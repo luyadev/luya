@@ -10,14 +10,17 @@ use luya\admin\aws\GroupAuth;
 /**
  * This is the model class for table "admin_group".
  *
- * @property int $group_id
+ * @property integer $id
  * @property string $name
  * @property string $text
+ * @property integer $is_deleted
  */
-class Group extends NgRestModel
+final class Group extends NgRestModel
 {
     use SoftDeleteTrait;
 
+    public $users = [];
+    
     /**
      * @inheritdoc
      */
@@ -32,34 +35,33 @@ class Group extends NgRestModel
     public function rules()
     {
         return [
-                [['name'], 'required'],
-                [['text'], 'string'],
-                [['name'], 'string', 'max' => 255],
+            [['name'], 'required'],
+            [['text'], 'string'],
+            [['is_deleted'], 'integer'],
+            [['name'], 'string', 'max' => 255],
+            [['users'], 'safe'],
         ];
     }
 
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['name', 'text', 'users'],
-            'restupdate' => ['name', 'text', 'users'],
-        ];
-    }
-
+    /**
+     * @inheritdoc
+     */
     public function extraFields()
     {
         return ['users'];
     }
     
-    // ngrest
-
-    public $users = [];
-
+    /**
+     * @inheritdoc
+     */
     public static function ngRestApiEndpoint()
     {
         return 'api-admin-group';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -69,6 +71,9 @@ class Group extends NgRestModel
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -76,7 +81,10 @@ class Group extends NgRestModel
             'text' => 'textarea',
         ];
     }
-    
+
+    /**
+     * @inheritdoc
+     */
     public function ngRestExtraAttributeTypes()
     {
         return [
@@ -92,6 +100,9 @@ class Group extends NgRestModel
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function ngRestConfig($config)
     {
         // load active window to config

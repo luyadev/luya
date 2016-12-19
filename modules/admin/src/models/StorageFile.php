@@ -4,6 +4,7 @@ namespace luya\admin\models;
 
 use Yii;
 use luya\web\Application;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "admin_storage_file".
@@ -30,19 +31,28 @@ use luya\web\Application;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class StorageFile extends \yii\db\ActiveRecord
+final class StorageFile extends ActiveRecord
 {
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'onBeforeInsert']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_storage_file';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -63,10 +73,7 @@ class StorageFile extends \yii\db\ActiveRecord
     }
 
     /**
-     * We can not global set is_deleted=0 to the where condition cause in some parts of the storage we want
-     * to access the name_new_compound to rebuild old image paths.
-     *
-     * @return \yii\db\$this
+     * @inheritdoc
      */
     public static function find()
     {

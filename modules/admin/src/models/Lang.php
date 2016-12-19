@@ -4,6 +4,7 @@ namespace luya\admin\models;
 
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\Module;
 
 /**
  * Language Model for Frontend/Admin.
@@ -17,7 +18,7 @@ use luya\admin\ngrest\base\NgRestModel;
  * @property integer $is_default
  * @author Basil Suter <basil@nadar.io>
  */
-class Lang extends NgRestModel
+final class Lang extends NgRestModel
 {
     /**
      * @inheritdoc
@@ -58,19 +59,9 @@ class Lang extends NgRestModel
     public function rules()
     {
         return [
-            [['name', 'short_code'], 'required'],
             [['is_default'], 'integer'],
-        ];
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['name', 'short_code', 'is_default'],
-            'restupdate' => ['name', 'short_code', 'is_default'],
+            [['name'], 'string', 'max' => 255],
+            [['short_code'], 'string', 'max' => 15],
         ];
     }
     
@@ -80,9 +71,9 @@ class Lang extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
-            'short_code' => 'Short Code',
-            'is_default' => 'Default Language',
+            'name' => Module::t('model_lang_name'),
+            'short_code' => Module::t('model_lang_short_code'),
+            'is_default' => Module::t('model_lang_is_default'),
         ];
     }
     

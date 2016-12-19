@@ -2,17 +2,48 @@
 
 namespace luya\admin\models;
 
-class UserOnline extends \yii\db\ActiveRecord
+use yii\db\ActiveRecord;
+
+/**
+ * This is the model class for table "admin_user_online".
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $last_timestamp
+ * @property string $invoken_route
+ */
+final class UserOnline extends ActiveRecord
 {
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_user_online';
     }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['user_id'], 'required'],
+            [['user_id', 'last_timestamp', 'invoken_route'], 'required'],
+            [['user_id', 'last_timestamp'], 'integer'],
+            [['invoken_route'], 'string', 'max' => 120],
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'last_timestamp' => 'Last Timestamp',
+            'invoken_route' => 'Invoken Route',
         ];
     }
 

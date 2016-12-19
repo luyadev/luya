@@ -2,6 +2,8 @@
 
 namespace luya\admin\models;
 
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "admin_config".
  *
@@ -10,7 +12,7 @@ namespace luya\admin\models;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Config extends \yii\db\ActiveRecord
+final class Config extends ActiveRecord
 {
     /**
      * @inheritdoc

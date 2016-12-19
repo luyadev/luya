@@ -4,15 +4,16 @@ namespace luya\admin\models;
 
 use luya\admin\file\Item;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\Module;
 
 /**
- * This is the model class for table "admin_group".
+ * This is the model class for table "admin_storage_filter".
  *
- * @property int $group_id
+ * @property integer $id
+ * @property string $identifier
  * @property string $name
- * @property string $text
  */
-class StorageFilter extends NgRestModel
+final class StorageFilter extends NgRestModel
 {
     /**
      * @inheritdoc
@@ -28,22 +29,27 @@ class StorageFilter extends NgRestModel
     public function rules()
     {
         return [
-            [['name', 'identifier'], 'required'],
+            [['identifier'], 'required'],
+            [['identifier'], 'string', 'max' => 100],
+            [['name'], 'string', 'max' => 255],
+            [['identifier'], 'unique'],
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'identifier' => Module::t('model_storagefilter_identifier'),
+            'name' => Module::t('model_storagefilter_name'),
         ];
     }
 
     /**
-     * @inheritdoc
+     * Remove image sources of the file.
      */
-    public function scenarios()
-    {
-        return [
-            'default' => ['name', 'identifier'],
-            'restcreate' => ['name', 'identifier'],
-            'restupdate' => ['name', 'identifier'],
-        ];
-    }
-    
     public function removeImageSources()
     {
         foreach (StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
@@ -65,8 +71,14 @@ class StorageFilter extends NgRestModel
         
         return false;
     }
-    
 
+    /**
+     * Apply the current filter chain.
+     *
+     * @param \luya\admin\file\Item $file
+     * @param unknown $fileSavePath
+     * @return boolean
+     */
     public function applyFilterChain(Item $file, $fileSavePath)
     {
         $loadFrom = $file->getServerSource();
@@ -79,8 +91,6 @@ class StorageFilter extends NgRestModel
         return true;
     }
 
-    // ngrest
-
     /**
      * @inheritdoc
      */
@@ -92,14 +102,21 @@ class StorageFilter extends NgRestModel
     /**
      * @inheritdoc
      */
+    public function ngRestAttributeTypes()
+    {
+        return [
+            'name' => 'text',
+            'identifier' => 'text',
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function ngRestConfig($config)
     {
-        $config->list->field('name', 'Name')->text();
-        $config->list->field('identifier', 'Identifier')->text();
-
-        $config->create->copyFrom('list');
-        $config->update->copyFrom('list');
-
+        $this->ngRestConfigDefine($config, 'list', ['name', 'identifier']);
+        
         return $config;
     }
 }

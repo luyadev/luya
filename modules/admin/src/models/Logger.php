@@ -7,6 +7,7 @@ use yii\helpers\Json;
 use yii\base\Arrayable;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\InfoActiveWindow;
+use luya\admin\Module;
 
 /**
  * Logger to store information when working in controllers and actions.
@@ -68,7 +69,7 @@ use luya\admin\aws\InfoActiveWindow;
  * @property string $group_identifier If provided the group_identifier is used to group multiple logging informations into one trace in order to see what messages should be display togher (trace behavior).
  * @property integer $group_identifier_index
  */
-class Logger extends NgRestModel
+final class Logger extends NgRestModel
 {
     /**
      * @var integer Type level info.
@@ -281,20 +282,20 @@ class Logger extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'time' => 'Time',
-            'message' => 'Message',
-            'type' => 'Type',
-            'trace_file' => 'Trace File',
-            'trace_line' => 'Trace Line',
-            'trace_function' => 'Trace Function',
-            'trace_function_args' => 'Trace Function Args',
-            'get' => 'Get',
-            'post' => 'Post',
-            'session' => 'Session',
-            'server' => 'Server',
-            'group_identifier' => 'Request Group',
-            'group_identifier_index' => 'Position',
+            'id' => Module::t('model_pk_id'),
+            'time' => Module::t('model_logger_time'),
+            'message' => Module::t('model_logger_message'),
+            'type' => Module::t('model_logger_type'),
+            'trace_file' => Module::t('model_logger_trace_file'),
+            'trace_line' => Module::t('model_logger_trace_line'),
+            'trace_function' => Module::t('model_logger_trace_function'),
+            'trace_function_args' => Module::t('model_logger_trace_function_args'),
+            'get' => Module::t('model_logger_get'),
+            'post' => Module::t('model_logger_post'),
+            'session' => Module::t('model_logger_session'),
+            'server' => Module::t('model_logger_server'),
+            'group_identifier' => Module::t('model_logger_group_identifier'),
+            'group_identifier_index' => Module::t('model_logger_group_identifier_index'),
         ];
     }
     

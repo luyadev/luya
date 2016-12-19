@@ -3,13 +3,15 @@
 namespace luya\admin\models;
 
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\Module;
 
 /**
- * Tags Data.
- * 
- * @author Basil Suter <basil@nadar.io>
+ * This is the model class for table "admin_tag".
+ *
+ * @property integer $id
+ * @property string $name
  */
-class Tag extends NgRestModel
+final class Tag extends NgRestModel
 {
     /**
      * @inheritdoc
@@ -33,6 +35,16 @@ class Tag extends NgRestModel
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Module::t('model_tag_name'),
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function genericSearchFields()
     {
         return ['name'];
@@ -49,12 +61,19 @@ class Tag extends NgRestModel
     /**
      * @inheritdoc
      */
+    public function ngRestAttributeTypes()
+    {
+        return [
+            'name' => 'text',
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function ngRestConfig($config)
     {
-        $config->list->field('name', 'Name')->text();
-        $config->create->copyFrom('list');
-        $config->update->copyFrom('list');
-        $config->delete = true;
+        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['name']);
 
         return $config;
     }

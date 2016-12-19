@@ -41,7 +41,7 @@ use yii\db\ActiveRecordInterface;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta8
  */
-class UserSetting extends Object implements \ArrayAccess
+final class UserSetting extends Object implements \ArrayAccess
 {
     const SEPERATOR = '.';
 

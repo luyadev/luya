@@ -8,7 +8,9 @@ use yii\base\Component;
 /**
  * Abstract Page Property Class.
  *
- * Each property must implement this method.
+ * Each property must implement this class.
+ * 
+ * Reade more in the Guide [[app-cmsproperties.md]].
  *
  * @author Basil Suter <basil.suter@nadar.io>
  */

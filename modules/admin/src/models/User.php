@@ -28,21 +28,22 @@ use luya\admin\aws\ChangePassword;
  * @property integer $secure_token_timestamp
  * @property integer $force_reload
  * @property string $settings
- * @property \admin\models\UserSetting $setting Setting object to store data.
+ * @property \luya\admin\models\UserSetting $setting Setting object to store data.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class User extends NgRestModel implements IdentityInterface, ChangePasswordInterface
+final class User extends NgRestModel implements IdentityInterface, ChangePasswordInterface
 {
     use SoftDeleteTrait;
-
-    public function getLastloginTimestamp()
+    
+    /**
+     * @inheritdoc
+     */
+    public function init()
     {
-        $item = UserLogin::find()->select(['timestamp_create'])->where(['user_id' => $this->id])->orderBy('id DESC')->asArray()->one();
-        
-        if ($item) {
-            return $item['timestamp_create'];
-        }
+        parent::init();
+        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
+        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'eventBeforeValidate']);
     }
     
     private $_setting = null;
@@ -57,6 +58,15 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return $this->_setting;
     }
     
+    public function getLastloginTimestamp()
+    {
+        $item = UserLogin::find()->select(['timestamp_create'])->where(['user_id' => $this->id])->orderBy('id DESC')->asArray()->one();
+    
+        if ($item) {
+            return $item['timestamp_create'];
+        }
+    }
+    
     public function updateSettings(array $data)
     {
         $this->updateAttributes([
@@ -64,16 +74,25 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ]);
     }
     
+    /**
+     * @inheritdoc
+     */
     public static function ngRestApiEndpoint()
     {
         return 'api-admin-user';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestListOrder()
     {
         return ['firstname' => SORT_ASC];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -85,6 +104,9 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestFilters()
     {
         return [
@@ -92,6 +114,9 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestExtraAttributeTypes()
     {
         return [
@@ -99,6 +124,9 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestConfig($config)
     {
         $config->aw->load(['class' => ChangePassword::className()]);
@@ -112,23 +140,25 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return $config;
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_user';
     }
 
-    public function init()
-    {
-        parent::init();
-        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
-        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'eventBeforeValidate']);
-    }
-
+    /**
+     * @inheritdoc
+     */
     public function genericSearchFields()
     {
         return ['firstname', 'lastname', 'email'];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -143,6 +173,9 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -154,6 +187,9 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function scenarios()
     {
         return [
@@ -191,7 +227,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     }
 
     /**
-     * override default scope find().
+     * @inheritdoc
      */
     public static function find()
     {
@@ -255,11 +291,11 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return ['groups', 'lastloginTimestamp'];
     }
 
-    /* ------------------------------------ yii2 auth methods below ------------------------------------ */
+    // AuthMethods
 
     public static function findByEmail($email)
     {
-        return self::find()->where(['email' => $email])->one();
+        return self::find()->where(['email' => $email, 'is_deleted' => 0])->one();
     }
 
     public function validatePassword($password)
@@ -267,7 +303,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return Yii::$app->security->validatePassword($password.$this->password_salt, $this->password);
     }
 
-    /* IdentityInterface below */
+    // IdentityInterface
 
     /**
      * Finds an identity by the given ID.
@@ -321,6 +357,6 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
      */
     public function validateAuthKey($authKey)
     {
-        return $this->getAuthKey() === $authKey;
+        return false;
     }
 }

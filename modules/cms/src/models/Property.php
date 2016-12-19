@@ -11,7 +11,7 @@ use luya\admin\models\Property as AdminProperty;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Property extends \yii\db\ActiveRecord
+final class Property extends \yii\db\ActiveRecord
 {
     public static function tableName()
     {

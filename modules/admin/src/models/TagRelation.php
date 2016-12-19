@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class TagRelation extends ActiveRecord
+final class TagRelation extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -66,7 +66,7 @@ class TagRelation extends ActiveRecord
     /**
      * Get tag object relation.
      *
-     * @return \yii\db\ActiveQuery
+     * @return \luya\admin\models\Tag
      */
     public function getTag()
     {
