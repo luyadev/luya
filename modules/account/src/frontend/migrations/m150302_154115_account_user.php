@@ -16,6 +16,17 @@ class m150302_154115_account_user extends Migration
             'password_salt' => $this->string(255),
             'auth_token' => $this->string(255),
             'is_deleted' => $this->integer(11)->defaultValue(0),
+            'gender' => $this->smallInteger(1)->defaultValue(0),
+            'street' => $this->string(120),
+            'zip' => $this->string(20),
+            'city' => $this->string(80),
+            'country' => $this->string(80),
+            'company' => $this->string(80),
+            'subscription_newsletter' => $this->boolean()->defaultValue(0),
+            'subscription_medianews' => $this->boolean()->defaultValue(0),
+            'verification_hash' => $this->string(80),
+            'is_mail_verified' => $this->boolean()->defaultValue(0),
+            'is_active' => $this->boolean()->defaultValue(0),
         ]);
     }
 

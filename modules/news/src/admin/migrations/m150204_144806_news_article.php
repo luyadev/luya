@@ -1,35 +1,32 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m150204_144806_news_article extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('news_article', [
-            'id' => 'pk',
-            'title' => Schema::TYPE_TEXT,
-            'text' => Schema::TYPE_TEXT,
-            'cat_id' => 'int(11) NOT NULL default 0',
-            'image_id' => Schema::TYPE_INTEGER,
-            'image_list' => Schema::TYPE_TEXT,
-            'file_list' => Schema::TYPE_TEXT,
-            'create_user_id' => Schema::TYPE_INTEGER,
-            'update_user_id' => Schema::TYPE_INTEGER,
-            'timestamp_create' => Schema::TYPE_INTEGER,
-            'timestamp_update' => Schema::TYPE_INTEGER,
-            'timestamp_display_from' => Schema::TYPE_INTEGER,
-            'timestamp_display_until' => Schema::TYPE_INTEGER,
-            'is_deleted' => 'tinyint(1) NOT NULL DEFAULT 0',
-            'is_display_limit' => 'tinyint(1) NOT NULL DEFAULT 0',
+            'id' => $this->primaryKey(),
+            'title' => $this->text(),
+            'text' => $this->text(),
+            'cat_id' => $this->integer(11)->defaultValue(0),
+            'image_id' => $this->integer(11)->defaultValue(0),
+            'image_list' => $this->text(),
+            'file_list' => $this->text(),
+            'create_user_id' => $this->integer(11)->defaultValue(0),
+            'update_user_id' => $this->integer(11)->defaultValue(0),
+            'timestamp_create' => $this->integer(11)->defaultValue(0),
+            'timestamp_update' => $this->integer(11)->defaultValue(0),
+            'timestamp_display_from' => $this->integer(11)->defaultValue(0),
+            'timestamp_display_until' => $this->integer(11)->defaultValue(0),
+            'is_deleted' => $this->boolean()->defaultValue(0),
+            'is_display_limit' => $this->boolean()->defaultValue(0),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m150204_144806_news_article cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('news_article');
     }
 }
