@@ -212,7 +212,7 @@ $this->beginPage()
         <!-- mdi-mdi-action-highlight-remove -->
     </div>
     <ul class="filemanager__folders" ng-show="folder.toggle_open==1">
-        <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in foldersData | filemanagerdirsfilter:folder.id"  ng-include="'reverseFolders'"></li>
+        <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id"  ng-include="'reverseFolders'"></li>
     </ul>
 </script>
 
@@ -247,7 +247,7 @@ $this->beginPage()
                         <span class="filemanager__folder-name"><?php echo Admin::t('layout_filemanager_root_dir'); ?></span>
                     </div>
                     <ul class="filemanager__folders">
-                        <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
+                        <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
                     </ul>
                 </li>
             </ul>

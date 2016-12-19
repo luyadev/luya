@@ -1694,6 +1694,7 @@
                     }).success(function(transport) {
                         $scope.foldersDataReload().then(function() {
                             $scope.folderFormToggler();
+                            $scope.newFolderName = null;
                         })
                     });
                 };
