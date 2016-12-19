@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
 
 /**
  * StorageImage Model.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 final class StorageImage extends ActiveRecord

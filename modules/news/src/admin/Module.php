@@ -7,7 +7,7 @@ use luya\admin\components\AdminMenuBuilder;
 
 /**
  * News Admin Module.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\admin\base\Module
@@ -42,7 +42,7 @@ class Module extends \luya\admin\base\Module
 
     /**
      * Translat news messages.
-     * 
+     *
      * @param string $message
      * @param array $params
      * @return string

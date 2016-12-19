@@ -15,9 +15,9 @@ use luya\admin\base\RestActiveController;
 
 /**
  * NgRest Model.
- * 
+ *
  * Read the Guide to understand [[ngrest-concept.md]].
- * 
+ *
  * This class extends the {{yii\db\ActiveRecord}}.
  *
  * @author Basil Suter <basil@nadar.io>

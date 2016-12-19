@@ -7,7 +7,7 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Admin Menu Data.
- * 
+ *
  * Collect informations from the menu data based on the admin modules in order to generate the different admin menu levels and containers.
  *
  * @author Basil Suter <basil@nadar.io>

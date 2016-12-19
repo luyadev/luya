@@ -30,14 +30,14 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     
     /**
      * @var string Define an error view file who is going to be renderd when the errorAction points to the `cms/error/index` route.
-     * 
+     *
      * In order to handle error messages in your application configure the error handler compononent in you configuration:
      * ```php
      * 'errorHandler' => [
      *     'errorAction' => 'cms/error/index',
      * ]
      * ```
-     * 
+     *
      * Now configure the view file which will be rendered in your cms module:
      *
      * ```php
@@ -45,7 +45,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
      *     'errorViewFile' => '@app/views/error/index.php',
      * ]
      * ```
-     * 
+     *
      * > Note that the view will be rendered with `renderPartial()`, this means the layout file will *not* be included.
      */
     public $errorViewFile = "@cms/views/error/index.php";

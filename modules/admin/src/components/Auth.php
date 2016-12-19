@@ -9,16 +9,16 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Auth components gives informations about permissions, who can do what.
- * 
+ *
  * In order to understand the permission weights read the [[app-admin-module-permission.md]] section.
  *
  * @author Basil Suter <basil@nadar.io>
  */
 class Auth extends \yii\base\Component
 {
-	/**
-	 * @var integer Can create new records
-	 */
+    /**
+     * @var integer Can create new records
+     */
     const CAN_CREATE = 1;
 
     /**
@@ -70,7 +70,7 @@ class Auth extends \yii\base\Component
     
     /**
      * Get the data for a given route and user.
-     * 
+     *
      * @param integer $userId The user id the find the data from.
      * @param string $route The route to find from the permission system.
      * @return array
@@ -88,7 +88,7 @@ class Auth extends \yii\base\Component
     
     /**
      * Calculate the weight from whether the user can create, udpate and/or delete.
-     * 
+     *
      * @param integer $create Whether the user can create new records
      * @param integer $update Whether the user can update records.
      * @param integer $delete Whether the user can delete records.
@@ -105,9 +105,9 @@ class Auth extends \yii\base\Component
 
     /**
      * Verify a permission type against its calculated `weight`.
-     * 
+     *
      * In order to calculate the permissions weight see {{\luya\admin\components\Auth::permissionWeight}}.
-     * 
+     *
      * @param string $type The type of permission (1,2,3 see constants)
      * @param integer $permissionWeight A weight of the permssions which is value between 1 - 9, see [[app-admin-module-permission.md]].
      * @return boolean
@@ -158,7 +158,7 @@ class Auth extends \yii\base\Component
     
     /**
      * See if the user has permitted the provided route.
-     * 
+     *
      * @param integer $userId The user id from admin users
      * @param string $route The route to test.
      * @return boolean
@@ -176,7 +176,7 @@ class Auth extends \yii\base\Component
 
     /**
      * Add a new route to the permission system (admin_auth)
-     * 
+     *
      * @param string $moduleName The name of the module where the route is located.
      * @param string $route The route which is an identifier.
      * @param string $name A readable name for the route to display in the permissions system.
@@ -206,7 +206,7 @@ class Auth extends \yii\base\Component
 
     /**
      * Add a new api route to the permission system (admin_auth)
-     * 
+     *
      * @param string $moduleName The name of the module where the route is located.
      * @param string $apiEndpoint An API endpoint name like `admin-user-group` which is an identifier.
      * @param string $name A readable name for the api to display in the permission system.

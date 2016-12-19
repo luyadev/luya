@@ -20,7 +20,7 @@ class m151026_161841_admin_tag extends Migration
 
     public function safeDown()
     {
-    	$this->dropTable('admin_tag');
-    	$this->dropTable('admin_tag_relation');
+        $this->dropTable('admin_tag');
+        $this->dropTable('admin_tag_relation');
     }
 }

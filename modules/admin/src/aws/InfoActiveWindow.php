@@ -6,14 +6,14 @@ use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Diplay Detail from ActiveRecord.
- * 
+ *
  * This ActiveWindow uses the {{yii\widgets\DetailView}} Widget in order to display the data.
- * 
+ *
  * Thefore you can customize all attributes to display and how to convert them:
- * 
+ *
  * ```php
  * $config->aw->load([
- *     'class' => 'luya\admin\aws\InfoActiveWindow', 
+ *     'class' => 'luya\admin\aws\InfoActiveWindow',
  *     'attributes' => [
  *         'title', // nothing define will use `text`
  *         'description:html', // renders html tags
@@ -22,9 +22,9 @@ use luya\admin\ngrest\base\ActiveWindow;
  *     ],
  * ]);
  * ```
- * 
+ *
  * Available Formatters:
- * 
+ *
  * + relativeTime
  * + datetime
  * + time
@@ -37,7 +37,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  * + paragraphs
  * + size
  * + shortSize
- * 
+ *
  * See [Formatting Guide](http://www.yiiframework.com/doc-2.0/guide-output-formatting.html)
  */
 class InfoActiveWindow extends ActiveWindow

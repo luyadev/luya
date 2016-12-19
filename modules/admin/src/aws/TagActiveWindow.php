@@ -16,23 +16,23 @@ use luya\admin\ngrest\base\ActiveWindow;
  * ```php
  * $config->aw->load(['class' => '\luya\admin\aws\TagActiveWindow']);
  * ```
- * 
+ *
  * If you want to define a specific table name instead of the table name where the active window is attached to use:
- * 
+ *
  * ```php
  * $config->aw->load(['class' => '\luya\admin\aws\TagActiveWindow', 'tableName' => 'virtualTableName']);
  * ```
- * 
+ *
  * If you have assigned the {{luya\admin\aws\TagActiveWindow}} aws to an ngrest model you can use the {{luya\admin\traits\TagsTrait}} to access the data.
- * 
+ *
  * For example when the {{luya\admin\traits\TagsTrait}} is used you can get the data for an active record:
- * 
+ *
  * ```php
  * $tags = Model::findOne(1)->tags;
  * ```
- * 
+ *
  * or you can also get all tags assigned for this table:
- * 
+ *
  * ```php
  * $allTags = Model::findTags();
  * ```
@@ -62,7 +62,8 @@ class TagActiveWindow extends ActiveWindow
     public function getTableName()
     {
         if ($this->_tableName === null) {
-            $this->_tableName = $this->model->tableName();;
+            $this->_tableName = $this->model->tableName();
+            ;
         }
         
         return $this->_tableName;

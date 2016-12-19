@@ -76,7 +76,7 @@ trait SoftDeleteTrait
 
     /**
      * Overrides the {{yii\db\ActiveRecord::delete}} method.
-     * 
+     *
      * @return boolean
      */
     public function delete()
@@ -95,7 +95,7 @@ trait SoftDeleteTrait
     
     /**
      * Evalate the values to update.
-     * 
+     *
      * @return array
      */
     private static function internalUpdateValues()

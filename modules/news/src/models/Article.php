@@ -141,7 +141,7 @@ class Article extends NgRestModel
     }
 
     /**
-     * 
+     *
      * @return string
      */
     public function getDetailUrl()
@@ -184,7 +184,7 @@ class Article extends NgRestModel
     }
     
     /**
-     * 
+     *
      * @param string $limit
      * @return unknown
      */
@@ -209,7 +209,7 @@ class Article extends NgRestModel
     }
 
     /**
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getCat()
@@ -226,6 +226,4 @@ class Article extends NgRestModel
     {
         return $this->cat->title;
     }
-
-    
 }

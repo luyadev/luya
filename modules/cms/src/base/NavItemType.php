@@ -7,7 +7,7 @@ use yii\base\Controller;
 
 /**
  * Abstract class for all Item Types.
- * 
+ *
  * @property \yii\base\Controller $controller The controller object.
  * @property array $options Optional settings for the nav item type.
  * @author Basil Suter <basil@nadar.io>
@@ -23,7 +23,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     
     /**
      * Get the corresponding nav item type for this type object
-     * 
+     *
      * @return \yii\db\ActiveRecordInterface An active record type.
      */
     public function getNavItem()
@@ -33,7 +33,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
 
     /**
      * Context properts array.
-     * 
+     *
      * @todo verify
      */
     public function getContextPropertysArray()
@@ -49,24 +49,24 @@ abstract class NavItemType extends \yii\db\ActiveRecord
      */
     public function setController(Controller $controller)
     {
-    	$this->_controller = $controller;
+        $this->_controller = $controller;
     }
     
     /**
      * Getter method for the controller object.
-     * 
+     *
      * @return \yii\base\Controller
      */
     public function getController()
     {
-    	return $this->_controller;
+        return $this->_controller;
     }
     
     private $_options = [];
 
     /**
      * Setter method for options.
-     * 
+     *
      * @param array $options
      */
     public function setOptions(array $options)
@@ -85,7 +85,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
 
     /**
      * Get a specific option value for a defined eky.
-     * 
+     *
      * @param string $key The array key to lookup inside the $options array.
      * @return boolean|mixed
      */

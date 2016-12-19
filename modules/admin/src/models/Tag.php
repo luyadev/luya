@@ -80,7 +80,7 @@ final class Tag extends NgRestModel
 
     /**
      * Get all primary key assigned tags for a table name.
-     * 
+     *
      * @param string $tableName
      * @param integer $pkId
      * @return \yii\db\ActiveRecord
@@ -92,7 +92,7 @@ final class Tag extends NgRestModel
     
     /**
      * Get all assigned tags for table name.
-     * 
+     *
      * @param string $tableName
      * @return \yii\db\ActiveRecord
      */

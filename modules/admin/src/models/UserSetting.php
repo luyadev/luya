@@ -154,7 +154,7 @@ final class UserSetting extends Object implements \ArrayAccess
 
     /**
      * Setter method for ArrayAccess.
-     * 
+     *
      * @param string $offset The offset key
      * @param midex $value The offset value
      */
@@ -165,7 +165,7 @@ final class UserSetting extends Object implements \ArrayAccess
 
     /**
      * Exists method for ArrayAccess.
-     * 
+     *
      * @param string $offset The offset key
      * @return boolean Whether the offset key exists in the array or not.
      */
@@ -176,7 +176,7 @@ final class UserSetting extends Object implements \ArrayAccess
 
     /**
      * Unset method for ArrayAccess.
-     * 
+     *
      * @param string $offset The offset key
      */
     public function offsetUnset($offset)
@@ -186,7 +186,7 @@ final class UserSetting extends Object implements \ArrayAccess
 
     /**
      * Getter method for ArrayAccess.
-     * 
+     *
      * @param string $offset The offset key
      * @param midex $value The offset value
      * @return mixed The value when accessing the array.

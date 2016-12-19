@@ -8,22 +8,22 @@ use yii\data\ActiveDataProvider;
 
 /**
  * News Module Default Controller contains actions to display and render views with predefined data.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class DefaultController extends \luya\web\Controller
 {
     /**
      * Get Article overview.
-     * 
+     *
      * The index action will return an active data provider object inside the $provider variable:
-     * 
+     *
      * ```php
      * foreach ($provider->models as $item) {
      *     var_dump($item);
      * }
      * ```
-     * 
+     *
      * @return string
      */
     public function actionIndex()
@@ -42,7 +42,7 @@ class DefaultController extends \luya\web\Controller
      * Get the category Model for a specific ID.
      *
      * The most common way is to use the active data provider object inside the $provider variable:
-     * 
+     *
      * ```php
      * foreach ($provider->getModels() as $cat) {
      *     var_dump($cat);

@@ -15,9 +15,9 @@ use luya\TagParser;
  * ```
  *
  * This will automatically generate nl2br on after find event (before display).
- * 
+ *
  * In order to enable the markdown parsing use the code below:
- * 
+ *
  * ```php
  * ['mytext' => ['textarea', 'markdown' => true]]
  * ```

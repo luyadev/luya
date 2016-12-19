@@ -11,9 +11,9 @@ use yii;
  */
 class UrlRule extends \yii\rest\UrlRule
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         $map = Yii::$app->getModule('admin')->controllerMap;

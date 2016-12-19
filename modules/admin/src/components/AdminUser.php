@@ -8,16 +8,16 @@ use luya\admin\models\UserOnline;
 
 /**
  * AdminUser Component.
- * 
+ *
  * The administration user Identity extends from {{yii\web\User}} in order to configure customized behaviors.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class AdminUser extends User
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $identityClass = '\luya\admin\models\User';
 
     /**
@@ -68,7 +68,7 @@ class AdminUser extends User
     
     /**
      * Perform a can api match request for the logged in user if user is logged in, returns false otherwhise.
-     * 
+     *
      * See the {{luya\admin\components\Auth::matchApi}} for details.
      *
      * @param string $apiEndpoint
@@ -85,7 +85,7 @@ class AdminUser extends User
      *
      * See the {{luya\admin\components\Auth::matchRoute}} for details.
      *
-     * @param string $route 
+     * @param string $route
      * @return booelan Whether the current user can request the provided route.
      */
     public function canRoute($route)

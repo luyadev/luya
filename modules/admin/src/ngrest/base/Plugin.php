@@ -131,7 +131,7 @@ abstract class Plugin extends Component
 
     /**
      * Encode from PHP to Json.
-     * 
+     *
      * See {{luya\admin\helpers\I18n::encode}}
      *
      * @param string|array $value
@@ -144,7 +144,7 @@ abstract class Plugin extends Component
     
     /**
      * Decode from Json to PHP.
-     * 
+     *
      * See {{luya\admin\helpers\I18n::decode}}
      *
      * @param string|array $value The value to decode (or if alreay is an array already)
@@ -158,9 +158,9 @@ abstract class Plugin extends Component
     
     /**
      * Encode the current value from a language array.
-     * 
+     *
      * See {{luya\admin\helpers\I18n::findCurrent}}
-     * 
+     *
      * @param array $fieldValues
      * @return string|unknown
      */

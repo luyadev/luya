@@ -12,7 +12,7 @@
 <?php echo $form->field($model, 'city') ?>
 <?php echo $form->field($model, 'country') ?>
 <?php echo $form->field($model, 'subscription_newsletter')->checkbox(); ?>
-<?php echo $form->field($model,  'subscription_medianews')->checkbox(); ?>
+<?php echo $form->field($model, 'subscription_medianews')->checkbox(); ?>
 <button type="submit">Submit</button>
 <?php echo $form->errorSummary($model); ?>
 <?php \yii\widgets\ActiveForm::end(); ?>

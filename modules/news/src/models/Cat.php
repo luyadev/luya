@@ -48,7 +48,7 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\Model::attributeLabels()
      */

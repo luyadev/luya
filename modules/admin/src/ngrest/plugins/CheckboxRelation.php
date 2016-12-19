@@ -205,12 +205,12 @@ class CheckboxRelation extends Plugin
 
     /**
      * Tiggers after Save/Update methods.
-     * 
+     *
      * ```php
      * $this->addEvent(NgRestModel::EVENT_AFTER_INSERT, [$this, 'afterSaveEvent']);
      * $this->addEvent(NgRestModel::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
      * ```
-     * 
+     *
      * @param \yii\base\Event $event An ActiveRecord  event.
      */
     public function afterSaveEvent($event)

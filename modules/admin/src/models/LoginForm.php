@@ -9,7 +9,7 @@ use yii\base\Model;
 
 /**
  * Admin Login Form Model.
- * 
+ *
  * @property \luya\admin\models\User $user The user model.
  * @author Basil Suter <basil@nadar.io>
  */
@@ -46,7 +46,7 @@ final class LoginForm extends Model
 
     /**
      * Inline validator.
-     * 
+     *
      * @param string $attribute Attribute value
      */
     public function validatePassword($attribute)
@@ -61,7 +61,7 @@ final class LoginForm extends Model
 
     /**
      * Send the secure token by mail.
-     * 
+     *
      * @return boolean
      */
     public function sendSecureLogin()
@@ -78,7 +78,7 @@ final class LoginForm extends Model
 
     /**
      * Validate the secure token.
-     * 
+     *
      * @param string $token
      * @param integer $userId
      * @return boolean|\luya\admin\models\User
@@ -100,7 +100,7 @@ final class LoginForm extends Model
 
     /**
      * Login the current user if valid.
-     * 
+     *
      * @return boolean|\luya\admin\models\User|boolean
      */
     public function login()

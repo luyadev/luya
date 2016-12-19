@@ -6,11 +6,11 @@ use luya\base\CoreModuleInterface;
 
 /**
  * Styleguide Module.
- * 
+ *
  * This module is bound to the {{luya\web\Element}} component.
- * 
+ *
  * In order to configure the Module in your config file you can use the example below:
- * 
+ *
  * ```php
  * 'modules' => [
  *     // ...
@@ -26,7 +26,7 @@ use luya\base\CoreModuleInterface;
  *     // ...
  * ]
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module implements CoreModuleInterface
@@ -48,7 +48,7 @@ class Module extends \luya\base\Module implements CoreModuleInterface
     
     /**
      * @var array An array with asset bundles files:
-     * 
+     *
      * ```php
      * 'assetFiles' => [
      *     'app\assets\ResourcesAsset',

@@ -32,6 +32,6 @@ class m150302_154115_account_user extends Migration
 
     public function safeDown()
     {
-    	$this->dropTable('account_user');
+        $this->dropTable('account_user');
     }
 }

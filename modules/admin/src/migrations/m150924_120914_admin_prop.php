@@ -16,6 +16,6 @@ class m150924_120914_admin_prop extends Migration
 
     public function safeDown()
     {
-		$this->dropTable('admin_property');
+        $this->dropTable('admin_property');
     }
 }

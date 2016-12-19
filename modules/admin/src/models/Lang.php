@@ -48,7 +48,7 @@ final class Lang extends NgRestModel
             }
         });
         
-        $this->on(self::EVENT_BEFORE_DELETE, function($event) {
+        $this->on(self::EVENT_BEFORE_DELETE, function ($event) {
             if ($this->is_default == 1) {
                 $this->addError('is_default', Module::t('model_lang_delete_error_is_default'));
                 $event->isValid = false;

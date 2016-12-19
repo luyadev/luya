@@ -19,7 +19,6 @@ class NgRestModelTest extends AdminTestCase
         $this->assertSame($scenes['default'], $scenes['restcreate']);
         $this->assertSame($scenes['default'], $scenes['restupdate']);
         $this->assertSame($scenes['restcreate'], $scenes['restcreate']);
-        
     }
     
     public function testGenericSearchFields()

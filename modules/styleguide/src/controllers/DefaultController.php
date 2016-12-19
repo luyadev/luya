@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 /**
  * Display the Styleguide Elements.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class DefaultController extends \luya\web\Controller
@@ -33,7 +33,7 @@ class DefaultController extends \luya\web\Controller
                 if ($mock !== false) {
                     $params[] = $mock;
                 } else {
-                    if($v->isArray()) {
+                    if ($v->isArray()) {
                         $params[] = ['$'.$v->name];
                     } else {
                         $params[] = '$'.$v->name;

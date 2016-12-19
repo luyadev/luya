@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module;
+
 ?>
 <h3><?= $this->context->alias; ?></h3>
 <div class="row" ng-controller="ActiveWindowTagController">
