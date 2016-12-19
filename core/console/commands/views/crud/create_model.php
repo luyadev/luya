@@ -55,17 +55,6 @@ class <?= $className; ?> extends NgRestModel
 
 <?php endif;?>
     /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios['restcreate'] = ['<?= implode("', '", $fields); ?>'];
-        $scenarios['restupdate'] = ['<?= implode("', '", $fields); ?>'];
-        return $scenarios;
-    }
-    
-    /**
      * @return array An array containing all field which can be lookedup during the admin search process.
      */
     public function genericSearchFields()

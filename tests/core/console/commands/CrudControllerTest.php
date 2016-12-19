@@ -156,17 +156,6 @@ class TestModel extends NgRestModel
     public $i18n = ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings'];
 
     /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios['restcreate'] = ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings'];
-        $scenarios['restupdate'] = ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings'];
-        return $scenarios;
-    }
-    
-    /**
      * @return array An array containing all field which can be lookedup during the admin search process.
      */
     public function genericSearchFields()
@@ -311,17 +300,6 @@ class TestModel extends NgRestModel
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios['restcreate'] = ['name', 'short_code', 'is_default'];
-        $scenarios['restupdate'] = ['name', 'short_code', 'is_default'];
-        return $scenarios;
-    }
-    
     /**
      * @return array An array containing all field which can be lookedup during the admin search process.
      */
