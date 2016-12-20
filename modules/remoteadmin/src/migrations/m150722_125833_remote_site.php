@@ -10,7 +10,7 @@ class m150722_125833_remote_site extends Migration
             'id' => $this->primaryKey(),
             'token' => $this->string(120)->notNull(),
             'url' => $this->string(120)->notNull(),
-            'auth_is_enabled' => $this->boolean()->defaultValue(0),
+            'auth_is_enabled' => $this->boolean()->defaultValue(false),
             'auth_user' => $this->string(120),
             'auth_pass' => $this->string(120),
         ]);

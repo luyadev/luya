@@ -14,7 +14,7 @@ class m150504_094950_gallery_album extends Migration
             'cover_image_id' => $this->integer(11)->defaultValue(0),
             'timestamp_create' => $this->integer(0)->defaultValue(0),
             'timestamp_update' => $this->integer(0)->defaultValue(0),
-            'is_highlight' => $this->boolean()->defaultValue(0),
+            'is_highlight' => $this->boolean()->defaultValue(false),
             'sort_index' => $this->integer()->defaultValue(0),
         ]);
     }

@@ -11,7 +11,7 @@ class m150323_125407_admin_auth extends Migration
             'id' => $this->primaryKey(),
             'alias_name' => $this->string(60)->notNull(),
             'module_name' => $this->string(60)->notNull(),
-            'is_crud' => $this->boolean()->defaultValue(0),
+            'is_crud' => $this->boolean()->defaultValue(false),
             'route' => $this->string(200),
             'api' => $this->string(200),
         ]);

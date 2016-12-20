@@ -15,13 +15,13 @@ class m150108_155009_cms_nav_item_page_block_item extends Migration
             'prev_id' => $this->integer(11),
             'json_config_values' => $this->text(),
             'json_config_cfg_values' => $this->text(),
-            'is_dirty' => $this->boolean()->defaultValue(0),
+            'is_dirty' => $this->boolean()->defaultValue(false),
             'create_user_id' => $this->integer(11)->defaultValue(0),
             'update_user_id' => $this->integer(11)->defaultValue(0),
             'timestamp_create' => $this->integer(11)->defaultValue(0),
             'timestamp_update' => $this->integer(11)->defaultValue(0),
             'sort_index' => $this->integer(11)->defaultValue(0),
-            'is_hidden' => $this->boolean()->defaultValue(0),
+            'is_hidden' => $this->boolean()->defaultValue(false),
         ]);
     }
 

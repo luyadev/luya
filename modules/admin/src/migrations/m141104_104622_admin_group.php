@@ -11,7 +11,7 @@ class m141104_104622_admin_group extends Migration
             'id' => 'pk',
             'name' => $this->string(255)->notNull(),
             'text' => $this->text(),
-            'is_deleted' => $this->boolean()->defaultValue(0),
+            'is_deleted' => $this->boolean()->defaultValue(false),
         ]);
     }
 

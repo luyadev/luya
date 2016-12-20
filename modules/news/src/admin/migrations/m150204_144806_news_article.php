@@ -20,8 +20,8 @@ class m150204_144806_news_article extends Migration
             'timestamp_update' => $this->integer(11)->defaultValue(0),
             'timestamp_display_from' => $this->integer(11)->defaultValue(0),
             'timestamp_display_until' => $this->integer(11)->defaultValue(0),
-            'is_deleted' => $this->boolean()->defaultValue(0),
-            'is_display_limit' => $this->boolean()->defaultValue(0),
+            'is_deleted' => $this->boolean()->defaultValue(false),
+            'is_display_limit' => $this->boolean()->defaultValue(false),
         ]);
     }
 

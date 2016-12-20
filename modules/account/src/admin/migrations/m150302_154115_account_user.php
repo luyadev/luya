@@ -22,11 +22,11 @@ class m150302_154115_account_user extends Migration
             'city' => $this->string(80),
             'country' => $this->string(80),
             'company' => $this->string(80),
-            'subscription_newsletter' => $this->boolean()->defaultValue(0),
-            'subscription_medianews' => $this->boolean()->defaultValue(0),
+            'subscription_newsletter' => $this->boolean()->defaultValue(false),
+            'subscription_medianews' => $this->boolean()->defaultValue(false),
             'verification_hash' => $this->string(80),
-            'is_mail_verified' => $this->boolean()->defaultValue(0),
-            'is_active' => $this->boolean()->defaultValue(0),
+            'is_mail_verified' => $this->boolean()->defaultValue(false),
+            'is_active' => $this->boolean()->defaultValue(false),
         ]);
     }
 

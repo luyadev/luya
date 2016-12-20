@@ -9,7 +9,7 @@ class m160629_092417_cmspermissiontable extends Migration
         $this->createTable('cms_nav_permission', [
             'group_id' => $this->integer(11)->notNull(),
             'nav_id' => $this->integer(11)->notNull(),
-            'inheritance' => $this->boolean()->defaultValue(0),
+            'inheritance' => $this->boolean()->defaultValue(false),
         ]);
     }
 

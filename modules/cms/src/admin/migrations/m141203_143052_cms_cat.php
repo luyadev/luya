@@ -18,7 +18,7 @@ class m141203_143052_cms_cat extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(180)->notNull(),
             'alias' => $this->string(180)->notNull(),
-            'is_deleted' => $this->boolean()->defaultValue(0),
+            'is_deleted' => $this->boolean()->defaultValue(false),
         ]);
     }
 

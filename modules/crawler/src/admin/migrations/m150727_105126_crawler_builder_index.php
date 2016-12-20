@@ -16,10 +16,10 @@ class m150727_105126_crawler_builder_index extends Migration
             'url_found_on_page' => $this->string(255),
             'group' => $this->string(120),
             'last_indexed' => $this->integer(11),
-            'crawled' => $this->boolean()->defaultValue(0),
+            'crawled' => $this->boolean()->defaultValue(false),
             'status_code' => $this->smallInteger(4)->defaultValue(0),
             'content_hash' => $this->string(80),
-            'is_dublication' => $this->boolean()->defaultValue(0),
+            'is_dublication' => $this->boolean()->defaultValue(false),
         ]);
     }
 

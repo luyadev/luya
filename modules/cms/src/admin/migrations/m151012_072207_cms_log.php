@@ -9,9 +9,9 @@ class m151012_072207_cms_log extends Migration
         $this->createTable('cms_log', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->defaultValue(0),
-            'is_insertion' => $this->boolean()->defaultValue(0),
-            'is_update' => $this->boolean()->defaultValue(0),
-            'is_deletion' => $this->boolean()->defaultValue(0),
+            'is_insertion' => $this->boolean()->defaultValue(false),
+            'is_update' => $this->boolean()->defaultValue(false),
+            'is_deletion' => $this->boolean()->defaultValue(false),
             'timestamp' => $this->integer(11)->notNull(),
             'message' => $this->string(255),
             'data_json' => $this->text(),
