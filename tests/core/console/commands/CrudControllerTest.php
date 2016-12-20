@@ -265,6 +265,7 @@ use luya\admin\ngrest\base\NgRestModel;
  * @property string $name
  * @property string $short_code
  * @property smallint $is_default
+ * @property smallint $is_deleted
  */
 class TestModel extends NgRestModel
 {
@@ -286,6 +287,7 @@ class TestModel extends NgRestModel
             'name' => Yii::t('app', 'Name'),
             'short_code' => Yii::t('app', 'Short Code'),
             'is_default' => Yii::t('app', 'Is Default'),
+            'is_deleted' => Yii::t('app', 'Is Deleted'),
         ];
     }
     
@@ -295,8 +297,9 @@ class TestModel extends NgRestModel
     public function rules()
     {
         return [
-            [['is_default'], 'integer'],
-            [['name', 'short_code'], 'string', 'max' => 255],
+            [['is_default', 'is_deleted'], 'integer'],
+            [['name'], 'string', 'max' => 255],
+            [['short_code'], 'string', 'max' => 15],
         ];
     }
 
@@ -325,6 +328,7 @@ class TestModel extends NgRestModel
             'name' => 'text',
             'short_code' => 'text',
             'is_default' => 'number',
+            'is_deleted' => 'number',
         ];
     }
     
@@ -337,8 +341,8 @@ class TestModel extends NgRestModel
     public function ngRestConfig($config)
     {
         // define fields for types based from ngrestAttributeTypes
-        $this->ngRestConfigDefine($config, 'list', ['name', 'short_code', 'is_default']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['name', 'short_code', 'is_default']);
+        $this->ngRestConfigDefine($config, 'list', ['name', 'short_code', 'is_default', 'is_deleted']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['name', 'short_code', 'is_default', 'is_deleted']);
         
         // enable or disable ability to delete;
         $config->delete = false; 
