@@ -29,10 +29,7 @@ class SelectArray extends Select
     
     public function getData()
     {
-        $cleandata = [
-            //['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
-            //['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
-        ];
+        $cleandata = [];
          
         foreach ($this->_data as $key => $value) {
             $cleandata[] = [

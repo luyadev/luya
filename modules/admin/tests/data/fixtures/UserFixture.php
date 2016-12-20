@@ -13,17 +13,17 @@ class UserFixture extends ActiveFixture
         return [
             'user1' => [
                 'id' => 1,
-                'firstname' => 'Basil',
-                'lastname' => 'Suter',
-                'email' => 'basil@nadar.io',
+                'firstname' => 'John',
+                'lastname' => 'Doe',
+                'email' => 'john@luya.io',
                 'password' => 'nohash',
                 'is_deleted' => 0,
             ],
             'user2' => [
                 'id' => 2,
-                'firstname' => 'Foo',
-                'lastname' => 'Bar',
-                'email' => 'foo@luya.io',
+                'firstname' => 'Jane',
+                'lastname' => 'Doe',
+                'email' => 'jane@luya.io',
                 'password' => 'nohash',
                 'is_deleted' => 0,
             ]
