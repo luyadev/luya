@@ -35,8 +35,8 @@ final class FileListBlock extends TwigBlock
             ],
             'cfgs' => [
                 ['var' => 'showType', 'label' => Module::t("block_file_list_files_showtype_label"), 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
-                        ['value' => '1', 'label' => Module::t("block_file_list_files_showtype_yes")],
-                        ['value' => '0', 'label' => Module::t("block_file_list_files_showtype_no")],
+                        ['value' => '1', 'label' => Module::t("block_file_list_showtype_yes")],
+                        ['value' => '0', 'label' => Module::t("block_file_list_showtype_no")],
                     ],
                 ],
             ],
