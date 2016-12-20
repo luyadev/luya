@@ -48,10 +48,10 @@ class NotifyController extends \luya\console\Command
     	return $this->outputSuccess('action successfully done');
     }
 
-	public function actionBar()
-	{
-		return $this->ouputError('Something failed inside this action');
-	}
+    public function actionBar()
+    {
+        return $this->ouputError('Something failed inside this action');
+    }
 }
 ```
 
@@ -77,4 +77,4 @@ If you want to create a command without a module you can just add the the Comman
 ],
 ```
 
-Now you could run the sync command like all other commands with `./vendor/bin/luya sync`.
+Now you could run the sync command like all other commands with `./vendor/bin/luya sync`.   
