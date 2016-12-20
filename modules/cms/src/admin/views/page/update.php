@@ -118,11 +118,10 @@ use luya\cms\admin\Module;
                     <div class="toolbar [ grey lighten-3 ]">
                         <div class="row">
                             <div class="col s12">
-
                                 <!-- LEFT TOOLBAR -->
                                 <div class="toolbar__left">
                                     <!-- CONFIG BUTTON -->
-                                    <div class="toolbar__group toolbar__group--settings" ng-show="propertiesData.length && navData.is_draft == 0">
+                                    <div class="toolbar__group toolbar__group--settings" ng-show="propertiesData.length == 0 || isDraft == false">
                                         <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()">
                                             <i class="material-icons cms__prop-toggle">settings</i>
                                         </a>
@@ -130,7 +129,7 @@ use luya\cms\admin\Module;
                                     <!-- /CONFIG BUTTON -->
                                     
                                     <!-- ACTIONS -->
-                                    <div class="toolbar__group">
+                                    <div class="toolbar__group" ng-show="isDraft == false">
                                         <a ng-click="showActions=!showActions" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="material-icons">more_vert</i></a>
                                     </div>
                                     <!--  /ACTIONS -->
