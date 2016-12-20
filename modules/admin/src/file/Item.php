@@ -9,7 +9,7 @@ use luya\admin\helpers\I18n;
 use luya\admin\storage\ItemTrait;
 
 /**
- * Storage File Item
+ * Storage File Item.
  *
  * @property string $caption The file caption
  * @property array $captionArray Contains the captions for all languages
@@ -85,7 +85,7 @@ class Item extends \yii\base\Object
      */
     public function getId()
     {
-        return $this->itemArray['id'];
+        return (int) $this->itemArray['id'];
     }
     
     /**
@@ -95,7 +95,7 @@ class Item extends \yii\base\Object
      */
     public function getFolderId()
     {
-        return $this->itemArray['folder_id'];
+        return (int) $this->itemArray['folder_id'];
     }
     
     /**
@@ -178,7 +178,7 @@ class Item extends \yii\base\Object
      */
     public function getSize()
     {
-        return $this->itemArray['file_size'];
+        return (int) $this->itemArray['file_size'];
     }
     
     /**
@@ -205,7 +205,7 @@ class Item extends \yii\base\Object
      */
     public function getUploadTimestamp()
     {
-        return $this->itemArray['upload_timestamp'];
+        return (int) $this->itemArray['upload_timestamp'];
     }
     
     /**
@@ -334,7 +334,7 @@ class Item extends \yii\base\Object
      */
     public function getFileExists()
     {
-        return file_exists($this->getServerSource());
+        return (bool) file_exists($this->getServerSource());
     }
     
     /**

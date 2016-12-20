@@ -17,8 +17,8 @@ use luya\admin\storage\ItemTrait;
  * @property string $source The source of the image where you can access the image by the web.
  * @property string $serverSource The source to the image internal used on the Server.
  * @property boolean $fileExists Return boolean whether the file server source exsits on the server or not.
- * @property string $resolutionWidth Get the image resolution width.
- * @property string $resolutionHeight Get the image resolution height.
+ * @property integer $resolutionWidth Get the image resolution width.
+ * @property integer $resolutionHeight Get the image resolution height.
  * @property \admin\file\Item $file The file object where the image was created from.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -64,7 +64,7 @@ class Item extends \yii\base\Object
      */
     public function getId()
     {
-        return $this->itemArray['id'];
+        return (int) $this->itemArray['id'];
     }
     
     /**
@@ -74,7 +74,7 @@ class Item extends \yii\base\Object
      */
     public function getFileId()
     {
-        return $this->itemArray['file_id'];
+        return (int) $this->itemArray['file_id'];
     }
 
     /**
@@ -84,7 +84,7 @@ class Item extends \yii\base\Object
      */
     public function getFilterId()
     {
-        return $this->itemArray['filter_id'];
+        return (int) $this->itemArray['filter_id'];
     }
     
     /**
@@ -127,27 +127,27 @@ class Item extends \yii\base\Object
      */
     public function getFileExists()
     {
-        return file_exists($this->getServerSource());
+        return (bool) file_exists($this->getServerSource());
     }
     
     /**
      * Get the image resolution width in Pixel.
      *
-     * @return string Get the width in Pixel.
+     * @return integer Get the width in Pixel.
      */
     public function getResolutionWidth()
     {
-        return $this->itemArray['resolution_width'];
+        return (int) $this->itemArray['resolution_width'];
     }
     
     /**
      * Get the image resolution height in Pixel.
      *
-     * @return string Get the height in Pixel.
+     * @return integer Get the height in Pixel.
      */
     public function getResolutionHeight()
     {
-        return $this->itemArray['resolution_height'];
+        return (int) $this->itemArray['resolution_height'];
     }
     
     /**
