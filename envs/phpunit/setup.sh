@@ -12,4 +12,5 @@ php index.php migrate --interactive=0
 php index.php import
 php index.php setup --email=test@luya.io --password=luyaio --firstname=John --lastname=Doe --interactive=0
 php index.php data/setup
-mysqldump --user=$user --password=$password $db_name > 1.0.0-RC2.sql
+chmod 0777 ../sql
+mysqldump --user=$user --password=$password $db_name > ../sql/1.0.0.sql
