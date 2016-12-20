@@ -48,6 +48,7 @@ class Controller extends \luya\web\Controller
                 'matchCallback' => function ($rule, $action) {
                     if (!Yii::$app->adminuser->isGuest) {
                         Yii::$app->luyaLanguage = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
+                        Yii::$app->language = Yii::$app->luyaLanguage;
                     }
                 
                     // see if a controller property has been defined to disabled the permission checks
