@@ -139,8 +139,10 @@ Each module does have its own compass configratuons `config.rb`, so you have to 
 CODING CONVENTIONS
 ===================
 
-SQL
-----------------------
+#### SQL
+
+SQL Datbase Table and Field namings:
+
 + Tables are singular
 + Table and column names are seperated by underscore (_)
 + The Primary Key is always ***id***
@@ -148,32 +150,27 @@ SQL
 + Always use the FRONTEND-MODULE name as prefix if there are both.
 
 table name examples
-```
-admin_user
-admin_user_setting
-admin_group
-admin_user_group (ref table between user and group)
-news_data
-news_category
-```
+
++ admin_user
++ admin_user_setting
++ admin_group
++ admin_user_group (ref table between user and group)
++ news_data
++ news_category
 
 field name examples
-```
-table: admin_user
-id
-firstname
-password_salt
-group_id
-```
 
++ table: admin_user
++ id
++ firstname
++ password_salt
++ group_id
 
-PHP
----------
+#### PHP 
+
 PSR2 Naming convention
 
 (http://www.php-fig.org/psr/psr-2/)
-
-### Example
 
 This example encompasses some of the rules below as a quick overview:
 
@@ -205,17 +202,14 @@ class Foo extends Bar implements FooInterface
 }
 ```
 
-CSS
------
+#### CSS
 
-(http://cssguidelin.es/)
+http://cssguidelin.es/
 
-JS
------
+#### JS
 
-(https://github.com/airbnb/javascript)
+https://github.com/airbnb/javascript
 
+#### JSON-SCHEMA:
 
-JSON-SCHEMA:
-------------
-(http://json-schema.org/latest/json-schema-core.html)
+http://json-schema.org/latest/json-schema-core.html
