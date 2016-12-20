@@ -38,7 +38,7 @@ use luya\helpers\ArrayHelper;
  * @since 1.0.0-rc1
  * @author Basil Suter <basil@nadar.io>
  */
-class ActiveQueryCheckboxInjector extends BaseBlockInjector
+final class ActiveQueryCheckboxInjector extends BaseBlockInjector
 {
     private $_query = null;
     

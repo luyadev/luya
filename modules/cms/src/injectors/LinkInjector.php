@@ -34,7 +34,7 @@ use luya\cms\helpers\Url;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class LinkInjector extends BaseBlockInjector
+final class LinkInjector extends BaseBlockInjector
 {
     private function getLinkUrl()
     {
@@ -49,10 +49,10 @@ class LinkInjector extends BaseBlockInjector
     public function setup()
     {
         $this->setContextConfig([
-           'var' => $this->varName,
-           'type' => 'zaa-link',
-           'label' => $this->varLabel,
-       ]);
+            'var' => $this->varName,
+            'type' => 'zaa-link',
+            'label' => $this->varLabel,
+        ]);
        
         $this->context->addExtraVar($this->varName, $this->getLinkUrl());
     }
