@@ -30,6 +30,9 @@ class DefaultController extends \luya\web\Controller
     {
         $provider = new ActiveDataProvider([
             'query' => Article::find()->andWhere(['is_deleted' => 0]),
+            'sort' => [
+                'defaultOrder' => $this->module->articleDefaultOrder,
+            ]
         ]);
         
         return $this->render('index', [

@@ -14,6 +14,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1115](https://github.com/luyadev/luya/issues/1115) ActiveDataProvider default sorting configuration for news article overview.
 - [#1018](https://github.com/luyadev/luya/issues/1018) NgRest SelectModel Plugins where conditions, labelFields and labelTemplate properties added.
 - [#1010](https://github.com/luyadev/luya/issues/1010) Ability to soft delete admin languages if its not the system default language.
 - [#1110](https://github.com/luyadev/luya/issues/1110) Filemanager is sorting the directories alphabetically instead of chronologically.
