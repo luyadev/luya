@@ -146,7 +146,7 @@ final class Lang extends NgRestModel
     public static function getDefault()
     {
         if (self::$_langInstance === null) {
-            self::$_langInstance = self::find()->where(['is_default' => 1])->asArray()->one();
+            self::$_langInstance = self::find()->where(['is_default' => 1, 'is_deleted' => 0])->asArray()->one();
         }
 
         return self::$_langInstance;
@@ -167,7 +167,7 @@ final class Lang extends NgRestModel
             if (!$langShortCode) {
                 self::$_langInstanceFindActive = self::getDefault();
             } else {
-                self::$_langInstanceFindActive = self::find()->where(['short_code' => $langShortCode])->asArray()->one();
+                self::$_langInstanceFindActive = self::find()->where(['short_code' => $langShortCode, 'is_deleted' => 0])->asArray()->one();
             }
         }
         
