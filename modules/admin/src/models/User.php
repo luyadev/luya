@@ -184,6 +184,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
             'lastname' => Module::t('mode_user_lastname'),
             'email' => Module::t('mode_user_email'),
             'password' => Module::t('mode_user_password'),
+            'lastloginTimestamp' => Module::t('model_user_lastlogintimestamp'),
         ];
     }
 

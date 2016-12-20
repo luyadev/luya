@@ -222,4 +222,5 @@ return [
     'model_storagefilter_identifier' => 'Filter Identifier',
     'model_storagefilter_name' => 'Filter Name',
     'model_tag_name' => 'Tag Identifier',
+    'model_user_lastlogintimestamp' => 'Last login',
 ];
