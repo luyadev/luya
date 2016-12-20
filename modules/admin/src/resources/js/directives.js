@@ -1184,7 +1184,7 @@
 
                 scope.$watch(function() { return scope.ngModel }, function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                        var filtering = $filter('filter')(scope.filesData, {id: n});
+                        var filtering = $filter('filter')(scope.filesData, {id: n}, true);
                         if (filtering && filtering.length == 1) {
                             scope.fileinfo = filtering[0];
                         }
@@ -1222,7 +1222,7 @@
 
                 $scope.$watch('fileId', function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                    	var filtering = $filter('filter')($scope.filesData, {id: n});
+                    	var filtering = $filter('filter')($scope.filesData, {id: n}, true);
                         if (filtering && filtering.length == 1) {
                         	$scope.fileinfo = filtering[0];
                         }

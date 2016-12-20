@@ -26,6 +26,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 ### Fixed
 
 - [#1097](https://github.com/luyadev/luya/issues/1097) Removed unused codes from the UrlManager parseRequest() method.
+- [#1111](https://github.com/luyadev/luya/issues/1111) Storage File selection does not display file name cause of not strict comparing method.
 
 1.0.0-RC2 (29. Nov 2016)
 -----------------------
