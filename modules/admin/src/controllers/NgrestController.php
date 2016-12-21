@@ -16,7 +16,7 @@ use luya\admin\ngrest\render\RenderActiveWindowCallback;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class NgrestController extends Controller
+final class NgrestController extends Controller
 {
     public $disablePermissionCheck = true;
     
