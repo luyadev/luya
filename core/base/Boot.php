@@ -122,7 +122,7 @@ abstract class Boot
     /**
      * Run the application based on the Sapi Name.
      *
-     * @return luya\web\Application|luya\cli\Application Application objected based on the sapi name.
+     * @return \luya\web\Application|\luya\cli\Application Application objected based on the sapi name.
      */
     public function run()
     {
