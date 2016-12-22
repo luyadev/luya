@@ -32,7 +32,10 @@ class DefaultController extends \luya\web\Controller
             'query' => Article::find()->andWhere(['is_deleted' => 0]),
             'sort' => [
                 'defaultOrder' => $this->module->articleDefaultOrder,
-            ]
+            ],
+        	'pagination' => [
+        		'defaultPageSize' => $this->module->articleDefaultPageSize,
+        	],
         ]);
         
         return $this->render('index', [
@@ -81,6 +84,12 @@ class DefaultController extends \luya\web\Controller
         
         $provider = new ActiveDataProvider([
             'query' => $model->getArticles(),
+        	'sort' => [
+        		'defaultOrder' => $this->module->categoryArticleDefaultOrder,
+        	],
+        	'pagination' => [
+        		'defaultPageSize' => $this->module->categoryArticleDefaultPageSize,
+        	],
         ]);
         
         return $this->render('category', [
