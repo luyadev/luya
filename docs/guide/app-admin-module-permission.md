@@ -1,10 +1,10 @@
-Admin Permissions
-====================
+# Admin Permissions
 
-In order to set permissions for an API-Gateway or a custom Route you can add those informations into the `getMenu()` method function of the corresponding module and run the `import` command. LUYA admin will then create those permissiosn and you can allocate those in the groups and users settings.
+LUYA provides an out of the box permission system. Menu entries are bound to the permission system, but you can also define custom permissions. In order to update permissions run the `import`console command, then all permissions will be stored in the database and you can allocat them to a user group.
 
-Custom Menu-Route
--------------
+Permissions are commonly part of the {{luya\admin\base\Module::getMenu}} method but can also be defined in {{luya\admin\base\Module::extendPermissionApis}} or {{luya\admin\base\Module::extendPermissionRoutes}}.
+
+### Custom Menu-Route
 
 ```php
 public function getMenu()
@@ -13,7 +13,7 @@ public function getMenu()
     ->node("My Admin Module", "materialize-css-icon")
         ->group("Verwalten")
             ->itemRoute("Stats", "myadminmodule/stats/index", "materialize-css-icon")
-            ->itemRoute("Export)", "myadminmodule/stats/export", "materialize-css-icon");
+            ->itemRoute("Export", "myadminmodule/stats/export", "materialize-css-icon");
 }
 ```
 
@@ -24,12 +24,12 @@ Menu-Api
 public function getMenu()
 {
     return (new \luya\admin\components\AdminMenuBuilder($this))
-    ->node('Administration', 'mdi-navigation-apps')
+    ->node('Administration', 'materialize-css-icon')
         ->group('Zugriff')
-            ->itemApi('Users', 'admin/user/index', 'mdi-action-account-circle', 'api-admin-user')
-            ->itemApi('Groups', 'admin/group/index', 'mdi-action-account-child', 'api-admin-group')
+            ->itemApi('Users', 'admin/user/index', 'materialize-css-icon', 'api-admin-user')
+            ->itemApi('Groups', 'admin/group/index', 'materialize-css-icon', 'api-admin-group')
         ->group('System')
-            ->itemApi('Languages', 'admin/lang/index', 'mdi-action-language', 'api-admin-lang');
+            ->itemApi('Languages', 'admin/lang/index', 'materialize-css-icon', 'api-admin-lang');
 }
 ```
 
