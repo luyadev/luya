@@ -27,7 +27,7 @@ return [
     'view_index_sidebar_move' => 'Переместить',
     'view_update_drop_blocks' => 'Перетащите блок контента сюда',
     'view_update_blockcontent' => 'Блок контента',
-    'view_update_config' => 'Дополнительные настройки',
+    'view_update_configs' => 'Дополнительные настройки',
     'view_update_settings' => 'Настройки',
     'view_update_btn_save' => 'Сохранить',
     'view_update_btn_cancel' => 'Прервать',
