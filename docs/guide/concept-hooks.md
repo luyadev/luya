@@ -4,7 +4,7 @@ LUYA has a built in Hooking mechanism, which allows you to print code in various
 
 Assuming to have a Layout file which has section output which can be used sometimes, but could also be blank.
 
-```
+```php
 <html>
 <head>
     <title>Page</title>
@@ -80,7 +80,7 @@ Hook::on('fooBarArray', function($hook) {
 
 As the {{luya\Hook::on}} method can be called multiple times the hook iteration array contains now 4 elements which can be rendered as following:
 
-```
+```php
 <ul>
 <?php foreach (Hook::array('fooBarArray') as $item): ?>
     <li><?= $item; ?></li>
@@ -110,7 +110,7 @@ Hook::on('fooBarArrayLinks', function($hook) {
 
 > When using array keys multiple times the last executed item will override the former key.
 
-```
+```php
 <ul>
 <?php foreach (Hook::array('fooBarArrayLinks') as $url => $name): ?>
     <li><a href="<?= $url; ?>"><?= $name; ?></a></li>
