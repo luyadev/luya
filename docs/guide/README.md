@@ -10,6 +10,7 @@
   + [Composition](concept-composition.md)
   + [Tags](concept-tags.md)
   + [HTML Element](concept-elements.md)
+  + [Hooks](concept-hooks.md)
   + [Image LazyLoader](concept-lazyload.md)
 + Application
   + [Storage Filters](app-filters.md)
