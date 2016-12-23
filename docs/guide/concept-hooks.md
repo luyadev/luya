@@ -82,7 +82,7 @@ As the {{luya\Hook::on}} method can be called multiple times the hook iteration 
 
 ```php
 <ul>
-<?php foreach (Hook::array('fooBarArray') as $item): ?>
+<?php foreach (Hook::iterate('fooBarArray') as $item): ?>
     <li><?= $item; ?></li>
 <?php endforeach; ?>
 </ul>
@@ -112,7 +112,7 @@ Hook::on('fooBarArrayLinks', function($hook) {
 
 ```php
 <ul>
-<?php foreach (Hook::array('fooBarArrayLinks') as $url => $name): ?>
+<?php foreach (Hook::iterate('fooBarArrayLinks') as $url => $name): ?>
     <li><a href="<?= $url; ?>"><?= $name; ?></a></li>
 <?php endforeach; ?>
 </ul>
