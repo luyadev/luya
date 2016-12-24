@@ -101,4 +101,23 @@ class HookTest extends LuyaWebTestCase
     
         $this->assertSame(['test' => 'value4'], Hook::iterate('fooBar'));
     }
+    
+    public function testPrepanding()
+    {
+    	Hook::on('prepand', function() { return 'test1'; });
+    	Hook::on('prepand', function() { return 'test2'; }, true);
+    	
+    	$this->assertSame('test2test1', Hook::string('prepand'));
+    }
+    
+    public function testPrepandingMultipleKeys()
+    {
+    	Hook::on('prepand', function() { return 'test1'; });
+    	Hook::on('prepand', function() { return 'test2'; });
+    	Hook::on('prepand', function() { return 'testA'; }, true);
+    	Hook::on('prepand', function() { return 'test3'; });
+    	Hook::on('prepand', function() { return 'testB'; }, true);
+    	 
+    	$this->assertSame('testBtestAtest1test2test3', Hook::string('prepand'));
+    }
 }

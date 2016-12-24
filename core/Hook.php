@@ -53,12 +53,17 @@ class Hook extends Object
      * 
      * @param string $name The name of the hook.
      * @param callable|array $value An array with `[$object, 'method']` or a callable function `function($hook) {}`.
-     * @param boolean $prepend Whether to prepend the item to the start or not, defaults to false.
+     * @param boolean $prepend Whether to prepend the item to the start or as by default to the end of the stack.
      */
     public static function on($name, $value, $prepend = false)
     {
-        /// @TODO implement prepend
-        static::$_hooks[$name][] = new HookEvent(['handler' => $value]);
+        $object = new HookEvent(['handler' => $value]);
+        
+        if ($prepend) {
+        	array_unshift(static::$_hooks[$name], $object);
+        } else {
+        	static::$_hooks[$name][] = $object;
+        }
     }
 
     /**
