@@ -600,6 +600,7 @@ $this->beginPage()
 					            	<option value="ru" <?php if (Yii::$app->luyaLanguage == 'ru'): ?>selected<?php endif; ?>>Pусский</option>
 					            	<option value="es" <?php if (Yii::$app->luyaLanguage == 'es'): ?>selected<?php endif; ?>>Español</option>
 					            	<option value="fr" <?php if (Yii::$app->luyaLanguage == 'fr'): ?>selected<?php endif; ?>>Français</option>
+					            	<option value="ua" <?php if (Yii::$app->luyaLanguage == 'ua'): ?>selected<?php endif; ?>>Українська</option>
 					            </select>
 				            </div>
 	            		</td>
