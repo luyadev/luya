@@ -60,7 +60,7 @@ abstract class Importer extends \yii\base\Object
     /**
      * Returns the import object to use the importers methods.
      *
-     * @return object Import \luya\console\interfaces\ImportControllerInterface
+     * @return \luya\console\interfaces\ImportControllerInterface The importer object.
      */
     public function getImporter()
     {
