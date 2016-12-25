@@ -1,5 +1,6 @@
-Page Crawler
-==============
+# Page Crawler
+
+[![Build Status](https://travis-ci.org/luyadev/luya-module-crawler.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-crawler)
 
 An easy to use Full-Website page crawler to make provide search results on your page. The crawlermodule gather all informations about the sides on the configured domain and stores the index in the database. From there you can now create search querys to provide search results, there are also helper methods which provides inteligent search results by spliting the input into multiple search querys (used by default).
 
