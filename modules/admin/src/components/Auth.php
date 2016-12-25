@@ -42,9 +42,20 @@ class Auth extends \yii\base\Component
     private function getPermissionTable($userId)
     {
         if ($this->_permissionTable === null) {
-            $this->_permissionTable = Yii::$app->db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id')
-            ->bindValue('user_id', $userId)
-            ->queryAll();
+        	
+        	/* OLD CODE IN ORDER TO ENSURE ISSUES:
+        	 * $this->_permissionTable = Yii::$app->db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id')
+             * ->bindValue('user_id', $userId)
+             * ->queryAll();
+        	 */
+        	
+            $this->_permissionTable = (new Query())
+            	->select("*")
+            	->from('admin_user_group')
+            	->innerJoin('admin_group_auth', 'admin_user_group.group_id=admin_group_auth.group_id')
+            	->innerJoin('admin_auth', 'admin_group_auth.auth_id = admin_auth.id')
+            	->where(['admin_user_group.user_id' => $userId])
+            	->all();
         }
         
         return $this->_permissionTable;
@@ -61,7 +72,7 @@ class Auth extends \yii\base\Component
     {
         $data = [];
         foreach ($this->getPermissionTable($userId) as $item) {
-            if ($item['api'] == $apiEndpoint) {
+            if ($item['api'] == $apiEndpoint && $item['user_id'] == $userId) {
                 $data[] = $item;
             }
         }
@@ -79,7 +90,7 @@ class Auth extends \yii\base\Component
     {
         $data = [];
         foreach ($this->getPermissionTable($userId) as $item) {
-            if ($item['route'] == $route) {
+            if ($item['route'] == $route && $item['user_id'] == $userId) {
                 $data[] = $item;
             }
         }
