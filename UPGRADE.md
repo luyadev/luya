@@ -1,17 +1,17 @@
 LUYA UPGRADE
 ============
 
-This document will help you upgrading from a LUYA Version into another.
+This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
 1.0.0 (in progress)
 -------------------
+
++ [#1109](https://github.com/luyadev/luya/issues/1109) All blocks deliverd from the LUYA core modules are marked as `final` so you are not able to extend from those blocks. Make sure you extend from the `luya\cms\base\Block` class.
 
 1.0.0-RC2 (29. Nov 2016)
 -----------------------
 
 The issues below can lead into problems when upgrading to 1.0.0-RC2.
-
-For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code with examples.
 
 + [#1070](https://github.com/luyadev/luya/issues/1070) Renamed methods of the block interface. Change `getBlockGroup()` to `blockGroup()`.
 + [#1058](https://github.com/luyadev/luya/issues/1058) Removed all massive assigned vars, cfgs, extras and placeholders from the PHP Block view.
