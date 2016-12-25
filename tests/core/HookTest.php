@@ -79,7 +79,7 @@ class HookTest extends LuyaWebTestCase
             $hook['foo'] = 'Bar';
             $hook['unfoo'] = 'Unfoo';
             
-            if ($hook['unfoo']) {
+            if (isset($hook['unfoo'])) {
                 unset($hook['unfoo']);
             }
         });
@@ -119,5 +119,11 @@ class HookTest extends LuyaWebTestCase
     	Hook::on('prepand', function() { return 'testB'; }, true);
     	 
     	$this->assertSame('testBtestAtest1test2test3', Hook::string('prepand'));
+    }
+    
+    public function testNotFoundListenerOutput()
+    {
+    	$this->assertSame([], Hook::iterate('notFoundArray'));
+    	$this->assertSame('', Hook::string('notFoundString'));
     }
 }
