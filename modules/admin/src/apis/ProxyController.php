@@ -71,6 +71,7 @@ class ProxyController extends Controller
 		$buildToken = Yii::$app->security->generateRandomString(16);
 		
 		$build = new ProxyBuild();
+		$build->detachBehavior('LogBehavior');
 		$build->attributes = [
 			'machine_id' => $machine->id,
 			'timestamp' => time(),
