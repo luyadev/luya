@@ -11,6 +11,7 @@ use yii\helpers\Console;
 
 /**
  * @since 1.0.0
+ * @var \yii\db\TableSchema $schema Schema object
  */
 class ClientTable extends Object
 {
@@ -26,6 +27,48 @@ class ClientTable extends Object
 		$this->build = $build;
 		$this->_data = $data;
 		parent::__construct($config);
+	}
+	
+	private $_schema = null;
+	
+	public function getSchema()
+	{
+		if ($this->_schema === null) {
+			$this->_schema = Yii::$app->db->getTableSchema($this->getName());
+		}
+		
+		return $this->_schema;
+	}
+	
+	public function getColumns()
+	{
+		return $this->schema->getColumnNames();
+	}
+	
+	protected function cleanUpMatchRow($row)
+	{
+		$data = [];
+		foreach ($row as $key => $item) {
+			foreach ($item as $field => $value) {
+				if (in_array($field, $this->getColumns())) {
+					$data[$key][$field] = $value;
+				}
+			}
+		}
+		
+		return $data;
+	}
+	
+	protected function cleanUpBatchInsertFields($fields)
+	{
+		$data = [];
+		foreach ($fields as $field) {
+			if (in_array($field, $this->getColumns())) {
+				$data[] = $field;
+			}
+		}
+		
+		return $data;
 	}
 	
 	public function getPks()
@@ -95,7 +138,7 @@ class ClientTable extends Object
 		
 		for ($i=0; $i<$counts; $i++) {
 			$match = array_splice($rows, $i, 25);
-			Yii::$app->db->createCommand()->batchInsert($this->getName(), $this->getFields(), $match)->execute();
+			Yii::$app->db->createCommand()->batchInsert($this->getName(), $this->cleanUpBatchInsertFields($this->getFields()), $this->cleanUpMatchRow($match))->execute();
 		}
 	}
 	

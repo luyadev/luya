@@ -2,6 +2,7 @@
 
 namespace luya\admin\proxy;
 
+use Yii;
 use yii\base\Object;
 use luya\console\Command;
 
@@ -35,7 +36,11 @@ class ClientBuild extends Object
 		$this->_buildConfig = $config;
 		
 		foreach ($config['tables'] as $tableName => $tableConfig) {
-			$this->_tables[$tableName] = new ClientTable($this, $tableConfig);
+			$schema = Yii::$app->db->getTableSchema($tableName);
+			
+			if ($schema !== null) {
+				$this->_tables[$tableName] = new ClientTable($this, $tableConfig);
+			}
 		}
 	}
 	
