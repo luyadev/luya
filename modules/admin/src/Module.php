@@ -75,6 +75,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'api-admin-effect' => 'luya\admin\apis\EffectController',
         'api-admin-filter' => 'luya\admin\apis\FilterController',
         'api-admin-tag' => 'luya\admin\apis\TagController',
+    	'api-admin-proxymachine' => 'luya\admin\apis\ProxyMachineController',
+    	'api-admin-proxybuild' => 'luya\admin\apis\ProxyBuildController',
+    	'api-admin-proxy' => 'luya\admin\apis\ProxyController',
     ];
 
     /**
@@ -212,7 +215,10 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
                     ->itemApi('menu_system_logger', 'admin/logger/index', 'label', 'api-admin-logger')
                 ->group('menu_group_images')
                     ->itemApi('menu_images_item_effects', 'admin/effect/index', 'blur_circular', 'api-admin-effect')
-                    ->itemApi('menu_images_item_filters', 'admin/filter/index', 'adjust', 'api-admin-filter');
+                    ->itemApi('menu_images_item_filters', 'admin/filter/index', 'adjust', 'api-admin-filter')
+                ->group('LCP')
+                    ->itemApi('Machines', 'admin/proxy-machine/index', 'label', 'api-admin-proxymachine')
+                    ->itemApi('Builds', 'admin/proxy-build/index', 'label', 'api-admin-proxybuild');
     }
 
     /**
