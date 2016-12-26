@@ -35,6 +35,9 @@ class ClientBuild extends Object
 		$this->_buildConfig = $config;
 		
 		foreach ($config['tables'] as $tableName => $tableConfig) {
+			if ($tableName == 'admin_ngrest_log') {
+				continue;
+			}
 			$this->_tables[$tableName] = new ClientTable($this, $tableConfig);
 		}
 	}
