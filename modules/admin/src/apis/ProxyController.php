@@ -67,7 +67,6 @@ class ProxyController extends Controller
 			];
 		}
 		
-		
 		$buildToken = Yii::$app->security->generateRandomString(16);
 		
 		$build = new ProxyBuild();

@@ -88,7 +88,15 @@ class ClientTable extends Object
 		}
 		
 		Yii::$app->db->createCommand()->truncateTable($this->getName())->execute();
-		Yii::$app->db->createCommand()->batchInsert($this->getName(), $this->getFields(), $this->getContentRows())->execute();
+		
+		$rows = $this->getContentRows();
+		$num = count($rows);
+		$counts = ceil($num/25);
+		
+		for ($i=0; $i<$counts; $i++) {
+			$match = array_splice($rows, $i, 25);
+			Yii::$app->db->createCommand()->batchInsert($this->getName(), $this->getFields(), $match)->execute();
+		}
 	}
 	
 	private function request($offset)
