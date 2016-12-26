@@ -13,12 +13,13 @@ class ClientTransfer extends Object
 	public $build;
 	
 	public function start()
-	{
-		
+	{	
 		foreach ($this->build->getTables() as $name => $table) {
 			/* @var $table \luya\admin\proxy\ClientTable */
 			
 			if (!$table->isComplet()) {
+				$this->build->command->outputInfo('Rows Expected: ' . $table->getRows());
+				$this->build->command->outputInfo('Rows Downloaded: ' . count($table->getContentRows()));
 				return $this->build->command->outputError('Incomplet build, stop execution: ' . $name);
 			}
 		}

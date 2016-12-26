@@ -41,7 +41,8 @@ class ProxyController extends Controller
 			throw new ForbiddenHttpException("Unable to acccess the proxy api due to invalid token.");
 		}
 		
-		$rowsPerRequest = 25;
+		// @TODO make configurable in machine config?!
+		$rowsPerRequest = $this->module->proxyRowsPerRequest;
 		
 		$config = [
 			'rowsPerRequest' => $rowsPerRequest,

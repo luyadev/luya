@@ -64,13 +64,16 @@ class ClientTable extends Object
 	{
 		if ($this->_contentRows === null) {
 			$data = [];
-			$this->build->command->outputInfo($this->getName() . ' fetching data from proxy:');
-			Console::startProgress(0, $this->getOffsetTotal());
+			
+			Console::startProgress(0,$this->getOffsetTotal(), 'Fetch: ' . $this->getName() . ' ');
+			
+			$progress = 1;
 			for ($i=0; $i<$this->getOffsetTotal(); $i++) {
 				$data = array_merge($this->request($i), $data);
 				usleep(100);
-				Console::updateProgress($i, $this->getOffsetTotal());
+				Console::updateProgress($progress++, $this->getOffsetTotal());
 			}
+			
 			Console::endProgress();
 			$this->_contentRows = $data;
 		}

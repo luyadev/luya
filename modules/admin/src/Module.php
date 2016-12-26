@@ -50,6 +50,11 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      * secureLogin. To test your smtp connection you can use `./vendor/bin/luya health/mailer`
      */
     public $secureLogin = false;
+    
+    /**
+     * @var integer The number of rows which should be transferd for each request.
+     */
+    public $proxyRowsPerRequest = 20;
 
     /**
      * @var array A configuration array with all tags shipped by default with the admin module.
