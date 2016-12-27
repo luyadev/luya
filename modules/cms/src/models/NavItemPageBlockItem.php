@@ -150,14 +150,14 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
         // its a negative value, so its a last item, lets find the last index for current config
         if ($this->sort_index < 0) {
-            $last = self::originalFind()->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->orderBy('sort_index DESC')->one();
+            $last = self::originalFind()->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->orderBy(['sort_index' => SORT_DESC])->one();
             if (!$last) {
                 $this->sort_index = 0;
             } else {
                 $this->sort_index = $last->sort_index + 1;
             }
         } else { // its not a negative value, we have to find the positions after the current sort index and update to a higher level
-            $higher = self::originalFind()->where('sort_index >= :index', ['index' => $this->sort_index])->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->all();
+            $higher = self::originalFind()->where(['>=', 'sort_index', $this->sort_index])->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->all();
             foreach ($higher as $item) {
                 $newSortIndex = $item->sort_index + 1;
                 Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $newSortIndex], ['id' => $item->id])->execute();
@@ -243,7 +243,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
         $index = 0;
-        $datas = self::originalFind()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC, timestamp_create DESC')->all();
+        $datas = self::originalFind()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy(['sort_index' => SORT_ASC, 'timestamp_create' => SORT_DESC])->all();
         foreach ($datas as $item) {
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $index], ['id' => $item->id])->execute();
             ++$index;
