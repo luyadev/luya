@@ -31,6 +31,7 @@ use luya\admin\storage\ItemTrait;
  * @property string $serverSource The path to the file on the filesystem of the server.
  * @property boolean $isHidden Whether the file is marked as hidden or not.
  * @property boolean $isDeleted Return whether the file has been removed from the filesytem or not.
+ * @property booelan $fileExists Whether the file resource exists in the storage folder or not.
  *
  * @author Basil Suter <basil@nadar.io>
  */
