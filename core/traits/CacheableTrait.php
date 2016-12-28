@@ -138,4 +138,18 @@ trait CacheableTrait
     
         return false;
     }
+    
+    /**
+     * Deletes all values from cache.
+	 * 
+     * @return boolean Whether the flush operation was successful.
+     */
+    public function flushHasCache()
+    {
+    	if ($this->isCachable()) {
+    		return Yii::$app->cache->flush();
+    	}
+    	
+    	return false;
+    }
 }
