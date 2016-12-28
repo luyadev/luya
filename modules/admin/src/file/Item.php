@@ -243,6 +243,18 @@ class Item extends \yii\base\Object
     }
     
     /**
+     * Get the md5 sum of the file calculated when creating.
+     * 
+     * {{luya\helpers\FileHelper::getFileHash}}
+     * 
+     * @return string
+     */
+    public function getFileHash()
+    {
+    	return $this->itemArray['hash_file'];
+    }
+    
+    /**
      * Get the realtive url to the source of the file.
      *
      * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For

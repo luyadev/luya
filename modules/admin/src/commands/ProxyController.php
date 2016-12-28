@@ -47,12 +47,12 @@ class ProxyController extends \luya\console\Command
 		
 		if (!$curl->error) {
 			$response = Json::decode($curl->response);
-			
 			$build = new ClientBuild($this, [
 				'buildToken' => sha1($response['buildToken']),
 				'buildConfig' => $response['config'],
 				'requestUrl' => $response['providerUrl'],
 				'requestCloseUrl' => $response['requestCloseUrl'],
+				'fileProviderUrl' => $response['fileProviderUrl'],
 				'machineIdentifier' => $identifier,
 				'machineToken' => sha1($token),
 			]);

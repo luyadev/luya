@@ -5,6 +5,7 @@ namespace luya\admin\proxy;
 use Yii;
 use yii\base\Object;
 use luya\console\Command;
+use yii\base\InvalidConfigException;
 
 class ClientBuild extends Object
 {
@@ -19,14 +20,27 @@ class ClientBuild extends Object
 	
 	public $requestCloseUrl = null;
 	
+	public $fileProviderUrl = null;
+	
 	public $machineIdentifier = null;
 
 	public $machineToken = null;
+	
+	public $storageFilesCount = null;
 	
 	public function __construct(Command $command, array $config = [])
 	{
 		$this->command = $command;
 		parent::__construct($config);
+	}
+	
+	public function init()
+	{
+		parent::init();
+		
+		if ($this->_buildConfig === null) {
+			throw new InvalidConfigException("build config can not be empty!");
+		}
 	}
 	
 	private $_buildConfig = null;
@@ -44,12 +58,15 @@ class ClientBuild extends Object
 		}
 	}
 	
+	public function getStorageFilesCount()
+	{
+		return $this->_buildConfig['storageFilesCount'];
+	}
+	
 	private $_tables = [];
 	
 	public function getTables()
 	{
 		return $this->_tables;
 	}
-	
-	
 }

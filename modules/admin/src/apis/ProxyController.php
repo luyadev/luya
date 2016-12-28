@@ -10,6 +10,7 @@ use yii\db\Query;
 use luya\admin\models\ProxyBuild;
 use yii\helpers\Json;
 use luya\helpers\Url;
+use luya\admin\models\StorageFile;
 
 /**
  * Proxy API.
@@ -47,6 +48,7 @@ class ProxyController extends Controller
 		$config = [
 			'rowsPerRequest' => $rowsPerRequest,
 			'tables' => [],
+			'storageFilesCount' => StorageFile::find()->count(),
 		];
 		
 		foreach (Yii::$app->db->schema->tableNames as $table) {
@@ -63,7 +65,6 @@ class ProxyController extends Controller
 				'rows' => $rows,
 				'fields' => $schema->columnNames,
 				'offset_total' => ceil($rows/$rowsPerRequest),
-				'offset_request_count' => 0,
 			];
 		}
 		
@@ -84,6 +85,7 @@ class ProxyController extends Controller
 			return [
 				'providerUrl' => Url::base(true) . '/admin/api-admin-proxy/data-provider',
 				'requestCloseUrl' => Url::base(true) . '/admin/api-admin-proxy/close',
+				'fileProviderUrl' => Url::base(true) . '/admin/api-admin-proxy/file-provider',
 				'buildToken' => $buildToken,
 				'config' => $config,
 			];
@@ -92,7 +94,7 @@ class ProxyController extends Controller
 		return $build->getErrors();
 	}
 	
-	public function actionDataProvider($machine, $buildToken, $table, $offset)
+	private function ensureBuild($machine, $buildToken)
 	{
 		$build = ProxyBuild::findOne(['build_token' => $buildToken, 'is_complet' => 0]);
 		
@@ -107,6 +109,13 @@ class ProxyController extends Controller
 		if ($build->proxyMachine->identifier !== $machine) {
 			throw new ForbiddenHttpException("Invalid machine identifier for current build.");
 		}
+		
+		return $build;
+	}
+	
+	public function actionDataProvider($machine, $buildToken, $table, $offset)
+	{
+		$build = $this->ensureBuild($machine, $buildToken);
 		
 		$config = $build->getTableConfig($table);
 		
@@ -127,6 +136,19 @@ class ProxyController extends Controller
 		}
 		
 		return $query->all();
+	}
+	
+	
+	
+	public function actionFileProvider($machine, $buildToken, $fileId)
+	{
+		$build = $this->ensureBuild($machine, $buildToken);
+		
+		
+		$file = Yii::$app->storage->getFile($fileId);
+		
+		/* @var $file \luya\admin\file\Item */
+		return Yii::$app->response->sendFile($file->serverSource)->send();
 	}
 	
 	public function actionClose($buildToken)
