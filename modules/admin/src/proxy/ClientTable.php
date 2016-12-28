@@ -145,7 +145,7 @@ class ClientTable extends Object
 	private function request($offset)
 	{
 		$curl = new Curl();
-		$curl->get($this->build->requestUrl, ['buildToken' => $this->build->buildToken, 'table' => $this->name, 'offset' => $offset]);
+		$curl->get($this->build->requestUrl, ['machine' => $this->build->machineIdentifier, 'buildToken' => $this->build->buildToken, 'table' => $this->name, 'offset' => $offset]);
 		
 		if (!$curl->error) {
 			return Json::decode($curl->response);

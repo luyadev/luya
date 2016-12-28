@@ -59,6 +59,11 @@ class ProxyBuild extends NgRestModel
 		];
 	}
 	
+	public function getProxyMachine()
+	{
+		return $this->hasOne(ProxyMachine::class, ['id' => 'machine_id']);
+	}
+	
 	/**
 	 * @return string Defines the api endpoint for the angular calls
 	 */

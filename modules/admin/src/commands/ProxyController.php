@@ -49,7 +49,7 @@ class ProxyController extends \luya\console\Command
 			$response = Json::decode($curl->response);
 			
 			$build = new ClientBuild($this, [
-				'buildToken' => $response['buildToken'],
+				'buildToken' => sha1($response['buildToken']),
 				'buildConfig' => $response['config'],
 				'requestUrl' => $response['providerUrl'],
 				'requestCloseUrl' => $response['requestCloseUrl'],

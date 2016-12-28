@@ -74,7 +74,7 @@ class ProxyController extends Controller
 		$build->attributes = [
 			'machine_id' => $machine->id,
 			'timestamp' => time(),
-			'build_token' => $buildToken,
+			'build_token' => sha1($buildToken),
 			'config' => Json::encode($config),
 			'is_complet' => 0,
 			'expiration_time' => time() + (60*10) // 10 minutes valid
@@ -92,7 +92,7 @@ class ProxyController extends Controller
 		return $build->getErrors();
 	}
 	
-	public function actionDataProvider($buildToken, $table, $offset)
+	public function actionDataProvider($machine, $buildToken, $table, $offset)
 	{
 		$build = ProxyBuild::findOne(['build_token' => $buildToken, 'is_complet' => 0]);
 		
@@ -102,6 +102,10 @@ class ProxyController extends Controller
 		
 		if (time() > $build->expiration_time) {
 			throw new ForbiddenHttpException("The expiration as been exceeded.");
+		}
+		
+		if ($build->proxyMachine->identifier !== $machine) {
+			throw new ForbiddenHttpException("Invalid machine identifier for current build.");
 		}
 		
 		$config = $build->getTableConfig($table);
