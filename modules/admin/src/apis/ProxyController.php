@@ -144,11 +144,15 @@ class ProxyController extends Controller
 	{
 		$build = $this->ensureBuild($machine, $buildToken);
 		
+		if ($build) {
+			$file = Yii::$app->storage->getFile($fileId);
+			/* @var $file \luya\admin\file\Item */
+			if ($file->fileExists) {
+				return Yii::$app->response->sendFile($file->serverSource)->send();
+			}
+		}
 		
-		$file = Yii::$app->storage->getFile($fileId);
-		
-		/* @var $file \luya\admin\file\Item */
-		return Yii::$app->response->sendFile($file->serverSource)->send();
+		return null;
 	}
 	
 	public function actionClose($buildToken)
