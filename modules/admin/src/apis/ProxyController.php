@@ -145,6 +145,11 @@ class ProxyController extends Controller
 		$build = $this->ensureBuild($machine, $buildToken);
 		
 		if ($build) {
+			
+			if (!is_numeric($fileId)) {
+				throw new \InvalidArgumentException("Invalid file id provided.");
+			}
+			
 			$file = Yii::$app->storage->getFile($fileId);
 			/* @var $file \luya\admin\file\Item */
 			if ($file->fileExists) {
