@@ -1,4 +1,8 @@
-# Docu Guidelines
+# Developer Guidelines
+
+Below some rules how to deatil with documentations, linking or using the php docs.
+
+## Documentation & Guide
 
 In order to make a Link somewhere inside the Guide or PHPDoc to a PHP Class use:
 
@@ -9,7 +13,25 @@ In order to make links from the API PHPdocs to the Guide use:
 
 + `[[concept-tags.md]]` where the markdown file is a file located in `/docs/guide` folder..
 
-To refer to inherite methods use:
+## PHPDOC
+
+All classes must have a php doc block which is sorted as follow including author and since tag.
+
+```php
+/**
+ * Title for the class with Dot.
+ *
+ * The description of the class should be available like this also with a dot at the end.
+ *
+ * @author John Doe <john@example.com>
+ * @since 1.0.0 
+ */
+class FooBar()
+{
+}
+```
+ 
+In order to refer to inherited methods use:
 
 ```php
 /**
