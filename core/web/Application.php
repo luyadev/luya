@@ -10,7 +10,7 @@ use luya\traits\ApplicationTrait;
  * @property \luya\web\Composition $composition Composition property
  * @property \luya\web\Twig $twig The twig component
  * @property \luya\web\Element $element The element component
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

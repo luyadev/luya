@@ -41,7 +41,7 @@ class ZipHelper
 
     /**
      * Zip a folder (include itself).
-     * 
+     *
      * ```php
      * \luya\helper\Zip::zipDir('/path/to/sourceDir', '/path/to/out.zip');
      * ```

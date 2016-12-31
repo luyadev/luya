@@ -6,9 +6,9 @@ use yii\base\Object;
 
 /**
  * HookEvent Object.
- * 
+ *
  * Each Hook Event is represented and evaluated by this Object. See {{luya\Hook}}.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -38,7 +38,7 @@ final class HookEvent extends Object implements \ArrayAccess
     
     /**
      * Getter method for iteration.
-     * 
+     *
      * @return array
      */
     public function getIterations()
@@ -62,7 +62,7 @@ final class HookEvent extends Object implements \ArrayAccess
     
     public function offsetSet($offset, $value)
     {
-        $this->iteration($value, $offset);    
+        $this->iteration($value, $offset);
     }
     
     public function offsetExists($offset)

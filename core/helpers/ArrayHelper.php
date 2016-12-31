@@ -4,9 +4,9 @@ namespace luya\helpers;
 
 /**
  * Helper methods when dealing with Arrays.
- * 
+ *
  * Extends the {{yii\helpers\ArrayHelper}} class by some usefull functions like:
- * 
+ *
  * + {{luya\helpers\ArrayHelper::toObject}}
  * + {{luya\helpers\ArrayHelper::arrayUnshiftAssoc}}
  * + {{luya\helpers\ArrayHelper::typeCast}}

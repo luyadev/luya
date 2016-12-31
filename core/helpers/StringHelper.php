@@ -4,9 +4,9 @@ namespace luya\helpers;
 
 /**
  * Helper methods when dealing with Strings.
- * 
+ *
  * Extends the {{yii\helpers\StringHelper}} class by some usefull functions like:
- * 
+ *
  * + {{luya\helpers\StringHelper::typeCast}}
  * + {{luya\helpers\StringHelper::replaceFirst}}
  * + {{luya\helpers\StringHelper::contains}}

@@ -7,9 +7,9 @@ use Exception;
 
 /**
  * Helper methods when dealing with Files.
- * 
+ *
  * Extends the {{yii\helpers\FileHelper}} class by some usefull functions like:
- * 
+ *
  * + {{luya\helpers\FileHelper::humanReadableFilesize}}
  * + {{luya\helpers\FileHelper::ensureExtension}}
  * + {{luya\helpers\FileHelper::getFileHash}}

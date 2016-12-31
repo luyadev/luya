@@ -8,7 +8,7 @@ use Yii;
  * Helper methods when dealing with URLs and Links.
  *
  * Extends the {{yii\helpers\BaseUrl}} class by some usefull functions like:
- * 
+ *
  * + {{luya\helpers\Url::trailing}}
  * + {{luya\helpers\Url::toInternal}}
  * + {{luya\helpers\Url::toAjax}}

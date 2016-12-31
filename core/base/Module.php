@@ -12,9 +12,9 @@ use yii\base\InvalidConfigException;
 
 /**
  * LUYA Module base class.
- * 
+ *
  * The module class provides url rule defintions and other helper methods.
- * 
+ *
  * In order to use a module within the CMS context it must extend from this base module class.
  *
  * @author Basil Suter <basil@nadar.io>
