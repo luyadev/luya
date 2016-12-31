@@ -5,18 +5,19 @@ namespace luya\helpers;
 use ZipArchive;
 
 /**
- * Zip Helper class
+ * Helper methods when dealing with ZIP Archives.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ZipHelper
 {
     /**
      * Add files and sub-directories in a folder to zip file.
      *
-     * @param string     $folder
-     * @param ZipArchive $zipFile
-     * @param int        $exclusiveLength Number of text to be exclusived from the file path.
+     * @param string $folder
+     * @param \ZipArchive $zipFile
+     * @param integer $exclusiveLength Number of text to be exclusived from the file path.
      */
     private static function folderToZip($folder, &$zipFile, $exclusiveLength)
     {
@@ -40,8 +41,10 @@ class ZipHelper
 
     /**
      * Zip a folder (include itself).
-     * Usage:
-     *   luya\helper\Zip::zipDir('/path/to/sourceDir', '/path/to/out.zip');.
+     * 
+     * ```php
+     * \luya\helper\Zip::zipDir('/path/to/sourceDir', '/path/to/out.zip');
+     * ```
      *
      * @param string $sourcePath Path of directory to be zip.
      * @param string $outZipPath Path of output zip file.

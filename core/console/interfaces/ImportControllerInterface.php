@@ -6,6 +6,7 @@ namespace luya\console\interfaces;
  * Command ImportController Interface.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface ImportControllerInterface
 {

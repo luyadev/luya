@@ -3,9 +3,17 @@
 namespace luya\helpers;
 
 /**
- * Extend the Yii Array Helper class
+ * Helper methods when dealing with Arrays.
+ * 
+ * Extends the {{yii\helpers\ArrayHelper}} class by some usefull functions like:
+ * 
+ * + {{luya\helpers\ArrayHelper::toObject}}
+ * + {{luya\helpers\ArrayHelper::arrayUnshiftAssoc}}
+ * + {{luya\helpers\ArrayHelper::typeCast}}
+ * + {{luya\helpers\ArrayHelper::search}}
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ArrayHelper extends \yii\helpers\BaseArrayHelper
 {

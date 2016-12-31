@@ -29,6 +29,7 @@ use SMTP;
  * @property \PHPMailer $mailer The PHP Mailer object
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Mail extends \yii\base\Component
 {

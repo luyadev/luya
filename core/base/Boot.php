@@ -17,6 +17,7 @@ use luya\helpers\ArrayHelper;
  * the default config `../configs/env.php`.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Boot
 {

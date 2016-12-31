@@ -34,6 +34,7 @@ use luya\web\UrlManager;
  * @property string $suffix The suffix which should be used to attach to the url rules.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ModuleReflection extends Object
 {

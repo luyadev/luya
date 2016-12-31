@@ -5,10 +5,14 @@ namespace luya\helpers;
 use Yii;
 
 /**
- * URL Helper to create URLs and other tools.
+ * Helper methods when dealing with URLs and Links.
  *
- * This Class extends the \yii\helpers\Url class which provides tools to create URLs based on the
- * URL-Manager component. There are also other little helper methods to work with urls.
+ * Extends the {{yii\helpers\BaseUrl}} class by some usefull functions like:
+ * 
+ * + {{luya\helpers\Url::trailing}}
+ * + {{luya\helpers\Url::toInternal}}
+ * + {{luya\helpers\Url::toAjax}}
+ * + {{luya\helpers\Url::ensureHttp}}
  *
  * An example of create an URL based on Route in the UrlManager:
  *
@@ -17,8 +21,9 @@ use Yii;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Url extends \yii\helpers\Url
+class Url extends \yii\helpers\BaseUrl
 {
     /**
      * Add a trailing slash to an url if there is no trailing slash at the end of the url.

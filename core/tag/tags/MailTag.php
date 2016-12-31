@@ -11,7 +11,7 @@ use luya\tag\BaseTag;
  * The mail Tag allows you to create E-Mail links to an adress. Example use `mail[info@luya.io]` or with an additional value info use `mail[info@luya.io](send mail)`
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-rc1
+ * @since 1.0.0
  */
 class MailTag extends BaseTag
 {

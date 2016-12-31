@@ -9,8 +9,8 @@ use yii\base\Object;
  * 
  * Each Hook Event is represented and evaluated by this Object. See {{luya\Hook}}.
  * 
- * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class HookEvent extends Object implements \ArrayAccess
 {

@@ -16,6 +16,7 @@ use yii\helpers\Html;
  * url of the server. In order to generate an external url use `link[luya](Go to Luya.io)`.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class LinkTag extends BaseTag
 {

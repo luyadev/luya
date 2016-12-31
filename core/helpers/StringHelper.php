@@ -3,14 +3,18 @@
 namespace luya\helpers;
 
 /**
- * String Helpers.
- *
- * This class extends the {{yii\helpers\StringHelper}} class by some helpful methods.
+ * Helper methods when dealing with Strings.
+ * 
+ * Extends the {{yii\helpers\StringHelper}} class by some usefull functions like:
+ * 
+ * + {{luya\helpers\StringHelper::typeCast}}
+ * + {{luya\helpers\StringHelper::replaceFirst}}
+ * + {{luya\helpers\StringHelper::contains}}
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta7
+ * @since 1.0.0
  */
-class StringHelper extends \yii\helpers\StringHelper
+class StringHelper extends \yii\helpers\BaseStringHelper
 {
     /**
      * TypeCast a string to its specific types.

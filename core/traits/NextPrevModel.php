@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
  * ActiveRecord object model.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta6
+ * @since 1.0.0
  */
 trait NextPrevModel
 {

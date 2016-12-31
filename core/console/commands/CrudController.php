@@ -13,7 +13,9 @@ use luya\helpers\FileHelper;
  * Console command to create a NgRest Crud with Controller, Api and Model based on a SQL Table.
  *
  * @property string $moduleNameWithoutAdminSuffix Get the $moduleName without admin suffix (if any).
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CrudController extends BaseCrudController
 {

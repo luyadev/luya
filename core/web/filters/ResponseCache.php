@@ -56,8 +56,8 @@ use luya\traits\CacheableTrait;
  * }
  * ```
  *
- * @since 1.0.0-beta7
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ResponseCache extends ActionFilter
 {

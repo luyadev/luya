@@ -15,6 +15,7 @@ use yii\rest\ActiveController as BaseActiveController;
  * See the {{luya\traits\RestBehaviorsTrait}} documentation in order to read more about the default enabled behaviors and protection settings.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class ActiveController extends BaseActiveController
 {

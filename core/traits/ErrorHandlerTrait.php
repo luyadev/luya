@@ -11,6 +11,7 @@ use luya\helpers\Url;
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 trait ErrorHandlerTrait
 {

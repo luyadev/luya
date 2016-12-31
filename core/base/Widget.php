@@ -13,6 +13,7 @@ use yii\helpers\Inflector;
  * view files and the widget only contains logic informations like a capsulated controller without views.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Widget extends \yii\base\Widget
 {

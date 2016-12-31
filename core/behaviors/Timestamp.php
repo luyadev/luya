@@ -19,7 +19,7 @@ use yii\db\ActiveRecord;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta5
+ * @since 1.0.0
  */
 class Timestamp extends Behavior
 {

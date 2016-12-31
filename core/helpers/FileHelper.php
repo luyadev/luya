@@ -6,9 +6,18 @@ use Yii;
 use Exception;
 
 /**
- * Extending the Yii File Helper class.
+ * Helper methods when dealing with Files.
+ * 
+ * Extends the {{yii\helpers\FileHelper}} class by some usefull functions like:
+ * 
+ * + {{luya\helpers\FileHelper::humanReadableFilesize}}
+ * + {{luya\helpers\FileHelper::ensureExtension}}
+ * + {{luya\helpers\FileHelper::getFileHash}}
+ * + {{luya\helpers\FileHelper::writeFile}}
+ * + {{luya\helpers\FileHelper::getFileContent}}
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class FileHelper extends \yii\helpers\BaseFileHelper
 {

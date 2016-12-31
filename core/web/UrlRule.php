@@ -13,6 +13,7 @@ namespace luya\web;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class UrlRule extends \yii\web\UrlRule
 {

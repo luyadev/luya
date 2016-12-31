@@ -39,8 +39,8 @@ use luya\base\HookEvent;
  * $array = Hook::iterate('fooBarArray'); // Array ( 0 => 'Hello', 1 => 'World')
  * ```
  * 
- * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Hook extends Object
 {

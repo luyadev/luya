@@ -21,6 +21,7 @@ use luya\base\Module;
  * Each of the importer classes must extend the {{\luya\console\Importer}} class.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ImportController extends Command implements ImportControllerInterface
 {

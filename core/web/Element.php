@@ -69,6 +69,7 @@ use Twig_Loader_Filesystem;
  * The styleguide will now insert the mocked values instead of generic values.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Element extends \yii\base\Component
 {

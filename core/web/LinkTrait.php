@@ -8,7 +8,7 @@ namespace luya\web;
  * Implementation of this trait will allow to echo the object in order to return the href of the link.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-RC2
+ * @since 1.0.0
  */
 trait LinkTrait
 {

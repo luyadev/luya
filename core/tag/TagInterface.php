@@ -6,7 +6,7 @@ namespace luya\tag;
  * TagInterface for all LUYA Tags
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-rc1
+ * @since 1.0.0
  */
 interface TagInterface
 {

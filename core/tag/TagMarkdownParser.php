@@ -15,7 +15,7 @@ use cebe\markdown\GithubMarkdown;
  * Otherwise those values would be automatiaclly converted to html link tags (<a href="www.luya.io">www.luya.io</a>).
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-rc1
+ * @since 1.0.0
  */
 class TagMarkdownParser extends GithubMarkdown
 {

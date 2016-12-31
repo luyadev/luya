@@ -12,6 +12,7 @@ use Yii;
  * @property boolean $isAdmin Whether the request is admin or not.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Request extends \yii\web\Request
 {

@@ -18,6 +18,7 @@ use luya\web\View;
  *
  * @author Basil Suter <basil@nadar.io>
  * @author Marc Stampfli <marc.stampfli@zephir.ch>
+ * @since 1.0.0
  */
 class LazyLoad extends Widget
 {

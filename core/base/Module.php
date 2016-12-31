@@ -11,9 +11,14 @@ use yii\base\InvalidParamException;
 use yii\base\InvalidConfigException;
 
 /**
- * Base Module class for all LUYA Modules.
+ * LUYA Module base class.
+ * 
+ * The module class provides url rule defintions and other helper methods.
+ * 
+ * In order to use a module within the CMS context it must extend from this base module class.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Module extends \yii\base\Module
 {

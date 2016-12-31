@@ -53,6 +53,7 @@ use yii\web\IdentityInterface;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface GroupUserIdentityInterface extends IdentityInterface
 {

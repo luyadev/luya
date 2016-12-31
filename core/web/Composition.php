@@ -16,6 +16,7 @@ use luya\web\CompositionAfterSetEvent;
  * @property string $language Return wrapper of getKey('langShortCode')
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Composition extends Component implements \ArrayAccess
 {

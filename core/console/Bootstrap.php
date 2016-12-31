@@ -9,6 +9,7 @@ use luya\base\BaseBootstrap;
  * Luya CLI Bootsrap.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Bootstrap extends BaseBootstrap
 {

@@ -24,7 +24,9 @@ use luya\console\interfaces\ImportControllerInterface;
  * ```
  *
  * @property \luya\console\interfaces\ImportControllerInterface $importer Importer Object
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Importer extends \yii\base\Object
 {

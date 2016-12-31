@@ -20,6 +20,7 @@ use luya\admin\models\Group;
  * This will perform the Setup task silent and does not prompt any questions.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class SetupController extends \luya\console\Command
 {

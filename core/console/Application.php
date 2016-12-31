@@ -8,9 +8,10 @@ use yii\console\Exception;
 use luya\traits\ApplicationTrait;
 
 /**
- * Luya CLI Application.
+ * Console/CLI Application.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Application extends \yii\console\Application
 {

@@ -13,6 +13,7 @@ use yii\helpers\Html;
  * `tel[+41 061 123 123]` or with with a name instead of the phone number `tel[+41 061 123 123](call us now!)`.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class TelTag extends BaseTag
 {

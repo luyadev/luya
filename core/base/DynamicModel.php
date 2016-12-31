@@ -10,7 +10,7 @@ use Yii;
  * Additional Dynamic Model to provide attribute labels.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta6
+ * @since 1.0.0
  */
 class DynamicModel extends \yii\base\DynamicModel
 {

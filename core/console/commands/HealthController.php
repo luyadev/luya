@@ -10,6 +10,7 @@ use yii\helpers\Console;
  * Health/Status informations about the Application itself.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class HealthController extends \luya\console\Command
 {

@@ -25,6 +25,7 @@ use luya\rest\UserBehaviorInterface;
  * Read the {{luya\rest\UserBehaviorInterface}} about the configuration ability to protect the controller.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 trait RestBehaviorsTrait
 {

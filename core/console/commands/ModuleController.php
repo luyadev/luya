@@ -8,9 +8,10 @@ use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
 
 /**
- * Command to create LUYA modules.
+ * Command to create a new LUYA Module.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ModuleController extends \luya\console\Command
 {

@@ -10,7 +10,7 @@ use luya\helpers\FileHelper;
  * Command to create ActiveWindow classes.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta4
+ * @since 1.0.0
  */
 class ActiveWindowController extends \luya\console\Command
 {

@@ -11,6 +11,7 @@ use luya\base\BaseBootstrap;
  * LUYA base bootstrap class which will be called during the bootstraping process.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Bootstrap extends BaseBootstrap
 {

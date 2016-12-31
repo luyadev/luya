@@ -14,6 +14,7 @@ use luya\helpers\FileHelper;
  * @property string $blockName The name of the block getter/setters stored.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class BlockController extends \luya\console\Command
 {

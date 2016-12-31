@@ -31,7 +31,7 @@ use luya\tag\TagMarkdownParser;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-rc1
+ * @since 1.0.0
  */
 class TagParser extends Object
 {

@@ -9,6 +9,8 @@ use luya\admin\importers\StorageImporter;
  * LUYA Admin Storage command.
  *
  * @author Martin Petrasch <martin.petrasch@zephir.ch>
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class StorageController extends \luya\console\Command
 {

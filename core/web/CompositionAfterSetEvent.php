@@ -6,6 +6,7 @@ namespace luya\web;
  * Event class for the composition after set key trigger.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CompositionAfterSetEvent extends \yii\base\Event
 {

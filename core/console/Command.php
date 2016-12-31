@@ -16,6 +16,7 @@ use luya\base\CoreModuleInterface;
  * methods commonly used to build wizzwards within command controllers.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Command extends \luya\console\Controller
 {

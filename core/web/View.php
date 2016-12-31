@@ -11,6 +11,7 @@ use luya\helpers\Url;
  * Implements additional helper methods to the Yii web controller.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class View extends \yii\web\View
 {

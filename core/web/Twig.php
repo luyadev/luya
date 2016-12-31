@@ -27,7 +27,9 @@ use Twig_Extension_Debug;
  *
  * @property \Twig_Environment stringEnv contains a string env object environemnt loaded from a string.
  * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Twig extends \yii\base\Component
 {

@@ -5,9 +5,10 @@ namespace luya\console;
 use luya\traits\ErrorHandlerTrait;
 
 /**
- * Luya CLI ErrorHandler.
+ * Console/CLI ErrorHandler.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ErrorHandler extends \yii\console\ErrorHandler
 {

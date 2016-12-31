@@ -12,7 +12,7 @@ namespace luya\web;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-RC2
+ * @since 1.0.0
  */
 interface LinkInterface
 {

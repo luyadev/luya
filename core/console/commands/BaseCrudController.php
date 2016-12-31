@@ -15,6 +15,7 @@ use yii\base\NotSupportedException;
  *
  * @see https://github.com/yiisoft/yii2-gii/blob/master/generators/model/Generator.php
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class BaseCrudController extends Command
 {

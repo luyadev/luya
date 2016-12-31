@@ -15,6 +15,7 @@ use yii\web\BadRequestHttpException;
  * @property \luya\web\Composition $composition The composition component if registered.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class UrlManager extends \yii\web\UrlManager
 {

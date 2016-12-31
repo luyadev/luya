@@ -12,6 +12,7 @@ use yii\helpers\Console;
  * muted behavior to run unit tests without respones.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Controller extends \yii\console\Controller
 {

@@ -12,6 +12,7 @@ use yii\console\Exception;
  *
  * @see https://github.com/yiisoft/yii2/issues/384
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class MigrateController extends \yii\console\controllers\MigrateController
 {

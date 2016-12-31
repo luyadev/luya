@@ -42,6 +42,7 @@ use yii\base\InvalidParamException;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Controller extends \yii\rest\Controller
 {

@@ -9,6 +9,7 @@ use yii\base\BootstrapInterface;
  * Base class for luya bootsrapping proccess.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class BaseBootstrap implements BootstrapInterface
 {
