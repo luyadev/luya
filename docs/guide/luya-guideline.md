@@ -23,6 +23,9 @@ All classes must have a php doc block which is sorted as follow including author
  *
  * The description of the class should be available like this also with a dot at the end.
  *
+ * @property string $virtualProperty This describes the response of the vritualProperty
+ * @property \luya\base\Module $virtualProperty2 This describes the response but ensures class linkable IDE abilities.
+ *
  * @author John Doe <john@example.com>
  * @since 1.0.0 
  */
@@ -30,6 +33,8 @@ class FooBar()
 {
 }
 ```
+
+> When `@property` are available they are separated to the other tags below.
  
 In order to refer to inherited methods use:
 
