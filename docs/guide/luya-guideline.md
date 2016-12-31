@@ -121,3 +121,37 @@ https://github.com/airbnb/javascript
 #### JSON-SCHEMA:
 
 http://json-schema.org/latest/json-schema-core.html
+
+
+## Admin Module CSS Informations
+
+The css and html files for the admin module are based on the following rules.
+
+#### Admin Design compile
+
+To compile the styles you have to install the following tools and plugins:
+
+(If ruby is not installed, run `sudo apt-get install ruby` on linux systems)
+
++ [Compass](http://compass-style.org/install/) (gem install compass) (Linux: `sudo apt-get install ruby-compass`)
++ [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails) (Linux: `sudo apt-get install ruby-autoprefixer-rails`)
+
+> If you have not enough rights to run the command use *sudo* to run the commands, or change the permissions in the install directory of ruby.
+
+
+If you have installed the tools successfull, you can now switch to the `resources` folder and run:
+
+```sh
+compass watch
+```
+
+or
+
+```sh
+compass compile
+```
+
++ compile: will compile all styles once
++ watch: watching for changes in the file and runs compile automatic
+
+Each module does have its own compass configratuons `config.rb`, so you have to run this process in each sub folder for the specific module.
