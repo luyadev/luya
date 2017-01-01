@@ -4,6 +4,7 @@ namespace luya\web;
 
 use Yii;
 use luya\helpers\Url;
+use luya\Exception;
 
 /**
  * LUYA web view wrapper.
@@ -39,12 +40,20 @@ class View extends \yii\web\View
     /**
      * Get the url source for an asset.
      *
-     * @todo verify there is already a yii-way solution
-     * @param string $assetName
-     * @return string
+     * When registering an asset `\app\assets\ResoucesAsset::register($this)` the $assetName
+     * is `app\assets\ResourcesAsset`.
+     *
+     * @param string $assetName The class name of the asset bundle (without the leading backslash)
+     * @return string The internal base path to the asset file.
      */
     public function getAssetUrl($assetName)
     {
+    	$assetName = ltrim($assetName, '\\');
+    	
+    	if (!isset($this->assetBundles[$assetName])) {
+    		throw new Exception("The AssetBundle '$assetName' is not registered.");
+    	}
+    	
         return $this->assetBundles[$assetName]->baseUrl;
     }
 

@@ -60,7 +60,6 @@ class Url extends \yii\helpers\BaseUrl
      * @param string $route The route to find from the url manager.
      * @param array $params The parameters to pass for this url rule.
      * @param boolean $scheme Whether to return static url or not
-     * @todo we have to remove this method as it provides no additinal functions to the yii\helpers\url to method
      * @return string The generated url.
      * @deprecated Will be removed in 1.0.0 release.
      */
