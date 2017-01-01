@@ -1,15 +1,17 @@
 <?php
 
-namespace luyatests\core\console\commands;
+namespace admintests\admin\commands;
 
 use Yii;
-use luya\console\commands\SetupController;
-use luyatests\LuyaConsoleTestCase;
+use admintests\AdminTestCase;
+use luya\admin\commands\SetupController;
+use luya\console\Application;
 
-class SetupControllerTest extends LuyaConsoleTestCase
+class SetupControllerTest extends AdminTestCase
 {
     public function testIndexAction()
     {
-        $ctrl = new SetupController('setup', Yii::$app);
+    	$app = new Application($this->getConfigArray());
+        $ctrl = new SetupController('setup', $app);
     }
 }
