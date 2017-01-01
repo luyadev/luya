@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\console\commands;
+namespace luya\admin\commands;
 
 use Yii;
 use luya\admin\importers\StorageImporter;

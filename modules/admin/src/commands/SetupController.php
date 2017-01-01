@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\console\commands;
+namespace luya\admin\commands;
 
 use Yii;
 use yii\console\Exception;
@@ -14,7 +14,7 @@ use luya\admin\models\Group;
  * You can also use the parameters to run the setup command for example.
  *
  * ```php
- * ./vendor/bin/luya setup --email=foo@bar.com --password=test --firstname=John --lastname=Doe --interactive=0
+ * ./vendor/bin/luya admin/setup --email=foo@bar.com --password=test --firstname=John --lastname=Doe --interactive=0
  * ```
  *
  * This will perform the Setup task silent and does not prompt any questions.

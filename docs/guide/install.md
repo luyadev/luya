@@ -44,7 +44,7 @@ Build and import all filesystem configurations into the database with the [impor
 At last we execute the [setup console command](luya-console.md) which is going to setup a user, group and permissions:
 
 ```sh
-./vendor/bin/luya setup
+./vendor/bin/luya admin/setup
 ```
 
 The setup proccess will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).

@@ -41,7 +41,7 @@ Now refresh all existing importer components with the import commmand:
 Sometimes image filters changes and you should reprocess all flemanager thumbnails:
 
 ```sh
-./vendor/bin/luya storage/process-thumbnails
+./vendor/bin/luya admin/storage/process-thumbnails
 ```
 
 ### Upgrade the application code
