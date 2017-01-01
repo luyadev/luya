@@ -16,6 +16,11 @@ class TestClass
     {
         $hook->iteration('world');
     }
+    
+    public function testingString($otherNameForHook)
+    {
+    	$otherNameForHook->iteration('testing');
+    }
 }
 
 class HookTest extends LuyaWebTestCase
@@ -64,10 +69,11 @@ class HookTest extends LuyaWebTestCase
     public function testIterationWithObjectHooks()
     {
         $obj = new TestClass();
-        Hook::on('fooBar', [$obj, 'helloHook']);
-        Hook::on('fooBar', [$obj, 'worldHook']);
+        Hook::on('fooBarObjectArray', [$obj, 'helloHook']);
+        Hook::on('fooBarObjectArray', [$obj, 'worldHook']);
+        Hook::on('fooBarObjectArray', [$obj, 'testingString']);
         
-        $this->assertSame(['hello', 'world'], Hook::iterate('fooBar'));
+        $this->assertSame(['hello', 'world', 'testing'], Hook::iterate('fooBarObjectArray'));
     }
     
     public function testIterationArrayAccessHook()
@@ -140,5 +146,13 @@ class HookTest extends LuyaWebTestCase
     {
     	$this->assertSame([], Hook::iterate('notFoundArray'));
     	$this->assertSame('', Hook::string('notFoundString'));
+    }
+    
+    public function testInvalidHandlerException()
+    {
+    	Hook::on('fooException', 'notexisting');
+    	
+    	$this->expectException('luya\Exception');
+    	Hook::string('fooException');
     }
 }
