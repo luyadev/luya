@@ -80,9 +80,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'api-admin-effect' => 'luya\admin\apis\EffectController',
         'api-admin-filter' => 'luya\admin\apis\FilterController',
         'api-admin-tag' => 'luya\admin\apis\TagController',
-    	'api-admin-proxymachine' => 'luya\admin\apis\ProxyMachineController',
-    	'api-admin-proxybuild' => 'luya\admin\apis\ProxyBuildController',
-    	'api-admin-proxy' => 'luya\admin\apis\ProxyController',
+        'api-admin-proxymachine' => 'luya\admin\apis\ProxyMachineController',
+        'api-admin-proxybuild' => 'luya\admin\apis\ProxyBuildController',
+        'api-admin-proxy' => 'luya\admin\apis\ProxyController',
     ];
 
     /**

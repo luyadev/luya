@@ -244,14 +244,14 @@ class Item extends \yii\base\Object
     
     /**
      * Get the md5 sum of the file calculated when creating.
-     * 
+     *
      * {{luya\helpers\FileHelper::getFileHash}}
-     * 
+     *
      * @return string
      */
     public function getFileHash()
     {
-    	return $this->itemArray['hash_file'];
+        return $this->itemArray['hash_file'];
     }
     
     /**

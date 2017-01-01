@@ -37,41 +37,41 @@ class StringHelper extends \yii\helpers\BaseStringHelper
     
     /**
      * TypeCast a numeric value to float or integer.
-     * 
+     *
      * If the given value is not a numeric or float value it will be returned as it is. In order to find out whether its float
      * or not use {{luya\helpers\StringHelper::isFloat}}.
-     * 
+     *
      * @param mixed $value The given value to parse.
      * @return mixed Returns the original value if not numeric or integer, float casted value.
      */
     public static function typeCastNumeric($value)
     {
-    	if (!self::isFloat($value)) {
-    		return $value;
-    	}
-    	
-    	if (intval($value) == $value) {
-    		return (int) $value;
-    	}
-    	
-    	return (float) $value;
+        if (!self::isFloat($value)) {
+            return $value;
+        }
+        
+        if (intval($value) == $value) {
+            return (int) $value;
+        }
+        
+        return (float) $value;
     }
     
     /**
      * Checks whether a string is a float value.
-     * 
+     *
      * Compared to `is_float` function of php, it only ensures whether the input variable is type float.
-     * 
+     *
      * @param mixed $value The value to check whether its float or not.
      * @return boolean Whether its a float value or not.
      */
     public static function isFloat($value)
     {
-    	if (is_float($value)) {
-    		return true;
-    	}
-    	
-    	return ($value == (string)(float) $value);
+        if (is_float($value)) {
+            return true;
+        }
+        
+        return ($value == (string)(float) $value);
     }
     
     /**

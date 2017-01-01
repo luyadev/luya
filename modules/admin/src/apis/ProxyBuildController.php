@@ -4,8 +4,8 @@ namespace luya\admin\apis;
 
 /**
  * Proxy Build Controller.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  */
 class ProxyBuildController extends \luya\admin\ngrest\base\Api
 {

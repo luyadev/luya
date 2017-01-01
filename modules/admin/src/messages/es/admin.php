@@ -195,7 +195,7 @@ return [
     'layout_rightbar_savebtn' => 'Guardar',
     'aws_changepassword_notequal' => 'La nueva contraseña y la repetición de contraseña no son iguales.',
     'aws_changeapssword_minchar' => 'La nueva contraseña debe tener al menos {min} caracteres.',
-		
+        
 // 1.0.0
 
 'model_pk_id' => 'ID',

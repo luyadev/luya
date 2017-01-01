@@ -8,8 +8,8 @@ use luya\admin\traits\SoftDeleteTrait;
 
 /**
  * Proxy Machine.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  *
  * @property integer $id
  * @property string $name
@@ -20,21 +20,21 @@ use luya\admin\traits\SoftDeleteTrait;
  */
 class ProxyMachine extends NgRestModel
 {
-	use SoftDeleteTrait;
-	
-	public function init()
-	{
-		parent::init();
-		
-		$this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'gernateIds']);
-	}
-	
-	public function gernateIds()
-	{
-		$this->identifier = uniqid('lcp');
-		$this->access_token = Yii::$app->security->generateRandomString(32);
-	}
-	
+    use SoftDeleteTrait;
+    
+    public function init()
+    {
+        parent::init();
+        
+        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'gernateIds']);
+    }
+    
+    public function gernateIds()
+    {
+        $this->identifier = uniqid('lcp');
+        $this->access_token = Yii::$app->security->generateRandomString(32);
+    }
+    
     /**
      * @inheritdoc
      */
@@ -54,7 +54,7 @@ class ProxyMachine extends NgRestModel
             'access_token' => Yii::t('app', 'Access Token'),
             'is_deleted' => Yii::t('app', 'Is Deleted'),
             'is_disabled' => Yii::t('app', 'Is Disabled'),
-        	'identifier' => Yii::t('app', 'Identifier'),
+            'identifier' => Yii::t('app', 'Identifier'),
         ];
     }
     
@@ -94,7 +94,7 @@ class ProxyMachine extends NgRestModel
         return [
             'name' => 'text',
             'access_token' => 'text',
-        	'identifier' => 'text',
+            'identifier' => 'text',
             'is_disabled' => 'toggleStatus',
         ];
     }
@@ -112,7 +112,7 @@ class ProxyMachine extends NgRestModel
         $this->ngRestConfigDefine($config, ['create'], ['name']);
         
         // enable or disable ability to delete;
-        $config->delete = true; 
+        $config->delete = true;
         
         return $config;
     }

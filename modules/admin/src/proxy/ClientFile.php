@@ -11,14 +11,14 @@ use yii\base\Object;
  */
 class ClientFile extends Object
 {
-	/**
-	 * @var \luya\admin\proxy\ClientBuild
-	 */
-	public $build = null;
+    /**
+     * @var \luya\admin\proxy\ClientBuild
+     */
+    public $build = null;
 
-	public function __construct(ClientBuild $build, array $config = [])
-	{
-		$this->build = $build;
-		parent::__construct($config);
-	}
+    public function __construct(ClientBuild $build, array $config = [])
+    {
+        $this->build = $build;
+        parent::__construct($config);
+    }
 }

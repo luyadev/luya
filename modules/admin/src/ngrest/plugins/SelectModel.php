@@ -20,10 +20,10 @@ use luya\helpers\ArrayHelper;
  *     ];
  * }
  * ```
- * 
+ *
  * The label data will automatically sorted by the label in ASC direction.
- * 
- * 
+ *
+ *
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -35,15 +35,15 @@ class SelectModel extends Select
     public $modelClass = null;
     
     /**
-     * @var string The field name which should represent the value of the data array. This value will be stored in the database. 
+     * @var string The field name which should represent the value of the data array. This value will be stored in the database.
      */
     public $valueField = null;
     
     /**
      * @var string|array An array or string to select the data from, this data will be returned in the select overview.
-     * 
+     *
      * An example of how to use multiple labels.
-     * 
+     *
      * ```php
      * 'labelField' => ['lastname', 'firstname'], // generate a label with lastname firstname
      * ```
@@ -52,27 +52,27 @@ class SelectModel extends Select
     
     /**
      * @var boolean|string If enabled you can defined how the placed variables should be strucutred. For example in combination with array labels:
-     * 
+     *
      * An example of how to use the template with multiple fields:
-     * 
+     *
      * ```php
      * 'labelField' => ['firstname', 'lastnmae', 'email'],
      * 'labelTemplate' => '%s %s (%s%)',
      * ```
-     * 
+     *
      * The above example woudl print `John Doe (john@example.com)`.
      */
     public $labelTemplate = false;
  
     /**
      * @var boolean|array An array with where conditions to provide for the active query. The value will be used like this in the conditions:
-     * 
+     *
      * ```php
      * $data = $modelClass::find()->where($where)->all();
      * ```
-     * 
+     *
      * Assuming `$where` has the value `['is_deleted' => 0]` the query would look as below:
-     * 
+     *
      * ```php
      * $data = $modelClass::find()->where(['is_deleted' => 0])->all();
      * ```
@@ -83,7 +83,7 @@ class SelectModel extends Select
 
     /**
      * Data DI Container for relation data.
-     * 
+     *
      * @param unknown $class
      * @param unknown $where
      * @return mixed
@@ -113,7 +113,6 @@ class SelectModel extends Select
         
         $values = [];
         foreach ($defintion as $field) {
-            
             $data = $model->getAttribute($field);
             
             if (is_array($data)) {

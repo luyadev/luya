@@ -16,7 +16,7 @@ class AdminTestCase extends \PHPUnit_Framework_TestCase
 
     public function getConfigArray()
     {
-    	return include(__DIR__ .'/data/configs/admin.php');
+        return include(__DIR__ .'/data/configs/admin.php');
     }
     
     public function mockApp()

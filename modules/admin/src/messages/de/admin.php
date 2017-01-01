@@ -194,7 +194,7 @@ return [
     'layout_rightbar_savebtn' => 'Speichern',
     'aws_changepassword_notequal' => 'Das neue Passwort muss mit der Wiederholung übereinstimmen.',
     'aws_changeapssword_minchar' => 'Das neue Passwort muss mindestens {min} Zeichen enthalten.',
-		
+        
 // 1.0.0
 
 'model_pk_id' => 'ID',

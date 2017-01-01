@@ -11,7 +11,7 @@ class SetupControllerTest extends AdminTestCase
 {
     public function testIndexAction()
     {
-    	$app = new Application($this->getConfigArray());
+        $app = new Application($this->getConfigArray());
         $ctrl = new SetupController('setup', $app);
     }
 }

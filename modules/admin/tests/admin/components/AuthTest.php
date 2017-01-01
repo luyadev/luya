@@ -18,12 +18,12 @@ class AuthTest extends AdminTestCase
     
     public function testGetApiTable()
     {
-    	$perm = $this->auth->getApiTable(1, 'api-admin-user');
-    	
-    	$this->assertTrue(is_array($perm));
-    	$this->assertSame(1, count($perm));
-    	$this->assertSame("1", $perm[0]['user_id']);
-    	$this->assertSame("1", $perm[0]['group_id']);
+        $perm = $this->auth->getApiTable(1, 'api-admin-user');
+        
+        $this->assertTrue(is_array($perm));
+        $this->assertSame(1, count($perm));
+        $this->assertSame("1", $perm[0]['user_id']);
+        $this->assertSame("1", $perm[0]['group_id']);
     }
     
     /*

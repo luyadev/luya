@@ -87,7 +87,7 @@ class Hook extends Object
                 } elseif (is_callable($hookEvent->handler)) {
                     $hookEvent->output = call_user_func($hookEvent->handler, $hookEvent);
                 } else {
-                	throw new Exception("The provided hook event handler is not valid.");
+                    throw new Exception("The provided hook event handler is not valid.");
                 }
                 
                 $hookEvent->isHandled = true;

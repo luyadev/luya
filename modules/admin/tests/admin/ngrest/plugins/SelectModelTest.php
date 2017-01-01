@@ -33,7 +33,6 @@ class SelectModelTest extends AdminTestCase
     
     public function testArrayLabelConfigGetData()
     {
-
         $model = new UserFixture();
         $model->load();
         $plugin = new SelectModel([
@@ -55,7 +54,6 @@ class SelectModelTest extends AdminTestCase
     
     public function testArrayLabelWithTemplateConfigGetData()
     {
-    
         $model = new UserFixture();
         $model->load();
         $plugin = new SelectModel([
@@ -78,7 +76,6 @@ class SelectModelTest extends AdminTestCase
     
     public function testWhereConfigGetData()
     {
-    
         $model = new UserFixture();
         $model->load();
         $plugin = new SelectModel([
@@ -100,31 +97,31 @@ class SelectModelTest extends AdminTestCase
     
     /**
      * Test relating with i18n casted select fields:
-     * 
+     *
      * https://github.com/luyadev/luya/issues/1125#issuecomment-269737028
      */
     public function testAfterFindEventWithI18n()
     {
-    	$event = new Event();
-    	$model = new UserFixture();
-    	$model->load();
-    	
-    	$user = $model->getModel('user1');
-    	$event->sender = $user;
-    	
-    	$plugin = new SelectModel([
-    		'name' => 'id',
-    		'alias' => 'test',
-    		'i18n' => true,
-    		'modelClass' => User::class,
-    		'valueField' => 'id',
-    		'labelField' => 'email',
-    	]);
+        $event = new Event();
+        $model = new UserFixture();
+        $model->load();
+        
+        $user = $model->getModel('user1');
+        $event->sender = $user;
+        
+        $plugin = new SelectModel([
+            'name' => 'id',
+            'alias' => 'test',
+            'i18n' => true,
+            'modelClass' => User::class,
+            'valueField' => 'id',
+            'labelField' => 'email',
+        ]);
     
-    	$plugin->onFind($event);
-    	
-    	$this->assertSame("", $user->id);
+        $plugin->onFind($event);
+        
+        $this->assertSame("", $user->id);
     
-    	unset($plugin);
+        unset($plugin);
     }
 }

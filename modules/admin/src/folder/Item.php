@@ -7,7 +7,7 @@ use luya\admin\storage\ItemTrait;
 
 /**
  * Storage Folder Item.
- * 
+ *
  * @property integer $id The unique folder id.
  * @property string $name The name of the Folder.
  * @property integer $parentId The id of the parent folder.
@@ -20,7 +20,7 @@ class Item extends \yii\base\Object
     
     /**
      * The unique folder id.
-     * 
+     *
      * @return integer The folder ID.
      */
     public function getId()
@@ -30,7 +30,7 @@ class Item extends \yii\base\Object
     
     /**
      * The name of the Folder.
-     * 
+     *
      * @return string Returns the name of the Folder.
      */
     public function getName()
@@ -40,9 +40,9 @@ class Item extends \yii\base\Object
     
     /**
      * The parent folder Id.
-     * 
+     *
      * If not parent folder exists the value is `0`.
-     * 
+     *
      * @return integer The parent folders id, 0 if no parent exists.
      */
     public function getParentId()
@@ -62,7 +62,7 @@ class Item extends \yii\base\Object
 
     /**
      * Whether the current folder has at least one child folder.
-     * 
+     *
      * @return boolean Whether a child folder exists or not.
      */
     public function hasChild()

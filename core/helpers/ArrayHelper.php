@@ -57,7 +57,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
         
         foreach ($array as $k => $v) {
             if (is_numeric($v)) {
-            	$return[$k] = StringHelper::typeCastNumeric($v);
+                $return[$k] = StringHelper::typeCastNumeric($v);
             } elseif (is_array($v)) {
                 $return[$k] = self::typeCast($v);
             } else {

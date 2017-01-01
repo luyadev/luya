@@ -7,10 +7,10 @@ use luyatests\data\MessageFileComperatorTrait;
 
 class MessageFileTest extends AdminTestCase
 {
-	use MessageFileComperatorTrait;
-	
-	public function testFiles()
-	{
-		$this->compare(Yii::getAlias('@admin/messages'), 'en');
-	}
+    use MessageFileComperatorTrait;
+    
+    public function testFiles()
+    {
+        $this->compare(Yii::getAlias('@admin/messages'), 'en');
+    }
 }

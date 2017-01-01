@@ -13,12 +13,12 @@ class PropertyConsistencyImporter extends Importer
 
     public function run()
     {
-    	foreach (CmsProperty::find()->all() as $cmsPropertyModel) {
-    		$adminProperty = AdminProperty::findOne($cmsPropertyModel->admin_prop_id);
-    		if (!$adminProperty) {
-    			$cmsPropertyModel->delete();
-    			$this->addLog('Old property values has been removed due to not existing property object.');
-    		}
-    	}
+        foreach (CmsProperty::find()->all() as $cmsPropertyModel) {
+            $adminProperty = AdminProperty::findOne($cmsPropertyModel->admin_prop_id);
+            if (!$adminProperty) {
+                $cmsPropertyModel->delete();
+                $this->addLog('Old property values has been removed due to not existing property object.');
+            }
+        }
     }
 }
