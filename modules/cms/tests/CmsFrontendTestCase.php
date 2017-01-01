@@ -20,7 +20,7 @@ class CmsFrontendTestCase extends \PHPUnit_Framework_TestCase
             $this->app = new \luya\Boot();
             $this->app->configFile = __DIR__ .'/data/configs/cms.php';
             $this->app->mockOnly = true;
-            $this->app->setYiiPath(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
+            $this->app->setBaseYiiFile(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
             $this->app->applicationWeb();
         }
     }

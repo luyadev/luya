@@ -17,5 +17,5 @@ foreach ($loaders as $file) {
 
 $boot = new \luya\Boot();
 $boot->configFile = 'configs/env.php';
-$boot->setYiiPath($vendor . '/yiisoft/yii2/Yii.php');
+$boot->setBaseYiiFile($vendor . '/yiisoft/yii2/Yii.php');
 $boot->applicationConsole();

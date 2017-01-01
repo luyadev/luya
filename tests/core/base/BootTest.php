@@ -38,7 +38,7 @@ class BootTest extends \luyatests\LuyaWebTestCase
     {
         $boot = new Boot();
         $boot->configFile = __DIR__ . '/../../data/configs/console.php';
-        $boot->setYiiPath('wrongPathToYii.php');
+        $boot->setBaseYiiFile('wrongPathToYii.php');
         $boot->mockOnly = true;
         $boot->applicationConsole();
     }
