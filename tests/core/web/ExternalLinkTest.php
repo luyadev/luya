@@ -17,4 +17,10 @@ class ExternalLinkTest extends LuyaWebTestCase
         $this->assertSame('https://luya.io', $link->getHref());
         $this->assertSame('https://luya.io', $link->__toString());
     }
+    
+    public function testMissingHrefException()
+    {
+    	$this->expectException('yii\base\InvalidConfigException');
+    	$link = new ExternalLink();
+    }
 }

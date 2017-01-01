@@ -6,6 +6,7 @@ use Yii;
 use luyatests\LuyaWebTestCase;
 use luya\traits\CacheableTrait;
 use yii\caching\FileDependency;
+use luyatests\data\classes\UnitCache;
 
 class CacheStub
 {
@@ -42,5 +43,15 @@ class CacheableTraitTest extends LuyaWebTestCase
         $this->assertTrue($cache->setHasCache(['cache', 'bar'], 'bar'));
         $this->assertTrue($cache->deleteHasCache(['cache', 'bar']));
         $this->assertFalse($cache->getHasCache(['cache', 'bar']));
+    }
+    
+    public function testFlushAllCache()
+    {
+    	Yii::$app->set('cache', ['class' => UnitCache::className()]);
+    	$cache = new CacheStub();
+    	$cache->setHasCache('foo', 'bar');
+    	$this->assertSame('bar', $cache->getHasCache('foo'));
+		$this->assertTrue($cache->flushHasCache());
+		$this->assertFalse($cache->getHasCache('foo'));
     }
 }

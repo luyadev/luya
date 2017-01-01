@@ -58,4 +58,17 @@ class FileHelperTest extends LuyaWebTestCase
         $this->assertSame(false, FileHelper::getFileHash('notexists.jpg'));
         $this->assertSame('7dff5cc5a1d8f04004b4a0075d3eeeae', FileHelper::getFileHash(__DIR__ . '/../../data/hashfile.txt'));
     }
+    
+    public function testWriteFile()
+    {
+    	$this->assertTrue(FileHelper::writeFile('@runtime/temp.txt', 'Hello World'));
+    	$this->assertFalse(FileHelper::writeFile('@does/not/exists/nofile.txt', 'Hello World'));
+    }
+    
+    public function testGetFileContent()
+    {
+    	$this->assertSame('Hello World', FileHelper::getFileContent('@runtime/temp.txt'));
+    	
+    	$this->assertFalse(FileHelper::getFileContent('doesNotExist.txt'));
+    }
 }

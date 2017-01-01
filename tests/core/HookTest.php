@@ -80,11 +80,26 @@ class HookTest extends LuyaWebTestCase
             $hook['unfoo'] = 'Unfoo';
             
             if (isset($hook['unfoo'])) {
-                unset($hook['unfoo']);
+				unset($hook['unfoo']);
             }
         });
         
         $this->assertSame(['Hello', 'World', 'foo' => 'Bar'], Hook::iterate('fooBar'));
+    }
+    
+    public function testIterationGetOffsetArrayAccessHook()
+    {
+    	Hook::on('fooBar', function($hook) {
+    
+    		$hook['foo'] = 'Bar';
+    		
+    		if (isset($hook['foo'])) {
+    			$hook['newfoo'] = $hook['foo'];
+    			unset($hook['foo']);
+    		}
+    	});
+    
+    	$this->assertArrayHasKey('newfoo', Hook::iterate('fooBar'));
     }
     
     public function testIterationOverrideKey()
