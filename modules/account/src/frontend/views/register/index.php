@@ -24,5 +24,5 @@
 <p>Erfolgreich registriert. Sie werden von einem Administrator freigeschalten.</p>
 <?php elseif ($state == 3): ?>
 <p>Sie haben sich erfolgreich registriert und könnnen sich jetzt einloggen</p>
-<a href="<?php echo luya\helpers\Url::toManager('account/default/index'); ?>">Login</a>
+<a href="<?= $this->url('account/default/index'); ?>">Login</a>
 <?php endif; ?>

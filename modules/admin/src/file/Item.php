@@ -280,7 +280,7 @@ class Item extends \yii\base\Object
      */
     public function getSource()
     {
-        return Url::toManager('admin/file/download', ['id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()]);
+        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()]);
     }
     
     /**

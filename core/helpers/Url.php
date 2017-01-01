@@ -62,9 +62,12 @@ class Url extends \yii\helpers\BaseUrl
      * @param boolean $scheme Whether to return static url or not
      * @todo we have to remove this method as it provides no additinal functions to the yii\helpers\url to method
      * @return string The generated url.
+     * @deprecated Will be removed in 1.0.0 release.
      */
     public static function toManager($route, array $params = [], $scheme = false)
     {
+    	trigger_error('Deprecated method us Url::toRoute() instead.', E_USER_DEPRECATED);
+    	
         $routeParams = [$route];
         foreach ($params as $key => $value) {
             $routeParams[$key] = $value;

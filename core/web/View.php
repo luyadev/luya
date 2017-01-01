@@ -61,14 +61,26 @@ class View extends \yii\web\View
 
     /**
      * Generate urls helper method.
+     * 
+     * Helper method for convenience which is equal to {{luya\web\UrlManager::createUrl}}.
      *
      * @param string $route The route to create `module/controller/action`.
      * @param array $params Optional parameters passed as key value pairing.
+     * @param boolean $scheme Whether to return static url or not
      * @return string
      */
-    public function url($route, array $params = [])
+    public function url($route, array $params = [], $scheme = false)
     {
-        return Url::toManager($route, $params);
+    	$routeParams = [$route];
+    	foreach ($params as $key => $value) {
+    		$routeParams[$key] = $value;
+    	}
+    	
+    	if ($scheme) {
+    		return Yii::$app->urlManager->createAbsoluteUrl($routeParams);
+    	}
+    	
+    	return Yii::$app->urlManager->createUrl($routeParams);
     }
     
     /**

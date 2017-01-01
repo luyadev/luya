@@ -3,6 +3,7 @@
 namespace luya\gallery\models;
 
 use luya\gallery\admin\Module;
+use luya\helpers\Url;
 
 class Album extends \luya\admin\ngrest\base\NgRestModel
 {
@@ -55,7 +56,7 @@ class Album extends \luya\admin\ngrest\base\NgRestModel
     {
         $category = Cat::findOne($this->cat_id);
 
-        return \luya\helpers\Url::toManager('gallery/alben/index', ['catId' => $category->id, 'title' => \yii\helpers\Inflector::slug($category->title)]);
+        return Url::toRoute(['/gallery/alben/index', 'catId' => $category->id, 'title' => \yii\helpers\Inflector::slug($category->title)]);
     }
 
     public function getCategoryName()
@@ -71,7 +72,7 @@ class Album extends \luya\admin\ngrest\base\NgRestModel
             return \luya\cms\helpers\Url::toMenuItem($contextNavItemId, 'gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
         }
 
-        return \luya\helpers\Url::toManager('gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+        return Url::toRoute(['/gallery/album/index', 'albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
     }
 
     public function images()

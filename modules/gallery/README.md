@@ -45,7 +45,7 @@ As the modules are not shipped with default view files you can use the following
 <?php foreach($catData as $item): ?>
     <div class="well">
         <h1><?php echo $item->title; ?></h1>
-        <a href="<?php echo \luya\helpers\Url::toManager('gallery/alben/index', ['catId' => $item->id, 'title' => \yii\helpers\Inflector::slug($item->title)]); ?>">Alben anzeigen</a>
+        <a href="<?php echo \luya\helpers\Url::toRoute(['/gallery/alben/index', 'catId' => $item->id, 'title' => \yii\helpers\Inflector::slug($item->title)]); ?>">Alben anzeigen</a>
     </div>
 <?php endforeach; ?>
 ```

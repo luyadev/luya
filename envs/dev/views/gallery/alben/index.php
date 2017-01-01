@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <a href="<?= \luya\helpers\Url::toManager('gallery/cat/index');?>"><i class="fa fa-fw fa-chevron-left"></i> Kategorieübersicht</a>
+        <a href="<?= $this->url('gallery/cat/index');?>"><i class="fa fa-fw fa-chevron-left"></i> Kategorieübersicht</a>
         <br />
         <br />
     </div>
