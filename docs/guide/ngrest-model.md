@@ -28,7 +28,9 @@ public function ngrestAttributeTypes()
 }
 ```
 
-A defintion contains always the attribute (as key) and the ngrest plugin config, if you have to pass arguments to the plugin object you can define an array where the first key is the name of the plugin and the other keys are the plugin properties.
+A defintion contains always the attribute (as key) and the ngrest plugin config, if you have to pass arguments to the plugin object you can define an array where the first key is the name of the plugin and the other keys are the plugin properties. Take a look at all [NgRest Plugins](ngrest-plugins.md).
+
+> Keep in mind that when a plugin is attached to a field, it will override the original value from the database. Examples are shown in the [Select Plugin Guide](ngrest-plugin-select.md)
 
 #### Pointers and ngRestConfig
 
