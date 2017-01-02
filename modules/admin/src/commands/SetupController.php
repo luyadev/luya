@@ -7,6 +7,7 @@ use yii\console\Exception;
 use luya\admin\models\Config;
 use luya\admin\models\User;
 use luya\admin\models\Group;
+use yii\db\Query;
 
 /**
  * Setup the Administration Interface.
@@ -144,8 +145,8 @@ class SetupController extends \luya\console\Command
         ]);
     
         // get the api-admin-user and api-admin-group auth rights
-        $data = Yii::$app->db->createCommand("SELECT * FROM admin_auth WHERE api='api-admin-user' OR api='api-admin-group'")->queryAll();
-    
+        $data = (new Query())->select(['id'])->from('admin_auth')->all();
+        
         foreach ($data as $item) {
             $this->insert('admin_group_auth', [
                 'group_id' => 1,
