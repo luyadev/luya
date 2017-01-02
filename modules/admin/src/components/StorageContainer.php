@@ -363,7 +363,7 @@ class StorageContainer extends Component
         
         $fileHashName = Storage::createFileHash($fileName);
         
-        $fileHash = FileHelper::getFileHash($fileSource);
+        $fileHash = FileHelper::md5sum($fileSource);
         
         $mimeType = FileHelper::getMimeType($fileSource);
         

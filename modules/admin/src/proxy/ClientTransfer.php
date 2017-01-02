@@ -51,9 +51,11 @@ class ClientTransfer extends Object
                 
                 if (!$curl->error) {
                     if (FileHelper::writeFile($file->serverSource, $curl->response)) {
-                        $md5 = FileHelper::getFileHash($file->serverSource);
+                        $md5 = FileHelper::md5sum($file->serverSource);
                         if ($md5 == $file->getFileHash()) {
-                            $this->build->command->outputInfo('+ ' . $file->name . ' downloaded.');
+                            $this->build->command->outputInfo('[+] ' . $file->name . ' downloaded.');
+                        } else {
+                        	$this->build->command->outputError('[!] ' . $file->name . ' error while downloading.');
                         }
                     }
                 }

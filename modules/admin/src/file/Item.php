@@ -245,7 +245,7 @@ class Item extends \yii\base\Object
     /**
      * Get the md5 sum of the file calculated when creating.
      *
-     * {{luya\helpers\FileHelper::getFileHash}}
+     * {{luya\helpers\FileHelper::md5sum}}
      *
      * @return string
      */

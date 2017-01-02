@@ -12,7 +12,7 @@ use Exception;
  *
  * + {{luya\helpers\FileHelper::humanReadableFilesize}}
  * + {{luya\helpers\FileHelper::ensureExtension}}
- * + {{luya\helpers\FileHelper::getFileHash}}
+ * + {{luya\helpers\FileHelper::md5sum}}
  * + {{luya\helpers\FileHelper::writeFile}}
  * + {{luya\helpers\FileHelper::getFileContent}}
  *
@@ -78,7 +78,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      * @param string $sourceFile The path to the file
      * @return false|string Returns false or the md5 hash of this file
      */
-    public static function getFileHash($sourceFile)
+    public static function md5sum($sourceFile)
     {
         return file_exists($sourceFile) ? hash_file('md5', $sourceFile) : false;
     }
