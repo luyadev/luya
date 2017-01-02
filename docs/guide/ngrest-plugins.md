@@ -26,7 +26,7 @@ A few plugins have options to configure, make sure you check the class reference
 |decimal            |{{\luya\admin\ngrest\plugins\Decimal}}|float	|Creates a decimal input field. First parameter defines optional step size. Default = 0.001
 |number				|{{\luya\admin\ngrest\plugins\Number}}|integer |Input field where only numbers are allowed.
 |cmsPage			|{{\luya\admin\ngrest\plugins\CmsPage}}|{{luya\cms\menu\Item}}|Cms Page selection and returns the menu component item.
-|link               |{{\luya\admin\ngrest\plugins\CmsPage}}|string|Select an internal page or enter an external link, the database field must be a varchar field in order to store informations and the cms module is required.
+|link               |{{\luya\admin\ngrest\plugins\Link}}|{{luya\web\LinkInterface}}|Select an internal page or enter an external link, the database field must be a varchar field in order to store informations and the cms module is required.
 
 ## Create a custom project Plugin
 
