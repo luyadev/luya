@@ -10,6 +10,10 @@ $input--date-width: 50px;
 .input {
     font-size: 0;
     line-height: 0;
+
+    + .input {
+        margin-top: 20px;
+    }
 }
 
 .input__label {
