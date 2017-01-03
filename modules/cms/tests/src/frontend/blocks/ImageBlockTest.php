@@ -1,6 +1,6 @@
 <?php
 
-namespace cmstests\src\blocks;
+namespace cmstests\src\frontend\blocks;
 
 use cmstests\CmsFrontendTestCase;
 use luya\cms\frontend\blocks\ImageBlock;

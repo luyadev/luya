@@ -6,28 +6,52 @@ use luya\cms\frontend\Module;
 use luya\TagParser;
 use luya\cms\frontend\blockgroups\TextGroup;
 use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
 
 /**
  * Paragraph Text Block.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class TextBlock extends TwigBlock
+final class TextBlock extends PhpBlock
 {
+	/**
+	 * @inheritdoc
+	 */
     public $module = 'cms';
     
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
 
+    /**
+     * @inheritdoc
+     */
+    public function blockGroup()
+    {
+    	return TextGroup::className();
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_text_name');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'format_align_left';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
@@ -45,17 +69,23 @@ final class TextBlock extends TwigBlock
         ];
     }
 
+    /**
+     * Get the text based on type input.
+     */
     public function getText()
     {
         $text = $this->getVarValue('content');
 
-        if ($this->getVarValue('textType') == 1) {
+        if ($this->getVarValue('textType', 0) == 1) {
             return TagParser::convertWithMarkdown($text);
         }
 
-        return $text;
+        return nl2br($text);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extraVars()
     {
         return [
@@ -63,6 +93,13 @@ final class TextBlock extends TwigBlock
         ];
     }
 
+    
+    public function admin()
+    {
+    	return '<p>{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_text_no_content') . '</span>'.
+    			'{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text }}{% endif %}</p>';
+    }
+    /*
     public function twigFrontend()
     {
         return '{% if vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty and vars.textType == 0 %}<p{% if cfgs.cssClass is not empty %} class="{{cfgs.cssClass}}"{% endif %}>{{ extras.text|nl2br }}</p>{% endif %}';
@@ -73,9 +110,7 @@ final class TextBlock extends TwigBlock
         return '<p>{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_text_no_content') . '</span>'.
         '{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text|nl2br }}{% endif %}</p>';
     }
-
-    public function blockGroup()
-    {
-        return TextGroup::className();
-    }
+	*/
+    
+    
 }

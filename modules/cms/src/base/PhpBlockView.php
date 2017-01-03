@@ -135,15 +135,41 @@ class PhpBlockView extends View
     }
     
     /**
+     * Wrap a very basic template arounte the value if value is not `empty()`.
+     * 
+     * Assuming to have variable `title` with the value `Hello World` and a template `<p>{{title}}</p>` renders:
+     * 
+     * ```
+     * <p>Hello World</p>
+     * ```
+     * 
+     * If a template is provided and $value is not empty return the wrapped template, otherwise the original $value input is returned.
+     * 
+     * @param string $key The variable name to idenfier as {{key}}.
+     * @param mixed $value The value which should be replaced for the $key.
+     * @param string $template The template as a string which replates the $key enclosed in {{
+     * @return string If a template is provided and $value is not empty return the wrapped template, otherwise the original $value input.
+     */
+    public function wrapTemplate($key, $value, $template)
+    {
+    	if (!$template || empty($value)) {
+    		return $value;
+    	}
+    	
+    	return str_replace(['{{'.$key. '}}'], $value, $template);
+    }
+    
+    /**
      * The the content value of a var.
      *
      * @param string $key The name of the var value to return, defined as `varName` inside the `config()` method of the vars section.
      * @param string $defaultValue Env value is not found this value will be returned.
+     * @param string $template Provde a template which replaces the current variable if value is not `empty()`. e.g. `<p>{{variable}}≤/p>` See {{luya\cms\base\PhpBlockView::wrapTemplate}}.
      * @return mixed
      */
-    public function varValue($key, $defaultValue = null)
+    public function varValue($key, $defaultValue = null, $template = false)
     {
-        return $this->context->getVarValue($key, $defaultValue);
+        return $this->wrapTemplate($key, $this->context->getVarValue($key, $defaultValue), $template);
     }
     
     /**
@@ -151,11 +177,12 @@ class PhpBlockView extends View
      *
      * @param string $key The name of the cfg value to return, defined as `varName` inside the `config()` method of the cfgs section.
      * @param string $defaultValue Env value is not found this value will be returned.
+     * @param string $template Provde a template which replaces the current variable if value is not `empty()`. e.g. `<p>{{variable}}≤/p>` See {{luya\cms\base\PhpBlockView::wrapTemplate}}.
      * @return mixed
      */
-    public function cfgValue($key, $defaultValue = null)
+    public function cfgValue($key, $defaultValue = null, $template = false)
     {
-        return $this->context->getCfgValue($key, $defaultValue);
+        return $this->wrapTemplate($key, $this->context->getCfgValue($key, $defaultValue), $template);
     }
     
     /**
@@ -163,11 +190,12 @@ class PhpBlockView extends View
      *
      * @param string $key The name of the extra var to return, defined as key inside the `extraVars()` method return array.
      * @param string $defaultValue Env value is not found this value will be returned.
+     * @param string $template Provde a template which replaces the current variable if value is not `empty()`. e.g. `<p>{{variable}}≤/p>` See {{luya\cms\base\PhpBlockView::wrapTemplate}}.
      * @return mixed
      */
-    public function extraValue($key, $defaultValue = null)
+    public function extraValue($key, $defaultValue = null, $template = false)
     {
-        return $this->context->getExtraValue($key, $defaultValue);
+        return $this->wrapTemplate($key, $this->context->getExtraValue($key, $defaultValue), $template);
     }
     
     /**

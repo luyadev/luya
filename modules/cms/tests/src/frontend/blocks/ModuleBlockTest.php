@@ -1,6 +1,6 @@
 <?php
 
-namespace cmstests\src\frontend;
+namespace cmstests\src\frontend\blocks;
 
 use Yii;
 use cmstests\CmsFrontendTestCase;
