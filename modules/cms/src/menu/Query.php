@@ -41,6 +41,7 @@ use Exception;
  * (in example of protected several items for not logged in users).
  *
  * @property \luya\cms\Menu $menu Application menu component object.
+ * 
  * @since 1.0.0-beta1
  * @author Basil Suter <basil@nadar.io>
  */
@@ -238,7 +239,7 @@ class Query extends \yii\base\Object
      */
     public function one()
     {
-        $data = $this->filter($this->_where, $this->menu[$this->getLang()]);
+        $data = $this->filter($this->menu[$this->getLang()], $this->_where, $this->_with);
 
         if (count($data) == 0) {
             return false;
@@ -255,7 +256,7 @@ class Query extends \yii\base\Object
      */
     public function all()
     {
-        return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->getLang()]), $this->getLang(), $this->_with);
+        return static::createArrayIterator($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with), $this->getLang(), $this->_with);
     }
     
     /**
@@ -265,7 +266,7 @@ class Query extends \yii\base\Object
      */
     public function count()
     {
-        return count($this->filter($this->_where, $this->menu[$this->getLang()]));
+        return count($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with));
     }
     
     /**
@@ -294,11 +295,18 @@ class Query extends \yii\base\Object
         return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
     }
     
-    protected function filter(array $whereExpression, $containerData)
+    /**
+     * Filtering data based on a where expression.
+     * 
+     * @param array $containerData The data to filter from
+     * @param array $whereExpression An array with `[['op' => '=', 'field' => 'fieldName', 'value' => 'comparevalue'],[]]`
+     * @param array $withCondition An array with with conditions `$with['hidden']`.
+     */
+    private function filter(array $containerData, array $whereExpression, array $withCondition)
     {
-        $data = array_filter($containerData, function ($item) {
+        $data = array_filter($containerData, function ($item) use ($whereExpression, $withCondition) {
             foreach ($item as $field => $value) {
-                if (!$this->arrayFilter($value, $field)) {
+                if (!$this->arrayFilter($value, $field, $whereExpression, $withCondition)) {
                     return false;
                 }
             }
@@ -317,13 +325,22 @@ class Query extends \yii\base\Object
         return $data;
     }
     
-    protected function arrayFilter($value, $field)
+    /**
+     * Filter an array item based on the where expression.
+     * 
+     * @param unknown $value
+     * @param unknown $field
+     * @param array $where
+     * @param array $with
+     * @return boolean
+     */
+    private function arrayFilter($value, $field, array $where, array $with)
     {
-        if ($field == 'is_hidden' && $this->_with['hidden'] === false && $value == 1) {
+        if ($field == 'is_hidden' && $with['hidden'] === false && $value == 1) {
             return false;
         }
     
-        foreach ($this->_where as $expression) {
+        foreach ($where as $expression) {
             if ($expression['field'] == $field) {
                 switch ($expression['op']) {
                     case '==':

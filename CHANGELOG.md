@@ -31,6 +31,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1130](https://github.com/luyadev/luya/issues/1130) Fixed issue which prevents item redirection loops.
 - [#1101](https://github.com/luyadev/luya/issues/1101) Rest model validation did not use proper language for the yii translations based on the user language.
 - [#1111](https://github.com/luyadev/luya/issues/1111) Storage File selection does not display file name cause of not strict comparing method.
 - [#1099](https://github.com/luyadev/luya/issues/1099) Broken file list block translations fixed.

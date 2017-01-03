@@ -215,11 +215,6 @@ class Item extends Object implements LinkInterface
     {
         if ($this->getType() === 2) {
             return $this->itemArray['module_name'];
-            /*
-            if (isset($this->itemArray['nav_item_type_id'], Yii::$app->menu->modulesMap)) {
-                return Yii::$app->menu->modulesMap[$this->itemArray['nav_item_type_id']]['module_name'];
-            }
-            */
         }
         
         return false;
@@ -338,7 +333,11 @@ class Item extends Object implements LinkInterface
         if ($this->getType() === 3) {
             switch ($this->redirectMapData('type')) {
                 case 1:
-                    return (($item = (new Query())->where(['nav_id' => $this->redirectMapData('value')])->with(['hidden'])->lang($this->lang)->one())) ? $item->getLink() : null;
+                	$navId = $this->redirectMapData('value');
+                	if (empty($navId) || $navId == $this->navId) {
+                		return null;
+                	}
+                    return (($item = (new Query())->where(['nav_id' => $navId])->with(['hidden'])->lang($this->lang)->one())) ? $item->getLink() : null;
                 case 2:
                     return $this->redirectMapData('value');
             }
