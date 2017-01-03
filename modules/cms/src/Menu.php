@@ -410,19 +410,6 @@ class Menu extends Component implements ArrayAccess
 
         return false;
     }
-    
-    /**
-     * deprecated currentLevel()
-     *
-     * @deprecated 1.0.0 As getLevelCurrent() replaces this function.
-     * @param integer $level
-     */
-    public function currentLevel($level)
-    {
-        trigger_error('currentLevel() is deprecated, use getLevelCurrent()', E_USER_NOTICE);
-
-        return $this->getLevelCurrent($level);
-    }
 
     /**
      * Return the home site for the current resolved language resolved by {{luya\web\Composition}} component.
