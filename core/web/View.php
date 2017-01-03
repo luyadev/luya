@@ -48,12 +48,12 @@ class View extends \yii\web\View
      */
     public function getAssetUrl($assetName)
     {
-    	$assetName = ltrim($assetName, '\\');
-    	
-    	if (!isset($this->assetBundles[$assetName])) {
-    		throw new Exception("The AssetBundle '$assetName' is not registered.");
-    	}
-    	
+        $assetName = ltrim($assetName, '\\');
+        
+        if (!isset($this->assetBundles[$assetName])) {
+            throw new Exception("The AssetBundle '$assetName' is not registered.");
+        }
+        
         return $this->assetBundles[$assetName]->baseUrl;
     }
 
@@ -70,7 +70,7 @@ class View extends \yii\web\View
 
     /**
      * Generate urls helper method.
-     * 
+     *
      * Helper method for convenience which is equal to {{luya\web\UrlManager::createUrl}}.
      *
      * @param string $route The route to create `module/controller/action`.
@@ -80,16 +80,16 @@ class View extends \yii\web\View
      */
     public function url($route, array $params = [], $scheme = false)
     {
-    	$routeParams = [$route];
-    	foreach ($params as $key => $value) {
-    		$routeParams[$key] = $value;
-    	}
-    	
-    	if ($scheme) {
-    		return Yii::$app->urlManager->createAbsoluteUrl($routeParams);
-    	}
-    	
-    	return Yii::$app->urlManager->createUrl($routeParams);
+        $routeParams = [$route];
+        foreach ($params as $key => $value) {
+            $routeParams[$key] = $value;
+        }
+        
+        if ($scheme) {
+            return Yii::$app->urlManager->createAbsoluteUrl($routeParams);
+        }
+        
+        return Yii::$app->urlManager->createUrl($routeParams);
     }
     
     /**

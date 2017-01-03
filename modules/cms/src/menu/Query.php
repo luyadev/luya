@@ -41,7 +41,7 @@ use Exception;
  * (in example of protected several items for not logged in users).
  *
  * @property \luya\cms\Menu $menu Application menu component object.
- * 
+ *
  * @since 1.0.0-beta1
  * @author Basil Suter <basil@nadar.io>
  */
@@ -297,7 +297,7 @@ class Query extends \yii\base\Object
     
     /**
      * Filtering data based on a where expression.
-     * 
+     *
      * @param array $containerData The data to filter from
      * @param array $whereExpression An array with `[['op' => '=', 'field' => 'fieldName', 'value' => 'comparevalue'],[]]`
      * @param array $withCondition An array with with conditions `$with['hidden']`.
@@ -327,7 +327,7 @@ class Query extends \yii\base\Object
     
     /**
      * Filter an array item based on the where expression.
-     * 
+     *
      * @param unknown $value
      * @param unknown $field
      * @param array $where

@@ -48,18 +48,18 @@ abstract class Boot
 
     /**
      * Setter method for the base Yii file.
-     * 
+     *
      * Example path to the yii base file:
-     * 
+     *
      * ```php
      * $boot->setYiiPath(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
      * ```
-     * 
+     *
      * @param string $baseYiiFile The path to the Yii.php file.
      */
     public function setBaseYiiFile($baseYiiFile)
     {
-    	$this->_baseYiiFile = $baseYiiFile;
+        $this->_baseYiiFile = $baseYiiFile;
     }
     
     /**
@@ -70,8 +70,8 @@ abstract class Boot
      */
     public function setYiiPath($baseYiiFile)
     {
-    	trigger_error('setYiiPath() is deprecated, use setBaseYiiFile() instead.', E_USER_DEPRECATED);
-    	$this->setBaseYiiFile($baseYiiFile);
+        trigger_error('setYiiPath() is deprecated, use setBaseYiiFile() instead.', E_USER_DEPRECATED);
+        $this->setBaseYiiFile($baseYiiFile);
     }
 
     /**

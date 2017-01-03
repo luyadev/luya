@@ -65,8 +65,8 @@ class Url extends \yii\helpers\BaseUrl
      */
     public static function toManager($route, array $params = [], $scheme = false)
     {
-    	trigger_error('Deprecated method us Url::toRoute() instead.', E_USER_DEPRECATED);
-    	
+        trigger_error('Deprecated method us Url::toRoute() instead.', E_USER_DEPRECATED);
+        
         $routeParams = [$route];
         foreach ($params as $key => $value) {
             $routeParams[$key] = $value;

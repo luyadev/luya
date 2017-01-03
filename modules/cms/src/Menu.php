@@ -212,46 +212,46 @@ class Menu extends Component implements ArrayAccess
     
     /**
      * Setter method for the language container.
-     * 
+     *
      * This is maily used when working with unit test.
-     * 
+     *
      * Example Data array:
-     * 
+     *
      * ```php
      * [
-	 *		43 => [
-	 *    		'id' => '43',
-	 *    		'nav_id' => '1',
-	 *    		'lang' => 'fr',
-	 *	  		'link' => '/public_html/fr/home',
-	 *    		'title' => 'Homepage',
-	 *     		'alias' => 'home',
-	 *     		'description' => '',
-	 *     		'keywords' => NULL,
-	 *     		'create_user_id' => '4',
-	 *     		'update_user_id' => '4',
-	 *     		'timestamp_create' => '1457091369',
-	 *     		'timestamp_update' => '1483367249',
-	 *     		'is_home' => '1',
-	 *     		'parent_nav_id' => '0',
-	 *     		'sort_index' => '1',
-	 *     		'is_hidden' => '1',
-	 *    		'type' => '1',
-	 *     		'nav_item_type_id' => '42',
-	 *     		'redirect' => false,
-	 *     		'module_name' => false,
-	 *     		'container' => 'default',
-	 *     		'depth' => 1,
-	 * 		],
-	 * ]
+     *		43 => [
+     *    		'id' => '43',
+     *    		'nav_id' => '1',
+     *    		'lang' => 'fr',
+     *	  		'link' => '/public_html/fr/home',
+     *    		'title' => 'Homepage',
+     *     		'alias' => 'home',
+     *     		'description' => '',
+     *     		'keywords' => NULL,
+     *     		'create_user_id' => '4',
+     *     		'update_user_id' => '4',
+     *     		'timestamp_create' => '1457091369',
+     *     		'timestamp_update' => '1483367249',
+     *     		'is_home' => '1',
+     *     		'parent_nav_id' => '0',
+     *     		'sort_index' => '1',
+     *     		'is_hidden' => '1',
+     *    		'type' => '1',
+     *     		'nav_item_type_id' => '42',
+     *     		'redirect' => false,
+     *     		'module_name' => false,
+     *     		'container' => 'default',
+     *     		'depth' => 1,
+     * 		],
+     * ]
      * ```
-     * 
+     *
      * @param string $langShortCode
      * @param array $data An array with items based on the database `[0 => ['id' => 1, 'nav_id' => 2, ... ]]`
      */
     public function setLanguageContainer($langShortCode, array $data)
     {
-    	$this->_languageContainer[$langShortCode] = $data;
+        $this->_languageContainer[$langShortCode] = $data;
     }
 
     /**

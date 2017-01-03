@@ -55,7 +55,7 @@ class ClientTransfer extends Object
                         if ($md5 == $file->getFileHash()) {
                             $this->build->command->outputInfo('[+] ' . $file->name . ' downloaded.');
                         } else {
-                        	$this->build->command->outputError('[!] ' . $file->name . ' error while downloading.');
+                            $this->build->command->outputError('[!] ' . $file->name . ' error while downloading.');
                         }
                     }
                 }

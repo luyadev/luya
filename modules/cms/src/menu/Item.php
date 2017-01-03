@@ -333,10 +333,10 @@ class Item extends Object implements LinkInterface
         if ($this->getType() === 3) {
             switch ($this->redirectMapData('type')) {
                 case 1:
-                	$navId = $this->redirectMapData('value');
-                	if (empty($navId) || $navId == $this->navId) {
-                		return null;
-                	}
+                    $navId = $this->redirectMapData('value');
+                    if (empty($navId) || $navId == $this->navId) {
+                        return null;
+                    }
                     return (($item = (new Query())->where(['nav_id' => $navId])->with(['hidden'])->lang($this->lang)->one())) ? $item->getLink() : null;
                 case 2:
                     return $this->redirectMapData('value');
