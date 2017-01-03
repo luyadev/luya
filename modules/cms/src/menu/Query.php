@@ -3,7 +3,7 @@
 namespace luya\cms\menu;
 
 use Yii;
-use Exception;
+use luya\cms\Exception;
 
 /**
  * Menu Query Builder.
@@ -128,7 +128,7 @@ class Query extends \yii\base\Object
         foreach ($args as $key => $value) {
             if (in_array($value, $this->_whereOperators, true)) {
                 if (count($args) !== 3) {
-                    throw new Exception(sprintf("Wrong where(['%s']) condition, see http://luya.io/api/cms-menu-query.html#where()-detail for all available conditions.", implode("', '", $args)));
+                    throw new Exception(sprintf("Wrong where(['%s']) condition, see https://luya.io/api/luya-cms-menu-Query#where()-detail for all available conditions.", implode("', '", $args)));
                 }
                 $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
                 break;
@@ -146,6 +146,7 @@ class Query extends \yii\base\Object
      *
      * @see \luya\cms\menu\Query->where()
      * @param array $args
+     * @return \luya\cms\menu\Query
      */
     public function andWhere(array $args)
     {
