@@ -171,4 +171,5 @@ return [
 	'block_audio_admin_nourl' => 'No embed audio code has been set.',
 	'block_audio_admin_hasurl' => 'Embed audio code is set.',
 	'block_file_list_admin_empty' => 'No files has been selected yet.',
+	'block_html_name' => 'HTML',
 ];

@@ -71,14 +71,6 @@ final class FileListBlock extends PhpBlock
     /**
      * @inheritdoc
      */
-    public function twigFrontend()
-    {
-        return '{% if extras.fileList is not empty %}<ul>{% for fileEntry in extras.fileList %}<li><a target="_blank" href="{{ fileEntry.source }}">{{ fileEntry.caption }}{% if cfgs.showType %} ({{ fileEntry.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function admin()
     {
         return '{% if extras.fileList is empty %}<p class="block__empty-text">'.Module::t('block_file_list_admin_empty').'</p>{% else %}<ul>{% for fileEntry in extras.fileList %}<li><a target="_blank" href="{{ fileEntry.source_http }}">{{ fileEntry.caption }}{% if cfgs.showType == 1 %} ({{ fileEntry.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';

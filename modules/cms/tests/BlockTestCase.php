@@ -20,6 +20,11 @@ class BlockTestCase extends CmsFrontendTestCase
 	
 	public function renderFrontend()
 	{
+		$this->assertNotEmpty($this->block->name());
+		$this->assertNotEmpty($this->block->icon());
+		$this->assertTrue(is_array($this->block->config()));
+		$this->assertTrue(is_array($this->block->extraVars()));
+		$this->assertFalse(is_array($this->block->renderAdmin()));
 		return $this->block->renderFrontend();
 	}
 		

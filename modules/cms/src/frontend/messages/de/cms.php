@@ -171,4 +171,5 @@ return [
 	'block_audio_admin_nourl' => 'Keine Audioquelle angegeben.',
 	'block_audio_admin_hasurl' => 'Audioquelle ist gesetzt.',
 	'block_file_list_admin_empty' => 'Es wurden noch keine Dateien ausgewählt.',
+	'block_html_name' => 'HTML',
 ];

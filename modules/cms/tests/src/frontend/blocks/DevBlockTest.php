@@ -2,14 +2,15 @@
 
 namespace cmstests\src\frontend\blocks;
 
-use cmstests\CmsFrontendTestCase;
 use luya\cms\frontend\blocks\DevBlock;
+use cmstests\BlockTestCase;
 
-class DevBlockTest extends CmsFrontendTestCase
+class DevBlockTest extends BlockTestCase
 {
+	public $blockClass = 'luya\cms\frontend\blocks\DevBlock';
+	
 	public function testRenderFrontend()
 	{
-		$block = new DevBlock();
-		$this->assertNotEmpty($block->renderFrontend());
+		$this->assertNotEmpty($this->renderFrontend());
 	}
 }
