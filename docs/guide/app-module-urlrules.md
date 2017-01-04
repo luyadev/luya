@@ -4,7 +4,7 @@ When dealing with modules with several actions and pages you may use nice readab
 
 ## Configure Rules
 
-To configure a new rule you have to open the Module file (`Module.php`) of the module you want to add new url rules. Now you can add rules to the `$urlRules` proprtie, which is an array where you have to add a new item each item must contain a route and a pattern.
+To configure a new rule you have to open the Module file (`Module.php`) of the {{luya\base\Module}} you want to add new url rules. Now you can add rules to the `$urlRules` propertie, which is an array where you have to add a new item each item must contain a route and a pattern.
 
 ```php
 <?php
@@ -25,11 +25,13 @@ The url rule explained in details:
 |pattern      |The newly defined name for the rule, which is what the end-users can see.
 |route        |To internal route used to determine the new location, based on the yii2 routing concept `module/controller/action`.
 
-You can also us parameters in your url rules ([More on the Yii2 Documentation](http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#parameterizing-routes).
+You can also use parameters in url rules:
 
 ```php
 ['pattern' => 'article-detail/<id:\d+>', 'route' => 'estore/article/index'],
 ```
+
+Visit the [Yii Documentation](http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#parameterizing-routes) for more details about parameters.
 
 > When you using the module in a cms context, your patterns must be prefix with the module name like `team/my-basket`, otherwise the cms can not auto replace the new pattern with the cms context informations.
 
@@ -44,7 +46,7 @@ Here also a helping list of regex expressions you may use to generate your varia
 
 ## Using the Rule to make a Link
 
-When you have defined url rules for your module, you may want to use them in your view/controller files to generate the links where the user can click on it. To make links we use the `luya\helpers\Url` class. Lets assume we create links for both above created patterns.
+When you have defined url rules for your module, you may want to use them in your view/controller files to generate the links where the user can click on it. To make links we use the {{luya\helpers\Url}} class. Lets assume we create links for the above created rule patterns.
 
 ```php
 \luya\helpers\Url::toRoute(['/estore/basket/index']);
@@ -71,4 +73,4 @@ public $urlRules = [
 ];
 ```
 
-To verify what composition language is used you can run `Yii::$app->composition['langShortCode'];`, the composition component is taking care of LUYA multi language websites and is registered by default for all LUYA projects.
+To verify what composition language is used you can dump `Yii::$app->composition->language`, the {{luya\web\Composition}} component is taking care of LUYA multi language websites and is registered by default for all LUYA projects.
