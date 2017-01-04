@@ -410,6 +410,11 @@
                 "initvalue": "@initvalue"
             },
             link: function(scope) {
+		    
+		if(jQuery.isNumeric(scope.model)){
+			scope.model = typeCastValue(scope.model);
+		}
+		    
                 $timeout(function(){
                     scope.$watch(function() { return scope.model }, function(n, o) {
                         if (n == undefined || n == null || n == '') {
