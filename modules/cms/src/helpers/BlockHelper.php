@@ -68,7 +68,7 @@ class BlockHelper
      * @param string|int $value Provided the value
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
-     * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
+     * @return boolean|array|luya\admin\image\Item Returns false when not found, returns an array with all data for the image on success.
      */
     public static function imageUpload($value, $applyFilter = false, $returnObject = false)
     {
@@ -142,13 +142,13 @@ class BlockHelper
      *
      * @param string|int $value Provided the value
      * @param boolean $returnObject Whether the storage object should be returned or an array.
-     * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
+     * @return boolean|array|\luya\admin\file\Item Returns false when not found, returns an array with all data for the image on success.
      */
     public static function fileUpload($value, $returnObject = false)
     {
         if (!empty($value)) {
             $file = Yii::$app->storage->getFile($value);
-    
+    		/* @var \luya\admin\file\Item $file */
             if ($file) {
                 if ($returnObject) {
                     return $file;
