@@ -148,7 +148,7 @@ class BlockHelper
     {
         if (!empty($value)) {
             $file = Yii::$app->storage->getFile($value);
-    		/* @var \luya\admin\file\Item $file */
+            /* @var \luya\admin\file\Item $file */
             if ($file) {
                 if ($returnObject) {
                     return $file;

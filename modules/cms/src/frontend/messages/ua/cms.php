@@ -166,10 +166,10 @@ return [
     
     // rc2
     'block_group_media_group' => 'Медіа',
-		
-	// 1.0.0
-	'block_audio_admin_nourl' => 'No embed audio code has been set.',
-	'block_audio_admin_hasurl' => 'Embed audio code is set.',
-	'block_file_list_admin_empty' => 'No files has been selected yet.',
-	'block_html_name' => 'HTML',
+        
+    // 1.0.0
+    'block_audio_admin_nourl' => 'No embed audio code has been set.',
+    'block_audio_admin_hasurl' => 'Embed audio code is set.',
+    'block_file_list_admin_empty' => 'No files has been selected yet.',
+    'block_html_name' => 'HTML',
 ];

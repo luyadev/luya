@@ -14,9 +14,9 @@ use luya\cms\base\PhpBlock;
  */
 final class TextBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
     
     /**
@@ -29,7 +29,7 @@ final class TextBlock extends PhpBlock
      */
     public function blockGroup()
     {
-    	return TextGroup::className();
+        return TextGroup::className();
     }
     
     /**
@@ -94,7 +94,7 @@ final class TextBlock extends PhpBlock
     
     public function admin()
     {
-    	return '<p>{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_text_no_content') . '</span>'.
-    			'{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text }}{% endif %}</p>';
+        return '<p>{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_text_no_content') . '</span>'.
+                '{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text }}{% endif %}</p>';
     }
 }

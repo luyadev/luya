@@ -20,6 +20,7 @@ class BlockTestCase extends CmsFrontendTestCase
 	
 	public function renderFrontend()
 	{
+		$this->assertNotEmpty($this->block->blockGroup());
 		$this->assertNotEmpty($this->block->name());
 		$this->assertNotEmpty($this->block->icon());
 		$this->assertTrue(is_array($this->block->config()));

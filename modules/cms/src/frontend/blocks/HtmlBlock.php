@@ -13,9 +13,9 @@ use luya\cms\base\PhpBlock;
  */
 final class HtmlBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
     /**
@@ -28,7 +28,7 @@ final class HtmlBlock extends PhpBlock
      */
     public function blockGroup()
     {
-    	return DevelopmentGroup::className();
+        return DevelopmentGroup::className();
     }
     
     /**

@@ -13,9 +13,9 @@ use luya\cms\base\PhpBlock;
  */
 final class FileListBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
     /**

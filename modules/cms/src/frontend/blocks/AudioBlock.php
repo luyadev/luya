@@ -13,11 +13,11 @@ use luya\cms\base\PhpBlock;
  */
 final class AudioBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
-	public $module = 'cms';
-	
+    /**
+     * @inheritdoc
+     */
+    public $module = 'cms';
+    
     /**
      * @inheritdoc
      */

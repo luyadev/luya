@@ -136,15 +136,15 @@ class PhpBlockView extends View
     
     /**
      * Wrap a very basic template arounte the value if value is not `empty()`.
-     * 
+     *
      * Assuming to have variable `title` with the value `Hello World` and a template `<p>{{title}}</p>` renders:
-     * 
+     *
      * ```
      * <p>Hello World</p>
      * ```
-     * 
+     *
      * If a template is provided and $value is not empty return the wrapped template, otherwise the original $value input is returned.
-     * 
+     *
      * @param string $key The variable name to idenfier as {{key}}.
      * @param mixed $value The value which should be replaced for the $key.
      * @param string $template The template as a string which replates the $key enclosed in {{
@@ -152,11 +152,11 @@ class PhpBlockView extends View
      */
     public function wrapTemplate($key, $value, $template)
     {
-    	if (!$template || empty($value)) {
-    		return $value;
-    	}
-    	
-    	return str_replace(['{{'.$key. '}}'], $value, $template);
+        if (!$template || empty($value)) {
+            return $value;
+        }
+        
+        return str_replace(['{{'.$key. '}}'], $value, $template);
     }
     
     /**

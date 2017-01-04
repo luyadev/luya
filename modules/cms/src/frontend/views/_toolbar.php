@@ -1,6 +1,7 @@
 <?php
 use luya\helpers\Url;
 use luya\cms\frontend\Module;
+
 ?>
 <div id="luya-cms-toolbar-wrapper">
     <div id="luya-cms-toolbar">
