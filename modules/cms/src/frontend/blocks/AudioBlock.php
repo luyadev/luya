@@ -3,23 +3,28 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
-use luya\cms\base\TwigBlock;
 use luya\cms\frontend\blockgroups\MediaGroup;
+use luya\cms\base\PhpBlock;
 
 /**
  * Audio Block for Soundcloude Service
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class AudioBlock extends TwigBlock
+final class AudioBlock extends PhpBlock
 {
+	/**
+	 * @inheritdoc
+	 */
+	public $module = 'cms';
+	
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public $cacheEnabled = true;
     
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function name()
     {
@@ -27,7 +32,7 @@ final class AudioBlock extends TwigBlock
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function blockGroup()
     {
@@ -35,7 +40,7 @@ final class AudioBlock extends TwigBlock
     }
     
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function icon()
     {
@@ -43,7 +48,7 @@ final class AudioBlock extends TwigBlock
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function config()
     {
@@ -55,7 +60,7 @@ final class AudioBlock extends TwigBlock
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function getFieldHelp()
     {
@@ -65,18 +70,19 @@ final class AudioBlock extends TwigBlock
     }
 
     /**
-     * @inheritDoc
-     */
+     * @inheritdoc
+     *
     public function twigFrontend()
     {
-        return '<div>{% if vars.soundUrl is not empty %}{{ vars.soundUrl }}{% else %}Keine Audioquelle angegeben{% endif %}</div>';
+        return '{% if vars.soundUrl is not empty %}<div>{{ vars.soundUrl }}</div>{% endif %}';
     }
+    */
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
-    public function twigAdmin()
+    public function admin()
     {
-        return '<p>Audio Block: {% if vars.soundUrl is empty %}Keine Audioquelle angegeben{% else %}Audioquelle ist gesetzt{% endif %}</p>';
+        return '<p>Audio Block: {% if vars.soundUrl is empty %}'.Module::t('block_audio_admin_nourl').'{% else %}'.Module::t('block_audio_admin_hasurl').'{% endif %}</p>';
     }
 }

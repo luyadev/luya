@@ -92,25 +92,10 @@ final class TextBlock extends PhpBlock
             'text' => $this->getText(),
         ];
     }
-
     
     public function admin()
     {
     	return '<p>{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_text_no_content') . '</span>'.
     			'{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text }}{% endif %}</p>';
     }
-    /*
-    public function twigFrontend()
-    {
-        return '{% if vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty and vars.textType == 0 %}<p{% if cfgs.cssClass is not empty %} class="{{cfgs.cssClass}}"{% endif %}>{{ extras.text|nl2br }}</p>{% endif %}';
-    }
-
-    public function twigAdmin()
-    {
-        return '<p>{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_text_no_content') . '</span>'.
-        '{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text|nl2br }}{% endif %}</p>';
-    }
-	*/
-    
-    
 }

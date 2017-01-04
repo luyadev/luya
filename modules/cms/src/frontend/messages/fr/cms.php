@@ -158,7 +158,7 @@ return [
     'block_group_project_elements' => 'Projet',
     'block_group_text_elements' => 'Textes',
     
-    /* rc1 */
+    // rc1
     'block_table_enable_markdown' => 'Activer le mode "Markdown"',
     'block_layout_row_column_css_class' => 'Classes CSS pour la mise en page des <div>',
     'block_image_cfg_css_class' => 'Classes CSS de l\'image',
@@ -166,4 +166,8 @@ return [
     
     // rc2
     'block_group_media_group' => 'Médias',
+		
+	// 1.0.0
+	'block_audio_admin_nourl' => 'No embed audio code has been set.',
+	'block_audio_admin_hasurl' => 'Embed audio code is set.',
 ];

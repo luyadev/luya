@@ -166,4 +166,8 @@ return [
 
       // rc2
       'block_group_media_group' =>  'Medio',
+		
+	// 1.0.0
+	'block_audio_admin_nourl' => 'No embed audio code has been set.',
+	'block_audio_admin_hasurl' => 'Embed audio code is set.',
 ];
