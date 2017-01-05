@@ -23,8 +23,13 @@ use luya\helpers\ArrayHelper;
  *
  * The label data will automatically sorted by the label in ASC direction.
  *
- *
- *
+ * The labelField can also provided as callable method:
+ * 
+ * ```php
+ * 'labelField' => function($model) {
+ *     return $model->firstname . ' ' . $model->lastname;
+ * }
+ * ```
  * @author Basil Suter <basil@nadar.io>
  */
 class SelectModel extends Select
@@ -40,12 +45,20 @@ class SelectModel extends Select
     public $valueField = null;
     
     /**
-     * @var string|array An array or string to select the data from, this data will be returned in the select overview.
+     * @var string|array|callable An array or string to select the data from, this data will be returned in the select overview.
      *
      * An example of how to use multiple labels.
      *
      * ```php
      * 'labelField' => ['lastname', 'firstname'], // generate a label with lastname firstname
+     * ```
+     * 
+     * In order to use callables the first param is the model:
+     * 
+     * ```php
+     * 'labelField' => function($model) {
+     *     return $model->firstname . ' ' . $model->lastname;
+     * }
      * ```
      */
     public $labelField = null;
@@ -109,11 +122,15 @@ class SelectModel extends Select
     
     private function generateLabelField(ActiveRecordInterface $model)
     {
+        if (is_callable($this->labelField, false)) {
+            return call_user_func($this->labelField, $model);
+        }
+        
         $defintion = (array) $this->labelField;
         
         $values = [];
         foreach ($defintion as $field) {
-            $data = $model->getAttribute($field);
+            $data = $model->$field;
             
             if (is_array($data)) {
                 $data = reset($data);

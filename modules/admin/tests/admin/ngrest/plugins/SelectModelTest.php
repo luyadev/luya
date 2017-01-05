@@ -96,9 +96,61 @@ class SelectModelTest extends AdminTestCase
     }
     
     /**
+     * @see https://github.com/luyadev/luya/issues/1133
+     */
+    public function testGetterMethodAttributeForLabelField()
+    {
+        $model = new UserFixture();
+        $model->load();
+        $plugin = new SelectModel([
+            'name' => 'test',
+            'alias' => 'test',
+            'i18n' => false,
+            'modelClass' => User::class,
+            'valueField' => 'id',
+            'labelField' => 'titleNamed',
+        ]);
+    
+        
+        $this->assertSame([
+            0 => ['value' => 1, 'label' => 'Mr.'],
+            1 => ['value' => 2, 'label' => 'Ms.'],
+        ], $plugin->getData());
+        
+        unset($plugin);
+    }
+    
+    /**
+     * @see https://github.com/luyadev/luya/issues/1133
+     */
+    public function testCallableLabelField()
+    {
+        $model = new UserFixture();
+        $model->load();
+        $plugin = new SelectModel([
+            'name' => 'test',
+            'alias' => 'test',
+            'i18n' => false,
+            'modelClass' => User::class,
+            'valueField' => 'id',
+            'labelField' => function($model) {
+                return $model->firstname . '@' . $model->lastname;
+            }
+        ]);
+    
+    
+        $this->assertSame([
+            0 => ['value' => 2, 'label' => 'Jane@Doe'],
+            1 => ['value' => 1, 'label' => 'John@Doe'],
+        ], $plugin->getData());
+    
+        unset($plugin);
+    }
+    
+    /**
      * Test relating with i18n casted select fields:
      *
-     * https://github.com/luyadev/luya/issues/1125#issuecomment-269737028
+     * @see https://github.com/luyadev/luya/issues/1125#issuecomment-269737028
      */
     public function testAfterFindEventWithI18n()
     {

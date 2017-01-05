@@ -265,14 +265,23 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         return true;
     }
     
+    /**
+     * Get the title Mr, Mrs. as string for the current user.
+     * 
+     * @return string
+     */
     public function getTitleNamed()
     {
         return self::getTitles()[$this->title];
     }
 
+    /**
+     * 
+     * @return string[]
+     */
     public static function getTitles()
     {
-        return [1 => 'Herr', 2 => 'Frau'];
+        return [1 => Module::t('model_user_title_mr'), 2 => Module::t('model_user_title_mrs')];
     }
 
     public function fields()

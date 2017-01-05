@@ -220,4 +220,6 @@ return [
     'model_storagefilter_name' => 'Filter Name',
     'model_tag_name' => 'Tag Identifier',
     'model_user_lastlogintimestamp' => 'Last login',
+    'model_user_title_mr' => 'Mr.',
+    'model_user_title_mrs' => 'Ms.',
 ];

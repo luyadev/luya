@@ -223,4 +223,6 @@ return [
     'model_storagefilter_name' => 'Назва фільтра',
     'model_tag_name' => 'Ідентифікатор тега',
     'model_user_lastlogintimestamp' => 'Останній вхід',
+    'model_user_title_mr' => 'Mr.',
+    'model_user_title_mrs' => 'Ms.',
 ];

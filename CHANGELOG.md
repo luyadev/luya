@@ -16,6 +16,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1133](https://github.com/luyadev/luya/issues/1133) Added callable $labelField and getter access for ngrest plugin luya\admin\ngrest\plugins\SelectModel.
 - [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain language added.
 - [#1120](https://github.com/luyadev/luya/issues/1120) Add Hook mechanism in order to trigger contents.
 - [#1115](https://github.com/luyadev/luya/issues/1115) ActiveDataProvider default sorting configuration for news article overview.
