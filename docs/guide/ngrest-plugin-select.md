@@ -23,7 +23,7 @@ Create a dropdown selection based on an {{yii\db\ActiveRecord}} model class:
 ```php
 public function ngrestAttributeTypes()
 {
-	return [
+    return [
 		// ...
 		'genres' => [
 	     	'selectModel', 
@@ -37,7 +37,15 @@ public function ngrestAttributeTypes()
 
 You can define more options for the select model like where statements and which fields should be displayed take a look at class api {{luya\admin\ngrest\plugins\SelectModel}} for more informations.
 
-> Attention: Keep in mind the plugin will override the default values from the database to display the rest api data.
+In order to generate a custom labelField you can also pass a closure function:
+
+```php
+'labelField' => function($model) {
+    return $model->firstname . ' ' . $model->lastname;
+}
+```
+
+> **Attention** Keep in mind the plugin will override the default values from the database to display the rest api data.
 > 
 > ```php
 > public function getCustomer()
