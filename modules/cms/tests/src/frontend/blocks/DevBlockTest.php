@@ -7,10 +7,10 @@ use cmstests\BlockTestCase;
 
 class DevBlockTest extends BlockTestCase
 {
-	public $blockClass = 'luya\cms\frontend\blocks\DevBlock';
-	
-	public function testRenderFrontend()
-	{
-		$this->assertNotEmpty($this->renderFrontend());
-	}
+    public $blockClass = 'luya\cms\frontend\blocks\DevBlock';
+    
+    public function testRenderFrontend()
+    {
+        $this->assertNotEmpty($this->renderFrontend());
+    }
 }

@@ -24,7 +24,7 @@ use luya\helpers\ArrayHelper;
  * The label data will automatically sorted by the label in ASC direction.
  *
  * The labelField can also provided as callable method:
- * 
+ *
  * ```php
  * 'labelField' => function($model) {
  *     return $model->firstname . ' ' . $model->lastname;
@@ -52,9 +52,9 @@ class SelectModel extends Select
      * ```php
      * 'labelField' => ['lastname', 'firstname'], // generate a label with lastname firstname
      * ```
-     * 
+     *
      * In order to use callables the first param is the model:
-     * 
+     *
      * ```php
      * 'labelField' => function($model) {
      *     return $model->firstname . ' ' . $model->lastname;

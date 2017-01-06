@@ -16,7 +16,7 @@ use luya\admin\ngrest\base\Plugin;
  * ```
  *
  * Now the checkbox is set the 1 by default (which is equals to $trueValue).
- * 
+ *
  * Checkbox is by default interactive toggleable in the crud overview in order to disable this behavior set $interactive to false.
  *
  * @author Basil Suter <basil@nadar.io>

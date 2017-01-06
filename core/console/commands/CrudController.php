@@ -459,8 +459,8 @@ class CrudController extends BaseCrudController
     
     /**
      * Generate only the ngrest model
-     * 
-     * @param string $model Provide 
+     *
+     * @param string $model Provide
      */
     public function actionModel($model = null)
     {

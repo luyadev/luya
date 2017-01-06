@@ -267,7 +267,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     
     /**
      * Get the title Mr, Mrs. as string for the current user.
-     * 
+     *
      * @return string
      */
     public function getTitleNamed()
@@ -276,7 +276,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     }
 
     /**
-     * 
+     *
      * @return string[]
      */
     public static function getTitles()

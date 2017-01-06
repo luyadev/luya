@@ -133,7 +133,7 @@ class SelectModelTest extends AdminTestCase
             'i18n' => false,
             'modelClass' => User::class,
             'valueField' => 'id',
-            'labelField' => function($model) {
+            'labelField' => function ($model) {
                 return $model->firstname . '@' . $model->lastname;
             }
         ]);

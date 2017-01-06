@@ -29,9 +29,9 @@ class QueryTest extends CmsFrontendTestCase
     
     private function generateItems($start, $end, $lang)
     {
-    	$data = [];
-    	foreach (range($start, $end) as $number) {
-    		$data[$number] = [
+        $data = [];
+        foreach (range($start, $end) as $number) {
+            $data[$number] = [
                     'id' => $number,
                     'nav_id' => $number,
                     'lang' => $lang,
@@ -55,51 +55,50 @@ class QueryTest extends CmsFrontendTestCase
                     'container' => 'default',
                     'depth' => 1,
             ];
-    	}
-    	
-    	return $data;
+        }
+        
+        return $data;
     }
     
     public function testWhereOperatorException()
     {
-    	Yii::$app->composition['langShortCode'] = 'en';
-    	Yii::$app->menu->setLanguageContainer('en', $this->generateItems(1, 10, 'en'));
-    	$this->expectException('luya\cms\Exception');
-    	$result = Yii::$app->menu->find()->where(['>', 'id', 4, 'error'])->all();
-
+        Yii::$app->composition['langShortCode'] = 'en';
+        Yii::$app->menu->setLanguageContainer('en', $this->generateItems(1, 10, 'en'));
+        $this->expectException('luya\cms\Exception');
+        $result = Yii::$app->menu->find()->where(['>', 'id', 4, 'error'])->all();
     }
     
     public function testWhereOperatorComperators()
     {
-    	Yii::$app->composition['langShortCode'] = 'en';
-    	Yii::$app->menu->setLanguageContainer('en', $this->generateItems(1, 10, 'en'));
-    	$this->assertSame(5, Yii::$app->menu->find()->where(['>', 'id', 5])->count());
-    	$this->assertSame(6, Yii::$app->menu->find()->where(['>=', 'id', 5])->count());
-    	$this->assertSame(4, Yii::$app->menu->find()->where(['<', 'id', 5])->count());
-    	$this->assertSame(5, Yii::$app->menu->find()->where(['<=', 'id', 5])->count());
-    	$this->assertSame(1, Yii::$app->menu->find()->where(['=', 'id', 5])->count());
-    	$this->assertSame(1, Yii::$app->menu->find()->where(['==', 'id', 5])->count());
-    	$this->assertSame(0, Yii::$app->menu->find()->where(['==', 'id', "5"])->count());
+        Yii::$app->composition['langShortCode'] = 'en';
+        Yii::$app->menu->setLanguageContainer('en', $this->generateItems(1, 10, 'en'));
+        $this->assertSame(5, Yii::$app->menu->find()->where(['>', 'id', 5])->count());
+        $this->assertSame(6, Yii::$app->menu->find()->where(['>=', 'id', 5])->count());
+        $this->assertSame(4, Yii::$app->menu->find()->where(['<', 'id', 5])->count());
+        $this->assertSame(5, Yii::$app->menu->find()->where(['<=', 'id', 5])->count());
+        $this->assertSame(1, Yii::$app->menu->find()->where(['=', 'id', 5])->count());
+        $this->assertSame(1, Yii::$app->menu->find()->where(['==', 'id', 5])->count());
+        $this->assertSame(0, Yii::$app->menu->find()->where(['==', 'id', "5"])->count());
     }
     
     public function testAndWhereOperatorComperators()
     {
-    	Yii::$app->composition['langShortCode'] = 'en';
-    	Yii::$app->menu->setLanguageContainer('en', $this->generateItems(1, 10, 'en'));
-    	$this->assertSame(1, Yii::$app->menu->find()->where(['=', 'id', 5])->andWhere(['is_hidden' => 0])->count());
-    	$this->assertSame(0, Yii::$app->menu->find()->where(['=', 'id', 5])->andWhere(['lang' => 'another'])->count());
+        Yii::$app->composition['langShortCode'] = 'en';
+        Yii::$app->menu->setLanguageContainer('en', $this->generateItems(1, 10, 'en'));
+        $this->assertSame(1, Yii::$app->menu->find()->where(['=', 'id', 5])->andWhere(['is_hidden' => 0])->count());
+        $this->assertSame(0, Yii::$app->menu->find()->where(['=', 'id', 5])->andWhere(['lang' => 'another'])->count());
     }
     
     public function testLimitAndOffset()
     {
-    	Yii::$app->composition['langShortCode'] = 'en';
-    	Yii::$app->menu->setLanguageContainer('en', $this->generateItems(1, 20, 'en'));
-    	$data = Yii::$app->menu->find()->limit(5)->offset(10)->all();
-    	$i = 10;
-    	$this->assertSame(5, count($data));
-    	foreach ($data as $item) {
-    		$i++;
-    		$this->assertSame($i, $item->id);
-    	}
+        Yii::$app->composition['langShortCode'] = 'en';
+        Yii::$app->menu->setLanguageContainer('en', $this->generateItems(1, 20, 'en'));
+        $data = Yii::$app->menu->find()->limit(5)->offset(10)->all();
+        $i = 10;
+        $this->assertSame(5, count($data));
+        foreach ($data as $item) {
+            $i++;
+            $this->assertSame($i, $item->id);
+        }
     }
 }
