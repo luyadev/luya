@@ -81,12 +81,12 @@ class MyTestBlock extends PhpBlock
     {
         return [
             'vars' => [
-                 ['var' => 'foo', 'label' => 'Foo', 'type' => 'zaa-text'],
-                 ['var' => 'bar', 'label' => 'Bar', 'type' => 'zaa-image', 'options' => OPTIONS!],
+                 ['var' => 'foo', 'label' => 'Foo', 'type' => self::TYPE_TEXT],
+                 ['var' => 'bar', 'label' => 'Bar', 'type' => self::TYPE_IMAGEUPLOAD, 'options' => OPTIONS!],
             ],
             'cfgs' => [
-                 ['var' => 'foo', 'label' => 'Foo', 'type' => 'zaa-text'],
-                 ['var' => 'bar', 'label' => 'Bar', 'type' => 'zaa-image', 'options' => OPTIONS!],
+                 ['var' => 'foo', 'label' => 'Foo', 'type' => self::TYPE_TEXT],
+                 ['var' => 'bar', 'label' => 'Bar', 'type' => self::TYPE_IMAGEUPLOAD, 'options' => OPTIONS!],
             ],
             'placeholders' => [
                  ['var' => 'foo', 'label' => 'Foo'],
@@ -124,12 +124,12 @@ EOT;
         $ctrl->type = BlockController::TYPE_APP;
         $ctrl->config = [
             'vars' => [
-                ['var' => 'foo', 'type' => 'zaa-text', 'label' => 'Foo'],
-                ['var' => 'bar', 'type' => 'zaa-image', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
+                ['var' => 'foo', 'type' => 'self::TYPE_TEXT', 'label' => 'Foo'],
+                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
             ],
             'cfgs' => [
-                ['var' => 'foo', 'type' => 'zaa-text', 'label' => 'Foo'],
-                ['var' => 'bar', 'type' => 'zaa-image', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
+                ['var' => 'foo', 'type' => 'self::TYPE_TEXT', 'label' => 'Foo'],
+                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
             ],
             'placeholders' => [
                 ['var' => 'foo', 'label' => 'Foo'],
@@ -214,12 +214,12 @@ class MyTestBlock extends PhpBlock
     {
         return [
             'vars' => [
-                 ['var' => 'foo', 'label' => 'Foo', 'type' => 'zaa-text'],
-                 ['var' => 'bar', 'label' => 'Bar', 'type' => 'zaa-image', 'options' => OPTIONS!],
+                 ['var' => 'foo', 'label' => 'Foo', 'type' => self::TYPE_TEXT],
+                 ['var' => 'bar', 'label' => 'Bar', 'type' => self::TYPE_IMAGEUPLOAD, 'options' => OPTIONS!],
             ],
             'cfgs' => [
-                 ['var' => 'foo', 'label' => 'Foo', 'type' => 'zaa-text'],
-                 ['var' => 'bar', 'label' => 'Bar', 'type' => 'zaa-image', 'options' => OPTIONS!],
+                 ['var' => 'foo', 'label' => 'Foo', 'type' => self::TYPE_TEXT],
+                 ['var' => 'bar', 'label' => 'Bar', 'type' => self::TYPE_IMAGEUPLOAD, 'options' => OPTIONS!],
             ],
             'placeholders' => [
                  ['var' => 'foo', 'label' => 'Foo'],
@@ -257,12 +257,12 @@ EOT;
         $ctrl->type = BlockController::TYPE_MODULE;
         $ctrl->config = [
             'vars' => [
-                ['var' => 'foo', 'type' => 'zaa-text', 'label' => 'Foo'],
-                ['var' => 'bar', 'type' => 'zaa-image', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
+                ['var' => 'foo', 'type' => 'self::TYPE_TEXT', 'label' => 'Foo'],
+                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
             ],
             'cfgs' => [
-                ['var' => 'foo', 'type' => 'zaa-text', 'label' => 'Foo'],
-                ['var' => 'bar', 'type' => 'zaa-image', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
+                ['var' => 'foo', 'type' => 'self::TYPE_TEXT', 'label' => 'Foo'],
+                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
             ],
             'placeholders' => [
                 ['var' => 'foo', 'label' => 'Foo'],

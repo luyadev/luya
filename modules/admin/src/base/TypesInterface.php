@@ -87,10 +87,20 @@ interface TypesInterface
     /**
      * @var string
      */
-    const TYPE_IAGEUPLOAD_ARRAY = 'zaa-image-upload-array';
+    const TYPE_IMAGEUPLOAD_ARRAY = 'zaa-image-upload-array';
     
     /**
      * @var string
      */
     const TYPE_LIST_ARRAY = 'zaa-list-array';
+    
+    /**
+     * @var string Generates a table view similar to a json input.
+     */
+    const TYPE_TABLE = 'zaa-table';
+    
+    /**
+     * @var string Generates a selection of all cms page, works only if cms module is present.
+     */
+    const TYPE_CMS_PAGE = 'zaa-cms-page';
 }

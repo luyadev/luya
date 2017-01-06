@@ -121,6 +121,7 @@ class BlockController extends \luya\console\Command
             'textarea' => 'Textarea multi rows input',
             'password' => 'Passwort input field (hides the signs)',
             'number' => 'Numbers allowed only',
+            'decimal' => 'Decimal Number Float',
             'wysiwyg' => 'What you see is what you get Editor',
             'select' => 'Dropdown Select',
             'date' => 'Date Selector',
@@ -133,7 +134,33 @@ class BlockController extends \luya\console\Command
             'image-array-upload' => 'creates an asrray with image id an caption string',
             'list-array' => 'Creates an array with a key variable value',
             'table' => 'User can dynamic create tables (jsons)',
+            'link' => 'Generats a linkable internal or external resource (use Link Injector!)',
             'cms-page' => 'Returns CMS page selection tree (only when cms is registered).',
+        ];
+    }
+    
+    private function getVariableTypeInterfaceMap()
+    {
+        return [
+            'text' => 'self::TYPE_TEXT',
+            'textarea' => 'self::TYPE_TEXTAREA',
+            'password' => 'self::TYPE_PASSWORD',
+            'number' => 'self::TYPE_NUMBER',
+            'decimal' => 'self::TYPE_DECIMAL',
+            'wysiwyg' => 'self::TYPE_WYSIWYG',
+            'select' => 'self::TYPE_SELECT',
+            'date' => 'self::TYPE_DATE',
+            'datetime' => 'self::TYPE_DATETIME',
+            'checkbox' => 'self::TYPE_CHECKBOX',
+            'checkbox-array' => 'self::TYPE_CHECKBOX_ARRAY',
+            'file-upload' => 'self::TYPE_FILEUPLOAD',
+            'file-array-upload' => 'self::TYPE_FILEUPLOAD_ARRAY',
+            'image-upload' => 'self::TYPE_IMAGEUPLOAD',
+            'image-array-upload' => 'self::TYPE_IMAGEUPLOAD_ARRAY',
+            'list-array' => 'self::TYPE_LIST_ARRAY',
+            'table' => 'self::TYPE_TABLE',
+            'link' => 'self::TYPE_LINK',
+            'cms-page' => 'self::TYPE_CMS_PAGE',
         ];
     }
 
@@ -219,7 +246,7 @@ class BlockController extends \luya\console\Command
         $v = [
             'var' => Inflector::variablize($name),
             'label' => $label,
-            'type' => 'zaa-'.$type,
+            'type' => $this->getVariableTypeInterfaceMap()[$type],
         ];
     
         if ($this->hasVariableTypeOption($type)) {

@@ -77,14 +77,14 @@ class <?= $className; ?> extends PhpBlock
 <?php if (!empty($config['vars'])): ?>
             'vars' => [
 <?php foreach ($config['vars'] as $var): ?>
-                 ['var' => '<?= $var['var']; ?>', 'label' => '<?= $var['label']; ?>', 'type' => '<?= $var['type']; ?>'<?php if (isset($var['options'])): ?>, 'options' => <?= $var['options']; ?><?php endif; ?>],
+                 ['var' => '<?= $var['var']; ?>', 'label' => '<?= $var['label']; ?>', 'type' => <?= $var['type']; ?><?php if (isset($var['options'])): ?>, 'options' => <?= $var['options']; ?><?php endif; ?>],
 <?php endforeach; ?>
             ],
 <?php endif; ?>
 <?php if (!empty($config['cfgs'])): ?>
             'cfgs' => [
 <?php foreach ($config['cfgs'] as $var): ?>
-                 ['var' => '<?= $var['var']; ?>', 'label' => '<?= $var['label']; ?>', 'type' => '<?= $var['type']; ?>'<?php if (isset($var['options'])): ?>, 'options' => <?= $var['options']; ?><?php endif; ?>],
+                 ['var' => '<?= $var['var']; ?>', 'label' => '<?= $var['label']; ?>', 'type' => <?= $var['type']; ?><?php if (isset($var['options'])): ?>, 'options' => <?= $var['options']; ?><?php endif; ?>],
 <?php endforeach; ?>
             ],
 <?php endif; ?>
