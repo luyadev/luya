@@ -516,7 +516,7 @@
 			var json = {};
 			json[fieldName] = invert;
 			$http.put($scope.config.apiEndpoint + '/' + rowId, angular.toJson(json, true)).success(function(data) {
-				row.active = invert;
+				row[fieldName] = invert;
 				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}), 1500);
 			}).error(function(data) {
 				$scope.printErrors(data);
