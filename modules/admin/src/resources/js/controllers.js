@@ -376,14 +376,18 @@
 				$scope.applySaveCallback();
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
 				$scope.switchTo(0, true);
-				$scope.highlightId = $scope.data.updateId;
-				$timeout(function() {
-					$scope.highlightId = 0;
-				}, 4000);
+				$scope.highlightItemId($scope.data.updateId);
 			}).error(function(data) {
 				$scope.printErrors(data);
 			});
 		};
+		
+		$scope.highlightItemId = function(id) {
+			$scope.highlightId = id;
+			$timeout(function() {
+				$scope.highlightId = 0;
+			}, 3000);
+		}
 		
 		$scope.submitCreate = function() {
 			
@@ -517,6 +521,7 @@
 			json[fieldName] = invert;
 			$http.put($scope.config.apiEndpoint + '/' + rowId, angular.toJson(json, true)).success(function(data) {
 				row[fieldName] = invert;
+				$scope.highlightItemId(rowId);
 				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}), 1500);
 			}).error(function(data) {
 				$scope.printErrors(data);
