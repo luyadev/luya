@@ -90,7 +90,7 @@ public function import(\luya\console\interfaces\ImportController $import)
 Example code where import directly does handle some code:
 
 ```php
-public function import(\luya\console\interfaces\ImportController $import)
+public function import(\luya\console\interfaces\ImportControllerInterface $import)
 {
     foreach ($import->getDirectoryFiles('filters') as $file) {
         $filterClassName = $file['ns'];
