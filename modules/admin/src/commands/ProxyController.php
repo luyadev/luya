@@ -10,6 +10,8 @@ use luya\admin\proxy\ClientTransfer;
 
 class ProxyController extends \luya\console\Command
 {
+    public $defaultAction = 'sync';
+    
     const CONFIG_VAR_URL = 'lcpProxyUrl';
     
     const CONFIG_VAR_TOKEN = 'lcpProxyToken';
