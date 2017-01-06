@@ -15,6 +15,11 @@ use luya\helpers\FileHelper;
 class ActiveWindowController extends \luya\console\Command
 {
     /**
+     * @inheritdoc
+     */
+    public $defaultAction = 'create';
+    
+    /**
      * @var string The suffix for an Active Window classes to generate.
      */
     public $suffix = 'ActiveWindow';

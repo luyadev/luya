@@ -16,6 +16,11 @@ use yii\helpers\Inflector;
 class ModuleController extends \luya\console\Command
 {
     /**
+     * @inheritdoc
+     */
+    public $defaultAction = 'create';
+    
+    /**
      * Humanize the class name
      *
      * @return string The humanized name.

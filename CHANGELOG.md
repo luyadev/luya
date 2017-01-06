@@ -16,6 +16,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1135](https://github.com/luyadev/luya/issues/1135) Command to generate only the ngrest model `curd/model "path/to/Model"`.
 - [#1136](https://github.com/luyadev/luya/issues/1136) Block generate uses the luya\admin\base\TypesInterface.
 - [#1134](https://github.com/luyadev/luya/issues/1134) ToggleStatus plugin ables to toggle the status from the crud list overview.
 - [#1133](https://github.com/luyadev/luya/issues/1133) Added callable $labelField and getter access for ngrest plugin luya\admin\ngrest\plugins\SelectModel.

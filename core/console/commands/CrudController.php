@@ -8,6 +8,8 @@ use yii\helpers\Inflector;
 use yii\db\TableSchema;
 use luya\Boot;
 use luya\helpers\FileHelper;
+use luya\admin\ngrest\base\NgRestModelInterface;
+use yii\console\Exception;
 
 /**
  * Console command to create a NgRest Crud with Controller, Api and Model based on a SQL Table.
@@ -19,6 +21,11 @@ use luya\helpers\FileHelper;
  */
 class CrudController extends BaseCrudController
 {
+    /**
+     * @inheritdoc
+     */
+    public $defaultAction = 'create';
+    
     /**
      * @var string The name of the module which should be used in order to generate the crud structure e.g `cmsadmin`.
      */
@@ -428,20 +435,61 @@ class CrudController extends BaseCrudController
         ];
         
         foreach ($files as $file) {
-            FileHelper::createDirectory($file['path']);
-            if (file_exists($file['path'] . DIRECTORY_SEPARATOR . $file['fileName'])) {
-                if (!$this->confirm("The File '{$file['fileName']}' already exists, do you want to override the existing file?")) {
-                    continue;
-                }
-            }
-            
-            if (FileHelper::writeFile($file['path'] . DIRECTORY_SEPARATOR . $file['fileName'], $file['content'])) {
-                $this->outputSuccess("Wrote file '{$file['fileName']}'.");
-            } else {
-                $this->outputError("Error while writing file '{$file['fileName']}'.");
-            }
+            $this->generateFile($file);
         }
         
         return $this->outputSuccess($this->generateBuildSummery($this->apiEndpoint, $this->getNamespace() . '\\apis\\' . $this->getModelNameCamlized() . 'Controller', $this->getModelNameCamlized(), $this->getSummaryControllerRoute()));
+    }
+    
+    protected function generateFile(array $file)
+    {
+        FileHelper::createDirectory($file['path']);
+        if (file_exists($file['path'] . DIRECTORY_SEPARATOR . $file['fileName'])) {
+            if (!$this->confirm("The File '{$file['fileName']}' already exists, do you want to override the existing file?")) {
+                return false;
+            }
+        }
+        
+        if (FileHelper::writeFile($file['path'] . DIRECTORY_SEPARATOR . $file['fileName'], $file['content'])) {
+            $this->outputSuccess("Wrote file '{$file['fileName']}'.");
+        } else {
+            $this->outputError("Error while writing file '{$file['fileName']}'.");
+        }
+    }
+    
+    /**
+     * Generate only the ngrest model
+     * 
+     * @param string $model Provide 
+     */
+    public function actionModel($model = null)
+    {
+        if (!$model) {
+            $model = $this->prompt('Namespaced path to the ngrest model (e.g. "app\models\Users"):');
+        }
+        $object = Yii::createObject(['class' => $model]);
+        
+        if (!$object instanceof NgRestModelInterface) {
+            throw new Exception("Model must be instance of NgRestModelInterface.");
+        }
+        
+        $reflector = new \ReflectionClass($model);
+        $fileName = $reflector->getFileName();
+        $path = dirname($fileName);
+        $apiEndpoint = $object->ngrestApiEndpoint();
+        $i18n = !empty($object->i18n);
+        $data = [
+            'path' =>  $path,
+            'fileName' => basename($fileName),
+            'content' => $this->generateModelContent(
+                $reflector->getNamespaceName(),
+                $reflector->getShortName(),
+                $apiEndpoint,
+                Yii::$app->db->getTableSchema($object->tableName(), true),
+                $i18n
+             ),
+        ];
+        
+        $this->generateFile($data);
     }
 }

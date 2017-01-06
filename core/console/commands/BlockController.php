@@ -19,6 +19,11 @@ use luya\helpers\FileHelper;
 class BlockController extends \luya\console\Command
 {
     /**
+     * @inheritdoc
+     */
+    public $defaultAction = 'create';
+    
+    /**
      * @var string Type module
      */
     const TYPE_MODULE = 'module';

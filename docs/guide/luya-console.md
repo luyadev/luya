@@ -22,6 +22,7 @@ Global LUYA commands:
 |`health`|Tests all basic directory if they are writeable and existing.
 |`health/mailer`|Check if you mailer component is working and can send mails.
 |`crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
+|`crud/model`|Generates only the [NgRestModel](ngrest-model.md). Usage `./vendor/bin/luya crud/model "app\models\Customer"` 
 |`module/create`|Create new [frontend/admin module](app-module.md) with a wizzard.
 |`block/create`|Create new [CMS content blocks](app-blocks.md) with a wizzard.
 |`aw/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
