@@ -17,13 +17,14 @@ class m161230_173046_issue1125 extends Migration
 			'name' => $this->string(),
 			'phone' => $this->string(),
 			'address' => $this->string(),
+		    'active' => $this->boolean()->defaultValue(false),
 		]);
     }
 
     public function down()
     {
-        echo "m161230_173046_issue1125 cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('ngresttest_order');
+        
+        $this->dropTable('ngresttest_customer');
     }
 }

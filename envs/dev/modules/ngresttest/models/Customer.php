@@ -44,7 +44,9 @@ class Customer extends NgRestModel
     public function rules()
     {
         return [
+            [['name'], 'required'],
             [['name', 'phone', 'address'], 'string', 'max' => 255],
+            [['active'], 'integer']
         ];
     }
 
@@ -73,6 +75,7 @@ class Customer extends NgRestModel
             'name' => 'text',
             'phone' => 'text',
             'address' => 'text',
+            'active' => 'toggleStatus',
         ];
     }
     
@@ -85,8 +88,8 @@ class Customer extends NgRestModel
     public function ngRestConfig($config)
     {
         // define fields for types based from ngrestAttributeTypes
-        $this->ngRestConfigDefine($config, 'list', ['name', 'phone', 'address']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['name', 'phone', 'address']);
+        $this->ngRestConfigDefine($config, 'list', ['name', 'phone', 'address', 'active']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['name', 'phone', 'address', 'active']);
         
         // enable or disable ability to delete;
         $config->delete = false; 

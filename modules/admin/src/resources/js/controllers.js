@@ -509,6 +509,20 @@
 			}
 		}
 		
+		$scope.toggleStatus = function(row, fieldName, fieldLabel, bindValue) {
+			var invertValue = !bindValue;
+			var invert = invertValue ? 1 : 0;
+			var rowId = row[$scope.config.pk];
+			var json = {};
+			json[fieldName] = invert;
+			$http.put($scope.config.apiEndpoint + '/' + rowId, angular.toJson(json, true)).success(function(data) {
+				row.active = invert;
+				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}), 1500);
+			}).error(function(data) {
+				$scope.printErrors(data);
+			});
+		}
+		
 		$scope.data = {
 			create : {},
 			update : {},

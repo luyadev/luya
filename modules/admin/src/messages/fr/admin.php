@@ -222,4 +222,5 @@ return [
     'model_user_lastlogintimestamp' => 'Last login',
     'model_user_title_mr' => 'Mr.',
     'model_user_title_mrs' => 'Ms.',
+    'js_ngrest_toggler_success' => '%field% successfully updated.',
 ];

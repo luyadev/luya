@@ -12,6 +12,22 @@ function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
+/**
+ * i18n localisation with params.
+ * 
+ * ```js
+ * i18nParam('js_i18n_translation_name', {variable: value});
+ * ```
+ * 
+ * Translations File:
+ * 
+ * ```php
+ * 'js_i18n_translation_name' => 'Hello %variable%',
+ * ```
+ * @param varName
+ * @param params
+ * @returns
+ */
 function i18nParam(varName, params) {
 	var varValue = i18n[varName];
 
