@@ -99,6 +99,8 @@ class MyBlock extends \luya\cms\base\PhpBlock
 
 Now the generated injector ActiveQueryCheckboxInjector is going to grab all informations from the defined query and assign them into the extra var `newsData`. Now you can access `$extras['newsData']` which returns all seleced rows from the checkbox you have assigend.
 
+> In order to append the injected variable to the end of the form use `'append' => true`.
+
 For example your view file could now look like this:
 
 ```php

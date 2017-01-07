@@ -35,6 +35,12 @@ abstract class BlockConfigElement
         $this->id = md5($this->get('var').uniqid());
     }
 
+    /**
+     * Has the config element an element or not.
+     * 
+     * @param string $key
+     * @return boolean
+     */
     protected function has($key)
     {
         if (!is_array($key)) {
@@ -50,6 +56,13 @@ abstract class BlockConfigElement
         return true;
     }
 
+    /**
+     * Get the element value.
+     * 
+     * @param string $key
+     * @param mixed $default
+     * @return string
+     */
     protected function get($key, $default = null)
     {
         if (!$this->has($key)) {

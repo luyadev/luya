@@ -53,4 +53,16 @@ class LinkInjectorTest extends CmsFrontendTestCase
         $this->assertSame('injector-test', $cfgs[0]['type']);
         $this->assertSame('zaa-text', $cfgs[1]['type']);
     }
+    
+    public function testAppendOfVar()
+    {
+    	$block = new StubBlock();
+    	$injector = new StubInjector(['context' => $block, 'append' => true]);
+    	$injector->setup();
+    
+    	$cfgs = $block->getConfigVarsExport();
+    
+    	$this->assertSame('injector-test', $cfgs[1]['type']);
+    	$this->assertSame('zaa-text', $cfgs[0]['type']);
+    }
 }

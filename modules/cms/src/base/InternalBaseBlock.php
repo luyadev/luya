@@ -44,6 +44,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     const INJECTOR_CFG = 'cfg';
 
+    /**
+     * Setup injectors.
+     */
     protected function injectorSetup()
     {
         foreach ($this->injectors() as $varName => $injector) {
@@ -77,9 +80,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     public $module = 'app';
     
     /**
-     * Whether cache is enabled for this block or not.
-     *
-     * @return boolean
+     * @inheritdoc
      */
     public function getIsCacheEnabled()
     {
@@ -87,7 +88,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
     
     /**
-     * The time of cache expiration
+     * @inheritdoc
      */
     public function getCacheExpirationTime()
     {
@@ -95,7 +96,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
     
     /**
-     * Whether is an container element or not.
+     * @inheritdoc
      */
     public function getIsContainer()
     {
@@ -247,15 +248,16 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
 
     /**
-     * Sets placeholder values.
-     *
-     * @param array $placeholders The array to be set as placeholder values
+     * @inheritdoc
      */
     public function setPlaceholderValues(array $placeholders)
     {
         $this->_placeholderValues = $placeholders;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getPlaceholderValues()
     {
         return $this->_placeholderValues;
@@ -285,15 +287,17 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
 
     /**
-     * Sets var values.
-     *
-     * @param array $values The array to be set as var values
+     * @inheritdoc
      */
     public function setVarValues(array $values)
     {
         $this->_varValues = $values;
     }
     
+    /**
+     * 
+     * @return array
+     */
     public function getVarValues()
     {
         return $this->_varValues;
@@ -314,21 +318,25 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
 
     
     /**
-     * Sets the config values.
-     *
-     * @param array $values The array to be set as config values
+     * @inheritdoc
      */
     public function setCfgValues(array $values)
     {
         $this->_cfgValues = $values;
     }
 
+    /**
+     * 
+     * @return array
+     */
     public function getCfgValues()
     {
         return $this->_cfgValues;
     }
 
     /**
+     * Define additional variables.
+     * 
      * @return array
      */
     public function extraVars()
@@ -336,6 +344,11 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return [];
     }
     
+    /**
+     * 
+     * @param unknown $key
+     * @param unknown $value
+     */
     public function addExtraVar($key, $value)
     {
         $this->_extraVars[$key] = $value;
@@ -343,7 +356,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     private $_extraVars = [];
     
-    // access from outside
+    /**
+     * @inheritdoc
+     */
     public function getExtraVarValues()
     {
         $this->_extraVars = ArrayHelper::merge($this->_extraVars, $this->extraVars());
@@ -352,6 +367,12 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     private $_assignExtraVars = false;
     
+    /**
+     * 
+     * @param unknown $key
+     * @param string $default
+     * @return string|mixed
+     */
     public function getExtraValue($key, $default = false)
     {
         if (!$this->_assignExtraVars) {
@@ -374,7 +395,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     private $_vars = [];
     
     /**
-     * @return array
+     * @inheritdoc
      */
     public function getConfigVarsExport()
     {
@@ -382,20 +403,29 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         
         if (isset($config['vars'])) {
             foreach ($config['vars'] as $item) {
-                $this->_vars[] = (new BlockVar($item))->toArray();
+            	$iteration = count($this->_vars) + 500;
+                $this->_vars[$iteration] = (new BlockVar($item))->toArray();
             }
         }
-
-        return $this->_vars;
+		ksort($this->_vars);
+        return array_values($this->_vars);
     }
 
-    public function addVar(array $varConfig)
+    /**
+     * Add a var variable to the config.
+     * 
+     * @param array $varConfig
+     * @param boolean Whether the variable should be append to the end instead of prepanding.
+     */
+    public function addVar(array $varConfig, $append = false)
     {
-        $this->_vars[] = (new BlockVar($varConfig))->toArray();
+    	$count = count($this->_vars);
+    	$iteration = $append ? $count + 1000 : $count;
+        $this->_vars[$iteration] = (new BlockVar($varConfig))->toArray();
     }
     
     /**
-     * @return array
+     * @inheritdoc
      */
     public function getConfigPlaceholdersExport()
     {
@@ -405,7 +435,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     private $_cfgs = [];
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function getConfigCfgsExport()
     {
@@ -413,16 +443,25 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         
         if (isset($config['cfgs'])) {
             foreach ($config['cfgs'] as $item) {
-                $this->_cfgs[] = (new BlockCfg($item))->toArray();
+            	$iteration = count($this->_cfgs) + 500;
+                $this->_cfgs[$iteration] = (new BlockCfg($item))->toArray();
             }
         }
-        
-        return $this->_cfgs;
+        ksort($this->_cfgs);
+        return array_values($this->_cfgs);
     }
     
-    public function addCfg(array $cfgConfig)
+    /**
+     * Add a cfg variable to the config.
+     * 
+     * @param array $cfgConfig
+     * @param boolean Whether the variable should be append to the end instead of prepanding.
+     */
+    public function addCfg(array $cfgConfig, $append = false)
     {
-        $this->_cfgs[] = (new BlockCfg($cfgConfig))->toArray();
+    	$count = count($this->_cfgs);
+    	$iteration = $append ? $count + 1000 : $count;
+        $this->_cfgs[$iteration] = (new BlockCfg($cfgConfig))->toArray();
     }
     
     /**

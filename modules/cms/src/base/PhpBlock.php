@@ -8,7 +8,7 @@ use yii\base\ViewContextInterface;
 /**
  * Represents a CMS block with PHP views.
  *
- * @property \luya\web\View $view View Object.
+ * @property \luya\cms\base\PhpBlockView $view View Object.
  *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
@@ -20,7 +20,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     /**
      * View Object getter.
      *
-     * @return object|mixed
+     * @return \luya\cms\base\PhpBlockView
      */
     public function getView()
     {
