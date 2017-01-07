@@ -2,9 +2,9 @@
 
 What is LUYA core? Why do i need it, and what can i do with?
 
-The LUYA Core extends the Yii2 application by helpers and more a more structured way to run an application. There is clear vision of how to use configuration files, how directories are arranged and a none reapeating way to start and bootstrap your application.
+The LUYA Core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by helpers and a structured way to run your application. There is clear vision of how to use configuration files, how directories are arranged, small configuration files, components are already set by the core and a DRY concept for your application.
 
-In other words i means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, sometimes with just an MVC provided by YII via the LUYA CORE sometimes you just need an administration area where you can manage data of your application and sometimes you also need a cms to manager the content.
+In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, sometimes with just an MVC provided by YII via the LUYA CORE sometimes you just need an administration area where you can manage data of your application and sometimes you also need a cms to manager the content.
 
 ## LUYA CORE as MVC
 
