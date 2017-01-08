@@ -52,4 +52,17 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
     	$this->assertSame('append', $cfg[0]['var']);
     	$this->assertSame('append2', $cfg[1]['var']);
     }
+    
+    public function testValueGetters()
+    {
+    	$block = new TestBlock();
+    	$block->setVarValues(['null' => null, 'empty' => '', 'false' => false, '0' => 0, 'as0' => 0]);
+    	
+    	$this->assertFalse($block->getVarValue('null', false));
+    	$this->assertFalse($block->getVarValue('empty', false));
+    	$this->assertFalse($block->getVarValue('false', false));
+    	$this->assertFalse($block->getVarValue('0', false));
+    	$this->assertFalse($block->getVarValue('as0', false));
+    	
+    }
 }

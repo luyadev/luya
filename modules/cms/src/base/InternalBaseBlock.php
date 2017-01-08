@@ -274,16 +274,17 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
 
     /**
-     * User method to get the values inside the class.
+     * Get var value.
      *
-     * @param string $key     The name of the key you want to retrieve
-     * @param mixed  $default A default value that will be returned if the key isn't found
+     * If the key does not exist in the array, is an empty string or null the default value will be returned.
      *
+     * @param string $key The name of the key you want to retrieve
+     * @param mixed  $default A default value that will be returned if the key isn't found or empty.
      * @return mixed
      */
     public function getVarValue($key, $default = false)
     {
-        return (array_key_exists($key, $this->_varValues)) ? $this->_varValues[$key] : $default;
+        return (isset($this->_varValues[$key]) && $this->_varValues[$key] != '') ? $this->_varValues[$key] : $default;
     }
 
     /**
@@ -304,16 +305,17 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
 
     /**
-     * User method to get the cfgs inside the block.
+     * Get cfg value.
      *
-     * @param string $key
-     * @param mixed  $default
+     * If the key does not exist in the array, is an empty string or null the default value will be returned.
      *
+     * @param string $key The name of the key you want to retrieve
+     * @param mixed  $default A default value that will be returned if the key isn't found or empty.
      * @return mixed
      */
     public function getCfgValue($key, $default = false)
     {
-        return (array_key_exists($key, $this->_cfgValues)) ? $this->_cfgValues[$key] : $default;
+        return (isset($this->_cfgValues[$key]) && $this->_cfgValues[$key] != '') ? $this->_cfgValues[$key] : $default;
     }
 
     
