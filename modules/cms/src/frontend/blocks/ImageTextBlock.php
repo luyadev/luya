@@ -62,12 +62,12 @@ final class ImageTextBlock extends TwigBlock
                     ],
                 ],
                 ['var' => 'margin', 'label' => Module::t('block_image_text_margin_label'), 'type' => 'zaa-select', 'initvalue' => $this->defaultMargin, 'options' => [
-                            ['value' => '5px', 'label' => '0 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '10px', 'label' => '10 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '15px', 'label' => '20 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '15px', 'label' => '30 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '15px', 'label' => '40 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '15px', 'label' => '50 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '5px', 'label' => '0 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '10px', 'label' => '10 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '20px', 'label' => '20 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '30px', 'label' => '30 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '40px', 'label' => '40 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '50px', 'label' => '50 ' . Module::t('block_image_text_margin_pixel')],
                     ],
                 ],
                 ['var' => 'textType', 'label' => Module::t('block_image_text_texttype_label'), 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
