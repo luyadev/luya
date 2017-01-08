@@ -1,13 +1,13 @@
 {
     "name" : "luyadev/luya-core",
-    "description" : "The LUYA core classes in addition to the Yii2 Framework",
+    "description" : "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
     "type" : "luya-core",
-    "keywords" : ["php", "luya", "yii2", "yii", "wrapper"],
+    "keywords" : ["luya", "core", "yii2", "yii", "cms", "admin"],
     "license": "MIT",
-    "homepage" : "http://luya.io",
+    "homepage" : "https://luya.io",
     "authors" : [
         {
-            "name" : "Basil",
+            "name" : "Basil Suter",
             "email" : "git@nadar.io",
             "homepage" : "https://github.com/nadar"
         }
