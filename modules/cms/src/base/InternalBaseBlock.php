@@ -345,9 +345,11 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
     
     /**
+     * Add an extra var entry.
      * 
-     * @param unknown $key
-     * @param unknown $value
+     * If the extra var is defined in extraVars() the key will be overriden.
+     * @param string $key
+     * @param mixed $value
      */
     public function addExtraVar($key, $value)
     {
@@ -361,7 +363,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     public function getExtraVarValues()
     {
-        $this->_extraVars = ArrayHelper::merge($this->_extraVars, $this->extraVars());
+        $this->_extraVars = ArrayHelper::merge($this->extraVars(), $this->_extraVars);
         return $this->_extraVars;
     }
     
@@ -369,7 +371,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     /**
      * 
-     * @param unknown $key
+     * @param string $key
      * @param string $default
      * @return string|mixed
      */
