@@ -104,7 +104,7 @@ abstract class Property extends Component implements TypesInterface
      */
     public function __toString()
     {
-        return $this->getValue();
+        return empty($this->getValue()) ? '' : $this->getValue();
     }
     
     /**
