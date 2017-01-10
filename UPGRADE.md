@@ -8,6 +8,8 @@ This document will help you upgrading from a LUYA Version into another. For more
 
 + [#1109](https://github.com/luyadev/luya/issues/1109) All blocks deliverd from the LUYA core modules are marked as `final` so you are not able to extend from those blocks. Make sure you extend from the `luya\cms\base\Block` class.
 
+As we merged migrations files from older beta releases, you can find all delete files in the following [commit](https://github.com/luyadev/luya/commit/78f5304054be95ad317a80455587d8a4e0a0b9a8#diff-ecf9849552b303be6db5a3bd40029037).
+
 1.0.0-RC2 (29. Nov 2016)
 -----------------------
 
