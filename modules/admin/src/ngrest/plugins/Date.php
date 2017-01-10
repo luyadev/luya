@@ -58,7 +58,7 @@ class Date extends Plugin
      */
     public function renderCreate($id, $ngModel)
     {
-        return $this->createFormTag('zaa-date', $id, $ngModel, ['dateFormat' => $this->dateFormat]);
+        return $this->createFormTag('zaa-date', $id, $ngModel, ['dateformat' => $this->dateFormat]);
     }
 
     /**

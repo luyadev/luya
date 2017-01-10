@@ -659,20 +659,19 @@
             scope: {
                 "model": "=",
                 "options": "=",
-                "dateFormat": "=",
+                "dateformat": "@dateformat",
                 "label": "@label",
                 "id": "@fieldid",
                 "name": "@fieldname",
                 "i18n": "@i18n"
             },
         	controller: function($scope, $filter) {
-
             	$scope.$watch(function() { return $scope.model }, function(n, o) {
             		
             		if (n != null && n != undefined) {
             			var datep = new Date(n*1000);
             			$scope.pickerPreselect = datep;
-            			$scope.date = $filter('date')(datep, $scope.dateFormat);
+            			$scope.date = $filter('date')(datep, $scope.dateformat);
             		} else {
             			$scope.date = null;
             			$scope.model = null;
@@ -713,7 +712,7 @@
 
             },
             template: function() {
-            	return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="{{dateFormat}}"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-class="{\'red\': datePickerToggler}" ng-click="toggleDatePicker()"><i class="material-icons" ng-hide="datePickerToggler">date_range</i><i class="material-icons" style="margin-top: 1px;" ng-show="datePickerToggler">close</i></span></datepicker></div></div></div>';
+            	return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="{{dateformat}}"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-class="{\'red\': datePickerToggler}" ng-click="toggleDatePicker()"><i class="material-icons" ng-hide="datePickerToggler">date_range</i><i class="material-icons" style="margin-top: 1px;" ng-show="datePickerToggler">close</i></span></datepicker></div></div></div>';
             }
         }
     });
