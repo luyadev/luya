@@ -25,6 +25,11 @@ class Date extends Plugin
      * or date is null/empty.
      */
     public $emptyMessage = '-';
+
+    /**
+     * @var string The format of date will be use when showing data
+     */
+    public $dateFormat = 'shortDate';
     
     /**
      * @inheritdoc
@@ -32,7 +37,7 @@ class Date extends Plugin
     public function renderList($id, $ngModel)
     {
         return [
-            $this->createTag('span', null, ['ng-show' => $ngModel, 'ng-bind' => $ngModel.'*1000 | date : \'shortDate\'']),
+            $this->createTag('span', null, ['ng-show' => $ngModel, 'ng-bind' => $ngModel.'*1000 | date : \'' . $this->dateFormat . '\'']),
             $this->createTag('span', $this->emptyMessage, ['ng-show' => '!'.$ngModel]),
         ];
     }
@@ -42,7 +47,7 @@ class Date extends Plugin
      */
     public function renderCreate($id, $ngModel)
     {
-        return $this->createFormTag('zaa-date', $id, $ngModel);
+        return $this->createFormTag('zaa-date', $id, $ngModel, ['dateFormat' => $this->dateFormat]);
     }
 
     /**
