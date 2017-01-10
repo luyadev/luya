@@ -67,7 +67,7 @@ class MyImage extends \luya\admin\base\ImageProperty
 
 In order to get use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage'); ?>" />`.
 
-> All properties implement the magical method `__toString()` and will return the return value from the `getValue()` method by default. Keep in mind that this is only true for the echo or return context. When checking for the existance of the value, explicitely use the `getValue()` methos as otherwise you will always receive the Property object.
+> All properties implement the magical method `__toString()` and will return the return value from the `getValue()` method by default. Keep in mind that this is only true for the echo or return context. When checking for the existance of a value, explicitely use the `getValue()` method as otherwise the Property object is returned, which always resolves to true.
 
 ## Get the Proprety value
 
