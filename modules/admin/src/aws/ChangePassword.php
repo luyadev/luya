@@ -13,6 +13,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  *
  * The model where you apply the ChangePassword ActiveWindow must implement the {{\luya\admin\aws\ChangePasswordInterface}}.
  *
+ * @todo rename to ChangePasswordActiveWindow
  * @author Basil Suter <basil@nadar.io>
  */
 class ChangePassword extends ActiveWindow
