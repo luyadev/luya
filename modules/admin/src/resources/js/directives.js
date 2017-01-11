@@ -700,7 +700,7 @@
                         $scope.date = null;
                         $scope.model = null;
                     } else {
-                        $scope.model = Date.parse(n);
+                        $scope.model = Date.parse(n) / 1000;
                         if (!$scope.model) {
                             var res = n.split($scope.separator);
                             if (res.length == 3) {
