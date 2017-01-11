@@ -43,6 +43,14 @@ class Date extends Plugin
     public $dateFormat = 'shortDate';
 
     /**
+     * @var string The separator of date format when you use your own format
+     * It will be use in js to convert date to timestamp. Default is '/'
+     *
+     * It very useful when your separator is not '/'
+     */
+    public $separator = '/';
+
+    /**
      * @inheritdoc
      */
     public function renderList($id, $ngModel)
@@ -58,7 +66,7 @@ class Date extends Plugin
      */
     public function renderCreate($id, $ngModel)
     {
-        return $this->createFormTag('zaa-date', $id, $ngModel, ['dateformat' => $this->dateFormat]);
+        return $this->createFormTag('zaa-date', $id, $ngModel, ['dateformat' => $this->dateFormat, 'separator' => $this->separator]);
     }
 
     /**
