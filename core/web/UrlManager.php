@@ -46,6 +46,23 @@ class UrlManager extends \yii\web\UrlManager
     private $_composition = null;
 
     /**
+     * Ensure whether a route starts with a language short key or not.
+     * 
+     * @param string $route The route to check `en/module/controller/action` or without `module/controller/action`
+     * @param string $language The language to check whether it exists or not `en`.
+     * @return boolean
+     */
+    public function routeHasLanguageCompositionPrefix($route, $language)
+    {
+        $parts = explode("/", $route);
+        if (isset($parts[0]) && $parts[0] == $language) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
      * Extend functionality of parent::parseRequest() by verify and resolve the composition informations.
      *
      * {@inheritDoc}
@@ -62,15 +79,20 @@ class UrlManager extends \yii\web\UrlManager
         
         $parsedRequest = parent::parseRequest($request);
 
+        // ensure if the parsed route first match equals the composition pattern.
+        // This can be the case when composition is hidden, but not default language is loaded and a
+        // url composition route is loaded!
+        // @see https://github.com/luyadev/luya/issues/1146
+        $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver['compositionKeys']['langShortCode']);
+        
         // if enableStrictParsing is enabled and the route is not found, $parsedRequest will return `false`.
-        if ($this->getComposition()->hidden || $parsedRequest === false) {
+        if ($res === false && ($this->composition->hidden || $parsedRequest === false)) {
             return $parsedRequest;
         }
         
-        $composition = $this->getComposition()->full;
+        $composition = $this->composition->createRoute();
         $length = strlen($composition);
         $route = $parsedRequest[0];
-        
         
         if (substr($route, 0, $length+1) == $composition.'/') {
             $parsedRequest[0] = substr($parsedRequest[0], $length);
@@ -126,6 +148,16 @@ class UrlManager extends \yii\web\UrlManager
         return $this->_menu;
     }
 
+    /**
+     * Setter method for the composition component.
+     * 
+     * @param \luya\web\Composition $composition
+     */
+    public function setComposition(Composition $composition)
+    {
+        $this->_composition = $composition;
+    }
+    
     /**
      * Get the composition component
      *
@@ -239,12 +271,14 @@ class UrlManager extends \yii\web\UrlManager
         $composition = (empty($composition)) ? $this->getComposition() : $composition;
         
         $originalParams = $params;
-        // creata parameter where route contains a composition
-        $params[0] = $composition->prependTo($params[0]);
-
+        
+        // prepand the original route, whether is hidden or not! 
+        // https://github.com/luyadev/luya/issues/1146
+        $params[0] = $composition->prependTo($params[0], $composition->createRoute());
+        
         $response = parent::createUrl($params);
 
-        // check if the parsed route is the same as before, if
+        // Check if the parsed route with the prepand composition has been found or not.
         if (strpos($response, $params[0]) !== false) {
             // we got back the same url from the createUrl, no match against composition route.
             $response = parent::createUrl($originalParams);
