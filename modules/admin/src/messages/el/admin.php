@@ -1,6 +1,6 @@
 <?php
 return [
-    'language_name' => 'Greek',
+    'language_name' => 'Ελληνικά',
     'button_save' => 'Αποθήκευση',
     'button_confirm' => 'Ναι',
     'button_abort' => 'Ακύρωση',
