@@ -31,6 +31,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count($obj->children));
         $this->assertEquals(11, count($obj->siblings));
         $this->assertFalse($obj->hasChildren());
+        $this->assertTrue($obj->isHome);
     }
     
     public function testChildItem()
@@ -39,6 +40,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals("/luya/envs/dev/public_html/en/page1/p1-page3", $obj->link);
         $this->assertEquals(2, $obj->depth);
         $this->assertEquals(6, count($obj->siblings));
+        $this->assertFalse($obj->isHome);
     }
     
     /*

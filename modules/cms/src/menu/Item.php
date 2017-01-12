@@ -42,7 +42,7 @@ use luya\web\LinkTrait;
  * @property array $sibilings Get all sibilings for the current item, this also includes the current item iteself.
  * @property array $teardown Return all parent elemtns **with** the current item.
  * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
- *
+ * @property boolean $isHome Returns true if the item is the home item, otherwise false.
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta1
  */
@@ -116,6 +116,16 @@ class Item extends Object implements LinkInterface
     public function getIsHidden()
     {
         return (bool) $this->itemArray['is_hidden'];
+    }
+    
+    /**
+     * Whether current item is home or not.
+     * 
+     * @return boolean Returns true if the item is the home item, otherwise false.
+     */
+    public function getIsHome()
+    {
+        return (bool) $this->itemArray['is_home'];
     }
     
     /**
