@@ -37,6 +37,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1156](https://github.com/luyadev/luya/issues/1156) Fixed issue where crawler preview does not decode html entities.
 - [#1146](https://github.com/luyadev/luya/issues/1146) Fixed url rule behavior when composition is hidden but an url rule is a composition rule.
 - [#1147](https://github.com/luyadev/luya/issues/1147) Empty file caption names contains the original file name.
 - [#1130](https://github.com/luyadev/luya/issues/1130) Fixed issue which prevents item redirection loops.

@@ -24,6 +24,9 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -36,10 +39,13 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             'last_update' => 'last update'
         ];
     }
-
-    /* custom methods */
     
-    public static function indexer($item, &$index)
+    /**
+     * 
+     * @param unknown $item
+     * @param unknown $index
+     */
+    private static function indexer($item, &$index)
     {
         if (empty($index)) {
             $index = $item;
@@ -52,6 +58,13 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         }
     }
 
+    /**
+     * Search by query in an iteligent way
+     * @param unknown $query
+     * @param unknown $languageInfo
+     * @param string $returnQuery
+     * @return \yii\db\ActiveQuery|\yii\db\ActiveRecord[]
+     */
     public static function searchByQuery($query, $languageInfo, $returnQuery = false)
     {
         $query = trim(htmlentities($query, ENT_QUOTES));
@@ -99,6 +112,13 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         return $result;
     }
     
+    /**
+     * Search By query name.
+     * 
+     * @param unknown $query
+     * @param unknown $languageInfo
+     * @return \yii\db\ActiveRecord[]
+     */
     public static function flatSearchByQuery($query, $languageInfo)
     {
         $query = trim(htmlentities($query, ENT_QUOTES));
@@ -125,11 +145,25 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         return $result;
     }
 
+    /**
+     * Generate preview from the search word and the corresponding cut amount.
+     * 
+     * @param string $word The word too lookup in the `$content` variable.
+     * @param number $cutAmount The amount of words on the left and right side of the word.
+     * @return mixed
+     */
     public function preview($word, $cutAmount = 150)
     {
-        return $this->highlight($word, $this->cut($word, $this->content, $cutAmount));
+        return $this->highlight($word, $this->cut($word, html_entity_decode($this->content), $cutAmount));
     }
 
+    /**
+     * 
+     * @param unknown $word
+     * @param unknown $context
+     * @param number $truncateAmount
+     * @return string
+     */
     public function cut($word, $context, $truncateAmount = 150)
     {
         $pos = strpos($context, $word);
@@ -140,29 +174,43 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         }
         // cut right
         if ((strlen($originalContext) - $pos) > $truncateAmount) {
-            $context = substr($context, 0, -(strlen($originalContext) - ($pos + strlen($word)) - $truncateAmount)).'...';
+            $context = substr($context, 0, -(strlen($originalContext) - ($pos + strlen($word) + 1) - $truncateAmount)).'...';
         }
 
         return $context;
     }
 
+    /**
+     * 
+     * @param unknown $word
+     * @param unknown $text
+     * @param string $sheme
+     * @return mixed
+     */
     public function highlight($word, $text, $sheme = "<span style='background-color:#FFEBD1; color:black;'>%s</span>")
     {
         return preg_replace("/".preg_quote(htmlentities($word, ENT_QUOTES), '/')."/i", sprintf($sheme, $word), $text);
     }
-
-    /* ngrest model properties */
-
+    
+    /**
+     * @inheritdoc
+     */
     public function genericSearchFields()
     {
         return ['url', 'content', 'title', 'language_info'];
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function ngRestApiEndpoint()
     {
         return 'api-crawler-index';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -176,6 +224,9 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function ngRestConfig($config)
     {
         $this->ngRestConfigDefine($config, 'list', ['title', 'url', 'language_info', 'last_update', 'added_to_index']);
