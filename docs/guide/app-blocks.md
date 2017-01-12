@@ -69,6 +69,15 @@ In the example above, the view file should looke like this:
 <?php endif; ?>
 ```
 
+In order to retrieve values from configurations (`$this->[METHOD]`):
+
+|Type|Method
+|----|------
+|var|{{luya\cms\base\PhpBlockView::varValue}}
+|cfg|{{luya\cms\base\PhpBlockView::cfgValue}}
+|extra|{{luya\cms\base\PhpBlockView::extraValue}}
+|placeholder|{{luya\cms\base\PhpBlockView::placeholderValue}}
+
 Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
 
 #### Register and import
