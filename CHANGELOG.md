@@ -36,7 +36,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
-- [#1147)(https://github.com/luyadev/luya/issues/1147) Empty file caption names contains the original file name.
+- [#1146](https://github.com/luyadev/luya/issues/1146) Fixed url rule behavior when composition is hidden but an url rule is a composition rule.
+- [#1147](https://github.com/luyadev/luya/issues/1147) Empty file caption names contains the original file name.
 - [#1130](https://github.com/luyadev/luya/issues/1130) Fixed issue which prevents item redirection loops.
 - [#1101](https://github.com/luyadev/luya/issues/1101) Rest model validation did not use proper language for the yii translations based on the user language.
 - [#1111](https://github.com/luyadev/luya/issues/1111) Storage File selection does not display file name cause of not strict comparing method.
