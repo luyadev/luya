@@ -21,7 +21,6 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1136](https://github.com/luyadev/luya/issues/1136) Block generate uses the luya\admin\base\TypesInterface.
 - [#1134](https://github.com/luyadev/luya/issues/1134) ToggleStatus plugin ables to toggle the status from the crud list overview.
 - [#1133](https://github.com/luyadev/luya/issues/1133) Added callable $labelField and getter access for ngrest plugin luya\admin\ngrest\plugins\SelectModel.
-- [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain language added.
 - [#1120](https://github.com/luyadev/luya/issues/1120) Add Hook mechanism in order to trigger contents.
 - [#1115](https://github.com/luyadev/luya/issues/1115) ActiveDataProvider default sorting configuration for news article overview.
 - [#1018](https://github.com/luyadev/luya/issues/1018) NgRest SelectModel Plugins where conditions, labelFields and labelTemplate properties added.
@@ -33,6 +32,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1096](https://github.com/luyadev/luya/issues/1096) News Module added teaser_text field in article model.
 - [#1006](https://github.com/luyadev/luya/issues/1006) Added spanish translations to all luya core modules and administration interface.
 - [#1103](https://github.com/luyadev/luya/issues/1103) InfoActiveWindow make usage of the yii\widgets\DetailView in order to configure attributes.
+- [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain language added.
+- [#1154](https://github.com/luyadev/luya/issues/1154) Italian language added.
 
 ### Fixed
 
