@@ -28,7 +28,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  *     "album_id" => "int(11) NOT NULL default 0",
  * ]);
  * ```
- * 
+ *
  * @todo rename to FilemanagerGalleryActiveWindow
  * @author Basil Suter <basil@nadar.io>
  */

@@ -9,7 +9,7 @@ class CrawlerTestCase extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $boot = new Boot();
-        $boot->setConfigArray( [
+        $boot->setConfigArray([
             'id' => 'testenv',
             'siteTitle' => 'Luya Tests',
             'remoteToken' => 'testtoken',

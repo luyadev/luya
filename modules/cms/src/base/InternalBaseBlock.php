@@ -296,7 +296,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
     
     /**
-     * 
+     *
      * @return array
      */
     public function getVarValues()
@@ -328,7 +328,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
 
     /**
-     * 
+     *
      * @return array
      */
     public function getCfgValues()
@@ -338,7 +338,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
 
     /**
      * Define additional variables.
-     * 
+     *
      * @return array
      */
     public function extraVars()
@@ -348,7 +348,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     /**
      * Add an extra var entry.
-     * 
+     *
      * If the extra var is defined in extraVars() the key will be overriden.
      * @param string $key
      * @param mixed $value
@@ -372,7 +372,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     private $_assignExtraVars = false;
     
     /**
-     * 
+     *
      * @param string $key
      * @param string $default
      * @return string|mixed
@@ -407,24 +407,24 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         
         if (isset($config['vars'])) {
             foreach ($config['vars'] as $item) {
-            	$iteration = count($this->_vars) + 500;
+                $iteration = count($this->_vars) + 500;
                 $this->_vars[$iteration] = (new BlockVar($item))->toArray();
             }
         }
-		ksort($this->_vars);
+        ksort($this->_vars);
         return array_values($this->_vars);
     }
 
     /**
      * Add a var variable to the config.
-     * 
+     *
      * @param array $varConfig
      * @param boolean Whether the variable should be append to the end instead of prepanding.
      */
     public function addVar(array $varConfig, $append = false)
     {
-    	$count = count($this->_vars);
-    	$iteration = $append ? $count + 1000 : $count;
+        $count = count($this->_vars);
+        $iteration = $append ? $count + 1000 : $count;
         $this->_vars[$iteration] = (new BlockVar($varConfig))->toArray();
     }
     
@@ -447,7 +447,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         
         if (isset($config['cfgs'])) {
             foreach ($config['cfgs'] as $item) {
-            	$iteration = count($this->_cfgs) + 500;
+                $iteration = count($this->_cfgs) + 500;
                 $this->_cfgs[$iteration] = (new BlockCfg($item))->toArray();
             }
         }
@@ -457,14 +457,14 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     /**
      * Add a cfg variable to the config.
-     * 
+     *
      * @param array $cfgConfig
      * @param boolean Whether the variable should be append to the end instead of prepanding.
      */
     public function addCfg(array $cfgConfig, $append = false)
     {
-    	$count = count($this->_cfgs);
-    	$iteration = $append ? $count + 1000 : $count;
+        $count = count($this->_cfgs);
+        $iteration = $append ? $count + 1000 : $count;
         $this->_cfgs[$iteration] = (new BlockCfg($cfgConfig))->toArray();
     }
     

@@ -17,9 +17,9 @@ use luya\web\ExternalLink;
  */
 final class ImageBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
     /**
@@ -94,22 +94,22 @@ final class ImageBlock extends PhpBlock
     
     /**
      * Get the Link Object.
-     * 
+     *
      * Linkable resources must implement {{luya\web\LinkInterface}}.
-     * 
+     *
      * @return \luya\web\ExternalLink|\luya\cms\menu\Item|boolean
      */
     public function getLinkObject()
     {
-    	if ($this->getCfgValue('externalLink', false)) {
-    		return new ExternalLink(['href' => $this->getCfgValue('externalLink', false)]);
-    	}
-    	
-    	if ($this->getCfgValue('internalLink', false)) {
-    		return Yii::$app->menu->find()->where(['nav_id' => $this->getCfgValue('internalLink')])->one();
-    	}
-    	
-    	return false;
+        if ($this->getCfgValue('externalLink', false)) {
+            return new ExternalLink(['href' => $this->getCfgValue('externalLink', false)]);
+        }
+        
+        if ($this->getCfgValue('internalLink', false)) {
+            return Yii::$app->menu->find()->where(['nav_id' => $this->getCfgValue('internalLink')])->one();
+        }
+        
+        return false;
     }
 
     /**
@@ -121,7 +121,7 @@ final class ImageBlock extends PhpBlock
             'image' => BlockHelper::imageUpload($this->getVarValue('imageId')),
             'imageAdmin' => BlockHelper::imageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
             'text' => $this->getText(),
-        	'link' => $this->getLinkObject(),
+            'link' => $this->getLinkObject(),
         ];
     }
 
