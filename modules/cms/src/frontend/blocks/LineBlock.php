@@ -23,6 +23,14 @@ final class LineBlock extends TwigBlock
     {
         return 'remove';
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getIsDirtyDialogEnabled()
+    {
+    	return false;
+    }
 
     public function config()
     {

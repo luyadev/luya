@@ -98,6 +98,14 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @inheritdoc
      */
+    public function getIsDirtyDialogEnabled()
+    {
+    	return true;
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function getIsContainer()
     {
         return $this->isContainer;
