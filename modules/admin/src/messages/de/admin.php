@@ -226,4 +226,5 @@ return [
     'model_user_title_mr' => 'Herr',
     'model_user_title_mrs' => 'Frau',
     'js_ngrest_toggler_success' => '%field% wurde erfolgreich aktualisiert.',
+    'layout_image_filter_selection' => 'Bild Filter auswählen:',
 ];

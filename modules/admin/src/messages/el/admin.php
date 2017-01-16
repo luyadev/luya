@@ -209,4 +209,5 @@ return [
     'model_user_title_mr' => 'Κος.',
     'model_user_title_mrs' => 'Κα.',
     'js_ngrest_toggler_success' => '%field% ενημερώθηκε επιτυχώς.',
+    'layout_image_filter_selection' => 'Select image Filter:',
 ];

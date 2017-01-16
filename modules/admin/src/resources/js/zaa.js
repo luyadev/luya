@@ -147,7 +147,9 @@ function typeCastValue(value) {
 	/**
 	 * Usage:
 	 *
+	 * ```
 	 * <div zaa-esc="methodClosesThisDiv()" />
+	 * ```
 	 */
 	zaa.directive("zaaEsc", function() {
 		return function(scope, element, attrs) {
@@ -158,6 +160,27 @@ function typeCastValue(value) {
 					});
 				}
 			});
+		};
+	});
+	
+	/**
+	 * Converty a string to number value, usefull in selects.
+	 * 
+	 * ```
+	 * <select name="filterId" ng-model="filterId" convert-to-number>
+	 * ```
+	 */
+	zaa.directive('convertToNumber', function() {
+		return {
+		    require: 'ngModel',
+		    link: function(scope, element, attrs, ngModel) {
+				ngModel.$parsers.push(function(val) {
+				    return val != null ? parseInt(val, 10) : null;
+				});
+				ngModel.$formatters.push(function(val) {
+				    return val != null ? '' + val : null;
+				});
+		    }
 		};
 	});
 

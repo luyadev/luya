@@ -125,7 +125,7 @@ $this->beginPage()
         <div ng-if="imageNotFoundError" class="alert alert--danger" style="margin-top:0px;">The requested image id ({{ngModel}}) could not be found anymore. The orignal file has been deleted in the filemanager!</div>
         <storage-file-upload ng-model="fileId"></storage-file-upload>
         <div ng-show="originalFileIsRemoved">
-            <div class="alert alert--danger"><?php echo Admin::t('layout_deleted_file'); ?></div>
+            <div class="alert alert--danger"><?= Admin::t('layout_deleted_file'); ?></div>
         </div><!--
         --><div class="imageupload__preview" ng-show="imageinfo != null">
             <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="responsive-img" />
@@ -145,8 +145,8 @@ $this->beginPage()
             </div>
         </div>
         <div class="imageupload__filter" ng-show="!noFilters() && imageinfo != null">
-            <label>Filter Auswahl</label>
-            <select name="filterId" ng-model="filterId"><option value="0"><?php echo Admin::t('layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
+            <label><?= Admin::t('layout_image_filter_selection'); ?></label>
+            <select name="filterId" ng-model="filterId" convert-to-number><option value="0"><?= Admin::t('layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div>
 
     </div>
