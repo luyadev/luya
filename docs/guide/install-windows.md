@@ -50,9 +50,4 @@ The setup proccess will ask you for an email and password to store your personal
 
 You can now log in into your administration interface `http://localhost/luya-kickstarter/public_html/admin` (depending on where you have located the luya files). When you have successfull logged into the administration area, navigate to **System** -> **Groups** and click **Authorizations**. This will open an Active Window where you can enable all permissions for your Group.
 
-Problems
---------
-
-When you have Problems with installing *LUYA* or have unexpected errors or strange behaviors, let us know and [Issue on GitHub](https://github.com/luyadev/luya/issues) or [Join the Gitter Chat](https://gitter.im/luyadev/luya) we love your Feedback!
-
-[![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+> Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA Setup.
