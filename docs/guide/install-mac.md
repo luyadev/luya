@@ -32,3 +32,5 @@ change the php version to your current active php version. To verify and test th
 which php
 php -i
 ```
+
+> Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA Setup.
