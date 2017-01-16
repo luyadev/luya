@@ -134,7 +134,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Set block variations.
-     * 
+     *
      * ```php
      * 'blockVariations' => [
      *     TextBlock::class => [
@@ -146,7 +146,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      *     ]
      * ]
      * ```
-     * 
+     *
      * @param array $config
      */
     public function setBlockVariations(array $config)

@@ -8,8 +8,8 @@ use luya\admin\ngrest\plugins\SelectModel;
 
 /**
  * Order.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  *
  * @property integer $id
  * @property integer $customer_id
@@ -66,31 +66,31 @@ class Order extends NgRestModel
     
     public function getCustomerName()
     {
-    	return $this->customer->address;
+        return $this->customer->address;
     }
     
     public function getOriginalCustomerId()
     {
-    	return $this->getOldAttribute('customer_id');
+        return $this->getOldAttribute('customer_id');
     }
     
     public function getCustomer()
     {
-    	return $this->hasOne(Customer::className(), ['id' => 'originalCustomerId']);
+        return $this->hasOne(Customer::className(), ['id' => 'originalCustomerId']);
     }
 
     public function extraFields()
     {
-    	return [
-    		'customerName',
-    	];
+        return [
+            'customerName',
+        ];
     }
     
     public function ngRestExtraAttributeTypes()
     {
-    	return [
-    		'customerName' => 'text',
-    	];
+        return [
+            'customerName' => 'text',
+        ];
     }
     
     /**
@@ -100,10 +100,10 @@ class Order extends NgRestModel
     {
         return [
             'customer_id' => [
-            	'class' => SelectModel::class,
-            	'modelClass' => Customer::className(),
-            	'valueField' => 'id',
-            	'labelField' => 'name',
+                'class' => SelectModel::class,
+                'modelClass' => Customer::className(),
+                'valueField' => 'id',
+                'labelField' => 'name',
             ],
             'title' => 'text',
         ];
@@ -122,7 +122,7 @@ class Order extends NgRestModel
         $this->ngRestConfigDefine($config, ['create', 'update'], ['customer_id', 'title']);
         
         // enable or disable ability to delete;
-        $config->delete = false; 
+        $config->delete = false;
         
         return $config;
     }

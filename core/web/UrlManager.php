@@ -47,7 +47,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Ensure whether a route starts with a language short key or not.
-     * 
+     *
      * @param string $route The route to check `en/module/controller/action` or without `module/controller/action`
      * @param string $language The language to check whether it exists or not `en`.
      * @return boolean
@@ -150,7 +150,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Setter method for the composition component.
-     * 
+     *
      * @param \luya\web\Composition $composition
      */
     public function setComposition(Composition $composition)
@@ -272,7 +272,7 @@ class UrlManager extends \yii\web\UrlManager
         
         $originalParams = $params;
         
-        // prepand the original route, whether is hidden or not! 
+        // prepand the original route, whether is hidden or not!
         // https://github.com/luyadev/luya/issues/1146
         $params[0] = $composition->prependTo($params[0], $composition->createRoute());
         

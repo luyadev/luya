@@ -34,4 +34,3 @@ class UserIdentity extends Model implements IdentityInterface
         return false;
     }
 }
-    

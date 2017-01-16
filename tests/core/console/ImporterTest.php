@@ -11,7 +11,7 @@ class StubImporter extends Importer
 {
     public function run()
     {
-        return $this->importer->id;   
+        return $this->importer->id;
     }
 }
 

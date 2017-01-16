@@ -14,9 +14,9 @@ use luya\cms\base\PhpBlock;
  */
 final class ListBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
     /**
@@ -45,7 +45,7 @@ final class ListBlock extends PhpBlock
      */
     public function blockGroup()
     {
-    	return TextGroup::className();
+        return TextGroup::className();
     }
 
     /**

@@ -34,7 +34,7 @@ final class SpacingBlock extends TwigBlock
      */
     public function getIsDirtyDialogEnabled()
     {
-    	return false;
+        return false;
     }
 
     public function icon()

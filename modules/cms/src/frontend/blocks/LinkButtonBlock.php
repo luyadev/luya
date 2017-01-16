@@ -13,14 +13,14 @@ use luya\cms\injectors\LinkInjector;
  */
 final class LinkButtonBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
-	public $module = 'cms';
-	
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
+    public $module = 'cms';
+    
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
 
     /**
@@ -44,11 +44,11 @@ final class LinkButtonBlock extends PhpBlock
      */
     public function injectors()
     {
-    	return [
-    		'linkData' => new LinkInjector([
-    			'varLabel' => Module::t('block_link_button_btnlabel_label'),
-    		]),
-    	];
+        return [
+            'linkData' => new LinkInjector([
+                'varLabel' => Module::t('block_link_button_btnlabel_label'),
+            ]),
+        ];
     }
 
     /**

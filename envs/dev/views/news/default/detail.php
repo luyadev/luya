@@ -4,12 +4,12 @@
 ?>
 <h1><?= $model->title; ?></h1>
 <ol>
-<? foreach ($model->tags as $tag): ?>
-<li><? print_r($tag->toArray()); ?><?= $tag->name; ?></li>
-<? endforeach; ?>
+<?php foreach ($model->tags as $tag): ?>
+<li><?php print_r($tag->toArray()); ?><?= $tag->name; ?></li>
+<?php endforeach; ?>
 </ol>
 
 
-<? foreach ($model->findTags() as $tag): ?>
+<?php foreach ($model->findTags() as $tag): ?>
 <?= $tag->name; ?><br />
-<? endforeach; ?>
+<?php endforeach; ?>

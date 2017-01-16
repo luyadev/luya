@@ -7,7 +7,6 @@ use luya\web\Asset;
 
 class TestAsset extends Asset
 {
-	
 }
 
 class ViewTest extends \luyatests\LuyaWebTestCase
@@ -37,7 +36,7 @@ class ViewTest extends \luyatests\LuyaWebTestCase
     
     public function testAssetUrlGetter()
     {
-    	/*
+        /*
     	$view = new View();
     	TestAsset::register($view);
     	*/

@@ -36,7 +36,7 @@ interface TypesInterface
     
     /**
      * @var string The example out for the link type:
-     * 
+     *
      * ```php
      * ['type' => 2, 'value' => 'https://luya.io']
      * ```
@@ -95,7 +95,7 @@ interface TypesInterface
     
     /**
      * @var string The arrayable json output would be:
-     * 
+     *
      * ```php
      * [['value' => 1], ['value' => 2]]]
      * ```

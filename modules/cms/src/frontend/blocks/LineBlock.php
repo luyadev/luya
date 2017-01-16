@@ -12,14 +12,14 @@ use luya\cms\base\PhpBlock;
  */
 final class LineBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
-	public $module = 'cms';
-	
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
+    public $module = 'cms';
+    
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
     
     /**
@@ -43,7 +43,7 @@ final class LineBlock extends PhpBlock
      */
     public function getIsDirtyDialogEnabled()
     {
-    	return false;
+        return false;
     }
 
     /**

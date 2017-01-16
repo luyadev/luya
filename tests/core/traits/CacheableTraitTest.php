@@ -47,11 +47,11 @@ class CacheableTraitTest extends LuyaWebTestCase
     
     public function testFlushAllCache()
     {
-    	Yii::$app->set('cache', ['class' => UnitCache::className()]);
-    	$cache = new CacheStub();
-    	$cache->setHasCache('foo', 'bar');
-    	$this->assertSame('bar', $cache->getHasCache('foo'));
-		$this->assertTrue($cache->flushHasCache());
-		$this->assertFalse($cache->getHasCache('foo'));
+        Yii::$app->set('cache', ['class' => UnitCache::className()]);
+        $cache = new CacheStub();
+        $cache->setHasCache('foo', 'bar');
+        $this->assertSame('bar', $cache->getHasCache('foo'));
+        $this->assertTrue($cache->flushHasCache());
+        $this->assertFalse($cache->getHasCache('foo'));
     }
 }

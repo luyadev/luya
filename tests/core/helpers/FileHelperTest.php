@@ -61,14 +61,14 @@ class FileHelperTest extends LuyaWebTestCase
     
     public function testWriteFile()
     {
-    	$this->assertTrue(FileHelper::writeFile('@runtime/temp.txt', 'Hello World'));
-    	$this->assertFalse(FileHelper::writeFile('@does/not/exists/nofile.txt', 'Hello World'));
+        $this->assertTrue(FileHelper::writeFile('@runtime/temp.txt', 'Hello World'));
+        $this->assertFalse(FileHelper::writeFile('@does/not/exists/nofile.txt', 'Hello World'));
     }
     
     public function testGetFileContent()
     {
-    	$this->assertSame('Hello World', FileHelper::getFileContent('@runtime/temp.txt'));
-    	
-    	$this->assertFalse(FileHelper::getFileContent('doesNotExist.txt'));
+        $this->assertSame('Hello World', FileHelper::getFileContent('@runtime/temp.txt'));
+        
+        $this->assertFalse(FileHelper::getFileContent('doesNotExist.txt'));
     }
 }

@@ -5,7 +5,7 @@ use yii\widgets\LinkPager;
 /* @var $provider \yii\data\ActiveDataProvider */
 ?>
 <h2>News Overview</h2>
-<?php foreach($provider->models as $item): ?>
+<?php foreach ($provider->models as $item): ?>
     <?php /* @var $item \luya\news\models\Article */ ?>
     <pre>
         <?php print_r($item->toArray()); ?>

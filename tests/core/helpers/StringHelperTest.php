@@ -23,34 +23,34 @@ class StringHelperTest extends LuyaWebTestCase
 
     public function testIsFloat()
     {
-    	$this->assertTrue(StringHelper::isFloat('1.0'));
-    	$this->assertTrue(StringHelper::isFloat("1.0"));
-    	$this->assertTrue(StringHelper::isFloat(1.0));
-    	$this->assertTrue(StringHelper::isFloat(1));
-    	$this->assertTrue(StringHelper::isFloat('1'));
-    	$this->assertTrue(StringHelper::isFloat('-1'));
-    	$float = 1.0;
-    	$this->assertTrue(StringHelper::isFloat($float));
-    	
-    	$this->assertFalse(StringHelper::isFloat('string'));
+        $this->assertTrue(StringHelper::isFloat('1.0'));
+        $this->assertTrue(StringHelper::isFloat("1.0"));
+        $this->assertTrue(StringHelper::isFloat(1.0));
+        $this->assertTrue(StringHelper::isFloat(1));
+        $this->assertTrue(StringHelper::isFloat('1'));
+        $this->assertTrue(StringHelper::isFloat('-1'));
+        $float = 1.0;
+        $this->assertTrue(StringHelper::isFloat($float));
+        
+        $this->assertFalse(StringHelper::isFloat('string'));
     }
     
     public function testTypeCastNumeric()
     {
-    	$this->assertSame(1, StringHelper::typeCastNumeric('1'));
-    	$this->assertSame(1.5, StringHelper::typeCastNumeric('1.5'));
-    	$this->assertSame(-1, StringHelper::typeCastNumeric('-1'));
-    	$this->assertSame(-1.5, StringHelper::typeCastNumeric('-1.5'));
-    	
-    	$this->assertSame(1, StringHelper::typeCastNumeric(1));
-    	$this->assertSame(1.5, StringHelper::typeCastNumeric(1.5));
-    	$this->assertSame(-1, StringHelper::typeCastNumeric(-1));
-    	$this->assertSame(-1.5, StringHelper::typeCastNumeric(-1.5));
-    	
-    	$this->assertSame(1, StringHelper::typeCastNumeric(true));
-    	$this->assertSame(0, StringHelper::typeCastNumeric(false));
-    	$this->assertSame('string', StringHelper::typeCastNumeric('string'));
-    	$this->assertSame([], StringHelper::typeCastNumeric([]));
+        $this->assertSame(1, StringHelper::typeCastNumeric('1'));
+        $this->assertSame(1.5, StringHelper::typeCastNumeric('1.5'));
+        $this->assertSame(-1, StringHelper::typeCastNumeric('-1'));
+        $this->assertSame(-1.5, StringHelper::typeCastNumeric('-1.5'));
+        
+        $this->assertSame(1, StringHelper::typeCastNumeric(1));
+        $this->assertSame(1.5, StringHelper::typeCastNumeric(1.5));
+        $this->assertSame(-1, StringHelper::typeCastNumeric(-1));
+        $this->assertSame(-1.5, StringHelper::typeCastNumeric(-1.5));
+        
+        $this->assertSame(1, StringHelper::typeCastNumeric(true));
+        $this->assertSame(0, StringHelper::typeCastNumeric(false));
+        $this->assertSame('string', StringHelper::typeCastNumeric('string'));
+        $this->assertSame([], StringHelper::typeCastNumeric([]));
     }
     
     public function testContains()

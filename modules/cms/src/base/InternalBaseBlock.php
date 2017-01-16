@@ -100,7 +100,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     public function getIsDirtyDialogEnabled()
     {
-    	return true;
+        return true;
     }
     
     /**
@@ -513,16 +513,16 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     /**
      * Configure Variations.
-     * 
+     *
      * ```php
      * TextBlock::variations()
      *     ->add('bold', 'Bold Font with Markdown')->cfgs(['cssClass' => 'bold-font-class'])->vars(['textType' => 1])
      *     ->add('italic', 'Italic Font')->cfgs(['cssClass' => 'italic-font-class'])
      *     ->register(),
      * VideoBlock::variations()
-     *     ->add('bold', 'Bold Videos')->cfgs([])->register(), 
+     *     ->add('bold', 'Bold Videos')->cfgs([])->register(),
      * ```
-     * 
+     *
      * @return \luya\cms\base\BlockFlavor
      */
     public static function variations()

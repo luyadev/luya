@@ -7,7 +7,7 @@ use yii\helpers\Html;
 ?>
 <?php if (!empty($this->extraValue('linkData'))): ?>
     <?= Html::a($this->varValue('label'), $this->extraValue('linkData')->href, [
-    	'class' => $this->extraValue('cssClass', null),
-    	'target' => $this->cfgValue('targetBlank') ? '_blank' : null,
+        'class' => $this->extraValue('cssClass', null),
+        'target' => $this->cfgValue('targetBlank') ? '_blank' : null,
     ]); ?>
 <?php endif; ?>

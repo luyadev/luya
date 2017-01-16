@@ -63,6 +63,6 @@ final class DevBlock extends PhpBlock
      */
     public function getIsDirtyDialogEnabled()
     {
-    	return false;
+        return false;
     }
 }

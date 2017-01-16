@@ -8,7 +8,6 @@ use luya\base\DynamicModel;
 
 class StubTestModel extends DynamicModel
 {
-    
 }
 
 class DynamicModelTest extends LuyaWebTestCase

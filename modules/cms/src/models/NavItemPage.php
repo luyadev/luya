@@ -236,7 +236,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                                 switch ($type) {
                                     case "vars": $blockObject->setVarValues($typeContent); break;
                                     case "cfgs": $blockObject->setCfgValues($typeContent); break;
-                                    case "extras": 
+                                    case "extras":
                                         foreach ($typeContent as $extraKey => $extraValue) {
                                             $blockObject->addExtraVar($extraKey, $extraValue);
                                         }
@@ -304,7 +304,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
     /**
      * Convert a json string to an array.
-     * 
+     *
      * @param string $json
      * @return array
      */
@@ -374,7 +374,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
     /**
      * Get the arrayable values from a specific block id.
-     * 
+     *
      * @param integer $blockId
      * @return array
      */
@@ -438,7 +438,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             '__placeholders' => $placeholders,
             'variations' => isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false,
             'variation' => empty($blockItem['variation'])? "0" : $blockItem['variation'], // as by angular selection
-        	'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
+            'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
         ];
     }
     

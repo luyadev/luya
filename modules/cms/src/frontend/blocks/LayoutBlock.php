@@ -14,9 +14,9 @@ use luya\cms\base\PhpBlock;
  */
 final class LayoutBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
     /**

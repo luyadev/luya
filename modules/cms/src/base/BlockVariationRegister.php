@@ -6,9 +6,9 @@ use yii\helpers\Inflector;
 
 /**
  * Generate Block Flavor Variations.
- * 
+ *
  * The register output generates:
- * 
+ *
  * ```php
  * textBlock::class => [
  *                   'variation1' => [
@@ -18,16 +18,16 @@ use yii\helpers\Inflector;
  *                   ],
  *               ]
  * ```
- * 
+ *
  * In order to configure the blockVariations property of the cms admin module:
- * 
+ *
  * ```php
  * TextBlock::variations()
  *     ->add('bold', 'Bold Font with Markdown')->cfgs(['cssClass' => 'bold-font-class'])->vars(['textType' => 1])
  *     ->add('italic', 'Italic Font')->cfgs(['cssClass' => 'italic-font-class'])
  *     ->register(),
  * VideoBlock::variations()
- *     ->add('bold', 'Bold Videos')->cfgs([])->register(), 
+ *     ->add('bold', 'Bold Videos')->cfgs([])->register(),
  * ```
  * @author Basil Suter <basil@nadar.io>
  *
@@ -48,12 +48,12 @@ class BlockVariationRegister
      */
     public function __construct(InternalBaseBlock $block)
     {
-        $this->block = $block;    
+        $this->block = $block;
     }
     
     /**
      * Register a new flavor.
-     * 
+     *
      * @param string $identifier
      * @param string $title
      * @return \luya\cms\base\BlockVariationRegister
@@ -73,7 +73,7 @@ class BlockVariationRegister
     
     /**
      * Flavor CFG variables.
-     * 
+     *
      * @param array $config
      * @return \luya\cms\base\BlockVariationRegister
      */
@@ -85,7 +85,7 @@ class BlockVariationRegister
     
     /**
      * Flavor VAR variables.
-     * 
+     *
      * @param array $config
      * @return \luya\cms\base\BlockVariationRegister
      */
@@ -97,7 +97,7 @@ class BlockVariationRegister
     
     /**
      * Flavor EXTRA variables.
-     * 
+     *
      * @param array $config
      * @return \luya\cms\base\BlockVariationRegister
      */
@@ -114,5 +114,4 @@ class BlockVariationRegister
     {
         return [$this->block->className() => $this->_variations];
     }
-    
 }

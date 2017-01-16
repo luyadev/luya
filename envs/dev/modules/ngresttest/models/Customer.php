@@ -7,8 +7,8 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Customer.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  *
  * @property integer $id
  * @property string $name
@@ -92,7 +92,7 @@ class Customer extends NgRestModel
         $this->ngRestConfigDefine($config, ['create', 'update'], ['name', 'phone', 'address', 'active']);
         
         // enable or disable ability to delete;
-        $config->delete = false; 
+        $config->delete = false;
         
         return $config;
     }

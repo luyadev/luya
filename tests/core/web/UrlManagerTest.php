@@ -98,7 +98,6 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $route = $urlManager->parseRequest($request);
         
         $this->assertFalse($route);
-    
     }
 
     public function testCompositionRequest()
@@ -283,16 +282,16 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
     
     public function testCompositionRuleWithHiddenLanguageAsUrlCreation()
     {
-    	$request = new Request();
-    	$request->pathInfo = '/';
-    	$composition = new Composition($request, ['hidden' => true, 'default' => ['langShortCode' => 'fr']]);
-    	$urlManager = new UrlManager();
-    	$urlManager->composition = $composition;
-    	$urlManager->addRules([
-    			['pattern' => '', 'route' => 'wirpre/default/index'],
-    			['pattern' => 'impressum', 'route' => 'wirpre/default/imprint', 'composition' => ['fr' => 'mentions-legales']],
-    	]);
-    	$url = $urlManager->createUrl(['/wirpre/default/imprint']);
-    	$this->assertContains('/mentions-legales', $url);
+        $request = new Request();
+        $request->pathInfo = '/';
+        $composition = new Composition($request, ['hidden' => true, 'default' => ['langShortCode' => 'fr']]);
+        $urlManager = new UrlManager();
+        $urlManager->composition = $composition;
+        $urlManager->addRules([
+                ['pattern' => '', 'route' => 'wirpre/default/index'],
+                ['pattern' => 'impressum', 'route' => 'wirpre/default/imprint', 'composition' => ['fr' => 'mentions-legales']],
+        ]);
+        $url = $urlManager->createUrl(['/wirpre/default/imprint']);
+        $this->assertContains('/mentions-legales', $url);
     }
 }

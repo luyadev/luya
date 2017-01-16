@@ -116,7 +116,7 @@ class Block extends NgRestModel
     
     /**
      * Get the block object from the database with context informations.
-     * 
+     *
      * @param unknown $blockId
      * @param unknown $id
      * @param unknown $context
