@@ -2,7 +2,6 @@
 
 namespace luya\cms\frontend\blocks;
 
-use Yii;
 use luya\cms\frontend\Module;
 use luya\cms\base\PhpBlock;
 use luya\cms\injectors\LinkInjector;
@@ -84,16 +83,6 @@ final class LinkButtonBlock extends PhpBlock
         return [
             'cssClass' => $this->getCfgValue('simpleLink') ? null : 'btn btn-default',
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function twigFrontend()
-    {
-        return '{% if extras.linkTarget is not empty %}<a class="{{ extras.cssClass }}"{% if cfgs.targetBlank == 1  %}target="_blank" ' .
-        '{% endif %} href="{{ extras.linkTarget }}">{% if vars.label is not empty %} {{ vars.label }} {% endif %}' .
-        '</a>{% endif %}';
     }
 
     /**
