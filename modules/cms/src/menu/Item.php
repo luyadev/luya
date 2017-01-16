@@ -120,7 +120,7 @@ class Item extends Object implements LinkInterface
     
     /**
      * Whether current item is home or not.
-     * 
+     *
      * @return boolean Returns true if the item is the home item, otherwise false.
      */
     public function getIsHome()

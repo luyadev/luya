@@ -16,6 +16,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1117](https://github.com/luyadev/luya/issues/1117) Content Proxy allows you to sync files and data from one environment into another.
+- [#1140](https://github.com/luyadev/luya/issues/1140) Added new block getIsDirtyDialogEnabled() method in order to disable the dirty dialog when blocks do not require any configuration.
 - [#1116](https://github.com/luyadev/luya/issues/1116) Injectors can be appended to the end of the configuration list.
 - [#1135](https://github.com/luyadev/luya/issues/1135) Command to generate only the ngrest model `crud/model "path/to/Model"`.
 - [#1136](https://github.com/luyadev/luya/issues/1136) Block generate uses the luya\admin\base\TypesInterface.
@@ -37,6 +39,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1143](https://github.com/luyadev/luya/issues/1143) Fixed image directive filter preselection, due to an angular convert to number problem.
 - [#1156](https://github.com/luyadev/luya/issues/1156) Fixed issue where crawler preview does not decode html entities.
 - [#1146](https://github.com/luyadev/luya/issues/1146) Fixed url rule behavior when composition is hidden but an url rule is a composition rule.
 - [#1147](https://github.com/luyadev/luya/issues/1147) Empty file caption names contains the original file name.

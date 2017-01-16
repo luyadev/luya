@@ -393,6 +393,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
+        	'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
         ];
     }
     

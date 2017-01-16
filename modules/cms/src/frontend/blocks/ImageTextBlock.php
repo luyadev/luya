@@ -15,9 +15,9 @@ use luya\cms\base\PhpBlock;
  */
 final class ImageTextBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
     /**
@@ -120,7 +120,7 @@ final class ImageTextBlock extends PhpBlock
     public function extraVars()
     {
         return [
-        	'image' => BlockHelper::imageUpload($this->getVarValue('imageId')),
+            'image' => BlockHelper::imageUpload($this->getVarValue('imageId')),
             'text' => $this->getText(),
         ];
     }

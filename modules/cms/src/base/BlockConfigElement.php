@@ -37,7 +37,7 @@ abstract class BlockConfigElement
 
     /**
      * Has the config element an element or not.
-     * 
+     *
      * @param string $key
      * @return boolean
      */
@@ -58,7 +58,7 @@ abstract class BlockConfigElement
 
     /**
      * Get the element value.
-     * 
+     *
      * @param string $key
      * @param mixed $default
      * @return string

@@ -5,22 +5,52 @@ namespace luya\crawler\models;
 use Yii;
 use luya\crawler\admin\Module;
 use luya\crawler\models\Searchdata;
+use luya\helpers\Url;
+use yii\helpers\Inflector;
 
+/**
+ * This is the model class for table "crawler_index".
+ *
+ * @property integer $id
+ * @property string $url
+ * @property string $title
+ * @property string $content
+ * @property string $description
+ * @property string $language_info
+ * @property string $url_found_on_page
+ * @property string $group
+ * @property integer $added_to_index
+ * @property integer $last_update
+ * @property string $clickUrl
+ */
 class Index extends \luya\admin\ngrest\base\NgRestModel
 {
-    /* yii model properties */
-
+    public static $counter = 0;
+    
+    public static $searchDataId = 0;
+    
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'crawler_index';
     }
 
-    public function scenarios()
+    /**
+     * @inheritdoc
+     */
+    public function rules()
     {
         return [
-            'default' => ['url', 'content', 'title', 'language_info', 'added_to_index', 'last_update', 'url_found_on_page', 'group', 'description'],
-            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'last_update', 'url_found_on_page', 'added_to_index', 'group'],
-            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'last_update', 'url_found_on_page', 'added_to_index', 'group'],
+                [['url'], 'required'],
+                [['content', 'description'], 'string'],
+                [['added_to_index', 'last_update'], 'integer'],
+                [['url', 'title'], 'string', 'max' => 200],
+                [['language_info'], 'string', 'max' => 80],
+                [['url_found_on_page'], 'string', 'max' => 255],
+                [['group'], 'string', 'max' => 120],
+                [['url'], 'unique'],
         ];
     }
 
@@ -41,25 +71,60 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
     }
     
     /**
-     * 
-     * @param unknown $item
-     * @param unknown $index
+     * Getter $clickUrl.
+     *
+     * @return string
      */
-    private static function indexer($item, &$index)
+    public function getClickUrl()
     {
-        if (empty($index)) {
-            $index = $item;
-        } else {
-            foreach ($index as $k => $v) {
-                if (!array_key_exists($k, $item)) {
-                    unset($index[$k]);
-                }
-            }
-        }
+        static::$counter++;
+        
+        return Url::toRoute([
+            '/crawler/click/index',
+            'slug' => Inflector::slug($this->title),
+            'searchId' => static::$searchDataId,
+            'indexId' => $this->id,
+            'position' => static::$counter,
+        ], true);
     }
-
+    
     /**
-     * Search by query in an iteligent way
+     * Search by general Like statement.
+     *
+     * @param string $query
+     * @param string $languageInfo
+     * @return \yii\db\ActiveRecord[]
+     */
+    public static function flatSearchByQuery($query, $languageInfo)
+    {
+        $query = static::encodeQuery($query);
+    
+        if (strlen($query) < 1) {
+            return [];
+        }
+    
+        $q = self::find()->where(['like', 'content', $query]);
+        if (!empty($languageInfo)) {
+            $q->andWhere(['language_info' => $languageInfo]);
+        }
+        $result = $q->all();
+    
+        $searchData = new SearchData();
+        $searchData->attributes = [
+            'query' => $query,
+            'results' => count($result),
+            'timestamp' => time(),
+            'language' => Yii::$app->composition->language,
+        ];
+        if ($searchData->save()) {
+            static::$searchDataId = $searchData->id;
+        }
+    
+        return $result;
+    }
+    
+    /**
+     * Intelligent searc
      * @param unknown $query
      * @param unknown $languageInfo
      * @param string $returnQuery
@@ -67,7 +132,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
      */
     public static function searchByQuery($query, $languageInfo, $returnQuery = false)
     {
-        $query = trim(htmlentities($query, ENT_QUOTES));
+        $query = static::encodeQuery($query);
         
         if (strlen($query) < 1) {
             return [];
@@ -91,7 +156,6 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             $ids[] = $item['id'];
         }
         
-        
         $activeQuery = self::find()->where(['in', 'id', $ids]);
         
         if ($returnQuery) {
@@ -107,47 +171,46 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             'timestamp' => time(),
             'language' => Yii::$app->composition->language,
         ];
-        $searchData->save();
+        if ($searchData->save()) {
+            static::$searchDataId = $searchData->id;
+        }
         
         return $result;
     }
     
     /**
-     * Search By query name.
-     * 
-     * @param unknown $query
-     * @param unknown $languageInfo
-     * @return \yii\db\ActiveRecord[]
+     *
+     * @param unknown $item
+     * @param unknown $index
      */
-    public static function flatSearchByQuery($query, $languageInfo)
+    private static function indexer($item, &$index)
     {
-        $query = trim(htmlentities($query, ENT_QUOTES));
-        
-        if (strlen($query) < 1) {
-            return [];
+        if (empty($index)) {
+            $index = $item;
+        } else {
+            foreach ($index as $k => $v) {
+                if (!array_key_exists($k, $item)) {
+                    unset($index[$k]);
+                }
+            }
         }
-        
-        $q = self::find()->where(['like', 'content', $query]);
-        if (!empty($languageInfo)) {
-            $q->andWhere(['language_info' => $languageInfo]);
-        }
-        $result = $q->all();
-        
-        $searchData = new SearchData();
-        $searchData->attributes = [
-            'query' => $query,
-            'results' => count($result),
-            'timestamp' => time(),
-            'language' => Yii::$app->composition->language,
-        ];
-        $searchData->save();
-        
-        return $result;
     }
+    
+    /**
+     * Encode the input query.
+     *
+     * @param unknown $query
+     * @return string
+     */
+    private static function encodeQuery($query)
+    {
+        return trim(htmlentities($query, ENT_QUOTES));
+    }
+    
 
     /**
      * Generate preview from the search word and the corresponding cut amount.
-     * 
+     *
      * @param string $word The word too lookup in the `$content` variable.
      * @param number $cutAmount The amount of words on the left and right side of the word.
      * @return mixed
@@ -158,7 +221,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
     }
 
     /**
-     * 
+     *
      * @param unknown $word
      * @param unknown $context
      * @param number $truncateAmount
@@ -181,7 +244,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
     }
 
     /**
-     * 
+     *
      * @param unknown $word
      * @param unknown $text
      * @param string $sheme
@@ -197,7 +260,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
      */
     public function genericSearchFields()
     {
-        return ['url', 'content', 'title', 'language_info'];
+        return ['url', 'content', 'title'];
     }
 
     /**
