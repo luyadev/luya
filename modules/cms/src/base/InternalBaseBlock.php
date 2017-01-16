@@ -300,7 +300,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     public function setVarValues(array $values)
     {
-        $this->_varValues = $values;
+        foreach ($values as $key => $value) {
+            $this->_varValues[$key] = $value;
+        }
     }
     
     /**
@@ -332,7 +334,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     public function setCfgValues(array $values)
     {
-        $this->_cfgValues = $values;
+        foreach ($values as $key => $value) {
+            $this->_cfgValues[$key] = $value;
+        }
     }
 
     /**
@@ -505,6 +509,25 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         }
         
         return $moduleName;
+    }
+    
+    /**
+     * Configure Variations.
+     * 
+     * ```php
+     * TextBlock::variations()
+     *     ->flavor('bold', 'Bold Font with Markdown')->cfgs(['cssClass' => 'bold-font-class'])->vars(['textType' => 1])
+     *     ->flavor('italic', 'Italic Font')->cfgs(['cssClass' => 'italic-font-class'])
+     *     ->register(),
+     * VideoBlock::variations()
+     *     ->flavor('bold', 'Bold Videos')->cfgs([])->register(), 
+     * ```
+     * 
+     * @return \luya\cms\base\BlockFlavor
+     */
+    public static function variations()
+    {
+        return (new BlockFlavor(new static));
     }
     
     /**

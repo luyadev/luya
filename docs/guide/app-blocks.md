@@ -197,7 +197,7 @@ public function callbackHelloWorld($time)
 The above callback requires the parameter `$time` and must be called trough an ajax call inside of the javascript, to create the url for this specific callback we are going to use createAjaxLink:
 
 ```php
-$this->createAjaxLink('HellWorld', ['zeit' => time()]);
+$this->createAjaxLink('HellWorld', ['time' => time()]);
 ```
 
 You could store this created link from above inside your extras vars and pass it to the javascript.
@@ -255,3 +255,19 @@ You can also use one of the predefined group block class:
 + {{\luya\cms\frontend\blockgroups\DevelopmentGroup}}
 + {{\luya\cms\frontend\blockgroups\MediaGroup}}
 + {{\luya\cms\frontend\blockgroups\TextGroup}}
+
+# Variation Flavors
+
+In order to provide block flavors configure your `blockVariation` property of the `cmsadmin` module inside your configuration file as follow:
+
+```php
+'cmsadmin' => [
+    'class' => 'luya\cms\admin\Module',
+    'blockVariations' => [
+        TextBlock::variations()
+            ->flavor('bold-flavor', 'Bold font with Markdown')->cfgs(['cssClass' => 'bold-font'])->vars(['textType' => 1])
+            ->flavor('italic-flavor', 'Italic Font')->cfgs(['cssClass' => 'italic-font'])
+            ->register(),
+    ]
+],
+```
