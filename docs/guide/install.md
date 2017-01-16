@@ -55,4 +55,4 @@ You can now log in into your administration interface `http://localhost/luya-kic
 
 ![luya-set-permission](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-install-set-permission.jpg "LUYA Set permissions")
 
-Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA Setup.
+> Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA Setup.
