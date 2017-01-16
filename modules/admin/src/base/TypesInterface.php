@@ -35,7 +35,11 @@ interface TypesInterface
     const TYPE_DECIMAL = 'zaa-decimal';
     
     /**
-     * @var string
+     * @var string The example out for the link type:
+     * 
+     * ```php
+     * ['type' => 2, 'value' => 'https://luya.io']
+     * ```
      */
     const TYPE_LINK = 'zaa-link';
     
