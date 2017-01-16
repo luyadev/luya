@@ -24,27 +24,29 @@ copy env-local-db.php.dist env-local-db.php
 
 Now change the database connection inside the `configs/env-local-db.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Command Prompt and change into your project directory and excute the console command at `public_html` folder.
 
+> `php` command is available if you already add your php.exe path on your system environment variable
+
 Create all Database tables:
 
 ```sh
-composer exec luya migrate
+php index.php luya migrate
 ```
 
 Import specific data into the Database:
 
 ```sh
-composer exec luya import
+php index.php luya import
 ```
 
 At least we execute the setup command which will install an administration area user, group and sets the lowest permission.
 
 ```sh
-composer exec luya admin/setup
+php index.php luya admin/setup
 ```
 
 The setup proccess will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).
 
-> `composer exec luya health` will make a small check if several directorys are readable etc.
+> `php index.php luya health` will make a small check if several directorys are readable etc.
 
 You can now log in into your administration interface `http://localhost/luya-kickstarter/public_html/admin` (depending on where you have located the luya files). When you have successfull logged into the administration area, navigate to **System** -> **Groups** and click **Authorizations**. This will open an Active Window where you can enable all permissions for your Group.
 
