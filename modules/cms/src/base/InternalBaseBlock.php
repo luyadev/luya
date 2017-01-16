@@ -516,18 +516,18 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * 
      * ```php
      * TextBlock::variations()
-     *     ->flavor('bold', 'Bold Font with Markdown')->cfgs(['cssClass' => 'bold-font-class'])->vars(['textType' => 1])
-     *     ->flavor('italic', 'Italic Font')->cfgs(['cssClass' => 'italic-font-class'])
+     *     ->add('bold', 'Bold Font with Markdown')->cfgs(['cssClass' => 'bold-font-class'])->vars(['textType' => 1])
+     *     ->add('italic', 'Italic Font')->cfgs(['cssClass' => 'italic-font-class'])
      *     ->register(),
      * VideoBlock::variations()
-     *     ->flavor('bold', 'Bold Videos')->cfgs([])->register(), 
+     *     ->add('bold', 'Bold Videos')->cfgs([])->register(), 
      * ```
      * 
      * @return \luya\cms\base\BlockFlavor
      */
     public static function variations()
     {
-        return (new BlockFlavor(new static));
+        return (new BlockVariationRegister(new static));
     }
     
     /**

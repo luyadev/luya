@@ -23,16 +23,16 @@ use yii\helpers\Inflector;
  * 
  * ```php
  * TextBlock::variations()
- *     ->flavor('bold', 'Bold Font with Markdown')->cfgs(['cssClass' => 'bold-font-class'])->vars(['textType' => 1])
- *     ->flavor('italic', 'Italic Font')->cfgs(['cssClass' => 'italic-font-class'])
+ *     ->add('bold', 'Bold Font with Markdown')->cfgs(['cssClass' => 'bold-font-class'])->vars(['textType' => 1])
+ *     ->add('italic', 'Italic Font')->cfgs(['cssClass' => 'italic-font-class'])
  *     ->register(),
  * VideoBlock::variations()
- *     ->flavor('bold', 'Bold Videos')->cfgs([])->register(), 
+ *     ->add('bold', 'Bold Videos')->cfgs([])->register(), 
  * ```
  * @author Basil Suter <basil@nadar.io>
  *
  */
-class BlockFlavor
+class BlockVariationRegister
 {
     /**
      * @var \luya\cms\base\InternalBaseBlock Internal base block from where the BlockFlavor has been instantiatet.
@@ -56,9 +56,9 @@ class BlockFlavor
      * 
      * @param string $identifier
      * @param string $title
-     * @return \luya\cms\base\BlockFlavor
+     * @return \luya\cms\base\BlockVariationRegister
      */
-    public function flavor($identifier, $title)
+    public function add($identifier, $title)
     {
         $identifier = Inflector::slug($identifier);
         $this->_variations[$identifier] = [
@@ -75,7 +75,7 @@ class BlockFlavor
      * Flavor CFG variables.
      * 
      * @param array $config
-     * @return \luya\cms\base\BlockFlavor
+     * @return \luya\cms\base\BlockVariationRegister
      */
     public function cfgs(array $config)
     {
@@ -87,7 +87,7 @@ class BlockFlavor
      * Flavor VAR variables.
      * 
      * @param array $config
-     * @return \luya\cms\base\BlockFlavor
+     * @return \luya\cms\base\BlockVariationRegister
      */
     public function vars(array $config)
     {
@@ -99,7 +99,7 @@ class BlockFlavor
      * Flavor EXTRA variables.
      * 
      * @param array $config
-     * @return \luya\cms\base\BlockFlavor
+     * @return \luya\cms\base\BlockVariationRegister
      */
     public function extras(array $config)
     {

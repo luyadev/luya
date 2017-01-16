@@ -256,7 +256,7 @@ You can also use one of the predefined group block class:
 + {{\luya\cms\frontend\blockgroups\MediaGroup}}
 + {{\luya\cms\frontend\blockgroups\TextGroup}}
 
-# Variation Flavors
+# Variations
 
 In order to provide block flavors configure your `blockVariation` property of the `cmsadmin` module inside your configuration file as follow:
 
@@ -265,8 +265,8 @@ In order to provide block flavors configure your `blockVariation` property of th
     'class' => 'luya\cms\admin\Module',
     'blockVariations' => [
         TextBlock::variations()
-            ->flavor('bold-flavor', 'Bold font with Markdown')->cfgs(['cssClass' => 'bold-font'])->vars(['textType' => 1])
-            ->flavor('italic-flavor', 'Italic Font')->cfgs(['cssClass' => 'italic-font'])
+            ->add('bold-flavor', 'Bold font with Markdown')->cfgs(['cssClass' => 'bold-font'])->vars(['textType' => 1])
+            ->add('italic-flavor', 'Italic Font')->cfgs(['cssClass' => 'italic-font'])
             ->register(),
     ]
 ],
