@@ -16,6 +16,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1117](https://github.com/luyadev/luya/issues/1117) Content Proxy allows you to sync files and data from one environment into another.
 - [#1140](https://github.com/luyadev/luya/issues/1140) Added new block getIsDirtyDialogEnabled() method in order to disable the dirty dialog when blocks do not require any configuration.
 - [#1116](https://github.com/luyadev/luya/issues/1116) Injectors can be appended to the end of the configuration list.
 - [#1135](https://github.com/luyadev/luya/issues/1135) Command to generate only the ngrest model `crud/model "path/to/Model"`.
