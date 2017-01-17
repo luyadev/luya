@@ -34,3 +34,11 @@
 .useronline__modal tr td:first-of-type {
 	text-align: center;
 }
+
+.useronline__number {
+	position: absolute;
+	top:0;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 12px;
+}

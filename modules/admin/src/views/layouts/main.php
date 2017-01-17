@@ -410,48 +410,21 @@ $this->beginPage()
                     </li>
                 </ul>
 
-                <ul class="right navbar__right hide-on-small-only">
-                    <li ng-click="reload()" >
-                        <div class="navbar__button">
-                            <i class="material-icons">replay</i>
-                            <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_reload'); ?></p>
-                        </div>
-                    </li>
-                    <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
-                        <div class="navbar__button">
-                            <i class="material-icons">developer_board</i>
-                            <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_version'); ?></p>
-                        </div>
-                    </li>
-                    <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
-                        <div class="navbar__button navbar__button__circle">
-                            <div class="navbar__button__circle-icon">
-                                <p class="navbar__button__circle-usercount">{{notify.length}}</p>
-                            </div>
-                            <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_useronline'); ?></p>
-                        </div>
-                    </li>
-                    <li ng-click="toggleHelpPanel()" >
-                        <div class="navbar__button">
-                            <i class="material-icons">help_outline</i>
-                            <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_help'); ?></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="navbar__button navbar__button--redhighlight">
-                            <a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="navbar__button__anchor">
-                                <i class="material-icons">exit_to_app</i>
-                                <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_logout'); ?></p>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="navbar__button" ng-click="toggleUserPanel()">
-                            <i class="material-icons left">account_circle</i><strong><?php echo $user->firstname; ?></strong><!-- NO WHITESPACE
-                                    --><p class="icon__spawn-text"><?php echo Admin::t('layout_btn_profile'); ?></p>
-                        </div>
-                    </li>
-                </ul>
+
+
+                <div class="iconbar__wrapper">
+                    <div class="iconbar" ng-class="{ 'iconbar--slided' : iconbarOpen }">
+                        <ul class="right navbar__right">
+                            <li class="toggler">
+                                <a class="toggler__link" ng-click="iconbarOpen=!iconbarOpen"><i class="material-icons">keyboard_arrow_right</i></a>
+                            </li>
+                            <?= $this->render('_iconbar'); ?>
+                        </ul>
+                    </div>
+                    <span class="toggler toggler--hidden right">
+                        <a class="toggler__link" ng-click="iconbarOpen=!iconbarOpen"><i class="material-icons">keyboard_arrow_left</i></a>
+                    </span>
+                </div>
 
                 <ul class="side-nav" id="mobile-demo" ng-class="{ 'side-nav--open' : mobileOpen }">
                     <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }">
