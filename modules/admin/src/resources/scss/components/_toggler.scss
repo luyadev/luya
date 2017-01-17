@@ -1,0 +1,31 @@
+.toggler {
+
+    display:block;
+    opacity: 1;
+    background: color('orange', 'darken-1');
+    height: 100%;
+    user-select: none;
+    transition: opacity .25s ease-in-out;
+
+    @include breakpoint(desktop) {
+
+        display: none;
+        opacity: 0;
+
+    }
+    &:hover {
+        background: color('orange', 'lighten-1');
+    }
+}
+
+.toggler__list {
+
+}
+
+.toggler__link {
+    cursor: pointer;
+
+    i {
+        line-height: 60px;
+    }
+}

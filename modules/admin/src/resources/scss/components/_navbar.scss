@@ -1,21 +1,18 @@
 .nav-wrapper {
     padding-#{$navbar__search--position}: 60px;
+    min-height: 64px;
+
+    .material-icons {
+        line-height: 64px;
+    }
 }
 
 .navbar__button {
     cursor: pointer;
     max-height: 64px;
-    padding: 0 15px;
+    padding: 0 10px;
     // transition: 0.25s ease background-color;
 
-    &.navbar__button__circle {
-        min-height: 64px;
-        // transition: 0.25s ease color;
-
-        .icon__spawn-text {
-            top: -15px;
-        }
-    }
 
     &:hover {
         background-color: color("blue", "darken-2");
@@ -24,16 +21,11 @@
             opacity: 1;
         }
 
-        .navbar__button__circle-icon {
-            border-color: color("shades", "white");
-        }
-
         i,
         strong,
         .icon__spawn-text,
         .navbar__button__circle-usercount {
             color: color("shades", "white");
-
         }
     }
 }
@@ -64,29 +56,21 @@
     border-color: #fff;
     border-radius: 50%;
     display: block;
-    height: 32px;
     margin: 0 auto;
     position: relative;
-    top: 16px;
+    top: 18px;
     // transition: 0.25s ease border-color;
-    width: 32px;
+    width: 25px;
+    height: 25px;
+    
 }
 
 .navbar__button__circle-usercount {
-    margin-top: -18px;
+    margin-top: -19px;
     text-align: center;
+    font-size: 13px;
 }
 
-.icon__spawn-text {
-    font-size: 8px;
-    height: 0;
-
-    // transition: 0.25s ease opacity;
-    opacity: 0;
-    position: relative;
-    text-align: center;
-    top: -48px;
-}
 
 //MY END
 
