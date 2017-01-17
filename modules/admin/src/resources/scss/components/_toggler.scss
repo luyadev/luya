@@ -2,10 +2,10 @@
 
     display:block;
     opacity: 1;
-    background: color('orange', 'darken-1');
+    background-color: color('orange', 'darken-1');
     height: 100%;
     user-select: none;
-    transition: opacity .25s ease-in-out;
+    transition: opacity .25s ease-in-out, background-color .25s ease-in-out;
 
     @include breakpoint(desktop) {
 
@@ -13,8 +13,8 @@
         opacity: 0;
 
     }
-    &:hover {
-        background: color('orange', 'lighten-1');
+    &:hover, a:hover {
+        background-color: color('orange', 'lighten-1');
     }
 }
 

@@ -14,3 +14,19 @@
         width: auto;
     }
 }
+
+.side-nav {
+
+  transition: transform .25s ease-in-out;
+
+    &--open {
+
+      transform: translateX(0);
+    }
+
+    .navbar__icon {
+      margin-top: -15px !important;
+      padding-left: 15px;
+    }
+
+}
