@@ -85,11 +85,6 @@ final class LayoutBlock extends PhpBlock
         ];
     }
 
-    public function twigFrontend()
-    {
-        return '<div class="row {{cfgs.rowDivClass}}"><div class="col-md-{{ extras.leftWidth }} {{ cfgs.leftColumnClasses }}">{{ placeholders.left }}</div><div class="col-md-{{ extras.rightWidth }} {{ cfgs.rightColumnClasses }}">{{ placeholders.right }}</div></div>';
-    }
-
     /**
      * @inheritdoc
      */

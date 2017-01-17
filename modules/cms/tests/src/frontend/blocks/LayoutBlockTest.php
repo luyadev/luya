@@ -26,7 +26,7 @@ class LayoutBlockTest extends BlockTestCase
             'rightColumnClasses' => 'rightclass',
             'rowDivClass' => 'rowclass',
         ]);
-        $this->assertSame('<div class="row rowclass"><div class="col-md-6 leftclass"></div><div class="col-md-6 rightclass"></div></div>', $this->renderFrontendNoSpace());
+        $this->assertSame('<div class="row rowclass"><div class="col-md-6 leftclass"></div><div class="col-md-6 rightclass"></div></div>', $this->renderFrontendNoSpace());
     }
     
     public function testPlaceholderValues()
