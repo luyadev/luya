@@ -8,6 +8,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1114](https://github.com/luyadev/luya/issues/1114) Updated materializecss to newest version and removed unused files.
+- [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated, renamed or removed functions collection.
 - [#1126](https://github.com/luyadev/luya/issues/1126) Moved CLI commands to the related modules.
 - [#1102](https://github.com/luyadev/luya/issues/1102) Removed News Module Tag table and replace by admin modules Tag models.
@@ -40,6 +42,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1162](https://github.com/luyadev/luya/issues/1162) Unable to create pages from empty draft selection.
 - [#1143](https://github.com/luyadev/luya/issues/1143) Fixed image directive filter preselection, due to an angular convert to number problem.
 - [#1156](https://github.com/luyadev/luya/issues/1156) Fixed issue where crawler preview does not decode html entities.
 - [#1146](https://github.com/luyadev/luya/issues/1146) Fixed url rule behavior when composition is hidden but an url rule is a composition rule.

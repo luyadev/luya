@@ -17,6 +17,7 @@
             line-height: 30px;
             height: 30px;
             padding-left: 1px;
+            vertical-align: top;
         }
     }
 }
@@ -29,7 +30,6 @@
     border-left: 1px solid #ddd;
 }
 
-
 .editlog__collapsible-header {
     font-weight: bold;
     line-height: 3rem;
@@ -38,11 +38,10 @@
 
     min-height: 3rem;
     padding: 0 1rem;
-
-    cursor: pointer;
+    
     transition: color .25s ease-in-out;
 
-    color: color('grey','darken-2');
+    color: color('grey', 'darken-2');
     border-bottom: 1px solid #ddd;
     background-color: #fff;
 
@@ -64,14 +63,7 @@
         transition: color .25s ease-in-out;
         text-align: center;
 
-        color: color('grey','darken-2');
-    }
-    &:hover {
-        color: color('grey','darken-3');
-
-        i {
-            color: color('grey','darken-3');
-        }
+        color: color('grey', 'darken-2');
     }
 }
 
@@ -80,7 +72,6 @@
 
     border-bottom: 1px solid #ddd;
 }
-
 
 .editlog__collapsible-body-item {
     line-height: 2rem;

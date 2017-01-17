@@ -157,4 +157,7 @@ return [
     
 // rc2
     'model_navitem_title_tag_label' => 'Titel Tag (SEO)',
+    
+// 1.0.0
+    'model_navitempage_empty_draft_id' => 'Die Vorlage darf nicht leer sein.',
 ];

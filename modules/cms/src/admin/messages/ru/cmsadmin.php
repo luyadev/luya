@@ -151,11 +151,13 @@ return [
     'button_update_version' => 'Обновить версию',
     'menu_group_item_env_permission' => 'Страница прав',
 
-    // rc1
-
+// rc1
     'page_update_actions_deepcopy_text' => 'Создать копию текущей страницы вместе с контентом. Все языки будут скопированы, но только опубликованные версии.',
     'page_update_actions_deepcopy_btn' => 'Создать копию',
 
-    // rc2
+// rc2
     'model_navitem_title_tag_label' => 'Название тегов (SEO)',
+    
+// 1.0.0
+    'model_navitempage_empty_draft_id' => 'Unable to create page from empty draft template.',
 ];
