@@ -117,6 +117,7 @@ class ModuleController extends \luya\console\Command
             'basePath' => $moduleFolder,
             'adminPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'admin',
             'adminAwsPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'aws',
+            'adminMigrationPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'migrations',
             'frontendPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'frontend',
             'frontendBlocksPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'blocks',
             'frontendControllersPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'controllers',
