@@ -27,15 +27,17 @@
 					}
 				}
 				
+				$scope.toggler = true;
+				
 				init();
 			},
 			template : function() {
-				return '<div class="menu-dropdown__category" ng-repeat="container in menuData.containers">' +
+				return '<div class="menu-dropdown__category"><span style="cursor:pointer; user-select: none;" ng-click="toggler=!toggler"><i class="material-icons" ng-if="toggler">keyboard_arrow_down</i><i class="material-icons" ng-if="!toggler">keyboard_arrow_up</i></span><br /><div ng-show="toggler" ng-repeat="container in menuData.containers">' +
                             '<b class="menu-dropdown__title">{{container.name}}</b>' +
                             '<ul class="menu-dropdown__list">' +
                                 '<li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse\'"></li>' +
                             '</ul>' +
-                        '</div>';
+                        '</div><div>';
 			}
 		}
 	});
