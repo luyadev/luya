@@ -106,11 +106,13 @@
  * #NAVBAR__ICON
  */
 .navbar__icon {
+    float: left;
+    margin-right: 10px;
+    margin-top: -1px;
+
     &.right {
-        margin-left: 8px;
-    }
-    &.left {
-        margin-right: 8px;
+        float: right;
+        margin-left: 10px;
     }
 }
 

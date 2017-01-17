@@ -11,7 +11,6 @@
 
 .card {
   position: relative;
-  overflow: hidden;
   margin: $element-top-margin 0 $element-bottom-margin 0;
   background-color: $card-bg-color;
   transition: box-shadow .25s;
@@ -20,7 +19,6 @@
 
 
   .card-title {
-    color: $card-bg-color;
     font-size: 24px;
     font-weight: 300;
     &.activator {
@@ -33,9 +31,14 @@
     position: relative;
 
     .card-image {
+      max-height: 60%;
       overflow: hidden;
     }
+    .card-image + .card-content {
+      max-height: 40%;
+    }
     .card-content {
+      max-height: 100%;
       overflow: hidden;
     }
     .card-action {
@@ -48,37 +51,66 @@
 
   &.small {
     height: 300px;
-
-    .card-image {
-      height: 150px;
-    }
-    .card-content {
-      height: 150px;
-    }
-
   }
 
   &.medium {
     height: 400px;
-
-    .card-image {
-      height: 250px;
-    }
-    .card-content {
-      height: 150px;
-    }
   }
 
   &.large {
     height: 500px;
+  }
+
+  // Horizontal Cards
+  &.horizontal {
+    &.small, &.medium, &.large {
+      .card-image {
+        height: 100%;
+        max-height: none;
+        overflow: visible;
+
+        img {
+          height: 100%;
+        }
+      }
+    }
+
+    display: flex;
 
     .card-image {
-      height: 330px;
+      max-width: 50%;
+      img {
+        border-radius: 2px 0 0 2px;
+        max-width: 100%;
+        width: auto;
+      }
     }
-    .card-content {
-      height: 170px;
+
+    .card-stacked {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+
+      .card-content {
+        flex-grow: 1;
+      }
     }
   }
+
+  // Sticky Action Section
+  &.sticky-action {
+    .card-action {
+      z-index: 2;
+    }
+
+    .card-reveal {
+      z-index: 1;
+      padding-bottom: 64px;
+    }
+  }
+
+
 
 
   .card-image {
@@ -97,6 +129,7 @@
     }
 
     .card-title {
+      color: $card-bg-color;
       position: absolute;
       bottom: 0;
       left: 0;
@@ -109,7 +142,6 @@
     padding: $card-padding;
     border-radius: 0 0 2px 2px;
 
-
     p {
       margin: 0;
       color: inherit;
@@ -120,13 +152,15 @@
   }
 
   .card-action {
+    position: relative;
+    background-color: inherit;
     border-top: 1px solid rgba(160,160,160,.2);
     padding: $card-padding;
 
-    a {
+    a:not(.btn):not(.btn-large):not(.btn-floating) {
       color: $card-link-color;
       margin-right: $card-padding;
-      @include transition(color .3s ease);
+      transition: color .3s ease;
       text-transform: uppercase;
 
       &:hover { color: $card-link-color-light; }
@@ -139,15 +173,15 @@
     background-color: $card-bg-color;
     width: 100%;
     overflow-y: auto;
+    left: 0;
     top: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
     display: none;
 
     .card-title {
       cursor: pointer;
       display: block;
     }
-
   }
 }
