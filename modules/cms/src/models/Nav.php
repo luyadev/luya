@@ -505,6 +505,10 @@ class Nav extends ActiveRecord
         if (!$navItem->validate()) {
             $errors = ArrayHelper::merge($navItem->getErrors(), $errors);
         }
+        
+        if (empty($fromDraftNavId)) {
+            $errors['from_draft_id'] = [Module::t('model_navitempage_empty_draft_id')];
+        }
 
         if (!empty($errors)) {
             return $errors;

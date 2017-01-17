@@ -233,6 +233,8 @@
 			controller : function($scope) {
 				
 				$scope.data.use_draft = 0;
+				$scope.data.layout_id = 0;
+				$scope.data.from_draft_id = 0;
 				
 				// layoutsData
 				

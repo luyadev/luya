@@ -87,8 +87,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     public function rules()
     {
         return [
-            [['layout_id', 'timestamp_create', 'create_user_id', 'nav_item_id'], 'required'],
-            [['nav_item_id', 'timestamp_create', 'create_user_id'], 'integer'],
+            [['layout_id', 'timestamp_create', 'create_user_id'], 'required', 'isEmpty' => function ($value) {
+                return empty($value);
+            }],
+            [['layout_id', 'timestamp_create', 'create_user_id', 'nav_item_id'], 'integer'],
             [['version_alias'], 'string']
         ];
     }
