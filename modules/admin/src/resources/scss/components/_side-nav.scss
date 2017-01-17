@@ -1,0 +1,16 @@
+.side-nav li {
+    border-bottom: 1px solid #eee;
+}
+
+.side-nav a {
+    height: auto;
+    line-height: 1.3rem;
+    display: block;
+    padding: 15px 0;
+    text-align: left;
+
+    i {
+        display: inline-block;
+        width: auto;
+    }
+}
