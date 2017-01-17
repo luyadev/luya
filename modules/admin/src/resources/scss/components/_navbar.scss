@@ -14,8 +14,8 @@
     // transition: 0.25s ease background-color;
 
 
-    &:hover {
-        background-color: color("blue", "darken-2");
+    &:hover, a:hover {
+        background-color: color("blue", "darken-1");
 
         .icon__spawn-text {
             opacity: 1;
@@ -51,19 +51,6 @@
     }
 }
 
-.navbar__button__circle-icon {
-    border: 3px solid;
-    border-color: #fff;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto;
-    position: relative;
-    top: 18px;
-    // transition: 0.25s ease border-color;
-    width: 25px;
-    height: 25px;
-    
-}
 
 .navbar__button__circle-usercount {
     margin-top: -19px;
