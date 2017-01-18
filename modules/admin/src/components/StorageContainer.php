@@ -489,7 +489,10 @@ class StorageContainer extends Component
             $fileQuery = $this->getFile($fileId);
             
             if (!$fileQuery || !$fileQuery->fileExists) {
-                throw new Exception("Unable to create image, cause the base file does not exist.");
+                if ($fileQuery !== false) {
+                    throw new Exception("Unable to create image, the base file source '{$fileQuery->serverSource}' does not exist.");
+                }
+                throw new Exception("Unable to create image, unable to find the file with id '{$fileId}'.");
             }
             
             $fileName = $filterId.'_'.$fileQuery->systemFileName;
