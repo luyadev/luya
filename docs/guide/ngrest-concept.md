@@ -1,13 +1,12 @@
-Admin Modul NgRest CRUD
-=======================
+# Admin Modul NgRest CRUD
 
-One of the most powerfull tools in *LUYA*, is the **ANGULAR CRUD** surface, its combines *Angular*, *RESTful*, *CRUD* and *Active Record* in a very elegant and powerfull way. So in a more understable sentence **Generate administration formulars to create, update, delete and list your data very fast and elegant**. It creates an API you can talk trough Angular and you can configure it like an ActiveRecord and also use it like an Active Record Model in your application. Here is an example of an NgRest Crud for Administration Users:
+One of the most powerfull tools in *LUYA*, is the **ANGULAR CRUD** surface, it combines *Angular*, *RESTful*, *CRUD* and *Active Record* in a very elegant and powerfull way. So in a more understable sentence **Generate administration formulars to create, update, delete and list your data very fast and elegant**. It creates an API you can talk trough Angular and you can configure it like an ActiveRecord and also use it like an Active Record Model in your application. Here is an example of an NgRest Crud for Administration Users:
 
 ![ngrest-crud-example](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/ngrest-crud-example.jpg "NgRest Crud Example")
 
 The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational State Transfer)
 
-> In order to create your own *NgRest* quickly and not understanding the details under the hood, you can create a migration with your data table, create an admin module and the run `./vendor/bin/luya crud/create`.
+> In order to create a NgRest CRUD setup: Create an admin module (`./vendor/bin/luya module/create`), create a migration  with a database table (`./vendor/bin/luya migrate/create mytable modulename`) and the run `./vendor/bin/luya crud/create`.
 
 ![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/ngrest-crud.png "NgRest Image")
 
@@ -72,6 +71,11 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
     /* NGREST SPECIFIC CONFIGURATIONS */
     
     /**
+     * Enable which fields should automaticcally be available as multilingual fields!
+     */
+    public $i18n = ['text'];
+    
+    /**
      * @return array An array define the field types of each field
      */
     public function ngrestAttributeTypes()
@@ -93,14 +97,9 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
      }
     
     /**
-     * Enable which fields should automaticcally be available as multilingual fields!
-     */
-    public $i18n = ['text'];
-    
-    /**
      * Define the ngrest config, which fileds should be available in create form, updateform and the grid overview list.
      * 
-     * @return \admin\ngrest\Config the configured ngrest object
+     * @return \luya\admin\ngrest\Config the configured ngrest object
      */
     public function ngRestConfig($config)
     {
@@ -117,12 +116,11 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
 }
 ```
 
-You can read more about the configuration (specially `ngRestConfig()`) of the ngrest object in [ngrest-model.md](ngrest model section).
-
+You can read more about the configuration of the NgRest in [NgRest Model Guide](ngrest-model.md).
 
 ## 2. Controller and API
 
-Each NgRest Crud needs an API (to make the rest call, create, update, list which are provided trough [Yii2 RESTful](http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html)) and a controller which contains the angular template for your configure `ngRestConfig()`. The API and the Controller are basically only Gateways for the Output and do relate to the ngrest model:
+Each NgRest Crud needs an API (to make the rest call, create, update, list which are provided trough [Yii 2 RESTful](http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html)) and a controller which contains the angular template for your configure `ngRestConfig()`. The API and the Controller are basically only Gateways for the Output and do relate to the ngrest model:
 
 ### NgRest Controller
 
@@ -176,7 +174,7 @@ To let your application know what apis are registered you have to open the Modul
 <?php
 namespace teamadmin;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     public $apis = [
         'api-team-member' => 'teamadmin\apis\MemberController',
