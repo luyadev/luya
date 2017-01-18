@@ -261,6 +261,9 @@ function typeCastValue(value) {
                 }
             };
 
+            /**
+             * Update the widths if the window gets resized
+             */
             var onResize = function() {
                 if(theadFixed) {
                     theadWidth = theadClone.width();
@@ -272,11 +275,13 @@ function typeCastValue(value) {
 
                     update();
                 }
-			};
+            };
 
+            /**
+             * Initialize the plugin on scroll (table contents getting loaded by ajax and table
+             * does not exist on load of the directive)
+             */
             var onScroll = function() {
-            	console.log("scroll");
-
                 if(!initialized) {
                     table = angular.element(element.find('table'));
                     thead = angular.element(table.find('thead'));
@@ -289,17 +294,9 @@ function typeCastValue(value) {
                 }
 
                 update();
-			};
+            };
 
-            /**
-             * Update the widths if the window gets resized
-             */
             angular.element($window).bind('resize', throttle(onResize, 50));
-
-            /**
-             * Initialize the plugin on scroll (table contents getting loaded by ajax and table
-             * does not exist on load of the directive)
-             */
             angular.element(element).bind("scroll", throttle(onScroll, 50));
         };
     });
