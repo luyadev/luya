@@ -14,13 +14,13 @@ function guid() {
 
 /**
  * i18n localisation with params.
- * 
+ *
  * ```js
  * i18nParam('js_i18n_translation_name', {variable: value});
  * ```
- * 
+ *
  * Translations File:
- * 
+ *
  * ```php
  * 'js_i18n_translation_name' => 'Hello %variable%',
  * ```
@@ -59,7 +59,7 @@ function typeCastValue(value) {
 		zaa.bootstrap = $controllerProvider;
 
 		$urlMatcherFactoryProvider.strictMode(false)
-		
+
 		$stateProvider
 			.state("default", {
 				url: "/default/:moduleId",
@@ -162,10 +162,10 @@ function typeCastValue(value) {
 			});
 		};
 	});
-	
+
 	/**
 	 * Converty a string to number value, usefull in selects.
-	 * 
+	 *
 	 * ```
 	 * <select name="filterId" ng-model="filterId" convert-to-number>
 	 * ```
@@ -183,6 +183,123 @@ function typeCastValue(value) {
 		    }
 		};
 	});
+
+    /**
+	 * Directive to trigger fixed table head
+     */
+    zaa.directive("fixedTableHead", function ($window) {
+        return function(scope, element, attrs) {
+            var initialized = false,
+                theadFixed = false,
+                table = null,
+                thead = null,
+                theadOffset = 0,
+                theadWidth = 0,
+                theadElementsWidth = [],
+                theadClone = null,
+                fixedOffset = 64;
+
+            var throttle = function(fn, wait) {
+                var time = Date.now();
+                return function() {
+                    if ((time + wait - Date.now()) < 0) {
+                        fn();
+                        time = Date.now();
+                    }
+                }
+            };
+
+            /**
+             * This function updates the thead and th widths
+             * It also sets the thead to fixed or reverses it's changes based on the scroll position
+             */
+            var update = function() {
+                /* Update the width and th widths */
+                theadWidth = theadClone.width();
+                theadElementsWidth = [];
+                theadClone.find('th').each( function() {
+                    theadElementsWidth.push(angular.element(this).width());
+                });
+
+                if(element.scrollTop() > theadOffset) {
+
+                    /* Show the clone to prevent the table from jumping */
+                    theadClone.show();
+
+                    /* Add the required styles to the thead */
+                    thead.css({
+                        width: theadWidth + 'px',
+                        position: 'fixed',
+                        backgroundColor: '#fff',
+                        zIndex: 1000,
+                        top: element.offset().top
+                    });
+
+                    /* Set the th widths */
+                    thead.find('th').each( function(index) {
+                        angular.element(this).width(theadElementsWidth[index]);
+                    });
+
+                    theadFixed = true;
+                } else {
+
+                    /* Hide the clone */
+                    theadClone.hide();
+
+                    /* Reset the css changes to default */
+                    thead.css({
+                        width: 'auto',
+                        position: 'relative',
+                        zIndex: 1000,
+                        top: 0
+                    });
+                    thead.find('th').each( function() {
+                        angular.element(this).width("auto");
+                    });
+
+                    theadFixed = false;
+                }
+            };
+
+            /**
+             * Update the widths if the window gets resized
+             */
+            var onResize = function() {
+                if(theadFixed) {
+                    theadWidth = theadClone.width();
+
+                    theadElementsWidth = [];
+                    theadClone.find('th').each( function() {
+                        theadElementsWidth.push(angular.element(this).width());
+                    });
+
+                    update();
+                }
+            };
+
+            /**
+             * Initialize the plugin on scroll (table contents getting loaded by ajax and table
+             * does not exist on load of the directive)
+             */
+            var onScroll = function() {
+                if(!initialized) {
+                    table = angular.element(element.find('table'));
+                    thead = angular.element(table.find('thead'));
+                    theadOffset = thead.offset().top - fixedOffset;
+                    theadClone = angular.element(table.find('thead')).clone();
+
+                    theadClone.css('visibility', "hidden").insertAfter(thead).hide();
+
+                    initialized = true;
+                }
+
+                update();
+            };
+
+            angular.element($window).bind('resize', throttle(onResize, 50));
+            angular.element(element).bind("scroll", throttle(onScroll, 50));
+        };
+    });
 
 	/**
 	 * Apply auto generated height for textareas based on input values
