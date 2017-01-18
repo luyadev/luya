@@ -7,9 +7,12 @@ use Curl\Curl;
 use yii\helpers\Json;
 use luya\admin\proxy\ClientBuild;
 use luya\admin\proxy\ClientTransfer;
+use luya\traits\CacheableTrait;
 
 class ProxyController extends \luya\console\Command
 {
+    use CacheableTrait;
+    
     public $defaultAction = 'sync';
     
     const CONFIG_VAR_URL = 'lcpProxyUrl';
@@ -48,6 +51,7 @@ class ProxyController extends \luya\console\Command
         $curl->get($proxyUrl, ['identifier' => $identifier, 'token' => sha1($token)]);
         
         if (!$curl->error) {
+            $this->flushHasCache();
             $response = Json::decode($curl->response);
             $build = new ClientBuild($this, [
                 'buildToken' => sha1($response['buildToken']),
