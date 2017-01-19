@@ -3,12 +3,13 @@
 namespace luya\cms\menu;
 
 use Yii;
-use luya\cms\Exception;
-use luya\admin\models\User;
-use luya\cms\models\Nav;
 use yii\base\Object;
+use luya\admin\models\User;
+use luya\cms\Exception;
+use luya\cms\models\Nav;
 use luya\web\LinkInterface;
 use luya\web\LinkTrait;
+use luya\helpers\Url;
 
 /**
  * Menu item Object.
@@ -43,6 +44,7 @@ use luya\web\LinkTrait;
  * @property array $teardown Return all parent elemtns **with** the current item.
  * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
  * @property boolean $isHome Returns true if the item is the home item, otherwise false.
+ * @property string $absoluteLink The link path with prepand website host `http://luya.io/home/about-us`.
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta1
  */
@@ -335,7 +337,7 @@ class Item extends Object implements LinkInterface
      * from a page to a hidden page, the link of the hidden page will be returned and the link
      * will be successfully displayed
      *
-     * @return string e.g. "/home/about-us" or with composition "/de/home/about-us"
+     * @return string The link path `/home/about-us` or with composition `/de/home/about-us`
      */
     public function getLink()
     {
@@ -358,6 +360,19 @@ class Item extends Object implements LinkInterface
         }
         
         return $this->itemArray['link'];
+    }
+    
+    /**
+     * Returns the link with an absolute scheme.
+     * 
+     * The link with an absolute scheme path example `http://luya.io/link` where link is the output
+     * from the {{luya\cms\menu\item::getLink}} method.
+     * 
+     * @return string The link path with prepand website host `http://luya.io/home/about-us`.
+     */
+    public function getAbsoluteLink()
+    {
+        return Url::base(true) . $this->getLink();
     }
 
     /**
