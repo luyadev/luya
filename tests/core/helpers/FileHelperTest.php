@@ -43,14 +43,18 @@ class FileHelperTest extends LuyaWebTestCase
         $this->assertSame('png', $test->extension);
         $this->assertSame('myfile', $test->name);
         $test = FileHelper::getFileInfo('/path/to/myfile.');
-        $this->assertSame(false, $test->extension);
+        $this->assertFalse($test->extension);
         $this->assertSame('myfile', $test->name);
         $test = FileHelper::getFileInfo('/path/to/myfile');
-        $this->assertSame(false, $test->extension);
+        $this->assertFalse($test->extension);
         $this->assertSame('myfile', $test->name);
         $test = FileHelper::getFileInfo('/path/to/');
-        $this->assertSame(false, $test->extension);
+        $this->assertFalse($test->extension);
         $this->assertSame('to', $test->name);
+        
+        $empty = FileHelper::getFileInfo('');
+        $this->assertFalse($empty->name);
+        $this->assertFalse($empty->extension);
     }
     
     public function testGetHashFile()
