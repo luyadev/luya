@@ -126,10 +126,6 @@ class ClientTable extends Object
     
     public function syncData()
     {
-        if (!$this->isComplet()) {
-            throw new Exception('unable to sync data from incomplet buffer');
-        }
-        
         Yii::$app->db->createCommand()->truncateTable($this->getName())->execute();
         
         $rows = $this->getContentRows();

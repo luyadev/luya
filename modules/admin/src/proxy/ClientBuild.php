@@ -28,6 +28,10 @@ class ClientBuild extends Object
     
     public $storageFilesCount = null;
     
+    public $optionStrict = null;
+    
+    public $optionTable = null;
+    
     public function __construct(Command $command, array $config = [])
     {
         $this->command = $command;
@@ -50,6 +54,11 @@ class ClientBuild extends Object
         $this->_buildConfig = $config;
         
         foreach ($config['tables'] as $tableName => $tableConfig) {
+            
+            if ($this->optionTable && $this->optionTable != $tableName) {
+                continue;
+            }
+            
             $schema = Yii::$app->db->getTableSchema($tableName);
             
             if ($schema !== null) {

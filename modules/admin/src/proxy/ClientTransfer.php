@@ -24,15 +24,16 @@ class ClientTransfer extends Object
         foreach ($this->build->getTables() as $name => $table) {
             /* @var $table \luya\admin\proxy\ClientTable */
             if (!$table->isComplet()) {
-                $this->build->command->outputInfo('Rows Expected: ' . $table->getRows());
-                $this->build->command->outputInfo('Rows Downloaded: ' . count($table->getContentRows()));
-                return $this->build->command->outputError('Incomplet build, stop execution: ' . $name);
+                if ($this->build->optionStrict) {
+                    $this->build->command->outputInfo('Rows Expected: ' . $table->getRows());
+                    $this->build->command->outputInfo('Rows Downloaded: ' . count($table->getContentRows()));
+                    return $this->build->command->outputError('Incomplet build, stop execution: ' . $name);
+                }
             }
         }
         foreach ($this->build->getTables() as $name => $table) {
             $table->syncData();
         }
-        
         
         // sync files
         foreach ((new Query())->all() as $file) {
