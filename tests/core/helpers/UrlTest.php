@@ -94,10 +94,14 @@ class UrlTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('http://www.luya.io', Url::ensureHttp('www.luya.io'));
         $this->assertEquals('http://luya.io', Url::ensureHttp('http://luya.io'));
         $this->assertEquals('http://www.luya.io', Url::ensureHttp('http://www.luya.io'));
+        $this->assertEquals('https://www.luya.io', Url::ensureHttp('https://www.luya.io'));
+        
         
         $this->assertEquals('https://luya.io', Url::ensureHttp('luya.io', true));
         $this->assertEquals('https://www.luya.io', Url::ensureHttp('www.luya.io', true));
         $this->assertEquals('https://luya.io', Url::ensureHttp('https://luya.io', true));
         $this->assertEquals('https://www.luya.io', Url::ensureHttp('https://www.luya.io', true));
+        
+        $this->assertEquals('http://luya.io', Url::ensureHttp('http://luya.io', true)); // @TODO ensure https, expected: https://luya.io
     }
 }
