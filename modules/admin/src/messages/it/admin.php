@@ -209,5 +209,5 @@ return [
     'model_user_title_mr' => 'Sig.',
     'model_user_title_mrs' => 'Sig.ra',
     'js_ngrest_toggler_success' => '%field% aggiornato con successo.',
-    'layout_image_filter_selection' => 'Select image Filter:',
+    'layout_image_filter_selection' => 'Seleziona filtro immagine:',
 ];

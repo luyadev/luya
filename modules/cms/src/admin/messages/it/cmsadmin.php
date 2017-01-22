@@ -148,5 +148,5 @@ return [
     'model_navitem_title_tag_label' => 'Titolo Tag (SEO)',
     
 // 1.0.0
-    'model_navitempage_empty_draft_id' => 'Unable to create page from empty draft template.',
+    'model_navitempage_empty_draft_id' => 'Impossibile creare una pagina da un modello vuoto.',
 ];
