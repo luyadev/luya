@@ -92,6 +92,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             [['placeholder_var'], 'required'],
             [['json_config_values', 'json_config_cfg_values'], 'string'],
             [['placeholder_var'], 'string', 'max' => 80],
+            [['variation'], 'safe'],
         ];
     }
     
@@ -126,6 +127,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             'timestamp_update' => 'Timestamp Update',
             'sort_index' => 'Sort Index',
             'is_hidden' => 'Is Hidden',
+            'variation' => 'Variation',
         ];
     }
     

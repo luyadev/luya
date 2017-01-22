@@ -23,7 +23,7 @@
         </div>
     </div>  <!-- /.luya-sidebar -->
 
-    <div class="luya-container__main">
+    <div class="luya-container__main" fixed-table-head>
         <div class="row">
             <div class="col s12" ui-view>
                 <div class="editlog">

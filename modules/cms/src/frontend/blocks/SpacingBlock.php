@@ -28,6 +28,14 @@ final class SpacingBlock extends TwigBlock
     {
         return Module::t('block_spacing_name');
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getIsDirtyDialogEnabled()
+    {
+        return false;
+    }
 
     public function icon()
     {

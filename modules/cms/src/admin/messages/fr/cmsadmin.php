@@ -140,10 +140,13 @@ return [
     'button_update_version' => 'Modifier une version',
     'menu_group_item_env_permission' => 'Permissions de la page',
     
-    /* rc1 */
+// rc1
     'page_update_actions_deepcopy_text' => 'Créer une copie de la page en cours comprenant son contenu. Toutes les langues seront copiés mais, seulement la version publiée sera visible.',
     'page_update_actions_deepcopy_btn' => 'Créer une copie',
     
 // rc2
     'model_navitem_title_tag_label' => 'Titre (SEO)',
+    
+// 1.0.0
+    'model_navitempage_empty_draft_id' => 'Unable to create page from empty draft template.',
 ];

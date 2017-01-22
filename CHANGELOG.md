@@ -8,6 +8,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1114](https://github.com/luyadev/luya/issues/1114) Updated materializecss to newest version and removed unused files.
+- [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated, renamed or removed functions collection.
 - [#1126](https://github.com/luyadev/luya/issues/1126) Moved CLI commands to the related modules.
 - [#1102](https://github.com/luyadev/luya/issues/1102) Removed News Module Tag table and replace by admin modules Tag models.
@@ -16,12 +18,16 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1171](https://github.com/luyadev/luya/issues/1171) CMS Menu item has method `getAbsoluteLink()` in order to retrieve link with prepand host scheme.
+- [#1169](https://github.com/luyadev/luya/issues/1169) Callable function for labelFields in the CheckboxRelation Plugin.
+- [#1118](https://github.com/luyadev/luya/issues/1118) Variation/Flavors for blocks can be configure in the config file in order to override and hide fields.
+- [#1117](https://github.com/luyadev/luya/issues/1117) Content Proxy allows you to sync files and data from one environment into another.
+- [#1140](https://github.com/luyadev/luya/issues/1140) Added new block getIsDirtyDialogEnabled() method in order to disable the dirty dialog when blocks do not require any configuration.
 - [#1116](https://github.com/luyadev/luya/issues/1116) Injectors can be appended to the end of the configuration list.
 - [#1135](https://github.com/luyadev/luya/issues/1135) Command to generate only the ngrest model `crud/model "path/to/Model"`.
 - [#1136](https://github.com/luyadev/luya/issues/1136) Block generate uses the luya\admin\base\TypesInterface.
 - [#1134](https://github.com/luyadev/luya/issues/1134) ToggleStatus plugin ables to toggle the status from the crud list overview.
 - [#1133](https://github.com/luyadev/luya/issues/1133) Added callable $labelField and getter access for ngrest plugin luya\admin\ngrest\plugins\SelectModel.
-- [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain language added.
 - [#1120](https://github.com/luyadev/luya/issues/1120) Add Hook mechanism in order to trigger contents.
 - [#1115](https://github.com/luyadev/luya/issues/1115) ActiveDataProvider default sorting configuration for news article overview.
 - [#1018](https://github.com/luyadev/luya/issues/1018) NgRest SelectModel Plugins where conditions, labelFields and labelTemplate properties added.
@@ -33,9 +39,16 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1096](https://github.com/luyadev/luya/issues/1096) News Module added teaser_text field in article model.
 - [#1006](https://github.com/luyadev/luya/issues/1006) Added spanish translations to all luya core modules and administration interface.
 - [#1103](https://github.com/luyadev/luya/issues/1103) InfoActiveWindow make usage of the yii\widgets\DetailView in order to configure attributes.
+- [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain language added.
+- [#1154](https://github.com/luyadev/luya/issues/1154) Italian language added.
 
 ### Fixed
 
+- [#1162](https://github.com/luyadev/luya/issues/1162) Unable to create pages from empty draft selection.
+- [#1143](https://github.com/luyadev/luya/issues/1143) Fixed image directive filter preselection, due to an angular convert to number problem.
+- [#1156](https://github.com/luyadev/luya/issues/1156) Fixed issue where crawler preview does not decode html entities.
+- [#1146](https://github.com/luyadev/luya/issues/1146) Fixed url rule behavior when composition is hidden but an url rule is a composition rule.
+- [#1147](https://github.com/luyadev/luya/issues/1147) Empty file caption names contains the original file name.
 - [#1130](https://github.com/luyadev/luya/issues/1130) Fixed issue which prevents item redirection loops.
 - [#1101](https://github.com/luyadev/luya/issues/1101) Rest model validation did not use proper language for the yii translations based on the user language.
 - [#1111](https://github.com/luyadev/luya/issues/1111) Storage File selection does not display file name cause of not strict comparing method.

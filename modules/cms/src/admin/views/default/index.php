@@ -1,8 +1,5 @@
-
 <script type="text/ng-template" id="createform.html">
     <form ng-switch on="data.nav_item_type">
-
-
         <div class="row">
             <div class="input input--radios col s12">
                 <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_add_type'); ?></label>
@@ -14,7 +11,7 @@
             </div>
         </div>
 
-<hr style="margin:10px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
+        <hr style="margin:10px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
 
         <div class="row" ng-show="data.nav_item_type == 1 && !data.isInline">
             <div class="input input--text col s12">
@@ -26,7 +23,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="input input--text col s12">
                 <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_title'); ?></label>
@@ -63,52 +59,43 @@
             <div class="input input--select col s12">
                 <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_parent_page'); ?></label>
                 <div class="input__field-wrapper">
-                    <input id="[checkbox-id]" ng-model="data.parent_nav_id" value="0" ng-true-value="0" type="checkbox" />
+                    <input id="[checkbox-id]" ng-model="data.parent_nav_id" value="0" ng-true-value="0" type="checkbox" convert-to-number/>
                     <label for="[checkbox-id]"><?php echo \luya\cms\admin\Module::t('view_index_page_parent_root'); ?></label>
                     <menu-dropdown class="menu-dropdown" nav-id="data.parent_nav_id" />
                 </div>
             </div>
         </div>
 
-<hr style="margin:10px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
+        <hr style="margin:10px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
 
         <div ng-switch-when="1">
             <create-form-page data="data"></create-form-page>
         </div>
-
         <div ng-switch-when="2">
             <create-form-module data="data"></create-form-module>
         </div>
-
         <div ng-switch-when="3">
             <create-form-redirect data="data"></create-form-redirect>
         </div>
-
-        <!-- SUCCESS -->
         <div ng-show="success">
             <div class="alert alert--success">
                 <i class="material-icons">check</i>
                 <p><?php echo \luya\cms\admin\Module::t('view_index_page_success'); ?></p>
             </div>
         </div>
-        <!-- /SUCCESS -->
-
-        <!-- ERROR -->
         <div class="alert alert--danger" ng-show="error.length != 0">
             <i class="material-icons">error</i>
             <ul>
                 <li ng-repeat="err in error">{{ err[0] }}</li>
             </ul>
         </div>
-        <!-- /ERROR -->
-
     </form>
 </script>
 
 <!-- CREATE PAGE FORM -->
 <script type="text/ng-template" id="createformpage.html">
         <div class="row" ng-show="!data.isInline">
-            <div class="input input--text col s12">
+            <div class="input input--text col s12"> 
                 <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_use_draft'); ?></label>
                 <div class="input__field-wrapper">
                     <input type="radio" ng-checked="data.use_draft == 0"><label ng-click="data.use_draft = 0; data.from_draft_id = 0"><?php echo \luya\cms\admin\Module::t('view_index_no'); ?></label><br />
@@ -121,7 +108,11 @@
         <div class="input input--select col s12">
             <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_select_draft'); ?></label>
             <div class="input__field-wrapper">
-                <select class="input__field browser-default" ng-model="data.from_draft_id" ng-options="draft.id as draft.title for draft in drafts"></select>
+                <select class="input__field browser-default" ng-model="data.from_draft_id" convert-to-number>
+                    <option value="0"><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
+                    <option value="">-----</option>
+                    <option ng-repeat="draft in drafts" value="{{draft.id}}">{{draft.title}}</option>
+                </select>
             </div>
         </div>
     </div>
@@ -129,9 +120,9 @@
         <div class="input input--select col s12"  ng-show="data.use_draft==0">
             <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_layout'); ?></label>
             <div class="input__field-wrapper">
-                <select class="input__field" ng-model="data.layout_id">
-                    <option value=""><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
-                    <option value="">- - - - -</option>
+                <select class="input__field" ng-model="data.layout_id" convert-to-number>
+                    <option value="0"><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
+                    <option value="">-----</option>
                     <option ng-repeat="item in layouts" value="{{item.id}}">{{item.name}}</option>
                 </select>
             </div>

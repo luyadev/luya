@@ -110,7 +110,7 @@ class Url extends \luya\helpers\Url
      */
     public static function generateLinkObject($config)
     {
-        if (!empty($config) && isset($config['type'])) {
+        if (!empty($config) && isset($config['type']) && isset($config['value'])) {
             switch ($config['type']) {
                 case 1:
                     return Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();

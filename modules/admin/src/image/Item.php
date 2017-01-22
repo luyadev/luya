@@ -172,7 +172,7 @@ class Item extends \yii\base\Object
      */
     public function applyFilter($filterName)
     {
-        return ($filterItem = Yii::$app->storage->getFiltersArrayItem($filterName)) ? Yii::$app->storage->addImage($this->getFileId(), $filterItem['id']) : false;
+        return ($filterItem = Yii::$app->storage->getFiltersArrayItem($filterName)) ? Yii::$app->storage->addImage($this->getFileId(), $filterItem['id'], !YII_ENV_PROD) : false;
     }
     
     /**

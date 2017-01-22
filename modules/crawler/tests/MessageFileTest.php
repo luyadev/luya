@@ -1,6 +1,6 @@
 <?php
 
-namespace admintests;
+namespace crawlerests;
 
 use Yii;
 use luyatests\data\MessageFileComperatorTrait;

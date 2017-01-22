@@ -112,8 +112,17 @@ class Block extends NgRestModel
         return $this->class;
     }
     
-    public static $blocks = [];
+    private static $blocks = [];
     
+    /**
+     * Get the block object from the database with context informations.
+     *
+     * @param unknown $blockId
+     * @param unknown $id
+     * @param unknown $context
+     * @param unknown $pageObject
+     * @return boolean|object|mixed
+     */
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
         if (isset(self::$blocks[$blockId])) {

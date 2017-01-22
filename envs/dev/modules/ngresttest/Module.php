@@ -8,9 +8,9 @@ class Module extends \luya\admin\base\Module
 {
     public $apis = [
             'api-ngresttest-table' => 'ngresttest\apis\TableController',
-    		'api-ngresttest-order' => 'ngresttest\apis\OrderController',
-    		'api-ngresttest-customer' => 'ngresttest\apis\CustomerController',
-    		
+            'api-ngresttest-order' => 'ngresttest\apis\OrderController',
+            'api-ngresttest-customer' => 'ngresttest\apis\CustomerController',
+            
     ];
     
     public function getMenu()
@@ -23,6 +23,5 @@ class Module extends \luya\admin\base\Module
         ->group('Group')
         ->itemApi('Order', 'ngresttest/order/index', 'label', 'api-ngresttest-order')
         ->itemApi('Customer', 'ngresttest/customer/index', 'label', 'api-ngresttest-customer');
-        
     }
 }

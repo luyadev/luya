@@ -192,4 +192,12 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return false;
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getIsDirtyDialogEnabled()
+    {
+        return true;
+    }
 }

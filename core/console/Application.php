@@ -45,12 +45,9 @@ class Application extends \yii\console\Application
             'migrate' => 'luya\console\commands\MigrateController',
             'crud' => 'luya\console\commands\CrudController',
             'module' => 'luya\console\commands\ModuleController',
-            'command' => 'luya\console\commands\CommandController',
             'import' => 'luya\console\commands\ImportController',
-            'setup' => 'luya\console\commands\SetupController',
             'health' => 'luya\console\commands\HealthController',
             'block' => 'luya\console\commands\BlockController',
-            'storage' => 'luya\console\commands\StorageController',
             'aw' => 'luya\console\commands\ActiveWindowController',
         ];
     }

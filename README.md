@@ -47,7 +47,7 @@ We are always looking for people who share their thoughts, code and problems wit
 + ✓ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
 + ✓ rc1 release (October 2016) - Merge admin and frontend modules into each other. Add luya vendor namespace prefix to all modules.
 + ✓ rc2 release (November 2016) - Bug fixes, PHP Doc and Guide improvements, basic features implementation.
-+ version 1.0.0 (Januar 2017) - First stable release of LUYA.
++ version 1.0.0 (February 2017) - First stable release of LUYA.
 
 #### Unit Test
 

@@ -131,11 +131,25 @@ interface BlockInterface
     
     /**
      * The time of cache expiration
+     *
+     * @return integer
      */
     public function getCacheExpirationTime();
     
     /**
      * Whether is an container element or not.
+     *
+     * @return boolean
      */
     public function getIsContainer();
+    
+    /**
+     * Whether the dirty marker dialog is enable or not.
+     *
+     * This can be usefull when working with blocks which does not require any input data, so therefore
+     * it does not require a drity marked dialog.
+     *
+     * @return boolean
+     */
+    public function getIsDirtyDialogEnabled();
 }

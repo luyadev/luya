@@ -5,28 +5,52 @@ namespace luya\cms\frontend\blocks;
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\TextGroup;
 use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
 
 /**
  * UL/OL list block.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class ListBlock extends TwigBlock
+final class ListBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
     
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_list_name');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'view_list';
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function blockGroup()
+    {
+        return TextGroup::className();
+    }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
@@ -41,6 +65,9 @@ final class ListBlock extends TwigBlock
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extraVars()
     {
         return [
@@ -48,18 +75,11 @@ final class ListBlock extends TwigBlock
         ];
     }
 
-    public function twigFrontend()
-    {
-        return '{% if vars.elements is not empty %}<{{ extras.listType }}>{% for row in vars.elements if row.value is not empty %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>{% endif %}';
-    }
-
-    public function twigAdmin()
+    /**
+     * @inheritdoc
+     */
+    public function admin()
     {
         return '{% if vars.elements is empty%}<span class="block__empty-text">' . Module::t('block_list_no_content') . '</span>{% else %}<{{ extras.listType }}>{% for row in vars.elements if row.value is not empty %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>{% endif %}';
-    }
-    
-    public function blockGroup()
-    {
-        return TextGroup::className();
     }
 }

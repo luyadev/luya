@@ -87,8 +87,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     public function rules()
     {
         return [
-            [['layout_id', 'timestamp_create', 'create_user_id', 'nav_item_id'], 'required'],
-            [['nav_item_id', 'timestamp_create', 'create_user_id'], 'integer'],
+            [['layout_id', 'timestamp_create', 'create_user_id'], 'required', 'isEmpty' => function ($value) {
+                return empty($value);
+            }],
+            [['layout_id', 'timestamp_create', 'create_user_id', 'nav_item_id'], 'integer'],
             [['version_alias'], 'string']
         ];
     }
@@ -203,6 +205,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $equalIndex = 1;
         $placeholders = $this->getPlaceholders($navItemPageId, $placeholderVar, $prevId);
         $blocksCount = count($placeholders);
+        $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
+        
         // foreach all placeholders but preserve varaibles above to make calculations
         foreach ($placeholders as $key => $placeholder) {
             $i++;
@@ -214,7 +218,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             
             if ($blockResponse === false) {
                 
-                // create block object
+                /** @var $blockObject \luya\cms\base\InternalBaseBlock */
                 $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
                 
                 // see if its a valid block object
@@ -222,6 +226,28 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
+                    
+                    // inject variations variables
+                    $possibleVariations = isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false;
+                    
+                    if (isset($possibleVariations[$placeholder['variation']])) {
+                        $ensuredVariation = $possibleVariations[$placeholder['variation']];
+                        foreach ($ensuredVariation as $type => $typeContent) {
+                            if (!empty($typeContent)) {
+                                $type = strtolower($type);
+                                switch ($type) {
+                                    case "vars": $blockObject->setVarValues($typeContent); break;
+                                    case "cfgs": $blockObject->setCfgValues($typeContent); break;
+                                    case "extras":
+                                        foreach ($typeContent as $extraKey => $extraValue) {
+                                            $blockObject->addExtraVar($extraKey, $extraValue);
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    
                     // set env options from current object environment
                     foreach ($this->getOptions() as $optKey => $optValue) {
                         $blockObject->setEnvOption($optKey, $optValue);
@@ -258,8 +284,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             }
             
             $string.= $blockResponse;
+            
+            unset($blockResponse);
         }
 
+        unset($variations);
+        unset($placeholders);
+        
         return $string;
     }
 
@@ -273,6 +304,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         ->all();
     }
     
+    /**
+     * Convert a json string to an array.
+     *
+     * @param string $json
+     * @return array
+     */
     private function jsonToArray($json)
     {
         $response = json_decode($json, true);
@@ -337,6 +374,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         return $data;
     }
     
+    /**
+     * Get the arrayable values from a specific block id.
+     *
+     * @param integer $blockId
+     * @return array
+     */
     public static function getBlock($blockId)
     {
         $blockItem = (new Query())->select('*')->from('cms_nav_item_page_block_item')->where(['id' => $blockId])->one();
@@ -377,6 +420,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $blockItem['json_config_cfg_values'] = ['__e' => '__o'];
         }
     
+        $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
+        
         return [
             'is_dirty' => (int) $blockItem['is_dirty'],
             'is_container' => (int) $blockObject->getIsContainer(),
@@ -393,6 +438,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
+            'variations' => isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false,
+            'variation' => empty($blockItem['variation'])? "0" : $blockItem['variation'], // as by angular selection
+            'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
         ];
     }
     

@@ -12,13 +12,13 @@ use yii\helpers\Html;
 			<a class="text-teaser" href="<?= $this->extraValue('link')->href; ?>" target="<?= $this->extraValue('link')->target; ?>">
 		<?php endif; ?>
 		<?= Html::tag('img', '', [
-			'src' => $this->extraValue('image')['source'], 
-			'alt' => $this->varValue('caption', ''),
-			'title' => $this->varValue('caption', null),
-			'width' => $this->cfgValue('width', null),
-			'height' => $this->cfgValue('height', null),
-			'class' => 'img-responsive' . $this->cfgValue('cssClass', null, ' {{cssClass}}'),
-		]); ?>
+            'src' => $this->extraValue('image')['source'],
+            'alt' => $this->varValue('caption', ''),
+            'title' => $this->varValue('caption', null),
+            'width' => $this->cfgValue('width', null),
+            'height' => $this->cfgValue('height', null),
+            'class' => 'img-responsive' . $this->cfgValue('cssClass', null, ' {{cssClass}}'),
+        ]); ?>
 		<?php if ($this->extraValue('link')): ?>
 			</a>
 		<?php endif; ?>

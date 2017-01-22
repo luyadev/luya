@@ -16,6 +16,7 @@
 @import 'base/base';
 @import 'base/typography';
 @import 'base/materialize-overwrite';
+@import 'base/breakpoints';
 
 /**
  * Helpers
@@ -56,9 +57,11 @@
 @import 'components/help';
 @import 'components/help-overlay';
 @import 'components/i18n';
+@import 'components/icon';
 @import 'components/imagearray';
 @import 'components/imageupload';
 @import 'components/input';
+@import 'components/iconbar';
 @import 'components/list';
 @import 'components/loading-bar';
 @import 'components/loading-indicator';
@@ -70,6 +73,7 @@
 @import 'components/navbar';
 @import 'components/ng-wig';
 @import 'components/search-box';
+@import 'components/side-nav';
 @import 'components/sidebar';
 @import 'components/spin';
 @import 'components/submenu';
@@ -80,6 +84,7 @@
 @import 'components/waves';
 @import 'components/langswitch';
 @import 'components/tabs';
+@import 'components/toggler';
 @import 'components/toasts';
 @import 'components/debug-container';
 @import 'components/zaa-sortrelation';

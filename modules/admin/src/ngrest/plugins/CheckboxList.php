@@ -17,7 +17,6 @@ use luya\helpers\StringHelper;
  * 		'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
  * }
  *
- * @todo testing and complete find and save events.
  * @author Basil Suter <basil@nadar.io>
  */
 class CheckboxList extends Plugin
@@ -26,16 +25,25 @@ class CheckboxList extends Plugin
     
     public $i18nEmptyValue = [];
     
+    /**
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('checkboxitems')]);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
@@ -52,11 +60,17 @@ class CheckboxList extends Plugin
         return ['items' => ArrayHelper::typeCast($data)];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function serviceData()
     {
         return ['checkboxitems' => $this->getItems()];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeSave($event)
     {
         // if its not i18n casted field we have to serialize the the file array as json and abort further event excution.
@@ -84,6 +98,9 @@ class CheckboxList extends Plugin
         return true;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeExpandFind($event)
     {
         if (!$this->i18n) {
@@ -94,6 +111,9 @@ class CheckboxList extends Plugin
         return true;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeFind($event)
     {
         if (!$this->i18n) {
@@ -104,6 +124,9 @@ class CheckboxList extends Plugin
         return true;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onAfterListFind($event)
     {
         $value = $event->sender->getAttribute($this->name);

@@ -180,7 +180,11 @@ class BlockHelper
             foreach ($value as $key => $item) {
                 $file = static::fileUpload($item['fileId'], true);
                 if ($file) {
-                    $file->caption = $item['caption'];
+                    if (!empty($item['caption'])) {
+                        $file->caption = $item['caption'];
+                    } else {
+                        $file->caption = $file->name;
+                    }
                     $data[$key] = ($returnObject) ? $file : $file->toArray();
                 }
             }

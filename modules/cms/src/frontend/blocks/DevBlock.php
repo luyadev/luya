@@ -57,4 +57,12 @@ final class DevBlock extends PhpBlock
     {
         return '<p>' . Module::t('block_dev_name') . '</p>';
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getIsDirtyDialogEnabled()
+    {
+        return false;
+    }
 }

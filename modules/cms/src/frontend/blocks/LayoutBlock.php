@@ -5,28 +5,44 @@ namespace luya\cms\frontend\blocks;
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\LayoutGroup;
 use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
 
 /**
  * Layout/Grid Block.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class LayoutBlock extends TwigBlock
+final class LayoutBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
+    /**
+     * @inheritdoc
+     */
     public $isContainer = true;
 
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_layout_name');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'view_column';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
@@ -58,6 +74,9 @@ final class LayoutBlock extends TwigBlock
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extraVars()
     {
         return [
@@ -66,16 +85,17 @@ final class LayoutBlock extends TwigBlock
         ];
     }
 
-    public function twigFrontend()
-    {
-        return '<div class="row {{cfgs.rowDivClass}}"><div class="col-md-{{ extras.leftWidth }} {{ cfgs.leftColumnClasses }}">{{ placeholders.left }}</div><div class="col-md-{{ extras.rightWidth }} {{ cfgs.rightColumnClasses }}">{{ placeholders.right }}</div></div>';
-    }
-
-    public function twigAdmin()
+    /**
+     * @inheritdoc
+     */
+    public function admin()
     {
         return '';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function blockGroup()
     {
         return LayoutGroup::className();

@@ -20,7 +20,7 @@ class ExternalLinkTest extends LuyaWebTestCase
     
     public function testMissingHrefException()
     {
-    	$this->expectException('yii\base\InvalidConfigException');
-    	$link = new ExternalLink();
+        $this->expectException('yii\base\InvalidConfigException');
+        $link = new ExternalLink();
     }
 }

@@ -126,18 +126,15 @@ class ClientTable extends Object
     
     public function syncData()
     {
-        if (!$this->isComplet()) {
-            throw new Exception('unable to sync data from incomplet buffer');
-        }
-        
         Yii::$app->db->createCommand()->truncateTable($this->getName())->execute();
         
         $rows = $this->getContentRows();
         $num = count($rows);
         $counts = ceil($num/25);
+
+        $chunks = array_chunk($rows, 25);
         
-        for ($i=0; $i<$counts; $i++) {
-            $match = array_splice($rows, $i, 25);
+        foreach ($chunks as $match) {
             Yii::$app->db->createCommand()->batchInsert($this->getName(), $this->cleanUpBatchInsertFields($this->getFields()), $this->cleanUpMatchRow($match))->execute();
         }
     }
@@ -152,3 +149,4 @@ class ClientTable extends Object
         }
     }
 }
+

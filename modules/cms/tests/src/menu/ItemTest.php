@@ -31,6 +31,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count($obj->children));
         $this->assertEquals(11, count($obj->siblings));
         $this->assertFalse($obj->hasChildren());
+        $this->assertTrue($obj->isHome);
     }
     
     public function testChildItem()
@@ -39,53 +40,15 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals("/luya/envs/dev/public_html/en/page1/p1-page3", $obj->link);
         $this->assertEquals(2, $obj->depth);
         $this->assertEquals(6, count($obj->siblings));
+        $this->assertFalse($obj->isHome);
     }
     
-    /*
-    public function testFindHidden()
+    public function testAbsoluteLink()
     {
-        $this->assertFalse(Yii::$app->menu->findOne(['id' => 9999]));
+        $menu = (new Query())->where(['id' => 2])->one();
+        
+        $this->assertSame('http://localhost/luya/envs/dev/public_html/luya/envs/dev/public_html/en/page1', $menu->absoluteLink);
     }
-
-    public function testFindOffline()
-    {
-        $this->assertFalse(Yii::$app->menu->findOne(['id' => 7]));
-    }
-
-    public function testFindHiddenAndOffline()
-    {
-        $this->assertFalse(Yii::$app->menu->findOne(['id' => 9]));
-    }
-
-    public function testFindHiddenWithHidden()
-    {
-        $this->assertInstanceOf("luya\cms\menu\Item", Yii::$app->menu->find()->where(['id' => 8])->with('hidden')->one());
-    }
-
-    public function testFindOfflineWithHidden()
-    {
-        $this->assertFalse(Yii::$app->menu->find()->where(['id' => 7])->with('hidden')->one());
-    }
-
-    public function testFindHiddenAndOfflineWithHidden()
-    {
-        $this->assertFalse(Yii::$app->menu->find()->where(['id' => 9])->with('hidden')->one());
-    }
-
-    public function testRedirectInternal()
-    {
-        $obj = Yii::$app->menu->findOne(['id' => 5]);
-
-        $this->assertEquals('/luya/envs/dev/public_html/en/page4', $obj->link);
-    }
-
-    public function testRedirectExternal()
-    {
-        $obj = Yii::$app->menu->findOne(['id' => 6]);
-
-        $this->assertEquals('https://luya.io', $obj->link);
-    }
-    */
     // translation tests
 
     public function testHomeLanguageCompare()

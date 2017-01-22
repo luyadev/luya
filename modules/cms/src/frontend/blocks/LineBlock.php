@@ -3,27 +3,52 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
-use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
 
 /**
  * Simple horizontal line block
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class LineBlock extends TwigBlock
+final class LineBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
+    public $module = 'cms';
+    
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
     
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_line_name');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'remove';
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getIsDirtyDialogEnabled()
+    {
+        return false;
+    }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
@@ -53,26 +78,10 @@ final class LineBlock extends TwigBlock
     }
 
     /**
-     * Available twig variables:
-     * @param {{vars.lineSpace}}
-     * @param {{vars.lineStyle}}
-     * @param {{vars.lineWidth}}
-     * @param {{vars.lineColor}}
+     * @inheritdoc
      */
-    public function twigFrontend()
+    public function admin()
     {
-        return '<hr style="border: 0; border-bottom: {{ vars.lineWidth }} {{ vars.lineStyle }} {{ vars.lineColor }}; margin: {{ vars.lineSpace }} 0;"/>';
-    }
-
-    /**
-     * Available twig variables:
-     * @param {{vars.lineSpace}}
-     * @param {{vars.lineStyle}}
-     * @param {{vars.lineWidth}}
-     * @param {{vars.lineColor}}
-     */
-    public function twigAdmin()
-    {
-        return '<p><hr/></p>';
+        return '<p><hr /></p>';
     }
 }

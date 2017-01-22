@@ -130,6 +130,43 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public $hiddenBlocks = [];
     
+    private $_blockVariation = null;
+    
+    /**
+     * Set block variations.
+     *
+     * ```php
+     * 'blockVariations' => [
+     *     TextBlock::class => [
+     *         'variation1' => [
+     *             'vars' => ['cssClass' => 'fetti-font-css-class'],
+     *             'cfgs' => [], // will be ignore as its empty, so you can also just remove this part.
+     *             'extras' => [], // will be ignore as its empty, so you can also just remove this part.
+     *         ],
+     *     ]
+     * ]
+     * ```
+     *
+     * @param array $config
+     */
+    public function setBlockVariations(array $config)
+    {
+        $_variations = [];
+        foreach ($config as $key => $content) {
+            if (is_numeric($key) && is_array($content)) {
+                $_variations[key($content)] = array_shift($content);
+            } else {
+                $_variations[$key] = $content;
+            }
+        }
+        $this->_blockVariation = $_variations;
+    }
+    
+    public function getBlockVariations()
+    {
+        return $this->_blockVariation;
+    }
+    
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))

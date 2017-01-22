@@ -223,7 +223,7 @@ class NavController extends \luya\admin\base\RestController
      */
     public function actionCreatePage()
     {
-        $fromDraft = $this->postArg('from_draft_id');
+        $fromDraft = $this->postArg('use_draft');
         $model = new Nav();
         
         $parentNavId = $this->postArg('parent_nav_id');
@@ -234,7 +234,7 @@ class NavController extends \luya\admin\base\RestController
         }
         
         if (!empty($fromDraft)) {
-            $create = $model->createPageFromDraft($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('description'), $fromDraft, $this->postArg('is_draft'));
+            $create = $model->createPageFromDraft($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('description'), $this->postArg('from_draft_id'), $this->postArg('is_draft'));
         } else {
             $create = $model->createPage($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'), $this->postArg('is_draft'));
         }

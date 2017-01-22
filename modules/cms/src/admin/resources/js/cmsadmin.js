@@ -27,15 +27,17 @@
 					}
 				}
 				
+				$scope.toggler = true;
+				
 				init();
 			},
 			template : function() {
-				return '<div class="menu-dropdown__category" ng-repeat="container in menuData.containers">' +
+				return '<div class="menu-dropdown__category"><span style="cursor:pointer; user-select: none;" ng-click="toggler=!toggler"><i class="material-icons" ng-if="toggler">keyboard_arrow_down</i><i class="material-icons" ng-if="!toggler">keyboard_arrow_up</i></span><br /><div ng-show="toggler" ng-repeat="container in menuData.containers">' +
                             '<b class="menu-dropdown__title">{{container.name}}</b>' +
                             '<ul class="menu-dropdown__list">' +
                                 '<li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse\'"></li>' +
                             '</ul>' +
-                        '</div>';
+                        '</div><div>';
 			}
 		}
 	});
@@ -233,6 +235,8 @@
 			controller : function($scope) {
 				
 				$scope.data.use_draft = 0;
+				$scope.data.layout_id = 0;
+				$scope.data.from_draft_id = 0;
 				
 				// layoutsData
 				
@@ -304,35 +308,6 @@
 	
 	// factory.js
 	
-	/*
-	 * zaa.factory('ApiCmsNavContainer', function($resource) { return
-	 * $resource('admin/api-cms-navcontainer/:id'); });
-	 */
-	
-	/*
-	 * zaa.factory('ApiCmsBlock', function($resource) { return
-	 * $resource('admin/api-cms-block/:id'); });
-	 */
-	
-	/*
-	zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
-		return $resource('admin/api-cms-navitempageblockitem/:id', { id : '@_id' }, {
-			save : {
-				method : 'POST',
-				isArray : false,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-			},
-			update : {
-				method : 'PUT',
-				isArray : false,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-			},
-			'delete' : {
-				method : 'DELETE'
-			}
-		});
-	});
-	*/
 	zaa.factory('PlaceholderService', function() {
 		var service = [];
 		
@@ -1248,6 +1223,34 @@
 			$scope.data = n;
 		});
 		
+		$scope.$watch(function() { return $scope.block.variation }, function(n, o) {
+			$scope.evalVariationVisbility(n);
+		});
+		
+		$scope.evalVariationVisbility = function(variatenName) {
+			if ($scope.block.variations.hasOwnProperty(variatenName)) {
+				var variation = $scope.block.variations[$scope.block.variation];
+				angular.forEach(variation, function(value, key) {
+					if (angular.isObject(value)) {
+						angular.forEach(value, function(v, k) {
+							angular.forEach($scope.block[key], function(object) {
+								if (k == object.var) {
+									object.invisible = true;
+								}
+							});
+						})
+					}
+				});
+			} else {
+				angular.forEach($scope.block.cfgs, function(object) {
+					object.invisible = false;
+				});
+				angular.forEach($scope.block.vars, function(object) {
+					object.invisible = false;
+				});
+			}
+		}
+		
 		$scope.cfgdata = $scope.block.cfgvalues || {};
 		
 		$scope.edit = false;
@@ -1301,44 +1304,23 @@
 					$toast.close();
 					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: block.name}), 2000);
 				});
-				/*
-				ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
-					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
-					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
-					$toast.close();
-					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: block.name}), 2000);
-				});
-				*/
 			});
 		};
 		
 		$scope.save = function () {
-			$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.block.id, {json_config_values: $scope.data, json_config_cfg_values: $scope.cfgdata}).success(function(response) {
+			$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.block.id, {
+				json_config_values: $scope.data,
+				json_config_cfg_values: $scope.cfgdata,
+				variation: $scope.block.variation
+			}).success(function(response) {
 				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}), 2000);
 				$scope.edit = false;
 				$scope.config = false;
 				$scope.block.is_dirty = 1;
 				$scope.block = angular.copy(response.objectdetail);
 				$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
+				$scope.evalVariationVisbility($scope.block.variation);
 			});
-			/*
-			return;
-			ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data), json_config_cfg_values : JSON.stringify($scope.cfgdata) }), function(rsp) {
-				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}), 2000);
-				$scope.edit = false;
-				$scope.config = false;
-				$scope.block.is_dirty = 1;
-				$http({
-				    url: 'admin/api-cms-navitem/get-block', 
-				    method: "GET",
-				    params: { blockId : $scope.block.id }
-				}).success(function(rsp) {
-					$scope.block = rsp;
-					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
-				});
-				
-			});
-			*/
 		}
 		
 	});
@@ -1376,12 +1358,6 @@
 						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 						$scope.droppedBlock = {};
 					});
-					/*
-					ApiCmsNavItemPageBlockItem.save($.param({ prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }), function(rsp) {
-						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
-						$scope.droppedBlock = {};
-					})
-					*/
 				} else {
 					$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.droppedBlock.id, {
 						prev_id : $scope.placeholder.prev_id,
@@ -1393,18 +1369,6 @@
 						$($ui.helper).remove(); //destroy clone
 			            $($ui.draggable).remove(); //remove from list
 					});
-					/*
-					ApiCmsNavItemPageBlockItem.update({ id : $scope.droppedBlock.id }, $.param({
-						prev_id : $scope.placeholder.prev_id,
-						placeholder_var : $scope.placeholder.var,
-						sort_index : sortIndex
-					}), function(rsp) {
-						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
-						$scope.droppedBlock = {};
-						$($ui.helper).remove(); //destroy clone
-			            $($ui.draggable).remove(); //remove from list
-					});
-					*/
 				}
 			}
 			AdminClassService.setClassSpace('onDragStart', undefined);

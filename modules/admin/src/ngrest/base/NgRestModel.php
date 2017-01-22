@@ -303,8 +303,9 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     private $_ngRestPrimaryKey = null;
     
     /**
+     * Getter method for NgRest Primary Key.
      *
-     * @return \yii\db\string
+     * @return string
      */
     public function getNgRestPrimaryKey()
     {
@@ -320,6 +321,16 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         return $this->_ngRestPrimaryKey;
     }
 
+    /**
+     * Setter method for NgRest Primary Key
+     *
+     * @param string $key
+     */
+    public function setNgRestPrimaryKey($key)
+    {
+        $this->_ngRestPrimaryKey = $key;
+    }
+    
     /**
      *
      * @param unknown $field

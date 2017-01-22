@@ -54,7 +54,7 @@ php index.php import
 4.) and finally after importer has been run successfully setup the envs instance and configure your user account:
 
 ```sh
-php index.php setup
+php index.php admin/setup
 ```
 
 5.) Open the *public_html* folder of your dev environment in your browser`localhost/luya/envs/dev/public_html`.

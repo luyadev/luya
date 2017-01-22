@@ -98,6 +98,14 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @inheritdoc
      */
+    public function getIsDirtyDialogEnabled()
+    {
+        return true;
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function getIsContainer()
     {
         return $this->isContainer;
@@ -292,11 +300,13 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     public function setVarValues(array $values)
     {
-        $this->_varValues = $values;
+        foreach ($values as $key => $value) {
+            $this->_varValues[$key] = $value;
+        }
     }
     
     /**
-     * 
+     *
      * @return array
      */
     public function getVarValues()
@@ -324,11 +334,13 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     public function setCfgValues(array $values)
     {
-        $this->_cfgValues = $values;
+        foreach ($values as $key => $value) {
+            $this->_cfgValues[$key] = $value;
+        }
     }
 
     /**
-     * 
+     *
      * @return array
      */
     public function getCfgValues()
@@ -338,7 +350,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
 
     /**
      * Define additional variables.
-     * 
+     *
      * @return array
      */
     public function extraVars()
@@ -348,7 +360,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     /**
      * Add an extra var entry.
-     * 
+     *
      * If the extra var is defined in extraVars() the key will be overriden.
      * @param string $key
      * @param mixed $value
@@ -372,7 +384,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     private $_assignExtraVars = false;
     
     /**
-     * 
+     *
      * @param string $key
      * @param string $default
      * @return string|mixed
@@ -407,24 +419,24 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         
         if (isset($config['vars'])) {
             foreach ($config['vars'] as $item) {
-            	$iteration = count($this->_vars) + 500;
+                $iteration = count($this->_vars) + 500;
                 $this->_vars[$iteration] = (new BlockVar($item))->toArray();
             }
         }
-		ksort($this->_vars);
+        ksort($this->_vars);
         return array_values($this->_vars);
     }
 
     /**
      * Add a var variable to the config.
-     * 
+     *
      * @param array $varConfig
      * @param boolean Whether the variable should be append to the end instead of prepanding.
      */
     public function addVar(array $varConfig, $append = false)
     {
-    	$count = count($this->_vars);
-    	$iteration = $append ? $count + 1000 : $count;
+        $count = count($this->_vars);
+        $iteration = $append ? $count + 1000 : $count;
         $this->_vars[$iteration] = (new BlockVar($varConfig))->toArray();
     }
     
@@ -447,7 +459,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         
         if (isset($config['cfgs'])) {
             foreach ($config['cfgs'] as $item) {
-            	$iteration = count($this->_cfgs) + 500;
+                $iteration = count($this->_cfgs) + 500;
                 $this->_cfgs[$iteration] = (new BlockCfg($item))->toArray();
             }
         }
@@ -457,14 +469,14 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     /**
      * Add a cfg variable to the config.
-     * 
+     *
      * @param array $cfgConfig
      * @param boolean Whether the variable should be append to the end instead of prepanding.
      */
     public function addCfg(array $cfgConfig, $append = false)
     {
-    	$count = count($this->_cfgs);
-    	$iteration = $append ? $count + 1000 : $count;
+        $count = count($this->_cfgs);
+        $iteration = $append ? $count + 1000 : $count;
         $this->_cfgs[$iteration] = (new BlockCfg($cfgConfig))->toArray();
     }
     
@@ -497,6 +509,25 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         }
         
         return $moduleName;
+    }
+    
+    /**
+     * Configure Variations.
+     *
+     * ```php
+     * TextBlock::variations()
+     *     ->add('bold', 'Bold Font with Markdown')->cfgs(['cssClass' => 'bold-font-class'])->vars(['textType' => 1])
+     *     ->add('italic', 'Italic Font')->cfgs(['cssClass' => 'italic-font-class'])
+     *     ->register(),
+     * VideoBlock::variations()
+     *     ->add('bold', 'Bold Videos')->cfgs([])->register(),
+     * ```
+     *
+     * @return \luya\cms\base\BlockFlavor
+     */
+    public static function variations()
+    {
+        return (new BlockVariationRegister(new static));
     }
     
     /**

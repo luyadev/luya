@@ -42,13 +42,22 @@ use luya\rest\ActiveController;
  *
  * You can also access getter fields from the $model class in order to display such informations in the checkbox selection. Assuming you have a `getMyName` method in the
  * $model object you can use it in the `labelFields` as `myName`.
+ * 
+ * In order to use a function for the labelFields:
+ * 
+ * ```php
+ * 'labelFields' => function($model) {
+ *     return $model->firstname . ' ' . $model->lastname;
+ * }
+ * ```
  *
  * @property \luya\admin\ngrest\base\NgRestModel $model The model object
+ * @property string $modelPrimaryKey The primary key string.
  * @author Basil Suter <basil@nadar.io>
  */
 class CheckboxRelation extends Plugin
 {
-    private $_model;
+    
     
     /**
      * @var string The reference table table name e.g. `admin_user_groupadmin_user_group`.
@@ -66,7 +75,13 @@ class CheckboxRelation extends Plugin
     public $refJoinPkId = null;
 
     /**
-     * @var array A list of fields which should be used for the display template.
+     * @var array A list of fields which should be used for the display template. Can also be a callable function to build the field with the template
+     * 
+     * ```php
+     * 'labelFields' => function($model) {
+     *     return $model->firstname . ' ' . $model->lastname;
+     * }
+     * ```
      */
     public $labelFields = null;
 
@@ -91,11 +106,6 @@ class CheckboxRelation extends Plugin
         $this->addEvent(NgRestModel::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
     }
     
-    public function setModel($className)
-    {
-        $this->_model = $className;
-    }
-
     private $_modelPrimaryKey = null;
     
     public function getModelPrimaryKey()
@@ -104,10 +114,27 @@ class CheckboxRelation extends Plugin
             $pkname = $this->model->primaryKey();
             $this->_modelPrimaryKey = reset($pkname);
         }
-        
+    
         return $this->_modelPrimaryKey;
     }
     
+    private $_model;
+    
+    /**
+     * Setter method for the model.
+     * 
+     * @param string $className
+     */
+    public function setModel($className)
+    {
+        $this->_model = $className;
+    }
+
+    /**
+     * Getter method for model.
+     * 
+     * @return \yii\base\Model
+     */
     public function getModel()
     {
         if (!is_object($this->_model)) {
@@ -115,29 +142,6 @@ class CheckboxRelation extends Plugin
         }
         
         return $this->_model;
-    }
-    
-    private function getOptionsData()
-    {
-        $items = [];
-
-        $pk = $this->model->primaryKey();
-        $pkName = $this->getModelPrimaryKey();
-
-        $select = $this->labelFields;
-        $select[] = $pkName;
-        foreach ($this->model->find()->all() as $item) {
-            $array = $item->getAttributes($select);
-            unset($array[$pkName]);
-            if ($this->labelTemplate) {
-                $label = vsprintf($this->labelTemplate, $array);
-            } else {
-                $label = implode(', ', $array);
-            }
-            $items[] = ['value' => $item[$pkName], 'label' => $label];
-        }
-
-        return ['items' => $items];
     }
     
     /**
@@ -167,6 +171,29 @@ class CheckboxRelation extends Plugin
         return $this->renderCreate($id, $ngModel);
     }
 
+    /**
+     * Get the options data to display.
+     * 
+     * @return array
+     */
+    private function getOptionsData()
+    {
+        $items = [];
+    
+        foreach ($this->model->find()->all() as $item) {
+            if (is_callable($this->labelFields, false)) {
+                $label = call_user_func($this->labelFields, $item);
+            } else {
+                $array = $item->getAttributes($this->labelFields);
+                $label = $this->labelTemplate ? vsprintf($this->labelTemplate, $array) : implode(', ', $array);
+            }
+    
+            $items[] = ['value' => $item[$this->modelPrimaryKey], 'label' => $label];
+        }
+    
+        return ['items' => $items];
+    }
+    
     /**
      * @inheritdoc
      */

@@ -7,7 +7,7 @@ use luya\admin\models\Lang;
 
 /**
  * Admin Language Component.
- * 
+ *
  * The component is registered by the admin module and provides methods to collect language data.
  *
  * @property string $getLanguageByShortCode Get the language from a shortCode..
@@ -15,7 +15,7 @@ use luya\admin\models\Lang;
  * @property integer $activeId Get the current active language ID.
  * @property string $activeShortCode Get the current active langauge Short-Code.
  * @property array $activeLanguage Get the array of the current active language (its not an AR object!).
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class AdminLanguage extends Component
@@ -84,7 +84,7 @@ class AdminLanguage extends Component
     
     /**
      * Get the language from a shortCode.
-     * 
+     *
      * @param string $shortCode
      * @return boolean|mixed
      */

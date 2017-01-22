@@ -69,6 +69,15 @@ In the example above, the view file should looke like this:
 <?php endif; ?>
 ```
 
+In order to retrieve values from configurations (`$this->[METHOD]`):
+
+|Type|Method
+|----|------
+|var|{{luya\cms\base\PhpBlockView::varValue}}
+|cfg|{{luya\cms\base\PhpBlockView::cfgValue}}
+|extra|{{luya\cms\base\PhpBlockView::extraValue}}
+|placeholder|{{luya\cms\base\PhpBlockView::placeholderValue}}
+
 Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
 
 #### Register and import
@@ -188,7 +197,7 @@ public function callbackHelloWorld($time)
 The above callback requires the parameter `$time` and must be called trough an ajax call inside of the javascript, to create the url for this specific callback we are going to use createAjaxLink:
 
 ```php
-$this->createAjaxLink('HellWorld', ['zeit' => time()]);
+$this->createAjaxLink('HellWorld', ['time' => time()]);
 ```
 
 You could store this created link from above inside your extras vars and pass it to the javascript.
@@ -246,3 +255,19 @@ You can also use one of the predefined group block class:
 + {{\luya\cms\frontend\blockgroups\DevelopmentGroup}}
 + {{\luya\cms\frontend\blockgroups\MediaGroup}}
 + {{\luya\cms\frontend\blockgroups\TextGroup}}
+
+# Variations
+
+In order to provide block flavors configure your `blockVariation` property of the `cmsadmin` module inside your configuration file as follow:
+
+```php
+'cmsadmin' => [
+    'class' => 'luya\cms\admin\Module',
+    'blockVariations' => [
+        TextBlock::variations()
+            ->add('bold-flavor', 'Bold font with Markdown')->cfgs(['cssClass' => 'bold-font'])->vars(['textType' => 1])
+            ->add('italic-flavor', 'Italic Font')->cfgs(['cssClass' => 'italic-font'])
+            ->register(),
+    ]
+],
+```

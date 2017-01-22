@@ -29,9 +29,9 @@ class BaseBootstrapTest extends \luyatests\LuyaWebTestCase
     
     public function testEmptyModules()
     {
-    	$app = new Application(['id' => '123', 'basePath' => '']);
-    	$boot = new CustomBootstrap();
-    	$boot->bootstrap($app);
-    	$this->assertSame([], $boot->getModules());
+        $app = new Application(['id' => '123', 'basePath' => '']);
+        $boot = new CustomBootstrap();
+        $boot->bootstrap($app);
+        $this->assertSame([], $boot->getModules());
     }
 }

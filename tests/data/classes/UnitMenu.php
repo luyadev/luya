@@ -51,7 +51,8 @@ class UnitMenu extends Component
     }
 }
 
-class Item {
+class Item
+{
     public $type = 1;
     
     public $link = 'this-is-a-cms-link';

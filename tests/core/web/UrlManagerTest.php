@@ -6,6 +6,7 @@ use Yii;
 use luya\web\UrlManager;
 use luya\web\Request;
 use luyatests\data\classes\UnitMenu;
+use luya\web\Composition;
 
 /**
  * @author nadar
@@ -97,7 +98,6 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $route = $urlManager->parseRequest($request);
         
         $this->assertFalse($route);
-    
     }
 
     public function testCompositionRequest()
@@ -253,5 +253,45 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $r = $urlManager->createMenuItemUrl(['moduledoesnotexists/controller/action'], 3);
          
         $this->assertContains('moduledoesnotexists/controller/action', $r);
+    }
+    
+    /**
+     * @see https://github.com/luyadev/luya/issues/1146
+     */
+    public function testCompositionRuleWithHiddenLanguageButCompositionLangShortCodeMatching()
+    {
+        $request = new Request();
+        $request->pathInfo = 'mentions-legales';
+        $composition = new Composition($request, ['hidden' => true, 'default' => ['langShortCode' => 'fr']]);
+        $this->assertSame('fr', $composition->language);
+        $urlManager = new UrlManager();
+        $urlManager->composition = $composition;
+        $urlManager->addRules([
+            ['pattern' => '', 'route' => 'wirpre/default/index'],
+            ['pattern' => 'impressum', 'route' => 'wirpre/default/imprint', 'composition' => ['fr' => 'mentions-legales']],
+        ]);
+        $parsed = $urlManager->parseRequest($request);
+        
+        $this->assertSame($composition->hidden, $urlManager->composition->hidden);
+        $this->assertSame($composition->default, $urlManager->composition->default);
+        $this->assertTrue($urlManager->routeHasLanguageCompositionPrefix('fr/foo/bar', 'fr'));
+        $this->assertFalse($urlManager->routeHasLanguageCompositionPrefix('fr/foo/bar', 'de'));
+        
+        $this->assertSame('wirpre/default/imprint', $parsed[0]);
+    }
+    
+    public function testCompositionRuleWithHiddenLanguageAsUrlCreation()
+    {
+        $request = new Request();
+        $request->pathInfo = '/';
+        $composition = new Composition($request, ['hidden' => true, 'default' => ['langShortCode' => 'fr']]);
+        $urlManager = new UrlManager();
+        $urlManager->composition = $composition;
+        $urlManager->addRules([
+                ['pattern' => '', 'route' => 'wirpre/default/index'],
+                ['pattern' => 'impressum', 'route' => 'wirpre/default/imprint', 'composition' => ['fr' => 'mentions-legales']],
+        ]);
+        $url = $urlManager->createUrl(['/wirpre/default/imprint']);
+        $this->assertContains('/mentions-legales', $url);
     }
 }

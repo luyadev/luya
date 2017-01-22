@@ -91,7 +91,7 @@ final class MapBlock extends TwigBlock
 
     public function twigFrontend()
     {
-        return '{% if vars.address is not empty %}<div class="embed-responsive embed-responsive-16by9"><iframe src="http://maps.google.com/maps?f=q&source=s_q&hl=de&geocode=&q={{ extras.address }}&z={{ extras.zoom }}&t={{ extras.maptype }}&output=embed" width="600" height="450" frameborder="0" style="border:0"></iframe></div>{% endif %}';
+        return '{% if vars.address is not empty %}<div class="embed-responsive embed-responsive-16by9"><iframe src="http://maps.google.com/maps?f=q&source=s_q&hl=de&geocode=&q={{ extras.address|url_encode }}&z={{ extras.zoom }}&t={{ extras.maptype }}&output=embed" width="600" height="450" frameborder="0" style="border:0"></iframe></div>{% endif %}';
     }
 
     public function twigAdmin()

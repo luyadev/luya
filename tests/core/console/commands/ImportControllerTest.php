@@ -34,7 +34,6 @@ class ImportControllerTest extends \luyatests\LuyaConsoleTestCase
         $this->assertArrayHasKey(0, $files);
         
         $this->assertSame('ImportTestFile.php', $files[0]['file']);
-        
     }
     
     public function testImporterQueue()

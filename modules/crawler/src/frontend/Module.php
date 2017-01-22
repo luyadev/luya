@@ -75,4 +75,8 @@ class Module extends \luya\base\Module
      * @var array E-Mail-Adresses array with recipients for the statistic command
      */
     public $statisticRecipients = [];
+    
+    public $urlRules = [
+        ['pattern' => 'click/<slug:[a-zA-Z0-9\-]+>/<searchId:\d+>/<indexId:\d+>/<position:\d+>', 'route' => 'crawler/click/index'],
+    ];
 }

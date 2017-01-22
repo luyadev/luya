@@ -33,7 +33,7 @@
 	 * + bool $config.inline Determines whether this crud is in inline mode orno
 	 */
 	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, $injector, AdminLangService, LuyaLoading, AdminToastService, CrudTabService) {
-		
+
 		LuyaLoading.start();
 		
 		$scope.toast = AdminToastService;

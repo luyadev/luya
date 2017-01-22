@@ -3,34 +3,62 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
-use Yii;
-use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
+use luya\cms\injectors\LinkInjector;
 
 /**
  * Simple button element with a link function
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class LinkButtonBlock extends TwigBlock
+final class LinkButtonBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
+    public $module = 'cms';
+    
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
 
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_link_button_name');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'link';
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function injectors()
+    {
+        return [
+            'linkData' => new LinkInjector([
+                'varLabel' => Module::t('block_link_button_btnlabel_label'),
+            ]),
+        ];
+    }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
             'vars' => [
                 ['var' => 'label', 'label' => Module::t('block_link_button_btnlabel_label'), 'type' => 'zaa-text'],
-                ['var' => 'linkData', 'label' => Module::t('block_link_button_btnhref_label'), 'type' => 'zaa-link'],
             ],
             'cfgs' => [
                 [
@@ -47,42 +75,22 @@ final class LinkButtonBlock extends TwigBlock
         ];
     }
 
-    public function getLinkTarget()
-    {
-        $linkData = $this->getVarValue('linkData', null);
-        $data = null;
-        if ($linkData) {
-            if ($linkData['type'] == '1') {
-                $menu = Yii::$app->menu->find()->where(['nav_id' => $linkData['value']])->one();
-                if ($menu) {
-                    $data = $menu->getLink();
-                }
-            }
-            if ($linkData['type'] == '2') {
-                $data = $linkData['value'];
-            }
-        }
-        return $data;
-    }
-    
+    /**
+     * @inheritdoc
+     */
     public function extraVars()
     {
         return [
-            'linkTarget' => $this->getLinkTarget(),
-            'cssClass' => $this->getCfgValue('simpleLink', 'btn btn-default'),
+            'cssClass' => $this->getCfgValue('simpleLink') ? null : 'btn btn-default',
         ];
     }
 
-    public function twigFrontend()
+    /**
+     * @inheritdoc
+     */
+    public function admin()
     {
-        return '{% if extras.linkTarget is not empty %}<a class="{{ extras.cssClass }}"{% if cfgs.targetBlank == 1  %}target="_blank" ' .
-        '{% endif %} href="{{ extras.linkTarget }}">{% if vars.label is not empty %} {{ vars.label }} {% endif %}' .
-        '</a>{% endif %}';
-    }
-
-    public function twigAdmin()
-    {
-        return '<p>' . Module::t('block_link_button_name') . ': {% if vars.linkData is empty %}' . Module::t('block_link_button_empty') . '</p>{% else %}' .
-        '</p><br/><strong>{% if vars.label is not empty %} {{ vars.label }} {% endif %}</strong>{% endif %}';
+        return '<p>{% if vars.label is empty or vars.linkData is empty %}' . Module::t('block_link_button_name') . ': ' . Module::t('block_link_button_empty') . '{% else %}' .
+        '{% if vars.label is not empty %}<a class="btn disabled">{{ vars.label }}</a>{% endif %}{% endif %}</p>';
     }
 }

@@ -191,4 +191,9 @@ class ConcreptImplementationBlock implements BlockInterface
     {
         return false;
     }
+    
+    public function getIsDirtyDialogEnabled()
+    {
+        return true;
+    }
 }

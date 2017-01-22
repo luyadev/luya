@@ -15,7 +15,7 @@ use luya\cms\admin\Module;
     </div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-        <div class="block clearfix" ng-class="{ 'block--edit' : edit , 'block--config' : config ,'block--is-hidden': block.is_hidden==1,'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container, 'block--is-container': block.is_container, 'block--first': $first, 'block--last': $last }" data-drag="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: true, refreshPositions : true, snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 } }" ng-model="block">
+        <div class="block clearfix" ng-class="{ 'block--edit' : edit , 'block--config' : config ,'block--is-hidden': block.is_hidden==1,'block--is-dirty' : !block.is_dirty && isEditable() &&block.is_dirty_dialog_enabled && !block.is_container, 'block--is-container': block.is_container, 'block--first': $first, 'block--last': $last }" data-drag="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: true, refreshPositions : true, snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 } }" ng-model="block">
             <div class="block__toolbar">
                 <div class="left">
                     <i class="block__move material-icons">open_with</i>
@@ -34,7 +34,7 @@ use luya\cms\admin\Module;
             <div class="block__body block-styles" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <form class="block__edit" ng-if="edit || config" ng-submit="save()">
                 <div class="block__edit-content">
-                    <div class="row" ng-repeat="field in block.vars">
+                    <div class="row" ng-repeat="field in block.vars" ng-hide="field.invisible">
                         <div class="block__help help help--is-right-aligned" ng-if="hasInfo(field.var)">
                             <div class="help__button">
                                 <i class="help__icon material-icons">help_outline</i>
@@ -46,7 +46,7 @@ use luya\cms\admin\Module;
                 </div>
                 <div class="block__config-content">
                     <p class="block__config__text"><span class="block__config__text-section"><?php echo Module::t('view_update_configs'); ?></span></p>
-                    <div class="row" ng-repeat="cfgField in block.cfgs">
+                    <div class="row" ng-repeat="cfgField in block.cfgs" ng-hide="cfgField.invisible">
                         <div class="block__help help help--is-right-aligned" ng-if="hasInfo(cfgField.var)">
                             <div class="help__button">
                                 <i class="help__icon material-icons">help_outline</i>
@@ -59,7 +59,16 @@ use luya\cms\admin\Module;
                 <br />
                 <div class="modal__footer">
                     <div class="row">
-                        <div class="col s12">
+                        <div class="col s6">
+                            <div ng-if="block.variations">
+                                Select a block variation:
+                                <select ng-model="block.variation">
+                                    <option value="0">No variation selected</option>
+                                    <option value="{{variationKey}}" ng-repeat="(variationKey, variation) in block.variations">{{variation.title}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col s6">
                             <div class="right">
                             	<button class="[ waves-effect waves-light ] btn btn--small red" type="button" ng-click="toggleBlockSettings()"><i class="material-icons left">cancel</i><?php echo Module::t('view_update_btn_cancel'); ?></button>
                                 <button class="[ waves-effect waves-light ] btn btn--small" type="submit"><i class="material-icons left">done</i><?php echo Module::t('view_update_btn_save'); ?></button>

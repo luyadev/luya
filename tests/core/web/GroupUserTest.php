@@ -47,7 +47,7 @@ class GroupAUserIdentity extends Model implements GroupUserIdentityInterface
 }
 
 class GroupUserTest extends LuyaWebTestCase
-{   
+{
     public function testInGroupButIsGuest()
     {
         $user = new GroupUser(['identityClass' => 'GroupAUserIdentity']);

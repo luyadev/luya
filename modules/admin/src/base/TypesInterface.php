@@ -35,7 +35,11 @@ interface TypesInterface
     const TYPE_DECIMAL = 'zaa-decimal';
     
     /**
-     * @var string
+     * @var string The example out for the link type:
+     *
+     * ```php
+     * ['type' => 2, 'value' => 'https://luya.io']
+     * ```
      */
     const TYPE_LINK = 'zaa-link';
     
@@ -90,7 +94,11 @@ interface TypesInterface
     const TYPE_IMAGEUPLOAD_ARRAY = 'zaa-image-upload-array';
     
     /**
-     * @var string
+     * @var string The arrayable json output would be:
+     *
+     * ```php
+     * [['value' => 1], ['value' => 2]]]
+     * ```
      */
     const TYPE_LIST_ARRAY = 'zaa-list-array';
     

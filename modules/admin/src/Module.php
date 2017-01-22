@@ -181,7 +181,13 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public function getJsTranslations()
     {
-        return $this->_jsTranslations;
+        $translations = [];
+        foreach ($this->_jsTranslations as $module => $data) {
+            foreach ($data as $key) {
+                $translations[$key] = Yii::t($module, $key, [], Yii::$app->luyaLanguage);
+            }
+        }
+        return $translations;
     }
     
     /**
@@ -193,11 +199,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public function setJsTranslations(array $translations)
     {
-        foreach ($translations as $module => $data) {
-            foreach ($data as $key) {
-                $this->_jsTranslations[$key] = Yii::t($module, $key, [], Yii::$app->luyaLanguage);
-            }
-        }
+        $this->_jsTranslations = $translations;
     }
     
     /**

@@ -45,8 +45,8 @@ class BootTest extends \luyatests\LuyaWebTestCase
     
     public function testSetterGetterConfig()
     {
-    	$boot = new Boot();
-    	$boot->setConfigArray(['foo' => 'bar']);
-    	$this->assertSame(['foo' => 'bar'], $boot->getConfigArray());
+        $boot = new Boot();
+        $boot->setConfigArray(['foo' => 'bar']);
+        $this->assertSame(['foo' => 'bar'], $boot->getConfigArray());
     }
 }
