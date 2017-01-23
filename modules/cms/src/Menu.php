@@ -18,8 +18,8 @@ use luya\cms\menu\InjectItem;
 /**
  * Menu container component by language.
  *
- * The menu container component returns an array with all menu items for a specific language, the class
- * is designed to run in "singleton" mode. The menu component provides also basic find methods like findAll,
+ * The {{luya\cms\Menu}} component returns an array with all menu items for a specific language, the class
+ * is designed to run in "singleton" mode. The {{luya\cms\Menu}} component provides also basic find methods like findAll,
  * findOne to return specific data via the Query class. The menu components resolves also the current item
  * based on the current request object.
  *
@@ -45,12 +45,12 @@ use luya\cms\menu\InjectItem;
  *
  * ### find()
  *
- * The find() methods is wrapper for creating a new cms\menu\Query().
+ * The find() methods is wrapper for creating a new \luya\cms\menu\Query().
  *
  * ```php
  * $itemsArray = Yii::$app->menu->find()->where(['id' => 1])->lang('en')->all();
  * // is equal to:
- * $itemsArray = (new \cms\menu\Query())->where(['id' => 1])->lang('en')->all();
+ * $itemsArray = (new \luya\cms\menu\Query())->where(['id' => 1])->lang('en')->all();
  * ```
  *
  * ### current
