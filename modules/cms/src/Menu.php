@@ -357,12 +357,12 @@ class Menu extends Component implements ArrayAccess
     /**
      * Get all items for a specific level.
      *
-     * @param integer $level levels starts with 1
+     * @param integer $level Define the level you like to get the items from, the hirarchy starts by the level 1, which is the root line.
      * @param \luya\cms\menu\Item $baseItem Provide an optional element which represents the base calculation item for Theme
      * siblings/children calculation, this can be case when you have several contains do not want to use the "current" Item
      * as base calucation, because getCurrent() could be in another container so it would get you all level container items for
      * this container.
-     * @return boolean|\luya\cms\menu\QueryIterator All siblings or children items.
+     * @return array|\luya\cms\menu\QueryIterator All siblings or children items, if not found an empty array will return.
      */
     public function getLevelContainer($level, Item $baseItem = null)
     {
@@ -388,7 +388,7 @@ class Menu extends Component implements ArrayAccess
             $i++;
         }
         // no no container found for the defined level
-        return false;
+        return [];
     }
 
     /**

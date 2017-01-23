@@ -94,6 +94,22 @@ To get the current breadcrumbs of the current menu item you can use the item obj
 </ol>
 ```
 
+## Menu Levels
+
+Sometimes you have navigation which should stick based on the previous item, assuming you have 2 menus, one on the top and the other on the left side, in order to display the second menu based on the current active menu you can use {{luya\cms\Menu::getLevelContainer}}.
+
+```php
+// you print the first menu somewhere:
+foreach (Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all() as $item):
+    echo $item->title;
+endforeach;
+
+// but have a second menu based on the first menu somewhere else:
+foreach (Yii::$app->menu->getLevelContainer(2) as $secondItem):
+    echo $secondItem->title;
+endforeach; 
+```
+
 # Menu Item Injection
 
 There is also a possibility to inject data into the menu component direct from every part of your web application. An item inject gives a module the possibility to add items into the menu Container.
