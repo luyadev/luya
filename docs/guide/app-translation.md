@@ -27,6 +27,23 @@ Now all the message with the prefix `app` will be loaded into the message compon
         └── app-otherparts.php
 ```
 
+In order to register an {{luya\base\Module}} translation define the {{luya\base\Module::translations}} property as followed:
+
+```php
+public $translations = [
+    [
+        'prefix' => 'mymodule*',
+        'basePath' => '@path/to/messages',
+        'fileMap' => [
+            'mymodule' => 'mymodule.php',
+            'mymodule/subsection' => 'subsection.php',
+        ],
+    ],
+];
+```
+
+The above registered module translation messages can be retrieved as `Yii::t('mymodule', 'Key', 'Value')` or for the subsection `Yii::t('mymodule/subsection', 'Key', 'Value')`.
+
 ### Message Source Content
 
 The message source file itself which contains the translations for the specific language is an array with a key where you can identifier the message and a value which is the content. Example content for `messages/de/app.php`:
