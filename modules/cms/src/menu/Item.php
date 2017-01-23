@@ -45,6 +45,10 @@ use luya\helpers\Url;
  * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
  * @property boolean $isHome Returns true if the item is the home item, otherwise false.
  * @property string $absoluteLink The link path with prepand website host `http://luya.io/home/about-us`.
+ * @property integer $sortIndex Sort index position for the current siblings list.
+ * @property \luya\cms\menu\Item|boolean $nextSibling Returns the next sibling based on the current sibling, if not found false is returned.
+ * @property \luya\cms\menu\Item|boolean $prevSibling Returns the previous sibling based on the current sibling, if not found false is returned.
+ * @property \luya\cms\models\Nav|boolean $model Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta1
  */
@@ -108,6 +112,16 @@ class Item extends Object implements LinkInterface
     public function getId()
     {
         return (int) $this->itemArray['id'];
+    }
+    
+    /**
+     * Get the sorting index position for the item on the current siblings.
+     * 
+     * @return integer Sort index position for the current siblings list.
+     */
+    public function getSortIndex()
+    {
+        return (int) $this->itemArray['sort_index'];
     }
 
     /**
@@ -459,7 +473,30 @@ class Item extends Object implements LinkInterface
      */
     public function getSiblings()
     {
-        return (new Query())->where(['parent_nav_id' => $this->getParentNavId(), 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
+        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->with($this->_with)->lang($this->lang)->all();
+    }
+    
+    /**
+     * Get the next sibling in the current siblings list.
+     * 
+     * If there is no next sibling (assuming its the last sibling item in the list) false is returned, otherwise the {{luya\cms\menu\Item}} is returned.
+     * 
+     * @return \luya\cms\menu\Item|boolean Returns the next sibling based on the current sibling, if not found false is returned.
+     */
+    public function getNextSibling()
+    {
+        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->andWhere(['>', 'sort_index', $this->sortIndex])->with($this->_with)->lang($this->lang)->one();
+    }
+    
+    /**
+     * Get the previous sibling in the current siblings list.
+     * 
+     * If there is no previous sibling (assuming its the first sibling item in the list) false is returned, otherwise the {{luya\cms\menu\Item}} is returned.
+     * @return \luya\cms\menu\Item|boolean Returns the previous sibling based on the current sibling, if not found false is returned.
+     */
+    public function getPrevSibling()
+    {
+        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->andWhere(['<', 'sort_index', $this->sortIndex])->with($this->_with)->lang($this->lang)->one();
     }
     
     /**
@@ -499,7 +536,6 @@ class Item extends Object implements LinkInterface
     /**
      * Getter method wrapper for `hasChildren()`
      *
-     * @since 1.0.0-beta6
      * @return boolean
      */
     public function getHasChildren()
@@ -520,6 +556,25 @@ class Item extends Object implements LinkInterface
     private $_model = null;
     
     /**
+     * Get the ActiveRecord Model for the current Nav Model.
+     * 
+     * @throws \luya\cms\Exception
+     * @return \luya\cms\models\Nav Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
+     */
+    public function getModel()
+    {
+        if ($this->_model === null) {
+            $this->_model = Nav::findOne($this->navId);
+            
+            if (empty($this->_model)) {
+                throw new Exception('The model active record could not be found for the corresponding nav item. Maybe you have inconsistent Database data.');
+            }
+        }
+        
+        return $this->_model;
+    }
+    
+    /**
      * This method allows you the retrieve a property for an page property. If the property is not found false will be retunrend
      * otherwhise the property object itself will be returned (implements `\admin\base\Property`) so you can retrieve the value of the
      * property by calling your custom method or the default `getValue()` method.
@@ -529,15 +584,7 @@ class Item extends Object implements LinkInterface
      */
     public function getProperty($varName)
     {
-        if ($this->_model === null) {
-            $this->_model = Nav::findOne($this->navId);
-        }
-
-        if (empty($this->_model)) {
-            throw new Exception('The model active record could not be found for the corresponding nav item. Maybe you have inconsistent Database data.');
-        }
-        
-        return $this->_model->getProperty($varName);
+        return $this->model->getProperty($varName);
     }
 
     /**
