@@ -8,6 +8,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1177](https://github.com/luyadev/luya/issues/1177) The luya\web\Elements component looks for the elements.php inside the @app/views folder instead of @app.
 - [#1114](https://github.com/luyadev/luya/issues/1114) Updated materializecss to newest version and removed unused files.
 - [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated, renamed or removed functions collection.

@@ -76,7 +76,7 @@ class Element extends \yii\base\Component
     /**
      * @var string The path to the default element file. Alias names will be parsed by Yii::getAlias.
      */
-    public $configFile = '@app/elements.php';
+    public $configFile = '@app/views/elements.php';
 
     /**
      * @var string The path to the folder where the view files to render can be found.
