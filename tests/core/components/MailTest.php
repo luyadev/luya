@@ -85,7 +85,7 @@ class MailTest extends \luyatests\LuyaWebTestCase
     {
         $mail = new Mail();
         $mail->layout = '@app/views/maillayout.php';
-        $mail->setBody('CONTENT');
+        $mail->body('CONTENT');
         $this->assertEquals('<div>CONTENT</div>', $mail->mailer->Body);
     }
     
@@ -93,7 +93,21 @@ class MailTest extends \luyatests\LuyaWebTestCase
     {
         $mail = new Mail();
         $mail->layout = false;
-        $mail->setBody('CONTENT');
+        $mail->body('CONTENT');
         $this->assertEquals('CONTENT', $mail->mailer->Body);
+    }
+    
+    public function testChaining()
+    {
+        $mail = (new Mail())->compose()->subject('foobar')->body('barfoo')->mailer;
+        
+        $this->assertSame('foobar', $mail->Subject);
+        $this->assertSame('barfoo', $mail->Body);
+    }
+    
+    public function testEmptyChainException()
+    {
+        $this->expectException('luya\Exception');
+        $mail = (new Mail())->compose()->send();
     }
 }
