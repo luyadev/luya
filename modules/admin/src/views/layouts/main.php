@@ -282,18 +282,18 @@ $this->beginPage()
 
             <div class="row">
 
-            <div class="col" ng-class="{'s8' : fileDetail, 's12' : !fileDetail }">
+            <div class="filemanager__col col" ng-class="{'filemanager__col--file-details' : fileDetail, 's12' : !fileDetail }">
             <table class="filemanager__table hoverable striped">
                 <thead>
-                <tr>
-                    <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
-                        <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
-                    </th>
-                    <th></th>
-                    <th><?= Admin::t('layout_filemanager_col_name'); ?><i ng-click="changeSortField('name')" ng-class="{'active-orderby' : sortField == 'name' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-name')" ng-class="{'active-orderby' : sortField == '-name' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
-                    <th><?= Admin::t('layout_filemanager_col_type'); ?><i ng-click="changeSortField('extension')" ng-class="{'active-orderby' : sortField == 'extension' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-extension')" ng-class="{'active-orderby' : sortField == '-extension' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
-                    <th><?= Admin::t('layout_filemanager_col_date'); ?><i ng-click="changeSortField('uploadTimestamp')" ng-class="{'active-orderby' : sortField == 'uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-uploadTimestamp')" ng-class="{'active-orderby' : sortField == '-uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
-                </tr>
+                    <tr>
+                        <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
+                            <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
+                        </th>
+                        <th></th>
+                        <th><?= Admin::t('layout_filemanager_col_name'); ?><i ng-click="changeSortField('name')" ng-class="{'active-orderby' : sortField == 'name' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-name')" ng-class="{'active-orderby' : sortField == '-name' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                        <th><?= Admin::t('layout_filemanager_col_type'); ?><i ng-click="changeSortField('extension')" ng-class="{'active-orderby' : sortField == 'extension' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-extension')" ng-class="{'active-orderby' : sortField == '-extension' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                        <th><?= Admin::t('layout_filemanager_col_date'); ?><i ng-click="changeSortField('uploadTimestamp')" ng-class="{'active-orderby' : sortField == 'uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-uploadTimestamp')" ng-class="{'active-orderby' : sortField == '-uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                    </tr>
                 </thead>
                 <tbody>
 
@@ -317,52 +317,47 @@ $this->beginPage()
                 </tbody>
             </table>
             </div>
-            <div class="col s4" ng-show="fileDetail">
-                <div class="filemanager__detail-wrapper">
-                    <h4>{{ fileDetail.name }}</h4>
-                    <table class="filemanager__table striped">
-                        <tbody>
+            <div class="filemanager__details" ng-show="fileDetail">
+                <div class="filemanager__details-bar">
+                    <a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn--small"><?= Admin::t('layout_filemanager_detail_download'); ?></a>
+                    <button type="button" class="btn btn--small" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)"><?= Admin::t('layout_filemanager_detail_replace_file'); ?></button>
+                    <a class="filemanager__details-close btn red btn-floating right" ng-click="closeFileDetail()"><i class="material-icons">close</i></a>
+                </div>
+
+                <table class="filemanager__details-table filemanager__table">
+                    <tbody>
                         <tr>
-                            <td><i><?php echo Admin::t('layout_filemanager_detail_name'); ?></i></td><td>{{ fileDetail.name }}</td>
+                            <td><b><?php echo Admin::t('layout_filemanager_detail_name'); ?></b></td><td>{{ fileDetail.name }}</td>
                         </tr>
                         <tr>
-                            <td><i><?php echo Admin::t('layout_filemanager_detail_date'); ?></i></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                            <td><b><?php echo Admin::t('layout_filemanager_detail_date'); ?></b></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
                         </tr>
                         <tr>
-                            <td><i><?php echo Admin::t('layout_filemanager_detail_filetype'); ?></i></td><td>{{ fileDetail.extension }}</td>
+                            <td><b><?php echo Admin::t('layout_filemanager_detail_filetype'); ?></b></td><td>{{ fileDetail.extension }}</td>
                         </tr>
                         <tr>
-                            <td><i><?php echo Admin::t('layout_filemanager_detail_size'); ?></i></td><td>{{ fileDetail.sizeReadable }}</td>
+                            <td><b><?php echo Admin::t('layout_filemanager_detail_size'); ?></b></td><td>{{ fileDetail.sizeReadable }}</td>
                         </tr>
                         <tr>
-                            <td><i><?php echo Admin::t('layout_filemanager_detail_id'); ?></i></td><td> {{ fileDetail.id }}</td>
+                            <td><b><?php echo Admin::t('layout_filemanager_detail_id'); ?></b></td><td> {{ fileDetail.id }}</td>
                         </tr>
-                        <tr>
-                            <td colspan="2"><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn--small"><?= Admin::t('layout_filemanager_detail_download'); ?></a></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <button type="button" class="btn btn--small" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)"><?= Admin::t('layout_filemanager_detail_replace_file'); ?></button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="card-panel clearfix">
-                        <strong><?= Admin::t('layout_filemanager_file_captions'); ?></strong>
-                        <div class="input input--text input--vertical" ng-repeat="(key, cap) in fileDetail.captionArray">
-                            <label class="input__label" for="id-{{key}}">{{key}}</label>
-                            <div class="input__field-wrapper">
-                                <input class="input__field" id="id-{{key}}" name="{{key}}" type="text" ng-model="fileDetail.captionArray[key]" />
-                            </div>
+                    </tbody>
+                </table>
+
+                <div class="filemanager__details-panel clearfix">
+                    <strong><?= Admin::t('layout_filemanager_file_captions'); ?></strong>
+                    <div class="input input--text input--vertical" ng-repeat="(key, cap) in fileDetail.captionArray">
+                        <label class="input__label filemanager__details-input-label" for="id-{{key}}">{{key}}</label>
+                        <div class="input__field-wrapper">
+                            <input class="input__field" id="id-{{key}}" name="{{key}}" type="text" ng-model="fileDetail.captionArray[key]" />
                         </div>
-                        <button type="button" class="filemanager__detail-save-button btn btn--small right" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
                     </div>
-                    <span ng-if="fileDetail.isImage">
-                        <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
-                    </span>
-                    <a class="btn btn--small right" ng-click="closeFileDetail()"><i class="material-icons">zoom_out</i></a>
-                </div> <!-- detail-wrapper END -->
-            </div>
+                    <button type="button" class="filemanager__detail-save-button btn btn--small right" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
+                </div>
+
+                <span ng-if="fileDetail.isImage">
+                    <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
+                </span>
         </div>
         <!-- FILES & FOLDERS -->
 

@@ -3,6 +3,10 @@
     position: relative;
 }
 
+.filemanager__col--file-details {
+    width: calc(100% - 400px);
+}
+
 .filemanager__files td span,
 .filemanager__files td img,
 .filemanager__files td i,
@@ -75,6 +79,7 @@
 .filemanager__file-move-icon {
     margin-left: 10px;
     vertical-align: text-bottom;
+
     &:hover {
         background-color: color("green", "base");
         border-radius: 2px;
@@ -82,13 +87,68 @@
     }
 }
 
-.filemanager__detail-wrapper {
-    padding-top: 48px;
-    position: relative;
+.filemanager__details {
+    position: fixed;
+    right: 0;
+    top: $navbar-height;
+    padding: 25px 0 25px 25px;
+    width: 400px;
+    background-color: #4e4e4e;
+    color: #fff;
+    bottom: 0;
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    z-index: 500;
+    overflow: scroll;
 
-    tbody {
-        border-top: 1px solid #d0d0d0;
+    h4 {
+        margin-top: 0;
     }
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.filemanager__details-bar {
+    display: block;
+    margin-bottom: 25px;
+    @include clearfix;
+
+    a, button {
+        float: left;
+        margin-right: 15px;
+    }
+}
+
+.filemanager__details-panel {
+    padding: 20px 10px;
+    background-color: #f0f0f0;
+    margin: 25px 0;
+    color: #000;
+
+    strong {
+        display: block;
+        margin-bottom: 15px;
+    }
+    label {
+        color: #000;
+    }
+    .input + .input {
+        margin-top: 10px;
+    }
+}
+
+.filemanager__details-table {
+    margin: 25px 0;
+}
+
+.filemanager__details-input-label {
+    text-transform: uppercase;
+}
+
+.filemanager__details-close {
+    margin-top: -2px;
+    float: right;
 }
 
 .filemanager__main-folder {
@@ -167,7 +227,7 @@
     user-select: none;
     position: absolute;
     left: 0;
-    top: 4px;
+    top: 0;
     cursor: pointer;
 }
 
@@ -184,7 +244,7 @@
     cursor: pointer;
     padding: 0px 0 0px 2px;
     position: relative;
-    display:inline-block;
+    display: inline-block;
     width: 100%;
 
     .filemanager__folder-name {
@@ -265,9 +325,9 @@
         }
         .btn-floating {
             background-color: color("light-blue", "accent-1");
-            margin-top:-7px;
+            margin-top: -7px;
 
-            &:hover i{
+            &:hover i {
                 font-size: 1.8rem;
 
                 &.filemanager__cancel-icon {
@@ -304,7 +364,7 @@
         color: color("red", "base");
         font-size: 32px;
         transform: rotate(45deg);
-        padding-left:4px;
+        padding-left: 4px;
     }
     &:hover > .filemanager__edit-icon,
     &:hover > .filemanager__delete-icon {
@@ -345,6 +405,10 @@
 .filemanager__files {
     padding-left: 20px;
     width: calc(100% - #{$filemanager__tree--width});
+
+    .filemanager__col--file-details & {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
 }
 
 .filemanager__file {
