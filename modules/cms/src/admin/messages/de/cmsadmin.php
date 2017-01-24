@@ -160,4 +160,5 @@ return [
     
 // 1.0.0
     'model_navitempage_empty_draft_id' => 'Die Vorlage darf nicht leer sein.',
+    'view_update_variation_select' => 'Keine Blockvariation ausgewählt',
 ];

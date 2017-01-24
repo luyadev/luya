@@ -149,4 +149,5 @@ return [
     
 // 1.0.0
     'model_navitempage_empty_draft_id' => 'Impossibile creare una pagina da un modello vuoto.',
+    'view_update_variation_select' => 'No block variation selected',
 ];
