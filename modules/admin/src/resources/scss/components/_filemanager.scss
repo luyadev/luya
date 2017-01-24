@@ -91,7 +91,7 @@
     position: fixed;
     right: 0;
     top: $navbar-height;
-    padding: 25px 0 25px 25px;
+    padding: 25px 15px 25px 15px;
     width: 400px;
     background-color: #4e4e4e;
     color: #fff;
@@ -100,12 +100,17 @@
     z-index: 500;
     overflow: scroll;
 
+    .modal & {
+        position: relative;
+        top: 36px;
+    }
+
     h4 {
         margin-top: 0;
     }
 
     img {
-        max-width: 100%;
+        width: 100%;
     }
 }
 
@@ -116,7 +121,7 @@
 
     a, button {
         float: left;
-        margin-right: 15px;
+        margin-right: 10px;
     }
 }
 
@@ -135,6 +140,22 @@
     }
     .input + .input {
         margin-top: 10px;
+    }
+    .input {
+        position: relative;
+    }
+    .input__field {
+        padding-right: 35px !important;
+    }
+    .flag {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        z-index: 20;
+        margin-top: -10px;
+        opacity: 1;
     }
 }
 

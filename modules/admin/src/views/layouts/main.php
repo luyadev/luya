@@ -344,20 +344,20 @@ $this->beginPage()
                     </tbody>
                 </table>
 
+                <span ng-if="fileDetail.isImage">
+                    <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
+                </span>
+
                 <div class="filemanager__details-panel clearfix">
                     <strong><?= Admin::t('layout_filemanager_file_captions'); ?></strong>
                     <div class="input input--text input--vertical" ng-repeat="(key, cap) in fileDetail.captionArray">
-                        <label class="input__label filemanager__details-input-label" for="id-{{key}}">{{key}}</label>
+                        <span class="flag flag--{{key}}"><span class="flag__fallback flag__fallback--colorized">{{key}}</span></span>
                         <div class="input__field-wrapper">
                             <input class="input__field" id="id-{{key}}" name="{{key}}" type="text" ng-model="fileDetail.captionArray[key]" />
                         </div>
                     </div>
                     <button type="button" class="filemanager__detail-save-button btn btn--small right" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
                 </div>
-
-                <span ng-if="fileDetail.isImage">
-                    <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
-                </span>
         </div>
         <!-- FILES & FOLDERS -->
 
