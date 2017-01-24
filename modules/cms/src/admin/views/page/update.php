@@ -59,11 +59,10 @@ use luya\cms\admin\Module;
                 <br />
                 <div class="modal__footer">
                     <div class="row">
-                        <div class="col s6">
+                        <div class="input__field-wrapper col s6">
                             <div ng-if="block.variations">
-                                Select a block variation:
-                                <select ng-model="block.variation">
-                                    <option value="0">No variation selected</option>
+                                <select class="input__field" ng-model="block.variation">
+                                    <option value="0" selected><?php echo Module::t('view_update_variation_select'); ?></option>
                                     <option value="{{variationKey}}" ng-repeat="(variationKey, variation) in block.variations">{{variation.title}}</option>
                                 </select>
                             </div>
