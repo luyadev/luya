@@ -3,7 +3,7 @@
 namespace luya\components;
 
 use Yii;
-use Exception;
+use luya\Exception;
 use PHPMailer;
 use SMTP;
 
@@ -87,7 +87,7 @@ class Mail extends \yii\base\Component
     
     /**
      * @since 1.0.0-beta7
-     * @var string|boolean Define a layout template file which is going to be wrapped around the setBody()
+     * @var string|boolean Define a layout template file which is going to be wrapped around the body()
      * content. The file alias will be resolved so an example layout could look as followed:
      *
      * ```php
@@ -156,11 +156,15 @@ class Mail extends \yii\base\Component
      * @param string $body The HTML body of the mail message.
      * @return \luya\components\Mail
      */
-    public function compose($subject, $body)
+    public function compose($subject = null, $body = null)
     {
         $this->cleanup();
-        $this->setSubject($subject);
-        $this->setBody($body);
+        if ($subject !== null) {
+            $this->subject($subject);
+        }
+        if ($body !== null) {
+            $this->body($body);
+        }
         return $this;
     }
     
@@ -170,7 +174,7 @@ class Mail extends \yii\base\Component
      * @param string $subject The subject message
      * @return \luya\components\Mail
      */
-    public function setSubject($subject)
+    public function subject($subject)
     {
         $this->getMailer()->Subject = $subject;
         return $this;
@@ -183,7 +187,7 @@ class Mail extends \yii\base\Component
      * @param string $body The HTML body message
      * @return \luya\components\Mail
      */
-    public function setBody($body)
+    public function body($body)
     {
         $this->getMailer()->Body = $this->wrapLayout($body);
         return $this;
@@ -351,6 +355,9 @@ class Mail extends \yii\base\Component
      */
     public function send()
     {
+        if (empty($this->mailer->Subject) || empty($this->mailer->Body)) {
+            throw new Exception("Mail subject() and body() can not be empty in order to send mail.");
+        }
         return $this->getMailer()->send();
     }
 
