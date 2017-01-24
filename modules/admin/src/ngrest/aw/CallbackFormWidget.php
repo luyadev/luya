@@ -7,6 +7,7 @@ use luya\Exception;
 use yii\helpers\Json;
 use yii\helpers\Inflector;
 use yii\helpers\ArrayHelper;
+use luya\base\Widget;
 
 /**
  * ActiveWindow Callback Form Widget.
@@ -37,7 +38,7 @@ use yii\helpers\ArrayHelper;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class CallbackFormWidget extends \yii\base\Widget
+class CallbackFormWidget extends Widget
 {
     /**
      * @var array Options for the Active Form:

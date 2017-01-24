@@ -6,6 +6,7 @@ This document will help you upgrading from a LUYA Version into another. For more
 1.0.0 (in progress)
 -------------------
 
++ [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 + [#1177](https://github.com/luyadev/luya/issues/1177) The elements.php for the luya\web\Elements component does new look for the elements.php inside the @app/views folder instead of @app.
 + [#1109](https://github.com/luyadev/luya/issues/1109) All blocks deliverd from the LUYA core modules are marked as `final` so you are not able to extend from those blocks. Make sure you extend from the `luya\cms\base\Block` class.
 

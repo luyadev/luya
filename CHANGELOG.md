@@ -8,6 +8,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 - [#1177](https://github.com/luyadev/luya/issues/1177) The luya\web\Elements component looks for the elements.php inside the @app/views folder instead of @app.
 - [#1114](https://github.com/luyadev/luya/issues/1114) Updated materializecss to newest version and removed unused files.
 - [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.

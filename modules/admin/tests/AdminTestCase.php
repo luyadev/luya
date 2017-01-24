@@ -29,4 +29,11 @@ class AdminTestCase extends \PHPUnit_Framework_TestCase
             $this->app->applicationWeb();
         }
     }
+    
+    protected function removeNewline($text)
+    {
+        $text = trim(preg_replace('/\s+/', ' ', $text));
+        
+        return str_replace(['> ', ' <'], ['>', '<'], $text);
+    }
 }
