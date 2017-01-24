@@ -30,7 +30,7 @@ A few plugins have options to configure, make sure you check the class reference
 
 ## Create a custom project Plugin
 
-Sometimes you really want to have project specific input behavior. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:
+Sometimes you really want to have project specific input behaviour. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:
 
 ```php
 <?php
