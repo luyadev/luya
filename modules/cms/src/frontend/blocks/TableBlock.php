@@ -39,6 +39,7 @@ final class TableBlock extends TwigBlock
                 ['var' => 'border', 'label' => Module::t('block_table_border_label'), 'type' => 'zaa-checkbox'],
                 ['var' => 'equaldistance', 'label' => Module::t('block_table_equaldistance_label'), 'type' => 'zaa-checkbox'],
                 ['var' => 'parseMarkdown', 'label' => Module::t('block_table_enable_markdown'), 'type' => 'zaa-checkbox'],
+                ['var' => 'divCssClass', 'label' => Module::t('block_cfg_additonal_css_class'), 'type' => self::TYPE_TEXT],
             ],
         ];
     }
@@ -90,7 +91,7 @@ final class TableBlock extends TwigBlock
     public function twigFrontend()
     {
         return  '{% if extras.table is not empty %}'.
-                '<table class="table{% if cfgs.stripe %} table-striped{% endif %}{% if cfgs.border %} table-bordered{% endif %}">'.
+                '<div class="{{cfgs.divCssClass}}"><table class="table{% if cfgs.stripe %} table-striped{% endif %}{% if cfgs.border %} table-bordered{% endif %}">'.
                     '{% if cfgs.header %}'.
                     '<thead>'.
                         '<tr>'.
@@ -108,7 +109,7 @@ final class TableBlock extends TwigBlock
                         '</tr>'.
                         '{% endfor %}'.
                     '</tbody>'.
-                '</table>'.
+                '</table></div>'.
                 '{% endif %}';
     }
 

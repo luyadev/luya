@@ -162,7 +162,7 @@ return [
     'block_table_enable_markdown' => 'Enable Markdown',
     'block_layout_row_column_css_class' => 'CSS classes for layout div',
     'block_image_cfg_css_class' => 'CSS classes for the image',
-    'block_cfg_additonal_css_class' => 'CSS classes',
+    'block_cfg_additonal_css_class' => 'CSS classes', // this is not block related and can be ussed in all blocks.
     
     // rc2
     'block_group_media_group' => 'Media',
