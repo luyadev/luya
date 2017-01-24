@@ -37,5 +37,5 @@ zaa.bootstrap.register('<?= $angularCrudControllerName; ?>', function($scope, $c
 });
 </script>
 <div ng-controller="<?= $angularCrudControllerName; ?>">
-    <button ng-click="sendButton('<?php echo $callbackName; ?>', <?= $callbackArgumentsJson; ?>)" class="<?= $buttonClass; ?>" type="button"><?php echo $buttonNameValue; ?></button>
+    <button ng-click='sendButton("<?php echo $callbackName; ?>", <?= $callbackArgumentsJson; ?>)' class="<?= $buttonClass; ?>" type="button"><?php echo $buttonNameValue; ?></button>
 </div>
