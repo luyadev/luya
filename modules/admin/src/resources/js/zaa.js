@@ -196,18 +196,7 @@ function typeCastValue(value) {
                 theadOffset = 0,
                 theadWidth = 0,
                 theadElementsWidth = [],
-                theadClone = null,
-                fixedOffset = 64;
-
-            var throttle = function(fn, wait) {
-                var time = Date.now();
-                return function() {
-                    if ((time + wait - Date.now()) < 0) {
-                        fn();
-                        time = Date.now();
-                    }
-                }
-            };
+                theadClone = null;
 
             /**
              * This function updates the thead and th widths
@@ -221,28 +210,30 @@ function typeCastValue(value) {
                     theadElementsWidth.push(angular.element(this).width());
                 });
 
+                theadOffset = (element.scrollTop() + table.offset().top) - element.offset().top;
+
+
                 if(element.scrollTop() > theadOffset) {
 
                     /* Show the clone to prevent the table from jumping */
                     theadClone.show();
-
-                    /* Add the required styles to the thead */
-                    thead.css({
-                        width: theadWidth + 'px',
-                        position: 'fixed',
-                        backgroundColor: '#fff',
-                        zIndex: 1000,
-                        top: element.offset().top
-                    });
 
                     /* Set the th widths */
                     thead.find('th').each( function(index) {
                         angular.element(this).width(theadElementsWidth[index]);
                     });
 
-                    theadFixed = true;
-                } else {
+                    /* Add the required styles to the thead */
+                    thead.css({
+                        width: theadWidth + 'px',
+                        position: 'fixed',
+                        backgroundColor: '#fff',
+                        zIndex: 300,
+                        top: element.offset().top
+                    });
 
+                    theadFixed = true;
+                } else if(theadFixed) {
                     /* Hide the clone */
                     theadClone.hide();
 
@@ -250,7 +241,6 @@ function typeCastValue(value) {
                     thead.css({
                         width: 'auto',
                         position: 'relative',
-                        zIndex: 1000,
                         top: 0
                     });
                     thead.find('th').each( function() {
@@ -273,7 +263,9 @@ function typeCastValue(value) {
                         theadElementsWidth.push(angular.element(this).width());
                     });
 
-                    update();
+                    if (thead.length > 0) {
+                        update();
+                    }
                 }
             };
 
@@ -281,23 +273,30 @@ function typeCastValue(value) {
              * Initialize the plugin on scroll (table contents getting loaded by ajax and table
              * does not exist on load of the directive)
              */
-            var onScroll = function() {
-                if(!initialized) {
+            var onScroll = function () {
+                if (!initialized) {
                     table = angular.element(element.find('table'));
                     thead = angular.element(table.find('thead'));
-                    theadOffset = thead.offset().top - fixedOffset;
-                    theadClone = angular.element(table.find('thead')).clone();
 
-                    theadClone.css('visibility', "hidden").insertAfter(thead).hide();
+                    if (thead.length > 0) {
+                        theadClone = angular.element(table.find('thead')).clone();
 
-                    initialized = true;
+                        theadClone.css('visibility', "hidden").insertAfter(thead).hide();
+
+                        initialized = true;
+                    } else {
+                        angular.element($window).off('resize');
+                        angular.element(element).off('scroll');
+                    }
                 }
 
-                update();
+                if (thead.length > 0) {
+                    update();
+                }
             };
 
-            angular.element($window).bind('resize', throttle(onResize, 50));
-            angular.element(element).bind("scroll", throttle(onScroll, 50));
+            angular.element($window).bind('resize', function() {onResize();});
+            angular.element(element).bind("scroll", function() {onScroll();});
         };
     });
 
