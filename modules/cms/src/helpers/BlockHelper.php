@@ -134,33 +134,39 @@ class BlockHelper
     }
     
     /**
-     * Return all informations for a file if exists
+     * Get file information based on input fileId.
+     *
+     * In order to use the FileUpload helper, define an extraVar based on the fileId from the cfg or
+     * var configurations.
      *
      * ```php
-     * 'file' => BlockHelper::FileUpload($this->getVarValue('myFile')),
+     * public function extraVars()
+     * {
+     *     return [
+     *         'file' => BlockHelper::FileUpload($this->getVarValue('myFile'), true)
+     *     ];
+     * }
      * ```
-     * Attention: Always use if statement in your view file to check if file exists.
-     *
-     * Example in block extrasVars():
-     * ```php
-     * 'file' => BlockHelper::FileUpload($this->getVarValue('myFile'), true),
-     * ```
-     * Example in view file to get the soure of the file:
-     *
+     * 
+     * Attention: Always use if statement in your view file to check if file exists. An example view
+     * for the above defined extra var `file`:
+     * 
      * ```html
-     * <? if ($this->extraValue('file')): ?>
-     *      <?= $this->extraValue('file')->source; ?>
-     * <? endif; ?>
+     * <?php if ($this->extraValue('file')): ?>
+     *      <a href="<?= $this->extraValue('file')->source; ?>">File Download</a>
+     * <?php endif; ?>
      * ```
      *
-     * @param string|int $value Provided the value
-     * @param boolean $returnObject Whether the storage object should be returned or an array.
-     * @return boolean|array|\luya\admin\file\Item Returns false when not found, returns an array with all data for the image on success.
+     * @param integer $fileId The file id from a config or cfg value in order to find the file.
+     * @param boolean $returnObject Whether the storage object should be returned or an array, if the file could not be found this parameter is 
+     * has no affect to the response and will return false.
+     * @return boolean|array|\luya\admin\file\Item Returns an array or the {{\luya\admin\file\Item}} object if the file could be find, otherwise the response is false. Make
+     * sure to check whether return value is false or not to ensure no exception will be thrown. 
      */
-    public static function fileUpload($value, $returnObject = false)
+    public static function fileUpload($fileId, $returnObject = false)
     {
-        if (!empty($value)) {
-            $file = Yii::$app->storage->getFile($value);
+        if (!empty($fileId)) {
+            $file = Yii::$app->storage->getFile($fileId);
             /* @var \luya\admin\file\Item $file */
             if ($file) {
                 if ($returnObject) {
