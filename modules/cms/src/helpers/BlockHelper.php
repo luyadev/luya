@@ -139,6 +139,19 @@ class BlockHelper
      * ```php
      * 'file' => BlockHelper::FileUpload($this->getVarValue('myFile')),
      * ```
+     * Attention: Always use if statement in your view file to check if file exists.
+     *
+     * Example in block extrasVars():
+     * ```php
+     * 'file' => BlockHelper::FileUpload($this->getExtraValue('myFile'), true),
+     * ```
+     * Example in view file to get the soure of the file:
+     *
+     * ```html
+     * <? if ($this->extraValue('file')): ?>
+     *      <?= $this->extraValue('file')->source; ?>
+     * <? endif; ?>
+     * ```
      *
      * @param string|int $value Provided the value
      * @param boolean $returnObject Whether the storage object should be returned or an array.
