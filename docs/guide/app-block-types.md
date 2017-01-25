@@ -115,3 +115,50 @@ The following Injectors are currently available:
 |---		|---
 |{{\luya\cms\injectors\ActiveQueryCheckboxInjector}}|Generate as checkbox selection from an ActiveRecord and assignes selected model rows into the extraVars section. In order to select only a specific fields add the `select()` to the ActiveRecord find ActiveQuery.
 |{{\luya\cms\injectors\LinkInjector}}|Generate an ability to select a link and returns the correct url to the link based on the user selection.
+
+Example for file Download and Markdown text for textarea:
+
+In block:
+```php
+ public function config()
+    {
+        return [
+            'vars' => [
+                 ['var' => 'image', 'label' => 'Bild', 'type' => self::TYPE_IMAGEUPLOAD, 'options' => ['no_filter' => true]],
+                 ['var' => 'title', 'label' => 'Titel', 'type' => self::TYPE_TEXT],
+                 ['var' => 'text', 'label' => 'Text', 'type' => self::TYPE_TEXTAREA],
+                 ['var' => 'download', 'label' => 'Download', 'type' => self::TYPE_FILEUPLOAD],
+            ],
+        ];
+    }
+
+    public function getText()
+    {
+        return TagParser::convertWithMarkdown($this->getVarValue('text'));
+    }
+
+
+
+    /**
+     * @inheritDoc
+     */
+    public function extraVars()
+    {
+        return [
+            'text' => $this->getText(),
+            'image' => BlockHelper::imageUpload($this->getVarValue('image'), false, true),
+            'download' => BlockHelper::fileUpload($this->getVarValue('download'), true),
+        ];
+    }
+
+`
+
+In View File:
+
+```php
+<? if ($this->extraValue('download')): ?>
+	<a href="<?= $this->extraValue('download')->source; ?>" download>
+		Button Text
+	</a>
+<? endif; ?>
+
