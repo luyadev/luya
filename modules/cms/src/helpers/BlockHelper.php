@@ -143,7 +143,7 @@ class BlockHelper
      *
      * Example in block extrasVars():
      * ```php
-     * 'file' => BlockHelper::FileUpload($this->getExtraValue('myFile'), true),
+     * 'file' => BlockHelper::FileUpload($this->getVarValue('myFile'), true),
      * ```
      * Example in view file to get the soure of the file:
      *
