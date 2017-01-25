@@ -70,6 +70,46 @@ There are several types you can use to generate your block controlls. Each class
 |zaa-image-array-upload|TYPE_IAGEUPLOAD_ARRAY|Create an asrray with image id an caption string
 |zaa-list-array|TYPE_LIST_ARRAY|Create an array with a key variable `value`
 
+### Examples with Types
+
+Example for file download (file upload) and Markdown text for textarea inputs.
+
+```php
+public function config()
+{
+    return [
+        'vars' => [
+             ['var' => 'image', 'label' => 'Image', 'type' => self::TYPE_IMAGEUPLOAD, 'options' => ['no_filter' => true]],
+             ['var' => 'text', 'label' => 'Text', 'type' => self::TYPE_TEXTAREA],
+             ['var' => 'download', 'label' => 'Download', 'type' => self::TYPE_FILEUPLOAD],
+        ],
+    ];
+}
+
+public function getText()
+{
+    return TagParser::convertWithMarkdown($this->getVarValue('text'));
+}
+
+public function extraVars()
+{
+    return [
+        'text' => $this->getText(),
+        'image' => BlockHelper::imageUpload($this->getVarValue('image'), false, true),
+        'download' => BlockHelper::fileUpload($this->getVarValue('download'), true),
+    ];
+}
+```
+`
+In the view you can access the values as follwed:
+
+```php
+<?php if ($this->extraValue('download') && $this->extraValue('image')): ?>
+    <img src="<?= $this->extraValue('image')->source; ?>" />
+    <?= $this->extraValue('text'); ?>
+    <a href="<?= $this->extraValue('download')->source; ?>">Download File</a>
+<?php endif; ?>
+
 ## Injectors
 
 A very common scenario is to collect data from an active record model, display the items and select them (via select or checkbox for example) and then access the selected model rows via extraVars. To achieve this a lot of code is required inside your blocks, which is good to understand what and why things happens. But if you need to get results quickly injectors are going to help you manage this kind of tasks.
@@ -115,50 +155,3 @@ The following Injectors are currently available:
 |---		|---
 |{{\luya\cms\injectors\ActiveQueryCheckboxInjector}}|Generate as checkbox selection from an ActiveRecord and assignes selected model rows into the extraVars section. In order to select only a specific fields add the `select()` to the ActiveRecord find ActiveQuery.
 |{{\luya\cms\injectors\LinkInjector}}|Generate an ability to select a link and returns the correct url to the link based on the user selection.
-
-Example for file Download and Markdown text for textarea:
-
-In block:
-```php
- public function config()
-    {
-        return [
-            'vars' => [
-                 ['var' => 'image', 'label' => 'Bild', 'type' => self::TYPE_IMAGEUPLOAD, 'options' => ['no_filter' => true]],
-                 ['var' => 'title', 'label' => 'Titel', 'type' => self::TYPE_TEXT],
-                 ['var' => 'text', 'label' => 'Text', 'type' => self::TYPE_TEXTAREA],
-                 ['var' => 'download', 'label' => 'Download', 'type' => self::TYPE_FILEUPLOAD],
-            ],
-        ];
-    }
-
-    public function getText()
-    {
-        return TagParser::convertWithMarkdown($this->getVarValue('text'));
-    }
-
-
-
-    /**
-     * @inheritDoc
-     */
-    public function extraVars()
-    {
-        return [
-            'text' => $this->getText(),
-            'image' => BlockHelper::imageUpload($this->getVarValue('image'), false, true),
-            'download' => BlockHelper::fileUpload($this->getVarValue('download'), true),
-        ];
-    }
-
-`
-
-In View File:
-
-```php
-<? if ($this->extraValue('download')): ?>
-	<a href="<?= $this->extraValue('download')->source; ?>" download>
-		Button Text
-	</a>
-<? endif; ?>
-
