@@ -22,7 +22,13 @@ final class UserLogin extends ActiveRecord
     public function init()
     {
         parent::init();
-        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeInsert']);
+        
+        $this->on(self::EVENT_BEFORE_VALIDATE, function($event) {
+        	if ($event->sender->isNewRecord) {
+        		$this->timestamp_create = time();
+        		$this->ip = Yii::$app->request->userIP;
+        	}
+        });
     }
 
     /**
@@ -58,14 +64,5 @@ final class UserLogin extends ActiveRecord
             'auth_token' => 'Auth Token',
             'ip' => 'Ip',
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function eventBeforeInsert()
-    {
-        $this->timestamp_create = time();
-        $this->ip = Yii::$app->request->userIP;
     }
 }

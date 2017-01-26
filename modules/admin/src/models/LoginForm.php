@@ -113,14 +113,12 @@ final class LoginForm extends Model
             $user->auth_token = Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt);
             $user->save();
 
-            $login = new UserLogin();
-            $login->setAttributes([
-                'auth_token' => $user->auth_token,
-                'user_id' => $user->id,
+            $login = new UserLogin([
+            	'auth_token' => $user->auth_token,
+            	'user_id' => $user->id,
             ]);
-            $login->insert();
+            $login->save();
             UserOnline::refreshUser($user->id, 'login');
-
             return $user;
         } else {
             return false;
