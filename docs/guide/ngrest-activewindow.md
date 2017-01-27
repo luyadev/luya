@@ -65,14 +65,10 @@ To render view files you can run the method `$this->render()` inside your active
 
 ### How to make a Button
 
-In order to create a button with a callback we use the helper method `$this->callbackButton`. Example view File
+In order to create a button with a callback we use the {{luya\admin\ngrest\aw\CallbackButtonWidget}} Widget. Example view File
 
 ```php
-<?php
-
-/* @var $this \luya\admin\ngrest\base\ActiveWindowView */
-
-echo $this->callbackButton('My Button', 'hello-world', ['params' => ['name' => 'John Doe']]);
+CallbackButtonWidget::widget(['label' => 'My Button', 'callback' => 'hello-world', 'params' => ['name' => 'John Doe']]);
 ```
 
 The callback of this button should look like this:
