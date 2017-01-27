@@ -149,4 +149,3 @@ class ClientTable extends Object
         }
     }
 }
-

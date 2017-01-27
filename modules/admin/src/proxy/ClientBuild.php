@@ -54,7 +54,6 @@ class ClientBuild extends Object
         $this->_buildConfig = $config;
         
         foreach ($config['tables'] as $tableName => $tableConfig) {
-            
             if ($this->optionTable && $this->optionTable != $tableName) {
                 continue;
             }

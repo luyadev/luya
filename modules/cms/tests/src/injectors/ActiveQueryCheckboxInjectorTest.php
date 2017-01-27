@@ -71,12 +71,12 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
      */
     public function testLabelLambda()
     {
-    	$block = new Block();
-    	$injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find(), 'label' => function($model) {
-    		return $model->id . '@' . $model->title;	
-    	}, 'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
-    	$injector->setup();
-    	$vars = $block->getConfigVarsExport();
-    	$this->assertSame('1@Homepage', $vars[0]['options']['items'][0]['label']);
+        $block = new Block();
+        $injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find(), 'label' => function ($model) {
+            return $model->id . '@' . $model->title;
+        }, 'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
+        $injector->setup();
+        $vars = $block->getConfigVarsExport();
+        $this->assertSame('1@Homepage', $vars[0]['options']['items'][0]['label']);
     }
 }

@@ -114,8 +114,8 @@ final class LoginForm extends Model
             $user->save();
 
             $login = new UserLogin([
-            	'auth_token' => $user->auth_token,
-            	'user_id' => $user->id,
+                'auth_token' => $user->auth_token,
+                'user_id' => $user->id,
             ]);
             $login->save();
             UserOnline::refreshUser($user->id, 'login');

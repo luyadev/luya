@@ -6,7 +6,7 @@ use admintests\AdminTestCase;
 use luya\admin\ngrest\aw\CallbackButtonWidget;
 use yii\base\Widget;
 
-class CallbackButtonWidgetTest extends  AdminTestCase
+class CallbackButtonWidgetTest extends AdminTestCase
 {
     public function testRenderOutput()
     {

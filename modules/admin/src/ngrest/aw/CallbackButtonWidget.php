@@ -10,15 +10,15 @@ use yii\helpers\Inflector;
 
 /**
  * Generate a button connected to a callback action.
- * 
+ *
  * Generates a button with a label which triggers an angular request for the active window callback:
- * 
+ *
  * ```php
  * CallbackButtonWidget::widget(['label' => 'Button Label', 'callback' => 'callback-function', 'params' => ['foo' => 'bar']]);
  * ```
- * 
+ *
  * The above example would call the `callbackCallbackFunction($foo)` callback from the Active Window.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

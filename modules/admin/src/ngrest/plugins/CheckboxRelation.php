@@ -42,9 +42,9 @@ use luya\rest\ActiveController;
  *
  * You can also access getter fields from the $model class in order to display such informations in the checkbox selection. Assuming you have a `getMyName` method in the
  * $model object you can use it in the `labelFields` as `myName`.
- * 
+ *
  * In order to use a function for the labelFields:
- * 
+ *
  * ```php
  * 'labelFields' => function($model) {
  *     return $model->firstname . ' ' . $model->lastname;
@@ -76,7 +76,7 @@ class CheckboxRelation extends Plugin
 
     /**
      * @var array A list of fields which should be used for the display template. Can also be a callable function to build the field with the template
-     * 
+     *
      * ```php
      * 'labelFields' => function($model) {
      *     return $model->firstname . ' ' . $model->lastname;
@@ -122,7 +122,7 @@ class CheckboxRelation extends Plugin
     
     /**
      * Setter method for the model.
-     * 
+     *
      * @param string $className
      */
     public function setModel($className)
@@ -132,7 +132,7 @@ class CheckboxRelation extends Plugin
 
     /**
      * Getter method for model.
-     * 
+     *
      * @return \yii\base\Model
      */
     public function getModel()
@@ -173,7 +173,7 @@ class CheckboxRelation extends Plugin
 
     /**
      * Get the options data to display.
-     * 
+     *
      * @return array
      */
     private function getOptionsData()

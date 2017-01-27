@@ -13,36 +13,36 @@ use luya\console\Command;
 
 /**
  * Proxy Sync Command.
- * 
+ *
  * ```sh
  * ./vendor/bin/luya admin/proxy
  * ```
- * 
+ *
  * Options:
- * 
+ *
  * ```sh
  * ./vendor/bin/luya admin/proxy --strict=0
  * ./vendor/bin/luya admin/proxy --table=admin_user
  * ```
- * 
+ *
  * For example in order to sync a large table without strict compare check
- * 
+ *
  * ```sh
  * ./vendor/bin/luya admin/proxy --strict=0 --table=large_table
  * ```
- * 
+ *
  * which is equals to:
- * 
+ *
   * ```sh
  * ./vendor/bin/luya admin/proxy -s=0 -t=large_table
  * ```
- * 
+ *
  * In order to clear the proxy config run
- * 
+ *
  * ```sh
  * ./vendor/bin/luya admin/proxy/clear
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ProxyController extends Command
@@ -90,7 +90,7 @@ class ProxyController extends Command
     
     /**
      * Sync Proxy Data.
-     * 
+     *
      * @return number
      */
     public function actionSync()
@@ -149,7 +149,7 @@ class ProxyController extends Command
     
     /**
      * Cleanup all stored Config Data.
-     * 
+     *
      * @return number
      */
     public function actionClear()

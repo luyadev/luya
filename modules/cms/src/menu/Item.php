@@ -116,7 +116,7 @@ class Item extends Object implements LinkInterface
     
     /**
      * Get the sorting index position for the item on the current siblings.
-     * 
+     *
      * @return integer Sort index position for the current siblings list.
      */
     public function getSortIndex()
@@ -378,10 +378,10 @@ class Item extends Object implements LinkInterface
     
     /**
      * Returns the link with an absolute scheme.
-     * 
+     *
      * The link with an absolute scheme path example `http://luya.io/link` where link is the output
      * from the {{luya\cms\menu\item::getLink}} method.
-     * 
+     *
      * @return string The link path with prepand website host `http://luya.io/home/about-us`.
      */
     public function getAbsoluteLink()
@@ -478,9 +478,9 @@ class Item extends Object implements LinkInterface
     
     /**
      * Get the next sibling in the current siblings list.
-     * 
+     *
      * If there is no next sibling (assuming its the last sibling item in the list) false is returned, otherwise the {{luya\cms\menu\Item}} is returned.
-     * 
+     *
      * @return \luya\cms\menu\Item|boolean Returns the next sibling based on the current sibling, if not found false is returned.
      */
     public function getNextSibling()
@@ -490,7 +490,7 @@ class Item extends Object implements LinkInterface
     
     /**
      * Get the previous sibling in the current siblings list.
-     * 
+     *
      * If there is no previous sibling (assuming its the first sibling item in the list) false is returned, otherwise the {{luya\cms\menu\Item}} is returned.
      * @return \luya\cms\menu\Item|boolean Returns the previous sibling based on the current sibling, if not found false is returned.
      */
@@ -557,7 +557,7 @@ class Item extends Object implements LinkInterface
     
     /**
      * Get the ActiveRecord Model for the current Nav Model.
-     * 
+     *
      * @throws \luya\cms\Exception
      * @return \luya\cms\models\Nav Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
      */

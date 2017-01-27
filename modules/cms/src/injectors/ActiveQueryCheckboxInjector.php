@@ -44,20 +44,20 @@ use luya\helpers\ArrayHelper;
  */
 final class ActiveQueryCheckboxInjector extends BaseBlockInjector
 {
-	/**
-	 * @var null|string|closure This attribute from the model is used to render the admin block dropdown selection. Define 
-	 * the field name to pick for the label or set a closure lambda function in order to provide the select label template.
-	 * 
-	 * ```php
-	 * 'label' => function($model) {
-	 *     return $model->title;
-	 * },
-	 * ```
-	 * 
-	 * If the label attribute is not defined, just all attribute from the model will be displayed.
-	 */
-	public $label = null;
-	
+    /**
+     * @var null|string|closure This attribute from the model is used to render the admin block dropdown selection. Define
+     * the field name to pick for the label or set a closure lambda function in order to provide the select label template.
+     *
+     * ```php
+     * 'label' => function($model) {
+     *     return $model->title;
+     * },
+     * ```
+     *
+     * If the label attribute is not defined, just all attribute from the model will be displayed.
+     */
+    public $label = null;
+    
     private $_query = null;
     
     /**
@@ -80,14 +80,13 @@ final class ActiveQueryCheckboxInjector extends BaseBlockInjector
         
         $data = [];
         foreach ($provider->getModels() as $model) {
-        	
-        	if (is_callable($this->label)) {
-        		$label = call_user_func($this->label, $model);
-        	} elseif (is_string($this->label)) {
-        		$label = $model->{$this->label};
-        	} else {
-        		$label = implode(", ", $model->getAttributes());
-        	}
+            if (is_callable($this->label)) {
+                $label = call_user_func($this->label, $model);
+            } elseif (is_string($this->label)) {
+                $label = $model->{$this->label};
+            } else {
+                $label = implode(", ", $model->getAttributes());
+            }
             $data[] = ['value' => $model->primaryKey, 'label' => $label];
         }
         return $data;

@@ -147,10 +147,10 @@ class BlockHelper
      *     ];
      * }
      * ```
-     * 
+     *
      * Attention: Always use if statement in your view file to check if file exists. An example view
      * for the above defined extra var `file`:
-     * 
+     *
      * ```html
      * <?php if ($this->extraValue('file')): ?>
      *      <a href="<?= $this->extraValue('file')->source; ?>">File Download</a>
@@ -158,10 +158,10 @@ class BlockHelper
      * ```
      *
      * @param integer $fileId The file id from a config or cfg value in order to find the file.
-     * @param boolean $returnObject Whether the storage object should be returned or an array, if the file could not be found this parameter is 
+     * @param boolean $returnObject Whether the storage object should be returned or an array, if the file could not be found this parameter is
      * has no affect to the response and will return false.
      * @return boolean|array|\luya\admin\file\Item Returns an array or the {{\luya\admin\file\Item}} object if the file could be find, otherwise the response is false. Make
-     * sure to check whether return value is false or not to ensure no exception will be thrown. 
+     * sure to check whether return value is false or not to ensure no exception will be thrown.
      */
     public static function fileUpload($fileId, $returnObject = false)
     {

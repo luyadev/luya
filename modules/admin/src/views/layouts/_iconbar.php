@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module as Admin;
+
 ?>
 <li class="icon" ng-click="reload()" >
     <div class="navbar__button">

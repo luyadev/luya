@@ -96,7 +96,7 @@ class Storage
             Yii::$app->storage->flushArrays();
             $file = StorageImage::findOne($imageId);
             if ($file) {
-            	$file->delete();
+                $file->delete();
             }
         }
         
@@ -108,7 +108,7 @@ class Storage
             foreach (Yii::$app->storage->findImages(['file_id' => $fileId]) as $imageItem) {
                 $storageImage = StorageImage::findOne($imageItem->id);
                 if ($storageImage) {
-                	$storageImage->delete();
+                    $storageImage->delete();
                 }
             }
             

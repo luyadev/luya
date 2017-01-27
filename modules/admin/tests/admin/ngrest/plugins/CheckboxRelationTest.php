@@ -86,7 +86,7 @@ class CheckboxRelationTest extends AdminTestCase
             'refJoinTable' => 'admin_user_group',
             'refModelPkId' => 'group_id',
             'refJoinPkId' => 'user_id',
-            'labelFields' => function($model) {
+            'labelFields' => function ($model) {
                 return $model->firstname . "|". $model->lastname;
             }
         ]);
