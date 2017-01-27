@@ -128,12 +128,11 @@ class MyBlock extends \luya\cms\base\PhpBlock
 	    return [
 	        'newsData' => new \luya\cms\injectors\ActiveQueryCheckboxInjector([
 	            'query' => \luya\news\models\Article::find(),
+	            'label' => 'title', // This attribute from the model is used to render the admin block dropdown selection.
 	            'type' => self::INJECTOR_VAR,
 	        ])
 	    ];
 	}
-	
-	// ...
 }
 ```
 

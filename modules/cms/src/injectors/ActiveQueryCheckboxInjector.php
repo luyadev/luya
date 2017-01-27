@@ -18,6 +18,7 @@ use luya\helpers\ArrayHelper;
  * ```php
  * new ActiveQueryCheckboxInjector([
  *     'query' => \newsadmin\models\Article::find()->where(['cat_id' => 1]),
+ *     'label' => 'title', // This attribute from the model is used to render the admin block dropdown selection.
  * ]);
  * ```
  *
@@ -28,7 +29,10 @@ use luya\helpers\ArrayHelper;
  * {
  *     return [
  *	       'theData' => new ActiveQueryCheckboxInjector([
- *             'query' => News::find()->select(['title'])->where(['is_deleted' => 0]),
+ *             'query' => News::find()->where(['is_deleted' => 0]),
+ *             'label' => function($model) {
+ *                 return $model->title . " - " . $model->description;
+ *             },
  *         ]);
  *	   ];
  * }
@@ -40,6 +44,20 @@ use luya\helpers\ArrayHelper;
  */
 final class ActiveQueryCheckboxInjector extends BaseBlockInjector
 {
+	/**
+	 * @var null|string|closure This attribute from the model is used to render the admin block dropdown selection. Define 
+	 * the field name to pick for the label or set a closure lambda function in order to provide the select label template.
+	 * 
+	 * ```php
+	 * 'label' => function($model) {
+	 *     return $model->title;
+	 * },
+	 * ```
+	 * 
+	 * If the label attribute is not defined, just all attribute from the model will be displayed.
+	 */
+	public $label = null;
+	
     private $_query = null;
     
     /**
@@ -62,13 +80,15 @@ final class ActiveQueryCheckboxInjector extends BaseBlockInjector
         
         $data = [];
         foreach ($provider->getModels() as $model) {
-            $labels = [];
-            foreach ($model->getAttributes($this->_query->select) as $value) {
-                if (is_string($value)) {
-                    $labels[] = $value;
-                }
-            }
-            $data[] = ['value' => $model->primaryKey, 'label' => implode(", ", $labels)];
+        	
+        	if (is_callable($this->label)) {
+        		$label = call_user_func($this->label, $model);
+        	} elseif (is_string($this->label)) {
+        		$label = $model->{$this->label};
+        	} else {
+        		$label = implode(", ", $model->getAttributes());
+        	}
+            $data[] = ['value' => $model->primaryKey, 'label' => $label];
         }
         return $data;
     }
@@ -89,7 +109,7 @@ final class ActiveQueryCheckboxInjector extends BaseBlockInjector
      */
     public function setup()
     {
-        //
+        // injecto the config
         $this->setContextConfig([
             'var' => $this->varName,
             'type' => 'zaa-checkbox-array',
@@ -98,7 +118,7 @@ final class ActiveQueryCheckboxInjector extends BaseBlockInjector
                 'items' => $this->getQueryData(),
             ]
         ]);
-        
+        // provide the extra data
         $this->context->addExtraVar($this->varName, $this->getExtraAssignData());
     }
 }

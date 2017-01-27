@@ -25,7 +25,7 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
     public function testBasicInjector()
     {
         $block = new Block();
-        $injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find(), 'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
+        $injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find(),  'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
         $injector->setup();
         
         $vars = $block->getConfigVarsExport();
@@ -41,13 +41,13 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
         
         $item1 = $v['options']['items'][0];
         
-        $this->assertSame('Homepage, homepage', $item1['label']);
+        $this->assertSame('1, 1, 1, 1, 1, 1, 1, 1482226241, 0, Homepage, homepage, , , ', $item1['label']);
     }
     
     public function testFieldSelectionBasicInjector()
     {
         $block = new Block();
-        $injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find()->select(['title']), 'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
+        $injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find()->select(['title']), 'label' => 'title', 'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
         $injector->setup();
     
         $vars = $block->getConfigVarsExport();
@@ -64,5 +64,19 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
         $item1 = $v['options']['items'][0];
     
         $this->assertSame('Homepage', $item1['label']);
+    }
+    
+    /**
+     * https://github.com/luyadev/luya/issues/1187
+     */
+    public function testLabelLambda()
+    {
+    	$block = new Block();
+    	$injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find(), 'label' => function($model) {
+    		return $model->id . '@' . $model->title;	
+    	}, 'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
+    	$injector->setup();
+    	$vars = $block->getConfigVarsExport();
+    	$this->assertSame('1@Homepage', $vars[0]['options']['items'][0]['label']);
     }
 }
