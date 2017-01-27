@@ -199,6 +199,7 @@ class StorageController extends RestController
                     foreach (Yii::$app->storage->findImages(['file_id' => $file->id]) as $img) {
                         Storage::removeImage($img->id, false);
                     }
+                    $this->flushApiCache();
                     return true;
                 }
             }
@@ -261,6 +262,7 @@ class StorageController extends RestController
                 return false;
             }
         }
+        $this->flushApiCache();
         return true;
     }
     

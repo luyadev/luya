@@ -47,6 +47,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1186](https://github.com/luyadev/luya/issues/1186) Image records not deleted from list without cache reload.
 - [#1162](https://github.com/luyadev/luya/issues/1162) Unable to create pages from empty draft selection.
 - [#1143](https://github.com/luyadev/luya/issues/1143) Fixed image directive filter preselection, due to an angular convert to number problem.
 - [#1156](https://github.com/luyadev/luya/issues/1156) Fixed issue where crawler preview does not decode html entities.
