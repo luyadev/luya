@@ -3,6 +3,7 @@ LUYA CMS
 
 [![Build Status](https://travis-ci.org/luyadev/luya-module-cms.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-cms)
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-cms/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-cms?branch=master)
+[![Total Downloads](https://poser.pugx.org/luyadev/luya-module-cms/downloads)](https://packagist.org/packages/luyadev/luya-module-cms)
 
 This module provides a full functional Content Management System to added contents based on Blocks.
 
