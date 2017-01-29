@@ -26,11 +26,11 @@ use luya\admin\ngrest\base\Plugin;
  *
  * Now when accessing the `$myimage` variabled defined from above the {{luya\admin\image\Item}} will be returned ottherwise false.
  *
- * If the user should not have the ability to selecte a filter enable `$noFilters`.
+ * If the user should not have the ability to selecte a filter disable `$filter`.
  *
  * ```php
  * return [
- *     'myimage' => ['noFilters' => true],
+ *     'myimage' => ['filter' => false],
  * ];
  * ```
  *
@@ -41,7 +41,7 @@ class Image extends Plugin
     /**
      * @var boolean Whether the user can choose a filter or not.
      */
-    public $noFilters = false;
+    public $filter = true;
 
     /**
      * @var boolean Whether to return a {{luya\admin\image\Item}} instead of the numeric image id value from the database.
@@ -61,7 +61,7 @@ class Image extends Plugin
      */
     public function renderCreate($id, $ngModel)
     {
-        return $this->createFormTag('zaa-image-upload', $id, $ngModel, ['options' => json_encode(['no_filter' => $this->noFilters])]);
+        return $this->createFormTag('zaa-image-upload', $id, $ngModel, ['options' => json_encode(['no_filter' => !$this->filter])]);
     }
 
     /**
