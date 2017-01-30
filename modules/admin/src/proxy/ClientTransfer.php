@@ -35,6 +35,8 @@ class ClientTransfer extends Object
             $table->syncData();
         }
         
+        $fileCount = 0;
+        
         // sync files
         foreach ((new Query())->where(['is_deleted' => 0])->all() as $file) {
             /* @var $file \luya\admin\file\Item */
@@ -51,6 +53,7 @@ class ClientTransfer extends Object
                     if (FileHelper::writeFile($file->serverSource, $curl->response)) {
                         $md5 = FileHelper::md5sum($file->serverSource);
                         if ($md5 == $file->getFileHash()) {
+                            $fileCount++;
                             $this->build->command->outputInfo('[+] File ' . $file->name . ' ('.$file->systemFileName.') downloaded.');
                         } else {
                             $this->build->command->outputError('[!] File ' . $file->name . ' ('.$file->systemFileName.') download error (invalid md5 checksum).');
@@ -60,6 +63,10 @@ class ClientTransfer extends Object
                 }
             }
         }
+        
+        $this->build->command->outputInfo("[=] {$fileCount} Files downloaded.");
+        
+        $imageCount = 0;
         
         // sync images
         foreach ((new \luya\admin\image\Query())->all() as $image) {
@@ -75,11 +82,14 @@ class ClientTransfer extends Object
             
                 if (!$curl->error) {
                     if (FileHelper::writeFile($image->serverSource, $curl->response)) {
+                        $imageCount++;
                         $this->build->command->outputInfo('[+] Image ' . $image->systemFileName.' downloaded.');
                     }
                 }
             }
         }
+        
+        $this->build->command->outputInfo("[=] {$imageCount} Images downloaded.");
         
         // close the build
         $curl = new Curl();
