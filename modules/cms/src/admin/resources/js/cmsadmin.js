@@ -113,7 +113,11 @@
 				data : '='
 			},
 			templateUrl : 'updateformmodule.html',
-			controller : function($scope) {
+			controller : function($scope, $http) {
+				$scope.modules = [];
+				$http.get('admin/api-admin-common/data-modules').then(function(response) {
+					$scope.modules = response.data;
+				});
 			}
 		}
 	});

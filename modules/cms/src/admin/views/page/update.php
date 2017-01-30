@@ -108,7 +108,11 @@ use luya\cms\admin\Module;
         <div class="input input--text col s12">
             <label class="input__label"><?php echo Module::t('view_index_module_select'); ?></label>
             <div class="input__field-wrapper">
-                <input name="text" type="text" class="input__field" ng-model="data.module_name" />
+                <select ng-model="data.module_name" class="input__field">
+                    <option value=""><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
+                    <option value="">- - - - -</option>
+                    <option ng-repeat="item in modules" value="{{item.value}}">{{item.label}}</option>
+                </select>
             </div>
         </div>
     </div>
