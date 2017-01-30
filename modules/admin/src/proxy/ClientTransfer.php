@@ -37,6 +37,7 @@ class ClientTransfer extends Object
         
         // sync files
         foreach ((new Query())->where(['is_deleted' => 0])->all() as $file) {
+            
             /* @var $file \luya\admin\file\Item */
             if (!$file->fileExists) {
                 $curl = new Curl();
@@ -51,9 +52,9 @@ class ClientTransfer extends Object
                     if (FileHelper::writeFile($file->serverSource, $curl->response)) {
                         $md5 = FileHelper::md5sum($file->serverSource);
                         if ($md5 == $file->getFileHash()) {
-                            $this->build->command->outputInfo('[+] ' . $file->name . ' ('.$file->source.') downloaded.');
+                            $this->build->command->outputInfo('[+] ' . $file->name . ' ('.$file->systemFileName.') downloaded.');
                         } else {
-                            $this->build->command->outputError('[!] ' . $file->name . ' ('.$file->source.') error while downloading (invalid md5 checksum).');
+                            $this->build->command->outputError('[!] ' . $file->name . ' ('.$file->systemFileName.') error while downloading (invalid md5 checksum).');
                             @unlink($file->serverSource);
                         }
                     }
