@@ -37,7 +37,6 @@ class ClientTransfer extends Object
         
         // sync files
         foreach ((new Query())->where(['is_deleted' => 0])->all() as $file) {
-            
             /* @var $file \luya\admin\file\Item */
             if (!$file->fileExists) {
                 $curl = new Curl();
@@ -52,9 +51,9 @@ class ClientTransfer extends Object
                     if (FileHelper::writeFile($file->serverSource, $curl->response)) {
                         $md5 = FileHelper::md5sum($file->serverSource);
                         if ($md5 == $file->getFileHash()) {
-                            $this->build->command->outputInfo('[+] ' . $file->name . ' ('.$file->systemFileName.') downloaded.');
+                            $this->build->command->outputInfo('[+] File ' . $file->name . ' ('.$file->systemFileName.') downloaded.');
                         } else {
-                            $this->build->command->outputError('[!] ' . $file->name . ' ('.$file->systemFileName.') error while downloading (invalid md5 checksum).');
+                            $this->build->command->outputError('[!] File ' . $file->name . ' ('.$file->systemFileName.') download error (invalid md5 checksum).');
                             @unlink($file->serverSource);
                         }
                     }
@@ -62,8 +61,27 @@ class ClientTransfer extends Object
             }
         }
         
-        // close the build
+        // sync images
+        foreach ((new \luya\admin\image\Query())->all() as $image) {
+            /* @var $image \luya\admin\image\Item */
+            if (!$image->fileExists) {
+                $curl = new Curl();
+                $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
+                $curl->get($this->build->imageProviderUrl, [
+                    'buildToken' => $this->build->buildToken,
+                    'machine' => $this->build->machineIdentifier,
+                    'imageId' => $image->id,
+                ]);
+            
+                if (!$curl->error) {
+                    if (FileHelper::writeFile($image->serverSource, $curl->response)) {
+                        $this->build->command->outputInfo('[+] Image ' . $file->systemFileName.' downloaded.');
+                    }
+                }
+            }
+        }
         
+        // close the build
         $curl = new Curl();
         $curl->get($this->build->requestCloseUrl, ['buildToken' => $this->build->buildToken]);
         

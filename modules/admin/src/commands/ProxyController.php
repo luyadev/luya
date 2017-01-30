@@ -133,6 +133,7 @@ class ProxyController extends Command
                 'requestUrl' => $response['providerUrl'],
                 'requestCloseUrl' => $response['requestCloseUrl'],
                 'fileProviderUrl' => $response['fileProviderUrl'],
+                'imageProviderUrl' => $response['imageProviderUrl'],
                 'machineIdentifier' => $identifier,
                 'machineToken' => sha1($token),
             ]);

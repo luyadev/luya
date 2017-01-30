@@ -85,6 +85,7 @@ class ProxyController extends Controller
                 'providerUrl' => Url::base(true) . '/admin/api-admin-proxy/data-provider',
                 'requestCloseUrl' => Url::base(true) . '/admin/api-admin-proxy/close',
                 'fileProviderUrl' => Url::base(true) . '/admin/api-admin-proxy/file-provider',
+                'imageProviderUrl' => Url::base(true) . '/admin/api-admin-proxy/image-provider',
                 'buildToken' => $buildToken,
                 'config' => $config,
             ];
@@ -155,6 +156,25 @@ class ProxyController extends Controller
             }
         }
         
+        return null;
+    }
+    
+    public function actionImageProvider($machine, $buildToken, $imageId)
+    {
+        $build = $this->ensureBuild($machine, $buildToken);
+    
+        if ($build) {
+            if (!is_numeric($imageId)) {
+                throw new \InvalidArgumentException("Invalid image id provided.");
+            }
+    
+            $image = Yii::$app->storage->getImage($imageId);
+            /* @var $image \luya\admin\image\Item */
+            if ($image->fileExists) {
+                return Yii::$app->response->sendFile($image->serverSource)->send();
+            }
+        }
+    
         return null;
     }
     

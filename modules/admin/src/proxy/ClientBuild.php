@@ -22,6 +22,8 @@ class ClientBuild extends Object
     
     public $fileProviderUrl = null;
     
+    public $imageProviderUrl = null;
+    
     public $machineIdentifier = null;
 
     public $machineToken = null;
