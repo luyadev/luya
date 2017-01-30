@@ -75,7 +75,7 @@ class ClientTransfer extends Object
             
                 if (!$curl->error) {
                     if (FileHelper::writeFile($image->serverSource, $curl->response)) {
-                        $this->build->command->outputInfo('[+] Image ' . $file->systemFileName.' downloaded.');
+                        $this->build->command->outputInfo('[+] Image ' . $image->systemFileName.' downloaded.');
                     }
                 }
             }
