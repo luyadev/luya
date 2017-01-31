@@ -21,6 +21,7 @@ use luya\admin\Module;
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
         $scope.config.inline = <?= (int) $config->inline; ?>;
         $scope.config.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
+        $scope.config.tableName = '<?= $config->tableName; ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
         <?php if ($config->groupByField): ?>
         $scope.config.groupBy = 1;
@@ -166,9 +167,14 @@ use luya\admin\Module;
                     <?php endforeach; ?>
                     <?php if (count($this->context->getButtons()) > 0): ?>
                         <td style="text-align:right;">
+                            <div ng-hide="isLocked(config.tableName, item[config.pk])">
                             <?php foreach ($this->context->getButtons() as $item): ?>
                                 <a class="crud__button waves-effect waves-light btn-flat btn--bordered" ng-click="<?php echo $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?php echo $item['icon']; ?></i><?php echo $item['label']; ?></a>
                             <?php endforeach; ?>
+                            </div>
+                            <div ng-show="isLocked(config.tableName, item[config.pk])">
+                                <span><small>is locked</small></span>
+                            </div>
                         </td>
                     <?php endif; ?>
                 </tr>

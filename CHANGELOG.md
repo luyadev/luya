@@ -45,6 +45,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1103](https://github.com/luyadev/luya/issues/1103) InfoActiveWindow make usage of the yii\widgets\DetailView in order to configure attributes.
 - [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain language added.
 - [#1154](https://github.com/luyadev/luya/issues/1154) Italian language added.
+- [#626](https://github.com/luyadev/luya/issues/626) User location for CMS and CRUD locations, page or crud item will be locked afterwards.
 
 ### Fixed
 

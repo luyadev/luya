@@ -5,16 +5,16 @@ namespace luya\admin\ngrest\base;
 use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\Html;
-use yii\helpers\Json;
 use yii\base\InvalidCallException;
 use yii\base\Arrayable;
 use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
-use luya\helpers\ArrayHelper;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
 use luya\admin\base\RestActiveController;
+use luya\admin\components\AdminUser;
+use luya\admin\models\UserOnline;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -29,7 +29,10 @@ class Api extends RestActiveController
     public function actions()
     {
         $actions = parent::actions();
+        $actions['view']['class'] = 'luya\admin\ngrest\base\actions\ViewAction';
         $actions['index']['class'] = 'luya\admin\ngrest\base\actions\IndexAction';
+        $actions['create']['class'] = 'luya\admin\ngrest\base\actions\CreateAction';
+        $actions['update']['class'] = 'luya\admin\ngrest\base\actions\UpdateAction';
         $actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
         return $actions;
     }
@@ -100,7 +103,14 @@ class Api extends RestActiveController
             $settings['filterName'] = $userFilter;
         }
         
-        return ['service' => $this->model->getNgrestServices(), '_settings' => $settings];
+        return [
+            'service' => $this->model->getNgrestServices(),
+            '_settings' => $settings,
+            '_locked' => [
+                'data' => UserOnline::find()->select(['lock_pk', 'last_timestamp', 'u.firstname', 'u.lastname', 'u.id'])->joinWith('user as u')->where(['lock_table' => $this->modelClass::tableName()])->createCommand()->queryAll(),
+                'userId' => Yii::$app->adminuser->id,   
+            ],
+        ];
     }
 
     public function actionSearch($query)

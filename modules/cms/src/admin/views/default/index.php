@@ -224,7 +224,10 @@
 
             </div>
 
-            <span ng-click="!showDrag && go(data)">
+            <span ng-if="isLocked('cms_nav_item', data.id)" style="cursor: not-allowed;">
+               {{data.title}} <small>(locked)</small>
+            </span>
+            <span ng-if="!isLocked('cms_nav_item', data.id)" ng-click="!showDrag && go(data)">
                 {{data.title}}
             </span>
 

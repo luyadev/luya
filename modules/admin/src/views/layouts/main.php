@@ -489,6 +489,7 @@ $this->beginPage()
                         <b><?php echo Admin::t('layout_useronline_inactivesince'); ?></b><br />
                         {{row.inactive_since}}
                     </small>
+                    <small ng-show="row.is_active">{{ row.lock_description }}</small>
                 </td>
             </tr>
             </tbody>

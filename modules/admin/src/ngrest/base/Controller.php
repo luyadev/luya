@@ -101,6 +101,7 @@ class Controller extends \luya\admin\base\Controller
 
         $config->inline = (int) $inline;
         $config->relations = $rel;
+        $config->tableName = $this->modelClass::tableName();
         
         $ngrest = new NgRest($config);
 

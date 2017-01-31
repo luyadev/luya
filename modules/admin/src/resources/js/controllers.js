@@ -778,7 +778,20 @@
 	
 	// LayoutMenuController.js
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, CacheReloadService, LuyaLoading, AdminToastService) {
+	zaa.filter('lockFilter', function() {
+		return function(data, table, pk) {
+			var has = false;
+			angular.forEach(data, function(value) {
+				if (value.lock_table == table && value.lock_pk == pk) {
+					has = true;
+				}
+			});
+			
+			return has;
+        };
+	});
+	
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, LuyaLoading, AdminToastService) {
 	
 		$scope.LuyaLoading = LuyaLoading;
 		
@@ -861,10 +874,16 @@
 						$scope.reload();
 					});
 				}
+				
+				$scope.locked = response.locked;
 				$scope.notify = response.useronline;
-				$timeout(tick, 60000);
+				$timeout(tick, 30000);
 			})
 		})();
+		
+		$scope.isLocked = function(table, pk) {
+			return $filter('lockFilter')($scope.locked, table, pk);
+		}
 		
 		$scope.searchQuery = null;
 	
