@@ -82,6 +82,11 @@ class Api extends RestActiveController
         return $this->_model;
     }
     
+    public function actionUnlock()
+    {
+    	UserOnline::unlock(Yii::$app->adminuser->id);
+    }
+    
     public function actionServices()
     {
         $settings = [];

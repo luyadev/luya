@@ -333,6 +333,8 @@
 		
 		$scope.closeUpdate = function () {
 			$scope.switchTo(0, true);
+			
+			$http.get($scope.config.apiEndpoint + '/unlock');
 	    };
 		
 		$scope.closeCreate = function() {
