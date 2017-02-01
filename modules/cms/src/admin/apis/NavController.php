@@ -9,6 +9,7 @@ use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
 use yii\helpers\Json;
 use yii\base\InvalidCallException;
+use luya\admin\models\UserOnline;
 
 /**
  * Nai Api provides tasks to create, modify and delete navigation items and properties of items.
@@ -80,6 +81,8 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionGetProperties($navId)
     {
+        UserOnline::lock(Yii::$app->adminuser->id, NavItem::tableName(), $navId, 'lock_cms_edit_page', ['title' => Nav::findOne($navId)->activeLanguageItem->title]);
+        
         $data = [];
         foreach (Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
             $object = \luya\admin\models\Property::findOne($row['admin_prop_id']);

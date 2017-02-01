@@ -486,8 +486,8 @@ $this->beginPage()
                 <td>{{row.email}}</td>
                 <td>
                     <small ng-hide="row.is_active">
-                        <b><?php echo Admin::t('layout_useronline_inactivesince'); ?></b><br />
-                        {{row.inactive_since}}
+                        <span><?= Admin::t('layout_useronline_inactivesince'); ?>: <b>{{row.inactive_since}}</b></span>
+                        <br /><small>{{ row.lock_description }}</small>
                     </small>
                     <small ng-show="row.is_active">{{ row.lock_description }}</small>
                 </td>

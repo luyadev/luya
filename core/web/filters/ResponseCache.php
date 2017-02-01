@@ -114,6 +114,30 @@ class ResponseCache extends ActionFilter
      * written as `get-data`.
      */
     public $actions = [];
+
+    /**
+     * @var array Define an array with the action and a callback which will be trigger event when cached.
+     * 
+     * ```php
+     * 'actionsCallable' => ['get-posts' => function($result) {
+     *     // do something whether is the response cached or not
+     * });
+     * ```
+     */
+    public $actionsCallable = [];
+    
+    /**
+     * call the action callable if available.
+     * 
+     * @param string $action The action ID name
+     * @param string $result The cahed or not cached action response, this is a string as its after the action filters.
+     */
+    private function callActionCallable($action, $result)
+    {
+        if (isset($this->actionsCallable[$action]) && is_callable($this->actionsCallable[$action])) {
+            call_user_func($this->actionsCallable[$action], $result);
+        }
+    }
     
     /**
      * @inheritdoc
@@ -128,9 +152,14 @@ class ResponseCache extends ActionFilter
         $response = Yii::$app->getResponse();
         
         if ($cache !== false) {
+            $this->callActionCallable($action->id, $cache);
             $response->content = $cache;
             return $response->send();
         }
+        
+        $response->on(Response::EVENT_AFTER_SEND, function($event) use ($action) {
+            $this->callActionCallable($action->id, $event->sender->content);
+        });
         
         $response->on(Response::EVENT_AFTER_SEND, [$this, 'cacheResponseContent']);
         

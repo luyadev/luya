@@ -22,7 +22,9 @@ class ViewAction extends \yii\rest\ViewAction
         
         $table = $this->modelClass::tableName();
         
-        UserOnline::lock(Yii::$app->adminuser->id, $table, $id, "Edit {$table} id {$id}");
+        $alias = Yii::$app->adminmenu->getApiDetail($this->modelClass::ngRestApiEndpoint());
+        
+        UserOnline::lock(Yii::$app->adminuser->id, $table, $id, 'lock_admin_edit_crud_item', ['table' => $alias['alias'], 'id' => $id, 'module' => $alias['module']['alias']]);
         
         return $result;
     }

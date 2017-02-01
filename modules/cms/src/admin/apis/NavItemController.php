@@ -14,7 +14,6 @@ use luya\cms\models\NavItemPageBlockItem;
 use luya\web\filters\ResponseCache;
 use yii\caching\DbDependency;
 use luya\cms\models\Layout;
-use luya\admin\models\UserOnline;
 
 /**
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
@@ -38,7 +37,7 @@ class NavItemController extends \luya\admin\base\RestController
                 'class' => DbDependency::className(),
                 'sql' => 'SELECT timestamp_update FROM cms_nav_item WHERE lang_id=:lang_id AND nav_id=:nav_id',
                 'params' => [':lang_id' => Yii::$app->request->get('langId', 0), ':nav_id' => Yii::$app->request->get('navId', 0)]
-            ]
+            ],
         ];
         
         return $behaviors;
@@ -56,9 +55,6 @@ class NavItemController extends \luya\admin\base\RestController
     {
         $item = NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
         if ($item) {
-            
-            UserOnline::lock(Yii::$app->adminuser->id, NavItem::tableName(), $navId, "Edit page " . $item->title);
-            
             return [
                 'error' => false,
                 'item' => $item->toArray(),

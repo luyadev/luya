@@ -210,4 +210,6 @@ return [
     'model_user_title_mrs' => 'Sig.ra',
     'js_ngrest_toggler_success' => '%field% aggiornato con successo.',
     'layout_image_filter_selection' => 'Seleziona filtro immagine:',
+    'lock_admin_edit_crud_item' => 'Editing {module} "{table}" (ID: {id}).',
+    'lock_cms_edit_page' => 'Editing page "{title}".',
 ];
