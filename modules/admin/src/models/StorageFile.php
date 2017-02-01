@@ -27,7 +27,6 @@ use yii\db\ActiveRecord;
  * @property string $passthrough_file_password
  * @property integer $passthrough_file_stats
  * @property string $caption
- * @property string $internal_note
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -59,7 +58,7 @@ final class StorageFile extends ActiveRecord
             [['name_original', 'name_new', 'mime_type', 'name_new_compound', 'extension', 'hash_file', 'hash_name'], 'required'],
             [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp', 'is_deleted'], 'safe'],
             [['is_hidden'], 'integer'],
-            [['caption', 'internal_note'], 'string'],
+            [['caption'], 'string'],
         ];
     }
     
