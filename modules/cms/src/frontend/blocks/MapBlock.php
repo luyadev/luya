@@ -3,29 +3,44 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
-use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
 
 /**
  * Google Maps Block.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class MapBlock extends TwigBlock
+final class MapBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
     
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
 
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_map_name');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'map';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
@@ -33,13 +48,13 @@ final class MapBlock extends TwigBlock
                 [
                     'var' => 'address',
                     'label' => Module::t('block_map_address_label'),
-                    'type' => 'zaa-text',
+                    'type' => self::TYPE_TEXT,
                     'placeholder' => 'Zephir Software Design AG, Tramstrasse 66, 4142 Münchenstein'
                 ],
                 [
                     'var' => 'zoom',
                     'label' => Module::t('block_map_zoom_label'),
-                    'type' => 'zaa-select',
+                    'type' => self::TYPE_SELECT,
                     'initvalue' => '12',
                     'options' => [
                         ['value' => '0', 'label' => Module::t('block_map_zoom_entire')],
@@ -69,7 +84,7 @@ final class MapBlock extends TwigBlock
                 [
                     'var' => 'maptype',
                     'label' => Module::t('block_map_maptype_label'),
-                    'type' => 'zaa-select',
+                    'type' => self::TYPE_SELECT,
                     'options' => [
                         ['value' => 'm', 'label' => Module::t('block_map_maptype_roadmap')],
                         ['value' => 'k', 'label' => Module::t('block_map_maptype_satellitemap')],
@@ -80,21 +95,22 @@ final class MapBlock extends TwigBlock
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extraVars()
     {
         return [
-            'address' => $this->getVarValue('address', 'Zephir Software Design AG, Tramstrasse 66, Münchenstein'),
+            'address' => urlencode($this->getVarValue('address', 'Zephir Software Design AG, Tramstrasse 66, Münchenstein')),
             'zoom' => $this->getVarValue('zoom', 15),
             'maptype' => $this->getVarValue('maptype', 'h'),
         ];
     }
 
-    public function twigFrontend()
-    {
-        return '{% if vars.address is not empty %}<div class="embed-responsive embed-responsive-16by9"><iframe src="http://maps.google.com/maps?f=q&source=s_q&hl=de&geocode=&q={{ extras.address|url_encode }}&z={{ extras.zoom }}&t={{ extras.maptype }}&output=embed" width="600" height="450" frameborder="0" style="border:0"></iframe></div>{% endif %}';
-    }
-
-    public function twigAdmin()
+    /**
+     * @inheritdoc
+     */
+    public function admin()
     {
         return '{% if vars.address is not empty %}<div class="video-container" style="margin:100px;"><iframe src="http://maps.google.com/maps?f=q&source=s_q&hl=de&geocode=&q={{ extras.address }}&z={{ extras.zoom }}&t={{ extras.maptype }}&output=embed" width="600" height="450" frameborder="0" style="border:0"></iframe></div>{% else %}<span class="block__empty-text">' . Module::t('block_map_no_content') . '</span>{% endif %}';
     }
