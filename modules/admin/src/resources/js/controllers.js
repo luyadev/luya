@@ -84,6 +84,11 @@
 			if (reset) {
 				$scope.resetData();
 			}
+			
+			if (type == 0) {
+				$http.get($scope.config.apiEndpoint + '/unlock');
+			}
+			
 			if (type == 0 || type == 1) {
 				if (!$scope.config.inline) {
 					$state.go('default.route');
@@ -333,8 +338,6 @@
 		
 		$scope.closeUpdate = function () {
 			$scope.switchTo(0, true);
-			
-			$http.get($scope.config.apiEndpoint + '/unlock');
 	    };
 		
 		$scope.closeCreate = function() {

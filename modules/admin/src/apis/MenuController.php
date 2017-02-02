@@ -5,6 +5,7 @@ namespace luya\admin\apis;
 use Yii;
 use luya\admin\Module;
 use luya\admin\base\RestController;
+use luya\admin\models\UserOnline;
 
 /**
  * Admin Menu API, provides all menu items and dashabord informations for a node or the entire system.
@@ -31,6 +32,7 @@ class MenuController extends RestController
      */
     public function actionItems($nodeId)
     {
+        UserOnline::unlock(Yii::$app->adminuser->id);
         return Yii::$app->adminmenu->getModuleItems($nodeId);
     }
 
