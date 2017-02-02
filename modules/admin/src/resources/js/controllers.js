@@ -882,7 +882,7 @@
 				
 				$scope.locked = response.locked;
 				$scope.notify = response.useronline;
-				$timeout(tick, 30000);
+				$timeout(tick, 20000);
 			})
 		})();
 		
