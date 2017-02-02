@@ -53,6 +53,11 @@ class Api extends RestActiveController
     public $autoEnablePagination = true;
     
     /**
+     * @var integer When pagination is enabled, this value is used for pagination rows by page.
+     */
+    public $pageSize = 100;
+    
+    /**
      * @inheritdoc
      */
     public function init()
@@ -65,14 +70,17 @@ class Api extends RestActiveController
 
         // pagination is disabled by default, lets verfy if there are more then 400 rows in the table and auto enable
         if ($this->pagination === false && $this->autoEnablePagination) {
-            if ($this->model->find()->count() > 200) {
-                $this->pagination = ['pageSize' => 100];
+            if ($this->model->ngRestFind()->count() > 200) {
+                $this->pagination = ['pageSize' => $this->pageSize];
             }
         }
     }
     
     private $_model = null;
     
+    /**
+     * @return \luya\admin\ngrest\base\NgRestModel
+     */
     public function getModel()
     {
         if ($this->_model === null) {
@@ -82,11 +90,19 @@ class Api extends RestActiveController
         return $this->_model;
     }
     
+    /**
+     * Unlock the useronline locker..
+     */
     public function actionUnlock()
     {
     	UserOnline::unlock(Yii::$app->adminuser->id);
     }
     
+    /**
+     * Service Action provides mutliple CRUD informations.
+     * 
+     * @return array
+     */
     public function actionServices()
     {
         $settings = [];
