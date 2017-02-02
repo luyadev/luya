@@ -171,4 +171,5 @@ return [
     'block_audio_admin_hasurl' => 'Il codice incorporato dell\'audio è stato fornito.',
     'block_file_list_admin_empty' => 'Nessun file è stato selezionato.',
     'block_html_name' => 'HTML',
+    'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
 ];

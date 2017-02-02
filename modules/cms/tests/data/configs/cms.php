@@ -6,6 +6,9 @@ return [
     'remoteToken' => 'testtoken',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms',
+    'aliases' => [
+        'cmstests' => dirname(__DIR__) . '/../',
+    ],
     'modules' => [
         'admin' => 'luya\admin\Module',
         'cms' => [

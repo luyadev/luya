@@ -27,6 +27,7 @@ class BlockTestCase extends CmsFrontendTestCase
         $this->assertTrue(is_array($this->block->config()));
         $this->assertTrue(is_array($this->block->extraVars()));
         $this->assertFalse(is_array($this->block->renderAdmin()));
+        $this->assertNotNull($this->block->getFieldHelp());
         return $this->block->renderFrontend();
     }
         

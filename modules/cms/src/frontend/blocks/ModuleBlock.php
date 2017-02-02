@@ -6,51 +6,116 @@ use Yii;
 use yii\web\Response;
 use yii\helpers\Json;
 use luya\cms\frontend\Module;
-use luya\cms\base\TwigBlock;
 use luya\cms\frontend\blockgroups\DevelopmentGroup;
 use luya\base\ModuleReflection;
 use luya\cms\helpers\BlockHelper;
+use luya\cms\base\PhpBlock;
 
 /**
  * Module integration Block to render controller and/or actions.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class ModuleBlock extends TwigBlock
+final class ModuleBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
+    /**
+     * @inheritdoc
+     */
+    public $cacheEnabled = false;
+    
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_module_name');
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function blockGroup()
+    {
+        return DevelopmentGroup::className();
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'view_module';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
             'vars' => [
-                ['var' => 'moduleName', 'label' => Module::t('block_module_modulename_label'), 'type' => 'zaa-select', 'options' => $this->getModuleNames()],
+                ['var' => 'moduleName', 'label' => Module::t('block_module_modulename_label'), 'type' => self::TYPE_SELECT, 'options' => $this->getModuleNames()],
             ],
             'cfgs' => [
-                ['var' => 'moduleController', 'label' => Module::t('block_module_modulecontroller_label'), 'type' => 'zaa-select', 'options' => BlockHelper::selectArrayOption($this->getControllerClasses())],
-                ['var' => 'moduleAction', 'label' => Module::t('block_module_moduleaction_label'), 'type' => 'zaa-text'],
-                ['var' => 'moduleActionArgs', 'label' => Module::t('block_module_moduleactionargs_label'), 'type' => 'zaa-text'],
+                ['var' => 'moduleController', 'label' => Module::t('block_module_modulecontroller_label'), 'type' => self::TYPE_SELECT, 'options' => BlockHelper::selectArrayOption($this->getControllerClasses())],
+                ['var' => 'moduleAction', 'label' => Module::t('block_module_moduleaction_label'), 'type' => self::TYPE_TEXT],
+                ['var' => 'moduleActionArgs', 'label' => Module::t('block_module_moduleactionargs_label'), 'type' => self::TYPE_TEXT],
             ],
         ];
     }
     
+    
+
+    /**
+     * @inheritdoc
+     */
+    public function getFieldHelp()
+    {
+        return [
+            'moduleName' => Module::t('block_module_modulename_help'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraVars()
+    {
+        return [
+            'moduleContent' => $this->moduleContent($this->getVarValue('moduleName')),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function admin()
+    {
+        return '{% if vars.moduleName is empty %}<span class="block__empty-text">' . Module::t('block_module_no_module') . '</span>{% else %}<p><i class="material-icons">developer_board</i> ' . Module::t('block_module_integration') . ': <strong>{{ vars.moduleName }}</strong></p>{% endif %}';
+    }
+    
+    /**
+     * Get all module related controllers.
+     * 
+     * @return array
+     */
     public function getControllerClasses()
     {
         $moduleName = $this->getVarValue('moduleName', false);
-
+    
         return (empty($moduleName) || !Yii::$app->hasModule($moduleName)) ? [] : Yii::$app->getModule($moduleName)->getControllerFiles();
     }
-
+    
+    /**
+     * Get all available frontend modules to make module selection in block.
+     * 
+     * @return array
+     */
     public function getModuleNames()
     {
         $data = [];
@@ -60,57 +125,31 @@ final class ModuleBlock extends TwigBlock
         return $data;
     }
 
-    public function getFieldHelp()
-    {
-        return [
-            'moduleName' => 'Es erscheinen alle Frontend Modulnamen, die in der Config hinterlegt sind.'
-        ];
-    }
-
-    public function extraVars()
-    {
-        return [
-            'moduleContent' => $this->moduleContent($this->getVarValue('moduleName')),
-        ];
-    }
-
-    public function twigAdmin()
-    {
-        return '{% if vars.moduleName is empty %}<span class="block__empty-text">' . Module::t('block_module_no_module') . '</span>{% else %}<p><i class="material-icons">developer_board</i> ' . Module::t('block_module_integration') . ': <strong>{{ vars.moduleName }}</strong></p>{% endif %}';
-    }
-
-    public function twigFrontend()
-    {
-        return '{{extras.moduleContent}}';
-    }
-    
-    public function blockGroup()
-    {
-        return DevelopmentGroup::className();
-    }
-
-    private function moduleContent($moduleName)
+    /**
+     * Return the Module output based on the module name.
+     * 
+     * @param string $moduleName
+     * @return string|null|\yii\web\Response
+     */
+    public function moduleContent($moduleName)
     {
         if ($this->isAdminContext() || empty($moduleName) || count($this->getEnvOptions()) === 0 || !Yii::$app->hasModule($moduleName)) {
             return;
         }
-        
-        $ctrl = $this->getCfgValue('moduleController');
-        $action = $this->getCfgValue('moduleAction', 'index');
-        $actionArgs = Json::decode($this->getCfgValue('moduleActionArgs', '{}'));
         
         // get module
         $module = Yii::$app->getModule($moduleName);
         $module->context = 'cms';
         
         // start module reflection
-        $reflection = Yii::createObject(['class' => ModuleReflection::className(), 'module' => $module]);
+        $reflection = Yii::createObject(['class' => ModuleReflection::class, 'module' => $module]);
         $reflection->suffix = $this->getEnvOption('restString');
 
         // if a controller has been defined we inject a custom starting route for the
         // module reflection object.
+        $ctrl = $this->getCfgValue('moduleController');
         if (!empty($ctrl)) {
-            $reflection->defaultRoute($ctrl, $action, $actionArgs);
+            $reflection->defaultRoute($ctrl, $this->getCfgValue('moduleAction', 'index'), Json::decode($this->getCfgValue('moduleActionArgs', '{}')));
         }
 
         $response = $reflection->run();
