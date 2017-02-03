@@ -29,7 +29,7 @@ $this->beginPage();
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
+                <?php foreach (Yii::$app->menu->findAll(['depth' => 1, 'container' => 'default']) as $item): /* @var $item \luya\cms\menu\Item */ ?>
                     <li <?php if ($item->isActive): ?>class="active"<?php endif;?>>
                         <a href="<?= $item->link; ?>"><?= $item->title; ?></a>
                     </li>
@@ -64,7 +64,7 @@ $this->beginPage();
         <div class="row">
             <div class="col-md-12">
                 <ol class="breadcrumb">
-                    <?php foreach (Yii::$app->menu->current->teardown as $item): ?>
+                    <?php foreach (Yii::$app->menu->current->teardown as $item): /* @var $item \luya\cms\menu\Item */ ?>
                     <li><a href="<?= $item->link; ?>"><?= $item->title; ?></a>
                     <?php endforeach; ?>
                 </ol>
@@ -73,7 +73,7 @@ $this->beginPage();
             <?php if (count(Yii::$app->menu->getLevelContainer(2)) > 0): ?>
             <div class="col-md-3">
                     <ul class="nav nav-pills nav-stacked">
-                        <?php foreach (Yii::$app->menu->getLevelContainer(2) as $child): ?>
+                        <?php foreach (Yii::$app->menu->getLevelContainer(2) as $child): /* @var $child \luya\cms\menu\Item */ ?>
                         <li <?php if ($child->isActive): ?>class="active" <?php endif; ?>><a href="<?= $child->link; ?>"><?= $child->title; ?></a></li>
                         <?php endforeach; ?>
                     </ul>
