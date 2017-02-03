@@ -27,7 +27,7 @@ A few plugins have options to configure, make sure you check the class reference
 |number				|{{\luya\admin\ngrest\plugins\Number}}|integer |Input field where only numbers are allowed.
 |cmsPage			|{{\luya\admin\ngrest\plugins\CmsPage}}|{{luya\cms\menu\Item}}|Cms Page selection and returns the menu component item.
 |link               |{{\luya\admin\ngrest\plugins\Link}}|{{luya\web\LinkInterface}}|Select an internal page or enter an external link, the database field must be a varchar field in order to store informations and the cms module is required.
-
+|slug               |{{\luya\admin\ngrest\plugins\Slug}}|string|Generates a slugified string which can be used for url rules.
 ## Create a custom project Plugin
 
 Sometimes you really want to have project specific input behaviour. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:

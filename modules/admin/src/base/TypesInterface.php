@@ -111,4 +111,9 @@ interface TypesInterface
      * @var string Generates a selection of all cms page, works only if cms module is present.
      */
     const TYPE_CMS_PAGE = 'zaa-cms-page';
+    
+    /**
+     * @var string Generates a slugified input field which removes not valid url "link" chars like whitespaces.
+     */
+    const TYPE_SLUG = 'zaa-slug';
 }

@@ -249,6 +249,30 @@
         }
     });
 
+    zaa.directive("zaaSlug", function() {
+    	return {
+    		restrict: "E",
+    		scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+            },
+    		controller: function($scope, Slug) {
+    			$scope.$watch(function() { return $scope.model; }, function(n, o) {
+    				if (n!=o) {
+    					$scope.model = Slug.slugify(n);
+    				}
+    			});
+    		},
+    		template:function() {
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+    		}
+    	}
+    });
+    
     zaa.directive("zaaWysiwyg", function() {
         return {
             restrict: "E",

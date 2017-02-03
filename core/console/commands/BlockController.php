@@ -141,6 +141,7 @@ class BlockController extends \luya\console\Command
             'table' => 'User can dynamic create tables (jsons)',
             'link' => 'Generats a linkable internal or external resource (use Link Injector!)',
             'cms-page' => 'Returns CMS page selection tree (only when cms is registered).',
+            'slug' => 'Slugified input field which allows only lower chars and - for url rules.',
         ];
     }
     
@@ -166,6 +167,7 @@ class BlockController extends \luya\console\Command
             'table' => 'self::TYPE_TABLE',
             'link' => 'self::TYPE_LINK',
             'cms-page' => 'self::TYPE_CMS_PAGE',
+            'slug' => 'self::TYPE_SLUG',
         ];
     }
 

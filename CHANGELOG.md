@@ -20,6 +20,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1193](https://github.com/luyadev/luya/issues/1193) Slugify Plugin to generate aliases with only lower case letters, numbers and strikes.
 - [#1187](https://github.com/luyadev/luya/issues/1187) ActiveQueryCheckboxInjector has new `label` attribute in order to define the rendering for the dropdown label in the block admin.
 - [#1171](https://github.com/luyadev/luya/issues/1171) CMS Menu item has method `getAbsoluteLink()` in order to retrieve link with prepand host scheme.
 - [#1137](https://github.com/luyadev/luya/issues/1137) Created `fixed-table-head` directive and added it to CRUD and filemanager
