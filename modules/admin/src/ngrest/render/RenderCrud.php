@@ -98,10 +98,8 @@ class RenderCrud extends Render implements RenderInterface
                     throw new InvalidConfigException("The configured api relation '{$rel['apiEndpoint']}' does not exists in the menu elements. Maybe you have no permissions to access this API.");
                 }
                 
-                $node = str_replace("-", "/", $api['route']);
-                
                 $buttons[] = [
-                    'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$node.'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
+                    'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$api['route'].'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
                     'icon' => 'chrome_reader_mode',
                     'label' => $rel['label'],
                 ];
