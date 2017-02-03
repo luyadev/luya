@@ -58,6 +58,11 @@ final class ActiveQueryCheckboxInjector extends BaseBlockInjector
      */
     public $label = null;
     
+    /**
+     * @var boolean|array Whether the extr assigned data should enable pagination.
+     */
+    public $pagination = false;
+    
     private $_query = null;
     
     /**
@@ -98,6 +103,7 @@ final class ActiveQueryCheckboxInjector extends BaseBlockInjector
         
         $provider = new ActiveDataProvider([
             'query' => $this->_query->andWhere(['in', 'id', $ids]),
+            'pagination' => $this->pagination,
         ]);
         
         return $provider->getModels();
