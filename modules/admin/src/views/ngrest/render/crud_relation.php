@@ -106,10 +106,6 @@ use yii\helpers\Json;
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
             
-                <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
-                    <?= Module::t('ngrest_crud_btn_create'); ?> <i class="material-icons right">check</i>
-                </button>
-            
                 <form name="formCreate" role="form" ng-submit="submitCreate()">
 
                     <!-- MODAL CONTENT -->
@@ -160,10 +156,6 @@ use yii\helpers\Json;
 
         <div ng-if="crudSwitchType==2" <?php if (!$config->inline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
             <?php if ($canUpdate && $config->getPointer('update')): ?>
-            
-                <button class="btn waves-effect waves-light red" type="button" ng-click="closeUpdate()">
-                    <i class="material-icons left">cancel</i> <?= Module::t('button_abort'); ?>
-                </button>
             
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
