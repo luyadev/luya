@@ -43,7 +43,7 @@ Here also a helping list of regex expressions you may use to generate your varia
 |`\w`       |Any word character (letter, number, underscore)|`<hash:\w+>`
 |`[abc]`    |Only the letters a, b or c|`<string:[abc]+>`
 |`[a-z0-9]` |All letter chars a-z (only lowercase) and numbers from 0 to 9|`<alias:[a-z0-9]+>`
-
+|`[a-z0-9\-]`|Slugable url rules known as aliases|`<alias:[a-z0-9\-]+>`
 ## Using the Rule to make a Link
 
 When you have defined url rules for your module, you may want to use them in your view/controller files to generate the links where the user can click on it. To make links we use the {{luya\helpers\Url}} class. Lets assume we create links for the above created rule patterns.
