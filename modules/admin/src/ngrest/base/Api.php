@@ -85,6 +85,10 @@ class Api extends RestActiveController
     {
         if ($this->_model === null) {
             $this->_model = Yii::createObject($this->modelClass);
+
+            if (!$this->_model instanceof NgRestModelInterface) {
+                throw new InvalidConfigException("The modelClass '$this->modelClass' must be an instance of NgRestModelInterface.");
+            }
         }
     
         return $this->_model;
