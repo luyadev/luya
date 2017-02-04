@@ -77,7 +77,7 @@ class ProxyController extends Controller
             'build_token' => sha1($buildToken),
             'config' => Json::encode($config),
             'is_complet' => 0,
-            'expiration_time' => time() + (60*10) // 10 minutes valid
+            'expiration_time' => time() + (60*15) // 15 minutes valid
         ];
         
         if ($build->save()) {
@@ -99,11 +99,11 @@ class ProxyController extends Controller
         $build = ProxyBuild::findOne(['build_token' => $buildToken, 'is_complet' => 0]);
         
         if (!$build) {
-            throw new ForbiddenHttpException("Unable to find build from token.");
+            throw new ForbiddenHttpException("Unable to find a ProxyBuild for the provided token.");
         }
         
         if (time() > $build->expiration_time) {
-            throw new ForbiddenHttpException("The expiration as been exceeded.");
+            throw new ForbiddenHttpException("The expiration time ".date("d.m.Y H:i:s", $build->expiration_time)." has exceeded.");
         }
         
         if ($build->proxyMachine->identifier !== $machine) {
