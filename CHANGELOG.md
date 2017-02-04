@@ -44,6 +44,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1096](https://github.com/luyadev/luya/issues/1096) News Module added teaser_text field in article model.
 - [#1006](https://github.com/luyadev/luya/issues/1006) Added spanish translations to all luya core modules and administration interface.
 - [#1103](https://github.com/luyadev/luya/issues/1103) InfoActiveWindow make usage of the yii\widgets\DetailView in order to configure attributes.
+- [#1158](https://github.com/luyadev/luya/issues/1158) Greek language added.
 - [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain language added.
 - [#1154](https://github.com/luyadev/luya/issues/1154) Italian language added.
 - [#626](https://github.com/luyadev/luya/issues/626) User location for CMS and CRUD locations, page or crud item will be locked afterwards.
