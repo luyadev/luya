@@ -168,12 +168,12 @@ return [
       'block_group_media_group' =>  'Medio',
         
     // 1.0.0
-    'block_audio_admin_nourl' => 'No embed audio code has been set.',
-    'block_audio_admin_hasurl' => 'Embed audio code is set.',
-    'block_file_list_admin_empty' => 'No files has been selected yet.',
-    'block_html_name' => 'HTML',
-    'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
-	'block_spacing_small_space' => 'Small space',
-	'block_spacing_medium_space' => 'Medium space',
-	'block_spacing_large_space' => 'Large space',
+      'block_audio_admin_nourl' => 'No se ha establecido ningún código de audio incorporado.',
+      'block_audio_admin_hasurl' => 'Se ha ajustado el código de audio incorporado.',
+      'block_file_list_admin_empty' => 'No se ha seleccionado aún ningún archivo.',
+      'block_html_name' => 'HTML',
+      'block_module_modulename_help' => 'Sólo en los módulos de frontend config registrados están disponibles.',
+      'block_spacing_small_space' => 'Espacio pequeño',
+      'block_spacing_medium_space' => 'Espacio medio',
+      'block_spacing_large_space' => 'Gran espacio',
 ];
