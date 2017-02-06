@@ -81,7 +81,7 @@ interface TypesInterface
     /**
      * @var string
      */
-    const TYPE_FILEUPLOAD_ARRAY = 'zaa-file-upload-array';
+    const TYPE_FILEUPLOAD_ARRAY = 'zaa-file-array-upload';
     
     /**
      * @var string
@@ -91,7 +91,7 @@ interface TypesInterface
     /**
      * @var string
      */
-    const TYPE_IMAGEUPLOAD_ARRAY = 'zaa-image-upload-array';
+    const TYPE_IMAGEUPLOAD_ARRAY = 'zaa-image-array-upload';
     
     /**
      * @var string The arrayable json output would be:
