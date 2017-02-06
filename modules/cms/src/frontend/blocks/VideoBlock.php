@@ -13,38 +13,67 @@ use luya\cms\frontend\blockgroups\MediaGroup;
  */
 final class VideoBlock extends TwigBlock
 {
+	const PROVIDER_YOUTUBE = 'youtube';
+	
+	const PROVIDER_YOUTUBE_EMBED_URL = 'https://www.youtube.com/embed/';
+	
+	const PROVIDER_VIMEO = 'vimeo';
+	
+	const PROVIDER_VIMEO_EMBED_URL = 'https://player.vimeo.com/video/';
+	
+	/**
+	 * @inheritdoc
+	 */
     public $module = 'cms';
 
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
 
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_video_name');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'videocam';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function blockGroup()
     {
         return MediaGroup::class;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
             'vars' => [
-                ['var' => 'url', 'label' => Module::t('block_video_url_label'), 'type' => 'zaa-text'],
+                ['var' => 'url', 'label' => Module::t('block_video_url_label'), 'type' => self::TYPE_TEXT],
             ],
             'cfgs' => [
-                ['var' => 'controls', 'label' => Module::t('block_video_controls_label'), 'type' => 'zaa-checkbox'],
-                ['var' => 'width', 'label' => Module::t('block_video_width_label'), 'type' => 'zaa-number'],
+                ['var' => 'controls', 'label' => Module::t('block_video_controls_label'), 'type' => self::TYPE_CHECKBOX],
+                ['var' => 'width', 'label' => Module::t('block_video_width_label'), 'type' => self::TYPE_NUMBER],
             ],
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFieldHelp()
     {
         return [
@@ -53,64 +82,62 @@ final class VideoBlock extends TwigBlock
             'width' => Module::t('block_video_help_width'),
         ];
     }
-
-    public function constructYoutubeUrl($scheme, $host, $query)
+    
+    public function embedYoutube()
     {
-        $url = '';
-        parse_str($query, $params);
-        if (isset($params['v'])) {
-            $url = $scheme . '://' . $host . '/embed/' . $params['v'];
-
-            if ($this->getCfgValue('controls')) {
-                $url .= '?rel=0&amp;controls=0&amp;showinfo=0';
-            } else {
-                $url .= '?' . $this->getCfgValue('controls');
-            }
-        }
-        return $url;
+    	parse_str(parse_url($this->getVarValue('url'), PHP_URL_QUERY), $args);
+    	// ensure if v argument exists
+    	if (isset($args['v'])) {
+    		$params['rel'] = 0;
+    		if ($this->getCfgValue('controls')) {
+    			$params['controls'] = 0;
+    		}
+    		return self::PROVIDER_YOUTUBE_EMBED_URL . $args['v'] . '?' . http_build_query($params);
+    	}
     }
-
-    public function constructVimeoUrl($path)
+    
+    public function embedVimeo()
     {
-        $path = trim($path, '/');
-        $url = '';
-        if (is_numeric($path)) {
-            $url = 'https://player.vimeo.com/video/' . $path . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
-        }
-        return $url;
+    	return self::PROVIDER_VIMEO_EMBED_URL . ltrim(parse_url($this->getVarValue('url'), PHP_URL_PATH), '/');
     }
 
     public function constructUrl()
     {
-        $urlComponents = parse_url($this->getVarValue('url'));
-        $correctUrl = isset($urlComponents['scheme']) && isset($urlComponents['host']);
-
-        if (($this->getVarValue('url', null) === null) || !$correctUrl) {
-            return null;
-        }
-
-        if (($urlComponents['host'] == 'www.youtube.com') || ($urlComponents['host'] == 'youtube.com') || (isset($urlComponents['query']))) {
-            return $this->constructYoutubeUrl($urlComponents['scheme'], $urlComponents['host'], $urlComponents['query']);
-        } elseif (($urlComponents['host'] == 'www.vimeo.com') || ($urlComponents['host'] == 'vimeo.com') || (isset($urlComponents['path']))) {
-            return $this->constructVimeoUrl($urlComponents['path']);
-        }
-        return null;
+    	if ($this->getVarValue('url')) {
+    		preg_match('/(?:www\.)?([a-z]+)(?:\.[a-z]+)?/', parse_url($this->getVarValue('url'), PHP_URL_HOST), $match);
+    		if (isset($match[1])) {
+    			switch ($match[1]) {
+    				case self::PROVIDER_YOUTUBE: return $this->embedYoutube();
+    				case self::PROVIDER_VIMEO: return $this->embedVimeo();
+    			}
+    		}
+    	}
+    	
+    	return null;
     }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function extraVars()
     {
         return [
             'url' => $this->constructUrl(),
-            'width' => $this->getCfgValue('width', 0),
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function twigFrontend()
     {
-        return '{% if extras.url is not empty %}{% if extras.width %}<div style="width:{{ extras.width }}">{% endif %}<div class="embed-responsive embed-responsive-16by9">'.
-        '<iframe class="embed-responsive-item" src="{{ extras.url }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>{% if extras.width %}</div>{% endif %}</div>{% endif %}';
+        return '{% if extras.url is not empty %}{% if cfgs.width %}<div style="width:{{ cfgs.width }}px">{% endif %}<div class="embed-responsive embed-responsive-16by9">'.
+        '<iframe class="embed-responsive-item" src="{{ extras.url }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>{% if cfgs.width %}</div>{% endif %}</div>{% endif %}';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function twigAdmin()
     {
         return '{% if extras.url is not empty %}<div style="margin:25px;width:300px"><div class="video-container"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
