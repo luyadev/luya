@@ -157,9 +157,9 @@ return [
     'page_update_actions_deepcopy_btn' => 'Crear copia',
     
 // rc2
-    'model_navitem_title_tag_label' => 'Title Tag (SEO)',
-    
+    'model_navitem_title_tag_label' => 'Etiqueta de título (SEO)',
+
 // 1.0.0
-    'model_navitempage_empty_draft_id' => 'Unable to create page from empty draft template.',
-    'view_update_variation_select' => 'No block variation selected',
+    'model_navitempage_empty_draft_id' => 'No se puede crear la página desde la plantilla de borrador vacía.',
+    'view_update_variation_select' => 'No se seleccionó ninguna variación de bloque',
 ];
