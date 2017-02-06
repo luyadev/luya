@@ -7,10 +7,10 @@ use luya\tag\TagMarkdownParser;
 
 class StubTagMarkdownParser extends TagMarkdownParser
 {
-	public function stubParseUrl($url)
-	{
-		return $this->parseUrl($url);
-	}
+    public function stubParseUrl($url)
+    {
+        return $this->parseUrl($url);
+    }
 }
 
 class TagMarkdownParserTest extends LuyaWebTestCase
@@ -44,8 +44,8 @@ class TagMarkdownParserTest extends LuyaWebTestCase
     
     public function testFakeMethodToHideCoveralls()
     {
-    	$parser = new StubTagMarkdownParser();
-    	$this->assertNull($parser->stubParseUrl('justnothing'));
+        $parser = new StubTagMarkdownParser();
+        $this->assertNull($parser->stubParseUrl('justnothing'));
     }
     
     private function rnl($content)

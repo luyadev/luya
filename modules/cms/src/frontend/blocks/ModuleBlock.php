@@ -101,7 +101,7 @@ final class ModuleBlock extends PhpBlock
     
     /**
      * Get all module related controllers.
-     * 
+     *
      * @return array
      */
     public function getControllerClasses()
@@ -113,7 +113,7 @@ final class ModuleBlock extends PhpBlock
     
     /**
      * Get all available frontend modules to make module selection in block.
-     * 
+     *
      * @return array
      */
     public function getModuleNames()
@@ -127,7 +127,7 @@ final class ModuleBlock extends PhpBlock
 
     /**
      * Return the Module output based on the module name.
-     * 
+     *
      * @param string $moduleName
      * @return string|null|\yii\web\Response
      */

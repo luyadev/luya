@@ -13,9 +13,9 @@ use luya\cms\base\PhpBlock;
  */
 final class QuoteBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
     /**
@@ -36,7 +36,7 @@ final class QuoteBlock extends PhpBlock
      */
     public function blockGroup()
     {
-    	return TextGroup::className();
+        return TextGroup::className();
     }
 
     /**

@@ -10,7 +10,7 @@ use luya\admin\ngrest\base\Plugin;
  *
  * You can optional set a placeholder value to guide your users, or an init value which will be assigned
  * to the angular model if nothing is set.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Slug extends Plugin

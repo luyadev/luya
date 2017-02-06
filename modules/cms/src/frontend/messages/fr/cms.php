@@ -173,7 +173,7 @@ return [
     'block_file_list_admin_empty' => 'No files has been selected yet.',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
-	'block_spacing_small_space' => 'Small space',
-	'block_spacing_medium_space' => 'Medium space',
-	'block_spacing_large_space' => 'Large space',
+    'block_spacing_small_space' => 'Small space',
+    'block_spacing_medium_space' => 'Medium space',
+    'block_spacing_large_space' => 'Large space',
 ];

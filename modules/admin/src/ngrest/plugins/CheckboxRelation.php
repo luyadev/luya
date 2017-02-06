@@ -50,18 +50,18 @@ use luya\rest\ActiveController;
  *     return $model->firstname . ' ' . $model->lastname;
  * }
  * ```
- * 
+ *
  * In case you want to get an active query item for the checkboxRelation data you can add a relation getter method which will be used to collect to data.
- * 
+ *
  * ```php
  * public function getGroups()
  * {
  *     return $this->hasMany(User::class, ['id' => 'user_id'])->viaTable('admin_user_grou', ['group_id' => 'id']);
  * }
  * ```
- * 
+ *
  * As now the there is a relation for `groups` this relation query will be used in order to return the data.
- * 
+ *
  * @property \luya\admin\ngrest\base\NgRestModel $model The model object
  * @property string $modelPrimaryKey The primary key string.
  * @author Basil Suter <basil@nadar.io>
@@ -228,7 +228,7 @@ class CheckboxRelation extends Plugin
      */
     public function onBeforeListFind($event)
     {
-    	$event->sender->{$this->name} = $this->getRelationData($event);
+        $event->sender->{$this->name} = $this->getRelationData($event);
     }
     
     /**
@@ -236,17 +236,17 @@ class CheckboxRelation extends Plugin
      */
     public function onBeforeFind($event)
     {
-    	$event->sender->{$this->name} = $this->getRelationData($event);
+        $event->sender->{$this->name} = $this->getRelationData($event);
     }
     
     private function getRelationData($event)
     {
-    	$relation = $event->sender->getRelation($this->name, false);
-    	if ($relation) {
-    		return $relation;
-    	}
-    	
-    	return $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
+        $relation = $event->sender->getRelation($this->name, false);
+        if ($relation) {
+            return $relation;
+        }
+        
+        return $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
 
     /**

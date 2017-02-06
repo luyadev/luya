@@ -13,9 +13,9 @@ use luya\cms\base\PhpBlock;
  */
 final class TableBlock extends PhpBlock
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
     
     /**
@@ -76,16 +76,16 @@ final class TableBlock extends PhpBlock
      */
     public function getTableData()
     {
-    	$hasHeader = $this->getCfgValue('header', 0);
+        $hasHeader = $this->getCfgValue('header', 0);
         $table = [];
         $i = 0;
         foreach ($this->getVarValue('table', []) as $row) {
             ++$i;
-			// whether the header data can be skipped or not
+            // whether the header data can be skipped or not
             if ($hasHeader == 1 && $i == 1) {
                 continue;
             }
-			// if markdown enabled parse field values
+            // if markdown enabled parse field values
             if ($this->getCfgValue('parseMarkdown', false)) {
                 foreach ($row as $field => $value) {
                     $row[$field] = TagParser::convertWithMarkdown($value);
@@ -100,7 +100,7 @@ final class TableBlock extends PhpBlock
 
     /**
      * Return the table header array data.
-     * 
+     *
      * @return array
      */
     public function getHeaderRow()

@@ -13,17 +13,17 @@ use luya\cms\frontend\blockgroups\MediaGroup;
  */
 final class VideoBlock extends TwigBlock
 {
-	const PROVIDER_YOUTUBE = 'youtube';
-	
-	const PROVIDER_YOUTUBE_EMBED_URL = 'https://www.youtube.com/embed/';
-	
-	const PROVIDER_VIMEO = 'vimeo';
-	
-	const PROVIDER_VIMEO_EMBED_URL = 'https://player.vimeo.com/video/';
-	
-	/**
-	 * @inheritdoc
-	 */
+    const PROVIDER_YOUTUBE = 'youtube';
+    
+    const PROVIDER_YOUTUBE_EMBED_URL = 'https://www.youtube.com/embed/';
+    
+    const PROVIDER_VIMEO = 'vimeo';
+    
+    const PROVIDER_VIMEO_EMBED_URL = 'https://player.vimeo.com/video/';
+    
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
     /**
@@ -85,35 +85,35 @@ final class VideoBlock extends TwigBlock
     
     public function embedYoutube()
     {
-    	parse_str(parse_url($this->getVarValue('url'), PHP_URL_QUERY), $args);
-    	// ensure if v argument exists
-    	if (isset($args['v'])) {
-    		$params['rel'] = 0;
-    		if ($this->getCfgValue('controls')) {
-    			$params['controls'] = 0;
-    		}
-    		return self::PROVIDER_YOUTUBE_EMBED_URL . $args['v'] . '?' . http_build_query($params);
-    	}
+        parse_str(parse_url($this->getVarValue('url'), PHP_URL_QUERY), $args);
+        // ensure if v argument exists
+        if (isset($args['v'])) {
+            $params['rel'] = 0;
+            if ($this->getCfgValue('controls')) {
+                $params['controls'] = 0;
+            }
+            return self::PROVIDER_YOUTUBE_EMBED_URL . $args['v'] . '?' . http_build_query($params);
+        }
     }
     
     public function embedVimeo()
     {
-    	return self::PROVIDER_VIMEO_EMBED_URL . ltrim(parse_url($this->getVarValue('url'), PHP_URL_PATH), '/');
+        return self::PROVIDER_VIMEO_EMBED_URL . ltrim(parse_url($this->getVarValue('url'), PHP_URL_PATH), '/');
     }
 
     public function constructUrl()
     {
-    	if ($this->getVarValue('url')) {
-    		preg_match('/(?:www\.)?([a-z]+)(?:\.[a-z]+)?/', parse_url($this->getVarValue('url'), PHP_URL_HOST), $match);
-    		if (isset($match[1])) {
-    			switch ($match[1]) {
-    				case self::PROVIDER_YOUTUBE: return $this->embedYoutube();
-    				case self::PROVIDER_VIMEO: return $this->embedVimeo();
-    			}
-    		}
-    	}
-    	
-    	return null;
+        if ($this->getVarValue('url')) {
+            preg_match('/(?:www\.)?([a-z]+)(?:\.[a-z]+)?/', parse_url($this->getVarValue('url'), PHP_URL_HOST), $match);
+            if (isset($match[1])) {
+                switch ($match[1]) {
+                    case self::PROVIDER_YOUTUBE: return $this->embedYoutube();
+                    case self::PROVIDER_VIMEO: return $this->embedVimeo();
+                }
+            }
+        }
+        
+        return null;
     }
     
     /**

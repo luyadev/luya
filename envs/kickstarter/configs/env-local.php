@@ -26,7 +26,7 @@ $config = [
     
     /*
      * Sets the default langage for the admin interface. Each user can override the language within its user profile settings.
-     * Currently supported language short codes: "en", "de", "fr", "es", "ru", "it", "ua", "el". The 
+     * Currently supported language short codes: "en", "de", "fr", "es", "ru", "it", "ua", "el". The
      */
     'luyaLanguage' => 'en',
     
@@ -69,9 +69,9 @@ $config = [
          * Admin module for the `cms` module.
          */
         'cmsadmin' => [
-        	'class' => 'luya\cms\admin\Module',
-        	'hiddenBlocks' => [],
-        	'blockVariations' => [],
+            'class' => 'luya\cms\admin\Module',
+            'hiddenBlocks' => [],
+            'blockVariations' => [],
         ],
     ],
     'components' => [
@@ -90,7 +90,7 @@ $config = [
 
         /*
          * ATTENTION:
-         * To help us improve our Software you can enable (true) this property to send all Exceptions directly to the luya developer team. 
+         * To help us improve our Software you can enable (true) this property to send all Exceptions directly to the luya developer team.
          * The follwing informations will be transfered:
          * - $_GET, $_POST, $_SERVER and $_SESSION data
          * - Exception Object (inlcuding stack trace, line, linenr, message, file)

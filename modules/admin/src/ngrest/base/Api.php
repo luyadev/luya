@@ -99,12 +99,12 @@ class Api extends RestActiveController
      */
     public function actionUnlock()
     {
-    	UserOnline::unlock(Yii::$app->adminuser->id);
+        UserOnline::unlock(Yii::$app->adminuser->id);
     }
     
     /**
      * Service Action provides mutliple CRUD informations.
-     * 
+     *
      * @return array
      */
     public function actionServices()
@@ -133,7 +133,7 @@ class Api extends RestActiveController
             '_settings' => $settings,
             '_locked' => [
                 'data' => UserOnline::find()->select(['lock_pk', 'last_timestamp', 'u.firstname', 'u.lastname', 'u.id'])->joinWith('user as u')->where(['lock_table' => $this->modelClass::tableName()])->createCommand()->queryAll(),
-                'userId' => Yii::$app->adminuser->id,   
+                'userId' => Yii::$app->adminuser->id,
             ],
         ];
     }

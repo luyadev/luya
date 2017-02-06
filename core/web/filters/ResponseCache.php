@@ -117,7 +117,7 @@ class ResponseCache extends ActionFilter
 
     /**
      * @var array Define an array with the action and a callback which will be trigger event when cached.
-     * 
+     *
      * ```php
      * 'actionsCallable' => ['get-posts' => function($result) {
      *     // do something whether is the response cached or not
@@ -128,7 +128,7 @@ class ResponseCache extends ActionFilter
     
     /**
      * call the action callable if available.
-     * 
+     *
      * @param string $action The action ID name
      * @param string $result The cahed or not cached action response, this is a string as its after the action filters.
      */
@@ -157,7 +157,7 @@ class ResponseCache extends ActionFilter
             return $response->send();
         }
         
-        $response->on(Response::EVENT_AFTER_SEND, function($event) use ($action) {
+        $response->on(Response::EVENT_AFTER_SEND, function ($event) use ($action) {
             $this->callActionCallable($action->id, $event->sender->content);
         });
         

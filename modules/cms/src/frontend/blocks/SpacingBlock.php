@@ -12,10 +12,10 @@ use luya\cms\helpers\BlockHelper;
  * @author Basil Suter <basil@nadar.io>
  */
 final class SpacingBlock extends PhpBlock
-{	
-	/**
-	 * @inheritdoc
-	 */
+{
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
     
     /**
@@ -25,11 +25,11 @@ final class SpacingBlock extends PhpBlock
     
     protected function getSpacings()
     {
-    	return [
-			1 => Module::t('block_spacing_small_space'),
-			2 => Module::t('block_spacing_medium_space'),
-			3 => Module::t('block_spacing_large_space'),
-		];
+        return [
+            1 => Module::t('block_spacing_small_space'),
+            2 => Module::t('block_spacing_medium_space'),
+            3 => Module::t('block_spacing_large_space'),
+        ];
     }
     
     /**
@@ -64,11 +64,11 @@ final class SpacingBlock extends PhpBlock
         return [
             'vars' => [
                 [
-                	'var' => 'spacing', 
-                	'label' => Module::t('block_spacing_spacing_label'), 
-                	'initvalue' => 1, 
-                	'type' => self::TYPE_SELECT, 
-                	'options' => BlockHelper::selectArrayOption($this->getSpacings()),
+                    'var' => 'spacing',
+                    'label' => Module::t('block_spacing_spacing_label'),
+                    'initvalue' => 1,
+                    'type' => self::TYPE_SELECT,
+                    'options' => BlockHelper::selectArrayOption($this->getSpacings()),
                 ],
             ],
         ];
@@ -80,7 +80,7 @@ final class SpacingBlock extends PhpBlock
     public function extraVars()
     {
         return [
-        	'spacingLabel' => $this->getSpacings()[$this->getVarValue('spacing', 1)],
+            'spacingLabel' => $this->getSpacings()[$this->getVarValue('spacing', 1)],
         ];
     }
 

@@ -101,7 +101,7 @@ final class UserOnline extends ActiveRecord
     
     /**
      * Refresh the state of the current user, or add if not exists.
-     * 
+     *
      * @param integer $userId
      * @param string $route
      */
@@ -142,7 +142,7 @@ final class UserOnline extends ActiveRecord
     
     /**
      * Get the user online list.
-     * 
+     *
      * @return array
      */
     public static function getList()
@@ -169,7 +169,7 @@ final class UserOnline extends ActiveRecord
 
     /**
      * Get the number uf online users.
-     * 
+     *
      * @return integer
      */
     public static function getCount()

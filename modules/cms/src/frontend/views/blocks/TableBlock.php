@@ -9,7 +9,7 @@
         <?php if ($this->cfgValue('header')): ?>
             <thead>
                 <tr>
-                    <?php foreach($this->extraValue('headerData', []) as $column): ?>
+                    <?php foreach ($this->extraValue('headerData', []) as $column): ?>
                     <th><?= $column; ?></th>
                     <?php endforeach; ?>
                 </tr>

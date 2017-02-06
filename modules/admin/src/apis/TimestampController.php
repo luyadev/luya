@@ -24,8 +24,8 @@ class TimestampController extends RestController
         UserOnline::clearList();
         
         if (!UserOnline::findOne(['user_id' => Yii::$app->adminuser->id])) {
-        	Yii::$app->response->statusCode = 401;
-        	return Yii::$app->response->send();
+            Yii::$app->response->statusCode = 401;
+            return Yii::$app->response->send();
         }
         // return users, verify force reload.
         return [
