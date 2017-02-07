@@ -3,15 +3,15 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
-use luya\cms\base\TwigBlock;
 use luya\cms\frontend\blockgroups\MediaGroup;
+use luya\cms\base\PhpBlock;
 
 /**
  * Embed YouTube and Vimeo video Block.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class VideoBlock extends TwigBlock
+final class VideoBlock extends PhpBlock
 {
     const PROVIDER_YOUTUBE = 'youtube';
     
@@ -83,6 +83,11 @@ final class VideoBlock extends TwigBlock
         ];
     }
     
+    /**
+     * Ensure the emebed youtube url based on url var.
+     *
+     * @return string
+     */
     public function embedYoutube()
     {
         parse_str(parse_url($this->getVarValue('url'), PHP_URL_QUERY), $args);
@@ -96,11 +101,21 @@ final class VideoBlock extends TwigBlock
         }
     }
     
+    /**
+     * Ensure the emebed vimeo url based on url var.
+     * 
+     * @return string
+     */
     public function embedVimeo()
     {
         return self::PROVIDER_VIMEO_EMBED_URL . ltrim(parse_url($this->getVarValue('url'), PHP_URL_PATH), '/');
     }
 
+    /**
+     * Construct the url based on url input.
+     * 
+     * @return string
+     */
     public function constructUrl()
     {
         if ($this->getVarValue('url')) {
@@ -129,16 +144,7 @@ final class VideoBlock extends TwigBlock
     /**
      * @inheritdoc
      */
-    public function twigFrontend()
-    {
-        return '{% if extras.url is not empty %}{% if cfgs.width %}<div style="width:{{ cfgs.width }}px">{% endif %}<div class="embed-responsive embed-responsive-16by9">'.
-        '<iframe class="embed-responsive-item" src="{{ extras.url }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>{% if cfgs.width %}</div>{% endif %}</div>{% endif %}';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function twigAdmin()
+    public function admin()
     {
         return '{% if extras.url is not empty %}<div style="margin:25px;width:300px"><div class="video-container"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
     }
