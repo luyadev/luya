@@ -727,6 +727,15 @@ class StorageContainer extends Component
             }
         }
         
+        // force auto fix
+        $this->autoFixMissingImageSources = true;
+        
+        foreach ($this->findImages() as $image) {
+            if (!empty($image->file) && !$image->file->isHidden && !$image->file->isDeleted) {
+                $image->toArray(); // which forces to recreate missing sources.
+            }
+        }
+        
         return true;
     }
 }
