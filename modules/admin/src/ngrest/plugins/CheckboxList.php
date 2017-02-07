@@ -120,7 +120,8 @@ class CheckboxList extends Plugin
     public function onBeforeFind($event)
     {
         if (!$this->i18n) {
-            $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
+            $array = $this->jsonDecode($event->sender->getAttribute($this->name));
+            $event->sender->setAttribute($this->name, ArrayHelper::getColumn($array, 'value'));
             return false;
         }
         
