@@ -67,8 +67,9 @@ There are several types you can use to generate your block controlls. Each class
 |zaa-file-upload|TYPE_FILEUPLOAD|Create a file upload form and returns the fileId on success
 |zaa-file-array-upload|TYPE_FILEUPLOAD_ARRAY|Create an array with file id and caption string
 |zaa-image-upload|TYPE_IMAGEUPLOAD|Create a image upload form and return the imageId on success
-|zaa-image-array-upload|TYPE_IMAGEUPLOAD_ARRAY|Create an asrray with image id an caption string
+|zaa-image-array-upload|TYPE_IMAGEUPLOAD_ARRAY|Create an array with image id an caption string
 |zaa-list-array|TYPE_LIST_ARRAY|Create an array with a key variable `value`
+|[zaa-multiple-inputs](app-block-type-multiple-inputs.md)| TYPE_MULTIPLE_INPUTS | Create an expandable list with plugins for each row
 
 ### Examples with Types
 

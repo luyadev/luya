@@ -30,6 +30,7 @@
     + [Block Selects](app-block-type-select.md)
     + [Block Checkbox](app-block-type-checkbox.md)
     + [Block Checkboxes Array](app-block-type-checkbox-array.md)
+    + [Block Multiple Inputs](app-block-type-multiple-inputs.md)
   + [Page Properties](app-cmsproperties.md)
 + Frontend Module
   + [About Frontend Modules](app-module-frontend.md)

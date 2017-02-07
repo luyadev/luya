@@ -991,9 +991,9 @@
                                         '</div>' +
                                     '</div>' +
                                     '<div class="list__right">' +
-                                    '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
-                                    '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveUp(key)" ng-show="{{key > 0}}"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                    '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveDown(key)" ng-show="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveUp(key)" ng-show="{{key > 0}}"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveDown(key)" ng-show="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
@@ -1068,12 +1068,86 @@
                                         '</div>' +
                                     '</div>' +
                                     '<div class="list__right">' +
-                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                         '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveUp(key)" ng-show="{{key > 0}}"><i class="material-icons">keyboard_arrow_up</i></button>' +
                                         '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveDown(key)" ng-show="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
+                            '</div>' +
+                        '</div>';
+            }
+        }
+    });
+
+    zaa.directive("zaaMultipleInputs", function() {
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname"
+            },
+            controller: function ($scope) {
+                $scope.init = function() {
+                    if ($scope.model == undefined || $scope.model == null) {
+                        $scope.model = [];
+                    }
+                };
+
+                $scope.add = function() {
+                    if ($scope.model == null || $scope.model == '' || $scope.model == undefined) {
+                        $scope.model = [];
+                    }
+
+                    $scope.model.push({});
+                };
+
+                $scope.remove = function(key) {
+                    $scope.model.splice(key, 1);
+                };
+
+                $scope.moveUp = function(index) {
+                    index = parseInt(index);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index-1];
+                    $scope.model[index-1] = oldRow;
+                };
+
+                $scope.moveDown = function(index) {
+                    index = parseInt(index);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index+1];
+                    $scope.model[index+1] = oldRow;
+                };
+
+                $scope.showDownButton = function(index) {
+                    return parseInt(index) < Object.keys($scope.model).length - 1;
+                };
+
+                $scope.init();
+            },
+            template: function() {
+                return '<div>' +
+                            '<div class="input input--list list" ng-class="{\'input--hide-label\': i18n}">' +
+                                '<label class="input__label">{{label}}</label>' +
+                                '<div class="input__field-wrapper">' +
+                                    '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<div ng-repeat="(key,row) in model track by key" class="list__item list__item--bordered">' +
+                                        '<div class="list__left" style="width: calc(100% - 140px)">' +
+                                            '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" fieldname="{{opt.var}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
+                                        '</div>' +
+                                        '<div class="list__right" style="width: 130px">' +
+                                            '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="{{key > 0}}" ng-click="moveUp(key)"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                            '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                            '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<button ng-click="add()" type="button" class="btn-floating left list__add-button"><i class="material-icons">add</i></button>' +
+                                '</div>' +
                             '</div>' +
                         '</div>';
             }
@@ -1127,7 +1201,7 @@
                             input[0].focus();
                         }
                     }, 50);
-                }
+                };
 
                 $scope.moveUp = function(index) {
                     index = parseInt(index);
@@ -1163,9 +1237,9 @@
                                         '<input class="list__input" type="text" ng-model="row.value" />' +
                                     '</div>' +
                                     '<div class="list__right" style="width:130px">' +
-                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                         '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="{{key > 0}}" ng-click="moveUp(key)"><i class="material-icons">keyboard_arrow_up</i></button>' +
                                         '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +

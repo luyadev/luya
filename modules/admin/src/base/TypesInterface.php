@@ -116,4 +116,29 @@ interface TypesInterface
      * @var string Generates a slugified input field which removes not valid url "link" chars like whitespaces.
      */
     const TYPE_SLUG = 'zaa-slug';
+
+    /**
+     * @var string Create an expandable list with plugins for each row.
+     *
+     * ```php
+     * ['var' => 'people', 'label' => 'People', 'type' => 'zaa-multiple-inputs', 'options' => [
+     *          [
+     *              'type' => 'zaa-select',
+     *              'var' => 'salutation',
+     *              'label' => 'Salutation',
+     *              'options' => [
+     *                  ['value' => 1, 'label' => 'Mr.'],
+     *                  ['value' => 2, 'label' => 'Mrs.'],
+     *              ]
+     *          ],
+     *          [
+     *              'type' => 'zaa-text',
+     *              'var' => 'name',
+     *              'label' => 'Name'
+     *          ],
+     *      ],
+     * ]
+     * ```
+     */
+    const TYPE_MULTIPLE_INPUTS = 'zaa-multiple-inputs';
 }
