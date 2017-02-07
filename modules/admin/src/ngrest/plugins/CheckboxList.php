@@ -11,11 +11,14 @@ use luya\helpers\StringHelper;
  *
  * Example usage:
  *
- * ```
+ * ```php
  * public function ngRestAttributeTypes()
  * {
- * 		'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
+ *     return [
+ *         'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
+ *     ];
  * }
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  */
