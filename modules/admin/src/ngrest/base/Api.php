@@ -128,11 +128,12 @@ class Api extends RestActiveController
             $settings['filterName'] = $userFilter;
         }
         
+        $modelClass = $this->modelClass;
         return [
             'service' => $this->model->getNgrestServices(),
             '_settings' => $settings,
             '_locked' => [
-                'data' => UserOnline::find()->select(['lock_pk', 'last_timestamp', 'u.firstname', 'u.lastname', 'u.id'])->joinWith('user as u')->where(['lock_table' => $this->modelClass::tableName()])->createCommand()->queryAll(),
+                'data' => UserOnline::find()->select(['lock_pk', 'last_timestamp', 'u.firstname', 'u.lastname', 'u.id'])->joinWith('user as u')->where(['lock_table' => $modelClass::tableName()])->createCommand()->queryAll(),
                 'userId' => Yii::$app->adminuser->id,
             ],
         ];
