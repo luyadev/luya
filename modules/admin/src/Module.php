@@ -44,6 +44,21 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
     
     /**
+     * @var array Available translation messages.
+     */
+    public $uiLanguageDropdown = [
+    	'en' => 'English',
+    	'de' => 'Deutsch',
+    	'ru' => 'Pусский',
+    	'es' => 'Español',
+    	'fr' => 'Français',
+    	'ua' => 'Українська',
+    	'it' => 'Italiano',
+    	'el' => 'Ελληνικά',
+    	'vi' => 'Việt Nam',
+    ];
+    
+    /**
      * @var boolean Enables a two-way factor auth system before logging into the admin
      * panel. If the system is not able to send mails (No configuration or missconfiguration)
      * then you are not able to login anymore. You should test the mail system before enabling

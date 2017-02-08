@@ -564,14 +564,9 @@ $this->beginPage()
 		            		<div class="input input--select input--vertical">
 				    			<label class="input__label" for="layout-changer" style="margin-bottom:5px;"><?= Admin::t('layout_rightbar_languagelabel')?></label>
 					            <select id="layout-changer" class="input__field-wrapper" ng-model="profile.lang">
-					            	<option value="de" <?php if (Yii::$app->luyaLanguage == 'de'): ?>selected<?php endif; ?>>Deutsch</option>
-					            	<option value="en" <?php if (Yii::$app->luyaLanguage == 'en'): ?>selected<?php endif; ?>>English</option>
-					            	<option value="ru" <?php if (Yii::$app->luyaLanguage == 'ru'): ?>selected<?php endif; ?>>Pусский</option>
-					            	<option value="es" <?php if (Yii::$app->luyaLanguage == 'es'): ?>selected<?php endif; ?>>Español</option>
-					            	<option value="fr" <?php if (Yii::$app->luyaLanguage == 'fr'): ?>selected<?php endif; ?>>Français</option>
-					            	<option value="ua" <?php if (Yii::$app->luyaLanguage == 'ua'): ?>selected<?php endif; ?>>Українська</option>
-                                    <option value="it" <?php if (Yii::$app->luyaLanguage == 'it'): ?>selected<?php endif; ?>>Italiano</option>
-                                    <option value="el" <?php if (Yii::$app->luyaLanguage == 'el'): ?>selected<?php endif; ?>>Ελληνικά</option>
+                                    <?php foreach ($this->context->module->uiLanguageDropdown as $key => $lang): ?>
+					            	<option value="<?= $key; ?>" <?php if (Yii::$app->luyaLanguage == $key): ?>selected<?php endif; ?>><?= $lang;?></option>
+                                    <?php endforeach; ?>
 					            </select>
 				            </div>
 	            		</td>
