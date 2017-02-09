@@ -45,6 +45,23 @@ abstract class ImageProperty extends Property
     }
     
     /**
+     * In order to auto apply a filter to each image override this mehotd returning the identifier of your Filter.
+     * 
+     * ```php
+     * public function filterName()
+     * {
+     *     return \app\filters\MyFilter::identifier();
+     * }
+     * ```
+     * 
+     * @return boolean|string
+     */
+    public function filterName()
+    {
+        return false;
+    }
+    
+    /**
      * Get the source of the image, if not available the method returns false.
      *
      * @return string|boolean Returns the path to the file, otherwise false.
@@ -56,7 +73,11 @@ abstract class ImageProperty extends Property
         
         if ($value) {
             $image = Yii::$app->storage->getImage($value);
+            /* @var $image \luya\admin\image\Item */
             if ($image) {
+                if ($this->filterName()) {
+                    return $image->applyFilter($this->filterName())->source;
+                }
                 return $image->source;
             }
         }
