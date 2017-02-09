@@ -39,7 +39,7 @@ class Item extends \yii\base\Object
 {
     use ItemTrait;
     
-    private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', '	image/tiff'];
+    private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
     private $_caption = null;
     
