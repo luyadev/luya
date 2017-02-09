@@ -12,6 +12,8 @@ use luya\traits\CacheableTrait;
 use luya\admin\helpers\I18n;
 use luya\admin\base\RestController;
 use yii\caching\DbDependency;
+use luya\admin\filters\TinyCrop;
+use luya\admin\filters\MediumThumbnail;
 
 /**
  * Filemanager and Storage API.
@@ -79,7 +81,7 @@ class StorageController extends RestController
                 $data = $file->toArray();
                 if ($file->isImage) {
                     // add tiny thumbnail
-                    $filter = Yii::$app->storage->getFiltersArrayItem('tiny-crop');
+                    $filter = Yii::$app->storage->getFiltersArrayItem(TinyCrop::identifier());
                     if ($filter) {
                         $thumbnail = Yii::$app->storage->addImage($file->id, $filter['id']);
                         if ($thumbnail) {
@@ -87,7 +89,7 @@ class StorageController extends RestController
                         }
                     }
                     // add meidum thumbnail
-                    $filter = Yii::$app->storage->getFiltersArrayItem('medium-thumbnail');
+                    $filter = Yii::$app->storage->getFiltersArrayItem(MediumThumbnail::identifier());
                     if ($filter) {
                         $thumbnail = Yii::$app->storage->addImage($file->id, $filter['id']);
                         if ($thumbnail) {
