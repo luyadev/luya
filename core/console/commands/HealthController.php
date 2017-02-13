@@ -5,6 +5,7 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\Console;
+use yii\imagine\Image;
 
 /**
  * Health/Status informations about the Application itself.
@@ -83,6 +84,12 @@ class HealthController extends \luya\console\Command
             }
         }
 
+        try {
+            Image::getImagine();
+        } catch (\Exception $e) {
+            $this->outputError('Imagine Error: ' . $e->getMessage());
+        }
+        
         return ($error) ? $this->outputError('Health check found errors!') : $this->outputSuccess('O.K.');
     }
 
