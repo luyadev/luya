@@ -84,11 +84,14 @@ class HealthController extends \luya\console\Command
             }
         }
 
+        /*
+         * move to admin/setup command as part of admin setup.
         try {
             Image::getImagine();
         } catch (\Exception $e) {
             $this->outputError('Imagine Error: ' . $e->getMessage());
         }
+        */
         
         return ($error) ? $this->outputError('Health check found errors!') : $this->outputSuccess('O.K.');
     }
