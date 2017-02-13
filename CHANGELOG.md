@@ -11,7 +11,6 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 - [#1177](https://github.com/luyadev/luya/issues/1177) The luya\web\Elements component looks for the elements.php inside the @app/views folder instead of @app.
 - [#1114](https://github.com/luyadev/luya/issues/1114) Updated materializecss to newest version and removed unused files.
-- [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated, renamed or removed functions collection.
 - [#1126](https://github.com/luyadev/luya/issues/1126) Moved CLI commands to the related modules.
 - [#1102](https://github.com/luyadev/luya/issues/1102) Removed News Module Tag table and replace by admin modules Tag models.
@@ -53,6 +52,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1186](https://github.com/luyadev/luya/issues/1186) Image records not deleted from list without cache reload.
 - [#1162](https://github.com/luyadev/luya/issues/1162) Unable to create pages from empty draft selection.
 - [#1143](https://github.com/luyadev/luya/issues/1143) Fixed image directive filter preselection, due to an angular convert to number problem.
