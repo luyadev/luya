@@ -10,6 +10,8 @@ use luya\cms\models\Nav;
 use luya\web\LinkInterface;
 use luya\web\LinkTrait;
 use luya\helpers\Url;
+use yii\base\Arrayable;
+use yii\base\ArrayableTrait;
 
 /**
  * Menu item Object.
@@ -52,9 +54,9 @@ use luya\helpers\Url;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta1
  */
-class Item extends Object implements LinkInterface
+class Item extends Object implements LinkInterface, Arrayable
 {
-    use LinkTrait;
+    use LinkTrait, ArrayableTrait;
     
     /**
      * @var array The item property containing the informations with key  value parinings. This property will be assigned when creating the
@@ -73,6 +75,14 @@ class Item extends Object implements LinkInterface
      */
     private $_with = [];
 
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        return ['href', 'target'];
+    }
+    
     /**
      * @inheritdoc
      */

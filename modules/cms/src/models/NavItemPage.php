@@ -111,16 +111,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        return [
-            'content_as_array' => 'contentAsArray',
-        ];
-    }
-    
-    /**
      * Get the list of version/pages for a specific nav item id
      *
      * @param unknown $navItemId

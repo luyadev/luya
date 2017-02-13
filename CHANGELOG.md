@@ -19,6 +19,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1202](https://github.com/luyadev/luya/issues/1202) Added Arrayable implementation for ExternalLink and menu\Item.
 - [#1200](https://github.com/luyadev/luya/issues/1200) Added new block type `zaa-multiple-inputs` to create more flexible blocks
 - [#1193](https://github.com/luyadev/luya/issues/1193) Slugify Plugin to generate aliases with only lower case letters, numbers and strikes.
 - [#1187](https://github.com/luyadev/luya/issues/1187) ActiveQueryCheckboxInjector has new `label` attribute in order to define the rendering for the dropdown label in the block admin.

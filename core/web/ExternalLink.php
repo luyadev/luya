@@ -5,6 +5,8 @@ namespace luya\web;
 use yii\base\Object;
 use luya\helpers\Url;
 use yii\base\InvalidConfigException;
+use yii\base\ArrayableTrait;
+use yii\base\Arrayable;
 
 /**
  * Generate External Link object.
@@ -14,10 +16,10 @@ use yii\base\InvalidConfigException;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ExternalLink extends Object implements LinkInterface
+class ExternalLink extends Object implements LinkInterface, Arrayable
 {
-    use LinkTrait;
-
+    use LinkTrait, ArrayableTrait;
+    
     /**
      * @inheritdoc
      */
@@ -28,6 +30,14 @@ class ExternalLink extends Object implements LinkInterface
         if ($this->href === null) {
             throw new InvalidConfigException('The href attribute can not be empty and must be set trough configuration array.');
         }
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        return ['href', 'target'];
     }
     
     private $_href = null;
