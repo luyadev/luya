@@ -3,8 +3,7 @@
 namespace luya\cms\helpers;
 
 use Yii;
-use luya\Exception;
-use luya\web\ExternalLink;
+use luya\cms\Exception;
 
 /**
  * CMS Url Helper class extends luya\helpers\Url by CMS routing methods.
@@ -14,6 +13,7 @@ use luya\web\ExternalLink;
  * your project application.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Url extends \luya\helpers\Url
 {
@@ -100,27 +100,5 @@ class Url extends \luya\helpers\Url
         }
 
         return Yii::$app->urlManager->createMenuItemUrl($routeParams, $navItemId);
-    }
-    
-    /**
-     * Generate a link object based on the configuration (array).
-     *
-     * @param string|array $config The configuration array to build the object
-     * @return \luya\web\LinkInterface|false Returns a linkable resource object or false if configuration is wrong.
-     */
-    public static function generateLinkObject($config)
-    {
-        if (!empty($config) && isset($config['type']) && isset($config['value'])) {
-            switch ($config['type']) {
-                case 1:
-                    return Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();
-                    break;
-                case 2:
-                    return new ExternalLink(['href' => $config['value']]);
-                    break;
-            }
-        }
-        
-        return false;
     }
 }

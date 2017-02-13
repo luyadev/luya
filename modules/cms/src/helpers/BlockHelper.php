@@ -3,6 +3,7 @@
 namespace luya\cms\helpers;
 
 use Yii;
+use luya\web\ExternalLink;
 
 /**
  * Helper methods for CMS Blocks.
@@ -13,8 +14,8 @@ use Yii;
  * The helper methods are basically tasks you are using a lot when dealing with block extra
  * value output or configuration of a block element like vars, cfgs.
  *
- * @since 1.0.0-RC2
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class BlockHelper
 {
@@ -212,5 +213,28 @@ class BlockHelper
         }
     
         return [];
+    }
+    
+    
+    /**
+     * Generate a link object based on the configuration (array).
+     *
+     * @param string|array $config The configuration array to build the object
+     * @return \luya\web\LinkInterface|false Returns a linkable resource object or false if configuration is wrong.
+     */
+    public static function linkObject($config)
+    {
+        if (!empty($config) && isset($config['type']) && isset($config['value'])) {
+            switch ($config['type']) {
+                case 1:
+                    return Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();
+                    break;
+                case 2:
+                    return new ExternalLink(['href' => $config['value']]);
+                    break;
+            }
+        }
+    
+        return false;
     }
 }
