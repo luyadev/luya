@@ -42,6 +42,11 @@ use luya\helpers\ArrayHelper;
  * 
  * This configure widget would output the following code:
  * 
+ * ```html
+ * <ul class="langnav__list">
+ *     <li class="langnav__item lang-element-item--active"><a class="langnav__link lang-link-item--active" href="/public_html/">DE</a></li>
+ *     <li class="langnav__item"><a class="langnav__link" href="/public_html/en">EN</a></li>
+ * </ul>
  * ```
  * 
  * @author Basil Suter <basil@nadar.io>
