@@ -29,4 +29,20 @@ class LangSwitcherTest extends CmsFrontendTestCase
 <li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">DE</a></li>
 </ul>', $out);
     }
+    
+    public function testSortCallable()
+    {
+        $out = LangSwitcher::widget(['itemsCallback' => function($items) {
+            ksort($items);
+            
+            return $items;
+        }]);
+        
+        
+            $this->assertSame('<ul class="list-element">
+<li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">Deutsch</a></li>
+<li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="/luya/envs/dev/public_html/">English</a></li>
+</ul>', $out);
+        
+    }
 }

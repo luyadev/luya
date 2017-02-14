@@ -95,6 +95,18 @@ class LangSwitcher extends \luya\base\Widget
     public $linkLabel = 'name';
     
     /**
+     * @var callable A callable function in order to sort the $items (the array key of the items contains the lang short code):
+     * 
+     * ```php
+     * 'itemsCallback' => function($items) {
+     *     ksort($items);
+     *     return $items;
+     * }
+     * ```
+     */
+    public $itemsCallback = null; 
+    
+    /**
      * Generate the item element.
      * 
      * @param string $href
@@ -160,10 +172,14 @@ class LangSwitcher extends \luya\base\Widget
                     $link = Yii::$app->urlManager->createMenuItemUrl($routeParams, $item->id, $compositionObject);
                 }
 
-                $items[] = $this->generateHtml($link, $currentLang == $lang['short_code'], $lang);
+                $items[$lang['short_code']] = $this->generateHtml($link, $currentLang == $lang['short_code'], $lang);
             } else {
-                $items[] = $this->generateHtml(Yii::$app->urlManager->prependBaseUrl($lang['short_code']), $currentLang == $lang['short_code'], $lang);
+                $items[$lang['short_code']] = $this->generateHtml(Yii::$app->urlManager->prependBaseUrl($lang['short_code']), $currentLang == $lang['short_code'], $lang);
             }
+        }
+        
+        if (is_callable($this->itemsCallback)) {
+            $items = call_user_func($this->itemsCallback, $items);
         }
 
         $options = $this->listElementOptions;
