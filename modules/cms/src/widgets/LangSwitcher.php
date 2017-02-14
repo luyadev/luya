@@ -55,6 +55,11 @@ use luya\helpers\ArrayHelper;
 class LangSwitcher extends \luya\base\Widget
 {
     /**
+     * @var null|array Singleton container when used for mobile and desktop in order to reduce db requests.
+     */
+    private static $_dataArray = null;
+    
+    /**
      * @var array The Wrapping list element (ul tag) Options to pass.
      *  - tag: Default is ul
      *  - seperator: The seperator for items defaults `\n`.
@@ -141,41 +146,62 @@ class LangSwitcher extends \luya\base\Widget
     }
 
     /**
+     * Add Singleton Container.
+     * 
+     * @return array
+     */
+    private static function getDataArray()
+    {
+        if (self::$_dataArray === null) {
+            $currentMenuItem = Yii::$app->menu->current;
+            $array = [];
+            foreach (Yii::$app->adminLanguage->getLanguages() as $lang) {
+                $array[] = [
+                    'lang' => $lang,
+                    'item' => Yii::$app->menu->find()->where(['nav_id' => $currentMenuItem->navId])->lang($lang['short_code'])->with('hidden')->one(),
+                ];
+            }
+            
+            self::$_dataArray = $array;
+        }
+        
+        return self::$_dataArray;
+    }
+    
+    /**
      * @return array An array with languages items.
      */
     public function run()
     {
         $currentLang = Yii::$app->composition['langShortCode'];
-        $currentMenuItem = Yii::$app->menu->current;
+        
         $rule = Yii::$app->menu->currentUrlRule;
 
         $items = [];
 
-        // Loop through all languages
-        foreach (Yii::$app->adminLanguage->getLanguages() as $lang) {
-            // Find item of current link with the lang
-            $item = Yii::$app->menu->find()->where(['nav_id' => $currentMenuItem->navId])->lang($lang['short_code'])->with('hidden')->one();
-
+        foreach (self::getDataArray() as $langData) {
+            $item = $langData['item'];
+            $lang = $langData['lang'];
+            
             if ($item) {
-                $link = $item->link;
-
                 if ($item->type == 2  && !empty($rule)) {
                     $routeParams = [$rule['route']];
-
                     foreach ($rule['params'] as $key => $value) {
                         $routeParams[$key] = $value;
                     }
-
                     $compositionObject = Yii::createObject(Composition::className());
                     $compositionObject->off(Composition::EVENT_AFTER_SET);
                     $compositionObject['langShortCode'] = $lang['short_code'];
                     $link = Yii::$app->urlManager->createMenuItemUrl($routeParams, $item->id, $compositionObject);
+                } else {
+                    $link = $item->link;
                 }
-
                 $items[$lang['short_code']] = $this->generateHtml($link, $currentLang == $lang['short_code'], $lang);
             } else {
                 $items[$lang['short_code']] = $this->generateHtml(Yii::$app->urlManager->prependBaseUrl($lang['short_code']), $currentLang == $lang['short_code'], $lang);
             }
+            
+            unset($item, $lang);
         }
         
         if (is_callable($this->itemsCallback)) {
