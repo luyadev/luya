@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use luya\helpers\ArrayHelper;
 
 /**
- * Language Switcher for CMS
+ * CMS Lang Switcher Widget.
  *
  * This widget will find all registered languages and display the corresponding like to the provided languages, 
  * if there as no translation found for the current link, it will point to the home page for this language. The
@@ -20,7 +20,7 @@ use luya\helpers\ArrayHelper;
  * 
  * Generates a list with all items:
  * 
- * ```php
+ * ```html
  * <ul class="list-element">
  *     <li><li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="/luya/envs/dev/public_html/">English</a></li></li>
  *     <li><li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">Deutsch</a></li></li>
@@ -29,7 +29,20 @@ use luya\helpers\ArrayHelper;
  * 
  * You can configure the elements to match your custom css:
  * 
+ * ```php
+ * LangSwitcher::widget([
+ *     'listElementOptions' => ['class' => 'langnav__list'],
+ *     'elementOptions' => ['class' => 'langnav__item'],
+ *     'linkOptions' => ['class' => 'langnav__link'],
+ *     'linkLabel' => function($lang) {
+ *         return strtoupper($lang['short_code']);
+ *     }
+ * ]);
+ * ```
  * 
+ * This configure widget would output the following code:
+ * 
+ * ```
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -38,6 +51,9 @@ class LangSwitcher extends \luya\base\Widget
 {
     /**
      * @var array The Wrapping list element (ul tag) Options to pass.
+     *  - tag: Default is ul
+     *  - seperator: The seperator for items defaults `\n`.
+     *  - class: The class to observe for the elements.
      */
     public $listElementOptions = ['class' => 'list-element'];
     
@@ -65,7 +81,7 @@ class LangSwitcher extends \luya\base\Widget
     public $linkOptions = ['class' => 'lang-link-item'];
     
     /**
-     * @var string Options to pass to the link element (a tag):
+     * @var string Options to pass to the link element (a tag). Can also be a callable in order to specific output.
      * 
      * - id:
      * - name: The fullname, e.g. English
@@ -102,7 +118,9 @@ class LangSwitcher extends \luya\base\Widget
         
         $tag = ArrayHelper::remove($elementOptions, 'tag', 'li');
         
-        return Html::tag($tag, Html::a($lang[$this->linkLabel], $href, $linkOptions), $elementOptions);
+        $text = is_callable($this->linkLabel) ? call_user_func($this->linkLabel, $lang) : $lang[$this->linkLabel];
+        
+        return Html::tag($tag, Html::a($text, $href, $linkOptions), $elementOptions);
     }
 
     /**
@@ -146,6 +164,9 @@ class LangSwitcher extends \luya\base\Widget
         $options = $this->listElementOptions;
         $options['encode'] = false;
         
-        return Html::ul($items, $options);
+        $separator = ArrayHelper::remove($options, 'separator', "\n");
+        $tag =  ArrayHelper::remove($options, 'tag', "ul");
+        
+        return Html::tag($tag, $separator . implode($separator, $items) . $separator, $options);
     }
 }

@@ -12,9 +12,21 @@ class LangSwitcherTest extends CmsFrontendTestCase
     public function testWidgetOutput()
     {
         $this->assertSame('<ul class="list-element">
-<li><li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="/luya/envs/dev/public_html/">English</a></li></li>
-<li><li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">Deutsch</a></li></li>
+<li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="/luya/envs/dev/public_html/">English</a></li>
+<li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">Deutsch</a></li>
 </ul>', LangSwitcher::widget());
         
+    }
+
+    public function testCallable()
+    {
+        $out = LangSwitcher::widget(['linkLabel' => function($lang) {
+            return strtoupper($lang['short_code']);
+        }]);
+        
+        $this->assertSame('<ul class="list-element">
+<li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="/luya/envs/dev/public_html/">EN</a></li>
+<li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">DE</a></li>
+</ul>', $out);
     }
 }
