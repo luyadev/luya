@@ -161,5 +161,5 @@ return [
 
 // 1.0.0
     'model_navitempage_empty_draft_id' => 'Không thể tạo trang rỗng không có template.',
-    'view_update_variation_select' => 'Không có block nào chọn thay đổi',	
+    'view_update_variation_select' => 'Không có block nào chọn thay đổi',
 ];

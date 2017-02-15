@@ -10,25 +10,25 @@ use luya\helpers\ArrayHelper;
 /**
  * CMS Lang Switcher Widget.
  *
- * This widget will find all registered languages and display the corresponding like to the provided languages, 
+ * This widget will find all registered languages and display the corresponding like to the provided languages,
  * if there as no translation found for the current link, it will point to the home page for this language. The
  * language switcher can even detect composition url rules for other languages based on the current menu item.
- * 
+ *
  * ```php
  * LangSwitcher::widget();
  * ```
- * 
+ *
  * Generates a list with all items:
- * 
+ *
  * ```html
  * <ul class="list-element">
  *     <li><li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="/luya/envs/dev/public_html/">English</a></li></li>
  *     <li><li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">Deutsch</a></li></li>
  * </ul>
  * ```
- * 
+ *
  * You can configure the elements to match your custom css:
- * 
+ *
  * ```php
  * LangSwitcher::widget([
  *     'listElementOptions' => ['class' => 'langnav__list'],
@@ -39,16 +39,16 @@ use luya\helpers\ArrayHelper;
  *     }
  * ]);
  * ```
- * 
+ *
  * This configure widget would output the following code:
- * 
+ *
  * ```html
  * <ul class="langnav__list">
  *     <li class="langnav__item lang-element-item--active"><a class="langnav__link lang-link-item--active" href="/public_html/">DE</a></li>
  *     <li class="langnav__item"><a class="langnav__link" href="/public_html/en">EN</a></li>
  * </ul>
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -69,7 +69,7 @@ class LangSwitcher extends \luya\base\Widget
     
     /**
      * @var array Options to pass to the element (li tag):
-     * 
+     *
      * - tag: The used tag (defaults is li tag)
      * - class: The class for the element.
      */
@@ -92,7 +92,7 @@ class LangSwitcher extends \luya\base\Widget
     
     /**
      * @var string Options to pass to the link element (a tag). Can also be a callable in order to specific output.
-     * 
+     *
      * - id:
      * - name: The fullname, e.g. English
      * - short_code: The short code, e.g. en
@@ -101,7 +101,7 @@ class LangSwitcher extends \luya\base\Widget
     
     /**
      * @var callable A callable function in order to sort the $items (the array key of the items contains the lang short code):
-     * 
+     *
      * ```php
      * 'itemsCallback' => function($items) {
      *     ksort($items);
@@ -109,11 +109,11 @@ class LangSwitcher extends \luya\base\Widget
      * }
      * ```
      */
-    public $itemsCallback = null; 
+    public $itemsCallback = null;
     
     /**
      * Generate the item element.
-     * 
+     *
      * @param string $href
      * @param boolean $isActive
      * @param array $lang
@@ -147,7 +147,7 @@ class LangSwitcher extends \luya\base\Widget
 
     /**
      * Add Singleton Container.
-     * 
+     *
      * @return array
      */
     private static function getDataArray()

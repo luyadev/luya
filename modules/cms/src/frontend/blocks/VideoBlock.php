@@ -103,7 +103,7 @@ final class VideoBlock extends PhpBlock
     
     /**
      * Ensure the emebed vimeo url based on url var.
-     * 
+     *
      * @return string
      */
     public function embedVimeo()
@@ -113,7 +113,7 @@ final class VideoBlock extends PhpBlock
 
     /**
      * Construct the url based on url input.
-     * 
+     *
      * @return string
      */
     public function constructUrl()
