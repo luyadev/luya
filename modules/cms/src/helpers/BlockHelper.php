@@ -4,6 +4,7 @@ namespace luya\cms\helpers;
 
 use Yii;
 use luya\web\ExternalLink;
+use luya\TagParser;
 
 /**
  * Helper methods for CMS Blocks.
@@ -236,5 +237,16 @@ class BlockHelper
         }
     
         return false;
+    }
+    
+    /**
+     * Wrapper function for Markdown Parsing.
+     * 
+     * @param string $text The text to parse with Markdown.
+     * @return string The parsed Markdown text.
+     */
+    public static function markdown($text)
+    {
+        return TagParser::convertWithMarkdown($text);
     }
 }
