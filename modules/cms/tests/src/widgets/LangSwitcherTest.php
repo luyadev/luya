@@ -15,12 +15,11 @@ class LangSwitcherTest extends CmsFrontendTestCase
 <li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="/luya/envs/dev/public_html/">English</a></li>
 <li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">Deutsch</a></li>
 </ul>', LangSwitcher::widget());
-        
     }
 
     public function testCallable()
     {
-        $out = LangSwitcher::widget(['linkLabel' => function($lang) {
+        $out = LangSwitcher::widget(['linkLabel' => function ($lang) {
             return strtoupper($lang['short_code']);
         }]);
         
@@ -32,17 +31,16 @@ class LangSwitcherTest extends CmsFrontendTestCase
     
     public function testSortCallable()
     {
-        $out = LangSwitcher::widget(['itemsCallback' => function($items) {
+        $out = LangSwitcher::widget(['itemsCallback' => function ($items) {
             ksort($items);
             
             return $items;
         }]);
         
         
-            $this->assertSame('<ul class="list-element">
+        $this->assertSame('<ul class="list-element">
 <li class="lang-element-item"><a class="lang-link-item" href="/luya/envs/dev/public_html/de">Deutsch</a></li>
 <li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="/luya/envs/dev/public_html/">English</a></li>
 </ul>', $out);
-        
     }
 }
