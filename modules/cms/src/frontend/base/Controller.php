@@ -95,7 +95,7 @@ abstract class Controller extends \luya\web\Controller
         // If the user has defined a layout file, thise will be ensured and set as layout file.
         $layoutFile = $model->nav->layout_file;
         if (!empty($layoutFile)) {
-        	$this->layout = StringHelper::startsWith($layoutFile, '@') ? $layoutFile : '/' . ltrim($layoutFile, '/');
+            $this->layout = StringHelper::startsWith($layoutFile, '@') ? $layoutFile : '/' . ltrim($layoutFile, '/');
         }
         
         if ($this->view->title === null) {

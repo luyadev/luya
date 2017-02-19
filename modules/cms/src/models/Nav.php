@@ -65,6 +65,7 @@ class Nav extends ActiveRecord
         return [
             [['nav_container_id', 'parent_nav_id'], 'required'],
             [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft', 'layout_file'], 'safe'],
+            [['layout_file'], 'match', 'pattern' => '/^[a-zA-Z0-9\.\-\_]+$/'],
         ];
     }
 

@@ -241,7 +241,7 @@ class BlockHelper
     
     /**
      * Wrapper function for Markdown Parsing.
-     * 
+     *
      * @param string $text The text to parse with Markdown.
      * @return string The parsed Markdown text.
      */

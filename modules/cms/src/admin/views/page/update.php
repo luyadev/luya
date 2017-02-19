@@ -156,8 +156,8 @@ use luya\cms\admin\Module;
                                     <div class="toolbar__group toolbar__group--placeholder-state">
                                         <div class="switch">
                                             <label>
-                                                <span ng-if="placeholderState"><?php echo Module::t('view_update_holder_state_on'); ?></span>
-                                                <span ng-if="!placeholderState"><?php echo Module::t('view_update_holder_state_off'); ?></span>
+                                                <span ng-if="placeholderState"><?= Module::t('view_update_holder_state_on'); ?></span>
+                                                <span ng-if="!placeholderState"><?= Module::t('view_update_holder_state_off'); ?></span>
                                                 <input type="checkbox" ng-model="placeholderState" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
                                             </label>
@@ -244,8 +244,23 @@ use luya\cms\admin\Module;
             <div class="row" ng-if="showActions">
                 <div class="col s12">
                     <div class="card-panel">
+                        <h3>Copy</h3>
                         <p><?= Module::t('page_update_actions_deepcopy_text'); ?></p>
                         <p><button type="button" class="btn" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
+                        <hr />
+                        <h3>Developer Settings</h3>
+                        <p>You can define another layout file which should be rendered instead of the main layout file. If empty the `main.php` layout will be used by default. You can also use alias paths. Layout file defintion does not require the php file extension.</p>
+                        <form ng-submit="submitNavForm()">
+	                        <div class="row">
+	                            <div class="input input--text col s12">
+	                                <label class="input__label">Layout File</label>
+	                                <div class="input__field-wrapper">
+	                                    <input type="text" class="input__field validate" ng-model="navData.layout_file" />
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -433,11 +448,10 @@ use luya\cms\admin\Module;
                             <div ng-switch-when="3">
                                 <update-form-redirect data="typeDataCopy"></update-form-redirect>
                             </div>
-
                             <br />
                             <div class="modal__footer">
                                 <div class="row">
-                                    <div class="col s12">
+                                    <div class="col s6">
                                         <div class="right">
                                             <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
                                             <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>

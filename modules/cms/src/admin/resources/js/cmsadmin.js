@@ -845,6 +845,15 @@
 		
 	    $scope.isDraft = false;
 		
+	    $scope.submitNavForm = function() {
+	    	$http.post('admin/api-cms-nav/update?id=' + $scope.navData.id, {layout_file: $scope.navData.layout_file}).success(function(response) {
+	    		AdminToastService.success(i18nParam('js_page_property_refresh'), 3000);
+	    	}).error(function(response) {
+	    		angular.forEach(response, function(value) {
+	    			AdminToastService.error(value.message, 4000);
+	    		});
+	    	});
+	    }
 	    
 	    function initializer() {
 			$scope.navData = $filter('filter')($scope.menuData.items, {id: $scope.id}, true)[0];
@@ -854,8 +863,6 @@
 			} else {
 			
 				$scope.loadNavProperties();
-				
-				/* watchers for properties if its not a draft */
 				
 				/* properties --> */
 				
