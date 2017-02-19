@@ -30,6 +30,7 @@ use yii\db\ActiveRecordInterface;
  * @property string $description
  * @property string $keywords
  * @property string $title_tag
+ * @property \luya\cms\models\Nav $nav Nav Model.
  *
  * @author Basil Suter <basil@nadar.io>
  */

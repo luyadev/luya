@@ -31,6 +31,7 @@ use luya\cms\admin\Module;
  * @property integer $is_offline
  * @property integer $is_home
  * @property integer $is_draft
+ * @property string $layout_file
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -63,7 +64,7 @@ class Nav extends ActiveRecord
     {
         return [
             [['nav_container_id', 'parent_nav_id'], 'required'],
-            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft'], 'safe'],
+            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft', 'layout_file'], 'safe'],
         ];
     }
 

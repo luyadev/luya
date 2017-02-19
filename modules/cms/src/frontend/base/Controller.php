@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
 use luya\cms\frontend\events\BeforeRenderEvent;
+use luya\helpers\StringHelper;
 
 /**
  * Abstract Controller for CMS Controllers.
@@ -89,6 +90,12 @@ abstract class Controller extends \luya\web\Controller
         // as its already renderd by the module controller itself.
         if ($typeModel->controller !== false && !empty($typeModel->controller->layout)) {
             $this->layout = false;
+        }
+        
+        // If the user has defined a layout file, thise will be ensured and set as layout file.
+        $layoutFile = $model->nav->layout_file;
+        if (!empty($layoutFile)) {
+        	$this->layout = StringHelper::startsWith($layoutFile, '@') ? $layoutFile : '/' . ltrim($layoutFile, '/');
         }
         
         if ($this->view->title === null) {
