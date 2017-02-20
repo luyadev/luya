@@ -13,7 +13,7 @@ use luya\cms\menu\Query as MenuQuery;
 use luya\cms\models\NavItemModule;
 use luya\traits\CacheableTrait;
 use luya\cms\menu\Item;
-use luya\cms\menu\InjectItem;
+use luya\cms\menu\InjectItemInterface;
 
 /**
  * Menu container component by language.
@@ -94,7 +94,16 @@ class Menu extends Component implements ArrayAccess
      */
     const MENU_ITEM_EVENT = 'menuItemEvent';
     
+    /**
+     * @var string Event which is triggere after the menu component is loaded and registered.
+     */
     const EVENT_AFTER_LOAD = 'eventAfterLoad';
+    
+    const ITEM_TYPE_PAGE = 1;
+    
+    const ITEM_TYPE_MODULE = 2;
+    
+    const ITEM_TYPE_REDIRECT = 3;
     
     /**
      * @var \luya\web\Request Request object
@@ -665,7 +674,11 @@ class Menu extends Component implements ArrayAccess
         return $languageContainer;
     }
     
-    public function injectItem(InjectItem $item)
+    /**
+     * 
+     * @param \luya\cms\menu\InjectItemInterface $item
+     */
+    public function injectItem(InjectItemInterface $item)
     {
         $this->_languageContainer[$item->getLang()][$item->getId()] = $item->toArray();
     }
