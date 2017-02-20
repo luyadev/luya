@@ -11,6 +11,7 @@ class BlockImporter extends Importer
 {
     public function run()
     {
+        $allblocks = Block::find()->all();
         $exists = [];
         
         foreach ($this->getImporter()->getDirectoryFiles('blocks') as $file) {
