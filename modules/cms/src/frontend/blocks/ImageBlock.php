@@ -72,6 +72,7 @@ final class ImageBlock extends PhpBlock
                 ['var' => 'internalLink', 'label' => Module::t('block_image_internallink_label'), 'type' => 'zaa-cms-page'],
                 ['var' => 'externalLink', 'label' => Module::t('block_image_externallink_label'), 'type' => 'zaa-text'],
                 ['var' => 'cssClass', 'label' => Module::t('block_image_cfg_css_class'), 'type' => 'zaa-text'],
+                ['var' => 'divCssClass', 'label' => Module::t('block_cfg_additonal_css_class'), 'type' => self::TYPE_TEXT],
             ],
         ];
     }

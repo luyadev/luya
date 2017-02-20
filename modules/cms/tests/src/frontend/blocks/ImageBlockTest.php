@@ -69,4 +69,11 @@ class ImageBlockTest extends BlockTestCase
         $this->block->addExtraVar('image', ['source' => 'luya.jpg']);
         $this->assertSame('<div class="image"><figure><a class="text-teaser" href="https://luya.io" target="_blank"><img class="img-responsive" src="luya.jpg" alt=""></a></figure></div>', $this->renderFrontendNoSpace());
     }
+    
+    public function testDivClassClass()
+    {
+        $this->block->setCfgValues(['divCssClass' => 'foobar']);
+        $this->block->addExtraVar('image', ['source' => 'luya.jpg']);
+        $this->assertSame('<div class="image foobar"><figure><img class="img-responsive" src="luya.jpg" alt=""></figure></div>', $this->renderFrontendNoSpace());
+    }
 }
