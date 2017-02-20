@@ -77,7 +77,7 @@ class ProxyController extends Controller
             'build_token' => sha1($buildToken),
             'config' => Json::encode($config),
             'is_complet' => 0,
-            'expiration_time' => time() + (60*15) // 15 minutes valid
+            'expiration_time' => time() + $this->module->proxyExpirationTime
         ];
         
         if ($build->save()) {

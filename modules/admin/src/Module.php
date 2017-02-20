@@ -134,6 +134,11 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     ];
     
     /**
+     * @var integer The expiration timeout for a proxy build in seconds. Default value is 1800 seconds which is 30 minutes.
+     */
+    public $proxyExpirationTime = 1800;
+    
+    /**
      * Returns all Asset files to registered in the administration interfaces.
      *
      * As the adminstration UI is written in angular, the assets must be pre assigned to the adminisration there for the `getAdminAssets()` method exists.
