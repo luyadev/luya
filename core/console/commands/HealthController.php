@@ -43,8 +43,6 @@ class HealthController extends \luya\console\Command
     {
         $error = false;
 
-        Console::clearScreenBeforeCursor();
-        
         @chdir(Yii::getAlias('@app'));
 
         $this->output('The directory the health commands is applying to: ' . Yii::getAlias('@app'));
