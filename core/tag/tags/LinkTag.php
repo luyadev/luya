@@ -12,7 +12,7 @@ use yii\helpers\Html;
  *
  * Generate a link to an external page or an internal page url (target blank difference).
  *
- * In order to call an interanl ure use the `//` prefix like `link[//contact](Go to contact)` now the `//` are replace by your local
+ * In order to call an internal url use the `//` prefix like `link[//contact](Go to contact)` now the `//` are replace by your local
  * url of the server. In order to generate an external url use `link[luya](Go to Luya.io)`.
  *
  * @author Basil Suter <basil@nadar.io>
