@@ -136,10 +136,12 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         }
         
         // try to force symlinks
-        $sym = @readlink($file);
-        if ($sym) {
-            if (@unlink($file)) {
-                return true;
+        if (is_link($file)) {
+            $sym = @readlink($file);
+            if ($sym) {
+                if (@unlink($file)) {
+                    return true;
+                }
             }
         }
         
@@ -149,15 +151,6 @@ class FileHelper extends \yii\helpers\BaseFileHelper
                 return true;
             }
         }
-        
-        // force change folder:
-        $old = getcwd();
-        chdir($file);
-        if (@unlink($file)) {
-            chdir($old);
-            return true;
-        }
-        chdir($old);
         
         return false;
     }
