@@ -130,14 +130,34 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      */
     public static function unlink($file)
     {
+        // default unlink
         if (@unlink($file)) {
             return true;
         }
         
+        // try to force symlinks
         $sym = @readlink($file);
         if ($sym) {
-            return @unlink($file);
+            if (@unlink($file)) {
+                return true;
+            }
         }
+        
+        // try to use realpath
+        if (realpath($file) && realpath($file) !== $file) {
+            if (@unlink(realpath($file))) {
+                return true;
+            }
+        }
+        
+        // force change folder:
+        $old = getcwd();
+        chdir($file);
+        if (@unlink($file)) {
+            chdir($old);
+            return true;
+        }
+        chdir($old);
         
         return false;
     }
