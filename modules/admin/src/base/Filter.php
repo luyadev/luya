@@ -208,11 +208,11 @@ abstract class Filter extends Object implements FilterInterface
             // get filter chain for filter and effect
             $model = StorageFilterChain::find()->where(['filter_id' => $filterModel->id, 'effect_id' => $chain['effect_id']])->one();
             if ($model) {
-                if (Json::decode($chain['effect_json_values']) != $model->effect_json_values) {
+                if (md5($chain['effect_json_values']) != md5(Json::encode($model->effect_json_values))) {
                     $model->effect_json_values = $chain['effect_json_values'];
                     if ($model->update(false)) {
                         $removeImages = true;
-                        $this->addLog("Effect chain option have been updated for '{$filterModel->name}'.");
+                        $this->addLog("[!] {$filterModel->name}: effect chain has changed.");
                     }
                 }
             } else {
@@ -220,21 +220,28 @@ abstract class Filter extends Object implements FilterInterface
                 $model->setAttributes(['filter_id' => $filterModel->id, 'effect_id' => $chain['effect_id'], 'effect_json_values' => $chain['effect_json_values']]);
                 if ($model->save(false)) {
                     $removeImages = true;
-                    $this->addLog("Effect chain option have been added for '{$filterModel->name}'.");
+                    $this->addLog("[+] {$filterModel->name}: Effect chain option/s have been added.");
                 }
             }
             $processed[] = $model->id;
         }
         // remove not used chains for the current filter
         foreach (StorageFilterChain::find()->where(['not in', 'id', $processed])->andWhere(['=', 'filter_id', $filterModel->id])->all() as $deletion) {
-            $this->addLog("Effect chain option have been removed for '{$filterModel->name}'");
+            $this->addLog("[-] {$filterModel->name}: Effect chain option/s have been removed.");
             $deletion->delete();
             $removeImages = true;
         }
         
         if ($removeImages) {
-            $this->addLog("remove image filter source cache.");
-            $filterModel->removeImageSources();
+            $this->addLog("[!] {$filterModel->name}: Remove images.");
+            $removeLog = $filterModel->removeImageSources();
+            foreach ($removeLog as $id => $sucess) {
+                if ($sucess) {
+                    $this->addLog('✓ image ' . $id . ' sucessfull unlinked.');
+                } else {
+                    $this->addLog('⨯ error while unlinking image id ' . $id);
+                }
+            }
         }
 
         return true;

@@ -2,6 +2,7 @@
 
 namespace luya\admin\models;
 
+use Yii;
 use luya\admin\file\Item;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\Module;
@@ -52,9 +53,14 @@ final class StorageFilter extends NgRestModel
      */
     public function removeImageSources()
     {
+        $log = [];
         foreach (StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
-            $img->deleteSource();
+            
+            $image = Yii::$app->storage->getImage($img->id);
+            
+            $log[$image->serverSource] = $img->deleteSource();
         }
+        return $log;
     }
     
     /**

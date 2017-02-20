@@ -121,4 +121,24 @@ class FileHelper extends \yii\helpers\BaseFileHelper
             return false;
         }
     }
+    
+    /**
+     * Unlink a file, which handles symlinks.
+     * 
+     * @param string $file The file path to the file to delete.
+     * @return boolean Whether the file has been removed or not.
+     */
+    public static function unlink($file)
+    {
+        if (@unlink($file)) {
+            return true;
+        }
+        
+        $sym = @readlink($file);
+        if ($sym) {
+            return @unlink($file);
+        }
+        
+        return false;
+    }
 }
