@@ -6,23 +6,11 @@ use Yii;
 use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\console\Importer;
-use luya\admin\models\Config;
-use yii\console\Exception;
 
 class BlockImporter extends Importer
 {
     public function run()
     {
-        $allblocks = Block::find()->all();
-        
-        if (count($allblocks) == 0) {
-            Config::set('rc1_block_classes_renameing', true);
-        }
-        
-        if (!Config::has('rc1_block_classes_renameing')) {
-            throw new Exception("You have to run the cmsadmin/updater/classes command in order to run the importer!");
-        }
-        
         $exists = [];
         
         foreach ($this->getImporter()->getDirectoryFiles('blocks') as $file) {
