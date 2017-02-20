@@ -10,7 +10,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  *
  * File has been created with `aw/create` command on LUYA version 1.0.0-dev. 
  */
-final class StorageEffectActiveWindow extends ActiveWindow
+final class StorageFilterImagesActiveWindow extends ActiveWindow
 {
     /**
      * @var string The name of the module where the ActiveWindow is located in order to finde the view path.
@@ -20,12 +20,12 @@ final class StorageEffectActiveWindow extends ActiveWindow
     /**
      * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
      */
-    public $alias = 'Storage Effect Active Window';
+    public $alias = 'Images';
 	
     /**
      * @var string The icon name from goolges material icon set (https://material.io/icons/)
      */
-    public $icon = 'extension';
+    public $icon = 'filter_vintage';
 	
     /**
      * The default action which is going to be requested when clicking the ActiveWindow.
@@ -42,20 +42,8 @@ final class StorageEffectActiveWindow extends ActiveWindow
     
     public function callbackRemove()
     {
-        $log = $this->model->removeImageSources();
+        $this->model->removeImageSources();
         
-        $error = false;
-        
-        foreach ($log as $image => $state) {
-            if (!$state) {
-                $error = true;
-            }
-        }
-        
-        if ($error) {
-            return $this->sendError("One or more images could not be deleted. Deletable images are removed.");
-        }
-        
-        return $this->sendSuccess("All image filter variations has been removed.");
+        return $this->sendSuccess("Removed image filter {this->model->name} versions.");
     }
 }

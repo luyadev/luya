@@ -5,6 +5,7 @@ use yii\base\Widget;
 /* @var $model \luya\admin\models\StorageFilter */
 ?>
 <h1><?= $model->name; ?></h1>
+<p>Identifier: <?= $model->identifier; ?></p>
 <?= CallbackButtonWidget::widget(['label' => 'Remove all generated Filter Images', 'callback' => 'remove']); ?>
 
 <?php if (count($images) == 0): ?>
@@ -20,7 +21,7 @@ use yii\base\Widget;
             </div>
             <div class="col s10">
               <span class="black-text">
-                <small><a target="_blank" href="<?= $image->serverSource; ?>"><?= $image->source; ?></a><br /></small>
+                <small><a target="_blank" href="<?= $image->source; ?>"><?= $image->source; ?></a><br /></small>
                 Caption: <?= $image->caption; ?>
               </span>
             </div>
