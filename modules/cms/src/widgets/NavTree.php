@@ -64,19 +64,19 @@ class NavTree extends Widget
     public $maxDepth = null;
 
     /**
-     * @var null|string The class that should be set on the *active link*
+     * @var string The class that should be set on the *active link*
      */
-    public $linkActiveClass = null;
+    public $linkActiveClass = 'nav__link--active';
 
     /**
-     * @var null|string The class that should be set on the *active item*
+     * @var string The class that should be set on the *active item*
      */
-    public $itemActiveClass = null;
+    public $itemActiveClass = '';
 
     /**
      * @var string This prefix will be set in front of the depth number on the list class e.g. list-depth-2
      */
-    public $listDepthClassPrefix = '';
+    public $listDepthClassPrefix = 'nav__list--';
 
     /**
      * @var null|array If set, a wrapper will be wrapped around the list
@@ -94,7 +94,9 @@ class NavTree extends Widget
      *
      * You can set all possible html attributes as options
      */
-    public $listOptions = [];
+    public $listOptions = [
+        'class' => 'nav__list'
+    ];
 
     /**
      * @var array Options for the items that are generated
@@ -103,7 +105,9 @@ class NavTree extends Widget
      *
      * You can set all possible html attributes as options
      */
-    public $itemOptions = [];
+    public $itemOptions = [
+        'class' => 'nav__item nav__item--{{alias}}'
+    ];
 
     /**
      * @var array Options for the links that are generated
@@ -113,7 +117,9 @@ class NavTree extends Widget
      * You can set all possible html attributes as options
      * **Note: href and content will be set regardless of the options**
      */
-    public $linkOptions = [];
+    public $linkOptions = [
+        'class' => 'nav__link'
+    ];
 
     /**
      * @var null|string The list tag will be set during init
@@ -131,7 +137,7 @@ class NavTree extends Widget
     private $_linkTag = null;
 
     /**
-     * Init of the NavTree widget, gets the tags from the options that are used in the widget
+     * @inheritdoc
      */
     public function init()
     {
