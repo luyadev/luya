@@ -63,9 +63,9 @@ class ProxyController extends Command
     /**
      * @var boolean Whether the isComplet sync check should be done after finish or not. If a table has a lot of traffic sometimes
      * there is a difference between the exchange of table informations (build) and transfer the data. In order to prevent
-     * the exception message you can disable the strict compare mode.
+     * the exception message you can disable the strict compare mode. In order to ensure strict comparing enable $strict.
      */
-    public $strict = true;
+    public $strict = false;
     
     /**
      * @var string If a table option is passed only this table will be synchronised. If false by default all tables will be synced.
