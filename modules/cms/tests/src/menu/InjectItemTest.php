@@ -30,4 +30,19 @@ class InjectItemTest extends CmsFrontendTestCase
         
         $this->assertSame('homepage/bar-foo', $array['alias']);
     }
+    
+    public function testSetAliasFromTitle()
+    {
+        $object = (new InjectItem())->setTitle('Hello ! World!')->setChildOf(1);
+        
+        $this->assertSame('homepage/hello-world', $object->alias);
+        
+        $alis = (new InjectItem())->setTitle('Foo Bar')->setAlias('luya-alias')->setChildOf(1);
+        
+        $this->assertSame('homepage/luya-alias', $alis->alias);
+        
+        $notoverride = (new InjectItem())->setAlias('luya-io')->setTitle('Hello')->setChildOf(1);
+        
+        $this->assertSame('homepage/luya-io', $notoverride->alias);
+    }
 }

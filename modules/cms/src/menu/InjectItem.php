@@ -220,6 +220,11 @@ class InjectItem extends Object implements InjectItemInterface
      */
     public function setTitle($title)
     {
+        // if the alias is empty use the title for the alias.
+        if ($this->_alias === null) {
+            $this->setAlias($title);
+        }
+        
         $this->_title = $title;
         
         return $this;
