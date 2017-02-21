@@ -48,6 +48,8 @@ use yii\base\ArrayableTrait;
  * @property boolean $isHome Returns true if the item is the home item, otherwise false.
  * @property string $absoluteLink The link path with prepand website host `http://luya.io/home/about-us`.
  * @property integer $sortIndex Sort index position for the current siblings list.
+ * @property boolean $hasChildren Check whether an item has childrens or not returning a boolean value.
+ * @property boolean $hasParent Check whether the parent has items or not.
  * @property \luya\cms\menu\Item|boolean $nextSibling Returns the next sibling based on the current sibling, if not found false is returned.
  * @property \luya\cms\menu\Item|boolean $prevSibling Returns the previous sibling based on the current sibling, if not found false is returned.
  * @property \luya\cms\models\Nav|boolean $model Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
