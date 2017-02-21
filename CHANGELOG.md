@@ -20,6 +20,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1214](https://github.com/luyadev/luya/issues/1214) Adding JsonLd class in order to register Schema Microdata informations to the View.
 - [#1188](https://github.com/luyadev/luya/issues/1188) Change the layout file for cms page.
 - [#1202](https://github.com/luyadev/luya/issues/1202) Added Arrayable implementation for ExternalLink and menu\Item.
 - [#1200](https://github.com/luyadev/luya/issues/1200) Added new block type `zaa-multiple-inputs` to create more flexible blocks
