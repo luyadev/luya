@@ -124,7 +124,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     
     /**
      * Unlink a file, which handles symlinks.
-     * 
+     *
      * @param string $file The file path to the file to delete.
      * @return boolean Whether the file has been removed or not.
      */
