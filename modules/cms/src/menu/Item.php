@@ -576,7 +576,7 @@ class Item extends Object implements LinkInterface, Arrayable
      * Example use of with in subquery of the current item:
      *
      * ```php
-     * if ($item->with(['hidden'])->hasChildren()) {
+     * if ($item->with(['hidden'])->hasChildren) {
      *     print_r($item->getChildren());
      * }
      * ```
