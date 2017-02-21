@@ -35,7 +35,13 @@ use yii\base\Object;
  *     'alias' => 'this-is-the-inject-alias',
  * ]));
  * ```
- *
+ * 
+ * You can also use the chain method to create a new inject item:
+ * 
+ * ```php
+ * $item = (new InjectItem())->setTitle('My Title')->setAlias('my Alias')->setItem(Yii::$app->menu->current);
+ * ```
+ * 
  * To attach the item at right moment you can bootstrap your module and use the `eventAfterLoad`
  * event of the menu component:
  *
@@ -58,21 +64,13 @@ use yii\base\Object;
  * @property $id integer|string The id (navItemId) for this inject item.
  * @property $link string The link to the detail view.
  * @property $alias The alias path.
+ * @property $title The navigation menu title.
+ * @property $description Alternative page descriptions.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
 class InjectItem extends Object implements InjectItemInterface
 {
-    /**
-     * @var string The navigation menu title
-     */
-    public $title = null;
-    
-    /**
-     * @var string Alternative page descriptions.
-     */
-    public $description = null;
-    
     /**
      * @var integer The user id who created this page.
      */
@@ -93,17 +91,7 @@ class InjectItem extends Object implements InjectItemInterface
      */
     public $isHidden = false;
     
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-        
-        if ($this->title === null || $this->alias === null) {
-            throw new Exception("The properties title and alias must be defined to inject a new Item.");
-        }
-    }
+    // Getter & Setter
     
     private $_item = null;
     
@@ -116,6 +104,10 @@ class InjectItem extends Object implements InjectItemInterface
     {
         if ($this->_item === null) {
             $this->_item = Yii::$app->menu->find()->where(['id' => $this->childOf])->with('hidden')->one();
+            
+            if (!$this->_item) {
+                throw new Exception("Unable to find item with id " . $this->childOf);
+            }
         }
         
         return $this->_item;
@@ -125,11 +117,14 @@ class InjectItem extends Object implements InjectItemInterface
      * Setter method for the item property.
      * 
      * @param \luya\cms\menu\Item $item
+     * @return \luya\cms\menu\InjectItem
      */
     public function setItem(Item $item)
     {
         $this->childOf = $item->id;
         $this->_item = $item;
+        
+        return $this;
     }
     
     private $_childOf = null;
@@ -138,10 +133,13 @@ class InjectItem extends Object implements InjectItemInterface
      * Setter method for childOf property.
      * 
      * @param integer $id
+     * @return \luya\cms\menu\InjectItem
      */
     public function setChildOf($id)
     {
         $this->_childOf = (int) $id;
+        
+        return $this;
     }
     
     /**
@@ -164,10 +162,13 @@ class InjectItem extends Object implements InjectItemInterface
      * Setter methdo for the item alias.
      * 
      * @param string $alias A slugable alias string will be parsed by the inflector::slug method.
+     * @return \luya\cms\menu\InjectItem
      */
     public function setAlias($alias)
     {
         $this->_alias = Inflector::slug($alias);
+        
+        return $this;
     }
     
     /**
@@ -177,8 +178,94 @@ class InjectItem extends Object implements InjectItemInterface
      */
     public function getAlias()
     {
+        if ($this->_alias === null) {
+            throw new Exception('The $alias property can not be null and must be set.');
+        }
+        
         return $this->item->alias . '/' . $this->_alias;
     }
+    
+    private $_link = null;
+    
+    /**
+     * Setter method fro the link.
+     *
+     * @param string $url
+     * @return \luya\cms\menu\InjectItem
+     */
+    public function setLink($url)
+    {
+        $this->_link = $url;
+        
+        return $this;
+    }
+    
+    /**
+     * Getter method for the menu link.
+     *
+     * @return string The built link.
+     */
+    public function getLink()
+    {
+        return ($this->_link === null) ? Yii::$app->menu->buildItemLink($this->alias, $this->getLang()) : $this->_link;
+    }
+    
+    private $_title = null;
+    
+    /**
+     * Setter method for the menu title.
+     * 
+     * @param string $title The menu item title.
+     * @return \luya\cms\menu\InjectItem
+     */
+    public function setTitle($title)
+    {
+        $this->_title = $title;
+        
+        return $this;
+    }
+    
+    /**
+     * Getter method for the menu title.
+     * 
+     * @throws Exception
+     * @return string
+     */
+    public function getTitle()
+    {
+        if ($this->_title === null) {
+            throw new Exception('The $title property can not be null and must be set.');
+        }
+        
+        return $this->_title;
+    }
+    
+    private $_description = null;
+    
+    /**
+     * Setter method for menu page description.
+     * 
+     * @param string $description Description for the menu item.
+     * @return \luya\cms\menu\InjectItem
+     */
+    public function setDescription($description)
+    {
+        $this->_description = $description;
+        
+        return $this;
+    }
+    
+    /**
+     * Getter method for the menu page description.
+     * 
+     * @return string The menu item description.
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    // Getters
     
     /**
      * Getter method for the container from the child of item.
@@ -210,27 +297,7 @@ class InjectItem extends Object implements InjectItemInterface
         return $this->item->lang;
     }
     
-    private $_link = null;
     
-    /**
-     * Setter method fro the link.
-     * 
-     * @param string $url
-     */
-    public function setLink($url)
-    {
-        $this->_link = $url;
-    }
-    
-    /**
-     * Getter method for the menu link.
-     * 
-     * @return string The built link.
-     */
-    public function getLink()
-    {
-        return ($this->_link === null) ? Yii::$app->menu->buildItemLink($this->alias, $this->getLang()) : $this->_link;
-    }
     
     /**
      * Getter method for the parent nav id from the childOf item.
