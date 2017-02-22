@@ -2,6 +2,7 @@
 
 namespace luya\cms\widgets;
 
+use luya\cms\menu\Query;
 use luya\cms\menu\QueryIteratorFilter;
 use luya\helpers\ArrayHelper;
 use Yii;
@@ -10,7 +11,7 @@ use luya\cms\menu\Item;
 use yii\helpers\Html;
 
 /**
- * Build a Navigation from top down or based on the given item.
+ * Build a Navigation from top down, based on the given item or with a specific menu query.
  *
  * Build the navigation from top:
  *
@@ -27,6 +28,7 @@ use yii\helpers\Html;
  * *Example with all options:*
  *
  * ```php
+ *    'findQuery' => Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all(),
  *    'startItem' => Yii::$app->menu->home,
  *    'maxDepth' => 2,
  *    'linkActiveClass' => 'link-active',
@@ -57,6 +59,11 @@ class NavTree extends Widget
      * @var null|Item Generate submenus for all pages below you this menu Item
      */
     private $_startItem = null;
+
+    /**
+     * @var null|QueryIteratorFilter The menu Query
+     */
+    private $_findQuery = null;
 
     /**
      * @var null|integer If set the depth of the menu will be limited
@@ -146,6 +153,10 @@ class NavTree extends Widget
         $this->_listTag = ArrayHelper::remove($this->listOptions, 'tag', 'ul');
         $this->_itemTag = ArrayHelper::remove($this->itemOptions, 'tag', 'li');
         $this->_linkTag = ArrayHelper::remove($this->linkOptions, 'tag', 'a');
+
+        if ($this->findQuery === null) {
+            $this->findQuery = Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all();
+        }
     }
 
     /**
@@ -155,13 +166,13 @@ class NavTree extends Widget
     {
         $html = "";
 
-        if($this->startItem === null) {
-            $html = $this->buildList(Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all());
-        } else if($this->startItem->hasChildren) {
-            $this->buildList($this->startItem->children, 0);
+        if ($this->startItem === null) {
+            $html = $this->buildList($this->findQuery);
+        } elseif ($this->startItem->hasChildren) {
+            $html = $this->buildList($this->startItem->children);
         }
 
-        if($this->wrapperOptions !== null) {
+        if ($this->wrapperOptions !== null) {
             $wrapperTag = ArrayHelper::remove($this->wrapperOptions, 'tag', 'nav');
             $html = Html::tag($wrapperTag, $html, $this->wrapperOptions);
         }
@@ -179,7 +190,7 @@ class NavTree extends Widget
     private function buildList(QueryIteratorFilter $iterator, $i = 1)
     {
         // Abort if maxDepth is set & reached
-        if($this->maxDepth !== null && $i >= $this->maxDepth) {
+        if ($this->maxDepth !== null && $i >= ($this->maxDepth + 1)) {
             return "";
         }
 
@@ -200,7 +211,7 @@ class NavTree extends Widget
             $linkOptions = array_merge($this->linkOptions, ['href' => $item->link]);
 
             // Set the active classes if item is active
-            if($item->isActive) {
+            if ($item->isActive) {
                 $itemOptions['class'] .= $this->itemActiveClass !== null ? ' ' . $this->itemActiveClass : '';
                 $linkOptions['class'] .= $this->linkActiveClass !== null ? ' ' . $this->linkActiveClass : '';
             }
@@ -241,7 +252,7 @@ class NavTree extends Widget
                     return $item->$f;
                 }
 
-                return 0;
+                return $match[1];
             }, $option);
         }
 
@@ -262,5 +273,21 @@ class NavTree extends Widget
     public function getStartItem()
     {
         return $this->_startItem;
+    }
+
+    /**
+     * @param QueryIteratorFilter $findQuery
+     */
+    public function setFindQuery(QueryIteratorFilter $findQuery = null)
+    {
+        $this->_findQuery = $findQuery;
+    }
+
+    /**
+     * @return QueryIteratorFilter|null
+     */
+    public function getFindQuery()
+    {
+        return $this->_findQuery;
     }
 }

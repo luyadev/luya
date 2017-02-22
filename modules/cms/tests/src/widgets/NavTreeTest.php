@@ -53,4 +53,52 @@ class NavTreeTest extends CmsFrontendTestCase
             ],
         ]));
     }
+
+    public function testOutputWithoutListClass()
+    {
+        $expectedHtml = '<ul class=" nav__list--1"><li class="nav__item nav__item--homepage "><a class="nav__link nav__link--active" href="/luya/envs/dev/public_html/">homepage</a></li><li class="nav__item nav__item--page-1"><a class="nav__link" href="page-1">Page 1</a><ul class=" nav__list--2"><li class="nav__item nav__item--page-11"><a class="nav__link" href="page-11">Page 1.1</a></li><li class="nav__item nav__item--page-12"><a class="nav__link" href="page-12">Page 1.2</a><ul class=" nav__list--3"><li class="nav__item nav__item--page-121"><a class="nav__link" href="page-121">Page 1.2.1</a></li><li class="nav__item nav__item--page-122"><a class="nav__link" href="page-122">Page 1.2.2</a></li><li class="nav__item nav__item--page-123"><a class="nav__link" href="page-123">Page 1.2.3</a></li></ul></li><li class="nav__item nav__item--page-13"><a class="nav__link" href="page-13">Page 1.3</a></li></ul></li></ul>';
+
+        Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuArray());
+
+        $this->assertSame($expectedHtml, NavTree::widget([
+            'listOptions' => [
+                'tag' => 'ul'
+            ],
+        ]));
+    }
+
+    public function testOutputWithWrongItemClassAttribute()
+    {
+        $expectedHtml = '<ul class="nav__list nav__list--1"><li class="nav__item nav__item--thisIsWrong "><a class="nav__link nav__link--active" href="/luya/envs/dev/public_html/">homepage</a></li><li class="nav__item nav__item--thisIsWrong"><a class="nav__link" href="page-1">Page 1</a><ul class="nav__list nav__list--2"><li class="nav__item nav__item--thisIsWrong"><a class="nav__link" href="page-11">Page 1.1</a></li><li class="nav__item nav__item--thisIsWrong"><a class="nav__link" href="page-12">Page 1.2</a><ul class="nav__list nav__list--3"><li class="nav__item nav__item--thisIsWrong"><a class="nav__link" href="page-121">Page 1.2.1</a></li><li class="nav__item nav__item--thisIsWrong"><a class="nav__link" href="page-122">Page 1.2.2</a></li><li class="nav__item nav__item--thisIsWrong"><a class="nav__link" href="page-123">Page 1.2.3</a></li></ul></li><li class="nav__item nav__item--thisIsWrong"><a class="nav__link" href="page-13">Page 1.3</a></li></ul></li></ul>';
+
+        Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuArray());
+
+        $this->assertSame($expectedHtml, NavTree::widget([
+            'itemOptions' => [
+                'class' => 'nav__item nav__item--{{thisIsWrong}}'
+            ],
+        ]));
+    }
+
+    public function testOutputWithMaxDepth()
+    {
+        $expectedHtml = '<ul class="nav__list nav__list--1"><li class="nav__item nav__item--homepage "><a class="nav__link nav__link--active" href="/luya/envs/dev/public_html/">homepage</a></li><li class="nav__item nav__item--page-1"><a class="nav__link" href="page-1">Page 1</a></li></ul>';
+
+        Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuArray());
+
+        $this->assertSame($expectedHtml, NavTree::widget([
+            'maxDepth' => 1
+        ]));
+    }
+
+    public function testOutputWithStartItem()
+    {
+        $expectedHtml = '<ul class="nav__list nav__list--1"><li class="nav__item nav__item--page-11"><a class="nav__link" href="page-11">Page 1.1</a></li><li class="nav__item nav__item--page-12"><a class="nav__link" href="page-12">Page 1.2</a><ul class="nav__list nav__list--2"><li class="nav__item nav__item--page-121"><a class="nav__link" href="page-121">Page 1.2.1</a></li><li class="nav__item nav__item--page-122"><a class="nav__link" href="page-122">Page 1.2.2</a></li><li class="nav__item nav__item--page-123"><a class="nav__link" href="page-123">Page 1.2.3</a></li></ul></li><li class="nav__item nav__item--page-13"><a class="nav__link" href="page-13">Page 1.3</a></li></ul>';
+
+        Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuArray());
+
+        $this->assertSame($expectedHtml, NavTree::widget([
+            'startItem' => Yii::$app->menu->findOne(['nav_id' => 2])
+        ]));
+    }
 }
