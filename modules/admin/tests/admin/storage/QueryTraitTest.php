@@ -8,6 +8,7 @@ use luya\admin\storage\QueryTrait;
 use yii\base\Object;
 use luya\admin\storage\ItemTrait;
 use luya\admin\storage\IteratorAbstract;
+use luya\admin\storage\ItemAbstract;
 
 class FixtureQueryTrait extends Object
 {
@@ -38,9 +39,8 @@ class FixtureQueryTrait extends Object
     }
 }
 
-class FixtureItem extends Object
+class FixtureItem extends ItemAbstract
 {
-    use ItemTrait;
     
     public function getId()
     {
@@ -57,13 +57,9 @@ class FixtureItem extends Object
         return $this->itemArray['group'];
     }
     
-    public function toArray()
+    public function fields()
     {
-        return [
-            'id' => $this->getId(),
-            'name' => $this->getName(),
-            'group' => $this->getGroup(),
-        ];
+        return ['id', 'name', 'group'];
     }
 }
 

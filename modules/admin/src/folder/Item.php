@@ -3,7 +3,7 @@
 namespace luya\admin\folder;
 
 use Yii;
-use luya\admin\storage\ItemTrait;
+use luya\admin\storage\ItemAbstract;
 
 /**
  * Storage Folder Item.
@@ -14,10 +14,8 @@ use luya\admin\storage\ItemTrait;
  * @property integer filesCount The number of files inside the folder.
  * @author Basil Suter <basil@nadar.io>
  */
-class Item extends \yii\base\Object
+class Item extends ItemAbstract
 {
-    use ItemTrait;
-    
     /**
      * The unique folder id.
      *
@@ -92,13 +90,8 @@ class Item extends \yii\base\Object
     /**
      * @inheritdoc
      */
-    public function toArray()
+    public function fields()
     {
-        return [
-            'id' => $this->getId(),
-            'name' => $this->getName(),
-            'parentId' => $this->getParentId(),
-            'filesCount' => $this->getFilesCount(),
-        ];
+        return ['id', 'name', 'parentId', 'filesCount'];
     }
 }
