@@ -20,6 +20,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $titleTag (getTitleTag()) function in order to return the SEO title.
 - [#1214](https://github.com/luyadev/luya/issues/1214) Adding JsonLd class in order to register Schema Microdata informations to the View.
 - [#1188](https://github.com/luyadev/luya/issues/1188) Change the layout file for cms page.
 - [#1202](https://github.com/luyadev/luya/issues/1202) Added Arrayable implementation for ExternalLink and menu\Item.

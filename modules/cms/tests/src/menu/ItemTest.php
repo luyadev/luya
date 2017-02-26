@@ -33,6 +33,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertSame(1, $obj->sortIndex);
         $this->assertFalse($obj->hasChildren);
         $this->assertTrue($obj->isHome);
+        $this->assertNull($obj->getTitleTag());
+        $this->assertNull($obj->titleTag);
     }
     
     public function testChildItem()

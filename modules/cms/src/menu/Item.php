@@ -50,6 +50,7 @@ use yii\base\ArrayableTrait;
  * @property integer $sortIndex Sort index position for the current siblings list.
  * @property boolean $hasChildren Check whether an item has childrens or not returning a boolean value.
  * @property boolean $hasParent Check whether the parent has items or not.
+ * @property string $titleTag Returns the title tag field for this item.
  * @property \luya\cms\menu\Item|boolean $nextSibling Returns the next sibling based on the current sibling, if not found false is returned.
  * @property \luya\cms\menu\Item|boolean $prevSibling Returns the previous sibling based on the current sibling, if not found false is returned.
  * @property \luya\cms\models\Nav|boolean $model Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
@@ -227,6 +228,18 @@ class Item extends Object implements LinkInterface, Arrayable
     public function setTitle($title)
     {
         $this->itemArray['title'] = $title;
+    }
+    
+    /**
+     * Returns the title tag field for this item.
+     * 
+     * This is also known as the "SEO-Title" in the cms admin interface.
+     * 
+     * @return string The seo title tag.
+     */
+    public function getTitleTag()
+    {
+    	return $this->itemArray['title_tag'];
     }
     
     /**
