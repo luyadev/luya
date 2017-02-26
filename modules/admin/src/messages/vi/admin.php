@@ -194,7 +194,7 @@ return [
     'layout_rightbar_savebtn' => 'Lưu',
     'aws_changepassword_notequal' => 'Mật khẩu và mật khẩu nhập lại không trùng nhau.',
     'aws_changeapssword_minchar' => 'Mật khẩu mới phải ít nhất {min} ký tự.',
-	
+    
 // 1.0.0
 
     'model_pk_id' => 'ID',
@@ -228,5 +228,5 @@ return [
     'js_ngrest_toggler_success' => '%field% successfully updated.',
     'layout_image_filter_selection' => 'Chọn bộ lọc hình ảnh:',
     'lock_admin_edit_crud_item' => 'Chỉnh {module} "{table}" (ID: {id}).',
-    'lock_cms_edit_page' => 'Chỉnh trang "{title}".',	
+    'lock_cms_edit_page' => 'Chỉnh trang "{title}".',
 ];

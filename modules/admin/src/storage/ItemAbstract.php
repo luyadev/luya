@@ -9,11 +9,11 @@ use yii\base\Arrayable;
 
 /**
  * @property $itemArray array An array with all elements assigned for this element.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class ItemAbstract extends Object implements Arrayable
-{   
+{
     use ArrayableTrait;
     
     private $_itemArray = [];

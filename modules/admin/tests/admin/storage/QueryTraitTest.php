@@ -41,7 +41,6 @@ class FixtureQueryTrait extends Object
 
 class FixtureItem extends ItemAbstract
 {
-    
     public function getId()
     {
         return $this->itemArray['id'];

@@ -46,14 +46,14 @@ abstract class ImageProperty extends Property
     
     /**
      * In order to auto apply a filter to each image override this mehotd returning the identifier of your Filter.
-     * 
+     *
      * ```php
      * public function filterName()
      * {
      *     return \app\filters\MyFilter::identifier();
      * }
      * ```
-     * 
+     *
      * @return boolean|string
      */
     public function filterName()

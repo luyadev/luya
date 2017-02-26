@@ -37,7 +37,6 @@ use luya\admin\storage\ItemAbstract;
  */
 class Item extends ItemAbstract
 {
-    
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
     private $_caption = null;

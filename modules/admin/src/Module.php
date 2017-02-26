@@ -47,15 +47,15 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      * @var array Available translation messages.
      */
     public $uiLanguageDropdown = [
-    	'en' => 'English',
-    	'de' => 'Deutsch',
-    	'ru' => 'Pусский',
-    	'es' => 'Español',
-    	'fr' => 'Français',
-    	'ua' => 'Українська',
-    	'it' => 'Italiano',
-    	'el' => 'Ελληνικά',
-    	'vi' => 'Việt Nam',
+        'en' => 'English',
+        'de' => 'Deutsch',
+        'ru' => 'Pусский',
+        'es' => 'Español',
+        'fr' => 'Français',
+        'ua' => 'Українська',
+        'it' => 'Italiano',
+        'el' => 'Ελληνικά',
+        'vi' => 'Việt Nam',
     ];
     
     /**

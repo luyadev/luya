@@ -9,22 +9,21 @@ use yii\captcha\CaptchaAction;
 
 class F extends Model
 {
-	public $verifyCode = null;
-	
+    public $verifyCode = null;
 }
 class DefaultController extends Controller
 {
-	public function actionIndex()
-	{
-		$model = new F();
-		return $this->render('index', ['model' => $model]);
-		return '<iframe src="'.Url::to('contactmanager/default/captcha').'"></iframe>';
-	}
-	
-	public function actions()
-	{
-		return [
-			'captcha' => CaptchaAction::class
-		];
-	}
+    public function actionIndex()
+    {
+        $model = new F();
+        return $this->render('index', ['model' => $model]);
+        return '<iframe src="'.Url::to('contactmanager/default/captcha').'"></iframe>';
+    }
+    
+    public function actions()
+    {
+        return [
+            'captcha' => CaptchaAction::class
+        ];
+    }
 }

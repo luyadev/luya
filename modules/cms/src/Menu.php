@@ -648,7 +648,7 @@ class Menu extends Component implements ArrayAccess
                     'lang' => $lang['short_code'],
                     'link' => $this->buildItemLink($alias, $langShortCode),
                     'title' => $item['title'],
-                	'title_tag' => $item['title_tag'],
+                    'title_tag' => $item['title_tag'],
                     'alias' => $alias,
                     'description' => $item['description'],
                     'keywords' => $item['keywords'],
@@ -676,7 +676,7 @@ class Menu extends Component implements ArrayAccess
     }
     
     /**
-     * 
+     *
      * @param \luya\cms\menu\InjectItemInterface $item
      */
     public function injectItem(InjectItemInterface $item)

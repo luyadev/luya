@@ -12,7 +12,7 @@ use yii\base\Widget;
 <div class="alert alert--info">No images has been generated for this filter yet.</div>
 <?php endif; ?>
 <div class="row">
-<? foreach ($images as $image): /* @var $image \luya\admin\image\Item */?>
+<?php foreach ($images as $image): /* @var $image \luya\admin\image\Item */?>
     <div class="col s3">
         <div class="card-panel grey lighten-5 z-depth-1">
           <div class="row valign-wrapper">
@@ -28,5 +28,5 @@ use yii\base\Widget;
           </div>
         </div>
     </div>
-<? endforeach; ?>
+<?php endforeach; ?>
 </div>

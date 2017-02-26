@@ -25,9 +25,9 @@ use yii\base\Object;
  *     'alias' => 'this-is-the-inject-alias',
  * ]));
  * ```
- * 
+ *
  * Instead of using the childOf property you can directly set an menu item:
- * 
+ *
  * ```php
  * Yii::$app->menu->injectItem(new InjectItem([
  *     'item' => Yii::$app->menu->current,
@@ -35,13 +35,13 @@ use yii\base\Object;
  *     'alias' => 'this-is-the-inject-alias',
  * ]));
  * ```
- * 
+ *
  * You can also use the chain method to create a new inject item:
- * 
+ *
  * ```php
  * $item = (new InjectItem())->setTitle('My Title')->setAlias('my Alias')->setItem(Yii::$app->menu->current);
  * ```
- * 
+ *
  * To attach the item at right moment you can bootstrap your module and use the `eventAfterLoad`
  * event of the menu component:
  *
@@ -57,7 +57,7 @@ use yii\base\Object;
  *     $event->sender->injectItem($newItem);
  * });
  * ```
- * 
+ *
  * @property $childOf integer The child of id in order read data from this parent item.
  * @property $item \luya\cms\menu\Item The resolved Item.
  * @property $navId integer|string The navId for this inject item.
@@ -66,7 +66,7 @@ use yii\base\Object;
  * @property $alias The alias path.
  * @property $title The navigation menu title.
  * @property $description Alternative page descriptions.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class InjectItem extends Object implements InjectItemInterface
@@ -115,7 +115,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Setter method for the item property.
-     * 
+     *
      * @param \luya\cms\menu\Item $item
      * @return \luya\cms\menu\InjectItem
      */
@@ -131,7 +131,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Setter method for childOf property.
-     * 
+     *
      * @param integer $id
      * @return \luya\cms\menu\InjectItem
      */
@@ -144,7 +144,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the childOf property.
-     * 
+     *
      * @throws Exception
      * @return number
      */
@@ -160,7 +160,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Setter methdo for the item alias.
-     * 
+     *
      * @param string $alias A slugable alias string will be parsed by the inflector::slug method.
      * @return \luya\cms\menu\InjectItem
      */
@@ -173,7 +173,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the alias.
-     * 
+     *
      * @return string The alias with the parent childOf alias prefixed.
      */
     public function getAlias()
@@ -214,7 +214,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Setter method for the menu title.
-     * 
+     *
      * @param string $title The menu item title.
      * @return \luya\cms\menu\InjectItem
      */
@@ -232,7 +232,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the menu title.
-     * 
+     *
      * @throws Exception
      * @return string
      */
@@ -249,7 +249,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Setter method for menu page description.
-     * 
+     *
      * @param string $description Description for the menu item.
      * @return \luya\cms\menu\InjectItem
      */
@@ -262,7 +262,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the menu page description.
-     * 
+     *
      * @return string The menu item description.
      */
     public function getDescription()
@@ -274,7 +274,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the container from the child of item.
-     * 
+     *
      * @return integer
      */
     public function getContainer()
@@ -284,7 +284,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Returns the depth number based on the alias paths.
-     * 
+     *
      * @return number
      */
     public function getDept()
@@ -294,7 +294,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Returns the language from the childOf item.
-     * 
+     *
      * @return string
      */
     public function getLang()
@@ -306,7 +306,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the parent nav id from the childOf item.
-     * 
+     *
      * @return integer
      */
     public function getParentNavId()
@@ -316,7 +316,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the create item timestamp.
-     * 
+     *
      * @return number
      */
     public function getTimestampCreate()
@@ -326,7 +326,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the update item timestamp.
-     * 
+     *
      * @return number
      */
     public function getTimestampUpdate()
@@ -355,7 +355,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the redirect content if its a redirect page, by default 0.
-     * 
+     *
      * @return number
      */
     public function getRedirect()
@@ -367,7 +367,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Setter methdo for the id (unique id).
-     * 
+     *
      * @param integer $id
      */
     public function setId($id)
@@ -377,7 +377,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the unique id.
-     * 
+     *
      * @return string|integer
      */
     public function getId()
@@ -393,7 +393,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Setter method for the navId.
-     * 
+     *
      * @param unknown $navId
      */
     public function setNavId($navId)
@@ -403,7 +403,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Getter method for the navId.
-     * 
+     *
      * @return string|unknown
      */
     public function getNavId()
@@ -416,7 +416,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     /**
      * Parse the injected item to an array.
-     * 
+     *
      * @return array
      */
     public function toArray()

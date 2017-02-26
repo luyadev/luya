@@ -25,7 +25,6 @@ use luya\admin\storage\ItemAbstract;
  */
 class Item extends ItemAbstract
 {
-    
     private $_file = null;
     
     private $_caption = null;

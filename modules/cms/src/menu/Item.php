@@ -232,14 +232,14 @@ class Item extends Object implements LinkInterface, Arrayable
     
     /**
      * Returns the title tag field for this item.
-     * 
+     *
      * This is also known as the "SEO-Title" in the cms admin interface.
-     * 
+     *
      * @return string The seo title tag.
      */
     public function getTitleTag()
     {
-    	return $this->itemArray['title_tag'];
+        return $this->itemArray['title_tag'];
     }
     
     /**
@@ -498,7 +498,7 @@ class Item extends Object implements LinkInterface, Arrayable
      * Get the previous sibling in the current siblings list.
      *
      * If there is no previous sibling (assuming its the first sibling item in the list) false is returned, otherwise the {{luya\cms\menu\Item}} is returned.
-     * 
+     *
      * @return \luya\cms\menu\Item|boolean Returns the previous sibling based on the current sibling, if not found false is returned.
      */
     public function getPrevSibling()
