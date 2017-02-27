@@ -213,7 +213,7 @@ abstract class Boot
             
             $require = require_once(dirname($this->_baseYiiFile) . DIRECTORY_SEPARATOR . 'BaseYii.php');
             
-            include($this->getCoreBasePath() . '/Yii.php');
+            require_once($this->getCoreBasePath() . '/Yii.php');
             
             Yii::setAlias('@luya', $this->getCoreBasePath());
             return $require;
