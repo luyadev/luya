@@ -3,6 +3,8 @@
 /**
  * LUYA YII Wrapper.
  * 
+ * It extends from [[\yii\BaseYii]] which provides the actual implementation. 
+ *
  * This is the Yii.php wrapper file in order to provide luya specific application IDE auto complet.
  * 
  * @property \luya\console\Application|\luya\web\Application $app The application 
