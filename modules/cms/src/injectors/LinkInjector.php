@@ -2,7 +2,6 @@
 
 namespace luya\cms\injectors;
 
-use Yii;
 use luya\cms\base\BaseBlockInjector;
 use luya\cms\helpers\BlockHelper;
 

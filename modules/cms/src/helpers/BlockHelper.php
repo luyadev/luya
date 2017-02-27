@@ -40,6 +40,14 @@ class BlockHelper
     /**
      * Create the Options list in the config for a zaa-checkbox-array based on an
      * key => value pairing array.
+     * 
+     * In order to get a key value pairing directly from a module use:
+     * 
+     * ```php
+     * return Tag::find()->select(['name'])->indexBy('id')->column();
+     * ```
+     *
+     * Where name is the value and id the key for the array.
      *
      * @param array $options The array who cares the options with items
      * @since 1.0.0-beta5
