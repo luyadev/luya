@@ -208,7 +208,13 @@ abstract class Boot
     private function includeYii()
     {
         if (file_exists($this->_baseYiiFile)) {
-            $require = require_once($this->_baseYiiFile);
+            
+            define('LUYA_YII_VENDOR', dirname($this->_baseYiiFile));
+            
+            $require = require_once(dirname($this->_baseYiiFile) . DIRECTORY_SEPARATOR . 'BaseYii.php');
+            
+            include($this->getCoreBasePath() . '/Yii.php');
+            
             Yii::setAlias('@luya', $this->getCoreBasePath());
             return $require;
         }
