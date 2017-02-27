@@ -1,15 +1,16 @@
 <?php
+
 /**
  * LUYA YII Wrapper.
  * 
- * Thank you Yii Team!
+ * This is the Yii.php wrapper file in order to provide luya specific application IDE auto complet.
  * 
  * @property \luya\console\Application|\luya\web\Application $app The application 
  */
 class Yii extends \yii\BaseYii
 {
     /**
-     * @var \luya\console\Application|\luya\web\Application the application instance
+     * @var \luya\console\Application|\luya\web\Application Luya Application instance.
      */
     public static $app;
 }

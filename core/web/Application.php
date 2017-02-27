@@ -7,9 +7,13 @@ use luya\traits\ApplicationTrait;
 /**
  * Luya Web Application.
  *
- * @property \luya\web\Composition $composition Composition property
- * @property \luya\web\Twig $twig The twig component
- * @property \luya\web\Element $element The element component
+ * 
+ * @property \luya\cms\Menu $menu Menu component in order to build navigation from CMS module.
+ * @property \luya\admin\components\StorageContainer $storage Storage component for reading, saving and holding files from the Admin module.
+ * @property \luya\web\Composition $composition Composition component.
+ * @property \luya\web\Element $element The element component.
+ * @property \luya\web\View $view The view component.
+ * @property \luya\web\Request $request The request component.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
