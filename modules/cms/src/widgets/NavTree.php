@@ -243,7 +243,7 @@ class NavTree extends Widget
      * @param array $options
      * @return array
      */
-    private function compileOption(Item $item = null, array $options)
+    private function compileOption(Item $item, array $options)
     {
         foreach ($options as $key => $option) {
             $options[$key] = preg_replace_callback('/{{([^}]*)}}/', function ($match) use ($item) {

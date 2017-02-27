@@ -82,6 +82,9 @@ use luya\cms\menu\InjectItemInterface;
  * ```
  *
  * @property array $currentUrlRule Get the url rules for the current menu item.
+ * @property \luya\cms\menu\Item $current Get the current active menu item.
+ * @property \luya\cms\menu\Item $home Get the home menu item.
+ *
  * @since 1.0.0-beta1
  * @author Basil Suter <basil@nadar.io>
  */
@@ -661,7 +664,6 @@ class Menu extends Component implements ArrayAccess
                     'sort_index' => $item['sort_index'],
                     'is_hidden' => $item['is_hidden'],
                     'type' => $item['nav_item_type'],
-                    'nav_item_type_id' => $item['nav_item_type_id'],
                     'redirect' => ($item['nav_item_type'] == 3 && isset($this->redirectMap[$item['nav_item_type_id']])) ? $this->redirectMap[$item['nav_item_type_id']] : false,
                     'module_name' => ($item['nav_item_type'] == 2 && isset($this->modulesMap[$item['nav_item_type_id']])) ? $this->modulesMap[$item['nav_item_type_id']]['module_name'] : false,
                     'container' => $item['container'],

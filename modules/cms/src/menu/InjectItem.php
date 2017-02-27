@@ -383,7 +383,7 @@ class InjectItem extends Object implements InjectItemInterface
     public function getId()
     {
         if ($this->_id === null) {
-            $this->_id = $this->item->id . '_' . md5(spl_object_hash($this) . $this->getAlias());
+            $this->_id = rand(10000,1000000);
         }
         
         return $this->_id;
@@ -409,7 +409,7 @@ class InjectItem extends Object implements InjectItemInterface
     public function getNavId()
     {
         if ($this->_navId === null) {
-            $this->_navId = $this->item->navId . '_' . $this->getChildOf();
+            $this->_navId = rand(10000,1000000);
         }
         return $this->_navId;
     }
@@ -427,8 +427,10 @@ class InjectItem extends Object implements InjectItemInterface
             'lang' => $this->getLang(),
             'link' => $this->getLink(),
             'title' => $this->title,
+            'title_tag' => $this->title,
             'alias' => $this->getAlias(),
             'description' => $this->description,
+            'keywords' => null,
             'create_user_id' => $this->createUserId,
             'update_user_id' => $this->updateUserId,
             'timestamp_create' => $this->getTimestampCreate(),
