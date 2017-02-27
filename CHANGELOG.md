@@ -20,6 +20,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1221](https://github.com/luyadev/luya/issues/1221) Added CMS Query `in` expression for where conditions.
 - [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $seoTitle (getSeoTitle()) function in order to return the alternative SEO title definition.
 - [#1214](https://github.com/luyadev/luya/issues/1214) Adding JsonLd class in order to register Schema Microdata informations to the View.
 - [#1188](https://github.com/luyadev/luya/issues/1188) Change the layout file for cms page.

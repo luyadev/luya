@@ -39,6 +39,17 @@ class CmsFrontendTestCase extends \PHPUnit_Framework_TestCase
         $data[] = self::generateMenuItem(8, 'Page 1.2.3', ['parent_nav_id' => 4, 'depth' => 3]);
         return $data;
     }
+    
+    public static function mockMenuContainerArray()
+    {
+        $data[] = self::generateMenuItem(1, 'homepage', ['is_home' => 1]);
+        $data[] = self::generateMenuItem(2, 'Page 1', []);
+        $data[] = self::generateMenuItem(3, '(c1) Page 1', ['container' => 'c1']);
+        $data[] = self::generateMenuItem(5, '(c2) Page 1', ['container' => 'c2']);
+        $data[] = self::generateMenuItem(6, '(c2) Page 2', ['container' => 'c2']);
+        
+        return $data;
+    }
 
     public static function generateMenuItem($id, $title, array $args)
     {

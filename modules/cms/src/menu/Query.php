@@ -42,7 +42,7 @@ use luya\cms\Exception;
  *
  * @property \luya\cms\Menu $menu Application menu component object.
  *
- * @since 1.0.0-beta1
+ * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
 class Query extends \yii\base\Object
@@ -53,7 +53,7 @@ class Query extends \yii\base\Object
 
     private $_menu = null;
 
-    private $_whereOperators = ['<', '<=', '>', '>=', '=', '=='];
+    private $_whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
     
     private $_with = ['hidden' => false];
     
@@ -84,13 +84,14 @@ class Query extends \yii\base\Object
      * where(['operator', 'field', 'value']);
      * ```
      *
-     * Allowed operators
+     * Available compare operators:
      * + **<** expression where field is smaller then value.
      * + **>** expression where field is bigger then value.
      * + **=** expression where field is equal value.
      * + **<=** expression where field is small or equal then value.
      * + **>=** expression where field is bigger or equal then value.
      * + **==** expression where field is equal to the value and even the type must be equal.
+     * + **in** expression where the second value is an array with values to look inside.
      *
      * Only one operator speific argument can be provided, to chain another expression
      * use the `andWhere()` method.
@@ -118,7 +119,13 @@ class Query extends \yii\base\Object
      * where(['>', 'id', 1])->andWHere(['<', 'id', 3]);
      * ```
      *
-     * This will only appaend the first condition where id is bigger then 1 and ignore the second one
+     * This will only append the first condition where id is bigger then 1 and ignore the second one.
+     * 
+     * Example using in operator
+     * 
+     * ```php
+     * where(['in', 'container', ['default', 'footer']); // querys all items from the containers `default` and `footer`.
+     * ```
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
      * @return \luya\cms\menu\Query
@@ -354,6 +361,8 @@ class Query extends \yii\base\Object
                         return ($value < $expression['value']);
                     case '<=':
                         return ($value <= $expression['value']);
+                    case 'in':
+                        return in_array($value, $expression['value']);
                     default:
                         return ($value == $expression['value']);
                 }
