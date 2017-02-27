@@ -50,7 +50,7 @@ use yii\base\ArrayableTrait;
  * @property integer $sortIndex Sort index position for the current siblings list.
  * @property boolean $hasChildren Check whether an item has childrens or not returning a boolean value.
  * @property boolean $hasParent Check whether the parent has items or not.
- * @property string $titleTag Returns the title tag field for this item.
+ * @property string $seoTitle Returns the Alternative SEO-Title. If entry is empty, the $title will returned instead.
  * @property \luya\cms\menu\Item|boolean $nextSibling Returns the next sibling based on the current sibling, if not found false is returned.
  * @property \luya\cms\menu\Item|boolean $prevSibling Returns the previous sibling based on the current sibling, if not found false is returned.
  * @property \luya\cms\models\Nav|boolean $model Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
@@ -231,15 +231,15 @@ class Item extends Object implements LinkInterface, Arrayable
     }
     
     /**
-     * Returns the title tag field for this item.
+     * Returns the Alternative SEO-Title.
      *
-     * This is also known as the "SEO-Title" in the cms admin interface.
+     * If no SEO-Title is given, the page title from {{luya\cms\menu\Item::getTitle}} will be returned instead.
      *
-     * @return string The seo title tag.
+     * @return string Return the SEO-Title, if empty the {{luya\cms\menu\Item::getTitle}} will be returned instead.
      */
-    public function getTitleTag()
+    public function getSeoTitle()
     {
-        return $this->itemArray['title_tag'];
+        return empty($this->itemArray['title_tag']) ? $this->title : $this->itemArray['title_tag'];
     }
     
     /**
