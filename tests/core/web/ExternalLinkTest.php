@@ -23,4 +23,11 @@ class ExternalLinkTest extends LuyaWebTestCase
         $this->expectException('yii\base\InvalidConfigException');
         $link = new ExternalLink();
     }
+    
+    public function testSchemaHttpMissing()
+    {
+        $link = new ExternalLink(['href' => '//go/there?p=1']);
+
+        $this->assertContains('public_html/go/there?p=1', $link->href);
+    }
 }
