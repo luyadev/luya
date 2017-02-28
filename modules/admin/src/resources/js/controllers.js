@@ -524,7 +524,7 @@
 			var rowId = row[$scope.config.pk];
 			var json = {};
 			json[fieldName] = invert;
-			$http.put($scope.config.apiEndpoint + '/' + rowId, angular.toJson(json, true)).success(function(data) {
+			$http.put($scope.config.apiEndpoint + '/' + rowId +'?ngrestCallType=update&fields='+fieldName, angular.toJson(json, true)).success(function(data) {
 				row[fieldName] = invert;
 				$scope.highlightItemId(rowId);
 				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}), 1500);
