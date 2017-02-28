@@ -1664,9 +1664,13 @@
                             $scope.filesDataReload().then(function() {
                             	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
                             	var random = (new Date()).toString();
-                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
-                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
-                            	$scope.fileDetail.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+                            	if (fileref.isImage) {
+	                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
+	                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+	                            }
+                            	
+                            	$scope.fileDetail = fileref;
+                            	
                             	LuyaLoading.stop();
                             	AdminToastService.success('the file has been replaced successfull.', 4000);
                             });

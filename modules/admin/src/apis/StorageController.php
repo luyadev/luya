@@ -14,6 +14,7 @@ use luya\admin\base\RestController;
 use yii\caching\DbDependency;
 use luya\admin\filters\TinyCrop;
 use luya\admin\filters\MediumThumbnail;
+use luya\helpers\FileHelper;
 
 /**
  * Filemanager and Storage API.
@@ -201,11 +202,23 @@ class StorageController extends RestController
                     foreach (Yii::$app->storage->findImages(['file_id' => $file->id]) as $img) {
                         Storage::removeImage($img->id, false);
                     }
+                    
+                    // calculate new file files based on new file
+                    $model = StorageFile::findOne($fileId);
+                    $fileHash = FileHelper::md5sum($serverSource);
+                    $fileSize = @filesize($serverSource);
+                    $model->updateAttributes([
+                        'hash_file' => $fileHash,
+                        'file_size' => $fileSize,
+                        'upload_timestamp' => time(),
+                    ]);
                     $this->flushApiCache();
+                    
                     return true;
                 }
             }
         }
+        
         return false;
     }
     
