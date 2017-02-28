@@ -131,6 +131,7 @@ class MyBlock extends \luya\cms\base\PhpBlock
 	            'query' => \luya\news\models\Article::find(),
 	            'label' => 'title', // This attribute from the model is used to render the admin block dropdown selection.
 	            'type' => self::INJECTOR_VAR,
+	            'varLabel' => 'Select Aritcles', // The Block form label
 	        ])
 	    ];
 	}
@@ -155,3 +156,17 @@ The following Injectors are currently available:
 |---		|---
 |{{\luya\cms\injectors\ActiveQueryCheckboxInjector}}|Generate as checkbox selection from an ActiveRecord and assignes selected model rows into the extraVars section. In order to select only a specific fields add the `select()` to the ActiveRecord find ActiveQuery.
 |{{\luya\cms\injectors\LinkInjector}}|Generate an ability to select a link and returns the correct url to the link based on the user selection.
+|{{\luya\cms\injectors\TagInjector}}|Generate a checkbox to select all available admin tags and provides api to return those selected tags.
+
+### Injector Api
+
+Each injector object generate trough the {{luya\cms\base\InternalBaseBlock::injectors}} method can be access trough the magical array access. Assuming you register the TagInjector:
+
+```php
+public function injectors()
+{
+    return ['tags' => new TagInjector()};
+}
+```
+
+Now you are able to access the TagInjector object trough the `$this['tags']` ArrayAccess getter method.
