@@ -29,7 +29,7 @@ use luya\admin\Module;
                     <input id="newTag" maxlength="255" ng-model="newTagName" type="text" class="input__field" />
                 </div>
             </div>
-            <button type="button" class="btn btn-default"><?= Module::t('aws_tag_add')?> <i class="material-icons right">check</i></button>
+            <button type="submit" class="btn btn-default"><?= Module::t('aws_tag_add')?> <i class="material-icons right">check</i></button>
         </form>
     </div>
 </div>
