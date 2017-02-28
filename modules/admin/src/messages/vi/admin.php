@@ -229,4 +229,5 @@ return [
     'layout_image_filter_selection' => 'Chọn bộ lọc hình ảnh:',
     'lock_admin_edit_crud_item' => 'Chỉnh {module} "{table}" (ID: {id}).',
     'lock_cms_edit_page' => 'Chỉnh trang "{title}".',
+    'layout_filemanager_col_size' => 'File size',
 ];

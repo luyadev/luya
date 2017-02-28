@@ -230,4 +230,5 @@ return [
     'layout_image_filter_selection' => 'Seleccione filtro de imagen:',
     'lock_admin_edit_crud_item' => 'Edición {module} "{table}" (ID: {id}).',
     'lock_cms_edit_page' => 'Edición de página "{title}".',
+    'layout_filemanager_col_size' => 'File size',
 ];

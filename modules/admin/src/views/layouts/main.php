@@ -293,6 +293,7 @@ $this->beginPage()
                         <th><?= Admin::t('layout_filemanager_col_name'); ?><i ng-click="changeSortField('name')" ng-class="{'active-orderby' : sortField == 'name' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-name')" ng-class="{'active-orderby' : sortField == '-name' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                         <th><?= Admin::t('layout_filemanager_col_type'); ?><i ng-click="changeSortField('extension')" ng-class="{'active-orderby' : sortField == 'extension' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-extension')" ng-class="{'active-orderby' : sortField == '-extension' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                         <th><?= Admin::t('layout_filemanager_col_date'); ?><i ng-click="changeSortField('uploadTimestamp')" ng-class="{'active-orderby' : sortField == 'uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-uploadTimestamp')" ng-class="{'active-orderby' : sortField == '-uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                        <th><?= Admin::t('layout_filemanager_col_size'); ?><i ng-click="changeSortField('size')" ng-class="{'active-orderby' : sortField == 'size' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-size')" ng-class="{'active-orderby' : sortField == '-size' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -310,6 +311,7 @@ $this->beginPage()
                     <td ng-click="toggleSelection(file)">{{file.name}}</td>
                     <td class="filemanager__lighten">{{file.extension}}</td>
                     <td class="filemanager__lighten">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
+                    <td class="filemanager__ligthen">{{file.sizeReadable}}</td>
                     <td class="filemanager__lighten" ng-click="openFileDetail(file)"><i class="material-icons">zoom_in</i></td>
                 </tr>
                 <!-- /FILES -->
