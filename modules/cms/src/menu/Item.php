@@ -410,7 +410,7 @@ class Item extends Object implements LinkInterface, Arrayable
      */
     public function getAbsoluteLink()
     {
-        return Url::base(true) . $this->getLink();
+        return Yii::$app->request->hostInfo . $this->getLink();
     }
 
     /**

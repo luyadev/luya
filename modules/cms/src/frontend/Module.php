@@ -9,6 +9,7 @@ use luya\base\CoreModuleInterface;
 use luya\web\ErrorHandler;
 use luya\web\ErrorHandlerExceptionRenderEvent;
 use yii\web\HttpException;
+use luya\cms\models\Config;
 
 /**
  * Cms Module.
@@ -100,6 +101,14 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
             if ($event->exception instanceof HttpException) {
                 // see whether a config value exists
                 // if a redirect page id exists, redirect.
+                $navId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
+                if ($navId) {
+                    $menu = Yii::$app->menu->find()->with(['hidden'])->where(['nav_id' => $navId])->one();
+                    if ($menu) {
+                        Yii::$app->getResponse()->redirect($menu->absoluteLink, 301)->send();
+                        exit;
+                    }
+                }
             }
         });
     }

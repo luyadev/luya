@@ -162,4 +162,7 @@ return [
 // 1.0.0
     'model_navitempage_empty_draft_id' => 'Unable to create page from empty draft template.',
     'view_update_variation_select' => 'No block variation selected',
+    'menu_group_item_env_config' => 'Config',
+    'js_config_update_success' => 'Configuration successfull saved.',
+    'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message',
 ];

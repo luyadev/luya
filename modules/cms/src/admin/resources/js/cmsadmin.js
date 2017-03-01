@@ -356,6 +356,22 @@
 		
 	});
 	
+	/* controllers */
+	
+	zaa.controller("ConfigController", function($scope, $http, AdminToastService) {
+		$scope.data = {};
+		
+		$http.get('admin/api-cms-admin/config').then(function(response) {
+			$scope.data = response.data;
+		});
+		
+		$scope.save = function() {
+			$http.post('admin/api-cms-admin/config', $scope.data).then(function(response) {
+				AdminToastService.success(i18n['js_config_update_success'], 4000);
+			});
+		}
+	});
+	
 	zaa.controller("PageVersionsController", function($scope, $http, ServiceLayoutsData, AdminToastService) {
 		/**
 		 * @var object $typeData From parent scope controller NavItemController

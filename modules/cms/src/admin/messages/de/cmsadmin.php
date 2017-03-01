@@ -161,4 +161,7 @@ return [
 // 1.0.0
     'model_navitempage_empty_draft_id' => 'Die Vorlage darf nicht leer sein.',
     'view_update_variation_select' => 'Keine Blockvariation ausgewählt',
+    'menu_group_item_env_config' => 'Konfiguration',
+    'js_config_update_success' => 'Konfiguration wurde gespeichert',
+    'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message',
 ];

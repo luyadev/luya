@@ -1,28 +1,28 @@
 <?php
 
-namespace luya\admin\models;
+namespace luya\cms\models;
 
-use yii\db\ActiveRecord;
+use Yii;
 use luya\traits\RegistryTrait;
 
 /**
- * This is the model class for table "admin_config".
+ * This is the model class for table "cms_config".
  *
- * @property string $name
+ * @property integer $name
  * @property string $value
- *
- * @author Basil Suter <basil@nadar.io>
  */
-final class Config extends ActiveRecord
+class Config extends \yii\db\ActiveRecord
 {
     use RegistryTrait;
+    
+    const HTTP_EXCEPTION_NAV_ID = 'httpExceptionNavId';
     
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'admin_config';
+        return 'cms_config';
     }
 
     /**
@@ -35,7 +35,7 @@ final class Config extends ActiveRecord
             [['name'], 'unique'],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
