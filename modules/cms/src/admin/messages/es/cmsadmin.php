@@ -165,4 +165,5 @@ return [
     'menu_group_item_env_config' => 'Config',
     'js_config_update_success' => 'Configuration successfull saved.',
     'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message',
+    'module_permission_update_config' => 'CMS Configurations',
 ];

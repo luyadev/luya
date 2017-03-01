@@ -195,7 +195,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             ['route' => 'cmsadmin/page/create', 'alias' => static::t('module_permission_add_new_page')],
             ['route' => 'cmsadmin/page/update', 'alias' => static::t('module_permission_update_pages')],
             ['route' => 'cmsadmin/page/drafts', 'alias' => static::t('module_permission_edit_drafts')],
-            ['route' => 'cmsadmin/config/index', 'alias' => 'Cms Configuration'],
+            ['route' => 'cmsadmin/config/index', 'alias' => static::t('module_permission_update_config')],
         ];
     }
 
