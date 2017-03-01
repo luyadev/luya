@@ -86,6 +86,11 @@ class NavTree extends Widget
     public $listDepthClassPrefix = 'nav__list--';
 
     /**
+     * @var boolean Decides whether the first <ul> tag will be outputted or not
+     */
+    public $ignoreFirstListTag = false;
+
+    /**
      * @var null|array If set, a wrapper will be wrapped around the list
      * - tag: The tag for the wrapper, e.g. `nav`
      * - class: Class or classes for the wrapper
@@ -204,7 +209,11 @@ class NavTree extends Widget
         $listOptions['class'] .= " " . $this->listDepthClassPrefix . $i;
 
         // <ul>
-        $html = Html::beginTag($this->_listTag, $listOptions);
+        $html = "";
+
+        if ($this->ignoreFirstListTag && $i !== 1 || !$this->ignoreFirstListTag) {
+            $html = Html::beginTag($this->_listTag, $listOptions);
+        }
 
         foreach ($iterator as $item) {
             $itemOptions = $this->itemOptions;
@@ -231,8 +240,12 @@ class NavTree extends Widget
             $html .= Html::endTag($this->_itemTag);
         }
 
-        // </ul>
-        return $html . Html::endTag($this->_listTag);
+        if ($this->ignoreFirstListTag && $i !== 1 || !$this->ignoreFirstListTag) {
+            // </ul>
+            $html .= Html::endTag($this->_listTag);
+        }
+
+        return $html;
     }
 
     /**
