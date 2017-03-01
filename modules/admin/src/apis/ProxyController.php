@@ -17,9 +17,11 @@ use luya\admin\models\StorageFile;
  *
  * How the data is prepared:
  *
- * 1. All Tables
- * 2. Table request estimated.
- * 3.
+ * 1. Foreach all tables
+ * 2. Ignore the $ingoreTables list
+ * 3. Table request estimated data write to $config
+ * 4. Generate Build.
+ * 5. Send build identifier to the client.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
