@@ -66,6 +66,11 @@ class LangSwitcher extends \luya\base\Widget
      *  - class: The class to observe for the elements.
      */
     public $listElementOptions = ['class' => 'list-element'];
+
+    /**
+     * @var boolean Decides whether the <ul> tag will be outputted or not
+     */
+    public $noListTag = false;
     
     /**
      * @var array Options to pass to the element (li tag):
@@ -169,7 +174,7 @@ class LangSwitcher extends \luya\base\Widget
     }
     
     /**
-     * @return array An array with languages items.
+     * @return string The langnav html
      */
     public function run()
     {
@@ -213,7 +218,11 @@ class LangSwitcher extends \luya\base\Widget
         
         $separator = ArrayHelper::remove($options, 'separator', "\n");
         $tag =  ArrayHelper::remove($options, 'tag', "ul");
-        
+
+        if($this->noListTag) {
+            return trim($separator . implode($separator, $items) . $separator);
+        }
+
         return Html::tag($tag, $separator . implode($separator, $items) . $separator, $options);
     }
 }

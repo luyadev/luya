@@ -50,7 +50,7 @@ class ItemTest extends CmsFrontendTestCase
     {
         $menu = (new Query())->where(['id' => 2])->one();
         
-        $this->assertSame('http://localhost/luya/envs/dev/public_html/luya/envs/dev/public_html/en/page1', $menu->absoluteLink);
+        $this->assertSame('http://localhost/luya/envs/dev/public_html/en/page1', $menu->absoluteLink);
     }
     
     public function testNextPevSibling()
