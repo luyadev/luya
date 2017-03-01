@@ -6,7 +6,6 @@ use Yii;
 use yii\base\Object;
 use Curl\Curl;
 use yii\helpers\Json;
-use luya\Exception;
 use yii\helpers\Console;
 
 /**

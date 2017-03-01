@@ -6,6 +6,9 @@ use Yii;
 use yii\base\BootstrapInterface;
 use luya\web\Application;
 use luya\base\CoreModuleInterface;
+use luya\web\ErrorHandler;
+use luya\web\ErrorHandlerExceptionRenderEvent;
+use yii\web\HttpException;
 
 /**
  * Cms Module.
@@ -90,6 +93,13 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
                     ['class' => 'luya\cms\frontend\components\RouteBehaviorUrlRule'],
                     ['class' => 'luya\cms\frontend\components\CatchAllUrlRule'],
                 ]);
+            }
+        });
+        
+        Yii::$app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function(ErrorHandlerExceptionRenderEvent $event) {
+            if ($event->exception instanceof HttpException) {
+                // see whether a config value exists
+                // if a redirect page id exists, redirect.
             }
         });
     }
