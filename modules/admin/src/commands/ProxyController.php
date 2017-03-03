@@ -124,6 +124,9 @@ class ProxyController extends Command
         
         if (!$curl->error) {
             $this->flushHasCache();
+            
+            $this->verbosePrint($curl->response);
+            
             $response = Json::decode($curl->response);
             $build = new ClientBuild($this, [
                 'optionStrict' => $this->strict,
@@ -144,8 +147,16 @@ class ProxyController extends Command
             }
         }
         
+        $this->clearConfig();
         $this->output($curl->response);
         return $this->outputError($curl->error_message);
+    }
+
+    private function clearConfig()
+    {
+    	Config::remove(self::CONFIG_VAR_TOKEN);
+    	Config::remove(self::CONFIG_VAR_URL);
+    	Config::remove(self::CONFIG_VAR_IDENTIFIER);
     }
     
     /**
@@ -155,9 +166,7 @@ class ProxyController extends Command
      */
     public function actionClear()
     {
-        Config::remove(self::CONFIG_VAR_TOKEN);
-        Config::remove(self::CONFIG_VAR_URL);
-        Config::remove(self::CONFIG_VAR_IDENTIFIER);
+        $this->clearConfig();
         return $this->outputSuccess('Config has been cleared.');
     }
 }
