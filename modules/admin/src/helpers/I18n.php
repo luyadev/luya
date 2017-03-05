@@ -78,7 +78,7 @@ class I18n
      * 
      * $decoded = I18n::decodeArray($array);
      * 
-     * print_r($decoded); // Dumps: [0 => 'Hello', 1 => 'Yes']; if default language is English.
+     * print_r($decoded); // Dumps: [0 => ['de' => 'Hallo', 'en' => 'Hello'], 1 => ['de' => 'Ja', 'en' => 'Yes']]; if default language is English.
      * ```
      * 
      * @param array $array The array to iterator trough and call the {{luya\admin\helpers\I18n::decode}} on its value. 
@@ -101,10 +101,51 @@ class I18n
      * @param mixed $onEmptyValue The value you can set when the language could not be found
      * @return string|unknown
      */
-    public static function findCurrent(array $fieldValues, $onEmptyValue = '')
+    public static function findActive(array $fieldValues, $onEmptyValue = '')
     {
         $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
     
         return (array_key_exists($langShortCode, $fieldValues)) ? $fieldValues[$langShortCode] : $onEmptyValue;
+    }
+
+    /**
+     * Find the corresponding element inside an array for the current active language
+     *
+     * @param array $fieldValues The array you want to to find the current
+     * @param mixed $onEmptyValue The value you can set when the language could not be found
+     * @return string
+     */
+    public static function findActiveArray(array $array, $onEmptyValue = '')
+    {
+    	$array = [];
+    	foreach ($array as $key => $value) {
+    		$array[$key] = static::findActive($valu, $onEmptyValue);
+    	}
+    	
+    	return $array;
+    }
+    
+    /**
+     * Decodes a json string and returns the current active language item.
+     * 
+     * @param string $input
+     * @param string $onEmptyValue
+     * @return string
+     */
+    public static function decodeActive($input, $onEmptyValue = '')
+    {
+    	return static::findActive(static::decode($input, $onEmptyValue));
+    }
+    
+    /**
+     * Decodes an array with json strings and returns the current active language item for each entry.
+     * 
+     * @param array $input
+     * @param unknown $onEmptyValue
+     * @return array
+     */
+    public static function decodeActiveArray(array $input, $onEmptyValue = '')
+    {
+    	return static::findActiveArray(static::decodeArray($input, $onEmptyValue));
     }
 }

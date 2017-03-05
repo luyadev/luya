@@ -61,7 +61,7 @@ class Item extends ItemAbstract
     public function getCaption()
     {
         if ($this->_caption === null) {
-            $this->_caption = I18n::findCurrent($this->getCaptionArray());
+            $this->_caption = I18n::findActive($this->getCaptionArray());
         }
     
         return $this->_caption;

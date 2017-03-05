@@ -159,14 +159,14 @@ abstract class Plugin extends Component
     /**
      * Encode the current value from a language array.
      *
-     * See {{luya\admin\helpers\I18n::findCurrent}}
+     * See {{luya\admin\helpers\I18n::findActive}}
      *
      * @param array $fieldValues
      * @return string|unknown
      */
     public function i18nDecodedGetActive(array $fieldValues)
     {
-        return I18n::findCurrent($fieldValues);
+        return I18n::findActive($fieldValues);
     }
     
     // HTML TAG HELPERS

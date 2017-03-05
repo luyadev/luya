@@ -15,7 +15,7 @@ namespace luya\cms\frontend\components;
  * help of the I18n helper:
  *
  * ```php
- * \admin\helpers\I18n::findCurrent(Yii::$app->page->getProperty('foobar'));
+ * \admin\helpers\I18n::findActive(Yii::$app->page->getProperty('foobar'));
  * ```
  *
  * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
