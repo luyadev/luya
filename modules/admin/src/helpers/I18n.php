@@ -68,6 +68,33 @@ class I18n
     }
     
     /**
+     * Decode an arry with i18n values.
+     * 
+     * In order to decode an arry with json values you can use this function istead of iterator trough
+     * the array items by yourself and calling {{luya\admin\helpers\I18n::decode}}.
+     * 
+     * ```php
+     * $array = ['{"de:"Hallo","en":"Hello"}', '{"de:"Ja","en":"Yes"}'];
+     * 
+     * $decoded = I18n::decodeArray($array);
+     * 
+     * print_r($decoded); // Dumps: [0 => 'Hello', 1 => 'Yes']; if default language is English.
+     * ```
+     * 
+     * @param array $array The array to iterator trough and call the {{luya\admin\helpers\I18n::decode}} on its value. 
+     * @param string $onEmptyValue If the decoded value is not existing or empty, this default value will be used instead of null.
+     */
+    public static function decodeArray(array $array, $onEmptyValue = '')
+    {
+    	$decoded = [];
+    	foreach ($array as $key => $value) {
+    		$decoded[$key] = static::decode($value, $onEmptyValue);
+    	}
+    	
+    	return $decoded;
+    }
+    
+    /**
      * Find the corresponding element inside an array for the current active language
      *
      * @param array $fieldValues The array you want to to find the current
