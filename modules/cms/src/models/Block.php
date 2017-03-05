@@ -8,7 +8,10 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
- *
+ * 
+ * @property integer $id
+ * @property integer $group_id
+ * @property string $class
  * @author Basil Suter <basil@nadar.io>
  */
 class Block extends NgRestModel
@@ -25,6 +28,11 @@ class Block extends NgRestModel
         return 'cms_block';
     }
     
+    public function extraFields()
+    {
+    	return ['usageCount'];
+    }
+    
     public function ngRestAttributeTypes()
     {
         return [
@@ -33,35 +41,44 @@ class Block extends NgRestModel
         ];
     }
     
+    public function ngRestExtraAttributeTypes()
+    {
+    	return [
+			'usageCount' => 'number',
+    	];
+    }
+    
     public function attributeLabels()
     {
         return [
             'group_id' => 'Group',
             'class' => 'Object Class',
+        	'usageCount' => 'Used in Content'
         ];
     }
 
     public function ngRestConfig($config)
     {
-        $this->ngRestConfigDefine($config, ['list'], ['group_id', 'class']);
+        $this->ngRestConfigDefine($config, ['list'], ['group_id', 'class', 'usageCount']);
         
         return $config;
     }
 
+    public function getUsageCount()
+    {
+    	return NavItemPageBlockItem::find()->where(['block_id' => $this->id])->count();
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
-        return [
-            [['class', 'group_id'], 'required'],
-        ];
-    }
-
-    public function scenarios()
-    {
-        return [
-            'commandinsert' => ['class', 'group_id'],
-            'restcreate' => ['class', 'group_id'],
-            'restupdate' => ['class', 'group_id'],
-        ];
+    	return [
+    		[['group_id', 'class'], 'required'],
+    		[['group_id'], 'integer'],
+    		[['class'], 'string', 'max' => 255],
+    	];
     }
     
     public function ngRestGroupByField()

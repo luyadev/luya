@@ -23,12 +23,9 @@ class BlockImporter extends Importer
             
             if (!$model) {
                 $block = new Block();
-                $block->scenario = 'commandinsert';
-                $block->setAttributes([
-                    'group_id' => $blockGroupId,
-                    'class' => $ns,
-                ]);
-                $block->insert();
+                $block->group_id = $blockGroupId;
+                $block->class = $ns;
+                $block->save();
                 $this->addLog($ns.' new block has been added to database.');
             } else {
                 $model->updateAttributes(['group_id' => $blockGroupId]);
