@@ -117,12 +117,12 @@ class I18n
      */
     public static function findActiveArray(array $array, $onEmptyValue = '')
     {
-    	$array = [];
+    	$output = [];
     	foreach ($array as $key => $value) {
-    		$array[$key] = static::findActive($valu, $onEmptyValue);
+    		$output[$key] = static::findActive($value, $onEmptyValue);
     	}
     	
-    	return $array;
+    	return $output;
     }
     
     /**
