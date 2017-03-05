@@ -243,8 +243,13 @@
                 "id": "@fieldid",
                 "name": "@fieldname",
             },
+            controller: function($scope) {
+            	$scope.unset = function() {
+            		$scope.model = null;
+            	}
+            },
             template: function() {
-                return '<update-form-redirect data="model"></update-form-redirect>';
+                return '<div><i class="material-icons" style="position:absolute;float:right;" ng-click="unset()" ng-if="model">cancel</i><update-form-redirect data="model"></update-form-redirect></div>';
             }
         }
     });
