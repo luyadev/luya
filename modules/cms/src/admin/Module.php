@@ -17,6 +17,16 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      * @var string The version label name of the first version, version alias is running through yii2 messaging system.
      */
     const VERSION_INIT_LABEL = 'Initial';
+    
+    const ROUTE_PAGE_CREATE = 'cmsadmin/page/create';
+    
+    const ROUTE_PAGE_UDPATE = 'cmsadmin/page/update';
+    
+    const ROUTE_PAGE_DELETE = 'cmsadmin/page/delete';
+    
+    const ROUTE_PAGE_DRAFTS = 'cmsadmin/page/drafts';
+    
+    const ROUTE_CONFIG = 'cmsadmin/config/index';
 
     public $apis = [
         'api-cms-admin' => 'luya\cms\admin\\apis\\AdminController',
@@ -192,10 +202,11 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     public function extendPermissionRoutes()
     {
         return [
-            ['route' => 'cmsadmin/page/create', 'alias' => static::t('module_permission_add_new_page')],
-            ['route' => 'cmsadmin/page/update', 'alias' => static::t('module_permission_update_pages')],
-            ['route' => 'cmsadmin/page/drafts', 'alias' => static::t('module_permission_edit_drafts')],
-            ['route' => 'cmsadmin/config/index', 'alias' => static::t('module_permission_update_config')],
+            ['route' => self::ROUTE_PAGE_CREATE, 'alias' => static::t('module_permission_add_new_page')],
+            ['route' => self::ROUTE_PAGE_UDPATE, 'alias' => static::t('module_permission_update_pages')],
+            ['route' => self::ROUTE_PAGE_DELETE, 'alias' => static::t('module_permission_delete_pages')],
+            ['route' => self::ROUTE_PAGE_DRAFTS, 'alias' => static::t('module_permission_edit_drafts')],
+            ['route' => self::ROUTE_CONFIG, 'alias' => static::t('module_permission_update_config')],
         ];
     }
 

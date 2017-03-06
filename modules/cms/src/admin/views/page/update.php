@@ -146,10 +146,12 @@ use luya\cms\admin\Module;
                                     </div>
                                     <!--  /ACTIONS -->
 
+                                    <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
                                     <!-- DELETE BUTTON -->
                                     <div class="toolbar__group toolbar__group--delete">
                                         <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="material-icons">delete</i></a>
                                     </div>
+                                    <?php endif; ?>
                                     <!-- /DELETE BUTTON -->
 
                                     <!-- PLACEHOLDER TOGGLE -->
@@ -365,10 +367,16 @@ use luya\cms\admin\Module;
                         <div class="page__header">
                             <div class="row">
                                 <div class="col s12">
-                                    <h4>
+                                    <h4 style="margin-bottom:0px;">
+                                        <span class="flag flag--{{lang.short_code}}">
+                                            <span class="flag__fallback">{{lang.name}}</span> 
+                                        </span>
                                         {{item.title}}
                                         <span ng-hide="settings">
-                                            <i ng-click="toggleSettings()" class="material-icons right [ waves-effect waves-blue ]">mode_edit</i>
+                                            <a ng-click="toggleSettings()" style="cursor: pointer;"><i class="material-icons right [ waves-effect waves-blue ]">mode_edit</i></a>
+                                            <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
+                                            <a ng-if="lang.is_default==0" ng-click="trashItem()" style="cursor: pointer;"><i class="material-icons right [ waves-effect waves-blue ]">delete</i></a>
+                                            <?php endif; ?>
                                             <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="right" ng-show="!liveEditState">
                                                 <i class="material-icons [ waves-effect waves-blue ]">open_in_new</i>
                                             </a>
@@ -378,7 +386,7 @@ use luya\cms\admin\Module;
                                             <a ng-click="toggleSettings()" style="cursor:pointer;" class="right"><i class="material-icons">close</i></a>
                                         </span>
                                     </h4>
-                                    <p>{{lang.name}}</p>
+                                    <p style="margin-top:0px;" class="chip"><small>{{ item.alias }}</small></p>
                                 </div>
                             </div>
                         </div>
@@ -448,14 +456,12 @@ use luya\cms\admin\Module;
                             <div ng-switch-when="3">
                                 <update-form-redirect data="typeDataCopy"></update-form-redirect>
                             </div>
-                            <br />
-                            <div class="modal__footer">
-                                <div class="row">
-                                    <div class="col s6">
-                                        <div class="right">
-                                            <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
-                                            <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
-                                        </div>
+                            
+                            <div class="row" style="padding-bottom:15px;">
+                                <div class="col s12">
+                                    <div class="right">
+                                        <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
+                                        <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
                                     </div>
                                 </div>
                             </div>

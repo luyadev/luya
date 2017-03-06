@@ -452,6 +452,12 @@
 		
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 		
+		$scope.$on('deletedNavItem', function() {
+			$scope.isOpen = false;
+			$scope.itemSelection = false;
+			$scope.selection = 0;
+		});
+		
 		$scope.NavItemController = $scope.$parent;
 		
 		$scope.navId = 0;
@@ -845,7 +851,6 @@
 		}
 		
 		$scope.trash = function() {
-	    	
 			AdminToastService.confirm(i18n['js_page_confirm_delete'], function($timeout, $toast) {
 				
 				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.id }}).success(function(response) {
@@ -961,7 +966,7 @@
 			}
 		});
 		
-		// app
+		// properties:
 		
 		$scope.isTranslated = false;
 		
@@ -971,6 +976,45 @@
 	
 		$scope.settings = false;
 		
+		$scope.typeDataCopy = [];
+		
+		$scope.typeData = [];
+		
+		$scope.container = [];
+		
+		$scope.currentVersionInformation = null;
+		
+		$scope.errors = [];
+		
+		$scope.homeUrl = homeUrl;
+		
+		$scope.currentPageVersion = 0;
+		
+		$scope.trashItem = function() {
+			if ($scope.lang.is_default == 0) {
+				AdminToastService.confirm(i18n['js_page_confirm_delete'], function($timeout, $toast) {
+					$http.get('admin/api-cms-navitem/delete', { params : { navItemId : $scope.item.id }}).success(function(response) {
+						$scope.menuDataReload().then(function() {
+							$scope.isTranslated = false;
+							$scope.item = [];
+							$scope.itemCopy = [];
+							$scope.settings = false;
+							$scope.typeDataCopy = [];
+							$scope.typeData = [];
+							$scope.container = [];
+							$scope.currentVersionInformation = null;
+							$scope.errors = [];
+							$scope.currentPageVersion = 0;
+							$scope.$broadcast('deletedNavItem');
+							$toast.close();
+		    			});
+		    		}).error(function(response) {
+						AdminToastService.error(i18n['js_page_delete_error_cause_redirects'], 5000);
+					});
+				});
+			}
+	    };
+	    
 		$scope.reset = function() {
 			$scope.itemCopy = angular.copy($scope.item);
 			if ($scope.item.nav_item_type == 1) {
@@ -980,8 +1024,6 @@
 			}
 			
 		}
-		
-		$scope.errors = [];
 
 		$scope.updateNavItemData = function(itemCopy, typeDataCopy) {
 			$scope.errors = [];
@@ -1011,8 +1053,6 @@
 			});
 		};
 		
-		$scope.homeUrl = homeUrl;
-		
 		$scope.toggleSettings = function() {
 			$scope.reset();
 			$scope.settings = !$scope.settings;
@@ -1023,14 +1063,6 @@
 				$scope.itemCopy.alias = Slug.slugify(n);
 			}
 		});
-	
-		$scope.typeDataCopy = [];
-		
-		$scope.typeData = [];
-		
-		$scope.container = [];
-		
-		$scope.currentVersionInformation = null;
 		
 		$scope.removeCurrentVersion = function() {
 			// {alias: $scope.currentVersionInformation.version_alias}
@@ -1043,8 +1075,6 @@
 				});
 			});
 		}
-		
-		$scope.currentPageVersion = 0;
 		
 		$scope.getItem = function(langId, navId) {
 			$http({

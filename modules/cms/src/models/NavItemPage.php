@@ -43,7 +43,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 $item->delete();
             }
             
-            $event->sender->forceNavItem->updateTimestamp();
+            if ($event->sender->forceNavItem) {
+                $event->sender->forceNavItem->updateTimestamp();
+            }
         });
         
         $this->on(self::EVENT_AFTER_UPDATE, function ($event) {

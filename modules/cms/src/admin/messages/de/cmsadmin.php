@@ -165,4 +165,5 @@ return [
     'js_config_update_success' => 'Konfiguration wurde gespeichert',
     'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message',
     'module_permission_update_config' => 'Cms Konfigurationen',
+    'module_permission_delete_pages' => 'Seite löschen',
 ];

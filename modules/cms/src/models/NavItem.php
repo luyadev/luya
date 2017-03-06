@@ -57,6 +57,18 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventLogger']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventLogger']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventLogger']);
+        
+        $this->on(self::EVENT_AFTER_DELETE, function ($event) {
+            
+            $type = $event->sender->getType();
+            if ($type) {
+                $type->delete();
+            }
+            
+            foreach (NavItemPage::find()->where(['nav_item_id' => $event->sender->id])->all() as $version) {
+                $version->delete();
+            }
+        });
     }
 
     /**

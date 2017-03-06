@@ -11,6 +11,8 @@ use yii\helpers\Json;
 use yii\base\InvalidCallException;
 use luya\admin\models\UserOnline;
 use yii\web\NotFoundHttpException;
+use luya\cms\admin\Module;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Nai Api provides tasks to create, modify and delete navigation items and properties of items.
@@ -210,6 +212,10 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionDelete($navId)
     {
+        if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
+            throw new ForbiddenHttpException("Unable to remove this page due to permission restrictions.");    
+        }
+        
         $model = Nav::find()->where(['id' => $navId])->one();
         if ($model) {
             Yii::$app->menu->flushCache();
