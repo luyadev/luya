@@ -133,7 +133,7 @@ use luya\cms\admin\Module;
                                 <!-- LEFT TOOLBAR -->
                                 <div class="toolbar__left">
                                     <!-- CONFIG BUTTON -->
-                                    <div class="toolbar__group toolbar__group--settings" ng-show="propertiesData.length == 0 || isDraft == false">
+                                    <div class="toolbar__group toolbar__group--settings" ng-show="propertiesData.length !== 0 && isDraft == false">
                                         <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()">
                                             <i class="material-icons cms__prop-toggle">settings</i>
                                         </a>
