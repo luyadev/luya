@@ -96,7 +96,7 @@ A very common scenario is to add properties to an existing menu item like an ima
 <?php endforeach; ?>
 ```
 
-This method allows you find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')` instead of using `Yii::$app->page->getProperty('xyz')`.
+This method allows you find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')`.
 
 #### in Layouts
 

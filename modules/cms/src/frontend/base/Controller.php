@@ -39,12 +39,7 @@ abstract class Controller extends \luya\web\Controller
         }
 
         Yii::$app->urlManager->contextNavItemId = $navItemId;
-
-        Yii::$app->set('page', [
-            'class' => 'luya\cms\frontend\components\Page',
-            'model' => $model,
-        ]);
-
+        
         $currentMenu = Yii::$app->menu->current;
         
         $event = new BeforeRenderEvent();
@@ -139,7 +134,7 @@ abstract class Controller extends \luya\web\Controller
     
         $props = [];
     
-        foreach (Yii::$app->page->getProperties() as $prop) {
+        foreach (Yii::$app->menu->current->model->getProperties() as $prop) {
             $o = $prop->getObject();
             $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
         }

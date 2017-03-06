@@ -29,7 +29,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
 
     public $tags = [
         'menu' => ['class' => 'luya\cms\tags\MenuTag'],
-        'page' => ['class' => 'luya\cms\tags\PageTag'], // marked as deprecated for 1.0.0
+        'page' => ['class' => 'luya\cms\tags\PageTag'],
     ];
     
     /**
