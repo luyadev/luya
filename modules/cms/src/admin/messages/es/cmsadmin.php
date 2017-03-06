@@ -167,4 +167,11 @@ return [
     'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message',
     'module_permission_update_config' => 'CMS Configurations',
     'module_permission_delete_pages' => 'Delete Page',
+	'page_update_actions_deepcopy_title' => 'Copy Page',
+	'page_update_actions_layout_title' => 'Layout File',
+	'page_update_actions_layout_text' => 'You can define another layout file which should be rendered instead of the main layout file. If empty the `main.php` layout will be used by default. You can also use alias paths. Layout file defintion does not require the php file extension.',
+	'page_update_actions_layout_file_field' => 'Layout File',
+	'page_update_actions_modal_title' => 'Page Settings',
+	'js_page_update_layout_save_success' => 'The layout file has been updated',
+	'js_page_create_copy_success' => 'The page copy has been created.',
 ];

@@ -586,13 +586,11 @@ $this->beginPage()
                     <ul class="collection with-header">
                     <?php foreach ($this->context->tags as $name => $object): ?>
                         <li class="collection-item" click-paste-pusher="<?= $object->example(); ?>" style="cursor: pointer;" ng-mouseenter="isHover['<?=$name;?>']=true" ng-mouseleave="isHover['<?=$name;?>']=false">
-
                             <div class="help-overlay" ng-show="isHover['<?=$name;?>']">
                                 <h3 class="help-overlay__title"><?= $name; ?></h3>
                                 <code class="help-overlay__example-code"><?= $object->example(); ?></code>
                                 <div class="help-overlay__description"><?= Markdown::process($object->readme()); ?></div>
                             </div>
-
                             <div><?= $name; ?><a class="secondary-content"><i class="material-icons">content_paste</i></a></div>
                         </li>
                     <?php endforeach; ?>

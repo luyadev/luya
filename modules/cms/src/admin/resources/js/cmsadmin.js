@@ -808,6 +808,8 @@
 	    };
 	    
 		/* app logic */
+	    
+	    $scope.showActions = 1;
 		
 		$scope.id = parseInt($stateParams.navId);
 		
@@ -822,6 +824,8 @@
 		$scope.createDeepPageCopy = function() {
 			$http.post('admin/api-cms-nav/deep-page-copy', {navId: $scope.id}).success(function(response) {
 				$scope.menuDataReload();
+				AdminToastService.success(i18n['js_page_create_copy_success'], 4000);
+				$scope.showActions = 1;
 			});
 		};
 		
@@ -868,7 +872,7 @@
 		
 	    $scope.submitNavForm = function() {
 	    	$http.post('admin/api-cms-nav/update?id=' + $scope.navData.id, {layout_file: $scope.navData.layout_file}).success(function(response) {
-	    		AdminToastService.success(i18nParam('js_page_property_refresh'), 3000);
+	    		AdminToastService.success(i18nParam('js_page_update_layout_save_success'), 3000);
 	    	}).error(function(response) {
 	    		angular.forEach(response, function(value) {
 	    			AdminToastService.error(value.message, 4000);

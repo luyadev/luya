@@ -123,10 +123,9 @@ use luya\cms\admin\Module;
 
     <div class="cms">
         <div class="cms__pages">
-
-            <div class="row">
+			<div class="row">
                 <div class="col s12">
-
+					
                     <div class="toolbar [ grey lighten-3 ]">
                         <div class="row">
                             <div class="col s12">
@@ -243,29 +242,39 @@ use luya\cms\admin\Module;
                 </div>
             </div>
             
-            <div class="row" ng-if="showActions">
-                <div class="col s12">
-                    <div class="card-panel">
-                        <h3>Copy</h3>
-                        <p><?= Module::t('page_update_actions_deepcopy_text'); ?></p>
-                        <p><button type="button" class="btn" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
-                        <hr />
-                        <h3>Developer Settings</h3>
-                        <p>You can define another layout file which should be rendered instead of the main layout file. If empty the `main.php` layout will be used by default. You can also use alias paths. Layout file defintion does not require the php file extension.</p>
-                        <form ng-submit="submitNavForm()">
+            <modal is-modal-hidden="showActions">
+            	<h1><?= Module::t('page_update_actions_modal_title'); ?></h1>
+            	<div class="row">
+            		<div class="col s12">
+                    	<ul class="collapsible" data-collapsible="accordion">
+		                <li>
+		                  <div class="collapsible-header" ng-click="tagsOpen=!tagsOpen"><i class="material-icons">content_copy</i> <?= Module::t('page_update_actions_deepcopy_title'); ?></div>
+		                  <div class="collapsible-body" ng-show="tagsOpen" style="display:block;">
+		                    <p><?= Module::t('page_update_actions_deepcopy_text'); ?></p>
+                       		<p><button type="button" class="btn" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
+                          </div>
+		                </li>
+		                <li>
+		                  <div class="collapsible-header" ng-click="supportOpen=!supportOpen"><i class="material-icons">web</i> <?= Module::t('page_update_actions_layout_title'); ?></div>
+		                  <div class="collapsible-body" ng-show="supportOpen" style="display:block;">
+		                  <p><?= Module::t('page_update_actions_layout_text'); ?></p>
+                        	<form ng-submit="submitNavForm()">
 	                        <div class="row">
 	                            <div class="input input--text col s12">
-	                                <label class="input__label">Layout File</label>
+	                                <label class="input__label"><?= Module::t('page_update_actions_layout_file_field'); ?></label>
 	                                <div class="input__field-wrapper">
 	                                    <input type="text" class="input__field validate" ng-model="navData.layout_file" />
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?></button>
-                        </form>
-                    </div>
+	                        <p><button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?></button></p>
+                        	</form>
+		                  </div>
+		                </li>
+		             </ul>
+                	</div>
                 </div>
-            </div>
+            </modal>
 
             <div class="row" ng-if="showPropForm">
                 <div class="col s12">
@@ -286,9 +295,7 @@ use luya\cms\admin\Module;
                              </div>
                         </div>
 
-                        <br />
-                        <div class="modal__footer">
-                            <div class="row">
+                            <div class="row" style="margin-top:25px;">
                                 <div class="input-field col s12">
                                     <div class="right">
                                         <button type="button" ng-click="togglePropMask()" class="btn red"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
@@ -297,7 +304,6 @@ use luya\cms\admin\Module;
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
