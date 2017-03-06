@@ -219,7 +219,7 @@ class LangSwitcher extends \luya\base\Widget
         $separator = ArrayHelper::remove($options, 'separator', "\n");
         $tag =  ArrayHelper::remove($options, 'tag', "ul");
 
-        if($this->noListTag) {
+        if ($this->noListTag) {
             return trim($separator . implode($separator, $items) . $separator);
         }
 

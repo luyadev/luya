@@ -120,9 +120,9 @@ class Query extends \yii\base\Object
      * ```
      *
      * This will only append the first condition where id is bigger then 1 and ignore the second one.
-     * 
+     *
      * Example using in operator
-     * 
+     *
      * ```php
      * where(['in', 'container', ['default', 'footer']); // querys all items from the containers `default` and `footer`.
      * ```

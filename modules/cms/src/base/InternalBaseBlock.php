@@ -75,7 +75,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
     
     /**
-     * 
+     *
      * @param string $offset The name of the registered Injector name.
      * @return \luya\cms\base\BaseBlockInjector
      */
@@ -171,8 +171,8 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * Now the generated injector ActiveQueryCheckbox is going to grab all informations from the defined query and assign
      * them into the extra var foobar. Now you can access `$this->extraValue('foobar')` which returns all seleced rows from the checkbox
      * you have assigend.
-     * 
-     * In order to access the injectors object api you can use the ArrayAccess getter method like `$this['foobar']` and you can access the public 
+     *
+     * In order to access the injectors object api you can use the ArrayAccess getter method like `$this['foobar']` and you can access the public
      * method for this Injector.
      */
     public function injectors()

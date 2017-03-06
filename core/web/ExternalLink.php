@@ -12,7 +12,7 @@ use luya\helpers\StringHelper;
 /**
  * Generate External Link object.
  *
- * When href is provided without a protocol, for example `//go/there` the slashes are replaced 
+ * When href is provided without a protocol, for example `//go/there` the slashes are replaced
  * by the current base absolute base URL.
  *
  * @property string $href The external href link will be http ensured on set.

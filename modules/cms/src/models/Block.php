@@ -8,7 +8,7 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
- * 
+ *
  * @property integer $id
  * @property integer $group_id
  * @property string $class
@@ -30,7 +30,7 @@ class Block extends NgRestModel
     
     public function extraFields()
     {
-    	return ['usageCount'];
+        return ['usageCount'];
     }
     
     public function ngRestAttributeTypes()
@@ -43,9 +43,9 @@ class Block extends NgRestModel
     
     public function ngRestExtraAttributeTypes()
     {
-    	return [
-			'usageCount' => 'number',
-    	];
+        return [
+            'usageCount' => 'number',
+        ];
     }
     
     public function attributeLabels()
@@ -53,7 +53,7 @@ class Block extends NgRestModel
         return [
             'group_id' => 'Group',
             'class' => 'Object Class',
-        	'usageCount' => 'Used in Content'
+            'usageCount' => 'Used in Content'
         ];
     }
 
@@ -66,7 +66,7 @@ class Block extends NgRestModel
 
     public function getUsageCount()
     {
-    	return NavItemPageBlockItem::find()->where(['block_id' => $this->id])->count();
+        return NavItemPageBlockItem::find()->where(['block_id' => $this->id])->count();
     }
     
     /**
@@ -74,11 +74,11 @@ class Block extends NgRestModel
      */
     public function rules()
     {
-    	return [
-    		[['group_id', 'class'], 'required'],
-    		[['group_id'], 'integer'],
-    		[['class'], 'string', 'max' => 255],
-    	];
+        return [
+            [['group_id', 'class'], 'required'],
+            [['group_id'], 'integer'],
+            [['class'], 'string', 'max' => 255],
+        ];
     }
     
     public function ngRestGroupByField()

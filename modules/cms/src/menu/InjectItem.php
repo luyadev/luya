@@ -383,7 +383,7 @@ class InjectItem extends Object implements InjectItemInterface
     public function getId()
     {
         if ($this->_id === null) {
-            $this->_id = rand(10000,1000000);
+            $this->_id = rand(10000, 1000000);
         }
         
         return $this->_id;
@@ -409,7 +409,7 @@ class InjectItem extends Object implements InjectItemInterface
     public function getNavId()
     {
         if ($this->_navId === null) {
-            $this->_navId = rand(10000,1000000);
+            $this->_navId = rand(10000, 1000000);
         }
         return $this->_navId;
     }

@@ -23,11 +23,11 @@ class BlockHelper
     /**
      * Create the options array for a zaa-select field based on an key value pairing
      * array.
-     * 
+     *
      * In order to provide a prompt message which displayes when nothing is selected us the $prompt param.
      *
      * In order to get a key value pairing directly from an ActiveRecord Model use:
-     * 
+     *
      * ```php
      * return Tag::find()->select(['name'])->indexBy('id')->column();
      * ```
@@ -40,7 +40,7 @@ class BlockHelper
     {
         $transform = [];
         if ($prompt) {
-        	$transform[] = ['value' => 0, 'label' => $prompt];
+            $transform[] = ['value' => 0, 'label' => $prompt];
         }
         foreach ($options as $key => $value) {
             $transform[] = ['value' => $key, 'label' => $value];
@@ -52,9 +52,9 @@ class BlockHelper
     /**
      * Create the Options list in the config for a zaa-checkbox-array based on an
      * key => value pairing array.
-     * 
+     *
      * In order to get a key value pairing directly from an ActiveRecord Model use:
-     * 
+     *
      * ```php
      * return Tag::find()->select(['name'])->indexBy('id')->column();
      * ```

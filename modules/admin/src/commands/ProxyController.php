@@ -154,9 +154,9 @@ class ProxyController extends Command
 
     private function clearConfig()
     {
-    	Config::remove(self::CONFIG_VAR_TOKEN);
-    	Config::remove(self::CONFIG_VAR_URL);
-    	Config::remove(self::CONFIG_VAR_IDENTIFIER);
+        Config::remove(self::CONFIG_VAR_TOKEN);
+        Config::remove(self::CONFIG_VAR_URL);
+        Config::remove(self::CONFIG_VAR_IDENTIFIER);
     }
     
     /**

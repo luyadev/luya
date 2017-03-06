@@ -4,9 +4,9 @@ namespace luya\traits;
 
 /**
  * Registry Trait.
- * 
+ *
  * Can be attached to ActiveRecords with a `name` and `value` property where name is an unique identifier.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

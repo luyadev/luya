@@ -208,7 +208,6 @@ abstract class Boot
     private function includeYii()
     {
         if (file_exists($this->_baseYiiFile)) {
-            
             defined('LUYA_YII_VENDOR') ?: define('LUYA_YII_VENDOR', dirname($this->_baseYiiFile));
             
             $require = require_once(dirname($this->_baseYiiFile) . DIRECTORY_SEPARATOR . 'BaseYii.php');

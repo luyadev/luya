@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+
 ?>
 <div class="card" ng-controller="ConfigController">
     <div style="padding:20px;">

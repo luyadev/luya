@@ -97,7 +97,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
             }
         });
         
-        Yii::$app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function(ErrorHandlerExceptionRenderEvent $event) {
+        Yii::$app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) {
             if ($event->exception instanceof HttpException) {
                 // see whether a config value exists
                 // if a redirect page id exists, redirect.
