@@ -95,6 +95,7 @@ trait ApplicationTrait
     {
         return array_merge(parent::coreComponents(), [
             'mail' => ['class' => 'luya\components\Mail'],
+            'formatter' => ['class' => 'luya\components\Formatter'],
         ]);
     }
 
