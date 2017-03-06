@@ -20,6 +20,11 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#903](https://github.com/luyadev/luya/issues/903) Added file manager details.
+- [#1216](https://github.com/luyadev/luya/issues/1216) Storage Item object integrated Arrayble Interface.
+- [#1224](https://github.com/luyadev/luya/issues/1224) Settings to define a 404 Error Page to render on HttpExceptions
+- [#1226](https://github.com/luyadev/luya/issues/1226) Delete language item in cms.
+- [#1225](https://github.com/luyadev/luya/issues/1225) Formatter component extends default formats for languages.
 - [#1222](https://github.com/luyadev/luya/issues/1222) Extend from BaseYii file in order to provide IDE Auto Complet.
 - [#1221](https://github.com/luyadev/luya/issues/1221) Added CMS Query `in` expression for where conditions.
 - [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $seoTitle (getSeoTitle()) function in order to return the alternative SEO title definition.
