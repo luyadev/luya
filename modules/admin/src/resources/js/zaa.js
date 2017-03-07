@@ -175,6 +175,8 @@ function typeCastValue(value) {
 			restrict: 'A',
 			scope: {
 				'tooltipText' : '=',
+				'tooltipOffsetTop': '=',
+                'tooltipOffsetLeft': '='
 			},
 			link:function(scope, element, attr) {
 				var html = '<div class="tooltip">' + scope.tooltipText + '</div>';
@@ -183,10 +185,20 @@ function typeCastValue(value) {
 				pop.hide();
 
                 element.on('mouseenter', function() {
-                    pop.css({
-                        top: this.getBoundingClientRect().top + pop.height(),
+                	var offset = {
+                        top: this.getBoundingClientRect().top + this.offsetHeight,
                         left: this.getBoundingClientRect().left
-                    });
+					};
+
+                	if(typeof scope.tooltipOffsetTop == 'number') {
+                		offset.top = offset.top + scope.tooltipOffsetTop;
+					}
+
+                    if(typeof scope.tooltipOffsetLeft == 'number') {
+                        offset.left = offset.left + scope.tooltipOffsetLeft;
+                    }
+
+                    pop.css(offset);
 
 					pop.show();
 				});

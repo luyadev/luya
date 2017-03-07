@@ -22,7 +22,7 @@ use luya\cms\admin\Module;
                     <div class="block__title" ng-bind-html="safe(block.full_name)" ng-click="toggleEdit()"></div>
                 </div>
                 <div class="right">
-                    <i ng-click="copyBlock()" tooltip tooltip-text="'Kopieren'" alt="Copy" title="Copy" class="material-icons block__tollbar__icon">content_copy</i>
+                    <i ng-click="copyBlock()" tooltip tooltip-text="'Kopieren'" tooltip-offset-top="3" alt="Copy" title="Copy" class="material-icons block__tollbar__icon">content_copy</i>
                     <i ng-click="toggleHidden()" alt="Visible" title="Visible" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==0">visibility</i>
                     <i ng-click="toggleHidden()" alt="Invisible" title="Invisible" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==1">visibility_off</i>
                     <i ng-show="isEditable()" alt="Edit" title="Edit" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : edit }" ng-click="toggleEdit()" title="Edit">edit</i>
