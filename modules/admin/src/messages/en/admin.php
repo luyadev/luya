@@ -230,5 +230,5 @@ return [
     'lock_admin_edit_crud_item' => 'Editing {module} "{table}" (ID: {id}).',
     'lock_cms_edit_page' => 'Editing page "{title}".',
     'layout_filemanager_col_size' => 'File size',
-    'js_filemanager_count_files_overlay' => 'Files: %count%'
+    'js_filemanager_count_files_overlay' => '%count% files',
 ];

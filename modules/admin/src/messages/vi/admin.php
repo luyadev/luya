@@ -230,4 +230,5 @@ return [
     'lock_admin_edit_crud_item' => 'Chỉnh {module} "{table}" (ID: {id}).',
     'lock_cms_edit_page' => 'Chỉnh trang "{title}".',
     'layout_filemanager_col_size' => 'File size',
+	'js_filemanager_count_files_overlay' => '%count% files',
 ];

@@ -167,18 +167,17 @@ function typeCastValue(value) {
 	 * Generate a Tool Tip Overlay, usager:
 	 * 
 	 * ```
-	 * <span tooltip tooltip-title="folder.id" tooltip-body="'Hey Ich habe hier eine Message'">Something Else</span>
+	 * <span tooltip tooltip-text="'Hey Ich habe hier eine Message'">Something Else</span>
 	 * ```
 	 */
 	zaa.directive("tooltip", function() {
 		return {
 			restrict: 'A',
 			scope: {
-				'tooltipTitle' : '=',
-				'tooltipBody' : '=',
+				'tooltipText' : '=',
 			},
 			link:function(scope, element, attr) {
-				var html = '<div class="tooltip">' + scope.tooltipBody + '</div>';
+				var html = '<div class="tooltip">' + scope.tooltipText + '</div>';
 				var pop = $(html);
                 element.after(pop);
 				pop.hide();
