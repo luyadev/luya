@@ -80,8 +80,7 @@ class Module extends \luya\base\Module
      * @inheritdoc
      */
     public $urlRules = [
-        ['pattern' => 'crawler/?query=<query:[a-zA-Z0-9\-\%]+>', 'route' => 'crawler/default/index'],
-        ['pattern' => 'crawler', 'route' => 'crawler/default/index'],
+        ['pattern' => 'crawler', 'route' => 'crawler/default'],
         ['pattern' => 'crawler/click/<slug:[a-zA-Z0-9\-]+>/<searchId:\d+>/<indexId:\d+>/<position:\d+>', 'route' => 'crawler/click/index'],
 
     ];
