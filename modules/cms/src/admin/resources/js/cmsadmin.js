@@ -564,6 +564,21 @@
 		};
 	});
 	
+	zaa.filter('menuchildfilter', function() {
+		return function(input, containerId, parentNavId) {
+			var returnValue = false;
+			angular.forEach(input, function(value, key) {
+				if (!returnValue) {
+					if (value.id == parentNavId && value.nav_container_id == containerId) {
+						returnValue = value;
+					}
+				}
+			});
+			
+			return returnValue;
+		}
+	});
+	
 	zaa.controller("CmsLiveEdit", function($scope, ServiceLiveEditMode) {
 		
 		$scope.display = 0;
@@ -582,7 +597,7 @@
 		
 	});
 	
-	zaa.controller("CmsMenuTreeController", function($scope, $state, $http, ServiceMenuData, ServiceLiveEditMode) {
+	zaa.controller("CmsMenuTreeController", function($scope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
 		
 		// live edit service
 		
@@ -624,8 +639,8 @@
 		
 	    $scope.showDrag = 0;
 	    
-	    $scope.isCurrentElement = function(navId) {
-	    	if ($state.params.navId == navId) {
+	    $scope.isCurrentElement = function(data) {
+	    	if ($state.params.navId == data.id) {
 	    		return true;
 	    	}
 	    	
@@ -821,6 +836,14 @@
 		
 		$scope.hasValues = false;
 		
+		$scope.bubbleParents = function(parentNavId, containerId) {
+	    	var item = $filter('menuchildfilter')($scope.menuData.items, containerId, parentNavId);
+	    	if (item) {
+	    		item.toggle_open = 1;
+	    		$scope.bubbleParents(item.parent_nav_id, item.nav_container_id);
+	    	}
+	    }
+		
 		$scope.createDeepPageCopy = function() {
 			$http.post('admin/api-cms-nav/deep-page-copy', {navId: $scope.id}).success(function(response) {
 				$scope.menuDataReload();
@@ -935,8 +958,7 @@
 	});
 	
 	/**
-	 * @param $scope.lang
-	 *            from ng-repeat
+	 * @param $scope.lang from ng-repeat
 	 */
 	zaa.controller("NavItemController", function($scope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
 		
@@ -1092,6 +1114,9 @@
 						$scope.typeData = response['typeData'];
 						$scope.isTranslated = true;
 						$scope.reset();
+						
+						$scope.NavController.bubbleParents($scope.NavController.navData.parent_nav_id, $scope.NavController.navData.nav_container_id);
+						
 						if ($scope.item.nav_item_type == 1) {
 							if ($scope.currentPageVersion == 0) {
 								$scope.currentPageVersion = response.item.nav_item_type_id;
@@ -1123,6 +1148,7 @@
 			if (AdminLangService.isInSelection($scope.lang.short_code)) {
 				$scope.getItem($scope.lang.id, $scope.NavController.id);
 			}
+			
 		};
 		
 		// <!-- NavItemTypePageController CODE
