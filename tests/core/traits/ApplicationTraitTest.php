@@ -23,4 +23,17 @@ class ApplicationTraitTest extends LuyaWebTestCase
     {
         $this->assertSame(3, count($this->trait->getFrontendModules()));
     }
+    
+    public function testLocalisation()
+    {
+        $app = Yii::$app;
+        // default
+        $this->assertContains('en_EN', $app->getLocale());
+    
+        $app->locales = ['de' => 'de_CH.utf'];
+    
+        $app->setLocale('de');
+        
+        $this->assertEquals('de_CH.utf', $app->getLocale());
+    }
 }

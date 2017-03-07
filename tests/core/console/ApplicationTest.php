@@ -11,13 +11,13 @@ class ApplicationTest extends LuyaConsoleTestCase
 {
     public function testInvalidCommandException()
     {
-        $this->setExpectedException('yii\console\Exception');
+        $this->expectException('yii\console\Exception');
         Yii::$app->runAction('luya/luya/luya');
     }
     
     public function testInvalidRouteCommand()
     {
-        $this->setExpectedException('yii\console\Exception');
+        $this->expectException('yii\console\Exception');
         Yii::$app->runAction('consolemodule/test-command/notavailable');
     }
         

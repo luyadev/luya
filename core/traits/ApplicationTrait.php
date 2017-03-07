@@ -60,22 +60,78 @@ trait ApplicationTrait
      * ```
      */
     public $tags = [];
+
+    /**
+     * @var array Can override the localisation value used for php internal `setlocale()` method for specific language. For example
+     * the language is de but the it should use the locale charset `de_CH.utf` (locale -a will return all locales installed on the server)
+     * you can define them inside an array where key is the language and value the locale value to be used.
+     *
+     * ```php
+     * public $locales = [
+     *    'de' => 'de_CH.utf8',
+     *    'en' => 'en_GB.utf8',
+     * ];
+     * ```
+     */
+    public $locales = [];
     
     /**
      * Add trace info to luya application trait
      */
     public function init()
     {
-        // call parent
         parent::init();
+        
         // add trace info
         Yii::trace('initialize LUYA Application', __METHOD__);
+        
+        $this->setLocale($this->language);
+    }
+    
+    /**
+     * Transform the $language into a locale sign to set php env settings.
+     * 
+     * Example transform input `de` to `de_CH` when available $locales property.
+     * 
+     * @param string $lang Find the locale POSIX for the provided $lang short code.
+     * @return string The localisation code for the provided lang short code.
+     */
+    public function ensureLocale($lang)
+    {
+        if (array_key_exists($lang, $this->locales)) {
+            return $this->locales[$lang];
+        }
+    
+        switch ($lang) {
+            case 'de':
+                return 'de_DE';
+            case 'fr':
+                return 'fr_FR';
+            case 'it':
+                return 'it_IT';
+            case 'ru':
+                return 'ru_RU';
+            default:
+                return 'en_EN';
+        }
+    }
+    
+    /**
+     * Setter method ensures the locilations POSIX from {{ensureLocale}} for the provided lang
+     * and changes the Yii::$app->langauge and sets the `setlocale()` code from ensureLocale().
+     * 
+     * @param string $lang The language short code to set the locale for.
+     */
+    public function setLocale($lang)
+    {
+        $this->language = $lang;
+        setlocale(LC_ALL, $this->ensureLocale($lang).'.utf8', $this->ensureLocale($lang));
     }
     
     /**
      * Read only property which is used in cli bootstrap process to set the @webroot alias
      *
-     * ```
+     * ```php
      * Yii::setAlias('@webroot', $app->webroot);
      * ```
      */
