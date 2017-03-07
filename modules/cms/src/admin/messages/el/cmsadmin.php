@@ -165,4 +165,11 @@ return [
 	'view_update_offline_info' => 'Change offline/online mode for this page, if a page is only its not accessable by url.',
 	'view_update_hidden_info' => 'Change the visbility of the page, page is acceessable by url but hidden in navigations.',
 	'view_update_homepage_info' => 'Set this page as Homepage.',
+	'view_update_block_tooltip_copy' => 'Add to Clipboard',
+	'view_update_block_tooltip_visible' => 'Toggle invisible',
+	'view_update_block_tooltip_invisible' => 'Toggle visible',
+	'view_update_block_tooltip_edit' => 'Edit',
+	'view_update_block_tooltip_editcfg' => 'Configure',
+	'view_update_block_tooltip_delete' => 'Delete',
+	'view_update_block_tooltip_close' => 'Close edit',
 ];

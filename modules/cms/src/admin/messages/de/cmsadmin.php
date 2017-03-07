@@ -176,4 +176,11 @@ return [
 	'view_update_offline_info' => 'Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.',
 	'view_update_hidden_info' => 'Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.',
 	'view_update_homepage_info' => 'Setzt diese Seite als Startseite.',
+	'view_update_block_tooltip_copy' => 'In Zwischenablage hinzufügen',
+	'view_update_block_tooltip_visible' => 'Sichtbar',
+	'view_update_block_tooltip_invisible' => 'Unsichtbar',
+	'view_update_block_tooltip_edit' => 'Bearbeiten',
+	'view_update_block_tooltip_editcfg' => 'Konfigurieren',
+	'view_update_block_tooltip_delete' => 'Löschen',
+	'view_update_block_tooltip_close' => 'Bearbeiten schliessen',
 ];
