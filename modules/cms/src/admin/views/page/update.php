@@ -22,7 +22,7 @@ use luya\cms\admin\Module;
                     <div class="block__title" ng-bind-html="safe(block.full_name)" ng-click="toggleEdit()"></div>
                 </div>
                 <div class="right">
-                    <i ng-click="copyBlock()" alt="Copy" title="Copy" class="material-icons block__tollbar__icon">content_copy</i>
+                    <i ng-click="copyBlock()" tooltip tooltip-text="'Kopieren'" alt="Copy" title="Copy" class="material-icons block__tollbar__icon">content_copy</i>
                     <i ng-click="toggleHidden()" alt="Visible" title="Visible" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==0">visibility</i>
                     <i ng-click="toggleHidden()" alt="Invisible" title="Invisible" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==1">visibility_off</i>
                     <i ng-show="isEditable()" alt="Edit" title="Edit" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : edit }" ng-click="toggleEdit()" title="Edit">edit</i>
@@ -183,7 +183,7 @@ use luya\cms\admin\Module;
                                     <!-- IS_HOME SWITCH -->
                                     <div class="toolbar__group  toolbar__group--homepage" ng-show="isDraft == false">
                                         <div class="switch">
-                                            <label title="Setzt diese Seite als Startseite." ng-if="!navData.is_home">
+                                            <label tooltip tooltip-text="'<?= Module::t('vew_update_homepage_info'); ?>'" ng-if="!navData.is_home">
                                                 <?php echo Module::t('view_update_is_homepage'); ?>
                                                 <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
@@ -199,7 +199,7 @@ use luya\cms\admin\Module;
                                     <!-- VISIBILITY SWITCH -->
                                     <div class="toolbar__group  toolbar__group--visibility" ng-show="isDraft == false">
                                         <div class="switch switch--with-icons">
-                                            <label title="Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.">
+                                            <label tooltip tooltip-text="'<?= Module::t('view_update_hidden_info')?>'">
                                                 <i class="switch__icon material-icons" ng-show="!navData.is_hidden">visibility</i>
                                                 <i class="switch__icon material-icons" ng-show="navData.is_hidden">visibility_off</i>
                                                 <input type="checkbox" ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1">
@@ -212,7 +212,7 @@ use luya\cms\admin\Module;
                                     <!-- OFFLINE SWITCH -->
                                     <div class="toolbar__group toolbar__group--online" ng-show="isDraft == false">
                                         <div class="switch switch--with-icons">
-                                            <label title="Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.">
+                                            <label tooltip tooltip-text="'<?= Module::t('view_update_offline_info')?>'">
                                                 <i class="switch__icon material-icons green-text" ng-show="!navData.is_offline">cloud_queue</i>
                                                 <i class="switch__icon material-icons red-text" ng-show="navData.is_offline">cloud_off</i>
                                                 <input type="checkbox" ng-model="navData.is_offline" ng-true-value="0" ng-false-value="1">

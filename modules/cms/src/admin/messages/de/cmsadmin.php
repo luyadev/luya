@@ -173,4 +173,7 @@ return [
 	'page_update_actions_modal_title' => 'Page Settings',
 	'js_page_update_layout_save_success' => 'The layout file has been updated',
 	'js_page_create_copy_success' => 'The page copy has been created.',
+	'view_update_offline_info' => 'Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.',
+	'view_update_hidden_info' => 'Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.',
+	'view_update_homepage_info' => 'Setzt diese Seite als Startseite.',
 ];
