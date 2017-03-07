@@ -28,12 +28,10 @@ class ApplicationTraitTest extends LuyaWebTestCase
     {
         $app = Yii::$app;
         // default
-        $this->assertContains('en_EN', $app->getLocale());
-    
+        $this->assertContains('en_EN', $app->ensureLocale($app->language));
         $app->locales = ['de' => 'de_CH.utf'];
-    
         $app->setLocale('de');
-        
-        $this->assertEquals('de_CH.utf', $app->getLocale());
+        $this->assertEquals('de_CH.utf', $app->ensureLocale('de'));
+        $this->assertSame('de', $app->language);
     }
 }
