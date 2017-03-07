@@ -246,10 +246,38 @@
             controller: function($scope) {
             	$scope.unset = function() {
             		$scope.model = null;
+            		$scope.data.model = null;
             	}
+            	
+            	$scope.data = {
+            		modalState: 1,
+            		model: null
+            	};
+            	
+            	$scope.$watch('model', function(n, o) {
+            		if (n) {
+            			$scope.data.model = n;
+            		}
+            	}, true);
+            	
+            	$scope.$watch('data.model', function(n, o) {
+            		if (n) {
+            			$scope.model = n;
+            		}
+            	}, true);
             },
             template: function() {
-                return '<div><i class="material-icons" style="position:absolute;float:right;" ng-click="unset()" ng-if="model">cancel</i><update-form-redirect data="model"></update-form-redirect></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper">'+
+                '<div ng-if="model"><link-object-to-string link="model"></link-object-to-string>'+
+                ' <button class="btn btn--small" type="button" ng-click="data.modalState=0">Link ändern</button> <button class="btn-flat  btn--small" type="button" ng-click="unset()"><i class="material-icons">cancel</i></button>'+
+                '</div>' +
+                '<div ng-if="!model">Kein Link ist gesetzt. <button class="btn" type="button" ng-click="data.modalState=0">Link setzten</button></div>' + 
+                '<modal is-modal-hidden="data.modalState">'+
+                '<update-form-redirect data="data.model"></update-form-redirect>'+
+                '<button ng-click="data.modalState=1" class="btn" type="button">Link Setzen</button>'+
+                '<button ng-click="unset(); data.modalState=1" type="button" class="btn-flat"><i class="material-icons">cancel</i></button>'+
+                '</modal>'+
+                '</div></div>';
             }
         }
     });

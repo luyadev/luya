@@ -71,13 +71,18 @@
 				navId : '='
 			},
 			controller : function($scope, $http, $state) {
-				$http.get('admin/api-cms-navitem/get-nav-item-path', { params : { navId : $scope.navId }}).success(function(response) {
-					$scope.path = response;
+				
+				$scope.$watch('navId', function(n) {
+					if (n) {
+						$http.get('admin/api-cms-navitem/get-nav-item-path', { params : { navId : $scope.navId }}).success(function(response) {
+							$scope.path = response;
+						});
+						$http.get('admin/api-cms-navitem/get-nav-container-name', { params : { navId : $scope.navId }}).success(function(response) {
+							$scope.container = response;
+						});
+					}
 				});
-				$http.get('admin/api-cms-navitem/get-nav-container-name', { params : { navId : $scope.navId }}).success(function(response) {
-					$scope.container = response;
-				});
-
+				
 				$scope.goTo = function(navId) {
 					$state.go('custom.cmsedit', { navId : navId });
 				}

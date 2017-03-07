@@ -163,6 +163,22 @@ function typeCastValue(value) {
 		};
 	});
 	
+	zaa.directive("linkObjectToString", function() {
+		return {
+			restrict: 'E',
+			relace:true,
+			scope: {
+				'link' : '='
+			},
+			template: function() {
+				return '<span>'+
+				'<span ng-if="link.type==2">Extern: {{link.value}}</span>' +
+				'<span ng-if="link.type==1"><show-internal-redirection nav-id="link.value" /></span>' +
+				'</span>';
+			}
+		}
+	});
+	
 	/**
 	 * Generate a Tool Tip Overlay, usager:
 	 * 
@@ -487,6 +503,8 @@ function typeCastValue(value) {
  	         }
  	     };
 	 });
+	
+	
 
 	zaa.directive("focusMe", function($timeout) {
 		return {

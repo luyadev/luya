@@ -46,7 +46,7 @@ final class LinkButtonBlock extends PhpBlock
     {
         return [
             'linkData' => new LinkInjector([
-                'varLabel' => Module::t('block_link_button_btnlabel_label'),
+                'varLabel' => Module::t('block_link_button_btnhref_label'),
             ]),
         ];
     }
