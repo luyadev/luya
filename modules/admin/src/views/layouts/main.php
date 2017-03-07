@@ -46,14 +46,14 @@ $this->beginPage()
 
 
 <script type="text/ng-template" id="modal">
-    <div class="modal__wrapper" ng-show="!isModalHidden">
+    <div class="modal__wrapper" ng-show="!isModalHidden" zaa-esc="isModalHidden=1" >
         <div class="modal">
-            <button type="button" class="btn waves-effect waves-light modal__close btn-floating red" ng-click="isModalHidden = true">
+            <button type="button" class="btn waves-effect waves-light modal__close btn-floating red" ng-click="isModalHidden=1">
                 <i class="material-icons">close</i>
             </button>
             <div class="modal-content" ng-transclude></div>
         </div>
-        <div class="modal__background" ng-click="isModalHidden = true" style="cursor:pointer;"></div>
+        <div class="modal__background" ng-click="isModalHidden=1" style="cursor:pointer;"></div>
     </div>
 </script>
 
@@ -113,9 +113,8 @@ $this->beginPage()
         </div>
         <span class="fileupload__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
         <span class="fileupload__path" ng-bind="fileinfo.name"></span>
-
-        <div ng-if="!modal">
-        <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
+        <div ng-if="!modal.state">
+        <modal is-modal-hidden="modal.state"><storage-file-manager selection="true" /></modal>
         </div>
     </div>
 </script>
@@ -289,6 +288,7 @@ $this->beginPage()
                         <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
                             <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
                         </th>
+                        <th ng-if="selectedFileFromParent" style="width:15px;"></th>
                         <th></th>
                         <th><?= Admin::t('layout_filemanager_col_name'); ?><i ng-click="changeSortField('name')" ng-class="{'active-orderby' : sortField == 'name' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-name')" ng-class="{'active-orderby' : sortField == '-name' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                         <th><?= Admin::t('layout_filemanager_col_type'); ?><i ng-click="changeSortField('extension')" ng-class="{'active-orderby' : sortField == 'extension' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-extension')" ng-class="{'active-orderby' : sortField == '-extension' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
@@ -299,10 +299,19 @@ $this->beginPage()
                 <tbody>
 
                 <!-- FILES -->
-                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" alt="fileId={{file.id}}" title="fileId={{file.id}}" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                <tr 
+                    ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
+                    alt="fileId={{file.id}}" 
+                    title="fileId={{file.id}}" 
+                    class="filemanager__file" 
+                    ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager__file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
+
                     <td ng-click="toggleSelection(file)" class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
                         <input type="checkbox" ng-checked="inSelection(file)" id="{{file.id}}" />
                         <label for="checked-status-managed-by-angular-{{file.id}}"></label>
+                    </td>
+                    <td ng-if="selectedFileFromParent">
+                        <i class="material-icons" ng-if="selectedFileFromParent.id == file.id">check_box</i>
                     </td>
                     <td ng-click="toggleSelection(file)" class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.isImage }">
                         <span ng-if="file.isImage"><img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail.source}}" /></span>
@@ -329,19 +338,19 @@ $this->beginPage()
                 <table class="filemanager__details-table filemanager__table">
                     <tbody>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_name'); ?></b></td><td>{{ fileDetail.name }}</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_name'); ?></b></td><td>{{ fileDetail.name }}</td>
                         </tr>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_date'); ?></b></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_date'); ?></b></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
                         </tr>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_filetype'); ?></b></td><td>{{ fileDetail.extension }}</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_filetype'); ?></b></td><td>{{ fileDetail.extension }}</td>
                         </tr>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_size'); ?></b></td><td>{{ fileDetail.sizeReadable }}</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_size'); ?></b></td><td>{{ fileDetail.sizeReadable }}</td>
                         </tr>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_id'); ?></b></td><td> {{ fileDetail.id }}</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_id'); ?></b></td><td>{{ fileDetail.id }}</td>
                         </tr>
                     </tbody>
                 </table>

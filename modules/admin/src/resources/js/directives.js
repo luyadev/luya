@@ -1273,7 +1273,7 @@
 
                 // controller logic
 
-                scope.modal = true;
+                scope.modal = {state: 1};
                 scope.fileinfo = null;
 
                 scope.select = function(fileId) {
@@ -1287,7 +1287,7 @@
                 }
 
                 scope.toggleModal = function() {
-                    scope.modal = !scope.modal;
+                    scope.modal.state = !scope.modal.state;
                 }
 
                 scope.$watch(function() { return scope.ngModel }, function(n, o) {
@@ -1825,10 +1825,12 @@
                 	$scope.sortField = name;
                 }
 
-                $scope.changeCurrentFolderId = function(folderId) {
+                $scope.changeCurrentFolderId = function(folderId, noState) {
                     $scope.currentFolderId = folderId;
-                    ServiceFoldersDirecotryId.folderId = folderId;
-                    $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId}, {ignoreLoadingBar: true});
+                    if (noState !== true) {
+                    	ServiceFoldersDirecotryId.folderId = folderId;
+                    	$http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId}, {ignoreLoadingBar: true});
+                    }
                 };
 
                 $scope.toggleFolderItem = function(data) {
@@ -1956,6 +1958,17 @@
                     	AdminToastService.success('Captions has been updated', 2000);
                     });
                 }
+               
+                $scope.selectedFileFromParent = null;
+                
+                $scope.init = function() {
+                	if ($scope.$parent.fileinfo) {
+                		$scope.selectedFileFromParent = $scope.$parent.fileinfo;
+                		$scope.changeCurrentFolderId($scope.selectedFileFromParent.folderId, true);
+                	}
+                }
+                
+                $scope.init();
 
             },
             templateUrl : 'storageFileManager'
