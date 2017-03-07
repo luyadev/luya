@@ -40,6 +40,7 @@ class SearchController extends RestController
                 
                 if (count($data) > 0) {
                     $search[] = [
+                        'hideFields' => $model->genericSearchHiddenFields(),
                         'type' => 'custom',
                         'menuItem' => $node,
                         'data' => $data,
@@ -56,6 +57,7 @@ class SearchController extends RestController
                 $stateProvider = $ctrl[0]->runAction('search-provider');
                 if (count($data) > 0) {
                     $search[] = [
+                        'hideFields' => $model->genericSearchHiddenFields(),
                         'type' => 'api',
                         'menuItem' => $api,
                         'data' => $data,

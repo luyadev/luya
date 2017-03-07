@@ -38,9 +38,19 @@ interface GenericSearchInterface
      * If genericSearchStateProvider() returns **false** the ability to click on the detail icon is disabled.
      *
      * @return array|boolean Returns the state config or when not clickable returns false
-     * @since 1.0.0-beta4
      */
     public function genericSearchStateProvider();
     
+    /**
+     * An array with fields which will be hidden in the search output, but are available for the State Provider functions.
+     * 
+     * @return array An array with fields which should be hide from the results, where value is the field name:
+     * 
+     * ```php
+     * return [
+     *     'hide', 'me', 'too',
+     * ];
+     * ```
+     */
     public function genericSearchHiddenFields();
 }

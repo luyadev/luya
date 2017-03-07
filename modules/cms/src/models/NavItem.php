@@ -276,7 +276,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      */
     public function genericSearchFields()
     {
-        return ['title', 'alias', 'nav_id'];
+        return ['title', 'container'];
     }
     
     /**
@@ -284,7 +284,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      */
     public function genericSearchHiddenFields()
     {
-        return [];
+        return ['nav_id'];
     }
 
     /**
@@ -292,13 +292,17 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      */
     public function genericSearch($searchQuery)
     {
-        $query = self::find();
-        $fields = $this->genericSearchFields();
-        foreach ($fields as $field) {
-            $query->orWhere(['like', $field, $searchQuery]);
+        $data = [];
+        
+        foreach (self::find()->select(['nav_id', 'title'])->orWhere(['like', 'title', $searchQuery])->with('nav')->distinct()->each() as $item) {
+            $data[] = [
+                'title' => $item->title,
+                'nav_id' => $item->nav_id,
+                'container' => $item->nav->navContainer->name,
+            ];
         }
-
-        return $query->select($fields)->asArray()->all();
+        
+        return $data;
     }
     
     /**

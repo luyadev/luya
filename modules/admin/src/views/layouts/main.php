@@ -538,12 +538,12 @@ $this->beginPage()
 				<table class="search-box__table">
                     <thead>
                         <tr ng-repeat="row in item.data | limitTo:1">
-                            <th ng-repeat="(k,v) in row">{{k}}</th>
+                            <th ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{k}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="row in item.data" ng-click="searchDetailClick(item, row)">
-                            <td class="search-box__row" ng-repeat="(k,v) in row">{{v}}</td>
+                            <td class="search-box__row" ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{v}}</td>
                         </tr>
                     </tbody>
                 </table>

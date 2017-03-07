@@ -32,6 +32,7 @@ use luya\cms\admin\Module;
  * @property integer $is_home
  * @property integer $is_draft
  * @property string $layout_file
+ * @property \luya\cms\models\NavContainer $navContainer Returns the nav container model
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -83,11 +84,20 @@ class Nav extends ActiveRecord
     /**
      * Return all nav items related to this object.
      *
-     * @return \yii\db\ActiveQuery
+     * @return \luya\cms\models\NavItem
      */
     public function getNavItems()
     {
         return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
+    }
+    
+    /**
+     * 
+     * @return \luya\cms\models\NavContainer
+     */
+    public function getNavContainer()
+    {
+        return $this->hasOne(NavContainer::class, ['id' => 'nav_container_id']);
     }
 
     /**
