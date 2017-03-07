@@ -177,23 +177,31 @@ function typeCastValue(value) {
 				'tooltipTitle' : '=',
 				'tooltipBody' : '=',
 			},
-			link:function(scope, elmn, attr) {
-				var html = '<div style="position:fixed;"><span>'+scope.tooltipTitle+'</span><div>'+scope.tooltipBody+'</div></div>';
+			link:function(scope, element, attr) {
+				var html = '<div class="tooltip">' + scope.tooltipBody + '</div>';
 				var pop = $(html);
-				elmn.append(pop);
+                element.after(pop);
 				pop.hide();
-				elmn.on('mouseenter', function() {
+
+                element.on('mouseenter', function() {
+                    pop.css({
+                        top: this.getBoundingClientRect().top + pop.height(),
+                        left: this.getBoundingClientRect().left
+                    });
+
 					pop.show();
 				});
-				elmn.on('mouseleave', function() {
+
+                element.on('mouseleave', function() {
 					pop.hide();
 				});
+
 			}
 		}
 	})
 
 	/**
-	 * Converty a string to number value, usefull in selects.
+	 * Convert a string to number value, usefull in selects.
 	 *
 	 * ```
 	 * <select name="filterId" ng-model="filterId" convert-to-number>
