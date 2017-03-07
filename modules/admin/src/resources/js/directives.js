@@ -1649,6 +1649,9 @@
                 
                 // file replace logic
 
+                $scope.folderCountMessage = function(folder) {
+                	return i18nParam('js_filemanager_count_files_overlay', {count: folder.filesCount});
+                }
                 
                 $scope.replaceFile = function(file, errorFiles) {
                 	$scope.replaceFiled = file;

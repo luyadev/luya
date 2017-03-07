@@ -162,6 +162,35 @@ function typeCastValue(value) {
 			});
 		};
 	});
+	
+	/**
+	 * Generate a Tool Tip Overlay, usager:
+	 * 
+	 * ```
+	 * <span tooltip tooltip-title="folder.id" tooltip-body="'Hey Ich habe hier eine Message'">Something Else</span>
+	 * ```
+	 */
+	zaa.directive("tooltip", function() {
+		return {
+			restrict: 'A',
+			scope: {
+				'tooltipTitle' : '=',
+				'tooltipBody' : '=',
+			},
+			link:function(scope, elmn, attr) {
+				var html = '<div style="position:fixed;"><span>'+scope.tooltipTitle+'</span><div>'+scope.tooltipBody+'</div></div>';
+				var pop = $(html);
+				elmn.append(pop);
+				pop.hide();
+				elmn.on('mouseenter', function() {
+					pop.show();
+				});
+				elmn.on('mouseleave', function() {
+					pop.hide();
+				});
+			}
+		}
+	})
 
 	/**
 	 * Converty a string to number value, usefull in selects.

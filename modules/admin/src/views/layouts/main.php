@@ -154,14 +154,12 @@ $this->beginPage()
 <script type="text/ng-template" id="reverseFolders">
 
     <i class="material-icons treeview__toggler filemanager__folder-toggleicon" ng-click="toggleFolderItem(folder)" ng-hide="folder.subfolder==0" ng-class="{'treeview__toggler--subnav-closed': folder.toggle_open!=1}">arrow_drop_down</i>
-    <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)">
+    <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)" tooltip tooltip-title="folder.name" tooltip-body="folderCountMessage(folder)">
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default"></i>
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active"></i>
-
                         <span class="filemanager__folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id">
                             {{folder.name }}                                            
                         </span>
-
                         <i class="material-icons filemanager__edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
                         <i class="material-icons filemanager__delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
                         
