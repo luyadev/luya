@@ -104,15 +104,15 @@ $this->beginPage()
 </script>
 
 <script type="text/ng-template" id="storageFileUpload">
-    <div class="fileupload">
-        <div class="fileupload__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
+    <div class="link-selector">
+        <div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
             <i class="material-icons left">attach_file</i>
                     <span>
                         <?php echo Admin::t('layout_select_file'); ?>
                     </span>
         </div>
-        <span class="fileupload__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
-        <span class="fileupload__path" ng-bind="fileinfo.name"></span>
+        <span class="link-selector__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
+        <span class="link-selector__path" ng-bind="fileinfo.name"></span>
         <div ng-if="!modal.state">
         <modal is-modal-hidden="modal.state"><storage-file-manager selection="true" /></modal>
         </div>

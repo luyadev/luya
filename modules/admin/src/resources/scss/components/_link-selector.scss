@@ -1,22 +1,22 @@
-.fileupload {
+.link-selector {
 	display: block;
 	position: relative;
 }
 
-.fileupload__btn,
-.fileupload__path {
+.link-selector__btn,
+.link-selector__path {
 	display: inline-block;
 	position: relative;
 }
 
-.fileupload__btn {
+.link-selector__btn {
 	display: inline-block;
 	width: 165px;
 	box-sizing: content-box;
 	vertical-align: middle;
 }
 
-.fileupload__reset {
+.link-selector__reset {
 	display: inline-block;
 	vertical-align: middle;
 	width: 24px;
@@ -29,13 +29,13 @@
 	}
 }
 
-.fileupload__path {
+.link-selector__path {
 	display: inline-block;
 	vertical-align: middle;
 
 	// Overwrite default materializecss styles
 
-	width: calc(100% - 265px - 24px) !important; // 100% - (width + padding of fileupload__btn)
+	width: calc(100% - 265px - 24px) !important; // 100% - (width + padding of link-selector__btn)
 	height: 36px !important;
 	margin-left: 15px !important;
 	color: color("grey", "lighten-1") !important;

@@ -267,16 +267,31 @@
             	}, true);
             },
             template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper">'+
-                '<div ng-if="model"><link-object-to-string link="model"></link-object-to-string>'+
-                ' <button class="btn btn--small" type="button" ng-click="data.modalState=0">Link ändern</button> <button class="btn-flat  btn--small" type="button" ng-click="unset()"><i class="material-icons">cancel</i></button>'+
-                '</div>' +
-                '<div ng-if="!model">Kein Link ist gesetzt. <button class="btn" type="button" ng-click="data.modalState=0">Link setzten</button></div>' + 
-                '<modal is-modal-hidden="data.modalState">'+
-                '<update-form-redirect data="data.model"></update-form-redirect>'+
-                '<button ng-click="data.modalState=1" class="btn" type="button">Link Setzen</button>'+
-                '<button ng-click="unset(); data.modalState=1" type="button" class="btn-flat"><i class="material-icons">cancel</i></button>'+
-                '</modal>'+
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper">' +
+                    '<div ng-if="model">' +
+                        '<div class="link-selector">' +
+                            '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
+                                '<i class="material-icons left">insert_link</i>' +
+                                '<span>Link ändern</span>' +
+                            '</div>' +
+                            '<span class="link-selector__reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' +
+                            '<span class="link-selector__path"><link-object-to-string link="model"></link-object-to-string></span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div ng-if="!model">' +
+                        '<div class="link-selector">' +
+                            '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
+                                '<i class="material-icons left">insert_link</i>' +
+                                '<span>Link setzen</span>' +
+                            '</div>' +
+                            '<span class="link-selector__path">Kein Link gesetzt</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<modal is-modal-hidden="data.modalState">'+
+                        '<update-form-redirect data="data.model"></update-form-redirect>'+
+                        '<button ng-click="unset(); data.modalState=1" type="button" class="btn red"><i class="material-icons">cancel</i></button> '+
+                        '<button ng-click="data.modalState=1" class="btn" type="button"><i class="material-icons">check</i> Link setzen</button>'+
+                    '</modal>'+
                 '</div></div>';
             }
         }

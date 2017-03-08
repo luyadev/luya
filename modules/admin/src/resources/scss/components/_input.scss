@@ -148,7 +148,7 @@ input[type='checkbox']:checked + .input__label:before {
 
     vertical-align: middle;
     width: 100%;
-    z-index: 10;
+    z-index: 5;
 
     &:focus {
         background-color: $input--border-color;
