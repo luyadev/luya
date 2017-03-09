@@ -105,9 +105,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public $urlRules = [
         ['class' => 'luya\admin\components\UrlRule'],
-        ['pattern' => 'file/<id:\d+>/<hash:\w+>/<fileName:(.*?)+>', 'route' => 'admin/file/download', 'position' => UrlRule::POSITION_BEFORE_LUYA],
-        ['pattern' => 'admin', 'route' => 'admin/default/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
-        ['pattern' => 'admin/login', 'route' => 'admin/login/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
+        ['pattern' => 'file/<id:\d+>/<hash:\w+>/<fileName:(.*?)+>', 'route' => 'admin/file/download'],
+        ['pattern' => 'admin', 'route' => 'admin/default/index'],
+        ['pattern' => 'admin/login', 'route' => 'admin/login/index'],
     ];
 
     /**

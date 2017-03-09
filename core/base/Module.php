@@ -24,7 +24,7 @@ abstract class Module extends \yii\base\Module
 {
     /**
      * @var array Contains the apis for each module to provided them in the admin module. They represents
-     *            the name of the api and the value represents the class. Example value:
+     * the name of the api and the value represents the class. Example value:
      *
      * ```php
      * [
@@ -50,14 +50,28 @@ abstract class Module extends \yii\base\Module
     public $tags = [];
     
     /**
-     * @var array Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route
-     *            must be array containing class name or array with pattern, route informations.
+     * @var array Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}}
+     * object configuration as array like this:
+     * 
+     * ```php
+     * 'urlRules' => [
+     *     ['pattern' => 'mymodule/detail/<id:\d+>', 'route' => 'mymodule/detail/user'],
+     * ],
+     * ```
+     * 
+     * Or you can provide a key value pairing where key is the pattern and the value is the route:
+     * 
+     * ```php
+     * 'urlRules' => [
+     *     'mymodule/detail/<id:\d+>' => 'mymodule/detail/user',
+     * ],
+     * ```
      */
     public $urlRules = [];
 
     /**
      * @var array An array containing all components which should be registered for the current module. If
-     *            the component does not exists an Exception will be thrown.
+     * the component does not exists an Exception will be thrown.
      */
     public $requiredComponents = [];
 

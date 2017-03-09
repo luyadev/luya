@@ -37,8 +37,12 @@ class Bootstrap extends BaseBootstrap
         }
         
         foreach ($this->getModules() as $id => $module) {
-            foreach ($module->urlRules as $rule) {
-                $this->_urlRules[(isset($rule['position'])) ? $rule['position'] : UrlRule::POSITION_AFTER_LUYA][] = $rule;
+            foreach ($module->urlRules as $key => $rule) {
+                if (is_string($key)) {
+                    $this->_urlRules[$key] = $rule;
+                } else {
+                    $this->_urlRules[] = $rule;
+                }
             }
             
             foreach ($module->apis as $alias => $class) {
@@ -75,10 +79,6 @@ class Bootstrap extends BaseBootstrap
             }
         }
         
-        ksort($this->_urlRules);
-        
-        foreach ($this->_urlRules as $position => $rules) {
-            $app->getUrlManager()->addRules($rules);
-        }
+        $app->getUrlManager()->addRules($this->_urlRules);
     }
 }

@@ -53,7 +53,7 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         Yii::$app->adminuser->logout();
-        return $this->redirect(['/admin/login/index']);
+        return $this->redirect(['/admin/login/index', 'logout' => true]);
     }
 
     public function colorizeValue($value, $displayValue = false)
