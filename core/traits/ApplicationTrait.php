@@ -101,19 +101,25 @@ trait ApplicationTrait
         if (array_key_exists($lang, $this->locales)) {
             return $this->locales[$lang];
         }
-    
-        switch ($lang) {
-            case 'de':
-                return 'de_DE';
-            case 'fr':
-                return 'fr_FR';
-            case 'it':
-                return 'it_IT';
-            case 'ru':
-                return 'ru_RU';
-            default:
-                return 'en_EN';
+        
+        if (strlen($lang) == 2) {
+            switch ($lang) {
+                case 'de':
+                    return 'de_DE';
+                case 'fr':
+                    return 'fr_FR';
+                case 'it':
+                    return 'it_IT';
+                case 'ru':
+                    return 'ru_RU';
+                case 'en':
+                    return 'en_US';
+                default:
+                    return strtolower($lang) . '_' . strtoupper($lang);
+            }
         }
+        
+        return $lang;
     }
     
     /**
@@ -124,7 +130,7 @@ trait ApplicationTrait
      */
     public function setLocale($lang)
     {
-        $locale = $this->ensureLocale($lang);
+        $locale = str_replace('.utf8', '', $this->ensureLocale($lang));
         $this->language = $locale;
         setlocale(LC_ALL, $locale.'.utf8', $locale);
     }
