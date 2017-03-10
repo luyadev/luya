@@ -68,8 +68,8 @@ trait ApplicationTrait
      *
      * ```php
      * public $locales = [
-     *    'de' => 'de_CH.utf8',
-     *    'en' => 'en_GB.utf8',
+     *    'de' => 'de_CH',
+     *    'en' => 'en_GB',
      * ];
      * ```
      */
@@ -124,8 +124,9 @@ trait ApplicationTrait
      */
     public function setLocale($lang)
     {
-        $this->language = $lang;
-        setlocale(LC_ALL, $this->ensureLocale($lang).'.utf8', $this->ensureLocale($lang));
+        $locale = $this->ensureLocale($lang);
+        $this->language = $locale;
+        setlocale(LC_ALL, $locale.'.utf8', $locale);
     }
     
     /**
