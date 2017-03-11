@@ -267,7 +267,7 @@
 		}
 		
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {
-			$http.post('admin/ngrest/render', $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
+			$http.post($scope.config.activeWindowRenderUrl, $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			})
 			.success(function(data) {

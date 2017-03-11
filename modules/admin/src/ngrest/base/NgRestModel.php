@@ -493,13 +493,38 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
-            $config = Yii::createObject(['class' => Config::class, 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
+            //$config = Yii::createObject(['class' => Config::class, 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
+            
+            $config = new Config();
+            $config->apiEndpoint = static::ngRestApiEndpoint();
+            $config->primaryKey = $this->getNgRestPrimaryKey();
+            
             $configBuilder = new ConfigBuilder(static::class);
             $this->ngRestConfig($configBuilder);
             $config->setConfig($configBuilder->getConfig());
             foreach ($this->i18n as $fieldName) {
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
+            
+           
+
+            // COPY FROM NgRestController to Builder of the config
+            // ensure what must be removed and added from outside
+            $config->filters = $this->ngRestFilters();
+            $config->defaultOrder = $this->ngRestListOrder();
+            
+            
+            $config->attributeGroups = $this->ngRestAttributeGroups();
+            $config->groupByField = $this->ngRestGroupByField();
+            
+            $rel = [];
+            foreach ($this->ngRestRelations() as $key => $item) {
+            	$rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
+            }
+            
+            
+            $config->relations = $rel;
+            $config->tableName = $this->tableName();
             
             $this->_config = $config;
         }

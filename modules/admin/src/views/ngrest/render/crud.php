@@ -18,6 +18,7 @@ use luya\admin\Module;
         $scope.config.update = <?php echo $this->context->getFieldsJson('update'); ?>;
         $scope.config.ngrestConfigHash = '<?php echo $config->hash; ?>';
         $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
+        $scope.config.activeWindowRenderUrl = '<?= $activeWindowRenderUrl; ?>';
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
         $scope.config.inline = <?= (int) $config->inline; ?>;
         $scope.config.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';

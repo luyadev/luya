@@ -7,6 +7,7 @@ use Exception;
 use yii\base\InvalidConfigException;
 use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\render\RenderCrud;
+use luya\helpers\FileHelper;
 
 /**
  * Base Controller for all NgRest Controllers.
@@ -60,18 +61,6 @@ class Controller extends \luya\admin\base\Controller
         $apiEndpoint = $this->model->ngRestApiEndpoint();
 
         $config = $this->model->getNgRestConfig();
-        
-        /*
-        // partial concept integration for
-        $configClass = $this->module->getLinkedNgRestConfig($apiEndpoint);
-
-        if ($configClass) {
-            // $class = Yii::createObject($configClass, ['apiEndpoint' => '', 'primaryKey' => '..']);
-            $config = false;
-        } else {
-            $config = $this->model->getNgRestConfig();
-        }
-        */
 
         if (!$config) {
             throw new Exception("Provided NgRest config for controller '' is invalid.");
@@ -81,34 +70,39 @@ class Controller extends \luya\admin\base\Controller
             $config->relationCall = ['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass];
         }
 
-        // apply config informations
-        $config->filters = $this->model->ngRestFilters();
-        $config->defaultOrder = $this->model->ngRestListOrder();
-        
         $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
         
         if ($userSortSettings && is_array($userSortSettings)) {
-            $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
+        	$config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
         }
         
-        $config->attributeGroups = $this->model->ngRestAttributeGroups();
-        $config->groupByField = $this->model->ngRestGroupByField();
-        
-        $rel = [];
-        foreach ($this->model->ngRestRelations() as $key => $item) {
-            $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
-        }
-
         $config->inline = (int) $inline;
-        $config->relations = $rel;
-        $config->tableName = $this->model->tableName();
         
         $ngrest = new NgRest($config);
-
         $crud = new RenderCrud();
         if ($relation) {
             $crud->viewFile = '@admin/views/ngrest/render/crud_relation.php';
         }
         return $ngrest->render($crud);
+    }
+    
+
+
+    public function actionExportDownload($key)
+    {
+    	$sessionkey = Yii::$app->session->get('tempNgRestKey');
+    	$fileName = Yii::$app->session->get('tempNgRestFileName');
+    
+    	if ($sessionkey !== base64_decode($key)) {
+    		throw new Exception('Invalid Export download key.');
+    	}
+    
+    	$content = FileHelper::getFileContent('@runtime/'.$sessionkey.'.tmp');
+    
+    	Yii::$app->session->remove('tempNgRestKey');
+    	Yii::$app->session->remove('tempNgRestFileName');
+    	@unlink(Yii::getAlias('@runtime/'.$sessionkey.'.tmp'));
+    
+    	return Yii::$app->response->sendContentAsFile($content, $fileName . '-export-'.date("Y-m-d-H-i").'.csv', ['mimeType' => 'application/csv']);
     }
 }
