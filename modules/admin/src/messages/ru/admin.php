@@ -233,4 +233,6 @@ return [
     'lock_cms_edit_page' => 'Editing page "{title}".',
     'layout_filemanager_col_size' => 'File size',
 	'js_filemanager_count_files_overlay' => '%count% files',
+	'js_link_change_value' => 'Change Link',
+	'js_link_set_value' => 'Set Link',
 ];

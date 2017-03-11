@@ -20,6 +20,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1211](https://github.com/luyadev/luya/issues/1211) Add new link directive with ability to deselect a link.
 - [#903](https://github.com/luyadev/luya/issues/903) Added file manager details.
 - [#1216](https://github.com/luyadev/luya/issues/1216) Storage Item object integrated Arrayble Interface.
 - [#1224](https://github.com/luyadev/luya/issues/1224) Settings to define a 404 Error Page to render on HttpExceptions
