@@ -4,7 +4,7 @@ Blocks are elements used in the CMS Module to display and configure data. Blocks
 
 ## Create a new Block
 
-> use `./vendor/bin/luya block/create` console command to generate a Block.
+> use `./vendor/bin/luya cms/block/create` console command to generate a Block.
 
 You can add Blocks to your application or to a module. In either case, the folder where the blocks are stored must be named as **blocks**. Additionaly blocks should have the suffix `Block`. 
 
