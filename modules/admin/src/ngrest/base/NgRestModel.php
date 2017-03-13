@@ -79,6 +79,17 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         $scenarios[RestActiveController::SCENARIO_RESTUPDATE] = $scenarios[self::SCENARIO_DEFAULT];
         return $scenarios;
     }
+    
+    /**
+     * Whether a field is i18n or not.
+     * 
+     * @param string $fieldName The name of the field which is 
+     * @return boolean
+     */
+    public function isI18n($fieldName)
+    {
+        return in_array($fieldName, $this->i18n) ? true : false;
+    }
 
     /**
      * Define an array with filters you can select from the crud list.

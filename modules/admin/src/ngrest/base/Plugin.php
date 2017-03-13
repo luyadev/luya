@@ -122,9 +122,10 @@ abstract class Plugin extends Component
      *
      * The above service data can be used when creating the tags with `$this->getServiceName('titles')`.
      *
+     * @param \yii\base\Event $event The event sender which triggers the event.
      * @return boolean|array
      */
-    public function serviceData()
+    public function serviceData($event)
     {
         return false;
     }
@@ -457,7 +458,7 @@ abstract class Plugin extends Component
     public function onCollectServiceData($event)
     {
         if ($this->onBeforeCollectServiceData($event)) {
-            $data = $this->serviceData();
+            $data = $this->serviceData($event);
             if (!empty($data)) {
                 $event->sender->addNgRestServiceData($this->name, $data);
             }

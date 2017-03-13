@@ -19,7 +19,9 @@ use luya\helpers\StringHelper;
  *     ];
  * }
  * ```
- *
+ * 
+ * The plugin stores the value of the selected checkbox items as json into the database.
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 class CheckboxList extends Plugin
@@ -66,7 +68,7 @@ class CheckboxList extends Plugin
     /**
      * @inheritdoc
      */
-    public function serviceData()
+    public function serviceData($event)
     {
         return ['checkboxitems' => $this->getItems()];
     }

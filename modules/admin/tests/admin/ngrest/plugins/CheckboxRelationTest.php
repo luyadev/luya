@@ -36,7 +36,7 @@ class CheckboxRelationTest extends AdminTestCase
         $this->assertSame([
             0 => ['value' => 1, 'label' => 'John Doe (john@luya.io)'],
             1 => ['value' => 2, 'label' => 'Jane Doe (jane@luya.io)']
-        ], $plugin->serviceData()['relationdata']['items']);
+        ], $plugin->serviceData($event)['relationdata']['items']);
     }
     
     public function testGetServiceDataNoTemplateConfiguration()
@@ -64,7 +64,7 @@ class CheckboxRelationTest extends AdminTestCase
         $this->assertSame([
             0 => ['value' => 1, 'label' => 'John, Doe'],
             1 => ['value' => 2, 'label' => 'Jane, Doe']
-        ], $plugin->serviceData()['relationdata']['items']);
+        ], $plugin->serviceData($event)['relationdata']['items']);
     }
     
     public function testGetServiceDataCallablaeConfiguration()
@@ -87,13 +87,13 @@ class CheckboxRelationTest extends AdminTestCase
             'refModelPkId' => 'group_id',
             'refJoinPkId' => 'user_id',
             'labelFields' => function ($model) {
-                return $model->firstname . "|". $model->lastname;
+                return $model['firstname'] . "|". $model['lastname'];
             }
         ]);
     
         $this->assertSame([
             0 => ['value' => 1, 'label' => 'John|Doe'],
             1 => ['value' => 2, 'label' => 'Jane|Doe']
-        ], $plugin->serviceData()['relationdata']['items']);
+        ], $plugin->serviceData($event)['relationdata']['items']);
     }
 }
