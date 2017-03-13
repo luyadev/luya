@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\cms\admin\commands;
+namespace luya\cms\frontend\commands;
 
 use luya\console\Command;
 use luya\admin\models\Config;

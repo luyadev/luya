@@ -1,12 +1,12 @@
 <?php
 
-namespace luyatests\core\console\commands;
+namespace cmstests\src\frontend\commands;
 
 use Yii;
-use luyatests\LuyaConsoleTestCase;
-use luya\console\commands\BlockController;
+use cmstests\CmsFrontendTestCase;
+use luya\cms\frontend\commands\BlockController;
 
-class BlockControllerTest extends LuyaConsoleTestCase
+class BlockControllerTest extends CmsFrontendTestCase
 {
     private function getHtml($content)
     {
@@ -149,7 +149,7 @@ EOT;
         $tpl = <<<'EOT'
 <?php
 
-namespace luyatests\data\modules\consolemodule\blocks;
+namespace luya\cms\frontend\blocks;
 
 use luya\cms\base\PhpBlock;
 use luya\cms\frontend\blockgroups\ProjectGroup;
@@ -165,7 +165,7 @@ class MyTestBlock extends PhpBlock
     /**
      * @var string The module where this block belongs to in order to find the view files.
      */
-    public $module = 'consolemodule';
+    public $module = 'cms';
 
     /**
      * @var boolean Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
@@ -253,7 +253,7 @@ class MyTestBlock extends PhpBlock
 EOT;
         $ctrl = new BlockController('id', Yii::$app);
         $ctrl->blockName = 'My Test';
-        $ctrl->moduleName = 'consolemodule';
+        $ctrl->moduleName = 'cms';
         $ctrl->type = BlockController::TYPE_MODULE;
         $ctrl->config = [
             'vars' => [

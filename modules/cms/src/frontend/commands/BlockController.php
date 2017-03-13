@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\console\commands;
+namespace luya\cms\frontend\commands;
 
 use Yii;
 use yii\helpers\Inflector;
@@ -316,7 +316,7 @@ class BlockController extends \luya\console\Command
     public function generateViewFile($blockClassName)
     {
         sort($this->viewFileDoc);
-        return $this->view->render('@luya/console/commands/views/block/create_block_view.php', [
+        return $this->view->render('@cms/views/commands/block/create_block_view.php', [
             'blockClassName' => $blockClassName,
             'phpdoc' => $this->viewFileDoc,
             'luyaText' => $this->getGeneratorText('block/create'),
@@ -404,7 +404,7 @@ class BlockController extends \luya\console\Command
         
         sort($this->phpdoc);
         
-        $content = $this->view->render('@luya/console/commands/views/block/create_block.php', [
+        $content = $this->view->render('@cms/views/commands/block/create_block', [
             'namespace' => $this->getFileNamespace(),
             'className' => $this->blockName,
             'name' => Inflector::camel2words($this->blockName),
