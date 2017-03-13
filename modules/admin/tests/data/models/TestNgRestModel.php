@@ -45,7 +45,7 @@ class TestNgRestModel extends NgRestModel
     }
     
     public function ngRestConfig($config)
-    {   
+    {
         $this->ngRestConfigDefine($config, 'list', ['foo', 'bar', 'extraAttr']);
         $this->ngRestConfigDefine($config, ['create', 'update'], ['foo']);
         $config->delete = true;
@@ -105,7 +105,7 @@ class TestNewNotationNgRestModel extends NgRestModel
     public function ngRestActiveWindows()
     {
         return [
-            ['class' => TagActiveWindow::class],  
+            ['class' => TagActiveWindow::class],
         ];
     }
 }

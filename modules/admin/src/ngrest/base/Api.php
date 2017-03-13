@@ -71,13 +71,13 @@ class Api extends RestActiveController
      */
     public function actions()
     {
-    	$actions = parent::actions();
-    	$actions['view']['class'] = 'luya\admin\ngrest\base\actions\ViewAction';
-    	$actions['index']['class'] = 'luya\admin\ngrest\base\actions\IndexAction';
-    	$actions['create']['class'] = 'luya\admin\ngrest\base\actions\CreateAction';
-    	$actions['update']['class'] = 'luya\admin\ngrest\base\actions\UpdateAction';
-    	$actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
-    	return $actions;
+        $actions = parent::actions();
+        $actions['view']['class'] = 'luya\admin\ngrest\base\actions\ViewAction';
+        $actions['index']['class'] = 'luya\admin\ngrest\base\actions\IndexAction';
+        $actions['create']['class'] = 'luya\admin\ngrest\base\actions\CreateAction';
+        $actions['update']['class'] = 'luya\admin\ngrest\base\actions\UpdateAction';
+        $actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
+        return $actions;
     }
     
     private $_model = null;
@@ -201,22 +201,22 @@ class Api extends RestActiveController
     
     public function actionActiveWindowCallback()
     {
-    	$config = $this->model->getNgRestConfig();
-    	$render = new RenderActiveWindowCallback();
-    	$ngrest = new NgRest($config);
+        $config = $this->model->getNgRestConfig();
+        $render = new RenderActiveWindowCallback();
+        $ngrest = new NgRest($config);
     
-    	return $ngrest->render($render);
+        return $ngrest->render($render);
     }
     
     public function actionActiveWindowRender()
     {
-    	$config = $this->model->getNgRestConfig();	 
-    	$render = new RenderActiveWindow();
-    	$render->setItemId(Yii::$app->request->post('itemId', false));
-    	$render->setActiveWindowHash(Yii::$app->request->post('activeWindowHash', false));
-    	$ngrest = new NgRest($config);
+        $config = $this->model->getNgRestConfig();
+        $render = new RenderActiveWindow();
+        $render->setItemId(Yii::$app->request->post('itemId', false));
+        $render->setActiveWindowHash(Yii::$app->request->post('activeWindowHash', false));
+        $ngrest = new NgRest($config);
     
-    	return $ngrest->render($render);
+        return $ngrest->render($render);
     }
     
     /**

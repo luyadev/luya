@@ -92,7 +92,7 @@ class Nav extends ActiveRecord
     }
     
     /**
-     * 
+     *
      * @return \luya\cms\models\NavContainer
      */
     public function getNavContainer()

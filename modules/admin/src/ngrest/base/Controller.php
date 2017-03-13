@@ -73,7 +73,7 @@ class Controller extends \luya\admin\base\Controller
         $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
         
         if ($userSortSettings && is_array($userSortSettings)) {
-        	$config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
+            $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
         }
         
         $config->inline = (int) $inline;
@@ -90,19 +90,19 @@ class Controller extends \luya\admin\base\Controller
 
     public function actionExportDownload($key)
     {
-    	$sessionkey = Yii::$app->session->get('tempNgRestKey');
-    	$fileName = Yii::$app->session->get('tempNgRestFileName');
+        $sessionkey = Yii::$app->session->get('tempNgRestKey');
+        $fileName = Yii::$app->session->get('tempNgRestFileName');
     
-    	if ($sessionkey !== base64_decode($key)) {
-    		throw new Exception('Invalid Export download key.');
-    	}
+        if ($sessionkey !== base64_decode($key)) {
+            throw new Exception('Invalid Export download key.');
+        }
     
-    	$content = FileHelper::getFileContent('@runtime/'.$sessionkey.'.tmp');
+        $content = FileHelper::getFileContent('@runtime/'.$sessionkey.'.tmp');
     
-    	Yii::$app->session->remove('tempNgRestKey');
-    	Yii::$app->session->remove('tempNgRestFileName');
-    	@unlink(Yii::getAlias('@runtime/'.$sessionkey.'.tmp'));
+        Yii::$app->session->remove('tempNgRestKey');
+        Yii::$app->session->remove('tempNgRestFileName');
+        @unlink(Yii::getAlias('@runtime/'.$sessionkey.'.tmp'));
     
-    	return Yii::$app->response->sendContentAsFile($content, $fileName . '-export-'.date("Y-m-d-H-i").'.csv', ['mimeType' => 'application/csv']);
+        return Yii::$app->response->sendContentAsFile($content, $fileName . '-export-'.date("Y-m-d-H-i").'.csv', ['mimeType' => 'application/csv']);
     }
 }

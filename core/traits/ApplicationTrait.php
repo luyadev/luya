@@ -90,9 +90,9 @@ trait ApplicationTrait
     
     /**
      * Transform the $language into a locale sign to set php env settings.
-     * 
+     *
      * Example transform input `de` to `de_CH` when available $locales property.
-     * 
+     *
      * @param string $lang Find the locale POSIX for the provided $lang short code.
      * @return string The localisation code for the provided lang short code.
      */
@@ -125,7 +125,7 @@ trait ApplicationTrait
     /**
      * Setter method ensures the locilations POSIX from {{ensureLocale}} for the provided lang
      * and changes the Yii::$app->langauge and sets the `setlocale()` code from ensureLocale().
-     * 
+     *
      * @param string $lang The language short code to set the locale for.
      */
     public function setLocale($lang)

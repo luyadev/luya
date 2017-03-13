@@ -395,7 +395,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
 
     /**
      * Defines the scope which field should be used for what situation.
-     * 
+     *
      * ```php
      * public function ngRestScopes()
      * {
@@ -406,10 +406,10 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *     ]:
      * }
      * ```
-     * 
+     *
      * The create and update scopes can also be written in seperated notation in order to configure
      * different forms for create and update:
-     * 
+     *
      * ```php
      * public function ngRestScopes()
      * {
@@ -428,7 +428,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Define Active Window configurations.
-     * 
+     *
      * ```php
      * public function ngRestActiveWindows()
      * {
@@ -538,7 +538,6 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function ngRestConfig($config)
     {
         foreach ($this->ngRestScopes() as $arrayConfig) {
-            
             if (!isset($arrayConfig[0]) && !isset($arrayConfig[1])) {
                 throw new InvalidConfigException("Invalid ngRestScope defintion. Definition must contain an array with two elements: `['create', []]`");
             }
@@ -594,7 +593,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             
             $rel = [];
             foreach ($this->ngRestRelations() as $key => $item) {
-            	$rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
+                $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
             }
             
             

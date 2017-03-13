@@ -13,14 +13,14 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Base class for NgRest Plugins.
- * 
- * Event trigger cycle for different use cases, the following use cases are available with its 
+ *
+ * Event trigger cycle for different use cases, the following use cases are available with its
  * event cycles.
- * 
+ *
  * + onFind
  * + onListFind
  * + onExpandFind
- * 
+ *
  * + find = The model is used in your controller frontend logic to display and assign data into the view (developer use case)
  * + list find = The model is populated for the Admin Table list view where you can see all your items and click the edit/delete icons.
  *   1. onListFind
@@ -256,10 +256,10 @@ abstract class Plugin extends Component
     
     /**
      * Remeves and event from the events stack by its trigger name.
-     * 
-     * In order to remove an event trigger from stack you have to do this right 
+     *
+     * In order to remove an event trigger from stack you have to do this right
      * after the initializer.
-     * 
+     *
      * ```php
      * public function init()
      * {
@@ -267,14 +267,14 @@ abstract class Plugin extends Component
      *     $this->removeEvent(NgRestModel::EVENT_AFTER_FIND);
      * }
      * ```
-     * 
+     *
      * @param string $trigger The event trigger name from the EVENT constants.
      */
     public function removeEvent($trigger)
     {
-    	if (isset($this->_events[$trigger])) {
-    		unset($this->_events[$trigger]);
-    	}
+        if (isset($this->_events[$trigger])) {
+            unset($this->_events[$trigger]);
+        }
     }
     
     /**
@@ -310,7 +310,7 @@ abstract class Plugin extends Component
      */
     public function onSave($event)
     {
-    	Yii::trace('Event Trigger: onSave for ' . get_class($this));
+        Yii::trace('Event Trigger: onSave for ' . get_class($this));
         if ($this->isAttributeWriteable($event) && $this->onBeforeSave($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));

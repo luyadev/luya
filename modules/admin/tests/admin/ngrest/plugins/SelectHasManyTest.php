@@ -28,6 +28,5 @@ class SelectHasManyTest extends AdminTestCase
         ]);
 
         $this->assertArrayNotHasKey('afterFind', $plugin->events());
-        
     }
 }

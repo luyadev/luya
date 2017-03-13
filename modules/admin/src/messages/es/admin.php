@@ -231,7 +231,7 @@ return [
     'lock_admin_edit_crud_item' => 'Edición {module} "{table}" (ID: {id}).',
     'lock_cms_edit_page' => 'Edición de página "{title}".',
     'layout_filemanager_col_size' => 'File size',
-	'js_filemanager_count_files_overlay' => '%count% files',
-	'js_link_change_value' => 'Change Link',
-	'js_link_set_value' => 'Set Link',
+    'js_filemanager_count_files_overlay' => '%count% files',
+    'js_link_change_value' => 'Change Link',
+    'js_link_set_value' => 'Set Link',
 ];

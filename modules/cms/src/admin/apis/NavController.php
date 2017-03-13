@@ -213,7 +213,7 @@ class NavController extends \luya\admin\base\RestController
     public function actionDelete($navId)
     {
         if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
-            throw new ForbiddenHttpException("Unable to remove this page due to permission restrictions.");    
+            throw new ForbiddenHttpException("Unable to remove this page due to permission restrictions.");
         }
         
         $model = Nav::find()->where(['id' => $navId])->one();

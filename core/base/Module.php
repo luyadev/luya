@@ -52,15 +52,15 @@ abstract class Module extends \yii\base\Module
     /**
      * @var array Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}}
      * object configuration as array like this:
-     * 
+     *
      * ```php
      * 'urlRules' => [
      *     ['pattern' => 'mymodule/detail/<id:\d+>', 'route' => 'mymodule/detail/user'],
      * ],
      * ```
-     * 
+     *
      * Or you can provide a key value pairing where key is the pattern and the value is the route:
-     * 
+     *
      * ```php
      * 'urlRules' => [
      *     'mymodule/detail/<id:\d+>' => 'mymodule/detail/user',

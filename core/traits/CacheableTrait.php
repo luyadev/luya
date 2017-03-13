@@ -87,7 +87,7 @@ trait CacheableTrait
      *
      * ```php
      * use CacheableTrait;
-     * 
+     *
      * public function getTopProducts($count = 10)
      * {
      *     return $this->getOrSetHasCache(['top-n-products', 'n' => $count], function ($cache) use ($count) {
@@ -95,7 +95,7 @@ trait CacheableTrait
      *     }, 1000);
      * }
      * ```
-     * 
+     *
      * @param mixed $key a key identifying the value to be cached. This can be a simple string or
      * a complex data structure consisting of factors representing the key.
      * @param \Closure $closure the closure that will be used to generate a value to be cached.
