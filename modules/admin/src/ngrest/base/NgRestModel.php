@@ -359,7 +359,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * The definition can contain properties, but does not have to.
      *
      * ```php
-     * ngRestAttributeTypes()
+     * public function ngRestAttributeTypes()
      * {
      *     return [
      *         'firstname' => 'text',
@@ -392,6 +392,58 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     {
         return [];
     }
+
+    /**
+     * Defines the scope which field should be used for what situation.
+     * 
+     * ```php
+     * public function ngRestScopes()
+     * {
+     *     return [
+     *         ['list', ['firstname', 'lastname']],
+     *         [['create', 'update'], ['firstname', 'lastname', 'description', 'image_id']],
+     *         ['delete', true],
+     *     ]:
+     * }
+     * ```
+     * 
+     * The create and update scopes can also be written in seperated notation in order to configure
+     * different forms for create and update:
+     * 
+     * ```php
+     * public function ngRestScopes()
+     * {
+     *     return [
+     *         ['list', ['firstname', 'lastname']],
+     *         ['create', ['firstname', 'lastname', 'description', 'image_id']],
+     *         ['update', ['description']],
+     *     ];
+     * }
+     * ```
+     */
+    public function ngRestScopes()
+    {
+        return [];
+    }
+    
+    /**
+     * Define Active Window configurations.
+     * 
+     * ```php
+     * public function ngRestActiveWindows()
+     * {
+     *     return [
+     *         ['class' => 'luya\admin\aws\TagActiveWindow', 'label' => 'Tags Label'],
+     *         ['class' => luya\admin\aws\ChangePassword::class, 'label' => 'Change your Password'],
+     *     ];
+     * }
+     * ```
+     */
+    public function ngRestActiveWindows()
+    {
+        return [];
+    }
+    
     
     /**
      * Inject data from the model into the config, usage exmple in ngRestConfig method context:
@@ -480,6 +532,29 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
                 
                 $config->$type->$typeField($field, $this->getAttributeLabel($field))->addPlugin($method, $args);
             }
+        }
+    }
+    
+    public function ngRestConfig($config)
+    {
+        foreach ($this->ngRestScopes() as $arrayConfig) {
+            
+            if (!isset($arrayConfig[0]) && !isset($arrayConfig[1])) {
+                throw new InvalidConfigException("Invalid ngRestScope defintion. Definition must contain an array with two elements: `['create', []]`");
+            }
+            
+            $scope = $arrayConfig[0];
+            $fields = $arrayConfig[1];
+
+            if ($scope == 'delete') {
+                $config->delete = $fields;
+            } else {
+                $this->ngRestConfigDefine($config, $scope, $fields);
+            }
+        }
+        
+        foreach ($this->ngRestActiveWindows() as $windowConfig) {
+            $config->aw->load($windowConfig);
         }
     }
     

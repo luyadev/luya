@@ -17,6 +17,13 @@ use luya\admin\ngrest\base\NgRestModel;
  */
 class <?= $className; ?> extends NgRestModel
 {
+<?php if ($i18nFields): ?>
+    /**
+     * @inheritdoc
+     */
+    public $i18n = ['<?= implode("', '", $textFields); ?>'];
+
+<?php endif;?>
     /**
      * @inheritdoc
      */
@@ -24,7 +31,15 @@ class <?= $className; ?> extends NgRestModel
     {
         return '<?= $dbTableName; ?>';
     }
-    
+
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return '<?= $apiEndpoint; ?>';
+    }
+
     /**
      * @inheritdoc
      */
@@ -35,7 +50,7 @@ class <?= $className; ?> extends NgRestModel
     '<?= $key; ?>' => Yii::t('app', '<?=$label?>'),
         <?php endforeach; ?>];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -47,31 +62,16 @@ class <?= $className; ?> extends NgRestModel
         <?php endforeach; ?>];
     }
 
-<?php if ($i18nFields): ?>
     /**
-     * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
-     */
-    public $i18n = ['<?= implode("', '", $textFields); ?>'];
-
-<?php endif;?>
-    /**
-     * @return array An array containing all field which can be lookedup during the admin search process.
+     * @inheritdoc
      */
     public function genericSearchFields()
     {
         return ['<?= implode("', '", $textFields); ?>'];
     }
-    
+
     /**
-     * @return string Defines the api endpoint for the angular calls
-     */
-    public static function ngRestApiEndpoint()
-    {
-        return '<?= $apiEndpoint; ?>';
-    }
-    
-    /**
-     * @return array An array define the field types of each field
+     * @inheritdoc
      */
     public function ngRestAttributeTypes()
     {
@@ -80,22 +80,16 @@ class <?= $className; ?> extends NgRestModel
     '<?=$name; ?>' => '<?= $type;?>',
         <?php endforeach; ?>];
     }
-    
+
     /**
-     * Define the NgRestConfig for this model with the ConfigBuilder object.
-     *
-     * @param \luya\admin\ngrest\ConfigBuilder $config The current active config builder object.
-     * @return \luya\admin\ngrest\ConfigBuilder
+     * @inheritdoc
      */
-    public function ngRestConfig($config)
+    public function ngRestScopes()
     {
-        // define fields for types based from ngrestAttributeTypes
-        $this->ngRestConfigDefine($config, 'list', ['<?= implode($fields, "', '"); ?>']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['<?= implode($fields, "', '"); ?>']);
-        
-        // enable or disable ability to delete;
-        $config->delete = false; 
-        
-        return $config;
+        return [
+            ['list', ['<?= implode($fields, "', '"); ?>']],
+            [['create', 'update'], ['<?= implode($fields, "', '"); ?>']],
+            ['delete', false],
+        ];
     }
 }

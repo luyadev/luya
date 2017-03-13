@@ -107,11 +107,24 @@ class TestModel extends NgRestModel
     /**
      * @inheritdoc
      */
+    public $i18n = ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings'];
+
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_user';
     }
-    
+
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-endpoint-name';
+    }
+
     /**
      * @inheritdoc
      */
@@ -133,7 +146,7 @@ class TestModel extends NgRestModel
             'settings' => Yii::t('app', 'Settings'),
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -151,28 +164,15 @@ class TestModel extends NgRestModel
     }
 
     /**
-     * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
-     */
-    public $i18n = ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings'];
-
-    /**
-     * @return array An array containing all field which can be lookedup during the admin search process.
+     * @inheritdoc
      */
     public function genericSearchFields()
     {
         return ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings'];
     }
-    
+
     /**
-     * @return string Defines the api endpoint for the angular calls
-     */
-    public static function ngRestApiEndpoint()
-    {
-        return 'api-endpoint-name';
-    }
-    
-    /**
-     * @return array An array define the field types of each field
+     * @inheritdoc
      */
     public function ngRestAttributeTypes()
     {
@@ -191,23 +191,17 @@ class TestModel extends NgRestModel
             'settings' => 'textarea',
         ];
     }
-    
+
     /**
-     * Define the NgRestConfig for this model with the ConfigBuilder object.
-     *
-     * @param \luya\admin\ngrest\ConfigBuilder $config The current active config builder object.
-     * @return \luya\admin\ngrest\ConfigBuilder
+     * @inheritdoc
      */
-    public function ngRestConfig($config)
+    public function ngRestScopes()
     {
-        // define fields for types based from ngrestAttributeTypes
-        $this->ngRestConfigDefine($config, 'list', ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings']);
-        
-        // enable or disable ability to delete;
-        $config->delete = false; 
-        
-        return $config;
+        return [
+            ['list', ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings']],
+            [['create', 'update'], ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings']],
+            ['delete', false],
+        ];
     }
 }
 EOT;
@@ -276,7 +270,15 @@ class TestModel extends NgRestModel
     {
         return 'admin_lang';
     }
-    
+
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-endpoint-name';
+    }
+
     /**
      * @inheritdoc
      */
@@ -290,7 +292,7 @@ class TestModel extends NgRestModel
             'is_deleted' => Yii::t('app', 'Is Deleted'),
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -304,23 +306,15 @@ class TestModel extends NgRestModel
     }
 
     /**
-     * @return array An array containing all field which can be lookedup during the admin search process.
+     * @inheritdoc
      */
     public function genericSearchFields()
     {
         return ['name', 'short_code'];
     }
-    
+
     /**
-     * @return string Defines the api endpoint for the angular calls
-     */
-    public static function ngRestApiEndpoint()
-    {
-        return 'api-endpoint-name';
-    }
-    
-    /**
-     * @return array An array define the field types of each field
+     * @inheritdoc
      */
     public function ngRestAttributeTypes()
     {
@@ -331,23 +325,17 @@ class TestModel extends NgRestModel
             'is_deleted' => 'number',
         ];
     }
-    
+
     /**
-     * Define the NgRestConfig for this model with the ConfigBuilder object.
-     *
-     * @param \luya\admin\ngrest\ConfigBuilder $config The current active config builder object.
-     * @return \luya\admin\ngrest\ConfigBuilder
+     * @inheritdoc
      */
-    public function ngRestConfig($config)
+    public function ngRestScopes()
     {
-        // define fields for types based from ngrestAttributeTypes
-        $this->ngRestConfigDefine($config, 'list', ['name', 'short_code', 'is_default', 'is_deleted']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['name', 'short_code', 'is_default', 'is_deleted']);
-        
-        // enable or disable ability to delete;
-        $config->delete = false; 
-        
-        return $config;
+        return [
+            ['list', ['name', 'short_code', 'is_default', 'is_deleted']],
+            [['create', 'update'], ['name', 'short_code', 'is_default', 'is_deleted']],
+            ['delete', false],
+        ];
     }
 }
 EOT;

@@ -124,20 +124,21 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         ];
     }
     
-    /**
-     * @inheritdoc
-     */
-    public function ngRestConfig($config)
+    public function ngRestScopes()
     {
-        $config->aw->load(['class' => ChangePassword::className()]);
-        
-        $this->ngRestConfigDefine($config, 'list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']);
-        $this->ngRestConfigDefine($config, 'create', ['title', 'firstname', 'lastname', 'email', 'password']);
-        $this->ngRestConfigDefine($config, 'update', ['title', 'firstname', 'lastname', 'email']);
-        
-        $config->delete = true;
-
-        return $config;
+        return [
+            ['list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']],
+            ['create', ['title', 'firstname', 'lastname', 'email', 'password']],
+            ['update', ['title', 'firstname', 'lastname', 'email']],
+            ['delete', true],
+        ];
+    }
+    
+    public function ngRestActiveWindows()
+    {
+        return [
+            ['class' => ChangePassword::class],
+        ];
     }
 
     /**

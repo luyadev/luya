@@ -6,7 +6,7 @@ The `NgRest` crud model class is the based class for the api, based on this Acti
 
 ## Where do i configure?
 
-Each NgRest Model does have a {{luya\admin\ngrest\base\NgRestModel::ngrestAttributeTypes}} method where you can define what type of fields you have and {{luya\admin\ngrest\base\NgRestModel::ngRestConfig}} where you can define the fields for the specific pointers (crud, list, create).
+Each NgRest Model does have a {{luya\admin\ngrest\base\NgRestModel::ngrestAttributeTypes}} method where you can define what type of fields you have and {{luya\admin\ngrest\base\NgRestModel::ngRestConfig}} where you can define the fields for the specific Scope (crud, list, create).
 
 #### Define attribute types
 
@@ -32,11 +32,11 @@ A defintion contains always the attribute (as key) and the ngrest plugin config,
 
 > Keep in mind that when a plugin is attached to a field, it will override the original value from the database. Examples are shown in the [Select Plugin Guide](ngrest-plugin-select.md)
 
-#### Pointers and ngRestConfig
+#### Scope and ngRestConfig
 
-There are 4 specific pointers you can use to configure. A pointer as like a section of your config:
+There are 4 specific Scope you can use to configure. A pointer as like a section of your config:
 
-|Pointer Name   |Description
+|Scope Name   |Description
 |---       |---
 |list      |List the data rows of the Table (like a data table)
 |create    |The form to create a new data record.
@@ -44,29 +44,31 @@ There are 4 specific pointers you can use to configure. A pointer as like a sect
 |delete    |Define whether items of the data table can be deleted or not. To activate deletion us `$config->delete = true`.
 |aw        |[ActiveWindows](ngrest-activewindow.md) Register/add active windows, to this config. Active windows are like buttons you can add to each item record.
 
-As you know what section/pointers you can define with your already defined attributes you have to define the {{luya\admin\ngrest\base\NgRestModel::ngRestConfig}} method, this could look as followed:
+As you know what section/Scope you can define with your already defined attributes you have to define the {{luya\admin\ngrest\base\NgRestModel::ngRestConfig}} method, this could look as followed:
 
 ```php
-public function ngRestConfig($config)
+public function ngRestScopes()
 {
-    // define fields for types based from ngrestAttributeTypes
-    $this->ngRestConfigDefine($config, 'list', ['title', 'name', 'timestamp']);
-    $this->ngRestConfigDefine($config, ['create', 'update'], ['title', 'name', 'text', 'description', 'timestamp', 'size']);
-    
-    // enable or disable ability to delete;
-    $config->delete = false; 
-    
-    return $config;
+    return [
+        ['list',  ['title', 'name', 'timestamp']],
+        [['create', 'update'],  ['title', 'name', 'text', 'timestamp', 'description', 'size]],
+        ['delete', false],
+    ];
 }
 ```
-
-As you can see we use the helper method {{luya\admin\ngrest\base\NgRestModel::ngRestConfigDefine}} to define which *pointer* has which *attributes*.
 
 #### Delete
 
 To enable a delete button where the user can remove an item from the database table you can configure the delete pointer:
 
 ```php
+public function ngRestScopes()
+{
+    return [
+        // ...
+        ['delete', false],
+    ];
+}
 $config->delete = true;
 ``` 
 
@@ -113,14 +115,15 @@ public function ngrestExtraAttributeTypes()
 }
 ```
 
-Now the only thing you have to is to add the field to the {{\luya\admin\ngrest\base\NgRestModel::ngRestConfigDefine}} defintions.
+Now the only thing you have to is to add the field to the {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes}} defintion.
 
 ```php
-public function ngRestConfig($config)
+public function ngRestScopes($)
 {
-    // ...
-    $this->ngRestConfigDefine($config, ['list'], ['registeredCount']);
-    // ...
+    return [
+        // ...
+        ['list', ['registeredCount', '...']] // where ... are the other fields for this scope.
+    ];
 }
 ```
 
