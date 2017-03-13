@@ -1,12 +1,12 @@
 <?php
 
-namespace luya\gallery\admin\blocks;
+namespace luya\gallery\frontend\blocks;
 
-use luya\cms\base\Block;
 use luya\cms\models\NavItem;
 use luya\gallery\models\Album;
+use luya\cms\base\PhpBlock;
 
-class GalleryAlbum extends Block
+class GalleryAlbum extends PhpBlock
 {
     public $module = 'gallery';
 
@@ -45,11 +45,12 @@ class GalleryAlbum extends Block
     public function extraVars()
     {
         return [
-            'album' => Album::find()->where(['id' => $this->getVarValue('albumId')])->one(),
+            'album' => Album::findOne($this->getVarValue('albumId')),
         ];
     }
 
-    public function twigAdmin()
+    
+    public function admin()
     {
         return '<p style="padding:20px 0px; font-size:20px;"><i class="fa fa-image fa-2x"></i> Gallery-Album: <strong>{{ extras.album.title }}</strong></p>';
     }

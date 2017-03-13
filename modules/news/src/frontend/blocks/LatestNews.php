@@ -1,11 +1,12 @@
 <?php
 
-namespace luya\news\admin\blocks;
+namespace luya\news\frontend\blocks;
 
 use luya\cms\models\NavItem;
 use luya\news\models\Article;
+use luya\cms\base\PhpBlock;
 
-class LatestNews extends \luya\cms\base\Block
+class LatestNews extends PhpBlock
 {
     public $module = 'news';
 
@@ -45,7 +46,7 @@ class LatestNews extends \luya\cms\base\Block
         ];
     }
 
-    public function twigAdmin()
+    public function admin()
     {
         return '<ul>{% for item in extras.items %}<li>{{ item.title }}</li>{% endfor %}</ul>';
     }

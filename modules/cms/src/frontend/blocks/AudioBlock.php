@@ -71,15 +71,6 @@ final class AudioBlock extends PhpBlock
 
     /**
      * @inheritdoc
-     *
-    public function twigFrontend()
-    {
-        return '{% if vars.soundUrl is not empty %}<div>{{ vars.soundUrl }}</div>{% endif %}';
-    }
-    */
-
-    /**
-     * @inheritdoc
      */
     public function admin()
     {

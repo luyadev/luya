@@ -278,6 +278,7 @@ class Element extends \yii\base\Component
             return $view->renderPhpFile(rtrim($this->getFolder(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . FileHelper::ensureExtension($file, 'php'), $args);
         } elseif ($this->renderEngine == 'twig') {
             // @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
+            trigger_error('twig render engine is not supported anymore.', E_USER_DEPRECATED);
             $twig = Yii::$app->twig->env(new Twig_Loader_Filesystem($this->getFolder()));
             return $twig->render(FileHelper::ensureExtension($file, 'twig'), $args);
         }

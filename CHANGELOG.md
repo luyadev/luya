@@ -17,6 +17,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1102](https://github.com/luyadev/luya/issues/1102) Removed News Module Tag table and replace by admin modules Tag models.
 - [#1098](https://github.com/luyadev/luya/issues/1098) Changed luya\base\Widget view path behavior to default implementation with option to enable app view paths lookup.
 - [#1109](https://github.com/luyadev/luya/issues/1109) In order to prevent blocks to extend from cms blocks, flag all cms blocks as final.
+- [#1076](https://github.com/luyadev/luya/issues/1076) Twig Component triggers now an deprecated notice message.
 
 ### Added
 
