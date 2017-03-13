@@ -130,6 +130,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
                 'refModelPkId' => 'user_id',
                 'refJoinPkId' => 'group_id',
                 'labelFields' => ['name'],
+            	'onlyRestScenarios' => true,
             ],
         ];
     }
