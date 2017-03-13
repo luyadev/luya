@@ -36,6 +36,8 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
 {
     use SoftDeleteTrait;
     
+    public $groups = [];
+    
     /**
      * @inheritdoc
      */
@@ -121,6 +123,14 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     {
         return [
             'lastloginTimestamp' => 'datetime',
+            'groups' => [
+                'checkboxRelation',
+                'model' => Group::className(),
+                'refJoinTable' => 'admin_user_group',
+                'refModelPkId' => 'user_id',
+                'refJoinPkId' => 'group_id',
+                'labelFields' => ['name'],
+            ],
         ];
     }
     
@@ -128,8 +138,8 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     {
         return [
             ['list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']],
-            ['create', ['title', 'firstname', 'lastname', 'email', 'password']],
-            ['update', ['title', 'firstname', 'lastname', 'email']],
+            ['create', ['title', 'firstname', 'lastname', 'email', 'password', 'groups']],
+            ['update', ['title', 'firstname', 'lastname', 'email', 'groups']],
             ['delete', true],
         ];
     }
@@ -195,8 +205,8 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     public function scenarios()
     {
         return [
-            'restcreate' => ['title', 'firstname', 'lastname', 'email', 'password'],
-            'restupdate' => ['title', 'firstname', 'lastname', 'email'],
+            'restcreate' => ['title', 'firstname', 'lastname', 'email', 'password', 'groups'],
+            'restupdate' => ['title', 'firstname', 'lastname', 'email', 'groups'],
             'changepassword' => ['password', 'password_salt'],
             'login' => ['email', 'password', 'force_reload'],
             'securelayer' => ['secure_token'],
