@@ -19,6 +19,7 @@ use luya\helpers\ArrayHelper;
  *
  * Or any other tags. This will register the json ld output into the layout file of the view.
  *
+ * @see https://schema.org/docs/schemas.html
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
