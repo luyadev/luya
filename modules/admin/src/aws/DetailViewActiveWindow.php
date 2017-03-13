@@ -13,7 +13,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  *
  * ```php
  * $config->aw->load([
- *     'class' => 'luya\admin\aws\InfoActiveWindow',
+ *     'class' => 'luya\admin\aws\DetailViewActiveWindow',
  *     'attributes' => [
  *         'title', // nothing define will use `text`
  *         'description:html', // renders html tags
@@ -40,7 +40,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  *
  * See [Formatting Guide](http://www.yiiframework.com/doc-2.0/guide-output-formatting.html)
  */
-class InfoActiveWindow extends ActiveWindow
+class DetailViewActiveWindow extends ActiveWindow
 {
     /**
      * @var string The name of the module where the active windows is located in order to finde the view path.
