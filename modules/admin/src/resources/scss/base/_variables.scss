@@ -32,7 +32,7 @@ $sidebar--padding: 5px;
 /**
  * #FLAGS (Language nav)
  */
-$flag-icon-css-path: '../img/flags' !default;
+$flag-icon-css-path: '../../img/flags' !default;
 $flag-icon-rect-path: '/4x3' !default;
 $flag-icon-square-path: '/1x1' !default;
 
@@ -40,7 +40,7 @@ $flag-icon-square-path: '/1x1' !default;
 /* #Folder
 */
 
-$folder-icon-svg-path: '../img/folder' !default;
+$folder-icon-svg-path: '../../img/folder' !default;
 
 // Key = language shortcode
 // Value = flag shortcode
@@ -54,5 +54,8 @@ $enabled-flags: (
 	"ru": "ru"
 );
 
+/**
+/* Materialize font
+*/
 
-
+$roboto-font-path: "../../fonts/roboto/" !default;

@@ -159,7 +159,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     {
         return [
             'luya\admin\assets\Main',
-            'luya\admin\assets\Flow',
+            'luya\admin\assets\AngularI18n',
         ];
     }
 

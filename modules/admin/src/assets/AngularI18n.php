@@ -36,20 +36,13 @@ use Yii;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta4
  */
-class BowerVendor extends \luya\web\Asset
+class AngularI18n extends \luya\web\Asset
 {
     /**
      * @var string The path to the folder where the files of this asset are located.
      */
-    public $sourcePath = '@admin/resources/bowervendor';
+    public $sourcePath = '@admin/resources/angular-i18n';
 
-    /**
-     * @var array A list of css style documents located in the $sourcePath folder.
-     */
-    public $css = [
-        'angular-chosen/chosen.min.css',
-    ];
-    
     /**
      * As params are not allowed inside array properties we have located the filling of the $js param into the initalizer.
      *
@@ -66,20 +59,11 @@ class BowerVendor extends \luya\web\Asset
         }
         
         $this->js = [
-            'angular/angular.min.js',
-            'angular-chosen/angular-chosen.min.js',
-            'angular-datepicker/angular-datepicker.min.js',
-            'angular-dragdrop/src/angular-dragdrop.min.js',
-            'angular-i18n/angular-locale_'.$lang.'.js',
-            'angular-loading-bar/loading-bar.min.js',
-            'angular-slugify/angular-slugify.js',
-            'angular-ui-router/release/angular-ui-router.min.js',
-            'jquery-ui/jquery-ui.min.js',
-            'ng-file-upload/ng-file-upload.min.js',
-            'ng-file-upload/ng-file-upload-shim.min.js',
-            'ng-wig/ng-wig.min.js',
-            'twig.js/twig.min.js',
-            'angular-filter.min.js',
+            'angular-locale_'.$lang.'.js',
         ];
     }
+
+    public $depends = [
+        'luya\admin\assets\Main',
+    ];
 }
