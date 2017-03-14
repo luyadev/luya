@@ -1489,15 +1489,15 @@
                         // image does not exists make request.
                         $http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                        }).success(function(success) {
-                            if (!success.error) {
+                        }).then(function(transport) {
+                            if (!transport.data.error) {
                                 scope.imagesDataReload().then(function(r) {
                                     scope.ngModel = success.id;
                                     AdminToastService.success(i18n['js_dir_image_upload_ok'], 2000);
                                     scope.imageLoading = false;
                                 });
                             }
-                        }).error(function(error) {
+                        }, function(error) {
                         	AdminToastService.error(i18n['js_dir_image_filter_error'], 7000);
                             scope.imageLoading = false;
                         });
@@ -1849,7 +1849,7 @@
                 $scope.createNewFolder = function(newFolderName) {
                     $http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function() {
                         $scope.foldersDataReload().then(function() {
                             $scope.folderFormToggler();
                             $scope.newFolderName = null;
@@ -1917,7 +1917,7 @@
                 $scope.updateFolder = function(folder) {
                     $http.post('admin/api-admin-storage/folder-update?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.toggleFolderMode(false);
                     });
                 }
@@ -1925,22 +1925,12 @@
                 $scope.checkEmptyFolder = function(folder) {
                     $http.post('admin/api-admin-storage/is-folder-empty?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
-                        if (transport == true) {
+                    }).then(function(transport) {
+                        if (transport.data == true) {
                             $scope.deleteFolder(folder);
                         } else {
                             $scope.toggleFolderMode('removeconfirm');
                         }
-                        /*
-                        if (transport == false) {
-                            // not empty
-                            folder.remove = false;
-                            folder.notempty = true;
-                        } else {
-                            // empty
-                            $scope.deleteFolder(folder);
-                        }
-                        */
                     });
                 };
 
@@ -1948,7 +1938,7 @@
                     // check if folder is empty
                     $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.foldersDataReload().then(function() {
                             $scope.filesDataReload().then(function() {
                                 $scope.toggleFolderMode(false);
@@ -1973,7 +1963,7 @@
                 $scope.moveFilesTo = function(folderId) {
                     $http.post('admin/api-admin-storage/filemanager-move-files', $.param({'fileIds' : $scope.selectedFiles, 'toFolderId' : folderId}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.filesDataReload().then(function() {
                             $scope.selectedFiles = [];
                             $scope.showFoldersToMove = false;
@@ -1985,7 +1975,7 @@
                     AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                        }).success(function(transport) {
+                        }).then(function(transport) {
                             $scope.filesDataReload().then(function() {
                                 $toast.close();
                                 AdminToastService.success(i18n['js_dir_manager_rm_file_ok'], 2000);
@@ -2000,7 +1990,7 @@
                 $scope.storeFileCaption = function(fileDetail) {
                 	$http.post('admin/api-admin-storage/filemanager-update-caption', $.param({'id': fileDetail.id, 'captionsText' : fileDetail.captionArray}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                     	AdminToastService.success('Captions has been updated', 2000);
                     });
                 }

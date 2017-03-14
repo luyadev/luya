@@ -591,7 +591,7 @@ function typeCastValue(value) {
 		var service = [];
 
 		service.reload = function() {
-			$http.get("admin/api-admin-common/cache").success(function(response) {
+			$http.get("admin/api-admin-common/cache").then(function(response) {
 				$window.location.reload();
 			});
 		}

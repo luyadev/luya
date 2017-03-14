@@ -65,33 +65,21 @@ class BowerVendor extends \luya\web\Asset
             $lang = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
         }
         
-        
         $this->js = [
-            // jquery ui
-            'jquery-ui/jquery-ui.min.js',
-            // angular files (official repo)
             'angular/angular.min.js',
-            'angular-i18n/angular-locale_'.$lang.'.js',
-            //'angular-resource/angular-resource.min.js',
-            // ui router
-            'angular-ui-router/release/angular-ui-router.min.js',
-            // drag&drop (replace with native html5)
+            'angular-chosen/angular-chosen.min.js',
+            'angular-datepicker/angular-datepicker.min.js',
             'angular-dragdrop/src/angular-dragdrop.min.js',
-            // loadingbar
-            'angular-loading-bar/build/loading-bar.min.js',
-            // slugify
+            'angular-i18n/angular-locale_'.$lang.'.js',
+            'angular-loading-bar/loading-bar.min.js',
             'angular-slugify/angular-slugify.js',
-            // twig.js
-            'twig.js/twig.min.js',
-            // ng-wig WYSIWYG editor
-            'ng-wig/dist/ng-wig.min.js',
-            // file upload
+            'angular-ui-router/release/angular-ui-router.min.js',
+            'jquery-ui/jquery-ui.min.js',
             'ng-file-upload/ng-file-upload.min.js',
             'ng-file-upload/ng-file-upload-shim.min.js',
-    
+            'ng-wig/ng-wig.min.js',
+            'twig.js/twig.min.js',
             'angular-filter.min.js',
-            'angular-datepicker/datepicker.min.js',
-            'angular-chosen/angular-chosen.min.js',
         ];
     }
 }

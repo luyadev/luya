@@ -85,8 +85,8 @@ zaa.factory("ServiceMenuData", function($http, $q, $rootScope) {
 			if (service.data.length > 0 && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-cms-menu/data-menu").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-cms-menu/data-menu").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:MenuData', service.data);
 					resolve(service.data);
 				});
@@ -121,8 +121,8 @@ zaa.factory("ServiceBlocksData", function($http, $q, $rootScope) {
 			if (service.data.length > 0 && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-cms-admin/data-blocks").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-cms-admin/data-blocks").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:BlocksData', service.data);
 					resolve(service.data);
 				});
@@ -157,8 +157,8 @@ zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
 			if (service.data.length > 0 && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-cms-admin/data-layouts").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-cms-admin/data-layouts").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:LayoutsData', service.data);
 					resolve(service.data);
 				});
