@@ -28,5 +28,5 @@ return [
     
 // 1.0.0
     
-    'teaser_text' => 'Texto de chamana',
+    'teaser_text' => 'Texto de chamada',
 ];
