@@ -523,6 +523,7 @@
 				ServiceMenuData.load(true);
 			}, function(r) {
 				$scope.errorMessageOnDuplicateAlias(r.data);
+				ServiceMenuData.load(true);
 			});
 	    }
 	    
@@ -645,7 +646,7 @@
 	    $scope.showDrag = 0;
 	    
 	    $scope.isCurrentElement = function(data) {
-	    	if ($state.params.navId == data.id) {
+	    	if (data !== null && $state.params.navId == data.id) {
 	    		return true;
 	    	}
 	    	
@@ -1445,7 +1446,7 @@
 				});
 			} else {
 				if (moveBlock === false) {
-					$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).success(function(response) {
+					$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).then(function(response) {
 						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 						$scope.droppedBlock = {};
 					});

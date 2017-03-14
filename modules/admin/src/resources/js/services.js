@@ -393,7 +393,7 @@ AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds'
 
 AdminToastService.confirm('Hello i am a callback and wait for your', function($q, $http) {
 	// do some ajax call
-	$http.get().success(function() {
+	$http.get().then(function() {
 		promise.resolve();
 	}).error(function() {
 		promise.reject();

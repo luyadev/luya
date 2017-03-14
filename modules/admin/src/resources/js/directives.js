@@ -1492,7 +1492,7 @@
                         }).then(function(transport) {
                             if (!transport.data.error) {
                                 scope.imagesDataReload().then(function(r) {
-                                    scope.ngModel = success.id;
+                                    scope.ngModel = transport.data.id;
                                     AdminToastService.success(i18n['js_dir_image_upload_ok'], 2000);
                                     scope.imageLoading = false;
                                 });
