@@ -13,27 +13,26 @@ module.exports = {
             "scss/**/*.scss"
         ],
         "scripts": [
-            "bowervendor/angular/angular.min.js",
-            "bowervendor/angular-chosen/angular-chosen.min.js",
-            "bowervendor/angular-datepicker/angular-datepicker.min.js",
-            "bowervendor/angular-dragdrop/src/angular-dragdrop.min.js",
-            "bowervendor/angular-loading-bar/loading-bar.min.js",
-            "bowervendor/angular-slugify/angular-slugify.js",
-            "bowervendor/angular-ui-router/release/angular-ui-router.min.js",
-            "bowervendor/jquery-ui/jquery-ui.min.js",
-            "bowervendor/ng-file-upload/ng-file-upload.min.js",
-            "bowervendor/ng-file-upload/ng-file-upload-shim.min.js",
-            "bowervendor/ng-wig/ng-wig.min.js",
-            "bowervendor/twig.js/twig.min.js",
-            "bowervendor/angular-filter.min.js",
-            "js/libs/*.js",
+            "vendor/angular/angular.min.js",
+            "vendor/angular-chosen/angular-chosen.min.js",
+            "vendor/angular-datepicker/angular-datepicker.min.js",
+            "vendor/angular-dragdrop/angular-dragdrop.min.js",
+            "vendor/angular-loading-bar/loading-bar.min.js",
+            "vendor/angular-slugify/angular-slugify.js",
+            "vendor/angular-ui-router/angular-ui-router.min.js",
+            "vendor/jquery-ui/jquery-ui.min.js",
+            "vendor/ng-file-upload/ng-file-upload.js",
+            "vendor/ng-file-upload/ng-file-upload-shim.js",
+            "vendor/ng-wig/ng-wig.min.js",
+            "vendor/twig.js/twig.min.js",
+            "vendor/angular-filter/angular-filter.min.js",
+            "vendor/angular-flow/ng-flow-standalone.min.js",
             "js/zaa.js",
             "js/services.js",
             "js/directives.js",
-            "js/controller.js"
+            "js/controllers.js"
         ]
     },
-
     "dest": {
         "local": {
             "styles": "dist/css/",

@@ -2066,7 +2066,7 @@ video.responsive-video {
     font-size: 1.2rem;
     padding: 0 10px;
     line-height: 30px;
-    line-height: 2rem; }
+    line-height: 1.875rem; }
   .pagination li.active a {
     color: #fff; }
   .pagination li.active {
@@ -2094,7 +2094,7 @@ video.responsive-video {
 
 .breadcrumb {
   font-size: 18px;
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   color: rgba(255, 255, 255, 0.7); }
   .breadcrumb i,
   .breadcrumb [class^="mdi-"], .breadcrumb [class*="mdi-"],
@@ -2102,7 +2102,7 @@ video.responsive-video {
     display: inline-block;
     float: left;
     font-size: 24px;
-    font-size: 1.6rem; }
+    font-size: 1.5rem; }
   .breadcrumb:before {
     content: '\E5CC';
     color: rgba(255, 255, 255, 0.7);
@@ -2112,7 +2112,7 @@ video.responsive-video {
     font-weight: normal;
     font-style: normal;
     font-size: 25px;
-    font-size: 1.66667rem;
+    font-size: 1.5625rem;
     margin: 0 10px 0 8px;
     -webkit-font-smoothing: antialiased; }
   .breadcrumb:first-child:before {
@@ -2218,7 +2218,7 @@ footer.page-footer {
     overflow: hidden;
     height: 50px;
     line-height: 50px;
-    line-height: 3.33333rem;
+    line-height: 3.125rem;
     color: rgba(255, 255, 255, 0.8);
     background-color: rgba(51, 51, 51, 0.08); }
 
@@ -2336,15 +2336,15 @@ td, th {
         vertical-align: middle; }
       .collection .collection-item.avatar i.circle {
         font-size: 18px;
-        font-size: 1.2rem;
+        font-size: 1.125rem;
         line-height: 42px;
-        line-height: 2.8rem;
+        line-height: 2.625rem;
         color: #fff;
         background-color: #999;
         text-align: center; }
       .collection .collection-item.avatar .title {
         font-size: 16px;
-        font-size: 1.06667rem; }
+        font-size: 1rem; }
       .collection .collection-item.avatar p {
         margin: 0; }
       .collection .collection-item.avatar .secondary-content {
@@ -2408,7 +2408,7 @@ nav ul a span.badge {
   float: none;
   margin-left: 4px;
   line-height: 22px;
-  line-height: 1.46667rem;
+  line-height: 1.375rem;
   height: 22px; }
 
 .side-nav span.badge.new,
@@ -3020,7 +3020,7 @@ nav {
   width: 100%;
   height: 56px;
   line-height: 56px;
-  line-height: 3.73333rem; }
+  line-height: 3.5rem; }
   nav.nav-extended {
     height: auto; }
     nav.nav-extended .nav-wrapper {
@@ -3032,10 +3032,10 @@ nav {
   nav i.material-icons {
     display: block;
     font-size: 24px;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     height: 56px;
     line-height: 56px;
-    line-height: 3.73333rem; }
+    line-height: 3.5rem; }
   nav .nav-wrapper {
     position: relative;
     height: 100%; }
@@ -3051,7 +3051,7 @@ nav {
     nav .button-collapse i {
       height: 56px;
       line-height: 56px;
-      line-height: 3.73333rem; }
+      line-height: 3.5rem; }
   nav .brand-logo {
     position: absolute;
     color: #fff;
@@ -3151,7 +3151,7 @@ nav {
   nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
     height: 64px;
     line-height: 64px;
-    line-height: 4.26667rem; }
+    line-height: 4rem; }
   .navbar-fixed {
     height: 64px; } }
 
@@ -3331,7 +3331,7 @@ small {
   display: inline-block;
   height: 36px;
   line-height: 36px;
-  line-height: 2.4rem;
+  line-height: 2.25rem;
   padding: 0 2rem;
   text-transform: uppercase;
   vertical-align: middle;
@@ -3395,7 +3395,7 @@ small {
   background-color: #26a69a;
   text-align: center;
   letter-spacing: .5px;
-  letter-spacing: 0.03333rem;
+  letter-spacing: 0.03125rem;
   -webkit-transition: .2s ease-out;
   transition: .2s ease-out;
   cursor: pointer; }
@@ -3411,7 +3411,7 @@ small {
   width: 40px;
   height: 40px;
   line-height: 40px;
-  line-height: 2.66667rem;
+  line-height: 2.5rem;
   padding: 0;
   background-color: #26a69a;
   border-radius: 50%;
@@ -3426,7 +3426,7 @@ small {
     color: #fff;
     font-size: 1.6rem;
     line-height: 40px;
-    line-height: 2.66667rem; }
+    line-height: 2.5rem; }
   .btn-floating:hover {
     background-color: #26a69a; }
   .btn-floating:before {
@@ -3436,7 +3436,7 @@ small {
     height: 56px; }
     .btn-floating.btn-large i {
       line-height: 56px;
-      line-height: 3.73333rem; }
+      line-height: 3.5rem; }
 
 button.btn-floating {
   border: none; }
@@ -3498,7 +3498,7 @@ button.btn-floating {
           box-shadow: none;
           color: #fff;
           line-height: 56px;
-          line-height: 3.73333rem;
+          line-height: 3.5rem;
           z-index: 1; }
           .fixed-action-btn.toolbar ul li a i {
             line-height: inherit; }
@@ -3549,7 +3549,7 @@ button.btn-floating {
 .btn-large {
   height: 54px;
   line-height: 54px;
-  line-height: 3.6rem; }
+  line-height: 3.375rem; }
   .btn-large i {
     font-size: 1.6rem; }
 
@@ -3592,18 +3592,18 @@ button.btn-floating {
   .side-nav li {
     float: none;
     line-height: 48px;
-    line-height: 3.2rem; }
+    line-height: 3rem; }
     .side-nav li.active {
       background-color: rgba(0, 0, 0, 0.05); }
   .side-nav a {
     color: rgba(0, 0, 0, 0.87);
     display: block;
     font-size: 14px;
-    font-size: 0.93333rem;
+    font-size: 0.875rem;
     font-weight: 500;
     height: 48px;
     line-height: 48px;
-    line-height: 3.2rem;
+    line-height: 3rem;
     padding: 0 32px; }
     .side-nav a:hover {
       background-color: rgba(0, 0, 0, 0.05); }
@@ -3623,7 +3623,7 @@ button.btn-floating {
     float: left;
     height: 48px;
     line-height: 48px;
-    line-height: 3.2rem;
+    line-height: 3rem;
     margin: 0 32px 0 0;
     width: 24px;
     color: rgba(0, 0, 0, 0.54); }
@@ -3634,10 +3634,10 @@ button.btn-floating {
     pointer-events: none;
     color: rgba(0, 0, 0, 0.54);
     font-size: 14px;
-    font-size: 0.93333rem;
+    font-size: 0.875rem;
     font-weight: 500;
     line-height: 48px;
-    line-height: 3.2rem; }
+    line-height: 3rem; }
     .side-nav .subheader:hover {
       background-color: transparent; }
   .side-nav .userView {
@@ -3665,9 +3665,9 @@ button.btn-floating {
     .side-nav .userView .name,
     .side-nav .userView .email {
       font-size: 14px;
-      font-size: 0.93333rem;
+      font-size: 0.875rem;
       line-height: 24px;
-      line-height: 1.6rem; }
+      line-height: 1.5rem; }
     .side-nav .userView .name {
       margin-top: 16px;
       font-weight: 500; }
@@ -4147,7 +4147,7 @@ button.btn-floating {
   display: none;
   color: #fff;
   line-height: 50px;
-  line-height: 3.33333rem;
+  line-height: 3.125rem;
   bottom: 0;
   width: 100%;
   text-align: center;
@@ -4173,7 +4173,7 @@ button.btn-floating {
   border-radius: 2px; }
   .card .card-title {
     font-size: 24px;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 300; }
     .card .card-title.activator {
       cursor: pointer; }
@@ -4265,7 +4265,7 @@ button.btn-floating {
       color: inherit; }
     .card .card-content .card-title {
       line-height: 48px;
-      line-height: 3.2rem; }
+      line-height: 3rem; }
   .card .card-action {
     position: relative;
     background-color: inherit;
@@ -4538,7 +4538,7 @@ table.hoverable tbody tr:hover {
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   /* Preferred icon size */
   display: inline-block;
   line-height: 1;
@@ -4588,9 +4588,9 @@ table.hoverable tbody tr:hover {
 
 .alert i {
   font-size: 54px;
-  font-size: 3.6rem;
+  font-size: 3.375rem;
   line-height: 54px;
-  line-height: 3.6rem;
+  line-height: 3.375rem;
   margin-right: 25px; }
 
 .alert.alert--icon-no-margin i {
@@ -4616,7 +4616,7 @@ datepicker select, datepicker select:focus, datepicker select:hover, .datepicker
 datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720kb-datepicker-calendar-body, ._720kb-datepicker-calendar-days-header, ._720kb-datepicker-calendar-years-pagination-pages {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 13.5px;
-  font-size: 0.9rem;
+  font-size: 0.84375rem;
   position: relative;
   float: left;
   clear: right;
@@ -4651,9 +4651,9 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 
 ._720kb-datepicker-calendar-header {
   font-size: 15px;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   line-height: 40px;
-  line-height: 2.66667rem;
+  line-height: 2.5rem;
   text-align: center; }
 
 ._720kb-datepicker-calendar-header:nth-child(odd) {
@@ -4689,7 +4689,7 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 
 ._720kb-datepicker-calendar-day {
   font-size: 12.5px;
-  font-size: 0.83333rem;
+  font-size: 0.78125rem;
   float: left;
   width: 12.2%;
   margin: 5px 1%;
@@ -4703,7 +4703,7 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 
 ._720kb-datepicker-calendar-header a, ._720kb-datepicker-calendar-header a:hover {
   font-size: 13.5px;
-  font-size: 0.9rem;
+  font-size: 0.84375rem;
   font-weight: bold;
   padding: 3% 9% 4% 9%;
   text-decoration: none;
@@ -4719,12 +4719,12 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 
 ._720kb-datepicker-calendar-month span {
   font-size: 13px;
-  font-size: 0.86667rem;
+  font-size: 0.8125rem;
   color: rgba(0, 0, 0, 0.4); }
 
 ._720kb-datepicker-calendar-month a span i {
   font-size: 15px;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-style: normal; }
 
 ._720kb-datepicker-calendar-month a, ._720kb-datepicker-calendar-month a:hover {
@@ -4739,10 +4739,10 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 
 ._720kb-datepicker-calendar-years-pagination a, ._720kb-datepicker-calendar-years-pagination a:hover {
   font-size: 12px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: normal;
   line-height: 20px;
-  line-height: 1.33333rem;
+  line-height: 1.25rem;
   display: inline-block;
   margin: 3px 1% 0 1%;
   padding: 0 7px; }
@@ -4764,7 +4764,7 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 
 ._720kb-datepicker-calendar-days-header div {
   font-size: 11.5px;
-  font-size: 0.76667rem;
+  font-size: 0.71875rem;
   font-weight: 500;
   float: left;
   width: 14.18%;
@@ -4774,7 +4774,7 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 
 ._720kb-datepicker-calendar-days ._720kb-datepicker-default-button {
   font-size: 18.5px;
-  font-size: 1.23333rem;
+  font-size: 1.15625rem;
   position: relative;
   bottom: -.5px; }
 
@@ -4808,11 +4808,11 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
   border-radius: 50%;
   color: #FFFFFF;
   font-size: 14px;
-  font-size: 0.93333rem;
+  font-size: 0.875rem;
   height: 40px;
   left: 5px;
   line-height: 40px;
-  line-height: 2.66667rem;
+  line-height: 2.5rem;
   position: absolute;
   text-align: center;
   top: 5px;
@@ -4835,7 +4835,7 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
   z-index: 50; }
   .aws-gallery__image-btn i {
     line-height: 37px;
-    line-height: 2.46667rem; }
+    line-height: 2.3125rem; }
   .aws-gallery__image-btn:hover {
     background-color: rgba(244, 67, 54, 0.7);
     color: #FFFFFF;
@@ -4905,7 +4905,7 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 
 .btn:not(.btn-floating) i, .btn-large:not(.btn-floating) i {
   font-size: 24px;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1;
   position: relative;
   top: 6px; }
@@ -4964,20 +4964,20 @@ datepicker, .datepicker, [datepicker], ._720kb-datepicker-calendar-header, ._720
 .crud__button {
   color: #757575;
   font-size: 12px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   height: 30px;
   letter-spacing: 0.5px;
-  letter-spacing: 0.03333rem;
+  letter-spacing: 0.03125rem;
   line-height: 30px;
-  line-height: 2rem;
+  line-height: 1.875rem;
   padding: 0 5px; }
   tr:hover .crud__button {
     color: #000000; }
   .crud__button i {
     font-size: 14px;
-    font-size: 0.93333rem;
+    font-size: 0.875rem;
     line-height: 30px;
-    line-height: 2rem; }
+    line-height: 1.875rem; }
     .crud__button i.left {
       margin-right: 3px; }
 
@@ -5072,9 +5072,9 @@ table td {
   padding: 0; }
   .editlog .btn-floating i {
     font-size: 16px;
-    font-size: 1.06667rem;
+    font-size: 1rem;
     line-height: 30px;
-    line-height: 2rem;
+    line-height: 1.875rem;
     height: 30px;
     padding-left: 1px;
     vertical-align: top; }
@@ -5302,7 +5302,7 @@ table td {
   position: relative;
   word-break: break-all;
   line-height: 24px;
-  line-height: 1.6rem;
+  line-height: 1.5rem;
   padding-left: 24px; }
   .filemanager__folders .filemanager__folders .filemanager__folder:before {
     background-color: #FFFFFF;
@@ -5437,7 +5437,7 @@ table td {
   .filemanager__folder-button .filemanager__cancel-icon {
     color: #F44336;
     font-size: 32px;
-    font-size: 2.13333rem;
+    font-size: 2rem;
     -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
             transform: rotate(45deg);
@@ -5451,7 +5451,7 @@ table td {
 .filemanager__delete-icon {
   float: right;
   font-size: 22px;
-  font-size: 1.46667rem;
+  font-size: 1.375rem;
   opacity: 0;
   padding: 0 14px;
   pointer-events: none;
@@ -5697,7 +5697,7 @@ table td {
   display: block;
   height: 36px;
   line-height: 36px;
-  line-height: 2.4rem;
+  line-height: 2.25rem;
   text-align: center;
   -webkit-transition: .25s ease all;
   transition: .25s ease all;
@@ -5731,7 +5731,7 @@ table td {
   .flow__delete i {
     color: #F44336;
     font-size: 30px;
-    font-size: 2rem;
+    font-size: 1.875rem;
     left: 50%;
     margin-left: -15px;
     margin-top: -15px;
@@ -5828,7 +5828,7 @@ textarea.materialize-textarea {
   display: inline-block;
   height: 25px;
   line-height: 25px;
-  line-height: 1.66667rem;
+  line-height: 1.5625rem;
   font-size: 1rem;
   -webkit-transition: 0.28s ease;
   transition: 0.28s ease;
@@ -5943,7 +5943,7 @@ form p:last-child {
     display: inline-block;
     height: 25px;
     line-height: 25px;
-    line-height: 1.66667rem;
+    line-height: 1.5625rem;
     font-size: 1rem;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -6232,10 +6232,10 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   background-color: #2196F3;
   display: inline-block;
   font-size: 24px;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   left: 0;
   line-height: 24px;
-  line-height: 1.6rem;
+  line-height: 1.5rem;
   margin: 0;
   padding: 8px 20px 5px;
   position: absolute;
@@ -6283,7 +6283,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   text-align: left;
   position: absolute;
   font-size: 8px;
-  font-size: 0.53333rem;
+  font-size: 0.5rem;
   min-height: 20px;
   bottom: -5px;
   left: 0;
@@ -6328,7 +6328,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 
 .imageupload__size {
   font-size: 14px;
-  font-size: 0.93333rem; }
+  font-size: 0.875rem; }
 
 .imageupload__loading {
   position: absolute;
@@ -6677,7 +6677,7 @@ input[type='checkbox']:checked + .input__label:before, input[type='checkbox']:ch
   height: 100px;
   text-align: center;
   font-size: 10px;
-  font-size: 0.66667rem; }
+  font-size: 0.625rem; }
 
 .loading-indicator > div {
   background-color: #fff;
@@ -6770,9 +6770,9 @@ input[type='checkbox']:checked + .input__label:before, input[type='checkbox']:ch
     height: 60px;
     background-color: #FFFFFF;
     line-height: 60px;
-    line-height: 4rem;
+    line-height: 3.75rem;
     font-size: 30px;
-    font-size: 2rem;
+    font-size: 1.875rem;
     border-radius: 50%;
     text-align: center;
     margin-right: 20px;
@@ -6785,9 +6785,9 @@ input[type='checkbox']:checked + .input__label:before, input[type='checkbox']:ch
   width: 30px !important;
   height: 30px !important;
   line-height: 30px !important;
-  line-height: 2rem !important;
+  line-height: 1.875rem !important;
   font-size: 20px !important;
-  font-size: 1.33333rem !important;
+  font-size: 1.25rem !important;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -6827,9 +6827,9 @@ input[type='checkbox']:checked + .input__label:before, input[type='checkbox']:ch
     width: 40px;
     height: 40px;
     line-height: 40px;
-    line-height: 2.66667rem;
+    line-height: 2.5rem;
     font-size: 20px;
-    font-size: 1.33333rem;
+    font-size: 1.25rem;
     border-radius: 50%;
     text-align: center;
     background-color: #FFFFFF; }
@@ -7070,7 +7070,7 @@ menu-dropdown,
   min-height: 64px; }
   .nav-wrapper .material-icons {
     line-height: 64px;
-    line-height: 4.26667rem; }
+    line-height: 4rem; }
 
 .navbar__button {
   cursor: pointer;
@@ -7105,7 +7105,7 @@ menu-dropdown,
   margin-top: -19px;
   text-align: center;
   font-size: 13px;
-  font-size: 0.86667rem; }
+  font-size: 0.8125rem; }
 
 /**
  * #NAVBAR__LINK
@@ -7251,7 +7251,7 @@ menu-dropdown,
   padding: 0 !important;
   list-style: none !important;
   font-size: 12px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #6B7277;
   background: -webkit-linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
   background: -webkit-linear-gradient(top, #ffffff 0%, #f9f9f9 100%);
@@ -7267,7 +7267,7 @@ menu-dropdown,
 
 .nw-toolbar label {
   line-height: 30px;
-  line-height: 2rem;
+  line-height: 1.875rem;
   display: inline-block;
   padding: 0 6px 0 3px; }
 
@@ -7368,7 +7368,7 @@ menu-dropdown,
 
 .nw-button:before {
   font-size: 12px;
-  font-size: 0.8rem; }
+  font-size: 0.75rem; }
 
 .nw-button.bold:before {
   content: "format_bold"; }
@@ -7421,9 +7421,9 @@ menu-dropdown,
   margin: 0;
   font-family: sans-serif;
   font-size: 14px;
-  font-size: 0.93333rem;
+  font-size: 0.875rem;
   line-height: 24px;
-  line-height: 1.6rem; }
+  line-height: 1.5rem; }
 
 .nw-select {
   height: 30px;
@@ -7595,7 +7595,7 @@ menu-dropdown,
 
 .sidebar__icon {
   font-size: 20px;
-  font-size: 1.33333rem; }
+  font-size: 1.25rem; }
 
 .sidebar__text {
   display: inline-block;
@@ -7705,13 +7705,13 @@ menu-dropdown,
 
 table {
   font-size: 14px;
-  font-size: 0.93333rem; }
+  font-size: 0.875rem; }
 
 .grid-sort-btn {
   cursor: pointer;
   display: inline-block;
   font-size: 20px;
-  font-size: 1.33333rem;
+  font-size: 1.25rem;
   line-height: 1;
   vertical-align: middle; }
   .grid-sort-btn.active-orderby {
@@ -7807,7 +7807,7 @@ table {
   margin-left: -5px;
   border-radius: 3px;
   font-size: 12px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   max-width: 250px;
   pointer-events: none; }
   .tooltip:after {
@@ -7862,7 +7862,7 @@ table {
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
   font-size: 12px;
-  font-size: 0.8rem; }
+  font-size: 0.75rem; }
 
 .waves-effect.waves-blue .waves-ripple {
   /* The alpha value allows the text and background color
@@ -7882,7 +7882,7 @@ table {
   float: left;
   height: 34px;
   line-height: 32px;
-  line-height: 2.13333rem; }
+  line-height: 2rem; }
   .langswitch__item.langswitch__item--active, .langswitch__item:hover {
     background-color: #42A5F5; }
   .langswitch__item:first-child {
@@ -7946,7 +7946,7 @@ table {
   cursor: pointer; }
   .toggler__link i {
     line-height: 60px;
-    line-height: 4rem; }
+    line-height: 3.75rem; }
 
 .toasts__confirm {
   display: block;
@@ -8090,9 +8090,9 @@ table {
   box-sizing: border-box !important;
   display: block;
   font-size: 16px;
-  font-size: 1.06667rem;
+  font-size: 1rem;
   line-height: 24px;
-  line-height: 1.6rem;
+  line-height: 1.5rem;
   margin: 10px 0 0;
   padding: 5px 10px 3px;
   width: 100%; }
@@ -8114,7 +8114,7 @@ table {
     vertical-align: middle; }
   .zaa-sortrelation__dropdown-entry i {
     font-size: 16px;
-    font-size: 1.06667rem;
+    font-size: 1rem;
     margin-right: 5px;
     -webkit-transition: .25s ease color;
     transition: .25s ease color; }

@@ -19,18 +19,13 @@ class Main extends \luya\web\Asset
      */
     public $css = [
         'dist/css/admin.css'
-        //'css/admin.css',
     ];
 
     /**
      * @var array A list of javascript files located in the $sourcePath folder.
      */
     public $js = [
-        'dist/js/main.min.js'
-        /*'js/zaa.js',
-        'js/services.js',
-        'js/directives.js',
-        'js/controllers.js',*/
+        'dist/js/main.min.js',
     ];
 
     /**
