@@ -66,11 +66,11 @@ class BowerVendor extends \luya\web\Asset
         }
         
         $this->js = [
-            'angular/angular.min.js',
+            'angular-i18n/angular-locale_'.$lang.'.js',
+            /*'angular/angular.min.js',
             'angular-chosen/angular-chosen.min.js',
             'angular-datepicker/angular-datepicker.min.js',
             'angular-dragdrop/src/angular-dragdrop.min.js',
-            'angular-i18n/angular-locale_'.$lang.'.js',
             'angular-loading-bar/loading-bar.min.js',
             'angular-slugify/angular-slugify.js',
             'angular-ui-router/release/angular-ui-router.min.js',
@@ -79,7 +79,11 @@ class BowerVendor extends \luya\web\Asset
             'ng-file-upload/ng-file-upload-shim.min.js',
             'ng-wig/ng-wig.min.js',
             'twig.js/twig.min.js',
-            'angular-filter.min.js',
+            'angular-filter.min.js',*/
         ];
     }
+
+    public $depends = [
+        'luya\admin\assets\Main',
+    ];
 }

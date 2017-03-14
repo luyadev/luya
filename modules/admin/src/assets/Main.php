@@ -18,17 +18,19 @@ class Main extends \luya\web\Asset
      * @var array A list of css style documents located in the $sourcePath folder.
      */
     public $css = [
-        'css/admin.css',
+        'dist/css/admin.css'
+        //'css/admin.css',
     ];
 
     /**
      * @var array A list of javascript files located in the $sourcePath folder.
      */
     public $js = [
-        'js/zaa.js',
+        'dist/js/main.min.js'
+        /*'js/zaa.js',
         'js/services.js',
         'js/directives.js',
-        'js/controllers.js',
+        'js/controllers.js',*/
     ];
 
     /**
@@ -36,6 +38,5 @@ class Main extends \luya\web\Asset
      */
     public $depends = [
         'luya\admin\assets\Jquery',
-        'luya\admin\assets\BowerVendor',
     ];
 }
