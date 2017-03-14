@@ -8,10 +8,9 @@ use luya\admin\ngrest\base\ActiveWindow;
 /**
  * Active Window to set permissions for a specific Group, used in groups ngrest model.
  *
- * @todo rename to GroupAuthActiveWindow
  * @author Basil Suter <basil@nadar.io>
  */
-class GroupAuth extends ActiveWindow
+class GroupAuthActiveWindow extends ActiveWindow
 {
     /**
      * @var string The name of the module where the active windows is located in order to finde the view path.

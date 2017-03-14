@@ -5,14 +5,14 @@ namespace tests\admin\aws;
 use Yii;
 use admintests\AdminTestCase;
 
-class ChangePasswordTest extends AdminTestCase
+class ChangePasswordActiveWindowTest extends AdminTestCase
 {
     public $aws = null;
 
     public function setUp()
     {
         parent::setUp();
-        $this->aws = Yii::createObject(['class' => 'luya\admin\aws\ChangePassword']);
+        $this->aws = Yii::createObject(['class' => 'luya\admin\aws\ChangePasswordActiveWindow']);
     }
 
     public function testIndex()

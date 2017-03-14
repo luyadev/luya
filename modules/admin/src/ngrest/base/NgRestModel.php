@@ -445,7 +445,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * {
      *     return [
      *         ['class' => 'luya\admin\aws\TagActiveWindow', 'label' => 'Tags Label'],
-     *         ['class' => luya\admin\aws\ChangePassword::class, 'label' => 'Change your Password'],
+     *         ['class' => luya\admin\aws\ChangePasswordActiveWindow::class, 'label' => 'Change your Password'],
      *     ];
      * }
      * ```

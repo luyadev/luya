@@ -5,7 +5,7 @@ namespace luya\admin\aws;
 /**
  * Change Password Active Window Interface.
  *
- * Each ChangePassword ActiveWindow must implemented this interface
+ * Each {{luya\admin\aws\ChangePasswordActiveWindow}} must implemented this interface
  *
  * ```php
  * class User extends \luya\admin\ngrest\base\NgRestModel implements \luya\admin\aws\ChangePasswordInterface

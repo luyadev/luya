@@ -143,7 +143,7 @@ The admin module of LUYA provides some basic reusable active windows you can reu
 |Name   |Class |Public Properties
 |--     |--     |--
 |Tag    |{{\luya\admin\aws\TagActiveWindow}}|<ul><li>$tableName</li></ul>
-|Gallery|{{\luya\admin\aws\Gallery}}|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
-|ChangePassword|{{\luya\admin\aws\ChangePassword}}|<ul><li>$className</li></ul>
-|CoordinatesActiveWindow|{{\luya\admin\aws\CoordinatesActiveWindow}}|<ul><li>$ampsApikey</li></ul>
-|FlowActiveWindow|{{\luya\admin\aws\FlowActiveWindow}}|<ul><li>$modelClass</li></ul>
+|Image collection selector from File Manager|{{\luya\admin\aws\ImageSelectCollectionActiveWindow}}|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
+|ChangePassword|{{\luya\admin\aws\ChangePasswordActiveWindow}}|<ul><li>$className</li></ul>
+|Coordinates Collector|{{\luya\admin\aws\CoordinatesActiveWindow}}|<ul><li>$ampsApikey</li></ul>
+|Image collection uploader with Flow|{{\luya\admin\aws\FlowActiveWindow}}|<ul><li>$modelClass</li></ul>

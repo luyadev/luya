@@ -12,7 +12,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  *
  * ```php
  * $config->aw->load([
- *     'class' => 'admin\aws\Gallery',
+ *     'class' => 'admin\aws\ImageCollectionActiveWindow',
  *     'refTableName' => 'gallery_album_image',
  *     'imageIdFieldName' => 'image_id',
  *     'refFieldName' => 'album_id',
@@ -29,10 +29,9 @@ use luya\admin\ngrest\base\ActiveWindow;
  * ]);
  * ```
  *
- * @todo rename to FilemanagerGalleryActiveWindow
  * @author Basil Suter <basil@nadar.io>
  */
-class Gallery extends ActiveWindow
+class ImageSelectCollectionActiveWindow extends ActiveWindow
 {
     public $refTableName = null;
 

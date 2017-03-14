@@ -10,7 +10,7 @@ use luya\admin\Module;
 use luya\admin\traits\SoftDeleteTrait;
 use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
-use luya\admin\aws\ChangePassword;
+use luya\admin\aws\ChangePasswordActiveWindow;
 
 /**
  * User Model represents all Administration Users.
@@ -137,7 +137,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     public function ngRestActiveWindows()
     {
         return [
-            ['class' => ChangePassword::class],
+            ['class' => ChangePasswordActiveWindow::class],
         ];
     }
 

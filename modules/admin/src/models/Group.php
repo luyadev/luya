@@ -5,7 +5,7 @@ namespace luya\admin\models;
 use luya\admin\Module;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\admin\ngrest\base\NgRestModel;
-use luya\admin\aws\GroupAuth;
+use luya\admin\aws\GroupAuthActiveWindow;
 
 /**
  * This is the model class for table "admin_group".
@@ -106,7 +106,7 @@ final class Group extends NgRestModel
     public function ngRestConfig($config)
     {
         // load active window to config
-        $config->aw->load(['class' => GroupAuth::className(), 'alias' => Module::t('model_group_btn_aws_groupauth')]);
+        $config->aw->load(['class' => GroupAuthActiveWindow::className(), 'alias' => Module::t('model_group_btn_aws_groupauth')]);
         
         // define config
         $this->ngRestConfigDefine($config, 'list', ['name', 'text']);
