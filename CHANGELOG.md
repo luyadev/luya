@@ -22,6 +22,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1230](https://github.com/luyadev/luya/issues/1230) ngRestScopes() resolves the need for ngRestConfig($config) method.
 - [#1214](https://github.com/luyadev/luya/issues/1214) Added JSON-LD class to add rich snippet informations to a website.
 - [#1124](https://github.com/luyadev/luya/issues/1124) Refactor all CMS blocks with UnitTests and PhpBlocks.
 - [#1211](https://github.com/luyadev/luya/issues/1211) Add new link directive with ability to deselect a link.
