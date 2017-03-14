@@ -9,6 +9,6 @@
   "devDependencies": {},
   "dependencies": {
     "gulp": "^3.9.1",
-    "zephir-gulp-workflow": "~1.0.2"
+    "zephir-gulp-workflow": "~1.0.3"
   }
 }
