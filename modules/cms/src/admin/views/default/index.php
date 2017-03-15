@@ -170,8 +170,8 @@ use \luya\cms\admin\Module;
         <div class="input input--radios col s12">
             <label class="input__label"><?php echo \luya\admin\Module::t('view_index_redirect_type'); ?></label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.redirect_type" value="1"><label ng-click="data.redirect_type = 1"><?php echo \luya\admin\Module::t('view_index_redirect_internal'); ?></label> <br />
-                <input type="radio" ng-model="data.redirect_type" value="2"><label ng-click="data.redirect_type = 2"><?php echo \luya\admin\Module::t('view_index_redirect_external'); ?></label>
+                <input type="radio" ng-model="data.redirect_type" ng-value="1"><label ng-click="data.redirect_type = 1"><?php echo \luya\admin\Module::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.redirect_type" ng-value="2"><label ng-click="data.redirect_type = 2"><?php echo \luya\admin\Module::t('view_index_redirect_external'); ?></label>
             </div>
         </div>
     </div>
