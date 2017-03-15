@@ -121,7 +121,7 @@ interface TypesInterface
      * @var string Create an expandable list with plugins for each row.
      *
      * ```php
-     * ['var' => 'people', 'label' => 'People', 'type' => 'zaa-multiple-inputs', 'options' => [
+     * ['var' => 'people', 'label' => 'People', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' => [
      *          [
      *              'type' => 'zaa-select',
      *              'var' => 'salutation',
