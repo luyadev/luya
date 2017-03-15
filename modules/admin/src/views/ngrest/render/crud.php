@@ -299,7 +299,7 @@ use luya\admin\Module;
 
     </div>
     
-     <modal is-modal-hidden="activeWindowModal" <?php if (!$config->inline): ?>zaa-esc="closeActiveWindow()"<?php endif; ?>>
+    <modal is-modal-hidden="activeWindowModal">
         <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
     </modal>
 
