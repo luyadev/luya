@@ -52,7 +52,7 @@ public function init()
 
 The following conventions are used when contributing to the LUYA project.
 
-#### PHP 
+### PHP 
 
 PSR2 Naming convention
 
@@ -88,7 +88,7 @@ class Foo extends Bar implements FooInterface
 }
 ```
 
-#### SQL
+### SQL
 
 SQL Datbase Table and Field namings:
 
@@ -115,15 +115,15 @@ field name examples
 + password_salt
 + group_id
 
-#### CSS
+### CSS
 
 http://cssguidelin.es/
 
-#### JS
+### JS
 
 https://github.com/airbnb/javascript
 
-#### JSON-SCHEMA:
+### JSON-SCHEMA:
 
 http://json-schema.org/latest/json-schema-core.html
 
@@ -132,7 +132,10 @@ http://json-schema.org/latest/json-schema-core.html
 
 The css and html files for the admin module are based on the following rules.
 
-#### Admin Design compile
+### Admin Design compile
+
+> We now use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow) to compile all styles and js files in the admin module.  
+> To use it, go to `modules/admin/src/resources` and run `gulp`. To install gulp and the dependencies on your System [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).
 
 To compile the styles you have to install the following tools and plugins:
 
