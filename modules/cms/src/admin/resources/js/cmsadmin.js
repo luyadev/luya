@@ -861,7 +861,7 @@
 		$scope.loadNavProperties = function() {
 			$http.get('admin/api-cms-nav/get-properties', { params: {navId: $scope.id}}).then(function(response) {
 				for(var i in response.data) {
-					var d = response[i];
+					var d = response.data[i];
 					$scope.propValues[d.admin_prop_id] = d.value;
 					$scope.hasValues = true;
 				}
