@@ -56,6 +56,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'it' => 'Italiano',
         'el' => 'Ελληνικά',
         'vi' => 'Việt Nam',
+    	'pt' => 'Portuguese',
     ];
     
     /**
