@@ -69,6 +69,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain translations added.
 - [#1154](https://github.com/luyadev/luya/issues/1154) Italian translations added.
 - [#1205](https://github.com/luyadev/luya/issues/1205) Vietnamese translations added.
+- [#1236](https://github.com/luyadev/luya/pull/1236) Portuguese translations added.
 
 ### Fixed
 
