@@ -154,7 +154,7 @@ abstract class Controller extends \luya\web\Controller
             $seoAlert++;
         } else {
             foreach ($menu->current->keywords as $word) {
-                if (preg_match_all('/' . $word . '/i', $content, $matches)) {
+                if (preg_match_all('/' . preg_quote($word) . '/i', $content, $matches)) {
                     $keywords[] = [$word, count($matches[0])];
                 } else {
                     $keywords[] = [$word, 0];
