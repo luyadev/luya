@@ -407,8 +407,8 @@
 				$scope.applySaveCallback();
 				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
 				$scope.switchTo(0, true);
-			}).error(function(data) {
-				$scope.printErrors(data);
+			}, function(data) {
+				$scope.printErrors(data.data);
 			});
 		};
 		
@@ -690,6 +690,10 @@
 				$scope.auths = response.data.auths;
 			})
 		};
+		
+		$scope.$on('awloaded', function(e, d) {
+			$scope.getRights();
+		});
 		
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.getRights();
