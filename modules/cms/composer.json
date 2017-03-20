@@ -34,7 +34,11 @@
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
-        },
-        "asset-pattern-skip-version": "(-build|-patch)"
+        }
+    },
+    "config": {
+        "fxp-asset" : {
+            "pattern-skip-version": "(-build|-patch)"
+        }   
     }
 }

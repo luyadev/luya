@@ -26,12 +26,16 @@
 				}
 			]
 		},
-		"asset-pattern-skip-version": "(-build|-patch)",
-        "asset-installer-paths": {
-            "bower-asset-library": "vendor/bower"
-        },
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
+    },
+    "config": {
+        "fxp-asset" : {
+            "pattern-skip-version": "(-build|-patch)",
+             "installer-paths": {
+                "bower-asset-library": "vendor/bower"
+            }
+        }   
     }
 }

@@ -7,7 +7,7 @@ With those few steps you can install *LUYA* on your Webserver. To install *LUYA*
 First of all you have to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. To global install the plugin open your Terminal and run the following code:
 
 ```sh
-composer global require "fxp/composer-asset-plugin:~1.2"
+composer global require "fxp/composer-asset-plugin:~1.3"
 ```
 
 After setting up composer, we execute the composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup enabling you to directly run your website. We recommend to run the `create-project` command directly from your htdocs/webserver folder:
