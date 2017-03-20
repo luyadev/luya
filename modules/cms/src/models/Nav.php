@@ -292,6 +292,10 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toBeforeNavId);
 
+        if (!$move || !$on) {
+            return false;
+        }
+        
         $response = self::checkDuplicateAlias($move->id, $to->parent_nav_id);
         
         if ($response !== true) {
@@ -317,6 +321,10 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toAfterNavId);
 
+        if (!$move || !$on) {
+            return false;
+        }
+        
         $response = self::checkDuplicateAlias($move->id, $to->parent_nav_id);
         
         if ($response !== true) {
@@ -341,6 +349,12 @@ class Nav extends ActiveRecord
     {
         $move = self::findOne($moveNavId);
         $on = self::findOne($droppedOnItemId);
+        
+        return false;
+        
+        if (!$move || !$on) {
+            return false;
+        }
 
 
         $response = self::checkDuplicateAlias($move->id, $on->id);
@@ -377,9 +391,6 @@ class Nav extends ActiveRecord
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
     }
-
-    // create methods
-    // @todo make static, moved to helper class?
 
     /**
      *
