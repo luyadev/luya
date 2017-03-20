@@ -7,6 +7,7 @@ use luya\crawler\admin\Module;
 use luya\crawler\models\Searchdata;
 use luya\helpers\Url;
 use yii\helpers\Inflector;
+use Nadar\Stemming\Stemm;
 
 /**
  * This is the model class for table "crawler_index".
@@ -43,14 +44,14 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
     public function rules()
     {
         return [
-                [['url'], 'required'],
-                [['content', 'description'], 'string'],
-                [['added_to_index', 'last_update'], 'integer'],
-                [['url', 'title'], 'string', 'max' => 200],
-                [['language_info'], 'string', 'max' => 80],
-                [['url_found_on_page'], 'string', 'max' => 255],
-                [['group'], 'string', 'max' => 120],
-                [['url'], 'unique'],
+            [['url'], 'required'],
+            [['content', 'description'], 'string'],
+            [['added_to_index', 'last_update'], 'integer'],
+            [['url', 'title'], 'string', 'max' => 200],
+            [['language_info'], 'string', 'max' => 80],
+            [['url_found_on_page'], 'string', 'max' => 255],
+            [['group'], 'string', 'max' => 120],
+            [['url'], 'unique'],
         ];
     }
 
@@ -99,17 +100,22 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
     {
         $query = static::encodeQuery($query);
     
+        $query = Stemm::stemPhrase($query, $languageInfo);
+        
         if (strlen($query) < 1) {
             return [];
         }
     
         $q = self::find()->where(['like', 'content', $query]);
+        $q->orWhere(['like', 'description', $query]);
+        $q->orWhere(['like', 'title', $query]);
         if (!empty($languageInfo)) {
             $q->andWhere(['language_info' => $languageInfo]);
         }
         $result = $q->all();
     
         $searchData = new SearchData();
+        $searchData->detachBehavior('LogBehavior');
         $searchData->attributes = [
             'query' => $query,
             'results' => count($result),
@@ -143,7 +149,11 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         $index = [];
         
         foreach ($parts as $word) {
-            $q = self::find()->select(['id', 'content'])->where(['like', 'content', $word]);
+            $word = Stemm::stem($word, $languageInfo);
+            $q = self::find()->select(['id', 'content']);
+            $q->where(['like', 'content', $word]);
+            $q->orWhere(['like', 'description', $query]);
+            $q->orWhere(['like', 'title', $query]);
             if (!empty($languageInfo)) {
                 $q->andWhere(['language_info' => $languageInfo]);
             }
@@ -165,6 +175,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         $result = $activeQuery->all();
         
         $searchData = new SearchData();
+        $searchData->detachBehavior('LogBehavior');
         $searchData->attributes = [
             'query' => $query,
             'results' => count($result),

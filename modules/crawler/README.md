@@ -1,4 +1,4 @@
-# Page Crawler
+# Page Crawler
 
 [![Build Status](https://travis-ci.org/luyadev/luya-module-crawler.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-crawler)
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-crawler/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-crawler?branch=master)

@@ -4,6 +4,7 @@ namespace crawlerests\models;
 
 use luya\crawler\models\Index;
 use crawlerests\CrawlerTestCase;
+use crawlerests\data\fixtures\IndexFixture;
 
 class StubIndex extends Index
 {
@@ -32,4 +33,47 @@ class IndexTest extends CrawlerTestCase
         $this->assertSame('Hello <span style=\'background-color:#FFEBD1; color:black;\'>foobar</span> Hello', $model->highlight('foobar', 'Hello FOOBAR Hello'));
         $this->assertSame('Hello <span style=\'background-color:#FFEBD1; color:black;\'>FOOBar</span> Hello', $model->highlight('FOOBar', 'Hello foobar Hello'));
     }
+    
+    public function testFlatSearchByQuery()
+    {
+        $fixture = new IndexFixture();
+        $fixture->load();
+        
+        $test = Index::flatSearchByQuery('aaa', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+        
+        $test = Index::flatSearchByQuery('bbb', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+        
+        $test = Index::flatSearchByQuery('ccc', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+        
+    }
+    
+    public function testsearchByQuery()
+    {
+        $fixture = new IndexFixture();
+        $fixture->load();
+    
+        $test = Index::searchByQuery('aaa', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+    
+        $test = Index::searchByQuery('bbb', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+    
+        $test = Index::searchByQuery('ccc', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+    }
+    
+    public function testEnhancedSearchByQuery()
+    {
+        $fixture = new IndexFixture();
+        $fixture->load();
+        $test = Index::searchByQuery('drink bug', 'en');
+        $this->assertSame('index2', $test[0]->title);
+        $test = Index::searchByQuery('drinking finding', 'en');
+        $this->assertSame('index2', $test[0]->title);
+    }
+    
+    
 }
