@@ -1,7 +1,6 @@
 <?php
 
 return [
-    
     'view_index_add_type' => 'Tipo de página',
     'view_index_type_page' => 'Página',
     'view_index_type_module' => 'Módulo',
@@ -107,7 +106,7 @@ return [
     'Initial' => 'Primeira versão',
     'view_index_page_version_chooser' => 'Versão publicada',
     'versions_selector' => 'Versões',
-    'page_has_no_version' => 'Esta página ainda não tem versão e layout. Crie uma nova versão clicando no ícone de adicionar <i class = "material-icons green-text"> adicionar </ i> à direita.',
+    'page_has_no_version' => 'Esta página ainda não tem versão e layout. Crie uma nova versão clicando no ícone de adicionar <i class="material-icons green-text">adicionar</i> à direita.',
     'version_edit_title' => 'Editar versão',
     'version_input_name' => 'Nome',
     'version_input_layout' => 'Layout',
