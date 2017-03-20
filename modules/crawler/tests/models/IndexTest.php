@@ -55,24 +55,39 @@ class IndexTest extends CrawlerTestCase
         $fixture = new IndexFixture();
         $fixture->load();
     
-        $test = Index::searchByQuery('aaa', 'en');
-        $this->assertSame('aaa', $test[0]->title);
+        $test1 = Index::searchByQuery('aaa', 'en');
+        $this->assertSame('aaa', $test1[0]->title);
     
-        $test = Index::searchByQuery('bbb', 'en');
-        $this->assertSame('aaa', $test[0]->title);
+        $test2 = Index::searchByQuery('bbb', 'en');
+        $this->assertSame('aaa', $test2[0]->title);
     
-        $test = Index::searchByQuery('ccc', 'en');
-        $this->assertSame('aaa', $test[0]->title);
+        $test3 = Index::searchByQuery('ccc', 'en');
+        $this->assertSame('aaa', $test3[0]->title);
     }
     
     public function testEnhancedSearchByQuery()
     {
         $fixture = new IndexFixture();
         $fixture->load();
-        $test = Index::searchByQuery('drink bug', 'en');
-        $this->assertSame('index2', $test[0]->title);
-        $test = Index::searchByQuery('drinking finding', 'en');
-        $this->assertSame('index2', $test[0]->title);
+        
+        $test1 = Index::searchByQuery('drink bug', 'en');
+        $this->assertSame('index2', $test1[0]->title);
+        
+        $test2 = Index::searchByQuery('drinking finding', 'en');
+        $this->assertSame('index3', $test2[0]->title);
+        
+        // test4
+        $test3 = Index::searchByQuery('two words', 'en');
+        $this->assertSame('index4', $test3[0]->title);
+        
+        $test4 = Index::searchByQuery('words two', 'en');
+        $this->assertSame('index4', $test4[0]->title);
+        
+        $test5 = Index::searchByQuery('words two', 'en');
+        $this->assertSame('index4', $test5[0]->title);
+        
+        $test6 = Index::searchByQuery('words two three', 'en');
+        $this->assertEmpty($test6);
     }
     
     

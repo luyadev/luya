@@ -26,12 +26,19 @@ class IndexFixture extends ActiveFixture
                 'language_info' => 'en',
             ],
             'index3' => [
-                'url' => 'index2.php',
-                'title' => 'index2',
+                'url' => 'index3.php',
+                'title' => 'index3',
                 'content' => 'stem drink stem find stem',
-                'description' => 'index2',
+                'description' => 'index3',
                 'language_info' => 'en',
             ],
+            'index4' => [
+                'url' => 'index4.php',
+                'title' => 'index4',
+                'content' => 'twowords',
+                'description' => 'index4',
+                'language_info' => 'en',
+            ]
         ];
     }
 }
