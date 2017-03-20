@@ -106,17 +106,17 @@ class ProxyController extends Command
         
         if (!$identifier) {
             $identifier = $this->prompt('Please enter the identifier ID:');
-            Config::set(self::CONFIG_VAR_IDENTIFIER, $identifier);
+            Config::set(self::CONFIG_VAR_IDENTIFIER, trim($identifier));
         }
         
         $token = Config::get(self::CONFIG_VAR_TOKEN);
         
         if (!$token) {
             $token = $this->prompt('Please enter the access token:');
-            Config::set(self::CONFIG_VAR_TOKEN, $token);
+            Config::set(self::CONFIG_VAR_TOKEN, trim($token));
         }
         
-        $proxyUrl = Url::ensureHttp(rtrim($url, '/')) . '/admin/api-admin-proxy';
+        $proxyUrl = Url::ensureHttp(rtrim(trim($url), '/')) . '/admin/api-admin-proxy';
         $this->outputInfo('Connect to: ' . $proxyUrl);
         
         $curl = new Curl();
