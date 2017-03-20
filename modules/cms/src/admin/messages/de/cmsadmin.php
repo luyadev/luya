@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'view_index_add_type' => 'Seitentyp',
     'view_index_type_page' => 'Seite',
     'view_index_type_module' => 'Modul',
