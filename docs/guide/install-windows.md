@@ -29,24 +29,24 @@ Now change the database connection inside the `configs/env-local-db.php` file to
 Create all Database tables:
 
 ```sh
-php index.php luya migrate
+php index.php migrate
 ```
 
 Import specific data into the Database:
 
 ```sh
-php index.php luya import
+php index.php import
 ```
 
 At least we execute the setup command which will install an administration area user, group and sets the lowest permission.
 
 ```sh
-php index.php luya admin/setup
+php index.php admin/setup
 ```
 
 The setup proccess will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).
 
-> `php index.php luya health` will make a small check if several directorys are readable etc.
+> `php index.php health` will make a small check if several directorys are readable etc.
 
 You can now log in into your administration interface `http://localhost/luya-kickstarter/public_html/admin` (depending on where you have located the luya files). When you have successfull logged into the administration area, navigate to **System** -> **Groups** and click **Authorizations**. This will open an Active Window where you can enable all permissions for your Group.
 
