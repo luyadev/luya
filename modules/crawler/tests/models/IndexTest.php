@@ -131,4 +131,16 @@ class IndexTest extends CrawlerTestCase
         $this->assertSame('index6/else/item', $test1[1]->url);
         $this->assertSame('index7.php', $test1[2]->url);
     }
+
+    public function testHtmlEncodingQuery()
+    {
+        $this->assertSame('&Ouml;ff', Index::encodeQuery('Öff'));
+        
+        $this->assertSame(1, (int) Index::activeQuerySearch('öff', 'de')->count());
+        $this->assertSame(1, (int) Index::activeQuerySearch('Öff', 'de')->count());
+        
+        $this->assertSame('offnungszeiten', Index::searchByQuery('öff', 'de')[0]->title);
+        $this->assertSame('offnungszeiten', Index::searchByQuery('Öff', 'de')[0]->title);
+        
+    }
 }

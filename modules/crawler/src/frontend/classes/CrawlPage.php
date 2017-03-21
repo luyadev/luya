@@ -178,14 +178,19 @@ class CrawlPage extends \yii\base\Object
         if (!$crawler) {
             return null;
         }
-        
-        $text = $crawler->filterXPath('//title')->text();
-        
-        if (!empty($text)) {
-            return $text;
+     
+        try {
+            $text = $crawler->filterXPath('//title')->text();
+            
+            if (!empty($text)) {
+                return $text;
+            }
+        } catch (\Exception $e) {
+            // catch "The current node list is empty." exception
         }
         
         return null;
+        
     }
 
     public function getTitle()

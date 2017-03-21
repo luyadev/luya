@@ -50,6 +50,6 @@
     + [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
     + [Plugin Selects](ngrest-plugin-select.md)
 + Developers
-  + [Docu Guidelines](luya-guideline.md)
+  + [LUYA Guidelines](luya-guideline.md)
   + [Collaboration](luya-collaboration.md)
   + [Browser Compatibility](luya-browser.md)

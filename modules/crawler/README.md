@@ -43,6 +43,8 @@ After setup the module in your config you have to run the migrations and import 
 
 To execute the command (and run the crawler proccess) use the crawler command `crawl`, you should put this command in cronjob to make sure your index is up-to-date:
 
+> Make sure your page is in utf8 mode (`<meta charset="utf-8"/>`).
+
 ```sh
 ./vendor/bin/luya crawler/crawl
 ```

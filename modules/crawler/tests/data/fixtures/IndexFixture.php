@@ -61,6 +61,12 @@ class IndexFixture extends ActiveFixture
                 'description' => 'index5',
                 'language_info' => 'en',
             ],
+            'index8' => [
+                'url' => 'offnungszeiten.php',
+                'title' => 'offnungszeiten',
+                'content' => '&Ouml;ffnungszeiten &ouml;ffnungszeiten &Ouml;ffnungszeiten &ouml;ffnungszeiten',
+                'language_info' => 'de',
+            ]
         ];
     }
 }

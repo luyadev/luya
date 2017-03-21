@@ -120,7 +120,6 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
      */
     public static function searchByQuery($query, $languageInfo)
     {
-        $query = static::encodeQuery($query);
         
         if (strlen($query) < 1) {
             return [];
@@ -238,6 +237,12 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             }
         }
         
+        $after = substr($item['url'], $newpos + 1);
+        
+        if ($after) {
+            $newpos = $newpos + strlen($after);
+        }
+        
         if (isset($item['urlwordpos']) && $item['urlwordpos'] < $newpos) {
             return $item['urlwordpos'];
         }
@@ -251,7 +256,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
      * @param unknown $query
      * @return string
      */
-    private static function encodeQuery($query)
+    public static function encodeQuery($query)
     {
         return trim(htmlentities($query, ENT_QUOTES));
     }
