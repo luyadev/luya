@@ -41,7 +41,7 @@ namespace file\namespace;
 /**
  * Test Model.
  * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC3-dev. 
  */
 class TestModel extends \luya\admin\ngrest\base\Api
 {
@@ -62,7 +62,7 @@ namespace file\namespace;
 /**
  * Test Model.
  * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC3-dev. 
  */
 class TestModel extends \luya\admin\ngrest\base\Controller
 {
@@ -86,7 +86,7 @@ use luya\admin\ngrest\base\NgRestModel;
 /**
  * Test Model.
  * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC3-dev. 
  *
  * @property integer $id
  * @property string $firstname
@@ -253,7 +253,7 @@ use luya\admin\ngrest\base\NgRestModel;
 /**
  * Test Model.
  * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC3-dev. 
  *
  * @property integer $id
  * @property string $name
