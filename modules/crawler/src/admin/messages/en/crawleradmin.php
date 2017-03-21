@@ -21,6 +21,6 @@ return [
     'index_title' => 'Title',
     'index_language_info' => 'Language info',
     'index_content' => 'Content',
-    'index_url_found' => 'URL found on Page',
+    'index_url_found' => 'URL found on page',
 
 ];
