@@ -205,6 +205,7 @@ return [
     'model_logger_time' => 'Thời gian',
     'model_logger_message' => 'Ghi chú',
     'model_logger_type' => 'Loại',
+    'model_logger_badgetype' => 'Status',
     'model_logger_trace_file' => 'Trace File',
     'model_logger_trace_line' => 'Trace Line',
     'model_logger_trace_function' => 'Trace Function',

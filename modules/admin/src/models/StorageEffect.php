@@ -77,7 +77,7 @@ final class StorageEffect extends NgRestModel
      */
     public function ngRestConfig($config)
     {
-        $this->ngRestConfigDefine($config, 'list', ['name', 'identifier', 'imagine_name', 'imagine_json_params']);
+        $this->ngRestConfigDefine($config, 'list', ['identifier', 'imagine_json_params']);
         
         return $config;
     }
