@@ -25,7 +25,7 @@ use luya\admin\Module;
                         <div class="input input--text input--vertical col s12">
                             <label class="input__label" for="email"><?= Module::t('login_mail'); ?></label>
                             <div class="input__field-wrapper">
-                                <input class="input__field" id="email" name="login[email]" type="email" />
+                                <input class="input__field" id="email" name="login[email]" type="email" tabindex="1" />
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@ use luya\admin\Module;
                         <div class="input input--text input--vertical col s12">
                             <label class="input__label" for="password"><?= Module::t('login_password'); ?></label>
                             <div class="input__field-wrapper">
-                                <input class="input__field" id="password" name="login[password]" type="password" />
+                                <input class="input__field" id="password" name="login[password]" type="password" tabindex="2" />
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ use luya\admin\Module;
                 </div>
 
                 <div class="card-action">
-                    <button class="btn right color green white-text" type="submit">
+                    <button class="btn right color green white-text" type="submit"  tabindex="3">
                         <?= Module::t('login_btn_login'); ?> <i class="material-icons right submit-icon">keyboard_arrow_right</i>
                         <div class="preloader-wrapper login__spinner right small active hidden spinner"><div class="spinner-layer"><div class="circle-clipper left"><div class="circle"></div></div></div></div>
                     </button>
@@ -66,7 +66,7 @@ use luya\admin\Module;
                         <div class="input input--text input--vertical col s12">
                             <label class="input__label" for="secure_token"><?= Module::t('login_securetoken'); ?></label>
                             <div class="input__field-wrapper">
-                                <input class="input__field" name="secure_token" id="secure_token" type="text" />
+                                <input class="input__field" name="secure_token" id="secure_token" type="text" tabeindex="1" />
                                 <small><?= Module::t('login_securetoken_info'); ?></small>
                             </div>
                         </div>
