@@ -26,14 +26,14 @@ return [
     'dashboard_title' => 'Welcome.',
     'dashboard_text' => 'You can switch between modules in the main navigation at the top of the screen.<br />The side navigation to the left gives you access to functions of the selected module.',
     'layout_select_file' => 'Choose file',
-    'layout_deleted_file' => 'You can\'t apply a filter, because the original file was deleted. Upload or choose a new file to apply a filter.',
-    'layout_no_filter' => 'No Filter',
+    'layout_deleted_file' => 'You can\'t apply a filter because the original file was deleted. Upload or select a new file to apply a filter.',
+    'layout_no_filter' => 'No filter',
     'layout_debug_table_key' => 'Name',
     'layout_debug_table_value' => 'Value',
     'layout_filemanager_save_dir' => 'Save?',
     'layout_filemanager_remove_dir' => 'Delete directory?',
     'layout_filemanager_remove_dir_not_empty' => 'The directory is not empty.<br/>Delete it anyway?',
-    'layout_filemanager_remove_selected_files' => 'Delete marked files',
+    'layout_filemanager_remove_selected_files' => 'Delete selected files',
     'layout_filemanager_move_selected_files' => 'Move to',
     'layout_filemanager_upload_error' => 'Error while uploading file',
     'layout_filemanager_col_name' => 'Name',
@@ -45,7 +45,7 @@ return [
     'layout_filemanager_detail_size' => 'Size',
     'layout_filemanager_detail_id' => 'Internal ID',
     'layout_filemanager_detail_download' => 'Download',
-    'layout_btn_reload' => 'reload',
+    'layout_btn_reload' => 'Reload',
     'layout_btn_version' => 'Version',
     'layout_btn_useronline' => 'Online Users',
     'layout_btn_logout' => 'Logout',
@@ -66,8 +66,8 @@ return [
     'layout_debug_php_ini_max_exec' => 'PHP max_execution_time', // no translation
     'layout_debug_php_ini_post_max_size' => 'PHP post_max_size', // no translation
     'layout_debug_php_ini_upload_max_file' => 'PHP upload_max_filesize', // no translation
-    'layout_search_min_letters' => 'Please enter a search term with at least <b>three letters</b>.',
-    'layout_search_no_results' => 'No entries where found.',
+    'layout_search_min_letters' => 'Please enter a search term with at least <strong>three letters</strong>.',
+    'layout_search_no_results' => 'No entries were found.',
     'layout_filemanager_upload_files' => 'Add file',
     'layout_filemanager_folder' => 'Folder',
     'layout_filemanager_add_folder' => 'Add folder',
@@ -82,35 +82,35 @@ return [
     'model_group_name' => 'Name',
     'model_group_description' => 'Description',
     'model_group_user_buttons' => 'User',
-    'model_group_btn_aws_groupauth' => 'Authorizations',
+    'model_group_btn_aws_groupauth' => 'Permissions',
     'ngrest_crud_btn_list' => 'Entries',
     'ngrest_crud_btn_add' => 'Add',
     'ngrest_crud_btn_close' => 'Close',
     'ngrest_crud_search_text' => 'Enter search term...',
     'ngrest_crud_rows_count' => 'Entries',
     'ngrest_crud_btn_create' => 'Create',
-    'api_storage_image_upload_error' => 'The following error occured while uploading an image \'{error}\'.',
+    'api_storage_image_upload_error' => 'The following error occurred while uploading an image \'{error}\'.',
     'api_storage_file_upload_success' => 'Files have been uploaded successfully.',
-    'api_sotrage_file_upload_error' => 'The following error occured while upload a file \'{error}\'.',
-    'api_sotrage_file_upload_empty_error' => 'No files to upload found, have you selected any files?',
-    'aws_changepassword_info' => 'Please enter a new passwort for this user. The passwort must have a length of at least 6 chars.',
-    'aws_changepassword_succes' => 'The password have been encrypted and stored successful.',
+    'api_sotrage_file_upload_error' => 'The following error occurred while uploading a file \'{error}\'.',
+    'api_sotrage_file_upload_empty_error' => 'No files found for uploading. Did you select any files?',
+    'aws_changepassword_info' => 'Please enter a new password for this user. The password must have a minimum length of 6 characters.',
+    'aws_changepassword_succes' => 'The password has been encrypted and stored successfully.',
     'aws_changepassword_new_pass' => 'New password',
-    'aws_changepassword_new_pass_retry' => 'New passwort repeat',
+    'aws_changepassword_new_pass_retry' => 'New password repeat',
     'view_index_redirect_type' => 'Forwarding type',
     'view_index_redirect_internal' => 'Internal page',
     'view_index_redirect_external' => 'External URL',
     'view_index_redirect_internal_select' => 'Choose the internal page that should be forwarded to.',
     'view_index_redirect_external_link' => 'External link',
-    'view_index_redirect_external_link_help' => 'External links start with http:// or https://',
+    'view_index_redirect_external_link_help' => 'External links start with http:// or https:// (for absolute internal links, use // instead)',
 
 // added translation in 1.0.0-beta3:
 
     'model_loginform_email_label' => 'Email',
     'model_loginform_password_label' => 'Password',
-    'model_loginform_wrong_user_or_password' => 'Wrong user or password.',
+    'model_loginform_wrong_user_or_password' => 'Wrong username or password.',
     'ngrest_select_no_selection' => 'Select nothing',
-    'js_ngrest_error' => 'An error occured while loading.',
+    'js_ngrest_error' => 'An error occurred while loading.',
     'js_ngrest_rm_page' => 'Do you really want to delete this entry? This can not be undone.',
     'js_ngrest_rm_confirm' => 'The record was deleted successfully.',
     'js_ngrest_rm_update' => 'The record was updated successfully.',
@@ -125,12 +125,12 @@ return [
     'js_dir_image_description' => 'Description',
     'js_dir_no_selection' => 'No entries available yet. Add new entries by clicking the <span class="green-text">+</span> below to the left.',
     'js_dir_image_upload_ok' => 'The image was created successfully.',
-    'js_dir_image_filter_error' => 'There was an error when applying the filter to the file.',
+    'js_dir_image_filter_error' => 'There was an error while applying the filter to the file.',
     'js_dir_upload_wait' => 'Your data is being uploaded and processed. This can take several minutes.',
     'js_dir_manager_upload_image_ok' => 'The file was uploaded successfully.',
     'js_dir_manager_rm_file_confirm' => 'Do you really want to delete this file?',
     'js_dir_manager_rm_file_ok' => 'The file was deleted successfully.',
-    'js_zaa_server_proccess' => 'The server is processing your data, please hang on.',
+    'js_zaa_server_proccess' => 'Please wait while the server is processing your data.',
 
 // added translation in 1.0.0-beta4:
 
@@ -138,10 +138,10 @@ return [
 
 // added translation in 1.0.0-beta5:
 
-    'aws_gallery_empty' => 'Please select some images on the left to add them into the gallery album.',
+    'aws_gallery_empty' => 'Please select some images to the left to add them to the gallery album.',
     'aws_gallery_images' => 'Album images',
     'layout_useronline_name' => 'Name',
-    'layout_useronline_mail' => 'E-Mail',
+    'layout_useronline_mail' => 'Email',
     'layout_useronline_inactivesince' => 'Inactive since',
 
 // added translations in 1.0.0-beta6
@@ -153,9 +153,9 @@ return [
 // added translations in 1.0.0-beta7
 
     'login_securetoken_mail_subject' => 'LUYA Security code',
-    'login_securetoken_mail' => '<h1>LUYA Security code</h1><p>Use the following security code to login into your administration interface on {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
-    'login_async_token_error' => 'The provided security code is wrong.',
-    'login_async_token_globalerror' => 'A Server Error occured, please contact your Site administrator.',
+    'login_securetoken_mail' => '<h1>LUYA Security code</h1><p>Use the following security code to log into your administration at {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
+    'login_async_token_error' => 'The provided security code is invalid.',
+    'login_async_token_globalerror' => 'A Server error occurred, please contact your site administrator.',
     'ngrest_crud_csv_export_btn' => 'Generate CSV',
     'ngrest_crud_csv_export_btn_dl' => 'Download CSV',
     'layout_filemanager_search_text' => 'Enter search term...',
@@ -164,7 +164,7 @@ return [
     'mode_user_title' => 'Title',
     'mode_user_firstname' => 'Firstname',
     'mode_user_lastname' => 'Lastname',
-    'mode_user_email' => 'E-Mail',
+    'mode_user_email' => 'Email',
     'mode_user_password' => 'Password',
 
 // added translations in 1.0.0-beta8
@@ -172,13 +172,13 @@ return [
     'aws_tag_add' => 'add',
     'aws_tag_search' => 'Search entries',
     'aws_tag_list' => 'List of all entries',
-    'dashboard_log_message_add' => 'Added a new row to <b>{container}</b>.',
-    'dashboard_log_message_edit' => 'Updated an existing row in <b>{container}</b>.',
+    'dashboard_log_message_add' => 'Added a new row to <strong>{container}</strong>.',
+    'dashboard_log_message_edit' => 'Updated an existing row in <strong>{container}</strong>.',
 
 // rc1
 
     'layout_btn_help' => 'Help',
-    'right_panel_support_title' => 'Informations &amp; Help',
+    'right_panel_support_title' => 'Information &amp; Help',
     'right_panel_support_tags_title' => 'Tags',
     'right_panel_support_support_title' => 'Support',
     'right_panel_support_support_text' => 'If you have any questions, please contact your webmaster or consult <a target="_blank" href="https://luya.io">luya.io</a>.',
@@ -186,14 +186,14 @@ return [
 // rc2
 
     'ngrest_crud_group_prompt' => 'Group by field',
-    'ngrest_crud_filter_prompt' => 'Select Filter',
-    'ngrest_crud_ajax_search_length' => 'The search query must be at least 3 chars.',
+    'ngrest_crud_filter_prompt' => 'Select filter',
+    'ngrest_crud_ajax_search_length' => 'The search query must have a minimum length of 3 characters.',
     'menu_system_logger' => 'Logging',
     'layout_filemanager_detail_replace_file' => 'Replace file',
     'layout_rightbar_languagelabel' => 'Interface Language',
     'layout_rightbar_savebtn' => 'Save',
     'aws_changepassword_notequal' => 'The new password and the password repetition are not equal.',
-    'aws_changeapssword_minchar' => 'The new password must have at least {min} characters.',
+    'aws_changeapssword_minchar' => 'The new password must have a minimum length of {min} characters.',
     
 // 1.0.0
 
@@ -201,7 +201,7 @@ return [
     'model_lang_name' => 'Name',
     'model_lang_short_code' => 'Short Code',
     'model_lang_is_default' => 'Is default',
-    'model_lang_delete_error_is_default' => 'Unable to delete the Default language of the System.',
+    'model_lang_delete_error_is_default' => 'Unable to delete the default language of the System.',
     'model_logger_time' => 'Time',
     'model_logger_message' => 'Message',
     'model_logger_type' => 'Type',
@@ -226,7 +226,7 @@ return [
     'model_user_title_mr' => 'Mr.',
     'model_user_title_mrs' => 'Ms.',
     'js_ngrest_toggler_success' => '%field% successfully updated.',
-    'layout_image_filter_selection' => 'Select image Filter:',
+    'layout_image_filter_selection' => 'Select image filter:',
     'lock_admin_edit_crud_item' => 'Editing {module} "{table}" (ID: {id}).',
     'lock_cms_edit_page' => 'Editing page "{title}".',
     'layout_filemanager_col_size' => 'File size',
