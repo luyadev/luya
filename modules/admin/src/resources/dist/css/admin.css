@@ -5993,12 +5993,12 @@ table td {
     content: '\00a0'; }
   .flag.flag--squared {
     width: 1em; }
-  .flag:not(.flag--de):not(.flag--en):not(.flag--fr):not(.flag--it):not(.flag--ru) {
+  .flag:not(.flag--ad):not(.flag--ae):not(.flag--af):not(.flag--ag):not(.flag--ai):not(.flag--al):not(.flag--am):not(.flag--ao):not(.flag--aq):not(.flag--ar):not(.flag--as):not(.flag--at):not(.flag--au):not(.flag--aw):not(.flag--ax):not(.flag--az):not(.flag--ba):not(.flag--bb):not(.flag--bd):not(.flag--be):not(.flag--bf):not(.flag--bg):not(.flag--bh):not(.flag--bi):not(.flag--bj):not(.flag--bl):not(.flag--bm):not(.flag--bn):not(.flag--bo):not(.flag--bq):not(.flag--br):not(.flag--bs):not(.flag--bt):not(.flag--bv):not(.flag--bw):not(.flag--by):not(.flag--bz):not(.flag--ca):not(.flag--cc):not(.flag--cd):not(.flag--cf):not(.flag--cg):not(.flag--ch):not(.flag--ci):not(.flag--ck):not(.flag--cl):not(.flag--cm):not(.flag--cn):not(.flag--co):not(.flag--cr):not(.flag--cu):not(.flag--cv):not(.flag--cw):not(.flag--cx):not(.flag--cy):not(.flag--cz):not(.flag--de):not(.flag--dj):not(.flag--dk):not(.flag--dm):not(.flag--do):not(.flag--dz):not(.flag--ec):not(.flag--ee):not(.flag--eg):not(.flag--eh):not(.flag--er):not(.flag--es):not(.flag--et):not(.flag--fi):not(.flag--fj):not(.flag--fk):not(.flag--fm):not(.flag--fo):not(.flag--fr):not(.flag--ga):not(.flag--gb):not(.flag--gd):not(.flag--ge):not(.flag--gf):not(.flag--gg):not(.flag--gh):not(.flag--gi):not(.flag--gl):not(.flag--gm):not(.flag--gn):not(.flag--gp):not(.flag--gq):not(.flag--gr):not(.flag--gs):not(.flag--gt):not(.flag--gu):not(.flag--gw):not(.flag--gy):not(.flag--hk):not(.flag--hm):not(.flag--hn):not(.flag--hr):not(.flag--ht):not(.flag--hu):not(.flag--id):not(.flag--ie):not(.flag--il):not(.flag--im):not(.flag--in):not(.flag--io):not(.flag--iq):not(.flag--ir):not(.flag--is):not(.flag--it):not(.flag--je):not(.flag--jm):not(.flag--jo):not(.flag--jp):not(.flag--ke):not(.flag--kg):not(.flag--kh):not(.flag--ki):not(.flag--km):not(.flag--kn):not(.flag--kp):not(.flag--kr):not(.flag--kw):not(.flag--ky):not(.flag--kz):not(.flag--la):not(.flag--lb):not(.flag--lc):not(.flag--li):not(.flag--lk):not(.flag--lr):not(.flag--ls):not(.flag--lt):not(.flag--lu):not(.flag--lv):not(.flag--ly):not(.flag--ma):not(.flag--mc):not(.flag--md):not(.flag--me):not(.flag--mf):not(.flag--mg):not(.flag--mh):not(.flag--mk):not(.flag--ml):not(.flag--mm):not(.flag--mn):not(.flag--mo):not(.flag--mp):not(.flag--mq):not(.flag--mr):not(.flag--ms):not(.flag--mt):not(.flag--mu):not(.flag--mv):not(.flag--mw):not(.flag--mx):not(.flag--my):not(.flag--mz):not(.flag--na):not(.flag--nc):not(.flag--ne):not(.flag--nf):not(.flag--ng):not(.flag--ni):not(.flag--nl):not(.flag--no):not(.flag--np):not(.flag--nr):not(.flag--nu):not(.flag--nz):not(.flag--om):not(.flag--pa):not(.flag--pe):not(.flag--pf):not(.flag--pg):not(.flag--ph):not(.flag--pk):not(.flag--pl):not(.flag--pm):not(.flag--pn):not(.flag--pr):not(.flag--ps):not(.flag--pt):not(.flag--pw):not(.flag--py):not(.flag--qa):not(.flag--re):not(.flag--ro):not(.flag--rs):not(.flag--ru):not(.flag--rw):not(.flag--sa):not(.flag--sb):not(.flag--sc):not(.flag--sd):not(.flag--se):not(.flag--sg):not(.flag--sh):not(.flag--si):not(.flag--sj):not(.flag--sk):not(.flag--sl):not(.flag--sm):not(.flag--sn):not(.flag--so):not(.flag--sr):not(.flag--ss):not(.flag--st):not(.flag--sv):not(.flag--sx):not(.flag--sy):not(.flag--sz):not(.flag--tc):not(.flag--td):not(.flag--tf):not(.flag--tg):not(.flag--th):not(.flag--tj):not(.flag--tk):not(.flag--tl):not(.flag--tm):not(.flag--tn):not(.flag--to):not(.flag--tr):not(.flag--tt):not(.flag--tv):not(.flag--tw):not(.flag--tz):not(.flag--ua):not(.flag--ug):not(.flag--um):not(.flag--us):not(.flag--uy):not(.flag--uz):not(.flag--va):not(.flag--vc):not(.flag--ve):not(.flag--vg):not(.flag--vi):not(.flag--vn):not(.flag--vu):not(.flag--wf):not(.flag--ws):not(.flag--ye):not(.flag--yt):not(.flag--za):not(.flag--zm):not(.flag--zw):not(.flag--en) {
     width: auto;
     line-height: inherit; }
-    .flag:not(.flag--de):not(.flag--en):not(.flag--fr):not(.flag--it):not(.flag--ru):before {
+    .flag:not(.flag--ad):not(.flag--ae):not(.flag--af):not(.flag--ag):not(.flag--ai):not(.flag--al):not(.flag--am):not(.flag--ao):not(.flag--aq):not(.flag--ar):not(.flag--as):not(.flag--at):not(.flag--au):not(.flag--aw):not(.flag--ax):not(.flag--az):not(.flag--ba):not(.flag--bb):not(.flag--bd):not(.flag--be):not(.flag--bf):not(.flag--bg):not(.flag--bh):not(.flag--bi):not(.flag--bj):not(.flag--bl):not(.flag--bm):not(.flag--bn):not(.flag--bo):not(.flag--bq):not(.flag--br):not(.flag--bs):not(.flag--bt):not(.flag--bv):not(.flag--bw):not(.flag--by):not(.flag--bz):not(.flag--ca):not(.flag--cc):not(.flag--cd):not(.flag--cf):not(.flag--cg):not(.flag--ch):not(.flag--ci):not(.flag--ck):not(.flag--cl):not(.flag--cm):not(.flag--cn):not(.flag--co):not(.flag--cr):not(.flag--cu):not(.flag--cv):not(.flag--cw):not(.flag--cx):not(.flag--cy):not(.flag--cz):not(.flag--de):not(.flag--dj):not(.flag--dk):not(.flag--dm):not(.flag--do):not(.flag--dz):not(.flag--ec):not(.flag--ee):not(.flag--eg):not(.flag--eh):not(.flag--er):not(.flag--es):not(.flag--et):not(.flag--fi):not(.flag--fj):not(.flag--fk):not(.flag--fm):not(.flag--fo):not(.flag--fr):not(.flag--ga):not(.flag--gb):not(.flag--gd):not(.flag--ge):not(.flag--gf):not(.flag--gg):not(.flag--gh):not(.flag--gi):not(.flag--gl):not(.flag--gm):not(.flag--gn):not(.flag--gp):not(.flag--gq):not(.flag--gr):not(.flag--gs):not(.flag--gt):not(.flag--gu):not(.flag--gw):not(.flag--gy):not(.flag--hk):not(.flag--hm):not(.flag--hn):not(.flag--hr):not(.flag--ht):not(.flag--hu):not(.flag--id):not(.flag--ie):not(.flag--il):not(.flag--im):not(.flag--in):not(.flag--io):not(.flag--iq):not(.flag--ir):not(.flag--is):not(.flag--it):not(.flag--je):not(.flag--jm):not(.flag--jo):not(.flag--jp):not(.flag--ke):not(.flag--kg):not(.flag--kh):not(.flag--ki):not(.flag--km):not(.flag--kn):not(.flag--kp):not(.flag--kr):not(.flag--kw):not(.flag--ky):not(.flag--kz):not(.flag--la):not(.flag--lb):not(.flag--lc):not(.flag--li):not(.flag--lk):not(.flag--lr):not(.flag--ls):not(.flag--lt):not(.flag--lu):not(.flag--lv):not(.flag--ly):not(.flag--ma):not(.flag--mc):not(.flag--md):not(.flag--me):not(.flag--mf):not(.flag--mg):not(.flag--mh):not(.flag--mk):not(.flag--ml):not(.flag--mm):not(.flag--mn):not(.flag--mo):not(.flag--mp):not(.flag--mq):not(.flag--mr):not(.flag--ms):not(.flag--mt):not(.flag--mu):not(.flag--mv):not(.flag--mw):not(.flag--mx):not(.flag--my):not(.flag--mz):not(.flag--na):not(.flag--nc):not(.flag--ne):not(.flag--nf):not(.flag--ng):not(.flag--ni):not(.flag--nl):not(.flag--no):not(.flag--np):not(.flag--nr):not(.flag--nu):not(.flag--nz):not(.flag--om):not(.flag--pa):not(.flag--pe):not(.flag--pf):not(.flag--pg):not(.flag--ph):not(.flag--pk):not(.flag--pl):not(.flag--pm):not(.flag--pn):not(.flag--pr):not(.flag--ps):not(.flag--pt):not(.flag--pw):not(.flag--py):not(.flag--qa):not(.flag--re):not(.flag--ro):not(.flag--rs):not(.flag--ru):not(.flag--rw):not(.flag--sa):not(.flag--sb):not(.flag--sc):not(.flag--sd):not(.flag--se):not(.flag--sg):not(.flag--sh):not(.flag--si):not(.flag--sj):not(.flag--sk):not(.flag--sl):not(.flag--sm):not(.flag--sn):not(.flag--so):not(.flag--sr):not(.flag--ss):not(.flag--st):not(.flag--sv):not(.flag--sx):not(.flag--sy):not(.flag--sz):not(.flag--tc):not(.flag--td):not(.flag--tf):not(.flag--tg):not(.flag--th):not(.flag--tj):not(.flag--tk):not(.flag--tl):not(.flag--tm):not(.flag--tn):not(.flag--to):not(.flag--tr):not(.flag--tt):not(.flag--tv):not(.flag--tw):not(.flag--tz):not(.flag--ua):not(.flag--ug):not(.flag--um):not(.flag--us):not(.flag--uy):not(.flag--uz):not(.flag--va):not(.flag--vc):not(.flag--ve):not(.flag--vg):not(.flag--vi):not(.flag--vn):not(.flag--vu):not(.flag--wf):not(.flag--ws):not(.flag--ye):not(.flag--yt):not(.flag--za):not(.flag--zm):not(.flag--zw):not(.flag--en):before {
       display: none; }
-    .flag:not(.flag--de):not(.flag--en):not(.flag--fr):not(.flag--it):not(.flag--ru) .flag__fallback {
+    .flag:not(.flag--ad):not(.flag--ae):not(.flag--af):not(.flag--ag):not(.flag--ai):not(.flag--al):not(.flag--am):not(.flag--ao):not(.flag--aq):not(.flag--ar):not(.flag--as):not(.flag--at):not(.flag--au):not(.flag--aw):not(.flag--ax):not(.flag--az):not(.flag--ba):not(.flag--bb):not(.flag--bd):not(.flag--be):not(.flag--bf):not(.flag--bg):not(.flag--bh):not(.flag--bi):not(.flag--bj):not(.flag--bl):not(.flag--bm):not(.flag--bn):not(.flag--bo):not(.flag--bq):not(.flag--br):not(.flag--bs):not(.flag--bt):not(.flag--bv):not(.flag--bw):not(.flag--by):not(.flag--bz):not(.flag--ca):not(.flag--cc):not(.flag--cd):not(.flag--cf):not(.flag--cg):not(.flag--ch):not(.flag--ci):not(.flag--ck):not(.flag--cl):not(.flag--cm):not(.flag--cn):not(.flag--co):not(.flag--cr):not(.flag--cu):not(.flag--cv):not(.flag--cw):not(.flag--cx):not(.flag--cy):not(.flag--cz):not(.flag--de):not(.flag--dj):not(.flag--dk):not(.flag--dm):not(.flag--do):not(.flag--dz):not(.flag--ec):not(.flag--ee):not(.flag--eg):not(.flag--eh):not(.flag--er):not(.flag--es):not(.flag--et):not(.flag--fi):not(.flag--fj):not(.flag--fk):not(.flag--fm):not(.flag--fo):not(.flag--fr):not(.flag--ga):not(.flag--gb):not(.flag--gd):not(.flag--ge):not(.flag--gf):not(.flag--gg):not(.flag--gh):not(.flag--gi):not(.flag--gl):not(.flag--gm):not(.flag--gn):not(.flag--gp):not(.flag--gq):not(.flag--gr):not(.flag--gs):not(.flag--gt):not(.flag--gu):not(.flag--gw):not(.flag--gy):not(.flag--hk):not(.flag--hm):not(.flag--hn):not(.flag--hr):not(.flag--ht):not(.flag--hu):not(.flag--id):not(.flag--ie):not(.flag--il):not(.flag--im):not(.flag--in):not(.flag--io):not(.flag--iq):not(.flag--ir):not(.flag--is):not(.flag--it):not(.flag--je):not(.flag--jm):not(.flag--jo):not(.flag--jp):not(.flag--ke):not(.flag--kg):not(.flag--kh):not(.flag--ki):not(.flag--km):not(.flag--kn):not(.flag--kp):not(.flag--kr):not(.flag--kw):not(.flag--ky):not(.flag--kz):not(.flag--la):not(.flag--lb):not(.flag--lc):not(.flag--li):not(.flag--lk):not(.flag--lr):not(.flag--ls):not(.flag--lt):not(.flag--lu):not(.flag--lv):not(.flag--ly):not(.flag--ma):not(.flag--mc):not(.flag--md):not(.flag--me):not(.flag--mf):not(.flag--mg):not(.flag--mh):not(.flag--mk):not(.flag--ml):not(.flag--mm):not(.flag--mn):not(.flag--mo):not(.flag--mp):not(.flag--mq):not(.flag--mr):not(.flag--ms):not(.flag--mt):not(.flag--mu):not(.flag--mv):not(.flag--mw):not(.flag--mx):not(.flag--my):not(.flag--mz):not(.flag--na):not(.flag--nc):not(.flag--ne):not(.flag--nf):not(.flag--ng):not(.flag--ni):not(.flag--nl):not(.flag--no):not(.flag--np):not(.flag--nr):not(.flag--nu):not(.flag--nz):not(.flag--om):not(.flag--pa):not(.flag--pe):not(.flag--pf):not(.flag--pg):not(.flag--ph):not(.flag--pk):not(.flag--pl):not(.flag--pm):not(.flag--pn):not(.flag--pr):not(.flag--ps):not(.flag--pt):not(.flag--pw):not(.flag--py):not(.flag--qa):not(.flag--re):not(.flag--ro):not(.flag--rs):not(.flag--ru):not(.flag--rw):not(.flag--sa):not(.flag--sb):not(.flag--sc):not(.flag--sd):not(.flag--se):not(.flag--sg):not(.flag--sh):not(.flag--si):not(.flag--sj):not(.flag--sk):not(.flag--sl):not(.flag--sm):not(.flag--sn):not(.flag--so):not(.flag--sr):not(.flag--ss):not(.flag--st):not(.flag--sv):not(.flag--sx):not(.flag--sy):not(.flag--sz):not(.flag--tc):not(.flag--td):not(.flag--tf):not(.flag--tg):not(.flag--th):not(.flag--tj):not(.flag--tk):not(.flag--tl):not(.flag--tm):not(.flag--tn):not(.flag--to):not(.flag--tr):not(.flag--tt):not(.flag--tv):not(.flag--tw):not(.flag--tz):not(.flag--ua):not(.flag--ug):not(.flag--um):not(.flag--us):not(.flag--uy):not(.flag--uz):not(.flag--va):not(.flag--vc):not(.flag--ve):not(.flag--vg):not(.flag--vi):not(.flag--vn):not(.flag--vu):not(.flag--wf):not(.flag--ws):not(.flag--ye):not(.flag--yt):not(.flag--za):not(.flag--zm):not(.flag--zw):not(.flag--en) .flag__fallback {
       display: block; }
 
 .flag__fallback {
@@ -6007,30 +6007,1255 @@ table td {
   .flag__fallback.flag__fallback--colorized {
     color: #2196F3; }
 
+.flag--ad {
+  background-image: url(../../img/flags/4x3/ad.svg); }
+  .flag--ad.flag--squared {
+    background-image: url(../../img/flags/1x1/ad.svg); }
+
+.flag--ae {
+  background-image: url(../../img/flags/4x3/ae.svg); }
+  .flag--ae.flag--squared {
+    background-image: url(../../img/flags/1x1/ae.svg); }
+
+.flag--af {
+  background-image: url(../../img/flags/4x3/af.svg); }
+  .flag--af.flag--squared {
+    background-image: url(../../img/flags/1x1/af.svg); }
+
+.flag--ag {
+  background-image: url(../../img/flags/4x3/ag.svg); }
+  .flag--ag.flag--squared {
+    background-image: url(../../img/flags/1x1/ag.svg); }
+
+.flag--ai {
+  background-image: url(../../img/flags/4x3/ai.svg); }
+  .flag--ai.flag--squared {
+    background-image: url(../../img/flags/1x1/ai.svg); }
+
+.flag--al {
+  background-image: url(../../img/flags/4x3/al.svg); }
+  .flag--al.flag--squared {
+    background-image: url(../../img/flags/1x1/al.svg); }
+
+.flag--am {
+  background-image: url(../../img/flags/4x3/am.svg); }
+  .flag--am.flag--squared {
+    background-image: url(../../img/flags/1x1/am.svg); }
+
+.flag--ao {
+  background-image: url(../../img/flags/4x3/ao.svg); }
+  .flag--ao.flag--squared {
+    background-image: url(../../img/flags/1x1/ao.svg); }
+
+.flag--aq {
+  background-image: url(../../img/flags/4x3/aq.svg); }
+  .flag--aq.flag--squared {
+    background-image: url(../../img/flags/1x1/aq.svg); }
+
+.flag--ar {
+  background-image: url(../../img/flags/4x3/ar.svg); }
+  .flag--ar.flag--squared {
+    background-image: url(../../img/flags/1x1/ar.svg); }
+
+.flag--as {
+  background-image: url(../../img/flags/4x3/as.svg); }
+  .flag--as.flag--squared {
+    background-image: url(../../img/flags/1x1/as.svg); }
+
+.flag--at {
+  background-image: url(../../img/flags/4x3/at.svg); }
+  .flag--at.flag--squared {
+    background-image: url(../../img/flags/1x1/at.svg); }
+
+.flag--au {
+  background-image: url(../../img/flags/4x3/au.svg); }
+  .flag--au.flag--squared {
+    background-image: url(../../img/flags/1x1/au.svg); }
+
+.flag--aw {
+  background-image: url(../../img/flags/4x3/aw.svg); }
+  .flag--aw.flag--squared {
+    background-image: url(../../img/flags/1x1/aw.svg); }
+
+.flag--ax {
+  background-image: url(../../img/flags/4x3/ax.svg); }
+  .flag--ax.flag--squared {
+    background-image: url(../../img/flags/1x1/ax.svg); }
+
+.flag--az {
+  background-image: url(../../img/flags/4x3/az.svg); }
+  .flag--az.flag--squared {
+    background-image: url(../../img/flags/1x1/az.svg); }
+
+.flag--ba {
+  background-image: url(../../img/flags/4x3/ba.svg); }
+  .flag--ba.flag--squared {
+    background-image: url(../../img/flags/1x1/ba.svg); }
+
+.flag--bb {
+  background-image: url(../../img/flags/4x3/bb.svg); }
+  .flag--bb.flag--squared {
+    background-image: url(../../img/flags/1x1/bb.svg); }
+
+.flag--bd {
+  background-image: url(../../img/flags/4x3/bd.svg); }
+  .flag--bd.flag--squared {
+    background-image: url(../../img/flags/1x1/bd.svg); }
+
+.flag--be {
+  background-image: url(../../img/flags/4x3/be.svg); }
+  .flag--be.flag--squared {
+    background-image: url(../../img/flags/1x1/be.svg); }
+
+.flag--bf {
+  background-image: url(../../img/flags/4x3/bf.svg); }
+  .flag--bf.flag--squared {
+    background-image: url(../../img/flags/1x1/bf.svg); }
+
+.flag--bg {
+  background-image: url(../../img/flags/4x3/bg.svg); }
+  .flag--bg.flag--squared {
+    background-image: url(../../img/flags/1x1/bg.svg); }
+
+.flag--bh {
+  background-image: url(../../img/flags/4x3/bh.svg); }
+  .flag--bh.flag--squared {
+    background-image: url(../../img/flags/1x1/bh.svg); }
+
+.flag--bi {
+  background-image: url(../../img/flags/4x3/bi.svg); }
+  .flag--bi.flag--squared {
+    background-image: url(../../img/flags/1x1/bi.svg); }
+
+.flag--bj {
+  background-image: url(../../img/flags/4x3/bj.svg); }
+  .flag--bj.flag--squared {
+    background-image: url(../../img/flags/1x1/bj.svg); }
+
+.flag--bl {
+  background-image: url(../../img/flags/4x3/bl.svg); }
+  .flag--bl.flag--squared {
+    background-image: url(../../img/flags/1x1/bl.svg); }
+
+.flag--bm {
+  background-image: url(../../img/flags/4x3/bm.svg); }
+  .flag--bm.flag--squared {
+    background-image: url(../../img/flags/1x1/bm.svg); }
+
+.flag--bn {
+  background-image: url(../../img/flags/4x3/bn.svg); }
+  .flag--bn.flag--squared {
+    background-image: url(../../img/flags/1x1/bn.svg); }
+
+.flag--bo {
+  background-image: url(../../img/flags/4x3/bo.svg); }
+  .flag--bo.flag--squared {
+    background-image: url(../../img/flags/1x1/bo.svg); }
+
+.flag--bq {
+  background-image: url(../../img/flags/4x3/bq.svg); }
+  .flag--bq.flag--squared {
+    background-image: url(../../img/flags/1x1/bq.svg); }
+
+.flag--br {
+  background-image: url(../../img/flags/4x3/br.svg); }
+  .flag--br.flag--squared {
+    background-image: url(../../img/flags/1x1/br.svg); }
+
+.flag--bs {
+  background-image: url(../../img/flags/4x3/bs.svg); }
+  .flag--bs.flag--squared {
+    background-image: url(../../img/flags/1x1/bs.svg); }
+
+.flag--bt {
+  background-image: url(../../img/flags/4x3/bt.svg); }
+  .flag--bt.flag--squared {
+    background-image: url(../../img/flags/1x1/bt.svg); }
+
+.flag--bv {
+  background-image: url(../../img/flags/4x3/bv.svg); }
+  .flag--bv.flag--squared {
+    background-image: url(../../img/flags/1x1/bv.svg); }
+
+.flag--bw {
+  background-image: url(../../img/flags/4x3/bw.svg); }
+  .flag--bw.flag--squared {
+    background-image: url(../../img/flags/1x1/bw.svg); }
+
+.flag--by {
+  background-image: url(../../img/flags/4x3/by.svg); }
+  .flag--by.flag--squared {
+    background-image: url(../../img/flags/1x1/by.svg); }
+
+.flag--bz {
+  background-image: url(../../img/flags/4x3/bz.svg); }
+  .flag--bz.flag--squared {
+    background-image: url(../../img/flags/1x1/bz.svg); }
+
+.flag--ca {
+  background-image: url(../../img/flags/4x3/ca.svg); }
+  .flag--ca.flag--squared {
+    background-image: url(../../img/flags/1x1/ca.svg); }
+
+.flag--cc {
+  background-image: url(../../img/flags/4x3/cc.svg); }
+  .flag--cc.flag--squared {
+    background-image: url(../../img/flags/1x1/cc.svg); }
+
+.flag--cd {
+  background-image: url(../../img/flags/4x3/cd.svg); }
+  .flag--cd.flag--squared {
+    background-image: url(../../img/flags/1x1/cd.svg); }
+
+.flag--cf {
+  background-image: url(../../img/flags/4x3/cf.svg); }
+  .flag--cf.flag--squared {
+    background-image: url(../../img/flags/1x1/cf.svg); }
+
+.flag--cg {
+  background-image: url(../../img/flags/4x3/cg.svg); }
+  .flag--cg.flag--squared {
+    background-image: url(../../img/flags/1x1/cg.svg); }
+
+.flag--ch {
+  background-image: url(../../img/flags/4x3/ch.svg); }
+  .flag--ch.flag--squared {
+    background-image: url(../../img/flags/1x1/ch.svg); }
+
+.flag--ci {
+  background-image: url(../../img/flags/4x3/ci.svg); }
+  .flag--ci.flag--squared {
+    background-image: url(../../img/flags/1x1/ci.svg); }
+
+.flag--ck {
+  background-image: url(../../img/flags/4x3/ck.svg); }
+  .flag--ck.flag--squared {
+    background-image: url(../../img/flags/1x1/ck.svg); }
+
+.flag--cl {
+  background-image: url(../../img/flags/4x3/cl.svg); }
+  .flag--cl.flag--squared {
+    background-image: url(../../img/flags/1x1/cl.svg); }
+
+.flag--cm {
+  background-image: url(../../img/flags/4x3/cm.svg); }
+  .flag--cm.flag--squared {
+    background-image: url(../../img/flags/1x1/cm.svg); }
+
+.flag--cn {
+  background-image: url(../../img/flags/4x3/cn.svg); }
+  .flag--cn.flag--squared {
+    background-image: url(../../img/flags/1x1/cn.svg); }
+
+.flag--co {
+  background-image: url(../../img/flags/4x3/co.svg); }
+  .flag--co.flag--squared {
+    background-image: url(../../img/flags/1x1/co.svg); }
+
+.flag--cr {
+  background-image: url(../../img/flags/4x3/cr.svg); }
+  .flag--cr.flag--squared {
+    background-image: url(../../img/flags/1x1/cr.svg); }
+
+.flag--cu {
+  background-image: url(../../img/flags/4x3/cu.svg); }
+  .flag--cu.flag--squared {
+    background-image: url(../../img/flags/1x1/cu.svg); }
+
+.flag--cv {
+  background-image: url(../../img/flags/4x3/cv.svg); }
+  .flag--cv.flag--squared {
+    background-image: url(../../img/flags/1x1/cv.svg); }
+
+.flag--cw {
+  background-image: url(../../img/flags/4x3/cw.svg); }
+  .flag--cw.flag--squared {
+    background-image: url(../../img/flags/1x1/cw.svg); }
+
+.flag--cx {
+  background-image: url(../../img/flags/4x3/cx.svg); }
+  .flag--cx.flag--squared {
+    background-image: url(../../img/flags/1x1/cx.svg); }
+
+.flag--cy {
+  background-image: url(../../img/flags/4x3/cy.svg); }
+  .flag--cy.flag--squared {
+    background-image: url(../../img/flags/1x1/cy.svg); }
+
+.flag--cz {
+  background-image: url(../../img/flags/4x3/cz.svg); }
+  .flag--cz.flag--squared {
+    background-image: url(../../img/flags/1x1/cz.svg); }
+
 .flag--de {
   background-image: url(../../img/flags/4x3/de.svg); }
   .flag--de.flag--squared {
     background-image: url(../../img/flags/1x1/de.svg); }
 
-.flag--en {
-  background-image: url(../../img/flags/4x3/gb.svg); }
-  .flag--en.flag--squared {
-    background-image: url(../../img/flags/1x1/gb.svg); }
+.flag--dj {
+  background-image: url(../../img/flags/4x3/dj.svg); }
+  .flag--dj.flag--squared {
+    background-image: url(../../img/flags/1x1/dj.svg); }
+
+.flag--dk {
+  background-image: url(../../img/flags/4x3/dk.svg); }
+  .flag--dk.flag--squared {
+    background-image: url(../../img/flags/1x1/dk.svg); }
+
+.flag--dm {
+  background-image: url(../../img/flags/4x3/dm.svg); }
+  .flag--dm.flag--squared {
+    background-image: url(../../img/flags/1x1/dm.svg); }
+
+.flag--do {
+  background-image: url(../../img/flags/4x3/do.svg); }
+  .flag--do.flag--squared {
+    background-image: url(../../img/flags/1x1/do.svg); }
+
+.flag--dz {
+  background-image: url(../../img/flags/4x3/dz.svg); }
+  .flag--dz.flag--squared {
+    background-image: url(../../img/flags/1x1/dz.svg); }
+
+.flag--ec {
+  background-image: url(../../img/flags/4x3/ec.svg); }
+  .flag--ec.flag--squared {
+    background-image: url(../../img/flags/1x1/ec.svg); }
+
+.flag--ee {
+  background-image: url(../../img/flags/4x3/ee.svg); }
+  .flag--ee.flag--squared {
+    background-image: url(../../img/flags/1x1/ee.svg); }
+
+.flag--eg {
+  background-image: url(../../img/flags/4x3/eg.svg); }
+  .flag--eg.flag--squared {
+    background-image: url(../../img/flags/1x1/eg.svg); }
+
+.flag--eh {
+  background-image: url(../../img/flags/4x3/eh.svg); }
+  .flag--eh.flag--squared {
+    background-image: url(../../img/flags/1x1/eh.svg); }
+
+.flag--er {
+  background-image: url(../../img/flags/4x3/er.svg); }
+  .flag--er.flag--squared {
+    background-image: url(../../img/flags/1x1/er.svg); }
+
+.flag--es {
+  background-image: url(../../img/flags/4x3/es.svg); }
+  .flag--es.flag--squared {
+    background-image: url(../../img/flags/1x1/es.svg); }
+
+.flag--et {
+  background-image: url(../../img/flags/4x3/et.svg); }
+  .flag--et.flag--squared {
+    background-image: url(../../img/flags/1x1/et.svg); }
+
+.flag--fi {
+  background-image: url(../../img/flags/4x3/fi.svg); }
+  .flag--fi.flag--squared {
+    background-image: url(../../img/flags/1x1/fi.svg); }
+
+.flag--fj {
+  background-image: url(../../img/flags/4x3/fj.svg); }
+  .flag--fj.flag--squared {
+    background-image: url(../../img/flags/1x1/fj.svg); }
+
+.flag--fk {
+  background-image: url(../../img/flags/4x3/fk.svg); }
+  .flag--fk.flag--squared {
+    background-image: url(../../img/flags/1x1/fk.svg); }
+
+.flag--fm {
+  background-image: url(../../img/flags/4x3/fm.svg); }
+  .flag--fm.flag--squared {
+    background-image: url(../../img/flags/1x1/fm.svg); }
+
+.flag--fo {
+  background-image: url(../../img/flags/4x3/fo.svg); }
+  .flag--fo.flag--squared {
+    background-image: url(../../img/flags/1x1/fo.svg); }
 
 .flag--fr {
   background-image: url(../../img/flags/4x3/fr.svg); }
   .flag--fr.flag--squared {
     background-image: url(../../img/flags/1x1/fr.svg); }
 
+.flag--ga {
+  background-image: url(../../img/flags/4x3/ga.svg); }
+  .flag--ga.flag--squared {
+    background-image: url(../../img/flags/1x1/ga.svg); }
+
+.flag--gb {
+  background-image: url(../../img/flags/4x3/gb.svg); }
+  .flag--gb.flag--squared {
+    background-image: url(../../img/flags/1x1/gb.svg); }
+
+.flag--gd {
+  background-image: url(../../img/flags/4x3/gd.svg); }
+  .flag--gd.flag--squared {
+    background-image: url(../../img/flags/1x1/gd.svg); }
+
+.flag--ge {
+  background-image: url(../../img/flags/4x3/ge.svg); }
+  .flag--ge.flag--squared {
+    background-image: url(../../img/flags/1x1/ge.svg); }
+
+.flag--gf {
+  background-image: url(../../img/flags/4x3/gf.svg); }
+  .flag--gf.flag--squared {
+    background-image: url(../../img/flags/1x1/gf.svg); }
+
+.flag--gg {
+  background-image: url(../../img/flags/4x3/gg.svg); }
+  .flag--gg.flag--squared {
+    background-image: url(../../img/flags/1x1/gg.svg); }
+
+.flag--gh {
+  background-image: url(../../img/flags/4x3/gh.svg); }
+  .flag--gh.flag--squared {
+    background-image: url(../../img/flags/1x1/gh.svg); }
+
+.flag--gi {
+  background-image: url(../../img/flags/4x3/gi.svg); }
+  .flag--gi.flag--squared {
+    background-image: url(../../img/flags/1x1/gi.svg); }
+
+.flag--gl {
+  background-image: url(../../img/flags/4x3/gl.svg); }
+  .flag--gl.flag--squared {
+    background-image: url(../../img/flags/1x1/gl.svg); }
+
+.flag--gm {
+  background-image: url(../../img/flags/4x3/gm.svg); }
+  .flag--gm.flag--squared {
+    background-image: url(../../img/flags/1x1/gm.svg); }
+
+.flag--gn {
+  background-image: url(../../img/flags/4x3/gn.svg); }
+  .flag--gn.flag--squared {
+    background-image: url(../../img/flags/1x1/gn.svg); }
+
+.flag--gp {
+  background-image: url(../../img/flags/4x3/gp.svg); }
+  .flag--gp.flag--squared {
+    background-image: url(../../img/flags/1x1/gp.svg); }
+
+.flag--gq {
+  background-image: url(../../img/flags/4x3/gq.svg); }
+  .flag--gq.flag--squared {
+    background-image: url(../../img/flags/1x1/gq.svg); }
+
+.flag--gr {
+  background-image: url(../../img/flags/4x3/gr.svg); }
+  .flag--gr.flag--squared {
+    background-image: url(../../img/flags/1x1/gr.svg); }
+
+.flag--gs {
+  background-image: url(../../img/flags/4x3/gs.svg); }
+  .flag--gs.flag--squared {
+    background-image: url(../../img/flags/1x1/gs.svg); }
+
+.flag--gt {
+  background-image: url(../../img/flags/4x3/gt.svg); }
+  .flag--gt.flag--squared {
+    background-image: url(../../img/flags/1x1/gt.svg); }
+
+.flag--gu {
+  background-image: url(../../img/flags/4x3/gu.svg); }
+  .flag--gu.flag--squared {
+    background-image: url(../../img/flags/1x1/gu.svg); }
+
+.flag--gw {
+  background-image: url(../../img/flags/4x3/gw.svg); }
+  .flag--gw.flag--squared {
+    background-image: url(../../img/flags/1x1/gw.svg); }
+
+.flag--gy {
+  background-image: url(../../img/flags/4x3/gy.svg); }
+  .flag--gy.flag--squared {
+    background-image: url(../../img/flags/1x1/gy.svg); }
+
+.flag--hk {
+  background-image: url(../../img/flags/4x3/hk.svg); }
+  .flag--hk.flag--squared {
+    background-image: url(../../img/flags/1x1/hk.svg); }
+
+.flag--hm {
+  background-image: url(../../img/flags/4x3/hm.svg); }
+  .flag--hm.flag--squared {
+    background-image: url(../../img/flags/1x1/hm.svg); }
+
+.flag--hn {
+  background-image: url(../../img/flags/4x3/hn.svg); }
+  .flag--hn.flag--squared {
+    background-image: url(../../img/flags/1x1/hn.svg); }
+
+.flag--hr {
+  background-image: url(../../img/flags/4x3/hr.svg); }
+  .flag--hr.flag--squared {
+    background-image: url(../../img/flags/1x1/hr.svg); }
+
+.flag--ht {
+  background-image: url(../../img/flags/4x3/ht.svg); }
+  .flag--ht.flag--squared {
+    background-image: url(../../img/flags/1x1/ht.svg); }
+
+.flag--hu {
+  background-image: url(../../img/flags/4x3/hu.svg); }
+  .flag--hu.flag--squared {
+    background-image: url(../../img/flags/1x1/hu.svg); }
+
+.flag--id {
+  background-image: url(../../img/flags/4x3/id.svg); }
+  .flag--id.flag--squared {
+    background-image: url(../../img/flags/1x1/id.svg); }
+
+.flag--ie {
+  background-image: url(../../img/flags/4x3/ie.svg); }
+  .flag--ie.flag--squared {
+    background-image: url(../../img/flags/1x1/ie.svg); }
+
+.flag--il {
+  background-image: url(../../img/flags/4x3/il.svg); }
+  .flag--il.flag--squared {
+    background-image: url(../../img/flags/1x1/il.svg); }
+
+.flag--im {
+  background-image: url(../../img/flags/4x3/im.svg); }
+  .flag--im.flag--squared {
+    background-image: url(../../img/flags/1x1/im.svg); }
+
+.flag--in {
+  background-image: url(../../img/flags/4x3/in.svg); }
+  .flag--in.flag--squared {
+    background-image: url(../../img/flags/1x1/in.svg); }
+
+.flag--io {
+  background-image: url(../../img/flags/4x3/io.svg); }
+  .flag--io.flag--squared {
+    background-image: url(../../img/flags/1x1/io.svg); }
+
+.flag--iq {
+  background-image: url(../../img/flags/4x3/iq.svg); }
+  .flag--iq.flag--squared {
+    background-image: url(../../img/flags/1x1/iq.svg); }
+
+.flag--ir {
+  background-image: url(../../img/flags/4x3/ir.svg); }
+  .flag--ir.flag--squared {
+    background-image: url(../../img/flags/1x1/ir.svg); }
+
+.flag--is {
+  background-image: url(../../img/flags/4x3/is.svg); }
+  .flag--is.flag--squared {
+    background-image: url(../../img/flags/1x1/is.svg); }
+
 .flag--it {
   background-image: url(../../img/flags/4x3/it.svg); }
   .flag--it.flag--squared {
     background-image: url(../../img/flags/1x1/it.svg); }
 
+.flag--je {
+  background-image: url(../../img/flags/4x3/je.svg); }
+  .flag--je.flag--squared {
+    background-image: url(../../img/flags/1x1/je.svg); }
+
+.flag--jm {
+  background-image: url(../../img/flags/4x3/jm.svg); }
+  .flag--jm.flag--squared {
+    background-image: url(../../img/flags/1x1/jm.svg); }
+
+.flag--jo {
+  background-image: url(../../img/flags/4x3/jo.svg); }
+  .flag--jo.flag--squared {
+    background-image: url(../../img/flags/1x1/jo.svg); }
+
+.flag--jp {
+  background-image: url(../../img/flags/4x3/jp.svg); }
+  .flag--jp.flag--squared {
+    background-image: url(../../img/flags/1x1/jp.svg); }
+
+.flag--ke {
+  background-image: url(../../img/flags/4x3/ke.svg); }
+  .flag--ke.flag--squared {
+    background-image: url(../../img/flags/1x1/ke.svg); }
+
+.flag--kg {
+  background-image: url(../../img/flags/4x3/kg.svg); }
+  .flag--kg.flag--squared {
+    background-image: url(../../img/flags/1x1/kg.svg); }
+
+.flag--kh {
+  background-image: url(../../img/flags/4x3/kh.svg); }
+  .flag--kh.flag--squared {
+    background-image: url(../../img/flags/1x1/kh.svg); }
+
+.flag--ki {
+  background-image: url(../../img/flags/4x3/ki.svg); }
+  .flag--ki.flag--squared {
+    background-image: url(../../img/flags/1x1/ki.svg); }
+
+.flag--km {
+  background-image: url(../../img/flags/4x3/km.svg); }
+  .flag--km.flag--squared {
+    background-image: url(../../img/flags/1x1/km.svg); }
+
+.flag--kn {
+  background-image: url(../../img/flags/4x3/kn.svg); }
+  .flag--kn.flag--squared {
+    background-image: url(../../img/flags/1x1/kn.svg); }
+
+.flag--kp {
+  background-image: url(../../img/flags/4x3/kp.svg); }
+  .flag--kp.flag--squared {
+    background-image: url(../../img/flags/1x1/kp.svg); }
+
+.flag--kr {
+  background-image: url(../../img/flags/4x3/kr.svg); }
+  .flag--kr.flag--squared {
+    background-image: url(../../img/flags/1x1/kr.svg); }
+
+.flag--kw {
+  background-image: url(../../img/flags/4x3/kw.svg); }
+  .flag--kw.flag--squared {
+    background-image: url(../../img/flags/1x1/kw.svg); }
+
+.flag--ky {
+  background-image: url(../../img/flags/4x3/ky.svg); }
+  .flag--ky.flag--squared {
+    background-image: url(../../img/flags/1x1/ky.svg); }
+
+.flag--kz {
+  background-image: url(../../img/flags/4x3/kz.svg); }
+  .flag--kz.flag--squared {
+    background-image: url(../../img/flags/1x1/kz.svg); }
+
+.flag--la {
+  background-image: url(../../img/flags/4x3/la.svg); }
+  .flag--la.flag--squared {
+    background-image: url(../../img/flags/1x1/la.svg); }
+
+.flag--lb {
+  background-image: url(../../img/flags/4x3/lb.svg); }
+  .flag--lb.flag--squared {
+    background-image: url(../../img/flags/1x1/lb.svg); }
+
+.flag--lc {
+  background-image: url(../../img/flags/4x3/lc.svg); }
+  .flag--lc.flag--squared {
+    background-image: url(../../img/flags/1x1/lc.svg); }
+
+.flag--li {
+  background-image: url(../../img/flags/4x3/li.svg); }
+  .flag--li.flag--squared {
+    background-image: url(../../img/flags/1x1/li.svg); }
+
+.flag--lk {
+  background-image: url(../../img/flags/4x3/lk.svg); }
+  .flag--lk.flag--squared {
+    background-image: url(../../img/flags/1x1/lk.svg); }
+
+.flag--lr {
+  background-image: url(../../img/flags/4x3/lr.svg); }
+  .flag--lr.flag--squared {
+    background-image: url(../../img/flags/1x1/lr.svg); }
+
+.flag--ls {
+  background-image: url(../../img/flags/4x3/ls.svg); }
+  .flag--ls.flag--squared {
+    background-image: url(../../img/flags/1x1/ls.svg); }
+
+.flag--lt {
+  background-image: url(../../img/flags/4x3/lt.svg); }
+  .flag--lt.flag--squared {
+    background-image: url(../../img/flags/1x1/lt.svg); }
+
+.flag--lu {
+  background-image: url(../../img/flags/4x3/lu.svg); }
+  .flag--lu.flag--squared {
+    background-image: url(../../img/flags/1x1/lu.svg); }
+
+.flag--lv {
+  background-image: url(../../img/flags/4x3/lv.svg); }
+  .flag--lv.flag--squared {
+    background-image: url(../../img/flags/1x1/lv.svg); }
+
+.flag--ly {
+  background-image: url(../../img/flags/4x3/ly.svg); }
+  .flag--ly.flag--squared {
+    background-image: url(../../img/flags/1x1/ly.svg); }
+
+.flag--ma {
+  background-image: url(../../img/flags/4x3/ma.svg); }
+  .flag--ma.flag--squared {
+    background-image: url(../../img/flags/1x1/ma.svg); }
+
+.flag--mc {
+  background-image: url(../../img/flags/4x3/mc.svg); }
+  .flag--mc.flag--squared {
+    background-image: url(../../img/flags/1x1/mc.svg); }
+
+.flag--md {
+  background-image: url(../../img/flags/4x3/md.svg); }
+  .flag--md.flag--squared {
+    background-image: url(../../img/flags/1x1/md.svg); }
+
+.flag--me {
+  background-image: url(../../img/flags/4x3/me.svg); }
+  .flag--me.flag--squared {
+    background-image: url(../../img/flags/1x1/me.svg); }
+
+.flag--mf {
+  background-image: url(../../img/flags/4x3/mf.svg); }
+  .flag--mf.flag--squared {
+    background-image: url(../../img/flags/1x1/mf.svg); }
+
+.flag--mg {
+  background-image: url(../../img/flags/4x3/mg.svg); }
+  .flag--mg.flag--squared {
+    background-image: url(../../img/flags/1x1/mg.svg); }
+
+.flag--mh {
+  background-image: url(../../img/flags/4x3/mh.svg); }
+  .flag--mh.flag--squared {
+    background-image: url(../../img/flags/1x1/mh.svg); }
+
+.flag--mk {
+  background-image: url(../../img/flags/4x3/mk.svg); }
+  .flag--mk.flag--squared {
+    background-image: url(../../img/flags/1x1/mk.svg); }
+
+.flag--ml {
+  background-image: url(../../img/flags/4x3/ml.svg); }
+  .flag--ml.flag--squared {
+    background-image: url(../../img/flags/1x1/ml.svg); }
+
+.flag--mm {
+  background-image: url(../../img/flags/4x3/mm.svg); }
+  .flag--mm.flag--squared {
+    background-image: url(../../img/flags/1x1/mm.svg); }
+
+.flag--mn {
+  background-image: url(../../img/flags/4x3/mn.svg); }
+  .flag--mn.flag--squared {
+    background-image: url(../../img/flags/1x1/mn.svg); }
+
+.flag--mo {
+  background-image: url(../../img/flags/4x3/mo.svg); }
+  .flag--mo.flag--squared {
+    background-image: url(../../img/flags/1x1/mo.svg); }
+
+.flag--mp {
+  background-image: url(../../img/flags/4x3/mp.svg); }
+  .flag--mp.flag--squared {
+    background-image: url(../../img/flags/1x1/mp.svg); }
+
+.flag--mq {
+  background-image: url(../../img/flags/4x3/mq.svg); }
+  .flag--mq.flag--squared {
+    background-image: url(../../img/flags/1x1/mq.svg); }
+
+.flag--mr {
+  background-image: url(../../img/flags/4x3/mr.svg); }
+  .flag--mr.flag--squared {
+    background-image: url(../../img/flags/1x1/mr.svg); }
+
+.flag--ms {
+  background-image: url(../../img/flags/4x3/ms.svg); }
+  .flag--ms.flag--squared {
+    background-image: url(../../img/flags/1x1/ms.svg); }
+
+.flag--mt {
+  background-image: url(../../img/flags/4x3/mt.svg); }
+  .flag--mt.flag--squared {
+    background-image: url(../../img/flags/1x1/mt.svg); }
+
+.flag--mu {
+  background-image: url(../../img/flags/4x3/mu.svg); }
+  .flag--mu.flag--squared {
+    background-image: url(../../img/flags/1x1/mu.svg); }
+
+.flag--mv {
+  background-image: url(../../img/flags/4x3/mv.svg); }
+  .flag--mv.flag--squared {
+    background-image: url(../../img/flags/1x1/mv.svg); }
+
+.flag--mw {
+  background-image: url(../../img/flags/4x3/mw.svg); }
+  .flag--mw.flag--squared {
+    background-image: url(../../img/flags/1x1/mw.svg); }
+
+.flag--mx {
+  background-image: url(../../img/flags/4x3/mx.svg); }
+  .flag--mx.flag--squared {
+    background-image: url(../../img/flags/1x1/mx.svg); }
+
+.flag--my {
+  background-image: url(../../img/flags/4x3/my.svg); }
+  .flag--my.flag--squared {
+    background-image: url(../../img/flags/1x1/my.svg); }
+
+.flag--mz {
+  background-image: url(../../img/flags/4x3/mz.svg); }
+  .flag--mz.flag--squared {
+    background-image: url(../../img/flags/1x1/mz.svg); }
+
+.flag--na {
+  background-image: url(../../img/flags/4x3/na.svg); }
+  .flag--na.flag--squared {
+    background-image: url(../../img/flags/1x1/na.svg); }
+
+.flag--nc {
+  background-image: url(../../img/flags/4x3/nc.svg); }
+  .flag--nc.flag--squared {
+    background-image: url(../../img/flags/1x1/nc.svg); }
+
+.flag--ne {
+  background-image: url(../../img/flags/4x3/ne.svg); }
+  .flag--ne.flag--squared {
+    background-image: url(../../img/flags/1x1/ne.svg); }
+
+.flag--nf {
+  background-image: url(../../img/flags/4x3/nf.svg); }
+  .flag--nf.flag--squared {
+    background-image: url(../../img/flags/1x1/nf.svg); }
+
+.flag--ng {
+  background-image: url(../../img/flags/4x3/ng.svg); }
+  .flag--ng.flag--squared {
+    background-image: url(../../img/flags/1x1/ng.svg); }
+
+.flag--ni {
+  background-image: url(../../img/flags/4x3/ni.svg); }
+  .flag--ni.flag--squared {
+    background-image: url(../../img/flags/1x1/ni.svg); }
+
+.flag--nl {
+  background-image: url(../../img/flags/4x3/nl.svg); }
+  .flag--nl.flag--squared {
+    background-image: url(../../img/flags/1x1/nl.svg); }
+
+.flag--no {
+  background-image: url(../../img/flags/4x3/no.svg); }
+  .flag--no.flag--squared {
+    background-image: url(../../img/flags/1x1/no.svg); }
+
+.flag--np {
+  background-image: url(../../img/flags/4x3/np.svg); }
+  .flag--np.flag--squared {
+    background-image: url(../../img/flags/1x1/np.svg); }
+
+.flag--nr {
+  background-image: url(../../img/flags/4x3/nr.svg); }
+  .flag--nr.flag--squared {
+    background-image: url(../../img/flags/1x1/nr.svg); }
+
+.flag--nu {
+  background-image: url(../../img/flags/4x3/nu.svg); }
+  .flag--nu.flag--squared {
+    background-image: url(../../img/flags/1x1/nu.svg); }
+
+.flag--nz {
+  background-image: url(../../img/flags/4x3/nz.svg); }
+  .flag--nz.flag--squared {
+    background-image: url(../../img/flags/1x1/nz.svg); }
+
+.flag--om {
+  background-image: url(../../img/flags/4x3/om.svg); }
+  .flag--om.flag--squared {
+    background-image: url(../../img/flags/1x1/om.svg); }
+
+.flag--pa {
+  background-image: url(../../img/flags/4x3/pa.svg); }
+  .flag--pa.flag--squared {
+    background-image: url(../../img/flags/1x1/pa.svg); }
+
+.flag--pe {
+  background-image: url(../../img/flags/4x3/pe.svg); }
+  .flag--pe.flag--squared {
+    background-image: url(../../img/flags/1x1/pe.svg); }
+
+.flag--pf {
+  background-image: url(../../img/flags/4x3/pf.svg); }
+  .flag--pf.flag--squared {
+    background-image: url(../../img/flags/1x1/pf.svg); }
+
+.flag--pg {
+  background-image: url(../../img/flags/4x3/pg.svg); }
+  .flag--pg.flag--squared {
+    background-image: url(../../img/flags/1x1/pg.svg); }
+
+.flag--ph {
+  background-image: url(../../img/flags/4x3/ph.svg); }
+  .flag--ph.flag--squared {
+    background-image: url(../../img/flags/1x1/ph.svg); }
+
+.flag--pk {
+  background-image: url(../../img/flags/4x3/pk.svg); }
+  .flag--pk.flag--squared {
+    background-image: url(../../img/flags/1x1/pk.svg); }
+
+.flag--pl {
+  background-image: url(../../img/flags/4x3/pl.svg); }
+  .flag--pl.flag--squared {
+    background-image: url(../../img/flags/1x1/pl.svg); }
+
+.flag--pm {
+  background-image: url(../../img/flags/4x3/pm.svg); }
+  .flag--pm.flag--squared {
+    background-image: url(../../img/flags/1x1/pm.svg); }
+
+.flag--pn {
+  background-image: url(../../img/flags/4x3/pn.svg); }
+  .flag--pn.flag--squared {
+    background-image: url(../../img/flags/1x1/pn.svg); }
+
+.flag--pr {
+  background-image: url(../../img/flags/4x3/pr.svg); }
+  .flag--pr.flag--squared {
+    background-image: url(../../img/flags/1x1/pr.svg); }
+
+.flag--ps {
+  background-image: url(../../img/flags/4x3/ps.svg); }
+  .flag--ps.flag--squared {
+    background-image: url(../../img/flags/1x1/ps.svg); }
+
+.flag--pt {
+  background-image: url(../../img/flags/4x3/pt.svg); }
+  .flag--pt.flag--squared {
+    background-image: url(../../img/flags/1x1/pt.svg); }
+
+.flag--pw {
+  background-image: url(../../img/flags/4x3/pw.svg); }
+  .flag--pw.flag--squared {
+    background-image: url(../../img/flags/1x1/pw.svg); }
+
+.flag--py {
+  background-image: url(../../img/flags/4x3/py.svg); }
+  .flag--py.flag--squared {
+    background-image: url(../../img/flags/1x1/py.svg); }
+
+.flag--qa {
+  background-image: url(../../img/flags/4x3/qa.svg); }
+  .flag--qa.flag--squared {
+    background-image: url(../../img/flags/1x1/qa.svg); }
+
+.flag--re {
+  background-image: url(../../img/flags/4x3/re.svg); }
+  .flag--re.flag--squared {
+    background-image: url(../../img/flags/1x1/re.svg); }
+
+.flag--ro {
+  background-image: url(../../img/flags/4x3/ro.svg); }
+  .flag--ro.flag--squared {
+    background-image: url(../../img/flags/1x1/ro.svg); }
+
+.flag--rs {
+  background-image: url(../../img/flags/4x3/rs.svg); }
+  .flag--rs.flag--squared {
+    background-image: url(../../img/flags/1x1/rs.svg); }
+
 .flag--ru {
   background-image: url(../../img/flags/4x3/ru.svg); }
   .flag--ru.flag--squared {
     background-image: url(../../img/flags/1x1/ru.svg); }
+
+.flag--rw {
+  background-image: url(../../img/flags/4x3/rw.svg); }
+  .flag--rw.flag--squared {
+    background-image: url(../../img/flags/1x1/rw.svg); }
+
+.flag--sa {
+  background-image: url(../../img/flags/4x3/sa.svg); }
+  .flag--sa.flag--squared {
+    background-image: url(../../img/flags/1x1/sa.svg); }
+
+.flag--sb {
+  background-image: url(../../img/flags/4x3/sb.svg); }
+  .flag--sb.flag--squared {
+    background-image: url(../../img/flags/1x1/sb.svg); }
+
+.flag--sc {
+  background-image: url(../../img/flags/4x3/sc.svg); }
+  .flag--sc.flag--squared {
+    background-image: url(../../img/flags/1x1/sc.svg); }
+
+.flag--sd {
+  background-image: url(../../img/flags/4x3/sd.svg); }
+  .flag--sd.flag--squared {
+    background-image: url(../../img/flags/1x1/sd.svg); }
+
+.flag--se {
+  background-image: url(../../img/flags/4x3/se.svg); }
+  .flag--se.flag--squared {
+    background-image: url(../../img/flags/1x1/se.svg); }
+
+.flag--sg {
+  background-image: url(../../img/flags/4x3/sg.svg); }
+  .flag--sg.flag--squared {
+    background-image: url(../../img/flags/1x1/sg.svg); }
+
+.flag--sh {
+  background-image: url(../../img/flags/4x3/sh.svg); }
+  .flag--sh.flag--squared {
+    background-image: url(../../img/flags/1x1/sh.svg); }
+
+.flag--si {
+  background-image: url(../../img/flags/4x3/si.svg); }
+  .flag--si.flag--squared {
+    background-image: url(../../img/flags/1x1/si.svg); }
+
+.flag--sj {
+  background-image: url(../../img/flags/4x3/sj.svg); }
+  .flag--sj.flag--squared {
+    background-image: url(../../img/flags/1x1/sj.svg); }
+
+.flag--sk {
+  background-image: url(../../img/flags/4x3/sk.svg); }
+  .flag--sk.flag--squared {
+    background-image: url(../../img/flags/1x1/sk.svg); }
+
+.flag--sl {
+  background-image: url(../../img/flags/4x3/sl.svg); }
+  .flag--sl.flag--squared {
+    background-image: url(../../img/flags/1x1/sl.svg); }
+
+.flag--sm {
+  background-image: url(../../img/flags/4x3/sm.svg); }
+  .flag--sm.flag--squared {
+    background-image: url(../../img/flags/1x1/sm.svg); }
+
+.flag--sn {
+  background-image: url(../../img/flags/4x3/sn.svg); }
+  .flag--sn.flag--squared {
+    background-image: url(../../img/flags/1x1/sn.svg); }
+
+.flag--so {
+  background-image: url(../../img/flags/4x3/so.svg); }
+  .flag--so.flag--squared {
+    background-image: url(../../img/flags/1x1/so.svg); }
+
+.flag--sr {
+  background-image: url(../../img/flags/4x3/sr.svg); }
+  .flag--sr.flag--squared {
+    background-image: url(../../img/flags/1x1/sr.svg); }
+
+.flag--ss {
+  background-image: url(../../img/flags/4x3/ss.svg); }
+  .flag--ss.flag--squared {
+    background-image: url(../../img/flags/1x1/ss.svg); }
+
+.flag--st {
+  background-image: url(../../img/flags/4x3/st.svg); }
+  .flag--st.flag--squared {
+    background-image: url(../../img/flags/1x1/st.svg); }
+
+.flag--sv {
+  background-image: url(../../img/flags/4x3/sv.svg); }
+  .flag--sv.flag--squared {
+    background-image: url(../../img/flags/1x1/sv.svg); }
+
+.flag--sx {
+  background-image: url(../../img/flags/4x3/sx.svg); }
+  .flag--sx.flag--squared {
+    background-image: url(../../img/flags/1x1/sx.svg); }
+
+.flag--sy {
+  background-image: url(../../img/flags/4x3/sy.svg); }
+  .flag--sy.flag--squared {
+    background-image: url(../../img/flags/1x1/sy.svg); }
+
+.flag--sz {
+  background-image: url(../../img/flags/4x3/sz.svg); }
+  .flag--sz.flag--squared {
+    background-image: url(../../img/flags/1x1/sz.svg); }
+
+.flag--tc {
+  background-image: url(../../img/flags/4x3/tc.svg); }
+  .flag--tc.flag--squared {
+    background-image: url(../../img/flags/1x1/tc.svg); }
+
+.flag--td {
+  background-image: url(../../img/flags/4x3/td.svg); }
+  .flag--td.flag--squared {
+    background-image: url(../../img/flags/1x1/td.svg); }
+
+.flag--tf {
+  background-image: url(../../img/flags/4x3/tf.svg); }
+  .flag--tf.flag--squared {
+    background-image: url(../../img/flags/1x1/tf.svg); }
+
+.flag--tg {
+  background-image: url(../../img/flags/4x3/tg.svg); }
+  .flag--tg.flag--squared {
+    background-image: url(../../img/flags/1x1/tg.svg); }
+
+.flag--th {
+  background-image: url(../../img/flags/4x3/th.svg); }
+  .flag--th.flag--squared {
+    background-image: url(../../img/flags/1x1/th.svg); }
+
+.flag--tj {
+  background-image: url(../../img/flags/4x3/tj.svg); }
+  .flag--tj.flag--squared {
+    background-image: url(../../img/flags/1x1/tj.svg); }
+
+.flag--tk {
+  background-image: url(../../img/flags/4x3/tk.svg); }
+  .flag--tk.flag--squared {
+    background-image: url(../../img/flags/1x1/tk.svg); }
+
+.flag--tl {
+  background-image: url(../../img/flags/4x3/tl.svg); }
+  .flag--tl.flag--squared {
+    background-image: url(../../img/flags/1x1/tl.svg); }
+
+.flag--tm {
+  background-image: url(../../img/flags/4x3/tm.svg); }
+  .flag--tm.flag--squared {
+    background-image: url(../../img/flags/1x1/tm.svg); }
+
+.flag--tn {
+  background-image: url(../../img/flags/4x3/tn.svg); }
+  .flag--tn.flag--squared {
+    background-image: url(../../img/flags/1x1/tn.svg); }
+
+.flag--to {
+  background-image: url(../../img/flags/4x3/to.svg); }
+  .flag--to.flag--squared {
+    background-image: url(../../img/flags/1x1/to.svg); }
+
+.flag--tr {
+  background-image: url(../../img/flags/4x3/tr.svg); }
+  .flag--tr.flag--squared {
+    background-image: url(../../img/flags/1x1/tr.svg); }
+
+.flag--tt {
+  background-image: url(../../img/flags/4x3/tt.svg); }
+  .flag--tt.flag--squared {
+    background-image: url(../../img/flags/1x1/tt.svg); }
+
+.flag--tv {
+  background-image: url(../../img/flags/4x3/tv.svg); }
+  .flag--tv.flag--squared {
+    background-image: url(../../img/flags/1x1/tv.svg); }
+
+.flag--tw {
+  background-image: url(../../img/flags/4x3/tw.svg); }
+  .flag--tw.flag--squared {
+    background-image: url(../../img/flags/1x1/tw.svg); }
+
+.flag--tz {
+  background-image: url(../../img/flags/4x3/tz.svg); }
+  .flag--tz.flag--squared {
+    background-image: url(../../img/flags/1x1/tz.svg); }
+
+.flag--ua {
+  background-image: url(../../img/flags/4x3/ua.svg); }
+  .flag--ua.flag--squared {
+    background-image: url(../../img/flags/1x1/ua.svg); }
+
+.flag--ug {
+  background-image: url(../../img/flags/4x3/ug.svg); }
+  .flag--ug.flag--squared {
+    background-image: url(../../img/flags/1x1/ug.svg); }
+
+.flag--um {
+  background-image: url(../../img/flags/4x3/um.svg); }
+  .flag--um.flag--squared {
+    background-image: url(../../img/flags/1x1/um.svg); }
+
+.flag--us {
+  background-image: url(../../img/flags/4x3/us.svg); }
+  .flag--us.flag--squared {
+    background-image: url(../../img/flags/1x1/us.svg); }
+
+.flag--uy {
+  background-image: url(../../img/flags/4x3/uy.svg); }
+  .flag--uy.flag--squared {
+    background-image: url(../../img/flags/1x1/uy.svg); }
+
+.flag--uz {
+  background-image: url(../../img/flags/4x3/uz.svg); }
+  .flag--uz.flag--squared {
+    background-image: url(../../img/flags/1x1/uz.svg); }
+
+.flag--va {
+  background-image: url(../../img/flags/4x3/va.svg); }
+  .flag--va.flag--squared {
+    background-image: url(../../img/flags/1x1/va.svg); }
+
+.flag--vc {
+  background-image: url(../../img/flags/4x3/vc.svg); }
+  .flag--vc.flag--squared {
+    background-image: url(../../img/flags/1x1/vc.svg); }
+
+.flag--ve {
+  background-image: url(../../img/flags/4x3/ve.svg); }
+  .flag--ve.flag--squared {
+    background-image: url(../../img/flags/1x1/ve.svg); }
+
+.flag--vg {
+  background-image: url(../../img/flags/4x3/vg.svg); }
+  .flag--vg.flag--squared {
+    background-image: url(../../img/flags/1x1/vg.svg); }
+
+.flag--vi {
+  background-image: url(../../img/flags/4x3/vi.svg); }
+  .flag--vi.flag--squared {
+    background-image: url(../../img/flags/1x1/vi.svg); }
+
+.flag--vn {
+  background-image: url(../../img/flags/4x3/vn.svg); }
+  .flag--vn.flag--squared {
+    background-image: url(../../img/flags/1x1/vn.svg); }
+
+.flag--vu {
+  background-image: url(../../img/flags/4x3/vu.svg); }
+  .flag--vu.flag--squared {
+    background-image: url(../../img/flags/1x1/vu.svg); }
+
+.flag--wf {
+  background-image: url(../../img/flags/4x3/wf.svg); }
+  .flag--wf.flag--squared {
+    background-image: url(../../img/flags/1x1/wf.svg); }
+
+.flag--ws {
+  background-image: url(../../img/flags/4x3/ws.svg); }
+  .flag--ws.flag--squared {
+    background-image: url(../../img/flags/1x1/ws.svg); }
+
+.flag--ye {
+  background-image: url(../../img/flags/4x3/ye.svg); }
+  .flag--ye.flag--squared {
+    background-image: url(../../img/flags/1x1/ye.svg); }
+
+.flag--yt {
+  background-image: url(../../img/flags/4x3/yt.svg); }
+  .flag--yt.flag--squared {
+    background-image: url(../../img/flags/1x1/yt.svg); }
+
+.flag--za {
+  background-image: url(../../img/flags/4x3/za.svg); }
+  .flag--za.flag--squared {
+    background-image: url(../../img/flags/1x1/za.svg); }
+
+.flag--zm {
+  background-image: url(../../img/flags/4x3/zm.svg); }
+  .flag--zm.flag--squared {
+    background-image: url(../../img/flags/1x1/zm.svg); }
+
+.flag--zw {
+  background-image: url(../../img/flags/4x3/zw.svg); }
+  .flag--zw.flag--squared {
+    background-image: url(../../img/flags/1x1/zw.svg); }
+
+.flag--en {
+  background-image: url(../../img/flags/4x3/gb.svg); }
+  .flag--en.flag--squared {
+    background-image: url(../../img/flags/1x1/gb.svg); }
 
 .floating-form {
   display: block;
