@@ -38,7 +38,29 @@ class IndexFixture extends ActiveFixture
                 'content' => 'twowords',
                 'description' => 'index4',
                 'language_info' => 'en',
-            ]
+            ],
+
+            'index7' => [
+                'url' => 'index7.php',
+                'title' => 'index7',
+                'content' => 'item',
+                'description' => 'index7',
+                'language_info' => 'en',
+            ],
+            'index6' => [
+                'url' => 'index6/else/item',
+                'title' => 'index5',
+                'content' => 'item',
+                'description' => 'index5',
+                'language_info' => 'en',
+            ],
+            'index5' => [
+                'url' => 'index5/item',
+                'title' => 'index5',
+                'content' => 'item',
+                'description' => 'index5',
+                'language_info' => 'en',
+            ],
         ];
     }
 }

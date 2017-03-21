@@ -42,6 +42,9 @@ class IndexTest extends CrawlerTestCase
         $test = Index::flatSearchByQuery('aaa', 'en');
         $this->assertSame('aaa', $test[0]->title);
         
+        $test = Index::flatSearchByQuery('AAA', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+        
         $test = Index::flatSearchByQuery('bbb', 'en');
         $this->assertSame('aaa', $test[0]->title);
         
@@ -57,6 +60,8 @@ class IndexTest extends CrawlerTestCase
     
         $test1 = Index::searchByQuery('aaa', 'en');
         $this->assertSame('aaa', $test1[0]->title);
+        $test1 = Index::searchByQuery('AAA', 'en');
+        $this->assertSame('aaa', $test1[0]->title);
     
         $test2 = Index::searchByQuery('bbb', 'en');
         $this->assertSame('aaa', $test2[0]->title);
@@ -71,6 +76,9 @@ class IndexTest extends CrawlerTestCase
         $fixture->load();
         
         $test1 = Index::searchByQuery('drink bug', 'en');
+        $this->assertSame('index2', $test1[0]->title);
+        
+        $test1 = Index::searchByQuery('Drink BUG', 'en');
         $this->assertSame('index2', $test1[0]->title);
         
         $test2 = Index::searchByQuery('drinking finding', 'en');
@@ -90,5 +98,37 @@ class IndexTest extends CrawlerTestCase
         $this->assertEmpty($test6);
     }
     
+    public function testEmptySearchs()
+    {
+        $fixture = new IndexFixture();
+        $fixture->load();
+        
+        $test1 = Index::searchByQuery('1', 'en');
+        $this->assertEmpty($test1);
+        $test2 = Index::flatSearchByQuery('1', 'en');
+        $this->assertEmpty($test2);
+    }
     
+    public function testSortByUrl()
+    {
+        $test1 = Index::searchByQuery('item', 'en');
+        
+        $this->assertSame(3, count($test1));
+        
+        $this->assertSame('index5/item', $test1[0]->url);
+        $this->assertSame('index6/else/item', $test1[1]->url);
+        $this->assertSame('index7.php', $test1[2]->url);
+        
+    }
+    
+    public function testSameSortByUrl()
+    {
+        $test1 = Index::searchByQuery('index', 'en');
+    
+        $this->assertSame(6, count($test1));
+    
+        $this->assertSame('index5/item', $test1[0]->url);
+        $this->assertSame('index6/else/item', $test1[1]->url);
+        $this->assertSame('index7.php', $test1[2]->url);
+    }
 }

@@ -8,6 +8,8 @@ use luya\crawler\models\Searchdata;
 use luya\helpers\Url;
 use yii\helpers\Inflector;
 use Nadar\Stemming\Stemm;
+use luya\helpers\StringHelper;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "crawler_index".
@@ -72,24 +74,6 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
     }
     
     /**
-     * Getter $clickUrl.
-     *
-     * @return string
-     */
-    public function getClickUrl()
-    {
-        static::$counter++;
-        
-        return Url::toRoute([
-            '/crawler/click/index',
-            'slug' => Inflector::slug($this->title),
-            'searchId' => static::$searchDataId,
-            'indexId' => $this->id,
-            'position' => static::$counter,
-        ], true);
-    }
-    
-    /**
      * Search by general Like statement.
      *
      * @param string $query
@@ -120,11 +104,9 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             'query' => $query,
             'results' => count($result),
             'timestamp' => time(),
-            'language' => Yii::$app->composition->language,
+            'language' => $languageInfo,
         ];
-        if ($searchData->save()) {
-            static::$searchDataId = $searchData->id;
-        }
+        $searchData->save(false);
     
         return $result;
     }
@@ -134,9 +116,9 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
      * @param unknown $query
      * @param unknown $languageInfo
      * @param string $returnQuery
-     * @return \yii\db\ActiveQuery|\yii\db\ActiveRecord[]
+     * @return \yii\db\ActiveRecord
      */
-    public static function searchByQuery($query, $languageInfo, $returnQuery = false)
+    public static function searchByQuery($query, $languageInfo)
     {
         $query = static::encodeQuery($query);
         
@@ -144,33 +126,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             return [];
         }
         
-        $parts = explode(" ", $query);
-        
-        $index = [];
-        
-        foreach ($parts as $word) {
-            $word = Stemm::stem($word, $languageInfo);
-            $q = self::find()->select(['id', 'content']);
-            $q->where(['like', 'content', $word]);
-            $q->orWhere(['like', 'description', $query]);
-            $q->orWhere(['like', 'title', $query]);
-            if (!empty($languageInfo)) {
-                $q->andWhere(['language_info' => $languageInfo]);
-            }
-            $data = $q->asArray()->indexBy('id')->all();
-            static::indexer($data, $index);
-        }
-        
-        $ids = [];
-        foreach ($index as $item) {
-            $ids[] = $item['id'];
-        }
-        
-        $activeQuery = self::find()->where(['in', 'id', $ids]);
-        
-        if ($returnQuery) {
-            return $activeQuery;
-        }
+        $activeQuery = self::activeQuerySearch($query, $languageInfo);
         
         $result = $activeQuery->all();
         
@@ -180,13 +136,63 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             'query' => $query,
             'results' => count($result),
             'timestamp' => time(),
-            'language' => Yii::$app->composition->language,
+            'language' => $languageInfo,
         ];
-        if ($searchData->save()) {
-            static::$searchDataId = $searchData->id;
-        }
+        $searchData->save();
         
         return $result;
+    }
+    
+    /**
+     * Smart search by a query.
+     *
+     * @param unknown $query
+     * @param unknown $languageInfo
+     * @param string $returnQuery
+     * @return \yii\db\ActiveQuery
+     */
+    public static function activeQuerySearch($query, $languageInfo)
+    {
+        $query = static::encodeQuery($query);
+        
+        $parts = explode(" ", $query);
+        
+        $index = [];
+        foreach ($parts as $word) {
+            $word = Stemm::stem($word, $languageInfo);
+            $q = self::find()->select(['id', 'url', 'title']);
+            $q->where(['like', 'content', $word]);
+            $q->orWhere(['like', 'description', $query]);
+            $q->orWhere(['like', 'title', $query]);
+            if (!empty($languageInfo)) {
+                $q->andWhere(['language_info' => $languageInfo]);
+            }
+            $data = $q->asArray()->indexBy('id')->all();
+        
+            static::indexer($word, $data, $index);
+        }
+        
+        
+        $ids = [];
+        $foundOld = 1;
+        foreach ($index as $item) {
+            if (isset($ids[$item['urlwordpos']])) {
+                $foundOld++;
+                $ids[$item['urlwordpos'] + $foundOld] = $item['id'];
+            } else {
+                $ids[$item['urlwordpos']] = $item['id'];
+            }
+        
+        }
+        
+        arsort($ids);
+        
+        $activeQuery = self::find()->where(['in', 'id', $ids]);
+        if (!empty($ids)) {
+            $activeQuery->orderBy(new Expression('FIELD (id, ' . implode(', ', $ids) . ')'));
+        }
+        
+        return $activeQuery;
     }
     
     /**
@@ -194,17 +200,49 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
      * @param unknown $item
      * @param unknown $index
      */
-    private static function indexer($item, &$index)
+    private static function indexer($keyword, $item, &$index)
     {
         if (empty($index)) {
             $index = $item;
+            foreach ($index as $k => $v) {
+                $index[$k]['urlwordpos'] = static::evalPosition($v, $keyword);
+            }
         } else {
             foreach ($index as $k => $v) {
                 if (!array_key_exists($k, $item)) {
                     unset($index[$k]);
+                } else {
+                    $index[$k]['urlwordpos'] = static::evalPosition($v, $keyword);
                 }
             }
         }
+    }
+    
+    private static $_midImportant = 500;
+    
+    private static $_unImportant = 1000;
+    
+    private static function evalPosition(array $item, $keyword)
+    {
+        $newpos = strpos($item['url'], $keyword);
+        
+        if ($newpos === false) {
+            $posInTitle = strpos($item['title'], $keyword);
+            
+            if ($posInTitle !== false) {
+                $newpos = $posInTitle + self::$_midImportant;
+                self::$_midImportant++;
+            } else {
+                $newpos = self::$_unImportant;
+                self::$_unImportant++;
+            }
+        }
+        
+        if (isset($item['urlwordpos']) && $item['urlwordpos'] < $newpos) {
+            return $item['urlwordpos'];
+        }
+        
+        return $newpos;
     }
     
     /**

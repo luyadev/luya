@@ -76,12 +76,12 @@ class Module extends \luya\base\Module
      */
     public $statisticRecipients = [];
     
+    public $searchResultPageSize = 25;
+    
     /**
      * @inheritdoc
      */
     public $urlRules = [
         ['pattern' => 'crawler', 'route' => 'crawler/default'],
-        ['pattern' => 'crawler/click/<slug:[a-zA-Z0-9\-]+>/<searchId:\d+>/<indexId:\d+>/<position:\d+>', 'route' => 'crawler/click/index'],
-
     ];
 }

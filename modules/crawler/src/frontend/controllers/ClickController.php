@@ -18,7 +18,7 @@ class ClickController extends Controller
             'position' => $position,
         ];
         // save whether valid or not, as user must be redirected.
-        $model->save();
+        $model->save(false);
         
         $index = Index::findOne($indexId);
         
