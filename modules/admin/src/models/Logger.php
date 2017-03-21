@@ -296,6 +296,7 @@ final class Logger extends NgRestModel
             'server' => Module::t('model_logger_server'),
             'group_identifier' => Module::t('model_logger_group_identifier'),
             'group_identifier_index' => Module::t('model_logger_group_identifier_index'),
+            'typeBadge' => Module::t('model_logger_badgetype'),
         ];
     }
     

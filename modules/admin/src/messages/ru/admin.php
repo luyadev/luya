@@ -207,6 +207,7 @@ return [
     'model_logger_time' => 'Time',
     'model_logger_message' => 'Message',
     'model_logger_type' => 'Type',
+    'model_logger_badgetype' => 'Status',
     'model_logger_trace_file' => 'Trace File',
     'model_logger_trace_line' => 'Trace Line',
     'model_logger_trace_function' => 'Trace Function',

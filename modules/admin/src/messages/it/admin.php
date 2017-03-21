@@ -188,6 +188,7 @@ return [
     'model_logger_time' => 'Orario',
     'model_logger_message' => 'Messaggio',
     'model_logger_type' => 'Tipo',
+    'model_logger_badgetype' => 'Status',
     'model_logger_trace_file' => 'Tracciamento File',
     'model_logger_trace_line' => 'Tracciamento Linea',
     'model_logger_trace_function' => 'Tracciamento Funzione',

@@ -205,6 +205,7 @@ return [
     'model_logger_time' => 'Час',
     'model_logger_message' => 'Повідомлення',
     'model_logger_type' => 'Тип',
+    'model_logger_badgetype' => 'Status',
     'model_logger_trace_file' => 'Файл трасування',
     'model_logger_trace_line' => 'Строка трасування',
     'model_logger_trace_function' => 'Трасуюча функциія',

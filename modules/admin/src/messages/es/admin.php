@@ -206,6 +206,7 @@ return [
     'model_logger_time' => 'Tiempo',
     'model_logger_message' => 'Mensaje',
     'model_logger_type' => 'Tipo',
+    'model_logger_badgetype' => 'Status',
     'model_logger_trace_file' => 'Archivo de rastreo',
     'model_logger_trace_line' => 'Línea de rastreo',
     'model_logger_trace_function' => 'Función de rastreo',
