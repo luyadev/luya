@@ -23,6 +23,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1163](https://github.com/luyadev/luya/issues/1163) Styling of the toggler. Added toggles for each container.
+- [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
 - [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
 - [#724](https://github.com/luyadev/luya/issues/724) Removed compass configs in admin module and added gulp workflow.
 - [#1243](https://github.com/luyadev/luya/issues/1243#issuecomment-288064499) Enabled all flags

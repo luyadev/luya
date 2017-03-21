@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * Base colors
  */
@@ -99,13 +100,13 @@
   .module-cmsadmin .accordion__entry--open > .accordion__body--empty:after {
     display: block;
     content: "";
-    background: url("../img/empty-placeholder-arrow.png") top left no-repeat;
+    background: url("../../img/empty-placeholder-arrow.png") top left no-repeat;
     width: 100px;
     height: 40px;
     position: absolute;
     background-size: cover;
     opacity: 0.5;
-    right: 200px;
+    right: 0;
     bottom: -20px; }
   .module-cmsadmin .accordion__body .accordion__body--empty:after {
     display: none; }
@@ -800,3 +801,64 @@
   .module-cmsadmin zaa-wysiwyg ol,
   .module-cmsadmin zaa-wysiwyg ol li {
     list-style-type: decimal; }
+
+/**
+ * Prefix every module style with the module class
+ */
+.block-styles b, .block-styles strong {
+  font-weight: 700; }
+
+.block-styles i {
+  font-style: italic; }
+
+.block-styles u {
+  text-decoration: underline; }
+
+.block-styles h1, .block-styles h2, .block-styles h3, .block-styles h4, .block-styles h5 {
+  margin: 0; }
+
+.block-styles h1 {
+  font-size: 2rem;
+  line-height: 2.4rem; }
+
+.block-styles h2 {
+  font-size: 1.8rem;
+  line-height: 2.2rem; }
+
+.block-styles h3 {
+  font-size: 1.6rem;
+  line-height: 2rem; }
+
+.block-styles h4 {
+  font-size: 1.4rem;
+  line-height: 1.8rem; }
+
+.block-styles h5 {
+  font-size: 1.2rem;
+  line-height: 1.6rem; }
+
+.block-styles p, .block-styles span {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  margin: 0; }
+
+.block-styles blockquote {
+  font-style: italic; }
+  .block-styles blockquote:before {
+    display: inline-block;
+    content: "«";
+    margin-right: 5px; }
+  .block-styles blockquote:after {
+    display: inline-block;
+    content: "»";
+    margin-left: 5px; }
+
+.block-styles ul, .block-styles ol {
+  padding: 0;
+  margin-left: 30px; }
+
+.block-styles ul, .block-styles ul li {
+  list-style-type: disc; }
+
+.block-styles ol, .block-styles ol li {
+  list-style-type: decimal; }

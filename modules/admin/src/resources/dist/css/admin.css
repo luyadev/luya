@@ -8578,13 +8578,33 @@ input[type='checkbox']:checked + .input__label:before, input[type='checkbox']:ch
 menu-dropdown,
 .menu-dropdown {
   display: block;
-  margin-left: -25px; }
+  margin: 10px 0 10px -25px; }
 
 .menu-dropdown__category {
   display: inline-block;
   vertical-align: top;
   min-width: 250px;
   padding-left: 25px; }
+
+.menu-dropdown__container {
+  margin: 10px 0; }
+
+.menu-dropdown__title,
+.menu-dropdown__toggle-all {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+  .menu-dropdown__title i,
+  .menu-dropdown__toggle-all i {
+    display: inline-block;
+    vertical-align: middle; }
+  .menu-dropdown__title span,
+  .menu-dropdown__toggle-all span {
+    vertical-align: middle;
+    margin-top: 3px;
+    display: inline-block; }
 
 .menu-dropdown__list {
   position: relative; }
