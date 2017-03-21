@@ -8,9 +8,6 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
-- [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
-- [#1243](https://github.com/luyadev/luya/issues/1243#issuecomment-288064499) Enabled all flags
-- [#724](https://github.com/luyadev/luya/issues/724) Removed compass configs in admin module and added gulp workflow.
 - [#1208](https://github.com/luyadev/luya/issues/1208) Renamed `luya\cms\widgets\LanguageSwitcher` to `LangSwitcher` and removed the template usage as it should not be part of the widget.
 - [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 - [#1177](https://github.com/luyadev/luya/issues/1177) The luya\web\Elements component looks for the elements.php inside the @app/views folder instead of @app.
@@ -26,6 +23,9 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
+- [#724](https://github.com/luyadev/luya/issues/724) Removed compass configs in admin module and added gulp workflow.
+- [#1243](https://github.com/luyadev/luya/issues/1243#issuecomment-288064499) Enabled all flags
 - [#1228](https://github.com/luyadev/luya/issues/1228) Remove session serailizer for ngRestConfig.
 - [#1230](https://github.com/luyadev/luya/issues/1230) New ngRestScopes() resolves the need for ngRestConfig($config) method.
 - [#1214](https://github.com/luyadev/luya/issues/1214) Added JSON-LD class to add rich snippet informations to a website.
