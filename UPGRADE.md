@@ -3,12 +3,14 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
-1.0.0 (in progress)
+1.0.0-RC3 (in progress)
 -------------------
 
++ [#1076](https://github.com/luyadev/luya/issues/1076) **TWIG IS DEPRECATED** The whole compont, as the cms blocks with twig are now depreacted, the twigjs admin output for blocks still works, all other code related to twig is not working anymore! In order to include to your project use: https://github.com/luyadev/luya-rc-legacy
 + [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 + [#1177](https://github.com/luyadev/luya/issues/1177) The elements.php for the luya\web\Elements component does new look for the elements.php inside the @app/views folder instead of @app.
 + [#1109](https://github.com/luyadev/luya/issues/1109) All blocks deliverd from the LUYA core modules are marked as `final` so you are not able to extend from those blocks. Make sure you extend from the `luya\cms\base\Block` class.
++ [#1244](https://github.com/luyadev/luya/issues/1244) When using the crawler module, the output of the controller changed to an ActiveDataProvider object instead of an array with results, see the crawler module readme.
 
 As we merged migrations files from older beta releases, you can find all delete files in the following [commit](https://github.com/luyadev/luya/commit/78f5304054be95ad317a80455587d8a4e0a0b9a8#diff-ecf9849552b303be6db5a3bd40029037).
 

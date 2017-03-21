@@ -1121,18 +1121,18 @@
 						$scope.isTranslated = true;
 						$scope.reset();
 						
-						$scope.NavController.bubbleParents($scope.NavController.navData.parent_nav_id, $scope.NavController.navData.nav_container_id);
-						
-						if ($scope.item.nav_item_type == 1) {
-							if ($scope.currentPageVersion == 0) {
-								$scope.currentPageVersion = response.data.item.nav_item_type_id;
-							}
-							if (response.data.item.nav_item_type_id in response.data.typeData) {
-								$scope.currentVersionInformation = response.data.typeData[$scope.currentPageVersion];
-								$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
+						if (!response.data['nav'].is_draft) {
+							$scope.NavController.bubbleParents($scope.NavController.navData.parent_nav_id, $scope.NavController.navData.nav_container_id);
+							if ($scope.item.nav_item_type == 1) {
+								if ($scope.currentPageVersion == 0) {
+									$scope.currentPageVersion = response.data.item.nav_item_type_id;
+								}
+								if (response.data.item.nav_item_type_id in response.data.typeData) {
+									$scope.currentVersionInformation = response.data.typeData[$scope.currentPageVersion];
+									$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
+								}
 							}
 						}
-						
 					}
 				}
 				$scope.loaded = true

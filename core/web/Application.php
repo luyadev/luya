@@ -33,7 +33,6 @@ class Application extends \yii\web\Application
             'urlManager' => ['class' => 'luya\web\UrlManager'],
             'view' => ['class' => 'luya\web\View'],
             'element' => ['class' => 'luya\web\Element'],
-            'twig' => ['class' => 'luya\web\Twig'],
             'composition' => ['class' => 'luya\web\Composition'],
             'assetManager' => [
                 'class' => 'luya\web\AssetManager',

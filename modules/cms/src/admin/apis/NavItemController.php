@@ -70,11 +70,12 @@ class NavItemController extends \luya\admin\base\RestController
      */
     public function actionNavLangItem($navId, $langId)
     {
-        $item = NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
+        $item = NavItem::find()->with('nav')->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
         if ($item) {
             return [
                 'error' => false,
                 'item' => $item->toArray(),
+                'nav' => $item->nav->toArray(),
                 'typeData' => ($item->nav_item_type == 1) ? NavItemPage::getVersionList($item->id) : $item->getType()->toArray(),
             ];
         }
