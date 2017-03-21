@@ -134,32 +134,15 @@ The css and html files for the admin module are based on the following rules.
 
 ### Admin Design compile
 
-> We now use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow) to compile all styles and js files in the admin module.  
-> To use it, go to `modules/admin/src/resources` and run `gulp`. To install gulp and the dependencies on your System [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).
+To compile css and js to one file we use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow).  
+To install gulp and the dependencies on your System [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).
 
-To compile the styles you have to install the following tools and plugins:
+Everything will be compiled to a folder `dist/` in the corresponding `{module}/resources` folder.
 
-(If ruby is not installed, run `sudo apt-get install ruby` on linux systems)
+> **Important:** The JS files and their order are all defined in the `compileConfig.js`. If you add a new JS file, make sure to add it in the config as well.
 
-+ [Compass](http://compass-style.org/install/) (gem install compass) (Linux: `sudo apt-get install ruby-compass`)
-+ [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails) (Linux: `sudo apt-get install ruby-autoprefixer-rails`)
+**Module: admin**  
+Run `gulp` in the following directory: `modules/admin/src/resources`.
 
-> If you have not enough rights to run the command use *sudo* to run the commands, or change the permissions in the install directory of ruby.
-
-
-If you have installed the tools successfull, you can now switch to the `resources` folder and run:
-
-```sh
-compass watch
-```
-
-or
-
-```sh
-compass compile
-```
-
-+ compile: will compile all styles once
-+ watch: watching for changes in the file and runs compile automatic
-
-Each module does have its own compass configratuons `config.rb`, so you have to run this process in each sub folder for the specific module.
+**Module: cmsadmin**  
+Run `gulp` in the following directory: `modules/cms/src/admin/resources`.

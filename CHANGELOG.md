@@ -8,6 +8,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
 - [#1243](https://github.com/luyadev/luya/issues/1243#issuecomment-288064499) Enabled all flags
 - [#724](https://github.com/luyadev/luya/issues/724) Removed compass configs in admin module and added gulp workflow.
 - [#1208](https://github.com/luyadev/luya/issues/1208) Renamed `luya\cms\widgets\LanguageSwitcher` to `LangSwitcher` and removed the template usage as it should not be part of the widget.
