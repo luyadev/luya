@@ -12,6 +12,7 @@
   + [HTML Element](concept-elements.md)
   + [Hooks](concept-hooks.md)
   + [Image LazyLoader](concept-lazyload.md)
+  + [Deployment & Sync](concept-depandsync.md)
 + Application
   + [Storage Filters](app-filters.md)
   + [Storage Filter Effects](app-filter-effects.md)
