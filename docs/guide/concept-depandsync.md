@@ -1,4 +1,5 @@
-# Deployment and Sync
+Deployment and Sync
+===
 
 As part of LUYA we have build an eco system in order to sync and deploy your website. Therefore this guide explains the best practice of how to bring your website online and sync it back to your local dev.
 
@@ -22,7 +23,7 @@ We recommend you to deploy the website to the Server in a very early stadium of 
 
 You are now ready to deploy your website into the server and can now start add content on the production env.
 
-## Sync
+##Sync
 
 We have built a sync command to sync the database and files from PROD to any local client. In order to setup this command log in to the admin interface of your PROD / Server website, navigat to System -> Machines and create a new one, you will need the identfier and token.
 
