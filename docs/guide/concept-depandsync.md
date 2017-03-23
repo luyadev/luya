@@ -5,7 +5,7 @@ As part of LUYA we have build an eco system in order to sync and deploy your web
 
 Those things are required for this guide:
 + Git repository (we use GitHub)
-+ Server with SSH access (Prod environemnt)
++ Server with SSH access (Prod environment)
 + Your local dev machine with LAMP or WAMP Stack.
 
 
