@@ -350,12 +350,9 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $on = self::findOne($droppedOnItemId);
         
-        return false;
-        
         if (!$move || !$on) {
             return false;
         }
-
 
         $response = self::checkDuplicateAlias($move->id, $on->id);
         
