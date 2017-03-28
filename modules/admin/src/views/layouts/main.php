@@ -63,8 +63,8 @@ $this->beginPage()
         <div class="input input--radios col s12">
             <label class="input__label"><?= Admin::t('view_index_redirect_type'); ?></label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label> <br />
-                <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
+                <input type="radio" ng-model="data.type" ng-value="1"><label ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.type" ng-value="2"><label ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
             </div>
         </div>
     </div>

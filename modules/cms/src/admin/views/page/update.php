@@ -442,7 +442,7 @@ use luya\cms\admin\Module;
                             </div>
                             <div class="row">
                                 <div class="input input--radios col s12">
-                                    <label class="input__label"><?php echo Module::t('view_index_add_type'); ?> {{ itemCopy.nav_item_type }}</label>
+                                    <label class="input__label"><?php echo Module::t('view_index_add_type'); ?></label>
                                     <div class="input__field-wrapper">
                                         <input type="radio" ng-model="itemCopy.nav_item_type" ng-value="1"><label ng-click="itemCopy.nav_item_type = 1"><?php echo Module::t('view_index_type_page'); ?></label> <br />
                                         <input type="radio" ng-model="itemCopy.nav_item_type" ng-value="2"><label ng-click="itemCopy.nav_item_type = 2"><?php echo Module::t('view_index_type_module'); ?></label> <br />
