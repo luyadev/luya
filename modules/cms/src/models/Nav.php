@@ -292,7 +292,7 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toBeforeNavId);
 
-        if (!$move || !$on) {
+        if (!$move || !$to) {
             return false;
         }
         
@@ -321,7 +321,7 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toAfterNavId);
 
-        if (!$move || !$on) {
+        if (!$move || !$to) {
             return false;
         }
         
