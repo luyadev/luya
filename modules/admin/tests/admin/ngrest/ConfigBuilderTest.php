@@ -62,13 +62,13 @@ class ConfigBuilderTest extends AdminTestCase
     public function testNgRestConfigAW()
     {
         $config = new ConfigBuilder('model\class\name');
-        $config->aw->load(['class' => 'luya\admin\aws\ChangePassword', 'alias' => 'Change Password']);
+        $config->aw->load(['class' => 'luya\admin\aws\ChangePasswordActiveWindow', 'alias' => 'Change Password']);
         $cfg = $config->getConfig();
 
         $this->assertArrayHasKey('aw', $cfg);
         $aw = $cfg['aw'];
-        $this->assertArrayHasKey('00a8a03b008f1b28d968f894d83c2e87c64c046c', $aw);
-        $obj = $aw['00a8a03b008f1b28d968f894d83c2e87c64c046c'];
+        $this->assertArrayHasKey('64a59ae8617f81fa6f1f16d60d99018d11505502', $aw);
+        $obj = $aw['64a59ae8617f81fa6f1f16d60d99018d11505502'];
 
         $this->assertArrayHasKey('objectConfig', $obj);
         $this->assertArrayHasKey('alias', $obj);

@@ -3,6 +3,8 @@
 namespace luya\cms\helpers;
 
 use Yii;
+use luya\web\ExternalLink;
+use luya\TagParser;
 
 /**
  * Helper methods for CMS Blocks.
@@ -13,8 +15,8 @@ use Yii;
  * The helper methods are basically tasks you are using a lot when dealing with block extra
  * value output or configuration of a block element like vars, cfgs.
  *
- * @since 1.0.0-RC2
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class BlockHelper
 {
@@ -22,12 +24,24 @@ class BlockHelper
      * Create the options array for a zaa-select field based on an key value pairing
      * array.
      *
+     * In order to provide a prompt message which displayes when nothing is selected us the $prompt param.
+     *
+     * In order to get a key value pairing directly from an ActiveRecord Model use:
+     *
+     * ```php
+     * return Tag::find()->select(['name'])->indexBy('id')->column();
+     * ```
+     *
      * @param array $options The key value array pairing the select array should be created from.
+     * @param string $prompt The prompt message when nothing is selected (contains the value 0 by default).
      * @since 1.0.0-beta5
      */
-    public static function selectArrayOption(array $options)
+    public static function selectArrayOption(array $options, $prompt = null)
     {
         $transform = [];
+        if ($prompt) {
+            $transform[] = ['value' => 0, 'label' => $prompt];
+        }
         foreach ($options as $key => $value) {
             $transform[] = ['value' => $key, 'label' => $value];
         }
@@ -38,6 +52,14 @@ class BlockHelper
     /**
      * Create the Options list in the config for a zaa-checkbox-array based on an
      * key => value pairing array.
+     *
+     * In order to get a key value pairing directly from an ActiveRecord Model use:
+     *
+     * ```php
+     * return Tag::find()->select(['name'])->indexBy('id')->column();
+     * ```
+     *
+     * Where name is the value and id the key for the array.
      *
      * @param array $options The array who cares the options with items
      * @since 1.0.0-beta5
@@ -212,5 +234,39 @@ class BlockHelper
         }
     
         return [];
+    }
+    
+    
+    /**
+     * Generate a link object based on the configuration (array).
+     *
+     * @param string|array $config The configuration array to build the object
+     * @return \luya\web\LinkInterface|false Returns a linkable resource object or false if configuration is wrong.
+     */
+    public static function linkObject($config)
+    {
+        if (!empty($config) && isset($config['type']) && isset($config['value'])) {
+            switch ($config['type']) {
+                case 1:
+                    return Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();
+                    break;
+                case 2:
+                    return new ExternalLink(['href' => $config['value']]);
+                    break;
+            }
+        }
+    
+        return false;
+    }
+    
+    /**
+     * Wrapper function for Markdown Parsing.
+     *
+     * @param string $text The text to parse with Markdown.
+     * @return string The parsed Markdown text.
+     */
+    public static function markdown($text)
+    {
+        return TagParser::convertWithMarkdown($text);
     }
 }

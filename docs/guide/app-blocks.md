@@ -4,7 +4,7 @@ Blocks are elements used in the CMS Module to display and configure data. Blocks
 
 ## Create a new Block
 
-> use `./vendor/bin/luya block/create` console command to generate a Block.
+> use `./vendor/bin/luya cms/block/create` console command to generate a Block.
 
 You can add Blocks to your application or to a module. In either case, the folder where the blocks are stored must be named as **blocks**. Additionaly blocks should have the suffix `Block`. 
 
@@ -170,7 +170,7 @@ If there is a property defined you will get the property object otherwhise retur
 
 Sometimes your block should also register some css or js files, therfore you can access the global {{\luya\web\View}} Object inside of your PHP view template. Its like registering other assets, by the difference that you are accessing the global scope view instead of the view on `$this`. An example of how to integrate an asset file:
 
-Assuming the blow code is the PHP View of your Block:
+Assuming the below code is the PHP View of your Block:
 
 ```php
 MyBlockAsset::register($this->appView);

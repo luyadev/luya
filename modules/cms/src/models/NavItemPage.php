@@ -43,7 +43,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 $item->delete();
             }
             
-            $event->sender->forceNavItem->updateTimestamp();
+            if ($event->sender->forceNavItem) {
+                $event->sender->forceNavItem->updateTimestamp();
+            }
         });
         
         $this->on(self::EVENT_AFTER_UPDATE, function ($event) {
@@ -108,16 +110,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     public function getLayout()
     {
         return $this->hasOne(Layout::className(), ['id' => 'layout_id']);
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        return [
-            'content_as_array' => 'contentAsArray',
-        ];
     }
     
     /**

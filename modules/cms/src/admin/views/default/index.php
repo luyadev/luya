@@ -1,12 +1,16 @@
+<?php
+use \luya\cms\admin\Module;
+
+?>
 <script type="text/ng-template" id="createform.html">
     <form ng-switch on="data.nav_item_type">
         <div class="row">
             <div class="input input--radios col s12">
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_add_type'); ?></label>
+                <label class="input__label"><?= Module::t('view_index_add_type'); ?></label>
                 <div class="input__field-wrapper">
-                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type = 1"><?php echo \luya\cms\admin\Module::t('view_index_type_page'); ?></label><br />
-                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type = 2; data.is_draft = 0"><?php echo \luya\cms\admin\Module::t('view_index_type_module'); ?></label><br />
-                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type = 3; data.is_draft = 0"><?php echo \luya\cms\admin\Module::t('view_index_type_redirect'); ?></label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type = 1"><?= Module::t('view_index_type_page'); ?></label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type = 2; data.is_draft = 0"><?= Module::t('view_index_type_module'); ?></label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type = 3; data.is_draft = 0"><?= Module::t('view_index_type_redirect'); ?></label><br />
                 </div>
             </div>
         </div>
@@ -15,17 +19,17 @@
 
         <div class="row" ng-show="data.nav_item_type == 1 && !data.isInline">
             <div class="input input--text col s12">
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_as_draft'); ?></label>
+                <label class="input__label"><?= Module::t('view_index_as_draft'); ?></label>
                 <div class="input__field-wrapper">
-                    <?php echo \luya\cms\admin\Module::t('view_index_as_draft_help'); ?><br />
-                    <input type="radio" ng-checked="data.is_draft == 0"><label ng-click="data.is_draft = 0"><?php echo \luya\cms\admin\Module::t('view_index_no'); ?></label><br />
-                    <input type="radio" ng-checked="data.is_draft == 1"><label ng-click="data.is_draft = 1"><?php echo \luya\cms\admin\Module::t('view_index_yes'); ?></label><br />
+                    <?= Module::t('view_index_as_draft_help'); ?><br />
+                    <input type="radio" ng-checked="data.is_draft == 0"><label ng-click="data.is_draft = 0"><?= Module::t('view_index_no'); ?></label><br />
+                    <input type="radio" ng-checked="data.is_draft == 1"><label ng-click="data.is_draft = 1"><?= Module::t('view_index_yes'); ?></label><br />
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="input input--text col s12">
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_title'); ?></label>
+                <label class="input__label"><?= Module::t('view_index_page_title'); ?></label>
                 <div class="input__field-wrapper">
                     <input name="text" type="text" class="input__field" ng-model="data.title" ng-change="aliasSuggestion()" focus-me="true" />
                 </div>
@@ -33,7 +37,7 @@
         </div>
         <div class="row">
             <div class="input input--text col s12">
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_alias'); ?></label>
+                <label class="input__label"><?= Module::t('view_index_page_alias'); ?></label>
                 <div class="input__field-wrapper">
                     <input name="text" type="text" class="input__field" ng-model="data.alias" />
                 </div>
@@ -41,7 +45,7 @@
         </div>
         <div class="row" ng-show="data.is_draft==0">
             <div class="input input--text col s12">
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_meta_description'); ?></label>
+                <label class="input__label"><?= Module::t('view_index_page_meta_description'); ?></label>
                 <div class="input__field-wrapper">
                     <textarea class="input__field validate" ng-model="data.description"></textarea>
                 </div>
@@ -49,7 +53,7 @@
         </div>
         <div class="row" ng-show="data.is_draft==0" ng-hide="data.isInline || navcontainer.length == 1 || data.parent_nav_id!=0">
             <div class="input input--select col s12">
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_nav_container'); ?></label>
+                <label class="input__label"><?= Module::t('view_index_page_nav_container'); ?></label>
                 <div class="input__field-wrapper">
                     <select class="input__field browser-default" ng-model="data.nav_container_id" ng-options="item.id as item.name for item in navcontainers"></select>
                 </div>
@@ -57,10 +61,10 @@
         </div>
         <div class="row" ng-show="data.is_draft==0 && !data.isInline">
             <div class="input input--select col s12">
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_parent_page'); ?></label>
+                <label class="input__label"><?= Module::t('view_index_page_parent_page'); ?></label>
                 <div class="input__field-wrapper">
-                    <input id="[checkbox-id]" ng-model="data.parent_nav_id" value="0" ng-true-value="0" type="checkbox" convert-to-number/>
-                    <label for="[checkbox-id]"><?php echo \luya\cms\admin\Module::t('view_index_page_parent_root'); ?></label>
+                    <input id="[checkbox-id]" ng-model="data.parent_nav_id" value="0" ng-true-value="0" type="checkbox"/>
+                    <label for="[checkbox-id]"><?= Module::t('view_index_page_parent_root'); ?></label>
                     <menu-dropdown class="menu-dropdown" nav-id="data.parent_nav_id" />
                 </div>
             </div>
@@ -80,7 +84,7 @@
         <div ng-show="success">
             <div class="alert alert--success">
                 <i class="material-icons">check</i>
-                <p><?php echo \luya\cms\admin\Module::t('view_index_page_success'); ?></p>
+                <p><?= Module::t('view_index_page_success'); ?></p>
             </div>
         </div>
         <div class="alert alert--danger" ng-show="error.length != 0">
@@ -96,17 +100,17 @@
 <script type="text/ng-template" id="createformpage.html">
         <div class="row" ng-show="!data.isInline">
             <div class="input input--text col s12"> 
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_use_draft'); ?></label>
+                <label class="input__label"><?= Module::t('view_index_page_use_draft'); ?></label>
                 <div class="input__field-wrapper">
-                    <input type="radio" ng-checked="data.use_draft == 0"><label ng-click="data.use_draft = 0; data.from_draft_id = 0"><?php echo \luya\cms\admin\Module::t('view_index_no'); ?></label><br />
-                    <input type="radio" ng-checked="data.use_draft == 1"><label ng-click="data.use_draft = 1; data.layout_id = 0"><?php echo \luya\cms\admin\Module::t('view_index_yes'); ?></label><br />
+                    <input type="radio" ng-checked="data.use_draft == 0"><label ng-click="data.use_draft = 0; data.from_draft_id = 0"><?= Module::t('view_index_no'); ?></label><br />
+                    <input type="radio" ng-checked="data.use_draft == 1"><label ng-click="data.use_draft = 1; data.layout_id = 0"><?= Module::t('view_index_yes'); ?></label><br />
                 </div>
             </div>
         </div>
 
     <div class="row"ng-show="data.use_draft==1">
         <div class="input input--select col s12">
-            <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_select_draft'); ?></label>
+            <label class="input__label"><?= Module::t('view_index_page_select_draft'); ?></label>
             <div class="input__field-wrapper">
                 <select class="input__field browser-default" ng-model="data.from_draft_id" convert-to-number>
                     <option value="0"><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
@@ -118,7 +122,7 @@
     </div>
     <div class="row">
         <div class="input input--select col s12"  ng-show="data.use_draft==0">
-            <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_page_layout'); ?></label>
+            <label class="input__label"><?= Module::t('view_index_page_layout'); ?></label>
             <div class="input__field-wrapper">
                 <select class="input__field" ng-model="data.layout_id" convert-to-number>
                     <option value="0"><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
@@ -131,7 +135,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()"><?php echo \luya\cms\admin\Module::t('view_index_page_btn_save'); ?></button>
+            <button type="button" class="btn" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
         </div>
     </div>
 </script>
@@ -141,7 +145,7 @@
 <script type="text/ng-template" id="createformmodule.html">
     <div class="row">
         <div class="input input--text col s12">
-            <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_module_select'); ?></label>
+            <label class="input__label"><?= Module::t('view_index_module_select'); ?></label>
             <div class="input__field-wrapper">
                 <select ng-model="data.module_name" class="input__field">
                     <option value=""><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
@@ -154,7 +158,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()"><?php echo \luya\cms\admin\Module::t('view_index_page_btn_save'); ?></button>
+            <button type="button" class="btn" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
         </div>
     </div>
 </script>
@@ -166,8 +170,8 @@
         <div class="input input--radios col s12">
             <label class="input__label"><?php echo \luya\admin\Module::t('view_index_redirect_type'); ?></label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.redirect_type" value="1"><label ng-click="data.redirect_type = 1"><?php echo \luya\admin\Module::t('view_index_redirect_internal'); ?></label> <br />
-                <input type="radio" ng-model="data.redirect_type" value="2"><label ng-click="data.redirect_type = 2"><?php echo \luya\admin\Module::t('view_index_redirect_external'); ?></label>
+                <input type="radio" ng-model="data.redirect_type" ng-value="1"><label ng-click="data.redirect_type = 1"><?php echo \luya\admin\Module::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.redirect_type" ng-value="2"><label ng-click="data.redirect_type = 2"><?php echo \luya\admin\Module::t('view_index_redirect_external'); ?></label>
             </div>
         </div>
     </div>
@@ -193,7 +197,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()"><?php echo \luya\cms\admin\Module::t('view_index_page_btn_save'); ?></button>
+            <button type="button" class="btn" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
         </div>
     </div>
 </script>
@@ -204,7 +208,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()"><?php echo \luya\cms\admin\Module::t('view_index_page_btn_save'); ?></button>
+            <button type="button" class="btn" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
         </div>
     </div>
 </script>
@@ -217,7 +221,7 @@
 
         <div class="treeview__drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
         </div>
-        <a ng-if="data.is_editable" class="treeview__button treeview__link" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag, 'treeview__link--hidden' : data.is_hidden == '1'}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
+        <a ng-if="data.is_editable" class="treeview__button treeview__link" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag, 'treeview__link--hidden' : data.is_hidden == '1'}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
             <div class="treeview__icon-holder">
 
                 <i class="material-icons treeview__toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview__toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
@@ -236,7 +240,7 @@
             </div>
         </a>
 
-        <a ng-if="!data.is_editable" class="treeview__button treeview__link" style="cursor: not-allowed;" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--hidden' : data.is_hidden == '1'}">
+        <a ng-if="!data.is_editable" class="treeview__button treeview__link" style="cursor: not-allowed;" ng-class="{'treeview__link--active' : isCurrentElement(data), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--hidden' : data.is_hidden == '1'}">
             <div class="treeview__icon-holder">
 
                 <i class="material-icons treeview__toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview__toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
@@ -273,7 +277,7 @@
                 <div class="sidebar__icon-holder">
                     <i class="sidebar__icon material-icons">add_box</i>
                 </div>
-                <span class="sidebar__text"><?php echo \luya\cms\admin\Module::t('view_index_sidebar_new_page'); ?></span>
+                <span class="sidebar__text"><?= Module::t('view_index_sidebar_new_page'); ?></span>
             </a>
             <?php endif; ?>
 
@@ -282,7 +286,7 @@
                 <div class="sidebar__icon-holder">
                     <i class="sidebar__icon material-icons">receipt</i>
                 </div>
-                <span class="sidebar__text"><?php echo \luya\cms\admin\Module::t('view_index_sidebar_drafts'); ?></span>
+                <span class="sidebar__text"><?= Module::t('view_index_sidebar_drafts'); ?></span>
             </a>
             <?php endif; ?>
 
@@ -305,13 +309,13 @@
                     <div class="sidebar__icon-holder">
                         <i class="sidebar__icon material-icons">mouse</i>
                     </div>
-                    <span class="sidebar__text"><?php echo \luya\cms\admin\Module::t('view_index_sidebar_move'); ?></span>
+                    <span class="sidebar__text"><?= Module::t('view_index_sidebar_move'); ?></span>
                 </label>
             </div>
             <?php endif; ?>
 
             <div class="treeview" ng-repeat="catitem in menuData.containers" ng-class="{ 'treeview--drag-active' : showDrag }">
-                <h5 class="sidebar__group-title sidebar__group-title--clickable" ng-click="toggleCat(catitem.id)"><i class="material-icons sidebar__group-title-icon" ng-class="{'sidebar__group-title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> <span>{{catitem.name}}</span></h5>
+                <h5 title="{{catitem.alias}}" alt="{{catitem.alias}}" class="sidebar__group-title sidebar__group-title--clickable" ng-click="toggleCat(catitem.id)"><i class="material-icons sidebar__group-title-icon" ng-class="{'sidebar__group-title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> <span>{{catitem.name}}</span></h5>
 
                 <div class="treeview__drop" ng-show="(menuData.items|menuparentfilter:catitem.id:0).length == 0 && !toggleIsHidden(catitem.id)" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{catitem.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onEmptyDrop()', multiple : true}"></div>
 

@@ -79,7 +79,7 @@ class ModuleBlockTest extends BlockTestCase
         $block->setEnvOption('context', 'admin');
         $block->setVarValues(['moduleName' => 'CmsUnitModule']);
 
-        $this->assertEquals('{% if vars.moduleName is empty %}<span class="block__empty-text">No module has been provided yet.</span>{% else %}<p><i class="material-icons">developer_board</i> Module integration: <strong>{{ vars.moduleName }}</strong></p>{% endif %}', $block->renderAdmin());
+        $this->assertEquals('{% if vars.moduleName is empty %}<span class="block__empty-text">No module has been specified yet.</span>{% else %}<p><i class="material-icons">developer_board</i> Module integration: <strong>{{ vars.moduleName }}</strong></p>{% endif %}', $block->renderAdmin());
     }
     
     public function testNotFoundException()

@@ -30,6 +30,7 @@ use yii\db\ActiveRecordInterface;
  * @property string $description
  * @property string $keywords
  * @property string $title_tag
+ * @property \luya\cms\models\Nav $nav Nav Model.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -56,6 +57,17 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventLogger']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventLogger']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventLogger']);
+        
+        $this->on(self::EVENT_AFTER_DELETE, function ($event) {
+            $type = $event->sender->getType();
+            if ($type) {
+                $type->delete();
+            }
+            
+            foreach (NavItemPage::find()->where(['nav_item_id' => $event->sender->id])->all() as $version) {
+                $version->delete();
+            }
+        });
     }
 
     /**
@@ -263,7 +275,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      */
     public function genericSearchFields()
     {
-        return ['title', 'alias', 'nav_id'];
+        return ['title', 'container'];
     }
     
     /**
@@ -271,7 +283,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      */
     public function genericSearchHiddenFields()
     {
-        return [];
+        return ['nav_id'];
     }
 
     /**
@@ -279,13 +291,17 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      */
     public function genericSearch($searchQuery)
     {
-        $query = self::find();
-        $fields = $this->genericSearchFields();
-        foreach ($fields as $field) {
-            $query->orWhere(['like', $field, $searchQuery]);
+        $data = [];
+        
+        foreach (self::find()->select(['nav_id', 'title'])->orWhere(['like', 'title', $searchQuery])->with('nav')->distinct()->each() as $item) {
+            $data[] = [
+                'title' => $item->title,
+                'nav_id' => $item->nav_id,
+                'container' => $item->nav->navContainer->name,
+            ];
         }
-
-        return $query->select($fields)->asArray()->all();
+        
+        return $data;
     }
     
     /**

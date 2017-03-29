@@ -176,4 +176,27 @@ class SelectModelTest extends AdminTestCase
     
         unset($plugin);
     }
+    
+    public function testFindSelfPrimaryKey()
+    {
+        $model = new UserFixture();
+        $model->load();
+        $plugin = new SelectModel([
+            'name' => 'test',
+            'alias' => 'test',
+            'i18n' => false,
+            'modelClass' => User::class,
+            'labelField' => function ($model) {
+            return $model->firstname . '@' . $model->lastname;
+            }
+            ]);
+        
+        
+        $this->assertSame([
+            0 => ['value' => 2, 'label' => 'Jane@Doe'],
+            1 => ['value' => 1, 'label' => 'John@Doe'],
+        ], $plugin->getData());
+        
+        unset($plugin);
+    }
 }

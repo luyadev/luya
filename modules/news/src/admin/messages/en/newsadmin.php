@@ -20,11 +20,11 @@ return [
     'article_tag' => 'Tag',
     'cat' => 'Categories',
     'cat_title' => 'Category',
-    'cat_delete_error' => 'This category is still being in use by one or multiple news and can not be deleted.',
-    'cat_title_create_error' => 'Please choose a category title.',
+    'cat_delete_error' => 'This category is used by one or multiple news and can not be deleted.',
+    'cat_title_create_error' => 'Please add a category title.',
     'tag' => 'Tags',
     'tag_title' => 'Tag',
-    'tag_title_create_error' => 'Please choose a tag title.',
+    'tag_title_create_error' => 'Please add a tag title.',
     
 // 1.0.0
     

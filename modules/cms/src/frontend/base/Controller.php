@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
 use luya\cms\frontend\events\BeforeRenderEvent;
+use luya\helpers\StringHelper;
 
 /**
  * Abstract Controller for CMS Controllers.
@@ -38,12 +39,7 @@ abstract class Controller extends \luya\web\Controller
         }
 
         Yii::$app->urlManager->contextNavItemId = $navItemId;
-
-        Yii::$app->set('page', [
-            'class' => 'luya\cms\frontend\components\Page',
-            'model' => $model,
-        ]);
-
+        
         $currentMenu = Yii::$app->menu->current;
         
         $event = new BeforeRenderEvent();
@@ -91,6 +87,12 @@ abstract class Controller extends \luya\web\Controller
             $this->layout = false;
         }
         
+        // If the user has defined a layout file, thise will be ensured and set as layout file.
+        $layoutFile = $model->nav->layout_file;
+        if (!empty($layoutFile)) {
+            $this->layout = StringHelper::startsWith($layoutFile, '@') ? $layoutFile : '/' . ltrim($layoutFile, '/');
+        }
+        
         if ($this->view->title === null) {
             if (empty($model->title_tag)) {
                 $this->view->title = $model->title;
@@ -132,7 +134,7 @@ abstract class Controller extends \luya\web\Controller
     
         $props = [];
     
-        foreach (Yii::$app->page->getProperties() as $prop) {
+        foreach (Yii::$app->menu->current->model->getProperties() as $prop) {
             $o = $prop->getObject();
             $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
         }
@@ -152,7 +154,7 @@ abstract class Controller extends \luya\web\Controller
             $seoAlert++;
         } else {
             foreach ($menu->current->keywords as $word) {
-                if (preg_match_all('/' . $word . '/i', $content, $matches)) {
+                if (preg_match_all('/' . preg_quote($word) . '/i', $content, $matches)) {
                     $keywords[] = [$word, count($matches[0])];
                 } else {
                     $keywords[] = [$word, 0];

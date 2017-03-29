@@ -14,6 +14,8 @@ use luya\cms\models\NavItemPageBlockItem;
 use luya\web\filters\ResponseCache;
 use yii\caching\DbDependency;
 use luya\cms\models\Layout;
+use yii\web\ForbiddenHttpException;
+use luya\cms\admin\Module;
 
 /**
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
@@ -42,6 +44,21 @@ class NavItemController extends \luya\admin\base\RestController
         
         return $behaviors;
     }
+
+    public function actionDelete($navItemId)
+    {
+        if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
+            throw new ForbiddenHttpException("Unable to perform this action due to permission restrictions");
+        }
+        
+        $model = NavItem::findOne($navItemId);
+        
+        if ($model) {
+            return $model->delete();
+        }
+        
+        return $this->sendModelError($model);
+    }
     
     /**
      * http://example.com/admin/api-cms-navitem/nav-lang-item?access-token=XXX&navId=A&langId=B.
@@ -53,11 +70,12 @@ class NavItemController extends \luya\admin\base\RestController
      */
     public function actionNavLangItem($navId, $langId)
     {
-        $item = NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
+        $item = NavItem::find()->with('nav')->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
         if ($item) {
             return [
                 'error' => false,
                 'item' => $item->toArray(),
+                'nav' => $item->nav->toArray(),
                 'typeData' => ($item->nav_item_type == 1) ? NavItemPage::getVersionList($item->id) : $item->getType()->toArray(),
             ];
         }
@@ -182,33 +200,6 @@ class NavItemController extends \luya\admin\base\RestController
 
         return $this->sendModelError($model);
     }
-
-    /**
-     * delete specific nav item info (page/module/redirect).
-     *
-     * @param $navItemType
-     * @param $navItemTypeId
-     */
-    /*
-    public function deleteItem($navItemType, $navItemTypeId)
-    {
-        $model = null;
-        switch ($navItemType) {
-            case 1:
-                $model = NavItemPage::find()->where(['id' => $navItemTypeId])->one();
-                break;
-            case 2:
-                $model = NavItemModule::find()->where(['id' => $navItemTypeId])->one();
-                break;
-            case 3:
-                $model = NavItemRedirect::find()->where(['id' => $navItemTypeId])->one();
-                break;
-        }
-        if ($model) {
-            $model->delete();
-        }
-    }
-    */
 
     /**
      * extract a post var and set to model attribute with the same name.

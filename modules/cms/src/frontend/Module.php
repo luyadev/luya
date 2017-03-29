@@ -6,6 +6,10 @@ use Yii;
 use yii\base\BootstrapInterface;
 use luya\web\Application;
 use luya\base\CoreModuleInterface;
+use luya\web\ErrorHandler;
+use luya\web\ErrorHandlerExceptionRenderEvent;
+use yii\web\HttpException;
+use luya\cms\models\Config;
 
 /**
  * Cms Module.
@@ -25,7 +29,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
 
     public $tags = [
         'menu' => ['class' => 'luya\cms\tags\MenuTag'],
-        'page' => ['class' => 'luya\cms\tags\PageTag'], // marked as deprecated for 1.0.0
+        'page' => ['class' => 'luya\cms\tags\PageTag'],
     ];
     
     /**
@@ -90,6 +94,21 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
                     ['class' => 'luya\cms\frontend\components\RouteBehaviorUrlRule'],
                     ['class' => 'luya\cms\frontend\components\CatchAllUrlRule'],
                 ]);
+            }
+        });
+        
+        Yii::$app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) {
+            if ($event->exception instanceof HttpException) {
+                // see whether a config value exists
+                // if a redirect page id exists, redirect.
+                $navId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
+                if ($navId) {
+                    $menu = Yii::$app->menu->find()->with(['hidden'])->where(['nav_id' => $navId])->one();
+                    if ($menu) {
+                        Yii::$app->getResponse()->redirect($menu->absoluteLink, 301)->send();
+                        exit;
+                    }
+                }
             }
         });
     }

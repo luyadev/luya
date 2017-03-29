@@ -5,6 +5,7 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\Console;
+use yii\imagine\Image;
 
 /**
  * Health/Status informations about the Application itself.
@@ -42,8 +43,6 @@ class HealthController extends \luya\console\Command
     {
         $error = false;
 
-        Console::clearScreenBeforeCursor();
-        
         @chdir(Yii::getAlias('@app'));
 
         $this->output('The directory the health commands is applying to: ' . Yii::getAlias('@app'));
@@ -83,6 +82,15 @@ class HealthController extends \luya\console\Command
             }
         }
 
+        /*
+         * move to admin/setup command as part of admin setup.
+        try {
+            Image::getImagine();
+        } catch (\Exception $e) {
+            $this->outputError('Imagine Error: ' . $e->getMessage());
+        }
+        */
+        
         return ($error) ? $this->outputError('Health check found errors!') : $this->outputSuccess('O.K.');
     }
 

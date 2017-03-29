@@ -8,6 +8,7 @@ use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\helpers\ArrayHelper;
 use luya\cms\admin\Module;
+use luya\cms\models\Config;
 
 /**
  * Admin Api delievers common api tasks like blocks and layouts.
@@ -16,6 +17,23 @@ use luya\cms\admin\Module;
  */
 class AdminController extends \luya\admin\base\RestController
 {
+    public function actionConfig()
+    {
+        // valid keys
+        $keys = [Config::HTTP_EXCEPTION_NAV_ID];
+        
+        foreach (Yii::$app->request->bodyParams as $key => $value) {
+            if (in_array($key, $keys)) {
+                Config::set($key, $value);
+            }
+        }
+        
+        $data = [];
+        $data[Config::HTTP_EXCEPTION_NAV_ID] = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
+        
+        return $data;
+    }
+    
     public function actionDataBlocks()
     {
         $favs = Yii::$app->adminuser->identity->setting->get("blockfav", []);

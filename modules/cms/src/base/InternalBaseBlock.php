@@ -23,7 +23,7 @@ use luya\cms\helpers\BlockHelper;
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class InternalBaseBlock extends Object implements BlockInterface, TypesInterface
+abstract class InternalBaseBlock extends Object implements BlockInterface, TypesInterface, \ArrayAccess
 {
     /**
      * Returns the configuration array.
@@ -32,28 +32,56 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     abstract public function config();
     
-    private $_varValues = [];
-
-    private $_cfgValues = [];
-
-    private $_placeholderValues = [];
-
-    private $_envOptions = [];
-
+    /**
+     * @var string Defines the injector config type `var`.
+     */
     const INJECTOR_VAR = 'var';
     
+    /**
+     * @var string Defines the injector config type `cfg`.
+     */
     const INJECTOR_CFG = 'cfg';
 
+    private $_injectorObjects = null;
+    
     /**
      * Setup injectors.
      */
     protected function injectorSetup()
     {
-        foreach ($this->injectors() as $varName => $injector) {
-            $injector->setContext($this);
-            $injector->varName = $varName;
-            $injector->setup();
+        if ($this->_injectorObjects === null) {
+            foreach ($this->injectors() as $varName => $injector) {
+                $injector->setContext($this);
+                $injector->varName = $varName;
+                $injector->setup();
+                $this->_injectorObjects[$injector->varName] = $injector;
+            }
         }
+    }
+    
+    public function offsetSet($offset, $value)
+    {
+        $this->_injectorObjects[$offset] = $value;
+    }
+    
+    public function offsetExists($offset)
+    {
+        return isset($this->_injectorObjects[$offset]);
+    }
+    
+    public function offsetUnset($offset)
+    {
+        unset($this->_injectorObjects[$offset]);
+    }
+    
+    /**
+     *
+     * @param string $offset The name of the registered Injector name.
+     * @return \luya\cms\base\BaseBlockInjector
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->_injectorObjects[$offset]) ? $this->_injectorObjects[$offset] : null;
     }
     
     /**
@@ -131,17 +159,21 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * public function injectors()
      * {
      *     return [
-     *         'foobar' => new cms\injector\ActiveQueryCheckbox([
+     *         'foobar' => new cms\injector\ActiveQueryCheckboxInjector([
      *             'query' => MyModel::find()->where(['id' => 1]),
-     *             'type' => self::INJECTOR_VAR, // could be self::INJECTOR_CFG
+     *             'type' => self::INJECTOR_VAR, // could be self::INJECTOR_CFG,
+     *             'varLabel' => 'The Field Label',
      *         ]);
      *     ];
      * }
      * ```
      *
      * Now the generated injector ActiveQueryCheckbox is going to grab all informations from the defined query and assign
-     * them into the extra var foobar. Now you can access `$extras['foobar']` which returns all seleced rows from the checkbox
+     * them into the extra var foobar. Now you can access `$this->extraValue('foobar')` which returns all seleced rows from the checkbox
      * you have assigend.
+     *
+     * In order to access the injectors object api you can use the ArrayAccess getter method like `$this['foobar']` and you can access the public
+     * method for this Injector.
      */
     public function injectors()
     {
@@ -216,6 +248,8 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return ($this->getEnvOption('context', false) === 'frontend') ? true : false;
     }
 
+    private $_envOptions = [];
+    
     /**
      * Sets a key => value pair in env options.
      *
@@ -226,20 +260,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     {
         $this->_envOptions[$key] = $value;
     }
-
-    /**
-     * Get a env option by $key. If $key does not exist it will return given $default or false.
-     *
-     * @param $key
-     * @param mixed $default
-     *
-     * @return mixed
-     */
-    public function getEnvOption($key, $default = false)
-    {
-        return (array_key_exists($key, $this->_envOptions)) ? $this->_envOptions[$key] : $default;
-    }
-
+    
     /**
      * Returns all environment/context informations where the block have been placed. Example Data.
      *
@@ -255,6 +276,21 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return $this->_envOptions;
     }
 
+    /**
+     * Get a env option by $key. If $key does not exist it will return given $default or false.
+     *
+     * @param $key
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    public function getEnvOption($key, $default = false)
+    {
+        return (array_key_exists($key, $this->_envOptions)) ? $this->_envOptions[$key] : $default;
+    }
+
+    private $_placeholderValues = [];
+    
     /**
      * @inheritdoc
      */
@@ -281,19 +317,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return (isset($this->getPlaceholderValues()[$placholder])) ? $this->getPlaceholderValues()[$placholder] : false;
     }
 
-    /**
-     * Get var value.
-     *
-     * If the key does not exist in the array, is an empty string or null the default value will be returned.
-     *
-     * @param string $key The name of the key you want to retrieve
-     * @param mixed  $default A default value that will be returned if the key isn't found or empty.
-     * @return mixed
-     */
-    public function getVarValue($key, $default = false)
-    {
-        return (isset($this->_varValues[$key]) && $this->_varValues[$key] != '') ? $this->_varValues[$key] : $default;
-    }
+    private $_varValues = [];
 
     /**
      * @inheritdoc
@@ -313,9 +337,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     {
         return $this->_varValues;
     }
-
+    
     /**
-     * Get cfg value.
+     * Get var value.
      *
      * If the key does not exist in the array, is an empty string or null the default value will be returned.
      *
@@ -323,11 +347,12 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * @param mixed  $default A default value that will be returned if the key isn't found or empty.
      * @return mixed
      */
-    public function getCfgValue($key, $default = false)
+    public function getVarValue($key, $default = false)
     {
-        return (isset($this->_cfgValues[$key]) && $this->_cfgValues[$key] != '') ? $this->_cfgValues[$key] : $default;
+        return (isset($this->_varValues[$key]) && $this->_varValues[$key] != '') ? $this->_varValues[$key] : $default;
     }
-
+    
+    private $_cfgValues = [];
     
     /**
      * @inheritdoc
@@ -348,6 +373,20 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return $this->_cfgValues;
     }
 
+    /**
+     * Get cfg value.
+     *
+     * If the key does not exist in the array, is an empty string or null the default value will be returned.
+     *
+     * @param string $key The name of the key you want to retrieve
+     * @param mixed  $default A default value that will be returned if the key isn't found or empty.
+     * @return mixed
+     */
+    public function getCfgValue($key, $default = false)
+    {
+        return (isset($this->_cfgValues[$key]) && $this->_cfgValues[$key] != '') ? $this->_cfgValues[$key] : $default;
+    }
+    
     /**
      * Define additional variables.
      *

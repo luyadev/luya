@@ -46,16 +46,14 @@ Wokring with callbacks
 
 ## Attaching the Class
 
-In order to add an Active Window into your NgRest config, you have to add the class to the `aw` pointer of your config and use the `load` method to bind the class to the aw pointer. As the Active Window contains the yii\base\Object as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `alias` and `icon` public properties. The alias and icon probierts does exist in every Active Window an can always be overwritten.
+In order to add an Active Window into your NgRest config, you have to add the config in the {{luya\admin\ngrest\base\NgRestModel::ngRestActiveWindows}} method. As the Active Window contains the {{yii\base\Object}} as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `alias` and `icon` public properties. The alias and icon probierts does exist in every Active Window an can always be overwritten.
 
 ```php
-public function ngRestConfig($config)
+public function ngRestActiveWindows($config)
 {
-    $config->aw->load(['class' => \luya\admin\aws\TestActiveWindow::className(), 'alias' => 'My Window Alias', 'icon' => 'extension']);
-    
-    // ...
-    
-    return $config;
+    return [
+        ['class' => \luya\admin\aws\TestActiveWindow::className(), 'alias' => 'My Window Alias', 'icon' => 'extension'],
+    ];
 }
 ```
 
@@ -145,7 +143,7 @@ The admin module of LUYA provides some basic reusable active windows you can reu
 |Name   |Class |Public Properties
 |--     |--     |--
 |Tag    |{{\luya\admin\aws\TagActiveWindow}}|<ul><li>$tableName</li></ul>
-|Gallery|{{\luya\admin\aws\Gallery}}|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
-|ChangePassword|{{\luya\admin\aws\ChangePassword}}|<ul><li>$className</li></ul>
-|CoordinatesActiveWindow|{{\luya\admin\aws\CoordinatesActiveWindow}}|<ul><li>$ampsApikey</li></ul>
-|FlowActiveWindow|{{\luya\admin\aws\FlowActiveWindow}}|<ul><li>$modelClass</li></ul>
+|Image collection selector from File Manager|{{\luya\admin\aws\ImageSelectCollectionActiveWindow}}|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
+|ChangePassword|{{\luya\admin\aws\ChangePasswordActiveWindow}}|<ul><li>$className</li></ul>
+|Coordinates Collector|{{\luya\admin\aws\CoordinatesActiveWindow}}|<ul><li>$ampsApikey</li></ul>
+|Image collection uploader with Flow|{{\luya\admin\aws\FlowActiveWindow}}|<ul><li>$modelClass</li></ul>

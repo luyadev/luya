@@ -17,9 +17,11 @@ use luya\admin\models\StorageFile;
  *
  * How the data is prepared:
  *
- * 1. All Tables
- * 2. Table request estimated.
- * 3.
+ * 1. Foreach all tables
+ * 2. Ignore the $ingoreTables list
+ * 3. Table request estimated data write to $config
+ * 4. Generate Build.
+ * 5. Send build identifier to the client.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -42,7 +44,6 @@ class ProxyController extends Controller
             throw new ForbiddenHttpException("Unable to acccess the proxy api due to invalid token.");
         }
         
-        // @TODO make configurable in machine config?!
         $rowsPerRequest = $this->module->proxyRowsPerRequest;
         
         $config = [
@@ -77,7 +78,7 @@ class ProxyController extends Controller
             'build_token' => sha1($buildToken),
             'config' => Json::encode($config),
             'is_complet' => 0,
-            'expiration_time' => time() + (60*15) // 15 minutes valid
+            'expiration_time' => time() + $this->module->proxyExpirationTime
         ];
         
         if ($build->save()) {

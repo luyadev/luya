@@ -6,7 +6,7 @@ use yii\helpers\Html;
  */
 ?>
 <?php if ($this->extraValue('image')): ?>
-<div class="image">
+<div class="image<?= $this->cfgValue('divCssClass', null, ' {{divCssClass}}'); ?>">
 	<figure>
 		<?php if ($this->extraValue('link')): ?>
 			<a class="text-teaser" href="<?= $this->extraValue('link')->href; ?>" target="<?= $this->extraValue('link')->target; ?>">

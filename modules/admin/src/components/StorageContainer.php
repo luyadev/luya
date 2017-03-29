@@ -16,6 +16,8 @@ use luya\admin\models\StorageFilter;
 use luya\admin\models\StorageFolder;
 use luya\traits\CacheableTrait;
 use luya\web\Request;
+use luya\admin\filters\TinyCrop;
+use luya\admin\filters\MediumThumbnail;
 
 /**
  * Storage Container for reading, saving and holding files.
@@ -722,8 +724,8 @@ class StorageContainer extends Component
         foreach ($this->findFiles(['is_hidden' => 0, 'is_deleted' => 0]) as $file) {
             if ($file->isImage) {
                 // create tiny thumbnail
-                $this->addImage($file->id, 'tiny-crop');
-                $this->addImage($file->id, 'medium-thumbnail');
+                $this->addImage($file->id, TinyCrop::identifier());
+                $this->addImage($file->id, MediumThumbnail::identifier());
             }
         }
         

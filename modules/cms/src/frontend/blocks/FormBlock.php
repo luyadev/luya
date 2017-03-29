@@ -5,15 +5,15 @@ namespace luya\cms\frontend\blocks;
 use Yii;
 use yii\helpers\Html;
 use luya\helpers\Url;
-use luya\cms\base\TwigBlock;
 use luya\cms\frontend\Module;
+use luya\cms\base\PhpBlock;
 
 /**
  *
  * @author Basil Suter <basil@nadar.io>
  *
  */
-final class FormBlock extends TwigBlock
+final class FormBlock extends PhpBlock
 {
     public $module = 'cms';
 
@@ -55,12 +55,12 @@ final class FormBlock extends TwigBlock
     {
         return [
             'vars' => [
+                ['var' => 'emailAddress', 'label' => 'Email wird an folgende Adresse gesendet', 'type' => 'zaa-text'],
                 ['var' => 'headline', 'label' => 'Überschrift', 'type' => 'zaa-text', 'placeholder' => 'Kontakt'],
                 ['var' => 'nameLabel', 'label' => 'Text für Feld "Name"', 'type' => 'zaa-text', 'placeholder' => $this->defaultNameLabel],
                 ['var' => 'emailLabel', 'label' => 'Text für Feld "Email"', 'type' => 'zaa-text', 'placeholder' => $this->defaultEmailLabel],
                 ['var' => 'messageLabel', 'label' => 'Text für Feld "Nachricht"', 'type' => 'zaa-text', 'placeholder' => $this->defaultMessageLabel],
                 ['var' => 'sendLabel', 'label' => 'Text auf dem Absendebutton', 'type' => 'zaa-text', 'placeholder' => $this->defaultSendLabel],
-                ['var' => 'emailAddress', 'label' => 'Email wird an folgende Adresse gesendet', 'type' => 'zaa-text'],
             ],
 
             'cfgs' => [
@@ -135,9 +135,8 @@ final class FormBlock extends TwigBlock
         }
     }
 
-    /**
-     * @todo: add prefix to encapsulate block ids
-     */
+    
+/*
     public function twigFrontend()
     {
         return  '{% if vars.emailAddress is not empty %}{% if vars.headline is not empty %}<h3>{{ vars.headline }}</h3>{% endif %}'.
@@ -179,8 +178,8 @@ final class FormBlock extends TwigBlock
                     '</form>'.
                     '{% endif %}';
     }
-
-    public function twigAdmin()
+*/
+    public function admin()
     {
         return  '<p><i>Form Block</i></p>{% if vars.emailAddress is not empty %}'.
                     '{% if vars.headline is not empty %}<h3>{{ vars.headline }}</h3>{% endif %}'.

@@ -6,7 +6,7 @@ use Yii;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
 use luya\admin\helpers\I18n;
-use luya\admin\storage\ItemTrait;
+use luya\admin\storage\ItemAbstract;
 
 /**
  * Storage File Item.
@@ -35,11 +35,9 @@ use luya\admin\storage\ItemTrait;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Item extends \yii\base\Object
+class Item extends ItemAbstract
 {
-    use ItemTrait;
-    
-    private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', '	image/tiff'];
+    private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
     private $_caption = null;
     
@@ -63,7 +61,7 @@ class Item extends \yii\base\Object
     public function getCaption()
     {
         if ($this->_caption === null) {
-            $this->_caption = I18n::findCurrent($this->getCaptionArray());
+            $this->_caption = I18n::findActive($this->getCaptionArray());
         }
     
         return $this->_caption;
@@ -366,31 +364,12 @@ class Item extends \yii\base\Object
     }
     
     /**
-     * Convert the Object informations into an Array.
-     *
-     * Sometimes you may want to retrieve all informations about the file item within an array, there the
-     * toArray method is used.
-     *
-     * @return array An array with all available methods as key and corresponding output.
+     * @inheritdoc
      */
-    public function toArray()
+    public function fields()
     {
         return [
-            'id' => $this->getId(),
-            'folderId' => $this->getFolderId(),
-            'name' => $this->getName(),
-            'systemFileName' => $this->getSystemFileName(),
-            'source' => $this->getSource(),
-            'httpSource' => $this->getHttpSource(),
-            'serverSource' => $this->getServerSource(),
-            'isImage' => $this->getIsImage(),
-            'mimeType' => $this->getMimeType(),
-            'extension' => $this->getExtension(),
-            'uploadTimestamp' => $this->getUploadTimestamp(),
-            'size' => $this->getSize(),
-            'sizeReadable' => $this->getSizeReadable(),
-            'caption' => $this->getCaption(),
-            'captionArray' => $this->getCaptionArray(),
+            'id','folderId', 'name', 'systemFileName', 'source', 'httpSource', 'serverSource', 'isImage', 'mimeType', 'extension', 'uploadTimestamp', 'size', 'sizeReadable', 'caption', 'captionArray'
         ];
     }
 }

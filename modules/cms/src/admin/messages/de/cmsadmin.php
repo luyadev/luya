@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'view_index_add_type' => 'Seitentyp',
     'view_index_type_page' => 'Seite',
     'view_index_type_module' => 'Modul',
@@ -161,4 +160,26 @@ return [
 // 1.0.0
     'model_navitempage_empty_draft_id' => 'Die Vorlage darf nicht leer sein.',
     'view_update_variation_select' => 'Keine Blockvariation ausgewählt',
+    'menu_group_item_env_config' => 'Konfiguration',
+    'js_config_update_success' => 'Konfiguration wurde gespeichert',
+    'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message',
+    'module_permission_update_config' => 'Cms Konfigurationen',
+    'module_permission_delete_pages' => 'Seite löschen',
+    'page_update_actions_deepcopy_title' => 'Copy Page',
+    'page_update_actions_layout_title' => 'Layout File',
+    'page_update_actions_layout_text' => 'You can define another layout file which should be rendered instead of the main layout file. If empty the `main.php` layout will be used by default. You can also use alias paths. Layout file defintion does not require the php file extension.',
+    'page_update_actions_layout_file_field' => 'Layout File',
+    'page_update_actions_modal_title' => 'Page Settings',
+    'js_page_update_layout_save_success' => 'The layout file has been updated',
+    'js_page_create_copy_success' => 'The page copy has been created.',
+    'view_update_offline_info' => 'Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.',
+    'view_update_hidden_info' => 'Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.',
+    'view_update_homepage_info' => 'Setzt diese Seite als Startseite.',
+    'view_update_block_tooltip_copy' => 'In Zwischenablage hinzufügen',
+    'view_update_block_tooltip_visible' => 'Sichtbar',
+    'view_update_block_tooltip_invisible' => 'Unsichtbar',
+    'view_update_block_tooltip_edit' => 'Bearbeiten',
+    'view_update_block_tooltip_editcfg' => 'Konfigurieren',
+    'view_update_block_tooltip_delete' => 'Löschen',
+    'view_update_block_tooltip_close' => 'Bearbeiten schliessen',
 ];

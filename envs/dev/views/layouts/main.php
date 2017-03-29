@@ -1,6 +1,8 @@
 <?php
 use app\assets\ResourcesAsset;
 use luya\helpers\Url;
+use luya\cms\widgets\LangSwitcher;
+use yii\base\Widget;
 
 ResourcesAsset::register($this);
 
@@ -52,13 +54,18 @@ $this->beginPage();
     
         
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <ol class="breadcrumb">
                     <?php foreach (Yii::$app->menu->current->teardown as $item): ?>
                     <li><a href="<?= $item->link; ?>"><?= $item->title; ?></a>
                     <?php endforeach; ?>
                 </ol>
             </div>
+            <div class="col-md-6">
+                <?= LangSwitcher::widget(); ?>
+            </div>
+        </div>
+        <div class="row">
         
             <?php if (count(Yii::$app->menu->getLevelContainer(2)) > 0): ?>
             <div class="col-md-3">

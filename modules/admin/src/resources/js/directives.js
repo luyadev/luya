@@ -243,8 +243,56 @@
                 "id": "@fieldid",
                 "name": "@fieldname",
             },
+            controller: function($scope) {
+            	$scope.unset = function() {
+            		$scope.model = null;
+            		$scope.data.model = null;
+            	}
+            	
+            	$scope.data = {
+            		modalState: 1,
+            		model: null
+            	};
+            	
+            	$scope.$watch('model', function(n, o) {
+            		if (n) {
+            			$scope.data.model = n;
+            		}
+            	}, true);
+            	
+            	$scope.$watch('data.model', function(n, o) {
+            		if (n) {
+            			$scope.model = n;
+            		}
+            	}, true);
+            },
             template: function() {
-                return '<update-form-redirect data="model"></update-form-redirect>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper">' +
+                    '<div ng-if="model">' +
+                        '<div class="link-selector">' +
+                            '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
+                                '<i class="material-icons left">insert_link</i>' +
+                                '<span>'+i18n['js_link_change_value']+'</span>' +
+                            '</div>' +
+                            '<span class="link-selector__reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' +
+                            '<span class="link-selector__path"><link-object-to-string link="model"></link-object-to-string></span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div ng-if="!model">' +
+                        '<div class="link-selector">' +
+                            '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
+                                '<i class="material-icons left">insert_link</i>' +
+                                '<span>'+i18n['js_link_set_value']+'</span>' +
+                            '</div>' +
+                            '<span class="link-selector__path">Kein Link gesetzt</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<modal is-modal-hidden="data.modalState">'+
+                        '<update-form-redirect data="data.model"></update-form-redirect>'+
+                        '<button ng-click="unset(); data.modalState=1" type="button" class="btn red"><i class="material-icons">cancel</i></button> '+
+                        '<button ng-click="data.modalState=1" class="btn" type="button"><i class="material-icons">check</i> '+i18n['js_link_set_value']+'</button>'+
+                    '</modal>'+
+                '</div></div>';
             }
         }
     });
@@ -1268,7 +1316,7 @@
 
                 // controller logic
 
-                scope.modal = true;
+                scope.modal = {state: 1};
                 scope.fileinfo = null;
 
                 scope.select = function(fileId) {
@@ -1282,7 +1330,7 @@
                 }
 
                 scope.toggleModal = function() {
-                    scope.modal = !scope.modal;
+                    scope.modal.state = !scope.modal.state;
                 }
 
                 scope.$watch(function() { return scope.ngModel }, function(n, o) {
@@ -1441,15 +1489,15 @@
                         // image does not exists make request.
                         $http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                        }).success(function(success) {
-                            if (!success.error) {
+                        }).then(function(transport) {
+                            if (!transport.data.error) {
                                 scope.imagesDataReload().then(function(r) {
-                                    scope.ngModel = success.id;
+                                    scope.ngModel = transport.data.id;
                                     AdminToastService.success(i18n['js_dir_image_upload_ok'], 2000);
                                     scope.imageLoading = false;
                                 });
                             }
-                        }).error(function(error) {
+                        }, function(error) {
                         	AdminToastService.error(i18n['js_dir_image_filter_error'], 7000);
                             scope.imageLoading = false;
                         });
@@ -1644,6 +1692,9 @@
                 
                 // file replace logic
 
+                $scope.folderCountMessage = function(folder) {
+                	return i18nParam('js_filemanager_count_files_overlay', {count: folder.filesCount});
+                }
                 
                 $scope.replaceFile = function(file, errorFiles) {
                 	$scope.replaceFiled = file;
@@ -1664,9 +1715,13 @@
                             $scope.filesDataReload().then(function() {
                             	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
                             	var random = (new Date()).toString();
-                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
-                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
-                            	$scope.fileDetail.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+                            	if (fileref.isImage) {
+	                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
+	                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+	                            }
+                            	
+                            	$scope.fileDetail = fileref;
+                            	
                             	LuyaLoading.stop();
                             	AdminToastService.success('the file has been replaced successfull.', 4000);
                             });
@@ -1794,7 +1849,7 @@
                 $scope.createNewFolder = function(newFolderName) {
                     $http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function() {
                         $scope.foldersDataReload().then(function() {
                             $scope.folderFormToggler();
                             $scope.newFolderName = null;
@@ -1816,10 +1871,12 @@
                 	$scope.sortField = name;
                 }
 
-                $scope.changeCurrentFolderId = function(folderId) {
+                $scope.changeCurrentFolderId = function(folderId, noState) {
                     $scope.currentFolderId = folderId;
-                    ServiceFoldersDirecotryId.folderId = folderId;
-                    $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId}, {ignoreLoadingBar: true});
+                    if (noState !== true) {
+                    	ServiceFoldersDirecotryId.folderId = folderId;
+                    	$http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId}, {ignoreLoadingBar: true});
+                    }
                 };
 
                 $scope.toggleFolderItem = function(data) {
@@ -1860,7 +1917,7 @@
                 $scope.updateFolder = function(folder) {
                     $http.post('admin/api-admin-storage/folder-update?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.toggleFolderMode(false);
                     });
                 }
@@ -1868,22 +1925,12 @@
                 $scope.checkEmptyFolder = function(folder) {
                     $http.post('admin/api-admin-storage/is-folder-empty?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
-                        if (transport == true) {
+                    }).then(function(transport) {
+                        if (transport.data == true) {
                             $scope.deleteFolder(folder);
                         } else {
                             $scope.toggleFolderMode('removeconfirm');
                         }
-                        /*
-                        if (transport == false) {
-                            // not empty
-                            folder.remove = false;
-                            folder.notempty = true;
-                        } else {
-                            // empty
-                            $scope.deleteFolder(folder);
-                        }
-                        */
                     });
                 };
 
@@ -1891,7 +1938,7 @@
                     // check if folder is empty
                     $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.foldersDataReload().then(function() {
                             $scope.filesDataReload().then(function() {
                                 $scope.toggleFolderMode(false);
@@ -1916,7 +1963,7 @@
                 $scope.moveFilesTo = function(folderId) {
                     $http.post('admin/api-admin-storage/filemanager-move-files', $.param({'fileIds' : $scope.selectedFiles, 'toFolderId' : folderId}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.filesDataReload().then(function() {
                             $scope.selectedFiles = [];
                             $scope.showFoldersToMove = false;
@@ -1928,7 +1975,7 @@
                     AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                        }).success(function(transport) {
+                        }).then(function(transport) {
                             $scope.filesDataReload().then(function() {
                                 $toast.close();
                                 AdminToastService.success(i18n['js_dir_manager_rm_file_ok'], 2000);
@@ -1943,10 +1990,21 @@
                 $scope.storeFileCaption = function(fileDetail) {
                 	$http.post('admin/api-admin-storage/filemanager-update-caption', $.param({'id': fileDetail.id, 'captionsText' : fileDetail.captionArray}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                     	AdminToastService.success('Captions has been updated', 2000);
                     });
                 }
+               
+                $scope.selectedFileFromParent = null;
+                
+                $scope.init = function() {
+                	if ($scope.$parent.fileinfo) {
+                		$scope.selectedFileFromParent = $scope.$parent.fileinfo;
+                		$scope.changeCurrentFolderId($scope.selectedFileFromParent.folderId, true);
+                	}
+                }
+                
+                $scope.init();
 
             },
             templateUrl : 'storageFileManager'

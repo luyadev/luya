@@ -30,6 +30,8 @@ use luya\helpers\ArrayHelper;
  *     return $model->firstname . ' ' . $model->lastname;
  * }
  * ```
+ * 
+ * You can also use the quick mode which finds the primary key by itself, therfore just keep valueField empty.
  * @author Basil Suter <basil@nadar.io>
  */
 class SelectModel extends Select
@@ -156,7 +158,12 @@ class SelectModel extends Select
             $class = $class::className();
         }
         
+        if (!$this->valueField) {
+            $this->valueField = implode("", $class::primaryKey());
+        }
+        
         foreach (static::getDataInstance($class, $this->where) as $item) {
+            
             $data[] = [
                 'value' => (int) $item->{$this->valueField},
                 'label' => $this->generateLabelField($item),

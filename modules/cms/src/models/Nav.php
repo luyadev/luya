@@ -31,6 +31,8 @@ use luya\cms\admin\Module;
  * @property integer $is_offline
  * @property integer $is_home
  * @property integer $is_draft
+ * @property string $layout_file
+ * @property \luya\cms\models\NavContainer $navContainer Returns the nav container model
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -63,7 +65,8 @@ class Nav extends ActiveRecord
     {
         return [
             [['nav_container_id', 'parent_nav_id'], 'required'],
-            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft'], 'safe'],
+            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft', 'layout_file'], 'safe'],
+            [['layout_file'], 'match', 'pattern' => '/^[a-zA-Z0-9\.\-\_]+$/'],
         ];
     }
 
@@ -81,11 +84,20 @@ class Nav extends ActiveRecord
     /**
      * Return all nav items related to this object.
      *
-     * @return \yii\db\ActiveQuery
+     * @return \luya\cms\models\NavItem
      */
     public function getNavItems()
     {
         return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
+    }
+    
+    /**
+     *
+     * @return \luya\cms\models\NavContainer
+     */
+    public function getNavContainer()
+    {
+        return $this->hasOne(NavContainer::class, ['id' => 'nav_container_id']);
     }
 
     /**
@@ -280,6 +292,10 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toBeforeNavId);
 
+        if (!$move || !$on) {
+            return false;
+        }
+        
         $response = self::checkDuplicateAlias($move->id, $to->parent_nav_id);
         
         if ($response !== true) {
@@ -305,6 +321,10 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toAfterNavId);
 
+        if (!$move || !$on) {
+            return false;
+        }
+        
         $response = self::checkDuplicateAlias($move->id, $to->parent_nav_id);
         
         if ($response !== true) {
@@ -329,7 +349,10 @@ class Nav extends ActiveRecord
     {
         $move = self::findOne($moveNavId);
         $on = self::findOne($droppedOnItemId);
-
+        
+        if (!$move || !$on) {
+            return false;
+        }
 
         $response = self::checkDuplicateAlias($move->id, $on->id);
         
@@ -365,9 +388,6 @@ class Nav extends ActiveRecord
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
     }
-
-    // create methods
-    // @todo make static, moved to helper class?
 
     /**
      *

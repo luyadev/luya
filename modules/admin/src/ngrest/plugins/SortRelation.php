@@ -25,7 +25,7 @@ abstract class SortRelation extends Plugin
         return $this->renderCreate($id, $ngModel);
     }
     
-    public function serviceData()
+    public function serviceData($event)
     {
         return [
             'sortrelationdata' => $this->getData(),

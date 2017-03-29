@@ -31,3 +31,14 @@
 	@import "components/treeview";
 	@import "components/wysiwyg";
 }
+
+/**
+ * Prefix every module style with the module class
+ */
+.block-styles {
+
+	@import "block-styles/base";
+	@import "block-styles/titles";
+	@import "block-styles/text";
+
+}

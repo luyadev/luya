@@ -6,9 +6,9 @@ use luya\cms\base\Block;
 use cmstests\data\blocks\TestBlock;
 use cmstests\data\blocks\FailureBlock;
 use cmstests\CmsFrontendTestCase;
-use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
 
-class GetterSetter extends TwigBlock
+class GetterSetter extends PhpBlock
 {
     public function extraVars()
     {
@@ -29,12 +29,7 @@ class GetterSetter extends TwigBlock
         ];
     }
 
-    public function twigFrontend()
-    {
-        return '';
-    }
-
-    public function twigAdmin()
+    public function admin()
     {
         return '';
     }
@@ -54,8 +49,6 @@ class BlockTest extends CmsFrontendTestCase
         $this->assertEquals(false, $block->isAdminContext());
         $this->assertEquals(false, $block->isFrontendContext());
 
-        $this->assertEquals('TestBlock.twig', $block->getViewFileName('twig'));
-        $this->assertEquals('twig-frontend', $block->renderFrontend());
 
         foreach ($block->getConfigVarsExport() as $var) {
             $this->assertArrayHasKey('id', $var);
@@ -88,8 +81,8 @@ class BlockTest extends CmsFrontendTestCase
         $block->setVarValues(['var1' => 'content var 1', 'var2' => 'content var 2']);
         $block->setCfgValues(['cfg1' => 'content cfg 1']);
 
-        $this->assertEquals('content var 1', $block->twigAdmin()[0]);
-        $this->assertEquals('content var 2', $block->twigAdmin()[1]);
+        $this->assertEquals('content var 1', $block->admin()[0]);
+        $this->assertEquals('content var 2', $block->admin()[1]);
     }
 
     /**
@@ -109,8 +102,7 @@ class BlockTest extends CmsFrontendTestCase
         $a = $gs->config();
         $b = $gs->name();
         $c = $gs->extraVars();
-        $d = $gs->twigAdmin();
-        $e = $gs->twigFrontend();
+        $d = $gs->admin();
 
         $gs->setPlaceholderValues(['blabl' => 'Gandalf ist mein Vorbild']);
     }

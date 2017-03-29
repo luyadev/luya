@@ -47,7 +47,6 @@ class Application extends \yii\console\Application
             'module' => 'luya\console\commands\ModuleController',
             'import' => 'luya\console\commands\ImportController',
             'health' => 'luya\console\commands\HealthController',
-            'block' => 'luya\console\commands\BlockController',
             'aw' => 'luya\console\commands\ActiveWindowController',
         ];
     }
@@ -60,45 +59,5 @@ class Application extends \yii\console\Application
         return array_merge($this->luyaCoreComponents(), [
             'errorHandler' => ['class' => 'luya\console\ErrorHandler'],
         ]);
-    }
-
-    /**
-     * In addition to the default behavior of runAction, the console command
-     * will strip the first element of the route and threat it as a module
-     * changed the controller namespace to run the commands.
-     *
-     * ```
-     * ./vendor/bin/luya <module>/<commandController>/<commandAction>
-     * ```
-     *
-     * Will run all controllers located in the `commands` folder of a module.
-     *
-     * {@inheritDoc}
-     *
-     * @see \yii\console\Application::runAction()
-     * @since 1.0.0-beta6
-     */
-    public function runAction($route, $params = [])
-    {
-        // In addition to the default behavior of runAction, the console command
-        // will strip the first element of the route and threat it as a module
-        // changed the controller namespace to run the commands
-        if (!empty($route)) {
-            $partial = explode("/", $route);
-            // if there is a first key in the splitted array
-            if (isset($partial[0]) && (count($partial) > 1) && ($module = Yii::$app->getModule($partial[0]))) {
-                try {
-                    // change the controller namespace of this module to make usage of `commands`.
-                    $module->controllerNamespace = $module->namespace . '\commands';
-                    unset($partial[0]);
-                    // action response
-                    return $module->runAction(implode("/", $partial), $params);
-                } catch (\Exception $e) {
-                    throw new Exception("Exception in route \"$route\": \"{$e->getMessage()}\" in file \"{$e->getFile()}\" on line {$e->getLine()}.", 0, $e);
-                }
-            }
-        }
-        // call parent action
-        return parent::runAction($route, $params);
     }
 }

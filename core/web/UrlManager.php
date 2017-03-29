@@ -74,7 +74,7 @@ class UrlManager extends \yii\web\UrlManager
     {
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
         $resolver = $this->getComposition()->getResolvedPathInfo($request);
-        
+
         $request->setPathInfo($resolver['route']);
         
         $parsedRequest = parent::parseRequest($request);
@@ -320,8 +320,10 @@ class UrlManager extends \yii\web\UrlManager
      */
     private function findModuleInRoute($route)
     {
+        $route = parse_url($route, PHP_URL_PATH);
+        
         $parts = array_values(array_filter(explode('/', $route)));
-    
+        
         if (isset($parts[0]) && array_key_exists($parts[0], Yii::$app->getApplicationModules())) {
             return $parts[0];
         }
@@ -355,10 +357,8 @@ class UrlManager extends \yii\web\UrlManager
     
         // if the item type is (2) module and the current context module is not equals we don't have to remove to replace the module name
         // as this is an url rule not related to the current module.
-        if ($item->type == 2) {
-            if ($module !== $item->moduleName) {
-                return $url;
-            }
+        if ($item->type == 2 && $module !== $item->moduleName) {
+            return $url;
         }
     
         return preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);

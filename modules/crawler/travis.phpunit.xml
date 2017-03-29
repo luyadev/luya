@@ -23,4 +23,9 @@
             <directory suffix=".php">./src</directory>
         </whitelist>
 	</filter>
+	<php>
+        <const name="DB_DSN" value="mysql:host=localhost;dbname=myapp_test" />
+        <const name="DB_USER" value="root" />
+        <const name="DB_PASS" value="" />
+    </php>
 </phpunit>

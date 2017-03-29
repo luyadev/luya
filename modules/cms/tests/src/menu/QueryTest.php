@@ -4,6 +4,7 @@ namespace cmstests\src\menu;
 
 use Yii;
 use cmstests\CmsFrontendTestCase;
+use luya\cms\menu\Query;
 
 class QueryTest extends CmsFrontendTestCase
 {
@@ -100,5 +101,25 @@ class QueryTest extends CmsFrontendTestCase
             $i++;
             $this->assertSame($i, $item->id);
         }
+    }
+
+    public function testInOperatorWithContainers()
+    {
+        Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuContainerArray());
+        
+        $default = (new Query())->where(['container' => 'default'])->count();
+        $c1 = (new Query())->where(['container' => 'c1'])->count();
+        $c2 = (new Query())->where(['container' => 'c2'])->count();
+        
+        $all = (new Query())->count();
+        
+        $this->assertSame(2, $default);
+        $this->assertSame(2, $c2);
+        $this->assertSame(1, $c1);
+        $this->assertSame(5, $all);
+        
+        $in = (new Query())->where(['in', 'container', ['c1', 'c2']])->count();
+        
+        $this->assertSame(3, $in);
     }
 }

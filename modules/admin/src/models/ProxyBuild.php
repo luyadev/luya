@@ -5,7 +5,7 @@ namespace luya\admin\models;
 use Yii;
 use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
-use luya\admin\aws\InfoActiveWindow;
+use luya\admin\aws\DetailViewActiveWindow;
 
 /**
  * This is the model class for table "admin_proxy_build".
@@ -116,7 +116,7 @@ class ProxyBuild extends NgRestModel
     public function ngRestConfig($config)
     {
         $config->aw->load([
-            'class' => InfoActiveWindow::class,
+            'class' => DetailViewActiveWindow::class,
         ]);
         
         // define fields for types based from ngrestAttributeTypes

@@ -8,18 +8,42 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1208](https://github.com/luyadev/luya/issues/1208) Renamed `luya\cms\widgets\LanguageSwitcher` to `LangSwitcher` and removed the template usage as it should not be part of the widget.
 - [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 - [#1177](https://github.com/luyadev/luya/issues/1177) The luya\web\Elements component looks for the elements.php inside the @app/views folder instead of @app.
 - [#1114](https://github.com/luyadev/luya/issues/1114) Updated materializecss to newest version and removed unused files.
-- [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated, renamed or removed functions collection.
 - [#1126](https://github.com/luyadev/luya/issues/1126) Moved CLI commands to the related modules.
 - [#1102](https://github.com/luyadev/luya/issues/1102) Removed News Module Tag table and replace by admin modules Tag models.
 - [#1098](https://github.com/luyadev/luya/issues/1098) Changed luya\base\Widget view path behavior to default implementation with option to enable app view paths lookup.
 - [#1109](https://github.com/luyadev/luya/issues/1109) In order to prevent blocks to extend from cms blocks, flag all cms blocks as final.
+- [#1076](https://github.com/luyadev/luya/issues/1076) Twig Component triggers now an deprecated notice message.
+- [#1218](https://github.com/luyadev/luya/issues/1218) Renamed InfoActiveWindow to DetailViewActiveWindow.
+- [#1244](https://github.com/luyadev/luya/issues/1244) Crawler DefaultController returns ActiveDataProvider instead of ActiveRecord results.
 
 ### Added
 
+- [#1163](https://github.com/luyadev/luya/issues/1163) Styling of the toggler. Added toggles for each container.
+- [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
+- [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
+- [#724](https://github.com/luyadev/luya/issues/724) Removed compass configs in admin module and added gulp workflow.
+- [#1243](https://github.com/luyadev/luya/issues/1243#issuecomment-288064499) Enabled all flags
+- [#1228](https://github.com/luyadev/luya/issues/1228) Remove session serailizer for ngRestConfig.
+- [#1230](https://github.com/luyadev/luya/issues/1230) New ngRestScopes() resolves the need for ngRestConfig($config) method.
+- [#1214](https://github.com/luyadev/luya/issues/1214) Added JSON-LD class to add rich snippet informations to a website.
+- [#1124](https://github.com/luyadev/luya/issues/1124) Refactor all CMS blocks with UnitTests and PhpBlocks.
+- [#1211](https://github.com/luyadev/luya/issues/1211) Add new link directive with ability to deselect a link.
+- [#903](https://github.com/luyadev/luya/issues/903) Added file manager details.
+- [#1216](https://github.com/luyadev/luya/issues/1216) Storage Item object integrated Arrayble Interface.
+- [#1224](https://github.com/luyadev/luya/issues/1224) Settings to define a 404 Error Page to render on HttpExceptions
+- [#1226](https://github.com/luyadev/luya/issues/1226) Delete language item in cms.
+- [#1225](https://github.com/luyadev/luya/issues/1225) Formatter component extends default formats for languages.
+- [#1222](https://github.com/luyadev/luya/issues/1222) Extend from BaseYii file in order to provide IDE Auto Complet.
+- [#1221](https://github.com/luyadev/luya/issues/1221) Added CMS Query `in` expression for where conditions.
+- [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $seoTitle (getSeoTitle()) function in order to return the alternative SEO title definition.
+- [#1214](https://github.com/luyadev/luya/issues/1214) Adding JsonLd class in order to register Schema Microdata informations to the View.
+- [#1188](https://github.com/luyadev/luya/issues/1188) Change the layout file for cms page.
+- [#1202](https://github.com/luyadev/luya/issues/1202) Added Arrayable implementation for ExternalLink and menu\Item.
 - [#1200](https://github.com/luyadev/luya/issues/1200) Added new block type `zaa-multiple-inputs` to create more flexible blocks
 - [#1193](https://github.com/luyadev/luya/issues/1193) Slugify Plugin to generate aliases with only lower case letters, numbers and strikes.
 - [#1187](https://github.com/luyadev/luya/issues/1187) ActiveQueryCheckboxInjector has new `label` attribute in order to define the rendering for the dropdown label in the block admin.
@@ -45,13 +69,16 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1096](https://github.com/luyadev/luya/issues/1096) News Module added teaser_text field in article model.
 - [#1006](https://github.com/luyadev/luya/issues/1006) Added spanish translations to all luya core modules and administration interface.
 - [#1103](https://github.com/luyadev/luya/issues/1103) InfoActiveWindow make usage of the yii\widgets\DetailView in order to configure attributes.
-- [#1158](https://github.com/luyadev/luya/issues/1158) Greek language added.
-- [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain language added.
-- [#1154](https://github.com/luyadev/luya/issues/1154) Italian language added.
 - [#626](https://github.com/luyadev/luya/issues/626) User location for CMS and CRUD locations, page or crud item will be locked afterwards.
+- [#1158](https://github.com/luyadev/luya/issues/1158) Greek translations added.
+- [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain translations added.
+- [#1154](https://github.com/luyadev/luya/issues/1154) Italian translations added.
+- [#1205](https://github.com/luyadev/luya/issues/1205) Vietnamese translations added.
+- [#1236](https://github.com/luyadev/luya/pull/1236) Portuguese translations added.
 
 ### Fixed
 
+- [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1186](https://github.com/luyadev/luya/issues/1186) Image records not deleted from list without cache reload.
 - [#1162](https://github.com/luyadev/luya/issues/1162) Unable to create pages from empty draft selection.
 - [#1143](https://github.com/luyadev/luya/issues/1143) Fixed image directive filter preselection, due to an angular convert to number problem.

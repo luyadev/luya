@@ -162,9 +162,73 @@ function typeCastValue(value) {
 			});
 		};
 	});
+	
+	zaa.directive("linkObjectToString", function() {
+		return {
+			restrict: 'E',
+			relace:true,
+			scope: {
+				'link' : '='
+			},
+			template: function() {
+				return '<span>'+
+				'<span ng-if="link.type==2">Extern: {{link.value}}</span>' +
+				'<span ng-if="link.type==1"><show-internal-redirection nav-id="link.value" /></span>' +
+				'</span>';
+			}
+		}
+	});
+	
+	/**
+	 * Generate a Tool Tip Overlay, usager:
+	 * 
+	 * ```
+	 * <span tooltip tooltip-text="'Hey Ich habe hier eine Message'">Something Else</span>
+	 * ```
+	 */
+	zaa.directive("tooltip", function() {
+		return {
+			restrict: 'A',
+			scope: {
+				'tooltipText' : '=',
+				'tooltipOffsetTop': '=',
+                'tooltipOffsetLeft': '='
+			},
+			link:function(scope, element, attr) {
+				var html = '<div class="tooltip">' + scope.tooltipText + '</div>';
+				var pop = $(html);
+                element.after(pop);
+				pop.hide();
+
+                element.on('mouseenter', function() {
+                	var offset = {
+                        top: this.getBoundingClientRect().top + this.offsetHeight,
+                        left: this.getBoundingClientRect().left
+					};
+
+                	if(typeof scope.tooltipOffsetTop == 'number') {
+                		offset.top = offset.top + scope.tooltipOffsetTop;
+					}
+
+                    if(typeof scope.tooltipOffsetLeft == 'number') {
+                        offset.left = offset.left + scope.tooltipOffsetLeft;
+                    }
+
+                    pop.css(offset);
+
+					pop.show();
+				});
+
+                element.on('mouseleave', function() {
+					pop.hide();
+				});
+
+			}
+		}
+	})
 
 	/**
-	 * Converty a string to number value, usefull in selects.
+	 * Convert a string to number value, usefull in selects.
 	 *
 	 * ```
 	 * <select name="filterId" ng-model="filterId" convert-to-number>
@@ -439,6 +503,8 @@ function typeCastValue(value) {
  	         }
  	     };
 	 });
+	
+	
 
 	zaa.directive("focusMe", function($timeout) {
 		return {
@@ -525,7 +591,7 @@ function typeCastValue(value) {
 		var service = [];
 
 		service.reload = function() {
-			$http.get("admin/api-admin-common/cache").success(function(response) {
+			$http.get("admin/api-admin-common/cache").then(function(response) {
 				$window.location.reload();
 			});
 		}
@@ -665,41 +731,3 @@ function typeCastValue(value) {
 
 
 })();
-
-// jquery helpers
-
-/* non angular activeWindow send - testing purpose */
-var activeWindowRegisterForm = function(form, callback, cb) {
-	$(form).submit(function(event) {
-	  event.preventDefault();
-      var activeWindowHash = $("[ng-controller=\""+ngrestConfigHash+"\"]").scope().data.aw.id;
-	  $.ajax({
-		  url: activeWindowCallbackUrl + "?activeWindowCallback=" + callback + "&ngrestConfigHash=" + ngrestConfigHash + "&activeWindowHash=" + activeWindowHash,
-		  data: $(form).serialize(),
-		  type: "POST",
-		  dataType: "json",
-		  success: function(transport) {
-			  cb.call(this, transport);
-		  },
-		  error: function(transport) {
-			  alert("we have an async error");
-		  }
-		});
-	});
-}
-
-var activeWindowAsyncGet = function(callback, params, cb) {
-	var activeWindowHash = $("[ng-controller=\""+ngrestConfigHash+"\"]").scope().data.activeWindow.id;
-	$.ajax({
-		url: activeWindowCallbackUrl + "?activeWindowCallback=" + callback + "&ngrestConfigHash=" + ngrestConfigHash + "&activeWindowHash=" + activeWindowHash,
-		data: params,
-		type: "GET",
-		dataType: "json",
-		success: function(transport) {
-			  cb.call(this, transport);
-		  },
-		  error: function(transport) {
-			  alert("we have an async error");
-		  }
-	});
-};

@@ -5,6 +5,7 @@ namespace luya\admin\models;
 use Yii;
 use luya\admin\models\StorageFile;
 use yii\db\ActiveRecord;
+use luya\helpers\FileHelper;
 
 /**
  * StorageImage Model.
@@ -53,6 +54,14 @@ final class StorageImage extends ActiveRecord
     public function deleteSource()
     {
         $image = Yii::$app->storage->getImage($this->id);
-        @unlink($image->serverSource);
+        if ($image) {
+            if (!FileHelper::unlink($image->serverSource)) {
+                return false; // unable to unlink image
+            }
+        } else {
+            return false; // image not even found
+        }
+        
+        return true;
     }
 }

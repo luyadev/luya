@@ -17,12 +17,6 @@ namespace luya\web;
  */
 class UrlRule extends \yii\web\UrlRule
 {
-    const POSITION_BEFORE_LUYA = 0;
-    
-    const POSITION_LUYA = 1;
-    
-    const POSITION_AFTER_LUYA = 2;
-    
     /**
      * @var array Composition rules are multi lingual rule definitions match against different
      * languages from composition component. This variable will be assigned from the modules urlRule
@@ -30,9 +24,4 @@ class UrlRule extends \yii\web\UrlRule
      * in this variable to retrieve the informations later on.
      */
     public $composition = [];
-    
-    /**
-     * @var int Position before the luya urlRule which loads the default or after.
-     */
-    public $position = self::POSITION_AFTER_LUYA;
 }

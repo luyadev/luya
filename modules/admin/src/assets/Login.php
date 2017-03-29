@@ -18,8 +18,7 @@ class Login extends \luya\web\Asset
      * @var array A list of css style documents located in the $sourcePath folder.
      */
     public $css = [
-        '//fonts.googleapis.com/icon?family=Material+Icons',
-        'css/admin.css',
+        'dist/css/admin.css',
         'css/login.css',
     ];
 

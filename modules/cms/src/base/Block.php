@@ -2,6 +2,9 @@
 
 namespace luya\cms\base;
 
+trigger_error('TwigBlock is deprecated.', E_USER_DEPRECATED);
+
+
 /**
  * Default Twig Block Behavior.
  *

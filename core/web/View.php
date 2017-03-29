@@ -99,14 +99,8 @@ class View extends \yii\web\View
      * public_html directory. For instance you have put some images in our public folder `public_html/img/luya.png`
      * then you can access the image file inside your view files with:
      *
-     * ```
-     * <img src="<?php echo $this->publicHtml; ?>/img/luya.png" />
-     * ```
-     *
-     * There is also a twig variable providing the same value:
-     *
-     * ```
-     * <img src="{{ publicHtml }}/img/luya.png" />
+     * ```php
+     * <img src="<?= $this->publicHtml; ?>/img/luya.png" />
      * ```
      *
      * @return string The relative baseUrl to your public_html folder.

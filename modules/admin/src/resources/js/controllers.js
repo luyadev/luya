@@ -178,10 +178,10 @@
 						} else {
 							LuyaLoading.start();
 							blockRequest = true;
-							$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
+							$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).then(function(response) {
 								$scope.config.pagerHiddenByAjaxSearch = true;
-								$scope.config.fullSearchContainer = response;
-								$scope.data.listArray = $filter('filter')(response, n);
+								$scope.config.fullSearchContainer = response.data;
+								$scope.data.listArray = $filter('filter')(response.data, n);
 								blockRequest = false;
 								LuyaLoading.stop();
 							});
@@ -204,9 +204,9 @@
 		
 		$scope.exportData = function() {
 			$scope.exportLoading = true;
-			$http.get($scope.config.apiEndpoint + '/export').success(function(response) {
+			$http.get($scope.config.apiEndpoint + '/export').then(function(response) {
 				$scope.exportLoading = false;
-				$scope.exportResponse = response;
+				$scope.exportResponse = response.data;
 				$scope.exportDownloadButton = true;
 			});
 		};
@@ -267,17 +267,17 @@
 		}
 		
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {
-			$http.post('admin/ngrest/render', $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
+			$http.post($scope.config.activeWindowRenderUrl, $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			})
-			.success(function(data) {
+			.then(function(response) {
 				$scope.openActiveWindow();
 				$scope.data.aw.itemId = id;
 				$scope.data.aw.configCallbackUrl = $scope.config.activeWindowCallbackUrl;
 				$scope.data.aw.configHash = $scope.config.ngrestConfigHash;
 				$scope.data.aw.hash = activeWindowId;
 				$scope.data.aw.id = activeWindowId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
-				$scope.data.aw.content = $sce.trustAsHtml(data);
+				$scope.data.aw.content = $sce.trustAsHtml(response.data);
 				$scope.$broadcast('awloaded', {id: activeWindowId});
 			})
 		};
@@ -306,11 +306,11 @@
 		
 		$scope.deleteItem = function(id, $event) {
 			AdminToastService.confirm(i18n['js_ngrest_rm_page'], function($timeout, $toast) {
-				$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
+				$http.delete($scope.config.apiEndpoint + '/'+id).then(function(response) {
 					$scope.loadList();
 					$toast.close();
 					AdminToastService.success(i18n['js_ngrest_rm_confirm'], 2000);
-				}).error(function(data) {
+				}, function(data) {
 					$scope.printErrors(data);
 				});
 			});
@@ -318,7 +318,8 @@
 		
 		$scope.toggleUpdate = function(id) {
 			$scope.resetData();
-			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
+			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).then(function(response) {
+				var data = response.data;
 				$scope.data.update = data;
 				
 				if ($scope.relationCall) {
@@ -331,7 +332,7 @@
 					$state.go('default.route.detail', {id : id});
 				}
 				$scope.data.updateId = id;
-			}).error(function(data) {
+			}, function(data) {
 				AdminToastService.error(i18n['js_ngrest_error'], 2000);
 			});
 		};
@@ -371,7 +372,8 @@
 		};
 		
 		$scope.submitUpdate = function () {
-			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
+			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).then(function(response) {
+				var data = response.data;
 				if ($scope.pager) {
 					$scope.realoadCrudList($scope.pager.currentPage);
 				} else {
@@ -382,8 +384,8 @@
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
 				$scope.switchTo(0, true);
 				$scope.highlightItemId($scope.data.updateId);
-			}).error(function(data) {
-				$scope.printErrors(data);
+			}, function(response) {
+				$scope.printErrors(response.data);
 			});
 		};
 		
@@ -400,13 +402,13 @@
 				//$scope.data.create[$scope.relationCall.field] = parseInt($scope.relationCall.id);
 			}
 			
-			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
+			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).then(function(response) {
 				$scope.realoadCrudList();
 				$scope.applySaveCallback();
 				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
 				$scope.switchTo(0, true);
-			}).error(function(data) {
-				$scope.printErrors(data);
+			}, function(data) {
+				$scope.printErrors(data.data);
 			});
 		};
 		
@@ -436,14 +438,15 @@
 		 * This method is triggerd by the crudLoader directive to reload service data.
 		 */
 		$scope.loadService = function() {
-			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
-				$scope.service = serviceResponse.service;
+			$http.get($scope.config.apiEndpoint + '/services').then(function(serviceResponse) {
+				$scope.service = serviceResponse.data.service;
 			});
 		};
 		
 		$scope.loadList = function(pageId) {
 			LuyaLoading.start();
-			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
+			$http.get($scope.config.apiEndpoint + '/services').then(function(response) {
+				var serviceResponse = response.data;
 				$scope.service = serviceResponse.service;
 				$scope.evalSettings(serviceResponse._settings);
 				if ($scope.relationCall) {
@@ -524,11 +527,11 @@
 			var rowId = row[$scope.config.pk];
 			var json = {};
 			json[fieldName] = invert;
-			$http.put($scope.config.apiEndpoint + '/' + rowId, angular.toJson(json, true)).success(function(data) {
+			$http.put($scope.config.apiEndpoint + '/' + rowId +'?ngrestCallType=update&fields='+fieldName, angular.toJson(json, true)).then(function(response) {
 				row[fieldName] = invert;
 				$scope.highlightItemId(rowId);
 				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}), 1500);
-			}).error(function(data) {
+			}, function(data) {
 				$scope.printErrors(data);
 			});
 		}
@@ -555,15 +558,15 @@
 		$scope.newTagName = null;
 		
 		$scope.loadTags = function() {
-			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadTags')).success(function(transport) {
-				$scope.tags = transport;
+			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadTags')).then(function(transport) {
+				$scope.tags = transport.data;
 			});
 		};
 		
 		$scope.loadRelations = function() {
-			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadRelations')).success(function(transport) {
+			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadRelations')).then(function(transport) {
 				$scope.relation = {};
-				transport.forEach(function(value, key) {
+				transport.data.forEach(function(value, key) {
 					$scope.relation[value.tag_id] = 1;
 				});
 			});
@@ -630,9 +633,9 @@
 		};
 		
 		$scope.loadImages = function() {
-			$http.get($scope.crud.getActiveWindowCallbackUrl('loadAllImages')).success(function(response) {
+			$http.get($scope.crud.getActiveWindowCallbackUrl('loadAllImages')).then(function(response) {
 				$scope.files = {}
-				response.forEach(function(value, key) {
+				response.data.forEach(function(value, key) {
 					$scope.files[value.fileId] = value;
 				});
 			})
@@ -682,11 +685,15 @@
 		};
 		
 		$scope.getRights = function() {
-			$http.get($scope.crud.getActiveWindowCallbackUrl('getRights')).success(function(response) {
-				$scope.rights = response.rights;
-				$scope.auths = response.auths;
+			$http.get($scope.crud.getActiveWindowCallbackUrl('getRights')).then(function(response) {
+				$scope.rights = response.data.rights;
+				$scope.auths = response.data.auths;
 			})
 		};
+		
+		$scope.$on('awloaded', function(e, d) {
+			$scope.getRights();
+		});
 		
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.getRights();
@@ -725,9 +732,8 @@
 		};
 		
 		$scope.getDashboard = function(nodeId) {
-			$http.get('admin/api-admin-menu/dashboard', { params : { 'nodeId' : nodeId }} )
-			.success(function(data) {
-				$scope.dashboard = data;
+			$http.get('admin/api-admin-menu/dashboard', { params : { 'nodeId' : nodeId }} ).then(function(data) {
+				$scope.dashboard = data.data;
 			});
 		};
 		
@@ -760,8 +766,8 @@
 		};
 		
 		$scope.get = function () {
-			$http.get('admin/api-admin-menu/items', { params : { 'nodeId' : $scope.moduleId }} )
-			.success(function(data) {
+			$http.get('admin/api-admin-menu/items', { params : { 'nodeId' : $scope.moduleId }} ).then(function(response) {
+				var data = response.data;
 				for (var itm in data.groups) {
 					var grp = data.groups[itm];				
 					$scope.itemAdd(grp.name, grp.items);
@@ -807,7 +813,7 @@
 		}
 		
 		$scope.updateUserProfile = function(profile) {
-			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).success(function(response) {
+			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).then(function(response) {
 				$window.location.reload();
 			});
 		};
@@ -872,16 +878,16 @@
 		};
 		
 		(function tick(){
-			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).success(function(response) {
-				$scope.forceReload = response.forceReload;
+			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).then(function(response) {
+				$scope.forceReload = response.data.forceReload;
 				if ($scope.forceReload) {
 					AdminToastService.confirm(i18n['js_admin_reload'], function($timeout, $toast) {
 						$scope.reload();
 					});
 				}
 				
-				$scope.locked = response.locked;
-				$scope.notify = response.useronline;
+				$scope.locked = response.data.locked;
+				$scope.notify = response.data.useronline;
 				$timeout(tick, 20000);
 			})
 		})();
@@ -917,8 +923,8 @@
 				if (n.length > 2) {
 					$timeout.cancel($scope.searchPromise);
 					$scope.searchPromise = $timeout(function() {
-						$http.get('admin/api-admin-search', { params : { query : n}}).success(function(response) {
-							$scope.searchResponse = response;
+						$http.get('admin/api-admin-search', { params : { query : n}}).then(function(response) {
+							$scope.searchResponse = response.data;
 						})
 					}, 1000)
 				} else {
@@ -956,9 +962,8 @@
 		};
 		
 		$scope.get = function () {
-			$http.get('admin/api-admin-menu')
-			.success(function(data) {
-				$scope.items = data;
+			$http.get('admin/api-admin-menu').then(function(response) {
+				$scope.items = response.data;
 			});
 		};
 		

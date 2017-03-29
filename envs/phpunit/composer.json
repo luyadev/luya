@@ -8,11 +8,13 @@
         "yiisoft/yii2-imagine": "~2.1.0",
         "flowjs/flow-php-server": "^1.0"
     },
-    "extra": {
-        "asset-pattern-skip-version": "(-build|-patch)",
-        "asset-installer-paths": {
-            "bower-asset-library": "vendor/bower"
-        }
+    "config": {
+        "fxp-asset" : {
+            "pattern-skip-version": "(-build|-patch)",
+             "installer-paths": {
+                "bower-asset-library": "vendor/bower"
+            }
+        }   
     },
     "autoload" : {
         "psr-4" : {

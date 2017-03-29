@@ -2,9 +2,9 @@
 
 namespace cmstests\data\blocks;
 
-use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
 
-class TestBlock extends TwigBlock
+class TestBlock extends PhpBlock
 {
     public $module = 'cmsadmin';
 
@@ -31,12 +31,7 @@ class TestBlock extends TwigBlock
         ];
     }
 
-    public function twigFrontend()
-    {
-        return 'twig-frontend';
-    }
-
-    public function twigAdmin()
+    public function admin()
     {
         return [$this->getVarValue('var1'), $this->getVarValue('var2')];
     }

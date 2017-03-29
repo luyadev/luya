@@ -95,24 +95,18 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
      {
         return 'api-team-member';
      }
-    
-    /**
-     * Define the ngrest config, which fileds should be available in create form, updateform and the grid overview list.
-     * 
-     * @return \luya\admin\ngrest\Config the configured ngrest object
-     */
-    public function ngRestConfig($config)
-    {
-        // define fields for types based from ngrestAttributeTypes
-        $this->ngRestConfigDefine($config, 'list', ['title', 'name']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['title', 'name', 'text']);
-        
-        // enable or disable ability to delete;
-        $config->delete = false; 
-        
-        return $config;
-    }
-    
+     
+     /**
+      *
+      */
+     public function ngRestScopes()
+     {
+         return [
+             ['list', ['title', 'name']],
+             [['create', 'update'], ['title', 'name', 'text']],
+             ['delete', false],
+         ];
+     }
 }
 ```
 

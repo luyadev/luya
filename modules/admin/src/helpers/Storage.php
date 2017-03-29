@@ -83,37 +83,30 @@ class Storage
     }
     
     /**
-     * Remove an image from the storage system.
+     * Remove an image from the storage system and database.
      *
-     * @param integer $imageId
-     * @param boolean $cleanup If cleanup is enabled, all other images will be deleted, the source file will be deleted to
-     * if clean is disabled, only the provided $imageId will be removed.
-     * @since 1.0.0-beta3
+     * @param integer $imageId The corresponding imageId for the {{\luya\admin\models\StorageImage}} Model to remove.
+     * @param boolean $cleanup If cleanup is enabled, all other images will be deleted. Event the {{\luya\admin\models\StorageFile}} will be removed
+     * from the database and filesystem. By default cleanup is disabled and will only remove the provided $imageId itself from {{\luya\admin\models\StorageImage}}.
+     * @return boolean
      */
-    public static function removeImage($imageId, $cleanup = true)
+    public static function removeImage($imageId, $cleanup = false)
     {
-        if (!$cleanup) {
-            Yii::$app->storage->flushArrays();
-            $file = StorageImage::findOne($imageId);
-            if ($file) {
-                $file->delete();
-            }
-        }
-        
+        Yii::$app->storage->flushArrays();
         $image = Yii::$app->storage->getImage($imageId);
-        
-        if ($image) {
+        if ($cleanup && $image) {
             $fileId = $image->fileId;
-            
             foreach (Yii::$app->storage->findImages(['file_id' => $fileId]) as $imageItem) {
                 $storageImage = StorageImage::findOne($imageItem->id);
                 if ($storageImage) {
                     $storageImage->delete();
                 }
             }
-            
-            Yii::$app->storage->flushArrays();
-            return static::removeFile($fileId);
+        }
+        
+        $file = StorageImage::findOne($imageId);
+        if ($file) {
+            return $file->delete();
         }
         
         return false;

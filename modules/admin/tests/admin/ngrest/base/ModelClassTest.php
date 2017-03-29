@@ -8,7 +8,6 @@ use yii\base\InvalidConfigException;
 
 class ModelClassTest extends AdminTestCase
 {
-
     const STRING_TYPE = 0;
 
     const OBJECT_TYPE = 1;
@@ -43,5 +42,4 @@ class ModelClassTest extends AdminTestCase
             throw new InvalidConfigException('Not support model type: ' . $type);
         }
     }
-
 }

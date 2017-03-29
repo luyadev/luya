@@ -3,7 +3,7 @@
 namespace luya\admin\image;
 
 use Yii;
-use luya\admin\storage\ItemTrait;
+use luya\admin\storage\ItemAbstract;
 
 /**
  * Image Item Detail Object.
@@ -23,10 +23,8 @@ use luya\admin\storage\ItemTrait;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Item extends \yii\base\Object
+class Item extends ItemAbstract
 {
-    use ItemTrait;
-    
     private $_file = null;
     
     private $_caption = null;
@@ -176,23 +174,10 @@ class Item extends \yii\base\Object
     }
     
     /**
-     * Convert the Object informations into an Array.
-     *
-     * Sometimes you may want to retrieve all informations about the image item within an array, there the
-     * toArray method is used.
-     *
-     * @return array An array with all available methods as key and corresponding output.
+     * @inheritdoc
      */
-    public function toArray()
+    public function fields()
     {
-        return [
-            'id' => $this->getId(),
-            'fileId' => $this->getFileId(),
-            'filterId' => $this->getFilterId(),
-            'source' => $this->getSource(),
-            'serverSource' => $this->getServerSource(),
-            'resolutionWidth' => $this->getResolutionWidth(),
-            'resolutionHeight' => $this->getResolutionHeight(),
-        ];
+        return ['id', 'fileId', 'filterId', 'source', 'serverSource', 'resolutionWidth', 'resolutionHeight'];
     }
 }

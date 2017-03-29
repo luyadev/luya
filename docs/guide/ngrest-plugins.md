@@ -111,21 +111,19 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
         return ['field'];
     }
 
-    public function ngrestExtraAttributeTypes()
+    public function ngRestExtraAttributeTypes()
     {
         return [
             'field' => ['class' => myadminmodule\plugins\TestPlugin::className()],
         ];
     }
     
-    public function ngRestConfig($config)
+    public function ngRestScopes()
     {
-        // ...
-        $this->ngRestConfigDefine($config, ['create', 'update', 'list'], ['field']);
-        // ...
+        return [
+            [['create', 'update', 'list'], ['field']],
+        ];
     }
-    
-    // ...
 }
 ```
 

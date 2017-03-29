@@ -15,6 +15,10 @@ use luya\helpers\Url;
 use luya\admin\base\RestActiveController;
 use luya\admin\components\AdminUser;
 use luya\admin\models\UserOnline;
+use luya\admin\ngrest\render\RenderActiveWindow;
+use luya\admin\ngrest\render\RenderActiveWindowCallback;
+use luya\admin\ngrest\NgRest;
+use luya\cms\admin\helpers\MenuHelper;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -23,20 +27,6 @@ use luya\admin\models\UserOnline;
  */
 class Api extends RestActiveController
 {
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        $actions = parent::actions();
-        $actions['view']['class'] = 'luya\admin\ngrest\base\actions\ViewAction';
-        $actions['index']['class'] = 'luya\admin\ngrest\base\actions\IndexAction';
-        $actions['create']['class'] = 'luya\admin\ngrest\base\actions\CreateAction';
-        $actions['update']['class'] = 'luya\admin\ngrest\base\actions\UpdateAction';
-        $actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
-        return $actions;
-    }
-    
     /**
      * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
      * is required.
@@ -74,6 +64,20 @@ class Api extends RestActiveController
                 $this->pagination = ['pageSize' => $this->pageSize];
             }
         }
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        $actions = parent::actions();
+        $actions['view']['class'] = 'luya\admin\ngrest\base\actions\ViewAction';
+        $actions['index']['class'] = 'luya\admin\ngrest\base\actions\IndexAction';
+        $actions['create']['class'] = 'luya\admin\ngrest\base\actions\CreateAction';
+        $actions['update']['class'] = 'luya\admin\ngrest\base\actions\UpdateAction';
+        $actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
+        return $actions;
     }
     
     private $_model = null;
@@ -195,6 +199,26 @@ class Api extends RestActiveController
         ]);
     }
     
+    public function actionActiveWindowCallback()
+    {
+        $config = $this->model->getNgRestConfig();
+        $render = new RenderActiveWindowCallback();
+        $ngrest = new NgRest($config);
+    
+        return $ngrest->render($render);
+    }
+    
+    public function actionActiveWindowRender()
+    {
+        $config = $this->model->getNgRestConfig();
+        $render = new RenderActiveWindow();
+        $render->setItemId(Yii::$app->request->post('itemId', false));
+        $render->setActiveWindowHash(Yii::$app->request->post('activeWindowHash', false));
+        $ngrest = new NgRest($config);
+    
+        return $ngrest->render($render);
+    }
+    
     /**
      * Prepare a temp file to
      * @todo added very basic csv support, must be stored as class, just a temp solution
@@ -262,11 +286,16 @@ class Api extends RestActiveController
         
         $store = FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
         
+        $menu = Yii::$app->adminmenu->getApiDetail($this->model->ngRestApiEndpoint());
+        
+        $route = $menu['route'];
+        $route = str_replace("/index", "/export-download", $route);
+        
         if ($store) {
             Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
             Yii::$app->session->set('tempNgRestKey', $key);
             return [
-                'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
+                'url' => Url::toRoute(['/'.$route, 'key' => base64_encode($key)]),
             ];
         }
         

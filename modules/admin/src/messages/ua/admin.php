@@ -205,6 +205,7 @@ return [
     'model_logger_time' => 'Час',
     'model_logger_message' => 'Повідомлення',
     'model_logger_type' => 'Тип',
+    'model_logger_badgetype' => 'Status',
     'model_logger_trace_file' => 'Файл трасування',
     'model_logger_trace_line' => 'Строка трасування',
     'model_logger_trace_function' => 'Трасуюча функциія',
@@ -229,4 +230,8 @@ return [
     'layout_image_filter_selection' => 'Select image Filter:',
     'lock_admin_edit_crud_item' => 'Editing {module} "{table}" (ID: {id}).',
     'lock_cms_edit_page' => 'Editing page "{title}".',
+    'layout_filemanager_col_size' => 'File size',
+    'js_filemanager_count_files_overlay' => '%count% files',
+    'js_link_change_value' => 'Change Link',
+    'js_link_set_value' => 'Set Link',
 ];

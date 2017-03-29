@@ -24,7 +24,7 @@ abstract class Boot
     /**
      * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/CHANGELOG.md)
      */
-    const VERSION = '1.0.0-dev';
+    const VERSION = '1.0.0-RC3-dev';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
@@ -208,7 +208,12 @@ abstract class Boot
     private function includeYii()
     {
         if (file_exists($this->_baseYiiFile)) {
-            $require = require_once($this->_baseYiiFile);
+            defined('LUYA_YII_VENDOR') ?: define('LUYA_YII_VENDOR', dirname($this->_baseYiiFile));
+            
+            $require = require_once(dirname($this->_baseYiiFile) . DIRECTORY_SEPARATOR . 'BaseYii.php');
+            
+            require_once($this->getCoreBasePath() . '/Yii.php');
+            
             Yii::setAlias('@luya', $this->getCoreBasePath());
             return $require;
         }

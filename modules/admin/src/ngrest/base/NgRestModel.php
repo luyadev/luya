@@ -79,6 +79,17 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         $scenarios[RestActiveController::SCENARIO_RESTUPDATE] = $scenarios[self::SCENARIO_DEFAULT];
         return $scenarios;
     }
+    
+    /**
+     * Whether a field is i18n or not.
+     * 
+     * @param string $fieldName The name of the field which is 
+     * @return boolean
+     */
+    public function isI18n($fieldName)
+    {
+        return in_array($fieldName, $this->i18n) ? true : false;
+    }
 
     /**
      * Define an array with filters you can select from the crud list.
@@ -359,7 +370,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * The definition can contain properties, but does not have to.
      *
      * ```php
-     * ngRestAttributeTypes()
+     * public function ngRestAttributeTypes()
      * {
      *     return [
      *         'firstname' => 'text',
@@ -392,6 +403,58 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     {
         return [];
     }
+
+    /**
+     * Defines the scope which field should be used for what situation.
+     *
+     * ```php
+     * public function ngRestScopes()
+     * {
+     *     return [
+     *         ['list', ['firstname', 'lastname']],
+     *         [['create', 'update'], ['firstname', 'lastname', 'description', 'image_id']],
+     *         ['delete', true],
+     *     ]:
+     * }
+     * ```
+     *
+     * The create and update scopes can also be written in seperated notation in order to configure
+     * different forms for create and update:
+     *
+     * ```php
+     * public function ngRestScopes()
+     * {
+     *     return [
+     *         ['list', ['firstname', 'lastname']],
+     *         ['create', ['firstname', 'lastname', 'description', 'image_id']],
+     *         ['update', ['description']],
+     *     ];
+     * }
+     * ```
+     */
+    public function ngRestScopes()
+    {
+        return [];
+    }
+    
+    /**
+     * Define Active Window configurations.
+     *
+     * ```php
+     * public function ngRestActiveWindows()
+     * {
+     *     return [
+     *         ['class' => 'luya\admin\aws\TagActiveWindow', 'label' => 'Tags Label'],
+     *         ['class' => luya\admin\aws\ChangePasswordActiveWindow::class, 'label' => 'Change your Password'],
+     *     ];
+     * }
+     * ```
+     */
+    public function ngRestActiveWindows()
+    {
+        return [];
+    }
+    
     
     /**
      * Inject data from the model into the config, usage exmple in ngRestConfig method context:
@@ -483,6 +546,28 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         }
     }
     
+    public function ngRestConfig($config)
+    {
+        foreach ($this->ngRestScopes() as $arrayConfig) {
+            if (!isset($arrayConfig[0]) && !isset($arrayConfig[1])) {
+                throw new InvalidConfigException("Invalid ngRestScope defintion. Definition must contain an array with two elements: `['create', []]`");
+            }
+            
+            $scope = $arrayConfig[0];
+            $fields = $arrayConfig[1];
+
+            if ($scope == 'delete') {
+                $config->delete = $fields;
+            } else {
+                $this->ngRestConfigDefine($config, $scope, $fields);
+            }
+        }
+        
+        foreach ($this->ngRestActiveWindows() as $windowConfig) {
+            $config->aw->load($windowConfig);
+        }
+    }
+    
     private $_config = null;
     
     /**
@@ -493,13 +578,38 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
-            $config = Yii::createObject(['class' => Config::class, 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
+            //$config = Yii::createObject(['class' => Config::class, 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
+            
+            $config = new Config();
+            $config->apiEndpoint = static::ngRestApiEndpoint();
+            $config->primaryKey = $this->getNgRestPrimaryKey();
+            
             $configBuilder = new ConfigBuilder(static::class);
             $this->ngRestConfig($configBuilder);
             $config->setConfig($configBuilder->getConfig());
             foreach ($this->i18n as $fieldName) {
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
+            
+           
+
+            // COPY FROM NgRestController to Builder of the config
+            // ensure what must be removed and added from outside
+            $config->filters = $this->ngRestFilters();
+            $config->defaultOrder = $this->ngRestListOrder();
+            
+            
+            $config->attributeGroups = $this->ngRestAttributeGroups();
+            $config->groupByField = $this->ngRestGroupByField();
+            
+            $rel = [];
+            foreach ($this->ngRestRelations() as $key => $item) {
+                $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
+            }
+            
+            
+            $config->relations = $rel;
+            $config->tableName = $this->tableName();
             
             $this->_config = $config;
         }

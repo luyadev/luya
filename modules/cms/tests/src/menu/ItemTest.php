@@ -31,8 +31,10 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count($obj->children));
         $this->assertEquals(11, count($obj->siblings));
         $this->assertSame(1, $obj->sortIndex);
-        $this->assertFalse($obj->hasChildren());
+        $this->assertFalse($obj->hasChildren);
         $this->assertTrue($obj->isHome);
+        $this->assertSame('Homepage', $obj->getSeoTitle());
+        $this->assertSame('Homepage', $obj->seoTitle);
     }
     
     public function testChildItem()
@@ -48,7 +50,7 @@ class ItemTest extends CmsFrontendTestCase
     {
         $menu = (new Query())->where(['id' => 2])->one();
         
-        $this->assertSame('http://localhost/luya/envs/dev/public_html/luya/envs/dev/public_html/en/page1', $menu->absoluteLink);
+        $this->assertSame('http://localhost/luya/envs/dev/public_html/en/page1', $menu->absoluteLink);
     }
     
     public function testNextPevSibling()

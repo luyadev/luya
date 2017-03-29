@@ -4,6 +4,8 @@ namespace luya\cms\base;
 
 use Yii;
 
+trigger_error('TwigBlock is deprecated.', E_USER_DEPRECATED);
+
 /**
  * Represents a CMS Block with Twig views.
  *

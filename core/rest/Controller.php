@@ -70,6 +70,7 @@ class Controller extends \yii\rest\Controller
      *         )
      * )
      * ```
+     *
      * @param \yii\base\Model $model The model to find the first error.
      * @throws \yii\base\InvalidParamException
      * @return array If the model has errors InvalidParamException will be thrown
@@ -77,7 +78,7 @@ class Controller extends \yii\rest\Controller
     public function sendModelError(Model $model)
     {
         if (!$model->hasErrors()) {
-            throw new InvalidParamException('The provided model has not errors to send.');
+            throw new InvalidParamException('The model as thrown an uknown Error.');
         }
 
         Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');

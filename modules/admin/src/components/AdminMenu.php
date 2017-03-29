@@ -221,7 +221,7 @@ class AdminMenu extends \yii\base\Component
      */
     public function getApiDetail($api = null)
     {
-        $items = $this->items;
+        $items = $this->getItems();
         
         $key = array_search($api, array_column($items, 'permssionApiEndpoint'));
         

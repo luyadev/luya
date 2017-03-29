@@ -5,6 +5,7 @@ namespace luya\admin\models;
 use Yii;
 use luya\web\Application;
 use yii\db\ActiveRecord;
+use luya\helpers\FileHelper;
 
 /**
  * This is the model class for table "admin_storage_file".
@@ -65,7 +66,12 @@ final class StorageFile extends ActiveRecord
     public function delete()
     {
         $file = Yii::$app->storage->getFile($this->id);
-        @unlink($file->serverSource);
+        
+        if ($file) {
+            if (!FileHelper::unlink($file->serverSource)) {
+                Logger::error("Unable to remove storage file: " . $file->serverSource);
+            }
+        }
         $this->is_deleted = 1;
         $this->update(false);
         return true;

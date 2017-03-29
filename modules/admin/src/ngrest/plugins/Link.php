@@ -4,7 +4,7 @@ namespace luya\admin\ngrest\plugins;
 
 use Yii;
 use luya\admin\ngrest\base\Plugin;
-use luya\cms\helpers\Url;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * Internal or External Link Plugin.
@@ -105,6 +105,6 @@ class Link extends Plugin
      */
     protected function generateLinkObject(array $config)
     {
-        return Url::generateLinkObject($config);
+        return BlockHelper::linkObject($config);
     }
 }

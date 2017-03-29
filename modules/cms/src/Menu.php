@@ -13,7 +13,7 @@ use luya\cms\menu\Query as MenuQuery;
 use luya\cms\models\NavItemModule;
 use luya\traits\CacheableTrait;
 use luya\cms\menu\Item;
-use luya\cms\menu\InjectItem;
+use luya\cms\menu\InjectItemInterface;
 
 /**
  * Menu container component by language.
@@ -82,6 +82,9 @@ use luya\cms\menu\InjectItem;
  * ```
  *
  * @property array $currentUrlRule Get the url rules for the current menu item.
+ * @property \luya\cms\menu\Item $current Get the current active menu item.
+ * @property \luya\cms\menu\Item $home Get the home menu item.
+ *
  * @since 1.0.0-beta1
  * @author Basil Suter <basil@nadar.io>
  */
@@ -94,7 +97,16 @@ class Menu extends Component implements ArrayAccess
      */
     const MENU_ITEM_EVENT = 'menuItemEvent';
     
+    /**
+     * @var string Event which is triggere after the menu component is loaded and registered.
+     */
     const EVENT_AFTER_LOAD = 'eventAfterLoad';
+    
+    const ITEM_TYPE_PAGE = 1;
+    
+    const ITEM_TYPE_MODULE = 2;
+    
+    const ITEM_TYPE_REDIRECT = 3;
     
     /**
      * @var \luya\web\Request Request object
@@ -542,7 +554,7 @@ class Menu extends Component implements ArrayAccess
     private function getNavData($langId)
     {
         return (new DbQuery())->from(['cms_nav_item item'])
-        ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.alias', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
+        ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
         ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
         ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
         ->where(['nav.is_deleted' => 0, 'item.lang_id' => $langId, 'nav.is_offline' => 0, 'nav.is_draft' => 0])
@@ -639,6 +651,7 @@ class Menu extends Component implements ArrayAccess
                     'lang' => $lang['short_code'],
                     'link' => $this->buildItemLink($alias, $langShortCode),
                     'title' => $item['title'],
+                    'title_tag' => $item['title_tag'],
                     'alias' => $alias,
                     'description' => $item['description'],
                     'keywords' => $item['keywords'],
@@ -651,7 +664,6 @@ class Menu extends Component implements ArrayAccess
                     'sort_index' => $item['sort_index'],
                     'is_hidden' => $item['is_hidden'],
                     'type' => $item['nav_item_type'],
-                    'nav_item_type_id' => $item['nav_item_type_id'],
                     'redirect' => ($item['nav_item_type'] == 3 && isset($this->redirectMap[$item['nav_item_type_id']])) ? $this->redirectMap[$item['nav_item_type_id']] : false,
                     'module_name' => ($item['nav_item_type'] == 2 && isset($this->modulesMap[$item['nav_item_type_id']])) ? $this->modulesMap[$item['nav_item_type_id']]['module_name'] : false,
                     'container' => $item['container'],
@@ -665,7 +677,11 @@ class Menu extends Component implements ArrayAccess
         return $languageContainer;
     }
     
-    public function injectItem(InjectItem $item)
+    /**
+     *
+     * @param \luya\cms\menu\InjectItemInterface $item
+     */
+    public function injectItem(InjectItemInterface $item)
     {
         $this->_languageContainer[$item->getLang()][$item->getId()] = $item->toArray();
     }

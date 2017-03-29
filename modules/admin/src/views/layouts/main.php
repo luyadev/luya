@@ -46,14 +46,14 @@ $this->beginPage()
 
 
 <script type="text/ng-template" id="modal">
-    <div class="modal__wrapper" ng-show="!isModalHidden">
+    <div class="modal__wrapper" ng-show="!isModalHidden" zaa-esc="isModalHidden=1" >
         <div class="modal">
-            <button type="button" class="btn waves-effect waves-light modal__close btn-floating red" ng-click="isModalHidden = true">
+            <button type="button" class="btn waves-effect waves-light modal__close btn-floating red" ng-click="isModalHidden=1">
                 <i class="material-icons">close</i>
             </button>
             <div class="modal-content" ng-transclude></div>
         </div>
-        <div class="modal__background" ng-click="isModalHidden = true" style="cursor:pointer;"></div>
+        <div class="modal__background" ng-click="isModalHidden=1" style="cursor:pointer;"></div>
     </div>
 </script>
 
@@ -63,8 +63,8 @@ $this->beginPage()
         <div class="input input--radios col s12">
             <label class="input__label"><?= Admin::t('view_index_redirect_type'); ?></label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label> <br />
-                <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
+                <input type="radio" ng-model="data.type" ng-value="1"><label ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.type" ng-value="2"><label ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
             </div>
         </div>
     </div>
@@ -104,18 +104,17 @@ $this->beginPage()
 </script>
 
 <script type="text/ng-template" id="storageFileUpload">
-    <div class="fileupload">
-        <div class="fileupload__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
+    <div class="link-selector">
+        <div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
             <i class="material-icons left">attach_file</i>
                     <span>
                         <?php echo Admin::t('layout_select_file'); ?>
                     </span>
         </div>
-        <span class="fileupload__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
-        <span class="fileupload__path" ng-bind="fileinfo.name"></span>
-
-        <div ng-if="!modal">
-        <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
+        <span class="link-selector__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
+        <span class="link-selector__path" ng-bind="fileinfo.name"></span>
+        <div ng-if="!modal.state">
+        <modal is-modal-hidden="modal.state"><storage-file-manager selection="true" /></modal>
         </div>
     </div>
 </script>
@@ -155,14 +154,12 @@ $this->beginPage()
 <script type="text/ng-template" id="reverseFolders">
 
     <i class="material-icons treeview__toggler filemanager__folder-toggleicon" ng-click="toggleFolderItem(folder)" ng-hide="folder.subfolder==0" ng-class="{'treeview__toggler--subnav-closed': folder.toggle_open!=1}">arrow_drop_down</i>
-    <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)">
+    <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)" tooltip tooltip-text="folderCountMessage(folder)" tooltip-offset-top="-5">
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default"></i>
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active"></i>
-
                         <span class="filemanager__folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id">
                             {{folder.name }}                                            
                         </span>
-
                         <i class="material-icons filemanager__edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
                         <i class="material-icons filemanager__delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
                         
@@ -289,19 +286,30 @@ $this->beginPage()
                         <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
                             <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
                         </th>
+                        <th ng-if="selectedFileFromParent" style="width:15px;"></th>
                         <th></th>
                         <th><?= Admin::t('layout_filemanager_col_name'); ?><i ng-click="changeSortField('name')" ng-class="{'active-orderby' : sortField == 'name' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-name')" ng-class="{'active-orderby' : sortField == '-name' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                         <th><?= Admin::t('layout_filemanager_col_type'); ?><i ng-click="changeSortField('extension')" ng-class="{'active-orderby' : sortField == 'extension' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-extension')" ng-class="{'active-orderby' : sortField == '-extension' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                         <th><?= Admin::t('layout_filemanager_col_date'); ?><i ng-click="changeSortField('uploadTimestamp')" ng-class="{'active-orderby' : sortField == 'uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-uploadTimestamp')" ng-class="{'active-orderby' : sortField == '-uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                        <th><?= Admin::t('layout_filemanager_col_size'); ?><i ng-click="changeSortField('size')" ng-class="{'active-orderby' : sortField == 'size' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-size')" ng-class="{'active-orderby' : sortField == '-size' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                     </tr>
                 </thead>
                 <tbody>
 
                 <!-- FILES -->
-                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" alt="fileId={{file.id}}" title="fileId={{file.id}}" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                <tr 
+                    ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
+                    alt="fileId={{file.id}}" 
+                    title="fileId={{file.id}}" 
+                    class="filemanager__file" 
+                    ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager__file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
+
                     <td ng-click="toggleSelection(file)" class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
                         <input type="checkbox" ng-checked="inSelection(file)" id="{{file.id}}" />
                         <label for="checked-status-managed-by-angular-{{file.id}}"></label>
+                    </td>
+                    <td ng-if="selectedFileFromParent">
+                        <i class="material-icons" ng-if="selectedFileFromParent.id == file.id">check_box</i>
                     </td>
                     <td ng-click="toggleSelection(file)" class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.isImage }">
                         <span ng-if="file.isImage"><img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail.source}}" /></span>
@@ -310,6 +318,7 @@ $this->beginPage()
                     <td ng-click="toggleSelection(file)">{{file.name}}</td>
                     <td class="filemanager__lighten">{{file.extension}}</td>
                     <td class="filemanager__lighten">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
+                    <td class="filemanager__ligthen">{{file.sizeReadable}}</td>
                     <td class="filemanager__lighten" ng-click="openFileDetail(file)"><i class="material-icons">zoom_in</i></td>
                 </tr>
                 <!-- /FILES -->
@@ -327,19 +336,19 @@ $this->beginPage()
                 <table class="filemanager__details-table filemanager__table">
                     <tbody>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_name'); ?></b></td><td>{{ fileDetail.name }}</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_name'); ?></b></td><td>{{ fileDetail.name }}</td>
                         </tr>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_date'); ?></b></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_date'); ?></b></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
                         </tr>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_filetype'); ?></b></td><td>{{ fileDetail.extension }}</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_filetype'); ?></b></td><td>{{ fileDetail.extension }}</td>
                         </tr>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_size'); ?></b></td><td>{{ fileDetail.sizeReadable }}</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_size'); ?></b></td><td>{{ fileDetail.sizeReadable }}</td>
                         </tr>
                         <tr>
-                            <td><b><?php echo Admin::t('layout_filemanager_detail_id'); ?></b></td><td> {{ fileDetail.id }}</td>
+                            <td><b><?= Admin::t('layout_filemanager_detail_id'); ?></b></td><td>{{ fileDetail.id }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -529,12 +538,12 @@ $this->beginPage()
 				<table class="search-box__table">
                     <thead>
                         <tr ng-repeat="row in item.data | limitTo:1">
-                            <th ng-repeat="(k,v) in row">{{k}}</th>
+                            <th ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{k}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="row in item.data" ng-click="searchDetailClick(item, row)">
-                            <td class="search-box__row" ng-repeat="(k,v) in row">{{v}}</td>
+                            <td class="search-box__row" ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{v}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -564,14 +573,9 @@ $this->beginPage()
 		            		<div class="input input--select input--vertical">
 				    			<label class="input__label" for="layout-changer" style="margin-bottom:5px;"><?= Admin::t('layout_rightbar_languagelabel')?></label>
 					            <select id="layout-changer" class="input__field-wrapper" ng-model="profile.lang">
-					            	<option value="de" <?php if (Yii::$app->luyaLanguage == 'de'): ?>selected<?php endif; ?>>Deutsch</option>
-					            	<option value="en" <?php if (Yii::$app->luyaLanguage == 'en'): ?>selected<?php endif; ?>>English</option>
-					            	<option value="ru" <?php if (Yii::$app->luyaLanguage == 'ru'): ?>selected<?php endif; ?>>Pусский</option>
-					            	<option value="es" <?php if (Yii::$app->luyaLanguage == 'es'): ?>selected<?php endif; ?>>Español</option>
-					            	<option value="fr" <?php if (Yii::$app->luyaLanguage == 'fr'): ?>selected<?php endif; ?>>Français</option>
-					            	<option value="ua" <?php if (Yii::$app->luyaLanguage == 'ua'): ?>selected<?php endif; ?>>Українська</option>
-                                    <option value="it" <?php if (Yii::$app->luyaLanguage == 'it'): ?>selected<?php endif; ?>>Italiano</option>
-                                    <option value="el" <?php if (Yii::$app->luyaLanguage == 'el'): ?>selected<?php endif; ?>>Ελληνικά</option>
+                                    <?php foreach ($this->context->module->uiLanguageDropdown as $key => $lang): ?>
+					            	<option value="<?= $key; ?>" <?php if (Yii::$app->luyaLanguage == $key): ?>selected<?php endif; ?>><?= $lang;?></option>
+                                    <?php endforeach; ?>
 					            </select>
 				            </div>
 	            		</td>
@@ -589,13 +593,11 @@ $this->beginPage()
                     <ul class="collection with-header">
                     <?php foreach ($this->context->tags as $name => $object): ?>
                         <li class="collection-item" click-paste-pusher="<?= $object->example(); ?>" style="cursor: pointer;" ng-mouseenter="isHover['<?=$name;?>']=true" ng-mouseleave="isHover['<?=$name;?>']=false">
-
                             <div class="help-overlay" ng-show="isHover['<?=$name;?>']">
                                 <h3 class="help-overlay__title"><?= $name; ?></h3>
                                 <code class="help-overlay__example-code"><?= $object->example(); ?></code>
                                 <div class="help-overlay__description"><?= Markdown::process($object->readme()); ?></div>
                             </div>
-
                             <div><?= $name; ?><a class="secondary-content"><i class="material-icons">content_paste</i></a></div>
                         </li>
                     <?php endforeach; ?>

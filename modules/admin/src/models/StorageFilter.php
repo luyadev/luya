@@ -2,9 +2,11 @@
 
 namespace luya\admin\models;
 
+use Yii;
 use luya\admin\file\Item;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\Module;
+use luya\admin\aws\StorageFilterImagesActiveWindow;
 
 /**
  * This is the model class for table "admin_storage_filter".
@@ -52,9 +54,13 @@ final class StorageFilter extends NgRestModel
      */
     public function removeImageSources()
     {
+        $log = [];
         foreach (StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
-            $img->deleteSource();
+            $image = Yii::$app->storage->getImage($img->id);
+            
+            $log[$image->serverSource] = $img->deleteSource();
         }
+        return $log;
     }
     
     /**
@@ -115,6 +121,8 @@ final class StorageFilter extends NgRestModel
      */
     public function ngRestConfig($config)
     {
+        $config->aw->load(StorageFilterImagesActiveWindow::class);
+        
         $this->ngRestConfigDefine($config, 'list', ['name', 'identifier']);
         
         return $config;

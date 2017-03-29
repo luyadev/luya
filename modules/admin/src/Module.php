@@ -44,6 +44,22 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
     
     /**
+     * @var array Available translation messages.
+     */
+    public $uiLanguageDropdown = [
+        'en' => 'English',
+        'de' => 'Deutsch',
+        'ru' => 'Pусский',
+        'es' => 'Español',
+        'fr' => 'Français',
+        'ua' => 'Українська',
+        'it' => 'Italiano',
+        'el' => 'Ελληνικά',
+        'vi' => 'Việt Nam',
+    	'pt' => 'Português',
+    ];
+    
+    /**
      * @var boolean Enables a two-way factor auth system before logging into the admin
      * panel. If the system is not able to send mails (No configuration or missconfiguration)
      * then you are not able to login anymore. You should test the mail system before enabling
@@ -90,9 +106,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public $urlRules = [
         ['class' => 'luya\admin\components\UrlRule'],
-        ['pattern' => 'file/<id:\d+>/<hash:\w+>/<fileName:(.*?)+>', 'route' => 'admin/file/download', 'position' => UrlRule::POSITION_BEFORE_LUYA],
-        ['pattern' => 'admin', 'route' => 'admin/default/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
-        ['pattern' => 'admin/login', 'route' => 'admin/login/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
+        ['pattern' => 'file/<id:\d+>/<hash:\w+>/<fileName:(.*?)+>', 'route' => 'admin/file/download'],
+        ['pattern' => 'admin', 'route' => 'admin/default/index'],
+        ['pattern' => 'admin/login', 'route' => 'admin/login/index'],
     ];
 
     /**
@@ -119,6 +135,11 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     ];
     
     /**
+     * @var integer The expiration timeout for a proxy build in seconds. Default value is 1800 seconds which is 30 minutes.
+     */
+    public $proxyExpirationTime = 1800;
+    
+    /**
      * Returns all Asset files to registered in the administration interfaces.
      *
      * As the adminstration UI is written in angular, the assets must be pre assigned to the adminisration there for the `getAdminAssets()` method exists.
@@ -139,7 +160,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     {
         return [
             'luya\admin\assets\Main',
-            'luya\admin\assets\Flow',
+            'luya\admin\assets\AngularI18n',
         ];
     }
 
@@ -168,7 +189,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         return [
             'js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error', 'js_ngrest_rm_update', 'js_ngrest_rm_success', 'js_tag_exists', 'js_tag_success', 'js_admin_reload', 'js_dir_till', 'js_dir_set_date', 'js_dir_table_add_row', 'js_dir_table_add_column', 'js_dir_image_description',
             'js_dir_no_selection', 'js_dir_image_upload_ok', 'js_dir_image_filter_error', 'js_dir_upload_wait', 'js_dir_manager_upload_image_ok', 'js_dir_manager_rm_file_confirm', 'js_dir_manager_rm_file_ok', 'js_zaa_server_proccess',
-            'ngrest_select_no_selection', 'js_ngrest_toggler_success',
+            'ngrest_select_no_selection', 'js_ngrest_toggler_success', 'js_filemanager_count_files_overlay', 'js_link_set_value', 'js_link_change_value',
         ];
     }
     

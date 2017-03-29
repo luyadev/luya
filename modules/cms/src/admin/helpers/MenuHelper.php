@@ -28,7 +28,7 @@ class MenuHelper
     {
         if (self::$items === null) {
             $items = (new Query())
-            ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title'])
+            ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'layout_file', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title'])
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy(['sort_index' => SORT_ASC])
@@ -200,7 +200,7 @@ class MenuHelper
     public static function getContainers()
     {
         if (self::$containers === null) {
-            self::$containers = (new Query())->select(['id', 'name'])->from('cms_nav_container')->where(['is_deleted' => 0])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
+            self::$containers = (new Query())->select(['id', 'name', 'alias'])->from('cms_nav_container')->where(['is_deleted' => 0])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
         }
         
         return self::$containers;

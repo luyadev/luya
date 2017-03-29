@@ -31,11 +31,12 @@ class LoginController extends Controller
 
     public function actionIndex()
     {
-        $this->registerAsset('\luya\admin\assets\Login');
         // redirect logged in users
         if (!Yii::$app->adminuser->isGuest) {
             return $this->redirect(['/admin/default/index']);
         }
+        
+        $this->registerAsset('\luya\admin\assets\Login');
         
         $this->view->registerJs("$(function(){ $('#email').focus(); observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."'); });", \luya\web\View::POS_END);
     

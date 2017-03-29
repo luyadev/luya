@@ -19,6 +19,7 @@ class ElementTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('baz', $element->bar());
     }
 
+    /*
     public function testRenderElement()
     {
         $element = new \luya\web\Element();
@@ -50,6 +51,7 @@ class ElementTest extends \luyatests\LuyaWebTestCase
 
         $this->assertEquals('baz', $response);
     }
+    */
     
     public function testPhpRenderElement()
     {

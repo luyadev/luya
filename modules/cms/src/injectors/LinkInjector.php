@@ -2,9 +2,8 @@
 
 namespace luya\cms\injectors;
 
-use Yii;
 use luya\cms\base\BaseBlockInjector;
-use luya\cms\helpers\Url;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * Link Injector to generate links.
@@ -40,7 +39,7 @@ final class LinkInjector extends BaseBlockInjector
     {
         $content = $this->getContextConfigValue($this->varName);
     
-        return Url::generateLinkObject($content);
+        return BlockHelper::linkObject($content);
     }
     
     /**

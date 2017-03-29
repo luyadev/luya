@@ -22,13 +22,13 @@ use luya\cms\admin\Module;
                     <div class="block__title" ng-bind-html="safe(block.full_name)" ng-click="toggleEdit()"></div>
                 </div>
                 <div class="right">
-                    <i ng-click="copyBlock()" alt="Copy" title="Copy" class="material-icons block__tollbar__icon">content_copy</i>
-                    <i ng-click="toggleHidden()" alt="Visible" title="Visible" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==0">visibility</i>
-                    <i ng-click="toggleHidden()" alt="Invisible" title="Invisible" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==1">visibility_off</i>
-                    <i ng-show="isEditable()" alt="Edit" title="Edit" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : edit }" ng-click="toggleEdit()" title="Edit">edit</i>
-                    <i ng-show="isConfigable()" alt="Config" title="Config" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : config }"ng-click="toggleConfig()" title="Confi">settings</i>
-                    <i ng-show="!edit && !config" alt="Delete" title="Delete" class="material-icons block__toolbar__icon" ng-click="removeBlock(block)">delete</i>
-                    <i ng-show="edit || config" alt="Close" title="Close" class="material-icons block__toolbar__icon" ng-click="toggleBlockSettings()">close</i>
+                    <i ng-click="copyBlock()" tooltip tooltip-text="'<?= Module::t('view_update_block_tooltip_copy');?>'" tooltip-offset-top="5" alt="Copy" title="Copy" class="material-icons block__tollbar__icon">content_copy</i>
+                    <i ng-click="toggleHidden()" tooltip tooltip-text="'<?= Module::t('view_update_block_tooltip_visible');?>'" tooltip-offset-top="5" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==0">visibility</i>
+                    <i ng-click="toggleHidden()" tooltip tooltip-text="'<?= Module::t('view_update_block_tooltip_invisible');?>'" tooltip-offset-top="5" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==1">visibility_off</i>
+                    <i ng-show="isEditable()" tooltip tooltip-text="'<?= Module::t('view_update_block_tooltip_edit');?>'" tooltip-offset-top="5" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : edit }" ng-click="toggleEdit()" title="Edit">edit</i>
+                    <i ng-show="isConfigable()" tooltip tooltip-text="'<?= Module::t('view_update_block_tooltip_editcfg');?>'" tooltip-offset-top="5" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : config }"ng-click="toggleConfig()" title="Confi">settings</i>
+                    <i ng-show="!edit && !config" tooltip tooltip-text="'<?= Module::t('view_update_block_tooltip_delete');?>'" tooltip-offset-top="5" class="material-icons block__toolbar__icon" ng-click="removeBlock(block)">delete</i>
+                    <i ng-show="edit || config" tooltip tooltip-text="'<?= Module::t('view_update_block_tooltip_close');?>'" tooltip-offset-top="5" class="material-icons block__toolbar__icon" ng-click="toggleBlockSettings()">close</i>
                 </div>
             </div>
             <div class="block__body block-styles" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
@@ -123,17 +123,16 @@ use luya\cms\admin\Module;
 
     <div class="cms">
         <div class="cms__pages">
-
-            <div class="row">
+			<div class="row">
                 <div class="col s12">
-
+					
                     <div class="toolbar [ grey lighten-3 ]">
                         <div class="row">
                             <div class="col s12">
                                 <!-- LEFT TOOLBAR -->
                                 <div class="toolbar__left">
                                     <!-- CONFIG BUTTON -->
-                                    <div class="toolbar__group toolbar__group--settings" ng-show="propertiesData.length == 0 || isDraft == false">
+                                    <div class="toolbar__group toolbar__group--settings" ng-show="propertiesData.length !== 0 && isDraft == false">
                                         <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()">
                                             <i class="material-icons cms__prop-toggle">settings</i>
                                         </a>
@@ -146,18 +145,20 @@ use luya\cms\admin\Module;
                                     </div>
                                     <!--  /ACTIONS -->
 
+                                    <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
                                     <!-- DELETE BUTTON -->
                                     <div class="toolbar__group toolbar__group--delete">
                                         <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="material-icons">delete</i></a>
                                     </div>
+                                    <?php endif; ?>
                                     <!-- /DELETE BUTTON -->
 
                                     <!-- PLACEHOLDER TOGGLE -->
                                     <div class="toolbar__group toolbar__group--placeholder-state">
                                         <div class="switch">
                                             <label>
-                                                <span ng-if="placeholderState"><?php echo Module::t('view_update_holder_state_on'); ?></span>
-                                                <span ng-if="!placeholderState"><?php echo Module::t('view_update_holder_state_off'); ?></span>
+                                                <span ng-if="placeholderState"><?= Module::t('view_update_holder_state_on'); ?></span>
+                                                <span ng-if="!placeholderState"><?= Module::t('view_update_holder_state_off'); ?></span>
                                                 <input type="checkbox" ng-model="placeholderState" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
                                             </label>
@@ -181,11 +182,11 @@ use luya\cms\admin\Module;
                                     </div>
                                     <!-- IS_HOME SWITCH -->
                                     <div class="toolbar__group  toolbar__group--homepage" ng-show="isDraft == false">
-                                        <div class="switch">
-                                            <label title="Setzt diese Seite als Startseite." ng-if="!navData.is_home">
+                                        <div class="switch switch--with-icons">
+                                            <label tooltip tooltip-text="'<?= Module::t('view_update_homepage_info'); ?>'" ng-if="!navData.is_home">
                                                 <?php echo Module::t('view_update_is_homepage'); ?>
                                                 <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
-                                                <span class="lever"></span>
+                                                <span class="lever switch__lever"></span>
                                             </label>
                                         </div>
                                         <span class="grey-text text-darken-2" ng-if="navData.is_home">
@@ -198,7 +199,7 @@ use luya\cms\admin\Module;
                                     <!-- VISIBILITY SWITCH -->
                                     <div class="toolbar__group  toolbar__group--visibility" ng-show="isDraft == false">
                                         <div class="switch switch--with-icons">
-                                            <label title="Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.">
+                                            <label tooltip tooltip-text="'<?= Module::t('view_update_hidden_info')?>'">
                                                 <i class="switch__icon material-icons" ng-show="!navData.is_hidden">visibility</i>
                                                 <i class="switch__icon material-icons" ng-show="navData.is_hidden">visibility_off</i>
                                                 <input type="checkbox" ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1">
@@ -211,7 +212,7 @@ use luya\cms\admin\Module;
                                     <!-- OFFLINE SWITCH -->
                                     <div class="toolbar__group toolbar__group--online" ng-show="isDraft == false">
                                         <div class="switch switch--with-icons">
-                                            <label title="Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.">
+                                            <label tooltip tooltip-text="'<?= Module::t('view_update_offline_info')?>'">
                                                 <i class="switch__icon material-icons green-text" ng-show="!navData.is_offline">cloud_queue</i>
                                                 <i class="switch__icon material-icons red-text" ng-show="navData.is_offline">cloud_off</i>
                                                 <input type="checkbox" ng-model="navData.is_offline" ng-true-value="0" ng-false-value="1">
@@ -241,14 +242,39 @@ use luya\cms\admin\Module;
                 </div>
             </div>
             
-            <div class="row" ng-if="showActions">
-                <div class="col s12">
-                    <div class="card-panel">
-                        <p><?= Module::t('page_update_actions_deepcopy_text'); ?></p>
-                        <p><button type="button" class="btn" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
-                    </div>
+            <modal is-modal-hidden="showActions">
+            	<h1><?= Module::t('page_update_actions_modal_title'); ?></h1>
+            	<div class="row">
+            		<div class="col s12">
+                    	<ul class="collapsible" data-collapsible="accordion">
+		                <li>
+		                  <div class="collapsible-header" ng-click="tagsOpen=!tagsOpen"><i class="material-icons">content_copy</i> <?= Module::t('page_update_actions_deepcopy_title'); ?></div>
+		                  <div class="collapsible-body" ng-show="tagsOpen" style="display:block;">
+		                    <p><?= Module::t('page_update_actions_deepcopy_text'); ?></p>
+                       		<p><button type="button" class="btn" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
+                          </div>
+		                </li>
+		                <li>
+		                  <div class="collapsible-header" ng-click="supportOpen=!supportOpen"><i class="material-icons">web</i> <?= Module::t('page_update_actions_layout_title'); ?></div>
+		                  <div class="collapsible-body" ng-show="supportOpen" style="display:block;">
+		                  <p><?= Module::t('page_update_actions_layout_text'); ?></p>
+                        	<form ng-submit="submitNavForm()">
+	                        <div class="row">
+	                            <div class="input input--text col s12">
+	                                <label class="input__label"><?= Module::t('page_update_actions_layout_file_field'); ?></label>
+	                                <div class="input__field-wrapper">
+	                                    <input type="text" class="input__field validate" ng-model="navData.layout_file" />
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <p><button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?></button></p>
+                        	</form>
+		                  </div>
+		                </li>
+		             </ul>
+                	</div>
                 </div>
-            </div>
+            </modal>
 
             <div class="row" ng-if="showPropForm">
                 <div class="col s12">
@@ -269,9 +295,7 @@ use luya\cms\admin\Module;
                              </div>
                         </div>
 
-                        <br />
-                        <div class="modal__footer">
-                            <div class="row">
+                            <div class="row" style="margin-top:25px;">
                                 <div class="input-field col s12">
                                     <div class="right">
                                         <button type="button" ng-click="togglePropMask()" class="btn red"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
@@ -280,7 +304,6 @@ use luya\cms\admin\Module;
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -350,10 +373,16 @@ use luya\cms\admin\Module;
                         <div class="page__header">
                             <div class="row">
                                 <div class="col s12">
-                                    <h4>
+                                    <h4 style="margin-bottom:0px;">
+                                        <span class="flag flag--{{lang.short_code}}">
+                                            <span class="flag__fallback">{{lang.name}}</span> 
+                                        </span>
                                         {{item.title}}
                                         <span ng-hide="settings">
-                                            <i ng-click="toggleSettings()" class="material-icons right [ waves-effect waves-blue ]">mode_edit</i>
+                                            <a ng-click="toggleSettings()" style="cursor: pointer;"><i class="material-icons right [ waves-effect waves-blue ]">mode_edit</i></a>
+                                            <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
+                                            <a ng-if="lang.is_default==0" ng-click="trashItem()" style="cursor: pointer;"><i class="material-icons right [ waves-effect waves-blue ]">delete</i></a>
+                                            <?php endif; ?>
                                             <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="right" ng-show="!liveEditState">
                                                 <i class="material-icons [ waves-effect waves-blue ]">open_in_new</i>
                                             </a>
@@ -363,7 +392,7 @@ use luya\cms\admin\Module;
                                             <a ng-click="toggleSettings()" style="cursor:pointer;" class="right"><i class="material-icons">close</i></a>
                                         </span>
                                     </h4>
-                                    <p>{{lang.name}}</p>
+                                    <p style="margin-top:0px;" class="chip"><small>{{ item.alias }}</small></p>
                                 </div>
                             </div>
                         </div>
@@ -415,9 +444,9 @@ use luya\cms\admin\Module;
                                 <div class="input input--radios col s12">
                                     <label class="input__label"><?php echo Module::t('view_index_add_type'); ?></label>
                                     <div class="input__field-wrapper">
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="1"><label ng-click="itemCopy.nav_item_type = 1"><?php echo Module::t('view_index_type_page'); ?></label> <br />
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="2"><label ng-click="itemCopy.nav_item_type = 2"><?php echo Module::t('view_index_type_module'); ?></label> <br />
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="3"><label ng-click="itemCopy.nav_item_type = 3"><?php echo Module::t('view_index_type_redirect'); ?></label>
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" ng-value="1"><label ng-click="itemCopy.nav_item_type = 1"><?php echo Module::t('view_index_type_page'); ?></label> <br />
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" ng-value="2"><label ng-click="itemCopy.nav_item_type = 2"><?php echo Module::t('view_index_type_module'); ?></label> <br />
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" ng-value="3"><label ng-click="itemCopy.nav_item_type = 3"><?php echo Module::t('view_index_type_redirect'); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -433,15 +462,12 @@ use luya\cms\admin\Module;
                             <div ng-switch-when="3">
                                 <update-form-redirect data="typeDataCopy"></update-form-redirect>
                             </div>
-
-                            <br />
-                            <div class="modal__footer">
-                                <div class="row">
-                                    <div class="col s12">
-                                        <div class="right">
-                                            <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
-                                            <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
-                                        </div>
+                            
+                            <div class="row" style="padding-bottom:15px;">
+                                <div class="col s12">
+                                    <div class="right">
+                                        <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
+                                        <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
                                     </div>
                                 </div>
                             </div>

@@ -63,9 +63,9 @@ class ProxyController extends Command
     /**
      * @var boolean Whether the isComplet sync check should be done after finish or not. If a table has a lot of traffic sometimes
      * there is a difference between the exchange of table informations (build) and transfer the data. In order to prevent
-     * the exception message you can disable the strict compare mode.
+     * the exception message you can disable the strict compare mode. In order to ensure strict comparing enable $strict.
      */
-    public $strict = true;
+    public $strict = false;
     
     /**
      * @var string If a table option is passed only this table will be synchronised. If false by default all tables will be synced.
@@ -106,17 +106,17 @@ class ProxyController extends Command
         
         if (!$identifier) {
             $identifier = $this->prompt('Please enter the identifier ID:');
-            Config::set(self::CONFIG_VAR_IDENTIFIER, $identifier);
+            Config::set(self::CONFIG_VAR_IDENTIFIER, trim($identifier));
         }
         
         $token = Config::get(self::CONFIG_VAR_TOKEN);
         
         if (!$token) {
             $token = $this->prompt('Please enter the access token:');
-            Config::set(self::CONFIG_VAR_TOKEN, $token);
+            Config::set(self::CONFIG_VAR_TOKEN, trim($token));
         }
         
-        $proxyUrl = Url::ensureHttp(rtrim($url, '/')) . '/admin/api-admin-proxy';
+        $proxyUrl = Url::ensureHttp(rtrim(trim($url), '/')) . '/admin/api-admin-proxy';
         $this->outputInfo('Connect to: ' . $proxyUrl);
         
         $curl = new Curl();
@@ -124,6 +124,9 @@ class ProxyController extends Command
         
         if (!$curl->error) {
             $this->flushHasCache();
+            
+            $this->verbosePrint($curl->response);
+            
             $response = Json::decode($curl->response);
             $build = new ClientBuild($this, [
                 'optionStrict' => $this->strict,
@@ -144,8 +147,16 @@ class ProxyController extends Command
             }
         }
         
+        $this->clearConfig();
         $this->output($curl->response);
         return $this->outputError($curl->error_message);
+    }
+
+    private function clearConfig()
+    {
+        Config::remove(self::CONFIG_VAR_TOKEN);
+        Config::remove(self::CONFIG_VAR_URL);
+        Config::remove(self::CONFIG_VAR_IDENTIFIER);
     }
     
     /**
@@ -155,9 +166,7 @@ class ProxyController extends Command
      */
     public function actionClear()
     {
-        Config::remove(self::CONFIG_VAR_TOKEN);
-        Config::remove(self::CONFIG_VAR_URL);
-        Config::remove(self::CONFIG_VAR_IDENTIFIER);
+        $this->clearConfig();
         return $this->outputSuccess('Config has been cleared.');
     }
 }

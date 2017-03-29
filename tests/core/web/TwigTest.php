@@ -19,6 +19,7 @@ class TwigTest extends \luyatests\LuyaWebTestCase
         return $twig;
     }
 
+    /*
     public function testEnvMethod()
     {
         $twig = new Twig();
@@ -40,5 +41,12 @@ class TwigTest extends \luyatests\LuyaWebTestCase
         $this->assertArrayHasKey('image', $functionList);
         $this->assertArrayHasKey('element', $functionList);
         $this->assertArrayHasKey('t', $functionList);
+    }
+    */
+
+    public function testNothing()
+    {
+        // we don't want to remove the twig unit tests, so lets keep this file with this sensless test.
+        $this->assertTrue(true);
     }
 }

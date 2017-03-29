@@ -6,6 +6,8 @@ use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\ngrest\base\Plugin;
 use luya\rest\ActiveController;
+use luya\helpers\ArrayHelper;
+use luya\admin\helpers\I18n;
 
 /**
  * Checkbox Selector via relation table.
@@ -87,8 +89,8 @@ class CheckboxRelation extends Plugin
      * @var array A list of fields which should be used for the display template. Can also be a callable function to build the field with the template
      *
      * ```php
-     * 'labelFields' => function($model) {
-     *     return $model->firstname . ' ' . $model->lastname;
+     * 'labelFields' => function($array) {
+     *     return $array['firstname'] . ' ' . $array['lastname'];
      * }
      * ```
      */
@@ -185,30 +187,37 @@ class CheckboxRelation extends Plugin
      *
      * @return array
      */
-    private function getOptionsData()
+    private function getOptionsData($event)
     {
         $items = [];
-    
-        foreach ($this->model->find()->all() as $item) {
+        
+        foreach ($this->model->find()->asArray(true)->all() as $item) {
             if (is_callable($this->labelFields, false)) {
                 $label = call_user_func($this->labelFields, $item);
             } else {
-                $array = $item->getAttributes($this->labelFields);
+                $array = ArrayHelper::filter($item, $this->labelFields);
+                
+                foreach ($array as $key => $value) {
+                    if ($event->sender->isI18n($key)) {
+                        $array[$key] = I18n::decodeActive($value);
+                    }
+                }
+                
                 $label = $this->labelTemplate ? vsprintf($this->labelTemplate, $array) : implode(', ', $array);
             }
-    
-            $items[] = ['value' => $item[$this->modelPrimaryKey], 'label' => $label];
+        
+            $items[] = ['value' => (int) $item[$this->modelPrimaryKey], 'label' => $label];
         }
-    
+        
         return ['items' => $items];
     }
     
     /**
      * @inheritdoc
      */
-    public function serviceData()
+    public function serviceData($event)
     {
-        return ['relationdata' => $this->getOptionsData()];
+        return ['relationdata' => $this->getOptionsData($event)];
     }
 
     /**
@@ -217,18 +226,14 @@ class CheckboxRelation extends Plugin
     public function onBeforeExpandFind($event)
     {
         $data = [];
-        foreach ($this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->each() as $item) {
-            $data[] = ['value' => $item->getAttribute($this->getModelPrimaryKey())];
+        foreach ($this->model->find()
+            ->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)
+            ->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])
+            ->asArray(true)
+            ->each() as $item) {
+            $data[] = ['value' => $item[$this->getModelPrimaryKey()]];
         }
         $event->sender->{$this->name} = $data;
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function onBeforeListFind($event)
-    {
-        $event->sender->{$this->name} = $this->getRelationData($event);
     }
     
     /**

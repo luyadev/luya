@@ -52,7 +52,7 @@ public function init()
 
 The following conventions are used when contributing to the LUYA project.
 
-#### PHP 
+### PHP 
 
 PSR2 Naming convention
 
@@ -88,7 +88,7 @@ class Foo extends Bar implements FooInterface
 }
 ```
 
-#### SQL
+### SQL
 
 SQL Datbase Table and Field namings:
 
@@ -115,15 +115,15 @@ field name examples
 + password_salt
 + group_id
 
-#### CSS
+### CSS
 
 http://cssguidelin.es/
 
-#### JS
+### JS
 
 https://github.com/airbnb/javascript
 
-#### JSON-SCHEMA:
+### JSON-SCHEMA:
 
 http://json-schema.org/latest/json-schema-core.html
 
@@ -132,31 +132,17 @@ http://json-schema.org/latest/json-schema-core.html
 
 The css and html files for the admin module are based on the following rules.
 
-#### Admin Design compile
+### Admin Design compile
 
-To compile the styles you have to install the following tools and plugins:
+To compile css and js to one file we use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow).  
+To install gulp and the dependencies on your System [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).
 
-(If ruby is not installed, run `sudo apt-get install ruby` on linux systems)
+Everything will be compiled to a folder `dist/` in the corresponding `{module}/resources` folder.
 
-+ [Compass](http://compass-style.org/install/) (gem install compass) (Linux: `sudo apt-get install ruby-compass`)
-+ [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails) (Linux: `sudo apt-get install ruby-autoprefixer-rails`)
+> **Important:** The JS files and their order are all defined in the `compileConfig.js`. If you add a new JS file, make sure to add it in the config as well.
 
-> If you have not enough rights to run the command use *sudo* to run the commands, or change the permissions in the install directory of ruby.
+**Module: admin**  
+Run `gulp` in the following directory: `modules/admin/src/resources`.
 
-
-If you have installed the tools successfull, you can now switch to the `resources` folder and run:
-
-```sh
-compass watch
-```
-
-or
-
-```sh
-compass compile
-```
-
-+ compile: will compile all styles once
-+ watch: watching for changes in the file and runs compile automatic
-
-Each module does have its own compass configratuons `config.rb`, so you have to run this process in each sub folder for the specific module.
+**Module: cmsadmin**  
+Run `gulp` in the following directory: `modules/cms/src/admin/resources`.

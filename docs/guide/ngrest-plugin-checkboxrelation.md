@@ -45,11 +45,12 @@ class User extends \luya\admin\ngrest\base\NgRestModel
         ];
     }
 
-    public function ngRestConfig($config)
+    public function ngRestScopes($config)
     {
-        // ...
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['groups']);
-        // ...
+        return [
+             // ...
+             [['create', 'update'], ['groups']],
+        ];
     }
 }
 ```

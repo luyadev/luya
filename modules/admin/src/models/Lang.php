@@ -105,7 +105,7 @@ final class Lang extends NgRestModel
         return [
             'name' => 'text',
             'short_code' => 'text',
-            'is_default' => ['toggleStatus', 'initValue' => 0],
+            'is_default' => ['toggleStatus', 'initValue' => 0, 'interactive' => false],
         ];
     }
     

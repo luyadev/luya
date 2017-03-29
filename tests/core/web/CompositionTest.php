@@ -199,19 +199,4 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         
         $this->assertEquals('this-should/be-left', $comp->removeFrom('en/this-should/be-left'));
     }
-    
-    public function testLocalisation()
-    {
-        $request = new Request();
-        $comp = new Composition($request);
-        
-        // default
-        $this->assertEquals('en_EN', $comp->getLocale());
-        
-        $comp->locales = ['de' => 'de_CH.utf'];
-        
-        $comp->setKey('langShortCode', 'de');
-        
-        $this->assertEquals('de_CH.utf', $comp->getLocale());
-    }
 }

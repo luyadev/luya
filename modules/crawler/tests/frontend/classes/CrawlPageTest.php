@@ -93,4 +93,11 @@ class CrawlPageTest extends \PHPUnit_Framework_TestCase
         
         $this->assertSame('Title', $this->object->getTitleTag());
     }
+
+    public function testHtmlEncoding()
+    {
+        $this->object->setCrawler(new Crawler(file_get_contents('tests/data/htmlencode.html')));
+        
+        $this->assertSame('&Ouml;ffnungszeiten &ouml;ffnungszeiten &Ouml;ffnungszeiten &ouml;ffnungszeiten', $this->object->getContent());
+    }
 }

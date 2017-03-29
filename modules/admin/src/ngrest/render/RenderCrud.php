@@ -59,13 +59,17 @@ class RenderCrud extends Render implements RenderInterface
             'canDelete' => $this->can(Auth::CAN_DELETE),
             //'crud' => $this,
             'config' => $this->config,
-            'activeWindowCallbackUrl' => 'admin/ngrest/callback',
+            'activeWindowRenderUrl' => $this->getRestUrl('active-window-render'),
+            'activeWindowCallbackUrl' => $this->getRestUrl('active-window-callback'),
         ), $this);
     }
 
-    public function getRestUrl()
+    public function getRestUrl($append = null)
     {
-        return 'admin/'.$this->config->apiEndpoint;
+        if ($append) {
+            $append = '/' . ltrim($append, '/');
+        }
+        return 'admin/'.$this->config->apiEndpoint . $append;
     }
     
     public function getPrimaryKey()

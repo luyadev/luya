@@ -4,6 +4,7 @@ namespace crawlerests\models;
 
 use luya\crawler\models\Index;
 use crawlerests\CrawlerTestCase;
+use crawlerests\data\fixtures\IndexFixture;
 
 class StubIndex extends Index
 {
@@ -31,5 +32,115 @@ class IndexTest extends CrawlerTestCase
         $this->assertSame('Hello <span style=\'background-color:#FFEBD1; color:black;\'>foobar</span> Hello', $model->highlight('foobar', 'Hello foobar Hello'));
         $this->assertSame('Hello <span style=\'background-color:#FFEBD1; color:black;\'>foobar</span> Hello', $model->highlight('foobar', 'Hello FOOBAR Hello'));
         $this->assertSame('Hello <span style=\'background-color:#FFEBD1; color:black;\'>FOOBar</span> Hello', $model->highlight('FOOBar', 'Hello foobar Hello'));
+    }
+    
+    public function testFlatSearchByQuery()
+    {
+        $fixture = new IndexFixture();
+        $fixture->load();
+        
+        $test = Index::flatSearchByQuery('aaa', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+        
+        $test = Index::flatSearchByQuery('AAA', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+        
+        $test = Index::flatSearchByQuery('bbb', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+        
+        $test = Index::flatSearchByQuery('ccc', 'en');
+        $this->assertSame('aaa', $test[0]->title);
+        
+    }
+    
+    public function testsearchByQuery()
+    {
+        $fixture = new IndexFixture();
+        $fixture->load();
+    
+        $test1 = Index::searchByQuery('aaa', 'en');
+        $this->assertSame('aaa', $test1[0]->title);
+        $test1 = Index::searchByQuery('AAA', 'en');
+        $this->assertSame('aaa', $test1[0]->title);
+    
+        $test2 = Index::searchByQuery('bbb', 'en');
+        $this->assertSame('aaa', $test2[0]->title);
+    
+        $test3 = Index::searchByQuery('ccc', 'en');
+        $this->assertSame('aaa', $test3[0]->title);
+    }
+    
+    public function testEnhancedSearchByQuery()
+    {
+        $fixture = new IndexFixture();
+        $fixture->load();
+        
+        $test1 = Index::searchByQuery('drink bug', 'en');
+        $this->assertSame('index2', $test1[0]->title);
+        
+        $test1 = Index::searchByQuery('Drink BUG', 'en');
+        $this->assertSame('index2', $test1[0]->title);
+        
+        $test2 = Index::searchByQuery('drinking finding', 'en');
+        $this->assertSame('index3', $test2[0]->title);
+        
+        // test4
+        $test3 = Index::searchByQuery('two words', 'en');
+        $this->assertSame('index4', $test3[0]->title);
+        
+        $test4 = Index::searchByQuery('words two', 'en');
+        $this->assertSame('index4', $test4[0]->title);
+        
+        $test5 = Index::searchByQuery('words two', 'en');
+        $this->assertSame('index4', $test5[0]->title);
+        
+        $test6 = Index::searchByQuery('words two three', 'en');
+        $this->assertEmpty($test6);
+    }
+    
+    public function testEmptySearchs()
+    {
+        $fixture = new IndexFixture();
+        $fixture->load();
+        
+        $test1 = Index::searchByQuery('1', 'en');
+        $this->assertEmpty($test1);
+        $test2 = Index::flatSearchByQuery('1', 'en');
+        $this->assertEmpty($test2);
+    }
+    
+    public function testSortByUrl()
+    {
+        $test1 = Index::searchByQuery('item', 'en');
+        
+        $this->assertSame(3, count($test1));
+        
+        $this->assertSame('index5/item', $test1[0]->url);
+        $this->assertSame('index6/else/item', $test1[1]->url);
+        $this->assertSame('index7.php', $test1[2]->url);
+        
+    }
+    
+    public function testSameSortByUrl()
+    {
+        $test1 = Index::searchByQuery('index', 'en');
+    
+        $this->assertSame(6, count($test1));
+    
+        $this->assertSame('index5/item', $test1[0]->url);
+        $this->assertSame('index6/else/item', $test1[1]->url);
+        $this->assertSame('index7.php', $test1[2]->url);
+    }
+
+    public function testHtmlEncodingQuery()
+    {
+        $this->assertSame('&Ouml;ff', Index::encodeQuery('Öff'));
+        
+        $this->assertSame(1, (int) Index::activeQuerySearch('öff', 'de')->count());
+        $this->assertSame(1, (int) Index::activeQuerySearch('Öff', 'de')->count());
+        
+        $this->assertSame('offnungszeiten', Index::searchByQuery('öff', 'de')[0]->title);
+        $this->assertSame('offnungszeiten', Index::searchByQuery('Öff', 'de')[0]->title);
+        
     }
 }

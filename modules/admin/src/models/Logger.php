@@ -6,8 +6,8 @@ use Yii;
 use yii\helpers\Json;
 use yii\base\Arrayable;
 use luya\admin\ngrest\base\NgRestModel;
-use luya\admin\aws\InfoActiveWindow;
 use luya\admin\Module;
+use luya\admin\aws\DetailViewActiveWindow;
 
 /**
  * Logger to store information when working in controllers and actions.
@@ -168,7 +168,7 @@ final class Logger extends NgRestModel
     public function ngRestConfig($config)
     {
         $config->aw->load([
-            'class' => InfoActiveWindow::className(),
+            'class' => DetailViewActiveWindow::className(),
             'attributes' => [
                 'id',
                 'time:datetime',
@@ -296,6 +296,7 @@ final class Logger extends NgRestModel
             'server' => Module::t('model_logger_server'),
             'group_identifier' => Module::t('model_logger_group_identifier'),
             'group_identifier_index' => Module::t('model_logger_group_identifier_index'),
+            'typeBadge' => Module::t('model_logger_badgetype'),
         ];
     }
     

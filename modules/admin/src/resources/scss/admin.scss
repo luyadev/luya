@@ -1,4 +1,10 @@
 /**
+/* Materialize font
+*/
+
+$roboto-font-path: "../../fonts/roboto/";
+
+/**
  * Materialize CSS
  * http://materializecss.com/
  */
@@ -42,12 +48,12 @@
 @import 'components/btn';
 @import 'components/button-right';
 @import 'components/checkbox-column-fix';
+@import 'components/chosen';
 @import 'components/crud';
 @import 'components/crud-loader-tag';
 @import 'components/editlog';
 @import 'components/filearray';
 @import 'components/filemanager';
-@import 'components/fileupload';
 @import 'components/flag';
 @import 'components/floating-form';
 @import 'components/flow';
@@ -62,6 +68,7 @@
 @import 'components/imageupload';
 @import 'components/input';
 @import 'components/iconbar';
+@import 'components/link-selector';
 @import 'components/list';
 @import 'components/loading-bar';
 @import 'components/loading-indicator';
@@ -80,6 +87,7 @@
 @import 'components/switch';
 @import 'components/table';
 @import 'components/toolbar';
+@import 'components/tooltip';
 @import 'components/useronline';
 @import 'components/waves';
 @import 'components/langswitch';

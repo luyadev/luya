@@ -10,6 +10,8 @@ use luya\cms\models\Nav;
 use luya\web\LinkInterface;
 use luya\web\LinkTrait;
 use luya\helpers\Url;
+use yii\base\Arrayable;
+use yii\base\ArrayableTrait;
 
 /**
  * Menu item Object.
@@ -46,15 +48,19 @@ use luya\helpers\Url;
  * @property boolean $isHome Returns true if the item is the home item, otherwise false.
  * @property string $absoluteLink The link path with prepand website host `http://luya.io/home/about-us`.
  * @property integer $sortIndex Sort index position for the current siblings list.
+ * @property boolean $hasChildren Check whether an item has childrens or not returning a boolean value.
+ * @property boolean $hasParent Check whether the parent has items or not.
+ * @property string $seoTitle Returns the Alternative SEO-Title. If entry is empty, the $title will returned instead.
  * @property \luya\cms\menu\Item|boolean $nextSibling Returns the next sibling based on the current sibling, if not found false is returned.
  * @property \luya\cms\menu\Item|boolean $prevSibling Returns the previous sibling based on the current sibling, if not found false is returned.
  * @property \luya\cms\models\Nav|boolean $model Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
+ *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta1
+ * @since 1.0.0
  */
-class Item extends Object implements LinkInterface
+class Item extends Object implements LinkInterface, Arrayable
 {
-    use LinkTrait;
+    use LinkTrait, ArrayableTrait;
     
     /**
      * @var array The item property containing the informations with key  value parinings. This property will be assigned when creating the
@@ -73,6 +79,14 @@ class Item extends Object implements LinkInterface
      */
     private $_with = [];
 
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        return ['href', 'target'];
+    }
+    
     /**
      * @inheritdoc
      */
@@ -217,6 +231,18 @@ class Item extends Object implements LinkInterface
     }
     
     /**
+     * Returns the Alternative SEO-Title.
+     *
+     * If no SEO-Title is given, the page title from {{luya\cms\menu\Item::getTitle}} will be returned instead.
+     *
+     * @return string Return the SEO-Title, if empty the {{luya\cms\menu\Item::getTitle}} will be returned instead.
+     */
+    public function getSeoTitle()
+    {
+        return empty($this->itemArray['title_tag']) ? $this->title : $this->itemArray['title_tag'];
+    }
+    
+    /**
      * Return the current nav item type by number.
      *
      * + 1 = Page with blocks
@@ -235,7 +261,6 @@ class Item extends Object implements LinkInterface
      * this information.
      *
      * @return boolean|string The name of the module or false if not found or wrong type
-     * @since 1.0.0-beta5
      */
     public function getModuleName()
     {
@@ -262,7 +287,6 @@ class Item extends Object implements LinkInterface
     
     /**
      * @return array An array with all keywords for this page
-     * @since 1.0.0-beta6
      */
     public function getKeywords()
     {
@@ -386,7 +410,7 @@ class Item extends Object implements LinkInterface
      */
     public function getAbsoluteLink()
     {
-        return Url::base(true) . $this->getLink();
+        return Yii::$app->request->hostInfo . $this->getLink();
     }
 
     /**
@@ -410,28 +434,15 @@ class Item extends Object implements LinkInterface
     {
         return $this->itemArray['depth'];
     }
-
-    private $_parent = null;
     
     /**
-     * Getter method wrapper for `hasParent()`
+     * Check whether the parent has items or not.
      *
      * @return boolean
-     * @since 1.0.0-beta6
      */
     public function getHasParent()
     {
-        return $this->hasParent();
-    }
-    
-    /**
-     * Check whether parent element exists or not
-     *
-     * @return boolean
-     */
-    public function hasParent()
-    {
-        return ($this->getParent()) ? true : false;
+        return count($this->getParent()) > 0 ? true : false;
     }
     
     /**
@@ -441,11 +452,7 @@ class Item extends Object implements LinkInterface
      */
     public function getParent()
     {
-        if ($this->_parent === null) {
-            $this->_parent = (new Query())->where(['nav_id' => $this->parentNavId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->one();
-        }
-        
-        return $this->_parent;
+        return (new Query())->where(['nav_id' => $this->parentNavId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->one();
     }
 
     /**
@@ -469,7 +476,6 @@ class Item extends Object implements LinkInterface
      * Get all sibilings for the current item, this also includes the current item iteself.
      *
      * @return array An array with all item-object siblings
-     * @since 1.0.0-beta3
      */
     public function getSiblings()
     {
@@ -492,6 +498,7 @@ class Item extends Object implements LinkInterface
      * Get the previous sibling in the current siblings list.
      *
      * If there is no previous sibling (assuming its the first sibling item in the list) false is returned, otherwise the {{luya\cms\menu\Item}} is returned.
+     *
      * @return \luya\cms\menu\Item|boolean Returns the previous sibling based on the current sibling, if not found false is returned.
      */
     public function getPrevSibling()
@@ -516,8 +523,6 @@ class Item extends Object implements LinkInterface
 
         return array_reverse($data, true);
     }
-
-    private $_children = null;
     
     /**
      * Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
@@ -526,31 +531,17 @@ class Item extends Object implements LinkInterface
      */
     public function getChildren()
     {
-        if ($this->_children === null) {
-            $this->_children = (new Query())->where(['parent_nav_id' => $this->navId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
-        }
-        
-        return $this->_children;
+        return (new Query())->where(['parent_nav_id' => $this->navId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
     }
     
-    /**
-     * Getter method wrapper for `hasChildren()`
-     *
-     * @return boolean
-     */
-    public function getHasChildren()
-    {
-        return $this->hasChildren();
-    }
-
     /**
      * Check whether an item has childrens or not returning a boolean value.
      *
      * @return bool If there are childrens the method returns true, otherwhise false.
      */
-    public function hasChildren()
+    public function getHasChildren()
     {
-        return (count($this->getChildren()) > 0) ? true : false;
+        return count($this->getChildren()) > 0 ? true : false;
     }
     
     private $_model = null;
@@ -580,7 +571,6 @@ class Item extends Object implements LinkInterface
      * property by calling your custom method or the default `getValue()` method.
      *
      * @param string $varName The variable name of the property defined inside of the property of the method `varName()`.
-     * @since 1.0.0-beta8
      */
     public function getProperty($varName)
     {
@@ -599,7 +589,7 @@ class Item extends Object implements LinkInterface
      * Example use of with in subquery of the current item:
      *
      * ```php
-     * if ($item->with(['hidden'])->hasChildren()) {
+     * if ($item->with(['hidden'])->hasChildren) {
      *     print_r($item->getChildren());
      * }
      * ```
