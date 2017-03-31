@@ -11,6 +11,7 @@ This document will help you upgrading from a LUYA Version into another. For more
 + [#1177](https://github.com/luyadev/luya/issues/1177) The elements.php for the luya\web\Elements component does new look for the elements.php inside the @app/views folder instead of @app.
 + [#1109](https://github.com/luyadev/luya/issues/1109) All blocks deliverd from the LUYA core modules are marked as `final` so you are not able to extend from those blocks. Make sure you extend from the `luya\cms\base\Block` class.
 + [#1244](https://github.com/luyadev/luya/issues/1244) When using the crawler module, the output of the controller changed to an ActiveDataProvider object instead of an array with results, see the crawler module readme.
++ The ngRest CheckboxRelation plugin dropped the support for ActiveRecord object getters inside the labelTemplates, use the closure function inside the labelFields propertie instead. 
 
 As we merged migrations files from older beta releases, you can find all delete files in the following [commit](https://github.com/luyadev/luya/commit/78f5304054be95ad317a80455587d8a4e0a0b9a8#diff-ecf9849552b303be6db5a3bd40029037).
 
