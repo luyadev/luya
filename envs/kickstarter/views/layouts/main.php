@@ -9,6 +9,7 @@ ResourcesAsset::register($this);
 
 $this->beginPage();
 ?>
+<!DOCTYPE html>
 <html lang="<?= Yii::$app->composition->language; ?>">
     <head>
         <meta charset="UTF-8" />
