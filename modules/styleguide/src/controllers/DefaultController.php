@@ -3,13 +3,12 @@
 namespace luya\styleguide\controllers;
 
 use Yii;
+use yii\helpers\Html;
 
 /**
- * @see http://stackoverflow.com/questions/19198804/deducing-php-closure-parameters
+ * Display the Styleguide Elements.
  *
- * $closure    = &$func;
- * $reflection = new ReflectionFunction($closure);
- * $arguments  = $reflection->getParameters();
+ * @author Basil Suter <basil@nadar.io>
  */
 class DefaultController extends \luya\web\Controller
 {
@@ -25,20 +24,37 @@ class DefaultController extends \luya\web\Controller
         foreach (Yii::$app->element->getElements() as $name => $closure) {
             $reflection = new \ReflectionFunction($closure);
             $args = $reflection->getParameters();
+            
             $params = [];
+            $writtenParams = [];
             foreach ($args as $k => $v) {
-                $params[] = '$'.$v->name;
+                $writtenParams[] = '$'.$v->name;
+                $mock = Yii::$app->element->getMockedArgValue($name, $v->name);
+                if ($mock !== false) {
+                    $params[] = $mock;
+                } else {
+                    if ($v->isArray()) {
+                        $params[] = ['$'.$v->name];
+                    } else {
+                        $params[] = '$'.$v->name;
+                    }
+                }
             }
-
+            
             $containers[] = [
                 'name' => $name,
-                'args' => $params,
-                'html' => Yii::$app->element->run($name, $params),
+                'tag' => Html::tag('div', Yii::$app->element->getElement($name, $params), $this->module->divOptions),
+                'args' => $writtenParams,
             ];
+        }
+        
+        foreach ($this->module->assetFiles as $class) {
+            $this->registerAsset($class);
         }
 
         return $this->render('index', [
             'containers' => $containers,
+            'global' => Html::tag('div', $this->renderPartial('_global'), $this->module->divOptions),
         ]);
     }
 
@@ -55,7 +71,9 @@ class DefaultController extends \luya\web\Controller
             $e = true;
         }
 
-        return $this->render('login', ['e' => $e]);
+        return $this->render('login', [
+            'e' => $e
+        ]);
     }
 
     private function hasAccess()

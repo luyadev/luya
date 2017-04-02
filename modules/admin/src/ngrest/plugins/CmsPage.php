@@ -8,7 +8,7 @@ use luya\admin\ngrest\base\Plugin;
 /**
  * Create ability to select a CMS page.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class CmsPage extends Plugin
 {
@@ -30,7 +30,7 @@ class CmsPage extends Plugin
     public function onAfterFind($event)
     {
         $fieldValue = $event->sender->getAttribute($this->name);
-        $menuItem = (!empty($fieldValue)) ? Yii::$app->menu->find()->where(['nav_id' => $fieldValue])->with(['hidden'])->one() : $fieldValue;
+        $menuItem = (!empty($fieldValue)) ? Yii::$app->menu->find()->where(['nav_id' => $fieldValue])->with(['hidden'])->one() : false;
         $event->sender->setAttribute($this->name, $menuItem);
     }
 }

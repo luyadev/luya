@@ -16,7 +16,7 @@ namespace luya\crawler\frontend;
  *
  * @link https://github.com/FriendsOfPHP/Goutte
  * @link http://api.symfony.com/2.7/Symfony/Component/DomCrawler.html
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module
 {
@@ -69,10 +69,19 @@ class Module extends \luya\base\Module
      * @var boolean By default the title tag will be used for the page name, if `$useH1` is enabled the title for the page will be replaced by the h1 tag if found, oterwise
      * only the title tag is used for titles.
      */
-    public $useH1 = true;
+    public $useH1 = false;
     
     /**
      * @var array E-Mail-Adresses array with recipients for the statistic command
      */
     public $statisticRecipients = [];
+    
+    public $searchResultPageSize = 25;
+    
+    /**
+     * @inheritdoc
+     */
+    public $urlRules = [
+        ['pattern' => 'crawler', 'route' => 'crawler/default'],
+    ];
 }

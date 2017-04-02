@@ -3,7 +3,6 @@
 namespace luya\admin\ngrest\plugins;
 
 use luya\admin\ngrest\base\Plugin;
-use yii\helpers\Json;
 use luya\helpers\ArrayHelper;
 use luya\helpers\StringHelper;
 
@@ -12,14 +11,18 @@ use luya\helpers\StringHelper;
  *
  * Example usage:
  *
- * ```
- * public function ngrestAttributeTypes()
+ * ```php
+ * public function ngRestAttributeTypes()
  * {
- * 		'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
+ *     return [
+ *         'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
+ *     ];
  * }
- *
- * @todo testing and complete find and save events.
- * @author nadar
+ * ```
+ * 
+ * The plugin stores the value of the selected checkbox items as json into the database.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class CheckboxList extends Plugin
 {
@@ -27,16 +30,25 @@ class CheckboxList extends Plugin
     
     public $i18nEmptyValue = [];
     
+    /**
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('checkboxitems')]);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
@@ -53,22 +65,47 @@ class CheckboxList extends Plugin
         return ['items' => ArrayHelper::typeCast($data)];
     }
     
-    public function serviceData()
+    /**
+     * @inheritdoc
+     */
+    public function serviceData($event)
     {
         return ['checkboxitems' => $this->getItems()];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeSave($event)
     {
         // if its not i18n casted field we have to serialize the the file array as json and abort further event excution.
         if (!$this->i18n) {
-            $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
+            // as it could be an assigned array from the frontend model assigne via a form, we verify if the array contains a value key.
+            $value = $event->sender->getAttribute($this->name);
+            
+            $data = [];
+            if (is_array($value)) {
+                foreach ($value as $key => $row) {
+                    if (!is_array($row)) {
+                        $data[] = ['value' => $row];
+                    } else {
+                        $data[] = $row;
+                    }
+                }
+            } else {
+                $data = $value;
+            }
+            
+            $event->sender->setAttribute($this->name, $this->i18nFieldEncode($data));
             return false;
         }
     
         return true;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeExpandFind($event)
     {
         if (!$this->i18n) {
@@ -79,16 +116,23 @@ class CheckboxList extends Plugin
         return true;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeFind($event)
     {
         if (!$this->i18n) {
-            $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
+            $array = $this->jsonDecode($event->sender->getAttribute($this->name));
+            $event->sender->setAttribute($this->name, ArrayHelper::getColumn($array, 'value'));
             return false;
         }
         
         return true;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onAfterListFind($event)
     {
         $value = $event->sender->getAttribute($this->name);

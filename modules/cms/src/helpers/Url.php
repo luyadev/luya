@@ -3,7 +3,7 @@
 namespace luya\cms\helpers;
 
 use Yii;
-use luya\Exception;
+use luya\cms\Exception;
 
 /**
  * CMS Url Helper class extends luya\helpers\Url by CMS routing methods.
@@ -13,6 +13,7 @@ use luya\Exception;
  * your project application.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Url extends \luya\helpers\Url
 {
@@ -81,7 +82,7 @@ class Url extends \luya\helpers\Url
     /**
      * create an url based on a context nav item informaiton inside the urlManager.
      *
-     * @param int $navItemId The menu item Id where the url should be created from
+     * @param integer $navItemId The menu item Id where the url should be created from
      * @param string|array $route Can be a string `module/controller/action` or an array like in the Yii Url helpers::to methods `['/module/controller/action', 'param' => 'bar]`.
      * @param array $params An array with params which are going to be attached to the route.
      *

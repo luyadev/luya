@@ -12,6 +12,22 @@ function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
+/**
+ * i18n localisation with params.
+ *
+ * ```js
+ * i18nParam('js_i18n_translation_name', {variable: value});
+ * ```
+ *
+ * Translations File:
+ *
+ * ```php
+ * 'js_i18n_translation_name' => 'Hello %variable%',
+ * ```
+ * @param varName
+ * @param params
+ * @returns
+ */
 function i18nParam(varName, params) {
 	var varValue = i18n[varName];
 
@@ -37,10 +53,12 @@ function typeCastValue(value) {
 (function() {
 	"use strict";
 
-	zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
+	zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, $urlMatcherFactoryProvider) {
 		$httpProvider.interceptors.push("authInterceptor");
 
 		zaa.bootstrap = $controllerProvider;
+
+		$urlMatcherFactoryProvider.strictMode(false)
 
 		$stateProvider
 			.state("default", {
@@ -62,8 +80,7 @@ function typeCastValue(value) {
 			.state("custom", {
 				url: "/template/:templateId",
 				templateUrl: function($stateParams) {
-					var res = $stateParams.templateId.split("-");
-					return res[0] + "/" + res[1] + "/" + res[2];
+					return $stateParams.templateId;
 				},
 				resolve : {
 					adminServiceResolver: adminServiceResolver,
@@ -130,7 +147,9 @@ function typeCastValue(value) {
 	/**
 	 * Usage:
 	 *
+	 * ```
 	 * <div zaa-esc="methodClosesThisDiv()" />
+	 * ```
 	 */
 	zaa.directive("zaaEsc", function() {
 		return function(scope, element, attrs) {
@@ -143,6 +162,207 @@ function typeCastValue(value) {
 			});
 		};
 	});
+	
+	zaa.directive("linkObjectToString", function() {
+		return {
+			restrict: 'E',
+			relace:true,
+			scope: {
+				'link' : '='
+			},
+			template: function() {
+				return '<span>'+
+				'<span ng-if="link.type==2">Extern: {{link.value}}</span>' +
+				'<span ng-if="link.type==1"><show-internal-redirection nav-id="link.value" /></span>' +
+				'</span>';
+			}
+		}
+	});
+	
+	/**
+	 * Generate a Tool Tip Overlay, usager:
+	 * 
+	 * ```
+	 * <span tooltip tooltip-text="'Hey Ich habe hier eine Message'">Something Else</span>
+	 * ```
+	 */
+	zaa.directive("tooltip", function() {
+		return {
+			restrict: 'A',
+			scope: {
+				'tooltipText' : '=',
+				'tooltipOffsetTop': '=',
+                'tooltipOffsetLeft': '='
+			},
+			link:function(scope, element, attr) {
+				var html = '<div class="tooltip">' + scope.tooltipText + '</div>';
+				var pop = $(html);
+                element.after(pop);
+				pop.hide();
+
+                element.on('mouseenter', function() {
+                	var offset = {
+                        top: this.getBoundingClientRect().top + this.offsetHeight,
+                        left: this.getBoundingClientRect().left
+					};
+
+                	if(typeof scope.tooltipOffsetTop == 'number') {
+                		offset.top = offset.top + scope.tooltipOffsetTop;
+					}
+
+                    if(typeof scope.tooltipOffsetLeft == 'number') {
+                        offset.left = offset.left + scope.tooltipOffsetLeft;
+                    }
+
+                    pop.css(offset);
+
+					pop.show();
+				});
+
+                element.on('mouseleave', function() {
+					pop.hide();
+				});
+
+			}
+		}
+	})
+
+	/**
+	 * Convert a string to number value, usefull in selects.
+	 *
+	 * ```
+	 * <select name="filterId" ng-model="filterId" convert-to-number>
+	 * ```
+	 */
+	zaa.directive('convertToNumber', function() {
+		return {
+		    require: 'ngModel',
+		    link: function(scope, element, attrs, ngModel) {
+				ngModel.$parsers.push(function(val) {
+				    return val != null ? parseInt(val, 10) : null;
+				});
+				ngModel.$formatters.push(function(val) {
+				    return val != null ? '' + val : null;
+				});
+		    }
+		};
+	});
+
+    /**
+	 * Directive to trigger fixed table head
+     */
+    zaa.directive("fixedTableHead", function ($window) {
+        return function(scope, element, attrs) {
+            var initialized = false,
+                theadFixed = false,
+                table = null,
+                thead = null,
+                theadOffset = 0,
+                theadWidth = 0,
+                theadElementsWidth = [],
+                theadClone = null;
+
+            /**
+             * This function updates the thead and th widths
+             * It also sets the thead to fixed or reverses it's changes based on the scroll position
+             */
+            var update = function() {
+                /* Update the width and th widths */
+                theadWidth = theadClone.width();
+                theadElementsWidth = [];
+                theadClone.find('th').each( function() {
+                    theadElementsWidth.push(angular.element(this).width());
+                });
+
+                theadOffset = (element.scrollTop() + table.offset().top) - element.offset().top;
+
+
+                if(element.scrollTop() > theadOffset) {
+
+                    /* Show the clone to prevent the table from jumping */
+                    theadClone.show();
+
+                    /* Set the th widths */
+                    thead.find('th').each( function(index) {
+                        angular.element(this).width(theadElementsWidth[index]);
+                    });
+
+                    /* Add the required styles to the thead */
+                    thead.css({
+                        width: theadWidth + 'px',
+                        position: 'fixed',
+                        backgroundColor: '#fff',
+                        zIndex: 300,
+                        top: element.offset().top
+                    });
+
+                    theadFixed = true;
+                } else if(theadFixed) {
+                    /* Hide the clone */
+                    theadClone.hide();
+
+                    /* Reset the css changes to default */
+                    thead.css({
+                        width: 'auto',
+                        position: 'relative',
+                        top: 0
+                    });
+                    thead.find('th').each( function() {
+                        angular.element(this).width("auto");
+                    });
+
+                    theadFixed = false;
+                }
+            };
+
+            /**
+             * Update the widths if the window gets resized
+             */
+            var onResize = function() {
+                if(theadFixed) {
+                    theadWidth = theadClone.width();
+
+                    theadElementsWidth = [];
+                    theadClone.find('th').each( function() {
+                        theadElementsWidth.push(angular.element(this).width());
+                    });
+
+                    if (thead.length > 0) {
+                        update();
+                    }
+                }
+            };
+
+            /**
+             * Initialize the plugin on scroll (table contents getting loaded by ajax and table
+             * does not exist on load of the directive)
+             */
+            var onScroll = function () {
+                if (!initialized) {
+                    table = angular.element(element.find('table'));
+                    thead = angular.element(table.find('thead'));
+
+                    if (thead.length > 0) {
+                        theadClone = angular.element(table.find('thead')).clone();
+
+                        theadClone.css('visibility', "hidden").insertAfter(thead).hide();
+
+                        initialized = true;
+                    } else {
+                        angular.element($window).off('resize');
+                        angular.element(element).off('scroll');
+                    }
+                }
+
+                if (thead.length > 0) {
+                    update();
+                }
+            };
+
+            angular.element($window).bind('resize', function() {onResize();});
+            angular.element(element).bind("scroll", function() {onScroll();});
+        };
+    });
 
 	/**
 	 * Apply auto generated height for textareas based on input values
@@ -283,6 +503,8 @@ function typeCastValue(value) {
  	         }
  	     };
 	 });
+	
+	
 
 	zaa.directive("focusMe", function($timeout) {
 		return {
@@ -369,7 +591,7 @@ function typeCastValue(value) {
 		var service = [];
 
 		service.reload = function() {
-			$http.get("admin/api-admin-common/cache").success(function(response) {
+			$http.get("admin/api-admin-common/cache").then(function(response) {
 				$window.location.reload();
 			});
 		}
@@ -509,41 +731,3 @@ function typeCastValue(value) {
 
 
 })();
-
-// jquery helpers
-
-/* non angular activeWindow send - testing purpose */
-var activeWindowRegisterForm = function(form, callback, cb) {
-	$(form).submit(function(event) {
-	  event.preventDefault();
-      var activeWindowHash = $("[ng-controller=\""+ngrestConfigHash+"\"]").scope().data.aw.id;
-	  $.ajax({
-		  url: activeWindowCallbackUrl + "?activeWindowCallback=" + callback + "&ngrestConfigHash=" + ngrestConfigHash + "&activeWindowHash=" + activeWindowHash,
-		  data: $(form).serialize(),
-		  type: "POST",
-		  dataType: "json",
-		  success: function(transport) {
-			  cb.call(this, transport);
-		  },
-		  error: function(transport) {
-			  alert("we have an async error");
-		  }
-		});
-	});
-}
-
-var activeWindowAsyncGet = function(callback, params, cb) {
-	var activeWindowHash = $("[ng-controller=\""+ngrestConfigHash+"\"]").scope().data.activeWindow.id;
-	$.ajax({
-		url: activeWindowCallbackUrl + "?activeWindowCallback=" + callback + "&ngrestConfigHash=" + ngrestConfigHash + "&activeWindowHash=" + activeWindowHash,
-		data: params,
-		type: "GET",
-		dataType: "json",
-		success: function(transport) {
-			  cb.call(this, transport);
-		  },
-		  error: function(transport) {
-			  alert("we have an async error");
-		  }
-	});
-};

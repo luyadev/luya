@@ -8,17 +8,23 @@ use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
 use luya\console\interfaces\ImportControllerInterface;
 use yii\base\InvalidParamException;
+use yii\base\InvalidConfigException;
 
 /**
- * Base Module class for all LUYA Modules.
+ * LUYA Module base class.
+ *
+ * The module class provides url rule defintions and other helper methods.
+ *
+ * In order to use a module within the CMS context it must extend from this base module class.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Module extends \yii\base\Module
 {
     /**
      * @var array Contains the apis for each module to provided them in the admin module. They represents
-     *            the name of the api and the value represents the class. Example value:
+     * the name of the api and the value represents the class. Example value:
      *
      * ```php
      * [
@@ -44,14 +50,28 @@ abstract class Module extends \yii\base\Module
     public $tags = [];
     
     /**
-     * @var array Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route
-     *            must be array containing class name or array with pattern, route informations.
+     * @var array Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}}
+     * object configuration as array like this:
+     *
+     * ```php
+     * 'urlRules' => [
+     *     ['pattern' => 'mymodule/detail/<id:\d+>', 'route' => 'mymodule/detail/user'],
+     * ],
+     * ```
+     *
+     * Or you can provide a key value pairing where key is the pattern and the value is the route:
+     *
+     * ```php
+     * 'urlRules' => [
+     *     'mymodule/detail/<id:\d+>' => 'mymodule/detail/user',
+     * ],
+     * ```
      */
     public $urlRules = [];
 
     /**
      * @var array An array containing all components which should be registered for the current module. If
-     *            the component does not exists an Exception will be thrown.
+     * the component does not exists an Exception will be thrown.
      */
     public $requiredComponents = [];
 
@@ -106,11 +126,7 @@ abstract class Module extends \yii\base\Module
     public $translations = [];
 
     /**
-     * The Luya-Module initializer is looking for defined requiredComponents.
-     *
-     * @throws \Exception
-     *
-     * @see \yii\base\Module::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -118,7 +134,7 @@ abstract class Module extends \yii\base\Module
         // verify all the components
         foreach ($this->requiredComponents as $component) {
             if (!Yii::$app->has($component)) {
-                throw new Exception(sprintf('The required component "%s" is not registered in the configuration file', $component));
+                throw new InvalidConfigException(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
         $this->registerTranslations();
@@ -143,8 +159,7 @@ abstract class Module extends \yii\base\Module
      *
      * the *@app* namespace views will be looked up for view files
      *
-     * @return string;
-     *
+     * @return string
      * @see \yii\base\Module::getLayoutPath()
      */
     public function getLayoutPath()
@@ -181,7 +196,7 @@ abstract class Module extends \yii\base\Module
     /**
      * register a component to the application. id => definition. All components will be registered during bootstrap process.
      *
-     * @return array:
+     * @return array
      */
     public function registerComponents()
     {
@@ -191,8 +206,31 @@ abstract class Module extends \yii\base\Module
     /**
      * Define a last of importer class with an array or run code directily with the import() method.
      *
-     * @param ImportControllerInterface $importer
-     * @return boolean|array
+     * Can be either an array with classes:
+     *
+     * ```php
+     * public function import(ImportControllerInterface $importer)
+     * {
+     *     return [
+     *         'path\to\class\Import',
+     *         MyImporterClass::className(),
+     *     ];
+     * }
+     * ```
+     *
+     * Or a direct functional call which executes importer things:
+     *
+     * ```php
+     * public function import(ImportControllerInterface $importer)
+     * {
+     *     foreach ($importer->getDirectoryFiles('blocks') as $block) {
+     *         // do something with block file.
+     *     }
+     * }
+     * ```
+     *
+     * @param \luya\console\interfaces\ImportControllerInterface $importer The importer controller class which will be invoke to the import method.
+     * @return boolean|array If an array is returned it must contain object class to created extending from {{luya\console\Command}}.
      */
     public function import(ImportControllerInterface $importer)
     {
@@ -218,10 +256,10 @@ abstract class Module extends \yii\base\Module
      */
     public function getControllerFiles()
     {
-        try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L233
+        try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L235
             $files = [];
             foreach (FileHelper::findFiles($this->controllerPath) as $file) {
-                $value = ltrim(str_replace([$this->controllerPath, 'Controller.php'], '', $file), '/');
+                $value = ltrim(str_replace([$this->controllerPath, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR);
                 $files[Inflector::camel2id($value)] = $file;
             }
             return $files;

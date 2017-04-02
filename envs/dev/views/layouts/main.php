@@ -1,73 +1,96 @@
 <?php
 use app\assets\ResourcesAsset;
+use luya\helpers\Url;
+use luya\cms\widgets\LangSwitcher;
+use yii\base\Widget;
+
 ResourcesAsset::register($this);
+
+/* @var $this luya\web\View */
+/* @var $content string */
+
+$this->beginPage();
 ?>
-<html>
+<html lang="<?= Yii::$app->composition->language; ?>">
     <head>
-        <title>Luya &mdash; <?php echo $this->title; ?></title>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>LUYA &mdash; <?php echo $this->title; ?></title>
         <?php $this->head() ?>
     </head>
     <body>
     <?php $this->beginBody() ?>
-        <div id="header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h1><?php echo Yii::$app->siteTitle; ?></h1>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="git pull-right">
-                            <a href="https://github.com/zephir/luya" target="_blank" alt="Luya on GitHub" title="Luya on GitHub"><i class="fa fa-github fa-2x"></i></a>
-                        </div>
-                    </div>
-                </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="https://luya.io" target="_blank" >
+                    <img alt="Brand" src="<?= $this->publicHtml; ?>/images/luya_logo_flat_icon.png" height="20px">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
+                    <li <?php if ($item->isActive): ?>class="active"<?php endif;?>>
+                        <a href="<?= $item->link; ?>"><?= $item->title; ?></a>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://github.com/luyadev/luya" target="_blank"><i class="fa fa-github"></i></a></li>
+                    <li><a href="https://twitter.com/luyadev" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.youtube.com/channel/UCfGs4sHk-D3swX0mhxv98RA" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                </ul>
             </div>
         </div>
-        <div class="container" id="content">
-            <div class="row">
+    </nav>
+        
+    <div style="margin-top:70px;"></div>
+        
+        
+        
+    <div class="container" id="content">
+    
+        
+        <div class="row">
+            <div class="col-md-6">
                 <ol class="breadcrumb">
-                    <?php foreach(Yii::$app->menu->current->teardown as $item): ?>
-                    <li><a href="<?php echo $item->link; ?>"><?php echo $item->title; ?></a>
+                    <?php foreach (Yii::$app->menu->current->teardown as $item): ?>
+                    <li><a href="<?= $item->link; ?>"><?= $item->title; ?></a>
                     <?php endforeach; ?>
                 </ol>
             </div>
-            <div class="row">
-                <div class="col-md-3" id="nav" style="min-height:500px;">
-                    <ul>
-                    <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
-                        <li>
-                            <a<?php if($item->isActive): ?> class="active"<?php endif;?> href="<?php echo $item->link; ?>"><?php echo $item->title; ?></a>
-                            <?php if($item->hasChildren()): ?>
-                            <ul>
-                                <?php foreach($item->children as $child): ?>
-                                    <li><a<?php if($child->isActive): ?> class="active"<?php endif;?> href="<?php echo $child->link; ?>">&raquo; <?php echo $child->title; ?></a></li>
-                                    
-                                    <?php if($child->hasChildren()): ?>
-                                    <ul>
-                                        <?php foreach($child->children as $grandChild): ?>
-                                            <li><a<?php if($grandChild->isActive): ?> class="active"<?php endif;?> href="<?php echo $grandChild->link; ?>">&raquo; <?php echo $grandChild->title; ?></a>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                    <?php endif; ?>
-                                    
-                                <?php endforeach; ?>
-                            </ul>
-                            <?php endif; ?>
-                        </li>
-                    <?php endforeach; ?>
+            <div class="col-md-6">
+                <?= LangSwitcher::widget(); ?>
+            </div>
+        </div>
+        <div class="row">
+        
+            <?php if (count(Yii::$app->menu->getLevelContainer(2)) > 0): ?>
+            <div class="col-md-3">
+                    <ul class="nav nav-pills nav-stacked">
+                        <?php foreach (Yii::$app->menu->getLevelContainer(2) as $child): ?>
+                        <li <?php if ($child->isActive): ?>class="active" <?php endif; ?>><a href="<?= $child->link; ?>"><?= $child->title; ?></a></li>
+                        <?php endforeach; ?>
                     </ul>
-                </ul>
                 </div>
                 <div class="col-md-9">
-                    <?php echo $content; ?>
+                    <?= $content; ?>
                 </div>
-            </div>
+            <?php else: ?>
+                <div class="col-md-12">
+                    <?= $content; ?>
+                </div>
+            <?php endif; ?>
         </div>
-        <div id="footer">
-            <div class="container divider">
-                <h4>&copy <?php echo date("Y"); ?> by <i>You</i> &amp; <i>Luya</i></h4>
-            </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">This website is made with <a href="https://luya.io" target="_blank">LUYA</a>.</p>
         </div>
+    </footer>
     <?php $this->endBody() ?>
     </body>
 </html>

@@ -8,6 +8,7 @@ use yii\base\Exception;
 use yii\helpers\Inflector;
 use luya\cms\admin\Module;
 use luya\admin\base\GenericSearchInterface;
+use yii\db\ActiveRecordInterface;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each
@@ -15,6 +16,21 @@ use luya\admin\base\GenericSearchInterface;
  * nav_item_type_id (pk of the table).
  *
  * @property \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule\luya\cms\models\NavItemRedirect $type The type object based on the current type id
+ * @property integer $id
+ * @property integer $nav_id
+ * @property integer $lang_id
+ * @property integer $nav_item_type
+ * @property integer $nav_item_type_id
+ * @property integer $create_user_id
+ * @property integer $update_user_id
+ * @property integer $timestamp_create
+ * @property integer $timestamp_update
+ * @property string $title
+ * @property string $alias
+ * @property string $description
+ * @property string $keywords
+ * @property string $title_tag
+ * @property \luya\cms\models\Nav $nav Nav Model.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -28,6 +44,9 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     public $parent_nav_id = null;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -38,6 +57,17 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventLogger']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventLogger']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventLogger']);
+        
+        $this->on(self::EVENT_AFTER_DELETE, function ($event) {
+            $type = $event->sender->getType();
+            if ($type) {
+                $type->delete();
+            }
+            
+            foreach (NavItemPage::find()->where(['nav_item_id' => $event->sender->id])->all() as $version) {
+                $version->delete();
+            }
+        });
     }
 
     /**
@@ -60,8 +90,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\db\ActiveRecord::tableName()
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -69,41 +98,27 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::rules()
+     * @inheritdoc
      */
     public function rules()
     {
         return [
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
-            [['nav_id', 'description', 'keywords', 'nav_item_type_id'], 'safe'],
+            [['nav_id', 'description', 'keywords', 'nav_item_type_id', 'title_tag'], 'safe'],
         ];
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::attributeLabels()
+     * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
             'title' => Module::t('model_navitem_title_label'),
             'alias' => Module::t('model_navitem_alias_label'),
+            'title_tag' => Module::t('model_navitem_title_tag_label'),
         ];
     }
-
-    /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::scenarios()
-     */
-    /*
-    public function scenarios()
-    {
-        return [
-            'default' => ['title', 'alias', 'nav_item_type', 'nav_id', 'lang_id', 'description', 'keywords'],
-        ];
-    }
-    */
 
     public function slugifyAlias()
     {
@@ -256,36 +271,37 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /* GenericSearchInterface */
 
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchFields()
+     * @inheritdoc
      */
     public function genericSearchFields()
     {
-        return ['title', 'alias', 'nav_id'];
+        return ['title', 'container'];
     }
     
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchHiddenFields()
+     * @inheritdoc
      */
     public function genericSearchHiddenFields()
     {
-        return [];
+        return ['nav_id'];
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearch()
+     * @inheritdoc
      */
     public function genericSearch($searchQuery)
     {
-        $query = self::find();
-        $fields = $this->genericSearchFields();
-        foreach ($fields as $field) {
-            $query->orWhere(['like', $field, $searchQuery]);
+        $data = [];
+        
+        foreach (self::find()->select(['nav_id', 'title'])->orWhere(['like', 'title', $searchQuery])->with('nav')->distinct()->each() as $item) {
+            $data[] = [
+                'title' => $item->title,
+                'nav_id' => $item->nav_id,
+                'container' => $item->nav->navContainer->name,
+            ];
         }
-
-        return $query->select($fields)->asArray()->all();
+        
+        return $data;
     }
     
     /**
@@ -293,6 +309,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * and jump/linking in the search results container.
      *
      * {@inheritDoc}
+     *
      * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
      */
     public function genericSearchStateProvider()
@@ -433,11 +450,8 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * @return bool
      * @throws Exception type not recognized (1,2,3)
      */
-    public function copyTypeContent($targetNavItem)
+    public function copyTypeContent(ActiveRecordInterface $targetNavItem)
     {
-        if (!$targetNavItem instanceof \yii\db\ActiveRecord) {
-            throw new Exception("Target nav item must be an instance of ActiveRecord.");
-        }
         switch ($this->nav_item_type) {
             case 1:
                 return $this->copyPageItem($targetNavItem);

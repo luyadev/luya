@@ -2,6 +2,11 @@
 
 namespace luya\cms\base;
 
+/**
+ * Block VAR variables ensurence.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class BlockVar extends BlockConfigElement
 {
     public function toArray()

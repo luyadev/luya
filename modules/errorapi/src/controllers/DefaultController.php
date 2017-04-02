@@ -8,7 +8,7 @@ use luya\errorapi\models\Data;
 /**
  *
  * @todo create phpunit test for module controller actions
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class DefaultController extends \luya\rest\Controller
 {

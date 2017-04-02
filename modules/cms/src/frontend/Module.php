@@ -6,6 +6,10 @@ use Yii;
 use yii\base\BootstrapInterface;
 use luya\web\Application;
 use luya\base\CoreModuleInterface;
+use luya\web\ErrorHandler;
+use luya\web\ErrorHandlerExceptionRenderEvent;
+use yii\web\HttpException;
+use luya\cms\models\Config;
 
 /**
  * Cms Module.
@@ -29,9 +33,24 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     ];
     
     /**
-     * @var string To handle error messages in your application put `'errorHandler' => ['errorAction' => 'cms/error/index']` in config file.
-     * To replace the standard error view file with your own - configure via the cms module in your config: `'cms' => ['errorViewFile' => '@app/views/error/index.php']`
-     * Please note that you'll have to define the layout in the view as it's rendered via `renderPartial()`.
+     * @var string Define an error view file who is going to be renderd when the errorAction points to the `cms/error/index` route.
+     *
+     * In order to handle error messages in your application configure the error handler compononent in you configuration:
+     * ```php
+     * 'errorHandler' => [
+     *     'errorAction' => 'cms/error/index',
+     * ]
+     * ```
+     *
+     * Now configure the view file which will be rendered in your cms module:
+     *
+     * ```php
+     * 'cms' => [
+     *     'errorViewFile' => '@app/views/error/index.php',
+     * ]
+     * ```
+     *
+     * > Note that the view will be rendered with `renderPartial()`, this means the layout file will *not* be included.
      */
     public $errorViewFile = "@cms/views/error/index.php";
 
@@ -53,9 +72,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     public $enableTagParsing = true;
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \luya\base\Module::registerComponents()
+     * @inheritdoc
      */
     public function registerComponents()
     {
@@ -66,14 +83,32 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function ($event) {
-            if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin()) {
+            if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin) {
                 $event->sender->urlManager->addRules([
                     ['class' => 'luya\cms\frontend\components\RouteBehaviorUrlRule'],
                     ['class' => 'luya\cms\frontend\components\CatchAllUrlRule'],
                 ]);
+            }
+        });
+        
+        Yii::$app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) {
+            if ($event->exception instanceof HttpException) {
+                // see whether a config value exists
+                // if a redirect page id exists, redirect.
+                $navId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
+                if ($navId) {
+                    $menu = Yii::$app->menu->find()->with(['hidden'])->where(['nav_id' => $navId])->one();
+                    if ($menu) {
+                        Yii::$app->getResponse()->redirect($menu->absoluteLink, 301)->send();
+                        exit;
+                    }
+                }
             }
         });
     }

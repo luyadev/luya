@@ -8,7 +8,7 @@ use luya\admin\ngrest\base\Plugin;
 /**
  * Base class for select dropdowns via Array or Model.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class Select extends Plugin
 {
@@ -31,7 +31,7 @@ abstract class Select extends Plugin
         return $this->renderCreate($id, $ngModel);
     }
 
-    public function serviceData()
+    public function serviceData($event)
     {
         return ['selectdata' => $this->data];
     }

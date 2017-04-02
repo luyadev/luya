@@ -4,10 +4,9 @@ namespace luya\crawler\frontend\classes;
 
 use Goutte\Client;
 use yii\base\InvalidConfigException;
-use yii\base\yii\base;
 use luya\helpers\Url;
 use luya\helpers\StringHelper;
-use Symfony\Component\Dom;
+use Symfony\Component\DomCrawler\Crawler;
 
 class CrawlPage extends \yii\base\Object
 {
@@ -19,7 +18,7 @@ class CrawlPage extends \yii\base\Object
     
     public $baseHost = null;
     
-    public $useH1 = true;
+    public $useH1 = false;
     
     private $_crawler = null;
 
@@ -58,18 +57,48 @@ class CrawlPage extends \yii\base\Object
         $this->pageUrl = null;
     }
 
+    public function setCrawler(Crawler $crawler)
+    {
+        $this->_crawler = $crawler;
+    }
+    
     public function getCrawler()
     {
         if ($this->_crawler === null) {
             try {
                 $this->client = new Client();
                 $this->_crawler = $this->client->request('GET', $this->pageUrl);
+                if ($this->client->getInternalResponse()->getStatus() !== 200) {
+                    $this->verbosePrint("[!] " .$this->pageUrl, "Response Status is not 200");
+                    $this->_crawler = false;
+                }
             } catch (\Exception $e) {
                 $this->_crawler = false;
             }
         }
 
         return $this->_crawler;
+    }
+    
+    public function getCrawlerHtml()
+    {
+        try {
+            $crawler = $this->getCrawler();
+            
+            if (!$crawler) {
+                return '';
+            }
+            
+            $crawler->filter('script')->each(function (Crawler $crawler) {
+                foreach ($crawler as $node) {
+                    $node->parentNode->removeChild($node);
+                }
+            });
+            
+            return $crawler->filter('body')->html();
+        } catch (\Exception $e) {
+            return '';
+        }
     }
 
     public function getContentType()
@@ -141,6 +170,28 @@ class CrawlPage extends \yii\base\Object
         
         return $crawler->filterXPath('//html')->attr('lang');
     }
+    
+    public function getTitleTag()
+    {
+        $crawler = $this->getCrawler();
+        
+        if (!$crawler) {
+            return null;
+        }
+     
+        try {
+            $text = $crawler->filterXPath('//title')->text();
+            
+            if (!empty($text)) {
+                return $text;
+            }
+        } catch (\Exception $e) {
+            // catch "The current node list is empty." exception
+        }
+        
+        return null;
+        
+    }
 
     public function getTitle()
     {
@@ -150,68 +201,118 @@ class CrawlPage extends \yii\base\Object
             return null;
         }
         
-        $text =  $crawler->filterXPath('//title')->text();
+        $tag = $this->getTitleCrawlerTag();
+        
+        if (!empty($tag)) {
+            return $tag;
+        }
+        
+        $text = $this->getTitleTag();
         
         $this->verbosePrint('? getTitle(): title tag found', $text);
         if ($this->useH1) {
-            $response = $crawler->filter('h1')->each(function ($node, $i) use ($text) {
-                if (!empty($node->text())) {
-                    return self::cleanupString($node->text());
-                }
-            });
+            $h1 = $this->getTitleH1();
             
-            if (!empty($response) && isset($response[0])) {
-                $text = $response[0];
-                $this->verbosePrint('? getTitle(): h1 tag found', $text);
+            if (!empty($h1)) {
+                return $h1;
             }
         }
         
         return $text;
     }
-
-    private function tempGetContent($url)
+    
+    public function getMetaKeywords()
+    {
+        $crawler = $this->getCrawler();
+        
+        if (!$crawler) {
+            return null;
+        }
+        
+        $descriptions = $crawler->filterXPath("//meta[@name='keywords']")->extract(['content']);
+        
+        if (isset($descriptions[0])) {
+            return str_replace(",", " ", $descriptions[0]);
+        }
+        
+        return null;
+    }
+    
+    public function getMetaDescription()
+    {
+        $crawler = $this->getCrawler();
+        
+        if (!$crawler) {
+            return null;
+        }
+        
+        $descriptions = $crawler->filterXPath("//meta[@name='description']")->extract(['content']);
+        
+        if (isset($descriptions[0])) {
+            return self::cleanupString($descriptions[0]);
+        }
+        
+        return null;
+    }
+    
+    public function getTitleH1()
+    {
+        $crawler = $this->getCrawler();
+        
+        if (!$crawler) {
+            return null;
+        }
+        
+        $response = $crawler->filter('h1')->each(function ($node, $i) {
+            if (!empty($node->text())) {
+                return self::cleanupString($node->text());
+            }
+        });
+        
+        if (!empty($response) && isset($response[0])) {
+            $this->verbosePrint('? getTitle(): h1 tag found', $response[0]);
+            return $response[0];
+        }
+            
+        return null;
+    }
+    
+    public function getTitleCrawlerTag()
+    {
+        $content = $this->getCrawlerHtml();
+        
+        preg_match_all("/\[CRAWL_TITLE\](.*?)\[\/CRAWL_TITLE\]/", $content, $results);
+        
+        if (!empty($results) && isset($results[1]) && isset($results[1][0])) {
+            $this->verbosePrint("[+] CRAWL_TITLE FOUND", $results[1][0]);
+            return $results[1][0];
+        }
+        
+        return false;
+    }
+    
+    public function getGroup()
     {
         try {
-            $curl = new \Curl\Curl();
-            $curl->get($url);
-            $content = $curl->response;
+            $content = $this->getCrawlerHtml();
     
-            if ($curl->error) {
-                $this->verbosePrint('Curl error message for url ' . $url, $curl->error_message);
+            preg_match_all("/\[CRAWL_GROUP\](.*?)\[\/CRAWL_GROUP\]/", $content, $results);
+    
+            if (!empty($results) && isset($results[1]) && isset($results[1][0])) {
+                $this->verbosePrint("[+] CRAWL_GROUP information found", $results[1][0]);
+                return $results[1][0];
             }
-            
-            if (empty($content)) {
-                $this->verbosePrint('The curl get process returns in empty response', $url);
-                return null;
-            }
-            
-            $dom = new \DOMDocument('1.0', 'utf-8');
     
-            libxml_use_internal_errors(true);
-            $dom->loadHTML($content);
-            libxml_clear_errors();
-    
-            $dom->preserveWhiteSpace = false; // remove redundant white spaces
+            return '';
+        } catch (\Exception $e) {
+            return '';
+        }
+    }
 
-            $body = $dom->getElementsByTagName('body');
-    
-            $bodyContent = null;
-    
-            if ($body && $body->length > 0) {
-                // remove scripts
-                while (($r = $dom->getElementsByTagName('script')) && $r->length) {
-                    $r->item(0)->parentNode->removeChild($r->item(0));
-                }
-    
-                $domBody = $body->item(0);
-    
-                $bodyContent = $dom->saveXML($domBody);
-                //$bodyContent = $this->dom->saveHTML($this->domBody); // argument not allowed on 5.3.5 or less, see: http://www.php.net/manual/de/domdocument.savehtml.php
-            } else {
-                $this->verbosePrint('unable to find body tag, or the length of body tags', $url);
-            }
-    
-            $bodyContent = preg_replace('/\s+/', ' ', $bodyContent);
+    private function tempGetContent()
+    {
+        try {
+            $bodyContent = preg_replace('/\s+/', ' ', $this->getCrawlerHtml());
             
             // find crawl full ignore
             preg_match("/\[CRAWL_FULL_IGNORE\]/s", $bodyContent, $output);
@@ -230,21 +331,25 @@ class CrawlPage extends \yii\base\Object
                         $bodyContent = str_replace($ignorPartial, '', $bodyContent);
                     }
                 }
+                
+                $bodyContent .= $this->getMetaDescription();
+                $bodyContent .= $this->getMetaKeywords();
+                $bodyContent .= $this->getTitleTag();
             }
             
             return $bodyContent;
         } catch (\Exception $e) {
-            return null;
+            return '';
         }
     }
-
+    
     public function getContent()
     {
         try {
             $this->verbosePrint('get content for', $this->pageUrl);
-            return self::cleanupString($this->tempGetContent($this->pageUrl));
+            return self::cleanupString($this->tempGetContent());
         } catch (\Exception $e) {
-            return null;
+            return '';
         }
     }
     

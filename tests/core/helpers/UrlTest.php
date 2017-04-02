@@ -7,7 +7,6 @@ use luya\helpers\Url;
 
 class UrlTest extends \luyatests\LuyaWebTestCase
 {
-
     public function testTrailing()
     {
         Yii::$app->composition->hidden = true;
@@ -26,15 +25,15 @@ class UrlTest extends \luyatests\LuyaWebTestCase
     
     public function testBaseHelper()
     {
-        $a = Url::toManager('urlmodule/bar/index');
+        $a = Url::toRoute(['/urlmodule/bar/index']);
         $this->assertEquals($a, Url::to(['/urlmodule/bar/index']));
         $this->assertEquals($a, Url::toRoute('/urlmodule/bar/index'));
         
-        $b = Url::toManager('urlmodule/default/index');
+        $b = Url::toRoute(['/urlmodule/default/index']);
         $this->assertEquals($b, Url::to(['/urlmodule/default/index']));
         $this->assertEquals($b, Url::toRoute('/urlmodule/default/index'));
         
-        $c = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
+        $c = Url::toRoute(['/news/default/detail', 'id' => 1, 'title' => 'foo-bar']);
         $this->assertEquals($c, Url::to(['/news/default/detail', 'id' => 1, 'title' => 'foo-bar']));
         $this->assertEquals($c, Url::toRoute(['/news/default/detail', 'id' => 1, 'title' => 'foo-bar']));
     }
@@ -51,16 +50,16 @@ class UrlTest extends \luyatests\LuyaWebTestCase
     public function testHelperEquals()
     {
         Yii::$app->composition->hidden = true;
-        $this->assertEquals(Url::to(['/admin/login/index']), Url::toManager('admin/login/index'));
+        $this->assertEquals(Url::to(['/admin/login/index']), Url::toRoute(['/admin/login/index']));
         
         Yii::$app->composition->hidden = false;
-        $this->assertEquals(Url::to(['/admin/login/index']), Url::toManager('admin/login/index'));
+        $this->assertEquals(Url::to(['/admin/login/index']), Url::toRoute(['/admin/login/index']));
         
         Yii::$app->composition->hidden = true;
-        $this->assertEquals(Url::to(['/admin/login/index'], true), Url::toManager('admin/login/index', [], true));
+        $this->assertEquals(Url::to(['/admin/login/index'], true), Url::toRoute(['/admin/login/index'], true));
         
         Yii::$app->composition->hidden = false;
-        $this->assertEquals(Url::to(['/admin/login/index'], true), Url::toManager('admin/login/index', [], true));
+        $this->assertEquals(Url::to(['/admin/login/index'], true), Url::toRoute(['/admin/login/index'], true));
     }
     
     public function testHelperEqualsInternal()
@@ -95,10 +94,14 @@ class UrlTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('http://www.luya.io', Url::ensureHttp('www.luya.io'));
         $this->assertEquals('http://luya.io', Url::ensureHttp('http://luya.io'));
         $this->assertEquals('http://www.luya.io', Url::ensureHttp('http://www.luya.io'));
+        $this->assertEquals('https://www.luya.io', Url::ensureHttp('https://www.luya.io'));
+        
         
         $this->assertEquals('https://luya.io', Url::ensureHttp('luya.io', true));
         $this->assertEquals('https://www.luya.io', Url::ensureHttp('www.luya.io', true));
         $this->assertEquals('https://luya.io', Url::ensureHttp('https://luya.io', true));
         $this->assertEquals('https://www.luya.io', Url::ensureHttp('https://www.luya.io', true));
+        
+        $this->assertEquals('http://luya.io', Url::ensureHttp('http://luya.io', true)); // @TODO ensure https, expected: https://luya.io
     }
 }

@@ -29,8 +29,12 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count($obj->parents));
         $this->assertEquals(1, count($obj->teardown));
         $this->assertEquals(0, count($obj->children));
-        $this->assertEquals(7, count($obj->siblings));
-        $this->assertFalse($obj->hasChildren());
+        $this->assertEquals(11, count($obj->siblings));
+        $this->assertSame(1, $obj->sortIndex);
+        $this->assertFalse($obj->hasChildren);
+        $this->assertTrue($obj->isHome);
+        $this->assertSame('Homepage', $obj->getSeoTitle());
+        $this->assertSame('Homepage', $obj->seoTitle);
     }
     
     public function testChildItem()
@@ -39,53 +43,37 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals("/luya/envs/dev/public_html/en/page1/p1-page3", $obj->link);
         $this->assertEquals(2, $obj->depth);
         $this->assertEquals(6, count($obj->siblings));
+        $this->assertFalse($obj->isHome);
     }
     
-    /*
-    public function testFindHidden()
+    public function testAbsoluteLink()
     {
-        $this->assertFalse(Yii::$app->menu->findOne(['id' => 9999]));
+        $menu = (new Query())->where(['id' => 2])->one();
+        
+        $this->assertSame('http://localhost/luya/envs/dev/public_html/en/page1', $menu->absoluteLink);
+    }
+    
+    public function testNextPevSibling()
+    {
+        $menu = (new Query())->where(['id' => 2])->one();
+        
+        $this->assertSame(1, $menu->prevSibling->id);
+        $this->assertSame(3, $menu->nextSibling->id);
+        
+        
+        $menu = (new Query())->where(['id' => 1])->one();
+        
+        $this->assertFalse($menu->prevSibling);
     }
 
-    public function testFindOffline()
+    public function testProperty()
     {
-        $this->assertFalse(Yii::$app->menu->findOne(['id' => 7]));
+        $menu = (new Query())->where(['id' => 2])->one();
+        
+        $this->assertSame($menu->id, $menu->model->id);
+        $this->assertFalse($menu->getProperty(null));
     }
-
-    public function testFindHiddenAndOffline()
-    {
-        $this->assertFalse(Yii::$app->menu->findOne(['id' => 9]));
-    }
-
-    public function testFindHiddenWithHidden()
-    {
-        $this->assertInstanceOf("luya\cms\menu\Item", Yii::$app->menu->find()->where(['id' => 8])->with('hidden')->one());
-    }
-
-    public function testFindOfflineWithHidden()
-    {
-        $this->assertFalse(Yii::$app->menu->find()->where(['id' => 7])->with('hidden')->one());
-    }
-
-    public function testFindHiddenAndOfflineWithHidden()
-    {
-        $this->assertFalse(Yii::$app->menu->find()->where(['id' => 9])->with('hidden')->one());
-    }
-
-    public function testRedirectInternal()
-    {
-        $obj = Yii::$app->menu->findOne(['id' => 5]);
-
-        $this->assertEquals('/luya/envs/dev/public_html/en/page4', $obj->link);
-    }
-
-    public function testRedirectExternal()
-    {
-        $obj = Yii::$app->menu->findOne(['id' => 6]);
-
-        $this->assertEquals('https://luya.io', $obj->link);
-    }
-    */
+    
     // translation tests
 
     public function testHomeLanguageCompare()
@@ -125,8 +113,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->parents));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->parents));
 
-        $this->assertEquals(7, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
-        //$this->assertEquals(7, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
+        $this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
+        //$this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
 
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->teardown));
         //$this->assertEquals(1, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->teardown));
@@ -155,8 +143,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->parents));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->parents));
 
-        $this->assertEquals(7, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->siblings));
-        //$this->assertEquals(7, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->siblings));
+        $this->assertEquals(11, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->siblings));
+        //$this->assertEquals(11, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->siblings));
 
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->teardown));
         //$this->assertEquals(1, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->teardown));
@@ -170,8 +158,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->one()->parents));
         $this->assertEquals(0, count(Yii::$app->menu->findOne(['nav_id' => 1])->parents));
     
-        $this->assertEquals(7, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
-        //$this->assertEquals(7, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
+        $this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
+        //$this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
 
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->teardown));
         //$this->assertEquals(1, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->teardown));
@@ -200,8 +188,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->parents));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->parents));
 
-        $this->assertEquals(7, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->siblings));
-        //$this->assertEquals(7, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->siblings));
+        $this->assertEquals(11, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->siblings));
+        //$this->assertEquals(11, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->siblings));
 
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->teardown));
         //$this->assertEquals(1, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->teardown));

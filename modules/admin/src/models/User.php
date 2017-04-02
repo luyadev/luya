@@ -10,7 +10,7 @@ use luya\admin\Module;
 use luya\admin\traits\SoftDeleteTrait;
 use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
-use luya\admin\aws\ChangePassword;
+use luya\admin\aws\ChangePasswordActiveWindow;
 
 /**
  * User Model represents all Administration Users.
@@ -28,21 +28,22 @@ use luya\admin\aws\ChangePassword;
  * @property integer $secure_token_timestamp
  * @property integer $force_reload
  * @property string $settings
- * @property \admin\models\UserSetting $setting Setting object to store data.
+ * @property \luya\admin\models\UserSetting $setting Setting object to store data.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class User extends NgRestModel implements IdentityInterface, ChangePasswordInterface
+final class User extends NgRestModel implements IdentityInterface, ChangePasswordInterface
 {
     use SoftDeleteTrait;
-
-    public function getLastloginTimestamp()
+    
+    /**
+     * @inheritdoc
+     */
+    public function init()
     {
-        $item = UserLogin::find()->select(['timestamp_create'])->where(['user_id' => $this->id])->orderBy('id DESC')->asArray()->one();
-        
-        if ($item) {
-            return $item['timestamp_create'];
-        }
+        parent::init();
+        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
+        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'eventBeforeValidate']);
     }
     
     private $_setting = null;
@@ -57,6 +58,15 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return $this->_setting;
     }
     
+    public function getLastloginTimestamp()
+    {
+        $item = UserLogin::find()->select(['timestamp_create'])->where(['user_id' => $this->id])->orderBy('id DESC')->asArray()->one();
+    
+        if ($item) {
+            return $item['timestamp_create'];
+        }
+    }
+    
     public function updateSettings(array $data)
     {
         $this->updateAttributes([
@@ -64,12 +74,26 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ]);
     }
     
+    /**
+     * @inheritdoc
+     */
     public static function ngRestApiEndpoint()
     {
         return 'api-admin-user';
     }
     
-    public function ngrestAttributeTypes()
+    /**
+     * @inheritdoc
+     */
+    public function ngRestListOrder()
+    {
+        return ['firstname' => SORT_ASC];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function ngRestAttributeTypes()
     {
         return [
             'title' => ['selectArray', 'data' => static::getTitles(), 'initValue' => 0],
@@ -80,43 +104,62 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
     
-    public function ngrestExtraAttributeTypes()
+    /**
+     * @inheritdoc
+     */
+    public function ngRestFilters()
+    {
+        return [
+            'Removed' => self::find()->where(['is_deleted' => 1]),
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function ngRestExtraAttributeTypes()
     {
         return [
             'lastloginTimestamp' => 'datetime',
         ];
     }
     
-    public function ngRestConfig($config)
+    public function ngRestScopes()
     {
-        $config->aw->load(['class' => ChangePassword::className(), 'className' => User::className()]);
-        
-        $this->ngRestConfigDefine($config, 'list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']);
-        $this->ngRestConfigDefine($config, 'create', ['title', 'firstname', 'lastname', 'email', 'password']);
-        $this->ngRestConfigDefine($config, 'update', ['title', 'firstname', 'lastname', 'email']);
-        
-        $config->delete = true;
-
-        return $config;
+        return [
+            ['list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']],
+            ['create', ['title', 'firstname', 'lastname', 'email', 'password']],
+            ['update', ['title', 'firstname', 'lastname', 'email']],
+            ['delete', true],
+        ];
+    }
+    
+    public function ngRestActiveWindows()
+    {
+        return [
+            ['class' => ChangePasswordActiveWindow::class],
+        ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_user';
     }
 
-    public function init()
-    {
-        parent::init();
-        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
-        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'eventBeforeValidate']);
-    }
-
+    /**
+     * @inheritdoc
+     */
     public function genericSearchFields()
     {
         return ['firstname', 'lastname', 'email'];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -131,6 +174,9 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -139,9 +185,13 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
             'lastname' => Module::t('mode_user_lastname'),
             'email' => Module::t('mode_user_email'),
             'password' => Module::t('mode_user_password'),
+            'lastloginTimestamp' => Module::t('model_user_lastlogintimestamp'),
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function scenarios()
     {
         return [
@@ -179,7 +229,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     }
 
     /**
-     * override default scope find().
+     * @inheritdoc
      */
     public static function find()
     {
@@ -188,13 +238,6 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
 
     public function changePassword($newpass, $newpasswd)
     {
-        if (strlen($newpass) < 8) {
-            return $this->addError('newpass', 'Das neue Passwort muss mindestens 8 Zeichen lang sein.');
-        }
-        if ($newpass !== $newpasswd) {
-            return $this->addError('newpasswd', 'Das neue Passwort muss mit der Wiederholung übereinstimmen.');
-        }
-
         $this->password = $newpass;
 
         if ($this->encodePassword()) {
@@ -222,24 +265,36 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
 
         return true;
     }
+    
+    /**
+     * Get the title Mr, Mrs. as string for the current user.
+     *
+     * @return string
+     */
+    public function getTitleNamed()
+    {
+        return self::getTitles()[$this->title];
+    }
 
+    /**
+     *
+     * @return string[]
+     */
     public static function getTitles()
     {
-        return [1 => 'Herr', 2 => 'Frau'];
+        return [1 => Module::t('model_user_title_mr'), 2 => Module::t('model_user_title_mrs')];
     }
 
     public function fields()
     {
         $fields = parent::fields();
         unset($fields['password'], $fields['password_salt'], $fields['auth_token'], $fields['is_deleted']);
-
         return $fields;
     }
 
     public function getGroups()
     {
-        return $this->hasMany(Group::className(), ['id' => 'group_id'])
-        ->viaTable('admin_user_group', ['user_id' => 'id']);
+        return $this->hasMany(Group::className(), ['id' => 'group_id'])->viaTable('admin_user_group', ['user_id' => 'id']);
     }
 
     public function extraFields()
@@ -247,11 +302,11 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return ['groups', 'lastloginTimestamp'];
     }
 
-    /* ------------------------------------ yii2 auth methods below ------------------------------------ */
+    // AuthMethods
 
     public static function findByEmail($email)
     {
-        return self::find()->where(['email' => $email])->one();
+        return self::find()->where(['email' => $email, 'is_deleted' => 0])->one();
     }
 
     public function validatePassword($password)
@@ -259,7 +314,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return Yii::$app->security->validatePassword($password.$this->password_salt, $this->password);
     }
 
-    /* IdentityInterface below */
+    // IdentityInterface
 
     /**
      * Finds an identity by the given ID.
@@ -313,6 +368,6 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
      */
     public function validateAuthKey($authKey)
     {
-        return $this->getAuthKey() === $authKey;
+        return false;
     }
 }

@@ -5,32 +5,19 @@ use yii\db\Migration;
 
 class m150323_132625_admin_group_auth extends Migration
 {
-    public function up()
-    {
-        $this->createTable('admin_group_auth', [
-            'group_id' => Schema::TYPE_INTEGER.'(11)',
-            'auth_id' => Schema::TYPE_INTEGER.'(11)',
-            'crud_create' => Schema::TYPE_SMALLINT.'(4)',
-            'crud_update' => Schema::TYPE_SMALLINT.'(4)',
-            'crud_delete' => Schema::TYPE_SMALLINT.'(4)',
-        ]);
-    }
-
-    public function down()
-    {
-        echo "m150323_132625_admin_group_auth cannot be reverted.\n";
-
-        return false;
-    }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
+        $this->createTable('admin_group_auth', [
+            'group_id' => $this->integer(11),
+            'auth_id' => $this->integer(11),
+            'crud_create' => $this->smallInteger(4),
+            'crud_update' => $this->smallInteger(4),
+            'crud_delete' => $this->smallInteger(4),
+        ]);
     }
 
     public function safeDown()
     {
+        $this->dropTable('admin_group_auth');
     }
-    */
 }

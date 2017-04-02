@@ -5,25 +5,27 @@ use yii\db\Migration;
 
 class m141104_114809_admin_user extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('admin_user', [
-            'id' => 'pk',
-            'firstname' => Schema::TYPE_STRING,
-            'lastname' => Schema::TYPE_STRING,
-            'title' => Schema::TYPE_SMALLINT,
-            'email' => 'VARCHAR(120) NOT NULL UNIQUE',
-            'password' => Schema::TYPE_STRING,
-            'password_salt' => Schema::TYPE_STRING,
-            'auth_token' => Schema::TYPE_STRING,
-            'is_deleted' => Schema::TYPE_SMALLINT,
+            'id' => $this->primaryKey(),
+            'firstname' => $this->string(255),
+            'lastname' => $this->string(255),
+            'title' => $this->smallInteger(1),
+            'email' => $this->string(120)->notNull()->unique(),
+            'password' => $this->string(255),
+            'password_salt' => $this->string(255),
+            'auth_token' => $this->string(255),
+            'is_deleted' => $this->boolean()->defaultValue(false),
+            'secure_token' => $this->string(40),
+            'secure_token_timestamp' => $this->integer(11)->defaultValue(0),
+            'force_reload' => $this->boolean()->defaultValue(false),
+            'settings' => $this->text(),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m141104_114809_admin_user cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('admin_user');
     }
 }

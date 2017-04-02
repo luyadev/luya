@@ -6,15 +6,16 @@ use Yii;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
 use luya\admin\helpers\I18n;
+use luya\admin\storage\ItemAbstract;
 
 /**
- * Storage File Item
+ * Storage File Item.
  *
  * @property string $caption The file caption
  * @property array $captionArray Contains the captions for all languages
  * @property integer $id The File id
  * @property integer $folderId The id of the folder the file is stored in.
- * @property \admin\folder\Item $folder Get the folder item object.
+ * @property \luya\admin\folder\Item $folder Get the folder item object.
  * @property string $name Get the original file name of the file.
  * @property string $systemFileName The new file name inside the storage folder.
  * @property string $mimeType The MIME type of the file while uploading.
@@ -30,14 +31,13 @@ use luya\admin\helpers\I18n;
  * @property string $serverSource The path to the file on the filesystem of the server.
  * @property boolean $isHidden Whether the file is marked as hidden or not.
  * @property boolean $isDeleted Return whether the file has been removed from the filesytem or not.
+ * @property booelan $fileExists Whether the file resource exists in the storage folder or not.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Item extends \yii\base\Object
+class Item extends ItemAbstract
 {
-    use \luya\admin\storage\ItemTrait;
-    
-    private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', '	image/tiff'];
+    private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
     private $_caption = null;
     
@@ -61,7 +61,7 @@ class Item extends \yii\base\Object
     public function getCaption()
     {
         if ($this->_caption === null) {
-            $this->_caption = I18n::findCurrent($this->getCaptionArray());
+            $this->_caption = I18n::findActive($this->getCaptionArray());
         }
     
         return $this->_caption;
@@ -70,7 +70,7 @@ class Item extends \yii\base\Object
     /**
      * Get the array with all captions from the filemanager global "captions" definition for all provided languages
      *
-     * @return array
+     * @return array Get the array with all captions from the filemanager global "captions" definition for all provided languages
      */
     public function getCaptionArray()
     {
@@ -80,27 +80,27 @@ class Item extends \yii\base\Object
     /**
      * Get the ID of the file (File-Id) and has nothing incommon with the image id.
      *
-     * @return integer
+     * @return integer The id of the file from the database.
      */
     public function getId()
     {
-        return $this->itemArray['id'];
+        return (int) $this->itemArray['id'];
     }
     
     /**
      * Get the Id of the folder fhe file is stored in.
      *
-     * @return integer
+     * @return integer The id of the folder where the file is located.
      */
     public function getFolderId()
     {
-        return $this->itemArray['folder_id'];
+        return (int) $this->itemArray['folder_id'];
     }
     
     /**
      * Get the Folder Object where the file is stored in.
      *
-     * @return \admin\folder\Item The folder object
+     * @return \luya\admin\folder\Item The folder object
      */
     public function getFolder()
     {
@@ -177,7 +177,7 @@ class Item extends \yii\base\Object
      */
     public function getSize()
     {
-        return $this->itemArray['file_size'];
+        return (int) $this->itemArray['file_size'];
     }
     
     /**
@@ -204,7 +204,7 @@ class Item extends \yii\base\Object
      */
     public function getUploadTimestamp()
     {
-        return $this->itemArray['upload_timestamp'];
+        return (int) $this->itemArray['upload_timestamp'];
     }
     
     /**
@@ -241,6 +241,18 @@ class Item extends \yii\base\Object
     }
     
     /**
+     * Get the md5 sum of the file calculated when creating.
+     *
+     * {{luya\helpers\FileHelper::md5sum}}
+     *
+     * @return string
+     */
+    public function getFileHash()
+    {
+        return $this->itemArray['hash_file'];
+    }
+    
+    /**
      * Get the realtive url to the source of the file.
      *
      * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For
@@ -266,7 +278,7 @@ class Item extends \yii\base\Object
      */
     public function getSource()
     {
-        return Url::toManager('admin/file/download', ['id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()]);
+        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()]);
     }
     
     /**
@@ -333,7 +345,7 @@ class Item extends \yii\base\Object
      */
     public function getFileExists()
     {
-        return file_exists($this->getServerSource());
+        return (bool) file_exists($this->getServerSource());
     }
     
     /**
@@ -352,31 +364,12 @@ class Item extends \yii\base\Object
     }
     
     /**
-     * Convert the Object informations into an Array.
-     *
-     * Sometimes you may want to retrieve all informations about the file item within an array, there the
-     * toArray method is used.
-     *
-     * @return array An array with all available methods as key and corresponding output.
+     * @inheritdoc
      */
-    public function toArray()
+    public function fields()
     {
         return [
-            'id' => $this->getId(),
-            'folderId' => $this->getFolderId(),
-            'name' => $this->getName(),
-            'systemFileName' => $this->getSystemFileName(),
-            'source' => $this->getSource(),
-            'httpSource' => $this->getHttpSource(),
-            'serverSource' => $this->getServerSource(),
-            'isImage' => $this->getIsImage(),
-            'mimeType' => $this->getMimeType(),
-            'extension' => $this->getExtension(),
-            'uploadTimestamp' => $this->getUploadTimestamp(),
-            'size' => $this->getSize(),
-            'sizeReadable' => $this->getSizeReadable(),
-            'caption' => $this->getCaption(),
-            'captionArray' => $this->getCaptionArray(),
+            'id','folderId', 'name', 'systemFileName', 'source', 'httpSource', 'serverSource', 'isImage', 'mimeType', 'extension', 'uploadTimestamp', 'size', 'sizeReadable', 'caption', 'captionArray'
         ];
     }
 }

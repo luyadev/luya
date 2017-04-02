@@ -3,7 +3,148 @@ LUYA CHANGELOG
 
 The changelog contains informations about bug fixes, new features or bc breaking code related to a GitHub issue. In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-1.0.0-rc1 (in progress)
+1.0.0 (in progress)
+-------------------
+
+### Changed
+
+- [#1208](https://github.com/luyadev/luya/issues/1208) Renamed `luya\cms\widgets\LanguageSwitcher` to `LangSwitcher` and removed the template usage as it should not be part of the widget.
+- [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
+- [#1177](https://github.com/luyadev/luya/issues/1177) The luya\web\Elements component looks for the elements.php inside the @app/views folder instead of @app.
+- [#1114](https://github.com/luyadev/luya/issues/1114) Updated materializecss to newest version and removed unused files.
+- [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated, renamed or removed functions collection.
+- [#1126](https://github.com/luyadev/luya/issues/1126) Moved CLI commands to the related modules.
+- [#1102](https://github.com/luyadev/luya/issues/1102) Removed News Module Tag table and replace by admin modules Tag models.
+- [#1098](https://github.com/luyadev/luya/issues/1098) Changed luya\base\Widget view path behavior to default implementation with option to enable app view paths lookup.
+- [#1109](https://github.com/luyadev/luya/issues/1109) In order to prevent blocks to extend from cms blocks, flag all cms blocks as final.
+- [#1076](https://github.com/luyadev/luya/issues/1076) Twig Component triggers now an deprecated notice message.
+- [#1218](https://github.com/luyadev/luya/issues/1218) Renamed InfoActiveWindow to DetailViewActiveWindow.
+- [#1244](https://github.com/luyadev/luya/issues/1244) Crawler DefaultController returns ActiveDataProvider instead of ActiveRecord results.
+
+### Added
+
+- [#1163](https://github.com/luyadev/luya/issues/1163) Styling of the toggler. Added toggles for each container.
+- [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
+- [#1245](https://github.com/luyadev/luya/issues/1245) Added gulp workflow to cms/admin.
+- [#724](https://github.com/luyadev/luya/issues/724) Removed compass configs in admin module and added gulp workflow.
+- [#1243](https://github.com/luyadev/luya/issues/1243#issuecomment-288064499) Enabled all flags
+- [#1228](https://github.com/luyadev/luya/issues/1228) Remove session serailizer for ngRestConfig.
+- [#1230](https://github.com/luyadev/luya/issues/1230) New ngRestScopes() resolves the need for ngRestConfig($config) method.
+- [#1214](https://github.com/luyadev/luya/issues/1214) Added JSON-LD class to add rich snippet informations to a website.
+- [#1124](https://github.com/luyadev/luya/issues/1124) Refactor all CMS blocks with UnitTests and PhpBlocks.
+- [#1211](https://github.com/luyadev/luya/issues/1211) Add new link directive with ability to deselect a link.
+- [#903](https://github.com/luyadev/luya/issues/903) Added file manager details.
+- [#1216](https://github.com/luyadev/luya/issues/1216) Storage Item object integrated Arrayble Interface.
+- [#1224](https://github.com/luyadev/luya/issues/1224) Settings to define a 404 Error Page to render on HttpExceptions
+- [#1226](https://github.com/luyadev/luya/issues/1226) Delete language item in cms.
+- [#1225](https://github.com/luyadev/luya/issues/1225) Formatter component extends default formats for languages.
+- [#1222](https://github.com/luyadev/luya/issues/1222) Extend from BaseYii file in order to provide IDE Auto Complet.
+- [#1221](https://github.com/luyadev/luya/issues/1221) Added CMS Query `in` expression for where conditions.
+- [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $seoTitle (getSeoTitle()) function in order to return the alternative SEO title definition.
+- [#1214](https://github.com/luyadev/luya/issues/1214) Adding JsonLd class in order to register Schema Microdata informations to the View.
+- [#1188](https://github.com/luyadev/luya/issues/1188) Change the layout file for cms page.
+- [#1202](https://github.com/luyadev/luya/issues/1202) Added Arrayable implementation for ExternalLink and menu\Item.
+- [#1200](https://github.com/luyadev/luya/issues/1200) Added new block type `zaa-multiple-inputs` to create more flexible blocks
+- [#1193](https://github.com/luyadev/luya/issues/1193) Slugify Plugin to generate aliases with only lower case letters, numbers and strikes.
+- [#1187](https://github.com/luyadev/luya/issues/1187) ActiveQueryCheckboxInjector has new `label` attribute in order to define the rendering for the dropdown label in the block admin.
+- [#1171](https://github.com/luyadev/luya/issues/1171) CMS Menu item has method `getAbsoluteLink()` in order to retrieve link with prepand host scheme.
+- [#1137](https://github.com/luyadev/luya/issues/1137) Created `fixed-table-head` directive and added it to CRUD and filemanager
+- [#1169](https://github.com/luyadev/luya/issues/1169) Callable function for labelFields in the CheckboxRelation Plugin.
+- [#1118](https://github.com/luyadev/luya/issues/1118) Variation/Flavors for blocks can be configure in the config file in order to override and hide fields.
+- [#1117](https://github.com/luyadev/luya/issues/1117) Content Proxy allows you to sync files and data from one environment into another.
+- [#1140](https://github.com/luyadev/luya/issues/1140) Added new block getIsDirtyDialogEnabled() method in order to disable the dirty dialog when blocks do not require any configuration.
+- [#1116](https://github.com/luyadev/luya/issues/1116) Injectors can be appended to the end of the configuration list.
+- [#1135](https://github.com/luyadev/luya/issues/1135) Command to generate only the ngrest model `crud/model "path/to/Model"`.
+- [#1136](https://github.com/luyadev/luya/issues/1136) Block generate uses the luya\admin\base\TypesInterface.
+- [#1134](https://github.com/luyadev/luya/issues/1134) ToggleStatus plugin ables to toggle the status from the crud list overview.
+- [#1133](https://github.com/luyadev/luya/issues/1133) Added callable $labelField and getter access for ngrest plugin luya\admin\ngrest\plugins\SelectModel.
+- [#1120](https://github.com/luyadev/luya/issues/1120) Add Hook mechanism in order to trigger contents.
+- [#1115](https://github.com/luyadev/luya/issues/1115) ActiveDataProvider default sorting configuration for news article overview.
+- [#1018](https://github.com/luyadev/luya/issues/1018) NgRest SelectModel Plugins where conditions, labelFields and labelTemplate properties added.
+- [#1010](https://github.com/luyadev/luya/issues/1010) Ability to soft delete admin languages if its not the system default language.
+- [#1110](https://github.com/luyadev/luya/issues/1110) Filemanager is sorting the directories alphabetically instead of chronologically.
+- [#1100](https://github.com/luyadev/luya/issues/1100) NgRestModel scenarios implements the restupdate and restcreate scenarios by default now.
+- [#1108](https://github.com/luyadev/luya/issues/1108) Added schema builder ability for migration files in order to support other shemes like postgreSQL.
+- [#1106](https://github.com/luyadev/luya/issues/1106) Added possibility to mock element arguments for the styleguide.
+- [#1096](https://github.com/luyadev/luya/issues/1096) News Module added teaser_text field in article model.
+- [#1006](https://github.com/luyadev/luya/issues/1006) Added spanish translations to all luya core modules and administration interface.
+- [#1103](https://github.com/luyadev/luya/issues/1103) InfoActiveWindow make usage of the yii\widgets\DetailView in order to configure attributes.
+- [#626](https://github.com/luyadev/luya/issues/626) User location for CMS and CRUD locations, page or crud item will be locked afterwards.
+- [#1158](https://github.com/luyadev/luya/issues/1158) Greek translations added.
+- [#1121](https://github.com/luyadev/luya/issues/1121) Ukrain translations added.
+- [#1154](https://github.com/luyadev/luya/issues/1154) Italian translations added.
+- [#1205](https://github.com/luyadev/luya/issues/1205) Vietnamese translations added.
+- [#1236](https://github.com/luyadev/luya/pull/1236) Portuguese translations added.
+
+### Fixed
+
+- [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
+- [#1186](https://github.com/luyadev/luya/issues/1186) Image records not deleted from list without cache reload.
+- [#1162](https://github.com/luyadev/luya/issues/1162) Unable to create pages from empty draft selection.
+- [#1143](https://github.com/luyadev/luya/issues/1143) Fixed image directive filter preselection, due to an angular convert to number problem.
+- [#1156](https://github.com/luyadev/luya/issues/1156) Fixed issue where crawler preview does not decode html entities.
+- [#1146](https://github.com/luyadev/luya/issues/1146) Fixed url rule behavior when composition is hidden but an url rule is a composition rule.
+- [#1147](https://github.com/luyadev/luya/issues/1147) Empty file caption names contains the original file name.
+- [#1130](https://github.com/luyadev/luya/issues/1130) Fixed issue which prevents item redirection loops.
+- [#1101](https://github.com/luyadev/luya/issues/1101) Rest model validation did not use proper language for the yii translations based on the user language.
+- [#1111](https://github.com/luyadev/luya/issues/1111) Storage File selection does not display file name cause of not strict comparing method.
+- [#1099](https://github.com/luyadev/luya/issues/1099) Broken file list block translations fixed.
+- [#1097](https://github.com/luyadev/luya/issues/1097) Removed unused codes from the UrlManager parseRequest() method.
+
+1.0.0-RC2 (29. Nov 2016)
+-----------------------
+
+### Changed
+
+- [#1070](https://github.com/luyadev/luya/issues/1070) **[BC BREAK]** Renamed methods of the block interface. Change `getBlockGroup()` to `blockGroup()`.
+- [#1058](https://github.com/luyadev/luya/issues/1058) **[BC BREAK]** Removed all massive assigned vars, cfgs, extras and placeholders from the PHP Block view.
+- [#1069](https://github.com/luyadev/luya/issues/1069) **[BC BREAK]** Removed CMS Block assets propertie in order to reduce RAM usage and follow Yii guidelines in order to register assets.
+- [#1068](https://github.com/luyadev/luya/issues/1068) **[BC BREAK]** Cms Block zaa() helper methods moved to \luya\cms\helpers\BlockHelper and marked methods as deprecated.
+- [#1067](https://github.com/luyadev/luya/issues/1067) **[BC BREAK]** Admin Module Menu: itemApi() routes are now separeted by slashes instead of dashes. As this supports native Yii handling. 
+- [#1045](https://github.com/luyadev/luya/issues/1045) **[BC BREAK]** Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
+- [#1075](https://github.com/luyadev/luya/issues/1075) **[BC BREAK]** Frontend and Admin Controller and Module assets can not be stored in the `$assets` property of a module or controller any more.
+- [#1086](https://github.com/luyadev/luya/issues/1086) Mark $page component as deprecated as properties can be accessed trough the menu component.
+- [#1066](https://github.com/luyadev/luya/issues/1066) NgRestModel methods renamed: `ngrestExtraAttributeTypes` to `ngRestExtraAttributeTypes` and `ngrestAttributeTypes` to `ngRestAttributeTypes`.
+- [#1043](https://github.com/luyadev/luya/issues/1043) Upgrade to 2.0.10 version of the Yii Framework.
+
+### Added
+
+- [#1081](https://github.com/luyadev/luya/issues/1081) Generate Link Interface for internal and external links in order to identify different link types.
+- [#1082](https://github.com/luyadev/luya/issues/1082) Link plugin for ngRest configuration in order to provide internal or external links.
+- [#1003](https://github.com/luyadev/luya/issues/1003) The crawler tag CRAWL_TITLE has been added to ensure a customization of the titles.
+- [#1008](https://github.com/luyadev/luya/issues/1008) Administration interface language can be changed and stored in the user settings.
+- [#1014](https://github.com/luyadev/luya/issues/1014) NgRest Crud has a new possibility to work with relation data via the `ngRestRelation()` method inside the NgRestModel. This allows you to open relation data in new tabs.
+- [#1038](https://github.com/luyadev/luya/issues/1038) Method `createCallbackUrl($callback)` added for ActiveWindows in order to get the absolut url for a callback, this is usefull when creating callbacks which can return a pdf for example.
+- [#1007](https://github.com/luyadev/luya/issues/1007) French translations available for all core modules.
+- [#1046](https://github.com/luyadev/luya/issues/1046) Hide menu items in the administration in order to enable crud relations with permissions but hide the menu point of the ngrest crud inside the admin interface.
+- [#1037](https://github.com/luyadev/luya/issues/1037) Image property abstract class to allow short and faster implementation of image properties.
+- [#1004](https://github.com/luyadev/luya/issues/1004) CMS Page field to set a custom page title tag in order to add SEO optimized titles.
+- [#1048](https://github.com/luyadev/luya/issues/1048) Crawler stores meta description infos into a seperat field in order to display description in search results.
+- [#1047](https://github.com/luyadev/luya/issues/1047) Title, Keyword and Description are now part of the Crawlers contnet, as the content is where the search field is look for the search query.
+- [#1049](https://github.com/luyadev/luya/issues/1049) Admin Filemanager supports replacement of files therefore the angular file upload component has been updated.
+- [#1051](https://github.com/luyadev/luya/issues/1051) Added new Meida block group, changed default positioning for standard groups, make block creator usage of Project block group by default.
+- [#1057](https://github.com/luyadev/luya/issues/1057) PHP Block CMS View class provides more and better helper methods in order to retrieve config contents.
+- [#1060](https://github.com/luyadev/luya/issues/1060) Filemanager Drag&Drop and Copy&Paste of files enabled (Chrome, Firefox and HTML5 Browsers only).
+- [#1063](https://github.com/luyadev/luya/issues/1063) Cleanup the block interface in order to make concret block implementations.
+- [#1059](https://github.com/luyadev/luya/issues/1059) Block Generator also generates the view file of the PHPBlock in the depending view folder.
+- [#1000](https://github.com/luyadev/luya/issues/1000) The CRUD generator will store the model in the shared models folder if available.
+- [#999](https://github.com/luyadev/luya/issues/999) Rewritten the CRUD generator and added ability to disable i18n fiel generation.
+- [#991](https://github.com/luyadev/luya/issues/991) User settings stores CRUD orderBy state in database for each ngrest crud setup.
+- [#919](https://github.com/luyadev/luya/issues/919) Added new option for image, imageArray, file and fileArray ngrest plugins in order to return an iterator or item object instead of database values.
+
+### Fixed
+
+- [#1072](https://github.com/luyadev/luya/issues/1072) Admin services will not force reload on each click when array is empty.
+- [#1078](https://github.com/luyadev/luya/issues/1078) Fixed bug where cms block press enter does not save values but closes block form visbility.
+- [#1002](https://github.com/luyadev/luya/issues/1002) Override the core commands method in the console application in order the provide the ability to use controllerMap variable for configurations in the applcation.
+- [#1011](https://github.com/luyadev/luya/issues/1011) The ViewContext implementation for cmslayout rendering allows you now to render other templates inside a cmslayout.
+- [#1044](https://github.com/luyadev/luya/issues/1044) Changing the cms permission force menu reload in order to fix bug with old menu permissions.
+- [#1013](https://github.com/luyadev/luya/issues/1013) Delete a cms page displays blank page and reloads menu, fixed bug where page was still visible.
+- [#1061](https://github.com/luyadev/luya/issues/1061) CMS Page properties with overriden default implementation returns wrong administration api value. 
+- [#1062](https://github.com/luyadev/luya/issues/1062) CMS Layout files will ignore prefixed files with . and _ and folders inside the cmslayout folder.
+- [#987](https://github.com/luyadev/luya/issues/987) Fixed issue with image auto rotate and moved to imagine extension version ~2.1.0
+
+1.0.0-RC1 (04.10.2016)
 -----------------------
 
 - [#806](https://github.com/luyadev/luya/issues/806#issuecomment-248597369) **[BC BREAK]** Renamed to `configs/server.php` to `configs/env.php`, new projects will also have the env prefix for the config names.
@@ -12,12 +153,15 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#973` **[BC BREAK]** Removed `$assets` property from **none admin modules**.
 - `#974` **[BC BREAK]** Removed `$isAdmin` property.
 - `#970` **[BC BREAK]** Deleted, renamed and rearranged LUYA core REST classes and methods.
+- `#995` Added Grouping/Section ability to for the crawler.
 - `#830` Added Textarea auto height plugin
-- `#983` Added LazyLoad Widget
+- `#983` Added LazyLoad Widget to the LUYA core features.
 - `#979` Added option to enable markdown parsing for table blocks.
 - `#971` Added basic pagination for NgRest Apis.
 - `#956` Added optional image css class and layout css class in block configurations.
 - `#959` Added block injectors to simplify relations, links and other helpfull tools to make less complex blocks.
+- `#998` Added the gii model generator to build the model rules() for the crud generator command crud/create.
+- `#994` Added ability to copy an existing page with all its languages and blocks.
 - `#965` Fixed bug where cms pages are lost while creating when selecting a container but choose a sub page not from the related container.
 - `#957` Fixed bug where cms admin container movement lost container_id reference of children elements.
 - `#963` Fixed bug where caching if block is not reseted correctly.

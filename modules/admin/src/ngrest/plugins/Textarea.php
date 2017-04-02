@@ -11,12 +11,18 @@ use luya\TagParser;
  * Example uf using the nl2br option
  *
  * ```php
- * ['mytext' => ['textarea', 'nl2br' => true]],
+ * ['mytext' => ['textarea', 'nl2br' => true]]
  * ```
  *
  * This will automatically generate nl2br on after find event (before display).
  *
- * @author nadar
+ * In order to enable the markdown parsing use the code below:
+ *
+ * ```php
+ * ['mytext' => ['textarea', 'markdown' => true]]
+ * ```
+ *
+ * @author Basil Suter <basil@nadar.io>
  */
 class Textarea extends Plugin
 {
@@ -26,20 +32,18 @@ class Textarea extends Plugin
     public $placeholder = null;
 
     /**
-     * @var bool Defines whether the textarea output value should be nl2br or not. This only
-     * will be triggerd after find (in frontend output).
+     * @var boolean Defines whether the textarea output value should be nl2br or not. This only will be triggerd after find (in frontend output).
      */
     public $nl2br = false;
     
     /**
-     * @var bool Define whether the textarea output value should be automaticcally parsed as
+     * @var boolean Define whether the textarea output value should be automaticcally parsed as
      * markdown or not. This will only trigger after find (in frontend output).
      */
     public $markdown = false;
 
     /**
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderList()
+     * @inheritdoc
      */
     public function renderList($id, $ngModel)
     {
@@ -47,8 +51,7 @@ class Textarea extends Plugin
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderCreate()
+     * @inheritdoc
      */
     public function renderCreate($id, $ngModel)
     {
@@ -56,8 +59,7 @@ class Textarea extends Plugin
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderUpdate()
+     * @inheritdoc
      */
     public function renderUpdate($id, $ngModel)
     {
@@ -65,8 +67,7 @@ class Textarea extends Plugin
     }
     
     /**
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::onAfterFind()
+     * @inheritdoc
      */
     public function onAfterFind($event)
     {

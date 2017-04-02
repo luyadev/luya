@@ -33,10 +33,10 @@
 
 
 .accordion__body {
-    background-color: $collapsible--background;
-    border-bottom: 1px solid $accordion__header-bg;
-    border-right: 1px solid $accordion__header-bg;
-    border-left: 1px solid $accordion__header-bg;
+    //background-color: $collapsible--background;
+    //border-bottom: 1px solid $accordion__header-bg;
+    //border-right: 1px solid $accordion__header-bg;
+    //border-left: 1px solid $accordion__header-bg;
     height: 0;
     padding: 0;
     box-sizing: border-box;
@@ -61,13 +61,13 @@
 .accordion__entry--open > .accordion__body--empty:after {
     display: block;
     content: "";
-    background: url("../img/empty-placeholder-arrow.png") top left no-repeat;
+    background: url("../../img/empty-placeholder-arrow.png") top left no-repeat;
     width: 100px;
     height: 40px;
     position: absolute;
     background-size: cover;
     opacity: 0.5;
-    right: 200px;
+    right: 0;
     bottom: -20px;
 }
 

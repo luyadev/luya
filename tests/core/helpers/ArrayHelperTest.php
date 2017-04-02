@@ -39,7 +39,17 @@ class ArrayHelperTest extends LuyaWebTestCase
                 2 => '2',
                 3 => '3',
                 4 => 'string',
+                5 => '1',
+                6 => '-1',
+                7 => '1.5',
+                8 => '-1.5',
             ],
+            'float' => 27.25,
+            'integerfloatstring' => '27.25',
+            'minus1' => -1,
+            'minus1float' => -1.5,
+            'minus1string' => '-1',
+            'minus1stringfloat' => '-1.5',
         ];
         
         $typecasted = ArrayHelper::typeCast($array);
@@ -53,6 +63,17 @@ class ArrayHelperTest extends LuyaWebTestCase
         $this->assertSame(2, $typecasted['sub'][2]);
         $this->assertSame(3, $typecasted['sub'][3]);
         $this->assertSame('string', $typecasted['sub'][4]);
+        $this->assertSame(1, $typecasted['sub'][5]);
+        $this->assertSame(-1, $typecasted['sub'][6]);
+        $this->assertSame(1.5, $typecasted['sub'][7]);
+        $this->assertSame(-1.5, $typecasted['sub'][8]);
+        
+        $this->assertSame(27.25, $typecasted['float']);
+        $this->assertSame(27.25, $typecasted['integerfloatstring']);
+        $this->assertSame(-1, $typecasted['minus1']);
+        $this->assertSame(-1.5, $typecasted['minus1float']);
+        $this->assertSame(-1, $typecasted['minus1string']);
+        $this->assertSame(-1.5, $typecasted['minus1stringfloat']);
     }
     
     public function testSearch()

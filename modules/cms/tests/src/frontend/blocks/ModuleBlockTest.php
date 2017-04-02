@@ -1,13 +1,69 @@
 <?php
 
-namespace cmstests\src\frontend;
+namespace cmstests\src\frontend\blocks;
 
 use Yii;
-use cmstests\CmsFrontendTestCase;
 use luya\cms\frontend\blocks\ModuleBlock;
+use cmstests\BlockTestCase;
 
-class ModuleBlockTest extends CmsFrontendTestCase
+class ModuleBlockTest extends BlockTestCase
 {
+    public $blockClass = 'luya\cms\frontend\blocks\ModuleBlock';
+    
+    public function testEmptyRender()
+    {
+        $this->assertSame('', $this->renderFrontendNoSpace());
+    }
+    
+    public function testModuleName()
+    {
+        $this->block->setEnvOption('context', 'frontend');
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $this->assertSame('cmsunitmodule/default/index', $this->renderFrontendNoSpace());
+    }
+    
+    public function testCutomControllerFrontend()
+    {
+        $this->block->setEnvOption('context', 'frontend');
+        $this->block->setCfgValues(['moduleController' => 'foo', 'moduleAction' => 'bar']);
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+    
+        $this->assertEquals('cmsunitmodule/foo/bar', $this->renderFrontendNoSpace());
+    }
+    
+    public function testCutomControllerFrontendActionArgs()
+    {
+        $this->block->setEnvOption('context', 'frontend');
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $this->block->setCfgValues(['moduleController' => 'default', 'moduleAction' => 'with-args', 'moduleActionArgs' => '{"param":"paramvalue"}']);
+        $this->assertEquals('paramvalue', $this->renderFrontendNoSpace());
+    }
+    
+    public function testGetControlleClassses()
+    {
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $ctrls = $this->block->getControllerClasses();
+    
+        $this->assertArrayHasKey('default', $ctrls);
+        $this->assertContains('DefaultController.php', $ctrls['default']);
+        $this->assertArrayHasKey('foo', $ctrls);
+        $this->assertContains('FooController.php', $ctrls['foo']);
+    }
+    
+    public function testGetModuless()
+    {
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $m = $this->block->getModuleNames();
+        
+        $this->assertArrayHasKey('value', $m[0]);
+        $this->assertArrayHasKey('label', $m[0]);
+        
+        $this->assertSame('CmsUnitModule', $m[0]['value']);
+        $this->assertSame('CmsUnitModule', $m[0]['label']);
+    }
+    
+    // older methods
+    
     public function testRenderingFrontend()
     {
         $block = new ModuleBlock();
@@ -23,52 +79,24 @@ class ModuleBlockTest extends CmsFrontendTestCase
         $block->setEnvOption('context', 'admin');
         $block->setVarValues(['moduleName' => 'CmsUnitModule']);
 
-        $this->assertEquals('{% if vars.moduleName is empty %}<span class="block__empty-text">No module has been provided yet.</span>{% else %}<p><i class="material-icons">developer_board</i> Module integration: <strong>{{ vars.moduleName }}</strong></p>{% endif %}', $block->renderAdmin());
-    }
-
-    public function testCutomControllerFrontend()
-    {
-        $block = new ModuleBlock();
-        $block->setEnvOption('context', 'frontend');
-        $block->setCfgValues(['moduleController' => 'foo', 'moduleAction' => 'bar']);
-        $block->setVarValues(['moduleName' => 'CmsUnitModule']);
-
-        $this->assertEquals('cmsunitmodule/foo/bar', $block->renderFrontend());
+        $this->assertEquals('{% if vars.moduleName is empty %}<span class="block__empty-text">No module has been specified yet.</span>{% else %}<p><i class="material-icons">developer_board</i> Module integration: <strong>{{ vars.moduleName }}</strong></p>{% endif %}', $block->renderAdmin());
     }
     
-    public function testCutomControllerFrontendActionArgs()
-    {
-        $block = new ModuleBlock();
-        $block->setEnvOption('context', 'frontend');
-        $block->setVarValues(['moduleName' => 'CmsUnitModule']);
-        $block->setCfgValues(['moduleController' => 'default', 'moduleAction' => 'with-args', 'moduleActionArgs' => '{"param":"paramvalue"}']);
-        $this->assertEquals('paramvalue', $block->renderFrontend());
-    }
-    
-    
-    /**
-     * @expectedException yii\web\NotFoundHttpException
-     */
     public function testNotFoundException()
     {
-        $block = new ModuleBlock();
-        $block->setEnvOption('context', 'frontend');
-        $block->setVarValues(['moduleName' => 'CmsUnitModule']);
-        $block->setCfgValues(['moduleController' => 'not-found-controller']);
-        
-        $this->assertSame('asdfsdf', $block->renderFrontend());
+        $this->block->setEnvOption('context', 'frontend');
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $this->block->setCfgValues(['moduleController' => 'not-found-controller']);
+        $this->expectException('\yii\web\NotFoundHttpException');
+        $this->renderFrontendNoSpace();
     }
     
-    /**
-     * @expectedException luya\cms\Exception
-     */
     public function testBlockWithException()
     {
-        $block = new ModuleBlock();
-        $block->setEnvOption('context', 'frontend');
-        $block->setVarValues(['moduleName' => 'CmsUnitModule']);
-        $block->setCfgValues(['moduleController' => 'default', 'moduleAction' => 'exception']);
-    
-        $this->assertSame('asdfsdf', $block->renderFrontend());
+        $this->block->setEnvOption('context', 'frontend');
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $this->block->setCfgValues(['moduleController' => 'default', 'moduleAction' => 'exception']);
+        $this->expectException('\luya\cms\Exception');
+        $this->renderFrontendNoSpace();
     }
 }

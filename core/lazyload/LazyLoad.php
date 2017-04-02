@@ -8,14 +8,17 @@ use yii\helpers\Html;
 use luya\web\View;
 
 /**
- * Generate images with LazyLoad Tags
+ * Image Lazy Loader.
  *
  * ```php
  * <?= LazyLoad::widget(['src' => 'http://www.zephir.ch/img/zephir-logo.png']); ?>
  * ```
  *
+ * In order to read more visit the [[concept-lazyload.md]] Guide section.
+ *
  * @author Basil Suter <basil@nadar.io>
  * @author Marc Stampfli <marc.stampfli@zephir.ch>
+ * @since 1.0.0
  */
 class LazyLoad extends Widget
 {
@@ -45,8 +48,7 @@ class LazyLoad extends Widget
     public $extraClass = null;
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -61,12 +63,12 @@ class LazyLoad extends Widget
         if (static::$counter == 1) {
             LazyLoadAsset::register($this->view);
             $this->view->registerJs("$('.lazy-image').lazyLoad();", View::POS_READY);
+            $this->view->registerCss(".lazy-image { display: none; }");
         }
     }
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Widget::run()
+     * @inheritdoc
      */
     public function run()
     {

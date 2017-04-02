@@ -5,22 +5,37 @@ namespace luya\admin\models;
 use Yii;
 use yii\helpers\Url;
 use luya\admin\Module;
+use yii\base\Model;
 
-class LoginForm extends \yii\base\Model
+/**
+ * Admin Login Form Model.
+ *
+ * @property \luya\admin\models\User $user The user model.
+ * @author Basil Suter <basil@nadar.io>
+ */
+final class LoginForm extends Model
 {
     private $_user = false;
 
     public $email;
+    
     public $password;
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['email', 'password'], 'required'],
+            [['email'], 'email'],
             ['password', 'validatePassword'],
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -29,6 +44,11 @@ class LoginForm extends \yii\base\Model
         ];
     }
 
+    /**
+     * Inline validator.
+     *
+     * @param string $attribute Attribute value
+     */
     public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
@@ -39,15 +59,30 @@ class LoginForm extends \yii\base\Model
         }
     }
 
+    /**
+     * Send the secure token by mail.
+     *
+     * @return boolean
+     */
     public function sendSecureLogin()
     {
         $token = $this->getUser()->getAndStoreToken();
 
-        Yii::$app->mail->compose(Module::t('login_securetoken_mail_subject'), Module::t('login_securetoken_mail', ['url' => Url::base(true), 'token' => $token]))->address($this->getUser()->email)->send();
+        Yii::$app->mail->compose(Module::t('login_securetoken_mail_subject'), Module::t('login_securetoken_mail', [
+            'url' => Url::base(true),
+            'token' => $token,
+        ]))->address($this->user->email)->send();
 
         return true;
     }
 
+    /**
+     * Validate the secure token.
+     *
+     * @param string $token
+     * @param integer $userId
+     * @return boolean|\luya\admin\models\User
+     */
     public function validateSecureToken($token, $userId)
     {
         $user = User::findOne($userId);
@@ -63,6 +98,11 @@ class LoginForm extends \yii\base\Model
         return false;
     }
 
+    /**
+     * Login the current user if valid.
+     *
+     * @return boolean|\luya\admin\models\User|boolean
+     */
     public function login()
     {
         if ($this->validate()) {
@@ -73,20 +113,21 @@ class LoginForm extends \yii\base\Model
             $user->auth_token = Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt);
             $user->save();
 
-            $login = new UserLogin();
-            $login->setAttributes([
+            $login = new UserLogin([
                 'auth_token' => $user->auth_token,
                 'user_id' => $user->id,
             ]);
-            $login->insert();
+            $login->save();
             UserOnline::refreshUser($user->id, 'login');
-
             return $user;
         } else {
             return false;
         }
     }
 
+    /**
+     * @return boolean|\luya\admin\models\User
+     */
     public function getUser()
     {
         if ($this->_user === false) {

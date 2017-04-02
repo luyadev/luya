@@ -7,20 +7,20 @@ use luya\web\Composition;
 
 /**
  * removed tests to implemented here (if not already).
- * 
- * 
+ *
+ *
  $parts = Yii::$app->composition->get();
- 
+
  $this->assertArrayHasKey('langShortCode', $parts);
  $this->assertArrayHasKey('foo', $parts);
  $this->assertArrayHasKey('bar', $parts);
- 
+
  $this->assertEquals('de', $parts['langShortCode']);
  $this->assertEquals('de', Yii::$app->composition->getLanguage());
  $this->assertEquals('1234', $parts['foo']);
  $this->assertEquals('luya09', $parts['bar']);
- 
- * 
+
+ *
  * @author nadar
  */
 class CompositionTest extends \luyatests\LuyaWebTestCase
@@ -198,20 +198,5 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $comp = new Composition($request);
         
         $this->assertEquals('this-should/be-left', $comp->removeFrom('en/this-should/be-left'));
-    }
-    
-    public function testLocalisation()
-    {
-        $request = new Request();
-        $comp = new Composition($request);
-        
-        // default
-        $this->assertEquals('en_EN', $comp->getLocale());
-        
-        $comp->locales = ['de' => 'de_CH.utf'];
-        
-        $comp->setKey('langShortCode', 'de');
-        
-        $this->assertEquals('de_CH.utf', $comp->getLocale());
     }
 }

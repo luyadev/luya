@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 /**
  * Create a password input for a given field.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Password extends Plugin
 {

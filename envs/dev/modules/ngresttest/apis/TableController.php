@@ -2,15 +2,15 @@
 
 namespace ngresttest\apis;
 
-use luya\admin\ngrest\base\Api;
-
 /**
- * NgRest API created at 21.03.2016 14:05 on LUYA Version 1.0.0-beta6-dev.
+ * Table Controller.
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev.
  */
-class TableController extends Api
+class TableController extends \luya\admin\ngrest\base\Api
 {
     /**
-     * @var string $modelClass The path to the model which is the provider for the rules and fields.
+     * @var string The path to the model which is the provider for the rules and fields.
      */
-    public $modelClass = '\ngresttest\models\Table';
+    public $modelClass = 'ngresttest\models\Table';
 }

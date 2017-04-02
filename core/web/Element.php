@@ -48,14 +48,35 @@ use Twig_Loader_Filesystem;
  * ];
  * ```
  *
+ * Its also possible to directly provided mocked arguments for the styleguide:
+ *
+ * ```php
+ * return [
+ *    'button' => [function($value, $link) {
+ *        return '<a class="btn btn-primary" href="'.$link.'">'.$value.'</a>';
+ *    }, ['value' => 'Value for Button', 'link' => 'Value for Link']],
+ * ];
+ * ```
+ *
+ * Or directly from the add Element method:
+ *
+ * ```php
+ * Yii::$app->element->addElement('button', function($value, $link) {
+ *     return '<a class="btn btn-primary" href="'.$link.'">'.$value.'</a>';
+ * }, ['value' => 'Value for Button', 'link' => 'Value for Link']);
+ * ```
+ *
+ * The styleguide will now insert the mocked values instead of generic values.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Element extends \yii\base\Component
 {
     /**
      * @var string The path to the default element file. Alias names will be parsed by Yii::getAlias.
      */
-    public $configFile = '@app/elements.php';
+    public $configFile = '@app/views/elements.php';
 
     /**
      * @var string The path to the folder where the view files to render can be found.
@@ -86,7 +107,11 @@ class Element extends \yii\base\Component
         if (file_exists($path)) {
             $config = (include($path));
             foreach ($config as $name => $closure) {
-                $this->addElement($name, $closure);
+                if (is_array($closure)) {
+                    $this->addElement($name, $closure[0], $closure[1]);
+                } else {
+                    $this->addElement($name, $closure);
+                }
             }
         }
     }
@@ -110,18 +135,22 @@ class Element extends \yii\base\Component
     /**
      * Add an element with a closure to the elements array.
      *
-     * @param string   $name    The identifier of the element where the close is binde to.
-     * @param callable $closure The closure function to registered, for instance:
+     * @param string $name The identifier of the element where the close is binde to.
+     * @param callable $closure The closure function to registered, for example:
      *
      * ```php
      * function() {
      *     return 'foobar';
      * }
      * ```
+     *
+     * @param array $mockedArgs An array with key value pairing for the argument in order to render them for the styleguide.
      */
-    public function addElement($name, $closure)
+    public function addElement($name, $closure, $mockedArgs = [])
     {
         $this->_elements[$name] = $closure;
+        
+        $this->mockArgs($name, $mockedArgs);
     }
 
     /**
@@ -181,7 +210,7 @@ class Element extends \yii\base\Component
      * @return mixed The return value of the executed closure function.
      *
      * @throws Exception
-     * @todo delete in RC1
+     * @deprecated Depracted in 1.0.0 and will be removed.
      */
     public function run($name, array $params = [])
     {
@@ -203,6 +232,35 @@ class Element extends \yii\base\Component
 
         return $this->_folder;
     }
+    
+    private $_mockedArguments = [];
+    
+    /**
+     * Mock arguments for an element in order to render those inside the styleguide.
+     *
+     * @param string $elementName The element name the arguments are defined for.
+     * @param array $args Arguments where the key is the argument name value and value to mock.
+     */
+    public function mockArgs($elementName, array $args)
+    {
+        $this->_mockedArguments[$elementName] = $args;
+    }
+    
+    /**
+     * Find the mocked value for an element argument.
+     *
+     * @param string $elementName The name of the element.
+     * @param string $argName The name of the argument.
+     * @return mixed|boolean Whether the mocked argument value exists returns the value otherwise false.
+     */
+    public function getMockedArgValue($elementName, $argName)
+    {
+        if (isset($this->_mockedArguments[$elementName]) && isset($this->_mockedArguments[$elementName][$argName])) {
+            return $this->_mockedArguments[$elementName][$argName];
+        }
+        
+        return false;
+    }
 
     /**
      * Method to render twig files with theyr specific arguments, can be used inside the element closure depending
@@ -219,6 +277,8 @@ class Element extends \yii\base\Component
             $view = new View();
             return $view->renderPhpFile(rtrim($this->getFolder(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . FileHelper::ensureExtension($file, 'php'), $args);
         } elseif ($this->renderEngine == 'twig') {
+            // @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
+            trigger_error('twig render engine is not supported anymore.', E_USER_DEPRECATED);
             $twig = Yii::$app->twig->env(new Twig_Loader_Filesystem($this->getFolder()));
             return $twig->render(FileHelper::ensureExtension($file, 'twig'), $args);
         }

@@ -4,7 +4,7 @@ namespace luya\cms\base;
 
 /**
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta6
  */
 interface NavItemTypeInterface

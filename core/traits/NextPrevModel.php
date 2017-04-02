@@ -8,8 +8,8 @@ use yii\db\ActiveQuery;
  * Trait to us within ActiveRecords to get next and prev (previous) model records of the current
  * ActiveRecord object model.
  *
- * @author nadar
- * @since 1.0.0-beta6
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 trait NextPrevModel
 {

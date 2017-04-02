@@ -5,29 +5,55 @@ namespace luya\cms\frontend\blocks;
 use Yii;
 use luya\cms\frontend\Module;
 use luya\TagParser;
-use luya\cms\base\TwigBlock;
+use luya\cms\frontend\blockgroups\MediaGroup;
+use luya\cms\helpers\BlockHelper;
+use luya\cms\base\PhpBlock;
+use luya\web\ExternalLink;
 
 /**
- * Display Block
- * 
+ * Image Block.
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class ImageBlock extends TwigBlock
+final class ImageBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
 
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_image_name');
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function blockGroup()
+    {
+        return MediaGroup::class;
+    }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'crop';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
@@ -46,10 +72,16 @@ class ImageBlock extends TwigBlock
                 ['var' => 'internalLink', 'label' => Module::t('block_image_internallink_label'), 'type' => 'zaa-cms-page'],
                 ['var' => 'externalLink', 'label' => Module::t('block_image_externallink_label'), 'type' => 'zaa-text'],
                 ['var' => 'cssClass', 'label' => Module::t('block_image_cfg_css_class'), 'type' => 'zaa-text'],
+                ['var' => 'divCssClass', 'label' => Module::t('block_cfg_additonal_css_class'), 'type' => self::TYPE_TEXT],
             ],
         ];
     }
 
+    /**
+     * Get the Text as html or p enclosed if empty null is returned.
+     *
+     * @return string|null
+     */
     public function getText()
     {
         $text = $this->getVarValue('caption');
@@ -58,62 +90,50 @@ class ImageBlock extends TwigBlock
             return TagParser::convertWithMarkdown($text);
         }
 
-        return $text;
+        return empty($text) ? null : '<p>' . nl2br($text) . '</p>';
+    }
+    
+    /**
+     * Get the Link Object.
+     *
+     * Linkable resources must implement {{luya\web\LinkInterface}}.
+     *
+     * @return \luya\web\ExternalLink|\luya\cms\menu\Item|boolean
+     */
+    public function getLinkObject()
+    {
+        if ($this->getCfgValue('externalLink', false)) {
+            return new ExternalLink(['href' => $this->getCfgValue('externalLink', false)]);
+        }
+        
+        if ($this->getCfgValue('internalLink', false)) {
+            return Yii::$app->menu->find()->where(['nav_id' => $this->getCfgValue('internalLink')])->one();
+        }
+        
+        return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extraVars()
     {
-        $linkIsExternal = true;
-        $link = $this->getCfgValue('externalLink', false);
-        
-        if (!$link && $this->getCfgValue('internalLink', false)) {
-            $linkIsExternal = false;
-            $link = Yii::$app->menu->find()->where(['nav_id' => $this->getCfgValue('internalLink')])->one();
-            if ($link) {
-                $link = $link->link;
-            } else {
-                $link = false;
-            }
-        }
-
         return [
-            'image' => $this->zaaImageUpload($this->getVarValue('imageId')),
-            'imageAdmin' => $this->zaaImageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
+            'image' => BlockHelper::imageUpload($this->getVarValue('imageId')),
+            'imageAdmin' => BlockHelper::imageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
             'text' => $this->getText(),
-            'link' => $link,
-            'linkIsExternal' => $linkIsExternal
+            'link' => $this->getLinkObject(),
         ];
     }
 
-    public function twigFrontend()
+    /**
+     * @inheritdoc
+     */
+    public function admin()
     {
-        return '{% if extras.image is not empty %}
-                <div class="image">
-                    <figure>
-                        {% if extras.link %}
-                            <a class="text-teaser" href="{{ extras.link }}"{% if extras.linkIsExternal %} target="_blank"{% endif %}>
-                        {% endif %}
-                        
-                            <img class="img-responsive {{cfgs.cssClass}}" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" />
-                            
-                        {% if extras.link %}
-                            </a>
-                        {% endif %}
-                        
-                        {% if extras.text is not empty %}
-                            <figcaption>
-                            {% if vars.textType == 1 %}{{ extras.text }}{% else %}<p>{{ extras.text|nl2br }}</p>{% endif %}
-                            </figcaption>
-                        {% endif %}
-                    </figure>
-                </div>
-            {% endif %}';
-    }
-
-    public function twigAdmin()
-    {
-        $image = '{% if extras.imageAdmin.source %}<p><img src="{{extras.imageAdmin.source}}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="max-width: 100%;" /><p>{% else %}<span class="block__empty-text">' . Module::t('block_image_no_image') . '</span>{% endif %}';
-        $image.= '{% if vars.caption is not empty %}{{vars.caption}}{% endif %}';
+        $image = '{% if extras.imageAdmin.source %}<p><img src="{{extras.imageAdmin.source}}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="max-width: 100%;"></p>';
+        $image.= '{% else %}<span class="block__empty-text">' . Module::t('block_image_no_image') . '</span>{% endif %}';
+        $image.= '{% if vars.caption is not empty %}{{extras.text}}{% endif %}';
 
         return $image;
     }

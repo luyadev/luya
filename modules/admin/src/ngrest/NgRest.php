@@ -26,7 +26,7 @@ use luya\admin\ngrest\render\RenderInterface;
  * $ngrest->render(new RenderCrud());
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class NgRest
 {
@@ -45,21 +45,6 @@ class NgRest
         $this->render = $render;
         $this->render->setConfig($this->config);
         return $this->render->render();
-    }
-
-    public static function findConfig($ngRestConfigHash)
-    {
-        // decode the session, find the hash, if yes return the
-        $session = Yii::$app->session->get($ngRestConfigHash);
-        // valid session usnerialize and return
-        if ($session) {
-            return unserialize($session);
-        }
-    }
-
-    public function __destruct()
-    {
-        yii::$app->session->set($this->config->hash, serialize($this->config));
     }
     
     public static function createPluginObject($className, $name, $alias, $i18n, $args = [])

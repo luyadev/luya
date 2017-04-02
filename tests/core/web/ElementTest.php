@@ -3,6 +3,7 @@
 namespace luyatests\core\web;
 
 use Yii;
+use luya\web\Element;
 
 class ElementTest extends \luyatests\LuyaWebTestCase
 {
@@ -18,6 +19,7 @@ class ElementTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('baz', $element->bar());
     }
 
+    /*
     public function testRenderElement()
     {
         $element = new \luya\web\Element();
@@ -49,6 +51,7 @@ class ElementTest extends \luyatests\LuyaWebTestCase
 
         $this->assertEquals('baz', $response);
     }
+    */
     
     public function testPhpRenderElement()
     {
@@ -96,7 +99,6 @@ class ElementTest extends \luyatests\LuyaWebTestCase
     {
         $element = new \luya\web\Element();
         $element->addElement('name', function () use ($element) {
-
         });
 
         $names = $element->getNames();
@@ -122,5 +124,46 @@ class ElementTest extends \luyatests\LuyaWebTestCase
         $this->assertTrue($element->hasElement('button'));
         $this->assertTrue($element->hasElement('teaserbox'));
         $this->assertFalse($element->hasElement('foobarinsertion'));
+    }
+    
+    public function testMockedArguemnts()
+    {
+        $element = new Element();
+        $element->mockArgs('test', ['foo' => 'bar', 'param' => 'value']);
+        $this->assertFalse($element->getMockedArgValue('test', 'notexists'));
+        $this->assertSame('bar', $element->getMockedArgValue('test', 'foo'));
+        $this->assertSame('value', $element->getMockedArgValue('test', 'param'));
+    }
+    
+    public function testMockedArguemntInsideFunctionCall()
+    {
+        $element = new Element();
+        $element->addElement('name', function () use ($element) {
+            $element->mockArgs('test', ['foo' => 'bar', 'param' => 'value']);
+        });
+        $element->name();
+        $this->assertFalse($element->getMockedArgValue('test', 'notexists'));
+        $this->assertSame('bar', $element->getMockedArgValue('test', 'foo'));
+        $this->assertSame('value', $element->getMockedArgValue('test', 'param'));
+    }
+    
+    public function testMockedArguemntsAsMockedArgsParam()
+    {
+        $element = new Element();
+        $element->addElement('elementName', function () use ($element) {
+            // nothing happens here
+        }, ['foo' => 'bar', 'param' => 'value']);
+        $this->assertFalse($element->getMockedArgValue('elementName', 'notexists'));
+        $this->assertSame('bar', $element->getMockedArgValue('elementName', 'foo'));
+        $this->assertSame('value', $element->getMockedArgValue('elementName', 'param'));
+    }
+    
+    public function testMockedArgumentsInlineElements()
+    {
+        $element = new \luya\web\Element(['configFile' => '@unitmodule/elementsMocked.php']);
+    
+        $this->assertFalse($element->getMockedArgValue('button', 'notexists'));
+        $this->assertSame('mock1', $element->getMockedArgValue('button', 'href'));
+        $this->assertSame('mock2', $element->getMockedArgValue('button', 'name'));
     }
 }

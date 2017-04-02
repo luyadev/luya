@@ -4,7 +4,6 @@ namespace luya;
 
 use Yii;
 use yii\base\Object;
-use luya\Exception;
 use luya\tag\TagMarkdownParser;
 
 /**
@@ -13,12 +12,14 @@ use luya\tag\TagMarkdownParser;
  * This is an additional concept to markdown, where you can inject your custom tags to parse. All tags must be an instance
  * of `luya\tag\BaseTag` and implement the `parse($value, $sub)` method in order to convert the input to your tag.
  *
+ * Read more in the Guide [[concept-tags.md]].
+ *
  * The identifier of the tag is not related to your tag, so you can configure the same tag as different names with multiple
  * purposes.
  *
  * To inject a created tag just use:
  *
- * ```
+ * ```php
  * TagParser::inject('tagname', ['class' => 'path\to\TagClass']);
  * ```
  *
@@ -30,7 +31,7 @@ use luya\tag\TagMarkdownParser;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-rc1
+ * @since 1.0.0
  */
 class TagParser extends Object
 {
@@ -56,7 +57,7 @@ class TagParser extends Object
      */
     public static function inject($name, $config)
     {
-        static::getInstance()->addTag($name, $config);
+        self::getInstance()->addTag($name, $config);
     }
     
     /**
@@ -67,7 +68,7 @@ class TagParser extends Object
      */
     public static function convert($text)
     {
-        return static::getInstance()->processText($text);
+        return self::getInstance()->processText($text);
     }
     
     /**
@@ -82,9 +83,16 @@ class TagParser extends Object
         return (new TagMarkdownParser())->parse(static::convert($text));
     }
     
+    /**
+     * Generate the instance for all registered tags.
+     *
+     * The main purpose of this method is to return all tag objects in admin context to provide help informations from the tags.
+     *
+     * @return array An array with all tag object available.
+     */
     public static function getInstantiatedTagObjects()
     {
-        $context = static::getInstance();
+        $context = self::getInstance();
         foreach ($context->tags as $key => $config) {
             $context->instantiatTag($key);
         }
@@ -113,10 +121,6 @@ class TagParser extends Object
 
     private function instantiatTag($tag)
     {
-        if (!$this->hasTag($tag)) {
-            throw new Exception("Wowo tag not found!");
-        }
-        
         if (!is_object($this->tags[$tag])) {
             $this->tags[$tag] = Yii::createObject($this->tags[$tag]);
             Yii::trace('tag parser object generated for:'. $tag, __CLASS__);

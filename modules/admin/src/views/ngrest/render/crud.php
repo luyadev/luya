@@ -18,9 +18,11 @@ use luya\admin\Module;
         $scope.config.update = <?php echo $this->context->getFieldsJson('update'); ?>;
         $scope.config.ngrestConfigHash = '<?php echo $config->hash; ?>';
         $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
+        $scope.config.activeWindowRenderUrl = '<?= $activeWindowRenderUrl; ?>';
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
         $scope.config.inline = <?= (int) $config->inline; ?>;
-        $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
+        $scope.config.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
+        $scope.config.tableName = '<?= $config->tableName; ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
         <?php if ($config->groupByField): ?>
         $scope.config.groupBy = 1;
@@ -48,6 +50,10 @@ use luya\admin\Module;
                 <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
                     <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?= Module::t('ngrest_crud_btn_close'); ?></a>
                 </li>
+                
+                <li ng-repeat="(index,btn) in tabService.tabs" class="tabs__item" ng-class="{'tabs__item--active' : btn.active}">
+                	<a class="tabs__anchor"><i class="material-icons tabs__icon" ng-click="closeTab(btn, index)">cancel</i> <span ng-click="switchToTab(btn)">{{btn.name}} #{{btn.id}}</span></a>
+                </li>
             </ul>
         </div>
 
@@ -58,7 +64,11 @@ use luya\admin\Module;
                 </span>
             </a>
         </div>
-
+		
+		<div class="card-panel" ng-repeat="btn in tabService.tabs" ng-if="btn.active">
+			<crud-relation-loader api="{{btn.api}}" array-index="{{btn.arrayIndex}}" model-class="{{btn.modelClass}}" id="{{btn.id}}"></crud-relation-loader>
+		</div>
+        
         <!-- LIST -->
         <div class="card-panel" ng-show="crudSwitchType==0">
 
@@ -74,7 +84,7 @@ use luya\admin\Module;
                                 
                             </div>
                             <div ng-show="config.minLengthWarning">
-                               <p>The search keyword must at least have 3 chars.</p>
+                               <p><?= Module::t('ngrest_crud_ajax_search_length')?></p>
                             </div>
                         </div>
                         <div class="col <?php if (!empty($config->filters)): ?>m6 l3<?php else: ?>m12 l4<?php endif; ?>">
@@ -82,7 +92,7 @@ use luya\admin\Module;
                                 <div class="input__field-wrapper">
                                     <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
                                     <select class="input__field" ng-change="changeGroupByField()" ng-model="config.groupByField">
-                                        <option value="0">Nach Feld gruppieren</option>
+                                        <option value="0"><?= Module::t('ngrest_crud_group_prompt'); ?></option>
                                         <?php foreach ($config->getPointer('list') as $item): ?>
                                             <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
                                         <?php endforeach; ?>
@@ -95,8 +105,8 @@ use luya\admin\Module;
                                 <div class="input input--select input--vertical input--full-width">
                                     <div class="input__field-wrapper">
                                         <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                        <select class="input__field" ng-change="realoadCrudList()" ng-model="config.filter">
-                                            <option value="0">Filter auswählen</option>
+                                        <select class="input__field" ng-model="config.filter">
+                                            <option value="0"><?= Module::t('ngrest_crud_filter_prompt'); ?></option>
                                             <?php foreach (array_keys($config->filters) as $name): ?>
                                                 <option value="<?= $name; ?>"><?= $name; ?></option>
                                             <?php endforeach; ?>
@@ -158,9 +168,14 @@ use luya\admin\Module;
                     <?php endforeach; ?>
                     <?php if (count($this->context->getButtons()) > 0): ?>
                         <td style="text-align:right;">
+                            <div ng-hide="isLocked(config.tableName, item[config.pk])">
                             <?php foreach ($this->context->getButtons() as $item): ?>
                                 <a class="crud__button waves-effect waves-light btn-flat btn--bordered" ng-click="<?php echo $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?php echo $item['icon']; ?></i><?php echo $item['label']; ?></a>
                             <?php endforeach; ?>
+                            </div>
+                            <div ng-show="isLocked(config.tableName, item[config.pk])">
+                                <span><small>is locked</small></span>
+                            </div>
                         </td>
                     <?php endif; ?>
                 </tr>
@@ -239,9 +254,13 @@ use luya\admin\Module;
                     <div class="modal__content">
                         <?php foreach ($this->context->forEachGroups(RenderCrud::TYPE_UPDATE) as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
-                                <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>">
-                                <h5 ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]"><?= $group['name']; ?> +/- Toggler</h5>
-                                <div style="border:1px solid #F0F0F0; margin-bottom:20px;" ng-show="groupToggler[<?= $key; ?>]">
+                                <div class="form-group" ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>">
+                                <p class="form-group__title" ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]">
+                                    <?= $group['name']; ?>
+                                    <span class="material-icons right" ng-show="groupToggler[<?= $key; ?>]">keyboard_arrow_up</span>
+                                    <span class="material-icons right" ng-show="!groupToggler[<?= $key; ?>]">keyboard_arrow_down</span>
+                                </p>
+                                <div class="form-group__fields" ng-show="groupToggler[<?= $key; ?>]">
                             <?php endif; ?>
                             <?php foreach ($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
@@ -280,7 +299,7 @@ use luya\admin\Module;
 
     </div>
     
-     <modal is-modal-hidden="activeWindowModal" <?php if (!$config->inline): ?>zaa-esc="closeActiveWindow()"<?php endif; ?>>
+    <modal is-modal-hidden="activeWindowModal">
         <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
     </modal>
 

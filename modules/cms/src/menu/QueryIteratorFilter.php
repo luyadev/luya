@@ -11,7 +11,7 @@ use luya\cms\Menu;
 /**
  * Iterator filter to verify valid events
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta5
  */
 class QueryIteratorFilter extends FilterIterator implements Countable

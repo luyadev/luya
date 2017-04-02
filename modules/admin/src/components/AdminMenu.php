@@ -3,9 +3,12 @@
 namespace luya\admin\components;
 
 use Yii;
+use luya\helpers\ArrayHelper;
 
 /**
- * Admin Menu Data
+ * Admin Menu Data.
+ *
+ * Collect informations from the menu data based on the admin modules in order to generate the different admin menu levels and containers.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -27,7 +30,17 @@ class AdminMenu extends \yii\base\Component
     public function getMenu()
     {
         if ($this->_menu === null) {
-            $this->_menu = Yii::$app->getModule('admin')->moduleMenus;
+            $menu = [];
+            $menus = Yii::$app->getModule('admin')->moduleMenus;
+            foreach ($menus as $k => $v) {
+                if (is_object($v) && $v instanceof AdminMenuBuilderInterface) {
+                    $data = $v->menu();
+                } else {
+                    $data = $v;
+                }
+                $menu = ArrayHelper::merge($data, $menu);
+            }
+            $this->_menu = $menu;
         }
 
         return $this->_menu;
@@ -109,14 +122,20 @@ class AdminMenu extends \yii\base\Component
                     continue;
                 }
             }
-
+            
+            try {
+                $alias = Yii::t($item['moduleId'], $item['alias'], [], Yii::$app->luyaLanguage);
+            } catch (\Exception $err) {
+                $alias = $item['alias'];
+            }
+            
             // ok we have passed all the tests, lets make an entry
             $responseData[] = [
                 'moduleId' => $item['moduleId'],
                 'id' => $index,
                 'template' => $item['template'],
                 'routing' => $item['routing'],
-                'alias' => $item['alias'],
+                'alias' => $alias,
                 'icon' => $item['icon'],
                 'searchModelClass' => $item['searchModelClass'],
             ];
@@ -132,27 +151,40 @@ class AdminMenu extends \yii\base\Component
         if (array_key_exists($nodeId, $this->_items)) {
             return $this->_items[$nodeId];
         }
+        
         $data = $this->getNodeData($nodeId);
-
         if (isset($data['groups'])) {
             foreach ($data['groups'] as $groupName => $groupItem) {
+                try {
+                    $data['groups'][$groupName]['name'] = Yii::t($data['moduleId'], $groupItem['name'], [], Yii::$app->luyaLanguage);
+                } catch (\Exception $e) {
+                }
+                
                 foreach ($groupItem['items'] as $groupItemKey => $groupItemEntry) {
                     if ($groupItemEntry['permissionIsRoute']) {
                         // when true, set permissionGranted to true
                         if (!Yii::$app->auth->matchRoute($this->getUserId(), $groupItemEntry['route'])) {
                             unset($data['groups'][$groupName]['items'][$groupItemKey]);
-                        } else {
-                            /* fixed bug #51 */
-                            $data['groups'][$groupName]['items'][$groupItemKey]['route'] = str_replace('/', '-', $data['groups'][$groupName]['items'][$groupItemKey]['route']);
+                            continue;
                         }
                     } elseif ($groupItemEntry['permissionIsApi']) {
                         // when true, set permissionGranted to true
                         if (!Yii::$app->auth->matchApi($this->getUserId(), $groupItemEntry['permssionApiEndpoint'])) {
                             unset($data['groups'][$groupName]['items'][$groupItemKey]);
+                            continue;
                         }
                     } else {
                         throw new \Exception('Menu item detected without permission entry');
                     }
+                    try {
+                        $alias = Yii::t($data['moduleId'], $data['groups'][$groupName]['items'][$groupItemKey]['alias'], [], Yii::$app->luyaLanguage);
+                    } catch (\Exception $err) {
+                        $alias = $data['groups'][$groupName]['items'][$groupItemKey]['alias'];
+                    }
+                    
+                    $data['groups'][$groupName]['items'][$groupItemKey]['hiddenInMenu'] = AdminMenuBuilder::getOptionValue($groupItemEntry, 'hiddenInMenu', false);
+                    
+                    $data['groups'][$groupName]['items'][$groupItemKey]['alias'] = $alias;
                 }
             }
         }
@@ -189,7 +221,7 @@ class AdminMenu extends \yii\base\Component
      */
     public function getApiDetail($api = null)
     {
-        $items = $this->items;
+        $items = $this->getItems();
         
         $key = array_search($api, array_column($items, 'permssionApiEndpoint'));
         

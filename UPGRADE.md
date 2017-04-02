@@ -1,9 +1,34 @@
 LUYA UPGRADE
 ============
 
-This document will help you upgrading from a LUYA Version into another.
+This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
-1.0.0-rc1 (in progress)
+1.0.0-RC3 (in progress)
+-------------------
+
++ [#1076](https://github.com/luyadev/luya/issues/1076) **TWIG IS DEPRECATED** The whole compont, as the cms blocks with twig are now depreacted, the twigjs admin output for blocks still works, all other code related to twig is not working anymore! In order to include to your project use: https://github.com/luyadev/luya-rc-legacy
++ [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
++ [#1177](https://github.com/luyadev/luya/issues/1177) The elements.php for the luya\web\Elements component does new look for the elements.php inside the @app/views folder instead of @app.
++ [#1109](https://github.com/luyadev/luya/issues/1109) All blocks deliverd from the LUYA core modules are marked as `final` so you are not able to extend from those blocks. Make sure you extend from the `luya\cms\base\Block` class.
++ [#1244](https://github.com/luyadev/luya/issues/1244) When using the crawler module, the output of the controller changed to an ActiveDataProvider object instead of an array with results, see the crawler module readme.
++ The ngRest CheckboxRelation plugin dropped the support for ActiveRecord object getters inside the labelTemplates, use the closure function inside the labelFields propertie instead. 
+
+As we merged migrations files from older beta releases, you can find all delete files in the following [commit](https://github.com/luyadev/luya/commit/78f5304054be95ad317a80455587d8a4e0a0b9a8#diff-ecf9849552b303be6db5a3bd40029037).
+
+1.0.0-RC2 (29. Nov 2016)
+-----------------------
+
+The issues below can lead into problems when upgrading to 1.0.0-RC2.
+
++ [#1070](https://github.com/luyadev/luya/issues/1070) Renamed methods of the block interface. Change `getBlockGroup()` to `blockGroup()`.
++ [#1058](https://github.com/luyadev/luya/issues/1058) Removed all massive assigned vars, cfgs, extras and placeholders from the PHP Block view.
++ [#1069](https://github.com/luyadev/luya/issues/1069) Removed CMS Block assets propertie in order to reduce RAM usage and follow Yii guidelines in order to register assets.
++ [#1068](https://github.com/luyadev/luya/issues/1068) Cms Block zaa() helper methods moved to \luya\cms\helpers\BlockHelper and marked methods as deprecated.
++ [#1045](https://github.com/luyadev/luya/issues/1045) Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
++ [#1067](https://github.com/luyadev/luya/issues/1067) The itemApi routes newls uses `/` (slashes) as delmiter instead of `-`: Old: `itemApi('label', 'admin-user-index')` new `itemApi('label', 'admin/user/index')` in your Module.php
++ [#1075](https://github.com/luyadev/luya/issues/1075) Frontend and Admin Controller and Module assets can not be stored in the `$assets` property of a module or controller any more.
+
+1.0.0-RC1 (04.10.2016)
 -----------
 
 As part of this release all module will be renamed. Frontend and admin module will be merged together. All module classes will get the prefix `luya`. So in order to upgrade your current modules, filters, blocks, blockgroups, models, etc. you have to rename a lot of classes of your project files:

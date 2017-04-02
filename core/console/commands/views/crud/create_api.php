@@ -12,12 +12,14 @@ echo "<?php\n";
 namespace <?php echo $namespace; ?>;
 
 /**
- * NgRest API created at <?php echo date("d.m.Y H:i"); ?> on LUYA Version <?php echo $luyaVersion; ?>.
+ * <?= $alias; ?>.
+ * 
+ * <?=$luyaVersion; ?> 
  */
 class <?php echo $className; ?> extends \luya\admin\ngrest\base\Api
 {
     /**
-     * @var string $modelClass The path to the model which is the provider for the rules and fields.
+     * @var string The path to the model which is the provider for the rules and fields.
      */
     public $modelClass = '<?= $modelClass;?>';
 }

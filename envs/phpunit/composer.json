@@ -1,26 +1,26 @@
 {
     "require": {
         "php": ">=5.5.0",
-        "yiisoft/yii2": "2.0.9",
+        "yiisoft/yii2": "~2.0.0",
         "twig/twig" : "^1.24",
         "curl/curl" : "^1.3",
         "phpmailer/phpmailer": "^5.2",
-        "imagine/imagine": "0.5.*",
-        "cebe/markdown": "~1.0.0 | ~1.1.0",
+        "yiisoft/yii2-imagine": "~2.1.0",
         "flowjs/flow-php-server": "^1.0"
     },
-    "extra": {
-        "asset-pattern-skip-version": "(-build|-patch)",
-        "asset-installer-paths": {
-            "bower-asset-library": "vendor/bower"
-        }
+    "config": {
+        "fxp-asset" : {
+            "pattern-skip-version": "(-build|-patch)",
+             "installer-paths": {
+                "bower-asset-library": "vendor/bower"
+            }
+        }   
     },
     "autoload" : {
         "psr-4" : {
             "luya\\" : "../../core/",
-            "admin\\" : "../../modules/admin/src",
-            "cms\\" : "../../modules/cms/src",
-            "cmsadmin\\" : "../../modules/cmsadmin/src"
+            "luya\\admin\\" : "../../modules/admin/src",
+            "luya\\cms\\" : "../../modules/cms/src"
         }
     }
 }

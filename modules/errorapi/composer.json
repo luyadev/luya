@@ -4,10 +4,10 @@
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "errorapi", "yii2", "yii", "luya-module"],
 	"license": "MIT",
-	"homepage" : "http://luya.io",
+	"homepage" : "https://luya.io",
 	"authors" : [
 		{
-			"name" : "Basil",
+			"name" : "Basil Suter",
 			"email" : "git@nadar.io",
 			"homepage" : "https://github.com/nadar"
 		}

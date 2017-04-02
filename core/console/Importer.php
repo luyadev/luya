@@ -24,7 +24,9 @@ use luya\console\interfaces\ImportControllerInterface;
  * ```
  *
  * @property \luya\console\interfaces\ImportControllerInterface $importer Importer Object
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Importer extends \yii\base\Object
 {
@@ -60,7 +62,7 @@ abstract class Importer extends \yii\base\Object
     /**
      * Returns the import object to use the importers methods.
      *
-     * @return object Import \luya\console\interfaces\ImportControllerInterface
+     * @return \luya\console\interfaces\ImportControllerInterface The importer object.
      */
     public function getImporter()
     {
@@ -71,12 +73,10 @@ abstract class Importer extends \yii\base\Object
      * Add something to the output. Wrapper method from importer.
      *
      * ```php
-     * $this->addLog('block', 'new block <ID> have been found and added to database');
+     * $this->addLog('new block <ID> have been found and added to database');
      * ```
      *
-     * @param string $section
-     * @param string $value
-     * @todo trigger deprecated section call
+     * @param string $value The value to be written for the log output.
      */
     public function addLog($value)
     {

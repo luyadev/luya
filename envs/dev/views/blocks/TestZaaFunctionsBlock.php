@@ -1,3 +1,3 @@
-<? foreach ($extras['zaaFIleArrayUpload'] as $item): ?>
+<?php foreach ($extras['zaaFIleArrayUpload'] as $item): ?>
 <?= $item->caption; ?>
-<? endforeach; ?>
+<?php endforeach; ?>

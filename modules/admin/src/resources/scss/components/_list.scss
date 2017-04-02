@@ -9,6 +9,11 @@
 
     width: 100%;
     margin-bottom: 15px;
+
+    &--bordered {
+        border: 1px solid color('grey', 'base');
+        padding: 10px;
+    }
 }
 
 .list__left, .list__right {
@@ -34,6 +39,12 @@
 .list__right {
     width: 130px;
     margin-left: 10px;
+    vertical-align: middle;
+    text-align: right;
+
+    .list__item--bordered & {
+        vertical-align: top;
+    }
 }
 
 .list__button {

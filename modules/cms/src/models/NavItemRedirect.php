@@ -11,6 +11,9 @@ use luya\cms\admin\Module;
 /**
  * Represents the type REDIRECT for a NavItem.
  *
+ * @property integer $id
+ * @property integer $type The type of redirect (1 = page, 2 = URL, 3 = Link to File)
+ * @property string $value Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItemRedirect extends NavItemType implements NavItemTypeInterface
@@ -21,20 +24,25 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
 
     const TYPE_LINK_TO_FILE = 3;
 
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_nav_item_redirect';
     }
 
     /**
-     * {@InheritDoc}
-     * @see \luya\cms\base\NavItemType::getNumericType()
+     * @inheritdoc
      */
     public static function getNummericType()
     {
         return NavItem::TYPE_REDIRECT;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -42,6 +50,9 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [

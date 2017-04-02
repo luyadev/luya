@@ -32,6 +32,29 @@
     		}
     	}
     });
+    
+    zaa.directive("crudRelationLoader", function($http, $sce) {
+    	return {
+    		restrict: "E",
+    		replace: true,
+    		transclude: false,
+    		scope: {
+    			"api": "@api",
+    			"arrayIndex": "@arrayIndex",
+    			"modelClass" : "@modelClass",
+    			"id": "@id",
+    		},
+    		controller: function($scope) {
+    			$scope.content = null;
+    			$http.get($scope.api+'/?inline=1&relation='+$scope.id+'&arrayIndex='+$scope.arrayIndex+'&modelClass='+$scope.modelClass).then(function(response) {
+					$scope.content = $sce.trustAsHtml(response.data);
+    			});
+    		},
+    		template: function() {
+    			return '<div compile-html ng-bind-html="content"></div>';
+    		}
+    	}
+    })
 
     // form.js
 
@@ -220,12 +243,84 @@
                 "id": "@fieldid",
                 "name": "@fieldname",
             },
+            controller: function($scope) {
+            	$scope.unset = function() {
+            		$scope.model = null;
+            		$scope.data.model = null;
+            	}
+            	
+            	$scope.data = {
+            		modalState: 1,
+            		model: null
+            	};
+            	
+            	$scope.$watch('model', function(n, o) {
+            		if (n) {
+            			$scope.data.model = n;
+            		}
+            	}, true);
+            	
+            	$scope.$watch('data.model', function(n, o) {
+            		if (n) {
+            			$scope.model = n;
+            		}
+            	}, true);
+            },
             template: function() {
-                return '<update-form-redirect data="model"></update-form-redirect>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper">' +
+                    '<div ng-if="model">' +
+                        '<div class="link-selector">' +
+                            '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
+                                '<i class="material-icons left">insert_link</i>' +
+                                '<span>'+i18n['js_link_change_value']+'</span>' +
+                            '</div>' +
+                            '<span class="link-selector__reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' +
+                            '<span class="link-selector__path"><link-object-to-string link="model"></link-object-to-string></span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div ng-if="!model">' +
+                        '<div class="link-selector">' +
+                            '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
+                                '<i class="material-icons left">insert_link</i>' +
+                                '<span>'+i18n['js_link_set_value']+'</span>' +
+                            '</div>' +
+                            '<span class="link-selector__path">Kein Link gesetzt</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<modal is-modal-hidden="data.modalState">'+
+                        '<update-form-redirect data="data.model"></update-form-redirect>'+
+                        '<button ng-click="unset(); data.modalState=1" type="button" class="btn red"><i class="material-icons">cancel</i></button> '+
+                        '<button ng-click="data.modalState=1" class="btn" type="button"><i class="material-icons">check</i> '+i18n['js_link_set_value']+'</button>'+
+                    '</modal>'+
+                '</div></div>';
             }
         }
     });
 
+    zaa.directive("zaaSlug", function() {
+    	return {
+    		restrict: "E",
+    		scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+            },
+    		controller: function($scope, Slug) {
+    			$scope.$watch(function() { return $scope.model; }, function(n, o) {
+    				if (n!=o) {
+    					$scope.model = Slug.slugify(n);
+    				}
+    			});
+    		},
+    		template:function() {
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+    		}
+    	}
+    });
+    
     zaa.directive("zaaWysiwyg", function() {
         return {
             restrict: "E",
@@ -238,7 +333,7 @@
                 "name": "@fieldname"
             },
             template: function() {
-                return '<textarea ng-wig="model" buttons="bold, italic, link, list1, list2" name="{{name}}"></textarea>';
+                return '<ng-wig ng-disabled="false" ng-model="model" buttons="bold, italic, link, list1, list2" name="{{name}}"></ng-wig>';
             }
         }
     });
@@ -387,6 +482,11 @@
                 "initvalue": "@initvalue"
             },
             link: function(scope) {
+		    
+		if(jQuery.isNumeric(scope.model)){
+			scope.model = typeCastValue(scope.model);
+		}
+		    
                 $timeout(function(){
                     scope.$watch(function() { return scope.model }, function(n, o) {
                         if (n == undefined || n == null || n == '') {
@@ -939,9 +1039,9 @@
                                         '</div>' +
                                     '</div>' +
                                     '<div class="list__right">' +
-                                    '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
-                                    '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveUp(key)" ng-show="{{key > 0}}"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                    '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveDown(key)" ng-show="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveUp(key)" ng-show="{{key > 0}}"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveDown(key)" ng-show="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
@@ -1016,12 +1116,86 @@
                                         '</div>' +
                                     '</div>' +
                                     '<div class="list__right">' +
-                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                         '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveUp(key)" ng-show="{{key > 0}}"><i class="material-icons">keyboard_arrow_up</i></button>' +
                                         '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveDown(key)" ng-show="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
+                            '</div>' +
+                        '</div>';
+            }
+        }
+    });
+
+    zaa.directive("zaaMultipleInputs", function() {
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname"
+            },
+            controller: function ($scope) {
+                $scope.init = function() {
+                    if ($scope.model == undefined || $scope.model == null) {
+                        $scope.model = [];
+                    }
+                };
+
+                $scope.add = function() {
+                    if ($scope.model == null || $scope.model == '' || $scope.model == undefined) {
+                        $scope.model = [];
+                    }
+
+                    $scope.model.push({});
+                };
+
+                $scope.remove = function(key) {
+                    $scope.model.splice(key, 1);
+                };
+
+                $scope.moveUp = function(index) {
+                    index = parseInt(index);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index-1];
+                    $scope.model[index-1] = oldRow;
+                };
+
+                $scope.moveDown = function(index) {
+                    index = parseInt(index);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index+1];
+                    $scope.model[index+1] = oldRow;
+                };
+
+                $scope.showDownButton = function(index) {
+                    return parseInt(index) < Object.keys($scope.model).length - 1;
+                };
+
+                $scope.init();
+            },
+            template: function() {
+                return '<div>' +
+                            '<div class="input input--list list" ng-class="{\'input--hide-label\': i18n}">' +
+                                '<label class="input__label">{{label}}</label>' +
+                                '<div class="input__field-wrapper">' +
+                                    '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<div ng-repeat="(key,row) in model track by key" class="list__item list__item--bordered">' +
+                                        '<div class="list__left" style="width: calc(100% - 140px)">' +
+                                            '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" fieldname="{{opt.var}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
+                                        '</div>' +
+                                        '<div class="list__right" style="width: 130px">' +
+                                            '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="{{key > 0}}" ng-click="moveUp(key)"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                            '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                            '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<button ng-click="add()" type="button" class="btn-floating left list__add-button"><i class="material-icons">add</i></button>' +
+                                '</div>' +
                             '</div>' +
                         '</div>';
             }
@@ -1075,7 +1249,7 @@
                             input[0].focus();
                         }
                     }, 50);
-                }
+                };
 
                 $scope.moveUp = function(index) {
                     index = parseInt(index);
@@ -1111,9 +1285,9 @@
                                         '<input class="list__input" type="text" ng-model="row.value" />' +
                                     '</div>' +
                                     '<div class="list__right" style="width:130px">' +
-                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                         '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="{{key > 0}}" ng-click="moveUp(key)"><i class="material-icons">keyboard_arrow_up</i></button>' +
                                         '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
@@ -1142,7 +1316,7 @@
 
                 // controller logic
 
-                scope.modal = true;
+                scope.modal = {state: 1};
                 scope.fileinfo = null;
 
                 scope.select = function(fileId) {
@@ -1156,12 +1330,12 @@
                 }
 
                 scope.toggleModal = function() {
-                    scope.modal = !scope.modal;
+                    scope.modal.state = !scope.modal.state;
                 }
 
                 scope.$watch(function() { return scope.ngModel }, function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                        var filtering = $filter('filter')(scope.filesData, {id: n});
+                        var filtering = $filter('filter')(scope.filesData, {id: n}, true);
                         if (filtering && filtering.length == 1) {
                             scope.fileinfo = filtering[0];
                         }
@@ -1199,7 +1373,7 @@
 
                 $scope.$watch('fileId', function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                    	var filtering = $filter('filter')($scope.filesData, {id: n});
+                    	var filtering = $filter('filter')($scope.filesData, {id: n}, true);
                         if (filtering && filtering.length == 1) {
                         	$scope.fileinfo = filtering[0];
                         }
@@ -1315,15 +1489,15 @@
                         // image does not exists make request.
                         $http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                        }).success(function(success) {
-                            if (!success.error) {
+                        }).then(function(transport) {
+                            if (!transport.data.error) {
                                 scope.imagesDataReload().then(function(r) {
-                                    scope.ngModel = success.id;
+                                    scope.ngModel = transport.data.id;
                                     AdminToastService.success(i18n['js_dir_image_upload_ok'], 2000);
                                     scope.imageLoading = false;
                                 });
                             }
-                        }).error(function(error) {
+                        }, function(error) {
                         	AdminToastService.error(i18n['js_dir_image_filter_error'], 7000);
                             scope.imageLoading = false;
                         });
@@ -1515,6 +1689,45 @@
                 $scope.foldersDirecotryIdReload = function() {
                 	return ServiceFoldersDirecotryId.load(true);
                 }
+                
+                // file replace logic
+
+                $scope.folderCountMessage = function(folder) {
+                	return i18nParam('js_filemanager_count_files_overlay', {count: folder.filesCount});
+                }
+                
+                $scope.replaceFile = function(file, errorFiles) {
+                	$scope.replaceFiled = file;
+                	
+                	if (!file) {
+                		return;
+                	}
+                	
+                	LuyaLoading.start();
+                	file.upload = Upload.upload({
+                		url: 'admin/api-admin-storage/file-replace',
+                        data: {file: file, fileId: $scope.fileDetail.id}
+                    });
+                	
+                	file.upload.then(function (response) {
+                        $timeout(function () {
+                            file.result = response.data;
+                            $scope.filesDataReload().then(function() {
+                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
+                            	var random = (new Date()).toString();
+                            	if (fileref.isImage) {
+	                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
+	                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+	                            }
+                            	
+                            	$scope.fileDetail = fileref;
+                            	
+                            	LuyaLoading.stop();
+                            	AdminToastService.success('the file has been replaced successfull.', 4000);
+                            });
+                        });
+                    });
+                };
 
                 // upload logic
 
@@ -1542,8 +1755,29 @@
                     }
                 })
 
+                $scope.pasteUpload = function(e) {
+                	
+                    for (var i = 0 ; i < e.originalEvent.clipboardData.items.length ; i++) {
+                        var item = e.originalEvent.clipboardData.items[i];
+                        
+                        if (item.kind == 'file') {
+                        	LuyaLoading.start(i18n['js_dir_upload_wait']);
+	                        Upload.upload({
+	                            url: 'admin/api-admin-storage/files-upload',
+	                            fields: {'folderId': $scope.currentFolderId},
+	                            file: item.getAsFile()
+	                        }).then(function(response) {
+	                        	$scope.filesDataReload().then(function() {
+	                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+	                                LuyaLoading.stop();
+	                            });
+	                        })
+                        }
+                    }
+                }
+                
                 $scope.uploadUsingUpload = function(file) {
-                    file.upload = Upload.upload({
+                	file.upload = Upload.upload({
                         url: 'admin/api-admin-storage/files-upload',
                         fields: {'folderId': $scope.currentFolderId},
                         file: file
@@ -1615,9 +1849,10 @@
                 $scope.createNewFolder = function(newFolderName) {
                     $http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function() {
                         $scope.foldersDataReload().then(function() {
                             $scope.folderFormToggler();
+                            $scope.newFolderName = null;
                         })
                     });
                 };
@@ -1636,10 +1871,12 @@
                 	$scope.sortField = name;
                 }
 
-                $scope.changeCurrentFolderId = function(folderId) {
+                $scope.changeCurrentFolderId = function(folderId, noState) {
                     $scope.currentFolderId = folderId;
-                    ServiceFoldersDirecotryId.folderId = folderId;
-                    $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId});
+                    if (noState !== true) {
+                    	ServiceFoldersDirecotryId.folderId = folderId;
+                    	$http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId}, {ignoreLoadingBar: true});
+                    }
                 };
 
                 $scope.toggleFolderItem = function(data) {
@@ -1648,7 +1885,7 @@
                     } else {
                         data['toggle_open'] = !data.toggle_open;
                     }
-                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data});
+                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data}, {ignoreLoadingBar: true});
                 };
 
                 $scope.folderUpdateForm = false;
@@ -1680,7 +1917,7 @@
                 $scope.updateFolder = function(folder) {
                     $http.post('admin/api-admin-storage/folder-update?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.toggleFolderMode(false);
                     });
                 }
@@ -1688,22 +1925,12 @@
                 $scope.checkEmptyFolder = function(folder) {
                     $http.post('admin/api-admin-storage/is-folder-empty?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
-                        if (transport == true) {
+                    }).then(function(transport) {
+                        if (transport.data == true) {
                             $scope.deleteFolder(folder);
                         } else {
                             $scope.toggleFolderMode('removeconfirm');
                         }
-                        /*
-                        if (transport == false) {
-                            // not empty
-                            folder.remove = false;
-                            folder.notempty = true;
-                        } else {
-                            // empty
-                            $scope.deleteFolder(folder);
-                        }
-                        */
                     });
                 };
 
@@ -1711,7 +1938,7 @@
                     // check if folder is empty
                     $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.foldersDataReload().then(function() {
                             $scope.filesDataReload().then(function() {
                                 $scope.toggleFolderMode(false);
@@ -1736,7 +1963,7 @@
                 $scope.moveFilesTo = function(folderId) {
                     $http.post('admin/api-admin-storage/filemanager-move-files', $.param({'fileIds' : $scope.selectedFiles, 'toFolderId' : folderId}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                         $scope.filesDataReload().then(function() {
                             $scope.selectedFiles = [];
                             $scope.showFoldersToMove = false;
@@ -1748,7 +1975,7 @@
                     AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                        }).success(function(transport) {
+                        }).then(function(transport) {
                             $scope.filesDataReload().then(function() {
                                 $toast.close();
                                 AdminToastService.success(i18n['js_dir_manager_rm_file_ok'], 2000);
@@ -1763,10 +1990,21 @@
                 $scope.storeFileCaption = function(fileDetail) {
                 	$http.post('admin/api-admin-storage/filemanager-update-caption', $.param({'id': fileDetail.id, 'captionsText' : fileDetail.captionArray}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
+                    }).then(function(transport) {
                     	AdminToastService.success('Captions has been updated', 2000);
                     });
                 }
+               
+                $scope.selectedFileFromParent = null;
+                
+                $scope.init = function() {
+                	if ($scope.$parent.fileinfo) {
+                		$scope.selectedFileFromParent = $scope.$parent.fileinfo;
+                		$scope.changeCurrentFolderId($scope.selectedFileFromParent.folderId, true);
+                	}
+                }
+                
+                $scope.init();
 
             },
             templateUrl : 'storageFileManager'

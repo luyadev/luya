@@ -7,8 +7,11 @@ use luya\Exception;
 use yii\helpers\Json;
 use yii\helpers\Inflector;
 use yii\helpers\ArrayHelper;
+use luya\base\Widget;
 
 /**
+ * ActiveWindow Callback Form Widget.
+ *
  * Example usage:
  *
  * ```php
@@ -32,9 +35,10 @@ use yii\helpers\ArrayHelper;
  *
  * <? $form::end(); ?>
  * ```
- * @author nadar
+ *
+ * @author Basil Suter <basil@nadar.io>
  */
-class CallbackFormWidget extends \yii\base\Widget
+class CallbackFormWidget extends Widget
 {
     /**
      * @var array Options for the Active Form:
@@ -73,9 +77,7 @@ class CallbackFormWidget extends \yii\base\Widget
     public $fieldConfig = [];
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -94,7 +96,7 @@ class CallbackFormWidget extends \yii\base\Widget
      * @param string $attribute The name of the field (which also will sent to the callback as this name)
      * @param string $label Optional Label
      * @param array $options
-     * @return \admin\ngrest\aw\ActiveField
+     * @return \luya\admin\ngrest\aw\ActiveField
      */
     public function field($attribute, $label = null, $options = [])
     {
@@ -134,9 +136,7 @@ class CallbackFormWidget extends \yii\base\Widget
     }
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Widget::run()
+     * @inheritdoc
      */
     public function run()
     {

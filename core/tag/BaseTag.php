@@ -11,7 +11,7 @@ use yii\base\Object;
  * @property \luya\web\View $view The view object in order to register scripts.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-rc1
+ * @since 1.0.0
  */
 abstract class BaseTag extends Object implements TagInterface
 {

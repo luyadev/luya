@@ -10,7 +10,7 @@ use Countable;
  *
  * @since 1.0.0-beta2
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class IteratorAbstract extends \yii\base\Object implements Iterator, Countable
 {

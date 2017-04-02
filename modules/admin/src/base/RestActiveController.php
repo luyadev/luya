@@ -29,6 +29,9 @@ class RestActiveController extends ActiveController implements UserBehaviorInter
         return Yii::$app->adminuser;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function checkAccess($action, $model = null, $params = [])
     {
         switch ($action) {

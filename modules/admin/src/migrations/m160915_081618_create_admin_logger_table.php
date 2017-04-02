@@ -8,25 +8,25 @@ class m160915_081618_create_admin_logger_table extends Migration
     public function safeUp()
     {
         $this->createTable('admin_logger', [
-            'id' => 'pk',
-            'time' => 'int(11) NOT NULL',
-            'message' => 'text NOT NULL',
-            'type' => 'int(11) NOT NULL',
-            'trace_file' => 'varchar(255)',
-            'trace_line' => 'varchar(255)',
-            'trace_function' => 'varchar(255)',
-            'trace_function_args' => 'text',
-            'group_identifier' => 'varchar(255)',
-            'group_identifier_index' => 'int(11)',
-            'get' => 'text',
-            'post' => 'text',
-            'session' => 'text',
-            'server' => 'text',
+            'id' => $this->primaryKey(),
+            'time' => $this->integer()->notNull(),
+            'message' => $this->text()->notNull(),
+            'type' => $this->integer(11)->notNull(),
+            'trace_file' => $this->string(255),
+            'trace_line' => $this->string(255),
+            'trace_function' => $this->string(255),
+            'trace_function_args' => $this->text(),
+            'group_identifier' => $this->string(255),
+            'group_identifier_index' => $this->integer(11),
+            'get' => $this->text(),
+            'post' => $this->text(),
+            'session' => $this->text(),
+            'server' => $this->text(),
         ]);
     }
 
     public function safeDown()
     {
-        $this->dropTable('admin_logger');   
+        $this->dropTable('admin_logger');
     }
 }

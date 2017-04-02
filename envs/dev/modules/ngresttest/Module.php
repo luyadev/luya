@@ -2,17 +2,26 @@
 
 namespace ngresttest;
 
+use luya\admin\components\AdminMenuBuilder;
+
 class Module extends \luya\admin\base\Module
 {
     public $apis = [
-        'api-ngresttest-table' => 'ngresttest\apis\TableController',
+            'api-ngresttest-table' => 'ngresttest\apis\TableController',
+            'api-ngresttest-order' => 'ngresttest\apis\OrderController',
+            'api-ngresttest-customer' => 'ngresttest\apis\CustomerController',
+            
     ];
     
     public function getMenu()
     {
-        return $this->node('Table', 'extension') // instead of extension, choose icon from https://design.google.com/icons/
-            ->group('GROUP')
-                ->itemApi('Table', 'ngresttest-table-index', 'label', 'api-ngresttest-table') // instead of label, choose icon from https://design.google.com/icons/
-        ->menu();
+        return (new \luya\admin\components\AdminMenuBuilder($this))
+        ->node('Table', 'extension')
+        ->group('Group')
+        ->itemApi('Table', 'ngresttest/table/index', 'label', 'api-ngresttest-table')
+        
+        ->group('Group')
+        ->itemApi('Order', 'ngresttest/order/index', 'label', 'api-ngresttest-order')
+        ->itemApi('Customer', 'ngresttest/customer/index', 'label', 'api-ngresttest-customer');
     }
 }

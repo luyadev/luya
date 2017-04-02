@@ -6,23 +6,12 @@ use Yii;
 use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\console\Importer;
-use luya\admin\models\Config;
-use yii\console\Exception;
 
 class BlockImporter extends Importer
 {
     public function run()
     {
         $allblocks = Block::find()->all();
-        
-        if (count($allblocks) == 0) {
-            Config::set('rc1_block_classes_renameing', true);
-        }
-        
-        if (!Config::has('rc1_block_classes_renameing')) {
-            throw new Exception("You have to run the cmsadmin/updater/classes command in order to run the importer!");
-        }
-        
         $exists = [];
         
         foreach ($this->getImporter()->getDirectoryFiles('blocks') as $file) {
@@ -34,12 +23,9 @@ class BlockImporter extends Importer
             
             if (!$model) {
                 $block = new Block();
-                $block->scenario = 'commandinsert';
-                $block->setAttributes([
-                    'group_id' => $blockGroupId,
-                    'class' => $ns,
-                ]);
-                $block->insert();
+                $block->group_id = $blockGroupId;
+                $block->class = $ns;
+                $block->save();
                 $this->addLog($ns.' new block has been added to database.');
             } else {
                 $model->updateAttributes(['group_id' => $blockGroupId]);
@@ -61,7 +47,7 @@ class BlockImporter extends Importer
     
     private function getBlockGroupId($blockObject)
     {
-        $groupClassName = $blockObject->getBlockGroup();
+        $groupClassName = $blockObject->blockGroup();
         
         $identifier = Yii::createObject(['class' => $groupClassName])->identifier();
         

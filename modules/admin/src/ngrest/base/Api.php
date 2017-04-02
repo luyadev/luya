@@ -3,17 +3,22 @@
 namespace luya\admin\ngrest\base;
 
 use Yii;
-use luya\helpers\FileHelper;
-use luya\helpers\Url;
 use yii\helpers\Inflector;
-use yii\base\InvalidCallException;
-use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
+use yii\base\InvalidCallException;
 use yii\base\Arrayable;
 use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
+use yii\data\ActiveDataProvider;
+use luya\helpers\FileHelper;
+use luya\helpers\Url;
 use luya\admin\base\RestActiveController;
-use luya\helpers\ArrayHelper;
+use luya\admin\components\AdminUser;
+use luya\admin\models\UserOnline;
+use luya\admin\ngrest\render\RenderActiveWindow;
+use luya\admin\ngrest\render\RenderActiveWindowCallback;
+use luya\admin\ngrest\NgRest;
+use luya\cms\admin\helpers\MenuHelper;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -38,8 +43,12 @@ class Api extends RestActiveController
     public $autoEnablePagination = true;
     
     /**
-     * {@inheritDoc}
-     * @see \yii\rest\ActiveController::init()
+     * @var integer When pagination is enabled, this value is used for pagination rows by page.
+     */
+    public $pageSize = 100;
+    
+    /**
+     * @inheritdoc
      */
     public function init()
     {
@@ -51,26 +60,87 @@ class Api extends RestActiveController
 
         // pagination is disabled by default, lets verfy if there are more then 400 rows in the table and auto enable
         if ($this->pagination === false && $this->autoEnablePagination) {
-            if ($this->model->find()->count() > 200) {
-                $this->pagination = ['pageSize' => 100];
+            if ($this->model->ngRestFind()->count() > 200) {
+                $this->pagination = ['pageSize' => $this->pageSize];
             }
         }
     }
     
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        $actions = parent::actions();
+        $actions['view']['class'] = 'luya\admin\ngrest\base\actions\ViewAction';
+        $actions['index']['class'] = 'luya\admin\ngrest\base\actions\IndexAction';
+        $actions['create']['class'] = 'luya\admin\ngrest\base\actions\CreateAction';
+        $actions['update']['class'] = 'luya\admin\ngrest\base\actions\UpdateAction';
+        $actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
+        return $actions;
+    }
+    
     private $_model = null;
     
+    /**
+     * @return \luya\admin\ngrest\base\NgRestModel
+     */
     public function getModel()
     {
         if ($this->_model === null) {
             $this->_model = Yii::createObject($this->modelClass);
+
+            if (!$this->_model instanceof NgRestModelInterface) {
+                throw new InvalidConfigException("The modelClass '$this->modelClass' must be an instance of NgRestModelInterface.");
+            }
         }
     
         return $this->_model;
     }
     
+    /**
+     * Unlock the useronline locker..
+     */
+    public function actionUnlock()
+    {
+        UserOnline::unlock(Yii::$app->adminuser->id);
+    }
+    
+    /**
+     * Service Action provides mutliple CRUD informations.
+     *
+     * @return array
+     */
     public function actionServices()
     {
-        return $this->model->getNgrestServices();
+        $settings = [];
+        $apiEndpoint = $this->model->ngRestApiEndpoint();
+        $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
+        
+        if ($userSortSettings && is_array($userSortSettings)) {
+            if ($userSortSettings['sort'] == SORT_DESC) {
+                $order = '-'.$userSortSettings['field'];
+            } else {
+                $order = '+'.$userSortSettings['field'];
+            }
+            
+            $settings['order'] = $order;
+        }
+        
+        $userFilter = Yii::$app->adminuser->identity->setting->get('ngrestfilter.admin/'.$apiEndpoint, false);
+        if ($userFilter) {
+            $settings['filterName'] = $userFilter;
+        }
+        
+        $modelClass = $this->modelClass;
+        return [
+            'service' => $this->model->getNgrestServices(),
+            '_settings' => $settings,
+            '_locked' => [
+                'data' => UserOnline::find()->select(['lock_pk', 'last_timestamp', 'u.firstname', 'u.lastname', 'u.id'])->joinWith('user as u')->where(['lock_table' => $modelClass::tableName()])->createCommand()->queryAll(),
+                'userId' => Yii::$app->adminuser->id,
+            ],
+        ];
     }
 
     public function actionSearch($query)
@@ -96,6 +166,23 @@ class Api extends RestActiveController
         ]);
     }
     
+    public function actionRelationCall($arrayIndex, $id, $modelClass)
+    {
+        $modelClass = base64_decode($modelClass);
+        $model = $modelClass::findOne($id);
+        
+        if (!$model) {
+            throw new InvalidCallException("unable to resolve relation call model.");
+        }
+        
+        $func = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
+        
+        return new ActiveDataProvider([
+            'query' => $func,
+            'pagination' => false,
+        ]);
+    }
+    
     public function actionFilter($filterName)
     {
         $model = $this->model;
@@ -110,6 +197,26 @@ class Api extends RestActiveController
             'query' => $model->ngRestFilters()[$filterName],
             'pagination' => $this->pagination,
         ]);
+    }
+    
+    public function actionActiveWindowCallback()
+    {
+        $config = $this->model->getNgRestConfig();
+        $render = new RenderActiveWindowCallback();
+        $ngrest = new NgRest($config);
+    
+        return $ngrest->render($render);
+    }
+    
+    public function actionActiveWindowRender()
+    {
+        $config = $this->model->getNgRestConfig();
+        $render = new RenderActiveWindow();
+        $render->setItemId(Yii::$app->request->post('itemId', false));
+        $render->setActiveWindowHash(Yii::$app->request->post('activeWindowHash', false));
+        $ngrest = new NgRest($config);
+    
+        return $ngrest->render($render);
     }
     
     /**
@@ -179,11 +286,16 @@ class Api extends RestActiveController
         
         $store = FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
         
+        $menu = Yii::$app->adminmenu->getApiDetail($this->model->ngRestApiEndpoint());
+        
+        $route = $menu['route'];
+        $route = str_replace("/index", "/export-download", $route);
+        
         if ($store) {
             Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
             Yii::$app->session->set('tempNgRestKey', $key);
             return [
-                'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
+                'url' => Url::toRoute(['/'.$route, 'key' => base64_encode($key)]),
             ];
         }
         

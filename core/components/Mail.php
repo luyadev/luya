@@ -3,7 +3,7 @@
 namespace luya\components;
 
 use Yii;
-use Exception;
+use luya\Exception;
 use PHPMailer;
 use SMTP;
 
@@ -29,6 +29,7 @@ use SMTP;
  * @property \PHPMailer $mailer The PHP Mailer object
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Mail extends \yii\base\Component
 {
@@ -86,7 +87,7 @@ class Mail extends \yii\base\Component
     
     /**
      * @since 1.0.0-beta7
-     * @var string|boolean Define a layout template file which is going to be wrapped around the setBody()
+     * @var string|boolean Define a layout template file which is going to be wrapped around the body()
      * content. The file alias will be resolved so an example layout could look as followed:
      *
      * ```php
@@ -155,11 +156,15 @@ class Mail extends \yii\base\Component
      * @param string $body The HTML body of the mail message.
      * @return \luya\components\Mail
      */
-    public function compose($subject, $body)
+    public function compose($subject = null, $body = null)
     {
         $this->cleanup();
-        $this->setSubject($subject);
-        $this->setBody($body);
+        if ($subject !== null) {
+            $this->subject($subject);
+        }
+        if ($body !== null) {
+            $this->body($body);
+        }
         return $this;
     }
     
@@ -169,7 +174,7 @@ class Mail extends \yii\base\Component
      * @param string $subject The subject message
      * @return \luya\components\Mail
      */
-    public function setSubject($subject)
+    public function subject($subject)
     {
         $this->getMailer()->Subject = $subject;
         return $this;
@@ -182,7 +187,7 @@ class Mail extends \yii\base\Component
      * @param string $body The HTML body message
      * @return \luya\components\Mail
      */
-    public function setBody($body)
+    public function body($body)
     {
         $this->getMailer()->Body = $this->wrapLayout($body);
         return $this;
@@ -196,8 +201,8 @@ class Mail extends \yii\base\Component
      */
     protected function wrapLayout($content)
     {
-        // do not wrap the content if layout is empty
-        if (empty($this->layout)) {
+        // do not wrap the content if layout is turned off.
+        if ($this->layout === false) {
             return $content;
         }
         
@@ -206,9 +211,9 @@ class Mail extends \yii\base\Component
     }
     
     /**
-     * Add multiple adresses into the mailer object.
+     * Add multiple addresses into the mailer object.
      *
-     * If no key is used, the name is going to be ignore, if a string key is availabe it represents the name.
+     * If no key is used, the name is going to be ignored, if a string key is available it represents the name.
      *
      * ```php
      * adresses(['foo@example.com', 'bar@example.com']);
@@ -238,27 +243,107 @@ class Mail extends \yii\base\Component
     }
     
     /**
-     * Correct spelled alias method for `adresses`.
+     * Add a single address with optional name
      *
-     * @todo remove wrong spelled on release
-     * @param array $emails
-     * @return \luya\components\Mail
-     */
-    public function addresses(array $emails)
-    {
-        return $this->adresses($emails);
-    }
-    
-    /**
-     * Add a single addresse with optional name
-     *
-     * @param string $email The email adresse e.g john@example.com
-     * @param string $name The name for the adresse e.g John Doe
+     * @param string $email The email address e.g. john@example.com
+     * @param string $name The name for the address e.g. John Doe
      * @return \luya\components\Mail
      */
     public function address($email, $name = null)
     {
         $this->getMailer()->addAddress($email, (empty($name)) ? $email : $name);
+
+        return $this;
+    }
+
+    /**
+     * Add multiple CC addresses into the mailer object.
+     *
+     * If no key is used, the name is going to be ignored, if a string key is available it represents the name.
+     *
+     * ```php
+     * ccAddresses(['foo@example.com', 'bar@example.com']);
+     * ```
+     *
+     * or with names
+     *
+     * ```php
+     * ccAddresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
+     * ```
+     *
+     * @return \luya\components\Mail
+     * @since 1.0.0-RC2
+     * @param array $emails An array with email addresses or name => email paring to use names.
+     */
+    public function ccAddresses(array $emails)
+    {
+        foreach ($emails as $name => $mail) {
+            if (is_int($name)) {
+                $this->ccAddress($mail);
+            } else {
+                $this->ccAddress($mail, $name);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a single CC address with optional name
+     *
+     * @param string $email The email address e.g. john@example.com
+     * @param string $name The name for the address e.g. John Doe
+     * @return \luya\components\Mail
+     */
+    public function ccAddress($email, $name = null)
+    {
+        $this->getMailer()->addCC($email, (empty($name)) ? $email : $name);
+
+        return $this;
+    }
+
+    /**
+     * Add multiple BCC addresses into the mailer object.
+     *
+     * If no key is used, the name is going to be ignored, if a string key is available it represents the name.
+     *
+     * ```php
+     * bccAddresses(['foo@example.com', 'bar@example.com']);
+     * ```
+     *
+     * or with names
+     *
+     * ```php
+     * bccAddresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
+     * ```
+     *
+     * @return \luya\components\Mail
+     * @since 1.0.0-RC2
+     * @param array $emails An array with email addresses or name => email paring to use names.
+     */
+    public function bccAddresses(array $emails)
+    {
+        foreach ($emails as $name => $mail) {
+            if (is_int($name)) {
+                $this->bccAddress($mail);
+            } else {
+                $this->bccAddress($mail, $name);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a single BCC address with optional name
+     *
+     * @param string $email The email address e.g. john@example.com
+     * @param string $name The name for the address e.g. John Doe
+     * @return \luya\components\Mail
+     */
+    public function bccAddress($email, $name = null)
+    {
+        $this->getMailer()->addBCC($email, (empty($name)) ? $email : $name);
 
         return $this;
     }
@@ -270,6 +355,9 @@ class Mail extends \yii\base\Component
      */
     public function send()
     {
+        if (empty($this->mailer->Subject) || empty($this->mailer->Body)) {
+            throw new Exception("Mail subject() and body() can not be empty in order to send mail.");
+        }
         return $this->getMailer()->send();
     }
 

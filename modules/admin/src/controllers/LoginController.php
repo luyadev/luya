@@ -18,10 +18,6 @@ class LoginController extends Controller
 {
     public $layout = '@admin/views/layouts/nosession';
 
-    public $skipModuleAssets = ['*'];
-
-    public $assets = ["\luya\admin\assets\Login"];
-
     public function getRules()
     {
         return [
@@ -39,6 +35,8 @@ class LoginController extends Controller
         if (!Yii::$app->adminuser->isGuest) {
             return $this->redirect(['/admin/default/index']);
         }
+        
+        $this->registerAsset('\luya\admin\assets\Login');
         
         $this->view->registerJs("$(function(){ $('#email').focus(); observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."'); });", \luya\web\View::POS_END);
     

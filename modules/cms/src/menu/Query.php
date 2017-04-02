@@ -3,7 +3,7 @@
 namespace luya\cms\menu;
 
 use Yii;
-use Exception;
+use luya\cms\Exception;
 
 /**
  * Menu Query Builder.
@@ -14,35 +14,36 @@ use Exception;
  * Basic example of making a menu selection:
  *
  * ```php
- * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->all();
+ * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->all();
  * ```
  *
  * By default the Menu Query will get the default language, or the current active language. To force
  * a specific language use the `lang()` method in your query chain:
  *
  * ```php
- * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->lang('en')->all();
+ * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->lang('en')->all();
  * ```
  *
  * You can also find one element instead of all
  *
  * ```php
- * $item = (new \cms\menu\Query())->where(['id' => 1])->one();
+ * $item = (new \luya\cms\menu\Query())->where(['id' => 1])->one();
  * ```
  *
  * To include hidden pages to your selection use with:
  *
  * ```php
- * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->with(['hidden'])->all();
+ * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->with(['hidden'])->all();
  * ```
  *
  * Attention: When you append the `with['hidden']` state, the visibility of the item will be overriden, even when you
  * change them with event inject. So take care of using with hidden when protecting items for beeing seen by guest users
  * (in example of protected several items for not logged in users).
  *
- * @property object $menu Contains menu Object.
- * @since 1.0.0-beta1
- * @author nadar
+ * @property \luya\cms\Menu $menu Application menu component object.
+ *
+ * @since 1.0.0
+ * @author Basil Suter <basil@nadar.io>
  */
 class Query extends \yii\base\Object
 {
@@ -52,7 +53,7 @@ class Query extends \yii\base\Object
 
     private $_menu = null;
 
-    private $_whereOperators = ['<', '<=', '>', '>=', '=', '=='];
+    private $_whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
     
     private $_with = ['hidden' => false];
     
@@ -63,7 +64,7 @@ class Query extends \yii\base\Object
     /**
      * Getter method to return menu component
      *
-     * @return \cms\menu\Container Menu Container object
+     * @return \luya\cms\Menu Menu Container object
      */
     public function getMenu()
     {
@@ -83,13 +84,14 @@ class Query extends \yii\base\Object
      * where(['operator', 'field', 'value']);
      * ```
      *
-     * Allowed operators
+     * Available compare operators:
      * + **<** expression where field is smaller then value.
      * + **>** expression where field is bigger then value.
      * + **=** expression where field is equal value.
      * + **<=** expression where field is small or equal then value.
      * + **>=** expression where field is bigger or equal then value.
      * + **==** expression where field is equal to the value and even the type must be equal.
+     * + **in** expression where the second value is an array with values to look inside.
      *
      * Only one operator speific argument can be provided, to chain another expression
      * use the `andWhere()` method.
@@ -117,17 +119,23 @@ class Query extends \yii\base\Object
      * where(['>', 'id', 1])->andWHere(['<', 'id', 3]);
      * ```
      *
-     * This will only appaend the first condition where id is bigger then 1 and ignore the second one
+     * This will only append the first condition where id is bigger then 1 and ignore the second one.
+     *
+     * Example using in operator
+     *
+     * ```php
+     * where(['in', 'container', ['default', 'footer']); // querys all items from the containers `default` and `footer`.
+     * ```
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function where(array $args)
     {
         foreach ($args as $key => $value) {
             if (in_array($value, $this->_whereOperators, true)) {
                 if (count($args) !== 3) {
-                    throw new Exception(sprintf("Wrong where(['%s']) condition, see http://luya.io/api/cms-menu-query.html#where()-detail for all available conditions.", implode("', '", $args)));
+                    throw new Exception(sprintf("Wrong where(['%s']) condition, see https://luya.io/api/luya-cms-menu-Query#where()-detail for all available conditions.", implode("', '", $args)));
                 }
                 $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
                 break;
@@ -143,8 +151,9 @@ class Query extends \yii\base\Object
      * Add another where statement to the existing, this is the case when using compare operators, as then only
      * one where definition can bet set.
      *
-     * @see \cms\menu\Query->where()
+     * @see \luya\cms\menu\Query->where()
      * @param array $args
+     * @return \luya\cms\menu\Query
      */
     public function andWhere(array $args)
     {
@@ -157,7 +166,7 @@ class Query extends \yii\base\Object
      * or the default language if no information is presented.
      *
      * @param string $langShortCode Language Short Code e.g. de or en
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function lang($langShortCode)
     {
@@ -167,9 +176,9 @@ class Query extends \yii\base\Object
     }
 
     /**
-     * @param string|array $with can be a string  containg "hidden" or an array with multiple patters
+     * @param string|array $types can be a string  containg "hidden" or an array with multiple patters
      * for example `['hidden']`. Further with statements upcoming.
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function with($types)
     {
@@ -201,7 +210,7 @@ class Query extends \yii\base\Object
      * Set a limition for the amount of results.
      *
      * @param integer $count The number of rows to return
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function limit($count)
     {
@@ -218,7 +227,7 @@ class Query extends \yii\base\Object
      * with the limit() function.
      *
      * @param integer $offset Defines the amount of offset start position.
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function offset($offset)
     {
@@ -234,11 +243,11 @@ class Query extends \yii\base\Object
      * just pick the first row from the filtered result and return the item object. If the filtering
      * based on the query settings does not return any result, the return will be false.
      *
-     * @return \cms\menu\Item|boolean Returns the Item object or false if nothing found.
+     * @return \luya\cms\menu\Item|boolean Returns the Item object or false if nothing found.
      */
     public function one()
     {
-        $data = $this->filter($this->_where, $this->menu[$this->getLang()]);
+        $data = $this->filter($this->menu[$this->getLang()], $this->_where, $this->_with);
 
         if (count($data) == 0) {
             return false;
@@ -251,11 +260,11 @@ class Query extends \yii\base\Object
      * Retrieve all found rows based on the filtering options and returns the the QueryIterator object
      * which is represents an array.
      *
-     * @return \cms\menu\QueryIterator Returns the QueryIterator object.
+     * @return \luya\cms\menu\QueryIterator Returns the QueryIterator object.
      */
     public function all()
     {
-        return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->getLang()]), $this->getLang(), $this->_with);
+        return static::createArrayIterator($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with), $this->getLang(), $this->_with);
     }
     
     /**
@@ -265,7 +274,7 @@ class Query extends \yii\base\Object
      */
     public function count()
     {
-        return count($this->filter($this->_where, $this->menu[$this->getLang()]));
+        return count($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with));
     }
     
     /**
@@ -274,7 +283,7 @@ class Query extends \yii\base\Object
      *
      * @param array $data The filtere results where the iterator object should be created with
      * @param string $langContext The language short code context, if any.
-     * @return \cms\menu\QueryIterator
+     * @return \luya\cms\menu\QueryIterator
      */
     public static function createArrayIterator(array $data, $langContext, $with)
     {
@@ -287,18 +296,25 @@ class Query extends \yii\base\Object
      *
      * @param array $itemArray The item array data for the object
      * @param string  $langContext The language short code context, if any.
-     * @return \cms\menu\Item
+     * @return \luya\cms\menu\Item
      */
     public static function createItemObject(array $itemArray, $langContext)
     {
         return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
     }
     
-    protected function filter(array $whereExpression, $containerData)
+    /**
+     * Filtering data based on a where expression.
+     *
+     * @param array $containerData The data to filter from
+     * @param array $whereExpression An array with `[['op' => '=', 'field' => 'fieldName', 'value' => 'comparevalue'],[]]`
+     * @param array $withCondition An array with with conditions `$with['hidden']`.
+     */
+    private function filter(array $containerData, array $whereExpression, array $withCondition)
     {
-        $data = array_filter($containerData, function ($item) {
+        $data = array_filter($containerData, function ($item) use ($whereExpression, $withCondition) {
             foreach ($item as $field => $value) {
-                if (!$this->arrayFilter($value, $field)) {
+                if (!$this->arrayFilter($value, $field, $whereExpression, $withCondition)) {
                     return false;
                 }
             }
@@ -317,13 +333,22 @@ class Query extends \yii\base\Object
         return $data;
     }
     
-    protected function arrayFilter($value, $field)
+    /**
+     * Filter an array item based on the where expression.
+     *
+     * @param unknown $value
+     * @param unknown $field
+     * @param array $where
+     * @param array $with
+     * @return boolean
+     */
+    private function arrayFilter($value, $field, array $where, array $with)
     {
-        if ($field == 'is_hidden' && $this->_with['hidden'] === false && $value == 1) {
+        if ($field == 'is_hidden' && $with['hidden'] === false && $value == 1) {
             return false;
         }
     
-        foreach ($this->_where as $expression) {
+        foreach ($where as $expression) {
             if ($expression['field'] == $field) {
                 switch ($expression['op']) {
                     case '==':
@@ -336,6 +361,8 @@ class Query extends \yii\base\Object
                         return ($value < $expression['value']);
                     case '<=':
                         return ($value <= $expression['value']);
+                    case 'in':
+                        return in_array($value, $expression['value']);
                     default:
                         return ($value == $expression['value']);
                 }

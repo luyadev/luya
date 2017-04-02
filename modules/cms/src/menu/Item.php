@@ -3,9 +3,15 @@
 namespace luya\cms\menu;
 
 use Yii;
-use luya\cms\Exception;
+use yii\base\Object;
 use luya\admin\models\User;
+use luya\cms\Exception;
 use luya\cms\models\Nav;
+use luya\web\LinkInterface;
+use luya\web\LinkTrait;
+use luya\helpers\Url;
+use yii\base\Arrayable;
+use yii\base\ArrayableTrait;
 
 /**
  * Menu item Object.
@@ -13,6 +19,8 @@ use luya\cms\models\Nav;
  * Each menu itaration will return in an Item-Object. The Item-Object contains several methods like
  * returning title, url and ids or retrieve depending item iterations like parents or childs. As the
  * Item Object extends the yii\base\Object all getter methods can be access as property.
+ *
+ * Read more in the [[app-menu.md]] Guide.
  *
  * @property integer $id Returns Unique identifier of item, represents data record of cms_nav_item table.
  * @property boolean $isHidden Returns boolean state of visbility.
@@ -37,12 +45,23 @@ use luya\cms\models\Nav;
  * @property array $sibilings Get all sibilings for the current item, this also includes the current item iteself.
  * @property array $teardown Return all parent elemtns **with** the current item.
  * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
+ * @property boolean $isHome Returns true if the item is the home item, otherwise false.
+ * @property string $absoluteLink The link path with prepand website host `http://luya.io/home/about-us`.
+ * @property integer $sortIndex Sort index position for the current siblings list.
+ * @property boolean $hasChildren Check whether an item has childrens or not returning a boolean value.
+ * @property boolean $hasParent Check whether the parent has items or not.
+ * @property string $seoTitle Returns the Alternative SEO-Title. If entry is empty, the $title will returned instead.
+ * @property \luya\cms\menu\Item|boolean $nextSibling Returns the next sibling based on the current sibling, if not found false is returned.
+ * @property \luya\cms\menu\Item|boolean $prevSibling Returns the previous sibling based on the current sibling, if not found false is returned.
+ * @property \luya\cms\models\Nav|boolean $model Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
  *
- * @author nadar
- * @since 1.0.0-beta1
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Item extends \yii\base\Object
+class Item extends Object implements LinkInterface, Arrayable
 {
+    use LinkTrait, ArrayableTrait;
+    
     /**
      * @var array The item property containing the informations with key  value parinings. This property will be assigned when creating the
      * Item-Object.
@@ -60,6 +79,30 @@ class Item extends \yii\base\Object
      */
     private $_with = [];
 
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        return ['href', 'target'];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getHref()
+    {
+        return $this->getLink();
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getTarget()
+    {
+        return '_self';
+    }
+    
     /**
      * Item-Object initiliazer, verify if the itemArray property is empty.
      *
@@ -84,6 +127,16 @@ class Item extends \yii\base\Object
     {
         return (int) $this->itemArray['id'];
     }
+    
+    /**
+     * Get the sorting index position for the item on the current siblings.
+     *
+     * @return integer Sort index position for the current siblings list.
+     */
+    public function getSortIndex()
+    {
+        return (int) $this->itemArray['sort_index'];
+    }
 
     /**
      * Whether the item is hidden or not if hidden items can be retreived (with/without settings).
@@ -93,6 +146,16 @@ class Item extends \yii\base\Object
     public function getIsHidden()
     {
         return (bool) $this->itemArray['is_hidden'];
+    }
+    
+    /**
+     * Whether current item is home or not.
+     *
+     * @return boolean Returns true if the item is the home item, otherwise false.
+     */
+    public function getIsHome()
+    {
+        return (bool) $this->itemArray['is_home'];
     }
     
     /**
@@ -168,6 +231,18 @@ class Item extends \yii\base\Object
     }
     
     /**
+     * Returns the Alternative SEO-Title.
+     *
+     * If no SEO-Title is given, the page title from {{luya\cms\menu\Item::getTitle}} will be returned instead.
+     *
+     * @return string Return the SEO-Title, if empty the {{luya\cms\menu\Item::getTitle}} will be returned instead.
+     */
+    public function getSeoTitle()
+    {
+        return empty($this->itemArray['title_tag']) ? $this->title : $this->itemArray['title_tag'];
+    }
+    
+    /**
      * Return the current nav item type by number.
      *
      * + 1 = Page with blocks
@@ -186,17 +261,11 @@ class Item extends \yii\base\Object
      * this information.
      *
      * @return boolean|string The name of the module or false if not found or wrong type
-     * @since 1.0.0-beta5
      */
     public function getModuleName()
     {
         if ($this->getType() === 2) {
             return $this->itemArray['module_name'];
-            /*
-            if (isset($this->itemArray['nav_item_type_id'], Yii::$app->menu->modulesMap)) {
-                return Yii::$app->menu->modulesMap[$this->itemArray['nav_item_type_id']]['module_name'];
-            }
-            */
         }
         
         return false;
@@ -218,7 +287,6 @@ class Item extends \yii\base\Object
     
     /**
      * @return array An array with all keywords for this page
-     * @since 1.0.0-beta6
      */
     public function getKeywords()
     {
@@ -271,7 +339,7 @@ class Item extends \yii\base\Object
     /**
      * Returns an active record object for the admin user who created this page.
      *
-     * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
+     * @return \luya\admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
      * found the return value is false.
      */
     public function getUserCreated()
@@ -282,7 +350,7 @@ class Item extends \yii\base\Object
     /**
      * Returns an active record object for the admin user who last time updated this page.
      *
-     * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who last time updated this page, if not
+     * @return \luya\admin\models\User|boolean Returns an ActiceRecord for the admin user who last time updated this page, if not
      * found the return value is false.
      */
     public function getUserUpdated()
@@ -307,7 +375,7 @@ class Item extends \yii\base\Object
      * from a page to a hidden page, the link of the hidden page will be returned and the link
      * will be successfully displayed
      *
-     * @return string e.g. "/home/about-us" or with composition "/de/home/about-us"
+     * @return string The link path `/home/about-us` or with composition `/de/home/about-us`
      */
     public function getLink()
     {
@@ -315,7 +383,11 @@ class Item extends \yii\base\Object
         if ($this->getType() === 3) {
             switch ($this->redirectMapData('type')) {
                 case 1:
-                    return (($item = (new Query())->where(['nav_id' => $this->redirectMapData('value')])->with(['hidden'])->lang($this->lang)->one())) ? $item->getLink() : null;
+                    $navId = $this->redirectMapData('value');
+                    if (empty($navId) || $navId == $this->navId) {
+                        return null;
+                    }
+                    return (($item = (new Query())->where(['nav_id' => $navId])->with(['hidden'])->lang($this->lang)->one())) ? $item->getLink() : null;
                 case 2:
                     return $this->redirectMapData('value');
             }
@@ -326,6 +398,19 @@ class Item extends \yii\base\Object
         }
         
         return $this->itemArray['link'];
+    }
+    
+    /**
+     * Returns the link with an absolute scheme.
+     *
+     * The link with an absolute scheme path example `http://luya.io/link` where link is the output
+     * from the {{luya\cms\menu\item::getLink}} method.
+     *
+     * @return string The link path with prepand website host `http://luya.io/home/about-us`.
+     */
+    public function getAbsoluteLink()
+    {
+        return Yii::$app->request->hostInfo . $this->getLink();
     }
 
     /**
@@ -349,42 +434,25 @@ class Item extends \yii\base\Object
     {
         return $this->itemArray['depth'];
     }
-
-    private $_parent = null;
     
     /**
-     * Getter method wrapper for `hasParent()`
+     * Check whether the parent has items or not.
      *
      * @return boolean
-     * @since 1.0.0-beta6
      */
     public function getHasParent()
     {
-        return $this->hasParent();
-    }
-    
-    /**
-     * Check whether parent element exists or not
-     *
-     * @return boolean
-     */
-    public function hasParent()
-    {
-        return ($this->getParent()) ? true : false;
+        return count($this->getParent()) > 0 ? true : false;
     }
     
     /**
      * Returns a Item-Object of the parent element, if no parent element exists returns false.
      *
-     * @return \cms\menu\Item|bool Returns the parent item-object or false if not exists.
+     * @return \luya\cms\menu\Item|bool Returns the parent item-object or false if not exists.
      */
     public function getParent()
     {
-        if ($this->_parent === null) {
-            $this->_parent = (new Query())->where(['nav_id' => $this->parentNavId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->one();
-        }
-        
-        return $this->_parent;
+        return (new Query())->where(['nav_id' => $this->parentNavId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->one();
     }
 
     /**
@@ -408,11 +476,34 @@ class Item extends \yii\base\Object
      * Get all sibilings for the current item, this also includes the current item iteself.
      *
      * @return array An array with all item-object siblings
-     * @since 1.0.0-beta3
      */
     public function getSiblings()
     {
-        return (new Query())->where(['parent_nav_id' => $this->getParentNavId(), 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
+        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->with($this->_with)->lang($this->lang)->all();
+    }
+    
+    /**
+     * Get the next sibling in the current siblings list.
+     *
+     * If there is no next sibling (assuming its the last sibling item in the list) false is returned, otherwise the {{luya\cms\menu\Item}} is returned.
+     *
+     * @return \luya\cms\menu\Item|boolean Returns the next sibling based on the current sibling, if not found false is returned.
+     */
+    public function getNextSibling()
+    {
+        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->andWhere(['>', 'sort_index', $this->sortIndex])->with($this->_with)->lang($this->lang)->one();
+    }
+    
+    /**
+     * Get the previous sibling in the current siblings list.
+     *
+     * If there is no previous sibling (assuming its the first sibling item in the list) false is returned, otherwise the {{luya\cms\menu\Item}} is returned.
+     *
+     * @return \luya\cms\menu\Item|boolean Returns the previous sibling based on the current sibling, if not found false is returned.
+     */
+    public function getPrevSibling()
+    {
+        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->andWhere(['<', 'sort_index', $this->sortIndex])->with($this->_with)->lang($this->lang)->one();
     }
     
     /**
@@ -432,45 +523,47 @@ class Item extends \yii\base\Object
 
         return array_reverse($data, true);
     }
-
-    private $_children = null;
     
     /**
      * Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
      *
-     * @return \cms\menu\QueryIterator Returns all children
+     * @return \luya\cms\menu\QueryIterator Returns all children
      */
     public function getChildren()
     {
-        if ($this->_children === null) {
-            $this->_children = (new Query())->where(['parent_nav_id' => $this->navId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
-        }
-        
-        return $this->_children;
+        return (new Query())->where(['parent_nav_id' => $this->navId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
     }
     
-    /**
-     * Getter method wrapper for `hasChildren()`
-     *
-     * @since 1.0.0-beta6
-     * @return boolean
-     */
-    public function getHasChildren()
-    {
-        return $this->hasChildren();
-    }
-
     /**
      * Check whether an item has childrens or not returning a boolean value.
      *
      * @return bool If there are childrens the method returns true, otherwhise false.
      */
-    public function hasChildren()
+    public function getHasChildren()
     {
-        return (count($this->getChildren()) > 0) ? true : false;
+        return count($this->getChildren()) > 0 ? true : false;
     }
     
     private $_model = null;
+    
+    /**
+     * Get the ActiveRecord Model for the current Nav Model.
+     *
+     * @throws \luya\cms\Exception
+     * @return \luya\cms\models\Nav Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
+     */
+    public function getModel()
+    {
+        if ($this->_model === null) {
+            $this->_model = Nav::findOne($this->navId);
+            
+            if (empty($this->_model)) {
+                throw new Exception('The model active record could not be found for the corresponding nav item. Maybe you have inconsistent Database data.');
+            }
+        }
+        
+        return $this->_model;
+    }
     
     /**
      * This method allows you the retrieve a property for an page property. If the property is not found false will be retunrend
@@ -478,19 +571,10 @@ class Item extends \yii\base\Object
      * property by calling your custom method or the default `getValue()` method.
      *
      * @param string $varName The variable name of the property defined inside of the property of the method `varName()`.
-     * @since 1.0.0-beta8
      */
     public function getProperty($varName)
     {
-        if ($this->_model === null) {
-            $this->_model = Nav::findOne($this->navId);
-        }
-
-        if (empty($this->_model)) {
-            throw new Exception('The model active record could not be found for the corresponding nav item. Maybe you have inconsistent Database data.');
-        }
-        
-        return $this->_model->getProperty($varName);
+        return $this->model->getProperty($varName);
     }
 
     /**
@@ -505,15 +589,15 @@ class Item extends \yii\base\Object
      * Example use of with in subquery of the current item:
      *
      * ```php
-     * if ($item->with(['hidden'])->hasChildren()) {
+     * if ($item->with(['hidden'])->hasChildren) {
      *     print_r($item->getChildren());
      * }
      * ```
      *
      * The above example display also hidden pages.
      *
-     * @see \cms\menu\Query::with()
-     * @return \cms\menu\Item;
+     * @see \luya\cms\menu\Query::with()
+     * @return \luya\cms\menu\Item;
      */
     public function with($with)
     {
@@ -533,7 +617,7 @@ class Item extends \yii\base\Object
      * ```
      *
      * @param string|array $without Can be a string `hidden` or an array `['hidden']`.
-     * @return \cms\menu\Item
+     * @return \luya\cms\menu\Item
      */
     public function without($without)
     {

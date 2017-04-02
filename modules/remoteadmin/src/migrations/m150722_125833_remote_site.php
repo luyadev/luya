@@ -1,35 +1,23 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m150722_125833_remote_site extends Migration
 {
-    public function up()
-    {
-        $this->createTable('remote_site', [
-            'id' => 'pk',
-            'token' => 'varchar(120)',
-            'url' => 'varchar(120)',
-            'status' => 'int(11)',
-        ]);
-    }
-
-    public function down()
-    {
-        echo "m150722_125833_remote_site cannot be reverted.\n";
-
-        return false;
-    }
-    
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
+        $this->createTable('remote_site', [
+            'id' => $this->primaryKey(),
+            'token' => $this->string(120)->notNull(),
+            'url' => $this->string(120)->notNull(),
+            'auth_is_enabled' => $this->boolean()->defaultValue(false),
+            'auth_user' => $this->string(120),
+            'auth_pass' => $this->string(120),
+        ]);
     }
 
     public function safeDown()
     {
+        $this->dropTable('remote_site');
     }
-    */
 }

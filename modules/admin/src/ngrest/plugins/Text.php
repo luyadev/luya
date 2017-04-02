@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 /**
  * Create a text input select for a given field.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Text extends Plugin
 {
@@ -22,9 +22,7 @@ class Text extends Plugin
     public $listOptions = [];
 
     /**
-     *
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderList()
+     * @inheritdoc
      */
     public function renderList($id, $ngModel)
     {
@@ -32,9 +30,7 @@ class Text extends Plugin
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderCreate()
+     * @inheritdoc
      */
     public function renderCreate($id, $ngModel)
     {
@@ -42,9 +38,7 @@ class Text extends Plugin
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderUpdate()
+     * @inheritdoc
      */
     public function renderUpdate($id, $ngModel)
     {

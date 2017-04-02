@@ -4,6 +4,8 @@ namespace luya\admin\models;
 
 use Yii;
 use luya\web\Application;
+use yii\db\ActiveRecord;
+use luya\helpers\FileHelper;
 
 /**
  * This is the model class for table "admin_storage_file".
@@ -26,47 +28,57 @@ use luya\web\Application;
  * @property string $passthrough_file_password
  * @property integer $passthrough_file_stats
  * @property string $caption
- * @property string $internal_note
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class StorageFile extends \yii\db\ActiveRecord
+final class StorageFile extends ActiveRecord
 {
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'onBeforeInsert']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_storage_file';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['name_original', 'name_new', 'mime_type', 'name_new_compound', 'extension', 'hash_file', 'hash_name'], 'required'],
             [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp', 'is_deleted'], 'safe'],
             [['is_hidden'], 'integer'],
-            [['caption', 'internal_note'], 'string'],
+            [['caption'], 'string'],
         ];
     }
     
     public function delete()
     {
         $file = Yii::$app->storage->getFile($this->id);
-        @unlink($file->serverSource);
+        
+        if ($file) {
+            if (!FileHelper::unlink($file->serverSource)) {
+                Logger::error("Unable to remove storage file: " . $file->serverSource);
+            }
+        }
         $this->is_deleted = 1;
         $this->update(false);
         return true;
     }
 
     /**
-     * We can not global set is_deleted=0 to the where condition cause in some parts of the storage we want
-     * to access the name_new_compound to rebuild old image paths.
-     *
-     * @return \yii\db\$this
+     * @inheritdoc
      */
     public static function find()
     {

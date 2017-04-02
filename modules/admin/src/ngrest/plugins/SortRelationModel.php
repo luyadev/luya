@@ -8,13 +8,13 @@ namespace luya\admin\ngrest\plugins;
  * Example usage:
  *
  * ```
- * public function ngrestAttributeTypes()
+ * public function ngRestAttributeTypes()
  * {
  * 		'genres' => ['sortRelationModel', 'modelClass' => path\to\Genres::className(), 'valueField' => 'id', 'labelField' => 'title']],
  * }
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class SortRelationModel extends SortRelation
 {

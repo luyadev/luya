@@ -2,31 +2,28 @@
 
 use yii\db\Migration;
 
+/**
+ * Cms Nav Container.
+ *
+ * The table has been renamed in later version and the ohter migrations has been removed, but the of the migration file
+ * is the same in order to keep the migration history.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class m141203_143052_cms_cat extends Migration
 {
-    public function up()
+    public function safeUp()
     {
-        $this->createTable('cms_cat', [ // renameed to cms_nav_container
-            'id' => 'pk',
-            'name' => 'VARCHAR(180) NOT NULL',
-            'rewrite' => 'VARCHAR(80) NOT NULL', // renamed to alias
-            'default_nav_id' => 'INT(11) NOT NULL', // dropped in m151028_085932_add_is_home_in_nav
-            'is_default' => 'TINYINT(1) NOT NULL DEFAULT 0', // dropped in m151028_085932_add_is_home_in_nav
-            'is_deleted' => 'TINYINT(1) NOT NULL default 0',
-        ]);
-
-        $this->insert('cms_cat', [ // renamed to cms_nav_container
-            'name' => 'Default Container',
-            'rewrite' => 'default', // renmaed to alias
-            'default_nav_id' => 1,
-            'is_default' => 1,
+        $this->createTable('cms_nav_container', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string(180)->notNull(),
+            'alias' => $this->string(180)->notNull(),
+            'is_deleted' => $this->boolean()->defaultValue(false),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m141203_143052_cms_cat cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('cms_nav_container');
     }
 }

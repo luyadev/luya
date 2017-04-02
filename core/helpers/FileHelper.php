@@ -3,13 +3,21 @@
 namespace luya\helpers;
 
 use Yii;
-use luya\admin\ngrest\plugins\File;
 use Exception;
 
 /**
- * Extending the Yii File Helper class.
+ * Helper methods when dealing with Files.
+ *
+ * Extends the {{yii\helpers\FileHelper}} class by some usefull functions like:
+ *
+ * + {{luya\helpers\FileHelper::humanReadableFilesize}}
+ * + {{luya\helpers\FileHelper::ensureExtension}}
+ * + {{luya\helpers\FileHelper::md5sum}}
+ * + {{luya\helpers\FileHelper::writeFile}}
+ * + {{luya\helpers\FileHelper::getFileContent}}
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class FileHelper extends \yii\helpers\BaseFileHelper
 {
@@ -59,8 +67,8 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         $path = pathinfo($sourceFile);
     
         return (object) [
-            'extension' => isset($path['extension']) ? (empty($path['extension']) ? false : $path['extension']) : false,
-            'name' => isset($path['filename']) ? $path['filename'] : false,
+            'extension' => (isset($path['extension']) && !empty($path['extension'])) ? $path['extension'] : false,
+            'name' => (isset($path['filename']) && !empty($path['filename'])) ? $path['filename'] : false,
         ];
     }
     
@@ -70,7 +78,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      * @param string $sourceFile The path to the file
      * @return false|string Returns false or the md5 hash of this file
      */
-    public static function getFileHash($sourceFile)
+    public static function md5sum($sourceFile)
     {
         return file_exists($sourceFile) ? hash_file('md5', $sourceFile) : false;
     }
@@ -86,10 +94,15 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     public static function writeFile($fileName, $content)
     {
         try {
-            return file_put_contents(Yii::getAlias($fileName), $content);
+            $response = file_put_contents(Yii::getAlias($fileName), $content);
+            if ($response === false) {
+                return false;
+            }
         } catch (Exception $error) {
             return false;
         }
+        
+        return true;
     }
     
     /**
@@ -97,7 +110,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      * will auto alias encode by Yii::getAlias function.
      *
      * @since 1.0.0-beta7
-     * @param sring $fileName The path to the file to get the content
+     * @param string $fileName The path to the file to get the content
      * @return string|boolean
      */
     public static function getFileContent($fileName)
@@ -107,5 +120,38 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         } catch (Exception $error) {
             return false;
         }
+    }
+    
+    /**
+     * Unlink a file, which handles symlinks.
+     *
+     * @param string $file The file path to the file to delete.
+     * @return boolean Whether the file has been removed or not.
+     */
+    public static function unlink($file)
+    {
+        // default unlink
+        if (@unlink($file)) {
+            return true;
+        }
+        
+        // try to force symlinks
+        if (is_link($file)) {
+            $sym = @readlink($file);
+            if ($sym) {
+                if (@unlink($file)) {
+                    return true;
+                }
+            }
+        }
+        
+        // try to use realpath
+        if (realpath($file) && realpath($file) !== $file) {
+            if (@unlink(realpath($file))) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

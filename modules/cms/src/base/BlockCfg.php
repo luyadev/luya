@@ -2,7 +2,12 @@
 
 namespace luya\cms\base;
 
-class BlockCfg extends \luya\cms\base\BlockConfigElement
+/**
+ * Block CFG variables ensurence.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
+class BlockCfg extends BlockConfigElement
 {
     public function toArray()
     {

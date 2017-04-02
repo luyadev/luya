@@ -4,55 +4,66 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\TextGroup;
-use luya\cms\base\TwigBlock;
+use luya\cms\base\PhpBlock;
 
 /**
  * WYSIWYG Block with ng-wig.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class WysiwygBlock extends TwigBlock
+final class WysiwygBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
+    public $module = 'cms';
+    
+    /**
+     * @inheritDoc
+     */
     public $cacheEnabled = true;
     
+    /**
+     * @inheritDoc
+     */
     public function name()
     {
         return Module::t('block_wysiwyg_name');
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function blockGroup()
+    {
+        return TextGroup::className();
+    }
 
+    /**
+     * @inheritDoc
+     */
     public function icon()
     {
         return 'format_color_text';
     }
 
+    /**
+     * @inheritDoc
+     */
     public function config()
     {
         return [
             'vars' => [
-                ['var' => 'content', 'label' => Module::t('block_wysiwyg_content_label'), 'type' => 'zaa-wysiwyg'],
+                ['var' => 'content', 'label' => Module::t('block_wysiwyg_content_label'), 'type' => self::TYPE_WYSIWYG],
             ],
         ];
     }
 
-    public function getFieldHelp()
-    {
-        return [
-            'content' => Module::t('block_wysiwyg_help_content'),
-        ];
-    }
-
-    public function twigFrontend()
-    {
-        return '{% if vars.content is not empty %}{{ vars.content }}{% endif %}';
-    }
-
-    public function twigAdmin()
+    /**
+     * @inheritDoc
+     */
+    public function admin()
     {
         return '{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_wysiwyg_no_content') . '</span>{% else %}{{ vars.content }}{% endif %}';
-    }
-    
-    public function getBlockGroup()
-    {
-        return TextGroup::className();
     }
 }

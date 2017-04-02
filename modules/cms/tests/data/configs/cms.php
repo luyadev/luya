@@ -6,12 +6,15 @@ return [
     'remoteToken' => 'testtoken',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms',
+    'aliases' => [
+        'cmstests' => dirname(__DIR__) . '/../',
+    ],
     'modules' => [
         'admin' => 'luya\admin\Module',
         'cms' => [
             'class' => '\luya\cms\frontend\Module'
         ],
-    	'cmsadmin' => 'luya\cms\admin\Module',
+        'cmsadmin' => 'luya\cms\admin\Module',
         'CmsUnitModule' => '\cmstests\data\modules\CmsUnitModule',
     ],
     'components' => [

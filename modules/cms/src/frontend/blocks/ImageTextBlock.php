@@ -2,36 +2,56 @@
 
 namespace luya\cms\frontend\blocks;
 
-use Yii;
-use luya\cms\frontend\Module;
 use luya\TagParser;
-use luya\cms\base\TwigBlock;
+use luya\cms\frontend\Module;
+use luya\cms\frontend\blockgroups\MediaGroup;
+use luya\cms\helpers\BlockHelper;
+use luya\cms\base\PhpBlock;
 
 /**
  * Image with Text block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class ImageTextBlock extends TwigBlock
+final class ImageTextBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
     public $module = 'cms';
 
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
-    
-    private $defaultMargin = '20px';
 
-    private $_source = null;
-
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_image_text_name');
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function blockGroup()
+    {
+        return MediaGroup::class;
+    }
 
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'recent_actors';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
@@ -45,22 +65,13 @@ class ImageTextBlock extends TwigBlock
                 ],
             ],
             'cfgs' => [
-                ['var' => 'heading', 'label' => Module::t('block_image_text_heading_label'), 'type' => 'zaa-text'],
-                ['var' => 'headingType', 'label' => Module::t('block_image_text_headingtype_label'), 'type' => 'zaa-select', 'initvalue' => 'h3', 'options' => [
-                        ['value' => 'h1', 'label' => Module::t('block_image_text_heading_label') . ' 1'],
-                        ['value' => 'h2', 'label' => Module::t('block_image_text_heading_label') . ' 2'],
-                        ['value' => 'h3', 'label' => Module::t('block_image_text_heading_label') . ' 3'],
-                        ['value' => 'h4', 'label' => Module::t('block_image_text_heading_label') . ' 4'],
-                        ['value' => 'h5', 'label' => Module::t('block_image_text_heading_label') . ' 5'],
-                    ],
-                ],
-                ['var' => 'margin', 'label' => Module::t('block_image_text_margin_label'), 'type' => 'zaa-select', 'initvalue' => $this->defaultMargin, 'options' => [
-                            ['value' => '5px', 'label' => '0 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '10px', 'label' => '10 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '15px', 'label' => '20 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '15px', 'label' => '30 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '15px', 'label' => '40 ' . Module::t('block_image_text_margin_pixel')],
-                            ['value' => '15px', 'label' => '50 ' . Module::t('block_image_text_margin_pixel')],
+                ['var' => 'margin', 'label' => Module::t('block_image_text_margin_label'), 'type' => 'zaa-select', 'initvalue' => '20px', 'options' => [
+                        ['value' => '5px', 'label' => '0 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '10px', 'label' => '10 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '20px', 'label' => '20 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '30px', 'label' => '30 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '40px', 'label' => '40 ' . Module::t('block_image_text_margin_pixel')],
+                        ['value' => '50px', 'label' => '50 ' . Module::t('block_image_text_margin_pixel')],
                     ],
                 ],
                 ['var' => 'textType', 'label' => Module::t('block_image_text_texttype_label'), 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
@@ -77,6 +88,9 @@ class ImageTextBlock extends TwigBlock
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFieldHelp()
     {
         return [
@@ -84,6 +98,11 @@ class ImageTextBlock extends TwigBlock
         ];
     }
 
+    /**
+     * Get the image text.
+     *
+     * @return string
+     */
     public function getText()
     {
         $text = $this->getVarValue('text');
@@ -92,49 +111,34 @@ class ImageTextBlock extends TwigBlock
             return TagParser::convertWithMarkdown($text);
         }
 
-        return $text;
+        return empty($text) ? null : '<p>' . nl2br($text) . '</p>';
     }
 
-    public function getImageSource()
-    {
-        if ($this->_source === null) {
-            $img = Yii::$app->storage->getImage($this->getVarValue('imageId'), 0);
-
-            $this->_source = $img ? $img->source : false;
-        }
-
-        return $this->_source;
-    }
-
+    /**
+     * @inheritdoc
+     */
     public function extraVars()
     {
         return [
-            'imageSource' => $this->getImageSource(),
-            'imageAdmin' => $this->zaaImageUpload($this->getVarValue('imageId'), 'medium-thumbnail'),
-            //'imageAdmin' => ($image = Yii::$app->storage->getImage($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
-            'imagePosition' => $this->getVarValue('imagePosition', 'left'),
-            'imageWidth' => $this->getImageSource() ? @getimagesize($this->getImageSource())[0] : 0,
-            'margin' => $this->getCfgValue('margin', $this->defaultMargin),
+            'image' => BlockHelper::imageUpload($this->getVarValue('imageId')),
             'text' => $this->getText(),
         ];
     }
 
-    public function twigFrontend()
+    /**
+     * @inheritdoc
+     */
+    public function admin()
     {
-        return  $this->render();
-    }
-
-    public function twigAdmin()
-    {
-        return  '{% if not extras.imageAdmin.source %}'.
+        return  '{% if not extras.image.source %}'.
                     '<span class="block__empty-text">' . Module::t('block_image_text_no_image') . '</span>'.
                 '{% endif %}'.
-                '{% if not vars.text %}'.
+                '{% if not extras.text %}'.
                     '<span class="block__empty-text">' . Module::t('block_image_text_no_text') . '</span>'.
                 '{% endif %}'.
-                '{% if extras.imageAdmin.source and vars.text %}'.
-                    '<img src="{{ extras.imageAdmin.source }}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="{% if extras.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;"">'.
-                    '<p>{% if cfgs.textType == 1 %}{{ extras.text }}{% else %}{{ extras.text|nl2br }}{% endif %}</p>'.
+                '{% if extras.image.source and extras.text %}'.
+                    '<img src="{{ extras.image.source }}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="{% if vars.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if vars.imagePosition == "right" %}margin-left:{{ cfgs.margin }}{% else %}margin-right:{{ cfgs.margin }}{% endif %};margin-bottom:{{ cfgs.margin }}; max-width: 50%;"">'.
+                    '{{ extras.text }}'.
                 '{% endif %}';
     }
 }

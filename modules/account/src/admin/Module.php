@@ -2,6 +2,8 @@
 
 namespace luya\account\admin;
 
+use luya\admin\components\AdminMenuBuilder;
+
 class Module extends \luya\admin\base\Module
 {
     public $apis = [
@@ -10,9 +12,9 @@ class Module extends \luya\admin\base\Module
     
     public function getMenu()
     {
-        return $this->node('Accounts', 'supervisor_account')
-        ->group('Übersicht')
-        ->itemApi('Benutzer', 'accountadmin-user-index', 'account_circle', 'api-account-user')
-        ->menu();
+        return (new AdminMenuBuilder($this))
+        ->node('Accounts', 'supervisor_account')
+            ->group('Übersicht')
+                ->itemApi('Benutzer', 'accountadmin/user/index', 'account_circle', 'api-account-user');
     }
 }

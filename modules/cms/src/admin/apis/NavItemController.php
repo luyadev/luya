@@ -14,6 +14,8 @@ use luya\cms\models\NavItemPageBlockItem;
 use luya\web\filters\ResponseCache;
 use yii\caching\DbDependency;
 use luya\cms\models\Layout;
+use yii\web\ForbiddenHttpException;
+use luya\cms\admin\Module;
 
 /**
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
@@ -37,10 +39,25 @@ class NavItemController extends \luya\admin\base\RestController
                 'class' => DbDependency::className(),
                 'sql' => 'SELECT timestamp_update FROM cms_nav_item WHERE lang_id=:lang_id AND nav_id=:nav_id',
                 'params' => [':lang_id' => Yii::$app->request->get('langId', 0), ':nav_id' => Yii::$app->request->get('navId', 0)]
-            ]
+            ],
         ];
         
         return $behaviors;
+    }
+
+    public function actionDelete($navItemId)
+    {
+        if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
+            throw new ForbiddenHttpException("Unable to perform this action due to permission restrictions");
+        }
+        
+        $model = NavItem::findOne($navItemId);
+        
+        if ($model) {
+            return $model->delete();
+        }
+        
+        return $this->sendModelError($model);
     }
     
     /**
@@ -53,11 +70,12 @@ class NavItemController extends \luya\admin\base\RestController
      */
     public function actionNavLangItem($navId, $langId)
     {
-        $item = NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
+        $item = NavItem::find()->with('nav')->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
         if ($item) {
             return [
                 'error' => false,
                 'item' => $item->toArray(),
+                'nav' => $item->nav->toArray(),
                 'typeData' => ($item->nav_item_type == 1) ? NavItemPage::getVersionList($item->id) : $item->getType()->toArray(),
             ];
         }
@@ -184,33 +202,6 @@ class NavItemController extends \luya\admin\base\RestController
     }
 
     /**
-     * delete specific nav item info (page/module/redirect).
-     *
-     * @param $navItemType
-     * @param $navItemTypeId
-     */
-    /*
-    public function deleteItem($navItemType, $navItemTypeId)
-    {
-        $model = null;
-        switch ($navItemType) {
-            case 1:
-                $model = NavItemPage::find()->where(['id' => $navItemTypeId])->one();
-                break;
-            case 2:
-                $model = NavItemModule::find()->where(['id' => $navItemTypeId])->one();
-                break;
-            case 3:
-                $model = NavItemRedirect::find()->where(['id' => $navItemTypeId])->one();
-                break;
-        }
-        if ($model) {
-            $model->delete();
-        }
-    }
-    */
-
-    /**
      * extract a post var and set to model attribute with the same name.
      *
      * @param $model
@@ -226,8 +217,8 @@ class NavItemController extends \luya\admin\base\RestController
     /**
      * check old entries - delete if obsolete (changed type) and add new entry to the appropriate cms_nav_item_(page/module/redirect).
      *
-     * @param integer The id of the nav_item item which should be changed
-     * @param integer The NEW type of content for the above nav_item.id
+     * @param integer $navItemId The id of the nav_item item which should be changed
+     * @param integer $navItemType The NEW type of content for the above nav_item.id
      * @return array|bool
      */
     public function actionUpdatePageItem($navItemId, $navItemType)
@@ -243,12 +234,15 @@ class NavItemController extends \luya\admin\base\RestController
         $model->alias = Yii::$app->request->post('alias', false);
         $model->description = Yii::$app->request->post('description', null);
         $model->keywords = Yii::$app->request->post('keywords');
+        $model->title_tag = Yii::$app->request->post('title_tag');
 
         // make sure the currently provided informations are valid (like title);
         if (!$model->validate()) {
             return $this->sendModelError($model);
         }
       
+        Yii::$app->menu->flushCache();
+        
         if ($model->nav_item_type == $navItemType) {
             $typeModel = $model->getType();
             // lets just update the type data

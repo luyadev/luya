@@ -3,29 +3,56 @@
 namespace luya\admin\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * ADMIN PROPERTY
  *
  * Base classes for CMS properties which are set by import process.
  *
- * @author nadar
+ * @property integer $id
+ * @property string $module_name
+ * @property string $var_name
+ * @property string $class_name
+ * @author Basil Suter <basil@nadar.io>
  */
-class Property extends \yii\db\ActiveRecord
+final class Property extends ActiveRecord
 {
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_property';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['module_name', 'var_name'], 'required'],
-            [['class_name'], 'safe'],
+            [['var_name', 'class_name'], 'required'],
+            [['module_name'], 'string', 'max' => 120],
+            [['var_name'], 'string', 'max' => 40],
+            [['class_name'], 'string', 'max' => 200],
+            [['var_name'], 'unique'],
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'module_name' => 'Module Name',
+            'var_name' => 'Var Name',
+            'class_name' => 'Class Name',
+        ];
+    }
+    
     public function createObject($value)
     {
         return static::getObject($this->class_name, $value);

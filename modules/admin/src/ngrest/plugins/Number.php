@@ -17,7 +17,7 @@ use luya\admin\ngrest\base\Plugin;
  * 'sort_index' => ['number', 'initValue' => 1000],
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Number extends Plugin
 {

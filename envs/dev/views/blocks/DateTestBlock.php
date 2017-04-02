@@ -1,3 +1,3 @@
-<? print_r($vars); ?>
-<? print_r($cfgs); ?>
-<? var_dump($extras); ?>
+<?php print_r($vars); ?>
+<?php print_r($cfgs); ?>
+<?php var_dump($extras); ?>

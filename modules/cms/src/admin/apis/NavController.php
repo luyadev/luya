@@ -8,6 +8,11 @@ use luya\cms\models\Property;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
 use yii\helpers\Json;
+use yii\base\InvalidCallException;
+use luya\admin\models\UserOnline;
+use yii\web\NotFoundHttpException;
+use luya\cms\admin\Module;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Nai Api provides tasks to create, modify and delete navigation items and properties of items.
@@ -17,13 +22,60 @@ use yii\helpers\Json;
  * example.com/admin/api-cms-nav/create-module
  * example.com/admin/api-cms-nav/create-item-module.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class NavController extends \luya\admin\base\RestController
 {
     private function postArg($name)
     {
         return Yii::$app->request->post($name, null);
+    }
+    
+    public function actionUpdate($id)
+    {
+        $model = Nav::findOne($id);
+        
+        if (!$model) {
+            throw new NotFoundHttpException("Unable to find nav model.");
+        }
+        
+        $model->attributes = Yii::$app->request->bodyParams;
+        
+        if (!$model->save()) {
+            return $this->sendModelError($model);
+        }
+        
+        return true;
+    }
+    
+    public function actionDeepPageCopy()
+    {
+        $navId = Yii::$app->request->getBodyParam('navId');
+        
+        if (empty($navId)) {
+            throw new InvalidCallException("navId can not be empty.");
+        }
+        
+        $nav = Nav::findOne($navId);
+        
+        if (!$nav) {
+            throw new InvalidCallException("Unable to find the requested model.");
+        }
+        
+        $model = $nav->createCopy();
+        foreach ($nav->navItems as $item) {
+            $newItem = new NavItem();
+            $newItem->attributes = $item->toArray();
+            $newItem->nav_id = $model->id;
+            $newItem->parent_nav_id = $model->parent_nav_id;
+            $newItem->title = $item->title . ' (copy)';
+            $newItem->alias = $item->alias . '-' . time();
+            if ($newItem->save() && !empty($newItem->nav_item_type_id)) {
+                $item->copyTypeContent($newItem);
+            }
+        }
+        
+        return true;
     }
     
     public function actionSaveCatToggle()
@@ -49,12 +101,14 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionGetProperties($navId)
     {
+        UserOnline::lock(Yii::$app->adminuser->id, NavItem::tableName(), $navId, 'lock_cms_edit_page', ['title' => Nav::findOne($navId)->activeLanguageItem->title]);
+        
         $data = [];
         foreach (Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
             $object = \luya\admin\models\Property::findOne($row['admin_prop_id']);
             $blockObject = $object->createObject($row['value']);
             
-            $value = $blockObject->getValue();
+            $value = $blockObject->getAdminValue();
             
             $row['value'] = (is_numeric($value)) ? (int) $value : $value;
              
@@ -158,6 +212,10 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionDelete($navId)
     {
+        if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
+            throw new ForbiddenHttpException("Unable to remove this page due to permission restrictions.");
+        }
+        
         $model = Nav::find()->where(['id' => $navId])->one();
         if ($model) {
             Yii::$app->menu->flushCache();
@@ -186,13 +244,13 @@ class NavController extends \luya\admin\base\RestController
     }
 
     /**
-     * creates a new nav entry for the type page (nav_id will be created.
+     * Create a new nav entry for the type page (nav_id will be created.
      *
-     * @param array $_POST:
+     * This methods is execute via post.
      */
     public function actionCreatePage()
     {
-        $fromDraft = $this->postArg('from_draft_id');
+        $fromDraft = $this->postArg('use_draft');
         $model = new Nav();
         
         $parentNavId = $this->postArg('parent_nav_id');
@@ -203,7 +261,7 @@ class NavController extends \luya\admin\base\RestController
         }
         
         if (!empty($fromDraft)) {
-            $create = $model->createPageFromDraft($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('description'), $fromDraft, $this->postArg('is_draft'));
+            $create = $model->createPageFromDraft($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('description'), $this->postArg('from_draft_id'), $this->postArg('is_draft'));
         } else {
             $create = $model->createPage($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'), $this->postArg('is_draft'));
         }
@@ -239,7 +297,7 @@ class NavController extends \luya\admin\base\RestController
         $navContainerId = $this->postArg('nav_container_id');
         
         if (!empty($parentNavId)) {
-        	$navContainerId = Nav::findOne($parentNavId)->nav_container_id;
+            $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
         
         $create = $model->createModule($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
@@ -273,7 +331,7 @@ class NavController extends \luya\admin\base\RestController
         $navContainerId = $this->postArg('nav_container_id');
         
         if (!empty($parentNavId)) {
-        	$navContainerId = Nav::findOne($parentNavId)->nav_container_id;
+            $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
         
         $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));

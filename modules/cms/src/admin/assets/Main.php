@@ -7,20 +7,12 @@ class Main extends \yii\web\AssetBundle
     public $sourcePath = '@cmsadmin/resources';
 
     public $js = [
-        'js/cmsadmin.js',
-        'js/services.js',
-        /*
-        'js/directives.js',
-        'js/layout.js',
-        'js/update.js',
-        'js/create.js',
-        'js/factorys.js',
-        */
+        'dist/js/main.min.js'
     ];
 
     public $css = [
-        'css/cmsadmin.css',
-        'css/cmsadmin-block-styles.css',
+        'dist/css/cmsadmin.css',
+        'dist/css/cmsadmin-block-styles.css',
     ];
 
     public $depends = [

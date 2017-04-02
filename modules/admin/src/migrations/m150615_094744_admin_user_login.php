@@ -4,32 +4,19 @@ use yii\db\Migration;
 
 class m150615_094744_admin_user_login extends Migration
 {
-    public function up()
-    {
-        $this->createTable('admin_user_login', [
-            'id' => 'pk',
-            'user_id' => 'int(11) NOT NULL',
-            'timestamp_create' => 'int(11) NOT NULL',
-            'auth_token' => 'varchar(120) NOT NULL',
-            'ip' => 'varchar(15) NOT NULL',
-        ]);
-    }
-
-    public function down()
-    {
-        echo "m150615_094744_admin_user_login cannot be reverted.\n";
-
-        return false;
-    }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
+        $this->createTable('admin_user_login', [
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull(),
+            'timestamp_create' => $this->integer(11)->notNull(),
+            'auth_token' => $this->string(120)->notNull(),
+            'ip' => $this->string(15)->notNull(),
+        ]);
     }
 
     public function safeDown()
     {
+        $this->dropTable('admin_user_login');
     }
-    */
 }

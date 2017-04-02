@@ -10,6 +10,10 @@ $input--date-width: 50px;
 .input {
     font-size: 0;
     line-height: 0;
+
+    + .input {
+        margin-top: 20px;
+    }
 }
 
 .input__label {
@@ -28,6 +32,7 @@ $input--date-width: 50px;
 
     word-wrap: break-word;
 
+    .list__left .input &,
     .input--vertical & {
         display: block;
 
@@ -105,6 +110,7 @@ input[type='checkbox']:checked + .input__label:before {
         width: calc(100% - #{$input__label-width});
     }
 
+    .list__left .input &,
     .input--vertical & {
         display: block;
 
@@ -142,7 +148,7 @@ input[type='checkbox']:checked + .input__label:before {
 
     vertical-align: middle;
     width: 100%;
-    z-index: 10;
+    z-index: 5;
 
     &:focus {
         background-color: $input--border-color;
@@ -258,6 +264,12 @@ input[type='checkbox']:checked + .input__label:before {
     max-width: 700px;
     padding-left: 5px;
     width: calc(100% - (#{$input__label-width} + 5px));
+
+    .list__left .input &,
+    .input--vertical & {
+        margin-top: 5px;
+        padding-left: 0;
+    }
 
     .input__field {
         margin-left: 0;

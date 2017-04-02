@@ -4,7 +4,6 @@ use luya\cms\frontend\Module;
 
 ?>
 <div id="luya-cms-toolbar-wrapper">
-
     <div id="luya-cms-toolbar">
         <div class="luya-cms-toolbar__button luya-cms-toolbar__button--info">
             <div class="luya-cms-toolbar__button-text">
@@ -20,25 +19,21 @@ use luya\cms\frontend\Module;
                 <?php endif; ?>
             </div>
         </div>
-    
         <div class="luya-cms-toolbar__button">
-            <a target="_blank" href="<?= Url::toRoute(['/admin/default/index', '#' => '/template/cmsadmin-default-index/update/' . $menu->current->navId], true); ?>">
+            <a target="_blank" href="<?= Url::toRoute(['/admin/default/index', '#' => '/template/cmsadmin~2Fdefault~2Findex/update/' . $menu->current->navId], true); ?>">
                 <i alt="<?= Module::t('tb_edit_alt'); ?>" title="<?= Module::t('tb_edit_alt'); ?>"  class="material-icons">mode_edit</i>
             </a>
         </div>
-
         <div class="luya-cms-toolbar__button">
             <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-seo-container')">
                 <?php if ($seoAlertCount > 0): ?><span class="luya-cms-toolbar__badge luya-cms-toolbar__badge--danger"><?= $seoAlertCount; ?></span><?php endif;?> <span><?= Module::t('tb_seo'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
-
         <div class="luya-cms-toolbar__button">
             <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-composition-container')">
                 <span class="luya-cms-toolbar__badge"><?= count($composition->get()); ?></span> <span><?= Module::t('tb_composition'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
-
         <?php if (!empty($properties)): ?>
             <div class="luya-cms-toolbar__button">
                 <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-properties-container')">
@@ -46,21 +41,15 @@ use luya\cms\frontend\Module;
                 </a>
             </div>
         <?php endif; ?>
-
         <div class="luya-cms-toolbar__pull-right">
-
             <div class="luya-cms-toolbar__logo">
                 <a href="https://luya.io" target="_blank">
-                    <img alt="LUYA <?= Luya\Boot::VERSION; ?>" title="LUYA <?= Luya\Boot::VERSION; ?>" src="data:image/png;base64,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" />
-
                     <?= Luya\Boot::VERSION; ?>
+                    <img alt="LUYA <?= Luya\Boot::VERSION; ?>" title="LUYA <?= Luya\Boot::VERSION; ?>" src="data:image/png;base64,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" />  
                 </a>
             </div>
-
         </div>
-
     </div>
-
     <div id="luya-cms-toolbar-seo-container" class="luya-cms-toolbar__container">
         <div class="luya-cms-toolbar__list">
             <div class="luya-cms-toolbar__list-entry">
@@ -118,7 +107,6 @@ use luya\cms\frontend\Module;
             </div>
         </div>
     </div>
-
     <div id="luya-cms-toolbar-composition-container" class="luya-cms-toolbar__container">
         <div class="luya-cms-toolbar__list">
             <?php foreach ($composition->get() as $key => $value): ?>

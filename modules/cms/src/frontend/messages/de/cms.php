@@ -162,5 +162,18 @@ return [
     'block_table_enable_markdown' => 'Markdown aktivieren',
     'block_layout_row_column_css_class' => 'CSS-KLassen für Layout Div',
     'block_image_cfg_css_class' => 'CSS Klassen für das Bild',
-    'block_cfg_additonal_css_class' => 'CSS Klasse',
+    'block_cfg_additonal_css_class' => 'CSS Klasse', // this is not block related and can be ussed in all blocks.
+    
+    // rc2
+    'block_group_media_group' => 'Medien',
+        
+    // 1.0.0
+    'block_audio_admin_nourl' => 'Keine Audioquelle angegeben.',
+    'block_audio_admin_hasurl' => 'Audioquelle ist gesetzt.',
+    'block_file_list_admin_empty' => 'Es wurden noch keine Dateien ausgewählt.',
+    'block_html_name' => 'HTML',
+    'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
+    'block_spacing_small_space' => 'Kleiner Abstand',
+    'block_spacing_medium_space' => 'Mittler Abstand',
+    'block_spacing_large_space' => 'Grosser Abstand',
 ];

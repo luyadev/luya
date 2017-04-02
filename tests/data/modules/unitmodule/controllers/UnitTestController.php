@@ -11,7 +11,6 @@ class UnitTestController extends \luya\web\Controller
             'module' => $this->module->id,
             'viewPath' => $this->getViewPath(),
             'moduleLayoutViewPath' => $this->getModuleLayoutViewPath(),
-            'assets' => $this->assets,
         ];
     }
 }

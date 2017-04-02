@@ -5,16 +5,19 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\Console;
+use yii\imagine\Image;
 
 /**
  * Health/Status informations about the Application itself.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class HealthController extends \luya\console\Command
 {
-    public $verbose = false;
-    
+    /**
+     * @var array An array with all folders to check where the value for the key is whether it should be writeable or not.
+     */
     public $folders = [
         'public_html/assets' => true,
         'public_html/storage' => true,
@@ -23,34 +26,30 @@ class HealthController extends \luya\console\Command
         'runtime' => true,
     ];
 
+    /**
+     * @var array An array with files to check if they exists or not.
+     */
     public $files = [
         'configs/env.php',
         'public_html/index.php',
     ];
     
-    public function options($actionId)
-    {
-        return ['verbose'];
-    }
-
     /**
      * Create all required directories an check whether they are writeable or not.
      *
-     * @return number
+     * @return string The action output.
      */
     public function actionIndex()
     {
         $error = false;
 
-        Console::clearScreenBeforeCursor();
-        
         @chdir(Yii::getAlias('@app'));
 
         $this->output('The directory the health commands is applying to: ' . Yii::getAlias('@app'));
         
         foreach ($this->folders as $folder => $writable) {
+            $mode = ($writable) ? 0777 : 0775;
             if (!file_exists($folder)) {
-                $mode = ($writable) ? 0777 : 0775;
                 if (FileHelper::createDirectory($folder, $mode)) {
                     $this->outputSuccess("$folder: successfully created directory");
                 } else {
@@ -83,13 +82,22 @@ class HealthController extends \luya\console\Command
             }
         }
 
+        /*
+         * move to admin/setup command as part of admin setup.
+        try {
+            Image::getImagine();
+        } catch (\Exception $e) {
+            $this->outputError('Imagine Error: ' . $e->getMessage());
+        }
+        */
+        
         return ($error) ? $this->outputError('Health check found errors!') : $this->outputSuccess('O.K.');
     }
 
     /**
      * Test Mail-Component (Use --verbose=1 to enable smtp debug output)
      *
-     * @return bool|null
+     * @return boolean Whether successfull or not.
      * @throws Exception On smtp failure
      */
     public function actionMailer()

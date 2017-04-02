@@ -2,18 +2,34 @@
 
 namespace luya\admin\models;
 
-class StorageFolder extends \yii\db\ActiveRecord
+use yii\db\ActiveRecord;
+
+/**
+ * Storage Folder Model.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
+final class StorageFolder extends ActiveRecord
 {
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_storage_folder';
     }
     
+    /**
+     * @inheritdoc
+     */
     public static function find()
     {
         return parent::find()->orderBy(['name' => 'ASC']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [

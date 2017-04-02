@@ -6,13 +6,14 @@ use yii\helpers\Json;
 use Imagine\Image\ManipulatorInterface;
 use yii\base\InvalidConfigException;
 use yii\imagine\Image;
+use yii\db\ActiveRecord;
 
 /**
  * Contains all information about filter effects for a single Chain element (like: thumbnail, 200x200).
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class StorageFilterChain extends \yii\db\ActiveRecord
+final class StorageFilterChain extends ActiveRecord
 {
     private $comperator = [
         'crop' => [
@@ -34,11 +35,17 @@ class StorageFilterChain extends \yii\db\ActiveRecord
         ]
     ];
     
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_storage_filter_chain';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -46,6 +53,9 @@ class StorageFilterChain extends \yii\db\ActiveRecord
         $this->on(self::EVENT_AFTER_FIND, [$this, 'eventAfterFind']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [

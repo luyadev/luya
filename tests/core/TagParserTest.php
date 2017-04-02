@@ -4,8 +4,37 @@ namespace luyatests\core;
 
 use luyatests\LuyaWebTestCase;
 use luya\TagParser;
+use luya\tag\tags\LinkTag;
+use luya\tag\BaseTag;
 
-class TagParserTeste extends LuyaWebTestCase
+class TestTag extends BaseTag
+{
+    public function name()
+    {
+        return 'testtag';
+    }
+    
+    public function example()
+    {
+        return 'testtag';
+    }
+    
+    public function readme()
+    {
+        return 'testtag';
+    }
+    
+    public function parse($value, $sub)
+    {
+        if (empty($sub)) {
+            return $value;
+        }
+        
+        return $value . '|'. $sub;
+    }
+}
+
+class TagParserTest extends LuyaWebTestCase
 {
     public function testInvalidContent()
     {
@@ -16,5 +45,29 @@ class TagParserTeste extends LuyaWebTestCase
         $this->assertSame('string', TagParser::convert('string'));
         $this->assertSame([], TagParser::convert([]));
         $this->assertSame('', TagParser::convert(''));
+    }
+    
+    public function testContentWithMarkdown()
+    {
+        $this->assertSame('<p>foo</p>', trim(TagParser::convertWithMarkdown('foo')));
+    }
+    
+    public function testInjectTag()
+    {
+        TagParser::inject('foo', ['class' => LinkTag::class]);
+        
+        $tags = TagParser::getInstantiatedTagObjects();
+        
+        $this->arrayHasKey('foo', $tags);
+        
+        $this->assertInstanceOf('luya\tag\tags\LinkTag', $tags['foo']);
+    }
+    
+    public function testProcessText()
+    {
+        TagParser::inject('test', ['class' => TestTag::class]);
+        $this->assertSame('value', TagParser::convert('test[value]'));
+        $this->assertSame('test[]', TagParser::convert('test[]'));
+        $this->assertSame('value|sub', TagParser::convert('test[value](sub)'));
     }
 }

@@ -12,7 +12,7 @@
 <?php echo $form->field($model, 'city') ?>
 <?php echo $form->field($model, 'country') ?>
 <?php echo $form->field($model, 'subscription_newsletter')->checkbox(); ?>
-<?php echo $form->field($model,  'subscription_medianews')->checkbox(); ?>
+<?php echo $form->field($model, 'subscription_medianews')->checkbox(); ?>
 <button type="submit">Submit</button>
 <?php echo $form->errorSummary($model); ?>
 <?php \yii\widgets\ActiveForm::end(); ?>
@@ -24,5 +24,5 @@
 <p>Erfolgreich registriert. Sie werden von einem Administrator freigeschalten.</p>
 <?php elseif ($state == 3): ?>
 <p>Sie haben sich erfolgreich registriert und könnnen sich jetzt einloggen</p>
-<a href="<?php echo luya\helpers\Url::toManager('account/default/index'); ?>">Login</a>
+<a href="<?= $this->url('account/default/index'); ?>">Login</a>
 <?php endif; ?>

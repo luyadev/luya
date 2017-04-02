@@ -5,30 +5,19 @@ use yii\db\Migration;
 
 class m150304_152256_admin_storage_image extends Migration
 {
-    public function up()
-    {
-        $this->createTable('admin_storage_image', [
-            'id' => 'pk',
-            'file_id' => Schema::TYPE_INTEGER,
-            'filter_id' => Schema::TYPE_INTEGER,
-        ]);
-    }
-
-    public function down()
-    {
-        echo "m150304_152256_admin_storage_image cannot be reverted.\n";
-
-        return false;
-    }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
+        $this->createTable('admin_storage_image', [
+            'id' => $this->primaryKey(),
+            'file_id' => $this->integer(11),
+            'filter_id' => $this->integer(11),
+            'resolution_width' => $this->integer(11),
+            'resolution_height' => $this->integer(11),
+        ]);
     }
 
     public function safeDown()
     {
+        $this->dropTable('admin_storage_image');
     }
-    */
 }

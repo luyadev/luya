@@ -5,19 +5,17 @@ use yii\db\Migration;
 
 class m141104_104631_admin_user_group extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('admin_user_group', [
-            'id' => 'pk',
-            'user_id' => Schema::TYPE_INTEGER,
-            'group_id' => Schema::TYPE_INTEGER,
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer(11),
+            'group_id' => $this->integer(11),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m141104_104631_admin_user_group cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('admin_user_group');
     }
 }

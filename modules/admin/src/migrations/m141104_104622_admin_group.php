@@ -5,20 +5,18 @@ use yii\db\Migration;
 
 class m141104_104622_admin_group extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('admin_group', [
             'id' => 'pk',
-            'name' => Schema::TYPE_STRING.' NOT NULL',
-            'text' => Schema::TYPE_TEXT,
-            'is_deleted' => 'TINYINT(1) NOT NULL default 0',
+            'name' => $this->string(255)->notNull(),
+            'text' => $this->text(),
+            'is_deleted' => $this->boolean()->defaultValue(false),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m141104_104622_admin_group cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('admin_group');
     }
 }

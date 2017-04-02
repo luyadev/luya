@@ -8,6 +8,7 @@ return [
     'defaultRoute' => 'unitmodule',
     'aliases' => [
         '@runtime' => dirname(__DIR__) . '/runtime',
+        '@luyatests' => dirname(__DIR__) . '/../',
     ],
     'modules' => [
         'unitmodule' => [

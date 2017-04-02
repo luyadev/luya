@@ -16,14 +16,14 @@ return [
     'album_sort_index' => 'Sort',
     'album_is_highlight' => 'Highlight',
     'album_upload' => 'Upload and edit images',
-    'album_category_error' => 'Please choose a category.',
-    'album_title_create_error' => 'Please choose a title.',
+    'album_category_error' => 'Please select a category.',
+    'album_title_create_error' => 'Please enter a title.',
 
     //cat
     'cat' => 'Categories',
     'cat_title' => 'Category',
     'cat_description' => 'Description',
     'cat_cover_image_id' => 'Cover image',
-    'cat_title_create_error' => 'Please choose a title.',
-    'cat_delete_error' => 'This category is still being used by one or multiple galleries and can not be deleted',
+    'cat_title_create_error' => 'Please enter a title.',
+    'cat_delete_error' => 'This category is used by one or multiple galleries and can not be deleted.',
 ];

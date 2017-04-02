@@ -12,7 +12,20 @@ use luya\admin\helpers\I18n;
 use luya\helpers\ArrayHelper;
 
 /**
- * Base class for all NgRest Plugins
+ * Base class for NgRest Plugins.
+ *
+ * Event trigger cycle for different use cases, the following use cases are available with its
+ * event cycles.
+ *
+ * + onFind
+ * + onListFind
+ * + onExpandFind
+ *
+ * + find = The model is used in your controller frontend logic to display and assign data into the view (developer use case)
+ * + list find = The model is populated for the Admin Table list view where you can see all your items and click the edit/delete icons.
+ *   1. onListFind
+ * + update = The update form to update an item from the list view
+ * + create = The create form to create a new record.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -66,8 +79,7 @@ abstract class Plugin extends Component
     abstract public function renderUpdate($id, $ngModel);
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -75,7 +87,7 @@ abstract class Plugin extends Component
         parent::init();
         
         if ($this->name === null || $this->alias === null || $this->i18n === null) {
-            throw new Exception("Plugin attributes id, name, alias, ngModel and i18n must be configured.");
+            throw new Exception("Plugin attributes name, alias and i18n must be configured.");
         }
         
         $this->addEvent(NgRestModel::EVENT_BEFORE_VALIDATE, 'onSave');
@@ -110,18 +122,19 @@ abstract class Plugin extends Component
      *
      * The above service data can be used when creating the tags with `$this->getServiceName('titles')`.
      *
+     * @param \yii\base\Event $event The event sender which triggers the event.
      * @return boolean|array
      */
-    public function serviceData()
+    public function serviceData($event)
     {
         return false;
     }
     
     /**
-     * Json decode value but verifys if its empty, cause this can thrown an json decode exception.
+     * Decodes the given JSON string into a PHP data structure and verifys if its empty, cause this can thrown an json decode exception.
      *
-     * @param string $value The string to encode
-     * @return mixed
+     * @param string $value The string to decode from json to php.
+     * @return array The PHP array.
      */
     public function jsonDecode($value)
     {
@@ -131,9 +144,11 @@ abstract class Plugin extends Component
     // I18N HELPERS
 
     /**
-     * Encode from PHP to Json
+     * Encode from PHP to Json.
      *
-     * @param string|array $field
+     * See {{luya\admin\helpers\I18n::encode}}
+     *
+     * @param string|array $value
      * @return string Returns a string
      */
     public function i18nFieldEncode($value)
@@ -142,9 +157,11 @@ abstract class Plugin extends Component
     }
     
     /**
-     * Decode from Json to PHP
+     * Decode from Json to PHP.
      *
-     * @param string|array $field The value to decode (or if alreay is an array already)
+     * See {{luya\admin\helpers\I18n::decode}}
+     *
+     * @param string|array $value The value to decode (or if alreay is an array already)
      * @param string $onEmptyValue Defines the value if the language could not be found and a value will be returns, this value will be used.
      * @return array returns an array with decoded field value
      */
@@ -154,13 +171,16 @@ abstract class Plugin extends Component
     }
     
     /**
+     * Encode the current value from a language array.
+     *
+     * See {{luya\admin\helpers\I18n::findActive}}
      *
      * @param array $fieldValues
      * @return string|unknown
      */
     public function i18nDecodedGetActive(array $fieldValues)
     {
-        return I18n::findCurrent($fieldValues);
+        return I18n::findActive($fieldValues);
     }
     
     // HTML TAG HELPERS
@@ -168,10 +188,10 @@ abstract class Plugin extends Component
     /**
      * Wrapper for Yii Html::tag method
      *
-     * @param string $name
-     * @param string $content
-     * @param array $options
-     * @return string
+     * @param string $name The name of the tag
+     * @param string $content The value inside the tag.
+     * @param array $options Options to passed to the tag generator.
+     * @return string The generated html string tag.
      */
     public function createTag($name, $content, array $options = [])
     {
@@ -181,11 +201,11 @@ abstract class Plugin extends Component
     /**
      * Helper method to create a form tag based on current object.
      *
-     * @param string $name
-     * @param string $id
-     * @param string $ngModel
-     * @param array $options
-     * @return string
+     * @param string $name Name of the form tag.
+     * @param string $id The id tag of the tag.
+     * @param string $ngModel The ngrest model name of the tag.
+     * @param array $options Options to passes to the tag creator.
+     * @return string The generated tag content.
      */
     public function createFormTag($name, $id, $ngModel, array $options = [])
     {
@@ -195,6 +215,7 @@ abstract class Plugin extends Component
     /**
      * Helper method to create a span tag with the ng-model in angular context for the crud overview
      * @param string $ngModel
+     * @param array $options An array with options to pass to the list tag
      * @return string
      */
     public function createListTag($ngModel, array $options = [])
@@ -235,6 +256,29 @@ abstract class Plugin extends Component
     }
     
     /**
+     * Remeves and event from the events stack by its trigger name.
+     *
+     * In order to remove an event trigger from stack you have to do this right
+     * after the initializer.
+     *
+     * ```php
+     * public function init()
+     * {
+     *     parent::init();
+     *     $this->removeEvent(NgRestModel::EVENT_AFTER_FIND);
+     * }
+     * ```
+     *
+     * @param string $trigger The event trigger name from the EVENT constants.
+     */
+    public function removeEvent($trigger)
+    {
+        if (isset($this->_events[$trigger])) {
+            unset($this->_events[$trigger]);
+        }
+    }
+    
+    /**
      * An override without calling the parent::events will stop all other events used by default.
      *
      * @return array
@@ -258,13 +302,16 @@ abstract class Plugin extends Component
     }
     
      /**
-     * This event will be triggered `onSave` event. If the property of this plugin inside the model, the event will not be triggered.
+     * This event will be triggered `onSave` event. If the model property is not writeable the event will not trigger.
+     *
+     * If the beforeSave method returns true and i18n is enabled, the value will be json encoded.
      *
      * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
      * @return void
      */
     public function onSave($event)
     {
+        Yii::trace('Event Trigger: onSave for ' . get_class($this));
         if ($this->isAttributeWriteable($event) && $this->onBeforeSave($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
@@ -277,7 +324,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triger before `onListFind`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_FIND $event The NgRestModel after ngrest find event.
      * @return boolean
      */
     public function onBeforeListFind($event)
@@ -288,7 +335,7 @@ abstract class Plugin extends Component
     /**
      * This event is only trigger when returning the ngrest crud list data. If the property of this plugin inside the model, the event will not be triggered.
      *
-     * @param \admin\ngrest\base\Model::EVENT_AFTER_NGREST_FIND $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_FIND $event The NgRestModel after ngrest find event.
      */
     public function onListFind($event)
     {
@@ -303,7 +350,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triggered after `onListFind`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_FIND $event The NgRestModel after ngrest find event.
      * @return boolean
      */
     public function onAfterListFind($event)
@@ -315,7 +362,8 @@ abstract class Plugin extends Component
 
     /**
      * This event will be trigger before `onFind`.
-     * @param unknown $event
+     *
+     * @param \yii\base\Event $event An event that is triggered after the record is created and populated with query result.
      * @return boolean
      */
     public function onBeforeFind($event)
@@ -325,7 +373,8 @@ abstract class Plugin extends Component
     
     /**
      * ActiveRecord afterFind event. If the property of this plugin inside the model, the event will not be triggered.
-     * @param unknown $event
+     *
+     * @param \yii\base\Event $event An event that is triggered after the record is created and populated with query result.
      */
     public function onFind($event)
     {
@@ -340,7 +389,8 @@ abstract class Plugin extends Component
     
     /**
      * This event will be trigger after `onFind`.
-     * @param unknown $event
+     *
+     * @param \yii\base\Event $event An event that is triggered after the record is created and populated with query result.
      * @return boolean
      */
     public function onAfterFind($event)
@@ -353,7 +403,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triggered before `onExpandFind`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND $event NgRestModel event EVENT_AFTER_NGREST_UPDATE_FIND.
      * @return boolean
      */
     public function onBeforeExpandFind($event)
@@ -363,7 +413,7 @@ abstract class Plugin extends Component
     
     /**
      * NgRest Model crud list/overview event after find. If the property of this plugin inside the model, the event will not be triggered.
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND $event NgRestModel event EVENT_AFTER_NGREST_UPDATE_FIND.
      */
     public function onExpandFind($event)
     {
@@ -379,7 +429,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triggered after `onExpandFind`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND $event NgRestModel event EVENT_AFTER_NGREST_UPDATE_FIND.
      * @return boolean
      */
     public function onAfterExpandFind($event)
@@ -392,7 +442,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triggered before `onCollectServiceData`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_SERVICE_NGREST $event NgRestModel event EVENT_SERVICE_NGREST.
      * @return boolean
      */
     public function onBeforeCollectServiceData($event)
@@ -401,13 +451,14 @@ abstract class Plugin extends Component
     }
     
     /**
+     * The ngrest services collector.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_SERVICE_NGREST $event NgRestModel event EVENT_SERVICE_NGREST.
      */
     public function onCollectServiceData($event)
     {
         if ($this->onBeforeCollectServiceData($event)) {
-            $data = $this->serviceData();
+            $data = $this->serviceData($event);
             if (!empty($data)) {
                 $event->sender->addNgRestServiceData($this->name, $data);
             }
@@ -415,10 +466,11 @@ abstract class Plugin extends Component
     }
 
     /**
-     * Check wehther the current plugin attribute is writeable in the Model class or not. If not writeable some events will be stopped from
+     * Check whether the current plugin attribute is writeable in the Model class or not. If not writeable some events will be stopped from
      * further processing. This is mainly used when adding extraFields to the grid list view.
      *
-     * @param object $event The current event object
+     * @param \yii\base\Event $event The current base event object.
+     * @return boolean Whether the current plugin attribute is writeable or not.
      */
     protected function isAttributeWriteable($event)
     {

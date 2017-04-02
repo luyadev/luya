@@ -4,6 +4,4 @@
  */
 ?>
 
-<?php if ($this->context->getVarValue('link')): ?>
-    <h1><?= $this->context->getExtraValue('Title', 'Not Found'); ?></h1>
-<?php endif; ?>
+<a href="<?= $this->extraValue('link')?>" target="<?= $this->extraValue('link')->target?>">Link Injector Link: <?= $this->extraValue('link'); ?></a>

@@ -4,9 +4,12 @@ namespace luya\cms\base;
 
 use Yii;
 
+trigger_error('TwigBlock is deprecated.', E_USER_DEPRECATED);
+
 /**
  * Represents a CMS Block with Twig views.
  *
+ * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
@@ -24,7 +27,7 @@ abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
             'vars' => $this->getVarValues(),
             'cfgs' => $this->getCfgValues(),
             'placeholders' => $this->getPlaceholderValues(),
-            'extras' => $this->extraVarsOutput(),
+            'extras' => $this->getExtraVarValues(),
         ]);
     }
     
@@ -35,8 +38,6 @@ abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
     }
     
     /* protected and privates */
-    
-    
     
     /**
      * Returns the content of the frontend twig file.

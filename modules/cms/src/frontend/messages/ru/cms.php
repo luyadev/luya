@@ -157,4 +157,23 @@ return [
     'block_group_basic_elements' => 'Общие',
     'block_group_project_elements' => 'Проект',
     'block_group_text_elements' => 'Текста',
+
+    // rc1
+    'block_table_enable_markdown' => 'Включить Markdown разметку',
+    'block_layout_row_column_css_class' => 'CSS классы для div шаблона',
+    'block_image_cfg_css_class' => 'CSS классы для изображений',
+    'block_cfg_additonal_css_class' => 'CSS классы',
+
+    // rc2
+    'block_group_media_group' => 'Медиа',
+        
+    // 1.0.0
+    'block_audio_admin_nourl' => 'No embed audio code has been set.',
+    'block_audio_admin_hasurl' => 'Embed audio code is set.',
+    'block_file_list_admin_empty' => 'No files has been selected yet.',
+    'block_html_name' => 'HTML',
+    'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
+    'block_spacing_small_space' => 'Small space',
+    'block_spacing_medium_space' => 'Medium space',
+    'block_spacing_large_space' => 'Large space',
 ];

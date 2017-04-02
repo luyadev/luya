@@ -38,14 +38,26 @@ use luya\admin\ngrest\base\ActiveWindow;
  */
 class FlowActiveWindow extends ActiveWindow
 {
+    /**
+     * @var string The name of the module where the active windows is located in order to finde the view path.
+     */
     public $module = '@admin';
     
+    /**
+     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
+     */
     public $alias = 'Flow Uploader';
     
+    /**
+     * @var string The icon name from goolges material icon set (https://material.io/icons/)
+     */
     public $icon = 'cloud_upload';
     
     public $modelClass = null;
     
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();

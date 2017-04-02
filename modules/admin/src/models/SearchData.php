@@ -3,23 +3,45 @@
 namespace luya\admin\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
-class SearchData extends \yii\db\ActiveRecord
+/**
+ * This is the model class for table "admin_search_data".
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $timestamp_create
+ * @property string $query
+ * @property integer $num_rows
+ */
+final class SearchData extends ActiveRecord
 {
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'onBeforeValidate']);
     }
+    
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_search_data';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['query', 'num_rows', 'user_id'], 'required'],
+            [['user_id', 'timestamp_create', 'query'], 'required'],
+            [['user_id', 'timestamp_create', 'num_rows'], 'integer'],
+            [['query'], 'string', 'max' => 255],
         ];
     }
 

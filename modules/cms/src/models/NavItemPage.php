@@ -11,6 +11,7 @@ use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
 use luya\traits\CacheableTrait;
+use yii\base\ViewContextInterface;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -24,12 +25,15 @@ use luya\traits\CacheableTrait;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class NavItemPage extends NavItemType implements NavItemTypeInterface
+class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewContextInterface
 {
     use CacheableTrait;
 
     private $_view = null;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -39,7 +43,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
                 $item->delete();
             }
             
-            $event->sender->forceNavItem->updateTimestamp();
+            if ($event->sender->forceNavItem) {
+                $event->sender->forceNavItem->updateTimestamp();
+            }
         });
         
         $this->on(self::EVENT_AFTER_UPDATE, function ($event) {
@@ -47,38 +53,53 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         });
     }
 
+    /**
+     * Get the view object to render the templates.
+     *
+     * @return \yii\base\View|\yii\web\View|\luya\web\View
+     */
     public function getView()
     {
         if ($this->_view === null) {
-            $this->_view = new View();
+            $this->_view = Yii::$app->getView();
         }
         
         return $this->_view;
     }
     
     /**
-     * {@InheritDoc}
-     * @see \luya\cms\base\NavItemType::getNumericType()
+     * @inheritdoc
      */
     public static function getNummericType()
     {
         return NavItem::TYPE_PAGE;
     }
     
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_nav_item_page';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['layout_id', 'timestamp_create', 'create_user_id'], 'required'],
-            [['nav_item_id', 'timestamp_create', 'create_user_id'], 'integer'],
+            [['layout_id', 'timestamp_create', 'create_user_id'], 'required', 'isEmpty' => function ($value) {
+                return empty($value);
+            }],
+            [['layout_id', 'timestamp_create', 'create_user_id', 'nav_item_id'], 'integer'],
             [['version_alias'], 'string']
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -91,13 +112,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         return $this->hasOne(Layout::className(), ['id' => 'layout_id']);
     }
     
-    public function extraFields()
-    {
-        return [
-            'content_as_array' => 'contentAsArray',
-        ];
-    }
-    
     /**
      * Get the list of version/pages for a specific nav item id
      *
@@ -108,6 +122,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         return self::find()->where(['nav_item_id' => $navItemId])->indexBy('id')->orderBy(['id' => SORT_ASC])->all();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function fields()
     {
         $fields = parent::fields();
@@ -119,6 +136,16 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     }
     
     /**
+     * The folder where all cmslayouts are stored.
+     *
+     * @see \yii\base\ViewContextInterface::getViewPath()
+     */
+    public function getViewPath()
+    {
+        return '@app/views/cmslayouts';
+    }
+    
+    /**
      * Frontend get Content returns the rendered content for this nav item page based on the page logic (placeholders, blocks)
      *
      * {@inheritDoc}
@@ -127,12 +154,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     public function getContent()
     {
         if ($this->layout) {
-            $layoutFile = Yii::getAlias('@app/views/cmslayouts/' . $this->layout->view_file);
+            $layoutFile = $this->layout->view_file;
             $placholders = [];
             foreach ($this->layout->getJsonConfig('placeholders') as $item) {
                 $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
             }
-            return $this->getView()->renderPhpFile($layoutFile, ['placeholders' => $placholders]);
+            return $this->getView()->render($layoutFile, ['placeholders' => $placholders], $this);
         }
         
         throw new Exception("Could not find the requested cms layout id '".$this->layout_id."' for nav item page id '". $this->id . "'. Make sure your page does not have an old inactive/deleted cms layout selected.");
@@ -167,8 +194,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     {
         $string = '';
         $i = 0;
+        $equalIndex = 1;
         $placeholders = $this->getPlaceholders($navItemPageId, $placeholderVar, $prevId);
         $blocksCount = count($placeholders);
+        $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
+        
         // foreach all placeholders but preserve varaibles above to make calculations
         foreach ($placeholders as $key => $placeholder) {
             $i++;
@@ -180,22 +210,36 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             
             if ($blockResponse === false) {
                 
-                // create block object
+                /** @var $blockObject \luya\cms\base\InternalBaseBlock */
                 $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
                 
                 // see if its a valid block object
                 if ($blockObject) {
-                    if (count($blockObject->assets) > 0) {
-                        $controllerObject = $this->getOption('cmsControllerObject');
-                        if ($controllerObject) {
-                            foreach ($blockObject->assets as $assetClassName) {
-                                $controllerObject->registerAsset($assetClassName);
-                            }
-                        }
-                    }
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
+                    
+                    // inject variations variables
+                    $possibleVariations = isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false;
+                    
+                    if (isset($possibleVariations[$placeholder['variation']])) {
+                        $ensuredVariation = $possibleVariations[$placeholder['variation']];
+                        foreach ($ensuredVariation as $type => $typeContent) {
+                            if (!empty($typeContent)) {
+                                $type = strtolower($type);
+                                switch ($type) {
+                                    case "vars": $blockObject->setVarValues($typeContent); break;
+                                    case "cfgs": $blockObject->setCfgValues($typeContent); break;
+                                    case "extras":
+                                        foreach ($typeContent as $extraKey => $extraValue) {
+                                            $blockObject->addExtraVar($extraKey, $extraValue);
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    
                     // set env options from current object environment
                     foreach ($this->getOptions() as $optKey => $optValue) {
                         $blockObject->setEnvOption($optKey, $optValue);
@@ -205,26 +249,40 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
                     $blockObject->setEnvOption('itemsCount', $blocksCount);
                     $blockObject->setEnvOption('isFirst', ($i == 1));
                     $blockObject->setEnvOption('isLast', ($i == $blocksCount));
-                    $blockObject->setEnvOption('isPrevEqual', array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id']);
+                    $prevIsEqual = array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id'];
+                    $blockObject->setEnvOption('isPrevEqual', $prevIsEqual);
                     $blockObject->setEnvOption('isNextEqual', array_key_exists($next, $placeholders) && $placeholder['block_id'] == $placeholders[$next]['block_id']);
+                    
+                    if (!$prevIsEqual) {
+                        $equalIndex = 1;
+                    } else {
+                        $equalIndex++;
+                    }
+                    $blockObject->setEnvOption('equalIndex', $equalIndex);
+                    
                     // render sub placeholders and set into object
                     $insertedHolders = [];
-                    foreach ($blockObject->getPlaceholders() as $item) {
+                    foreach ($blockObject->getConfigPlaceholdersExport() as $item) {
                         $insertedHolders[$item['var']] = $this->renderPlaceholderRecursive($navItemPageId, $item['var'], $placeholder['id']);
                     }
                     $blockObject->setPlaceholderValues($insertedHolders);
                     // output buffer the rendered frontend method of the block
                     $blockResponse = $blockObject->renderFrontend();
                     
-                    if ($blockObject->cacheEnabled) {
-                        $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->cacheExpiration);
+                    if ($blockObject->getIsCacheEnabled()) {
+                        $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
                     }
                 }
             }
             
             $string.= $blockResponse;
+            
+            unset($blockResponse);
         }
 
+        unset($variations);
+        unset($placeholders);
+        
         return $string;
     }
 
@@ -238,6 +296,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         ->all();
     }
     
+    /**
+     * Convert a json string to an array.
+     *
+     * @param string $json
+     * @return array
+     */
     private function jsonToArray($json)
     {
         $response = json_decode($json, true);
@@ -302,6 +366,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         return $data;
     }
     
+    /**
+     * Get the arrayable values from a specific block id.
+     *
+     * @param integer $blockId
+     * @return array
+     */
     public static function getBlock($blockId)
     {
         $blockItem = (new Query())->select('*')->from('cms_nav_item_page_block_item')->where(['id' => $blockId])->one();
@@ -322,7 +392,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     
         $placeholders = [];
     
-        foreach ($blockObject->getPlaceholders() as $pk => $pv) {
+        foreach ($blockObject->getConfigPlaceholdersExport() as $pk => $pv) {
             $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
             $pv['prev_id'] = $blockItem['id'];
             $placeholderVar = $pv['var'];
@@ -342,22 +412,27 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             $blockItem['json_config_cfg_values'] = ['__e' => '__o'];
         }
     
+        $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
+        
         return [
             'is_dirty' => (int) $blockItem['is_dirty'],
-            'is_container' => (int) $blockObject->isContainer,
+            'is_container' => (int) $blockObject->getIsContainer(),
             'id' => $blockItem['id'],
             'is_hidden' => $blockItem['is_hidden'],
             'name' => $blockObject->name(),
             'icon' => $blockObject->icon(),
-            'full_name' => $blockObject->getFullName(),
+            'full_name' => ($blockObject->icon() === null) ? $blockObject->name() : '<i class="material-icons">'.$blockObject->icon().'</i> <span>'.$blockObject->name().'</span>',
             'twig_admin' => $blockObject->renderAdmin(),
-            'vars' => $blockObject->getVars(),
-            'cfgs' => $blockObject->getCfgs(),
-            'extras' => $blockObject->extraVarsOutput(),
+            'vars' => $blockObject->getConfigVarsExport(),
+            'cfgs' => $blockObject->getConfigCfgsExport(),
+            'extras' => $blockObject->getExtraVarValues(),
             'values' => $blockItem['json_config_values'],
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
+            'variations' => isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false,
+            'variation' => empty($blockItem['variation'])? "0" : $blockItem['variation'], // as by angular selection
+            'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
         ];
     }
     

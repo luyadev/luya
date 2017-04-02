@@ -3,27 +3,53 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
-use luya\cms\base\TwigBlock;
+use luya\cms\frontend\blockgroups\MediaGroup;
+use luya\cms\base\PhpBlock;
 
 /**
  * Audio Block for Soundcloude Service
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class AudioBlock extends TwigBlock
+final class AudioBlock extends PhpBlock
 {
+    /**
+     * @inheritdoc
+     */
+    public $module = 'cms';
+    
+    /**
+     * @inheritdoc
+     */
     public $cacheEnabled = true;
     
+    /**
+     * @inheritdoc
+     */
     public function name()
     {
         return Module::t('block_audio_name');
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function blockGroup()
+    {
+        return MediaGroup::class;
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function icon()
     {
         return 'volume_up';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function config()
     {
         return [
@@ -33,6 +59,9 @@ class AudioBlock extends TwigBlock
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFieldHelp()
     {
         return [
@@ -41,20 +70,10 @@ class AudioBlock extends TwigBlock
     }
 
     /**
-     * Available twig variables:
-     * @param {{vars.soundUrl}}
+     * @inheritdoc
      */
-    public function twigFrontend()
+    public function admin()
     {
-        return '<div>{% if vars.soundUrl is not empty %}{{ vars.soundUrl }}{% else %}Keine Audioquelle angegeben{% endif %}</div>';
-    }
-
-    /**
-     * Available twig variables:
-     * @param {{vars.soundUrl}}
-     */
-    public function twigAdmin()
-    {
-        return '<p>Audio Block: {% if vars.soundUrl is empty %}Keine Audioquelle angegeben{% else %}Audioquelle ist gesetzt{% endif %}</p>';
+        return '<p>Audio Block: {% if vars.soundUrl is empty %}'.Module::t('block_audio_admin_nourl').'{% else %}'.Module::t('block_audio_admin_hasurl').'{% endif %}</p>';
     }
 }

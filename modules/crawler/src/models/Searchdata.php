@@ -74,7 +74,7 @@ class Searchdata extends \luya\admin\ngrest\base\NgRestModel
     /**
      * @return array An array define the field types of each field
      */
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'query' => 'text',
@@ -92,7 +92,7 @@ class Searchdata extends \luya\admin\ngrest\base\NgRestModel
      */
     public function ngRestConfig($config)
     {
-        // define fields for types based from ngrestAttributeTypes
+        // define fields for types based from ngRestAttributeTypes
         $this->ngRestConfigDefine($config, 'list', ['query', 'results', 'timestamp', 'language']);
         $this->ngRestConfigDefine($config, ['create', 'update'], ['query', 'results', 'timestamp', 'language']);
         

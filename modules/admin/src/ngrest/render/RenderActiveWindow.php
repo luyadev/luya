@@ -6,7 +6,7 @@ use Yii;
 use luya\admin\ngrest\base\Render;
 
 /**
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class RenderActiveWindow extends Render implements RenderInterface
 {
@@ -17,8 +17,11 @@ class RenderActiveWindow extends Render implements RenderInterface
     public function render()
     {
         if (($activeWindow = $this->findActiveWindow($this->activeWindowHash)) !== false) {
+            /** @var $object \luya\admin\ngrest\base\ActiveWindow */
             $object = Yii::createObject($activeWindow['objectConfig']);
             $object->setItemId($this->_itemId);
+            $object->setConfigHash($this->config->getHash());
+            $object->setActiveWindowHash($this->activeWindowHash);
             Yii::$app->session->set($this->activeWindowHash, $this->_itemId);
             return $object->index();
         }
@@ -37,7 +40,8 @@ class RenderActiveWindow extends Render implements RenderInterface
     public function findActiveWindow($activeWindowHash)
     {
         $activeWindows = $this->config->getPointer('aw');
-        if (array_key_exists($activeWindowHash, $activeWindows)) {
+        
+        if (isset($activeWindows[$activeWindowHash])) {
             return $activeWindows[$activeWindowHash];
         }
 

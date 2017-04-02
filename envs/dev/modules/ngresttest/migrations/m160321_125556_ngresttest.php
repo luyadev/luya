@@ -29,7 +29,7 @@ class m160321_125556_ngresttest extends Migration
             'sortRelationModel' => 'text',
             
             // i18n
-            
+
             'i18n_image' => 'text',
             'i18n_imageArray' => 'text',
             'i18n_file' => 'text',

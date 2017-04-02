@@ -18,22 +18,59 @@ use luya\helpers\ArrayHelper;
  * ```php
  * new ActiveQueryCheckboxInjector([
  *     'query' => \newsadmin\models\Article::find()->where(['cat_id' => 1]),
+ *     'label' => 'title', // This attribute from the model is used to render the admin block dropdown selection.
  * ]);
+ * ```
+ *
+ * In order to configure the ActiveQueryCheckboxInjector used the {{\luya\cms\base\InternalBaseBlock::injectors}} method:
+ *
+ * ```php
+ * public function injectors()
+ * {
+ *     return [
+ *	       'theData' => new ActiveQueryCheckboxInjector([
+ *             'query' => News::find()->where(['is_deleted' => 0]),
+ *             'label' => function($model) {
+ *                 return $model->title . " - " . $model->description;
+ *             },
+ *         ]);
+ *	   ];
+ * }
  * ```
  *
  * @property \yii\db\ActiveQueryInterface $query The ActiveQuery object
  * @since 1.0.0-rc1
  * @author Basil Suter <basil@nadar.io>
  */
-class ActiveQueryCheckboxInjector extends BaseBlockInjector
+final class ActiveQueryCheckboxInjector extends BaseBlockInjector
 {
+    /**
+     * @var null|string|closure This attribute from the model is used to render the admin block dropdown selection. Define
+     * the field name to pick for the label or set a closure lambda function in order to provide the select label template.
+     *
+     * ```php
+     * 'label' => function($model) {
+     *     return $model->title;
+     * },
+     * ```
+     *
+     * If the label attribute is not defined, just all attribute from the model will be displayed.
+     */
+    public $label = null;
+    
+    /**
+     * @var boolean|array Whether the extr assigned data should enable pagination.
+     */
+    public $pagination = false;
+    
     private $_query = null;
     
     /**
-     * Setter method for the active query interface. Define the active query which will be used
-     * to retrieve data.
+     * Setter method for the active query interface.
      *
-     * @param ActiveQueryInterface $query
+     * Define the active query which will be used to retrieve data must be an instance of {{\yii\db\ActiveQueryInterface}}.
+     *
+     * @param \yii\db\ActiveQueryInterface $query The query provider for the {{yii\data\ActiveDataProvider}}.
      */
     public function setQuery(ActiveQueryInterface $query)
     {
@@ -48,13 +85,14 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
         
         $data = [];
         foreach ($provider->getModels() as $model) {
-            $labels = [];
-            foreach ($model->getAttributes() as $value) {
-                if (is_string($value)) {
-                    $labels[] = $value;
-                }
+            if (is_callable($this->label)) {
+                $label = call_user_func($this->label, $model);
+            } elseif (is_string($this->label)) {
+                $label = $model->{$this->label};
+            } else {
+                $label = implode(", ", $model->getAttributes());
             }
-            $data[] = ['value' => $model->primaryKey, 'label' => implode(", ", $labels)];
+            $data[] = ['value' => $model->primaryKey, 'label' => $label];
         }
         return $data;
     }
@@ -65,18 +103,18 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
         
         $provider = new ActiveDataProvider([
             'query' => $this->_query->andWhere(['in', 'id', $ids]),
+            'pagination' => $this->pagination,
         ]);
         
         return $provider->getModels();
     }
     
     /**
-     * {@inheritDoc}
-     * @see \cms\base\BaseBlockInjector::setup()
+     * @inheritdoc
      */
     public function setup()
     {
-        //
+        // injecto the config
         $this->setContextConfig([
             'var' => $this->varName,
             'type' => 'zaa-checkbox-array',
@@ -85,7 +123,7 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
                 'items' => $this->getQueryData(),
             ]
         ]);
-        
+        // provide the extra data
         $this->context->addExtraVar($this->varName, $this->getExtraAssignData());
     }
 }

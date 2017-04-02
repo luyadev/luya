@@ -4,7 +4,6 @@ use yii\db\Migration;
 
 class m160524_134433_searchindex extends Migration
 {
-    // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
         $this->createTable('crawler_searchdata', [

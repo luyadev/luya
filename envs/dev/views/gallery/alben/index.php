@@ -1,16 +1,16 @@
 <div class="row">
     <div class="col-md-12">
-        <a href="<?= \luya\helpers\Url::toManager('gallery/cat/index');?>"><i class="fa fa-fw fa-chevron-left"></i> Kategorieübersicht</a>
+        <a href="<?= $this->url('gallery/cat/index');?>"><i class="fa fa-fw fa-chevron-left"></i> Kategorieübersicht</a>
         <br />
         <br />
     </div>
 </div>
-<? if(count($albenData) == 0): ?>
+<?php if (count($albenData) == 0): ?>
 <div class="alert alert-info">Es wurden noch keine Bilder zu dieser Kategorie hinterlegt.</div>
-<? else: ?>
+<?php else: ?>
 <div class="albums">
     <div class="row">
-        <? foreach($albenData as $item): ?>
+        <?php foreach ($albenData as $item): ?>
             <div class="album col-xs-12 col-sm-6 col-md-4">
                 <a class="album__link" href="<?= $item->getDetailUrl(); ?>">
                     <img class="album__image" src="<?= Yii::$app->storage->getImage($item->cover_image_id)->source; ?>" />
@@ -23,7 +23,7 @@
                 </a>
                 <div class="album__title"><h2 class="text-center"><?= $item->title; ?></h2></div>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>
-<? endif; ?>
+<?php endif; ?>

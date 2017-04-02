@@ -8,9 +8,10 @@ use luya\admin\components\Auth;
 use luya\admin\models\Lang;
 use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
+use yii\base\InvalidConfigException;
 
 /**
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class RenderCrud extends Render implements RenderInterface
 {
@@ -58,13 +59,17 @@ class RenderCrud extends Render implements RenderInterface
             'canDelete' => $this->can(Auth::CAN_DELETE),
             //'crud' => $this,
             'config' => $this->config,
-            'activeWindowCallbackUrl' => 'admin/ngrest/callback',
+            'activeWindowRenderUrl' => $this->getRestUrl('active-window-render'),
+            'activeWindowCallbackUrl' => $this->getRestUrl('active-window-callback'),
         ), $this);
     }
 
-    public function getRestUrl()
+    public function getRestUrl($append = null)
     {
-        return 'admin/'.$this->config->apiEndpoint;
+        if ($append) {
+            $append = '/' . ltrim($append, '/');
+        }
+        return 'admin/'.$this->config->apiEndpoint . $append;
     }
     
     public function getPrimaryKey()
@@ -89,6 +94,20 @@ class RenderCrud extends Render implements RenderInterface
     {
         if ($this->_buttons === null) {
             $buttons = [];
+            
+            foreach ($this->config->relations as $rel) {
+                $api = Yii::$app->adminmenu->getApiDetail($rel['apiEndpoint']);
+                
+                if (!$api) {
+                    throw new InvalidConfigException("The configured api relation '{$rel['apiEndpoint']}' does not exists in the menu elements. Maybe you have no permissions to access this API.");
+                }
+                
+                $buttons[] = [
+                    'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$api['route'].'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
+                    'icon' => 'chrome_reader_mode',
+                    'label' => $rel['label'],
+                ];
+            }
             
             if ($this->can(Auth::CAN_UPDATE)) {
                 // get all activeWindows assign to the crud

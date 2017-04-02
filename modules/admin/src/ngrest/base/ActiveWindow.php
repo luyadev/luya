@@ -3,11 +3,13 @@
 namespace luya\admin\ngrest\base;
 
 use Yii;
-use luya\Exception;
+use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\base\ViewContextInterface;
 use yii\base\Object;
 use luya\admin\ngrest\base\ActiveWindowView;
+use luya\Exception;
+use luya\helpers\Url;
 
 /**
  * Base class for all ActiveWindow classes.
@@ -15,14 +17,14 @@ use luya\admin\ngrest\base\ActiveWindowView;
  * An ActiveWindow is basically a custom view which renders your data attached to a row in the CRUD grid table.
  *
  * @property integer $itemId The Id of the item
- * @property \admin\ngrest\base\ActiveWindowView $view The view object
+ * @property \luya\admin\ngrest\base\ActiveWindowView $view The view object
  * @property string $name Get the current Active Window Name
  * @property string $hashName Get an unique hased Active Window config name
  * @property \yii\db\ActiveRecordInterface $model The model evaluated by the `findOne` of the called ng rest model ActiveRecord.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class ActiveWindow extends Object implements ViewContextInterface
+abstract class ActiveWindow extends Object implements ViewContextInterface, ActiveWindowInterface
 {
     /**
      * @var string $suffix The suffix to use for all classes
@@ -40,18 +42,20 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     public $module = null;
     
     /**
-     * @var string Google-Icon name
+     * @var string The icon name from goolges material icon set (https://material.io/icons/)
      */
     public $icon = 'extension';
     
     /**
-     * @var string Optional alias name for the ActiveWindow which renders the Crud-list-Button.
+     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
      */
     public $alias = false;
 
     private $_model = null;
     
     /**
+     * Get the model object from where the Active Window is attached to.
+     *
      * @return \yii\db\ActiveRecordInterface Get the model of the called ngrest model ActiveRecord by it's itemId.
      */
     public function getModel()
@@ -64,10 +68,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     }
     
     /**
-     * Initliazier
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -76,6 +77,59 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
         if ($this->module === null) {
             throw new Exception('The ActiveWindow property \'module\' of '.get_called_class().' can not be null. You have to defined the module in where the ActiveWindow is defined. For example `public $module = \'@admin\';`');
         }
+    }
+    
+    private $_configHash = null;
+    
+    /**
+     * @inheritdoc
+     */
+    public function setConfigHash($hash)
+    {
+        $this->_configHash = $hash;
+    }
+    
+    /**
+     * Return the config hash name from the setter method.
+     *
+     * @return string
+     */
+    public function getConfigHash()
+    {
+        return $this->_configHash;
+    }
+    
+    private $_activeWindowHash = null;
+    
+    /**
+     * @inheritdoc
+     */
+    public function setActiveWindowHash($hash)
+    {
+        $this->_activeWindowHash = $hash;
+    }
+    
+    /**
+     * Get the active window hash from the setter method.
+     * @return string
+     */
+    public function getActiveWindowHash()
+    {
+        return $this->_activeWindowHash;
+    }
+    
+    /**
+     * Create an absolute link to a callback.
+     *
+     * This method is commonly used when returing data directly to the browser, there for the abolute url to a callback is required. Only logged in
+     * users can view the callback url, but there is no other security about callbacks.
+     *
+     * @param string $callback The name of the callback without the callback prefix exmaple `createPdf` if the callback is `callbackCreatePdf()`.
+     * @return string The absolute url to the callback.
+     */
+    public function createCallbackUrl($callback)
+    {
+        return Url::to(['/admin/ngrest/callback', 'activeWindowCallback' => Inflector::camel2id($callback), 'ngrestConfigHash' => $this->getConfigHash(), 'activeWindowHash' => $this->getActiveWindowHash()], true);
     }
     
     /**
@@ -146,7 +200,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     public function getHashName()
     {
         if ($this->_hashName === null) {
-            $this->_hashName = sha1($this->getName() . $this->icon . $this->alias);
+            $this->_hashName = sha1(self::class);
         }
         
         return $this->_hashName;
@@ -174,7 +228,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     /**
      * Get the view object to render templates.
      *
-     * @return \admin\ngrest\base\ActiveWindowView
+     * @return \luya\admin\ngrest\base\ActiveWindowView
      */
     public function getView()
     {
@@ -199,25 +253,19 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     private $_itemId = null;
     
     /**
-     * Set the value of the item Id in where the active window context is initialized.
-     *
-     * @param intger $itemId The item id context
-     * @throws Exception
-     * @return intger
+     * @inheritdoc
      */
-    public function setItemId($itemId)
+    public function setItemId($id)
     {
-        if (is_int($itemId)) {
-            return $this->_itemId = $itemId;
+        if (is_int($id)) {
+            return $this->_itemId = $id;
         }
         
         throw new Exception("Unable to set active window item id, item id value must be integer.");
     }
 
     /**
-     * Get the item id of the current active window context.
-     *
-     * @return intger|mixed
+     * @inheritdoc
      */
     public function getItemId()
     {

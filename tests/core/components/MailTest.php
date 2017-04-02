@@ -52,12 +52,40 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('arraywithname@example.com', $mailerTo[3][0]);
         $this->assertSame('Jane Doe', $mailerTo[3][1]);
     }
+
+    public function testCcAddresses()
+    {
+        $mail = new Mail();
+        $mail->ccAddresses(['foo@bar.com', 'John Doe' => 'john.doe@notamail.com']);
+
+        $mailerBcc = $mail->mailer->getCcAddresses();
+
+        $this->assertSame('foo@bar.com', $mailerBcc[0][0]);
+        $this->assertSame('foo@bar.com', $mailerBcc[0][1]);
+
+        $this->assertSame('john.doe@notamail.com', $mailerBcc[1][0]);
+        $this->assertSame('John Doe', $mailerBcc[1][1]);
+    }
+
+    public function testBccAddresses()
+    {
+        $mail = new Mail();
+        $mail->bccAddresses(['foo@bar.com', 'John Doe' => 'john.doe@notamail.com']);
+
+        $mailerBcc = $mail->mailer->getBccAddresses();
+
+        $this->assertSame('foo@bar.com', $mailerBcc[0][0]);
+        $this->assertSame('foo@bar.com', $mailerBcc[0][1]);
+
+        $this->assertSame('john.doe@notamail.com', $mailerBcc[1][0]);
+        $this->assertSame('John Doe', $mailerBcc[1][1]);
+    }
     
     public function testLayoutWrapper()
     {
         $mail = new Mail();
         $mail->layout = '@app/views/maillayout.php';
-        $mail->setBody('CONTENT');
+        $mail->body('CONTENT');
         $this->assertEquals('<div>CONTENT</div>', $mail->mailer->Body);
     }
     
@@ -65,7 +93,21 @@ class MailTest extends \luyatests\LuyaWebTestCase
     {
         $mail = new Mail();
         $mail->layout = false;
-        $mail->setBody('CONTENT');
+        $mail->body('CONTENT');
         $this->assertEquals('CONTENT', $mail->mailer->Body);
+    }
+    
+    public function testChaining()
+    {
+        $mail = (new Mail())->compose()->subject('foobar')->body('barfoo')->mailer;
+        
+        $this->assertSame('foobar', $mail->Subject);
+        $this->assertSame('barfoo', $mail->Body);
+    }
+    
+    public function testEmptyChainException()
+    {
+        $this->expectException('luya\Exception');
+        $mail = (new Mail())->compose()->send();
     }
 }

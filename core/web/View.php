@@ -4,6 +4,7 @@ namespace luya\web;
 
 use Yii;
 use luya\helpers\Url;
+use luya\Exception;
 
 /**
  * LUYA web view wrapper.
@@ -11,6 +12,7 @@ use luya\helpers\Url;
  * Implements additional helper methods to the Yii web controller.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class View extends \yii\web\View
 {
@@ -38,12 +40,20 @@ class View extends \yii\web\View
     /**
      * Get the url source for an asset.
      *
-     * @todo verify there is already a yii-way solution
-     * @param string $assetName
-     * @return string
+     * When registering an asset `\app\assets\ResoucesAsset::register($this)` the $assetName
+     * is `app\assets\ResourcesAsset`.
+     *
+     * @param string $assetName The class name of the asset bundle (without the leading backslash)
+     * @return string The internal base path to the asset file.
      */
     public function getAssetUrl($assetName)
     {
+        $assetName = ltrim($assetName, '\\');
+        
+        if (!isset($this->assetBundles[$assetName])) {
+            throw new Exception("The AssetBundle '$assetName' is not registered.");
+        }
+        
         return $this->assetBundles[$assetName]->baseUrl;
     }
 
@@ -61,13 +71,25 @@ class View extends \yii\web\View
     /**
      * Generate urls helper method.
      *
+     * Helper method for convenience which is equal to {{luya\web\UrlManager::createUrl}}.
+     *
      * @param string $route The route to create `module/controller/action`.
      * @param array $params Optional parameters passed as key value pairing.
+     * @param boolean $scheme Whether to return static url or not
      * @return string
      */
-    public function url($route, array $params = [])
+    public function url($route, array $params = [], $scheme = false)
     {
-        return Url::toManager($route, $params);
+        $routeParams = [$route];
+        foreach ($params as $key => $value) {
+            $routeParams[$key] = $value;
+        }
+        
+        if ($scheme) {
+            return Yii::$app->urlManager->createAbsoluteUrl($routeParams);
+        }
+        
+        return Yii::$app->urlManager->createUrl($routeParams);
     }
     
     /**
@@ -77,14 +99,8 @@ class View extends \yii\web\View
      * public_html directory. For instance you have put some images in our public folder `public_html/img/luya.png`
      * then you can access the image file inside your view files with:
      *
-     * ```
-     * <img src="<?php echo $this->publicHtml; ?>/img/luya.png" />
-     * ```
-     *
-     * There is also a twig variable providing the same value:
-     *
-     * ```
-     * <img src="{{ publicHtml }}/img/luya.png" />
+     * ```php
+     * <img src="<?= $this->publicHtml; ?>/img/luya.png" />
      * ```
      *
      * @return string The relative baseUrl to your public_html folder.

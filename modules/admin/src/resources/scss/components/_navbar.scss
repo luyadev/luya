@@ -1,31 +1,24 @@
 .nav-wrapper {
     padding-#{$navbar__search--position}: 60px;
+    min-height: 64px;
+
+    .material-icons {
+        line-height: 64px;
+    }
 }
 
 .navbar__button {
     cursor: pointer;
     max-height: 64px;
-    padding: 0 15px;
+    padding: 0 10px;
     // transition: 0.25s ease background-color;
 
-    &.navbar__button__circle {
-        min-height: 64px;
-        // transition: 0.25s ease color;
 
-        .icon__spawn-text {
-            top: -15px;
-        }
-    }
-
-    &:hover {
-        background-color: color("blue", "darken-2");
+    &:hover, a:hover {
+        background-color: color("blue", "darken-1");
 
         .icon__spawn-text {
             opacity: 1;
-        }
-
-        .navbar__button__circle-icon {
-            border-color: color("shades", "white");
         }
 
         i,
@@ -33,7 +26,6 @@
         .icon__spawn-text,
         .navbar__button__circle-usercount {
             color: color("shades", "white");
-
         }
     }
 }
@@ -59,34 +51,13 @@
     }
 }
 
-.navbar__button__circle-icon {
-    border: 3px solid;
-    border-color: #fff;
-    border-radius: 50%;
-    display: block;
-    height: 32px;
-    margin: 0 auto;
-    position: relative;
-    top: 16px;
-    // transition: 0.25s ease border-color;
-    width: 32px;
-}
 
 .navbar__button__circle-usercount {
-    margin-top: -18px;
+    margin-top: -19px;
     text-align: center;
+    font-size: 13px;
 }
 
-.icon__spawn-text {
-    font-size: 8px;
-    height: 0;
-
-    // transition: 0.25s ease opacity;
-    opacity: 0;
-    position: relative;
-    text-align: center;
-    top: -48px;
-}
 
 //MY END
 
@@ -106,11 +77,13 @@
  * #NAVBAR__ICON
  */
 .navbar__icon {
+    float: left;
+    margin-right: 10px;
+    margin-top: -1px;
+
     &.right {
-        margin-left: 8px;
-    }
-    &.left {
-        margin-right: 8px;
+        float: right;
+        margin-left: 10px;
     }
 }
 

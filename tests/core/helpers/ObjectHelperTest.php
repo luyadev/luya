@@ -6,7 +6,7 @@ use luya\helpers\ObjectHelper;
 
 /**
  * Testing Object Class
- * 
+ *
  * @author nadar
  *
  */

@@ -9,7 +9,7 @@ Installation
 Add the module to your composer.json:
 
 ```
-composer require luyadev/luya-module-frontendgroup:1.0.0-beta8
+composer require luyadev/luya-module-frontendgroup:^1.0@dev
 ```
 
 After adding to your composer json you have to include the frontendgroup module into your Yii/LUYA config of your project and bootstrap the Module (otherwhise it can not catch the menu before item event).

@@ -5,10 +5,14 @@ namespace luya\helpers;
 use Yii;
 
 /**
- * URL Helper to create URLs and other tools.
+ * Helper methods when dealing with URLs and Links.
  *
- * This Class extends the \yii\helpers\Url class which provides tools to create URLs based on the
- * URL-Manager component. There are also other little helper methods to work with urls.
+ * Extends the {{yii\helpers\BaseUrl}} class by some usefull functions like:
+ *
+ * + {{luya\helpers\Url::trailing}}
+ * + {{luya\helpers\Url::toInternal}}
+ * + {{luya\helpers\Url::toAjax}}
+ * + {{luya\helpers\Url::ensureHttp}}
  *
  * An example of create an URL based on Route in the UrlManager:
  *
@@ -17,14 +21,16 @@ use Yii;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Url extends \yii\helpers\Url
+class Url extends \yii\helpers\BaseUrl
 {
     /**
      * Add a trailing slash to an url if there is no trailing slash at the end of the url.
      *
-     * @param string $url   The url which a trailing slash should be appended
+     * @param string $url The url which a trailing slash should be appended
      * @param string $slash If you want to trail a file on a windows system it gives you the ability to add forward slashes.
+     * @return string The url with added trailing slash, if requred.
      */
     public static function trailing($url, $slash = '/')
     {
@@ -36,6 +42,7 @@ class Url extends \yii\helpers\Url
      *
      * @param array $routeParams Example array to route `['/module/controller/action']`.
      * @param boolean $scheme Whether to return the absolute url or not
+     * @return string The created url.
      */
     public static function toInternal(array $routeParams, $scheme = false)
     {
@@ -50,13 +57,16 @@ class Url extends \yii\helpers\Url
      * Only stil exists to avoid bc break, former known as `to()`. Use `Url::toRoute(['/module/controller/action', 'arg1' => 'arg1value']);` instead.
      * Wrapper functions for the createUrl function of the url manager.
      *
-     * @param string $route
-     * @param array  $params
-     * @param boolean $sheme Whether to return static url or not
-     * @todo we have to remove this method as it provides no additinal functions to the yii\helpers\url to method
+     * @param string $route The route to find from the url manager.
+     * @param array $params The parameters to pass for this url rule.
+     * @param boolean $scheme Whether to return static url or not
+     * @return string The generated url.
+     * @deprecated Will be removed in 1.0.0 release.
      */
     public static function toManager($route, array $params = [], $scheme = false)
     {
+        trigger_error('Deprecated method us Url::toRoute() instead.', E_USER_DEPRECATED);
+        
         $routeParams = [$route];
         foreach ($params as $key => $value) {
             $routeParams[$key] = $value;
@@ -74,7 +84,7 @@ class Url extends \yii\helpers\Url
      *
      * @param string $route  The base routing path defined in yii. module/controller/action
      * @param array  $params Optional array containing get parameters with key value pairing
-     * @return string
+     * @return string The ajax url link.
      */
     public static function toAjax($route, array $params = [])
     {

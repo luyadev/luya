@@ -29,7 +29,7 @@
 
 <div class="image-grid">
     <div class="row">
-        <? foreach($model->images() as $image): ?>
+        <?php foreach ($model->images() as $image): ?>
             <div class="col-md-3">
                 <a class="image-grid__image swipebox" href="<?= Yii::$app->storage->getImage($image['image_id'])->applyFilter('lightbox')->source; ?>" rel="gallery">
                     <img src="<?= Yii::$app->storage->getImage($image['image_id'])->applyFilter('medium-crop')->source; ?>" />
@@ -38,6 +38,6 @@
                     </div>
                 </a>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>

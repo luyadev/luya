@@ -6,7 +6,15 @@ use yii\base\Component;
 use luya\admin\models\Lang;
 
 /**
- * Admin Language component to make singelton similiar pattern to collect langauges and active language.
+ * Admin Language Component.
+ *
+ * The component is registered by the admin module and provides methods to collect language data.
+ *
+ * @property string $getLanguageByShortCode Get the language from a shortCode..
+ * @property array $languages Get an array of all languages (its not an AR object!).
+ * @property integer $activeId Get the current active language ID.
+ * @property string $activeShortCode Get the current active langauge Short-Code.
+ * @property array $activeLanguage Get the array of the current active language (its not an AR object!).
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -74,6 +82,12 @@ class AdminLanguage extends Component
         return $this->_languages;
     }
     
+    /**
+     * Get the language from a shortCode.
+     *
+     * @param string $shortCode
+     * @return boolean|mixed
+     */
     public function getLanguageByShortCode($shortCode)
     {
         return isset($this->getLanguages()[$shortCode]) ? $this->getLanguages()[$shortCode] : false;

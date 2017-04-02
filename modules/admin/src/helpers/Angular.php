@@ -36,7 +36,7 @@ class Angular
      * @param string $type
      * @param string $ngModel
      * @param string $label
-     * @param array $options
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @param array $mergeOptions Additonal attributes to be set for the tag $type.
      */
     protected static function injector($type, $ngModel, $label, $options = [], array $mergeOptions = [])
@@ -61,9 +61,8 @@ class Angular
      * <my-input ng-model="name"></my-input>
      * ```
      *
-     * @param unknown $name
-     * @param unknown $ngModel
-     * @param array $options
+     * @param string $name The name for the generated direcitve tag which will be converted from camelcase to id notation.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function directive($name, array $options = [])
     {
@@ -73,10 +72,10 @@ class Angular
     /**
      * zaaSortRelationArray directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
      * @param array $sourceData
-     * @param array $options
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaSortRelationArray($ngModel, $label, array $sourceData, array $options = [])
     {
@@ -86,9 +85,9 @@ class Angular
     /**
      * zaaText directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaText($ngModel, $label, array $options = [])
     {
@@ -98,9 +97,9 @@ class Angular
     /**
      * zaaTextarea directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaTextarea($ngModel, $label, array $options = [])
     {
@@ -110,9 +109,9 @@ class Angular
     /**
      * zaaNumber directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaNumber($ngModel, $label, array $options = [])
     {
@@ -122,9 +121,9 @@ class Angular
     /**
      * zaaDecimal directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaDecimal($ngModel, $label, array $options = [])
     {
@@ -138,10 +137,10 @@ class Angular
      * return AngularInput::zaaSelect($ngModel, $this->alias, [['value' => 123, 'label' => 123123]]);
      * ```
      *
-     * @param unknown $ngModel
-     * @param unknown $label
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
      * @param array $data
-     * @param array $options
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaSelect($ngModel, $label, array $data, array $options = [])
     {
@@ -151,9 +150,9 @@ class Angular
     /**
      * zaaCheckbox directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaCheckbox($ngModel, $label, array $options = [])
     {
@@ -175,10 +174,10 @@ class Angular
      *
      * But make sure the service you call returns the data within ['items' => $data].
      *
-     * @param unknown $ngModel
-     * @param unknown $label
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
      * @param array $data
-     * @param array $options
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaCheckboxArray($ngModel, $label, array $data, array $options = [])
     {
@@ -188,9 +187,9 @@ class Angular
     /**
      * zaaDate directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaDate($ngModel, $label, array $options = [])
     {
@@ -200,9 +199,9 @@ class Angular
     /**
      * zaaDatetime directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaDatetime($ngModel, $label, array $options = [])
     {
@@ -212,9 +211,9 @@ class Angular
     /**
      * zaaTable directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaTable($ngModel, $label, array $options = [])
     {
@@ -224,60 +223,60 @@ class Angular
     /**
      * zaaListArray directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaListArray($ngModel, $label, array $options = [])
     {
-        //return self::injector('zaa-table', $ngModel, $label, [], $options);
+        return self::injector('zaa-list-array', $ngModel, $label, [], $options);
     }
     
     /**
      * zaaFileArrayUpload directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaFileArrayUpload($ngModel, $label, array $options = [])
     {
-        //return self::injector('zaa-table', $ngModel, $label, [], $options);
+        return self::injector('zaa-file-array-upload', $ngModel, $label, [], $options);
     }
     
     /**
      * zaaImageArrayUpload directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaImageArrayUpload($ngModel, $label, array $options = [])
     {
-        //return self::injector('zaa-table', $ngModel, $label, [], $options);
+        return self::injector('zaa-image-array-upload', $ngModel, $label, [], $options);
     }
     
     /**
      * zaaImageUpload directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaImageUpload($ngModel, $label, array $options = [])
     {
-        //return self::injector('zaa-table', $ngModel, $label, [], $options);
+        return self::injector('zaa-image-upload', $ngModel, $label, [], $options);
     }
     
     /**
      * zaaFileUpload directive
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $options
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function zaaFileUpload($ngModel, $label, array $options = [])
     {
-        //return self::injector('zaa-table', $ngModel, $label, [], $options);
+        return self::injector('zaa-file-upload', $ngModel, $label, [], $options);
     }
 }

@@ -10,32 +10,35 @@ class LinkTagTest extends LuyaWebTestCase
     public function testLinkParser()
     {
         $link = new LinkTag();
+
+        $this->assertNotNull($link->readme());
+        $this->assertNotNull($link->example());
         
-        $this->assertSame('<a class="link-external" href="http://none" label="http://none" target="_blank">http://none</a>', $link->parse('none', null));
-        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io" label="http://localhost/luya/envs/dev/public_html/luya.io">http://localhost/luya/envs/dev/public_html/luya.io</a>', $link->parse('//luya.io', null));
-        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io/sub" label="http://localhost/luya/envs/dev/public_html/luya.io/sub">http://localhost/luya/envs/dev/public_html/luya.io/sub</a>', $link->parse('//luya.io/sub', null));
-        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io/sub/" label="http://localhost/luya/envs/dev/public_html/luya.io/sub/">http://localhost/luya/envs/dev/public_html/luya.io/sub/</a>', $link->parse('//luya.io/sub/', null));
-        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io" label="http://localhost/luya/envs/dev/public_html/luya.io">http://localhost/luya/envs/dev/public_html/luya.io</a>', $link->parse('//luya.io', null));
+        $this->assertSame('<a class="link-external" href="http://none" target="_blank">http://none</a>', $link->parse('none', null));
+        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io">http://localhost/luya/envs/dev/public_html/luya.io</a>', $link->parse('//luya.io', null));
+        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io/sub">http://localhost/luya/envs/dev/public_html/luya.io/sub</a>', $link->parse('//luya.io/sub', null));
+        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io/sub/">http://localhost/luya/envs/dev/public_html/luya.io/sub/</a>', $link->parse('//luya.io/sub/', null));
+        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io">http://localhost/luya/envs/dev/public_html/luya.io</a>', $link->parse('//luya.io', null));
         
         
-        $this->assertSame('<a class="link-external" href="http://luya.io" label="http://luya.io" target="_blank">http://luya.io</a>', $link->parse('http://luya.io', null));
-        $this->assertSame('<a class="link-external" href="https://luya.io" label="https://luya.io" target="_blank">https://luya.io</a>', $link->parse('https://luya.io', null));
-        $this->assertSame('<a class="link-external" href="http://www.luya.io" label="http://www.luya.io" target="_blank">http://www.luya.io</a>', $link->parse('www.luya.io', null));
+        $this->assertSame('<a class="link-external" href="http://luya.io" target="_blank">http://luya.io</a>', $link->parse('http://luya.io', null));
+        $this->assertSame('<a class="link-external" href="https://luya.io" target="_blank">https://luya.io</a>', $link->parse('https://luya.io', null));
+        $this->assertSame('<a class="link-external" href="http://www.luya.io" target="_blank">http://www.luya.io</a>', $link->parse('www.luya.io', null));
     }
     
     public function testLinkPaserWithSub()
     {
         $link = new LinkTag();
         
-        $this->assertSame('<a class="link-external" href="http://none" label="subalias" target="_blank">subalias</a>', $link->parse('none', 'subalias'));
-        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io" label="subalias">subalias</a>', $link->parse('//luya.io', 'subalias'));
-        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io/sub" label="subalias">subalias</a>', $link->parse('//luya.io/sub', 'subalias'));
-        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io/sub/" label="subalias">subalias</a>', $link->parse('//luya.io/sub/', 'subalias'));
-        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io" label="subalias">subalias</a>', $link->parse('//luya.io', 'subalias'));
+        $this->assertSame('<a class="link-external" href="http://none" target="_blank">subalias</a>', $link->parse('none', 'subalias'));
+        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io">subalias</a>', $link->parse('//luya.io', 'subalias'));
+        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io/sub">subalias</a>', $link->parse('//luya.io/sub', 'subalias'));
+        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io/sub/">subalias</a>', $link->parse('//luya.io/sub/', 'subalias'));
+        $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io">subalias</a>', $link->parse('//luya.io', 'subalias'));
         
         
-        $this->assertSame('<a class="link-external" href="http://luya.io" label="subalias" target="_blank">subalias</a>', $link->parse('http://luya.io', 'subalias'));
-        $this->assertSame('<a class="link-external" href="https://luya.io" label="subalias" target="_blank">subalias</a>', $link->parse('https://luya.io', 'subalias'));
-        $this->assertSame('<a class="link-external" href="http://www.luya.io" label="subalias" target="_blank">subalias</a>', $link->parse('www.luya.io', 'subalias'));
+        $this->assertSame('<a class="link-external" href="http://luya.io" target="_blank">subalias</a>', $link->parse('http://luya.io', 'subalias'));
+        $this->assertSame('<a class="link-external" href="https://luya.io" target="_blank">subalias</a>', $link->parse('https://luya.io', 'subalias'));
+        $this->assertSame('<a class="link-external" href="http://www.luya.io" target="_blank">subalias</a>', $link->parse('www.luya.io', 'subalias'));
     }
 }

@@ -25,39 +25,40 @@ $config = [
     'siteTitle' => 'My Project',
     
     /*
-     * Set the administration area language. Available language short codes: "en", "de" and "ru"
+     * Sets the default langage for the admin interface. Each user can override the language within its user profile settings.
+     * Currently supported language short codes: "en", "de", "fr", "es", "ru", "it", "ua", "el". The
      */
     'luyaLanguage' => 'en',
     
     /*
-     * Let the application know which module should be executed by default (if no url is set). This module must be included 
+     * Let the application know which module should be executed by default (if no url is set). This module must be included
      * in the modules section. In the most cases you are using the cms as default handler for your website. But the concept
-     * of LUYA is also that you can use the Website without the CMS module! 
+     * of LUYA is also that you can use the Website without the CMS module!
      */
     'defaultRoute' => 'cms',
     
     /*
-     * Define the basePath of the project (Yii Configration Setup
+     * Define the basePath of the project (Yii Configration Setup)
      */
     'basePath' => dirname(__DIR__),
     
     'modules' => [
 
         /*
-         * If you have other administration module (like cmsadmin) then you going to need this module. The Admin module provides
-         * a lot of functionalitiy like storage system etc. But the basic concept of LUYA is also that you can use LUYA without the
+         * If you have other admin modules (like cmsadmin) then you going to need the admin. The Admin module provides
+         * a lot of functionality, like storage, user, permission, crud, etc. But the basic concept of LUYA is also that you can use LUYA without the
          * admin module.
-         * 
-         * @secureLogin: (boolean) This will activated a two-way authentification method where u get a token sent by mail, for this feature
-         * you have to make sure the mail component is configured correctly, you can test with console command `./vendor/bin/luya health/mailer`.
+         *
+         * @secureLogin: (boolean) This will activate a two-way authentification method where u get a token sent by mail, for this feature
+         * you have to make sure the mail component is configured correctly. You can test this with console command `./vendor/bin/luya health/mailer`.
          */
         'admin' => [
-            'class' => 'admin\Module',
+            'class' => 'luya\admin\Module',
             'secureLogin' => false, // when enabling secure login, the mail component must be proper configured otherwise the auth token mail will not send.
         ],
         
         /*
-         * You can use the cms module if you like.
+         * Frontend module for the `cms` module.
          */
         'cms' => [
             'class' => 'luya\cms\frontend\Module',
@@ -65,9 +66,13 @@ $config = [
         ],
 
         /*
-         * This is the administration module for the `cms` module.
+         * Admin module for the `cms` module.
          */
-        'cmsadmin' => 'luya\cms\admin\Module',
+        'cmsadmin' => [
+            'class' => 'luya\cms\admin\Module',
+            'hiddenBlocks' => [],
+            'blockVariations' => [],
+        ],
     ],
     'components' => [
         
@@ -85,11 +90,12 @@ $config = [
 
         /*
          * ATTENTION:
-         * To help us improve our Software you can enable (true) this property to send all Exceptions directly to the luya developer team. The follwing informations will be transfered:
+         * To help us improve our Software you can enable (true) this property to send all Exceptions directly to the luya developer team.
+         * The follwing informations will be transfered:
          * - $_GET, $_POST, $_SERVER and $_SESSION data
          * - Exception Object (inlcuding stack trace, line, linenr, message, file)
          *
-         * You can also create your own errorapi (zehir/luya-modul-errorapi) module to get notification
+         * You can also create your own errorapi (https://github.com/luyadev/luya-module-errorapi) module to get notification
          * about the errors from your projects.
          */
         'errorHandler' => [
@@ -99,8 +105,9 @@ $config = [
         /*
          * The composition component handles your languages and they way your urls will look like. The composition componentn will
          * automatically add the language prefix you have defined in `default` to your url (the language part in the url "example.com/EN/homepage").
-         * 
+         *
          * hidden: (boolean) If this website is not multilingual you can hidde the composition, other whise you have to enable this.
+         * default: (array) Contains the default setup for the current language, this must match your language system configuration.
          */
         'composition' => [
             'hidden' => true, // you will not have languages in your url (most case for pages which are not multi lingual)
@@ -111,7 +118,7 @@ $config = [
          * When you are enabling the cache, luya will cache cms blocks and speed up the system in different ways. In the prep config
          * we use the DummyCache to "fake" the caching behavior, but actually nothing gets cached, when your in production you should
          * use caching which matches your hosting environment. In most cases yii\caching\FileCache will result in fast website.
-         * 
+         *
          * http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-apis
          */
         'cache' => [
@@ -131,18 +138,14 @@ $config = [
     ],
 ];
 
-/**
- * if you want to use the debug and gii modules of yii, add them to your composer.json in the require section:
- * "yiisoft/yii2-gii" : "*"
- * "yiisoft/yii2-debug" : "*"
- */
-
-/*if (YII_DEBUG) {
+/*
+if (YII_DEBUG) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = 'yii\debug\Module';
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = 'yii\gii\Module';
-}*/
+}
+*/
 
 
 return \yii\helpers\ArrayHelper::merge($config, require('env-local-db.php'));

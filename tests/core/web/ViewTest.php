@@ -3,6 +3,11 @@
 namespace luyatests\core\web;
 
 use luya\web\View;
+use luya\web\Asset;
+
+class TestAsset extends Asset
+{
+}
 
 class ViewTest extends \luyatests\LuyaWebTestCase
 {
@@ -27,5 +32,13 @@ class ViewTest extends \luyatests\LuyaWebTestCase
         $string = 'test  test test';
         $resultString = $view->compress($string);
         $this->assertEquals(14, strlen($resultString));
+    }
+    
+    public function testAssetUrlGetter()
+    {
+        /*
+    	$view = new View();
+    	TestAsset::register($view);
+    	*/
     }
 }

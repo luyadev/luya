@@ -7,14 +7,14 @@ namespace luya\admin\image;
  *
  * @since 1.0.0-beta2
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Iterator extends \luya\admin\storage\IteratorAbstract
 {
     /**
      * Iterator get current element, generates a new object for the current item on access.
      *
-     * @return \cms\menu\Item
+     * @return \luya\admin\image\Item
      */
     public function current()
     {

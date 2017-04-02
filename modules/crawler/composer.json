@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-crawler",
-	"description" : "An easy to use page crawler to make an internal search field on your page. The crawlermodule gather all informations about the sides on the configured domain.",
+	"description" : "An full search page crawler to enable complex and customized searching abilities.",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "crawler", "yii2", "yii", "yii2-pagecrawler", "pagecrawler", "luya-module"],
 	"license": "MIT",
@@ -17,16 +17,33 @@
 	},
 	"require" : {
 		"fabpot/goutte" : "^3.1",
-		"jakeasmith/http_build_url" : "^0.1"
+		"jakeasmith/http_build_url" : "~1.0",
+		"nadar/stemming" : "~1.0.0"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "~5.0",
+		"luyadev/luya" : "^1.0@dev",
+       "luyadev/luya-module-admin" : "^1.0@dev",
+		"satooshi/php-coveralls": "~1.0"
 	},
 	"autoload" : {
 		"psr-4" : {
 			"luya\\crawler\\" : "src/"
 		}
 	},
+	"autoload-dev" : {
+       "psr-4" : {
+           "crawlerests\\" : "tests/"
+       }
+    },
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
+    },
+    "config": {
+        "fxp-asset" : {
+            "pattern-skip-version": "(-build|-patch)"
+        }   
     }
 }

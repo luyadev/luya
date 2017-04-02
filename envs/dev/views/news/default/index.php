@@ -1,7 +1,18 @@
-<h1>News Index Overview</h1>
-<pre>
-<?php foreach($model::getAvailableNews() as $n): ?>
-    <p><?php echo $n->title; ?></p>
-    <a href="<?php echo $n->detailUrl; ?>"><?php echo $n->detailUrl; ?></a>
+<?php
+use yii\widgets\LinkPager;
+
+/* @var $this \luya\web\View */
+/* @var $provider \yii\data\ActiveDataProvider */
+?>
+<h2>News Overview</h2>
+<?php foreach ($provider->models as $item): ?>
+    <?php /* @var $item \luya\news\models\Article */ ?>
+    <pre>
+        <?php print_r($item->toArray()); ?>
+    </pre>
+    <p>
+        <a href="<?= $item->detailUrl; ?>">News Detail Link</a>
+    </p>
 <?php endforeach; ?>
-</pre>
+
+<?= LinkPager::widget(['pagination' => $provider->pagination]); ?>

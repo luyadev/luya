@@ -35,19 +35,7 @@ class FilterImporter extends Importer
                 ['var' => 'saveOptions', 'label' => 'save options'],
             ]]),
         ]);
-
-        /*
-        $this->refresh('resize', [
-            'name' => 'Zuschneiden',
-            'imagine_name' => 'resize',
-            'imagine_json_params' => json_encode(['vars' => [
-                ['var' => 'width', 'label' => 'Breit in Pixel'],
-                ['var' => 'height', 'label' => 'Hoehe in Pixel'],
-                ['var' => 'saveOptions', 'label' => 'save options'],
-            ]]),
-        ]);
-        */
-
+        
         $this->refresh('crop', [
             'name' => 'Crop',
             'imagine_name' => 'crop',
@@ -68,12 +56,13 @@ class FilterImporter extends Importer
                 $list[] = $object->identifier();
                 $log = $object->getLog();
                 if (count($log) > 0) {
-                    $this->addLog(implode(', ', $log));
+                    $this->addLog([$object->identifier() => $log]);
                 }
             }
         }
         
         foreach (StorageFilter::find()->where(['not in', 'identifier', $list])->all() as $filter) {
+            $this->addLog('Remove image filter identifier: ' . $filter->identifier());
             $filter->delete();
         }
     }

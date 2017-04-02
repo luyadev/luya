@@ -21,16 +21,25 @@ use luya\cms\admin\Module;
  * about the content, title or alias (link) itself, cause those informations are stored in the the [[\cmsadmin\models\NavItem]] to the corresponding
  * language. So basically the Nav contains the structure and state of the menu/navigation put not content, or titles cause those are related to a language.
  *
- *
  * @property \luya\cms\models\NavItem $activeLanguageItem Returns the NavItem for the current active user language with with the context object nav id.
+ * @property integer $id
+ * @property integer $nav_container_id
+ * @property integer $parent_nav_id
+ * @property integer $sort_index
+ * @property integer $is_deleted
+ * @property integer $is_hidden
+ * @property integer $is_offline
+ * @property integer $is_home
+ * @property integer $is_draft
+ * @property string $layout_file
+ * @property \luya\cms\models\NavContainer $navContainer Returns the nav container model
  *
  * @author Basil Suter <basil@nadar.io>
  */
 class Nav extends ActiveRecord
 {
     /**
-     * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::tableName()
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -38,8 +47,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -51,14 +59,14 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::rules()
+     * @inheritdoc
      */
     public function rules()
     {
         return [
             [['nav_container_id', 'parent_nav_id'], 'required'],
-            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft'], 'safe'],
+            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft', 'layout_file'], 'safe'],
+            [['layout_file'], 'match', 'pattern' => '/^[a-zA-Z0-9\.\-\_]+$/'],
         ];
     }
 
@@ -76,13 +84,38 @@ class Nav extends ActiveRecord
     /**
      * Return all nav items related to this object.
      *
-     * @return \yii\db\ActiveQuery
+     * @return \luya\cms\models\NavItem
      */
     public function getNavItems()
     {
         return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
     }
+    
+    /**
+     *
+     * @return \luya\cms\models\NavContainer
+     */
+    public function getNavContainer()
+    {
+        return $this->hasOne(NavContainer::class, ['id' => 'nav_container_id']);
+    }
 
+    /**
+     * @return
+     */
+    public function createCopy()
+    {
+        $model = new self();
+        $model->attributes = $this->toArray();
+        $model->is_hidden = 1;
+        $model->is_offline = 1;
+        $model->is_home = 0;
+        $model->is_draft = 0;
+        if ($model->save(false)) {
+            return $model;
+        }
+    }
+    
     private $_properties = null;
     
     /**
@@ -115,7 +148,7 @@ class Nav extends ActiveRecord
     
     public function hasGroupPermission(Group $group)
     {
-        $definitions = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id])->all();
+        $definitions = (new Query())->select("nav_id")->from("cms_nav_permission")->where(['group_id' => $group->id])->all();
         
         // the group has no permission defined, this means he can access ALL cms pages
         if (count($definitions) == 0) {
@@ -133,7 +166,7 @@ class Nav extends ActiveRecord
     
     public function hasGroupPermissionSelected(Group $group)
     {
-        $definition = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
+        $definition = (new Query())->select("inheritance")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
         
         if ($definition) {
             return true;
@@ -144,7 +177,7 @@ class Nav extends ActiveRecord
     
     public function isGroupPermissionInheritNode(Group $group)
     {
-        $definition = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
+        $definition = (new Query())->select("inheritance")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
         
         if ($definition) {
             return (bool) $definition['inheritance'];
@@ -237,7 +270,7 @@ class Nav extends ActiveRecord
      * Additional this checks for matching language contexts when comparing aliases.
      *
      * @param $currentNavId
-     * @param $targetNav
+     * @param $parentNavId
      * @return boolean|mixed returns `true` if no duplication has been found, otherwhise returns an array with the duplicated existing item.
      */
     public static function checkDuplicateAlias($currentNavId, $parentNavId)
@@ -259,6 +292,10 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toBeforeNavId);
 
+        if (!$move || !$to) {
+            return false;
+        }
+        
         $response = self::checkDuplicateAlias($move->id, $to->parent_nav_id);
         
         if ($response !== true) {
@@ -284,6 +321,10 @@ class Nav extends ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toAfterNavId);
 
+        if (!$move || !$to) {
+            return false;
+        }
+        
         $response = self::checkDuplicateAlias($move->id, $to->parent_nav_id);
         
         if ($response !== true) {
@@ -308,7 +349,10 @@ class Nav extends ActiveRecord
     {
         $move = self::findOne($moveNavId);
         $on = self::findOne($droppedOnItemId);
-
+        
+        if (!$move || !$on) {
+            return false;
+        }
 
         $response = self::checkDuplicateAlias($move->id, $on->id);
         
@@ -345,9 +389,12 @@ class Nav extends ActiveRecord
         }
     }
 
-    // create methods
-    // @todo make static, moved to helper class?
-
+    /**
+     *
+     * @param unknown $title
+     * @param unknown $langId
+     * @return boolean
+     */
     public function createDraft($title, $langId)
     {
         $_errors = [];
@@ -433,6 +480,18 @@ class Nav extends ActiveRecord
         return $sourceNavItem->copyTypeContent($navItem);
     }
 
+    /**
+     *
+     * @param unknown $parentNavId
+     * @param unknown $navContainerId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $description
+     * @param unknown $fromDraftNavId
+     * @param string $isDraft
+     * @return boolean
+     */
     public function createPageFromDraft($parentNavId, $navContainerId, $langId, $title, $alias, $description, $fromDraftNavId, $isDraft = false)
     {
         if (!$isDraft && empty($isDraft) && !is_numeric($isDraft)) {
@@ -465,6 +524,10 @@ class Nav extends ActiveRecord
         }
         if (!$navItem->validate()) {
             $errors = ArrayHelper::merge($navItem->getErrors(), $errors);
+        }
+        
+        if (empty($fromDraftNavId)) {
+            $errors['from_draft_id'] = [Module::t('model_navitempage_empty_draft_id')];
         }
 
         if (!empty($errors)) {
@@ -510,6 +573,18 @@ class Nav extends ActiveRecord
         return true;
     }
 
+    /**
+     *
+     * @param unknown $parentNavId
+     * @param unknown $navContainerId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $layoutId
+     * @param unknown $description
+     * @param string $isDraft
+     * @return boolean
+     */
     public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)
     {
         $_errors = [];
@@ -565,6 +640,16 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     *
+     * @param unknown $navId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $layoutId
+     * @param unknown $description
+     * @return boolean
+     */
     public function createPageItem($navId, $langId, $title, $alias, $layoutId, $description)
     {
         $_errors = [];
@@ -604,6 +689,17 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     *
+     * @param unknown $parentNavId
+     * @param unknown $navContainerId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $moduleName
+     * @param unknown $description
+     * @return boolean
+     */
     public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName, $description)
     {
         $_errors = [];
@@ -652,6 +748,18 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     *
+     * @param unknown $parentNavId
+     * @param unknown $navContainerId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
+     * @param unknown $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+     * @param unknown $description
+     * @return boolean
+     */
     public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
     {
         $_errors = [];
@@ -700,6 +808,16 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     *
+     * @param unknown $navId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $moduleName
+     * @param unknown $description
+     * @return boolean
+     */
     public function createModuleItem($navId, $langId, $title, $alias, $moduleName, $description)
     {
         $_errors = [];
@@ -737,6 +855,17 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     *
+     * @param unknown $navId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
+     * @param unknown $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+     * @param unknown $description
+     * @return boolean
+     */
     public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
     {
         $_errors = [];

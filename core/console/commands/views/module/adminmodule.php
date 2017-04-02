@@ -7,9 +7,9 @@ echo "<?php\n";
 namespace <?= $ns ?>\admin;
 
 /**
- * Admin module of <?= $name; ?>.
+ * <?= $name; ?> Admin Module.
  *
- * Created with LUYA Version <?= Boot::VERSION; ?> at <?= date("d.m.Y"); ?> 
+ * <?= $luyaText; ?> 
  */
 class Module extends \luya\admin\base\Module
 {

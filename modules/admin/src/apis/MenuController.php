@@ -5,32 +5,60 @@ namespace luya\admin\apis;
 use Yii;
 use luya\admin\Module;
 use luya\admin\base\RestController;
+use luya\admin\models\UserOnline;
 
 /**
  * Admin Menu API, provides all menu items and dashabord informations for a node or the entire system.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class MenuController extends RestController
 {
+    /**
+     * The index action of the menu api returns all available modules which is the top menu know as node.
+     *
+     * @return array
+     */
     public function actionIndex()
     {
         return Yii::$app->adminmenu->getModules();
     }
 
+    /**
+     * The items action returns all items for a given node.
+     *
+     * @param integer $nodeId The id of the node to find all items from.
+     * @return array
+     */
     public function actionItems($nodeId)
     {
+        UserOnline::unlock(Yii::$app->adminuser->id);
         return Yii::$app->adminmenu->getModuleItems($nodeId);
     }
 
+    /**
+     * Get all dashabord items for a given node.
+     *
+     * @param integer $nodeId The id of the node to find all items from.
+     * @return array
+     */
     public function actionDashboard($nodeId)
     {
         $data = Yii::$app->adminmenu->getNodeData($nodeId);
         $accessList = [];
 
+        // verify if no permissions has ben seet for this know or no groups are available trough permissions issues.
+        if (!isset($data['groups'])) {
+            return [];
+        }
+        
         foreach ($data['groups'] as $groupkey => $groupvalue) {
             foreach ($groupvalue['items'] as $row) {
                 if ($row['permissionIsApi']) {
+                    try {
+                        $row['alias'] = Yii::t($data['moduleId'], $row['alias'], [], Yii::$app->luyaLanguage);
+                    } catch (\Exception $e) {
+                    }
                     // @todo check if the user can access this api, otherwise hide this log informations?
                     $accessList[] = $row;
                 }

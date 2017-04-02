@@ -5,21 +5,346 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
+use yii\db\TableSchema;
 use luya\Boot;
+use luya\helpers\FileHelper;
+use luya\admin\ngrest\base\NgRestModelInterface;
+use yii\console\Exception;
 
 /**
- * NgRest Crud console commands.
+ * Console command to create a NgRest Crud with Controller, Api and Model based on a SQL Table.
+ *
+ * @property string $moduleNameWithoutAdminSuffix Get the $moduleName without admin suffix (if any).
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class CrudController extends \luya\console\Command
+class CrudController extends BaseCrudController
 {
-    private function getSqlTablesArray()
+    /**
+     * @inheritdoc
+     */
+    public $defaultAction = 'create';
+    
+    /**
+     * @var string The name of the module which should be used in order to generate the crud structure e.g `cmsadmin`.
+     */
+    public $moduleName = null;
+    
+    /**
+     * @var string The name of the model in camelcase notation e.g `NavItem`.
+     */
+    public $modelName = null;
+    
+    /**
+     * @var string The name of the API endpoint based on the modelName und moduleName selections e.g `api-cms-navitem`.
+     */
+    public $apiEndpoint = null;
+    
+    /**
+     * @var string The name of the corresponding model database table e.g. `cms_navitem`.
+     */
+    public $dbTableName = null;
+    
+    /**
+     * @var boolean Whether the i18n text fields will be casted or not.
+     */
+    public $enableI18n = null;
+    
+    /**
+     * Get the $moduleName without admin suffix (if any).
+     *
+     * @return mixed Return the module name without admin suffix.
+     */
+    public function getModuleNameWithoutAdminSuffix()
     {
-        $names = Yii::$app->db->schema->tableNames;
-        
-        return array_combine($names, $names);
+        return preg_replace('/admin$/', '', $this->moduleName);
     }
+    
+    /**
+     * Get the model name in lower case.
+     *
+     * @return string Model name in lower case
+     */
+    public function getModelNameLower()
+    {
+        return strtolower($this->modelName);
+    }
+    
+    /**
+     * Get the camlized model name.
+     *
+     * @return string Camlized model name
+     */
+    public function getModelNameCamlized()
+    {
+        return Inflector::camelize($this->modelName);
+    }
+    
+    /**
+     * Get the namepsace to the model.
+     *
+     * @return string The full namepsace with model name itself.
+     */
+    public function getAbsoluteModelNamespace()
+    {
+        return $this->getModelNamespace() . '\\models\\' . $this->getModelNameCamlized();
+    }
+    
+    /**
+     * Generate a suggestion for the api endpoint.
+     *
+     * @return string Api endpoint suggestion
+     */
+    public function getApiEndpointSuggestion()
+    {
+        return 'api-'.$this->getModuleNameWithoutAdminSuffix().'-'.$this->getModelNameLower();
+    }
+    
+    /**
+     * Generate a suggestion for the database table name.
+     *
+     * @return string The database table suggestion.
+     */
+    public function getDatabaseNameSuggestion()
+    {
+        return strtolower($this->getModuleNameWithoutAdminSuffix().'_'.Inflector::underscore($this->modelName));
+    }
+    
+    private $_dbTableShema = null;
+    
+    /**
+     * Get the database table schema.
+     *
+     * @return \yii\db\TableSchema The schmema object
+     */
+    public function getDbTableShema()
+    {
+        if ($this->_dbTableShema === null) {
+            $this->_dbTableShema = Yii::$app->db->getTableSchema($this->dbTableName, true);
+        }
+        
+        return $this->_dbTableShema;
+    }
+    
+    /**
+     * The module object.
+     *
+     * @return \luya\base\Modue The module object itself, could be the application object as well.
+     */
+    public function getModule()
+    {
+        return Yii::$app->getModule($this->moduleName);
+    }
+    
+    /**
+     * Get the base path of the module.
+     *
+     * @return string The module basepath.
+     */
+    public function getBasePath()
+    {
+        return $this->getModule()->basePath;
+    }
+    
+    private $_modelBasePath = null;
+    
+    /**
+     * Get the base path of the module.
+     *
+     * @return string The module basepath.
+     */
+    public function getModelBasePath()
+    {
+        if ($this->_modelBasePath === null) {
+            return $this->getModule()->basePath;
+        }
+    
+        return $this->_modelBasePath;
+    }
+    
+    public function setModelBasePath($path)
+    {
+        $this->_modelBasePath = $path;
+    }
+    
+    
+    /**
+     * Get the namepsace of the module.
+     *
+     * see {{luya\base\Module::getNamespace}}.
+     *
+     * @return string The module namespace.
+     */
+    public function getNamespace()
+    {
+        return $this->getModule()->getNamespace();
+    }
+    
+    private $_modelNamespace = null;
+    
+    public function getModelNamespace()
+    {
+        if ($this->_modelNamespace === null) {
+            return $this->getModule()->getNamespace();
+        }
+         
+        return $this->_modelNamespace;
+    }
+    
+    public function setModelNamespace($ns)
+    {
+        $this->_modelNamespace = $ns;
+    }
+    
+    /**
+     * Get the controller route for the summary.
+     *
+     * @return string The summary route like module/controller/action
+     */
+    public function getSummaryControllerRoute()
+    {
+        return strtolower($this->moduleName).'/'.Inflector::camel2id($this->getModelNameCamlized()).'/index';
+    }
+    
+    public function ensureBasePathAndNamespace()
+    {
+        $nsItems = explode('\\', $this->getNamespace());
+        // if there are more namespace paths then one, it means there is space for a sub folder models
+        if (count($nsItems) > 1) {
+            $items = explode(DIRECTORY_SEPARATOR, $this->getBasePath());
+            $last = array_pop($items);
+            // as now we assume we change directory to a subfolder, the removed folder name must be "admin".
+            if ($last == 'admin') {
+                array_pop($nsItems);
+                $this->modelNamespace = implode('\\', $nsItems);
+                $this->modelBasePath = implode(DIRECTORY_SEPARATOR, $items);
+            }
+        }
+    }
+    
+    /**
+     * Generate the api file content based on its view file.
+     *
+     * @param string $fileNamespace
+     * @param string $className
+     * @param string $modelClass
+     * @return string
+     */
+    public function generateApiContent($fileNamespace, $className, $modelClass)
+    {
+        $alias = Inflector::humanize(Inflector::camel2words($className));
+        return $this->view->render('@luya/console/commands/views/crud/create_api.php', [
+            'namespace' => $fileNamespace,
+            'className' => $className,
+            'modelClass' =>  $modelClass,
+            'luyaVersion' => $this->getGeneratorText('crud/create'),
+            'alias' => $alias,
+        ]);
+    }
+    
+    /**
+     * Generate the controller view file based on its view file.
+     * @param string $fileNamespace
+     * @param string $className
+     * @param string $modelClass
+     * @return string
+     */
+    public function generateControllerContent($fileNamespace, $className, $modelClass)
+    {
+        $alias = Inflector::humanize(Inflector::camel2words($className));
+        return $this->view->render('@luya/console/commands/views/crud/create_controller.php', [
+            'namespace' => $fileNamespace,
+            'className' => $className,
+            'modelClass' =>  $modelClass,
+            'luyaVersion' => $this->getGeneratorText('crud/create'),
+            'alias' => $alias,
+        ]);
+    }
+    
+    /**
+     * Generate the model content based on its view file.
+     *
+     * @param string $fileNamepsace
+     * @param string $className
+     * @param string $apiEndpoint
+     * @param \yii\db\TableSchema $schema
+     * @param boolean $i18nFields
+     * @return string
+     */
+    public function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema, $i18nFields)
+    {
+        $alias = Inflector::humanize(Inflector::camel2words($className));
+        $dbTableName = $schema->fullName;
+        
+        $fields = [];
+        $textfields = [];
+        $properties = [];
+        $ngrestFieldConfig = [];
+        foreach ($schema->columns as $k => $v) {
+            $properties[$v->name] = $v->type;
+            if ($v->isPrimaryKey) {
+                continue;
+            }
+            $fields[] = $v->name;
+            
+            if ($v->phpType == 'string') {
+                $textfields[] = $v->name;
+            }
+            
+            if ($v->type == 'text') {
+                $ngrestFieldConfig[$v->name] = 'textarea';
+            }
+            if ($v->type == 'string') {
+                $ngrestFieldConfig[$v->name] = 'text';
+            }
+            if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint') {
+                $ngrestFieldConfig[$v->name] = 'number';
+            }
+            if ($v->type == 'decimal') {
+                $ngrestFieldConfig[$v->name] = 'decimal';
+            }
+            if ($v->type == 'boolean') {
+                $ngrestFieldConfig[$v->name] = 'toggleStatus';
+            }
+        };
+        
+        return $this->view->render('@luya/console/commands/views/crud/create_model.php', [
+            'namespace' => $fileNamepsace,
+            'className' => $className,
+            'luyaVersion' => $this->getGeneratorText('crud/create'),
+            'apiEndpoint' => $apiEndpoint,
+            'dbTableName' => $dbTableName,
+            'fields' => $fields,
+            'textFields' => $textfields,
+            'rules' => $this->generateRules($schema),
+            'labels' => $this->generateLabels($schema),
+            'properties' => $properties,
+            'ngrestFieldConfig' => $ngrestFieldConfig,
+            'i18nFields' => $i18nFields,
+            'alias' => $alias,
+        ]);
+    }
+
+    /**
+     * Generate the block build summary based on its view file.
+     *
+     * @param string $apiEndpoint
+     * @param string $apiClassPath
+     * @param string $humanizeModelName
+     * @param string $controllerRoute
+     * @return string
+     */
+    public function generateBuildSummery($apiEndpoint, $apiClassPath, $humanizeModelName, $controllerRoute)
+    {
+        return $this->view->render('@luya/console/commands/views/crud/build_summary.php', [
+            'apiEndpoint' => $apiEndpoint,
+            'apiClassPath' => $apiClassPath,
+            'humanizeModelName' => $humanizeModelName,
+            'controllerRoute' => $controllerRoute,
+        ]);
+    }
+    
     /**
      * Create Ng-Rest-Model, Controller and Api for an existing Database-Table.
      *
@@ -27,223 +352,144 @@ class CrudController extends \luya\console\Command
      */
     public function actionCreate()
     {
-        $this->outputInfo("Make sure the module is added to your configuration.");
-        $module = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the crud should be stored in:']);
-        $modulePre = preg_replace('/admin$/', '', $module);
+        if ($this->moduleName === null) {
+            Console::clearScreenBeforeCursor();
+            $this->moduleName = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the CRUD files should be saved:']);
+        }
         
-        $modelSelection = true;
-        
-        while ($modelSelection) {
-            $modelName = $this->prompt('Model Name (e.g. Album):', ['required' => true]);
-            
-            $camlizeModelName = Inflector::camelize($modelName);
-            
-            if ($modelName !== $camlizeModelName) {
-                if ($this->confirm("We have camlized the model name to '$camlizeModelName' do you want to continue with this name?")) {
-                    $modelName = $camlizeModelName;
+        if ($this->modelName === null) {
+            $modelSelection = true;
+            while ($modelSelection) {
+                $modelName = $this->prompt('Model Name (e.g. Album):', ['required' => true]);
+                $camlizeModelName = Inflector::camelize($modelName);
+                if ($modelName !== $camlizeModelName) {
+                    if ($this->confirm("We have camlized the model name to '$camlizeModelName' do you want to continue with this name?")) {
+                        $modelName = $camlizeModelName;
+                        $modelSelection = false;
+                    }
+                } else {
                     $modelSelection = false;
                 }
-            } else {
-                $modelSelection = false;
+                $this->modelName = $modelName;
             }
         }
         
-        $apiEndpoint = $this->prompt('Api Endpoint:', ['required' => true, 'default' => 'api-'.$modulePre.'-'.strtolower($modelName).'']);
+        if ($this->apiEndpoint === null) {
+            $this->apiEndpoint = $this->prompt('Api Endpoint:', ['required' => true, 'default' => $this->getApiEndpointSuggestion()]);
+        }
 
-        $sqlSelection = true;
-        while ($sqlSelection) {
-            $sqlTable = $this->prompt('Database Table name:', ['required' => true, 'default' => strtolower($modulePre).'_'.Inflector::underscore($modelName)]);
-            
-            if ($sqlTable == '?') {
-                foreach ($this->getSqlTablesArray() as $table) {
-                    $this->outputInfo("- " . $table);
+        if ($this->dbTableName === null) {
+            $sqlSelection = true;
+            while ($sqlSelection) {
+                $sqlTable = $this->prompt('Database Table name for the Model:', ['required' => true, 'default' => $this->getDatabaseNameSuggestion()]);
+                if ($sqlTable == '?') {
+                    foreach ($this->getSqlTablesArray() as $table) {
+                        $this->outputInfo("- " . $table);
+                    }
                 }
-            }
-            
-            if (isset($this->getSqlTablesArray()[$sqlTable])) {
-                $sqlSelection = false;
-            } else {
-                $this->outputError("The selected database '$sqlTable' does not exists in the list of tables. Type '?' to see all tables.");
-            }
-        }
-
-        if (!$this->confirm("Create '$modelName' controller, api & model based on sql table '$sqlTable' in module '$module' for api endpoint '$apiEndpoint'?")) {
-            return $this->outputError('Crud creation aborted.');
-        }
-
-        $shema = Yii::$app->db->getTableSchema($sqlTable, true);
-
-        if (!$shema) {
-            return $this->outputError("Could not read informations from database table '$sqlTable', table does not exist.");
-        }
-
-        $yiiModule = Yii::$app->getModule($module);
-
-        $basePath = $yiiModule->basePath;
-
-        $ns = $yiiModule->getNamespace();
-
-        $modelName = ucfirst($modelName);
-        $fileName = ucfirst(strtolower($modelName));
-
-        $modelNs = '\\'.$ns.'\\models\\'.$modelName;
-        $data = [
-            'api' => [
-                'folder' => 'apis',
-                'ns' => $ns.'\\apis',
-                'file' => $fileName.'Controller.php',
-                'class' => $fileName.'Controller',
-                'route' => strtolower($module).'-'.strtolower($modelName).'-index',
-            ],
-            'controller' => [
-                'folder' => 'controllers',
-                'ns' => $ns.'\\controllers',
-                'file' => $fileName.'Controller.php',
-                'class' => $fileName.'Controller',
-            ],
-            'model' => [
-                'folder' => 'models',
-                'ns' => $ns.'\\models',
-                'file' => $modelName.'.php',
-                'class' => $modelName,
-            ],
-        ];
-        $apiClass = null;
-        foreach ($data as $name => $item) {
-            $folder = $basePath.DIRECTORY_SEPARATOR.$item['folder'];
-
-            if (!file_exists($folder)) {
-                mkdir($folder);
-            }
-
-            $extended = true;
-            
-            if (file_exists($folder.DIRECTORY_SEPARATOR.$item['file'])) {
-                if ($name == 'model') {
-                    $this->outputInfo("Mode '".$item['file']."' exists already. Created an abstract NgRest model where you can extend from.");
+                if (isset($this->getSqlTablesArray()[$sqlTable])) {
+                    $this->dbTableName = $sqlTable;
+                    $sqlSelection = false;
                 } else {
-                    $this->outputInfo("File '".$item['file']."' exists already, created a .copy file instead.");
+                    $this->outputError("The selected database '$sqlTable' does not exists in the list of tables. Type '?' to see all tables.");
                 }
-                $item['file'] = $item['file'].'.copy';
-                $extended = false;
-            }
-            
-            $content = '<?php'.PHP_EOL.PHP_EOL;
-            $content .= 'namespace '.$item['ns'].';'.PHP_EOL.PHP_EOL;
-            switch ($name) {
-
-                case 'api':
-                    $content = $this->view->render('@luya/console/commands/views/crud/create_api.php', [
-                        'className' => $item['class'],
-                        'modelClass' => $modelNs,
-                        'namespace' => $item['ns'],
-                        'luyaVersion' => Boot::VERSION,
-                    ]);
-                    break;
-
-                case 'controller':
-                    $content = $this->view->render('@luya/console/commands/views/crud/create_controller.php', [
-                        'className' => $item['class'],
-                        'modelClass' => $modelNs,
-                        'namespace' => $item['ns'],
-                        'luyaVersion' => Boot::VERSION,
-                    ]);
-                    break;
-
-                case 'model':
-
-                    if (!$extended) {
-                        $modelName = $modelName . 'NgRest';
-                        $item['file'] = $modelName . '.php';
-                        $item['class'] = $modelName;
-                    }
-                    
-                    $names = [];
-                    $allfields = [];
-                    $fieldConfigs = [];
-                    $textFields = [];
-                    $i18n = [];
-                    foreach ($shema->columns as $k => $v) {
-                        if ($v->isPrimaryKey) {
-                            continue;
-                        }
-                        
-                        $allfields[] = $v->name;
-                        $properties[$v->name] = $v->type;
-                        
-                        if ($v->type == 'text') {
-                            $fieldConfigs[$v->name] = 'textarea';
-                            $i18n[] = $v->name;
-                            $names[] = $v->name;
-                            $textFields[] = $v->name;
-                        }
-                        if ($v->type == 'string') {
-                            $fieldConfigs[$v->name] = 'text';
-                            $i18n[] = $v->name;
-                            $names[] = $v->name;
-                            $textFields[] = $v->name;
-                        }
-                        if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint') {
-                            $fieldConfigs[$v->name] = 'number';
-                            $names[] = $v->name;
-                        }
-                        
-                        if ($v->type == 'decimal') {
-                            $fieldConfigs[$v->name] = 'decimal';
-                            $names[] = $v->name;
-                        }
-                        
-                        if ($v->type == 'boolean') {
-                            $fieldConfigs[$v->name] = 'toggleStatus';
-                            $names[] = $v->name;
-                        }
-                    }
-                    
-                    $content = $this->view->render('@luya/console/commands/views/crud/create_model.php', [
-                        'className' => $item['class'],
-                        'modelClass' => $modelNs,
-                        'namespace' => $item['ns'],
-                        'luyaVersion' => Boot::VERSION,
-                        'apiEndpoint' => $apiEndpoint,
-                        'sqlTable' => $sqlTable,
-                        'fieldNames' => $names,
-                        'allFieldNames' => $allfields,
-                        'fieldConfigs' => $fieldConfigs,
-                        'i18n' => $i18n,
-                        'extended' => $extended,
-                        'textFields' => $textFields,
-                        'properties' => $properties,
-                    ]);
-                    
-                    break;
-            }
-
-            
-            
-            if (file_put_contents($folder.DIRECTORY_SEPARATOR.$item['file'], $content)) {
-                echo $this->ansiFormat('- File '.$folder.DIRECTORY_SEPARATOR.$item['file'].' created.', Console::FG_GREEN).PHP_EOL;
             }
         }
 
-        $getMenu = 'public function getMenu()
-{
-    return $this->node(\''.Inflector::humanize($modelName).'\', \'extension\') // instead of extension, choose icon from https://design.google.com/icons/
-        ->group(\'GROUP\')
-            ->itemApi(\''.Inflector::humanize($modelName).'\', \''.$data['api']['route'].'\', \'label\', \''.$apiEndpoint.'\') // instead of label, choose icon from https://design.google.com/icons/
-    ->menu();
-}
-            ';
+        if ($this->enableI18n === null) {
+            $this->enableI18n = $this->confirm("Would you like to enable i18n field input for text fields? Only required for multilingual pages.");
+        }
 
-        $mname = $this->ansiFormat($basePath.'/Module.php', Console::BOLD);
-        $a = $this->ansiFormat('$apis', Console::BOLD);
-        echo PHP_EOL.'Modify the '.$a.' var in '.$mname.' like below:'.PHP_EOL.PHP_EOL;
-        echo $this->ansiFormat('public $apis = [
-    \''.$apiEndpoint.'\' => \''.$data['api']['ns'].'\\'.$data['api']['class'].'\',
-];', Console::FG_YELLOW);
-        echo PHP_EOL.PHP_EOL.'Update the getMenu() method like below:'.PHP_EOL.PHP_EOL;
-        echo $this->ansiFormat($getMenu, Console::FG_YELLOW);
-        echo PHP_EOL;
+        $this->ensureBasePathAndNamespace();
+        
+        $files = [];
+        
+        // api content
 
-        return 0;
+        $files['api'] = [
+            'path' => $this->getBasePath() . DIRECTORY_SEPARATOR . 'apis',
+            'fileName' => $this->getModelNameCamlized() . 'Controller.php',
+            'content' => $this->generateApiContent($this->getNamespace() . '\\apis', $this->getModelNameCamlized() . 'Controller', $this->getAbsoluteModelNamespace()),
+        ];
+        
+        // controller
+
+        $files['controller'] = [
+            'path' =>  $this->getBasePath() . DIRECTORY_SEPARATOR . 'controllers',
+            'fileName' => $this->getModelNameCamlized() . 'Controller.php',
+            'content' => $this->generateControllerContent($this->getNamespace() . '\\controllers', $this->getModelNameCamlized() . 'Controller', $this->getAbsoluteModelNamespace()),
+        ];
+        
+        // model
+
+        $files['model'] = [
+            'path' =>  $this->getModelBasePath() . DIRECTORY_SEPARATOR . 'models',
+            'fileName' => $this->getModelNameCamlized() . '.php',
+            'content' => $this->generateModelContent(
+                $this->getModelNamespace() . '\\models',
+                $this->getModelNameCamlized(),
+                $this->apiEndpoint,
+                $this->getDbTableShema(),
+                $this->enableI18n
+             ),
+        ];
+        
+        foreach ($files as $file) {
+            $this->generateFile($file);
+        }
+        
+        return $this->outputSuccess($this->generateBuildSummery($this->apiEndpoint, $this->getNamespace() . '\\apis\\' . $this->getModelNameCamlized() . 'Controller', $this->getModelNameCamlized(), $this->getSummaryControllerRoute()));
+    }
+    
+    protected function generateFile(array $file)
+    {
+        FileHelper::createDirectory($file['path']);
+        if (file_exists($file['path'] . DIRECTORY_SEPARATOR . $file['fileName'])) {
+            if (!$this->confirm("The File '{$file['fileName']}' already exists, do you want to override the existing file?")) {
+                return false;
+            }
+        }
+        
+        if (FileHelper::writeFile($file['path'] . DIRECTORY_SEPARATOR . $file['fileName'], $file['content'])) {
+            $this->outputSuccess("Wrote file '{$file['fileName']}'.");
+        } else {
+            $this->outputError("Error while writing file '{$file['fileName']}'.");
+        }
+    }
+    
+    /**
+     * Generate only the ngrest model
+     *
+     * @param string $model Provide
+     */
+    public function actionModel($model = null)
+    {
+        if (!$model) {
+            $model = $this->prompt('Namespaced path to the ngrest model (e.g. "app\models\Users"):');
+        }
+        $object = Yii::createObject(['class' => $model]);
+        
+        if (!$object instanceof NgRestModelInterface) {
+            throw new Exception("Model must be instance of NgRestModelInterface.");
+        }
+        
+        $reflector = new \ReflectionClass($model);
+        $fileName = $reflector->getFileName();
+        $path = dirname($fileName);
+        $apiEndpoint = $object->ngrestApiEndpoint();
+        $i18n = !empty($object->i18n);
+        $data = [
+            'path' =>  $path,
+            'fileName' => basename($fileName),
+            'content' => $this->generateModelContent(
+                $reflector->getNamespaceName(),
+                $reflector->getShortName(),
+                $apiEndpoint,
+                Yii::$app->db->getTableSchema($object->tableName(), true),
+                $i18n
+             ),
+        ];
+        
+        $this->generateFile($data);
     }
 }

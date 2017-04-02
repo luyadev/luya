@@ -73,6 +73,7 @@ textarea.materialize-textarea {
 [type="radio"]:checked {
 	position: absolute;
 	left: -9999px;
+	top: 0;
 	visibility: hidden;
 }
 
@@ -187,6 +188,7 @@ form p:last-child {
 [type="checkbox"]:checked {
 	position: absolute;
 	left: -9999px;
+	top: 0;
 	visibility: hidden;
 }
 
@@ -318,8 +320,8 @@ form p:last-child {
 			height: 13px;
 			border-top: 2px solid transparent;
 			border-left: 2px solid transparent;
-			border-right: 2px solid $input-bg-color;
-			border-bottom: 2px solid $input-bg-color;
+			border-right: 2px solid $input-background;
+			border-bottom: 2px solid $input-background;
 			-webkit-transform: rotateZ(37deg);
 			transform: rotateZ(37deg);
 

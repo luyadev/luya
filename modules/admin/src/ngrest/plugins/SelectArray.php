@@ -10,13 +10,13 @@ use luya\helpers\ArrayHelper;
  * Example usage:
  *
  * ```
- * public function ngrestAttributeTypes()
+ * public function ngRestAttributeTypes()
  * {
  * 		'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
  * }
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class SelectArray extends Select
 {
@@ -29,10 +29,7 @@ class SelectArray extends Select
     
     public function getData()
     {
-        $cleandata = [
-            //['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
-            //['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
-        ];
+        $cleandata = [];
          
         foreach ($this->_data as $key => $value) {
             $cleandata[] = [

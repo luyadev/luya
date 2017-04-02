@@ -2,7 +2,7 @@
 
 The gallery module allows you create folders and collection and upload images to the collections. Its an easy way to create a gallery very quick and create your own view files.
 
-## Installtion
+## Installation
 
 Require the modules in your composer.json
 
@@ -41,18 +41,18 @@ As the modules are not shipped with default view files you can use the following
 
 #### cat/index.php
 
-```
+```php
 <?php foreach($catData as $item): ?>
     <div class="well">
         <h1><?php echo $item->title; ?></h1>
-        <a href="<?php echo \luya\helpers\Url::toManager('gallery/alben/index', ['catId' => $item->id, 'title' => \yii\helpers\Inflector::slug($item->title)]); ?>">Alben anzeigen</a>
+        <a href="<?php echo \luya\helpers\Url::toRoute(['/gallery/alben/index', 'catId' => $item->id, 'title' => \yii\helpers\Inflector::slug($item->title)]); ?>">Alben anzeigen</a>
     </div>
 <?php endforeach; ?>
 ```
 
 #### alben/index.php
 
-```
+```php
 <table border="1">
 <?php foreach($albenData as $item): ?>
 <tr>
@@ -72,7 +72,7 @@ As the modules are not shipped with default view files you can use the following
 
 #### album/index.php
 
-```
+```php
 <div class="well">
 <table border="1">
 <tr>

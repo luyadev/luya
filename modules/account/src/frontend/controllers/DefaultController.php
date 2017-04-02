@@ -43,7 +43,7 @@ class DefaultController extends Controller
                 $url = Yii::$app->session->get('accountRef');
                 Yii::$app->session->remove('accountRef');
             } else {
-                $url = Url::toManager('account/settings/index');
+                $url = Url::toRoute(['/account/settings/index']);
             }
             $this->redirect($url);
         }
@@ -56,7 +56,7 @@ class DefaultController extends Controller
                 if ($this->module->getUserIdentity()->login($userObject)) {
                     $url = Yii::$app->session->get('accountRef');
                     if (!$url) {
-                        $url = Url::toManager('account/settings/index');
+                        $url = Url::toRoute(['/account/settings/index']);
                     } else {
                         Yii::$app->session->remove('accountRef');
                     }

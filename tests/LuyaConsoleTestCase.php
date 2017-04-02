@@ -28,7 +28,7 @@ class LuyaConsoleTestCase extends \PHPUnit_Framework_TestCase implements LuyaTes
             $this->app = new \luya\Boot();
             $this->app->configFile = $this->getConfigFile();
             $this->app->mockOnly = true;
-            $this->app->setYiiPath('vendor/yiisoft/yii2/Yii.php');
+            $this->app->setBaseYiiFile('vendor/yiisoft/yii2/Yii.php');
             $this->app->applicationConsole();
         }
     }

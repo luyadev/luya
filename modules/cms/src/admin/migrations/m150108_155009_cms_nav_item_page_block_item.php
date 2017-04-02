@@ -5,33 +5,28 @@ use yii\db\Migration;
 
 class m150108_155009_cms_nav_item_page_block_item extends Migration
 {
-    public function up()
+    public function safeUp()
     {
-        /*
-         * @TODO make a block offline or online (for example if you drop in a block, he should be offline until you have updated it with informations.
-         * otherwise the user can see empty blocks in the frontend
-         */
         $this->createTable('cms_nav_item_page_block_item', [
-            'id' => 'pk',
-            'block_id' => Schema::TYPE_INTEGER,
-            'placeholder_var' => 'VARCHAR(80) NOT NULL',
-            'nav_item_page_id' => Schema::TYPE_INTEGER,
-            'prev_id' => Schema::TYPE_INTEGER,
-            'json_config_values' => Schema::TYPE_TEXT,
-            'json_config_cfg_values' => Schema::TYPE_TEXT,
-            'is_dirty' => 'tinyint(1) default 0',
-            'create_user_id' => 'int(11) default 0',
-            'update_user_id' => 'int(11) default 0',
-            'timestamp_create' => 'int(11) default 0',
-            'timestamp_update' => 'int(11) default 0',
-            'sort_index' => Schema::TYPE_INTEGER.' default 0',
+            'id' => $this->primaryKey(),
+            'block_id' => $this->integer(11)->notNull(),
+            'placeholder_var' => $this->string(80)->notNull(),
+            'nav_item_page_id' => $this->integer(11),
+            'prev_id' => $this->integer(11),
+            'json_config_values' => $this->text(),
+            'json_config_cfg_values' => $this->text(),
+            'is_dirty' => $this->boolean()->defaultValue(false),
+            'create_user_id' => $this->integer(11)->defaultValue(0),
+            'update_user_id' => $this->integer(11)->defaultValue(0),
+            'timestamp_create' => $this->integer(11)->defaultValue(0),
+            'timestamp_update' => $this->integer(11)->defaultValue(0),
+            'sort_index' => $this->integer(11)->defaultValue(0),
+            'is_hidden' => $this->boolean()->defaultValue(false),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m150108_155009_cms_nav_item_page_block_item cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('cms_nav_item_page_block_item');
     }
 }

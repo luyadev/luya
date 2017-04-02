@@ -16,7 +16,7 @@ use luya\admin\ngrest\base\Plugin;
  * ['timestamp', ['Date', 'emptyMessage' => 'No Date']],
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Date extends Plugin
 {
@@ -27,22 +27,18 @@ class Date extends Plugin
     public $emptyMessage = '-';
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderList()
+     * @inheritdoc
      */
     public function renderList($id, $ngModel)
     {
         return [
-            $this->createTag('span', null, ['ng-show' => $ngModel, 'ng-bind' => $ngModel.'*1000 | date : \'dd.MM.yyyy\'']),
+            $this->createTag('span', null, ['ng-show' => $ngModel, 'ng-bind' => $ngModel.'*1000 | date : \'shortDate\'']),
             $this->createTag('span', $this->emptyMessage, ['ng-show' => '!'.$ngModel]),
         ];
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderCreate()
+     * @inheritdoc
      */
     public function renderCreate($id, $ngModel)
     {
@@ -50,9 +46,7 @@ class Date extends Plugin
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderUpdate()
+     * @inheritdoc
      */
     public function renderUpdate($id, $ngModel)
     {

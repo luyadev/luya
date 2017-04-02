@@ -5,20 +5,18 @@ use yii\db\Migration;
 
 class m150106_095003_cms_layout extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('cms_layout', [
-            'id' => 'pk',
-            'name' => Schema::TYPE_STRING,
-            'json_config' => Schema::TYPE_TEXT,
-            'view_file' => Schema::TYPE_STRING,
+            'id' => $this->primaryKey(),
+            'name' => $this->string(255),
+            'json_config' => $this->text(),
+            'view_file' => $this->string(255),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m150106_095003_cms_layout cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('cms_layout');
     }
 }

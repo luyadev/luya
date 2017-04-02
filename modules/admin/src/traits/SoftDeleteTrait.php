@@ -74,12 +74,30 @@ trait SoftDeleteTrait
         return (empty($where)) ? parent::find() : parent::find()->andWhere($where);
     }
 
+    /**
+     * Overrides the {{yii\db\ActiveRecord::delete}} method.
+     *
+     * @return boolean
+     */
     public function delete()
     {
-        $this->updateAttributes(static::internalUpdateValues());
-        return true;
+        $result = false;
+        
+        if ($this->beforeDelete()) {
+            $this->updateAttributes(static::internalUpdateValues());
+            $result = true;
+        }
+        
+        return $result;
     }
     
+    
+    
+    /**
+     * Evalate the values to update.
+     *
+     * @return array
+     */
     private static function internalUpdateValues()
     {
         $update = [];

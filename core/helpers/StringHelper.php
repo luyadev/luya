@@ -3,32 +3,75 @@
 namespace luya\helpers;
 
 /**
- * String Helper additional to Yii base String Helper
+ * Helper methods when dealing with Strings.
+ *
+ * Extends the {{yii\helpers\StringHelper}} class by some usefull functions like:
+ *
+ * + {{luya\helpers\StringHelper::typeCast}}
+ * + {{luya\helpers\StringHelper::replaceFirst}}
+ * + {{luya\helpers\StringHelper::contains}}
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta7
+ * @since 1.0.0
  */
-class StringHelper extends \yii\helpers\StringHelper
+class StringHelper extends \yii\helpers\BaseStringHelper
 {
     /**
-     * TypeCast a string to its specific type, arrays will passed to arrayhelper::typeCast method.
+     * TypeCast a string to its specific types.
      *
-     * @param mixed $string The input string to typecase
-     * @return mixed The typecased value
+     * Arrays will passed to to the {{luya\helpers\ArrayHelper::typeCast}} class.
+     *
+     * @param mixed $string The input string to type cast. Arrays will be passted to {{luya\helpers\ArrayHelper::typeCast}}.
+     * @return mixed The new type casted value, if the input is an array the output is the typecasted array.
      */
     public static function typeCast($string)
     {
         if (is_numeric($string)) {
-            if (is_float($string)) {
-                return (float)$string;
-            } else {
-                return (int)$string;
-            }
+            return static::typeCastNumeric($string);
         } elseif (is_array($string)) {
             return ArrayHelper::typeCast($string);
         }
         
         return $string;
+    }
+    
+    /**
+     * TypeCast a numeric value to float or integer.
+     *
+     * If the given value is not a numeric or float value it will be returned as it is. In order to find out whether its float
+     * or not use {{luya\helpers\StringHelper::isFloat}}.
+     *
+     * @param mixed $value The given value to parse.
+     * @return mixed Returns the original value if not numeric or integer, float casted value.
+     */
+    public static function typeCastNumeric($value)
+    {
+        if (!self::isFloat($value)) {
+            return $value;
+        }
+        
+        if (intval($value) == $value) {
+            return (int) $value;
+        }
+        
+        return (float) $value;
+    }
+    
+    /**
+     * Checks whether a string is a float value.
+     *
+     * Compared to `is_float` function of php, it only ensures whether the input variable is type float.
+     *
+     * @param mixed $value The value to check whether its float or not.
+     * @return boolean Whether its a float value or not.
+     */
+    public static function isFloat($value)
+    {
+        if (is_float($value)) {
+            return true;
+        }
+        
+        return ($value == (string)(float) $value);
     }
     
     /**
@@ -40,10 +83,10 @@ class StringHelper extends \yii\helpers\StringHelper
      * StringHelper::replaceFirst('abc', '123', 'abc abc abc'); // returns "123 abc abc"
      * ```
      *
-     * @param string $search The string you want to find
-     * @param string $replace The string you want to replace the first occurrence with.
+     * @param string $search Search string to look for.
+     * @param string $replace Replacement value for the first found occurrence.
      * @param string $subject The string you want to look up to replace the first element.
-     * @return mixed
+     * @return mixed Replaced string
      * @since 1.0.0-rc1
      */
     public static function replaceFirst($search, $replace, $subject)

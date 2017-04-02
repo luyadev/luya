@@ -3,9 +3,9 @@
 namespace luya\cms\base;
 
 use yii\base\Object;
+use yii\base\InvalidConfigException;
 use luya\cms\base\BlockInterface;
 use luya\cms\base\InternalBaseBlock;
-use yii\base\InvalidConfigException;
 
 /**
  * The base injector class for all Injectors.
@@ -46,7 +46,12 @@ abstract class BaseBlockInjector extends Object
     /**
      * @var string The type of variable is used for the inject. can be either var or cfg.
      */
-    public $type = InternalBaseBlock::VAR_INJECTOR;
+    public $type = InternalBaseBlock::INJECTOR_VAR;
+    
+    /**
+     * @var boolean Whether the variable should be at the start (prepand) or end (append) of the configration.
+     */
+    public $append = false;
     
     private $_context = null;
     
@@ -78,11 +83,11 @@ abstract class BaseBlockInjector extends Object
      */
     public function getContextConfigValue($varName, $defaultValue = null)
     {
-        if ($this->type == InternalBaseBlock::VAR_INJECTOR) {
+        if ($this->type == InternalBaseBlock::INJECTOR_VAR) {
             return $this->context->getVarValue($varName, $defaultValue);
         }
         
-        if ($this->type == InternalBaseBlock::CFG_INJECTOR) {
+        if ($this->type == InternalBaseBlock::INJECTOR_CFG) {
             return $this->context->getCfgValue($varName, $defaultValue);
         }
             
@@ -97,12 +102,12 @@ abstract class BaseBlockInjector extends Object
      */
     public function setContextConfig(array $config)
     {
-        if ($this->type == InternalBaseBlock::VAR_INJECTOR) {
-            return $this->context->addVar($config);
+        if ($this->type == InternalBaseBlock::INJECTOR_VAR) {
+            return $this->context->addVar($config, $this->append);
         }
          
-        if ($this->type == InternalBaseBlock::CFG_INJECTOR) {
-            return $this->context->addCfg($config);
+        if ($this->type == InternalBaseBlock::INJECTOR_CFG) {
+            return $this->context->addCfg($config, $this->append);
         }
         
         throw new InvalidConfigException("The type '{$this->type}' is not supported.");

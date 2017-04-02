@@ -53,6 +53,6 @@ class LinkInjectorTestBlock extends \luya\cms\base\PhpBlock
      */
     public function admin()
     {
-        return '<p>Block Admin</p>';
+        return '<p>{{ dump(extras.link) }}</p>';
     }
 }

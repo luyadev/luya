@@ -17,8 +17,8 @@ class I18n
     /**
      * Encode from PHP to Json
      *
-     * @param string|array $field
-     * @return string Returns a string
+     * @param string|array $value The value to encode from php to json.
+     * @return string Returns the json encoded string.
      */
     public static function encode($value)
     {
@@ -28,10 +28,9 @@ class I18n
     /**
      * Decode from Json to PHP
      *
-     * @param string|array $field The value to decode (or if alreay is an array already)
+     * @param string|array $value The value to decode from json to php.
      * @param string $onEmptyValue Defines the value if the language could not be found and a value will be returns, this value will be used.
-     *
-     * @return array returns an array with decoded field value
+     * @return array Return the decoded php value.
      */
     public static function decode($value, $onEmptyValue = '')
     {
@@ -69,16 +68,84 @@ class I18n
     }
     
     /**
+     * Decode an arry with i18n values.
+     *
+     * In order to decode an arry with json values you can use this function istead of iterator trough
+     * the array items by yourself and calling {{luya\admin\helpers\I18n::decode}}.
+     *
+     * ```php
+     * $array = ['{"de:"Hallo","en":"Hello"}', '{"de:"Ja","en":"Yes"}'];
+     *
+     * $decoded = I18n::decodeArray($array);
+     *
+     * print_r($decoded); // Dumps: [0 => ['de' => 'Hallo', 'en' => 'Hello'], 1 => ['de' => 'Ja', 'en' => 'Yes']]; if default language is English.
+     * ```
+     *
+     * @param array $array The array to iterator trough and call the {{luya\admin\helpers\I18n::decode}} on its value.
+     * @param string $onEmptyValue If the decoded value is not existing or empty, this default value will be used instead of null.
+     */
+    public static function decodeArray(array $array, $onEmptyValue = '')
+    {
+        $decoded = [];
+        foreach ($array as $key => $value) {
+            $decoded[$key] = static::decode($value, $onEmptyValue);
+        }
+        
+        return $decoded;
+    }
+    
+    /**
      * Find the corresponding element inside an array for the current active language
      *
      * @param array $fieldValues The array you want to to find the current
      * @param mixed $onEmptyValue The value you can set when the language could not be found
      * @return string|unknown
      */
-    public static function findCurrent(array $fieldValues, $onEmptyValue = '')
+    public static function findActive(array $fieldValues, $onEmptyValue = '')
     {
         $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
     
         return (array_key_exists($langShortCode, $fieldValues)) ? $fieldValues[$langShortCode] : $onEmptyValue;
+    }
+
+    /**
+     * Find the corresponding element inside an array for the current active language
+     *
+     * @param array $fieldValues The array you want to to find the current
+     * @param mixed $onEmptyValue The value you can set when the language could not be found
+     * @return string
+     */
+    public static function findActiveArray(array $array, $onEmptyValue = '')
+    {
+        $output = [];
+        foreach ($array as $key => $value) {
+            $output[$key] = static::findActive($value, $onEmptyValue);
+        }
+        
+        return $output;
+    }
+    
+    /**
+     * Decodes a json string and returns the current active language item.
+     *
+     * @param string $input
+     * @param string $onEmptyValue
+     * @return string
+     */
+    public static function decodeActive($input, $onEmptyValue = '')
+    {
+        return static::findActive(static::decode($input, $onEmptyValue));
+    }
+    
+    /**
+     * Decodes an array with json strings and returns the current active language item for each entry.
+     *
+     * @param array $input
+     * @param unknown $onEmptyValue
+     * @return array
+     */
+    public static function decodeActiveArray(array $input, $onEmptyValue = '')
+    {
+        return static::findActiveArray(static::decodeArray($input, $onEmptyValue));
     }
 }

@@ -4,6 +4,8 @@ namespace luya\cms\admin\importers;
 
 use Yii;
 use luya\console\Importer;
+use luya\cms\models\Property as CmsProperty;
+use luya\admin\models\Property as AdminProperty;
 
 class PropertyConsistencyImporter extends Importer
 {
@@ -11,12 +13,11 @@ class PropertyConsistencyImporter extends Importer
 
     public function run()
     {
-        $query = Yii::$app->db->createCommand('SELECT * FROM cms_nav_property')->queryAll();
-        foreach ($query as $row) {
-            $exists = Yii::$app->db->createCommand('SELECT * FROM admin_property WHERE id=:id')->bindParam(':id', $row['admin_prop_id'])->queryOne();
-            if (!$exists) {
-                Yii::$app->db->createCommand()->delete('cms_nav_property', ['id' => $row['id']])->execute();
-                $this->addLog('removed old cms property with value '.$row['value']);
+        foreach (CmsProperty::find()->all() as $cmsPropertyModel) {
+            $adminProperty = AdminProperty::findOne($cmsPropertyModel->admin_prop_id);
+            if (!$adminProperty) {
+                $cmsPropertyModel->delete();
+                $this->addLog('Old property values has been removed due to not existing property object.');
             }
         }
     }

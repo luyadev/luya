@@ -3,9 +3,17 @@
 namespace luya\helpers;
 
 /**
- * Extend the Yii Array Helper class
+ * Helper methods when dealing with Arrays.
  *
- * @author nadar
+ * Extends the {{yii\helpers\ArrayHelper}} class by some usefull functions like:
+ *
+ * + {{luya\helpers\ArrayHelper::toObject}}
+ * + {{luya\helpers\ArrayHelper::arrayUnshiftAssoc}}
+ * + {{luya\helpers\ArrayHelper::typeCast}}
+ * + {{luya\helpers\ArrayHelper::search}}
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ArrayHelper extends \yii\helpers\BaseArrayHelper
 {
@@ -25,7 +33,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      *
      * @param array $arr The array where the value should be prepend
      * @param string $key The new array key
-     * @param mix $val The value for the new key
+     * @param mixed $val The value for the new key
      * @return array
      */
     public static function arrayUnshiftAssoc(&$arr, $key, $val)
@@ -49,11 +57,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
         
         foreach ($array as $k => $v) {
             if (is_numeric($v)) {
-                if (is_float($v)) {
-                    $return[$k] = (float)$v;
-                } else {
-                    $return[$k] = (int)$v;
-                }
+                $return[$k] = StringHelper::typeCastNumeric($v);
             } elseif (is_array($v)) {
                 $return[$k] = self::typeCast($v);
             } else {
@@ -66,24 +70,24 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     
     /**
      * Search trough all keys inside of an array, any occurence will return the rest of the array.
-     * 
+     *
      * ```php
      * $data  = [
      *     ['name' => 'Foo Bar', 'id' => 1],
      *     ['name' => 'Bar Baz', 'id' => 2],
      * ];
      * ```
-     * 
+     *
      * Assuming the above array parameter searching for `1` would return:
-     * 
+     *
      * ```php
      * $data  = [
      *     ['name' => 'Foo Bar', 'id' => 1],
      * ];
      * ```
-     * 
+     *
      * Searching for the string `Bar` would return the the orignal array is bar would be found in both.
-     * 
+     *
      * @param array $array The multidimensional array keys.
      * @param string $searchText The text you where search inside the rows.
      * @param boolean $sensitive Whether to use strict sensitive search (true) or case insenstivie search (false).
@@ -92,7 +96,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     public static function search($array, $searchText, $sensitive = false)
     {
         $function = ($sensitive) ? 'strpos' : 'stripos';
-        return array_filter($array, function($item) use ($searchText, $function) {
+        return array_filter($array, function ($item) use ($searchText, $function) {
             $response = false;
             foreach ($item as $key => $value) {
                 if ($response) {
@@ -101,7 +105,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
                 if ($function($value, "$searchText") !== false) {
                     $response = true;
                 }
-            }            
+            }
             return $response;
         });
     }

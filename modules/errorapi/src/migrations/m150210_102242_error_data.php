@@ -5,20 +5,18 @@ use yii\db\Migration;
 
 class m150210_102242_error_data extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('error_data', [
-            'id' => 'pk',
-            'identifier' => Schema::TYPE_STRING,
-            'error_json' => Schema::TYPE_TEXT,
-            'timestamp_create' => Schema::TYPE_INTEGER,
+            'id' => $this->primaryKey(),
+            'identifier' => $this->string(255),
+            'error_json' => $this->text(),
+            'timestamp_create' => $this->integer(11)->defaultValue(0),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m150210_102242_error_data cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('error_data');
     }
 }

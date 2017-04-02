@@ -56,8 +56,8 @@ use luya\traits\CacheableTrait;
  * }
  * ```
  *
- * @since 1.0.0-beta7
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ResponseCache extends ActionFilter
 {
@@ -83,9 +83,9 @@ class ResponseCache extends ActionFilter
     public $duration = 0;
     
     /**
-     * @var array|Dependency the dependency that the cached content depends on.
+     * @var array|\yii\caching\Dependency The dependency that the cached content depends on.
+     *
      * This can be either a [[Dependency]] object or a configuration array for creating the dependency object.
-     * For example,
      *
      * ```php
      * [
@@ -114,12 +114,33 @@ class ResponseCache extends ActionFilter
      * written as `get-data`.
      */
     public $actions = [];
+
+    /**
+     * @var array Define an array with the action and a callback which will be trigger event when cached.
+     *
+     * ```php
+     * 'actionsCallable' => ['get-posts' => function($result) {
+     *     // do something whether is the response cached or not
+     * });
+     * ```
+     */
+    public $actionsCallable = [];
     
     /**
-     * This method will be applied before the action runs in order to determine whether this action should be cached or not.
+     * call the action callable if available.
      *
-     * {@inheritDoc}
-     * @see \yii\base\ActionFilter::beforeAction()
+     * @param string $action The action ID name
+     * @param string $result The cahed or not cached action response, this is a string as its after the action filters.
+     */
+    private function callActionCallable($action, $result)
+    {
+        if (isset($this->actionsCallable[$action]) && is_callable($this->actionsCallable[$action])) {
+            call_user_func($this->actionsCallable[$action], $result);
+        }
+    }
+    
+    /**
+     * @inheritdoc
      */
     public function beforeAction($action)
     {
@@ -131,9 +152,14 @@ class ResponseCache extends ActionFilter
         $response = Yii::$app->getResponse();
         
         if ($cache !== false) {
+            $this->callActionCallable($action->id, $cache);
             $response->content = $cache;
             return $response->send();
         }
+        
+        $response->on(Response::EVENT_AFTER_SEND, function ($event) use ($action) {
+            $this->callActionCallable($action->id, $event->sender->content);
+        });
         
         $response->on(Response::EVENT_AFTER_SEND, [$this, 'cacheResponseContent']);
         
@@ -144,7 +170,6 @@ class ResponseCache extends ActionFilter
      * Will be executed after the Response Object has send its content.
      *
      * @param \yii\web\ResponseEvent $event
-     * @return void
      */
     public function cacheResponseContent($event)
     {

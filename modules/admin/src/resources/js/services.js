@@ -62,8 +62,8 @@ zaa.factory("ServiceFoldersData", function($http, $q, $rootScope) {
 			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-admin-storage/data-folders").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-admin-storage/data-folders").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:FoldersData', service.data);
 					resolve(service.data);
 				});
@@ -98,8 +98,8 @@ zaa.factory("ServiceFoldersDirecotryId", function($http, $q, $rootScope) {
 			if (service.folderId !== false && forceReload !== true) {
 				resolve(service.folderId);
 			} else {
-				$http.get("admin/api-admin-common/get-filemanager-folder-state").success(function(response) {
-					service.folderId = response;
+				$http.get("admin/api-admin-common/get-filemanager-folder-state").then(function(response) {
+					service.folderId = response.data;
 					$rootScope.$broadcast('service:FoldersDirectoryId', service.folderId);
 					resolve(service.folderId);
 				});
@@ -126,15 +126,15 @@ $scope.imagesDataReload = function() {
 zaa.factory("ServiceImagesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-admin-storage/data-images").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-admin-storage/data-images").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:ImagesData', service.data);
 					resolve(service.data);
 				});
@@ -161,15 +161,15 @@ $scope.filesDataReload = function() {
 zaa.factory("ServiceFilesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-admin-storage/data-files").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-admin-storage/data-files").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:FilesData', service.data);
 					resolve(service.data);
 				});
@@ -203,8 +203,8 @@ zaa.factory("ServiceFiltersData", function($http, $q, $rootScope) {
 			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-admin-storage/data-filters").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-admin-storage/data-filters").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:FiltersData', service.data);
 					resolve(service.data);
 				});
@@ -238,8 +238,8 @@ zaa.factory("ServiceLanguagesData", function($http, $q, $rootScope) {
 			if (service.data.length > 0 && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-admin-common/data-languages").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-admin-common/data-languages").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:LanguagesData', service.data);
 					resolve(service.data);
 				})
@@ -266,20 +266,48 @@ $scope.propertiesDataReload = function() {
 zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
-				$http.get("admin/api-admin-common/data-properties").success(function(response) {
-					service.data = response;
+				$http.get("admin/api-admin-common/data-properties").then(function(response) {
+					service.data = response.data;
 					$rootScope.$broadcast('service:PropertiesData', service.data);
 					resolve(service.data);
 				})
 			}
 		});
+	};
+	
+	return service;
+});
+
+zaa.factory("CrudTabService", function() {
+	
+	var service = [];
+	
+	service.tabs = [];
+	
+	service.remove = function(index, $scope) {
+		service.tabs.splice(index, 1);
+		
+		if (service.tabs.length > 0) {
+			var lastTab = service.tabs.slice(-1)[0];
+			lastTab.active = true;
+		} else {
+			$scope.switchTo(0);
+		}
+	};
+	
+	service.addTab = function(id, api, arrayIndex, name, modelClass) {
+		service.tabs.push({id: id, api: api, arrayIndex: arrayIndex, active: false, name: name, modelClass:modelClass});
+	};
+	
+	service.clear = function() {
+		service.tabs = [];
 	};
 	
 	return service;
@@ -365,7 +393,7 @@ AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds'
 
 AdminToastService.confirm('Hello i am a callback and wait for your', function($q, $http) {
 	// do some ajax call
-	$http.get().success(function() {
+	$http.get().then(function() {
 		promise.resolve();
 	}).error(function() {
 		promise.reject();

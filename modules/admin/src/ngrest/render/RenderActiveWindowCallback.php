@@ -10,7 +10,7 @@ use luya\admin\ngrest\base\Render;
 
 /**
  * @todo sanitize post (\yii\helpers\HtmlPurifier::process(...)
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class RenderActiveWindowCallback extends Render implements RenderInterface
 {
@@ -27,6 +27,8 @@ class RenderActiveWindowCallback extends Render implements RenderInterface
         
         $obj = Yii::createObject($activeWindows[$activeWindowHash]['objectConfig']);
         $obj->setItemId(Yii::$app->session->get($activeWindowHash));
+        $obj->setConfigHash($this->config->getHash());
+        $obj->setActiveWindowHash($activeWindowHash);
 
         $function = 'callback'.Inflector::id2camel($activeWindowCallback);
 

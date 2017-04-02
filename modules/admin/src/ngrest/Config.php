@@ -5,6 +5,7 @@ namespace luya\admin\ngrest;
 use Exception;
 use luya\helpers\ArrayHelper;
 use yii\base\Object;
+use luya\admin\Module;
 
 /**
  * Defines and holds an NgRest Config.
@@ -55,12 +56,18 @@ class Config extends Object implements ConfigInterface
     
     public $attributeGroups = false;
     
+    public $relations = [];
+    
     public $groupByField = false;
+
+    public $tableName = null;
     
     public $apiEndpoint = null;
 
     public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */
 
+    public $relationCall = false;
+    
     public function getDefaultOrderField()
     {
         if ($this->defaultOrder === null) {
@@ -273,7 +280,7 @@ class Config extends Object implements ConfigInterface
         if (!$this->hasField('list', $this->primaryKey)) {
             $this->addField('list', $this->primaryKey, [
                 'name' => $this->primaryKey,
-                'alias' => 'ID',
+                'alias' => Module::t('model_pk_id'),
                 'type' => [
                     'class' => 'luya\admin\ngrest\plugins\Text',
                     'args' => [],

@@ -15,6 +15,6 @@ class ExceptionTest extends \luyatests\LuyaWebTestCase
     public function testNameException()
     {
         $e = new \luya\Exception('fixme');
-        $this->assertEquals('Luya Exception', $e->getName());
+        $this->assertEquals('LUYA Exception', $e->getName());
     }
 }

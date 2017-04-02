@@ -3,6 +3,7 @@
 namespace luya\admin\image;
 
 use Yii;
+use luya\admin\storage\ItemAbstract;
 
 /**
  * Image Item Detail Object.
@@ -16,16 +17,14 @@ use Yii;
  * @property string $source The source of the image where you can access the image by the web.
  * @property string $serverSource The source to the image internal used on the Server.
  * @property boolean $fileExists Return boolean whether the file server source exsits on the server or not.
- * @property string $resolutionWidth Get the image resolution width.
- * @property string $resolutionHeight Get the image resolution height.
+ * @property integer $resolutionWidth Get the image resolution width.
+ * @property integer $resolutionHeight Get the image resolution height.
  * @property \admin\file\Item $file The file object where the image was created from.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Item extends \yii\base\Object
+class Item extends ItemAbstract
 {
-    use \luya\admin\storage\ItemTrait;
-    
     private $_file = null;
     
     private $_caption = null;
@@ -63,7 +62,7 @@ class Item extends \yii\base\Object
      */
     public function getId()
     {
-        return $this->itemArray['id'];
+        return (int) $this->itemArray['id'];
     }
     
     /**
@@ -73,7 +72,7 @@ class Item extends \yii\base\Object
      */
     public function getFileId()
     {
-        return $this->itemArray['file_id'];
+        return (int) $this->itemArray['file_id'];
     }
 
     /**
@@ -83,7 +82,7 @@ class Item extends \yii\base\Object
      */
     public function getFilterId()
     {
-        return $this->itemArray['filter_id'];
+        return (int) $this->itemArray['filter_id'];
     }
     
     /**
@@ -126,33 +125,33 @@ class Item extends \yii\base\Object
      */
     public function getFileExists()
     {
-        return file_exists($this->getServerSource());
+        return (bool) file_exists($this->getServerSource());
     }
     
     /**
      * Get the image resolution width in Pixel.
      *
-     * @return string Get the width in Pixel.
+     * @return integer Get the width in Pixel.
      */
     public function getResolutionWidth()
     {
-        return $this->itemArray['resolution_width'];
+        return (int) $this->itemArray['resolution_width'];
     }
     
     /**
      * Get the image resolution height in Pixel.
      *
-     * @return string Get the height in Pixel.
+     * @return integer Get the height in Pixel.
      */
     public function getResolutionHeight()
     {
-        return $this->itemArray['resolution_height'];
+        return (int) $this->itemArray['resolution_height'];
     }
     
     /**
      * Get image depending file object where the image was create from, its like the original Source
      *
-     * @return \admin\file\Item
+     * @return \luya\admin\file\Item
      */
     public function getFile()
     {
@@ -167,31 +166,18 @@ class Item extends \yii\base\Object
      * Apply a new filter for the original ussed file and return the new created image object.
      *
      * @param string $filterName The name of a filter like `tiny-thumbnail` or a custom filter you have defined in your filters list.
-     * @return boolean|\admin\image\Item Returns boolean or image item object if its found.
+     * @return boolean|\luya\admin\image\Item Returns boolean or image item object if its found.
      */
     public function applyFilter($filterName)
     {
-        return ($filterItem = Yii::$app->storage->getFiltersArrayItem($filterName)) ? Yii::$app->storage->addImage($this->getFileId(), $filterItem['id']) : false;
+        return ($filterItem = Yii::$app->storage->getFiltersArrayItem($filterName)) ? Yii::$app->storage->addImage($this->getFileId(), $filterItem['id'], !YII_ENV_PROD) : false;
     }
     
     /**
-     * Convert the Object informations into an Array.
-     *
-     * Sometimes you may want to retrieve all informations about the image item within an array, there the
-     * toArray method is used.
-     *
-     * @return array An array with all available methods as key and corresponding output.
+     * @inheritdoc
      */
-    public function toArray()
+    public function fields()
     {
-        return [
-            'id' => $this->getId(),
-            'fileId' => $this->getFileId(),
-            'filterId' => $this->getFilterId(),
-            'source' => $this->getSource(),
-            'serverSource' => $this->getServerSource(),
-            'resolutionWidth' => $this->getResolutionWidth(),
-            'resolutionHeight' => $this->getResolutionHeight(),
-        ];
+        return ['id', 'fileId', 'filterId', 'source', 'serverSource', 'resolutionWidth', 'resolutionHeight'];
     }
 }

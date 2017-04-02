@@ -13,15 +13,27 @@ class AdminTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->mockApp();
     }
+
+    public function getConfigArray()
+    {
+        return include(__DIR__ .'/data/configs/admin.php');
+    }
     
     public function mockApp()
     {
         if ($this->app === null) {
             $this->app = new \luya\Boot();
-            $this->app->configFile = __DIR__ .'/data/configs/admin.php';
+            $this->app->setConfigArray($this->getConfigArray());
             $this->app->mockOnly = true;
-            $this->app->setYiiPath(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
+            $this->app->setBaseYiiFile(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
             $this->app->applicationWeb();
         }
+    }
+    
+    protected function removeNewline($text)
+    {
+        $text = trim(preg_replace('/\s+/', ' ', $text));
+        
+        return str_replace(['> ', ' <'], ['>', '<'], $text);
     }
 }

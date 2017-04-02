@@ -6,8 +6,9 @@ use luya\cms\base\Block;
 use cmstests\data\blocks\TestBlock;
 use cmstests\data\blocks\FailureBlock;
 use cmstests\CmsFrontendTestCase;
+use luya\cms\base\PhpBlock;
 
-class GetterSetter extends Block
+class GetterSetter extends PhpBlock
 {
     public function extraVars()
     {
@@ -28,12 +29,7 @@ class GetterSetter extends Block
         ];
     }
 
-    public function twigFrontend()
-    {
-        return '';
-    }
-
-    public function twigAdmin()
+    public function admin()
     {
         return '';
     }
@@ -53,11 +49,8 @@ class BlockTest extends CmsFrontendTestCase
         $this->assertEquals(false, $block->isAdminContext());
         $this->assertEquals(false, $block->isFrontendContext());
 
-        $this->assertEquals('TestBlock.twig', $block->getViewFileName('twig'));
-        $this->assertEquals('twig-frontend', $block->renderFrontend());
-        $this->assertEquals('<i class="material-icons">test-icon</i> <span>Test</span>', $block->getFullName());
 
-        foreach ($block->getVars() as $var) {
+        foreach ($block->getConfigVarsExport() as $var) {
             $this->assertArrayHasKey('id', $var);
             $this->assertArrayHasKey('var', $var);
             $this->assertArrayHasKey('label', $var);
@@ -67,7 +60,7 @@ class BlockTest extends CmsFrontendTestCase
             $this->assertArrayHasKey('initvalue', $var);
         }
 
-        foreach ($block->getCfgs() as $var) {
+        foreach ($block->getConfigCfgsExport() as $var) {
             $this->assertArrayHasKey('id', $var);
             $this->assertArrayHasKey('var', $var);
             $this->assertArrayHasKey('label', $var);
@@ -88,8 +81,8 @@ class BlockTest extends CmsFrontendTestCase
         $block->setVarValues(['var1' => 'content var 1', 'var2' => 'content var 2']);
         $block->setCfgValues(['cfg1' => 'content cfg 1']);
 
-        $this->assertEquals('content var 1', $block->twigAdmin()[0]);
-        $this->assertEquals('content var 2', $block->twigAdmin()[1]);
+        $this->assertEquals('content var 1', $block->admin()[0]);
+        $this->assertEquals('content var 2', $block->admin()[1]);
     }
 
     /**
@@ -99,7 +92,7 @@ class BlockTest extends CmsFrontendTestCase
     {
         $block = new FailureBlock();
         // will throw Exception:  Required attributes in config var element is missing. var, label and type are required.
-        $block->getVars();
+        $block->getConfigVarsExport();
     }
 
     public function testGetterSetter()
@@ -109,8 +102,7 @@ class BlockTest extends CmsFrontendTestCase
         $a = $gs->config();
         $b = $gs->name();
         $c = $gs->extraVars();
-        $d = $gs->twigAdmin();
-        $e = $gs->twigFrontend();
+        $d = $gs->admin();
 
         $gs->setPlaceholderValues(['blabl' => 'Gandalf ist mein Vorbild']);
     }

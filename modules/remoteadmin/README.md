@@ -12,7 +12,7 @@ REMOTE ADMIN
 
 We will add more features in future, to make the [LUYA](https://github.com/zephir/luya#readme) control panel a powerfull tool!
 
-![Remote Admin](remote-admin.png)
+![Remote Admin](https://raw.githubusercontent.com/luyadev/luya-module-remoteadmin/master/remote-admin.png)
 
 How to
 ------

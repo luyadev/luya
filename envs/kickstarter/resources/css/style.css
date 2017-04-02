@@ -2,74 +2,37 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-#header {
-    background-color:#90caf9 ;
-}
-
-#header h1 {
-    padding:10px 0px; color:white; margin:0px; font-weight:400;
-}
-
-#header h2 {
-    padding:10px 0px; color:white; margin:0px; font-weight:200; font-size:18px;
-}
-
-#header h1 small {
-    font-weight:300; font-size:18px;
-}
-
-#header .git {
-    margin-top:20px;
-}
-
-#nav {
-    background-color:#e3f2fd; padding:10px;
-}
-
-#nav ul {
-    list-style-type:none; margin:0px; padding:0px;
-}
-
-#nav ul li a {
-    display:block; padding:10px; color:#0d47a1;
-}
-
-#nav ul .active, #nav ul li a:hover {
-    background-color:#FFF; text-decoration:none; color:black;
-}
-
-#nav ul ul {
-    margin-left:20px;
-}
-
-#nav ul .active {
-    font-weight:600;
-}
-
 #content {
-    min-height:450px; margin-top:20px;
+   margin-top:20px;
 }
 
-#content h1 {
-    font-weight:600; color:black;
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
 }
 
-#content h2 {
-    font-weight:400; color:#333;
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #ff9058;
 }
 
-#content p {
-    font-weight:300; font-size:19px;
+.footer .text-muted {
+    margin:20px 0px; color:white;
 }
 
-#footer {
-    margin-top:20px;
+.footer .text-muted a {
+   color:white; text-decoration:underline;
 }
 
-#footer h4 {
-    font-weight:400; color:#333; margin-top:20px; font-size:15px; text-transform:uppercase;
-}
-
-#footer .divider {
-    border-top:1px solid #e3f2fd;
+.active a {
+    background-color: #ff9058 !important;
+    color:white !important;
 }

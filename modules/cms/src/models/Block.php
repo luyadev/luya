@@ -9,6 +9,9 @@ use luya\admin\ngrest\base\NgRestModel;
 /**
  * Block ActiveRecord contains the Block<->Group relation.
  *
+ * @property integer $id
+ * @property integer $group_id
+ * @property string $class
  * @author Basil Suter <basil@nadar.io>
  */
 class Block extends NgRestModel
@@ -25,11 +28,23 @@ class Block extends NgRestModel
         return 'cms_block';
     }
     
-    public function ngrestAttributeTypes()
+    public function extraFields()
+    {
+        return ['usageCount'];
+    }
+    
+    public function ngRestAttributeTypes()
     {
         return [
             'group_id' => ['selectModel', 'modelClass' => BlockGroup::className(), 'valueField' => 'id', 'labelField' => 'name'],
             'class' => 'text',
+        ];
+    }
+    
+    public function ngRestExtraAttributeTypes()
+    {
+        return [
+            'usageCount' => 'number',
         ];
     }
     
@@ -38,29 +53,31 @@ class Block extends NgRestModel
         return [
             'group_id' => 'Group',
             'class' => 'Object Class',
+            'usageCount' => 'Used in Content'
         ];
     }
 
     public function ngRestConfig($config)
     {
-        $this->ngRestConfigDefine($config, ['list'], ['group_id', 'class']);
+        $this->ngRestConfigDefine($config, ['list'], ['group_id', 'class', 'usageCount']);
         
         return $config;
     }
 
+    public function getUsageCount()
+    {
+        return NavItemPageBlockItem::find()->where(['block_id' => $this->id])->count();
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['class', 'group_id'], 'required'],
-        ];
-    }
-
-    public function scenarios()
-    {
-        return [
-            'commandinsert' => ['class', 'group_id'],
-            'restcreate' => ['class', 'group_id'],
-            'restupdate' => ['class', 'group_id'],
+            [['group_id', 'class'], 'required'],
+            [['group_id'], 'integer'],
+            [['class'], 'string', 'max' => 255],
         ];
     }
     
@@ -112,8 +129,17 @@ class Block extends NgRestModel
         return $this->class;
     }
     
-    public static $blocks = [];
+    private static $blocks = [];
     
+    /**
+     * Get the block object from the database with context informations.
+     *
+     * @param unknown $blockId
+     * @param unknown $id
+     * @param unknown $context
+     * @param unknown $pageObject
+     * @return boolean|object|mixed
+     */
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
         if (isset(self::$blocks[$blockId])) {
