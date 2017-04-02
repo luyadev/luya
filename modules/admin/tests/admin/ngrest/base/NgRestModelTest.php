@@ -65,7 +65,7 @@ class NgRestModelTest extends AdminTestCase
         $this->assertTrue($array['delete']);
         
         $this->assertArrayHasKey('aw', $array);
-        $this->assertArrayHasKey('20bfd729bb01954cea413f6cfc3bcf6c77b25ed3', $array['aw']);
+        $this->assertArrayHasKey('14a462badd4c440ea0faf3a32d266c8d6af07ba4', $array['aw']);
     }
     
     public function testCompareNewAndOldConfig()
@@ -73,12 +73,12 @@ class NgRestModelTest extends AdminTestCase
         $old = new TestNgRestModel();
         $oldArray = $old->getNgRestConfig()->getConfig();
         
-        unset($oldArray['aw']['20bfd729bb01954cea413f6cfc3bcf6c77b25ed3']['objectConfig']['ngRestModelClass']);
+        unset($oldArray['aw']['14a462badd4c440ea0faf3a32d266c8d6af07ba4']['objectConfig']['ngRestModelClass']);
         
         $new = new TestNewNotationNgRestModel();
         $newArray = $new->getNgRestConfig()->getConfig();
         
-        unset($newArray['aw']['20bfd729bb01954cea413f6cfc3bcf6c77b25ed3']['objectConfig']['ngRestModelClass']);
+        unset($newArray['aw']['14a462badd4c440ea0faf3a32d266c8d6af07ba4']['objectConfig']['ngRestModelClass']);
         
         $this->assertSame($oldArray, $newArray);
     }
