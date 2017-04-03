@@ -267,4 +267,17 @@ abstract class Module extends \yii\base\Module
             return [];
         };
     }
+    
+    /**
+     * Overrides the yii2 default behavior by not throwing an exception if no alias has been defined 
+     * for the controller namespace. Otherwise each module requires an alias for its first namepsace entry
+     * which results into exception for external modules without an alias.
+     * exception.
+     * 
+     * @inheritdoc
+     */
+    public function getControllerPath()
+    {
+        return Yii::getAlias('@' . str_replace('\\', '/', $this->controllerNamespace), false);
+    }
 }
