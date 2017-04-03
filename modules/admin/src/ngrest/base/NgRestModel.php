@@ -604,7 +604,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             
             $rel = [];
             foreach ($this->ngRestRelations() as $key => $item) {
-                $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
+                $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->className())];
             }
             
             
