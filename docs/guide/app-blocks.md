@@ -59,9 +59,7 @@ In the example above, the view file should looke like this:
 
 ```php
 <?php
-/**
- * @var $this \luya\cms\base\PhpBlockView
- */
+/* @var $this \luya\cms\base\PhpBlockView */
 ?>
 
 <?php if ($this->varValue('mytext')): ?>
