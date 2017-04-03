@@ -57,7 +57,7 @@ class DefaultController extends \luya\web\Controller
                 'timestamp' => time(),
                 'language' => $language,
             ];
-            $searchData->save(false);
+            $searchData->save();
         }
         
         return $this->render('index', [
