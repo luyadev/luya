@@ -239,14 +239,14 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
                     ->itemApi('menu_access_item_group', 'admin/group/index', 'group', 'api-admin-group')
                 ->group('menu_group_system')
                     ->itemApi('menu_system_item_language', 'admin/lang/index', 'language', 'api-admin-lang')
-                    ->itemApi('menu_system_item_tags', 'admin/tag/index', 'label', 'api-admin-tag')
-                    ->itemApi('menu_system_logger', 'admin/logger/index', 'label', 'api-admin-logger')
+                    ->itemApi('menu_system_item_tags', 'admin/tag/index', 'view_list', 'api-admin-tag')
+                    ->itemApi('menu_system_logger', 'admin/logger/index', 'notifications', 'api-admin-logger')
                 ->group('menu_group_images')
                     ->itemApi('menu_images_item_effects', 'admin/effect/index', 'blur_circular', 'api-admin-effect')
                     ->itemApi('menu_images_item_filters', 'admin/filter/index', 'adjust', 'api-admin-filter')
-                ->group('LCP')
-                    ->itemApi('Machines', 'admin/proxy-machine/index', 'label', 'api-admin-proxymachine')
-                    ->itemApi('Builds', 'admin/proxy-build/index', 'label', 'api-admin-proxybuild');
+                ->group('Content Proxy')
+                    ->itemApi('Machines', 'admin/proxy-machine/index', 'devices', 'api-admin-proxymachine')
+                    ->itemApi('Builds', 'admin/proxy-build/index', 'import_export', 'api-admin-proxybuild');
     }
 
     /**
