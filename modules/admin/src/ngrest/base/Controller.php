@@ -8,6 +8,7 @@ use yii\base\InvalidConfigException;
 use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\render\RenderCrud;
 use luya\helpers\FileHelper;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Base Controller for all NgRest Controllers.
@@ -86,23 +87,23 @@ class Controller extends \luya\admin\base\Controller
         return $ngrest->render($crud);
     }
     
-
-
     public function actionExportDownload($key)
     {
-        $sessionkey = Yii::$app->session->get('tempNgRestKey');
+        $sessionkey = Yii::$app->session->get('tempNgRestFileKey');
         $fileName = Yii::$app->session->get('tempNgRestFileName');
-    
+        $mimeType = Yii::$app->session->get('tempNgRestFileMime');
+        
         if ($sessionkey !== base64_decode($key)) {
-            throw new Exception('Invalid Export download key.');
+            throw new ForbiddenHttpException('Invalid download key.');
         }
     
         $content = FileHelper::getFileContent('@runtime/'.$sessionkey.'.tmp');
     
-        Yii::$app->session->remove('tempNgRestKey');
+        Yii::$app->session->remove('tempNgRestFileKey');
         Yii::$app->session->remove('tempNgRestFileName');
+        Yii::$app->session->remove('tempNgRestFileMime');
         @unlink(Yii::getAlias('@runtime/'.$sessionkey.'.tmp'));
     
-        return Yii::$app->response->sendContentAsFile($content, $fileName . '-export-'.date("Y-m-d-H-i").'.csv', ['mimeType' => 'application/csv']);
+        return Yii::$app->response->sendContentAsFile($content, $fileName, ['mimeType' => $mimeType]);
     }
 }

@@ -337,13 +337,14 @@ class Api extends RestActiveController
         $route = str_replace("/index", "/export-download", $route);
         
         if ($store) {
-            Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
-            Yii::$app->session->set('tempNgRestKey', $key);
+            Yii::$app->session->set('tempNgRestFileName',  Inflector::slug($this->model->tableName())  . '-export-'.date("Y-m-d-H-i").'.csv');
+            Yii::$app->session->set('tempNgRestFileMime',  'application/csv');
+            Yii::$app->session->set('tempNgRestFileKey', $key);
             return [
                 'url' => Url::toRoute(['/'.$route, 'key' => base64_encode($key)]),
             ];
         }
         
-        throw new ErrorException("Unable to write the temporary file for the csv export. Make sure the runtime folder is writeable.");
+        throw new ErrorException("Unable to write the temporary file. Make sure the runtime folder is writeable.");
     }
 }

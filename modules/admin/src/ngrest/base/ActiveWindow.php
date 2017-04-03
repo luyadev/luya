@@ -10,6 +10,7 @@ use yii\base\Object;
 use luya\admin\ngrest\base\ActiveWindowView;
 use luya\Exception;
 use luya\helpers\Url;
+use luya\helpers\FileHelper;
 
 /**
  * Base class for all ActiveWindow classes.
@@ -135,6 +136,35 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
             'ngrestConfigHash' => $this->getConfigHash(), 
             'activeWindowHash' => $this->getActiveWindowHash(),
         ], true);
+    }
+    
+    /**
+     * 
+     * MIME: https://wiki.selfhtml.org/wiki/Referenz:MIME-Typen
+     * @param unknown $fileName
+     * @param unknown $mimeType
+     * @param unknown $content
+     * @return string
+     */
+    public function createDownloadableFileUrl($fileName, $mimeType, $content)
+    {
+        $key = uniqid(microtime().Inflector::slug($fileName), true);
+        
+        $store = FileHelper::writeFile('@runtime/'.$key.'.tmp', $content);
+        
+        $menu = Yii::$app->adminmenu->getApiDetail($this->model->ngRestApiEndpoint());
+        
+        $route = $menu['route'];
+        $route = str_replace("/index", "/export-download", $route);
+        
+        if ($store) {
+            Yii::$app->session->set('tempNgRestFileName', $fileName);
+            Yii::$app->session->set('tempNgRestFileKey', $key);
+            Yii::$app->session->set('tempNgRestFileMime', $mimeType);
+            return Url::toRoute(['/'.$route, 'key' => base64_encode($key), 'time' => time()], true);
+        }
+        
+        return false;
     }
     
     /**

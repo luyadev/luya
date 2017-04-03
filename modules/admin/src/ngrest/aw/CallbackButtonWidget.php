@@ -44,6 +44,11 @@ class CallbackButtonWidget extends Widget
     public $options = [];
     
     /**
+     * @var string Optional string with javascript callback function which is going to be triggered after angular response.
+     */
+    public $angularCallbackFunction = 'function() {};';
+    
+    /**
      * @var array Add additional parameters which will be sent to the callback. ['foo' => 'bar']
      */
     public $params = [];
@@ -76,6 +81,7 @@ class CallbackButtonWidget extends Widget
             'reloadListOnSuccess' => (isset($options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
             'reloadWindowOnSuccess' => (isset($options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
             'buttonClass' => ArrayHelper::getValue($this->options, 'class', 'btn'),
+            'angularCallbackFunction' => $this->angularCallbackFunction,
         ]);
     }
     
