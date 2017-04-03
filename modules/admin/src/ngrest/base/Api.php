@@ -18,7 +18,6 @@ use luya\admin\models\UserOnline;
 use luya\admin\ngrest\render\RenderActiveWindow;
 use luya\admin\ngrest\render\RenderActiveWindowCallback;
 use luya\admin\ngrest\NgRest;
-use luya\cms\admin\helpers\MenuHelper;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -99,7 +98,7 @@ class Api extends RestActiveController
     }
     
     /**
-     * Unlock the useronline locker..
+     * Unlock the useronline locker.
      */
     public function actionUnlock()
     {
@@ -143,21 +142,41 @@ class Api extends RestActiveController
         ];
     }
 
+    /**
+     * Search API.
+     * 
+     * This action is mainly used by  {{luya\admin\apis\SearchController}}.
+     * 
+     * @param unknown $query
+     * @return unknown
+     */
     public function actionSearch($query)
     {
-        if (strlen($query) <= 2) {
-            Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');
-
-            return ['query' => 'The query string must be at least 3 chars'];
-        }
         return $this->model->genericSearch($query);
     }
 
+    /**
+     * Search API Provider.
+     * 
+     * The searchProvider provides informations about how the admin UI can render the clickable links 
+     * for the found results.
+     * 
+     * This action is mainly used by  {{luya\admin\apis\SearchController}}.
+     * 
+     * @return unknown
+     */
     public function actionSearchProvider()
     {
         return $this->model->genericSearchStateProvider();
     }
     
+    /**
+     * Generate a response with pagination disabled.
+     * 
+     * Search querys with Pagination will be handled by this action.
+     * 
+     * @return \yii\data\ActiveDataProvider
+     */
     public function actionFullResponse()
     {
         return new ActiveDataProvider([
@@ -166,6 +185,15 @@ class Api extends RestActiveController
         ]);
     }
     
+    /**
+     * Call the dataProvider for a foreign model.
+     * 
+     * @param unknown $arrayIndex
+     * @param unknown $id
+     * @param unknown $modelClass The name of the model where the ngRestRelation is defined.
+     * @throws InvalidCallException
+     * @return \yii\data\ActiveDataProvider
+     */
     public function actionRelationCall($arrayIndex, $id, $modelClass)
     {
         $modelClass = base64_decode($modelClass);
@@ -175,14 +203,21 @@ class Api extends RestActiveController
             throw new InvalidCallException("unable to resolve relation call model.");
         }
         
-        $func = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
+        $query = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
         
         return new ActiveDataProvider([
-            'query' => $func,
+            'query' => $query,
             'pagination' => false,
         ]);
     }
     
+    /**
+     * Filter the Api response by a defined Filtername.
+     * 
+     * @param string $filterName
+     * @throws InvalidCallException
+     * @return \yii\data\ActiveDataProvider
+     */
     public function actionFilter($filterName)
     {
         $model = $this->model;
@@ -199,6 +234,11 @@ class Api extends RestActiveController
         ]);
     }
     
+    /**
+     * Renders the Callback for an ActiveWindow.
+     * 
+     * @return string
+     */
     public function actionActiveWindowCallback()
     {
         $config = $this->model->getNgRestConfig();
@@ -208,6 +248,11 @@ class Api extends RestActiveController
         return $ngrest->render($render);
     }
     
+    /**
+     * Renders the index page of an ActiveWindow.
+     * 
+     * @return string
+     */
     public function actionActiveWindowRender()
     {
         $config = $this->model->getNgRestConfig();

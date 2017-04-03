@@ -20,7 +20,7 @@ use luya\helpers\Url;
  * @property \luya\admin\ngrest\base\ActiveWindowView $view The view object
  * @property string $name Get the current Active Window Name
  * @property string $hashName Get an unique hased Active Window config name
- * @property \yii\db\ActiveRecordInterface $model The model evaluated by the `findOne` of the called ng rest model ActiveRecord.
+ * @property \luya\admin\ngrest\base\NgRestModel $model The model evaluated by the `findOne` of the called ng rest model ActiveRecord.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -51,22 +51,6 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
      */
     public $alias = false;
 
-    private $_model = null;
-    
-    /**
-     * Get the model object from where the Active Window is attached to.
-     *
-     * @return \yii\db\ActiveRecordInterface Get the model of the called ngrest model ActiveRecord by it's itemId.
-     */
-    public function getModel()
-    {
-        if ($this->_model === null && $this->ngRestModelClass !== null) {
-            $this->_model = call_user_func_array([$this->ngRestModelClass, 'findOne'], [$this->itemId]);
-        }
-        
-        return $this->_model;
-    }
-    
     /**
      * @inheritdoc
      */
@@ -77,6 +61,22 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         if ($this->module === null) {
             throw new Exception('The ActiveWindow property \'module\' of '.get_called_class().' can not be null. You have to defined the module in where the ActiveWindow is defined. For example `public $module = \'@admin\';`');
         }
+    }
+    
+    private $_model = null;
+    
+    /**
+     * Get the model object from where the Active Window is attached to.
+     *
+     * @return \luya\admin\ngrest\base\NgRestModel Get the model of the called ngrest model ActiveRecord by it's itemId.
+     */
+    public function getModel()
+    {
+        if ($this->_model === null && $this->ngRestModelClass !== null) {
+            $this->_model = call_user_func_array([$this->ngRestModelClass, 'findOne'], [$this->itemId]);
+        }
+        
+        return $this->_model;
     }
     
     private $_configHash = null;
@@ -129,7 +129,12 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
      */
     public function createCallbackUrl($callback)
     {
-        return Url::to(['/admin/ngrest/callback', 'activeWindowCallback' => Inflector::camel2id($callback), 'ngrestConfigHash' => $this->getConfigHash(), 'activeWindowHash' => $this->getActiveWindowHash()], true);
+        return Url::to([
+            '/admin/'.$this->model->ngRestApiEndpoint().'/active-window-callback', 
+            'activeWindowCallback' => Inflector::camel2id($callback), 
+            'ngrestConfigHash' => $this->getConfigHash(), 
+            'activeWindowHash' => $this->getActiveWindowHash(),
+        ], true);
     }
     
     /**
