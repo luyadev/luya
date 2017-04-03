@@ -22,7 +22,6 @@ From the example above the css file `style.css` would be looked up in the locati
 > In a project context, we recommend to *not* store images inside the asset sources. Images should stored in the `public_html` folder and you can access them in the view with `src="<?= $this->publicHtml; ?>/myimage.jpg"`.
 
 ### Using the Asset
----------------
 
 To register an asset file you have to put those files into the config of a module. Each module can have assets. All controllers of this module will register those assets into the view automaticaly. If you are in a cms context, all asset files must be registered to the cms module, otherwise they will not be available in the cmslayouts. An example of registering assets into the cms module:
 
