@@ -153,8 +153,6 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
     {
         $query = static::encodeQuery($query);
         
-        $query = Inflector::slug($query, ' ', false);
-        
         $parts = explode(" ", $query);
         
         $index = [];
