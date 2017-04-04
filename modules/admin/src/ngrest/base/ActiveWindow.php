@@ -235,7 +235,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     public function getHashName()
     {
         if ($this->_hashName === null) {
-            $this->_hashName = sha1(self::class);
+            $this->_hashName = sha1(get_called_class());
         }
         
         return $this->_hashName;

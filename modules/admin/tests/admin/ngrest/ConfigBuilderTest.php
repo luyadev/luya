@@ -68,8 +68,8 @@ class ConfigBuilderTest extends AdminTestCase
         $this->assertArrayHasKey('aw', $cfg);
         $aw = $cfg['aw'];
         
-        $this->assertArrayHasKey('14a462badd4c440ea0faf3a32d266c8d6af07ba4', $aw);
-        $obj = $aw['14a462badd4c440ea0faf3a32d266c8d6af07ba4'];
+        $this->assertArrayHasKey('ff21bd877239c16ade6e598df6d2bfa91c127953', $aw);
+        $obj = $aw['ff21bd877239c16ade6e598df6d2bfa91c127953'];
 
         $this->assertArrayHasKey('objectConfig', $obj);
         $this->assertArrayHasKey('alias', $obj);
