@@ -162,13 +162,17 @@ return [
     'aws_tag_list' => 'Λίστα ετικετών',
     'dashboard_log_message_add' => 'Προστέθηκε μια νέα γραμμη στο <b>{container}</b>.',
     'dashboard_log_message_edit' => 'Ενημερώθηκε μια υπάρχουσα γραμμή στο <b>{container}</b>.',
+
 // rc1
+
     'layout_btn_help' => 'Βοήθεια',
     'right_panel_support_title' => 'Πληροφορίες &amp; Βοήθεια',
     'right_panel_support_tags_title' => 'Ετικέτες',
     'right_panel_support_support_title' => 'Υποστήριξη',
     'right_panel_support_support_text' => 'Εάν έχετε κάποιες ερωτήσεις παρακαλώ επικοινωνήστε με το διαχειρηστή του ιστότοπου, ή συμβουλευτείτε το <a target="_blank" href="https://luya.io">luya.io</a>.',
+
 // rc2
+
     'ngrest_crud_group_prompt' => 'Ομαδοποίηση με πεδίο',
     'ngrest_crud_filter_prompt' => 'Επιλέξτε Φίλτρο',
     'ngrest_crud_ajax_search_length' => 'Οι όροι αναζήτησης πρέπει να αποτελούνται από τουλάχιστον 3 χαρακτήρες.',
@@ -179,7 +183,8 @@ return [
     'aws_changepassword_notequal' => 'Ο κωδικός και η επανάληψη κωδικού δεν είναι τα ίδια.',
     'aws_changeapssword_minchar' => 'Ο νέος κωδικός πρέπει να έχει τουλάχιστον {min} χαρακτήρες.',
     
-// 1.0.0
+// rc3
+
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Ονομα',
     'model_lang_short_code' => 'Μικρός Κωδικός',
@@ -217,4 +222,6 @@ return [
     'js_filemanager_count_files_overlay' => '%count% files',
     'js_link_change_value' => 'Change Link',
     'js_link_set_value' => 'Set Link',
+    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
+    
 ];

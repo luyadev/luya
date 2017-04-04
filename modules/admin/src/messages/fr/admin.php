@@ -173,7 +173,8 @@ return [
     'dashboard_log_message_add' => 'Nouvelle entrée ajoutée à <b>{container}</b>',
     'dashboard_log_message_edit' => 'Modification d\une entrée existante dans <b>{container}</b>',
 
-    /* Added translations in rc1 */
+// rc1
+    
     'layout_btn_help' => 'Aide',
     'right_panel_support_title' => 'Informations &amp; Aides',
     'right_panel_support_tags_title' => 'Etiquettes',
@@ -192,7 +193,7 @@ return [
     'aws_changepassword_notequal' => 'Le nouveau mot de passe et la répétition du mot de passe ne sont pas égaux.',
     'aws_changeapssword_minchar' => 'Le nouveau mot de passe doit contenir au moins {min} caractères.',
         
-    // 1.0.0
+// rc3
     
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Name',
@@ -231,4 +232,6 @@ return [
     'js_filemanager_count_files_overlay' => '%count% files',
     'js_link_change_value' => 'Change Link',
     'js_link_set_value' => 'Set Link',
+    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
+    
 ];

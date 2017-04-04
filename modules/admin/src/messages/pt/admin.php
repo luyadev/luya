@@ -195,7 +195,7 @@ return [
     'aws_changepassword_notequal' => 'A nova senha e a repetição de senha não são iguais.',
     'aws_changeapssword_minchar' => 'A senha precisa ter pelo menos  {min} caracteres.',
     
-// 1.0.0
+// rc3
 
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Nome',
@@ -234,4 +234,6 @@ return [
     'js_filemanager_count_files_overlay' => '%count% arquivo(s)',
     'js_link_change_value' => 'Alterar link',
     'js_link_set_value' => 'Definir link',
+    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
+    
 ];

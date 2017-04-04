@@ -102,7 +102,7 @@ return [
     'view_index_redirect_internal_select' => 'Scegli la pagina interna alla quale verrà rediretto.',
     'view_index_redirect_external_link' => 'Link esterno',
     'view_index_redirect_external_link_help' => 'I link esterno cominciano con http:// o https://',
-    // added translation in 1.0.0-beta3:
+// added translation in 1.0.0-beta3:
     'model_loginform_email_label' => 'Email',
     'model_loginform_password_label' => 'Password',
     'model_loginform_wrong_user_or_password' => 'Username o password errate.',
@@ -136,11 +136,11 @@ return [
     'layout_useronline_name' => 'Nome',
     'layout_useronline_mail' => 'E-Mail',
     'layout_useronline_inactivesince' => 'Non attivo dal',
-    // added translations in 1.0.0-beta6
+// added translations in 1.0.0-beta6
     'layout_debug_caching' => 'Caching',
     'debug_state_on' => 'On',
     'debug_state_off' => 'Off',
-    // added translations in 1.0.0-beta7
+// added translations in 1.0.0-beta7
     'login_securetoken_mail_subject' => 'LUYA Codice di sicurezza',
     'login_securetoken_mail' => '<h1>LUYA Codice di sicurezza</h1><p>Utilizza il seguente codice di sicurezza per accedere all\'\area di amministrazione {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
     'login_async_token_error' => 'Il codice di sicurezza inserito non è valido.',
@@ -155,20 +155,24 @@ return [
     'mode_user_lastname' => 'Cognome',
     'mode_user_email' => 'E-Mail',
     'mode_user_password' => 'Password',
-    // added translations in 1.0.0-beta8
+// added translations in 1.0.0-beta8
     'aws_tag_new' => 'Aggiungi nuovo elemento',
     'aws_tag_add' => 'aggiungi',
     'aws_tag_search' => 'Inserisci termine',
     'aws_tag_list' => 'Lista di tutti i tag',
     'dashboard_log_message_add' => 'Aggiungi una nuova riga a <b>{container}</b>.',
     'dashboard_log_message_edit' => 'Aggiorna una riga esistente in <b>{container}</b>.',
-    // rc1
+
+// rc1
+
     'layout_btn_help' => 'Aiuto',
     'right_panel_support_title' => 'Informazioni &amp; Aiuto',
     'right_panel_support_tags_title' => 'Tags',
     'right_panel_support_support_title' => 'Supporto',
     'right_panel_support_support_text' => 'Se hai qualche domanda, contatta il webmaster o consulta qui <a target="_blank" href="https://luya.io">luya.io</a>.',
-    // rc2
+
+// rc2
+
     'ngrest_crud_group_prompt' => 'Raggruppa per campo',
     'ngrest_crud_filter_prompt' => 'Seleziona Filtro',
     'ngrest_crud_ajax_search_length' => 'Il termine di ricerca deve essere di almeno 3 caratteri.',
@@ -179,7 +183,8 @@ return [
     'aws_changepassword_notequal' => 'La nuova password e la nuova password ripetuta non sono uguali.',
     'aws_changeapssword_minchar' => 'La nuova password deve contenere almeno {min} caratteri.',
 
-    // 1.0.0
+// rc3
+
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Nome',
     'model_lang_short_code' => 'Codice abbreviato',
@@ -217,4 +222,6 @@ return [
     'js_filemanager_count_files_overlay' => '%count% files',
     'js_link_change_value' => 'Change Link',
     'js_link_set_value' => 'Set Link',
+    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
+    
 ];

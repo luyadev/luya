@@ -177,7 +177,7 @@ return [
     'dashboard_log_message_add' => 'Добавить новую строку в <b>{container}</b>.',
     'dashboard_log_message_edit' => 'Обновить существующую строку в <b>{container}</b>.',
 
-    // rc1
+// rc1
 
     'layout_btn_help' => 'Помощь',
     'right_panel_support_title' => 'Информация &amp; помощь',
@@ -185,7 +185,7 @@ return [
     'right_panel_support_support_title' => 'Поддержка',
     'right_panel_support_support_text' => 'Если у вас возникли вопросы, то обратитесь к своему вебмастеру или проконсультируйтесь на <a target="_blank" href="https://luya.io">luya.io</a>.',
 
-    // rc2
+// rc2
 
     'ngrest_crud_group_prompt' => 'Группировка по полю',
     'ngrest_crud_filter_prompt' => 'Выбрать фильтер',
@@ -197,7 +197,7 @@ return [
     'aws_changepassword_notequal' => 'Пароли не совпадают.',
     'aws_changeapssword_minchar' => 'Пароль должен иметь минимум {min} символа.',
         
-    // 1.0.0
+// rc3
     
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Name',
@@ -236,4 +236,6 @@ return [
     'js_filemanager_count_files_overlay' => '%count% files',
     'js_link_change_value' => 'Change Link',
     'js_link_set_value' => 'Set Link',
+    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
+    
 ];

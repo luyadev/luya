@@ -40,6 +40,7 @@ class CallbackButtonWidget extends Widget
      * - reloadListOnSuccess: boolean, if enabled, the active window will reload the ngrest crud list after success response from callback via sendSuccess().
      * - reloadWindowOnSuccess: boolean, if enabled the active window will reload itself after success (when successResponse is returnd).
      * - class: string, html class fur the button
+     * - linkLabel: This label is for the second triggerable download link.
      */
     public $options = [];
     
@@ -81,6 +82,7 @@ class CallbackButtonWidget extends Widget
             'reloadListOnSuccess' => (isset($options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
             'reloadWindowOnSuccess' => (isset($options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
             'buttonClass' => ArrayHelper::getValue($this->options, 'class', 'btn'),
+            'linkLabel' => ArrayHelper::getValue($this->options, 'linkLabel', 'Download'),
             'angularCallbackFunction' => $this->angularCallbackFunction,
         ]);
     }

@@ -195,7 +195,7 @@ return [
     'aws_changepassword_notequal' => 'The new password and the password repetition are not equal.',
     'aws_changeapssword_minchar' => 'The new password must have a minimum length of {min} characters.',
     
-// 1.0.0
+// rc3
 
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Name',
@@ -234,4 +234,5 @@ return [
     'js_filemanager_count_files_overlay' => '%count% files',
     'js_link_change_value' => 'Change Link',
     'js_link_set_value' => 'Set Link',
+    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
 ];
