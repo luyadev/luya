@@ -36,12 +36,14 @@ use luya\helpers\FileHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class CallbackButtonFileDownloadWidget extends  CallbackButtonWidget
+class CallbackButtonFileDownloadWidget extends CallbackButtonWidget
 {
     /**
      * @inheritdoc
      */
     public $angularCallbackFunction = 'function($response, $scope) { $scope.linkHref = $response.url; $scope.linkHrefHidden = false; $scope.buttonHidden = true; };';
+    
+    public $options = ['class' => 'btn cyan btn--small'];
     
     /**
      * Generates and returns the content output.
