@@ -33,7 +33,19 @@ class ClientBuild extends Object
     
     public $optionStrict = null;
     
-    public $optionTable = null;
+    private $_optionTable = null;
+    
+    public function setOptionTable($table)
+    {
+        if (!empty($table)) {
+            $this->_optionTable = explode(",", $table);
+        }
+    }
+    
+    public function getOptionTable()
+    {
+        return $this->_optionTable;
+    }
     
     public function __construct(Command $command, array $config = [])
     {
@@ -48,8 +60,6 @@ class ClientBuild extends Object
         if ($this->_buildConfig === null) {
             throw new InvalidConfigException("build config can not be empty!");
         }
-        
-        $this->optionTable = explode(",", $this->optionTable);
     }
     
     private $_buildConfig = null;
@@ -59,11 +69,18 @@ class ClientBuild extends Object
         $this->_buildConfig = $config;
         
         foreach ($config['tables'] as $tableName => $tableConfig) {
+            
             if (!empty($this->optionTable)) {
+                $skip = true;
+                
                 foreach ($this->optionTable as $useName) {
-                    if ($useName != $tableName || !StringHelper::startsWithWildcard($tableName, $useName)) {
-                        continue;
+                    if ($useName == $tableName || StringHelper::startsWithWildcard($tableName, $useName)) {
+                        $skip = false;
                     }
+                }
+                
+                if ($skip) {
+                    continue;
                 }
             }
             
