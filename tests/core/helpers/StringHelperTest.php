@@ -82,4 +82,12 @@ class StringHelperTest extends LuyaWebTestCase
         $this->assertFalse(StringHelper::contains(['notexistings'], 'hello bar foo', true)); // enabled strict mode
         $this->assertTrue(StringHelper::contains(['a', 'b', 'c'], 'thesmallabc', true));
     }
+    
+    public function testStartsWithWildcard()
+    {
+        $this->assertFalse(StringHelper::startsWithWildcard('abcdefgh', 'abc'));
+        $this->assertTrue(StringHelper::startsWithWildcard('abcdefgh', 'abc*'));
+        $this->assertFalse(StringHelper::startsWithWildcard('ABCDEFGHI', 'abc*'));
+        $this->assertTrue(StringHelper::startsWithWildcard('ABCDEFGHI', 'abc*', false));
+    }
 }
