@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Object;
 use luya\console\Command;
 use yii\base\InvalidConfigException;
+use luya\helpers\StringHelper;
 
 class ClientBuild extends Object
 {
@@ -47,6 +48,8 @@ class ClientBuild extends Object
         if ($this->_buildConfig === null) {
             throw new InvalidConfigException("build config can not be empty!");
         }
+        
+        $this->optionTable = explode(",", $this->optionTable);
     }
     
     private $_buildConfig = null;
@@ -56,8 +59,12 @@ class ClientBuild extends Object
         $this->_buildConfig = $config;
         
         foreach ($config['tables'] as $tableName => $tableConfig) {
-            if ($this->optionTable && $this->optionTable != $tableName) {
-                continue;
+            if (!empty($this->optionTable)) {
+                foreach ($this->optionTable as $useName) {
+                    if ($useName != $tableName || !StringHelper::startsWithWildcard($tableName, $useName)) {
+                        continue;
+                    }
+                }
             }
             
             $schema = Yii::$app->db->getTableSchema($tableName);

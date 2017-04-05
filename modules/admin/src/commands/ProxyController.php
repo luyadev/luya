@@ -39,7 +39,7 @@ use luya\console\Command;
  * For example in order to sync a large table without strict compare check
  *
  * ```sh
- * ./vendor/bin/luya admin/proxy --strict=0 --table=large_table
+ * ./vendor/bin/luya admin/proxy --strict=0 --table=large_table,another_table
  * ```
  *
  * which is equals to:
@@ -47,8 +47,16 @@ use luya\console\Command;
   * ```sh
  * ./vendor/bin/luya admin/proxy -s=0 -t=large_table
  * ```
+ * 
+ * Using wildcard to use table with a given prefix use:
+ * 
+ * ```sh
+ * ./vendor/bin/luya admin/proxy -t=app_*
+ * ```
+ * 
+ * would only sync tables which starts with `app_*` like `app_news`, `app_articles`.
  *
- * In order to clear the proxy config run
+ * In order to clear the proxy config run:
  *
  * ```sh
  * ./vendor/bin/luya admin/proxy/clear
@@ -79,7 +87,9 @@ class ProxyController extends Command
     public $strict = false;
     
     /**
-     * @var string If a table option is passed only this table will be synchronised. If false by default all tables will be synced.
+     * @var string If a table option is passed only this table will be synchronised. If false by default all tables will be synced. You
+     * can define multible tables ab seperating those with a comma `table1,table2,table`. In order to define only tables with start
+     * with a given prefix you can use `app_*` using asterisks symbold to define wild card starts with string defintions.
      */
     public $table = null;
     
