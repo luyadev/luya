@@ -70,8 +70,13 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     /**
      * @var integer The number of rows which should be transferd for each request.
      */
-    public $proxyRowsPerRequest = 25;
+    public $proxyRowsPerRequest = 100;
 
+    /**
+     * @var integer The expiration timeout for a proxy build in seconds. Default value is 1800 seconds which is 30 minutes.
+     */
+    public $proxyExpirationTime = 3600;
+    
     /**
      * @var array A configuration array with all tags shipped by default with the admin module.
      */
@@ -133,11 +138,6 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             ],
         ],
     ];
-    
-    /**
-     * @var integer The expiration timeout for a proxy build in seconds. Default value is 1800 seconds which is 30 minutes.
-     */
-    public $proxyExpirationTime = 1800;
     
     /**
      * Returns all Asset files to registered in the administration interfaces.
