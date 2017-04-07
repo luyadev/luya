@@ -51,7 +51,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      * @param array $array The array which should be type casted
      * @return array An array with type casted values
      */
-    public static function typeCast($array)
+    public static function typeCast(array $array)
     {
         $return = [];
         
@@ -93,7 +93,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      * @param boolean $sensitive Whether to use strict sensitive search (true) or case insenstivie search (false).
      * @return array The modified array depending on the search result hits.
      */
-    public static function search($array, $searchText, $sensitive = false)
+    public static function search(array $array, $searchText, $sensitive = false)
     {
         $function = ($sensitive) ? 'strpos' : 'stripos';
         return array_filter($array, function ($item) use ($searchText, $function) {
@@ -108,5 +108,34 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
             }
             return $response;
         });
+    }
+    
+    /**
+     * Search for a Column Value inside a Multidimension array and return the array with the found key.
+     * 
+     * If several results with the same key value exists, the first result is picked.
+     * 
+     * ```php
+     * $array = [
+     *     ['name' => 'luya', 'userId' => 1],
+     *     ['name' => 'nadar', 'userId' => 2],
+     * ];
+     * 
+     * $result = ArrayHelper::searchColumn($array, 'name', 'nadar');
+     * 
+     * // output:
+     * // ['name' => 'nadar', 'userId' => 2];
+     * ```
+     * 
+     * @param array $array The array with the multimensional array values.
+     * @param string $column The column to lookup and compare with the $search string.
+     * @param string $search The string to search inside the provided column.
+     * @return array|boolean
+     */
+    public static function searchColumn(array $array, $column, $search)
+    {
+        $key = array_search($search, array_column($array, $column));
+        
+        return ($key !== false) ?  $array[$key] : false;
     }
 }
