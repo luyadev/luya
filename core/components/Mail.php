@@ -199,10 +199,13 @@ class Mail extends \yii\base\Component
      * Pass option parameters to the layout files.
      * 
      * @param array $vars
+     * @return \luya\components\Mail 
      */
     public function context(array $vars)
     {
         $this->_context = $vars;
+        
+        return $this;
     }
 
     /**
