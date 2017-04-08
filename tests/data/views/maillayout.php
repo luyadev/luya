@@ -1,1 +1,1 @@
-<div><?= $content; ?></div>
+<div><?= $content; ?></div><?php if (isset($option)): ?><?= $option; ?><?php endif; ?>

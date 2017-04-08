@@ -192,6 +192,18 @@ class Mail extends \yii\base\Component
         $this->getMailer()->Body = $this->wrapLayout($body);
         return $this;
     }
+    
+    private $_context = [];
+    
+    /**
+     * Pass option parameters to the layout files.
+     * 
+     * @param array $vars
+     */
+    public function context(array $vars)
+    {
+        $this->_context = $vars;
+    }
 
     /**
      * Wrap the layout from the `$layout` propertie and store
@@ -207,7 +219,10 @@ class Mail extends \yii\base\Component
         }
         
         $view = Yii::$app->getView();
-        return $view->renderPhpFile(Yii::getAlias($this->layout), ['content' => $content]);
+        
+        $vars = array_merge($this->_context, ['content' => $content]);
+        
+        return $view->renderPhpFile(Yii::getAlias($this->layout), $vars);
     }
     
     /**

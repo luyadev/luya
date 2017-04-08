@@ -97,6 +97,15 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('CONTENT', $mail->mailer->Body);
     }
     
+    public function testLayoutContextVars()
+    {
+        $mail = new Mail();
+        $mail->layout = '@app/views/maillayout.php';
+        $mail->context(['option' => 'Option Context']);
+        $mail->body('CONTENT');
+        $this->assertEquals('<div>CONTENT</div>Option Context', $mail->mailer->Body);
+    }
+    
     public function testChaining()
     {
         $mail = (new Mail())->compose()->subject('foobar')->body('barfoo')->mailer;
