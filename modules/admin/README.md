@@ -5,21 +5,15 @@ LUYA ADMIN
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-admin/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-admin?branch=master)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-admin/downloads)](https://packagist.org/packages/luyadev/luya-module-admin)
 
-This is the READ ONLY repo for the administration interface of LUYA. It is based on [Angular JS](https://angularjs.org/) and Material Design. The basic concept behind the administration module is that you can plug your own administration interfaces for your modules very quick.
+Administration Interface based on [Angular JS](https://angularjs.org/), [Materialize CSS](http://materializecss.com/) and [Yii 2](http://www.yiiframework.com/) (which is wrapped in the LUYA CORE).
 
-Your customer must edit the data, and want to implement the administration very quick, so we have build some nice tools out of the box:
+![Luya Admin](https://raw.githubusercontent.com/luyadev/luya-module-admin/master/luya_admin.png)
 
-+ [NgRest, CRUD system based on Angular and Yii2](app-admin-module-ngrest.md)
-+ [Storage system](https://luya.io/api/admin-components-storagecontainer.html)
-+ Image filters and effects
-+ Apis
-+ Permissions
-+ Easy build: checkboxes via table, selects, image upload, file upload, datepickers, page selector, etc.
+Features:
 
-[Checkout the Docs](https://luya.io/en/guide/app-admin-module)
-
-The Admin-Module provides even more:
-
-+ ActiveWindows (A button in crud list who can do ANYTHING!)
-+ File Manager with Folder
-+ Groups & Users
++ CRUD (based on RESTful and Angular)
++ Scaffolding CRUDs
++ Syncing Project between Environments
++ Storage System for Files and Images, also known as File Manager.
++ Permission System with Users and Groups.
++ Searching trough all Modules and Models.
