@@ -161,13 +161,25 @@ class Api extends RestActiveController
      * The searchProvider provides informations about how the admin UI can render the clickable links 
      * for the found results.
      * 
-     * This action is mainly used by  {{luya\admin\apis\SearchController}}.
+     * This action is mainly used by  {{luya\admin\apis\SearchController}} defined by {{luya\admin\base\GenericSearchInterface::genericSearchStateProvider}}
      * 
-     * @return unknown
+     * @return array
      */
     public function actionSearchProvider()
     {
         return $this->model->genericSearchStateProvider();
+    }
+    
+    /**
+     * Search API Hidden Fields
+     * 
+     * This action is mainly used by {luya\admin\apis\SearchController}}.
+     * 
+     * @return array
+     */
+    public function actionSearchHiddenFields()
+    {
+        return $this->model->genericSearchHiddenFields();
     }
     
     /**

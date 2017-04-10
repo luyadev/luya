@@ -3,14 +3,27 @@
 namespace luya\admin\base;
 
 /**
- * Defines a structure for the Admin search, called generic search.
+ * Generic Search Interface.
+ * 
+ * A searchable Active Record must integrate this Interface in order to make usage of the Administration Search UI.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface GenericSearchInterface
 {
+    /**
+     * The fields to lookup with the search query.
+     *
+     * @return array An array with all fields where should be looked up against the genericSearch query.
+     */
     public function genericSearchFields();
 
+    /**
+     * The Query which is going to be performend to the concret implementation.
+     * 
+     * @param string $searchQuery An HTML encoded string to lookup the database table.
+     */
     public function genericSearch($searchQuery);
     
     /**
