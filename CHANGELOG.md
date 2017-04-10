@@ -20,6 +20,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1076](https://github.com/luyadev/luya/issues/1076) Twig Component triggers now an deprecated notice message.
 - [#1218](https://github.com/luyadev/luya/issues/1218) Renamed InfoActiveWindow to DetailViewActiveWindow.
 - [#1244](https://github.com/luyadev/luya/issues/1244) Crawler DefaultController returns ActiveDataProvider instead of ActiveRecord results.
+- [#1231](https://github.com/luyadev/luya/issues/1231) Upgrade to Angular 1.6 therfore all custom angular admin js files have to make sure to be compatible with Version 1.6 (dropped .success and .error for $http component)
 
 ### Added
 
