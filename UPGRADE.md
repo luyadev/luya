@@ -18,9 +18,9 @@ This document will help you upgrading from a LUYA Version into another. For more
 > },
 > ```
 
-+ []() Replace `setYiiPath` with `setBaseYiiFile` in the public_html/index.php file.
-+ []() *ALL* your blocks now have to extend from luya\cms\base\PhpBlock. Twig blocks are deprecated! 
-+ []() The menu item `hasChildren()` has been droped is now a getter method use `getHasChildren()` or `hasChildren` instead.
++ [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated Methods, Classes and Properties.
++ [#1076](https://github.com/luyadev/luya/issues/1076) *ALL* your blocks now have to extend from luya\cms\base\PhpBlock. Twig blocks are deprecated! 
++ [#1127](https://github.com/luyadev/luya/issues/1127) The menu item `hasChildren()` has been droped is now a getter method use `getHasChildren()` or `hasChildren` instead.
 + [#1076](https://github.com/luyadev/luya/issues/1076) **TWIG IS DEPRECATED** The whole compont, as the cms blocks with twig are now depreacted, the twigjs admin output for blocks still works, all other code related to twig is not working anymore! In order to include to your project use: https://github.com/luyadev/luya-rc-legacy
 + [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 + [#1177](https://github.com/luyadev/luya/issues/1177) The elements.php for the luya\web\Elements component does new look for the elements.php inside the @app/views folder instead of @app.
