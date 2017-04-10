@@ -24,11 +24,15 @@ body {
   background-color: #ff9058;
 }
 
-.footer .text-muted {
-    margin:20px 0px; color:white;
+.footer .container ul {
+    margin:0px; padding:20px 0px; color:white; list-style-type:none;
 }
 
-.footer .text-muted a {
+.footer .container ul li {
+    display:inline-block; padding-right:25px;
+}
+
+.footer  a {
    color:white; text-decoration:underline;
 }
 

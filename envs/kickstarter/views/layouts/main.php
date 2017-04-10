@@ -1,6 +1,7 @@
 <?php
 use app\assets\ResourcesAsset;
 use luya\helpers\Url;
+use luya\cms\widgets\LangSwitcher;
 
 ResourcesAsset::register($this);
 
@@ -16,19 +17,19 @@ $this->beginPage();
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>LUYA &mdash; <?php echo $this->title; ?></title>
+        <title><?= $this->title; ?></title>
         <?php $this->head() ?>
     </head>
     <body>
     <?php $this->beginBody() ?>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="https://luya.io" target="_blank" >
-                    <img alt="Brand" src="<?= $this->publicHtml; ?>/images/luya_logo_flat_icon.png" height="20px">
+                    <img alt="luya.io" src="<?= $this->publicHtml; ?>/images/luya_logo_flat_icon.png" height="20px">
                 </a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div>
                 <ul class="nav navbar-nav">
                 <?php foreach (Yii::$app->menu->findAll(['depth' => 1, 'container' => 'default']) as $item): /* @var $item \luya\cms\menu\Item */ ?>
                     <li <?php if ($item->isActive): ?>class="active"<?php endif;?>>
@@ -36,18 +37,17 @@ $this->beginPage();
                     </li>
                 <?php endforeach; ?>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="https://github.com/luyadev/luya" target="_blank"><i class="fa fa-github"></i></a></li>
-                    <li><a href="https://twitter.com/luyadev" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="https://www.youtube.com/channel/UCfGs4sHk-D3swX0mhxv98RA" target="_blank"><i class="fa fa-youtube"></i></a></li>
-                </ul>
+                <?= LangSwitcher::widget([
+                    'listElementOptions' => ['class' => 'nav navbar-nav navbar-right hidden-xs'],
+                    'linkLabel' => function($lang) {
+                        return strtoupper($lang['short_code']);
+                    }
+                ]); ?>
             </div>
         </div>
     </nav>
         
     <div style="margin-top:70px;"></div>
-        
-        
         
     <div class="container" id="content">
     
@@ -92,7 +92,12 @@ $this->beginPage();
     
     <footer class="footer">
         <div class="container">
-            <p class="text-muted">This website is made with <a href="https://luya.io" target="_blank">LUYA</a>.</p>
+                <ul>
+                    <li>This website is made with <a href="https://luya.io" target="_blank">LUYA</a></li>
+                    <li><a href="https://github.com/luyadev/luya" target="_blank"><i class="fa fa-github"></i></a></li>
+                    <li><a href="https://twitter.com/luyadev" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.youtube.com/channel/UCfGs4sHk-D3swX0mhxv98RA" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                </ul>
         </div>
     </footer>
     <?php $this->endBody() ?>
