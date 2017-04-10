@@ -12,6 +12,7 @@ The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provide
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/luyadev/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/luyadev/luya/?branch=master)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
 [![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya)
+[![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 
 ![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta8.png)
 
@@ -47,7 +48,7 @@ We are always looking for people who share their thoughts, code and problems wit
 + ✓ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
 + ✓ rc1 release (October 2016) - Merge admin and frontend modules into each other. Add luya vendor namespace prefix to all modules.
 + ✓ rc2 release (November 2016) - Bug fixes, PHP Doc and Guide improvements, basic features implementation.
-+ rc3 release (March 2017) - Large API breaks and new features, therefore the rc3 release in order to get latest bugs reports and informations from Developers.
++ rc3 release (April 2017) - Large API breaks and new features, therefore the rc3 release in order to get latest bugs reports and informations from Developers.
 + version 1.0.0 (April 2017) - First stable release of LUYA.
 
 #### Unit Test
@@ -58,3 +59,11 @@ We are always looking for people who share their thoughts, code and problems wit
 4. Change dsn, username and passwort in phpunit.xml
 5. Ensure you have installed current composer packages `composer install` with dev packages.
 6. Execute the phpunit bin file `./vendor/bin/phpunit`.
+
+#### Shield
+
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+
+```
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+```
