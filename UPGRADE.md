@@ -6,6 +6,18 @@ This document will help you upgrading from a LUYA Version into another. For more
 1.0.0-RC3 (in progress)
 -------------------
 
+> The kickstarter now refers to the newest composer fxp entry, so make sure to add the new fxp config after run `composer global update`
+> ```json
+> "config": {
+>     "fxp-asset" : {
+>         "pattern-skip-version": "(-build|-patch)",
+>         "installer-paths": {
+>             "bower-asset-library": "vendor/bower"
+>         }
+>     }   
+> },
+> ```
+
 + []() Replace `setYiiPath` with `setBaseYiiFile` in the public_html/index.php file.
 + []() *ALL* your blocks now have to extend from luya\cms\base\PhpBlock. Twig blocks are deprecated! 
 + []() The menu item `hasChildren()` has been droped is now a getter method use `getHasChildren()` or `hasChildren` instead.
