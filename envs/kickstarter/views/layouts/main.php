@@ -46,11 +46,7 @@ $this->beginPage();
             </div>
         </div>
     </nav>
-        
-    <div style="margin-top:70px;"></div>
-        
     <div class="container" id="content">
-    
         <!-- /* DELETE ME -->    
         <div class="row" style="margin-bottom: 20px;">
             <div class="col-md-12">
@@ -89,7 +85,6 @@ $this->beginPage();
             <?php endif; ?>
         </div>
     </div>
-    
     <footer class="footer">
         <div class="container">
                 <ul>
