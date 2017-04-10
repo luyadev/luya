@@ -1,5 +1,7 @@
 # LUYA News Module
 
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+
 The news module will provided you a basic news system with categories and tags.
 
 ## Installation
