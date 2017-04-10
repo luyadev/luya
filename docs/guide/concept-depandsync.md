@@ -29,6 +29,8 @@ You are now ready to deploy your website into the server and can now start add c
 Sync
 ---
 
+**IMAGE OF SYNC COMMAND**
+
 We have built a sync command to sync the database and files from PROD to any local client. In order to setup this command log in to the admin interface of your PROD / Server website, navigat to System -> Machines and create a new one, you will need the identfier and token.
 
 Now run `./vendor/bin/luya admin/proxy` you will have to enter the url of your prod env like `https://luya.io` and then enter machine and identifier you get from the previous step.
