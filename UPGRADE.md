@@ -3,7 +3,7 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
-1.0.0-RC3 (in progress)
+1.0.0-RC3 (11. April 2017)
 -------------------
 
 > The kickstarter now refers to the newest composer fxp entry, so make sure to add the new fxp config after run `composer global update`

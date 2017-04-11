@@ -10,7 +10,7 @@ The exporter module allowss you to easily download the full database and storage
 Add the exporter module to your composer.json:
 
 ```
-"luyadev/luya-module-exporter" : "^1.0@dev",
+"luyadev/luya-module-exporter" : "1.0.0-RC3",
 ```
 
 Set up you your application configuration as follows :
