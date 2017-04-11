@@ -1,30 +1,28 @@
-* Work in Progress *
-
 Deployment and Sync
 ===
 
-As part of LUYA we have build an eco system in order to sync and deploy your website. Therefore this guide explains the best practice of how to bring your website online and sync it back to your local dev.
+As part of the LUYA ecosystem, we have developed processes to sync and deploy your website. This guide explains the best practice of how to bring your website online and sync it back to your local development environment.
 
-Those things are required for this guide:
+The following is required to reproduce the steps in this guide:
 + Git repository (we use GitHub)
 + Server with SSH access (Prod environment)
-+ Your local dev machine with LAMP or WAMP Stack.
++ A local development machine with LAMP or WAMP Stack
 
 
-**We never sync data into the ProdServer, only the oposite way!**
+**We never sync data from the local environment to the production server, only the opposite way!**
 
-When starting to build a Website you are developing on your local dev machine, create the Git Repository, checkout the LUYA kickstarter project, add those files into Git and start develop your Website.
+When starting to build a website, you create a Git repository for the project, check out the LUYA kickstarter project, add the included files into the new Git repository and start developing your website.
 
-We recommend you to deploy the website to the Server in a very early stadium of the development cycle. So use dummy text data on your local system.
+We recommend that you deploy the website to the server in an early stadium of the development cycle. So use dummy text and data on your local system.
 
 Deployment
 ---
 
-1. Setup your Server Prod environment (create database, enable ssh, etc.)
+1. Set up your production environment on the server (create database, enable ssh, etc.)
 2. Change the `env-prod.php` config.
-3. Install the [LUYA DEPLOYER](https://luya.io/guide/module/luyadev---luya-deployer) so you can deploy your website with `./vendor/bin/dep luya prod`.
+3. Install and configure the [LUYA DEPLOYER](https://luya.io/guide/module/luyadev---luya-deployer) so you can deploy your website with the `./vendor/bin/dep luya prod` command.
 
-You are now ready to deploy your website into the server and can now start add content on the production env.
+You are now ready to deploy your website to the server and can start to add content on the production environment.
 
 Sync
 ---
@@ -32,6 +30,6 @@ Sync
 ![luya-proxy](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-proxy.gif "LUYA Proxy Sync")
 
 
-We have built a sync command to sync the database and files from PROD to any local client. In order to setup this command log in to the admin interface of your PROD / Server website, navigat to System -> Machines and create a new one, you will need the identfier and token.
+We have developed a sync command to synchronize the database and files from the production environment to a number of local clients. In order to set up this command, log in to the admin interface of your website on the production server, navigat to System -> Machines and create a new one. You will have to copy the identfier and token that is generated in the next step.
 
-Now run `./vendor/bin/luya admin/proxy` you will have to enter the url of your prod env like `https://luya.io` and then enter machine and identifier you get from the previous step.
+Now run the `./vendor/bin/luya admin/proxy` command. You will have to enter the URL of your production environment (like `https://luya.io`) and then enter the machine and identifier from the previous step.
