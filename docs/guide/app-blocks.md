@@ -176,6 +176,26 @@ MyBlockAsset::register($this->appView);
 
 Now your [[app-assets.md]] is registered in the appliation view object.
 
+## Register JS or CSS in Block View (inline)
+
+Sometimes your block needs to pass data to JS (or CSS). The easiest way to do that is to register your data in the Blocks View file.
+
+### JS
+
+```php
+$this->appView->registerJs("
+    var data = ['some', 'data'];
+", luya\web\View::POS_READY); 
+```
+
+### CSS
+
+```php
+$this->appView->registerCss("
+    .data { color: red; }
+"); 
+```
+
 ## Ajax Requests in Block
 
 To implement ajax inside a block the following concept is used:
