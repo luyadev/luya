@@ -48,6 +48,6 @@ The setup proccess will ask you for an email and password to store your personal
 
 > `php index.php health` will make a small check if several directorys are readable etc.
 
-You can now log in into your administration interface `http://localhost/luya-kickstarter/public_html/admin` (depending on where you have located the luya files). When you have successfull logged into the administration area, navigate to **System** -> **Groups** and click **Authorizations**. This will open an Active Window where you can enable all permissions for your Group.
+You can now log in into your administration interface `http://localhost/luya-kickstarter/public_html/admin` (depending on where you have located the LUYA files).
 
 > Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA Setup.
