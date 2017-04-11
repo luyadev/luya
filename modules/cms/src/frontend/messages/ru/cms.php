@@ -168,12 +168,12 @@ return [
     'block_group_media_group' => 'Медиа',
         
     // 1.0.0
-    'block_audio_admin_nourl' => 'No embed audio code has been set.',
-    'block_audio_admin_hasurl' => 'Embed audio code is set.',
-    'block_file_list_admin_empty' => 'No files has been selected yet.',
+    'block_audio_admin_nourl' => 'Код для аудиовставки не установлен.',
+    'block_audio_admin_hasurl' => 'Код для аудиовставки установлен.',
+    'block_file_list_admin_empty' => 'Файлы не выбраны.',
     'block_html_name' => 'HTML',
-    'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
-    'block_spacing_small_space' => 'Small space',
-    'block_spacing_medium_space' => 'Medium space',
-    'block_spacing_large_space' => 'Large space',
+    'block_module_modulename_help' => 'Доступны только зарегистрированные конфигурационные модули.',
+    'block_spacing_small_space' => 'Маленькое пробел',
+    'block_spacing_medium_space' => 'Середний пробел',
+    'block_spacing_large_space' => 'Большой пробел',
 ];
