@@ -4,7 +4,11 @@ This release brings a lot of API breaking changes, so make sure to check the [Ch
 
 What are the most important improvements?
 
-+ LUYA CONTENT PROXY: Hola! This is an awesome feature, believe us! It allows you to sync a production environment with your local environment just with one command: `./vendor/bin/luya admin/proxy`. Database tables and files/images will be synchronised according to your local migration status. There is a new guide section where you can read more about this feature and see an image: https://luya.io/guide/concept-depandsync
+The new LUYA Content Proxy in action:
+
+![luya-proxy](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-proxy.gif "LUYA Proxy Sync")
+
++ LUYA CONTENT PROXY: Hola! This is an awesome feature, believe us! It allows you to sync a production environment with your local environment just with one command: `./vendor/bin/luya admin/proxy`. Database tables and files/images will be synchronised according to your local migration status. There is a new guide section where you can read more about this feature (Work in Progress): https://luya.io/guide/concept-depandsync
 + The Crawler module now has a more sophisticated search and sort algorithm including word stemming.
 + The admin interface got some new file manager colors, the top main navigation is more polished and consistent than before.
 + File and link selection directives got updated to improve usability.
