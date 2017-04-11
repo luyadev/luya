@@ -80,6 +80,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1255](https://github.com/luyadev/luya/issues/1255) Fixed scroll bug and improved over all behavior.
+- [#1254](https://github.com/luyadev/luya/issues/1254) Updated CRUD pagination styles.
 - [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1186](https://github.com/luyadev/luya/issues/1186) Image records not deleted from list without cache reload.
 - [#1162](https://github.com/luyadev/luya/issues/1162) Unable to create pages from empty draft selection.
