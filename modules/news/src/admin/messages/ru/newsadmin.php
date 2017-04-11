@@ -31,4 +31,8 @@ return [
     'tag' => 'Теги',
     'tag_title' => 'Тег',
     'tag_title_create_error' => 'Заполните тег.',
+
+    // 1.0.0
+
+    'teaser_text' => 'Текст тизера',
 ];
