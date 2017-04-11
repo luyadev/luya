@@ -41,7 +41,7 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
         
         $item1 = $v['options']['items'][0];
         
-        $this->assertSame('1, 1, 1, 1, 1, 1, 1, 1482226241, 0, Homepage, homepage, , , ', $item1['label']);
+        $this->AssertContains('Homepage, homepage,', $item1['label']);
     }
     
     public function testFieldSelectionBasicInjector()

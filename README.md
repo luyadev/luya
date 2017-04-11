@@ -52,8 +52,8 @@ We are always looking for people who share their thoughts, code and problems wit
 
 #### Unit Test
 
-1. Create Database (example luya_phpunit)
-2. Insert Database dump from `tests/data/sql/1.0.0.sql`
+1. Create Database (example luya_env_phpunit)
+2. Insert Database dump from `tests/data/sql/1.0.0-RC3.sql`
 3. Rename phpunit.xml.dist to phpunit.xml
 4. Change dsn, username and passwort in phpunit.xml
 5. Ensure you have installed current composer packages `composer install` with dev packages.

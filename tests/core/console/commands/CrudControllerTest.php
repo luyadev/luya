@@ -31,7 +31,7 @@ class CrudControllerTest extends LuyaConsoleTestCase
         $this->assertNotNull($testShema);
         
         $this->assertSame(7, count($ctrl->generateRules($testShema)));
-        $this->assertSame(13, count($ctrl->generateLabels($testShema)));
+        $this->assertSame(14, count($ctrl->generateLabels($testShema)));
         
         $tpl = <<<'EOT'
 <?php
@@ -101,13 +101,14 @@ use luya\admin\ngrest\base\NgRestModel;
  * @property integer $secure_token_timestamp
  * @property smallint $force_reload
  * @property text $settings
+ * @property string $cookie_token
  */
 class TestModel extends NgRestModel
 {
     /**
      * @inheritdoc
      */
-    public $i18n = ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings'];
+    public $i18n = ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings', 'cookie_token'];
 
     /**
      * @inheritdoc
@@ -144,6 +145,7 @@ class TestModel extends NgRestModel
             'secure_token_timestamp' => Yii::t('app', 'Secure Token Timestamp'),
             'force_reload' => Yii::t('app', 'Force Reload'),
             'settings' => Yii::t('app', 'Settings'),
+            'cookie_token' => Yii::t('app', 'Cookie Token'),
         ];
     }
 
@@ -156,7 +158,7 @@ class TestModel extends NgRestModel
             [['title', 'is_deleted', 'secure_token_timestamp', 'force_reload'], 'integer'],
             [['email'], 'required'],
             [['settings'], 'string'],
-            [['firstname', 'lastname', 'password', 'password_salt', 'auth_token'], 'string', 'max' => 255],
+            [['firstname', 'lastname', 'password', 'password_salt', 'auth_token', 'cookie_token'], 'string', 'max' => 255],
             [['email'], 'string', 'max' => 120],
             [['secure_token'], 'string', 'max' => 40],
             [['email'], 'unique'],
@@ -168,7 +170,7 @@ class TestModel extends NgRestModel
      */
     public function genericSearchFields()
     {
-        return ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings'];
+        return ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings', 'cookie_token'];
     }
 
     /**
@@ -189,6 +191,7 @@ class TestModel extends NgRestModel
             'secure_token_timestamp' => 'number',
             'force_reload' => 'number',
             'settings' => 'textarea',
+            'cookie_token' => 'text',
         ];
     }
 
@@ -198,8 +201,8 @@ class TestModel extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings']],
-            [['create', 'update'], ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings']],
+            ['list', ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings', 'cookie_token']],
+            [['create', 'update'], ['firstname', 'lastname', 'title', 'email', 'password', 'password_salt', 'auth_token', 'is_deleted', 'secure_token', 'secure_token_timestamp', 'force_reload', 'settings', 'cookie_token']],
             ['delete', false],
         ];
     }
