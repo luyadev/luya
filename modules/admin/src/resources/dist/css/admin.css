@@ -3043,7 +3043,7 @@ nav {
     position: relative;
     height: 100%; }
   nav .nav-master{
-    background: #00897b;
+    background: #c66900;
   }
   @media only screen and (min-width: 993px) {
     nav a.button-collapse {
@@ -9245,7 +9245,7 @@ menu-dropdown,
   transition: 0.25s ease background-color;
   cursor: pointer; }
   .sidebar__button.sidebar__button--active, .sidebar__button.sidebar__button--active:hover {
-    background-color: #537994 !important;}
+    background-color: #ff9800 !important;}
   .sidebar__button.sidebar__button--active i, .sidebar__button.sidebar__button--active a{
     color: #FFFFFF;
   }
