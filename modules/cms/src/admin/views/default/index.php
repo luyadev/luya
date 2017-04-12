@@ -273,7 +273,7 @@ use \luya\cms\admin\Module;
         <div ng-controller="CmsMenuTreeController">
 
             <?php if (Yii::$app->adminuser->canRoute('cmsadmin/page/create')): ?>
-            <a class="sidebar__button sidebar__button--positive" ui-sref="custom.cmsadd">
+            <a class="sidebar__button sidebar__dashboard" ui-sref="custom.cmsadd">
                 <div class="sidebar__icon-holder">
                     <i class="sidebar__icon material-icons">add_box</i>
                 </div>

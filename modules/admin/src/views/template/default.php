@@ -1,12 +1,12 @@
 <div ng-controller="DefaultController">
     <div class="luya-container__sidebar sidebar">
         <div class="submenu">
-            <div class="submenu__item sidebar__button" ng-class="{'sidebar__button--active' :currentItem == null }" ng-click="loadDashboard()">
+            <div class="submenu__item sidebar__button sidebar__dashboard" ng-click="loadDashboard()">
                 <div class="sidebar__icon-holder">
                     <i class="material-icons sidebar__icon">dashboard</i>
                 </div>
                 <a class="sidebar__text">
-                    <small>Dashboard</small>
+                    Dashboard
                 </a>
             </div>
             <div ng-repeat="item in items" class="submenu__group">

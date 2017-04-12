@@ -405,7 +405,7 @@ $this->beginPage()
 
     <div class="navbar-fixed">
         <nav>
-            <div class="nav-wrapper blue">
+            <div class="nav-wrapper nav-master">
                 <a style="cursor: pointer;" data-activates="mobile-demo" class="button-collapse" ng-click="mobileOpen = !mobileOpen"><i class="material-icons">menu</i></a>
 
                 <ul class="left hide-on-med-and-down">
