@@ -15,7 +15,7 @@ This document will help you upgrading from a LUYA Version into another. For more
 >             "bower-asset-library": "vendor/bower"
 >         }
 >     }   
-> },
+> }
 > ```
 
 + [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated Methods, Classes and Properties.
