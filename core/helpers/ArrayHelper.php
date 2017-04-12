@@ -124,7 +124,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      * $result = ArrayHelper::searchColumn($array, 'name', 'nadar');
      * 
      * // output:
-     * // ['name' => 'nadar', 'userId' => 2];
+     * // array ('name' => 'nadar', 'userId' => 2);
      * ```
      * 
      * @param array $array The array with the multimensional array values.
@@ -137,5 +137,39 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
         $key = array_search($search, array_column($array, $column));
         
         return ($key !== false) ?  $array[$key] : false;
+    }
+    
+    /**
+     * Search for columns with the given search value, returns the full array with all valid items.
+     * 
+     * > This function is not casesensitive, which means FOO will match Foo, foo and FOO
+     * 
+     * ```php
+     * $array = [
+     *     ['name' => 'luya', 'userId' => 1],
+     *     ['name' => 'nadar', 'userId' => 1],
+     * ];
+     * 
+     * $result = ArrayHelper::searchColumn($array, 'userId', '1');
+     * 
+     * // output:
+     * // array (
+     * //     array ('name' => 'luya', 'userId' => 1),
+     * //     array ('name' => 'nadar', 'userId' => 1)
+     * // );
+     * ```
+     * 
+     * @param array $array The multidimensional array input
+     * @param string $column The column to compare with $search string
+     * @param mixed $search The search string to compare with the column value.
+     * @return array Returns an array with all valid elements.
+     */
+    public static function searchColumns(array $array, $column, $search)
+    {
+        $keys = array_filter($array, function($var) use($column, $search) {
+            return strcasecmp($search, $var[$column]) == 0 ? true : false;
+        });
+        
+        return $keys;
     }
 }

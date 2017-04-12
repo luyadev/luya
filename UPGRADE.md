@@ -3,6 +3,9 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+1.0.0 (in progress)
+-------------------
+
 1.0.0-RC3 (11. April 2017)
 -------------------
 
@@ -15,7 +18,7 @@ This document will help you upgrading from a LUYA Version into another. For more
 >             "bower-asset-library": "vendor/bower"
 >         }
 >     }   
-> },
+> }
 > ```
 
 + [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated Methods, Classes and Properties.
