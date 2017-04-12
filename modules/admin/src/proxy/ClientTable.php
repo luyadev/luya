@@ -112,7 +112,6 @@ class ClientTable extends Object
             $progress = 1;
             for ($i=0; $i<$this->getOffsetTotal(); $i++) {
                 $data = array_merge($this->request($i), $data);
-                usleep(10);
                 gc_collect_cycles();
                 Console::updateProgress($progress++, $this->getOffsetTotal());
             }
