@@ -6,6 +6,8 @@ use Yii;
 use luya\Exception;
 use PHPMailer;
 use SMTP;
+use luya\web\View;
+use yii\base\Controller;
 
 /**
  * LUYA mail component to compose messages and send them via SMTP.
@@ -13,7 +15,7 @@ use SMTP;
  * This component is registered on each LUYA instance, how to use:
  *
  * ```php
- * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail'->adress('info@example.com')->send()) {
+ * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail'->address('info@example.com')->send()) {
  *     echo "Mail has been sent!";
  * } else {
  *     echo "Error" : Yii::$app->mail->error;
@@ -190,6 +192,27 @@ class Mail extends \yii\base\Component
     public function body($body)
     {
         $this->getMailer()->Body = $this->wrapLayout($body);
+        return $this;
+    }
+
+    /**
+     * Render a view file for the given Controller context.
+     * 
+     * Assuming the following example inside a controller:
+     * 
+     * ```php
+     * Yii::$app->mail->compose('Send E-Mail')->render($this, 'mymail', ['foo' => 'bar'])->address('info@luya.io')->send();
+     * ```
+     * 
+     * @param \yii\base\Controller $controller The controller context
+     * @param string $viewFile The view file to render
+     * @param array $params The parameters to pass to the view file.
+     * @return \luya\components\Mail
+     */
+    public function render(Controller $controller, $viewFile, array $params = [])
+    {
+        $this->body($controller->renderPartial($viewFile, $params));
+        
         return $this;
     }
     

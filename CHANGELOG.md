@@ -6,6 +6,15 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0 (in progress)
 -------------------
 
+### Changed
+
+### Added
+
+- [#1266](https://github.com/luyadev/luya/issues/1266) render() method for the mailer component in order to provide controller template files.
+
+### Fixed
+
+
 1.0.0-RC3 (11. April 2017)
 -------------------
 
