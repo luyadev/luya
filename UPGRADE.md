@@ -3,6 +3,9 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+1.0.0 (in progress)
+-------------------
+
 1.0.0-RC3 (11. April 2017)
 -------------------
 
