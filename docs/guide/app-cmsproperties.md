@@ -98,6 +98,8 @@ A very common scenario is to add properties to an existing menu item like an ima
 
 This method allows you find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')`.
 
+> When dealing with large menus you can preload the models (with its properties) for a given menu query use {{luya\cms\menu\Query::preloadModels}} or {{luya\cms\Menu::findAll}} with second statement `true`.
+
 #### in Layouts
 
 In the layout you can always get the current propertys based on the current active menu item.

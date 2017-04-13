@@ -566,6 +566,16 @@ class Item extends Object implements LinkInterface, Arrayable
     }
     
     /**
+     * Setter method for the Model.
+     * 
+     * @param null|\luya\cms\models\Nav $model The Nav model Active Record
+     */
+    public function setModel($model)
+    {
+        $this->_model = $model;
+    }
+    
+    /**
      * This method allows you the retrieve a property for an page property. If the property is not found false will be retunrend
      * otherwhise the property object itself will be returned (implements `\admin\base\Property`) so you can retrieve the value of the
      * property by calling your custom method or the default `getValue()` method.

@@ -122,4 +122,15 @@ class QueryTest extends CmsFrontendTestCase
         
         $this->assertSame(3, $in);
     }
+    
+    public function testPreloadModels()
+    {
+        $default = (new Query())->where(['container' => 'default'])->all();
+        
+        $this->assertNull($default->getInnerIterator()->getLoadedModel(1));
+        
+        $default = (new Query())->where(['container' => 'default'])->preloadModels()->all();
+        
+        $this->assertNotNull($default->getInnerIterator()->getLoadedModel(1));
+    }
 }
