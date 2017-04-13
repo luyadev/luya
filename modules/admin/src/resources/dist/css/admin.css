@@ -1993,7 +1993,7 @@ a {
 
 .clearfix {
   clear: both; }
-
+/*
 .z-depth-0 {
   box-shadow: none !important; }
 
@@ -2013,7 +2013,7 @@ a {
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3); }
 
 .z-depth-5 {
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3); }*/
 
 .hoverable {
   -webkit-transition: box-shadow .25s;
@@ -3043,7 +3043,7 @@ nav {
     position: relative;
     height: 100%; }
   nav .nav-master{
-    background: #c66900;
+    background: #ffc947;
   }
   @media only screen and (min-width: 993px) {
     nav a.button-collapse {
@@ -3107,7 +3107,7 @@ nav {
       -webkit-transition: background-color .3s;
       transition: background-color .3s;
       font-size: 1rem;
-      color: #fff;
+      color: #000;
       display: block;
       padding: 0 15px;
       cursor: pointer; }
@@ -8532,7 +8532,7 @@ input[type='checkbox']:checked + .input__label:before, input[type='checkbox']:ch
   bottom: 0;
   left: 0;
   overflow: scroll;
-  padding-left: 300px;
+  padding-left: 270px;
   position: absolute;
   top: 0;
   -webkit-transition: 0.25s ease padding-left;
@@ -8763,10 +8763,11 @@ menu-dropdown,
 
 .navbar__item.navbar__item--active {
   /*background-color: #00695C;*/
-  color: #FFFFFF; }
+  -webkit-box-shadow:inset 0 -5px 2px -2px #ff9800;
+  -moz-box-shadow:inset 0 -5px 2px -2px #ff9800;
+  box-shadow:inset 0 -5px 2px -2px #ff9800;
+   }
   .navbar__item.navbar__item--active .navbar__link {
-    color: #FFFFFF;
-    text-decoration: underline;
     font-weight: bold; }
 
 .navbar__button__anchor {
@@ -9245,7 +9246,7 @@ menu-dropdown,
   transition: 0.25s ease background-color;
   cursor: pointer; }
   .sidebar__button.sidebar__button--active, .sidebar__button.sidebar__button--active:hover {
-    background-color: #ff9800 !important;}
+    background-color: #c66900 !important;}
   .sidebar__button.sidebar__button--active i, .sidebar__button.sidebar__button--active a{
     color: #FFFFFF;
   }
