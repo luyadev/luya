@@ -95,4 +95,23 @@ class ModuleReflectionTest extends \luyatests\LuyaWebTestCase
         // throws:  Controller not found. The requested module reflection route 'foo/index' could not be found.
         $resposne = $ref->run();
     }
+    
+    /**
+     * @see https://github.com/luyadev/luya/issues/1267
+     */
+    public function testModuleWithActionParamsMerge()
+    {
+        $request = new \luya\web\Request();
+        $request->setQueryParams(['foo' => 'fromget']);
+        $ref = new ModuleReflection($request, new \luya\web\UrlManager(), ['module' => Yii::$app->getModule('urlmodule')]);
+        $ref->defaultRoute('foo', 'index', ['foo' => 'bar', 'baz' => 'bar']);
+        $ref->setSuffix('subpage');
+        $this->assertSame([
+            'route' => 'subpage',
+            'args' => [
+                'foo' => 'fromget',
+                'baz' => 'bar',
+            ]
+        ], $ref->getRequestRoute());
+    }
 }

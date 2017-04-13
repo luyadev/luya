@@ -150,7 +150,7 @@ class ModuleReflection extends Object
         // overload args if none defined with massiv get assigment
         if (count($array['args']) === 0) {
             /**
-             * issue: https://github.com/zephir/luya/issues/754
+             * issue: https://github.com/luyadev/luya/issues/754
              *
              * 01.02.2016: we have to remove the get param overloading, otherwhise we can not guarnte
              * to re generate the current url rule. Have to verify why in which case this was needed.
@@ -159,6 +159,21 @@ class ModuleReflection extends Object
              * new: do not overload: $array['args'] = [];
              */
             $array['args'] = [];
+        }
+        
+        /**
+         * issue: https://github.com/luyadev/luya/issues/754
+         *
+         * As the route resolving should not contain empty argument list we overload the $requertRoute['args'] if they are empty
+         * with the whole get params
+         */
+        if (empty($array['args'])) {
+            $array['args'] = $this->request->get();
+        }
+        
+        // @see https://github.com/luyadev/luya/issues/1267
+        if ($this->_defaultRoute !== null) {
+            $array['args'] = array_merge($this->_defaultRoute['args'], $array['args']);
         }
 
         return $array;
@@ -199,11 +214,10 @@ class ModuleReflection extends Object
      * Run the route based on the values.
      *
      * @return string|\yii\web\Response The response of the action, can be either a string or an object from response.
-     * @throws NotFoundHttpException
+     * @throws \yii\web\NotFoundHttpException
      */
     public function run()
     {
-        // request route
         $requestRoute = $this->getRequestRoute();
         // create controller object
         $controller = $this->module->createController($requestRoute['route']);
@@ -213,16 +227,6 @@ class ModuleReflection extends Object
         }
         
         Yii::info('LUYA module run module "'.$this->module->id.'" route ' . $requestRoute['route'], __METHOD__);
-        
-        /**
-         * issue: https://github.com/zephir/luya/issues/754
-         *
-         * As the route resolving should not contain empty argument list we overload the $requertRoute['args'] if they are empty
-         * with the whole get params
-         */
-        if (empty($requestRoute['args'])) {
-            $requestRoute['args'] = $this->request->get();
-        }
         
         $this->controller = $controller[0];
         
