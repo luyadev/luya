@@ -116,18 +116,12 @@ class Nav extends ActiveRecord
         }
     }
     
-    private $_properties = null;
-    
     /**
      *
      */
     public function getProperties()
     {
-        if ($this->_properties === null) {
-            $this->_properties = CmsProperty::find()->where(['nav_id' => $this->id])->with('adminProperty')->all();
-        }
-        
-        return $this->_properties;
+        return $this->hasMany(CmsProperty::class, ['nav_id' => 'id'])->with('adminProperty');
     }
     
     /**
@@ -137,7 +131,7 @@ class Nav extends ActiveRecord
      */
     public function getProperty($varName)
     {
-        foreach ($this->getProperties() as $prop) {
+        foreach ($this->properties as $prop) {
             if ($prop->adminProperty->var_name == $varName) {
                 return $prop->getObject();
             }

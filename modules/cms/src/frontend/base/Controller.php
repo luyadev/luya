@@ -32,7 +32,7 @@ abstract class Controller extends \luya\web\Controller
      */
     public function renderItem($navItemId, $appendix = null, $setNavItemTypeId = false)
     {
-        $model = NavItem::find()->where(['id' => $navItemId])->with('nav')->one();
+        $model = NavItem::find()->where(['id' => $navItemId])->with(['nav'])->one();
 
         if (!$model) {
             throw new NotFoundHttpException('The requested nav item could not found.');
@@ -44,7 +44,7 @@ abstract class Controller extends \luya\web\Controller
         
         $event = new BeforeRenderEvent();
         $event->menu = $currentMenu;
-        foreach ($model->nav->getProperties() as $property) {
+        foreach ($model->nav->properties as $property) {
             $object = $property->getObject();
             
             $object->trigger($object::EVENT_BEFORE_RENDER, $event);
@@ -122,6 +122,7 @@ abstract class Controller extends \luya\web\Controller
             $this->view->registerCssFile('https://fonts.googleapis.com/icon?family=Material+Icons');
             $this->getView()->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar'], ['content' => $content]);
         }
+        
         return $content;
     }
     
@@ -134,7 +135,7 @@ abstract class Controller extends \luya\web\Controller
     
         $props = [];
     
-        foreach (Yii::$app->menu->current->model->getProperties() as $prop) {
+        foreach (Yii::$app->menu->current->model->properties as $prop) {
             $o = $prop->getObject();
             $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
         }
