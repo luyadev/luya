@@ -57,8 +57,8 @@ class QueryIterator extends Object implements Iterator
     
     /**
      * Load all models for ghe given Menu Query.
-     * 
-     * 
+     *
+     *
      * @return array An array where the key is the id of the nav model and value the {{luya\cms\models\Nav}} object.
      */
     public function loadModels()
@@ -72,9 +72,9 @@ class QueryIterator extends Object implements Iterator
     
     /**
      * Get the model for a given id.
-     * 
+     *
      * If the model was not preloaded by {{loadModels}} null is returned.
-     * 
+     *
      * @param integer $id
      * @return null|\luya\cms\models\Nav
      */

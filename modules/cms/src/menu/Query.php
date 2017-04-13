@@ -177,7 +177,7 @@ class Query extends Object
     
     /**
      * With/Without expression to hidde or display data from the Menu Query.
-     * 
+     *
      * @param string|array $types can be a string  containg "hidden" or an array with multiple with statements
      * for example `['hidden']`. Further with statements upcoming.
      * @return \luya\cms\menu\Query
@@ -198,10 +198,10 @@ class Query extends Object
     
     /**
      * Preload Mmodels for the given Menu Query.
-     * 
+     *
      * When menu a {{luya\cms\menu\Item::getModel}} method is called it will lazy the given {{luya\cms\models\Nav}} Model.
      * This can be slow on large menus, therfore you can preload all models for given Menu Query by enabling this method.
-     * 
+     *
      * @param boolean $preloadModels Whether to preload all {{luya\cms\menu\Item}} models for {{luya\cms\menu\Item::getModel}} or not.
      * @return \luya\cms\menu\Query
      */

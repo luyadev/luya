@@ -239,7 +239,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Setter method for author user ID in order ensure phpunit tests.
-     * 
+     *
      * @param integer $userId
      */
     public static function setAuthorUserId($userId)

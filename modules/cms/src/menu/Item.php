@@ -567,7 +567,7 @@ class Item extends Object implements LinkInterface, Arrayable
     
     /**
      * Setter method for the Model.
-     * 
+     *
      * @param null|\luya\cms\models\Nav $model The Nav model Active Record
      */
     public function setModel($model)
