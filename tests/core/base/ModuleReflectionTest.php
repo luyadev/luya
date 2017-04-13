@@ -114,4 +114,21 @@ class ModuleReflectionTest extends \luyatests\LuyaWebTestCase
             ]
         ], $ref->getRequestRoute());
     }
+    
+    public function testSetterGetterRequestedRoute()
+    {
+        $ref = $this->buildObject(Yii::$app->getModule('urlmodule'));
+        $ref->defaultRoute('foo', 'index', ['arg' => 1]);
+        
+        $this->assertSame(['route' => 'foo/index', 'args' => ['arg' => 1]], $ref->getRequestRoute());
+        $this->assertSame(['route' => 'foo/index', 'args' => ['arg' => 1]], $ref->getRequestRoute()); // using the getter after set there test twice
+    
+        $ref->setRequestRoute('go/there');
+        $this->assertSame(['route' => 'go/there', 'args' => []], $ref->getRequestRoute());
+        
+        $ref = $this->buildObject(Yii::$app->getModule('urlmodule'));
+        $this->assertSame(['route' => 'default', 'args' => []], $ref->getRequestRoute());
+        $ref->setRequestRoute('go/there');
+        $this->assertSame(['route' => 'go/there', 'args' => []], $ref->getRequestRoute());
+    }
 }

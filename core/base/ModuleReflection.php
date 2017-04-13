@@ -126,6 +126,8 @@ class ModuleReflection extends Object
     {
         return $this->_suffix;
     }
+    
+    private $_requestRoute = null;
 
     /**
      * Determine the default route based on current defaultRoutes or parsedRequested by the UrlManager.
@@ -134,6 +136,10 @@ class ModuleReflection extends Object
      */
     public function getRequestRoute()
     {
+        if ($this->_requestRoute !== null) {
+            return $this->_requestRoute;
+        }
+        
         if ($this->_defaultRoute !== null && empty($this->getSuffix())) {
             $array = $this->_defaultRoute;
         } else {
@@ -176,7 +182,19 @@ class ModuleReflection extends Object
             $array['args'] = array_merge($this->_defaultRoute['args'], $array['args']);
         }
 
+        $this->_requestRoute = $array;
+        
         return $array;
+    }
+
+    /**
+     * Setter method for the requested route
+     * @param unknown $route
+     * @param array $args
+     */
+    public function setRequestRoute($route, array $args = [])
+    {
+        $this->_requestRoute = ['route' => $route, 'args' => $args];
     }
 
     /**

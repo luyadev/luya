@@ -175,8 +175,8 @@ abstract class Module extends \yii\base\Module
      * Extract the current module from the route and return the new resolved route.
      *
      * @param string $route Route to resolve, e.g. `admin/default/index`
-     *
-     * @return string
+     * @return string The resolved route without the module id `default/index` when input was `admin/default/index`
+     * and the current module id is `admin`.
      */
     public function resolveRoute($route)
     {
