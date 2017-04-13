@@ -99,4 +99,22 @@ class ModuleBlockTest extends BlockTestCase
         $this->expectException('\luya\cms\Exception');
         $this->renderFrontendNoSpace();
     }
+    
+    public function testStrictRender()
+    {
+        $this->block->setEnvOption('context', 'frontend');
+        $this->block->setCfgValues(['moduleController' => 'foo', 'moduleAction' => 'bar', 'strictRender' => 1]);
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        
+        $this->assertEquals('cmsunitmodule/foo/bar', $this->renderFrontendNoSpace());
+    }
+    
+    public function testStrictRenderArgs()
+    {
+        $this->block->setEnvOption('context', 'frontend');
+        $this->block->setCfgValues(['moduleController' => 'foo', 'moduleAction' => 'bar', 'strictRender' => 1]);
+        $this->block->setVarValues(['moduleName' => 'CmsUnitModule']);
+    
+        $this->assertEquals('cmsunitmodule/foo/bar', $this->renderFrontendNoSpace());
+    }
 }

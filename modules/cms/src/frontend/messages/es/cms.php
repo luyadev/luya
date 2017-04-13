@@ -167,7 +167,7 @@ return [
       // rc2
       'block_group_media_group' =>  'Medio',
         
-    // 1.0.0
+       // rc3
       'block_audio_admin_nourl' => 'No se ha establecido ningún código de audio incorporado.',
       'block_audio_admin_hasurl' => 'Se ha ajustado el código de audio incorporado.',
       'block_file_list_admin_empty' => 'No se ha seleccionado aún ningún archivo.',
@@ -176,4 +176,9 @@ return [
       'block_spacing_small_space' => 'Espacio pequeño',
       'block_spacing_medium_space' => 'Espacio medio',
       'block_spacing_large_space' => 'Gran espacio',
+    
+    // 1.0.0
+    'block_module_strictrender' => 'Strict Render',
+    'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.'
+    
 ];

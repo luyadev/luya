@@ -587,19 +587,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "f5835c9207a676154cfa25581c21c6c764018c15"
+                "reference": "0237d5f06acfb439cabcbddc282582705a943a61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/f5835c9207a676154cfa25581c21c6c764018c15",
-                "reference": "f5835c9207a676154cfa25581c21c6c764018c15",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/0237d5f06acfb439cabcbddc282582705a943a61",
+                "reference": "0237d5f06acfb439cabcbddc282582705a943a61",
                 "shasum": ""
             },
             "require": {
                 "curl/curl": "~1.0",
                 "php": ">=5.5.0",
                 "phpmailer/phpmailer": "~5.0",
-                "twig/twig": "~1.0",
                 "yiisoft/yii2": "2.0.11"
             },
             "require-dev": {
@@ -648,7 +647,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2017-04-12T13:53:41+00:00"
+            "time": "2017-04-13 16:27:14"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -656,12 +655,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "3e191e2925c5073b04fe8f66e4c595af4d22468c"
+                "reference": "c68d880a4225e027425c00c41a9b1e7a75d2dc8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/3e191e2925c5073b04fe8f66e4c595af4d22468c",
-                "reference": "3e191e2925c5073b04fe8f66e4c595af4d22468c",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/c68d880a4225e027425c00c41a9b1e7a75d2dc8e",
+                "reference": "c68d880a4225e027425c00c41a9b1e7a75d2dc8e",
                 "shasum": ""
             },
             "require": {
@@ -711,20 +710,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-04-12T10:44:29+00:00"
+            "time": "2017-04-12 14:12:31"
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "5a5a9fc8025a08d8919be87d6884d5a92520cefe"
+                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/5a5a9fc8025a08d8919be87d6884d5a92520cefe",
-                "reference": "5a5a9fc8025a08d8919be87d6884d5a92520cefe",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8e6e04167378abf1ddb4d3522d8755c5fd90d102",
+                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102",
                 "shasum": ""
             },
             "require": {
@@ -753,7 +752,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-01-26T22:05:40+00:00"
+            "time": "2017-04-12T18:52:22+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2495,68 +2494,6 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2017-03-20T09:45:15+00:00"
-        },
-        {
-            "name": "twig/twig",
-            "version": "v1.33.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a",
-                "reference": "05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.7"
-            },
-            "require-dev": {
-                "psr/container": "^1.0",
-                "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~3.3@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.33-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Twig_": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
-                    "name": "Armin Ronacher",
-                    "email": "armin.ronacher@active-4.com",
-                    "role": "Project Founder"
-                },
-                {
-                    "name": "Twig Team",
-                    "homepage": "http://twig.sensiolabs.org/contributors",
-                    "role": "Contributors"
-                }
-            ],
-            "description": "Twig, the flexible, fast, and secure template language for PHP",
-            "homepage": "http://twig.sensiolabs.org",
-            "keywords": [
-                "templating"
-            ],
-            "time": "2017-03-22T15:40:09+00:00"
         },
         {
             "name": "webmozart/assert",
