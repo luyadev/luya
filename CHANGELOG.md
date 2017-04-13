@@ -10,6 +10,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1270](https://github.com/luyadev/luya/issues/1270) Module block set resolved query params into the request component if not strict mode.
 - [#1268](https://github.com/luyadev/luya/issues/1268) Module block strict render ability in order to strict render the given action and controller paths instead of parse them trough the request component.
 - [#1227](https://github.com/luyadev/luya/issues/1227) Added preloadModels() method for the Menu Query in order to collect all models for the given request. This can strongly reduce the sql count when working with properties or models.
 - [#1266](https://github.com/luyadev/luya/issues/1266) render() method for the mailer component in order to provide controller template files.

@@ -158,6 +158,8 @@ final class ModuleBlock extends PhpBlock
         
         if ($this->getCfgValue('strictRender')) {
             $reflection->setRequestRoute(implode("/", [$this->getCfgValue('moduleController', $module->defaultRoute), $this->getCfgValue('moduleAction', 'index')]), $args);
+        } else {
+            Yii::$app->request->queryParams = array_merge($reflection->getRequestRoute()['args'], Yii::$app->request->queryParams);
         }
 
         $response = $reflection->run();
