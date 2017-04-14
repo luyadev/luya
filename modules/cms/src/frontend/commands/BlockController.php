@@ -376,7 +376,7 @@ class BlockController extends \luya\console\Command
                     $doVars = $this->confirm('Add one more?', false);
                     ++$i;
                 }
-                $doCfgs = $this->confirm('Add new Configuration (cgfs)?', false);
+                $doCfgs = $this->confirm('Add new Configuration (cfgs)?', false);
                 $i = 1;
                 while ($doCfgs) {
                     $item = $this->varCreator('Configration (cfgs) #'.$i, 'cfg');
