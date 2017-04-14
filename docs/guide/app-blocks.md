@@ -154,6 +154,24 @@ the following keys are available:
 + **isNextEqual**: Returns whether the next item is of the same origin (block type, like text block) as the current.
 + **equalIndex**: Get the current index/position of this element within the list of *same* elements.
 
+The properties can help you in order to make a container layout block which auto closes/open the row when working with a grid system like the one from Bootstrap:
+
+```php
+<?php if (!$this->isPrevEqual): ?>
+<div class="row">
+<?php endif; ?>
+
+    <div class="col-md-3">
+       <h1>The Block Content.</h1>
+    </div>
+
+<?php if (!$this->isNextEqual): ?>
+</div>
+<?php endif; ?>
+```
+
+The above example would only open the row element once and closes the row container when the next element is not an element of the current block.
+
 #### Properties from CMS Page
 
 If there are any CMS properties defined you can access them like this:
