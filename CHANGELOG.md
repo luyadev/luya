@@ -18,7 +18,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 ### Fixed
 
 - [#1267](https://github.com/luyadev/luya/issues/1267) Fixed bug where module block action params overrides the default values, merge instead.
-
+- [#1265](https://github.com/luyadev/luya/issues/1265) Using https for Google Maps embed code.
 
 1.0.0-RC3 (11. April 2017)
 -------------------
