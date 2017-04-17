@@ -28,7 +28,7 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $this->assertFalse(empty($mail->getError()));
     }
     
-    public function testAdresses()
+    public function testAddresses()
     {
         $mail = new Mail();
         $mail->address('mailonly@example.com');

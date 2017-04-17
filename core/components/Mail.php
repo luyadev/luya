@@ -268,7 +268,7 @@ class Mail extends \yii\base\Component
      *
      * @return \luya\components\Mail
      * @since 1.0.0-beta4
-     * @param array $emails An array with email adresses or name => email paring to use names.
+     * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function addresses(array $emails)
     {
