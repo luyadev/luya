@@ -33,7 +33,7 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $mail = new Mail();
         $mail->address('mailonly@example.com');
         $mail->address('withname@example.com', 'John Doe');
-        $mail->adresses([
+        $mail->addresses([
             'arraymailonly@example.com',
             'Jane Doe' => 'arraywithname@example.com'
         ]);
