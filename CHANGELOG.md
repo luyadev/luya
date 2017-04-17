@@ -9,6 +9,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 ### Changed
 
 - [#1273](https://github.com/luyadev/luya/issues/1273) Mail component remove adresses() replace with addresses().
+- [#1264](https://github.com/luyadev/luya/issues/1264) Renamed $LinkActiveClass property to $linkActiveClass in luya\cms\widgets\LangSwitcher.
 
 ### Added
 
