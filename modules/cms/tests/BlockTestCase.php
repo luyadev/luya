@@ -2,6 +2,8 @@
 
 namespace cmstests;
 
+use Twig_Loader_String;
+
 class BlockTestCase extends CmsFrontendTestCase
 {
     public $blockClass = null;
@@ -29,6 +31,20 @@ class BlockTestCase extends CmsFrontendTestCase
         $this->assertFalse(is_array($this->block->renderAdmin()));
         $this->assertNotNull($this->block->getFieldHelp());
         return $this->block->renderFrontend();
+    }
+    
+    public function renderAdmin()
+    {
+    	$twig = new \Twig_Environment(new \Twig_Loader_Filesystem());
+    	$temp = $twig->createTemplate($this->block->renderAdmin());
+    	return $temp->render(['cfgs' => $this->block->getCfgValues(), 'vars' => $this->block->getVarValues()]);
+    }
+
+    public function renderAdminNoSpace()
+    {
+    	$text = trim(preg_replace('/\s+/', ' ', $this->renderAdmin()));
+    	
+    	return str_replace(['> ', ' <'], ['>', '<'], $text);
     }
         
     public function renderFrontendNoSpace()

@@ -179,6 +179,7 @@ return [
     
     // 1.0.0
     'block_module_strictrender' => 'Strict Render',
-    'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.'
+    'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.',
+	'block_html_cfg_raw_label' => 'Render HTML in Admin',
     
 ];
