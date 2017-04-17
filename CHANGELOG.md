@@ -8,6 +8,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1273](https://github.com/luyadev/luya/issues/1273) Mail component remove adresses() replace with addresses().
+
 ### Added
 
 - [#1270](https://github.com/luyadev/luya/issues/1270) Module block set resolved query params into the request component if not strict mode.

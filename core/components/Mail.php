@@ -257,20 +257,20 @@ class Mail extends \yii\base\Component
      * If no key is used, the name is going to be ignored, if a string key is available it represents the name.
      *
      * ```php
-     * adresses(['foo@example.com', 'bar@example.com']);
+     * addresses(['foo@example.com', 'bar@example.com']);
      * ```
      *
      * or with names
      *
      * ```php
-     * adresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
+     * addresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
      * ```
      *
      * @return \luya\components\Mail
      * @since 1.0.0-beta4
      * @param array $emails An array with email adresses or name => email paring to use names.
      */
-    public function adresses(array $emails)
+    public function addresses(array $emails)
     {
         foreach ($emails as $name => $mail) {
             if (is_int($name)) {
