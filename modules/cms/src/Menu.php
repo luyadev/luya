@@ -461,9 +461,9 @@ class Menu extends Component implements ArrayAccess
      * Wrapper method to get one menu item for current language without hidden items for the
      * sepcific where statement.
      *
-     * @param array $where
+     * @param array $where See {{\luya\cms\menu\Query::where}}
      * @see \luya\cms\menu\Query::where()
-     * @return \luya\cms\menu\QueryIterator
+     * @return \luya\cms\menu\Item
      */
     public function findOne(array $where)
     {
