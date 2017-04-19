@@ -576,15 +576,35 @@ class Item extends Object implements LinkInterface, Arrayable
     }
     
     /**
+     * Get Property Object.
+     * 
      * This method allows you the retrieve a property for an page property. If the property is not found false will be retunrend
-     * otherwhise the property object itself will be returned (implements `\admin\base\Property`) so you can retrieve the value of the
+     * otherwhise the property object itself will be returned {{luya\\admin\base\Property}} so you can retrieve the value of the
      * property by calling your custom method or the default `getValue()` method.
+     * 
+     * In order to return the value, which is mostly the case, use: {{luya\cms\menu\Item::getPropertyValue}}
      *
-     * @param string $varName The variable name of the property defined inside of the property of the method `varName()`.
+     * @param string $varName The variable name of the property defined in the method {{luya\\admin\base\Property::varName}}
+     * @return \luya\admin\base\Property
      */
     public function getProperty($varName)
     {
         return $this->model->getProperty($varName);
+    }
+
+    /**
+     * Get the value of a Property Object.
+     * 
+     * Compared to {{luya\cms\menu\Item::getProperty}} this method returns only the value for a given property. If the
+     * property is not assigned for the current Menu Item the $defaultValue will be returned, which is null by default.
+     * 
+     * @param string $varName The variable name of the property defined in the method {{luya\\admin\base\Property::varName}}
+     * @param mixed $defaultValue The default value which will be returned if the property is not set for the current page.
+     * @return string|mixed Returns the value of {{luya\admin\base\Property::getValue}} if set, otherwise $defaultValue.
+     */
+    public function getPropertyValue($varName, $defaultValue = null)
+    {
+    	return $this->getProperty($varName) ? $this->getProperty($varName)->getValue() : $defaultValue;
     }
 
     /**
