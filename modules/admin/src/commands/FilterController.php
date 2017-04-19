@@ -19,11 +19,11 @@ class FilterController extends Command
     public function actionIndex()
     {
         if ($this->identifier === null) {
-            $this->identifier = Inflector::id2camel($this->prompt('Enter the filter identifier', ['required' => true]));
+            $this->identifier = Inflector::variablize($this->prompt('Enter the filter identifier', ['required' => true]));
         }
 
         if ($this->name === null) {
-            $this->name = $this->prompt('Would you like to enter a Name?', ['required' => false, 'default' => $this->identifier]);
+            $this->name = ucfirst($this->prompt('Would you like to enter a Name?', ['required' => false, 'default' => ucfirst($this->identifier)]));
         }
         
         if ($this->chain === null) {
