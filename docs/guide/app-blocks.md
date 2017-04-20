@@ -10,8 +10,6 @@ You can add Blocks to your application or to a module. In either case, the folde
 
 For example, we create a Block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
 
-> In 1.0.0-beta8 the new *PHP BLOCKS* was introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from {{\luya\cms\base\PhpBlock}}. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
-
 This is what the `TextTransformBlock` could looke like in your code:
 
 ```php
