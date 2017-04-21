@@ -77,4 +77,15 @@ class Request extends \yii\web\Request
         
         return $this->_isAdmin;
     }
+    
+    /**
+     * Get the user client language.
+     * 
+     * @param string $defaultValue Return if not set.
+     * @return string
+     */
+    public function getClientLanguage($defaultValue)
+    {
+        return (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : $defaultValue;
+    }
 }
