@@ -447,22 +447,23 @@ class Menu extends Component implements ArrayAccess
      * Wrapper method to get all menu items for the current language without hidden items for
      * the specific where statement.
      *
-     * @param array $where See \luya\cms\menu\Query::where()
+     * @param array $where See {{\luya\cms\menu\Query::where}}
+     * @param boolean $preloadModels Whether to preload all models for the given menu Query. See {{luya\cms\menu\Query::preloadModels}}
      * @see \luya\cms\menu\Query::where()
      * @return \luya\cms\menu\QueryIterator
      */
-    public function findAll(array $where)
+    public function findAll(array $where, $preloadModels = false)
     {
-        return (new MenuQuery())->where($where)->all();
+        return (new MenuQuery())->where($where)->preloadModels($preloadModels)->all();
     }
 
     /**
      * Wrapper method to get one menu item for current language without hidden items for the
      * sepcific where statement.
      *
-     * @param array $where
+     * @param array $where See {{\luya\cms\menu\Query::where}}
      * @see \luya\cms\menu\Query::where()
-     * @return \luya\cms\menu\QueryIterator
+     * @return \luya\cms\menu\Item
      */
     public function findOne(array $where)
     {

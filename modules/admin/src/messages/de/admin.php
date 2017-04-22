@@ -195,7 +195,7 @@ return [
     'aws_changepassword_notequal' => 'Das neue Passwort muss mit der Wiederholung übereinstimmen.',
     'aws_changeapssword_minchar' => 'Das neue Passwort muss mindestens {min} Zeichen enthalten.',
         
-// 1.0.0
+// rc3
 
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Name',
@@ -234,4 +234,5 @@ return [
     'js_filemanager_count_files_overlay' => '%count% Dateien',
     'js_link_change_value' => 'Link ändern',
     'js_link_set_value' => 'Link setzen',
+    'callback_button_file_download_widget_success' => 'Die Datei wurde vorbereitet. Sie können die Datei jetzt herunterladen.',
 ];

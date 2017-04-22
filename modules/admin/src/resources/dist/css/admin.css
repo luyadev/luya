@@ -9110,6 +9110,26 @@ menu-dropdown,
   color: grey;
   display: inline-block; }
 
+.pagination {
+  margin: 30px 0; }
+
+.pagination__number {
+  cursor: pointer;
+  margin: 0 2px; }
+  .pagination__number.active a {
+    background-color: #E57373;
+    color: #FFFFFF; }
+  .pagination__number:hover a {
+    background-color: #E57373;
+    color: #FFFFFF; }
+
+.pagination__arrow {
+  cursor: pointer; }
+  .pagination__arrow a {
+    line-height: 0; }
+  .pagination__arrow:hover a {
+    color: #F44336; }
+
 .search-box {
   background-color: #FFFFFF;
   position: fixed;

@@ -133,11 +133,11 @@ use luya\admin\Module;
 
             <div ng-if="pager && !config.pagerHiddenByAjaxSearch" style="text-align: center;">
                 <ul class="pagination">
-                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
-                    <li class="waves-effect" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
+                    <li class="pagination__arrow pagination__arrow--left" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
+                    <li class="pagination__number" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
                         <a>{{pageId}}</a>
                     </li>
-                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
+                    <li class="pagination__arrow pagination__arrow--right" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
                 </ul>
             </div>
 
@@ -154,7 +154,7 @@ use luya\admin\Module;
                 </thead>
                 <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
                 <tr ng-if="config.groupBy" class="table__group">
-                    <td colspan="100"> <!--ng-click="IS IT THIS?"-->
+                    <td colspan="100">
                         <strong>{{key}}</strong>
                         <i class="material-icons right" ng-click="viewToggler[key]=true" ng-show="!viewToggler[key]">keyboard_arrow_up</i>
                         <i class="material-icons right" ng-click="viewToggler[key]=false" ng-show="viewToggler[key]">keyboard_arrow_down</i>
@@ -184,11 +184,11 @@ use luya\admin\Module;
 
             <div ng-if="pager && !config.pagerHiddenByAjaxSearch" style="text-align: center;">
                 <ul class="pagination">
-                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
-                    <li class="waves-effect" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
+                    <li class="pagination__arrow pagination__arrow--left" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
+                    <li class="pagination__number" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
                         <a>{{pageId}}</a>
                     </li>
-                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
+                    <li class="pagination__arrow pagination__arrow--right" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
                 </ul>
             </div>
 

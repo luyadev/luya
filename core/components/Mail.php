@@ -6,6 +6,8 @@ use Yii;
 use luya\Exception;
 use PHPMailer;
 use SMTP;
+use luya\web\View;
+use yii\base\Controller;
 
 /**
  * LUYA mail component to compose messages and send them via SMTP.
@@ -13,7 +15,7 @@ use SMTP;
  * This component is registered on each LUYA instance, how to use:
  *
  * ```php
- * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail'->adress('info@example.com')->send()) {
+ * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail'->address('info@example.com')->send()) {
  *     echo "Mail has been sent!";
  * } else {
  *     echo "Error" : Yii::$app->mail->error;
@@ -194,6 +196,42 @@ class Mail extends \yii\base\Component
     }
 
     /**
+     * Render a view file for the given Controller context.
+     * 
+     * Assuming the following example inside a controller:
+     * 
+     * ```php
+     * Yii::$app->mail->compose('Send E-Mail')->render($this, 'mymail', ['foo' => 'bar'])->address('info@luya.io')->send();
+     * ```
+     * 
+     * @param \yii\base\Controller $controller The controller context
+     * @param string $viewFile The view file to render
+     * @param array $params The parameters to pass to the view file.
+     * @return \luya\components\Mail
+     */
+    public function render(Controller $controller, $viewFile, array $params = [])
+    {
+        $this->body($controller->renderPartial($viewFile, $params));
+        
+        return $this;
+    }
+    
+    private $_context = [];
+    
+    /**
+     * Pass option parameters to the layout files.
+     * 
+     * @param array $vars
+     * @return \luya\components\Mail 
+     */
+    public function context(array $vars)
+    {
+        $this->_context = $vars;
+        
+        return $this;
+    }
+
+    /**
      * Wrap the layout from the `$layout` propertie and store
      * the passed  content as $content variable in the view.
      *
@@ -207,7 +245,10 @@ class Mail extends \yii\base\Component
         }
         
         $view = Yii::$app->getView();
-        return $view->renderPhpFile(Yii::getAlias($this->layout), ['content' => $content]);
+        
+        $vars = array_merge($this->_context, ['content' => $content]);
+        
+        return $view->renderPhpFile(Yii::getAlias($this->layout), $vars);
     }
     
     /**
@@ -216,20 +257,20 @@ class Mail extends \yii\base\Component
      * If no key is used, the name is going to be ignored, if a string key is available it represents the name.
      *
      * ```php
-     * adresses(['foo@example.com', 'bar@example.com']);
+     * addresses(['foo@example.com', 'bar@example.com']);
      * ```
      *
      * or with names
      *
      * ```php
-     * adresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
+     * addresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
      * ```
      *
      * @return \luya\components\Mail
      * @since 1.0.0-beta4
-     * @param array $emails An array with email adresses or name => email paring to use names.
+     * @param array $emails An array with email addresses or name => email paring to use names.
      */
-    public function adresses(array $emails)
+    public function addresses(array $emails)
     {
         foreach ($emails as $name => $mail) {
             if (is_int($name)) {

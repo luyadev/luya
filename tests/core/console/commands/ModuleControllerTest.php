@@ -21,7 +21,7 @@ namespace app\modules\admin;
 /**
  * Foo Admin Module.
  *
- * File has been created with `module/create` command on LUYA version 1.0.0-RC3-dev. 
+ * File has been created with `module/create` command on LUYA version 1.0.0-dev. 
  */
 class Module extends \luya\admin\base\Module
 {
@@ -44,7 +44,7 @@ namespace app\modules\frontend;
 /**
  * Foo Admin Module.
  *
- * File has been created with `module/create` command on LUYA version 1.0.0-RC3-dev. 
+ * File has been created with `module/create` command on LUYA version 1.0.0-dev. 
  */
 class Module extends \luya\base\Module
 {
@@ -62,7 +62,7 @@ EOT;
         $tpl = <<<'EOT'
 # Foo Module
  
-File has been created with `module/create` command on LUYA version 1.0.0-RC3-dev. 
+File has been created with `module/create` command on LUYA version 1.0.0-dev. 
  
 ## Installation
 

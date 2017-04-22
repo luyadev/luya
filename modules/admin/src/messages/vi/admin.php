@@ -195,7 +195,7 @@ return [
     'aws_changepassword_notequal' => 'Mật khẩu và mật khẩu nhập lại không trùng nhau.',
     'aws_changeapssword_minchar' => 'Mật khẩu mới phải ít nhất {min} ký tự.',
     
-// 1.0.0
+// rc3
 
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Tên',
@@ -234,4 +234,6 @@ return [
     'js_filemanager_count_files_overlay' => '%count% files',
     'js_link_change_value' => 'Change Link',
     'js_link_set_value' => 'Set Link',
+    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
+    
 ];

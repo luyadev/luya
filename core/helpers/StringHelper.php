@@ -36,6 +36,25 @@ class StringHelper extends \yii\helpers\BaseStringHelper
     }
     
     /**
+     * Checke whether a strings starts with the wildcard symbole and compares the string before the wild card symbol * 
+     * with the string provided, if there is NO wildcard symbold it always return false.
+     * 
+     * 
+     * @param string $string The string which should be checked with $with comperator
+     * @param string $with The with string which must end with the wildcard symbol * e.g. `foo*` would match string `foobar`.
+     * @return boolean Whether the string starts with the wildcard marked string or not, if no wildcard symbol is contained 
+     * in the $with it always returns false.
+     */
+    public static function startsWithWildcard($string, $with, $caseSensitive = true)
+    {
+        if (substr($with, -1) != "*") {
+            return false;
+        }
+        
+        return self::startsWith($string, rtrim($with, '*'), $caseSensitive);
+    }
+    
+    /**
      * TypeCast a numeric value to float or integer.
      *
      * If the given value is not a numeric or float value it will be returned as it is. In order to find out whether its float

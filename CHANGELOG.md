@@ -8,6 +8,28 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1273](https://github.com/luyadev/luya/issues/1273) Mail component remove adresses() replace with addresses().
+- [#1264](https://github.com/luyadev/luya/issues/1264) Renamed $LinkActiveClass property to $linkActiveClass in luya\cms\widgets\LangSwitcher.
+
+### Added
+
+- [#1270](https://github.com/luyadev/luya/issues/1270) Module block set resolved query params into the request component if not strict mode.
+- [#1268](https://github.com/luyadev/luya/issues/1268) Module block strict render ability in order to strict render the given action and controller paths instead of parse them trough the request component.
+- [#1227](https://github.com/luyadev/luya/issues/1227) Added preloadModels() method for the Menu Query in order to collect all models for the given request. This can strongly reduce the sql count when working with properties or models.
+- [#1266](https://github.com/luyadev/luya/issues/1266) render() method for the mailer component in order to provide controller template files.
+- [#1269](https://github.com/luyadev/luya/issues/1269) Add raw option for html block in order to render the html output in admin view.
+
+### Fixed
+
+- [#1267](https://github.com/luyadev/luya/issues/1267) Fixed bug where module block action params overrides the default values, merge instead.
+- [#1265](https://github.com/luyadev/luya/issues/1265) Using https for Google Maps embed code.
+
+1.0.0-RC3 (11. April 2017)
+-------------------
+
+### Changed
+
++ [#1229](https://github.com/luyadev/luya/issues/1229) The ngRest CheckboxRelation plugin dropped the support for ActiveRecord object getters inside the labelTemplates, use the closure function inside the labelFields propertie instead. 
 - [#1208](https://github.com/luyadev/luya/issues/1208) Renamed `luya\cms\widgets\LanguageSwitcher` to `LangSwitcher` and removed the template usage as it should not be part of the widget.
 - [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 - [#1177](https://github.com/luyadev/luya/issues/1177) The luya\web\Elements component looks for the elements.php inside the @app/views folder instead of @app.
@@ -20,6 +42,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1076](https://github.com/luyadev/luya/issues/1076) Twig Component triggers now an deprecated notice message.
 - [#1218](https://github.com/luyadev/luya/issues/1218) Renamed InfoActiveWindow to DetailViewActiveWindow.
 - [#1244](https://github.com/luyadev/luya/issues/1244) Crawler DefaultController returns ActiveDataProvider instead of ActiveRecord results.
+- [#1231](https://github.com/luyadev/luya/issues/1231) Upgrade to Angular 1.6 therfore all custom angular admin js files have to make sure to be compatible with Version 1.6 (dropped .success and .error for $http component)
 
 ### Added
 
@@ -78,6 +101,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1255](https://github.com/luyadev/luya/issues/1255) Fixed scroll bug and improved over all behavior.
+- [#1254](https://github.com/luyadev/luya/issues/1254) Updated CRUD pagination styles.
 - [#1138](https://github.com/luyadev/luya/issues/1138) Updated responsive menu bar styles to improve the user experience on smaller screens.
 - [#1186](https://github.com/luyadev/luya/issues/1186) Image records not deleted from list without cache reload.
 - [#1162](https://github.com/luyadev/luya/issues/1162) Unable to create pages from empty draft selection.

@@ -12,7 +12,7 @@ return [
     'view_index_page_title' => 'Título da página',
     'view_index_page_alias' => 'Segmento do caminho do URL',
     'view_index_page_meta_description' => 'Descrição (Meta Descrição para o Google)',
-    'view_index_page_nav_container' => 'Navigação-Container',
+    'view_index_page_nav_container' => 'Navegação-Container',
     'view_index_page_parent_page' => 'Página principal',
     'view_index_page_success' => 'Criou a página com sucesso!',
     'view_index_page_parent_root' => 'no nível da raiz',
@@ -63,7 +63,7 @@ return [
     'model_navitemredirect_value_label' => 'Alvo do redirecionamento',
     
     'view_index_add_title' => 'Adicionar nova página',
-    'view_index_add_page_from_language' => 'Adcionar página do idioma',
+    'view_index_add_page_from_language' => 'Adicionar página do idioma',
     'view_index_add_page_from_language_info' => 'Deseja copiar o conteúdo de outro idioma ao criar esta página?',
     'view_index_add_page_empty' => 'Adicionar nova página em branco',
     'view_index_language_loading' => 'Lendo a página',
@@ -86,7 +86,7 @@ return [
     'js_state_is_home' => '%title% é uma página raiz',
     'js_state_is_not_home' => '%title% não é uma página raiz',
     'js_page_item_update_ok' => 'A página «%title%» foi atualizada!',
-    'js_page_block_update_ok' => 'O bloco «%name%» foi atualizada!',
+    'js_page_block_update_ok' => 'O bloco «%name%» foi atualizado!',
     'js_page_block_remove_ok' => 'O bloco «%name%» foi excluído!',
     'js_page_block_visbility_change' => 'A visibilidade de «% name%» foi alterada com êxito.',
 

@@ -10,7 +10,7 @@ return [
     'tb_seo_link' => 'Link da URL',
     'tb_seo_keywords' => 'Palavras-chaves',
     'tb_seo_keywords_notfound' => 'Nenhuma palavra-chave encontrada! Você deve adicionar palavras-chaves para analisar seu conteúdo.',
-    'tb_seo_warning' => 'Algumas de suas palavras-chaves não foram encontradas em seu conteúdo, Para corrigir isto, você deve alterar suas palavras-chaves ou adicionando conteúdo para as palavras-chaves definidas',
+    'tb_seo_warning' => 'Algumas de suas palavras-chaves não foram encontradas em seu conteúdo. Para corrigir isto, você deve alterar suas palavras-chaves ou adicionar algum conteúdo para as palavras-chaves definidas',
     'tb_edit_alt' => 'Edite esta tabela na interface do CMS',
     'tb_visible_not_alt' => 'Esta página NÃO está visível para o visitante',
     'tb_visible_alt' => 'Esta página é visível para o seu visitante',
@@ -123,7 +123,7 @@ return [
     'block_text_name' => 'Texto',
     'block_text_content_label' => 'Texto',
     'block_text_texttype_label' =>'Tipo de texto',
-    'block_text_texttype_normal' => 'Texto casal',
+    'block_text_texttype_normal' => 'Texto casual',
     'block_text_texttype_markdown' => 'Texto de markdown ',
     'block_text_no_content' => 'Nenhum texto foi fornecido ainda.',
     'block_title_name' => 'Cabeçalho',
@@ -148,8 +148,8 @@ return [
     'block_video_help_width' => 'Será ignorado quando 0 ou vazio',
     'block_image_fixed_width' => 'Imagem com largura fixa',
     'block_image_fixed_height' => 'Imagem com altura fixa',
-    'block_layout_left_column_css_class' => 'Classes CSS para a coluna da direita',
-    'block_layout_right_column_css_class' => 'Classes CSS para a coluna da esquerda',
+    'block_layout_left_column_css_class' => 'Classes CSS para a coluna da esquerda',
+    'block_layout_right_column_css_class' => 'Classes CSS para a coluna da direita',
     'block_image_internallink_label' => 'Link interno',
     'block_image_externallink_label' => 'Link externo (Substitui o link interno, se configurado)',
     'block_group_dev_elements' => 'Desenvolvimento',
@@ -165,9 +165,9 @@ return [
     'block_cfg_additonal_css_class' => 'Classes CSS', // this is not block related and can be ussed in all blocks.
     
     // rc2
-    'block_group_media_group' => 'Média',
+    'block_group_media_group' => 'Mídia',
         
-    // 1.0.0
+    // rc3
     'block_audio_admin_nourl' => 'Nenhum código de áudio incorporado foi definido.',
     'block_audio_admin_hasurl' => 'O código de áudio incorporado foi definido.',
     'block_file_list_admin_empty' => 'Nenhum arquivo foi selecionado ainda.',
@@ -176,4 +176,10 @@ return [
     'block_spacing_small_space' => 'Espaço pequeno',
     'block_spacing_medium_space' => 'Espaço médio',
     'block_spacing_large_space' => 'Espaço grande',
+    
+    // 1.0.0
+    'block_module_strictrender' => 'Strict Render',
+    'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.',
+	'block_html_cfg_raw_label' => 'Render HTML in Admin',
+    
 ];

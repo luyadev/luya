@@ -167,13 +167,19 @@ return [
     // rc2
     'block_group_media_group' => 'Медиа',
         
-    // 1.0.0
-    'block_audio_admin_nourl' => 'No embed audio code has been set.',
-    'block_audio_admin_hasurl' => 'Embed audio code is set.',
-    'block_file_list_admin_empty' => 'No files has been selected yet.',
+    // rc3
+    'block_audio_admin_nourl' => 'Код для аудиовставки не установлен.',
+    'block_audio_admin_hasurl' => 'Код для аудиовставки установлен.',
+    'block_file_list_admin_empty' => 'Файлы не выбраны.',
     'block_html_name' => 'HTML',
-    'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
-    'block_spacing_small_space' => 'Small space',
-    'block_spacing_medium_space' => 'Medium space',
-    'block_spacing_large_space' => 'Large space',
+    'block_module_modulename_help' => 'Доступны только зарегистрированные конфигурационные модули.',
+    'block_spacing_small_space' => 'Маленькое пробел',
+    'block_spacing_medium_space' => 'Середний пробел',
+    'block_spacing_large_space' => 'Большой пробел',
+    
+    // 1.0.0
+    'block_module_strictrender' => 'Strict Render',
+    'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.',
+	'block_html_cfg_raw_label' => 'Render HTML in Admin',
+    
 ];

@@ -88,7 +88,7 @@ class LangSwitcher extends \luya\base\Widget
     /**
      * @var string The class to set when the link item (a tag) is the current language.
      */
-    public $LinkActiveClass = 'lang-link-item--active';
+    public $linkActiveClass = 'lang-link-item--active';
     
     /**
      * @var array Options to pass to the link element (a tag).
@@ -131,9 +131,9 @@ class LangSwitcher extends \luya\base\Widget
         
         if ($isActive) {
             if (isset($linkOptions['class'])) {
-                $linkOptions['class'] = $linkOptions['class'] . ' ' . $this->LinkActiveClass;
+                $linkOptions['class'] = $linkOptions['class'] . ' ' . $this->linkActiveClass;
             } else {
-                $linkOptions['class'] = $this->LinkActiveClass;
+                $linkOptions['class'] = $this->linkActiveClass;
             }
          
             if (isset($elementOptions['class'])) {

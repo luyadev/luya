@@ -235,6 +235,18 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         return Yii::t('cmsadmin', $message, $params, Yii::$app->luyaLanguage);
     }
     
+    private static $_authorUserId = 0;
+    
+    /**
+     * Setter method for author user ID in order ensure phpunit tests.
+     *
+     * @param integer $userId
+     */
+    public static function setAuthorUserId($userId)
+    {
+        self::$_authorUserId = $userId;
+    }
+    
     /**
      * Get the user id of the logged in user in web appliation context.
      *
@@ -243,6 +255,6 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public static function getAuthorUserId()
     {
-        return (Yii::$app instanceof \luya\web\Application) ? Yii::$app->adminuser->getId() : 0;
+        return (Yii::$app instanceof \luya\web\Application) ? Yii::$app->adminuser->getId() : self::$_authorUserId;
     }
 }

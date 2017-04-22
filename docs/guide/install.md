@@ -13,7 +13,7 @@ composer global require "fxp/composer-asset-plugin:~1.3"
 After setting up composer, we execute the composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup enabling you to directly run your website. We recommend to run the `create-project` command directly from your htdocs/webserver folder:
 
 ```sh
-composer create-project luyadev/luya-kickstarter:1.0.0-RC2
+composer create-project luyadev/luya-kickstarter:1.0.0-RC3
 ```
 
 > Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
@@ -51,8 +51,6 @@ The setup proccess will ask you for an email and password to store your personal
 
 > `./vendor/bin/luya health` will make a small check if several directories exist and readable/writable.
 
-You can now log in into your administration interface `http://localhost/luya-kickstarter/admin` (depending on where you have located the luya files). When you have successfull logged into the administration area, navigate to **System** -> **Groups** and click **Authorizations**. This will open an Active Window where you can enable all permissions for your Group.
-
-![luya-set-permission](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-install-set-permission.jpg "LUYA Set permissions")
+You can now log in into your administration interface `http://localhost/luya-kickstarter/admin` (depending on where you have located the LUYA files).
 
 > Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA Setup.

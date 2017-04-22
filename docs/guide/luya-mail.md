@@ -51,10 +51,10 @@ To quickly send an email in one line you can use the object chain mode like the 
 $mail = Yii::$app->mail->compose('Mail Subject', 'My HTML email content goes here.')->address('recipient@luya.io')->send();
 ```
 
-You can also use the method `adresses` with an array of all E-Mail adresse you would like to address.
+You can also use the method `addresses` with an array of all E-Mail adresse you would like to address.
 
 ```php
-Yii::$app->mail->compose('Subject', '<p>Html</p>')->adresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])->send();
+Yii::$app->mail->compose('Subject', '<p>Html</p>')->addresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])->send();
 ```
 
 In order to add cc or bcc recipients you can use similar functions to {{\luya\components\Mail::addresses}}.

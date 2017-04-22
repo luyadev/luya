@@ -46,7 +46,7 @@ After running the import command you will see the property in the CMS admin. In 
 
 We are also have a set of predefined propertys you can extend from, this i cause some blocks have to override the `getValue()` method in order to change the value output, as this is common scenario we have built classes you can abstract from.
 
-#### luya\admin\base\ImageProperty
+#### Image Property
 
 The image property is often used to return upload an image and return the path for, so you can abstract your property from {{\luya\admin\base\ImageProperty}} like the example below:
 
@@ -69,7 +69,12 @@ In order to get use the above MyImage property just run: `<img src="<?= $item->g
 
 > All properties implement the magical method `__toString()` and will return the return value from the `getValue()` method by default. Keep in mind that this is only true for the echo or return context. When checking for the existance of a value, explicitely use the `getValue()` method as otherwise the Property object is returned, which always resolves to true.
 
-## Get the Proprety value
+Predefined properties
+
++ {{luya\admin\base\ImageProperty}}
++ {{luya\admin\base\CheckboxProperty}}
+
+## Get the Propety
 
 You can access the properties in
 
@@ -77,14 +82,20 @@ You can access the properties in
 + [CMS Layouts](app-cmslayouts.md) or Layouts
 + [Menus Item](app-menu.md)
 
-> If you access a property but the properties has not been append to this page you will get the `defaultValue` defined from your block object.
-
 #### in Menus
 
 A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item the menu component does have a `getProperty($varName)` method on each item. For example collecting the menu and retrieving the page property `navImage` could be done as followed:
 
+Getting the value of a Property, if not found null will be returned.
+
 ```php
-<?php foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
+echo Yii::$app->menu->current->getPropertyValue('myProperty');
+```
+
+Working with the Property Object:
+
+```php
+<?php foreach(Yii::$app->menu->findAll(['parent_nav_id' => 0, 'container' => 'default']) as $item): ?>
 <li>
 	<a href="<?= $item->link; ?>">
 		<?php /* now depending on the if the property `navImage` is set for this page item we can access this property object. */
@@ -97,6 +108,8 @@ A very common scenario is to add properties to an existing menu item like an ima
 ```
 
 This method allows you find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')`.
+
+> When dealing with large menus you can preload the models (with its properties) for a given menu query use {{luya\cms\menu\Query::preloadModels}} or {{luya\cms\Menu::findAll}} with second statement `true`.
 
 #### in Layouts
 

@@ -8,7 +8,6 @@ use luya\crawler\models\Searchdata;
 use luya\helpers\Url;
 use yii\helpers\Inflector;
 use Nadar\Stemming\Stemm;
-use luya\helpers\StringHelper;
 use yii\db\Expression;
 
 /**
@@ -106,7 +105,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             'timestamp' => time(),
             'language' => $languageInfo,
         ];
-        $searchData->save(false);
+        $searchData->save();
     
         return $result;
     }
@@ -158,6 +157,11 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         
         $index = [];
         foreach ($parts as $word) {
+
+            if (empty($word)) {
+                continue;
+            }
+            
             $word = Stemm::stem($word, $languageInfo);
             $q = self::find()->select(['id', 'url', 'title']);
             $q->where(['like', 'content', $word]);

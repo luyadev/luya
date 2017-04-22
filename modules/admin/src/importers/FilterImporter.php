@@ -62,7 +62,7 @@ class FilterImporter extends Importer
         }
         
         foreach (StorageFilter::find()->where(['not in', 'identifier', $list])->all() as $filter) {
-            $this->addLog('Remove image filter identifier: ' . $filter->identifier());
+            $this->addLog('Remove image filter identifier: ' . $filter->identifier);
             $filter->delete();
         }
     }

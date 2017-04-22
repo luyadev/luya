@@ -12,7 +12,7 @@ use yii\base\Component;
  *
  * Reade more in the Guide [[app-cmsproperties.md]].
  *
- * @author Basil Suter <basil.suter@nadar.io>
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class Property extends Component implements TypesInterface
 {
@@ -132,7 +132,7 @@ abstract class Property extends Component implements TypesInterface
     }
 
     /**
-     * If the property is requested in the frontend or admin context and there is no value
+     * If the property is requested in admin context and there is no value
      * the `default()` value response will be used.
      *
      * For example a preselecting item from a list select dropdown:
@@ -161,6 +161,7 @@ abstract class Property extends Component implements TypesInterface
         if ($this->i18n) {
             $this->value = I18n::decode($this->value);
         }
+        
         return $this->value;
     }
     
@@ -168,14 +169,27 @@ abstract class Property extends Component implements TypesInterface
      * This is what will be returned when the property is requested in the frontend.
      *
      * You can override this function in order to provide your own output logic.
+     * 
+     * Make sure to call the parent implementation of getValue when overriding this function in
+     * order to make sure the usage of i18n variables:
+     * 
+     * ```php
+     * public function getValue()
+     * {
+     *     $value = parent::getValue();
+     *     // do something with value and return
+     *     return Yii::$app->storage->getImage($value);
+     * }
+     * ```
      *
-     * @return mixed
+     * @return mixed The value stored in the database for this property.
      */
     public function getValue()
     {
         if ($this->i18n) {
             $this->value = I18n::decode($this->value);
         }
+        
         return $this->value;
     }
 }

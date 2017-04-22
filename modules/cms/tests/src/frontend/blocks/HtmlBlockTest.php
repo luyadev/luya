@@ -21,4 +21,18 @@ class HtmlBlockTest extends BlockTestCase
         
         $this->assertSame('<div class="foo">Hello World</div>', $this->renderFrontendNoSpace());
     }
+    
+    public function testAdminRawOutput()
+    {
+    	$this->block->setVarValues([
+    		'html' => '<p>hello</p>',
+    	]);
+    	
+    	$this->assertSame('<pre><code>&lt;p&gt;hello&lt;/p&gt;</code></pre>', $this->renderAdminNoSpace());
+    	
+    	$this->block->setCfgValues(['raw' => 1]);
+    	
+    	$this->assertSame('<p>hello</p>', $this->renderAdminNoSpace());
+    	 
+    }
 }

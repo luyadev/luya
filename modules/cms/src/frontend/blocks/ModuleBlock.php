@@ -65,6 +65,7 @@ final class ModuleBlock extends PhpBlock
                 ['var' => 'moduleController', 'label' => Module::t('block_module_modulecontroller_label'), 'type' => self::TYPE_SELECT, 'options' => BlockHelper::selectArrayOption($this->getControllerClasses())],
                 ['var' => 'moduleAction', 'label' => Module::t('block_module_moduleaction_label'), 'type' => self::TYPE_TEXT],
                 ['var' => 'moduleActionArgs', 'label' => Module::t('block_module_moduleactionargs_label'), 'type' => self::TYPE_TEXT],
+                ['var' => 'strictRender', 'label' => Module::t('block_module_strictrender'), 'type' => self::TYPE_CHECKBOX]
             ],
         ];
     }
@@ -78,6 +79,7 @@ final class ModuleBlock extends PhpBlock
     {
         return [
             'moduleName' => Module::t('block_module_modulename_help'),
+            'strictRender' => Module::t('block_module_strictrender_help'),
         ];
     }
 
@@ -145,11 +147,19 @@ final class ModuleBlock extends PhpBlock
         $reflection = Yii::createObject(['class' => ModuleReflection::class, 'module' => $module]);
         $reflection->suffix = $this->getEnvOption('restString');
 
+        $args = Json::decode($this->getCfgValue('moduleActionArgs', '{}'));
+        
         // if a controller has been defined we inject a custom starting route for the
         // module reflection object.
         $ctrl = $this->getCfgValue('moduleController');
         if (!empty($ctrl)) {
-            $reflection->defaultRoute($ctrl, $this->getCfgValue('moduleAction', 'index'), Json::decode($this->getCfgValue('moduleActionArgs', '{}')));
+            $reflection->defaultRoute($ctrl, $this->getCfgValue('moduleAction', 'index'), $args);
+        }
+        
+        if ($this->getCfgValue('strictRender')) {
+            $reflection->setRequestRoute(implode("/", [$this->getCfgValue('moduleController', $module->defaultRoute), $this->getCfgValue('moduleAction', 'index')]), $args);
+        } else {
+            Yii::$app->request->queryParams = array_merge($reflection->getRequestRoute()['args'], Yii::$app->request->queryParams);
         }
 
         $response = $reflection->run();

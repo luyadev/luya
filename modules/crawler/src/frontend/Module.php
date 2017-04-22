@@ -72,7 +72,7 @@ class Module extends \luya\base\Module
     public $useH1 = false;
     
     /**
-     * @var array E-Mail-Adresses array with recipients for the statistic command
+     * @var array E-Mail addresses array with recipients for the statistic command
      */
     public $statisticRecipients = [];
     

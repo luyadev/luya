@@ -1,9 +1,9 @@
 <script>
-zaa.bootstrap.register('<?php echo $angularCrudControllerName; ?>', function($scope, $controller, $injector) {
+zaa.bootstrap.register('<?= $angularCrudControllerName; ?>', function($scope, $controller, $injector) {
     $scope.crud = $scope.$parent;
     $scope.params = {};
     $scope.responseData = {};
-    $scope.callbackFunction = <?php echo $angularCallbackFunction; ?>
+    $scope.callbackFunction = <?= $angularCallbackFunction; ?>
     $scope.sendButton = function(callback) {
         $scope.crud.sendActiveWindowCallback(callback, $scope.params).then(function(success) {
             var data = success.data;
@@ -25,20 +25,18 @@ zaa.bootstrap.register('<?php echo $angularCrudControllerName; ?>', function($sc
                     $scope.crud.toast.error(message, 8000);
                 } else {
                     $scope.crud.toast.success(message, 8000);
-                    <?php echo $closeOnSuccess.$reloadListOnSuccess.$reloadWindowOnSuccess; ?>
+                    <?= $closeOnSuccess.$reloadListOnSuccess.$reloadWindowOnSuccess; ?>
                 }
             }
-
-            
 		}, function(error) {
 			$scope.crud.toast.error(error.data.message, 8000);
 		});
     };
 });
 </script>
-<div ng-controller="<?php echo $angularCrudControllerName; ?>">
+<div ng-controller="<?= $angularCrudControllerName; ?>">
 
 	<?= $form; ?>
 
-    <button ng-click="sendButton('<?php echo $callbackName; ?>')" class="<?= $buttonClass; ?>" type="button"><?php echo $buttonNameValue; ?></button>
+    <button ng-click="sendButton('<?= $callbackName; ?>')" class="<?= $buttonClass; ?>" type="button"><?= $buttonNameValue; ?></button>
 </div>

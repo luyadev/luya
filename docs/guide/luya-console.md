@@ -6,7 +6,7 @@ To execute a console command open your Terminal and go into the base directory o
 ./vendor/bin/luya <command>
 ```
 
-> On Windows Systems you can run commands via the composer exec command: `composer exec luya <command>`
+> On Windows systems you can run commands by going into the public_html folder an run: `php index.php <command>`
 
 Where *command* is one of the following commands below:
 

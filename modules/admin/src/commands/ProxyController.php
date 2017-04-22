@@ -12,10 +12,21 @@ use luya\helpers\Url;
 use luya\console\Command;
 
 /**
- * Proxy Sync Command.
- *
+ * Synchronise a PROD env to your locale env with files and images.
+ * 
+ * The proxy command will ask for an url, identifier and token. The url is the url of your website in production where you have leased the token and 
+ * identifier inside the admin. Make sure you are using the right protocol (with or without https)!
+ * 
+ * e.g url: `https://luya.io` or if you are using a domain with www `http://www.example.com` depending on your server configuration.
+ * 
  * ```sh
  * ./vendor/bin/luya admin/proxy
+ * ```
+ *
+ * You can also provide all prompted options in order to not used an interactive mode:
+ * 
+ * ```sh
+ * ./vendor/bin/luya admin/proxy --url=https://example.com --idf=lcp58e35acb4ca69 --token=ESOH1isB3ka_dF09ozkDJewpeecGCdUw
  * ```
  *
  * Options:
@@ -28,7 +39,7 @@ use luya\console\Command;
  * For example in order to sync a large table without strict compare check
  *
  * ```sh
- * ./vendor/bin/luya admin/proxy --strict=0 --table=large_table
+ * ./vendor/bin/luya admin/proxy --strict=0 --table=large_table,another_table
  * ```
  *
  * which is equals to:
@@ -36,8 +47,16 @@ use luya\console\Command;
   * ```sh
  * ./vendor/bin/luya admin/proxy -s=0 -t=large_table
  * ```
+ * 
+ * Using wildcard to use table with a given prefix use:
+ * 
+ * ```sh
+ * ./vendor/bin/luya admin/proxy -t=app_*
+ * ```
+ * 
+ * would only sync tables which starts with `app_*` like `app_news`, `app_articles`.
  *
- * In order to clear the proxy config run
+ * In order to clear the proxy config run:
  *
  * ```sh
  * ./vendor/bin/luya admin/proxy/clear
@@ -68,16 +87,37 @@ class ProxyController extends Command
     public $strict = false;
     
     /**
-     * @var string If a table option is passed only this table will be synchronised. If false by default all tables will be synced.
+     * @var string If a table option is passed only this table will be synchronised. If false by default all tables will be synced. You
+     * can define multible tables ab seperating those with a comma `table1,table2,table`. In order to define only tables with start
+     * with a given prefix you can use `app_*` using asterisks symbold to define wild card starts with string defintions.
      */
     public $table = null;
+    
+    /**
+     * @var string The production environment Domain where your LUYA application is running in production mode make so to use the right protocolo
+     * examples:
+     * - https://luya.io
+     * - http://www.example.com
+     * 
+     */
+    public $url = null;
+    
+    /**
+     * @var string The identifier you get from the Machines menu in your production env admin looks like this: lcp58e35acb4ca69
+     */
+    public $idf = null;
+
+    /**
+     * @var string The token which is used for the identifier, looks like this: ESOH1isB3ka_dF09ozkDJewpeecGCdUw
+     */
+    public $token = null;
     
     /**
      * @inheritdoc
      */
     public function options($actionID)
     {
-        return ['strict', 'table'];
+        return ['strict', 'table', 'url', 'idf', 'token'];
     }
     
     /**
@@ -85,7 +125,7 @@ class ProxyController extends Command
      */
     public function optionAliases()
     {
-        return ['s' => 'strict', 't' => 'table'];
+        return ['s' => 'strict', 't' => 'table', 'u' => 'url', 'i' => 'idf', 'tk' => 'token'];
     }
     
     /**
@@ -95,26 +135,39 @@ class ProxyController extends Command
      */
     public function actionSync()
     {
-        $url = Config::get(self::CONFIG_VAR_URL);
-        
-        if (!$url) {
-            $url = $this->prompt('Please enter the lcp Proxy Url:');
-            Config::set(self::CONFIG_VAR_URL, $url);
+        if ($this->url === null) {
+            $url = Config::get(self::CONFIG_VAR_URL);
+            
+            if (!$url) {
+                $url = $this->prompt('Enter the Proxy PROD env URL (e.g. https://example.com):');
+                Config::set(self::CONFIG_VAR_URL, $url);
+            }
+        } else {
+            $url = $this->url;
         }
         
-        $identifier = Config::get(self::CONFIG_VAR_IDENTIFIER);
-        
-        if (!$identifier) {
-            $identifier = $this->prompt('Please enter the identifier ID:');
-            Config::set(self::CONFIG_VAR_IDENTIFIER, trim($identifier));
+        if ($this->idf === null) {
+            $identifier = Config::get(self::CONFIG_VAR_IDENTIFIER);
+            
+            if (!$identifier) {
+                $identifier = $this->prompt('Please enter the identifier ID:');
+                Config::set(self::CONFIG_VAR_IDENTIFIER, trim($identifier));
+            }
+        } else {
+            $identifier = $this->idf;
         }
         
-        $token = Config::get(self::CONFIG_VAR_TOKEN);
-        
-        if (!$token) {
-            $token = $this->prompt('Please enter the access token:');
-            Config::set(self::CONFIG_VAR_TOKEN, trim($token));
+        if ($this->token === null) {
+            $token = Config::get(self::CONFIG_VAR_TOKEN);
+            
+            if (!$token) {
+                $token = $this->prompt('Please enter the access token:');
+                Config::set(self::CONFIG_VAR_TOKEN, trim($token));
+            }
+        } else {
+            $token = $this->token;
         }
+        
         
         $proxyUrl = Url::ensureHttp(rtrim(trim($url), '/')) . '/admin/api-admin-proxy';
         $this->outputInfo('Connect to: ' . $proxyUrl);

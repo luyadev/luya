@@ -100,4 +100,46 @@ class ArrayHelperTest extends LuyaWebTestCase
         
         $this->assertSame(1, count(ArrayHelper::search($data, 'Foo', true)));
     }
+    
+    public function testSearchColumn()
+    {
+        $array = [
+            ['foo' => 'bar'],
+            ['foo' => 'baz'],
+        ];
+        
+        $this->assertSame(['foo' => 'bar'], ArrayHelper::searchColumn($array, 'foo', 'bar'));
+        $this->assertFalse(ArrayHelper::searchColumn($array, 'foo', 'ba'));
+        
+        $sameResults = [
+            ['foo' => 'bar', 'prio' => 1],
+            ['foo' => 'bar', 'prio' => 2],
+        ];
+        
+        $this->assertSame(['foo' => 'bar', 'prio' => 1], ArrayHelper::searchColumn($sameResults, 'foo', 'bar'));
+    }
+    
+    public function testSearchColumns()
+    {
+        $array = [
+            ['foo' => 'bar', 'user_id' => 1],
+            'key' => ['foo' => 'baz', 'user_id' => 1],
+        ];
+        
+        $this->assertSame([
+            ['foo' => 'bar', 'user_id' => 1],
+            'key' => ['foo' => 'baz', 'user_id' => 1],
+        ], ArrayHelper::searchColumns($array, 'user_id', 1));
+        
+        $this->assertSame([
+            'key' => ['foo' => 'baz', 'user_id' => 1],
+        ], ArrayHelper::searchColumns($array, 'foo', 'baz'));
+        
+        $this->assertSame([
+            'key' => ['foo' => 'baz', 'user_id' => 1],
+        ], ArrayHelper::searchColumns($array, 'foo', 'BAZ'));
+        
+        
+        $this->assertSame([], ArrayHelper::searchColumns($array, 'foo', 'NOTFOUNDATALL'));
+    }
 }

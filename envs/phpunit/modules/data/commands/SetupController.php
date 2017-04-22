@@ -7,6 +7,7 @@ use luya\console\Command;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
 use luya\admin\models\Lang;
+use luya\cms\admin\Module;
 
 class SetupController extends Command
 {
@@ -40,6 +41,7 @@ class SetupController extends Command
     
     public function actionIndex()
     {
+        Module::setAuthorUserId(1);
         $lang = new Lang();
         $lang->scenario = 'restcreate';
         $lang->attributes = ['name' => 'Deutsch', 'short_code' => 'de', 'is_default' => 0];

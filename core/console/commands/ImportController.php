@@ -151,39 +151,35 @@ class ImportController extends Command implements ImportControllerInterface
      */
     public function actionIndex()
     {
-        try {
-            $queue = $this->buildImporterQueue();
-    
-            foreach ($queue as $pos => $object) {
-                $this->verbosePrint("Run importer object '{$object->className()}' on position '{$pos}'.", __METHOD__);
-                $object->run();
-            }
-    
-            if (Yii::$app->hasModule('admin')) {
-                Config::set('last_import_timestamp', time());
-                Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
-            }
-            
-            foreach ($this->getLog() as $section => $value) {
-                $this->outputInfo(PHP_EOL . $section . ":");
-                foreach ($value as $k => $v) {
-                    if (is_array($v)) {
-                        foreach ($v as $kk => $kv) {
-                            if (is_array($kv)) {
-                                $this->output(" - {$kk}: " . print_r($kv, true));
-                            } else {
-                                $this->output(" - {$kk}: {$kv}");
-                            }
+        $queue = $this->buildImporterQueue();
+
+        foreach ($queue as $pos => $object) {
+            $this->verbosePrint("Run importer object '{$object->className()}' on position '{$pos}'.", __METHOD__);
+            $object->run();
+        }
+
+        if (Yii::$app->hasModule('admin')) {
+            Config::set('last_import_timestamp', time());
+            Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
+        }
+        
+        foreach ($this->getLog() as $section => $value) {
+            $this->outputInfo(PHP_EOL . $section . ":");
+            foreach ($value as $k => $v) {
+                if (is_array($v)) {
+                    foreach ($v as $kk => $kv) {
+                        if (is_array($kv)) {
+                            $this->output(" - {$kk}: " . print_r($kv, true));
+                        } else {
+                            $this->output(" - {$kk}: {$kv}");
                         }
-                    } else {
-                        $this->output(" - " . $v);
                     }
+                } else {
+                    $this->output(" - " . $v);
                 }
             }
-            
-            return $this->outputSuccess("Importer run successfull.");
-        } catch (Exception $err) {
-            return $this->outputError(sprintf("Exception while importing: '%s' in file '%s' on line '%s'.", $err->getMessage(), $err->getFile(), $err->getLine()));
         }
+        
+        return $this->outputSuccess("Importer run successfull.");
     }
 }

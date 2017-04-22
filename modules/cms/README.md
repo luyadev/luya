@@ -1,6 +1,7 @@
 LUYA CMS
 ========
 
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Build Status](https://travis-ci.org/luyadev/luya-module-cms.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-cms)
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-cms/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-cms?branch=master)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-cms/downloads)](https://packagist.org/packages/luyadev/luya-module-cms)
@@ -13,10 +14,10 @@ For installation and usage please check: [LUYA.IO](https://luya.io)
 
 ### Setup
 
-Require in composer section:
+Install the module trough composer:
 
 ```sh
-composer require luyadev/luya-module-cms:^1.0@dev
+composer require luyadev/luya-module-cms:1.0.0-RC3
 ```
 
 Add frontend and admin module of the cms module to your configuration modules section and bootstrap the cms frontend module:

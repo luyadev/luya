@@ -175,8 +175,8 @@ abstract class Module extends \yii\base\Module
      * Extract the current module from the route and return the new resolved route.
      *
      * @param string $route Route to resolve, e.g. `admin/default/index`
-     *
-     * @return string
+     * @return string The resolved route without the module id `default/index` when input was `admin/default/index`
+     * and the current module id is `admin`.
      */
     public function resolveRoute($route)
     {
@@ -266,5 +266,18 @@ abstract class Module extends \yii\base\Module
         } catch (InvalidParamException $e) {
             return [];
         };
+    }
+    
+    /**
+     * Overrides the yii2 default behavior by not throwing an exception if no alias has been defined 
+     * for the controller namespace. Otherwise each module requires an alias for its first namepsace entry
+     * which results into exception for external modules without an alias.
+     * exception.
+     * 
+     * @inheritdoc
+     */
+    public function getControllerPath()
+    {
+        return Yii::getAlias('@' . str_replace('\\', '/', $this->controllerNamespace), false);
     }
 }

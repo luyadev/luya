@@ -1,6 +1,8 @@
 Description
 ===========
 
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+
 The exporter module allowss you to easily download the full database and storage data from a project for a local import and thus, to setup a state of a website at a given time.
 
 ### Installation
@@ -8,7 +10,7 @@ The exporter module allowss you to easily download the full database and storage
 Add the exporter module to your composer.json:
 
 ```
-"luyadev/luya-module-exporter" : "^1.0@dev",
+"luyadev/luya-module-exporter" : "1.0.0-RC3",
 ```
 
 Set up you your application configuration as follows :

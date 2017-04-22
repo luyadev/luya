@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Object;
 use luya\console\Command;
 use yii\base\InvalidConfigException;
+use luya\helpers\StringHelper;
 
 class ClientBuild extends Object
 {
@@ -32,7 +33,19 @@ class ClientBuild extends Object
     
     public $optionStrict = null;
     
-    public $optionTable = null;
+    private $_optionTable = null;
+    
+    public function setOptionTable($table)
+    {
+        if (!empty($table)) {
+            $this->_optionTable = explode(",", $table);
+        }
+    }
+    
+    public function getOptionTable()
+    {
+        return $this->_optionTable;
+    }
     
     public function __construct(Command $command, array $config = [])
     {
@@ -56,8 +69,19 @@ class ClientBuild extends Object
         $this->_buildConfig = $config;
         
         foreach ($config['tables'] as $tableName => $tableConfig) {
-            if ($this->optionTable && $this->optionTable != $tableName) {
-                continue;
+            
+            if (!empty($this->optionTable)) {
+                $skip = true;
+                
+                foreach ($this->optionTable as $useName) {
+                    if ($useName == $tableName || StringHelper::startsWithWildcard($tableName, $useName)) {
+                        $skip = false;
+                    }
+                }
+                
+                if ($skip) {
+                    continue;
+                }
             }
             
             $schema = Yii::$app->db->getTableSchema($tableName);

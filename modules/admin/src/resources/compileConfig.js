@@ -37,10 +37,6 @@ module.exports = {
         "local": {
             "styles": "dist/css/",
             "scripts": "dist/js/"
-        },
-        "prod": {
-            "styles": "dist/css/",
-            "scripts": "dist/js/"
         }
     }
 };

@@ -28,12 +28,12 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $this->assertFalse(empty($mail->getError()));
     }
     
-    public function testAdresses()
+    public function testAddresses()
     {
         $mail = new Mail();
         $mail->address('mailonly@example.com');
         $mail->address('withname@example.com', 'John Doe');
-        $mail->adresses([
+        $mail->addresses([
             'arraymailonly@example.com',
             'Jane Doe' => 'arraywithname@example.com'
         ]);
@@ -95,6 +95,15 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $mail->layout = false;
         $mail->body('CONTENT');
         $this->assertEquals('CONTENT', $mail->mailer->Body);
+    }
+    
+    public function testLayoutContextVars()
+    {
+        $mail = new Mail();
+        $mail->layout = '@app/views/maillayout.php';
+        $mail->context(['option' => 'Option Context']);
+        $mail->body('CONTENT');
+        $this->assertEquals('<div>CONTENT</div>Option Context', $mail->mailer->Body);
     }
     
     public function testChaining()

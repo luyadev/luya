@@ -19,21 +19,21 @@ return [
     'menu_group_images' => 'Imagens',
     'menu_access_item_user' => 'Usuários',
     'menu_access_item_group' => 'Grupos',
-    'menu_system_item_language' => 'Linguagens',
+    'menu_system_item_language' => 'Idiomas',
     'menu_system_item_tags' => 'Tags',
     'menu_images_item_effects' => 'Efeitos',
     'menu_images_item_filters' => 'Filtros',
     'dashboard_title' => 'Bem-vindo.',
-    'dashboard_text' => 'Você pode alternar entre os módulos na navegação principal na parte superior da tela. <br /> A navegação lateral à esquerda dá acesso às funções do módulo selecionado.',
+    'dashboard_text' => 'Você pode alternar entre os módulos na navegação principal na parte superior da tela.<br /> A navegação lateral à esquerda dá acesso às funções do módulo selecionado.',
     'layout_select_file' => 'Escolha o arquivo',
-    'layout_deleted_file' => 'Você não pode aplicar um filtro, porque o arquivo original foi excluído. Envie ou escolha um novo arquivo para aplicar um filtro',
+    'layout_deleted_file' => 'Você não pode aplicar um filtro porque o arquivo original foi excluído. Envie ou escolha um novo arquivo para aplicar um filtro',
     'layout_no_filter' => 'Sem filtro',
     'layout_debug_table_key' => 'Nome',
     'layout_debug_table_value' => 'Valor',
     'layout_filemanager_save_dir' => 'Gravar?',
     'layout_filemanager_remove_dir' => 'Excluir o diretório?',
-    'layout_filemanager_remove_dir_not_empty' => 'O diretório não está vazio.<br/>Deseja excluir assim mesmo?',
-    'layout_filemanager_remove_selected_files' => 'Excluit arquivos marcados',
+    'layout_filemanager_remove_dir_not_empty' => 'O diretório não está vazio.<br />Deseja excluir assim mesmo?',
+    'layout_filemanager_remove_selected_files' => 'Excluir arquivos marcados',
     'layout_filemanager_move_selected_files' => 'Mover para',
     'layout_filemanager_upload_error' => 'Erro ao enviar o arquivo',
     'layout_filemanager_col_name' => 'Nome',
@@ -92,7 +92,7 @@ return [
     'api_storage_image_upload_error' => 'Ocorreu o seguinte erro ao tentar enviar a imagem \'{error}\'.',
     'api_storage_file_upload_success' => 'Os arquivos foram enviados com sucesso.',
     'api_sotrage_file_upload_error' => 'Ocorreu o seguinte erro ao tentar enviar o arquivo  \'{error}\'.',
-    'api_sotrage_file_upload_empty_error' => 'Não foi encontrado nenhum arquivo para enviar, você selecionou algum arquivo?',
+    'api_sotrage_file_upload_empty_error' => 'Não foi encontrado nenhum arquivo para enviar. Você selecionou algum arquivo?',
     'aws_changepassword_info' => 'Por favor, digite a nova senha para este usuário. A senha deve ter pelo menos 6 caracteres.',
     'aws_changepassword_succes' => 'A senha foi criptada e armazenada com sucesso.',
     'aws_changepassword_new_pass' => 'Nova senha',
@@ -126,7 +126,7 @@ return [
     'js_dir_no_selection' => 'Nenhuma entrada disponível ainda. Adicione uma nova clicando em <span class="green-text">+</span> abaixo à esquerda.',
     'js_dir_image_upload_ok' => 'A imagem foi criada com sucesso.',
     'js_dir_image_filter_error' => 'Ocorreu um erro ao aplicar o filtro ao arquivo.',
-    'js_dir_upload_wait' => 'Seus dados estão sendo carregados e processados. Este processo pode levar vários minutos para se concluido.',
+    'js_dir_upload_wait' => 'Seus dados estão sendo carregados e processados. Este processo pode levar vários minutos para ser concluído.',
     'js_dir_manager_upload_image_ok' => 'O arquivo foi enviado com sucesso.',
     'js_dir_manager_rm_file_confirm' => 'Deseja realmente excluir este arquivo?',
     'js_dir_manager_rm_file_ok' => 'Arquivo excluído.',
@@ -134,7 +134,7 @@ return [
 
 // added translation in 1.0.0-beta4:
 
-    'ngrest_crud_empty_row' => 'Nenhum dado foi adicionado a esta tablea ainda.',
+    'ngrest_crud_empty_row' => 'Nenhum dado foi adicionado a esta tabela ainda.',
 
 // added translation in 1.0.0-beta5:
 
@@ -181,12 +181,12 @@ return [
     'right_panel_support_title' => 'Informações &amp; Ajuda',
     'right_panel_support_tags_title' => 'Tags',
     'right_panel_support_support_title' => 'Suporte',
-    'right_panel_support_support_text' => 'Se você tiver alguma dúvida, por favor, entre em contato com o webmmaster ou consulte <a target="_blank" href="https://luya.io">luya.io</a>.',
+    'right_panel_support_support_text' => 'Se você tiver alguma dúvida, por favor, entre em contato com o webmaster ou consulte <a target="_blank" href="https://luya.io">luya.io</a>.',
 
 // rc2
 
     'ngrest_crud_group_prompt' => 'Agrupar por campo',
-    'ngrest_crud_filter_prompt' => 'Slecionar filtro',
+    'ngrest_crud_filter_prompt' => 'Selecionar filtro',
     'ngrest_crud_ajax_search_length' => 'A consulta deve ter no mínimo 3 caracteres',
     'menu_system_logger' => 'Logging',
     'layout_filemanager_detail_replace_file' => 'Substituir arquivo',
@@ -195,7 +195,7 @@ return [
     'aws_changepassword_notequal' => 'A nova senha e a repetição de senha não são iguais.',
     'aws_changeapssword_minchar' => 'A senha precisa ter pelo menos  {min} caracteres.',
     
-// 1.0.0
+// rc3
 
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Nome',
@@ -234,4 +234,6 @@ return [
     'js_filemanager_count_files_overlay' => '%count% arquivo(s)',
     'js_link_change_value' => 'Alterar link',
     'js_link_set_value' => 'Definir link',
+    'callback_button_file_download_widget_success' => 'O arquivo está pronto. Você pode baixá-lo agora.'
+    
 ];

@@ -1,5 +1,6 @@
 # Page Crawler
 
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Build Status](https://travis-ci.org/luyadev/luya-module-crawler.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-crawler)
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-crawler/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-crawler?branch=master)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-crawler/downloads)](https://packagist.org/packages/luyadev/luya-module-crawler)
@@ -11,13 +12,13 @@ An easy to use Full-Website page crawler to make provide search results on your 
 Add the package to your composer file
 
 ```sh
-composer require luyadev/luya-module-crawler:^1.0@dev
+composer require luyadev/luya-module-crawler:1.0.0-RC3
 ```
 
 or add it directly to your composer.json file:
 
 ```sh
-"luyadev/luya-module-crawler" : "^1.0@dev"
+"luyadev/luya-module-crawler" : "1.0.0-RC3"
 ```
 
 Add the modules to your configuration (config) in the modules section:

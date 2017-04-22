@@ -54,8 +54,11 @@ final class HtmlBlock extends PhpBlock
     {
         return [
             'vars' => [
-                ['var' => 'html', 'label' => Module::t('block_html_html_label'), 'type' => 'zaa-textarea'],
+                ['var' => 'html', 'label' => Module::t('block_html_html_label'), 'type' => self::TYPE_TEXTAREA],
             ],
+        	'cfgs' => [
+        		['var' => 'raw', 'label' => Module::t('block_html_cfg_raw_label'), 'type' => self::TYPE_CHECKBOX]
+        	],
         ];
     }
 
@@ -64,6 +67,16 @@ final class HtmlBlock extends PhpBlock
      */
     public function admin()
     {
-        return '{% if vars.html is empty %}<span class="block__empty-text">' . Module::t('block_html_no_content') . '</span>{% else %}<p><code>{{ vars.html | escape }}</code></p>{% endif %}';
+    	$message =  Module::t('block_html_no_content');
+    	return <<<EOT
+    	{% if vars.html is empty %}
+    		<span class="block__empty-text">{$message}</span>{% else %}
+    		{% if cfgs.raw == 1 %}
+    			{{ vars.html | raw }}
+    		{% else %}
+    			<pre><code>{{ vars.html | escape }}</code></pre>
+    		{% endif %}
+    	{% endif %}
+EOT;
     }
 }

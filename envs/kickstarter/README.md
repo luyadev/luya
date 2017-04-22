@@ -4,7 +4,12 @@
 
 # LUYA Kickstarter Application
 
-[LUYA](https://gitter.im/luyadev/luya) is a [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+[![Total Downloads](https://poser.pugx.org/luyadev/luya-kickstarter/downloads)](https://packagist.org/packages/luyadev/luya-kickstarter)
+[![License](https://poser.pugx.org/luyadev/luya-kickstarter/license)](https://packagist.org/packages/luyadev/luya-kickstarter)
+
+
+[LUYA](https://github.com/luyadev/luya) is a [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
 ![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta8.png)
 

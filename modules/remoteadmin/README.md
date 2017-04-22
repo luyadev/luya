@@ -1,6 +1,8 @@
 REMOTE ADMIN
 =============
 
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+
 **The powerful tool for Agencies!**
 
 *What is REMOTE ADMIN?* Well, have you ever created several websites with the same system and delivered them to different Providers? Remote Admin provides you the ability to collect all your [LUYA](https://github.com/zephir/luya#readme) Websites into the REMOTE ADMIN and helps you to see:
@@ -24,7 +26,7 @@ Remote Admin will work out of the box with all [LUYA](https://github.com/zephir/
 require remoteadmin in composer.json:
 
 ```
-"luyadev/luya-module-remoteadmin" : "^1.0@dev",
+"luyadev/luya-module-remoteadmin" : "1.0.0-RC3",
 ```
 
 add remote admin to the list of your modules:

@@ -4,6 +4,7 @@ namespace luya\cms\menu;
 
 use Yii;
 use luya\cms\Exception;
+use yii\base\Object;
 
 /**
  * Menu Query Builder.
@@ -45,21 +46,14 @@ use luya\cms\Exception;
  * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
-class Query extends \yii\base\Object
+class Query extends Object
 {
-    private $_where = [];
-
-    private $_lang = null;
-
+    /**
+     * @var array An array with all available where operators.
+     */
+    protected $whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
+    
     private $_menu = null;
-
-    private $_whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
-    
-    private $_with = ['hidden' => false];
-    
-    private $_offset = null;
-    
-    private $_limit = null;
     
     /**
      * Getter method to return menu component
@@ -75,6 +69,8 @@ class Query extends \yii\base\Object
         return $this->_menu;
     }
 
+    private $_where = [];
+    
     /**
      * Query where similar behavior of filtering items.
      *
@@ -133,7 +129,7 @@ class Query extends \yii\base\Object
     public function where(array $args)
     {
         foreach ($args as $key => $value) {
-            if (in_array($value, $this->_whereOperators, true)) {
+            if (in_array($value, $this->whereOperators, true)) {
                 if (count($args) !== 3) {
                     throw new Exception(sprintf("Wrong where(['%s']) condition, see https://luya.io/api/luya-cms-menu-Query#where()-detail for all available conditions.", implode("', '", $args)));
                 }
@@ -160,6 +156,8 @@ class Query extends \yii\base\Object
         return $this->where($args);
     }
 
+    private $_lang = null;
+    
     /**
      * Changeing the container in where the data should be collection, by default the composition
      * `langShortCode` is the default language code. This represents the current active language,
@@ -175,8 +173,12 @@ class Query extends \yii\base\Object
         return $this;
     }
 
+    private $_with = ['hidden' => false];
+    
     /**
-     * @param string|array $types can be a string  containg "hidden" or an array with multiple patters
+     * With/Without expression to hidde or display data from the Menu Query.
+     *
+     * @param string|array $types can be a string  containg "hidden" or an array with multiple with statements
      * for example `['hidden']`. Further with statements upcoming.
      * @return \luya\cms\menu\Query
      */
@@ -184,11 +186,29 @@ class Query extends \yii\base\Object
     {
         $types = (array) $types;
         foreach ($types as $type) {
-            if (array_key_exists($type, $this->_with)) {
+            if (isset($this->_with[$type])) {
                 $this->_with[$type] = true;
             }
         }
  
+        return $this;
+    }
+    
+    private $_preloadModels = false;
+    
+    /**
+     * Preload Mmodels for the given Menu Query.
+     *
+     * When menu a {{luya\cms\menu\Item::getModel}} method is called it will lazy the given {{luya\cms\models\Nav}} Model.
+     * This can be slow on large menus, therfore you can preload all models for given Menu Query by enabling this method.
+     *
+     * @param boolean $preloadModels Whether to preload all {{luya\cms\menu\Item}} models for {{luya\cms\menu\Item::getModel}} or not.
+     * @return \luya\cms\menu\Query
+     */
+    public function preloadModels($preloadModels = true)
+    {
+        $this->_preloadModels = $preloadModels;
+        
         return $this;
     }
 
@@ -206,6 +226,8 @@ class Query extends \yii\base\Object
         return $this->_lang;
     }
 
+    private $_limit = null;
+    
     /**
      * Set a limition for the amount of results.
      *
@@ -220,6 +242,8 @@ class Query extends \yii\base\Object
         
         return $this;
     }
+    
+    private $_offset = null;
     
     /**
      * Define offset start for the rows, if you defined offset to be 5 and you have 11 rows, the
@@ -264,7 +288,7 @@ class Query extends \yii\base\Object
      */
     public function all()
     {
-        return static::createArrayIterator($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with), $this->getLang(), $this->_with);
+        return static::createArrayIterator($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with), $this->getLang(), $this->_with, $this->_preloadModels);
     }
     
     /**
@@ -283,11 +307,12 @@ class Query extends \yii\base\Object
      *
      * @param array $data The filtere results where the iterator object should be created with
      * @param string $langContext The language short code context, if any.
+     * @param integer $preloadModels Whether the models should be preload or not.
      * @return \luya\cms\menu\QueryIterator
      */
-    public static function createArrayIterator(array $data, $langContext, $with)
+    public static function createArrayIterator(array $data, $langContext, $with, $preloadModels = false)
     {
-        return (new QueryIteratorFilter(Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext, 'with' => $with])));
+        return (new QueryIteratorFilter(new QueryIterator(['data' => $data, 'lang' => $langContext, 'with' => $with, 'preloadModels' => $preloadModels])));
     }
     
     /**
@@ -295,12 +320,13 @@ class Query extends \yii\base\Object
      * of the QueryIterator class.
      *
      * @param array $itemArray The item array data for the object
-     * @param string  $langContext The language short code context, if any.
+     * @param string $langContext The language short code context, if any.
+     * @param null|\luya\cms\models\Nav The nav model from the preload stage.
      * @return \luya\cms\menu\Item
      */
-    public static function createItemObject(array $itemArray, $langContext)
+    public static function createItemObject(array $itemArray, $langContext, $model = null)
     {
-        return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
+        return new Item(['itemArray' => $itemArray, 'lang' => $langContext, 'model' => $model]);
     }
     
     /**

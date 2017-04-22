@@ -64,7 +64,7 @@ interface TypesInterface
     const TYPE_DATETIME = 'zaa-datetime';
     
     /**
-     * @var string
+     * @var integer If value is set (checkbox is checked) `1` will return otherwise `0`.
      */
     const TYPE_CHECKBOX = 'zaa-checkbox';
     

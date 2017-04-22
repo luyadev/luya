@@ -40,8 +40,14 @@ class CallbackButtonWidget extends Widget
      * - reloadListOnSuccess: boolean, if enabled, the active window will reload the ngrest crud list after success response from callback via sendSuccess().
      * - reloadWindowOnSuccess: boolean, if enabled the active window will reload itself after success (when successResponse is returnd).
      * - class: string, html class fur the button
+     * - linkLabel: This label is for the second triggerable download link.
      */
     public $options = [];
+    
+    /**
+     * @var string Optional string with javascript callback function which is going to be triggered after angular response.
+     */
+    public $angularCallbackFunction = 'function() {};';
     
     /**
      * @var array Add additional parameters which will be sent to the callback. ['foo' => 'bar']
@@ -72,10 +78,12 @@ class CallbackButtonWidget extends Widget
             'callbackName' => $this->callbackConvert($this->callback),
             'callbackArgumentsJson' => Json::htmlEncode($this->params),
             'buttonNameValue' => $this->label,
-            'closeOnSuccess' => (isset($options['closeOnSuccess'])) ? '$scope.crud.closeActiveWindow();' : null,
-            'reloadListOnSuccess' => (isset($options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
-            'reloadWindowOnSuccess' => (isset($options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
+            'closeOnSuccess' => (isset($this->options['closeOnSuccess'])) ? '$scope.crud.closeActiveWindow();' : null,
+            'reloadListOnSuccess' => (isset($this->options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
+            'reloadWindowOnSuccess' => (isset($this->options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
             'buttonClass' => ArrayHelper::getValue($this->options, 'class', 'btn'),
+            'linkLabel' => ArrayHelper::getValue($this->options, 'linkLabel', 'Download'),
+            'angularCallbackFunction' => $this->angularCallbackFunction,
         ]);
     }
     

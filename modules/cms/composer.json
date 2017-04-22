@@ -19,7 +19,8 @@
 	   "phpunit/phpunit" : "~5.0",
 	   "luyadev/luya" : "^1.0@dev",
 	   "luyadev/luya-module-admin" : "^1.0@dev",
-	   "satooshi/php-coveralls": "~1.0"
+	   "satooshi/php-coveralls": "~1.0",
+	   "twig/twig" : "^2.0"
 	},
 	"autoload" : {
 		"psr-4" : {

@@ -3,16 +3,19 @@
 namespace luya\crawler\models;
 
 use Yii;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\aws\DetailViewActiveWindow;
 
 /**
- * NgRest Model created at 24.05.2016 15:56 on LUYA Version 1.0.0-beta7-dev.
+ * Searchdata Model.
  *
+ * @property integer $id
  * @property string $query
  * @property integer $results
  * @property integer $timestamp
  * @property string $language
  */
-class Searchdata extends \luya\admin\ngrest\base\NgRestModel
+class Searchdata extends NgRestModel
 {
     /**
      * @inheritdoc
@@ -21,58 +24,52 @@ class Searchdata extends \luya\admin\ngrest\base\NgRestModel
     {
         return 'crawler_searchdata';
     }
-    
+
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-crawler-searchdata';
+    }
+
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
+            'id' => Yii::t('app', 'ID'),
             'query' => Yii::t('app', 'Query'),
             'results' => Yii::t('app', 'Results'),
             'timestamp' => Yii::t('app', 'Timestamp'),
             'language' => Yii::t('app', 'Language'),
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-             [['query', 'results', 'timestamp', 'language'], 'required'],
+            [['query', 'timestamp'], 'required'],
+            [['results', 'timestamp'], 'integer'],
+            [['query'], 'string', 'max' => 120],
+            [['language'], 'string', 'max' => 12],
         ];
     }
+
     /**
      * @inheritdoc
-     */
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios['restcreate'] = ['query', 'results', 'timestamp', 'language'];
-        $scenarios['restupdate'] = ['query', 'results', 'timestamp', 'language'];
-        return $scenarios;
-    }
-    
-    /**
-     * @return array An array containing all field which can be lookedup during the admin search process.
      */
     public function genericSearchFields()
     {
         return ['query', 'language'];
     }
-    
+
     /**
-     * @return string Defines the api endpoint for the angular calls
-     */
-    public static function ngRestApiEndpoint()
-    {
-        return 'api-crawler-searchdata';
-    }
-    
-    /**
-     * @return array An array define the field types of each field
+     * @inheritdoc
      */
     public function ngRestAttributeTypes()
     {
@@ -83,22 +80,27 @@ class Searchdata extends \luya\admin\ngrest\base\NgRestModel
             'language' => 'text',
         ];
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function ngRestScopes()
+    {
+        return [
+            ['list', ['query', 'results', 'timestamp', 'language']],
+            ['delete', false],
+        ];
+    }
     
     /**
-     * Define the NgRestConfig for this model with the ConfigBuilder object.
-     *
-     * @param \admin\ngrest\ConfigBuilder $config The current active config builder object.
-     * @return \admin\ngrest\ConfigBuilder
+     * @inheritdoc
      */
-    public function ngRestConfig($config)
+    public function ngRestActiveWindows()
     {
-        // define fields for types based from ngRestAttributeTypes
-        $this->ngRestConfigDefine($config, 'list', ['query', 'results', 'timestamp', 'language']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['query', 'results', 'timestamp', 'language']);
-        
-        // enable or disable ability to delete;
-        $config->delete = false;
-        
-        return $config;
+        return [
+            ['class' => DetailViewActiveWindow::class, 'attributes' => [
+               'language', 'query', 'results', 'timestamp:date', 
+            ]],
+        ];
     }
 }

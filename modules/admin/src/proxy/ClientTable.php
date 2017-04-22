@@ -112,7 +112,7 @@ class ClientTable extends Object
             $progress = 1;
             for ($i=0; $i<$this->getOffsetTotal(); $i++) {
                 $data = array_merge($this->request($i), $data);
-                usleep(100);
+                gc_collect_cycles();
                 Console::updateProgress($progress++, $this->getOffsetTotal());
             }
             
@@ -144,7 +144,10 @@ class ClientTable extends Object
         $curl->get($this->build->requestUrl, ['machine' => $this->build->machineIdentifier, 'buildToken' => $this->build->buildToken, 'table' => $this->name, 'offset' => $offset]);
         
         if (!$curl->error) {
-            return Json::decode($curl->response);
+            $response = Json::decode($curl->response);
+            $curl->close();
+            unset($curl);
+            return $response;
         }
     }
 }

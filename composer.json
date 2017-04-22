@@ -18,7 +18,6 @@
 	"require" : {
 		"php": ">=5.5.0",
 		"yiisoft/yii2": "2.0.11",
-		"twig/twig" : "~1.0",
         "curl/curl" : "~1.0",
         "phpmailer/phpmailer": "~5.0"
 	},

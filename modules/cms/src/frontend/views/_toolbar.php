@@ -20,7 +20,7 @@ use luya\cms\frontend\Module;
             </div>
         </div>
         <div class="luya-cms-toolbar__button">
-            <a target="_blank" href="<?= Url::toRoute(['/admin/default/index', '#' => '/template/cmsadmin~2Fdefault~2Findex/update/' . $menu->current->navId], true); ?>">
+            <a target="_blank" href="<?= Url::toInternal(['/admin/default/index', '#' => '!/template/cmsadmin~2Fdefault~2Findex/update/' . $menu->current->navId], true); ?>">
                 <i alt="<?= Module::t('tb_edit_alt'); ?>" title="<?= Module::t('tb_edit_alt'); ?>"  class="material-icons">mode_edit</i>
             </a>
         </div>

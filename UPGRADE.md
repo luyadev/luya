@@ -3,15 +3,37 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
-1.0.0-RC3 (in progress)
+1.0.0 (in progress)
 -------------------
 
+1.0.0-RC3 (11. April 2017)
+-------------------
+
+> The kickstarter now refers to the newest composer fxp entry, so make sure to add the new fxp config after run `composer global update`
+> ```json
+> "config": {
+>     "fxp-asset" : {
+>         "pattern-skip-version": "(-build|-patch)",
+>         "installer-paths": {
+>             "bower-asset-library": "vendor/bower"
+>         }
+>     }   
+> }
+> ```
+
+If there is an error after the migrate command (missing column `title_tag`) sadly you have to create this field manual in table `cms_nav_item` name `title_tag` type `varchar(200)`. This is due to migration prepare for 1.0.0 release.
+
++ [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated Methods, Classes and Properties.
++ [#1076](https://github.com/luyadev/luya/issues/1076) *ALL* your blocks now have to extend from luya\cms\base\PhpBlock. Twig blocks are deprecated! 
++ [#1127](https://github.com/luyadev/luya/issues/1127) The menu item `hasChildren()` has been droped is now a getter method use `getHasChildren()` or `hasChildren` instead.
 + [#1076](https://github.com/luyadev/luya/issues/1076) **TWIG IS DEPRECATED** The whole compont, as the cms blocks with twig are now depreacted, the twigjs admin output for blocks still works, all other code related to twig is not working anymore! In order to include to your project use: https://github.com/luyadev/luya-rc-legacy
 + [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 + [#1177](https://github.com/luyadev/luya/issues/1177) The elements.php for the luya\web\Elements component does new look for the elements.php inside the @app/views folder instead of @app.
 + [#1109](https://github.com/luyadev/luya/issues/1109) All blocks deliverd from the LUYA core modules are marked as `final` so you are not able to extend from those blocks. Make sure you extend from the `luya\cms\base\Block` class.
 + [#1244](https://github.com/luyadev/luya/issues/1244) When using the crawler module, the output of the controller changed to an ActiveDataProvider object instead of an array with results, see the crawler module readme.
-+ The ngRest CheckboxRelation plugin dropped the support for ActiveRecord object getters inside the labelTemplates, use the closure function inside the labelFields propertie instead. 
++ [#1229](https://github.com/luyadev/luya/issues/1229) The ngRest CheckboxRelation plugin dropped the support for ActiveRecord object getters inside the labelTemplates, use the closure function inside the labelFields propertie instead. 
++ [#1229](https://github.com/luyadev/luya/issues/1229) When creating an ngRestPlugin the method `serviceData()` requires now an event parameter `serviceData($event)`.
+- [#1231](https://github.com/luyadev/luya/issues/1231) Upgrade to Angular 1.6 therfore all custom angular admin js files have to make sure to be compatible with Version 1.6 (dropped .success and .error for $http component)
 
 As we merged migrations files from older beta releases, you can find all delete files in the following [commit](https://github.com/luyadev/luya/commit/78f5304054be95ad317a80455587d8a4e0a0b9a8#diff-ecf9849552b303be6db5a3bd40029037).
 

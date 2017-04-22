@@ -36,9 +36,8 @@ class SearchController extends RestController
                     throw new Exception('The model must be an instance of GenericSearchInterface');
                 }
                 $data = $model->genericSearch($query);
-                $stateProvider = $model->genericSearchStateProvider();
-                
                 if (count($data) > 0) {
+                    $stateProvider = $model->genericSearchStateProvider();
                     $search[] = [
                         'hideFields' => $model->genericSearchHiddenFields(),
                         'type' => 'custom',
@@ -47,6 +46,8 @@ class SearchController extends RestController
                         'stateProvider' => $stateProvider,
                     ];
                 }
+                
+                unset($data);
             }
         }
 
@@ -54,23 +55,25 @@ class SearchController extends RestController
             if ($api['permissionIsApi']) {
                 $ctrl = $module->createController($api['permssionApiEndpoint']);
                 $data = $ctrl[0]->runAction('search', ['query' => $query]);
-                $stateProvider = $ctrl[0]->runAction('search-provider');
                 if (count($data) > 0) {
+                    $stateProvider = $ctrl[0]->runAction('search-provider');
+                    $hiddenFields = $ctrl[0]->runAction('search-hidden-fields');
                     $search[] = [
-                        'hideFields' => $model->genericSearchHiddenFields(),
+                        'hideFields' => $hiddenFields,
                         'type' => 'api',
                         'menuItem' => $api,
                         'data' => $data,
                         'stateProvider' => $stateProvider,
                     ];
                 }
+                unset($data);
             }
         }
 
         $searchData = new SearchData();
         $searchData->query = $query;
         $searchData->num_rows = count($search);
-        $searchData->insert();
+        $searchData->save();
 
         return $search;
     }

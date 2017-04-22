@@ -1,6 +1,8 @@
 Error API Module
 =========
 
+[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+
 For a strong and secure website, it is important to get access to all the errors and exceptions that occur in the background before your customer complain and make sure that it only happens once.
 
 With the Error Api module, you can send all exceptions to your personal Error Api and get notify by email or Slack. If an exception occurs on the customer website, you will be notified with the full error stack and a slack notification will be sent (if configured).
@@ -10,7 +12,7 @@ With the Error Api module, you can send all exceptions to your personal Error Ap
 add this line to your composer.json and run the `composer install` command
 
 ```
-"luyadev/luya-module-errorapi" : "^1.0@dev",
+"luyadev/luya-module-errorapi" : "1.0.0-RC3",
 ```
 
 add the module to your application config:

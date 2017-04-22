@@ -498,7 +498,8 @@ class StorageContainer extends Component
                 if ($fileQuery !== false) {
                     throw new Exception("Unable to create image, the base file source '{$fileQuery->serverSource}' does not exist.");
                 }
-                throw new Exception("Unable to create image, unable to find the file with id '{$fileId}'.");
+                
+                throw new Exception("Unable to find the file with id '{$fileId}', image can not be created.");
             }
             
             $fileName = $filterId.'_'.$fileQuery->systemFileName;
@@ -544,10 +545,11 @@ class StorageContainer extends Component
             
             $this->_imagesArray[$model->id] = $model->toArray();
             $this->deleteHasCache($this->_imageCacheKey);
+            
             return $this->getImage($model->id);
         } catch (\Exception $err) {
             if ($throwException) {
-                throw new Exception("add image exception: " . $err->getMessage(), 0, $err);
+                throw $err;
             }
         }
         
@@ -734,7 +736,7 @@ class StorageContainer extends Component
         
         foreach ($this->findImages() as $image) {
             if (!empty($image->file) && !$image->file->isHidden && !$image->file->isDeleted) {
-                $image->toArray(); // which forces to recreate missing sources.
+                $image->source; // which forces to recreate missing sources.
             }
         }
         
