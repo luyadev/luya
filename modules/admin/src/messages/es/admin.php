@@ -195,9 +195,9 @@ return [
     'layout_rightbar_savebtn' => 'Guardar',
     'aws_changepassword_notequal' => 'La nueva contraseña y la repetición de contraseña no son iguales.',
     'aws_changeapssword_minchar' => 'La nueva contraseña debe tener al menos {min} caracteres.',
-        
+
 // rc3
-    
+
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Nombre',
     'model_lang_short_code' => 'Código corto',
@@ -206,7 +206,7 @@ return [
     'model_logger_time' => 'Tiempo',
     'model_logger_message' => 'Mensaje',
     'model_logger_type' => 'Tipo',
-    'model_logger_badgetype' => 'Status',
+    'model_logger_badgetype' => 'Estado',
     'model_logger_trace_file' => 'Archivo de rastreo',
     'model_logger_trace_line' => 'Línea de rastreo',
     'model_logger_trace_function' => 'Función de rastreo',
@@ -231,10 +231,10 @@ return [
     'layout_image_filter_selection' => 'Seleccione filtro de imagen:',
     'lock_admin_edit_crud_item' => 'Edición {module} "{table}" (ID: {id}).',
     'lock_cms_edit_page' => 'Edición de página "{title}".',
-    'layout_filemanager_col_size' => 'File size',
-    'js_filemanager_count_files_overlay' => '%count% files',
-    'js_link_change_value' => 'Change Link',
-    'js_link_set_value' => 'Set Link',
-    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
-    
+    'layout_filemanager_col_size' => 'Tamaño del archivo',
+    'js_filemanager_count_files_overlay' => '%count% archivos',
+    'js_link_change_value' => 'Cambiar enlace',
+    'js_link_set_value' => 'Establecer vínculo',
+    'callback_button_file_download_widget_success' => 'El archivo ha sido preparado. Puedes descargarlo ahora.'
+
 ];
