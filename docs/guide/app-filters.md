@@ -4,6 +4,8 @@ With *Filters* you can modify, crop, resize or use effects on any image provided
 
 The basic concept behind filter classes, is to track filters in VCS system, so you can add a filter and push it into git, and your project members does have the same environement as you.
 
+> Use the `./vendor/bin/luya admin/filter` command in order to generate a Filter quickly.
+
 ## Create a new filter
 
 To create a filer file extended from the {{\luya\admin\base\Filter}} add a new file with the suffix `Filter` in your LUYA project root folder or module folder `filters` and run the import command.

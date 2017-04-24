@@ -33,6 +33,9 @@ Admin Module commands:
 |---	|---
 |`admin/setup`|Execute the *LUYA* Setup will create a user, group and base table informations.
 |`admin/setup/user`|Create a new user for the *LUYA* Admin from command line.
+|`admin/filter`|Generate a [Filter](app-filters.md) Class.
+|`admin/proxy`|Start the [content sync](concept-depandsync) process.
+|`admin/proxy/clear`|Flush the configuration setup for the content sync process.
 |`admin/storage/cleanup`|Cleanup not existing files compare file system and database.
 |`admin/storage/cleanup-image-table`|Find if dupliations are available in the image table (same filter and file id). If confirmed it will remove all duplications except of one, the first one created.
 |`admin/storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
