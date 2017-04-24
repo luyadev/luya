@@ -81,8 +81,15 @@ class GroupAuthProperty extends Property
         return (bool) !empty($this->getGroups());
     }
     
+    public function getAdminValue()
+    {
+    	$value = parent::getValue();
+    	return Json::decode($value);
+    }
+    
     public function getValue()
     {
-        return Json::decode($this->value);
+    	$value = parent::getValue();
+        return Json::decode($value);
     }
 }
