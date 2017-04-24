@@ -442,7 +442,8 @@ class Item extends Object implements LinkInterface, Arrayable
      */
     public function getHasParent()
     {
-        return count($this->getParent()) > 0 ? true : false;
+    	$parent = $this->getParent();
+    	return ($parent && count($parent) > 0) ? true : false;
     }
     
     /**
