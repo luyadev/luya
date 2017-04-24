@@ -33,3 +33,19 @@ Sync
 We have developed a sync command to synchronize the database and files from the production environment to a number of local clients. In order to set up this command, log in to the admin interface of your website on the production server, navigat to System -> Machines and create a new one. You will have to copy the identfier and token that is generated in the next step.
 
 Now run the `./vendor/bin/luya admin/proxy` command. You will have to enter the URL of your production environment (like `https://luya.io`) and then enter the machine and identifier from the previous step.
+
+Deploy Prep Env
+---
+
+When running a preproduction env (prep) its very common to copy the database and files after deployment, this can be achieved with deployer and admin/proxy very quick. Therefore just updater your **deploy.php** 
+
+```php
+task('deploy:syncProdEnv', function() {
+    $proxy = run('cd {{release_path}} && ./vendor/bin/luya admin/proxy --url=https://www.prod-website.com --idf=IDENTIFER --token=TOKEN');
+    writeln($proxy);
+    
+})->onlyOn('prep');
+after('deploy:shared', 'deploy:syncProdEnv');
+```
+
+Now everytime you deploy to the prep env `./vendor/bin/dep luya prep` it will sync the files from the prod env.
