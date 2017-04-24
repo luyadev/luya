@@ -312,7 +312,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * @param unknown $placholder
      * @return boolean
      */
-    public function getPlacholderValue($placholder)
+    public function getPlaceholderValue($placholder)
     {
         return (isset($this->getPlaceholderValues()[$placholder])) ? $this->getPlaceholderValues()[$placholder] : false;
     }
