@@ -77,7 +77,6 @@ abstract class Controller extends \yii\console\Controller
      *
      * @param string $message The message which sould be displayed.
      * @return number Exit code 0
-     * @since 1.0.0-beta5
      */
     public function outputInfo($message)
     {

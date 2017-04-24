@@ -109,7 +109,6 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      * Basic helper to retreive the content of a file and catched exception. The filename
      * will auto alias encode by Yii::getAlias function.
      *
-     * @since 1.0.0-beta7
      * @param string $fileName The path to the file to get the content
      * @return string|boolean
      */

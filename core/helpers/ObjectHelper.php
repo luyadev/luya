@@ -16,7 +16,6 @@ class ObjectHelper
     /**
      * Convert Object to Array
      *
-     * @since 1.0.0-beta7
      * @param object $object
      */
     public static function toArray($object)

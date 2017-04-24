@@ -57,7 +57,6 @@ abstract class Command extends \luya\console\Controller
      * Get selection list of all module types.
      *
      * @return string
-     * @since 1.0.0-beta4
      */
     public function selectModuleType()
     {
@@ -76,7 +75,6 @@ abstract class Command extends \luya\console\Controller
      * - hideCore: boolean, if enabled all core modules (from luya dev team) will be hidden.
      *
      * @return string The name (ID) of the selected module.
-     * @since 1.0.0-beta4
      */
     public function selectModule(array $options = [])
     {
@@ -110,7 +108,6 @@ abstract class Command extends \luya\console\Controller
      * @param string $string The name of the class, e.g.: hello_word would
      * @param string $suffix The suffix to append on the class name if not eixsts, e.g.: MySuffix
      * @return string The class name e.g. HelloWorldMySuffix
-     * @since 1.0.0-beta4
      */
     public function createClassName($string, $suffix = false)
     {
@@ -127,7 +124,6 @@ abstract class Command extends \luya\console\Controller
      * Get the current Luya Version
      *
      * @return string
-     * @since 1.0.0-beta4
      */
     public function getLuyaVersion()
     {

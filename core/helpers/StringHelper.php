@@ -106,7 +106,6 @@ class StringHelper extends \yii\helpers\BaseStringHelper
      * @param string $replace Replacement value for the first found occurrence.
      * @param string $subject The string you want to look up to replace the first element.
      * @return mixed Replaced string
-     * @since 1.0.0-rc1
      */
     public static function replaceFirst($search, $replace, $subject)
     {
@@ -125,8 +124,7 @@ class StringHelper extends \yii\helpers\BaseStringHelper
      * @param string|array $needle The char or word to find in the $haystack. Can be an array to multi find words or char in the string.
      * @param string $haystack The haystack where the $needle string should be looked  up.
      * @param boolean $strict If an array of needles is provided the $strict parameter defines whether all keys must be found ($strict = true) or just one result must be found ($strict = false).
-     * @return boolean If an array of values is provided the response may change depending on $findAll
-     * @since 1.0.0-rc1
+     * @return boolean If an array of values is provided the response may change depending on $findAll.
      */
     public static function contains($needle, $haystack, $strict = false)
     {

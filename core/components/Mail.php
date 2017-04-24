@@ -88,7 +88,6 @@ class Mail extends \yii\base\Component
     public $smtpSecure = 'tls';
     
     /**
-     * @since 1.0.0-beta7
      * @var string|boolean Define a layout template file which is going to be wrapped around the body()
      * content. The file alias will be resolved so an example layout could look as followed:
      *
@@ -267,7 +266,6 @@ class Mail extends \yii\base\Component
      * ```
      *
      * @return \luya\components\Mail
-     * @since 1.0.0-beta4
      * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function addresses(array $emails)
@@ -313,7 +311,6 @@ class Mail extends \yii\base\Component
      * ```
      *
      * @return \luya\components\Mail
-     * @since 1.0.0-RC2
      * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function ccAddresses(array $emails)
@@ -359,7 +356,6 @@ class Mail extends \yii\base\Component
      * ```
      *
      * @return \luya\components\Mail
-     * @since 1.0.0-RC2
      * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function bccAddresses(array $emails)
