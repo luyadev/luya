@@ -50,6 +50,8 @@
   + [Plugins](ngrest-plugins.md)
     + [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
     + [Plugin Selects](ngrest-plugin-select.md)
++ Lessons
+  + [Using Forms in Blocks](lesson-blockform.md)
 + Developers
   + [LUYA Guidelines](luya-guideline.md)
   + [Collaboration](luya-collaboration.md)
