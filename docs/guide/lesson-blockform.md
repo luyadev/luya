@@ -15,28 +15,28 @@ use yii\base\Model;
 
 class TestModel extends Model
 {
-	public $name = null;
-	public $email = null;
-	public $text = null;
+    public $name = null;
+    public $email = null;
+    public $text = null;
 	
-	public function rules()
-	{
-		return [
-			[['name', 'text'], 'required'],
-			[['name', 'text'], 'string'],
-			[['email'], 'email'],
-		];
-	}
+    public function rules()
+    {
+        return [
+            [['name', 'text'], 'required'],
+            [['name', 'text'], 'string'],
+            [['email'], 'email'],
+        ];
+    }
 	
-	public function sendMail()
-	{
-		// this is what happens on success, like sending a mail
+    public function sendMail()
+    {
+        // this is what happens on success, like sending a mail
 		
-		return Yii::$app->mail
-			->compose('Success Subject', 'You got mail: ' . print_r($this->attributes, true))
-			->address('hello@luya.io')
-			->send();
-	}
+        return Yii::$app->mail
+            ->compose('Success Subject', 'You got mail: ' . print_r($this->attributes, true))
+            ->address('hello@luya.io')
+            ->send();
+    }
 }
 ```
 					
@@ -47,27 +47,27 @@ Now the Model respons needs to be assigned to the frontend view trough the extra
 ```php
 class MyFormBlock extends \luya\cms\base\PhpBlock
 {
-	// ... configs, icons, etc.
-	public function extraVars()
-	{
-		return [
-			'model' => $this->prepareModel(),
-		];
-	}
+    // ... configs, icons, etc.
+    public function extraVars()
+    {
+        return [
+            'model' => $this->prepareModel(),
+        ];
+    }
 	
-	public function prepareModel()
-	{
-		$model = new TestModel();
-		if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-			$model->sendMail();
-			Yii::$app->session->setFlash('myBlockFormSuccess');
-			Yii::$app->response->redirect(Yii::$app->request->url);
+    public function prepareModel()
+    {
+        $model = new TestModel();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->sendMail();
+            Yii::$app->session->setFlash('myBlockFormSuccess');
+            Yii::$app->response->redirect(Yii::$app->request->url);
 			
-			return Yii::$app->end();
-		}
-		 
-		return $model;
-	}
+            return Yii::$app->end();
+        }
+ 
+        return $model;
+    }
 }
 ```
 				
@@ -87,14 +87,13 @@ use yii\helpers\Html;
  */
 ?>
 <?php if (Yii::$app->session->getFlash('myBlockFormSuccess')): ?>
-	<div class="alert alert-success">The form has been sent! Thank you.</div>
+    <div class="alert alert-success">The form has been sent! Thank you.</div>
 <?php else: ?>
-	<?php $form = ActiveForm::begin(); ?>
-		<?= $form->field($this->extraValue('model'), 'name') ?>
-		<?= $form->field($this->extraValue('model'), 'email') ?>
-	    <?= $form->field($this->extraValue('model'), 'text')->textarea() ?>
-	    <?= Html::submitButton('Login', ['class' => 'btn btn-primary-outline']) ?>
-	<?php ActiveForm::end(); ?>
+    <?php $form = ActiveForm::begin(); ?>
+        <?= $form->field($this->extraValue('model'), 'name') ?>
+        <?= $form->field($this->extraValue('model'), 'email') ?>
+        <?= $form->field($this->extraValue('model'), 'text')->textarea() ?>
+        <?= Html::submitButton('Login', ['class' => 'btn btn-primary-outline']) ?>
+    <?php ActiveForm::end(); ?>
 <?php endif; ?>
 ```
-
