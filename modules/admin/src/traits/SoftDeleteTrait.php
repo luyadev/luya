@@ -58,6 +58,7 @@ trait SoftDeleteTrait
 
     /**
      * Overrides the ngRestFind() method of the ActiveRecord
+     * @return \yii\db\ActiveQuery
      */
     public static function ngRestFind()
     {
@@ -67,6 +68,7 @@ trait SoftDeleteTrait
     
     /**
      * Overrides the find() method of the ActiveRecord
+     * @return \yii\db\ActiveQuery
      */
     public static function find()
     {
