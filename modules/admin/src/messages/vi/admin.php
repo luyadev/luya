@@ -234,6 +234,6 @@ return [
     'js_filemanager_count_files_overlay' => '%count% files',
     'js_link_change_value' => 'Change Link',
     'js_link_set_value' => 'Set Link',
-    'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
+    'callback_button_file_download_widget_success' => 'Tệp tin đã sẵn sàng! Bạn có thể tải ngay!'
     
 ];
