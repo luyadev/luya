@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d29a8bd69d464532d461b3f9c923836b",
+    "content-hash": "27714c946dd7676b6ec4527a447beb3c",
     "packages": [],
     "packages-dev": [
         {
@@ -378,16 +378,16 @@
         },
         {
             "name": "flowjs/flow-php-server",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flowjs/flow-php-server.git",
-                "reference": "d621e27a18ba509de72b274241931c5b607ca95f"
+                "reference": "c6802bf7c68fe8d1e19b60e484bf08f838861728"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flowjs/flow-php-server/zipball/d621e27a18ba509de72b274241931c5b607ca95f",
-                "reference": "d621e27a18ba509de72b274241931c5b607ca95f",
+                "url": "https://api.github.com/repos/flowjs/flow-php-server/zipball/c6802bf7c68fe8d1e19b60e484bf08f838861728",
+                "reference": "c6802bf7c68fe8d1e19b60e484bf08f838861728",
                 "shasum": ""
             },
             "require": {
@@ -426,7 +426,7 @@
                 "resumable.js",
                 "upload"
             ],
-            "time": "2016-10-01T08:55:14+00:00"
+            "time": "2017-04-22T08:41:31+00:00"
         },
         {
             "name": "guzzle/guzzle",
@@ -587,12 +587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "7ba94759de07e35422a4959bb2d401fbf3672224"
+                "reference": "c929a722f167a47ad44ed74d70cca0f1108e420b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/7ba94759de07e35422a4959bb2d401fbf3672224",
-                "reference": "7ba94759de07e35422a4959bb2d401fbf3672224",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/c929a722f167a47ad44ed74d70cca0f1108e420b",
+                "reference": "c929a722f167a47ad44ed74d70cca0f1108e420b",
                 "shasum": ""
             },
             "require": {
@@ -647,7 +647,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2017-04-16 11:16:06"
+            "time": "2017-04-25T10:29:53+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -655,12 +655,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "f2ea3a6361a41eca3c974fdceb85d53648a46717"
+                "reference": "e09245dabca316757924e3ce29823dc5fb234098"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/f2ea3a6361a41eca3c974fdceb85d53648a46717",
-                "reference": "f2ea3a6361a41eca3c974fdceb85d53648a46717",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/e09245dabca316757924e3ce29823dc5fb234098",
+                "reference": "e09245dabca316757924e3ce29823dc5fb234098",
                 "shasum": ""
             },
             "require": {
@@ -710,7 +710,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-04-13 16:35:21"
+            "time": "2017-04-24T10:28:17+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2497,21 +2497,20 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.3.0",
+            "version": "v1.33.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "9718186a5df85a4f7917e78d3ffcabc204c75d25"
+                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9718186a5df85a4f7917e78d3ffcabc204c75d25",
-                "reference": "9718186a5df85a4f7917e78d3ffcabc204c75d25",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd6ca96227917e1e85b41c7c3cc6507b411e0927",
+                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
-                "symfony/polyfill-mbstring": "~1.0"
+                "php": ">=5.2.7"
             },
             "require-dev": {
                 "psr/container": "^1.0",
@@ -2521,7 +2520,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "1.33-dev"
                 }
             },
             "autoload": {
@@ -2556,7 +2555,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-03-22T15:41:51+00:00"
+            "time": "2017-04-20T17:39:48+00:00"
         },
         {
             "name": "webmozart/assert",
