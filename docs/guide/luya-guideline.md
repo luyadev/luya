@@ -48,6 +48,10 @@ public function init()
 }
 ```
 
+## Versioning
+
+This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md).
+
 ## CODING CONVENTIONS
 
 The following conventions are used when contributing to the LUYA project.
