@@ -232,7 +232,7 @@ function typeCastValue(value) {
     /**
      * Convert a string to number value, usefull in selects.
      *
-     * ```
+     * ```ftffdghfgdfgffdgddggddggdghhdgggdddgggggfggggggfffgggfgggffffghhhhhhhhuuhhuuuhhhhhh
      * <select name="filterId" ng-model="filterId" convert-to-number>
      * ```
      */
@@ -262,18 +262,22 @@ function typeCastValue(value) {
                 var table = angular.element(element.find('table'));
                 var thead = angular.element(table.find('thead'));
 
-                thead.css('background-color', '#fff');
+                if (table.length > 0 && thead.length > 0) {
+                    thead.css('background-color', '#fff');
 
-                var tableOffset = table.offset().top - $('.navbar-fixed').height();
+                    var tableOffset = table.offset().top - $('.navbar-fixed').height();
 
-                if(tableOffset <= 0) {
-                    thead.css('transform', 'translateY(' + (-1 - tableOffset) + 'px)');
-                    thead.css('box-shadow', '0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 5px 0 rgba(0, 0, 0, 0.04), 0 3px 1px -2px rgba(0, 0, 0, 0.1)');
-                } else {
-                    thead.css('transform', 'none');
-                    thead.css('box-shadow', 'none');
+                    if (tableOffset <= 0) {
+                        thead.css('transform', 'translateY(' + (-1 - tableOffset) + 'px)');
+                        thead.css('box-shadow', '0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 5px 0 rgba(0, 0, 0, 0.04), 0 3px 1px -2px rgba(0, 0, 0, 0.1)');
+                    } else {
+                        thead.css('transform', 'none');
+                        thead.css('box-shadow', 'none');
+                    }
                 }
             };
+
+            onScroll();
 
             angular.element(element).bind("scroll", function () {
                 onScroll();
