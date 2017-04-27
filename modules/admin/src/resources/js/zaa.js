@@ -232,7 +232,7 @@ function typeCastValue(value) {
     /**
      * Convert a string to number value, usefull in selects.
      *
-     * ```ftffdghfgdfgffdgddggddggdghhdgggdddgggggfggggggfffgggfgggffffghhhhhhhhuuhhuuuhhhhhh
+     * ```
      * <select name="filterId" ng-model="filterId" convert-to-number>
      * ```
      */
