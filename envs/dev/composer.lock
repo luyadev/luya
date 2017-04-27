@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "da248e4f4973d7ace7c9e8a9fdb57b8d",
+    "content-hash": "9d04e9277ea3c1f2aa96b427a8cc8a85",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -448,16 +448,16 @@
         },
         {
             "name": "flowjs/flow-php-server",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flowjs/flow-php-server.git",
-                "reference": "d621e27a18ba509de72b274241931c5b607ca95f"
+                "reference": "c6802bf7c68fe8d1e19b60e484bf08f838861728"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flowjs/flow-php-server/zipball/d621e27a18ba509de72b274241931c5b607ca95f",
-                "reference": "d621e27a18ba509de72b274241931c5b607ca95f",
+                "url": "https://api.github.com/repos/flowjs/flow-php-server/zipball/c6802bf7c68fe8d1e19b60e484bf08f838861728",
+                "reference": "c6802bf7c68fe8d1e19b60e484bf08f838861728",
                 "shasum": ""
             },
             "require": {
@@ -496,7 +496,7 @@
                 "resumable.js",
                 "upload"
             ],
-            "time": "2016-10-01T08:55:14+00:00"
+            "time": "2017-04-22T08:41:31+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1259,79 +1259,17 @@
             "time": "2016-11-14T01:06:16+00:00"
         },
         {
-            "name": "twig/twig",
-            "version": "v1.33.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a",
-                "reference": "05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.7"
-            },
-            "require-dev": {
-                "psr/container": "^1.0",
-                "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~3.3@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.33-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Twig_": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
-                    "name": "Armin Ronacher",
-                    "email": "armin.ronacher@active-4.com",
-                    "role": "Project Founder"
-                },
-                {
-                    "name": "Twig Team",
-                    "homepage": "http://twig.sensiolabs.org/contributors",
-                    "role": "Contributors"
-                }
-            ],
-            "description": "Twig, the flexible, fast, and secure template language for PHP",
-            "homepage": "http://twig.sensiolabs.org",
-            "keywords": [
-                "templating"
-            ],
-            "time": "2017-03-22T15:40:09+00:00"
-        },
-        {
             "name": "yiisoft/yii2",
-            "version": "2.0.11",
+            "version": "2.0.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "4144506d84b5c895e026be4d79ebbef7067ebcd3"
+                "reference": "ee996adec1dfd7babb67bd0c604f5bd6425fe5ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/4144506d84b5c895e026be4d79ebbef7067ebcd3",
-                "reference": "4144506d84b5c895e026be4d79ebbef7067ebcd3",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ee996adec1dfd7babb67bd0c604f5bd6425fe5ab",
+                "reference": "ee996adec1dfd7babb67bd0c604f5bd6425fe5ab",
                 "shasum": ""
             },
             "require": {
@@ -1418,7 +1356,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-02-01T16:46:29+00:00"
+            "time": "2017-02-08T09:04:32+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1522,16 +1460,16 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "dev-master",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "9f656e4721add78615d1a65c34834b5756a080d4"
+                "reference": "647be6c9d48dc2f3c2e2f33b9eba0a4ca78abde9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/9f656e4721add78615d1a65c34834b5756a080d4",
-                "reference": "9f656e4721add78615d1a65c34834b5756a080d4",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/647be6c9d48dc2f3c2e2f33b9eba0a4ca78abde9",
+                "reference": "647be6c9d48dc2f3c2e2f33b9eba0a4ca78abde9",
                 "shasum": ""
             },
             "require": {
@@ -1565,7 +1503,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2017-04-13 11:01:19"
+            "time": "2017-02-21T10:30:50+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -1672,9 +1610,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "yiisoft/yii2-debug": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
