@@ -82,7 +82,7 @@ class Controller extends \luya\admin\base\Controller
         $ngrest = new NgRest($config);
         $crud = new RenderCrud();
         if ($relation) {
-            $crud->viewFile = '@admin/views/ngrest/render/crud_relation.php';
+            $crud->viewFile = 'crud_relation.php';
         }
         return $ngrest->render($crud);
     }

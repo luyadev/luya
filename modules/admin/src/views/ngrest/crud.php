@@ -2,24 +2,27 @@
 use luya\admin\ngrest\render\RenderCrud;
 use luya\admin\Module;
 
+/* @var $config \luya\admin\ngrest\ConfigInterface */
+/* @var $this \luya\admin\ngrest\render\RenderCrudView */
+
 ?>
 <script>
-    activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl;?>';
-    ngrestConfigHash = '<?php echo $config->hash; ?>';
-    zaa.bootstrap.register('<?php echo $config->hash; ?>', function($scope, $controller) {
+    activeWindowCallbackUrl = '<?= $activeWindowCallbackUrl;?>';
+    ngrestConfigHash = '<?= $config->hash; ?>';
+    zaa.bootstrap.register('<?= $config->hash; ?>', function($scope, $controller) {
         /* extend class */
         $.extend(this, $controller('CrudController', { $scope : $scope }));
         /* local controller config */
-        $scope.config.apiListQueryString = '<?php echo $this->context->apiQueryString('list'); ?>';
-        $scope.config.apiUpdateQueryString = '<?php echo $this->context->apiQueryString('update'); ?>';
-        $scope.config.apiEndpoint = '<?php echo $this->context->getRestUrl(); ?>';
-        $scope.config.list = <?php echo $this->context->getFieldsJson('list'); ?>;
-        $scope.config.create = <?php echo $this->context->getFieldsJson('create'); ?>;
-        $scope.config.update = <?php echo $this->context->getFieldsJson('update'); ?>;
-        $scope.config.ngrestConfigHash = '<?php echo $config->hash; ?>';
-        $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
+        $scope.config.apiListQueryString = '<?= $this->context->apiQueryString('list'); ?>';
+        $scope.config.apiUpdateQueryString = '<?= $this->context->apiQueryString('update'); ?>';
+        $scope.config.apiEndpoint = '<?= $this->context->getRestUrl(); ?>';
+        $scope.config.list = <?= $this->context->getFieldsJson('list'); ?>;
+        $scope.config.create = <?= $this->context->getFieldsJson('create'); ?>;
+        $scope.config.update = <?= $this->context->getFieldsJson('update'); ?>;
+        $scope.config.ngrestConfigHash = '<?= $config->hash; ?>';
+        $scope.config.activeWindowCallbackUrl = '<?= $activeWindowCallbackUrl; ?>';
         $scope.config.activeWindowRenderUrl = '<?= $activeWindowRenderUrl; ?>';
-        $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
+        $scope.config.pk = '<?= $config->getPrimaryKey(); ?>';
         $scope.config.inline = <?= (int) $config->inline; ?>;
         $scope.config.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.config.tableName = '<?= $config->tableName; ?>';
@@ -30,7 +33,7 @@ use luya\admin\Module;
         <?php endif; ?>
     });
 </script>
-<div ng-controller="<?php echo $config->hash; ?>" ng-init="init()">
+<div ng-controller="<?= $config->hash; ?>" ng-init="init()">
     <!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
     <div style="visibility:hidden;" ui-view></div>
     <div ng-if="service">
@@ -71,9 +74,7 @@ use luya\admin\Module;
         
         <!-- LIST -->
         <div class="card-panel" ng-show="crudSwitchType==0">
-
             <div class="button-right" style="margin-bottom:30px;">
-
                 <div class="button-right__left">
                     <div class="row">
                         <div class="col <?php if (!empty($config->filters)): ?>m12 l6<?php else: ?>m6 l8<?php endif; ?>">
@@ -145,7 +146,7 @@ use luya\admin\Module;
                 <thead>
                 <tr>
                     <?php foreach ($config->getPointer('list') as $item): ?>
-                        <th ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?php echo $item['alias']; ?> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                        <th ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                     <?php endforeach; ?>
                     <?php if (count($this->context->getButtons()) > 0): ?>
                         <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span></th>
@@ -163,14 +164,14 @@ use luya\admin\Module;
                 <tr ng-repeat="(k, item) in items | srcbox:config.searchString" ng-show="viewToggler[key]" ng-class="{'crud__item-highlight': isHighlighted(item)}">
                     <?php foreach ($config->getPointer('list') as $item): ?>
                         <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
-                            <td ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?php echo $element['html']; ?></td>
+                            <td ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?= $element['html']; ?></td>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                     <?php if (count($this->context->getButtons()) > 0): ?>
                         <td style="text-align:right;">
                             <div ng-hide="isLocked(config.tableName, item[config.pk])">
                             <?php foreach ($this->context->getButtons() as $item): ?>
-                                <a class="crud__button waves-effect waves-light btn-flat btn--bordered" ng-click="<?php echo $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?php echo $item['icon']; ?></i><?php echo $item['label']; ?></a>
+                                <a class="crud__button waves-effect waves-light btn-flat btn--bordered" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?= $item['icon']; ?></i><?= $item['label']; ?></a>
                             <?php endforeach; ?>
                             </div>
                             <div ng-show="isLocked(config.tableName, item[config.pk])">
@@ -217,7 +218,7 @@ use luya\admin\Module;
                             <?php foreach ($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
                                     <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_CREATE) as $element): ?>
-                                        <?php echo $element['html']; ?>
+                                        <?= $element['html']; ?>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endforeach; ?>
@@ -265,7 +266,7 @@ use luya\admin\Module;
                             <?php foreach ($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
                                     <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_UPDATE) as $element): ?>
-                                        <?php echo $element['html']; ?>
+                                        <?= $element['html']; ?>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endforeach; ?>

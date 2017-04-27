@@ -2,9 +2,9 @@
 
 namespace luya\admin\ngrest;
 
-use Exception;
-use luya\helpers\ArrayHelper;
 use yii\base\Object;
+use luya\Exception;
+use luya\helpers\ArrayHelper;
 use luya\admin\Module;
 
 /**
@@ -64,9 +64,19 @@ class Config extends Object implements ConfigInterface
     
     public $apiEndpoint = null;
 
-    public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */
-
     public $relationCall = false;
+    
+    private $_primaryKey = null;
+    
+    public function getPrimaryKey()
+    {
+    	return $this->_primaryKey;
+    }
+    
+    public function setPrimaryKey($key)
+    {
+    	$this->_primaryKey = $key;
+    }
     
     public function getDefaultOrderField()
     {

@@ -18,4 +18,6 @@ interface ConfigInterface
     public function getExtraFields();
 
     public function onFinish();
+    
+    public function getPrimaryKey();
 }

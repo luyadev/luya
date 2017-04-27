@@ -3,17 +3,20 @@
 namespace luya\admin\ngrest\render;
 
 use Yii;
-use yii\base\View;
 use luya\admin\components\Auth;
 use luya\admin\models\Lang;
 use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
 use yii\base\InvalidConfigException;
+use yii\base\ViewContextInterface;
 
 /**
+ * 
+ * @property \luya\admin\ngrest\render\RenderCrudView $view
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
-class RenderCrud extends Render implements RenderInterface
+class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 {
     const TYPE_LIST = 'list';
 
@@ -21,7 +24,7 @@ class RenderCrud extends Render implements RenderInterface
 
     const TYPE_UPDATE = 'update';
 
-    public $viewFile = '@admin/views/ngrest/render/crud.php';
+    public $viewFile = 'crud.php';
 
     private $_permissions = [];
 
@@ -45,23 +48,27 @@ class RenderCrud extends Render implements RenderInterface
     public function getView()
     {
         if ($this->_view === null) {
-            $this->_view = new View();
+            $this->_view = new RenderCrudView();
         }
 
         return $this->_view;
     }
+    
+    public function getViewPath()
+    {
+    	return '@admin/views/ngrest';
+    }
 
     public function render()
     {
-        return $this->getView()->render($this->viewFile, array(
+    	return $this->view->render($this->viewFile, [
             'canCreate' => $this->can(Auth::CAN_CREATE),
             'canUpdate' => $this->can(Auth::CAN_UPDATE),
             'canDelete' => $this->can(Auth::CAN_DELETE),
-            //'crud' => $this,
             'config' => $this->config,
             'activeWindowRenderUrl' => $this->getRestUrl('active-window-render'),
             'activeWindowCallbackUrl' => $this->getRestUrl('active-window-callback'),
-        ), $this);
+        ], $this);
     }
 
     public function getRestUrl($append = null)
