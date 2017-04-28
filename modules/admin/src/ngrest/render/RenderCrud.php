@@ -9,6 +9,7 @@ use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
 use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
+use luya\admin\ngrest\render\RenderCrudInterface;
 
 /**
  * 
@@ -16,7 +17,7 @@ use yii\base\ViewContextInterface;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class RenderCrud extends Render implements RenderInterface, ViewContextInterface
+class RenderCrud extends Render implements RenderInterface, ViewContextInterface, RenderCrudInterface
 {
     const TYPE_LIST = 'list';
 
@@ -58,7 +59,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     {
     	return '@admin/views/ngrest';
     }
-
+    
     public function render()
     {
     	return $this->view->render($this->viewFile, [
@@ -66,24 +67,61 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             'canUpdate' => $this->can(Auth::CAN_UPDATE),
             'canDelete' => $this->can(Auth::CAN_DELETE),
             'config' => $this->config,
-            'activeWindowRenderUrl' => $this->getRestUrl('active-window-render'),
-            'activeWindowCallbackUrl' => $this->getRestUrl('active-window-callback'),
+    		'isInline' => $this->getIsInline(),
+    		'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
         ], $this);
     }
 
-    public function getRestUrl($append = null)
+    public function getApiEndpoint($append = null)
     {
         if ($append) {
             $append = '/' . ltrim($append, '/');
         }
-        return 'admin/'.$this->config->apiEndpoint . $append;
+        return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
     }
     
     public function getPrimaryKey()
     {
         return $this->config->primaryKey;
     }
+    
+    private $_relationCall = false;
+    
+    public function getRelationCall()
+    {
+    	return $this->_relationCall;
+    }
+    
+    public function setRelationCall(array $options)
+    {
+    	$this->_relationCall = $options;
+    }
+    
+    private $_isInline = false;
+    
+    /**
+     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
+     * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
+     */
+    public function getIsInline()
+    {
+    	return $this->_isInline;	
+    }
+    
+    public function setIsInline($inline)
+    {
+    	$this->_isInline = $inline;
+    }
 
+    public function getOrderBy()
+    {
+    	return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
+    }
+    
+    /*
+     * OLD
+     */
+    
     /**
      * collection all the buttons in the crud list.
      *
@@ -102,7 +140,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         if ($this->_buttons === null) {
             $buttons = [];
             
-            foreach ($this->config->relations as $rel) {
+            foreach ($this->getConfig()->getRelataions() as $rel) {
                 $api = Yii::$app->adminmenu->getApiDetail($rel['apiEndpoint']);
                 
                 if (!$api) {
@@ -163,7 +201,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             $query['expand'] = implode(',', $this->config->getPointerExtraFields($type));
         }
         // return url decoed string from http_build_query
-        return urldecode(http_build_query($query));
+        return http_build_query($query, '', '&');
     }
 
     /**
@@ -223,7 +261,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             $names[$elmn['name']] = $elmn['name'];
         }
         
-        foreach ($this->config->attributeGroups as $group) {
+        foreach ($this->getConfig()->getAttributeGroups()as $group) {
             foreach ($group[0] as $item) {
                 if (in_array($item, $names)) {
                     unset($names[$item]);
@@ -234,7 +272,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         $groups[] = [$names, '__default', 'collapsed' => true, 'is_default' => true];
         
         
-        return array_merge($groups, $this->config->attributeGroups);
+        return array_merge($groups, $this->getConfig()->getAttributeGroups());
     }
     
     public function forEachGroups($pointer)

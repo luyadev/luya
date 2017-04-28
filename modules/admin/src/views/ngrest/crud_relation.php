@@ -23,7 +23,7 @@ use yii\helpers\Json;
         $scope.config.inline = 1;
         $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
-        $scope.relationCall = <?= Json::htmlEncode($config->relationCall); ?>
+        $scope.relationCall = <?= Json::htmlEncode($relationCall); ?>
         <?php if ($config->groupByField): ?>
         $scope.config.groupBy = 1;
         $scope.config.groupByField = "<?= $config->groupByField; ?>";

@@ -66,10 +66,6 @@ class Controller extends \luya\admin\base\Controller
         if (!$config) {
             throw new Exception("Provided NgRest config for controller '' is invalid.");
         }
-        
-        if ($relation && $arrayIndex !== false && $modelClass !== false) {
-            $config->relationCall = ['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass];
-        }
 
         $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
         
@@ -77,10 +73,12 @@ class Controller extends \luya\admin\base\Controller
             $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
         }
         
-        $config->inline = (int) $inline;
-        
         $ngrest = new NgRest($config);
         $crud = new RenderCrud();
+        $crud->setIsInline($inline);
+        if ($relation && $arrayIndex !== false && $modelClass !== false) {
+        	$crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
+        }
         if ($relation) {
             $crud->viewFile = 'crud_relation.php';
         }

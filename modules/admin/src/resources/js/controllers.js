@@ -46,14 +46,6 @@
 		$scope.tabService = CrudTabService;
 		
 		/**
-		 * As we have changed to ng-if some variables need to get pased by an object in order to keep the parent scope, as ng-if create a new scope.
-		 */
-		$scope.config = {
-			filter: '0', groupBy: 0, groupByField: '0', pagerHiddenByAjaxSearch: false, fullSearchContainer: false,
-			minLengthWarning: false
-		};
-		
-		/**
 		 * 0 = list
 		 * 1 = add
 		 * 2 = edit
@@ -222,8 +214,9 @@
 		$scope.parentController = $scope.$parent;
 		
 		$scope.applySaveCallback = function() {
-			if ($scope.saveCallback != 0 && $scope.saveCallback != null && $scope.saveCallback != false) {
-				$injector.invoke($scope.saveCallback, this);
+			if ($scope.config.saveCallback) {
+				console.log($scope.config.saveCallback);
+				$injector.invoke($scope.config.saveCallback, this);
 			}
 		}
 		
