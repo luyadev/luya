@@ -168,18 +168,18 @@ return [
     'block_group_media_group' => 'Médias',
         
     // rc3
-    'block_audio_admin_nourl' => 'No embed audio code has been set.',
-    'block_audio_admin_hasurl' => 'Embed audio code is set.',
-    'block_file_list_admin_empty' => 'No files has been selected yet.',
+    'block_audio_admin_nourl' => 'Aucun code audio intégré n\'a été défini',
+    'block_audio_admin_hasurl' => 'Code audio intégré a été défini',
+    'block_file_list_admin_empty' => 'Aucun fichier n\'a été sélectionné',
     'block_html_name' => 'HTML',
-    'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
-    'block_spacing_small_space' => 'Small space',
-    'block_spacing_medium_space' => 'Medium space',
-    'block_spacing_large_space' => 'Large space',
+    'block_module_modulename_help' => 'Seuls les modules frontend enregistrés dans la configuration sont disponibles',
+    'block_spacing_small_space' => 'Petit espace',
+    'block_spacing_medium_space' => 'Espace moyen',
+    'block_spacing_large_space' => 'Grand espace',
     
     // 1.0.0
-    'block_module_strictrender' => 'Strict Render',
-    'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.',
-	'block_html_cfg_raw_label' => 'Render HTML in Admin',
+    'block_module_strictrender' => 'Rendu stricte',
+    'block_module_strictrender_help' => 'Lorsque le rendu strict est activé, le module exécutera uniquement les routes fournis (module, contrôleur, action, params) sans tenir compte des actions et l\'url des contrôleurs',
+    'block_html_cfg_raw_label' => 'Affcher l\'HTML dans l\'admin',
     
 ];
