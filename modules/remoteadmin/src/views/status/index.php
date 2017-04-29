@@ -43,15 +43,14 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
 	<div class="card-panel">
 		<h3><i class="material-icons">update</i> Remote Sites</h3>
 		<p>Current LUYA Version is <a href="https://packagist.org/packages/luyadev/luya-core" target="_blank"><strong><?= $currentVersion['version']; ?></strong></a>, released at <?= Yii::$app->formatter->asDate(strtotime($currentVersion['time']))?></p>
-		<table class="bordered hoverable">
+		<table class="bordered hoverable centered">
 			<thead>
 			<tr>
-			    <th>Id</th>
-			    <th>Url</th>
+			    <th style="text-align:left;">Url</th>
 			    <th>Time *</th>
 			    <th>YII_DEBUG</th>
 			    <th>Transfer Exceptions</th>
-			    <th>Admins Online</th>
+			    <th>Online Admin</th>
 			    <th>YII_ENV</th>
 			    <th>LUYA Version</th>
 			    <th>Yii Version</th>
@@ -59,16 +58,16 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
 			</tr>
 			</thead>
 	        <tr ng-repeat="site in sites">
-	            <td>{{site.id}}</td>
-	            <td><a ng-href="{{site.url}}" target="_blank">{{site.url}}</a></td>
-	            <td ng-if="!site.status.error">{{site.status.time}}</td>
-	            <td ng-if="!site.status.error" style="{{site.status.debugstyle}}">{{site.status.debug}}</td>
-	            <td ng-if="!site.status.error" style="{{site.status.exceptionsstyle}}">{{site.status.exceptions}}</td>
-	            <td ng-if="!site.status.error">{{site.status.online}}</td>
-	            <td ng-if="!site.status.error">{{site.status.env}}</td>
-	            <td ng-if="!site.status.error" style="{{site.status.luyastyle}}">{{site.status.luya}}</td>
-	            <td ng-if="!site.status.error">{{site.status.yii}}</td>
+	            <td style="text-align:left;"><a ng-href="{{site.url}}" target="_blank">{{site.url}}</a></td>
+	            <td ng-if="!site.status.error && !site.status.loading">{{site.status.time}}</td>
+	            <td ng-if="!site.status.error && !site.status.loading" style="{{site.status.debugstyle}}">{{site.status.debug}}</td>
+	            <td ng-if="!site.status.error && !site.status.loading" style="{{site.status.exceptionsstyle}}">{{site.status.exceptions}}</td>
+	            <td ng-if="!site.status.error && !site.status.loading">{{site.status.online}}</td>
+	            <td ng-if="!site.status.error && !site.status.loading">{{site.status.env}}</td>
+	            <td ng-if="!site.status.error && !site.status.loading" style="{{site.status.luyastyle}}">{{site.status.luya}}</td>
+	            <td ng-if="!site.status.error && !site.status.loading">{{site.status.yii}}</td>
 	            <td ng-if="site.status.error" colspan="7"><div style="background-color:#FF8A80; padding:4px; color:white;">Unable to retrieve data from the Remote Page.</div></td>
+                <td ng-if="site.status.loading" colspan="7"><div class="progress"><div class="indeterminate"></div></div></td>
                 <td><a ng-href="{{site.url}}/admin" target="_blank"> <button class="btn-flat  btn--bordered"><i class="material-icons">exit_to_app</i></button></a></td>
 	        </tr>
 		</table>
