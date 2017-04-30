@@ -171,6 +171,6 @@ return [
     'view_update_block_tooltip_edit' => 'Modifier',
     'view_update_block_tooltip_editcfg' => 'Configurer',
     'view_update_block_tooltip_delete' => 'Supprimer',
-    'view_update_block_tooltip_close' => 'Fermer l\'édition,
+    'view_update_block_tooltip_close' => 'Fermer l\'édition',
     
 ];
