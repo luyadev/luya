@@ -6,6 +6,7 @@ use yii\base\Object;
 use luya\Exception;
 use luya\helpers\ArrayHelper;
 use luya\admin\Module;
+use yii\base\InvalidConfigException;
 
 /**
  * Defines and holds an NgRest Config.
@@ -36,10 +37,14 @@ use luya\admin\Module;
  */
 class Config extends Object implements ConfigInterface
 {
-    private $_config = null;
+    private $_config = [];
     
     public function setConfig(array $config)
     {
+    	if (!empty($this->_config)) {
+    		throw new InvalidConfigException("Unable to override an already provided Config.");	
+    	}
+    	
     	$this->_config = $config;
     }
     
