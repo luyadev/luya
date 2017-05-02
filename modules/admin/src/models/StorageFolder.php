@@ -35,6 +35,7 @@ final class StorageFolder extends ActiveRecord
         return [
             [['name'], 'required'],
             [['parent_id', 'timestamp_create', 'is_deleted'], 'safe'],
+            [['is_deleted'], 'boolean']
         ];
     }
 }

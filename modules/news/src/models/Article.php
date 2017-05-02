@@ -85,7 +85,8 @@ class Article extends NgRestModel
         return [
             [['title', 'text'], 'required'],
             [['title', 'text', 'image_list', 'file_list', 'teaser_text'], 'string'],
-            [['cat_id', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'timestamp_display_from', 'timestamp_display_until', 'is_deleted', 'is_display_limit'], 'integer'],
+            [['cat_id', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'timestamp_display_from', 'timestamp_display_until'], 'integer'],
+            [['is_deleted', 'is_display_limit'], 'boolean'],
             [['image_id'], 'safe'],
         ];
     }

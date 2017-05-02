@@ -306,7 +306,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
 
     public static function findByEmail($email)
     {
-        return self::find()->where(['email' => $email, 'is_deleted' => 0])->one();
+        return self::find()->where(['email' => $email, 'is_deleted' => false])->one();
     }
 
     public function validatePassword($password)

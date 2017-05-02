@@ -65,7 +65,7 @@ class ProxyMachine extends NgRestModel
     {
         return [
             [['name', 'access_token', 'identifier'], 'required'],
-            [['is_deleted', 'is_disabled'], 'integer'],
+            [['is_deleted', 'is_disabled'], 'boolean'],
             [['name', 'access_token', 'identifier'], 'string', 'max' => 255],
         ];
     }

@@ -37,7 +37,7 @@ final class Group extends NgRestModel
         return [
             [['name'], 'required'],
             [['text'], 'string'],
-            [['is_deleted'], 'integer'],
+            [['is_deleted'], 'boolean'],
             [['name'], 'string', 'max' => 255],
             [['users'], 'safe'],
         ];

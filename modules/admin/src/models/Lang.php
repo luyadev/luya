@@ -71,7 +71,7 @@ final class Lang extends NgRestModel
     {
         return [
             [['name', 'short_code'], 'required'],
-            [['is_default'], 'integer'],
+            [['is_default'], 'boolean'],
             [['name'], 'string', 'max' => 255],
             [['short_code'], 'string', 'max' => 15],
         ];
