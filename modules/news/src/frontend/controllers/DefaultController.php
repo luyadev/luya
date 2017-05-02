@@ -29,7 +29,7 @@ class DefaultController extends \luya\web\Controller
     public function actionIndex()
     {
         $provider = new ActiveDataProvider([
-            'query' => Article::find()->andWhere(['is_deleted' => 0]),
+            'query' => Article::find()->andWhere(['is_deleted' => false]),
             'sort' => [
                 'defaultOrder' => $this->module->articleDefaultOrder,
             ],
@@ -107,7 +107,7 @@ class DefaultController extends \luya\web\Controller
      */
     public function actionDetail($id, $title)
     {
-        $model = Article::findOne(['id' => $id, 'is_deleted' => 0]);
+        $model = Article::findOne(['id' => $id, 'is_deleted' => false]);
         
         if (!$model) {
             return $this->goHome();

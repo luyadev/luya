@@ -105,7 +105,7 @@ class CrawlContainer extends \yii\base\Object
 
     public function find()
     {
-        foreach (Builderindex::find()->where(['crawled' => 0])->asArray()->all() as $item) {
+        foreach (Builderindex::find()->where(['crawled' => false])->asArray()->all() as $item) {
             if (!$this->isProcessed($item['url'])) {
                 if ($this->urlStatus($item['url'])) {
                     $this->addProcessed($item['url']);
@@ -113,7 +113,7 @@ class CrawlContainer extends \yii\base\Object
             }
         }
 
-        if (Builderindex::find()->where(['crawled' => 0])->count() > 0) {
+        if (Builderindex::find()->where(['crawled' => false])->count() > 0) {
             $this->find();
         } else {
             $this->finish();
@@ -127,7 +127,7 @@ class CrawlContainer extends \yii\base\Object
 
     public function finish()
     {
-        $builder = Builderindex::find()->where(['is_dublication' => 0])->indexBy('url')->asArray()->all();
+        $builder = Builderindex::find()->where(['is_dublication' => false])->indexBy('url')->asArray()->all();
         $index = Index::find()->asArray()->indexBy('url')->all();
 
         if (count($builder) == 0) {
@@ -260,7 +260,7 @@ class CrawlContainer extends \yii\base\Object
                 $model->group = $this->getCrawler($url)->getGroup();
                 $model->title = $this->getCrawler($url)->getTitle();
                 $model->description = $this->getCrawler($url)->getMetaDescription();
-                $model->crawled = 1;
+                $model->crawled = true;
                 $model->status_code = 1;
                 $model->last_indexed = time();
                 $model->language_info = $this->getCrawler($url)->getLanguageInfo();
@@ -283,10 +283,10 @@ class CrawlContainer extends \yii\base\Object
             if (!$this->filterUrlIsValid($url)) {
                 $model->delete();
             } else {
-                if ($model->crawled !== 1) {
+                if (!$model->crawled) {
                     $model->content = $this->getCrawler($url)->getContent();
                     $model->group = $this->getCrawler($url)->getGroup();
-                    $model->crawled = 1;
+                    $model->crawled = true;
                     $model->status_code = 1;
                     $model->last_indexed = time();
                     $model->title = $this->getCrawler($url)->getTitle();

@@ -131,7 +131,7 @@ class SetupController extends \luya\console\Command
             'email' => $this->email,
             'password' => $pw,
             'password_salt' => $salt,
-            'is_deleted' => 0,
+            'is_deleted' => false,
         ]);
     
         $this->insert('admin_group', [
@@ -160,13 +160,13 @@ class SetupController extends \luya\console\Command
         $this->insert('admin_lang', [
             'name' => $this->langName,
             'short_code' => $this->langShortCode,
-            'is_default' => 1,
+            'is_default' => true,
         ]);
     
         if (Yii::$app->hasModule('cms')) {
             // insert default page
-            $this->insert("cms_nav_container", ['id' => 1, 'name' => 'Default Container', 'alias' => 'default', 'is_deleted' => 0]);
-            $this->insert("cms_nav", ['nav_container_id' => 1, 'parent_nav_id' => 0, 'sort_index' => 0, 'is_deleted' => 0, 'is_hidden' => 0, 'is_offline' => 0, 'is_home' => 1, 'is_draft' => 0]);
+            $this->insert("cms_nav_container", ['id' => 1, 'name' => 'Default Container', 'alias' => 'default', 'is_deleted' => false]);
+            $this->insert("cms_nav", ['nav_container_id' => 1, 'parent_nav_id' => 0, 'sort_index' => 0, 'is_deleted' => false, 'is_hidden' => false, 'is_offline' => false, 'is_home' => true, 'is_draft' => false]);
             $this->insert("cms_nav_item", ['nav_id' => 1, 'lang_id' => 1, 'nav_item_type' => 1, 'nav_item_type_id' => 1, 'create_user_id' => 1, 'update_user_id' => 1, 'timestamp_create' => time(), 'title' => 'Homepage', 'alias' => 'homepage']);
             $this->insert('cms_nav_item_page', ['layout_id' => 1, 'create_user_id' => 1, 'timestamp_create' => time(), 'version_alias' => 'Initial', 'nav_item_id' => 1]);
         }

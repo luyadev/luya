@@ -110,7 +110,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     public function ngRestFilters()
     {
         return [
-            'Removed' => self::find()->where(['is_deleted' => 1]),
+            'Removed' => self::find()->where(['is_deleted' => true]),
         ];
     }
     
@@ -207,7 +207,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     public function beforeCreate()
     {
         $this->auth_token = '';
-        $this->is_deleted = 0;
+        $this->is_deleted = false;
     }
 
     public function eventBeforeValidate()
@@ -233,7 +233,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
      */
     public static function find()
     {
-        return parent::find()->where(['is_deleted' => 0]);
+        return parent::find()->where(['is_deleted' => false]);
     }
 
     public function changePassword($newpass, $newpasswd)

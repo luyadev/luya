@@ -67,7 +67,7 @@ class Storage
      */
     public static function removeFile($fileId, $cleanup = false)
     {
-        $model = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
+        $model = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => false])->one();
         if ($model) {
             if ($cleanup) {
                 foreach (Yii::$app->storage->findImages(['file_id' => $fileId]) as $imageItem) {

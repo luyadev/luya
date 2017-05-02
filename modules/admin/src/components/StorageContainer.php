@@ -397,8 +397,8 @@ class StorageContainer extends Component
             'folder_id' => (int) $folderId,
             'hash_file' => $fileHash,
             'hash_name' => $fileHashName,
-            'is_hidden' => ($isHidden) ? 1 : 0,
-            'is_deleted' => 0,
+            'is_hidden' => ($isHidden) ? true : false,
+            'is_deleted' => false,
             'file_size' => @filesize($savePath),
             'caption' => null,
         ]);
@@ -568,7 +568,7 @@ class StorageContainer extends Component
     public function getFoldersArray()
     {
         if ($this->_foldersArray === null) {
-            $this->_foldersArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create'])->where(['is_deleted' => 0])->orderBy(['name' => 'ASC'])->indexBy('id'), $this->_folderCacheKey);
+            $this->_foldersArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create'])->where(['is_deleted' => false])->orderBy(['name' => 'ASC'])->indexBy('id'), $this->_folderCacheKey);
         }
         
         return $this->_foldersArray;
@@ -723,7 +723,7 @@ class StorageContainer extends Component
      */
     public function processThumbnails()
     {
-        foreach ($this->findFiles(['is_hidden' => 0, 'is_deleted' => 0]) as $file) {
+        foreach ($this->findFiles(['is_hidden' => false, 'is_deleted' => false]) as $file) {
             if ($file->isImage) {
                 // create tiny thumbnail
                 $this->addImage($file->id, TinyCrop::identifier());

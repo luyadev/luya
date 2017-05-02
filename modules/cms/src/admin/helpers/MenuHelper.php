@@ -32,7 +32,7 @@ class MenuHelper
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy(['sort_index' => SORT_ASC])
-            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 0])
+            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => false])
             ->all();
             
             self::loadInheritanceData(0);
@@ -84,7 +84,7 @@ class MenuHelper
     private static function getNavItems()
     {
         if (self::$_navItems === null) {
-            $items = Nav::find()->select(['sort_index', 'id', 'parent_nav_id', 'is_deleted'])->where(['is_deleted' => 0])->orderBy(['sort_index' => SORT_ASC])->asArray()->all();
+            $items = Nav::find()->select(['sort_index', 'id', 'parent_nav_id', 'is_deleted'])->where(['is_deleted' => false])->orderBy(['sort_index' => SORT_ASC])->asArray()->all();
             return self::$_navItems = ArrayHelper::index($items, null, 'parent_nav_id');
         }
         
@@ -200,7 +200,7 @@ class MenuHelper
     public static function getContainers()
     {
         if (self::$containers === null) {
-            self::$containers = (new Query())->select(['id', 'name', 'alias'])->from('cms_nav_container')->where(['is_deleted' => 0])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
+            self::$containers = (new Query())->select(['id', 'name', 'alias'])->from('cms_nav_container')->where(['is_deleted' => false])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
         }
         
         return self::$containers;
@@ -221,7 +221,7 @@ class MenuHelper
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy('cms_nav.sort_index ASC')
-            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 1])
+            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => true])
             ->all();
         }
         

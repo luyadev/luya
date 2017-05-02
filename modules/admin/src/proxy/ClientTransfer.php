@@ -38,7 +38,7 @@ class ClientTransfer extends Object
         $fileCount = 0;
         
         // sync files
-        foreach ((new Query())->where(['is_deleted' => 0])->all() as $file) {
+        foreach ((new Query())->where(['is_deleted' => false])->all() as $file) {
             /* @var $file \luya\admin\file\Item */
             if (!$file->fileExists) {
                 $curl = new Curl();

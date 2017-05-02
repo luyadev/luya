@@ -107,10 +107,10 @@ class Nav extends ActiveRecord
     {
         $model = new self();
         $model->attributes = $this->toArray();
-        $model->is_hidden = 1;
-        $model->is_offline = 1;
-        $model->is_home = 0;
-        $model->is_draft = 0;
+        $model->is_hidden = true;
+        $model->is_offline = true;
+        $model->is_home = false;
+        $model->is_draft = false;
         if ($model->save(false)) {
             return $model;
         }
@@ -270,7 +270,7 @@ class Nav extends ActiveRecord
     public static function checkDuplicateAlias($currentNavId, $parentNavId)
     {
         $currentNavItems = NavItem::find()->where(['nav_id' => $currentNavId])->asArray()->all();
-        foreach (self::find()->where(['parent_nav_id' => $parentNavId, 'is_deleted' => 0])->andWhere(['<>', 'id', $currentNavId])->asArray()->all() as $item) {
+        foreach (self::find()->where(['parent_nav_id' => $parentNavId, 'is_deleted' => false])->andWhere(['<>', 'id', $currentNavId])->asArray()->all() as $item) {
             foreach ($currentNavItems as $currentNavItem) {
                 $itemNavItem = NavItem::find()->asArray()->where(['nav_id' => $item['id'], 'lang_id' => $currentNavItem['lang_id']])->one();
                 if ($itemNavItem && $currentNavItem['alias'] == $itemNavItem['alias']) {
@@ -399,9 +399,9 @@ class Nav extends ActiveRecord
             'parent_nav_id' => 0,
             'nav_container_id' => 0,
             'sort_index' => 0,
-            'is_draft' => 1,
-            'is_hidden' => 1,
-            'is_offline' => 1
+            'is_draft' => true,
+            'is_hidden' => true,
+            'is_offline' => true,
         ];
         // nav item
         $navItem = new NavItem();
@@ -498,8 +498,8 @@ class Nav extends ActiveRecord
         $nav->attributes = [
             'parent_nav_id' => $parentNavId,
             'nav_container_id' => $navContainerId,
-            'is_hidden' => 1,
-            'is_offline' => 1,
+            'is_hidden' => true,
+            'is_offline' => true,
             'is_draft' => $isDraft
         ];
         // nav item
@@ -595,8 +595,8 @@ class Nav extends ActiveRecord
         $nav->attributes = [
             'parent_nav_id' => $parentNavId,
             'nav_container_id' => $navContainerId,
-            'is_hidden' => 1,
-            'is_offline' => 1,
+            'is_hidden' => true,
+            'is_offline' => true,
             'is_draft' => $isDraft
         ];
         $navItem->attributes = [
@@ -706,8 +706,8 @@ class Nav extends ActiveRecord
         $nav->attributes = [
             'parent_nav_id' => $parentNavId,
             'nav_container_id' => $navContainerId,
-            'is_hidden' => 1,
-            'is_offline' => 1
+            'is_hidden' => true,
+            'is_offline' => true,
         ];
         $navItem->attributes = [
             'lang_id' => $langId,
@@ -766,8 +766,8 @@ class Nav extends ActiveRecord
         $nav->attributes = [
             'parent_nav_id' => $parentNavId,
             'nav_container_id' => $navContainerId,
-            'is_hidden' => 1,
-            'is_offline' => 1
+            'is_hidden' => true,
+            'is_offline' => true,
         ];
         $navItem->attributes = [
             'lang_id' => $langId,

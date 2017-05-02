@@ -59,7 +59,7 @@ class StorageController extends RestController
                 $folders[$key]['subfolder'] = Yii::$app->storage->getFolder($folder->id)->hasChild();
             }
             
-            $this->setHasCache('storageApiDataFolders', $folders, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_folder WHERE is_deleted=0']), 0);
+            $this->setHasCache('storageApiDataFolders', $folders, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_folder WHERE is_deleted=false']), 0);
             
             return $folders;
         }
@@ -78,7 +78,7 @@ class StorageController extends RestController
         
         if ($cache === false) {
             $files = [];
-            foreach (Yii::$app->storage->findFiles(['is_hidden' => 0, 'is_deleted' => 0]) as $file) {
+            foreach (Yii::$app->storage->findFiles(['is_hidden' => false, 'is_deleted' => false]) as $file) {
                 $data = $file->toArray();
                 if ($file->isImage) {
                     // add tiny thumbnail
@@ -100,7 +100,7 @@ class StorageController extends RestController
                 }
                 $files[] = $data;
             }
-            $this->setHasCache('storageApiDataFiles', $files, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_file WHERE is_deleted=0']), 0);
+            $this->setHasCache('storageApiDataFiles', $files, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_file WHERE is_deleted=false']), 0);
             return $files;
         }
         

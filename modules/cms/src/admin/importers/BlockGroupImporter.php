@@ -24,7 +24,7 @@ class BlockGroupImporter extends Importer
             $model = BlockGroup::find()->where(['identifier' => $obj->identifier()])->one();
             
             if ($model) {
-                $model->updateAttributes(['name' => $obj->label(), 'is_deleted' => 0]);
+                $model->updateAttributes(['name' => $obj->label(), 'is_deleted' => false]);
                 $this->addLog('update blockgroup name: ' . $obj->label());
                 $handled[] = $model->id;
             } else {

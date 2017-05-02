@@ -19,7 +19,7 @@ class FileController extends \luya\web\Controller
     public function actionDownload($id, $hash, $fileName)
     {
         // find file in file query
-        $fileData = Yii::$app->storage->findFile(['id' => $id, 'hash_name' => $hash, 'is_deleted' => 0]);
+        $fileData = Yii::$app->storage->findFile(['id' => $id, 'hash_name' => $hash, 'is_deleted' => false]);
         // proceed when file exists
         if ($fileData) {
             // get file source from storage system

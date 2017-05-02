@@ -40,8 +40,8 @@ class LogBehavior extends \yii\base\Behavior
                 'timestamp_create' => time(),
                 'route' => $this->route,
                 'api' => $this->api,
-                'is_insert' => 1,
-                'is_update' => 0,
+                'is_insert' => true,
+                'is_update' => false,
                 'attributes_json' => json_encode($event->sender->getAttributes()),
             ])->execute();
         }
@@ -55,8 +55,8 @@ class LogBehavior extends \yii\base\Behavior
                 'timestamp_create' => time(),
                 'route' => $this->route,
                 'api' => $this->api,
-                'is_insert' => 0,
-                'is_update' => 1,
+                'is_insert' => false,
+                'is_update' => true,
                 'attributes_json' => json_encode($event->sender->getAttributes()),
             ])->execute();
         }

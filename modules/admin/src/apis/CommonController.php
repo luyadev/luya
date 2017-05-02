@@ -115,7 +115,7 @@ class CommonController extends RestController
         }
     
         $user = Yii::$app->adminuser->identity;
-        $user->force_reload = 0;
+        $user->force_reload = false;
         $user->save(false);
     
         return true;

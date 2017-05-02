@@ -19,7 +19,7 @@ trait SoftDeleteTrait
      *
      * ```php
      * return [
-     *     'is_deleted' => [1, 0], // on delete sets `is_deleted = 1`; on find add where `where(['is_deleted' => 0]);`.
+     *     'is_deleted' => [true, false], // on delete sets `is_deleted = true`; on find add where `where(['is_deleted' => false]);`.
      *     'is_inactive' => true, // on delete sets `is_inactive = true`; on find add where `where([is_inactive' => !true]);`.
      * ];
      * ```
@@ -36,7 +36,7 @@ trait SoftDeleteTrait
     public static function FieldStateDescriber()
     {
         return [
-            'is_deleted' => [1, 0]
+            'is_deleted' => [true, false]
         ];
     }
 

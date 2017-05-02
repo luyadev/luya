@@ -36,15 +36,15 @@ final class Lang extends NgRestModel
          * has default to 1, disabled the other default attributes.
          */
         $this->on(self::EVENT_BEFORE_INSERT, function ($event) {
-            if ($this->is_default == 1) {
-                self::updateAll(['is_default' => 0]);
+            if ($this->is_default) {
+                self::updateAll(['is_default' => false]);
             }
         });
         
         $this->on(self::EVENT_BEFORE_UPDATE, function ($event) {
-            if ($this->is_default == 1) {
+            if ($this->is_default) {
                 $this->markAttributeDirty('is_default');
-                self::updateAll(['is_default' => 0]);
+                self::updateAll(['is_default' => false]);
             }
         });
         
@@ -146,7 +146,7 @@ final class Lang extends NgRestModel
     public static function getDefault()
     {
         if (self::$_langInstance === null) {
-            self::$_langInstance = self::find()->where(['is_default' => 1, 'is_deleted' => 0])->asArray()->one();
+            self::$_langInstance = self::find()->where(['is_default' => true, 'is_deleted' => false])->asArray()->one();
         }
 
         return self::$_langInstance;
@@ -167,7 +167,7 @@ final class Lang extends NgRestModel
             if (!$langShortCode) {
                 self::$_langInstanceFindActive = self::getDefault();
             } else {
-                self::$_langInstanceFindActive = self::find()->where(['short_code' => $langShortCode, 'is_deleted' => 0])->asArray()->one();
+                self::$_langInstanceFindActive = self::find()->where(['short_code' => $langShortCode, 'is_deleted' => false])->asArray()->one();
             }
         }
         

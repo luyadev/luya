@@ -174,9 +174,9 @@ class Log extends \yii\db\ActiveRecord
     {
         $model = new self();
         $model->setAttributes([
-            'is_insertion' => ($type == 1) ? 1 : 0,
-            'is_update' => ($type == 2) ? 1 : 0,
-            'is_deletion' => ($type == 3) ? 1 : 0,
+            'is_insertion' => ($type == 1) ? true : false,
+            'is_update' => ($type == 2) ? true : false,
+            'is_deletion' => ($type == 3) ? true : false,
             'table_name' => $tableName,
             'row_id' => $rowId,
             'message' => Json::encode($message),

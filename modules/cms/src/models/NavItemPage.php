@@ -415,7 +415,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
         
         return [
-            'is_dirty' => (int) $blockItem['is_dirty'],
+            'is_dirty' => (bool) $blockItem['is_dirty'],
             'is_container' => (int) $blockObject->getIsContainer(),
             'id' => $blockItem['id'],
             'is_hidden' => $blockItem['is_hidden'],
