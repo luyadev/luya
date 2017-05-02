@@ -301,7 +301,7 @@ class CrudController extends BaseCrudController
             if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint') {
                 $ngrestFieldConfig[$v->name] = 'number';
             }
-            if ($v->type == 'decimal') {
+            if ($v->type == 'decimal' || $v->type == 'float' || $v->type == 'double') {
                 $ngrestFieldConfig[$v->name] = 'decimal';
             }
             if ($v->type == 'boolean') {
