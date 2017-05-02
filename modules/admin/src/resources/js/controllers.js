@@ -215,7 +215,6 @@
 		
 		$scope.applySaveCallback = function() {
 			if ($scope.config.saveCallback) {
-				console.log($scope.config.saveCallback);
 				$injector.invoke($scope.config.saveCallback, this);
 			}
 		}

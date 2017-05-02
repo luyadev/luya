@@ -235,6 +235,9 @@ return [
     'js_filemanager_count_files_overlay' => '%count% archivos',
     'js_link_change_value' => 'Cambiar enlace',
     'js_link_set_value' => 'Establecer vínculo',
-    'callback_button_file_download_widget_success' => 'El archivo ha sido preparado. Puedes descargarlo ahora.'
-
+    'callback_button_file_download_widget_success' => 'El archivo ha sido preparado. Puedes descargarlo ahora.',
+    
+// 1.0.0
+    
+    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
 ];

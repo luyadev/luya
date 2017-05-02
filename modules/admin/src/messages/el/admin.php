@@ -224,4 +224,8 @@ return [
     'js_link_set_value' => 'Set Link',
     'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.'
     
+    
+// 1.0.0
+    
+    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
 ];

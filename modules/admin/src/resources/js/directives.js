@@ -1696,6 +1696,8 @@
                 	return i18nParam('js_filemanager_count_files_overlay', {count: folder.filesCount});
                 }
                 
+                $scope.errorMsg = null;
+                
                 $scope.replaceFile = function(file, errorFiles) {
                 	$scope.replaceFiled = file;
                 	
@@ -1746,7 +1748,7 @@
 
                 $scope.$watch('uploadResults', function(n, o) {
                     if ($scope.uploadingfiles != null) {
-                        if (n == $scope.uploadingfiles.length) {
+                        if (n == $scope.uploadingfiles.length && $scope.errorMsg == null) {
                             $scope.filesDataReload().then(function() {
                             	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
                                 LuyaLoading.stop();
@@ -1767,10 +1769,16 @@
 	                            fields: {'folderId': $scope.currentFolderId},
 	                            file: item.getAsFile()
 	                        }).then(function(response) {
-	                        	$scope.filesDataReload().then(function() {
-	                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
-	                                LuyaLoading.stop();
-	                            });
+                        		if (response.data.upload) {
+		                        	$scope.filesDataReload().then(function() {
+		                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+		                            	LuyaLoading.stop();
+		                            });
+                        		} else {
+                        			AdminToastService.error(response.data.message, 6000);
+                        			LuyaLoading.stop();
+                        		}
+	                        	
 	                        })
                         }
                     }
@@ -1788,14 +1796,15 @@
                             $scope.uploadResults++;
                             file.processed = true;
                             file.result = response.data;
-
-                            if (file.result.upload == false) {
-                                $scope.errorMsg = file.result.message;
+                            if (!file.result.upload) {
+                            	AdminToastService.error(file.result.message, 6000);
+                            	LuyaLoading.stop();
+                                $scope.errorMsg = true
                             }
                         });
                     }, function (response) {
                         if (response.status > 0) {
-                            $scope.errorMsg = response.status + ': ' + response.data;
+                            $scope.errorMsg = true;
                         }
                     });
 

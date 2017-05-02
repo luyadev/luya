@@ -239,7 +239,7 @@ class StorageController extends RestController
                 if ($response) {
                     return ['upload' => true, 'message' => Module::t('api_storage_file_upload_succes')];
                 } else {
-                    return ['upload' => false, 'message', 'Error while storing your image in the storage component.'];
+                    return ['upload' => false, 'message' => Module::t('api_storage_file_upload_folder_error')];
                 }
             } catch (Exception $err) {
                 return ['upload' => false, 'message' => Module::t('api_sotrage_file_upload_error', ['error' => $err->getMessage()])];
