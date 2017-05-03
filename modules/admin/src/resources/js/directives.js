@@ -316,7 +316,7 @@
     			});
     		},
     		template:function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
     		}
     	}
     });
@@ -411,7 +411,7 @@
                 "placeholder": "@placeholder"
             },
             template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
