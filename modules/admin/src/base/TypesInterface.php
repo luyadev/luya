@@ -44,6 +44,11 @@ interface TypesInterface
     const TYPE_LINK = 'zaa-link';
     
     /**
+     * @var string Generates a Color-Wheel Input.
+     */
+    const TYPE_COLOR = 'zaa-color';
+    
+    /**
      * @var string
      */
     const TYPE_WYSIWYG = 'zaa-wysiwyg';

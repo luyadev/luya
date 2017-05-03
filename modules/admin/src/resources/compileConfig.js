@@ -27,6 +27,7 @@ module.exports = {
             "vendor/twig.js/twig.min.js",
             "vendor/angular-filter/angular-filter.min.js",
             "vendor/angular-flow/ng-flow-standalone.min.js",
+            "vendor/ng-colorwheel.js",
             "js/zaa.js",
             "js/services.js",
             "js/directives.js",

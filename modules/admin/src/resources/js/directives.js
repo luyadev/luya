@@ -321,6 +321,25 @@
     	}
     });
     
+    zaa.directive("zaaColor", function() {
+    	return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+            },
+            template: function() {
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper">'+
+                	'<div ng-colorwheel="{ size: 150, segments: 120 }" ng-model="model"></div><div><div style="width:20px;display:inline-block; margin-right:5px; height:20px; background-color:{{model}}; padding:5px;"></div><input type="text" ng-model="model" /></div>'+
+                '</div></div>';
+            }
+        }
+    });
+    
     zaa.directive("zaaWysiwyg", function() {
         return {
             restrict: "E",
