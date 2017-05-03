@@ -60,7 +60,7 @@ class DefaultController extends \luya\web\Controller
         }
         
         $provider = new ActiveDataProvider([
-            'query' => Article::find()->where(['in', 'cat_id', $ids]),
+            'query' => Article::find()->where(['in', 'cat_id', $ids])->andWhere(['is_deleted' => false]),
             'sort' => [
                 'defaultOrder' => $this->module->articleDefaultOrder,
             ],
