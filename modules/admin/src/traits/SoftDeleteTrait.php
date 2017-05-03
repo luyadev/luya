@@ -32,6 +32,9 @@ trait SoftDeleteTrait
      * - string/nummeric: The value will be inverted with "!" opposite operator, this can lead into problems
      *
      * if you want to override the default implemenation to match your custom models you should always use the former type of state description.
+     * 
+     * @todo rename to fieldStateDescriber
+     * @deprecated remove in 1.0.0 replace with fieldStateDescriber
      */
     public static function FieldStateDescriber()
     {
@@ -63,7 +66,7 @@ trait SoftDeleteTrait
     public static function ngRestFind()
     {
         $where = static::internalAndWhere();
-        return (empty($where)) ? parent::ngrestFind() : parent::ngRestFind()->andWhere($where);
+        return empty($where) ? parent::ngRestFind() : parent::ngRestFind()->andWhere($where);
     }
     
     /**
@@ -92,8 +95,6 @@ trait SoftDeleteTrait
         
         return $result;
     }
-    
-    
     
     /**
      * Evalate the values to update.

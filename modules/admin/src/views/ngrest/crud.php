@@ -110,7 +110,11 @@ $this->beginBody();
                 <thead>
                 <tr>
                     <?php foreach ($config->getPointer('list') as $item): ?>
-                        <th ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                        <th ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?= $item['alias']; ?>
+                        <?php if ($config->getDefaultOrderField()): ?>
+                        <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i>
+                        <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i>
+                        <?php endif; ?></th>
                     <?php endforeach; ?>
                     <?php if (count($this->context->getButtons()) > 0): ?>
                         <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span></th>

@@ -13,7 +13,7 @@ use yii\web\ForbiddenHttpException;
 /**
  * Base Controller for all NgRest Controllers.
  *
- * @property luya\admin\ngrest\base\Model $model The model based from the modelClass instance
+ * @property luya\admin\ngrest\base\NgRestModel $model The model based from the modelClass instance
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -48,6 +48,10 @@ class Controller extends \luya\admin\base\Controller
     
     private $_model = null;
 
+    /**
+     * Get Model Object
+     * @return \luya\admin\ngrest\base\NgRestModel
+     */
     public function getModel()
     {
         if ($this->_model === null) {
@@ -69,7 +73,7 @@ class Controller extends \luya\admin\base\Controller
 
         $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
         
-        if ($userSortSettings && is_array($userSortSettings)) {
+        if ($userSortSettings && is_array($userSortSettings) && $config->getDefaultOrder() !== false) {
             $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
         }
         

@@ -115,6 +115,10 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
     public function getOrderBy()
     {
+        if ($this->getConfig()->getDefaultOrderField() === false) {
+            return false;
+        }
+        
     	return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
     }
     

@@ -3,30 +3,26 @@
 namespace luya\admin\ngrest\base;
 
 use yii\base\Behavior;
-use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
 use luya\admin\ngrest\NgRest;
+use yii\base\Event;
 
 /**
- * NgRest Event Behavior which is attached to all NgRest Models
+ * NgRest Event Behavior.
+ * 
+ * This Behavior is attached to all {{luya\admin\ngrest\base\NgRestModel}} Objects.
  *
  * @author Basil Suter <basil@nadar.io>
  */
 class NgRestEventBehavior extends Behavior
 {
-    public $plugins = null;
+    public $plugins = [];
     
     private static $_pluginInstances = [];
     
-    public function init()
-    {
-        parent::init();
-        
-        if ($this->plugins === null) {
-            throw new InvalidConfigException("plugins property can not be empty.");
-        }
-    }
-    
+    /**
+     * @inheritdoc
+     */
     public function events()
     {
         return [
@@ -34,7 +30,12 @@ class NgRestEventBehavior extends Behavior
         ];
     }
     
-    public function bindPluginEvents($event)
+    /**
+     * Bing all plugin Events to the corresponding Owner Object.
+     * 
+     * @param \yii\base\Event $event
+     */
+    public function bindPluginEvents(Event $event)
     {
         foreach ($this->plugins as $field => $plugin) {
             $plugin = self::findPluginInstance($field, $plugin, $event->sender->tableName());
@@ -44,6 +45,14 @@ class NgRestEventBehavior extends Behavior
         }
     }
     
+    /**
+     * Singleton Container for Plugin Objects.
+     * 
+     * @param string $field
+     * @param array $plugin
+     * @param string $tableName
+     * @return \luya\admin\ngrest\base\Plugin
+     */
     private static function findPluginInstance($field, array $plugin, $tableName)
     {
         if (!isset(self::$_pluginInstances[$tableName][$field])) {

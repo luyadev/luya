@@ -526,6 +526,31 @@
 			}, function(data) {
 				$scope.printErrors(data);
 			});
+		};
+		
+		$scope.sortableUp = function(index, row, fieldName) {
+			var switchWith = $scope.data.listArray[index-1];
+			$scope.data.listArray[index-1] = row;
+			$scope.data.listArray[index] = switchWith;
+			$scope.updateSortableIndexPositions(fieldName);
+		};
+		
+		$scope.sortableDown = function(index, row, fieldName) {
+			var switchWith = $scope.data.listArray[index+1];
+			$scope.data.listArray[index+1] = row;
+			$scope.data.listArray[index] = switchWith;
+			$scope.updateSortableIndexPositions(fieldName);
+		};
+		
+		$scope.updateSortableIndexPositions = function(fieldName) {
+			angular.forEach($scope.data.listArray, function(value, key) {
+				var json = {};
+				json[fieldName] = key;
+				var rowId = value[$scope.config.pk];
+				$http.put($scope.config.apiEndpoint + '/' + rowId +'?ngrestCallType=update&fields='+fieldName, angular.toJson(json, true), {
+					  ignoreLoadingBar: true
+				});
+			});
 		}
 		
 		$scope.data = {

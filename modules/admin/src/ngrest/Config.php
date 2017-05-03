@@ -151,7 +151,7 @@ class Config extends Object implements ConfigInterface
     
     public function getDefaultOrderField()
     {
-        if ($this->getDefaultOrder() === null) {
+        if (!$this->getDefaultOrder()) {
             return false;
         }
         
@@ -160,7 +160,7 @@ class Config extends Object implements ConfigInterface
     
     public function getDefaultOrderDirection()
     {
-    	if ($this->getDefaultOrder()=== null) {
+    	if (!$this->getDefaultOrder()) {
             return false;
         }
         

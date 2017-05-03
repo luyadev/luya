@@ -119,6 +119,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *     return ['created_at' => SORT_ASC];
      * }
      * ```
+     * 
+     * If the return value is `false` the sorting **is disabled** for this NgRest CRUD.
      *
      * @return array Return an Array where the key is the field and value the direction. Example `['timestamp' => SORT_ASC]`.
      * @since 1.0.0-beta8
