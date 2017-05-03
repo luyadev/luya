@@ -8,6 +8,12 @@ use yii\helpers\Inflector;
 use luya\admin\base\Filter;
 use luya\helpers\FileHelper;
 
+/**
+ * Create Filters.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class FilterController extends Command
 {
     public $identifier = null;
@@ -19,20 +25,20 @@ class FilterController extends Command
     public function actionIndex()
     {
         if ($this->identifier === null) {
-            $this->identifier = Inflector::variablize($this->prompt('Enter the filter identifier', ['required' => true]));
+            $this->identifier = Inflector::variablize($this->prompt('Enter the filter identifier:', ['required' => true]));
         }
 
         if ($this->name === null) {
-            $this->name = ucfirst($this->prompt('Would you like to enter a Name?', ['required' => false, 'default' => ucfirst($this->identifier)]));
+            $this->name = ucfirst($this->prompt('Enter a self-explanatory Name:', ['required' => false, 'default' => ucfirst($this->identifier)]));
         }
         
         if ($this->chain === null) {
-            $select = $this->select('What type of Effect?', [Filter::EFFECT_THUMBNAIL => 'Thumbnail', Filter::EFFECT_CROP => 'Crop']);
+            $select = $this->select('Select the Effect', [Filter::EFFECT_THUMBNAIL => 'Thumbnail', Filter::EFFECT_CROP => 'Crop']);
             
             if ($select == Filter::EFFECT_THUMBNAIL) {
-                $dimension = $this->prompt('Dimensions (width x height)', ['required' => true, 'default' => '600xnull']);
+                $dimension = $this->prompt('Enter thumbnail dimensions (width x height):', ['required' => true, 'default' => '600xnull']);
             } else {
-                $dimension = $this->prompt('Dimensions (width x height)', ['required' => true, 'default' => '600xnull']);
+                $dimension = $this->prompt('Enter crop dimensions (width x height):', ['required' => true, 'default' => '600xnull']);
             }
             
             if ($select == Filter::EFFECT_THUMBNAIL) {
