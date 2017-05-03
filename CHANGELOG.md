@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1266](https://github.com/luyadev/luya/issues/1266) render() method for the mailer component in order to provide controller template files.
 - [#1269](https://github.com/luyadev/luya/issues/1269) Add raw option for html block in order to render the html output in admin view.
 - [#1215](https://github.com/luyadev/luya/issues/1215) Added type float and double in ngrest data types to use decimal.
+- [#1119](https://github.com/luyadev/luya/issues/1119) Added PostgreSQL Compatibility.
 
 ### Fixed
 
