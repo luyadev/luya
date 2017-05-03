@@ -25,11 +25,7 @@ class FilterController extends Command
     public function actionIndex()
     {
         if ($this->identifier === null) {
-            $this->identifier = Inflector::variablize($this->prompt('Enter the filter identifier:', ['required' => true]));
-        }
-
-        if ($this->name === null) {
-            $this->name = ucfirst($this->prompt('Enter a self-explanatory Name:', ['required' => false, 'default' => ucfirst($this->identifier)]));
+            $this->identifier = Inflector::variablize($this->prompt('Enter the filter identifier: (e.g. profilePicture)', ['required' => true, 'pattern' => '/^[a-zA-Z0-9]+$/i', 'error' => 'The filter identifer can only contain a-z,A-Z,0-9']));
         }
         
         if ($this->chain === null) {
@@ -49,10 +45,22 @@ class FilterController extends Command
             
             $xp = explode("x", $dimension);
             $this->chain[$namedSelect] = ['width' => $xp[0], 'height' => $xp[1]];
+            
+
+            $tempName = $select == Filter::EFFECT_THUMBNAIL ? 'Thumbnail '. $dimension : 'Crop '.$dimension;
+            $tempName.= ' ' . Inflector::camel2words($this->identifier);
+        }
+        
+        if ($this->name === null) {
+            if (!$tempName) {
+                $tempName = Inflector::camel2words($this->identifier);
+            }
+            
+            $this->name = ucfirst($this->prompt('Enter a self-explanatory Name:', ['required' => false, 'default' => $tempName]));
         }
         
         $folder = Yii::$app->basePath . DIRECTORY_SEPARATOR . 'filters';
-        $className = $this->name . 'Filter';
+        $className = Inflector::camelize($this->identifier) . 'Filter';
         $content = $this->generateClassView($this->identifier, $this->name, $this->chain, $className);
         $filePath = $folder . DIRECTORY_SEPARATOR . $className . '.php';
         
