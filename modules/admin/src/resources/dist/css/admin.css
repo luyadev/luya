@@ -9380,6 +9380,19 @@ menu-dropdown,
         -ms-transform: rotate(-90deg);
             transform: rotate(-90deg); }
 
+.sortable {
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-size: 1.06667rem;
+  position: relative;
+  vertical-align: middle; }
+  .sortable:hover {
+    color: #2196F3; }
+  .sortable--up.ng-hide + .sortable--down {
+    margin-left: 32px; }
+
 .spin {
   -webkit-animation: spin 2s infinite linear;
           animation: spin 2s infinite linear; }
