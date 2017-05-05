@@ -381,7 +381,7 @@ $this->beginPage()
 
 <!-- /ANGULAR SCRIPTS -->
 
-<div class="luya-container ng-cloak" ng-class="{'luya-container--right-panel-active': sidePanelUserMenu || sidePanelHelp}">
+<div class="luya-container ng-cloak" ng-class="{'luya-container--right-panel-active': sidePanelHelp}">
     <div class="toasts" ng-if="toastQueue" ng-repeat="item in toastQueue">
         <div class="toasts__confirm" ng-if="item.type == 'confirm'" zaa-esc="item.close()">
             <div class="toasts__item toasts__item--confirm">
@@ -553,35 +553,7 @@ $this->beginPage()
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->
-    <div class="luya-container__right-panel" ng-if="sidePanelUserMenu || sidePanelHelp">
-        <div ng-if="sidePanelUserMenu">
-        	<p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
-            
-            <form ng-submit="updateUserProfile(profile)" method="post" ng-init="profile.lang='<?=Yii::$app->luyaLanguage;?>'">
-	           
-	           	<table class="bordered">
-	            	<tr>
-	            		<td><?= $user->firstname; ?> <?= $user->lastname; ?></td>
-	            	</tr>
-	            	<tr>
-	            		<td><?= $user->email; ?></td>
-	            	</tr>
-	            	<tr>
-	            		<td>
-		            		<div class="input input--select input--vertical">
-				    			<label class="input__label" for="layout-changer" style="margin-bottom:5px;"><?= Admin::t('layout_rightbar_languagelabel')?></label>
-					            <select id="layout-changer" class="input__field-wrapper" ng-model="profile.lang">
-                                    <?php foreach ($this->context->module->uiLanguageDropdown as $key => $lang): ?>
-					            	<option value="<?= $key; ?>" <?php if (Yii::$app->luyaLanguage == $key): ?>selected<?php endif; ?>><?= $lang;?></option>
-                                    <?php endforeach; ?>
-					            </select>
-				            </div>
-	            		</td>
-	            	</tr>
-            	</table>
-	            <input style="margin-top:20px;" type="submit" value="<?= Admin::t('layout_rightbar_savebtn'); ?>" class="btn" />
-            </form>
-        </div>
+    <div class="luya-container__right-panel" ng-if="sidePanelHelp">
         <div ng-if="sidePanelHelp">
             <h4><?= Admin::t('right_panel_support_title'); ?></h4>
             <ul class="collapsible" data-collapsible="accordion" ng-init="tagsOpen=false">

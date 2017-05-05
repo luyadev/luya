@@ -259,9 +259,9 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
             return false;
         }
         // create random string for password salting
-        $this->password_salt = yii::$app->getSecurity()->generateRandomString();
+        $this->password_salt = Yii::$app->getSecurity()->generateRandomString();
         // store the password
-        $this->password = yii::$app->getSecurity()->generatePasswordHash($this->password.$this->password_salt);
+        $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password.$this->password_salt);
 
         return true;
     }

@@ -828,12 +828,6 @@
 		$scope.reload = function() {
 			CacheReloadService.reload();
 		}
-		
-		$scope.updateUserProfile = function(profile) {
-			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).then(function(response) {
-				$window.location.reload();
-			});
-		};
 	
 		$scope.sidePanelUserMenu = false;
 		
@@ -986,5 +980,39 @@
 		
 		$scope.get();
 	});
-
+	
+	zaa.controller("AccountController", function($scope, $http, $window, AdminToastService) {
+		
+		$scope.changePassword = function(pass) {
+			$http.post('admin/api-admin-user/change-password', pass).then(function(response) {
+				AdminToastService.success("The password has been changed.", 5000);
+			}, function(error) {
+				AdminToastService.errorArray(error.data, 3000);
+			});
+		};
+		
+		$scope.updateUserProfile = function(profile) {
+			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).then(function(response) {
+				$window.location.reload();
+			});
+		};
+		
+		$scope.profile = {}
+		
+		$scope.getProfile = function() {
+			$http.get('admin/api-admin-user/session').then(function(success) {
+				$scope.profile = success.data;
+			});
+		};
+		
+		$scope.changePersonData = function(data) {
+			$http.put('admin/api-admin-user/session-update', data).then(function(success) {
+				console.log(success);
+			}, function(error) {
+				AdminToastService.errorArray(error.data, 3000);
+			});
+		};
+		
+		$scope.getProfile();
+	});
 })();

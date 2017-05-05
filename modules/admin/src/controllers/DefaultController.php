@@ -8,6 +8,7 @@ use luya\helpers\Url;
 use yii\helpers\Json;
 use luya\admin\base\Controller;
 use luya\TagParser;
+use luya\web\View;
 
 /**
  * Administration Controller provides, dashboard, logout and index.
@@ -35,19 +36,15 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         // register auth token
-        $this->view->registerJs("var authToken='".Yii::$app->adminuser->identity->authToken ."';", \luya\web\View::POS_HEAD);
-        $this->view->registerJs("var homeUrl='".Url::home(true)."';", \luya\web\View::POS_HEAD);
-        // register admin js translations from module
-        $this->view->registerJs('var i18n=' . Json::encode($this->module->jsTranslations), \luya\web\View::POS_HEAD);
-        // Init ElementQueries after page load
-        // $this->view->registerJs('setTimeout( function() {ElementQueries.listen(); ElementQueries.init();}, 1500);', \luya\web\View::POS_LOAD);
-        // return and render index view file
+        $this->view->registerJs("var authToken='".Yii::$app->adminuser->identity->authToken ."';", View::POS_HEAD);
+        $this->view->registerJs("var homeUrl='".Url::home(true)."';", View::POS_HEAD);
+        $this->view->registerJs('var i18n=' . Json::encode($this->module->jsTranslations), View::POS_HEAD);
         return $this->render('index');
     }
 
     public function actionDashboard()
     {
-        return $this->renderPartial('dashboard.php');
+        return $this->renderPartial('dashboard');
     }
 
     public function actionLogout()
