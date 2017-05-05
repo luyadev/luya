@@ -215,6 +215,8 @@ class StorageContainer extends Component
     
     /**
      * Get the internal server path to the storage folder.
+     * 
+     * Default path is `@webroot/storage`.
      *
      * @return string Get the path on the server to the storage folder based @webroot alias.
      */
@@ -225,6 +227,18 @@ class StorageContainer extends Component
         }
         
         return $this->_serverPath;
+    }
+    
+    /**
+     * Setter method for $serverPath
+     * 
+     * The input path will be auomatically wrapped trough {{Yii::getAlias}}.
+     * 
+     * @param string $path The path on the server where the storage data is stored.
+     */
+    public function setServerPath($path)
+    {
+        $this->_serverPath = Yii::getAlias($path);
     }
     
     private $_filesArray = null;
