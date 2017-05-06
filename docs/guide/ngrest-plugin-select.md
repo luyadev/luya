@@ -26,11 +26,11 @@ public function ngrestAttributeTypes()
     return [
 		// ...
 		'genres' => [
-	     	'selectModel', 
-	     	'modelClass' => Customers::className(), 
-	     	'valueField' => 'customer_id', 
-	     	'labelField' => 'name',
-	     ],
+			'selectModel', 
+			'modelClass' => Customers::className(), 
+		 	'valueField' => 'customer_id', 
+		 	'labelField' => 'name',
+		 ],
      ];
 }
 ```
@@ -50,7 +50,7 @@ In order to generate a custom labelField you can also pass a closure function:
 > ```php
 > public function getCustomer()
 > {
->     return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+>     return $this->hasOne(Customer::class, ['id' => 'customer_id']);
 > }
 > ```
 > 
@@ -59,11 +59,11 @@ In order to generate a custom labelField you can also pass a closure function:
 > ```php
 > public function getOriginalCustomerId()
 > {
-> 	return $this->getOldAttribute('customer_id');
+>     return $this->getOldAttribute('customer_id');
 > }
 >     
 > public function getCustomer()
 > {
-> 	return $this->hasOne(Customer::className(), ['id' => 'originalCustomerId']);
+>     return $this->hasOne(Customer::class, ['id' => 'originalCustomerId']);
 > }
 > ```

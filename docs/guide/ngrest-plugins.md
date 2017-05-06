@@ -28,6 +28,9 @@ A few plugins have options to configure, make sure you check the class reference
 |cmsPage			|{{\luya\admin\ngrest\plugins\CmsPage}}|{{luya\cms\menu\Item}}|Cms Page selection and returns the menu component item.
 |link               |{{\luya\admin\ngrest\plugins\Link}}|{{luya\web\LinkInterface}}|Select an internal page or enter an external link, the database field must be a varchar field in order to store informations and the cms module is required.
 |slug               |{{\luya\admin\ngrest\plugins\Slug}}|string|Generates a slugified string which can be used for url rules.
+|color				|{{\luya\admin\ngrest\plugins\Color}}|string|A color wheel to pick a color.
+|sortable			|{{\luya\admin\ngrest\plugins\Sortable}}|integer|Sort items in crud list with arrow keys up/down. Commonly used in combination of {{luya\admin\traits\SortableTrait}}.
+
 ## Create a custom project Plugin
 
 Sometimes you really want to have project specific input behaviour. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:
@@ -38,8 +41,9 @@ Sometimes you really want to have project specific input behaviour. To achieve t
 namespace myadminmodule\plugins;
 
 use luya\admin\helpers\Angular;
+use luya\admin\ngrest\base\Plugin;
 
-class TestPlugin extends \admin\ngrest\base\Plugin
+class TestPlugin extends Plugin
 {
     public function renderList($id, $ngModel)
     {
@@ -67,7 +71,7 @@ class TestPlugin extends \admin\ngrest\base\Plugin
 }
 ```
 
-The above class is abstracted from the `admin\ngrest\base\Plugin` which requires the `renderUpdate`, `renderList` and `renderCreate` methods which are basically taking care of the form input or the element in the crud list view. As you can see we use the helper method `Angular::directive` to return a Form Input Tag with a custom directive named `my-directive`. The directive must be stored in en admin javascript file you can assign by using [Admin Module Assets](app-admin-module-assets.md). For example:
+The above class is abstracted from the {{luya\admin\ngrest\base\Plugin}} which requires the {{luya\admin\ngrest\base\Plugin::renderUpdate}}, {{luya\admin\ngrest\base\Plugin::renderList}} and {{luya\admin\ngrest\base\Plugin::renderCreate}} methods which are basically taking care of the form input or the element in the crud list view. As you can see we use the helper method {{luya\admin\helpers\Angular::directive}} to return a Form Input Tag with a custom directive named `my-directive`. The directive must be stored in en admin javascript file you can assign by using [Admin Module Assets](app-admin-module-assets.md). For example:
 
 ```js
 zaa.directive("myDirective", function() {
@@ -98,12 +102,12 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
     
     public function setField($data)
     {
-        // This is what happends when the value from the angualr api response trys to save or update the model with $data.
+        // This is triggered when the value from the angular api response trys to save or update the model with $data.
     }
     
     public function getField()
     {
-        // This is what happens when active record pattern trys to get the values for the field. This is basic getter/setter principal of the yii\base\Object.
+        // This is triggered when active record trys to get the values for the field. This is basic getter/setter concept of the yii\base\Object.
     }
     
     public function extraFields()
@@ -127,7 +131,7 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
 }
 ```
 
-Make sure the the `field` extra field is part of the validation rules. For example:
+Make sure the the `field` extra field is part of the validation rules.
 
 ```php
 public function rules()
