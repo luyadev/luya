@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1290](https://github.com/luyadev/luya/issues/1290) Fixed Tooltip Bug, cause of lexer parser error. Wrong directive variable scope declaration.
 - [#1286](https://github.com/luyadev/luya/issues/1286) Filemanager show error message on error.
 - [#1267](https://github.com/luyadev/luya/issues/1267) Fixed bug where module block action params overrides the default values, merge instead.
 - [#1265](https://github.com/luyadev/luya/issues/1265) Using https for Google Maps embed code.

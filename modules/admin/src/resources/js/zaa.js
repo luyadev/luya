@@ -185,14 +185,14 @@ function typeCastValue(value) {
      * Generate a Tool Tip Overlay, usager:
      *
      * ```
-     * <span tooltip tooltip-text="'Hey Ich habe hier eine Message'">Something Else</span>
+     * <span tooltip tooltip-text="Hey Ich habe hier eine Message">Something Else</span>
      * ```
      */
     zaa.directive("tooltip", function () {
         return {
             restrict: 'A',
             scope: {
-                'tooltipText': '=',
+                'tooltipText': '@',
                 'tooltipOffsetTop': '=',
                 'tooltipOffsetLeft': '='
             },
