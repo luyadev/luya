@@ -185,7 +185,13 @@ function typeCastValue(value) {
      * Generate a Tool Tip Overlay, usager:
      *
      * ```
-     * <span tooltip tooltip-text="Hey Ich habe hier eine Message">Something Else</span>
+     * <span tooltip tooltip-text="Trigger this Message on Hover">Span Text</span>
+     * ```
+     * 
+     * In order to trigger an expression call instead of a static text use:
+     * 
+     * ```
+     * <span tooltip tooltip-expression="scopeFunction(fooBar)">Span Text</span>
      * ```
      */
     zaa.directive("tooltip", function () {
@@ -193,10 +199,15 @@ function typeCastValue(value) {
             restrict: 'A',
             scope: {
                 'tooltipText': '@',
+                'tooltipExpression': '=',
                 'tooltipOffsetTop': '=',
                 'tooltipOffsetLeft': '='
             },
             link: function (scope, element, attr) {
+            	
+            	if (scope.tooltipExpression) {
+            		scope.tooltipText = scope.tooltipExpression;
+            	}
                 var html = '<div class="tooltip">' + scope.tooltipText + '</div>';
                 var pop = $(html);
                 element.after(pop);
