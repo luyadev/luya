@@ -74,7 +74,7 @@ use luya\helpers\Url;
                         <input class="input__field" id="email" ng-model="profile.email" type="text" />
                     </div>
                 </div>
-                <input style="margin-top:20px;"  type="submit" value="Change Password" class="btn right">
+                <input style="margin-top:20px;"  type="submit" value="<?= Module::t('layout_rightbar_savebtn'); ?>" class="btn right">
             </form>
           </div>
         </div>
