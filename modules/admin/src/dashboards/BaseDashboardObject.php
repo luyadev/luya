@@ -30,4 +30,16 @@ abstract class BaseDashboardObject extends Object implements DashboardObjectInte
 	{
 		return $this->_dataApiUrl;
 	}
+	
+	private $_title;
+	
+	public function setTitle($title)
+	{
+		$this->_title = $title;
+	}
+	
+	public function getTitle()
+	{
+		return $this->_title;
+	}
 }

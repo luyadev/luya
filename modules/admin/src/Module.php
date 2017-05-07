@@ -59,6 +59,16 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     	'pt' => 'Português',
     ];
     
+    /*
+    public $dashboardObjects = [
+   		[
+   		'template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>', 
+   		'dataApiUrl' => 'admin/api-news-article',
+   		'title' => 'Last Logins',
+   		],
+  	];
+  	*/
+    
     /**
      * @var boolean Enables a two-way factor auth system before logging into the admin
      * panel. If the system is not able to send mails (No configuration or missconfiguration)

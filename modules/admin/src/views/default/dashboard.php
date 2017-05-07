@@ -3,10 +3,13 @@
     <p><?php echo \luya\admin\Module::t('dashboard_text'); ?></p>
 </div>
 
-<div style="margin:50px;">
+<div class="row">
 <?php foreach ($items as $dashboard): /* @var $dashboard \luya\admin\base\DashboardObjectInterface */ ?>
 <div class="col s4">
-	<?= $dashboard->getTemplate(); ?>
+	<div class="card-panel">
+		<h4><?= $dashboard->getTitle(); ?></h4>
+		<?= $dashboard->getTemplate(); ?>
+	</div>
 </div>
 <?php endforeach; ?>
 </div>

@@ -7,4 +7,6 @@ interface DashboardObjectInterface
 	public function getTemplate();
 	
 	public function getDataApiUrl();
+	
+	public function getTitle();
 }
