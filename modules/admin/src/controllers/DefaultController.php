@@ -9,6 +9,7 @@ use yii\helpers\Json;
 use luya\admin\base\Controller;
 use luya\TagParser;
 use luya\web\View;
+use luya\helpers\ArrayHelper;
 
 /**
  * Administration Controller provides, dashboard, logout and index.
@@ -44,7 +45,15 @@ class DefaultController extends Controller
 
     public function actionDashboard()
     {
-        return $this->renderPartial('dashboard');
+    	$items = [];
+    	foreach (Yii::$app->adminModules as $module) {
+    		foreach ($module->dashboardObjects as $config) {
+    			$items[] = Yii::createObject(ArrayHelper::merge(['class' => '\luya\admin\dashboards\DefaultObject'], $config));
+    		}
+    	}
+        return $this->renderPartial('dashboard', [
+        	'items' => $items,
+        ]);
     }
 
     public function actionLogout()
