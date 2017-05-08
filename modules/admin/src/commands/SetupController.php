@@ -8,6 +8,7 @@ use luya\admin\models\Config;
 use luya\admin\models\User;
 use luya\admin\models\Group;
 use yii\db\Query;
+use yii\imagine\Image;
 
 /**
  * Setup the Administration Interface.
@@ -77,6 +78,12 @@ class SetupController extends \luya\console\Command
      */
     public function actionIndex()
     {
+    	try {
+    		Image::getImagine();
+    	} catch (\Exception $e) {
+    		return $this->outputError('Unable to setup, unable to find image library: ' . $e->getMessage());
+    	}
+    	
         if (!Config::has('last_import_timestamp')) {
             return $this->outputError("You have to run the 'import' process first. run in terminal: ./vendor/bin/luya import");
         }
