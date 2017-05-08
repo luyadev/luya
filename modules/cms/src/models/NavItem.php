@@ -9,6 +9,7 @@ use yii\helpers\Inflector;
 use luya\cms\admin\Module;
 use luya\admin\base\GenericSearchInterface;
 use yii\db\ActiveRecordInterface;
+use luya\admin\models\User;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each
@@ -120,6 +121,11 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         ];
     }
 
+    public function getUpdateUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'update_user_id']);
+    }
+    
     public function slugifyAlias()
     {
         $this->alias = Inflector::slug($this->alias);

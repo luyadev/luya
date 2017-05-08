@@ -59,6 +59,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     	'pt' => 'Português',
     ];
     
+    /**
+     * @inheritdoc
+     */
     public $dashboardObjects = [
    		[
        		'template' => '<table class="striped"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>', 

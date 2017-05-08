@@ -41,6 +41,16 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'api-cms-navitemblock' => 'luya\cms\admin\apis\NavItemBlockController',
     ];
 
+    /**
+     * @inheritdoc
+     */
+    public $dashboardObjects = [
+        [
+            'template' => '<table class="striped"><thead></thead><tr><th>Page</th><th>User</th><th>Time</ht></tr></thead><tr ng-repeat="item in data"><td>{{item.title}}</td><td>{{item.updateUser.firstname}} {{item.updateUser.lastname}}</td><td>{{item.timestamp_update * 1000 | date:\'short\'}}</td></tr></table>',
+            'dataApiUrl' => 'admin/api-cms-navitem/last-updates',
+            'title' => 'Last Page Updates',
+        ],
+    ];
     
     /**
      * Returns all Asset files to registered in the administration interfaces.

@@ -45,6 +45,13 @@ class NavItemController extends \luya\admin\base\RestController
         return $behaviors;
     }
 
+    public function actionLastUpdates()
+    {
+        return NavItem::find()->select(['cms_nav_item.title', 'timestamp_update', 'update_user_id'])->limit(10)->orderBy(['timestamp_update' => SORT_DESC])->joinWith(['updateUser' => function($q) {
+            $q->select(['firstname', 'lastname', 'id']);  
+        }])->asArray(true)->all();
+    }
+    
     public function actionDelete($navItemId)
     {
         if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
