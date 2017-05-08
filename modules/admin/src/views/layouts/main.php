@@ -407,6 +407,7 @@ $this->beginPage()
                 <a style="cursor: pointer;" data-activates="mobile-demo" class="button-collapse" ng-click="mobileOpen = !mobileOpen"><i class="material-icons">menu</i></a>
 
                 <ul class="left hide-on-med-and-down">
+                    <li class="navbar__item"><a ng-href="#"><i class="material-icons navbar__icon">home</i></a></li>
                     <li class="navbar__item" ng-repeat="item in items" ng-class="{'navbar__item--active' : isActive(item) }">
                         <a ng-click="click(item);" class="navbar__link"><i class="material-icons navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
                     </li>
