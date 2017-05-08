@@ -24,7 +24,17 @@
 		})
 	});
 	
-	// CrudController.js
+	zaa.controller("DefaultDashboardObjectController", function($scope, $http, $sce) {
+		
+		$scope.data;
+		
+		$scope.loadData = function(dataApiUrl) {
+			$http.get(dataApiUrl).then(function(success) {
+				$scope.data = success.data;
+			});
+		};
+	});
+	
 	/**
 	 * Base Crud Controller
 	 * 

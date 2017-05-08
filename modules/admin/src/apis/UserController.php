@@ -37,7 +37,7 @@ class UserController extends Api
     {
         $user = Yii::$app->adminuser->identity;
         $user->attributes = Yii::$app->request->bodyParams;
-        $user->update();
+        $user->update(true, ['title', 'firstname', 'lastname', 'email', 'id']);
         
         return $user;
     }
