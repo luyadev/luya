@@ -60,7 +60,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     ];
     
     /**
-     * @inheritdoc
+     * @array Provide dashboard objects from last user logins.
      */
     public $dashboardObjects = [
    		[
