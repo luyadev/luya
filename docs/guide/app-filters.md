@@ -93,12 +93,3 @@ or you can use the filter name directly, this is less recommend as if the filter
 the filter must be exact name like the method identifier() returns from the filter class.
 
 > The {{luya\admin\image\Item::applyFilter}} returns the new generated {{\luya\admin\image\Item}} Object where you can access other methods and informations.
-
-
-### apply filter in twig view
-
-You can also use the twig filter to apply an image filter to an existing image. The ***main difference*** between the php and twig view is those, the twig filter only returns the http source to the newly applyd image instead of an image object.
-
-```
-<img src="{{ filterApply(139, 'my-filter') }}" />
-```

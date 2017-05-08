@@ -5,7 +5,6 @@ namespace luya\web;
 use Yii;
 use luya\Exception;
 use luya\helpers\FileHelper;
-use Twig_Loader_Filesystem;
 
 /**
  * HTML Element Component.
@@ -23,12 +22,6 @@ use Twig_Loader_Filesystem;
  *
  * ```php
  * echo Yii::$app->element->foo('Hello World');
- * ```
- *
- * or in Twig
- *
- * ```twig
- * {{ element('foo', 'Hello World') }}
  * ```
  *
  * By default the Element-Component will lookup for an `elements.php` file returning an array
@@ -82,11 +75,6 @@ class Element extends \yii\base\Component
      * @var string The path to the folder where the view files to render can be found.
      */
     public $viewsFolder = '@app/views/elements/';
-
-    /**
-     * @var string $renderEngine Define the render engine you want to use for the element component, can be `php` or `twig`.
-     */
-    public $renderEngine = 'php';
     
     /**
      * @var array Contains all registered elements.
@@ -273,16 +261,8 @@ class Element extends \yii\base\Component
      */
     public function render($file, array $args = [])
     {
-        if ($this->renderEngine == 'php') {
-            $view = new View();
-            return $view->renderPhpFile(rtrim($this->getFolder(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . FileHelper::ensureExtension($file, 'php'), $args);
-        } elseif ($this->renderEngine == 'twig') {
-            // @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
-            trigger_error('twig render engine is not supported anymore.', E_USER_DEPRECATED);
-            $twig = Yii::$app->twig->env(new Twig_Loader_Filesystem($this->getFolder()));
-            return $twig->render(FileHelper::ensureExtension($file, 'twig'), $args);
-        }
+    	$view = new View();
+        return $view->renderPhpFile(rtrim($this->getFolder(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . FileHelper::ensureExtension($file, 'php'), $args);
         
-        throw new Exception('Not supported render engine: ' . $this->renderEngine);
     }
 }

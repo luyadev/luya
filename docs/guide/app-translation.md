@@ -64,14 +64,6 @@ echo Yii::t('app', 'title_top');
 
 This would return *Hello everyone, i am title top!*.
 
-### Using translation in Twig
-
-There is also a twig function which allows you to retrieve the content like in Yii:t:
-
-```
-t('app', 'title_top')
-```
-
 ### Placeholders as Parameters
 
 Sometimes you may want to add a placeholder you can fill up with specific content. You can use a key for the placholder or using the array keys:

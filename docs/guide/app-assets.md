@@ -75,9 +75,3 @@ $myAsset = $this->assetManager->getBundle('\\app\\assets\\MyTestAsset');
 
 echo $myAsset->baseUrl; 
 ```
-
-To access the baseUrl of an asset in a twig template you may use:
-
-```
-{{ asset('\\app\\assets\\MyTestAsset').baseUrl }}
-```

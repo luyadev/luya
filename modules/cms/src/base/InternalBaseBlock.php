@@ -18,7 +18,6 @@ use luya\cms\helpers\BlockHelper;
  * two froms of implementations.
  *
  * + {{\luya\cms\base\PhpBlock}}
- * + {{\luya\cms\base\TwigBlock}}
  *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
@@ -520,9 +519,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
     
     /**
-     * Returns the name of the twig or php file to be rendered.
+     * Returns the name of the php file to be rendered.
      *
-     * @return string The name of the twig or php file (example.twig, example.php)
+     * @return string The name of the php file (example.php)
      */
     public function getViewFileName($extension)
     {

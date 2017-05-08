@@ -46,7 +46,7 @@ Where `button` is the name of the element closure defined in your elements.php f
 ## Render view file
 
 
-When you have a more complex html element, the possibility to concate the html parts seems to look a little ugly, for this reason you can also render a view file with the function `render()`. This method will render a defined TWIG file which is located in *@app/views/elements/__NAME__.php*.
+When you have a more complex html element, the possibility to concate the html parts seems to look a little ugly, for this reason you can also render a view file with the function `render()`. This method will render a defined php template which is located in *@app/views/elements/__NAME__.php*.
 
 ```php
 'myElementButton' => function($href, $name) {
@@ -54,7 +54,7 @@ When you have a more complex html element, the possibility to concate the html p
 }
 ```
 
-The above example will render the file `button` with the paremeters `['href' => $href, 'name' => $name ]`. The twig file (*button*) must be stored in the folder `@app/views/elements` with the name `button.php`. An example content of `@app/views/elements/button.php` could look like this:
+The above example will render the file `button` with the paremeters `['href' => $href, 'name' => $name ]`. The view file (*button*) must be stored in the folder `@app/views/elements` with the name `button.php`. An example content of `@app/views/elements/button.php` could look like this:
 
 ```php
 <a href="<?= $href; ?>" class="btn btn-primary"><?= $name; ?></a>

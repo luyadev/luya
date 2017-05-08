@@ -48,15 +48,9 @@ class GalleryAlbum extends PhpBlock
             'album' => Album::findOne($this->getVarValue('albumId')),
         ];
     }
-
     
     public function admin()
     {
         return '<p style="padding:20px 0px; font-size:20px;"><i class="fa fa-image fa-2x"></i> Gallery-Album: <strong>{{ extras.album.title }}</strong></p>';
-    }
-
-    public function twigFrontend()
-    {
-        return '<h1>{{ extras.album.title }}</h1><p>{{ extras.album.description }}</p><p><a href="{{ extras.album.getDetailUrl(cfgs.nav_item_id) }}"><img class="img-responsive img-rounded" src="{{ filterApply(extras.album.cover_image_id, "medium-thumbnail") }}" border="0" /></a></p>';
     }
 }
