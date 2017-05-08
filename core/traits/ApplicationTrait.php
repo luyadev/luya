@@ -162,7 +162,7 @@ trait ApplicationTrait
     /**
      * Get an array with all modules which are an instance of the `luya\base\Module`.
      *
-     * @return array Containing all module objects which are of luya\base\Module.
+     * @return \luya\base\Module
      */
     public function getApplicationModules()
     {
@@ -180,7 +180,7 @@ trait ApplicationTrait
     /**
      * Return a list with all registered frontend modules except 'luya' and 'cms'. This is needed in the module block.
      *
-     * @return array
+     * @return \luya\base\Module
      */
     public function getFrontendModules()
     {
@@ -198,7 +198,7 @@ trait ApplicationTrait
     /**
      * Return all Admin Module Interface implementing modules.
      * 
-     * @return \luya\base\AdminModuleInterface[]
+     * @return \luya\base\AdminModuleInterface
      */
     public function getAdminModules()
     {
