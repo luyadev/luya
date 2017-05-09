@@ -240,4 +240,7 @@ return [
  // 1.0.0
     
     'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
+    'model_user_oldpassword' => 'Previous (old) Password',
+    'js_account_update_profile_success' => 'The profile data has been successfull updated.',
+    'dashboard_lastlogin_title' => 'Last User Logins',
 ];
