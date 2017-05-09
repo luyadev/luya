@@ -51,8 +51,9 @@
     + [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
     + [Plugin Selects](ngrest-plugin-select.md)
 + Lessons
-  + [Creating a CMS block](lesson-imagesliderblock.md)
+  + [Creating an image slider block](lesson-imagesliderblock.md)
   + [Using Forms in Blocks](lesson-blockform.md)
+  + [Creating a address book admin and frontend module](lesson-module.md)
 + Developers
   + [LUYA Guidelines](luya-guideline.md)
   + [Collaboration](luya-collaboration.md)
