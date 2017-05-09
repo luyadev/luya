@@ -51,6 +51,7 @@
     + [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
     + [Plugin Selects](ngrest-plugin-select.md)
 + Lessons
+  + [Creating a CMS block](lesson-imagesliderblock.md)
   + [Using Forms in Blocks](lesson-blockform.md)
 + Developers
   + [LUYA Guidelines](luya-guideline.md)
