@@ -71,7 +71,7 @@ class SelectModel extends Select
      * An example of how to use the template with multiple fields:
      *
      * ```php
-     * 'labelField' => ['firstname', 'lastnmae', 'email'],
+     * 'labelField' => ['firstname', 'lastname', 'email'],
      * 'labelTemplate' => '%s %s (%s%)',
      * ```
      *
