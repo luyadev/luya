@@ -158,7 +158,7 @@ return [
 // rc2
     'model_navitem_title_tag_label' => 'Title Tag (SEO)',
     
-// 1.0.0
+// rc3
     'model_navitempage_empty_draft_id' => 'Unable to create page from empty template.',
     'view_update_variation_select' => 'Normal',
     'menu_group_item_env_config' => 'Config',
@@ -183,4 +183,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configure',
     'view_update_block_tooltip_delete' => 'Delete',
     'view_update_block_tooltip_close' => 'Close',
+
+// 1.0.0
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
 ];

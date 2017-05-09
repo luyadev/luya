@@ -3,6 +3,7 @@
 namespace luya\admin\models;
 
 use yii\base\Model;
+use luya\admin\Module;
 
 /**
  * 
@@ -42,6 +43,15 @@ class UserChangePassword extends Model
             [['oldpass', 'newpass', 'newpassrepeat'], 'required'],
             [['newpass'], 'string', 'min' => '8'],
             [['newpass'], 'compare', 'compareAttribute' => 'newpassrepeat'],
+        ];
+    }
+    
+    public function attributeLabels()
+    {
+        return [
+            'oldpass' => Module::t('model_user_oldpassword'),
+            'newpassrepeat' => Module::t('aws_changepassword_new_pass_retry'),
+            'newpass' => Module::t('aws_changepassword_new_pass'),
         ];
     }
     

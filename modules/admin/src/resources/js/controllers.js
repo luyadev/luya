@@ -992,10 +992,9 @@
 	});
 	
 	zaa.controller("AccountController", function($scope, $http, $window, AdminToastService) {
-		
 		$scope.changePassword = function(pass) {
 			$http.post('admin/api-admin-user/change-password', pass).then(function(response) {
-				AdminToastService.success("The password has been changed.", 5000);
+				AdminToastService.success(i18n['aws_changepassword_succes'], 5000);
 			}, function(error) {
 				AdminToastService.errorArray(error.data, 3000);
 			});
@@ -1017,7 +1016,7 @@
 		
 		$scope.changePersonData = function(data) {
 			$http.put('admin/api-admin-user/session-update', data).then(function(success) {
-				console.log(success);
+				AdminToastService.success(i18n['js_account_update_profile_success'], 5000);
 			}, function(error) {
 				AdminToastService.errorArray(error.data, 3000);
 			});

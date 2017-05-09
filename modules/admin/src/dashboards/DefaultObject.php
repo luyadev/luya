@@ -2,6 +2,7 @@
 
 namespace luya\admin\dashboards;
 
+use Yii;
 use yii\helpers\Html;
 use luya\helpers\ArrayHelper;
 
@@ -36,6 +37,19 @@ class DefaultObject extends BaseDashboardObject
 	 */
     public $outerTemplate = '<h3>{{title}}</h3>{{template}}';
 
+    public function getTitle()
+    {
+        $title = parent::getTitle();
+        
+        if (!is_array($title)) {
+            return $title;
+        }
+        
+        list($category, $message) = $title;
+        
+        return Yii::t($category, $message);
+    }
+    
     /**
      * @inheritdoc
      */
