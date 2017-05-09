@@ -1,3 +1,6 @@
+<?php
+use luya\remoteadmin\Module;
+?>
 <script>
 zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
 
@@ -41,16 +44,16 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
 </script>
 <div  ng-controller="SitesStatusController">
 	<div class="card-panel">
-		<h3><i class="material-icons">update</i> Remote Sites</h3>
-		<p>Current LUYA Version is <a href="https://packagist.org/packages/luyadev/luya-core" target="_blank"><strong><?= $currentVersion['version']; ?></strong></a>, released at <?= Yii::$app->formatter->asDate(strtotime($currentVersion['time']))?></p>
+		<h3><i class="material-icons">update</i> <?= Module::t('status_index_heading'); ?></h3>
+        <p><?= Module::t('status_index_intro', ['version' => $currentVersion['version'], 'date' => Yii::$app->formatter->asDate(strtotime($currentVersion['time']))]); ?></p>
 		<table class="bordered hoverable centered">
 			<thead>
 			<tr>
-			    <th style="text-align:left;">Url</th>
-			    <th>Time *</th>
+			    <th style="text-align:left;"><?= Module::t('model_site_url'); ?></th>
+			    <th><?= Module::t('status_index_column_time'); ?> *</th>
 			    <th>YII_DEBUG</th>
-			    <th>Transfer Exceptions</th>
-			    <th>Online Admin</th>
+			    <th><?= Module::t('status_index_column_transferexception'); ?></th>
+			    <th><?= Module::t('status_index_column_onlineadmin'); ?></th>
 			    <th>YII_ENV</th>
 			    <th>LUYA Version</th>
 			    <th>Yii Version</th>
@@ -66,20 +69,20 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
 	            <td ng-if="!site.status.error && !site.status.loading">{{site.status.env}}</td>
 	            <td ng-if="!site.status.error && !site.status.loading" style="{{site.status.luyastyle}}">{{site.status.luya}}</td>
 	            <td ng-if="!site.status.error && !site.status.loading">{{site.status.yii}}</td>
-	            <td ng-if="site.status.error" colspan="7"><div style="background-color:#FF8A80; padding:4px; color:white;">Unable to retrieve data from the Remote Page.</div></td>
+	            <td ng-if="site.status.error" colspan="7"><div style="background-color:#FF8A80; padding:4px; color:white;"><?= Module::t('status_index_table_error'); ?></div></td>
                 <td ng-if="site.status.loading" colspan="7"><div class="progress"><div class="indeterminate"></div></div></td>
                 <td><a ng-href="{{site.url}}/admin" target="_blank"> <button class="btn-flat  btn--bordered"><i class="material-icons">exit_to_app</i></button></a></td>
 	        </tr>
 		</table>
-		<p><small>The Remote Data will be cached for <strong>2 minutes</strong>. You can us the cache-reload button to flush the whole page cache.</small></p>
-		<p><small>* Time: Returns the total elapsed time since the start of the request on the Remote application. Its the speed of the application, not the time elapsed to make the remote request.</small></p>
+		<p><small><?= Module::t('status_index_caching_info'); ?></small></p>
+		<p><small><?= Module::t('status_index_time_info'); ?></small></p>
 	</div>
 	<div class="card-panel red accent-1" ng-if="hasError">
-		<p>If the request to a remote page returns an error, the following issues could have caused your request:</p>
+		<p><?= Module::t('stauts_index_error_text'); ?></p>
 		<ul>
-		    <li>The requested website is secured by a httpauth authorization, you can add the httpauth credentials in the page configuration section.</li>
-		    <li>The requested website url is wrong or not valid anymire. Make sure the url is correctly added with its protocol.</li>
-		    <li>The requested website remote token is not defined in the config of the website itself or your enter secure token is wrong.</li>
+		    <li><?= Module::t('status_index_error_1'); ?></li>
+		    <li><?= Module::t('status_index_error_2'); ?></li>
+		    <li><?= Module::t('status_index_error_3'); ?></li>
 		</ul>
 	</div>
 </div>

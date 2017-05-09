@@ -2,12 +2,12 @@
 
 namespace luya\remoteadmin\models;
 
-use Yii;
 use yii\helpers\Json;
 use Curl\Curl;
 use luya\helpers\Url;
 use luya\traits\CacheableTrait;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\remoteadmin\Module;
 
 /**
  * This is the model class for table "remote_site".
@@ -49,12 +49,12 @@ class Site extends NgRestModel
     public function attributeLabels()
     {
     	return [
-    		'id' => 'ID',
-    		'token' => 'Token',
-    		'url' => 'Url',
-    		'auth_is_enabled' => 'Auth Is Enabled',
-    		'auth_user' => 'Auth User',
-    		'auth_pass' => 'Auth Pass',
+    		'id' => Module::t('model_site_id'),
+    		'token' => Module::t('model_site_token'),
+    		'url' => Module::t('model_site_url'),
+    		'auth_is_enabled' => Module::t('model_site_auth_is_enabled'),
+    		'auth_user' => Module::t('model_site_auth_user'),
+    		'auth_pass' => Module::t('model_site_auth_pass'),
     	];
     }
     
@@ -149,7 +149,7 @@ class Site extends NgRestModel
     
     public function textify($value)
     {
-    	return !empty($value) ? 'On' : 'Off';
+        return !empty($value) ? Module::t('model_site_on') :  Module::t('model_site_off') ;
     }
     
     public function colorize($value, $invert = false)
