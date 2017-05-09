@@ -1,27 +1,29 @@
 {
-	"name" : "luyadev/luya",
-	"description" : "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
-	"type" : "luya-core",
-	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular", "yii2-wrapper"],
-	"license": "MIT",
-	"homepage" : "https://luya.io",
-	"authors" : [
-		{
-			"name" : "Basil Suter",
-			"email" : "git@nadar.io",
-			"homepage" : "https://github.com/nadar"
-		}
-	],
-	"support" : {
-		"issues" : "https://github.com/luyadev/luya/issues"
-	},
-	"require" : {
-		"php": ">=5.5.0",
-		"yiisoft/yii2": "2.0.11",
+    "minimum-stability" : "RC",
+    "name" : "luyadev/luya",
+    "description" : "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
+    "type" : "luya-core",
+    "keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular", "yii2-wrapper"],
+    "license": "MIT",
+    "homepage" : "https://luya.io",
+    "authors" : [
+        {
+            "name" : "Basil Suter",
+            "email" : "git@nadar.io",
+            "homepage" : "https://github.com/nadar"
+        }
+    ],
+    "support" : {
+        "issues" : "https://github.com/luyadev/luya/issues"
+    },
+    "require" : {
+        "php": ">=5.5.0",
+        "yiisoft/yii2": "2.0.11",
         "curl/curl" : "~1.0",
         "phpmailer/phpmailer": "~5.0"
-	},
+    },
     "require-dev" : {
+        "nadar/github-markdown-fixer" : "~1.0",
         "phpunit/phpunit" : "~5.0",
         "satooshi/php-coveralls": "~1.0"
     },

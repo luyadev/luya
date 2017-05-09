@@ -1,10 +1,10 @@
-# Gallery Module
+# Gallery Module
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 
 The gallery module allows you create folders and collection and upload images to the collections. Its an easy way to create a gallery very quick and create your own view files.
 
-## Installation
+## Installation
 
 Require the modules in your composer.json
 
@@ -41,7 +41,7 @@ You can now login to your administration area and setup the permissions in order
 
 As the modules are not shipped with default view files you can use the following examples:
 
-#### cat/index.php
+#### cat/index.php
 
 ```php
 <?php foreach($catData as $item): ?>
@@ -52,7 +52,7 @@ As the modules are not shipped with default view files you can use the following
 <?php endforeach; ?>
 ```
 
-#### alben/index.php
+#### alben/index.php
 
 ```php
 <table border="1">
