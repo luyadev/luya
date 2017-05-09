@@ -49,9 +49,9 @@ class Formatter extends \yii\i18n\Formatter
      * the format to use for the given language.
      *
      * ```php
-     * 'dateFormats' => [
-     *     'fr' => 'HH:mm:ss',
-     *     'en' => 'HH:mm:ss',
+     * 'datetimeFormats' => [
+     *     'fr' => 'dd.MM.yyyy - HH:mm:ss',
+     *     'en' => 'MM/dd/yyyy HH:mm:ss',
      * ]
      * ```
      *
@@ -62,6 +62,13 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * @var array An array with time formats to use as default values where the key is the local language and value
      * the format to use for the given language.
+     * 
+     * ```php
+     * 'timeFormats' => [
+     *     'fr' => 'HH:mm:ss',
+     *     'de' => 'HH.mm.ss',
+     * ],
+     * ```
      *
      * See {{\luya\component\Formatter::timeFormat}} for more informations about valid values.
      */
