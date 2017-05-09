@@ -158,7 +158,7 @@ return [
 // rc2
     'model_navitem_title_tag_label' => 'Título Tag (SEO)',
     
-// 1.0.0
+// rc3
     'model_navitempage_empty_draft_id' => 'Não foi possível criar a página a partir do modelo de rascunho vazio.',
     'view_update_variation_select' => 'Nenhuma variação de bloco selecionada',
     'menu_group_item_env_config' => 'Configuração',
@@ -183,4 +183,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configurar',
     'view_update_block_tooltip_delete' => 'Excluir',
     'view_update_block_tooltip_close' => 'Fechar a edição',
+    
+// 1.0.0
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
 ];

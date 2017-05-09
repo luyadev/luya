@@ -159,7 +159,7 @@ return [
 // rc2
     'model_navitem_title_tag_label' => 'Thẻ tiêu đề (SEO)',
 
-// 1.0.0
+// rc3
     'model_navitempage_empty_draft_id' => 'Không thể tạo trang rỗng không có template.',
     'view_update_variation_select' => 'Không có block nào chọn thay đổi',
     'menu_group_item_env_config' => 'Thiết lập',
@@ -184,4 +184,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Thiết lập',
     'view_update_block_tooltip_delete' => 'Xóa',
     'view_update_block_tooltip_close' => 'Đóng',
+    
+// 1.0.0
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
 ];

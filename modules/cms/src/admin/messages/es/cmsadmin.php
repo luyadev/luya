@@ -159,7 +159,7 @@ return [
 // rc2
     'model_navitem_title_tag_label' => 'Etiqueta de título (SEO)',
 
-// 1.0.0
+// rc3
     'model_navitempage_empty_draft_id' => 'No se puede crear la página desde la plantilla de borrador vacía.',
     'view_update_variation_select' => 'No se seleccionó ninguna variación de bloque',
     'menu_group_item_env_config' => 'Configuración',
@@ -184,4 +184,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configurar',
     'view_update_block_tooltip_delete' => 'Eliminar',
     'view_update_block_tooltip_close' => 'Cerrar edición',
+    
+// 1.0.0
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
 ];

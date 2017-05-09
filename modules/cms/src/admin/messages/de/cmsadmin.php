@@ -157,7 +157,7 @@ return [
 // rc2
     'model_navitem_title_tag_label' => 'Titel Tag (SEO)',
     
-// 1.0.0
+// rc3
     'model_navitempage_empty_draft_id' => 'Die Vorlage darf nicht leer sein.',
     'view_update_variation_select' => 'Keine Blockvariation ausgewählt',
     'menu_group_item_env_config' => 'Konfiguration',
@@ -182,4 +182,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Konfigurieren',
     'view_update_block_tooltip_delete' => 'Löschen',
     'view_update_block_tooltip_close' => 'Bearbeiten schliessen',
+    
+// 1.0.0
+    'cmsadmin_dashboard_lastupdate' => 'Zuletzt bearbeitet Seiten'
 ];

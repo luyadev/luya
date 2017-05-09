@@ -147,7 +147,7 @@ return [
 // rc2
     'model_navitem_title_tag_label' => 'Titre (SEO)',
     
-// 1.0.0
+// rc3
     'model_navitempage_empty_draft_id' => 'Impossible de créer une page à partir d\'un modèle de brouillon vide',
     'view_update_variation_select' => 'Aucun bloc de variation sélectionné',
     'menu_group_item_env_config' => 'Configuration',
@@ -173,4 +173,6 @@ return [
     'view_update_block_tooltip_delete' => 'Supprimer',
     'view_update_block_tooltip_close' => 'Fermer l\'édition',
     
+// 1.0.0
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
 ];
