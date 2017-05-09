@@ -1,12 +1,12 @@
 <?php
 
-namespace luyatests\core\console\commands;
+namespace admintests\admin\commands;
 
 use Yii;
-use luyatests\LuyaConsoleTestCase;
 use luya\console\commands\ActiveWindowController;
+use admintests\AdminTestCase;
 
-class ActiveWindowControllerTest extends LuyaConsoleTestCase
+class ActiveWindowControllerTest extends AdminTestCase
 {
     public function testPhpViewRenderContent()
     {

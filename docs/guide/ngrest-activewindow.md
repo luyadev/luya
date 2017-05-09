@@ -10,7 +10,7 @@ An example of an active window (Change Password) when clicked:
 
 ### Create an Active Window
 
-> Use the [aw/create console command](luya-console.md) to generate a new Active Window.
+> Use the [`admin/active-window` console command](luya-console.md) to generate a new Active Window.
 
 A very example basic class with the name *TestActiveWindow* just renders an index and contains a callback:
 

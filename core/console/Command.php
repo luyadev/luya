@@ -133,7 +133,7 @@ abstract class Command extends \luya\console\Controller
     /**
      * Generates the LUYA text which all generator files should include.
      *
-     * @param string $command The command which is used like `crud/create` or `aw/create`.
+     * @param string $command The command which is used like `crud/create``.
      * @return string The text to insert.
      */
     public function getGeneratorText($command)

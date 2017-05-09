@@ -4,7 +4,6 @@ namespace luya\console;
 
 use Yii;
 use yii\helpers\Console;
-use yii\console\Exception;
 use luya\traits\ApplicationTrait;
 
 /**
@@ -47,7 +46,6 @@ class Application extends \yii\console\Application
             'module' => 'luya\console\commands\ModuleController',
             'import' => 'luya\console\commands\ImportController',
             'health' => 'luya\console\commands\HealthController',
-            'aw' => 'luya\console\commands\ActiveWindowController',
         ];
     }
     

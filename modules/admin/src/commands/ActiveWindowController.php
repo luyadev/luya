@@ -1,10 +1,11 @@
 <?php
 
-namespace luya\console\commands;
+namespace luya\admin\commands;
 
 use Yii;
 use yii\helpers\Inflector;
 use luya\helpers\FileHelper;
+use luya\console\Command;
 
 /**
  * Command to create ActiveWindow classes.
@@ -12,7 +13,7 @@ use luya\helpers\FileHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ActiveWindowController extends \luya\console\Command
+class ActiveWindowController extends Command
 {
     /**
      * @inheritdoc
@@ -35,7 +36,7 @@ class ActiveWindowController extends \luya\console\Command
     public function renderWindowClassView($className, $namespace, $moduleId)
     {
         $alias = Inflector::humanize(Inflector::camel2words($className));
-        return $this->view->render('@luya/console/commands/views/aw/create.php', [
+        return $this->view->render('@admin/commands/views/aw/create.php', [
             'className' => $className,
             'namespace' => $namespace,
             'luyaText' => $this->getGeneratorText('aw/create'),

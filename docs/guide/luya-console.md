@@ -24,7 +24,6 @@ Global LUYA commands:
 |`crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
 |`crud/model`|Generates only the [NgRestModel](ngrest-model.md). Usage `./vendor/bin/luya crud/model "app\models\Customer"` 
 |`module/create`|Create new [frontend/admin module](app-module.md) with a wizzard.
-|`aw/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
 |`module/controller/action`|All comands stored in the folder `commands` can be run by default routing.
 
 Admin Module commands:
@@ -39,6 +38,7 @@ Admin Module commands:
 |`admin/storage/cleanup`|Cleanup not existing files compare file system and database.
 |`admin/storage/cleanup-image-table`|Find if dupliations are available in the image table (same filter and file id). If confirmed it will remove all duplications except of one, the first one created.
 |`admin/storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
+|`admin/active-window/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
 
 CMS Module commands:
 

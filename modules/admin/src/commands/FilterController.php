@@ -9,7 +9,7 @@ use luya\admin\base\Filter;
 use luya\helpers\FileHelper;
 
 /**
- * Create Filters.
+ * Create Storage Filters
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -22,6 +22,11 @@ class FilterController extends Command
     
     public $chain = null;
     
+    /**
+     * Create a new image filter to apply on an Image Object.
+     * 
+     * @return number
+     */
     public function actionIndex()
     {
         if ($this->identifier === null) {
@@ -69,6 +74,14 @@ class FilterController extends Command
         }
     }
     
+    /**
+     * 
+     * @param unknown $identifier
+     * @param unknown $name
+     * @param array $chain
+     * @param unknown $className
+     * @return string
+     */
     public function generateClassView($identifier, $name, array $chain, $className)
     {
     	return $this->view->render('@admin/views/commands/filter/filterClass.php', [

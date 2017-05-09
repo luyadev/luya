@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1294](https://github.com/luyadev/luya/issues/1294) Moved Active Window scaffolding command into admin Module.
 - [#1277](https://github.com/luyadev/luya/issues/1277) Renamed getPlacholderValue() to getPlaceholderValue().
 - [#1273](https://github.com/luyadev/luya/issues/1273) Mail component remove adresses() replace with addresses().
 - [#1264](https://github.com/luyadev/luya/issues/1264) Renamed $LinkActiveClass property to $linkActiveClass in luya\cms\widgets\LangSwitcher.
