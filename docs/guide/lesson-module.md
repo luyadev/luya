@@ -6,7 +6,7 @@ Our starting point is a fresh [LUYA kickstarter RC3 installation](https://luya.i
 
 ## Create the module using the LUYA code wizard
 
-As described in the [LUYA  guide](https://luya.io/guide/app-admin-module) we create the module by using the LUYA code wizard:
+As described in the [LUYA  guide](https://luya.io/guide/app-admin-module) we'll create the module by using the LUYA code wizard:
 
 ```php
 ./vendor/bin/luya module/create
@@ -16,13 +16,13 @@ See the GIF below:
 
 ![Creating a module](img/addressbook-create.gif "Creating module with commands")
 
-You'll notice the created file structure in the ```modules/addressbook``` directory:
+After successfully executing you'll notice the created file structure in the ```modules/addressbook``` directory:
 
 ![Filesystem](img/addressbook-filetree.png "Creating module with commands")
 
-## Configure module
+## Configure the module
 
-To registrate the module in LUYA you [have to edit the config file](https://luya.io/guide/app-module) for your environment. We have to edit the ```configs/env-local.php``` because we're developing in the local environment. We're adding the ````addressbook``` module to the existent module section in the config file:
+To register the module in LUYA you [have to edit the config file](https://luya.io/guide/app-module) according to your working environment. We'll edit the ```configs/env-local.php``` because we're developing in the local environment. To register both modules (admin and frontend), we're adding the ```addressbook``` and ```addressbookadmin``` module to the existent module section in the config file:
 
 ```php
 'addressbook' => 'app\modules\addressbook\frontend\Module',
@@ -31,12 +31,12 @@ To registrate the module in LUYA you [have to edit the config file](https://luya
 
 ## Creating the models and migrations
 
-First step is the construction of our data model and the migration file for the creation of the associated database table.
-Again, we're using the code wizard to [create the migration file](https://luya.io/guide/ngrest-concept) for our registrated admin module *addressbookadmin*. We'll need two tables, one for the contact data itself and one for the different contact groups.
+Our first step is the creation of our data model and the migration files to create the associated database tables.
+Again, we're using the code wizard to [create the migration file](https://luya.io/guide/ngrest-concept) for our registered admin module *addressbookadmin*. We'll need two tables, one for the contact data itself and one for the different contact groups.
 
 ```php
 ./vendor/bin/luya migrate/create addressbook_contact addressbookadmin
-./vendor/bin/luya migrate/create addressbook_category addressbookadmin
+./vendor/bin/luya migrate/create addressbook_group addressbookadmin
 ```
 
 You'll find both migration files in ```modules/addressbook/admin/migrations/```.
@@ -96,13 +96,13 @@ To create the database tables from the migration files, you've to execute the ``
 
 ### Creating the models
 
-Again we're using the LUYA code wizard to help us create the corresponding model to the data tables:
+Again we're using the LUYA code wizard to help us create the corresponding models with a preconfigured CRUD view for the database tables:
 
 ```php
 ./vendor/bin/luya crud/create
 ```
 
-See how to use the wizard to automatically create the contact model```models/Contact.php``` and all associated files like the API controller ```modules/addressbook/admin/apis/ContactController.php``` and the controller ```modules/addressbook/admin/controllers/ContactController.php```:
+Below you see how to use the wizard to automatically create the contact model```models/Contact.php``` and all associated files like the API controller ```modules/addressbook/admin/apis/ContactController.php``` and the controller ```modules/addressbook/admin/controllers/ContactController.php```:
 
 ![Creating contact model](img/addressbook-contact-modelcreate.gif "Creating contact model")
 
@@ -110,7 +110,7 @@ Repeat the process for the ```Group``` model.
 
 ## Adding the module to the admin menue
 
-In order to see the new module, you've to define the menue appearance in the ```modules/addressbook/admin/Module.php```. After succesfully executing the ```crud/create``` command you'll also get a generated code proposal (green color) in the command line (see the GIF above). We want to see both the contacts and the groups and have to modify the generated code accordingly.
+In order to see the new module, you've to define the menue appearance in the ```modules/addressbook/admin/Module.php```. After succesfully executing the ```crud/create``` command you'll also get a generated code proposal (green color) in the command line (see the GIF above). We want to see both the contacts and the groups in the admin menue and have to modify the generated code accordingly.
 
 Your admin ```Module.php``` should look like this:
 
@@ -142,7 +142,7 @@ class Module extends \luya\admin\base\Module
 
 ## Importing the module
 
-Finally, we're going to import the new module with the import command:
+Finally, we're going to import the new modules with the import command:
 
 ```php
 ./vendor/bin/luya import
@@ -181,23 +181,24 @@ public function ngRestAttributeTypes()
     }
 ```
 
-Now add a new contact record in the admin panel under ```Addressbook/Contact/Add``` and notice the dropdown under the label ```Group ID```. Don't forget to create some groups for testing before. Change the labels in the ```attributeLabels()``` function to your liking.
+Now add a new contact record in the admin panel under ```Addressbook/Contact/Add``` and notice the dropdown under the label ```Group ID```. Don't forget to create some test groups before. 
+Change the labels in the ```attributeLabels()``` function to your liking.
 
 ## Frontend presentation
 
-After adding some sample data it's time to add a representation of our module to the frontend. To do this we'll have two options: using a [frontend module](https://luya.io/guide/app-module-frontend) or using the module block.
+After adding some sample data it's time to add a presentation of our module to the frontend. To do this we'll have two options: using a [frontend module](https://luya.io/guide/app-module-frontend) or using the module block.
 
 ### Module block 
 
-If you're using the module block to render the frontend module, you can place other blocks above and below because you're in the CMS context. This is most useful for simple modules which have only one view (i.e. a simple form). If you're linking a details view inside the module view, you'll not leave the page and detail view will get rendered in the same block. Another disadvantage is the static URL to the page. No matter what you're doing in the module block view, the site URL won't change as you're still in the context of the CMS page where you've placed the module block.
+If you're using the module block to render the frontend module, you can place other blocks above and below because you're in the CMS context. This is most useful for simple modules which have only one view (i.e. a simple form). If you're linking a detail view inside the module view, you won't leave the page and the detail view will get rendered in the same block. Another disadvantage is the static URL to the page. No matter what you're doing in the module block view, the site URL won't change as you're still in the context of the CMS page where you've placed the module block.
 
 ### Frontend module
 
-Using a Frontend Module offer all possibilities: you can define your own layout, you've full control of the URL routes and you've control over the whole page not just a part of it (from setting the page title tag to defining all detail views). 
+Using a Frontend Module offer all possibilities: you can define your own layout, you've full control of the URL routes and you're able to control all aspects of the page not just a part of it (from setting the page title tag to defining all detail views). 
 
 ## Set up the frontend module
 
-We're choosing the frontend module path because we want full control over site and define two views, a list and a detail view. 
+We're choosing the frontend module path because we want full control over URL routes and want to define two full page views (a contact list and the contact detail view).
 
 
 
