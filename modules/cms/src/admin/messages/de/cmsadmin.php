@@ -184,5 +184,5 @@ return [
     'view_update_block_tooltip_close' => 'Bearbeiten schliessen',
     
 // 1.0.0
-    'cmsadmin_dashboard_lastupdate' => 'Zuletzt bearbeitet Seiten'
+    'cmsadmin_dashboard_lastupdate' => 'Zuletzt aktualisierte Seiten'
 ];
