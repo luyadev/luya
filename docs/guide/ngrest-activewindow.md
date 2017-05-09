@@ -1,4 +1,4 @@
-# NgRest ActiveWindow
+# NgRest ActiveWindow
 
 An *NgRest ActiveWindow* is a concept to attach a modal window into an [Ng Rest Crud List](ngrest-concept.md). The Active Window is always bound to an **ID** of an item and is represented as a button with an icon and/or an alias. An example of a Button in the crud list:
 
@@ -8,7 +8,7 @@ An example of an active window (Change Password) when clicked:
 
 ![overlay-window](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aw_window.png "Active Window Overlay")
 
-### Create an Active Window
+### Create an Active Window
 
 > Use the [aw/create console command](luya-console.md) to generate a new Active Window.
 
@@ -44,7 +44,7 @@ Wokring with callbacks
 + To return successfull data use `sendSuccess($message)`.
 + To return error data use `sendError($message)`.
 
-## Attaching the Class
+## Attaching the Class
 
 In order to add an Active Window into your NgRest config, you have to add the config in the {{luya\admin\ngrest\base\NgRestModel::ngRestActiveWindows}} method. As the Active Window contains the {{yii\base\Object}} as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `alias` and `icon` public properties. The alias and icon probierts does exist in every Active Window an can always be overwritten.
 

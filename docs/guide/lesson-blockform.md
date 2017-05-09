@@ -1,8 +1,8 @@
-# Generate a Form within a Block
+# Generate a Form within a Block
 
 This is an example of how to generate a block with a form represented by a model and using the active form widget to generate the output.
 
-## Generate the Model
+## Generate the Model
 
 First of all generate the model with your custom roles and store in `app/models`:
 
@@ -40,7 +40,7 @@ class TestModel extends Model
 }
 ```
 					
-## Prepare the Block 
+## Prepare the Block 
 
 Now the Model respons needs to be assigned to the frontend view trough the extra vars section. extra vars are somewhat equals to when assign vars into the view in a controller context. You can assign anything into your view files.
 

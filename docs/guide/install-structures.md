@@ -9,24 +9,24 @@ This is what a standard luya kickstarter appliation hierarchy should look like a
 ```
 .
 ├── public_html
-│   ├── storage
-│   └── css
+│   ├── storage
+│   └── css
 ├── assets
 ├── blocks
 ├── filters
 ├── configs
 ├── migrations
 ├── modules
-│   ├── <APP-MODULE>
-│   │   ├── assets
-│   │   └── controllers
-│   └── <APP-ADMIN-MODULE>
-│       ├── assets
-│       └── controllers
+│   ├── <APP-MODULE>
+│   │   ├── assets
+│   │   └── controllers
+│   └── <APP-ADMIN-MODULE>
+│       ├── assets
+│       └── controllers
 ├── runtime
 └── views
     ├── <APP-MODULE>
-    │   └── default
+    │   └── default
     ├── cmslayouts
     └── layouts
 ```

@@ -116,7 +116,7 @@ You can read more about the configuration of the NgRest in [NgRest Model Guide](
 
 Each NgRest Crud needs an API (to make the rest call, create, update, list which are provided trough [Yii 2 RESTful](http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html)) and a controller which contains the angular template for your configure `ngRestConfig()`. The API and the Controller are basically only Gateways for the Output and do relate to the ngrest model:
 
-### NgRest Controller
+### NgRest Controller
 
 Example of an ngrest controller (which are located in `<module>/controllers`):
 
@@ -130,7 +130,7 @@ class MemberController extends \luya\admin\ngrest\base\Controller
 }
 ```
 
-### NgRest Api
+### NgRest Api
 
 Example of an api controller (which are located in `<module>/apis`):
 
@@ -182,7 +182,7 @@ There are a few rules while defining the api endpoint name:
 + API Endpoints does never have an admin prefix in the module, by defintion. So event when you have only one module `foobaradmin` the choosen module name for the endpoint would be `foobar`.
 + APIs are alaways **singular** described, its not ~~members~~ its *member*.
 
-### Menu
+### Menu
 
 The store the permission informations of your newly created ngrest crud you have to override the `getMenu()` method of your Module class where the ngrest crud belongs to.
 

@@ -12,18 +12,18 @@ Structure of Modules
 ```
 .
 ├── admin
-│   ├── assets
-│   ├── apis
-│   ├── importers
-│   ├── controllers
-│   ├── migrations
-│   └── resources
+│   ├── assets
+│   ├── apis
+│   ├── importers
+│   ├── controllers
+│   ├── migrations
+│   └── resources
 ├── frontend
-│   ├── assets
-│   ├── controllers
-│   ├── blockgroups
-│   ├── blocks
-│   └── views
+│   ├── assets
+│   ├── controllers
+│   ├── blockgroups
+│   ├── blocks
+│   └── views
 ├── models
 └── helpers
 ```

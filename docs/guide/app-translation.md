@@ -1,4 +1,4 @@
-# Translation / Messages
+# Translation / Messages
 
 This section explains how to use the [Yii Messaging system](http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html#message-translation) inside a LUYA Project. This is a summary guide. To use the translation/messaging system in your controller or view files you have to configure the yii2 i18n component:
 
@@ -19,10 +19,10 @@ Now all the message with the prefix `app` will be loaded into the message compon
 ```
 .
 └── messages
-    ├── de
+    ├── de
     │   ├── app.php
     │   └── app-otherparts.php
-    └── en
+    └── en
         ├── app.php
         └── app-otherparts.php
 ```
@@ -44,7 +44,7 @@ public $translations = [
 
 The above registered module translation messages can be retrieved as `Yii::t('mymodule', 'Key', 'Value')` or for the subsection `Yii::t('mymodule/subsection', 'Key', 'Value')`.
 
-### Message Source Content
+### Message Source Content
 
 The message source file itself which contains the translations for the specific language is an array with a key where you can identifier the message and a value which is the content. Example content for `messages/de/app.php`:
 

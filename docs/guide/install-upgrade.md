@@ -24,7 +24,7 @@ composer update
 
 Now you got a new composer lock file, which can be used for other team members to install the new luya version.
 
-### Console
+### Console
 
 After updating composer, excecute the following command to upgrade the Database.
 

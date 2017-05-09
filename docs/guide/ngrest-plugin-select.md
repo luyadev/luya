@@ -1,6 +1,6 @@
-# Dropdown Selection
+# Dropdown Selection
 
-The {{luya\admin\ngrest\plugins\SelectArray}} and {{luya\admin\ngrest\plugins\SelectModel}} plugins generate a dropdown selection list from an array or a database table.
+The {{luya\admin\ngrest\plugins\SelectArray}} and {{luya\admin\ngrest\plugins\SelectModel}} plugins generate a dropdown selection list from an array or a database table.
 
 ### Select from an Array
 

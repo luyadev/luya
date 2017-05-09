@@ -1,8 +1,8 @@
-# Block config and type
+# Block config and type
 
 Here we are going to more deeply understand what the `config()` method of a block contains and what kind of types can be used. To understand of the config first we have to explain the available types of confiugrations and which are used to be configured by the user or the developer.
 
-### Types
+### Types
 
 The `config()` method returns an array with all defined types for this current block, the first level defines the block types:
 
@@ -16,13 +16,13 @@ return [
 
 > You only have to return the types you like to use in your block, if do not have placeholders your don't have to return it at all.
 
-| Name | Function
+| Name | Function
 | ---- | --------
-| vars | Contains all variables which are shown when editing the block in the administration.
+| vars | Contains all variables which are shown when editing the block in the administration.
 | cfgs | Those options are the config gear icon in the administration overview and can contain optional informations which could be more deeply or more for the developer context.
-| placeholders | Allows you to generate placeholders which creates an arra where other blocks can be dropped into, this is very common for layout blocks.
+| placeholders | Allows you to generate placeholders which creates an arra where other blocks can be dropped into, this is very common for layout blocks.
 
-### Field
+### Field
 
 
 Now you can add a field into the above defined type, this is like a configuration of a field which must contain `var`, `label` and `type`:
@@ -111,7 +111,7 @@ In the view you can access the values as follwed:
     <a href="<?= $this->extraValue('download')->source; ?>">Download File</a>
 <?php endif; ?>
 
-## Injectors
+## Injectors
 
 A very common scenario is to collect data from an active record model, display the items and select them (via select or checkbox for example) and then access the selected model rows via extraVars. To achieve this a lot of code is required inside your blocks, which is good to understand what and why things happens. But if you need to get results quickly injectors are going to help you manage this kind of tasks.
 

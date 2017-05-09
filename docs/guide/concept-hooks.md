@@ -61,7 +61,7 @@ class DefaultController extends \luya\web\Controller
 }
 ```
 
-When {{luya\Hook::on}} is called multiple times in a request cycle, the output will concated and is sorted by execution time.
+When {{luya\Hook::on}} is called multiple times in a request cycle, the output will concated and is sorted by execution time.
 
 ## Array output
 

@@ -15,7 +15,7 @@ Casual Example of an html partial you may reuse in different pages with differen
 Now you can create an html element component for this.
 
 
-## Create Element and Use
+## Create Element and Use
 
 To add a new html element component, go into your Application Folder (@app) and create a php file with the name `elements.php`. This file will contain all the element partials for this Project. An element is defined by a *name* and a corresponding *closure*. Below en example setup for `elements.php` file:
 

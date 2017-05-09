@@ -1,4 +1,4 @@
-# Installation on MAC OSX
+# Installation on MAC OSX
 
 The installation process does not differ to the [baisc installation](install.md) but on several osx setups you may use different config values as described below.
 
@@ -10,13 +10,13 @@ Most OSX Apache services does not work with the default unix socket defined in y
 'dsn' => 'mysql:host=localhost;dbname=luyaweb;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
 ```
 
-#### XAMPP
+#### XAMPP
 
 ```php
 'dsn' => 'mysql:host=localhost;dbname=luyaweb;/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
 ```
 
-## Misc issues
+## Misc issues
 
 Create a .bash_profile file in your home folder (cd ~) with following content
 
