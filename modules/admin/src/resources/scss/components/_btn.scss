@@ -12,6 +12,11 @@
 	&:hover {
 		background-color: color("green", "darken-2");
 	}
+
+	&--full-width {
+		display: block;
+		width: 100%;
+	}
 }
 
 .btn.red:hover,
