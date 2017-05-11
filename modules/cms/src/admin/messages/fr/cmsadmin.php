@@ -140,14 +140,14 @@ return [
     'button_update_version' => 'Modifier une version',
     'menu_group_item_env_permission' => 'Permissions de la page',
     
-// rc1
+    /* rc1 */
     'page_update_actions_deepcopy_text' => 'Créer une copie de la page en cours comprenant son contenu. Toutes les langues seront copiés mais, seulement la version publiée sera visible.',
     'page_update_actions_deepcopy_btn' => 'Créer une copie',
     
-// rc2
+    /* rc2 */
     'model_navitem_title_tag_label' => 'Titre (SEO)',
     
-// rc3
+    /* rc3 */
     'model_navitempage_empty_draft_id' => 'Impossible de créer une page à partir d\'un modèle de brouillon vide',
     'view_update_variation_select' => 'Aucun bloc de variation sélectionné',
     'menu_group_item_env_config' => 'Configuration',
@@ -173,6 +173,6 @@ return [
     'view_update_block_tooltip_delete' => 'Supprimer',
     'view_update_block_tooltip_close' => 'Fermer l\'édition',
     
-// 1.0.0
-    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
+    /* 1.0.0 */
+    'cmsadmin_dashboard_lastupdate' => 'Dernières modifications'
 ];
