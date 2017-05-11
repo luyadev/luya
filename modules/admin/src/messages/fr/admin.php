@@ -119,7 +119,7 @@ return [
     'js_ngrest_rm_success' => 'La nouvelle entréea été inséré avec succès',
     'js_tag_exists' => 'existe déjà et ne peut pas être ajouté',
     'js_tag_success' => 'Informations sur le tag a été acceptée',
-    'js_admin_reload' => 'Le système a été mis à jour et doit être rechargée. Enregistrer vos modifications effectuées sur le présent formulaire. (En cliquant sur "annuler", cette boîte de dialogue s\'affichera à nouveau en 30 secondes.)',
+    'js_admin_reload' => 'Le système a été mis à jour et doit être rechargée. Enregistrer vos modifications effectuées sur le présent formulaire. (En cliquant sur "annuler", cette boîte de dialogue s\'affichera à nouveau dans 30 secondes).',
     'js_dir_till' => 'jusqu\'à',
     'js_dir_set_date' => 'Définir la date actuelle',
     'js_dir_table_add_row' => 'Ajouter une ligne',
@@ -173,28 +173,25 @@ return [
     'dashboard_log_message_add' => 'Nouvelle entrée ajoutée à <b>{container}</b>',
     'dashboard_log_message_edit' => 'Modification d\une entrée existante dans <b>{container}</b>',
 
-// rc1
-    
+    /* rc1 */
     'layout_btn_help' => 'Aide',
     'right_panel_support_title' => 'Informations &amp; Aides',
     'right_panel_support_tags_title' => 'Etiquettes',
     'right_panel_support_support_title' => 'Support',
-    'right_panel_support_support_text' => 'Pour toute question, contacter le Webmaster ou consulter la page <a target="_blank" href="https://luya.io">luya.io</a>.',
+    'right_panel_support_support_text' => 'Pour toute question, contacter le Webmaster ou consulter la page <a target="_blank" href="https://luya.io">luya.io</a>',
     
-// rc2
-
+    /* rc2 */
     'ngrest_crud_group_prompt' => 'Groupe par champ',
     'ngrest_crud_filter_prompt' => 'Sélectionner un filtre',
-    'ngrest_crud_ajax_search_length' => 'La requête de recherche doit comporter au moins 3 caractères.',
+    'ngrest_crud_ajax_search_length' => 'La requête de recherche doit comporter au moins 3 caractères',
     'menu_system_logger' => 'Logger',
     'layout_filemanager_detail_replace_file' => 'Remplacer le fichier',
-    'layout_rightbar_languagelabel' => 'Interface Langue',
+    'layout_rightbar_languagelabel' => 'Langue de l\'interface',
     'layout_rightbar_savebtn' => 'Enregistrer',
-    'aws_changepassword_notequal' => 'Le nouveau mot de passe et la répétition du mot de passe ne sont pas égaux.',
-    'aws_changeapssword_minchar' => 'Le nouveau mot de passe doit contenir au moins {min} caractères.',
+    'aws_changepassword_notequal' => 'Le nouveau mot de passe et la répétition du mot de passe ne correspond pas',
+    'aws_changeapssword_minchar' => 'Le nouveau mot de passe doit contenir au moins {min} caractères',
         
-// rc3
-    
+    /* rc3 */
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Langue',
     'model_lang_short_code' => 'Code',
@@ -231,19 +228,17 @@ return [
     
     'js_ngrest_toggler_success' => '%field% mis à jour avec succès',
     'layout_image_filter_selection' => 'Sélectionner le filtre de l\'image:',
-    'lock_admin_edit_crud_item' => 'En cours de modification {module} "{table}" (ID: {id}).',
-    'lock_cms_edit_page' => 'Page en cours de modification "{title}".',
+    'lock_admin_edit_crud_item' => 'En cours de modification {module} "{table}" (ID: {id})',
+    'lock_cms_edit_page' => 'Page en cours de modification "{title}"',
     'layout_filemanager_col_size' => 'Taille du fichier',
     'js_filemanager_count_files_overlay' => '%count% fichiers',
     'js_link_change_value' => 'Changer le lien',
     'js_link_set_value' => 'Définir le lien',
     'callback_button_file_download_widget_success' => 'Le fichier a été préparé. Vous pouvez le télécharger maintenant.',
     
-    
-// 1.0.0
-    
-    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
-    'model_user_oldpassword' => 'Previous (old) Password',
-    'js_account_update_profile_success' => 'The profile data has been successfull updated.',
-    'dashboard_lastlogin_title' => 'Last User Logins',
+    /* 1.0.0 */
+    'api_storage_file_upload_folder_error' => 'Erreur lors de l\'enregistrement du fichier. Une erreur d\'autorisation pourrait être la cause de ce problème. Assurez-vous que le dossier de stockage est accessible en écriture !',
+    'model_user_oldpassword' => 'Ancien mot de passe',
+    'js_account_update_profile_success' => 'Les informations de profil ont été mises à jour avec succès',
+    'dashboard_lastlogin_title' => 'Dernières connexions de l\'utilisateur',
 ];
