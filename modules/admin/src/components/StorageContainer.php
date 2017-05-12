@@ -100,6 +100,35 @@ class StorageContainer extends Component
     use CacheableTrait;
     
     /**
+     * @var array The mime types 
+     */
+    public $dangerousMimeTypes = [
+        'application/x-msdownload',
+        'application/x-msdos-program',
+        'application/x-msdos-windows',
+        'application/x-download',
+        'application/bat',
+        'application/x-bat',
+        'application/com',
+        'application/x-com',
+        'application/exe',
+        'application/x-exe',
+        'application/x-winexe',
+        'application/x-winhlp',
+        'application/x-winhelp',
+        'application/x-javascript',
+        'application/hta',
+        'application/x-ms-shortcut',
+        'application/octet-stream',
+        'vms/exe',
+        'text/javascript',
+        'text/scriptlet',
+        'text/x-php',
+        'text/plain',
+        'application/x-spss',
+    ];
+    
+    /**
      * @var \luya\web\Request Request object resolved by the Dependency Injector.
      */
     public $request = null;
@@ -385,6 +414,10 @@ class StorageContainer extends Component
         
         if (empty($mimeType)) {
             $mimeType = FileHelper::getMimeType($fileName);
+        }
+        
+        if (in_array($mimeType, $this->dangerousMimeTypes)) {
+            throw new Exception("This files is in the dangrous types list and can not be stored.");
         }
         
         $newName = implode([$baseName.'_'.$fileHashName, $fileInfo->extension], '.');
