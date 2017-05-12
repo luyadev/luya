@@ -204,8 +204,8 @@ class Storage
      * Example response
      *
      * ```php
-     * ['error' => false, 'message' => 'file uploaded succesfully', 'file_id' => 123], // success response example
-     * ['error' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
+     * ['upload' => false, 'message' => 'file uploaded succesfully', 'file_id' => 123], // success response example
+     * ['upload' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
      * ```
      *
      * @param array $fileArray Its an entry of the files array like $_FILES['logo_image'].
@@ -236,8 +236,8 @@ class Storage
      * Example response
      *
      * ```php
-     * ['error' => false, 'message' => 'file uploaded succesfully', 'file_id' => 123], // success response example
-     * ['error' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
+     * ['upload' => false, 'message' => 'file uploaded succesfully', 'file_id' => 123], // success response example
+     * ['upload' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
      * ```
      *
      * @todo what happen if $files does have more then one entry, as the response is limit to 1
