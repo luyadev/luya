@@ -14,7 +14,7 @@ See the GIF below:
 
 ![Creating a module](img/addressbook-create.gif "Creating module with commands")
 
-After successfully executing you'll notice the created file structure in the ```modules/addressbook``` directory:
+After successfully executing you'll notice the created file structure in the `modules/addressbook` directory:
 
 ![Filesystem](img/addressbook-filetree.png "Creating module with commands")
 
