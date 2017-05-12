@@ -8,9 +8,7 @@ Our starting point is a fresh [LUYA kickstarter RC3 installation](https://luya.i
 
 As described in the [LUYA  guide](https://luya.io/guide/app-admin-module) we'll create the module by using the LUYA code wizard:
 
-```php
-./vendor/bin/luya module/create
-```
+`./vendor/bin/luya module/create`
 
 See the GIF below:
 
@@ -22,7 +20,7 @@ After successfully executing you'll notice the created file structure in the ```
 
 ## Configure the module
 
-To register the module in LUYA you [have to edit the config file](https://luya.io/guide/app-module) according to your working environment. We'll edit the ```configs/env-local.php``` because we're developing in the local environment. To register both modules (admin and frontend), we're adding the ```addressbook``` and ```addressbookadmin``` module to the existent module section in the config file:
+To register the module in LUYA you [have to edit the config file](https://luya.io/guide/app-module) according to your working environment. We'll edit the `configs/env-local.php` because we're developing in the local environment. To register both modules (admin and frontend), we're adding the `addressbook` and `addressbookadmin` module to the existent module section in the config file:
 
 ```php
 'addressbook' => 'app\modules\addressbook\frontend\Module',
@@ -39,7 +37,7 @@ Again, we're using the code wizard to [create the migration file](https://luya.i
 ./vendor/bin/luya migrate/create addressbook_group addressbookadmin
 ```
 
-You'll find both migration files in ```modules/addressbook/admin/migrations/```.
+You'll find both migration files in `modules/addressbook/admin/migrations/`.
 
 ### Adding migration details
 
@@ -88,31 +86,27 @@ Note that your migration class name will differ because of the included timestam
 
 ### Executing the migrations
 
-To create the database tables from the migration files, you've to execute the ```migrate``` command:
+To create the database tables from the migration files, you've to execute the `migrate` command:
 
-```php
-./vendor/bin/luya migrate
-```
+`./vendor/bin/luya migrate`
 
 ### Creating the models
 
 Again we're using the LUYA code wizard to help us create the corresponding models with a preconfigured CRUD view for the database tables:
 
-```php
-./vendor/bin/luya crud/create
-```
+`./vendor/bin/luya crud/create`
 
-Below you see how to use the wizard to automatically create the contact model```models/Contact.php``` and all associated files like the API controller ```modules/addressbook/admin/apis/ContactController.php``` and the controller ```modules/addressbook/admin/controllers/ContactController.php```:
+Below you see how to use the wizard to automatically create the contact model`models/Contact.php` and all associated files like the API controller `modules/addressbook/admin/apis/ContactController.php` and the controller `modules/addressbook/admin/controllers/ContactController.php`:
 
 ![Creating contact model](img/addressbook-contact-modelcreate.gif "Creating contact model")
 
-Repeat the process for the ```Group``` model.
+Repeat the process for the `Group` model.
 
 ## Adding the module to the admin menue
 
-In order to see the new module, you've to define the menue appearance in the ```modules/addressbook/admin/Module.php```. After succesfully executing the ```crud/create``` command you'll also get a generated code proposal (green color) in the command line (see the GIF above). We want to see both the contacts and the groups in the admin menue and have to modify the generated code accordingly.
+In order to see the new module, you've to define the menue appearance in the `modules/addressbook/admin/Module.php`. After succesfully executing the `crud/create` command you'll also get a generated code proposal (green color) in the command line (see the GIF above). We want to see both the contacts and the groups in the admin menue and have to modify the generated code accordingly.
 
-Your admin ```Module.php``` should look like this:
+Your admin `Module.php` should look like this:
 
 ```php
 <?php
@@ -144,19 +138,17 @@ class Module extends \luya\admin\base\Module
 
 Finally, we're going to import the new modules with the import command:
 
-```php
-./vendor/bin/luya import
-```
+`./vendor/bin/luya import`
 
-Before we'll see the module in the admin view, we've to set the permissions for the ```addressbookadmin``` for our user in ```System/Groups/Permissions```:
+Before we'll see the module in the admin view, we've to set the permissions for the `addressbookadmin` for our user in `System/Groups/Permissions`:
 
 ![Settings permissions](img/addressbook-permissions.gif "Settings permissions")
 
 ## Linking the group table in the contact table
 
-We don't want to put the group id in a contact record. In order to get a nice dropdown with all available ```Groups```, we've to modify the ```ngRestAttributeTypes()``` function in the```Contact.php``` model. We'll use the [selectModel](https://luya.io/guide/ngrest-plugin-select) attribute type for the field ```group_id```. 
+We don't want to put the group id in a contact record. In order to get a nice dropdown with all available `Groups`, we've to modify the `ngRestAttributeTypes()` function in the `Contact.php` model. We'll use the [selectModel](https://luya.io/guide/ngrest-plugin-select) attribute type for the field `group_id`. 
 
-Our ```ngRestAttributeTypes()``` function should look like this:
+Our `ngRestAttributeTypes()` function should look like this:
 
 ```php
 public function ngRestAttributeTypes()
@@ -181,8 +173,8 @@ public function ngRestAttributeTypes()
     }
 ```
 
-Now add a new contact record in the admin panel under ```Addressbook/Contact/Add``` and notice the dropdown under the label ```Group ID```. Don't forget to create some test groups before. 
-Change the labels in the ```attributeLabels()``` function to your liking.
+Now add a new contact record in the admin panel under `Addressbook/Contact/Add` and notice the dropdown under the label `Group ID`. Don't forget to create some test groups before. 
+Change the labels in the `attributeLabels()` function to your liking.
 
 ## Frontend presentation
 
