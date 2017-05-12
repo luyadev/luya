@@ -190,9 +190,102 @@ Using a Frontend Module offer all possibilities: you can define your own layout,
 
 ## Set up the frontend module
 
-We're choosing the frontend module path because we want full control over URL routes and want to define two full page views (a contact list and the contact detail view).
+We're choosing the frontend module path because we want full control over site and we want to define two views, a list and a detail view.
 
+### Setting up the DefaultController
 
+First we want the functionality of a list view of all contacts. We're using an [active data provider](http://www.yiiframework.com/doc-2.0/guide-output-data-providers.html) for this task. After configure our desired page size and sort order, we're rendering the *index* view and assign our active data provider.
 
+We also want a detail view of a selected contact. For this we're defining another action function: *actionDetail*. This time we're querying the selected record and render the *detail* view.
 
+```php
+<?php
 
+namespace app\modules\addressbook\frontend\controllers;
+
+use app\modules\addressbook\models\Contact;
+use luya\web\Controller;
+use yii\data\ActiveDataProvider;
+
+class DefaultController extends Controller
+{
+    public function actionIndex()
+    {
+        $provider = new ActiveDataProvider([
+            'query' => Contact::find(),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'group_id' => SORT_ASC,
+                    'lastname' => SORT_ASC,
+                ]
+            ],
+        ]);
+
+        return $this->render('index', [
+            'provider' => $provider
+        ]);
+    }
+    
+    public function actionDetail($id = null)
+    {
+        if ($id) {
+            $model = Contact::findOne($id);
+        } else {
+            $model = Contact::findOne(1);
+        }
+
+        return $this->render('detail', [
+            'model' => $model
+        ]);
+    }
+}
+```
+
+### Setting up the index view
+
+We create the `index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our *$dataprovider* which was defined in our *DefaultController* above. We give some styling options and more importantly we define custom row options as we want to be able to click on a table entry. We define *location.href* change for the *onclick* event and some background color changes when hovering with the mouse cursor. This is how it looks in the end:
+
+```php
+<?= \yii\grid\GridView::widget([
+    'dataProvider' => $provider,
+    'columns' => ['firstname', 'lastname', 'country'],
+    'rowOptions' => function ($model, $key, $index, $grid) {
+        $route = \luya\helpers\Url::toRoute(['/addressbook/default/detail', 'id' => $key]);
+        return [
+            'id' => $model['id'],
+            'style' => 'cursor:pointer;background-color:#fff',
+            'onclick' => 'location.href="'.$route.'";',
+            'onmouseover' => '$("tbody > tr").css("background-color","#fff");$(this).css("background-color","rgb(211, 236, 255)");'
+        ];
+    },
+    'tableOptions' => ['class' => 'table table-bordered']
+
+]); ?>
+```
+
+Again you should work with style sheets and external javscript files, but for the sake of a short example we'll define everything inline.
+
+### Setting up the detail view
+
+When clicking on an entry in the list view, we'll get routed to our detail view. To be able to get back fast, we're creating a back button with the correct URL route to our list view. Our detail view uses a Yii widget again: the [DetailView](http://www.yiiframework.com/doc-2.0/yii-widgets-detailview.html) widget.
+
+```php
+<div>
+    <a href="<?= $route = \luya\helpers\Url::toRoute(['/addressbook']); ?>">< Back</a>
+</div>
+<br/>
+
+<?= \yii\widgets\DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+        'salutation',
+        'firstname',
+        'lastname',
+        'street',
+        'notes:html',
+    ],
+]);
+```
