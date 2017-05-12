@@ -384,6 +384,20 @@ class Mail extends \yii\base\Component
 
         return $this;
     }
+    
+    /**
+     * Add attachment.
+     * 
+     * @param string $filePath The path to the file, will be checked with `is_file`.
+     * @param string $name An optional name to use for the Attachment.
+     * @return \luya\components\Mail
+     */
+    public function addAttachment($filePath, $name = null)
+    {
+        $this->getMailer()->addAttachment($filePath, empty($name) ? '' : $name);
+        
+        return $this;
+    }
 
     /**
      * Trigger the send event of the mailer
