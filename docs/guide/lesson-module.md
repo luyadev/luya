@@ -188,22 +188,34 @@ If you're using the module block to render the frontend module, you can place ot
 
 Using a Frontend Module offer all possibilities: you can define your own layout, you've full control of the URL routes and you're able to control all aspects of the page not just a part of it (from setting the page title tag to defining all detail views). 
 
+## Frontend presentation
+
+After adding some sample data it's time to add a representation of our module to the frontend. To do this we'll have two options: using a [frontend module](https://luya.io/guide/app-module-frontend) or using the module block.
+
+### Module block 
+
+If you're using the module block to render the frontend module, you can place other blocks above and below because you're in the CMS context. This is most useful for simple modules which have only one view (i.e. a simple form). If you're linking a details view inside the module view, you'll not leave the page and detail view will get rendered in the same block. Another disadvantage is the static URL to the page. No matter what you're doing in the module block view, the site URL won't change as you're still in the context of the CMS page where you've placed the module block.
+
+### Frontend module
+
+Using a Frontend Module offer all possibilities: you can define your own layout, you've full control of the URL routes and you've control over the whole page not just a part of it (from setting the page title tag to defining all detail views). 
+
 ## Set up the frontend module
 
 We're choosing the frontend module path because we want full control over site and we want to define two views, a list and a detail view.
 
 ### Setting up the DefaultController
 
-First we want the functionality of a list view of all contacts. We're using an [active data provider](http://www.yiiframework.com/doc-2.0/guide-output-data-providers.html) for this task. After configure our desired page size and sort order, we're rendering the *index* view and assign our active data provider.
+First we want the functionality of a list view of all contacts. We're using an [active data provider](http://www.yiiframework.com/doc-2.0/guide-output-data-providers.html) for this task. Additionally we want the data output to be grouped by the defined contact groups. After fetching the correct contacts for each group and configuring our desired page size and sort order, we're rendering the *index* view and assigning our active data providers and group models.
 
-We also want a detail view of a selected contact. For this we're defining another action function: *actionDetail*. This time we're querying the selected record and render the *detail* view.
+We also want a detail view of a selected contact. For this we're defining another action function: *actionDetail* with using the contact id as parameter. We're querying the selected record by the assigned id and render it with the *detail* view template.
 
 ```php
 <?php
-
 namespace app\modules\addressbook\frontend\controllers;
 
 use app\modules\addressbook\models\Contact;
+use app\modules\addressbook\models\Group;
 use luya\web\Controller;
 use yii\data\ActiveDataProvider;
 
@@ -211,30 +223,35 @@ class DefaultController extends Controller
 {
     public function actionIndex()
     {
-        $provider = new ActiveDataProvider([
-            'query' => Contact::find(),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'group_id' => SORT_ASC,
-                    'lastname' => SORT_ASC,
-                ]
-            ],
-        ]);
+        $groups = Group::find()->all();
+        $providers = [];
+        foreach ($groups as $group) {
+            $providers[] = new ActiveDataProvider([
+                'query' => Contact::find()->where(['group_id' => $group->id]),
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+                'sort' => [
+                    'defaultOrder' => [
+                        'group_id' => SORT_ASC,
+                        'lastname' => SORT_ASC,
+                    ]
+                ],
+            ]);
+        }
 
         return $this->render('index', [
-            'provider' => $provider
+            'providers' => $providers,
+            'groups' => $groups
         ]);
     }
-    
+
     public function actionDetail($id = null)
     {
-        if ($id) {
-            $model = Contact::findOne($id);
-        } else {
-            $model = Contact::findOne(1);
+        $model = Contact::findOne($id);
+
+        if (!$model) {
+            return $this->goHome();
         }
 
         return $this->render('detail', [
@@ -246,31 +263,52 @@ class DefaultController extends Controller
 
 ### Setting up the index view
 
-We create the `index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our *$dataprovider* which was defined in our *DefaultController* above. We give some styling options and more importantly we define custom row options as we want to be able to click on a table entry. We define *location.href* change for the *onclick* event and some background color changes when hovering with the mouse cursor. This is how it looks in the end:
+For our first view, the list view, we'll create the `views/default/index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our *$dataproviders* and *$groups* which were defined in our *DefaultController* above. We parse each contact group, print the group name and render the contact data from the data provider. We're setting up some styling options for the grid view and define some custom row options as we want to be able to click on a table entry and see the mouse hovering. For the *onclick* event we define the `location.href` change to link to the detail view and some background color changes for the *onmouseover* and *onmouseout* event. This is how it looks in the end:
 
 ```php
-<?= \yii\grid\GridView::widget([
-    'dataProvider' => $provider,
-    'columns' => ['firstname', 'lastname', 'country'],
-    'rowOptions' => function ($model, $key, $index, $grid) {
-        $route = \luya\helpers\Url::toRoute(['/addressbook/default/detail', 'id' => $key]);
-        return [
-            'id' => $model['id'],
-            'style' => 'cursor:pointer;background-color:#fff',
-            'onclick' => 'location.href="'.$route.'";',
-            'onmouseover' => '$("tbody > tr").css("background-color","#fff");$(this).css("background-color","rgb(211, 236, 255)");'
-        ];
-    },
-    'tableOptions' => ['class' => 'table table-bordered']
-
-]); ?>
+<? for ($i = 0; $i < count($groups); $i++): ?>
+    <h3><?= $groups[$i]->name ?></h3>
+    <?= \yii\grid\GridView::widget([
+        'dataProvider' => $providers[$i],
+        'columns' => [
+            [
+                'attribute' => 'firstname',
+                'contentOptions' => ['style' => 'width:404px'],
+                'enableSorting' => false,
+                'headerOptions' => ['style' => 'background-color:#e9e9e9'],
+            ],
+            [
+                'attribute' => 'lastname',
+                'contentOptions' => ['style' => 'width:395px'],
+                'enableSorting' => false,
+                'headerOptions' => ['style' => 'background-color:#e9e9e9'],
+            ],
+            [
+                'attribute' => 'country',
+                'enableSorting' => false,
+                'headerOptions' => ['style' => 'background-color:#e9e9e9'],
+            ],
+        ],
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            $route = \luya\helpers\Url::toRoute(['/addressbook/default/detail', 'id' => $key]);
+            return [
+                'id' => $model['id'],
+                'style' => 'cursor:pointer;background-color:#fff',
+                'onclick' => 'location.href="' . $route . '";',
+                'onmouseover' => '$(this).css("background-color","rgb(211, 236, 255)");',
+                'onmouseout' => '$("tbody > tr").css("background-color","#fff");',
+            ];
+        },
+        'tableOptions' => ['class' => 'table table-bordered']
+    ]); ?>
+<? endfor; ?>
 ```
 
-Again you should work with style sheets and external javscript files, but for the sake of a short example we'll define everything inline.
+Again you should work with style sheets, CSS class names and external javascript files, but for the sake of a short example we'll define everything inline.
 
 ### Setting up the detail view
 
-When clicking on an entry in the list view, we'll get routed to our detail view. To be able to get back fast, we're creating a back button with the correct URL route to our list view. Our detail view uses a Yii widget again: the [DetailView](http://www.yiiframework.com/doc-2.0/yii-widgets-detailview.html) widget.
+When clicking on an entry in the list view, we'll end up in our detail view. To be able to get back fast, we're creating a back button with the correct URL route to our list view. Our detail view uses a Yii widget again: the [DetailView](http://www.yiiframework.com/doc-2.0/yii-widgets-detailview.html) widget.
 
 ```php
 <div>
@@ -289,3 +327,17 @@ When clicking on an entry in the list view, we'll get routed to our detail view.
     ],
 ]);
 ```
+
+## Result
+
+After setting up the frontend module, we've to create a module page and choose our new `addressbook` module:
+
+![Creating module page](img/addressbook-createpage.gif "Create module page")
+
+With this last step, we've created our own module, more precisely two modules: `addressbook` for frontend rendering and `adressbookadmin` for the administration purpose. For the module `addressbookadmin` we've created a migration file and from this we've automatically generated the needed data tables. Using the LUYA code wizard, we also created the models with the CRUD view for each data table. We also learned how to link the `group` names to the `group_id` field in the `Contact` CRUD view and rendering them as a dropdown select.
+For the frontend module implementation we heavily relied on Yii 2.0 great toolsets to render the table data and only added some inline styling and hover functionality.
+
+Depending on your test data, the final result will look something like this in the frontend view:
+
+![Preview frontend](img/addressbook-demo.gif "Preview frontend")
+
