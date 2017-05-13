@@ -1,13 +1,13 @@
 <?php
 
 namespace luya\admin\ngrest\plugins;
-
-use Yii;
+;
 use yii\db\ActiveRecordInterface;
 use luya\helpers\ArrayHelper;
 
 /**
  * DropDown Select
+ * 
  * Create a selection dropdown based on an ActiveRecord Model.
  *
  * Example usage:
@@ -21,7 +21,7 @@ use luya\helpers\ArrayHelper;
  * }
  * ```
  *
- * The label data will automatically sorted by the label in ASC direction.
+ * If there is no valueField value provided the primary key from the `modelClass` will be returned automatically. The label data will automatically sorted by the label in ASC direction.
  *
  * The labelField can also provided as callable method:
  *
@@ -32,6 +32,9 @@ use luya\helpers\ArrayHelper;
  * ```
  * 
  * You can also use the quick mode which finds the primary key by itself, therfore just keep valueField empty.
+ *
+ * @property string $valueField The field name which should represent the value of the data array. This value will be stored in the database and is mostly the primary key of the $modelClass Model.
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class SelectModel extends Select
@@ -40,11 +43,6 @@ class SelectModel extends Select
      * @var string The className of the ActiveRecord or NgRestModel in order to build the ActiveQuery find methods.
      */
     public $modelClass = null;
-    
-    /**
-     * @var string The field name which should represent the value of the data array. This value will be stored in the database.
-     */
-    public $valueField = null;
     
     /**
      * @var string|array|callable An array or string to select the data from, this data will be returned in the select overview.
@@ -99,8 +97,8 @@ class SelectModel extends Select
     /**
      * Data DI Container for relation data.
      *
-     * @param unknown $class
-     * @param unknown $where
+     * @param string $class
+     * @param string|array $where
      * @return mixed
      */
     private static function getDataInstance($class, $where)
@@ -117,11 +115,19 @@ class SelectModel extends Select
         return static::$_dataInstance[$class];
     }
     
+    /**
+     * Flush Instances
+     */
     private static function flushDataInstances()
     {
         static::$_dataInstance = [];
     }
     
+    /**
+     * 
+     * @param ActiveRecordInterface $model
+     * @return mixed|unknown
+     */
     private function generateLabelField(ActiveRecordInterface $model)
     {
         if (is_callable($this->labelField, false)) {
@@ -148,6 +154,39 @@ class SelectModel extends Select
         return implode(" ", $values);
     }
     
+    private $_valueField = null;
+    
+    /**
+     * Getter Method for valueField.
+     * 
+     * If no value is provided it will auto matically return the primary key of the derived model class.
+     * 
+     * @return string The primary key from `modelClass`.
+     */
+    public function getValueField()
+    {
+    	if ($this->_valueField === null) {
+    		$class = $this->modelClass;
+    		$this->_valueField = implode("", $class::primaryKey());
+    	}
+    	
+    	return $this->_valueField;
+    }
+    
+    /**
+     * Setter method for valueField.
+     *
+     * @param string $value The field name which should represent the value of the data array. This value will be stored in the database and is mostly the primary key
+     * of the $modelClass Model.
+     */
+    public function setValueField($value)
+    {
+    	$this->_valueField = $value;
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function getData()
     {
         $data = [];
@@ -156,10 +195,6 @@ class SelectModel extends Select
         
         if (is_object($class)) {
             $class = $class::className();
-        }
-        
-        if (!$this->valueField) {
-            $this->valueField = implode("", $class::primaryKey());
         }
         
         foreach (static::getDataInstance($class, $this->where) as $item) {

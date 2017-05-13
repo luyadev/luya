@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1303](https://github.com/luyadev/luya/issues/1303) NgRest SelectModel valueField is automatically retrieved from the model class if no value is provided.
 - [#1291](https://github.com/luyadev/luya/issues/1291) Replace User Sidebar with User Dashboard to change Password.
 - [#1288](https://github.com/luyadev/luya/issues/1288) Added Color-Wheel NgRest Plugin and Angular Type.
 - [#1287](https://github.com/luyadev/luya/issues/1287) Sortable Plugin and Trait added.

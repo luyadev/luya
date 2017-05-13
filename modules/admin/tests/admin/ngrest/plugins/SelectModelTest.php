@@ -187,16 +187,10 @@ class SelectModelTest extends AdminTestCase
             'i18n' => false,
             'modelClass' => User::class,
             'labelField' => function ($model) {
-            return $model->firstname . '@' . $model->lastname;
+            	return $model->firstname . '@' . $model->lastname;
             }
-            ]);
+        ]);
         
-        
-        $this->assertSame([
-            0 => ['value' => 2, 'label' => 'Jane@Doe'],
-            1 => ['value' => 1, 'label' => 'John@Doe'],
-        ], $plugin->getData());
-        
-        unset($plugin);
+		$this->assertSame('id', $plugin->valueField);
     }
 }
