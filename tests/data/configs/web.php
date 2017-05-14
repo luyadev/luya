@@ -25,6 +25,9 @@ return [
         ],
     ],
     'components' => [
+    	'composition' => [
+    		'hidden' => false,
+    	],
         'request' => [
             'forceWebRequest' => true,
         ],
