@@ -39,7 +39,7 @@ class Composition extends Component implements \ArrayAccess
      * @var bool Enable or disable the->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
      * returns the full prefix composition pattern based url.
      */
-    public $hidden = false;
+    public $hidden = true;
 
     /**
      * @var string Url matching prefix, which is used for all the modules (e.g. an e-store requireds a language
@@ -78,19 +78,12 @@ class Composition extends Component implements \ArrayAccess
     public $hostInfoMapping = [];
 
     /**
-     * @var array Read-Only property, contains all composition key value paringins
-     */
-    private $_composition = [];
-
-    private $_compositionKeys = [];
-
-    /**
      * Class constructor, to get data from DiContainer.
      *
      * @param \luya\web\Request $request Request componet resolved from Depency Manager
      * @param array $config The object configuration array
      */
-    public function __construct(\luya\web\Request $request, array $config = [])
+    public function __construct(Request $request, array $config = [])
     {
         $this->request = $request;
         parent::__construct($config);
@@ -106,6 +99,8 @@ class Composition extends Component implements \ArrayAccess
         return $this->default['langShortCode'];
     }
 
+    private $_compositionKeys = [];
+    
     /**
      * Resolve the the composition on init.
      */
@@ -195,6 +190,8 @@ class Composition extends Component implements \ArrayAccess
         // return array with route and resolvedValues
         return ['route' => implode('/', $requestUrlParts), 'resolvedValues' => $resolvedValues, 'compositionKeys' => $keys, 'keys' => $foundKeys];
     }
+    
+    private $_composition = [];
 
     /**
      * Set a new composition key and value in composition array. If the key already exists, it will
