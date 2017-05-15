@@ -107,7 +107,8 @@ table name examples
 + admin_user
 + admin_user_setting
 + admin_group
-+ admin_user_group (ref table between user and group)
++ admin_user_group (Reference table between user and group)
++ admin_user_group_ref (Alternative the reference table can contain the suffix `_ref` or `_rel`)
 + news_data
 + news_category
 
