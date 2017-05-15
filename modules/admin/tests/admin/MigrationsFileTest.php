@@ -4,12 +4,14 @@ namespace admintests;
 
 use Yii;
 use luya\testsuite\traits\MessageFileCompareTrait;
+use luya\testsuite\traits\MigrationFileCheckTrait;
 
-class MigrationsFileTestextends AdminTestCase
+class MigrationsFileTest extends AdminTestCase
 {
+    use MigrationFileCheckTrait;
     
-    public function testFiles()
+    public function testMigrations()
     {
-        $this->compareMessages(Yii::getAlias('@admin/messages'), 'en');
+        $this->checkMigrationFolder('@admin/migrations');
     }
 }
