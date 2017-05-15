@@ -36,7 +36,8 @@
             "luya\\styleguide\\" : "../../modules/styleguide/src",
             "luya\\payment\\" : "../../../luya-module-payment/src",
             "luya\\basicauth\\" : "../../../luya-module-basicauth/src",
-            "luya\\bootstrap4\\" : "../../../luya-bootstrap4/src"
+            "luya\\bootstrap4\\" : "../../../luya-bootstrap4/src",
+            "luya\\estore\\" : "../../../luya-module-estore/src/"
         }
     }
 }

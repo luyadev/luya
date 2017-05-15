@@ -11,5 +11,7 @@ class UserTest extends AdminTestCase
     {
         $model = new UserFixture();
         $model->load();
+        
+        $this->assertInstanceOf('luya\admin\models\User', $model->getModel('user1'));
     }
 }

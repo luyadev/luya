@@ -3,14 +3,14 @@
 namespace admintests;
 
 use Yii;
-use luyatests\data\MessageFileComperatorTrait;
+use luya\testsuite\traits\MessageFileCompareTrait;
 
 class MessageFileTest extends AdminTestCase
 {
-    use MessageFileComperatorTrait;
+    use MessageFileCompareTrait;
     
     public function testFiles()
     {
-        $this->compare(Yii::getAlias('@admin/messages'), 'en');
+        $this->compareMessages(Yii::getAlias('@admin/messages'), 'en');
     }
 }

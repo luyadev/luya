@@ -13,5 +13,7 @@ class SetupControllerTest extends AdminTestCase
     {
         $app = new Application($this->getConfigArray());
         $ctrl = new SetupController('setup', $app);
+        
+        $this->assertInstanceOf('\luya\admin\commands\SetupController', $ctrl);
     }
 }

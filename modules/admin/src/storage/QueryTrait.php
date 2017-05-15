@@ -252,8 +252,9 @@ trait QueryTrait
         foreach ($args as $key => $value) {
             if (in_array($value, $this->_whereOperators, true)) {
                 if (count($args) !== 3) {
-                    throw new Exception(sprintf("Wrong where(['%s']) condition, see http://luya.io/api/cms-menu-query.html#where()-detail for all available conditions.", implode("', '", $args)));
+                    throw new Exception("Wrong where condition. Condition needs an operator and two operands.");
                 }
+                
                 $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
                 break;
             } else {
