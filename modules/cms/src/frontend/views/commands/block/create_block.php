@@ -29,7 +29,7 @@ class <?= $className; ?> extends PhpBlock
      * @var boolean Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
      * in a different way for a better user experience. Container block will not display isDirty colorizing.
      */
-    public $isContainer = false;
+    public $isContainer = true;
 
 <?php endif; ?>
 <?php if ($cacheEnabled): ?>
