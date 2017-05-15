@@ -38,5 +38,9 @@ return [
             'password' => DB_PASS,
             'charset' => 'utf8',
         ],
+    	'sqllite' => [
+    		'class' => 'yii\db\Connection',
+    		'dsn' => 'sqlite::memory:',
+    	]
     ],
 ];

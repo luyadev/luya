@@ -12,6 +12,26 @@ namespace luya\traits;
  */
 trait RegistryTrait
 {
+	/**
+	 * Determines what attribute field in the corresponding model table should be used to find the identifier key.
+	 * 
+	 * @return string The name attribute field defaults to `name`.
+	 */
+	public static function getNameAttribute()
+	{
+		return 'name';
+	}
+	
+	/**
+	 * Determines what attribute field in the corresponding model table should be used to store the identifier key and retrieve its data.
+	 * 
+	 * @return string The value attribute field defaults to `value`.
+	 */
+	public static function getValueAttribute()
+	{
+		return 'value';
+	}
+	
     /**
      * Check whether a config value exists or not
      *
@@ -20,7 +40,7 @@ trait RegistryTrait
      */
     public static function has($name)
     {
-        return (self::find()->where(['name' => $name])->one()) ? true : false;
+        return (self::find()->where([self::getNameAttribute() => $name])->one()) ? true : false;
     }
     
     /**
@@ -31,10 +51,10 @@ trait RegistryTrait
      */
     public static function get($name, $defaultValue = null)
     {
-        $model = self::find()->where(['name' => $name])->asArray()->one();
+        $model = self::find()->where([self::getNameAttribute() => $name])->asArray()->one();
     
         if ($model) {
-            return $model['value'];
+            return $model[self::getValueAttribute()];
         }
     
         return $defaultValue;
@@ -45,14 +65,15 @@ trait RegistryTrait
      *
      * @param string $name
      * @param string $value
+     * @return boolean
      */
     public static function set($name, $value)
     {
-        $model = self::find()->where(['name' => $name])->one();
+        $model = self::find()->where([self::getNameAttribute() => $name])->one();
     
         if ($model) {
             return (bool) $model->updateAttributes([
-                'value' => $value,
+                self::getValueAttribute() => $value,
             ]);
         }
     
@@ -69,10 +90,10 @@ trait RegistryTrait
      */
     public static function remove($name)
     {
-        $model = self::find()->where(['name' => $name])->one();
+        $model = self::find()->where([self::getNameAttribute() => $name])->one();
     
         if ($model) {
-            return (bool) $model->delete();
+            return (bool) $model->deleteAll([self::getNameAttribute() => $name]);
         }
     
         return false;
