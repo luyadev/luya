@@ -10,6 +10,8 @@ use luya\Exception;
  * LUYA web view wrapper.
  *
  * Implements additional helper methods to the Yii web controller.
+ * 
+ * @property string $publicHtml Return the relativ path to your public_html folder
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -76,10 +78,12 @@ class View extends \yii\web\View
      * @param string $route The route to create `module/controller/action`.
      * @param array $params Optional parameters passed as key value pairing.
      * @param boolean $scheme Whether to return static url or not
+     * @deprecated Deprecated since 1.0.0-RC3 use {{luya\helpers\Url::toRoute}} instead. Will be removed in 1.0.0
      * @return string
      */
     public function url($route, array $params = [], $scheme = false)
     {
+    	trigger_error('Deprecated since 1.0.0-RC3 use \luya\helpers\Url::toRoute instead. Will be removed in 1.0.0', E_USER_DEPRECATED);
         $routeParams = [$route];
         foreach ($params as $key => $value) {
             $routeParams[$key] = $value;
