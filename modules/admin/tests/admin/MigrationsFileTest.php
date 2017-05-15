@@ -3,7 +3,6 @@
 namespace admintests;
 
 use Yii;
-use luya\testsuite\traits\MessageFileCompareTrait;
 use luya\testsuite\traits\MigrationFileCheckTrait;
 
 class MigrationsFileTest extends AdminTestCase
