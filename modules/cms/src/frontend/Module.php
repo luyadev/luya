@@ -125,6 +125,6 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     
     public static function t($message, array $params = [])
     {
-        return Yii::t('cms', $message, $params, Yii::$app->adminuser->interfaceLanguage);
+        return Yii::t('cms', $message, $params);
     }
 }

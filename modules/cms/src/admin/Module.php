@@ -242,7 +242,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('cmsadmin', $message, $params, Yii::$app->adminuser->interfaceLanguage);
+        return Yii::t('cmsadmin', $message, $params);
     }
     
     private static $_authorUserId = 0;

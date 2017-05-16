@@ -23,7 +23,6 @@ class Controller extends \luya\web\Controller
      */
     public $disablePermissionCheck = false;
 
-    
     /**
      * Returns the rules for the AccessControl filter behavior.
      *
@@ -76,5 +75,15 @@ class Controller extends \luya\web\Controller
                 'rules' => $this->getRules(),
             ],
         ];
+    }
+    
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            Yii::$app->language = Yii::$app->adminuser->interfaceLanguage;
+            return true;
+        }
+        
+        return false;
     }
 }
