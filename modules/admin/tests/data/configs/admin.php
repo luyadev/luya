@@ -14,6 +14,9 @@ return [
         'admin' => [
             'class' => 'luya\admin\Module',
         ],
+        'crudmodulefolderadmin' => [
+            'class' => 'admintests\data\modules\crudmodulefolder\admin\Module',
+        ]
     ],
     'components' => [
         'request' => [

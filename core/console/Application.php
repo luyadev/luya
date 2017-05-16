@@ -42,7 +42,6 @@ class Application extends \yii\console\Application
             'serve' => 'yii\console\controllers\ServeController',
             // luya default commands
             'migrate' => 'luya\console\commands\MigrateController',
-            'crud' => 'luya\console\commands\CrudController',
             'module' => 'luya\console\commands\ModuleController',
             'import' => 'luya\console\commands\ImportController',
             'health' => 'luya\console\commands\HealthController',

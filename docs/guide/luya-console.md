@@ -21,8 +21,6 @@ Global LUYA commands:
 |`migrate/create migration1 modulename`|Create new migration file named `mymigration1` in the module `modulename`: `migrate/create mymigration1 modulename`.
 |`health`|Tests all basic directory if they are writeable and existing.
 |`health/mailer`|Check if you mailer component is working and can send mails.
-|`crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
-|`crud/model`|Generates only the [NgRestModel](ngrest-model.md). Usage `./vendor/bin/luya crud/model "app\models\Customer"` 
 |`module/create`|Create new [frontend/admin module](app-module.md) with a wizzard.
 |`module/controller/action`|All comands stored in the folder `commands` can be run by default routing.
 
@@ -39,6 +37,8 @@ Admin Module commands:
 |`admin/storage/cleanup-image-table`|Find if dupliations are available in the image table (same filter and file id). If confirmed it will remove all duplications except of one, the first one created.
 |`admin/storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
 |`admin/active-window/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
+|`admin/crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
+|`admin/crud/model`|Generates only the [NgRestModel](ngrest-model.md). Usage `./vendor/bin/luya admin/crud/model "app\models\Customer"` 
 
 CMS Module commands:
 

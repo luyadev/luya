@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1301](https://github.com/luyadev/luya/issues/1301) Move the CRUD commands to the admin module `admin/crud/create` and `admin/crud/model`.
 - [#1289](https://github.com/luyadev/luya/issues/1289) Remove luyaLanguage application property and replace with admin module `interfaceLanguage` property.
 - [#1294](https://github.com/luyadev/luya/issues/1294) Moved Active Window scaffolding command into admin Module.
 - [#1277](https://github.com/luyadev/luya/issues/1277) Renamed getPlacholderValue() to getPlaceholderValue().

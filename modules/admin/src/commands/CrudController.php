@@ -1,15 +1,15 @@
 <?php
 
-namespace luya\console\commands;
+namespace luya\admin\commands;
 
 use Yii;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
 use yii\db\TableSchema;
-use luya\Boot;
+use yii\console\Exception;
+use luya\admin\base\BaseCrudController;
 use luya\helpers\FileHelper;
 use luya\admin\ngrest\base\NgRestModelInterface;
-use yii\console\Exception;
 
 /**
  * Console command to create a NgRest Crud with Controller, Api and Model based on a SQL Table.
@@ -234,7 +234,7 @@ class CrudController extends BaseCrudController
     public function generateApiContent($fileNamespace, $className, $modelClass)
     {
         $alias = Inflector::humanize(Inflector::camel2words($className));
-        return $this->view->render('@luya/console/commands/views/crud/create_api.php', [
+        return $this->view->render('@admin/commands/views/crud/create_api.php', [
             'namespace' => $fileNamespace,
             'className' => $className,
             'modelClass' =>  $modelClass,
@@ -253,7 +253,7 @@ class CrudController extends BaseCrudController
     public function generateControllerContent($fileNamespace, $className, $modelClass)
     {
         $alias = Inflector::humanize(Inflector::camel2words($className));
-        return $this->view->render('@luya/console/commands/views/crud/create_controller.php', [
+        return $this->view->render('@admin/commands/views/crud/create_controller.php', [
             'namespace' => $fileNamespace,
             'className' => $className,
             'modelClass' =>  $modelClass,
@@ -309,7 +309,7 @@ class CrudController extends BaseCrudController
             }
         };
         
-        return $this->view->render('@luya/console/commands/views/crud/create_model.php', [
+        return $this->view->render('@admin/commands/views/crud/create_model.php', [
             'namespace' => $fileNamepsace,
             'className' => $className,
             'luyaVersion' => $this->getGeneratorText('crud/create'),
@@ -337,7 +337,7 @@ class CrudController extends BaseCrudController
      */
     public function generateBuildSummery($apiEndpoint, $apiClassPath, $humanizeModelName, $controllerRoute)
     {
-        return $this->view->render('@luya/console/commands/views/crud/build_summary.php', [
+        return $this->view->render('@admin/commands/views/crud/build_summary.php', [
             'apiEndpoint' => $apiEndpoint,
             'apiClassPath' => $apiClassPath,
             'humanizeModelName' => $humanizeModelName,

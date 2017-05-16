@@ -843,12 +843,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "d5154974738160dbb0f8d48d978d9168bdd8f9ff"
+                "reference": "babaeeea31cd6bd77e949764f1da0051cd275bc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/d5154974738160dbb0f8d48d978d9168bdd8f9ff",
-                "reference": "d5154974738160dbb0f8d48d978d9168bdd8f9ff",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/babaeeea31cd6bd77e949764f1da0051cd275bc4",
+                "reference": "babaeeea31cd6bd77e949764f1da0051cd275bc4",
                 "shasum": ""
             },
             "require-dev": {
@@ -893,7 +893,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-05-11 10:06:15"
+            "time": "2017-05-16 11:04:14"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -901,12 +901,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "36327ff09f027cf5c8718352ea49f35d5e6bc297"
+                "reference": "971c63f01b2bd22bc618dd6f26275093b5fa4304"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/36327ff09f027cf5c8718352ea49f35d5e6bc297",
-                "reference": "36327ff09f027cf5c8718352ea49f35d5e6bc297",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/971c63f01b2bd22bc618dd6f26275093b5fa4304",
+                "reference": "971c63f01b2bd22bc618dd6f26275093b5fa4304",
                 "shasum": ""
             },
             "require": {
@@ -942,7 +942,7 @@
                 "module",
                 "php"
             ],
-            "time": "2017-05-15 15:00:07"
+            "time": "2017-05-16 11:05:13"
         },
         {
             "name": "myclabs/deep-copy",
