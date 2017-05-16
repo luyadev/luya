@@ -27,8 +27,7 @@ class RegistryTraitTest extends LuyaWebTestCase
 {
 	public function testRegistryTraitHandler()
 	{
-		
-		$r = Yii::$app->sqllite->createCommand()->createTable('mytest', ['name' => 'varchar(120)', 'value' => 'varchar(120)'])->execute();
+		Yii::$app->sqllite->createCommand()->createTable('mytest', ['id' => 'INT(11) PRIMARY KEY', 'name' => 'varchar(120)', 'value' => 'varchar(120)'])->execute();
 		
 		$this->assertFalse(UserStub::has('foo'));
 		$this->assertNull(UserStub::get('foo'));
@@ -38,5 +37,13 @@ class RegistryTraitTest extends LuyaWebTestCase
 		$this->assertTrue(UserStub::remove('foo'));
 		$this->assertFalse(UserStub::has('foo'));
 		
+		// test override
+		
+		$this->assertTrue(UserStub::set('foo', 'bar'));
+		$this->assertTrue(UserStub::set('foo', 'baz'));
+		$this->assertSame('baz', UserStub::get('foo'));
+		$this->assertTrue(UserStub::remove('foo'));
+		$this->assertFalse(UserStub::remove('foo'));
 	}
+	
 }

@@ -93,7 +93,7 @@ trait RegistryTrait
         $model = self::find()->where([self::getNameAttribute() => $name])->one();
     
         if ($model) {
-            return (bool) $model->deleteAll([self::getNameAttribute() => $name]);
+            return (bool) $model->delete();
         }
     
         return false;
