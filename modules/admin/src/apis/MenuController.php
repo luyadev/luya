@@ -56,7 +56,7 @@ class MenuController extends RestController
             foreach ($groupvalue['items'] as $row) {
                 if ($row['permissionIsApi']) {
                     try {
-                        $row['alias'] = Yii::t($data['moduleId'], $row['alias'], [], Yii::$app->luyaLanguage);
+                        $row['alias'] = Yii::t($data['moduleId'], $row['alias'], [], Yii::$app->language);
                     } catch (\Exception $e) {
                     }
                     // @todo check if the user can access this api, otherwise hide this log informations?

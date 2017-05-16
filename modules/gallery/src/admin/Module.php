@@ -32,6 +32,6 @@ class Module extends \luya\admin\base\Module
 
     public static function t($message, array $params = [])
     {
-        return Yii::t('galleryadmin', $message, $params, Yii::$app->luyaLanguage);
+        return Yii::t('galleryadmin', $message, $params, Yii::$app->adminuser->interfaceLanguage);
     }
 }

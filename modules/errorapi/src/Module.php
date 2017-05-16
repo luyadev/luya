@@ -30,6 +30,6 @@ class Module extends \luya\base\Module implements CoreModuleInterface
 
     public static function t($message, array $params = [])
     {
-        return Yii::t('errorapi', $message, $params, Yii::$app->luyaLanguage);
+        return Yii::t('errorapi', $message, $params, Yii::$app->language);
     }
 }

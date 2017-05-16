@@ -50,11 +50,6 @@ return [
     'siteTitle' => 'My Project',
     
     /*
-     * Set the administration area language. Available language short codes: "en", "de" and "ru"
-     */
-    'luyaLanguage' => 'en',
-    
-    /*
      * Let the application know which module should be executed by default (if no url is set). This module must be included 
      * in the modules section. In the most cases you are using the cms as default handler for your website. But the concept
      * of LUYA is also that you can use the Website without the CMS module! 
@@ -79,6 +74,7 @@ return [
         'admin' => [
             'class' => 'luya\admin\Module',
             'secureLogin' => false, // when enabling secure login, the mail component must be proper configured otherwise the auth token mail will not send.
+            'interfaceLanguage' => 'en', // Set the administration area language. 
         ],
         
         /*

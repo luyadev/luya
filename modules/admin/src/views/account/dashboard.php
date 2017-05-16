@@ -99,15 +99,15 @@ use luya\helpers\Url;
             <div class="card-panel grey lighten-3">
                 <p><a href="<?= Url::toRoute(['/admin/default/logout']); ?>" class="btn btn--full-width red"><?= Module::t('layout_btn_logout'); ?></a></p>
                 <br />
-                <div ng-init="settings.lang='<?=Yii::$app->luyaLanguage;?>'">
+                <div ng-init="settings.lang='<?=Yii::$app->language;?>'">
                     <div class="row">
                         <div class="col s12">
                             <div class="input input--select input--vertical">
                                 <label class="input__label black-text" for="layout-changer" style="margin-bottom:5px;"><?= Module::t('layout_rightbar_languagelabel')?></label>
                                 <div class="input__select-wrapper">
                                     <select id="layout-changer" class="input__field" ng-model="settings.lang" ng-change="updateUserProfile(settings)">
-                                        <?php foreach ($this->context->module->uiLanguageDropdown as $key => $lang): ?>
-                                            <option value="<?= $key; ?>" <?php if (Yii::$app->luyaLanguage == $key): ?>selected<?php endif; ?>><?= $lang;?></option>
+                                        <?php foreach ($this->context->module->interfaceLanguageDropdown as $key => $lang): ?>
+                                            <option value="<?= $key; ?>" <?php if (Yii::$app->language== $key): ?>selected<?php endif; ?>><?= $lang;?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

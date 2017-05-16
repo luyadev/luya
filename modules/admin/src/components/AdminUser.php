@@ -5,6 +5,7 @@ namespace luya\admin\components;
 use Yii;
 use yii\web\User;
 use luya\admin\models\UserOnline;
+use yii\web\UserEvent;
 
 /**
  * AdminUser Component.
@@ -41,6 +42,11 @@ class AdminUser extends User
     public $idParam = '__luya_adminId';
     
     /**
+     * @var string Variable to assign the default language from the admin module in order to set default language if not set.
+     */
+    public $defaultLanguage = null;
+    
+    /**
      * @inheritdoc
      */
     public function init()
@@ -53,10 +59,14 @@ class AdminUser extends User
     /**
      * After the login process of the user, set the admin interface language based on the user settings.
      */
-    public function onAfterLogin()
+    public function onAfterLogin(UserEvent $event)
     {
-        Yii::$app->luyaLanguage = $this->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
-        Yii::$app->language = Yii::$app->luyaLanguage;
+        Yii::$app->language = $this->getInterfaceLanguage();
+    }
+
+    public function getInterfaceLanguage()
+    {
+        return $this->getIsGuest() ? $this->defaultLanguage : $this->identity->setting->get('luyadminlanguage', $this->defaultLanguage);
     }
 
     /**

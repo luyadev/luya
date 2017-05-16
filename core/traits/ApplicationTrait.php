@@ -10,7 +10,6 @@ use luya\base\CoreModuleInterface;
 /**
  * LUYA Appliation trait
  *
- * @property string $luyaLanguage Admin Interface language
  * @property string $webroot Returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
  *
@@ -25,14 +24,6 @@ trait ApplicationTrait
      * @var string Title for the application used in different sections like Login screen
      */
     public $siteTitle = 'LUYA Application';
-
-    /**
-     * @var string The internal used language to translate luya message, this is also used for all luya
-     * core modules. Currently available languages
-     * + en
-     * + de
-     */
-    public $luyaLanguage = 'en';
     
     /**
      * @var string|boolean Set a token, which will be used to collect data from a central host, if you want to enable this feature.

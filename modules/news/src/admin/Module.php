@@ -49,6 +49,6 @@ class Module extends \luya\admin\base\Module
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('newsadmin', $message, $params, Yii::$app->luyaLanguage);
+        return Yii::t('newsadmin', $message, $params, Yii::$app->adminuser->interfaceLanguage);
     }
 }

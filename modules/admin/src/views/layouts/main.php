@@ -10,9 +10,9 @@ $this->beginPage()
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?php echo Yii::$app->siteTitle; ?> &rsaquo; {{currentItem.alias}}</title>
+    <title><?= Yii::$app->siteTitle; ?> &rsaquo; {{currentItem.alias}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="<?php echo Url::base(true); ?>/admin" />
+    <base href="<?= Url::base(true); ?>/admin" />
     <style type="text/css">
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   			display: none !important;
@@ -108,7 +108,7 @@ $this->beginPage()
         <div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
             <i class="material-icons left">attach_file</i>
                     <span>
-                        <?php echo Admin::t('layout_select_file'); ?>
+                        <?= Admin::t('layout_select_file'); ?>
                     </span>
         </div>
         <span class="link-selector__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
@@ -166,7 +166,7 @@ $this->beginPage()
                         <span ng-if="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
                             <div class="filemanager__file-dialog">
-                                <span><?php echo Admin::t('layout_filemanager_save_dir'); ?></span>
+                                <span><?= Admin::t('layout_filemanager_save_dir'); ?></span>
                                 <div class="filemanager__file-dialog--buttons">
                                     <span class="btn-floating white">
                                         <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
@@ -180,7 +180,7 @@ $this->beginPage()
                         <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
                         <span ng-if="folderDeleteForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
-                                <span><?php echo Admin::t('layout_filemanager_remove_dir'); ?></span>
+                                <span><?= Admin::t('layout_filemanager_remove_dir'); ?></span>
                                 <div class="filemanager__file-dialog--buttons">
                                     <span class="btn-floating white">
                                         <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
@@ -194,7 +194,7 @@ $this->beginPage()
 
                         <span ng-if="folderDeleteConfirmForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
-                                <span><?php echo Admin::t('layout_filemanager_remove_dir_not_empty'); ?></span>
+                                <span><?= Admin::t('layout_filemanager_remove_dir_not_empty'); ?></span>
                                 <div class="filemanager__file-dialog--buttons">
                                     <span class="btn-floating white">
                                         <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
@@ -225,13 +225,13 @@ $this->beginPage()
 
                 <div class="floating-form left" ng-class="{ 'floating-form--active' : showFolderForm }">
                     <div class="floating-form__form">
-                        <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" placeholder="<?php echo Admin::t('layout_filemanager_folder'); ?>" />
+                        <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" placeholder="<?= Admin::t('layout_filemanager_folder'); ?>" />
                     </div><!-- PREVENT WHITESPACE
                          --><div class="floating-form__actions">
                         <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></span>
                         <span class="floating-form__button floating-form__button--active-close btn-floating" ng-click="folderFormToggler()"><i class="material-icons">add</i></span>
                     </div><!-- PREVENT WHITESPACE
-                         --><span class="floating-form__label" ng-click="folderFormToggler()"><?php echo Admin::t('layout_filemanager_add_folder'); ?></span>
+                         --><span class="floating-form__label" ng-click="folderFormToggler()"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
                 </div>
 
             </div>
@@ -241,7 +241,7 @@ $this->beginPage()
                 <li class="filemanager__folder filemanager__folder--root" ng-class="{'filemanager__folder--active' : currentFolderId == 0 }">
                     <div class="filemanager__folder-button folder-root" ng-click="changeCurrentFolderId(0)">
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--root"></i>
-                        <span class="filemanager__folder-name"><?php echo Admin::t('layout_filemanager_root_dir'); ?></span>
+                        <span class="filemanager__folder-name"><?= Admin::t('layout_filemanager_root_dir'); ?></span>
                     </div>
                     <ul class="filemanager__folders">
                         <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
@@ -261,7 +261,7 @@ $this->beginPage()
                             <span class="btn-floating">
                                 <i class="material-icons">file_upload</i>
                             </span>
-                    <span class="floating-button-label__label"><?php echo Admin::t('layout_filemanager_upload_files'); ?></span>
+                    <span class="floating-button-label__label"><?= Admin::t('layout_filemanager_upload_files'); ?></span>
                 </label>
 
                 <div class="filemanager__search input input--text">
@@ -270,8 +270,8 @@ $this->beginPage()
                     </div>
                 </div>
 
-                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?php echo Admin::t('layout_filemanager_remove_selected_files'); ?></button>
-                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?php echo Admin::t('layout_filemanager_move_selected_files'); ?></button>
+                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Admin::t('layout_filemanager_remove_selected_files'); ?></button>
+                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Admin::t('layout_filemanager_move_selected_files'); ?></button>
 
             </div>
 
@@ -370,8 +370,8 @@ $this->beginPage()
 
         <div class="filemanager__toolbar filemanager__toolbar--bottom">
 
-            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?php echo Admin::t('layout_filemanager_remove_selected_files'); ?></button>
-            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?php echo Admin::t('layout_filemanager_move_selected_files'); ?></button>
+            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Admin::t('layout_filemanager_remove_selected_files'); ?></button>
+            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Admin::t('layout_filemanager_move_selected_files'); ?></button>
 
         </div>
     </div>
@@ -387,8 +387,8 @@ $this->beginPage()
             <div class="toasts__item toasts__item--confirm">
                 <p>{{item.message}}</p>
                 <div class="toasts__item-buttons">
-                    <button type="button" class="btn btn--small grey" ng-click="item.close()"><?php echo Admin::t('button_abort'); ?></button>
-                    <button type="button" class="btn btn--small red" ng-click="item.click()"><?php echo Admin::t('button_confirm'); ?></button>
+                    <button type="button" class="btn btn--small grey" ng-click="item.close()"><?= Admin::t('button_abort'); ?></button>
+                    <button type="button" class="btn btn--small red" ng-click="item.click()"><?= Admin::t('button_confirm'); ?></button>
                 </div>
             </div>
         </div>
@@ -450,27 +450,25 @@ $this->beginPage()
         <table class="bordered">
             <thead>
             <tr>
-                <th><?php echo Admin::t('layout_debug_table_key'); ?></th>
-                <th><?php echo Admin::t('layout_debug_table_value'); ?></th>
+                <th><?= Admin::t('layout_debug_table_key'); ?></th>
+                <th><?= Admin::t('layout_debug_table_value'); ?></th>
             </tr>
             </thead>
-            <tr><td><?php echo Admin::t('layout_debug_luya_version'); ?>:</td><td><?php echo \luya\Boot::VERSION; ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_id'); ?>:</td><td><?php echo Yii::$app->id ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_sitetitle'); ?>:</td><td><?php echo Yii::$app->siteTitle ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_remotetoken'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_assetmanager_forcecopy'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_transfer_exceptions'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_caching'); ?>:</td><td><?= (Yii::$app->has('cache')) ? Yii::$app->cache->className() : $this->context->colorizeValue(false); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_yii_debug'); ?>:</td><td><?php echo $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_yii_env'); ?>:</td><td><?php echo YII_ENV; ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_app_language'); ?>:</td><td><?php echo Yii::$app->language; ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_luya_language'); ?>:</td><td><?php echo Yii::$app->luyaLanguage; ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_yii_timezone'); ?>:</td><td><?php echo Yii::$app->timeZone; ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_php_timezone'); ?>:</td><td><?php echo date_default_timezone_get(); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_php_ini_memory_limit'); ?>:</td><td><?php echo ini_get('memory_limit'); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_php_ini_max_exec'); ?>:</td><td><?php echo ini_get('max_execution_time'); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_php_ini_post_max_size'); ?>:</td><td><?php echo ini_get('post_max_size'); ?></td></tr>
-            <tr><td><?php echo Admin::t('layout_debug_php_ini_upload_max_file'); ?>:</td><td><?php echo ini_get('upload_max_filesize'); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_luya_version'); ?>:</td><td><?= \luya\Boot::VERSION; ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_id'); ?>:</td><td><?= Yii::$app->id ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_sitetitle'); ?>:</td><td><?= Yii::$app->siteTitle ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_remotetoken'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_assetmanager_forcecopy'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_transfer_exceptions'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_caching'); ?>:</td><td><?= (Yii::$app->has('cache')) ? Yii::$app->cache->className() : $this->context->colorizeValue(false); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_yii_debug'); ?>:</td><td><?= $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_yii_env'); ?>:</td><td><?= YII_ENV; ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_yii_timezone'); ?>:</td><td><?= Yii::$app->timeZone; ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_php_timezone'); ?>:</td><td><?= date_default_timezone_get(); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_php_ini_memory_limit'); ?>:</td><td><?= ini_get('memory_limit'); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_php_ini_max_exec'); ?>:</td><td><?= ini_get('max_execution_time'); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_php_ini_post_max_size'); ?>:</td><td><?= ini_get('post_max_size'); ?></td></tr>
+            <tr><td><?= Admin::t('layout_debug_php_ini_upload_max_file'); ?>:</td><td><?= ini_get('upload_max_filesize'); ?></td></tr>
         </table>
     </div>
 
@@ -479,8 +477,8 @@ $this->beginPage()
             <thead>
             <tr>
                 <th></th>
-                <th><?php echo Admin::t('layout_useronline_name'); ?></th>
-                <th><?php echo Admin::t('layout_useronline_mail'); ?></th>
+                <th><?= Admin::t('layout_useronline_name'); ?></th>
+                <th><?= Admin::t('layout_useronline_mail'); ?></th>
                 <td></td>
             </tr>
             </thead>
@@ -508,12 +506,12 @@ $this->beginPage()
 
         <div class="center" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
             <br /><br /><br />
-            <p><?php echo Admin::t('layout_search_min_letters'); ?></p>
+            <p><?= Admin::t('layout_search_min_letters'); ?></p>
         </div>
 
         <div class="center" ng-show="(searchResponse.length == 0 && searchResponse != null) && searchQuery.length > 2">
             <br /><br /><br />
-            <p><?php echo Admin::t('layout_search_no_results'); ?></p>
+            <p><?= Admin::t('layout_search_no_results'); ?></p>
         </div>
 
         <div class="center" ng-show="searchResponse==null && searchQuery.length > 2">

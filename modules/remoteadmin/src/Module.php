@@ -46,6 +46,6 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('remoteadmin', $message, $params, Yii::$app->luyaLanguage);
+        return Yii::t('remoteadmin', $message, $params, Yii::$app->adminuser->interfaceLanguage);
     }
 }

@@ -124,7 +124,7 @@ class AdminMenu extends \yii\base\Component
             }
             
             try {
-                $alias = Yii::t($item['moduleId'], $item['alias'], [], Yii::$app->luyaLanguage);
+                $alias = Yii::t($item['moduleId'], $item['alias'], [], Yii::$app->language);
             } catch (\Exception $err) {
                 $alias = $item['alias'];
             }
@@ -156,7 +156,7 @@ class AdminMenu extends \yii\base\Component
         if (isset($data['groups'])) {
             foreach ($data['groups'] as $groupName => $groupItem) {
                 try {
-                    $data['groups'][$groupName]['name'] = Yii::t($data['moduleId'], $groupItem['name'], [], Yii::$app->luyaLanguage);
+                    $data['groups'][$groupName]['name'] = Yii::t($data['moduleId'], $groupItem['name'], [], Yii::$app->language);
                 } catch (\Exception $e) {
                 }
                 
@@ -177,7 +177,7 @@ class AdminMenu extends \yii\base\Component
                         throw new \Exception('Menu item detected without permission entry');
                     }
                     try {
-                        $alias = Yii::t($data['moduleId'], $data['groups'][$groupName]['items'][$groupItemKey]['alias'], [], Yii::$app->luyaLanguage);
+                        $alias = Yii::t($data['moduleId'], $data['groups'][$groupName]['items'][$groupItemKey]['alias'], [], Yii::$app->language);
                     } catch (\Exception $err) {
                         $alias = $data['groups'][$groupName]['items'][$groupItemKey]['alias'];
                     }

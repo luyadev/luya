@@ -44,9 +44,15 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
     
     /**
+     * @var string The default language for the admin interrace (former known as luyaLanguage).
+     * Currently supported: "en", "de", "fr", "es", "ru", "it", "ua", "el".
+     */
+    public $interfaceLanguage = 'en';
+    
+    /**
      * @var array Available translation messages.
      */
-    public $uiLanguageDropdown = [
+    public $interfaceLanguageDropdown = [
         'en' => 'English',
         'de' => 'Deutsch',
         'ru' => 'Pусский',
@@ -216,7 +222,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         $translations = [];
         foreach ($this->_jsTranslations as $module => $data) {
             foreach ($data as $key) {
-                $translations[$key] = Yii::t($module, $key, [], Yii::$app->luyaLanguage);
+                $translations[$key] = Yii::t($module, $key, [], Yii::$app->language);
             }
         }
         return $translations;
@@ -273,6 +279,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             ],
             'adminuser' => [
                 'class' => AdminUser::className(),
+                'defaultLanguage' => $this->interfaceLanguage,
             ],
             'adminmenu' => [
                 'class' => AdminMenu::className(),
@@ -309,8 +316,8 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      * @param array $params Optional parameters to pass to the translation.
      * @return string The translated message.
      */
-    public static function t($message, array $params = [])
+    public static function t($message, array $params = [], $language = null)
     {
-        return Yii::t('admin', $message, $params, Yii::$app->luyaLanguage);
+        return Yii::t('admin', $message, $params, $language);
     }
 }
