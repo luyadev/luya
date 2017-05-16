@@ -10,6 +10,7 @@ return [
         '@runtime' => dirname(__DIR__) . '/runtime',
         '@data' => dirname(__DIR__),
     ],
+    'language' => 'en',
     'modules' => [
         'admin' => [
             'class' => 'luya\admin\Module',
