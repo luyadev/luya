@@ -71,7 +71,6 @@ class Hook extends Object
      *
      * @param string $name The hook name.
      * @return array An array with {{luya\base\HookEvent}} objects.
-     * objects.
      * @throws Exception
      */
     protected static function trigger($name)
