@@ -3,7 +3,7 @@
 namespace luya\web;
 
 use Yii;
-use luya\helpers\Url;
+
 use luya\Exception;
 
 /**
@@ -38,7 +38,7 @@ class View extends \yii\web\View
             $this->registerMetaTag(['name' => 'csrf-token', 'content' => Yii::$app->request->getCsrfToken()], 'csrfToken');
         }
     }
-    
+
     /**
      * Get the url source for an asset.
      *
@@ -47,6 +47,7 @@ class View extends \yii\web\View
      *
      * @param string $assetName The class name of the asset bundle (without the leading backslash)
      * @return string The internal base path to the asset file.
+     * @throws Exception
      */
     public function getAssetUrl($assetName)
     {

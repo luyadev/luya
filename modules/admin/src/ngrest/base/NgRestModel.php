@@ -6,7 +6,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use luya\admin\ngrest\NgRest;
+
 use luya\admin\behaviors\LogBehavior;
 use luya\admin\base\GenericSearchInterface;
 use luya\admin\ngrest\Config;
@@ -314,11 +314,11 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     private $_ngRestPrimaryKey = null;
-    
+
     /**
      * Getter method for NgRest Primary Key.
-     *
      * @return string
+     * @throws InvalidConfigException
      */
     public function getNgRestPrimaryKey()
     {
@@ -346,8 +346,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      *
-     * @param unknown $field
-     * @param unknown $data
+     * @param string $field
+     * @param mixed $data
      */
     public function addNgRestServiceData($field, $data)
     {

@@ -172,11 +172,11 @@ class Article extends NgRestModel
     
         return $config;
     }
-    
+
     /**
      *
-     * @param string $limit
-     * @return unknown
+     * @param false|int $limit
+     * @return Article[]
      */
     public static function getAvailableNews($limit = false)
     {

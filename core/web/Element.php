@@ -112,8 +112,9 @@ class Element extends \yii\base\Component
      * $element->name($param1);
      * ```
      *
-     * @param string $name   access method name
-     * @param array  $params access method params
+     * @param string $name access method name
+     * @param array $params access method params
+     * @return mixed
      */
     public function __call($name, $params)
     {

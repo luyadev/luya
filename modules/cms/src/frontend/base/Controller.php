@@ -27,6 +27,7 @@ abstract class Controller extends \luya\web\Controller
      * @param boolean|integer $setNavItemTypeId To get the content of a version this parameter will change the database value from the nav item Model
      * to this provided value
      *
+     * @return string
      * @throws NotFoundHttpException
      * @throws MethodNotAllowedHttpException
      */

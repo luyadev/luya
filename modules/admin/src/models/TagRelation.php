@@ -37,7 +37,7 @@ final class TagRelation extends ActiveRecord
             [['tag_id', 'table_name', 'pk_id'], 'safe'],
         ];
     }
-    
+
     /**
      * Get an array with all entries for a table name associated with a primary key.
      *
@@ -45,6 +45,7 @@ final class TagRelation extends ActiveRecord
      *
      * @param string $tableName The table name
      * @param integer $pkId The primary key combination.
+     * @return array|ActiveRecord[]
      */
     public static function getDataForRelation($tableName, $pkId)
     {
@@ -57,6 +58,7 @@ final class TagRelation extends ActiveRecord
      * This methods i mainly used internal to retrieve data for the Active Window. Use the {{luya\admin\traits\TagsTrait}} in your Model instead.
      *
      * @param string $tableName The table name.
+     * @return array|ActiveRecord[]
      */
     public static function getDistinctDataForTable($tableName)
     {

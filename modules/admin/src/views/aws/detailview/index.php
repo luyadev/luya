@@ -1,6 +1,6 @@
 <?php
 use yii\widgets\DetailView;
-use yii\base\Widget;
+
 
 ?>
 <?= DetailView::widget([

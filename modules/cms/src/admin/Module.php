@@ -233,12 +233,13 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             PropertyConsistencyImporter::className(),
         ];
     }
-    
+
     /**
      * Translations for CMS Module.
      *
      * @param unknown $message
      * @param array $params
+     * @return string
      */
     public static function t($message, array $params = [])
     {

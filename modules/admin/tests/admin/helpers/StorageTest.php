@@ -2,7 +2,7 @@
 
 namespace admintests\admin\helpers;
 
-use Yii;
+
 use admintests\AdminTestCase;
 use luya\admin\helpers\Storage;
 

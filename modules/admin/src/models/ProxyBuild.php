@@ -2,7 +2,7 @@
 
 namespace luya\admin\models;
 
-use Yii;
+
 use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;

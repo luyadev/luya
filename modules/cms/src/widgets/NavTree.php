@@ -2,7 +2,7 @@
 
 namespace luya\cms\widgets;
 
-use luya\cms\menu\Query;
+
 use luya\cms\menu\QueryIteratorFilter;
 use luya\helpers\ArrayHelper;
 use Yii;

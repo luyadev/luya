@@ -2,7 +2,7 @@
 
 namespace luya\admin\ngrest\plugins;
 
-use luya\helpers\ArrayHelper;
+
 use luya\admin\ngrest\base\Plugin;
 
 /**

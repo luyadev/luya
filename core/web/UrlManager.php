@@ -3,7 +3,7 @@
 namespace luya\web;
 
 use Yii;
-use luya\helpers\Url;
+
 use yii\web\BadRequestHttpException;
 
 /**

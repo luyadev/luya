@@ -3,7 +3,7 @@
 namespace luya\admin\ngrest;
 
 use yii\base\Object;
-use luya\Exception;
+
 use luya\helpers\ArrayHelper;
 use luya\admin\Module;
 use yii\base\InvalidConfigException;

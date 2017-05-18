@@ -2,7 +2,7 @@
 
 namespace ngresttest;
 
-use luya\admin\components\AdminMenuBuilder;
+
 
 class Module extends \luya\admin\base\Module
 {

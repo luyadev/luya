@@ -3,7 +3,7 @@
 namespace luya\admin;
 
 use Yii;
-use luya\web\UrlRule;
+
 use luya\console\interfaces\ImportControllerInterface;
 use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminLanguage;

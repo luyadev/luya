@@ -370,7 +370,7 @@ class StorageContainer extends Component
     {
         return (new \luya\admin\file\Query())->findOne($fileId);
     }
-    
+
     /**
      * Add a new file based on the source to the storage system.
      *
@@ -389,7 +389,8 @@ class StorageContainer extends Component
      * @param string $fileName The name of this file (must contain data type suffix).
      * @param integer $folderId The id of the folder where the file should be stored in.
      * @param boolean $isHidden Should the file visible in the filemanager or not.
-     * @return \luya\admin\file\Item|\luya\Exception|boolean Returns the item object, if an error happens an exception is thrown.
+     * @return bool|\luya\admin\file\Item|Exception Returns the item object, if an error happens an exception is thrown.
+     * @throws Exception
      */
     public function addFile($fileSource, $fileName, $folderId = 0, $isHidden = false)
     {
@@ -502,7 +503,7 @@ class StorageContainer extends Component
     {
         return (new \luya\admin\image\Query())->findOne($imageId);
     }
-    
+
     /**
      * Add a new image based an existing file Id.
      *
@@ -519,7 +520,8 @@ class StorageContainer extends Component
      * @param integer $fileId The id of the file where image should be created from.
      * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added. Filter can new also be the string name of the filter like `tiny-crop`.
      * @param boolean $throwException Whether the addImage should throw an exception or just return boolean
-     * @return \luya\admin\image\Item|\luya\Exception|boolean Returns the item object, if an error happens and $throwException is off `false` is returned otherwhise an exception is thrown.
+     * @return bool|\luya\admin\image\Item|Exception Returns the item object, if an error happens and $throwException is off `false` is returned otherwhise an exception is thrown.
+     * @throws \Exception
      */
     public function addImage($fileId, $filterId = 0, $throwException = false)
     {

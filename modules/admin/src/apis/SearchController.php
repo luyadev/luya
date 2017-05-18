@@ -21,8 +21,8 @@ class SearchController extends RestController
      * This method returns all node items with an search model class or a generic search interface instance and returns its data.
      *
      * @param string $query The query to search for.
-     * @throws luya\Exception
      * @return array
+     * @throws Exception
      */
     public function actionIndex($query)
     {

@@ -456,11 +456,12 @@ class CrudController extends BaseCrudController
             $this->outputError("Error while writing file '{$file['fileName']}'.");
         }
     }
-    
+
     /**
      * Generate only the ngrest model
      *
      * @param string $model Provide
+     * @throws Exception
      */
     public function actionModel($model = null)
     {

@@ -5,8 +5,7 @@ namespace luya\web;
 use Yii;
 use yii\base\Component;
 use luya\Exception;
-use luya\helpers\Url;
-use luya\web\CompositionAfterSetEvent;
+
 
 /**
  * Composition provides multi lingual handling and detection.

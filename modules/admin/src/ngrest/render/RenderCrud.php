@@ -9,7 +9,7 @@ use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
 use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
-use luya\admin\ngrest\render\RenderCrudInterface;
+
 
 /**
  * 
@@ -98,10 +98,11 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     }
     
     private $_isInline = false;
-    
+
     /**
      * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
      * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
+     * @return bool
      */
     public function getIsInline()
     {
@@ -125,7 +126,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     /*
      * OLD
      */
-    
+
     /**
      * collection all the buttons in the crud list.
      *
@@ -136,8 +137,8 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
      *     ['ngClick' => 'toggle(...)', 'icon' => 'fa fa-fw fa-edit', 'label' => 'Button Label']
      * ];
      * ```
-     *
      * @return returns array with all buttons for this crud
+     * @throws InvalidConfigException
      */
     public function getButtons()
     {
@@ -296,12 +297,13 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         
         return $data;
     }
-    
+
     /**
      * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file!
      *
      * @param unknown_type $element
-     * @param string       $configContext list,create,update
+     * @param string $configContext list,create,update
+     * @return array
      */
     public function createElements($element, $configContext)
     {

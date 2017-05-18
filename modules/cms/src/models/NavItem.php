@@ -259,7 +259,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     {
         $this->updateAttributes(['timestamp_update' => time()]);
     }
-    
+
     /**
      * temp disabled the links for the specific module, cause we are not yet able to handle module integration blocks (find the module inside the content), so wo just
      * display all nav items tempo.
@@ -267,6 +267,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * @todo fix me above!
      *
      * @param unknown $moduleName
+     * @return array|\yii\db\ActiveRecord[]
      */
     public static function fromModule($moduleName)
     {
@@ -327,8 +328,6 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
             ],
         ];
     }
-
-    private static $_navItemModules = [];
     
     public function getLang()
     {

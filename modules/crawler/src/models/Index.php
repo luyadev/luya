@@ -2,11 +2,10 @@
 
 namespace luya\crawler\models;
 
-use Yii;
+
 use luya\crawler\admin\Module;
-use luya\crawler\models\Searchdata;
-use luya\helpers\Url;
-use yii\helpers\Inflector;
+
+
 use Nadar\Stemming\Stemm;
 use yii\db\Expression;
 

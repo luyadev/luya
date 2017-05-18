@@ -3,11 +3,11 @@
 namespace luya\console\commands;
 
 use Yii;
-use Exception;
+
 use luya\admin\models\Config;
 use luya\console\Command;
 use luya\console\interfaces\ImportControllerInterface;
-use luya\base\Module;
+
 
 /**
  * Import controller runs the module defined importer classes.

@@ -23,7 +23,7 @@ class TagMarkdownParser extends GithubMarkdown
      * @var boolean To convert all newlines to <br/>-tags. By default only newlines with two preceding spaces are converted to <br/>-tags.
      */
     public $enableNewlines = true;
-    
+
     /**
      * Disable the url parsing of markdown.
      *
@@ -33,6 +33,7 @@ class TagMarkdownParser extends GithubMarkdown
      * Will not be parsed to an a tag.
      *
      * @param string $markdown
+     * @return array|void
      */
     protected function parseUrl($markdown)
     {

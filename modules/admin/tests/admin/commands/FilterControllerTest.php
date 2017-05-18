@@ -2,7 +2,7 @@
 
 namespace admintests\admin\commands;
 
-use Yii;
+
 use admintests\AdminTestCase;
 use luya\console\Application;
 use luya\admin\commands\FilterController;

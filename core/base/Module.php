@@ -3,7 +3,7 @@
 namespace luya\base;
 
 use yii;
-use Exception;
+
 use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
 use luya\console\interfaces\ImportControllerInterface;

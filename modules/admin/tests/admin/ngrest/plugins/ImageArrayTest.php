@@ -3,7 +3,7 @@
 namespace admintests\admin\ngrest\plugins;
 
 use admintests\AdminTestCase;
-use yii\base\Model;
+
 use yii\base\Event;
 use admintests\data\fixtures\UserFixture;
 use luya\admin\ngrest\plugins\ImageArray;

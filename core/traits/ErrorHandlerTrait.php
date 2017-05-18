@@ -41,6 +41,7 @@ trait ErrorHandlerTrait
      * @param string $message The message you want to send to the error api server.
      * @param string $file The you are currently send the message (use __FILE__)
      * @param string $line The line you want to submit (use __LINE__)
+     * @return bool|null
      */
     public function transferMessage($message, $file = __FILE__, $line = __LINE__)
     {

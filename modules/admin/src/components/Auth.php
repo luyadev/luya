@@ -147,7 +147,7 @@ class Auth extends \yii\base\Component
      *
      * @param integer $userId
      * @param string $apiEndpoint As defined in the Module.php like (api-admin-user) which is a unique identifiere
-     * @param integer $typeVerification The CONST number provided from CAN_*
+     * @param integer|string $typeVerification The CONST number provided from CAN_*
      * @return bool
      */
     public function matchApi($userId, $apiEndpoint, $typeVerification = false)

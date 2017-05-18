@@ -5,8 +5,8 @@ namespace luya\cms\models;
 use Yii;
 use yii\db\Query;
 use luya\Exception;
-use luya\web\View;
-use luya\cms\models\NavItemPageBlockItem;
+
+
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
@@ -111,11 +111,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         return $this->hasOne(Layout::className(), ['id' => 'layout_id']);
     }
-    
+
     /**
      * Get the list of version/pages for a specific nav item id
      *
      * @param unknown $navItemId
+     * @return array|\yii\db\ActiveRecord[]
      */
     public static function getVersionList($navItemId)
     {

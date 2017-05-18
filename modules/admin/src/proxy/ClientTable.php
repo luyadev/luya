@@ -128,8 +128,6 @@ class ClientTable extends Object
         Yii::$app->db->createCommand()->truncateTable($this->getName())->execute();
         
         $rows = $this->getContentRows();
-        $num = count($rows);
-        $counts = ceil($num/25);
 
         $chunks = array_chunk($rows, 25);
         

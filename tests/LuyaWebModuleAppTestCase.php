@@ -3,7 +3,7 @@
 namespace luyatests;
 
 use Yii;
-use luyatests\LuyaTestCaseInterface;
+
 
 require 'vendor/autoload.php';
 require 'data/env.php';

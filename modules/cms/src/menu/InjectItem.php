@@ -94,11 +94,11 @@ class InjectItem extends Object implements InjectItemInterface
     // Getter & Setter
     
     private $_item = null;
-    
+
     /**
      * Returns the evalutead menu item whether from the childOf property or set from the setter method.
-     *
-     * @return \luya\cms\menu\Item
+     * @return Item
+     * @throws Exception
      */
     public function getItem()
     {
@@ -170,11 +170,11 @@ class InjectItem extends Object implements InjectItemInterface
         
         return $this;
     }
-    
+
     /**
      * Getter method for the alias.
-     *
      * @return string The alias with the parent childOf alias prefixed.
+     * @throws Exception
      */
     public function getAlias()
     {

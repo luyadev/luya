@@ -3,7 +3,7 @@
 namespace luyatests\core;
 
 use luyatests\LuyaWebTestCase;
-use luyatests\data\models\DummyBaseModel;
+
 use luya\base\DynamicModel;
 
 class StubTestModel extends DynamicModel

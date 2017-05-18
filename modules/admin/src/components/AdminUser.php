@@ -55,9 +55,10 @@ class AdminUser extends User
         $this->on(self::EVENT_BEFORE_LOGOUT, [$this, 'onBeforeLogout']);
         $this->on(self::EVENT_AFTER_LOGIN, [$this, 'onAfterLogin']);
     }
-    
+
     /**
      * After the login process of the user, set the admin interface language based on the user settings.
+     * @param UserEvent $event
      */
     public function onAfterLogin(UserEvent $event)
     {
@@ -97,7 +98,7 @@ class AdminUser extends User
      * See the {{luya\admin\components\Auth::matchRoute}} for details.
      *
      * @param string $route
-     * @return booelan Whether the current user can request the provided route.
+     * @return bool Whether the current user can request the provided route.
      */
     public function canRoute($route)
     {

@@ -82,11 +82,12 @@ trait RegistryTrait
         $model->name = $name;
         return $model->save();
     }
-    
+
     /**
      * Remove an existing config value
      *
      * @param string $name
+     * @return bool
      */
     public static function remove($name)
     {

@@ -8,7 +8,7 @@ use ArrayAccess;
 use yii\base\Component;
 use yii\web\NotFoundHttpException;
 use yii\db\Query as DbQuery;
-use luya\cms\Exception;
+
 use luya\cms\menu\Query as MenuQuery;
 use luya\cms\models\NavItemModule;
 use luya\traits\CacheableTrait;
@@ -178,6 +178,7 @@ class Menu extends Component implements ArrayAccess
      * ArrayAccess get the current offset key if not yet loaded.
      *
      * @param string $offset Language short code to get
+     * @return array|mixed
      */
     public function offsetGet($offset)
     {
@@ -479,8 +480,8 @@ class Menu extends Component implements ArrayAccess
      * 2. find menu item based on the end of the current path (via array_pop)
      * 3. if no item could be found the home item will be returned
      * 4. otherwise return the alias match from step 2.
-     *
-     * @return \luya\cms\menu\Item
+     * @return Item
+     * @throws NotFoundHttpException
      */
     private function resolveCurrent()
     {
@@ -551,6 +552,7 @@ class Menu extends Component implements ArrayAccess
      * load all navigation items for a specific language id.
      *
      * @param integer $langId
+     * @return array
      */
     private function getNavData($langId)
     {
@@ -606,6 +608,7 @@ class Menu extends Component implements ArrayAccess
      * helper method to see if the request url can be found in the active container.
      *
      * @param array $urlParts
+     * @return bool|Item
      */
     private function aliasMatch(array $urlParts)
     {
@@ -616,8 +619,8 @@ class Menu extends Component implements ArrayAccess
      * Helper method to load all contaienr data for a specific langauge.
      *
      * @param string $langShortCode e.g. de
-     * @throws Exception
      * @return array
+     * @throws NotFoundHttpException
      */
     private function loadLanguageContainer($langShortCode)
     {

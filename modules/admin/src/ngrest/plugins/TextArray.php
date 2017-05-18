@@ -2,7 +2,7 @@
 
 namespace luya\admin\ngrest\plugins;
 
-use yii\helpers\Json;
+
 use luya\admin\ngrest\base\Plugin;
 
 /**
