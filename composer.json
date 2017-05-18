@@ -1,5 +1,4 @@
 {
-    "minimum-stability" : "RC",
     "name" : "luyadev/luya",
     "description" : "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
     "type" : "luya-core",
@@ -17,7 +16,7 @@
         "issues" : "https://github.com/luyadev/luya/issues"
     },
     "require" : {
-        "yiisoft/yii2": "2.0.11",
+        "yiisoft/yii2": "~2.0.0",
         "curl/curl" : "~1.0",
         "phpmailer/phpmailer": "~5.0"
     },
