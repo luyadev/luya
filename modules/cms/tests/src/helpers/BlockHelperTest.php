@@ -23,7 +23,10 @@ class BlockHelperTest extends CmsFrontendTestCase
     }
     public function testImageArrayUpload()
     {
-        $this->assertSame([], BlockHelper::imageArrayUpload(['imageId' => 1, 'imageId' => 2]));
+        $this->assertSame([], BlockHelper::imageArrayUpload([
+            ['imageId' => 1], 
+            ['imageId' => 2]
+        ]));
     }
     
     public function testFileUpload()
@@ -32,7 +35,11 @@ class BlockHelperTest extends CmsFrontendTestCase
     }
     public function testFileArrayUpload()
     {
-        $this->assertSame([], BlockHelper::fileArrayUpload(['fileId' => 1, 'fileId' => 2]));
+        $this->assertSame([], BlockHelper::fileArrayUpload([
+            ['fileId' => 1], 
+            ['fileId' => 2]
+        ]
+        ));
     }
 
     public function testInternalGenerateLinkObject()
