@@ -1,5 +1,7 @@
-Description
+LUYA MODEL EXPORTER
 ===========
+
+> We recommend to use the LUYA Content Proxy instead of the Exporter Module!
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 
