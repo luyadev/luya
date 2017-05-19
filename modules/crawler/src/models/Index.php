@@ -96,7 +96,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         }
         $result = $q->all();
     
-        $searchData = new SearchData();
+        $searchData = new Searchdata();
         $searchData->detachBehavior('LogBehavior');
         $searchData->attributes = [
             'query' => $query,
@@ -127,7 +127,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         
         $result = $activeQuery->all();
         
-        $searchData = new SearchData();
+        $searchData = new Searchdata();
         $searchData->detachBehavior('LogBehavior');
         $searchData->attributes = [
             'query' => $query,
