@@ -1,5 +1,5 @@
 <?php
-use luya\base\Boot;
+
 
 ?># <?= $humanName; ?> Module
  

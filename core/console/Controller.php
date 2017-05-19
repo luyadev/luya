@@ -32,7 +32,6 @@ abstract class Controller extends \yii\console\Controller
      *
      * @param string $message The message which is displayed
      * @param string $color A color from {{\yii\helpers\Console}} color constants.
-     * @param return $color the ansi formated text via echo when muted is disabled.
      */
     protected function output($message, $color = null)
     {
@@ -49,7 +48,7 @@ abstract class Controller extends \yii\console\Controller
      * Helper method to stop the console command with an error message, outputError returns exit code 1.
      *
      * @param string $message The message which should be displayed.
-     * @return number Exit code 1
+     * @return int Exit code 1
      */
     public function outputError($message)
     {
@@ -62,7 +61,7 @@ abstract class Controller extends \yii\console\Controller
      * Helper method to stop the console command with a success message, outputSuccess returns exit code 0.
      *
      * @param string $message The message which sould be displayed
-     * @return number Exit code 0
+     * @return int Exit code 0
      */
     public function outputSuccess($message)
     {
@@ -76,7 +75,7 @@ abstract class Controller extends \yii\console\Controller
      * but does have a different output color (blue). outputInfo returns exit code 0.
      *
      * @param string $message The message which sould be displayed.
-     * @return number Exit code 0
+     * @return int Exit code 0
      */
     public function outputInfo($message)
     {

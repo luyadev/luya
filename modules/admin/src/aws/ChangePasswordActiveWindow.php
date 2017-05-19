@@ -50,6 +50,7 @@ class ChangePasswordActiveWindow extends ActiveWindow
      *
      * @param string $newpass The new password which must be set.
      * @param string $newpasswd The repeation in order to check whether does inputs are equal or not.
+     * @return array
      * @throws \luya\Exception
      */
     public function callbackSave($newpass, $newpasswd)

@@ -7,7 +7,7 @@ use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\base\ViewContextInterface;
 use yii\base\Object;
-use luya\admin\ngrest\base\ActiveWindowView;
+
 use luya\Exception;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
@@ -38,7 +38,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     public $ngRestModelClass = null;
     
     /**
-     * @var the module name in where the active window context is loaded, in order to find view files.
+     * @var string the module name in where the active window context is loaded, in order to find view files.
      */
     public $module = null;
     
@@ -279,6 +279,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
      *
      * @param string $name The view file to render
      * @param array $params Optional params to assign into the view
+     * @return string
      */
     public function render($name, array $params = [])
     {

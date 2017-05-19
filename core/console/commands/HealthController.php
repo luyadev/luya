@@ -4,7 +4,7 @@ namespace luya\console\commands;
 
 use Yii;
 use yii\helpers\FileHelper;
-use yii\helpers\Console;
+
 use yii\imagine\Image;
 
 /**

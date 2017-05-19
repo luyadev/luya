@@ -60,7 +60,7 @@ final class UserSetting extends Object implements \ArrayAccess
      * Get a key of the user settings, dot notation is allowed to return a key of an array.
      *
      * @param string $key
-     * @param string|booelan|null $default
+     * @param string|bool|null $default
      * @return string|array|null
      */
     public function get($key, $default = null)
@@ -101,7 +101,7 @@ final class UserSetting extends Object implements \ArrayAccess
      * Remove an element from the user settings data array.
      *
      * @param string $key
-     * @return void
+     * @return bool
      */
     public function remove($key)
     {
@@ -131,7 +131,7 @@ final class UserSetting extends Object implements \ArrayAccess
      *
      * @param string $key
      * @param array|string|boolean $value
-     * @return booelan
+     * @return bool
      */
     public function set($key, $value)
     {
@@ -153,17 +153,6 @@ final class UserSetting extends Object implements \ArrayAccess
     // ArrayAccess
 
     /**
-     * Setter method for ArrayAccess.
-     *
-     * @param string $offset The offset key
-     * @param midex $value The offset value
-     */
-    public function offsetSet($offset, $value)
-    {
-        return $this->set($offset, $value);
-    }
-
-    /**
      * Exists method for ArrayAccess.
      *
      * @param string $offset The offset key
@@ -175,20 +164,30 @@ final class UserSetting extends Object implements \ArrayAccess
     }
 
     /**
+     * Setter method for ArrayAccess.
+     *
+     * @param string $offset The offset key
+     * @param mixed $value The offset value
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
+    /**
      * Unset method for ArrayAccess.
      *
      * @param string $offset The offset key
      */
     public function offsetUnset($offset)
     {
-        return $this->remove($offset);
+        $this->remove($offset);
     }
 
     /**
      * Getter method for ArrayAccess.
      *
      * @param string $offset The offset key
-     * @param midex $value The offset value
      * @return mixed The value when accessing the array.
      */
     public function offsetGet($offset)

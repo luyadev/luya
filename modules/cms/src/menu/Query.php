@@ -70,7 +70,7 @@ class Query extends Object
     }
 
     private $_where = [];
-    
+
     /**
      * Query where similar behavior of filtering items.
      *
@@ -124,7 +124,8 @@ class Query extends Object
      * ```
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
-     * @return \luya\cms\menu\Query
+     * @return Query
+     * @throws Exception
      */
     public function where(array $args)
     {
@@ -328,13 +329,14 @@ class Query extends Object
     {
         return new Item(['itemArray' => $itemArray, 'lang' => $langContext, 'model' => $model]);
     }
-    
+
     /**
      * Filtering data based on a where expression.
      *
      * @param array $containerData The data to filter from
      * @param array $whereExpression An array with `[['op' => '=', 'field' => 'fieldName', 'value' => 'comparevalue'],[]]`
      * @param array $withCondition An array with with conditions `$with['hidden']`.
+     * @return array
      */
     private function filter(array $containerData, array $whereExpression, array $withCondition)
     {

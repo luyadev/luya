@@ -2,7 +2,7 @@
 
 namespace app\blocks;
 
-use Yii;
+
 use luya\cms\injectors\LinkInjector;
 
 /**

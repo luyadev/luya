@@ -4,7 +4,7 @@ namespace luya\admin\components;
 
 use yii\base\Object;
 use luya\base\AdminModuleInterface;
-use luya\admin\base\GenericSearchInterface;
+
 
 /**
  * Builder class for the Administration Menu/Navigation.
@@ -77,7 +77,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      *
      * @param string $name The name of the node, all names will process trough the `Yii::t` function with its module name as prefix.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
-     * @param string $template Whether to use a custom template or not.
+     * @param bool $template Whether to use a custom template or not.
      * @return \luya\admin\components\AdminMenuBuilder
      */
     public function node($name, $icon, $template = false)
@@ -230,7 +230,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      *
      * @param array $item The item where the option key persists.
      * @param string $optionName The name of the option to get.
-     * @param string $defaultValue The default value if the option is not available for this item.
+     * @param mixed $defaultValue The default value if the option is not available for this item.
      * @return mixed
      */
     public static function getOptionValue(array $item, $optionName, $defaultValue = false)

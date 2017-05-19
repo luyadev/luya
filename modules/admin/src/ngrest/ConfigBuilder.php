@@ -86,7 +86,8 @@ class ConfigBuilder implements ConfigBuilderInterface
      *
      * @param unknown $name
      * @param unknown $args
-     * @return \luya\admin\ngrest\ConfigBuilder
+     * @return ConfigBuilder
+     * @throws Exception
      */
     public function __call($name, $args)
     {
@@ -168,7 +169,7 @@ class ConfigBuilder implements ConfigBuilderInterface
     
         return $this;
     }
-    
+
     /**
      * Creates a new active window object using the given configuration.
      *
@@ -190,13 +191,14 @@ class ConfigBuilder implements ConfigBuilderInterface
      * + a string: representing the class name of the object to be created
      * + a configuration array: the array must contain a `class` element which is treated as the object class,
      *   and the rest of the name-value pairs will be used to initialize the corresponding object properties
-     *
+     * @return $this
+     * @throws Exception
      * @since 1.0.0-beta4
      */
     public function load($objectType)
     {
         if ($this->pointer !== 'aw') {
-            throw new Exception('Register method can only be used in aw pointer context.');
+            throw new Exception('Register method can only be used in a pointer context.');
         }
         
         $object = Yii::createObject($objectType);

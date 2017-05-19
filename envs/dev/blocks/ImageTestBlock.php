@@ -2,7 +2,7 @@
 
 namespace app\blocks;
 
-use Yii;
+
 
 /**
  * Block created with Luya Block Creator Version 1.0.0-RC1-dev at 08.09.2016 16:30
@@ -58,6 +58,7 @@ class ImageTestBlock extends \luya\cms\base\PhpBlock
      * Available twig variables:
      * @param {{extras.image}}
      * @param {{vars.image}}
+     * @return string
      */
     public function admin()
     {

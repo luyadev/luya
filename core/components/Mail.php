@@ -6,7 +6,7 @@ use Yii;
 use luya\Exception;
 use PHPMailer;
 use SMTP;
-use luya\web\View;
+
 use yii\base\Controller;
 
 /**
@@ -235,6 +235,7 @@ class Mail extends \yii\base\Component
      * the passed  content as $content variable in the view.
      *
      * @param string $content The content to wrapp inside the layout.
+     * @return string
      */
     protected function wrapLayout($content)
     {
@@ -401,8 +402,8 @@ class Mail extends \yii\base\Component
 
     /**
      * Trigger the send event of the mailer
-     *
-     * @return boolean
+     * @return bool
+     * @throws Exception
      */
     public function send()
     {

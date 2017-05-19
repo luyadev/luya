@@ -44,9 +44,9 @@ class JsonLd extends Object
     /**
      * Register a Person.
      *
-     * @param unknown $firstname
-     * @param unknown $lastname
-     * @param unknown $jobTitle
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $jobTitle
      */
     public static function person($firstname, $lastname, $jobTitle = null)
     {
@@ -89,8 +89,6 @@ class JsonLd extends Object
             "name" => ArrayHelper::remove($options, 'name', null),
         ]);
     }
-    
-    private static $_graphs = [];
     
     /**
      * Register an json array to the view.

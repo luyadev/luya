@@ -13,7 +13,7 @@ use yii\data\ActiveDataProvider;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
 use luya\admin\base\RestActiveController;
-use luya\admin\components\AdminUser;
+
 use luya\admin\models\UserOnline;
 use luya\admin\ngrest\render\RenderActiveWindow;
 use luya\admin\ngrest\render\RenderActiveWindowCallback;
@@ -80,9 +80,10 @@ class Api extends RestActiveController
     }
     
     private $_model = null;
-    
+
     /**
-     * @return \luya\admin\ngrest\base\NgRestModel
+     * @return NgRestModel
+     * @throws InvalidConfigException
      */
     public function getModel()
     {
@@ -200,9 +201,9 @@ class Api extends RestActiveController
     /**
      * Call the dataProvider for a foreign model.
      * 
-     * @param unknown $arrayIndex
-     * @param unknown $id
-     * @param unknown $modelClass The name of the model where the ngRestRelation is defined.
+     * @param mixed $arrayIndex
+     * @param mixed $id
+     * @param string $modelClass The name of the model where the ngRestRelation is defined.
      * @throws InvalidCallException
      * @return \yii\data\ActiveDataProvider
      */
@@ -275,11 +276,12 @@ class Api extends RestActiveController
     
         return $ngrest->render($render);
     }
-    
+
     /**
      * Prepare a temp file to
      * @todo added very basic csv support, must be stored as class, just a temp solution
      * @return array
+     * @throws ErrorException
      */
     public function actionExport()
     {

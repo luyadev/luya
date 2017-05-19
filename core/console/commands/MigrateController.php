@@ -98,6 +98,8 @@ class MigrateController extends \yii\console\controllers\MigrateController
      *
      * @param string $name The name of the migration
      * @param string|boolean $module The module name where the migration should be placed in.
+     * @return int|void
+     * @throws Exception
      * @todo replace module param with user teminal selection.
      * @see \yii\console\controllers\BaseMigrateController::actionCreate()
      */

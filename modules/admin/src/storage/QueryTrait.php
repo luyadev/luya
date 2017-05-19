@@ -198,7 +198,7 @@ trait QueryTrait
     
         return $this;
     }
-    
+
     /**
      * Query where similar behavior of filtering items.
      *
@@ -245,7 +245,8 @@ trait QueryTrait
      * This will only appaend the first condition where id is bigger then 1 and ignore the second one
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
-     * @return \luya\admin\storage\QueryTrait
+     * @return QueryTrait
+     * @throws Exception
      */
     public function where(array $args)
     {

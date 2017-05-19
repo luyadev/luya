@@ -2,8 +2,8 @@
 
 namespace luya\console;
 
-use Yii;
-use yii\helpers\Console;
+
+
 use luya\traits\ApplicationTrait;
 
 /**

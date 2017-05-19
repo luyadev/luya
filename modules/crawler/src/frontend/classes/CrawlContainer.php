@@ -8,7 +8,7 @@ use yii\base\InvalidConfigException;
 use luya\crawler\models\Builderindex;
 use luya\crawler\models\Index;
 use luya\helpers\Url;
-use luya\crawler\frontend\classes\CrawlPage;
+
 
 class CrawlContainer extends \yii\base\Object
 {

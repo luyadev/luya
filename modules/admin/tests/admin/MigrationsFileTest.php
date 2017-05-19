@@ -2,7 +2,7 @@
 
 namespace admintests;
 
-use Yii;
+
 use luya\testsuite\traits\MigrationFileCheckTrait;
 
 class MigrationsFileTest extends AdminTestCase

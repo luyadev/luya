@@ -2,7 +2,7 @@
 
 namespace crawlerests;
 
-use Yii;
+
 use luyatests\data\MessageFileComperatorTrait;
 use PHPUnit\Framework\TestCase;
 

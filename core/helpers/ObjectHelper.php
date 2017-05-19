@@ -17,6 +17,7 @@ class ObjectHelper
      * Convert Object to Array
      *
      * @param object $object
+     * @return array
      */
     public static function toArray($object)
     {

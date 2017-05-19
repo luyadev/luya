@@ -42,7 +42,7 @@ class Storage
     {
         return isset(self::$uploadErrors[$errorId]) ? self::$uploadErrors[$errorId] : 'unknown error';
     }
-    
+
     /**
      * Create a unique file hash from the file name.
      *
@@ -51,6 +51,7 @@ class Storage
      * So you need to use the "%u" formatter of sprintf() or printf() to get the string representation of the unsigned crc32() checksum in decimal format.
      *
      * @var string $fileName The file name which should be hashed
+     * @return string
      */
     public static function createFileHash($fileName)
     {
@@ -111,12 +112,14 @@ class Storage
         
         return false;
     }
-    
+
     /**
      * Get the image resolution of a given file path.
      *
      * @param string $filePath
+     * @param bool $throwException
      * @return array
+     * @throws Exception
      */
     public static function getImageResolution($filePath, $throwException = false)
     {

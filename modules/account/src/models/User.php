@@ -126,6 +126,7 @@ class User extends NgRestModel implements \yii\web\IdentityInterface
      *
      * @param string $token the token to be looked for
      *
+     * @param null $type
      * @return IdentityInterface|null the identity object that matches the given token.
      */
     public static function findIdentityByAccessToken($token, $type = null)

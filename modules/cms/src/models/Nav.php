@@ -6,11 +6,11 @@ use Yii;
 use yii\db\Query;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
-use luya\admin\models\Property as AdminProperty;
+
 use luya\admin\models\Group;
 use luya\cms\models\Property as CmsProperty;
-use luya\cms\models\NavItem;
-use luya\cms\models\NavItemPageBlockItem;
+
+
 use luya\cms\admin\Module;
 
 /**

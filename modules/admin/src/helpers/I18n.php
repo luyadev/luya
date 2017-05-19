@@ -66,7 +66,7 @@ class I18n
     
         return $value;
     }
-    
+
     /**
      * Decode an arry with i18n values.
      *
@@ -83,6 +83,7 @@ class I18n
      *
      * @param array $array The array to iterator trough and call the {{luya\admin\helpers\I18n::decode}} on its value.
      * @param string $onEmptyValue If the decoded value is not existing or empty, this default value will be used instead of null.
+     * @return array
      */
     public static function decodeArray(array $array, $onEmptyValue = '')
     {

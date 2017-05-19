@@ -4,7 +4,7 @@ namespace admintests\admin\ngrest\aw;
 
 use admintests\AdminTestCase;
 use luya\admin\ngrest\aw\CallbackButtonWidget;
-use yii\base\Widget;
+
 
 class CallbackButtonWidgetTest extends AdminTestCase
 {

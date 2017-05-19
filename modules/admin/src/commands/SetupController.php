@@ -182,11 +182,11 @@ class SetupController extends \luya\console\Command
     
         return $this->outputSuccess("Setup is finished. You can now login into the Administration-Area with the E-Mail '{$this->email}'.");
     }
-    
+
     /**
      * Create a new user and append them to an existing group.
-     *
-     * @return boolean
+     * @return bool
+     * @throws Exception
      */
     public function actionUser()
     {
@@ -236,12 +236,13 @@ class SetupController extends \luya\console\Command
 
         return $this->outputSuccess("The user ($email) has been created.");
     }
-    
+
     /**
      * Helper to insert data in database table.
      *
      * @param string $table The database table
      * @param array $fields The array with insert fields
+     * @return int
      */
     private function insert($table, array $fields)
     {

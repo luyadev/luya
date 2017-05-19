@@ -4,8 +4,7 @@ namespace luya\cms\base;
 
 use yii\base\Object;
 use yii\base\InvalidConfigException;
-use luya\cms\base\BlockInterface;
-use luya\cms\base\InternalBaseBlock;
+
 
 /**
  * The base injector class for all Injectors.
@@ -74,11 +73,13 @@ abstract class BaseBlockInjector extends Object
     {
         return $this->_context;
     }
-    
+
     /**
      * Returns the value of the variable which is defined for this injector object based on it given type.
      *
+     * @param string $varName
      * @param mixed $defaultValue The default value for the variable if not found.
+     * @return mixed
      * @throws InvalidConfigException
      */
     public function getContextConfigValue($varName, $defaultValue = null)

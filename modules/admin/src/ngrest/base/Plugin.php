@@ -7,7 +7,7 @@ use yii\base\Component;
 use yii\helpers\Json;
 use yii\helpers\Html;
 use luya\Exception;
-use luya\admin\ngrest\base\NgRestModel;
+
 use luya\admin\helpers\I18n;
 use luya\helpers\ArrayHelper;
 

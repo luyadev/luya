@@ -4,7 +4,7 @@ namespace luya\crawler\frontend\classes;
 
 use Goutte\Client;
 use yii\base\InvalidConfigException;
-use luya\helpers\Url;
+
 use luya\helpers\StringHelper;
 use Symfony\Component\DomCrawler\Crawler;
 

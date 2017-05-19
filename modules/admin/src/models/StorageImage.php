@@ -3,7 +3,7 @@
 namespace luya\admin\models;
 
 use Yii;
-use luya\admin\models\StorageFile;
+
 use yii\db\ActiveRecord;
 use luya\helpers\FileHelper;
 

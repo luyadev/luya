@@ -2,7 +2,7 @@
 
 namespace luya\web;
 
-use luya\web\GroupUserIdentityInterface;
+
 use yii\base\InvalidConfigException;
 use yii\web\User;
 
@@ -109,6 +109,8 @@ class GroupUser extends User
      * Checks whether a user exists for the provided group based on the GroupUserIdentityInterface implementation
      *
      * @param string|array $alias
+     * @return bool
+     * @throws InvalidConfigException
      */
     public function inGroup($alias)
     {

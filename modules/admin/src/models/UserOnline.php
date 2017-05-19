@@ -98,12 +98,13 @@ final class UserOnline extends ActiveRecord
             ]);
         }
     }
-    
+
     /**
      * Refresh the state of the current user, or add if not exists.
      *
      * @param integer $userId
      * @param string $route
+     * @return bool
      */
     public static function refreshUser($userId, $route)
     {
@@ -118,7 +119,7 @@ final class UserOnline extends ActiveRecord
 
     /**
      * Remove the given user id if exists.
-     * @param unknown $userId
+     * @param int $userId
      */
     public static function removeUser($userId)
     {
@@ -129,7 +130,7 @@ final class UserOnline extends ActiveRecord
     }
 
     /**
-     * @param integer $maxIdleTime Default value in seconds is a half hour (30 * 60) = 1800
+     * @param int $maxIdleTime Default value in seconds is a half hour (30 * 60) = 1800
      */
     public static function clearList($maxIdleTime = 1800)
     {

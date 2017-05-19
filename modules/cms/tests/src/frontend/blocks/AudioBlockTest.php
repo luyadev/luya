@@ -2,7 +2,7 @@
 
 namespace cmstests\src\frontend\blocks;
 
-use luya\cms\frontend\blocks\AudioBlock;
+
 use cmstests\BlockTestCase;
 
 class AudioBlockTest extends BlockTestCase

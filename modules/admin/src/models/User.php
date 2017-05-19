@@ -4,7 +4,7 @@ namespace luya\admin\models;
 
 use Yii;
 use yii\web\IdentityInterface;
-use luya\admin\models\UserLogin;
+
 use luya\admin\aws\ChangePasswordInterface;
 use luya\admin\Module;
 use luya\admin\traits\SoftDeleteTrait;
@@ -333,7 +333,8 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
      *
      * @param string $token the token to be looked for
      *
-     * @return IdentityInterface|null the identity object that matches the given token.
+     * @param null $type
+     * @return null|IdentityInterface the identity object that matches the given token.
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {

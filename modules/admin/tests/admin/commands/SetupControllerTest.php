@@ -2,7 +2,7 @@
 
 namespace admintests\admin\commands;
 
-use Yii;
+
 use admintests\AdminTestCase;
 use luya\admin\commands\SetupController;
 use luya\console\Application;

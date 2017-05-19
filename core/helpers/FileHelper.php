@@ -44,7 +44,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      *
      * @param string $file The file where extension should be append if not existing
      * @param string $extension
-     * @return the ensured file/path with extension
+     * @return string the ensured file/path with extension
      */
     public static function ensureExtension($file, $extension)
     {

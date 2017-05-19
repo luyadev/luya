@@ -9,7 +9,7 @@ use luya\cms\Exception;
 use luya\cms\models\Nav;
 use luya\web\LinkInterface;
 use luya\web\LinkTrait;
-use luya\helpers\Url;
+
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
 

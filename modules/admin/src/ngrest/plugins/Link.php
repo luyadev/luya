@@ -2,7 +2,7 @@
 
 namespace luya\admin\ngrest\plugins;
 
-use Yii;
+
 use luya\admin\ngrest\base\Plugin;
 use luya\cms\helpers\BlockHelper;
 
