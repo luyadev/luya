@@ -35,7 +35,7 @@ class User extends \luya\admin\ngrest\base\NgRestModel
         return [
             'groups' => [
                 'checkboxRelation',
-                'model' => User::className(),
+                'model' => Group::className(),
                 'refJoinTable' => 'admin_user_group',
                 'refModelPkId' => 'group_id',
                 'refJoinPkId' => 'user_id',
