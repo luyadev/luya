@@ -133,6 +133,10 @@ class SelectModel extends Select
         if (is_callable($this->labelField, false)) {
             return call_user_func($this->labelField, $model);
         }
+
+        if ($this->labelField === null) {
+            $this->labelField = $model->attributes();
+        }
         
         $defintion = (array) $this->labelField;
         

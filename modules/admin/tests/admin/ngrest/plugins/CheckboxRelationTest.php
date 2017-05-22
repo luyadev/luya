@@ -29,7 +29,7 @@ class CheckboxRelationTest extends AdminTestCase
             'refJoinTable' => 'admin_user_group',
             'refModelPkId' => 'group_id',
             'refJoinPkId' => 'user_id',
-            'labelFields' => ['firstname', 'lastname', 'email'],
+            'labelField' => ['firstname', 'lastname', 'email'],
             'labelTemplate' =>  '%s %s (%s)'
         ]);
 
@@ -58,7 +58,7 @@ class CheckboxRelationTest extends AdminTestCase
             'refJoinTable' => 'admin_user_group',
             'refModelPkId' => 'group_id',
             'refJoinPkId' => 'user_id',
-            'labelFields' => ['firstname', 'lastname'],
+            'labelField' => ['firstname', 'lastname'],
         ]);
     
         $this->assertSame([
@@ -86,7 +86,7 @@ class CheckboxRelationTest extends AdminTestCase
             'refJoinTable' => 'admin_user_group',
             'refModelPkId' => 'group_id',
             'refJoinPkId' => 'user_id',
-            'labelFields' => function ($model) {
+            'labelField' => function ($model) {
                 return $model['firstname'] . "|". $model['lastname'];
             }
         ]);

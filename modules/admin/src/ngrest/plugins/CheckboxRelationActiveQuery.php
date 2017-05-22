@@ -24,7 +24,7 @@ use luya\admin\ngrest\NgRest;
  *         'adminGroups' => [
  *             'class' => CheckboxRelationActiveQuery::class,
  *             'query' => $this->getGroups(),
- *             'labelFields' => ['name'],
+ *             'labelField' => ['name'],
  *         ],
  *    ];
  * }

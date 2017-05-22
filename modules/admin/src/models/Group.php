@@ -94,7 +94,7 @@ final class Group extends NgRestModel
                 'refJoinTable' => 'admin_user_group',
                 'refModelPkId' => 'group_id',
                 'refJoinPkId' => 'user_id',
-                'labelFields' => ['firstname', 'lastname', 'email'],
+                'labelField' => ['firstname', 'lastname', 'email'],
                 'labelTemplate' =>  '%s %s (%s)'
             ],
         ];
