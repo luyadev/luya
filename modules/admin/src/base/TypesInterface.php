@@ -54,7 +54,8 @@ interface TypesInterface
     const TYPE_WYSIWYG = 'zaa-wysiwyg';
     
     /**
-     * @var string
+     * @var string Retuns the selected value from the options array. Where key is what will be stored and returned and value 
+     * will be display in the admin interfaces dropdown.
      */
     const TYPE_SELECT = 'zaa-select';
     
