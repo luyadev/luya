@@ -107,6 +107,12 @@ class CheckboxRelation extends Plugin
     public $onlyRestScenarios = false;
 
     /**
+     * @var boolean Whether the admin request should be retrived as admin or not, by default its an admin query as this is more performat but
+     * you only have an array within the labelFields closure.
+     */
+    public $asArray = true;
+    
+    /**
      * @inheritdoc
      */
     public function init()
@@ -191,10 +197,13 @@ class CheckboxRelation extends Plugin
     {
         $items = [];
         
-        foreach ($this->model->find()->asArray(true)->all() as $item) {
+        foreach ($this->model->find()->asArray($this->asArray)->all() as $item) {
             if (is_callable($this->labelFields, false)) {
                 $label = call_user_func($this->labelFields, $item);
             } else {
+                if ($this->labelFields === null) {
+                    $this->labelFields = array_keys($item);
+                }
                 $array = ArrayHelper::filter($item, $this->labelFields);
                 
                 foreach ($array as $key => $value) {
