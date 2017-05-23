@@ -20,6 +20,11 @@ use yii\web\ForbiddenHttpException;
 class Controller extends \luya\admin\base\Controller
 {
     /**
+     * @inheritdoc
+     */
+    public $layout = false;
+    
+    /**
      * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
      * is required.
      *
