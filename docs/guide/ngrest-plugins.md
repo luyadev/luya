@@ -61,7 +61,7 @@ class TestPlugin extends Plugin
         return Angular::directive('my-directive', ['model' => $ngModel, 'data' => $this->getServiceName('data')]);
     }
     
-    public function serviceData()
+    public function serviceData($event)
     {
         return [
             'data' => [
