@@ -13,7 +13,7 @@ Most OSX Apache services does not work with the default unix socket defined in y
 #### XAMPP
 
 ```php
-'dsn' => 'mysql:host=localhost;dbname=luyaweb;/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
+'dsn' => 'mysql:host=localhost;dbname=luyaweb;unix_socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
 ```
 
 ## Misc issues
