@@ -2,6 +2,8 @@
 
 namespace luya\helpers;
 
+use yii\web\ForbiddenHttpException;
+
 /**
  * Helper methods when dealing with Arrays.
  *
@@ -171,5 +173,55 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
         });
         
         return $keys;
+    }
+    
+    /**
+     * Generate an Array from a Rang with an appending optional Text.
+     * 
+     * This is commonly used when generate dropDowns in forms to select a number of something.
+     * 
+     * When $text is an array, the first key is the singular value to use, the second is the pluralized value.
+     * 
+     * ```php
+     * $range = ArrayHelper::generateRange(1, 3, 'ticket');
+     * // array (1 => "1 ticket", 2 => "2 ticket", 3 => "3 ticket")
+     * ```
+     * 
+     * Using the pluralized texts:
+     * 
+     * ```php
+     * $range = ArrayHelper::generateRange(1, 3, ['ticket', 'tickets']);
+     * // array (1 => "1 ticket", 2 => "2 tickets", 3 => "3 tickets")
+     * ```
+     * 
+     * In php range() function is used to generate the array range.
+     * 
+     * @param string|integer $from The range starts from
+     * @param string|integer $to The range ends
+     * @param string|array $text Optinal text to append to each element. If an array is given the first value is used
+     * for the singular value, the second will be used for the pluralized values.
+     * @return array An array where the key is the number and value the number with optional text.
+     */
+    public static function generateRange($from, $to, $text = null)
+    {
+        $range = range($from, $to);
+        $array = array_combine($range, $range);
+        
+        if ($text) {
+            array_walk($array, function(&$item, $key) use ($text) {
+                if (is_array($text)) {
+                    list ($singular, $plural) = $text;
+                    if ($key == 1) {
+                        $item = "{$key} {$singular}";
+                    } else {
+                        $item = "{$key} {$plural}";
+                    }
+                } else {
+                    $item = "{$key} {$text}";
+                }
+            });
+        }
+        
+        return $array;
     }
 }
