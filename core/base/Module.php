@@ -136,21 +136,50 @@ abstract class Module extends \yii\base\Module
                 throw new InvalidConfigException(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
-        $this->registerTranslations();
+        
+        $this->registerTranslationArray($this->translations);
     }
     
     /**
-     * register the translation service for luya
+     * Internal used to register the translations from the translation array.
+     * @param array $translations
      */
-    private function registerTranslations()
+    protected function registerTranslationArray(array $translations)
     {
-        foreach ($this->translations as $translation) {
-            Yii::$app->i18n->translations[$translation['prefix']] = [
-                'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => $translation['basePath'],
-                'fileMap' => $translation['fileMap'],
-            ];
+        foreach ($translations as $translation) {
+            $this->registerTranslation($translation['prefix'], $translation['basePath'], $translation['fileMap']);
         }
+    }
+    
+    /**
+     * Register a Translation to the i18n component.
+     * 
+     * In order to register Translations you can either use the $translations array or calling this method
+     * straight after the init() method:
+     * 
+     * ```php
+     * public function init()
+     * {
+     *     parent::init();
+     *     
+     *     $this->registerTranslation('mymodule*', '@mymoduleid/messages', [
+     *         'mymodule' => 'mymodule.php',
+     *         'mymodule/sub' => 'sub.php',
+     *     ]);
+     * }
+     * ```
+     * 
+     * @param string $prefix
+     * @param string $basePath
+     * @param array $fileMap
+     */
+    public function registerTranslation($prefix, $basePath, array $fileMap)
+    {
+        Yii::$app->i18n->translations[$prefix] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => $basePath,
+            'fileMap' => $fileMap,
+        ];
     }
 
     /**
