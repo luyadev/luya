@@ -35,7 +35,7 @@ use luya\traits\CacheableTrait;
  * to cache only the response for the specific parameter.
  *
  * ```php
- * public function behvaiors()
+ * public function behaviors()
  * {
  *     return [
  *         'responseCache' => [
