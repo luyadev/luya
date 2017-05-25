@@ -1,6 +1,6 @@
 {
     "name": "luyadev/luya-kickstarter",
-    "description": "The kickstarter for a new LUYA application.",
+    "description": "The kickstarter project for a new LUYA application.",
     "type": "project",
     "license":"MIT",
     "require": {
@@ -10,7 +10,8 @@
     },
     "require-dev": {
         "yiisoft/yii2-gii" : "~2.0.0",
-        "yiisoft/yii2-debug" : "~2.0.0"
+        "yiisoft/yii2-debug" : "~2.0.0",
+        "luyadev/luya-testsuite": "~1.0.0"
     },
     "scripts": {
         "post-create-project-cmd": [
