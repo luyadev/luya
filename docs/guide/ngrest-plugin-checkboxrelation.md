@@ -12,15 +12,12 @@ Below an example of a User model where you can select the related Groups and sto
 ```php
 class User extends \luya\admin\ngrest\base\NgRestModel
 {    
-
     public $groups = [];
-    
 
     public function extraFields()
     {
         return ['groups']; // add the groups field to the extraFields of this active record
     }
-    
 
     public function rules()
     {
@@ -60,27 +57,46 @@ class User extends \luya\admin\ngrest\base\NgRestModel
 There is also an ability to make checkboxRelation based on an Active Query Relation definition inside your model:
 
 ```php
-public $adminGroups = [];
-
-public function ngRestExtraAttributeTypes()
+class User extends \luya\admin\ngrest\base\NgRestModel
 {
-    return [
-        'adminGroups' => [
-            'class' => CheckboxRelationActiveQuery::class,
-            'query' => $this->getGroups(),
-            'labelField' => ['name'],
-        ],
-   ];
-}
-
-public function extraFields()
-{
-    return ['adminGroups'];
-}
-
-public function getGroups()
-{
-    return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable(ProductGroupRef::tableName(), ['product_id' => 'id']);
+	public $adminGroups = [];
+	
+	public function extraFields()
+	{
+	    return ['adminGroups'];
+	}
+	
+	public function rules()
+	{
+	    return [
+			// ...
+	        [['adminGroups'], 'safe'],
+	    ];
+	}
+	
+	public function getGroups()
+	{
+	    return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable('admin_user_group, ['user_id' => 'id']);
+	}
+	
+	public function ngRestExtraAttributeTypes()
+	{
+	    return [
+	        'adminGroups' => [
+	            'class' => CheckboxRelationActiveQuery::class,
+	            'query' => $this->getGroups(),
+	            'labelField' => ['name'],
+	        ],
+	   ];
+	}
+	
+	public function ngRestScopes($config)
+    {
+        return [
+             // ...
+             [['create', 'update'], ['adminGroups']],
+        ];
+    }
 }
 ```
 
