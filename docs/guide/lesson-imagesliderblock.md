@@ -25,8 +25,8 @@ As LUYA is build upon Yii, we can use the built in asset system. We registrate e
 ```php
 <?php 
 $this->appView->registerJsFile(
-	'//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js', 
-	['depends' => ['\yii\web\JqueryAsset']]
+    '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js', 
+    ['depends' => ['\yii\web\JqueryAsset']]
 );
 ?>
 ```

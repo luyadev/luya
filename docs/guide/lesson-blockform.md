@@ -18,7 +18,7 @@ class TestModel extends Model
     public $name = null;
     public $email = null;
     public $text = null;
-	
+    
     public function rules()
     {
         return [
@@ -27,11 +27,11 @@ class TestModel extends Model
             [['email'], 'email'],
         ];
     }
-	
+    
     public function sendMail()
     {
         // this is what happens on success, like sending a mail
-		
+        
         return Yii::$app->mail
             ->compose('Success Subject', 'You got mail: ' . print_r($this->attributes, true))
             ->address('hello@luya.io')
@@ -39,7 +39,7 @@ class TestModel extends Model
     }
 }
 ```
-					
+                    
 ## Prepare the Block 
 
 Now the Model respons needs to be assigned to the frontend view trough the extra vars section. extra vars are somewhat equals to when assign vars into the view in a controller context. You can assign anything into your view files.
@@ -54,7 +54,7 @@ class MyFormBlock extends \luya\cms\base\PhpBlock
             'model' => $this->prepareModel(),
         ];
     }
-	
+    
     public function prepareModel()
     {
         $model = new TestModel();
@@ -62,7 +62,7 @@ class MyFormBlock extends \luya\cms\base\PhpBlock
             $model->sendMail();
             Yii::$app->session->setFlash('myBlockFormSuccess');
             Yii::$app->response->redirect(Yii::$app->request->url);
-			
+            
             return Yii::$app->end();
         }
  
@@ -70,7 +70,7 @@ class MyFormBlock extends \luya\cms\base\PhpBlock
     }
 }
 ```
-				
+                
 Now the model is available in the extra vars section as model.
 
 ### Render the Form in the View

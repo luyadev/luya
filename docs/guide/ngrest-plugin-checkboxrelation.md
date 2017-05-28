@@ -59,38 +59,38 @@ There is also an ability to make checkboxRelation based on an Active Query Relat
 ```php
 class User extends \luya\admin\ngrest\base\NgRestModel
 {
-	public $adminGroups = [];
-	
-	public function extraFields()
-	{
-	    return ['adminGroups'];
-	}
-	
-	public function rules()
-	{
-	    return [
-			// ...
-	        [['adminGroups'], 'safe'],
-	    ];
-	}
-	
-	public function getGroups()
-	{
-	    return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable('admin_user_group', ['user_id' => 'id']);
-	}
-	
-	public function ngRestExtraAttributeTypes()
-	{
-	    return [
-	        'adminGroups' => [
-	            'class' => CheckboxRelationActiveQuery::class,
-	            'query' => $this->getGroups(),
-	            'labelField' => ['name'],
-	        ],
-	   ];
-	}
-	
-	public function ngRestScopes($config)
+    public $adminGroups = [];
+    
+    public function extraFields()
+    {
+        return ['adminGroups'];
+    }
+    
+    public function rules()
+    {
+        return [
+            // ...
+            [['adminGroups'], 'safe'],
+        ];
+    }
+    
+    public function getGroups()
+    {
+        return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable('admin_user_group', ['user_id' => 'id']);
+    }
+    
+    public function ngRestExtraAttributeTypes()
+    {
+        return [
+            'adminGroups' => [
+                'class' => CheckboxRelationActiveQuery::class,
+                'query' => $this->getGroups(),
+                'labelField' => ['name'],
+            ],
+       ];
+    }
+    
+    public function ngRestScopes($config)
     {
         return [
              // ...

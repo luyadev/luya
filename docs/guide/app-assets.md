@@ -27,8 +27,8 @@ To register an asset file you have to put those files into the config of a modul
 
 ```php
 return [
-	'modules' => [
-		...
+    'modules' => [
+        ...
         'cms' => [
             'class' => 'cms\Module',
             'assets' => [
@@ -36,8 +36,8 @@ return [
                 '\\app\\assets\\FooBarAsset',
             ]
         ],
-		...
-	]
+        ...
+    ]
 ];
 ```
 

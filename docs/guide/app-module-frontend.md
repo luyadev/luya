@@ -34,7 +34,7 @@ LUYA uses the default implementation of the title variable inside the [Yii Titel
 ```php
 public function actionIndex()
 {
-	// change the title of the page
+    // change the title of the page
     $this->view->title = 'Hello World title';
     
     // render your file
@@ -54,7 +54,7 @@ This is equals for meta tags or descriptions:
 ```php
 public function actionIndex()
 {
-	// register meta tag
+    // register meta tag
     $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'Luya, Yii, PHP']);
     $this->view->registerMetaTag(['name' => 'description', 'content' => 'Description of this Page.'], 'metaDescription');
     

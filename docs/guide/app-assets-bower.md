@@ -33,9 +33,9 @@ create php asset class based in your config above:
 ```php
 class JqueryAsset extends \luya\web\Asset
 {
-	public $sourcePath = '@bower';
+    public $sourcePath = '@bower';
 
-	public $js = [
+    public $js = [
         'jquery/dist/jquery.min.js',
         'jquery-ui/jquery-ui.min.js',
     ];

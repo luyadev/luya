@@ -118,19 +118,19 @@ The below view file shows an Angular Controller which collectis data from the th
 <script>
 zaa.bootstrap.register('InlineController', function($scope, $controller) {
 
-	$scope.data = <?= $dataFromController; ?>;
+    $scope.data = <?= $dataFromController; ?>;
 
-	$scope.addToList = function(member) {
-		$scope.$parent.sendActiveWindowCallback('add-to-list', {member:member}).then(function(response) {
-			$scope.$parent.activeWindowReload();
-		});
-	};
+    $scope.addToList = function(member) {
+        $scope.$parent.sendActiveWindowCallback('add-to-list', {member:member}).then(function(response) {
+            $scope.$parent.activeWindowReload();
+        });
+    };
 });
 </script>
 <div class="row" ng-controller="InlineController">
-	<ul>
-		<li ng-click="addToList(member)" ng-repeat="item in data">{{item.name}}</li>
-	</ul>
+    <ul>
+        <li ng-click="addToList(member)" ng-repeat="item in data">{{item.name}}</li>
+    </ul>
 </div>
 ```
 
