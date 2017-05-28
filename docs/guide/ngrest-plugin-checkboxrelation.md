@@ -76,7 +76,7 @@ class User extends \luya\admin\ngrest\base\NgRestModel
 	
 	public function getGroups()
 	{
-	    return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable('admin_user_group, ['user_id' => 'id']);
+	    return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable('admin_user_group', ['user_id' => 'id']);
 	}
 	
 	public function ngRestExtraAttributeTypes()
