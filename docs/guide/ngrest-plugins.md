@@ -21,7 +21,7 @@ A few plugins have options to configure, make sure you check the class reference
 |fileArray          |{{\luya\admin\ngrest\plugins\FileArray}}|array		|Creates an uploader for multiple files and returns an array with the file ids from the storage system.
 |checkboxList		|{{\luya\admin\ngrest\plugins\CheckboxList}}|array		|Create multiple checkboxes and return the selected items as array.
 |[checkboxRelation](ngrest-plugin-checkboxrelation.md) |{{\luya\admin\ngrest\plugins\CheckboxRelation}}|array |Create multiple checkbox based on another model with a via table.
-|CheckboxRelationActiveQuery|{{\luya\admin\ngrest\plugins\CheckboxRelationActiveQuery}}|array |Create an Checkbox Relation based on a current existing relation definition inside the Model.
+|[CheckboxRelationActiveQuery](ngrest-plugin-checkboxrelation.md)|{{\luya\admin\ngrest\plugins\CheckboxRelationActiveQuery}}|array |Create an Checkbox Relation based on a current existing relation definition inside the Model.
 |date				|{{\luya\admin\ngrest\plugins\Date}}|integer |Datepicker to choose date, month and year. Returns the unix timestamp of the selection.
 |datetime 			|{{\luya\admin\ngrest\plugins\Datetime}}|integer |Datepicker to choose date, month, year hour and minute. Returns the unix timestamp of the selection.
 |decimal            |{{\luya\admin\ngrest\plugins\Decimal}}|float	|Creates a decimal input field. First parameter defines optional step size. Default = 0.001

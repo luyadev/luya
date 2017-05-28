@@ -54,3 +54,34 @@ class User extends \luya\admin\ngrest\base\NgRestModel
     }
 }
 ```
+
+## Active Query Relation
+
+There is also an ability to make checkboxRelation based on an Active Query Relation definition inside your model:
+
+```php
+public $adminGroups = [];
+
+public function ngRestExtraAttributeTypes()
+{
+    return [
+        'adminGroups' => [
+            'class' => CheckboxRelationActiveQuery::class,
+            'query' => $this->getGroups(),
+            'labelField' => ['name'],
+        ],
+   ];
+}
+
+public function extraFields()
+{
+    return ['adminGroups'];
+}
+
+public function getGroups()
+{
+    return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable(ProductGroupRef::tableName(), ['product_id' => 'id']);
+}
+```
+
+The difference is mainly to use a variable which is used to store and get data for plugin prefix with `admin`.
