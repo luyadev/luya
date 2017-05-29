@@ -1,4 +1,5 @@
 {
+    "minimum-stability" : "RC",
     "name" : "luyadev/luya",
     "description" : "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
     "type" : "luya-core",
@@ -22,7 +23,7 @@
     },
     "require-dev" : {
         "nadar/github-markdown-fixer" : "~1.0",
-        "phpunit/phpunit" : "~5.0",
+        "luyadev/luya-testsuite" : "~1.0.0",
         "satooshi/php-coveralls": "~1.0"
     },
     "autoload" : {

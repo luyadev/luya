@@ -19,11 +19,11 @@ Set up you your application configuration as follows :
 
 ```
 'modules' => [
-	// ...
-	'exporter' => [
-	    'class' => 'luya\exporter\Module',
+    // ...
+    'exporter' => [
+        'class' => 'luya\exporter\Module',
         'downloadPassword' => 'EnterYourSecureRandomToken',
-	],
+    ],
 ]
 ```
 

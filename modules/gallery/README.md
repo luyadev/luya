@@ -16,9 +16,9 @@ Now add the modules to your configuration in the modules section:
 
 ```php
 'modules' => [
-	// ...
-	'gallery' => 'luya\gallery\frontend\Module',
-	'galleryadmin' => 'luya\gallery\admin\Module',
+    // ...
+    'gallery' => 'luya\gallery\frontend\Module',
+    'galleryadmin' => 'luya\gallery\admin\Module',
 ]
 ```
 
