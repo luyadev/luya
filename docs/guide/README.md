@@ -54,6 +54,7 @@
   + [Creating an image slider block](lesson-imagesliderblock.md)
   + [Using Forms in Blocks](lesson-blockform.md)
   + [Creating a address book admin and frontend module](lesson-module.md)
+  + [Adding an ActiveWindow to the address book module](lesson-aws.md)
 + Developers
   + [LUYA Guidelines](luya-guideline.md)
   + [Collaboration](luya-collaboration.md)
