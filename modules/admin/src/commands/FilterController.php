@@ -16,11 +16,11 @@ use luya\helpers\FileHelper;
  */
 class FilterController extends Command
 {
-    public $identifier = null;
+    public $identifier;
     
-    public $name = null;
+    public $name;
     
-    public $chain = null;
+    public $chain;
     
     /**
      * Create a new image filter to apply on an Image Object.

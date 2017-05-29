@@ -41,7 +41,7 @@ class BlockVariationRegister
     
     private $_variations = [];
     
-    private $_tempIdentifier = null;
+    private $_tempIdentifier;
     
     /**
      * @param InternalBaseBlock $block

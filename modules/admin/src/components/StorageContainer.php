@@ -131,7 +131,7 @@ class StorageContainer extends Component
     /**
      * @var \luya\web\Request Request object resolved by the Dependency Injector.
      */
-    public $request = null;
+    public $request;
     
     private $_fileCacheKey = 'storage_fileCacheKey';
     
@@ -161,7 +161,7 @@ class StorageContainer extends Component
         parent::__construct($config);
     }
     
-    private $_httpPath = null;
+    private $_httpPath;
     
     /**
      * Setter for the http path in order to read online storage files.
@@ -200,7 +200,7 @@ class StorageContainer extends Component
         return $this->_httpPath;
     }
     
-    private $_absoluteHttpPath = null;
+    private $_absoluteHttpPath;
     
     /**
      * Setter fro the absolute http path in order to read from another storage source.
@@ -240,7 +240,7 @@ class StorageContainer extends Component
         return $this->_absoluteHttpPath;
     }
     
-    private $_serverPath = null;
+    private $_serverPath;
     
     /**
      * Get the internal server path to the storage folder.
@@ -270,7 +270,7 @@ class StorageContainer extends Component
         $this->_serverPath = Yii::getAlias($path);
     }
     
-    private $_filesArray = null;
+    private $_filesArray;
     
     /**
      * Get all storage files as an array from database.
@@ -299,7 +299,7 @@ class StorageContainer extends Component
         return (isset($this->filesArray[$fileId])) ? $this->filesArray[$fileId] : false;
     }
     
-    private $_imagesArray = null;
+    private $_imagesArray;
     
     /**
      * Get all storage images as an array from database.
@@ -605,7 +605,7 @@ class StorageContainer extends Component
         return false;
     }
     
-    private $_foldersArray = null;
+    private $_foldersArray;
     
     /**
      * Get all storage folders as an array from database.
@@ -698,7 +698,7 @@ class StorageContainer extends Component
         return false;
     }
     
-    private $_filtersArray = null;
+    private $_filtersArray;
     
     /**
      * Get all storage filters as an array from database.

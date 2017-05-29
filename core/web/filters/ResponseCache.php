@@ -100,7 +100,7 @@ class ResponseCache extends ActionFilter
      * If [[cacheCookies]] or [[cacheHeaders]] is enabled, then [[\yii\caching\Dependency::reusable]] should be enabled as well to save performance.
      * This is because the cookies and headers are currently stored separately from the actual page content, causing the dependency to be evaluated twice.
      */
-    public $dependency = null;
+    public $dependency;
     
     /**
      * @var array The list of actions where the ResponseCache should be applied. You have to define the actions otherwhise the Response
@@ -176,7 +176,7 @@ class ResponseCache extends ActionFilter
         $this->setHasCache($this->calculateCacheKey(), $event->sender->content, $this->dependency, $this->duration);
     }
     
-    private $_cacheKey = null;
+    private $_cacheKey;
     
     /**
      * Calculate the cache key based in several informations in order to make cache key unique.

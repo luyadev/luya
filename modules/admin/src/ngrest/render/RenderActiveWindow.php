@@ -10,9 +10,9 @@ use luya\admin\ngrest\base\Render;
  */
 class RenderActiveWindow extends Render implements RenderInterface
 {
-    private $_itemId = null;
+    private $_itemId;
 
-    public $activeWindowHash = null;
+    public $activeWindowHash;
     
     public function render()
     {

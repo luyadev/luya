@@ -9,7 +9,7 @@ use yii\captcha\CaptchaAction;
 
 class F extends Model
 {
-    public $verifyCode = null;
+    public $verifyCode;
 }
 class DefaultController extends Controller
 {

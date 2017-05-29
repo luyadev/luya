@@ -123,7 +123,7 @@ final class Lang extends NgRestModel
         return $config;
     }
     
-    private static $_langInstanceQuery = null;
+    private static $_langInstanceQuery;
 
     /**
      * @return array
@@ -137,7 +137,7 @@ final class Lang extends NgRestModel
         return self::$_langInstanceQuery;
     }
 
-    private static $_langInstance = null;
+    private static $_langInstance;
     
     /**
      *
@@ -152,7 +152,7 @@ final class Lang extends NgRestModel
         return self::$_langInstance;
     }
 
-    private static $_langInstanceFindActive = null;
+    private static $_langInstanceFindActive;
     
     /**
      * Get the active langauge array

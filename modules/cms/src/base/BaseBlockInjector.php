@@ -35,12 +35,12 @@ abstract class BaseBlockInjector extends Object
     /**
      * @var string The name of the variable on what the injector should use and listen to.
      */
-    public $varName = null;
+    public $varName;
     
     /**
      * @var string The label used in the administration area for this injector.
      */
-    public $varLabel = null;
+    public $varLabel;
     
     /**
      * @var string The type of variable is used for the inject. can be either var or cfg.
@@ -52,7 +52,7 @@ abstract class BaseBlockInjector extends Object
      */
     public $append = false;
     
-    private $_context = null;
+    private $_context;
     
     /**
      * Setter for the context value must be typeof BlockInterface.

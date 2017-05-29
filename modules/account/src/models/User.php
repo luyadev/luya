@@ -7,9 +7,9 @@ use luya\admin\ngrest\base\NgRestModel;
 
 class User extends NgRestModel implements \yii\web\IdentityInterface
 {
-    public $password_confirm = null;
+    public $password_confirm;
 
-    public $plainPassword = null;
+    public $plainPassword;
 
     public function init()
     {

@@ -6,5 +6,5 @@ class FileDownloadEvent extends \yii\base\Event
 {
     public $isValid = true;
     
-    public $file = null;
+    public $file;
 }

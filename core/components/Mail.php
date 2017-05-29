@@ -35,7 +35,7 @@ use yii\base\Controller;
  */
 class Mail extends \yii\base\Component
 {
-    private $_mailer = null;
+    private $_mailer;
 
     /**
      * @var string sender email address
@@ -60,7 +60,7 @@ class Mail extends \yii\base\Component
     /**
      * @var string email server password
      */
-    public $password = null; // insert password
+    public $password; // insert password
 
     /**
      * @var bool disable if you want to use old PHP sendmail

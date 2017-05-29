@@ -15,7 +15,7 @@ use yii\base\ViewContextInterface;
  */
 abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, ViewContextInterface
 {
-    private $_view = null;
+    private $_view;
     
     /**
      * View Object getter.

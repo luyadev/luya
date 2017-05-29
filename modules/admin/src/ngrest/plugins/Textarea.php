@@ -29,7 +29,7 @@ class Textarea extends Plugin
     /**
      * @var string Html5 placholder attribute value to set and example for the user
      */
-    public $placeholder = null;
+    public $placeholder;
 
     /**
      * @var boolean Defines whether the textarea output value should be nl2br or not. This only will be triggerd after find (in frontend output).

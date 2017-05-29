@@ -9,7 +9,7 @@ class Module extends \luya\base\Module implements CoreModuleInterface
 {
     public $recipient = [];
 
-    public $slackToken = null;
+    public $slackToken;
     
     public $slackChannel = '#luya';
 

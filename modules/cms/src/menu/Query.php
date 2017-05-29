@@ -53,7 +53,7 @@ class Query extends Object
      */
     protected $whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
     
-    private $_menu = null;
+    private $_menu;
     
     /**
      * Getter method to return menu component
@@ -157,7 +157,7 @@ class Query extends Object
         return $this->where($args);
     }
 
-    private $_lang = null;
+    private $_lang;
     
     /**
      * Changeing the container in where the data should be collection, by default the composition
@@ -227,7 +227,7 @@ class Query extends Object
         return $this->_lang;
     }
 
-    private $_limit = null;
+    private $_limit;
     
     /**
      * Set a limition for the amount of results.
@@ -244,7 +244,7 @@ class Query extends Object
         return $this;
     }
     
-    private $_offset = null;
+    private $_offset;
     
     /**
      * Define offset start for the rows, if you defined offset to be 5 and you have 11 rows, the

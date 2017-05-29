@@ -10,11 +10,6 @@ use luya\cms\base\PhpBlock;
 
 class GetterSetter extends PhpBlock
 {
-    public function extraVars()
-    {
-        return [];
-    }
-
     public function name()
     {
         return 'name';

@@ -34,7 +34,7 @@ class Api extends RestActiveController
      * public $modelClass = 'admin\models\User';
      * ```
      */
-    public $modelClass = null;
+    public $modelClass;
     
     /**
      * @var boolean Defines whether the automatic pagination should be enabled if more then 200 rows of data stored in this table or not.
@@ -79,7 +79,7 @@ class Api extends RestActiveController
         return $actions;
     }
     
-    private $_model = null;
+    private $_model;
 
     /**
      * @return NgRestModel

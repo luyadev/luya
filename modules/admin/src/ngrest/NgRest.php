@@ -31,9 +31,9 @@ use luya\admin\ngrest\render\RenderInterface;
  */
 class NgRest
 {
-    private $config = null;
+    private $config;
 
-    private $render = null;
+    private $render;
 
     /**
      * Create new NgRest Object.

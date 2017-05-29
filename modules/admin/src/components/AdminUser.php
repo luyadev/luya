@@ -44,7 +44,7 @@ class AdminUser extends User
     /**
      * @var string Variable to assign the default language from the admin module in order to set default language if not set.
      */
-    public $defaultLanguage = null;
+    public $defaultLanguage;
     
     /**
      * @inheritdoc

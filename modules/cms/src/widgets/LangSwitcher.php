@@ -57,7 +57,7 @@ class LangSwitcher extends \luya\base\Widget
     /**
      * @var null|array Singleton container when used for mobile and desktop in order to reduce db requests.
      */
-    private static $_dataArray = null;
+    private static $_dataArray;
     
     /**
      * @var array The Wrapping list element (ul tag) Options to pass.
@@ -114,7 +114,7 @@ class LangSwitcher extends \luya\base\Widget
      * }
      * ```
      */
-    public $itemsCallback = null;
+    public $itemsCallback;
     
     /**
      * Generate the item element.

@@ -66,13 +66,13 @@ class Item extends Object implements LinkInterface, Arrayable
      * @var array The item property containing the informations with key  value parinings. This property will be assigned when creating the
      * Item-Object.
      */
-    public $itemArray = null;
+    public $itemArray;
 
     /**
      * @var string|null Can contain the language context, so the sub querys for this item will be the same language context
      * as the parent object which created this object.
      */
-    public $lang = null;
+    public $lang;
     
     /**
      * @var array Privat property containing with informations for the Query Object.
@@ -281,7 +281,7 @@ class Item extends Object implements LinkInterface, Arrayable
         return $this->itemArray['description'];
     }
 
-    private $_keywords = null;
+    private $_keywords;
     
     private $_delimiters = [',', ';', '|'];
     
@@ -545,7 +545,7 @@ class Item extends Object implements LinkInterface, Arrayable
         return count($this->getChildren()) > 0 ? true : false;
     }
     
-    private $_model = null;
+    private $_model;
     
     /**
      * Get the ActiveRecord Model for the current Nav Model.

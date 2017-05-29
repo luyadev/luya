@@ -18,7 +18,7 @@ use luya\base\CoreModuleInterface;
  */
 trait ApplicationTrait
 {
-    private $_webroot = null;
+    private $_webroot;
     
     /**
      * @var string Title for the application used in different sections like Login screen

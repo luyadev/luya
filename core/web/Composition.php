@@ -32,7 +32,7 @@ class Composition extends Component implements \ArrayAccess
     /**
      * @var \yii\web\Request Request-Object container from DI
      */
-    public $request = null;
+    public $request;
 
     /**
      * @var bool Enable or disable the->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
@@ -309,7 +309,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function removeFrom($route)
     {
-        $pattern = preg_quote($this->getFull().'/');
+        $pattern = preg_quote($this->getFull().'/', '#');
 
         return preg_replace("#$pattern#", '', $route, 1);
     }

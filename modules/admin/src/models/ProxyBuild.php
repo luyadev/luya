@@ -73,7 +73,7 @@ class ProxyBuild extends NgRestModel
         return 'api-admin-proxybuild';
     }
     
-    private $_arrayConfig = null;
+    private $_arrayConfig;
     
     public function getArrayConfig()
     {

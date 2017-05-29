@@ -57,7 +57,7 @@ class TagActiveWindow extends ActiveWindow
      */
     public $icon = "view_list";
 
-    private $_tableName = null;
+    private $_tableName;
     
     public function getTableName()
     {

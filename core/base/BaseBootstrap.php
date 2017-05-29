@@ -16,7 +16,7 @@ abstract class BaseBootstrap implements BootstrapInterface
     /**
      * @var array Readonly variable contains all module Objects.
      */
-    private $_modules = null;
+    private $_modules;
 
     /**
      * Boostrap method will be invoken by Yii Application bootrapping proccess containing

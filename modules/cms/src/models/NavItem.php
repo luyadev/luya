@@ -43,7 +43,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     const TYPE_REDIRECT = 3;
 
-    public $parent_nav_id = null;
+    public $parent_nav_id;
 
     /**
      * @inheritdoc
@@ -131,7 +131,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $this->alias = Inflector::slug($this->alias);
     }
     
-    private $_type = null;
+    private $_type;
     
     /**
      * GET the type object based on the nav_item_type defintion and the nav_item_type_id which is the

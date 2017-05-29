@@ -16,17 +16,17 @@ class ActiveField extends Object
     /**
      * @var \luya\admin\ngrest\aw\CallbackFormWidget The form widget object
      */
-    public $form = null;
+    public $form;
     
     /**
      * @var string The attribute name of the field is isued as identifier to send the post data.
      */
-    public $attribute = null;
+    public $attribute;
     
     /**
      * @var string Pre defined value of the option
      */
-    public $value = null;
+    public $value;
     
     /**
      * @var string|boolean A label which is used when no label is provided from class creation config

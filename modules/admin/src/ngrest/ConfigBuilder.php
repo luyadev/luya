@@ -19,9 +19,9 @@ use luya\helpers\ArrayHelper;
  */
 class ConfigBuilder implements ConfigBuilderInterface
 {
-    protected $pointer = null;
+    protected $pointer;
 
-    protected $field = null;
+    protected $field;
 
     protected $config = [];
 
@@ -35,7 +35,7 @@ class ConfigBuilder implements ConfigBuilderInterface
     /**
      * @var string When the ConfigBuilder is created, this property must be fulfilled by the constructor:
      */
-    public $ngRestModelClass = null;
+    public $ngRestModelClass;
     
     /**
      * Maig setter function, defines whether a pointer exists or not, if not existing it will be created.

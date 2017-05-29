@@ -19,7 +19,7 @@ abstract class BlockConfigElement
 {
     public $item = [];
 
-    protected $id = null;
+    protected $id;
 
     /**
      *

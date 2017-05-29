@@ -29,7 +29,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 {
     use CacheableTrait;
 
-    private $_view = null;
+    private $_view;
 
     /**
      * @inheritdoc

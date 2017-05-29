@@ -10,7 +10,7 @@ require 'data/env.php';
 
 class LuyaConsoleTestCase extends \PHPUnit_Framework_TestCase implements LuyaTestCaseInterface
 {
-    public $app = null;
+    public $app;
 
     public function setUp()
     {

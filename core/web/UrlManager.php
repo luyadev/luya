@@ -39,11 +39,11 @@ class UrlManager extends \yii\web\UrlManager
      *
      * This context setter is called in {{luya\cms\frontend\base\Controller::renderItem}} method and is used when calling {{\luya\web\UrlManager::createUrl}} method.
      */
-    public $contextNavItemId = null;
+    public $contextNavItemId;
 
-    private $_menu = null;
+    private $_menu;
 
-    private $_composition = null;
+    private $_composition;
 
     /**
      * Ensure whether a route starts with a language short key or not.
@@ -191,7 +191,7 @@ class UrlManager extends \yii\web\UrlManager
      */
     public function removeBaseUrl($route)
     {
-        return preg_replace('#'.preg_quote($this->baseUrl).'#', '', $route, 1);
+        return preg_replace('#'.preg_quote($this->baseUrl, '#').'#', '', $route, 1);
     }
 
     /**

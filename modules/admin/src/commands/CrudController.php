@@ -29,27 +29,27 @@ class CrudController extends BaseCrudController
     /**
      * @var string The name of the module which should be used in order to generate the crud structure e.g `cmsadmin`.
      */
-    public $moduleName = null;
+    public $moduleName;
     
     /**
      * @var string The name of the model in camelcase notation e.g `NavItem`.
      */
-    public $modelName = null;
+    public $modelName;
     
     /**
      * @var string The name of the API endpoint based on the modelName und moduleName selections e.g `api-cms-navitem`.
      */
-    public $apiEndpoint = null;
+    public $apiEndpoint;
     
     /**
      * @var string The name of the corresponding model database table e.g. `cms_navitem`.
      */
-    public $dbTableName = null;
+    public $dbTableName;
     
     /**
      * @var boolean Whether the i18n text fields will be casted or not.
      */
-    public $enableI18n = null;
+    public $enableI18n;
     
     /**
      * Get the $moduleName without admin suffix (if any).
@@ -111,7 +111,7 @@ class CrudController extends BaseCrudController
         return strtolower($this->getModuleNameWithoutAdminSuffix().'_'.Inflector::underscore($this->modelName));
     }
     
-    private $_dbTableShema = null;
+    private $_dbTableShema;
     
     /**
      * Get the database table schema.
@@ -147,7 +147,7 @@ class CrudController extends BaseCrudController
         return $this->getModule()->basePath;
     }
     
-    private $_modelBasePath = null;
+    private $_modelBasePath;
     
     /**
      * Get the base path of the module.
@@ -181,7 +181,7 @@ class CrudController extends BaseCrudController
         return $this->getModule()->getNamespace();
     }
     
-    private $_modelNamespace = null;
+    private $_modelNamespace;
     
     public function getModelNamespace()
     {

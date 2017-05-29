@@ -46,7 +46,7 @@ abstract class Importer extends \yii\base\Object
     /**
      * @var mixed|array Read only property contains the importer object.
      */
-    private $_importer = null;
+    private $_importer;
 
     /**
      * Class constructor containing the importer object from where its called.

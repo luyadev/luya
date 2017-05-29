@@ -84,7 +84,7 @@ class Element extends \yii\base\Component
     /**
      * @var string Parsed path of the folder where the view files are stored.
      */
-    private $_folder = null;
+    private $_folder;
 
     /**
      * Yii intializer, is loading the default elements.php if existing.

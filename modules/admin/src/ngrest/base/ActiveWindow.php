@@ -40,7 +40,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     /**
      * @var string the module name in where the active window context is loaded, in order to find view files.
      */
-    public $module = null;
+    public $module;
     
     /**
      * @var string The icon name from goolges material icon set (https://material.io/icons/)
@@ -64,7 +64,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         }
     }
     
-    private $_model = null;
+    private $_model;
     
     /**
      * Get the model object from where the Active Window is attached to.
@@ -80,7 +80,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         return $this->_model;
     }
     
-    private $_configHash = null;
+    private $_configHash;
     
     /**
      * @inheritdoc
@@ -100,7 +100,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         return $this->_configHash;
     }
     
-    private $_activeWindowHash = null;
+    private $_activeWindowHash;
     
     /**
      * @inheritdoc
@@ -187,7 +187,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         return $this->icon;
     }
     
-    private $_name = null;
+    private $_name;
     
     /**
      * Get the ActiveWindow name based on its class short name.
@@ -203,7 +203,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         return $this->_name;
     }
     
-    private $_viewFolderName = null;
+    private $_viewFolderName;
     
     /**
      * Get the folder name where the views for this ActiveWindow should be stored.
@@ -225,7 +225,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         return $this->_viewFolderName;
     }
     
-    private $_hashName = null;
+    private $_hashName;
     
     /**
      * Get a unique identifier hash based on the name and config values like icon and alias.
@@ -258,7 +258,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         return implode(DIRECTORY_SEPARATOR, [Yii::getAlias($module), 'views', 'aws', $this->getViewFolderName()]);
     }
     
-    private $_view = null;
+    private $_view;
     
     /**
      * Get the view object to render templates.
@@ -286,7 +286,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
         return $this->getView()->render($name, $params, $this);
     }
 
-    private $_itemId = null;
+    private $_itemId;
     
     /**
      * @inheritdoc

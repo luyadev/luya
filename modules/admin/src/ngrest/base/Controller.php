@@ -32,7 +32,7 @@ class Controller extends \luya\admin\base\Controller
      * public $modelClass = 'admin\models\User';
      * ```
      */
-    public $modelClass = null;
+    public $modelClass;
 
     /**
      * @var boolean Disables the permission
@@ -51,7 +51,7 @@ class Controller extends \luya\admin\base\Controller
         }
     }
     
-    private $_model = null;
+    private $_model;
 
     /**
      * Get Model Object

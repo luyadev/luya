@@ -37,7 +37,7 @@ class Request extends \yii\web\Request
         'application/json' => 'yii\web\JsonParser',
     ];
     
-    private $_isAdmin = null;
+    private $_isAdmin;
     
     /**
      * Setter method to force isAdmin request.

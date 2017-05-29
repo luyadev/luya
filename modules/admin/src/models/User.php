@@ -46,7 +46,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'eventBeforeValidate']);
     }
     
-    private $_setting = null;
+    private $_setting;
     
     public function getSetting()
     {

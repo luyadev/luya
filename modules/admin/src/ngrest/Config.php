@@ -65,7 +65,7 @@ class Config extends Object implements ConfigInterface
     	$this->_relations = $relations;
     }
     
-    private $_apiEndpoint = null;
+    private $_apiEndpoint;
     
     public function getApiEndpoint()
     {
@@ -101,7 +101,7 @@ class Config extends Object implements ConfigInterface
     	$this->_filters = $filters;
     }
     
-    private $_defaultOrder = null;
+    private $_defaultOrder;
     
     public function getDefaultOrder()
     {
@@ -113,7 +113,7 @@ class Config extends Object implements ConfigInterface
     	$this->_defaultOrder = $defaultOrder;
     }
     
-    private $_groupByField = null;
+    private $_groupByField;
     
     public function getGroupByField()
     {
@@ -125,7 +125,7 @@ class Config extends Object implements ConfigInterface
     	$this->_groupByField = $groupByField;
     }
     
-    private $_tableName = null;
+    private $_tableName;
     
     public function getTableName()
     {
@@ -137,7 +137,7 @@ class Config extends Object implements ConfigInterface
     	$this->_tableName = $tableName;
     }
     
-    private $_primaryKey = null;
+    private $_primaryKey;
     
     public function getPrimaryKey()
     {
@@ -177,7 +177,7 @@ class Config extends Object implements ConfigInterface
         return '+';
     }
 
-    private $_hash = null;
+    private $_hash;
     
     public function getHash()
     {
@@ -284,7 +284,7 @@ class Config extends Object implements ConfigInterface
         return ($this->getPointer('delete') === true) ? true : false;
     }
 
-    private $_plugins = null;
+    private $_plugins;
     
     /**
      * @todo: combine getPlugins and getExtraFields()
@@ -311,7 +311,7 @@ class Config extends Object implements ConfigInterface
         return $this->_plugins;
     }
 
-    private $_extraFields = null;
+    private $_extraFields;
     
     /**
      * @todo: combine getPlugins and getExtraFields()

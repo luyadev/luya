@@ -91,7 +91,7 @@ class ProxyController extends Command
      * can define multible tables ab seperating those with a comma `table1,table2,table`. In order to define only tables with start
      * with a given prefix you can use `app_*` using asterisks symbold to define wild card starts with string defintions.
      */
-    public $table = null;
+    public $table;
     
     /**
      * @var string The production environment Domain where your LUYA application is running in production mode make so to use the right protocolo
@@ -100,17 +100,17 @@ class ProxyController extends Command
      * - http://www.example.com
      * 
      */
-    public $url = null;
+    public $url;
     
     /**
      * @var string The identifier you get from the Machines menu in your production env admin looks like this: lcp58e35acb4ca69
      */
-    public $idf = null;
+    public $idf;
 
     /**
      * @var string The token which is used for the identifier, looks like this: ESOH1isB3ka_dF09ozkDJewpeecGCdUw
      */
-    public $token = null;
+    public $token;
     
     /**
      * @inheritdoc

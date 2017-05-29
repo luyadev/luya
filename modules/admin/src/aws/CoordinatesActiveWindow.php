@@ -32,7 +32,7 @@ class CoordinatesActiveWindow extends ActiveWindow
      * @var string Register your maps application and enter your api key here
      * while configure the active window (https://console.developers.google.com).
      */
-    public $mapsApiKey = null;
+    public $mapsApiKey;
     
     /**
      * @inheritdoc

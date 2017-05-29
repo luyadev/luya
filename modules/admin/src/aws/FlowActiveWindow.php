@@ -53,7 +53,7 @@ class FlowActiveWindow extends ActiveWindow
      */
     public $icon = 'cloud_upload';
     
-    public $modelClass = null;
+    public $modelClass;
     
     /**
      * @inheritdoc
@@ -93,7 +93,7 @@ class FlowActiveWindow extends ActiveWindow
         ]);
     }
     
-    private $_model = null;
+    private $_model;
     
     public function getModel()
     {

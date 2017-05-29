@@ -63,9 +63,9 @@ trait QueryTrait
 {
     private $_where = [];
     
-    private $_offset = null;
+    private $_offset;
     
-    private $_limit = null;
+    private $_limit;
     
     private $_whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
     

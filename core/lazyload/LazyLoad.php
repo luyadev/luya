@@ -25,17 +25,17 @@ class LazyLoad extends Widget
     /**
      * @var string The path to the image you want to lazy load.
      */
-    public $src = null;
+    public $src;
     
     /**
      * @var integer The width of the image, this information should be provided in order to display a placeholder.
      */
-    public $width = null;
+    public $width;
     
     /**
      * @var integer The height of the image, this information should be provided in order to display a placeholder.
      */
-    public $height = null;
+    public $height;
 
     /**
      * @var boolean Define whether a full image tag should be return or only the attributes. This can be applied when using the lazy loader in background images.
@@ -45,7 +45,7 @@ class LazyLoad extends Widget
     /**
      * @var string Additional classes for the lazy load image.
      */
-    public $extraClass = null;
+    public $extraClass;
     
     /**
      * @inheritdoc

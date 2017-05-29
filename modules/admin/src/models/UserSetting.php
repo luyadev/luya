@@ -47,7 +47,7 @@ final class UserSetting extends Object implements \ArrayAccess
 
     public $data = [];
 
-    public $sender = null;
+    public $sender;
 
     private function save()
     {
