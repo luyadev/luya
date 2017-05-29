@@ -4,6 +4,7 @@ namespace luya\admin\ngrest\plugins;
 ;
 use yii\db\ActiveRecordInterface;
 use luya\helpers\ArrayHelper;
+use luya\helpers\StringHelper;
 
 /**
  * DropDown Select
