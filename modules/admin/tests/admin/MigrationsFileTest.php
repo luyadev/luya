@@ -5,6 +5,7 @@ namespace admintests;
 
 use luya\testsuite\traits\MigrationFileCheckTrait;
 
+/*
 class MigrationsFileTest extends AdminTestCase
 {
     use MigrationFileCheckTrait;
@@ -14,3 +15,4 @@ class MigrationsFileTest extends AdminTestCase
         $this->checkMigrationFolder('@admin/migrations');
     }
 }
+*/
