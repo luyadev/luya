@@ -90,7 +90,7 @@ class GroupEmailActiveWindow extends ActiveWindow
         ]);
     }
 
-    public function CallbackSendMail($subject, $text)
+    public function callbackSendMail($subject, $text)
     {
         $mail = Yii::$app->mail->compose($subject, $text);
 
