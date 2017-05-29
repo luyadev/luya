@@ -66,9 +66,9 @@ final class UserSetting extends Object implements \ArrayAccess
     public function get($key, $default = null)
     {
         $array = $this->data;
-        foreach (explode(self::SEPERATOR, $key) as $key) {
-            if (is_array($array) && array_key_exists($key, $array)) {
-                $array = $array[$key];
+        foreach (explode(self::SEPERATOR, $key) as $item) {
+            if (is_array($array) && array_key_exists($item, $array)) {
+                $array = $array[$item];
             } else {
                 return $default;
             }
@@ -86,9 +86,9 @@ final class UserSetting extends Object implements \ArrayAccess
     public function has($key)
     {
         $array = $this->data;
-        foreach (explode(self::SEPERATOR, $key) as $key) {
-            if (is_array($array) && array_key_exists($key, $array)) {
-                $array = $array[$key];
+        foreach (explode(self::SEPERATOR, $key) as $item) {
+            if (is_array($array) && array_key_exists($item, $array)) {
+                $array = $array[$item];
             } else {
                 return false;
             }
@@ -107,14 +107,14 @@ final class UserSetting extends Object implements \ArrayAccess
     {
         if ($this->has($key)) {
             $array = &$this->data;
-            foreach (explode(self::SEPERATOR, $key) as $key) {
-                if (array_key_exists($key, $array)) {
+            foreach (explode(self::SEPERATOR, $key) as $item) {
+                if (array_key_exists($item, $array)) {
                     $lastArray = &$array;
-                    $array = &$array[$key];
+                    $array = &$array[$item];
                 }
             }
             
-            unset($lastArray[$key]);
+            unset($lastArray[$item]);
             if (empty($lastArray)) {
                 unset($lastArray);
             }
@@ -137,11 +137,11 @@ final class UserSetting extends Object implements \ArrayAccess
         $array = &$this->data;
         $keys = explode(self::SEPERATOR, $key);
         $i = 1;
-        foreach ($keys as $key) {
-            if (is_array($array) && array_key_exists($key, $array) && !is_array($array[$key]) && $i !== count($keys)) {
+        foreach ($keys as $item) {
+            if (is_array($array) && array_key_exists($item, $array) && !is_array($array[$item]) && $i !== count($keys)) {
                 return false;
             }
-            $array = &$array[$key];
+            $array = &$array[$item];
             $i++;
         }
         $array = $value;

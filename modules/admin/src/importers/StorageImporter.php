@@ -9,9 +9,12 @@ use Yii;
 use luya\console\Importer;
 
 /**
+ * Storage Importer.
+ * 
  * Storage system importer behavior to cleanup the storage database and folder.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class StorageImporter extends Importer
 {

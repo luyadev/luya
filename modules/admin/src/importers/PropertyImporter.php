@@ -6,6 +6,12 @@ use Yii;
 use luya\admin\models\Property;
 use luya\console\Importer;
 
+/**
+ * Import Properties.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class PropertyImporter extends Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_FIRST;

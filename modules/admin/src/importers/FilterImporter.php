@@ -6,6 +6,12 @@ use luya\admin\models\StorageEffect;
 use luya\admin\models\StorageFilter;
 use luya\console\Importer;
 
+/**
+ * Import Storage Filters.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class FilterImporter extends Importer
 {
     private function refresh($identifier, $fields)
