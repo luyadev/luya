@@ -114,7 +114,6 @@ final class UserSetting extends Object implements \ArrayAccess
                 }
             }
             
-            if (isset($lastArray) && $lastArray[$key]);
             unset($lastArray[$key]);
             if (empty($lastArray)) {
                 unset($lastArray);
