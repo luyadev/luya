@@ -178,31 +178,19 @@ Change the labels in the `attributeLabels()` function to your liking.
 
 ## Frontend presentation
 
-After adding some sample data it's time to add a presentation of our module to the frontend. To do this we'll have two options: using a [frontend module](https://luya.io/guide/app-module-frontend) or using the module block.
-
-### Module block 
-
-If you're using the module block to render the frontend module, you can place other blocks above and below because you're in the CMS context. This is most useful for simple modules which have only one view (i.e. a simple form). If you're linking a detail view inside the module view, you won't leave the page and the detail view will get rendered in the same block. Another disadvantage is the static URL to the page. No matter what you're doing in the module block view, the site URL won't change as you're still in the context of the CMS page where you've placed the module block.
-
-### Frontend module
-
-Using a Frontend Module offer all possibilities: you can define your own layout, you've full control of the URL routes and you're able to control all aspects of the page not just a part of it (from setting the page title tag to defining all detail views). 
-
-## Frontend presentation
-
-After adding some sample data it's time to add a representation of our module to the frontend. To do this we'll have two options: using a [frontend module](https://luya.io/guide/app-module-frontend) or using the module block.
+After adding some sample data it's time to add a representation of our module to the frontend. To do this we'll have two options: using a module page or using the module block. Both cases need an implementation of the [frontend module](https://luya.io/guide/app-module-frontend)
 
 ### Module block 
 
 If you're using the module block to render the frontend module, you can place other blocks above and below because you're in the CMS context. This is most useful for simple modules which have only one view (i.e. a simple form). If you're linking a details view inside the module view, you'll not leave the page and detail view will get rendered in the same block. Another disadvantage is the static URL to the page. No matter what you're doing in the module block view, the site URL won't change as you're still in the context of the CMS page where you've placed the module block.
 
-### Frontend module
+### Module page
 
-Using a Frontend Module offer all possibilities: you can define your own layout, you've full control of the URL routes and you've control over the whole page not just a part of it (from setting the page title tag to defining all detail views). 
+Using a module page offers all possibilities: you can define your own layout, you've full control of the URL routes and you've control over the whole page not just a part of it (from setting the page title tag to defining all detail views). 
 
 ## Set up the frontend module
 
-We're choosing the frontend module path because we want full control over site and we want to define two views, a list and a detail view.
+We're choosing the module page path because we want full control over the site and we want to define two views, a list and a detail view. These two views should fill the whole page and not just a part of it (like a module block).
 
 ### Setting up the DefaultController
 
@@ -266,8 +254,8 @@ class DefaultController extends Controller
 For our first view, the list view, we'll create the `views/default/index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our *$dataproviders* and *$groups* which were defined in our *DefaultController* above. We parse each contact group, print the group name and render the contact data from the data provider. We're setting up some styling options for the grid view and define some custom row options as we want to be able to click on a table entry and see the mouse hovering. For the *onclick* event we define the `location.href` change to link to the detail view and some background color changes for the *onmouseover* and *onmouseout* event. This is how it looks in the end:
 
 ```php
-<? for ($i = 0; $i < count($groups); $i++): ?>
-    <h3><?= $groups[$i]->name ?></h3>
+<? foreach ($groups as $group): ?>
+    <h3><?= $group->name ?></h3>
     <?= \yii\grid\GridView::widget([
         'dataProvider' => $providers[$i],
         'columns' => [
@@ -301,7 +289,7 @@ For our first view, the list view, we'll create the `views/default/index.php` an
         },
         'tableOptions' => ['class' => 'table table-bordered']
     ]); ?>
-<? endfor; ?>
+<? endforeach; ?>
 ```
 
 Again you should work with style sheets, CSS class names and external javascript files, but for the sake of a short example we'll define everything inline.
