@@ -1,14 +1,14 @@
-# How to create a LUYA ActiveWindow
+# How to create a LUYA Active Window
 
 In this lesson we're going to add a special email function to the [address book](https://github.com/luyadev/luya-module-addressbook) which we've created in the [previous lesson](https://github.com/luyadev/luya/blob/master/docs/guide/lesson-module.md). We'll extend the original CRUD view for the contact group list in the CMS with another button. This button will open a window overlay which will give us the possibility to freely add custom actions and views. In our case, we want to add the feature to send all contacts in the group list an email. 
 
 We'll learn how to add and integrate an [ActiveWindow](https://luya.io/guide/ngrest-activewindow) to an existent LUYA module.
 
-## Creating the ActiveWindow
+## Creating the Active Window
 
 As in the previous examples we'll use a LUYA code wizard to create a generic base for our ActiveWindow:
 
-```php
+```sh
 ./vendor/bin/luya aw/create
 ```
 See the GIF below:
@@ -22,9 +22,9 @@ As stated in the [ActiveWindow Documentation]() we'll have to add the button for
 ```php
 public function ngRestActiveWindows()
 {
-	return [
-            ['class' => \app\modules\addressbook\admin\aws\GroupEmailActiveWindow::className(), 'alias' => 'Email to group', 'icon' => 'email'],
-        ];
+    return [
+        ['class' => \app\modules\addressbook\admin\aws\GroupEmailActiveWindow::className(), 'alias' => 'Email to group', 'icon' => 'email'],
+    ];
 }
 ```
 
@@ -37,17 +37,17 @@ The next step is to actual declare our functions, which are needed to send the e
 
 ```php
 'components' => [        
-        /*
-         * Add your smtp connection to the mail component to send mails (which is required for secure login), you can test your
-         * mail component with the luya console command ./vendor/bin/luya health/mailer.
-         */
-        'mail' => [
-            'host' => null,
-            'username' => null,
-            'password' => '',
-            'from' => null,
-            'fromName' => null,
-        ]
+    /*
+     * Add your smtp connection to the mail component to send mails (which is required for secure login), you can test your
+     * mail component with the luya console command ./vendor/bin/luya health/mailer.
+     */
+    'mail' => [
+        'host' => null,
+        'username' => null,
+        'password' => '',
+        'from' => null,
+        'fromName' => null,
+    ]
 ]
 ```
 
@@ -160,8 +160,3 @@ We configured the *CallbackFormWidget* to use our defined callback function in t
 After saving the view file, we've successfully added an ActiveWindow to the *addressbook* module. As you can see, it's fully integrated in our CRUD view, utilizes the already defined [materialize table styles](http://materializecss.com/table.html) and uses the LUYA CMS notification service:
 
 ![Showing the ActiveWindow](img/aws-result.gif "Showing the ActiveWindow")
-
-
-
-
-
