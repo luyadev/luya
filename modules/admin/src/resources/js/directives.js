@@ -58,6 +58,15 @@
 
     // form.js
 
+    /**
+     * Generate form input types based on ZAA Directives.
+     * 
+     * Usage inside another Angular Template:
+     * 
+     * ```php
+     * <zaa-injector dir="zaa-text" options="{}" fieldid="myFieldId" fieldname="myFieldName" initvalue="0" label="My Label" model="mymodel"></zaa-injector>
+     * ```
+     */
     zaa.directive("zaaInjector", function($compile) {
         return {
             restrict: "E",

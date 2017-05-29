@@ -122,19 +122,19 @@ Lets assume we have news articles from an ActiveRecord model you want to select 
 ```php
 class MyBlock extends \luya\cms\base\PhpBlock
 {
-	// ...
-	
-	public function injectors()
-	{
-	    return [
-	        'newsData' => new \luya\cms\injectors\ActiveQueryCheckboxInjector([
-	            'query' => \luya\news\models\Article::find(),
-	            'label' => 'title', // This attribute from the model is used to render the admin block dropdown selection.
-	            'type' => self::INJECTOR_VAR,
-	            'varLabel' => 'Select Aritcles', // The Block form label
-	        ])
-	    ];
-	}
+    // ...
+    
+    public function injectors()
+    {
+        return [
+            'newsData' => new \luya\cms\injectors\ActiveQueryCheckboxInjector([
+                'query' => \luya\news\models\Article::find(),
+                'label' => 'title', // This attribute from the model is used to render the admin block dropdown selection.
+                'type' => self::INJECTOR_VAR,
+                'varLabel' => 'Select Aritcles', // The Block form label
+            ])
+        ];
+    }
 }
 ```
 
@@ -146,14 +146,14 @@ For example your view file could now look like this:
 
 ```php
 foreach ($this->extraValue('newsData') as $model) {
-	echo $model->title; // assuming title is an attribute of the Article model defined in the query part of the injector.
+    echo $model->title; // assuming title is an attribute of the Article model defined in the query part of the injector.
 }
 ```
 
 The following Injectors are currently available:
 
-|Class		|Description
-|---		|---
+|Class        |Description
+|---        |---
 |{{\luya\cms\injectors\ActiveQueryCheckboxInjector}}|Generate as checkbox selection from an ActiveRecord and assignes selected model rows into the extraVars section. In order to select only a specific fields add the `select()` to the ActiveRecord find ActiveQuery.
 |{{\luya\cms\injectors\LinkInjector}}|Generate an ability to select a link and returns the correct url to the link based on the user selection.
 |{{\luya\cms\injectors\TagInjector}}|Generate a checkbox to select all available admin tags and provides api to return those selected tags.

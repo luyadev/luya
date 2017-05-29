@@ -251,10 +251,10 @@ By default, soft delete trait will use the field `is_deleted` to find and delete
 ```php
 public static function FieldStateDescriber()
 {
-	return [
-	    'is_deleted' => [1, 0], // on delete sets `is_deleted = 1`; on find add where `where(['is_deleted' => 0]);`.
-	    'is_inactive' => true, // on delete sets `is_inactive = true`; on find add where `where([is_inactive' => !true]);`.
-	]
+    return [
+        'is_deleted' => [1, 0], // on delete sets `is_deleted = 1`; on find add where `where(['is_deleted' => 0]);`.
+        'is_inactive' => true, // on delete sets `is_inactive = true`; on find add where `where([is_inactive' => !true]);`.
+    ]
 }
 ```
 

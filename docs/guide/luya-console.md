@@ -27,7 +27,7 @@ Global LUYA commands:
 Admin Module commands:
 
 |Command|Description
-|---	|---
+|---    |---
 |`admin/setup`|Execute the *LUYA* Setup will create a user, group and base table informations.
 |`admin/setup/user`|Create a new user for the *LUYA* Admin from command line.
 |`admin/filter`|Generate a [Filter](app-filters.md) Class.
@@ -61,7 +61,7 @@ class NotifyController extends \luya\console\Command
 {
     public function actionIndex()
     {
-    	return $this->outputSuccess('action successfully done');
+        return $this->outputSuccess('action successfully done');
     }
 
     public function actionBar()
@@ -89,7 +89,7 @@ If you want to create a command without a module you can just add the the Comman
 
 ```php
 'controllerMap' => [
-	'sync' => 'app\commands\SyncController',
+    'sync' => 'app\commands\SyncController',
 ],
 ```
 

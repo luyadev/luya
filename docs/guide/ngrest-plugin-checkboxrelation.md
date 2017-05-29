@@ -12,15 +12,12 @@ Below an example of a User model where you can select the related Groups and sto
 ```php
 class User extends \luya\admin\ngrest\base\NgRestModel
 {    
-
     public $groups = [];
-    
 
     public function extraFields()
     {
         return ['groups']; // add the groups field to the extraFields of this active record
     }
-    
 
     public function rules()
     {
@@ -35,11 +32,11 @@ class User extends \luya\admin\ngrest\base\NgRestModel
         return [
             'groups' => [
                 'checkboxRelation',
-                'model' => User::className(),
+                'model' => Group::className(),
                 'refJoinTable' => 'admin_user_group',
                 'refModelPkId' => 'group_id',
                 'refJoinPkId' => 'user_id',
-                'labelFields' => ['firstname', 'lastname', 'email'],
+                'labelField' => ['firstname', 'lastname', 'email'],
                 'labelTemplate' =>  '%s %s (%s)'
             ],
         ];
@@ -54,3 +51,53 @@ class User extends \luya\admin\ngrest\base\NgRestModel
     }
 }
 ```
+
+## Active Query Relation
+
+There is also an ability to make checkboxRelation based on an Active Query Relation definition inside your model:
+
+```php
+class User extends \luya\admin\ngrest\base\NgRestModel
+{
+    public $adminGroups = [];
+    
+    public function extraFields()
+    {
+        return ['adminGroups'];
+    }
+    
+    public function rules()
+    {
+        return [
+            // ...
+            [['adminGroups'], 'safe'],
+        ];
+    }
+    
+    public function getGroups()
+    {
+        return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable('admin_user_group', ['user_id' => 'id']);
+    }
+    
+    public function ngRestExtraAttributeTypes()
+    {
+        return [
+            'adminGroups' => [
+                'class' => CheckboxRelationActiveQuery::class,
+                'query' => $this->getGroups(),
+                'labelField' => ['name'],
+            ],
+       ];
+    }
+    
+    public function ngRestScopes($config)
+    {
+        return [
+             // ...
+             [['create', 'update'], ['adminGroups']],
+        ];
+    }
+}
+```
+
+The difference is mainly to use a variable which is used to store and get data for plugin prefix with `admin`.

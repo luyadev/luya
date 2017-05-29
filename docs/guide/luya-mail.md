@@ -4,14 +4,14 @@ LUYA is shipped with a {{luya\components\Mail}} component who is using the PHPMa
 
 ```php
 'components' => [
-	'mail' => [
-		'host' => 'smtp.host.com',
-		'username' => 'your@user.host.com',
-		'password' => 'YourSmtpPassword',
-		'from' => 'you@luya.io',
-		'fromName' => 'Luya Admin',
-		'altBody' => 'Your HTML ALT BODY'
-	]
+    'mail' => [
+        'host' => 'smtp.host.com',
+        'username' => 'your@user.host.com',
+        'password' => 'YourSmtpPassword',
+        'from' => 'you@luya.io',
+        'fromName' => 'Luya Admin',
+        'altBody' => 'Your HTML ALT BODY'
+    ]
 ]
 ```
 
@@ -68,10 +68,10 @@ The response value of `$mail` (actually its the response of the method `send()`)
 
 ```php
 if (!$mail) {
-	echo "Houston, we have problem: " . PHP_EOL;
-	echo Yii::$app->mail->error;
+    echo "Houston, we have problem: " . PHP_EOL;
+    echo Yii::$app->mail->error;
 } else {
-	echo "Wow, mail has been sent!";
+    echo "Wow, mail has been sent!";
 }
 ```
 
@@ -89,10 +89,10 @@ $mail->mailer->addReplyTo('info@example.com', 'Information');
 $mail->mailer->addCC('cc@example.com');
 $mail->mailer->addBCC('bcc@example.com');
 if (!$mail->send()) {
-	echo "Houston, we have problem: " . PHP_EOL;
-	echo Yii::$app->mail->error;
+    echo "Houston, we have problem: " . PHP_EOL;
+    echo Yii::$app->mail->error;
 } else {
-	echo "Wow, mail has been sent!";
+    echo "Wow, mail has been sent!";
 }
 ```
 

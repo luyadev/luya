@@ -142,4 +142,13 @@ class ArrayHelperTest extends LuyaWebTestCase
         
         $this->assertSame([], ArrayHelper::searchColumns($array, 'foo', 'NOTFOUNDATALL'));
     }
+    
+    public function testGenerateRange()
+    {
+        $this->assertSame([1 => 1, 2 => 2, 3 => 3], ArrayHelper::generateRange(1, 3));
+        $this->assertSame([10 => 10, 9 => 9, 8 => 8], ArrayHelper::generateRange(10, 8));
+        $this->assertSame([1 => "1 Foo", 2 => "2 Foo", 3 => "3 Foo"], ArrayHelper::generateRange(1, 3, 'Foo'));
+        $this->assertSame([1 => "1 Foo", 2 => "2 Foos", 3 => "3 Foos"], ArrayHelper::generateRange(1, 3, ['Foo', 'Foos']));
+        $this->assertSame([2 => "2 Foos", 3 => "3 Foos"], ArrayHelper::generateRange(2, 3, ['Foo', 'Foos']));
+    }
 }

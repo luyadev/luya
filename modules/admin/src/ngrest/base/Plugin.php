@@ -311,7 +311,6 @@ abstract class Plugin extends Component
      */
     public function onSave($event)
     {
-        Yii::trace('Event Trigger: onSave for ' . get_class($this));
         if ($this->isAttributeWriteable($event) && $this->onBeforeSave($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));

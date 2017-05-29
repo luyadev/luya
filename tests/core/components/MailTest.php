@@ -119,4 +119,19 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $this->expectException('luya\Exception');
         $mail = (new Mail())->compose()->send();
     }
+    
+    public function testReplyTo()
+    {
+        $mail = (new Mail())->addReplyTo('hello@luya.io', 'Name');
+        
+        $this->assertSame(['hello@luya.io' => [
+            'hello@luya.io', 'Name'
+        ]], $mail->mailer->getReplyToAddresses());
+        
+        $mail = (new Mail())->addReplyTo('hello@luya.io');
+        
+        $this->assertSame(['hello@luya.io' => [
+            'hello@luya.io', 'hello@luya.io'
+        ]], $mail->mailer->getReplyToAddresses());
+    }
 }

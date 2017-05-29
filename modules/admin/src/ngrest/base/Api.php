@@ -13,11 +13,11 @@ use yii\data\ActiveDataProvider;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
 use luya\admin\base\RestActiveController;
-
 use luya\admin\models\UserOnline;
 use luya\admin\ngrest\render\RenderActiveWindow;
 use luya\admin\ngrest\render\RenderActiveWindowCallback;
 use luya\admin\ngrest\NgRest;
+use yii\web\NotFoundHttpException;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -96,6 +96,27 @@ class Api extends RestActiveController
         }
     
         return $this->_model;
+    }
+    
+    /**
+     * Get the Model for the API based on a given Id.
+     *
+     * If not found a NotFoundHttpException will be thrown.
+     *
+     * @params integer|string $id The id to performe the findOne() method.
+     * @throws NotFoundHttpException
+     * @return \luya\admin\ngrest\base\NgRestModel
+     */
+    public function findModel($id)
+    {
+        $class = $this->modelClass;
+        $model = $class::findOne($id);
+        
+        if (!$model) {
+            throw new NotFoundHttpException("Unable to find the Model for the given ID");
+        }
+        
+        return $model;
     }
     
     /**

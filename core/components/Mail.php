@@ -399,6 +399,20 @@ class Mail extends \yii\base\Component
         
         return $this;
     }
+    
+    /**
+     * Add ReplyTo Address.
+     * 
+     * @param string $email
+     * @param string $name
+     * @return \luya\components\Mail
+     */
+    public function addReplyTo($email, $name = null)
+    {
+        $this->getMailer()->addReplyTo($email, empty($name) ? $email : $name);
+        
+        return $this;
+    }
 
     /**
      * Trigger the send event of the mailer

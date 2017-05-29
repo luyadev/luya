@@ -36,19 +36,19 @@ use luya\admin\helpers\I18n;
  *         'refJoinTable' => 'admin_user_group',
  *         'refModelPkId' => 'group_id',
  *         'refJoinPkId' => 'user_id',
- *         'labelFields' => ['firstname', 'lastname', 'email'],
+ *         'labelField' => ['firstname', 'lastname', 'email'],
  *         'labelTemplate' =>  '%s %s (%s)'
  *     ],
  * }
  * ```
  *
  * You can also access getter fields from the $model class in order to display such informations in the checkbox selection. Assuming you have a `getMyName` method in the
- * $model object you can use it in the `labelFields` as `myName`.
+ * $model object you can use it in the `labelField` as `myName`.
  *
- * In order to use a function for the labelFields:
+ * In order to use a function for the labelField:
  *
  * ```php
- * 'labelFields' => function($model) {
+ * 'labelField' => function($model) {
  *     return $model->firstname . ' ' . $model->lastname;
  * }
  * ```
@@ -89,7 +89,7 @@ class CheckboxRelation extends Plugin
      * @var array A list of fields which should be used for the display template. Can also be a callable function to build the field with the template
      *
      * ```php
-     * 'labelFields' => function($array) {
+     * 'labelField' => function($array) {
      *     return $array['firstname'] . ' ' . $array['lastname'];
      * }
      * ```
@@ -106,6 +106,12 @@ class CheckboxRelation extends Plugin
      */
     public $onlyRestScenarios = false;
 
+    /**
+     * @var boolean Whether the admin request should be retrived as admin or not, by default its an admin query as this is more performat but
+     * you only have an array within the labelField closure.
+     */
+    public $asArray = true;
+    
     /**
      * @inheritdoc
      */
@@ -191,11 +197,14 @@ class CheckboxRelation extends Plugin
     {
         $items = [];
         
-        foreach ($this->model->find()->asArray(true)->all() as $item) {
-            if (is_callable($this->labelFields, false)) {
-                $label = call_user_func($this->labelFields, $item);
+        foreach ($this->model->find()->asArray($this->asArray)->all() as $item) {
+            if (is_callable($this->labelField, false)) {
+                $label = call_user_func($this->labelField, $item);
             } else {
-                $array = ArrayHelper::filter($item, $this->labelFields);
+                if ($this->labelField === null) {
+                    $this->labelField = array_keys($item);
+                }
+                $array = ArrayHelper::filter($item, $this->labelField);
                 
                 foreach ($array as $key => $value) {
                     if ($event->sender->isI18n($key)) {

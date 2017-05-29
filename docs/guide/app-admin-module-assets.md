@@ -21,7 +21,7 @@ class MyAdminAsset extends \luya\web\Asset
 
     // important to solve all javascript dependency issues relating jquery, bower, angular, ...
     public $depends = [
-        'admin\assets\Main',
+        'luya\admin\assets\Main',
     ];
 }
 ```

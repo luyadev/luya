@@ -18,6 +18,10 @@ class LoginController extends Controller
 {
     public $layout = '@admin/views/layouts/nosession';
 
+    /**
+     * {@inheritDoc}
+     * @see \luya\admin\base\Controller::getRules()
+     */
     public function getRules()
     {
         return [
@@ -29,6 +33,11 @@ class LoginController extends Controller
         ];
     }
 
+    /**
+     * Show Login Form.
+     * 
+     * @return \yii\web\Response|string
+     */
     public function actionIndex()
     {
         // redirect logged in users
@@ -43,6 +52,11 @@ class LoginController extends Controller
         return $this->render('index');
     }
     
+    /**
+     * Async Secure Token Login.
+     * 
+     * @return array
+     */
     public function actionAsyncToken()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -55,9 +69,7 @@ class LoginController extends Controller
             if ($user) {
                 if (Yii::$app->adminuser->login($user)) {
                     Yii::$app->session->remove('secureId');
-                    return ['refresh' => true, 'message' => 'top!'];
-                } else {
-                    // misc error while login ?!
+                    return ['refresh' => true, 'message' => null];
                 }
             } else {
                 return ['errors' => Module::t('login_async_token_error'), 'refresh' => false];
@@ -67,6 +79,11 @@ class LoginController extends Controller
         return ['errors' => Module::t('login_async_token_globalerror'), 'refresh' => false];
     }
 
+    /**
+     * Async Login Form.
+     * 
+     * @return array
+     */
     public function actionAsync()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -81,14 +98,10 @@ class LoginController extends Controller
                     if ($model->sendSecureLogin()) {
                         Yii::$app->session->set('secureId', $model->getUser()->id);
                         return ['refresh' => false, 'errors' => false, 'enterSecureToken' => true];
-                    } else {
-                        // misc error while secure token sent ?!
                     }
                 } else {
                     if (Yii::$app->adminuser->login($userObject)) {
                         return ['refresh' => true, 'errors' => false, 'enterSecureToken' => false];
-                    } else {
-                        // misc error while login ?!
                     }
                 }
             }
