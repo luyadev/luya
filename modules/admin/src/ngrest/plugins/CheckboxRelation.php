@@ -94,7 +94,7 @@ class CheckboxRelation extends Plugin
      * }
      * ```
      */
-    public $labelFields;
+    public $labelField;
 
     /**
      * @var string The template which is sued for the label fields like the sprinf command e.g. `%s %s (%s)`.
