@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef6f91a9f3f3eb74f8091ef353994629",
+    "content-hash": "edaf20f567f47ff5712b13850bab33e8",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -843,12 +843,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "44d81b8f32454f7c6955687926cc2153f18ae926"
+                "reference": "5889faab431c814061151448a18222f1503e7f0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/44d81b8f32454f7c6955687926cc2153f18ae926",
-                "reference": "44d81b8f32454f7c6955687926cc2153f18ae926",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/5889faab431c814061151448a18222f1503e7f0b",
+                "reference": "5889faab431c814061151448a18222f1503e7f0b",
                 "shasum": ""
             },
             "require-dev": {
@@ -893,20 +893,20 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-05-29T07:03:51+00:00"
+            "time": "2017-05-29T07:54:40+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "dev-master",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "02e4e33f232fea30f57389a5aa5dc23526050c0b"
+                "reference": "cf14ae6f352b3782140f9245c59cb01ab1d31f49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/02e4e33f232fea30f57389a5aa5dc23526050c0b",
-                "reference": "02e4e33f232fea30f57389a5aa5dc23526050c0b",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/cf14ae6f352b3782140f9245c59cb01ab1d31f49",
+                "reference": "cf14ae6f352b3782140f9245c59cb01ab1d31f49",
                 "shasum": ""
             },
             "require": {
@@ -943,7 +943,7 @@
                 "module",
                 "php"
             ],
-            "time": "2017-05-24T08:13:37+00:00"
+            "time": "2017-05-19T13:35:13+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3043,7 +3043,6 @@
     "aliases": [],
     "minimum-stability": "RC",
     "stability-flags": {
-        "luyadev/luya-testsuite": 20,
         "luyadev/luya-module-cms": 20
     },
     "prefer-stable": false,
