@@ -35,18 +35,18 @@ class TestActiveWindow extends \luya\admin\ngrest\base\ActiveWindow
 
 Some general informations about Active Windows:
 
-+ The popertie `$module` is required and is used to determine the path for the views files.
++ The poperty `$module` is required and is used to determine the path for the views files.
 + The `index()` method is required and will always be the default method which is rendered when clicking on the button in the crud grid list.
 + Callbacks must be prefix with `callback`, the properties of the callbacks can be either required or not.
 
-Wokring with callbacks
+Working with callbacks
 
-+ To return successfull data use `sendSuccess($message)`.
++ To return successful data use `sendSuccess($message)`.
 + To return error data use `sendError($message)`.
 
 ## Attaching the Class
 
-In order to add an Active Window into your NgRest config, you have to add the config in the {{luya\admin\ngrest\base\NgRestModel::ngRestActiveWindows}} method. As the Active Window contains the {{yii\base\Object}} as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `alias` and `icon` public properties. The alias and icon probierts does exist in every Active Window an can always be overwritten.
+In order to add an Active Window into your NgRest config, you have to add the config in the {{luya\admin\ngrest\base\NgRestModel::ngRestActiveWindows}} method. As the Active Window contains the {{yii\base\Object}} as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `alias` and `icon` public properties. The alias and icon propierties does exist in every Active Window an can always be overwritten.
 
 ```php
 public function ngRestActiveWindows($config)
@@ -59,7 +59,7 @@ public function ngRestActiveWindows($config)
 
 ### View Files
 
-To render view files you can run the method `$this->render()` inside your active window class. The render method will lookup for php view file based on the base path of your `$module` propertie. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` propertie and your Active Window name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
+To render view files you can run the method `$this->render()` inside your active window class. The render method will lookup for php view file based on the base path of your `$module` property. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` property and your Active Window name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
 
 ### How to make a Button
 
