@@ -24,13 +24,13 @@ class FormatterTest extends LuyaWebTestCase
         $formatter = new Formatter([
             'datetimeFormats' => [
                 'en' => 'HH/mm',
-                'de' => 'mm/HH',
-                'fr' => 'HH:mm',
+                'de' => 'HH:mm',
+                'fr' => 'HH.mm',
             ],
-            'locale' => 'de',
+            'locale' => 'fr',
         ]);
         
-        $this->assertSame('00/16', $formatter->asDatetime($ts));
+        $this->assertSame('14.00', $formatter->asDatetime($ts));
         
         $formatter = new Formatter([
             'timeFormats' => [
@@ -41,6 +41,6 @@ class FormatterTest extends LuyaWebTestCase
             'locale' => 'fr',
         ]);
         
-        $this->assertSame('16:00:33', $formatter->asTime($ts));
+        $this->assertSame('14:00:33', $formatter->asTime($ts));
     }
 }
