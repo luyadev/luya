@@ -586,18 +586,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "854e2648a04ad0e32b6645e7895da227dc535072"
+                "reference": "6caf3712b546d85ec78c26d87ef5c6265161f1a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/854e2648a04ad0e32b6645e7895da227dc535072",
-                "reference": "854e2648a04ad0e32b6645e7895da227dc535072",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/6caf3712b546d85ec78c26d87ef5c6265161f1a5",
+                "reference": "6caf3712b546d85ec78c26d87ef5c6265161f1a5",
                 "shasum": ""
             },
             "require": {
                 "curl/curl": "~1.0",
                 "phpmailer/phpmailer": "~5.0",
-                "yiisoft/yii2": "2.0.11"
+                "yiisoft/yii2": "~2.0.0"
             },
             "require-dev": {
                 "nadar/github-markdown-fixer": "~1.0",
@@ -646,7 +646,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2017-05-16T11:34:27+00:00"
+            "time": "2017-05-29T07:03:51+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -654,12 +654,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "a3dab4642ed59eb4b78c5132134d984c190c9ad5"
+                "reference": "3c5994d544733e4c382ced22197541d38b8c7aeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/a3dab4642ed59eb4b78c5132134d984c190c9ad5",
-                "reference": "a3dab4642ed59eb4b78c5132134d984c190c9ad5",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/3c5994d544733e4c382ced22197541d38b8c7aeb",
+                "reference": "3c5994d544733e4c382ced22197541d38b8c7aeb",
                 "shasum": ""
             },
             "require": {
@@ -708,7 +708,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-05-16T11:04:14+00:00"
+            "time": "2017-05-29T07:03:51+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1288,16 +1288,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.19",
+            "version": "5.7.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1"
+                "reference": "3cb94a5f8c07a03c8b7527ed7468a2926203f58b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69c4f49ff376af2692bad9cebd883d17ebaa98a1",
-                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3cb94a5f8c07a03c8b7527ed7468a2926203f58b",
+                "reference": "3cb94a5f8c07a03c8b7527ed7468a2926203f58b",
                 "shasum": ""
             },
             "require": {
@@ -1315,7 +1315,7 @@
                 "phpunit/php-timer": "^1.0.6",
                 "phpunit/phpunit-mock-objects": "^3.2",
                 "sebastian/comparator": "^1.2.4",
-                "sebastian/diff": "~1.2",
+                "sebastian/diff": "^1.4.3",
                 "sebastian/environment": "^1.3.4 || ^2.0",
                 "sebastian/exporter": "~2.0",
                 "sebastian/global-state": "^1.1",
@@ -1366,7 +1366,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-04-03T02:22:27+00:00"
+            "time": "2017-05-22T07:42:55+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1643,23 +1643,23 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "1.4.1",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "13edfd8706462032c2f52b4b862974dd46b71c9e"
+                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/13edfd8706462032c2f52b4b862974dd46b71c9e",
-                "reference": "13edfd8706462032c2f52b4b862974dd46b71c9e",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/7f066a26a962dbe58ddea9f72a4e82874a3975a4",
+                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8"
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0"
             },
             "type": "library",
             "extra": {
@@ -1691,7 +1691,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2015-12-08T07:14:41+00:00"
+            "time": "2017-05-22T07:24:03+00:00"
         },
         {
             "name": "sebastian/environment",
