@@ -204,7 +204,7 @@ class SelectModel extends Select
         foreach (static::getDataInstance($class, $this->where) as $item) {
             
             $data[] = [
-                'value' => (int) $item->{$this->valueField},
+                'value' => StringHelper::typeCast($item->{$this->valueField}),
                 'label' => $this->generateLabelField($item),
             ];
         }

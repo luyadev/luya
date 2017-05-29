@@ -60,7 +60,7 @@ abstract class Select extends Plugin
     {
         $value = StringHelper::typeCast($event->sender->getAttribute($this->name));
         foreach ($this->data as $item) {
-            if ($item['value'] === $value) {
+            if (StringHelper::typeCast($item['value']) === $value) {
                 $event->sender->setAttribute($this->name, $item['label']);
             }
         }
