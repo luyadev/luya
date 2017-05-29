@@ -7,7 +7,7 @@ use luya\account\RegisterInterface;
 
 abstract class RegisterForm extends \yii\base\Model implements RegisterInterface
 {
-    private $_model = null;
+    private $_model;
     
     protected $modelClass = 'luya\account\models\User';
     

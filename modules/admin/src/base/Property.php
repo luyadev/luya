@@ -24,12 +24,12 @@ abstract class Property extends Component implements TypesInterface
     /**
      * @var string The module where the property is located.
      */
-    public $moduleName = null;
+    public $moduleName;
 
     /**
      * @var mixed The value from the database assigned into the property object.
      */
-    public $value = null;
+    public $value;
     
     /**
      * @var boolean Whether the property is used for an i18n use case or not, this will

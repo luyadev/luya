@@ -54,12 +54,12 @@ class CallbackFormWidget extends Widget
     /**
      * @var string Required value of the Submit Button
      */
-    public $buttonValue = null;
+    public $buttonValue;
     
     /**
      * @var string Required value of the callback in the Active Window which should be triggered by this Form.
      */
-    public $callback = null;
+    public $callback;
 
     /**
      * @var string Optional string with javascript callback function which is going to be triggered after angular response.

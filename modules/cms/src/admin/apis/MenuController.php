@@ -65,7 +65,7 @@ class MenuController extends \luya\admin\base\RestController
         return true;
     }
 
-    private $_groups = null;
+    private $_groups;
 
     private function getGroups()
     {

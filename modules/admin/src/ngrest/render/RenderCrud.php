@@ -29,13 +29,13 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
     private $_permissions = [];
 
-    private $_buttons = null;
+    private $_buttons;
 
-    private $_view = null;
+    private $_view;
 
     private $_fields = [];
 
-    private $_langs = null;
+    private $_langs;
 
     public function can($type)
     {
@@ -247,7 +247,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         return $this->_langs;
     }
 
-    private $_defaultLangShortCode = null;
+    private $_defaultLangShortCode;
 
     public function getDefaultLangShortCode()
     {

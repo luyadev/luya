@@ -99,7 +99,7 @@ abstract class Module extends \yii\base\Module
      * name inside the child modules $context variable. For example the cms includes the news module, the context variable
      * of news would have the value "cms".
      */
-    public $context = null;
+    public $context;
 
     /**
      * @var string The default name of the moduleLayout

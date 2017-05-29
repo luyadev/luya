@@ -90,7 +90,7 @@ class DetailViewActiveWindow extends ActiveWindow
      * - `captionOptions`: the HTML attributes to customize label tag. For example: `['class' => 'bg-red']`.
      *   Please refer to [[\yii\helpers\BaseHtml::renderTagAttributes()]] for the supported syntax.
      */
-    public $attributes = null;
+    public $attributes;
     
     /**
      * Renders the index file of the ActiveWindow.

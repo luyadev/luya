@@ -167,7 +167,7 @@ class Site extends NgRestModel
     	return ($version == self::getCurrentLuyaVersion()['version']) ? 'background-color:#c8e6c9' : 'background-color:#ffcdd2';
     }
     
-    private static $_currentVersion = null;
+    private static $_currentVersion;
     
     public static function getCurrentLuyaVersion()
     {

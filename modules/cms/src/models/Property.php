@@ -30,7 +30,7 @@ final class Property extends \yii\db\ActiveRecord
         return $this->hasOne(AdminProperty::className(), ['id' => 'admin_prop_id']);
     }
     
-    private $_object = null;
+    private $_object;
     
     public function getObject()
     {

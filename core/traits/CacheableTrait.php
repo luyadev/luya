@@ -62,7 +62,7 @@ trait CacheableTrait
     /**
      * @var boolean Whether the caching is enabled or disabled.
      */
-    private $_cachable = null;
+    private $_cachable;
     
     /**
      * Check if the current configuration of the application and the property allows a caching of the

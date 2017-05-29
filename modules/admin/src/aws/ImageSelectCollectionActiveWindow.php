@@ -33,11 +33,11 @@ use luya\admin\ngrest\base\ActiveWindow;
  */
 class ImageSelectCollectionActiveWindow extends ActiveWindow
 {
-    public $refTableName = null;
+    public $refTableName;
 
-    public $imageIdFieldName = null;
+    public $imageIdFieldName;
 
-    public $refFieldName = null;
+    public $refFieldName;
 
     /**
      * @var string The name of the module where the active windows is located in order to finde the view path.

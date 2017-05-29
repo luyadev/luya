@@ -42,7 +42,7 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         ];
     }
 
-    private $_module = null;
+    private $_module;
 
     private function getModule()
     {
@@ -75,7 +75,7 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         ];
     }
 
-    private $_content = null;
+    private $_content;
     
     /**
      * @todo: see if $pathAfterRoute could be available in the urlRules, otherwise display default

@@ -73,17 +73,17 @@ class CheckboxRelation extends Plugin
     /**
      * @var string The reference table table name e.g. `admin_user_groupadmin_user_group`.
      */
-    public $refJoinTable = null;
+    public $refJoinTable;
 
     /**
      * @var string The reference table model field name e.g `group_id`.
      */
-    public $refModelPkId = null;
+    public $refModelPkId;
 
     /**
      * @var string The reference table poin field name e.g. `user_id`.
      */
-    public $refJoinPkId = null;
+    public $refJoinPkId;
 
     /**
      * @var array A list of fields which should be used for the display template. Can also be a callable function to build the field with the template
@@ -94,12 +94,12 @@ class CheckboxRelation extends Plugin
      * }
      * ```
      */
-    public $labelFields = null;
+    public $labelFields;
 
     /**
      * @var string The template which is sued for the label fields like the sprinf command e.g. `%s %s (%s)`.
      */
-    public $labelTemplate = null;
+    public $labelTemplate;
 
     /**
      * @var boolean Whether the checkbox plugin should only trigger for the restcreate and restupdate events or for all SAVE/UPDATE events.
@@ -117,7 +117,7 @@ class CheckboxRelation extends Plugin
         $this->addEvent(NgRestModel::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
     }
     
-    private $_modelPrimaryKey = null;
+    private $_modelPrimaryKey;
     
     public function getModelPrimaryKey()
     {

@@ -25,14 +25,14 @@ class AdminLanguage extends Component
      *
      * @var array
      */
-    private $_activeLanguage = null;
+    private $_activeLanguage;
     
     /**
      * Containg all availabe languages from Lang Model.
      *
      * @var array
      */
-    private $_languages = null;
+    private $_languages;
     
     /**
      * Get the array of the current active language (its not an AR object!)

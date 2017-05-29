@@ -109,7 +109,7 @@ class JsonLd extends Object
         Yii::$app->view->params['@graph'][] = $json;
     }
     
-    private static $_view = null;
+    private static $_view;
     
     private static function registerView()
     {

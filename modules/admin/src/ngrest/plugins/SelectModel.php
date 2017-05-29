@@ -42,7 +42,7 @@ class SelectModel extends Select
     /**
      * @var string The className of the ActiveRecord or NgRestModel in order to build the ActiveQuery find methods.
      */
-    public $modelClass = null;
+    public $modelClass;
     
     /**
      * @var string|array|callable An array or string to select the data from, this data will be returned in the select overview.
@@ -61,7 +61,7 @@ class SelectModel extends Select
      * }
      * ```
      */
-    public $labelField = null;
+    public $labelField;
     
     /**
      * @var boolean|string If enabled you can defined how the placed variables should be strucutred. For example in combination with array labels:
@@ -154,7 +154,7 @@ class SelectModel extends Select
         return implode(" ", $values);
     }
     
-    private $_valueField = null;
+    private $_valueField;
     
     /**
      * Getter Method for valueField.

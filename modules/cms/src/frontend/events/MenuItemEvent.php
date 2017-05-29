@@ -25,7 +25,7 @@ namespace luya\cms\frontend\events;
  */
 class MenuItemEvent extends \yii\base\Event
 {
-    public $item = null;
+    public $item;
     
     public function getVisible()
     {

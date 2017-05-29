@@ -20,7 +20,7 @@ use luya\helpers\ArrayHelper;
  */
 class SelectArray extends Select
 {
-    private $_data = null;
+    private $_data;
     
     public function setData(array $data)
     {

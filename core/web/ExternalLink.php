@@ -43,7 +43,7 @@ class ExternalLink extends Object implements LinkInterface, Arrayable
         return ['href', 'target'];
     }
     
-    private $_href = null;
+    private $_href;
     
     /**
      * Set the href value for an external link resource.

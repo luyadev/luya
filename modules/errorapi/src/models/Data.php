@@ -6,9 +6,9 @@ use luya\errorapi\Module;
 
 class Data extends \yii\db\ActiveRecord
 {
-    public $message = null;
+    public $message;
 
-    public $serverName = null;
+    public $serverName;
     
     public $errorArray = [];
 

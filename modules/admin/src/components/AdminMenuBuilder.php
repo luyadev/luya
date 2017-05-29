@@ -50,7 +50,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     /**
      * @var \luya\base\AdminModuleInterface The context on what the menu is running.
      */
-    protected $moduleContext = null;
+    protected $moduleContext;
     
     /**
      * @var array List of all permission APIs.

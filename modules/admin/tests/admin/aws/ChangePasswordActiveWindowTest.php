@@ -7,7 +7,7 @@ use admintests\AdminTestCase;
 
 class ChangePasswordActiveWindowTest extends AdminTestCase
 {
-    public $aws = null;
+    public $aws;
 
     public function setUp()
     {

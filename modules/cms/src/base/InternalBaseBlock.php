@@ -41,7 +41,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     const INJECTOR_CFG = 'cfg';
 
-    private $_injectorObjects = null;
+    private $_injectorObjects;
     
     /**
      * Setup injectors.

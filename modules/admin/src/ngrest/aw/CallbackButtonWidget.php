@@ -27,12 +27,12 @@ class CallbackButtonWidget extends Widget
     /**
      * @var string The id of the callback if the callback method s name is `callbackSayHello` the callback id would be `say-hello`.
      */
-    public $callback = null;
+    public $callback;
     
     /**
      * @var string The label of the button to display for the user.
      */
-    public $label = null;
+    public $label;
     
     /**
      * @param array $options Define behavior of the button, options are name-value pairs. The following options are available:

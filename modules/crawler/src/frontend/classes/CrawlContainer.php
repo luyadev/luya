@@ -12,11 +12,11 @@ use luya\helpers\Url;
 
 class CrawlContainer extends \yii\base\Object
 {
-    public $baseUrl = null;
+    public $baseUrl;
 
-    public $baseHost = null;
+    public $baseHost;
 
-    public $pageCrawler = null;
+    public $pageCrawler;
 
     public $filterRegex = [];
     

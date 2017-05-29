@@ -56,14 +56,14 @@ final class ActiveQueryCheckboxInjector extends BaseBlockInjector
      *
      * If the label attribute is not defined, just all attribute from the model will be displayed.
      */
-    public $label = null;
+    public $label;
     
     /**
      * @var boolean|array Whether the extr assigned data should enable pagination.
      */
     public $pagination = false;
     
-    private $_query = null;
+    private $_query;
     
     /**
      * Setter method for the active query interface.

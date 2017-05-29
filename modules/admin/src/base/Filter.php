@@ -62,7 +62,7 @@ abstract class Filter extends Object implements FilterInterface
     /**
      * @var mixed|array Private property to store the effect params list
      */
-    private $_effectParamsList = null;
+    private $_effectParamsList;
 
     /**
      * Add message to log array.

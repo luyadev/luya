@@ -17,7 +17,7 @@ use luya\helpers\ArrayHelper;
  */
 class MenuHelper
 {
-    private static $items = null;
+    private static $items;
     
     /**
      * Get all nav data entries with corresponding item content
@@ -79,7 +79,7 @@ class MenuHelper
     
     private static $_inheritData = [];
     
-    private static $_navItems = null;
+    private static $_navItems;
     
     private static function getNavItems()
     {
@@ -129,7 +129,7 @@ class MenuHelper
     
     /* NAV GROUP INHERITANCE NODE */
     
-    private static $_cmsPermissionData = null;
+    private static $_cmsPermissionData;
     
     private static function getCmsPermissionData()
     {
@@ -161,7 +161,7 @@ class MenuHelper
     
     /* NAV GROUP PERMISSION */
     
-    private static $_navGroupPermissions = null;
+    private static $_navGroupPermissions;
     
     private static function getNavGroupPermissions()
     {
@@ -190,7 +190,7 @@ class MenuHelper
         return false;
     }
     
-    private static $containers = null;
+    private static $containers;
     
     /**
      * Get all cms containers
@@ -206,7 +206,7 @@ class MenuHelper
         return self::$containers;
     }
     
-    private static $drafts = null;
+    private static $drafts;
     
     /**
      * Get all drafts nav items

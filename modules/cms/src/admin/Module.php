@@ -151,7 +151,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public $hiddenBlocks = [];
     
-    private $_blockVariation = null;
+    private $_blockVariation;
     
     /**
      * Set block variations.

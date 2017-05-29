@@ -29,22 +29,22 @@ class SetupController extends \luya\console\Command
     /**
      * @var string The email of the user to create.
      */
-    public $email = null;
+    public $email;
     
     /**
      * @var string The blank password of the user to create.
      */
-    public $password = null;
+    public $password;
     
     /**
      * @var string The firstname of the user to create.
      */
-    public $firstname = null;
+    public $firstname;
     
     /**
      * @var string The lastname of the user to create.
      */
-    public $lastname = null;
+    public $lastname;
     
     /**
      * @var string Whether the setup is interactive or not.
@@ -54,12 +54,12 @@ class SetupController extends \luya\console\Command
     /**
      * @var string The name of the default language e.g. English
      */
-    public $langName = null;
+    public $langName;
     
     /**
      * @var string The short code of the language e.g. en
      */
-    public $langShortCode = null;
+    public $langShortCode;
     
     /**
      * @inheritdoc

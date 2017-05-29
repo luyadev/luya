@@ -93,7 +93,7 @@ class InjectItem extends Object implements InjectItemInterface
     
     // Getter & Setter
     
-    private $_item = null;
+    private $_item;
 
     /**
      * Returns the evalutead menu item whether from the childOf property or set from the setter method.
@@ -127,7 +127,7 @@ class InjectItem extends Object implements InjectItemInterface
         return $this;
     }
     
-    private $_childOf = null;
+    private $_childOf;
     
     /**
      * Setter method for childOf property.
@@ -156,7 +156,7 @@ class InjectItem extends Object implements InjectItemInterface
         return $this->_childOf;
     }
     
-    private $_alias = null;
+    private $_alias;
     
     /**
      * Setter methdo for the item alias.
@@ -185,7 +185,7 @@ class InjectItem extends Object implements InjectItemInterface
         return $this->item->alias . '/' . $this->_alias;
     }
     
-    private $_link = null;
+    private $_link;
     
     /**
      * Setter method fro the link.
@@ -210,7 +210,7 @@ class InjectItem extends Object implements InjectItemInterface
         return ($this->_link === null) ? Yii::$app->menu->buildItemLink($this->alias, $this->getLang()) : $this->_link;
     }
     
-    private $_title = null;
+    private $_title;
     
     /**
      * Setter method for the menu title.
@@ -245,7 +245,7 @@ class InjectItem extends Object implements InjectItemInterface
         return $this->_title;
     }
     
-    private $_description = null;
+    private $_description;
     
     /**
      * Setter method for menu page description.
@@ -363,7 +363,7 @@ class InjectItem extends Object implements InjectItemInterface
         return 0;
     }
 
-    private $_id = null;
+    private $_id;
     
     /**
      * Setter methdo for the id (unique id).
@@ -389,7 +389,7 @@ class InjectItem extends Object implements InjectItemInterface
         return $this->_id;
     }
     
-    private $_navId = null;
+    private $_navId;
     
     /**
      * Setter method for the navId.

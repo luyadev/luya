@@ -47,7 +47,7 @@ class TagParser extends Object
         'link' => ['class' => 'luya\tag\tags\LinkTag'],
     ];
     
-    private static $_instance = null;
+    private static $_instance;
     
     /**
      * Inject a new tag with a given name and a configurable array config.
@@ -156,7 +156,7 @@ class TagParser extends Object
             $tag = $row['function'];
             if ($this->hasTag($tag)) {
                 $replace = $this->evalTag($tag, $row);
-                $text = preg_replace('['.preg_quote($row[0]).']mi', $replace, $text, 1);
+                $text = preg_replace('/'.preg_quote($row[0], '/').'/mi', $replace, $text, 1);
             }
         }
         

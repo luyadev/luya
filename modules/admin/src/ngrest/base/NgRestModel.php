@@ -297,7 +297,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         return $query->select($fields)->all();
     }
 
-    private $_ngrestCallType = null;
+    private $_ngrestCallType;
     
     /**
      * Determine the current call type based on get params as they can change the output behavior to make the ngrest crud list view.
@@ -313,7 +313,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         return $this->_ngrestCallType;
     }
 
-    private $_ngRestPrimaryKey = null;
+    private $_ngRestPrimaryKey;
 
     /**
      * Getter method for NgRest Primary Key.
@@ -570,7 +570,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         }
     }
     
-    private $_config = null;
+    private $_config;
     
     /**
      * Build and call the full config object if not build yet for this model.

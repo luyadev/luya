@@ -41,19 +41,19 @@ class ModuleReflection extends Object
     /**
      * @var \luya\web\Request Request object from DI-Container.
      */
-    public $request = null;
+    public $request;
 
     /**
      * @var \luya\web\UrlManager UrlManager object from DI-Container.
      */
-    public $urlManager = null;
+    public $urlManager;
     
     /**
      * @var \yii\base\Controller|null The controller paramter is null until the [[run()]] method has been applied.
      */
-    public $controller = null;
+    public $controller;
 
-    private $_defaultRoute = null;
+    private $_defaultRoute;
 
     /**
      * Class constructor in order to consum from DI Container.
@@ -82,7 +82,7 @@ class ModuleReflection extends Object
         $this->urlManager->addRules($this->module->urlRules, true);
     }
 
-    private $_module = null;
+    private $_module;
     
     /**
      * Setter for the module property.
@@ -104,7 +104,7 @@ class ModuleReflection extends Object
         return $this->_module;
     }
     
-    private $_suffix = null;
+    private $_suffix;
     
     /**
      * Setter for the suffix property.
@@ -127,7 +127,7 @@ class ModuleReflection extends Object
         return $this->_suffix;
     }
     
-    private $_requestRoute = null;
+    private $_requestRoute;
 
     /**
      * Determine the default route based on current defaultRoutes or parsedRequested by the UrlManager.

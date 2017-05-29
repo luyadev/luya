@@ -15,7 +15,7 @@ use yii\base\Object;
  */
 abstract class BaseTag extends Object implements TagInterface
 {
-    private $_view = null;
+    private $_view;
     
     /**
      * Get the view object to register assets in tags.

@@ -34,17 +34,17 @@ abstract class Plugin extends Component
     /**
      * @var string The name of the field corresponding to the ActiveRecord (also known as fieldname)
      */
-    public $name = null;
+    public $name;
     
     /**
      * @var string The alias name of the plugin choosen by the user (also known as label)
      */
-    public $alias = null;
+    public $alias;
     
     /**
      * @var boolean Whether the plugin is in i18n context or not.
      */
-    public $i18n = null;
+    public $i18n;
 
     /**
      * @var mixed This value will be used when the i18n decodes the given value but is not set yet, default value.

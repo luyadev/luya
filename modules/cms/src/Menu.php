@@ -111,25 +111,25 @@ class Menu extends Component implements ArrayAccess
     /**
      * @var \luya\web\Request Request object
      */
-    public $request = null;
+    public $request;
     
     private $_cachePrefix = 'MenuContainerCache';
     
-    private $_currentUrlRule = null;
+    private $_currentUrlRule;
     
-    private $_composition = null;
+    private $_composition;
 
-    private $_current = null;
+    private $_current;
 
-    private $_currentAppendix = null;
+    private $_currentAppendix;
 
     private $_languageContainer = [];
 
-    private $_languages = null;
+    private $_languages;
 
-    private $_redirectMap = null;
+    private $_redirectMap;
     
-    private $_modulesMap = null;
+    private $_modulesMap;
     
     /**
      * Class constructor to DI the request object.

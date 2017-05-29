@@ -6,7 +6,7 @@ namespace cmstests;
 
 class BlockTestCase extends CmsFrontendTestCase
 {
-    public $blockClass = null;
+    public $blockClass;
     
     /**
      * @var \luya\cms\base\PhpBlock

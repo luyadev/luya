@@ -14,9 +14,9 @@ use luya\helpers\ArrayHelper;
  */
 class AdminMenu extends \yii\base\Component
 {
-    private $_menu = null;
+    private $_menu;
 
-    private $_modules = null;
+    private $_modules;
 
     private $_items = [];
 

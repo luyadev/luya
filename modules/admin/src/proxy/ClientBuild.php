@@ -13,27 +13,27 @@ class ClientBuild extends Object
     /**
      * @var \luya\console\Command $command object
      */
-    public $command = null;
+    public $command;
     
-    public $buildToken = null;
+    public $buildToken;
     
-    public $requestUrl = null;
+    public $requestUrl;
     
-    public $requestCloseUrl = null;
+    public $requestCloseUrl;
     
-    public $fileProviderUrl = null;
+    public $fileProviderUrl;
     
-    public $imageProviderUrl = null;
+    public $imageProviderUrl;
     
-    public $machineIdentifier = null;
+    public $machineIdentifier;
 
-    public $machineToken = null;
+    public $machineToken;
     
-    public $storageFilesCount = null;
+    public $storageFilesCount;
     
-    public $optionStrict = null;
+    public $optionStrict;
     
-    private $_optionTable = null;
+    private $_optionTable;
     
     public function setOptionTable($table)
     {
@@ -62,7 +62,7 @@ class ClientBuild extends Object
         }
     }
     
-    private $_buildConfig = null;
+    private $_buildConfig;
     
     public function setBuildConfig(array $config)
     {
