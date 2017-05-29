@@ -212,28 +212,27 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $groups = Group::find()->all();
-        $providers = [];
-        foreach ($groups as $group) {
-            $providers[] = new ActiveDataProvider([
-                'query' => Contact::find()->where(['group_id' => $group->id]),
-                'pagination' => [
-                    'pageSize' => 20,
-                ],
-                'sort' => [
-                    'defaultOrder' => [
-                        'group_id' => SORT_ASC,
-                        'lastname' => SORT_ASC,
-                    ]
-                ],
-            ]);
-        }
-
         return $this->render('index', [
-            'providers' => $providers,
             'groups' => $groups
         ]);
     }
 
+    public function getGroupProvider(Group $group)
+    {
+        return new ActiveDataProvider([
+            'query' => Contact::find()->where(['group_id' => $group->id]),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'group_id' => SORT_ASC,
+                    'lastname' => SORT_ASC,
+                ]
+            ],
+        ]);
+    }
+    
     public function actionDetail($id = null)
     {
         $model = Contact::findOne($id);
@@ -251,13 +250,13 @@ class DefaultController extends Controller
 
 ### Setting up the index view
 
-For our first view, the list view, we'll create the `views/default/index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our *$dataproviders* and *$groups* which were defined in our *DefaultController* above. We parse each contact group, print the group name and render the contact data from the data provider. We're setting up some styling options for the grid view and define some custom row options as we want to be able to click on a table entry and see the mouse hovering. For the *onclick* event we define the `location.href` change to link to the detail view and some background color changes for the *onmouseover* and *onmouseout* event. This is how it looks in the end:
+For our first view, the list view, we'll create the `views/default/index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our *$dataproviders* and *$groups* which were defined in our *DefaultController* above. We parse each contact group, print the group name and render the contact data from the data provider for the current group. We're setting up some styling options for the grid view and define some custom row options as we want to be able to click on a table entry and see the mouse hovering. For the *onclick* event we define the `location.href` change to link to the detail view and some background color changes for the *onmouseover* and *onmouseout* event. This is how it looks in the end:
 
 ```php
 <? foreach ($groups as $group): ?>
-    <h3><?= $group->name ?></h3>
+    <h3><?= $group->name ?></h3>    
     <?= \yii\grid\GridView::widget([
-        'dataProvider' => $providers[$i],
+        'dataProvider' => $this->context->getGroupProvider($group),
         'columns' => [
             [
                 'attribute' => 'firstname',
