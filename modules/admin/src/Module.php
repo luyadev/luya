@@ -139,7 +139,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     public $assets = [];
     
     /**
-     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected menu items forom all admin modules and build the menu.
+     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected menu items from all admin modules and build the menu.
      */
     public $moduleMenus = [];
     

@@ -22,6 +22,8 @@ return [
     'components' => [
         'request' => [
             'forceWebRequest' => true,
+            'isAdmin' => true,
+            'isConsoleRequest' => false
         ],
         'db' => [
             'class' => 'yii\db\Connection',

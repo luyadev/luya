@@ -38,6 +38,8 @@ use luya\base\AdminModuleInterface;
  */
 class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
 {
+    private static $index = 0;
+    
     private $_menu = [];
     
     private $_pointers = [];
@@ -82,8 +84,9 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      */
     public function node($name, $icon, $template = false)
     {
-        $this->_pointers['node'] = $name;
-        $this->_menu[$name] = [
+        $this->_pointers['node'] = self::$index;
+        $this->_menu[self::$index] = [
+            'id' => self::$index,
             'moduleId' => $this->moduleContext->id,
             'template' => $template,
             'routing' => $template ? 'custom' : 'default',
@@ -94,6 +97,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'searchModelClass' => false,
         ];
     
+        self::$index++;
         return $this;
     }
     
@@ -109,8 +113,9 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      */
     public function nodeRoute($name, $icon, $template, $route, $searchModelClass = null)
     {
-        $this->_pointers['node'] = $name;
-        $this->_menu[$name] = [
+        $this->_pointers['node'] = self::$index;
+        $this->_menu[self::$index] = [
+            'id' => self::$index,
             'moduleId' => $this->moduleContext->id,
             'template' => $template,
             'routing' => $template ? 'custom' : 'default',
@@ -123,6 +128,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
         $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
+        self::$index++;
         return $this;
     }
     

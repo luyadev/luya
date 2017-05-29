@@ -2,8 +2,6 @@
 
 namespace luya\helpers;
 
-use yii\web\ForbiddenHttpException;
-
 /**
  * Helper methods when dealing with Arrays.
  *
@@ -129,6 +127,8 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      * // array ('name' => 'nadar', 'userId' => 2);
      * ```
      * 
+     * > This will not work with assoc keys
+     * 
      * @param array $array The array with the multimensional array values.
      * @param string $column The column to lookup and compare with the $search string.
      * @param string $search The string to search inside the provided column.
@@ -136,8 +136,8 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      */
     public static function searchColumn(array $array, $column, $search)
     {
-        $key = array_search($search, array_column($array, $column));
-        
+        $columns = array_column($array, $column);
+        $key = array_search($search, $columns);
         return ($key !== false) ?  $array[$key] : false;
     }
     
