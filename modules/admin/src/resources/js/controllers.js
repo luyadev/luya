@@ -78,7 +78,7 @@
 		
 		$scope.switchTo = function(type, reset) {
 			
-			if ($scope.relationCall) {
+			if ($scope.config.relationCall) {
 				$scope.crudSwitchType = type;
 				return;
 			}
@@ -104,8 +104,6 @@
 				});
 			}
 		};
-		
-		$scope.relationCall = false;
 		
 		$scope.changeGroupByField = function() {
 			if ($scope.config.groupByField == 0) {
@@ -324,7 +322,7 @@
 				var data = response.data;
 				$scope.data.update = data;
 				
-				if ($scope.relationCall) {
+				if ($scope.config.relationCall) {
 					
 					$scope.crudSwitchType = 2;
 				} else {
@@ -400,7 +398,7 @@
 		
 		$scope.submitCreate = function() {
 			
-			if ($scope.relationCall) {
+			if ($scope.config.relationCall) {
 				//$scope.data.create[$scope.relationCall.field] = parseInt($scope.relationCall.id);
 			}
 			
@@ -451,9 +449,9 @@
 				var serviceResponse = response.data;
 				$scope.service = serviceResponse.service;
 				$scope.evalSettings(serviceResponse._settings);
-				if ($scope.relationCall) {
+				if ($scope.config.relationCall) {
 					var url = $scope.config.apiEndpoint + '/relation-call/?' + $scope.config.apiListQueryString;
-					url = url + '&arrayIndex=' + $scope.relationCall.arrayIndex + '&id=' + $scope.relationCall.id + '&modelClass=' + $scope.relationCall.modelClass;
+					url = url + '&arrayIndex=' + $scope.config.relationCall.arrayIndex + '&id=' + $scope.config.relationCall.id + '&modelClass=' + $scope.config.relationCall.modelClass;
 				} else {
 					var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
 				}

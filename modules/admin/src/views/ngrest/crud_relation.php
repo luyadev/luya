@@ -3,33 +3,13 @@ use luya\admin\ngrest\render\RenderCrud;
 use luya\admin\Module;
 use yii\helpers\Json;
 
+/* @var $config \luya\admin\ngrest\ConfigInterface */
+/* @var $this \luya\admin\ngrest\render\RenderCrudView */
+/* @var $isInline boolean Whether current window mode is inline or not */
+$this->beginPage();
+$this->beginBody();
 ?>
-<script>
-    activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl;?>';
-    ngrestConfigHash = '<?php echo $config->hash; ?>';
-    zaa.bootstrap.register('<?php echo $config->hash; ?>', function($scope, $controller) {
-        /* extend class */
-        $.extend(this, $controller('CrudController', { $scope : $scope }));
-        /* local controller config */
-        $scope.config.apiListQueryString = '<?php echo $this->context->apiQueryString('list'); ?>';
-        $scope.config.apiUpdateQueryString = '<?php echo $this->context->apiQueryString('update'); ?>';
-        $scope.config.apiEndpoint = '<?php echo $this->context->getRestUrl(); ?>';
-        $scope.config.list = <?php echo $this->context->getFieldsJson('list'); ?>;
-        $scope.config.create = <?php echo $this->context->getFieldsJson('create'); ?>;
-        $scope.config.update = <?php echo $this->context->getFieldsJson('update'); ?>;
-        $scope.config.ngrestConfigHash = '<?php echo $config->hash; ?>';
-        $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
-        $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
-        $scope.config.inline = 1;
-        $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
-        $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
-        $scope.relationCall = <?= Json::htmlEncode($relationCall); ?>
-        <?php if ($config->groupByField): ?>
-        $scope.config.groupBy = 1;
-        $scope.config.groupByField = "<?= $config->groupByField; ?>";
-        <?php endif; ?>
-    });
-</script>
+<?php $this->registerAngularControllerScript(); ?>
 <div ng-controller="<?php echo $config->hash; ?>" ng-init="init()">
     <!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
     <div style="visibility:hidden;" ui-view></div>
@@ -154,7 +134,7 @@ use yii\helpers\Json;
             <?php endif; ?>
         </div>
 
-        <div ng-if="crudSwitchType==2" <?php if (!$config->inline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
+        <div ng-if="crudSwitchType==2" <?php if (!$isInline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
             <?php if ($canUpdate && $config->getPointer('update')): ?>
             
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
@@ -203,8 +183,11 @@ use yii\helpers\Json;
 
     </div>
     
-     <modal is-modal-hidden="activeWindowModal" <?php if (!$config->inline): ?>zaa-esc="closeActiveWindow()"<?php endif; ?>>
+     <modal is-modal-hidden="activeWindowModal" <?php if (!$isInline): ?>zaa-esc="closeActiveWindow()"<?php endif; ?>>
         <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
     </modal>
 
 </div>
+
+<?php $this->endBody(); ?>
+<?php $this->endPage(); ?>
