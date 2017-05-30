@@ -9,257 +9,154 @@ $this->beginPage();
 $this->beginBody();
 ?>
 <?php $this->registerAngularControllerScript(); ?>
-<div ng-controller="<?= $config->hash; ?>" ng-init="init()">
+<div ng-controller="<?= $config->hash; ?>" ng-init="init()" class="crud">
     <!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
     <div style="visibility:hidden;" ui-view></div>
-    <div ng-if="service">
-        <div class="tabs">
-            <ul>
-                <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">menu</i> <?= Module::t('ngrest_crud_btn_list'); ?></a>
-                </li>
-                <?php if ($canCreate && $config->getPointer('create')): ?>
-                    <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
-                        <a class="tabs__anchor" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> <?= Module::t('ngrest_crud_btn_add'); ?></a>
-                    </li>
-                <?php endif; ?>
-                <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?= Module::t('ngrest_crud_btn_close'); ?></a>
-                </li>
-                <li ng-repeat="(index,btn) in tabService.tabs" class="tabs__item" ng-class="{'tabs__item--active' : btn.active}">
-                	<a class="tabs__anchor"><i class="material-icons tabs__icon" ng-click="closeTab(btn, index)">cancel</i> <span ng-click="switchToTab(btn)">{{btn.name}} #{{btn.id}}</span></a>
-                </li>
-            </ul>
-        </div>
-        <div class="langswitch crud__langswitch" ng-if="crudSwitchType!==0">
-            <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'langswitch__item--active' : AdminLangService.isInSelection(lang.short_code)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ] ng-binding ng-scope">
-                <span class="flag flag--{{lang.short_code}}">
-                    <span class="flag__fallback">{{lang.name}}</span>
-                </span>
-            </a>
-        </div>
-		<div class="card-panel" ng-repeat="btn in tabService.tabs" ng-if="btn.active">
-			<crud-relation-loader api="{{btn.api}}" array-index="{{btn.arrayIndex}}" model-class="{{btn.modelClass}}" id="{{btn.id}}"></crud-relation-loader>
-		</div>
-        <div class="card-panel" ng-show="crudSwitchType==0">
-            <div class="button-right" style="margin-bottom:30px;">
-                <div class="button-right__left">
-                    <div class="row">
-                        <div class="col <?php if (!empty($config->getFilters())): ?>m12 l6<?php else: ?>m6 l8<?php endif; ?>">
-                            <div class="input input--text">
-                                <div class="input__field-wrapper">
-                                    <input class="input__field" ng-model="config.searchQuery" type="text" placeholder="<?= Module::t('ngrest_crud_search_text'); ?>" />
-                                </div>
-                            </div>
-                            <div ng-show="config.minLengthWarning">
-                               <p><?= Module::t('ngrest_crud_ajax_search_length')?></p>
-                            </div>
-                        </div>
-                        <div class="col <?php if (!empty($config->getFilters())): ?>m6 l3<?php else: ?>m12 l4<?php endif; ?>">
-                            <div class="input input--select input--vertical input--full-width">
-                                <div class="input__field-wrapper">
-                                    <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                    <select class="input__field" ng-change="changeGroupByField()" ng-model="config.groupByField">
-                                        <option value="0"><?= Module::t('ngrest_crud_group_prompt'); ?></option>
-                                        <?php foreach ($config->getPointer('list') as $item): ?>
-                                            <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <?php if (!empty($config->getFilters())): ?>
-                            <div class="col m6 l3">
-                                <div class="input input--select input--vertical input--full-width">
-                                    <div class="input__field-wrapper">
-                                        <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                        <select class="input__field" ng-model="config.filter">
-                                            <option value="0"><?= Module::t('ngrest_crud_filter_prompt'); ?></option>
-                                            <?php foreach (array_keys($config->getFilters()) as $name): ?>
-                                                <option value="<?= $name; ?>"><?= $name; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-                <div class="button-right__right">
-                    <div>
-                        <button type="button" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()" class="btn cyan btn--small" style="width: 100%;">
-                            <i class="material-icons left">unarchive</i> <?= Module::t('ngrest_crud_csv_export_btn'); ?>
-                        </button>
-                        <div ng-show="exportLoading" class="btn disabled btn--small center" style="width: 100%;"><i class="material-icons spin">cached</i></div>
-                        <div ng-show="exportDownloadButton">
-                            <button ng-click="exportDownload()" class="btn light-green btn--small" type="button" style="width: 100%;"><i class="material-icons left">file_download</i> <?= Module::t('ngrest_crud_csv_export_btn_dl'); ?></button>
-                        </div>
-                    </div>
+    <div class="crud-header">
+        <h1 class="crud-title">TITLE</h1>
+        <div class="crud-toolbar">
+            <button type="button" class="btn btn-sm btn-link btn-icon"><i class="material-icons">settings</i></button>
+            <div class="btn-group">
+                <button class="btn btn-sm btn-link btn-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#"><i class="material-icons">get_app</i> <span>Export CSV</span></a>
+                    <a class="dropdown-item" href="#"><i class="material-icons">done_all</i> <span>Mark all as done</span></a>
                 </div>
             </div>
-            <div ng-if="pager && !config.pagerHiddenByAjaxSearch" style="text-align: center;">
-                <ul class="pagination">
-                    <li class="pagination__arrow pagination__arrow--left" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
-                    <li class="pagination__number" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
-                        <a>{{pageId}}</a>
-                    </li>
-                    <li class="pagination__arrow pagination__arrow--right" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
-                </ul>
-            </div>
-            <table class="striped responsive-table hoverable">
-                <thead>
-                <tr>
-                    <?php foreach ($config->getPointer('list') as $item): ?>
-                        <th ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?= $item['alias']; ?>
-                        <?php if ($config->getDefaultOrderField()): ?>
-                        <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i>
-                        <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i>
-                        <?php endif; ?></th>
-                    <?php endforeach; ?>
-                    <?php if (count($this->context->getButtons()) > 0): ?>
-                        <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span></th>
-                    <?php endif; ?>
-                </tr>
-                </thead>
-                <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
-	                <tr ng-if="config.groupBy" class="table__group">
-	                    <td colspan="100">
-	                        <strong>{{key}}</strong>
-	                        <i class="material-icons right" ng-click="viewToggler[key]=true" ng-show="!viewToggler[key]">keyboard_arrow_up</i>
-	                        <i class="material-icons right" ng-click="viewToggler[key]=false" ng-show="viewToggler[key]">keyboard_arrow_down</i>
-	                    </td>
-	                </tr>
-	                <tr ng-repeat="(k, item) in items | srcbox:config.searchString" ng-show="viewToggler[key]" ng-class="{'crud__item-highlight': isHighlighted(item)}">
-	                    <?php foreach ($config->getPointer('list') as $item): ?>
-	                        <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
-	                            <td ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?= $element['html']; ?></td>
-	                        <?php endforeach; ?>
-	                    <?php endforeach; ?>
-	                    <?php if (count($this->context->getButtons()) > 0): ?>
-	                        <td style="text-align:right;">
-	                            <div ng-hide="isLocked(config.tableName, item[config.pk])">
-	                            <?php foreach ($this->context->getButtons() as $item): ?>
-	                                <a class="crud__button waves-effect waves-light btn-flat btn--bordered" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?= $item['icon']; ?></i><?= $item['label']; ?></a>
-	                            <?php endforeach; ?>
-	                            </div>
-	                            <div ng-show="isLocked(config.tableName, item[config.pk])">
-	                                <span><small>is locked</small></span>
-	                            </div>
-	                        </td>
-	                    <?php endif; ?>
-	                </tr>
-                </tbody>
-            </table>
-            <div ng-if="pager && !config.pagerHiddenByAjaxSearch" style="text-align: center;">
-                <ul class="pagination">
-                    <li class="pagination__arrow pagination__arrow--left" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
-                    <li class="pagination__number" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
-                        <a>{{pageId}}</a>
-                    </li>
-                    <li class="pagination__arrow pagination__arrow--right" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
-                </ul>
-            </div>
-            <div ng-show="data.list.length == 0" class="alert alert--info"><?= Module::t('ngrest_crud_empty_row'); ?></div>
-        </div>
-        <div class="card-panel" ng-if="crudSwitchType==1" <?php if (!$isInline): ?>zaa-esc="closeCreate()"<?php endif; ?>>
-            <?php if ($canCreate && $config->getPointer('create')): ?>
-                <form name="formCreate" role="form" ng-submit="submitCreate()">
-                    <!-- MODAL CONTENT -->
-                    <div class="modal__content">
-                        <?php foreach ($this->context->forEachGroups(RenderCrud::TYPE_CREATE) as $key => $group): ?>
-                            <?php if (!$group['is_default']): ?>
-                                <div class="form-group" ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>">
-                                <p class="form-group__title" ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]">
-                                    <?= $group['name']; ?>
-                                    <span class="material-icons right" ng-show="groupToggler[<?= $key; ?>]">keyboard_arrow_up</span>
-                                    <span class="material-icons right" ng-show="!groupToggler[<?= $key; ?>]">keyboard_arrow_down</span>
-                                </p>
-                                <div class="form-group__fields" ng-show="groupToggler[<?= $key; ?>]">
-                            <?php endif; ?>
-
-                            <?php foreach ($group['fields'] as $field => $fieldItem): ?>
-                                <div class="row">
-                                    <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_CREATE) as $element): ?>
-                                        <?= $element['html']; ?>
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php endforeach; ?>
-
-                            <?php if (!$group['is_default']): ?>
-                                </div> <!-- /.form-group__fields -->
-                                </div> <!-- /.form-group -->
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                    <div class="modal__footer">
-                        <div class="row">
-                            <div class="col s12">
-                                <div class="right">
-                                    <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
-                                        <?= Module::t('ngrest_crud_btn_create'); ?> <i class="material-icons right">check</i>
-                                    </button>
-                                    <button class="btn waves-effect waves-light red" type="button" ng-click="closeCreate()">
-                                        <i class="material-icons left">cancel</i> <?= Module::t('button_abort'); ?>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            <?php endif; ?>
-        </div>
-        <div class="card-panel" ng-if="crudSwitchType==2" <?php if (!$isInline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
-            <?php if ($canUpdate && $config->getPointer('update')): ?>
-                <form name="formUpdate" role="form" ng-submit="submitUpdate()">
-                    <!-- MODAL CONTENT -->
-                    <div class="modal__content">
-                        <?php foreach ($this->context->forEachGroups(RenderCrud::TYPE_UPDATE) as $key => $group): ?>
-                            <?php if (!$group['is_default']): ?>
-                                <div class="form-group" ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>">
-                                <p class="form-group__title" ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]">
-                                    <?= $group['name']; ?>
-                                    <span class="material-icons right" ng-show="groupToggler[<?= $key; ?>]">keyboard_arrow_up</span>
-                                    <span class="material-icons right" ng-show="!groupToggler[<?= $key; ?>]">keyboard_arrow_down</span>
-                                </p>
-                                <div class="form-group__fields" ng-show="groupToggler[<?= $key; ?>]">
-                            <?php endif; ?>
-                            <?php foreach ($group['fields'] as $field => $fieldItem): ?>
-                                <div class="row">
-                                    <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_UPDATE) as $element): ?>
-                                        <?= $element['html']; ?>
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php endforeach; ?>
-                            <?php if (!$group['is_default']): ?>
-                                </div>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                    <!-- /MODAL CONTENT -->
-                    <!-- MODAL FOOTER -->
-                    <div class="modal__footer">
-                        <div class="row">
-                            <div class="col s12">
-                                <div class="right">
-                                    <button class="btn waves-effect waves-light" type="submit" ng-disabled="updateForm.$invalid">
-                                        <?= Module::t('button_save'); ?> <i class="material-icons right">check</i>
-                                    </button>
-                                    <button class="btn waves-effect waves-light red" type="button" ng-click="closeUpdate()">
-                                        <i class="material-icons left">cancel</i> <?= Module::t('button_abort'); ?>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /MODAL FOOTER -->
-                </form>
-            <?php endif; ?>
         </div>
     </div>
-    <modal is-modal-hidden="activeWindowModal">
-        <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
-    </modal>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" role="tab">
+                <i class="material-icons">list</i>
+                <span><?= Module::t('ngrest_crud_btn_list'); ?></span>
+            </a>
+        </li>
+        <li class="nav-item mr-auto"> <!-- THE LAST ONE OF THE REGULAR CRUD TABS NEEDS TO HAVE THE MR-AUTO CLASS -->
+            <a class="nav-link" data-toggle="tab" role="tab">
+                <i class="material-icons">add_box</i>
+                <span><?= Module::t('ngrest_crud_btn_add'); ?></span>
+            </a>
+        </li>
+
+        <li class="nav-item nav-item-border-only" ng-repeat="lang in AdminLangService.data">
+            <a class="nav-link active" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" role="tab">
+                <span class="flag flag--{{lang.short_code}}">
+                    <span class="flag__fallback ng-binding">{{lang.name}}</span>
+                </span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+
+        <div class="tab-pane active" id="entries" role="tabpanel">
+
+            <div class="tab-padded">
+                <div class="row mt-2">
+                    <div class="col-md-4 col-lg-6 col-xl-6 col-xxxl-8">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="material-icons">search</i>
+                            </div>
+                            <input class="form-control" ng-model="config.searchQuery" type="text" placeholder="<?= Module::t('ngrest_crud_search_text'); ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3 col-xl-3 col-xxxl-2">
+                        <select class="form-control" id="group-by">
+                            <option>Group by ...</option>
+                            <option>Field 1</option>
+                            <option>Field 2</option>
+                            <option>Field 3</option>
+                            <option>Field 4</option>
+                            <option>Field 5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-lg-3 col-xl-3 col-xxxl-2">
+                        <select class="form-control" id="group-by">
+                            <option>Filter by ...</option>
+                            <option>Field 1</option>
+                            <option>Field 2</option>
+                            <option>Field 3</option>
+                            <option>Field 4</option>
+                            <option>Field 5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-hover table-striped table-align-middle mt-4">
+                <thead class="thead-default">
+                    <tr>
+                        <?php foreach ($config->getPointer('list') as $item): ?>
+                        <th>
+                            <span><?= $item['alias']; ?></span>
+                            <div class="table-sorter table-sorter-up is-active">
+                                <i class="material-icons">keyboard_arrow_up</i>
+                            </div>
+                            <div class="table-sorter table-sorter-down">
+                                <i class="material-icons">keyboard_arrow_down</i>
+                            </div>
+                        </th>
+                        <?php endforeach; ?>
+                        <th class="tab-padding-right text-right">
+                            <span class="crud-counter">{{data.listArray.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
+                    <tr ng-repeat="(k, item) in items | srcbox:config.searchString" ng-show="viewToggler[key]">
+                        <?php foreach ($config->getPointer('list') as $item): ?>
+                            <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
+                                 <td><?= $element['html']; ?></td>
+                             <?php endforeach; ?>
+                         <?php endforeach; ?>
+                         <?php if (count($this->context->getButtons()) > 0): ?>
+                        <td class="text-right">
+                            <?php foreach ($this->context->getButtons() as $item): ?>
+                            <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i></button>
+                            <?php endforeach; ?>
+                            <!-- 
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-link btn-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><i class="material-icons">build</i> <span>Build</span></a>
+                                    <a class="dropdown-item" href="#"><i class="material-icons">done</i> <span>Mark as done</span></a>
+                                    <a class="dropdown-item" href="#"><i class="material-icons">report</i> <span>Report</span></a>
+                                </div>
+                            </div>
+                             -->
+                        </td>
+                        <?php endif; ?>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="pagination" ng-if="pager && !config.pagerHiddenByAjaxSearch">
+                <li class="page-item page-item-icon disabled" ng-class="{'disabled' : pager.currentPage == 1}" >
+                    <a class="page-link" ng-click="pagerPrevClick()" tabindex="-1"><i class="material-icons">keyboard_arrow_left</i></a>
+                </li>
+                <li class="page-item active" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}">
+                    <a class="page-link" ng-click="realoadCrudList(pageId)">{{pageId}}</a>
+                </li>
+                <li class="page-item page-item-icon" ng-class="{'disabled' : pager.currentPage == pager.pageCount}">
+                    <a class="page-link"  ng-click="pagerNextClick()"><i class="material-icons">keyboard_arrow_right</i></a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="tab-pane tab-padded" id="add" role="tabpanel">
+            TAB 2
+        </div>
+
+    </div>
+
 </div>
 <?php $this->endBody(); ?>
 <?php $this->endPage(); ?>

@@ -2,44 +2,12 @@
 use luya\admin\Module;
 use luya\helpers\Url;
 ?>
-
-<div class="luya__content">
-    <h1>Account</h1>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#entries" role="tab">
-                <i class="material-icons">list</i>
-                <span>Entries</span>
-            </a>
-        </li>
-        <li class="nav-item mr-auto"> <!-- THE LAST ONE OF THE REGULAR CRUD TABS NEEDS TO HAVE THE MR-AUTO CLASS -->
-            <a class="nav-link" data-toggle="tab" href="#add" role="tab">
-                <i class="material-icons">add_box</i>
-                <span>Add new</span>
-            </a>
-        </li>
-
-    </ul>
-
-    <div class="tab-content">
-
-        <div class="tab-pane active" id="entries" role="tabpanel">
-            <div class="tab-padded">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid" ng-controller="AccountController">
-    <br />
+<div class="luya__content" ng-controller="AccountController">
+    <h1><span ng-bind="profile.firstname"></span> <span ng-bind="profile.lastname"></span></h1>
     <div class="row">
-        <div class="col s8">
-            <div class="card-panel">
-                <div class="row">
-                    <div class="col s12">
-                        <h4 class="input-offset"><span ng-bind="profile.firstname"></span> <span ng-bind="profile.lastname"></span></h4>
-                    </div>
-                </div>
+        <div class="col-md-4">
+            <div class="card">
+            <h2>Personalien</h2>
                 <form ng-submit="changePersonData(profile)">
                     <div class="row">
                         <div class="col s12">
@@ -83,13 +51,11 @@ use luya\helpers\Url;
                     </div>
                 </form>
             </div>
-            <br />
-            <div class="card-panel">
-                <div class="row">
-                    <div class="col s12">
-                        <h4 class="input-offset"><?= Module::t('mode_user_password'); ?></h4>
-                    </div>
-                </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <h2><?= Module::t('mode_user_password'); ?></h2>
                 <form ng-submit="changePassword(pass)" class="clearfix">
                     <div class="row">
                         <div class="col s12 l6">
@@ -123,26 +89,19 @@ use luya\helpers\Url;
                 </form>
             </div>
         </div>
-        <div class="col s3">
-            <div class="card-panel grey lighten-3">
-                <p><a href="<?= Url::toRoute(['/admin/default/logout']); ?>" class="btn btn--full-width red"><?= Module::t('layout_btn_logout'); ?></a></p>
-                <br />
-                <div ng-init="settings.lang='<?=Yii::$app->adminuser->interfaceLanguage;?>'">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="input input--select input--vertical">
-                                <label class="input__label black-text" for="layout-changer" style="margin-bottom:5px;"><?= Module::t('layout_rightbar_languagelabel')?></label>
-                                <div class="input__select-wrapper">
-                                    <select id="layout-changer" class="input__field" ng-model="settings.lang" ng-change="updateUserProfile(settings)">
-                                        <?php foreach ($this->context->module->interfaceLanguageDropdown as $key => $lang): ?>
-                                            <option value="<?= $key; ?>" <?php if (Yii::$app->adminuser->interfaceLanguage == $key): ?>selected<?php endif; ?>><?= $lang;?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <p><a href="<?= Url::toRoute(['/admin/default/logout']); ?>" class="btn btn-primary"><?= Module::t('layout_btn_logout'); ?></a></p>
+                <div class="input input--select input--vertical">
+                    <label class="input__label black-text" for="layout-changer" style="margin-bottom:5px;"><?= Module::t('layout_rightbar_languagelabel')?></label>
+                    <div class="input__select-wrapper">
+                        <select id="layout-changer" class="input__field" ng-model="settings.lang" ng-change="updateUserProfile(settings)">
+                            <?php foreach ($this->context->module->interfaceLanguageDropdown as $key => $lang): ?>
+                                <option value="<?= $key; ?>" <?php if (Yii::$app->adminuser->interfaceLanguage == $key): ?>selected<?php endif; ?>><?= $lang;?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
