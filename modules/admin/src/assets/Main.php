@@ -18,7 +18,7 @@ class Main extends \luya\web\Asset
      * @var array A list of css style documents located in the $sourcePath folder.
      */
     public $css = [
-        'dist/css/admin.css'
+        'dist/css/main.css'
     ];
 
     /**
