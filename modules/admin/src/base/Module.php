@@ -127,7 +127,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      */
     public function getMenu()
     {
-        return [];
+        return false;
     }
     
     /**
