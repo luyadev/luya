@@ -8,6 +8,7 @@ use luya\helpers\Url;
 use luya\traits\CacheableTrait;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\remoteadmin\Module;
+use luya\helpers\StringHelper;
 
 /**
  * This is the model class for table "remote_site".
@@ -164,7 +165,13 @@ class Site extends NgRestModel
     
     public function versionize($version)
     {
-    	return ($version == self::getCurrentLuyaVersion()['version']) ? 'background-color:#c8e6c9' : 'background-color:#ffcdd2';
+        if ($version == self::getCurrentLuyaVersion()['version']) {
+            return 'background-color:#dff0d8';
+        } elseif (StringHelper::contains('dev', $version)) {
+            return 'background-color:#fcf8e3';
+        }
+        
+        return 'background-color:#f2dede';
     }
     
     private static $_currentVersion;
