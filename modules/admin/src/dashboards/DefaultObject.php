@@ -23,7 +23,7 @@ class DefaultObject extends BaseDashboardObject
      * ```
      */
     public $wrapperOptions = [
-        'class' => 'card-panel',
+        'class' => 'card',
         'ng-controller' => 'DefaultDashboardObjectController',
         'ng-init' => 'loadData(\'{{dataApiUrl}}\')',
     ];
@@ -35,7 +35,7 @@ class DefaultObject extends BaseDashboardObject
 	 * <h3>{{title}}</h3>{{template}}
 	 * ```
 	 */
-    public $outerTemplate = '<h3>{{title}}</h3>{{template}}';
+    public $outerTemplate = '<div class="card-block"><h5 class="card-title">{{title}}</h4>{{template}}</div>';
 
     public function getTitle()
     {

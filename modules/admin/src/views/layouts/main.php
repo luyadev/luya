@@ -28,75 +28,82 @@ $this->beginPage()
 <?php $this->beginBody(); ?>
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
-    <div class="luya__mainnav">
-            
+    <div class="luya__mainnav">    
         <div class="mainnav mainnav--small">
-        
             <div class="mainnav__static">
-        
                 <ul class="mainnav__list">
-        
                     <li class="mainnav__entry">
-                        <a class="mainnav__link" href="#">
+                        <span class="mainnav__link" href="#">
                             <i class="mainnav__icon material-icons">search</i>
                             <span class="mainnav__label">
                                 Search
                             </span>
-                        </a>
+                        </span>
                     </li>
-        
                     <li class="mainnav__entry">
-                        <a class="mainnav__link" ng-href="#">
+                        <span class="mainnav__link" ui-sref="home" ui-sref-active="mainnav__link--active">
                             <i class="mainnav__icon material-icons">home</i>
                             <span class="mainnav__label">
                                 Dashboard
                             </span>
-                        </a>
+                        </span>
                     </li>
-        
                 </ul>
-        
             </div>
-        
             <div class="mainnav__modules">
-        
                 <ul class="mainnav__list">
-        
                     <li class="mainnav__entry" ng-repeat="item in items">
-                        <a class="mainnav__link"  ng-class="{'mainnav__link--active' : isActive(item) }" ng-click="click(item)">
+                        <span class="mainnav__link"  ng-class="{'mainnav__link--active' : isActive(item) }" ng-click="click(item)">
                             <i class="mainnav__icon material-icons">{{item.icon}}</i>
                             <span class="mainnav__label">
                                 {{item.alias}}
                             </span>
-                        </a>
+                        </span>
                     </li>
-        
                 </ul>
-        
             </div>
-        
             <div class="mainnav__static mainnav__static--bottom">
-        
                 <ul class="mainnav__list">
-        
                     <li class="mainnav__entry">
-                        <a class="mainnav__link" href="#">
+                        <span class="mainnav__link" ng-click="reload()">
                             <i class="mainnav__icon material-icons">refresh</i>
                             <span class="mainnav__label">
-                                Clear cache
+                                <?= Admin::t('layout_btn_reload'); ?>
                             </span>
-                        </a>
+                        </span>
                     </li>
-        
                     <li class="mainnav__entry">
                         <a class="mainnav__link" href="#">
-                            <i class="mainnav__icon material-icons">face</i>
+                            <i class="mainnav__icon material-icons">developer_board</i>
                             <span class="mainnav__label">
-                                Account
+                                <?= Admin::t('layout_btn_version'); ?>
                             </span>
                         </a>
                     </li>
-        
+                    <li class="mainnav__entry">
+                        <a class="mainnav__link" href="#">
+                            <i class="mainnav__icon material-icons">panorama_fish_eye</i>
+                            <span class="mainnav__label">
+                                <?= Admin::t('layout_btn_useronline'); ?>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="mainnav__entry">
+                        <a class="mainnav__link" href="<?= Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>">
+                            <i class="mainnav__icon material-icons">exit_to_app</i>
+                            <span class="mainnav__label">
+                                <?= Admin::t('layout_btn_logout'); ?>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="mainnav__entry">
+                        <a class="mainnav__link" ui-sref="custom({templateId:'admin/account/dashboard'})">
+                            <i class="mainnav__icon material-icons">account_circle</i>
+                            <span class="mainnav__label">
+                                <?= Admin::t('layout_btn_profile'); ?>
+                            </span>
+                        </a>
+                    </li>
                     <li class="mainnav__entry">
                         <a class="mainnav__link" href="https://luya.io" target="_blank">
                             <span class="mainnav__icon">
@@ -107,16 +114,11 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
-        
                 </ul>
-        
             </div>
-        
         </div>
-            
-    </div>
-    <div class="luya__main" ui-view>
-    </div>
+     </div>
+    <div class="luya__main" ui-view />
 </div>
 <?php $this->endBody() ?>
 </body>

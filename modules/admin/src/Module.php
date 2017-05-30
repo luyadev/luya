@@ -70,7 +70,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public $dashboardObjects = [
    		[
-       		'template' => '<table class="striped"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>', 
+       		'template' => '<table class="table"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>', 
        		'dataApiUrl' => 'admin/api-admin-common/last-logins',
        		'title' => ['admin', 'dashboard_lastlogin_title'],
    		],

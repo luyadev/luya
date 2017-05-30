@@ -2,7 +2,35 @@
 use luya\admin\Module;
 use luya\helpers\Url;
 ?>
-<div class="container" ng-controller="AccountController">
+
+<div class="luya__content">
+    <h1>Account</h1>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#entries" role="tab">
+                <i class="material-icons">list</i>
+                <span>Entries</span>
+            </a>
+        </li>
+        <li class="nav-item mr-auto"> <!-- THE LAST ONE OF THE REGULAR CRUD TABS NEEDS TO HAVE THE MR-AUTO CLASS -->
+            <a class="nav-link" data-toggle="tab" href="#add" role="tab">
+                <i class="material-icons">add_box</i>
+                <span>Add new</span>
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content">
+
+        <div class="tab-pane active" id="entries" role="tabpanel">
+            <div class="tab-padded">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" ng-controller="AccountController">
     <br />
     <div class="row">
         <div class="col s8">
