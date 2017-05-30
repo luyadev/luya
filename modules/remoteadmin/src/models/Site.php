@@ -160,7 +160,7 @@ class Site extends NgRestModel
     	} else {
     		$state = !empty($value);
     	}
-    	return $state ? 'background-color:#c8e6c9' : 'background-color:#ffcdd2';
+    	return $state ? 'background-color:#dff0d8' : 'background-color:#f2dede';
     }
     
     public function versionize($version)
