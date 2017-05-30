@@ -98,9 +98,9 @@ $this->beginPage()
                     </li>
         
                     <li class="mainnav__entry">
-                        <a class="mainnav__link" href="http://luya.io" target="_blank">
+                        <a class="mainnav__link" href="https://luya.io" target="_blank">
                             <span class="mainnav__icon">
-                                <img class="mainnav__image-icon" src="images/luya-logo-small.png" />
+                                <img class="mainnav__image-icon" src="<?= $this->getAssetUrl('luya\admin\assets\Main'); ?>/images/luya-logo-small.png" />
                             </span>
                             <span class="mainnav__label">
                                 LUYA
