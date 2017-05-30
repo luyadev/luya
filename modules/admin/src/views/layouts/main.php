@@ -29,7 +29,7 @@ $this->beginPage()
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
     <div class="luya__mainnav">    
-        <div class="mainnav mainnav--small">
+        <div class="mainnav" ng-mouseover="isHover=true" ng-mouseout="isHover=false" ng-class="{'mainnav--small' : !isHover}">
             <div class="mainnav__static">
                 <ul class="mainnav__list">
                     <li class="mainnav__entry">
