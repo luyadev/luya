@@ -21,15 +21,11 @@ use luya\admin\Module as Admin;
 
 
 <script type="text/ng-template" id="modal">
-    <div class="modal__wrapper" ng-show="!isModalHidden" zaa-esc="isModalHidden=1" >
-        <div class="modal">
-            <button type="button" class="btn waves-effect waves-light modal__close btn-floating red" ng-click="isModalHidden=1">
-                <i class="material-icons">close</i>
-            </button>
-            <div class="modal-content" ng-transclude></div>
-        </div>
-        <div class="modal__background" ng-click="isModalHidden=1" style="cursor:pointer;"></div>
+<div class="modal fade" tabindex="-1" aria-hidden="true" ng-class="{'show':!isModalHidden}" ng-style="{display: (isModalHidden ? 'none' : 'block')}" zaa-esc="isModalHidden=1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" ng-transclude />
     </div>
+</div>
 </script>
 
 <!-- UPDATE REDIRECT FORM -->

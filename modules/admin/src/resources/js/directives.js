@@ -28,7 +28,7 @@
     			}
     		},
     		template: function() {
-    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-floating green lighten-1"><i class="material-icons">playlist_add</i></button><div ng-show="showWindow" class="modal__wrapper"><div class="modal"><button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="toggleWindow()"><i class="material-icons">close</i></button><div class="modal-content" compile-html ng-bind-html="content"></div></div><div class="modal__background"></div></div></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-floating green lighten-1"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="!showWindow"><div ng-bind-html="content"></div></div>';
     		}
     	}
     });
@@ -500,23 +500,8 @@
                 "name": "@fieldname",
                 "placeholder": "@placeholder"
             },
-            /*
-            link : function(scope, element) {
-            	var e = element.find('textarea')[0];
-            	var h = angular.element(e).height();
-            	var recalc = function(e, h) {
-            		if (e.scrollHeight > h) {
-            			e.style.height = (e.scrollHeight) + "px";
-            		}
-            	}
-            	scope.$watch('model', function(n, o) {
-            		recalc(e, h);
-            	});
-            	recalc(e, h);
-            },
-            */
             template: function() {
-                return '<div class="input input--textarea" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><textarea id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="input__field" auto-grow placeholder="{{placeholder}}"></textarea></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><textarea id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="form-control" auto-grow placeholder="{{placeholder}}"></textarea></div></div>';
             }
         }
     });
@@ -533,7 +518,7 @@
                 "name": "@fieldname"
             },
             template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="password" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="password" class="form-control" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -571,10 +556,10 @@
                 });
             },
             template: function() {
-                return '<div class="input input--select" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label" for="{{id}}">{{label}}</label>' +
-                            '<div class="input__select-wrapper">' +
-                                '<select name="{{name}}" id="{{id}}" class="input__field browser-default" chosen search-contains="true" allow-single-deselect="true" width="\'100%\'" placeholder-text-single="\'' + i18n['ngrest_select_no_selection']+ '\'" ng-options="item.value as item.label for item in options" ng-model="model"><option></option></select>' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div>' +
+                            '<div class="form-side">' +
+                                '<select name="{{name}}" id="{{id}}" class="form-control browser-default" chosen search-contains="true" allow-single-deselect="true" width="\'100%\'" placeholder-text-single="\'' + i18n['ngrest_select_no_selection']+ '\'" ng-options="item.value as item.label for item in options" ng-model="model"><option></option></select>' +
                             '</div>' +
                         '</div>';
             }
@@ -615,9 +600,10 @@
             	})
             },
             template: function() {
-                return '<div class="input input--single-checkbox">' +
-                            '<input id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" />' +
-                            '<label for="{{id}}" class="input__label">{{label}}</label>' +
+                return '<div class="form-check">' +
+                            '<label for="{{id}}" class="form-check-label">'+
+                            '<input id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" class="form-check-input" />' +
+                            '{{label}}</label>' +
                         '</div>';
             }
         }
@@ -790,7 +776,7 @@
 
             },
             template: function() {
-            	return '<div class="input input--date" ng-class="{\'input--hide-label\': i18n, \'input--with-time\': model!=null && date!=null}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-class="{\'red\': datePickerToggler}" ng-click="toggleDatePicker()"><i class="material-icons" ng-hide="datePickerToggler">date_range</i><i class="material-icons" style="margin-top: 1px;" ng-show="datePickerToggler">close</i></span></datepicker>'+
+            	return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n, \'input--with-time\': model!=null && date!=null}"><div class="form-side form-side-label"><label>{{label}}</label></div><div class="form-side"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-class="{\'red\': datePickerToggler}" ng-click="toggleDatePicker()"><i class="material-icons" ng-hide="datePickerToggler">date_range</i><i class="material-icons" style="margin-top: 1px;" ng-show="datePickerToggler">close</i></span></datepicker>'+
             	'<div ng-show="model!=null && date!=null" class="hour-selection"><span class="hour-selection__icon"><i class="material-icons">access_time</i></span><input type="text" ng-model="hour" ng-change="autoRefactor()" class="input__field input__field--hour" /><span class="time-divider">:</span><input type="text" ng-model="min" ng-change="autoRefactor()" class="input__field input__field--minute" /></div>'
             	'</div></div></div>';
             }
@@ -856,7 +842,7 @@
 
             },
             template: function() {
-            	return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-class="{\'red\': datePickerToggler}" ng-click="toggleDatePicker()"><i class="material-icons" ng-hide="datePickerToggler">date_range</i><i class="material-icons" style="margin-top: 1px;" ng-show="datePickerToggler">close</i></span></datepicker></div></div></div>';
+            	return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label>{{label}}</label></div><div class="form-side"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-class="{\'red\': datePickerToggler}" ng-click="toggleDatePicker()"><i class="material-icons" ng-hide="datePickerToggler">date_range</i><i class="material-icons" style="margin-top: 1px;" ng-show="datePickerToggler">close</i></span></datepicker></div></div></div>';
             }
         }
     });
