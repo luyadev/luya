@@ -30,13 +30,13 @@ $this->beginBody();
 
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" role="tab">
+            <a class="nav-link" ng-class="{'active':crudSwitchType==0}" role="tab" ng-click="switchTo(0, true)">
                 <i class="material-icons">list</i>
                 <span><?= Module::t('ngrest_crud_btn_list'); ?></span>
             </a>
         </li>
         <li class="nav-item mr-auto"> <!-- THE LAST ONE OF THE REGULAR CRUD TABS NEEDS TO HAVE THE MR-AUTO CLASS -->
-            <a class="nav-link" data-toggle="tab" role="tab">
+            <a class="nav-link" ng-class="{'active':crudSwitchType==1}" ng-click="switchTo(1)">
                 <i class="material-icons">add_box</i>
                 <span><?= Module::t('ngrest_crud_btn_add'); ?></span>
             </a>
@@ -53,7 +53,7 @@ $this->beginBody();
 
     <div class="tab-content">
 
-        <div class="tab-pane active" id="entries" role="tabpanel">
+        <div class="tab-pane active" role="tabpanel" ng-show="crudSwitchType==0">
 
             <div class="tab-padded">
                 <div class="row mt-2">
@@ -151,12 +151,9 @@ $this->beginBody();
 
         </div>
 
-        <div class="tab-pane tab-padded" id="add" role="tabpanel">
-            TAB 2
-        </div>
-
+        <?= $this->render('_crudform', ['type' => '1', 'renderer' => RenderCrud::TYPE_CREATE, 'isInline' => $isInline]); ?>
+        <?= $this->render('_crudform', ['type' => '2', 'renderer' => RenderCrud::TYPE_UPDATE, 'isInline' => $isInline]); ?>
     </div>
-
 </div>
 <?php $this->endBody(); ?>
 <?php $this->endPage(); ?>

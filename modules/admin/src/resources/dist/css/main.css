@@ -9834,16 +9834,57 @@ html, body {
   position: relative; }
 
 label {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
   width: 100%; }
   label .flag {
     margin: -1px 10px 0 0; }
 
 form:not(.form-inline) .form-check-input {
   margin-right: 10px; }
+
+.form-check-label {
+  cursor: pointer;
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+  position: relative; }
+
+.form-check-input {
+  left: 0;
+  margin: 0 !important;
+  position: absolute !important;
+  top: 3px; }
+
+.form-side-by-side {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+
+.form-not-side-by-side .form-side {
+  display: block;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 100%;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%; }
+
+.form-side {
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 200px;
+      -ms-flex: 1 1 200px;
+          flex: 1 1 200px; }
+  .form-side-label {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 200px;
+        -ms-flex: 0 1 200px;
+            flex: 0 1 200px; }
 
 .input-group-addon {
   color: #fff; }
@@ -10073,6 +10114,12 @@ form:not(.form-inline) .form-check-input {
   .btn-sm .material-icons, .btn-group-sm > .btn .material-icons {
     font-size: 16px;
     font-size: 1rem; }
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.7); }
+
+.modal-body-gray {
+  background-color: #F2F2F2; }
 
 .modulenav {
   display: block;
