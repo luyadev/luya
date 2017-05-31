@@ -313,19 +313,24 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             foreach ($this->getLangs() as $lang) {
                 if ($i == 0) {
                     $return[] = [
-                        'html' => '<label class="i18n__label">'.$element['alias'].'</label><div class="i18n__fields">',
+                        'html' => '<div class="form-i18n">
+                                       <label class="form-i18n-label" for="exampleTextarea">
+                                           ' . $element['alias'] . '
+                                       </label>
+                                       <div class="col">
+                                           <div class="row">',
                     ];
                 }
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $lang['short_code']);
                 $id = 'id-'.md5($ngModel.$lang['short_code']);
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
-                    'html' => '<div class="crud__i18n-col crud__i18n-col--{{(12/AdminLangService.selection.length)}}" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], true).'<div class="crud__flag"><span class="flag flag--'.$lang['short_code'].'"><span class="flag__fallback flag__fallback--colorized">'.$lang['short_code'].'</span></span></div></div>',
+                    'html' => '<div class="col" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], true).'<span class="flag flag--'.$lang['short_code'].' form-col-flag"><span class="flag__fallback">'.$lang['short_code'].'</span></span></div>',
                 ];
 
                 ++$i;
             }
-            $return[] = ['html' => '</div>'];
+            $return[] = ['html' => '</div><!-- /col --> </div><!-- /row --> </div><!-- /i18n -->'];
 
             return $return;
         }
