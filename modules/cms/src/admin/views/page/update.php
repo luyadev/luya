@@ -1,6 +1,6 @@
 <?php
 use luya\cms\admin\Module;
-use yii\bootstrap\Html;
+use yii\helpers\Html;
 
 ?>
 <script type="text/ng-template" id="recursion.html">
