@@ -1,10 +1,10 @@
 # NgRest Config Plugins
 
-An NgRest Plugin is like the type of an input. You can create selects, date pickers, file or image uploads, etc. Each NgRest Config Plugin can have its configuration options. In order to understand how to use the plugins read the [[ngrest-model.md]] Guide-Section.
+An NgRest Plugin is like the type of an input. You can create selects, date pickers, file or image uploads, etc. Each NgRest Config Plugin can have its configuration options. You should read the [[ngrest-model.md]] Guide-Section to understand how to use the plugins.
 
 ### Available Plugins
 
-A few plugins have options to configure, make sure you check the class reference of the plugin to find all details.
+A few plugins can be configured, make sure to check out the class reference of the plugin to find all details.
 
 |Name            |Class|Return        |Description
 |--------------    |-----|---        |-------------
@@ -34,7 +34,7 @@ A few plugins have options to configure, make sure you check the class reference
 
 ## Create a custom project Plugin
 
-Sometimes you really want to have project specific input behaviour. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:
+Sometimes you need to have project specific input behaviour. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:
 
 ```php
 <?php
@@ -72,7 +72,7 @@ class TestPlugin extends Plugin
 }
 ```
 
-The above class is abstracted from the {{luya\admin\ngrest\base\Plugin}} which requires the {{luya\admin\ngrest\base\Plugin::renderUpdate}}, {{luya\admin\ngrest\base\Plugin::renderList}} and {{luya\admin\ngrest\base\Plugin::renderCreate}} methods which are basically taking care of the form input or the element in the crud list view. As you can see we use the helper method {{luya\admin\helpers\Angular::directive}} to return a Form Input Tag with a custom directive named `my-directive`. The directive must be stored in en admin javascript file you can assign by using [Admin Module Assets](app-admin-module-assets.md). For example:
+The above class is abstracted from the {{luya\admin\ngrest\base\Plugin}} which requires the {{luya\admin\ngrest\base\Plugin::renderUpdate}}, {{luya\admin\ngrest\base\Plugin::renderList}} and {{luya\admin\ngrest\base\Plugin::renderCreate}} methods which are basically taking care of the form input or the element in the crud list view. As you can see we use the helper method {{luya\admin\helpers\Angular::directive}} to return a Form Input Tag with a custom directive named `my-directive`. The directive has to be stored in an admin javascript file that you can assign by using [Admin Module Assets](app-admin-module-assets.md). For example:
 
 ```js
 zaa.directive("myDirective", function() {
@@ -94,7 +94,7 @@ zaa.directive("myDirective", function() {
 });
 ```
 
-Now in order to use the custom `TestPlugin` in your [NgRest Config Model](ngrest-model.md) cast ean extra Field which takes care of getting (list) and setting (update/create) the value in your `admin\ngrest\base\Model` ActiveRecord class model.
+Now in order to use the custom `TestPlugin` in your [NgRest Config Model](ngrest-model.md) you can define an extra Field which takes care of getting (list) and setting (update/create) the value in your `admin\ngrest\base\Model` ActiveRecord class model.
 
 ```php
 class Product extends \luya\admin\ngrest\base\NgRestModel
@@ -108,7 +108,7 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
     
     public function getField()
     {
-        // This is triggered when active record trys to get the values for the field. This is basic getter/setter concept of the yii\base\Object.
+        // This is triggered when the active record tries to get the values for the field. This is the basic getter/setter concept of the yii\base\Object.
     }
     
     public function extraFields()
