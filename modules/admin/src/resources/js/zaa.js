@@ -200,24 +200,62 @@ function typeCastValue(value) {
             scope: {
                 'tooltipText': '@',
                 'tooltipExpression': '=',
+                'tooltipPosition': '@',
                 'tooltipOffsetTop': '=',
                 'tooltipOffsetLeft': '='
             },
             link: function (scope, element, attr) {
-            	
-            	if (scope.tooltipExpression) {
-            		scope.tooltipText = scope.tooltipExpression;
-            	}
-                var html = '<div class="tooltip">' + scope.tooltipText + '</div>';
+                var positions = {
+                    top: function(elem, pop) {
+                        var bcr = elem.getBoundingClientRect();
+                        return {
+                            top: 0 - bcr.height - pop.outerHeight() - 5,
+                            left: (bcr.width / 2) - (pop.outerWidth() / 2)
+                        }
+                    },
+                    right: function(elem, pop) {
+                        var bcr = elem.getBoundingClientRect();
+                        return {
+                            top: 0 - (bcr.height / 2) - (pop.outerHeight() / 2) - 5,
+                            left: bcr.width
+                        }
+                    },
+                    bottom: function(elem, pop) {
+                        var bcr = elem.getBoundingClientRect();
+                        return {
+                            top: -5,
+                            left: (bcr.width / 2) - (pop.outerWidth() / 2)
+                        }
+                    },
+                    left: function(elem, pop) {
+                        var bcr = elem.getBoundingClientRect();
+                        return {
+                            top: 0 - (bcr.height / 2) - (pop.outerHeight() / 2) - 5,
+                            left: 0 - pop.width() - 10
+                        }
+                    }
+                };
+
+                if (scope.tooltipExpression) {
+                    scope.tooltipText = scope.tooltipExpression;
+                }
+
+                var html = '<div class="tooltip tooltip-' + scope.tooltipPosition + '" role="tooltip">' +
+                               '<div class="tooltip-arrow"></div>' +
+                               '<div class="tooltip-inner">' + scope.tooltipText +  '</div>' +
+                            '</div>';
+
                 var pop = $(html);
                 element.after(pop);
                 pop.hide();
 
                 element.on('mouseenter', function () {
-                    var offset = {
-                        top: this.getBoundingClientRect().top + this.offsetHeight,
-                        left: this.getBoundingClientRect().left
-                    };
+                    var offset = {};
+                    if(typeof positions[scope.tooltipPosition] === 'function') {
+                        offset = positions[scope.tooltipPosition](this, pop);
+                    } else {
+                        offset = positions['bottom'](this, pop);
+                    }
 
                     if (typeof scope.tooltipOffsetTop == 'number') {
                         offset.top = offset.top + scope.tooltipOffsetTop;
@@ -227,7 +265,9 @@ function typeCastValue(value) {
                         offset.left = offset.left + scope.tooltipOffsetLeft;
                     }
 
-                    pop.css(offset);
+                    pop.css({
+                        'transform': 'translateX(' + offset.left + 'px) translateY(' + offset.top + 'px)'
+                    });
 
                     pop.show();
                 });

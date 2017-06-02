@@ -52,8 +52,8 @@ $this->beginPage()
             </div>
             <div class="mainnav__modules">
                 <ul class="mainnav__list">
-                    <li class="mainnav__entry" ng-repeat="item in items">
-                        <span class="mainnav__link"  ng-class="{'mainnav__link--active' : isActive(item) }" ng-click="click(item)">
+                    <li class="mainnav__entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-offset-top="5" tooltip-position=right>
+                        <span class="mainnav__link" ng-class="{'mainnav__link--active' : isActive(item) }" ng-click="click(item)">
                             <i class="mainnav__icon material-icons">{{item.icon}}</i>
                             <span class="mainnav__label">
                                 {{item.alias}}
