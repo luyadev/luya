@@ -2,6 +2,7 @@
 
 namespace luya\web\filters;
 
+use Yii;
 use yii\base\ActionFilter;
 use yii\base\InvalidCallException;
 use yii\helpers\VarDumper;
@@ -63,6 +64,8 @@ class RobotsFilter extends ActionFilter
                 throw new InvalidCallException("Robots Filter has detected an invalid Request: " . VarDumper::export(Yii::$app->request->post()));
             }
         }
+        
+        return true;
     }
     
     public function afterAction($action, $result)
