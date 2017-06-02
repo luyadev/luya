@@ -186,6 +186,576 @@ use luya\admin\Module as Admin;
 
 <!-- FILEMANAGER -->
 <script type="text/ng-template" id="storageFileManager">
+<div class="filemanager"  ng-paste="pasteUpload($event)">
+
+    <div class="row">
+
+        <!-- Folders -->
+        <div class="col filemanager-folders">
+
+            <div class="btn btn-block text-left btn-success">
+                <span class="material-icons">add_box</span>
+                <span class="btn-icon-label">Create new folder</span>
+            </div>
+
+            <ul class="folders mt-4">
+
+                <li class="folders-item">
+                    <span class="folders-collapse">
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </span>
+
+                    <span class="folders-text folders-label">
+                        <span class="folders-folder-icon folders-folder-icon-open">
+                            <i class="material-icons">folder_open</i>
+                        </span>
+                        <span class="folders-folder-icon">
+                            <i class="material-icons">folder</i>
+                        </span>
+
+                        Images
+                    </span>
+                    <span class="folders-text folders-input">
+                        <input class="form-control" type="text" value="Images" id="change-folder-name" />
+                    </span>
+                    <span class="folders-text folders-confirm-delete-message">
+                        Delete forever?
+                    </span>
+
+                    <span class="folders-actions">
+
+                        <span class="folders-actions-default">
+                            <span class="folders-action-edit">
+                                <i class="material-icons">mode_edit</i>
+                            </span>
+
+                            <span class="folders-action-delete">
+                                <i class="material-icons">delete_forever</i>
+                            </span>
+                        </span>
+
+                        <span class="folders-actions-confirm">
+                            <span class="folders-action-save">
+                                <i class="material-icons">check</i>
+                            </span>
+
+                            <span class="folders-action-abort">
+                                <i class="material-icons">clear</i>
+                            </span>
+                        </span>
+
+                    </span>
+
+                    <ul class="folders">
+
+                        <li class="folders-item is-active">
+                            <span class="folders-collapse"></span>
+
+                            <span class="folders-text folders-label">
+                                <span class="folders-folder-icon folders-folder-icon-open">
+                                    <i class="material-icons">folder_open</i>
+                                </span>
+                                <span class="folders-folder-icon">
+                                    <i class="material-icons">folder</i>
+                                </span>
+
+                                Images
+                            </span>
+                            <span class="folders-text folders-input">
+                                <input class="form-control" type="text" value="Images" id="change-folder-name" />
+                            </span>
+                            <span class="folders-text folders-confirm-delete-message">
+                                Delete forever?
+                            </span>
+
+                            <span class="folders-actions">
+
+                                <span class="folders-actions-default">
+                                    <span class="folders-action-edit">
+                                        <i class="material-icons">mode_edit</i>
+                                    </span>
+
+                                    <span class="folders-action-delete">
+                                        <i class="material-icons">delete_forever</i>
+                                    </span>
+                                </span>
+
+                                <span class="folders-actions-confirm">
+                                    <span class="folders-action-save">
+                                        <i class="material-icons">check</i>
+                                    </span>
+
+                                    <span class="folders-action-abort">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </span>
+
+                            </span>
+
+                        </li>
+
+                        <li class="folders-item">
+                            <span class="folders-collapse">
+                                <i class="material-icons">keyboard_arrow_down</i>
+                            </span>
+
+                            <span class="folders-text folders-label">
+                                <span class="folders-folder-icon folders-folder-icon-open">
+                                    <i class="material-icons">folder_open</i>
+                                </span>
+                                <span class="folders-folder-icon">
+                                    <i class="material-icons">folder</i>
+                                </span>
+
+                                Images
+                            </span>
+                            <span class="folders-text folders-input">
+                                <input class="form-control" type="text" value="Images" id="change-folder-name" />
+                            </span>
+                            <span class="folders-text folders-confirm-delete-message">
+                                Delete forever?
+                            </span>
+
+                            <span class="folders-actions">
+
+                                <span class="folders-actions-default">
+                                    <span class="folders-action-edit">
+                                        <i class="material-icons">mode_edit</i>
+                                    </span>
+
+                                    <span class="folders-action-delete">
+                                        <i class="material-icons">delete_forever</i>
+                                    </span>
+                                </span>
+
+                                <span class="folders-actions-confirm">
+                                    <span class="folders-action-save">
+                                        <i class="material-icons">check</i>
+                                    </span>
+
+                                    <span class="folders-action-abort">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </span>
+
+                            </span>
+
+                            <ul class="folders">
+
+                                <li class="folders-item">
+                                    <span class="folders-collapse"></span>
+
+                                    <span class="folders-text folders-label">
+                                        <span class="folders-folder-icon folders-folder-icon-open">
+                                            <i class="material-icons">folder_open</i>
+                                        </span>
+                                        <span class="folders-folder-icon">
+                                            <i class="material-icons">folder</i>
+                                        </span>
+
+                                        Images
+                                    </span>
+                                    <span class="folders-text folders-input">
+                                        <input class="form-control" type="text" value="Images" id="change-folder-name" />
+                                    </span>
+                                    <span class="folders-text folders-confirm-delete-message">
+                                        Delete forever?
+                                    </span>
+
+                                    <span class="folders-actions">
+
+                                        <span class="folders-actions-default">
+                                            <span class="folders-action-edit">
+                                                <i class="material-icons">mode_edit</i>
+                                            </span>
+
+                                            <span class="folders-action-delete">
+                                                <i class="material-icons">delete_forever</i>
+                                            </span>
+                                        </span>
+
+                                        <span class="folders-actions-confirm">
+                                            <span class="folders-action-save">
+                                                <i class="material-icons">check</i>
+                                            </span>
+
+                                            <span class="folders-action-abort">
+                                                <i class="material-icons">clear</i>
+                                            </span>
+                                        </span>
+
+                                    </span>
+
+                                </li>
+
+                                <li class="folders-item">
+                                    <span class="folders-collapse"></span>
+
+                                    <span class="folders-text folders-label">
+                                        <span class="folders-folder-icon folders-folder-icon-open">
+                                            <i class="material-icons">folder_open</i>
+                                        </span>
+                                        <span class="folders-folder-icon">
+                                            <i class="material-icons">folder</i>
+                                        </span>
+
+                                        Images
+                                    </span>
+                                    <span class="folders-text folders-input">
+                                        <input class="form-control" type="text" value="Images" id="change-folder-name" />
+                                    </span>
+                                    <span class="folders-text folders-confirm-delete-message">
+                                        Delete forever?
+                                    </span>
+
+                                    <span class="folders-actions">
+
+                                        <span class="folders-actions-default">
+                                            <span class="folders-action-edit">
+                                                <i class="material-icons">mode_edit</i>
+                                            </span>
+
+                                            <span class="folders-action-delete">
+                                                <i class="material-icons">delete_forever</i>
+                                            </span>
+                                        </span>
+
+                                        <span class="folders-actions-confirm">
+                                            <span class="folders-action-save">
+                                                <i class="material-icons">check</i>
+                                            </span>
+
+                                            <span class="folders-action-abort">
+                                                <i class="material-icons">clear</i>
+                                            </span>
+                                        </span>
+
+                                    </span>
+
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li class="folders-item edit">
+                    <span class="folders-collapse">
+                    </span>
+
+                    <span class="folders-text folders-label">
+                        <span class="folders-folder-icon folders-folder-icon-open">
+                            <i class="material-icons">folder_open</i>
+                        </span>
+                        <span class="folders-folder-icon">
+                            <i class="material-icons">folder</i>
+                        </span>
+
+                        Edit mode
+                    </span>
+                    <span class="folders-text folders-input">
+                        <input class="form-control" type="text" value="Edit mode" id="change-folder-name" />
+                    </span>
+                    <span class="folders-text folders-confirm-delete-message">
+                        Delete forever?
+                    </span>
+
+                    <span class="folders-actions">
+
+                        <span class="folders-actions-default">
+                            <span class="folders-action-edit">
+                                <i class="material-icons">mode_edit</i>
+                            </span>
+
+                            <span class="folders-action-delete">
+                                <i class="material-icons">delete_forever</i>
+                            </span>
+                        </span>
+
+                        <span class="folders-actions-confirm">
+                            <span class="folders-action-save">
+                                <i class="material-icons">check</i>
+                            </span>
+
+                            <span class="folders-action-abort">
+                                <i class="material-icons">clear</i>
+                            </span>
+                        </span>
+
+                    </span>
+
+                </li>
+
+                <li class="folders-item delete">
+                    <span class="folders-collapse"></span>
+
+                    <span class="folders-text folders-label">
+                        <span class="folders-folder-icon folders-folder-icon-open">
+                            <i class="material-icons">folder_open</i>
+                        </span>
+                        <span class="folders-folder-icon">
+                            <i class="material-icons">folder</i>
+                        </span>
+
+                        Edit mode
+                    </span>
+                    <span class="folders-text folders-input">
+                        <input class="form-control" type="text" value="Edit mode" id="change-folder-name" />
+                    </span>
+                    <span class="folders-text folders-confirm-delete-message">
+                        Delete forever?
+                    </span>
+
+                    <span class="folders-actions">
+
+                        <span class="folders-actions-default">
+                            <span class="folders-action-edit">
+                                <i class="material-icons">mode_edit</i>
+                            </span>
+
+                            <span class="folders-action-delete">
+                                <i class="material-icons">delete_forever</i>
+                            </span>
+                        </span>
+
+                        <span class="folders-actions-confirm">
+                            <span class="folders-action-save">
+                                <i class="material-icons">check</i>
+                            </span>
+
+                            <span class="folders-action-abort">
+                                <i class="material-icons">clear</i>
+                            </span>
+                        </span>
+
+                    </span>
+
+                </li>
+
+            </ul>
+
+        </div>
+        <!-- /Folders -->
+
+        <!-- Files -->
+        <div class="col filemanager-files">
+
+            <div class="row">
+
+                <div class="col">
+
+                    <div class="filemanager-file-actions">
+
+                        <div class="filemanager-file-actions-left">
+
+                            <div class="btn btn-success">
+                                <span class="material-icons">add_box</span>
+                                <span class="btn-icon-label">Add file</span>
+                            </div>
+
+                        </div>
+
+                        <div class="filemanager-file-actions-right">
+
+                            <div class="btn btn-info">
+                                <span class="material-icons">subdirectory_arrow_right</span>
+                                <span class="btn-icon-label">Move X files</span>
+                            </div>
+
+                            <div class="btn btn-danger">
+                                <span class="material-icons">delete_forever</span>
+                                <span class="btn-icon-label">Delete X files</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <table class="table table-hover table-striped table-align-middle mt-4">
+                        <thead class="thead-default">
+                            <tr>
+                                <th>
+                                    <span>
+                                        <i class="material-icons">done_all</i>
+                                    </span>
+                                </th>
+                                <th></th>
+                                <th>
+                                    <span>Name</span>
+                                    <div class="table-sorter table-sorter-up">
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </div>
+                                    <div class="table-sorter table-sorter-down">
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <span>Type</span>
+                                    <div class="table-sorter table-sorter-up">
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </div>
+                                    <div class="table-sorter table-sorter-down">
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <span>Creation Date</span>
+                                    <div class="table-sorter table-sorter-up">
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </div>
+                                    <div class="table-sorter table-sorter-down">
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <span>File size</span>
+                                    <div class="table-sorter table-sorter-up">
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </div>
+                                    <div class="table-sorter table-sorter-down">
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </th>
+                                <th class="tab-padding-right text-right">
+                                    <span class="crud-counter">9 files</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+							<tr 
+                   				 ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
+                   				 alt="fileId={{file.id}}" 
+                    			title="fileId={{file.id}}" 
+                    			class="filemanager__file" 
+                    			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager__file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
+
+					<th scope="row" ng-hide="allowSelection == 'true' ng-click="toggleSelection(file)">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" ng-checked="inSelection(file)" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                </th>
+                    <td ng-if="selectedFileFromParent">
+                       <span class="custom-control-indicator"></span>
+                    </td>
+                    <td ng-click="toggleSelection(file)" class="text-center">
+                        <span ng-if="file.isImage"><img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail.source}}" /></span>
+                        <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
+                    </td>
+                    <td ng-click="toggleSelection(file)">{{file.name}}</td>
+                    <td>{{file.extension}}</td>
+                    <td>{{file.uploadTimestamp * 1000 | date:"short"}}</td>
+                    <td>{{file.sizeReadable}}</td>
+                    <td>
+						<button type="button" class="btn btn-sm btn-link btn-icon" ng-click="openFileDetail(file)">
+                                        <i class="material-icons">more_vert</i>
+                                    </button></td>
+		                </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col filemanager-detail-view" ng-class="{'open': fileDetail}">
+
+                    <div class="file-detail-view">
+
+                        <div class="file-detail-view-head">
+
+                            <div class="btn btn-success">
+                                <span class="material-icons">file_download</span>
+                                <span class="btn-icon-label">Download</span>
+                            </div>
+
+                            <div class="btn btn-info ml-1">
+                                <span class="material-icons">file_upload</span>
+                                <span class="btn-icon-label">Replace</span>
+                            </div>
+
+                            <div class="file-detail-view-close">
+                                <i class="material-icons">cancel</i>
+                            </div>
+
+                        </div>
+                        <table class="table table-striped table-hover table-align-middle mt-4">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Filename</th>
+                                    <td>{{ fileDetail.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Creation Date</th>
+                                    <td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">File Type</th>
+                                    <td>{{ fileDetail.extension }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Size</th>
+                                    <td>{{ fileDetail.sizeReadable }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Internal ID</th>
+                                    <td>{{ fileDetail.id }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+						<div ng-if="fileDetail.isImage">
+                    		<img class="img-fluid" ng-src="{{fileDetail.thumbnailMedium.source}}" />
+                		</div>
+
+                        <form class="bg-faded p-2 mt-4">
+                            <h3 class="mb-3">File caption</h3>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="inlineFormInputGroup">
+
+                                    <span class="flag flag--en">
+                                        <span class="flag__fallback">EN</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="inlineFormInputGroup">
+
+                                    <span class="flag flag--de">
+                                        <span class="flag__fallback">DE</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="inlineFormInputGroup">
+
+                                    <span class="flag flag--fr">
+                                        <span class="flag__fallback">FR</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- /Files -->
+
+    </div>
+
+</div>
+</script>
+
+<!-- FILEMANAGER -->
+<script type="text/ng-template" id="storageFileManagerOld">
 
     <div class="filemanager" ng-paste="pasteUpload($event)">
 
