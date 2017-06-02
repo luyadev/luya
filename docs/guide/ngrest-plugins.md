@@ -103,7 +103,7 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
     
     public function setField($data)
     {
-        // This is triggered when the value from the angular api response trys to save or update the model with $data.
+        // This is triggered when the value from the angular api response tries to save or update the model with $data.
     }
     
     public function getField()
