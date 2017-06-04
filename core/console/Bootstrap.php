@@ -39,7 +39,6 @@ class Bootstrap extends BaseBootstrap
             $folder = $module->basePath . DIRECTORY_SEPARATOR . 'commands';
             if (file_exists($folder) && is_dir($folder)) {
                 foreach (FileHelper::findFiles($folder) as $file) {
-                    
                     $module->controllerNamespace = $module->namespace . '\commands';
                     
                     $className = '\\'.$module->getNamespace().'\\commands\\' . pathinfo($file, PATHINFO_FILENAME);

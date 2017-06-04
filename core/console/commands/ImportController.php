@@ -8,7 +8,6 @@ use luya\admin\models\Config;
 use luya\console\Command;
 use luya\console\interfaces\ImportControllerInterface;
 
-
 /**
  * Import controller runs the module defined importer classes.
  *

@@ -262,8 +262,7 @@ class Element extends \yii\base\Component
      */
     public function render($file, array $args = [])
     {
-    	$view = new View();
+        $view = new View();
         return $view->renderPhpFile(rtrim($this->getFolder(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . FileHelper::ensureExtension($file, 'php'), $args);
-        
     }
 }

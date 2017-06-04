@@ -2,8 +2,6 @@
 
 namespace luya\console;
 
-
-
 use luya\traits\ApplicationTrait;
 
 /**

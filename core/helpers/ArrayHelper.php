@@ -112,23 +112,23 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     
     /**
      * Search for a Column Value inside a Multidimension array and return the array with the found key.
-     * 
+     *
      * If several results with the same key value exists, the first result is picked.
-     * 
+     *
      * ```php
      * $array = [
      *     ['name' => 'luya', 'userId' => 1],
      *     ['name' => 'nadar', 'userId' => 2],
      * ];
-     * 
+     *
      * $result = ArrayHelper::searchColumn($array, 'name', 'nadar');
-     * 
+     *
      * // output:
      * // array ('name' => 'nadar', 'userId' => 2);
      * ```
-     * 
+     *
      * > This will not work with assoc keys
-     * 
+     *
      * @param array $array The array with the multimensional array values.
      * @param string $column The column to lookup and compare with the $search string.
      * @param string $search The string to search inside the provided column.
@@ -143,24 +143,24 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     
     /**
      * Search for columns with the given search value, returns the full array with all valid items.
-     * 
+     *
      * > This function is not casesensitive, which means FOO will match Foo, foo and FOO
-     * 
+     *
      * ```php
      * $array = [
      *     ['name' => 'luya', 'userId' => 1],
      *     ['name' => 'nadar', 'userId' => 1],
      * ];
-     * 
+     *
      * $result = ArrayHelper::searchColumn($array, 'userId', '1');
-     * 
+     *
      * // output:
      * // array (
      * //     array ('name' => 'luya', 'userId' => 1),
      * //     array ('name' => 'nadar', 'userId' => 1)
      * // );
      * ```
-     * 
+     *
      * @param array $array The multidimensional array input
      * @param string $column The column to compare with $search string
      * @param mixed $search The search string to compare with the column value.
@@ -168,7 +168,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      */
     public static function searchColumns(array $array, $column, $search)
     {
-        $keys = array_filter($array, function($var) use($column, $search) {
+        $keys = array_filter($array, function ($var) use ($column, $search) {
             return strcasecmp($search, $var[$column]) == 0 ? true : false;
         });
         
@@ -177,25 +177,25 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     
     /**
      * Generate an Array from a Rang with an appending optional Text.
-     * 
+     *
      * This is commonly used when generate dropDowns in forms to select a number of something.
-     * 
+     *
      * When $text is an array, the first key is the singular value to use, the second is the pluralized value.
-     * 
+     *
      * ```php
      * $range = ArrayHelper::generateRange(1, 3, 'ticket');
      * // array (1 => "1 ticket", 2 => "2 ticket", 3 => "3 ticket")
      * ```
-     * 
+     *
      * Using the pluralized texts:
-     * 
+     *
      * ```php
      * $range = ArrayHelper::generateRange(1, 3, ['ticket', 'tickets']);
      * // array (1 => "1 ticket", 2 => "2 tickets", 3 => "3 tickets")
      * ```
-     * 
+     *
      * In php range() function is used to generate the array range.
-     * 
+     *
      * @param string|integer $from The range starts from
      * @param string|integer $to The range ends
      * @param string|array $text Optinal text to append to each element. If an array is given the first value is used
@@ -208,9 +208,9 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
         $array = array_combine($range, $range);
         
         if ($text) {
-            array_walk($array, function(&$item, $key) use ($text) {
+            array_walk($array, function (&$item, $key) use ($text) {
                 if (is_array($text)) {
-                    list ($singular, $plural) = $text;
+                    list($singular, $plural) = $text;
                     if ($key == 1) {
                         $item = "{$key} {$singular}";
                     } else {

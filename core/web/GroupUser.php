@@ -2,7 +2,6 @@
 
 namespace luya\web;
 
-
 use yii\base\InvalidConfigException;
 use yii\web\User;
 

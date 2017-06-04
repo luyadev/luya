@@ -188,19 +188,19 @@ trait ApplicationTrait
     
     /**
      * Return all Admin Module Interface implementing modules.
-     * 
+     *
      * @return \luya\base\AdminModuleInterface
      */
     public function getAdminModules()
     {
-    	$modules = [];
-    	
-    	foreach ($this->getModules() as $id => $obj) {
-    		if ($obj instanceof Module && $obj instanceof AdminModuleInterface) {
-    			$modules[$id] = $obj;
-    		}
-    	}
-    	
-    	return $modules;
+        $modules = [];
+        
+        foreach ($this->getModules() as $id => $obj) {
+            if ($obj instanceof Module && $obj instanceof AdminModuleInterface) {
+                $modules[$id] = $obj;
+            }
+        }
+        
+        return $modules;
     }
 }

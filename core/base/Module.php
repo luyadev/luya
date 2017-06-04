@@ -153,22 +153,22 @@ abstract class Module extends \yii\base\Module
     
     /**
      * Register a Translation to the i18n component.
-     * 
+     *
      * In order to register Translations you can either use the $translations array or calling this method
      * straight after the init() method:
-     * 
+     *
      * ```php
      * public function init()
      * {
      *     parent::init();
-     *     
+     *
      *     $this->registerTranslation('mymodule*', '@mymoduleid/messages', [
      *         'mymodule' => 'mymodule.php',
      *         'mymodule/sub' => 'sub.php',
      *     ]);
      * }
      * ```
-     * 
+     *
      * @param string $prefix
      * @param string $basePath
      * @param array $fileMap
@@ -296,11 +296,11 @@ abstract class Module extends \yii\base\Module
     }
     
     /**
-     * Overrides the yii2 default behavior by not throwing an exception if no alias has been defined 
+     * Overrides the yii2 default behavior by not throwing an exception if no alias has been defined
      * for the controller namespace. Otherwise each module requires an alias for its first namepsace entry
      * which results into exception for external modules without an alias.
      * exception.
-     * 
+     *
      * @inheritdoc
      */
     public function getControllerPath()

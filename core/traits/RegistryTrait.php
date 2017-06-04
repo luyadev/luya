@@ -12,26 +12,26 @@ namespace luya\traits;
  */
 trait RegistryTrait
 {
-	/**
-	 * Determines what attribute field in the corresponding model table should be used to find the identifier key.
-	 * 
-	 * @return string The name attribute field defaults to `name`.
-	 */
-	public static function getNameAttribute()
-	{
-		return 'name';
-	}
-	
-	/**
-	 * Determines what attribute field in the corresponding model table should be used to store the identifier key and retrieve its data.
-	 * 
-	 * @return string The value attribute field defaults to `value`.
-	 */
-	public static function getValueAttribute()
-	{
-		return 'value';
-	}
-	
+    /**
+     * Determines what attribute field in the corresponding model table should be used to find the identifier key.
+     *
+     * @return string The name attribute field defaults to `name`.
+     */
+    public static function getNameAttribute()
+    {
+        return 'name';
+    }
+    
+    /**
+     * Determines what attribute field in the corresponding model table should be used to store the identifier key and retrieve its data.
+     *
+     * @return string The value attribute field defaults to `value`.
+     */
+    public static function getValueAttribute()
+    {
+        return 'value';
+    }
+    
     /**
      * Check whether a config value exists or not
      *

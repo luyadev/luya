@@ -80,7 +80,7 @@ class Request extends \yii\web\Request
     
     /**
      * Get the user client language.
-     * 
+     *
      * @param string $defaultValue Return if not set.
      * @return string
      */
