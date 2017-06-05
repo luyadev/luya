@@ -1,7 +1,8 @@
 + Installation
-  + [Setup](install.md)
+  + [Setup Linux](install.md)
   + [Setup Mac](install-mac.md)
   + [Setup Windows](install-windows.md)
+  + [Common Setup Problems](install-problems.md)
   + [Upgrade](install-upgrade.md)
   + [Structure & Config](install-structures.md)
   + [Environment Configs](install-configs.md)
@@ -51,8 +52,8 @@
     + [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
     + [Plugin Selects](ngrest-plugin-select.md)
 + Lessons
-  + [Create an image slider block](lesson-imagesliderblock.md)
   + [Using Forms in Blocks](lesson-blockform.md)
+  + [Create an image slider block](lesson-imagesliderblock.md)
   + [Create an admin and frontend module](lesson-module.md)
   + [Create an Active Window](lesson-activewindow.md)
 + Developers
