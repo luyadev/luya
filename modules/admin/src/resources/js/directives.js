@@ -206,9 +206,9 @@
                 }
     		},
     		template: function() {
-    			return '<div class="input input--sortrelation" ng-class="{\'input--hide-label\': i18n}">' +
-                    '<label class="input__label" for="{{id}}">{{label}}</label>' +
-                    '<div class="input__field-wrapper">' +
+    			return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                    '<div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div>' +
+                    '<div class="form-side">' +
                         '<div class="zaa-sortrelation">' +
                             '<ul class="zaa-sortrelation__list>">' +
                                 '<li class="zaa-sortrelation__entry" ng-repeat="(key, item) in getModelItems() track by key">' +
@@ -276,7 +276,7 @@
             	}, true);
             },
             template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper">' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><labelfor="{{id}}">{{label}}</label></div><div class="form-side">' +
                     '<div ng-if="model">' +
                         '<div class="link-selector">' +
                             '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
@@ -325,7 +325,7 @@
     			});
     		},
     		template:function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="orm-side"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="form-control" placeholder="{{placeholder}}" /></div></div>';
     		}
     	}
     });
@@ -378,9 +378,9 @@
                 });
             },
             template: function() {
-                return  '<div class="input input--color" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label" for="{{id}}">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
+                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side' +
+                            '<label for="{{id}}">{{label}}</label></div>' +
+                            '<div class="form-side">' +
                                 '<div class="colorwheel">' +
                                     '<div class="colorwheel__input-wrapper" style="background-color: {{model}};">' +
                                         '<input class="colorwheel__input" type="text" ng-model="model" style="color: {{textColor}}; border-color: {{textColor}};" maxlength="7" />' +
@@ -434,7 +434,7 @@
                     }
                 })
             }, template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -465,7 +465,7 @@
                     }
                 })
             }, template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" step="{{steps}}" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" step="{{steps}}" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -670,10 +670,10 @@
                 scope.random = Math.random().toString(36).substring(7);
             },
             template: function() {
-                return '<div class="input input--multiple-checkboxes"  ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
-                                '<input class="input__searchfield" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} ' + i18n['js_dir_till'] + '{{options.items.length}}'+
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side">' +
+                            '<label >{{label}}</label></div>' +
+                            '<div class="form-side">' +
+                                '<input class="form-control" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} ' + i18n['js_dir_till'] + '{{options.items.length}}'+
                                 '<div ng-repeat="(k, item) in optionitems track by k">' +
                                     '<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
                                     '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
@@ -999,9 +999,9 @@
                 "name": "@fieldname"
             },
             template: function() {
-                return '<div class="input input--file-upload" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
+                            '<label>{{label}}</label></div>' +
+                            '<div class="form-side">' +
                                 '<storage-file-upload ng-model="model"></storage-file-upload>' +
                             '</div>' +
                         '</div>';
@@ -1021,9 +1021,9 @@
                 "name": "@fieldname"
             },
             template: function() {
-                return '<div class="input input--image-upload" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
+                            '<label>{{label}}</label></div>' +
+                            '<div class="form-side">' +
                                 '<storage-image-upload options="options" ng-model="model"></storage-image-upload>' +
                             '</div>' +
                         '</div>';
@@ -1081,12 +1081,11 @@
                 };
             },
             template: function() {
-                return '<div class="input input--image-array imagearray" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
+                            '<label>{{label}}</label></div>' +
+                            '<div class="form-side">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                 '<div ng-repeat="(key,image) in model track by key" class="row list__item">' +
-
                                     '<div class="list__left row">' +
                                         '<div class="col s8">' +
                                             '<storage-image-upload ng-model="image.imageId" options="options"></storage-image-upload>' +
@@ -1159,9 +1158,9 @@
                 };
             },
             template: function() {
-                return '<div class="input input--file-array filearray" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
+                            '<label>{{label}}</label></div>' +
+                            '<div class="form-side">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                 '<div ng-repeat="(key,file) in model track by key" class="row list__item">' +
                                     '<div class="list__left row">' +
@@ -1237,23 +1236,21 @@
                 $scope.init();
             },
             template: function() {
-                return '<div>' +
-                            '<div class="input input--list list" ng-class="{\'input--hide-label\': i18n}">' +
-                                '<label class="input__label">{{label}}</label>' +
-                                '<div class="input__field-wrapper">' +
-                                    '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
-                                    '<div ng-repeat="(key,row) in model track by key" class="list__item list__item--bordered">' +
-                                        '<div class="list__left" style="width: calc(100% - 140px)">' +
-                                            '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" fieldname="{{opt.var}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
-                                        '</div>' +
-                                        '<div class="list__right" style="width: 130px">' +
-                                            '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="{{key > 0}}" ng-click="moveUp(key)"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                            '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                            '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
-                                        '</div>' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
+                            '<label>{{label}}</label></div>' +
+                            '<div class="form-side">' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                '<div ng-repeat="(key,row) in model track by key" class="list__item list__item--bordered">' +
+                                    '<div class="list__left" style="width: calc(100% - 140px)">' +
+                                        '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" fieldname="{{opt.var}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
                                     '</div>' +
-                                    '<button ng-click="add()" type="button" class="btn-floating left list__add-button"><i class="material-icons">add</i></button>' +
+                                    '<div class="list__right" style="width: 130px">' +
+                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="{{key > 0}}" ng-click="moveUp(key)"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
+                                    '</div>' +
                                 '</div>' +
+                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button"><i class="material-icons">add</i></button>' +
                             '</div>' +
                         '</div>';
             }
@@ -1334,9 +1331,9 @@
 
             },
             template: function() {
-                return '<div class="input input--list list" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
+                            '<label>{{label}}</label></div>' +
+                            '<div class="form-side">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                 '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
                                     '<div class="list__left" style="width:calc(100% - 140px)">' +

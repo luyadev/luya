@@ -23,7 +23,14 @@ use luya\admin\Module as Admin;
 <script type="text/ng-template" id="modal">
 <div class="modal fade" tabindex="-1" aria-hidden="true" ng-class="{'show':!isModalHidden}" ng-style="{display: (isModalHidden ? 'none' : 'block')}" zaa-esc="isModalHidden=1">
     <div class="modal-dialog modal-xl">
-        <div class="modal-content" ng-transclude />
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{title}}</h5>
+                <button type="button" class="close" aria-label="Close" ng-click="isModalHidden=1">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body" ng-transclude />
     </div>
 </div>
 </script>
@@ -626,13 +633,13 @@ use luya\admin\Module as Admin;
                         </thead>
                         <tbody>
 							<tr 
-                   				 ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
-                   				 alt="fileId={{file.id}}" 
+                   				ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
+                   				alt="fileId={{file.id}}" 
                     			title="fileId={{file.id}}" 
                     			class="filemanager__file" 
                     			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager__file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
 
-					<th scope="row" ng-hide="allowSelection == 'true' ng-click="toggleSelection(file)">
+					<th scope="row" ng-hide="allowSelection == 'true'" ng-click="toggleSelection(file)">
                                     <label class="custom-control custom-checkbox">
                                         <input type="checkbox" ng-checked="inSelection(file)" class="custom-control-input">
                                         <span class="custom-control-indicator"></span>

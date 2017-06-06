@@ -663,7 +663,8 @@ function typeCastValue(value) {
         return {
             restrict: "E",
             scope: {
-                isModalHidden: "="
+                isModalHidden: "=",
+                title: '@'
             },
             replace: true,
             transclude: true,
