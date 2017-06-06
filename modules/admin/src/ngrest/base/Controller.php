@@ -89,7 +89,7 @@ class Controller extends \luya\admin\base\Controller
         	$crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
         }
         if ($relation) {
-            $crud->viewFile = 'crud_relation.php';
+            //$crud->viewFile = 'crud_relation.php';
         }
         return $ngrest->render($crud);
     }

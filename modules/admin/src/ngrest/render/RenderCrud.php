@@ -68,7 +68,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             'canDelete' => $this->can(Auth::CAN_DELETE),
             'config' => $this->config,
     		'isInline' => $this->getIsInline(),
-    		//'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
+    		'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
         ], $this);
     }
 
