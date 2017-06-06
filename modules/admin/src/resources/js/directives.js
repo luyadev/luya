@@ -20,6 +20,7 @@
     					$http.get($scope.api+'/?inline=1').then(function(response) {
     						$scope.content = $sce.trustAsHtml(response.data);
     						$scope.showWindow = true;
+    						console.log($scope.content);
     					})
     				} else {
     					$scope.$parent.loadService();
@@ -28,7 +29,7 @@
     			}
     		},
     		template: function() {
-    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-floating green lighten-1"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="!showWindow"><div ng-bind-html="content"></div></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="!showWindow" title="crud"><div compile-html ng-bind-html="content"></div></div>';
     		}
     	}
     });
