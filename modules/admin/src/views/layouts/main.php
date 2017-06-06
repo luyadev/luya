@@ -32,7 +32,7 @@ $this->beginPage()
         <div class="mainnav" ng-class="{'mainnav--small' : !isHover}">
             <div class="mainnav__static">
                 <ul class="mainnav__list">
-                    <li class="mainnav__entry">
+                    <li class="mainnav__entry" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav__link" href="#">
                             <i class="mainnav__icon material-icons">search</i>
                             <span class="mainnav__label">
@@ -40,7 +40,7 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <li class="mainnav__entry">
+                    <li class="mainnav__entry" tooltip tooltip-text="Dashboard" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav__link" ui-sref="home" ui-sref-active="mainnav__link--active">
                             <i class="mainnav__icon material-icons">home</i>
                             <span class="mainnav__label">
@@ -52,7 +52,7 @@ $this->beginPage()
             </div>
             <div class="mainnav__modules">
                 <ul class="mainnav__list">
-                    <li class="mainnav__entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-offset-top="5" tooltip-position=right>
+                    <li class="mainnav__entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav__link" ng-class="{'mainnav__link--active' : isActive(item) }" ng-click="click(item)">
                             <i class="mainnav__icon material-icons">{{item.icon}}</i>
                             <span class="mainnav__label">
@@ -64,7 +64,7 @@ $this->beginPage()
             </div>
             <div class="mainnav__static mainnav__static--bottom">
                 <ul class="mainnav__list">
-                    <li class="mainnav__entry">
+                    <li class="mainnav__entry" tooltip tooltip-text="<?= Admin::t('layout_btn_reload'); ?>" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav__link" ng-click="reload()">
                             <i class="mainnav__icon material-icons">refresh</i>
                             <span class="mainnav__label">
@@ -72,6 +72,7 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
+                    <!-- 
                     <li class="mainnav__entry">
                         <a class="mainnav__link" href="#">
                             <i class="mainnav__icon material-icons">developer_board</i>
@@ -80,7 +81,8 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
-                    <li class="mainnav__entry">
+                     -->
+                    <li class="mainnav__entry" tooltip tooltip-text="<?= Admin::t('layout_btn_useronline'); ?>" tooltip-offset-top="5" tooltip-position="right">
                         <a class="mainnav__link" href="#">
                             <i class="mainnav__icon material-icons">panorama_fish_eye</i>
                             <span class="mainnav__label">
@@ -88,6 +90,7 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
+                    <!-- 
                     <li class="mainnav__entry">
                         <a class="mainnav__link" href="<?= Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>">
                             <i class="mainnav__icon material-icons">exit_to_app</i>
@@ -96,7 +99,8 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
-                    <li class="mainnav__entry">
+                    -->
+                    <li class="mainnav__entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-offset-top="5" tooltip-position="right">
                         <a class="mainnav__link" ui-sref="custom({templateId:'admin/account/dashboard'})">
                             <i class="mainnav__icon material-icons">account_circle</i>
                             <span class="mainnav__label">
@@ -104,6 +108,7 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
+                    <!-- 
                     <li class="mainnav__entry">
                         <a class="mainnav__link" href="https://luya.io" target="_blank">
                             <span class="mainnav__icon">
@@ -114,6 +119,7 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
