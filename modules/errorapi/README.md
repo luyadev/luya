@@ -40,7 +40,6 @@ To enable the error api for your website, you need to configure the default LUYA
 'components' => [
     // ...
     'errorHandler' => [
-        'class' => 'luya\web\ErrorHandler',
         'api' => 'https://example.com/errorapi', // where example is the domain you have setup error api above
         'transferException' => true',
     ],
