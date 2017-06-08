@@ -103,7 +103,7 @@ class Link extends Plugin
      * @param array $config The configuration array must contain the keys `value` and `type`.
      * @return string The parsed link source based on the input type.
      */
-    protected function generateLinkObject(array $config)
+    protected function generateLinkObject($config)
     {
         return BlockHelper::linkObject($config);
     }
