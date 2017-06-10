@@ -6,12 +6,12 @@ use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\Html;
 use yii\base\InvalidCallException;
-use yii\base\Arrayable;
 use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
+use luya\helpers\ExportHelper;
 use luya\admin\base\RestActiveController;
 use luya\admin\models\UserOnline;
 use luya\admin\ngrest\render\RenderActiveWindow;
@@ -306,61 +306,7 @@ class Api extends RestActiveController
      */
     public function actionExport()
     {
-        $tempData = null;
-        
-        // first row
-        $header = [];
-        $i = 0;
-        
-        foreach ($this->model->find()->all() as $key => $value) {
-            $row = [];
-            
-            $attrs = $value->getAttributes();
-            foreach ($value->extraFields() as $field) {
-                $attrs[$field] = $value->$field;
-            }
-            
-            foreach ($attrs as $k => $v) {
-                if (is_object($v)) {
-                    if ($v instanceof Arrayable) {
-                        $v = $v->toArray();
-                    } else {
-                        continue;
-                    }
-                }
-                
-                if ($i === 0) {
-                    $header[] = $this->model->getAttributeLabel($k);
-                }
-                
-                if (is_array($v)) {
-                    $tv = [];
-                    foreach ($v as $kk => $vv) {
-                        if (is_object($vv)) {
-                            if ($vv instanceof Arrayable) {
-                                $tv[] = implode(" | ", $vv->toArray());
-                            } else {
-                                continue;
-                            }
-                        } elseif (is_array($vv)) {
-                            $tv[] = implode(" | ", $vv);
-                        } else {
-                            $tv[] = $vv;
-                        }
-                    }
-                 
-                    $v = implode(" - ", $tv);
-                }
-                
-                $row[] = '"'. str_replace('"', '\"', $v) .'"';
-            }
-            
-            if ($i=== 0) {
-                $tempData.= implode(",", $header) . "\n";
-            }
-            $tempData.= implode(",", $row) . "\n";
-            $i++;
-        }
+        $tempData = ExportHelper::csv($this->model->find());
         
         $key = uniqid('ngre', true);
         
