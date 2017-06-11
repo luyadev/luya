@@ -89,7 +89,6 @@ An example for a configuration file `configs/env.php` (which env.php is the defa
 return [
     'id' => 'myapp',
     'siteTitle' => 'My Application',
-    'luyaLanguage' => 'en',
     'basePath' => dirname(__DIR__),
     'components' => [
         'mail' => [

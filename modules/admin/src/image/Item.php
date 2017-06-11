@@ -25,9 +25,9 @@ use luya\admin\storage\ItemAbstract;
  */
 class Item extends ItemAbstract
 {
-    private $_file = null;
+    private $_file;
     
-    private $_caption = null;
+    private $_caption;
     
     /**
      * Set caption for image item, override existings values

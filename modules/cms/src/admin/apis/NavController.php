@@ -177,13 +177,13 @@ class NavController extends \luya\admin\base\RestController
         $item = Nav::find()->where(['id' => $navId])->one();
         Yii::$app->menu->flushCache();
         if ($homeState == 1) {
-            Nav::updateAll(['is_home' => 0]);
+            Nav::updateAll(['is_home' => false]);
             $item->setAttributes([
-                'is_home' => 1,
+                'is_home' => true,
             ]);
         } else {
             $item->setAttributes([
-                'is_home' => 0,
+                'is_home' => false,
             ]);
         }
 
@@ -224,7 +224,7 @@ class NavController extends \luya\admin\base\RestController
             $redirects = NavItemRedirect::find()->where(['value' => $navId])->asArray()->all();
             foreach ($redirects as $redirect) {
                 $navItem = NavItem::find()->where(['nav_item_type' => 3, 'nav_item_type_id' => $redirect['id']])->one();
-                $redirectResult = empty(Nav::find()->where(['id' => $navItem->nav_id, 'is_deleted' => 0])->one()) ? $redirectResult : true;
+                $redirectResult = empty(Nav::find()->where(['id' => $navItem->nav_id, 'is_deleted' => false])->one()) ? $redirectResult : true;
             }
 
             if ($redirectResult) {
@@ -232,7 +232,7 @@ class NavController extends \luya\admin\base\RestController
                 return;
             }
 
-            $model->is_deleted = 1;
+            $model->is_deleted = true;
 
             foreach (NavItem::find()->where(['nav_id' => $navId])->all() as $navItem) {
                 $navItem->setAttribute('alias', date('Y-m-d-H-i').'-'.$navItem->alias);

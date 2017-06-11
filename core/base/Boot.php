@@ -34,7 +34,7 @@ abstract class Boot
     /**
      * @var \luya\web\Application|\luya\console\Application The application object.
      */
-    public $app = null;
+    public $app;
 
     /**
      * @var bool When enabled the boot process will not return/echo something, but the variabled will contain the Application object.
@@ -44,7 +44,7 @@ abstract class Boot
     /**
      * @var string Path to the Yii.php file.
      */
-    private $_baseYiiFile = null;
+    private $_baseYiiFile;
 
     /**
      * Setter method for the base Yii file.
@@ -84,7 +84,7 @@ abstract class Boot
         return strtolower(php_sapi_name());
     }
 
-    private $_configArray = null;
+    private $_configArray;
     
     /**
      * This method allows you to directly inject a configuration array instead of using the config file

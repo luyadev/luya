@@ -1,4 +1,3 @@
-
 {
   "name": "luya-core",
   "version": "1.0.0",
@@ -9,6 +8,6 @@
   "devDependencies": {},
   "dependencies": {
     "gulp": "^3.9.1",
-    "zephir-gulp-workflow": "~1.0.3"
+    "zephir-gulp-workflow": "^1.0.3"
   }
 }

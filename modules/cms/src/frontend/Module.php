@@ -98,7 +98,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
         });
         
         Yii::$app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) {
-            if ($event->exception instanceof HttpException) {
+            if ($event->exception instanceof HttpException && !YII_DEBUG) {
                 // see whether a config value exists
                 // if a redirect page id exists, redirect.
                 $navId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
@@ -125,6 +125,6 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     
     public static function t($message, array $params = [])
     {
-        return Yii::t('cms', $message, $params, Yii::$app->luyaLanguage);
+        return Yii::t('cms', $message, $params);
     }
 }

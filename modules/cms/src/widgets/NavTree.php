@@ -2,7 +2,7 @@
 
 namespace luya\cms\widgets;
 
-use luya\cms\menu\Query;
+
 use luya\cms\menu\QueryIteratorFilter;
 use luya\helpers\ArrayHelper;
 use Yii;
@@ -58,17 +58,17 @@ class NavTree extends Widget
     /**
      * @var null|Item Generate submenus for all pages below you this menu Item
      */
-    private $_startItem = null;
+    private $_startItem;
 
     /**
      * @var null|QueryIteratorFilter The menu Query
      */
-    private $_findQuery = null;
+    private $_findQuery;
 
     /**
      * @var null|integer If set the depth of the menu will be limited
      */
-    public $maxDepth = null;
+    public $maxDepth;
 
     /**
      * @var string The class that should be set on the *active link*
@@ -97,7 +97,7 @@ class NavTree extends Widget
      *
      * You can set all possible html attributes as options
      */
-    public $wrapperOptions = null;
+    public $wrapperOptions;
 
     /**
      * @var array Options for the lists that are generated
@@ -136,17 +136,17 @@ class NavTree extends Widget
     /**
      * @var null|string The list tag will be set during init
      */
-    private $_listTag = null;
+    private $_listTag;
 
     /**
      * @var null|string The item tag will be set during init
      */
-    private $_itemTag = null;
+    private $_itemTag;
 
     /**
      * @var null|string The link tag will be set during init
      */
-    private $_linkTag = null;
+    private $_linkTag;
 
     /**
      * @inheritdoc

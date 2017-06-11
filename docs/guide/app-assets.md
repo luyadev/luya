@@ -1,4 +1,4 @@
-# Application Assets
+# Application Assets
 
 Asset files like CSS or JavaScript are resources you have to integrate in your web project but organize them in "package" like folders, so called Asset Bundles. Assets are based on [Yii2 Asset Bundles](http://www.yiiframework.com/doc-2.0/guide-structure-assets.html) you may read more detailed informations about. The LUYA assets describe just another way of including them into you project.
 
@@ -21,14 +21,14 @@ From the example above the css file `style.css` would be looked up in the locati
 
 > In a project context, we recommend to *not* store images inside the asset sources. Images should stored in the `public_html` folder and you can access them in the view with `src="<?= $this->publicHtml; ?>/myimage.jpg"`.
 
-### Using the Asset
+### Using the Asset
 
 To register an asset file you have to put those files into the config of a module. Each module can have assets. All controllers of this module will register those assets into the view automaticaly. If you are in a cms context, all asset files must be registered to the cms module, otherwise they will not be available in the cmslayouts. An example of registering assets into the cms module:
 
 ```php
 return [
-	'modules' => [
-		...
+    'modules' => [
+        ...
         'cms' => [
             'class' => 'cms\Module',
             'assets' => [
@@ -36,8 +36,8 @@ return [
                 '\\app\\assets\\FooBarAsset',
             ]
         ],
-		...
-	]
+        ...
+    ]
 ];
 ```
 
@@ -49,7 +49,7 @@ use app\assets\MyTestAsset;
 $asset = MyTestAsset::register($this); // $this represents the view object
 ```
 
-### Publish Options
+### Publish Options
 
 To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders to be published.
 For example in the LUYA kickstarter project, you'll find both the 'boostrap' and the 'css' folder in the publish options:
@@ -74,10 +74,4 @@ Run the the get bundle method inside your view file for the registered assetMana
 $myAsset = $this->assetManager->getBundle('\\app\\assets\\MyTestAsset');
 
 echo $myAsset->baseUrl; 
-```
-
-To access the baseUrl of an asset in a twig template you may use:
-
-```
-{{ asset('\\app\\assets\\MyTestAsset').baseUrl }}
 ```

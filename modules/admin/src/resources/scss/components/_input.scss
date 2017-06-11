@@ -106,8 +106,12 @@ input[type='checkbox']:checked + .input__label:before {
     width: 100%;
 
     .input__label + & {
-        padding: 5px;
+        padding: 5px 0 5px 5px;
         width: calc(100% - #{$input__label-width});
+    }
+
+    .input--file-array .input__label + & {
+        padding-right: 5px;
     }
 
     .list__left .input &,
@@ -256,19 +260,20 @@ input[type='checkbox']:checked + .input__label:before {
     display: inline-block;
 
     margin-left: 5px;
-    width: calc(100% - (#{$input__label-width} + 5px));
+    width: calc(100% - #{$input__label-width});
 }
 
 .input__select-wrapper {
     display: inline-block;
     max-width: 700px;
     padding-left: 5px;
-    width: calc(100% - (#{$input__label-width} + 5px));
+    width: calc(100% - #{$input__label-width});
 
     .list__left .input &,
     .input--vertical & {
         margin-top: 5px;
         padding-left: 0;
+        width: 100%;
     }
 
     .input__field {

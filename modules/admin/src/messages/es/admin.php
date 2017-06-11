@@ -235,6 +235,17 @@ return [
     'js_filemanager_count_files_overlay' => '%count% archivos',
     'js_link_change_value' => 'Cambiar enlace',
     'js_link_set_value' => 'Establecer vínculo',
+<<<<<<< HEAD
     'callback_button_file_download_widget_success' => 'El archivo ha sido preparado. Puedes descargarlo ahora.'
 
+=======
+    'callback_button_file_download_widget_success' => 'El archivo ha sido preparado. Puedes descargarlo ahora.',
+    
+// 1.0.0
+    
+    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
+    'model_user_oldpassword' => 'Previous (old) Password',
+    'js_account_update_profile_success' => 'The profile data has been successfull updated.',
+    'dashboard_lastlogin_title' => 'Last User Logins',
+>>>>>>> 5e78ac2d0410bbf74e427290851725b557b8b51a
 ];

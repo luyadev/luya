@@ -2,39 +2,22 @@
 
 namespace luyatests;
 
-use Yii;
-use luyatests\LuyaTestCaseInterface;
+use luya\testsuite\cases\BaseTestSuite;
+use luya\base\Boot;
+
 
 require 'vendor/autoload.php';
 require 'data/env.php';
 
-class LuyaWebModuleAppTestCase extends \PHPUnit_Framework_TestCase implements LuyaTestCaseInterface
+class LuyaWebModuleAppTestCase extends BaseTestSuite
 {
-    public $app = null;
-
-    public function setUp()
+    public function getConfigArray()
     {
-        $this->mockApp();
-    }
-
-    public function getConfigFile()
-    {
-        return __DIR__ .'/data/configs/webmoduleapp.php';
+        return include(__DIR__ .'/data/configs/webmoduleapp.php');
     }
     
-    public function mockApp()
+    public function bootApplication(Boot $boot)
     {
-        if ($this->app === null) {
-            $this->app = new \luya\Boot();
-            $this->app->configFile = $this->getConfigFile();
-            $this->app->mockOnly = true;
-            $this->app->setBaseYiiFile('vendor/yiisoft/yii2/Yii.php');
-            $this->app->applicationWeb();
-        }
-    }
-
-    public function getTrace()
-    {
-        return Yii::getLogger()->getProfiling();
+        $boot->applicationWeb();
     }
 }

@@ -2,11 +2,11 @@
 
 namespace cmstests;
 
-use Twig_Loader_String;
+
 
 class BlockTestCase extends CmsFrontendTestCase
 {
-    public $blockClass = null;
+    public $blockClass;
     
     /**
      * @var \luya\cms\base\PhpBlock

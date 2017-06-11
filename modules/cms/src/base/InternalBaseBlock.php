@@ -2,7 +2,7 @@
 
 namespace luya\cms\base;
 
-use Yii;
+
 use yii\base\Object;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
@@ -18,7 +18,6 @@ use luya\cms\helpers\BlockHelper;
  * two froms of implementations.
  *
  * + {{\luya\cms\base\PhpBlock}}
- * + {{\luya\cms\base\TwigBlock}}
  *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
@@ -42,7 +41,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     const INJECTOR_CFG = 'cfg';
 
-    private $_injectorObjects = null;
+    private $_injectorObjects;
     
     /**
      * Setup injectors.
@@ -312,7 +311,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * @param unknown $placholder
      * @return boolean
      */
-    public function getPlacholderValue($placholder)
+    public function getPlaceholderValue($placholder)
     {
         return (isset($this->getPlaceholderValues()[$placholder])) ? $this->getPlaceholderValues()[$placholder] : false;
     }
@@ -520,9 +519,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
     
     /**
-     * Returns the name of the twig or php file to be rendered.
+     * Returns the name of the php file to be rendered.
      *
-     * @return string The name of the twig or php file (example.twig, example.php)
+     * @return string The name of the php file (example.php)
      */
     public function getViewFileName($extension)
     {
@@ -568,7 +567,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     {
         return (new BlockVariationRegister(new static));
     }
-    
+
     /**
      * Create the options array for a zaa-select field based on an key value pairing
      * array.
@@ -576,13 +575,14 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * @deprecated Will be removed in 1.0.0
      * @param array $options The key value array pairing the select array should be created from.
      * @since 1.0.0-beta5
+     * @return array
      */
     protected function zaaSelectArrayOption(array $options)
     {
         trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::selectArrayOption() instead.', E_USER_DEPRECATED);
         return BlockHelper::selectArrayOption($options);
     }
-    
+
     /**
      * Create the Options list in the config for a zaa-checkbox-array based on an
      * key => value pairing array.
@@ -590,6 +590,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * @deprecated Will be removed in 1.0.0
      * @param array $options The array who cares the options with items
      * @since 1.0.0-beta5
+     * @return array
      */
     protected function zaaCheckboxArrayOption(array $options)
     {

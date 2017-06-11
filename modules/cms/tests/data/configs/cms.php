@@ -9,6 +9,7 @@ return [
     'aliases' => [
         'cmstests' => dirname(__DIR__) . '/../',
     ],
+    'language' => 'en',
     'modules' => [
         'admin' => 'luya\admin\Module',
         'cms' => [
@@ -20,6 +21,9 @@ return [
     'components' => [
         'request' => [
             'forceWebRequest' => true,
+        ],
+        'composition' => [
+            'hidden' => false,
         ],
         'db' => [
             'class' => 'yii\db\Connection',

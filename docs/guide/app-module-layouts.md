@@ -14,20 +14,20 @@ namespace app\modules\estore\controllers;
 
 class DefaultController extends \luya\web\Controller
 {
-	/**
-	 * @return int Calculate the number of basket items
-	 */
-	public function getBasketCount()
-	{
-		return 10;
-	}
+    /**
+     * @return int Calculate the number of basket items
+     */
+    public function getBasketCount()
+    {
+        return 10;
+    }
 
-	/**
-	 * Returns all basket items for this user.
-	 */
+    /**
+     * Returns all basket items for this user.
+     */
     public function actionBasket()
     {   
-    	// add your basket action logic
+        // add your basket action logic
         return $this->renderLayout('basket');
     }
     
@@ -36,8 +36,8 @@ class DefaultController extends \luya\web\Controller
      */
     public function actionConfirm()
     {
-    	// add your confirmation action logic
-    	return $this->renderLayout('confirm');
+        // add your confirmation action logic
+        return $this->renderLayout('confirm');
     }
 }
 ```
@@ -46,14 +46,14 @@ Now render layout will lookup for a `layout.php` file inside your views folder w
 
 ```php
 <div class="row">
-	<div class="col-md-10">
-		<!-- where the content of the basket and confirm layout will be returned -->
-		<?= $content; ?>
-	</div>
-	
-	<div class="col-md-2">
-		<h1>Basket</h1>
-		<p><?= $this->context->getBasketCount(); ?> item(s)</p>
-	</div>
+    <div class="col-md-10">
+        <!-- where the content of the basket and confirm layout will be returned -->
+        <?= $content; ?>
+    </div>
+    
+    <div class="col-md-2">
+        <h1>Basket</h1>
+        <p><?= $this->context->getBasketCount(); ?> item(s)</p>
+    </div>
 </div>
 ```

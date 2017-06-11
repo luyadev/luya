@@ -3,7 +3,7 @@
 namespace luya\base;
 
 use yii;
-use Exception;
+
 use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
 use luya\console\interfaces\ImportControllerInterface;
@@ -99,7 +99,7 @@ abstract class Module extends \yii\base\Module
      * name inside the child modules $context variable. For example the cms includes the news module, the context variable
      * of news would have the value "cms".
      */
-    public $context = null;
+    public $context;
 
     /**
      * @var string The default name of the moduleLayout
@@ -121,7 +121,6 @@ abstract class Module extends \yii\base\Module
      * ```php
      * Yii::t('luya/admin', 'MyVariableInAdminPhp');
      * ```
-     * @since 1.0.0-beta3
      */
     public $translations = [];
 
@@ -137,21 +136,50 @@ abstract class Module extends \yii\base\Module
                 throw new InvalidConfigException(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
-        $this->registerTranslations();
+        
+        $this->registerTranslationArray($this->translations);
     }
     
     /**
-     * register the translation service for luya
+     * Internal used to register the translations from the translation array.
+     * @param array $translations
      */
-    private function registerTranslations()
+    protected function registerTranslationArray(array $translations)
     {
-        foreach ($this->translations as $translation) {
-            Yii::$app->i18n->translations[$translation['prefix']] = [
-                'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => $translation['basePath'],
-                'fileMap' => $translation['fileMap'],
-            ];
+        foreach ($translations as $translation) {
+            $this->registerTranslation($translation['prefix'], $translation['basePath'], $translation['fileMap']);
         }
+    }
+    
+    /**
+     * Register a Translation to the i18n component.
+     *
+     * In order to register Translations you can either use the $translations array or calling this method
+     * straight after the init() method:
+     *
+     * ```php
+     * public function init()
+     * {
+     *     parent::init();
+     *
+     *     $this->registerTranslation('mymodule*', '@mymoduleid/messages', [
+     *         'mymodule' => 'mymodule.php',
+     *         'mymodule/sub' => 'sub.php',
+     *     ]);
+     * }
+     * ```
+     *
+     * @param string $prefix
+     * @param string $basePath
+     * @param array $fileMap
+     */
+    public function registerTranslation($prefix, $basePath, array $fileMap)
+    {
+        Yii::$app->i18n->translations[$prefix] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => $basePath,
+            'fileMap' => $fileMap,
+        ];
     }
 
     /**
@@ -252,7 +280,6 @@ abstract class Module extends \yii\base\Module
      * id of this controller and value the file on the server.
      *
      * @return array Returns an array where the key is the controller id and value the original file.
-     * @since 1.0.0-beta5
      */
     public function getControllerFiles()
     {
@@ -269,11 +296,11 @@ abstract class Module extends \yii\base\Module
     }
     
     /**
-     * Overrides the yii2 default behavior by not throwing an exception if no alias has been defined 
+     * Overrides the yii2 default behavior by not throwing an exception if no alias has been defined
      * for the controller namespace. Otherwise each module requires an alias for its first namepsace entry
      * which results into exception for external modules without an alias.
      * exception.
-     * 
+     *
      * @inheritdoc
      */
     public function getControllerPath()

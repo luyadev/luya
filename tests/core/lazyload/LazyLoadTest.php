@@ -4,7 +4,7 @@ namespace luyatests\core\lazyload;
 
 use luyatests\LuyaWebTestCase;
 use luya\lazyload\LazyLoad;
-use yii\base\Widget;
+
 
 class LazyLoadTest extends LuyaWebTestCase
 {

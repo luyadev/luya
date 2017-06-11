@@ -196,6 +196,7 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $request->pathInfo = 'foo/bar';
         $request->hostInfo = 'example.fr';
         $comp = new Composition($request);
+        $comp->hidden = false;
         
         $this->assertEquals('this-should/be-left', $comp->removeFrom('en/this-should/be-left'));
     }

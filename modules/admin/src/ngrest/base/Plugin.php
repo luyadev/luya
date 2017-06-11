@@ -7,7 +7,7 @@ use yii\base\Component;
 use yii\helpers\Json;
 use yii\helpers\Html;
 use luya\Exception;
-use luya\admin\ngrest\base\NgRestModel;
+
 use luya\admin\helpers\I18n;
 use luya\helpers\ArrayHelper;
 
@@ -34,17 +34,17 @@ abstract class Plugin extends Component
     /**
      * @var string The name of the field corresponding to the ActiveRecord (also known as fieldname)
      */
-    public $name = null;
+    public $name;
     
     /**
      * @var string The alias name of the plugin choosen by the user (also known as label)
      */
-    public $alias = null;
+    public $alias;
     
     /**
      * @var boolean Whether the plugin is in i18n context or not.
      */
-    public $i18n = null;
+    public $i18n;
 
     /**
      * @var mixed This value will be used when the i18n decodes the given value but is not set yet, default value.
@@ -311,7 +311,6 @@ abstract class Plugin extends Component
      */
     public function onSave($event)
     {
-        Yii::trace('Event Trigger: onSave for ' . get_class($this));
         if ($this->isAttributeWriteable($event) && $this->onBeforeSave($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));

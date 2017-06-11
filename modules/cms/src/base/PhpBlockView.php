@@ -131,7 +131,7 @@ class PhpBlockView extends View
      */
     public function placeholderValue($placeholder)
     {
-        return $this->context->getPlacholderValue($placeholder);
+        return $this->context->getPlaceholderValue($placeholder);
     }
     
     /**

@@ -9,24 +9,24 @@ This is what a standard luya kickstarter appliation hierarchy should look like a
 ```
 .
 ├── public_html
-│   ├── storage
-│   └── css
+│   ├── storage
+│   └── css
 ├── assets
 ├── blocks
 ├── filters
 ├── configs
 ├── migrations
 ├── modules
-│   ├── <APP-MODULE>
-│   │   ├── assets
-│   │   └── controllers
-│   └── <APP-ADMIN-MODULE>
-│       ├── assets
-│       └── controllers
+│   ├── <APP-MODULE>
+│   │   ├── assets
+│   │   └── controllers
+│   └── <APP-ADMIN-MODULE>
+│       ├── assets
+│       └── controllers
 ├── runtime
 └── views
     ├── <APP-MODULE>
-    │   └── default
+    │   └── default
     ├── cmslayouts
     └── layouts
 ```
@@ -48,11 +48,6 @@ return [
      * The name of your site, will be display on the login screen
      */
     'siteTitle' => 'My Project',
-    
-    /*
-     * Set the administration area language. Available language short codes: "en", "de" and "ru"
-     */
-    'luyaLanguage' => 'en',
     
     /*
      * Let the application know which module should be executed by default (if no url is set). This module must be included 
@@ -79,6 +74,7 @@ return [
         'admin' => [
             'class' => 'luya\admin\Module',
             'secureLogin' => false, // when enabling secure login, the mail component must be proper configured otherwise the auth token mail will not send.
+            'interfaceLanguage' => 'en', // Set the administration area language. 
         ],
         
         /*

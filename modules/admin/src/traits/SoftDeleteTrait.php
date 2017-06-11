@@ -19,7 +19,7 @@ trait SoftDeleteTrait
      *
      * ```php
      * return [
-     *     'is_deleted' => [1, 0], // on delete sets `is_deleted = 1`; on find add where `where(['is_deleted' => 0]);`.
+     *     'is_deleted' => [true, false], // on delete sets `is_deleted = true`; on find add where `where(['is_deleted' => false]);`.
      *     'is_inactive' => true, // on delete sets `is_inactive = true`; on find add where `where([is_inactive' => !true]);`.
      * ];
      * ```
@@ -32,11 +32,14 @@ trait SoftDeleteTrait
      * - string/nummeric: The value will be inverted with "!" opposite operator, this can lead into problems
      *
      * if you want to override the default implemenation to match your custom models you should always use the former type of state description.
+     * 
+     * @todo rename to fieldStateDescriber
+     * @deprecated remove in 1.0.0 replace with fieldStateDescriber
      */
     public static function FieldStateDescriber()
     {
         return [
-            'is_deleted' => [1, 0]
+            'is_deleted' => [true, false]
         ];
     }
 
@@ -58,15 +61,17 @@ trait SoftDeleteTrait
 
     /**
      * Overrides the ngRestFind() method of the ActiveRecord
+     * @return \yii\db\ActiveQuery
      */
     public static function ngRestFind()
     {
         $where = static::internalAndWhere();
-        return (empty($where)) ? parent::ngrestFind() : parent::ngRestFind()->andWhere($where);
+        return empty($where) ? parent::ngRestFind() : parent::ngRestFind()->andWhere($where);
     }
     
     /**
      * Overrides the find() method of the ActiveRecord
+     * @return \yii\db\ActiveQuery
      */
     public static function find()
     {
@@ -90,8 +95,6 @@ trait SoftDeleteTrait
         
         return $result;
     }
-    
-    
     
     /**
      * Evalate the values to update.

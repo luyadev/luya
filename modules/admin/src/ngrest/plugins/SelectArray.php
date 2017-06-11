@@ -9,24 +9,36 @@ use luya\helpers\ArrayHelper;
  *
  * Example usage:
  *
- * ```
+ * ```php
  * public function ngRestAttributeTypes()
  * {
  * 		'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
  * }
  * ```
  *
+ * @property array $data Setter/Getter for the dropdown values.
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 class SelectArray extends Select
 {
-    private $_data = null;
+    private $_data;
     
+    /**
+     * Setter method for Data.
+     *
+     * @param array $data
+     */
     public function setData(array $data)
     {
         $this->_data = $data;
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \luya\admin\ngrest\plugins\Select::getData()
+     */
     public function getData()
     {
         $cleandata = [];

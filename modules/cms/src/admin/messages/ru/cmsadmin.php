@@ -158,7 +158,7 @@ return [
 // rc2
     'model_navitem_title_tag_label' => 'Название тегов (SEO)',
     
-// 1.0.0
+// rc3
     'model_navitempage_empty_draft_id' => 'Не удалось создать страницу из пустого шаблона черновика.',
     'view_update_variation_select' => 'Не выбрано ни одного изменения блока',
     'menu_group_item_env_config' => 'Настройки',
@@ -183,4 +183,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Настройки',
     'view_update_block_tooltip_delete' => 'Удалить',
     'view_update_block_tooltip_close' => 'Закрыть редактирование',
+    
+// 1.0.0
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
 ];

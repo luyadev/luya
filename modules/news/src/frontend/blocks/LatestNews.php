@@ -50,9 +50,4 @@ class LatestNews extends PhpBlock
     {
         return '<ul>{% for item in extras.items %}<li>{{ item.title }}</li>{% endfor %}</ul>';
     }
-
-    public function twigFrontend()
-    {
-        return '<ul>{% for item in extras.items %}<li><a href="{{ item.getDetailUrl(cfgs.nav_item_id) }}">{{ item.title }}</a></li>{% endfor %}</ul>';
-    }
 }

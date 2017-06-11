@@ -23,9 +23,14 @@ class DatabaseController extends Command
      * ./vendor/bin/luya exporter/database/remote-replace-local "mysql:host=localhost;dbname=REMOTE_DB_NAME" "USERNAME" "PASSWORD"
      * ```
      *
-     * @param string $fromDsn
-     * @param string $fromUsername
-     * @param string $fromPassword
+     * @param $remoteDsn
+     * @param $remoteUsername
+     * @param $remotePassword
+     * @return int
+     * @throws Exception
+     * @internal param string $fromDsn
+     * @internal param string $fromUsername
+     * @internal param string $fromPassword
      */
     public function actionRemoteReplaceLocal($remoteDsn, $remoteUsername, $remotePassword)
     {

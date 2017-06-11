@@ -41,6 +41,16 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'api-cms-navitemblock' => 'luya\cms\admin\apis\NavItemBlockController',
     ];
 
+    /**
+     * @inheritdoc
+     */
+    public $dashboardObjects = [
+        [
+            'template' => '<table class="striped"><thead></thead><tr><th>Page</th><th>User</th><th>Time</ht></tr></thead><tr ng-repeat="item in data"><td><a ui-sref="custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})">{{item.title}}</a></td><td>{{item.updateUser.firstname}} {{item.updateUser.lastname}}</td><td>{{item.timestamp_update * 1000 | date:\'short\'}}</td></tr></table>',
+            'dataApiUrl' => 'admin/api-cms-navitem/last-updates',
+            'title' => ['cmsadmin', 'cmsadmin_dashboard_lastupdate'],
+        ],
+    ];
     
     /**
      * Returns all Asset files to registered in the administration interfaces.
@@ -141,7 +151,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public $hiddenBlocks = [];
     
-    private $_blockVariation = null;
+    private $_blockVariation;
     
     /**
      * Set block variations.
@@ -223,16 +233,17 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             PropertyConsistencyImporter::className(),
         ];
     }
-    
+
     /**
      * Translations for CMS Module.
      *
      * @param unknown $message
      * @param array $params
+     * @return string
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('cmsadmin', $message, $params, Yii::$app->luyaLanguage);
+        return Yii::t('cmsadmin', $message, $params);
     }
     
     private static $_authorUserId = 0;

@@ -2,7 +2,7 @@
 
 namespace luya\admin\ngrest\plugins;
 
-use luya\helpers\ArrayHelper;
+
 use luya\admin\ngrest\base\Plugin;
 
 /**
@@ -18,7 +18,7 @@ class Slug extends Plugin
     /**
      * @var integer Html field placeholder
      */
-    public $placeholder = null;
+    public $placeholder;
 
     public function renderList($id, $ngModel)
     {

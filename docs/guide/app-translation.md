@@ -1,4 +1,4 @@
-# Translation / Messages
+# Translation / Messages
 
 This section explains how to use the [Yii Messaging system](http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html#message-translation) inside a LUYA Project. This is a summary guide. To use the translation/messaging system in your controller or view files you have to configure the yii2 i18n component:
 
@@ -19,32 +19,32 @@ Now all the message with the prefix `app` will be loaded into the message compon
 ```
 .
 └── messages
-    ├── de
+    ├── de
     │   ├── app.php
     │   └── app-otherparts.php
-    └── en
+    └── en
         ├── app.php
         └── app-otherparts.php
 ```
 
-In order to register an {{luya\base\Module}} translation define the {{luya\base\Module::translations}} property as followed:
+In order to register an {{luya\base\Module}} translation call the {{luya\base\Module::registerTranslation}} method after the init() of your Module as followed:
 
 ```php
-public $translations = [
-    [
-        'prefix' => 'mymodule*',
-        'basePath' => '@path/to/messages',
-        'fileMap' => [
-            'mymodule' => 'mymodule.php',
-            'mymodule/subsection' => 'subsection.php',
-        ],
-    ],
-];
+public function init()
+{
+    parent::init();
+    
+    $this->registerTranslation('mymodule*', '@mymoduleid/messages', [
+        'mymodule' => 'mymodule.php',
+        'mymodule/sub' => 'sub.php',
+    );
+}
 ```
+
 
 The above registered module translation messages can be retrieved as `Yii::t('mymodule', 'Key', 'Value')` or for the subsection `Yii::t('mymodule/subsection', 'Key', 'Value')`.
 
-### Message Source Content
+### Message Source Content
 
 The message source file itself which contains the translations for the specific language is an array with a key where you can identifier the message and a value which is the content. Example content for `messages/de/app.php`:
 
@@ -63,14 +63,6 @@ echo Yii::t('app', 'title_top');
 ```
 
 This would return *Hello everyone, i am title top!*.
-
-### Using translation in Twig
-
-There is also a twig function which allows you to retrieve the content like in Yii:t:
-
-```
-t('app', 'title_top')
-```
 
 ### Placeholders as Parameters
 

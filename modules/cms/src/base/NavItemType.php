@@ -41,7 +41,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
         return []; // override
     }
     
-    private $_controller = null;
+    private $_controller;
     
     /**
      * Setter method to store the current controller Object

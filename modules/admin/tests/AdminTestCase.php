@@ -2,32 +2,22 @@
 
 namespace admintests;
 
+use luya\testsuite\cases\BaseTestSuite;
+use luya\base\Boot;
+
 require 'vendor/autoload.php';
 require 'data/env.php';
 
-class AdminTestCase extends \PHPUnit_Framework_TestCase
+class AdminTestCase extends BaseTestSuite
 {
-    public $app = null;
-    
-    public function setUp()
-    {
-        $this->mockApp();
-    }
-
     public function getConfigArray()
     {
         return include(__DIR__ .'/data/configs/admin.php');
     }
     
-    public function mockApp()
+    public function bootApplication(Boot $boot)
     {
-        if ($this->app === null) {
-            $this->app = new \luya\Boot();
-            $this->app->setConfigArray($this->getConfigArray());
-            $this->app->mockOnly = true;
-            $this->app->setBaseYiiFile(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
-            $this->app->applicationWeb();
-        }
+         $boot->applicationWeb();
     }
     
     protected function removeNewline($text)

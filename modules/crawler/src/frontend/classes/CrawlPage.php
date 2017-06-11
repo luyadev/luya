@@ -4,23 +4,23 @@ namespace luya\crawler\frontend\classes;
 
 use Goutte\Client;
 use yii\base\InvalidConfigException;
-use luya\helpers\Url;
+
 use luya\helpers\StringHelper;
 use Symfony\Component\DomCrawler\Crawler;
 
 class CrawlPage extends \yii\base\Object
 {
-    public $pageUrl = null;
+    public $pageUrl;
 
-    public $client = null;
+    public $client;
 
-    public $baseUrl = null;
+    public $baseUrl;
     
-    public $baseHost = null;
+    public $baseHost;
     
     public $useH1 = false;
     
-    private $_crawler = null;
+    private $_crawler;
 
     public $verbose = false;
     

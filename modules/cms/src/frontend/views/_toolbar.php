@@ -133,7 +133,15 @@ use luya\cms\frontend\Module;
                         </div>
                         <div class="luya-cms-toolbar__list-entry-right">
                             <p>
-                                <?= is_array($prop['value']) ? count($prop['value']) . ' item(s)' : $prop['value']; ?>
+                            	<?php if (is_object($prop['value'])): ?>
+                            		Type Object
+                            	<?php elseif (is_array($prop['value'])): ?>
+                            		Type Array: <?= count($prop['value']); ?> item(s);
+                            	<?php elseif (is_scalar($prop['value'])): ?>
+                            		<?= $prop['value']; ?>
+                            	<?php else: ?>
+                            		Type Undefined
+                            	<?php endif; ?>
                             </p>
                         </div>
                     </div>

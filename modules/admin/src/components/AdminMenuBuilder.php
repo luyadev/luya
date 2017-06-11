@@ -4,7 +4,7 @@ namespace luya\admin\components;
 
 use yii\base\Object;
 use luya\base\AdminModuleInterface;
-use luya\admin\base\GenericSearchInterface;
+
 
 /**
  * Builder class for the Administration Menu/Navigation.
@@ -38,6 +38,8 @@ use luya\admin\base\GenericSearchInterface;
  */
 class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
 {
+    private static $index = 0;
+    
     private $_menu = [];
     
     private $_pointers = [];
@@ -50,7 +52,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     /**
      * @var \luya\base\AdminModuleInterface The context on what the menu is running.
      */
-    protected $moduleContext = null;
+    protected $moduleContext;
     
     /**
      * @var array List of all permission APIs.
@@ -77,13 +79,14 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      *
      * @param string $name The name of the node, all names will process trough the `Yii::t` function with its module name as prefix.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
-     * @param string $template Whether to use a custom template or not.
+     * @param bool $template Whether to use a custom template or not.
      * @return \luya\admin\components\AdminMenuBuilder
      */
     public function node($name, $icon, $template = false)
     {
-        $this->_pointers['node'] = $name;
-        $this->_menu[$name] = [
+        $this->_pointers['node'] = self::$index;
+        $this->_menu[self::$index] = [
+            'id' => self::$index,
             'moduleId' => $this->moduleContext->id,
             'template' => $template,
             'routing' => $template ? 'custom' : 'default',
@@ -94,6 +97,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'searchModelClass' => false,
         ];
     
+        self::$index++;
         return $this;
     }
     
@@ -109,8 +113,9 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      */
     public function nodeRoute($name, $icon, $template, $route, $searchModelClass = null)
     {
-        $this->_pointers['node'] = $name;
-        $this->_menu[$name] = [
+        $this->_pointers['node'] = self::$index;
+        $this->_menu[self::$index] = [
+            'id' => self::$index,
             'moduleId' => $this->moduleContext->id,
             'template' => $template,
             'routing' => $template ? 'custom' : 'default',
@@ -123,6 +128,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
         $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
+        self::$index++;
         return $this;
     }
     
@@ -230,7 +236,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      *
      * @param array $item The item where the option key persists.
      * @param string $optionName The name of the option to get.
-     * @param string $defaultValue The default value if the option is not available for this item.
+     * @param mixed $defaultValue The default value if the option is not available for this item.
      * @return mixed
      */
     public static function getOptionValue(array $item, $optionName, $defaultValue = false)

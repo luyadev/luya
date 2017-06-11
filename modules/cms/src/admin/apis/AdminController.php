@@ -7,7 +7,7 @@ use luya\cms\models\Layout;
 use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\helpers\ArrayHelper;
-use luya\cms\admin\Module;
+use luya\cms\frontend\Module;
 use luya\cms\models\Config;
 
 /**
@@ -64,6 +64,7 @@ class AdminController extends \luya\admin\base\RestController
                 continue;
             }
             
+            $group['name'] = Module::t($group['name']);
             $group['is_fav'] = 0;
             $group['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get("togglegroup.{$group['id']}", 1);
             $groups[] = [

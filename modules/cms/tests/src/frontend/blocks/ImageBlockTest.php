@@ -3,7 +3,7 @@
 namespace cmstests\src\frontend\blocks;
 
 use cmstests\BlockTestCase;
-use luya\cms\frontend\blocks\ImageBlock;
+
 
 class ImageBlockTest extends BlockTestCase
 {

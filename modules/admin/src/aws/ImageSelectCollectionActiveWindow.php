@@ -11,13 +11,17 @@ use luya\admin\ngrest\base\ActiveWindow;
  * Usage example of registering Gallery Active Window:
  *
  * ```php
- * $config->aw->load([
- *     'class' => 'admin\aws\ImageCollectionActiveWindow',
- *     'refTableName' => 'gallery_album_image',
- *     'imageIdFieldName' => 'image_id',
- *     'refFieldName' => 'album_id',
- *     'alias' => 'Select Image',
- * ]);
+ * public function ngRestActiveWindows()
+ * {
+ *     return [
+ *         ['class' => 'admin\aws\ImageCollectionActiveWindow',
+ *          'refTableName' => 'gallery_album_image',
+ *          'imageIdFieldName' => 'image_id',
+ *          'refFieldName' => 'album_id',
+ *          'alias' => 'Select Image',
+ *         ],
+ *     ];
+ * }
  * ```
  *
  * The above example would required the following migration code for the ref table:
@@ -33,11 +37,11 @@ use luya\admin\ngrest\base\ActiveWindow;
  */
 class ImageSelectCollectionActiveWindow extends ActiveWindow
 {
-    public $refTableName = null;
+    public $refTableName;
 
-    public $imageIdFieldName = null;
+    public $imageIdFieldName;
 
-    public $refFieldName = null;
+    public $refFieldName;
 
     /**
      * @var string The name of the module where the active windows is located in order to finde the view path.

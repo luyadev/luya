@@ -63,9 +63,9 @@ trait QueryTrait
 {
     private $_where = [];
     
-    private $_offset = null;
+    private $_offset;
     
-    private $_limit = null;
+    private $_limit;
     
     private $_whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
     
@@ -198,7 +198,7 @@ trait QueryTrait
     
         return $this;
     }
-    
+
     /**
      * Query where similar behavior of filtering items.
      *
@@ -245,15 +245,17 @@ trait QueryTrait
      * This will only appaend the first condition where id is bigger then 1 and ignore the second one
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
-     * @return \luya\admin\storage\QueryTrait
+     * @return QueryTrait
+     * @throws Exception
      */
     public function where(array $args)
     {
         foreach ($args as $key => $value) {
             if (in_array($value, $this->_whereOperators, true)) {
                 if (count($args) !== 3) {
-                    throw new Exception(sprintf("Wrong where(['%s']) condition, see http://luya.io/api/cms-menu-query.html#where()-detail for all available conditions.", implode("', '", $args)));
+                    throw new Exception("Wrong where condition. Condition needs an operator and two operands.");
                 }
+                
                 $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
                 break;
             } else {

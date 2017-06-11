@@ -17,7 +17,7 @@ use luya\helpers\ArrayHelper;
  */
 class MenuHelper
 {
-    private static $items = null;
+    private static $items;
     
     /**
      * Get all nav data entries with corresponding item content
@@ -32,7 +32,7 @@ class MenuHelper
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy(['sort_index' => SORT_ASC])
-            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 0])
+            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => false])
             ->all();
             
             self::loadInheritanceData(0);
@@ -79,12 +79,12 @@ class MenuHelper
     
     private static $_inheritData = [];
     
-    private static $_navItems = null;
+    private static $_navItems;
     
     private static function getNavItems()
     {
         if (self::$_navItems === null) {
-            $items = Nav::find()->select(['sort_index', 'id', 'parent_nav_id', 'is_deleted'])->where(['is_deleted' => 0])->orderBy(['sort_index' => SORT_ASC])->asArray()->all();
+            $items = Nav::find()->select(['sort_index', 'id', 'parent_nav_id', 'is_deleted'])->where(['is_deleted' => false])->orderBy(['sort_index' => SORT_ASC])->asArray()->all();
             return self::$_navItems = ArrayHelper::index($items, null, 'parent_nav_id');
         }
         
@@ -129,7 +129,7 @@ class MenuHelper
     
     /* NAV GROUP INHERITANCE NODE */
     
-    private static $_cmsPermissionData = null;
+    private static $_cmsPermissionData;
     
     private static function getCmsPermissionData()
     {
@@ -161,7 +161,7 @@ class MenuHelper
     
     /* NAV GROUP PERMISSION */
     
-    private static $_navGroupPermissions = null;
+    private static $_navGroupPermissions;
     
     private static function getNavGroupPermissions()
     {
@@ -190,7 +190,7 @@ class MenuHelper
         return false;
     }
     
-    private static $containers = null;
+    private static $containers;
     
     /**
      * Get all cms containers
@@ -200,13 +200,13 @@ class MenuHelper
     public static function getContainers()
     {
         if (self::$containers === null) {
-            self::$containers = (new Query())->select(['id', 'name', 'alias'])->from('cms_nav_container')->where(['is_deleted' => 0])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
+            self::$containers = (new Query())->select(['id', 'name', 'alias'])->from('cms_nav_container')->where(['is_deleted' => false])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
         }
         
         return self::$containers;
     }
     
-    private static $drafts = null;
+    private static $drafts;
     
     /**
      * Get all drafts nav items
@@ -221,7 +221,7 @@ class MenuHelper
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy('cms_nav.sort_index ASC')
-            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 1])
+            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => true])
             ->all();
         }
         

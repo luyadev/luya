@@ -140,36 +140,39 @@ return [
     'button_update_version' => 'Modifier une version',
     'menu_group_item_env_permission' => 'Permissions de la page',
     
-// rc1
+    /* rc1 */
     'page_update_actions_deepcopy_text' => 'Créer une copie de la page en cours comprenant son contenu. Toutes les langues seront copiés mais, seulement la version publiée sera visible.',
     'page_update_actions_deepcopy_btn' => 'Créer une copie',
     
-// rc2
+    /* rc2 */
     'model_navitem_title_tag_label' => 'Titre (SEO)',
     
-// 1.0.0
-    'model_navitempage_empty_draft_id' => 'Unable to create page from empty draft template.',
-    'view_update_variation_select' => 'No block variation selected',
-    'menu_group_item_env_config' => 'Config',
-    'js_config_update_success' => 'Configuration successfull saved.',
-    'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message',
-    'module_permission_update_config' => 'CMS Configurations',
-    'module_permission_delete_pages' => 'Delete Page',
-    'page_update_actions_deepcopy_title' => 'Copy Page',
-    'page_update_actions_layout_title' => 'Layout File',
-    'page_update_actions_layout_text' => 'You can define another layout file which should be rendered instead of the main layout file. If empty the `main.php` layout will be used by default. You can also use alias paths. Layout file defintion does not require the php file extension.',
-    'page_update_actions_layout_file_field' => 'Layout File',
-    'page_update_actions_modal_title' => 'Page Settings',
-    'js_page_update_layout_save_success' => 'The layout file has been updated',
-    'js_page_create_copy_success' => 'The page copy has been created.',
-    'view_update_offline_info' => 'Change offline/online mode for this page, if a page is only its not accessable by url.',
-    'view_update_hidden_info' => 'Change the visbility of the page, page is acceessable by url but hidden in navigations.',
-    'view_update_homepage_info' => 'Set this page as Homepage.',
-    'view_update_block_tooltip_copy' => 'Add to Clipboard',
-    'view_update_block_tooltip_visible' => 'Toggle invisible',
-    'view_update_block_tooltip_invisible' => 'Toggle visible',
-    'view_update_block_tooltip_edit' => 'Edit',
-    'view_update_block_tooltip_editcfg' => 'Configure',
-    'view_update_block_tooltip_delete' => 'Delete',
-    'view_update_block_tooltip_close' => 'Close edit',
+    /* rc3 */
+    'model_navitempage_empty_draft_id' => 'Impossible de créer une page à partir d\'un modèle de brouillon vide',
+    'view_update_variation_select' => 'Aucun bloc de variation sélectionné',
+    'menu_group_item_env_config' => 'Configuration',
+    'js_config_update_success' => 'Configuration enregistrée avec succès',
+    'config_index_httpexceptionnavid' => 'Définissez la redirection de la page erreur 404 <br /> <petit> Astuce: Créez une page 404 et la marquer comme masquée et affichez votre message d\'erreur',
+    'module_permission_update_config' => 'Configurations de CMS',
+    'module_permission_delete_pages' => 'Supprimer la page',
+    'page_update_actions_deepcopy_title' => 'Copier la page',
+    'page_update_actions_layout_title' => 'Fichier de disposition',
+    'page_update_actions_layout_text' => 'Vous pouvez définir un autre fichier de disposition pour le rendu au lieu du fichier de mise en page principal. Si vide, la disposition `main.php` sera utilisée par défaut. Vous pouvez également utiliser des alias pour le chemin. La définition du fichier de disposition ne nécessite pas l\'extension .php',
+    'page_update_actions_layout_file_field' => 'Fichier de disposition',
+    'page_update_actions_modal_title' => 'Paramètres de la page',
+    'js_page_update_layout_save_success' => 'Le fichier de dispostion a été mis à jour',
+    'js_page_create_copy_success' => 'Une copie de la page a été créée',
+    'view_update_offline_info' => 'Changez le mode hors connexion/connecté pour cette page',
+    'view_update_hidden_info' => 'Changez la visibilité de la page. Elle sera accessible par url mais cachée dans la navigation',
+    'view_update_homepage_info' => 'Définissez cette page comme page d\'accueil',
+    'view_update_block_tooltip_copy' => 'Ajouter au presse-papiers',
+    'view_update_block_tooltip_visible' => 'Afficher',
+    'view_update_block_tooltip_invisible' => 'Cacher',
+    'view_update_block_tooltip_edit' => 'Modifier',
+    'view_update_block_tooltip_editcfg' => 'Configurer',
+    'view_update_block_tooltip_delete' => 'Supprimer',
+    'view_update_block_tooltip_close' => 'Fermer l\'édition',
+    
+    /* 1.0.0 */
+    'cmsadmin_dashboard_lastupdate' => 'Dernières modifications'
 ];

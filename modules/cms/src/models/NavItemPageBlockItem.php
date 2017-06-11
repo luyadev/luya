@@ -88,7 +88,8 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
                     $this->$attribute = Json::encode($data, JSON_FORCE_OBJECT);
                 }
             }, 'skipOnEmpty' => false],
-            [['block_id', 'nav_item_page_id', 'prev_id', 'is_dirty', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'sort_index', 'is_hidden'], 'integer'],
+            [['block_id', 'nav_item_page_id', 'prev_id', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'sort_index'], 'integer'],
+            [['is_dirty', 'is_hidden'], 'boolean'],
             [['placeholder_var'], 'required'],
             [['json_config_values', 'json_config_cfg_values'], 'string'],
             [['placeholder_var'], 'string', 'max' => 80],
@@ -173,7 +174,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             $this->create_user_id = Module::getAuthorUserId();
         } else {
             $this->deleteHasCache(['blockcache', (int) $this->id]);
-            $this->is_dirty = 1;
+            $this->is_dirty = true;
             $this->update_user_id = Module::getAuthorUserId();
             $this->timestamp_update = time();
         }

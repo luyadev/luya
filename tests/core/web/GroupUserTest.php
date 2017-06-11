@@ -2,7 +2,7 @@
 
 namespace luyatests\core\web;
 
-use Yii;
+
 use luyatests\LuyaWebTestCase;
 use luya\web\GroupUser;
 use luya\web\GroupUserIdentityInterface;

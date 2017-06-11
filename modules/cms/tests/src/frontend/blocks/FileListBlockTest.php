@@ -2,7 +2,7 @@
 
 namespace cmstests\src\frontend\blocks;
 
-use luya\cms\frontend\blocks\FileListBlock;
+
 use cmstests\BlockTestCase;
 
 class FileListBlockTest extends BlockTestCase

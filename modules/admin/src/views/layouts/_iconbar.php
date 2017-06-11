@@ -36,7 +36,7 @@ use luya\admin\Module as Admin;
     </div>
 </li>
 <li class="icon icon__username">
-    <div class="navbar__button" ng-click="toggleUserPanel()">
+    <div class="navbar__button" ui-sref="custom({templateId:'admin/account/dashboard'})">
         <i class="material-icons left">account_circle</i><strong><?= Yii::$app->adminuser->identity->firstname; ?></strong>
         <p class="icon__spawn-text"><?= Admin::t('layout_btn_profile'); ?></p>
     </div>

@@ -1,14 +1,14 @@
-# NgRest Model
+# NgRest Model
 
 The `NgRest` crud model class is the based class for the api, based on this Active Record class the find, update and created validation rules will be perfomed. The main different to the Yii2 Restful implementation is the to use {{luya\admin\ngrest\base\NgRestModel}} as base class. So the ngrest crud model provides additianl informations to what fields you want to edit, create or list in your crud view.
 
 > You should read the [Admin NgRest Crud Concept](ngrest-concept.md) in order to understand what the NgRest Model is all about.
 
-## Where do i configure?
+## Where do i configure?
 
 Each NgRest Model does have a {{luya\admin\ngrest\base\NgRestModel::ngrestAttributeTypes}} method where you can define what type of fields you have and {{luya\admin\ngrest\base\NgRestModel::ngRestConfig}} where you can define the fields for the specific Scope (crud, list, create).
 
-#### Define attribute types
+#### Define attribute types
 
 To define an attribute type for a specific attribute, you have to override the {{luya\admin\ngrest\base\NgRestModel::ngrestAttributeTypes}} method by returning an array where the key is the field and value the config of the [NgRest Plugin](ngrest-plugins.md).
 
@@ -57,7 +57,7 @@ public function ngRestScopes()
 }
 ```
 
-#### Delete
+#### Delete
 
 To enable a delete button where the user can remove an item from the database table you can configure the delete pointer:
 
@@ -251,10 +251,10 @@ By default, soft delete trait will use the field `is_deleted` to find and delete
 ```php
 public static function FieldStateDescriber()
 {
-	return [
-	    'is_deleted' => [1, 0], // on delete sets `is_deleted = 1`; on find add where `where(['is_deleted' => 0]);`.
-	    'is_inactive' => true, // on delete sets `is_inactive = true`; on find add where `where([is_inactive' => !true]);`.
-	]
+    return [
+        'is_deleted' => [1, 0], // on delete sets `is_deleted = 1`; on find add where `where(['is_deleted' => 0]);`.
+        'is_inactive' => true, // on delete sets `is_inactive = true`; on find add where `where([is_inactive' => !true]);`.
+    ]
 }
 ```
 

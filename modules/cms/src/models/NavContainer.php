@@ -63,6 +63,6 @@ class NavContainer extends NgRestModel
      */
     public function getNavs()
     {
-        return $this->hasMany(Nav::className(), ['nav_container_id' => 'id'])->where(['is_deleted' => 0, 'is_draft' => 0])->orderBy(['sort_index' => SORT_ASC]);
+        return $this->hasMany(Nav::className(), ['nav_container_id' => 'id'])->where(['is_deleted' => false, 'is_draft' => false])->orderBy(['sort_index' => SORT_ASC]);
     }
 }

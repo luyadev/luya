@@ -8,7 +8,7 @@ use luya\validators\FloatValidator;
 
 class StubModel extends Model
 {
-    public $value = null;
+    public $value;
 }
 
 class FloatValidatorTest extends LuyaWebTestCase

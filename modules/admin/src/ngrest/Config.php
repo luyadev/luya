@@ -2,10 +2,11 @@
 
 namespace luya\admin\ngrest;
 
-use Exception;
-use luya\helpers\ArrayHelper;
 use yii\base\Object;
+
+use luya\helpers\ArrayHelper;
 use luya\admin\Module;
+use yii\base\InvalidConfigException;
 
 /**
  * Defines and holds an NgRest Config.
@@ -37,53 +38,133 @@ use luya\admin\Module;
 class Config extends Object implements ConfigInterface
 {
     private $_config = [];
-
-    private $_plugins = null;
-
-    private $_extraFields = null;
-
-    private $_hash = null;
     
-    /**
-     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
-     * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
-     */
-    public $inline = false;
+    public function setConfig(array $config)
+    {
+    	if (!empty($this->_config)) {
+    		throw new InvalidConfigException("Unable to override an already provided Config.");	
+    	}
+    	
+    	$this->_config = $config;
+    }
+    
+    public function getConfig()
+    {
+    	return $this->_config;
+    }
+    
+    private $_relations = [];
+    
+    public function getRelataions()
+    {
+    	return $this->_relations;
+    }
 
-    public $filters = false;
+    public function setRelations(array $relations)
+    {
+    	$this->_relations = $relations;
+    }
     
-    public $defaultOrder = null;
+    private $_apiEndpoint;
     
-    public $attributeGroups = false;
+    public function getApiEndpoint()
+    {
+    	return $this->_apiEndpoint;
+    }
     
-    public $relations = [];
+    public function setApiEndpoint($apiEndpoint)
+    {
+    	$this->_apiEndpoint = $apiEndpoint;
+    }
     
-    public $groupByField = false;
-
-    public $tableName = null;
+    private $_attributeGroups = false;
     
-    public $apiEndpoint = null;
-
-    public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */
-
-    public $relationCall = false;
+    public function getAttributeGroups()
+    {
+    	return $this->_attributeGroups;
+    }
+    
+    public function setAttributeGroups(array $groups)
+    {
+    	$this->_attributeGroups = $groups;
+    }
+    
+    private $_filters = false;
+    
+    public function getFilters()
+    {
+    	return $this->_filters;
+    }
+    
+    public function setFilters(array $filters)
+    {
+    	$this->_filters = $filters;
+    }
+    
+    private $_defaultOrder;
+    
+    public function getDefaultOrder()
+    {
+    	return $this->_defaultOrder;
+    }
+    
+    public function setDefaultOrder($defaultOrder)
+    {
+    	$this->_defaultOrder = $defaultOrder;
+    }
+    
+    private $_groupByField;
+    
+    public function getGroupByField()
+    {
+    	return $this->_groupByField;
+    }
+    
+    public function setGroupByField($groupByField)
+    {
+    	$this->_groupByField = $groupByField;
+    }
+    
+    private $_tableName;
+    
+    public function getTableName()
+    {
+    	return $this->_tableName;
+    }
+    
+    public function setTableName($tableName)
+    {
+    	$this->_tableName = $tableName;
+    }
+    
+    private $_primaryKey;
+    
+    public function getPrimaryKey()
+    {
+    	return $this->_primaryKey;
+    }
+    
+    public function setPrimaryKey($key)
+    {
+    	$this->_primaryKey = $key;
+    }
     
     public function getDefaultOrderField()
     {
-        if ($this->defaultOrder === null) {
+        if (!$this->getDefaultOrder()) {
             return false;
         }
         
-        return key($this->defaultOrder);
+        return key($this->getDefaultOrder());
     }
     
     public function getDefaultOrderDirection()
     {
-        if ($this->defaultOrder === null) {
+    	if (!$this->getDefaultOrder()) {
             return false;
         }
         
-        $direction = (is_array($this->defaultOrder)) ? current($this->defaultOrder) : null; // us preg split to find in string?
+        $direction = (is_array($this->getDefaultOrder())) ? current($this->getDefaultOrder()) : null; // us preg split to find in string?
 
         if ($direction == SORT_ASC || strtolower($direction) == 'asc') {
             return '+';
@@ -95,25 +176,13 @@ class Config extends Object implements ConfigInterface
         
         return '+';
     }
+
+    private $_hash;
     
-    public function setConfig(array $config)
-    {
-        if (count($this->_config) > 0) {
-            throw new Exception('Cant set config if config is not empty');
-        }
-
-        $this->_config = $config;
-    }
-
-    public function getConfig()
-    {
-        return $this->_config;
-    }
-
     public function getHash()
     {
         if ($this->_hash === null) {
-            $this->_hash = md5($this->apiEndpoint);
+            $this->_hash = md5($this->getApiEndpoint());
         }
 
         return $this->_hash;
@@ -168,7 +237,7 @@ class Config extends Object implements ConfigInterface
      */
     public function getOption($key)
     {
-        return ($this->hasPointer('options') && array_key_exists($key, $this->_config['options'])) ? $this->_config['options'][$key] : 0;
+        return ($this->hasPointer('options') && array_key_exists($key, $this->_config['options'])) ? $this->_config['options'][$key] : false;
     }
 
     public function addField($pointer, $field, array $options = [])
@@ -215,6 +284,8 @@ class Config extends Object implements ConfigInterface
         return ($this->getPointer('delete') === true) ? true : false;
     }
 
+    private $_plugins;
+    
     /**
      * @todo: combine getPlugins and getExtraFields()
      */
@@ -240,6 +311,8 @@ class Config extends Object implements ConfigInterface
         return $this->_plugins;
     }
 
+    private $_extraFields;
+    
     /**
      * @todo: combine getPlugins and getExtraFields()
      */

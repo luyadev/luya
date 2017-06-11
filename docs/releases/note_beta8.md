@@ -23,7 +23,7 @@ Today (11. August 2016) beta 8 of the Yii2-based content management system LUYA 
 
 And, the most important thing of all, a new LUYA logo will be unveiled soon.  ;-)
 
-### Links
+### Links
 
 + [How to Install](https://luya.io/guide/install)
 + [How to upgrade existing LUYA Version](https://luya.io/guide/install-upgrade)

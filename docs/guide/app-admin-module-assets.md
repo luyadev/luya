@@ -2,7 +2,7 @@
 
 This section describes how to add assets (css or javascript) files to your administration module, to make sure are depending and initializing your files at the right point, all your custom assets should depend on the `admin\assets\Main` packaged.
 
-### Example Bundle
+### Example Bundle
 
 Below en example administration asset file depending on the administration main asset bundle:
 
@@ -21,14 +21,14 @@ class MyAdminAsset extends \luya\web\Asset
 
     // important to solve all javascript dependency issues relating jquery, bower, angular, ...
     public $depends = [
-        'admin\assets\Main',
+        'luya\admin\assets\Main',
     ];
 }
 ```
 
 > The asset bundle itself should always stored in a `assets` folder where the resource files for the asset should always located in a `resources` folder.
 
-### Embed the asset
+### Embed the asset
 
 To embed the above created example asset file stored in your admin module you hav to add the asset bundle into the {{\luya\base\AdminModuleInterface::getAdminAssets}} method of the belonging `Module.php` file as shown below:
 

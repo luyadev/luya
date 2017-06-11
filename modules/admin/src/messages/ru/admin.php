@@ -236,6 +236,13 @@ return [
     'js_filemanager_count_files_overlay' => '%count% файлов',
     'js_link_change_value' => 'Изменить ссылку',
     'js_link_set_value' => 'Установить ссылку',
-    'callback_button_file_download_widget_success' => 'Файл подготовлен. Вы можете скачать его.'
+    'callback_button_file_download_widget_success' => 'Файл подготовлен. Вы можете скачать его.',
     
+    
+// 1.0.0
+    
+    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
+    'model_user_oldpassword' => 'Previous (old) Password',
+    'js_account_update_profile_success' => 'The profile data has been successfull updated.',
+    'dashboard_lastlogin_title' => 'Last User Logins',
 ];

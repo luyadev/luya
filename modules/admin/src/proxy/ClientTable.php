@@ -14,12 +14,12 @@ use yii\helpers\Console;
  */
 class ClientTable extends Object
 {
-    private $_data = null;
+    private $_data;
     
     /**
      * @var \luya\admin\proxy\ClientBuild
      */
-    public $build = null;
+    public $build;
     
     public function __construct(ClientBuild $build, array $data, array $config = [])
     {
@@ -28,7 +28,7 @@ class ClientTable extends Object
         parent::__construct($config);
     }
     
-    private $_schema = null;
+    private $_schema;
     
     public function getSchema()
     {
@@ -100,7 +100,7 @@ class ClientTable extends Object
         return $this->getRows() == count($this->getContentRows());
     }
     
-    private $_contentRows = null;
+    private $_contentRows;
     
     public function getContentRows()
     {
@@ -128,8 +128,6 @@ class ClientTable extends Object
         Yii::$app->db->createCommand()->truncateTable($this->getName())->execute();
         
         $rows = $this->getContentRows();
-        $num = count($rows);
-        $counts = ceil($num/25);
 
         $chunks = array_chunk($rows, 25);
         

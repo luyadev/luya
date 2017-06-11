@@ -7,13 +7,13 @@ Below some rules how to deail with documentations, linking or using the php docs
 In order to make a Link somewhere inside the Guide or PHPDoc to a PHP Class use:
 
 + `{{\luya\base\Module}}` This will generate a link to the API for this class.
-+ `{{\luya\base\Module::resolveRoute}}` Genrate a link to the luya\base\Module and method `resolveRoute()`.
++ `{{\luya\base\Module::resolveRoute}}` Genrate a link to the luya\base\Module and method `resolveRoute()`.
 
 In order to make links from the API PHPdocs to the Guide use:
 
 + `[[concept-tags.md]]` where the markdown file is a file located in `/docs/guide` folder..
 
-## PHPDOC
+## PHPDOC
 
 All classes must have a php doc block which is sorted as follow including author and since tag.
 
@@ -48,11 +48,15 @@ public function init()
 }
 ```
 
+## Versioning
+
+This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md).
+
 ## CODING CONVENTIONS
 
 The following conventions are used when contributing to the LUYA project.
 
-### PHP 
+### PHP 
 
 PSR2 Naming convention
 
@@ -88,7 +92,7 @@ class Foo extends Bar implements FooInterface
 }
 ```
 
-### SQL
+### SQL
 
 SQL Datbase Table and Field namings:
 
@@ -103,7 +107,8 @@ table name examples
 + admin_user
 + admin_user_setting
 + admin_group
-+ admin_user_group (ref table between user and group)
++ admin_user_group (Reference table between user and group)
++ admin_user_group_ref (Alternative the reference table can contain the suffix `_ref` or `_rel`)
 + news_data
 + news_category
 
@@ -119,11 +124,11 @@ field name examples
 
 http://cssguidelin.es/
 
-### JS
+### JS
 
 https://github.com/airbnb/javascript
 
-### JSON-SCHEMA:
+### JSON-SCHEMA:
 
 http://json-schema.org/latest/json-schema-core.html
 
@@ -132,7 +137,7 @@ http://json-schema.org/latest/json-schema-core.html
 
 The css and html files for the admin module are based on the following rules.
 
-### Admin Design compile
+### Admin Design compile
 
 To compile css and js to one file we use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow).  
 To install gulp and the dependencies on your System [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).

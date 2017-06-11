@@ -7,9 +7,9 @@ use luya\admin\ngrest\base\NgRestModel;
 
 class User extends NgRestModel implements \yii\web\IdentityInterface
 {
-    public $password_confirm = null;
+    public $password_confirm;
 
-    public $plainPassword = null;
+    public $plainPassword;
 
     public function init()
     {
@@ -126,6 +126,7 @@ class User extends NgRestModel implements \yii\web\IdentityInterface
      *
      * @param string $token the token to be looked for
      *
+     * @param null $type
      * @return IdentityInterface|null the identity object that matches the given token.
      */
     public static function findIdentityByAccessToken($token, $type = null)

@@ -6,7 +6,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use luya\admin\ngrest\NgRest;
+
 use luya\admin\behaviors\LogBehavior;
 use luya\admin\base\GenericSearchInterface;
 use luya\admin\ngrest\Config;
@@ -119,6 +119,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *     return ['created_at' => SORT_ASC];
      * }
      * ```
+     * 
+     * If the return value is `false` the sorting **is disabled** for this NgRest CRUD.
      *
      * @return array Return an Array where the key is the field and value the direction. Example `['timestamp' => SORT_ASC]`.
      * @since 1.0.0-beta8
@@ -295,7 +297,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         return $query->select($fields)->all();
     }
 
-    private $_ngrestCallType = null;
+    private $_ngrestCallType;
     
     /**
      * Determine the current call type based on get params as they can change the output behavior to make the ngrest crud list view.
@@ -311,12 +313,12 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         return $this->_ngrestCallType;
     }
 
-    private $_ngRestPrimaryKey = null;
-    
+    private $_ngRestPrimaryKey;
+
     /**
      * Getter method for NgRest Primary Key.
-     *
      * @return string
+     * @throws InvalidConfigException
      */
     public function getNgRestPrimaryKey()
     {
@@ -344,8 +346,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      *
-     * @param unknown $field
-     * @param unknown $data
+     * @param string $field
+     * @param mixed $data
      */
     public function addNgRestServiceData($field, $data)
     {
@@ -568,7 +570,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         }
     }
     
-    private $_config = null;
+    private $_config;
     
     /**
      * Build and call the full config object if not build yet for this model.

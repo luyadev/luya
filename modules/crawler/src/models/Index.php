@@ -2,11 +2,10 @@
 
 namespace luya\crawler\models;
 
-use Yii;
+
 use luya\crawler\admin\Module;
-use luya\crawler\models\Searchdata;
-use luya\helpers\Url;
-use yii\helpers\Inflector;
+
+
 use Nadar\Stemming\Stemm;
 use yii\db\Expression;
 
@@ -97,7 +96,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         }
         $result = $q->all();
     
-        $searchData = new SearchData();
+        $searchData = new Searchdata();
         $searchData->detachBehavior('LogBehavior');
         $searchData->attributes = [
             'query' => $query,
@@ -128,7 +127,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         
         $result = $activeQuery->all();
         
-        $searchData = new SearchData();
+        $searchData = new Searchdata();
         $searchData->detachBehavior('LogBehavior');
         $searchData->attributes = [
             'query' => $query,

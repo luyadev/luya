@@ -18,11 +18,11 @@ namespace luya\admin\ngrest\plugins;
  */
 class SortRelationModel extends SortRelation
 {
-    public $modelClass = null;
+    public $modelClass;
     
-    public $valueField = null;
+    public $valueField;
     
-    public $labelField = null;
+    public $labelField;
     
     public function getData()
     {

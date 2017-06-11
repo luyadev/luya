@@ -8,7 +8,7 @@ use luya\admin\ngrest\Config;
 class ConfigTest extends AdminTestCase
 {
     /**
-     * @expectedException Exception
+     * @expectedException yii\base\InvalidConfigException
      */
     public function testSetConfigException()
     {

@@ -8,7 +8,7 @@ Below are all these configs and environments explained.
 
 ![configs-graphic](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/configs-luya.jpg "LUYA Envs config")
 
-## env.php
+## env.php
 The `env.php` file returns the currently used config. It's used to change the config on different environment.
 This file is ignored by GIT. If you create a new project, an example file called `env.php.dist` will be provided (See [Install](install.md)).
 

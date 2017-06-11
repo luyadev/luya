@@ -5,6 +5,7 @@ namespace luya\news\frontend\controllers;
 use luya\news\models\Article;
 use luya\news\models\Cat;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
 
 /**
  * News Module Default Controller contains actions to display and render views with predefined data.
@@ -29,7 +30,7 @@ class DefaultController extends \luya\web\Controller
     public function actionIndex()
     {
         $provider = new ActiveDataProvider([
-            'query' => Article::find()->andWhere(['is_deleted' => 0]),
+            'query' => Article::find()->andWhere(['is_deleted' => false]),
             'sort' => [
                 'defaultOrder' => $this->module->articleDefaultOrder,
             ],
@@ -40,6 +41,35 @@ class DefaultController extends \luya\web\Controller
         
         return $this->render('index', [
             'model' => Article::className(),
+            'provider' => $provider,
+        ]);
+    }
+    
+    /**
+     * Get all articles for a given categorie ids string seperated by command.
+     * 
+     * @param string $ids The categorie ids: `1,2,3`
+     * @return \yii\web\Response|string
+     */
+    public function actionCategories($ids)
+    {
+        $ids = explode(",", Html::encode($ids));
+        
+        if (!is_array($ids)) {
+            return $this->goHome();
+        }
+        
+        $provider = new ActiveDataProvider([
+            'query' => Article::find()->where(['in', 'cat_id', $ids])->andWhere(['is_deleted' => false]),
+            'sort' => [
+                'defaultOrder' => $this->module->articleDefaultOrder,
+            ],
+            'pagination' => [
+                'defaultPageSize' => $this->module->articleDefaultPageSize,
+            ],
+        ]);
+        
+        return $this->render('categories', [
             'provider' => $provider,
         ]);
     }
@@ -107,7 +137,7 @@ class DefaultController extends \luya\web\Controller
      */
     public function actionDetail($id, $title)
     {
-        $model = Article::findOne(['id' => $id, 'is_deleted' => 0]);
+        $model = Article::findOne(['id' => $id, 'is_deleted' => false]);
         
         if (!$model) {
             return $this->goHome();

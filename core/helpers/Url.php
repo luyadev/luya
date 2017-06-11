@@ -109,7 +109,6 @@ class Url extends \yii\helpers\BaseUrl
      * @param string $url The url where the http protcol should be applied to if missing
      * @param boolean $https Whether the ensured url should be returned as https or not.
      * @return string
-     * @since 1.0.0-beta7
      */
     public static function ensureHttp($url, $https = false)
     {

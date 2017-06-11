@@ -39,7 +39,7 @@ class Item extends ItemAbstract
 {
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
-    private $_caption = null;
+    private $_caption;
     
     /**
      * Set caption for file item, override existings values

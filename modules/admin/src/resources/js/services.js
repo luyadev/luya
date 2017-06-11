@@ -436,6 +436,12 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		service.notify(message, timeout, 'error');
 	};
 	
+	service.errorArray = function(array, timeout) {
+		angular.forEach(array, function(value, key) {
+			service.error(value.message, timeout);
+		});
+	};
+	
 	service.confirm = function(message, callback) {
 		var uuid = guid();
 		service.queue[uuid] = {message: message, click: function() {

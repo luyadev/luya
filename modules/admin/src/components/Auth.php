@@ -31,7 +31,7 @@ class Auth extends \yii\base\Component
      */
     const CAN_DELETE = 3;
 
-    private $_permissionTable = null;
+    private $_permissionTable;
     
     /**
      * Get all permissions entries for the given User.
@@ -147,7 +147,7 @@ class Auth extends \yii\base\Component
      *
      * @param integer $userId
      * @param string $apiEndpoint As defined in the Module.php like (api-admin-user) which is a unique identifiere
-     * @param integer $typeVerification The CONST number provided from CAN_*
+     * @param integer|string $typeVerification The CONST number provided from CAN_*
      * @return bool
      */
     public function matchApi($userId, $apiEndpoint, $typeVerification = false)
@@ -206,7 +206,7 @@ class Auth extends \yii\base\Component
             return Yii::$app->db->createCommand()->insert('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
-                'is_crud' => 0,
+                'is_crud' => false,
                 'route' => $route,
                 'api' => 0,
             ])->execute();
@@ -236,7 +236,7 @@ class Auth extends \yii\base\Component
             return Yii::$app->db->createCommand()->insert('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
-                'is_crud' => 1,
+                'is_crud' => true,
                 'route' => 0,
                 'api' => $apiEndpoint,
             ])->execute();
@@ -292,11 +292,11 @@ class Auth extends \yii\base\Component
         foreach ($data as $type => $items) {
             switch ($type) {
                 case 'apis':
-                    $q = (new Query())->select('*')->from('admin_auth')->where(['not in', 'api', $items])->andWhere(['is_crud' => 1])->all();
+                    $q = (new Query())->select('*')->from('admin_auth')->where(['not in', 'api', $items])->andWhere(['is_crud' => true])->all();
                     $toCleanup = ArrayHelper::merge($q, $toCleanup);
                     break;
                 case 'routes':
-                    $q = (new Query())->select('*')->from('admin_auth')->where(['not in', 'route', $items])->andWhere(['is_crud' => 0])->all();
+                    $q = (new Query())->select('*')->from('admin_auth')->where(['not in', 'route', $items])->andWhere(['is_crud' => false])->all();
                     $toCleanup = ArrayHelper::merge($q, $toCleanup);
                     break;
             }

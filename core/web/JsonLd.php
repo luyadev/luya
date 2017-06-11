@@ -44,9 +44,9 @@ class JsonLd extends Object
     /**
      * Register a Person.
      *
-     * @param unknown $firstname
-     * @param unknown $lastname
-     * @param unknown $jobTitle
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $jobTitle
      */
     public static function person($firstname, $lastname, $jobTitle = null)
     {
@@ -90,8 +90,6 @@ class JsonLd extends Object
         ]);
     }
     
-    private static $_graphs = [];
-    
     /**
      * Register an json array to the view.
      *
@@ -111,7 +109,7 @@ class JsonLd extends Object
         Yii::$app->view->params['@graph'][] = $json;
     }
     
-    private static $_view = null;
+    private static $_view;
     
     private static function registerView()
     {

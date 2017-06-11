@@ -24,7 +24,17 @@
 		})
 	});
 	
-	// CrudController.js
+	zaa.controller("DefaultDashboardObjectController", function($scope, $http, $sce) {
+		
+		$scope.data;
+		
+		$scope.loadData = function(dataApiUrl) {
+			$http.get(dataApiUrl).then(function(success) {
+				$scope.data = success.data;
+			});
+		};
+	});
+	
 	/**
 	 * Base Crud Controller
 	 * 
@@ -44,14 +54,6 @@
 		$scope.AdminLangService = AdminLangService;
 		
 		$scope.tabService = CrudTabService;
-		
-		/**
-		 * As we have changed to ng-if some variables need to get pased by an object in order to keep the parent scope, as ng-if create a new scope.
-		 */
-		$scope.config = {
-			filter: '0', groupBy: 0, groupByField: '0', pagerHiddenByAjaxSearch: false, fullSearchContainer: false,
-			minLengthWarning: false
-		};
 		
 		/**
 		 * 0 = list
@@ -76,7 +78,7 @@
 		
 		$scope.switchTo = function(type, reset) {
 			
-			if ($scope.relationCall) {
+			if ($scope.config.relationCall) {
 				$scope.crudSwitchType = type;
 				return;
 			}
@@ -102,8 +104,6 @@
 				});
 			}
 		};
-		
-		$scope.relationCall = false;
 		
 		$scope.changeGroupByField = function() {
 			if ($scope.config.groupByField == 0) {
@@ -222,8 +222,8 @@
 		$scope.parentController = $scope.$parent;
 		
 		$scope.applySaveCallback = function() {
-			if ($scope.saveCallback != 0 && $scope.saveCallback != null && $scope.saveCallback != false) {
-				$injector.invoke($scope.saveCallback, this);
+			if ($scope.config.saveCallback) {
+				$injector.invoke($scope.config.saveCallback, this);
 			}
 		}
 		
@@ -322,7 +322,7 @@
 				var data = response.data;
 				$scope.data.update = data;
 				
-				if ($scope.relationCall) {
+				if ($scope.config.relationCall) {
 					
 					$scope.crudSwitchType = 2;
 				} else {
@@ -398,7 +398,7 @@
 		
 		$scope.submitCreate = function() {
 			
-			if ($scope.relationCall) {
+			if ($scope.config.relationCall) {
 				//$scope.data.create[$scope.relationCall.field] = parseInt($scope.relationCall.id);
 			}
 			
@@ -449,9 +449,9 @@
 				var serviceResponse = response.data;
 				$scope.service = serviceResponse.service;
 				$scope.evalSettings(serviceResponse._settings);
-				if ($scope.relationCall) {
+				if ($scope.config.relationCall) {
 					var url = $scope.config.apiEndpoint + '/relation-call/?' + $scope.config.apiListQueryString;
-					url = url + '&arrayIndex=' + $scope.relationCall.arrayIndex + '&id=' + $scope.relationCall.id + '&modelClass=' + $scope.relationCall.modelClass;
+					url = url + '&arrayIndex=' + $scope.config.relationCall.arrayIndex + '&id=' + $scope.config.relationCall.id + '&modelClass=' + $scope.config.relationCall.modelClass;
 				} else {
 					var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
 				}
@@ -533,6 +533,31 @@
 				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}), 1500);
 			}, function(data) {
 				$scope.printErrors(data);
+			});
+		};
+		
+		$scope.sortableUp = function(index, row, fieldName) {
+			var switchWith = $scope.data.listArray[index-1];
+			$scope.data.listArray[index-1] = row;
+			$scope.data.listArray[index] = switchWith;
+			$scope.updateSortableIndexPositions(fieldName);
+		};
+		
+		$scope.sortableDown = function(index, row, fieldName) {
+			var switchWith = $scope.data.listArray[index+1];
+			$scope.data.listArray[index+1] = row;
+			$scope.data.listArray[index] = switchWith;
+			$scope.updateSortableIndexPositions(fieldName);
+		};
+		
+		$scope.updateSortableIndexPositions = function(fieldName) {
+			angular.forEach($scope.data.listArray, function(value, key) {
+				var json = {};
+				json[fieldName] = key;
+				var rowId = value[$scope.config.pk];
+				$http.put($scope.config.apiEndpoint + '/' + rowId +'?ngrestCallType=update&fields='+fieldName, angular.toJson(json, true), {
+					  ignoreLoadingBar: true
+				});
 			});
 		}
 		
@@ -811,12 +836,6 @@
 		$scope.reload = function() {
 			CacheReloadService.reload();
 		}
-		
-		$scope.updateUserProfile = function(profile) {
-			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).then(function(response) {
-				$window.location.reload();
-			});
-		};
 	
 		$scope.sidePanelUserMenu = false;
 		
@@ -969,5 +988,38 @@
 		
 		$scope.get();
 	});
-
+	
+	zaa.controller("AccountController", function($scope, $http, $window, AdminToastService) {
+		$scope.changePassword = function(pass) {
+			$http.post('admin/api-admin-user/change-password', pass).then(function(response) {
+				AdminToastService.success(i18n['aws_changepassword_succes'], 5000);
+			}, function(error) {
+				AdminToastService.errorArray(error.data, 3000);
+			});
+		};
+		
+		$scope.updateUserProfile = function(profile) {
+			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).then(function(response) {
+				$window.location.reload();
+			});
+		};
+		
+		$scope.profile = {}
+		
+		$scope.getProfile = function() {
+			$http.get('admin/api-admin-user/session').then(function(success) {
+				$scope.profile = success.data;
+			});
+		};
+		
+		$scope.changePersonData = function(data) {
+			$http.put('admin/api-admin-user/session-update', data).then(function(success) {
+				AdminToastService.success(i18n['js_account_update_profile_success'], 5000);
+			}, function(error) {
+				AdminToastService.errorArray(error.data, 3000);
+			});
+		};
+		
+		$scope.getProfile();
+	});
 })();

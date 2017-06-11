@@ -2,7 +2,7 @@
 
 namespace luya\admin\models;
 
-use Yii;
+
 use yii\helpers\Json;
 use yii\base\Arrayable;
 use luya\admin\ngrest\base\NgRestModel;
@@ -203,7 +203,7 @@ final class Logger extends NgRestModel
 
     private static $identiferIndex = [];
 
-    private static $requestIdentifier = null;
+    private static $requestIdentifier;
 
     private static function getRequestIdentifier()
     {

@@ -53,7 +53,7 @@ class Query extends Object
      */
     protected $whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
     
-    private $_menu = null;
+    private $_menu;
     
     /**
      * Getter method to return menu component
@@ -70,7 +70,7 @@ class Query extends Object
     }
 
     private $_where = [];
-    
+
     /**
      * Query where similar behavior of filtering items.
      *
@@ -124,7 +124,8 @@ class Query extends Object
      * ```
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
-     * @return \luya\cms\menu\Query
+     * @return Query
+     * @throws Exception
      */
     public function where(array $args)
     {
@@ -156,7 +157,7 @@ class Query extends Object
         return $this->where($args);
     }
 
-    private $_lang = null;
+    private $_lang;
     
     /**
      * Changeing the container in where the data should be collection, by default the composition
@@ -226,7 +227,7 @@ class Query extends Object
         return $this->_lang;
     }
 
-    private $_limit = null;
+    private $_limit;
     
     /**
      * Set a limition for the amount of results.
@@ -243,7 +244,7 @@ class Query extends Object
         return $this;
     }
     
-    private $_offset = null;
+    private $_offset;
     
     /**
      * Define offset start for the rows, if you defined offset to be 5 and you have 11 rows, the
@@ -328,13 +329,14 @@ class Query extends Object
     {
         return new Item(['itemArray' => $itemArray, 'lang' => $langContext, 'model' => $model]);
     }
-    
+
     /**
      * Filtering data based on a where expression.
      *
      * @param array $containerData The data to filter from
      * @param array $whereExpression An array with `[['op' => '=', 'field' => 'fieldName', 'value' => 'comparevalue'],[]]`
      * @param array $withCondition An array with with conditions `$with['hidden']`.
+     * @return array
      */
     private function filter(array $containerData, array $whereExpression, array $withCondition)
     {

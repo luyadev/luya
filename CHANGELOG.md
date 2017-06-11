@@ -1,26 +1,41 @@
 LUYA CHANGELOG
 ==============
 
-The changelog contains informations about bug fixes, new features or bc breaking code related to a GitHub issue. In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
+All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
 1.0.0 (in progress)
 -------------------
 
 ### Changed
 
-- [#1273](https://github.com/luyadev/luya/issues/1273) Mail component remove adresses() replace with addresses().
-- [#1264](https://github.com/luyadev/luya/issues/1264) Renamed $LinkActiveClass property to $linkActiveClass in luya\cms\widgets\LangSwitcher.
+- [#1308](https://github.com/luyadev/luya/issues/1308) Renamed `luya\admin\ngrest\plugins\CheckboxRelation::labelFields` to `luya\admin\ngrest\plugins\CheckboxRelation::labelField`
+- [#1301](https://github.com/luyadev/luya/issues/1301) Move the CRUD commands to the admin module `admin/crud/create` and `admin/crud/model`.
+- [#1289](https://github.com/luyadev/luya/issues/1289) Remove `luyaLanguage` application property and replace with admin module `interfaceLanguage` property.
+- [#1294](https://github.com/luyadev/luya/issues/1294) Moved Active Window scaffolding command into admin Module `admin/aw/create`
+- [#1277](https://github.com/luyadev/luya/issues/1277) Renamed `getPlacholderValue()` to `getPlaceholderValue()`.
+- [#1273](https://github.com/luyadev/luya/issues/1273) Mail component remove `adresses()` replace with `addresses()`.
+- [#1264](https://github.com/luyadev/luya/issues/1264) Renamed `$LinkActiveClass` property to `$linkActiveClass` in luya\cms\widgets\LangSwitcher.
+- [#1295](https://github.com/luyadev/luya/issues/1295) Fully removed all Twig files, tests and components as announced.
 
 ### Added
 
+- [#1312](https://github.com/luyadev/luya/issues/1312) ArrayHelper::generateRange for select dropdowns with numeric values.
+- [#1303](https://github.com/luyadev/luya/issues/1303) NgRest SelectModel valueField is automatically retrieved from the model class if no value is provided.
+- [#1291](https://github.com/luyadev/luya/issues/1291) Replace User Sidebar with User Dashboard to change Password.
+- [#1288](https://github.com/luyadev/luya/issues/1288) Added Color-Wheel NgRest Plugin and Angular Type.
+- [#1287](https://github.com/luyadev/luya/issues/1287) Sortable Plugin and Trait added.
 - [#1270](https://github.com/luyadev/luya/issues/1270) Module block set resolved query params into the request component if not strict mode.
 - [#1268](https://github.com/luyadev/luya/issues/1268) Module block strict render ability in order to strict render the given action and controller paths instead of parse them trough the request component.
 - [#1227](https://github.com/luyadev/luya/issues/1227) Added preloadModels() method for the Menu Query in order to collect all models for the given request. This can strongly reduce the sql count when working with properties or models.
 - [#1266](https://github.com/luyadev/luya/issues/1266) render() method for the mailer component in order to provide controller template files.
 - [#1269](https://github.com/luyadev/luya/issues/1269) Add raw option for html block in order to render the html output in admin view.
+- [#1215](https://github.com/luyadev/luya/issues/1215) Added type float and double in ngrest data types to use decimal.
+- [#1119](https://github.com/luyadev/luya/issues/1119) Added PostgreSQL Compatibility.
 
 ### Fixed
 
+- [#1290](https://github.com/luyadev/luya/issues/1290) Fixed Tooltip Bug, cause of lexer parser error. Wrong directive variable scope declaration.
+- [#1286](https://github.com/luyadev/luya/issues/1286) Filemanager show error message on error.
 - [#1267](https://github.com/luyadev/luya/issues/1267) Fixed bug where module block action params overrides the default values, merge instead.
 - [#1265](https://github.com/luyadev/luya/issues/1265) Using https for Google Maps embed code.
 

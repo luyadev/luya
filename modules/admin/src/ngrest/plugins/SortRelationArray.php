@@ -4,7 +4,7 @@ namespace luya\admin\ngrest\plugins;
 
 class SortRelationArray extends SortRelation
 {
-    private $_data = null;
+    private $_data;
     
     public function getData()
     {

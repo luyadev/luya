@@ -2,35 +2,39 @@
 
 namespace luya\admin\ngrest\plugins;
 
-use luya\Exception;
 use luya\admin\ngrest\base\Plugin;
 
 /**
- * Render Colorized overview
+ * Color Wheel Plugin.
  *
  * @author Basil Suter <basil@nadar.io>
  */
 class Color extends Plugin
 {
+	/**
+	 * @inheritdoc
+	 */
     public function renderList($id, $ngModel)
     {
-        return $this->createListTag($ngModel);
-        /*
-        $element = $doc->createElement('span', '&nbsp;');
-        $element->setAttribute('style', 'font-size:14.5px; padding-left:30px; background-color : #{{item.'.$this->name.'}}');
-        $doc->appendChild($element);
-
-        return $doc;
-        */
+    	return [
+    		$this->createTag('span', null, ['style' => 'background-color: {{' . $ngModel .' }}; margin-right:5px; border-radius: 60%; padding:0px 8px;']),
+    		$this->createListTag($ngModel),
+    	];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
-        throw new Exception('Error: there is no create implementation for ColorPlugin yet!');
+    	return $this->createFormTag('zaa-color', $id, $ngModel);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
-        throw new Exception('Error: there is no update implementation for ColorPlugin yet!');
+    	return $this->renderCreate($id, $ngModel);
     }
 }

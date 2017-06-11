@@ -18,45 +18,10 @@ class ElementTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('baz', $element->getElement('bar'));
         $this->assertEquals('baz', $element->bar());
     }
-
-    /*
-    public function testRenderElement()
-    {
-        $element = new \luya\web\Element();
-        $element->renderEngine = 'twig';
-
-        $element->addElement('rnd', function ($param) use ($element) {
-            return $element->render('rnd', ['pa' => $param, 'bar' => 'baz']);
-        });
-
-        $response = $element->rnd(1);
-
-        $this->assertEquals('1-baz', $response);
-    }
-
-    public function testRenderRecursivElement()
-    {
-        $element = Yii::$app->element;
-        $element->renderEngine = 'twig';
-
-        $element->addElement('bar', function () {
-            return 'baz';
-        });
-
-        $element->addElement('recursiv', function () use ($element) {
-            return $element->render('recursiv.twig');
-        });
-
-        $response = $element->recursiv();
-
-        $this->assertEquals('baz', $response);
-    }
-    */
     
     public function testPhpRenderElement()
     {
         $element = new \luya\web\Element();
-        $element->renderEngine = 'php';
     
         $element->addElement('rnd', function ($param) use ($element) {
             return $element->render('rnd', ['pa' => $param, 'bar' => 'baz']);
@@ -70,7 +35,6 @@ class ElementTest extends \luyatests\LuyaWebTestCase
     public function testPhpRenderRecursivElement()
     {
         $element = Yii::$app->element;
-        $element->renderEngine = 'php';
     
         $element->addElement('bar', function () {
             return 'baz';

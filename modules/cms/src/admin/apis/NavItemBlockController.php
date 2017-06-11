@@ -46,7 +46,7 @@ class NavItemBlockController extends \luya\admin\base\RestController
         if (($model) && ((Yii::$app->request->post('copyBlockId', 0) !== Yii::$app->request->post('prevId', false)))) {
             $newModel = new NavItemPageBlockItem();
             $newModel->attributes = $model->toArray();
-            $newModel->is_dirty = 0;
+            $newModel->is_dirty = false;
             $newModel->prev_id = Yii::$app->request->post('prevId', false);
             $newModel->placeholder_var = Yii::$app->request->post('placeholder_var', false);
             $newModel->sort_index = Yii::$app->request->post('sortIndex', false);

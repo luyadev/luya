@@ -2,7 +2,7 @@
 
 namespace luya\cms\menu;
 
-use Yii;
+
 use Iterator;
 use yii\base\Object;
 use luya\cms\models\Nav;
@@ -28,7 +28,7 @@ class QueryIterator extends Object implements Iterator
      * @var string|null Can contain the language context, so the sub querys for this item will be the same language context
      * as the parent object which created this object.
      */
-    public $lang = null;
+    public $lang;
 
     /**
      * @see \luya\cms\menu\Query::with()
@@ -53,7 +53,7 @@ class QueryIterator extends Object implements Iterator
         }
     }
     
-    private $_loadModels = null;
+    private $_loadModels;
     
     /**
      * Load all models for ghe given Menu Query.

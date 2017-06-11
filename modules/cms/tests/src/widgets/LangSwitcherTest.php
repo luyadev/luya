@@ -5,7 +5,7 @@ namespace cmstests\src\widgets;
 
 use cmstests\CmsFrontendTestCase;
 use luya\cms\widgets\LangSwitcher;
-use yii\base\Widget;
+
 
 class LangSwitcherTest extends CmsFrontendTestCase
 {

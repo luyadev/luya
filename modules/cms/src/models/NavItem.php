@@ -9,6 +9,7 @@ use yii\helpers\Inflector;
 use luya\cms\admin\Module;
 use luya\admin\base\GenericSearchInterface;
 use yii\db\ActiveRecordInterface;
+use luya\admin\models\User;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each
@@ -42,7 +43,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     const TYPE_REDIRECT = 3;
 
-    public $parent_nav_id = null;
+    public $parent_nav_id;
 
     /**
      * @inheritdoc
@@ -120,12 +121,17 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         ];
     }
 
+    public function getUpdateUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'update_user_id']);
+    }
+    
     public function slugifyAlias()
     {
         $this->alias = Inflector::slug($this->alias);
     }
     
-    private $_type = null;
+    private $_type;
     
     /**
      * GET the type object based on the nav_item_type defintion and the nav_item_type_id which is the
@@ -253,7 +259,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     {
         $this->updateAttributes(['timestamp_update' => time()]);
     }
-    
+
     /**
      * temp disabled the links for the specific module, cause we are not yet able to handle module integration blocks (find the module inside the content), so wo just
      * display all nav items tempo.
@@ -261,6 +267,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * @todo fix me above!
      *
      * @param unknown $moduleName
+     * @return array|\yii\db\ActiveRecord[]
      */
     public static function fromModule($moduleName)
     {
@@ -321,8 +328,6 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
             ],
         ];
     }
-
-    private static $_navItemModules = [];
     
     public function getLang()
     {

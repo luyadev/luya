@@ -11,7 +11,7 @@ use luya\helpers\FileHelper;
  * This is the model class for table "admin_storage_file".
  *
  * @property integer $id
- * @property integer $is_hidden
+ * @property boolean $is_hidden
  * @property integer $folder_id
  * @property string $name_original
  * @property string $name_new
@@ -58,7 +58,7 @@ final class StorageFile extends ActiveRecord
         return [
             [['name_original', 'name_new', 'mime_type', 'name_new_compound', 'extension', 'hash_file', 'hash_name'], 'required'],
             [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp', 'is_deleted'], 'safe'],
-            [['is_hidden'], 'integer'],
+            [['is_hidden'], 'boolean'],
             [['caption'], 'string'],
         ];
     }
@@ -72,7 +72,7 @@ final class StorageFile extends ActiveRecord
                 Logger::error("Unable to remove storage file: " . $file->serverSource);
             }
         }
-        $this->is_deleted = 1;
+        $this->is_deleted = true;
         $this->update(false);
         return true;
     }

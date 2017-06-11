@@ -9,9 +9,12 @@ use Yii;
 use luya\console\Importer;
 
 /**
+ * Storage Importer.
+ * 
  * Storage system importer behavior to cleanup the storage database and folder.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class StorageImporter extends Importer
 {
@@ -52,7 +55,7 @@ class StorageImporter extends Importer
         }
 
         // check storage files which are not flagged as deleted
-        foreach (StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->asArray()->all() as $dbfile) {
+        foreach (StorageFile::find()->where(['is_deleted' => false])->indexBy('id')->asArray()->all() as $dbfile) {
             if (isset($diskFiles[$dbfile['name_new_compound']])) {
                 unset($diskFiles[$dbfile['name_new_compound']]);
             }
@@ -95,7 +98,7 @@ class StorageImporter extends Importer
         }
 
         // check storage files
-        $allStorageFileEntries = StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->all();
+        $allStorageFileEntries = StorageFile::find()->where(['is_deleted' => false])->indexBy('id')->all();
 
         $count = 0;
 
@@ -107,7 +110,7 @@ class StorageImporter extends Importer
 
         foreach ($allStorageFileEntries as $dbfile) {
             if (!in_array($dbfile['name_new_compound'], $storageFileIndex)) {
-                $dbfile->updateAttributes(['is_deleted' => 1]);
+                $dbfile->updateAttributes(['is_deleted' => true]);
                 $count++;
             }
         }

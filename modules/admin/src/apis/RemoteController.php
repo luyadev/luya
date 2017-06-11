@@ -31,8 +31,8 @@ class RemoteController extends Controller
      * Retrieve administration informations if the token is valid.
      *
      * @param string $token The sha1 encrypted access token.
-     * @throws luya\Exception If invalid token.
-     * @return array
+     * @return array If invalid token.
+     * @throws Exception
      */
     public function actionIndex($token)
     {

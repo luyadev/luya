@@ -29,8 +29,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $_GET['redirect'] should be urlencoded
-     * @param $_POST['LoginForm'] data to login
+     * @param $_GET ['redirect'] should be urlencoded
+     * @param $_POST ['LoginForm'] data to login
+     * @return string
      */
     public function actionIndex($ref = null)
     {

@@ -8,7 +8,7 @@ All CMS Layouts are stored in the `views/cmslayouts` folder which is located in 
 views/cmslayouts/2columns.php
 ```
 
-You can now add html content to the new cmslayout file *2columns.php* but the most important is to let the cms know on which part of the file the user can add content (blocks). To mark the area which can be filled with user content defined the area with `<?= $placholders['YOUR_VARIABLE_NAME']; ?>`. In the example below we have made 2 placeholders for each column (left and right):
+You can now add html content to the new cmslayout file *2columns.php* but the most important is to let the cms know on which part of the file the user can add content (blocks). To mark the area which can be filled with user content defined the area with `<?= $placeholders['YOUR_VARIABLE_NAME']; ?>`. In the example below we have made 2 placeholders for each column (left and right):
 
 ```php
 <div class="row">

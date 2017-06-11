@@ -6,7 +6,6 @@ use Yii;
 use admintests\AdminTestCase;
 use luya\admin\storage\QueryTrait;
 use yii\base\Object;
-use luya\admin\storage\ItemTrait;
 use luya\admin\storage\IteratorAbstract;
 use luya\admin\storage\ItemAbstract;
 
@@ -135,14 +134,6 @@ class QueryTraitTest extends AdminTestCase
             
             $i++;
         }
-    }
-    
-    /**
-     * @expectedException
-     */
-    public function testWhereInvalidOperatorException()
-    {
-        (new FixtureQueryTrait())->where(['foo', 'id', [1, 3]])->all();
     }
     
     public function testIterator()

@@ -6,18 +6,18 @@ use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\Html;
 use yii\base\InvalidCallException;
-use yii\base\Arrayable;
 use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
+use luya\helpers\ExportHelper;
 use luya\admin\base\RestActiveController;
-use luya\admin\components\AdminUser;
 use luya\admin\models\UserOnline;
 use luya\admin\ngrest\render\RenderActiveWindow;
 use luya\admin\ngrest\render\RenderActiveWindowCallback;
 use luya\admin\ngrest\NgRest;
+use yii\web\NotFoundHttpException;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -34,7 +34,7 @@ class Api extends RestActiveController
      * public $modelClass = 'admin\models\User';
      * ```
      */
-    public $modelClass = null;
+    public $modelClass;
     
     /**
      * @var boolean Defines whether the automatic pagination should be enabled if more then 200 rows of data stored in this table or not.
@@ -79,10 +79,11 @@ class Api extends RestActiveController
         return $actions;
     }
     
-    private $_model = null;
-    
+    private $_model;
+
     /**
-     * @return \luya\admin\ngrest\base\NgRestModel
+     * @return NgRestModel
+     * @throws InvalidConfigException
      */
     public function getModel()
     {
@@ -95,6 +96,27 @@ class Api extends RestActiveController
         }
     
         return $this->_model;
+    }
+    
+    /**
+     * Get the Model for the API based on a given Id.
+     *
+     * If not found a NotFoundHttpException will be thrown.
+     *
+     * @params integer|string $id The id to performe the findOne() method.
+     * @throws NotFoundHttpException
+     * @return \luya\admin\ngrest\base\NgRestModel
+     */
+    public function findModel($id)
+    {
+        $class = $this->modelClass;
+        $model = $class::findOne($id);
+        
+        if (!$model) {
+            throw new NotFoundHttpException("Unable to find the Model for the given ID");
+        }
+        
+        return $model;
     }
     
     /**
@@ -200,9 +222,9 @@ class Api extends RestActiveController
     /**
      * Call the dataProvider for a foreign model.
      * 
-     * @param unknown $arrayIndex
-     * @param unknown $id
-     * @param unknown $modelClass The name of the model where the ngRestRelation is defined.
+     * @param mixed $arrayIndex
+     * @param mixed $id
+     * @param string $modelClass The name of the model where the ngRestRelation is defined.
      * @throws InvalidCallException
      * @return \yii\data\ActiveDataProvider
      */
@@ -275,69 +297,16 @@ class Api extends RestActiveController
     
         return $ngrest->render($render);
     }
-    
+
     /**
      * Prepare a temp file to
      * @todo added very basic csv support, must be stored as class, just a temp solution
      * @return array
+     * @throws ErrorException
      */
     public function actionExport()
     {
-        $tempData = null;
-        
-        // first row
-        $header = [];
-        $i = 0;
-        
-        foreach ($this->model->find()->all() as $key => $value) {
-            $row = [];
-            
-            $attrs = $value->getAttributes();
-            foreach ($value->extraFields() as $field) {
-                $attrs[$field] = $value->$field;
-            }
-            
-            foreach ($attrs as $k => $v) {
-                if (is_object($v)) {
-                    if ($v instanceof Arrayable) {
-                        $v = $v->toArray();
-                    } else {
-                        continue;
-                    }
-                }
-                
-                if ($i === 0) {
-                    $header[] = $this->model->getAttributeLabel($k);
-                }
-                
-                if (is_array($v)) {
-                    $tv = [];
-                    foreach ($v as $kk => $vv) {
-                        if (is_object($vv)) {
-                            if ($vv instanceof Arrayable) {
-                                $tv[] = implode(" | ", $vv->toArray());
-                            } else {
-                                continue;
-                            }
-                        } elseif (is_array($vv)) {
-                            $tv[] = implode(" | ", $vv);
-                        } else {
-                            $tv[] = $vv;
-                        }
-                    }
-                 
-                    $v = implode(" - ", $tv);
-                }
-                
-                $row[] = '"'. str_replace('"', '\"', $v) .'"';
-            }
-            
-            if ($i=== 0) {
-                $tempData.= implode(",", $header) . "\n";
-            }
-            $tempData.= implode(",", $row) . "\n";
-            $i++;
-        }
+        $tempData = ExportHelper::csv($this->model->find());
         
         $key = uniqid('ngre', true);
         

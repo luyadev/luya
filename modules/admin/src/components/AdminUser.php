@@ -5,6 +5,7 @@ namespace luya\admin\components;
 use Yii;
 use yii\web\User;
 use luya\admin\models\UserOnline;
+use yii\web\UserEvent;
 
 /**
  * AdminUser Component.
@@ -41,6 +42,11 @@ class AdminUser extends User
     public $idParam = '__luya_adminId';
     
     /**
+     * @var string Variable to assign the default language from the admin module in order to set default language if not set.
+     */
+    public $defaultLanguage;
+    
+    /**
      * @inheritdoc
      */
     public function init()
@@ -49,14 +55,19 @@ class AdminUser extends User
         $this->on(self::EVENT_BEFORE_LOGOUT, [$this, 'onBeforeLogout']);
         $this->on(self::EVENT_AFTER_LOGIN, [$this, 'onAfterLogin']);
     }
-    
+
     /**
      * After the login process of the user, set the admin interface language based on the user settings.
+     * @param UserEvent $event
      */
-    public function onAfterLogin()
+    public function onAfterLogin(UserEvent $event)
     {
-        Yii::$app->luyaLanguage = $this->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
-        Yii::$app->language = Yii::$app->luyaLanguage;
+        Yii::$app->language = $this->getInterfaceLanguage();
+    }
+
+    public function getInterfaceLanguage()
+    {
+        return $this->getIsGuest() ? $this->defaultLanguage : $this->identity->setting->get('luyadminlanguage', $this->defaultLanguage);
     }
 
     /**
@@ -87,7 +98,7 @@ class AdminUser extends User
      * See the {{luya\admin\components\Auth::matchRoute}} for details.
      *
      * @param string $route
-     * @return booelan Whether the current user can request the provided route.
+     * @return bool Whether the current user can request the provided route.
      */
     public function canRoute($route)
     {

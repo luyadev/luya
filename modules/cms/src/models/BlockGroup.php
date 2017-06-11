@@ -42,11 +42,6 @@ class BlockGroup extends NgRestModel
         ];
     }
     
-    public static function find()
-    {
-        return Yii::createObject(ActiveQuery::className(), [get_called_class()]);
-    }
-    
     public function ngRestConfig($config)
     {
         $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['name', 'identifier']);

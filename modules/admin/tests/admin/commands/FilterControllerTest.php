@@ -2,7 +2,7 @@
 
 namespace admintests\admin\commands;
 
-use Yii;
+
 use admintests\AdminTestCase;
 use luya\console\Application;
 use luya\admin\commands\FilterController;
@@ -21,7 +21,7 @@ class FilterControllerTest extends AdminTestCase
 /**
  * Nam Filter.
  *
- * File has been created with `block/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `block/create` command on LUYA version 1.0.0-RC3. 
  */
 class className extends Filter
 {

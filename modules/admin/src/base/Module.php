@@ -16,6 +16,19 @@ use luya\base\AdminModuleInterface;
 class Module extends \luya\base\Module implements AdminModuleInterface
 {
     public $requiredComponents = ['db'];
+    
+    /**
+     * Dashboard Objects will be retrieved when the admin dashboard is loaded.
+     * You can use either easy to use preconfigured objects or provide a custom dashboard widget
+     * object class.
+     *
+     * ```php
+     * public $dashboardObjects = [
+     *     ['template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>', 'dataApiUrl' => 'admin/api-news-article'],
+     * ];
+     * ```
+     */
+    public $dashboardObjects = [];
 
     /**
      * @var array The config linker property can specific the configuration class for ngRest model where the key
@@ -114,7 +127,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      */
     public function getMenu()
     {
-        return [];
+        return false;
     }
     
     /**

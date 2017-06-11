@@ -23,7 +23,6 @@ class Controller extends \luya\web\Controller
      */
     public $disablePermissionCheck = false;
 
-    
     /**
      * Returns the rules for the AccessControl filter behavior.
      *
@@ -46,11 +45,6 @@ class Controller extends \luya\web\Controller
                 'actions' => [], // apply to all actions by default
                 'roles' => ['@'],
                 'matchCallback' => function ($rule, $action) {
-                    if (!Yii::$app->adminuser->isGuest) {
-                        Yii::$app->luyaLanguage = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
-                        Yii::$app->language = Yii::$app->luyaLanguage;
-                    }
-                
                     // see if a controller property has been defined to disabled the permission checks
                     if ($action->controller->disablePermissionCheck) {
                         return true;
@@ -58,10 +52,10 @@ class Controller extends \luya\web\Controller
                     // get the route based on the current $action object
                     $route = implode('/', [$action->controller->module->id, $action->controller->id, $action->id]);
                     
-                    UserOnline::refreshUser(Yii::$app->adminuser->getId(), $route);
+                    UserOnline::refreshUser($this->user->id, $route);
                     
                     // check the access inside auth->matchRoute and return true/false.
-                    return Yii::$app->auth->matchRoute(Yii::$app->adminuser->getId(), $route);
+                    return Yii::$app->auth->matchRoute($this->user->id, $route);
                 },
             ],
         ];
@@ -81,5 +75,15 @@ class Controller extends \luya\web\Controller
                 'rules' => $this->getRules(),
             ],
         ];
+    }
+    
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            Yii::$app->language = Yii::$app->adminuser->interfaceLanguage;
+            return true;
+        }
+        
+        return false;
     }
 }

@@ -96,9 +96,9 @@ To make async search queries use the restcontroller route (jquery example):
 var url = '<?= Url::toInternal(['crawler/rest/index']); ?>';
 
 $.ajax({
-	url : url 
+    url : url 
 }).done(function(response) {
-	console.log(response);
+    console.log(response);
 });
 ```
 
@@ -114,9 +114,9 @@ Partial ignore a content from the crawler:
 
 ```html
 <div>
-	<!-- [CRAWL_IGNORE] -->
-	<p>The crawler will never see and store this information</p>
-	<!-- [/CRAWL_IGNORE] -->
+    <!-- [CRAWL_IGNORE] -->
+    <p>The crawler will never see and store this information</p>
+    <!-- [/CRAWL_IGNORE] -->
 </div>
 ```
 
@@ -124,8 +124,8 @@ Ignore a page complet:
 
 ```html
 <div>
-	<!-- [CRAWL_FULL_IGNORE] --> 
-	<p>The full page will be ignored by the crawler.</p>
+    <!-- [CRAWL_FULL_IGNORE] --> 
+    <p>The full page will be ignored by the crawler.</p>
 </div>
 ```
 

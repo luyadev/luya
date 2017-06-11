@@ -5,8 +5,8 @@ namespace luya\cms\models;
 use Yii;
 use yii\db\Query;
 use luya\Exception;
-use luya\web\View;
-use luya\cms\models\NavItemPageBlockItem;
+
+
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
@@ -29,7 +29,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 {
     use CacheableTrait;
 
-    private $_view = null;
+    private $_view;
 
     /**
      * @inheritdoc
@@ -111,11 +111,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         return $this->hasOne(Layout::className(), ['id' => 'layout_id']);
     }
-    
+
     /**
      * Get the list of version/pages for a specific nav item id
      *
      * @param unknown $navItemId
+     * @return array|\yii\db\ActiveRecord[]
      */
     public static function getVersionList($navItemId)
     {
@@ -345,13 +346,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
     public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)
     {
-        /*
-         $nav_item_page_block_item_data = (new \yii\db\Query())->select([
-         't1_id' => 't1.id', 't1.is_dirty', 'block_id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_json_config_cfg_values' => 't1.json_config_cfg_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
-         //'t2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config', 't2_twig_admin' => 't2.twig_admin',
-         ])->from('cms_nav_item_page_block_item t1')->orderBy('t1.sort_index ASC')->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_var' => $placeholderVar])->all();
-         */
-    
         $nav_item_page_block_item_data = (new \yii\db\Query())->select(['id'])->from('cms_nav_item_page_block_item')->orderBy('sort_index ASC')->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])->all();
     
         $data = [];
@@ -415,7 +409,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
         
         return [
-            'is_dirty' => (int) $blockItem['is_dirty'],
+            'is_dirty' => (bool) $blockItem['is_dirty'],
             'is_container' => (int) $blockObject->getIsContainer(),
             'id' => $blockItem['id'],
             'is_hidden' => $blockItem['is_hidden'],

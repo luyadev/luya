@@ -21,7 +21,7 @@ class Layout extends NgRestModel
     {
         $config->list->field('name', 'Name')->text();
         $config->list->field('json_config', 'JSON Config')->textarea();
-        $config->list->field('view_file', 'Twig Filename (*.twig)')->text();
+        $config->list->field('view_file', 'Filename (*.php)')->text();
 
         $config->create->copyFrom('list', ['id']);
 

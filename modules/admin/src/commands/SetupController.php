@@ -8,6 +8,7 @@ use luya\admin\models\Config;
 use luya\admin\models\User;
 use luya\admin\models\Group;
 use yii\db\Query;
+use yii\imagine\Image;
 
 /**
  * Setup the Administration Interface.
@@ -28,22 +29,22 @@ class SetupController extends \luya\console\Command
     /**
      * @var string The email of the user to create.
      */
-    public $email = null;
+    public $email;
     
     /**
      * @var string The blank password of the user to create.
      */
-    public $password = null;
+    public $password;
     
     /**
      * @var string The firstname of the user to create.
      */
-    public $firstname = null;
+    public $firstname;
     
     /**
      * @var string The lastname of the user to create.
      */
-    public $lastname = null;
+    public $lastname;
     
     /**
      * @var string Whether the setup is interactive or not.
@@ -53,12 +54,12 @@ class SetupController extends \luya\console\Command
     /**
      * @var string The name of the default language e.g. English
      */
-    public $langName = null;
+    public $langName;
     
     /**
      * @var string The short code of the language e.g. en
      */
-    public $langShortCode = null;
+    public $langShortCode;
     
     /**
      * @inheritdoc
@@ -77,6 +78,12 @@ class SetupController extends \luya\console\Command
      */
     public function actionIndex()
     {
+    	try {
+    		Image::getImagine();
+    	} catch (\Exception $e) {
+    		return $this->outputError('Unable to setup, unable to find image library: ' . $e->getMessage());
+    	}
+    	
         if (!Config::has('last_import_timestamp')) {
             return $this->outputError("You have to run the 'import' process first. run in terminal: ./vendor/bin/luya import");
         }
@@ -131,7 +138,7 @@ class SetupController extends \luya\console\Command
             'email' => $this->email,
             'password' => $pw,
             'password_salt' => $salt,
-            'is_deleted' => 0,
+            'is_deleted' => false,
         ]);
     
         $this->insert('admin_group', [
@@ -160,13 +167,13 @@ class SetupController extends \luya\console\Command
         $this->insert('admin_lang', [
             'name' => $this->langName,
             'short_code' => $this->langShortCode,
-            'is_default' => 1,
+            'is_default' => true,
         ]);
     
         if (Yii::$app->hasModule('cms')) {
             // insert default page
-            $this->insert("cms_nav_container", ['id' => 1, 'name' => 'Default Container', 'alias' => 'default', 'is_deleted' => 0]);
-            $this->insert("cms_nav", ['nav_container_id' => 1, 'parent_nav_id' => 0, 'sort_index' => 0, 'is_deleted' => 0, 'is_hidden' => 0, 'is_offline' => 0, 'is_home' => 1, 'is_draft' => 0]);
+            $this->insert("cms_nav_container", ['id' => 1, 'name' => 'Default Container', 'alias' => 'default', 'is_deleted' => false]);
+            $this->insert("cms_nav", ['nav_container_id' => 1, 'parent_nav_id' => 0, 'sort_index' => 0, 'is_deleted' => false, 'is_hidden' => false, 'is_offline' => false, 'is_home' => true, 'is_draft' => false]);
             $this->insert("cms_nav_item", ['nav_id' => 1, 'lang_id' => 1, 'nav_item_type' => 1, 'nav_item_type_id' => 1, 'create_user_id' => 1, 'update_user_id' => 1, 'timestamp_create' => time(), 'title' => 'Homepage', 'alias' => 'homepage']);
             $this->insert('cms_nav_item_page', ['layout_id' => 1, 'create_user_id' => 1, 'timestamp_create' => time(), 'version_alias' => 'Initial', 'nav_item_id' => 1]);
         }
@@ -175,11 +182,11 @@ class SetupController extends \luya\console\Command
     
         return $this->outputSuccess("Setup is finished. You can now login into the Administration-Area with the E-Mail '{$this->email}'.");
     }
-    
+
     /**
      * Create a new user and append them to an existing group.
-     *
-     * @return boolean
+     * @return bool
+     * @throws Exception
      */
     public function actionUser()
     {
@@ -229,12 +236,13 @@ class SetupController extends \luya\console\Command
 
         return $this->outputSuccess("The user ($email) has been created.");
     }
-    
+
     /**
      * Helper to insert data in database table.
      *
      * @param string $table The database table
      * @param array $fields The array with insert fields
+     * @return int
      */
     private function insert($table, array $fields)
     {

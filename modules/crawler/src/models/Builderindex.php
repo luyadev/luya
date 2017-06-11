@@ -79,7 +79,7 @@ class Builderindex extends \luya\admin\ngrest\base\NgRestModel
         $model = self::findOne(['url' => $url]);
 
         if ($model) {
-            if ($model->crawled == 1) {
+            if ($model->crawled) {
                 return true;
             }
         }
@@ -104,7 +104,7 @@ class Builderindex extends \luya\admin\ngrest\base\NgRestModel
         $model->url = $url;
         $model->title = StringHelper::truncate($title, 197);
         $model->url_found_on_page = $urlFoundOnPage;
-        $model->crawled = 0;
+        $model->crawled = false;
 
         return $model->save(false);
     }
@@ -114,9 +114,9 @@ class Builderindex extends \luya\admin\ngrest\base\NgRestModel
         $this->content_hash = md5($this->content);
         $count = self::find()->where(['content_hash' => $this->content_hash])->andWhere(['!=', 'url', $this->url])->count();
         if ($count > 0) {
-            $this->is_dublication = 1;
+            $this->is_dublication = true;
         } else {
-            $this->is_dublication = 0;
+            $this->is_dublication = false;
         }
     }
 }

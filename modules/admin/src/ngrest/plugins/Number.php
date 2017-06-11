@@ -29,7 +29,7 @@ class Number extends Plugin
     /**
      * @var integer Html field placeholder
      */
-    public $placeholder = null;
+    public $placeholder;
 
     public function renderList($id, $ngModel)
     {

@@ -14,7 +14,7 @@ use luya\admin\Module;
 
             <!-- Normal login -->
             <form class="card" method="post" id="loginForm">
-                <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->csrfToken; ?>" />
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>" />
                 <div class="card-content clearfix">
                     <span class="card-title black-text"><?= Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></span>
 
@@ -38,7 +38,7 @@ use luya\admin\Module;
                             </div>
                         </div>
                     </div>
-
+ 
                     <br />
 
                 </div>
@@ -55,7 +55,7 @@ use luya\admin\Module;
 
             <!-- Token -->
             <form class="card hidden" method="post" id="secureForm">
-                <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->csrfToken; ?>" />
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>" />
                 <div class="card-content clearfix">
                     <span class="card-title black-text"><?= Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></span>
 

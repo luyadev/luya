@@ -37,7 +37,7 @@ final class Group extends NgRestModel
         return [
             [['name'], 'required'],
             [['text'], 'string'],
-            [['is_deleted'], 'integer'],
+            [['is_deleted'], 'boolean'],
             [['name'], 'string', 'max' => 255],
             [['users'], 'safe'],
         ];
@@ -94,7 +94,7 @@ final class Group extends NgRestModel
                 'refJoinTable' => 'admin_user_group',
                 'refModelPkId' => 'group_id',
                 'refJoinPkId' => 'user_id',
-                'labelFields' => ['firstname', 'lastname', 'email'],
+                'labelField' => ['firstname', 'lastname', 'email'],
                 'labelTemplate' =>  '%s %s (%s)'
             ],
         ];

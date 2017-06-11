@@ -111,11 +111,9 @@ class HookTest extends LuyaWebTestCase
     {
         Hook::on('fooBar', function ($hook) {
             $hook['test'] = 'value1';
-            $hook['test'] = 'value2';
         });
         
         Hook::on('fooBar', function ($hook) {
-            $hook['test'] = 'value3';
             $hook['test'] = 'value4';
         });
     

@@ -32,8 +32,12 @@ class ModuleTest extends LuyaWebTestCase
     
     public function testRegisterTranslation()
     {
-        Yii::$app->getModule('unitmodule')->translations[] = ['prefix' => 'test*', 'basePath' => '@luya/messages', 'fileMap' => 'luya/test'];
+        Yii::$app->getModule('unitmodule')->translations[] = ['prefix' => 'test*', 'basePath' => '@luya/messages', 'fileMap' => ['luya/test']];
         Yii::$app->getModule('unitmodule')->init();
+        Yii::$app->getModule('unitmodule')->registerTranslation('foo*', '@luya/foobar/message', ['foo' => 'foo.php']);
+        
+        $this->assertArrayHasKey('foo*', Yii::$app->i18n->translations);
+        $this->assertArrayHasKey('test*', Yii::$app->i18n->translations);
     }
     
     public function testUseAppLayoutPath()

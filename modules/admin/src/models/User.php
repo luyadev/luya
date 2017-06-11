@@ -4,7 +4,7 @@ namespace luya\admin\models;
 
 use Yii;
 use yii\web\IdentityInterface;
-use luya\admin\models\UserLogin;
+
 use luya\admin\aws\ChangePasswordInterface;
 use luya\admin\Module;
 use luya\admin\traits\SoftDeleteTrait;
@@ -46,7 +46,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'eventBeforeValidate']);
     }
     
-    private $_setting = null;
+    private $_setting;
     
     public function getSetting()
     {
@@ -110,7 +110,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     public function ngRestFilters()
     {
         return [
-            'Removed' => self::find()->where(['is_deleted' => 1]),
+            'Removed' => self::find()->where(['is_deleted' => true]),
         ];
     }
     
@@ -207,7 +207,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     public function beforeCreate()
     {
         $this->auth_token = '';
-        $this->is_deleted = 0;
+        $this->is_deleted = false;
     }
 
     public function eventBeforeValidate()
@@ -233,7 +233,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
      */
     public static function find()
     {
-        return parent::find()->where(['is_deleted' => 0]);
+        return parent::find()->where(['is_deleted' => false]);
     }
 
     public function changePassword($newpass, $newpasswd)
@@ -259,9 +259,9 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
             return false;
         }
         // create random string for password salting
-        $this->password_salt = yii::$app->getSecurity()->generateRandomString();
+        $this->password_salt = Yii::$app->getSecurity()->generateRandomString();
         // store the password
-        $this->password = yii::$app->getSecurity()->generatePasswordHash($this->password.$this->password_salt);
+        $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password.$this->password_salt);
 
         return true;
     }
@@ -306,7 +306,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
 
     public static function findByEmail($email)
     {
-        return self::find()->where(['email' => $email, 'is_deleted' => 0])->one();
+        return self::find()->where(['email' => $email, 'is_deleted' => false])->one();
     }
 
     public function validatePassword($password)
@@ -333,7 +333,8 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
      *
      * @param string $token the token to be looked for
      *
-     * @return IdentityInterface|null the identity object that matches the given token.
+     * @param null $type
+     * @return null|IdentityInterface the identity object that matches the given token.
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {

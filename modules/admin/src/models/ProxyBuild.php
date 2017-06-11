@@ -2,7 +2,7 @@
 
 namespace luya\admin\models;
 
-use Yii;
+
 use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
@@ -36,7 +36,8 @@ class ProxyBuild extends NgRestModel
     {
         return [
             [['machine_id', 'timestamp', 'build_token', 'config', 'expiration_time'], 'required'],
-            [['machine_id', 'timestamp', 'is_complet', 'expiration_time'], 'integer'],
+            [['machine_id', 'timestamp', 'expiration_time'], 'integer'],
+            [['is_complet'], 'boolean'],
             [['config'], 'string'],
             [['build_token'], 'string', 'max' => 255],
             [['build_token'], 'unique'],
@@ -72,7 +73,7 @@ class ProxyBuild extends NgRestModel
         return 'api-admin-proxybuild';
     }
     
-    private $_arrayConfig = null;
+    private $_arrayConfig;
     
     public function getArrayConfig()
     {

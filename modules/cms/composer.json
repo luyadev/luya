@@ -20,7 +20,7 @@
 	   "luyadev/luya" : "^1.0@dev",
 	   "luyadev/luya-module-admin" : "^1.0@dev",
 	   "satooshi/php-coveralls": "~1.0",
-	   "twig/twig" : "^2.0"
+	   "twig/twig" : "^1.0"
 	},
 	"autoload" : {
 		"psr-4" : {

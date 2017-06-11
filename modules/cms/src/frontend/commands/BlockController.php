@@ -36,34 +36,34 @@ class BlockController extends \luya\console\Command
     /**
      * @var string The type of block, valid `app` (static::TYPE_APP) or `module` (static::TYPE_TMODULE) values.
      */
-    public $type = null;
+    public $type;
     
     /**
      * @var string If type is `module` the name of the module must be provided with this $moduleName property.
      */
-    public $moduleName = null;
+    public $moduleName;
     
     /**
      * @var array Provide the configuration array which is inside the `config()` method of the block.
      */
-    public $config = null;
+    public $config;
     
     /**
      * @var boolean Whether the block is a container/layout block or not this will enable/dsiable the $isContainer property
      */
-    public $isContainer = null;
+    public $isContainer;
     
     /**
      * @var boolean Whether the caching property should be displayed or not inside the block.
      */
-    public $cacheEnabled = null;
+    public $cacheEnabled;
     
     /**
      * @var boolean If dry run is enabled the content of the block will be returned but no files will be created. This is usefull for unit testing.
      */
     public $dryRun = false;
     
-    private $_blockName = null;
+    private $_blockName;
     
     /**
      * Setter method for $blockName, ensure the correct block name.
@@ -175,7 +175,7 @@ class BlockController extends \luya\console\Command
     {
         return [
             'select' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
-            'checkbox-array' => "BlockHelper::checkboxArrayOption([1 => 'Label for 1')",
+            'checkbox-array' => "BlockHelper::checkboxArrayOption([1 => 'Label for 1'])",
             'image-upload' => "['no_filter' => false]",
             'image-array-upload' => "['no_filter' => false]",
         ];

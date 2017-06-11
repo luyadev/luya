@@ -10,7 +10,6 @@ use luya\base\CoreModuleInterface;
 /**
  * LUYA Appliation trait
  *
- * @property string $luyaLanguage Admin Interface language
  * @property string $webroot Returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
  *
@@ -19,23 +18,12 @@ use luya\base\CoreModuleInterface;
  */
 trait ApplicationTrait
 {
-    private $_webroot = null;
+    private $_webroot;
     
     /**
      * @var string Title for the application used in different sections like Login screen
      */
     public $siteTitle = 'LUYA Application';
-
-    /**
-     * @var string The internal used language to translate luya message, this is also used for all luya
-     * core modules. Currently available languages
-     *
-     * + en
-     * + de
-     *
-     * @since 1.0.0-beta2
-     */
-    public $luyaLanguage = 'en';
     
     /**
      * @var string|boolean Set a token, which will be used to collect data from a central host, if you want to enable this feature.
@@ -165,7 +153,7 @@ trait ApplicationTrait
     /**
      * Get an array with all modules which are an instance of the `luya\base\Module`.
      *
-     * @return array Containing all module objects which are of luya\base\Module.
+     * @return \luya\base\Module
      */
     public function getApplicationModules()
     {
@@ -183,7 +171,7 @@ trait ApplicationTrait
     /**
      * Return a list with all registered frontend modules except 'luya' and 'cms'. This is needed in the module block.
      *
-     * @return array
+     * @return \luya\base\Module
      */
     public function getFrontendModules()
     {
@@ -195,6 +183,24 @@ trait ApplicationTrait
             }
         }
 
+        return $modules;
+    }
+    
+    /**
+     * Return all Admin Module Interface implementing modules.
+     *
+     * @return \luya\base\AdminModuleInterface
+     */
+    public function getAdminModules()
+    {
+        $modules = [];
+        
+        foreach ($this->getModules() as $id => $obj) {
+            if ($obj instanceof Module && $obj instanceof AdminModuleInterface) {
+                $modules[$id] = $obj;
+            }
+        }
+        
         return $modules;
     }
 }

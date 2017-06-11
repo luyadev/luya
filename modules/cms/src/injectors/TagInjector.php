@@ -31,7 +31,7 @@ class TagInjector extends BaseBlockInjector
         return Tag::find()->select(['name'])->indexBy('id')->column();
     }
     
-    private $_assignedTags = null;
+    private $_assignedTags;
     
     /**
      * Get assigned models for the current Block.

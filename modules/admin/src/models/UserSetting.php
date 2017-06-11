@@ -47,7 +47,7 @@ final class UserSetting extends Object implements \ArrayAccess
 
     public $data = [];
 
-    public $sender = null;
+    public $sender;
 
     private function save()
     {
@@ -60,15 +60,15 @@ final class UserSetting extends Object implements \ArrayAccess
      * Get a key of the user settings, dot notation is allowed to return a key of an array.
      *
      * @param string $key
-     * @param string|booelan|null $default
+     * @param string|bool|null $default
      * @return string|array|null
      */
     public function get($key, $default = null)
     {
         $array = $this->data;
-        foreach (explode(self::SEPERATOR, $key) as $key) {
-            if (is_array($array) && array_key_exists($key, $array)) {
-                $array = $array[$key];
+        foreach (explode(self::SEPERATOR, $key) as $item) {
+            if (is_array($array) && array_key_exists($item, $array)) {
+                $array = $array[$item];
             } else {
                 return $default;
             }
@@ -86,9 +86,9 @@ final class UserSetting extends Object implements \ArrayAccess
     public function has($key)
     {
         $array = $this->data;
-        foreach (explode(self::SEPERATOR, $key) as $key) {
-            if (is_array($array) && array_key_exists($key, $array)) {
-                $array = $array[$key];
+        foreach (explode(self::SEPERATOR, $key) as $item) {
+            if (is_array($array) && array_key_exists($item, $array)) {
+                $array = $array[$item];
             } else {
                 return false;
             }
@@ -101,21 +101,20 @@ final class UserSetting extends Object implements \ArrayAccess
      * Remove an element from the user settings data array.
      *
      * @param string $key
-     * @return void
+     * @return bool
      */
     public function remove($key)
     {
         if ($this->has($key)) {
             $array = &$this->data;
-            foreach (explode(self::SEPERATOR, $key) as $key) {
-                if (array_key_exists($key, $array)) {
+            foreach (explode(self::SEPERATOR, $key) as $item) {
+                if (array_key_exists($item, $array)) {
                     $lastArray = &$array;
-                    $array = &$array[$key];
+                    $array = &$array[$item];
                 }
             }
             
-            if (isset($lastArray) && $lastArray[$key]);
-            unset($lastArray[$key]);
+            unset($lastArray[$item]);
             if (empty($lastArray)) {
                 unset($lastArray);
             }
@@ -131,18 +130,18 @@ final class UserSetting extends Object implements \ArrayAccess
      *
      * @param string $key
      * @param array|string|boolean $value
-     * @return booelan
+     * @return bool
      */
     public function set($key, $value)
     {
         $array = &$this->data;
         $keys = explode(self::SEPERATOR, $key);
         $i = 1;
-        foreach ($keys as $key) {
-            if (is_array($array) && array_key_exists($key, $array) && !is_array($array[$key]) && $i !== count($keys)) {
+        foreach ($keys as $item) {
+            if (is_array($array) && array_key_exists($item, $array) && !is_array($array[$item]) && $i !== count($keys)) {
                 return false;
             }
-            $array = &$array[$key];
+            $array = &$array[$item];
             $i++;
         }
         $array = $value;
@@ -151,17 +150,6 @@ final class UserSetting extends Object implements \ArrayAccess
     }
 
     // ArrayAccess
-
-    /**
-     * Setter method for ArrayAccess.
-     *
-     * @param string $offset The offset key
-     * @param midex $value The offset value
-     */
-    public function offsetSet($offset, $value)
-    {
-        return $this->set($offset, $value);
-    }
 
     /**
      * Exists method for ArrayAccess.
@@ -175,20 +163,30 @@ final class UserSetting extends Object implements \ArrayAccess
     }
 
     /**
+     * Setter method for ArrayAccess.
+     *
+     * @param string $offset The offset key
+     * @param mixed $value The offset value
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
+    /**
      * Unset method for ArrayAccess.
      *
      * @param string $offset The offset key
      */
     public function offsetUnset($offset)
     {
-        return $this->remove($offset);
+        $this->remove($offset);
     }
 
     /**
      * Getter method for ArrayAccess.
      *
      * @param string $offset The offset key
-     * @param midex $value The offset value
      * @return mixed The value when accessing the array.
      */
     public function offsetGet($offset)

@@ -100,9 +100,38 @@ class StorageContainer extends Component
     use CacheableTrait;
     
     /**
+     * @var array The mime types 
+     */
+    public $dangerousMimeTypes = [
+        'application/x-msdownload',
+        'application/x-msdos-program',
+        'application/x-msdos-windows',
+        'application/x-download',
+        'application/bat',
+        'application/x-bat',
+        'application/com',
+        'application/x-com',
+        'application/exe',
+        'application/x-exe',
+        'application/x-winexe',
+        'application/x-winhlp',
+        'application/x-winhelp',
+        'application/x-javascript',
+        'application/hta',
+        'application/x-ms-shortcut',
+        'application/octet-stream',
+        'vms/exe',
+        'text/javascript',
+        'text/scriptlet',
+        'text/x-php',
+        'text/plain',
+        'application/x-spss',
+    ];
+    
+    /**
      * @var \luya\web\Request Request object resolved by the Dependency Injector.
      */
-    public $request = null;
+    public $request;
     
     private $_fileCacheKey = 'storage_fileCacheKey';
     
@@ -132,7 +161,7 @@ class StorageContainer extends Component
         parent::__construct($config);
     }
     
-    private $_httpPath = null;
+    private $_httpPath;
     
     /**
      * Setter for the http path in order to read online storage files.
@@ -171,7 +200,7 @@ class StorageContainer extends Component
         return $this->_httpPath;
     }
     
-    private $_absoluteHttpPath = null;
+    private $_absoluteHttpPath;
     
     /**
      * Setter fro the absolute http path in order to read from another storage source.
@@ -211,10 +240,12 @@ class StorageContainer extends Component
         return $this->_absoluteHttpPath;
     }
     
-    private $_serverPath = null;
+    private $_serverPath;
     
     /**
      * Get the internal server path to the storage folder.
+     * 
+     * Default path is `@webroot/storage`.
      *
      * @return string Get the path on the server to the storage folder based @webroot alias.
      */
@@ -227,7 +258,19 @@ class StorageContainer extends Component
         return $this->_serverPath;
     }
     
-    private $_filesArray = null;
+    /**
+     * Setter method for $serverPath
+     * 
+     * The input path will be auomatically wrapped trough {{Yii::getAlias}}.
+     * 
+     * @param string $path The path on the server where the storage data is stored.
+     */
+    public function setServerPath($path)
+    {
+        $this->_serverPath = Yii::getAlias($path);
+    }
+    
+    private $_filesArray;
     
     /**
      * Get all storage files as an array from database.
@@ -256,7 +299,7 @@ class StorageContainer extends Component
         return (isset($this->filesArray[$fileId])) ? $this->filesArray[$fileId] : false;
     }
     
-    private $_imagesArray = null;
+    private $_imagesArray;
     
     /**
      * Get all storage images as an array from database.
@@ -327,7 +370,7 @@ class StorageContainer extends Component
     {
         return (new \luya\admin\file\Query())->findOne($fileId);
     }
-    
+
     /**
      * Add a new file based on the source to the storage system.
      *
@@ -346,7 +389,8 @@ class StorageContainer extends Component
      * @param string $fileName The name of this file (must contain data type suffix).
      * @param integer $folderId The id of the folder where the file should be stored in.
      * @param boolean $isHidden Should the file visible in the filemanager or not.
-     * @return \luya\admin\file\Item|\luya\Exception|boolean Returns the item object, if an error happens an exception is thrown.
+     * @return bool|\luya\admin\file\Item|Exception Returns the item object, if an error happens an exception is thrown.
+     * @throws Exception
      */
     public function addFile($fileSource, $fileName, $folderId = 0, $isHidden = false)
     {
@@ -373,6 +417,10 @@ class StorageContainer extends Component
             $mimeType = FileHelper::getMimeType($fileName);
         }
         
+        if (in_array($mimeType, $this->dangerousMimeTypes)) {
+            throw new Exception("This files is in the dangrous types list and can not be stored.");
+        }
+        
         $newName = implode([$baseName.'_'.$fileHashName, $fileInfo->extension], '.');
         
         $savePath = $this->serverPath . '/' . $newName;
@@ -397,8 +445,8 @@ class StorageContainer extends Component
             'folder_id' => (int) $folderId,
             'hash_file' => $fileHash,
             'hash_name' => $fileHashName,
-            'is_hidden' => ($isHidden) ? 1 : 0,
-            'is_deleted' => 0,
+            'is_hidden' => ($isHidden) ? true : false,
+            'is_deleted' => false,
             'file_size' => @filesize($savePath),
             'caption' => null,
         ]);
@@ -455,7 +503,7 @@ class StorageContainer extends Component
     {
         return (new \luya\admin\image\Query())->findOne($imageId);
     }
-    
+
     /**
      * Add a new image based an existing file Id.
      *
@@ -472,7 +520,8 @@ class StorageContainer extends Component
      * @param integer $fileId The id of the file where image should be created from.
      * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added. Filter can new also be the string name of the filter like `tiny-crop`.
      * @param boolean $throwException Whether the addImage should throw an exception or just return boolean
-     * @return \luya\admin\image\Item|\luya\Exception|boolean Returns the item object, if an error happens and $throwException is off `false` is returned otherwhise an exception is thrown.
+     * @return bool|\luya\admin\image\Item|Exception Returns the item object, if an error happens and $throwException is off `false` is returned otherwhise an exception is thrown.
+     * @throws \Exception
      */
     public function addImage($fileId, $filterId = 0, $throwException = false)
     {
@@ -556,7 +605,7 @@ class StorageContainer extends Component
         return false;
     }
     
-    private $_foldersArray = null;
+    private $_foldersArray;
     
     /**
      * Get all storage folders as an array from database.
@@ -568,7 +617,7 @@ class StorageContainer extends Component
     public function getFoldersArray()
     {
         if ($this->_foldersArray === null) {
-            $this->_foldersArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create'])->where(['is_deleted' => 0])->orderBy(['name' => 'ASC'])->indexBy('id'), $this->_folderCacheKey);
+            $this->_foldersArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create'])->where(['is_deleted' => false])->orderBy(['name' => 'ASC'])->indexBy('id'), $this->_folderCacheKey);
         }
         
         return $this->_foldersArray;
@@ -649,7 +698,7 @@ class StorageContainer extends Component
         return false;
     }
     
-    private $_filtersArray = null;
+    private $_filtersArray;
     
     /**
      * Get all storage filters as an array from database.
@@ -723,7 +772,7 @@ class StorageContainer extends Component
      */
     public function processThumbnails()
     {
-        foreach ($this->findFiles(['is_hidden' => 0, 'is_deleted' => 0]) as $file) {
+        foreach ($this->findFiles(['is_hidden' => false, 'is_deleted' => false]) as $file) {
             if ($file->isImage) {
                 // create tiny thumbnail
                 $this->addImage($file->id, TinyCrop::identifier());

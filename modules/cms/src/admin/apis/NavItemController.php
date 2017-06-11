@@ -45,6 +45,13 @@ class NavItemController extends \luya\admin\base\RestController
         return $behaviors;
     }
 
+    public function actionLastUpdates()
+    {
+        return NavItem::find()->select(['cms_nav_item.title', 'timestamp_update', 'update_user_id', 'nav_id'])->limit(10)->orderBy(['timestamp_update' => SORT_DESC])->joinWith(['updateUser' => function($q) {
+            $q->select(['firstname', 'lastname', 'id']);  
+        }])->asArray(true)->all();
+    }
+    
     public function actionDelete($navItemId)
     {
         if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
@@ -174,13 +181,13 @@ class NavItemController extends \luya\admin\base\RestController
         
         return ['error' => !$save];
     }
-    
+
     /**
      * admin/api-cms-navitem/update-item?navItemId=2.
      *
-     * @param unknown_type $navItemId
-     *
-     * @return unknown
+     * @param int $navItemId
+     * @return mixed
+     * @throws Exception
      */
     public function actionUpdateItem($navItemId)
     {
@@ -220,6 +227,7 @@ class NavItemController extends \luya\admin\base\RestController
      * @param integer $navItemId The id of the nav_item item which should be changed
      * @param integer $navItemType The NEW type of content for the above nav_item.id
      * @return array|bool
+     * @throws Exception
      */
     public function actionUpdatePageItem($navItemId, $navItemType)
     {

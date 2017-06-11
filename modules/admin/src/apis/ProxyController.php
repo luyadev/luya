@@ -34,7 +34,7 @@ class ProxyController extends Controller
     
     public function actionIndex($identifier, $token)
     {
-        $machine = ProxyMachine::findOne(['identifier' => $identifier, 'is_deleted' => 0]);
+        $machine = ProxyMachine::findOne(['identifier' => $identifier, 'is_deleted' => false]);
         
         if (!$machine) {
             throw new ForbiddenHttpException("Unable to acccess the proxy api.");

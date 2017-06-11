@@ -109,7 +109,7 @@ final class LoginForm extends Model
             $user = $this->getUser();
             $user->detachBehavior('LogBehavior');
             $user->scenario = 'login';
-            $user->force_reload = 0;
+            $user->force_reload = false;
             $user->auth_token = Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt);
             $user->save();
 

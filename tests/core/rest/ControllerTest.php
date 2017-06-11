@@ -9,9 +9,9 @@ use yii\base\Model;
 
 class FooModel extends Model
 {
-    public $firstname = null;
+    public $firstname;
     
-    public $email = null;
+    public $email;
     
     public function rules()
     {

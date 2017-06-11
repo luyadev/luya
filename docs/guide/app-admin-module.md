@@ -11,6 +11,6 @@ Some features available in the Admin Modules:
 
 You can use the [Console Command](app-console.md) `module/create` to scaffold quickly all the required folders and files.
 
-### Controller View
+### Controller View
 
 Inside an administration modules controller, you have to use `renderPartial()` method when rendering views, as there is no layout views because you are in an Angular context.

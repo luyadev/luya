@@ -42,7 +42,7 @@ class Module extends \luya\base\Module
      * 'baseUrl' => 'https://luya.io',
      * ```
      */
-    public $baseUrl = null;
+    public $baseUrl;
     
     /**
      * @var array An array with regular expression (including delimiters) which will be applied to found links so you can

@@ -65,7 +65,7 @@ class MenuController extends \luya\admin\base\RestController
         return true;
     }
 
-    private $_groups = null;
+    private $_groups;
 
     private function getGroups()
     {
@@ -155,7 +155,7 @@ class MenuController extends \luya\admin\base\RestController
                 Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
             }
 
-            return Yii::$app->db->createCommand()->insert('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId, 'inheritance' => 1])->execute();
+            return Yii::$app->db->createCommand()->insert('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId, 'inheritance' => true])->execute();
         }
     }
 

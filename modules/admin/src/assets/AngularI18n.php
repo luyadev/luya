@@ -52,11 +52,7 @@ class AngularI18n extends \luya\web\Asset
     {
         parent::init();
         
-        $lang = Yii::$app->luyaLanguage;
-        
-        if (!Yii::$app->adminuser->isGuest) {
-            $lang = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
-        }
+        $lang = Yii::$app->adminuser->getInterfaceLanguage();
         
         $this->js = [
             'angular-locale_'.$lang.'.js',

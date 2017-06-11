@@ -7,8 +7,6 @@ use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Storage Effect Active Window.
- *
- * File has been created with `aw/create` command on LUYA version 1.0.0-dev.
  */
 final class StorageFilterImagesActiveWindow extends ActiveWindow
 {

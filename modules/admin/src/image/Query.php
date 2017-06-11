@@ -17,7 +17,7 @@ class Query extends \yii\base\Object
 {
     use QueryTrait;
     
-    private $_storage = null;
+    private $_storage;
     
     /**
      * Singleton behavior for storage component getter.

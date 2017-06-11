@@ -2,7 +2,7 @@
 
 namespace luya\admin\controllers;
 
-use Yii;
+
 use luya\admin\base\Controller;
 
 /**

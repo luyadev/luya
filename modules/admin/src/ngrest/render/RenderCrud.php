@@ -3,17 +3,21 @@
 namespace luya\admin\ngrest\render;
 
 use Yii;
-use yii\base\View;
 use luya\admin\components\Auth;
 use luya\admin\models\Lang;
 use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
 use yii\base\InvalidConfigException;
+use yii\base\ViewContextInterface;
+
 
 /**
+ * 
+ * @property \luya\admin\ngrest\render\RenderCrudView $view
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
-class RenderCrud extends Render implements RenderInterface
+class RenderCrud extends Render implements RenderInterface, ViewContextInterface, RenderCrudInterface
 {
     const TYPE_LIST = 'list';
 
@@ -21,17 +25,17 @@ class RenderCrud extends Render implements RenderInterface
 
     const TYPE_UPDATE = 'update';
 
-    public $viewFile = '@admin/views/ngrest/render/crud.php';
+    public $viewFile = 'crud.php';
 
     private $_permissions = [];
 
-    private $_buttons = null;
+    private $_buttons;
 
-    private $_view = null;
+    private $_view;
 
     private $_fields = [];
 
-    private $_langs = null;
+    private $_langs;
 
     public function can($type)
     {
@@ -45,37 +49,83 @@ class RenderCrud extends Render implements RenderInterface
     public function getView()
     {
         if ($this->_view === null) {
-            $this->_view = new View();
+            $this->_view = new RenderCrudView();
         }
 
         return $this->_view;
     }
-
+    
+    public function getViewPath()
+    {
+    	return '@admin/views/ngrest';
+    }
+    
     public function render()
     {
-        return $this->getView()->render($this->viewFile, array(
+    	return $this->view->render($this->viewFile, [
             'canCreate' => $this->can(Auth::CAN_CREATE),
             'canUpdate' => $this->can(Auth::CAN_UPDATE),
             'canDelete' => $this->can(Auth::CAN_DELETE),
-            //'crud' => $this,
             'config' => $this->config,
-            'activeWindowRenderUrl' => $this->getRestUrl('active-window-render'),
-            'activeWindowCallbackUrl' => $this->getRestUrl('active-window-callback'),
-        ), $this);
+    		'isInline' => $this->getIsInline(),
+    		//'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
+        ], $this);
     }
 
-    public function getRestUrl($append = null)
+    public function getApiEndpoint($append = null)
     {
         if ($append) {
             $append = '/' . ltrim($append, '/');
         }
-        return 'admin/'.$this->config->apiEndpoint . $append;
+        return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
     }
     
     public function getPrimaryKey()
     {
         return $this->config->primaryKey;
     }
+    
+    private $_relationCall = false;
+    
+    public function getRelationCall()
+    {
+    	return $this->_relationCall;
+    }
+    
+    public function setRelationCall(array $options)
+    {
+    	$this->_relationCall = $options;
+    }
+    
+    private $_isInline = false;
+
+    /**
+     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
+     * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
+     * @return bool
+     */
+    public function getIsInline()
+    {
+    	return $this->_isInline;	
+    }
+    
+    public function setIsInline($inline)
+    {
+    	$this->_isInline = $inline;
+    }
+
+    public function getOrderBy()
+    {
+        if ($this->getConfig()->getDefaultOrderField() === false) {
+            return false;
+        }
+        
+    	return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
+    }
+    
+    /*
+     * OLD
+     */
 
     /**
      * collection all the buttons in the crud list.
@@ -87,15 +137,15 @@ class RenderCrud extends Render implements RenderInterface
      *     ['ngClick' => 'toggle(...)', 'icon' => 'fa fa-fw fa-edit', 'label' => 'Button Label']
      * ];
      * ```
-     *
      * @return returns array with all buttons for this crud
+     * @throws InvalidConfigException
      */
     public function getButtons()
     {
         if ($this->_buttons === null) {
             $buttons = [];
             
-            foreach ($this->config->relations as $rel) {
+            foreach ($this->getConfig()->getRelataions() as $rel) {
                 $api = Yii::$app->adminmenu->getApiDetail($rel['apiEndpoint']);
                 
                 if (!$api) {
@@ -156,7 +206,7 @@ class RenderCrud extends Render implements RenderInterface
             $query['expand'] = implode(',', $this->config->getPointerExtraFields($type));
         }
         // return url decoed string from http_build_query
-        return urldecode(http_build_query($query));
+        return http_build_query($query, '', '&');
     }
 
     /**
@@ -197,7 +247,7 @@ class RenderCrud extends Render implements RenderInterface
         return $this->_langs;
     }
 
-    private $_defaultLangShortCode = null;
+    private $_defaultLangShortCode;
 
     public function getDefaultLangShortCode()
     {
@@ -216,7 +266,7 @@ class RenderCrud extends Render implements RenderInterface
             $names[$elmn['name']] = $elmn['name'];
         }
         
-        foreach ($this->config->attributeGroups as $group) {
+        foreach ($this->getConfig()->getAttributeGroups()as $group) {
             foreach ($group[0] as $item) {
                 if (in_array($item, $names)) {
                     unset($names[$item]);
@@ -227,7 +277,7 @@ class RenderCrud extends Render implements RenderInterface
         $groups[] = [$names, '__default', 'collapsed' => true, 'is_default' => true];
         
         
-        return array_merge($groups, $this->config->attributeGroups);
+        return array_merge($groups, $this->getConfig()->getAttributeGroups());
     }
     
     public function forEachGroups($pointer)
@@ -247,12 +297,13 @@ class RenderCrud extends Render implements RenderInterface
         
         return $data;
     }
-    
+
     /**
      * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file!
      *
      * @param unknown_type $element
-     * @param string       $configContext list,create,update
+     * @param string $configContext list,create,update
+     * @return array
      */
     public function createElements($element, $configContext)
     {

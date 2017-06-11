@@ -10,7 +10,7 @@ To execute a console command open your Terminal and go into the base directory o
 
 Where *command* is one of the following commands below:
 
-### Available commands
+### Available commands
 
 Global LUYA commands:
 
@@ -21,21 +21,24 @@ Global LUYA commands:
 |`migrate/create migration1 modulename`|Create new migration file named `mymigration1` in the module `modulename`: `migrate/create mymigration1 modulename`.
 |`health`|Tests all basic directory if they are writeable and existing.
 |`health/mailer`|Check if you mailer component is working and can send mails.
-|`crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
-|`crud/model`|Generates only the [NgRestModel](ngrest-model.md). Usage `./vendor/bin/luya crud/model "app\models\Customer"` 
 |`module/create`|Create new [frontend/admin module](app-module.md) with a wizzard.
-|`aw/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
 |`module/controller/action`|All comands stored in the folder `commands` can be run by default routing.
 
 Admin Module commands:
 
 |Command|Description
-|---	|---
+|---    |---
 |`admin/setup`|Execute the *LUYA* Setup will create a user, group and base table informations.
 |`admin/setup/user`|Create a new user for the *LUYA* Admin from command line.
+|`admin/filter`|Generate a [Filter](app-filters.md) Class.
+|`admin/proxy`|Start the [content sync](concept-depandsync) process.
+|`admin/proxy/clear`|Flush the configuration setup for the content sync process.
 |`admin/storage/cleanup`|Cleanup not existing files compare file system and database.
 |`admin/storage/cleanup-image-table`|Find if dupliations are available in the image table (same filter and file id). If confirmed it will remove all duplications except of one, the first one created.
 |`admin/storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
+|`admin/active-window/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
+|`admin/crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
+|`admin/crud/model`|Generates only the [NgRestModel](ngrest-model.md). Usage `./vendor/bin/luya admin/crud/model "app\models\Customer"` 
 
 CMS Module commands:
 
@@ -58,7 +61,7 @@ class NotifyController extends \luya\console\Command
 {
     public function actionIndex()
     {
-    	return $this->outputSuccess('action successfully done');
+        return $this->outputSuccess('action successfully done');
     }
 
     public function actionBar()
@@ -86,7 +89,7 @@ If you want to create a command without a module you can just add the the Comman
 
 ```php
 'controllerMap' => [
-	'sync' => 'app\commands\SyncController',
+    'sync' => 'app\commands\SyncController',
 ],
 ```
 

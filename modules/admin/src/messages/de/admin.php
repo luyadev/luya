@@ -235,4 +235,12 @@ return [
     'js_link_change_value' => 'Link ändern',
     'js_link_set_value' => 'Link setzen',
     'callback_button_file_download_widget_success' => 'Die Datei wurde vorbereitet. Sie können die Datei jetzt herunterladen.',
+    
+    
+// 1.0.0
+    
+    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
+    'model_user_oldpassword' => 'Altes Passwort',
+    'js_account_update_profile_success' => 'Das Profil wurde erfolgreich aktualisiert.',
+    'dashboard_lastlogin_title' => 'Neuste Benutzer logins',
 ];

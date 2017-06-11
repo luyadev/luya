@@ -2,7 +2,7 @@
 
 namespace luya\cms\models;
 
-use Yii;
+
 use luya\traits\RegistryTrait;
 
 /**

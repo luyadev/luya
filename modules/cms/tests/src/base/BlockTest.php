@@ -10,11 +10,6 @@ use luya\cms\base\PhpBlock;
 
 class GetterSetter extends PhpBlock
 {
-    public function extraVars()
-    {
-        return [];
-    }
-
     public function name()
     {
         return 'name';
@@ -83,16 +78,6 @@ class BlockTest extends CmsFrontendTestCase
 
         $this->assertEquals('content var 1', $block->admin()[0]);
         $this->assertEquals('content var 2', $block->admin()[1]);
-    }
-
-    /**
-     * @expectedException Exception
-     */
-    public function testBlockConfigException()
-    {
-        $block = new FailureBlock();
-        // will throw Exception:  Required attributes in config var element is missing. var, label and type are required.
-        $block->getConfigVarsExport();
     }
 
     public function testGetterSetter()

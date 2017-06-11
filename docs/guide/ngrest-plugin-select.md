@@ -1,6 +1,6 @@
-# Dropdown Selection
+# Dropdown Selection
 
-The {{luya\admin\ngrest\plugins\SelectArray}} and {{luya\admin\ngrest\plugins\SelectModel}} plugins generate a dropdown selection list from an array or a database table.
+The {{luya\admin\ngrest\plugins\SelectArray}} and {{luya\admin\ngrest\plugins\SelectModel}} plugins generate a dropdown selection list from an array or a database table.
 
 ### Select from an Array
 
@@ -9,10 +9,10 @@ Create a dropdown selection based on an assoc array:
 ```php
 public function ngrestAttributeTypes()
 {
-	return [
-		// ...
-		'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
-	];
+    return [
+        // ...
+        'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
+    ];
 }
 ```
 
@@ -24,13 +24,13 @@ Create a dropdown selection based on an {{yii\db\ActiveRecord}} model class:
 public function ngrestAttributeTypes()
 {
     return [
-		// ...
-		'genres' => [
-	     	'selectModel', 
-	     	'modelClass' => Customers::className(), 
-	     	'valueField' => 'customer_id', 
-	     	'labelField' => 'name',
-	     ],
+        // ...
+        'genres' => [
+            'selectModel', 
+            'modelClass' => Customers::className(), 
+             'valueField' => 'customer_id', 
+             'labelField' => 'name',
+         ],
      ];
 }
 ```
@@ -50,7 +50,7 @@ In order to generate a custom labelField you can also pass a closure function:
 > ```php
 > public function getCustomer()
 > {
->     return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+>     return $this->hasOne(Customer::class, ['id' => 'customer_id']);
 > }
 > ```
 > 
@@ -59,11 +59,11 @@ In order to generate a custom labelField you can also pass a closure function:
 > ```php
 > public function getOriginalCustomerId()
 > {
-> 	return $this->getOldAttribute('customer_id');
+>     return $this->getOldAttribute('customer_id');
 > }
 >     
 > public function getCustomer()
 > {
-> 	return $this->hasOne(Customer::className(), ['id' => 'originalCustomerId']);
+>     return $this->hasOne(Customer::class, ['id' => 'originalCustomerId']);
 > }
 > ```

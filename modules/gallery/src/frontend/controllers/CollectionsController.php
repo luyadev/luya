@@ -26,6 +26,7 @@ class CollectionsController extends Controller
      * Get all collections for a specfici categorie
      *
      * @param integer $catId
+     * @return string
      */
     public function actionDataByCategorie($catId)
     {

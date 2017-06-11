@@ -2,7 +2,7 @@
 
 namespace cmstests\src\frontend\blocks;
 
-use luya\cms\frontend\blocks\TextBlock;
+
 use cmstests\BlockTestCase;
 
 class TextBlockTest extends BlockTestCase

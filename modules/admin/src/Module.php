@@ -3,7 +3,7 @@
 namespace luya\admin;
 
 use Yii;
-use luya\web\UrlRule;
+
 use luya\console\interfaces\ImportControllerInterface;
 use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminLanguage;
@@ -44,9 +44,15 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
     
     /**
+     * @var string The default language for the admin interrace (former known as luyaLanguage).
+     * Currently supported: "en", "de", "fr", "es", "ru", "it", "ua", "el".
+     */
+    public $interfaceLanguage = 'en';
+    
+    /**
      * @var array Available translation messages.
      */
-    public $uiLanguageDropdown = [
+    public $interfaceLanguageDropdown = [
         'en' => 'English',
         'de' => 'Deutsch',
         'ru' => 'Pусский',
@@ -58,6 +64,17 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'vi' => 'Việt Nam',
     	'pt' => 'Português',
     ];
+    
+    /**
+     * @array Provide dashboard objects from last user logins.
+     */
+    public $dashboardObjects = [
+   		[
+       		'template' => '<table class="striped"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>', 
+       		'dataApiUrl' => 'admin/api-admin-common/last-logins',
+       		'title' => ['admin', 'dashboard_lastlogin_title'],
+   		],
+  	];
     
     /**
      * @var boolean Enables a two-way factor auth system before logging into the admin
@@ -122,7 +139,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     public $assets = [];
     
     /**
-     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected menu items forom all admin modules and build the menu.
+     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected menu items from all admin modules and build the menu.
      */
     public $moduleMenus = [];
     
@@ -189,7 +206,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         return [
             'js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error', 'js_ngrest_rm_update', 'js_ngrest_rm_success', 'js_tag_exists', 'js_tag_success', 'js_admin_reload', 'js_dir_till', 'js_dir_set_date', 'js_dir_table_add_row', 'js_dir_table_add_column', 'js_dir_image_description',
             'js_dir_no_selection', 'js_dir_image_upload_ok', 'js_dir_image_filter_error', 'js_dir_upload_wait', 'js_dir_manager_upload_image_ok', 'js_dir_manager_rm_file_confirm', 'js_dir_manager_rm_file_ok', 'js_zaa_server_proccess',
-            'ngrest_select_no_selection', 'js_ngrest_toggler_success', 'js_filemanager_count_files_overlay', 'js_link_set_value', 'js_link_change_value',
+            'ngrest_select_no_selection', 'js_ngrest_toggler_success', 'js_filemanager_count_files_overlay', 'js_link_set_value', 'js_link_change_value', 'aws_changepassword_succes', 'js_account_update_profile_success',
         ];
     }
     
@@ -205,7 +222,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         $translations = [];
         foreach ($this->_jsTranslations as $module => $data) {
             foreach ($data as $key) {
-                $translations[$key] = Yii::t($module, $key, [], Yii::$app->luyaLanguage);
+                $translations[$key] = Yii::t($module, $key, [], Yii::$app->language);
             }
         }
         return $translations;
@@ -262,6 +279,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             ],
             'adminuser' => [
                 'class' => AdminUser::className(),
+                'defaultLanguage' => $this->interfaceLanguage,
             ],
             'adminmenu' => [
                 'class' => AdminMenu::className(),
@@ -298,8 +316,8 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      * @param array $params Optional parameters to pass to the translation.
      * @return string The translated message.
      */
-    public static function t($message, array $params = [])
+    public static function t($message, array $params = [], $language = null)
     {
-        return Yii::t('admin', $message, $params, Yii::$app->luyaLanguage);
+        return Yii::t('admin', $message, $params, $language);
     }
 }

@@ -6,7 +6,7 @@ use Yii;
 use luya\Exception;
 use PHPMailer;
 use SMTP;
-use luya\web\View;
+
 use yii\base\Controller;
 
 /**
@@ -35,7 +35,7 @@ use yii\base\Controller;
  */
 class Mail extends \yii\base\Component
 {
-    private $_mailer = null;
+    private $_mailer;
 
     /**
      * @var string sender email address
@@ -60,7 +60,7 @@ class Mail extends \yii\base\Component
     /**
      * @var string email server password
      */
-    public $password = null; // insert password
+    public $password; // insert password
 
     /**
      * @var bool disable if you want to use old PHP sendmail
@@ -88,7 +88,6 @@ class Mail extends \yii\base\Component
     public $smtpSecure = 'tls';
     
     /**
-     * @since 1.0.0-beta7
      * @var string|boolean Define a layout template file which is going to be wrapped around the body()
      * content. The file alias will be resolved so an example layout could look as followed:
      *
@@ -197,13 +196,13 @@ class Mail extends \yii\base\Component
 
     /**
      * Render a view file for the given Controller context.
-     * 
+     *
      * Assuming the following example inside a controller:
-     * 
+     *
      * ```php
      * Yii::$app->mail->compose('Send E-Mail')->render($this, 'mymail', ['foo' => 'bar'])->address('info@luya.io')->send();
      * ```
-     * 
+     *
      * @param \yii\base\Controller $controller The controller context
      * @param string $viewFile The view file to render
      * @param array $params The parameters to pass to the view file.
@@ -220,9 +219,9 @@ class Mail extends \yii\base\Component
     
     /**
      * Pass option parameters to the layout files.
-     * 
+     *
      * @param array $vars
-     * @return \luya\components\Mail 
+     * @return \luya\components\Mail
      */
     public function context(array $vars)
     {
@@ -236,6 +235,7 @@ class Mail extends \yii\base\Component
      * the passed  content as $content variable in the view.
      *
      * @param string $content The content to wrapp inside the layout.
+     * @return string
      */
     protected function wrapLayout($content)
     {
@@ -267,7 +267,6 @@ class Mail extends \yii\base\Component
      * ```
      *
      * @return \luya\components\Mail
-     * @since 1.0.0-beta4
      * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function addresses(array $emails)
@@ -313,7 +312,6 @@ class Mail extends \yii\base\Component
      * ```
      *
      * @return \luya\components\Mail
-     * @since 1.0.0-RC2
      * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function ccAddresses(array $emails)
@@ -359,7 +357,6 @@ class Mail extends \yii\base\Component
      * ```
      *
      * @return \luya\components\Mail
-     * @since 1.0.0-RC2
      * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function bccAddresses(array $emails)
@@ -388,11 +385,39 @@ class Mail extends \yii\base\Component
 
         return $this;
     }
+    
+    /**
+     * Add attachment.
+     *
+     * @param string $filePath The path to the file, will be checked with `is_file`.
+     * @param string $name An optional name to use for the Attachment.
+     * @return \luya\components\Mail
+     */
+    public function addAttachment($filePath, $name = null)
+    {
+        $this->getMailer()->addAttachment($filePath, empty($name) ? '' : $name);
+        
+        return $this;
+    }
+    
+    /**
+     * Add ReplyTo Address.
+     *
+     * @param string $email
+     * @param string $name
+     * @return \luya\components\Mail
+     */
+    public function addReplyTo($email, $name = null)
+    {
+        $this->getMailer()->addReplyTo($email, empty($name) ? $email : $name);
+        
+        return $this;
+    }
 
     /**
      * Trigger the send event of the mailer
-     *
-     * @return boolean
+     * @return bool
+     * @throws Exception
      */
     public function send()
     {

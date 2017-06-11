@@ -36,13 +36,13 @@ class StringHelper extends \yii\helpers\BaseStringHelper
     }
     
     /**
-     * Checke whether a strings starts with the wildcard symbole and compares the string before the wild card symbol * 
+     * Checke whether a strings starts with the wildcard symbole and compares the string before the wild card symbol *
      * with the string provided, if there is NO wildcard symbold it always return false.
-     * 
-     * 
+     *
+     *
      * @param string $string The string which should be checked with $with comperator
      * @param string $with The with string which must end with the wildcard symbol * e.g. `foo*` would match string `foobar`.
-     * @return boolean Whether the string starts with the wildcard marked string or not, if no wildcard symbol is contained 
+     * @return boolean Whether the string starts with the wildcard marked string or not, if no wildcard symbol is contained
      * in the $with it always returns false.
      */
     public static function startsWithWildcard($string, $with, $caseSensitive = true)
@@ -106,7 +106,6 @@ class StringHelper extends \yii\helpers\BaseStringHelper
      * @param string $replace Replacement value for the first found occurrence.
      * @param string $subject The string you want to look up to replace the first element.
      * @return mixed Replaced string
-     * @since 1.0.0-rc1
      */
     public static function replaceFirst($search, $replace, $subject)
     {
@@ -125,8 +124,7 @@ class StringHelper extends \yii\helpers\BaseStringHelper
      * @param string|array $needle The char or word to find in the $haystack. Can be an array to multi find words or char in the string.
      * @param string $haystack The haystack where the $needle string should be looked  up.
      * @param boolean $strict If an array of needles is provided the $strict parameter defines whether all keys must be found ($strict = true) or just one result must be found ($strict = false).
-     * @return boolean If an array of values is provided the response may change depending on $findAll
-     * @since 1.0.0-rc1
+     * @return boolean If an array of values is provided the response may change depending on $findAll.
      */
     public static function contains($needle, $haystack, $strict = false)
     {

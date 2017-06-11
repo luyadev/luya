@@ -19,12 +19,12 @@ add the module to your application config:
 
 ```
 'modules' => [
-	// ...
-	'errorapi' => [
-	    'class' => 'luya\errorapi\Module',
-	    'recipient' => ['errors@example.com'],
-	    'slackToken' => 'YOUR_SECRET_SLACK_TOKEN',
-	],
+    // ...
+    'errorapi' => [
+        'class' => 'luya\errorapi\Module',
+        'recipient' => ['errors@example.com'],
+        'slackToken' => 'YOUR_SECRET_SLACK_TOKEN',
+    ],
 ]
 ```
 
@@ -38,12 +38,11 @@ To enable the error api for your website, you need to configure the default LUYA
 
 ```
 'components' => [
-	// ...
-	'errorHandler' => [
-		'class' => 'luya\web\ErrorHandler',
-		'api' => 'https://example.com/errorapi', // where example is the domain you have setup error api above
-		'transferException' => true',
-	],
+    // ...
+    'errorHandler' => [
+        'api' => 'https://example.com/errorapi', // where example is the domain you have setup error api above
+        'transferException' => true',
+    ],
 ]
 ```
 

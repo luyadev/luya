@@ -66,6 +66,10 @@ class UserSettingsTest extends AdminTestCase
         $this->assertFalse($model->has('one.two.three'));
         $this->assertFalse($model->has('one.two'));
         $this->assertFalse($model->has('one'));
+        
+        // remove not existing element
+        $this->assertFalse($model->remove('not.existing.element.somewhere'));
+        $this->assertFalse($model->remove('notexisting'));
     }
     
     public function testUnsetRemoveElement()

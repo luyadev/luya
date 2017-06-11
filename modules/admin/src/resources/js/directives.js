@@ -58,6 +58,15 @@
 
     // form.js
 
+    /**
+     * Generate form input types based on ZAA Directives.
+     * 
+     * Usage inside another Angular Template:
+     * 
+     * ```php
+     * <zaa-injector dir="zaa-text" options="{}" fieldid="myFieldId" fieldname="myFieldName" initvalue="0" label="My Label" model="mymodel"></zaa-injector>
+     * ```
+     */
     zaa.directive("zaaInjector", function($compile) {
         return {
             restrict: "E",
@@ -316,9 +325,72 @@
     			});
     		},
     		template:function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
     		}
     	}
+    });
+    
+    zaa.directive("zaaColor", function() {
+    	return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+            },
+            controller: function($scope) {
+                function getTextColor(){
+                    if(typeof $scope.model === 'undefined') {
+                        return '#000';
+                    }
+
+                    var hex = $scope.model;
+
+                    if(typeof $scope.model === 'string') {
+                        hex = hex.substr(1);
+                    }
+
+                    if(hex.length === 3) {
+                        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+                        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+                            return r + r + g + g + b + b;
+                        });
+                    }
+
+                    if(hex.length === 6) {
+                        var r = parseInt(hex.substr(0, 2), 16);
+                        var g = parseInt(hex.substr(2, 2), 16);
+                        var b = parseInt(hex.substr(4, 2), 16);
+                        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+                        return (yiq >= 128) ? '#000' : '#fff';
+                    }
+
+                    return '#000';
+                }
+
+                $scope.textColor = getTextColor();
+
+                $scope.$watch(function() { return $scope.model; }, function(n, o) {
+                    $scope.textColor = getTextColor();
+                });
+            },
+            template: function() {
+                return  '<div class="input input--color" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<label class="input__label" for="{{id}}">{{label}}</label>' +
+                            '<div class="input__field-wrapper">' +
+                                '<div class="colorwheel">' +
+                                    '<div class="colorwheel__input-wrapper" style="background-color: {{model}};">' +
+                                        '<input class="colorwheel__input" type="text" ng-model="model" style="color: {{textColor}}; border-color: {{textColor}};" maxlength="7" />' +
+                                    '</div>' +
+                                    '<div class="colorwheel__wheel"><div ng-colorwheel="{ size: 150, segments: 120 }" ng-model="model"></div></div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+            }
+        }
     });
     
     zaa.directive("zaaWysiwyg", function() {
@@ -411,7 +483,7 @@
                 "placeholder": "@placeholder"
             },
             template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -502,7 +574,7 @@
                 return '<div class="input input--select" ng-class="{\'input--hide-label\': i18n}">' +
                             '<label class="input__label" for="{{id}}">{{label}}</label>' +
                             '<div class="input__select-wrapper">' +
-                                '<select name="{{name}}" id="{{id}}" class="input__field browser-default" chosen allow-single-deselect="true" width="\'100%\'" placeholder-text-single="\'' + i18n['ngrest_select_no_selection']+ '\'" ng-options="item.value as item.label for item in options" ng-model="model"><option></option></select>' +
+                                '<select name="{{name}}" id="{{id}}" class="input__field browser-default" chosen search-contains="true" allow-single-deselect="true" width="\'100%\'" placeholder-text-single="\'' + i18n['ngrest_select_no_selection']+ '\'" ng-options="item.value as item.label for item in options" ng-model="model"><option></option></select>' +
                             '</div>' +
                         '</div>';
             }
@@ -1696,6 +1768,8 @@
                 	return i18nParam('js_filemanager_count_files_overlay', {count: folder.filesCount});
                 }
                 
+                $scope.errorMsg = null;
+                
                 $scope.replaceFile = function(file, errorFiles) {
                 	$scope.replaceFiled = file;
                 	
@@ -1746,7 +1820,7 @@
 
                 $scope.$watch('uploadResults', function(n, o) {
                     if ($scope.uploadingfiles != null) {
-                        if (n == $scope.uploadingfiles.length) {
+                        if (n == $scope.uploadingfiles.length && $scope.errorMsg == null) {
                             $scope.filesDataReload().then(function() {
                             	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
                                 LuyaLoading.stop();
@@ -1767,10 +1841,16 @@
 	                            fields: {'folderId': $scope.currentFolderId},
 	                            file: item.getAsFile()
 	                        }).then(function(response) {
-	                        	$scope.filesDataReload().then(function() {
-	                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
-	                                LuyaLoading.stop();
-	                            });
+                        		if (response.data.upload) {
+		                        	$scope.filesDataReload().then(function() {
+		                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+		                            	LuyaLoading.stop();
+		                            });
+                        		} else {
+                        			AdminToastService.error(response.data.message, 6000);
+                        			LuyaLoading.stop();
+                        		}
+	                        	
 	                        })
                         }
                     }
@@ -1788,14 +1868,15 @@
                             $scope.uploadResults++;
                             file.processed = true;
                             file.result = response.data;
-
-                            if (file.result.upload == false) {
-                                $scope.errorMsg = file.result.message;
+                            if (!file.result.upload) {
+                            	AdminToastService.error(file.result.message, 6000);
+                            	LuyaLoading.stop();
+                                $scope.errorMsg = true
                             }
                         });
                     }, function (response) {
                         if (response.status > 0) {
-                            $scope.errorMsg = response.status + ': ' + response.data;
+                            $scope.errorMsg = true;
                         }
                     });
 

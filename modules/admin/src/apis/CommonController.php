@@ -7,6 +7,7 @@ use luya\traits\CacheableTrait;
 use luya\admin\models\Property;
 use luya\admin\models\Lang;
 use luya\admin\base\RestController;
+use luya\admin\models\UserLogin;
 
 /**
  * Common Admin API Tasks.
@@ -115,7 +116,7 @@ class CommonController extends RestController
         }
     
         $user = Yii::$app->adminuser->identity;
-        $user->force_reload = 0;
+        $user->force_reload = false;
         $user->save(false);
     
         return true;
@@ -172,5 +173,12 @@ class CommonController extends RestController
 
         $data = Yii::$app->request->getBodyParam('data');
         Yii::$app->adminuser->identity->setting->set('foldertree.'.$data['id'], (int) $data['toggle_open']);
+    }
+
+    public function actionLastLogins()
+    {
+        return UserLogin::find()->select(['user_id', 'max(timestamp_create) as maxdate'])->joinWith(['user' => function($q) {
+            $q->select(['id', 'firstname', 'lastname']);
+        }])->limit(10)->groupBy(['user_id'])->orderBy(['maxdate' => SORT_DESC])->asArray()->all();
     }
 }

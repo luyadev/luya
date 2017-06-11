@@ -1,5 +1,7 @@
-Description
+LUYA MODEL EXPORTER
 ===========
+
+> We recommend to use the LUYA Content Proxy instead of the Exporter Module!
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 
@@ -17,11 +19,11 @@ Set up you your application configuration as follows :
 
 ```
 'modules' => [
-	// ...
-	'exporter' => [
-	    'class' => 'luya\exporter\Module',
+    // ...
+    'exporter' => [
+        'class' => 'luya\exporter\Module',
         'downloadPassword' => 'EnterYourSecureRandomToken',
-	],
+    ],
 ]
 ```
 

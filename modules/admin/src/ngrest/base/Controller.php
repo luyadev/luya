@@ -13,12 +13,17 @@ use yii\web\ForbiddenHttpException;
 /**
  * Base Controller for all NgRest Controllers.
  *
- * @property luya\admin\ngrest\base\Model $model The model based from the modelClass instance
+ * @property luya\admin\ngrest\base\NgRestModel $model The model based from the modelClass instance
  *
  * @author Basil Suter <basil@nadar.io>
  */
 class Controller extends \luya\admin\base\Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public $layout = false;
+    
     /**
      * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
      * is required.
@@ -27,7 +32,7 @@ class Controller extends \luya\admin\base\Controller
      * public $modelClass = 'admin\models\User';
      * ```
      */
-    public $modelClass = null;
+    public $modelClass;
 
     /**
      * @var boolean Disables the permission
@@ -46,8 +51,12 @@ class Controller extends \luya\admin\base\Controller
         }
     }
     
-    private $_model = null;
+    private $_model;
 
+    /**
+     * Get Model Object
+     * @return \luya\admin\ngrest\base\NgRestModel
+     */
     public function getModel()
     {
         if ($this->_model === null) {
@@ -66,23 +75,21 @@ class Controller extends \luya\admin\base\Controller
         if (!$config) {
             throw new Exception("Provided NgRest config for controller '' is invalid.");
         }
-        
-        if ($relation && $arrayIndex !== false && $modelClass !== false) {
-            $config->relationCall = ['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass];
-        }
 
         $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
         
-        if ($userSortSettings && is_array($userSortSettings)) {
+        if ($userSortSettings && is_array($userSortSettings) && $config->getDefaultOrder() !== false) {
             $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
         }
         
-        $config->inline = (int) $inline;
-        
         $ngrest = new NgRest($config);
         $crud = new RenderCrud();
+        $crud->setIsInline($inline);
+        if ($relation && $arrayIndex !== false && $modelClass !== false) {
+        	$crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
+        }
         if ($relation) {
-            $crud->viewFile = '@admin/views/ngrest/render/crud_relation.php';
+            $crud->viewFile = 'crud_relation.php';
         }
         return $ngrest->render($crud);
     }

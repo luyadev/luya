@@ -1,4 +1,4 @@
-# Admin CSS Styles
+# Admin CSS Styles
 
 This style guide is going to help you creating customized forms and buttons when working with the LUYA admin modules.
 
@@ -88,7 +88,7 @@ This style guide is going to help you creating customized forms and buttons when
 </div>
 ```
 
-#### Label above the form
+#### Label above the form
 
 By default all labels of forms are display on the left side with the input to the right. In order to use a the label above the input you can to the following: lediglich dem `.input` div die Klasse `.input--vertical` hinzufügen.  
   
@@ -105,7 +105,7 @@ Example form with label above:
 </div>
 ```
 
-## Icons
+## Icons
 
 We have implemented the google material design icons, you can check the reference for all icons [https://www.google.com/design/icons/](https://www.google.com/design/icons/).
 
@@ -255,7 +255,7 @@ You can use all the [Tables from Materialize](http://materializecss.com/table.ht
 </table>
 ```
 
-## Colors
+## Colors
 
 You can use the [Google Material Colors](https://www.google.com/design/spec/style/color.html#).  
 

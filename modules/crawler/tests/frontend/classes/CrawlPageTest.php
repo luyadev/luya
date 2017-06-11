@@ -7,7 +7,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class CrawlPageTest extends \PHPUnit_Framework_TestCase
 {
-    public $object = null;
+    public $object;
     
     protected function setUp()
     {

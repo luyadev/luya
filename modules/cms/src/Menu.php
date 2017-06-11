@@ -8,7 +8,7 @@ use ArrayAccess;
 use yii\base\Component;
 use yii\web\NotFoundHttpException;
 use yii\db\Query as DbQuery;
-use luya\cms\Exception;
+
 use luya\cms\menu\Query as MenuQuery;
 use luya\cms\models\NavItemModule;
 use luya\traits\CacheableTrait;
@@ -111,25 +111,25 @@ class Menu extends Component implements ArrayAccess
     /**
      * @var \luya\web\Request Request object
      */
-    public $request = null;
+    public $request;
     
     private $_cachePrefix = 'MenuContainerCache';
     
-    private $_currentUrlRule = null;
+    private $_currentUrlRule;
     
-    private $_composition = null;
+    private $_composition;
 
-    private $_current = null;
+    private $_current;
 
-    private $_currentAppendix = null;
+    private $_currentAppendix;
 
     private $_languageContainer = [];
 
-    private $_languages = null;
+    private $_languages;
 
-    private $_redirectMap = null;
+    private $_redirectMap;
     
-    private $_modulesMap = null;
+    private $_modulesMap;
     
     /**
      * Class constructor to DI the request object.
@@ -178,6 +178,7 @@ class Menu extends Component implements ArrayAccess
      * ArrayAccess get the current offset key if not yet loaded.
      *
      * @param string $offset Language short code to get
+     * @return array|mixed
      */
     public function offsetGet($offset)
     {
@@ -430,7 +431,7 @@ class Menu extends Component implements ArrayAccess
      */
     public function getHome()
     {
-        return (new MenuQuery())->where(['is_home' => '1'])->with('hidden')->one();
+        return (new MenuQuery())->where(['is_home' => 1])->with('hidden')->one();
     }
 
     /**
@@ -479,8 +480,8 @@ class Menu extends Component implements ArrayAccess
      * 2. find menu item based on the end of the current path (via array_pop)
      * 3. if no item could be found the home item will be returned
      * 4. otherwise return the alias match from step 2.
-     *
-     * @return \luya\cms\menu\Item
+     * @return Item
+     * @throws NotFoundHttpException
      */
     private function resolveCurrent()
     {
@@ -551,6 +552,7 @@ class Menu extends Component implements ArrayAccess
      * load all navigation items for a specific language id.
      *
      * @param integer $langId
+     * @return array
      */
     private function getNavData($langId)
     {
@@ -558,7 +560,7 @@ class Menu extends Component implements ArrayAccess
         ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
         ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
         ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
-        ->where(['nav.is_deleted' => 0, 'item.lang_id' => $langId, 'nav.is_offline' => 0, 'nav.is_draft' => 0])
+        ->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
         ->orderBy(['container' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
         ->indexBy('id')
         ->all();
@@ -606,6 +608,7 @@ class Menu extends Component implements ArrayAccess
      * helper method to see if the request url can be found in the active container.
      *
      * @param array $urlParts
+     * @return bool|Item
      */
     private function aliasMatch(array $urlParts)
     {
@@ -616,8 +619,8 @@ class Menu extends Component implements ArrayAccess
      * Helper method to load all contaienr data for a specific langauge.
      *
      * @param string $langShortCode e.g. de
-     * @throws Exception
      * @return array
+     * @throws NotFoundHttpException
      */
     private function loadLanguageContainer($langShortCode)
     {
