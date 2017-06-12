@@ -632,6 +632,10 @@
 		};
 
 		// controller logic
+		
+		$scope.dropItem = function(a,b,c) {
+			console.log('on drop', a,b,c);
+		}
 
 		$scope.toggleItem = function(data) {
 			if (data.toggle_open == undefined) {

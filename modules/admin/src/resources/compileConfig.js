@@ -27,6 +27,7 @@ module.exports = {
             "vendorlibs/angular-filter/angular-filter.min.js",
             "vendorlibs/angular-flow/ng-flow-standalone.min.js",
             "vendorlibs/ng-colorwheel/ng-colorwheel.js",
+            "js/dnd.js",
             "js/zaa.js",
             "js/services.js",
             "js/directives.js",

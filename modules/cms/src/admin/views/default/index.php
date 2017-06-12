@@ -2,16 +2,23 @@
 use \luya\cms\admin\Module;
 
 ?>
+<style>
+<!--
+.b-top { border-top:2px solid red; }
+.b-bottom { border-bottom:2px solid red; }
+.b-left { border-left:2px solid red; }
+.b-hover { background-color:green; }
+-->
+</style>
 <?= $this->render('_angulardirectives'); ?>
 <script type="text/ng-template" id="reverse2.html">
-    <span class="treeview__label treeview__label--page" ng-click="go(data)">
+    <span class="treeview__label treeview__label--page" ng-click="go(data)" dnd dnd-model="data" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'make-drag', onHover: 'b-hover', onHoverTop: 'b-top', onHoverMiddle: 'b-left', onHoverBottom: 'b-bottom'}">
         <span class="treeview__icon treeview__icon--collapse" ng-show="(menuData.items | menuparentfilter:catitem.id:data.id).length">
             <i class="material-icons">arrow_drop_down</i>
         </span>
         <span class="treeview__icon treeview__icon--right" ng-if="data.is_home==1">
             <i class="material-icons">home</i>
         </span>
-    
         <span class="treeview__link">
             <span class="google-chrome-font-offset-fix">{{data.title}}</span>
         </span>
