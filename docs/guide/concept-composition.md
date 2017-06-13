@@ -1,14 +1,15 @@
 # Composition Concept
 
-When deailing with multiple languages the {{\luya\web\Composition}} component is a powerfull tool to help building **multi lingual url rules**, generate websites with **locatisation prefixes** (like example.com/de/ch) or define domains which should automatic trigger a website language with **host info mapping**.
+When dealing with multiple language websites the {{\luya\web\Composition}} component is a powerfull tool to help building **multi lingual url rules**, generate websites with **localisation prefixes** (like www.example.com/de/ch) or define domains which should automatic trigger a website language trough **host info mapping**.
 
-To configure and setup the composition component you always have to open your application configuration file and update the composition in the components section. The below examples shows a very advanced use of the compoisition in order to show all possibilities.
+To configure and setup the composition component you have to open the application configuration file and update the composition component in the components section. The below examples shows a very advanced use of the composition in order to show all possibilities.
 
 ```php
 return [
     'components' => [
         // ...
         'composition' => [
+            'hidden' => false,
             'pattern' => '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>',
             'default' => [
                 'countryShortCode' => 'us',
@@ -25,13 +26,29 @@ return [
 ];
 ```
 
-The above example will generate language and country specific prefix urls for example `http://example.com/en-us/` and the `hostInfoMapping` domains who points to this website would have the predefined settings defined in the array.
+The above example will generate a language and country specific prefix urls for example `http://example.com/en-us/` and the `hostInfoMapping` domains who points to this website would have the predefined settings defined in the array.
 
-In order to access data from the composition component you can access the above configure patterns as followed:
+In order to access data from the composition component you can array access the composition component by its keys:
 
 ```php
 $langShortCode = Yii::$app->composition['langShortCode'];
 $countryShortCode = Yii::$app->composition['countryShortCode'];
 ```
 
-> Note: In the CMS context, the `langShortCode` is required by default and other patterns can be added if you like, but the langShortCode is bound to the CMS language tables from the database. When creating a luya website without CMS/ADMIN modules you can complet change those pattersn.
+> Note: In the CMS context, the **langShortCode** is **required** by default. Other patterns can be added, but the langShortCode is bound to the CMS language table from the database. When creating a LUYA website without the CMS module you can complet change those patterns.
+
+## Disable the Component
+
+When your website is not running in an multi lingual context you do not want to make use of the composition component you can turn it off by setting {{luya\web\Composition::hidden}} to true. As the Composition will be loaded always, you can only tell the component to **not** prefix your urls with the composition patterns.
+
+```php
+return [
+    'components' => [
+        // ...
+        'composition' => [
+            'hidden' => true,
+            'default' => ['langShortCode' => 'en'],
+        ]
+    ]
+];
+```
