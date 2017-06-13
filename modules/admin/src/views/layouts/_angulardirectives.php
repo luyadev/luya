@@ -129,7 +129,7 @@ use luya\admin\Module as Admin;
     </div>
 </script>
 
-<script type="text/ng-template" id="reverseFolders">
+<script type="text/ng-template" id="reverseFolders2">
 
     <i class="material-icons treeview__toggler filemanager__folder-toggleicon" ng-click="toggleFolderItem(folder)" ng-hide="folder.subfolder==0" ng-class="{'treeview__toggler--subnav-closed': folder.toggle_open!=1}">arrow_drop_down</i>
     <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-offset-top="-5">
@@ -191,362 +191,49 @@ use luya\admin\Module as Admin;
     </ul>
 </script>
 
+<script type="text/ng-template" id="reverseFolders">
+<span class="folders-text folders-label" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-position="right" ng-click="changeCurrentFolderId(folder.id)" >
+<span class="folders-folder-icon folders-folder-icon-open">
+    <i class="material-icons">folder_open</i>
+</span>
+<span class="folders-folder-icon">
+    <i class="material-icons">folder</i>
+</span>
+{{folder.name }}
+</span>
+<ul class="folders">
+    <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
+</ul>
+</script>
+
 <!-- FILEMANAGER -->
 <script type="text/ng-template" id="storageFileManager">
 <div class="filemanager"  ng-paste="pasteUpload($event)">
-
     <div class="row">
-
         <!-- Folders -->
         <div class="col filemanager-folders">
-
             <div class="btn btn-block text-left btn-success">
-                <span class="material-icons">add_box</span>
-                <span class="btn-icon-label">Create new folder</span>
+                <span class="material-icons">add</span>
+                <span class="btn-icon-label"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
             </div>
-
             <ul class="folders mt-4">
-
-                <li class="folders-item">
-                    <span class="folders-collapse">
-                        <i class="material-icons">keyboard_arrow_down</i>
-                    </span>
-
-                    <span class="folders-text folders-label">
+                <li class="folders-item" ng-class="{'is-active' : currentFolderId == 0}">
+                    <span class="folders-text folders-label" ng-click="changeCurrentFolderId(0)">
                         <span class="folders-folder-icon folders-folder-icon-open">
                             <i class="material-icons">folder_open</i>
                         </span>
                         <span class="folders-folder-icon">
                             <i class="material-icons">folder</i>
                         </span>
-
-                        Images
+                        <?= Admin::t('layout_filemanager_root_dir'); ?>
                     </span>
-                    <span class="folders-text folders-input">
-                        <input class="form-control" type="text" value="Images" id="change-folder-name" />
-                    </span>
-                    <span class="folders-text folders-confirm-delete-message">
-                        Delete forever?
-                    </span>
-
-                    <span class="folders-actions">
-
-                        <span class="folders-actions-default">
-                            <span class="folders-action-edit">
-                                <i class="material-icons">mode_edit</i>
-                            </span>
-
-                            <span class="folders-action-delete">
-                                <i class="material-icons">delete_forever</i>
-                            </span>
-                        </span>
-
-                        <span class="folders-actions-confirm">
-                            <span class="folders-action-save">
-                                <i class="material-icons">check</i>
-                            </span>
-
-                            <span class="folders-action-abort">
-                                <i class="material-icons">clear</i>
-                            </span>
-                        </span>
-
-                    </span>
-
                     <ul class="folders">
-
-                        <li class="folders-item is-active">
-                            <span class="folders-collapse"></span>
-
-                            <span class="folders-text folders-label">
-                                <span class="folders-folder-icon folders-folder-icon-open">
-                                    <i class="material-icons">folder_open</i>
-                                </span>
-                                <span class="folders-folder-icon">
-                                    <i class="material-icons">folder</i>
-                                </span>
-
-                                Images
-                            </span>
-                            <span class="folders-text folders-input">
-                                <input class="form-control" type="text" value="Images" id="change-folder-name" />
-                            </span>
-                            <span class="folders-text folders-confirm-delete-message">
-                                Delete forever?
-                            </span>
-
-                            <span class="folders-actions">
-
-                                <span class="folders-actions-default">
-                                    <span class="folders-action-edit">
-                                        <i class="material-icons">mode_edit</i>
-                                    </span>
-
-                                    <span class="folders-action-delete">
-                                        <i class="material-icons">delete_forever</i>
-                                    </span>
-                                </span>
-
-                                <span class="folders-actions-confirm">
-                                    <span class="folders-action-save">
-                                        <i class="material-icons">check</i>
-                                    </span>
-
-                                    <span class="folders-action-abort">
-                                        <i class="material-icons">clear</i>
-                                    </span>
-                                </span>
-
-                            </span>
-
-                        </li>
-
-                        <li class="folders-item">
-                            <span class="folders-collapse">
-                                <i class="material-icons">keyboard_arrow_down</i>
-                            </span>
-
-                            <span class="folders-text folders-label">
-                                <span class="folders-folder-icon folders-folder-icon-open">
-                                    <i class="material-icons">folder_open</i>
-                                </span>
-                                <span class="folders-folder-icon">
-                                    <i class="material-icons">folder</i>
-                                </span>
-
-                                Images
-                            </span>
-                            <span class="folders-text folders-input">
-                                <input class="form-control" type="text" value="Images" id="change-folder-name" />
-                            </span>
-                            <span class="folders-text folders-confirm-delete-message">
-                                Delete forever?
-                            </span>
-
-                            <span class="folders-actions">
-
-                                <span class="folders-actions-default">
-                                    <span class="folders-action-edit">
-                                        <i class="material-icons">mode_edit</i>
-                                    </span>
-
-                                    <span class="folders-action-delete">
-                                        <i class="material-icons">delete_forever</i>
-                                    </span>
-                                </span>
-
-                                <span class="folders-actions-confirm">
-                                    <span class="folders-action-save">
-                                        <i class="material-icons">check</i>
-                                    </span>
-
-                                    <span class="folders-action-abort">
-                                        <i class="material-icons">clear</i>
-                                    </span>
-                                </span>
-
-                            </span>
-
-                            <ul class="folders">
-
-                                <li class="folders-item">
-                                    <span class="folders-collapse"></span>
-
-                                    <span class="folders-text folders-label">
-                                        <span class="folders-folder-icon folders-folder-icon-open">
-                                            <i class="material-icons">folder_open</i>
-                                        </span>
-                                        <span class="folders-folder-icon">
-                                            <i class="material-icons">folder</i>
-                                        </span>
-
-                                        Images
-                                    </span>
-                                    <span class="folders-text folders-input">
-                                        <input class="form-control" type="text" value="Images" id="change-folder-name" />
-                                    </span>
-                                    <span class="folders-text folders-confirm-delete-message">
-                                        Delete forever?
-                                    </span>
-
-                                    <span class="folders-actions">
-
-                                        <span class="folders-actions-default">
-                                            <span class="folders-action-edit">
-                                                <i class="material-icons">mode_edit</i>
-                                            </span>
-
-                                            <span class="folders-action-delete">
-                                                <i class="material-icons">delete_forever</i>
-                                            </span>
-                                        </span>
-
-                                        <span class="folders-actions-confirm">
-                                            <span class="folders-action-save">
-                                                <i class="material-icons">check</i>
-                                            </span>
-
-                                            <span class="folders-action-abort">
-                                                <i class="material-icons">clear</i>
-                                            </span>
-                                        </span>
-
-                                    </span>
-
-                                </li>
-
-                                <li class="folders-item">
-                                    <span class="folders-collapse"></span>
-
-                                    <span class="folders-text folders-label">
-                                        <span class="folders-folder-icon folders-folder-icon-open">
-                                            <i class="material-icons">folder_open</i>
-                                        </span>
-                                        <span class="folders-folder-icon">
-                                            <i class="material-icons">folder</i>
-                                        </span>
-
-                                        Images
-                                    </span>
-                                    <span class="folders-text folders-input">
-                                        <input class="form-control" type="text" value="Images" id="change-folder-name" />
-                                    </span>
-                                    <span class="folders-text folders-confirm-delete-message">
-                                        Delete forever?
-                                    </span>
-
-                                    <span class="folders-actions">
-
-                                        <span class="folders-actions-default">
-                                            <span class="folders-action-edit">
-                                                <i class="material-icons">mode_edit</i>
-                                            </span>
-
-                                            <span class="folders-action-delete">
-                                                <i class="material-icons">delete_forever</i>
-                                            </span>
-                                        </span>
-
-                                        <span class="folders-actions-confirm">
-                                            <span class="folders-action-save">
-                                                <i class="material-icons">check</i>
-                                            </span>
-
-                                            <span class="folders-action-abort">
-                                                <i class="material-icons">clear</i>
-                                            </span>
-                                        </span>
-
-                                    </span>
-
-                                </li>
-
-                            </ul>
-
-                        </li>
-
+                        <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
                     </ul>
-
                 </li>
-
-                <li class="folders-item edit">
-                    <span class="folders-collapse">
-                    </span>
-
-                    <span class="folders-text folders-label">
-                        <span class="folders-folder-icon folders-folder-icon-open">
-                            <i class="material-icons">folder_open</i>
-                        </span>
-                        <span class="folders-folder-icon">
-                            <i class="material-icons">folder</i>
-                        </span>
-
-                        Edit mode
-                    </span>
-                    <span class="folders-text folders-input">
-                        <input class="form-control" type="text" value="Edit mode" id="change-folder-name" />
-                    </span>
-                    <span class="folders-text folders-confirm-delete-message">
-                        Delete forever?
-                    </span>
-
-                    <span class="folders-actions">
-
-                        <span class="folders-actions-default">
-                            <span class="folders-action-edit">
-                                <i class="material-icons">mode_edit</i>
-                            </span>
-
-                            <span class="folders-action-delete">
-                                <i class="material-icons">delete_forever</i>
-                            </span>
-                        </span>
-
-                        <span class="folders-actions-confirm">
-                            <span class="folders-action-save">
-                                <i class="material-icons">check</i>
-                            </span>
-
-                            <span class="folders-action-abort">
-                                <i class="material-icons">clear</i>
-                            </span>
-                        </span>
-
-                    </span>
-
-                </li>
-
-                <li class="folders-item delete">
-                    <span class="folders-collapse"></span>
-
-                    <span class="folders-text folders-label">
-                        <span class="folders-folder-icon folders-folder-icon-open">
-                            <i class="material-icons">folder_open</i>
-                        </span>
-                        <span class="folders-folder-icon">
-                            <i class="material-icons">folder</i>
-                        </span>
-
-                        Edit mode
-                    </span>
-                    <span class="folders-text folders-input">
-                        <input class="form-control" type="text" value="Edit mode" id="change-folder-name" />
-                    </span>
-                    <span class="folders-text folders-confirm-delete-message">
-                        Delete forever?
-                    </span>
-
-                    <span class="folders-actions">
-
-                        <span class="folders-actions-default">
-                            <span class="folders-action-edit">
-                                <i class="material-icons">mode_edit</i>
-                            </span>
-
-                            <span class="folders-action-delete">
-                                <i class="material-icons">delete_forever</i>
-                            </span>
-                        </span>
-
-                        <span class="folders-actions-confirm">
-                            <span class="folders-action-save">
-                                <i class="material-icons">check</i>
-                            </span>
-
-                            <span class="folders-action-abort">
-                                <i class="material-icons">clear</i>
-                            </span>
-                        </span>
-
-                    </span>
-
-                </li>
-
             </ul>
-
         </div>
         <!-- /Folders -->
-
         <!-- Files -->
         <div class="col filemanager-files">
 
@@ -558,40 +245,42 @@ use luya\admin\Module as Admin;
 
                         <div class="filemanager-file-actions-left">
 
-                            <div class="btn btn-success">
-                                <span class="material-icons">add_box</span>
-                                <span class="btn-icon-label">Add file</span>
+                            <div class="btn btn-success"  ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
+                                <span class="material-icons">file_upload</span>
+                                <span class="btn-icon-label"><?= Admin::t('layout_filemanager_upload_files'); ?></span>
+                            </div>
+                            <div class="btn">
+                                <input type="text"  ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />
                             </div>
 
                         </div>
 
                         <div class="filemanager-file-actions-right">
 
-                            <div class="btn btn-info">
+                            <div class="btn btn-info" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">
                                 <span class="material-icons">subdirectory_arrow_right</span>
-                                <span class="btn-icon-label">Move X files</span>
+                                <span class="btn-icon-label"><?= Admin::t('layout_filemanager_move_selected_files'); ?></span>
                             </div>
 
-                            <div class="btn btn-danger">
+                            <div class="btn btn-danger" ng-show="selectedFiles.length > 0" ng-click="removeFiles()">
                                 <span class="material-icons">delete_forever</span>
-                                <span class="btn-icon-label">Delete X files</span>
+                                <span class="btn-icon-label"><b>{{selectedFiles.length}}</b> <?= Admin::t('layout_filemanager_remove_selected_files'); ?></span>
                             </div>
 
                         </div>
-
                     </div>
-
                     <table class="table table-hover table-striped table-align-middle mt-4">
                         <thead class="thead-default">
                             <tr>
-                                <th>
-                                    <span>
+                                <th ng-hide="allowSelection == 'true'">
+                                    <span ng-click="toggleSelectionAll()">
                                         <i class="material-icons">done_all</i>
                                     </span>
                                 </th>
-                                <th></th>
+                                <th ng-if="selectedFileFromParent" style="width:15px;"></th>
+                                <th></th><!-- image thumbnail / file icon -->
                                 <th>
-                                    <span>Name</span>
+                                    <span><?= Admin::t('layout_filemanager_col_name'); ?></span>
                                     <div class="table-sorter table-sorter-up">
                                         <i class="material-icons">keyboard_arrow_up</i>
                                     </div>
@@ -600,7 +289,7 @@ use luya\admin\Module as Admin;
                                     </div>
                                 </th>
                                 <th>
-                                    <span>Type</span>
+                                    <span><?= Admin::t('layout_filemanager_col_type'); ?></span>
                                     <div class="table-sorter table-sorter-up">
                                         <i class="material-icons">keyboard_arrow_up</i>
                                     </div>
@@ -609,7 +298,7 @@ use luya\admin\Module as Admin;
                                     </div>
                                 </th>
                                 <th>
-                                    <span>Creation Date</span>
+                                    <span><?= Admin::t('layout_filemanager_col_date'); ?></span>
                                     <div class="table-sorter table-sorter-up">
                                         <i class="material-icons">keyboard_arrow_up</i>
                                     </div>
@@ -618,7 +307,7 @@ use luya\admin\Module as Admin;
                                     </div>
                                 </th>
                                 <th>
-                                    <span>File size</span>
+                                    <span><?= Admin::t('layout_filemanager_col_size'); ?></span>
                                     <div class="table-sorter table-sorter-up">
                                         <i class="material-icons">keyboard_arrow_up</i>
                                     </div>
@@ -627,7 +316,7 @@ use luya\admin\Module as Admin;
                                     </div>
                                 </th>
                                 <th class="tab-padding-right text-right">
-                                    <span class="crud-counter">9 files</span>
+                                    <span class="crud-counter">{{ (filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery).length }} files</span>
                                 </th>
                             </tr>
                         </thead>
@@ -645,6 +334,7 @@ use luya\admin\Module as Admin;
                                         <span class="custom-control-indicator"></span>
                                     </label>
                                 </th>
+
                     <td ng-if="selectedFileFromParent">
                        <span class="custom-control-indicator"></span>
                     </td>
@@ -656,7 +346,7 @@ use luya\admin\Module as Admin;
                     <td>{{file.extension}}</td>
                     <td>{{file.uploadTimestamp * 1000 | date:"short"}}</td>
                     <td>{{file.sizeReadable}}</td>
-                    <td>
+                    <td class="text-right">
 						<button type="button" class="btn btn-sm btn-link btn-icon" ng-click="openFileDetail(file)">
                                         <i class="material-icons">more_vert</i>
                                     </button></td>
@@ -745,19 +435,12 @@ use luya\admin\Module as Admin;
                                 </div>
                             </div>
                         </form>
-
                     </div>
-
                 </div>
-
             </div>
-
-
         </div>
         <!-- /Files -->
-
     </div>
-
 </div>
 </script>
 
