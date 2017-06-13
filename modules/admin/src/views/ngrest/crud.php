@@ -38,7 +38,7 @@ $this->beginBody();
                 </div>
             </div>
         <?php endif; ?>
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link" ng-class="{'active':crudSwitchType==0}" ng-click="switchTo(0, true)">
                     <i class="material-icons">list</i>
@@ -63,7 +63,7 @@ $this->beginBody();
                     <span ng-click="switchToTab(btn)">{{btn.name}} #{{btn.id}}</span>
                 </a>
             </li>
-            <li class="nav-item nav-item-border-only" ng-repeat="lang in AdminLangService.data" ng-class="{'ml-auto' : $first}">
+            <li class="nav-item nav-item-alternative" ng-repeat="lang in AdminLangService.data" ng-class="{'ml-auto' : $first}">
                 <a class="nav-link" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" role="tab">
                     <span class="flag flag--{{lang.short_code}}">
                         <span class="flag__fallback">{{lang.name}}</span>
