@@ -1,6 +1,6 @@
 # Composition Concept
 
-When deailing with multiple languages the {{\luya\web\Composition}} component is a powerfull tool to help building **multi lingual url rules**, generate websites with **locatisation prefixes** (like example.com/de/ch), define domains which should automatic trigger a website language with **host info mapping**.
+When deailing with multiple languages the {{\luya\web\Composition}} component is a powerfull tool to help building **multi lingual url rules**, generate websites with **locatisation prefixes** (like example.com/de/ch) or define domains which should automatic trigger a website language with **host info mapping**.
 
 To configure and setup the composition component you always have to open your application configuration file and update the composition in the components section. The below examples shows a very advanced use of the compoisition in order to show all possibilities.
 
