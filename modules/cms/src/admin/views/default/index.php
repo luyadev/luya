@@ -12,19 +12,19 @@ use \luya\cms\admin\Module;
 </style>
 <?= $this->render('_angulardirectives'); ?>
 <script type="text/ng-template" id="reverse2.html">
-    <span class="treeview__label treeview__label--page" ng-click="go(data)" dnd dnd-model="data" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-isvalid="validItem(hover,dragged)" dnd-css="{onDrag: 'make-drag', onHover: 'b-hover', onHoverTop: 'b-top', onHoverMiddle: 'b-left', onHoverBottom: 'b-bottom'}">
-        <span class="treeview__icon treeview__icon--collapse" ng-show="(menuData.items | menuparentfilter:catitem.id:data.id).length">
+    <span class="treeview__label treeview__label--page" dnd dnd-model="data" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-isvalid="validItem(hover,dragged)" dnd-css="{onDrag: 'make-drag', onHover: 'b-hover', onHoverTop: 'b-top', onHoverMiddle: 'b-left', onHoverBottom: 'b-bottom'}">
+        <span class="treeview__icon treeview__icon--collapse" ng-show="(menuData.items | menuparentfilter:catitem.id:data.id).length"  ng-click="toggleItem(data)">
             <i class="material-icons">arrow_drop_down</i>
         </span>
         <span class="treeview__icon treeview__icon--right" ng-if="data.is_home==1">
             <i class="material-icons">home</i>
         </span>
-        <span class="treeview__link">
+        <span class="treeview__link" ng-click="go(data)" >
             <span class="google-chrome-font-offset-fix">{{data.title}}</span>
         </span>
     </span>
     <ul class="treeview__items">
-        <li class="treeview__item" ng-class="{'treeview__item--isoffline' : data.is_offline, 'treeview__item--ishidden': data.is_hidden, 'treeview__item--has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse2.html'" />
+        <li class="treeview__item" ng-class="{'treeview__item--isoffline' : data.is_offline, 'treeview__item--collapsed': !data.toggle_open, 'treeview__item--ishidden': data.is_hidden, 'treeview__item--has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse2.html'" />
     </ul>
 </script>
 <div class="luya__subnav">
@@ -69,7 +69,7 @@ use \luya\cms\admin\Module;
                     <span class="treeview__link"><span class="google-chrome-font-offset-fix">{{catitem.alias}}</span></span>
                 </div>
                 <ul class="treeview__items">
-                    <li class="treeview__item" ng-class="{'treeview__item--isoffline' : data.is_offline, 'treeview__item--ishidden': data.is_hidden, 'treeview__item--has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'reverse2.html'" />
+                    <li class="treeview__item" ng-class="{'treeview__item--isoffline' : data.is_offline, 'treeview__item--collapsed': !data.toggle_open, 'treeview__item--ishidden': data.is_hidden, 'treeview__item--has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'reverse2.html'" />
                 </ul>
             </li>
         </ul>
