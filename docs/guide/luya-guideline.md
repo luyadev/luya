@@ -1,6 +1,6 @@
 # Developer Guidelines
 
-Below some rules how to deail with documentations, linking or using the php docs.
+Below some rules how to deal with documentations, linking or using the php docs.
 
 ## Documentation & Guide
 
