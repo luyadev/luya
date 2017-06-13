@@ -633,9 +633,92 @@
 
 		// controller logic
 		
-		$scope.dropItem = function(a,b,c) {
-			console.log('on drop', a,b,c);
+		$scope.dropItem = function(drag,drop,pos) {
+			if (pos == 'bottom') {
+				var api = 'admin/api-cms-navitem/move-after';
+				var params = {moveItemId: drag.id, droppedAfterItemId: drop.id};
+			} else if (pos == 'top') {
+				var api = 'admin/api-cms-navitem/move-before';
+				var params = {moveItemId: drag.id, droppedBeforeItemId: drop.id};
+
+			} else if (pos == 'middle') {
+				var api = 'admin/api-cms-navitem/move-to-child';
+				var params = {moveItemId: drag.id, droppedOnItemId: drop.id};
+
+			}
+			
+			$http.get(api, { params : params }).then(function(success) {
+				ServiceMenuData.load(true);
+			}, function(error) {
+				console.log(error);
+				console.log('throw error message errorMessageOnDuplicateAlias');
+				ServiceMenuData.load(true);
+			});
+			
+			/*
+			$http.get(api, { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).then(function(r) {
+				ServiceMenuData.load(true);
+			}, function(r) {
+				$scope.errorMessageOnDuplicateAlias(r.data);
+				ServiceMenuData.load(true);
+			});
+			*/
+			/*
+			$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).then(function(r) {
+				ServiceMenuData.load(true);
+			}, function(r) {
+				$scope.errorMessageOnDuplicateAlias(r.data);
+				ServiceMenuData.load(true);
+			});
+			 $scope.onBeforeDrop = function($event, $ui) {
+	    	var itemid = $($event.target).data('itemid');
+			$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).then(function(r) {
+				ServiceMenuData.load(true);
+			}, function(r) {
+				$scope.errorMessageOnDuplicateAlias(r.data);
+				ServiceMenuData.load(true);
+			});
+	    }
+
+	    $scope.onAfterDrop = function($event, $ui) {
+	    	var itemid = $($event.target).data('itemid');
+			$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).then(function(r) {
+				ServiceMenuData.load(true);
+			}, function(r) {
+				$scope.errorMessageOnDuplicateAlias(r.data);
+				ServiceMenuData.load(true);
+			});
+	    }
+
+			*/
+		};
+		
+		$scope.validItem = function(hover, draged) {
+			
+			if (hover.id == draged.id) {
+				return false;
+			}
+			
+			$scope.rritems = [];
+			$scope.recursivItemValidity(draged.nav_container_id, draged.id);
+			
+			if ($scope.rritems.indexOf(hover.id) == -1) {
+				return true;
+			}
+			
+			return false;
 		}
+		
+		$scope.rritems = [];
+		
+		$scope.recursivItemValidity = function(containerId, parentNavId) {
+			var items = $filter('menuparentfilter')($scope.menuData.items, containerId, parentNavId);
+			
+			angular.forEach(items, function(item) {
+				$scope.rritems.push(item.id);
+				$scope.recursivItemValidity(containerId, item.id);
+			});
+		};
 
 		$scope.toggleItem = function(data) {
 			if (data.toggle_open == undefined) {

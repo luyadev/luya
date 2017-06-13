@@ -24,16 +24,19 @@ angular.module('dnd', [])
 /**
  * Usage:
  * 
- * dnd dnd-model="data" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
+ * dnd dnd-model="data" dnd-isvalid="isValid(hover,dragged)" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
  */
 .directive('dnd', function(dndFactory) {
 	return {
 		scope: {
 			dndModel : '=',
 			dndCss : '=',
-			dndOndrop : '&'
+			dndOndrop : '&',
+			dndIsvalid : '&'
 		},
 		link: function(scope, element) {
+			var isValid = true;
+			
 	        // this gives us the native JS object
 	        var dragable = element[0];
 	
@@ -44,6 +47,7 @@ angular.module('dnd', [])
 	        dragable.addEventListener(
 	            'dragstart',
 	            function(e) {
+	            	isValid = true;
 	            	dndFactory.content(scope.dndModel);
 	            	dndFactory.elmnSet(dragable);
 	                this.classList.add(scope.dndCss.onDrag);
@@ -72,12 +76,12 @@ angular.module('dnd', [])
     		        // allows us to drop
     		        if (e.preventDefault) { e.preventDefault(); }
     		        
-    		        var dragelement = dndFactory.elmnGet();
-    		        
-    		        console.log(dragelement.contains(el));
-    		        
-    		        //var isChild = element.has(e.target).length > 0;
-                    //var isSelf = el == e.target;
+    		        	if (!scope.dndIsvalid({hover:  scope.dndModel, dragged: dndFactory.get().content})) {
+    		        		e.stopPropagation();
+    		        		e.preventDefault();
+    		        		isValid = false;
+    		        		return false;
+    		        	}
     		        
                     var re = el.getBoundingClientRect();
 
@@ -138,9 +142,11 @@ angular.module('dnd', [])
     		        this.classList.remove(scope.dndCss.onHoverTop);
     		        this.classList.remove(scope.dndCss.onHoverMiddle);
     		        this.classList.remove(scope.dndCss.onHoverBottom);
-                	scope.$apply(function() {
-                		scope.dndOndrop({dragged: dndFactory.get().content, dropped: scope.dndModel, position: dndFactory.get().pos});
-                	});
+    		        if (isValid) {
+	                	scope.$apply(function() {
+	                		scope.dndOndrop({dragged: dndFactory.get().content, dropped: scope.dndModel, position: dndFactory.get().pos});
+	                	});
+    		        }
                 	return false;
                 },
                 false
