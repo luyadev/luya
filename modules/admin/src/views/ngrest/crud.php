@@ -72,7 +72,7 @@ $this->beginBody();
             </li>
         </ul>
     <?php endif; ?>
-    <div class="tab-content" ng-if="service">
+    <div class="tab-content">
         <?php if (!$relationCall): ?>
         <div class="tab-pane" ng-repeat="btn in tabService.tabs" ng-class="{'active' : btn.active}" ng-if="btn.active">
             <crud-relation-loader api="{{btn.api}}" array-index="{{btn.arrayIndex}}" model-class="{{btn.modelClass}}" id="{{btn.id}}"></crud-relation-loader>

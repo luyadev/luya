@@ -11,25 +11,24 @@
     		},
     		controller: function($scope) {
 
-    			$scope.showWindow = false;
+    			$scope.input = { showWindow : true};
 
     			$scope.content = null;
 
     			$scope.toggleWindow = function() {
-    				if (!$scope.showWindow) {
+    				if ($scope.input.showWindow) {
     					$http.get($scope.api+'/?inline=1').then(function(response) {
     						$scope.content = $sce.trustAsHtml(response.data);
-    						$scope.showWindow = true;
-    						console.log($scope.content);
-    					})
+    						$scope.input.showWindow = false;
+    					});
     				} else {
     					$scope.$parent.loadService();
-    					$scope.showWindow = false;
+    					$scope.input.showWindow = true;
     				}
     			}
     		},
     		template: function() {
-    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="!showWindow" title="crud"><div compile-html ng-bind-html="content"></div></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" title="crud"><div compile-html ng-bind-html="content"></modal></div>';
     		}
     	}
     });
