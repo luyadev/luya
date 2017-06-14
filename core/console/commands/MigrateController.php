@@ -150,15 +150,13 @@ class MigrateController extends \yii\console\controllers\MigrateController
             $applied[substr($version, 1, 13)] = true;
         }
 
-        $moduleMigrationDirs = array();
+        $moduleMigrationDirs = $this->migrationPath;
 
         if (count($this->moduleMigrationDirectories) > 0) {
             foreach ($this->moduleMigrationDirectories as $name => $dir) {
                 $moduleMigrationDirs[] = $dir;
             }
         }
-
-        $moduleMigrationDirs[] = $this->migrationPath;
 
         $migrations = [];
 
