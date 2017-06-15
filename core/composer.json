@@ -16,7 +16,7 @@
         "issues" : "https://github.com/luyadev/luya/issues"
     },
     "require" : {
-        "yiisoft/yii2": "~2.0.0",
+        "yiisoft/yii2": "2.0.12",
         "curl/curl" : "^1.3",
         "phpmailer/phpmailer": "^5.2",
         "luyadev/luya-composer" : "~1.0.0"
