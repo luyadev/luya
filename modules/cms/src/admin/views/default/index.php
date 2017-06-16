@@ -75,4 +75,4 @@ use \luya\cms\admin\Module;
         </ul>
     </div>
 </div>
-<div class="luya__content" ui-view />
+<div class="luya__content luya__content--cmsadmin" ui-view />
