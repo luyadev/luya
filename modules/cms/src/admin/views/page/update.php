@@ -68,15 +68,15 @@
                             </div>
                             <div class="blockholder-group blockholder-group-favorites" ng-repeat="item in blocksData | orderBy:'groupPosition'" >
                                 <span class="blockholder-group-title">
-                                    <i class="material-icons">favorite</i>
+                                    <i class="material-icons" ng-if="item.group.is_fav">favorite</i>
                                     <span>{{item.group.name}}</span>
                                 </span>
                                 <ul class="blockholder-list">
                                     <li class="blockholder-item" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}">
-                                        <!-- <i class="material-icons blockholder-icon">subject</i> -->
-                                        <span ng-bind-html="safe(block.full_name)"></span>
+                                        <i class="material-icons blockholder-icon">{{block.icon}}</i>
+                                        <span>{{block.name}}</span>
 
-                                        <button class="blockholder-favorite">
+                                        <button class="blockholder-favorite" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">
                                             <i class="material-icons">favorite</i>
                                         </button>
                                     </li>
