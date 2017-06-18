@@ -1,36 +1,40 @@
 # Menu Component
 
-The {{\luya\cms\Menu}} component allows you to collect data to build the websites navigations. The menu component is part of the `cms` module.
+The {{\luya\cms\Menu}} component allows you to build the websites navigations. The menu component is part of the **cms** module.
 
-You can access the {{\luya\cms\Menu}} component trough `Yii::$app->menu`. This component will help you to create menus, find childs, get items of containers, etc. The menu component will automatically registered as component when you the CMS Module to your config (menu component is part of the cms module).
+You can access the {{\luya\cms\Menu}} component trough `Yii::$app->menu`. This component help you to create menus, find childs, get items of containers, get propertie data and much more. The menu component is automatically registered when adding the CMS Module to your config.
 
-When you request a menu item you will always get a {{\luya\cms\menu\Item}} object which provides a lot of getter methods.
+When you request a menu item, you will always get a {{\luya\cms\menu\Item}} object which provides a lot of getter methods.
 
-The menu component will automatic load the current active menu items based on your current language which will be evulated by the {{\luya\web\Composition}} component.
+The menu component automatically loads the {{\luya\cms\Menu::getCurrent}} active menu item based on your current language which will be evaluated by the {{\luya\web\Composition}} component.
 
 ## Get the current Page
 
-One of the most important features is to get the current active menu item, to access this {{\luya\cms\Menu}} you can use {{\luya\cms\Menu::getCurrent}}.
+One of the most important features is to get the current active menu item, to retrieve the current menu object use {{\luya\cms\Menu::getCurrent}}. 
 
 ```php
 echo Yii::$app->menu->current->link; // equal: Yii::$app->menu->getCurrent()->getLink():
 ```
 
-Where {{\luya\cms\Menu::getCurrent}} returns a {{\luya\cms\menu\Item}} you can access other informations then {{\luya\cms\menu\Item::getLink}}, {{\luya\cms\menu\Item::getTitle}} etc.
+Where {{\luya\cms\Menu::getCurrent}} returns a {{\luya\cms\menu\Item}} you can access other informations like {{\luya\cms\menu\Item::getLink}}, {{\luya\cms\menu\Item::getTitle}} etc.
 
 ## Get the Homepage
 
-To get the homepage us the {{\luya\cms\Menu::getHome}} property which will return a {{\luya\cms\menu\Item}}.
+To get the homepage object use {{\luya\cms\Menu::getHome}} method which will return a {{\luya\cms\menu\Item}} as well.
 
 ```php
 echo Yii::$app->menu->home->title; // equal: Yii::$app->menu->getHome()->getTitle();
 ```
 
-## Build menu Navigations
+## Building menu Navigations
+
+To list navigation data of the menu use the {{\luya\cms\Menu::find}} method which returns a {{\luya\cms\menu\Query}} object you can defined where statements and return either {{\luya\cms\menu\Query::one}}, {{\luya\cms\menu\Query::all}} or {{\luya\cms\menu\Query::count}}. To shorten you can use the {{\luya\cms\Menu::findAll}} or {{\luya\cms\Menu::findOne}} method.
+
+Using {{\luya\cms\menu\Query::one}} or {{\luya\cms\Menu::findOne}} return an {{\luya\cms\menu\Item}}. Foreachable responses from {{\luya\cms\menu\Query::all}} or {{\luya\cms\Menu::findAll}} return an {{\luya\cms\menu\Iterator}} instead.
 
 #### findAll()
 
-To list navigation data of the menu use the {{\luya\cms\Menu::find}} method (which is somehwat equilvalent implementation of Yii2 ActiveRecord pattern) you can use the {{\luya\cms\Menu::findAll}} method. This will return and array iterator you can foreach based on an where expression. Below a very common example of how to build a menu with one level:
+A common basic example to retrieve all menu items from the root level of a navigation using {{\luya\cms\Menu::findAll}}:
 
 ```php
 <ul>
