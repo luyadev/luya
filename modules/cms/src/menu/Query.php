@@ -68,6 +68,27 @@ class Query extends Object
 
         return $this->_menu;
     }
+    
+    /**
+     * Helper method to retrieve only the root elements for a given query.
+     *
+     * @return \luya\cms\menu\Query
+     */
+    public function root()
+    {
+    	return $this->where(['parent_nav_id' => 0]);
+    }
+    
+    /**
+     * Helper method to define the container to retrieve all elements from.
+     *
+     * @param string $alias The alias name from a given container to retrieve items from.
+     * @return \luya\cms\menu\Query
+     */
+    public function container($alias)
+    {
+    	return $this->where(['container' => $alias]);
+    }
 
     private $_where = [];
 
