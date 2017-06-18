@@ -1,14 +1,13 @@
 <script type="text/ng-template" id="recursion.html">
 <h4 class="cmsadmin-container-title">{{placeholder.label}}</h4>
-    <div class="card">
-        <div class="card-block">
+<div class="card">
+	<div class="card-block">
                     <div class="block" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
                         <div class="block-toolbar">
                             <div class="toolbar-item">
                                 <!-- <i class="material-icons">title</i>-->
                                 <span ng-bind-html="safe(block.full_name)"></span>
                             </div>
-
                             <div class="toolbar-item ml-auto">
                                 <button class="toolbar-button">
                                     <i class="material-icons">content_copy</i>
@@ -24,14 +23,23 @@
                                     <i class="material-icons">delete</i>
                                 </button>
                             </div>
-                            <div class="toolbar-item">
-                                <button class="toolbar-button">
-                                    <i class="material-icons">clear</i>
+							<div ng-show="isEditable()" ng-click="toggleEdit()" class="toolbar-item">
+								<button class="toolbar-button">
+                                    <i class="material-icons">edit</i>
                                 </button>
-                            </div>
+							</div>
                         </div>
-                        <div class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
+						<modal is-modal-hidden="!edit" title="Settings">
+							<form class="block__edit" ng-if="edit || config" ng-submit="save()">
+								<div ng-repeat="field in block.vars" ng-hide="field.invisible">
+                        			<zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
+                    			</div>
+								<button type="submit"><i class="material-icons left">done</i></button>
+							</form>
+						</modal>
+                        <div ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
                     </div>
+
     </div>
 </div>  
 </script>
