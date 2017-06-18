@@ -32,13 +32,22 @@ To list navigation data of the menu use the {{\luya\cms\Menu::find}} method whic
 
 Using {{\luya\cms\menu\Query::one}} or {{\luya\cms\Menu::findOne}} return an {{\luya\cms\menu\Item}}. Foreachable responses from {{\luya\cms\menu\Query::all}} or {{\luya\cms\Menu::findAll}} return an {{\luya\cms\menu\Iterator}} instead.
 
-#### findAll()
+#### find()
 
-A common basic example to retrieve all menu items from the root level of a navigation using {{\luya\cms\Menu::findAll}}:
+As Navigations are stored in containers you mostly want to return the root level of a navigation inside a specific container, where default is the standard container which is initialized when setting up LUYA with the CMS module:
 
 ```php
 <ul>
-<?php foreach (Yii::$app->menu->findAll(['parent_nav_id' => 0]) as $item): ?>
+<?php foreach (Yii::$app->menu->find()->container('default')->root()->all() as $item): ?>
+    <li><a href="<?= $item->link;"><?= $item->title; ?></a>
+<?php endforeach; ?>
+</ul>
+```
+Which is equals to the {{\luya\cms\Menu::findAll}} method with where parameters:
+
+```php
+<ul>
+<?php foreach (Yii::$app->menu->findAll(['parent_nav_id' => 0, 'container' => 'default']) as $item): ?>
     <li><a href="<?= $item->link;"><?= $item->title; ?></a>
 <?php endforeach; ?>
 </ul>
@@ -50,28 +59,35 @@ You can also add more where parameters by adding another key with value expressi
 findAll(['parent_nav_id' => 0, 'container' => 'footer']);
 ```
 
-#### find()
+#### where()
 
-Sometimes you are looking for more complex operator expression there for you can build menu query with the {{\luya\cms\Menu::find}} method:
+You can also use where expression to customize the menu output:
 
 ```php
 Yii::$app->menu->find()->where(['!=', 'is_active', 0])->andWhere(['==', 'parent_nav_id', 0])->all();
 ```
 
-Therefore you can use different operators inside the where query:
+Using in conditions:
 
-|Operator |Equals
+```php
+Yii::$app->menu->find()->where(['in', 'id', [1,2,3,4,5,6]])->all();
+```
+
+The following where operators are available inside a condition:
+
+|Operator|Equals
 |---|---
-|<= | Smaller as and equal
-|<  | Smaller as
-|>  | Bigger as
-|>= | Bigger as and equal
-|=  | Equals
-|== | Equal and type comparison
+|<= |Smaller as and equal
+|<  |Smaller as
+|>  |Bigger as
+|>= |Bigger as and equal
+|=  |Equals
+|== |Equal and type comparison
+|in |Whether a value is in the array definition
 
 #### findOne()
 
-To retrieve just a single menu item from the menu component based on parameters, you can use the {{\luya\cms\Menu::findOne}} method:
+To retrieve just a single menu item from the menu component based on *equal* where condition, you can use the {{\luya\cms\Menu::findOne}} method:
 
 ```php
 echo Yii::$app->menu->findOne(['id' => 1])->link;
