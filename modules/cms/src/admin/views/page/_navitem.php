@@ -49,8 +49,7 @@
     </li>
     <li class="nav-item nav-item-alternative">
         <a class="nav-link" href="#en" role="tab">
-            <i class="material-icons">add</i>
-            New Version
+            <i class="material-icons">add_box</i>
         </a>
     </li>
     <li class="nav-item nav-item-alternative nav-item-icon ml-auto">

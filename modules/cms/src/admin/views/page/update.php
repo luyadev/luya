@@ -1,4 +1,27 @@
-<div class="cmsadmin" ng-controller="NavController" ng-show="!isDeleted">
+<div class="cmsadmin" ng-controller="NavController" ng-show="!isDeleted" ng-init="settingsOverlay=true">
+
+	<modal is-modal-hidden="settingsOverlay" title="Settings">
+		<div class="card text-center">
+		  <div class="card-header">
+		    <ul class="nav nav-tabs card-header-tabs">
+		      <li class="nav-item">
+		        <a class="nav-link active" href="#">Active</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">Link</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link disabled" href="#">Disabled</a>
+		      </li>
+		    </ul>
+		  </div>
+		  <div class="card-block">
+		    <h4 class="card-title">Special title treatment</h4>
+		    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+		    <a href="#" class="btn btn-primary">Go somewhere</a>
+		  </div>
+		</div>
+	</modal>
         <? if(isset($_GET['preview'])): ?>
         <div class="row">
             <div class="col cmsadmin-frame-wrapper">
@@ -10,41 +33,37 @@
                     <div class="col">
                         <div class="cmsadmin-toolbar">
                             <div class="toolbar-item">
-                                <i class="material-icons">home</i>
-                                <span>Homepage</span>
-                            </div>
-                            <div class="toolbar-item">
                                 <label class="switch" for="switch-visibility-status">
-                                    <span class="switch__switch">
-                                        <input class="switch__checkbox" type="checkbox" id="switch-visibility-status"/>
-                                        <span class="switch__control"></span>
+                                	<span class="switch__label">
+                                        <i class="material-icons" ng-show="!navData.is_hidden">visibility</i>
+                                        <i class="material-icons" ng-show="navData.is_hidden">visibility_off</i>
                                     </span>
-                                    <span class="switch__label">
-                                        <i class="material-icons">visibility</i>
-                                        <span>Visible</span>
+                                    <span class="switch__switch">
+                                        <input class="switch__checkbox"  ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1" type="checkbox" id="switch-visibility-status"/>
+                                        <span class="switch__control"></span>
                                     </span>
                                 </label>
                             </div>
                             <div class="toolbar-item">
                                 <label class="switch" for="switch-online-status">
-                                    <span class="switch__switch">
-                                        <input class="switch__checkbox" type="checkbox" id="switch-online-status"/>
-                                        <span class="switch__control"></span>
-                                    </span>
                                     <span class="switch__label">
-                                        <i class="material-icons">cloud</i>
-                                        <span>Online</span>
+                                        <i class="material-icons" ng-show="!navData.is_offline">cloud_queue</i>
+                                        <i class="material-icons" ng-show="navData.is_offline">cloud_off</i>
+                                    </span>
+                                    <span class="switch__switch">
+                                        <input class="switch__checkbox" type="checkbox" id="switch-online-status" ng-model="navData.is_offline" ng-true-value="0" ng-false-value="1"/>
+                                        <span class="switch__control"></span>
                                     </span>
                                 </label>
                             </div>
-                            <div class="toolbar-item" ng-class="{'ml-auto':$first}" ng-repeat="lang in AdminLangService.data">
-                                <button class="toolbar-button toolbar-button-flag active">
+                            <div class="toolbar-item" ng-class="{'ml-auto':$first}" ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)">
+                                <button class="toolbar-button toolbar-button-flag" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" >
                                     <span class="flag flag--{{lang.short_code}}">
                                         <span class="flag__fallback">{{lang.name}}</span>
                                     </span>
                                 </button>
                             </div>
-                            <div class="toolbar-item">
+                            <div class="toolbar-item" ng-click="settingsOverlay=!settingsOverlay">
                                 <button class="toolbar-button">
                                     <i class="material-icons">more_vert</i>
                                 </button>
