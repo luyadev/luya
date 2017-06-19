@@ -429,13 +429,15 @@
 
 .treeview {
   display: block;
+  font-size: 14px;
+  font-size: 0.93333rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none;
-  list-style: none;
-  margin: 0;
-  padding: 0; }
+          user-select: none; }
 
 .treeview__container {
   display: block;
@@ -449,8 +451,6 @@
   margin: 0;
   padding: 0;
   position: relative; }
-  .treeview__container > .treeview__items {
-    padding-left: 15px; }
   .treeview__item > .treeview__items {
     margin-left: 15px; }
   .treeview__item--collapsed > .treeview__items {
@@ -478,6 +478,8 @@
     left: -4px;
     position: absolute;
     top: 0; }
+  .treeview__item--lvl1:before, .treeview__item--lvl1:after {
+    display: none; }
   .treeview__item:last-child:after {
     display: none; }
   .treeview__item--has-children:before {
@@ -511,25 +513,30 @@
     opacity: .5; }
 
 .treeview__icon {
-  font-size: 24px;
-  font-size: 1.6rem;
-  height: 24px;
+  font-size: 18px;
+  font-size: 1.2rem;
+  height: 18px;
   left: 0;
   line-height: 1;
   position: absolute;
-  top: 0;
-  width: 24px; }
+  top: 3px;
+  width: 18px; }
   .treeview__icon--right {
     left: auto;
     right: 10px; }
   .treeview__icon--collapse {
+    top: 0;
     cursor: pointer;
+    font-size: 24px;
+    font-size: 1.6rem;
+    height: 24px;
+    width: 24px;
     -webkit-transition: .25s ease-in-out transform;
     transition: .25s ease-in-out transform; }
     .treeview__item--collapsed .treeview__icon--collapse {
-      -webkit-transform: rotate(-90deg) translateX(1px);
-          -ms-transform: rotate(-90deg) translateX(1px);
-              transform: rotate(-90deg) translateX(1px); }
+      -webkit-transform: rotate(-90deg) translateX(-1px);
+          -ms-transform: rotate(-90deg) translateX(-1px);
+              transform: rotate(-90deg) translateX(-1px); }
   .treeview__icon .material-icons {
     display: block; }
 

@@ -68,8 +68,8 @@ use \luya\cms\admin\Module;
                     </span>
                     <span class="treeview__link"><span class="google-chrome-font-offset-fix">{{catitem.alias}}</span></span>
                 </div>
-                <ul class="treeview__items">
-                    <li class="treeview__item" ng-class="{'treeview__item--isoffline' : data.is_offline, 'treeview__item--collapsed': !data.toggle_open, 'treeview__item--ishidden': data.is_hidden, 'treeview__item--has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'reverse2.html'" />
+                <ul class="treeview__items treeview__items--lvl1">
+                    <li class="treeview__item treeview__item--lvl1" ng-class="{'treeview__item--isoffline' : data.is_offline, 'treeview__item--collapsed': !data.toggle_open, 'treeview__item--ishidden': data.is_hidden, 'treeview__item--has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'reverse2.html'" />
                 </ul>
             </li>
         </ul>

@@ -2,7 +2,7 @@ module.exports = {
     "configs": {
         "enableBrowserSync": false,
         "pxtorem": {
-            "baseFontSize": 15,
+            "baseFontSize": 16,
             "selectorBlackList": [/^html$/]
         }
     },

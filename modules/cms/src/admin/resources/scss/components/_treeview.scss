@@ -4,10 +4,11 @@
 
 .treeview {
     display: block;
-    user-select: none;
+    font-size: 14px;
     list-style: none;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 // ==================================================
@@ -32,15 +33,12 @@
     padding: 0;
     position: relative;
 
-    .treeview__container > & {
-        padding-left: 15px;
-    }
-
     // Add indention if child of treeview__item
     .treeview__item > & {
         margin-left: 15px;
     }
 
+    // Hide if collapsed
     .treeview__item--collapsed > & {
         display: none;
     }
@@ -71,6 +69,11 @@
         left: -4px;
         position: absolute;
         top: 0;
+    }
+
+    &--lvl1:before,
+    &--lvl1:after {
+        display: none;
     }
 
     &:last-child:after {
@@ -120,13 +123,13 @@
 }
 
 .treeview__icon {
-    font-size: 24px;
-    height: 24px;
+    font-size: 18px;
+    height: 18px;
     left: 0;
     line-height: 1;
     position: absolute;
-    top: 0;
-    width: 24px;
+    top: 3px;
+    width: 18px;
 
     &--right {
         left: auto;
@@ -134,11 +137,15 @@
     }
 
     &--collapse {
+        top: 0;
         cursor: pointer;
+        font-size: 24px;
+        height: 24px;
+        width: 24px;
         transition: .25s ease-in-out transform;
 
         .treeview__item--collapsed & {
-            transform: rotate(-90deg) translateX(1px);
+            transform: rotate(-90deg) translateX(-1px);
         }
     }
 
