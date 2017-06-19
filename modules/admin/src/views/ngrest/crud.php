@@ -114,7 +114,7 @@ $this->beginBody();
                 <thead class="thead-default">
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
-                        <th>
+                        <th class="tab-padding-left">
                             <span><?= $item['alias']; ?></span>
                             <div class="table-sorter table-sorter-up is-active">
                                 <i class="material-icons">keyboard_arrow_up</i>
@@ -131,9 +131,9 @@ $this->beginBody();
                 </thead>
                 <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
                     <tr ng-repeat="(k, item) in items | srcbox:config.searchString" ng-show="viewToggler[key]">
-                        <?php foreach ($config->getPointer('list') as $item): ?>
+                        <?php $i = 0; foreach ($config->getPointer('list') as $item): $i++; ?>
                             <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
-                                 <td><?= $element['html']; ?></td>
+                                 <td class="<?= $i != 1 ?: 'tab-padding-left'; ?>"><?= $element['html']; ?></td>
                              <?php endforeach; ?>
                          <?php endforeach; ?>
                          <?php if (count($this->context->getButtons()) > 0): ?>
