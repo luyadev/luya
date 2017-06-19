@@ -133,6 +133,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $fields['version_alias'] = function ($model) {
             return Module::t($model->version_alias);
         };
+        $fields['layout_admin_template']  = function($model) {
+            return $this->layout->admin_template;
+        };
         return $fields;
     }
     

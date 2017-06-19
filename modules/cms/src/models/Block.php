@@ -38,6 +38,7 @@ class Block extends NgRestModel
         return [
             'group_id' => ['selectModel', 'modelClass' => BlockGroup::className(), 'valueField' => 'id', 'labelField' => 'name'],
             'class' => 'text',
+            'is_disabled' => 'toggleStatus',
         ];
     }
     
@@ -53,13 +54,14 @@ class Block extends NgRestModel
         return [
             'group_id' => 'Group',
             'class' => 'Object Class',
-            'usageCount' => 'Used in Content'
+            'usageCount' => 'Used in Content',
+            'is_disabled' => 'Is Disabled',
         ];
     }
 
     public function ngRestConfig($config)
     {
-        $this->ngRestConfigDefine($config, ['list'], ['group_id', 'class', 'usageCount']);
+        $this->ngRestConfigDefine($config, ['list'], ['group_id', 'class', 'usageCount', 'is_disabled']);
         
         return $config;
     }
@@ -76,7 +78,7 @@ class Block extends NgRestModel
     {
         return [
             [['group_id', 'class'], 'required'],
-            [['group_id'], 'integer'],
+            [['group_id', 'is_disabled'], 'integer'],
             [['class'], 'string', 'max' => 255],
         ];
     }
