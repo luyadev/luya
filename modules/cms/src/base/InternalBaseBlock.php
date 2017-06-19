@@ -483,7 +483,39 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     public function getConfigPlaceholdersExport()
     {
-        return (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
+        $array =  (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
+        
+        $holders = [];
+        
+        foreach ($array as $holder) {
+            if (isset($holder['var'])) {
+                $holders[] = $holder;
+            } else {
+                foreach ($holder as $columnHolder) {
+                    $holders[] = $columnHolder;
+                }
+            }
+        }
+        
+        return $holders;
+    }
+    
+    public function getConfigPlaceholdersByRowsExport()
+    {
+        $array =  (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
+        
+        $rows = [];
+        
+        foreach ($array as $holder) {
+            if (isset($holder['var'])) {
+                $holder['cols'] = 12;
+                $rows[] = [$holder];
+            } else {
+                $rows[] = $holder;
+            }
+        }
+        
+        return $rows;
     }
     
     private $_cfgs = [];

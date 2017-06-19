@@ -1,0 +1,6 @@
+[
+    [
+        {"cols": 8, "var": "content", "label": "Content"},
+        {"cols": 4, "var": "sidebar", "label": "Sidebar"}
+    ]
+]

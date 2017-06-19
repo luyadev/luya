@@ -39,8 +39,8 @@
             </modal>
             <div ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
             <div ng-if="block.__placeholders.length" class="block-front">
-                <div class="row">
-                    <div class="col-xl-12" ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" />
+                <div class="row" ng-repeat="row in block.__placeholders">
+                    <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" />
                 </div>
             </div>
         </div>
@@ -76,8 +76,8 @@
     </li>
 </ul>
 <div class="cmsadmin-page" ng-if="isTranslated">
-    <div class="row" ng-if="item.nav_item_type==1">
-        <div class="col-xl-12" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" />
+    <div class="row" ng-if="item.nav_item_type==1" ng-repeat="row in container.__placeholders">
+        <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" />
     </div>
     <div class="row" ng-if="item.nav_item_type==2">
         Module
