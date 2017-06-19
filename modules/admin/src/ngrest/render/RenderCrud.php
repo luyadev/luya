@@ -261,6 +261,10 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
     private function evalGroupFields($pointerElements)
     {
+        if (!$pointerElements) {
+            return [];
+        }
+        
         $names = [];
         foreach ($pointerElements as $elmn) {
             $names[$elmn['name']] = $elmn['name'];
