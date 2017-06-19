@@ -248,10 +248,38 @@
     color: #EA2E49; }
 
 .cmsadmin {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   margin: 0 0 0 15px;
   min-height: 100%; }
   .cmsadmin > .row {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 100%;
+        -ms-flex: 1 1 100%;
+            flex: 1 1 100%;
     margin-right: 0; }
+    .cmsadmin > .row > .col > .row {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 100%;
+          -ms-flex: 1 1 100%;
+              flex: 1 1 100%; }
+    .cmsadmin > .row > .col,
+    .cmsadmin > .row > .col > .row > .col {
+      -webkit-box-align: stretch;
+      -webkit-align-items: stretch;
+          -ms-flex-align: stretch;
+              align-items: stretch;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column; }
 
 .cmsadmin-toolbar {
   -webkit-box-align: center;
@@ -307,41 +335,60 @@
       width: 100%; }
 
 .cmsadmin-pages {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 100%;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
   padding: 0 0 15px; }
-  .cmsadmin-pages > .row > .col {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    width: 100%; }
-    .cmsadmin-pages > .row > .col > .nav-tabs {
-      border-bottom: 0;
-      -webkit-box-flex: 0;
-      -webkit-flex: 0 0 42px;
-          -ms-flex: 0 0 42px;
-              flex: 0 0 42px;
-      z-index: 10; }
-      .cmsadmin-pages > .row > .col > .nav-tabs .nav-link {
-        background-color: #eceeef;
-        border-bottom: 0; }
-        .cmsadmin-pages > .row > .col > .nav-tabs .nav-link.active {
-          border-bottom: 1px solid #F2F2F2; }
-      .cmsadmin-pages > .row > .col > .nav-tabs .nav-item-alternative .nav-link {
-        background-color: #F2F2F2; }
-      .cmsadmin-pages > .row > .col > .nav-tabs .nav-item-alternative:not(.nav-item-icon) a.nav-link {
-        margin-top: -1px; }
+  .cmsadmin-pages > .row {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 100%;
+        -ms-flex: 1 1 100%;
+            flex: 1 1 100%; }
+    .cmsadmin-pages > .row > .col {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      width: 100%; }
+      .cmsadmin-pages > .row > .col > .nav-tabs {
+        border-bottom: 0;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 42px;
+            -ms-flex: 0 0 42px;
+                flex: 0 0 42px;
+        z-index: 10; }
+        .cmsadmin-pages > .row > .col > .nav-tabs .nav-link {
+          background-color: transparent;
+          border-bottom: 0; }
+          .cmsadmin-pages > .row > .col > .nav-tabs .nav-link.active {
+            border-bottom: 1px solid #F2F2F2; }
+        .cmsadmin-pages > .row > .col > .nav-tabs .nav-item-title {
+          padding-left: 0; }
+        .cmsadmin-pages > .row > .col > .nav-tabs .nav-item-alternative .nav-link {
+          background-color: transparent; }
+        .cmsadmin-pages > .row > .col > .nav-tabs .nav-item-alternative:not(.nav-item-icon) a.nav-link {
+          margin-top: -1px; }
 
 .cmsadmin-page {
-  background-color: #eceeef;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: solid #ddd;
+  border-radius: 0 5px 0 0;
+  border-width: 1px 1px 0 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 100%;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
   margin-top: -1px;
-  padding: 10px; }
+  padding: 10px 10px 10px 0; }
 
 .cmsadmin-container-title {
   margin-bottom: 10px;
@@ -363,7 +410,8 @@
 
 .cmsnav {
   display: block;
-  margin: 10px 0; }
+  margin: 10px 0;
+  width: 100%; }
 
 .cmsnav__list {
   display: block;
