@@ -1,230 +1,123 @@
+.blockholder-column {
+    max-width: 250px;
+    min-width: 250px;
+    padding-right: 0;
+}
+
 .blockholder {
-    z-index: 10 !important;
-
-    overflow: auto;
-
-    height: 100%;
-    padding: 20px 10px;
-
-    background-color: #4e4e4e;
-}
-
-.blockholder__group {
-    margin-bottom: 20px;
-
-    &--clipboard {
-        margin-top: -20px;
-        margin-right: -10px;
-        margin-bottom: 0;
-        margin-left: -10px;
-        padding: 10px;
-
-        @include clearfix;
-    }
-    &--favorite {
-        margin-right: -10px;
-        margin-left: -10px;
-        padding: 10px;
-
-        background-color: $red;
-    }
-}
-
-.blockholder__group-toggler {
-    transition: .25s ease transform;
-
-    &--rotated {
-        transform: rotate(-90deg);
-    }
-}
-
-.blockholder__group-title {
-    font-weight: 400;
-
-    position: relative;
-
+    background-color: $gray;
+    color: $white;
     display: block;
-
-    width: 100%;
-    margin-bottom: 10px;
-
-    user-select: none;
-
-    color: #fff;
-
-    i {
-        font-size: 20px;
-
-        position: absolute;
-        top: 2px;
-
-        &.left {
-            left: 0;
-        }
-        &.right {
-            right: 0;
-        }
-        &.right + span {
-            padding-right: 22px;
-        }
-    }
-    span {
-        display: block;
-
-        padding: 0 0 0 22px;
-    }
-
-    &:first-of-type {
-        margin-top: 0;
-    }
-
-    &[ng-click] {
-        cursor: pointer;
-    }
-
-    &--collapsed {
-        margin-bottom: 0;
-    }
-}
-
-.blockholder__clear-clipboard {
-    float: right;
-
-    margin-top: 5px;
-
-    cursor: pointer;
-
-    color: $red;
-}
-
-.blockholder__search {
-    position: relative;
-
-    margin-bottom: 15px;
-
-    color: white;
-}
-
-.blockholder__input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 2rem;
-    padding: 6px 15px 5px 30px;
-
-    border: 1px solid #fff;
-    outline: none;
-    background-color: transparent;
-}
-
-.blockholder__input:focus, .blockholder__search--active .blockholder__input {
-    color: #000;
-    background-color: #fff;
-}
-
-.blockholder__icon {
-    position: absolute;
-    top: 0;
-
     height: 100%;
+    padding: 15px;
+    width: 100%;
+    user-select: none;
+}
 
-    cursor: pointer;
+.blockholder-search {
+    border-bottom: 1px solid $white;
+    display: block;
+    margin: 0 0 30px;
+    padding-right: 25px;
+    position: relative;
+    width: 100%;
+}
 
-    &.blockholder__icon--search {
-        left: 0;
+.blockholder-search-input {
+    background: none;
+    border: none;
+    color: $white;
+    outline: 0;
+    padding-top: 5px;
+    width: 100%;
+}
 
-        padding-top: 4px;
-        padding-left: 4px;
+.blockholder-search-label {
+    color: $white;
+    display: inline-block;
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.blockholder-group {
+    margin: 0 0 30px;
+}
+
+.blockholder-group-title {
+    display: block;
+    margin-bottom: 5px;
+    padding-left: 32px;
+
+    .material-icons {
+        font-size: 20px;
+        margin-left: -28px;
+        margin-right: -3px;
     }
 
-    &.blockholder__icon--cancel {
-        right: 0;
+    .blockholder-group-favorites & {
+        color: $brand-primary;
+    }
+}
 
-        padding-top: 2px;
-        padding-right: 2px;
+.blockholder-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
-        color: black;
+.blockholder-item {
+    border: 1px dashed transparent;
+    padding: 4px 2px 3px 30px;
+    position: relative;
+    transition: .2s ease-in-out border;
 
-        i {
-            font-size: 16px;
+    &:not(:first-of-type) {
+        margin-top: 5px;
+    }
+
+    &:hover {
+        border-color: $white;
+        cursor: move;
+    }
+
+    .blockholder-icon {
+        font-size: 20px;
+        left: 3px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        + span {
+            margin-left: 0;
         }
     }
 }
 
-.blockholder__input:focus + .blockholder__icon--search, .blockholder__search--active .blockholder__icon--search {
-    color: #000;
-}
-
-.blockholder__block {
-    font-size: 13px;
-    line-height: 20px;
-
-    z-index: 100 !important;
-
-    display: inline-block;
-
-    width: 100%;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    padding: 4px 5px;
-
-    cursor: move;
-    user-select: none;
-    transition: .2s ease background-color, .2s ease color, .2s ease border-color, .2s ease box-shadow;
-    text-align: left;
-
-    color: rgba($white, .5);
-    border: 1px dashed rgba($white, .5);
-    background-color: #4e4e4e;
-
-    i {
-        font-size: 16px;
-
-        width: 16px;
-        margin: 0 !important;
-
-        vertical-align: middle;
-    }
-
-    span {
-        display: inline-block;
-
-        width: calc(100% - 20px);
-        margin-top: 1px;
-
-        vertical-align: middle;
-    }
-
-    &:hover, &.ui-draggable-dragging {
-        color: $black;
-        border-color: $black;
-        background-color: $white;
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-    }
-
-    &.ui-draggable-dragging {
-        z-index: 10000 !important;
-    }
-}
-
-.blockholder__group--favorite .blockholder__block {
-    color: #4e4e4e;
-    border-color: #4e4e4e;
-    background-color: $white;
-}
-
-.blockholder__fav-icon {
-    pointer-events: none;
-
+.blockholder-favorite {
+    background: none;
+    border: none;
+    color: $brand-primary;
+    font-size: 16px;
     opacity: 0;
+    padding-bottom: 3px;
+    padding-top: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .25s ease-in-out opacity, .25s ease-in-out color;
 
-    &--red {
+    .blockholder-item:hover & {
+        cursor: pointer;
+        opacity: 1;
+        pointer-events: all;
+    }
+    &:hover {
         color: $red;
     }
-}
-
-.blockholder__block:hover .blockholder__fav-icon {
-    cursor: pointer;
-    pointer-events: all;
-
-    opacity: 1;
 }

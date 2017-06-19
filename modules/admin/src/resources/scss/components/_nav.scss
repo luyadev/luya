@@ -1,0 +1,80 @@
+.tab-pane {
+    background-color: $nav-tab-active-background-color;
+    border: solid $nav-tabs-border-color;
+    border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
+    border-width: 0 $nav-tabs-border-width $nav-tabs-border-width $nav-tabs-border-width;
+    padding: 15px 0;
+
+    .card & {
+        border: 0;
+        margin-left: -0.625rem;
+        margin-right: -0.625rem;
+    }
+}
+
+.tab-padded {
+    padding-left: $nav-link-padding-horizontal;
+    padding-right: $nav-link-padding-horizontal;
+}
+
+.tab-padding-left {
+    padding-left: $nav-link-padding-horizontal !important;
+}
+
+.tab-padding-right {
+    padding-right: $nav-link-padding-horizontal !important;
+}
+
+.nav-item-alternative {
+    margin-left: 10px;
+
+    .nav-link {
+        border: none;
+        padding: 9px 15px;
+        position: relative;
+
+        &:after {
+            background-color: $brand-primary;
+            bottom: 0;
+            content: "";
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+            transition: .1s ease-in-out width;
+            width: 0;
+        }
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+        background-color: transparent;
+        border: none;
+
+        &:after {
+            width: 100%;
+        }
+    }
+
+    &.nav-item-icon .nav-link {
+        font-size: 18px;
+        padding: 7px 5px;
+    }
+}
+
+.nav-item-title {
+    align-self: center;
+    color: $black;
+    font-size: 20px;
+    margin-right: 25px;
+    padding-left: 5px;
+
+    > span {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .flag {
+        margin-right: 10px;
+    }
+}

@@ -9,7 +9,7 @@
 	position: relative;
 	display: inline-block;
 	width: (4 / 3) * 1em;
-	line-height: 1.5em;
+	line-height: 1em;
 
 	&:before {
 		content: '\00a0';
@@ -19,12 +19,12 @@
 		width: 1em;
 	}
 
-	$allFlags: "";
-	@each $lang, $flag in $flags {
-		$allFlags: $allFlags + ":not(.flag--#{$lang})";
+	$allEnabledFlags: "";
+	@each $lang, $flag in $enabled-flags {
+		$allEnabledFlags: $allEnabledFlags + ":not(.flag--#{$lang})";
 	}
 
-	&#{$allFlags} {
+	&#{$allEnabledFlags} {
 		width: auto;
 		line-height: inherit;
 
@@ -43,7 +43,7 @@
 	text-transform: uppercase;
 
 	&.flag__fallback--colorized {
-		color: $brand-primary;
+		color: color("blue", "base");
 	}
 }
 
@@ -60,6 +60,6 @@
 	}
 }
 
-@each $lang, $flag in $flags {
+@each $lang, $flag in $enabled-flags {
 	@include flag($flag, $lang);
 }

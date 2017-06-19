@@ -1,218 +1,164 @@
-/**
- * #BLOCK
- */
+$block-border-width: 1px !default;
+$block-border-color: #B2B2B2 !default;
+$block-padding: 10px !default;
+
 .block {
-	background-color: $block--background;
-	padding: 0;
-	margin: 10px 0;
-	position: relative;
-	transition: 0.5s ease opacity;
-	border-top: none;
-	border-left: 0 solid transparent;
-	border-bottom: 0 solid transparent;
-	border-right: 0 solid transparent;
-	min-height: 50px;
-	border:1px solid #fbfbfb;
+    background-color: $white;
+    border: $block-border-width solid transparent;
+    border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
+    padding: 0;
+    position: relative;
+    transition: .2s ease-in-out border-color, 0s .2s ease-in-out z-index;
+    z-index: 10;
 
- 	&:hover:not(.block--is-container):not(.block--edit) {
- 		border:1px solid #9E9E9E;	
- 	}
+    &:not(:last-of-type) {
+        margin-bottom: 25px;
+    }
 
-	&:hover > .block__toolbar,
-	&.block--edit .block__toolbar,
-	&.block--config .block__toolbar,
-	&.block--is-container > .block__toolbar {
-		display: block;
-	}
-	&:last-of-type {
-		margin-bottom: 0;
-	}
-	&.block--is-dirty:not(.block--edit):not(.block--config) {
-		background-color: $block--background-is-dirty;
-	}
-	&:not(.block--edit):not(.block--config).block--is-hidden {
-		opacity: 0.5;
-	}
-	&.block--edit, &.block--config {
-		background-color: $block--active-background;
-		border-left: 4px solid $block--toolbar--background;
-		border-bottom: 4px solid $block--toolbar--background;
-		border-right: 4px solid $block--toolbar--background;
-	}
-
-	.accordion {
-		margin: 0 10px 10px 10px;
-	}
-	&.block--is-container > .accordion {
-		margin: 0;
-	}
-
-	&.block--is-container {
-		padding-top: 32px;
-	}
-
-	&--first {
-		margin-top: 0;
-	}
-	&--last {
-		margin-bottom: 0;
-	}
-}
-
-.page--drag-active .block--is-container {
-	border-color: $grey--darken !important;
-}
-
-.block__toolbar {
-	background-color: $block__toolbar--background;
-	color: $block__toolbar--color;
-	font-size: 18px;
-	padding: 2px 10px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	user-select: none;
-	z-index: 10;
-	transition: 0.5s ease background-color, 0.3s ease color;
-
-	i {
-		font-size: 22px;
-		vertical-align: middle;
-		cursor: pointer;
-	}
-	span {
-		vertical-align: middle;
-		cursor: pointer;
-	}
-
-	display: none;
-}
-
-.block__toolbar__icon {
-    transition: 0.2s ease color;
-
+    &-is-editing,
     &:hover {
-        color: $block__toolbar__icon--hover;
+        border-color: rgba($block-border-color, .5);
+        transition: .2s ease-in-out border-color;
+        z-index: 50;
     }
-    &.block__toolbar__icon--active {
-        color: $block__toolbar__icon--active;
+
+    &-is-editing {
+        margin-bottom: 45px;
+
+        &:not(:last-of-type) {
+            margin-bottom: 45px;
+        }
+    }
+
+    &-is-layout {
+        border-color: $block-border-color;
+        padding-top: 35px;
+
+        &:hover {
+            border-color: $block-border-color;
+        }
     }
 }
 
-.block--is-hidden:not(.block--is-container):not(.block--edit):not(.block--config) .block__toolbar {
-	background-color: $block--hidden__toolbar-background;
-	color: $black;
-}
-.page--drag-active .block:not(.block--is-container) .block__toolbar {
-	display: none;
-}
-.page--drag-active .block--is-container .block__toolbar {
-	background-color: $grey--darken !important;
-	z-index: 1;
+.block-toolbar {
+    background-color: $gray-dark;
+    color: $white;
+    display: flex;
+    flex-wrap: wrap;
+    left: -$block-border-width;
+    opacity: 0;
+    padding: 0 $block-padding;
+    pointer-events: none;
+    position: absolute;
+    right: -$block-border-width;
+    top: 0;
+    transform: translateY(-80%);
+    transition: .2s ease-in-out opacity, .2s ease-in-out transform;
+
+    .toolbar-item {
+        font-size: 20px;
+    }
+
+    .toolbar-button {
+        background: none;
+        border: none;
+        color: $white;
+        cursor: pointer;
+        display: block;
+        margin-left: 10px;
+        transition: .25s ease-in-out background-color;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, .2);
+        }
+    }
+
+    .block-is-editing > &,
+    .block:hover > & {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(-100%);
+    }
+
+    .block-is-layout > &,
+    .block-is-layout:hover > & {
+        background-color: $block-border-color;
+        opacity: 1;
+        pointer-events: all;
+        transform: none;
+    }
 }
 
-.block__move {
-	cursor: move;
-	margin-right: 15px;
+.block-front,
+.block-edit {
+    padding: $block-padding;
 }
 
-.block__title {
-	display: inline-block;
+.block-front {
+    h1, h2, h3, h4, h5 {
+        color: $black;
+    }
 
-	p {
-		display: inline-block;
-		vertical-align: middle;
-	}
+    .block-is-layout > & {
+        padding: 0;
+
+        .row > div[class^="col"] {
+            padding: $block-padding $block-padding + 5;
+
+            &:not(:last-of-type) {
+                border-right: $block-border-width solid $block-border-color;
+            }
+        }
+
+        > .row {
+            margin: 0 -1px;
+
+            &:not(:last-of-type) {
+                border-bottom: $block-border-width solid $block-border-color;
+            }
+        }
+    }
+
+    .block-is-editing > & {
+        display: none;
+    }
 }
 
-.block__body {
-	display: block;
-	height: 100%;
-	padding: 20px 10px;
-	cursor: pointer;
-	@include clearfix;
-}
-.block--is-container > .block__body {
-	display: none;
-}
-.block--edit .block__body {
-	display: none;
-}
+.block-edit {
+    display: none;
 
-.block__edit {
-	display: none;
+    .block-is-editing > & {
+        display: block;
+    }
 
-	.collapsible {
-		margin-top: 30px;
-	}
-}
-.block__edit-content {
-	display: none;
-	padding-right: 40px; // This padding is needed to give a little bit of space if there is a "help" icon
-}
-.block--edit .block__edit {
-	display: block;
-	height: 100%;
-	padding: ($block__toolbar--height + 5px) 10px 0 10px;
-
-	.block__edit-content {
-		display: block;
-	}
+    .tab-pane {
+        border: $nav-tabs-border-width solid $nav-tabs-border-color !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }
 
-.block--config .block__body {
-	display: none;
-
-	.collapsible {
-		margin-top: 30px;
-	}
-}
-.block--config .block__edit {
-	display: block;
-	height: 100%;
-	padding: ($block__toolbar--height + 5px) 10px 0 10px;
-
-	.block__config-content {
-		display: block;
-	}
-}
-.block__config-content {
-	display: none;
+.block-edit-tabs {
+    bottom: 0;
+    display: flex;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
 }
 
-.block__config__text {
-    font-size: 1rem;
-    font-weight: bold;
-    line-height: 36px;
-    text-align: left;
-    text-transform: uppercase;
-    vertical-align: middle;
-}
-.block__config__text-section {
-    color: $lime;
-}
+.block-edit-tab {
+    background-color: $white;
+    border: solid rgba($block-border-color, .5);
+    border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
+    border-width: $block-border-width $block-border-width $block-border-width $block-border-width;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px 10px;
+    transform: translateY(100%);
 
-.block__help {
-	position: absolute;
-	right: 10px;
-}
-
-@each $depth, $color in $container-block--colors {
-	$selector: "";
-	@while $depth > 0 {
-		$selector: $selector + ".block--is-container ";
-		$depth: $depth - 1;
-	}
-
-	#{$selector} {
-		//border-left: 4px solid #{$color};
-		//border-bottom: 4px solid #{$color};
-		//border-right: 4px solid #{$color};
-
-
-		> .block__toolbar {
-			background-color: #{$color};
-		}
-	}
+    &.active {
+        border-top-color: transparent;
+    }
 }

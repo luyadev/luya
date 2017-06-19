@@ -1,0 +1,129 @@
+.cmsadmin {
+    margin: 0 0 0 15px;
+    min-height: 100%;
+
+    > .row {
+        margin-right: 0;
+    }
+}
+
+.cmsadmin-toolbar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px 0 30px;
+    width: 100%;
+
+    label {
+        margin: 0;
+    }
+
+    .toolbar-item {
+        flex: 0 0 auto;
+        padding: 5px 25px;
+
+        &:first-of-type {
+            padding-left: 0;
+        }
+        &:not(:first-of-type) {
+            border-left: 1px solid $nav-tabs-border-color;
+        }
+    }
+
+    .toolbar-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: relative;
+
+        .material-icons {
+            font-size: 20px;
+        }
+    }
+
+    .toolbar-button-flag {
+        padding-left: 10px;
+        padding-right: 10px;
+
+        &:after {
+            background-color: $brand-primary;
+            bottom: 0;
+            content: "";
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+            transition: .1s ease-in-out width;
+            width: 0;
+        }
+
+        &.active:after,
+        &:hover:after {
+            width: 100%;
+        }
+    }
+}
+
+.cmsadmin-pages {
+    padding: 0 0 15px;
+
+    > .row {
+        > .col {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            > .nav-tabs {
+                border-bottom: 0;
+                flex: 0 0 42px;
+                z-index: 10;
+
+                .nav-link {
+                    background-color: $gray-lighter;
+                    border-bottom: 0;
+
+                    &.active {
+                        border-bottom: 1px solid $gray-lightest;
+                    }
+                }
+
+                .nav-item-alternative .nav-link {
+                    background-color: $gray-lightest;
+                }
+
+                .nav-item-alternative:not(.nav-item-icon) a.nav-link {
+                    margin-top: -1px;
+                }
+            }
+        }
+    }
+}
+
+.cmsadmin-page {
+    background-color: $gray-lighter;
+    border: $nav-tabs-border-width solid $nav-tabs-border-color;
+    border-radius: $nav-tabs-border-radius;
+    margin-top: -1px;
+    padding: 10px;
+}
+
+.cmsadmin-container-title {
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.cmsadmin-frame-wrapper {
+    position: relative;
+}
+
+.cmsadmin-frame {
+    border: none;
+    bottom: 30px;
+    display: block;
+    height: calc(100% - 25px);
+    left: 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: calc(100% - 20px);
+}

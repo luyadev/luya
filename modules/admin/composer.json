@@ -18,7 +18,8 @@
 	},
 	"require" : {
 	    "yiisoft/yii2-imagine": "~2.1.0",
-	    "flowjs/flow-php-server": "^1.0"
+	    "flowjs/flow-php-server": "^1.0",
+		"twbs/bootstrap": "4.0.0-alpha.6"
 	},
 	"require-dev" : {
 		"luyadev/luya-testsuite" : "~1.0.0",

@@ -1,13 +1,59 @@
-.switch.switch--with-icons {
-	margin-top: 4px;
+.switch {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    min-width: 150px;
+    width: 100%;
+    user-select: none;
 }
 
-.switch__icon {
-	font-size: 1.2rem !important;
-	line-height: inherit !important;
-	color: color("grey", "darken-2");
+.switch__switch {
+    display: block;
+    flex: 0 0 50px;
+    height: 30px;
+    vertical-align: middle;
+    width: 100%;
 }
 
-.switch--with-icons .switch__lever {
-	margin-top: -9px !important;
+.switch__checkbox {
+    display: none;
+}
+
+.switch__control {
+    background-color: #c0c0c0;
+    border-radius: 7.5px;
+    display: block;
+    height: 15px;
+    margin: 7.5px 0;
+    position: relative;
+    transition: .4s ease-in-out background-color;
+    width: 100%;
+
+    &:after {
+        background-color: $white;
+        border-radius: 50%;
+        box-shadow: 2px 2px 5px rgba($black, .2);
+        content: "";
+        height: 25px;
+        left: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: .25s ease-in-out left;
+        width: 25px;
+    }
+
+    .switch__checkbox:checked + & {
+        background-color: $green;
+
+        &:after {
+            left: calc(100% - 20px - 5px);
+        }
+    }
+}
+
+.switch__label {
+    flex: 1 0 auto;
+    line-height: 30px;
+    margin: 0 0 0 15px;
 }
