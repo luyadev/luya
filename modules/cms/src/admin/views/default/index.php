@@ -12,7 +12,7 @@ use \luya\cms\admin\Module;
 </style>
 <?= $this->render('_angulardirectives'); ?>
 <script type="text/ng-template" id="reverse2.html">
-    <span class="treeview__label treeview__label--page" dnd dnd-model="data" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-isvalid="validItem(hover,dragged)" dnd-css="{onDrag: 'make-drag', onHover: 'b-hover', onHoverTop: 'b-top', onHoverMiddle: 'b-left', onHoverBottom: 'b-bottom'}">
+    <span class="treeview__label treeview__label--page" dnd dnd-model="data" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-isvalid="validItem(hover,dragged)" dnd-css='{onDrag:"make-drag",onHover:"b-hover",onHoverTop:"b-top",onHoverMiddle:"b-left",onHoverBottom:"b-bottom"}'>
         <span class="treeview__icon treeview__icon--collapse" ng-show="(menuData.items | menuparentfilter:catitem.id:data.id).length"  ng-click="toggleItem(data)">
             <i class="material-icons">arrow_drop_down</i>
         </span>

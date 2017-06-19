@@ -2,11 +2,12 @@
 <h4 class="cmsadmin-container-title">{{placeholder.label}}</h4>
 <div class="card">
     <div class="card-block">
-        <div class="block" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
+        <div ng-class="{'block-is-layout' : block.is_container}" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
+            <div class="block" dnd dnd-model="block" dnd-isvalid="true" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'drag-start', onHover: 'b-hover', onHoverTop: 'b-top', onHoverMiddle: 'b-left', onHoverBottom: 'b-bottom'}">
             <div class="block-toolbar">
                 <div class="toolbar-item">
-                    <!-- <i class="material-icons">title</i>-->
-                    <span ng-bind-html="safe(block.full_name)"></span>
+                    <i class="material-icons">{{block.icon}}</i>
+                    <span>{{block.name}}</span>
                 </div>
                 <div class="toolbar-item ml-auto">
                     <button class="toolbar-button">
@@ -37,11 +38,12 @@
                     <button type="submit"><i class="material-icons left">done</i></button>
                 </form>
             </modal>
-            <div ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
+            <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
             <div ng-if="block.__placeholders.length" class="block-front">
                 <div class="row" ng-repeat="row in block.__placeholders">
                     <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" />
                 </div>
+            </div>
             </div>
         </div>
     </div>

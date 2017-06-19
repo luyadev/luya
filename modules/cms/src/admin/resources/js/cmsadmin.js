@@ -1367,6 +1367,20 @@
 			});
 		};
 
+		$scope.dropItem = function(dragged,dropped,position) {
+			console.log(dragged.favorized);
+			console.log(dragged);
+			if (dragged.hasOwnProperty('favorized')) {
+				console.log('gooo');
+				// its a new block
+				$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index : 0, block_id : dragged.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).then(function(response) {
+					console.log('top');
+				});
+			} else {
+				// moving an existing block
+			}
+		};
+		
 		$scope.copyBlock = function() {
 			ServiceBlockCopyStack.push($scope.block.id, $scope.block.name);
 		};

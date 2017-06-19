@@ -69,7 +69,9 @@
                                 <span>{{item.group.name}}</span>
                             </span>
                             <ul class="blockholder-list">
-                                <li class="blockholder-item" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}">
+                                <li class="blockholder-item" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
+                                    dnd dnd-model="block" dnd-isvalid="true" dnd-drop-disabled dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
+                                >
                                     <i class="material-icons blockholder-icon">{{block.icon}}</i>
                                     <span>{{block.name}}</span>
 
