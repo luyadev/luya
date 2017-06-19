@@ -22,13 +22,11 @@
 		  </div>
 		</div>
 	</modal>
-        <? if(isset($_GET['preview'])): ?>
         <div class="row">
-            <div class="col cmsadmin-frame-wrapper">
-                <iframe src="http://demo.luya.io" class="cmsadmin-frame"></iframe>
+            <div class="col cmsadmin-frame-wrapper" ng-if="displayLiveContainer">
+                <iframe class="cmsadmin-frame" ng-src="{{ liveUrl | trustAsResourceUrl:liveUrl }}" frameborder="0" width="100%" height="100%"></iframe>
             </div>
             <div class="col">
-        <? endif; ?>
                 <div class="row">
                     <div class="col">
                         <div class="cmsadmin-toolbar">
@@ -104,8 +102,6 @@
                         </div>
                     </div>
                 </div>
-        <? if(isset($_GET['preview'])): ?>
             </div>
         </div>
-         <? endif; ?>
 </div>

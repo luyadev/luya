@@ -591,6 +591,7 @@
 		}
 	});
 
+	/*
 	zaa.controller("CmsLiveEdit", function($scope, ServiceLiveEditMode) {
 
 		$scope.display = 0;
@@ -608,6 +609,7 @@
 		});
 
 	});
+	*/
 
 	zaa.controller("CmsMenuTreeController", function($scope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
 
@@ -865,8 +867,22 @@
 
 	// update.js
 
-	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminToastService, AdminClassService, AdminLangService) {
+	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService) {
 
+		$scope.displayLiveContainer = false;
+		
+		$scope.liveUrl = homeUrl;
+		
+		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
+			$scope.displayLiveContainer = n;
+		});
+		
+		$scope.$on('service:LiveEditModeUrlChange', function(event, url) {
+			var d = new Date();
+			var n = d.getTime();
+			$scope.liveUrl = url + '&' + n;
+		});
+		
 		$scope.AdminLangService = AdminLangService;
 
 		/* service AdminPropertyService inheritance */
