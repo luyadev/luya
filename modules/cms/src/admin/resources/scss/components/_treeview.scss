@@ -46,7 +46,7 @@
 
 .treeview-item {
     display: block;
-    padding-top: 5px;
+    padding: 0;
     position: relative;
 
     &:before {
@@ -54,7 +54,7 @@
         border-left: 1px solid lighten($gray, 45);
         content: '';
         display: block;
-        height: 18px;
+        height: 15px;
         left: -4px;
         position: absolute;
         top: 0;
@@ -85,11 +85,13 @@
         width: 7px;
     }
     &-collapsed:before {
-        height: 19px;
+        height: 16px;
     }
 }
 
 .treeview-label {
+    border: solid transparent;
+    border-width: 2px 0 2px 0;
     display: block;
     padding: 0 35px 0 23px;
     position: relative;
@@ -119,6 +121,21 @@
 
     .treeview-item-ishidden & {
         opacity: .5;
+    }
+
+    &.drag-dragging {
+        .treeview__icon--collapse {
+            display: none;
+        }
+    }
+    &.drag-hover-top {
+        border-top-color: $green;
+    }
+    &.drag-hover-middle {
+        background-color: $green;
+    }
+    &.drag-hover-bottom {
+        border-bottom-color: $green;
     }
 }
 

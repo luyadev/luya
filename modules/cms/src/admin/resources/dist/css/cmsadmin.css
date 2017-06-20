@@ -458,14 +458,14 @@
 
 .treeview-item {
   display: block;
-  padding-top: 5px;
+  padding: 0;
   position: relative; }
   .treeview-item:before {
     border-bottom: 1px solid silver;
     border-left: 1px solid silver;
     content: '';
     display: block;
-    height: 18px;
+    height: 15px;
     left: -4px;
     position: absolute;
     top: 0;
@@ -486,9 +486,11 @@
     top: -1px;
     width: 7px; }
   .treeview-item-collapsed:before {
-    height: 19px; }
+    height: 16px; }
 
 .treeview-label {
+  border: solid transparent;
+  border-width: 2px 0 2px 0;
   display: block;
   padding: 0 35px 0 23px;
   position: relative;
@@ -511,6 +513,14 @@
     background-color: #EA2E49; }
   .treeview-item-ishidden .treeview-label {
     opacity: .5; }
+  .treeview-label.drag-dragging .treeview__icon--collapse {
+    display: none; }
+  .treeview-label.drag-hover-top {
+    border-top-color: #79B744; }
+  .treeview-label.drag-hover-middle {
+    background-color: #79B744; }
+  .treeview-label.drag-hover-bottom {
+    border-bottom-color: #79B744; }
 
 .treeview-icon {
   font-size: 18px;
