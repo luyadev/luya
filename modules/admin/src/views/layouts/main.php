@@ -29,7 +29,7 @@ $this->beginPage()
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
     <div class="luya-mainnav">
-        <div class="mainnav" ng-class="{'mainnav--small' : !isHover}">
+        <div class="mainnav" ng-class="{'mainnav-small' : !isHover}">
             <div class="mainnav-static">
                 <ul class="mainnav-list">
                     <li class="mainnav-entry" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
