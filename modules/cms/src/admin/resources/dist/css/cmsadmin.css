@@ -458,14 +458,14 @@
 
 .treeview__item {
   display: block;
-  padding-top: 5px;
+  padding-top: 0;
   position: relative; }
   .treeview__item:before {
     border-bottom: 1px solid silver;
     border-left: 1px solid silver;
     content: '';
     display: block;
-    height: 18px;
+    height: 15px;
     left: -4px;
     position: absolute;
     top: 0;
@@ -486,9 +486,11 @@
     top: -1px;
     width: 7px; }
   .treeview__item--collapsed:before {
-    height: 19px; }
+    height: 16px; }
 
 .treeview__label {
+  border: solid transparent;
+  border-width: 2px 0 2px 0;
   display: block;
   padding: 0 35px 0 23px;
   position: relative;
@@ -511,6 +513,14 @@
     background-color: #EA2E49; }
   .treeview__item--ishidden .treeview__label {
     opacity: .5; }
+  .treeview__label.drag-dragging .treeview__icon--collapse {
+    display: none; }
+  .treeview__label.drag-hover-top {
+    border-top-color: #79B744; }
+  .treeview__label.drag-hover-middle {
+    background-color: #79B744; }
+  .treeview__label.drag-hover-bottom {
+    border-bottom-color: #79B744; }
 
 .treeview__icon {
   font-size: 18px;
@@ -525,14 +535,14 @@
     left: auto;
     right: 10px; }
   .treeview__icon--collapse {
-    top: 0;
     cursor: pointer;
     font-size: 24px;
     font-size: 1.5rem;
     height: 24px;
-    width: 24px;
+    top: 0;
     -webkit-transition: .25s ease-in-out transform;
-    transition: .25s ease-in-out transform; }
+    transition: .25s ease-in-out transform;
+    width: 24px; }
     .treeview__item--collapsed .treeview__icon--collapse {
       -webkit-transform: rotate(-90deg) translateX(-1px);
           -ms-transform: rotate(-90deg) translateX(-1px);
