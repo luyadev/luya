@@ -10260,7 +10260,6 @@ form:not(.form-inline) .form-check-input {
   overflow: auto;
   overflow: -moz-scrollbars-none;
   padding: 0 10px;
-  z-index: 100;
   -ms-overflow-style: none; }
   .luya__subnav::-webkit-scrollbar {
     display: none; }
@@ -10317,7 +10316,6 @@ form:not(.form-inline) .form-check-input {
   padding: 5px 10px 10px;
   position: relative;
   width: 200px;
-  z-index: 150;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;

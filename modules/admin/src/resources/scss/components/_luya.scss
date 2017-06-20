@@ -24,7 +24,6 @@
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
     padding: 0 10px;
-    z-index: 100;
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
