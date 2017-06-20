@@ -1381,7 +1381,7 @@
 		$scope.dropItem = function(dragged,dropped,position) {
 			
 			var sortIndex = $scope.$index;
-			
+			console.log(position);
 			if (position == 'bottom') {
 				sortIndex = sortIndex + 1;
 			}
@@ -1392,7 +1392,7 @@
 				});
 			} else {
 				// moving an existing block
-				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dropped.id, {
+				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
 					prev_id : $scope.placeholder.prev_id,
 					placeholder_var : $scope.placeholder['var'],
 					sort_index : sortIndex

@@ -24,7 +24,7 @@ angular.module('dnd', [])
 /**
  * Usage:
  * 
- * dnd dnd-model="data" dnd-isvalid="isValid(hover,dragged)" dnd-drag-disabled dnd-diable-middle dnd-drop-disabled dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
+ * dnd dnd-model="data" dnd-isvalid="isValid(hover,dragged)" dnd-drag-disabled dnd-diable-drag-middle dnd-drop-disabled dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
  */
 .directive('dnd', function(dndFactory) {
 	return {
@@ -42,6 +42,8 @@ angular.module('dnd', [])
 		link: function(scope, element, attrs) {
 			var isValid = true;
 			
+			var disableMiddleDrop = attrs.hasOwnProperty('dndDisableDragMiddle');
+			
 	        // this gives us the native JS object
 	        var dragable = element[0];
 	
@@ -50,7 +52,6 @@ angular.module('dnd', [])
 	        if (!attrs.hasOwnProperty('dndDragDisabled')) {
 	        	dragable.draggable = true;
 	        }
-	        
 	
 	        dragable.addEventListener(
 	            'dragstart',
@@ -83,35 +84,47 @@ angular.module('dnd', [])
     		        e.dataTransfer.dropEffect = 'move';
     		        // allows us to drop
     		        if (e.preventDefault) { e.preventDefault(); }
-    		        
-    		        	if (!scope.dndIsvalid({hover:  scope.dndModel, dragged: dndFactory.get().content})) {
-    		        		e.stopPropagation();
-    		        		e.preventDefault();
-    		        		isValid = false;
-    		        		return false;
-    		        	}
+    		        if (!scope.dndIsvalid({hover:  scope.dndModel, dragged: dndFactory.get().content})) {
+		        		e.stopPropagation();
+		        		e.preventDefault();
+		        		isValid = false;
+		        		return false;
+		        	}
     		        
                     var re = el.getBoundingClientRect();
 
     		        var height = re.height;
     		        var mouseHeight = e.clientY - re.top;
-    		        
     		        var percentage = (100 / height) * mouseHeight;
-    		        if (percentage <= 25) {
-    		        	this.classList.add(scope.dndCss.onHoverTop);
-    		        	this.classList.remove(scope.dndCss.onHoverMiddle);
-    		        	this.classList.remove(scope.dndCss.onHoverBottom);
-    		        	dndFactory.pos('top');
-    		        } else if (percentage >= 65) {
-    		        	this.classList.remove(scope.dndCss.onHoverTop);
-    		        	this.classList.remove(scope.dndCss.onHoverMiddle);
-    		        	this.classList.add(scope.dndCss.onHoverBottom);
-    		        	dndFactory.pos('bottom');
+    		        if (disableMiddleDrop) {
+    		        	if (percentage <= 50) {
+        		        	this.classList.add(scope.dndCss.onHoverTop);
+        		        	this.classList.remove(scope.dndCss.onHoverMiddle);
+        		        	this.classList.remove(scope.dndCss.onHoverBottom);
+        		        	dndFactory.pos('top');
+        		        } else {
+        		        	this.classList.remove(scope.dndCss.onHoverTop);
+        		        	this.classList.remove(scope.dndCss.onHoverMiddle);
+        		        	this.classList.add(scope.dndCss.onHoverBottom);
+        		        	dndFactory.pos('bottom');
+        		        }
     		        } else {
-    		        	this.classList.remove(scope.dndCss.onHoverTop);
-    		        	this.classList.add(scope.dndCss.onHoverMiddle);
-    		        	this.classList.remove(scope.dndCss.onHoverBottom);
-    		        	dndFactory.pos('middle');
+    		        	if (percentage <= 25) {
+        		        	this.classList.add(scope.dndCss.onHoverTop);
+        		        	this.classList.remove(scope.dndCss.onHoverMiddle);
+        		        	this.classList.remove(scope.dndCss.onHoverBottom);
+        		        	dndFactory.pos('top');
+        		        } else if (percentage >= 65) {
+        		        	this.classList.remove(scope.dndCss.onHoverTop);
+        		        	this.classList.remove(scope.dndCss.onHoverMiddle);
+        		        	this.classList.add(scope.dndCss.onHoverBottom);
+        		        	dndFactory.pos('bottom');
+        		        } else {
+        		        	this.classList.remove(scope.dndCss.onHoverTop);
+        		        	this.classList.add(scope.dndCss.onHoverMiddle);
+        		        	this.classList.remove(scope.dndCss.onHoverBottom);
+        		        	dndFactory.pos('middle');
+        		        }
     		        }
     		        
     		        this.classList.add(scope.dndCss.onHover);
