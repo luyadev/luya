@@ -1284,20 +1284,26 @@
 
 			});
 		}
-		$scope.revPlaceholders = function(placeholder, prevId, placeholderVar, replaceContent) {
-			var tmp = placeholder['prev_id'];
-			if (parseInt(prevId) == parseInt(tmp) && placeholderVar == placeholder['var']) {
-				placeholder['__nav_item_page_block_items'] = replaceContent;
-				return true;
-			}
+		$scope.revPlaceholders = function(placeholders, prevId, placeholderVar, replaceContent) {
+			for (var placeholderKey in placeholders) {
+				var placeholder = placeholders[placeholderKey];
+				
+				var tmp = placeholder['prev_id'];
+				if (parseInt(prevId) == parseInt(tmp) && placeholderVar == placeholder['var']) {
+					placeholder['__nav_item_page_block_items'] = replaceContent;
+					return true;
+				}
 
-			var find = $scope.revFind(placeholder, prevId, placeholderVar, replaceContent)
-			if (find !== false) {
-				return find;
+				var find = $scope.revFind(placeholder, prevId, placeholderVar, replaceContent)
+				if (find !== false) {
+					return find;
+				}
+				return false;
 			}
-			return false;
+			
 		}
 
+		// extend by adding placeholder rows
 		$scope.revFind = function(placeholder, prevId, placeholderVar, replaceContent) {
 			for (var i in placeholder['__nav_item_page_block_items']) {
 				for (var holder in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
@@ -1366,18 +1372,23 @@
 				AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
 			});
 		};
-
+		
 		$scope.dropItem = function(dragged,dropped,position) {
-			console.log(dragged.favorized);
-			console.log(dragged);
+			var sortIndex = $scope.$index;
 			if (dragged.hasOwnProperty('favorized')) {
-				console.log('gooo');
 				// its a new block
-				$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index : 0, block_id : dragged.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).then(function(response) {
-					console.log('top');
+				$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index:sortIndex, block_id : dragged.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).then(function(response) {
+					$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
 			} else {
 				// moving an existing block
+				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dropped.id, {
+					prev_id : $scope.placeholder.prev_id,
+					placeholder_var : $scope.placeholder['var'],
+					sort_index : sortIndex
+				}).then(function(response) {
+					$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+				});
 			}
 		};
 		

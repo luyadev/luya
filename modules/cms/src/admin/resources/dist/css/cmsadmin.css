@@ -51,7 +51,7 @@
   transition: .2s ease-in-out opacity, .2s ease-in-out transform; }
   .block-toolbar .toolbar-item {
     font-size: 20px;
-    font-size: 1.33333rem; }
+    font-size: 1.25rem; }
   .block-toolbar .toolbar-button {
     background: none;
     border: none;
@@ -172,7 +172,7 @@
   color: #fff;
   display: inline-block;
   font-size: 20px;
-  font-size: 1.33333rem;
+  font-size: 1.25rem;
   margin: 0;
   position: absolute;
   right: 0;
@@ -188,7 +188,7 @@
   padding-left: 32px; }
   .blockholder-group-title .material-icons {
     font-size: 20px;
-    font-size: 1.33333rem;
+    font-size: 1.25rem;
     margin-left: -28px;
     margin-right: -3px; }
   .blockholder-group-favorites .blockholder-group-title {
@@ -212,7 +212,7 @@
     cursor: move; }
   .blockholder-item .blockholder-icon {
     font-size: 20px;
-    font-size: 1.33333rem;
+    font-size: 1.25rem;
     left: 3px;
     position: absolute;
     top: 50%;
@@ -227,7 +227,7 @@
   border: none;
   color: #FF006B;
   font-size: 16px;
-  font-size: 1.06667rem;
+  font-size: 1rem;
   opacity: 0;
   padding-bottom: 3px;
   padding-top: 0;
@@ -314,7 +314,7 @@
     position: relative; }
     .cmsadmin-toolbar .toolbar-button .material-icons {
       font-size: 20px;
-      font-size: 1.33333rem; }
+      font-size: 1.25rem; }
   .cmsadmin-toolbar .toolbar-button-flag {
     padding-left: 10px;
     padding-right: 10px; }
@@ -430,7 +430,7 @@
 .treeview {
   display: block;
   font-size: 14px;
-  font-size: 0.93333rem;
+  font-size: 0.875rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -496,7 +496,7 @@
   .treeview__label--container {
     font-weight: bold;
     letter-spacing: .8px;
-    letter-spacing: 0.05333rem; }
+    letter-spacing: 0.05rem; }
   .treeview__label:after {
     border-radius: 5px;
     content: "";
@@ -514,7 +514,7 @@
 
 .treeview__icon {
   font-size: 18px;
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   height: 18px;
   left: 0;
   line-height: 1;
@@ -528,7 +528,7 @@
     top: 0;
     cursor: pointer;
     font-size: 24px;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     height: 24px;
     width: 24px;
     -webkit-transition: .25s ease-in-out transform;
