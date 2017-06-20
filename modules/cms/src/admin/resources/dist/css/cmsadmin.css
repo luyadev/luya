@@ -413,18 +413,18 @@
   margin: 10px 0;
   width: 100%; }
 
-.cmsnav__list {
+.cmsnav-list {
   display: block;
   list-style: none;
   margin: 0;
   padding: 0; }
-  .cmsnav__list:not(:first-of-type) {
+  .cmsnav-list:not(:first-of-type) {
     margin-top: 15px; }
 
-.cmsnav__button:not(:first-of-type) {
+.cmsnav-button:not(:first-of-type) {
   margin-top: 5px; }
 
-.cmsnav__treeview {
+.cmsnav-treeview {
   display: block; }
 
 .treeview {
@@ -439,28 +439,28 @@
       -ms-user-select: none;
           user-select: none; }
 
-.treeview__container {
+.treeview-container {
   display: block;
   margin-top: 20px;
   position: relative;
   width: 100%; }
 
-.treeview__items {
+.treeview-items {
   display: block;
   list-style: none;
   margin: 0;
   padding: 0;
   position: relative; }
-  .treeview__item > .treeview__items {
+  .treeview-item > .treeview-items {
     margin-left: 15px; }
-  .treeview__item--collapsed > .treeview__items {
+  .treeview-item-collapsed > .treeview-items {
     display: none; }
 
-.treeview__item {
+.treeview-item {
   display: block;
   padding-top: 5px;
   position: relative; }
-  .treeview__item:before {
+  .treeview-item:before {
     border-bottom: 1px solid silver;
     border-left: 1px solid silver;
     content: '';
@@ -470,7 +470,7 @@
     position: absolute;
     top: 0;
     width: 25px; }
-  .treeview__item:after {
+  .treeview-item:after {
     border-left: 1px solid silver;
     content: '';
     display: block;
@@ -478,26 +478,26 @@
     left: -4px;
     position: absolute;
     top: 0; }
-  .treeview__item--lvl1:before, .treeview__item--lvl1:after {
+  .treeview-item-lvl1:before, .treeview-item-lvl1:after {
     display: none; }
-  .treeview__item:last-child:after {
+  .treeview-item:last-child:after {
     display: none; }
-  .treeview__item--has-children:before {
+  .treeview-item-has-children:before {
     top: -1px;
     width: 7px; }
-  .treeview__item--collapsed:before {
+  .treeview-item-collapsed:before {
     height: 19px; }
 
-.treeview__label {
+.treeview-label {
   display: block;
   padding: 0 35px 0 23px;
   position: relative;
   width: 100%; }
-  .treeview__label--container {
+  .treeview-label-container {
     font-weight: bold;
     letter-spacing: .8px;
     letter-spacing: 0.05rem; }
-  .treeview__label:after {
+  .treeview-label:after {
     border-radius: 5px;
     content: "";
     height: 100%;
@@ -505,14 +505,14 @@
     right: 0;
     top: 0;
     width: 5px; }
-  .treeview__label--page:after {
+  .treeview-label-page:after {
     background-color: #79B744; }
-  .treeview__item--isoffline .treeview__label:after {
+  .treeview-item-isoffline .treeview-label:after {
     background-color: #EA2E49; }
-  .treeview__item--ishidden .treeview__label {
+  .treeview-item-ishidden .treeview-label {
     opacity: .5; }
 
-.treeview__icon {
+.treeview-icon {
   font-size: 18px;
   font-size: 1.125rem;
   height: 18px;
@@ -521,10 +521,10 @@
   position: absolute;
   top: 3px;
   width: 18px; }
-  .treeview__icon--right {
+  .treeview-icon-right {
     left: auto;
     right: 10px; }
-  .treeview__icon--collapse {
+  .treeview-icon-collapse {
     top: 0;
     cursor: pointer;
     font-size: 24px;
@@ -533,20 +533,20 @@
     width: 24px;
     -webkit-transition: .25s ease-in-out transform;
     transition: .25s ease-in-out transform; }
-    .treeview__item--collapsed .treeview__icon--collapse {
+    .treeview-item-collapsed .treeview-icon-collapse {
       -webkit-transform: rotate(-90deg) translateX(-1px);
           -ms-transform: rotate(-90deg) translateX(-1px);
               transform: rotate(-90deg) translateX(-1px); }
-  .treeview__icon .material-icons {
+  .treeview-icon .material-icons {
     display: block; }
 
-.treeview__link {
+.treeview-link {
   border-radius: 5px;
   cursor: pointer;
   display: block;
   padding: 0 7px;
   width: 100%; }
-  .treeview__link:hover {
+  .treeview-link:hover {
     background-color: rgba(0, 0, 0, 0.1); }
-    .treeview__label--container .treeview__link:hover {
+    .treeview-label-container .treeview-link:hover {
       background-color: transparent; }
