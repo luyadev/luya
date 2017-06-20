@@ -52,8 +52,8 @@
 </script>
 <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item nav-item-title">
-        <span class="flag flag--{{lang.short_code}}">
-            <span class="flag__fallback">{{lang.name}}</span>
+        <span class="flag flag-{{lang.short_code}}">
+            <span class="flag-fallback">{{lang.name}}</span>
         </span>
         <span>{{ item.title }}</span>
     </li>

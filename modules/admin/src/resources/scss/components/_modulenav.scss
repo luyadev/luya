@@ -5,7 +5,7 @@
     width: 100%;
 }
 
-.modulenav__group {
+.modulenav-group {
     display: block;
 
     &:first-child {
@@ -16,25 +16,25 @@
     }
 }
 
-.modulenav__group-title {
+.modulenav-group-title {
     color: $gray-light;
     display: block;
     padding-left: 32px;
     width: 100%;
 }
 
-.modulenav__list {
+.modulenav-list {
     list-style: none;
     margin: 10px 0 0;
     padding: 0;
 }
 
-.modulenav__item {
+.modulenav-item {
     display: block;
     margin-top: 5px;
 }
 
-.modulenav__link {
+.modulenav-link {
     border-radius: 5px;
     color: $gray;
     cursor: pointer;
@@ -53,8 +53,8 @@
     }
 }
 
-.modulenav__icon,
-.modulenav__label {
+.modulenav-icon,
+.modulenav-label {
     display: inline-block;
     height: 24px;
     line-height: 24px;
@@ -62,10 +62,10 @@
     vertical-align: middle;
 }
 
-.modulenav__icon {
+.modulenav-icon {
     font-size: 20px !important;
 }
 
-.modulenav__label {
+.modulenav-label {
     margin-left: 3px;
 }

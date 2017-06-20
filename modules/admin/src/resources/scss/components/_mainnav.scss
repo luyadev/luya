@@ -9,7 +9,7 @@
     position: relative;
     width: 200px;
 
-    &--small {
+    &-small {
         flex: 0 0 62px;
         width: 62px;
     }
@@ -17,7 +17,7 @@
     user-select: none;
 }
 
-.mainnav__modules {
+.mainnav-modules {
     flex: 1 0;
 
     overflow: auto;
@@ -28,26 +28,26 @@
     -ms-overflow-style: none; // IE 10+
 }
 
-.mainnav__static {
+.mainnav-static {
     flex: 0 0;
 }
 
-.mainnav__list {
+.mainnav-list {
     line-height: 1;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.mainnav__entry {
+.mainnav-entry {
     margin-top: 5px;
 
-    .mainnav--small & {
+    .mainnav-small & {
         text-align: center;
     }
 }
 
-.mainnav__link {
+.mainnav-link {
     border-radius: 5px;
     color: $gray-light;
     cursor: pointer;
@@ -58,7 +58,7 @@
     text-decoration: none;
     transition: .2s ease-in-out color, .2s ease-in-out background-color;
 
-    .mainnav--small &:after {
+    .mainnav-small &:after {
         background-color: rgba(#fff, .1);
         border-radius: 5px;
         content: "";
@@ -77,12 +77,12 @@
     }
 
     &:hover,
-    &--active {
+    &-active {
         background-color: rgba(#fff, .1);
         color: $brand-primary;
         text-decoration: none;
 
-        .mainnav--small & {
+        .mainnav-small & {
             background-color: transparent;
 
             &:after {
@@ -93,19 +93,19 @@
     }
 }
 
-.mainnav__icon,
-.mainnav__label {
+.mainnav-icon,
+.mainnav-label {
     display: inline-block;
     height: 24px;
     line-height: 24px;
 }
 
-.mainnav__icon {
+.mainnav-icon {
     flex: 0 0;
     font-size: 24px !important;
     margin: 0 15px 0 0;
 
-    .mainnav--small & {
+    .mainnav-small & {
         left: 50%;
         margin: 0;
         position: absolute;
@@ -114,22 +114,22 @@
     }
 }
 
-.mainnav__image-icon {
+.mainnav-image-icon {
     height: auto;
     margin-top: -2px;
     min-width: 24px;
     width: 100%;
 
-    &--small {
+    &-small {
         margin-top: 0;
     }
 }
 
-.mainnav__label {
+.mainnav-label {
     flex: 1 0;
     @include google-chrome-font-offset-fix;
 
-    .mainnav--small & {
+    .mainnav-small & {
         display: none;
     }
 }

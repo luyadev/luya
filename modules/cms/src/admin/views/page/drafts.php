@@ -1,4 +1,4 @@
-<div class="luya__content">
+<div class="luya-content">
     <h1><?php echo \luya\cms\admin\Module::t('draft_title'); ?></h1>
     <p><?php echo \luya\cms\admin\Module::t('draft_text'); ?></p>
     <div class="card" ng-controller="DraftsController">

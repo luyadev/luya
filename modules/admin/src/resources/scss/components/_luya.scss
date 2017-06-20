@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-.luya__main {
+.luya-main {
     align-items: stretch;
     display: flex;
     flex: 1 1;
@@ -15,11 +15,11 @@
     justify-content: flex-start;
 }
 
-.luya__mainnav {
+.luya-mainnav {
     z-index: 50;
 }
 
-.luya__subnav {
+.luya-subnav {
     align-items: stretch;
     background-color: $white;
     color: $gray;
@@ -50,7 +50,7 @@
     -ms-overflow-style: none; // IE 10+
 }
 
-.luya__content {
+.luya-content {
     background-color: $gray-lightest;
     flex: 1 1;
     overflow: auto;
@@ -59,11 +59,11 @@
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
-    &--cmsadmin {
+    &-cmsadmin {
         padding: 0;
     }
 
-    .luya__subnav.overlaying + & {
+    .luya-subnav.overlaying + & {
         padding-left: 50px;
     }
 

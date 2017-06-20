@@ -65,8 +65,8 @@ $this->beginBody();
             </li>
             <li class="nav-item nav-item-alternative" ng-repeat="lang in AdminLangService.data" ng-class="{'ml-auto' : $first}">
                 <a class="nav-link" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" role="tab">
-                    <span class="flag flag--{{lang.short_code}}">
-                        <span class="flag__fallback">{{lang.name}}</span>
+                    <span class="flag flag-{{lang.short_code}}">
+                        <span class="flag-fallback">{{lang.name}}</span>
                     </span>
                 </a>
             </li>

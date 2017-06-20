@@ -2,7 +2,7 @@
 use luya\admin\Module;
 use luya\helpers\Url;
 ?>
-<div class="luya__content" ng-controller="AccountController">
+<div class="luya-content" ng-controller="AccountController">
     <h1>
         <span ng-bind="profile.firstname"></span> <span ng-bind="profile.lastname"></span>
         <a href="<?= Url::toRoute(['/admin/default/logout']); ?>" class="btn btn-danger"><?= Module::t('layout_btn_logout'); ?></a>
