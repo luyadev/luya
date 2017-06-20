@@ -10,17 +10,22 @@
                         <i class="material-icons">{{block.icon}}</i>
                         <span>{{block.name}}</span>
                     </div>
-                    <div class="toolbar-item ml-auto">
+                    <div class="toolbar-item ml-auto" ng-click="copyBlock()">
                         <button class="toolbar-button">
                             <i class="material-icons">content_copy</i>
                         </button>
                     </div>
-                    <div class="toolbar-item">
+                    <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==0">
                         <button class="toolbar-button">
                             <i class="material-icons">visibility</i>
                         </button>
                     </div>
-                    <div class="toolbar-item">
+                    <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==1">
+                        <button class="toolbar-button">
+                            <i class="material-icons">visibility_off</i>
+                        </button>
+                    </div>
+                    <div class="toolbar-item" ng-click="removeBlock()">
                         <button class="toolbar-button">
                             <i class="material-icons">delete</i>
                         </button>
@@ -31,8 +36,8 @@
                         </button>
                     </div>
                 </div>
-                <modal is-modal-hidden="!edit" title="Settings">
-                    <form class="block__edit" ng-if="edit || config" ng-submit="save()">
+                <modal is-modal-hidden="modalHidden" title="Settings">
+                    <form class="block__edit" ng-if="edit" ng-submit="save()">
                         <div ng-repeat="field in block.vars" ng-hide="field.invisible">
                             <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
                         </div>
@@ -42,7 +47,7 @@
                 <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
                 <div ng-if="block.__placeholders.length" class="block-front">
                     <div class="row" ng-repeat="row in block.__placeholders">
-                        <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" />
+                        <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-include="'recursion.html'" />
                     </div>
                 </div>
             </div>
@@ -80,7 +85,7 @@
 </ul>
 <div class="cmsadmin-page" ng-if="isTranslated">
     <div class="row" ng-if="item.nav_item_type==1" ng-repeat="row in container.__placeholders">
-        <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" />
+        <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-include="'recursion.html'" />
     </div>
     <div class="row" ng-if="item.nav_item_type==2">
         Module

@@ -15,7 +15,6 @@ module.exports = {
             "vendorlibs/angular/angular.min.js",
             "vendorlibs/angular-chosen/angular-chosen.min.js",
             "vendorlibs/angular-datepicker/angular-datepicker.min.js",
-            "vendorlibs/angular-dragdrop/angular-dragdrop.min.js",
             "vendorlibs/angular-loading-bar/loading-bar.min.js",
             "vendorlibs/angular-slugify/angular-slugify.js",
             "vendorlibs/angular-ui-router/angular-ui-router.min.js",
