@@ -1285,16 +1285,13 @@
 			});
 		}
 		$scope.revPlaceholders = function(placeholders, prevId, placeholderVar, replaceContent) {
-			
 			for (var placeholderKey in placeholders) {
 				var placeholder = placeholders[placeholderKey];
-				
 				var tmp = placeholder['prev_id'];
 				if (parseInt(prevId) == parseInt(tmp) && placeholderVar == placeholder['var']) {
 					placeholder['__nav_item_page_block_items'] = replaceContent;
 					return true;
 				}
-
 				var find = $scope.revFind(placeholder, prevId, placeholderVar, replaceContent)
 				if (find !== false) {
 					return find;
@@ -1304,7 +1301,6 @@
 			return false;
 		}
 
-		// extend by adding placeholder rows
 		$scope.revFind = function(placeholder, prevId, placeholderVar, replaceContent) {
 			for (var i in placeholder['__nav_item_page_block_items']) {
 				for (var holderKey in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
@@ -1383,7 +1379,12 @@
 		};
 		
 		$scope.dropItem = function(dragged,dropped,position) {
+			
 			var sortIndex = $scope.$index;
+			
+			if (position == 'bottom') {
+				sortIndex = sortIndex + 1;
+			}
 			if (dragged.hasOwnProperty('favorized')) {
 				// its a new block
 				$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index:sortIndex, block_id : dragged.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).then(function(response) {
@@ -1563,6 +1564,7 @@
 	/**
 	 * @TODO HANDLING SORT INDEX OF EACH BLOCK
 	 */
+	/*
 	zaa.controller("DropBlockController", function($scope, $http, AdminClassService) {
 
 		$scope.PagePlaceholderController = $scope.$parent;
@@ -1609,6 +1611,7 @@
 			AdminClassService.setClassSpace('onDragStart', undefined);
 		}
 	});
+	*/
 
 	zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, ServiceBlocksData, ServiceBlockCopyStack, $sce) {
 
