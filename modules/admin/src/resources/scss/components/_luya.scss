@@ -15,6 +15,10 @@
     justify-content: flex-start;
 }
 
+.luya__mainnav {
+    z-index: 50;
+}
+
 .luya__subnav {
     align-items: stretch;
     background-color: $white;
@@ -24,17 +28,19 @@
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
     padding: 0 10px;
+    max-width: 250px;
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
 
-    &.preview-active {
+    &.overlaying {
         bottom: 0;
         box-shadow: 2px 0 10px 1px rgba(0,0,0,.1);
         position: absolute;
         top: 0;
-        transform: translateX(-80%);
+        transform: translateX(calc(-100% + 50px));
         transition: .2s ease-in-out transform;
+        z-index: 20;
 
         &:hover {
             transform: translateX(0);
@@ -57,8 +63,8 @@
         padding: 0;
     }
 
-    &.preview-active {
-        padding-left: 40px;
+    .luya__subnav.overlaying + & {
+        padding-left: 50px;
     }
 
     -ms-overflow-style: none; // IE 10+

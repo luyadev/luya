@@ -27,8 +27,8 @@ use \luya\cms\admin\Module;
         <li class="treeview__item" ng-class="{'treeview__item--isoffline' : data.is_offline, 'treeview__item--collapsed': !data.toggle_open, 'treeview__item--ishidden': data.is_hidden, 'treeview__item--has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse2.html'" />
     </ul>
 </script>
-<div class="luya__subnav">
-    <div class="cmsnav" ng-controller="CmsMenuTreeController">
+<div class="luya__subnav" ng-controller="CmsMenuTreeController" ng-class="{'overlaying': liveEditStateToggler}">
+    <div class="cmsnav">
         <ul class="cmsnav__list cmsnav__list--buttons">
             <?php if (Yii::$app->adminuser->canRoute('cmsadmin/page/create')): ?>
             <li class="cmsnav__button" ui-sref="custom.cmsadd">

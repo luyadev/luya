@@ -10242,6 +10242,9 @@ form:not(.form-inline) .form-check-input {
       -ms-flex-pack: start;
           justify-content: flex-start; }
 
+.luya__mainnav {
+  z-index: 50; }
+
 .luya__subnav {
   -webkit-box-align: stretch;
   -webkit-align-items: stretch;
@@ -10260,20 +10263,22 @@ form:not(.form-inline) .form-check-input {
   overflow: auto;
   overflow: -moz-scrollbars-none;
   padding: 0 10px;
+  max-width: 250px;
   -ms-overflow-style: none; }
   .luya__subnav::-webkit-scrollbar {
     display: none; }
-  .luya__subnav.preview-active {
+  .luya__subnav.overlaying {
     bottom: 0;
     box-shadow: 2px 0 10px 1px rgba(0, 0, 0, 0.1);
     position: absolute;
     top: 0;
-    -webkit-transform: translateX(-80%);
-        -ms-transform: translateX(-80%);
-            transform: translateX(-80%);
+    -webkit-transform: translateX(calc(-100% + 50px));
+        -ms-transform: translateX(calc(-100% + 50px));
+            transform: translateX(calc(-100% + 50px));
     -webkit-transition: .2s ease-in-out transform;
-    transition: .2s ease-in-out transform; }
-    .luya__subnav.preview-active:hover {
+    transition: .2s ease-in-out transform;
+    z-index: 20; }
+    .luya__subnav.overlaying:hover {
       -webkit-transform: translateX(0);
           -ms-transform: translateX(0);
               transform: translateX(0); }
@@ -10292,8 +10297,8 @@ form:not(.form-inline) .form-check-input {
     display: none; }
   .luya__content--cmsadmin {
     padding: 0; }
-  .luya__content.preview-active {
-    padding-left: 40px; }
+  .luya__subnav.overlaying + .luya__content {
+    padding-left: 50px; }
 
 .mainnav {
   background: -webkit-linear-gradient(bottom, #232526, #35383D);
