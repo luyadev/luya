@@ -1513,8 +1513,8 @@
 		$scope.removeBlock = function() {
 			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), function($timeout, $toast) {
 				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + $scope.block.id).then(function(response) {
-					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
-					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
+					$scope.NavItemTypePageController.refresh();
+					$scope.NavItemTypePageController.loadLiveUrl();
 					$toast.close();
 					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: $scope.block.name}), 2000);
 				});
@@ -1528,14 +1528,13 @@
 				variation: $scope.block.variation
 			}).then(function(response) {
 				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}), 2000);
-				$scope.edit = false;
+				$scope.toggleEdit();
 				$scope.block.is_dirty = 1;
 				$scope.block = angular.copy(response.data.objectdetail);
-				$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
+				$scope.NavItemTypePageController.loadLiveUrl();
 				$scope.evalVariationVisbility($scope.block.variation);
 			});
 		};
-
 	});
 
 	/**
