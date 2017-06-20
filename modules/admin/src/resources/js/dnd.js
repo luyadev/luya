@@ -47,7 +47,9 @@ angular.module('dnd', [])
 	
 	        /* DRAGABLE */
 	        
-	        dragable.draggable = true;
+	        if (!attrs.hasOwnProperty('dndDragDisabled')) {
+	        	dragable.draggable = true;
+	        }
 	        
 	
 	        dragable.addEventListener(
@@ -139,8 +141,7 @@ angular.module('dnd', [])
     		    false
     		);
 
-    		
-    		if (!attrs.dndDropDisabled) {
+    		if (!attrs.hasOwnProperty('dndDropDisabled')) {
 	            el.addEventListener(
 	                'drop',
 	                function(e) {

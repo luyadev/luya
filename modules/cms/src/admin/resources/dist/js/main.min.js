@@ -1285,6 +1285,7 @@
 			});
 		}
 		$scope.revPlaceholders = function(placeholders, prevId, placeholderVar, replaceContent) {
+			
 			for (var placeholderKey in placeholders) {
 				var placeholder = placeholders[placeholderKey];
 				
@@ -1298,18 +1299,20 @@
 				if (find !== false) {
 					return find;
 				}
-				return false;
 			}
-			
+
+			return false;
 		}
 
 		// extend by adding placeholder rows
 		$scope.revFind = function(placeholder, prevId, placeholderVar, replaceContent) {
 			for (var i in placeholder['__nav_item_page_block_items']) {
-				for (var holder in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
-					var rsp = $scope.revPlaceholders(placeholder['__nav_item_page_block_items'][i]['__placeholders'][holder], prevId, placeholderVar, replaceContent);
-					if (rsp !== false) {
-						return rsp;
+				for (var holderKey in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
+					for (var holder in placeholder['__nav_item_page_block_items'][i]['__placeholders'][holderKey]) {
+						var rsp = $scope.revPlaceholders(placeholder['__nav_item_page_block_items'][i]['__placeholders'][holderKey][holder], prevId, placeholderVar, replaceContent);
+						if (rsp !== false) {
+							return rsp;
+						}
 					}
 				}
 			}
@@ -1330,7 +1333,7 @@
 	 * @param $scope.placeholder
 	 *            from ng-repeat
 	 */
-	zaa.controller("PagePlaceholderController", function($scope, AdminClassService, PlaceholderService) {
+	zaa.controller("PagePlaceholderController", function($scope, $http, AdminClassService, PlaceholderService) {
 
 		$scope.NavItemTypePageController = $scope.$parent;
 
@@ -1355,6 +1358,12 @@
 			if (status !== undefined && !$scope.isOpen) {
 				$scope.isOpen = true;
 			}
+		};
+		
+		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
+			$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : dropped.prev_id, sort_index:0, block_id : dragged.id , placeholder_var : dropped.var, nav_item_page_id : dropped.nav_item_page_id }).then(function(response) {
+				$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
+			});
 		};
 	});
 
