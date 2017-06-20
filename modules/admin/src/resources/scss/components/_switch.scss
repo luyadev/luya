@@ -7,7 +7,7 @@
     user-select: none;
 }
 
-.switch__switch {
+.switch-switch {
     display: block;
     flex: 0 0 50px;
     height: 30px;
@@ -15,11 +15,11 @@
     width: 100%;
 }
 
-.switch__checkbox {
+.switch-checkbox {
     display: none;
 }
 
-.switch__control {
+.switch-control {
     background-color: #c0c0c0;
     border-radius: 7.5px;
     display: block;
@@ -43,7 +43,7 @@
         width: 25px;
     }
 
-    .switch__checkbox:checked + & {
+    .switch-checkbox:checked + & {
         background-color: $green;
 
         &:after {
@@ -52,7 +52,7 @@
     }
 }
 
-.switch__label {
+.switch-label {
     flex: 1 0 auto;
     line-height: 30px;
     margin: 0 0 0 15px;

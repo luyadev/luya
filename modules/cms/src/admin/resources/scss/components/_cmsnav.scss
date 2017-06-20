@@ -8,7 +8,7 @@
 // General lists
 // ==================================================
 
-.cmsnav__list {
+.cmsnav-list {
     display: block;
     list-style: none;
     margin: 0;
@@ -23,7 +23,7 @@
 // Buttons
 // ==================================================
 
-.cmsnav__button:not(:first-of-type) {
+.cmsnav-button:not(:first-of-type) {
     margin-top: 5px;
 }
 
@@ -35,6 +35,6 @@
 // Treeview
 // ==================================================
 
-.cmsnav__treeview {
+.cmsnav-treeview {
     display: block;
 }

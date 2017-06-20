@@ -12,32 +12,32 @@
                     <div class="cmsadmin-toolbar">
                         <div class="toolbar-item">
                             <label class="switch" for="switch-visibility-status">
-                            	<span class="switch__label">
+                            	<span class="switch-label">
                                     <i class="material-icons" ng-show="!navData.is_hidden">visibility</i>
                                     <i class="material-icons" ng-show="navData.is_hidden">visibility_off</i>
                                 </span>
-                                <span class="switch__switch">
-                                    <input class="switch__checkbox"  ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1" type="checkbox" id="switch-visibility-status"/>
-                                    <span class="switch__control"></span>
+                                <span class="switch-switch">
+                                    <input class="switch-checkbox"  ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1" type="checkbox" id="switch-visibility-status"/>
+                                    <span class="switch-control"></span>
                                 </span>
                             </label>
                         </div>
                         <div class="toolbar-item">
                             <label class="switch" for="switch-online-status">
-                                <span class="switch__label">
+                                <span class="switch-label">
                                     <i class="material-icons" ng-show="!navData.is_offline">cloud_queue</i>
                                     <i class="material-icons" ng-show="navData.is_offline">cloud_off</i>
                                 </span>
-                                <span class="switch__switch">
-                                    <input class="switch__checkbox" type="checkbox" id="switch-online-status" ng-model="navData.is_offline" ng-true-value="0" ng-false-value="1"/>
-                                    <span class="switch__control"></span>
+                                <span class="switch-switch">
+                                    <input class="switch-checkbox" type="checkbox" id="switch-online-status" ng-model="navData.is_offline" ng-true-value="0" ng-false-value="1"/>
+                                    <span class="switch-control"></span>
                                 </span>
                             </label>
                         </div>
                         <div class="toolbar-item" ng-class="{'ml-auto':$first}" ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)">
                             <button class="toolbar-button toolbar-button-flag" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" >
-                                <span class="flag flag--{{lang.short_code}}">
-                                    <span class="flag__fallback">{{lang.name}}</span>
+                                <span class="flag flag-{{lang.short_code}}">
+                                    <span class="flag-fallback">{{lang.name}}</span>
                                 </span>
                             </button>
                         </div>

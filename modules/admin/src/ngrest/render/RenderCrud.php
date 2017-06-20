@@ -329,7 +329,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                 $id = 'id-'.md5($ngModel.$lang['short_code']);
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
-                    'html' => '<div class="col" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], true).'<span class="flag flag--'.$lang['short_code'].' form-col-flag"><span class="flag__fallback">'.$lang['short_code'].'</span></span></div>',
+                    'html' => '<div class="col" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], true).'<span class="flag flag-'.$lang['short_code'].' form-col-flag"><span class="flag-fallback">'.$lang['short_code'].'</span></span></div>',
                 ];
 
                 ++$i;

@@ -153,12 +153,12 @@ use luya\cms\admin\Module;
 </script>
 <!-- treeview item -->
 <script type="text/ng-template" id="reverse.html">
- <div data-drag="true" jqyoui-draggable data-jqyoui-options="{revert: true, delay: 200, scroll : false, handle : '.treeview__link--draggable'}" ng-model="data">
-    <div class="treeview__drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
+ <div data-drag="true" jqyoui-draggable data-jqyoui-options="{revert: true, delay: 200, scroll : false, handle : '.treeview-link--draggable'}" ng-model="data">
+    <div class="treeview-drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview-drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
     </div>
-    <a ng-if="data.is_editable" class="treeview__button treeview__link" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag, 'treeview__link--hidden' : data.is_hidden == '1'}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
-        <div class="treeview__icon-holder">
-            <i class="material-icons treeview__toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview__toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
+    <a ng-if="data.is_editable" class="treeview-button treeview-link" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview-link--active' : isCurrentElement(data), 'treeview-link--is-online' : data.is_offline == '0', 'treeview-link--is-hidden' : data.is_hidden == '1', 'treeview-link--draggable' : showDrag, 'treeview-link--hidden' : data.is_hidden == '1'}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview-link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
+        <div class="treeview-icon-holder">
+            <i class="material-icons treeview-toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview-toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
         </div>
 
         <span ng-if="isLocked('cms_nav_item', data.id)" style="cursor: not-allowed;">
@@ -168,23 +168,23 @@ use luya\cms\admin\Module;
             {{data.title}}
         </span>
 
-        <div class="treeview__info-icons">
-            <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
+        <div class="treeview-info-icons">
+            <i ng-show="data.is_home==1" class="material-icons treeview-text-icon">home</i>
         </div>
     </a>
-    <a ng-if="!data.is_editable" class="treeview__button treeview__link" style="cursor: not-allowed;" ng-class="{'treeview__link--active' : isCurrentElement(data), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--hidden' : data.is_hidden == '1'}">
-        <div class="treeview__icon-holder">
-            <i class="material-icons treeview__toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview__toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
+    <a ng-if="!data.is_editable" class="treeview-button treeview-link" style="cursor: not-allowed;" ng-class="{'treeview-link--active' : isCurrentElement(data), 'treeview-link--is-online' : data.is_offline == '0', 'treeview-link--is-hidden' : data.is_hidden == '1', 'treeview-link--hidden' : data.is_hidden == '1'}">
+        <div class="treeview-icon-holder">
+            <i class="material-icons treeview-toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview-toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
         </div>
         <span style="cursor: not-allowed;">{{data.title}}</span>
-        <div class="treeview__info-icons">
-            <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
+        <div class="treeview-info-icons">
+            <i ng-show="data.is_home==1" class="material-icons treeview-text-icon">home</i>
         </div>
     </a>
-    <ul class="treeview__list" role="menu" ng-if="data.toggle_open==1">
-        <li class="treeview__item" role="menuitem" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse.html'"></li>
+    <ul class="treeview-list" role="menu" ng-if="data.toggle_open==1">
+        <li class="treeview-item" role="menuitem" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse.html'"></li>
     </ul>
-    <div class="treeview__drop" ng-show="$last" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onAfterDrop()', multiple : true}">
+    <div class="treeview-drop" ng-show="$last" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview-drop--hover' }" jqyoui-droppable="{onDrop: 'onAfterDrop()', multiple : true}">
     </div>
 </div>
 </script>

@@ -1,3 +1,3 @@
-<div class="luya__content">
+<div class="luya-content">
     <storage-file-manager ng-model="$parent.$parent.ngModel" selection="false" />
 </div>

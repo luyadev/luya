@@ -2,12 +2,12 @@
 use luya\admin\Module as Admin;
 ?>
 <div class="loading-overlay" ng-if="LuyaLoading.getState()">
-    <div class="loading-overlay__content">
-        <h3 class="loading-overlay__title">
+    <div class="loading-overlay-content">
+        <h3 class="loading-overlay-title">
             {{LuyaLoading.getStateMessage()}}
         </h3>
 
-        <div class="loading-overlay__loader">
+        <div class="loading-overlay-loader">
             <div class="loading-indicator">
                 <div class="rect1"></div><!--
                 --><div class="rect2"></div><!--
@@ -39,8 +39,8 @@ use luya\admin\Module as Admin;
 <script type="text/ng-template" id="updateformredirect.html">
     <div class="row">
         <div class="input input--radios col s12">
-            <label class="input__label"><?= Admin::t('view_index_redirect_type'); ?></label>
-            <div class="input__field-wrapper">
+            <label class="input-label"><?= Admin::t('view_index_redirect_type'); ?></label>
+            <div class="input-field-wrapper">
                 <input type="radio" ng-model="data.type" ng-value="1"><label ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label> <br />
                 <input type="radio" ng-model="data.type" ng-value="2"><label ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
             </div>
@@ -56,9 +56,9 @@ use luya\admin\Module as Admin;
         <div class="col s12" ng-switch-when="2">
 
             <div class="input input--text col s12">
-                <label class="input__label"><?= Admin::t('view_index_redirect_external_link'); ?></label>
-                <div class="input__field-wrapper">
-                    <input name="text" type="text" class="input__field" ng-model="data.value" placeholder="http://" />
+                <label class="input-label"><?= Admin::t('view_index_redirect_external_link'); ?></label>
+                <div class="input-field-wrapper">
+                    <input name="text" type="text" class="input-field" ng-model="data.value" placeholder="http://" />
                     <small><?= Admin::t('view_index_redirect_external_link_help'); ?></small>
                 </div>
             </div>
@@ -72,25 +72,25 @@ use luya\admin\Module as Admin;
     <div class="input">
         <input type="radio" ng-checked="data.id == navId" />
         <label ng-click="changeModel(data)">
-            <span class="menu-dropdown__label">{{ data.title }}</span>
+            <span class="menu-dropdown-label">{{ data.title }}</span>
         </label>
     </div>
 
-    <ul class="menu-dropdown__list">
-        <li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:data.id" ng-include="'menuDropdownReverse'"></li>
+    <ul class="menu-dropdown-list">
+        <li class="menu-dropdown-item" ng-repeat="data in menuData.items | menuparentfilter:container.id:data.id" ng-include="'menuDropdownReverse'"></li>
     </ul>
 </script>
 
 <script type="text/ng-template" id="storageFileUpload">
     <div class="link-selector">
-        <div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
+        <div class="link-selector-btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
             <i class="material-icons left">attach_file</i>
                     <span>
                         <?= Admin::t('layout_select_file'); ?>
                     </span>
         </div>
-        <span class="link-selector__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
-        <span class="link-selector__path" ng-bind="fileinfo.name"></span>
+        <span class="link-selector-reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
+        <span class="link-selector-path" ng-bind="fileinfo.name"></span>
         <div ng-if="!modal.state">
         <modal is-modal-hidden="modal.state"><storage-file-manager selection="true" /></modal>
         </div>
@@ -104,10 +104,10 @@ use luya\admin\Module as Admin;
         <div ng-show="originalFileIsRemoved">
             <div class="alert alert--danger"><?= Admin::t('layout_deleted_file'); ?></div>
         </div><!--
-        --><div class="imageupload__preview" ng-show="imageinfo != null">
+        --><div class="imageupload-preview" ng-show="imageinfo != null">
             <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="responsive-img" />
-            <div class="imageupload__size" ng-show="!imageLoading">{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</div>
-            <div class="imageupload__loading" ng-hide="!imageLoading">
+            <div class="imageupload-size" ng-show="!imageLoading">{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</div>
+            <div class="imageupload-loading" ng-hide="!imageLoading">
                 <div class="preloader-wrapper big active">
                     <div class="spinner-layer spinner-green-only">
                         <div class="circle-clipper left">
@@ -121,7 +121,7 @@ use luya\admin\Module as Admin;
                 </div>
             </div>
         </div>
-        <div class="imageupload__filter" ng-show="!noFilters() && imageinfo != null">
+        <div class="imageupload-filter" ng-show="!noFilters() && imageinfo != null">
             <label><?= Admin::t('layout_image_filter_selection'); ?></label>
             <select name="filterId" ng-model="filterId" convert-to-number><option value="0"><?= Admin::t('layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div>
@@ -131,54 +131,54 @@ use luya\admin\Module as Admin;
 
 <script type="text/ng-template" id="reverseFolders2">
 
-    <i class="material-icons treeview__toggler filemanager__folder-toggleicon" ng-click="toggleFolderItem(folder)" ng-hide="folder.subfolder==0" ng-class="{'treeview__toggler--subnav-closed': folder.toggle_open!=1}">arrow_drop_down</i>
-    <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-offset-top="-5">
-        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default"></i>
-        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active"></i>
-                        <span class="filemanager__folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id">
+    <i class="material-icons treeview-toggler filemanager-folder-toggleicon" ng-click="toggleFolderItem(folder)" ng-hide="folder.subfolder==0" ng-class="{'treeview-toggler--subnav-closed': folder.toggle_open!=1}">arrow_drop_down</i>
+    <div class="filemanager-folder-button" ng-click="changeCurrentFolderId(folder.id)" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-offset-top="-5">
+        <i class="material-icons filemanager-folder-icon filemanager-folder-icon--default"></i>
+        <i class="material-icons filemanager-folder-icon filemanager-folder-icon--active"></i>
+                        <span class="filemanager-folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id">
                             {{folder.name }}                                            
                         </span>
-                        <i class="material-icons filemanager__edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
-                        <i class="material-icons filemanager__delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
+                        <i class="material-icons filemanager-edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
+                        <i class="material-icons filemanager-delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
                         
                         <span ng-if="folderUpdateForm && currentFolderId==folder.id">
-                            <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
-                            <div class="filemanager__file-dialog">
+                            <input type="text" ng-model="folder.name" class="filemanager-file-dialog-input"/>
+                            <div class="filemanager-file-dialog">
                                 <span><?= Admin::t('layout_filemanager_save_dir'); ?></span>
-                                <div class="filemanager__file-dialog--buttons">
+                                <div class="filemanager-file-dialog--buttons">
                                     <span class="btn-floating white">
-                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
+                                        <i class="material-icons filemanager-file-dialog-icon" ng-click="updateFolder(folder)">check</i>
                                     </span>
                                     <span class="btn-floating white">
-                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                        <i class="material-icons filemanager-file-dialog-icon filemanager-cancel-icon" ng-click="toggleFolderMode(false)">add</i>
                                     </span>
                                 </div>                                
                             </div>
                         </span>
-                        <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
+                        <i class="material-icons filemanager-file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
                         <span ng-if="folderDeleteForm && currentFolderId==folder.id">
-                            <div class="filemanager__file-dialog">
+                            <div class="filemanager-file-dialog">
                                 <span><?= Admin::t('layout_filemanager_remove_dir'); ?></span>
-                                <div class="filemanager__file-dialog--buttons">
+                                <div class="filemanager-file-dialog--buttons">
                                     <span class="btn-floating white">
-                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
+                                        <i class="material-icons filemanager-file-dialog-icon" ng-click="checkEmptyFolder(folder)">check</i>
                                     </span>
                                     <span class="btn-floating white">
-                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                        <i class="material-icons filemanager-file-dialog-icon filemanager-cancel-icon" ng-click="toggleFolderMode(false)">add</i>
                                     </span>
                                 </div>
                             </div>
                         </span>
 
                         <span ng-if="folderDeleteConfirmForm && currentFolderId==folder.id">
-                            <div class="filemanager__file-dialog">
+                            <div class="filemanager-file-dialog">
                                 <span><?= Admin::t('layout_filemanager_remove_dir_not_empty'); ?></span>
-                                <div class="filemanager__file-dialog--buttons">
+                                <div class="filemanager-file-dialog--buttons">
                                     <span class="btn-floating white">
-                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
+                                        <i class="material-icons filemanager-file-dialog-icon" ng-click="deleteFolder(folder)">check</i>
                                     </span>
                                     <span class="btn-floating white">
-                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                        <i class="material-icons filemanager-file-dialog-icon filemanager-cancel-icon" ng-click="toggleFolderMode(false)">add</i>
                                     </span>
                                 </div>
                             </div>
@@ -186,8 +186,8 @@ use luya\admin\Module as Admin;
 
         <!-- mdi-mdi-action-highlight-remove -->
     </div>
-    <ul class="filemanager__folders" ng-show="folder.toggle_open==1">
-        <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id"  ng-include="'reverseFolders'"></li>
+    <ul class="filemanager-folders" ng-show="folder.toggle_open==1">
+        <li class="filemanager-folder"  ng-class="{'filemanager-folder--active' : currentFolderId == folder.id, 'filemanager-folder--has-subfolders': folder.-items.length > 0}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id"  ng-include="'reverseFolders'"></li>
     </ul>
 </script>
 
@@ -325,8 +325,8 @@ use luya\admin\Module as Admin;
                    				ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
                    				alt="fileId={{file.id}}" 
                     			title="fileId={{file.id}}" 
-                    			class="filemanager__file" 
-                    			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager__file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
+                    			class="filemanager-file" 
+                    			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
 
 					<th scope="row" ng-hide="allowSelection == 'true'" ng-click="toggleSelection(file)">
                                     <label class="custom-control custom-checkbox">
@@ -339,7 +339,7 @@ use luya\admin\Module as Admin;
                        <span class="custom-control-indicator"></span>
                     </td>
                     <td ng-click="toggleSelection(file)" class="text-center">
-                        <span ng-if="file.isImage"><img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail.source}}" /></span>
+                        <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
                         <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
                     </td>
                     <td ng-click="toggleSelection(file)">{{file.name}}</td>
@@ -412,7 +412,7 @@ use luya\admin\Module as Admin;
                                     <input type="text" class="form-control" id="inlineFormInputGroup">
 
                                     <span class="flag flag--en">
-                                        <span class="flag__fallback">EN</span>
+                                        <span class="flag-fallback">EN</span>
                                     </span>
                                 </div>
                             </div>
@@ -421,7 +421,7 @@ use luya\admin\Module as Admin;
                                     <input type="text" class="form-control" id="inlineFormInputGroup">
 
                                     <span class="flag flag--de">
-                                        <span class="flag__fallback">DE</span>
+                                        <span class="flag-fallback">DE</span>
                                     </span>
                                 </div>
                             </div>
@@ -430,7 +430,7 @@ use luya\admin\Module as Admin;
                                     <input type="text" class="form-control" id="inlineFormInputGroup">
 
                                     <span class="flag flag--fr">
-                                        <span class="flag__fallback">FR</span>
+                                        <span class="flag-fallback">FR</span>
                                     </span>
                                 </div>
                             </div>
@@ -450,32 +450,32 @@ use luya\admin\Module as Admin;
     <div class="filemanager" ng-paste="pasteUpload($event)">
 
         <!-- TREE -->
-        <div class="filemanager__tree">
+        <div class="filemanager-tree">
 
-            <div class="filemanager__toolbar filemanager__toolbar--top">
+            <div class="filemanager-toolbar filemanager-toolbar--top">
 
                 <div class="floating-form left" ng-class="{ 'floating-form--active' : showFolderForm }">
-                    <div class="floating-form__form">
-                        <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" placeholder="<?= Admin::t('layout_filemanager_folder'); ?>" />
+                    <div class="floating-form-form">
+                        <input class="floating-form-input" type="text" ng-model="newFolderName" id="foldername" placeholder="<?= Admin::t('layout_filemanager_folder'); ?>" />
                     </div><!-- PREVENT WHITESPACE
-                         --><div class="floating-form__actions">
-                        <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></span>
-                        <span class="floating-form__button floating-form__button--active-close btn-floating" ng-click="folderFormToggler()"><i class="material-icons">add</i></span>
+                         --><div class="floating-form-actions">
+                        <span class="[ floating-form-button floating-form-button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></span>
+                        <span class="floating-form-button floating-form-button--active-close btn-floating" ng-click="folderFormToggler()"><i class="material-icons">add</i></span>
                     </div><!-- PREVENT WHITESPACE
-                         --><span class="floating-form__label" ng-click="folderFormToggler()"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
+                         --><span class="floating-form-label" ng-click="folderFormToggler()"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
                 </div>
 
             </div>
 
             <!-- FOLDER LIST -->
-            <ul class="filemanager__folders">
-                <li class="filemanager__folder filemanager__folder--root" ng-class="{'filemanager__folder--active' : currentFolderId == 0 }">
-                    <div class="filemanager__folder-button folder-root" ng-click="changeCurrentFolderId(0)">
-                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--root"></i>
-                        <span class="filemanager__folder-name"><?= Admin::t('layout_filemanager_root_dir'); ?></span>
+            <ul class="filemanager-folders">
+                <li class="filemanager-folder filemanager-folder--root" ng-class="{'filemanager-folder--active' : currentFolderId == 0 }">
+                    <div class="filemanager-folder-button folder-root" ng-click="changeCurrentFolderId(0)">
+                        <i class="material-icons filemanager-folder-icon filemanager-folder-icon--root"></i>
+                        <span class="filemanager-folder-name"><?= Admin::t('layout_filemanager_root_dir'); ?></span>
                     </div>
-                    <ul class="filemanager__folders">
-                        <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
+                    <ul class="filemanager-folders">
+                        <li class="filemanager-folder" ng-class="{'filemanager-folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
                     </ul>
                 </li>
             </ul>
@@ -484,20 +484,20 @@ use luya\admin\Module as Admin;
         </div><!--/TREE
 
                 FILES & FOLDERS
-             --><div class="filemanager__files">
+             --><div class="filemanager-files">
 
-            <div class="filemanager__toolbar filemanager__toolbar--top">
+            <div class="filemanager-toolbar filemanager-toolbar--top">
 
                 <label class="floating-button-label left" ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
                             <span class="btn-floating">
                                 <i class="material-icons">file_upload</i>
                             </span>
-                    <span class="floating-button-label__label"><?= Admin::t('layout_filemanager_upload_files'); ?></span>
+                    <span class="floating-button-label-label"><?= Admin::t('layout_filemanager_upload_files'); ?></span>
                 </label>
 
-                <div class="filemanager__search input input--text">
-                    <div class="input__field-wrapper">
-                        <input class="input__field filemanager__search-input" type="text" ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />
+                <div class="filemanager-search input input--text">
+                    <div class="input-field-wrapper">
+                        <input class="input-field filemanager-search-input" type="text" ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />
                     </div>
                 </div>
 
@@ -508,11 +508,11 @@ use luya\admin\Module as Admin;
 
             <div class="row">
 
-            <div class="filemanager__col col" ng-class="{'filemanager__col--file-details' : fileDetail, 's12' : !fileDetail }">
-            <table class="filemanager__table hoverable striped">
+            <div class="filemanager-col col" ng-class="{'filemanager-col--file-details' : fileDetail, 's12' : !fileDetail }">
+            <table class="filemanager-table hoverable striped">
                 <thead>
                     <tr>
-                        <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
+                        <th class="filemanager-checkox-column" ng-hide="allowSelection == 'true'">
                             <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
                         </th>
                         <th ng-if="selectedFileFromParent" style="width:15px;"></th>
@@ -530,39 +530,39 @@ use luya\admin\Module as Admin;
                     ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
                     alt="fileId={{file.id}}" 
                     title="fileId={{file.id}}" 
-                    class="filemanager__file" 
-                    ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager__file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
+                    class="filemanager-file" 
+                    ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
 
-                    <td ng-click="toggleSelection(file)" class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
+                    <td ng-click="toggleSelection(file)" class="filemanager-checkox-column" ng-hide="allowSelection == 'true'">
                         <input type="checkbox" ng-checked="inSelection(file)" id="{{file.id}}" />
                         <label for="checked-status-managed-by-angular-{{file.id}}"></label>
                     </td>
                     <td ng-if="selectedFileFromParent">
                         <i class="material-icons" ng-if="selectedFileFromParent.id == file.id">check_box</i>
                     </td>
-                    <td ng-click="toggleSelection(file)" class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.isImage }">
-                        <span ng-if="file.isImage"><img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail.source}}" /></span>
+                    <td ng-click="toggleSelection(file)" class="filemanager-icon-column" ng-class="{ 'filemanager-icon-column--thumb' : file.isImage }">
+                        <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
                         <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
                     </td>
                     <td ng-click="toggleSelection(file)">{{file.name}}</td>
-                    <td class="filemanager__lighten">{{file.extension}}</td>
-                    <td class="filemanager__lighten">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
-                    <td class="filemanager__ligthen">{{file.sizeReadable}}</td>
-                    <td class="filemanager__lighten" ng-click="openFileDetail(file)"><i class="material-icons">zoom_in</i></td>
+                    <td class="filemanager-lighten">{{file.extension}}</td>
+                    <td class="filemanager-lighten">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
+                    <td class="filemanager-ligthen">{{file.sizeReadable}}</td>
+                    <td class="filemanager-lighten" ng-click="openFileDetail(file)"><i class="material-icons">zoom_in</i></td>
                 </tr>
                 <!-- /FILES -->
 
                 </tbody>
             </table>
             </div>
-            <div class="filemanager__details" ng-show="fileDetail">
-                <div class="filemanager__details-bar">
+            <div class="filemanager-details" ng-show="fileDetail">
+                <div class="filemanager-details-bar">
                     <a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn--small"><?= Admin::t('layout_filemanager_detail_download'); ?></a>
                     <button type="button" class="btn btn--small" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)"><?= Admin::t('layout_filemanager_detail_replace_file'); ?></button>
-                    <a class="filemanager__details-close btn red btn-floating right" ng-click="closeFileDetail()"><i class="material-icons">close</i></a>
+                    <a class="filemanager-details-close btn red btn-floating right" ng-click="closeFileDetail()"><i class="material-icons">close</i></a>
                 </div>
 
-                <table class="filemanager__details-table filemanager__table">
+                <table class="filemanager-details-table filemanager-table">
                     <tbody>
                         <tr>
                             <td><b><?= Admin::t('layout_filemanager_detail_name'); ?></b></td><td>{{ fileDetail.name }}</td>
@@ -586,20 +586,20 @@ use luya\admin\Module as Admin;
                     <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
                 </span>
 
-                <div class="filemanager__details-panel clearfix">
+                <div class="filemanager-details-panel clearfix">
                     <strong><?= Admin::t('layout_filemanager_file_captions'); ?></strong>
                     <div class="input input--text input--vertical" ng-repeat="(key, cap) in fileDetail.captionArray">
-                        <span class="flag flag--{{key}}"><span class="flag__fallback flag__fallback--colorized">{{key}}</span></span>
-                        <div class="input__field-wrapper">
-                            <input class="input__field" id="id-{{key}}" name="{{key}}" type="text" ng-model="fileDetail.captionArray[key]" />
+                        <span class="flag flag-{{key}}"><span class="flag-fallback flag-fallback-colorized">{{key}}</span></span>
+                        <div class="input-field-wrapper">
+                            <input class="input-field" id="id-{{key}}" name="{{key}}" type="text" ng-model="fileDetail.captionArray[key]" />
                         </div>
                     </div>
-                    <button type="button" class="filemanager__detail-save-button btn btn--small right" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
+                    <button type="button" class="filemanager-detail-save-button btn btn--small right" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
                 </div>
         </div>
         <!-- FILES & FOLDERS -->
 
-        <div class="filemanager__toolbar filemanager__toolbar--bottom">
+        <div class="filemanager-toolbar filemanager-toolbar--bottom">
 
             <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Admin::t('layout_filemanager_remove_selected_files'); ?></button>
             <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Admin::t('layout_filemanager_move_selected_files'); ?></button>

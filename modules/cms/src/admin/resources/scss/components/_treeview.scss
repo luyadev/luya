@@ -15,7 +15,7 @@
 // Container styles
 // ==================================================
 
-.treeview__container {
+.treeview-container {
     display: block;
     margin-top: 20px;
     position: relative;
@@ -26,27 +26,27 @@
 // Item lists
 // ==================================================
 
-.treeview__items {
+.treeview-items {
     display: block;
     list-style: none;
     margin: 0;
     padding: 0;
     position: relative;
 
-    // Add indention if child of treeview__item
-    .treeview__item > & {
+    // Add indention if child of treeview-item
+    .treeview-item > & {
         margin-left: 15px;
     }
 
     // Hide if collapsed
-    .treeview__item--collapsed > & {
+    .treeview-item-collapsed > & {
         display: none;
     }
 }
 
-.treeview__item {
+.treeview-item {
     display: block;
-    padding-top: 0;
+    padding-top: 5px;
     position: relative;
 
     &:before {
@@ -54,7 +54,7 @@
         border-left: 1px solid lighten($gray, 45);
         content: '';
         display: block;
-        height: 15px;
+        height: 18px;
         left: -4px;
         position: absolute;
         top: 0;
@@ -71,8 +71,8 @@
         top: 0;
     }
 
-    &--lvl1:before,
-    &--lvl1:after {
+    &-lvl1:before,
+    &-lvl1:after {
         display: none;
     }
 
@@ -80,24 +80,22 @@
         display: none
     }
 
-    &--has-children:before {
+    &-has-children:before {
         top: -1px;
         width: 7px;
     }
-    &--collapsed:before {
-        height: 16px;
+    &-collapsed:before {
+        height: 19px;
     }
 }
 
-.treeview__label {
-    border: solid transparent;
-    border-width: 2px 0 2px 0;
+.treeview-label {
     display: block;
     padding: 0 35px 0 23px;
     position: relative;
     width: 100%;
 
-    &--container {
+    &-container {
         font-weight: bold;
         letter-spacing: .8px;
     }
@@ -112,35 +110,19 @@
         width: 5px;
     }
 
-    &--page:after {
+    &-page:after {
         background-color: $green;
     }
-    .treeview__item--isoffline &:after {
+    .treeview-item-isoffline &:after {
         background-color: $red;
     }
 
-    .treeview__item--ishidden & {
+    .treeview-item-ishidden & {
         opacity: .5;
-    }
-
-    &.drag-dragging {
-        .treeview__icon--collapse {
-            display: none;
-        }
-    }
-
-    &.drag-hover-top {
-        border-top-color: $green;
-    }
-    &.drag-hover-middle {
-        background-color: $green;
-    }
-    &.drag-hover-bottom {
-        border-bottom-color: $green;
     }
 }
 
-.treeview__icon {
+.treeview-icon {
     font-size: 18px;
     height: 18px;
     left: 0;
@@ -149,20 +131,20 @@
     top: 3px;
     width: 18px;
 
-    &--right {
+    &-right {
         left: auto;
         right: 10px;
     }
 
-    &--collapse {
+    &-collapse {
+        top: 0;
         cursor: pointer;
         font-size: 24px;
         height: 24px;
-        top: 0;
-        transition: .25s ease-in-out transform;
         width: 24px;
+        transition: .25s ease-in-out transform;
 
-        .treeview__item--collapsed & {
+        .treeview-item-collapsed & {
             transform: rotate(-90deg) translateX(-1px);
         }
     }
@@ -172,7 +154,7 @@
     }
 }
 
-.treeview__link {
+.treeview-link {
     border-radius: 5px;
     cursor: pointer;
     display: block;
@@ -182,7 +164,7 @@
     &:hover {
         background-color: rgba(0, 0, 0, .1);
 
-        .treeview__label--container & {
+        .treeview-label-container & {
             background-color: transparent;
         }
     }
