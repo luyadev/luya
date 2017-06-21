@@ -88,7 +88,8 @@ class CmslayoutImporter extends Importer
                 
                 if ($layoutItem) {
                     $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
-                    if ($match) {
+                    $matchRevert = $this->comparePlaceholders(json_decode($layoutItem->json_config, true), $_placeholders);
+                    if ($match && $matchRevert) {
                         $layoutItem->updateAttributes([
                             'name' => $readableFileName,
                             'view_file' => $fileBaseName,
