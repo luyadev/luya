@@ -15,7 +15,7 @@ use yii\base\Controller;
  * This component is registered on each LUYA instance, how to use:
  *
  * ```php
- * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail'->address('info@example.com')->send()) {
+ * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail')->address('info@example.com')->send()) {
  *     echo "Mail has been sent!";
  * } else {
  *     echo "Error" : Yii::$app->mail->error;
