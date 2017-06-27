@@ -1,7 +1,5 @@
 <div class="cmsadmin" ng-controller="NavController" ng-show="!isDeleted" ng-init="settingsOverlay=true">
-	<modal is-modal-hidden="settingsOverlay" title="Settings">
-		setttings
-	</modal>
+	<?= $this->render('_settings'); ?>
     <div class="row">
         <div class="col cmsadmin-frame-wrapper" ng-if="displayLiveContainer">
             <iframe class="cmsadmin-frame" ng-src="{{ liveUrl | trustAsResourceUrl:liveUrl }}" frameborder="0" width="100%" height="100%"></iframe>
@@ -17,7 +15,7 @@
                                     <i class="material-icons" ng-show="navData.is_hidden">visibility_off</i>
                                 </span>
                                 <span class="switch-switch">
-                                    <input class="switch-checkbox"  ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1" type="checkbox" id="switch-visibility-status"/>
+                                    <input class="switch-checkbox" ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1" type="checkbox" id="switch-visibility-status"/>
                                     <span class="switch-control"></span>
                                 </span>
                             </label>
@@ -74,7 +72,6 @@
                                 >
                                     <i class="material-icons blockholder-icon">{{block.icon}}</i>
                                     <span>{{block.name}}</span>
-
                                     <button class="blockholder-favorite" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">
                                         <i class="material-icons">favorite</i>
                                     </button>

@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-block">
         <div ng-if="placeholder.__nav_item_page_block_items.length == 0" dnd dnd-drag-disabled dnd-model="placeholder" dnd-isvalid="true" dnd-ondrop="dropItemPlaceholder(dragged,dropped,position)" dnd-css="{onDrag: 'drag-start', onHover: 'b-hover', onHoverTop: 'b-top', onHoverMiddle: 'b-left', onHoverBottom: 'b-bottom'}">LEER</div>
-        <div ng-class="{'block-is-layout' : block.is_container}" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
+        <div ng-class="{'block-is-layout' : block.is_container}" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items track by key" ng-controller="PageBlockEditController">
             <div class="block" dnd dnd-model="block" dnd-isvalid="true" dnd-disable-drag-middle dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'drag-start', onHover: 'b-hover', onHoverTop: 'b-top', onHoverMiddle: 'b-left', onHoverBottom: 'b-bottom'}">
                 <div class="block-toolbar">
                     <div class="toolbar-item">
@@ -46,8 +46,8 @@
                 </modal>
                 <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
                 <div ng-if="block.__placeholders.length" class="block-front">
-                    <div class="row" ng-repeat="row in block.__placeholders">
-                        <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-include="'recursion.html'" />
+                    <div class="row" ng-repeat="(inlineRowKey, row) in block.__placeholders track by inlineRowKey">
+                        <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderInlineKey, placeholder) in row track by placeholderInlineKey" ng-include="'recursion.html'" />
                     </div>
                 </div>
             </div>
@@ -84,8 +84,8 @@
     </li>
 </ul>
 <div class="cmsadmin-page" ng-if="isTranslated">
-    <div class="row" ng-if="item.nav_item_type==1" ng-repeat="row in container.__placeholders">
-        <div class="col-xl-{{placeholder.cols}}" ng-repeat="placeholder in row" ng-include="'recursion.html'" />
+    <div class="row" ng-if="item.nav_item_type==1" ng-repeat="(key, row) in container.__placeholders track by key">
+        <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'" />
     </div>
     <div class="row" ng-if="item.nav_item_type==2">
         Module

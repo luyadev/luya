@@ -1273,45 +1273,37 @@
 				params : { navItemPageId : $scope.currentPageVersion, prevId : prevId, placeholderVar : placeholderVar}
 			}).then(function(response) {
 				ServiceLiveEditMode.changeUrl($scope.item.id, $scope.currentPageVersion);
-				for (var i in $scope.container.__placeholders) {
-					var out = $scope.revPlaceholders($scope.container.__placeholders[i], prevId, placeholderVar, response.data);
-					if (out !== false ) {
-						return;
-					}
-				}
-
+				angular.forEach($scope.container.__placeholders, function(placeholder) {
+					$scope.revPlaceholders(placeholder, prevId, placeholderVar, response.data);
+				});
 			});
 		};
 		
 		$scope.revPlaceholders = function(placeholders, prevId, placeholderVar, replaceContent) {
-			for (var placeholderKey in placeholders) {
-				var placeholder = placeholders[placeholderKey];
-				var tmp = placeholder['prev_id'];
-				if (parseInt(prevId) == parseInt(tmp) && placeholderVar == placeholder['var']) {
-					placeholder['__nav_item_page_block_items'] = replaceContent;
-					return true;
+			angular.forEach(placeholders, function(placeholderRow, placeholderKey) {
+				if (parseInt(prevId) == parseInt(placeholderRow.prev_id) && placeholderVar == placeholderRow['var']) {
+					placeholders[placeholderKey]['__nav_item_page_block_items'] = replaceContent;
+				} else {
+					$scope.revFind(placeholderRow, prevId, placeholderVar, replaceContent);
 				}
-				var find = $scope.revFind(placeholder, prevId, placeholderVar, replaceContent)
-				if (find !== false) {
-					return find;
-				}
-			}
-
-			return false;
+			});
 		};
 		
 		$scope.revFind = function(placeholder, prevId, placeholderVar, replaceContent) {
 			for (var i in placeholder['__nav_item_page_block_items']) {
 				for (var holderKey in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
 					for (var holder in placeholder['__nav_item_page_block_items'][i]['__placeholders'][holderKey]) {
-						var rsp = $scope.revPlaceholders(placeholder['__nav_item_page_block_items'][i]['__placeholders'][holderKey][holder], prevId, placeholderVar, replaceContent);
-						if (rsp !== false) {
-							return rsp;
-						}
+						$scope.revPlaceholders(placeholder['__nav_item_page_block_items'][i]['__placeholders'][holderKey], prevId, placeholderVar, replaceContent);
 					}
 				}
 			}
-			return false;
+		};
+		
+		/* drops items in an empty page placeholder from a cms layout */
+		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
+			$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : dropped.prev_id, sort_index:0, block_id : dragged.id , placeholder_var : dropped.var, nav_item_page_id : dropped.nav_item_page_id }).then(function(response) {
+				$scope.refreshNested(dropped.prev_id, dropped.var);
+			});
 		};
 		
 		$scope.refresh();
@@ -1365,6 +1357,13 @@
 
 		$scope.NavItemTypePageController = $scope.$parent;
 
+		/* drops items in block container */
+		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
+			$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : dropped.prev_id, sort_index:0, block_id : dragged.id , placeholder_var : dropped.var, nav_item_page_id : dropped.nav_item_page_id }).then(function(response) {
+				$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
+			});
+		};
+		
 		$scope.dropItem = function(dragged,dropped,position) {
 			var sortIndex = $scope.$index;
 			if (position == 'bottom') {
