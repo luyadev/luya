@@ -38,8 +38,10 @@
                 </div>
                 <modal is-modal-hidden="modalHidden" title="Settings">
                     <form class="block__edit" ng-if="edit" ng-submit="save()">
-                        <div ng-repeat="field in block.vars" ng-hide="field.invisible">
-                            <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
+                        <div ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
+                            <div class="col">
+                                <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="material-icons left">done</i> Save</button>
                     </form>

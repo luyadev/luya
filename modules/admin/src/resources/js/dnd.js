@@ -92,7 +92,6 @@ angular.module('dnd', [])
 		        	}
     		        
                     var re = el.getBoundingClientRect();
-
     		        var height = re.height;
     		        var mouseHeight = e.clientY - re.top;
     		        var percentage = (100 / height) * mouseHeight;
