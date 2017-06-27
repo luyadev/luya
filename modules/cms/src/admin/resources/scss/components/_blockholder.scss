@@ -11,7 +11,11 @@
     height: 100%;
     padding: 15px;
     width: 100%;
+    max-width: 250px;
+    min-width: 250px;
+    position: fixed;
     user-select: none;
+    @include overflow-no-scrollbars;
 }
 
 .blockholder-search {

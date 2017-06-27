@@ -1,6 +1,12 @@
 /**
  * Default paths for the flags
  */
+.google-chrome-font-offset-fix {
+  display: inline-block; }
+  @media (-webkit-min-device-pixel-ratio: 0) {
+    .google-chrome-font-offset-fix {
+      margin-top: 2px; } }
+
 .block {
   background-color: #fff;
   border: 1px solid transparent;
@@ -147,10 +153,18 @@
   height: 100%;
   padding: 15px;
   width: 100%;
+  max-width: 250px;
+  min-width: 250px;
+  position: fixed;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none; }
+          user-select: none;
+  overflow: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none; }
+  .blockholder::-webkit-scrollbar {
+    display: none; }
 
 .blockholder-search {
   border-bottom: 1px solid #fff;
@@ -451,10 +465,13 @@
   margin: 0;
   padding: 0;
   position: relative; }
-  .treeview-item > .treeview-items {
+  .treeview-item > .treeview-dropper > .treeview-items {
     margin-left: 15px; }
-  .treeview-item-collapsed > .treeview-items {
+  .treeview-item-collapsed > .treeview-dropper > .treeview-items {
     display: none; }
+
+.treeview-dropper {
+  display: block; }
 
 .treeview-item {
   display: block;
@@ -513,13 +530,13 @@
     background-color: #EA2E49; }
   .treeview-item-ishidden .treeview-label {
     opacity: .5; }
-  .treeview-label.drag-dragging .treeview__icon--collapse {
+  .drag-dragging > .treeview-label .treeview-icon-collapse {
     display: none; }
-  .treeview-label.drag-hover-top {
+  .drag-hover-top > .treeview-label {
     border-top-color: #79B744; }
-  .treeview-label.drag-hover-middle {
+  .drag-hover-middle > .treeview-label {
     background-color: #79B744; }
-  .treeview-label.drag-hover-bottom {
+  .drag-hover-bottom > .treeview-label {
     border-bottom-color: #79B744; }
 
 .treeview-icon {

@@ -13,6 +13,13 @@
 @import "../../../../../admin/vendor/twbs/bootstrap/scss/variables";
 
 // ==================================================
+// Helpers
+// ==================================================
+
+@import "../../../../../admin/src/resources/scss/helpers/google-chrome-font-offset-fix";
+@import "../../../../../admin/src/resources/scss/helpers/overflow-no-scrollbars";
+
+// ==================================================
 // Components
 // ==================================================
 
