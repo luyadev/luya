@@ -465,13 +465,10 @@
   margin: 0;
   padding: 0;
   position: relative; }
-  .treeview-item > .treeview-dropper > .treeview-items {
+  .treeview-item > .treeview-items {
     margin-left: 15px; }
-  .treeview-item-collapsed > .treeview-dropper > .treeview-items {
+  .treeview-item-collapsed > .treeview-items {
     display: none; }
-
-.treeview-dropper {
-  display: block; }
 
 .treeview-item {
   display: block;
@@ -530,13 +527,13 @@
     background-color: #EA2E49; }
   .treeview-item-ishidden .treeview-label {
     opacity: .5; }
-  .drag-dragging > .treeview-label .treeview-icon-collapse {
+  .treeview-label.drag-dragging .treeview-icon-collapse {
     display: none; }
-  .drag-hover-top > .treeview-label {
+  .treeview-label.drag-hover-top {
     border-top-color: #79B744; }
-  .drag-hover-middle > .treeview-label {
+  .treeview-label.drag-hover-middle {
     background-color: #79B744; }
-  .drag-hover-bottom > .treeview-label {
+  .treeview-label.drag-hover-bottom {
     border-bottom-color: #79B744; }
 
 .treeview-icon {

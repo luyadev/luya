@@ -34,18 +34,14 @@
     position: relative;
 
     // Add indention if child of treeview-item
-    .treeview-item > .treeview-dropper > & {
+    .treeview-item > & {
         margin-left: 15px;
     }
 
     // Hide if collapsed
-    .treeview-item-collapsed > .treeview-dropper > & {
+    .treeview-item-collapsed > & {
         display: none;
     }
-}
-
-.treeview-dropper {
-    display: block;
 }
 
 .treeview-item {
@@ -127,18 +123,18 @@
         opacity: .5;
     }
 
-    .drag-dragging > & {
+    &.drag-dragging {
         .treeview-icon-collapse {
             display: none;
         }
     }
-    .drag-hover-top > & {
+    &.drag-hover-top {
         border-top-color: $green;
     }
-    .drag-hover-middle > & {
+    &.drag-hover-middle {
         background-color: $green;
     }
-    .drag-hover-bottom > & {
+    &.drag-hover-bottom {
         border-bottom-color: $green;
     }
 }
