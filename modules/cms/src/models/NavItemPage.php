@@ -157,8 +157,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         if ($this->layout) {
             $layoutFile = $this->layout->view_file;
             $placholders = [];
-            foreach ($this->layout->getJsonConfig('placeholders') as $item) {
-                $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
+            foreach ($this->layout->getJsonConfig('placeholders') as $row) {
+                foreach ($row as $item) {
+                    $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
+                }
             }
             return $this->getView()->render($layoutFile, ['placeholders' => $placholders], $this);
         }

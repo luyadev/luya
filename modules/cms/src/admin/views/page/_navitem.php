@@ -57,6 +57,7 @@
     </div>
 </div>
 </script>
+<?= $this->render('_navitem_settings'); ?>
 <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item nav-item-title">
         <span class="flag flag-{{lang.short_code}}">
@@ -65,22 +66,25 @@
         <span>{{ item.title }}</span>
     </li>
     <li class="nav-item" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1">
-        <a class="nav-link active" role="tab">
+        <a class="nav-link active">
             <span>{{ versionItem.version_alias }}</span>
         </a>
     </li>
     <li class="nav-item nav-item-alternative">
-        <a class="nav-link" href="#en" role="tab">
+        <a class="nav-link">
             <i class="material-icons">add_box</i>
         </a>
     </li>
     <li class="nav-item nav-item-alternative nav-item-icon ml-auto">
-        <a class="nav-link" href="#en" role="tab">
+        <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay">
             <i class="material-icons">edit</i>
         </a>
     </li>
     <li class="nav-item nav-item-alternative nav-item-icon">
-        <a class="nav-link" href="#en" role="tab">
+        <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="nav-link" ng-show="!liveEditState">
+            <i class="material-icons">open_in_new</i>
+        </a>
+        <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="nav-link">
             <i class="material-icons">open_in_new</i>
         </a>
     </li>

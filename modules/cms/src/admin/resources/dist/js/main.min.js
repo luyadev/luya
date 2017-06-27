@@ -1078,6 +1078,8 @@
 	zaa.controller("NavItemController", function($scope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
 
 		$scope.loaded = false;
+		
+		$scope.itemSettingsOverlay = true;
 
 		$scope.NavController = $scope.$parent;
 
