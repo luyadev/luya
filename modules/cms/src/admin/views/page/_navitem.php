@@ -1,3 +1,6 @@
+<?php
+use luya\cms\admin\Module;
+?>
 <script type="text/ng-template" id="recursion.html">
 <h4 class="cmsadmin-container-title">{{placeholder.label}}</h4>
 <div class="card">
@@ -94,10 +97,17 @@
         <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'" />
     </div>
     <div class="row" ng-if="item.nav_item_type==2">
-        Module
+        <?= Module::t('view_update_page_is_module'); ?>
     </div>
     <div class="row" ng-if="item.nav_item_type==3">
-        Redirect
+        <div ng-switch="typeData.type">
+            <div ng-switch-when="1">
+                <p><?= Module::t('view_update_page_is_redirect_internal'); ?></p>
+            </div>
+            <div ng-switch-when="2">
+                <p><?= Module::t('view_update_page_is_redirect_external'); ?>.</p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="cmsadmin-page" ng-if="!isTranslated">
