@@ -69,7 +69,6 @@ public function ngRestScopes()
         ['delete', false],
     ];
 }
-$config->delete = true;
 ``` 
 
 This will trigger the  [Yii AR delete methode](http://www.yiiframework.com/doc-2.0/yii-db-activerecord.html#delete()-detail) and removes the item irrevocable, you can override the `delete()` method to change the behavior of a deletion.
