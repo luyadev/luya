@@ -1264,8 +1264,11 @@
 			}
 		};
 
-		// <!-- NavItemTypePageController CODE
-
+		/**
+		 * Refresh the current layout container blocks.
+		 * 
+		 * After successfull api response all cms layout are foreach and the values are passed to revPlaceholders() method.
+		 */
 		$scope.refreshNested = function(prevId, placeholderVar) {
 			$http({
 				url : 'admin/api-cms-navitem/reload-placeholder',
@@ -1279,6 +1282,15 @@
 			});
 		};
 		
+		/**
+		 * The revPlaceholders method goes trourgh the new row/col (grid) system container json layout where:
+		 * 
+		 * rows[][1] = col left
+		 * rows[][2] = col right
+		 * 
+		 * Where a layout have at least on row which can have cols inside. So there revPlaceholders method goes trough the cols
+		 * and check if the col is equal the given col to replace the content with  (from refreshNested method).
+		 */
 		$scope.revPlaceholders = function(placeholders, prevId, placeholderVar, replaceContent) {
 			angular.forEach(placeholders, function(placeholderRow, placeholderKey) {
 				if (parseInt(prevId) == parseInt(placeholderRow.prev_id) && placeholderVar == placeholderRow['var']) {
@@ -1289,6 +1301,10 @@
 			});
 		};
 		
+		
+		/**
+		 * The revFind method does the recursiv job within a block an passes the value back to revPlaceholders().
+		 */
 		$scope.revFind = function(placeholder, prevId, placeholderVar, replaceContent) {
 			for (var i in placeholder['__nav_item_page_block_items']) {
 				for (var holderKey in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
@@ -1299,7 +1315,9 @@
 			}
 		};
 		
-		/* drops items in an empty page placeholder from a cms layout */
+		/**
+		 * drops items in an empty page placeholder from a cms layout
+		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
 			$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : dropped.prev_id, sort_index:0, block_id : dragged.id , placeholder_var : dropped.var, nav_item_page_id : dropped.nav_item_page_id }).then(function(response) {
 				$scope.refreshNested(dropped.prev_id, dropped.var);
