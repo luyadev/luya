@@ -34,6 +34,13 @@ We have developed a sync command to synchronize the database and files from the 
 
 Now run the `./vendor/bin/luya admin/proxy` command. You will have to enter the URL of your production environment (like `https://luya.io`) and then enter the machine and identifier from the previous step.
 
+Terminal commands:
+
+`./vendor/bin/luya admin/proxy` --> run or setup proxy urls and secret token
+`./vendor/bin/luya admin/proxy/clear` --> clear and reset local stored proxy configurariont
+
+Get more commands and infos about der !(LUYA Proxy Controller)[https://luya.io/api/luya-admin-commands-ProxyController]
+
 Deploy Prep Env
 ---
 
