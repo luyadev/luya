@@ -39,8 +39,7 @@ Terminal commands:
 `./vendor/bin/luya admin/proxy` --> run or setup proxy urls and secret token
 `./vendor/bin/luya admin/proxy/clear` --> clear and reset local stored proxy configurariont
 
-Get more commands and infos about der !(LUYA Proxy Controller)[https://luya.io/api/luya-admin-commands-ProxyController]
-
+Get more commands and infos about der ![https://luya.io/api/luya-admin-commands-ProxyController](LUYA proxy controller)
 Deploy Prep Env
 ---
 
