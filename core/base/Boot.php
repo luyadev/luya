@@ -24,7 +24,7 @@ abstract class Boot
     /**
      * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/CHANGELOG.md)
      */
-    const VERSION = '1.0.0-dev';
+    const VERSION = '1.0.0-RC4-dev';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
@@ -60,18 +60,6 @@ abstract class Boot
     public function setBaseYiiFile($baseYiiFile)
     {
         $this->_baseYiiFile = $baseYiiFile;
-    }
-    
-    /**
-     * Setter method for the base Yii file.
-     *
-     * @deprecated Will be removed in 1.0.0 release.
-     * @param string $baseYiiFile The path to the Yii.php file.
-     */
-    public function setYiiPath($baseYiiFile)
-    {
-        trigger_error('setYiiPath() is deprecated, use setBaseYiiFile() instead.', E_USER_DEPRECATED);
-        $this->setBaseYiiFile($baseYiiFile);
     }
 
     /**
