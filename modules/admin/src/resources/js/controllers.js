@@ -827,8 +827,10 @@
         };
 	});
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, LuyaLoading, AdminToastService) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, LuyaLoading, AdminToastService, AdminClassService) {
 	
+		$scope.AdminClassService = AdminClassService;
+		
 		$scope.LuyaLoading = LuyaLoading;
 		
 		$scope.toastQueue = AdminToastService.queue;
@@ -837,6 +839,7 @@
 			CacheReloadService.reload();
 		}
 	
+		/*
 		$scope.sidePanelUserMenu = false;
 		
 		$scope.sidePanelHelp = false;
@@ -852,6 +855,7 @@
 		};
 		
 	    $scope.userMenuOpen = false;
+	    */
 	
 		$scope.notify = null;
 		

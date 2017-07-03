@@ -29,6 +29,7 @@ module.exports = {
             "js/dnd.js",
             "js/zaa.js",
             "js/services.js",
+            "js/filters.js",
             "js/directives.js",
             "js/controllers.js"
         ]
