@@ -28,7 +28,7 @@ use luya\cms\admin\Module;
             </div>
             <div ng-switch-when="2">
                 <h1><?= Module::t('view_update_properties_title'); ?></h1>
-                <div ng-show="!hasValues" class="alert alert-info"><?php echo Module::t('view_update_no_properties_exists'); ?></div>
+                <div ng-show="!hasValues" class="alert alert-info"><?= Module::t('view_update_no_properties_exists'); ?></div>
                 <div class="row" ng-repeat="prop in propertiesData">
                     <div ng-if="prop.i18n" class="col">
                         <ul>
@@ -41,8 +41,8 @@ use luya\cms\admin\Module;
                         <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                     </div>
                 </div>
-                <button type="button" ng-click="storePropValues()" class="btn btn-primary" ng-show="hasValues"><?php echo Module::t('btn_refresh'); ?></button>
-                <button type="button" ng-click="storePropValues()" class="btn btn-primary" ng-show="!hasValues"><?php echo Module::t('btn_save'); ?></button>
+                <button type="button" ng-click="storePropValues()" class="btn btn-primary" ng-show="hasValues"><?= Module::t('btn_refresh'); ?></button>
+                <button type="button" ng-click="storePropValues()" class="btn btn-primary" ng-show="!hasValues"><?= Module::t('btn_save'); ?></button>
             </div>
             <div ng-switch-when="3">
                 <h1><?= Module::t('page_update_actions_layout_title'); ?></h1>
@@ -56,7 +56,7 @@ use luya\cms\admin\Module;
                         </div>
                     </div>
                 </div>
-                <p><button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?></button></p>
+                <p><button class="btn waves-effect waves-light" type="submit"><?= Module::t('btn_save'); ?></button></p>
                 </form>
             </div>
             <div ng-switch-when="4">
@@ -66,6 +66,18 @@ use luya\cms\admin\Module;
             </div>
             <div ng-switch-when="5">
                 <h1>Startseite</h1>
+                <!-- OLD CODE -->
+                <div class="switch switch--with-icons">
+                    <label tooltip tooltip-text="<?= Module::t('view_update_homepage_info'); ?>" ng-if="!navData.is_home">
+                        <?= Module::t('view_update_is_homepage'); ?>
+                        <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
+                        <span class="lever switch__lever"></span>
+                    </label>
+                </div>
+                <span class="grey-text text-darken-2" ng-if="navData.is_home">
+                    <i class="material-icons cms__prop-toggle green-text text-darken-1" style="vertical-align: middle; margin-right: 3px;">check_circle</i>
+                    <span  style="vertical-align: bottom"><?= Module::t('view_update_is_homepage'); ?></span>
+                </span>
             </div>
         </div>
     </div>

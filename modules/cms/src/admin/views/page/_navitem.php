@@ -68,22 +68,22 @@ use luya\cms\admin\Module;
         </span>
         <span>{{ item.title }}</span>
     </li>
-    <li class="nav-item" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1">
+    <li class="nav-item" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1 && isTranslated">
         <a class="nav-link active">
             <span>{{ versionItem.version_alias }}</span>
         </a>
     </li>
-    <li class="nav-item nav-item-alternative">
+    <li class="nav-item nav-item-alternative" ng-show="isTranslated">
         <a class="nav-link">
             <i class="material-icons">add_box</i>
         </a>
     </li>
-    <li class="nav-item nav-item-alternative nav-item-icon ml-auto">
+    <li class="nav-item nav-item-alternative nav-item-icon ml-auto" ng-show="isTranslated">
         <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay">
             <i class="material-icons">edit</i>
         </a>
     </li>
-    <li class="nav-item nav-item-alternative nav-item-icon">
+    <li class="nav-item nav-item-alternative nav-item-icon" ng-show="isTranslated">
         <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="nav-link" ng-show="!liveEditState">
             <i class="material-icons">open_in_new</i>
         </a>
@@ -111,5 +111,41 @@ use luya\cms\admin\Module;
     </div>
 </div>
 <div class="cmsadmin-page" ng-if="!isTranslated">
-    <p>Not yet translated</p>
+    <!-- TODO -->
+    <div class="alert alert-info"><?= Module::t('view_update_no_translations'); ?></div>
+    <div ng-controller="CopyPageController">
+        <h2><?= Module::t('view_index_add_page_from_language'); ?></h2>
+        <p><?= Module::t('view_index_add_page_from_language_info'); ?></p>
+        <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
+        <div ng-show="isOpen">
+            <hr />
+            <ul>
+                <li ng-repeat="item in items"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
+            </ul>
+            <div ng-show="itemSelection">
+                <div class="row">
+                    <div class="input input--text col s12">
+                        <label class="input__label"><?= Module::t('view_index_page_title'); ?></label>
+                        <div class="input__field-wrapper">
+                            <input name="text" type="text" class="input__field" ng-change="aliasSuggestion()" ng-model="itemSelection.title" />
+                        </div>
+                    </div>
+                <div class="row">
+                </div>
+                    <div class="input input--text col s12">
+                        <label class="input__label"><?= Module::t('view_index_page_alias'); ?></label>
+                        <div class="input__field-wrapper">
+                            <input name="text" type="text" class="input__field" ng-model="itemSelection.alias" />
+                        </div>
+                    </div>
+                </div>
+
+                <button ng-click="save()" class="btn"><?= Module::t('view_index_page_btn_save'); ?></button>
+            </div>
+        </div>
+    </div>
+    <div ng-controller="CmsadminCreateInlineController">
+        <h2><?= Module::t('view_index_add_page_empty'); ?></h2>
+        <create-form data="data"></create-form>
+    </div>
 </div>
