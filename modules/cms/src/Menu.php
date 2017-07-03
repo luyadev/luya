@@ -14,6 +14,7 @@ use luya\cms\models\NavItemModule;
 use luya\traits\CacheableTrait;
 use luya\cms\menu\Item;
 use luya\cms\menu\InjectItemInterface;
+use luya\cms\menu\QueryOperatorFieldInterface;
 
 /**
  * Menu container component by language.
@@ -31,7 +32,7 @@ use luya\cms\menu\InjectItemInterface;
  * the ability to add with statements, or chaning the language container as its a capsulated MenuQuery.
  *
  * ```php
- * $itemsArray = Yii::$app->menu->findAll(['parent_nav_id' => 0, 'parent_nav_id' => 1]);
+ * $itemsArray = Yii::$app->menu->findAll([self::FIELD_PARENTNAVID => 0, self::FIELD_PARENTNAVID => 1]);
  * ```
  *
  * ### findOne()
@@ -40,7 +41,7 @@ use luya\cms\menu\InjectItemInterface;
  * the ability to add with statements, or chaning the language container as its a capsulated MenuQuery.
  *
  * ```php
- * $itemArray = Yii::$app->menu->findOne(['id' => 1]);
+ * $itemArray = Yii::$app->menu->findOne([self::FIELD_ID => 1]);
  * ```
  *
  * ### find()
@@ -48,9 +49,9 @@ use luya\cms\menu\InjectItemInterface;
  * The find() methods is wrapper for creating a new \luya\cms\menu\Query().
  *
  * ```php
- * $itemsArray = Yii::$app->menu->find()->where(['id' => 1])->lang('en')->all();
+ * $itemsArray = Yii::$app->menu->find()->where([self::FIELD_ID => 1])->lang('en')->all();
  * // is equal to:
- * $itemsArray = (new \luya\cms\menu\Query())->where(['id' => 1])->lang('en')->all();
+ * $itemsArray = (new \luya\cms\menu\Query())->where([self::FIELD_ID => 1])->lang('en')->all();
  * ```
  *
  * ### current
@@ -88,7 +89,7 @@ use luya\cms\menu\InjectItemInterface;
  * @since 1.0.0-beta1
  * @author Basil Suter <basil@nadar.io>
  */
-class Menu extends Component implements ArrayAccess
+class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
 {
     use CacheableTrait;
     
@@ -431,7 +432,7 @@ class Menu extends Component implements ArrayAccess
      */
     public function getHome()
     {
-        return (new MenuQuery())->where(['is_home' => 1])->with('hidden')->one();
+        return (new MenuQuery())->where([self::FIELD_ISHOME => 1])->with('hidden')->one();
     }
 
     /**
@@ -612,7 +613,7 @@ class Menu extends Component implements ArrayAccess
      */
     private function aliasMatch(array $urlParts)
     {
-        return (new MenuQuery())->where(['alias' => implode('/', $urlParts)])->with('hidden')->one();
+        return (new MenuQuery())->where([self::FIELD_ALIAS => implode('/', $urlParts)])->with('hidden')->one();
     }
 
     /**
