@@ -79,6 +79,7 @@ use luya\cms\admin\Module;
     </div>
 </div>
 </script>
+
 <!-- CREATE PAGE FORM -->
 <script type="text/ng-template" id="createformpage.html">
 <div class="form-group" ng-show="!data.isInline">
@@ -124,6 +125,7 @@ use luya\cms\admin\Module;
 </div>
 <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
+
 <!-- CREATE REDIRECT FORM -->
 <script type="text/ng-template" id="createformredirect.html">
 <div class="form-check">
@@ -147,44 +149,39 @@ use luya\cms\admin\Module;
 </div>
 <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
+
 <!-- CREATE DRAFT FORM -->
 <script type="text/ng-template" id="createformdraft.html">
 <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
-<!-- treeview item -->
-<script type="text/ng-template" id="reverse.html">
- <div data-drag="true" jqyoui-draggable data-jqyoui-options="{revert: true, delay: 200, scroll : false, handle : '.treeview-link--draggable'}" ng-model="data">
-    <div class="treeview-drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview-drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
-    </div>
-    <a ng-if="data.is_editable" class="treeview-button treeview-link" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview-link--active' : isCurrentElement(data), 'treeview-link--is-online' : data.is_offline == '0', 'treeview-link--is-hidden' : data.is_hidden == '1', 'treeview-link--draggable' : showDrag, 'treeview-link--hidden' : data.is_hidden == '1'}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview-link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
-        <div class="treeview-icon-holder">
-            <i class="material-icons treeview-toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview-toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
-        </div>
 
-        <span ng-if="isLocked('cms_nav_item', data.id)" style="cursor: not-allowed;">
-           {{data.title}} <small>(locked)</small>
-        </span>
-        <span ng-if="!isLocked('cms_nav_item', data.id)" ng-click="!showDrag && go(data)">
-            {{data.title}}
-        </span>
 
-        <div class="treeview-info-icons">
-            <i ng-show="data.is_home==1" class="material-icons treeview-text-icon">home</i>
+<!-- UPDATE PAGE FORM -->
+<script type="text/ng-template" id="updateformpage.html">
+    <div class="row" ng-show="isEditAvailable()">
+        <div class="input input--select col s12">
+            <label class="input__label"><?php echo Module::t('view_index_page_version_chooser'); ?></label>
+            <div class="input__field-wrapper" ng-show="parent.typeData!==undefined">
+                <select ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
+            </div>
         </div>
-    </a>
-    <a ng-if="!data.is_editable" class="treeview-button treeview-link" style="cursor: not-allowed;" ng-class="{'treeview-link--active' : isCurrentElement(data), 'treeview-link--is-online' : data.is_offline == '0', 'treeview-link--is-hidden' : data.is_hidden == '1', 'treeview-link--hidden' : data.is_hidden == '1'}">
-        <div class="treeview-icon-holder">
-            <i class="material-icons treeview-toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview-toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
-        </div>
-        <span style="cursor: not-allowed;">{{data.title}}</span>
-        <div class="treeview-info-icons">
-            <i ng-show="data.is_home==1" class="material-icons treeview-text-icon">home</i>
-        </div>
-    </a>
-    <ul class="treeview-list" role="menu" ng-if="data.toggle_open==1">
-        <li class="treeview-item" role="menuitem" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse.html'"></li>
-    </ul>
-    <div class="treeview-drop" ng-show="$last" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview-drop--hover' }" jqyoui-droppable="{onDrop: 'onAfterDrop()', multiple : true}">
     </div>
-</div>
 </script>
+<!-- /UPDATE PAGE FORM -->
+
+<!-- UPDATE MODULE FORM -->
+<script type="text/ng-template" id="updateformmodule.html">
+    <div class="row">
+        <div class="input input--text col s12">
+            <label class="input__label"><?php echo Module::t('view_index_module_select'); ?></label>
+            <div class="input__field-wrapper">
+                <select ng-model="data.module_name" class="input__field">
+                    <option value=""><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
+                    <option value="">- - - - -</option>
+                    <option ng-repeat="item in modules" value="{{item.value}}">{{item.label}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- /UPDATE MODULE FORM -->

@@ -69,7 +69,7 @@ use luya\cms\admin\Module;
         <span>{{ item.title }}</span>
     </li>
     <li class="nav-item" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1 && isTranslated">
-        <a class="nav-link active">
+        <a class="nav-link" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-click="switchVersion(versionItem.id);">
             <span>{{ versionItem.version_alias }}</span>
         </a>
     </li>
