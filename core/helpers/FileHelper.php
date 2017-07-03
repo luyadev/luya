@@ -70,7 +70,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
             'extension' => (isset($path['extension']) && !empty($path['extension'])) ? $path['extension'] : false,
             'name' => (isset($path['filename']) && !empty($path['filename'])) ? $path['filename'] : false,
             'source' => $sourceFile,
-            'sourceFilename' => $path['dirname'] . DIRECTORY_SEPARATOR . $path['filename'],
+            'sourceFilename' => (isset($path['dirname']) && isset($path['filename'])) ? $path['dirname'] . DIRECTORY_SEPARATOR . $path['filename'] : false,
         ];
     }
     
