@@ -48,7 +48,7 @@ Which is equals to the {{\luya\cms\Menu::findAll}} method with where parameters:
 ```php
 <ul>
 <?php foreach (Yii::$app->menu->findAll(['parent_nav_id' => 0, 'container' => 'default']) as $item): ?>
-    <li><a href="<?= $item->link;"><?= $item->title; ?></a>
+    <li><a href="<?= $item->link; ?>"><?= $item->title; ?></a></li>
 <?php endforeach; ?>
 </ul>
 ```
