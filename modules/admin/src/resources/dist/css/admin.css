@@ -10509,7 +10509,7 @@ form:not(.form-inline) .form-check-input {
   transition: .25s ease-in-out background-color; }
   .modulenav-link:focus {
     text-decoration: none; }
-  .modulenav-link--active, .modulenav-link:hover {
+  .modulenav-link-active, .modulenav-link:hover {
     color: #FF006B;
     text-decoration: none; }
 
