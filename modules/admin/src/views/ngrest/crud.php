@@ -135,25 +135,25 @@ $this->beginBody();
                                  <td class="<?= $i != 1 ?: 'tab-padding-left'; ?>"><?= $element['html']; ?></td>
                              <?php endforeach; ?>
                          <?php endforeach; ?>
-                         <?php if (count($this->context->getButtons()) > 0): ?>
                         <td class="text-right">
-                            <?php foreach ($this->context->getButtons() as $item): ?>
-                            <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i></button>
-                            <?php endforeach; ?>
-                            <!-- 
-                            <div class="btn-group">
-                                <button class="btn btn-sm btn-link btn-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"><i class="material-icons">build</i> <span>Build</span></a>
-                                    <a class="dropdown-item" href="#"><i class="material-icons">done</i> <span>Mark as done</span></a>
-                                    <a class="dropdown-item" href="#"><i class="material-icons">report</i> <span>Report</span></a>
+                            <?php if (count($this->context->getButtons()) > 0): ?>
+                                <?php foreach ($this->context->getButtons() as $item): ?>
+                                <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i></button>
+                                <?php endforeach; ?>
+                                <!-- 
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-link btn-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#"><i class="material-icons">build</i> <span>Build</span></a>
+                                        <a class="dropdown-item" href="#"><i class="material-icons">done</i> <span>Mark as done</span></a>
+                                        <a class="dropdown-item" href="#"><i class="material-icons">report</i> <span>Report</span></a>
+                                    </div>
                                 </div>
-                            </div>
-                             -->
+                                 -->
+                             <?php endif; ?>
                         </td>
-                        <?php endif; ?>
                     </tr>
                 </tbody>
             </table>
