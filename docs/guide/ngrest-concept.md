@@ -6,16 +6,15 @@ One of the most powerfull tools in *LUYA*, is the **ANGULAR CRUD** surface, it c
 
 The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational State Transfer)
 
-> In order to create a NgRest CRUD:
-> 1. Create an (admin) module (`./vendor/bin/luya module/create`)
-> 2. Add the module to your `configs/`  (see the generated README file in the module)
-> 3. Create a migration with a database table (`./vendor/bin/luya migrate/create mytable modulename`) 
-> 4. After preparation (adding table, fields, etc) run the migration (`./vendor/bin/luya migrate`)
-> 5. Run `./vendor/bin/luya crud/create` and provide the needed informations (like module name, table name, etc.)
-> 6. Copy the terminal output to the generated Module (`<YOUR_MODULE>/admin/Module.php`)
-> 7. Run `./vendor/bin/luya import`
+> Quick NgRest CRUD setup structions:
+> 1. Create an (admin) module `./vendor/bin/luya module/create`.
+> 2. Add the module to your application config within the modules section (see the generated README.md file in the module).
+> 3. Create a migration with a database table `./vendor/bin/luya migrate/create mytable modulename`.
+> 4. After preparation the migration file (addTable, fields) run the migration command `./vendor/bin/luya migrate`.
+> 5. Run `./vendor/bin/luya crud/create` and provide the needed informations (like module name, table name, etc.).
+> 6. Copy the terminal output to the previous generated Module file: `<YOUR_MODULE>/admin/Module.php`.
+> 7. Run the import command `./vendor/bin/luya import`
 > 8. Set permission in Admin under System -> User groups -> permission
-> 9. Done
 
 ![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/ngrest-crud.png "NgRest Image")
 
