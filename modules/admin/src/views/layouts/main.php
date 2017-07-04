@@ -41,7 +41,7 @@ $this->beginPage()
                         </span>
                     </li>
                     <li class="mainnav-entry" tooltip tooltip-text="Dashboard" tooltip-offset-top="5" tooltip-position="right">
-                        <span class="mainnav-link" ui-sref="home" ui-sref-active="mainnav-link--active">
+                        <span class="mainnav-link" ui-sref="home" ui-sref-active="mainnav-link-active">
                             <i class="mainnav-icon material-icons">home</i>
                             <span class="mainnav-label">
                                 Dashboard
@@ -53,7 +53,7 @@ $this->beginPage()
             <div class="mainnav-modules">
                 <ul class="mainnav-list">
                     <li class="mainnav-entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-offset-top="5" tooltip-position="right">
-                        <span class="mainnav-link" ng-class="{'mainnav-link--active' : isActive(item) }" ng-click="click(item)">
+                        <span class="mainnav-link" ng-class="{'mainnav-link-active' : isActive(item) }" ng-click="click(item)">
                             <i class="mainnav-icon material-icons">{{item.icon}}</i>
                             <span class="mainnav-label">
                                 {{item.alias}}
