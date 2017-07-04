@@ -157,6 +157,7 @@ $this->beginBody();
                     </tr>
                 </tbody>
             </table>
+            <div ng-show="data.list.length == 0" class="alert"><?= Module::t('ngrest_crud_empty_row'); ?></div>
             <ul class="pagination" ng-if="pager && !config.pagerHiddenByAjaxSearch">
                 <li class="page-item page-item-icon" ng-class="{'disabled' : pager.currentPage == 1}" >
                     <a class="page-link" ng-click="pagerPrevClick()"><i class="material-icons">keyboard_arrow_left</i></a>
