@@ -44,13 +44,17 @@
 	 */
 	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, $injector, AdminLangService, LuyaLoading, AdminToastService, CrudTabService) {
 
+		/**
+		 * initializer called by dom render in active window due to controller extends ability.
+		 */
+		$scope.init = function () {
+			$scope.loadList();
+		};
+		
 		LuyaLoading.start();
 		
 		$scope.toast = AdminToastService;
-		
-		/*
-		 * 6.10.2015: remove dialogs, add variable toggler to display. added ngSwitch
-		 */
+
 		$scope.AdminLangService = AdminLangService;
 		
 		$scope.tabService = CrudTabService;
@@ -215,28 +219,15 @@
 			$scope.exportDownloadButton = false;
 			window.open($scope.exportResponse.url);
 			return false;
-		}
-		
-		/* old definitions */
-		
-		$scope.parentController = $scope.$parent;
+		};
 		
 		$scope.applySaveCallback = function() {
 			if ($scope.config.saveCallback) {
 				$injector.invoke($scope.config.saveCallback, this);
 			}
-		}
+		};
 		
 		$scope.showCrudList = true;
-		
-		$scope.currentMenuItem = null;
-		
-		$scope.init = function () {
-			$scope.loadList();
-			$scope.$watch(function() { return $scope.parentController.currentItem }, function(newValue) {
-				$scope.currentMenuItem = newValue;
-			});
-		};
 		
 		$scope.isOrderBy = function(field) {
 			if (field == $scope.config.orderBy) {

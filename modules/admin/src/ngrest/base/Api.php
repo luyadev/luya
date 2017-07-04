@@ -59,7 +59,7 @@ class Api extends RestActiveController
 
         // pagination is disabled by default, lets verfy if there are more then 400 rows in the table and auto enable
         if ($this->pagination === false && $this->autoEnablePagination) {
-            if ($this->model->ngRestFind()->count() > 200) {
+            if ($this->model->ngRestFind()->count() > ($this->pageSize*2)) {
                 $this->pagination = ['pageSize' => $this->pageSize];
             }
         }

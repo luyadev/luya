@@ -69,6 +69,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             'config' => $this->config,
     		'isInline' => $this->getIsInline(),
     		'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
+    	    'currentMenu' => Yii::$app->adminmenu->getApiDetail($this->getConfig()->getApiEndpoint()),
         ], $this);
     }
 
@@ -318,7 +319,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                 if ($i == 0) {
                     $return[] = [
                         'html' => '<div class="form-i18n">
-                                       <label class="form-i18n-label" for="exampleTextarea">
+                                       <label class="form-i18n-label">
                                            ' . $element['alias'] . '
                                        </label>
                                        <div class="col">
@@ -355,7 +356,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         $method = 'render'.ucfirst($configContext);
         $html = $obj->$method($elmnId, $elmnModel);
 
-        return (is_array($html)) ? implode(" ", $html) : $html;
+        return is_array($html) ? implode(" ", $html) : $html;
     }
 
     private function ngModelString($configContext, $fieldId)

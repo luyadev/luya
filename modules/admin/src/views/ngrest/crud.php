@@ -16,7 +16,7 @@ $this->beginBody();
     <?php if (!$relationCall): ?>
         <?php if (!$isInline): ?>
             <div class="crud-header">
-                <h1 class="crud-title">TITEL</h1>
+                <h1 class="crud-title"><?= $currentMenu['alias']; ?></h1>
                 <div class="crud-toolbar">
                     <div class="btn-group" ng-class="{'show': toggleSettings}">
                         <button class="btn btn-sm btn-link btn-icon" type="button" ng-click="toggleSettings=!toggleSettings">
@@ -109,17 +109,16 @@ $this->beginBody();
                     <?php endif; ?>
                 </div>
             </div>
-
             <table class="table table-hover table-striped table-align-middle mt-4">
                 <thead class="thead-default">
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
                         <th class="tab-padding-left">
                             <span><?= $item['alias']; ?></span>
-                            <div class="table-sorter table-sorter-up is-active">
+                            <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'is-active' : !isOrderBy('+<?= $item['name']; ?>') }">
                                 <i class="material-icons">keyboard_arrow_up</i>
                             </div>
-                            <div class="table-sorter table-sorter-down">
+                            <div class="table-sorter table-sorter-down" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-active' : !isOrderBy('-<?= $item['name']; ?>') }">
                                 <i class="material-icons">keyboard_arrow_down</i>
                             </div>
                         </th>
@@ -159,14 +158,14 @@ $this->beginBody();
                 </tbody>
             </table>
             <ul class="pagination" ng-if="pager && !config.pagerHiddenByAjaxSearch">
-                <li class="page-item page-item-icon disabled" ng-class="{'disabled' : pager.currentPage == 1}" >
-                    <a class="page-link" ng-click="pagerPrevClick()" tabindex="-1"><i class="material-icons">keyboard_arrow_left</i></a>
+                <li class="page-item page-item-icon" ng-class="{'disabled' : pager.currentPage == 1}" >
+                    <a class="page-link" ng-click="pagerPrevClick()"><i class="material-icons">keyboard_arrow_left</i></a>
                 </li>
-                <li class="page-item active" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}">
+                <li class="page-item" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}">
                     <a class="page-link" ng-click="realoadCrudList(pageId)">{{pageId}}</a>
                 </li>
                 <li class="page-item page-item-icon" ng-class="{'disabled' : pager.currentPage == pager.pageCount}">
-                    <a class="page-link"  ng-click="pagerNextClick()"><i class="material-icons">keyboard_arrow_right</i></a>
+                    <a class="page-link" ng-click="pagerNextClick()"><i class="material-icons">keyboard_arrow_right</i></a>
                 </li>
             </ul>
         </div>
