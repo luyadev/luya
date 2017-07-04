@@ -11,7 +11,7 @@ use \luya\cms\admin\Module;
 ->
 </style>
 <?= $this->render('_angulardirectives'); ?>
-<script type="text/ng-template" id="reverse2.html">
+<script type="text/ng-template" id="cmsNavReverse.html">
     <span class="treeview-label treeview-label-page" dnd dnd-model="data" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-isvalid="validItem(hover,dragged)" dnd-css="{onDrag:'drag-dragging',onHover:'drag-hover',onHoverTop:'drag-hover-top',onHoverMiddle:'drag-hover-middle',onHoverBottom:'drag-hover-bottom'}">
         <span class="treeview-icon treeview-icon-collapse" ng-show="(menuData.items | menuparentfilter:catitem.id:data.id).length"  ng-click="toggleItem(data)">
             <i class="material-icons">arrow_drop_down</i>
@@ -24,7 +24,7 @@ use \luya\cms\admin\Module;
         </span>
     </span>
     <ul class="treeview-items">
-        <li class="treeview-item" ng-class="{'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse2.html'" />
+        <li class="treeview-item" ng-class="{'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'cmsNavReverse.html'" />
     </ul>
 </script>
 <div class="luya-subnav" ng-controller="CmsMenuTreeController" ng-class="{'overlaying': liveEditStateToggler}">
@@ -61,18 +61,22 @@ use \luya\cms\admin\Module;
             </li>
         </ul>
         <ul class="cmsnav-list cmsnav-list-treeview treeview"> 
-            <li class="treeview-container"  ng-repeat="catitem in menuData.containers" >
-                <div class="treeview-label treeview-label-container">
+            <li class="treeview-container" ng-repeat="catitem in menuData.containers" >
+                <div class="treeview-label treeview-label-container" ng-click="toggleCat(catitem.id)">
                     <span class="treeview-icon treeview-icon-collapse">
-                        <i class="material-icons">keyboard_arrow_down</i>
+                        <i class="material-icons" ng-show="!toggleIsHidden(catitem.id)">keyboard_arrow_down</i>
+                        <i class="material-icons" ng-show="toggleIsHidden(catitem.id)">keyboard_arrow_right</i>
                     </span>
                     <span class="treeview-link"><span class="google-chrome-font-offset-fix">{{catitem.alias}}</span></span>
                 </div>
-                <ul class="treeview-items treeview-items-lvl1">
-                    <li class="treeview-item treeview-item-lvl1" ng-class="{'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'reverse2.html'" />
+                <div ng-show="(menuData.items|menuparentfilter:catitem.id:0).length == 0 && !toggleIsHidden(catitem.id)">
+                    <p><small>Keine Seiten</small></p>
+                </div>
+                <ul class="treeview-items treeview-items-lvl1" ng-show="!toggleIsHidden(catitem.id)">
+                    <li class="treeview-item treeview-item-lvl1" ng-class="{'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'cmsNavReverse.html'" />
                 </ul>
             </li>
         </ul>
     </div>
 </div>
-<div class="luya-content luya-content-cmsadmin" ui-view />
+<div class="luya-content luya-content-cmsadmin" ui-view></div>
