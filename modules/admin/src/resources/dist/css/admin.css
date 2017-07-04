@@ -10201,6 +10201,91 @@ form:not(.form-inline) .form-check-input {
 .input-group-addon {
   color: #fff; }
 
+#loading-bar {
+  background-color: #fff;
+  height: 5px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 20000; }
+  #loading-bar .bar {
+    background-color: #77C4D3;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    -webkit-transition: .25s ease-in-out width;
+    transition: .25s ease-in-out width; }
+
+#loading-bar-spinner {
+  display: none; }
+
+.loading-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  color: #fff;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 50000; }
+
+.loading-overlay-title {
+  font-size: 40px;
+  font-size: 2.66667rem;
+  font-weight: 400;
+  margin: 150px 0 0 0;
+  text-align: center;
+  color: #fff; }
+
+.loading-indicator {
+  font-size: 10px;
+  font-size: 0.66667rem;
+  height: 80px;
+  margin: 100px auto;
+  text-align: center;
+  width: 100px; }
+
+.loading-indicator > div {
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  background-color: #FF006B;
+  display: inline-block;
+  height: 100%;
+  margin: 0 3px;
+  width: 10px; }
+
+.loading-indicator .rect2 {
+  animation-delay: -1.1s;
+  -webkit-animation-delay: -1.1s; }
+
+.loading-indicator .rect3 {
+  animation-delay: -1.0s;
+  -webkit-animation-delay: -1.0s; }
+
+.loading-indicator .rect4 {
+  animation-delay: -0.9s;
+  -webkit-animation-delay: -0.9s; }
+
+.loading-indicator .rect5 {
+  animation-delay: -0.8s;
+  -webkit-animation-delay: -0.8s; }
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4); }
+  20% {
+    -webkit-transform: scaleY(1); } }
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4); }
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1); } }
+
 .luya {
   display: -webkit-box;
   display: -webkit-flex;
@@ -10722,6 +10807,14 @@ form:not(.form-inline) .form-check-input {
     display: inline-block; }
   .table-sorter.is-active + .table-sorter-down {
     display: none; }
+
+.toasts-toast {
+  position: absolute;
+  bottom: 0;
+  left: 80px;
+  z-index: 100000;
+  -webkit-transition: .25s ease-in-out transform;
+  transition: .25s ease-in-out transform; }
 
 .tooltip {
   margin: 0;

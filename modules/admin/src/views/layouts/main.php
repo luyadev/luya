@@ -124,8 +124,42 @@ $this->beginPage()
             </div>
         </div>
      </div>
-    <div class="luya-main" ui-view />
+    <div class="luya-main" ui-view></div>
 </div>
+
+<div class="toasts" ng-repeat="item in toastQueue">
+
+    <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" ng-click="item.close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{item.message}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="item.close()"><?= Admin::t('button_abort'); ?></button>
+                    <button type="button" class="btn btn-primary" ng-click="item.click()"><?= Admin::t('button_confirm'); ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toasts-toast" ng-if="item.type != 'confirm'" style="transform: translateY(-{{ ($index * 110) }}%);">
+        <div class="alert" ng-class="{'alert-success': item.type == 'success', 'alert-danger': item.type == 'error', 'alert-warning': item.type == 'warning', 'alert-info': 'info'}">
+            <i class="material-icons" ng-show="item.type == 'success'">check_circle</i>
+            <i class="material-icons" ng-show="item.type == 'error'">error_outline</i>
+            <i class="material-icons" ng-show="item.type == 'warning'">warning</i>
+            <i class="material-icons" ng-show="item.type == 'info'">info_outline</i>
+            <span>{{item.message}}</span>
+        </div>
+    </div>
+</div>
+
 <?php $this->endBody() ?>
 </body>
 </html>

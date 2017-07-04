@@ -13,6 +13,7 @@ class StorageController extends Controller
 {
     public function actionIndex()
     {
+        sleep(20);
         return $this->renderPartial('index');
     }
 }
