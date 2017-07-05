@@ -33,7 +33,7 @@ The corresponding view file could look like this:
 File: `views/controller/index.php`
 
 ```php
-<? if(Yii::$app->session->getFlash('success'): ?>
+<? if(Yii::$app->session->getFlash('success')): ?>
     <p>Thank you for your request</p>
 <? else: ?>
         
