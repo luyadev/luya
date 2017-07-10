@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\admin\validators;
+namespace luya\admin\ngrest\validators;
 
 use Yii;
 use yii\validators\Validator;
