@@ -25,4 +25,11 @@ interface NgRestModelInterface
      * @return string
      */
     public static function ngRestApiEndpoint();
+    
+    /**
+     * Whether current model is in ngrest context or not
+     * 
+     * @return boolean
+     */
+    public function getIsNgRestContext();
 }

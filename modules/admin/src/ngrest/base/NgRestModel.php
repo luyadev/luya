@@ -312,6 +312,22 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
 
         return $this->_ngrestCallType;
     }
+    
+    /**
+     * Whether the current model is in api context (REST SCENARIOS or CALL TYPE) context or not.
+     *
+     * @return boolean Whether the current model is in api context or not.
+     */
+    public function getIsNgRestContext()
+    {
+        if ($this->scenario == RestActiveController::SCENARIO_RESTCREATE
+            || $this->scenario == RestActiveController::SCENARIO_RESTUPDATE
+            || $this->getNgRestCallType()) {
+            return true;
+        }
+        
+        return false;
+    }
 
     private $_ngRestPrimaryKey;
 

@@ -9,6 +9,8 @@ use yii\helpers\Json;
 use yii\web\UploadedFile;
 use yii\base\Model;
 use luya\base\DynamicModel;
+use luya\admin\ngrest\base\NgRestModelInterface;
+use yii\base\InvalidConfigException;
 
 /**
  * Storage Upload Validator.
@@ -76,6 +78,14 @@ class StorageUploadValidator extends Validator
      */
     public function validateAttribute($model, $attribute)
     {
+        if (!$model instanceof NgRestModelInterface) {
+            throw new InvalidConfigException("The model must be an instance of NgRestModelInterface.");
+        }
+        
+        if ($model->getIsNgRestContext()) {
+            return;
+        }
+        
         $files = $this->multiple ? UploadedFile::getInstances($model, $attribute) : (array) UploadedFile::getInstance($model, $attribute);
         
         $contextModel = new DynamicModel(['file' => $files]);
