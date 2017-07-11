@@ -10810,11 +10810,13 @@ form:not(.form-inline) .form-check-input {
 
 .toasts-toast {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 80px;
   z-index: 100000;
   -webkit-transition: .25s ease-in-out transform;
   transition: .25s ease-in-out transform; }
+  .toasts-toast .alert {
+    margin-bottom: 5px; }
 
 .tooltip {
   margin: 0;

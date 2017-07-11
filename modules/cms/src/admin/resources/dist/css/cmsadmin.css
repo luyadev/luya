@@ -11,11 +11,11 @@
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 0 0 5px 5px;
+  margin-top: 5px;
   padding: 0;
   position: relative;
   -webkit-transition: .2s ease-in-out border-color, 0s .2s ease-in-out z-index;
-  transition: .2s ease-in-out border-color, 0s .2s ease-in-out z-index;
-  z-index: 10; }
+  transition: .2s ease-in-out border-color, 0s .2s ease-in-out z-index; }
   .block:not(:last-of-type) {
     margin-bottom: 25px; }
   .block-is-editing, .block:hover {
@@ -27,11 +27,29 @@
     margin-bottom: 45px; }
     .block-is-editing:not(:last-of-type) {
       margin-bottom: 45px; }
-  .block-is-layout {
+  .block-is-layout > .block {
     border-color: #B2B2B2;
-    padding-top: 35px; }
-    .block-is-layout:hover {
-      border-color: #B2B2B2; }
+    border-radius: 5px; }
+    .block-is-layout > .block:hover {
+      border-color: #B2B2B2;
+      border-radius: 0 0 5px 5px; }
+  .block:before, .block:after {
+    background-color: #FF006B;
+    content: "";
+    height: 5px;
+    left: 0;
+    display: none;
+    position: absolute;
+    right: 0;
+    z-index: 1000; }
+  .block:before {
+    top: -6px; }
+  .block:after {
+    bottom: -6px; }
+  .block--drag-top:before {
+    display: block; }
+  .block--drag-bottom:after {
+    display: block; }
 
 .block-toolbar {
   background-color: #292b2c;
@@ -69,6 +87,8 @@
     transition: .25s ease-in-out background-color; }
     .block-toolbar .toolbar-button:hover {
       background-color: rgba(255, 255, 255, 0.2); }
+    .block--is-dragging .block-toolbar .toolbar-button {
+      display: none; }
   .block-is-editing > .block-toolbar,
   .block:hover > .block-toolbar {
     opacity: 1;
@@ -403,10 +423,15 @@
           flex: 1 1 100%;
   margin-top: -1px;
   padding: 10px 10px 10px 0; }
+  .cmsadmin-pages > .row > .col:last-of-type .cmsadmin-page {
+    border-radius: 0;
+    border-right: 0; }
 
 .cmsadmin-container-title {
   margin-bottom: 10px;
   margin-top: 20px; }
+  .block-is-layout > .block > .block-front .cmsadmin-container-title {
+    margin-top: 0; }
 
 .cmsadmin-frame-wrapper {
   position: relative; }
@@ -440,6 +465,13 @@
 
 .cmsnav-treeview {
   display: block; }
+
+.empty-placeholder {
+  padding: 10px;
+  text-align: center; }
+  .empty-placeholder--drag-hover {
+    background-color: #FF006B;
+    color: #fff; }
 
 .treeview {
   display: block;

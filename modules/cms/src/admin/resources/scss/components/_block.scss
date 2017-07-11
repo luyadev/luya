@@ -6,10 +6,11 @@ $block-padding: 10px !default;
     background-color: $white;
     border: $block-border-width solid transparent;
     border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
+    margin-top: 5px;
     padding: 0;
     position: relative;
+
     transition: .2s ease-in-out border-color, 0s .2s ease-in-out z-index;
-    z-index: 10;
 
     &:not(:last-of-type) {
         margin-bottom: 25px;
@@ -29,14 +30,39 @@ $block-padding: 10px !default;
             margin-bottom: 45px;
         }
     }
-
-    &-is-layout {
+    .block-is-layout > & {
         border-color: $block-border-color;
-        padding-top: 35px;
+        border-radius: $nav-tabs-border-radius;
 
         &:hover {
             border-color: $block-border-color;
+            border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
         }
+    }
+
+    &:before,
+    &:after {
+        background-color: $brand-primary;
+        content: "";
+        height: 5px;
+        left: 0;
+        display: none;
+        position: absolute;
+        right: 0;
+        z-index: 1000;
+    }
+    &:before {
+        top: -6px;
+    }
+    &:after {
+        bottom: -6px;
+    }
+
+    &--drag-top:before {
+        display: block;
+    }
+    &--drag-bottom:after {
+        display: block;
     }
 }
 
@@ -70,6 +96,10 @@ $block-padding: 10px !default;
 
         &:hover {
             background-color: rgba(255, 255, 255, .2);
+        }
+
+        .block--is-dragging & {
+            display: none;
         }
     }
 

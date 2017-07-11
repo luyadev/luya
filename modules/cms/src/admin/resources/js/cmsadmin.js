@@ -1033,9 +1033,9 @@
 			    	if (n !== o && n !== undefined) {
 			    		$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).then(function(response) {
 							if ($scope.navData.is_offline == 1) {
-								AdminToastService.notify(i18nParam('js_state_offline', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_offline', {title: $scope.navData.title}), 2000);
 							} else {
-								AdminToastService.notify(i18nParam('js_state_online', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_online', {title: $scope.navData.title}), 2000);
 							}
 			    		});
 			    	}
@@ -1045,9 +1045,9 @@
 					if (n !== o && n !== undefined) {
 						$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).then(function(response) {
 							if ($scope.navData.is_hidden == 1) {
-								AdminToastService.notify(i18nParam('js_state_hidden', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_hidden', {title: $scope.navData.title}), 2000);
 							} else {
-								AdminToastService.notify(i18nParam('js_state_visible', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_visible', {title: $scope.navData.title}), 2000);
 							}
 						});
 					}
@@ -1058,9 +1058,9 @@
 						$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).then(function(response) {
 							$scope.menuDataReload().then(function() {
 								if ($scope.navData.is_home == 1) {
-									AdminToastService.notify(i18nParam('js_state_is_home', {title: $scope.navData.title}), 2000);
+									AdminToastService.info(i18nParam('js_state_is_home', {title: $scope.navData.title}), 2000);
 								} else {
-									AdminToastService.notify(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 2000);
+									AdminToastService.info(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 2000);
 								}
 			    			});
 						});
@@ -1425,7 +1425,7 @@
 				/* load live url on hidden trigger */
 				$scope.NavItemTypePageController.$parent.$parent.loadLiveUrl();
 				// successfull toggle hidden state of block
-				AdminToastService.notify(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}), 2000);
+				AdminToastService.info(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}), 2000);
 			});
 		};
 
