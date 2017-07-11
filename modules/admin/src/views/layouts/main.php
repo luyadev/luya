@@ -150,7 +150,7 @@ $this->beginPage()
     </div>
 
     <div class="toasts-toast" ng-if="item.type != 'confirm'" style="transform: translateY(-{{ ($index * 110) }}%);">
-        <div class="alert" ng-class="{'alert-success': item.type == 'success', 'alert-danger': item.type == 'error', 'alert-warning': item.type == 'warning', 'alert-info': 'info'}">
+        <div class="alert" ng-class="{'alert-success': item.type == 'success', 'alert-danger': item.type == 'error', 'alert-warning': item.type == 'warning', 'alert-info': item.type == 'info'}">
             <i class="material-icons" ng-show="item.type == 'success'">check_circle</i>
             <i class="material-icons" ng-show="item.type == 'error'">error_outline</i>
             <i class="material-icons" ng-show="item.type == 'warning'">warning</i>
