@@ -32,7 +32,7 @@ Setup Crud:
 3. Define and Add the Api-Endpoint to your Module and enable the Authorizations
 4. Import and Setup privileges.
 
-## 1. The Model
+## Creating the Model
 
 We assume you have a made a table via the migrations (in your example below we assume you make a team module with members) and executue the migrations so you can no creat an `ActiveRecord` model for the provided table. The model represents the datasource for the REST API, you can create the model with the gii module extension or you can also generate the model and the rest of the classes with the `admin/crud/create` cli command.
 
@@ -120,7 +120,7 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
 
 You can read more about the configuration of the NgRest in [NgRest Model Guide](ngrest-model.md).
 
-## 2. Controller and API
+## Creating Controller and API
 
 Each NgRest Crud needs an API (to make the rest call, create, update, list which are provided trough [Yii 2 RESTful](http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html)) and a controller which contains the angular template for your configure `ngRestConfig()`. The API and the Controller are basically only Gateways for the Output and do relate to the ngrest model:
 
@@ -164,7 +164,7 @@ and you can also force the api to always generate a pagination by setting `$pagi
 public $pagination = ['pageSize' => 100];
 ```
 
-## 3. Api-Endpoint & Authorization
+## Creating the Api-Endpoint & Authorization
 
 The last part of the ngrest process is the let your application know where your api is located (Yii2 controller namespace) and to make permission entries for the ngrest (who can create, update, delete and see the crud).
 
@@ -206,7 +206,7 @@ public function getMenu()
 
 The Icons `account` and `extension` are choosem from the google material icons: https://design.google.com/icons/. You can add as much nodes, groups and items as you want. The first argument of `node`, `group` and `itemApi` as the navigation button display in the administration area, you can wrapp them with Yii::t in order to make internalisations.
 
-## 4. Import and Priviliges
+## Import and Priviliges
 
 Run `./vendor/bin/luya import`, open the administration area and allocate the new menu items to a group. 
 
