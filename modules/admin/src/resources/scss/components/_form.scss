@@ -16,6 +16,10 @@ form:not(.form-inline) .form-check-input {
     margin-right: 10px;
 }
 
+textarea {
+    min-height: 46px;
+}
+
 .form-check-label {
     cursor: pointer;
     margin-bottom: 0;
@@ -43,7 +47,7 @@ form:not(.form-inline) .form-check-input {
 }
 
 .form-side {
-    align-self: baseline;
+    align-self: flex-start;
     flex: 1 1 250px;
 
     &-label {
