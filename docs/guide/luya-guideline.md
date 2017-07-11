@@ -4,6 +4,11 @@ Below some rules how to deal with documentations, linking or using the php docs.
 
 ## Documentation & Guide
 
+Informations about creating guides and how they are rendered on luya.io:
+
++ Heading 1 titles will automatically removed from the rendering on luya.io, therefore the navigation title will be used instead. So you add a heading markdown notation on a file, but you don't have to.
++ Heading 2 titles will be used in order to auto generate a table of contents on luya.io.
+
 In order to make a Link somewhere inside the Guide or PHPDoc to a PHP Class use:
 
 + `{{\luya\base\Module}}` This will generate a link to the API for this class.
