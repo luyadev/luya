@@ -83,41 +83,42 @@ use luya\admin\Module as Admin;
 
 <script type="text/ng-template" id="storageFileUpload">
     <div class="link-selector">
-        <div class="link-selector-btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
-            <i class="material-icons left">attach_file</i>
-                    <span>
-                        <?= Admin::t('layout_select_file'); ?>
-                    </span>
+        <div class="link-selector-btn btn btn-secondary" ng-click="toggleModal()">
+            <i class="material-icons left" ng-show="!fileinfo.name">file_upload</i>
+            <i class="material-icons left" ng-show="fileinfo.name">attach_file</i>
+            <span ng-if="fileinfo.name" ng-bind="fileinfo.name"></span>
+            <span ng-if="!fileinfo.name">
+                <?= Admin::t('layout_select_file'); ?>
+            </span>
         </div>
-        <span class="link-selector-reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
-        <span class="link-selector-path" ng-bind="fileinfo.name"></span>
+        <span class="link-selector-reset" ng-click="reset()" ng-show="fileinfo!=null">
+            <i class="material-icons">remove_circle</i>
+        </span>
         <div ng-if="!modal.state">
-        <modal is-modal-hidden="modal.state"><storage-file-manager selection="true" /></modal>
+            <modal is-modal-hidden="modal.state"><storage-file-manager selection="true" /></modal>
         </div>
     </div>
 </script>
 
 <script type="text/ng-template" id="storageImageUpload">
     <div class="imageupload">
-        <div ng-if="imageNotFoundError" class="alert alert--danger" style="margin-top:0px;">The requested image id ({{ngModel}}) could not be found anymore. The orignal file has been deleted in the filemanager!</div>
-        <storage-file-upload ng-model="fileId"></storage-file-upload>
+        <div ng-if="imageNotFoundError" class="alert alert-danger" style="margin-top:0px;">The requested image id ({{ngModel}}) could not be found anymore. The orignal file has been deleted in the filemanager!</div>
         <div ng-show="originalFileIsRemoved">
-            <div class="alert alert--danger"><?= Admin::t('layout_deleted_file'); ?></div>
-        </div><!--
-        --><div class="imageupload-preview" ng-show="imageinfo != null">
-            <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="responsive-img" />
+            <div class="alert alert-danger"><?= Admin::t('layout_deleted_file'); ?></div>
+        </div>
+        <div class="imageupload-upload">
+            <storage-file-upload ng-model="fileId"></storage-file-upload>
+        </div>
+        <div class="imageupload-preview" ng-show="imageinfo != null">
+            <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="img-fluid" />
             <div class="imageupload-size" ng-show="!imageLoading">{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</div>
-            <div class="imageupload-loading" ng-hide="!imageLoading">
-                <div class="preloader-wrapper big active">
-                    <div class="spinner-layer spinner-green-only">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div><div class="gap-patch">
-                            <div class="circle"></div>
-                        </div><div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
+            <div class="imageupload-loading" ng-show="imageLoading">
+                <div class="loading-indicator">
+                    <div class="rect1"></div><!--
+                 --><div class="rect2"></div><!--
+                 --><div class="rect3"></div><!--
+                 --><div class="rect4"></div><!--
+                 --><div class="rect5"></div>
                 </div>
             </div>
         </div>
@@ -140,7 +141,7 @@ use luya\admin\Module as Admin;
                         </span>
                         <i class="material-icons filemanager-edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
                         <i class="material-icons filemanager-delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
-                        
+
                         <span ng-if="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager-file-dialog-input"/>
                             <div class="filemanager-file-dialog">
@@ -321,11 +322,11 @@ use luya\admin\Module as Admin;
                             </tr>
                         </thead>
                         <tbody>
-							<tr 
-                   				ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
-                   				alt="fileId={{file.id}}" 
-                    			title="fileId={{file.id}}" 
-                    			class="filemanager-file" 
+							<tr
+                   				ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField"
+                   				alt="fileId={{file.id}}"
+                    			title="fileId={{file.id}}"
+                    			class="filemanager-file"
                     			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
 
 					<th scope="row" ng-hide="allowSelection == 'true'" ng-click="toggleSelection(file)">
@@ -526,11 +527,11 @@ use luya\admin\Module as Admin;
                 <tbody>
 
                 <!-- FILES -->
-                <tr 
-                    ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" 
-                    alt="fileId={{file.id}}" 
-                    title="fileId={{file.id}}" 
-                    class="filemanager-file" 
+                <tr
+                    ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField"
+                    alt="fileId={{file.id}}"
+                    title="fileId={{file.id}}"
+                    class="filemanager-file"
                     ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
 
                     <td ng-click="toggleSelection(file)" class="filemanager-checkox-column" ng-hide="allowSelection == 'true'">
