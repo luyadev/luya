@@ -23,6 +23,8 @@ Assuming to have a Layout file which has section output which can be used someti
 </html>
 ```
 
+## Hooks Setup
+
 Now a hooking listener is setup which listens to the identifier `layoutFooter`. After setting up the hook listener, the Hook can be filled with content from various files like Blocks, Controllers or Widgets.
 
 Assuming to have a Controller with an action.
@@ -63,7 +65,7 @@ class DefaultController extends \luya\web\Controller
 
 When {{luya\Hook::on}} is called multiple times in a request cycle, the output will concated and is sorted by execution time.
 
-## Array output
+## Using Array Output
 
 Sometimes its more convenient to iterate elements instead of concant the output. This can be helpfull when working with list output:
 
