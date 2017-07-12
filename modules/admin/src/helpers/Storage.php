@@ -398,7 +398,7 @@ class Storage
                     'size' => $file['size'][$index],
                 ];
             }
-        } elseif (!isset($file['tmp_name']) || empty($file['tmp_name'])) {
+        } elseif (isset($file['tmp_name']) && !empty($file['tmp_name'])) {
             $files[] = [
                 'name' => $file['name'],
                 'type' => $file['type'],
