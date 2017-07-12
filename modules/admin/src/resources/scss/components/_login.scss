@@ -1,0 +1,92 @@
+.login-screen {
+    background-color: $purple-light;
+    background: linear-gradient(321deg, $red, $purple-light, $purple, $pink);
+    background-size: 800% 800%;
+
+    -webkit-animation: LuyaLogin 50s ease infinite;
+    -moz-animation: LuyaLogin 50s ease infinite;
+    animation: LuyaLogin 50s ease infinite;
+
+    @-webkit-keyframes LuyaLogin {
+        0%{background-position:0% 9%}
+        50%{background-position:100% 92%}
+        100%{background-position:0% 9%}
+    }
+    @-moz-keyframes LuyaLogin {
+        0%{background-position:0% 9%}
+        50%{background-position:100% 92%}
+        100%{background-position:0% 9%}
+    }
+    @keyframes LuyaLogin {
+        0%{background-position:0% 9%}
+        50%{background-position:100% 92%}
+        100%{background-position:0% 9%}
+    }
+    position: relative;
+    height: 100%;
+}
+
+.login-panel {
+    background: $white;
+    // box-shadow:inset 0 0 5px $gray;
+    border: solid $purple 1px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    width: 518px; // goldener Schnitt
+    max-width: 100%;
+    min-height: 320px;
+
+    padding: 25px;
+
+}
+
+.login-logo {
+    background: url("../../img/luyalogo-white.svg") top center no-repeat;
+    min-height: 100px;
+    background-size: contain;
+    top: -140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: auto;
+    position: absolute;
+
+}
+
+.login-form {
+}
+
+.login-btn {
+    background: $pink;
+    width:100%;
+    margin-top: 10px;
+    min-height: 50px;
+    cursor: pointer;
+    box-shadow: none;
+    border: none;
+    color: $white;
+    font-size: 18px;
+}
+
+.login-title {
+    text-align: center;
+}
+
+.login-inputs {
+    width: 100%;
+}
+
+.login-input {
+    display:block;
+    width: 100%;
+    margin-bottom: 25px;
+    border:none;
+    border-style:solid;
+    border-width: 0;
+    border-color:$white;
+    border-bottom: solid 3px $pink;
+    padding: 15px 5px 10px 5px !important;
+}
