@@ -200,17 +200,16 @@ class Mail extends \yii\base\Component
      * Assuming the following example inside a controller:
      *
      * ```php
-     * Yii::$app->mail->compose('Send E-Mail')->render($this, 'mymail', ['foo' => 'bar'])->address('info@luya.io')->send();
+     * Yii::$app->mail->compose('Send E-Mail')->render('@app/views/_mail', ['foo' => 'bar'])->address('info@luya.io')->send();
      * ```
      *
-     * @param \yii\base\Controller $controller The controller context
      * @param string $viewFile The view file to render
      * @param array $params The parameters to pass to the view file.
      * @return \luya\components\Mail
      */
-    public function render(Controller $controller, $viewFile, array $params = [])
+    public function render($viewFile, array $params = [])
     {
-        $this->body($controller->renderPartial($viewFile, $params));
+        $this->body(Yii::$app->view->render($viewFile, $params));
         
         return $this;
     }
