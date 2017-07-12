@@ -38,11 +38,16 @@ use luya\admin\Module as Admin;
 <!-- UPDATE REDIRECT FORM -->
 <script type="text/ng-template" id="updateformredirect.html">
     <div class="row">
-        <div class="input input--radios col s12">
-            <label class="input-label"><?= Admin::t('view_index_redirect_type'); ?></label>
-            <div class="input-field-wrapper">
-                <input type="radio" ng-model="data.type" ng-value="1"><label ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label> <br />
-                <input type="radio" ng-model="data.type" ng-value="2"><label ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
+        <div class="form-group form-side-by-side">
+            <div class="form-side form-side-label">
+                <label><?= Admin::t('view_index_redirect_type'); ?></label>
+            </div>
+            <div class="form-side">
+                <input type="radio" ng-model="data.type" ng-value="1" id="redirect_internal">
+                <label for="redirect_internal" ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label>
+
+                <input type="radio" ng-model="data.type" ng-value="2" id="redirect_external">
+                <label for="redirect_external" ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
             </div>
         </div>
     </div>
@@ -68,32 +73,35 @@ use luya\admin\Module as Admin;
 <!-- /UPDATE REDIRECT FORM -->
 
 <script type="text/ng-template" id="menuDropdownReverse">
-
-    <div class="input">
-        <input type="radio" ng-checked="data.id == navId" />
-        <label ng-click="changeModel(data)">
-            <span class="menu-dropdown-label">{{ data.title }}</span>
-        </label>
-    </div>
-
-    <ul class="menu-dropdown-list">
-        <li class="menu-dropdown-item" ng-repeat="data in menuData.items | menuparentfilter:container.id:data.id" ng-include="'menuDropdownReverse'"></li>
+    <span class="treeview-label treeview-label-page" ng-click="changeModel(data)">
+        <span class="treeview-icon">
+            <input type="radio" ng-checked="data.id == navId" id="toggler-for-{{data.id}}" />
+            <label for="toggler-for-{{data.id}}"></label>
+        </span>
+        <span class="treeview-link" >
+            <span class="google-chrome-font-offset-fix">{{data.title}}</span>
+        </span>
+    </span>
+    <ul class="treeview-items">
+        <li class="treeview-item" ng-class="{'treeview-item-has-children' : (menuData.items | menuparentfilter:container.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:container.id:data.id" ng-include="'menuDropdownReverse'"></li>
     </ul>
 </script>
 
 <script type="text/ng-template" id="storageFileUpload">
     <div class="link-selector">
-        <div class="link-selector-btn btn btn-secondary" ng-click="toggleModal()">
-            <i class="material-icons left" ng-show="!fileinfo.name">file_upload</i>
-            <i class="material-icons left" ng-show="fileinfo.name">attach_file</i>
-            <span ng-if="fileinfo.name" ng-bind="fileinfo.name"></span>
-            <span ng-if="!fileinfo.name">
-                <?= Admin::t('layout_select_file'); ?>
+        <div class="link-selector-actions">
+            <div class="link-selector-btn btn btn-secondary" ng-click="toggleModal()">
+                <i class="material-icons left" ng-show="!fileinfo.name">file_upload</i>
+                <i class="material-icons left" ng-show="fileinfo.name">attach_file</i>
+                <span ng-if="fileinfo.name" ng-bind="fileinfo.name"></span>
+                <span ng-if="!fileinfo.name">
+                    <?= Admin::t('layout_select_file'); ?>
+                </span>
+            </div>
+            <span class="link-selector-reset" ng-click="reset()" ng-show="fileinfo!=null">
+                <i class="material-icons">remove_circle</i>
             </span>
         </div>
-        <span class="link-selector-reset" ng-click="reset()" ng-show="fileinfo!=null">
-            <i class="material-icons">remove_circle</i>
-        </span>
         <div ng-if="!modal.state">
             <modal is-modal-hidden="modal.state"><storage-file-manager selection="true" /></modal>
         </div>

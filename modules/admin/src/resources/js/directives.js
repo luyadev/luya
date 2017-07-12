@@ -742,21 +742,25 @@
                 return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><labelfor="{{id}}">{{label}}</label></div><div class="form-side">' +
                     '<div ng-if="model">' +
                         '<div class="link-selector">' +
-                            '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
-                                '<i class="material-icons left">insert_link</i>' +
-                                '<span>'+i18n['js_link_change_value']+'</span>' +
+                            '<div class="link-selector-actions">' +
+                                '<div class="link-selector-btn btn btn-secondary" ng-click="data.modalState=0">' +
+                                    '<i class="material-icons left">insert_link</i>' +
+                                    '<span>' + i18n['js_link_set_value'] + '</span>' +
+                                '</div>' +
+                                '<span class="link-selector-reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' +
                             '</div>' +
-                            '<span class="link-selector__reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' +
-                            '<span class="link-selector__path"><link-object-to-string link="model"></link-object-to-string></span>' +
+                            '<p class="link-selector-path"><link-object-to-string link="model"></link-object-to-string></p>' +
                         '</div>' +
                     '</div>' +
                     '<div ng-if="!model">' +
                         '<div class="link-selector">' +
-                            '<div class="link-selector__btn btn-flat [ grey lighten-4 ]" ng-click="data.modalState=0">' +
-                                '<i class="material-icons left">insert_link</i>' +
-                                '<span>'+i18n['js_link_set_value']+'</span>' +
+                            '<div class="link-selector-actions">' +
+                                '<div class="link-selector__btn btn btn-secondary" ng-click="data.modalState=0">' +
+                                    '<i class="material-icons left">insert_link</i>' +
+                                    '<span>'+i18n['js_link_set_value']+'</span>' +
+                                '</div>' +
+                                '<span class="link-selector-path">Kein Link gesetzt</span>' +
                             '</div>' +
-                            '<span class="link-selector__path">Kein Link gesetzt</span>' +
                         '</div>' +
                     '</div>' +
                     '<modal is-modal-hidden="data.modalState">'+
@@ -897,7 +901,7 @@
                     }
                 })
             }, template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -928,7 +932,7 @@
                     }
                 })
             }, template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" step="{{steps}}" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" step="{{steps}}" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -1161,7 +1165,7 @@
                 scope.random = Math.random().toString(36).substring(7);
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side">' +
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
                             '<label >{{label}}</label></div>' +
                             '<div class="form-side">' +
                                 '<input class="form-control" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} ' + i18n['js_dir_till'] + '{{options.items.length}}'+

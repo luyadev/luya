@@ -20,6 +20,10 @@
     margin-top: 20px;
     position: relative;
     width: 100%;
+
+    .treeview-chooser & {
+        margin-top: 10px;
+    }
 }
 
 // ==================================================
@@ -59,6 +63,12 @@
         position: absolute;
         top: 0;
         width: 25px;
+
+        .treeview-chooser & {
+            height: 20px;
+            top: -5px;
+            width: 20px;
+        }
     }
 
     &:after {
@@ -69,6 +79,10 @@
         left: -4px;
         position: absolute;
         top: 0;
+
+        .treeview-chooser & {
+            top: -5px;
+        }
     }
 
     &-lvl1:before,
@@ -83,6 +97,11 @@
     &-has-children:before {
         top: -1px;
         width: 7px;
+
+        .treeview-chooser & {
+            height: 25px;
+            top: -10px;
+        }
     }
     &-collapsed:before {
         height: 16px;
@@ -97,6 +116,10 @@
     position: relative;
     width: 100%;
 
+    .treeview-chooser & {
+        padding-right: 0;
+    }
+
     &-container {
         font-weight: bold;
         letter-spacing: .8px;
@@ -110,6 +133,10 @@
         right: 0;
         top: 0;
         width: 5px;
+
+        .treeview-chooser & {
+            display: none;
+        }
     }
 
     &-page:after {
@@ -154,12 +181,12 @@
     }
 
     &-collapse {
-        top: 0;
         cursor: pointer;
         font-size: 24px;
         height: 24px;
-        width: 24px;
+        top: 0;
         transition: .25s ease-in-out transform;
+        width: 24px;
 
         .treeview-item-collapsed & {
             transform: rotate(-90deg) translateX(-1px);
@@ -185,4 +212,28 @@
             background-color: transparent;
         }
     }
+}
+
+.treeview-chooser {
+
+    .treeview-icon input[type="radio"] {
+        display: none;
+
+        + label {
+            background-color: $gray-lightest;
+            border: 2px solid $brand-primary;
+            border-radius: 50%;
+            height: 16px;
+            margin: 1px 0 0 3px;
+            position: relative;
+            transition: .25s ease-in-out border;
+            width: 16px;
+            z-index: 1000;
+        }
+
+        &:checked + label {
+            border-width: 8px;
+        }
+    }
+
 }

@@ -37,6 +37,7 @@ textarea {
 .form-side-by-side {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .form-not-side-by-side .form-side {
@@ -87,4 +88,18 @@ textarea {
 
 .form-i18n .form-side-label {
     display: none;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    clear: left;
+    float: left;
+    margin: 3px 10px 3px 0;
+
+    & + label {
+        cursor: pointer;
+        float: left;
+        margin: 0 0 3px 0;
+        width: auto;
+    }
 }

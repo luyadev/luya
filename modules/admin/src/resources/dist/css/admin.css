@@ -10118,7 +10118,8 @@ textarea {
   display: flex;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+          flex-wrap: wrap;
+  width: 100%; }
 
 .form-not-side-by-side .form-side {
   display: block;
@@ -10178,6 +10179,18 @@ textarea {
 
 .form-i18n .form-side-label {
   display: none; }
+
+input[type="checkbox"],
+input[type="radio"] {
+  clear: left;
+  float: left;
+  margin: 3px 10px 3px 0; }
+  input[type="checkbox"] + label,
+  input[type="radio"] + label {
+    cursor: pointer;
+    float: left;
+    margin: 0 0 3px 0;
+    width: auto; }
 
 .imageupload {
   margin-top: -25px; }
@@ -10263,9 +10276,13 @@ textarea {
 
 .link-selector {
   display: block;
-  padding-right: 30px;
   position: relative;
   width: 100%; }
+
+.link-selector-actions {
+  display: inline-block;
+  padding-right: 30px;
+  position: relative; }
 
 .link-selector-reset {
   color: #d9534f;
@@ -10283,6 +10300,9 @@ textarea {
   transition: .25s ease-in-out background-color; }
   .link-selector-reset:hover {
     color: #AC0031; }
+
+.link-selector-path {
+  margin: 5px 0 5px; }
 
 #loading-bar {
   background-color: #fff;

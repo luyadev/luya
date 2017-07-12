@@ -279,7 +279,7 @@
     opacity: 1;
     pointer-events: all; }
   .blockholder-favorite:hover {
-    color: #EA2E49; }
+    color: #d9534f; }
 
 .cmsadmin {
   display: -webkit-box;
@@ -473,6 +473,14 @@
     background-color: #FF006B;
     color: #fff; }
 
+.menu-dropdown-toggle-all {
+  font-size: 14px;
+  font-size: 0.875rem;
+  cursor: pointer; }
+  .menu-dropdown-toggle-all i {
+    font-size: 24px;
+    font-size: 1.5rem; }
+
 .treeview {
   display: block;
   font-size: 14px;
@@ -490,6 +498,8 @@
   margin-top: 20px;
   position: relative;
   width: 100%; }
+  .treeview-chooser .treeview-container {
+    margin-top: 10px; }
 
 .treeview-items {
   display: block;
@@ -516,6 +526,10 @@
     position: absolute;
     top: 0;
     width: 25px; }
+    .treeview-chooser .treeview-item:before {
+      height: 20px;
+      top: -5px;
+      width: 20px; }
   .treeview-item:after {
     border-left: 1px solid silver;
     content: '';
@@ -524,6 +538,8 @@
     left: -4px;
     position: absolute;
     top: 0; }
+    .treeview-chooser .treeview-item:after {
+      top: -5px; }
   .treeview-item-lvl1:before, .treeview-item-lvl1:after {
     display: none; }
   .treeview-item:last-child:after {
@@ -531,6 +547,9 @@
   .treeview-item-has-children:before {
     top: -1px;
     width: 7px; }
+    .treeview-chooser .treeview-item-has-children:before {
+      height: 25px;
+      top: -10px; }
   .treeview-item-collapsed:before {
     height: 16px; }
 
@@ -541,6 +560,8 @@
   padding: 0 35px 0 23px;
   position: relative;
   width: 100%; }
+  .treeview-chooser .treeview-label {
+    padding-right: 0; }
   .treeview-label-container {
     font-weight: bold;
     letter-spacing: .8px;
@@ -553,10 +574,12 @@
     right: 0;
     top: 0;
     width: 5px; }
+    .treeview-chooser .treeview-label:after {
+      display: none; }
   .treeview-label-page:after {
     background-color: #79B744; }
   .treeview-item-isoffline .treeview-label:after {
-    background-color: #EA2E49; }
+    background-color: #d9534f; }
   .treeview-item-ishidden .treeview-label {
     opacity: .5; }
   .treeview-label.drag-dragging .treeview-icon-collapse {
@@ -581,14 +604,14 @@
     left: auto;
     right: 10px; }
   .treeview-icon-collapse {
-    top: 0;
     cursor: pointer;
     font-size: 24px;
     font-size: 1.5rem;
     height: 24px;
-    width: 24px;
+    top: 0;
     -webkit-transition: .25s ease-in-out transform;
-    transition: .25s ease-in-out transform; }
+    transition: .25s ease-in-out transform;
+    width: 24px; }
     .treeview-item-collapsed .treeview-icon-collapse {
       -webkit-transform: rotate(-90deg) translateX(-1px);
           -ms-transform: rotate(-90deg) translateX(-1px);
@@ -606,3 +629,19 @@
     background-color: rgba(0, 0, 0, 0.1); }
     .treeview-label-container .treeview-link:hover {
       background-color: transparent; }
+
+.treeview-chooser .treeview-icon input[type="radio"] {
+  display: none; }
+  .treeview-chooser .treeview-icon input[type="radio"] + label {
+    background-color: #F2F2F2;
+    border: 2px solid #FF006B;
+    border-radius: 50%;
+    height: 16px;
+    margin: 1px 0 0 3px;
+    position: relative;
+    -webkit-transition: .25s ease-in-out border;
+    transition: .25s ease-in-out border;
+    width: 16px;
+    z-index: 1000; }
+  .treeview-chooser .treeview-icon input[type="radio"]:checked + label {
+    border-width: 8px; }

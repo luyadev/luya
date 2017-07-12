@@ -36,14 +36,27 @@
                 init();
             },
             template : function() {
-                return '<div class="menu-dropdown__category">' +
-                    '<b class="menu-dropdown__toggle-all" ng-click="toggler=!toggler"><i class="material-icons" ng-if="!toggler">keyboard_arrow_down</i><i class="material-icons" ng-if="toggler">keyboard_arrow_up</i> <span>Toggle all</span></b><br />' +
-                    '<div class="menu-dropdown__container" ng-show="toggler" ng-repeat="container in menuData.containers">' +
-                    '<b class="menu-dropdown__title" ng-click="container.isHidden=!container.isHidden"><i class="material-icons" ng-if="container.isHidden">keyboard_arrow_down</i><i class="material-icons" ng-if="!container.isHidden">keyboard_arrow_up</i> <span>{{container.name}}</span></b>' +
-                    '<ul class="menu-dropdown__list" ng-hide="container.isHidden">' +
-                    '<li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse\'"></li>' +
-                    '</ul>' +
-                    '</div><div>';
+                return '<div class="menu-dropdown-category">' +
+                        '<b class="menu-dropdown-toggle-all" ng-click="toggler=!toggler"><i class="material-icons" ng-if="!toggler">keyboard_arrow_down</i><i class="material-icons" ng-if="toggler">keyboard_arrow_right</i> <span>Toggle all</span></b><br />' +
+                        '<div class="menu-dropdown-container" ng-show="toggler" ng-repeat="container in menuData.containers">' +
+                            '<ul class="treeview treeview-chooser" ng-show="toggler">' +
+                                '<li class="treeview-container" ng-repeat="container in menuData.containers" >' +
+                                    '<div class="treeview-label treeview-label-container" ng-click="container.isHidden=!container.isHidden">' +
+                                        '<span class="treeview-icon treeview-icon-collapse">' +
+                                            '<i class="material-icons" ng-show="container.isHidden">keyboard_arrow_down</i>' +
+                                            '<i class="material-icons" ng-show="!container.isHidden">keyboard_arrow_right</i>' +
+                                        '</span>' +
+                                        '<span class="treeview-link">' +
+                                            '<span class="google-chrome-font-offset-fix">{{container.name}}</span>' +
+                                        '</span>' +
+                                    '</div>' +
+                                    '<ul class="treeview-items treeview-items-lvl1" ng-hide="container.isHidden">' +
+                                        '<li class="treeview-item treeview-item-lvl1" ng-class="{\'treeview-item-has-children\' : (menuData.items | menuparentfilter:container.id:0).length}" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse\'"></li>' +
+                                    '</ul>' +
+                                '</li>' +
+                            '</ul>' +
+                        '</div>' +
+                    '<div>';
             }
         }
     });

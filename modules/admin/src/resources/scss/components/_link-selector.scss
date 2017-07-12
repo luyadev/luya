@@ -1,9 +1,14 @@
 .link-selector {
     display: block;
-    padding-right: 30px;
     position: relative;
 
     width: 100%;
+}
+
+.link-selector-actions {
+    display: inline-block;
+    padding-right: 30px;
+    position: relative;
 }
 
 .link-selector-reset {
@@ -20,4 +25,8 @@
     &:hover {
         color: $red-dark;
     }
+}
+
+.link-selector-path {
+    margin: 5px 0 5px;
 }
