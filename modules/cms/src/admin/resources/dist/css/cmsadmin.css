@@ -630,18 +630,6 @@
     .treeview-label-container .treeview-link:hover {
       background-color: transparent; }
 
-.treeview-chooser .treeview-icon input[type="radio"] {
-  display: none; }
-  .treeview-chooser .treeview-icon input[type="radio"] + label {
-    background-color: #F2F2F2;
-    border: 2px solid #FF006B;
-    border-radius: 50%;
-    height: 16px;
-    margin: 1px 0 0 3px;
-    position: relative;
-    -webkit-transition: .25s ease-in-out border;
-    transition: .25s ease-in-out border;
-    width: 16px;
-    z-index: 1000; }
-  .treeview-chooser .treeview-icon input[type="radio"]:checked + label {
-    border-width: 8px; }
+.treeview-chooser .treeview-label-page .treeview-icon {
+  left: 4px;
+  top: 2px; }

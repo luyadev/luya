@@ -103,3 +103,33 @@ input[type="radio"] {
         width: auto;
     }
 }
+
+input[type="radio"] {
+    display: none;
+
+    + label {
+        display: block;
+        padding-left: 25px;
+        position: relative;
+        width: 100%;
+
+        &:before {
+            background-color: #c0c0c0;
+            border: 0 solid $brand-primary;
+            border-radius: 50%;
+            content: "";
+            height: 16px;
+            left: 0;
+            margin: 0;
+            position: absolute;
+            transition: .25s ease-in-out border;
+            width: 16px;
+            z-index: 1000;
+            top: 3px;
+        }
+    }
+
+    &:checked + label:before {
+        border-width: 8px;
+    }
+}

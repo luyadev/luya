@@ -10192,6 +10192,30 @@ input[type="radio"] {
     margin: 0 0 3px 0;
     width: auto; }
 
+input[type="radio"] {
+  display: none; }
+  input[type="radio"] + label {
+    display: block;
+    padding-left: 25px;
+    position: relative;
+    width: 100%; }
+    input[type="radio"] + label:before {
+      background-color: #c0c0c0;
+      border: 0 solid #FF006B;
+      border-radius: 50%;
+      content: "";
+      height: 16px;
+      left: 0;
+      margin: 0;
+      position: absolute;
+      -webkit-transition: .25s ease-in-out border;
+      transition: .25s ease-in-out border;
+      width: 16px;
+      z-index: 1000;
+      top: 3px; }
+  input[type="radio"]:checked + label:before {
+    border-width: 8px; }
+
 .imageupload {
   margin-top: -25px; }
   .imageupload::after {

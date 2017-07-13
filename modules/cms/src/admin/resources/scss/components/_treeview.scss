@@ -214,26 +214,7 @@
     }
 }
 
-.treeview-chooser {
-
-    .treeview-icon input[type="radio"] {
-        display: none;
-
-        + label {
-            background-color: $gray-lightest;
-            border: 2px solid $brand-primary;
-            border-radius: 50%;
-            height: 16px;
-            margin: 1px 0 0 3px;
-            position: relative;
-            transition: .25s ease-in-out border;
-            width: 16px;
-            z-index: 1000;
-        }
-
-        &:checked + label {
-            border-width: 8px;
-        }
-    }
-
+.treeview-chooser .treeview-label-page .treeview-icon {
+    left: 4px;
+    top: 2px;
 }
