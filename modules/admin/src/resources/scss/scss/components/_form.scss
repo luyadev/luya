@@ -1,0 +1,90 @@
+$label-width: 200px !default;
+
+.form-control {
+}
+
+.form-group {
+    position: relative;
+}
+
+label {
+    display: block;
+    width: 100%;
+}
+
+form:not(.form-inline) .form-check-input {
+    margin-right: 10px;
+}
+
+textarea {
+    min-height: 46px;
+}
+
+.form-check-label {
+    cursor: pointer;
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.form-check-input {
+    left: 0;
+    margin: 0 !important;
+    position: absolute !important;
+    top: 3px;
+}
+
+.form-side-by-side {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-not-side-by-side .form-side {
+    display: block;
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+}
+
+.form-side {
+    align-self: flex-start;
+    flex: 1 1 250px;
+
+    &-label {
+        flex: 0 1 $label-width;
+        min-width: $label-width;
+
+        label {
+            margin: 7px 0 0 0;
+        }
+    }
+}
+
+.form-i18n {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .col {
+        padding: 0 3px;
+        position: relative;
+    }
+}
+
+.form-col-flag {
+    opacity: .5;
+    position: absolute;
+    right: 12px;
+    top: 5.5px;
+    z-index: 10;
+}
+
+.form-i18n-label {
+    align-self: baseline;
+    flex: 0 0 $label-width;
+    margin: 7px 0 0 0;
+}
+
+.form-i18n .form-side-label {
+    display: none;
+}

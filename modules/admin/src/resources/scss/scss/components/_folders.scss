@@ -1,0 +1,145 @@
+$icon-font-size: 20px;
+$icon-line-height: $icon-font-size + 10px;
+
+.folders {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.folders-item {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+
+    &:not(:first-of-type) {
+        margin-top: 5px;
+    }
+
+    .material-icons {
+        font-size: $icon-font-size;
+        line-height: $icon-line-height;
+    }
+
+    .folders {
+        display: block;
+        flex: 0 0 100%;
+        margin-top: 5px;
+        padding-left: 10px;
+        width: 100%;
+    }
+}
+
+.folders-text {
+    display: block;
+    flex: 1 1 auto;
+    margin: 0 10px 0 5px;
+}
+
+.folders-collapse {
+    cursor: pointer;
+    flex: 0 0 20px;
+    &:hover {
+        color: $brand-primary;
+    }
+
+    order: -2;
+}
+
+.folders-label {
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    padding: 2px 5px 0;
+
+    &:hover {
+        background-color: $gray-lighter;
+    }
+
+    .edit > &,
+    .delete > & {
+        display: none;
+    }
+}
+
+.folders-folder-icon {
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: -2px;
+
+    .is-active > .folders-label & {
+        display: none;
+    }
+}
+
+.folders-folder-icon-open {
+    display: none;
+
+    .is-active > .folders-label & {
+        display: inline-block;
+    }
+}
+
+.folders-input {
+    display: none;
+
+    .form-control {
+        padding-bottom: 4px;
+        padding-top: 4px;
+    }
+
+    .edit > & {
+        display: block;
+    }
+}
+
+.folders-confirm-delete-message {
+    color: $red;
+    display: none;
+
+    .delete > & {
+        display: block;
+    }
+}
+
+.folders-actions {
+    flex: 0 0 45px;
+}
+
+.folders-actions-default {
+    display: block;
+
+    .edit > .folders-actions &,
+    .delete > .folders-actions & {
+        display: none;
+    }
+}
+
+.folders-action-edit,
+.folders-action-save {
+    cursor: pointer;
+
+    &:hover {
+        color: $green;
+    }
+}
+
+.folders-action-delete,
+.folders-action-abort {
+    cursor: pointer;
+
+    &:hover {
+        color: $red;
+    }
+}
+
+.folders-actions-confirm {
+    display: none;
+
+    .edit > .folders-actions &,
+    .delete > .folders-actions & {
+        display: block;
+    }
+}

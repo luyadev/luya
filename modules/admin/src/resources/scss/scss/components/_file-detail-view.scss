@@ -1,0 +1,23 @@
+.file-detail-view {
+    display: block;
+    max-width: 355px;
+    position: fixed;
+}
+
+.file-detail-view-head {
+    align-items: center;
+    display: flex;
+}
+
+.file-detail-view-close {
+    color: $red;
+    cursor: pointer;
+    font-size: 40px;
+    line-height: 40px;
+    margin-left: auto;
+    transition: .25s ease-in-out color;
+
+    &:hover {
+        color: $red-dark;
+    }
+}

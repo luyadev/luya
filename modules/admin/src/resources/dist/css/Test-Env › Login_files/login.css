@@ -1,0 +1,37 @@
+.card {
+    margin-top: 100px;
+}
+
+.btn {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.preloader-wrapper.login__spinner {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    margin-top: 8px;
+    margin-right: 4px;
+}
+
+.preloader-wrapper.login__spinner .spinner-layer {
+    border-color: #fff !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.login__success {
+    text-align: center;
+    padding: 50px 0 44px 0;
+}
+
+.login__success-icon {
+    font-size: 14rem;
+}
+
+form .row {
+    margin-bottom: 20px;
+}

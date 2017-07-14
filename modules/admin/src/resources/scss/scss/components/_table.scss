@@ -1,0 +1,46 @@
+.table {
+    .dropdown-menu {
+        min-width: 0;
+    }
+
+    .custom-checkbox {
+        margin: 0;
+    }
+}
+
+.table-align-middle {
+    th,
+    td {
+        vertical-align: middle;
+    }
+}
+
+.thead-default th,
+.thead-inverse th {
+    border-top: 0;
+    font-weight: 400;
+
+    span {
+        vertical-align: middle;
+    }
+}
+
+.table-sorter {
+    color: $gray;
+    cursor: pointer;
+    display: none;
+    font-size: 20px;
+    margin: -2px 0 0 10px;
+    vertical-align: middle;
+
+    &.table-sorter-down {
+        display: inline-block;
+    }
+    &.is-active {
+        color: $brand-primary;
+        display: inline-block;
+    }
+    &.is-active + .table-sorter-down {
+        display: none;
+    }
+}

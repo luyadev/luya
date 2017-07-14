@@ -9948,7 +9948,7 @@ input[type="radio"] {
 
 .login-logo {
   background: url("../../img/luyalogo-white.svg") top center no-repeat;
-  min-height: 110px;
+  min-height: 100px;
   background-size: contain;
   top: 50%;
   left: 50%;
@@ -10045,28 +10045,12 @@ input[type="radio"] {
   background: rgba(255, 0, 107, 0.25);
   border-left: 5px solid #FF006B; }
   .login-status ul {
-    padding-left: 10px;
-    margin: 0; }
+    padding-left: 10px; }
     .login-status ul li {
-      list-style: none;
-      margin: 0;
-      padding: 0; }
+      list-style: none; }
   .login-status-wrapper {
     min-height: 25px;
     margin-bottom: 15px; }
-  .login-status-success {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translateY(-50%) translate(-50%);
-        -ms-transform: translateY(-50%) translate(-50%);
-            transform: translateY(-50%) translate(-50%);
-    width: 100px;
-    height: 100px;
-    font-size: 90px !important;
-    font-size: 6rem !important;
-    text-align: center;
-    color: #FF006B; }
 
 .luya {
   display: -webkit-box;

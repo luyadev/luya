@@ -1,0 +1,83 @@
+.zaaselect {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+.zaaselect-select {
+    display: none;
+}
+
+.zaaselect-selected {
+    background-color: $white;
+    border: 1px solid $gray-light;
+    cursor: pointer;
+    display: block;
+    padding: 7px 30px 6px 14px;
+    position: relative;
+    width: 100%;
+}
+
+.zaaselect-dropdown-icon {
+    font-size: 30px;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .zaaselect.open & {
+        transform: translateY(-50%) rotate(180deg);
+    }
+}
+
+.zaaselect-clear-icon {
+    font-size: 25px;
+    margin-top: 1px;
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.zaaselect-dropdown {
+    background-color: $white;
+    border: 1px solid $gray-light;
+    border-top: none;
+    bottom: 2px;
+    display: none;
+    left: 0;
+    padding: 5px 12px;
+    position: absolute;
+    right: 0;
+    transform: translateY(100%);
+    z-index: 1000;
+
+    .zaaselect.open & {
+        display: block;
+    }
+}
+
+.zaaselect-search {
+    display: block;
+    margin: 0 0 10px 0;
+    width: 100%;
+}
+
+.zaaselect-search-input {
+    background-color: $gray-lighter;
+    border: 1px solid $gray-light;
+    display: block;
+    outline: 0;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.zaaselect-item {
+    padding: 5px 10px;
+
+    &:hover {
+        background-color: $brand-primary;
+        color: $white;
+        cursor: pointer;
+    }
+}

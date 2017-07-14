@@ -8017,9 +8017,6 @@ html, body {
   padding: 0;
   margin: 0; }
 
-*:focus {
-  outline: 0; }
-
 .btn {
   cursor: pointer; }
   .btn .material-icons {
@@ -9616,8 +9613,7 @@ textarea {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  width: 100%; }
+      flex-wrap: wrap; }
 
 .form-not-side-by-side .form-side {
   display: block;
@@ -9669,18 +9665,6 @@ textarea {
 
 .form-i18n .form-side-label {
   display: none; }
-
-input[type="checkbox"],
-input[type="radio"] {
-  clear: left;
-  float: left;
-  margin: 3px 10px 3px 0; }
-  input[type="checkbox"] + label,
-  input[type="radio"] + label {
-    cursor: pointer;
-    float: left;
-    margin: 0 0 3px 0;
-    width: auto; }
 
 .imageupload {
   margin-top: -25px; }
@@ -9766,13 +9750,9 @@ input[type="radio"] {
 
 .link-selector {
   display: block;
+  padding-right: 30px;
   position: relative;
   width: 100%; }
-
-.link-selector-actions {
-  display: inline-block;
-  padding-right: 30px;
-  position: relative; }
 
 .link-selector-reset {
   color: #d9534f;
@@ -9790,9 +9770,6 @@ input[type="radio"] {
   transition: .25s ease-in-out background-color; }
   .link-selector-reset:hover {
     color: #AC0031; }
-
-.link-selector-path {
-  margin: 5px 0 5px; }
 
 #loading-bar {
   background-color: #fff;
@@ -9881,9 +9858,9 @@ input[type="radio"] {
 
 .login-screen {
   background-color: #C21888;
-  background: -webkit-linear-gradient(130deg, #d9534f, #C21888, #AD1579, #FF006B);
-  background: linear-gradient(320deg, #d9534f, #C21888, #AD1579, #FF006B);
-  background-size: 250% 250%;
+  background: -webkit-linear-gradient(129deg, #d9534f, #C21888, #AD1579, #FF006B);
+  background: linear-gradient(321deg, #d9534f, #C21888, #AD1579, #FF006B);
+  background-size: 800% 800%;
   -webkit-animation: LuyaLogin 50s ease infinite;
   animation: LuyaLogin 50s ease infinite;
   position: relative;
@@ -9907,94 +9884,45 @@ input[type="radio"] {
 
 .login-frame {
   background: #fff;
+  border: solid #AD1579 1px;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
       -ms-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
-  width: 320px;
+  width: 518px;
   max-width: 100%;
-  height: 518px; }
-  @media (min-width: 518px) {
-    .login-frame {
-      width: 518px;
-      height: 320px; } }
-
-.login-panel-left {
-  display: inline-block;
-  position: relative;
-  min-height: 198px;
-  background: #FF006B;
-  float: left;
-  width: 320px;
-  max-width: 100%; }
-  @media (min-width: 518px) {
-    .login-panel-left {
-      width: 38%;
-      min-height: 100%; } }
-
-.login-panel-right {
-  width: 100%;
-  padding: 20px;
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-  min-height: 318px; }
-  @media (min-width: 518px) {
-    .login-panel-right {
-      width: 62%;
-      min-height: 318px; } }
+  min-height: 320px;
+  padding: 25px; }
 
 .login-logo {
   background: url("../../img/luyalogo-white.svg") top center no-repeat;
-  min-height: 110px;
+  min-height: 100px;
   background-size: contain;
-  top: 50%;
+  top: -140px;
   left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-      -ms-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
-  position: absolute;
-  width: 110px; }
-
-.login-form-field {
-  margin-bottom: 20px; }
-
-.login-buttons {
-  width: calc(100% - 40px);
-  max-width: 100%;
-  display: inline-block;
-  position: absolute;
-  bottom: 20px; }
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100px;
+  height: auto;
+  position: absolute; }
 
 .login-btn {
   background: #FF006B;
   width: 100%;
-  min-height: 40px;
+  margin-top: 10px;
+  min-height: 50px;
   cursor: pointer;
   box-shadow: none;
   border: none;
   color: #fff;
-  -webkit-transition: .25s background ease-in-out;
-  transition: .25s background ease-in-out; }
-  .login-btn:hover {
-    background: rgba(255, 0, 107, 0.5); }
-
-.login-btn-50 {
-  width: 50%;
-  float: left; }
-  .login-btn-50:last-of-type {
-    padding-right: 0; }
+  font-size: 18px;
+  font-size: 1.2rem; }
 
 .login-title {
-  text-align: left;
-  font-size: 1.4rem;
-  margin-bottom: 20px;
-  line-height: 1.05; }
-  @media (min-width: 518px) {
-    .login-title {
-      font-size: 1.6rem; } }
+  text-align: center; }
 
 .login-inputs {
   width: 100%; }
@@ -10002,71 +9930,13 @@ input[type="radio"] {
 .login-input {
   display: block;
   width: 100%;
+  margin-bottom: 25px;
   border: none;
   border-style: solid;
   border-width: 0;
   border-color: #fff;
-  border-bottom: solid 1px #FF006B;
-  padding: 8px 5px 5px 0; }
-  .login-input:last-of-type {
-    margin-bottom: 3px; }
-
-.login-system-info {
-  position: absolute;
-  bottom: 0;
-  padding-bottom: 0;
-  width: 100%;
-  max-width: 100%;
-  text-align: center; }
-  @media (min-width: 518px) {
-    .login-system-info {
-      padding-bottom: 20px; } }
-
-.login-version {
-  color: #fff;
-  display: block;
-  text-align: center;
-  line-height: 40px;
-  line-height: 2.66667rem; }
-
-.login-reset {
-  color: #4D4D4D;
-  text-align: right;
-  display: block; }
-
-.login-link {
-  -webkit-transition: .25s color ease-in-out;
-  transition: .25s color ease-in-out; }
-  .login-link:hover {
-    color: #8E8E8E;
-    text-decoration: none; }
-
-.login-status {
-  background: rgba(255, 0, 107, 0.25);
-  border-left: 5px solid #FF006B; }
-  .login-status ul {
-    padding-left: 10px;
-    margin: 0; }
-    .login-status ul li {
-      list-style: none;
-      margin: 0;
-      padding: 0; }
-  .login-status-wrapper {
-    min-height: 25px;
-    margin-bottom: 15px; }
-  .login-status-success {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translateY(-50%) translate(-50%);
-        -ms-transform: translateY(-50%) translate(-50%);
-            transform: translateY(-50%) translate(-50%);
-    width: 100px;
-    height: 100px;
-    font-size: 90px !important;
-    font-size: 6rem !important;
-    text-align: center;
-    color: #FF006B; }
+  border-bottom: solid 3px #FF006B;
+  padding: 15px 5px 10px 5px !important; }
 
 .luya {
   display: -webkit-box;
