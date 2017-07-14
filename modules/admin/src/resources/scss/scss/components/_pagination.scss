@@ -1,0 +1,22 @@
+.pagination {
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+
+    .table + & {
+        margin-top: 30px;
+    }
+    .tab-pane .table + & {
+        margin-bottom: -15px;
+    }
+}
+
+.page-item-icon {
+    font-size: 20px;
+
+    .material-icons {
+        margin-top: -2px;
+    }
+}

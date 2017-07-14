@@ -1,0 +1,17 @@
+.crud-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.crud-title {
+    margin: 0 auto 0 0;
+}
+
+.crud-counter {
+    color: $gray;
+    font-weight: 300;
+}

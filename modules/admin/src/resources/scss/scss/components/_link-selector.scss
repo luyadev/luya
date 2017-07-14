@@ -1,0 +1,23 @@
+.link-selector {
+    display: block;
+    padding-right: 30px;
+    position: relative;
+
+    width: 100%;
+}
+
+.link-selector-reset {
+    color: $brand-danger;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 25px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .25s ease-in-out background-color;
+
+    &:hover {
+        color: $red-dark;
+    }
+}

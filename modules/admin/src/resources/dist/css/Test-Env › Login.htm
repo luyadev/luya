@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://localhost/luyadev/envs/dev/public_html/admin/login?logout=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Test-Env › Login</title>
+            <meta name="csrf-param" content="_csrf">
+<meta name="csrf-token" content="aUZOeW9JczILcwI.XQ9GQ1AFHCAMAB4KByAiGkJ8FlMTNQcSFjwqeA==">
+<link href="./Test-Env › Login_files/admin.css" rel="stylesheet">
+<link href="./Test-Env › Login_files/login.css" rel="stylesheet">        </head>
+        <body class="login-screen">
+                            
+<div class="login-frame">
+    <div class="login-panel-left">
+        <div class="login-logo"></div>
+        <div class="login-system-info">
+            <span class="login-version">
+                {version}            </span>
+        </div>
+    </div>
+    <div class="login-panel-right">
+        <!-- normal login in form -->
+        <form class="login-form" method="post" id="loginForm">
+            <input type="hidden" name="_csrf" value="aUZOeW9JczILcwI.XQ9GQ1AFHCAMAB4KByAiGkJ8FlMTNQcSFjwqeA==">
+            <div class="login-inputs">
+                <h1 class="login-title">Login for Test-Env</h1>
+                <div class="login-status-wrapper">
+                    <div class="login-status" id="errorsContainer" style=""><ul><li>Wrong username or password.</li></ul></div>
+                </div>
+                <div class="login-form-field">
+                    <input class="login-input" id="email" name="login[email]" type="email" tabindex="1" placeholder="Email">
+                </div>
+                <div class="login-form-field">
+                    <input class="login-input" id="password" name="login[password]" type="password" tabindex="2" placeholder="Password">
+                    <a href="http://localhost/luyadev/envs/dev/public_html/admin/login?logout=1#" class="login-reset login-link">
+                        Passwort vergessen?
+                    </a>
+                </div>
+                <div class="login-buttons">
+                    <button class="login-btn" type="submit" tabindex="3">
+                        Login                    </button>
+                </div>
+            </div>
+        </form>
+        <!-- end of normal login in form -->
+        <!-- secure login in form -->
+        <form class="login-form hidden" method="post" id="secureForm">
+            <input type="hidden" name="_csrf" value="aUZOeW9JczILcwI.XQ9GQ1AFHCAMAB4KByAiGkJ8FlMTNQcSFjwqeA==">
+            <div class="login-inputs">
+                <h1 class="login-title">Login for Test-Env</h1>
+                <div class="login-status-wrapper">
+                    <div class="login-status" id="errorsContainer" style="display: none">
+                        <span class="login-status-message">blah</span>
+                    </div>
+                </div>
+                <div class="login-form-field">
+                    <label class="input-label" for="secure_token">Enter the security code that was sent to your email.</label>
+                    <input class="login-input" id="secure_token" name="secure_token" type="text" tabindex="1" placeholder="Security code">
+                </div>
+                <div class="login-buttons">
+                    <button class="login-btn login-btn-50" type="submit" tabindex="2">
+                        Send                    </button>
+                    <button class="login-btn login-btn-50" id="abortToken" type="submit" tabindex="3">
+                        Cancel                    </button>
+                </div>
+            </div>
+        </form>
+        <!-- end of secure login in form -->
+    </div>
+</div>
+            <div><div id="yii-debug-toolbar" class="yii-debug-toolbar yii-debug-toolbar_position_bottom" style="display: block;">
+    <div class="yii-debug-toolbar__bar">
+        <div class="yii-debug-toolbar__block yii-debug-toolbar__title">
+            <a href="http://localhost/luyadev/envs/dev/public_html/debug/default/index">
+                <img width="30" height="30" alt="" src="data:image/png;base64,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">
+            </a>
+        </div>
+
+        <div class="yii-debug-toolbar__block yii-debug-toolbar__ajax" style="display: none">
+            AJAX <span class="yii-debug-toolbar__label yii-debug-toolbar__ajax_counter">0</span>
+            <div class="yii-debug-toolbar__ajax_info">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Status</th>
+                        <th>URL</th>
+                        <th>Time</th>
+                        <th>Profile</th>
+                    </tr>
+                    </thead>
+                    <tbody class="yii-debug-toolbar__ajax_requests"></tbody>
+                </table>
+            </div>
+        </div>
+
+                    <div class="yii-debug-toolbar__block">
+    <a href="http://localhost/luyadev/envs/dev/public_html/debug/default/view?panel=config&amp;tag=596807a32bfb8">
+        <span class="yii-debug-toolbar__label">2.0.11.2</span>
+        PHP
+        <span class="yii-debug-toolbar__label">7.1.4</span>
+    </a>
+</div>
+                    <div class="yii-debug-toolbar__block">
+    <a href="http://localhost/luyadev/envs/dev/public_html/debug/default/view?panel=request&amp;tag=596807a32bfb8" title="Status code: 200 OK">Status <span class="yii-debug-toolbar__label yii-debug-toolbar__label_success">200</span></a>
+    <a href="http://localhost/luyadev/envs/dev/public_html/debug/default/view?panel=request&amp;tag=596807a32bfb8" title="Action: luya\admin\controllers\LoginController::actionIndex()">Route <span class="yii-debug-toolbar__label">admin/login/index</span></a>
+</div>
+                    
+
+<div class="yii-debug-toolbar__block">
+    <a href="http://localhost/luyadev/envs/dev/public_html/debug/default/view?panel=log&amp;tag=596807a32bfb8" title="Logged 30 messages">Log
+        <span class="yii-debug-toolbar__label">30</span>
+    </a>
+        </div>
+                    <div class="yii-debug-toolbar__block">
+    <a href="http://localhost/luyadev/envs/dev/public_html/debug/default/view?panel=profiling&amp;tag=596807a32bfb8" title="Total request processing time was 210 ms">Time <span class="yii-debug-toolbar__label yii-debug-toolbar__label_info">210 ms</span></a>
+    <a href="http://localhost/luyadev/envs/dev/public_html/debug/default/view?panel=profiling&amp;tag=596807a32bfb8" title="Peak memory consumption">Memory <span class="yii-debug-toolbar__label yii-debug-toolbar__label_info">2.130 MB</span></a>
+</div>
+                                        <div class="yii-debug-toolbar__block">
+    <a href="http://localhost/luyadev/envs/dev/public_html/debug/default/view?panel=assets&amp;tag=596807a32bfb8" title="Number of asset bundles loaded">Asset Bundles <span class="yii-debug-toolbar__label yii-debug-toolbar__label_info">2</span></a>
+</div>
+                                                                    
+        <div class="yii-debug-toolbar__block_last">
+
+        </div>
+        <a class="yii-debug-toolbar__external" href="http://localhost/luyadev/envs/dev/public_html/admin/login?logout=1#" target="_blank">
+            <span class="yii-debug-toolbar__external-icon"></span>
+        </a>
+
+        <span class="yii-debug-toolbar__toggle">
+            <span class="yii-debug-toolbar__toggle-icon"></span>
+        </span>
+    </div>
+
+    <div class="yii-debug-toolbar__view">
+        <iframe src="./Test-Env › Login_files/saved_resource.html" frameborder="0"></iframe>
+    </div>
+</div>
+</div><style>
+#yii-debug-toolbar-logo {
+    position: fixed;
+    right: 31px;
+    bottom: 4px;
+}
+
+.yii-debug-toolbar {
+    font: 11px Verdana, Arial, sans-serif;
+    text-align: left;
+    width: 96px;
+    transition: width .3s ease;
+    z-index: 1000000;
+}
+
+.yii-debug-toolbar_active {
+    width: 100%;
+}
+
+.yii-debug-toolbar_position_top {
+    margin: 0 0 20px 0;
+    width: 100%;
+}
+
+.yii-debug-toolbar_position_bottom {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+}
+
+.yii-debug-toolbar__bar {
+    position: relative;
+    padding: 0;
+    font: 11px Verdana, Arial, sans-serif;
+    text-align: left;
+    overflow: hidden;
+    box-sizing: content-box;
+
+    background: rgb(255, 255, 255);
+    background: -moz-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(247, 247, 247) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(247, 247, 247) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgb(247, 247, 247) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f7f7f7', GradientType=0); /* IE6-9 */
+
+    border: 1px solid rgba(0, 0, 0, 0.11);
+
+    /* ensure debug toolbar text is displayed ltr even on rtl pages */
+    direction: ltr;
+}
+
+.yii-debug-toolbar.yii-debug-toolbar_active:not(.yii-debug-toolbar_animating) .yii-debug-toolbar__bar {
+    overflow: visible;
+}
+.yii-debug-toolbar:not(.yii-debug-toolbar_active) .yii-debug-toolbar__bar {
+    height:40px;
+}
+
+.yii-debug-toolbar__bar:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.yii-debug-toolbar__view {
+    height: 0;
+    overflow: hidden;
+    background: white;
+}
+
+.yii-debug-toolbar__view iframe {
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+    height: 100%;
+    width: 100%;
+    border: 0;
+}
+
+.yii-debug-toolbar_iframe_active .yii-debug-toolbar__view {
+    height: 100%;
+}
+
+.yii-debug-toolbar_iframe_animating .yii-debug-toolbar__view {
+    transition: height .3s ease;
+}
+
+.yii-debug-toolbar__block {
+    float: left;
+    margin: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.11);
+    padding: 4px 8px;
+    line-height: 32px;
+    white-space: nowrap;
+}
+
+.yii-debug-toolbar__block_active,
+.yii-debug-toolbar__ajax:hover {
+    background: rgb(247, 247, 247); /* Old browsers */
+    background: -moz-linear-gradient(top, rgb(247, 247, 247) 0%, rgb(224, 224, 224) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgb(247, 247, 247) 0%, rgb(224, 224, 224) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgb(247, 247, 247) 0%, rgb(224, 224, 224) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7f7f7', endColorstr='#e0e0e0', GradientType=0); /* IE6-9 */
+}
+
+.yii-debug-toolbar__block a {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+}
+
+.yii-debug-toolbar__block img {
+    vertical-align: middle;
+}
+
+.yii-debug-toolbar__label {
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 14px;
+    white-space: nowrap;
+    vertical-align: baseline;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #999999;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+}
+
+.yii-debug-toolbar__label:empty {
+    display: none;
+}
+
+a.yii-debug-toolbar__label:hover,
+a.yii-debug-toolbar__label:focus {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.yii-debug-toolbar__label_important,
+.yii-debug-toolbar__label_error {
+    background-color: #b94a48;
+}
+
+.yii-debug-toolbar__label_important[href] {
+    background-color: #953b39;
+}
+
+.yii-debug-toolbar__label_warning,
+.yii-debug-toolbar__badge_warning {
+    background-color: #f89406;
+}
+
+.yii-debug-toolbar__label_warning[href] {
+    background-color: #c67605;
+}
+
+.yii-debug-toolbar__label_success {
+    background-color: #468847;
+}
+
+.yii-debug-toolbar__label_success[href] {
+    background-color: #356635;
+}
+
+.yii-debug-toolbar__label_info {
+    background-color: #3a87ad;
+}
+
+.yii-debug-toolbar__label_info[href] {
+    background-color: #2d6987;
+}
+
+.yii-debug-toolbar__label_inverse,
+.yii-debug-toolbar__badge_inverse {
+    background-color: #333333;
+}
+
+.yii-debug-toolbar__label_inverse[href],
+.yii-debug-toolbar__badge_inverse[href] {
+    background-color: #1a1a1a;
+}
+
+.yii-debug-toolbar__title {
+    background: rgb(247, 247, 247); /* Old browsers */
+    background: -moz-linear-gradient(top, rgb(247, 247, 247) 0%, rgb(224, 224, 224) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgb(247, 247, 247) 0%, rgb(224, 224, 224) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgb(247, 247, 247) 0%, rgb(224, 224, 224) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7f7f7', endColorstr='#e0e0e0', GradientType=0); /* IE6-9 */
+}
+
+.yii-debug-toolbar__block_last{ /* creates space for .yii-debug-toolbar__toggle, .yii-debug-toolbar__external */
+    width: 80px;
+    height: 40px;
+    float: left;
+}
+
+.yii-debug-toolbar__toggle,
+.yii-debug-toolbar__external {
+    cursor: pointer;
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    font-weight: 100;
+    line-height: 28px;
+    color: #ffffff;
+    text-align: center;
+
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+
+    transition: opacity .3s ease;
+}
+
+.yii-debug-toolbar__toggle:hover,
+.yii-debug-toolbar__toggle:focus,
+.yii-debug-toolbar__external:hover,
+.yii-debug-toolbar__external:focus {
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+}
+
+.yii-debug-toolbar__toggle-icon,
+.yii-debug-toolbar__external-icon {
+    display: inline-block;
+
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.yii-debug-toolbar__toggle {
+    right: 10px;
+    bottom: 4px;
+}
+
+.yii-debug-toolbar__toggle-icon {
+    padding: 7px 0;
+    width: 10px;
+    height: 16px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDUwIDUwIj48cGF0aCBmaWxsPSIjNDQ0IiBkPSJNMTUuNTYzIDQwLjgzNmEuOTk3Ljk5NyAwIDAgMCAxLjQxNCAwbDE1LTE1YTEgMSAwIDAgMCAwLTEuNDE0bC0xNS0xNWExIDEgMCAwIDAtMS40MTQgMS40MTRMMjkuODU2IDI1LjEzIDE1LjU2MyAzOS40MmExIDEgMCAwIDAgMCAxLjQxNHoiLz48L3N2Zz4=');
+    transition: -webkit-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.yii-debug-toolbar_active .yii-debug-toolbar__toggle-icon {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+}
+
+.yii-debug-toolbar_iframe_active .yii-debug-toolbar__toggle-icon {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.yii-debug-toolbar__external {
+    display: none;
+    right: 50px;
+    bottom: 4px;
+}
+
+.yii-debug-toolbar_iframe_active .yii-debug-toolbar__external {
+    display: block;
+}
+
+.yii-debug-toolbar__external-icon {
+    padding: 8px 0;
+    width: 14px;
+    height: 14px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDUwIDUwIj48cGF0aCBmaWxsPSIjNDQ0IiBkPSJNMzkuNjQyIDkuNzIyYTEuMDEgMS4wMSAwIDAgMC0uMzgyLS4wNzdIMjguMTAzYTEgMSAwIDAgMCAwIDJoOC43NDNMMjEuNyAyNi43OWExIDEgMCAwIDAgMS40MTQgMS40MTVMMzguMjYgMTMuMDZ2OC43NDNhMSAxIDAgMCAwIDIgMFYxMC42NDZhMS4wMDUgMS4wMDUgMCAwIDAtLjYxOC0uOTI0eiIvPjxwYXRoIGQ9Ik0zOS4yNiAyNy45ODVhMSAxIDAgMCAwLTEgMXYxMC42NmgtMjh2LTI4aDEwLjY4M2ExIDEgMCAwIDAgMC0ySDkuMjZhMSAxIDAgMCAwLTEgMXYzMGExIDEgMCAwIDAgMSAxaDMwYTEgMSAwIDAgMCAxLTF2LTExLjY2YTEgMSAwIDAgMC0xLTF6Ii8+PC9zdmc+');
+}
+
+.yii-debug-toolbar__ajax {
+    position: relative;
+}
+
+.yii-debug-toolbar__ajax:hover .yii-debug-toolbar__ajax_info,
+.yii-debug-toolbar__ajax:focus .yii-debug-toolbar__ajax_info {
+    visibility: visible;
+}
+.yii-debug-toolbar__ajax_info {
+    visibility: hidden;
+    transition: visibility .2s linear;
+    background-color: white;
+    box-shadow: inset 0 -10px 10px -10px #e1e1e1;
+    position: absolute;
+    bottom: 40px;
+    left: -1px;
+    padding: 10px;
+    max-width: 480px;
+    max-height: 480px;
+    word-wrap: break-word;
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.11);
+    z-index: 1000001;
+}
+.yii-debug-toolbar__ajax a {
+    color: #337ab7;
+}
+.yii-debug-toolbar__ajax table {
+    width: 100%;
+    table-layout: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.yii-debug-toolbar__ajax table td {
+    padding: 4px;
+    font-size: 12px;
+    line-height: normal;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+.yii-debug-toolbar__ajax table th {
+    padding: 4px;
+    font-size: 11px;
+    line-height: normal;
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+.yii-debug-toolbar__ajax_request_status {
+    color: white;
+    padding: 2px 5px;
+}
+.yii-debug-toolbar__ajax_request_url {
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}</style><script>(function () {
+    'use strict';
+
+    var findToolbar = function () {
+            return document.querySelector('#yii-debug-toolbar');
+        },
+        ajax = function (url, settings) {
+            var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            settings = settings || {};
+            xhr.open(settings.method || 'GET', url, true);
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('Accept', 'text/html');
+            xhr.onreadystatechange = function (state) {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200 && settings.success) {
+                        settings.success(xhr);
+                    } else if (xhr.status != 200 && settings.error) {
+                        settings.error(xhr);
+                    }
+                }
+            };
+            xhr.send(settings.data || '');
+        },
+        url,
+        div,
+        toolbarEl = findToolbar(),
+        toolbarAnimatingClass = 'yii-debug-toolbar_animating',
+        barSelector = '.yii-debug-toolbar__bar',
+        viewSelector = '.yii-debug-toolbar__view',
+        blockSelector = '.yii-debug-toolbar__block',
+        toggleSelector = '.yii-debug-toolbar__toggle',
+        externalSelector = '.yii-debug-toolbar__external',
+
+        CACHE_KEY = 'yii-debug-toolbar',
+        ACTIVE_STATE = 'active',
+
+        animationTime = 300,
+
+        activeClass = 'yii-debug-toolbar_active',
+        iframeActiveClass = 'yii-debug-toolbar_iframe_active',
+        iframeAnimatingClass = 'yii-debug-toolbar_iframe_animating',
+        titleClass = 'yii-debug-toolbar__title',
+        blockClass = 'yii-debug-toolbar__block',
+        blockActiveClass = 'yii-debug-toolbar__block_active',
+        requestStack = [];
+
+    if (toolbarEl) {
+        url = toolbarEl.getAttribute('data-url');
+
+        ajax(url, {
+            success: function (xhr) {
+                div = document.createElement('div');
+                div.innerHTML = xhr.responseText;
+
+                toolbarEl.parentNode && toolbarEl.parentNode.replaceChild(div, toolbarEl);
+
+                showToolbar(findToolbar());
+            },
+            error: function (xhr) {
+                toolbarEl.innerHTML = xhr.responseText;
+            }
+        });
+    }
+
+    function showToolbar(toolbarEl) {
+        var barEl = toolbarEl.querySelector(barSelector),
+            viewEl = toolbarEl.querySelector(viewSelector),
+            toggleEl = toolbarEl.querySelector(toggleSelector),
+            externalEl = toolbarEl.querySelector(externalSelector),
+            blockEls = barEl.querySelectorAll(blockSelector),
+            iframeEl = viewEl.querySelector('iframe'),
+            iframeHeight = function () {
+                return (window.innerHeight * 0.7) + 'px';
+            },
+            isIframeActive = function () {
+                return toolbarEl.classList.contains(iframeActiveClass);
+            },
+            showIframe = function (href) {
+                toolbarEl.classList.add(iframeAnimatingClass);
+                toolbarEl.classList.add(iframeActiveClass);
+
+                iframeEl.src = externalEl.href = href;
+                viewEl.style.height = iframeHeight();
+                setTimeout(function() {
+                    toolbarEl.classList.remove(iframeAnimatingClass);
+                }, animationTime);
+            },
+            hideIframe = function () {
+                toolbarEl.classList.add(iframeAnimatingClass);
+                toolbarEl.classList.remove(iframeActiveClass);
+                removeActiveBlocksCls();
+
+                externalEl.href = '#';
+                viewEl.style.height = '';
+                setTimeout(function() {
+                    toolbarEl.classList.remove(iframeAnimatingClass);
+                }, animationTime);
+            },
+            removeActiveBlocksCls = function () {
+                [].forEach.call(blockEls, function (el) {
+                    el.classList.remove(blockActiveClass);
+                });
+            },
+            toggleToolbarClass = function (className) {
+                toolbarEl.classList.add(toolbarAnimatingClass);
+                if (toolbarEl.classList.contains(className)) {
+                    toolbarEl.classList.remove(className);
+                } else {
+                    toolbarEl.classList.add(className);
+                }
+                setTimeout(function () {
+                    toolbarEl.classList.remove(toolbarAnimatingClass);
+                }, animationTime);
+            },
+            toggleStorageState = function (key, value) {
+                if (window.localStorage) {
+                    var item = localStorage.getItem(key);
+
+                    if (item) {
+                        localStorage.removeItem(key);
+                    } else {
+                        localStorage.setItem(key, value);
+                    }
+                }
+            },
+            restoreStorageState = function (key) {
+                if (window.localStorage) {
+                    return localStorage.getItem(key);
+                }
+            },
+            togglePosition = function () {
+                if (isIframeActive()) {
+                    hideIframe();
+                } else {
+                    toggleToolbarClass(activeClass);
+                    toggleStorageState(CACHE_KEY, ACTIVE_STATE);
+                }
+            };
+
+        toolbarEl.style.display = 'block';
+
+        if (restoreStorageState(CACHE_KEY) == ACTIVE_STATE) {
+            toolbarEl.classList.add(activeClass);
+        }
+
+        window.onresize = function () {
+            if (toolbarEl.classList.contains(iframeActiveClass)) {
+                viewEl.style.height = iframeHeight();
+            }
+        };
+
+        barEl.onclick = function (e) {
+            var target = e.target,
+                block = findAncestor(target, blockClass);
+
+            if (block && !block.classList.contains(titleClass)
+                && e.which !== 2 && !e.ctrlKey // not mouse wheel and not ctrl+click
+            ) {
+                while (target !== this) {
+                    if (target.href) {
+                        removeActiveBlocksCls();
+                        block.classList.add(blockActiveClass);
+                        showIframe(target.href);
+                    }
+                    target = target.parentNode;
+                }
+
+                e.preventDefault();
+            }
+        };
+
+        toggleEl.onclick = togglePosition;
+    }
+
+    function findAncestor(el, cls) {
+        while ((el = el.parentElement) && !el.classList.contains(cls));
+        return el;
+    }
+
+    function renderAjaxRequests() {
+        var requestCounter = document.getElementsByClassName('yii-debug-toolbar__ajax_counter');
+        if (!requestCounter.length) {
+            return;
+        }
+        var ajaxToolbarPanel = document.querySelector('.yii-debug-toolbar__ajax');
+        var tbodies = document.getElementsByClassName('yii-debug-toolbar__ajax_requests');
+        var state = 'ok';
+        if (tbodies.length) {
+            var tbody = tbodies[0];
+            var rows = document.createDocumentFragment();
+            if (requestStack.length) {
+                var firstItem = requestStack.length > 20 ? requestStack.length - 20 : 0;
+                for (var i = firstItem; i < requestStack.length; i++) {
+                    var request = requestStack[i];
+                    var row = document.createElement('tr');
+                    rows.appendChild(row);
+
+                    var methodCell = document.createElement('td');
+                    methodCell.innerHTML = request.method;
+                    row.appendChild(methodCell);
+
+                    var statusCodeCell = document.createElement('td');
+                    var statusCode = document.createElement('span');
+                    if (request.statusCode < 300) {
+                        statusCode.setAttribute('class', 'yii-debug-toolbar__ajax_request_status yii-debug-toolbar__label_success');
+                    } else if (request.statusCode < 400) {
+                        statusCode.setAttribute('class', 'yii-debug-toolbar__ajax_request_status yii-debug-toolbar__label_warning');
+                    } else {
+                        statusCode.setAttribute('class', 'yii-debug-toolbar__ajax_request_status yii-debug-toolbar__label_error');
+                    }
+                    statusCode.textContent = request.statusCode || '-';
+                    statusCodeCell.appendChild(statusCode);
+                    row.appendChild(statusCodeCell);
+
+                    var pathCell = document.createElement('td');
+                    pathCell.className = 'yii-debug-toolbar__ajax_request_url';
+                    pathCell.innerHTML = request.url;
+                    pathCell.setAttribute('title', request.url);
+                    row.appendChild(pathCell);
+
+                    var durationCell = document.createElement('td');
+                    durationCell.className = 'yii-debug-toolbar__ajax_request_duration';
+                    if (request.duration) {
+                        durationCell.innerText = request.duration + " ms";
+                    } else {
+                        durationCell.innerText = '-';
+                    }
+                    row.appendChild(durationCell);
+                    row.appendChild(document.createTextNode(' '));
+
+                    var profilerCell = document.createElement('td');
+                    if (request.profilerUrl) {
+                        var profilerLink = document.createElement('a');
+                        profilerLink.setAttribute('href', request.profilerUrl);
+                        profilerLink.innerText = request.profile;
+                        profilerCell.appendChild(profilerLink);
+                    } else {
+                        profilerCell.innerText = 'n/a';
+                    }
+                    row.appendChild(profilerCell);
+
+                    if (request.error) {
+                        if (state !== "loading" && i > requestStack.length - 4) {
+                            state = 'error';
+                        }
+                    } else if (request.loading) {
+                        state = 'loading'
+                    }
+                    row.className = 'yii-debug-toolbar__ajax_request';
+                }
+                while (tbody.firstChild) {
+                    tbody.removeChild(tbody.firstChild);
+                }
+                tbody.appendChild(rows);
+            }
+            ajaxToolbarPanel.style.display = 'block';
+        }
+        requestCounter[0].innerText = requestStack.length;
+        var className = 'yii-debug-toolbar__label yii-debug-toolbar__ajax_counter';
+        if (state == 'ok') {
+            className += ' yii-debug-toolbar__label_success';
+        } else if (state == 'error') {
+            className += ' yii-debug-toolbar__label_error';
+        }
+        requestCounter[0].className = className;
+    };
+
+    var proxied = XMLHttpRequest.prototype.open;
+
+    XMLHttpRequest.prototype.open = function (method, url, async, user, pass) {
+        var self = this;
+        /* prevent logging AJAX calls to static and inline files, like templates */
+        if (url.substr(0, 1) === '/' && !url.match(new RegExp("{{ excluded_ajax_paths }}"))) {
+            var stackElement = {
+                loading: true,
+                error: false,
+                url: url,
+                method: method,
+                start: new Date()
+            };
+            requestStack.push(stackElement);
+            this.addEventListener("readystatechange", function () {
+                if (self.readyState == 4) {
+                    stackElement.duration = self.getResponseHeader("X-Debug-Duration") || new Date() - stackElement.start;
+                    stackElement.loading = false;
+                    stackElement.statusCode = self.status;
+                    stackElement.error = self.status < 200 || self.status >= 400;
+                    stackElement.profile = self.getResponseHeader("X-Debug-Tag");
+                    stackElement.profilerUrl = self.getResponseHeader("X-Debug-Link");
+                    renderAjaxRequests();
+                }
+            }, false);
+            renderAjaxRequests();
+        }
+        proxied.apply(this, Array.prototype.slice.call(arguments));
+    };
+
+})();</script><script src="./Test-Env › Login_files/jquery.js"></script>
+<script src="./Test-Env › Login_files/login.js"></script>
+<script type="text/javascript">$(function(){ $('#email').focus(); observeLogin('#loginForm', 'http://localhost/luyadev/envs/dev/public_html/admin/login/async', 'http://localhost/luyadev/envs/dev/public_html/admin/login/async-token'); });</script>        
+    
+</body></html>

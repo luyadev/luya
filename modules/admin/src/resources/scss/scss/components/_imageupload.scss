@@ -1,0 +1,68 @@
+.imageupload {
+    margin-top: -25px;
+    @include clearfix;
+}
+
+.imageupload-upload,
+.imageupload-preview,
+.imageupload-filter {
+    display: block;
+    float: left;
+    margin-top: 25px;
+}
+
+.imageupload-upload {
+    margin-right: 25px;
+}
+
+.imageupload-preview {
+    background-color: $gray-lightest;
+    margin-right: 25px;
+    overflow: hidden;
+    padding: 25px;
+    position: relative;
+}
+
+.imageupload-size {
+    background-color: rgba(0, 0, 0, .6);
+    bottom: 0;
+    color: $white;
+    left: 0;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+
+.imageupload-filter {
+    select {
+        width: 100%;
+    }
+}
+
+.imageupload-loading {
+    background-color: rgba(0, 0, 0, .8);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    $imageupload-loading-indicator-line-width: 8px;
+    $imageupload-loading-indicator-margin-left-right: 2px;
+    $imageupload-loading-indicator-height: 80px;
+
+    .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        height: $imageupload-loading-indicator-height;
+        width: ($imageupload-loading-indicator-line-width * 5) + (($imageupload-loading-indicator-margin-left-right * 2) * 5);
+    }
+
+    .loading-indicator > div {
+        margin: 0 $imageupload-loading-indicator-margin-left-right;
+        width: $imageupload-loading-indicator-line-width;
+    }
+}

@@ -1,0 +1,11 @@
+.toasts-toast {
+    position: absolute;
+    bottom: 10px;
+    left: 80px;
+    z-index: 100000;
+    transition: .25s ease-in-out transform;
+
+    .alert {
+        margin-bottom: 5px;
+    }
+}

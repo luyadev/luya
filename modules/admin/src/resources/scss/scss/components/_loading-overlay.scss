@@ -1,0 +1,18 @@
+.loading-overlay {
+    background-color: rgba(0, 0, 0, .7);
+    bottom: 0;
+    color: $white;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 50000;
+}
+
+.loading-overlay-title {
+    font-size: 40px;
+    font-weight: 400;
+    margin: 150px 0 0 0;
+    text-align: center;
+    color: $white;
+}

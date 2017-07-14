@@ -1,0 +1,55 @@
+// ==================================================
+// General button
+// ==================================================
+
+.btn {
+    cursor: pointer;
+
+    .material-icons {
+        font-size: 1.5em;
+    }
+    &.btn-link .material-icons {
+        font-size: 24px;
+    }
+    &.btn-link {
+        border-radius: 0;
+    }
+
+    > .material-icons:first-of-type {
+        margin-left: -6px;
+    }
+}
+
+// ==================================================
+// Link button
+// ==================================================
+
+.btn-link {
+    color: $gray-light;
+
+    &:hover {
+        color: $brand-primary;
+    }
+}
+
+// ==================================================
+// Button with icon
+// ==================================================
+
+.btn-icon {
+    padding: 6px 5px 6px;
+
+    &.btn-link {
+        padding: 2px;
+    }
+}
+
+.btn .material-icons,
+.btn-icon-label {
+    vertical-align: middle;
+}
+
+.btn-icon-label {
+    margin-left: 10px;
+    @include google-chrome-font-offset-fix;
+}

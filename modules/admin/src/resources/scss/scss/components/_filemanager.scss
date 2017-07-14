@@ -1,0 +1,80 @@
+.filemanager {
+    background-color: $white;
+    min-height: 100%;
+
+    .row {
+        min-height: 100%;
+    }
+}
+
+.filemanager-folders {
+    align-self: stretch;
+    flex: 0 0 400px;
+    padding: 15px;
+}
+
+.filemanager-files {
+    align-self: stretch;
+    flex: 1 0 auto;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-top: 15px;
+    width: auto;
+
+    .table .custom-checkbox {
+        margin-top: 8px;
+    }
+}
+
+.filemanager-file-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filemanager-file-actions-right {
+    margin-left: auto;
+}
+
+.filemanager-file-icon {
+    font-size: 25px;
+    line-height: 40px;
+}
+
+.filemanager-detail-view {
+    border-left: 15px solid $gray-lightest;
+    display: none;
+    flex: 0 0 400px;
+    margin: -15px 0 -15px 15px;
+    padding: 15px;
+    position: relative;
+
+    &.open {
+        display: block;
+    }
+}
+
+.filemanager-dropzone {
+    background-color: rgba($black, .6);
+    border: 10px solid $white;
+    bottom: 50px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .2);
+    color: $white;
+    left: 50px;
+    position: fixed;
+    right: 50px;
+    top: 50px;
+    z-index: 500;
+
+    h2 {
+        color: $white;
+    }
+}
+
+.filemanager-dropzone-inner {
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}

@@ -9682,30 +9682,6 @@ input[type="radio"] {
     margin: 0 0 3px 0;
     width: auto; }
 
-input[type="radio"] {
-  display: none; }
-  input[type="radio"] + label {
-    display: block;
-    padding-left: 25px;
-    position: relative;
-    width: 100%; }
-    input[type="radio"] + label:before {
-      background-color: #c0c0c0;
-      border: 0 solid #FF006B;
-      border-radius: 50%;
-      content: "";
-      height: 16px;
-      left: 0;
-      margin: 0;
-      position: absolute;
-      -webkit-transition: .25s ease-in-out border;
-      transition: .25s ease-in-out border;
-      width: 16px;
-      z-index: 1000;
-      top: 3px; }
-  input[type="radio"]:checked + label:before {
-    border-width: 8px; }
-
 .imageupload {
   margin-top: -25px; }
   .imageupload::after {
@@ -9972,7 +9948,7 @@ input[type="radio"] {
 
 .login-logo {
   background: url("../../img/luyalogo-white.svg") top center no-repeat;
-  min-height: 110px;
+  min-height: 100px;
   background-size: contain;
   top: 50%;
   left: 50%;
@@ -10069,28 +10045,12 @@ input[type="radio"] {
   background: rgba(255, 0, 107, 0.25);
   border-left: 5px solid #FF006B; }
   .login-status ul {
-    padding-left: 10px;
-    margin: 0; }
+    padding-left: 10px; }
     .login-status ul li {
-      list-style: none;
-      margin: 0;
-      padding: 0; }
+      list-style: none; }
   .login-status-wrapper {
     min-height: 25px;
     margin-bottom: 15px; }
-  .login-status-success {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translateY(-50%) translate(-50%);
-        -ms-transform: translateY(-50%) translate(-50%);
-            transform: translateY(-50%) translate(-50%);
-    width: 100px;
-    height: 100px;
-    font-size: 90px !important;
-    font-size: 6rem !important;
-    text-align: center;
-    color: #FF006B; }
 
 .luya {
   display: -webkit-box;

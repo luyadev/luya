@@ -1,0 +1,113 @@
+// ==================================================
+// Bootstrap colors
+// ==================================================
+
+$brand-primary: $pink;
+$brand-inverse: $gray-light;
+
+// ==================================================
+// General
+// ==================================================
+
+// Spacing
+
+$spacer: 15px;
+
+// ==================================================
+// Fonts
+// ==================================================
+
+// Default font
+
+$font-family-sans-serif: 'Roboto', sans-serif;
+
+// Headings
+
+$headings-color: $brand-primary;
+
+$font-size-h1: 2rem;
+$font-size-h2: 1.8rem;
+$font-size-h3: 1.6rem;
+$font-size-h4: 1.4rem;
+$font-size-h5: 1.2rem;
+$font-size-h6: 1rem;
+
+$headings-margin-bottom: $spacer * 1.5;
+
+$headings-font-weight: 200;
+
+// ==================================================
+// Grid
+// ==================================================
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1600px,
+    xxxl: 2200px
+);
+
+$grid-gutter-width-base: 10px;
+
+// ==================================================
+// Navs
+// ==================================================
+
+$nav-link-padding-horizontal: 15px; // Custom
+$nav-link-padding-vertical: 8px; // Custom
+
+$nav-link-padding: $nav-link-padding-vertical $nav-link-padding-horizontal;
+
+// Tabs
+
+$nav-tab-active-background-color: $white; // Custom
+
+$nav-tabs-border-radius: 5px;
+$nav-tabs-border-width: 1px;
+$nav-tabs-active-link-hover-color: $brand-primary;
+
+// ==================================================
+// Forms
+// ==================================================
+
+$input-border-radius: 0;
+$input-border-color: $gray-light;
+$input-btn-border-width: 1px;
+
+// Input Groups
+
+$input-group-addon-border-color: $gray-light;
+$input-group-addon-bg: $gray-light;
+
+// Check / Radio
+
+$form-check-input-margin-y: .2rem;
+
+// ==================================================
+// Tables
+// ==================================================
+
+$table-head-bg:         transparent;
+$table-head-color:      $brand-primary;
+
+$table-inverse-color:   $white;
+$table-inverse-bg:      $brand-primary;
+
+// BG for the striped effect
+$table-bg-accent: $gray-lightest;
+
+// ==================================================
+// Pagination
+// ==================================================
+
+$pagination-border-width: 0;
+$pagination-color: $gray;
+$pagination-hover-color: $brand-primary;
+$pagination-active-color: $brand-primary;
+$pagination-hover-bg: transparent;
+$pagination-active-bg: transparent;
+
+$pagination-line-height: 1.5;
