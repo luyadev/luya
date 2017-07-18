@@ -98,7 +98,7 @@ To create the database tables from the migration files, you've to execute the `m
 
 Again we're using the LUYA code wizard to help us create the corresponding models with a preconfigured CRUD view for the database tables:
 
-`./vendor/bin/luya admin/crud/create`
+`./vendor/bin/luya crud/create`
 
 Below you see how to use the wizard to automatically create the contact model`models/Contact.php` and all associated files like the API controller `modules/addressbook/admin/apis/ContactController.php` and the controller `modules/addressbook/admin/controllers/ContactController.php`:
 
@@ -108,7 +108,7 @@ Repeat the process for the `Group` model.
 
 ## Adding the module to the admin menue
 
-In order to see the new module, you've to define the menue appearance in the `modules/addressbook/admin/Module.php`. After succesfully executing the `admin/crud/create` command you'll also get a generated code proposal (green color) in the command line (see the GIF above). We want to see both the contacts and the groups in the admin menue and have to modify the generated code accordingly.
+In order to see the new module, you've to define the menue appearance in the `modules/addressbook/admin/Module.php`. After succesfully executing the `crud/create` command you'll also get a generated code proposal (green color) in the command line (see the GIF above). We want to see both the contacts and the groups in the admin menue and have to modify the generated code accordingly.
 
 Your admin `Module.php` should look like this:
 
