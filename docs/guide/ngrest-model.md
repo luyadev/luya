@@ -225,7 +225,7 @@ public function ngRestConfig($config)
 Sometimes its usefull and common to directly manage relational data inside the current ngrest crud. Therefore we have created something called {{\luya\admin\ngrest\base\NgRestModel::ngRestRelations}}. Inside this method you can define relations which are also based on the NgRest concept.
 
 ```php
-public function ngRestRelation()
+public function ngRestRelations()
 {
     return [
         ['label' => 'The Label', 'apiEndpoint' => \path\to\ngRest\Model::ngRestApiEndpoint(), 'dataProvider' => $this->getSales()],
