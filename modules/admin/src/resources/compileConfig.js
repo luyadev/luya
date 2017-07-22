@@ -13,12 +13,10 @@ module.exports = {
         ],
         "scripts": [
             "vendorlibs/angular/angular.min.js",
-            "vendorlibs/angular-chosen/angular-chosen.min.js",
             "vendorlibs/angular-datepicker/angular-datepicker.min.js",
             "vendorlibs/angular-loading-bar/loading-bar.min.js",
             "vendorlibs/angular-slugify/angular-slugify.js",
             "vendorlibs/angular-ui-router/angular-ui-router.min.js",
-            "vendorlibs/jquery-ui/jquery-ui.min.js",
             "vendorlibs/ng-file-upload/ng-file-upload.js",
             "vendorlibs/ng-file-upload/ng-file-upload-shim.js",
             "vendorlibs/ng-wig/ng-wig.min.js",

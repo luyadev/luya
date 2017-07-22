@@ -1021,6 +1021,22 @@
                         }
                     })
                 });
+                
+                scope.setModelValue = function(option) {
+                	scope.model = option.value;
+                	scope.isOpen = 0;
+                };
+                
+                scope.getSelectedValue = function() {
+                	var defaultLabel = i18n['ngrest_select_no_selection'];
+                	angular.forEach(scope.options, function(item) {
+                		if (scope.model == item.value) {
+                			defaultLabel = item.label;
+                		}
+                	})
+                	
+                	return defaultLabel;
+                }
 
             },
             template: function() {
@@ -1033,25 +1049,22 @@
                                 '<label for="{{id}}">{{label}}</label>' +
                             '</div>' +
                             '<div class="form-side">' +
-                                '<div class="zaaselect open">' +
-                                    '<select class="zaaselect-select">' +
-                                        '<option value="eintrag1" selected>Eintrag 1</option>' +
+                                '<div class="zaaselect" ng-class="{\'open\':isOpen}">' +
+                                    '<select class="zaaselect-select" ng-model="model">' +
+                                        '<option ng-repeat="opt in options" ng-value="{{opt.value}}">{{opt.label}}</option>' +
                                         '<option value="eintrag2">Eintrag 2</option>' +
                                     '</select>' +
-                                    '<div class="zaaselect-selected">' +
-                                        '<span>Test</span>' +
-                                        '<i class="material-icons zaaselect-dropdown-icon">keyboard_arrow_down</i>' +
-                                        '<i class="material-icons zaaselect-clear-icon">clear</i>' +
+                                    '<div class="zaaselect-selected" ng-click="isOpen=!isOpen">' +
+                                        '<span>{{getSelectedValue()}}</span>' +
+                                        '<i class="material-icons zaaselect-dropdown-icon" ng-click="isOpen=!isOpen">keyboard_arrow_down</i>' +
+                                        '<i class="material-icons zaaselect-clear-icon" ng-click="model=initvalue">clear</i>' +
                                     '</div>' +
                                     '<div class="zaaselect-dropdown">' +
                                         '<div class="zaaselect-search">' +
-                                            '<input class="zaaselect-search-input" type="search" />' +
+                                            '<input class="zaaselect-search-input" type="search" ng-model="searchQuery" />' +
                                         '</div>' +
-                                        '<div class="zaaselect-item">' +
-                                            '<span class="zaaselect-active" value="eintrag1">Eintrag 1</span>' +
-                                        '</div>' +
-                                        '<div class="zaaselect-item">' +
-                                            '<span value="eintrag2">Eintrag 2</span>' +
+                                        '<div class="zaaselect-item" ng-repeat="opt in options | filter:searchQuery" ng-click="setModelValue(opt)">' +
+                                            '<span ng-class="{\'zaaselect-active\': opt.value == model}">{{opt.label}}</span>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
