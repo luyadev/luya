@@ -62,12 +62,12 @@
                             </label>
                         </div>
                         <div class="blockholder-group blockholder-group-favorites" ng-repeat="item in blocksData | orderBy:'groupPosition'" >
-                            <span class="blockholder-group-title">
+                            <span class="blockholder-group-title" ng-click="toggleGroup(item.group)" ng-hide="searchQuery.length > 0">
                                 <i class="material-icons" ng-if="item.group.is_fav">favorite</i>
                                 <span>{{item.group.name}}</span>
                             </span>
                             <ul class="blockholder-list">
-                                <li class="blockholder-item" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
+                                <li class="blockholder-item" ng-show="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
                                     dnd dnd-model="block" dnd-isvalid="true" dnd-drop-disabled dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
                                 >
                                     <i class="material-icons blockholder-icon">{{block.icon}}</i>
