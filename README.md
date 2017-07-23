@@ -1,4 +1,7 @@
 <p align="center">
+    <b>Warning: Do not update your project to the dev-master build, as it contains the new admin design with lots of bugs and missing functions!</b>
+</p>
+<p align="center">
   <img src="https://luya.io/img/luya_logo_flat_icon.png" alt="LUYA Logo"/>
 </p>
 
