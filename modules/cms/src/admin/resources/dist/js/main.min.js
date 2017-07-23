@@ -38,7 +38,7 @@
             template : function() {
                 return '<div class="menu-dropdown-category">' +
                         '<b class="menu-dropdown-toggle-all" ng-click="toggler=!toggler"><i class="material-icons" ng-if="!toggler">keyboard_arrow_down</i><i class="material-icons" ng-if="toggler">keyboard_arrow_right</i> <span>Toggle all</span></b><br />' +
-                        '<div class="menu-dropdown-container" ng-show="toggler" ng-repeat="container in menuData.containers">' +
+                        '<div class="menu-dropdown-container" ng-show="toggler">' +
                             '<ul class="treeview treeview-chooser" ng-show="toggler">' +
                                 '<li class="treeview-container" ng-repeat="container in menuData.containers" >' +
                                     '<div class="treeview-label treeview-label-container" ng-click="container.isHidden=!container.isHidden">' +
