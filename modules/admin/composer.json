@@ -18,13 +18,16 @@
 	},
 	"require" : {
 	    "yiisoft/yii2-imagine": "~2.1.0",
-	    "flowjs/flow-php-server": "^1.0",
-		"twbs/bootstrap": "4.0.0-alpha.6"
+	    "flowjs/flow-php-server": "^1.0"
 	},
 	"require-dev" : {
 		"luyadev/luya-testsuite" : "~1.0.0",
 		"luyadev/luya-module-cms" : "^1.0@dev",
-		"satooshi/php-coveralls": "~1.0"
+		"satooshi/php-coveralls": "~1.0",
+		"twbs/bootstrap": "4.0.0-alpha.6",
+		"bower-asset/angular" : "^1.6.0",
+		"bower-asset/angular-loading-bar" : "^0.9",
+		"bower-asset/angular-slugify" : "^1.0.0"
 	},
 	"autoload" : {
 		"psr-4" : {

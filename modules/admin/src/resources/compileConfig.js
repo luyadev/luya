@@ -12,11 +12,11 @@ module.exports = {
             "scss/**/*.scss"
         ],
         "scripts": [
-            "vendorlibs/angular/angular.min.js",
-            "vendorlibs/angular-datepicker/angular-datepicker.min.js",
-            "vendorlibs/angular-loading-bar/loading-bar.min.js",
-            "vendorlibs/angular-slugify/angular-slugify.js",
-            "vendorlibs/angular-ui-router/angular-ui-router.min.js",
+        	"../../vendor/bower-asset/angular/angular.min.js",
+        	"../../vendor/bower-asset/angular-loading-bar/build/loading-bar.min.js",
+            "../../vendor/bower-asset/angular-slugify/angular-slugify.js",        	
+        	"vendorlibs/angular-datepicker/angular-datepicker.min.js",
+        	"vendorlibs/angular-ui-router/angular-ui-router.min.js",
             "vendorlibs/ng-file-upload/ng-file-upload.js",
             "vendorlibs/ng-file-upload/ng-file-upload-shim.js",
             "vendorlibs/ng-wig/ng-wig.min.js",
