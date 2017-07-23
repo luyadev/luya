@@ -157,8 +157,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         if ($this->layout) {
             $layoutFile = $this->layout->view_file;
             $placholders = [];
-            foreach ($this->layout->getJsonConfig('placeholders') as $item) {
-                $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
+            foreach ($this->layout->getJsonConfig('placeholders') as $row) {
+                foreach ($row as $item) {
+                    $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
+                }
             }
             return $this->getView()->render($layoutFile, ['placeholders' => $placholders], $this);
         }
@@ -328,16 +330,21 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $nav_item_page['json_config'] = json_decode($nav_item_page['json_config'], true);
         
         if (isset($nav_item_page['json_config']['placeholders'])) {
-            foreach ($nav_item_page['json_config']['placeholders'] as $placeholderKey => $placeholder) {
-                $placeholder['nav_item_page_id'] = $this->id;
-                $placeholder['prev_id'] = 0;
-                $placeholder['__nav_item_page_block_items'] = [];
-        
-                $return['__placeholders'][$placeholderKey] = $placeholder;
-        
-                $placeholderVar = $placeholder['var'];
-        
-                $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
+            foreach ($nav_item_page['json_config']['placeholders'] as $rowKey => $row) {
+                foreach ($row as $placeholderKey => $placeholder) {
+                    $placeholder['nav_item_page_id'] = $this->id;
+                    $placeholder['prev_id'] = 0;
+                    $placeholder['__nav_item_page_block_items'] = [];
+                    if (!isset($placeholder['cols'])) {
+                        $placeholder['cols'] = '12';
+                    }
+            
+                    $return['__placeholders'][$rowKey][$placeholderKey] = $placeholder;
+            
+                    $placeholderVar = $placeholder['var'];
+            
+                    $return['__placeholders'][$rowKey][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
+                }
             }
         }
         
@@ -386,16 +393,19 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
         $placeholders = [];
     
-        foreach ($blockObject->getConfigPlaceholdersExport() as $pk => $pv) {
-            $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
-            $pv['prev_id'] = $blockItem['id'];
-            $placeholderVar = $pv['var'];
-    
-            $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
-    
-            $placeholder = $pv;
-    
-            $placeholders[] = $placeholder;
+        foreach ($blockObject->getConfigPlaceholdersByRowsExport() as $rowKey => $row) {
+            
+            foreach ($row as $pk => $pv) {
+                $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
+                $pv['prev_id'] = $blockItem['id'];
+                $placeholderVar = $pv['var'];
+        
+                $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
+        
+                $placeholder = $pv;
+                
+                $placeholders[$rowKey][] = $placeholder;
+            }
         }
     
         if (empty($blockItem['json_config_values'])) {

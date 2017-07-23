@@ -1,0 +1,43 @@
+.loading-indicator {
+	margin: 30px auto;
+	width: 150px;
+	height: 100px;
+	text-align: center;
+	font-size: 10px;
+}
+
+.loading-indicator > div {
+	background-color: #fff;
+	height: 100%;
+	width: 8px;
+	display: inline-block;
+	margin-left: 5px;
+
+	animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.loading-indicator .rect2 {
+	animation-delay: -1.1s;
+}
+
+.loading-indicator .rect3 {
+	animation-delay: -1.0s;
+}
+
+.loading-indicator .rect4 {
+	animation-delay: -0.9s;
+}
+
+.loading-indicator .rect5 {
+	animation-delay: -0.8s;
+}
+
+@keyframes sk-stretchdelay {
+	0%, 40%, 100% {
+		transform: scaleY(0.4);
+		-webkit-transform: scaleY(0.4);
+	}  20% {
+		   transform: scaleY(1.0);
+		   -webkit-transform: scaleY(1.0);
+	   }
+}

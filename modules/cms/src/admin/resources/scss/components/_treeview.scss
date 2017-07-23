@@ -1,188 +1,220 @@
-$treeview--padding: 5px;
+// ==================================================
+// Treeview
+// ==================================================
 
-.treeview__button {
-	display: block;
-	background-color: $white;
-	color: $black;
-	width: 100%;
-	padding: 2px $treeview--padding;
-	vertical-align: middle;
-	text-align: left;
-	transition: 0.25s ease background-color;
-
-	i {
-		font-size: 1.2rem;
-	}
-
-	span,
-	i {
-		position: relative;
-		vertical-align: middle;
-		cursor: pointer;
-	}
-
-	span {
-		display: inline-block;
-		word-break: break-word;
-		margin-top: 2px;
-		width: calc(100% - 50px);
-	}
-
-	&:hover {
-		background-color: $grey;
-	}
-
-	& + .treeview__button {
-		margin-top: 5px;
-	}
+.treeview {
+    display: block;
+    font-size: 14px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
 }
 
-.treeview__icon-holder {
-	display: inline-block;
-	padding: 0 4px 0 8px;
-	width: 28px;
+// ==================================================
+// Container styles
+// ==================================================
+
+.treeview-container {
+    display: block;
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
+
+    .treeview-chooser & {
+        margin-top: 10px;
+    }
 }
 
-.treeview__button--create,
-.treeview__button--draft {
-	padding: 10px $treeview--padding;
+// ==================================================
+// Item lists
+// ==================================================
+
+.treeview-items {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    // Add indention if child of treeview-item
+    .treeview-item > & {
+        margin-left: 15px;
+    }
+
+    // Hide if collapsed
+    .treeview-item-collapsed > & {
+        display: none;
+    }
 }
 
-.treeview__button--create {
-	background-color: $green;
-	color: $white;
+.treeview-item {
+    display: block;
+    padding: 0;
+    position: relative;
 
-	&:hover {
-		background-color: $green--darken-3;
-	}
+    &:before {
+        border-bottom: 1px solid lighten($gray, 45);
+        border-left: 1px solid lighten($gray, 45);
+        content: '';
+        display: block;
+        height: 15px;
+        left: -4px;
+        position: absolute;
+        top: 0;
+        width: 25px;
+
+        .treeview-chooser & {
+            height: 20px;
+            top: -5px;
+            width: 20px;
+        }
+    }
+
+    &:after {
+        border-left: 1px solid lighten($gray, 45);
+        content: '';
+        display: block;
+        height: 100%;
+        left: -4px;
+        position: absolute;
+        top: 0;
+
+        .treeview-chooser & {
+            top: -5px;
+        }
+    }
+
+    &-lvl1:before,
+    &-lvl1:after {
+        display: none;
+    }
+
+    &:last-child:after {
+        display: none
+    }
+
+    &-has-children:before {
+        top: -1px;
+        width: 7px;
+
+        .treeview-chooser & {
+            height: 25px;
+            top: -10px;
+        }
+    }
+    &-collapsed:before {
+        height: 16px;
+    }
 }
 
-.treeview__button--switch {
-	padding: 0;
+.treeview-label {
+    border: solid transparent;
+    border-width: 2px 0 2px 0;
+    display: block;
+    padding: 0 35px 0 23px;
+    position: relative;
+    width: 100%;
 
-	&.treeview__button--switch-active {
-		background-color: $grey--darken;
-	}
+    .treeview-chooser & {
+        padding-right: 0;
+    }
 
-	label {
-		display: block;
-		padding: 10px $treeview--padding;
-		width: 100%;
-		height: 100%;
-	}
+    &-container {
+        font-weight: bold;
+        letter-spacing: .8px;
+    }
 
-	.lever {
-		margin: -4px ($treeview--padding + 7px) 0 ($treeview--padding + 7px);
-	}
+    &:after {
+        border-radius: 5px;
+        content: "";
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 5px;
+
+        .treeview-chooser & {
+            display: none;
+        }
+    }
+
+    &-page:after {
+        background-color: $green;
+    }
+    .treeview-item-isoffline &:after {
+        background-color: $red;
+    }
+
+    .treeview-item-ishidden & {
+        opacity: .5;
+    }
+
+    &.drag-dragging {
+        .treeview-icon-collapse {
+            display: none;
+        }
+    }
+    &.drag-hover-top {
+        border-top-color: $green;
+    }
+    &.drag-hover-middle {
+        background-color: $green;
+    }
+    &.drag-hover-bottom {
+        border-bottom-color: $green;
+    }
 }
 
-.treeview__text-icon {
-	font-size: inherit;
-	margin-left: 5px;
-	margin-top: -2px;
+.treeview-icon {
+    font-size: 18px;
+    height: 18px;
+    left: 0;
+    line-height: 1;
+    position: absolute;
+    top: 3px;
+    width: 18px;
+
+    &-right {
+        left: auto;
+        right: 10px;
+    }
+
+    &-collapse {
+        cursor: pointer;
+        font-size: 24px;
+        height: 24px;
+        top: 0;
+        transition: .25s ease-in-out transform;
+        width: 24px;
+
+        .treeview-item-collapsed & {
+            transform: rotate(-90deg) translateX(-1px);
+        }
+    }
+
+    .material-icons {
+        display: block;
+    }
 }
 
-.treeview__title {
-	user-select: none;
-	font-size: 14px;
-	line-height: 100%;
-	cursor: pointer;
+.treeview-link {
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    padding: 0 7px;
+    width: 100%;
 
-	span,
-	i {
-		display: inline-block;
-		vertical-align: middle;
-	}
+    &:hover {
+        background-color: rgba(0, 0, 0, .1);
+
+        .treeview-label-container & {
+            background-color: transparent;
+        }
+    }
 }
 
-.treeview__title-icon {
-	transform: rotate(180deg);
-	transition: 0.25s ease transform;
-
-	&.treeview__title-icon--closed {
-		transform: rotate(0deg);
-	}
-}
-
-.treeview__list .treeview__list {
-	margin-top: 2px;
-	margin-left: 15px;
-}
-
-.treeview__item + .treeview__item {
-	margin-top: 2px;
-}
-
-.treeview__link {
-	background-color: $grey;
-	position: relative;
-	user-select: none;
-	padding-right: 10px;
-
-	&.treeview__link--hidden {
-		background-color: #E0E0E0;
-		opacity: 0.5;
-	}
-
-	&.treeview__link--active,
-	&:hover {
-		background-color: #b3e5fc;
-	}
-
-	&:after {
-		content: "";
-		display: block;
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		width: 5px;
-		background-color: $red;
-		transition: 0.25s ease background-color;
-	}
-
-	&.treeview__link--is-online:after {
-		background-color: $green--accent-4;
-	}
-
-	&.treeview__link--hover {
-		background-color: $green--accent-4;
-	}
-}
-
-.treeview__info-icons {
-	position: absolute;
-	right: 10px;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-.treeview--drag-active .treeview__link {
-	cursor: move;
-
-	span, i {
-		cursor: move;
-	}
-}
-
-.treeview--drag-active .treeview__drop {
-	display: block;
-	height: 10px;
-	width: 100%;
-	background-color: rgba($green--accent-4, 0.5);
-	margin: 5px 0;
-
-	&.treeview__drop--hover {
-		background-color: $green--accent-4;
-	}
-}
-
-.treeview__toggler {
-	margin-top: 1px;
-	transform: rotate(0deg);
-	transition: 0.25s ease transform;
-
-	&.treeview__toggler--subnav-closed {
-		transform: rotate(-90deg);
-	}
+.treeview-chooser .treeview-label-page .treeview-icon {
+    left: 4px;
+    top: 2px;
 }

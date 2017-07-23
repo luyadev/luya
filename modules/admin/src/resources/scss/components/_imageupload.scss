@@ -1,55 +1,68 @@
 .imageupload {
-    // display: block;
+    margin-top: -25px;
+    @include clearfix;
 }
 
-.imageupload__filter,
-.imageupload__preview {
-    vertical-align: top;
-    margin-top: 10px;
+.imageupload-upload,
+.imageupload-preview,
+.imageupload-filter {
+    display: block;
     float: left;
+    margin-top: 25px;
 }
 
-.imageupload__filter {
-    width: 100%;
-    select {
-        max-width: 100%;
-    }
-    label {
-        display: block;
-    }
-    @media (min-width: 1200px) {
-        box-sizing: border-box;
-        width: calc(100% - 245px) !important;
-        margin-left: 15px !important;
-    }
+.imageupload-upload {
+    margin-right: 25px;
 }
 
-.imageupload__preview {
+.imageupload-preview {
+    background-color: $gray-lightest;
+    margin-right: 25px;
+    overflow: hidden;
+    padding: 25px;
     position: relative;
-    font-size: 0;
-    min-height: 100px;
-    width: 225px;
-    height: auto;
+}
+
+.imageupload-size {
+    background-color: rgba(0, 0, 0, .6);
+    bottom: 0;
+    color: $white;
+    left: 0;
+    padding: 5px;
+    position: absolute;
+    right: 0;
     text-align: center;
 }
 
-.imageupload__size {
-    font-size: 14px;
+.imageupload-filter {
+    select {
+        width: 100%;
+    }
 }
 
-.imageupload__loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+.imageupload-loading {
+    background-color: rgba(0, 0, 0, .8);
     bottom: 0;
-    background-color: rgba(color("shades", "black"), 0.5);
-}
-
-.imageupload__loading .preloader-wrapper {
+    left: 0;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -32px;
-    margin-left: -32px;
+    right: 0;
+    top: 0;
+
+    $imageupload-loading-indicator-line-width: 8px;
+    $imageupload-loading-indicator-margin-left-right: 2px;
+    $imageupload-loading-indicator-height: 80px;
+
+    .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        height: $imageupload-loading-indicator-height;
+        width: ($imageupload-loading-indicator-line-width * 5) + (($imageupload-loading-indicator-margin-left-right * 2) * 5);
+    }
+
+    .loading-indicator > div {
+        margin: 0 $imageupload-loading-indicator-margin-left-right;
+        width: $imageupload-loading-indicator-line-width;
+    }
 }

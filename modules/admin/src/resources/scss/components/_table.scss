@@ -1,45 +1,46 @@
-table {
-    font-size: 14px;
+.table {
+    .dropdown-menu {
+        min-width: 0;
+    }
+
+    .custom-checkbox {
+        margin: 0;
+    }
 }
 
-.grid-sort-btn {
+.table-align-middle {
+    th,
+    td {
+        vertical-align: middle;
+    }
+}
+
+.thead-default th,
+.thead-inverse th {
+    border-top: 0;
+    font-weight: 400;
+
+    span {
+        vertical-align: middle;
+    }
+}
+
+.table-sorter {
+    color: $gray;
     cursor: pointer;
-    display: inline-block;
+    display: none;
     font-size: 20px;
-    line-height: 1;
+    margin: -2px 0 0 10px;
     vertical-align: middle;
 
-    &.active-orderby {
-        color: color("blue", "base");
-        font-weight: 700;
+    &.table-sorter-down {
+        display: inline-block;
     }
-}
-
-.table__group {
-    background-color: color('grey', 'base') !important;
-    border-left: 2px solid color('grey', 'base');
-    border-right: 2px solid color('grey', 'base');
-    color: color('shades', 'white');
-
-    > td {
-        border-bottom: 2px solid color('grey', 'base');
-        cursor: pointer;
-        padding: 10px 5px;
+    &.is-active {
+        color: $brand-primary;
+        display: inline-block;
     }
-
-    &:first-child > td {
-        padding-top: 10px;
-    }
-
-    & ~ tr {
-        border-left: 2px solid color('grey', 'base');
-
-        td:last-child {
-            border-right: 2px solid color('grey', 'base');
-        }
-
-        &:last-child td {
-            border-bottom: 2px solid color('grey', 'base');
-        }
+    &.is-active + .table-sorter-down {
+        display: none;
     }
 }

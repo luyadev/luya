@@ -1,57 +1,30 @@
-<div ng-controller="DefaultController">
-    <div class="luya-container__sidebar sidebar">
-        <div class="submenu">
-            <div class="submenu__item sidebar__button" ng-class="{'sidebar__button--active' :currentItem == null }" ng-click="loadDashboard()">
-                <div class="sidebar__icon-holder">
-                    <i class="material-icons sidebar__icon">dashboard</i>
-                </div>
-                <a class="sidebar__text">
-                    <small>Dashboard</small>
-                </a>
-            </div>
-            <div ng-repeat="item in items" class="submenu__group">
-                <h5 class="sidebar__group-title" ng-if="item.items.length !== 0">{{item.name}}</h5>
-                <div class="submenu__item sidebar__button" ng-repeat="sub in item.items" ng-hide="sub.hiddenInMenu" ng-class="{'sidebar__button--active' : sub.route == currentItem.route }" ng-click="click(sub)">
-                    <div class="sidebar__icon-holder">
-                        <i class="material-icons sidebar__icon">{{sub.icon}}</i>
-                    </div>
-                    <a class="sidebar__text">
-                        {{sub.alias}}
-                    </a>
-                </div>
-            </div>
+<div class="luya-subnav" ng-controller="DefaultController">
+    <div class="modulenav">
+        <div class="modulenav-group">
+            <ul class="modulenav-list">
+                <li class="modulenav-item">
+                    <span class="modulenav-link" ng-class="{'modulenav-link-active' :currentItem == null }" ng-click="loadDashboard()">
+                        <i class="modulenav-icon material-icons">dashboard</i>
+                        <span class="modulenav-label">
+                            Dashboard
+                        </span>
+                    </span>
+                </li>
+            </ul>
         </div>
-    </div>  <!-- /.luya-sidebar -->
-
-    <div class="luya-container__main" fixed-table-head>
-        <div class="row">
-            <div class="col s12" ui-view>
-                <div class="editlog">
-                    <div class="row" ng-repeat="item in dashboard" ng-controller="DashboardController">
-                        <div class="editlog__collapsible z-depth-1">
-                            <div class="editlog__collapsible-header"> <i class="material-icons">today</i><span>{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span></div>
-                            <div class="editlog__collapsible-body">
-                                <div class="row editlog__collapsible-body-item " ng-repeat="(key, log) in item.items">
-                                    <div class="col s6 m3 collapsible-body-item-time truncate">
-                                        <span class="btn-floating green small" ng-if="log.is_insert == 1">
-                                            <i class="material-icons editlog__icon">note_add</i>
-                                        </span>
-                                        <span class="btn-floating orange small" ng-if="log.is_update == 1">
-                                            <i class="material-icons editlog__icon">create</i>
-                                        </span>
-                                        <span>{{log.timestamp * 1000 | date:"HH:mm"}}</span>
-                                    </div>
-                                    <div class="col s6 m3">
-                                        <span>{{ log.name }}</span></div>
-                                    <div class="col s12 m6 truncate">
-                                        <span compile-html ng-bind-html="log.message | trustAsUnsafe"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="modulenav-group" ng-repeat="item in items" class="submenu-group">
+            <span class="modulenav-group-title">{{item.name}}</span>
+            <ul class="modulenav-list">
+                <li class="modulenav-item" ng-repeat="sub in item.items">
+                    <span class="modulenav-link" ng-click="click(sub)"  ng-class="{'modulenav-link-active' : sub.route == currentItem.route }">
+                        <i class="modulenav-icon material-icons">{{sub.icon}}</i>
+                        <span class="modulenav-label">
+                            {{sub.alias}}
+                        </span>
+                    </span>
+                </li>
+            </ul>
         </div>
-    </div>  <!-- /.luya-main -->
+    </div>
 </div>
+<div class="luya-content" ui-view></div>

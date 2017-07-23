@@ -1,0 +1,24 @@
+.input-group {
+    position: relative;
+
+    .flag {
+        opacity: .5;
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+
+    $input-group-addon-selector: '.input-group-addon';
+    @for $i from 1 through 5 {
+        #{$input-group-addon-selector} + .flag {
+            right: 45px * $i;
+        }
+        $input-group-addon-selector: #{$input-group-addon-selector} + #{'.input-group-addon'};
+    }
+}
+
+.input-group-addon {
+    color: $white;
+}

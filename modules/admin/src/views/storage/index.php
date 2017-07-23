@@ -1,3 +1,3 @@
-<div class="card-panel" style="margin: 0; padding: 25px; overflow: scroll; height: 100%;" fixed-table-head>
+<div class="luya-content">
     <storage-file-manager ng-model="$parent.$parent.ngModel" selection="false" />
 </div>

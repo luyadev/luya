@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "edaf20f567f47ff5712b13850bab33e8",
+    "content-hash": "56a875b6835ee9fbb9b4b2d4393b3ec7",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -39,16 +39,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.3.6",
+            "version": "3.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/Inputmask.git",
-                "reference": "e42852f4afa01a80815394a5b2f9ce504c1a8d0b"
+                "reference": "9835731cb78cac749734d94a1cb5bd70da4d3b10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/e42852f4afa01a80815394a5b2f9ce504c1a8d0b",
-                "reference": "e42852f4afa01a80815394a5b2f9ce504c1a8d0b",
+                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/9835731cb78cac749734d94a1cb5bd70da4d3b10",
+                "reference": "9835731cb78cac749734d94a1cb5bd70da4d3b10",
                 "shasum": ""
             },
             "require": {
@@ -160,16 +160,16 @@
         },
         {
             "name": "cebe/markdown",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
+                "reference": "25b28bae8a6f185b5030673af77b32e1163d5c6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
-                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/25b28bae8a6f185b5030673af77b32e1163d5c6e",
+                "reference": "25b28bae8a6f185b5030673af77b32e1163d5c6e",
                 "shasum": ""
             },
             "require": {
@@ -216,20 +216,20 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14T20:40:20+00:00"
+            "time": "2017-07-16T21:13:23+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.9.2",
+            "version": "v4.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "6d50e5282afdfdfc3e0ff6d192aff56c5629b3d4"
+                "reference": "95e1bae3182efc0f3422896a3236e991049dac69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/6d50e5282afdfdfc3e0ff6d192aff56c5629b3d4",
-                "reference": "6d50e5282afdfdfc3e0ff6d192aff56c5629b3d4",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/95e1bae3182efc0f3422896a3236e991049dac69",
+                "reference": "95e1bae3182efc0f3422896a3236e991049dac69",
                 "shasum": ""
             },
             "require": {
@@ -263,7 +263,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2017-03-13T06:30:53+00:00"
+            "time": "2017-06-03T02:28:16+00:00"
         },
         {
             "name": "flowjs/flow-php-server",
@@ -575,6 +575,207 @@
     ],
     "packages-dev": [
         {
+            "name": "bower-asset/angular",
+            "version": "v1.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular.git",
+                "reference": "c5accffceeee635c740434046d3b06079ea47a58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular/zipball/c5accffceeee635c740434046d3b06079ea47a58",
+                "reference": "c5accffceeee635c740434046d3b06079ea47a58",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular.js",
+                "bower-asset-ignore": []
+            },
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/angular-loading-bar",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chieffancypants/angular-loading-bar.git",
+                "reference": "d734873e52ded18fa27d67f52272ae43267dfd63"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chieffancypants/angular-loading-bar/zipball/d734873e52ded18fa27d67f52272ae43267dfd63",
+                "reference": "d734873e52ded18fa27d67f52272ae43267dfd63",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">=1.2.9,<2.0.0"
+            },
+            "require-dev": {
+                "bower-asset/angular": "~1.2.23",
+                "bower-asset/angular-1.3": "1.3",
+                "bower-asset/angular-1.4": "1.4",
+                "bower-asset/angular-animate": "~1.2.9",
+                "bower-asset/angular-animate-1.3": "1.3",
+                "bower-asset/angular-animate-1.4": "1.4",
+                "bower-asset/angular-mocks": "~1.2.9",
+                "bower-asset/angular-mocks-1.3": "1.3",
+                "bower-asset/angular-mocks-1.4": "1.4"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "build/loading-bar.js",
+                    "build/loading-bar.css"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "components",
+                    "test",
+                    "example"
+                ]
+            }
+        },
+        {
+            "name": "bower-asset/angular-slugify",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paulsmith/angular-slugify.git",
+                "reference": "eff9ecc3c1234c9dd22bed8b647508f19d25c978"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paulsmith/angular-slugify/zipball/eff9ecc3c1234c9dd22bed8b647508f19d25c978",
+                "reference": "eff9ecc3c1234c9dd22bed8b647508f19d25c978",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">=1.0.0,<2.0.0"
+            },
+            "require-dev": {
+                "bower-asset/angular": ">=1.2.0,<2.0.0",
+                "bower-asset/angular-mocks": ">=1.2.0,<2.0.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular-slugify.js"
+            }
+        },
+        {
+            "name": "bower-asset/angularjs-datepicker",
+            "version": "2.1.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/720kb/angular-datepicker.git",
+                "reference": "12b53a4088c68c2905f05f000dbbcbb3cb50a974"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/720kb/angular-datepicker/zipball/12b53a4088c68c2905f05f000dbbcbb3cb50a974",
+                "reference": "12b53a4088c68c2905f05f000dbbcbb3cb50a974",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./dist/angular-datepicker.css",
+                    "./dist/angular-datepicker.js",
+                    "./dist/angular-datepicker.sourcemap.map"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A datepicker directive for angularjs.",
+            "keywords": [
+                "angular",
+                "angularjs",
+                "date",
+                "datepicker",
+                "input",
+                "input"
+            ]
+        },
+        {
+            "name": "bower-asset/ng-file-upload",
+            "version": "12.2.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danialfarid/ng-file-upload-bower.git",
+                "reference": "4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danialfarid/ng-file-upload-bower/zipball/4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
+                "reference": "4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">1.2.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "ng-file-upload.js",
+                "bower-asset-ignore": []
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Lightweight Angular JS directive to upload files. Support drag&drop, paste image, progress and abort"
+        },
+        {
+            "name": "bower-asset/ui-router",
+            "version": "0.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular-ui/ui-router.git",
+                "reference": "ef5ce80fa6ec8a2c6a87cf1cf1c5809e1950af11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular-ui/ui-router/zipball/ef5ce80fa6ec8a2c6a87cf1cf1c5809e1950af11",
+                "reference": "ef5ce80fa6ec8a2c6a87cf1cf1c5809e1950af11",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">=1.0.8,<2.0.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./release/angular-ui-router.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "component.json",
+                    "package.json",
+                    "lib",
+                    "config",
+                    "sample",
+                    "test",
+                    "tests",
+                    "ngdoc_assets",
+                    "Gruntfile.js",
+                    "files.js"
+                ]
+            },
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "curl/curl",
             "version": "1.6.1",
             "source": {
@@ -843,12 +1044,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "5889faab431c814061151448a18222f1503e7f0b"
+                "reference": "901070505886d0bc3fa634e81e3d8d195f38f15f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/5889faab431c814061151448a18222f1503e7f0b",
-                "reference": "5889faab431c814061151448a18222f1503e7f0b",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/901070505886d0bc3fa634e81e3d8d195f38f15f",
+                "reference": "901070505886d0bc3fa634e81e3d8d195f38f15f",
                 "shasum": ""
             },
             "require-dev": {
@@ -893,20 +1094,20 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-05-29T07:54:40+00:00"
+            "time": "2017-07-03 10:04:02"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "cf14ae6f352b3782140f9245c59cb01ab1d31f49"
+                "reference": "d1251d30eb7ae230fa8da40ed943713baaaac641"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/cf14ae6f352b3782140f9245c59cb01ab1d31f49",
-                "reference": "cf14ae6f352b3782140f9245c59cb01ab1d31f49",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/d1251d30eb7ae230fa8da40ed943713baaaac641",
+                "reference": "d1251d30eb7ae230fa8da40ed943713baaaac641",
                 "shasum": ""
             },
             "require": {
@@ -943,7 +1144,7 @@
                 "module",
                 "php"
             ],
-            "time": "2017-05-19T13:35:13+00:00"
+            "time": "2017-06-28T09:41:18+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1145,22 +1346,22 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.1",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
+                "reference": "46f7e8bb075036c92695b15a1ddb6971c751e585"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
-                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/46f7e8bb075036c92695b15a1ddb6971c751e585",
+                "reference": "46f7e8bb075036c92695b15a1ddb6971c751e585",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
                 "phpdocumentor/reflection-common": "^1.0@dev",
-                "phpdocumentor/type-resolver": "^0.2.0",
+                "phpdocumentor/type-resolver": "^0.4.0",
                 "webmozart/assert": "^1.0"
             },
             "require-dev": {
@@ -1186,24 +1387,24 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-09-30T07:12:33+00:00"
+            "time": "2017-07-15T11:38:20+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "0.2.1",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb"
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
-                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/9c977708995954784726e25d0cd1dddf4e65b0f7",
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
+                "php": "^5.5 || ^7.0",
                 "phpdocumentor/reflection-common": "^1.0"
             },
             "require-dev": {
@@ -1233,7 +1434,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2016-11-25T06:54:22+00:00"
+            "time": "2017-07-14T14:27:02+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1626,16 +1827,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.1.4",
+            "version": "6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "42b7f394a8e009516582331b1e03a1aba40175d1"
+                "reference": "fa5711d0559fc4b64deba0702be52d41434cbcb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/42b7f394a8e009516582331b1e03a1aba40175d1",
-                "reference": "42b7f394a8e009516582331b1e03a1aba40175d1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fa5711d0559fc4b64deba0702be52d41434cbcb7",
+                "reference": "fa5711d0559fc4b64deba0702be52d41434cbcb7",
                 "shasum": ""
             },
             "require": {
@@ -1680,7 +1881,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.1.x-dev"
+                    "dev-master": "6.2.x-dev"
                 }
             },
             "autoload": {
@@ -1706,20 +1907,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-05-22T07:45:30+00:00"
+            "time": "2017-07-03T15:54:24+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "eabce450df194817a7d7e27e19013569a903a2bf"
+                "reference": "d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/eabce450df194817a7d7e27e19013569a903a2bf",
-                "reference": "eabce450df194817a7d7e27e19013569a903a2bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4",
+                "reference": "d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4",
                 "shasum": ""
             },
             "require": {
@@ -1765,7 +1966,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2017-03-03T06:30:20+00:00"
+            "time": "2017-06-30T08:15:21+00:00"
         },
         {
             "name": "psr/log",
@@ -2035,16 +2236,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "3.0.3",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3"
+                "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3",
-                "reference": "02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/cd0871b3975fb7fc44d11314fd1ee20925fce4f5",
+                "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5",
                 "shasum": ""
             },
             "require": {
@@ -2056,7 +2257,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -2081,7 +2282,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2017-05-18T10:10:00+00:00"
+            "time": "2017-07-01T08:51:00+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -2433,16 +2634,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.3.0-RC1",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "a20ae356da7674117f77bab604d9af11fe57d97d"
+                "reference": "a094618deb9a3fe1c3cf500a796e167d0495a274"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/a20ae356da7674117f77bab604d9af11fe57d97d",
-                "reference": "a20ae356da7674117f77bab604d9af11fe57d97d",
+                "url": "https://api.github.com/repos/symfony/config/zipball/a094618deb9a3fe1c3cf500a796e167d0495a274",
+                "reference": "a094618deb9a3fe1c3cf500a796e167d0495a274",
                 "shasum": ""
             },
             "require": {
@@ -2450,10 +2651,12 @@
                 "symfony/filesystem": "~2.8|~3.0"
             },
             "conflict": {
-                "symfony/dependency-injection": "<3.3"
+                "symfony/dependency-injection": "<3.3",
+                "symfony/finder": "<3.3"
             },
             "require-dev": {
                 "symfony/dependency-injection": "~3.3",
+                "symfony/finder": "~3.3",
                 "symfony/yaml": "~3.0"
             },
             "suggest": {
@@ -2489,20 +2692,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-03T13:21:08+00:00"
+            "time": "2017-06-16T12:40:34+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v3.3.0-RC1",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "bdbaaa623c914a4654450452351c45857708dbcf"
+                "reference": "a97e45d98c59510f085fa05225a1acb74dfe0546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/bdbaaa623c914a4654450452351c45857708dbcf",
-                "reference": "bdbaaa623c914a4654450452351c45857708dbcf",
+                "url": "https://api.github.com/repos/symfony/console/zipball/a97e45d98c59510f085fa05225a1acb74dfe0546",
+                "reference": "a97e45d98c59510f085fa05225a1acb74dfe0546",
                 "shasum": ""
             },
             "require": {
@@ -2515,6 +2718,7 @@
             },
             "require-dev": {
                 "psr/log": "~1.0",
+                "symfony/config": "~3.3",
                 "symfony/dependency-injection": "~3.3",
                 "symfony/event-dispatcher": "~2.8|~3.0",
                 "symfony/filesystem": "~2.8|~3.0",
@@ -2557,20 +2761,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-15T12:04:53+00:00"
+            "time": "2017-07-03T13:19:36+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.0-RC1",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "2a237220d7d24a4ac867f701fe07320f341b2454"
+                "reference": "63b85a968486d95ff9542228dc2e4247f16f9743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/2a237220d7d24a4ac867f701fe07320f341b2454",
-                "reference": "2a237220d7d24a4ac867f701fe07320f341b2454",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/63b85a968486d95ff9542228dc2e4247f16f9743",
+                "reference": "63b85a968486d95ff9542228dc2e4247f16f9743",
                 "shasum": ""
             },
             "require": {
@@ -2613,20 +2817,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-20T17:12:40+00:00"
+            "time": "2017-07-05T13:02:37+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.20",
+            "version": "v2.8.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "7fc8e2b4118ff316550596357325dfd92a51f531"
+                "reference": "1377400fd641d7d1935981546aaef780ecd5bf6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/7fc8e2b4118ff316550596357325dfd92a51f531",
-                "reference": "7fc8e2b4118ff316550596357325dfd92a51f531",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/1377400fd641d7d1935981546aaef780ecd5bf6d",
+                "reference": "1377400fd641d7d1935981546aaef780ecd5bf6d",
                 "shasum": ""
             },
             "require": {
@@ -2673,20 +2877,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-26T16:56:54+00:00"
+            "time": "2017-06-02T07:47:27+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.3.0-RC1",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "cf1e3a0c50c0d30b40be8996df55c8b05b704ccc"
+                "reference": "427987eb4eed764c3b6e38d52a0f87989e010676"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/cf1e3a0c50c0d30b40be8996df55c8b05b704ccc",
-                "reference": "cf1e3a0c50c0d30b40be8996df55c8b05b704ccc",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/427987eb4eed764c3b6e38d52a0f87989e010676",
+                "reference": "427987eb4eed764c3b6e38d52a0f87989e010676",
                 "shasum": ""
             },
             "require": {
@@ -2722,20 +2926,20 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-11T16:47:52+00:00"
+            "time": "2017-07-11T07:17:58+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4"
+                "reference": "f29dca382a6485c3cbe6379f0c61230167681937"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/e79d363049d1c2128f133a2667e4f4190904f7f4",
-                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f29dca382a6485c3cbe6379f0c61230167681937",
+                "reference": "f29dca382a6485c3cbe6379f0c61230167681937",
                 "shasum": ""
             },
             "require": {
@@ -2747,7 +2951,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -2781,11 +2985,11 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2017-06-09T14:24:12+00:00"
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v3.3.0-RC1",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
@@ -2834,16 +3038,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.0-RC1",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "924d16e27b592d8bb8aa8ef531005a3f564f64e7"
+                "reference": "1f93a8d19b8241617f5074a123e282575b821df8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/924d16e27b592d8bb8aa8ef531005a3f564f64e7",
-                "reference": "924d16e27b592d8bb8aa8ef531005a3f564f64e7",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/1f93a8d19b8241617f5074a123e282575b821df8",
+                "reference": "1f93a8d19b8241617f5074a123e282575b821df8",
                 "shasum": ""
             },
             "require": {
@@ -2885,7 +3089,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-15T12:04:53+00:00"
+            "time": "2017-06-15T12:58:50+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -2928,21 +3132,72 @@
             "time": "2017-04-07T12:08:54+00:00"
         },
         {
-            "name": "twig/twig",
-            "version": "v1.33.2",
+            "name": "twbs/bootstrap",
+            "version": "4.0.0-alpha.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927"
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "65ffb1c3b6e94440812a2e228cb8e8be512652ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd6ca96227917e1e85b41c7c3cc6507b411e0927",
-                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/65ffb1c3b6e94440812a2e228cb8e8be512652ec",
+                "reference": "65ffb1c3b6e94440812a2e228cb8e8be512652ec",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "https://getbootstrap.com",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "web"
+            ],
+            "time": "2017-01-06T16:41:52+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.34.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "f878bab48edb66ad9c6ed626bf817f60c6c096ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f878bab48edb66ad9c6ed626bf817f60c6c096ee",
+                "reference": "f878bab48edb66ad9c6ed626bf817f60c6c096ee",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.7"
+                "php": ">=5.3.3"
             },
             "require-dev": {
                 "psr/container": "^1.0",
@@ -2952,12 +3207,15 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.33-dev"
+                    "dev-master": "1.34-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2987,7 +3245,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-04-20T17:39:48+00:00"
+            "time": "2017-07-04T13:19:31+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -3043,7 +3301,8 @@
     "aliases": [],
     "minimum-stability": "RC",
     "stability-flags": {
-        "luyadev/luya-module-cms": 20
+        "luyadev/luya-module-cms": 20,
+        "twbs/bootstrap": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

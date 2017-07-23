@@ -67,8 +67,10 @@ final class LayoutBlock extends PhpBlock
                 ['var' => 'rowDivClass', 'label' => Module::t('block_layout_row_column_css_class'), 'type' => 'zaa-text'],
             ],
             'placeholders' => [
-                ['var' => 'left', 'label' => Module::t('block_layout_placeholders_left')],
-                ['var' => 'right', 'label' => Module::t('block_layout_placeholders_right')],
+                [
+                    ['var' => 'left', 'cols' => 10, 'label' => Module::t('block_layout_placeholders_left')],
+                    ['var' => 'right', 'cols' => 2, 'label' => Module::t('block_layout_placeholders_right')],
+                ]
             ],
         ];
     }

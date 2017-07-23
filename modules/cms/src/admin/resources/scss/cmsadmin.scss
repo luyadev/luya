@@ -1,44 +1,32 @@
-@import 'base/variables';
+// ==================================================
+// Variables
+// ==================================================
 
+@import "../../../../../admin/src/resources/scss/variables/colors";
+@import "../../../../../admin/src/resources/scss/variables/bootstrap";
+@import "../../../../../admin/src/resources/scss/variables/flags";
 
-/**
- * Prefix every module style with the module class
- */
-.module-cmsadmin {
-    /**
-	 * #HELPERS
-	 *		clearfix:		Clearfix mixin
- 	 */
-    @import 'helpers/clearfix';
-    /**
-	 * #COMPONENTS
-	 *		block:			Block styles
-	 *		blockholder:	Styles for the blockholder
-	 *		cms				CMS basic styles (Columns etc)
-	 *		collapsible:	Accordion styles
-     * 		page:			Styles for the page in the cms admin
-     *		treeview:		Styles for the treeview
- 	 */
+// ==================================================
+// Include Bootstrap
+// ==================================================
 
-	@import "components/accordion";
-	@import "components/block";
-	@import "components/blockholder";
-	@import "components/cms";
-	@import "components/collapsible";
-	@import "components/liveedit";
-	@import "components/page";
-    @import 'components/permissions';
-	@import "components/treeview";
-	@import "components/wysiwyg";
-}
+@import "../../../../../admin/vendor/twbs/bootstrap/scss/variables";
 
-/**
- * Prefix every module style with the module class
- */
-.block-styles {
+// ==================================================
+// Helpers
+// ==================================================
 
-	@import "block-styles/base";
-	@import "block-styles/titles";
-	@import "block-styles/text";
+@import "../../../../../admin/src/resources/scss/helpers/google-chrome-font-offset-fix";
+@import "../../../../../admin/src/resources/scss/helpers/overflow-no-scrollbars";
 
-}
+// ==================================================
+// Components
+// ==================================================
+
+@import "components/block";
+@import "components/blockholder";
+@import "components/cmsadmin";
+@import "components/cmsnav";
+@import "components/empty-placeholder";
+@import "components/menu-dropdown";
+@import "components/treeview";

@@ -55,6 +55,7 @@ class AdminController extends \luya\admin\base\RestController
                 $blocks[] = [
                     'id' => $block['id'],
                     'name' => $obj->name(),
+                	'icon' => $obj->icon(),
                     'full_name' => ($obj->icon() === null) ? $obj->name() : '<i class="material-icons">'.$obj->icon().'</i> <span>'.$obj->name().'</span>',
                     'favorized' => array_key_exists($block['id'], $favs),
                 ];

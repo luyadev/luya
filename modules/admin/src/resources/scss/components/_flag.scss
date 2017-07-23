@@ -9,22 +9,22 @@
 	position: relative;
 	display: inline-block;
 	width: (4 / 3) * 1em;
-	line-height: 1em;
+	line-height: 1.5em;
 
 	&:before {
 		content: '\00a0';
 	}
 
-	&.flag--squared {
+	&.flag-squared {
 		width: 1em;
 	}
 
-	$allEnabledFlags: "";
-	@each $lang, $flag in $enabled-flags {
-		$allEnabledFlags: $allEnabledFlags + ":not(.flag--#{$lang})";
+	$allFlags: "";
+	@each $lang, $flag in $flags {
+		$allFlags: $allFlags + ":not(.flag-#{$lang})";
 	}
 
-	&#{$allEnabledFlags} {
+	&#{$allFlags} {
 		width: auto;
 		line-height: inherit;
 
@@ -32,18 +32,18 @@
 			display: none;
 		}
 
-		.flag__fallback {
+		.flag-fallback {
 			display: block;
 		}
 	}
 }
 
-.flag__fallback {
+.flag-fallback {
 	display: none;
 	text-transform: uppercase;
 
-	&.flag__fallback--colorized {
-		color: color("blue", "base");
+	&.flag-fallback-colorized {
+		color: $brand-primary;
 	}
 }
 
@@ -52,14 +52,14 @@
 		$lang: $country;
 	}
 
-	.flag--#{$lang} {
+	.flag-#{$lang} {
 		background-image: url(#{$flag-icon-css-path}#{$flag-icon-rect-path}/#{$country}.svg);
-		&.flag--squared {
+		&.flag-squared {
 			background-image: url(#{$flag-icon-css-path}#{$flag-icon-square-path}/#{$country}.svg);
 		}
 	}
 }
 
-@each $lang, $flag in $enabled-flags {
+@each $lang, $flag in $flags {
 	@include flag($flag, $lang);
 }

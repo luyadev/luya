@@ -1,0 +1,12 @@
+@mixin google-chrome-font-offset-fix {
+
+    @media (-webkit-min-device-pixel-ratio: 0) {
+        margin-top: 2px;
+    }
+
+}
+
+.google-chrome-font-offset-fix {
+    display: inline-block;
+    @include google-chrome-font-offset-fix;
+}

@@ -8,6 +8,7 @@ use luya\helpers\FileHelper;
 use luya\cms\models\Layout;
 use luya\console\Importer;
 use yii\helpers\Inflector;
+use yii\helpers\Json;
 
 /**
  * Import cmslayout files from the folder and analyise placeholders.
@@ -37,43 +38,58 @@ class CmslayoutImporter extends Importer
         $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
         $layoutFiles = [];
         if (file_exists($cmslayouts)) {
-            $files = FileHelper::findFiles($cmslayouts, ['recursive' => false, 'filter' => function ($path) {
-                return !in_array(substr(basename($path), 0, 1), $this->ignorePrefix);
-            }]);
+            $files = FileHelper::findFiles($cmslayouts, [
+                'recursive' => false,
+                'caseSensitive' => false,
+                'only' => ['*.php'],
+                'filter' => function ($path) {
+                    return in_array(substr(basename($path), 0, 1), $this->ignorePrefix) ? false : null;
+                }]);
+            
             foreach ($files as $file) {
                 $fileinfo = FileHelper::getFileInfo($file);
-                
                 $fileBaseName = $fileinfo->name . '.' . $fileinfo->extension;
+
+                $json = false;
+                
+                if (file_exists($fileinfo->sourceFilename. '.json')) {
+                    $json = FileHelper::getFileContent($fileinfo->sourceFilename. '.json');
+                    
+                    try {
+                        $json = Json::decode($json);
+                    } catch (\Exception $e) {
+                        $json = false;
+                    }
+                }
                 
                 $readableFileName = $this->generateReadableName($fileinfo->name);
                 
-                $oldTwigName = $fileinfo->name . '.twig';
-                if ($fileinfo->extension !== 'php') {
-                    throw new Exception("layout file '$file': Since 1.0.0-beta6, cms layouts must be a php file with '<?= \$placeholders['content']; ?>' instead of a twig '{{placeholders.content}}'");
-                }
-                
                 $layoutFiles[] = $fileBaseName;
-                $layoutFiles[] = $oldTwigName;
 
                 $content = file_get_contents($file);
                 
                 preg_match_all("/placeholders\[[\'\"](.*?)[\'\"]\]/", $content, $results);
-                
-                $_placeholders = [];
-                foreach (array_unique($results[1]) as $holderName) {
-                    if (!$this->verifyVariable($holderName)) {
-                        throw new Exception("Wrong variable name detected '".$holderName."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
+
+                if (!$json) {
+                    $placeholder = [];
+                    foreach (array_unique($results[1]) as $holderName) {
+                        if (!$this->verifyVariable($holderName)) {
+                            throw new Exception("Wrong variable name detected '".$holderName."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
+                        }
+                        $placeholder[] = ['label' => $this->generateReadableName($holderName), 'var' => $holderName];
                     }
-                    $_placeholders[] = ['label' => $this->generateReadableName($holderName), 'var' => $holderName];
+                    $_placeholders = ['placeholders' => [$placeholder]];
+                } else {
+                    $_placeholders = ['placeholders' => $json];
                 }
                 
-                $_placeholders = ['placeholders' => $_placeholders];
                 
-                $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName], ['view_file' =>  $oldTwigName]])->one();
+                $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName]])->one();
                 
                 if ($layoutItem) {
                     $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
-                    if ($match) {
+                    $matchRevert = $this->comparePlaceholders(json_decode($layoutItem->json_config, true), $_placeholders);
+                    if ($match && $matchRevert) {
                         $layoutItem->updateAttributes([
                             'name' => $readableFileName,
                             'view_file' => $fileBaseName,

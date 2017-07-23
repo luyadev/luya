@@ -1,17 +1,22 @@
 #loading-bar {
+    background-color: #fff;
+    height: 5px;
     left: 0;
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 50000;
+    z-index: 20000;
+
+    .bar {
+        background-color: $brand-info;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: .25s ease-in-out width;
+    }
 }
 
-#loading-bar .bar {
-    background-color: #fff;
-    height: 4px;
-    transition: 0.25s ease width;
-}
-
-.loading-bar-spinner {
+#loading-bar-spinner {
     display: none;
 }
