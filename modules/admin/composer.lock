@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "382edd604dd05d913716ae62f307045b",
+    "content-hash": "56a875b6835ee9fbb9b4b2d4393b3ec7",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -665,6 +665,115 @@
             "extra": {
                 "bower-asset-main": "./angular-slugify.js"
             }
+        },
+        {
+            "name": "bower-asset/angularjs-datepicker",
+            "version": "2.1.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/720kb/angular-datepicker.git",
+                "reference": "12b53a4088c68c2905f05f000dbbcbb3cb50a974"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/720kb/angular-datepicker/zipball/12b53a4088c68c2905f05f000dbbcbb3cb50a974",
+                "reference": "12b53a4088c68c2905f05f000dbbcbb3cb50a974",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./dist/angular-datepicker.css",
+                    "./dist/angular-datepicker.js",
+                    "./dist/angular-datepicker.sourcemap.map"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A datepicker directive for angularjs.",
+            "keywords": [
+                "angular",
+                "angularjs",
+                "date",
+                "datepicker",
+                "input",
+                "input"
+            ]
+        },
+        {
+            "name": "bower-asset/ng-file-upload",
+            "version": "12.2.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danialfarid/ng-file-upload-bower.git",
+                "reference": "4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danialfarid/ng-file-upload-bower/zipball/4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
+                "reference": "4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">1.2.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "ng-file-upload.js",
+                "bower-asset-ignore": []
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Lightweight Angular JS directive to upload files. Support drag&drop, paste image, progress and abort"
+        },
+        {
+            "name": "bower-asset/ui-router",
+            "version": "0.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular-ui/ui-router.git",
+                "reference": "ef5ce80fa6ec8a2c6a87cf1cf1c5809e1950af11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular-ui/ui-router/zipball/ef5ce80fa6ec8a2c6a87cf1cf1c5809e1950af11",
+                "reference": "ef5ce80fa6ec8a2c6a87cf1cf1c5809e1950af11",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">=1.0.8,<2.0.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./release/angular-ui-router.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "component.json",
+                    "package.json",
+                    "lib",
+                    "config",
+                    "sample",
+                    "test",
+                    "tests",
+                    "ngdoc_assets",
+                    "Gruntfile.js",
+                    "files.js"
+                ]
+            },
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "curl/curl",
