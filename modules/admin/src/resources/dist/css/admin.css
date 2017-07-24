@@ -10719,6 +10719,11 @@ input[type="radio"] {
 .tab-padding-right {
   padding-right: 15px !important; }
 
+.nav-link {
+  cursor: pointer; }
+  .nav-link:hover, .nav-link .active:hover {
+    cursor: pointer; }
+
 .nav-item-alternative {
   margin-left: 10px; }
   .nav-item-alternative .nav-link {
@@ -10741,6 +10746,7 @@ input[type="radio"] {
       width: 0; }
   .nav-item-alternative .nav-link.active,
   .nav-item-alternative .nav-link:hover {
+    cursor: pointer;
     background-color: transparent;
     border: none; }
     .nav-item-alternative .nav-link.active:after,

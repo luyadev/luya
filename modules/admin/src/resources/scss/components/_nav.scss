@@ -25,6 +25,14 @@
     padding-right: $nav-link-padding-horizontal !important;
 }
 
+.nav-link {
+    cursor: pointer;
+
+    &:hover, .active:hover {
+        cursor: pointer;
+    }
+}
+
 .nav-item-alternative {
     margin-left: 10px;
 
@@ -49,6 +57,7 @@
 
     .nav-link.active,
     .nav-link:hover {
+        cursor: pointer;
         background-color: transparent;
         border: none;
 
