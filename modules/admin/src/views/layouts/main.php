@@ -179,6 +179,8 @@ $this->beginPage()
     </div>
 </div>
 
+<?= $this->render('_loadingscreen.php', ["hideOnLoad" => true]); ?>
+
 <?php $this->endBody() ?>
 </body>
 </html>

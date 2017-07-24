@@ -14,4 +14,5 @@
             <?php $this->endBody() ?>
         </body>
     </html>
+<?= $this->render('_loadingscreen.php', ["hideOnLoad" => true]); ?>
 <?php $this->endPage() ?>
