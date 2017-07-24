@@ -301,11 +301,13 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $data = [];
         
         foreach (self::find()->select(['nav_id', 'title'])->orWhere(['like', 'title', $searchQuery])->with('nav')->distinct()->each() as $item) {
-            $data[] = [
-                'title' => $item->title,
-                'nav_id' => $item->nav_id,
-                'container' => $item->nav->navContainer->name,
-            ];
+            if ($item->nav) {
+                $data[] = [
+                    'title' => $item->title,
+                    'nav_id' => $item->nav_id,
+                    'container' => $item->nav->navContainer->name,
+                ];
+            }
         }
         
         return $data;

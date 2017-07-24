@@ -915,11 +915,15 @@
 	    $scope.searchInputOpen = false;
 	
 	    $scope.escapeSearchInput = function() {
-	        if( $scope.searchInputOpen ) {
+	        if ($scope.searchInputOpen) {
 	            $scope.closeSearchInput();
 	        }
 	    };
 	
+	    $scope.toggleSearchInput = function() {
+	    	$scope.searchInputOpen = !$scope.searchInputOpen;
+	    };
+	    
 	    $scope.openSearchInput = function() {
 	        $scope.searchInputOpen = true;
 	    };

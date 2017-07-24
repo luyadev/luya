@@ -32,8 +32,8 @@ $this->beginPage()
         <div class="mainnav" ng-class="{'mainnav-small' : !isHover}">
             <div class="mainnav-static">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right" ng-click="openSearchInput()">
-                        <span class="mainnav-link" href="#">
+                    <li class="mainnav-entry" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
+                        <span class="mainnav-link" ng-click="toggleSearchInput()">
                             <i class="mainnav-icon material-icons">search</i>
                             <span class="mainnav-label">
                                 Search
@@ -116,9 +116,7 @@ $this->beginPage()
         </div>
      </div>
     <div class="luya-main" ui-view></div>
-
-    <!-- Search sidebar panel -->
-    <div class="luya-search luya-search-open"> <!-- toggle class "luya-search-closed" and "luya-search-open" -->
+    <div class="luya-search" ng-class="{'luya-search-open' : searchInputOpen, 'luya-search-closed': !searchInputOpen}" zaa-esc="escapeSearchInput()">
         <div class="luya-search-inner">
             <div class="luya-search-form form-group">
                 <input id="global-search-input" ng-model="searchQuery" type="search" class="luya-search-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>
@@ -128,74 +126,20 @@ $this->beginPage()
             </div>
 
             <div class="luya-search-results">
-                <div class="luya-search-result">
-                    <div class="luya-search-result-title"><i class="material-icons">edit</i>&nbsp;<span>Page Content</span>
+                <div class="luya-search-result" ng-repeat="item in searchResponse">
+                    <div class="luya-search-result-title"><i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
                         <i class="material-icons luya-search-toggler luya-search-toggler-open">chevron_right</i>  <!-- toggle class "luya-search-toggler-open" and "luya-search-toggler-close" -->
                     </div>
 
                     <div class="luya-search-table-wrapper">
                         <table class="luya-search-table">
-                            <tr>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Age</th>
-                                <th>Olle</th>
-                                <th>Molle</th>
-                                <th>Mudda</th>
+                            <tr ng-repeat="row in item.data | limitTo:1">
+                                <th ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{k}}</th>
                             </tr>
-                            <tr>
-                                <td>Jill</td>
-                                <td>Smith</td>
-                                <td>50</td>
-                                <td>50</td>
-                                <td>50</td>
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <td>Eve</td>
-                                <td>Jackson</td>
-                                <td>94</td>
-                                <td>94</td>
-                                <td>94</td>
-                                <td>94</td>
+                            <tr ng-repeat="row in item.data" ng-click="searchDetailClick(item, row)">
+                                <td ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{v}}</td>
                             </tr>
                         </table>
-                    </div>
-                </div>
-                <!-- next result -->
-                <div class="luya-search-result">
-                    <div class="luya-search-result-title"><i class="material-icons">edit</i>&nbsp;<span>Page Content</span>
-                        <i class="material-icons luya-search-toggler luya-search-toggler-closed">chevron_right</i>
-                        <span class="luya-search-result-counter">5</span><span class="luya-search-result-counter-100 ng-hide">+</span> <!-- toggle class "luya-search-toggler-open" and "luya-search-toggler-close" -->
-                    </div>
-                    <div class="luya-search-table-wrapper">
-                        <table class="luya-search-table">
-                            <tr>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Age</th>
-                                <th>Olle</th>
-                                <th>Molle</th>
-                                <th>Mudda</th>
-                            </tr>
-                            <tr>
-                                <td>Jill</td>
-                                <td>Smith</td>
-                                <td>50</td>
-                                <td>50</td>
-                                <td>50</td>
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <td>Eve</td>
-                                <td>Jackson</td>
-                                <td>94</td>
-                                <td>94</td>
-                                <td>94</td>
-                                <td>94</td>
-                            </tr>
-                        </table>
-                    </div>
                     </div>
                 </div>
             </div>
