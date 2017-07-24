@@ -1,7 +1,6 @@
 <?php
 use luya\admin\Module;
 ?>
-
 <div class="login-frame">
     <div class="login-panel-left">
         <div class="login-logo"></div>
