@@ -83,24 +83,14 @@ $this->beginPage()
                     </li>
                      -->
                     <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_useronline'); ?>" tooltip-offset-top="5" tooltip-position="right">
-                        <a class="mainnav-link" href="#">
+                        <span class="mainnav-link">
                             <i class="mainnav-icon material-icons">panorama_fish_eye</i>
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_useronline'); ?>
                             </span>
-                            <span class="mainnav-user-online">3</span>
-                        </a>
+                            <span class="mainnav-user-online">{{notify.length}}</span>
+                        </span>
                     </li>
-                    <!-- 
-                    <li class="mainnav-entry">
-                        <a class="mainnav-link" href="<?= Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>">
-                            <i class="mainnav-icon material-icons">exit_to_app</i>
-                            <span class="mainnav-label">
-                                <?= Admin::t('layout_btn_logout'); ?>
-                            </span>
-                        </a>
-                    </li>
-                    -->
                     <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-offset-top="5" tooltip-position="right">
                         <a class="mainnav-link" ui-sref="custom({templateId:'admin/account/dashboard'})">
                             <i class="mainnav-icon material-icons">account_circle</i>
