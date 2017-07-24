@@ -5,7 +5,7 @@ namespace luya\errorapi;
 use Yii;
 use luya\base\CoreModuleInterface;
 
-class Module extends \luya\base\Module implements CoreModuleInterface
+final class Module extends \luya\base\Module implements CoreModuleInterface
 {
     public $recipient = [];
 

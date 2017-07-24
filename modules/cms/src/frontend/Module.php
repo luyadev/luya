@@ -16,7 +16,7 @@ use luya\cms\models\Config;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
+final class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
 {
     /**
      * @var array We have no urlRules in cms Module. the UrlRoute file will only be used when

@@ -7,7 +7,7 @@ namespace luya\news\frontend;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module
+final class Module extends \luya\base\Module
 {
     /**
      * @var boolean use the application view folder

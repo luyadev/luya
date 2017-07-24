@@ -7,7 +7,7 @@ namespace luya\gallery\frontend;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module
+final class Module extends \luya\base\Module
 {
     /**
      * @var boolean This module does not have view files, so the view are looked up in the application folder.

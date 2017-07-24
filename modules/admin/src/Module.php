@@ -34,7 +34,7 @@ use luya\admin\importers\StorageImporter;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\admin\base\Module implements CoreModuleInterface
+final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * This event gets trigger before some trys to download a file.

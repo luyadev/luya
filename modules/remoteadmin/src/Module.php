@@ -10,7 +10,7 @@ use luya\admin\components\AdminMenuBuilder;
  * @author Basil Suter <basil@nadar.io>
  *
  */
-class Module extends \luya\admin\base\Module implements CoreModuleInterface
+final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     public $apis = [
         'api-remote-site' => 'luya\remoteadmin\apis\SiteController',

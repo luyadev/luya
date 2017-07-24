@@ -4,7 +4,7 @@ namespace luya\account\admin;
 
 use luya\admin\components\AdminMenuBuilder;
 
-class Module extends \luya\admin\base\Module
+final class Module extends \luya\admin\base\Module
 {
     public $apis = [
         'api-account-user' => 'luya\account\admin\apis\UserController',

@@ -11,7 +11,7 @@ use luya\cms\admin\importers\PropertyConsistencyImporter;
 use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminMenuBuilder;
 
-class Module extends \luya\admin\base\Module implements CoreModuleInterface
+final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * @var string The version label name of the first version, version alias is running through yii2 messaging system.

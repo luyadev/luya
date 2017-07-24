@@ -18,7 +18,7 @@ namespace luya\crawler\frontend;
  * @link http://api.symfony.com/2.7/Symfony/Component/DomCrawler.html
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module
+final class Module extends \luya\base\Module
 {
     /**
      * @var boolean This module enables by default to lookup for view files in the apps/views folder.
