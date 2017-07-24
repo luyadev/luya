@@ -6,9 +6,9 @@ use luya\admin\Module;
     <div class="login-panel-left">
         <div class="login-logo"></div>
         <div class="login-system-info">
-            <span class="login-version">
+            <!-- <span class="login-version">
                 <?= Module::t('login_version'); ?>
-            </span>
+            </span> -->
         </div>
     </div>
     <div class="login-panel-right">
@@ -30,9 +30,9 @@ use luya\admin\Module;
                 <div class="login-form-field">
                     <input class="login-input" id="password" name="login[password]" type="password" tabindex="2" required />
                     <label for="password" class="login-input-label"><?= Module::t('login_password'); ?></label>
-                    <a href="#" class="login-reset login-link">
+                    <!-- <a href="#" class="login-reset login-link" >
                         Passwort vergessen?
-                    </a>
+                    </a> -->
                 </div>
                 <div class="login-buttons">
                     <button class="login-btn" type="submit"  tabindex="3">
