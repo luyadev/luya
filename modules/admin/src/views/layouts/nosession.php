@@ -10,9 +10,9 @@
         </head>
         <body class="login-screen">
             <?php $this->beginBody() ?>
-                <?php echo $content; ?>
+                <?= $content; ?>
+				<?= $this->render('_loadingscreen.php', ["hideOnLoad" => true]); ?>
             <?php $this->endBody() ?>
         </body>
     </html>
-<?= $this->render('_loadingscreen.php', ["hideOnLoad" => true]); ?>
 <?php $this->endPage() ?>

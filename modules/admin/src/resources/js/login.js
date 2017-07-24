@@ -31,6 +31,7 @@ var observeLogin = function(form, url, secureUrl) {
 				}
 				
 				if (refresh) {
+					$('#luya-loading-overlay').show();
                     $('#secureForm').hide();
                     $('#loginForm').hide();
                     $('#success').show();
@@ -59,10 +60,11 @@ var observeLogin = function(form, url, secureUrl) {
 				}
 				
 				if (refresh) {
+					$('#luya-loading-overlay').show();
                     $('#secureForm').hide();
                     $('#loginForm').hide();
 					$('#success').show();
-                    location.reload();
+					location.reload();
 				}
 			},
 			dataType: "json"
@@ -70,7 +72,8 @@ var observeLogin = function(form, url, secureUrl) {
 	});
 	
 	$('#abortToken').click(function(e) {
-        $('.spinner').hide(); $('.submit-icon').show();
+        $('.spinner').hide(); 
+        $('.submit-icon').show();
 		$('#errorsContainer').hide();
 		$('#secureForm').hide();
 		$('#loginForm').show();

@@ -1,7 +1,6 @@
 <?php
 use luya\admin\Module as Admin;
 use luya\helpers\Url;
-use yii\helpers\Markdown;
 
 $user = Yii::$app->adminuser->getIdentity();
 $this->beginPage()
@@ -179,7 +178,7 @@ $this->beginPage()
     </div>
 </div>
 
-<?= $this->render('_loadingscreen.php', ["hideOnLoad" => true]); ?>
+<?= $this->render('_loadingscreen.php', ["hideOnLoad" => false]); ?>
 
 <?php $this->endBody() ?>
 </body>
