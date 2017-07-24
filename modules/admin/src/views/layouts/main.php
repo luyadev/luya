@@ -88,6 +88,7 @@ $this->beginPage()
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_useronline'); ?>
                             </span>
+                            <span class="mainnav-user-online">3</span>
                         </a>
                     </li>
                     <!-- 

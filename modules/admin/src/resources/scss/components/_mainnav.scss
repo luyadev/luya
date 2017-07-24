@@ -133,3 +133,13 @@
         display: none;
     }
 }
+
+.mainnav-user-online {
+    position: absolute;
+    padding-top: 2px;
+
+    font-size: 13px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
