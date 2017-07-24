@@ -10741,6 +10741,7 @@ input[type="radio"] {
       width: 0; }
   .nav-item-alternative .nav-link.active,
   .nav-item-alternative .nav-link:hover {
+    cursor: pointer;
     background-color: transparent;
     border: none; }
     .nav-item-alternative .nav-link.active:after,
