@@ -9903,7 +9903,7 @@ input[type="radio"] {
       -webkit-transition: .25s ease-in-out border;
       transition: .25s ease-in-out border;
       width: 16px;
-      z-index: 1000;
+      z-index: 40;
       top: 3px; }
   input[type="radio"]:checked + label:before {
     border-width: 8px; }
@@ -10402,6 +10402,158 @@ input[type="radio"] {
     padding: 0; }
   .luya-subnav.overlaying + .luya-content {
     padding-left: 50px; }
+
+.luya-search {
+  position: absolute;
+  display: block;
+  width: 640px;
+  max-width: 100%;
+  top: 0;
+  bottom: 0;
+  background: white;
+  z-index: 45;
+  padding-left: 62px;
+  -webkit-transition: .25s left ease-in-out;
+  transition: .25s left ease-in-out;
+  box-shadow: 0 0 10px -2px #292b2c; }
+  @media (min-width: 992px) {
+    .luya-search {
+      width: 70%; } }
+  .luya-search-closed {
+    left: -100%; }
+  .luya-search-open {
+    left: 0; }
+  .luya-search-inner {
+    padding: 20px; }
+
+.luya-search-form {
+  position: relative;
+  background: #eceeef;
+  padding: 10px; }
+
+.luya-search-input {
+  width: calc(100% - 50px);
+  max-width: 100%; }
+
+.luya-search-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 31px;
+  height: 37px;
+  padding: 7px;
+  cursor: pointer;
+  -webkit-transition: .25s color ease-in-out;
+  transition: .25s color ease-in-out;
+  background: #fff;
+  line-height: 1em; }
+  .luya-search-close:hover {
+    color: #FF006B; }
+  .luya-search-close-icon {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
+
+.luya-search-results {
+  position: relative; }
+
+.luya-search-result {
+  background: #eceeef;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 15px; }
+
+.luya-search-result-title {
+  color: #292b2c;
+  display: block;
+  font-size: 20px;
+  font-size: 1.33333rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  position: relative; }
+
+.luya-search-toggler {
+  background: #fff;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: -webkit-transform .25s ease-in-out;
+  transition: -webkit-transform .25s ease-in-out;
+  transition: transform .25s ease-in-out;
+  transition: transform .25s ease-in-out, -webkit-transform .25s ease-in-out;
+  cursor: pointer;
+  padding: 5px;
+  color: inherit;
+  -webkit-transition: .25s color ease-in-out;
+  transition: .25s color ease-in-out; }
+  .luya-search-toggler:hover {
+    color: #FF006B; }
+  .luya-search-toggler-open {
+    -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+            transform: rotate(90deg); }
+  .luya-search-toggler-closed {
+    -webkit-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+            transform: rotate(-90deg); }
+
+.luya-search-result-counter {
+  position: absolute;
+  right: -7px;
+  top: -7px;
+  font-size: 9px;
+  font-size: 0.6rem;
+  padding: 1px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #292b2c;
+  color: #fff;
+  text-align: center; }
+
+.luya-search-result-counter-100 {
+  color: #000;
+  position: absolute;
+  right: -18px;
+  top: -16px;
+  font-size: 9px;
+  font-size: 0.6rem;
+  padding: 1px;
+  text-align: right;
+  font-size: 16px;
+  font-size: 1.06667rem;
+  font-weight: 400; }
+
+.luya-search-table-wrapper {
+  overflow-x: auto;
+  margin-top: 10px;
+  padding: 5px; }
+
+.luya-search-table {
+  width: 100%; }
+  .luya-search-table td {
+    min-width: 100px;
+    -webkit-transition: .25s padding ease-in-out;
+    transition: .25s padding ease-in-out; }
+  .luya-search-table tr {
+    line-height: 35px;
+    line-height: 2.33333rem;
+    cursor: pointer;
+    -webkit-transition: .25s background ease-in-out, .25s color ease-in-out;
+    transition: .25s background ease-in-out, .25s color ease-in-out; }
+    .luya-search-table tr:hover {
+      background: #FF006B;
+      color: #fff; }
+      .luya-search-table tr:hover:first-of-type {
+        background: none;
+        color: #000; }
+      .luya-search-table tr:hover td:first-of-type {
+        padding-left: 10px; }
 
 .mainnav {
   background: -webkit-linear-gradient(bottom, #232526, #35383D);

@@ -69,3 +69,175 @@
 
     -ms-overflow-style: none; // IE 10+
 }
+
+.luya-search {
+    position: absolute;
+    display: block;
+    width: 640px;
+    max-width: 100%;
+    top: 0;
+    bottom: 0;
+    background: white;
+    z-index: 45;
+    padding-left: 62px;
+    transition: .25s left ease-in-out;
+    box-shadow: 0 0 10px -2px $gray-dark;
+
+    @include media-breakpoint-up(lg) {
+        width: 70%;
+    }
+
+    &-closed {
+        left: -100%;
+    }
+
+    &-open {
+        left: 0;
+    }
+
+    &-inner {
+        padding: 20px;
+    }
+}
+.luya-search-form {
+    position: relative;
+    background: $gray-lighter;
+    padding: 10px;
+}
+.luya-search-input {
+    width: calc(100% - 50px);
+    max-width: 100%;
+
+}
+
+.luya-search-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 31px;
+    height: 37px;
+    padding: 7px;
+    cursor: pointer;
+    transition: .25s color ease-in-out;
+    background: $white;
+    line-height: 1em;
+
+    &:hover {
+        color: $pink;
+    }
+
+    &-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+.luya-search-results {
+    position: relative;
+}
+
+.luya-search-result {
+    background: $gray-lighter;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.luya-search-result-title {
+    color: $gray-dark;
+    display: block;
+    font-size: 20px;
+    font-family: $font-family-sans-serif;
+    font-weight: 200;
+    position:relative;
+}
+
+.luya-search-toggler {
+    background: $white;
+    position: absolute;
+    right:0;
+    top: 0;
+    transform: translateY(-50%);
+    transition: transform .25s ease-in-out;
+    cursor: pointer;
+    padding: 5px;
+    color: inherit;
+    transition: .25s color ease-in-out;
+
+    &:hover {
+        color: $pink;
+    }
+    
+    &-open {
+
+        transform: rotate(90deg);
+    }
+    &-closed {
+
+        transform: rotate(-90deg);
+    }
+}
+
+.luya-search-result-counter {
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    font-size: 9px;
+    padding:1px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: $gray-dark;
+    color: $white;
+    text-align: center;
+}
+
+.luya-search-result-counter-100 {
+    color: $black;
+    position: absolute;
+    right: -18px;
+    top: -16px;
+    font-size: 9px;
+    padding:1px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.luya-search-table-wrapper {
+    overflow-x: auto;
+    margin-top: 10px;
+    // background: $gray-lightest;
+    padding: 5px;
+}
+
+.luya-search-table {
+    width: 100%;
+    td {
+        min-width: 100px;
+        transition: .25s padding ease-in-out;
+
+    }
+
+    tr {
+        line-height: 35px;
+        cursor: pointer;
+        transition: .25s background ease-in-out, .25s color ease-in-out;
+
+        &:hover {
+            &:first-of-type {
+                background: none;
+                color: $black;
+            }
+            background: $pink;
+            color: $white;
+
+            td {
+                &:first-of-type {
+                    padding-left: 10px;
+                }
+
+            }
+        }
+    }
+}

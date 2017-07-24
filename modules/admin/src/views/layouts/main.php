@@ -32,7 +32,7 @@ $this->beginPage()
         <div class="mainnav" ng-class="{'mainnav-small' : !isHover}">
             <div class="mainnav-static">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
+                    <li class="mainnav-entry" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right" ng-click="openSearchInput()">
                         <span class="mainnav-link" href="#">
                             <i class="mainnav-icon material-icons">search</i>
                             <span class="mainnav-label">
@@ -126,10 +126,94 @@ $this->beginPage()
         </div>
      </div>
     <div class="luya-main" ui-view></div>
+
+    <!-- Search sidebar panel -->
+    <div class="luya-search luya-search-open"> <!-- toggle class "luya-search-closed" and "luya-search-open" -->
+        <div class="luya-search-inner">
+            <div class="luya-search-form form-group">
+                <input id="global-search-input" ng-model="searchQuery" type="search" class="luya-search-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>
+                <div class="luya-search-close">
+                    <i class="material-icons luya-search-close-icon" ng-click="closeSearchInput()">close</i>
+                </div>
+            </div>
+
+            <div class="luya-search-results">
+                <div class="luya-search-result">
+                    <div class="luya-search-result-title"><i class="material-icons">edit</i>&nbsp;<span>Page Content</span>
+                        <i class="material-icons luya-search-toggler luya-search-toggler-open">chevron_right</i>  <!-- toggle class "luya-search-toggler-open" and "luya-search-toggler-close" -->
+                    </div>
+
+                    <div class="luya-search-table-wrapper">
+                        <table class="luya-search-table">
+                            <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Age</th>
+                                <th>Olle</th>
+                                <th>Molle</th>
+                                <th>Mudda</th>
+                            </tr>
+                            <tr>
+                                <td>Jill</td>
+                                <td>Smith</td>
+                                <td>50</td>
+                                <td>50</td>
+                                <td>50</td>
+                                <td>50</td>
+                            </tr>
+                            <tr>
+                                <td>Eve</td>
+                                <td>Jackson</td>
+                                <td>94</td>
+                                <td>94</td>
+                                <td>94</td>
+                                <td>94</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- next result -->
+                <div class="luya-search-result">
+                    <div class="luya-search-result-title"><i class="material-icons">edit</i>&nbsp;<span>Page Content</span>
+                        <i class="material-icons luya-search-toggler luya-search-toggler-closed">chevron_right</i>
+                        <span class="luya-search-result-counter">5</span><span class="luya-search-result-counter-100 ng-hide">+</span> <!-- toggle class "luya-search-toggler-open" and "luya-search-toggler-close" -->
+                    </div>
+                    <div class="luya-search-table-wrapper">
+                        <table class="luya-search-table">
+                            <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Age</th>
+                                <th>Olle</th>
+                                <th>Molle</th>
+                                <th>Mudda</th>
+                            </tr>
+                            <tr>
+                                <td>Jill</td>
+                                <td>Smith</td>
+                                <td>50</td>
+                                <td>50</td>
+                                <td>50</td>
+                                <td>50</td>
+                            </tr>
+                            <tr>
+                                <td>Eve</td>
+                                <td>Jackson</td>
+                                <td>94</td>
+                                <td>94</td>
+                                <td>94</td>
+                                <td>94</td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="toasts" ng-repeat="item in toastQueue">
-
     <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
