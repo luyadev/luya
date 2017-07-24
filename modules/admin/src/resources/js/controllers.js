@@ -943,8 +943,8 @@
 					$scope.searchPromise = $timeout(function() {
 						$http.get('admin/api-admin-search', { params : { query : n}}).then(function(response) {
 							$scope.searchResponse = response.data;
-						})
-					}, 1000)
+						});
+					}, 400)
 				} else {
 	                $scope.searchResponse = null;
 				}
