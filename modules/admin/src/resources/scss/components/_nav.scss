@@ -32,6 +32,7 @@
         border: none;
         padding: 9px 15px;
         position: relative;
+        cursor: pointer;
 
         &:after {
             background-color: $brand-primary;
