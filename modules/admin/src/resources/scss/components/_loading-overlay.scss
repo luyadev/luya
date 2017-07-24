@@ -1,5 +1,5 @@
 .loading-overlay {
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgb(41, 41, 49);
     bottom: 0;
     color: $white;
     left: 0;
@@ -7,6 +7,7 @@
     right: 0;
     top: 0;
     z-index: 50000;
+
 }
 
 .loading-overlay-title {
@@ -15,4 +16,15 @@
     margin: 150px 0 0 0;
     text-align: center;
     color: $white;
+}
+
+.loading-logo {
+    background: url('../../images/luyalogo-animation.gif');
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
 }

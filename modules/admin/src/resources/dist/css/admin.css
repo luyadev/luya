@@ -10088,7 +10088,7 @@ input[type="radio"] {
     -webkit-transform: scaleY(1); } }
 
 .loading-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #292931;
   bottom: 0;
   color: #fff;
   left: 0;
@@ -10104,6 +10104,18 @@ input[type="radio"] {
   margin: 150px 0 0 0;
   text-align: center;
   color: #fff; }
+
+.loading-logo {
+  background: url("../../images/luyalogo-animation.gif");
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+      -ms-transform: translateY(-50%) translateX(-50%);
+          transform: translateY(-50%) translateX(-50%); }
 
 .login-screen {
   background-color: #C21888;
@@ -10173,7 +10185,7 @@ input[type="radio"] {
       min-height: 318px; } }
 
 .login-logo {
-  background: url("../../img/luyalogo-white.svg") top center no-repeat;
+  background: url("../../images/luyalogo-white.svg") top center no-repeat;
   min-height: 110px;
   background-size: contain;
   top: 50%;
