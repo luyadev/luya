@@ -69,6 +69,7 @@
 
     -ms-overflow-style: none; // IE 10+
 }
+/* Search panel styling */
 
 .luya-search {
     position: absolute;
@@ -82,6 +83,7 @@
     padding-left: 62px;
     transition: .25s left ease-in-out;
     box-shadow: 0 0 10px -2px $gray-dark;
+    overflow-y: auto;
 
     @include media-breakpoint-up(lg) {
         width: 70%;
@@ -99,6 +101,7 @@
         padding: 20px;
     }
 }
+
 .luya-search-form {
     position: relative;
     background: $gray-lighter;
@@ -131,6 +134,7 @@
         transform: translateY(-50%);
     }
 }
+
 .luya-search-results {
     position: relative;
 }
@@ -215,7 +219,6 @@
     td {
         min-width: 100px;
         transition: .25s padding ease-in-out;
-
     }
 
     tr {
@@ -236,7 +239,6 @@
                 &:first-of-type {
 
                 }
-
             }
         }
     }
