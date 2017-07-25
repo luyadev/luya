@@ -82,6 +82,7 @@
     padding-left: 62px;
     transition: .25s left ease-in-out;
     box-shadow: 0 0 10px -2px $gray-dark;
+    overflow-y: auto;
 
     @include media-breakpoint-up(lg) {
         width: 70%;

@@ -10427,7 +10427,8 @@ input[type="radio"] {
   padding-left: 62px;
   -webkit-transition: .25s left ease-in-out;
   transition: .25s left ease-in-out;
-  box-shadow: 0 0 10px -2px #292b2c; }
+  box-shadow: 0 0 10px -2px #292b2c;
+  overflow-y: auto; }
   @media (min-width: 992px) {
     .luya-search {
       width: 70%; } }
