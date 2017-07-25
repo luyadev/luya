@@ -170,10 +170,10 @@
     }
 
     tbody {
-        color: $gray-light;
+        color: $gray-lighter;
         th {
             line-height: 20px;
-            border-bottom: 1px solid $gray-light;
+            border-bottom: 1px solid $gray-lighter;
             margin-bottom: 15px;
         }
         th, td {
@@ -200,7 +200,7 @@
             }
 
             &.mainnav-tooltip-big-gray {
-                color: $gray;
+                color: $gray-light;
             }
         }
     }

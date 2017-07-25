@@ -10737,11 +10737,11 @@ input[type="radio"] {
     left: -5px;
     bottom: 15px; }
   .mainnav-tooltip-big tbody {
-    color: #8E8E8E; }
+    color: #eceeef; }
     .mainnav-tooltip-big tbody th {
       line-height: 20px;
       line-height: 1.33333rem;
-      border-bottom: 1px solid #8E8E8E;
+      border-bottom: 1px solid #eceeef;
       margin-bottom: 15px; }
     .mainnav-tooltip-big tbody th, .mainnav-tooltip-big tbody td {
       min-width: 180px;
@@ -10758,7 +10758,7 @@ input[type="radio"] {
       .mainnav-tooltip-big tbody tr.mainnav-tooltip-big-red {
         color: #d9534f; }
       .mainnav-tooltip-big tbody tr.mainnav-tooltip-big-gray {
-        color: #4D4D4D; }
+        color: #8E8E8E; }
 
 .material-icons {
   display: inline-block;

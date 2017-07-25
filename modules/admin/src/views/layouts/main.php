@@ -95,7 +95,7 @@ $this->beginPage()
                                     <th><?= Admin::t('layout_useronline_mail'); ?></th>
                                     <th><?= Admin::t('layout_useronline_activity'); ?></th>
                                   </tr>
-                                  <tr ng-repeat="row in notify" ng-class="{ 'mainnav-tooltip-big-green' : row.is_active, 'mainnav-tooltip-big-red' : !row.is_active }">
+                                  <tr ng-repeat="row in notify" ng-class="{ 'mainnav-tooltip-big-green' : row.is_active, 'mainnav-tooltip-big-gray' : !row.is_active }">
                                     <td>{{row.firstname}} {{row.lastname}}</td>
                                     <td>{{row.email}}</td>
                                     <td class="tooltip-big-activity">
