@@ -81,13 +81,33 @@ $this->beginPage()
                         </a>
                     </li>
                      -->
-                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_useronline'); ?>" tooltip-offset-top="5" tooltip-position="right">
+                    <li class="mainnav-entry">
                         <span class="mainnav-link">
                             <i class="mainnav-icon material-icons">panorama_fish_eye</i>
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_useronline'); ?>
                             </span>
                             <span class="mainnav-user-online">{{notify.length}}</span>
+                            <span class="mainnav-tooltip-big">
+                               <table>
+                                  <tr>
+                                    <th><?= Admin::t('layout_useronline_name'); ?></th>
+                                    <th><?= Admin::t('layout_useronline_mail'); ?></th>
+                                    <th><?= Admin::t('layout_useronline_activity'); ?></th>
+                                  </tr>
+                                  <tr ng-repeat="row in notify" ng-class="{ 'mainnav-tooltip-big-green' : row.is_active, 'mainnav-tooltip-big-red' : !row.is_active }">
+                                    <td>{{row.firstname}} {{row.lastname}}</td>
+                                    <td>{{row.email}}</td>
+                                    <td class="tooltip-big-activity">
+                                        <small ng-hide="row.is_active">
+                                            <span><b>{{row.inactive_since}}</b>&nbsp;<?= Admin::t('layout_useronline_inactive'); ?></span><br />
+                                            <small>{{ row.lock_description }}</small>
+                                        </span>
+                                        <small ng-show="row.is_active">{{ row.lock_description }}</small>
+                                    </td>
+                                  </tr>
+                                </table>
+                            </span>
                         </span>
                     </li>
                     <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-offset-top="5" tooltip-position="right">
