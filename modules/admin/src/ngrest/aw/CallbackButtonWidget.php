@@ -35,7 +35,7 @@ class CallbackButtonWidget extends Widget
     public $label;
     
     /**
-     * @param array $options Define behavior of the button, options are name-value pairs. The following options are available:
+     * @var array $options Define behavior of the button, options are name-value pairs. The following options are available:
      * - closeOnSuccess: boolean, if enabled, the active window will close after successfully sendSuccess() response from callback.
      * - reloadListOnSuccess: boolean, if enabled, the active window will reload the ngrest crud list after success response from callback via sendSuccess().
      * - reloadWindowOnSuccess: boolean, if enabled the active window will reload itself after success (when successResponse is returnd).
