@@ -9,7 +9,7 @@ use yii\console\Exception;
 
 /**
  * Database Migration Too.
- * 
+ *
  * This extends the original yii migration tool by the ability to specify a module name within the create section.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -69,5 +69,4 @@ class MigrateController extends \yii\console\controllers\MigrateController
             return self::EXIT_CODE_NORMAL;
         }
     }
-    
 }

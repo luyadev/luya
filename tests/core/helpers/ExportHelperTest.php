@@ -55,6 +55,11 @@ class ExportHelperTest extends LuyaWebTestCase
         $this->assertEquals('"id"'.PHP_EOL.'"1"'.PHP_EOL.'"2"'. PHP_EOL, ExportHelper::csv($this->getArray(), ['id']));
     }
     
+    public function testCsvArrayExportWithPropertiesAndDifferentArrangedSortedColumns()
+    {
+        $this->assertEquals('"id","name"'.PHP_EOL.'"1","John"'.PHP_EOL.'"2","Jane"'. PHP_EOL, ExportHelper::csv($this->getArray(), ['name', 'id']));
+    }
+    
     public function testCsvArrayExportNoHeader()
     {
         $this->assertEquals('"1","John"'.PHP_EOL.'"2","Jane"'. PHP_EOL, ExportHelper::csv($this->getArray(), [], false));

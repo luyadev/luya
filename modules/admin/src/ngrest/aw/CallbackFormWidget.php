@@ -47,7 +47,7 @@ class CallbackFormWidget extends Widget
      * - buttonClass: string, an optional class for the submit button replaces `btn`.
      * - closeOnSuccess: boolean, if enabled, the active window will close after successfully sendSuccess() response from callback.
      * - reloadListOnSuccess: boolean, if enabled, the active window will reload the ngrest crud list after success response from callback via sendSuccess().
-     * - reloadWindowOnSuccess: boolena, if enabled the active window will reload itself after success (when successResponse is returnd).
+     * - reloadWindowOnSuccess: boolean, if enabled the active window will reload itself after success (when successResponse is returnd).
      */
     public $options = [];
     

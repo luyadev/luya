@@ -17,11 +17,12 @@ use luya\Exception;
 class ExportHelper
 {
     /**
+     * Export an Array or ActiveQuery instance into a CSV formated string.
      *
-     * @param unknown $input
-     * @param array $keys
-     * @param string $header
-     * @return string
+     * @param array|ActiveQueryInterface $input The data to export into a csv
+     * @param array $keys Defines which keys should be packed into the generated CSV. The defined keys does not change the sort behavior of the generated csv.
+     * @param string $header Whether the column name should be set as header inside the csv or not.
+     * @return string The generated CSV as string.
      */
     public static function csv($input, array $keys = [], $header = true)
     {
