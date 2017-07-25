@@ -107,7 +107,6 @@
 .luya-search-input {
     width: calc(100% - 50px);
     max-width: 100%;
-
 }
 
 .luya-search-close {
@@ -228,13 +227,14 @@
             &:first-of-type {
                 background: none;
                 color: $black;
+                cursor: default;
             }
             background: $pink;
             color: $white;
 
             td {
                 &:first-of-type {
-                    padding-left: 10px;
+
                 }
 
             }
