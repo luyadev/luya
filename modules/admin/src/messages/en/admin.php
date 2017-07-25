@@ -142,7 +142,9 @@ return [
     'aws_gallery_images' => 'Album images',
     'layout_useronline_name' => 'Name',
     'layout_useronline_mail' => 'Email',
+    'layout_useronline_activity' => 'Activity',
     'layout_useronline_inactivesince' => 'Inactive since',
+    'layout_useronline_inactive' => 'inactive',
 
 // added translations in 1.0.0-beta6
 
