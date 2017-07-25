@@ -10,7 +10,7 @@ To execute a console command open your Terminal and go into the base directory o
 
 Where *command* is one of the following commands below:
 
-### Available commands
+## Standard commands
 
 Global LUYA commands:
 
