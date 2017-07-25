@@ -69,6 +69,7 @@
 
     -ms-overflow-style: none; // IE 10+
 }
+/* Search panel styling */
 
 .luya-search {
     position: absolute;
@@ -100,6 +101,7 @@
         padding: 20px;
     }
 }
+
 .luya-search-form {
     position: relative;
     background: $gray-lighter;
@@ -132,6 +134,7 @@
         transform: translateY(-50%);
     }
 }
+
 .luya-search-results {
     position: relative;
 }
@@ -216,7 +219,6 @@
     td {
         min-width: 100px;
         transition: .25s padding ease-in-out;
-
     }
 
     tr {
@@ -237,7 +239,6 @@
                 &:first-of-type {
 
                 }
-
             }
         }
     }

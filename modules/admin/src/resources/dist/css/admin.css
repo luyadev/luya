@@ -10415,6 +10415,7 @@ input[type="radio"] {
   .luya-subnav.overlaying + .luya-content {
     padding-left: 50px; }
 
+/* Search panel styling */
 .luya-search {
   position: absolute;
   display: block;
