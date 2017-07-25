@@ -49,7 +49,7 @@ Working with callbacks
 In order to add an Active Window into your NgRest config, you have to add the config in the {{luya\admin\ngrest\base\NgRestModel::ngRestActiveWindows}} method. As the Active Window contains the {{yii\base\Object}} as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `alias` and `icon` public properties. The alias and icon propierties does exist in every Active Window an can always be overwritten.
 
 ```php
-public function ngRestActiveWindows($config)
+public function ngRestActiveWindows()
 {
     return [
         ['class' => \luya\admin\aws\TestActiveWindow::className(), 'alias' => 'My Window Alias', 'icon' => 'extension'],
