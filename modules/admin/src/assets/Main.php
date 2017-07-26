@@ -25,7 +25,7 @@ class Main extends \luya\web\Asset
      * @var array A list of javascript files located in the $sourcePath folder.
      */
     public $js = [
-        'dist/js/main.min.js',
+        'dist/js/main.js',
     ];
 
     /**

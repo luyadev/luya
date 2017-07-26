@@ -16,7 +16,7 @@
 }
 
 .luya-mainnav {
-    z-index: 50;
+    z-index: 100;
 }
 
 .luya-subnav {
@@ -79,7 +79,7 @@
     top: 0;
     bottom: 0;
     background: white;
-    z-index: 45;
+    z-index: 80;
     padding-left: 62px;
     transition: .25s left ease-in-out;
     box-shadow: 0 0 10px -2px $gray-dark;
