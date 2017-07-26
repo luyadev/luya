@@ -86,7 +86,7 @@ class AdminController extends \luya\admin\base\RestController
                     'toggle_open' => (int) Yii::$app->adminuser->identity->setting->get("togglegroup.99999", 1),
                     'id' => '99999',
                     'is_fav' => 1,
-                    'name' => Module::t('block_group_favorites'),
+                    'name' => \luya\cms\admin\Module::t('block_group_favorites'), // translation stored in admin module
                     'identifier' => 'favs',
                     'position' => 0,
                 ],
