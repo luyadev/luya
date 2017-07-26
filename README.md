@@ -51,8 +51,8 @@ We are always looking for people who share their thoughts, code and problems wit
 + ✓ rc1 release (October 2016) - Merge admin and frontend modules into each other. Add luya vendor namespace prefix to all modules.
 + ✓ rc2 release (November 2016) - Bug fixes, PHP Doc and Guide improvements, basic features implementation.
 + ✓ rc3 release (April 2017) - Large API breaks and new features, therefore the rc3 release in order to get latest bugs reports and informations from Developers.
-+ rc4 release (Q2 2017) - Find latest bugs in new admin user interface
-+ version 1.0.0 (Q3 2017) - First stable release of LUYA.
++ rc4 release (Q3 2017) - Introduce new Admin UI.
++ version 1.0.0 (Q4 2017) - Fix new Admin UI bugs and release first stable version of LUYA.
 
 #### Unit Test
 
