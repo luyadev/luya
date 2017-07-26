@@ -32,7 +32,7 @@ $this->beginPage()
             <div class="mainnav-static">
                 <ul class="mainnav-list">
                     <li class="mainnav-entry" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
-                        <span class="mainnav-link" ng-click="toggleSearchInput()">
+                        <span class="mainnav-link" ng-click="toggleSearchInput()" ng-class="{'mainnav-link-active' : searchInputOpen }">
                             <i class="mainnav-icon material-icons">search</i>
                             <span class="mainnav-label">
                                 Search
@@ -135,12 +135,12 @@ $this->beginPage()
         </div>
      </div>
     <div class="luya-main" ui-view></div>
-    <div class="luya-search" ng-class="{'luya-search-open' : searchInputOpen, 'luya-search-closed': !searchInputOpen}" zaa-esc="escapeSearchInput()">
-        <div class="luya-search-inner">
-            <div class="luya-search-form form-group">
-                <input id="global-search-input" ng-model="searchQuery" type="search" class="luya-search-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>
-                <div class="luya-search-close">
-                    <i class="material-icons luya-search-close-icon" ng-click="closeSearchInput()">close</i>
+    <div class="luyasearch" ng-class="{'luyasearch-open' : searchInputOpen, 'luyasearch-closed': !searchInputOpen}" zaa-esc="escapeSearchInput()">
+        <div class="luyasearch-inner">
+            <div class="luyasearch-form form-group">
+                <input id="global-search-input" ng-model="searchQuery" type="search" class="luyasearch-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>
+                <div class="luyasearch-close">
+                    <i class="material-icons luyasearch-close-icon" ng-click="closeSearchInput()">close</i>
                 </div>
             </div>
             <div class="alert alert-info" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
@@ -152,13 +152,13 @@ $this->beginPage()
             <div class="alert" ng-show="searchResponse==null && searchQuery.length > 2">
                 Loading ...
             </div>
-            <div class="luya-search-results">
-                <div class="luya-search-result" ng-repeat="item in searchResponse">
-                    <div class="luya-search-result-title"><i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
-                        <i class="material-icons luya-search-toggler luya-search-toggler-open">chevron_right</i>  <!-- toggle class "luya-search-toggler-open" and "luya-search-toggler-close" -->
+            <div class="luyasearch-results">
+                <div class="luyasearch-result" ng-repeat="item in searchResponse">
+                    <div class="luyasearch-result-title"><i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
+                        <i class="material-icons luyasearch-toggler luyasearch-toggler-open">chevron_right</i>  <!-- toggle class "luyasearch-toggler-open" and "luyasearch-toggler-close" -->
                     </div>
-                    <div class="luya-search-table-wrapper">
-                        <table class="luya-search-table">
+                    <div class="luyasearch-table-wrapper">
+                        <table class="luyasearch-table">
                             <tr ng-repeat="row in item.data | limitTo:1">
                                 <th ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{k}}</th>
                             </tr>
