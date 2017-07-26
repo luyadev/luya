@@ -143,13 +143,20 @@ $this->beginPage()
                     <i class="material-icons luya-search-close-icon" ng-click="closeSearchInput()">close</i>
                 </div>
             </div>
-
+            <div class="alert alert-info" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
+                <?= Admin::t('layout_search_min_letters'); ?>
+            </div>
+            <div class="alert alert-info" ng-show="(searchResponse.length == 0 && searchResponse != null) && searchQuery.length > 2">
+                <?= Admin::t('layout_search_no_results'); ?>
+            </div>
+            <div class="alert" ng-show="searchResponse==null && searchQuery.length > 2">
+                Loading ...
+            </div>
             <div class="luya-search-results">
                 <div class="luya-search-result" ng-repeat="item in searchResponse">
                     <div class="luya-search-result-title"><i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
                         <i class="material-icons luya-search-toggler luya-search-toggler-open">chevron_right</i>  <!-- toggle class "luya-search-toggler-open" and "luya-search-toggler-close" -->
                     </div>
-
                     <div class="luya-search-table-wrapper">
                         <table class="luya-search-table">
                             <tr ng-repeat="row in item.data | limitTo:1">
@@ -186,7 +193,6 @@ $this->beginPage()
             </div>
         </div>
     </div>
-
     <div class="toasts-toast" ng-if="item.type != 'confirm'" style="transform: translateY(-{{ ($index * 100) }}%);">
         <div class="alert" ng-class="{'alert-success': item.type == 'success', 'alert-danger': item.type == 'error', 'alert-warning': item.type == 'warning', 'alert-info': item.type == 'info'}">
             <i class="material-icons" ng-show="item.type == 'success'">check_circle</i>
