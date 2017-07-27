@@ -881,19 +881,13 @@
 	// update.js
 
 	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService) {
-
-		$scope.displayLiveContainer = false;
-		
-		$scope.liveUrl = homeUrl;
 		
 		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
 			$scope.displayLiveContainer = n;
 		});
 		
-		$scope.$on('service:LiveEditModeUrlChange', function(event, url) {
-			var d = new Date();
-			var n = d.getTime();
-			$scope.liveUrl = url + '&' + n;
+		$scope.$watch(function() { return ServiceLiveEditMode.url }, function(n, o) {
+			$scope.liveUrl = n;
 		});
 		
 		$scope.AdminLangService = AdminLangService;
