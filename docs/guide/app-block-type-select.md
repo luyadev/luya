@@ -22,7 +22,7 @@ Using select with string values:
 ]],
 ```
 
-The <a href="http://luya.io/api/luya-cms-helpers-BlockHelper">Blockhelper function provides you an optimized markup for the select options array.
+The [Blockhelper function](http://luya.io/api/luya-cms-helpers-BlockHelper) provides you an optimized markup for the select options array.
 
 ```php
  ['var' => 'width', 'label' => 'Width', 'type' => self::TYPE_SELECT, 'options' => BlockHelper::selectArrayOption(
