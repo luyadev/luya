@@ -114,24 +114,17 @@ use luya\admin\Module as Admin;
         <div ng-show="originalFileIsRemoved">
             <div class="alert alert-danger"><?= Admin::t('layout_deleted_file'); ?></div>
         </div>
+        <div class="imageupload-preview" ng-show="imageinfo != null">
+            <div class="imageupload-preview-sizer"></div>
+            <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="imageupload-preview-image" />
+            <div class="imageupload-infos">
+                <div class="imageupload-size" ng-show="!imageLoading">{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</div>
+            </div>
+        </div>
         <div class="imageupload-upload">
             <storage-file-upload ng-model="fileId"></storage-file-upload>
         </div>
-        <div class="imageupload-preview" ng-show="imageinfo != null">
-            <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="img-fluid" />
-            <div class="imageupload-size" ng-show="!imageLoading">{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</div>
-            <div class="imageupload-loading" ng-show="imageLoading">
-                <div class="loading-indicator">
-                    <div class="rect1"></div><!--
-                 --><div class="rect2"></div><!--
-                 --><div class="rect3"></div><!--
-                 --><div class="rect4"></div><!--
-                 --><div class="rect5"></div>
-                </div>
-            </div>
-        </div>
         <div class="imageupload-filter" ng-show="!noFilters() && imageinfo != null">
-            <label><?= Admin::t('layout_image_filter_selection'); ?></label>
             <select name="filterId" ng-model="filterId" convert-to-number><option value="0"><?= Admin::t('layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div>
 

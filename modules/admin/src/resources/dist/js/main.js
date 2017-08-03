@@ -3202,10 +3202,15 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
             	})
             },
             template: function() {
-                return '<div class="form-check">' +
-                            '<label for="{{id}}" class="form-check-label">'+
-                            '<input id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" class="form-check-input" />' +
-                            '{{label}}</label>' +
+                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label for="{{id}}">{{label}}</label>' +
+                            '</div>' +
+                            '<div class="form-side">' +
+                                '<div class="form-check">' +
+                                    '<input id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" class="form-check-input-standalone" />' +
+                                '</div>' +
+                            '</div>' +
                         '</div>';
             }
         }
@@ -3363,24 +3368,53 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 
             	$scope.autoRefactor = function() {
             		$scope.refactor($scope.date);
-            	}
+            	};
 
             	$scope.datePickerToggler = false;
 
             	$scope.toggleDatePicker = function() {
             		$scope.datePickerToggler = !$scope.datePickerToggler;
-            	}
+            	};
 
+            	$scope.openDatePicker = function() {
+                    $scope.datePickerToggler = true;
+                };
+
+                $scope.closeDatePicker = function() {
+                    $scope.datePickerToggler = false;
+                };
 
             	$scope.hour = "0";
 
             	$scope.min = "0";
-
             },
             template: function() {
-            	return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n, \'input--with-time\': model!=null && date!=null}"><div class="form-side form-side-label"><label>{{label}}</label></div><div class="form-side"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-class="{\'red\': datePickerToggler}" ng-click="toggleDatePicker()"><i class="material-icons" ng-hide="datePickerToggler">date_range</i><i class="material-icons" style="margin-top: 1px;" ng-show="datePickerToggler">close</i></span></datepicker>'+
-            	'<div ng-show="model!=null && date!=null" class="hour-selection"><span class="hour-selection__icon"><i class="material-icons">access_time</i></span><input type="text" ng-model="hour" ng-change="autoRefactor()" class="input__field input__field--hour" /><span class="time-divider">:</span><input type="text" ng-model="min" ng-change="autoRefactor()" class="input__field input__field--minute" /></div>'
-            	'</div></div></div>';
+            	return  '<div class="form-group form-side-by-side zaa-datetime" ng-class="{\'input--hide-label\': i18n, \'input--with-time\': model!=null && date!=null}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label>{{label}}</label>' +
+                            '</div>' +
+                            '<div class="form-side form-inline datepicker-wrapper" ng-click="console.log(arguments)">' +
+                                '<datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy">' +
+                                        '<input class="form-control datepicker-date-input" ng-model="date" type="text" ng-focus="openDatePicker()" />' +
+                                        '<div class="input-group-addon" ng-click="toggleDatePicker()">' +
+                                            '<i class="material-icons" ng-hide="datePickerToggler">date_range</i>' +
+                                            '<i class="material-icons" ng-show="datePickerToggler">close</i>' +
+                                        '</div>' +
+                                '</datepicker>' +
+            	                '<div ng-show="model!=null && date!=null" class="hour-selection">' +
+                                    '<div class="input-group">' +
+                                        '<div class="input-group-addon">' +
+                                            '<i class="material-icons">access_time</i>' +
+                                        '</div>' +
+                                        '<input class="form-control zaa-datetime-hour-input" type="text" ng-model="hour" ng-change="autoRefactor()" />' +
+                                    '</div>' +
+                                    '<div class="input-group">' +
+                                        '<div class="input-group-addon zaa-datetime-time-colon">:</div>' +
+                                        '<input class="form-control zaa-datetime-minute-input" type="text" ng-model="min" ng-change="autoRefactor()" />' +
+                                    '</div>' +
+            	                '</div>' +
+                            '</div>' +
+                        '</div>';
             }
         }
     });
@@ -3434,17 +3468,38 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 
             	$scope.autoRefactor = function() {
             		$scope.refactor($scope.date);
-            	}
+            	};
 
             	$scope.datePickerToggler = false;
 
             	$scope.toggleDatePicker = function() {
             		$scope.datePickerToggler = !$scope.datePickerToggler;
-            	}
+            	};
+
+                $scope.openDatePicker = function() {
+                    $scope.datePickerToggler = true;
+                };
+
+                $scope.closeDatePicker = function() {
+                    $scope.datePickerToggler = false;
+                };
 
             },
             template: function() {
-            	return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label>{{label}}</label></div><div class="form-side"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-class="{\'red\': datePickerToggler}" ng-click="toggleDatePicker()"><i class="material-icons" ng-hide="datePickerToggler">date_range</i><i class="material-icons" style="margin-top: 1px;" ng-show="datePickerToggler">close</i></span></datepicker></div></div></div>';
+            	return  '<div class="form-group form-side-by-side zaa-date" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label>{{label}}</label>' +
+                            '</div>' +
+                            '<div class="form-side datepicker-wrapper">' +
+                                '<datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy">' +
+                                    '<input class="form-control datepicker-date-input" ng-model="date" type="text" ng-focus="openDatePicker()" />' +
+                                    '<div class="input-group-addon" ng-click="toggleDatePicker()">' +
+                                        '<i class="material-icons" ng-hide="datePickerToggler">date_range</i>' +
+                                        '<i class="material-icons" ng-show="datePickerToggler">close</i>' +
+                                    '</div>' +
+                                '</datepicker>' +
+                            '</div>' +
+                        '</div>';
             }
         }
     });
@@ -3683,7 +3738,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 };
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
+                return '<div class="form-group form-side-by-side list" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
                             '<label>{{label}}</label></div>' +
                             '<div class="form-side">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
