@@ -14,7 +14,7 @@ use luya\cms\helpers\BlockHelper;
  * new LinkInjector();
  * ```
  *
- * In order to configure the LinkInjector used the {{\luya\cms\base\InternalBaseBlock::injectors}} method:
+ * In order to configure the LinkInjector, use the {{\luya\cms\base\InternalBaseBlock::injectors}} method:
  *
  * ```php
  * public function injectors()
