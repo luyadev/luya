@@ -2587,7 +2587,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     			}
     		},
     		template: function() {
-    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" title="crud"><div compile-html ng-bind-html="content"></modal></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-icon"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" title="crud"><div compile-html ng-bind-html="content"></modal></div>';
     		}
     	}
     });
@@ -3738,27 +3738,35 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 };
             },
             template: function() {
-                return '<div class="form-group form-side-by-side list" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
-                            '<label>{{label}}</label></div>' +
+                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label>{{label}}</label>' +
+                            '</div>' +
                             '<div class="form-side">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
-                                '<div ng-repeat="(key,image) in model track by key" class="row list__item">' +
-                                    '<div class="list__left row">' +
-                                        '<div class="col s8">' +
-                                            '<storage-image-upload ng-model="image.imageId" options="options"></storage-image-upload>' +
+                                '<div class="list zaa-file-array-upload">' +
+                                    '<p class="list-no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<div ng-repeat="(key,image) in model track by key" class="list-item">' +
+                                        '<div class="list-section">' +
+                                            '<div class="list-left">' +
+                                                '<storage-image-upload ng-model="image.imageId" options="options"></storage-image-upload>' +
+                                            '</div>' +
+                                            '<div class="list-right">' +
+                                                '<div class="form-group">' +
+                                                    '<label for="{{image.id}}">' + i18n['js_dir_image_description'] + '</label>' +
+                                                    '<textarea ng-model="image.caption" id="{{image.id}}" class="zaa-file-array-upload-description form-control" auto-grow></textarea>' +
+                                                '</div>' +
+                                            '</div>' +
                                         '</div>' +
-                                        '<div class="input-field col s4">' +
-                                            '<textarea ng-model="image.caption" class="materialize-textarea"></textarea>' +
-                                            '<label>'+i18n['js_dir_image_description']+'</label>' +
+                                        '<div class="list-buttons">' +
+                                            '<div class="btn-group" role="group">' +
+                                                '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                '<button type="button" class="btn btn-icon btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
+                                            '</div>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<div class="list__right">' +
-                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveUp(key)" ng-show="{{key > 0}}"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveDown(key)" ng-show="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
-                                    '</div>' +
+                                    '<button ng-click="add()" type="button" class="btn btn-icon btn-success list-add-button"><i class="material-icons">add</i></button>' +
                                 '</div>' +
-                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
                             '</div>' +
                         '</div>';
             }
@@ -3815,27 +3823,35 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 };
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
-                            '<label>{{label}}</label></div>' +
+                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label>{{label}}</label>' +
+                            '</div>' +
                             '<div class="form-side">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
-                                '<div ng-repeat="(key,file) in model track by key" class="row list__item">' +
-                                    '<div class="list__left row">' +
-                                        '<div class="filearray__upload col s8">' +
-                                            '<storage-file-upload ng-model="file.fileId"></storage-file-upload>' +
+                                '<div class="list zaa-file-array-upload">' +
+                                    '<p class="list-no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<div ng-repeat="(key,file) in model track by key" class="list-item">' +
+                                        '<div class="list-section">' +
+                                            '<div class="list-left">' +
+                                                '<storage-file-upload ng-model="file.fileId"></storage-file-upload>' +
+                                            '</div>' +
+                                            '<div class="list-right">' +
+                                                '<div class="form-group">' +
+                                                    '<label for="{{file.id}}">' + i18n['js_dir_image_description'] + '</label>' +
+                                                    '<textarea ng-model="file.caption" id="{{file.id}}" class="zaa-file-array-upload-description form-control" auto-grow></textarea>' +
+                                                '</div>' +
+                                            '</div>' +
                                         '</div>' +
-                                        '<div class="input-field col s4">' +
-                                            '<input type="text" ng-model="file.caption" class="filearray__description-input" />' +
-                                            '<label>'+i18n['js_dir_image_description']+'</label>' +
+                                        '<div class="list-buttons">' +
+                                            '<div class="btn-group" role="group">' +
+                                                '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                '<button type="button" class="btn btn-icon btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
+                                            '</div>' +
                                         '</div>' +
-                                    '</div>' +
-                                    '<div class="list__right">' +
-                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveUp(key)" ng-show="{{key > 0}}"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-click="moveDown(key)" ng-show="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
-                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
+                                '<button ng-click="add()" type="button" class="btn btn-icon btn-success list-add-button"><i class="material-icons">add</i></button>' +
                             '</div>' +
                         '</div>';
             }
