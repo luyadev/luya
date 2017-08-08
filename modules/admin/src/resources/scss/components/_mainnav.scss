@@ -20,8 +20,18 @@
         .mainnav-tooltip-big {
             left: 55px;
         }
+
+        .mainnav-tooltip-toggle-hidden {
+            visibility: visible;
+        }
     }
     user-select: none;
+
+    &:not(.mainnav-small) {
+        .tooltip {
+            display: none !important;
+        }
+    }
 }
 
 .mainnav-modules {
@@ -99,6 +109,10 @@
             }
         }
 
+        .mainnav-label {
+            color: $gray-lightest;
+        }
+
         .mainnav-tooltip-big {
             display: block;
             opacity: 1;
@@ -112,6 +126,7 @@
     display: inline-block;
     height: 24px;
     line-height: 24px;
+    transition: .2s ease-in-out color, .2s ease-in-out background-color;
 }
 
 .mainnav-icon {
@@ -153,6 +168,7 @@
     font-size: 13px;
     top: 50%;
     left: 17px;
+    transition: color .2s ease-in-out;
     transform: translateY(-50%);
 }
 
@@ -225,10 +241,8 @@
     transform: translateY(-50%);
     outline: none !important;
     cursor: pointer;
-
     background: $gray-dark;
-    border: solid 1px $gray;
-
+    border: none;
     transition: background .25s ease-in-out, min-height .2s ease-in-out;;
 
     i {
