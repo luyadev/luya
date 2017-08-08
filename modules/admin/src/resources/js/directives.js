@@ -1843,27 +1843,6 @@
                                 '</div>' +
                             '</div>' +
                         '</div>';
-
-
-                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<div class="form-side form-side-label">' +
-                                '<label>{{label}}</label>' +
-                            '</div>' +
-                            '<div class="form-side">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
-                                '<div ng-repeat="(key,row) in model track by key" class="list__item list__item--bordered">' +
-                                    '<div class="list__left" style="width: calc(100% - 140px)">' +
-                                        '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" fieldname="{{opt.var}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
-                                    '</div>' +
-                                    '<div class="list__right" style="width: 130px">' +
-                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="{{key > 0}}" ng-click="moveUp(key)"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
-                                    '</div>' +
-                                '</div>' +
-                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button"><i class="material-icons">add</i></button>' +
-                            '</div>' +
-                        '</div>';
             }
         }
     });
