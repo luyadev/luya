@@ -15,3 +15,15 @@
     color: $gray;
     font-weight: 300;
 }
+
+.crud-loader-tag {
+    position: relative;
+    right: 0;
+    margin-top: 1px;
+    float: right;
+
+    & + * {
+        display: block;
+        padding-right: 40px;
+    }
+}

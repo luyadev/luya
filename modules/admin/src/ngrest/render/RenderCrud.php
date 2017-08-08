@@ -322,7 +322,6 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                                        <label class="form-i18n-label">
                                            ' . $element['alias'] . '
                                        </label>
-                                       <div class="col">
                                            <div class="row">',
                     ];
                 }
@@ -335,7 +334,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
                 ++$i;
             }
-            $return[] = ['html' => '</div><!-- /col --> </div><!-- /row --> </div><!-- /i18n -->'];
+            $return[] = ['html' => '</div><!-- /row --> </div><!-- /i18n -->'];
 
             return $return;
         }

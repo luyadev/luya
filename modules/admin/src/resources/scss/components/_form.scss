@@ -4,6 +4,7 @@ $label-width: 200px !default;
 }
 
 .form-group {
+    margin-bottom: 25px;
     position: relative;
 }
 
@@ -56,7 +57,7 @@ textarea {
         min-width: $label-width;
 
         label {
-            margin: 7px 0 0 0;
+            margin: 0;
         }
     }
 }
@@ -66,8 +67,14 @@ textarea {
     flex-wrap: wrap;
     width: 100%;
 
+    > .row {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+
     .col {
-        padding: 0 3px;
+        // padding: 0 3px;
         position: relative;
     }
 }
@@ -83,7 +90,7 @@ textarea {
 .form-i18n-label {
     align-self: baseline;
     flex: 0 0 $label-width;
-    margin: 7px 0 0 0;
+    margin: 0;
 }
 
 .form-i18n .form-side-label {
@@ -122,14 +129,21 @@ input[type="radio"] {
             left: 0;
             margin: 0;
             position: absolute;
+            top: 3px;
             transition: .25s ease-in-out border;
             width: 16px;
             z-index: 40;
-            top: 3px;
         }
     }
 
     &:checked + label:before {
         border-width: 8px;
     }
+}
+
+.form-check-input-standalone {
+    clear: both !important;
+    float: none !important;
+    margin: 1px 0 0 0 !important;
+    position: relative;
 }

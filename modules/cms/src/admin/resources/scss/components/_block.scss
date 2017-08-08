@@ -125,8 +125,14 @@ $block-padding: 10px !default;
 }
 
 .block-front {
+    @include clearfix;
+
     h1, h2, h3, h4, h5 {
         color: $black;
+    }
+
+    > *:last-of-type {
+        margin-bottom: 0;
     }
 
     .block-is-layout > & {

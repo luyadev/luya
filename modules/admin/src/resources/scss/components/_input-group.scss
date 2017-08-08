@@ -20,5 +20,10 @@
 }
 
 .input-group-addon {
-    color: $white;
+    .form-control ~ & {
+        margin-left: -1px;
+    }
+    & ~ .form-control {
+        margin-left: -1px;
+    }
 }
