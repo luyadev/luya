@@ -1,0 +1,44 @@
+.zaa-table-wrapper {
+    display: block;
+    padding: 0 50px 50px 0;
+    position: relative;
+    width: 100%;
+}
+
+.zaa-table {
+    margin: 0;
+
+    td {
+        position: relative;
+
+        > textarea {
+            border: none;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            padding: 10px;
+            position: absolute;
+            resize: none;
+            right: 0;
+            top: 0;
+            width: 100%;
+        }
+    }
+
+}
+
+.zaa-table-buttons {
+    text-align: center;
+}
+
+.zaa-table-add-column {
+    position: absolute;
+    right: 0;
+    top: 13px;
+}
+
+.zaa-table-add-row {
+    bottom: 0;
+    left: 13px;
+    position: absolute;
+}

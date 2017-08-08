@@ -845,14 +845,16 @@
                 });
             },
             template: function() {
-                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side' +
-                            '<label for="{{id}}">{{label}}</label></div>' +
+                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label for="{{id}}">{{label}}</label>' +
+                            '</div>' +
                             '<div class="form-side">' +
                                 '<div class="colorwheel">' +
-                                    '<div class="colorwheel__input-wrapper" style="background-color: {{model}};">' +
-                                        '<input class="colorwheel__input" type="text" ng-model="model" style="color: {{textColor}}; border-color: {{textColor}};" maxlength="7" />' +
+                                    '<div class="colorwheel-background" style="background-color: {{model}};">' +
+                                        '<input class="colorwheel-input" type="text" ng-model="model" style="color: {{textColor}}; border-color: {{textColor}};" maxlength="7" />' +
                                     '</div>' +
-                                    '<div class="colorwheel__wheel"><div ng-colorwheel="{ size: 150, segments: 120 }" ng-model="model"></div></div>' +
+                                    '<div class="colorwheel-wheel"><div ng-colorwheel="{ size: 150, segments: 120 }" ng-model="model"></div></div>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -1509,42 +1511,43 @@
                 }
             },
             template: function() {
-                return '<div class="zaa-table__wrapper">'+
-                            '<h5 ng-show="label">{{label}}</h5>' +
-                            '<table class="zaa-table">'+
-                                '<thead>'+
-                                    '<tr>'+
-                                        '<td width="30"></td>'+
-                                        '<td data-ng-repeat="(hk, hr) in model[0] track by hk">'+
-                                            '<div class="zaa-table__cell-toolbar-top">'+
-                                                '<button type="button" ng-show="{{hk > 0}}" ng-click="moveLeft(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-left" tabindex="-1"><i class="material-icons" style="transform: rotate(180deg);">play_arrow</i></button>' +
-                                                '<div class="zaa-table__cell-toolbar-center">'+
-                                                    '<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn zaa-table__btn--del" data-drag="true" tabindex="-1">'+
-                                                        '<i class="material-icons">delete</i>'+
-                                                    '</button>'+
-                                                '</div>'+
-                                                '<button type="button" ng-click="moveRight(hk)" ng-show="showRightButton(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-right" tabindex="-1"><i class="material-icons">play_arrow</i></button>' +
-                                            '</div>'+
-                                        '</td>'+
-                                    '</tr>'+
-                                '</thead>' +
-                                '<tr data-ng-repeat="(key, row) in model track by key">'+
-                                    '<td>'+
-                                        '<button type="button" class="btn-floating zaa-table__btn zaa-table__btn--del" ng-click="removeRow(key)" tabindex="-1">'+
-                                            '<i class="material-icons">delete</i>'+
-                                        '</button>'+
-                                        '<div class="zaa-table__cell-toolbar-side">'+
-                                            '<button type="button" ng-show="{{key > 0}}" ng-click="moveUp(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-top" tabindex="-1"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
-                                            '<button type="button" ng-show="showDownButton(key)" ng-click="moveDown(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-bottom" tabindex="-1"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
-                                        '</div>'+
-                                    '</td>'+
-                                    '<td data-ng-repeat="(field,value) in row track by field">'+
-                                        '<textarea ng-model="model[key][field]" class="zaa-table__textarea"></textarea>'+
-                                    '</td>'+
-                                '</tr>'+
-                            '</table>'+
-                            '<button ng-click="addRow()" type="button" class="[ waves-effect waves-light ] btn btn--small">'+i18n['js_dir_table_add_row']+' <i class="material-icons right">add</i></button>'+
-                            '<button ng-click="addColumn()" type="button" style="float:right;" class="[ waves-effect waves-light ] btn btn--small">'+i18n['js_dir_table_add_column']+' <i class="material-icons right">add</i></button>'+
+                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label ng-if="label">{{label}}</label>' +
+                                '<label ng-if="!label">Table</label>' +
+                            '</div>' +
+                            '<div class="form-side">' +
+                                '<div class="zaa-table-wrapper">' +
+                                    '<table class="zaa-table table table-bordered">' +
+                                        '<tbody>' +
+                                            '<tr>' +
+                                                '<th scope="col" width="35px"></th>' +
+                                                '<th scope="col" data-ng-repeat="(hk, hr) in model[0] track by hk" class="zaa-table-buttons">' +
+                                                    '<div class="btn-group" role="group">' +
+                                                        '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveLeft(hk)" ng-if="hk > 0"><i class="material-icons">keyboard_arrow_left</i></button>' +
+                                                        '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveRight(hk)" ng-if="showRightButton(hk)"><i class="material-icons">keyboard_arrow_right</i></button>' +
+                                                        '<button type="button" class="btn btn-icon btn-outline-danger" ng-click="removeColumn(hk)"><i class="material-icons">remove</i></button>' +
+                                                    '</div>' +
+                                                '</th>' +
+                                            '</tr>' +
+                                            '<tr data-ng-repeat="(key, row) in model track by key">' +
+                                                '<td width="35px" scope="row" class="zaa-table-buttons">' +
+                                                    '<div class="btn-group-vertical" role="group">' +
+                                                        '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                        '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                        '<button type="button" class="btn btn-icon btn-outline-danger" ng-click="removeRow(key)"><i class="material-icons">remove</i></button>' +
+                                                    '</div>' +
+                                                '</td>' +
+                                                '<td data-ng-repeat="(field,value) in row track by field">'+
+                                                    '<textarea ng-model="model[key][field]" class="zaa-table__textarea"></textarea>'+
+                                                '</td>'+
+                                            '</tr>' +
+                                        '</tbody>' +
+                                    '</table>' +
+                                    '<button ng-click="addRow()" type="button" class="zaa-table-add-row btn btn-icon btn-success"><i class="material-icons">add</i></button>'+
+                                    '<button ng-click="addColumn()" type="button" class="zaa-table-add-column btn btn-icon btn-success"><i class="material-icons">add</i></button>'+
+                                '</div>' +
+                            '</div>' +
                         '</div>';
             }
         }
@@ -1910,21 +1913,25 @@
 
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
-                            '<label>{{label}}</label></div>' +
+                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label>{{label}}</label>' +
+                            '</div>' +
                             '<div class="form-side">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
-                                '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
-                                    '<div class="list__left" style="width:calc(100% - 140px)">' +
-                                        '<input class="list__input" type="text" ng-model="row.value" />' +
+                                '<div class="list zaa-file-array-upload">' +
+                                    '<p class="list-no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<div ng-repeat="(key,row) in model track by key" class="list-item">' +
+                                        '<input class="form-control list-input" type="text" ng-model="row.value" />' +
+                                        '<div class="list-buttons">' +
+                                            '<div class="btn-group" role="group">' +
+                                                '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                '<button type="button" class="btn btn-icon btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
+                                            '</div>' +
+                                        '</div>' +
                                     '</div>' +
-                                    '<div class="list__right" style="width:130px">' +
-                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="{{key > 0}}" ng-click="moveUp(key)"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                        '<button type="button" class="btn-floating list__button [ blue lighten-1 ]" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                        '<button type="button" class="btn-floating list__button [ red lighten-1 ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
-                                    '</div>' +
+                                    '<button ng-click="add()" type="button" class="btn btn-icon btn-success list-add-button"><i class="material-icons">add</i></button>' +
                                 '</div>' +
-                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
                             '</div>' +
                         '</div>';
             }
