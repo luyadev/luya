@@ -9,11 +9,29 @@
     position: relative;
     width: 200px;
 
+    .mainnav-tooltip-big {
+        left: 195px;
+    }
+
     &-small {
         flex: 0 0 62px;
         width: 62px;
+
+        .mainnav-tooltip-big {
+            left: 55px;
+        }
+
+        .mainnav-tooltip-toggle-hidden {
+            visibility: visible;
+        }
     }
     user-select: none;
+
+    &:not(.mainnav-small) {
+        .tooltip {
+            display: none !important;
+        }
+    }
 }
 
 .mainnav-modules {
@@ -43,6 +61,7 @@
 
     .mainnav-small & {
         text-align: center;
+
     }
 }
 
@@ -90,6 +109,10 @@
             }
         }
 
+        .mainnav-label {
+            color: $gray-lightest;
+        }
+
         .mainnav-tooltip-big {
             display: block;
             opacity: 1;
@@ -97,11 +120,13 @@
     }
 }
 
+
 .mainnav-icon,
 .mainnav-label {
     display: inline-block;
     height: 24px;
     line-height: 24px;
+    transition: .2s ease-in-out color, .2s ease-in-out background-color;
 }
 
 .mainnav-icon {
@@ -140,19 +165,17 @@
 
 .mainnav-user-online {
     position: absolute;
-    padding-top: 2px;
-
     font-size: 13px;
     top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    left: 17px;
+    transition: color .2s ease-in-out;
+    transform: translateY(-50%);
 }
 
 .mainnav-tooltip-big {
     position: absolute;
     display: none;
     opacity: 0;
-    left: 55px;
     background: $gray-dark;
     border-radius: 5px;
     bottom: 0;
@@ -202,6 +225,40 @@
             &.mainnav-tooltip-big-gray {
                 color: $gray-light;
             }
+        }
+    }
+}
+
+.mainnav-toggler {
+    width: 16px;
+    min-height: 42px;
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    transform: translateY(-50%);
+    outline: none !important;
+    cursor: pointer;
+    background: $gray-dark;
+    border: none;
+    transition: background .25s ease-in-out, min-height .2s ease-in-out;;
+
+    i {
+        color: $gray-lighter;
+        transition: transform .25s ease-in-out, color .25s ease-in-out
+    }
+
+    &:hover {
+        background: $gray;
+        min-height: 72px;
+    }
+
+    &-open {
+
+        i {
+            transform: rotate(180deg);
         }
     }
 }

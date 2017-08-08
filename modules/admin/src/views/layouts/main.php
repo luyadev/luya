@@ -132,10 +132,11 @@ $this->beginPage()
                     -->
                 </ul>
             </div>
+            <button class="mainnav-toggler" ng-class="{'mainnav-toggler-open' : isHover}"  ng-click="isHover = !isHover"><i class="material-icons">chevron_right</i></button>
         </div>
      </div>
     <div class="luya-main" ui-view></div>
-    <div class="luyasearch" ng-class="{'luyasearch-open' : searchInputOpen, 'luyasearch-closed': !searchInputOpen}" zaa-esc="escapeSearchInput()">
+    <div class="luyasearch" ng-class="{'luyasearch-open' : searchInputOpen, 'luyasearch-closed': !searchInputOpen, 'luyasearch-toggled': isHover}" zaa-esc="escapeSearchInput()">
         <div class="luyasearch-inner">
             <div class="luyasearch-form form-group">
                 <input id="global-search-input" ng-model="searchQuery" type="search" class="luyasearch-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>

@@ -114,7 +114,7 @@
                 if (scope.tooltipExpression) {
                     scope.tooltipText = scope.tooltipExpression;
                 }
-
+                
                 var html = '<div class="tooltip tooltip-' + scope.tooltipPosition + '" role="tooltip">' +
                                '<div class="tooltip-arrow"></div>' +
                                '<div class="tooltip-inner">' + scope.tooltipText +  '</div>' +
