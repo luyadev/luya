@@ -132,6 +132,7 @@ $this->beginPage()
                     -->
                 </ul>
             </div>
+            <button class="mainnav-toggler" ng-class="{'mainnav-toggler-open' : isHover}"  ng-click="isHover = !isHover"><i class="material-icons">chevron_right</i></button>
         </div>
      </div>
     <div class="luya-main" ui-view></div>
