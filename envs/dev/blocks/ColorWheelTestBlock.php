@@ -53,7 +53,9 @@ class ColorWheelTestBlock extends PhpBlock
     {
         return [
             'vars' => [
-                 ['var' => 'color', 'label' => 'Color', 'type' => self::TYPE_COLOR],
+                ['var' => 'entries', 'label' => 'Einträge', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' => [
+                    ['var' => 'color', 'label' => 'Color', 'type' => self::TYPE_COLOR],
+                ]],
             ],
         ];
     }
@@ -65,8 +67,10 @@ class ColorWheelTestBlock extends PhpBlock
     */
     public function admin()
     {
-        return '<p>
-                    <span style="display: inline-block; width: 100%; height: 50px; background-color: {{vars.color}};"></span>
-                </p>';
+        return '<div style="margin: -15px 0 0 -15px; display: block; width: 100%;">
+                    {% for entry in vars.entries %}
+                        <div style="display: inline-block; width: 50px; height: 50px; background-color: {{entry.color}}; margin: 15px 0 0 15px;"></div>
+                    {% endfor %}
+                </div>';
     }
 }
