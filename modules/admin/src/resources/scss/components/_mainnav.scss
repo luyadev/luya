@@ -1,36 +1,60 @@
 .mainnav {
     background: map_get($mainnav-colors, 'background');
     color: map_get($mainnav-colors, 'color');
-    display: flex;
-    flex: 0 0 200px;
-    flex-direction: column;
-    height: 100%;
+    display: block;
     padding: 5px 10px 10px;
     position: relative;
-    width: 200px;
+    width: 100%;
 
-    .mainnav-tooltip-big {
-        left: 195px;
-    }
-
-    &-small {
-        flex: 0 0 62px;
-        width: 62px;
-
-        .mainnav-tooltip-big {
-            left: 55px;
-        }
-
-        .mainnav-tooltip-toggle-hidden {
-            visibility: visible;
-        }
-    }
-    user-select: none;
-
-    &:not(.mainnav-small) {
+    @media (max-width: $mobile-nav-breakpoint - 1px) {
         .tooltip {
             display: none !important;
         }
+    }
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: flex;
+        flex: 0 0 200px;
+        flex-direction: column;
+        height: 100%;
+        width: 200px;
+
+        .mainnav-tooltip-big {
+            left: 195px;
+        }
+
+        &-small {
+            flex: 0 0 62px;
+            width: 62px;
+
+            .mainnav-tooltip-big {
+                left: 55px;
+            }
+
+            .mainnav-tooltip-toggle-hidden {
+                visibility: visible;
+            }
+        }
+        user-select: none;
+
+        &:not(.mainnav-small) {
+            .tooltip {
+                display: none !important;
+            }
+        }
+    }
+}
+
+.mainnav-toggler-mobile {
+    cursor: pointer;
+    font-size: 30px;
+    text-align: right;
+}
+
+.hide-on-mobile {
+    display: none;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: block;
     }
 }
 
@@ -76,17 +100,19 @@
     text-decoration: none;
     transition: .2s ease-in-out color, .2s ease-in-out background-color;
 
-    .mainnav-small &:after {
-        background-color: rgba(#fff, .1);
-        border-radius: 5px;
-        content: "";
-        height: 0;
-        left: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        transition: .1s ease-in-out height, .1s ease-in-out width;
-        width: 0;
+    @media (min-width: $mobile-nav-breakpoint) {
+        .mainnav-small &:after {
+            background-color: rgba(#fff, .1);
+            border-radius: 5px;
+            content: "";
+            height: 0;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            transition: .1s ease-in-out height, .1s ease-in-out width;
+            width: 0;
+        }
     }
 
     &:focus {
@@ -100,12 +126,14 @@
         color: $brand-primary;
         text-decoration: none;
 
-        .mainnav-small & {
-            background-color: transparent;
+        @media (min-width: $mobile-nav-breakpoint) {
+            .mainnav-small & {
+                background-color: transparent;
 
-            &:after {
-                height: 100%;
-                width: 100%;
+                &:after {
+                    height: 100%;
+                    width: 100%;
+                }
             }
         }
 
@@ -120,7 +148,6 @@
     }
 }
 
-
 .mainnav-icon,
 .mainnav-label {
     display: inline-block;
@@ -130,16 +157,19 @@
 }
 
 .mainnav-icon {
-    flex: 0 0;
     font-size: 24px !important;
     margin: 0 15px 0 0;
 
-    .mainnav-small & {
-        left: 50%;
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        transform: translateX(-50%) translateY(-50%);
+    @media (min-width: $mobile-nav-breakpoint) {
+        flex: 0 0;
+
+        .mainnav-small & {
+            left: 50%;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
     }
 }
 
@@ -155,54 +185,57 @@
 }
 
 .mainnav-label {
-    flex: 1 0;
     @include google-chrome-font-offset-fix;
 
-    .mainnav-small & {
-        display: none;
+    @media (min-width: $mobile-nav-breakpoint) {
+        flex: 1 0;
+
+        .mainnav-small & {
+            display: none;
+        }
     }
 }
 
 .mainnav-user-online {
-    position: absolute;
     font-size: 13px;
-    top: 50%;
     left: 17px;
-    transition: color .2s ease-in-out;
+    position: absolute;
+    top: 50%;
     transform: translateY(-50%);
+    transition: color .2s ease-in-out;
 }
 
 .mainnav-tooltip-big {
-    position: absolute;
-    display: none;
-    opacity: 0;
     background: $gray-dark;
     border-radius: 5px;
     bottom: 0;
-    transition: .25s opacity ease-in-out;
+    display: none;
+    opacity: 0;
     padding: 10px;
+    position: absolute;
+    transition: .25s opacity ease-in-out;
 
     &:after {
-        content: "";
+        border-color: transparent $gray-dark transparent transparent;
         border-style: solid;
         border-width: 5px 5px 5px 0;
-        border-color: transparent $gray-dark transparent transparent;
-        position: absolute;
-        left: -5px;
         bottom: 15px;
+        content: "";
+        left: -5px;
+        position: absolute;
     }
 
     tbody {
         color: $gray-lighter;
         th {
-            line-height: 20px;
             border-bottom: 1px solid $gray-lighter;
+            line-height: 20px;
             margin-bottom: 15px;
         }
         th, td {
             min-width: 180px;
-            text-align: left;
             padding: 10px 0;
+            text-align: left;
 
             &:last-of-type {
                 min-width: 150px;
@@ -230,20 +263,21 @@
 }
 
 .mainnav-toggler {
-    width: 16px;
+    background: $gray-dark;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    margin: 0;
     min-height: 42px;
+    outline: none !important;
+    padding: 0;
     position: absolute;
     right: -8px;
     top: 50%;
-    padding: 0;
-    margin: 0;
-    border-radius: 5px;
     transform: translateY(-50%);
-    outline: none !important;
-    cursor: pointer;
-    background: $gray-dark;
-    border: none;
     transition: background .25s ease-in-out, min-height .2s ease-in-out;;
+    width: 16px;
 
     i {
         color: $gray-lighter;
@@ -260,5 +294,9 @@
         i {
             transform: rotate(180deg);
         }
+    }
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: block;
     }
 }

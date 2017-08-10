@@ -28,10 +28,17 @@ $this->beginPage()
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
     <div class="luya-mainnav">
-        <div class="mainnav" ng-class="{'mainnav-small' : !isHover}">
-            <div class="mainnav-static">
+        <div class="mainnav" ng-class="{'mainnav-small' : !isHover}" ng-init="isOpen = false">
+
+            <div class="mainnav-toggler-mobile">
+                <div class="mainnav-toggler-mobile-icon" ng-click="isOpen = !isOpen">
+                    <i class="material-icons">menu</i>
+                </div>
+            </div>
+
+            <div class="mainnav-static" ng-show="isOpen">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
+                    <li class="mainnav-entry hide-on-mobile" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav-link" ng-click="toggleSearchInput()" ng-class="{'mainnav-link-active' : searchInputOpen }">
                             <i class="mainnav-icon material-icons">search</i>
                             <span class="mainnav-label">
@@ -49,7 +56,7 @@ $this->beginPage()
                     </li>
                 </ul>
             </div>
-            <div class="mainnav-modules">
+            <div class="mainnav-modules" ng-show="isOpen">
                 <ul class="mainnav-list">
                     <li class="mainnav-entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav-link" ng-class="{'mainnav-link-active' : isActive(item) }" ng-click="click(item)">
@@ -61,7 +68,7 @@ $this->beginPage()
                     </li>
                 </ul>
             </div>
-            <div class="mainnav-static mainnav-static--bottom">
+            <div class="mainnav-static mainnav-static--bottom" ng-show="isOpen">
                 <ul class="mainnav-list">
                     <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_reload'); ?>" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav-link" ng-click="reload()">
@@ -81,7 +88,7 @@ $this->beginPage()
                         </a>
                     </li>
                      -->
-                    <li class="mainnav-entry">
+                    <li class="mainnav-entry hide-on-mobile">
                         <span class="mainnav-link">
                             <i class="mainnav-icon material-icons">panorama_fish_eye</i>
                             <span class="mainnav-label">
