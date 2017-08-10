@@ -67,7 +67,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
             case self::TYPE_INTERNAL_PAGE:
                 $item = Yii::$app->menu->find()->where(['nav_id' => $this->value])->with('hidden')->one();
                 if (!$item) {
-                    throw new Exception('Unable to find item '.$this->value);
+                    throw new Exception('Unable to find item '.$this->value . ' in order to resolve an internal page redirect. Maybe the page does not exist anymore or is offline.');
                 }
 
                 return $item->link;
