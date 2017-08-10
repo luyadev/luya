@@ -194,7 +194,7 @@ class NavItemController extends \luya\admin\base\RestController
         $model = NavItem::find()->where(['id' => $navItemId])->one();
 
         if (!$model) {
-            throw new Exception('Unable to find item id '.$navItemId);
+            throw new Exception('Unable to find nav item id '.$navItemId . ' in order to update data.');
         }
         $model->setParentFromModel();
         $model->attributes = Yii::$app->request->post();
