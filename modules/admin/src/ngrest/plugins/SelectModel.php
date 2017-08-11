@@ -5,6 +5,7 @@ namespace luya\admin\ngrest\plugins;
 use yii\db\ActiveRecordInterface;
 use luya\helpers\ArrayHelper;
 use luya\helpers\StringHelper;
+use yii\db\ActiveQuery;
 
 /**
  * DropDown Select
@@ -41,7 +42,8 @@ use luya\helpers\StringHelper;
 class SelectModel extends Select
 {
     /**
-     * @var string The className of the ActiveRecord or NgRestModel in order to build the ActiveQuery find methods.
+     * @var string The className of the ActiveRecord or NgRestModel in order to build the ActiveQuery find methods. This is the Model with the related data 
+     * where the value from the field where you register the plugin with the field {{luya\admin\ngrest\plugins::$valueField}} value.
      */
     public $modelClass;
     
@@ -76,7 +78,7 @@ class SelectModel extends Select
      *
      * The above example woudl print `John Doe (john@example.com)`.
      */
-    public $labelTemplate = false;
+    public $labelTemplate;
  
     /**
      * @var boolean|array An array with where conditions to provide for the active query. The value will be used like this in the conditions:
@@ -91,7 +93,7 @@ class SelectModel extends Select
      * $data = $modelClass::find()->where(['is_deleted' => 0])->all();
      * ```
      */
-    public $where = false;
+    public $where;
     
     private static $_dataInstance = [];
 
@@ -102,13 +104,10 @@ class SelectModel extends Select
      * @param string|array $where
      * @return mixed
      */
-    private static function getDataInstance($class, $where)
+    private static function getDataInstance(ActiveQuery $query)
     {
+        $class = $query->modelClass;
         if (!isset(static::$_dataInstance[$class])) {
-            $query = $class::find();
-            if ($where !== false) {
-                $query->where($where);
-            }
             $queryData = $query->all();
             static::$_dataInstance[$class] = $queryData;
         }
@@ -198,12 +197,15 @@ class SelectModel extends Select
         
         $class = $this->modelClass;
         
-        if (is_object($class)) {
-            $class = $class::className();
+        $query = $class::find();
+        if ($this->where) {
+            $query->where($this->where);
+        }
+        if (is_array($this->labelField)) {
+            $query->select(array_merge($this->labelField, [$this->valueField]));
         }
         
-        foreach (static::getDataInstance($class, $this->where) as $item) {
-            
+        foreach (static::getDataInstance($query) as $item) {
             $data[] = [
                 'value' => StringHelper::typeCast($item->{$this->valueField}),
                 'label' => $this->generateLabelField($item),
@@ -215,6 +217,9 @@ class SelectModel extends Select
         return $data;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return [
@@ -223,6 +228,21 @@ class SelectModel extends Select
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
+    public function onAfterListFind($event)
+    {
+        // if modelClass and sender class are the same, we should detach the ngrest events, but this wont work currently
+        // https://github.com/yiisoft/yii2/issues/12910
+        if ($this->modelClass !== $event->sender->className()) {
+            return parent::onAfterListFind($event);
+        }
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function __destruct()
     {
         self::flushDataInstances();
