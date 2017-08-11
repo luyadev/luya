@@ -30,8 +30,8 @@
     </div>
     <div class="luya-content" ui-view>
         <h1>Dashboard</h1>
-        <div class="card-columns" ng-repeat="item in dashboard">
-            <div class="card">
+        <div class="card-columns">
+            <div class="card" ng-repeat="item in dashboard">
                 <div class="card-block">
                     <h3 class="card-title">{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span></h3>
                     <table class="table">
