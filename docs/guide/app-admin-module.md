@@ -5,7 +5,7 @@ An Admin Module provides the ability to quickly create an adminstration section 
 Some features available in the Admin section:
 
 + Create, Read, Update and Delete with Angular and Yii base on Active Records => [[ngrest-concept.md]]
-+ Display custom Data with a Controller and View File => [[app-admin-controllerview.md]]
++ Display custom Data with a Controller and View File => [[app-admin-module-controllerview.md]]
 + Storage System for uploading images and files => {{luya\admin\components\StorageContainer}}
 + Permissions and Admin Menus => [[app-admin-module-permission.md]]
 + APIs

@@ -41,7 +41,7 @@
   + [Url Rules](app-module-urlrules.md)
 + Administration Module
   + [About Admin Modules](app-admin-module.md)
-  + [Custom Controller &amp; View](app-admin-controllerview.md]
+  + [Custom Controller &amp; View](app-admin-module-controllerview.md)
   + [Permissions](app-admin-module-permission.md)
   + [Assets](app-admin-module-assets.md)
   + [CSS Styles](app-admin-styles.md)
