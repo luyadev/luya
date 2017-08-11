@@ -21,6 +21,11 @@ class DefaultController extends Controller
     public $disablePermissionCheck = true;
     
     /**
+     * @var string Path to the admin layout
+     */
+    public $layout = '@admin/views/layouts/main';
+    
+    /**
      * Yii initializer. Find assets to register, and add them into the view if they are not ignore by $skipModuleAssets.
      */
     public function init()

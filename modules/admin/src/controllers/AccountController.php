@@ -9,8 +9,6 @@ class AccountController extends Controller
 {
     public $disablePermissionCheck = true;
     
-    public $layout = false;
-    
     public function actionDashboard()
     {
         return $this->render('dashboard', [

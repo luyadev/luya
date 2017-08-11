@@ -16,6 +16,6 @@ class TemplateController extends Controller
 
     public function actionDefault()
     {
-        return $this->renderPartial('default');
+        return $this->render('default');
     }
 }

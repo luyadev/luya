@@ -16,7 +16,7 @@ class Controller extends \luya\web\Controller
     /**
      * @var string Path to the admin layout
      */
-    public $layout = '@admin/views/layouts/main';
+    public $layout = false;
 
     /**
      * @var bool When enabling `$disablePermissionCheck` all actions are not secured by access controller but are do require an authtenticated user (logged in user).
