@@ -155,7 +155,7 @@ class Api extends RestActiveController
         
         $modelClass = $this->modelClass;
         return [
-            'service' => $this->model->getNgrestServices(),
+            'service' => $this->model->getNgRestServices(),
             '_settings' => $settings,
             '_locked' => [
                 'data' => UserOnline::find()->select(['lock_pk', 'last_timestamp', 'u.firstname', 'u.lastname', 'u.id'])->joinWith('user as u')->where(['lock_table' => $modelClass::tableName()])->createCommand()->queryAll(),

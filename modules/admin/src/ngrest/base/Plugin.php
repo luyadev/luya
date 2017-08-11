@@ -256,7 +256,7 @@ abstract class Plugin extends Component
     }
     
     /**
-     * Remeves and event from the events stack by its trigger name.
+     * Remove an event from the events stack by its trigger name.
      *
      * In order to remove an event trigger from stack you have to do this right
      * after the initializer.

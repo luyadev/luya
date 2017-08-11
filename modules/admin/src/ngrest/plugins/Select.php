@@ -50,7 +50,7 @@ abstract class Select extends Plugin
      */
     public function serviceData($event)
     {
-        return ['selectdata' => $this->data];
+        return ['selectdata' => $this->getData()];
     }
     
     /**
@@ -59,7 +59,7 @@ abstract class Select extends Plugin
     public function onAfterListFind($event)
     {
         $value = StringHelper::typeCast($event->sender->getAttribute($this->name));
-        foreach ($this->data as $item) {
+        foreach ($this->getData() as $item) {
             if (StringHelper::typeCast($item['value']) === $value) {
                 $event->sender->setAttribute($this->name, $item['label']);
             }

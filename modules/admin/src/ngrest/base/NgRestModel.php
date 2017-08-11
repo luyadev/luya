@@ -375,7 +375,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *
      * @return mixed The service data.
      */
-    public function getNgrestServices()
+    public function getNgRestServices()
     {
         $this->trigger(self::EVENT_SERVICE_NGREST);
 
@@ -596,8 +596,6 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
-            //$config = Yii::createObject(['class' => Config::class, 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
-            
             $config = new Config();
             $config->apiEndpoint = static::ngRestApiEndpoint();
             $config->primaryKey = $this->getNgRestPrimaryKey();
@@ -608,8 +606,6 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             foreach ($this->i18n as $fieldName) {
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
-            
-           
 
             // COPY FROM NgRestController to Builder of the config
             // ensure what must be removed and added from outside
