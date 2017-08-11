@@ -39,4 +39,15 @@ class ImportHelperTest extends LuyaWebTestCase
             1 => ['Jane'],
         ], ImportHelper::csv($csv, ['removeHeader' => true, 'fields' => ['firstname']]));
     }
+    
+    public function testCsvWithNewline()
+    {
+        $csv = ExportHelper::csv([['firstname' => 'John', 'text' => 'Hello' . PHP_EOL . 'World'], ['firstname' => 'Jane', 'text' => 'World\nHello']]);
+        
+        $this->assertSame([
+            0 => ['firstname', 'text'],
+            1 => ['John', 'Hello' . PHP_EOL . 'World'],
+            2 => ['Jane', 'World\nHello'],
+        ], ImportHelper::csv($csv));
+    }
 }

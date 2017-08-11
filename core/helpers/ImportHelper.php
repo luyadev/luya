@@ -15,8 +15,9 @@ class ImportHelper
      *
      * @param string $filename Can be either a filename which is parsed by {{luya\helpers\FileHelper::getFileContent}} or a string with the contained csv data.
      * @param array $options Provide options to the csv
-     * + removeHeader: boolean, Whether the import csv contains a header in the first row to skip or not. Defaults to false
-     * + delimiter: string, The delimiter
+     * + removeHeader: boolean, Whether the import csv contains a header in the first row to skip or not. Default value is false.
+     * + delimiter: string, The delimiter which is used to explode the columns. Default value is `,`.
+     * + enclosure: string, The encloser which is used betweend the columns. Default value is `"`.
      * + fields: array, An array with fielnames (based on the array header if any, or position) which should be parsed into the final export.
      * ```php
      * 'fields' => ['firstname', 'lastname'] // will only parse those fields based on table header (row 0)
@@ -28,15 +29,17 @@ class ImportHelper
     {
         // check if a given file name is provided or a csv based on the content
         if (FileHelper::getFileInfo($filename)->extension) {
-            $input = FileHelper::getFileContent($filename);
+            $resource = fopen($filename, 'r');
         } else {
-            $input = $filename;
+            $resource = fopen('php://memory', 'rw');
+            fwrite($resource, $filename);
+            rewind($resource);
         }
-        // http://php.net/manual/de/function.str-getcsv.php#101888
-        $data = str_getcsv($input, "\n");
-        foreach ($data as &$row) {
-            $row = str_getcsv($row, ArrayHelper::getValue($options, 'delimiter', ','));
+        $data = [];
+        while (($row = fgetcsv($resource, 0, ArrayHelper::getValue($options, 'delimiter', ','), ArrayHelper::getValue($options, 'enclosure', '"'))) !== false) {
+            $data[] = $row;
         }
+        fclose($resource);
         
         // check whether only an amount of fields should be parsed into the final array
         $fields = ArrayHelper::getValue($options, 'fields', false);
