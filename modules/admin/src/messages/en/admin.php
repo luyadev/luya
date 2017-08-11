@@ -142,9 +142,7 @@ return [
     'aws_gallery_images' => 'Album images',
     'layout_useronline_name' => 'Name',
     'layout_useronline_mail' => 'Email',
-    'layout_useronline_activity' => 'Activity',
     'layout_useronline_inactivesince' => 'Inactive since',
-    'layout_useronline_inactive' => 'inactive',
 
 // added translations in 1.0.0-beta6
 
@@ -238,10 +236,12 @@ return [
     'js_link_set_value' => 'Set Link',
     'callback_button_file_download_widget_success' => 'The file has been prepared. You can download it now.',
     
-// 1.0.0
+// rc4
 
     'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
     'model_user_oldpassword' => 'Previous (old) Password',
     'js_account_update_profile_success' => 'The profile data has been successfull updated.',
     'dashboard_lastlogin_title' => 'Last User Logins',
+    'layout_useronline_activity' => 'Activity',
+    'layout_useronline_inactive' => 'inactive',
 ];
