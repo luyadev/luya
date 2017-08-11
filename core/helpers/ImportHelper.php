@@ -2,6 +2,8 @@
 
 namespace luya\helpers;
 
+use Yii;
+
 /**
  * Import from Formats to Array.
  *
@@ -12,6 +14,8 @@ class ImportHelper
 {
     /**
      * Import a CSV from a string or filename and return array.
+     * 
+     * The filename can be either a resource from fopen() or a string containing the csv data. Filenames will be wrapped trough {{Yii::getAlias()}} method.
      *
      * @param string $filename Can be either a filename which is parsed by {{luya\helpers\FileHelper::getFileContent}} or a string with the contained csv data.
      * @param array $options Provide options to the csv
@@ -27,6 +31,8 @@ class ImportHelper
      */
     public static function csv($filename, array $options = [])
     {
+        $filename = Yii::getAlias($filename);
+        
         // check if a given file name is provided or a csv based on the content
         if (FileHelper::getFileInfo($filename)->extension) {
             $resource = fopen($filename, 'r');
