@@ -36,7 +36,7 @@ $this->beginPage()
                 </div>
             </div>
 
-            <div class="mainnav-static" ng-show="isOpen">
+            <div class="mainnav-static" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
                     <li class="mainnav-entry hide-on-mobile" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav-link" ng-click="toggleSearchInput()" ng-class="{'mainnav-link-active' : searchInputOpen }">
@@ -56,7 +56,7 @@ $this->beginPage()
                     </li>
                 </ul>
             </div>
-            <div class="mainnav-modules" ng-show="isOpen">
+            <div class="mainnav-modules" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
                     <li class="mainnav-entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav-link" ng-class="{'mainnav-link-active' : isActive(item) }" ng-click="click(item)">
@@ -68,7 +68,7 @@ $this->beginPage()
                     </li>
                 </ul>
             </div>
-            <div class="mainnav-static mainnav-static--bottom" ng-show="isOpen">
+            <div class="mainnav-static mainnav-static--bottom" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
                     <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_reload'); ?>" tooltip-offset-top="5" tooltip-position="right">
                         <span class="mainnav-link" ng-click="reload()">
@@ -142,7 +142,11 @@ $this->beginPage()
             <button class="mainnav-toggler" ng-class="{'mainnav-toggler-open' : isHover}"  ng-click="isHover = !isHover"><i class="material-icons">chevron_right</i></button>
         </div>
      </div>
-    <div class="luya-main" ui-view></div>
+
+
+    <div ui-view></div>
+
+
     <div class="luyasearch" ng-class="{'luyasearch-open' : searchInputOpen, 'luyasearch-closed': !searchInputOpen, 'luyasearch-toggled': isHover}" zaa-esc="escapeSearchInput()">
         <div class="luyasearch-inner">
             <div class="luyasearch-form form-group">
