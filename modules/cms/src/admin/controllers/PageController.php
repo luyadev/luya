@@ -2,20 +2,27 @@
 
 namespace luya\cms\admin\controllers;
 
-class PageController extends \luya\admin\base\Controller
+use luya\admin\base\Controller;
+
+/**
+ * Provie Page Templates for create update and drafts.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class PageController extends Controller
 {
     public function actionCreate()
     {
-        return $this->renderPartial('create');
+        return $this->render('create');
     }
 
     public function actionUpdate()
     {
-        return $this->renderPartial('update');
+        return $this->render('update');
     }
     
     public function actionDrafts()
     {
-        return $this->renderPartial('drafts');
+        return $this->render('drafts');
     }
 }

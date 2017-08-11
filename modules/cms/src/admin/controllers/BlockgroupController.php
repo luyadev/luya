@@ -2,7 +2,14 @@
 
 namespace luya\cms\admin\controllers;
 
-class BlockgroupController extends \luya\admin\ngrest\base\Controller
+use luya\admin\ngrest\base\Controller;
+
+/**
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ *
+ */
+class BlockgroupController extends Controller
 {
     public $modelClass = 'luya\cms\models\BlockGroup';
 }

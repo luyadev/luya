@@ -3,8 +3,14 @@
 namespace luya\cms\admin\controllers;
 
 use \luya\cms\models\Log;
+use luya\admin\base\Controller;
 
-class DefaultController extends \luya\admin\base\Controller
+/**
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ *
+ */
+class DefaultController extends Controller
 {
     public function actionIndex()
     {
@@ -13,7 +19,7 @@ class DefaultController extends \luya\admin\base\Controller
         foreach ($data as $item) {
             $groups[strtotime('today', $item->timestamp)][] = $item;
         }
-        return $this->renderPartial('index', [
+        return $this->render('index', [
             'groups' => $groups,
         ]);
     }
