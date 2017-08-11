@@ -144,7 +144,7 @@ $this->beginPage()
      </div>
 
 
-    <div ui-view></div>
+    <div ui-view class="luya-main-wrapper"></div>
 
 
     <div class="luyasearch" ng-class="{'luyasearch-open' : searchInputOpen, 'luyasearch-closed': !searchInputOpen, 'luyasearch-toggled': isHover}" zaa-esc="escapeSearchInput()">
