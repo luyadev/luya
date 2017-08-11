@@ -76,6 +76,7 @@
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
     padding: 15px 25px;
+    height: 100%;
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
