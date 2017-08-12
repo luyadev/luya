@@ -1905,7 +1905,7 @@ Examples
 
 AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds', 2000');
 
-AdminToastService.confirm('Hello i am a callback and wait for your', function($q, $http) {
+AdminToastService.confirm('Hello i am a callback and wait for your', 'Das löschen?', function($q, $http) {
 	// do some ajax call
 	$http.get().then(function() {
 		promise.resolve();
@@ -1964,9 +1964,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		});
 	};
 	
-	service.confirm = function(message, callback) {
+	service.confirm = function(message, title, callback) {
 		var uuid = guid();
-		service.queue[uuid] = {message: message, click: function() {
+		service.queue[uuid] = {message: message, title:title, click: function() {
 			var queue = this;
 			var response = $injector.invoke(this.callback, this, { $toast : this });
 			if (response !== undefined) {
@@ -4660,7 +4660,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 };
 
                 $scope.removeFiles = function() {
-                    AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], function($timeout, $toast) {
+                    AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], 'Datei entfernen', function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                         }).then(function(transport) {
@@ -4999,7 +4999,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		};
 		
 		$scope.deleteItem = function(id, $event) {
-			AdminToastService.confirm(i18n['js_ngrest_rm_page'], function($timeout, $toast) {
+			AdminToastService.confirm(i18n['js_ngrest_rm_page'], 'Entfernen', function($timeout, $toast) {
 				$http.delete($scope.config.apiEndpoint + '/'+id).then(function(response) {
 					$scope.loadList();
 					$toast.close();
@@ -5594,12 +5594,16 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 			}
 		};
 		
+		$scope.visibleAdminReloadDialog = false;
+		
 		(function tick(){
 			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).then(function(response) {
 				$scope.forceReload = response.data.forceReload;
-				if ($scope.forceReload) {
-					AdminToastService.confirm(i18n['js_admin_reload'], function($timeout, $toast) {
+				if ($scope.forceReload && !$scope.visibleAdminReloadDialog) {
+					$scope.visibleAdminReloadDialog = true;
+					AdminToastService.confirm(i18n['js_admin_reload'], 'Seite neu laden', function($timeout, $toast) {
 						$scope.reload();
+						$scope.visibleAdminReloadDialog = false;
 					});
 				}
 				

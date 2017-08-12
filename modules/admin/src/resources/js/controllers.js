@@ -296,7 +296,7 @@
 		};
 		
 		$scope.deleteItem = function(id, $event) {
-			AdminToastService.confirm(i18n['js_ngrest_rm_page'], function($timeout, $toast) {
+			AdminToastService.confirm(i18n['js_ngrest_rm_page'], 'Entfernen', function($timeout, $toast) {
 				$http.delete($scope.config.apiEndpoint + '/'+id).then(function(response) {
 					$scope.loadList();
 					$toast.close();
@@ -891,12 +891,16 @@
 			}
 		};
 		
+		$scope.visibleAdminReloadDialog = false;
+		
 		(function tick(){
 			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).then(function(response) {
 				$scope.forceReload = response.data.forceReload;
-				if ($scope.forceReload) {
-					AdminToastService.confirm(i18n['js_admin_reload'], function($timeout, $toast) {
+				if ($scope.forceReload && !$scope.visibleAdminReloadDialog) {
+					$scope.visibleAdminReloadDialog = true;
+					AdminToastService.confirm(i18n['js_admin_reload'], 'Seite neu laden', function($timeout, $toast) {
 						$scope.reload();
+						$scope.visibleAdminReloadDialog = false;
 					});
 				}
 				

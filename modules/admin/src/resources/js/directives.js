@@ -2566,7 +2566,7 @@
                 };
 
                 $scope.removeFiles = function() {
-                    AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], function($timeout, $toast) {
+                    AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], 'Datei entfernen', function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                         }).then(function(transport) {

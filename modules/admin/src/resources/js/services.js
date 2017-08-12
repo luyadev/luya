@@ -391,7 +391,7 @@ Examples
 
 AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds', 2000');
 
-AdminToastService.confirm('Hello i am a callback and wait for your', function($q, $http) {
+AdminToastService.confirm('Hello i am a callback and wait for your', 'Das löschen?', function($q, $http) {
 	// do some ajax call
 	$http.get().then(function() {
 		promise.resolve();
@@ -450,9 +450,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		});
 	};
 	
-	service.confirm = function(message, callback) {
+	service.confirm = function(message, title, callback) {
 		var uuid = guid();
-		service.queue[uuid] = {message: message, click: function() {
+		service.queue[uuid] = {message: message, title:title, click: function() {
 			var queue = this;
 			var response = $injector.invoke(this.callback, this, { $toast : this });
 			if (response !== undefined) {

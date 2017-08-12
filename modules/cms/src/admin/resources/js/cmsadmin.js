@@ -1000,7 +1000,7 @@
 		};
 
 		$scope.trash = function() {
-			AdminToastService.confirm(i18n['js_page_confirm_delete'], function($timeout, $toast) {
+			AdminToastService.confirm(i18n['js_page_confirm_delete'], 'Seite löschen', function($timeout, $toast) {
 
 				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.id }}).then(function(response) {
 	    			$scope.isDeleted = true;
@@ -1142,7 +1142,7 @@
 
 		$scope.trashItem = function() {
 			if ($scope.lang.is_default == 0) {
-				AdminToastService.confirm(i18n['js_page_confirm_delete'], function($timeout, $toast) {
+				AdminToastService.confirm(i18n['js_page_confirm_delete'], 'Seite Löschen', function($timeout, $toast) {
 					$http.get('admin/api-cms-navitem/delete', { params : { navItemId : $scope.item.id }}).then(function(response) {
 						$scope.menuDataReload().then(function() {
 							$scope.isTranslated = false;
@@ -1215,7 +1215,7 @@
 
 		$scope.removeCurrentVersion = function() {
 			// {alias: $scope.currentVersionInformation.version_alias}
-			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: $scope.currentVersionInformation.version_alias}), function($toast, $http) {
+			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: $scope.currentVersionInformation.version_alias}), 'Version löschen', function($toast, $http) {
 				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : $scope.currentVersionInformation.id}).then(function(response) {
 					var aliasName = $scope.currentVersionInformation.version_alias;
 					$scope.refreshForce();
@@ -1537,7 +1537,7 @@
 		};
 
 		$scope.removeBlock = function() {
-			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), function($timeout, $toast) {
+			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), 'Block löschen', function($timeout, $toast) {
 				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + $scope.block.id).then(function(response) {
 					$scope.NavItemTypePageController.refresh();
 					$scope.NavItemTypePageController.loadLiveUrl();
