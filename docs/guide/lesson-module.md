@@ -36,7 +36,7 @@ To register the module in LUYA you [have to edit the config file](https://luya.i
 Our first step is the creation of our data model and the migration files to create the associated database tables.
 Again, we're using the code wizard to [create the migration file](https://luya.io/guide/ngrest-concept) for our registered admin module *addressbookadmin*. We'll need two tables, one for the contact data itself and one for the different contact groups.
 
-```php
+```sh
 ./vendor/bin/luya migrate/create addressbook_contact addressbookadmin
 ./vendor/bin/luya migrate/create addressbook_group addressbookadmin
 ```
@@ -92,13 +92,17 @@ Note that your migration class name will differ because of the included timestam
 
 To create the database tables from the migration files, you've to execute the `migrate` command:
 
-`./vendor/bin/luya migrate`
+```sh
+./vendor/bin/luya migrate
+```
 
 ### Creating the models
 
 Again we're using the LUYA code wizard to help us create the corresponding models with a preconfigured CRUD view for the database tables:
 
-`./vendor/bin/luya admin/crud/create`
+```sh
+./vendor/bin/luya admin/crud/create
+```
 
 Below you see how to use the wizard to automatically create the contact model`models/Contact.php` and all associated files like the API controller `modules/addressbook/admin/apis/ContactController.php` and the controller `modules/addressbook/admin/controllers/ContactController.php`:
 
@@ -142,7 +146,9 @@ class Module extends \luya\admin\base\Module
 
 Finally, we're going to import the new modules with the import command:
 
-`./vendor/bin/luya import`
+```
+./vendor/bin/luya import
+```
 
 Before we'll see the module in the admin view, we've to set the permissions for the `addressbookadmin` for our user in `System/Groups/Permissions`:
 
@@ -302,11 +308,7 @@ Again you should work with style sheets, CSS class names and external javascript
 When clicking on an entry in the list view, we'll end up in our detail view. To be able to get back fast, we're creating a back button with the correct URL route to our list view. Our detail view uses a Yii widget again: the [DetailView](http://www.yiiframework.com/doc-2.0/yii-widgets-detailview.html) widget.
 
 ```php
-<div>
-    <a href="<?= $route = \luya\helpers\Url::toRoute(['/addressbook']); ?>">< Back</a>
-</div>
-<br/>
-
+<a href="<?= $route = \luya\helpers\Url::toRoute(['/addressbook']); ?>">Back</a>
 <?= \yii\widgets\DetailView::widget([
     'model' => $model,
     'attributes' => [
