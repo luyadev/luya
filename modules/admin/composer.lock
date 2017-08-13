@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "56a875b6835ee9fbb9b4b2d4393b3ec7",
+    "content-hash": "fee2bf9094616a63cafd28fdfc41056d",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -709,6 +709,38 @@
             ]
         },
         {
+            "name": "bower-asset/flow.js",
+            "version": "v2.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flowjs/flow.js.git",
+                "reference": "172e3d1b05d4089a735b24c394c0983a7d0e29c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flowjs/flow.js/zipball/172e3d1b05d4089a735b24c394c0983a7d0e29c5",
+                "reference": "172e3d1b05d4089a735b24c394c0983a7d0e29c5",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./dist/flow.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "samples",
+                    "CHANGELOG.md",
+                    "karma.conf.js",
+                    "package.json",
+                    "src/*",
+                    "Gruntfile.js"
+                ]
+            }
+        },
+        {
             "name": "bower-asset/ng-file-upload",
             "version": "12.2.13",
             "source": {
@@ -734,6 +766,44 @@
                 "MIT"
             ],
             "description": "Lightweight Angular JS directive to upload files. Support drag&drop, paste image, progress and abort"
+        },
+        {
+            "name": "bower-asset/ng-flow",
+            "version": "v2.7.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flowjs/ng-flow.git",
+                "reference": "a15c09ea7d36f36dee8d2b4bb27e61396267d997"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flowjs/ng-flow/zipball/a15c09ea7d36f36dee8d2b4bb27e61396267d997",
+                "reference": "a15c09ea7d36f36dee8d2b4bb27e61396267d997",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": "~1",
+                "bower-asset/flow.js": "~2"
+            },
+            "require-dev": {
+                "bower-asset/angular-mocks": "~1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./dist/ng-flow.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "test",
+                    "samples",
+                    "build",
+                    "*.md",
+                    "karma.conf.js",
+                    "LICENSE",
+                    "Gruntfile.js",
+                    "package.json",
+                    "bower.json"
+                ]
+            }
         },
         {
             "name": "bower-asset/ui-router",
@@ -777,16 +847,16 @@
         },
         {
             "name": "curl/curl",
-            "version": "1.7.1",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "19d39f6c101bf9ed76feea86b446361f53c8d368"
+                "reference": "16e8489b048ef57ffbf74591a201f7808155b2db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/19d39f6c101bf9ed76feea86b446361f53c8d368",
-                "reference": "19d39f6c101bf9ed76feea86b446361f53c8d368",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/16e8489b048ef57ffbf74591a201f7808155b2db",
+                "reference": "16e8489b048ef57ffbf74591a201f7808155b2db",
                 "shasum": ""
             },
             "require": {
@@ -828,36 +898,36 @@
                 "curl",
                 "dot"
             ],
-            "time": "2017-08-09T09:46:25+00:00"
+            "time": "2017-08-12T11:44:08+00:00"
         },
         {
             "name": "doctrine/instantiator",
-            "version": "1.0.5",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d"
+                "reference": "185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda",
+                "reference": "185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3,<8.0-DEV"
+                "php": "^7.1"
             },
             "require-dev": {
                 "athletic/athletic": "~0.1.8",
                 "ext-pdo": "*",
                 "ext-phar": "*",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~2.0"
+                "phpunit/phpunit": "^6.2.3",
+                "squizlabs/php_codesniffer": "^3.0.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -882,7 +952,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14T21:17:01+00:00"
+            "time": "2017-07-22T11:58:36+00:00"
         },
         {
             "name": "guzzle/guzzle",
@@ -1044,12 +1114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "1520404fe2f80bd3f0685360a04eab52a1def684"
+                "reference": "9232b457c131acac6299ab47cb68fed6b26bb97b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/1520404fe2f80bd3f0685360a04eab52a1def684",
-                "reference": "1520404fe2f80bd3f0685360a04eab52a1def684",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/9232b457c131acac6299ab47cb68fed6b26bb97b",
+                "reference": "9232b457c131acac6299ab47cb68fed6b26bb97b",
                 "shasum": ""
             },
             "require-dev": {
@@ -1094,7 +1164,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-08-10T11:02:03+00:00"
+            "time": "2017-08-12T13:09:46+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
