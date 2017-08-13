@@ -15,26 +15,24 @@ use luya\admin\ngrest\base\ActiveWindow;
  * Flow Uploader ActiveWindow enables multi image upload with chunck ability.
  *
  * The Flow ActiveWindow will not store any data in the filemanager as its thought to be used in large image upload
- * scenarios like galleries, event the image are chuncked into parts in order to enable large image uploads.
+ * scenarios like galleries. The image are chuncked into parts in order to enable large image uploads.
  *
  * Example use:
  *
- * ```
- * public function ngRestConfig($config)
+ * ```php
+ * public function ngRestActiveWindows()
  * {
- *     // ...
- *     $config->aw->load(['class' => FlowActiveWindow, 'modelClass' => self::className()]);
+ *   return [
+ *       ['class' => \luya\admin\aws\FlowActiveWindow::class, 'alias' => 'My Gallery'],
+ *   ];
  * }
  * ```
  *
- * The property `modelClass` must be defined and the defined model class must implement the interface `FlowActiveWindowInterface`
- * in order to perfom all tasks defined in the FlowActiveWindow. There is also a helper Trait you can include in order to do
- * the basic jobs of such a image relation table.
+ * The attached model class must implement the interface {{\luya\admin\aws\FlowActiveWindowInterface}} in order to interact with thw Activ Window. 
+ * 
+ * There is also a helper Trait {{\luya\admin\aws\FlowActiveWindowTrait}} you can include in order to work with a relation table.
  *
- *
- * [[\admin\aw\FlowActiveWindowTrait]]
- *
- * @since 1.0.0-beta7
+ * @since 1.0.0
  */
 class FlowActiveWindow extends ActiveWindow
 {
@@ -53,35 +51,36 @@ class FlowActiveWindow extends ActiveWindow
      */
     public $icon = 'cloud_upload';
     
-    public $modelClass;
+    /**
+     * @inheritdoc
+     */
+    public function getModel()
+    {
+    	$model = parent::getModel();
+    	
+    	if (!$model instanceof FlowActiveWindowInterface) {
+    		throw new InvalidConfigException("The model ".$this->model->className()."which attaches the FlowActiveWindow must be an instance of luya\admin\aws\FlowActiveWindowInterface.");
+    	}
+    	
+    	return $model;
+    }
     
     /**
      * @inheritdoc
      */
-    public function init()
+    public function index()
     {
-        parent::init();
-        
-        if ($this->modelClass === null) {
-            throw new InvalidConfigException('The property modelClass can not be empty and is required for FlowActiveWindow.');
-        }
+        return $this->render('index');
     }
     
     /**
-     * Renders the index file of the ActiveWindow.
-     *
-     * @return string The render index file.
+     * Returns a list of uploaded images.
+     * 
+     * @return array
      */
-    public function index()
-    {
-        return $this->render('index', [
-            'id' => $this->itemId,
-        ]);
-    }
-    
     public function callbackList()
     {
-        $data = $this->getModelItem()->flowListImages();
+        $data = $this->model->flowListImages();
         
         $images = [];
         foreach (Yii::$app->storage->findImages(['in', 'id', $data]) as $item) {
@@ -93,32 +92,18 @@ class FlowActiveWindow extends ActiveWindow
         ]);
     }
     
-    private $_model;
-    
-    public function getModel()
-    {
-        if ($this->_model === null) {
-            $this->_model = Yii::createObject($this->modelClass);
-            
-            if (!$this->_model instanceof FlowActiveWindowInterface) {
-                throw new InvalidConfigException('The modelClass object must be instance of FlowActiveWindowInterface.');
-            }
-        }
-
-        return $this->_model;
-    }
-    
-    public function getModelItem()
-    {
-        return $this->model->findOne($this->itemId);
-    }
-    
+    /**
+     * Remove a given image from the collection.
+     * 
+     * @param integer $imageId
+     * @return array
+     */
     public function callbackRemove($imageId)
     {
         $image = Yii::$app->storage->getImage($imageId);
         
         if ($image) {
-            $this->modelItem->flowDeleteImage($image);
+            $this->model->flowDeleteImage($image);
             if (Storage::removeImage($image->id, true)) {
                 return $this->sendSuccess('image has been removed');
             }
@@ -127,6 +112,11 @@ class FlowActiveWindow extends ActiveWindow
         return $this->sendError('Unable to remove this image');
     }
     
+    /**
+     * Flow Uploader Upload.
+     * 
+     * @return string
+     */
     public function callbackUpload()
     {
         $config = new Config();
@@ -161,12 +151,8 @@ class FlowActiveWindow extends ActiveWindow
                 if ($image) {
                     $image->applyFilter('small-crop');
                     
-                    $model = $this->model;
-                    $row = $this->getModelItem();
-                    if ($row) {
-                        $row->flowSaveImage($image);
-                        return 'done';
-                    }
+                    $this->model->flowSaveImage($image);
+                    return 'done';
                 }
             }
         } else {

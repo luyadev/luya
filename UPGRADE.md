@@ -6,6 +6,8 @@ This document will help you upgrading from a LUYA Version into another. For more
 1.0.0-RC4 (in progress)
 -------------------
 
+ + [#1369]() FlowActiveWindow dropped property `$modelClass` and does need to be configured anymore.
+
 1.0.0-RC3 (11. April 2017)
 -------------------
 

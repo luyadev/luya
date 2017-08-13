@@ -74,7 +74,7 @@ module.exports = {
                 "../../vendor/bower-asset/ui-router/release/angular-ui-router.min.js",
                 "../../vendor/bower-asset/ng-file-upload/ng-file-upload-shim.min.js",
                 "../../vendor/bower-asset/ng-file-upload/ng-file-upload.min.js",
-                "../../venodr/bower-asset/ng-flow/dist/ng-flow-standalone.min.js",
+                "../../vendor/bower-asset/ng-flow/dist/ng-flow-standalone.min.js",
                 "vendorlibs/ng-wig/ng-wig.min.js",
                 "vendorlibs/twig.js/twig.min.js",
                 "vendorlibs/angular-filter/angular-filter.min.js",
