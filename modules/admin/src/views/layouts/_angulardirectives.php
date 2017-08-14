@@ -245,26 +245,25 @@ use luya\admin\Module as Admin;
 
                     <div class="filemanager-file-actions">
 
-                        <div class="filemanager-file-actions-left">
+                        <div class="filemanager-file-actions-left" ng-class="{'filemanager-file-actions-left-spacing': selectedFiles.length > 0}">
 
-                            <div class="btn btn-success"  ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
+                            <div class="btn btn-success filemanager-upload-file"  ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
                                 <span class="material-icons">file_upload</span>
                                 <span class="btn-icon-label"><?= Admin::t('layout_filemanager_upload_files'); ?></span>
                             </div>
-                            <div class="btn">
-                                <input type="text"  ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />
-                            </div>
+
+                            <input class="filemanager-search" type="text"  ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />
 
                         </div>
 
-                        <div class="filemanager-file-actions-right">
+                        <div class="filemanager-file-actions-right" ng-show="selectedFiles.length > 0">
 
-                            <div class="btn btn-info" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">
+                            <div class="btn btn-info" ng-click="showFoldersToMove=!showFoldersToMove">
                                 <span class="material-icons">subdirectory_arrow_right</span>
                                 <span class="btn-icon-label"><?= Admin::t('layout_filemanager_move_selected_files'); ?></span>
                             </div>
 
-                            <div class="btn btn-danger" ng-show="selectedFiles.length > 0" ng-click="removeFiles()">
+                            <div class="btn btn-danger" ng-click="removeFiles()">
                                 <span class="material-icons">delete_forever</span>
                                 <span class="btn-icon-label"><b>{{selectedFiles.length}}</b> <?= Admin::t('layout_filemanager_remove_selected_files'); ?></span>
                             </div>

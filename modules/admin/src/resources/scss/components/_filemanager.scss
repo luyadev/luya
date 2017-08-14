@@ -32,6 +32,27 @@
     flex-wrap: wrap;
 }
 
+.filemanager-file-actions-left {
+    align-items: flex-start;
+    display: flex;
+    flex: 1 1;
+    flex-wrap: wrap;
+
+    &-spacing {
+        padding-right: 50px;
+    }
+}
+
+.filemanager-upload-file {
+    margin-right: 25px;
+}
+
+.filemanager-search {
+    display: block;
+    flex: 1 1;
+    padding: 7px 10px;
+}
+
 .filemanager-file-actions-right {
     margin-left: auto;
 }
