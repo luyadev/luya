@@ -404,7 +404,6 @@
 		 * @var integer $fromVersionPageId From ng-model the version copy from or 0 = new empty/blank version
 		 * @var integer $versionLayoutId From ng-model, only if fromVersionPageId is 0
  		 */
-
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 
 		// layoutsData
@@ -414,31 +413,6 @@
     	$scope.$on('service:LayoutsData', function(event, data) {
     		$scope.layoutsData = data;
     	});
-
-    	$scope.closeCreateModal = function() {
-    		$scope.createVersionModalState = true;
-    	}
-
-    	$scope.editVersionModalState = true;
-
-    	$scope.closeEditModal = function() {
-    		$scope.editVersionModalState = true;
-    	}
-
-    	$scope.openEditModal = function() {
-    		$scope.editVersionModalState = false;
-    	}
-
-		$scope.toggleVersionEdit = function(versionId) {
-			$scope.$parent.switchVersion(versionId);
-			$scope.openEditModal();
-		};
-
-		$scope.toggleRemoveVersion = function(versionid) {
-			$scope.$parent.switchVersion(versionid);
-			$scope.$parent.removeCurrentVersion();
-
-		}
 
     	// controller logic
 
@@ -465,7 +439,6 @@
 				}
 
 				$scope.refreshForce();
-				$scope.closeCreateModal();
 
 				AdminToastService.success(i18n['js_version_create_success'], 4000);
 			});
@@ -1132,8 +1105,6 @@
 
 		$scope.container = [];
 
-		$scope.currentVersionInformation = null;
-
 		$scope.errors = [];
 
 		$scope.homeUrl = homeUrl;
@@ -1152,7 +1123,6 @@
 							$scope.typeDataCopy = [];
 							$scope.typeData = [];
 							$scope.container = [];
-							$scope.currentVersionInformation = null;
 							$scope.errors = [];
 							$scope.currentPageVersion = 0;
 							$scope.$broadcast('deletedNavItem');
@@ -1213,17 +1183,15 @@
 			}
 		});
 
-		$scope.removeCurrentVersion = function() {
-			// {alias: $scope.currentVersionInformation.version_alias}
-			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: $scope.currentVersionInformation.version_alias}), 'Version löschen', function($toast, $http) {
-				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : $scope.currentVersionInformation.id}).then(function(response) {
-					var aliasName = $scope.currentVersionInformation.version_alias;
+		$scope.removeVersion = function(version) {
+			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: version.version_alias}), 'Version löschen', function($toast, $http) {
+				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : version.id}).then(function(response) {
 					$scope.refreshForce();
 					$toast.close();
-					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: aliasName}), 5000);
+					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: version.version_alias}), 5000);
 				});
 			});
-		};
+		}
 
 		$scope.getItem = function(langId, navId) {
 			$http({
@@ -1245,7 +1213,6 @@
 									$scope.currentPageVersion = response.data.item.nav_item_type_id;
 								}
 								if (response.data.item.nav_item_type_id in response.data.typeData) {
-									$scope.currentVersionInformation = response.data.typeData[$scope.currentPageVersion];
 									$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
 								}
 							}
@@ -1258,7 +1225,6 @@
 
 		$scope.switchVersion = function(pageVersionid) {
 			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
-			$scope.currentVersionInformation = $scope.typeData[pageVersionid];
 			$scope.currentPageVersion = pageVersionid;
 			$scope.loadLiveUrl();
 		};

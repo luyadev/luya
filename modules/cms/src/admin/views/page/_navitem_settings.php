@@ -40,6 +40,22 @@ use luya\cms\admin\Module;
         </div>
         <div ng-switch-when="2">
             <h1>Version</h1>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Layout</th>
+                    <th>Erstellt</th>
+                    <th>Edit</th>
+                    <th>Remove</th>
+                </tr>
+                <tr ng-repeat="versionItem in typeData" ng-class="{'table-success' : currentPageVersion == versionItem.id}">
+                    <td>{{versionItem.version_alias}}</td>
+                    <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
+                    <td>{{versionItem.timestamp_create}}</td>
+                    <td><i class="material-icons">edit</i></td>
+                    <td><button type="button" ng-click="removeVersion(versionItem)"><i class="material-icons">delete</i></button></td>
+                </tr>
+            </table>
         </div>
         <div ng-switch-when="3" ng-controller="PageVersionsController">
             <form ng-submit="createNewVersionSubmit(create)">
