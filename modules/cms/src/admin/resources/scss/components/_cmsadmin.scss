@@ -59,7 +59,7 @@
         padding-right: 10px;
 
         &:after {
-            background-color: $brand-primary;
+            background-color: theme-color(primary);
             bottom: 0;
             content: "";
             height: 2px;
@@ -100,7 +100,7 @@
                     border-bottom: 0;
 
                     &.active {
-                        border-bottom: 1px solid $gray-lightest;
+                        border-bottom: 1px solid map-get($grays, 100);
                     }
                 }
 

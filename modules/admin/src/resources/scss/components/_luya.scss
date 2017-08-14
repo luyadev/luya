@@ -36,7 +36,7 @@
 
 .luya-subnav {
     background-color: $white;
-    color: $gray;
+    color: color('gray');
     display: flex;
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
@@ -72,7 +72,7 @@
 }
 
 .luya-content {
-    background-color: $gray-lightest;
+    background-color: map-get($grays, 100);
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
     padding: 15px 25px;

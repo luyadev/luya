@@ -32,7 +32,7 @@
         <h1>Dashboard</h1>
         <div class="card-columns">
             <div class="card" ng-repeat="item in dashboard">
-                <div class="card-block">
+                <div class="card-body">
                     <h3 class="card-title">{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span></h3>
                     <table class="table">
                         <tr ng-repeat="(key, log) in item.items">

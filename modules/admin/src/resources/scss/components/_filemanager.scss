@@ -42,7 +42,7 @@
 }
 
 .filemanager-detail-view {
-    border-left: 15px solid $gray-lightest;
+    border-left: 15px solid map-get($grays, 100);;
     display: none;
     flex: 0 0 400px;
     margin: -15px 0 -15px 15px;

@@ -122,7 +122,7 @@ input[type="radio"] {
 
         &:before {
             background-color: #c0c0c0;
-            border: 0 solid $brand-primary;
+            border: 0 solid theme-color(primary);
             border-radius: 50%;
             content: "";
             height: 16px;

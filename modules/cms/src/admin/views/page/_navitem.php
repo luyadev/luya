@@ -4,7 +4,7 @@ use luya\cms\admin\Module;
 <script type="text/ng-template" id="recursion.html">
 <h4 class="cmsadmin-container-title">{{placeholder.label}}</h4>
 <div class="card">
-    <div class="card-block">
+    <div class="card-body">
         <div class="empty-placeholder" ng-if="placeholder.__nav_item_page_block_items.length == 0" dnd dnd-drag-disabled dnd-model="placeholder" dnd-isvalid="true" dnd-ondrop="dropItemPlaceholder(dragged,dropped,position)" dnd-css="{onDrag: 'empty-placeholder--is-dragging', onHover: 'empty-placeholder--drag-hover', onHoverTop: 'empty-placeholder--drag-top', onHoverMiddle: 'empty-placeholder--drag-middle', onHoverBottom: 'empty-placeholder--drag-bottom'}">Drop blocks here</div>
         <div ng-class="{'block-is-layout' : block.is_container}" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items track by key" ng-controller="PageBlockEditController">
             <div class="block" dnd dnd-model="block" dnd-isvalid="true" dnd-disable-drag-middle dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'block--is-dragging', onHover: 'block--drag-hover', onHoverTop: 'block--drag-top', onHoverMiddle: 'block--drag-middle', onHoverBottom: 'block--drag-bottom'}">

@@ -11,7 +11,7 @@
 }
 
 .imageupload-preview {
-    background-color: $gray-lightest;
+    background-color: map-get($grays, 100);;
     max-width: 300px;
     position: relative;
     width: 100%;
@@ -36,7 +36,7 @@
 }
 
 .imageupload-size {
-    background-color: $brand-primary;
+    background-color: theme-color(primary);
     bottom: -30px;
     color: $white;
     left: 0;

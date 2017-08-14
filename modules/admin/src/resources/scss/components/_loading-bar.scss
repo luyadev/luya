@@ -8,7 +8,7 @@
     z-index: 20000;
 
     .bar {
-        background-color: $brand-info;
+        background-color: theme-color(info);
         bottom: 0;
         left: 0;
         position: absolute;

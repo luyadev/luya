@@ -5,7 +5,7 @@
 }
 
 .blockholder {
-    background-color: $gray;
+    background-color: color(gray);
     color: $white;
     display: block;
     height: 100%;
@@ -63,7 +63,7 @@
     }
 
     .blockholder-group-favorites & {
-        color: $brand-primary;
+        color: theme-color(primary);
     }
 }
 
@@ -104,7 +104,7 @@
 .blockholder-favorite {
     background: none;
     border: none;
-    color: $brand-primary;
+    color: theme-color(primary);
     font-size: 16px;
     opacity: 0;
     padding-bottom: 3px;

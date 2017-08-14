@@ -64,7 +64,7 @@ use luya\cms\admin\Module;
 </script>
 <h1><?= Module::t('menu_group_item_env_permission'); ?></h1>
 <div ng-controller="PermissionController" class="card">
-    <div class="card-block">
+    <div class="card-body">
         <table class="table table-hover table-sm">
             <thead>
                 <tr>

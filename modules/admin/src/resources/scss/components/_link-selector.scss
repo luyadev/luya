@@ -12,7 +12,7 @@
 }
 
 .link-selector-reset {
-    color: $brand-danger;
+    color: theme-color(danger);
     cursor: pointer;
     display: inline-block;
     font-size: 25px;

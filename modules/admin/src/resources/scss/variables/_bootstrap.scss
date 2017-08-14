@@ -2,9 +2,6 @@
 // Bootstrap colors
 // ==================================================
 
-$brand-primary: $pink;
-$brand-inverse: $gray-light;
-
 // ==================================================
 // General
 // ==================================================
@@ -23,7 +20,7 @@ $font-family-sans-serif: 'Roboto', sans-serif;
 
 // Headings
 
-$headings-color: $brand-primary;
+$headings-color: theme-color(primary);
 
 $font-size-h1: 2rem;
 $font-size-h2: 1.8rem;
@@ -67,20 +64,20 @@ $nav-tab-active-background-color: $white; // Custom
 
 $nav-tabs-border-radius: 5px;
 $nav-tabs-border-width: 1px;
-$nav-tabs-active-link-hover-color: $brand-primary;
+$nav-tabs-active-link-hover-color: theme-color(primary);
 
 // ==================================================
 // Forms
 // ==================================================
 
 $input-border-radius: 0;
-$input-border-color: $gray-light;
+$input-border-color: map-get($grays, 600);
 $input-btn-border-width: 1px;
 
 // Input Groups
 
-$input-group-addon-border-color: $gray-light;
-$input-group-addon-bg: $gray-lighter;
+$input-group-addon-border-color: map-get($grays, 600);
+$input-group-addon-bg: map-get($grays, 100);;
 
 // Check / Radio
 
@@ -91,22 +88,22 @@ $form-check-input-margin-y: .2rem;
 // ==================================================
 
 $table-head-bg:         transparent;
-$table-head-color:      $brand-primary;
+$table-head-color:      theme-color(primary);
 
 $table-inverse-color:   $white;
-$table-inverse-bg:      $brand-primary;
+$table-inverse-bg:      theme-color(primary);
 
 // BG for the striped effect
-$table-bg-accent: $gray-lightest;
+$table-bg-accent: map-get($grays, 100);;
 
 // ==================================================
 // Pagination
 // ==================================================
 
 $pagination-border-width: 0;
-$pagination-color: $gray;
-$pagination-hover-color: $brand-primary;
-$pagination-active-color: $brand-primary;
+$pagination-color: color('gray');
+$pagination-hover-color: theme-color(primary);
+$pagination-active-color: theme-color(primary);
 $pagination-hover-bg: transparent;
 $pagination-active-bg: transparent;
 

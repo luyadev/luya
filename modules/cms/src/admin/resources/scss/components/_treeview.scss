@@ -54,8 +54,8 @@
     position: relative;
 
     &:before {
-        border-bottom: 1px solid lighten($gray, 45);
-        border-left: 1px solid lighten($gray, 45);
+        border-bottom: 1px solid map-get($grays, 400);
+        border-left: 1px solid map-get($grays, 400);
         content: '';
         display: block;
         height: 15px;
@@ -72,7 +72,7 @@
     }
 
     &:after {
-        border-left: 1px solid lighten($gray, 45);
+        border-left: 1px solid map-get($grays, 400);
         content: '';
         display: block;
         height: 100%;

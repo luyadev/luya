@@ -44,7 +44,7 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
 </script>
 <div  ng-controller="SitesStatusController">
     <div class="card">
-    	<div class="card-block">
+    	<div class="card-body">
     		<h3><i class="material-icons">update</i> <?= Module::t('status_index_heading'); ?></h3>
             <p><?= Module::t('status_index_intro', ['version' => $currentVersion['version'], 'date' => Yii::$app->formatter->asDate(strtotime($currentVersion['time']))]); ?></p>
     		<table class="table table-striped">

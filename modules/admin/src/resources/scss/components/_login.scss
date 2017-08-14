@@ -198,7 +198,7 @@
 }
 
 .login-reset {
-    color: $gray;
+    color: color('gray');
     text-align: right;
     display: block;
 }
@@ -206,7 +206,7 @@
 .login-link {
     transition: .25s color ease-in-out;
     &:hover {
-        color: $gray-light;
+        color: map-get($grays, 600);
         text-decoration: none;
     }
 }

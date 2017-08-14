@@ -17,7 +17,7 @@
 }
 
 .modulenav-group-title {
-    color: $gray-light;
+    color: map-get($grays, 600);
     display: block;
     padding-left: 32px;
     width: 100%;
@@ -36,7 +36,7 @@
 
 .modulenav-link {
     border-radius: 5px;
-    color: $gray;
+    color: color('gray');
     cursor: pointer;
     display: block;
     padding: 5px;
@@ -48,7 +48,7 @@
 
     &-active,
     &:hover {
-        color: $brand-primary;
+        color: theme-color(primary);
         text-decoration: none;
     }
 }

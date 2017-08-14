@@ -3,7 +3,7 @@
     text-align: center;
 
     &--drag-hover {
-        background-color: $brand-primary;
+        background-color: theme-color(primary);
         color: $white;
     }
 }

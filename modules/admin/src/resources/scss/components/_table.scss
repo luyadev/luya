@@ -26,7 +26,7 @@
 }
 
 .table-sorter {
-    color: $gray;
+    color: color('gray');
     cursor: pointer;
     display: none;
     font-size: 20px;
@@ -37,7 +37,7 @@
         display: inline-block;
     }
     &.is-active {
-        color: $brand-primary;
+        color: theme-color(primary);
         display: inline-block;
     }
     &.is-active + .table-sorter-down {

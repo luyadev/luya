@@ -25,10 +25,10 @@
 // ==================================================
 
 .btn-link {
-    color: $gray-light;
+    color: map-get($grays, 600);
 
     &:hover {
-        color: $brand-primary;
+        color: theme-color(primary);
     }
 }
 

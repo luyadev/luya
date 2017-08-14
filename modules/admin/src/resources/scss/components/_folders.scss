@@ -41,7 +41,7 @@ $icon-line-height: $icon-font-size + 10px;
     cursor: pointer;
     flex: 0 0 20px;
     &:hover {
-        color: $brand-primary;
+        color: theme-color(primary);
     }
 
     order: -2;
@@ -55,7 +55,7 @@ $icon-line-height: $icon-font-size + 10px;
     padding: 2px 5px 0;
 
     &:hover {
-        background-color: $gray-lighter;
+        background-color: map-get($grays, 100);;
     }
 
     .edit > &,

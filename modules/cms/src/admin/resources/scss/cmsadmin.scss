@@ -1,4 +1,11 @@
 // ==================================================
+// Include Bootstrap Mixins / Functions
+// ==================================================
+
+@import "../../../../../admin/vendor/twbs/bootstrap/scss/mixins/clearfix";
+@import "../../../../../admin/vendor/twbs/bootstrap/scss/functions";
+
+// ==================================================
 // Variables
 // ==================================================
 
@@ -7,10 +14,9 @@
 @import "../../../../../admin/src/resources/scss/variables/flags";
 
 // ==================================================
-// Include Bootstrap
+// Include Bootstrap variables
 // ==================================================
 
-@import "../../../../../admin/vendor/twbs/bootstrap/scss/mixins/clearfix";
 @import "../../../../../admin/vendor/twbs/bootstrap/scss/variables";
 
 // ==================================================

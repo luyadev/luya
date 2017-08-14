@@ -43,7 +43,7 @@
 	text-transform: uppercase;
 
 	&.flag-fallback-colorized {
-		color: $brand-primary;
+		color: theme-color(primary);
 	}
 }
 

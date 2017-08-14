@@ -16,7 +16,7 @@ use luya\cms\admin\Module;
             </li>
         </ul>
     </div>
-    <div  class="card-block">
+    <div  class="card-body">
         <form ng-switch on="data.nav_item_type">
             <div class="form-group" ng-show="data.nav_item_type == 1 && !data.isInline">
                 <label for="exampleInputEmail1"><?= Module::t('view_index_as_draft'); ?></label>

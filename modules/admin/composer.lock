@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fee2bf9094616a63cafd28fdfc41056d",
+    "content-hash": "3586873d012825b0a820dc921c8f3dfb",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -902,32 +902,32 @@
         },
         {
             "name": "doctrine/instantiator",
-            "version": "1.0.5",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d"
+                "reference": "185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda",
+                "reference": "185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3,<8.0-DEV"
+                "php": "^7.1"
             },
             "require-dev": {
                 "athletic/athletic": "~0.1.8",
                 "ext-pdo": "*",
                 "ext-phar": "*",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~2.0"
+                "phpunit/phpunit": "^6.2.3",
+                "squizlabs/php_codesniffer": "^3.0.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -952,7 +952,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14T21:17:01+00:00"
+            "time": "2017-07-22T11:58:36+00:00"
         },
         {
             "name": "guzzle/guzzle",
@@ -1114,12 +1114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "9232b457c131acac6299ab47cb68fed6b26bb97b"
+                "reference": "c2537c2487eef56238fd759a935a8c4f0861c607"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/9232b457c131acac6299ab47cb68fed6b26bb97b",
-                "reference": "9232b457c131acac6299ab47cb68fed6b26bb97b",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/c2537c2487eef56238fd759a935a8c4f0861c607",
+                "reference": "c2537c2487eef56238fd759a935a8c4f0861c607",
                 "shasum": ""
             },
             "require-dev": {
@@ -1164,7 +1164,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-08-12T13:09:46+00:00"
+            "time": "2017-08-14T07:29:28+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -3204,16 +3204,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "4.0.0-alpha.6",
+            "version": "v4.0.0-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "65ffb1c3b6e94440812a2e228cb8e8be512652ec"
+                "reference": "35f80bb12e4e71fd777ee60ffa43711d8f84b1a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/65ffb1c3b6e94440812a2e228cb8e8be512652ec",
-                "reference": "65ffb1c3b6e94440812a2e228cb8e8be512652ec",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/35f80bb12e4e71fd777ee60ffa43711d8f84b1a6",
+                "reference": "35f80bb12e4e71fd777ee60ffa43711d8f84b1a6",
                 "shasum": ""
             },
             "replace": {
@@ -3251,7 +3251,7 @@
                 "sass",
                 "web"
             ],
-            "time": "2017-01-06T16:41:52+00:00"
+            "time": "2017-08-11T03:56:35+00:00"
         },
         {
             "name": "twig/twig",
@@ -3373,7 +3373,7 @@
     "minimum-stability": "RC",
     "stability-flags": {
         "luyadev/luya-module-cms": 20,
-        "twbs/bootstrap": 15
+        "twbs/bootstrap": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,

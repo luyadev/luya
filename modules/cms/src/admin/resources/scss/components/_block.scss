@@ -42,7 +42,7 @@ $block-padding: 10px !default;
 
     &:before,
     &:after {
-        background-color: $brand-primary;
+        background-color: theme-color(primary);
         content: "";
         height: 5px;
         left: 0;
@@ -67,7 +67,7 @@ $block-padding: 10px !default;
 }
 
 .block-toolbar {
-    background-color: $gray-dark;
+    background-color: map-get($grays, 900);
     color: $white;
     display: flex;
     flex-wrap: wrap;

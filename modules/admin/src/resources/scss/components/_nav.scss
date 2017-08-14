@@ -43,7 +43,7 @@
         cursor: pointer;
 
         &:after {
-            background-color: $brand-primary;
+            background-color: theme-color(primary);
             bottom: 0;
             content: "";
             height: 2px;

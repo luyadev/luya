@@ -4,7 +4,7 @@
     position: relative;
 
     &:not(:last-of-type) {
-        border-bottom: 1px solid $gray-light;
+        border-bottom: 1px solid map-get($grays, 600);
         margin-bottom: 20px;
     }
 }

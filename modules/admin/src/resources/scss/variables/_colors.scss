@@ -1,30 +1,82 @@
-$white: #fff;
+// =========================
+// Bootstrap colors
+// =========================
 
-$black: #000;
-$black-light: #232526;
+$white:  #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:  #000;
 
-$gray-dark:                 #292b2c;
-$gray:                      #4D4D4D;
-$gray-light:                #8E8E8E;
-$gray-lighter:              #eceeef;
-$gray-lightest:             #F2F2F2;
+$grays: (
+    100: $gray-100,
+    200: $gray-200,
+    300: $gray-300,
+    400: $gray-400,
+    500: $gray-500,
+    600: $gray-600,
+    700: $gray-700,
+    800: $gray-800,
+    900: $gray-900
+);
 
-$blue:                      #014B8B;
-$orange:                    #FF7C3A;
-$red-dark:                  #AC0031;
-$red:                       #d9534f;
-$purple:                    #AD1579;
-$purple-light:              #C21888;
-$pink:                      #FF006B;
-$green:                     #79B744;
-$teal:                      #77C4D3;
+$blue:    #007bff;
+$indigo:  #6610f2;
+$purple:  #6f42c1;
+$pink:    #FF006B;
+$red:     #dc3545;
+$orange:  #fd7e14;
+$yellow:  #ffc107;
+$green:   #28a745;
+$teal:    #20c997;
+$cyan:    #17a2b8;
 
-$pink-alpha-25:             rgba(255, 0, 107, .25);
-$pink-alpha-50:             rgba(255, 0, 107, .5);
-$pink-alpha-75:             rgba(255, 0, 107, .75);
+$colors: (
+    blue: $blue,
+    indigo: $indigo,
+    purple: $purple,
+    pink: $pink,
+    red: $red,
+    orange: $orange,
+    yellow: $yellow,
+    green: $green,
+    teal: $teal,
+    cyan: $cyan,
+    white: $white,
+    gray: $gray-700,
+    gray-dark: $gray-800
+);
+
+$theme-colors: (
+    primary: $pink,
+    secondary: $gray-600,
+    success: $green,
+    info: $cyan,
+    warning: $yellow,
+    danger: $red,
+    light: $gray-100,
+    dark: $gray-800
+);
+
+// =========================
+// Custom colors
+// =========================
+
+$red-dark: darken($red, 50);
+$purple-light: lighten($purple, 20);
+
+$pink-alpha-25:             rgba($pink, .25);
+$pink-alpha-50:             rgba($pink, .5);
+$pink-alpha-75:             rgba($pink, .75);
 
 $mainnav-colors: (
-    background-color: $black-light,
-    background: linear-gradient(to top, $black-light, #35383D),
+    background-color: map_get($grays, 900),
+    background: linear-gradient(to top, map_get($grays, 900), #35383D),
     color: $white,
-)
+);

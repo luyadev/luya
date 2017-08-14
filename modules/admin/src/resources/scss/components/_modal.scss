@@ -3,7 +3,7 @@
 }
 
 .modal-body-gray {
-    background-color: $gray-lightest;
+    background-color: map-get($grays, 100);;
 }
 
 .modal-xl {

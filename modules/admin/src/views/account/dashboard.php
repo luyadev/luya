@@ -11,7 +11,7 @@ use luya\helpers\Url;
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                 	<h2>Personalien</h2>
                     <form ng-submit="changePersonData(profile)">
                         <div class="form-group form-side-by-side">
@@ -60,7 +60,7 @@ use luya\helpers\Url;
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <h2><?= Module::t('mode_user_password'); ?></h2>
                     <form ng-submit="changePassword(pass)">
                             <div class="form-group form-side-by-side">
@@ -97,7 +97,7 @@ use luya\helpers\Url;
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <h2>General</h2>
                     <div class="form-group form-side-by-side">
                         <div class="form-side form-side-label">

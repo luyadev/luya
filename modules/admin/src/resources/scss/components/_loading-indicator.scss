@@ -13,7 +13,7 @@ $loading-indicator-height: 150px !default;
 .loading-indicator > div {
     animation: sk-stretchdelay 1.2s infinite ease-in-out;
     -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
-    background-color: $brand-primary;
+    background-color: theme-color(primary);
     display: inline-block;
     height: 100%;
     margin: 0 $loading-indicator-margin-left-right;
