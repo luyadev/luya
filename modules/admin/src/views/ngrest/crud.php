@@ -22,7 +22,7 @@ $this->beginBody();
                         <button class="btn btn-sm btn-link btn-icon" type="button" ng-click="toggleSettings=!toggleSettings">
                             <i class="material-icons">more_vert</i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
                             <a class="dropdown-item" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()">
                                 <i class="material-icons">get_app</i> <span><?= Module::t('ngrest_crud_csv_export_btn'); ?></span>
                             </a>
