@@ -34,7 +34,7 @@ use luya\cms\admin\Module;
                         </button>
                     </div>
                     <div ng-show="isEditable()" ng-click="toggleEdit()" class="toolbar-item">
-                        <button class="toolbar-button">
+                        <button class="toolbar-button" tooltip tooltip-text="TEST" tooltip-position="top">
                             <i class="material-icons">edit</i>
                         </button>
                     </div>

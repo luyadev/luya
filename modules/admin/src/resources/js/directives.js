@@ -69,7 +69,7 @@
      * <span tooltip tooltip-expression="scopeFunction(fooBar)">Span Text</span>
      * ```
      */
-    zaa.directive("tooltip", function () {
+    zaa.directive("tooltip", function ($document) {
         return {
             restrict: 'A',
             scope: {
@@ -81,32 +81,33 @@
             },
             link: function (scope, element, attr) {
                 var positions = {
-                    top: function(elem, pop) {
-                        var bcr = elem.getBoundingClientRect();
+                    top: function() {
+                        var bcr = element[0].getBoundingClientRect();
                         return {
-                            top: 0 - bcr.height - pop.outerHeight() - 5,
-                            left: (bcr.width / 2) - (pop.outerWidth() / 2)
+                            top: bcr.top - scope.pop.outerHeight(),
+                            left: (bcr.left + (bcr.width / 2)) - (scope.pop.outerWidth() / 2),
                         }
                     },
-                    right: function(elem, pop) {
-                        var bcr = elem.getBoundingClientRect();
+                    bottom: function() {
+                        var bcr = element[0].getBoundingClientRect();
                         return {
-                            top: 0 - (bcr.height / 2) - (pop.outerHeight() / 2) - 5,
-                            left: bcr.width
+                            top: bcr.top + bcr.height,
+                            left: (bcr.left + (bcr.width / 2)) - (scope.pop.outerWidth() / 2),
                         }
                     },
-                    bottom: function(elem, pop) {
-                        var bcr = elem.getBoundingClientRect();
+                    right: function() {
+                        var bcr = element[0].getBoundingClientRect();
+                        window.console.log(bcr);
                         return {
-                            top: -5,
-                            left: (bcr.width / 2) - (pop.outerWidth() / 2)
+                            top: (bcr.top + (bcr.height / 2)) - (scope.pop.outerHeight() / 2),
+                            left: bcr.left + bcr.width
                         }
                     },
-                    left: function(elem, pop) {
-                        var bcr = elem.getBoundingClientRect();
+                    left: function() {
+                        var bcr = element[0].getBoundingClientRect();
                         return {
-                            top: 0 - (bcr.height / 2) - (pop.outerHeight() / 2) - 5,
-                            left: 0 - pop.width() - 10
+                            top: (bcr.top + (bcr.height / 2)) - (scope.pop.outerHeight() / 2),
+                            left: bcr.left - scope.pop.outerWidth()
                         }
                     }
                 };
@@ -120,16 +121,16 @@
                                '<div class="tooltip-inner">' + scope.tooltipText +  '</div>' +
                             '</div>';
 
-                var pop = $(html);
-                element.after(pop);
-                pop.hide();
+                scope.pop = $(html);
+                element.after(scope.pop);
+                scope.pop.hide();
 
-                element.on('mouseenter', function () {
+                var onScroll = function() {
                     var offset = {};
                     if(typeof positions[scope.tooltipPosition] === 'function') {
-                        offset = positions[scope.tooltipPosition](this, pop);
+                        offset = positions[scope.tooltipPosition]();
                     } else {
-                        offset = positions['bottom'](this, pop);
+                        offset = positions['right']();
                     }
 
                     if (typeof scope.tooltipOffsetTop == 'number') {
@@ -140,15 +141,21 @@
                         offset.left = offset.left + scope.tooltipOffsetLeft;
                     }
 
-                    pop.css({
-                        'transform': 'translateX(' + offset.left + 'px) translateY(' + offset.top + 'px)'
-                    });
+                    scope.pop.css(offset);
+                };
 
-                    pop.show();
+                element.on('mouseenter', function () {
+                    onScroll();
+
+                    // todo: Improve performance?
+                    element.parents().on('scroll', onScroll);
+
+                    scope.pop.show();
                 });
 
                 element.on('mouseleave', function () {
-                    pop.hide();
+                    element.parents().off('scroll', onScroll);
+                    scope.pop.hide();
                 });
 
             }
