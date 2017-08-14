@@ -79,4 +79,10 @@ var observeLogin = function(form, url, secureUrl) {
 		$('#loginForm').show();
 		$('#success').hide();
 	});
+
+    $(window).load(function() {
+        $('.login-logo').addClass('login-logo-loaded');
+        $('.login-form').addClass('login-form-loaded');
+    });
+
 };
