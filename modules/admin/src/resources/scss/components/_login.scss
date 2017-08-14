@@ -58,7 +58,6 @@
     &-center {
         left:50%;
         transform: translateX(-50%);
-
         position: relative;
     }
     &-right {
@@ -86,7 +85,6 @@
     border: none;
     color: $white;
     transition: .25s background ease-in-out;
-    outline: 0 !important;
     font-weight: 300;
 
     &:hover {
@@ -113,7 +111,7 @@
     font-size: $font-size-h4;
     margin-bottom: 20px;
     line-height: 1.05;
-    @media (min-width: 518px) {
+    @include media-breakpoint-sm-up(){
         font-size: $font-size-h3;
     }
 }
@@ -152,6 +150,7 @@
     &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 30px white inset;
     }
+
     /* -webkit-text-fill-color: yellow !important; */
 
     &:last-of-type {
