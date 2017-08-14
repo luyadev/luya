@@ -3139,9 +3139,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "initvalue": "@initvalue"
             },
             link: function(scope) {
-
-            	console.log(scope.optionsvalue, scope.optionslabel, scope.options);
-            	
+    			
             	if (scope.optionsvalue == undefined) {
             		scope.optionsvalue = 'value';
             	}
