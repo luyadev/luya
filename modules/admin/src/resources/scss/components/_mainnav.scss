@@ -130,6 +130,10 @@
     &:focus {
         color: $white;
         text-decoration: none;
+
+        .mainnav-user-online {
+            color: theme-color(primary);
+        }
     }
 
     &:hover,
@@ -137,6 +141,10 @@
         background-color: rgba(#fff, .1);
         color: $white;
         text-decoration: none;
+
+        .mainnav-user-online {
+            color: theme-color(primary);
+        }
 
         @media (min-width: $mobile-nav-breakpoint) {
             .mainnav-small & {
@@ -217,9 +225,10 @@
     font-size: 13px;
     left: 17px;
     position: absolute;
-    top: 50%;
+    top: 56%;
     transform: translateY(-50%);
     transition: color .2s ease-in-out;
+
 }
 
 .mainnav-tooltip-big {
