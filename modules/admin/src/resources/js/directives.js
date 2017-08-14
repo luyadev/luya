@@ -97,7 +97,6 @@
                     },
                     right: function() {
                         var bcr = element[0].getBoundingClientRect();
-                        window.console.log(bcr);
                         return {
                             top: (bcr.top + (bcr.height / 2)) - (scope.pop.outerHeight() / 2),
                             left: bcr.left + bcr.width
