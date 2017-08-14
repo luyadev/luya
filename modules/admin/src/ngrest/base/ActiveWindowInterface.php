@@ -46,4 +46,14 @@ interface ActiveWindowInterface
      * @return string The response string, render and displayed trough the angular ajax request.
      */
     public function index();
+    
+    /**
+     * Return the current alias defined for this Active Window.
+     */
+    public function getAlias();
+    
+    /**
+     * Return the current icon defined for this Active Window.
+     */
+    public function getIcon();
 }

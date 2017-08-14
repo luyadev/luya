@@ -285,17 +285,24 @@ class Api extends RestActiveController
     /**
      * Renders the index page of an ActiveWindow.
      * 
-     * @return string
+     * @return array
      */
     public function actionActiveWindowRender()
     {
-        $config = $this->model->getNgRestConfig();
+        // generate ngrest active window
         $render = new RenderActiveWindow();
         $render->setItemId(Yii::$app->request->post('itemId', false));
         $render->setActiveWindowHash(Yii::$app->request->post('activeWindowHash', false));
-        $ngrest = new NgRest($config);
-    
-        return $ngrest->render($render);
+        
+        // process ngrest render view with config context
+        $ngrest = new NgRest($this->model->getNgRestConfig());
+        
+        return [
+            'content' => $ngrest->render($render), 
+            'icon' => $render->getActiveWindowObject()->getIcon(), 
+            'alias' => $render->getActiveWindowObject()->getAlias(), 
+            'requestDate' => time(),
+        ];
     }
 
     /**
