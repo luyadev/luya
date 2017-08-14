@@ -2556,6 +2556,11 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
             	});
             },
             link: function (scope, element) {
+            	
+            	scope.$on('$destroy', function() {
+            		element.remove();
+            	});
+            	
             	angular.element(document.body).append(element);
             }
         }
