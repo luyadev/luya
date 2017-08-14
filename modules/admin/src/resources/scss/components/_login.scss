@@ -1,113 +1,93 @@
 .login-screen {
-    background-color: $purple-light;
-    background: linear-gradient(320deg, $red, $purple-light, $purple, $pink);
-    background-size: 250% 250%;
-
-    -webkit-animation: LuyaLogin 50s ease infinite;
-    -moz-animation: LuyaLogin 50s ease infinite;
-    animation: LuyaLogin 50s ease infinite;
-
-    @-webkit-keyframes LuyaLogin {
-        0%{background-position:0% 9%}
-        50%{background-position:100% 92%}
-        100%{background-position:0% 9%}
-    }
-    @-moz-keyframes LuyaLogin {
-        0%{background-position:0% 9%}
-        50%{background-position:100% 92%}
-        100%{background-position:0% 9%}
-    }
-    @keyframes LuyaLogin {
-        0%{background-position:0% 9%}
-        50%{background-position:100% 92%}
-        100%{background-position:0% 9%}
-    }
+    background-color: $white;
     position: relative;
     height: 100%;
-}
-
-.login-frame {
-    background: $white;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    width: 320px;
-    max-width: 100%;
-    height: 518px;
-
-    @media (min-width: 518px) {
-        width: 518px;
-        height: 320px;
-    }
-}
-
-.login-panel-left {
-    display:inline-block;
-    position: relative;
-    min-height: 198px;
-    background: $pink;
-    float:left;
-    width: 320px;
-    max-width: 100%;
-
-    @media (min-width: 518px) {
-        width:38%;
-        min-height: 100%;
-    }
-}
-
-.login-panel-right {
     width: 100%;
-    padding:20px;
-    position: relative;
-    display: inline-block;
-    max-width: 100%;
-    min-height: 318px;
-
-    @media (min-width: 518px) {
-        width:62%;
-        min-height: 318px;
-    }
 }
 
 .login-logo {
-    background: url("../../images/luyalogo-white.svg") top center no-repeat;
-    min-height: 110px;
-    background-size: contain;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
     position: absolute;
-    width: 110px;
+    left:50%;
+    top:0;
+    transition: .2s all ease-in-out;
+    transform: translateX(-50%);
+    z-index: 99;
 
-    @media (min-width: 518px) {
+    img {
+        width: 80px;
+        @include media-breakpoint-up(sm) {
+            width: 100px;
+        }
+    }
 
+    &-loaded {
+        top: -120px;
+        @include media-breakpoint-up(sm) {
+            top: -160px;
+        }
     }
 }
 
-.login-form {
+.login-frame {
+    width: 320px;
+    max-width: 100%;
+    position: relative;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 15px 40px 15px;
+}
 
+.login-form {
+    opacity: 0;
+    transition: .25s opacity ease-in-out;
+    &-loaded {
+        opacity: 1;
+    }
     &-field {
         margin-bottom: 20px;
     }
 }
+
 .login-buttons {
-    width: calc(100% - 40px);
+    width: 100%;
     max-width: 100%;
     display: inline-block;
-    position: absolute;
-    bottom: 20px;
+    position: relative;
+
+    &-center {
+        left:50%;
+        transform: translateX(-50%);
+
+        position: relative;
+    }
+    &-right {
+        width: 100%;
+        right:0;
+
+        .login-btn {
+            right:0;
+            margin-left: 50%;
+            max-width: 50%;
+        }
+    }
+    &-left {
+        left:0;
+    }
 }
+
 .login-btn {
     background: $pink;
     width:100%;
+    max-width: 100%;
     min-height: 40px;
     cursor: pointer;
     box-shadow: none;
     border: none;
     color: $white;
     transition: .25s background ease-in-out;
+    outline: 0 !important;
+    font-weight: 300;
 
     &:hover {
         background: $pink-alpha-50;
@@ -115,20 +95,24 @@
 }
 
 .login-btn-50 {
-    width: 50%;
-    float: left;
-
-    &:last-of-type {
-        padding-right: 0;
+    float: none;
+    width: 100%;
+    &:first-of-type {
+        margin-bottom: 10px;
+    }
+    @include media-breakpoint-up(sm) {
+        width: calc(50% - 5px);
+        float: left;
+        &:first-of-type {
+            margin-right: 10px;
+        }
     }
 }
-
 .login-title {
     text-align: left;
     font-size: $font-size-h4;
     margin-bottom: 20px;
     line-height: 1.05;
-
     @media (min-width: 518px) {
         font-size: $font-size-h3;
     }
@@ -140,81 +124,65 @@
 
 .login-form-field {
     position: relative;
-    margin-bottom: 24px;
+    margin-bottom: 35px;
 }
 
 .login-input-label {
     position: absolute;
     margin-bottom: 0;
-    top: 8px;
+    top: 10px;
+    left: 10px;
     display: inline-block;
     width: auto;
-    transition: top .25s ease-in-out, color .25s ease-in-out, font-size .25s ease-in-out;
-    font-size: 16px;
+    transition: top .25s ease-in-out, color .25s ease-in-out, font-size .25s ease-in-out, left .25s ease-in-out;
+    font-size: 15px;
+    font-weight: 300;
+    color: $gray-800;
 }
 
 .login-input {
     display:block;
     width: 100%;
-    border:none;
-    border-style:solid;
-    border-width: 0;
     border-color:$white;
-    border-bottom: solid 1px $pink;
-    padding: 8px 3px 3px 0;
+    border: solid 1px $gray-300;
+    padding: 9px;
     margin-bottom: 10px;
+    font-weight: 300;
+
+    &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset;
+    }
+    /* -webkit-text-fill-color: yellow !important; */
 
     &:last-of-type {
         margin-bottom: 3px;
     }
 
-    &:focus, &:valid {
+    &:focus, &:valid, &:-webkit-autofill {
         outline: 0;
         ~ .login-input-label {
-            top: -17px;
+            top: -24px;
             font-size: 13px;
+            left: 0;
         }
     }
-}
 
-.login-system-info {
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 0;
-    width: 100%;
-    max-width: 100%;
-    text-align: center;
-
-    @media (min-width: 518px) {
-        padding-bottom: 20px;
+    &:focus, &:valid {
+        border-bottom-color: $pink;
     }
-}
-
-.login-version {
-    color: $white;
-    display: block;
-    text-align: center;
-    line-height: 40px;
-}
-
-.login-reset {
-    color: color('gray');
-    text-align: right;
-    display: block;
 }
 
 .login-link {
     transition: .25s color ease-in-out;
     &:hover {
-        color: map-get($grays, 600);
+        color: map-get($grays, 800);
         text-decoration: none;
     }
 }
 
 .login-status {
-
-    background: $pink-alpha-25;
-    border-left: 5px solid $pink;
+    min-height: 25px;
+    margin-bottom: 35px;
 
     ul {
         padding-left: 10px;
@@ -223,14 +191,10 @@
         li {
             list-style: none;
             margin: 0;
-            padding: 0;
+            padding: 5px 0;
         }
     }
 
-    &-wrapper {
-        min-height: 25px;
-        margin-bottom: 15px;
-    }
     &-success {
         position: absolute;
         top: 50%;
@@ -243,8 +207,60 @@
         text-align: center;
         color: $pink;
 
-        &-wrapper {
+    }
+}
 
+.login-info {
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width: 100%;
+
+    h1 {
+        text-align: center;
+    }
+    padding: 25px;
+    text-align: center;
+
+    @include media-breakpoint-up(sm) {
+
+        h1 {
+            text-align: left;
+        }
+
+        padding: 25px;
+        text-align: left;
+
+        &-text {
+            font-weight: 300;
+        }
+    }
+}
+
+.login-secure-token-label {
+    font-weight: 300;
+}
+
+.login-links {
+    position: absolute;
+    display: none;
+
+    @include media-breakpoint-up(sm) {
+        display: block;
+        right:0;
+        bottom: 0;
+        padding: 25px;
+
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
     }
 }
