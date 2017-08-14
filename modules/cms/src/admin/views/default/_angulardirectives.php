@@ -113,16 +113,10 @@ use luya\cms\admin\Module;
 </div>
 <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
+
 <!-- CREATE MODULE FORM -->
 <script type="text/ng-template" id="createformmodule.html">
-<div class="form-group">
-    <label><?= Module::t('view_index_module_select'); ?></label>
-    <select ng-model="data.module_name" class="form-control">
-        <option value=""><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
-        <option value="">- - - - -</option>
-        <option ng-repeat="item in modules" value="{{item.value}}">{{item.label}}</option>
-    </select>
-</div>
+<zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
 <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
 
@@ -144,7 +138,7 @@ use luya\cms\admin\Module;
 </div>
 <div class="form-group" ng-show="data.redirect_type==2">
     <label><?php echo \luya\admin\Module::t('view_index_redirect_external_link'); ?></label>
-    <input class="form-control" type="text" class="input__field" ng-model="data.redirect_type_value" placeholder="http://" />
+    <input class="form-control" type="text" class="input__field" ng-model="data.redirect_type_value" placeholder="https://" />
     <small class="form-text text-muted"><?php echo \luya\admin\Module::t('view_index_redirect_external_link_help'); ?></small>
 </div>
 <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
@@ -155,8 +149,7 @@ use luya\cms\admin\Module;
 <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
 
-
-<!-- UPDATE PAGE FORM -->
+<!-- PAGE UPDATE FORM -->
 <script type="text/ng-template" id="updateformpage.html">
     <div class="row" ng-show="isEditAvailable()">
         <div class="input input--select col s12">
@@ -167,21 +160,8 @@ use luya\cms\admin\Module;
         </div>
     </div>
 </script>
-<!-- /UPDATE PAGE FORM -->
 
 <!-- UPDATE MODULE FORM -->
 <script type="text/ng-template" id="updateformmodule.html">
-    <div class="row">
-        <div class="input input--text col s12">
-            <label class="input__label"><?php echo Module::t('view_index_module_select'); ?></label>
-            <div class="input__field-wrapper">
-                <select ng-model="data.module_name" class="input__field">
-                    <option value=""><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
-                    <option value="">- - - - -</option>
-                    <option ng-repeat="item in modules" value="{{item.value}}">{{item.label}}</option>
-                </select>
-            </div>
-        </div>
-    </div>
+    <zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
 </script>
-<!-- /UPDATE MODULE FORM -->
