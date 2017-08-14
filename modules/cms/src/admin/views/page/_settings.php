@@ -66,6 +66,7 @@ use luya\cms\admin\Module;
             </div>
             <div ng-switch-when="5">
                 <h1>Startseite</h1>
+                <p><?= Module::t('view_update_homepage_info'); ?></p>
                 <!-- OLD CODE -->
                 <div class="switch switch--with-icons">
                     <label tooltip tooltip-text="<?= Module::t('view_update_homepage_info'); ?>" ng-if="!navData.is_home">
