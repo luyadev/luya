@@ -106,7 +106,7 @@ $this->beginPage()
                                     <td>{{row.firstname}} {{row.lastname}}</td>
                                     <td>{{row.email}}</td>
                                     <td class="tooltip-big-activity">
-                                        <small ng-hide="row.is_active">
+                                        <span ng-show="!row.is_active">
                                             <span><b>{{row.inactive_since}}</b>&nbsp;<?= Admin::t('layout_useronline_inactive'); ?></span><br />
                                             <small>{{ row.lock_description }}</small>
                                         </span>
