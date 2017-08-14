@@ -416,14 +416,6 @@
 
     	// controller logic
 
-    	$scope.changeVersionLayout = function(versionItem) {
-    		$http.post('admin/api-cms-navitem/change-page-version-layout', $.param({'pageItemId': versionItem.id, 'layoutId': versionItem.layout_id, 'alias': versionItem.version_alias}), headers).then(function(response) {
-    			$scope.refreshForce();
-    			$scope.closeEditModal();
-    			AdminToastService.success(i18n['js_version_update_success'], 4000);
-			});
-    	};
-
 		$scope.createNewVersionSubmit = function(data) {
 			if (data == undefined) {
 				AdminToastService.error(i18n['js_version_error_empty_fields'], 4000);
@@ -1055,7 +1047,7 @@
 	/**
 	 * @param $scope.lang from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
+	zaa.controller("NavItemController", function($scope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
 
 		$scope.loaded = false;
 		
@@ -1077,6 +1069,14 @@
 			ServiceLiveEditMode.changeUrl($scope.item.id, $scope.currentPageVersion);
 		};
 
+		// layoutsData
+
+		$scope.layoutsData = ServiceLayoutsData.data;
+
+    	$scope.$on('service:BlocksData', function(event, data) {
+    		$scope.layoutsData = data;
+    	});
+		
 		// serviceMenuData inheritance
 
 		$scope.menuDataReload = function() {
@@ -1191,8 +1191,24 @@
 					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: version.version_alias}), 5000);
 				});
 			});
-		}
+		};
+		
+    	$scope.editVersionItem;
+    	
+    	$scope.tab = 1;
+    	
+    	$scope.editVersion = function(versionItem) {
+    		$scope.tab = 4;
+    		$scope.editVersionItem = versionItem;
+    	};
 
+    	$scope.editVersionUpdate = function(editVersionItem) {
+    		$http.post('admin/api-cms-navitem/change-page-version-layout', {'pageItemId': editVersionItem.id, 'layoutId': editVersionItem.layout_id, 'alias': editVersionItem.version_alias}).then(function(response) {
+    			$scope.refreshForce();
+    			AdminToastService.success(i18n['js_version_update_success'], 4000);
+			});
+    	};
+    	
 		$scope.getItem = function(langId, navId) {
 			$http({
 			    url: 'admin/api-cms-navitem/nav-lang-item',

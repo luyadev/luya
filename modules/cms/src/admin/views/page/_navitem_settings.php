@@ -2,17 +2,21 @@
 use luya\cms\admin\Module;
 ?>
 <modal is-modal-hidden="itemSettingsOverlay" title="{{item.title}} Settings">
-<div class="row"  ng-init="tab=1">
+<div class="row">
     <div class="col-md-3">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
                 <a class="nav-link" ng-click="tab=1" ng-class="{'active':tab==1}">Title &amp; Slug</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" ng-click="tab=3" ng-class="{'active':tab==3}">Neue Version anlegen</a>
+            </li>
+            <li><hr /></li>
+            <li class="nav-item">
                 <a class="nav-link" ng-click="tab=2" ng-class="{'active':tab==2}">Versions</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" ng-click="tab=3" ng-class="{'active':tab==3}">Neue Version anlegen</a>
+            <li class="nav-item" ng-show="editVersionItem">
+                <a class="nav-link" ng-click="tab=4" ng-class="{'active':tab==4}">+ {{editVersionItem.version_alias}}</a>
             </li>
         </ul>
     </div>
@@ -20,7 +24,6 @@ use luya\cms\admin\Module;
         <div ng-switch-when="1">
             <h1>Dashboard</h1>
             <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
-            
                 <zaa-text model="itemCopy.title" label="<?= Module::t('view_index_page_title'); ?>" />
                 <zaa-text model="itemCopy.alias" label="<?= Module::t('view_index_page_alias'); ?>" />
                 <zaa-text model="itemCopy.title_tag" label="<?= Module::t('model_navitem_title_tag_label'); ?>" />
@@ -52,10 +55,16 @@ use luya\cms\admin\Module;
                     <td>{{versionItem.version_alias}}</td>
                     <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
                     <td>{{versionItem.timestamp_create}}</td>
-                    <td><i class="material-icons">edit</i></td>
-                    <td><button type="button" ng-click="removeVersion(versionItem)"><i class="material-icons">delete</i></button></td>
+                    <td><button type="button" class="btn btn-icon btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button></td>
+                    <td><button type="button" class="btn btn-icon btn-sm btn-outline-danger" ng-click="removeVersion(versionItem)"><i class="material-icons">delete</i></button></td>
                 </tr>
             </table>
+        </div>
+        <div ng-switch-when="4">
+            <h1><?= Module::t('version_edit_title'); ?></h1>
+            <zaa-text model="editVersionItem.version_alias" label="<?= Module::t('version_input_name'); ?>" />
+            <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name" />
+            <button type="button" class="btn btn-primary" ng-click="editVersionUpdate(editVersionItem)">Update</button>
         </div>
         <div ng-switch-when="3" ng-controller="PageVersionsController">
             <form ng-submit="createNewVersionSubmit(create)">
