@@ -460,6 +460,9 @@
             			AdminClassService.setClassSpace('modalBody', 'modal-open')
             		}
             	});
+            },
+            link: function (scope, element) {
+            	angular.element(document.body).append(element);
             }
         }
     });
