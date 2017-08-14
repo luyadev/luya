@@ -1,3 +1,6 @@
+<?php
+use luya\cms\admin\Module;
+?>
 <div class="cmsadmin" ng-controller="NavController" ng-show="!isDeleted" ng-init="settingsOverlay=true">
 	<?= $this->render('_settings'); ?>
     <div class="row">
@@ -8,7 +11,7 @@
             <div class="row">
                 <div class="col">
                     <div class="cmsadmin-toolbar">
-                        <div class="toolbar-item">
+                        <div class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
                             <label class="switch" for="switch-visibility-status">
                             	<span class="switch-label">
                                     <i class="material-icons" ng-show="!navData.is_hidden">visibility</i>
@@ -20,7 +23,7 @@
                                 </span>
                             </label>
                         </div>
-                        <div class="toolbar-item">
+                        <div class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_offline_info')?>" tooltip-position="bottom">
                             <label class="switch" for="switch-online-status">
                                 <span class="switch-label">
                                     <i class="material-icons" ng-show="!navData.is_offline">cloud_queue</i>

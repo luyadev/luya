@@ -69,7 +69,7 @@
      * <span tooltip tooltip-expression="scopeFunction(fooBar)">Span Text</span>
      * ```
      */
-    zaa.directive("tooltip", function () {
+    zaa.directive("tooltip", function ($document) {
         return {
             restrict: 'A',
             scope: {
@@ -81,32 +81,32 @@
             },
             link: function (scope, element, attr) {
                 var positions = {
-                    top: function(elem, pop) {
-                        var bcr = elem.getBoundingClientRect();
+                    top: function() {
+                        var bcr = element[0].getBoundingClientRect();
                         return {
-                            top: 0 - bcr.height - pop.outerHeight() - 5,
-                            left: (bcr.width / 2) - (pop.outerWidth() / 2)
+                            top: bcr.top - scope.pop.outerHeight(),
+                            left: (bcr.left + (bcr.width / 2)) - (scope.pop.outerWidth() / 2),
                         }
                     },
-                    right: function(elem, pop) {
-                        var bcr = elem.getBoundingClientRect();
+                    bottom: function() {
+                        var bcr = element[0].getBoundingClientRect();
                         return {
-                            top: 0 - (bcr.height / 2) - (pop.outerHeight() / 2) - 5,
-                            left: bcr.width
+                            top: bcr.top + bcr.height,
+                            left: (bcr.left + (bcr.width / 2)) - (scope.pop.outerWidth() / 2),
                         }
                     },
-                    bottom: function(elem, pop) {
-                        var bcr = elem.getBoundingClientRect();
+                    right: function() {
+                        var bcr = element[0].getBoundingClientRect();
                         return {
-                            top: -5,
-                            left: (bcr.width / 2) - (pop.outerWidth() / 2)
+                            top: (bcr.top + (bcr.height / 2)) - (scope.pop.outerHeight() / 2),
+                            left: bcr.left + bcr.width
                         }
                     },
-                    left: function(elem, pop) {
-                        var bcr = elem.getBoundingClientRect();
+                    left: function() {
+                        var bcr = element[0].getBoundingClientRect();
                         return {
-                            top: 0 - (bcr.height / 2) - (pop.outerHeight() / 2) - 5,
-                            left: 0 - pop.width() - 10
+                            top: (bcr.top + (bcr.height / 2)) - (scope.pop.outerHeight() / 2),
+                            left: bcr.left - scope.pop.outerWidth()
                         }
                     }
                 };
@@ -120,16 +120,16 @@
                                '<div class="tooltip-inner">' + scope.tooltipText +  '</div>' +
                             '</div>';
 
-                var pop = $(html);
-                element.after(pop);
-                pop.hide();
+                scope.pop = $(html);
+                element.after(scope.pop);
+                scope.pop.hide();
 
-                element.on('mouseenter', function () {
+                var onScroll = function() {
                     var offset = {};
                     if(typeof positions[scope.tooltipPosition] === 'function') {
-                        offset = positions[scope.tooltipPosition](this, pop);
+                        offset = positions[scope.tooltipPosition]();
                     } else {
-                        offset = positions['bottom'](this, pop);
+                        offset = positions['right']();
                     }
 
                     if (typeof scope.tooltipOffsetTop == 'number') {
@@ -140,15 +140,21 @@
                         offset.left = offset.left + scope.tooltipOffsetLeft;
                     }
 
-                    pop.css({
-                        'transform': 'translateX(' + offset.left + 'px) translateY(' + offset.top + 'px)'
-                    });
+                    scope.pop.css(offset);
+                };
 
-                    pop.show();
+                element.on('mouseenter', function () {
+                    onScroll();
+
+                    // todo: Improve performance?
+                    element.parents().on('scroll', onScroll);
+
+                    scope.pop.show();
                 });
 
                 element.on('mouseleave', function () {
-                    pop.hide();
+                    element.parents().off('scroll', onScroll);
+                    scope.pop.hide();
                 });
 
             }
@@ -947,6 +953,9 @@
         }
     });
 
+    /**
+     * <zaa-text model="itemCopy.title" label="<?= Module::t('view_index_page_title'); ?>" />
+     */
     zaa.directive("zaaText", function(){
         return {
             restrict: "E",
@@ -1001,7 +1010,24 @@
     });
 
     /**
+     * 
+     * Usage Example:
+     * 
+     * ```js
+     * <zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
+     * ```
+     * 
+     * Options value defintion:
+     * 
+     * ```js
      * options=[{"value":123,"label":123-Label}, {"value":abc,"label":ABC-Label}]
+     * ```
+     * 
+     * In order to change the value and label keys which should be used to take the value and label keys within the given array use:
+     * 
+     * ```js
+     * <zaa-select model="create.fromVersionPageId" label="My Label" options="typeData" optionslabel="version_alias" optionsvalue="id" />
+     * ```
      */
     zaa.directive("zaaSelect", function($timeout){
         return {
@@ -1009,6 +1035,8 @@
             scope: {
                 "model": "=",
                 "options": "=",
+                "optionsvalue" : "@optionsvalue",
+                "optionslabel" : "@optionslabel",
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
@@ -1016,10 +1044,18 @@
                 "initvalue": "@initvalue"
             },
             link: function(scope) {
-
-        if(jQuery.isNumeric(scope.model)){
-            scope.model = typeCastValue(scope.model);
-        }
+    			
+            	if (scope.optionsvalue == undefined) {
+            		scope.optionsvalue = 'value';
+            	}
+            	
+            	if (scope.optionslabel == undefined) {
+            		scope.optionslabel = 'label';
+            	}
+            	
+		        if (jQuery.isNumeric(scope.model)){
+		            scope.model = typeCastValue(scope.model);
+		        }
 
                 $timeout(function(){
                     scope.$watch(function() { return scope.model }, function(n, o) {
@@ -1033,15 +1069,15 @@
                 });
                 
                 scope.setModelValue = function(option) {
-                	scope.model = option.value;
+                	scope.model = option[scope.optionsvalue];
                 	scope.isOpen = 0;
                 };
                 
                 scope.getSelectedValue = function() {
                 	var defaultLabel = i18n['ngrest_select_no_selection'];
                 	angular.forEach(scope.options, function(item) {
-                		if (scope.model == item.value) {
-                			defaultLabel = item.label;
+                		if (scope.model == item[scope.optionsvalue]) {
+                			defaultLabel = item[scope.optionslabel];
                 		}
                 	})
                 	
@@ -1061,8 +1097,7 @@
                             '<div class="form-side">' +
                                 '<div class="zaaselect" ng-class="{\'open\':isOpen}">' +
                                     '<select class="zaaselect-select" ng-model="model">' +
-                                        '<option ng-repeat="opt in options" ng-value="{{opt.value}}">{{opt.label}}</option>' +
-                                        '<option value="eintrag2">Eintrag 2</option>' +
+                                        '<option ng-repeat="opt in options" ng-value="{{opt[optionsvalue]}}">{{opt[optionslabel]}}</option>' +
                                     '</select>' +
                                     '<div class="zaaselect-selected" ng-click="isOpen=!isOpen">' +
                                         '<span>{{getSelectedValue()}}</span>' +
@@ -1074,7 +1109,7 @@
                                             '<input class="zaaselect-search-input" type="search" ng-model="searchQuery" />' +
                                         '</div>' +
                                         '<div class="zaaselect-item" ng-repeat="opt in options | filter:searchQuery" ng-click="setModelValue(opt)">' +
-                                            '<span ng-class="{\'zaaselect-active\': opt.value == model}">{{opt.label}}</span>' +
+                                            '<span ng-class="{\'zaaselect-active\': opt[optionsvalue] == model}">{{opt[optionslabel]}}</span>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +

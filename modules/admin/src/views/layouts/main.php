@@ -38,7 +38,7 @@ $this->beginPage()
 
             <div class="mainnav-static" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry hide-on-mobile" tooltip tooltip-text="Search" tooltip-offset-top="5" tooltip-position="right">
+                    <li class="mainnav-entry hide-on-mobile" tooltip tooltip-text="Search" tooltip-position="right">
                         <span class="mainnav-link" ng-click="toggleSearchInput()" ng-class="{'mainnav-link-active' : searchInputOpen }">
                             <i class="mainnav-icon material-icons">search</i>
                             <span class="mainnav-label">
@@ -46,7 +46,7 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <li class="mainnav-entry" tooltip tooltip-text="Dashboard" tooltip-offset-top="5" tooltip-position="right">
+                    <li class="mainnav-entry" tooltip tooltip-text="Dashboard" tooltip-position="right">
                         <span class="mainnav-link" ui-sref="home" ui-sref-active="mainnav-link-active">
                             <i class="mainnav-icon material-icons">home</i>
                             <span class="mainnav-label">
@@ -58,7 +58,7 @@ $this->beginPage()
             </div>
             <div class="mainnav-modules" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-offset-top="5" tooltip-position="right">
+                    <li class="mainnav-entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-position="right">
                         <span class="mainnav-link" ng-class="{'mainnav-link-active' : isActive(item) }" ng-click="click(item)">
                             <i class="mainnav-icon material-icons">{{item.icon}}</i>
                             <span class="mainnav-label">
@@ -70,7 +70,7 @@ $this->beginPage()
             </div>
             <div class="mainnav-static mainnav-static--bottom" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_reload'); ?>" tooltip-offset-top="5" tooltip-position="right">
+                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_reload'); ?>" tooltip-position="right">
                         <span class="mainnav-link" ng-click="reload()">
                             <i class="mainnav-icon material-icons">refresh</i>
                             <span class="mainnav-label">
@@ -117,7 +117,7 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-offset-top="5" tooltip-position="right">
+                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-position="right">
                         <a class="mainnav-link" ui-sref="custom({templateId:'admin/account/dashboard'})">
                             <i class="mainnav-icon material-icons">account_circle</i>
                             <span class="mainnav-label">

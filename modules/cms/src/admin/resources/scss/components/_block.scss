@@ -77,9 +77,8 @@ $block-padding: 10px !default;
     pointer-events: none;
     position: absolute;
     right: -$block-border-width;
-    top: 0;
-    transform: translateY(-80%);
-    transition: .2s ease-in-out opacity, .2s ease-in-out transform;
+    top: -35px;
+    transition: .2s ease-in-out opacity;
 
     .toolbar-item {
         font-size: 20px;
@@ -107,7 +106,6 @@ $block-padding: 10px !default;
     .block:hover > & {
         opacity: 1;
         pointer-events: all;
-        transform: translateY(-100%);
     }
 
     .block-is-layout > &,
@@ -115,7 +113,6 @@ $block-padding: 10px !default;
         background-color: $block-border-color;
         opacity: 1;
         pointer-events: all;
-        transform: none;
     }
 }
 

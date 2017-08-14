@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+use luya\helpers\Html;
 ?>
 <script type="text/ng-template" id="recursion.html">
 <h4 class="cmsadmin-container-title">{{placeholder.label}}</h4>
@@ -14,32 +15,32 @@ use luya\cms\admin\Module;
                         <span>{{block.name}}</span>
                     </div>
                     <div class="toolbar-item ml-auto" ng-click="copyBlock()">
-                        <button class="toolbar-button">
+                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_copy'));?>" tooltip-position="top">
                             <i class="material-icons">content_copy</i>
                         </button>
                     </div>
                     <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==0">
-                        <button class="toolbar-button">
+                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_visible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility</i>
                         </button>
                     </div>
                     <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==1">
-                        <button class="toolbar-button">
+                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_invisible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility_off</i>
                         </button>
                     </div>
                     <div class="toolbar-item" ng-click="removeBlock()">
-                        <button class="toolbar-button">
+                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_delete'));?>" tooltip-position="top">
                             <i class="material-icons">delete</i>
                         </button>
                     </div>
                     <div ng-show="isEditable()" ng-click="toggleEdit()" class="toolbar-item">
-                        <button class="toolbar-button">
+                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_edit'));?>" tooltip-position="top">
                             <i class="material-icons">edit</i>
                         </button>
                     </div>
                 </div>
-                <modal is-modal-hidden="modalHidden" title="Settings">
+                <modal is-modal-hidden="modalHidden" title="{{block.name}}">
                     <form class="block__edit" ng-if="edit" ng-submit="save()">
                         <div ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
                             <div class="col">

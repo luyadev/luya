@@ -102,9 +102,10 @@ class NavItemController extends \luya\admin\base\RestController
     
     public function actionChangePageVersionLayout()
     {
-        $pageItemId = Yii::$app->request->post('pageItemId');
-        $layoutId = Yii::$app->request->post('layoutId');
-        $alias = Yii::$app->request->post('alias');
+        $params =  Yii::$app->request->bodyParams;
+        $pageItemId = $params['pageItemId'];
+        $layoutId =  $params['layoutId'];
+        $alias =  $params['alias'];
 
         $model = NavItemPage::findOne(['id' => $pageItemId]);
         

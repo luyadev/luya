@@ -47,14 +47,14 @@
     width: auto;
 }
 
-.blockholder-group {
-    margin: 0 0 30px;
-}
-
 .blockholder-group-title {
     display: block;
     margin-bottom: 5px;
     padding-left: 32px;
+
+    .blockholder-group:not(:first-of-type) & {
+        margin-top: 30px;
+    }
 
     .material-icons {
         font-size: 20px;

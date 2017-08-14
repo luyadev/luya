@@ -1,7 +1,63 @@
 .tooltip {
     margin: 0;
     opacity: 1;
-    position: absolute;
+    position: fixed;
     white-space: nowrap;
     z-index: 1000;
+
+    &-right {
+        padding-left: 5px;
+        margin-left: 3px;
+    }
+    &-left {
+        padding-right: 5px;
+        margin-right: 3px;
+    }
+    &-top {
+        padding-bottom: 5px;
+        margin-bottom: 3px;
+    }
+    &-bottom {
+        padding-top: 5px;
+        margin-top: 3px;
+    }
+}
+
+.tooltip-arrow {
+    height: 0;
+    position: absolute;
+    width: 0;
+
+    .tooltip-right & {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border-bottom: 5px solid transparent;
+        border-right: 5px solid $black;
+        border-top: 5px solid transparent;
+    }
+    .tooltip-left & {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border-bottom: 5px solid transparent;
+        border-left: 5px solid transparent;
+        border-top: 5px solid transparent;
+    }
+    .tooltip-top & {
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid $black;
+    }
+    .tooltip-bottom & {
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        border-bottom: 5px solid $black;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
 }
