@@ -35,12 +35,6 @@
             }
         }
         user-select: none;
-
-        &:not(.mainnav-small) {
-            .tooltip {
-                display: none !important;
-            }
-        }
     }
 }
 

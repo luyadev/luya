@@ -46,7 +46,7 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <li class="mainnav-entry" tooltip tooltip-text="Dashboard" tooltip-position="right">
+                    <li class="mainnav-entry" tooltip tooltip-text="Dashboard" tooltip-position="right" tooltip-disabled="isHover">
                         <span class="mainnav-link" ui-sref="home" ui-sref-active="mainnav-link-active">
                             <i class="mainnav-icon material-icons">home</i>
                             <span class="mainnav-label">
@@ -58,7 +58,7 @@ $this->beginPage()
             </div>
             <div class="mainnav-modules" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-position="right">
+                    <li class="mainnav-entry" ng-repeat="item in items" tooltip tooltip-text="{{item.alias}}" tooltip-position="right" tooltip-disabled="isHover">
                         <span class="mainnav-link" ng-class="{'mainnav-link-active' : isActive(item) }" ng-click="click(item)">
                             <i class="mainnav-icon material-icons">{{item.icon}}</i>
                             <span class="mainnav-label">
@@ -70,7 +70,7 @@ $this->beginPage()
             </div>
             <div class="mainnav-static mainnav-static--bottom" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_reload'); ?>" tooltip-position="right">
+                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_reload'); ?>" tooltip-position="right" tooltip-disabled="isHover">
                         <span class="mainnav-link" ng-click="reload()">
                             <i class="mainnav-icon material-icons">refresh</i>
                             <span class="mainnav-label">
@@ -119,7 +119,7 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-position="right">
+                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-position="right" tooltip-disabled="isHover">
                         <a class="mainnav-link" ui-sref="custom({templateId:'admin/account/dashboard'})">
                             <i class="mainnav-icon material-icons">account_circle</i>
                             <span class="mainnav-label">
