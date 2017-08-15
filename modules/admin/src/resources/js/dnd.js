@@ -24,7 +24,14 @@ angular.module('dnd', [])
 /**
  * Usage:
  * 
+ * ```js
  * dnd dnd-model="data" dnd-isvalid="isValid(hover,dragged)" dnd-drag-disabled dnd-diable-drag-middle dnd-drop-disabled dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
+ * ```
+ * 
+ * + dnd-model: This is the model which will be used as "dropped", when drag is disabled this model is not needed
+ * + dnd-disable-drag-middle
+ * + dnd-drag-disabled
+ * + dnd-is-valid
  */
 .directive('dnd', function(dndFactory) {
 	return {

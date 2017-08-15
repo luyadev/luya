@@ -491,6 +491,7 @@
 
 	});
 
+	/*
 	zaa.controller("DropNavController", function($scope, $http, ServiceMenuData, AdminToastService) {
 
 		$scope.droppedNavItem = null;
@@ -540,7 +541,8 @@
 				ServiceMenuData.load(true);
 			});
 	    }
-	})
+	});
+	*/
 
 	zaa.filter("menuparentfilter", function() {
 		return function(input, containerId, parentNavId) {
@@ -613,6 +615,12 @@
 
 		// controller logic
 		
+		$scope.dropEmptyContainer = function(dragged,dropped,position,catId) {
+			$http.get('admin/api-cms-navitem/move-to-container', { params: {moveItemId: dragged.id, droppedOnCatId: catId}}).then(function(succes) {
+				ServiceMenuData.load(true);
+			});
+		};
+		
 		$scope.dropItem = function(drag,drop,pos) {
 			if (pos == 'bottom') {
 				var api = 'admin/api-cms-navitem/move-after';
@@ -624,7 +632,6 @@
 			} else if (pos == 'middle') {
 				var api = 'admin/api-cms-navitem/move-to-child';
 				var params = {moveItemId: drag.id, droppedOnItemId: drop.id};
-
 			}
 			
 			$http.get(api, { params : params }).then(function(success) {
