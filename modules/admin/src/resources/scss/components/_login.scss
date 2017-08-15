@@ -6,25 +6,49 @@
 }
 
 .login-logo {
-    position: absolute;
-    left:50%;
-    top:0;
-    transition: .2s all ease-in-out;
-    transform: translateX(-50%);
-    z-index: 99;
+    position:absolute;
+    left:10px;
+    top: -65px;
+    transform: translateX(0);
+    transition: .35s all ease-in-out;
 
     img {
-        width: 80px;
-        @include media-breakpoint-up(sm) {
-            width: 100px;
+        width: 45px;
+        transition: .2s width ease-in-out;
+    }
+
+    @media screen and (min-height: 600px) {
+        left:50%;
+        top:0;
+        transform: translateX(-50%);
+        z-index: 99;
+
+        img {
+            width: 80px;
+            @include media-breakpoint-up(sm) {
+                width: 100px;
+            }
+
+            @media screen and (max-height: 600px) {
+                width: 70px;
+            }
+        }
+
+        &-loaded {
+            top: -100px;
+
+            @include media-breakpoint-up(sm) {
+                top: -160px;
+            }
+
+            @media screen and (max-height: 450px) {
+                top: -100px;
+            }
         }
     }
 
-    &-loaded {
-        top: -120px;
-        @include media-breakpoint-up(sm) {
-            top: -160px;
-        }
+    @media screen and (max-height: 400px) {
+        opacity: 0;
     }
 }
 
@@ -32,10 +56,18 @@
     width: 320px;
     max-width: 100%;
     position: relative;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left:0;
+    margin: 40px auto;
+    transform: translate(0, 0);
     padding: 15px 15px 40px 15px;
+
+    @media screen and (min-height: 320px) {
+        margin: 0;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .login-form {
@@ -76,14 +108,12 @@
 }
 
 .login-btn {
-    background: $pink;
     width:100%;
     max-width: 100%;
     min-height: 40px;
     cursor: pointer;
     box-shadow: none;
     border: none;
-    color: $white;
     transition: .25s background ease-in-out;
     font-weight: 300;
 
@@ -210,16 +240,18 @@
 }
 
 .login-info {
+    display: block;
     position: absolute;
     bottom: 0;
     left:0;
     width: 100%;
+    padding: 25px;
+    text-align: center;
+    opacity: 1;
 
     h1 {
         text-align: center;
     }
-    padding: 25px;
-    text-align: center;
 
     @include media-breakpoint-up(sm) {
 
@@ -233,6 +265,11 @@
         &-text {
             font-weight: 300;
         }
+    }
+
+    @media screen and (max-height: 400px) {
+        opacity: 0;
+        display: none;
     }
 }
 
@@ -249,7 +286,11 @@
         right:0;
         bottom: 0;
         padding: 25px;
+    }
 
+    @media screen and (max-height: 400px) {
+        opacity: 0;
+        display: none;
     }
 
     ul {
