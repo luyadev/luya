@@ -51,7 +51,7 @@ use \luya\cms\admin\Module;
             </ul>
             <ul class="cmsnav-list cmsnav-list-switches">
                 <li class="cmsnav-switch">
-                    <label class="switch" for="switch-live-preview">
+                    <label class="switch switch-left" for="switch-live-preview">
                         <span class="switch-switch">
                             <input class="switch-checkbox" type="checkbox" id="switch-live-preview" ng-model="liveEditStateToggler" ng-true-value="1" ng-false-value="0" />
                             <span class="switch-control" for="switch-live-preview"></span>
