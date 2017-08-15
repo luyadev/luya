@@ -40,7 +40,7 @@ use luya\helpers\Html;
                         </button>
                     </div>
                 </div>
-                <modal is-modal-hidden="modalHidden" title="{{block.name}}">
+                <modal is-modal-hidden="modalHidden" modal-title="{{block.name}}">
                     <form class="block__edit" ng-if="edit" ng-submit="save()">
                         <div ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
                             <div class="col">

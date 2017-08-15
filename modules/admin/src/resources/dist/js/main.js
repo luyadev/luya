@@ -2543,9 +2543,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
      *
      * ```
      * <button ng-click="modalState=!modalState">Toggle Modal</button>
-     * <modal is-modal-hidden="modalState">
-     *      <h1>Modal Container</h1>
-     *    <p>Hello world!</p>
+     * <modal is-modal-hidden="modalState" modal-title="I am the Title">
+     *     <h1>Modal Container</h1>
+     *     <p>Hello world!</p>
      * </modal>
      * ```
      */
@@ -2554,7 +2554,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
             restrict: "E",
             scope: {
                 isModalHidden: "=",
-                title: '@'
+                title: '@modalTitle'
             },
             replace: true,
             transclude: true,
