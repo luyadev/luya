@@ -41,14 +41,33 @@ use luya\helpers\Html;
                     </div>
                 </div>
                 <modal is-modal-hidden="modalHidden" modal-title="{{block.name}}">
-                    <form class="block__edit" ng-if="edit" ng-submit="save()">
-                        <div ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
-                            <div class="col">
-                                <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
-                            </div>
+                    <div class="card" ng-init="modalMode=1">
+                        <div class="card-header" ng-show="block.cfgs.length > 0">
+                            <ul class="nav nav-tabs card-header-tabs">
+                                <li class="nav-item" ng-click="modalMode=1">
+                                    <a class="nav-link" ng-class="{'active' : modalMode==1}" ng-click="modalMode=1">Content</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ng-class="{'active' : modalMode==2}" ng-click="modalMode=2">Config</a>
+                                </li>
+                            </ul>
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="material-icons left">done</i> Save</button>
-                    </form>
+                        <div  class="card-body">
+                        <form class="block__edit" ng-submit="save()">
+                            <div ng-if="modalMode==1" ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
+                               <div class="col">
+                                   <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
+                                </div>
+                            </div>
+                            <div ng-if="modalMode==2"  ng-repeat="cfgField in block.cfgs" ng-hide="cfgField.invisible" class="row">
+                                <div class="col">
+                                   <zaa-injector dir="cfgField.type"  options="cfgField.options" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}"  placeholder="{{cfgField.placeholder}}" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
+                               </div>    
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="material-icons left">done</i> Save</button>
+                        </form>
+                        </div>
+                    </div>
                 </modal>
                 <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
                 <div ng-if="block.__placeholders.length" class="block-front">
