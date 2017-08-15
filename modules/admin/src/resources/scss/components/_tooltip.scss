@@ -2,7 +2,6 @@
     margin: 0;
     opacity: 1;
     position: fixed;
-    transform: translateZ(0);
     z-index: 100000;
 
     &-right {
@@ -20,6 +19,14 @@
     &-bottom {
         margin-top: 3px;
         padding-top: 5px;
+    }
+}
+
+.tooltip-inner {
+    box-shadow: 0 0 10px 2px rgba(0,0,0,.4);
+
+    .tooltip-image & {
+        max-width: 100%;
     }
 }
 

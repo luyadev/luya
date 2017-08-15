@@ -35,12 +35,11 @@
 }
 
 .luya-subnav {
-    background-color: $white;
+    background-color: map-get($grays, 100);
     color: color('gray');
     display: flex;
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
-
     padding: 0 10px 20px;
     width: 100%;
     &::-webkit-scrollbar {
@@ -54,6 +53,10 @@
         flex: 0 0 250px;
         max-width: 250px;
         padding: 0 10px;
+
+        .luya-main-crud & {
+            padding: 0 0 20px 25px;
+        }
 
         &.overlaying {
             bottom: 0;

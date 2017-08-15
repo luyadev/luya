@@ -2177,10 +2177,13 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 'tooltipText': '@',
                 'tooltipExpression': '=',
                 'tooltipPosition': '@',
-                'tooltipOffsetTop': '=',
-                'tooltipOffsetLeft': '='
+                'tooltipOffsetTop': '@',
+                'tooltipOffsetLeft': '@',
+                'tooltipImageUrl': '@'
             },
             link: function (scope, element, attr) {
+                var defaultPosition = 'right';
+
                 var positions = {
                     top: function() {
                         var bcr = element[0].getBoundingClientRect();
@@ -2216,10 +2219,13 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                     scope.tooltipText = scope.tooltipExpression;
                 }
                 
-                var html = '<div class="tooltip tooltip-' + scope.tooltipPosition + '" role="tooltip">' +
-                               '<div class="tooltip-arrow"></div>' +
-                               '<div class="tooltip-inner">' + scope.tooltipText +  '</div>' +
-                            '</div>';
+                var html =  '<div class="tooltip tooltip-' + (scope.tooltipPosition || defaultPosition) + (scope.tooltipImageUrl ? ' tooltip-image' : '') + '" role="tooltip">' +
+                                '<div class="tooltip-arrow"></div>' +
+                                '<div class="tooltip-inner">' +
+                                    (scope.tooltipText ? ('<span class="tooltip-text">' + scope.tooltipText +  '</span>') : '') +
+                                    (scope.tooltipImageUrl ? ('<img class="tooltip-image" src="' + scope.tooltipImageUrl +  '">') : '') +
+                                '</div>' +
+                             '</div>';
 
                 scope.pop = $(html);
                 $document.find('body').append(scope.pop);
@@ -2230,7 +2236,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                     if(typeof positions[scope.tooltipPosition] === 'function') {
                         offset = positions[scope.tooltipPosition]();
                     } else {
-                        offset = positions['right']();
+                        offset = positions[defaultPosition]();
                     }
 
                     if (typeof scope.tooltipOffsetTop == 'number') {
@@ -2258,6 +2264,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                     scope.pop.hide();
                 });
 
+                scope.$on('$destroy', function() {
+                    scope.pop.remove();
+                });
             }
         }
     })
