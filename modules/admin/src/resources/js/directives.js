@@ -1106,7 +1106,7 @@
                             '<div class="form-side">' +
                                 '<div class="zaaselect" ng-class="{\'open\':isOpen}">' +
                                     '<select class="zaaselect-select" ng-model="model">' +
-                                        '<option ng-repeat="opt in options" ng-value="{{opt[optionsvalue]}}">{{opt[optionslabel]}}</option>' +
+                                        '<option ng-repeat="opt in options" ng-value="opt[optionsvalue]">{{opt[optionslabel]}}</option>' +
                                     '</select>' +
                                     '<div class="zaaselect-selected" ng-click="isOpen=!isOpen">' +
                                         '<span>{{getSelectedValue()}}</span>' +
