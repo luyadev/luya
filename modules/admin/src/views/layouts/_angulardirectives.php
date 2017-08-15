@@ -274,8 +274,9 @@ use luya\admin\Module as Admin;
                         <thead class="thead-default">
                             <tr>
                                 <th ng-hide="allowSelection == 'true'">
-                                    <span ng-click="toggleSelectionAll()">
+                                    <span class="filemanager-check-all" ng-click="toggleSelectionAll()">
                                         <i class="material-icons">done_all</i>
+                                        <span class="filemanager-files-counter">({{ (filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery).length }} files)</span>
                                     </span>
                                 </th>
                                 <th ng-if="selectedFileFromParent" style="width:15px;"></th>
@@ -316,9 +317,7 @@ use luya\admin\Module as Admin;
                                         <i class="material-icons">keyboard_arrow_down</i>
                                     </div>
                                 </th>
-                                <th class="tab-padding-right text-right">
-                                    <span class="crud-counter">{{ (filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery).length }} files</span>
-                                </th>
+                                <th class="tab-padding-right text-right filemanager-actions-column"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -327,31 +326,30 @@ use luya\admin\Module as Admin;
                    				alt="fileId={{file.id}}"
                     			title="fileId={{file.id}}"
                     			class="filemanager-file"
-                    			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}">
+                    			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}"
+                            >
 
-					<th scope="row" ng-hide="allowSelection == 'true'" ng-click="toggleSelection(file)">
-                                    <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" ng-checked="inSelection(file)" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                    </label>
+                                <th scope="row" ng-hide="allowSelection == 'true'" ng-click="toggleSelection(file)">
+                                    <div class="filemanager-fakebox" ng-class="{'filemanager-fakebox-active': inSelection(file)}"></div>
                                 </th>
 
-                    <td ng-if="selectedFileFromParent">
-                       <span class="custom-control-indicator"></span>
-                    </td>
-                    <td ng-click="toggleSelection(file)" class="text-center">
-                        <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
-                        <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
-                    </td>
-                    <td ng-click="toggleSelection(file)">{{file.name}}</td>
-                    <td>{{file.extension}}</td>
-                    <td>{{file.uploadTimestamp * 1000 | date:"short"}}</td>
-                    <td>{{file.sizeReadable}}</td>
-                    <td class="text-right">
-						<button type="button" class="btn btn-sm btn-link btn-icon" ng-click="openFileDetail(file)">
+                                <td ng-if="selectedFileFromParent" ng-click="toggleSelection(file)">
+                                   <span class="custom-control-indicator"></span>
+                                </td>
+                                <td class="text-center" ng-click="toggleSelection(file)">
+                                    <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
+                                    <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
+                                </td>
+                                <td ng-click="toggleSelection(file)">{{file.name}}</td>
+                                <td ng-click="toggleSelection(file)">{{file.extension}}</td>
+                                <td ng-click="toggleSelection(file)">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
+                                <td ng-click="toggleSelection(file)">{{file.sizeReadable}}</td>
+                                <td class="text-right">
+                                    <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="openFileDetail(file)">
                                         <i class="material-icons">more_vert</i>
-                                    </button></td>
-		                </tr>
+                                    </button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

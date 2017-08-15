@@ -5,6 +5,19 @@
     .row {
         min-height: 100%;
     }
+
+    th, td {
+        user-select: none;
+    }
+
+    th[ng-click],
+    td[ng-click] {
+        cursor: pointer;
+    }
+}
+
+.filemanager-actions-column {
+    width: 50px;
 }
 
 .filemanager-folders {
@@ -98,4 +111,41 @@
     text-align: center;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
+}
+
+.filemanager-check-all {
+    font-size: 20px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.filemanager-files-counter {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.filemanager-fakebox {
+    background-color: map-get($grays, 300);
+    border-radius: $input-border-radius-lg;
+    display: block;
+    height: 20px;
+    position: relative;
+    width: 20px;
+
+    &-active {
+        background-color: color(blue);
+
+        &:after {
+            @include material-icons;
+            color: $white;
+            content: "check";
+            font-size: 16px;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+    }
 }
