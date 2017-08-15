@@ -3,7 +3,7 @@ use luya\admin\Module;
 ?>
 <div class="login-frame">
     <div class="login-logo">
-        <img src="<?= $this->getAssetUrl("luya\admin\assets\Login") .'/images/luyalogo.png' ?>" />
+        <img src="<?= $this->getAssetUrl("luya\admin\assets\Login") .'/images/luyalogo.png' ?>" alt="<?= Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?>" />
     </div>
     <!-- normal login form -->
     <form class="login-form" method="post" id="loginForm">
@@ -35,13 +35,13 @@ use luya\admin\Module;
                 <label class="input-label login-secure-token-label" for="secure_token"><?= Module::t('login_securetoken_info'); ?></label>
                 <input class="login-input" id="secure_token" name="secure_token" type="text" tabindex="1" placeholder="<?= Module::t('login_securetoken'); ?>" />
             </div>
-            <div class="login-status" id="errorsContainer" style="display: none"></div>
+            <div class="login-status alert alert-danger" id="errorsSecureContainer" style="display: none"></div>
             <div class="login-buttons">
+                <button class="btn btn-secondary login-btn login-btn-50" id="abortToken" type="button"  tabindex="3">
+                    <?= Module::t('button_abort'); ?>
+                </button>
                 <button class="btn btn-primary login-btn login-btn-50" type="submit"  tabindex="2">
                     <?= Module::t('button_send'); ?>
-                </button>
-                <button class="btn btn-primary login-btn login-btn-50" id="abortToken" type="submit"  tabindex="3">
-                    <?= Module::t('button_abort'); ?>
                 </button>
             </div>
         </div>

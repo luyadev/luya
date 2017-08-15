@@ -43,7 +43,7 @@ var observeLogin = function(form, url, secureUrl) {
 	});
 	
 	$('#secureForm').submit(function(e) {
-		$('#errorsContainer').hide();
+		$('#errorsSecureContainer').hide();
         $('.spinner').show(); $('.submit-icon').hide();
 		e.preventDefault();
 		$.ajax({
@@ -55,8 +55,8 @@ var observeLogin = function(form, url, secureUrl) {
 				var refresh = response['refresh'];
 				
 				if (response['errors']) {
-					$('#errorsContainer').html('<ul><li>' + response['errors'] + '</li></ul>');
-					$('#errorsContainer').show();
+					$('#errorsSecureContainer').html('<ul><li>' + response['errors'] + '</li></ul>');
+					$('#errorsSecureContainer').show();
 				}
 				
 				if (refresh) {

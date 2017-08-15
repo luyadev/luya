@@ -11,7 +11,6 @@
         <body class="login-screen">
             <?php $this->beginBody() ?>
                 <?= $content; ?>
-				<?= $this->render('_loadingscreen.php', ["hideOnLoad" => true]); ?>
             <?php $this->endBody() ?>
         </body>
     </html>
