@@ -1,5 +1,5 @@
 .filemanager {
-    background-color: $white;
+    background-color: color(white);
     min-height: 100%;
 
     .row {
@@ -36,6 +36,21 @@
 
     .table .custom-checkbox {
         margin-top: 8px;
+    }
+}
+
+.filemanager-file {
+
+    &-selected {
+        th,
+        td {
+            background-color: theme-color(primary);
+            color: color(white);
+
+            .material-icons {
+                color: color(white);
+            }
+        }
     }
 }
 
@@ -90,7 +105,7 @@
 
 .filemanager-dropzone {
     background-color: rgba($black, .6);
-    border: 10px solid $white;
+    border: 10px solid color(white);
     bottom: 50px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, .2);
     color: $white;
@@ -101,7 +116,7 @@
     z-index: 500;
 
     h2 {
-        color: $white;
+        color: color(white);
     }
 }
 
@@ -134,18 +149,27 @@
     position: relative;
     width: 20px;
 
+    .filemanager-file-selected &,
     &-active {
         background-color: color(blue);
 
         &:after {
             @include material-icons;
-            color: $white;
+            color: color(white);
             content: "check";
             font-size: 16px;
             left: 50%;
             position: absolute;
             top: 50%;
             transform: translateX(-50%) translateY(-50%);
+        }
+    }
+
+    .filemanager-file-selected & {
+        background-color: color(white);
+
+        &:after {
+            color: theme-color(primary);
         }
     }
 }

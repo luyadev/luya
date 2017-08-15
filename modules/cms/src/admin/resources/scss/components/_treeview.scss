@@ -142,11 +142,11 @@
     &-page:after {
         background-color: $green;
     }
-    .treeview-item-isoffline &:after {
+    .treeview-item-isoffline > &:after {
         background-color: $red;
     }
 
-    .treeview-item-ishidden & {
+    .treeview-item-ishidden > & {
         opacity: .5;
     }
 

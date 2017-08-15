@@ -326,16 +326,13 @@ use luya\admin\Module as Admin;
                    				alt="fileId={{file.id}}"
                     			title="fileId={{file.id}}"
                     			class="filemanager-file"
-                    			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file--selected': selectedFileFromParent && selectedFileFromParent.id == file.id}"
+                    			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file-selected': selectedFileFromParent && selectedFileFromParent.id == file.id}"
                             >
 
-                                <th scope="row" ng-hide="allowSelection == 'true'" ng-click="toggleSelection(file)">
+                                <th scope="row" ng-click="toggleSelection(file)">
                                     <div class="filemanager-fakebox" ng-class="{'filemanager-fakebox-active': inSelection(file)}"></div>
                                 </th>
 
-                                <td ng-if="selectedFileFromParent" ng-click="toggleSelection(file)">
-                                   <span class="custom-control-indicator"></span>
-                                </td>
                                 <td class="text-center" ng-click="toggleSelection(file)">
                                     <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
                                     <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
