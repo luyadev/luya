@@ -39,15 +39,11 @@
         &:first-of-type {
             padding-left: 0;
         }
-        &:not(:first-of-type) {
+        &:not(:first-of-type):not(.toolbar-item-lang) {
             border-left: 1px solid $nav-tabs-border-color;
         }
         &-lang {
-            padding: 5px 10px;
-
-            & + .toolbar-item-lang {
-                border-left: none;
-            }
+            padding: 5px 15px;
         }
     }
 

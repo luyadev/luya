@@ -181,7 +181,6 @@
                 };
 
                 element.on('mouseenter', function () {
-                    window.console.log(scope.tooltipDisabled);
                     if(typeof scope.tooltipDisabled === 'undefined' || scope.tooltipDisabled === false) {
                         onScroll();
 
