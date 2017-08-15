@@ -45,6 +45,22 @@
                 top: -100px;
             }
         }
+
+        &-loaded {
+            top: -100px;
+
+            @include media-breakpoint-up(sm) {
+                top: -160px;
+            }
+
+            @media screen and (max-height: 450px) {
+                top: -100px;
+            }
+        }
+    }
+
+    @media screen and (max-height: 400px) {
+        opacity: 0;
     }
 
     @media screen and (max-height: 400px) {
@@ -108,18 +124,14 @@
 }
 
 .login-btn {
+    position: relative;
     width:100%;
     max-width: 100%;
-    min-height: 40px;
     cursor: pointer;
     box-shadow: none;
-    border: none;
     transition: .25s background ease-in-out;
     font-weight: 300;
-
-    &:hover {
-        background: $pink-alpha-50;
-    }
+    min-height: 38px;
 }
 
 .login-btn-50 {
@@ -223,20 +235,6 @@
             padding: 5px 0;
         }
     }
-
-    &-success {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-50%) translate(-50%);
-        width: 100px;
-        height: 100px;
-
-        font-size: 90px !important;
-        text-align: center;
-        color: $pink;
-
-    }
 }
 
 .login-info {
@@ -248,6 +246,18 @@
     padding: 25px;
     text-align: center;
     opacity: 1;
+
+
+    &-text {
+        font-weight: 300;
+        .material-icons {
+            padding-right: 5px;
+            color: $green;
+            line-height: 1;
+            margin-top: -2px;
+            font-size: 25px;
+        }
+    }
 
     h1 {
         text-align: center;
@@ -261,10 +271,11 @@
 
         padding: 25px;
         text-align: left;
+    }
 
-        &-text {
-            font-weight: 300;
-        }
+    @media screen and (max-height: 400px) {
+        opacity: 0;
+        display: none;
     }
 
     @media screen and (max-height: 400px) {
@@ -275,6 +286,18 @@
 
 .login-secure-token-label {
     font-weight: 300;
+}
+
+.login-success {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-60%, -50%);
+
+    i {
+        font-size: 95px;
+        color: $green;
+    }
 }
 
 .login-links {
@@ -302,5 +325,21 @@
             padding: 0;
             margin: 0;
         }
+    }
+}
+
+.login-spinner {
+    display: none;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    svg {
+        width: 40px;
+        padding-top: 7px;
+        padding-left: 7px;
     }
 }

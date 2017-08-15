@@ -1,5 +1,34 @@
 <?php
 use luya\admin\Module;
+
+$spinner = '<svg version="1.1" 
+                id="svg-spinner"
+                xmlns="http://www.w3.org/2000/svg" 
+                xmlns:xlink="http://www.w3.org/1999/xlink" 
+                x="0px" 
+                y="0px"
+                viewBox="0 0 120 120" 
+                xml:space="preserve">
+            
+                <path
+                    id="spinner" 
+                    fill="#fff" 
+                    d="M40,72C22.4,72,8,57.6,8,40C8,22.4,
+                    22.4,8,40,8c17.6,0,32,14.4,32,32c0,1.1-0.9,2-2,2
+                    s-2-0.9-2-2c0-15.4-12.6-28-28-28S12,24.6,12,40s12.6,
+                    28,28,28c1.1,0,2,0.9,2,2S41.1,72,40,72z"
+                >
+                    <animateTransform
+                        attributeType="xml"
+                        attributeName="transform"
+                        type="rotate"
+                        from="0 40 40"
+                        to="360 40 40"
+                        dur="0.6s"
+                        repeatCount="indefinite"
+                    />
+                </path>
+            </svg>';
 ?>
 <div class="login-frame">
     <div class="login-logo">
@@ -20,13 +49,12 @@ use luya\admin\Module;
             <div class="login-status alert alert-danger" id="errorsContainer" style="display: none"></div>
             <div class="login-buttons login-buttons-right">
                 <button class="btn btn-primary login-btn" type="submit"  tabindex="3">
-                    <?= Module::t('login_btn_login'); ?>
+                    <span class="login-spinner"><?= $spinner; ?></span><span class="login-btn-label"><?= Module::t('login_btn_login'); ?></span>
                 </button>
             </div>
         </div>
     </form>
     <!-- end of normal login form -->
-    
     <!-- secure login form -->
     <form class="login-form hidden" method="post" id="secureForm">
         <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>" />
@@ -41,22 +69,25 @@ use luya\admin\Module;
                     <?= Module::t('button_abort'); ?>
                 </button>
                 <button class="btn btn-primary login-btn login-btn-50" type="submit"  tabindex="2">
-                    <?= Module::t('button_send'); ?>
+                    <span class="login-spinner"><?= $spinner; ?></span> <span class="login-btn-label"><?= Module::t('button_send'); ?></span>
                 </button>
             </div>
         </div>
     </form>
     <!-- end of secure login form -->
+    <div class="login-success hidden" id="success">
+        <i class="material-icons login-success-icon">check_circle</i>
+    </div>
 </div>
 
 <div class="login-info">
     <h1 class="login-title"><?= Yii::$app->siteTitle; ?></h1>
-    <span class="login-info-text"><?php if (Yii::$app->request->isSecureConnection): ?><i class="material-icons">security</i><?endif; ?> <?= Yii::$app->request->hostInfo; ?></span>
+    <span class="login-info-text"><?php if (Yii::$app->request->isSecureConnection): ?><i class="material-icons">verified_user</i><?endif; ?><?= Yii::$app->request->hostInfo; ?></span>
 </div>
 
 <div class="login-links">
-    <ul class="login-link-list">
-        <li class="login-link-item">
+    <ul>
+        <li>
             <a href="https://twitter.com/luyadev" target="_blank" class="login-link">@luyadev</a>
         </li>
     </ul>

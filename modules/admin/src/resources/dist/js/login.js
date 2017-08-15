@@ -1,14 +1,19 @@
 var observeLogin = function(form, url, secureUrl) {
 	$(form).submit(function(e) {
         $('#errorsContainer').hide();
-		$('.spinner').show(); $('.submit-icon').hide();
+        $('.login-btn[type="submit"]').attr('disabled', true);
+        $('.login-spinner').show();
+        $('.login-btn-label').hide();
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: $(this).serialize(),
 			success : function(response) {
-                $('.spinner').hide(); $('.submit-icon').show();
+                $('.login-btn[type="submit"]').attr('disabled', false);
+                $('.login-spinner').hide();
+                $('.login-btn-label').show();
+                $('.login-logo').hide();
 				var refresh = response['refresh'];
 				var errors = response['errors'];
 				var enterSecureToken = response['enterSecureToken'];
@@ -44,14 +49,16 @@ var observeLogin = function(form, url, secureUrl) {
 	
 	$('#secureForm').submit(function(e) {
 		$('#errorsSecureContainer').hide();
-        $('.spinner').show(); $('.submit-icon').hide();
+        $('.login-btn[type="submit"]').attr('disabled', true);
+        $('.login-spinner').show();
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: secureUrl,
 			data: $(this).serialize(),
 			success : function(response) {
-                $('.spinner').hide(); $('.submit-icon').show();
+                $('.login-spinner').hide();
+                $('.login-btn[type="submit"]').attr('disabled', false);
 				var refresh = response['refresh'];
 				
 				if (response['errors']) {
@@ -84,5 +91,4 @@ var observeLogin = function(form, url, secureUrl) {
         $('.login-logo').addClass('login-logo-loaded');
         $('.login-form').addClass('login-form-loaded');
     });
-
 };
