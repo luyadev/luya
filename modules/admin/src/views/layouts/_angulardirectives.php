@@ -21,7 +21,7 @@ use luya\admin\Module as Admin;
 
 
 <script type="text/ng-template" id="modal">
-<div class="modal fade" tabindex="-1" aria-hidden="true" ng-class="{'show':!isModalHidden}" ng-style="{display: (isModalHidden ? 'none' : 'block')}" zaa-esc="isModalHidden=1">
+<div class="modal fade" tabindex="-1" aria-hidden="true" ng-class="{'show':!isModalHidden}" zaa-esc="isModalHidden=1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
