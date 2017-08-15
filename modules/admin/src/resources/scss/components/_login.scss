@@ -111,7 +111,7 @@
     font-size: $font-size-h4;
     margin-bottom: 20px;
     line-height: 1.05;
-    @include media-breakpoint-sm-up(){
+    @include media-breakpoint-up(sm){
         font-size: $font-size-h3;
     }
 }
