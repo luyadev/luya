@@ -107,12 +107,16 @@
     cursor: pointer;
     display: flex;
     min-height: 42px;
-    padding: 9px;
+    padding: 8px;
     position: relative;
     text-decoration: none;
     transition: .2s ease-in-out color, .2s ease-in-out background-color;
 
     @media (min-width: $mobile-nav-breakpoint) {
+        .mainnav-small & {
+            padding: 9px;
+        }
+
         .mainnav-small &:after {
             background-color: rgba(#fff, .1);
             border-radius: 5px;
@@ -171,7 +175,6 @@
 .mainnav-icon,
 .mainnav-label {
     display: inline-block;
-    height: 22px;
     line-height: 22px;
 }
 
