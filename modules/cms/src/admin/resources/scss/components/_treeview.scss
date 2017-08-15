@@ -142,11 +142,11 @@
     &-page:after {
         background-color: $green;
     }
-    .treeview-item-isoffline &:after {
+    .treeview-item-isoffline > &:after {
         background-color: $red;
     }
 
-    .treeview-item-ishidden & {
+    .treeview-item-ishidden > & {
         opacity: .5;
     }
 
@@ -205,6 +205,7 @@
     padding: 0 7px;
     width: 100%;
 
+    .treeview-item-active > .treeview-label > &,
     &:hover {
         background-color: rgba(0, 0, 0, .1);
 

@@ -78,7 +78,7 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <!-- 
+                    <!--
                     <li class="mainnav-entry">
                         <a class="mainnav-link" href="#">
                             <i class="mainnav-icon material-icons">developer_board</i>
@@ -90,11 +90,13 @@ $this->beginPage()
                      -->
                     <li class="mainnav-entry hide-on-mobile">
                         <span class="mainnav-link">
-                            <i class="mainnav-icon material-icons">panorama_fish_eye</i>
+                            <div class="mainnav-icon mainnav-icon-user-count">
+                                <span class="mainnav-user-online">{{notify.length}}</span>
+                                <i class="material-icons">panorama_fish_eye</i>
+                            </div>
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_useronline'); ?>
                             </span>
-                            <span class="mainnav-user-online">{{notify.length}}</span>
                             <span class="mainnav-tooltip-big">
                                <table>
                                   <tr>
@@ -125,7 +127,7 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
-                    <!-- 
+                    <!--
                     <li class="mainnav-entry">
                         <a class="mainnav-link" href="https://luya.io" target="_blank">
                             <span class="mainnav-icon">
@@ -139,13 +141,13 @@ $this->beginPage()
                     -->
                 </ul>
             </div>
-            <button class="mainnav-toggler" ng-class="{'mainnav-toggler-open' : isHover}"  ng-click="isHover = !isHover"><i class="material-icons">chevron_right</i></button>
+            <button class="mainnav-toggler" ng-class="{'mainnav-toggler-open' : isHover}" ng-click="isHover = !isHover">
+                <i class="material-icons">chevron_right</i>
+            </button>
         </div>
-     </div>
-
+    </div>
 
     <div ui-view class="luya-main-wrapper"></div>
-
 
     <div class="luyasearch" ng-class="{'luyasearch-open' : searchInputOpen, 'luyasearch-closed': !searchInputOpen, 'luyasearch-toggled': isHover}" zaa-esc="escapeSearchInput()">
         <div class="luyasearch-inner">
@@ -183,24 +185,25 @@ $this->beginPage()
             </div>
         </div>
     </div>
-</div>
+    </div>
 
-<div class="toasts" ng-repeat="item in toastQueue">
-    <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{item.title}}</h5>
-                    <button type="button" class="close" ng-click="item.close()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{item.message}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" ng-click="item.close()"><?= Admin::t('button_abort'); ?></button>
-                    <button type="button" class="btn btn-primary" ng-click="item.click()"><?= Admin::t('button_confirm'); ?></button>
+    <div class="toasts" ng-repeat="item in toastQueue">
+        <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{item.title}}</h5>
+                        <button type="button" class="close" ng-click="item.close()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{item.message}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" ng-click="item.close()"><?= Admin::t('button_abort'); ?></button>
+                        <button type="button" class="btn btn-primary" ng-click="item.click()"><?= Admin::t('button_confirm'); ?></button>
+                    </div>
                 </div>
             </div>
         </div>

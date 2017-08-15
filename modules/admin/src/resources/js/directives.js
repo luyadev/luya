@@ -76,10 +76,13 @@
                 'tooltipText': '@',
                 'tooltipExpression': '=',
                 'tooltipPosition': '@',
-                'tooltipOffsetTop': '=',
-                'tooltipOffsetLeft': '='
+                'tooltipOffsetTop': '@',
+                'tooltipOffsetLeft': '@',
+                'tooltipImageUrl': '@'
             },
             link: function (scope, element, attr) {
+                var defaultPosition = 'right';
+
                 var positions = {
                     top: function() {
                         var bcr = element[0].getBoundingClientRect();
@@ -115,13 +118,16 @@
                     scope.tooltipText = scope.tooltipExpression;
                 }
                 
-                var html = '<div class="tooltip tooltip-' + scope.tooltipPosition + '" role="tooltip">' +
-                               '<div class="tooltip-arrow"></div>' +
-                               '<div class="tooltip-inner">' + scope.tooltipText +  '</div>' +
-                            '</div>';
+                var html =  '<div class="tooltip tooltip-' + (scope.tooltipPosition || defaultPosition) + (scope.tooltipImageUrl ? ' tooltip-image' : '') + '" role="tooltip">' +
+                                '<div class="tooltip-arrow"></div>' +
+                                '<div class="tooltip-inner">' +
+                                    (scope.tooltipText ? ('<span class="tooltip-text">' + scope.tooltipText +  '</span>') : '') +
+                                    (scope.tooltipImageUrl ? ('<img class="tooltip-image" src="' + scope.tooltipImageUrl +  '">') : '') +
+                                '</div>' +
+                             '</div>';
 
                 scope.pop = $(html);
-                element.after(scope.pop);
+                $document.find('body').append(scope.pop);
                 scope.pop.hide();
 
                 var onScroll = function() {
@@ -129,7 +135,7 @@
                     if(typeof positions[scope.tooltipPosition] === 'function') {
                         offset = positions[scope.tooltipPosition]();
                     } else {
-                        offset = positions['right']();
+                        offset = positions[defaultPosition]();
                     }
 
                     if (typeof scope.tooltipOffsetTop == 'number') {
@@ -157,6 +163,9 @@
                     scope.pop.hide();
                 });
 
+                scope.$on('$destroy', function() {
+                    scope.pop.remove();
+                });
             }
         }
     })
@@ -442,9 +451,9 @@
      *
      * ```
      * <button ng-click="modalState=!modalState">Toggle Modal</button>
-     * <modal is-modal-hidden="modalState">
-     *      <h1>Modal Container</h1>
-     *    <p>Hello world!</p>
+     * <modal is-modal-hidden="modalState" modal-title="I am the Title">
+     *     <h1>Modal Container</h1>
+     *     <p>Hello world!</p>
      * </modal>
      * ```
      */
@@ -453,7 +462,7 @@
             restrict: "E",
             scope: {
                 isModalHidden: "=",
-                title: '@'
+                title: '@modalTitle'
             },
             replace: true,
             transclude: true,
@@ -1097,7 +1106,7 @@
                             '<div class="form-side">' +
                                 '<div class="zaaselect" ng-class="{\'open\':isOpen}">' +
                                     '<select class="zaaselect-select" ng-model="model">' +
-                                        '<option ng-repeat="opt in options" ng-value="{{opt[optionsvalue]}}">{{opt[optionslabel]}}</option>' +
+                                        '<option ng-repeat="opt in options" ng-value="opt[optionsvalue]">{{opt[optionslabel]}}</option>' +
                                     '</select>' +
                                     '<div class="zaaselect-selected" ng-click="isOpen=!isOpen">' +
                                         '<span>{{getSelectedValue()}}</span>' +

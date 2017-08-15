@@ -45,6 +45,22 @@
                 top: -100px;
             }
         }
+
+        &-loaded {
+            top: -100px;
+
+            @include media-breakpoint-up(sm) {
+                top: -160px;
+            }
+
+            @media screen and (max-height: 450px) {
+                top: -100px;
+            }
+        }
+    }
+
+    @media screen and (max-height: 400px) {
+        opacity: 0;
     }
 
     @media screen and (max-height: 400px) {
@@ -231,6 +247,7 @@
     text-align: center;
     opacity: 1;
 
+
     &-text {
         font-weight: 300;
         .material-icons {
@@ -254,6 +271,11 @@
 
         padding: 25px;
         text-align: left;
+    }
+
+    @media screen and (max-height: 400px) {
+        opacity: 0;
+        display: none;
     }
 
     @media screen and (max-height: 400px) {

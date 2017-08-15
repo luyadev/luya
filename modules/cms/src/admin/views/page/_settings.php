@@ -1,7 +1,7 @@
 <?php
 use luya\cms\admin\Module;
 ?>
-<modal is-modal-hidden="settingsOverlay" title="Settings">
+<modal is-modal-hidden="settingsOverlay" modal-title="Settings">
     <div class="row"  ng-init="tab=1">
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column">

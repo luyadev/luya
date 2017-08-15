@@ -64,6 +64,20 @@ use luya\cms\admin\Module;
                                 <i class="material-icons">search</i>
                             </label>
                         </div>
+                        <div class="blockholder-group" ng-show="copyStack.length > 0">
+                            <span class="blockholder-group-title">
+                                <i class="material-icons">bookmark</i>
+                                <span><?= Module::t('view_update_blockholder_clipboard') ?> <a class="btn btn-icon btn-outline-secondary btn-sm" ng-click="clearStack()"><i class="material-icons">clear</i></a></span>
+                            </span>
+                            <ul class="blockholder-list">
+                                <li class="blockholder-item" ng-repeat="stackItem in copyStack"
+                                    dnd dnd-model="stackItem" dnd-isvalid="true" dnd-drop-disabled dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
+                                >
+                                    <i class="material-icons blockholder-icon">{{stackItem.icon}}</i>
+                                    <span>{{stackItem.name}}</span>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="blockholder-group blockholder-group-favorites" ng-repeat="item in blocksData | orderBy:'groupPosition'" >
                             <span class="blockholder-group-title" ng-click="toggleGroup(item.group)" ng-hide="searchQuery.length > 0">
                                 <i class="material-icons" ng-if="item.group.is_fav">favorite</i>

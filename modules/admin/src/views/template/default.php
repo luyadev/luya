@@ -1,4 +1,4 @@
-<div class="luya-main" ng-controller="DefaultController">
+<div class="luya-main luya-main-crud" ng-controller="DefaultController">
     <div class="luya-subnav">
         <div class="modulenav">
             <div class="modulenav-group">

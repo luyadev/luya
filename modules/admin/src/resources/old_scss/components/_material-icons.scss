@@ -10,7 +10,7 @@
     url(../../fonts/material-icons/MaterialIcons-Regular.ttf) format('truetype');
 }
 
-.material-icons {
+@mixin material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
@@ -33,4 +33,8 @@
 
     /* Support for IE. */
     font-feature-settings: 'liga';
+}
+
+.material-icons {
+    @include material-icons;
 }

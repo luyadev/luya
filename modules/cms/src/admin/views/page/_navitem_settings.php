@@ -1,7 +1,7 @@
 <?php
 use luya\cms\admin\Module;
 ?>
-<modal is-modal-hidden="itemSettingsOverlay" title="{{item.title}} Settings">
+<modal is-modal-hidden="itemSettingsOverlay" modal-title="{{item.title}} Settings">
 <div class="row">
     <div class="col-md-3">
         <ul class="nav nav-pills flex-column">

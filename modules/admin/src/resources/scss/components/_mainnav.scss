@@ -103,16 +103,20 @@
 
 .mainnav-link {
     border-radius: 5px;
-    color: map-get($grays, 600);
+    color: map-get($grays, 400);
     cursor: pointer;
     display: flex;
     min-height: 42px;
-    padding: 9px;
+    padding: 8px;
     position: relative;
     text-decoration: none;
     transition: .2s ease-in-out color, .2s ease-in-out background-color;
 
     @media (min-width: $mobile-nav-breakpoint) {
+        .mainnav-small & {
+            padding: 9px;
+        }
+
         .mainnav-small &:after {
             background-color: rgba(#fff, .1);
             border-radius: 5px;
@@ -171,7 +175,6 @@
 .mainnav-icon,
 .mainnav-label {
     display: inline-block;
-    height: 22px;
     line-height: 22px;
 }
 
@@ -221,73 +224,6 @@
     }
 }
 
-.mainnav-user-online {
-    font-size: 13px;
-    left: 17px;
-    position: absolute;
-    top: 56%;
-    transform: translateY(-50%);
-    transition: color .2s ease-in-out;
-
-}
-
-.mainnav-tooltip-big {
-    background: map-get($grays, 800);
-    border-radius: 5px;
-    bottom: 0;
-    display: none;
-    opacity: 0;
-    padding: 10px;
-    position: absolute;
-    transition: .25s opacity ease-in-out;
-
-    &:after {
-        border-color: transparent map-get($grays, 800) transparent transparent;
-        border-style: solid;
-        border-width: 5px 5px 5px 0;
-        bottom: 15px;
-        content: "";
-        left: -5px;
-        position: absolute;
-    }
-
-    tbody {
-        color: map-get($grays, 100);;
-        th {
-            border-bottom: 1px solid map-get($grays, 100);;
-            line-height: 20px;
-            margin-bottom: 15px;
-        }
-        th, td {
-            min-width: 180px;
-            padding: 10px 0;
-            text-align: left;
-
-            &:last-of-type {
-                min-width: 150px;
-            }
-            &:first-of-type {
-                padding-left: 5px;
-            }
-        }
-
-        tr {
-            padding: 10px;
-            &.mainnav-tooltip-big-green {
-                color: $green;
-            }
-
-            &.mainnav-tooltip-big-red {
-                color: $red;
-            }
-
-            &.mainnav-tooltip-big-gray {
-                color: map-get($grays, 600);
-            }
-        }
-    }
-}
-
 .mainnav-toggler {
     background: map-get($grays, 700);
     border: none;
@@ -324,5 +260,78 @@
 
     @media (min-width: $mobile-nav-breakpoint) {
         display: block;
+    }
+}
+
+.mainnav-icon-user-count {
+    display: inline-block;
+    position: relative;
+}
+
+.mainnav-user-online {
+    font-size: 12px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    transition: color .2s ease-in-out;
+}
+
+.mainnav-tooltip-big {
+    background: map-get($grays, 800);
+    border-radius: 5px;
+    bottom: 0;
+    display: none;
+    opacity: 0;
+    padding: 10px;
+    position: absolute;
+    transition: .25s opacity ease-in-out;
+
+    &:after {
+        border-color: transparent map-get($grays, 800) transparent transparent;
+        border-style: solid;
+        border-width: 5px 5px 5px 0;
+        bottom: 15px;
+        content: "";
+        left: -5px;
+        position: absolute;
+    }
+
+    tbody {
+        color: map-get($grays, 100);
+
+        th {
+            border-bottom: 1px solid map-get($grays, 100);;
+            line-height: 20px;
+            margin-bottom: 15px;
+        }
+
+        th, td {
+            min-width: 180px;
+            padding: 10px 0;
+            text-align: left;
+
+            &:last-of-type {
+                min-width: 150px;
+            }
+            &:first-of-type {
+                padding-left: 5px;
+            }
+        }
+
+        tr {
+            padding: 10px;
+            &.mainnav-tooltip-big-green {
+                color: $green;
+            }
+
+            &.mainnav-tooltip-big-red {
+                color: $red;
+            }
+
+            &.mainnav-tooltip-big-gray {
+                color: map-get($grays, 600);
+            }
+        }
     }
 }

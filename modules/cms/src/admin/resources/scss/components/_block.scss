@@ -44,9 +44,9 @@ $block-padding: 10px !default;
     &:after {
         background-color: theme-color(primary);
         content: "";
+        display: none;
         height: 5px;
         left: 0;
-        display: none;
         position: absolute;
         right: 0;
         z-index: 1000;
@@ -64,6 +64,13 @@ $block-padding: 10px !default;
     &--drag-bottom:after {
         display: block;
     }
+
+    &-is-hidden .block-front {
+        opacity: .3;
+    }
+    &-is-virgin .block-front {
+        background-color: lighten(color(blue), 30);
+    }
 }
 
 .block-toolbar {
@@ -77,8 +84,9 @@ $block-padding: 10px !default;
     pointer-events: none;
     position: absolute;
     right: -$block-border-width;
-    top: -35px;
+    transform: translateY(-100%);
     transition: .2s ease-in-out opacity;
+    z-index: 1000;
 
     .toolbar-item {
         font-size: 20px;
