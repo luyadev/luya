@@ -38,7 +38,7 @@ $this->beginPage()
 
             <div class="mainnav-static" ng-class="{'mainnav-hidden': !isOpen}">
                 <ul class="mainnav-list">
-                    <li class="mainnav-entry hide-on-mobile" tooltip tooltip-text="Search" tooltip-position="right">
+                    <li class="mainnav-entry hide-on-mobile" tooltip tooltip-text="Search" tooltip-position="right" tooltip-disabled="isHover">
                         <span class="mainnav-link" ng-click="toggleSearchInput()" ng-class="{'mainnav-link-active' : searchInputOpen }">
                             <i class="mainnav-icon material-icons">search</i>
                             <span class="mainnav-label">

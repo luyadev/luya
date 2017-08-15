@@ -1,6 +1,6 @@
 .blockholder-column {
-    max-width: 250px;
-    min-width: 250px;
+    max-width: 265px;
+    min-width: 265px;
     padding-right: 0;
 }
 
@@ -13,9 +13,13 @@
     width: 100%;
     max-width: 250px;
     min-width: 250px;
-    position: fixed;
+    position: relative;
     user-select: none;
     @include overflow-no-scrollbars;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        position: fixed;
+    }
 }
 
 .blockholder-search {

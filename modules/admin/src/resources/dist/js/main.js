@@ -2158,16 +2158,46 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     });
 
     /**
-     * Generate a Tool Tip Overlay, usager:
+     * Generate a Tool Tip – usage:
      *
+     * The default tooltip is positioned on the right side of the element:
+     *
+     * ```html
+     * <span tooltip tooltip-text="Tooltip">...</span>
      * ```
-     * <span tooltip tooltip-text="Trigger this Message on Hover">Span Text</span>
+     *
+     *
+     * You can provide an Image URL beside or instead of text.
+     *
+     * ```html
+     * <span tooltip tooltip-image-url="http://image.url">...</span>
      * ```
-     * 
+     *
+     * Change the position (`top`, `right`, `bottom` or `left`):
+     *
+     * ```html
+     * <span tooltip tooltip-text="Tooltip" tooltip-position="top">...</span>
+     * ```
+     *
+     *
+     * Add an offset to the generated position. The example below adds 5px offset from left and pulls the tooltip 5px up.
+     *
+     * ```html
+     * <span tooltip tooltip-text="Tooltip" tooltip-offset-left="5" tooltip-offset-top="-5">...</span>
+     * ```
+     *
+     *
      * In order to trigger an expression call instead of a static text use:
-     * 
-     * ```
+     *
+     * ```html
      * <span tooltip tooltip-expression="scopeFunction(fooBar)">Span Text</span>
+     * ```
+     *
+     *
+     * Disable tooltip based on variable (two way binding):
+     *
+     * ```html
+     * <span tooltip tooltip-text="Tooltip" tooltip-disabled="variableMightBeTrueMightBeFalseMightChange">Span Text</span>
      * ```
      */
     zaa.directive("tooltip", function ($document) {
@@ -2179,7 +2209,8 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 'tooltipPosition': '@',
                 'tooltipOffsetTop': '@',
                 'tooltipOffsetLeft': '@',
-                'tooltipImageUrl': '@'
+                'tooltipImageUrl': '@',
+                'tooltipDisabled': '='
             },
             link: function (scope, element, attr) {
                 var defaultPosition = 'right';
@@ -2251,12 +2282,15 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 };
 
                 element.on('mouseenter', function () {
-                    onScroll();
+                    window.console.log(scope.tooltipDisabled);
+                    if(typeof scope.tooltipDisabled === 'undefined' || scope.tooltipDisabled === false) {
+                        onScroll();
 
-                    // todo: Improve performance?
-                    element.parents().on('scroll', onScroll);
+                        // todo: Improve performance ...? x)
+                        element.parents().on('scroll', onScroll);
 
-                    scope.pop.show();
+                        scope.pop.show();
+                    }
                 });
 
                 element.on('mouseleave', function () {

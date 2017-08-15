@@ -9,6 +9,7 @@
 
         > .col > .row {
             flex: 1 1 100%;
+            flex-wrap: nowrap;
         }
 
         > .col,
