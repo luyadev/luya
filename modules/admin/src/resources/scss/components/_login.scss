@@ -219,20 +219,6 @@
             padding: 5px 0;
         }
     }
-
-    &-success {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-50%) translate(-50%);
-        width: 100px;
-        height: 100px;
-
-        font-size: 90px !important;
-        text-align: center;
-        color: $green;
-
-    }
 }
 
 .login-info {
@@ -250,7 +236,9 @@
         .material-icons {
             padding-right: 5px;
             color: $green;
-            line-height: 0.5
+            line-height: 1;
+            margin-top: -2px;
+            font-size: 25px;
         }
     }
 
@@ -285,8 +273,8 @@
     transform: translate(-60%, -50%);
 
     i {
-        font-size: 38px;
-        color: $pink;
+        font-size: 95px;
+        color: $green;
     }
 }
 

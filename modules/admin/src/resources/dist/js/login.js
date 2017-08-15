@@ -13,6 +13,7 @@ var observeLogin = function(form, url, secureUrl) {
                 $('.login-btn[type="submit"]').attr('disabled', false);
                 $('.login-spinner').hide();
                 $('.login-btn-label').show();
+                $('.login-logo').hide();
 				var refresh = response['refresh'];
 				var errors = response['errors'];
 				var enterSecureToken = response['enterSecureToken'];
@@ -49,14 +50,14 @@ var observeLogin = function(form, url, secureUrl) {
 	$('#secureForm').submit(function(e) {
 		$('#errorsSecureContainer').hide();
         $('.login-btn[type="submit"]').attr('disabled', true);
-        $('.spinner').show();
+        $('.login-spinner').show();
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: secureUrl,
 			data: $(this).serialize(),
 			success : function(response) {
-                $('.spinner').hide();
+                $('.login-spinner').hide();
                 $('.login-btn[type="submit"]').attr('disabled', false);
 				var refresh = response['refresh'];
 				

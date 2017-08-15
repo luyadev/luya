@@ -49,7 +49,7 @@ $spinner = '<svg version="1.1"
             <div class="login-status alert alert-danger" id="errorsContainer" style="display: none"></div>
             <div class="login-buttons login-buttons-right">
                 <button class="btn btn-primary login-btn" type="submit"  tabindex="3">
-                    <?= '<span class="login-spinner">' . $spinner . '</span>' . '<span class="login-btn-label">' . Module::t('login_btn_login') . '</span>'; ?>
+                    <span class="login-spinner"><?= $spinner; ?></span><span class="login-btn-label"><?= Module::t('login_btn_login'); ?></span>
                 </button>
             </div>
         </div>
@@ -69,7 +69,7 @@ $spinner = '<svg version="1.1"
                     <?= Module::t('button_abort'); ?>
                 </button>
                 <button class="btn btn-primary login-btn login-btn-50" type="submit"  tabindex="2">
-                   <?= '<span class="login-spinner">' . $spinner . '</span>' . '<span class="login-btn-label">' . Module::t('button_send') . '</span>'; ?>
+                    <span class="login-spinner"><?= $spinner; ?></span> <span class="login-btn-label"><?= Module::t('button_send'); ?></span>
                 </button>
             </div>
         </div>
