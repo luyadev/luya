@@ -2222,7 +2222,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                             '</div>';
 
                 scope.pop = $(html);
-                element.after(scope.pop);
+                $document.find('body').append(scope.pop);
                 scope.pop.hide();
 
                 var onScroll = function() {
