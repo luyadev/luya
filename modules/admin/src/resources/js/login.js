@@ -13,7 +13,6 @@ var observeLogin = function(form, url, secureUrl) {
                 $('.login-btn[type="submit"]').attr('disabled', false);
                 $('.login-spinner').hide();
                 $('.login-btn-label').show();
-                $('.login-logo').hide();
 				var refresh = response['refresh'];
 				var errors = response['errors'];
 				var enterSecureToken = response['enterSecureToken'];
@@ -40,6 +39,7 @@ var observeLogin = function(form, url, secureUrl) {
                     $('#secureForm').hide();
                     $('#loginForm').hide();
                     $('#success').show();
+                    $('.login-logo').hide();
                     location.reload();
 				}
 			},
@@ -71,6 +71,7 @@ var observeLogin = function(form, url, secureUrl) {
                     $('#secureForm').hide();
                     $('#loginForm').hide();
 					$('#success').show();
+                    $('.login-logo').hide();
 					location.reload();
 				}
 			},
