@@ -5,6 +5,7 @@ use luya\admin\Module;
     <div class="login-logo">
         <img src="<?= $this->getAssetUrl("luya\admin\assets\Login") .'/images/luyalogo.png' ?>" />
     </div>
+    <!-- normal login form -->
     <form class="login-form" method="post" id="loginForm">
         <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>" />
         <div class="login-inputs">
@@ -24,8 +25,9 @@ use luya\admin\Module;
             </div>
         </div>
     </form>
-    <!-- end of normal login in form -->
-    <!-- secure login in form -->
+    <!-- end of normal login form -->
+    
+    <!-- secure login form -->
     <form class="login-form hidden" method="post" id="secureForm">
         <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>" />
         <div class="login-inputs">
@@ -44,18 +46,18 @@ use luya\admin\Module;
             </div>
         </div>
     </form>
-        <!-- end of secure login in form -->
+    <!-- end of secure login form -->
 </div>
 
 <div class="login-info">
-    <h1 class="login-title"><?= Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></h1>
-    <span class="login-info-text">Blub blub blubber</span>
+    <h1 class="login-title"><?= Yii::$app->siteTitle; ?></h1>
+    <span class="login-info-text"><?php if (Yii::$app->request->isSecureConnection): ?><i class="material-icons">security</i><?endif; ?> <?= Yii::$app->request->hostInfo; ?></span>
 </div>
 
 <div class="login-links">
     <ul class="login-link-list">
         <li class="login-link-item">
-            <a href="#" class="login-link">@luyadev</a>
+            <a href="https://twitter.com/luyadev" target="_blank" class="login-link">@luyadev</a>
         </li>
     </ul>
 </div>
