@@ -40,8 +40,8 @@
     cursor: pointer;
     display: block;
     padding: 5px 5px 5px 30px;
-    transition: .25s ease-in-out background-color;
     position: relative;
+    transition: .25s ease-in-out background-color;
 
     &:focus {
         text-decoration: none;
@@ -64,11 +64,11 @@
 
 .modulenav-icon {
     font-size: 20px !important;
-    position: absolute;
     left: 0;
+    position: absolute;
 }
 
 .modulenav-label {
-    margin-left: 3px;
     line-height: 20px;
+    margin-left: 3px;
 }

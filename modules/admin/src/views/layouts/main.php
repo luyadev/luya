@@ -90,11 +90,13 @@ $this->beginPage()
                      -->
                     <li class="mainnav-entry hide-on-mobile">
                         <span class="mainnav-link">
-                            <i class="mainnav-icon material-icons">panorama_fish_eye</i>
+                            <div class="mainnav-icon mainnav-icon-user-count">
+                                <span class="mainnav-user-online">{{notify.length}}</span>
+                                <i class="material-icons">panorama_fish_eye</i>
+                            </div>
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_useronline'); ?>
                             </span>
-                            <span class="mainnav-user-online">{{notify.length}}</span>
                             <span class="mainnav-tooltip-big">
                                <table>
                                   <tr>

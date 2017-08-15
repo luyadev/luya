@@ -2,24 +2,23 @@
     margin: 0;
     opacity: 1;
     position: fixed;
-    white-space: nowrap;
     z-index: 1000;
 
     &-right {
-        padding-left: 5px;
         margin-left: 3px;
+        padding-left: 5px;
     }
     &-left {
-        padding-right: 5px;
         margin-right: 3px;
+        padding-right: 5px;
     }
     &-top {
-        padding-bottom: 5px;
         margin-bottom: 3px;
+        padding-bottom: 5px;
     }
     &-bottom {
-        padding-top: 5px;
         margin-top: 3px;
+        padding-top: 5px;
     }
 }
 
@@ -29,35 +28,35 @@
     width: 0;
 
     .tooltip-right & {
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
         border-bottom: 5px solid transparent;
         border-right: 5px solid $black;
         border-top: 5px solid transparent;
-    }
-    .tooltip-left & {
-        right: 0;
+        left: 0;
         top: 50%;
         transform: translateY(-50%);
+    }
+    .tooltip-left & {
         border-bottom: 5px solid transparent;
         border-left: 5px solid transparent;
         border-top: 5px solid transparent;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
     }
     .tooltip-top & {
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
         border-top: 5px solid $black;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
     }
     .tooltip-bottom & {
-        left: 50%;
-        top: 0;
-        transform: translateX(-50%);
         border-bottom: 5px solid $black;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
     }
 }
