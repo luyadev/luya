@@ -64,6 +64,13 @@ $block-padding: 10px !default;
     &--drag-bottom:after {
         display: block;
     }
+
+    &-is-hidden .block-front {
+        opacity: .3;
+    }
+    &-is-virgin .block-front {
+        background-color: lighten(color(blue), 30);
+    }
 }
 
 .block-toolbar {
