@@ -56,10 +56,18 @@
     width: 320px;
     max-width: 100%;
     position: relative;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left:0;
+    margin: 40px auto;
+    transform: translate(0, 0);
     padding: 15px 15px 40px 15px;
+
+    @media screen and (min-height: 320px) {
+        margin: 0;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .login-form {
@@ -278,7 +286,11 @@
         right:0;
         bottom: 0;
         padding: 25px;
+    }
 
+    @media screen and (max-height: 400px) {
+        opacity: 0;
+        display: none;
     }
 
     ul {
