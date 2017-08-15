@@ -1,5 +1,9 @@
 .modal {
     background-color: rgba(0, 0, 0, .7);
+
+    &.show {
+        display: block;
+    }
 }
 
 .modal-body-gray {
