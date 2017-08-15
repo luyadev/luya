@@ -84,8 +84,9 @@ $block-padding: 10px !default;
     pointer-events: none;
     position: absolute;
     right: -$block-border-width;
-    top: -35px;
+    top: -20px;
     transition: .2s ease-in-out opacity;
+    z-index: 1000;
 
     .toolbar-item {
         font-size: 20px;

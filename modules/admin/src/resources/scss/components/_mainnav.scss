@@ -298,12 +298,14 @@
     }
 
     tbody {
-        color: map-get($grays, 100);;
+        color: map-get($grays, 100);
+
         th {
             border-bottom: 1px solid map-get($grays, 100);;
             line-height: 20px;
             margin-bottom: 15px;
         }
+
         th, td {
             min-width: 180px;
             padding: 10px 0;
