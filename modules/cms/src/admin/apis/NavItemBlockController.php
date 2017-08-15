@@ -41,19 +41,19 @@ class NavItemBlockController extends \luya\admin\base\RestController
 
     public function actionCopyBlockFromStack()
     {
-        $model = NavItemPageBlockItem::findOne(Yii::$app->request->post('copyBlockId', 0));
+        $model = NavItemPageBlockItem::findOne(Yii::$app->request->getBodyParam('copyBlockId', 0));
 
-        if (($model) && ((Yii::$app->request->post('copyBlockId', 0) !== Yii::$app->request->post('prevId', false)))) {
+        if (($model) && ((Yii::$app->request->getBodyParam('copyBlockId', 0) !== Yii::$app->request->getBodyParam('prevId', false)))) {
             $newModel = new NavItemPageBlockItem();
             $newModel->attributes = $model->toArray();
             $newModel->is_dirty = false;
-            $newModel->prev_id = Yii::$app->request->post('prevId', false);
-            $newModel->placeholder_var = Yii::$app->request->post('placeholder_var', false);
-            $newModel->sort_index = Yii::$app->request->post('sortIndex', false);
-            $newModel->nav_item_page_id = Yii::$app->request->post('nav_item_page_id', false);
+            $newModel->prev_id = Yii::$app->request->getBodyParam('prevId', false);
+            $newModel->placeholder_var = Yii::$app->request->getBodyParam('placeholder_var', false);
+            $newModel->sort_index = Yii::$app->request->getBodyParam('sortIndex', false);
+            $newModel->nav_item_page_id = Yii::$app->request->getBodyParam('nav_item_page_id', false);
 
             if ($newModel->insert(false)) {
-                $this->copySubBlocksTo(Yii::$app->request->post('copyBlockId', false), $newModel->id, $newModel->nav_item_page_id);
+                $this->copySubBlocksTo(Yii::$app->request->getBodyParam('copyBlockId', false), $newModel->id, $newModel->nav_item_page_id);
                 return ['response' => true];
             }
         }

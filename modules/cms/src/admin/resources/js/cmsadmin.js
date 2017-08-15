@@ -491,59 +491,6 @@
 
 	});
 
-	/*
-	zaa.controller("DropNavController", function($scope, $http, ServiceMenuData, AdminToastService) {
-
-		$scope.droppedNavItem = null;
-
-		$scope.showVersionList = false;
-
-		$scope.errorMessageOnDuplicateAlias = function(response) {
-			AdminToastService.error(i18nParam('js_page_add_exists', {title: response.success.title, id: response.success.nav_id}), 5000);
-		}
-
-	    $scope.onBeforeDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-			$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-
-	    $scope.onAfterDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-			$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-
-	    $scope.onChildDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-			$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-
-	    $scope.onEmptyDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-	    	$http.get('admin/api-cms-navitem/move-to-container', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnCatId : itemid }}).then(function(r) {
-	    		ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-	});
-	*/
-
 	zaa.filter("menuparentfilter", function() {
 		return function(input, containerId, parentNavId) {
 			var result = [];
@@ -570,26 +517,6 @@
 			return returnValue;
 		}
 	});
-
-	/*
-	zaa.controller("CmsLiveEdit", function($scope, ServiceLiveEditMode) {
-
-		$scope.display = 0;
-
-		$scope.url = homeUrl;
-
-		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
-			$scope.display = n;
-		});
-
-		$scope.$on('service:LiveEditModeUrlChange', function(event, url) {
-			var d = new Date();
-			var n = d.getTime();
-			$scope.url = url + '&' + n;
-		});
-
-	});
-	*/
 
 	zaa.controller("CmsMenuTreeController", function($scope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
 
@@ -641,43 +568,6 @@
 				console.log('throw error message errorMessageOnDuplicateAlias');
 				ServiceMenuData.load(true);
 			});
-			
-			/*
-			$http.get(api, { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-			*/
-			/*
-			$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-			 $scope.onBeforeDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-			$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-
-	    $scope.onAfterDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-			$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-
-			*/
 		};
 		
 		$scope.validItem = function(hover, draged) {
@@ -1326,45 +1216,6 @@
 	});
 
 
-	/**
-	 * @param $scope.placeholder From ng-repeat
-	 */
-	/*
-	zaa.controller("PagePlaceholderController", function($scope, $http, AdminClassService, PlaceholderService) {
-
-		$scope.NavItemTypePageController = $scope.$parent;
-
-		$scope.PlaceholderService = PlaceholderService;
-
-		$scope.$watch(function() { return $scope.PlaceholderService.status }, function(n,o) {
-			if (n) {
-				$scope.isOpen = true;
-			} else {
-				$scope.isOpen = false;
-			}
-		});
-
-		$scope.isOpen = false;
-
-		$scope.toggleOpen = function() {
-			$scope.isOpen = !$scope.isOpen;
-		}
-
-		$scope.mouseEnter = function() {
-			var status = AdminClassService.getClassSpace('onDragStart');
-			if (status !== undefined && !$scope.isOpen) {
-				$scope.isOpen = true;
-			}
-		};
-		
-		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
-			$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : dropped.prev_id, sort_index:0, block_id : dragged.id , placeholder_var : dropped.var, nav_item_page_id : dropped.nav_item_page_id }).then(function(response) {
-				$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
-			});
-		};
-	});
-	*/
-
 
 	/**
 	 * @param $scope.block From ng-repeat scope assignment
@@ -1385,9 +1236,25 @@
 			if (position == 'bottom') {
 				sortIndex = sortIndex + 1;
 			}
-			if (dragged.hasOwnProperty('favorized')) {
+			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
 				// its a new block
-				$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index:sortIndex, block_id : dragged.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).then(function(response) {
+				$http.post('admin/api-cms-navitempageblockitem/create', { 
+					prev_id : $scope.placeholder.prev_id,
+					sort_index:sortIndex, 
+					block_id : dragged.id, 
+					placeholder_var : $scope.placeholder['var'], 
+					nav_item_page_id : $scope.placeholder.nav_item_page_id
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+				});
+			} else if (dragged.hasOwnProperty('copystack')) {
+				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
+					copyBlockId: dragged.id,
+					sortIndex: sortIndex,
+					prevId:  $scope.placeholder.prev_id,
+					placeholder_var :  $scope.placeholder['var'],
+					nav_item_page_id : $scope.placeholder.nav_item_page_id
+				}).then(function(response) {
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
 			} else {
@@ -1403,7 +1270,7 @@
 		};
 		
 		$scope.copyBlock = function() {
-			ServiceBlockCopyStack.push($scope.block.id, $scope.block.name);
+			ServiceBlockCopyStack.push($scope.block);
 		};
 
 		$scope.toggleHidden = function() {
@@ -1425,20 +1292,6 @@
 			});
 		};
 
-		/*
-		$scope.hasInfo = function(varFieldName) {
-			if (varFieldName in $scope.block.field_help) {
-				return true;
-			}
-
-			return false;
-		}
-
-		$scope.getInfo = function(varFieldName) {
-			return $scope.block.field_help[varFieldName];
-		}
-		*/
-
         $scope.isEditable = function() {
             return typeof $scope.block.vars != "undefined" && $scope.block.vars.length > 0;
         };
@@ -1446,21 +1299,7 @@
         $scope.isConfigurable = function() {
             return typeof $scope.block.cfgs != "undefined" && $scope.block.cfgs.length > 0;
         };
-
-        /*
-		$scope.safe = function(html) {
-			return $sce.trustAsHtml(html);
-		};
-		*/
         
-		/*
-		$scope.onStop = function() {
-			$scope.$apply(function() {
-				AdminClassService.setClassSpace('onDragStart', undefined);
-			});
-		};
-		*/
-
 		$scope.$watch(function() { return $scope.block.values }, function(n, o) {
 			$scope.data = n;
 		});
@@ -1552,58 +1391,6 @@
 		};
 	});
 
-	/**
-	 * @TODO HANDLING SORT INDEX OF EACH BLOCK
-	 */
-	/*
-	zaa.controller("DropBlockController", function($scope, $http, AdminClassService) {
-
-		$scope.PagePlaceholderController = $scope.$parent;
-
-		$scope.droppedBlock = {};
-
-		$scope.onDrop = function($event, $ui) {
-
-			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
-
-			var sortIndex = $($event.target).data('sortindex');
-			var moveBlock = $scope.droppedBlock['vars'] || false;
-			var event = $scope.droppedBlock['event'] || false;
-
-			if (event === 'isServiceBlockCopyInstance') {
-				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', $.param({
-					copyBlockId: $scope.droppedBlock.blockId,
-					sortIndex: sortIndex,
-					prevId:  $scope.placeholder.prev_id,
-					placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id
-				}), headers).then(function(response) {
-					$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
-					$scope.droppedBlock = {};
-				});
-			} else {
-				if (moveBlock === false) {
-					$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).then(function(response) {
-						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
-						$scope.droppedBlock = {};
-					});
-				} else {
-					$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.droppedBlock.id, {
-						prev_id : $scope.placeholder.prev_id,
-						placeholder_var : $scope.placeholder['var'],
-						sort_index : sortIndex
-					}).then(function(response) {
-						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
-						$scope.droppedBlock = {};
-						$($ui.helper).remove(); //destroy clone
-			            $($ui.draggable).remove(); //remove from list
-					});
-				}
-			}
-			AdminClassService.setClassSpace('onDragStart', undefined);
-		}
-	});
-	*/
-
 	zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, ServiceBlocksData, ServiceBlockCopyStack, $sce) {
 
 		// service ServiceBlocksData inheritance
@@ -1667,29 +1454,7 @@
 			} else if($scope.searchIsDirty) {
 				$scope.blocksData = angular.copy($scope.blocksDataRestore);
 			}
-		})
-
-		/*
-		$scope.onStart = function() {
-			$scope.$apply(function() {
-				AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
-			});
-		}
-		*/
-
-		/*
-		$scope.safe = function(html) {
-			return $sce.trustAsHtml(html);
-		}
-		*/
-
-		/*
-		$scope.onStop = function() {
-			$scope.$apply(function() {
-				AdminClassService.setClassSpace('onDragStart', undefined);
-			});
-		}
-		*/
+		});
 	});
 
 })();

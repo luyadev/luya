@@ -51,11 +51,11 @@ zaa.factory("ServiceBlockCopyStack", function($rootScope) {
 		$rootScope.$broadcast('service:CopyStack', service.stack);
 	};
 	
-	service.push = function(blockId, name) {
+	service.push = function(block) {
 		if (service.stack.length > 4) {
 			service.stack.shift();
 		}
-		service.stack.push({blockId: blockId, name: name, event: 'isServiceBlockCopyInstance'});
+		service.stack.push({blockId: block.block_id, name: block.name, icon:block.icon, id: block.id, copystack: 1});
 		$rootScope.$broadcast('service:CopyStack', service.stack);
 	};
 	

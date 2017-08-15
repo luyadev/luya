@@ -422,6 +422,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'is_dirty' => (bool) $blockItem['is_dirty'],
             'is_container' => (int) $blockObject->getIsContainer(),
             'id' => $blockItem['id'],
+            'block_id' => $blockItem['block_id'],
             'is_hidden' => $blockItem['is_hidden'],
             'name' => $blockObject->name(),
             'icon' => $blockObject->icon(),
