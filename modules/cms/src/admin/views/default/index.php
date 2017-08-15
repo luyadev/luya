@@ -24,7 +24,7 @@ use \luya\cms\admin\Module;
         </span>
     </span>
     <ul class="treeview-items">
-        <li class="treeview-item" ng-class="{'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'cmsNavReverse.html'" />
+        <li class="treeview-item" ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'cmsNavReverse.html'" />
     </ul>
 </script>
 
@@ -75,7 +75,7 @@ use \luya\cms\admin\Module;
                         <p><small>Keine Seiten</small></p>
                     </div>
                     <ul class="treeview-items treeview-items-lvl1" ng-show="!toggleIsHidden(catitem.id)">
-                        <li class="treeview-item treeview-item-lvl1" ng-class="{'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'cmsNavReverse.html'" />
+                        <li class="treeview-item treeview-item-lvl1" ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'cmsNavReverse.html'" />
                     </ul>
                 </li>
             </ul>
