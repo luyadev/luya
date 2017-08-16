@@ -132,13 +132,12 @@ use luya\admin\Module as Admin;
 </script>
 
 <script type="text/ng-template" id="reverseFolders2">
-
     <i class="material-icons treeview-toggler filemanager-folder-toggleicon" ng-click="toggleFolderItem(folder)" ng-hide="folder.subfolder==0" ng-class="{'treeview-toggler--subnav-closed': folder.toggle_open!=1}">arrow_drop_down</i>
     <div class="filemanager-folder-button" ng-click="changeCurrentFolderId(folder.id)" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-offset-top="-5">
         <i class="material-icons filemanager-folder-icon filemanager-folder-icon--default"></i>
         <i class="material-icons filemanager-folder-icon filemanager-folder-icon--active"></i>
                         <span class="filemanager-folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id">
-                            {{folder.name }}                                            
+                            {{folder.name }}
                         </span>
                         <i class="material-icons filemanager-edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
                         <i class="material-icons filemanager-delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
@@ -154,7 +153,7 @@ use luya\admin\Module as Admin;
                                     <span class="btn-floating white">
                                         <i class="material-icons filemanager-file-dialog-icon filemanager-cancel-icon" ng-click="toggleFolderMode(false)">add</i>
                                     </span>
-                                </div>                                
+                                </div>
                             </div>
                         </span>
                         <i class="material-icons filemanager-file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
@@ -194,18 +193,29 @@ use luya\admin\Module as Admin;
 </script>
 
 <script type="text/ng-template" id="reverseFolders">
-<span class="folders-text folders-label" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-position="right" ng-click="changeCurrentFolderId(folder.id)" >
-<span class="folders-folder-icon folders-folder-icon-open">
-    <i class="material-icons">folder_open</i>
-</span>
-<span class="folders-folder-icon">
-    <i class="material-icons">folder</i>
-</span>
-{{folder.name }}
-</span>
-<ul class="folders">
-    <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
-</ul>
+    <span class="folders-actions" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-position="right">
+        <span class="folders-actions-left">
+            <button class="folders-actions-toggler" ng-if="folder.subfolder == true"><i class="material-icons">keyboard_arrow_down</i></button>
+        </span>
+
+        <span class="folders-text folders-label" ng-click="changeCurrentFolderId(folder.id)">
+            <span class="folders-folder-icon" ng-if="currentFolderId == folder.id">
+                <i class="material-icons">folder_open</i>
+            </span>
+            <span class="folders-folder-icon" ng-if="currentFolderId != folder.id">
+                <i class="material-icons">folder</i>
+            </span>
+            {{folder.name }}
+        </span>
+
+        <span class="folders-actions-right">
+            <button class="folders-actions-edit"><i class="material-icons">edit</i></button>
+            <button class="folders-actions-delete"><i class="material-icons">delete</i></button>
+        </span>
+    </span>
+    <ul class="folders">
+        <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
+    </ul>
 </script>
 
 <!-- FILEMANAGER -->

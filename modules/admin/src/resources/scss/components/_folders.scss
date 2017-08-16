@@ -34,7 +34,6 @@ $icon-line-height: $icon-font-size + 10px;
 .folders-text {
     display: block;
     flex: 1 1 auto;
-    margin: 0 10px 0 5px;
 }
 
 .folders-collapse {
@@ -52,7 +51,7 @@ $icon-line-height: $icon-font-size + 10px;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
-    padding: 2px 5px 0;
+    padding: 2px 0 0;
 
     &:hover {
         background-color: map-get($grays, 100);;
@@ -95,51 +94,40 @@ $icon-line-height: $icon-font-size + 10px;
     }
 }
 
-.folders-confirm-delete-message {
-    color: $red;
-    display: none;
-
-    .delete > & {
-        display: block;
-    }
-}
-
 .folders-actions {
-    flex: 0 0 45px;
-}
-
-.folders-actions-default {
-    display: block;
-
-    .edit > .folders-actions &,
-    .delete > .folders-actions & {
-        display: none;
-    }
-}
-
-.folders-action-edit,
-.folders-action-save {
-    cursor: pointer;
+    padding-left: 25px;
+    width: 100%;
 
     &:hover {
-        color: $green;
+        padding-right: 50px;
     }
 }
 
-.folders-action-delete,
-.folders-action-abort {
-    cursor: pointer;
-
-    &:hover {
-        color: $red;
-    }
+.folders-actions-left,
+.folders-actions-right {
+    position: absolute;
+    top: 0;
 }
 
-.folders-actions-confirm {
+.folders-actions-left {
+    left: 0;
+}
+
+.folders-actions-right {
     display: none;
+    right: 0;
 
-    .edit > .folders-actions &,
-    .delete > .folders-actions & {
+    .folders-actions:hover & {
         display: block;
     }
+}
+
+.folders-actions-toggler,
+.folders-actions-edit,
+.folders-actions-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
 }

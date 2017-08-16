@@ -13,8 +13,26 @@
     }
 }
 
-.page-item-icon {
+.page-link {
+    cursor: pointer;
+
+    &:hover {
+        color: theme-color(primary) !important;
+    }
+
+    .active > & {
+        background-color: theme-color(primary) !important;
+        color: color(white) !important;
+    }
+    .active > &:hover {
+        color: color(white) !important;
+    }
+}
+
+.page-item-icon .page-link {
     font-size: 20px;
+    padding-top: 3px;
+    padding-bottom: 6px;
 
     .material-icons {
         margin-top: -2px;
