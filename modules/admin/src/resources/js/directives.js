@@ -1137,12 +1137,12 @@
                                 '<label for="{{id}}">{{label}}</label>' +
                             '</div>' +
                             '<div class="form-side">' +
-                                '<div class="zaaselect" ng-class="{\'open\':isOpen}">' +
+                                '<div class="zaaselect" ng-class="{\'open\':isOpen, \'selected\':model}">' +
                                     '<select class="zaaselect-select" ng-model="model">' +
                                         '<option ng-repeat="opt in options" ng-value="opt[optionsvalue]">{{opt[optionslabel]}}</option>' +
                                     '</select>' +
-                                    '<div class="zaaselect-selected" ng-click="isOpen=!isOpen">' +
-                                        '<span>{{getSelectedValue()}}</span>' +
+                                    '<div class="zaaselect-selected">' +
+                                        '<span class="zaaselect-selected-text" ng-click="isOpen=!isOpen">{{getSelectedValue()}}</span>' +
                                         '<i class="material-icons zaaselect-dropdown-icon" ng-click="isOpen=!isOpen">keyboard_arrow_down</i>' +
                                         '<i class="material-icons zaaselect-clear-icon" ng-click="model=initvalue">clear</i>' +
                                     '</div>' +
@@ -1150,8 +1150,10 @@
                                         '<div class="zaaselect-search">' +
                                             '<input class="zaaselect-search-input" type="search" ng-model="searchQuery" />' +
                                         '</div>' +
-                                        '<div class="zaaselect-item" ng-repeat="opt in options | filter:searchQuery" ng-click="setModelValue(opt)">' +
-                                            '<span ng-class="{\'zaaselect-active\': opt[optionsvalue] == model}">{{opt[optionslabel]}}</span>' +
+                                        '<div class="zaaselect-overflow">' +
+                                            '<div class="zaaselect-item" ng-repeat="opt in options | filter:searchQuery" ng-click="setModelValue(opt)">' +
+                                                '<span ng-class="{\'zaaselect-active\': opt[optionsvalue] == model}">{{opt[optionslabel]}}</span>' +
+                                            '</div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +

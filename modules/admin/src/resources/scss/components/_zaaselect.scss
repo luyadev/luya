@@ -2,6 +2,7 @@
     display: block;
     position: relative;
     width: 100%;
+    user-select: none;
 }
 
 .zaaselect-select {
@@ -13,8 +14,14 @@
     border: 1px solid map-get($grays, 600);
     cursor: pointer;
     display: block;
-    padding: 7px 30px 6px 14px;
+    padding: 0;
     position: relative;
+    width: 100%;
+}
+
+.zaaselect-selected-text {
+    display: block;
+    padding: 7px 30px 6px 14px;
     width: 100%;
 }
 
@@ -28,15 +35,23 @@
     .zaaselect.open & {
         transform: translateY(-50%) rotate(180deg);
     }
+    .zaaselect.selected & {
+        right: 40px;
+    }
 }
 
 .zaaselect-clear-icon {
+    display: none;
     font-size: 25px;
-    margin-top: 1px;
+    margin-top: 0;
     position: absolute;
-    right: 40px;
+    right: 8px;
     top: 50%;
     transform: translateY(-50%);
+
+    .zaaselect.selected & {
+        display: block;
+    }
 }
 
 .zaaselect-dropdown {
@@ -46,7 +61,7 @@
     bottom: 2px;
     display: none;
     left: 0;
-    padding: 5px 12px;
+    padding: 5px 12px 10px;
     position: absolute;
     right: 0;
     transform: translateY(100%);
@@ -55,6 +70,11 @@
     .zaaselect.open & {
         display: block;
     }
+}
+
+.zaaselect-overflow {
+    max-height: 500px;
+    overflow: auto;
 }
 
 .zaaselect-search {
