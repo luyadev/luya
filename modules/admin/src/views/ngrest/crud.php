@@ -114,11 +114,12 @@ $this->beginBody();
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
                         <th class="tab-padding-left">
-                            <span><?= $item['alias']; ?></span>
                             <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'is-active' : !isOrderBy('+<?= $item['name']; ?>') }">
+                                <span><?= $item['alias']; ?></span>
                                 <i class="material-icons">keyboard_arrow_up</i>
                             </div>
                             <div class="table-sorter table-sorter-down" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-active' : !isOrderBy('-<?= $item['name']; ?>') }">
+                                <span><?= $item['alias']; ?></span>
                                 <i class="material-icons">keyboard_arrow_down</i>
                             </div>
                         </th>
