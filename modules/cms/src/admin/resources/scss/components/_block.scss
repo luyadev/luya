@@ -4,7 +4,7 @@ $block-padding: 10px !default;
 
 .block {
     background-color: $white;
-    border: $block-border-width solid rgba($block-border-color, .5);
+    border: $block-border-width solid transparent;
     border-radius: $nav-tabs-border-radius;
     margin-top: 5px;
     padding: 0;
@@ -63,6 +63,10 @@ $block-padding: 10px !default;
     }
     &-is-virgin .block-front {
         background-color: lighten(color(blue), 30);
+    }
+
+    .show-block-lines & {
+        border-color: rgba($block-border-color, .5);
     }
 }
 
