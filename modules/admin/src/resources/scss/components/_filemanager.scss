@@ -26,6 +26,34 @@
     flex: 0 0 400px;
 }
 
+.filemanager-add-folder {
+    display: block;
+    width: 100%;
+}
+
+.filemanager-add-folder-form {
+    display: block;
+    padding-right: 100px;
+    position: relative;
+    width: 100%;
+}
+
+.filemanager-add-folder-input {
+    padding: 9px 5px 5px 5px;
+    width: 100%;
+}
+
+.filemanager-add-folder-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .btn {
+        padding-left: 14px;
+        padding-right: 8px;
+    }
+}
+
 .filemanager-files {
     align-self: stretch;
     flex: 1 0 auto;
@@ -127,15 +155,15 @@
 }
 
 .filemanager-check-all {
-    font-size: 20px;
     cursor: pointer;
     display: inline-block;
+    font-size: 20px;
     vertical-align: middle;
 }
 
 .filemanager-files-counter {
-    font-size: 12px;
     display: inline-block;
+    font-size: 12px;
     vertical-align: middle;
 }
 

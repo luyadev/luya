@@ -97,5 +97,25 @@
             return $sce.trustAsResourceUrl(val);
         };
     });
+
+    zaa.filter('truncateMiddle', function () {
+        return function (val, length, placeholder) {
+            if(!length) {
+                length = 30;
+            }
+            if(!placeholder) {
+                placeholder = '...';
+            }
+
+            if(val.length <= length) {
+                return val;
+            }
+
+            var targetLength = length - placeholder.length;
+            var partLength = targetLength / 2;
+
+            return (val.substring(0, partLength)) + placeholder + val.substring(val.length - partLength, val.length);
+        };
+    });
     
 })();

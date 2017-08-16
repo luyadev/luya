@@ -214,10 +214,26 @@ use luya\admin\Module as Admin;
     <div class="row">
         <!-- Folders -->
         <div class="col filemanager-folders">
-            <div class="btn btn-block text-left btn-success">
-                <span class="material-icons">add</span>
-                <span class="btn-icon-label"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
+
+
+            <div class="filemanager-add-folder">
+
+                <div class="btn btn-block text-left btn-success" ng-click="folderFormToggler()" ng-if="!showFolderForm">
+                    <span class="material-icons">add</span>
+                    <span class="btn-icon-label"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
+                </div>
+
+                <div class="filemanager-add-folder-form" ng-if="showFolderForm">
+                    <input class="filemanager-add-folder-input" type="text" placeholder="<?php echo Admin::t('layout_filemanager_folder'); ?>" title="<?php echo Admin::t('layout_filemanager_folder'); ?>" ng-model="newFolderName" />
+                    <div class="filemanager-add-folder-actions">
+                        <button class="btn btn-success" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></button>
+                        <button class="btn btn-danger" ng-click="folderFormToggler()"><i class="material-icons">cancel</i></button>
+                    </div>
+                </div>
+
             </div>
+
+
             <ul class="folders mt-4">
                 <li class="folders-item" ng-class="{'is-active' : currentFolderId == 0}">
                     <span class="folders-text folders-label" ng-click="changeCurrentFolderId(0)">
@@ -321,12 +337,12 @@ use luya\admin\Module as Admin;
                             </tr>
                         </thead>
                         <tbody>
-							<tr
-                   				ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField"
-                   				alt="fileId={{file.id}}"
-                    			title="fileId={{file.id}}"
-                    			class="filemanager-file"
-                    			ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file-selected': selectedFileFromParent && selectedFileFromParent.id == file.id}"
+                            <tr
+                                ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField"
+                                alt="fileId={{file.id}}"
+                                title="fileId={{file.id}}"
+                                class="filemanager-file"
+                                ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file-selected': selectedFileFromParent && selectedFileFromParent.id == file.id}"
                             >
 
                                 <th scope="row" ng-click="toggleSelection(file)">
@@ -337,7 +353,7 @@ use luya\admin\Module as Admin;
                                     <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
                                     <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
                                 </td>
-                                <td ng-click="toggleSelection(file)">{{file.name}}</td>
+                                <td ng-click="toggleSelection(file)">{{file.name | truncateMiddle: 30}}</td>
                                 <td ng-click="toggleSelection(file)">{{file.extension}}</td>
                                 <td ng-click="toggleSelection(file)">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
                                 <td ng-click="toggleSelection(file)">{{file.sizeReadable}}</td>

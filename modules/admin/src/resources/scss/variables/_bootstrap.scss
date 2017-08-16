@@ -20,7 +20,7 @@ $font-family-sans-serif: 'Roboto', sans-serif;
 
 // Headings
 
-$headings-color: theme-color(primary);
+$headings-color: map-get($grays, 900);
 
 $font-size-h1: 2rem;
 $font-size-h2: 1.8rem;
