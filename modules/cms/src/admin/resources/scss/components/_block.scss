@@ -128,7 +128,7 @@ $block-padding: 10px !default;
 .block-front {
     @include clearfix;
     cursor: pointer;
-    overflow: auto;
+    overflow: hidden;
 
     .block-is-layout > & {
         padding: 0;
