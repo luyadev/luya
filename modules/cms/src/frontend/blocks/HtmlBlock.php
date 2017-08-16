@@ -74,7 +74,7 @@ final class HtmlBlock extends PhpBlock
     		{% if cfgs.raw == 1 %}
     			{{ vars.html | raw }}
     		{% else %}
-    			<pre><code>{{ vars.html | escape }}</code></pre>
+                <code>{{ vars.html | escape }}</code>
     		{% endif %}
     	{% endif %}
 EOT;
