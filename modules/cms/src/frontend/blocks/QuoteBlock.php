@@ -64,6 +64,6 @@ final class QuoteBlock extends PhpBlock
      */
     public function admin()
     {
-        return '{% if vars.content is not empty %}<blockquote>{{ vars.content }}</blockquote>{% else %}<span class="block__empty-text">' . Module::t('block_quote_no_content') . '</span>{% endif %}';
+        return '{% if vars.content is not empty %}<blockquote><p>{{ vars.content }}</p></blockquote>{% else %}<span class="block__empty-text">' . Module::t('block_quote_no_content') . '</span>{% endif %}';
     }
 }

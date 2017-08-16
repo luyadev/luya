@@ -146,6 +146,6 @@ final class VideoBlock extends PhpBlock
      */
     public function admin()
     {
-        return '{% if extras.url is not empty %}<div style="margin:25px;width:300px"><div class="video-container"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
+        return '{% if extras.url is not empty %}<div class="iframe-container"><iframe src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
     }
 }

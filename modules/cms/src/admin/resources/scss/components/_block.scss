@@ -4,8 +4,8 @@ $block-padding: 10px !default;
 
 .block {
     background-color: $white;
-    border: $block-border-width solid transparent;
-    border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
+    border: $block-border-width solid rgba($block-border-color, .5);
+    border-radius: $nav-tabs-border-radius;
     margin-top: 5px;
     padding: 0;
     position: relative;
@@ -16,20 +16,13 @@ $block-padding: 10px !default;
         margin-bottom: 25px;
     }
 
-    &-is-editing,
     &:hover {
         border-color: rgba($block-border-color, .5);
+        border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
         transition: .2s ease-in-out border-color;
         z-index: 50;
     }
 
-    &-is-editing {
-        margin-bottom: 45px;
-
-        &:not(:last-of-type) {
-            margin-bottom: 45px;
-        }
-    }
     .block-is-layout > & {
         border-color: $block-border-color;
         border-radius: $nav-tabs-border-radius;
@@ -110,7 +103,6 @@ $block-padding: 10px !default;
         }
     }
 
-    .block-is-editing > &,
     .block:hover > & {
         opacity: 1;
         pointer-events: all;
@@ -131,14 +123,8 @@ $block-padding: 10px !default;
 
 .block-front {
     @include clearfix;
-
-    h1, h2, h3, h4, h5 {
-        color: $black;
-    }
-
-    > *:last-of-type {
-        margin-bottom: 0;
-    }
+    cursor: pointer;
+    overflow: auto;
 
     .block-is-layout > & {
         padding: 0;
@@ -158,48 +144,5 @@ $block-padding: 10px !default;
                 border-bottom: $block-border-width solid $block-border-color;
             }
         }
-    }
-
-    .block-is-editing > & {
-        display: none;
-    }
-}
-
-.block-edit {
-    display: none;
-
-    .block-is-editing > & {
-        display: block;
-    }
-
-    .tab-pane {
-        border: $nav-tabs-border-width solid $nav-tabs-border-color !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-}
-
-.block-edit-tabs {
-    bottom: 0;
-    display: flex;
-    left: 0;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-}
-
-.block-edit-tab {
-    background-color: $white;
-    border: solid rgba($block-border-color, .5);
-    border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
-    border-width: $block-border-width $block-border-width $block-border-width $block-border-width;
-    cursor: pointer;
-    margin-left: 10px;
-    padding: 5px 10px;
-    transform: translateY(100%);
-
-    &.active {
-        border-top-color: transparent;
     }
 }

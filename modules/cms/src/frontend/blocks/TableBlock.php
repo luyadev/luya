@@ -127,9 +127,9 @@ final class TableBlock extends PhpBlock
     public function admin()
     {
         return  '<p>{% if extras.table is empty %}<span class="block__empty-text">' . Module::t('block_table_no_table') . '</span>{% else %}'.
-                '<table class="bordered striped" style="border:1px solid #d0d0d0">'.
+                '<table class="table table-bordered table-striped table-align-middle table-responsive">'.
                     '{% if cfgs.header %}'.
-                    '<thead>'.
+                    '<thead class="thead-inverse">'.
                         '<tr>'.
                             '{% for column in extras.headerData %}<th>{{ column }}</th>{% endfor %}'.
                         '</tr>'.
@@ -139,7 +139,7 @@ final class TableBlock extends PhpBlock
                         '{% for row in extras.table %}'.
                         '<tr>'.
                             '{% for column in row %}'.
-                            '<td {% if cfgs.equaldistance %}class="col s{{ (12/(row|length))|round }}"{% endif %}>{{ column }}</td>'.
+                            '<td>{{ column }}</td>'.
                             '{% endfor %}'.
                         '</tr>'.
                         '{% endfor %}'.
