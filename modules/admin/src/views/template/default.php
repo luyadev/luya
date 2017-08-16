@@ -34,15 +34,14 @@
             <div class="card" ng-repeat="item in dashboard">
                 <div class="card-body">
                     <h3 class="card-title">{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span></h3>
-                    <table class="table">
+                    <table class="table table-sm table-responsive">
                         <tr ng-repeat="(key, log) in item.items">
                             <td>
                                 <i class="material-icons" ng-if="log.is_insert == 1">note_add</i>
                                 <i class="material-icons" ng-if="log.is_update == 1">create</i>
-                            </td>
-                            <td>{{log.timestamp * 1000 | date:"HH:mm"}}</td>
-                            <td>{{ log.name }}</td>
-                            <td><span compile-html ng-bind-html="log.message | trustAsUnsafe"></span></td>
+                                <small>{{log.timestamp * 1000 | date:"HH:mm"}}</small></td>
+                            <td><small>{{ log.name }}</small></td>
+                            <td><small><span compile-html ng-bind-html="log.message | trustAsUnsafe"></span></small></td>
                         </tr>
                     </table>
                 </div>
