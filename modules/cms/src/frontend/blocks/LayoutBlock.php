@@ -68,8 +68,8 @@ final class LayoutBlock extends PhpBlock
             ],
             'placeholders' => [
                 [
-                    ['var' => 'left', 'cols' => 10, 'label' => Module::t('block_layout_placeholders_left')],
-                    ['var' => 'right', 'cols' => 2, 'label' => Module::t('block_layout_placeholders_right')],
+                    ['var' => 'left', 'cols' => $this->getExtraValue('leftWidth'), 'label' => Module::t('block_layout_placeholders_left')],
+                    ['var' => 'right', 'cols' => $this->getExtraValue('rightWidth'), 'label' => Module::t('block_layout_placeholders_right')],
                 ]
             ],
         ];
