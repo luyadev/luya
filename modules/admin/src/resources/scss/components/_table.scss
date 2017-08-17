@@ -18,6 +18,7 @@
 .thead-default th,
 .thead-inverse th {
     border-top: 0;
+    color: color(gray);
     font-weight: 400;
 
     span {
@@ -25,22 +26,27 @@
     }
 }
 
+.table-sorter-wrapper {
+    display: block;
+}
+
 .table-sorter {
     color: color('gray');
     cursor: pointer;
     display: none;
-    font-size: 20px;
-    margin: -2px 0 0 10px;
+    margin: 0;
     vertical-align: middle;
 
     &.table-sorter-down {
         display: inline-block;
     }
-    &.is-active {
+    .is-active & {
         color: theme-color(primary);
+    }
+    &.is-sorting {
         display: inline-block;
     }
-    &.is-active + .table-sorter-down {
+    &.is-sorting + .table-sorter-down {
         display: none;
     }
 }

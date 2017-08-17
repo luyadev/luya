@@ -114,14 +114,18 @@ $this->beginBody();
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
                         <th class="tab-padding-left">
-                            <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'is-active' : !isOrderBy('+<?= $item['name']; ?>') }">
-                                <span><?= $item['alias']; ?></span>
-                                <i class="material-icons">keyboard_arrow_up</i>
+
+                            <div class="table-sorter-wrapper" ng-class="{'is-active' : isOrderBy('+<?= $item['name']; ?>') || isOrderBy('-<?= $item['name']; ?>') }">
+                                <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-sorting': !isOrderBy('-<?= $item['name']; ?>')}">
+                                    <span><?= $item['alias']; ?></span>
+                                    <i class="material-icons">keyboard_arrow_up</i>
+                                </div>
+                                <div class="table-sorter table-sorter-down" ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'is-sorting': !isOrderBy('+<?= $item['name']; ?>')}">
+                                    <span><?= $item['alias']; ?></span>
+                                    <i class="material-icons">keyboard_arrow_down</i>
+                                </div>
                             </div>
-                            <div class="table-sorter table-sorter-down" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-active' : !isOrderBy('-<?= $item['name']; ?>') }">
-                                <span><?= $item['alias']; ?></span>
-                                <i class="material-icons">keyboard_arrow_down</i>
-                            </div>
+
                         </th>
                         <?php endforeach; ?>
                         <th class="tab-padding-right text-right">
@@ -141,18 +145,6 @@ $this->beginBody();
                                 <?php foreach ($this->context->getButtons() as $item): ?>
                                 <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i></button>
                                 <?php endforeach; ?>
-                                <!-- 
-                                <div class="btn-group">
-                                    <button class="btn btn-sm btn-link btn-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"><i class="material-icons">build</i> <span>Build</span></a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons">done</i> <span>Mark as done</span></a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons">report</i> <span>Report</span></a>
-                                    </div>
-                                </div>
-                                 -->
                              <?php endif; ?>
                         </td>
                     </tr>
