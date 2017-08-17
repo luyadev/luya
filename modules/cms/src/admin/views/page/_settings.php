@@ -2,7 +2,7 @@
 use luya\cms\admin\Module;
 ?>
 <modal is-modal-hidden="settingsOverlay" modal-title="Settings">
-    <div class="row"  ng-init="tab=1">
+    <div ng-if="!settingsOverlay" class="row" ng-init="tab=1">
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">

@@ -41,7 +41,7 @@ use luya\helpers\Html;
                     </div>
                 </div>
                 <modal is-modal-hidden="modalHidden" modal-title="{{block.name}}">
-                    <div class="card" ng-init="modalMode=1">
+                    <div ng-if="!modalHidden" class="card" ng-init="modalMode=1">
                         <div class="card-header" ng-show="block.cfgs.length > 0">
                             <ul class="nav nav-tabs card-header-tabs">
                                 <li class="nav-item" ng-click="modalMode=1">
