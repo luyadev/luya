@@ -245,4 +245,5 @@ return [
     'dashboard_lastlogin_title' => 'Neuste Benutzer logins',
     'layout_useronline_activity' => 'Activity',
     'layout_useronline_inactive' => 'inactive',
+    'login_ssl_info' => 'Die Webseite wird über eine sichere verschlüsselte Verbindung geschützt.',
 ];

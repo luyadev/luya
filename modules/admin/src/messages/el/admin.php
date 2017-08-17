@@ -233,4 +233,5 @@ return [
     'dashboard_lastlogin_title' => 'Last User Logins',
     'layout_useronline_activity' => 'Activity',
     'layout_useronline_inactive' => 'inactive',
+    'login_ssl_info' => 'Website uses encrypted secure connection.',
 ];

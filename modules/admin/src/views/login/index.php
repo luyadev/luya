@@ -82,7 +82,7 @@ $spinner = '<svg version="1.1"
 
 <div class="login-info">
     <h1 class="login-title"><?= Yii::$app->siteTitle; ?></h1>
-    <span class="login-info-text"><?php if (Yii::$app->request->isSecureConnection): ?><i class="material-icons">verified_user</i><?endif; ?><?= Yii::$app->request->hostInfo; ?></span>
+    <span class="login-info-text"><?php if (Yii::$app->request->isSecureConnection): ?><i alt="<?= Module::t('login_ssl_info');?>" title="<?= Module::t('login_ssl_info');?>" class="material-icons">verified_user</i><?endif; ?><?= Yii::$app->request->hostInfo; ?></span>
 </div>
 
 <div class="login-links">
