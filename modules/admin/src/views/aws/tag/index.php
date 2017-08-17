@@ -1,10 +1,8 @@
 <?php
 use luya\admin\Module;
-
 ?>
-<h3><?= $this->context->alias; ?></h3>
 <div class="row" ng-controller="ActiveWindowTagController">
-    <div class="col s9">
+    <div class="col-md-9">
         <div class="input input--text input--vertical">
             <label class="input__label" for="searchString"><?= Module::t('aws_tag_search')?></label>
             <div class="input__field-wrapper">
@@ -21,15 +19,10 @@ use luya\admin\Module;
             </div>
         </div>
     </div>
-    <div class="col s3">
+    <div class="col-md-3">
         <form ng-submit="saveTag()">
-            <div class="input input--text input--vertical">
-                <label class="input__label" for="newTag"><?= Module::t('aws_tag_new')?>:</label>
-                <div class="input__field-wrapper">
-                    <input id="newTag" maxlength="255" ng-model="newTagName" type="text" class="input__field" />
-                </div>
-            </div>
-            <button type="submit" class="btn btn-default"><?= Module::t('aws_tag_add')?> <i class="material-icons right">check</i></button>
+            <zaa-text model="newTagName" label="<?= Module::t('aws_tag_new')?>" />
+            <button type="submit" class="btn btn-primary"><?= Module::t('aws_tag_add')?></button>
         </form>
     </div>
 </div>
