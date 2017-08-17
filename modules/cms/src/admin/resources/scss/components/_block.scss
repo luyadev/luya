@@ -1,15 +1,14 @@
 $block-border-width: 1px !default;
-$block-border-color: #B2B2B2 !default;
+$block-border-color: map-get($grays, 300) !default;
 $block-padding: 10px !default;
 
 .block {
     background-color: $white;
-    border: $block-border-width solid transparent;
+    border: $block-border-width solid $block-border-color;
     border-radius: $nav-tabs-border-radius;
     margin-top: 5px;
     padding: 0;
     position: relative;
-
     transition: .2s ease-in-out border-color, 0s .2s ease-in-out z-index;
 
     &:not(:last-of-type) {
@@ -17,19 +16,17 @@ $block-padding: 10px !default;
     }
 
     &:hover {
-        border-color: rgba($block-border-color, .5);
+        border-color: $block-border-color;
         border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
         transition: .2s ease-in-out border-color;
         z-index: 50;
     }
 
     .block-is-layout > & {
-        border-color: $block-border-color;
-        border-radius: $nav-tabs-border-radius;
+        border-color: transparent;
 
         &:hover {
-            border-color: $block-border-color;
-            border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
+            // border-color: $block-border-color;
         }
     }
 
@@ -72,6 +69,7 @@ $block-padding: 10px !default;
 
 .block-toolbar {
     background-color: map-get($grays, 900);
+    border-radius: $nav-tabs-border-radius $nav-tabs-border-radius 0 0;
     color: $white;
     display: flex;
     flex-wrap: wrap;
@@ -84,7 +82,6 @@ $block-padding: 10px !default;
     transform: translateY(-100%);
     transition: .2s ease-in-out opacity;
     z-index: 1000;
-    border-radius: $nav-tabs-border-radius $nav-tabs-border-radius 0 0;
 
     .toolbar-item {
         font-size: 20px;
@@ -131,23 +128,7 @@ $block-padding: 10px !default;
     cursor: pointer;
     overflow: hidden;
 
-    .block-is-layout > & {
-        padding: 0;
-
-        .row > div[class^="col"] {
-            padding: $block-padding $block-padding + 5;
-
-            &:not(:last-of-type) {
-                border-right: $block-border-width solid $block-border-color;
-            }
-        }
-
-        > .row {
-            margin: 0 -1px;
-
-            &:not(:last-of-type) {
-                border-bottom: $block-border-width solid $block-border-color;
-            }
-        }
+    .block-is-layout > .block > & {
+        padding: 10px 0;
     }
 }

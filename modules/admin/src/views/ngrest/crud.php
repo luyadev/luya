@@ -114,7 +114,6 @@ $this->beginBody();
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
                         <th class="tab-padding-left">
-
                             <div class="table-sorter-wrapper" ng-class="{'is-active' : isOrderBy('+<?= $item['name']; ?>') || isOrderBy('-<?= $item['name']; ?>') }">
                                 <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-sorting': !isOrderBy('-<?= $item['name']; ?>')}">
                                     <span><?= $item['alias']; ?></span>
@@ -125,7 +124,6 @@ $this->beginBody();
                                     <i class="material-icons">keyboard_arrow_down</i>
                                 </div>
                             </div>
-
                         </th>
                         <?php endforeach; ?>
                         <th class="tab-padding-right text-right">
@@ -143,7 +141,7 @@ $this->beginBody();
                         <td class="text-right">
                             <?php if (count($this->context->getButtons()) > 0): ?>
                                 <?php foreach ($this->context->getButtons() as $item): ?>
-                                <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i></button>
+                                    <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i></button>
                                 <?php endforeach; ?>
                              <?php endif; ?>
                         </td>
