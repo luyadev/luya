@@ -4,7 +4,7 @@ $block-padding: 10px !default;
 
 .block {
     background-color: $white;
-    border: $block-border-width solid $block-border-color;
+    border: $block-border-width dashed $block-border-color;
     border-radius: $nav-tabs-border-radius;
     margin-top: 5px;
     padding: 0;
