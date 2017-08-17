@@ -25,6 +25,7 @@ $this->beginPage()
 <body ng-cloak flow-prevent-drop class="{{AdminClassService.getClassSpace('modalBody')}}">
 <?php $this->beginBody(); ?>
 <?= $this->render('_angulardirectives'); ?>
+
 <div class="luya">
     <div class="luya-mainnav">
         <div class="mainnav" ng-class="{'mainnav-small' : !isHover}" ng-init="isOpen = false">
@@ -184,25 +185,24 @@ $this->beginPage()
             </div>
         </div>
     </div>
-    </div>
+</div>
 
-    <div class="toasts" ng-repeat="item in toastQueue">
-        <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{item.title}}</h5>
-                        <button type="button" class="close" ng-click="item.close()" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {{item.message}}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" ng-click="item.close()"><?= Admin::t('button_abort'); ?></button>
-                        <button type="button" class="btn btn-primary" ng-click="item.click()"><?= Admin::t('button_confirm'); ?></button>
-                    </div>
+<div class="toasts" ng-repeat="item in toastQueue">
+    <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{item.title}}</h5>
+                    <button type="button" class="close" ng-click="item.close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{item.message}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="item.close()"><?= Admin::t('button_abort'); ?></button>
+                    <button type="button" class="btn btn-primary" ng-click="item.click()"><?= Admin::t('button_confirm'); ?></button>
                 </div>
             </div>
         </div>
