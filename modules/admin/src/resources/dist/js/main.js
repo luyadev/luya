@@ -4813,6 +4813,29 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
         }
     });
 
+    zaa.directive("hasEnoughSpace", function($window, $document) {
+        return function (scope, element, attrs) {
+
+            function checkWidth() {
+                if(element.parent().outerWidth() <= element.outerWidth()) {
+                    element.removeClass('has-enough-space').addClass('not-enough-space');
+                } else {
+                    element.removeClass('not-enough-space').addClass('has-enough-space');
+                }
+            }
+
+            angular.element($window).on('resize', function() {
+                checkWidth();
+            });
+
+            checkWidth();
+            setTimeout( function() {
+                checkWidth();
+            }, 500);
+        };
+    });
+
+
 })();
 
 (function() {
@@ -5327,7 +5350,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 			} else {
 				$scope.pager = false;
 			}
-		}
+		};
 		
 		$scope.toggleStatus = function(row, fieldName, fieldLabel, bindValue) {
 			var invertValue = !bindValue;

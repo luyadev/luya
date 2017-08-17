@@ -84,6 +84,7 @@ $block-padding: 10px !default;
     transform: translateY(-100%);
     transition: .2s ease-in-out opacity;
     z-index: 1000;
+    border-radius: $nav-tabs-border-radius $nav-tabs-border-radius 0 0;
 
     .toolbar-item {
         font-size: 20px;

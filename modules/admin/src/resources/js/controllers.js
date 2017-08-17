@@ -510,7 +510,7 @@
 			} else {
 				$scope.pager = false;
 			}
-		}
+		};
 		
 		$scope.toggleStatus = function(row, fieldName, fieldLabel, bindValue) {
 			var invertValue = !bindValue;
