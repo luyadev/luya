@@ -94,12 +94,12 @@ use luya\helpers\Html;
         </a>
     </li>
     <li class="nav-item nav-item-alternative" ng-show="isTranslated">
-        <a class="nav-link">
+        <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=3">
             <i class="material-icons">add_box</i>
         </a>
     </li>
     <li class="nav-item nav-item-alternative nav-item-icon ml-auto" ng-show="isTranslated">
-        <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay">
+        <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=1">
             <i class="material-icons">edit</i>
         </a>
     </li>
