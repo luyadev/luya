@@ -37,6 +37,10 @@
     margin: 0;
     vertical-align: middle;
 
+    .material-icons {
+        visibility: hidden;
+    }
+
     &.table-sorter-down {
         display: inline-block;
     }
@@ -48,5 +52,9 @@
     }
     &.is-sorting + .table-sorter-down {
         display: none;
+    }
+
+    .is-active &.is-sorting .material-icons {
+        visibility: visible;
     }
 }
