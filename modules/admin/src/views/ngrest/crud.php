@@ -11,8 +11,10 @@ $this->beginBody();
 ?>
 <?php $this->registerAngularControllerScript(); ?>
 <div ng-controller="<?= $config->hash; ?>" ng-init="init()" class="crud">
+
     <!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
-    <div style="visibility:hidden;" ui-view></div>
+    <div style="display: none;" ui-view></div>
+
     <?php if (!$relationCall): ?>
         <?php if (!$isInline): ?>
             <div class="crud-header">
