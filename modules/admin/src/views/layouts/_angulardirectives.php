@@ -368,7 +368,7 @@ use luya\admin\Module as Admin;
                                 <td ng-click="toggleSelection(file)">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
                                 <td ng-click="toggleSelection(file)">{{file.sizeReadable}}</td>
                                 <td class="text-right">
-                                    <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="openFileDetail(file)">
+                                    <button type="button" class="btn btn-sm btn-icon" ng-click="openFileDetail(file)">
                                         <i class="material-icons">more_vert</i>
                                     </button>
                                 </td>
@@ -383,12 +383,12 @@ use luya\admin\Module as Admin;
 
                         <div class="file-detail-view-head">
 
-                            <div class="btn btn-success">
+                            <a class="btn btn-success" ng-href="{{fileDetail.source}}" target="_blank">
                                 <span class="material-icons">file_download</span>
                                 <span class="btn-icon-label">Download</span>
-                            </div>
+                            </a>
 
-                            <div class="btn btn-info ml-1">
+                            <div class="btn btn-info ml-1" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">
                                 <span class="material-icons">file_upload</span>
                                 <span class="btn-icon-label">Replace</span>
                             </div>
@@ -429,33 +429,18 @@ use luya\admin\Module as Admin;
 
                         <form class="bg-faded p-2 mt-4">
                             <h3 class="mb-3">File caption</h3>
-                            <div class="form-group">
+                            <div class="form-group" ng-repeat="(key, cap) in fileDetail.captionArray">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="inlineFormInputGroup">
+                                    <input type="text" class="form-control" ng-model="fileDetail.captionArray[key]">
 
-                                    <span class="flag flag--en">
-                                        <span class="flag-fallback">EN</span>
+                                    <span class="flag flag--{{key}}">
+                                        <span class="flag-fallback">{{key}}</span>
                                     </span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inlineFormInputGroup">
 
-                                    <span class="flag flag--de">
-                                        <span class="flag-fallback">DE</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inlineFormInputGroup">
+                            <button type="button" class="btn btn-primary" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
 
-                                    <span class="flag flag--fr">
-                                        <span class="flag-fallback">FR</span>
-                                    </span>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
