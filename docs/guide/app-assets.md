@@ -63,6 +63,18 @@ public $publishOptions = [
 ];
 ```
 
+Its very common to ignore the `node_moduels` folder when working with gulp process, to do so use the following `except` property:
+
+```php
+public $publishOptions = [
+    'except' => [
+        'node_modules/',
+    ]
+];
+```
+
+> Patterns ending with '/' apply to **directory** paths only, and patterns not ending with '/' apply to **file** paths only. For example, '/a/b' matches all file paths ending with '/a/b'; and '.svn/' matches directory paths ending with '.svn'.
+
 
 ### Accessing the asset path
 
