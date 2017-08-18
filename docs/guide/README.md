@@ -54,9 +54,10 @@
     + [Plugin Selects](ngrest-plugin-select.md)
 + Lessons
   + [Using Forms in Blocks](lesson-blockform.md)
-  + [Create an image slider block](lesson-imagesliderblock.md)
-  + [Create an admin and frontend module](lesson-module.md)
+  + [CMS image slider Block](lesson-imagesliderblock.md)
+  + [Admin and Frontend modules](lesson-module.md)
   + [Create an Active Window](lesson-activewindow.md)
+  + [Custom Angular Controller and Admin View](lesson-admin-custom-angular-view.md)
 + Developers
   + [LUYA Guidelines](luya-guideline.md)
   + [Collaboration](luya-collaboration.md)
