@@ -13,6 +13,11 @@ use luya\admin\ngrest\base\Plugin;
 abstract class Select extends Plugin
 {
     public $initValue = 0;
+    
+    /**
+     * @var string This value will be displayed in the ngrest list overview if the given value is empty(). 
+     */
+    public $emptyListValue;
 
     /**
      * Getter method for data array.
@@ -59,10 +64,15 @@ abstract class Select extends Plugin
     public function onAfterListFind($event)
     {
         $value = StringHelper::typeCast($event->sender->getAttribute($this->name));
-        foreach ($this->getData() as $item) {
-            if (StringHelper::typeCast($item['value']) === $value) {
-                $event->sender->setAttribute($this->name, $item['label']);
-            }
+        
+        if ($this->emptyListValue && empty($value)) {
+        	$event->sender->setAttribute($this->name, $this->emptyListValue);
+        } else {
+	        foreach ($this->getData() as $item) {
+	            if (StringHelper::typeCast($item['value']) === $value) {
+	                $event->sender->setAttribute($this->name, $item['label']);
+	            }
+	        }
         }
     }
 }
