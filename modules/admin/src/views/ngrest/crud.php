@@ -40,7 +40,7 @@ $this->beginBody();
                 </div>
             </div>
         <?php endif; ?>
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs nav-tabs-mobile-icons">
             <li class="nav-item">
                 <a class="nav-link" ng-class="{'active':crudSwitchType==0}" ng-click="switchTo(0, true)">
                     <i class="material-icons">list</i>
@@ -111,7 +111,7 @@ $this->beginBody();
                     <?php endif; ?>
                 </div>
             </div>
-            <table class="table table-hover table-striped table-align-middle mt-4">
+            <table class="table table-hover table-striped table-align-middle table-responsive mt-4">
                 <thead class="thead-default">
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>

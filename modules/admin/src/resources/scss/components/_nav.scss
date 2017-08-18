@@ -31,6 +31,14 @@
     &:hover, .active:hover {
         cursor: pointer;
     }
+
+    .nav-tabs-mobile-icons & > span{
+        display: none;
+
+        @media (min-width: 480px) {
+            display: inline-block;
+        }
+    }
 }
 
 .nav-item-alternative {
