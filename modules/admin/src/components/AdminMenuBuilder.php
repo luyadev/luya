@@ -17,7 +17,7 @@ use luya\base\AdminModuleInterface;
  * public function getMenu()
  * {
  *     return (new AdminMenuBuilder($this))
- *         ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin-storage-index', 'admin/storage/index')
+ *         ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin/storage/index')
  *         ->node('menu_node_system', 'layers')
  *             ->group('menu_group_access')
  *                 ->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')
@@ -105,19 +105,18 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      *
      * @param string $name The name of the node, all names will process trough the `Yii::t` function with its module name as prefix.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
-     * @param string $template Whether to use a custom template or not.
      * @param string $route The route to the template which is going to be render by angular, example `cmsadmin/default/index`.
      * @param string $searchModelClass The path to the model to search inside the admin global search, must implement the {{luya\admin\base\GenericSearchInterface}}.
      * @return \luya\admin\components\AdminMenuBuilder
      */
-    public function nodeRoute($name, $icon, $template, $route, $searchModelClass = null)
+    public function nodeRoute($name, $icon, $route, $searchModelClass = null)
     {
         $this->_pointers['node'] = self::$index;
         $this->_menu[self::$index] = [
             'id' => self::$index,
             'moduleId' => $this->moduleContext->id,
-            'template' => $template,
-            'routing' => $template ? 'custom' : 'default',
+        	'template' => $route, // as the template is equal to the route of the node which is loaded
+            'routing' => 'custom',
             'alias' => $name,
             'icon' => $icon,
             'permissionRoute' => $route,

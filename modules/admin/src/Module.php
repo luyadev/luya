@@ -249,7 +249,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))
-            ->nodeRoute('menu_node_filemanager', 'cloud_upload', 'admin/storage/index', 'admin/storage/index')
+            ->nodeRoute('menu_node_filemanager', 'cloud_upload', 'admin/storage/index')
             ->node('menu_node_system', 'settings_applications')
                 ->group('menu_group_access')
                     ->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')

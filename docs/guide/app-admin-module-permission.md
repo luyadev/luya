@@ -24,7 +24,7 @@ public function getMenu()
         ->group("Group")
             ->itemRoute("Stats", "myadminmodule/stats/index", "materialize-css-icon") // An example for a custom route
             ->itemApi('Users', 'admin/user/index', 'materialize-css-icon', 'api-admin-user') // An example for en NgRest Api
-    ->nodeRoute('Root Custom URL', 'materialize-css-icon', 'admin/templates/mytemplate', 'module/controller/route');
+    ->nodeRoute('Root Custom URL', 'materialize-css-icon', 'module/controller/route');
 
 }
 ```
