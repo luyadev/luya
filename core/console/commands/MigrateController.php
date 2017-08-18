@@ -42,31 +42,30 @@ class MigrateController extends \yii\console\controllers\MigrateController
             return parent::actionCreate($name);
         }
         
+        if (!isset($this->migrationPath[$module])) {
+        	throw new Exception("The module \"$module\" does not exist in the application modules configuration.");
+        }
+        
         // apply custom migration code to generate new migrations for a module specific path
         if (!preg_match('/^[\w\\\\]+$/', $name)) {
             throw new Exception('The migration name should contain letters, digits, underscore and/or backslash characters only.');
         }
         
-        $name = 'm'.gmdate('ymd_His').'_'.$name;
+        $className = 'm'.gmdate('ymd_His').'_'.$name;
         
-        if (!isset($this->migrationPath[$module])) {
-            throw new Exception("The given module does not exist in the module list. Make sure the module is setup in your config.");
-        }
+       
+        $migrationPath = $this->migrationPath[$module];
         
-        $folder = $this->migrationPath[$module];
-        $file = $folder.DIRECTORY_SEPARATOR.$name.'.php';
-        
+        $file = $migrationPath . DIRECTORY_SEPARATOR . $className . '.php';
         if ($this->confirm("Create new migration '$file'?")) {
-            $content = $this->renderFile(Yii::getAlias($this->templateFile), ['className' => $name]);
-        
-            if ($folder !== false && !file_exists($folder)) {
-                FileHelper::createDirectory($folder, 0775, false);
-            }
-        
-            file_put_contents($file, $content);
-            $this->stdout("New migration created successfully.\n", Console::FG_GREEN);
-        
-            return self::EXIT_CODE_NORMAL;
+        	$content = $this->generateMigrationSourceCode([
+        		'name' => $name,
+        		'className' => $className,
+        		'namespace' => null,
+        	]);
+        	FileHelper::createDirectory($migrationPath);
+        	file_put_contents($file, $content);
+        	$this->stdout("New migration created successfully.\n", Console::FG_GREEN);
         }
     }
 }
