@@ -35,14 +35,14 @@ use luya\cms\admin\Module;
                                 </span>
                             </label>
                         </div>
-                        <div class="toolbar-item toolbar-item-lang" ng-class="{'ml-auto':$first}" ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)">
+                        <div class="toolbar-item toolbar-item-lang" ng-class="{'ml-auto':$first}" ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-show="AdminLangService.data.length > 1">
                             <button class="toolbar-button toolbar-button-flag" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" >
                                 <span class="flag flag-{{lang.short_code}}">
                                     <span class="flag-fallback">{{lang.name}}</span>
                                 </span>
                             </button>
                         </div>
-                        <div class="toolbar-item" ng-click="settingsOverlay=!settingsOverlay">
+                        <div class="toolbar-item" ng-click="settingsOverlay=!settingsOverlay" ng-class="{'ml-auto': AdminLangService.data.length <= 1}">
                             <button class="toolbar-button">
                                 <i class="material-icons">more_vert</i>
                             </button>
