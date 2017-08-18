@@ -112,7 +112,8 @@ use luya\helpers\Html;
         </a>
     </li>
 </ul>
-<div class="cmsadmin-page" ng-if="isTranslated">
+<div ng-if="!loaded">loading...</div>
+<div class="cmsadmin-page" ng-show="isTranslated && loaded">
     <div class="row" ng-if="item.nav_item_type==1" ng-repeat="(key, row) in container.__placeholders track by key">
         <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'" />
     </div>
@@ -130,7 +131,7 @@ use luya\helpers\Html;
         </div>
     </div>
 </div>
-<div class="cmsadmin-page" ng-if="!isTranslated">
+<div class="cmsadmin-page" ng-show="!isTranslated && loaded">
     <!-- TODO -->
     <div class="alert alert-info"><?= Module::t('view_update_no_translations'); ?></div>
     <div ng-controller="CopyPageController">
