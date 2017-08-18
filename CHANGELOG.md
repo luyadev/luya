@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1356](https://github.com/luyadev/luya/issues/1356) Fixed problem with when ngrest plugin SelectModel target class is the same model.
 - [#1369](https://github.com/luyadev/luya/issues/1369) Flow Uploader lost bearer token while uploading images.
 - [#1290](https://github.com/luyadev/luya/issues/1290) Fixed Tooltip Bug, cause of lexer parser error. Wrong directive variable scope declaration.
 - [#1286](https://github.com/luyadev/luya/issues/1286) Filemanager show error message on error.
