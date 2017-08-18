@@ -40,7 +40,7 @@ class FinderController extends Controller
 
 Create a the view file for the index action of the controller:
 
-```php
+```
 <script>
 zaa.bootstrap.register('MyController', function($scope, $http) {
 
