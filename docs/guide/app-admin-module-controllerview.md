@@ -52,3 +52,25 @@ public function getMenu()
 You have now told the administration module that there is a new menu entry, all you have to do is now run the `import` command and assign the new permissions your administration interface.
 
 > Do not forget to run `import` command and assign the permission to your Administration Group in the Admin UI!
+
+You could also use {{luya\admin\componenets\AdminMenuBuilder::nodeRoute()}} which would not have a group and item which gives you a larger screen to build your custom views.
+
+## Custom View inline Angular Controller
+
+If you like to make a view file without any asset integration you can just bootstrap an inline angular controller like this within your view file:
+
+```php
+<script>
+zaa.bootstrap.register('FinderController', function($scope, $controller) {
+	
+	// add your angular controller logic
+
+	$scope.title = 'Hello World';	
+});
+</script>
+<div class="luya-content" ng-controller="FinderController">
+	<h1>{{title}}</div>
+</div>
+```
+
+You could also register a java script file within an [[app-admin-module-assets.md]].
