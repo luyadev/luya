@@ -62,14 +62,14 @@ If you like to make a view file without any asset integration you can just boots
 ```php
 <script>
 zaa.bootstrap.register('FinderController', function($scope, $controller) {
-	
-	// add your angular controller logic
+    
+    // add your angular controller logic
 
-	$scope.title = 'Hello World';	
+    $scope.title = 'Hello World';    
 });
 </script>
 <div class="luya-content" ng-controller="FinderController">
-	<h1>{{title}}</div>
+    <h1>{{title}}</div>
 </div>
 ```
 

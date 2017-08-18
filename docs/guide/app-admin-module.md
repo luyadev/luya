@@ -18,14 +18,14 @@ You can use the [[app-console.md]] `module/create` to scaffold quickly all the r
 .
 └── mymodule
     ├── admin
-    │   ├── aws
-    │   ├── migrations
-    │   └── Module.php
+    │   ├── aws
+    │   ├── migrations
+    │   └── Module.php
     ├── frontend
-    │   ├── blocks
-    │   ├── controllers
-    │   ├── Module.php
-    │   └── views
+    │   ├── blocks
+    │   ├── controllers
+    │   ├── Module.php
+    │   └── views
     ├── models
     └── README.md
 ```
