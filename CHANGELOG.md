@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1248](https://github.com/luyadev/luya/issues/1248) Fixed caption of "block groups" does not obey the user's language option.
 - [#1272](https://github.com/luyadev/luya/issues/1272) Empty layout block reloading problem has been fixed due to rewrite of the cms controllers which reloads the placeholders.
 - [#1356](https://github.com/luyadev/luya/issues/1356) Fixed problem with when ngrest plugin SelectModel target class is the same model.
 - [#1369](https://github.com/luyadev/luya/issues/1369) Flow Uploader lost bearer token while uploading images.
