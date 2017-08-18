@@ -50,14 +50,14 @@ class DefaultController extends Controller
 
     public function actionDashboard()
     {
-    	$items = [];
-    	foreach (Yii::$app->adminModules as $module) {
-    		foreach ($module->dashboardObjects as $config) {
-    			$items[] = Yii::createObject(ArrayHelper::merge(['class' => '\luya\admin\dashboards\DefaultObject'], $config));
-    		}
-    	}
+        $items = [];
+        foreach (Yii::$app->adminModules as $module) {
+            foreach ($module->dashboardObjects as $config) {
+                $items[] = Yii::createObject(ArrayHelper::merge(['class' => '\luya\admin\dashboards\DefaultObject'], $config));
+            }
+        }
         return $this->renderPartial('dashboard', [
-        	'items' => $items,
+            'items' => $items,
         ]);
     }
 

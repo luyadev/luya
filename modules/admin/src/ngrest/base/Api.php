@@ -166,9 +166,9 @@ class Api extends RestActiveController
 
     /**
      * Search API.
-     * 
+     *
      * This action is mainly used by  {{luya\admin\apis\SearchController}}.
-     * 
+     *
      * @param unknown $query
      * @return unknown
      */
@@ -179,12 +179,12 @@ class Api extends RestActiveController
 
     /**
      * Search API Provider.
-     * 
-     * The searchProvider provides informations about how the admin UI can render the clickable links 
+     *
+     * The searchProvider provides informations about how the admin UI can render the clickable links
      * for the found results.
-     * 
+     *
      * This action is mainly used by  {{luya\admin\apis\SearchController}} defined by {{luya\admin\base\GenericSearchInterface::genericSearchStateProvider}}
-     * 
+     *
      * @return array
      */
     public function actionSearchProvider()
@@ -194,9 +194,9 @@ class Api extends RestActiveController
     
     /**
      * Search API Hidden Fields
-     * 
+     *
      * This action is mainly used by {luya\admin\apis\SearchController}}.
-     * 
+     *
      * @return array
      */
     public function actionSearchHiddenFields()
@@ -206,9 +206,9 @@ class Api extends RestActiveController
     
     /**
      * Generate a response with pagination disabled.
-     * 
+     *
      * Search querys with Pagination will be handled by this action.
-     * 
+     *
      * @return \yii\data\ActiveDataProvider
      */
     public function actionFullResponse()
@@ -221,7 +221,7 @@ class Api extends RestActiveController
     
     /**
      * Call the dataProvider for a foreign model.
-     * 
+     *
      * @param mixed $arrayIndex
      * @param mixed $id
      * @param string $modelClass The name of the model where the ngRestRelation is defined.
@@ -247,7 +247,7 @@ class Api extends RestActiveController
     
     /**
      * Filter the Api response by a defined Filtername.
-     * 
+     *
      * @param string $filterName
      * @throws InvalidCallException
      * @return \yii\data\ActiveDataProvider
@@ -270,7 +270,7 @@ class Api extends RestActiveController
     
     /**
      * Renders the Callback for an ActiveWindow.
-     * 
+     *
      * @return string
      */
     public function actionActiveWindowCallback()
@@ -284,7 +284,7 @@ class Api extends RestActiveController
     
     /**
      * Renders the index page of an ActiveWindow.
-     * 
+     *
      * @return array
      */
     public function actionActiveWindowRender()
@@ -298,9 +298,9 @@ class Api extends RestActiveController
         $ngrest = new NgRest($this->model->getNgRestConfig());
         
         return [
-            'content' => $ngrest->render($render), 
-            'icon' => $render->getActiveWindowObject()->getIcon(), 
-            'alias' => $render->getActiveWindowObject()->getAlias(), 
+            'content' => $ngrest->render($render),
+            'icon' => $render->getActiveWindowObject()->getIcon(),
+            'alias' => $render->getActiveWindowObject()->getAlias(),
             'requestDate' => time(),
         ];
     }
@@ -325,8 +325,8 @@ class Api extends RestActiveController
         $route = str_replace("/index", "/export-download", $route);
         
         if ($store) {
-            Yii::$app->session->set('tempNgRestFileName',  Inflector::slug($this->model->tableName())  . '-export-'.date("Y-m-d-H-i").'.csv');
-            Yii::$app->session->set('tempNgRestFileMime',  'application/csv');
+            Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName())  . '-export-'.date("Y-m-d-H-i").'.csv');
+            Yii::$app->session->set('tempNgRestFileMime', 'application/csv');
             Yii::$app->session->set('tempNgRestFileKey', $key);
             return [
                 'url' => Url::toRoute(['/'.$route, 'key' => base64_encode($key)]),

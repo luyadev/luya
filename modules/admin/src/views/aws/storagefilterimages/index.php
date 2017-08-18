@@ -1,7 +1,6 @@
 <?php
 use luya\admin\ngrest\aw\CallbackButtonWidget;
 
-
 /* @var $model \luya\admin\models\StorageFilter */
 ?>
 <h1><?= $model->name; ?></h1>

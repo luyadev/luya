@@ -6,9 +6,9 @@ use yii\base\Model;
 use luya\admin\Module;
 
 /**
- * 
+ *
  * @property \luya\admin\models\User $user
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

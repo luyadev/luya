@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module;
+
 ?>
 <div class="row" ng-controller="ActiveWindowTagController">
     <div class="col-md-9">

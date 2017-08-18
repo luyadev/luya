@@ -100,7 +100,7 @@ class StorageContainer extends Component
     use CacheableTrait;
     
     /**
-     * @var array The mime types 
+     * @var array The mime types
      */
     public $dangerousMimeTypes = [
         'application/x-msdownload',
@@ -244,7 +244,7 @@ class StorageContainer extends Component
     
     /**
      * Get the internal server path to the storage folder.
-     * 
+     *
      * Default path is `@webroot/storage`.
      *
      * @return string Get the path on the server to the storage folder based @webroot alias.
@@ -260,9 +260,9 @@ class StorageContainer extends Component
     
     /**
      * Setter method for $serverPath
-     * 
+     *
      * The input path will be auomatically wrapped trough {{Yii::getAlias}}.
-     * 
+     *
      * @param string $path The path on the server where the storage data is stored.
      */
     public function setServerPath($path)

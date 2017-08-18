@@ -2,7 +2,6 @@
 
 namespace cmstests\src\frontend\blocks;
 
-
 use cmstests\BlockTestCase;
 
 class TextBlockTest extends BlockTestCase

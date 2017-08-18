@@ -44,7 +44,7 @@ class Layout extends NgRestModel
             ['list', ['name', 'json_config', 'view_file'], ],
             [['create', 'update'], ['name']],
         ];
-    }    
+    }
 
     
     public function getJsonConfig($node = false)

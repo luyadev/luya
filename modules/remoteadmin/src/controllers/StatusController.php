@@ -11,13 +11,13 @@ use luya\traits\CacheableTrait;
  */
 class StatusController extends \luya\admin\base\Controller
 {
-	use CacheableTrait;
-	
+    use CacheableTrait;
+    
     public function actionIndex()
     {
         return $this->renderPartial('index', [
             'sites' => Site::find()->all(),
-        	'currentVersion' => Site::getCurrentLuyaVersion(),
+            'currentVersion' => Site::getCurrentLuyaVersion(),
         ]);
     }
 }

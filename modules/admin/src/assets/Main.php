@@ -9,9 +9,9 @@ namespace luya\admin\assets;
  */
 class Main extends \luya\web\Asset
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $sourcePath = '@admin/resources';
 
     /**
@@ -39,8 +39,8 @@ class Main extends \luya\web\Asset
      * @inheritdoc
      */
     public $publishOptions = [
-    	'except' => [
-    		'node_modules/',
-    	]
+        'except' => [
+            'node_modules/',
+        ]
     ];
 }

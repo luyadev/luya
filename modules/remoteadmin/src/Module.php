@@ -6,7 +6,7 @@ use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminMenuBuilder;
 
 /**
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  *
  */

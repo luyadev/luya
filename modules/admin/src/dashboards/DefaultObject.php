@@ -8,14 +8,14 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Fast generated Dashboard Objects.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class DefaultObject extends BaseDashboardObject
 {
     /**
      * @var array Options to generate the wrapper element. Generates a tag like:
-     * 
+     *
      * ```
      * <div class="card-panel" ng-controller="DefaultDashboardObjectController" ng-init="loadData(\'{{dataApiUrl}}\');">
      *     <!-- content from: $outerTemplate -->
@@ -28,13 +28,13 @@ class DefaultObject extends BaseDashboardObject
         'ng-init' => 'loadData(\'{{dataApiUrl}}\')',
     ];
     
-	/**
-	 * @var string The wrapper template which is by default:
-	 * 
-	 * ```
-	 * <h3>{{title}}</h3>{{template}}
-	 * ```
-	 */
+    /**
+     * @var string The wrapper template which is by default:
+     *
+     * ```
+     * <h3>{{title}}</h3>{{template}}
+     * ```
+     */
     public $outerTemplate = '<div class="card-body"><h5 class="card-title">{{title}}</h4>{{template}}</div>';
 
     public function getTitle()

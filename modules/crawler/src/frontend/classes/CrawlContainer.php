@@ -9,7 +9,6 @@ use luya\crawler\models\Builderindex;
 use luya\crawler\models\Index;
 use luya\helpers\Url;
 
-
 class CrawlContainer extends \yii\base\Object
 {
     public $baseUrl;

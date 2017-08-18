@@ -190,7 +190,6 @@ class CrawlPage extends \yii\base\Object
         }
         
         return null;
-        
     }
 
     public function getTitle()

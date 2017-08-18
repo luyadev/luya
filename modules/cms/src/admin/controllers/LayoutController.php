@@ -5,7 +5,7 @@ namespace luya\cms\admin\controllers;
 use luya\admin\ngrest\base\Controller;
 
 /**
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  *
  */

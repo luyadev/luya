@@ -1,5 +1,6 @@
 <?php
 use luya\remoteadmin\Module;
+
 ?>
 <script>
 zaa.bootstrap.register('SitesStatusController', function($scope, $http) {

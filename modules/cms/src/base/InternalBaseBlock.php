@@ -2,7 +2,6 @@
 
 namespace luya\cms\base;
 
-
 use yii\base\Object;
 use yii\helpers\Inflector;
 use luya\helpers\Url;

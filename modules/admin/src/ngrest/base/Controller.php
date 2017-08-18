@@ -86,7 +86,7 @@ class Controller extends \luya\admin\base\Controller
         $crud = new RenderCrud();
         $crud->setIsInline($inline);
         if ($relation && $arrayIndex !== false && $modelClass !== false) {
-        	$crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
+            $crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
         }
         if ($relation) {
             //$crud->viewFile = 'crud_relation.php';

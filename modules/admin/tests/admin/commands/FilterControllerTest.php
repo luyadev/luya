@@ -2,21 +2,20 @@
 
 namespace admintests\admin\commands;
 
-
 use admintests\AdminTestCase;
 use luya\console\Application;
 use luya\admin\commands\FilterController;
 
 class FilterControllerTest extends AdminTestCase
 {
-	public function testIndexAction()
-	{
-		$app = new Application($this->getConfigArray());
-		$ctrl = new FilterController('index', $app);
-		
-		$this->assertTrue(is_object($ctrl));
-	
-		$buff = <<<EOT
+    public function testIndexAction()
+    {
+        $app = new Application($this->getConfigArray());
+        $ctrl = new FilterController('index', $app);
+        
+        $this->assertTrue(is_object($ctrl));
+    
+        $buff = <<<EOT
 
 /**
  * Nam Filter.
@@ -46,6 +45,6 @@ class className extends Filter
     }
 }
 EOT;
-		$this->assertContains($buff, $ctrl->generateClassView('idf', 'Nam', ['method' => ['arg' => 'v', 'foo' => 'bar']], 'className'));
-	}
+        $this->assertContains($buff, $ctrl->generateClassView('idf', 'Nam', ['method' => ['arg' => 'v', 'foo' => 'bar']], 'className'));
+    }
 }

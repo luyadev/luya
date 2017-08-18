@@ -7,11 +7,11 @@ use luya\admin\ngrest\base\Render;
 
 /**
  * Render the index view of an Active Window.
- * 
+ *
  * @property \luya\admin\ngrest\base\ActiveWindowInterface $activeWindowObject
  * @property integer $itemId
  * @property string $activeWindowHash
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -29,7 +29,7 @@ class RenderActiveWindow extends Render implements RenderInterface
     
     /**
      * Get current Active Window Object.
-     * 
+     *
      * @return \luya\admin\ngrest\base\ActiveWindowInterface
      */
     public function getActiveWindowObject()
@@ -51,7 +51,7 @@ class RenderActiveWindow extends Render implements RenderInterface
     
     /**
      * Active Window Hash Getter Method.
-     * 
+     *
      * @return string
      */
     public function getActiveWindowHash()
@@ -61,7 +61,7 @@ class RenderActiveWindow extends Render implements RenderInterface
     
     /**
      * Active Window Hash Setter Method.
-     * 
+     *
      * @param string $activeWindowHash
      */
     public function setActiveWindowHash($activeWindowHash)
@@ -73,7 +73,7 @@ class RenderActiveWindow extends Render implements RenderInterface
 
     /**
      * Setter Method for current Item Id.
-     * 
+     *
      * @param integer $id
      */
     public function setItemId($id)
@@ -93,7 +93,7 @@ class RenderActiveWindow extends Render implements RenderInterface
 
     /**
      * Find the active window in the config based on a given Hash.
-     * 
+     *
      * @param string $activeWindowHash
      * @return array|boolean
      */

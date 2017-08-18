@@ -394,7 +394,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $placeholders = [];
     
         foreach ($blockObject->getConfigPlaceholdersByRowsExport() as $rowKey => $row) {
-            
             foreach ($row as $pk => $pv) {
                 $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
                 $pv['prev_id'] = $blockItem['id'];

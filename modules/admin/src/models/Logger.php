@@ -2,7 +2,6 @@
 
 namespace luya\admin\models;
 
-
 use yii\helpers\Json;
 use yii\base\Arrayable;
 use luya\admin\ngrest\base\NgRestModel;

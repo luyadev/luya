@@ -8,7 +8,7 @@ use luya\admin\components\AdminMenu;
 class AdminMenuTest extends AdminTestCase
 {
     /**
-     * 
+     *
      * @return \luya\admin\components\AdminMenu
      */
     private function getAdminMenuComponent()

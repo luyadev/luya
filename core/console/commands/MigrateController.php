@@ -43,7 +43,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
         }
         
         if (!isset($this->migrationPath[$module])) {
-        	throw new Exception("The module \"$module\" does not exist in the application modules configuration.");
+            throw new Exception("The module \"$module\" does not exist in the application modules configuration.");
         }
         
         // apply custom migration code to generate new migrations for a module specific path
@@ -58,14 +58,14 @@ class MigrateController extends \yii\console\controllers\MigrateController
         
         $file = $migrationPath . DIRECTORY_SEPARATOR . $className . '.php';
         if ($this->confirm("Create new migration '$file'?")) {
-        	$content = $this->generateMigrationSourceCode([
-        		'name' => $name,
-        		'className' => $className,
-        		'namespace' => null,
-        	]);
-        	FileHelper::createDirectory($migrationPath);
-        	file_put_contents($file, $content);
-        	$this->stdout("New migration created successfully.\n", Console::FG_GREEN);
+            $content = $this->generateMigrationSourceCode([
+                'name' => $name,
+                'className' => $className,
+                'namespace' => null,
+            ]);
+            FileHelper::createDirectory($migrationPath);
+            file_put_contents($file, $content);
+            $this->stdout("New migration created successfully.\n", Console::FG_GREEN);
         }
     }
 }

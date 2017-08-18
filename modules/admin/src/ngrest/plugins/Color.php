@@ -11,15 +11,15 @@ use luya\admin\ngrest\base\Plugin;
  */
 class Color extends Plugin
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
-    	return [
-    		$this->createTag('span', null, ['style' => 'background-color: {{' . $ngModel .' }}; margin-right:5px; border-radius: 60%; padding:0px 8px;']),
-    		$this->createListTag($ngModel),
-    	];
+        return [
+            $this->createTag('span', null, ['style' => 'background-color: {{' . $ngModel .' }}; margin-right:5px; border-radius: 60%; padding:0px 8px;']),
+            $this->createListTag($ngModel),
+        ];
     }
 
     /**
@@ -27,7 +27,7 @@ class Color extends Plugin
      */
     public function renderCreate($id, $ngModel)
     {
-    	return $this->createFormTag('zaa-color', $id, $ngModel);
+        return $this->createFormTag('zaa-color', $id, $ngModel);
     }
 
     /**
@@ -35,6 +35,6 @@ class Color extends Plugin
      */
     public function renderUpdate($id, $ngModel)
     {
-    	return $this->renderCreate($id, $ngModel);
+        return $this->renderCreate($id, $ngModel);
     }
 }

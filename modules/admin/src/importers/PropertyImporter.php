@@ -8,7 +8,7 @@ use luya\console\Importer;
 
 /**
  * Import Properties.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

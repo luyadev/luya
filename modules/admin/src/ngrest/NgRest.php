@@ -25,7 +25,7 @@ use luya\admin\ngrest\render\RenderInterface;
  * ```php
  * $ngrest->render(new RenderCrud());
  * ```
- * 
+ *
  * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
@@ -37,7 +37,7 @@ class NgRest
 
     /**
      * Create new NgRest Object.
-     * 
+     *
      * @param \luya\admin\ngrest\ConfigInterface $configObject
      */
     public function __construct(ConfigInterface $configObject)
@@ -48,7 +48,7 @@ class NgRest
 
     /**
      * Renders the Config for the Given Render Interface.
-     * 
+     *
      * @param \luya\admin\ngrest\render\RenderInterface $render
      * @return string
      */
@@ -61,7 +61,7 @@ class NgRest
     
     /**
      * Generates an NgRest Plugin Object.
-     * 
+     *
      * @param string $className
      * @param string $name
      * @param string $alias

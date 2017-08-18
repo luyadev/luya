@@ -35,7 +35,7 @@ class LoginController extends Controller
 
     /**
      * Show Login Form.
-     * 
+     *
      * @return \yii\web\Response|string
      */
     public function actionIndex()
@@ -54,7 +54,7 @@ class LoginController extends Controller
     
     /**
      * Async Secure Token Login.
-     * 
+     *
      * @return array
      */
     public function actionAsyncToken()
@@ -81,7 +81,7 @@ class LoginController extends Controller
 
     /**
      * Async Login Form.
-     * 
+     *
      * @return array
      */
     public function actionAsync()

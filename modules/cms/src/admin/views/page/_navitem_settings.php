@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+
 ?>
 <modal is-modal-hidden="itemSettingsOverlay" modal-title="{{item.title}} Settings">
 <div class="row" ng-if="!itemSettingsOverlay">

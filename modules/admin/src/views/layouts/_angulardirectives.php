@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module as Admin;
+
 ?>
 <div class="loading-overlay" ng-if="LuyaLoading.getState()">
     <div class="loading-overlay-content">

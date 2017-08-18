@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+
 ?>
 <script type="text/ng-template" id="createform.html">
 <div class="card">

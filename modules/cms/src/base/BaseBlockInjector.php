@@ -5,7 +5,6 @@ namespace luya\cms\base;
 use yii\base\Object;
 use yii\base\InvalidConfigException;
 
-
 /**
  * The base injector class for all Injectors.
  *

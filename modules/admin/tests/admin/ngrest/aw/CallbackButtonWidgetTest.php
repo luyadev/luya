@@ -5,7 +5,6 @@ namespace admintests\admin\ngrest\aw;
 use admintests\AdminTestCase;
 use luya\admin\ngrest\aw\CallbackButtonWidget;
 
-
 class CallbackButtonWidgetTest extends AdminTestCase
 {
     public function testRenderOutput()

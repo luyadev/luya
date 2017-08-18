@@ -28,8 +28,8 @@ use luya\admin\ngrest\base\ActiveWindow;
  * }
  * ```
  *
- * The attached model class must implement the interface {{\luya\admin\aws\FlowActiveWindowInterface}} in order to interact with thw Activ Window. 
- * 
+ * The attached model class must implement the interface {{\luya\admin\aws\FlowActiveWindowInterface}} in order to interact with thw Activ Window.
+ *
  * There is also a helper Trait {{\luya\admin\aws\FlowActiveWindowTrait}} you can include in order to work with a relation table.
  *
  * @since 1.0.0
@@ -56,13 +56,13 @@ class FlowActiveWindow extends ActiveWindow
      */
     public function getModel()
     {
-    	$model = parent::getModel();
-    	
-    	if (!$model instanceof FlowActiveWindowInterface) {
-    		throw new InvalidConfigException("The model ".$this->model->className()."which attaches the FlowActiveWindow must be an instance of luya\admin\aws\FlowActiveWindowInterface.");
-    	}
-    	
-    	return $model;
+        $model = parent::getModel();
+        
+        if (!$model instanceof FlowActiveWindowInterface) {
+            throw new InvalidConfigException("The model ".$this->model->className()."which attaches the FlowActiveWindow must be an instance of luya\admin\aws\FlowActiveWindowInterface.");
+        }
+        
+        return $model;
     }
     
     /**
@@ -75,7 +75,7 @@ class FlowActiveWindow extends ActiveWindow
     
     /**
      * Returns a list of uploaded images.
-     * 
+     *
      * @return array
      */
     public function callbackList()
@@ -94,7 +94,7 @@ class FlowActiveWindow extends ActiveWindow
     
     /**
      * Remove a given image from the collection.
-     * 
+     *
      * @param integer $imageId
      * @return array
      */
@@ -114,7 +114,7 @@ class FlowActiveWindow extends ActiveWindow
     
     /**
      * Flow Uploader Upload.
-     * 
+     *
      * @return string
      */
     public function callbackUpload()

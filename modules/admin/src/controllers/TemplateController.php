@@ -2,7 +2,6 @@
 
 namespace luya\admin\controllers;
 
-
 use luya\admin\base\Controller;
 
 /**

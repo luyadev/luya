@@ -8,7 +8,7 @@ use luya\cms\frontend\blockgroups\ProjectGroup;
 /**
  * Color Wheel Test Block.
  *
- * File has been created with `block/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `block/create` command on LUYA version 1.0.0-dev.
  */
 class ColorWheelTestBlock extends PhpBlock
 {
@@ -61,7 +61,7 @@ class ColorWheelTestBlock extends PhpBlock
     }
     
     /**
-     * {@inheritDoc} 
+     * {@inheritDoc}
      *
      * @param {{vars.color}}
     */

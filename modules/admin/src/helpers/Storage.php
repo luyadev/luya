@@ -265,7 +265,7 @@ class Storage
     
     /**
      * Example Input unform:
-     * 
+     *
      * ```php
         Array
         (
@@ -276,9 +276,9 @@ class Storage
                             [0] => Altersfragen-Leimental (4).pdf
                             [1] => Altersfragen-Leimental (2).pdf
                         )
-        
+
                 )
-        
+
             [type] => Array
                 (
                     [attachment] => Array
@@ -286,9 +286,9 @@ class Storage
                             [0] => application/pdf
                             [1] => application/pdf
                         )
-        
+
                 )
-        
+
             [tmp_name] => Array
                 (
                     [attachment] => Array
@@ -296,9 +296,9 @@ class Storage
                             [0] => /tmp/phpNhqnwR
                             [1] => /tmp/phpbZ8XSn
                         )
-        
+
                 )
-        
+
             [error] => Array
                 (
                     [attachment] => Array
@@ -306,9 +306,9 @@ class Storage
                             [0] => 0
                             [1] => 0
                         )
-        
+
                 )
-        
+
             [size] => Array
                 (
                     [attachment] => Array
@@ -316,16 +316,16 @@ class Storage
                             [0] => 261726
                             [1] => 255335
                         )
-        
+
                 )
-        
+
         )
      * ```
-     * 
+     *
      * to:
-     * 
+     *
      * ```php
-     * 
+     *
         Array
         (
             [0] => Array
@@ -336,7 +336,7 @@ class Storage
                     [error] => 0
                     [size] => 261726
                 )
-        
+
             [1] => Array
                 (
                     [name] => Altersfragen-Leimental (2).pdf
@@ -345,7 +345,7 @@ class Storage
                     [error] => 0
                     [size] => 255335
                 )
-        
+
         )
      * ```
      * @param array $files
@@ -372,7 +372,7 @@ class Storage
     
     /**
      * Extract $_FILES array.
-     * 
+     *
      * @param array $file
      * @return array
      */
@@ -412,7 +412,7 @@ class Storage
     }
     
     /**
-     * 
+     *
      * @param array $file An array with the following keys available:
      * - name:
      * - type:

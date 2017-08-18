@@ -2,8 +2,6 @@
 
 namespace ngresttest;
 
-
-
 class Module extends \luya\admin\base\Module
 {
     public $apis = [

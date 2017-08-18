@@ -13,18 +13,18 @@ use luya\console\Command;
 
 /**
  * Synchronise a PROD env to your locale env with files and images.
- * 
- * The proxy command will ask for an url, identifier and token. The url is the url of your website in production where you have leased the token and 
+ *
+ * The proxy command will ask for an url, identifier and token. The url is the url of your website in production where you have leased the token and
  * identifier inside the admin. Make sure you are using the right protocol (with or without https)!
- * 
+ *
  * e.g url: `https://luya.io` or if you are using a domain with www `http://www.example.com` depending on your server configuration.
- * 
+ *
  * ```sh
  * ./vendor/bin/luya admin/proxy
  * ```
  *
  * You can also provide all prompted options in order to not used an interactive mode:
- * 
+ *
  * ```sh
  * ./vendor/bin/luya admin/proxy --url=https://example.com --idf=lcp58e35acb4ca69 --token=ESOH1isB3ka_dF09ozkDJewpeecGCdUw
  * ```
@@ -47,13 +47,13 @@ use luya\console\Command;
   * ```sh
  * ./vendor/bin/luya admin/proxy -s=0 -t=large_table
  * ```
- * 
+ *
  * Using wildcard to use table with a given prefix use:
- * 
+ *
  * ```sh
  * ./vendor/bin/luya admin/proxy -t=app_*
  * ```
- * 
+ *
  * would only sync tables which starts with `app_*` like `app_news`, `app_articles`.
  *
  * In order to clear the proxy config run:
@@ -98,7 +98,7 @@ class ProxyController extends Command
      * examples:
      * - https://luya.io
      * - http://www.example.com
-     * 
+     *
      */
     public $url;
     

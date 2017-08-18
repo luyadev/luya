@@ -6,7 +6,7 @@ use luya\admin\base\Controller;
 
 /**
  * Provie Page Templates for create update and drafts.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class PageController extends Controller

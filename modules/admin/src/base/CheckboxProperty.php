@@ -4,13 +4,13 @@ namespace luya\admin\base;
 
 /**
  * Checkbox Base Property.
- * 
+ *
  * Whether is checked or not:
- * 
+ *
  * ```php
  * echo Yii::$app->menu->current->getProperty('myCheckbox')->getValue() ? 'Its checked!' : 'Its NOT checked...';
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

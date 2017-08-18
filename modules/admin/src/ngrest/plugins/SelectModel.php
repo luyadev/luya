@@ -1,6 +1,7 @@
 <?php
 
 namespace luya\admin\ngrest\plugins;
+
 ;
 use yii\db\ActiveRecordInterface;
 use luya\helpers\ArrayHelper;
@@ -9,7 +10,7 @@ use yii\db\ActiveQuery;
 
 /**
  * DropDown Select
- * 
+ *
  * Create a selection dropdown based on an ActiveRecord Model.
  *
  * Example usage:
@@ -32,7 +33,7 @@ use yii\db\ActiveQuery;
  *     return $model->firstname . ' ' . $model->lastname;
  * }
  * ```
- * 
+ *
  * You can also use the quick mode which finds the primary key by itself, therfore just keep valueField empty.
  *
  * @property string $valueField The field name which should represent the value of the data array. This value will be stored in the database and is mostly the primary key of the $modelClass Model.
@@ -42,7 +43,7 @@ use yii\db\ActiveQuery;
 class SelectModel extends Select
 {
     /**
-     * @var string The className of the ActiveRecord or NgRestModel in order to build the ActiveQuery find methods. This is the Model with the related data 
+     * @var string The className of the ActiveRecord or NgRestModel in order to build the ActiveQuery find methods. This is the Model with the related data
      * where the value from the field where you register the plugin with the field {{luya\admin\ngrest\plugins::$valueField}} value.
      */
     public $modelClass;
@@ -124,7 +125,7 @@ class SelectModel extends Select
     }
     
     /**
-     * 
+     *
      * @param ActiveRecordInterface $model
      * @return mixed|unknown
      */
@@ -162,19 +163,19 @@ class SelectModel extends Select
     
     /**
      * Getter Method for valueField.
-     * 
+     *
      * If no value is provided it will auto matically return the primary key of the derived model class.
-     * 
+     *
      * @return string The primary key from `modelClass`.
      */
     public function getValueField()
     {
-    	if ($this->_valueField === null) {
-    		$class = $this->modelClass;
-    		$this->_valueField = implode("", $class::primaryKey());
-    	}
-    	
-    	return $this->_valueField;
+        if ($this->_valueField === null) {
+            $class = $this->modelClass;
+            $this->_valueField = implode("", $class::primaryKey());
+        }
+        
+        return $this->_valueField;
     }
     
     /**
@@ -185,7 +186,7 @@ class SelectModel extends Select
      */
     public function setValueField($value)
     {
-    	$this->_valueField = $value;
+        $this->_valueField = $value;
     }
     
     /**

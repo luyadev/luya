@@ -16,7 +16,7 @@ abstract class Select extends Plugin
 
     /**
      * Getter method for data array.
-     * 
+     *
      * @return array
      */
     abstract public function getData();

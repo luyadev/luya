@@ -301,14 +301,14 @@ abstract class Plugin extends Component
         return true;
     }
     
-     /**
-     * This event will be triggered `onSave` event. If the model property is not writeable the event will not trigger.
-     *
-     * If the beforeSave method returns true and i18n is enabled, the value will be json encoded.
-     *
-     * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
-     * @return void
-     */
+    /**
+    * This event will be triggered `onSave` event. If the model property is not writeable the event will not trigger.
+    *
+    * If the beforeSave method returns true and i18n is enabled, the value will be json encoded.
+    *
+    * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
+    * @return void
+    */
     public function onSave($event)
     {
         if ($this->isAttributeWriteable($event) && $this->onBeforeSave($event)) {

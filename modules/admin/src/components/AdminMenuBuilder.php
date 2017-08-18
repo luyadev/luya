@@ -5,7 +5,6 @@ namespace luya\admin\components;
 use yii\base\Object;
 use luya\base\AdminModuleInterface;
 
-
 /**
  * Builder class for the Administration Menu/Navigation.
  *

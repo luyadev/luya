@@ -14,7 +14,7 @@ class ImportHelper
 {
     /**
      * Import a CSV from a string or filename and return array.
-     * 
+     *
      * The filename can be either a resource from fopen() or a string containing the csv data. Filenames will be wrapped trough {{Yii::getAlias()}} method.
      *
      * @param string $filename Can be either a filename which is parsed by {{luya\helpers\FileHelper::getFileContent}} or a string with the contained csv data.

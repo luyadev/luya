@@ -6,7 +6,7 @@ use \luya\cms\models\Log;
 use luya\admin\base\Controller;
 
 /**
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  *
  */

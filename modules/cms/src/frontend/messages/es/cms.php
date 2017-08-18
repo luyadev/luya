@@ -180,6 +180,6 @@ return [
     // 1.0.0
     'block_module_strictrender' => 'Render estricto',
     'block_module_strictrender_help' => 'Cuando se habilita el procesamiento estricto, el módulo sólo ejecutará la ruta proporcionada (módulo, controlador, acción, parámetros) sin escuchar las rutas de acción y controlador.',
-	'block_html_cfg_raw_label' => 'Renderizar HTML en Admin',
+    'block_html_cfg_raw_label' => 'Renderizar HTML en Admin',
 
 ];

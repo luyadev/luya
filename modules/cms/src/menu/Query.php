@@ -76,7 +76,7 @@ class Query extends Object implements QueryOperatorFieldInterface
      */
     public function root()
     {
-    	return $this->where([self::FIELD_PARENTNAVID => 0]);
+        return $this->where([self::FIELD_PARENTNAVID => 0]);
     }
     
     /**
@@ -87,7 +87,7 @@ class Query extends Object implements QueryOperatorFieldInterface
      */
     public function container($alias)
     {
-    	return $this->where([self::FIELD_CONTAINER => $alias]);
+        return $this->where([self::FIELD_CONTAINER => $alias]);
     }
 
     private $_where = [];

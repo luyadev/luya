@@ -177,7 +177,7 @@ class CommonController extends RestController
 
     public function actionLastLogins()
     {
-        return UserLogin::find()->select(['user_id', 'max(timestamp_create) as maxdate'])->joinWith(['user' => function($q) {
+        return UserLogin::find()->select(['user_id', 'max(timestamp_create) as maxdate'])->joinWith(['user' => function ($q) {
             $q->select(['id', 'firstname', 'lastname']);
         }])->limit(10)->groupBy(['user_id'])->orderBy(['maxdate' => SORT_DESC])->asArray()->all();
     }

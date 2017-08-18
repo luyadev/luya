@@ -28,7 +28,7 @@ interface NgRestModelInterface
     
     /**
      * Whether current model is in ngrest context or not
-     * 
+     *
      * @return boolean
      */
     public function getIsNgRestContext();

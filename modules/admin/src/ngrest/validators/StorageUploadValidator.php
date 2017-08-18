@@ -14,37 +14,37 @@ use yii\base\InvalidConfigException;
 
 /**
  * Storage Upload Validator.
- * 
+ *
  * Storing Files into the storage system in order to View them inside the NgRest Context.
- * 
+ *
  * ### Single File Upload
- * 
+ *
  * Model rule:
- * 
+ *
  * ```php
  * [['attachment'], StorageUploadValidator::class],
  * ```
- * 
+ *
  * View File:
- * 
+ *
  * ```php
  * <?= $form->field($model, 'attachment')->fileInput(['accept' => 'file/*']) ?>
  * ```
- * 
+ *
  * ### Multiple Files Upload
- * 
+ *
  * Mode rule:
- * 
+ *
  * ```php
  * [['attachments'], StorageUploadValidator::class, 'multiple' => true],
  * ```
- * 
+ *
  * View File:
- * 
+ *
  * ```php
  * <?= $form->field($model, 'attachments[]')->fileInput(['multiple' => true, 'accept' => 'file/*']) ?>
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-RC4
  */
@@ -62,17 +62,17 @@ class StorageUploadValidator extends Validator
     
     /**
      * @var integer The folder id where all files will be uploaded to, this is the virtual directory number from {{luya\admin\componenets\StorageContainer}}. Defaults
-     * is 0 which is the root directory of the file manager. If {{isHidden}} is enabled, the folder id does not matter as its not shown in the file manager anyhow. 
+     * is 0 which is the root directory of the file manager. If {{isHidden}} is enabled, the folder id does not matter as its not shown in the file manager anyhow.
      */
     public $folderId = 0;
     
     /**
-     * @var boolean Whether the files should be visible inside the file manager or not. 
+     * @var boolean Whether the files should be visible inside the file manager or not.
      */
     public $isHidden = true;
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\validators\Validator::validateAttribute()
      */
@@ -108,7 +108,6 @@ class StorageUploadValidator extends Validator
             } else {
                 return $this->addError($model, $attribute, 'Unable to save given file.');
             }
-            
         }
         
         // set the json value for this field which is compatible with the ngrest plugin fileArray

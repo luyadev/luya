@@ -10,11 +10,10 @@ use luya\admin\ngrest\base\Render;
 use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
 
-
 /**
- * 
+ *
  * @property \luya\admin\ngrest\render\RenderCrudView $view
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class RenderCrud extends Render implements RenderInterface, ViewContextInterface, RenderCrudInterface
@@ -57,19 +56,19 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     
     public function getViewPath()
     {
-    	return '@admin/views/ngrest';
+        return '@admin/views/ngrest';
     }
     
     public function render()
     {
-    	return $this->view->render($this->viewFile, [
+        return $this->view->render($this->viewFile, [
             'canCreate' => $this->can(Auth::CAN_CREATE),
             'canUpdate' => $this->can(Auth::CAN_UPDATE),
             'canDelete' => $this->can(Auth::CAN_DELETE),
             'config' => $this->config,
-    		'isInline' => $this->getIsInline(),
-    		'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
-    	    'currentMenu' => Yii::$app->adminmenu->getApiDetail($this->getConfig()->getApiEndpoint()),
+            'isInline' => $this->getIsInline(),
+            'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
+            'currentMenu' => Yii::$app->adminmenu->getApiDetail($this->getConfig()->getApiEndpoint()),
         ], $this);
     }
 
@@ -90,12 +89,12 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     
     public function getRelationCall()
     {
-    	return $this->_relationCall;
+        return $this->_relationCall;
     }
     
     public function setRelationCall(array $options)
     {
-    	$this->_relationCall = $options;
+        $this->_relationCall = $options;
     }
     
     private $_isInline = false;
@@ -107,12 +106,12 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
      */
     public function getIsInline()
     {
-    	return $this->_isInline;	
+        return $this->_isInline;
     }
     
     public function setIsInline($inline)
     {
-    	$this->_isInline = $inline;
+        $this->_isInline = $inline;
     }
 
     public function getOrderBy()
@@ -121,7 +120,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             return false;
         }
         
-    	return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
+        return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
     }
     
     /*

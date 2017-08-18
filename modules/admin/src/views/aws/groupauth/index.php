@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module;
+
 ?>
 <div ng-controller="ActiveWindowGroupAuth">
     <button type="button" ng-click="toggleAll()" class="btn"><?= Module::t('aws_groupauth_select_all'); ?></button>

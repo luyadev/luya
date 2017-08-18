@@ -131,15 +131,15 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     public function createCallbackUrl($callback)
     {
         return Url::to([
-            '/admin/'.$this->model->ngRestApiEndpoint().'/active-window-callback', 
-            'activeWindowCallback' => Inflector::camel2id($callback), 
-            'ngrestConfigHash' => $this->getConfigHash(), 
+            '/admin/'.$this->model->ngRestApiEndpoint().'/active-window-callback',
+            'activeWindowCallback' => Inflector::camel2id($callback),
+            'ngrestConfigHash' => $this->getConfigHash(),
             'activeWindowHash' => $this->getActiveWindowHash(),
         ], true);
     }
     
     /**
-     * 
+     *
      * MIME: https://wiki.selfhtml.org/wiki/Referenz:MIME-Typen
      * @param unknown $fileName
      * @param unknown $mimeType

@@ -203,8 +203,12 @@ class Nav extends ActiveRecord
             'nav_container_id' => $this->nav_container_id,
             'parent_nav_id' => $this->parent_nav_id
         ])->orderBy('sort_index ASC')->asArray()->all() as $model) {
-            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id',
-                ['id' => $model['id']])->execute();
+            Yii::$app->db->createCommand()->update(
+                self::tableName(),
+                ['sort_index' => $i],
+                'id=:id',
+                ['id' => $model['id']]
+            )->execute();
             ++$i;
         }
 

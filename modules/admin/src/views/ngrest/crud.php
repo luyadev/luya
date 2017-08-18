@@ -34,7 +34,7 @@ $this->beginBody();
                             <a class="dropdown-item" ng-show="exportDownloadButton" ng-click="exportDownload()">
                                <i class="material-icons">get_app</i><span> <?= Module::t('ngrest_crud_csv_export_btn_dl'); ?></span>
                             </a>
-                            <?php // foreach buttons from external buttons list ?>
+                            <?php // foreach buttons from external buttons list?>
                         </div>
                     </div>
                 </div>

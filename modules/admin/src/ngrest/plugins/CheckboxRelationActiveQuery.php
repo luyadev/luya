@@ -10,14 +10,14 @@ use luya\admin\ngrest\NgRest;
 
 /**
  * Checkbox Realtion based on an ActiveRelation.
- * 
+ *
  * This plugin uses the the active linking abilieits of the yii relations.
- * 
+ *
  * Example implementation:
- * 
+ *
  * ```php
  * public $adminGroups = [];
- * 
+ *
  * public function ngRestExtraAttributeTypes()
  * {
  *     return [
@@ -28,18 +28,18 @@ use luya\admin\ngrest\NgRest;
  *         ],
  *    ];
  * }
- * 
+ *
  * public function extraFields()
  * {
  *     return ['adminGroups'];
  * }
- * 
+ *
  * public function getGroups()
  * {
  *     return $this->hasMany(Group::class, ['id' => 'group_id'])->viaTable(ProductGroupRef::tableName(), ['product_id' => 'id']);
  * }
  * ```
- * 
+ *
  * @property \yii\db\ActiveQuery $query Active Query relation.
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -49,7 +49,7 @@ class CheckboxRelationActiveQuery extends CheckboxRelation
     public $onlyRestScenarios = true;
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\admin\ngrest\plugins\CheckboxRelation::init()
      */
@@ -77,7 +77,7 @@ class CheckboxRelationActiveQuery extends CheckboxRelation
     
     /**
      * Setter method for ActiveQuery.
-     * 
+     *
      * @param ActiveQuery $query
      */
     public function setQuery(ActiveQuery $query)
@@ -94,6 +94,4 @@ class CheckboxRelationActiveQuery extends CheckboxRelation
     {
         return $this->_query;
     }
-    
-    
 }

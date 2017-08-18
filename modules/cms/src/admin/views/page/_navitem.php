@@ -1,6 +1,7 @@
 <?php
 use luya\cms\admin\Module;
 use luya\helpers\Html;
+
 ?>
 <script type="text/ng-template" id="recursion.html">
 <h4 class="cmsadmin-container-title">{{placeholder.label}}</h4>

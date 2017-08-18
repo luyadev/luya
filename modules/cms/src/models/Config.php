@@ -2,7 +2,6 @@
 
 namespace luya\cms\models;
 
-
 use luya\traits\RegistryTrait;
 
 /**

@@ -99,7 +99,7 @@ class Searchdata extends NgRestModel
     {
         return [
             ['class' => DetailViewActiveWindow::class, 'attributes' => [
-               'language', 'query', 'results', 'timestamp:date', 
+               'language', 'query', 'results', 'timestamp:date',
             ]],
         ];
     }

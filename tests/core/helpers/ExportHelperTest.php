@@ -40,9 +40,8 @@ class ExportHelperTest extends LuyaWebTestCase
     private function initActiveRecord()
     {
         Yii::$app->sqllite->createCommand()->createTable('csvmodelstub', [
-            'id' => 'INT(11) PRIMARY KEY', 
+            'id' => 'INT(11) PRIMARY KEY',
             'name' => 'varchar(120)'])->execute();
-        
     }
     
     public function testCsvArrayExport()

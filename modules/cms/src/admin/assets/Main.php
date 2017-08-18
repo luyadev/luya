@@ -4,14 +4,14 @@ namespace luya\cms\admin\assets;
 
 /**
  * CMS Main Asset Bundle.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Main extends \yii\web\AssetBundle
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $sourcePath = '@cmsadmin/resources';
 
     /**
@@ -39,8 +39,8 @@ class Main extends \yii\web\AssetBundle
      * @inheritdoc
      */
     public $publishOptions = [
-    		'except' => [
-    				'node_modules/',
-    		]
+            'except' => [
+                    'node_modules/',
+            ]
     ];
 }

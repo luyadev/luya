@@ -2,7 +2,6 @@
 
 namespace luya\cms\menu;
 
-
 use Iterator;
 use yii\base\Object;
 use luya\cms\models\Nav;

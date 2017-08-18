@@ -22,11 +22,11 @@ use luya\helpers\StringHelper;
  */
 class Site extends NgRestModel
 {
-	use CacheableTrait;
+    use CacheableTrait;
 
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'remote_site';
@@ -37,11 +37,11 @@ class Site extends NgRestModel
      */
     public function rules()
     {
-    	return [
-    		[['token', 'url'], 'required'],
-    		[['auth_is_enabled'], 'integer'],
-    		[['token', 'url', 'auth_user', 'auth_pass'], 'string', 'max' => 120],
-    	];
+        return [
+            [['token', 'url'], 'required'],
+            [['auth_is_enabled'], 'integer'],
+            [['token', 'url', 'auth_user', 'auth_pass'], 'string', 'max' => 120],
+        ];
     }
     
     /**
@@ -49,14 +49,14 @@ class Site extends NgRestModel
      */
     public function attributeLabels()
     {
-    	return [
-    		'id' => Module::t('model_site_id'),
-    		'token' => Module::t('model_site_token'),
-    		'url' => Module::t('model_site_url'),
-    		'auth_is_enabled' => Module::t('model_site_auth_is_enabled'),
-    		'auth_user' => Module::t('model_site_auth_user'),
-    		'auth_pass' => Module::t('model_site_auth_pass'),
-    	];
+        return [
+            'id' => Module::t('model_site_id'),
+            'token' => Module::t('model_site_token'),
+            'url' => Module::t('model_site_url'),
+            'auth_is_enabled' => Module::t('model_site_auth_is_enabled'),
+            'auth_user' => Module::t('model_site_auth_user'),
+            'auth_pass' => Module::t('model_site_auth_pass'),
+        ];
     }
     
     /**
@@ -80,13 +80,13 @@ class Site extends NgRestModel
      */
     public function ngRestAttributeTypes()
     {
-    	return [
-    		'token' => 'text',
-    		'url' => 'text',
-    		'auth_is_enabled' => 'toggleStatus',
-    		'auth_user' => 'text',
-    		'auth_pass' => 'password',
-    	];
+        return [
+            'token' => 'text',
+            'url' => 'text',
+            'auth_is_enabled' => 'toggleStatus',
+            'auth_user' => 'text',
+            'auth_pass' => 'password',
+        ];
     }
     
     /**
@@ -94,57 +94,57 @@ class Site extends NgRestModel
      */
     public function ngRestScopes()
     {
-    	return [
-    		['list', ['url', 'token']],
-    		[['create', 'update'], ['url', 'token', 'auth_is_enabled', 'auth_user', 'auth_pass']],
-    		['delete', true],
-    	];
+        return [
+            ['list', ['url', 'token']],
+            [['create', 'update'], ['url', 'token', 'auth_is_enabled', 'auth_user', 'auth_pass']],
+            ['delete', true],
+        ];
     }
     
     /**
      * Ensure the input URL.
-     * 
+     *
      * @return string
      */
     public function getEnsuredUrl()
     {
-    	return Url::ensureHttp(Url::trailing($this->url));
+        return Url::ensureHttp(Url::trailing($this->url));
     }
     
     public function extraFields()
     {
-    	return ['remote'];
+        return ['remote'];
     }
     
     /**
      * Get the remote data.
-     * 
+     *
      * @return array|boolean
      */
     public function getRemote()
     {
-    	return $this->getOrSetHasCache([__CLASS__, $this->getEnsuredUrl()], function() {
-        	$curl = new Curl();
-        	if ($this->auth_is_enabled) {
-        		$curl->setBasicAuthentication($this->auth_user, $this->auth_pass);
-        	}
-        	$curl->get($this->getEnsuredUrl(). 'admin/api-admin-remote?token=' . sha1($this->token));
+        return $this->getOrSetHasCache([__CLASS__, $this->getEnsuredUrl()], function () {
+            $curl = new Curl();
+            if ($this->auth_is_enabled) {
+                $curl->setBasicAuthentication($this->auth_user, $this->auth_pass);
+            }
+            $curl->get($this->getEnsuredUrl(). 'admin/api-admin-remote?token=' . sha1($this->token));
 
-        	$data = $curl->isSuccess() ? Json::decode($curl->response) : false;
-        	
-        	if ($data) {
-        		$data['app_elapsed_time'] = round($data['app_elapsed_time'], 2);
-        		$data['app_debug_style'] = $this->colorize($data['app_debug'], true);
-        		$data['app_debug'] = $this->textify($data['app_debug']);
-        		$data['app_transfer_exceptions_style'] = $this->colorize($data['app_transfer_exceptions']);
-        		$data['app_transfer_exceptions'] = $this->textify($data['app_transfer_exceptions']);
-        		$data['luya_version_style'] = $this->versionize($data['luya_version']);
-        		$data['error'] = false;
-        	} else {
-        		$data['error'] = true;
-        	}
-        	
-        	return $data;
+            $data = $curl->isSuccess() ? Json::decode($curl->response) : false;
+            
+            if ($data) {
+                $data['app_elapsed_time'] = round($data['app_elapsed_time'], 2);
+                $data['app_debug_style'] = $this->colorize($data['app_debug'], true);
+                $data['app_debug'] = $this->textify($data['app_debug']);
+                $data['app_transfer_exceptions_style'] = $this->colorize($data['app_transfer_exceptions']);
+                $data['app_transfer_exceptions'] = $this->textify($data['app_transfer_exceptions']);
+                $data['luya_version_style'] = $this->versionize($data['luya_version']);
+                $data['error'] = false;
+            } else {
+                $data['error'] = true;
+            }
+            
+            return $data;
         }, (60*2));
     }
     
@@ -155,12 +155,12 @@ class Site extends NgRestModel
     
     public function colorize($value, $invert = false)
     {
-    	if ($invert) {
-    		$state = empty($value);
-    	} else {
-    		$state = !empty($value);
-    	}
-    	return $state ? 'background-color:#dff0d8' : 'background-color:#f2dede';
+        if ($invert) {
+            $state = empty($value);
+        } else {
+            $state = !empty($value);
+        }
+        return $state ? 'background-color:#dff0d8' : 'background-color:#f2dede';
     }
     
     public function versionize($version)
@@ -178,23 +178,23 @@ class Site extends NgRestModel
     
     public static function getCurrentLuyaVersion()
     {
-    	if (self::$_currentVersion !== null) {
-    		return self::$_currentVersion;
-    	}
-    	
-    	$curl = new Curl();
-    	$curl->get('https://packagist.org/packages/luyadev/luya-core.json');
-    	$json = Json::decode($curl->response);
-    		
-    		foreach ($json['package']['versions'] as $version =>  $package) {
-    			if ($version == 'dev-master' || !is_numeric(substr($version, 0, 1))) {
-    				continue;
-    			}
-    			
-    			self::$_currentVersion= $package;
-    			return $package;
-    		}
-    		
-    		return false;
+        if (self::$_currentVersion !== null) {
+            return self::$_currentVersion;
+        }
+        
+        $curl = new Curl();
+        $curl->get('https://packagist.org/packages/luyadev/luya-core.json');
+        $json = Json::decode($curl->response);
+            
+        foreach ($json['package']['versions'] as $version =>  $package) {
+            if ($version == 'dev-master' || !is_numeric(substr($version, 0, 1))) {
+                continue;
+            }
+                
+            self::$_currentVersion= $package;
+            return $package;
+        }
+            
+        return false;
     }
 }

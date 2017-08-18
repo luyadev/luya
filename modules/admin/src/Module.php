@@ -62,19 +62,19 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'it' => 'Italiano',
         'el' => 'Ελληνικά',
         'vi' => 'Việt Nam',
-    	'pt' => 'Português',
+        'pt' => 'Português',
     ];
     
     /**
      * @array Provide dashboard objects from last user logins.
      */
     public $dashboardObjects = [
-   		[
-       		'template' => '<table class="table"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>', 
-       		'dataApiUrl' => 'admin/api-admin-common/last-logins',
-       		'title' => ['admin', 'dashboard_lastlogin_title'],
-   		],
-  	];
+        [
+               'template' => '<table class="table"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>',
+               'dataApiUrl' => 'admin/api-admin-common/last-logins',
+               'title' => ['admin', 'dashboard_lastlogin_title'],
+        ],
+    ];
     
     /**
      * @var boolean Enables a two-way factor auth system before logging into the admin

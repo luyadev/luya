@@ -2,7 +2,6 @@
 
 namespace luya\admin\ngrest\plugins;
 
-
 use luya\admin\ngrest\base\Plugin;
 
 /**

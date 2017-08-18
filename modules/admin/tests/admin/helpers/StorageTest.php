@@ -2,7 +2,6 @@
 
 namespace admintests\admin\helpers;
 
-
 use admintests\AdminTestCase;
 use luya\admin\helpers\Storage;
 

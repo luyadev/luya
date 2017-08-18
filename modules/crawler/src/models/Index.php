@@ -2,7 +2,6 @@
 
 namespace luya\crawler\models;
 
-
 use luya\crawler\admin\Module;
 
 
@@ -118,7 +117,6 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
      */
     public static function searchByQuery($query, $languageInfo)
     {
-        
         if (strlen($query) < 1) {
             return [];
         }
@@ -156,7 +154,6 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         
         $index = [];
         foreach ($parts as $word) {
-
             if (empty($word)) {
                 continue;
             }
@@ -184,7 +181,6 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
             } else {
                 $ids[$item['urlwordpos']] = $item['id'];
             }
-        
         }
         
         arsort($ids);

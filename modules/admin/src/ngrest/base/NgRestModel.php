@@ -82,8 +82,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Whether a field is i18n or not.
-     * 
-     * @param string $fieldName The name of the field which is 
+     *
+     * @param string $fieldName The name of the field which is
      * @return boolean
      */
     public function isI18n($fieldName)
@@ -119,7 +119,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *     return ['created_at' => SORT_ASC];
      * }
      * ```
-     * 
+     *
      * If the return value is `false` the sorting **is disabled** for this NgRest CRUD.
      *
      * @return array Return an Array where the key is the field and value the direction. Example `['timestamp' => SORT_ASC]`.
