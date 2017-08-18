@@ -5,6 +5,8 @@ namespace luya\admin\base;
 use Yii;
 use yii\filters\AccessControl;
 use luya\admin\models\UserOnline;
+use yii\filters\ContentNegotiator;
+use yii\web\Response;
 
 /**
  * Base controller for all Admin-Module controllers.
@@ -19,22 +21,52 @@ class Controller extends \luya\web\Controller
     public $layout = false;
 
     /**
-     * @var bool When enabling `$disablePermissionCheck` all actions are not secured by access controller but are do require an authtenticated user (logged in user).
+     * @var boolean When enabling `$disablePermissionCheck` all actions are not secured by access controller but are do require an authtenticated user (logged in user).
      */
     public $disablePermissionCheck = false;
 
+    /**
+     * @var array A list of actions which should be treated as api response, this will convert a returned array into an application/json header.
+     * 
+     * An example controller with an api response action `actionQuery`.
+     * 
+     * ```php
+     * <?php
+     * 
+     * namespace app\modules\mymodule\admin\controllers;
+     * 
+     * use luya\admin\base\Controller;
+     * 
+     * class MyTestController extends Controller
+     * {
+     *     public $disablePermissionCheck = true;
+     * 	
+     * 	   public $apiResponseActions = ['query'];
+     * 	
+     * 	   public function actionIndex()
+     * 	   {
+     * 	       return $this->render('index');
+     * 	   }
+     * 	
+     * 	   public function actionQuery()
+     * 	   {
+     * 		   return ['foo' => time()];
+     * 	   }
+     * }
+	 * ```
+     */
+    public $apiResponseActions = [];
+    
     /**
      * Returns the rules for the AccessControl filter behavior.
      *
      * The rules are applied as following:
      *
-     * + Must be logged in.
-     * + Apply to all actions.
-     * + Ignore if disabledPermissionCheck is enabled.
-     * + Check permission with `\admin\components\Auth::matchRoute()`.
-     * + By default not logged in users.
+     * 1. Administration User must be logged in, this is by default for all actions inside the controller.
+     * 2. Check the current given route against {{luya\admin\components\Auth::matchRoute()}}.
+     *   2a. If {{luya\admin\base\Controller::$disabledPermissionCheck}} enabled, the match route behavior is disabled.
      *
-     * @return array Rule-Definitions
+     * @return array A list of rules.
      * @see yii\filters\AccessControl
      */
     public function getRules()
@@ -68,15 +100,30 @@ class Controller extends \luya\web\Controller
      */
     public function behaviors()
     {
-        return [
+        $behaviors = [
             'access' => [
                 'class' => AccessControl::className(),
                 'user' => Yii::$app->adminuser,
                 'rules' => $this->getRules(),
             ],
         ];
+        
+        if (!empty($this->apiResponseActions)) {
+        	$behaviors['negotiator'] = [
+        		'class' => ContentNegotiator::className(),
+        		'only' => $this->apiResponseActions,
+        		'formats' => [
+        			'application/json' => Response::FORMAT_JSON,
+        		],
+        	];
+        }
+        
+        return $behaviors;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
