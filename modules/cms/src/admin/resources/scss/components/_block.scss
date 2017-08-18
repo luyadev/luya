@@ -19,15 +19,11 @@ $block-padding: 10px !default;
         border-color: $block-border-color;
         border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
         transition: .2s ease-in-out border-color;
-        z-index: 50;
+        z-index: 1;
     }
 
     .block-is-layout > & {
         border-color: transparent;
-
-        &:hover {
-            // border-color: $block-border-color;
-        }
     }
 
     &:before,

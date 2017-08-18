@@ -62,17 +62,17 @@ use luya\helpers\Html;
                             <div ng-if="modalMode==2"  ng-repeat="cfgField in block.cfgs" ng-hide="cfgField.invisible" class="row">
                                 <div class="col">
                                    <zaa-injector dir="cfgField.type"  options="cfgField.options" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}"  placeholder="{{cfgField.placeholder}}" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
-                               </div>    
+                               </div>
                             </div>
                             <button type="submit" class="btn btn-primary"><i class="material-icons left">done</i> Save</button>
                         </form>
                         </div>
                     </div>
                 </modal>
-                <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
+                <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
                 <div ng-if="block.__placeholders.length" class="block-front">
                     <div class="row" ng-repeat="(inlineRowKey, row) in block.__placeholders track by inlineRowKey">
-                        <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderInlineKey, placeholder) in row track by placeholderInlineKey" ng-include="'recursion.html'" />
+                        <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderInlineKey, placeholder) in row track by placeholderInlineKey" ng-include="'recursion.html'"></div>
                     </div>
                 </div>
             </div>
@@ -81,39 +81,61 @@ use luya\helpers\Html;
 </div>
 </script>
 <?= $this->render('_navitem_settings'); ?>
-<ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item nav-item-title">
-        <span class="flag flag-{{lang.short_code}}">
-            <span class="flag-fallback">{{lang.name}}</span>
-        </span>
-        <span>{{ item.title }}</span>
-    </li>
-    <li class="nav-item" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1 && isTranslated">
-        <a class="nav-link" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-click="switchVersion(versionItem.id);">
-            <span>{{ versionItem.version_alias }}</span>
-        </a>
-    </li>
-    <li class="nav-item nav-item-alternative" ng-show="isTranslated">
-        <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=3">
-            <i class="material-icons">add_box</i>
-        </a>
-    </li>
-    <li class="nav-item nav-item-alternative nav-item-icon ml-auto" ng-show="isTranslated">
-        <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=1">
-            <i class="material-icons">edit</i>
-        </a>
-    </li>
-    <li class="nav-item nav-item-alternative nav-item-icon" ng-show="isTranslated">
-        <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="nav-link" ng-show="!liveEditState">
-            <i class="material-icons">open_in_new</i>
-        </a>
-        <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="nav-link">
-            <i class="material-icons">open_in_new</i>
-        </a>
-    </li>
-</ul>
+<div class="cmsadmin-nav-tabs">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item nav-item-title">
+            <span class="flag flag-{{lang.short_code}}">
+                <span class="flag-fallback">{{lang.name}}</span>
+            </span>
+            <span>{{ item.title }}</span>
+        </li>
+    </ul>
+
+    <ul class="nav nav-tabs" role="tablist" has-enough-space loading-condition="loaded" is-flex-box="true">
+        <li class="nav-item nav-item-version" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1 && isTranslated">
+            <a class="nav-link" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-click="switchVersion(versionItem.id);">
+                <span>{{ versionItem.version_alias }}</span>
+            </a>
+        </li>
+        <li class="nav-item nav-item-alternative" ng-show="isTranslated">
+            <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=3">
+                <i class="material-icons">add_box</i>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="nav nav-tabs cmsadmin-fallback-small" role="tablist">
+        <li class="nav-item dropdown" ng-init="toggleVersionsDropdown=false" ng-class="{'show': toggleVersionsDropdown}">
+            <a class="nav-link dropdown-toggle" role="button" ng-click="toggleVersionsDropdown = !toggleVersionsDropdown">Versions (#{{currentPageVersion}})</a>
+            <div class="dropdown-menu" ng-class="{'show': toggleVersionsDropdown}">
+                <button class="dropdown-item" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1 && isTranslated">
+                    <span>{{ versionItem.version_alias }} (#{{versionItem.id}})</span>
+                </button>
+                <div class="dropdown-divider"></div>
+                <span class="dropdown-item" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=3"><i class="material-icons">add_box</i> <span>Add version</span></span>
+            </div>
+        </li>
+    </ul>
+
+    <ul class="nav nav-tabs ml-auto flex-no-wrap" role="tablist">
+        <li class="nav-item nav-item-alternative nav-item-icon ml-auto" ng-show="isTranslated">
+            <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=1">
+                <i class="material-icons">edit</i>
+            </a>
+        </li>
+        <li class="nav-item nav-item-alternative nav-item-icon" ng-show="isTranslated">
+            <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="nav-link" ng-show="!liveEditState">
+                <i class="material-icons">open_in_new</i>
+            </a>
+            <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="nav-link">
+                <i class="material-icons">open_in_new</i>
+            </a>
+        </li>
+    </ul>
+</div>
+
 <div ng-if="!loaded">loading...</div>
-<div class="cmsadmin-page" ng-show="isTranslated && loaded">
+<div class="cmsadmin-page" ng-if="isTranslated && loaded">
     <div class="row" ng-if="item.nav_item_type==1" ng-repeat="(key, row) in container.__placeholders track by key">
         <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'" />
     </div>

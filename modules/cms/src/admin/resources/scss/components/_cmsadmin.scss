@@ -81,6 +81,27 @@
     }
 }
 
+.cmsadmin-nav-tabs {
+    display: flex;
+}
+
+.cmsadmin-fallback-small {
+    display: none;
+}
+
+.nav-tabs {
+    &.has-enough-space + .cmsadmin-fallback-small {
+        display: none;
+    }
+    &.not-enough-space {
+        display: none;
+
+        + .cmsadmin-fallback-small {
+            display: block;
+        }
+    }
+}
+
 .cmsadmin-pages {
     display: flex;
     flex: 1 1 100%;

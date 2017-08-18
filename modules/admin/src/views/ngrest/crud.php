@@ -150,12 +150,13 @@ $this->beginBody();
                     </tr>
                 </tbody>
             </table>
+
             <div ng-show="data.list.length == 0" class="alert"><?= Module::t('ngrest_crud_empty_row'); ?></div>
 
-            <div class="pagination-wrapper">
-                <div class="pagination" ng-if="pager && !config.pagerHiddenByAjaxSearch">
+            <div class="pagination-wrapper" ng-if="pager && !config.pagerHiddenByAjaxSearch">
+                <div class="pagination">
 
-                    <ul class="pagination-list" has-enough-space>
+                    <ul class="pagination-list" has-enough-space loading-condition="pager && !config.pagerHiddenByAjaxSearch">
                         <li class="page-item page-item-icon" ng-class="{'disabled' : pager.currentPage == 1}" >
                             <a class="page-link" ng-click="pagerPrevClick()"><i class="material-icons">keyboard_arrow_left</i></a>
                         </li>

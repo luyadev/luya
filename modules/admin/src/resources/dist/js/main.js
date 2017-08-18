@@ -4813,26 +4813,71 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
         }
     });
 
-    zaa.directive("hasEnoughSpace", function($window, $document) {
-        return function (scope, element, attrs) {
+    zaa.directive("hasEnoughSpace", function($window, $document, $timeout) {
+        return {
+            restrict: "A",
+            scope: {
+                "loadingCondition": "=",
+                "isFlexBox": "="
+            },
+            link: function (scope, element, attrs) {
+                scope.elementWidth = 0;
 
-            function checkWidth() {
-                if(element.parent().outerWidth() <= element.outerWidth()) {
-                    element.removeClass('has-enough-space').addClass('not-enough-space');
-                } else {
-                    element.removeClass('not-enough-space').addClass('has-enough-space');
+                var getElementOriginalWidth = function() {
+                    var elementOriginalWidth = 0;
+                    var elementClone = element.clone().insertAfter(element);
+
+                    elementClone.css({
+                        'position': 'fixed',
+                        'top': 0,
+                        'left': 0,
+                        'visibility': 'hidden'
+                    });
+
+                    if(elementClone.css('display') === 'none') {
+                        elementClone.css('display', scope.isFlexBox ? 'flex' : 'block');
+                    }
+
+                    elementOriginalWidth = elementClone.outerWidth();
+
+                    elementClone.remove();
+
+                    return elementOriginalWidth;
+                };
+
+
+                function checkSize() {
+                    $timeout(function() {
+                        if(!scope.elementOriginalWidth) {
+                            scope.elementOriginalWidth = getElementOriginalWidth();
+                        }
+
+                        if(element.hasClass('not-enough-space')) {
+                            element.removeClass('not-enough-space');
+                            element.addClass('has-enough-space');
+                        }
+
+                        var currentElementWidth = element.outerWidth();
+                        if(currentElementWidth < scope.elementOriginalWidth) {
+                            element.removeClass('has-enough-space').addClass('not-enough-space');
+                        } else {
+                            element.removeClass('not-enough-space').addClass('has-enough-space');
+                        }
+                    });
                 }
+
+                angular.element($window).on('resize', function() {
+                    checkSize();
+                });
+
+                scope.$watch('loadingCondition', function(n) {
+                    if(n == true) {
+                        checkSize();
+                    }
+                });
+
             }
-
-            angular.element($window).on('resize', function() {
-                checkWidth();
-            });
-
-            checkWidth();
-            setTimeout( function() {
-                checkWidth();
-            }, 500);
-        };
+        }
     });
 
 
