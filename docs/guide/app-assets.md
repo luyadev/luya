@@ -51,8 +51,7 @@ $asset = MyTestAsset::register($this); // $this represents the view object
 
 ### Publish Options
 
-To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders to be published.
-For example in the LUYA kickstarter project, you'll find both the 'boostrap' and the 'css' folder in the publish options:
+To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders to be published. For example in the LUYA kickstarter project, you'll find both the 'boostrap' and the 'css' folder in the publish options:
 
 ```php
 public $publishOptions = [
@@ -63,7 +62,7 @@ public $publishOptions = [
 ];
 ```
 
-Its very common to ignore the `node_moduels` folder when working with gulp process, to do so use the following `except` property:
+Or you can do also the opposite of this behavior by select which folder should **not** be copied within the assets folder. To do so configure the `except` property:
 
 ```php
 public $publishOptions = [
