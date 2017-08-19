@@ -1,6 +1,6 @@
 # LUYA Mail Component
 
-LUYA is shipped with a {{luya\components\Mail}} component who is using the PHPMailer. You can access the mail component with `Yii::$app->mail` and start sending mails. To configure the component u can override class properties in your config like this:
+LUYA is shipped with a {{luya\components\Mail}} component who is using the PHPMailer. You can access the mail component with `Yii::$app->mail` and start sending mails. To configure the component just override class properties in your config like this:
 
 ```php
 'components' => [
@@ -15,34 +15,11 @@ LUYA is shipped with a {{luya\components\Mail}} component who is using the PHPMa
 ]
 ```
 
-In order to test your configurations you can run the console command `health/mailer`. The command will try to connect to your mail server trough your provided credentials. By default the mailer component requires an SMTP Server and is not using the phpmail functions.
+In order to test your configurations you can run the console command `health/mailer`. The command will try to connect to your mail server trough your provided credentials. By default the mailer component requires an SMTP Server and is not using PHPs mail function.
 
 ```
 ./vendor/bin/luya health/mailer
 ```
-
-## Define a Mail Template
-
-In order to define a HTML template for your mails, add `'layout' => '@app/views/maillayout.php'` to the mail component's configuration above.
-
-Example template:
-
-```php
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>My App</title>
-</head>
-<body>
-<img src="<?= luya\helpers\Url::base(true); ?>/images/logo.png" />
-<?= $content; ?>
-</body>
-</html>
-```
-
-{{\luya\helpers\Url::base}} can be used to get the absolute server URL.
-
 ## Compose new E-Mail
 
 To quickly send an email in one line you can use the object chain mode like the example below:
@@ -96,3 +73,24 @@ if (!$mail->send()) {
 }
 ```
 
+## Define a Mail Template
+
+In order to define a HTML template for your mails, add `'layout' => '@app/views/maillayout.php'` to the mail component's configuration above.
+
+Example template:
+
+```php
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My App</title>
+</head>
+<body>
+<img src="<?= luya\helpers\Url::base(true); ?>/images/logo.png" />
+<?= $content; ?>
+</body>
+</html>
+```
+
+{{\luya\helpers\Url::base}} can be used to get the absolute server URL.
