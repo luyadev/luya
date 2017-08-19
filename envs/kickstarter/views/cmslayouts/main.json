@@ -2,6 +2,6 @@
 	"rows" : [
 	    [
 	        {"cols": 12, "var": "content", "label": "Main Container"}
-	    ],
+	    ]
 	]
 }
