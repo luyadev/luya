@@ -123,7 +123,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     }
 
     /**
-     * @inheritdoc
+     * @return array|\luya\admin\components\AdminMenuBuilderInterface
      */
     public function getMenu()
     {
@@ -175,15 +175,13 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      */
     public function getAuthApis()
     {
-        $menu = $this->getMenu();
-        
-        if (is_object($menu)) {
-            $perm = $menu->permissionApis;
-        } else {
-            $perm = $this->_permissionApis;
-        }
-        
-        return ArrayHelper::merge($this->extendPermissionApis(), $perm);
+    	$menu = $this->getMenu();
+    	
+    	if (!$menu) {
+    		return $this->extendPermissionApis();
+    	}
+    	
+        return ArrayHelper::merge($this->extendPermissionApis(), $menu->getPermissionApis());
     }
 
     /**
@@ -193,14 +191,12 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      */
     public function getAuthRoutes()
     {
-        $menu = $this->getMenu();
-        
-        if (is_object($menu)) {
-            $perm = $menu->permissionRoutes;
-        } else {
-            $perm = $this->_permissionRoutes;
-        }
-
-        return ArrayHelper::merge($this->extendPermissionRoutes(), $perm);
+    	$menu = $this->getMenu();
+    	 
+    	if (!$menu) {
+    		return $this->extendPermissionRoutes();
+    	}
+    	
+        return ArrayHelper::merge($this->extendPermissionRoutes(), $menu->getPermissionRoutes());
     }
 }

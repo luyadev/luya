@@ -53,15 +53,9 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      */
     protected $moduleContext;
     
-    /**
-     * @var array List of all permission APIs.
-     */
-    public $permissionApis = [];
     
-    /**
-     * @var array List of all permission Routes.
-     */
-    public $permissionRoutes = [];
+    
+    
     
     /**
      * @param \luya\base\AdminModuleInterface $module
@@ -71,6 +65,26 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     {
         $this->moduleContext = $module;
         parent::__construct($config);
+    }
+    
+    /**
+     * @var array List of all permission APIs.
+     */
+    private $_permissionApis = [];
+    
+    public function getPermissionApis()
+    {
+    	return $this->_permissionApis;
+    }
+    
+    /**
+     * @var array List of all permission Routes.
+     */
+    private $_permissionRoutes = [];
+    
+    public function getPermissionRoutes()
+    {
+    	return $this->_permissionRoutes;
     }
     
     /**
@@ -124,7 +138,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'searchModelClass' => $searchModelClass,
         ];
     
-        $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
+        $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
         self::$index++;
         return $this;
@@ -167,7 +181,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'options' => $this->verifyOptions($options),
         ];
     
-        $this->permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
+        $this->_permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
     
         return $this;
     }
@@ -195,7 +209,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'options' => $this->verifyOptions($options),
         ];
     
-        $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
+        $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
         return $this;
     }

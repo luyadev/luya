@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Added
 
 - [#1292](https://github.com/luyadev/luya/issues/1292) NEW ADMIN UI!
+- [#1361](https://github.com/luyadev/luya/issues/1361) Added ability to provide json file for cms layouts in order to render the grid in the admin according to the frontend.
 - [#1375](https://github.com/luyadev/luya/issues/1375) Added Import Helper class which provides functions to parse CSV files to Arrays.
 - [#1332](https://github.com/luyadev/luya/issues/1332) Added Export Helper class in order to generate CSV Files from Arrays.
 - [#1312](https://github.com/luyadev/luya/issues/1312) ArrayHelper::generateRange for select dropdowns with numeric values.

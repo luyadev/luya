@@ -59,4 +59,8 @@ interface AdminMenuBuilderInterface
      * @return array The menu array with all its nodes, subnodes routes and apis.
      */
     public function menu();
+    
+    public function getPermissionApis();
+    
+    public function getPermissionRoutes();
 }

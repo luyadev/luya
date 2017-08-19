@@ -57,6 +57,14 @@ class CmslayoutImporter extends Importer
                     
                     try {
                         $json = Json::decode($json);
+                        
+                        // the rows column defines the placeholders
+                        // if the rows column does not exists fail back to normal layout processing
+                        if (isset($json['rows'])) {
+                        	$json = $json['rows'];
+                        } else {
+                        	$json = false;
+                        }
                     } catch (\Exception $e) {
                         $json = false;
                     }
