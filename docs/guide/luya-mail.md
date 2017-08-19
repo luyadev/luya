@@ -17,9 +17,10 @@ LUYA is shipped with a {{luya\components\Mail}} component who is using the PHPMa
 
 In order to test your configurations you can run the console command `health/mailer`. The command will try to connect to your mail server trough your provided credentials. By default the mailer component requires an SMTP Server and is not using PHPs mail function.
 
-```
+```sh
 ./vendor/bin/luya health/mailer
 ```
+
 ## Compose new E-Mail
 
 To quickly send an email in one line you can use the object chain mode like the example below:
@@ -93,4 +94,4 @@ Example template:
 </html>
 ```
 
-{{\luya\helpers\Url::base}} can be used to get the absolute server URL.
+{{\luya\helpers\Url::$base}} can be used to get the absolute server URL.

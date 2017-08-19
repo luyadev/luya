@@ -63,7 +63,7 @@ class DefaultController extends \luya\web\Controller
 }
 ```
 
-When {{luya\Hook::on}} is called multiple times in a request cycle, the output will concated and is sorted by execution time.
+When {{luya\Hook::on()}} is called multiple times in a request cycle, the output will concated and is sorted by execution time.
 
 ## Using Array Output
 
@@ -80,7 +80,7 @@ Hook::on('fooBarArray', function($hook) {
 });
 ```
 
-As the {{luya\Hook::on}} method can be called multiple times the hook iteration array contains now 4 elements which can be rendered as following:
+As the {{luya\Hook::iterate()}} method can be called multiple times the hook iteration array contains now 4 elements which can be rendered as following:
 
 ```php
 <ul>

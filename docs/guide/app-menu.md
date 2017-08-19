@@ -6,17 +6,17 @@ You can access the {{\luya\cms\Menu}} component trough `Yii::$app->menu`. This c
 
 When you request a menu item, you will always get a {{\luya\cms\menu\Item}} object which provides a lot of getter methods.
 
-The menu component automatically loads the {{\luya\cms\Menu::getCurrent}} active menu item based on your current language which will be evaluated by the {{\luya\web\Composition}} component.
+The menu component automatically loads the {{\luya\cms\Menu::getCurrent()}} active menu item based on your current language which will be evaluated by the {{\luya\web\Composition}} component.
 
 ## Get the current Page
 
-One of the most important features is to get the current active menu item, to retrieve the current menu object use {{\luya\cms\Menu::getCurrent}}. 
+One of the most important features is to get the current active menu item, to retrieve the current menu object use {{\luya\cms\Menu::getCurrent()}}. 
 
 ```php
 echo Yii::$app->menu->current->link; // equal: Yii::$app->menu->getCurrent()->getLink():
 ```
 
-Where {{\luya\cms\Menu::getCurrent}} returns a {{\luya\cms\menu\Item}} you can access other informations like {{\luya\cms\menu\Item::getLink}}, {{\luya\cms\menu\Item::getTitle}} etc.
+Where {{\luya\cms\Menu::getCurrent()}} returns a {{\luya\cms\menu\Item}} you can access other informations like {{\luya\cms\menu\Item::getLink()}}, {{\luya\cms\menu\Item::getTitle()}} etc.
 
 ## Get the Homepage
 
@@ -28,9 +28,9 @@ echo Yii::$app->menu->home->title; // equal: Yii::$app->menu->getHome()->getTitl
 
 ## Building menu Navigations
 
-To list navigation data of the menu use the {{\luya\cms\Menu::find}} method which returns a {{\luya\cms\menu\Query}} object you can defined where statements and return either {{\luya\cms\menu\Query::one}}, {{\luya\cms\menu\Query::all}} or {{\luya\cms\menu\Query::count}}. To shorten you can use the {{\luya\cms\Menu::findAll}} or {{\luya\cms\Menu::findOne}} method.
+To list navigation data of the menu use the {{\luya\cms\Menu::find()}} method which returns a {{\luya\cms\menu\Query}} object you can defined where statements and return either {{\luya\cms\menu\Query::one()}}, {{\luya\cms\menu\Query::all()}} or {{\luya\cms\menu\Query::count()}}. To shorten you can use the {{\luya\cms\Menu::findAll()}} or {{\luya\cms\Menu::findOne()}} method.
 
-Using {{\luya\cms\menu\Query::one}} or {{\luya\cms\Menu::findOne}} return an {{\luya\cms\menu\Item}}. Foreachable responses from {{\luya\cms\menu\Query::all}} or {{\luya\cms\Menu::findAll}} return an {{\luya\cms\menu\Iterator}} instead.
+Using {{\luya\cms\menu\Query::one()}} or {{\luya\cms\Menu::findOne()}} return an {{\luya\cms\menu\Item}}. Foreachable responses from {{\luya\cms\menu\Query::all()}} or {{\luya\cms\Menu::findAll()}} return an {{\luya\cms\menu\Iterator}} instead.
 
 #### find()
 
@@ -43,7 +43,7 @@ As Navigations are stored in containers you mostly want to return the root level
 <?php endforeach; ?>
 </ul>
 ```
-Which is equals to the {{\luya\cms\Menu::findAll}} method with where parameters:
+Which is equals to the {{\luya\cms\Menu::findAll()}} method with where parameters:
 
 ```php
 <ul>

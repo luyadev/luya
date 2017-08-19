@@ -69,10 +69,10 @@ In order to retrieve values from configurations (`$this->[METHOD]`):
 
 |Type|Method
 |----|------
-|var|{{luya\cms\base\PhpBlockView::varValue}}
-|cfg|{{luya\cms\base\PhpBlockView::cfgValue}}
-|extra|{{luya\cms\base\PhpBlockView::extraValue}}
-|placeholder|{{luya\cms\base\PhpBlockView::placeholderValue}}
+|var|{{luya\cms\base\PhpBlockView::varValue()}}
+|cfg|{{luya\cms\base\PhpBlockView::cfgValuee()}}
+|extra|{{luya\cms\base\PhpBlockView::extraValuee()}}
+|placeholder|{{luya\cms\base\PhpBlockView::placeholderValuee()}}
 
 Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
 
@@ -143,7 +143,7 @@ the following keys are available:
 + **id**: Return the unique identifier from the cms context
 + **blockId**: Returns the id of this block (unique identifier)
 + **context**: Returns frontend or backend to find out in which context you are.
-+ **pageObject**: Returns the {{\luya\cms\models\NavItem}} Object where you can run \luya\cms\models\NavItem::getNav}} to retrievew the Nav Object.
++ **pageObject**: Returns the {{\luya\cms\models\NavItem}} Object where you can run {{luya\cms\models\NavItem::getNav()}} to retrievew the Nav Object.
 + **isFirst**: Returns whether this block is the first in its placeholder or not.
 + **isLast**: Return whether his block is the last in its placeholder or not.
 + **index**: Returns the number of the index/position within this placheholder.

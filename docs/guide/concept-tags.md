@@ -55,4 +55,4 @@ I am tooltip[John Doe](This showns when hover, over me).
 
 ## Parse Text
 
-Sometimes you are not in a context where the parsing is enabled, so you can parser your content by using the {{luya\TagParser::convert}} or even directly with markdown integration {{luya\TagParser::convertWithMarkdown}} this enables you to parse tags even in your controllers or views.
+Sometimes you are not in a context where the parsing is enabled, so you can parser your content by using the {{luya\TagParser::convert()}} or even directly with markdown integration {{luya\TagParser::convertWithMarkdown()}} this enables you to parse tags even in your controllers or views.

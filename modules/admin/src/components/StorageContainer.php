@@ -27,11 +27,11 @@ use luya\admin\filters\MediumThumbnail;
  * As files, images and folders implement the same traits you can also read more about enhanced usage:
  *
  * + Querying Data with {{\luya\admin\storage\QueryTrait}}
- * + Where conditions {{\luya\admin\storage\QueryTrait::where}}
+ * + Where conditions {{\luya\admin\storage\QueryTrait::where()}}
  *
  * ## Handling Files
  *
- * First adding a new file to the Storage system using the {{\luya\admin\components\StorageContainer::addFile}} method.
+ * First adding a new file to the Storage system using the {{\luya\admin\components\StorageContainer::addFile()}} method.
  *
  * ```php
  * Yii::$app->storage->addFile('/the/path/to/File.jpg', 'File.jpg', 0, 1);
@@ -466,7 +466,7 @@ class StorageContainer extends Component
      *
      * This method returns an array with images matching there $args array condition. If no argument is provided all images will be returned.
      *
-     * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
+     * See {{\luya\admin\storage\QueryTrait::where()}} for condition informations.
      *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\image\Iterator An iterator object containing all image found for the condition provided.
@@ -481,7 +481,7 @@ class StorageContainer extends Component
      *
      * This method returns a single image matching the where condition, if the multiple results match the condition the first one will be picked.
      *
-     * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
+     * See {{\luya\admin\storage\QueryTrait::where()}} for condition informations.
      *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\image\Item The file item object.
@@ -639,7 +639,7 @@ class StorageContainer extends Component
      *
      * If no argument is provided all images will be returned.
      *
-     * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
+     * See {{\luya\admin\storage\QueryTrait::where()}} for condition informations.
      *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\folder\Iterator An iterator object containing all image found for the condition provided.
@@ -654,7 +654,7 @@ class StorageContainer extends Component
      *
      * This method returns a single fpöder matching the where condition, if the multiple results match the condition the first one will be picked.
      *
-     * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
+     * See {{\luya\admin\storage\QueryTrait::where()}} for condition informations.
      *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\folder\Item The folder item object.
@@ -719,7 +719,7 @@ class StorageContainer extends Component
     /**
      * Get a single filter by filter identifier from the filters array.
      *
-     * @param integer $filterIdentifier The filter identifier to find use {{luya\admin\base\Filter::identifier}} method.
+     * @param integer $filterIdentifier The filter identifier to find use {{luya\admin\base\Filter::identifier()}} method.
      * @return boolean|array The filter array or false if not found.
      */
     public function getFiltersArrayItem($filterIdentifier)

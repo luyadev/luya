@@ -449,8 +449,8 @@ class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
      * Wrapper method to get all menu items for the current language without hidden items for
      * the specific where statement.
      *
-     * @param array $where See {{\luya\cms\menu\Query::where}}
-     * @param boolean $preloadModels Whether to preload all models for the given menu Query. See {{luya\cms\menu\Query::preloadModels}}
+     * @param array $where See {{\luya\cms\menu\Query::where()}}
+     * @param boolean $preloadModels Whether to preload all models for the given menu Query. See {{luya\cms\menu\Query::preloadModels()}}
      * @see \luya\cms\menu\Query::where()
      * @return \luya\cms\menu\QueryIterator
      */
@@ -463,7 +463,7 @@ class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
      * Wrapper method to get one menu item for current language without hidden items for the
      * sepcific where statement.
      *
-     * @param array $where See {{\luya\cms\menu\Query::where}}
+     * @param array $where See {{\luya\cms\menu\Query::where()}}
      * @see \luya\cms\menu\Query::where()
      * @return \luya\cms\menu\Item
      */

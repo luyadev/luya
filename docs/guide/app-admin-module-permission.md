@@ -2,7 +2,7 @@
 
 LUYA provides an out of the box permission system. Menu entries are bound to the permission system, but you can also define custom permissions. In order to update permissions run the `import`console command, then all permissions will be stored in the database and you can allocat them to a user group.
 
-Permissions are commonly part of the {{luya\admin\base\Module::getMenu}} method but can also be defined in {{luya\admin\base\Module::extendPermissionApis}} or {{luya\admin\base\Module::extendPermissionRoutes}}.
+Permissions are commonly part of the {{luya\admin\base\Module::getMenu()}} method but can also be defined in {{luya\admin\base\Module::extendPermissionApis()}} or {{luya\admin\base\Module::extendPermissionRoutes()}}.
 
 ## The Menu
 
@@ -35,7 +35,7 @@ Please see the {{luya\admin\components\AdminMenuiBuilder api documentation for f
 
 ## Route and Api permssions without Menu
 
-You can also setup permissions which are not regulated trough {{luya\admin\base\Module::getMenu}}, therefore configurate the {{luya\admin\base\Module}} class and override the following methods:
+You can also setup permissions which are not regulated trough {{luya\admin\base\Module::getMenu()}}, therefore configurate the {{luya\admin\base\Module}} class and override the following methods:
 
 ```php
 public function extendPermissionApis()

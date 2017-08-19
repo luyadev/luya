@@ -7,10 +7,13 @@ namespace luya\helpers;
  *
  * Extends the {{yii\helpers\ArrayHelper}} class by some usefull functions like:
  *
- * + {{luya\helpers\ArrayHelper::toObject}}
- * + {{luya\helpers\ArrayHelper::arrayUnshiftAssoc}}
- * + {{luya\helpers\ArrayHelper::typeCast}}
- * + {{luya\helpers\ArrayHelper::search}}
+ * + {{luya\helpers\ArrayHelper::toObject()}}
+ * + {{luya\helpers\ArrayHelper::arrayUnshiftAssoc()}}
+ * + {{luya\helpers\ArrayHelper::typeCast()}}
+ * + {{luya\helpers\ArrayHelper::search()}}
+ * + {{luya\helpers\ArrayHelper::searchColumn()}}
+ * + {{luya\helpers\ArrayHelper::searchColumns()}}
+ * + {{luya\helpers\ArrayHelper::generateRange()}}
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

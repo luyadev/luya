@@ -134,12 +134,12 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     ];
 
     /**
-     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected asset files to assign.
+     * @var array This property is used by the {{luya\web\Bootstrap::run()}} method in order to set the collected asset files to assign.
      */
     public $assets = [];
     
     /**
-     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected menu items from all admin modules and build the menu.
+     * @var array This property is used by the {{luya\web\Bootstrap::run()}} method in order to set the collected menu items from all admin modules and build the menu.
      */
     public $moduleMenus = [];
     
@@ -231,7 +231,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     /**
      * Setter for js translations files.
      *
-     * This setter method is used by the {{luya\web\Bootstrap::run}} to assign all js transaltion files from the admin modules.
+     * This setter method is used by the {{luya\web\Bootstrap::run()}} to assign all js transaltion files from the admin modules.
      *
      * @param array $translations
      */

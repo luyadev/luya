@@ -10,11 +10,12 @@ use Exception;
  *
  * Extends the {{yii\helpers\FileHelper}} class by some usefull functions like:
  *
- * + {{luya\helpers\FileHelper::humanReadableFilesize}}
- * + {{luya\helpers\FileHelper::ensureExtension}}
- * + {{luya\helpers\FileHelper::md5sum}}
- * + {{luya\helpers\FileHelper::writeFile}}
- * + {{luya\helpers\FileHelper::getFileContent}}
+ * + {{luya\helpers\FileHelper::humanReadableFilesize()}}
+ * + {{luya\helpers\FileHelper::ensureExtension()}}
+ * + {{luya\helpers\FileHelper::md5sum()}}
+ * + {{luya\helpers\FileHelper::writeFile()}}
+ * + {{luya\helpers\FileHelper::getFileContent()}}
+ * + {{luya\helpers\FileHelper::unlink()}}
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

@@ -6,11 +6,11 @@ The `NgRest` crud model class is the based class for the api, based on this Acti
 
 ## Where do i configure?
 
-Each NgRest Model does have a {{luya\admin\ngrest\base\NgRestModel::ngrestAttributeTypes}} method where you can define what type of fields you have and {{luya\admin\ngrest\base\NgRestModel::ngRestConfig}} where you can define the fields for the specific Scope (crud, list, create).
+Each NgRest Model does have a {{luya\admin\ngrest\base\NgRestModel::ngrestAttributeTypes()}} method where you can define what type of fields you have and {{luya\admin\ngrest\base\NgRestModel::ngRestConfig()}} where you can define the fields for the specific Scope (crud, list, create).
 
 #### Define attribute types
 
-To define an attribute type for a specific attribute, you have to override the {{luya\admin\ngrest\base\NgRestModel::ngrestAttributeTypes}} method by returning an array where the key is the field and value the config of the [NgRest Plugin](ngrest-plugins.md).
+To define an attribute type for a specific attribute, you have to override the {{luya\admin\ngrest\base\NgRestModel::ngrestAttributeTypes()}} method by returning an array where the key is the field and value the config of the [NgRest Plugin](ngrest-plugins.md).
 
 An example of a defintions:
 
@@ -44,7 +44,7 @@ There are 4 specific Scope you can use to configure. A pointer as like a section
 |delete    |Define whether items of the data table can be deleted or not. To activate deletion us `$config->delete = true`.
 |aw        |[ActiveWindows](ngrest-activewindow.md) Register/add active windows, to this config. Active windows are like buttons you can add to each item record.
 
-As you know what section/Scope you can define with your already defined attributes you have to define the {{luya\admin\ngrest\base\NgRestModel::ngRestConfig}} method, this could look as followed:
+As you know what section/Scope you can define with your already defined attributes you have to define the {{luya\admin\ngrest\base\NgRestModel::ngRestConfig()}} method, this could look as followed:
 
 ```php
 public function ngRestScopes()
@@ -103,7 +103,7 @@ public function extraFields()
 }
 ```
 
-Now we have an extraField with the name `registeredCount`. When accessing this extra Field the getter method `getRegisteredCount()` will execute and the number of users will be returned. In order to get this additional into the crud list grid view you have to define the extra field in {{\luya\admin\ngrest\base\NgRestModel::ngrestExtraAttributeTypes}} like the other not extra attribute fields.
+Now we have an extraField with the name `registeredCount`. When accessing this extra Field the getter method `getRegisteredCount()` will execute and the number of users will be returned. In order to get this additional into the crud list grid view you have to define the extra field in {{\luya\admin\ngrest\base\NgRestModel::ngrestExtraAttributeTypes()}} like the other not extra attribute fields.
 
 ```php
 public function ngrestExtraAttributeTypes()
@@ -114,7 +114,7 @@ public function ngrestExtraAttributeTypes()
 }
 ```
 
-Now the only thing you have to is to add the field to the {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes}} defintion.
+Now the only thing you have to is to add the field to the {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes()}} defintion.
 
 ```php
 public function ngRestScopes($)
@@ -143,7 +143,7 @@ Now the default ordering of the grid list data is by the field *timestamp_create
 
 ## Grid List Group Fields
 
-To generate more administration user friendly crud list panels the ability to group fields helps a lot in case of usability. This will automtically group the field values for the defined field and removes the column if the defined group field. To define a default group by policy override the {{\luya\admin\ngrest\base\NgRestModel::ngRestGroupByField}} method like follow, returning a string with the field name where the group should be applied to:
+To generate more administration user friendly crud list panels the ability to group fields helps a lot in case of usability. This will automtically group the field values for the defined field and removes the column if the defined group field. To define a default group by policy override the {{\luya\admin\ngrest\base\NgRestModel::ngRestGroupByField()}} method like follow, returning a string with the field name where the group should be applied to:
 
 ```php
 public function ngRestGroupByField()
@@ -156,7 +156,7 @@ The field (`cat_id` in the example) must exist in the list pointer config array.
 
 ## Grid List Adding User-Filters
 
-Sometimes the users should filter the crud list data based on different where conditions, assuming we have some calendar data with huge amount of data. Now the administration user should have the possibility to see already past calendar entries, and upcoming calendar entries. To do so we create a new filter for this NgRest Model. To provide filters we have to override the method {{\luya\admin\ngrest\base\NgRestModel::ngRestFilters}} and provide an array with a name and a find statement to collect the data, for example the example described above:
+Sometimes the users should filter the crud list data based on different where conditions, assuming we have some calendar data with huge amount of data. Now the administration user should have the possibility to see already past calendar entries, and upcoming calendar entries. To do so we create a new filter for this NgRest Model. To provide filters we have to override the method {{\luya\admin\ngrest\base\NgRestModel::ngRestFilters()}} and provide an array with a name and a find statement to collect the data, for example the example described above:
 
 ```php
 public function ngRestFilters()
@@ -173,7 +173,7 @@ Keep in mind, the query provider [yii\data\ActiveDataProvider](http://www.yiifra
 
 ## Override ngRestFind
 
-In order to customize the grid list query to hide (or join) data from the grid list view, you can override the {{\luya\admin\ngrest\base\NgRestModel::ngRestFind}} public static method. This method will be called to retrieve all your data. For example we assume you want to list all news entries which `is_archived` is not 1 (represents an archived news message) than you could override the ngRestFind method as followed:
+In order to customize the grid list query to hide (or join) data from the grid list view, you can override the {{\luya\admin\ngrest\base\NgRestModel::ngRestFind()}} public static method. This method will be called to retrieve all your data. For example we assume you want to list all news entries which `is_archived` is not 1 (represents an archived news message) than you could override the ngRestFind method as followed:
 
 ```php
 public static function ngRestFind()
@@ -222,7 +222,7 @@ public function ngRestConfig($config)
 
 ## Crud Relation Tabs
 
-Sometimes its usefull and common to directly manage relational data inside the current ngrest crud. Therefore we have created something called {{\luya\admin\ngrest\base\NgRestModel::ngRestRelations}}. Inside this method you can define relations which are also based on the NgRest concept.
+Sometimes its usefull and common to directly manage relational data inside the current ngrest crud. Therefore we have created something called {{\luya\admin\ngrest\base\NgRestModel::ngRestRelations()}}. Inside this method you can define relations which are also based on the NgRest concept.
 
 ```php
 public function ngRestRelations()
@@ -235,7 +235,7 @@ public function ngRestRelations()
 
 The above example will use the `getSales()` method of the current model where you are implementing this relation. The `getSales()` must return an {{yii\db\QueryInterface}} Object, for example you can use `$this->hasMany(Model, ['key' => 'rel'])` or `new \yii\db\Query()`.
 
-> Tip: If you generate an NgRest model for a relation which is not used in any other situations you can hide those items from the menu, but not from the permission system. To hide en element add the hiddenInMenu option in the {{\luya\admin\base\Module::getMenu}} method of the module as following: `itemApi('name', 'route', 'icon', 'api', ['hiddenInMenu' => true])`.
+> Tip: If you generate an NgRest model for a relation which is not used in any other situations you can hide those items from the menu, but not from the permission system. To hide en element add the hiddenInMenu option in the {{\luya\admin\base\Module::getMenu()}} method of the module as following: `itemApi('name', 'route', 'icon', 'api', ['hiddenInMenu' => true])`.
 
 ## Soft Deletion 
 
@@ -259,7 +259,7 @@ public static function FieldStateDescriber()
 
 ## Scenarios
 
-The rest api uses the `restcreate` and `restupdate` scenarios in order to apply the rules. By default those rules are equals to the `default` rules which is generated by the {{luya\admin\ngrest\base\NgRestModel::scenarios}} method.
+The rest api uses the `restcreate` and `restupdate` scenarios in order to apply the rules. By default those rules are equals to the `default` rules which is generated by the {{luya\admin\ngrest\base\NgRestModel::scenarios()}} method.
 
 If you want to customize the rest scenarios fields as they may differ from the default rule based scenario fields you can override those fields:
 

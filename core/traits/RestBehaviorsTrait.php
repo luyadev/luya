@@ -54,7 +54,7 @@ trait RestBehaviorsTrait
     }
 
     /**
-     * Override the default {{yii\rest\Controller::behaviors}} method.
+     * Override the default {{yii\rest\Controller::behaviors()}} method.
      * The following changes are differ to the base implementation:
      *
      * + If {{luya\rest\UserBehaviorInterface}} is **not** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is removed.

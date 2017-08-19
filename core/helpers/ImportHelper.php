@@ -17,7 +17,7 @@ class ImportHelper
      *
      * The filename can be either a resource from fopen() or a string containing the csv data. Filenames will be wrapped trough {{Yii::getAlias()}} method.
      *
-     * @param string $filename Can be either a filename which is parsed by {{luya\helpers\FileHelper::getFileContent}} or a string with the contained csv data.
+     * @param string $filename Can be either a filename which is parsed by {{luya\helpers\FileHelper::getFileContent()}} or a string with the contained csv data.
      * @param array $options Provide options to the csv
      * + removeHeader: boolean, Whether the import csv contains a header in the first row to skip or not. Default value is false.
      * + delimiter: string, The delimiter which is used to explode the columns. Default value is `,`.

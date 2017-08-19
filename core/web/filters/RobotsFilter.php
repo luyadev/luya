@@ -11,7 +11,7 @@ use yii\helpers\VarDumper;
  * Prevent Robots from sending Forms.
  *
  * This is a very basic spam protection method. If someone sends the form faster then in the
- * given {{luya\web\filters\RobotsFilter::delay}} time, an InvalidCallException will be thrown.
+ * given {{luya\web\filters\RobotsFilter::$delay}} time, an InvalidCallException will be thrown.
  *
  * Usage:
  *
