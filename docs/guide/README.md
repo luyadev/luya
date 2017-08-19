@@ -41,10 +41,10 @@
   + [Url Rules](app-module-urlrules.md)
 + Administration Module
   + [About Admin Modules](app-admin-module.md)
-  + [Custom Controller &amp; View](app-admin-module-controllerview.md)
+  + [Custom Admin Controller &amp; View](app-admin-module-controllerview.md)
   + [Admin Permissions &amp; Menu](app-admin-module-permission.md)
-  + [Assets](app-admin-module-assets.md)
-  + [CSS Styles](app-admin-styles.md)
+  + [Admin Assets](app-admin-module-assets.md)
+  + [Admin CSS Styles](app-admin-styles.md)
 + NgRest CRUD
   + [Concept](ngrest-concept.md)
   + [NgRest Model](ngrest-model.md)
