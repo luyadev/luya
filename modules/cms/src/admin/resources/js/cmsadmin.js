@@ -1130,9 +1130,10 @@
 								}
 							}
 						}
+						
+						$scope.loaded = true
 					}
 				}
-				$scope.loaded = true
 			});
 		};
 
@@ -1204,11 +1205,11 @@
 		};
 		
 		/**
-		 * drops items in an empty page placeholder from a cms layout
+		 * drops items in an empty page placeholder of CMS LAYOUT PLACEHOLDER
 		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
-			$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : dropped.prev_id, sort_index:0, block_id : dragged.id , placeholder_var : dropped.var, nav_item_page_id : dropped.nav_item_page_id }).then(function(response) {
-				$scope.refreshNested(dropped.prev_id, dropped.var);
+			$http.post('admin/api-cms-navitempageblockitem/create', {prev_id: dropped.prev_id, sort_index:0, block_id: dragged.id, placeholder_var : dropped['var'], nav_item_page_id: dropped.nav_item_page_id }).then(function(response) {
+				$scope.refreshNested(dropped['prev_id'], dropped['var']);
 			});
 		};
 		
@@ -1224,7 +1225,9 @@
 
 		$scope.NavItemTypePageController = $scope.$parent;
 
-		/* drops items in block container */
+		/**
+		 * drops an item in an empty placeholder of a BLOCK
+		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
 			$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : dropped.prev_id, sort_index:0, block_id : dragged.id , placeholder_var : dropped.var, nav_item_page_id : dropped.nav_item_page_id }).then(function(response) {
 				$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
@@ -1233,17 +1236,26 @@
 		
 		$scope.dropItem = function(dragged,dropped,position) {
 			var sortIndex = $scope.$index;
+			
+			/*
+			console.log('dropped on block id', dropped.id);
+			console.log('dragged the block', dragged.name);
+			console.log('position', position);
+			console.log('originalSortIndex', sortIndex);
+			*/
+			
 			if (position == 'bottom') {
 				sortIndex = sortIndex + 1;
 			}
+			
 			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
 				// its a new block
 				$http.post('admin/api-cms-navitempageblockitem/create', { 
-					prev_id : $scope.placeholder.prev_id,
-					sort_index:sortIndex, 
-					block_id : dragged.id, 
-					placeholder_var : $scope.placeholder['var'], 
-					nav_item_page_id : $scope.placeholder.nav_item_page_id
+					prev_id: $scope.placeholder.prev_id,
+					sort_index: sortIndex, 
+					block_id: dragged.id, 
+					placeholder_var: $scope.placeholder['var'], 
+					nav_item_page_id: $scope.placeholder.nav_item_page_id
 				}).then(function(response) {
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
@@ -1251,18 +1263,18 @@
 				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
 					copyBlockId: dragged.id,
 					sortIndex: sortIndex,
-					prevId:  $scope.placeholder.prev_id,
-					placeholder_var :  $scope.placeholder['var'],
-					nav_item_page_id : $scope.placeholder.nav_item_page_id
+					prevId: $scope.placeholder.prev_id,
+					placeholder_var: $scope.placeholder['var'],
+					nav_item_page_id: $scope.placeholder.nav_item_page_id
 				}).then(function(response) {
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
 			} else {
 				// moving an existing block
 				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
-					prev_id : $scope.placeholder.prev_id,
-					placeholder_var : $scope.placeholder['var'],
-					sort_index : sortIndex
+					prev_id: $scope.placeholder.prev_id,
+					placeholder_var: $scope.placeholder['var'],
+					sort_index: sortIndex
 				}).then(function(response) {
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
@@ -1367,7 +1379,7 @@
 		$scope.removeBlock = function() {
 			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), 'Block löschen', function($timeout, $toast) {
 				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + $scope.block.id).then(function(response) {
-					$scope.NavItemTypePageController.refresh();
+					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 					$scope.NavItemTypePageController.loadLiveUrl();
 					$toast.close();
 					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: $scope.block.name}), 2000);
