@@ -377,7 +377,25 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData, $rootScope) {
 	return service;
 });
 
-
+/*
+ * Admin Debug Bar provides an array with debug information from the last request in order to find bugs without the developer tools of the browser 
+ */
+zaa.factory("AdminDebugBar", function() {
+	
+	var service = [];
+	
+	service.data = [];
+	
+	service.pushRequest = function(request) {
+		console.log('request', request);
+	};
+	
+	service.pushResponse = function(response) {
+		console.log('response', response);
+	};
+	
+	return service;
+});
 
 /*
 

@@ -219,13 +219,18 @@ function typeCastValue(value) {
         return service;
     });
     
-    zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService) {
+    zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService, AdminDebugBar) {
         return {
             request: function (config) {
+            	AdminDebugBar.pushRequest(config);
                 config.headers = config.headers || {};
                 config.headers.Authorization = "Bearer " + authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
                 return config;
+            },
+            response: function(config) {
+            	AdminDebugBar.pushResponse(config);
+            	return config;
             },
             responseError: function (data) {
                 if (data.status == 401) {

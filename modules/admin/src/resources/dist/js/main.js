@@ -1498,13 +1498,18 @@ function typeCastValue(value) {
         return service;
     });
     
-    zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService) {
+    zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService, AdminDebugBar) {
         return {
             request: function (config) {
+            	AdminDebugBar.pushRequest(config);
                 config.headers = config.headers || {};
                 config.headers.Authorization = "Bearer " + authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
                 return config;
+            },
+            response: function(config) {
+            	AdminDebugBar.pushResponse(config);
+            	return config;
             },
             responseError: function (data) {
                 if (data.status == 401) {
@@ -1898,7 +1903,25 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData, $rootScope) {
 	return service;
 });
 
-
+/*
+ * Admin Debug Bar provides an array with debug information from the last request in order to find bugs without the developer tools of the browser 
+ */
+zaa.factory("AdminDebugBar", function() {
+	
+	var service = [];
+	
+	service.data = [];
+	
+	service.pushRequest = function(request) {
+		console.log('request', request);
+	};
+	
+	service.pushResponse = function(response) {
+		console.log('response', response);
+	};
+	
+	return service;
+});
 
 /*
 
