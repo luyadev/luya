@@ -572,6 +572,9 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         }
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestConfig($config)
     {
         foreach ($this->ngRestScopes() as $arrayConfig) {

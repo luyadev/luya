@@ -117,6 +117,10 @@
 			}
 		}
 		
+		$scope.parentSelectInline = function(item) {
+			$scope.$parent.$parent.$parent.setModelValue($scope.getRowPrimaryValue(item));
+		};
+		
 		$scope.relationItems = [];
 		
 		/*
@@ -510,6 +514,10 @@
 			} else {
 				$scope.pager = false;
 			}
+		};
+		
+		$scope.getRowPrimaryValue = function(row) {
+			return row[$scope.config.pk];
 		};
 		
 		$scope.toggleStatus = function(row, fieldName, fieldLabel, bindValue) {
