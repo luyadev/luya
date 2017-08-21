@@ -2361,7 +2361,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 });
 
                 scope.$on('$destroy', function() {
-                    scope.pop.remove();
+                    if(scope.pop) {
+                        scope.pop.remove();
+                    }
                 });
             }
         }
