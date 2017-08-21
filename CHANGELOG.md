@@ -162,7 +162,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1082](https://github.com/luyadev/luya/issues/1082) Link plugin for ngRest configuration in order to provide internal or external links.
 - [#1003](https://github.com/luyadev/luya/issues/1003) The crawler tag CRAWL_TITLE has been added to ensure a customization of the titles.
 - [#1008](https://github.com/luyadev/luya/issues/1008) Administration interface language can be changed and stored in the user settings.
-- [#1014](https://github.com/luyadev/luya/issues/1014) NgRest Crud has a new possibility to work with relation data via the `ngRestRelation()` method inside the NgRestModel. This allows you to open relation data in new tabs.
+- [#1014](https://github.com/luyadev/luya/issues/1014) NgRest Crud has a new possibility to work with relation data via the `ngRestRelations()` method inside the NgRestModel. This allows you to open relation data in new tabs.
 - [#1038](https://github.com/luyadev/luya/issues/1038) Method `createCallbackUrl($callback)` added for ActiveWindows in order to get the absolut url for a callback, this is usefull when creating callbacks which can return a pdf for example.
 - [#1007](https://github.com/luyadev/luya/issues/1007) French translations available for all core modules.
 - [#1046](https://github.com/luyadev/luya/issues/1046) Hide menu items in the administration in order to enable crud relations with permissions but hide the menu point of the ngrest crud inside the admin interface.
