@@ -3941,7 +3941,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                             '</div>' +
                             '<div class="form-side">' +
                                 '<div class="list zaa-file-array-upload">' +
-                                    '<p class="list-no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<p class="alert alert-info" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                     '<div ng-repeat="(key,image) in model track by key" class="list-item">' +
                                         '<div class="list-section">' +
                                             '<div class="list-left">' +
@@ -3970,6 +3970,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
         }
     });
 
+    /**
+     * Multiple selection of files.
+     */
     zaa.directive("zaaFileArrayUpload", function(){
         return {
             restrict: "E",
@@ -4026,9 +4029,12 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                             '</div>' +
                             '<div class="form-side">' +
                                 '<div class="list zaa-file-array-upload">' +
-                                    '<p class="list-no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<p class="alert alert-info" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                     '<div ng-repeat="(key,file) in model track by key" class="list-item">' +
-                                        '<div class="list-section">' +
+                                    	'<div class="list-section" ng-if="file.hiddenStorageUploadSource">' +
+                                    		'<a ng-href="{{file.hiddenStorageUploadSource}}" target="_blank" class="btn btn-primary">{{file.hiddenStorageUploadName}}</a>'+
+                                    	'</div>' + 
+                                        '<div class="list-section" ng-if="!file.hiddenStorageUploadSource">' +
                                             '<div class="list-left">' +
                                                 '<storage-file-upload ng-model="file.fileId"></storage-file-upload>' +
                                             '</div>' +
@@ -4039,7 +4045,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                                                 '</div>' +
                                             '</div>' +
                                         '</div>' +
-                                        '<div class="list-buttons">' +
+                                        '<div class="list-buttons"  ng-if="!file.hiddenStorageUploadSource">' +
                                             '<div class="btn-group" role="group">' +
                                                 '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
                                                 '<button type="button" class="btn btn-icon btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
@@ -4112,7 +4118,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                             '</div>' +
                             '<div class="form-side">' +
                                 '<div class="list zaa-file-array-upload">' +
-                                    '<p class="list-no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<p class="alert alert-info" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                     '<div ng-repeat="(key,row) in model track by key" class="list-item">' +
                                         '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" fieldname="{{opt.var}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
                                         '<div class="list-buttons">' +
@@ -4211,7 +4217,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                             '</div>' +
                             '<div class="form-side">' +
                                 '<div class="list zaa-file-array-upload">' +
-                                    '<p class="list-no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
+                                    '<p class="alert alert-info" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                     '<div ng-repeat="(key,row) in model track by key" class="list-item">' +
                                         '<input class="form-control list-input" type="text" ng-model="row.value" />' +
                                         '<div class="list-buttons">' +

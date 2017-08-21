@@ -104,7 +104,7 @@ class StorageUploadValidator extends Validator
                     // its not multiple file upload, so pick the first file and set the fileId value into the model attribute in order to store the data
                     return $model->$attribute = $save->id;
                 }
-                $data[] = ['fileId' => $save->id, 'caption' => null];
+                $data[] = ['fileId' => $save->id, 'caption' => null, 'hiddenStorageUploadSource' => $save->getSourceStatic(), 'hiddenStorageUploadName' => $save->getName()];
             } else {
                 return $this->addError($model, $attribute, 'Unable to save given file.');
             }
