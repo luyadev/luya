@@ -206,13 +206,24 @@ use luya\admin\Module as Admin;
             <span class="folders-folder-icon" ng-if="currentFolderId != folder.id">
                 <i class="material-icons">folder</i>
             </span>
-            {{folder.name }}
+            <span class="folders-folder-name" ng-hide="editFolderLabel">{{folder.name }}</span>
         </span>
 
-        <span class="folders-actions-right">
-            <button class="folders-actions-edit"><i class="material-icons">edit</i></button>
-            <button class="folders-actions-delete"><i class="material-icons">delete</i></button>
+        <span class="folder-text folder-edit" ng-show="editFolderLabel">
+            <input class="folder-label-input" ng-model="folder.name" type="text" />
         </span>
+
+        <span class="folders-actions-right" ng-class="{'folders-actions-right-edit': editFolderLabel }"  ng-show="!showFoldersToMove" ng-init="editFolderLabel = false">
+            <button class="folders-actions-edit" ng-hide="editFolderLabel" ng-click="editFolderLabel=!editFolderLabel"><i class="material-icons">edit</i></button>
+            <button class="folders-actions-delete" ng-hide="editFolderLabel"><i class="material-icons">delete</i></button>
+
+            <button ng-show="editFolderLabel" class="folders-actions-save" ng-click="updateFolder(folder); editFolderLabel=!editFolderLabel"><i class="material-icons">check</i></button>
+            <button ng-show="editFolderLabel" class="folders-actions-abort" ng-click="editFolderLabel=!editFolderLabel"><i class="material-icons">cancel</i></button>
+        </span>
+
+         <span class="folders-actions-right folders-actions-right-edit" ng-show="showFoldersToMove">
+              <span class="folders-folder-move-icon" ng-click="moveFilesTo(folder.id)"><i class="material-icons">subdirectory_arrow_left</i></span>
+         </span>
     </span>
     <ul class="folders">
         <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
