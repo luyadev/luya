@@ -81,6 +81,14 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+    	return array_keys($this->ngRestExtraAttributeTypes());
+    }
+    
+    /**
      * Whether a field is i18n or not.
      *
      * @param string $fieldName The name of the field which is
