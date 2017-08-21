@@ -1,7 +1,8 @@
 # Working with Forms
 
-This example shows how to use a [ActiveForm](http://www.yiiframework.com/doc-2.0/yii-widgets-activeform.html) in a controller.  
-It uses a [NgRest Model](ngrest-model.md).
+This example shows how to use a {{yii\widgets\ActiveForm}}  in a controller. It uses a [[ngrest-model.md]].
+
+## Controller Logic
 
 ```php
 public function actionIndex()
@@ -9,7 +10,7 @@ public function actionIndex()
     $model = new ExampleFormModel();
 
     // Validate model
-    if($model->load(Yii::$app->request->post()) && $model->validate()) {
+    if ($model->load(Yii::$app->request->post()) && $model->validate()) {
         // All data submitted is valid
         // Do stuff with the data
         
@@ -29,13 +30,15 @@ public function actionIndex()
 }
 ```
 
+## View File
+
 The corresponding view file could look like this:  
 File: `views/controller/index.php`
 
 ```php
-<? if(Yii::$app->session->getFlash('success')): ?>
+<?php if(Yii::$app->session->getFlash('success')): ?>
     <p>Thank you for your request</p>
-<? else: ?>
+<?php else: ?>
         
     <? $form = \yii\widgets\ActiveForm::begin(); ?> <!-- start of form -->
 
@@ -47,9 +50,38 @@ File: `views/controller/index.php`
 
     <? \yii\widgets\ActiveForm::end(); ?> <!-- end of form -->
 
-<? endif; ?>
+<?php endif; ?>
 ```
 
 The `success` variable is used to determine if the model was successfully saved - that's only requried if you don't redirect the user to another page.
 
 See [Yii 2 ActiveForm](http://www.yiiframework.com/doc-2.0/yii-widgets-activeform.html) for more informations.
+
+## Image and File Uploads
+
+In order to enable image and file upload you can just use the file input:
+
+```php
+<?= $activeForm->field($form, 'attachment[]')->fileInput(['multiple' => true, 'accept' => 'file/*']) ?>
+```
+
+Validation inside the model:
+
+```php
+[['attachment'], StorageUploadValidator::class, 'multiple' => true],
+```
+
+In order to display the data inside the NgRest CRUD system you have to apply the {{luya\admin\ngrest\plugins\FileArray}} plugin for the given field name:
+
+```php
+/**
+ * @inheritdoc
+ */
+public function ngRestAttributeTypes()
+{
+    return [
+    	// ...
+        'attachment' => 'fileArray',
+    ];
+}
+```

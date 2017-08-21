@@ -25,7 +25,6 @@ $this->beginPage()
 <body ng-cloak flow-prevent-drop class="{{AdminClassService.getClassSpace('modalBody')}}">
 <?php $this->beginBody(); ?>
 <?= $this->render('_angulardirectives'); ?>
-
 <div class="luya">
     <div class="luya-mainnav">
         <div class="mainnav" ng-class="{'mainnav-small' : !isHover}" ng-init="isOpen = false">
