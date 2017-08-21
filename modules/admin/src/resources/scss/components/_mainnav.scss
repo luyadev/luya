@@ -19,7 +19,7 @@
         width: 200px;
 
         .mainnav-tooltip-big {
-            left: 195px;
+            left: 190px;
         }
 
         &-small {
@@ -27,7 +27,7 @@
             width: 62px;
 
             .mainnav-tooltip-big {
-                left: 55px;
+                left: 50px;
             }
 
             .mainnav-tooltip-toggle-hidden {
@@ -258,31 +258,33 @@
 }
 
 .mainnav-icon-user-count {
-    display: inline-block;
     position: relative;
+    ~ .mainnav-label {
+        margin-left: 5px;
+    }
 }
 
 .mainnav-user-online {
     font-size: 12px;
+    height: 0;
     left: 50%;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    transition: color .2s ease-in-out;
+    top: 2px;
+    transform: translateX(-50%);
 }
 
 .mainnav-tooltip-big {
-    background: map-get($grays, 800);
+    background: $tooltip-bg;
     border-radius: 5px;
     bottom: 0;
     display: none;
     opacity: 0;
     padding: 10px;
     position: absolute;
-    transition: .25s opacity ease-in-out;
+    box-shadow: $tooltip-box-shadow;
 
     &:after {
-        border-color: transparent map-get($grays, 800) transparent transparent;
+        border-color: transparent $tooltip-bg transparent transparent;
         border-style: solid;
         border-width: 5px 5px 5px 0;
         bottom: 15px;

@@ -23,7 +23,7 @@
 }
 
 .tooltip-inner {
-    box-shadow: 0 0 10px 2px rgba(0,0,0,.4);
+    box-shadow: $tooltip-box-shadow;
 
     .tooltip-image & {
         max-width: 100%;
