@@ -360,10 +360,7 @@ use luya\admin\Module as Admin;
                         </thead>
                         <tbody>
                             <tr
-                                ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField"
-                                alt="fileId={{file.id}}"
-                                title="fileId={{file.id}}"
-                                class="filemanager-file"
+                                ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" class="filemanager-file"
                                 ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file-selected': selectedFileFromParent && selectedFileFromParent.id == file.id, 'filemanager-file-detail-open': fileDetail.id === file.id}"
                             >
 
@@ -375,7 +372,7 @@ use luya\admin\Module as Admin;
                                     <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
                                     <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
                                 </td>
-                                <td ng-click="openFileDetail(file)" tooltip tooltip-position="bottom" tooltip-text="{{file.name}}">{{file.name | truncateMiddle: 30}}</td>
+                                <td ng-click="openFileDetail(file)">{{file.name | truncateMiddle: 30}}</td>
                                 <td ng-click="openFileDetail(file)">{{file.extension}}</td>
                                 <td ng-click="openFileDetail(file)">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
                                 <td ng-click="openFileDetail(file)">{{file.sizeReadable}}</td>
