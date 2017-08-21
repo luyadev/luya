@@ -3,6 +3,11 @@
 
     &.show {
         display: block;
+        transform: none;
+
+        .modal-dialog {
+            transform: none;
+        }
     }
 }
 
@@ -11,6 +16,6 @@
 }
 
 .modal-xl {
-    max-width: 100%;
     margin: 30px 50px;
+    max-width: 100%;
 }

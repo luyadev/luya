@@ -67,6 +67,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             'canDelete' => $this->can(Auth::CAN_DELETE),
             'config' => $this->config,
             'isInline' => $this->getIsInline(),
+        	'modelSelection' => $this->getModelSelection(),
             'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
             'currentMenu' => Yii::$app->adminmenu->getApiDetail($this->getConfig()->getApiEndpoint()),
         ], $this);
@@ -112,6 +113,18 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     public function setIsInline($inline)
     {
         $this->_isInline = $inline;
+    }
+    
+    private $_modelSelection;
+    
+    public function setModelSelection($selection)
+    {
+    	$this->_modelSelection = $selection;
+    }
+    
+    public function getModelSelection()
+    {
+    	return $this->_modelSelection;
     }
 
     public function getOrderBy()

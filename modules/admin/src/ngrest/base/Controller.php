@@ -66,7 +66,7 @@ class Controller extends \luya\admin\base\Controller
         return $this->_model;
     }
     
-    public function actionIndex($inline = false, $relation = false, $arrayIndex = false, $modelClass = false)
+    public function actionIndex($inline = false, $relation = false, $arrayIndex = false, $modelClass = false, $modelSelection = false)
     {
         $apiEndpoint = $this->model->ngRestApiEndpoint();
 
@@ -85,6 +85,7 @@ class Controller extends \luya\admin\base\Controller
         $ngrest = new NgRest($config);
         $crud = new RenderCrud();
         $crud->setIsInline($inline);
+        $crud->setModelSelection($modelSelection);
         if ($relation && $arrayIndex !== false && $modelClass !== false) {
             $crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
         }

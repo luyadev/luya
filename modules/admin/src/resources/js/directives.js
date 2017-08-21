@@ -522,13 +522,18 @@
     
     /* CRUD, FORMS & FILE MANAGER */
     
+    /**
+     * If modelSelection and modelSetter is enabled, you can select a given row based in its primary key which will triggered the ngrest of the parent CRUD form.
+     */
     zaa.directive("crudLoader", function($http, $sce) {
     	return {
     		restrict: "E",
     		replace: true,
     		transclude: false,
     		scope: {
-    			"api": "@api",
+    			"api": "@",
+    			"modelSelection" : "@",
+    			"modelSetter": "="
     		},
     		controller: function($scope) {
 
@@ -538,7 +543,7 @@
 
     			$scope.toggleWindow = function() {
     				if ($scope.input.showWindow) {
-    					$http.get($scope.api+'/?inline=1').then(function(response) {
+    					$http.get($scope.api+'/?inline=1&modelSelection=' + $scope.modelSetter).then(function(response) {
     						$scope.content = $sce.trustAsHtml(response.data);
     						$scope.input.showWindow = false;
     					});
@@ -546,10 +551,15 @@
     					$scope.$parent.loadService();
     					$scope.input.showWindow = true;
     				}
-    			}
+    			};
+    			
+    			$scope.setModelValue = function(value) {
+    				$scope.modelSetter = value;
+    				$scope.toggleWindow();
+    			};
     		},
     		template: function() {
-    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-icon"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" title="crud"><div compile-html ng-bind-html="content"></modal></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-icon"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" modal-title="CRUD Window"><div compile-html ng-bind-html="content"></modal></div>';
     		}
     	}
     });
@@ -1012,6 +1022,27 @@
             },
             template: function() {
                 return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="form-control" placeholder="{{placeholder}}" /></div></div>';
+            }
+        }
+    });
+    
+    /**
+     * <zaa-text model="itemCopy.title" label="<?= Module::t('view_index_page_title'); ?>" />
+     */
+    zaa.directive("zaaSpan", function(){
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+                "placeholder": "@placeholder"
+            },
+            template: function() {
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><span ng-bind="model"></span></div></div>';
             }
         }
     });

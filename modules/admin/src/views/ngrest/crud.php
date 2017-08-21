@@ -47,12 +47,14 @@ $this->beginBody();
                     <span><?= Module::t('ngrest_crud_btn_list'); ?></span>
                 </a>
             </li>
+            <?php if ($canCreate && $config->getPointer('create')): ?>
             <li class="nav-item">
                 <a class="nav-link" ng-class="{'active':crudSwitchType==1}" ng-click="switchTo(1)">
                     <i class="material-icons">add_box</i>
                     <span><?= Module::t('ngrest_crud_btn_add'); ?></span>
                 </a>
             </li>
+            <?php endif; ?>
             <li class="nav-item" ng-show="crudSwitchType==2">
                 <a class="nav-link" ng-class="{'active' : crudSwitchType==2}" ng-click="switchTo(0, true)">
                     <i class="material-icons">cancel</i>
@@ -141,7 +143,7 @@ $this->beginBody();
                             <i class="material-icons right" ng-show="viewToggler[key]">keyboard_arrow_down</i>
                         </td>
                     </tr>
-                    <tr ng-repeat="(k, item) in items | srcbox:config.searchString" ng-show="viewToggler[key]">
+                    <tr ng-repeat="(k, item) in items track by k | srcbox:config.searchString" ng-show="viewToggler[key]" <?php if ($isInline): ?>ng-click="parentSelectInline(item)" <?php if ($modelSelection): ?>ng-class="{'is-selected-row': getRowPrimaryValue(item) == <?= $modelSelection?>}"<?php endif; ?> class="selectableRow"<?php endif; ?>>
                         <?php $i = 0; foreach ($config->getPointer('list') as $item): $i++; ?>
                             <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
                                  <td class="<?= $i != 1 ?: 'tab-padding-left'; ?>"><?= $element['html']; ?></td>
@@ -162,7 +164,6 @@ $this->beginBody();
 
             <div class="pagination-wrapper" ng-if="pager && !config.pagerHiddenByAjaxSearch">
                 <div class="pagination">
-
                     <ul class="pagination-list" has-enough-space loading-condition="pager && !config.pagerHiddenByAjaxSearch">
                         <li class="page-item page-item-icon" ng-class="{'disabled' : pager.currentPage == 1}" >
                             <a class="page-link" ng-click="pagerPrevClick()"><i class="material-icons">keyboard_arrow_left</i></a>
@@ -193,13 +194,16 @@ $this->beginBody();
                             <a class="page-link" ng-click="pagerNextClick();"><i class="material-icons">keyboard_arrow_right</i></a>
                         </li>
                     </ul>
-
                 </div>
             </div>
 
         </div>
-        <?= $this->render('_crudform', ['type' => '1', 'renderer' => RenderCrud::TYPE_CREATE, 'isInline' => $isInline]); ?>
-        <?= $this->render('_crudform', ['type' => '2', 'renderer' => RenderCrud::TYPE_UPDATE, 'isInline' => $isInline]); ?>
+        <?php if ($canCreate && $config->getPointer('create')): ?>
+        	<?= $this->render('_crudform', ['type' => '1', 'renderer' => RenderCrud::TYPE_CREATE, 'isInline' => $isInline]); ?>
+        <?php endif; ?>
+        <?php if ($canUpdate && $config->getPointer('update')): ?>
+        	<?= $this->render('_crudform', ['type' => '2', 'renderer' => RenderCrud::TYPE_UPDATE, 'isInline' => $isInline]); ?>
+        <?php endif; ?>
         <?= $this->render('_awform'); ?>
     </div>
 </div>

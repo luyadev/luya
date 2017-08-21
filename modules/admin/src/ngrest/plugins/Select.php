@@ -17,7 +17,7 @@ abstract class Select extends Plugin
     /**
      * @var string This value will be displayed in the ngrest list overview if the given value is empty(). 
      */
-    public $emptyListValue;
+    public $emptyListValue = "-";
 
     /**
      * Getter method for data array.

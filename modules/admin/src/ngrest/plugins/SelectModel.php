@@ -224,7 +224,7 @@ class SelectModel extends Select
     public function renderCreate($id, $ngModel)
     {
         return [
-            $this->createCrudLoaderTag($this->modelClass),
+            $this->createCrudLoaderTag($this->modelClass, $ngModel),
             $this->createFormTag('zaa-select', $id, $ngModel, ['initvalue' => $this->initValue, 'options' => $this->getServiceName('selectdata')]),
         ];
     }

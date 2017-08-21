@@ -11,4 +11,8 @@ interface RenderCrudInterface
     public function getIsInline();
     
     public function setIsInline($inline);
+    
+    public function setModelSelection($selection);
+    
+    public function getModelSelection();
 }

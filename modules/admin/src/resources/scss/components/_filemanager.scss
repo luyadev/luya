@@ -67,6 +67,38 @@
 
 .filemanager-file {
 
+    img {
+        height: 30px;
+        width: auto;
+    }
+
+    td:last-of-type {
+        position: relative;
+    }
+    td:last-of-type:after {
+        border-bottom: 25px solid transparent;
+        border-right: 25px solid theme-color(primary);
+        border-top: 25px solid transparent;
+        content: "";
+        height: 0;
+        opacity: 0;
+        position: absolute;
+        right: 360px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: 0s ease-in-out opacity;
+        width: 0;
+
+        .modal & {
+            right: 318px;
+        }
+    }
+
+    &-detail-open td:last-of-type:after {
+        opacity: 1;
+        transition: .25s .2s ease-in-out opacity;
+    }
+
     &-selected {
         th,
         td {
@@ -114,19 +146,6 @@
 .filemanager-file-icon {
     font-size: 25px;
     line-height: 40px;
-}
-
-.filemanager-detail-view {
-    border-left: 15px solid map-get($grays, 100);;
-    display: none;
-    flex: 0 0 400px;
-    margin: -15px 0 -15px 15px;
-    padding: 15px;
-    position: relative;
-
-    &.open {
-        display: block;
-    }
 }
 
 .filemanager-dropzone {
