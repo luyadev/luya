@@ -237,6 +237,7 @@ class Api extends RestActiveController
             throw new InvalidCallException("unable to resolve relation call model.");
         }
         
+        /** @var $query \yii\db\ActiveQuery */
         $query = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
         
         return new ActiveDataProvider([
