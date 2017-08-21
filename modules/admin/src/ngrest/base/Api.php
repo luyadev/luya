@@ -240,6 +240,10 @@ class Api extends RestActiveController
         /** @var $query \yii\db\ActiveQuery */
         $query = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
         
+        if (!$query->multiple) {
+        	throw new InvalidConfigException("The relation defintion must be a hasMany() relation.");
+        }
+        
         return new ActiveDataProvider([
             'query' => $query,
             'pagination' => false,
