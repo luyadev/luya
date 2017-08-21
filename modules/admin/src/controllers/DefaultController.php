@@ -63,7 +63,10 @@ class DefaultController extends Controller
 
     public function actionLogout()
     {
-        Yii::$app->adminuser->logout();
+        if (!Yii::$app->adminuser->logout(false)) {
+        	Yii::$app->session->destroy();
+        }
+        
         return $this->redirect(['/admin/login/index', 'logout' => true]);
     }
 

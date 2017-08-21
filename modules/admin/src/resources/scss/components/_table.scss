@@ -6,6 +6,12 @@
     .custom-checkbox {
         margin: 0;
     }
+
+    th,
+    td {
+        padding-bottom: 6px;
+        padding-top: 6px;
+    }
 }
 
 .table-align-middle {
@@ -57,4 +63,11 @@
     .is-active &.is-sorting .material-icons {
         visibility: visible;
     }
+}
+
+.table-group td {
+    background-color: theme-color(secondary);
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
 }

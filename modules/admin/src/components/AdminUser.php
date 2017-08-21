@@ -35,11 +35,6 @@ class AdminUser extends User
      * @inheritdoc
      */
     public $enableAutoLogin = false;
-
-    /**
-     * @inheritdoc
-     */
-    public $idParam = '__luya_adminId';
     
     /**
      * @var string Variable to assign the default language from the admin module in order to set default language if not set.
@@ -52,6 +47,9 @@ class AdminUser extends User
     public function init()
     {
         parent::init();
+        
+        $this->idParam = '__luyaAdminId_' . md5(Yii::$app->id);
+        
         $this->on(self::EVENT_BEFORE_LOGOUT, [$this, 'onBeforeLogout']);
         $this->on(self::EVENT_AFTER_LOGIN, [$this, 'onAfterLogin']);
     }

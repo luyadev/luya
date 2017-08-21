@@ -111,7 +111,7 @@ $this->beginBody();
                     <?php endif; ?>
                 </div>
             </div>
-            <table class="table table-hover table-striped table-align-middle table-responsive mt-4">
+            <table class="table table-hover table-align-middle table-responsive table-striped mt-4">
                 <thead class="thead-default">
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
@@ -134,6 +134,13 @@ $this->beginBody();
                     </tr>
                 </thead>
                 <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
+                    <tr ng-if="config.groupBy" class="table-group" ng-click="viewToggler[key]=!viewToggler[key]">
+                        <td colspan="<?= count($config->getPointer('list')) + 1 ?>">
+                            <strong>{{key}}</strong>
+                            <i class="material-icons right" ng-show="!viewToggler[key]">keyboard_arrow_right</i>
+                            <i class="material-icons right" ng-show="viewToggler[key]">keyboard_arrow_down</i>
+                        </td>
+                    </tr>
                     <tr ng-repeat="(k, item) in items | srcbox:config.searchString" ng-show="viewToggler[key]">
                         <?php $i = 0; foreach ($config->getPointer('list') as $item): $i++; ?>
                             <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
