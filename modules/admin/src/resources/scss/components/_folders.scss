@@ -62,7 +62,9 @@ $icon-line-height: $icon-font-size + 10px;
         display: none;
     }
 }
-
+.folders-folder-name {
+    margin-bottom: 3px;
+}
 .folders-folder-icon {
     display: inline-block;
     margin-right: 5px;
@@ -121,13 +123,35 @@ $icon-line-height: $icon-font-size + 10px;
         display: block;
     }
 }
+.folders-edit {
+    position: relative;
+}
+.folders-actions-right-edit {
+    display: block;
+}
 
 .folders-actions-toggler,
 .folders-actions-edit,
-.folders-actions-delete {
+.folders-actions-delete,
+.folders-actions-abort,
+.folders-actions-save{
     background: none;
     border: none;
     cursor: pointer;
     margin: 0;
     padding: 0;
+}
+
+.folder-label-input {
+    position: absolute;
+    width: calc(100% - 100px);
+    max-width: 100%;
+    left: 50px;
+    right: 200px;
+    top:3px;
+    max-height: 24px;
+}
+
+.folders-folder-move-icon {
+    cursor: pointer;
 }
