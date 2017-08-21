@@ -22,7 +22,7 @@ use yii\web\NotFoundHttpException;
 /**
  * The RestActiveController for all NgRest implementations.
  *
- * @property \admin\ngrest\NgRestModeInterface $model Get the model object based on the $modelClass property.
+ * @property \luya\admin\ngrest\NgRestModel $model Get the model object based on the $modelClass property.
  */
 class Api extends RestActiveController
 {
@@ -213,8 +213,18 @@ class Api extends RestActiveController
      */
     public function actionFullResponse()
     {
+    	$query = Yii::$app->request->post('query');
+    	
+    	$find = $this->model->ngRestFind();
+    	
+    	foreach ($this->model->getTableSchema()->columns as $column) {
+    		if ($column->phpType !== "boolean") {
+    			$find->orFilterWhere(['like', $column->name, $query]);
+    		}
+    	}
+    	
         return new ActiveDataProvider([
-            'query' => $this->model->find(),
+            'query' => $find,
             'pagination' => false,
         ]);
     }
