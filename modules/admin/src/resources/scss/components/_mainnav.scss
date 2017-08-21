@@ -6,11 +6,6 @@
     position: relative;
     width: 100%;
 
-    @media (max-width: $mobile-nav-breakpoint - 1px) {
-        .tooltip {
-            display: none !important;
-        }
-    }
     @media (min-width: $mobile-nav-breakpoint) {
         display: flex;
         flex: 0 0 200px;

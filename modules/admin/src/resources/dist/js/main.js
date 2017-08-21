@@ -2289,22 +2289,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                     }
                 };
 
-                if (scope.tooltipExpression) {
-                    scope.tooltipText = scope.tooltipExpression;
-                }
-                
-                var html =  '<div class="tooltip tooltip-' + (scope.tooltipPosition || defaultPosition) + (scope.tooltipImageUrl ? ' tooltip-image' : '') + '" role="tooltip">' +
-                                '<div class="tooltip-arrow"></div>' +
-                                '<div class="tooltip-inner">' +
-                                    (scope.tooltipText ? ('<span class="tooltip-text">' + scope.tooltipText +  '</span>') : '') +
-                                    (scope.tooltipImageUrl ? ('<img class="tooltip-image" src="' + scope.tooltipImageUrl +  '">') : '') +
-                                '</div>' +
-                             '</div>';
-
-                scope.pop = $(html);
-                $document.find('body').append(scope.pop);
-                scope.pop.hide();
-
                 var onScroll = function() {
                     var offset = {};
                     if(typeof positions[scope.tooltipPosition] === 'function') {
@@ -2325,12 +2309,48 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 };
 
                 element.on('mouseenter', function () {
+
+                    // Generate tooltip HTML for the first time
+                    if(!scope.pop) {
+                        if (scope.tooltipExpression) {
+                            scope.tooltipText = scope.tooltipExpression;
+                        }
+
+                        var html =  '<div class="tooltip tooltip-' + (scope.tooltipPosition || defaultPosition) + (scope.tooltipImageUrl ? ' tooltip-image' : '') + '" role="tooltip">' +
+                                        '<div class="tooltip-arrow"></div>' +
+                                        '<div class="tooltip-inner">' +
+                                        (scope.tooltipText ? ('<span class="tooltip-text">' + scope.tooltipText +  '</span>') : '') +
+                                        '</div>' +
+                                    '</div>';
+
+                        var $html = $(html);
+
+                        if(scope.tooltipImageUrl) {
+                            var image = new Image();
+                            image.onload = function() {
+                                onScroll();
+                            };
+                            image.src = scope.tooltipImageUrl;
+                            $html.find('.tooltip-inner').append(image);
+                        }
+
+                        scope.pop = $html;
+
+                        $document.find('body').append(scope.pop);
+                        scope.pop.hide();
+                    }
+
+                    // If tooltip shall be display...
                     if(typeof scope.tooltipDisabled === 'undefined' || scope.tooltipDisabled === false) {
+
+                        // ..check position
                         onScroll();
 
                         // todo: Improve performance ...? x)
+                        // ..register scroll listener
                         element.parents().on('scroll', onScroll);
 
+                        // ..show popup
                         scope.pop.show();
                     }
                 });
@@ -2345,7 +2365,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 });
             }
         }
-    })
+    });
 
     /**
      * Convert a string to number value, usefull in selects.

@@ -15,6 +15,10 @@
     td[ng-click] {
         cursor: pointer;
     }
+    th[ng-click^="openFileDetail"],
+    td[ng-click^="openFileDetail"] {
+        cursor: zoom-in;
+    }
 }
 
 .filemanager-actions-column {
@@ -77,7 +81,7 @@
     }
     td:last-of-type:after {
         border-bottom: 25px solid transparent;
-        border-right: 25px solid theme-color(primary);
+        border-right: 25px solid color(gray);
         border-top: 25px solid transparent;
         content: "";
         height: 0;

@@ -13,7 +13,7 @@
     z-index: 1000;
 
     &.open {
-        border-left: 2px solid theme-color(primary);
+        border-left: 2px solid color(gray);
         transform: translateX(0);
     }
 }
@@ -46,7 +46,7 @@
     transition: .25s ease-in-out transform, .25s ease-in-out box-shadow;
 
     .file-detail-view.open & {
-        border: solid theme-color(primary);
+        border: solid color(gray);
         border-width: 2px 0 2px 2px;
         transform: translateX(-100%);
     }
@@ -63,7 +63,7 @@
     }
 
     &:not(.disabled):hover {
-        background-color: theme-color(primary);
+        background-color: theme-color(dark);
         color: color(white);
         cursor: pointer;
     }

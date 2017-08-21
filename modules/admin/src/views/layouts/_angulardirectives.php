@@ -371,17 +371,17 @@ use luya\admin\Module as Admin;
                                     <div class="filemanager-fakebox" ng-class="{'filemanager-fakebox-active': inSelection(file)}"></div>
                                 </th>
 
-                                <td class="text-center" ng-click="toggleSelection(file)">
+                                <td class="text-center" ng-click="openFileDetail(file)" tooltip tooltip-image-url="{{file.thumbnailMedium.source}}" tooltip-disabled="!file.isImage">
                                     <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
                                     <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
                                 </td>
-                                <td ng-click="toggleSelection(file)">{{file.name | truncateMiddle: 30}}</td>
-                                <td ng-click="toggleSelection(file)">{{file.extension}}</td>
-                                <td ng-click="toggleSelection(file)">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
-                                <td ng-click="toggleSelection(file)">{{file.sizeReadable}}</td>
+                                <td ng-click="openFileDetail(file)" tooltip tooltip-position="bottom" tooltip-text="{{file.name}}">{{file.name | truncateMiddle: 30}}</td>
+                                <td ng-click="openFileDetail(file)">{{file.extension}}</td>
+                                <td ng-click="openFileDetail(file)">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
+                                <td ng-click="openFileDetail(file)">{{file.sizeReadable}}</td>
                                 <td class="text-right">
                                     <button type="button" class="btn btn-sm btn-icon" ng-click="openFileDetail(file)">
-                                        <i class="material-icons">more_vert</i>
+                                        <i class="material-icons">zoom_in</i>
                                     </button>
                                 </td>
                             </tr>
