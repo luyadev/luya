@@ -22,7 +22,7 @@ use luya\admin\Module as Admin;
 
 
 <script type="text/ng-template" id="modal">
-<div class="modal fade" tabindex="-1" aria-hidden="true" ng-class="{'show':!isModalHidden}" zaa-esc="isModalHidden=1">
+<div class="modal" tabindex="-1" aria-hidden="true" ng-class="{'show':!isModalHidden}" zaa-esc="isModalHidden=1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -364,7 +364,7 @@ use luya\admin\Module as Admin;
                                 alt="fileId={{file.id}}"
                                 title="fileId={{file.id}}"
                                 class="filemanager-file"
-                                ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file-selected': selectedFileFromParent && selectedFileFromParent.id == file.id}"
+                                ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file-selected': selectedFileFromParent && selectedFileFromParent.id == file.id, 'filemanager-file-detail-open': fileDetail.id === file.id}"
                             >
 
                                 <th scope="row" ng-click="toggleSelection(file)">
@@ -388,79 +388,87 @@ use luya\admin\Module as Admin;
                         </tbody>
                     </table>
                 </div>
-
-                <div class="col filemanager-detail-view" ng-class="{'open': fileDetail}">
-
-                    <div class="file-detail-view">
-
-                        <div class="file-detail-view-head">
-
-                            <a class="btn btn-success" ng-href="{{fileDetail.source}}" target="_blank">
-                                <span class="material-icons">file_download</span>
-                                <span class="btn-icon-label">Download</span>
-                            </a>
-
-                            <div class="btn btn-info ml-1" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">
-                                <span class="material-icons">file_upload</span>
-                                <span class="btn-icon-label">Replace</span>
-                            </div>
-
-                            <div class="file-detail-view-close">
-                                <i class="material-icons">cancel</i>
-                            </div>
-
-                        </div>
-                        <table class="table table-striped table-hover table-align-middle mt-4">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Filename</th>
-                                    <td>{{ fileDetail.name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Creation Date</th>
-                                    <td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">File Type</th>
-                                    <td>{{ fileDetail.extension }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Size</th>
-                                    <td>{{ fileDetail.sizeReadable }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Internal ID</th>
-                                    <td>{{ fileDetail.id }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-						<div ng-if="fileDetail.isImage">
-                    		<img class="img-fluid" ng-src="{{fileDetail.thumbnailMedium.source}}" />
-                		</div>
-
-                        <form class="bg-faded p-2 mt-4">
-                            <h3 class="mb-3">File caption</h3>
-                            <div class="form-group" ng-repeat="(key, cap) in fileDetail.captionArray">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" ng-model="fileDetail.captionArray[key]">
-
-                                    <span class="flag flag--{{key}}">
-                                        <span class="flag-fallback">{{key}}</span>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <button type="button" class="btn btn-primary" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
-
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- /Files -->
     </div>
 </div>
+
+<div class="file-detail-view" ng-class="{'open': fileDetail}">
+
+    <div class="file-detail-view-head">
+
+        <a class="btn btn-success" ng-href="{{fileDetail.source}}" target="_blank">
+            <span class="material-icons">file_download</span>
+            <span class="btn-icon-label">Download</span>
+        </a>
+
+        <div class="btn btn-info ml-1" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">
+            <span class="material-icons">file_upload</span>
+            <span class="btn-icon-label">Replace</span>
+        </div>
+
+        <div class="file-detail-view-close" ng-click="closeFileDetail()">
+            <i class="material-icons">cancel</i>
+        </div>
+
+    </div>
+    <table class="table table-striped table-hover table-align-middle mt-4">
+        <tbody>
+        <tr>
+            <th scope="row">Filename</th>
+            <td>{{ fileDetail.name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Creation Date</th>
+            <td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}}</td>
+        </tr>
+        <tr>
+            <th scope="row">File Type</th>
+            <td>{{ fileDetail.extension }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Size</th>
+            <td>{{ fileDetail.sizeReadable }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Internal ID</th>
+            <td>{{ fileDetail.id }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div ng-if="fileDetail.isImage">
+        <img class="img-fluid" ng-src="{{fileDetail.thumbnailMedium.source}}" />
+    </div>
+
+    <form class="bg-faded p-2 mt-4">
+        <h3 class="mb-3">File caption</h3>
+        <div class="form-group" ng-repeat="(key, cap) in fileDetail.captionArray">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="fileDetail.captionArray[key]">
+
+                <span class="flag flag--{{key}}">
+                                        <span class="flag-fallback">{{key}}</span>
+                                    </span>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
+
+    </form>
+
+    <div class="file-detail-view-arrows">
+        <div class="file-detail-view-arrow file-detail-view-arrow-prev disabled">
+            <i class="material-icons">keyboard_arrow_up</i>
+        </div>
+        <div class="file-detail-view-arrow file-detail-view-arrow-next">
+            <i class="material-icons">keyboard_arrow_down</i>
+        </div>
+    </div>
+
+</div>
+
 </script>
 
 <!-- FILEMANAGER -->
