@@ -18,6 +18,7 @@ use luya\admin\ngrest\render\RenderActiveWindow;
 use luya\admin\ngrest\render\RenderActiveWindowCallback;
 use luya\admin\ngrest\NgRest;
 use yii\web\NotFoundHttpException;
+use yii\db\ActiveQuery;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -247,10 +248,10 @@ class Api extends RestActiveController
             throw new InvalidCallException("unable to resolve relation call model.");
         }
         
-        /** @var $query \yii\db\ActiveQuery */
+        /** @var $query \yii\db\Query */
         $query = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
         
-        if (!$query->multiple) {
+        if ($query instanceof ActiveQuery && !$query->multiple) {
         	throw new InvalidConfigException("The relation defintion must be a hasMany() relation.");
         }
         
