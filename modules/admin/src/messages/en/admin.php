@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Value',
     'layout_filemanager_save_dir' => 'Save?',
     'layout_filemanager_remove_dir' => 'Delete directory?',
-    'layout_filemanager_remove_dir_not_empty' => 'The directory is not empty.<br/>Delete it anyway?',
+    'layout_filemanager_remove_dir_not_empty' => 'Unable to remove not empty directory, please move all files into another folder or remove them first.', // text update in rc4
     'layout_filemanager_remove_selected_files' => 'Delete selected files',
     'layout_filemanager_move_selected_files' => 'Move to',
     'layout_filemanager_upload_error' => 'Error while uploading file',

@@ -4778,6 +4778,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 
                 $scope.folderDeleteConfirmForm = false;
 
+                /*
                 $scope.toggleFolderMode = function(mode) {
                     if (mode == 'edit') {
                         $scope.folderUpdateForm = true;
@@ -4797,6 +4798,8 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                         $scope.folderDeleteConfirmForm = false;
                     }
                 };
+                
+                */
 
                 $scope.updateFolder = function(folder) {
                     $http.post('admin/api-admin-storage/folder-update?folderId=' + folder.id, $.param({ name : folder.name }), {
@@ -4806,6 +4809,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                     });
                 }
 
+                /*
                 $scope.checkEmptyFolder = function(folder) {
                     $http.post('admin/api-admin-storage/is-folder-empty?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -4817,18 +4821,27 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                         }
                     });
                 };
-
+				*/
                 $scope.deleteFolder = function(folder) {
-                    // check if folder is empty
-                    $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.id, $.param({ name : folder.name }), {
+                	
+                	$http.post('admin/api-admin-storage/is-folder-empty?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                     }).then(function(transport) {
-                        $scope.foldersDataReload().then(function() {
-                            $scope.filesDataReload().then(function() {
-                                $scope.toggleFolderMode(false);
-                                $scope.currentFolderId = 0;
+                        if (transport.data == true) {
+                        	 // check if folder is empty
+                            $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.id, $.param({ name : folder.name }), {
+                                headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+                            }).then(function(transport) {
+                                $scope.foldersDataReload().then(function() {
+                                    $scope.filesDataReload().then(function() {
+                                        $scope.toggleFolderMode(false);
+                                        $scope.currentFolderId = 0;
+                                    });
+                                });
                             });
-                        });
+                        } else {
+                        	AdminToastService.error(i18n['layout_filemanager_remove_dir_not_empty'], 6000);
+                        }
                     });
                 };
 
