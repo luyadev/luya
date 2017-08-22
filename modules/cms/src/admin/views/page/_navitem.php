@@ -66,11 +66,11 @@ use luya\helpers\Html;
                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary"><i class="material-icons left">done</i> Save</button>
+                            <button type="button" class="btn btn-primary-outline float-right" ng-click="showHelp=!showHelp"><i class="material-icons left">help</i> {{ showHelp == true ? 'Hide help' : 'Show help' }}</button>
                         </form>
                         </div>
-						<button type="button" class="btn btn-secondary-outline btn-sm" ng-click="showHelp=!showHelp">Show Help</button>
 						<div ng-if="showHelp">
-							<ul>
+							<ul class="help">
 								<li click-paste-pusher="{{help.example}}"  ng-repeat="help in navCfg.helptags"><h3>{{help.name}}</h3><blockquote>{{help.example}}</blockquote><span ng-bind-html="help.readme | trustAsUnsafe"></span></li>
 							</ul>
 						</div>
