@@ -6,6 +6,11 @@
     transform: translateY(-100%);
     transition: 0.25s ease transform;
     z-index: 10000;
+    font-family: "Roboto", Helvetica, Arial, sans-serif !important;
+}
+
+#luya-cms-toolbar-wrapper a, #luya-cms-toolbar-wrapper p, #luya-cms-toolbar-wrapper span, #luya-cms-toolbar-wrapper label {
+    font-family: "Roboto", Helvetica, Arial, sans-serif !important;
 }
 
 @media screen and (max-width: 900px) {
