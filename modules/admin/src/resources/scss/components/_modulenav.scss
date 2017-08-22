@@ -19,7 +19,7 @@
 .modulenav-group-title {
     color: map-get($grays, 600);
     display: block;
-    padding-left: 32px;
+    padding-left: 8px;
     width: 100%;
 }
 
@@ -49,8 +49,13 @@
 
     &-active,
     &:hover {
-        color: theme-color(primary);
         text-decoration: none;
+        background-color: rgba(0,0,0,0.1);
+
+    }
+
+    &-active {
+        color: theme-color(primary);
     }
 }
 
@@ -64,7 +69,8 @@
 
 .modulenav-icon {
     font-size: 20px !important;
-    left: 0;
+    left: 5px;
+    top: 4px;
     position: absolute;
 }
 
