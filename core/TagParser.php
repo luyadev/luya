@@ -76,7 +76,7 @@ class TagParser extends Object
      * of this method to fix the conflict between markdown and tag parser when using urls.
      *
      * @param string $text The content where the CMS-Tags should be found and convert into Html-Tags and Markdown Tags.
-     * @return string the COnverted output of $text.
+     * @return string the Converted output of $text.
      */
     public static function convertWithMarkdown($text)
     {
@@ -88,7 +88,7 @@ class TagParser extends Object
      *
      * The main purpose of this method is to return all tag objects in admin context to provide help informations from the tags.
      *
-     * @return array An array with all tag object available.
+     * @return \luya\tag\TagInterface
      */
     public static function getInstantiatedTagObjects()
     {

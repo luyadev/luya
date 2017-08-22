@@ -819,9 +819,11 @@
         };
 	});
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, LuyaLoading, AdminToastService, AdminClassService) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, AdminDebugBar, LuyaLoading, AdminToastService, AdminClassService) {
 	
 		$scope.AdminClassService = AdminClassService;
+		
+		$scope.AdminDebugBar = AdminDebugBar;
 		
 		$scope.LuyaLoading = LuyaLoading;
 		

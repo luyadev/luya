@@ -1,5 +1,5 @@
 <script>
-zaa.bootstrap.register('FlowController', function($scope, $controller) {
+zaa.bootstrap.register('FlowController', function($scope, $rootScope, $controller) {
     $scope.$watch(function() { return $scope.$flow }, function(n, o) {
         $scope.$flow.opts.target = $scope.$parent.getActiveWindowCallbackUrl('upload');
     });
@@ -29,7 +29,7 @@ zaa.bootstrap.register('FlowController', function($scope, $controller) {
     };
 
     $scope.flowOptions = {
-        headers : {Authorization : 'Bearer ' + authToken}
+        headers : {Authorization : 'Bearer ' + $rootScope.luyacfg.authToken}
     };
     
     $scope.loadList();

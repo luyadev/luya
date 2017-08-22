@@ -10,6 +10,7 @@ use luya\admin\base\Controller;
 use luya\TagParser;
 use luya\web\View;
 use luya\helpers\ArrayHelper;
+use yii\helpers\Markdown;
 
 /**
  * Administration Controller provides, dashboard, logout and index.
@@ -41,10 +42,28 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
+    	$tags = [];
+    	foreach (TagParser::getInstantiatedTagObjects() as $name => $object) {
+    		$tags[] = [
+    			'name' => $name,
+    			'example' => $object->example(),
+    			'readme' => Markdown::process($object->readme()),
+    		];
+    	}
+    	
         // register auth token
-        $this->view->registerJs("var authToken='".Yii::$app->adminuser->identity->authToken ."';", View::POS_HEAD);
-        $this->view->registerJs("var homeUrl='".Url::home(true)."';", View::POS_HEAD);
+        //$this->view->registerJs("var authToken='".Yii::$app->adminuser->identity->authToken ."';", View::POS_HEAD);
+        //$this->view->registerJs("var homeUrl='".Url::home(true)."';", View::POS_HEAD);
         $this->view->registerJs('var i18n=' . Json::encode($this->module->jsTranslations), View::POS_HEAD);
+        //$this->view->registerJs('var helptags=' . Json::encode($tags), View::POS_HEAD);
+        
+        $this->view->registerJs('zaa.run(function($rootScope) { $rootScope.luyacfg = ' . Json::encode([
+        	'authToken' => Yii::$app->adminuser->identity->authToken,
+        	'homeUrl' => Url::home(true),
+        	'i18n' => $this->module->jsTranslations,
+        	'helptags' => $tags,
+        ]). '; });', View::POS_END);
+        
         return $this->render('index');
     }
 
@@ -56,6 +75,7 @@ class DefaultController extends Controller
                 $items[] = Yii::createObject(ArrayHelper::merge(['class' => '\luya\admin\dashboards\DefaultObject'], $config));
             }
         }
+        
         return $this->renderPartial('dashboard', [
             'items' => $items,
         ]);
@@ -68,16 +88,6 @@ class DefaultController extends Controller
         }
         
         return $this->redirect(['/admin/login/index', 'logout' => true]);
-    }
-
-    public function colorizeValue($value, $displayValue = false)
-    {
-        $text = ($displayValue) ? $value : Module::t('debug_state_on');
-        if ($value) {
-            return '<span style="color:green;">'.$text.'</span>';
-        }
-
-        return '<span style="color:red;">'.Module::t('debug_state_off').'</span>';
     }
     
     public function getTags()

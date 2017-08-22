@@ -54,6 +54,7 @@ function typeCastValue(value) {
     /* CONFIG */
     
     zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, $urlMatcherFactoryProvider) {
+    	
         $httpProvider.interceptors.push("authInterceptor");
 
         zaa.bootstrap = $controllerProvider;
@@ -222,15 +223,16 @@ function typeCastValue(value) {
     zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService, AdminDebugBar) {
         return {
             request: function (config) {
-            	AdminDebugBar.pushRequest(config);
+            	config.debugId = AdminDebugBar.pushRequest(config);
                 config.headers = config.headers || {};
-                config.headers.Authorization = "Bearer " + authToken;
+                config.headers.Authorization = "Bearer " + $rootScope.luyacfg.authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
                 return config;
             },
             response: function(config) {
+            	var isConfig = config;
             	AdminDebugBar.pushResponse(config);
-            	return config;
+            	return isConfig;
             },
             responseError: function (data) {
                 if (data.status == 401) {

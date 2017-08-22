@@ -387,11 +387,22 @@ zaa.factory("AdminDebugBar", function() {
 	service.data = [];
 	
 	service.pushRequest = function(request) {
-		console.log('request', request);
+		return service.data.push({'url': request.url, 'requestData': request.data, 'responseData': null, 'responseStatus' : null, start:new Date(), end:null, parseTime: null});
 	};
 	
 	service.pushResponse = function(response) {
-		console.log('response', response);
+		var responseCopy = response;
+		
+		var serviceData = service.data[responseCopy.config.debugId];
+		
+		if (serviceData) {
+			serviceData.responseData = responseCopy.data;
+			serviceData.responseStatus = responseCopy.status;
+			serviceData.end = new Date();
+			serviceData.parseTime = new Date() - serviceData.start;
+		}
+		
+		return response;
 	};
 	
 	return service;

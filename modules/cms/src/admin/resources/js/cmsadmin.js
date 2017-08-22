@@ -742,7 +742,11 @@
 
 	// update.js
 
-	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService) {
+	zaa.controller("NavController", function($scope, $rootScope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService) {
+		
+		$scope.navCfg = {
+			helptags: $rootScope.luyacfg.helptags,
+		};
 		
 		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
 			$scope.displayLiveContainer = n;
@@ -944,7 +948,7 @@
 	/**
 	 * @param $scope.lang from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
+	zaa.controller("NavItemController", function($scope, $rootScope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
 
 		$scope.loaded = false;
 		
@@ -1004,7 +1008,7 @@
 
 		$scope.errors = [];
 
-		$scope.homeUrl = homeUrl;
+		$scope.homeUrl = $rootScope.luyacfg.homeUrl;
 
 		$scope.currentPageVersion = 0;
 

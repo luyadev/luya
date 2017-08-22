@@ -77,16 +77,6 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <!--
-                    <li class="mainnav-entry">
-                        <a class="mainnav-link" href="#">
-                            <i class="mainnav-icon material-icons">developer_board</i>
-                            <span class="mainnav-label">
-                                <?= Admin::t('layout_btn_version'); ?>
-                            </span>
-                        </a>
-                    </li>
-                     -->
                     <li class="mainnav-entry hide-on-mobile">
                         <span class="mainnav-link">
                             <div class="mainnav-icon mainnav-icon-user-count">
@@ -126,9 +116,8 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
-                    <!--
                     <li class="mainnav-entry">
-                        <a class="mainnav-link" href="https://luya.io" target="_blank">
+                        <a class="mainnav-link" ng-click="showDebugBar=!showDebugBar">
                             <span class="mainnav-icon">
                                 <img class="mainnav-image-icon" src="<?= $this->getAssetUrl('luya\admin\assets\Main'); ?>/images/luya-logo-small.png" />
                             </span>
@@ -137,7 +126,6 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
-                    -->
                 </ul>
             </div>
             <button class="mainnav-toggler" ng-class="{'mainnav-toggler-open' : isHover}" ng-click="isHover = !isHover">
@@ -185,7 +173,6 @@ $this->beginPage()
         </div>
     </div>
 </div>
-
 <div class="toasts" ng-repeat="item in toastQueue">
     <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
         <div class="modal-dialog" role="document">
@@ -215,6 +202,14 @@ $this->beginPage()
             <span>{{item.message}}</span>
         </div>
     </div>
+</div>
+<div ng-if="showDebugBar">
+	<table class="table">
+		<tr ng-repeat="debugItem in AdminDebugBar.data">
+			<td>{{ debugItem.url }}</td>
+			<td>{{ debugItem.parseTime }}</td>
+		</tr>
+	</table>
 </div>
 <?php $this->endBody() ?>
 </body>

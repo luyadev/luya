@@ -1333,6 +1333,7 @@ function typeCastValue(value) {
     /* CONFIG */
     
     zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, $urlMatcherFactoryProvider) {
+    	
         $httpProvider.interceptors.push("authInterceptor");
 
         zaa.bootstrap = $controllerProvider;
@@ -1501,15 +1502,16 @@ function typeCastValue(value) {
     zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService, AdminDebugBar) {
         return {
             request: function (config) {
-            	AdminDebugBar.pushRequest(config);
+            	config.debugId = AdminDebugBar.pushRequest(config);
                 config.headers = config.headers || {};
-                config.headers.Authorization = "Bearer " + authToken;
+                config.headers.Authorization = "Bearer " + $rootScope.luyacfg.authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
                 return config;
             },
             response: function(config) {
+            	var isConfig = config;
             	AdminDebugBar.pushResponse(config);
-            	return config;
+            	return isConfig;
             },
             responseError: function (data) {
                 if (data.status == 401) {
@@ -1913,11 +1915,22 @@ zaa.factory("AdminDebugBar", function() {
 	service.data = [];
 	
 	service.pushRequest = function(request) {
-		console.log('request', request);
+		return service.data.push({'url': request.url, 'requestData': request.data, 'responseData': null, 'responseStatus' : null, start:new Date(), end:null, parseTime: null});
 	};
 	
 	service.pushResponse = function(response) {
-		console.log('response', response);
+		var responseCopy = response;
+		
+		var serviceData = service.data[responseCopy.config.debugId];
+		
+		if (serviceData) {
+			serviceData.responseData = responseCopy.data;
+			serviceData.responseStatus = responseCopy.status;
+			serviceData.end = new Date();
+			serviceData.parseTime = new Date() - serviceData.start;
+		}
+		
+		return response;
 	};
 	
 	return service;
@@ -5799,9 +5812,11 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
         };
 	});
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, LuyaLoading, AdminToastService, AdminClassService) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, AdminDebugBar, LuyaLoading, AdminToastService, AdminClassService) {
 	
 		$scope.AdminClassService = AdminClassService;
+		
+		$scope.AdminDebugBar = AdminDebugBar;
 		
 		$scope.LuyaLoading = LuyaLoading;
 		

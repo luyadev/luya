@@ -43,7 +43,7 @@ use luya\helpers\Html;
                 </div>
                 <modal is-modal-hidden="modalHidden" modal-title="{{block.name}}">
                     <div ng-if="!modalHidden" class="card" ng-init="modalMode=1">
-                        <div class="card-header" ng-show="block.cfgs.length > 0">
+						<div class="card-header" ng-show="block.cfgs.length > 0">
                             <ul class="nav nav-tabs card-header-tabs">
                                 <li class="nav-item" ng-click="modalMode=1">
                                     <a class="nav-link" ng-class="{'active' : modalMode==1}" ng-click="modalMode=1">Content</a>
@@ -53,7 +53,7 @@ use luya\helpers\Html;
                                 </li>
                             </ul>
                         </div>
-                        <div  class="card-body">
+                        <div class="card-body">
                         <form class="block__edit" ng-submit="save()">
                             <div ng-if="modalMode==1" ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
                                <div class="col">
@@ -68,6 +68,12 @@ use luya\helpers\Html;
                             <button type="submit" class="btn btn-primary"><i class="material-icons left">done</i> Save</button>
                         </form>
                         </div>
+						<button type="button" class="btn btn-secondary-outline btn-sm" ng-click="showHelp=!showHelp">Show Help</button>
+						<div ng-if="showHelp">
+							<ul>
+								<li click-paste-pusher="{{help.example}}"  ng-repeat="help in navCfg.helptags"><h3>{{help.name}}</h3><blockquote>{{help.example}}</blockquote><span ng-bind-html="help.readme | trustAsUnsafe"></span></li>
+							</ul>
+						</div>
                     </div>
                 </modal>
                 <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
