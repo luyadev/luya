@@ -91,7 +91,8 @@ class SelectRelationActiveQuery extends Plugin
 	 */
 	public function renderCreate($id, $ngModel)
 	{
-		$menu = Yii::$app->adminmenu->getApiDetail($this->_query->modelClass::ngRestApiEndpoint());
+		$class = $this->_query->modelClass;
+		$menu = Yii::$app->adminmenu->getApiDetail($class::ngRestApiEndpoint());
 		
 		return [
 			$this->createCrudLoaderTag($this->_query->modelClass, $ngModel),
