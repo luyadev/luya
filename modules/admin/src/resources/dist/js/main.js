@@ -2706,6 +2706,10 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     
     /**
      * If modelSelection and modelSetter is enabled, you can select a given row based in its primary key which will triggered the ngrest of the parent CRUD form.
+     * 
+     * ```
+     * <crud-loader api="admin/api-admin-proxy" alias="Name of the CRUD"></crud-loader>
+     * ```
      */
     zaa.directive("crudLoader", function($http, $sce) {
     	return {
@@ -2715,6 +2719,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     		scope: {
     			"api": "@",
     			"modelSelection" : "@",
+    			"alias" : "@",
     			"modelSetter": "="
     		},
     		controller: function($scope) {
@@ -2741,7 +2746,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     			};
     		},
     		template: function() {
-    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-icon"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" modal-title="CRUD Window"><div compile-html ng-bind-html="content"></modal></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-icon"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" modal-title="{{alias}}"><div compile-html ng-bind-html="content"></modal></div>';
     		}
     	}
     });

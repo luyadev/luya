@@ -30,8 +30,9 @@ class SelectRelationActiveQuery extends Plugin
 	private $_labelField;
 	
 	/**
+	 * Setter method for Label Field.
 	 * 
-	 * @param unknown $labelField
+	 * @param string|array $labelField The fields to display based on the sql table seperated by commas or as array.
 	 */
 	public function setLabelField($labelField)
 	{
@@ -43,8 +44,9 @@ class SelectRelationActiveQuery extends Plugin
 	}
 	
 	/**
+	 * Getter method for Label Field.
 	 * 
-	 * @return unknown|array
+	 * @return array
 	 */
 	public function getLabelField()
 	{
@@ -58,7 +60,7 @@ class SelectRelationActiveQuery extends Plugin
 	
 	/**
 	 * 
-	 * @param ActiveQuery $query
+	 * @param yii\db\ActiveQuery $query
 	 */
 	public function setQuery(ActiveQuery $query)
 	{

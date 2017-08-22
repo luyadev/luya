@@ -174,7 +174,6 @@ $this->beginBody();
                             <a class="page-link" ng-click="pagerNextClick();"><i class="material-icons">keyboard_arrow_right</i></a>
                         </li>
                     </ul>
-
                     <ul class="pagination-list pagination-list-small">
                         <li class="page-item page-item-icon" ng-class="{'disabled' : pager.currentPage == 1}" >
                             <a class="page-link" ng-click="pagerPrevClick()"><i class="material-icons">keyboard_arrow_left</i></a>
@@ -195,7 +194,6 @@ $this->beginBody();
                     </ul>
                 </div>
             </div>
-
         </div>
         <?php if ($canCreate && $config->getPointer('create')): ?>
         	<?= $this->render('_crudform', ['type' => '1', 'renderer' => RenderCrud::TYPE_CREATE, 'isInline' => $isInline]); ?>
