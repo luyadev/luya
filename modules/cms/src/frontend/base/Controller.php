@@ -120,7 +120,7 @@ abstract class Controller extends \luya\web\Controller
         }
         
         if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {
-            $this->view->registerCssFile('https://fonts.googleapis.com/icon?family=Material+Icons');
+            $this->view->registerCssFile('//fonts.googleapis.com/icon?family=Material+Icons');
             $this->getView()->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar'], ['content' => $content]);
         }
         
@@ -163,6 +163,7 @@ abstract class Controller extends \luya\web\Controller
         
         // echo is used in order to support cases where asset manager is not available
         echo '<style>' . $this->renderPartial('/inline/toolbar.css') . '</style>';
+        // mabye ensure that jquery is loaded,  better put this at the End of body tag
         echo '<script>' . $this->renderPartial('/inline/toolbar.js') . '</script>';
     
         echo $this->renderPartial('/_toolbar.php', [
