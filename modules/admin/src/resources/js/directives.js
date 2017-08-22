@@ -549,6 +549,10 @@
     
     /**
      * If modelSelection and modelSetter is enabled, you can select a given row based in its primary key which will triggered the ngrest of the parent CRUD form.
+     * 
+     * ```
+     * <crud-loader api="admin/api-admin-proxy"></crud-loader>
+     * ```
      */
     zaa.directive("crudLoader", function($http, $sce) {
     	return {
