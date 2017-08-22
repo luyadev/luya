@@ -105,13 +105,22 @@ use luya\helpers\Url;
                             <label for="layout-changer"><?= Module::t('layout_rightbar_languagelabel')?></label>
                         </div>
                         <div class="form-side">
-                            <select id="layout-changer" class="form-control" ng-model="settings.lang" ng-change="updateUserProfile(settings)">
+                            <select id="layout-changer" class="form-control" ng-model="settings.luyadminlanguage">
                                 <?php foreach ($this->context->module->interfaceLanguageDropdown as $key => $lang): ?>
-                                    <option value="<?= $key; ?>" <?php if (Yii::$app->adminuser->interfaceLanguage == $key): ?>selected<?php endif; ?>><?= $lang;?></option>
+                                    <option value="<?= $key; ?>"><?= $lang;?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
+                    <div class="form-group form-side-by-side">
+                        <div class="form-side form-side-label">
+                            <label for="layout-changer">Developer Mode</label>
+                        </div>
+                        <div class="form-side">
+                            <input type="checkbox" ng-model="settings.isDeveloper" />
+                        </div>
+                    </div>
+                    <button type="button" class="btn" ng-click="changeSettings(settings)">Save</button>
                 </div>
             </div>
         </div>

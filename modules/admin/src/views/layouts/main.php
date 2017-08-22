@@ -116,7 +116,7 @@ $this->beginPage()
                             </span>
                         </a>
                     </li>
-                    <li class="mainnav-entry">
+                    <li class="mainnav-entry" ng-show="settings.isDeveloper">
                         <a class="mainnav-link" ng-click="showDebugBar=!showDebugBar">
                             <span class="mainnav-icon">
                                 <img class="mainnav-image-icon" src="<?= $this->getAssetUrl('luya\admin\assets\Main'); ?>/images/luya-logo-small.png" />
@@ -172,6 +172,48 @@ $this->beginPage()
             </div>
         </div>
     </div>
+    
+    <div ng-show="showDebugBar" style="position:absolute; bottom:0px; height:200px; width:100%; background-color:white; overflow:auto; z-index:99999999;">
+    	<button type="button" ng-click="showDebugBar=!showDebugBar">X</button>
+		<div class="row">
+			<div class="col-md-2">
+				<table class="table table-bordered table-striped">
+					<tr ng-repeat="(key, item) in AdminDebugBar.data" ng-class="{'table-primary': key == debugDetailKey}">
+						<td>{{ item.url }}</td>
+						<td>{{ item.responseStatus }}</td>
+						<td>{{ item.parseTime }}</td>
+						<td><button type="button" ng-click="loadDebugDetail(item, key)">Detail</button>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-10">
+				<div ng-show="debugDetail">
+					<table class="table table-bordered table-striped">
+						<tr>
+							<td>Request URL</td>
+							<td>{{debugDetail.url}}</td>
+						</tr>
+						<tr>
+							<td>Parse Time</td>
+							<td>{{debugDetail.parseTime}}</td>
+						</tr>
+						<tr>
+							<td>Request Data</td>
+							<td>{{debugDetail.requestData}}</td>
+						</tr>
+						<tr>
+							<td>Response Status</td>
+							<td>{{debugDetail.responseStatus}}</td>
+						</tr>
+						<tr>
+							<td>responseData</td>
+							<td>{{debugDetail.responseData}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="toasts" ng-repeat="item in toastQueue">
     <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
@@ -203,14 +245,7 @@ $this->beginPage()
         </div>
     </div>
 </div>
-<div ng-if="showDebugBar">
-	<table class="table">
-		<tr ng-repeat="debugItem in AdminDebugBar.data">
-			<td>{{ debugItem.url }}</td>
-			<td>{{ debugItem.parseTime }}</td>
-		</tr>
-	</table>
-</div>
+
 <?php $this->endBody() ?>
 </body>
 </html>

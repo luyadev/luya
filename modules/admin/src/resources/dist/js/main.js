@@ -5855,6 +5855,28 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 			CacheReloadService.reload();
 		}
 	
+
+		$scope.profile = {};
+		$scope.settings = {};
+		
+		$scope.getProfileAndSettings = function() {
+			$http.get('admin/api-admin-user/session').then(function(success) {
+				$scope.profile = success.data.user;
+				$scope.settings  = success.data.settings;
+			});
+		};
+		
+		$scope.getProfileAndSettings();
+		
+		$scope.debugDetail = null;
+		
+		$scope.debugDetailKey = null;
+		
+		$scope.loadDebugDetail = function(debugDetail, key) {
+			$scope.debugDetail = debugDetail;
+			$scope.debugDetailKey = key;
+		}
+		
 		/*
 		$scope.sidePanelUserMenu = false;
 		
@@ -6026,17 +6048,19 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 			});
 		};
 		
-		$scope.updateUserProfile = function(profile) {
-			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).then(function(response) {
+		$scope.changeSettings = function(settings) {
+			$http.post('admin/api-admin-user/change-settings', settings).then(function(response) {
 				$window.location.reload();
 			});
 		};
 		
-		$scope.profile = {}
+		$scope.profile = {};
+		$scope.settings = {};
 		
 		$scope.getProfile = function() {
 			$http.get('admin/api-admin-user/session').then(function(success) {
-				$scope.profile = success.data;
+				$scope.profile = success.data.user;
+				$scope.settings  = success.data.settings;
 			});
 		};
 		

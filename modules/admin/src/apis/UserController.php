@@ -5,6 +5,7 @@ namespace luya\admin\apis;
 use Yii;
 use luya\admin\ngrest\base\Api;
 use luya\admin\models\UserChangePassword;
+use luya\admin\models\User;
 
 /**
  * User API, provides ability to manager and list all administration users.
@@ -30,7 +31,10 @@ class UserController extends Api
     
     public function actionSession()
     {
-        return Yii::$app->adminuser->identity->toArray(['title', 'firstname', 'lastname', 'email', 'id']);
+        return [
+        	'user' => Yii::$app->adminuser->identity->toArray(['title', 'firstname', 'lastname', 'email', 'id']),
+        	'settings' => Yii::$app->adminuser->identity->setting->getArray([User::USER_SETTING_ISDEVELOPER, User::USER_SETTING_UILANGUAGE]),
+        ];
     }
 
     public function actionSessionUpdate()
@@ -40,5 +44,17 @@ class UserController extends Api
         $user->update(true, ['title', 'firstname', 'lastname', 'email', 'id']);
         
         return $user;
+    }
+    
+    public function actionChangeSettings()
+    {
+    	
+    	$params = Yii::$app->request->bodyParams;
+    	
+    	foreach ($params as $param => $value) {
+    		Yii::$app->adminuser->identity->setting->set($param, $value);
+    	}
+    	
+    	return true;
     }
 }

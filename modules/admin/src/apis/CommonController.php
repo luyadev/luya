@@ -65,22 +65,6 @@ class CommonController extends RestController
     }
     
     /**
-     * Change the language admin interface and store in user settings.
-     *
-     * @return boolean
-     */
-    public function actionChangeLanguage()
-    {
-        $lang = Yii::$app->request->getBodyParam('lang');
-        
-        if (!empty($lang)) {
-            return Yii::$app->adminuser->identity->setting->set('luyadminlanguage', $lang);
-        }
-        
-        return false;
-    }
-    
-    /**
      * Get all available administration regisetered properties.
      *
      * @return array Get all properties.
@@ -175,6 +159,10 @@ class CommonController extends RestController
         Yii::$app->adminuser->identity->setting->set('foldertree.'.$data['id'], (int) $data['toggle_open']);
     }
 
+    /**
+     * Last User logins
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public function actionLastLogins()
     {
         return UserLogin::find()->select(['user_id', 'max(timestamp_create) as maxdate'])->joinWith(['user' => function ($q) {

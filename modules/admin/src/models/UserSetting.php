@@ -76,6 +76,22 @@ final class UserSetting extends Object implements \ArrayAccess
 
         return $array;
     }
+    
+    /**
+     * 
+     * @param array $keys
+     * @param unknown $default
+     * @return string[]|array[]|NULL[]
+     */
+    public function getArray(array $keys, $default = null)
+    {
+    	$data = [];
+    	foreach ($keys as $key) {
+    		$data[$key] = $this->get($key, $default);
+    	}
+    	
+    	return $data;
+    }
 
     /**
      * Check if an element existing inside the user settings or not.

@@ -34,6 +34,10 @@ use luya\admin\aws\ChangePasswordActiveWindow;
  */
 final class User extends NgRestModel implements IdentityInterface, ChangePasswordInterface
 {
+	const USER_SETTING_ISDEVELOPER = 'isDeveloper';
+	
+	const USER_SETTING_UILANGUAGE = 'luyadminlanguage';
+	
     use SoftDeleteTrait;
     
     /**
