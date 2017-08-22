@@ -66,7 +66,7 @@ $this->beginBody();
                     <span ng-click="switchToTab(btn)">{{btn.name}} #{{btn.id}}</span>
                 </a>
             </li>
-            <li class="nav-item nav-item-alternative" ng-repeat="lang in AdminLangService.data" ng-class="{'ml-auto' : $first}" ng-show="AdminLangService.data > 1">
+            <li class="nav-item nav-item-alternative" ng-repeat="lang in AdminLangService.data" ng-class="{'ml-auto' : $first}" ng-show="AdminLangService.data.length > 1">
                 <a class="nav-link" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" role="tab">
                     <span class="flag flag-{{lang.short_code}}">
                         <span class="flag-fallback">{{lang.name}}</span>
