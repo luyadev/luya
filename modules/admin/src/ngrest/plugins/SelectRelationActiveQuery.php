@@ -2,8 +2,10 @@
 
 namespace luya\admin\ngrest\plugins;
 
+use Yii;
 use luya\admin\ngrest\base\Plugin;
 use yii\db\ActiveQuery;
+use yii\helpers\Json;
 
 /**
  * Performance Optimised Select Releation Plugin.
@@ -89,9 +91,11 @@ class SelectRelationActiveQuery extends Plugin
 	 */
 	public function renderCreate($id, $ngModel)
 	{
+		$menu = Yii::$app->adminmenu->getApiDetail($this->_query->modelClass::ngRestApiEndpoint());
+		
 		return [
 			$this->createCrudLoaderTag($this->_query->modelClass, $ngModel),
-			$this->createFormTag('zaa-span', $id, $ngModel)
+			$this->createFormTag('zaa-async-value', $id, $ngModel, ['api' => 'admin/'.$menu['permssionApiEndpoint'], 'fields' => Json::encode($this->labelField)])
 		];
 	}
 	

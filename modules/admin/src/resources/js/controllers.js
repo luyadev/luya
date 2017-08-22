@@ -118,7 +118,7 @@
 		}
 		
 		$scope.parentSelectInline = function(item) {
-			$scope.$parent.$parent.$parent.setModelValue($scope.getRowPrimaryValue(item));
+			$scope.$parent.$parent.$parent.setModelValue($scope.getRowPrimaryValue(item), item);
 		};
 		
 		$scope.relationItems = [];

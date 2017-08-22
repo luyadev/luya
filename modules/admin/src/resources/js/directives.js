@@ -551,7 +551,7 @@
      * If modelSelection and modelSetter is enabled, you can select a given row based in its primary key which will triggered the ngrest of the parent CRUD form.
      * 
      * ```
-     * <crud-loader api="admin/api-admin-proxy" alias="Name of the CRUD"></crud-loader>
+     * <crud-loader api="admin/api-admin-proxy" alias="Name of the CRUD Active Window"></crud-loader>
      * ```
      */
     zaa.directive("crudLoader", function($http, $sce) {
@@ -561,8 +561,8 @@
     		transclude: false,
     		scope: {
     			"api": "@",
-    			"modelSelection" : "@",
     			"alias" : "@",
+    			"modelSelection" : "@",
     			"modelSetter": "="
     		},
     		controller: function($scope) {
@@ -583,7 +583,11 @@
     				}
     			};
     			
-    			$scope.setModelValue = function(value) {
+    			/**
+    			 * @param integer $value contains the primary key
+    			 * @param array $row contains the full row from the crud loader model in order to display data.
+    			 */
+    			$scope.setModelValue = function(value, row) {
     				$scope.modelSetter = value;
     				$scope.toggleWindow();
     			};
@@ -1057,22 +1061,39 @@
     });
     
     /**
-     * <zaa-text model="itemCopy.title" label="<?= Module::t('view_index_page_title'); ?>" />
+     * <zaa-async-value model="theModel" label="Hello world" fields="{foo,baar}" />
      */
-    zaa.directive("zaaSpan", function(){
+    zaa.directive("zaaAsyncValue", function(){
         return {
             restrict: "E",
             scope: {
                 "model": "=",
-                "options": "=",
+                "api" : "@",
+                "fields" : "=",
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
                 "name": "@fieldname",
-                "placeholder": "@placeholder"
+            },
+            controller: function($scope, $timeout, $http) {
+            	$timeout(function() {
+            		$scope.$watch('model', function(n, o) {
+            			if (n) {
+                    		$scope.value = '';
+            				$http.get($scope.api + "/" + n + "?fields=" + $scope.fields.join()).then(function(response) {
+            					$scope.value;
+            					angular.forEach(response.data, function(value) {
+            						if (value) {
+            							$scope.value = $scope.value + value + " ";
+            						}
+            					});
+            				});
+            			}
+            		})
+            	});
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><span ng-bind="model"></span></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><span ng-bind="value"></span></div></div>';
             }
         }
     });
@@ -1334,9 +1355,9 @@
             },
             template: function() {
                 return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
-                            '<label >{{label}}</label></div>' +
+                            '<label>{{label}}</label></div>' +
                             '<div class="form-side">' +
-                                '<input class="form-control" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} ' + i18n['js_dir_till'] + '{{options.items.length}}'+
+                                '<input class="form-control" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> <span class="badge badge-secondary">{{optionitems.length}} ' + i18n['js_dir_till'] + ' {{options.items.length}}</span>'+
                                 '<div ng-repeat="(k, item) in optionitems track by k">' +
                                     '<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
                                     '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
@@ -1449,7 +1470,7 @@
                             '<div class="form-side form-side-label">' +
                                 '<label>{{label}}</label>' +
                             '</div>' +
-                            '<div class="form-side form-inline datepicker-wrapper" ng-click="console.log(arguments)">' +
+                            '<div class="form-side form-inline datepicker-wrapper">' +
                                 '<datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy">' +
                                         '<input class="form-control datepicker-date-input" ng-model="date" type="text" ng-focus="openDatePicker()" />' +
                                         '<div class="input-group-addon" ng-click="toggleDatePicker()">' +
