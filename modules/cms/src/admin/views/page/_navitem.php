@@ -98,33 +98,7 @@ use luya\helpers\Html;
         </li>
     </ul>
 
-    <ul class="nav nav-tabs" role="tablist" has-enough-space loading-condition="loaded" is-flex-box="true">
-        <li class="nav-item nav-item-version" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1 && isTranslated">
-            <a class="nav-link" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-click="switchVersion(versionItem.id);">
-                <span>{{ versionItem.version_alias }}</span>
-            </a>
-        </li>
-        <li class="nav-item nav-item-alternative" ng-show="isTranslated">
-            <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=3">
-                <i class="material-icons">add_box</i>
-            </a>
-        </li>
-    </ul>
-
-    <ul class="nav nav-tabs cmsadmin-fallback-small" role="tablist">
-        <li class="nav-item dropdown" ng-init="toggleVersionsDropdown=false" ng-class="{'show': toggleVersionsDropdown}">
-            <a class="nav-link dropdown-toggle" role="button" ng-click="toggleVersionsDropdown = !toggleVersionsDropdown">Versions (#{{currentPageVersion}})</a>
-            <div class="dropdown-menu" ng-class="{'show': toggleVersionsDropdown}">
-                <button class="dropdown-item" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-repeat="versionItem in typeData" ng-if="item.nav_item_type==1 && isTranslated">
-                    <span>{{ versionItem.version_alias }} (#{{versionItem.id}})</span>
-                </button>
-                <div class="dropdown-divider"></div>
-                <span class="dropdown-item" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=3"><i class="material-icons">add_box</i> <span>Add version</span></span>
-            </div>
-        </li>
-    </ul>
-
-    <ul class="nav nav-tabs ml-auto flex-no-wrap" role="tablist">
+    <ul class="nav nav-tabs flex-no-wrap" role="tablist">
         <li class="nav-item nav-item-alternative nav-item-icon ml-auto" ng-show="isTranslated">
             <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=1">
                 <i class="material-icons">edit</i>
@@ -137,6 +111,19 @@ use luya\helpers\Html;
             <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="nav-link">
                 <i class="material-icons">open_in_new</i>
             </a>
+        </li>
+    </ul>
+
+    <ul class="nav nav-tabs ml-auto" role="tablist">
+        <li class="nav-item dropdown" ng-class="{'show': toggleVersionsDropdown}">
+            <a class="nav-link dropdown-toggle" role="button" ng-click="toggleVersionsDropdown = !toggleVersionsDropdown">Versions (#{{currentPageVersion}})</a>
+            <div class="dropdown-menu" ng-class="{'show': toggleVersionsDropdown}">
+                <button type="button" class="dropdown-item" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-repeat="versionItem in typeData" ng-show="item.nav_item_type==1 && isTranslated" ng-click="switchVersion(versionItem.id)">
+                    <span>{{ versionItem.version_alias }} (#{{versionItem.id}})</span>
+                </button>
+                <div class="dropdown-divider"></div>
+                <span class="dropdown-item" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=3"><i class="material-icons">add_box</i> <span>Add version</span></span>
+            </div>
         </li>
     </ul>
 </div>

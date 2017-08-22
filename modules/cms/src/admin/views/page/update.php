@@ -11,6 +11,7 @@ use luya\cms\admin\Module;
         <div class="col">
             <div class="row">
                 <div class="col">
+
                     <div class="cmsadmin-toolbar">
                         <div class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
                             <label class="switch" for="switch-visibility-status">
@@ -49,6 +50,7 @@ use luya\cms\admin\Module;
                             </button>
                         </div>
                     </div>
+
                     <div class="cmsadmin-pages">
                         <div class="row">
                             <div class="col" ng-repeat="lang in languagesData" ng-if="AdminLangService.isInSelection(lang.short_code)" ng-controller="NavItemController">
