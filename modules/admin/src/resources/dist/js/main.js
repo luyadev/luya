@@ -2681,11 +2681,14 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
             templateUrl: "modal",
             controller : function($scope, AdminClassService) {
             	$scope.$watch('isModalHidden', function(n, o) {
-            		if (n) {
-            			AdminClassService.clearSpace('modalBody')
-            		} else {
-            			AdminClassService.setClassSpace('modalBody', 'modal-open')
+            		if (n!==o) {
+            			if (n) {
+                			AdminClassService.clearSpace('modalBody')
+                		} else {
+                			AdminClassService.setClassSpace('modalBody', 'modal-open')
+                		}
             		}
+            		
             	});
             },
             link: function (scope, element) {
