@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1269](https://github.com/luyadev/luya/issues/1269) Add raw option for html block in order to render the html output in admin view.
 - [#1215](https://github.com/luyadev/luya/issues/1215) Added type float and double in ngrest data types to use decimal.
 - [#1119](https://github.com/luyadev/luya/issues/1119) Added PostgreSQL Compatibility.
+- [#1331](https://github.com/luyadev/luya/issues/1331) Active Window generator generates index action view file.
 
 ### Fixed
 
