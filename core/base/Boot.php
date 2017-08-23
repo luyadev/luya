@@ -206,7 +206,6 @@ abstract class Boot
      * return the file.
      *
      * @return bool Return value based on require_once command.
-     *
      * @throws Exception Throws Exception if the YiiBase file does not exists.
      */
     private function includeYii()
@@ -214,12 +213,19 @@ abstract class Boot
         if (file_exists($this->_baseYiiFile)) {
             defined('LUYA_YII_VENDOR') ?: define('LUYA_YII_VENDOR', dirname($this->_baseYiiFile));
             
-            $require = require_once(dirname($this->_baseYiiFile) . DIRECTORY_SEPARATOR . 'BaseYii.php');
+            $baseYiiFolder = LUYA_YII_VENDOR . DIRECTORY_SEPARATOR;
+            $luyaYiiFile = $this->getCoreBasePath() . DIRECTORY_SEPARATOR .  'Yii.php';
             
-            require_once($this->getCoreBasePath() . '/Yii.php');
+            if (file_exists($luyaYiiFile)) {
+                require_once($baseYiiFolder . 'BaseYii.php');
+                require_once($luyaYiiFile);
+            } else {
+                require_once($baseYiiFolder . 'Yii.php');
+            }
             
             Yii::setAlias('@luya', $this->getCoreBasePath());
-            return $require;
+            
+            return true;
         }
 
         throw new Exception("YiiBase file does not exits '".$this->_baseYiiFile."'.");
