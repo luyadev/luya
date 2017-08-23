@@ -95,6 +95,17 @@ abstract class Boot
     }
     
     /**
+     * The prependConfigArray will be merged into the config, 
+     * this way you can prepand config values for a custom Boot class.
+     * 
+     * @return array
+     */
+    public function prependConfigArray()
+    {
+        return [];
+    }
+    
+    /**
      * Get the config array from the configFile path with the predefined values.
      *
      * @throws \luya\Exception Throws exception if the config file does not exists.
@@ -116,6 +127,11 @@ abstract class Boot
             // adding default configuration timezone if not set
             if (!array_key_exists('timezone', $config)) {
                 $config['timezone'] = 'Europe/Berlin';
+            }
+            
+            // preset the values from the defaultConfigArray
+            if (!empty($this->prependConfigArray())) {
+                $config = ArrayHelper::merge($config, $this->prependConfigArray());
             }
          
             $this->_configArray = $config;
