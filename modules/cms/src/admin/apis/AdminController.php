@@ -42,7 +42,7 @@ class AdminController extends \luya\admin\base\RestController
         foreach (BlockGroup::find()->asArray()->all() as $group) {
             $blocks = [];
             $groupPosition = null;
-            foreach (Block::find()->where(['group_id' => $group['id']])->all() as $block) {
+            foreach (Block::find()->where(['group_id' => $group['id'], 'is_disabled' => false])->all() as $block) {
                 $obj = Block::objectId($block['id'], 0, 'admin');
                 if (!$obj || in_array(get_class($obj), Yii::$app->getModule('cmsadmin')->hiddenBlocks)) {
                     continue;
