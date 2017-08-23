@@ -951,8 +951,6 @@
 	zaa.controller("NavItemController", function($scope, $rootScope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
 
 		$scope.loaded = false;
-		
-		$scope.itemSettingsOverlay = true;
 
 		$scope.NavController = $scope.$parent;
 
@@ -1011,6 +1009,8 @@
 		$scope.homeUrl = $rootScope.luyacfg.homeUrl;
 
 		$scope.currentPageVersion = 0;
+		
+		$scope.currentPageVersionAlias;
 
 		$scope.trashItem = function() {
 			if ($scope.lang.is_default == 0) {
@@ -1130,6 +1130,7 @@
 									$scope.currentPageVersion = response.data.item.nav_item_type_id;
 								}
 								if (response.data.item.nav_item_type_id in response.data.typeData) {
+									$scope.currentPageVersionAlias = $scope.container = response.data.typeData[$scope.currentPageVersion]['version_alias'];
 									$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
 								}
 							}
@@ -1140,11 +1141,19 @@
 				}
 			});
 		};
-
+		
+		$scope.versionDropDownVisbility = false;
+		
+		$scope.toggleVersionsDropdown = function() {
+			$scope.versionDropDownVisbility = !$scope.versionDropDownVisbility;
+		};
+		
 		$scope.switchVersion = function(pageVersionid) {
 			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
+			$scope.currentPageVersionAlias = $scope.typeData[pageVersionid]['version_alias'];
 			$scope.currentPageVersion = pageVersionid;
 			$scope.loadLiveUrl();
+			$scope.toggleVersionsDropdown();
 		};
 
 		$scope.refreshForce = function() {
@@ -1156,6 +1165,17 @@
 				$scope.getItem($scope.lang.id, $scope.NavController.id);
 			}
 		};
+		
+		/* new settings overlay */
+		
+		$scope.settingsOverlayVisibility = true;
+		
+		$scope.toggleSettingsOverlay = function(tab) {
+			$scope.settingsOverlayVisibility = !$scope.settingsOverlayVisibility;
+			if (tab) {
+				$scope.tab = tab;
+			}
+		}
 
 		/**
 		 * Refresh the current layout container blocks.

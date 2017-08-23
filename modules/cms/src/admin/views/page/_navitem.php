@@ -88,7 +88,7 @@ use luya\helpers\Html;
 </div>
 </script>
 <?= $this->render('_navitem_settings'); ?>
-<div class="cmsadmin-nav-tabs">
+<div class="cmsadmin-nav-tabs" ng-if="loaded">
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item nav-item-title">
             <span class="flag flag-{{lang.short_code}}">
@@ -97,10 +97,9 @@ use luya\helpers\Html;
             <span>{{ item.title }}</span>
         </li>
     </ul>
-
     <ul class="nav nav-tabs flex-no-wrap" role="tablist">
         <li class="nav-item nav-item-alternative nav-item-icon ml-auto" ng-show="isTranslated">
-            <a class="nav-link" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=1">
+            <a class="nav-link" ng-click="toggleSettingsOverlay(1)">
                 <i class="material-icons">edit</i>
             </a>
         </li>
@@ -113,21 +112,21 @@ use luya\helpers\Html;
             </a>
         </li>
     </ul>
-
-    <ul class="nav nav-tabs ml-auto" role="tablist">
-        <li class="nav-item dropdown" ng-class="{'show': toggleVersionsDropdown}">
-            <a class="nav-link dropdown-toggle" role="button" ng-click="toggleVersionsDropdown = !toggleVersionsDropdown">Versions (#{{currentPageVersion}})</a>
-            <div class="dropdown-menu" ng-class="{'show': toggleVersionsDropdown}">
-                <button type="button" class="dropdown-item" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-repeat="versionItem in typeData" ng-show="item.nav_item_type==1 && isTranslated" ng-click="switchVersion(versionItem.id)">
-                    <span>{{ versionItem.version_alias }} (#{{versionItem.id}})</span>
-                </button>
+    <ul class="nav nav-tabs ml-auto" role="tablist" ng-if="item.nav_item_type==1">
+        <li class="nav-item dropdown" ng-class="{'show': versionDropDownVisbility}">
+            <a class="nav-link dropdown-toggle" role="button" ng-click="toggleVersionsDropdown()">{{ currentPageVersionAlias }}</a>
+            <div class="dropdown-menu" ng-class="{'show': versionDropDownVisbility}">
+                <div ng-repeat="versionItem in typeData">
+                    <button type="button" class="dropdown-item" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-click="switchVersion(versionItem.id)">
+                        <span>{{ versionItem.version_alias }} (#{{$index+1}})</span>
+                    </button>
+                </div>
                 <div class="dropdown-divider"></div>
-                <span class="dropdown-item" ng-click="itemSettingsOverlay=!itemSettingsOverlay;tab=3"><i class="material-icons">add_box</i> <span>Add version</span></span>
+                <span class="dropdown-item" ng-click="toggleSettingsOverlay(3); toggleVersionsDropdown()"><i class="material-icons">add_box</i> <span>Add version</span></span>
             </div>
         </li>
     </ul>
 </div>
-
 <div ng-if="!loaded">loading...</div>
 <div class="cmsadmin-page" ng-if="isTranslated && loaded">
     <div class="row" ng-if="item.nav_item_type==1" ng-repeat="(key, row) in container.__placeholders track by key">
