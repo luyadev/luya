@@ -27,3 +27,16 @@
         padding-right: 40px;
     }
 }
+
+.selectableRow td {
+    cursor: pointer;
+}
+
+.is-selected-row td {
+    background-color: theme-color(primary);
+    color: color(white);
+
+    .material-icons {
+        color: color(white);
+    }
+}

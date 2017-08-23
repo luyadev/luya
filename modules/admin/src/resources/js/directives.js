@@ -1354,13 +1354,24 @@
                 scope.random = Math.random().toString(36).substring(7);
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label">' +
-                            '<label>{{label}}</label></div>' +
+                return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label for="{{id}}">{{label}}</label>' +
+                            '</div>' +
                             '<div class="form-side">' +
-                                '<input class="form-control" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> <span class="badge badge-secondary">{{optionitems.length}} ' + i18n['js_dir_till'] + ' {{options.items.length}}</span>'+
-                                '<div ng-repeat="(k, item) in optionitems track by k">' +
-                                    '<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
-                                    '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
+
+                                '<div class="input-group mb-3">' +
+                                    '<div class="input-group-addon">' +
+                                        '<i class="material-icons">search</i>' +
+                                    '</div>' +
+                                    '<input class="form-control" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Enter search term...">' +
+
+                                    '<span class="zaa-checkbox-array-counter badge badge-secondary">{{optionitems.length}} ' + i18n['js_dir_till'] + ' {{options.items.length}}</span>' +
+                                '</div>' +
+
+                                '<div class="form-check" ng-repeat="(k, item) in optionitems track by k">' +
+                                    '<input type="checkbox" class="form-check-input" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
+                                        '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';

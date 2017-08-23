@@ -21,6 +21,15 @@ textarea {
     min-height: 46px;
 }
 
+.form-check {
+    @include clearfix;
+    user-select: none;
+
+    .form-check-input + label {
+        padding-left: 25px;
+    }
+}
+
 .form-check-label {
     cursor: pointer;
     margin-bottom: 0;
