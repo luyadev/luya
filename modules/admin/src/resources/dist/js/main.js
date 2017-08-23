@@ -3020,7 +3020,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                             '</div>' +
                         '</div>' +
                     '</div>' +
-                    '<modal is-modal-hidden="data.modalState">'+
+                    '<modal is-modal-hidden="data.modalState" modal-title="{{label}}">'+
                         '<update-form-redirect data="data.model"></update-form-redirect>'+
                         '<button ng-click="unset(); data.modalState=1" type="button" class="btn red"><i class="material-icons">cancel</i></button> '+
                         '<button ng-click="data.modalState=1" class="btn" type="button"><i class="material-icons">check</i> '+i18n['js_link_set_value']+'</button>'+
