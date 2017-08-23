@@ -152,12 +152,15 @@ $this->beginBody();
                                  <td class="<?= $i != 1 ?: 'tab-padding-left'; ?>"><?= $element['html']; ?></td>
                              <?php endforeach; ?>
                          <?php endforeach; ?>
-                        <td class="text-right">
+                        <td class="text-right" ng-hide="isLocked(config.tableName, item[config.pk])">
                             <?php if (count($this->context->getButtons()) > 0): ?>
                                 <?php foreach ($this->context->getButtons() as $item): ?>
                                     <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i></button>
                                 <?php endforeach; ?>
                              <?php endif; ?>
+                        </td>
+                        <td class="text-right" ng-show="isLocked(config.tableName, item[config.pk])">
+                            <small><i class="material-icons btn-icon">lock_outline</i><?= Module::t('locked_info'); ?></small>
                         </td>
                     </tr>
                 </tbody>
