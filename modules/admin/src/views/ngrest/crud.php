@@ -118,14 +118,18 @@ $this->beginBody();
                         <?php foreach ($config->getPointer('list') as $item): ?>
                         <th class="tab-padding-left">
                             <div class="table-sorter-wrapper" ng-class="{'is-active' : isOrderBy('+<?= $item['name']; ?>') || isOrderBy('-<?= $item['name']; ?>') }">
-                                <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-sorting': !isOrderBy('-<?= $item['name']; ?>')}">
+                                <?php if ($config->getDefaultOrderField()): ?>
+                                    <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-sorting': !isOrderBy('-<?= $item['name']; ?>')}">
+                                        <span><?= $item['alias']; ?></span>
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </div>
+                                    <div class="table-sorter table-sorter-down" ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'is-sorting': !isOrderBy('+<?= $item['name']; ?>')}">
+                                        <span><?= $item['alias']; ?></span>
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                <?php else: ?>
                                     <span><?= $item['alias']; ?></span>
-                                    <i class="material-icons">keyboard_arrow_up</i>
-                                </div>
-                                <div class="table-sorter table-sorter-down" ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'is-sorting': !isOrderBy('+<?= $item['name']; ?>')}">
-                                    <span><?= $item['alias']; ?></span>
-                                    <i class="material-icons">keyboard_arrow_down</i>
-                                </div>
+                                <?php endif; ?>
                             </div>
                         </th>
                         <?php endforeach; ?>

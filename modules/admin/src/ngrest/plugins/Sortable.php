@@ -22,8 +22,8 @@ class Sortable extends Plugin
     public function renderList($id, $ngModel)
     {
         return [
-            $this->createTag('i', 'keyboard_arrow_up', ['ng-init' => '$first ? changeOrder(\''.$this->name.'\', \'+\') : null', 'ng-click' => 'sortableUp($index, item, \''.$this->name.'\')', 'ng-hide' => '$first', 'class' => 'material-icons crud__button btn-flat btn--bordered sortable sortable--up']),
-            $this->createTag('i', 'keyboard_arrow_down', ['ng-click' => 'sortableDown($index, item, \''.$this->name.'\')', 'ng-hide' => '$last', 'class' => 'material-icons crud__button btn-flat btn--bordered sortable sortable--down'])
+            $this->createTag('i', 'keyboard_arrow_up', ['ng-init' => '$first ? changeOrder(\''.$this->name.'\', \'+\') : null', 'ng-click' => 'sortableUp($index, item, \''.$this->name.'\')', 'ng-hide' => '$first', 'class' => 'btn btn-outline-secondary btn-icon']),
+            $this->createTag('i', 'keyboard_arrow_down', ['ng-click' => 'sortableDown($index, item, \''.$this->name.'\')', 'ng-hide' => '$last', 'class' => 'btn btn-outline-secondary btn-icon'])
         ];
     }
     
