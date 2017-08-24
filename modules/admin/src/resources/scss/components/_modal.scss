@@ -19,3 +19,19 @@
     margin: 30px 50px;
     max-width: 100%;
 }
+
+
+.modal-header {
+    .close {
+        position: relative;
+    }
+}
+
+.modal-esc {
+    position: absolute;
+    top: 2px;
+    left:-35px;
+    font-size: 14px;
+    line-height: 1.5rem;
+    color: $gray-500;
+}
