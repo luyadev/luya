@@ -162,21 +162,27 @@
   padding: 0;
   opacity: 0.5;
 
+  position: relative;
+
   background-color: transparent;
   background-position: center center;
   background-repeat: no-repeat;
   border: none;
   border-radius: 2px;
 
-  font-size: 0;
+  font-size: 10px;
 
   cursor: pointer;
-  
-  font-family: 'Material Icons';
 }
 
 .nw-button:before {
   font-size: 12px;
+  font-family: 'Material Icons' !important;
+  height: 30px;
+  width:30px;
+  top:0;
+  left: 0;
+  position: absolute;
 }
 
 .nw-button.bold:before {
