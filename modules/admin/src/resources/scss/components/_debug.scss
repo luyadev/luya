@@ -1,0 +1,51 @@
+.debug {
+
+    width: auto;
+    min-width: 280px;
+    padding: 40px 10px 20px 10px;
+    background: $gray-300;
+    border-radius: 5px;
+    position: absolute;
+    box-shadow: $tooltip-box-shadow;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999999;
+
+    max-height: 480px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .close {
+        margin-top: -30px;
+        cursor: pointer;
+    }
+
+
+
+    @media (min-width: $mobile-nav-breakpoint) {
+
+        position: absolute;
+        bottom: 10px;
+        left: 65px;
+        transform: none;
+        top:auto;
+        overflow: visible;
+
+
+        &-toggled {
+            left: 205px;
+        }
+
+        &:after {
+            border-color: transparent  $gray-300 transparent transparent;
+            border-style: solid;
+            border-width: 5px 5px 5px 0;
+            bottom: 15px;
+            content: "";
+            left: -5px;
+            position: absolute;
+        }
+    }
+}
