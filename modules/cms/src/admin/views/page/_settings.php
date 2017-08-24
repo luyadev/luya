@@ -21,6 +21,9 @@ use luya\cms\admin\Module;
                 <li class="nav-item">
                     <a class="nav-link" ng-click="tab=5" ng-class="{'active':tab==5}">Startseite</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" ng-click="tab=6" ng-class="{'active':tab==6}">Remove</a>
+                </li>
             </ul>
         </div>
         <div class="col-md-9" ng-switch="tab">
@@ -80,6 +83,11 @@ use luya\cms\admin\Module;
                     <i class="material-icons cms__prop-toggle green-text text-darken-1" style="vertical-align: middle; margin-right: 3px;">check_circle</i>
                     <span  style="vertical-align: bottom"><?= Module::t('view_update_is_homepage'); ?></span>
                 </span>
+            </div>
+            <div ng-switch-when="6">
+                <h1>Remove</h1>
+                <p>Remove this page.</p>
+                <p><a ng-click="trash()" class="btn btn-icon"><i class="material-icons">delete</i></a></p>
             </div>
         </div>
     </div>
