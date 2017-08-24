@@ -173,8 +173,10 @@ $this->beginPage()
         </div>
     </div>
     
-    <div ng-show="showDebugBar" style="position:absolute; bottom:0px; height:200px; width:100%; background-color:white; overflow:auto; z-index:99999999;">
-    	<button type="button" ng-click="showDebugBar=!showDebugBar">X</button>
+    <div class="debug " ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}">
+        <button type="button" class="close" ng-click="showDebugBar=!showDebugBar" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
 		<div class="row">
 			<div class="col-md-2">
 				<table class="table table-bordered table-striped">
