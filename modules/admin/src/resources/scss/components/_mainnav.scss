@@ -188,13 +188,21 @@
     .mainnav-link:hover & {
         color: theme-color(primary);
     }
+
+    + span {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
 }
+
 
 .mainnav-image-icon {
     height: auto;
     margin-top: -2px;
     min-width: 24px;
     width: 100%;
+    max-width: 25px;
 
     &-small {
         margin-top: 0;

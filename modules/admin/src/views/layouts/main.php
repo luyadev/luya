@@ -173,47 +173,37 @@ $this->beginPage()
         </div>
     </div>
     
-    <div ng-show="showDebugBar" style="position:absolute; bottom:0px; height:200px; width:100%; background-color:white; overflow:auto; z-index:99999999;">
-    	<button type="button" ng-click="showDebugBar=!showDebugBar">X</button>
-		<div class="row">
-			<div class="col-md-2">
-				<table class="table table-bordered table-striped">
-					<tr ng-repeat="(key, item) in AdminDebugBar.data" ng-class="{'table-primary': key == debugDetailKey}">
-						<td>{{ item.url }}</td>
-						<td>{{ item.responseStatus }}</td>
-						<td>{{ item.parseTime }}</td>
-						<td><button type="button" ng-click="loadDebugDetail(item, key)">Detail</button>
-					</tr>
-				</table>
-			</div>
-			<div class="col-md-10">
-				<div ng-show="debugDetail">
-					<table class="table table-bordered table-striped">
-						<tr>
-							<td>Request URL</td>
-							<td>{{debugDetail.url}}</td>
-						</tr>
-						<tr>
-							<td>Parse Time</td>
-							<td>{{debugDetail.parseTime}}</td>
-						</tr>
-						<tr>
-							<td>Request Data</td>
-							<td>{{debugDetail.requestData}}</td>
-						</tr>
-						<tr>
-							<td>Response Status</td>
-							<td>{{debugDetail.responseStatus}}</td>
-						</tr>
-						<tr>
-							<td>responseData</td>
-							<td>{{debugDetail.responseData}}</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="debug" ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}">
+        <button type="button" class="close" ng-click="showDebugBar=!showDebugBar" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="debug-inner">
+            <div class="debug-items" ng-show="debugItem" ng-hide="debugDetail">
+                <ul class="debug-item" ng-repeat="(key, item) in AdminDebugBar.data" ng-class="{'table-primary': key == debugDetailKey}">
+                    <li>URL: {{ item.url }}
+
+                    </li>
+                    <li>Status: {{ item.responseStatus }}</li>
+                    <li>Time: {{ item.parseTime }}ms</li>
+                    <li>
+                        <button class="btn btn-primary" type="button" ng-click="loadDebugDetail(item, key)">Details</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="debug-details">
+                <ul class="debug-detail" ng-show="debugDetail">
+                    <li>Request URL: {{debugDetail.url}}</li>
+                    <li>Parse Time: {{debugDetail.parseTime}}</li>
+                    <li>Request Data: {{debugDetail.requestData}}</li>
+                    <li>Response Status: {{debugDetail.responseStatus}}</li>
+                    <li>ResponseData: {{debugDetail.responseData}}</li>
+                    <li>
+                        <button class="btn btn-primary" type="button" ng-click="debugItem=!debugItem; debugDetail=!debugDetail">Hide Details</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div> <!-- end of debug inner -->
 </div>
 <div class="toasts" ng-repeat="item in toastQueue">
     <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
