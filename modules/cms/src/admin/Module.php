@@ -191,7 +191,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))
-            ->nodeRoute('menu_node_cms', 'art_track', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
+            ->nodeRoute('menu_node_cms', 'note_add', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
             ->node('menu_node_cmssettings', 'settings')
                 ->group('menu_group_env')
                     ->itemRoute('menu_group_item_env_permission', "cmsadmin/permission/index", 'gavel')
