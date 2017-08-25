@@ -48,7 +48,7 @@ public function chain()
         [self::EFFECT_THUMBNAIL, [
             'width' => 600,
             'height' => null,
-            'type' => \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET,
+            'mode' => \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET,
         ]],
         [self::EFFECT_CROP, [
             'width' => 400,
