@@ -98,6 +98,9 @@ abstract class Boot
      * The prependConfigArray will be merged into the config, 
      * this way you can prepand config values for a custom Boot class.
      * 
+     * > When using prependConfig inside a custom boot class, the custom boot class will not used in the vendor bin file `./vendor/bin/luya`,
+     * > so make sure to generate your own bin file.
+     * 
      * @return array
      */
     public function prependConfigArray()
