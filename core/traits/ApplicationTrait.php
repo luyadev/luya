@@ -122,6 +122,20 @@ trait ApplicationTrait
         $this->language = $locale;
         setlocale(LC_ALL, $locale.'.utf8', $locale);
     }
+
+    /**
+     * Get luya composer installer array data from the vendor folder.
+     */
+    public function getInstallerArray()
+    {
+    	$file = Yii::getAlias('@vendor' . DIRECTORY_SEPARATOR . 'luyadev' . DIRECTORY_SEPARATOR . 'installer.php');
+    	 
+    	if (is_file($file)) {
+    		return require($file);
+    	}
+    	 
+    	return false;
+    }
     
     /**
      * Read only property which is used in cli bootstrap process to set the @webroot alias

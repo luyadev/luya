@@ -326,12 +326,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "c28eeee6e22718be87b7e1ba9a9166510a2ff2e9"
+                "reference": "4e2fead7bd7bb5f99eb6f76651a99a75b24fb737"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/c28eeee6e22718be87b7e1ba9a9166510a2ff2e9",
-                "reference": "c28eeee6e22718be87b7e1ba9a9166510a2ff2e9",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/4e2fead7bd7bb5f99eb6f76651a99a75b24fb737",
+                "reference": "4e2fead7bd7bb5f99eb6f76651a99a75b24fb737",
                 "shasum": ""
             },
             "require": {
@@ -368,7 +368,7 @@
                 "composer",
                 "luya"
             ],
-            "time": "2017-08-26T13:41:37+00:00"
+            "time": "2017-08-27 06:58:14"
         },
         {
             "name": "phpmailer/phpmailer",
