@@ -125,6 +125,40 @@ trait ApplicationTrait
 
     /**
      * Get luya composer installer array data from the vendor folder.
+     * 
+     * Example Array
+     * 
+     * ```php
+     * 
+     * array(2) {
+     *   ["luyadev/luya-module-cms"]=>
+     *   array(3) {
+     *     ["package"]=>
+     *     array(3) {
+     *       ["name"]=>
+     *       string(23) "luyadev/luya-module-cms"
+     *       ["prettyName"]=>
+     *       string(23) "luyadev/luya-module-cms"
+     *       ["version"]=>
+     *       string(11) "9999999-dev"
+     *     }
+     *     ["blocks"]=>
+     *     array(1) {
+     *       [0]=>
+     *       string(99) "/Applications/MAMP/htdocs/sichtfeld-openair.ch/vendor/luyadev/luya-module-cms/src/frontend/blocks/*"
+     *     }
+     *     ["bootstrap"]=>
+     *     array(1) {
+     *       [0]=>
+     *       string(27) "luya/cms/frontend/Bootstrap"
+     *     }
+     *   }
+     *   ["__timestamp"]=>
+     *   int(1503819779)
+     * }
+	 * ```
+     * 
+     * @return array
      */
     public function getInstallerArray()
     {
@@ -135,6 +169,18 @@ trait ApplicationTrait
     	}
     	 
     	return false;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    protected function bootstrap()
+    {
+    	foreach ($this->getInstallerArray() as $package) {
+    		$this->bootstrap = array_merge($this->bootstrap, $package['bootstrap']);	
+    	}
+    	
+    	parent::bootstrap();
     }
     
     /**
