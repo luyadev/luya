@@ -38,7 +38,7 @@
         },
         "luya" : {
         	"bootstrap": ["\\luya\\cms\\frontend\\Bootstrap"],
-        	"blocks" : ["src/frontend/blocks/*"]
+        	"blocks" : ["src/frontend/blocks"]
         }
     },
     "config": {

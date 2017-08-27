@@ -17,6 +17,10 @@ final class Config extends ActiveRecord
 {
     use RegistryTrait;
     
+    const CONFIG_LAST_IMPORT_TIMESTAMP = 'last_import_timestamp';
+    
+    const CONFIG_SETUP_COMMAND_TIMESTAMP = 'setup_command_timestamp';
+    
     /**
      * @inheritdoc
      */

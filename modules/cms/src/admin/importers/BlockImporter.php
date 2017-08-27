@@ -6,6 +6,8 @@ use Yii;
 use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\console\Importer;
+use luya\helpers\FileHelper;
+use luya\helpers\StringHelper;
 
 class BlockImporter extends Importer
 {
@@ -32,6 +34,19 @@ class BlockImporter extends Importer
                 $exists[] = $model->id;
             }
         }
+        
+        foreach (Yii::$app->packageInstaller->configs as $config) {
+        	foreach ($config->blocks as $block) {
+        		if (is_file($block)) {
+        			
+        		} elseif (is_dir($block)) {
+        			foreach (FileHelper::findFiles($block) as $blockItem) {
+        				
+        			}
+        		}
+        	}
+        }
+        
         foreach ($allblocks as $block) {
             if (!in_array($block->id, $exists)) {
                 $this->addLog('block id '.$block->id.' removed from database.');

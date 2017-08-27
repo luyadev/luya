@@ -6,6 +6,7 @@ use Yii;
 use luya\base\AdminModuleInterface;
 use luya\base\Module;
 use luya\base\CoreModuleInterface;
+use luya\base\PackageInstaller;
 
 /**
  * LUYA Appliation trait
@@ -124,51 +125,19 @@ trait ApplicationTrait
     }
 
     /**
-     * Get luya composer installer array data from the vendor folder.
-     * 
-     * Example Array
-     * 
-     * ```php
-     * 
-     * array(2) {
-     *   ["luyadev/luya-module-cms"]=>
-     *   array(3) {
-     *     ["package"]=>
-     *     array(3) {
-     *       ["name"]=>
-     *       string(23) "luyadev/luya-module-cms"
-     *       ["prettyName"]=>
-     *       string(23) "luyadev/luya-module-cms"
-     *       ["version"]=>
-     *       string(11) "9999999-dev"
-     *     }
-     *     ["blocks"]=>
-     *     array(1) {
-     *       [0]=>
-     *       string(99) "/Applications/MAMP/htdocs/sichtfeld-openair.ch/vendor/luyadev/luya-module-cms/src/frontend/blocks/*"
-     *     }
-     *     ["bootstrap"]=>
-     *     array(1) {
-     *       [0]=>
-     *       string(27) "luya/cms/frontend/Bootstrap"
-     *     }
-     *   }
-     *   ["__timestamp"]=>
-     *   int(1503819779)
-     * }
-	 * ```
-     * 
-     * @return array
+     * Get the package Installer
+     * @return \luya\base\PackageInstaller
      */
-    public function getInstallerArray()
+    public function getPackageInstaller()
     {
     	$file = Yii::getAlias('@vendor' . DIRECTORY_SEPARATOR . 'luyadev' . DIRECTORY_SEPARATOR . 'installer.php');
-    	 
+    	
+    	$data = [];
     	if (is_file($file)) {
-    		return require($file);
+    		$data = require($file);
     	}
     	 
-    	return false;
+    	return new PackageInstaller($data);
     }
     
     /**
@@ -176,10 +145,8 @@ trait ApplicationTrait
      */
     protected function bootstrap()
     {
-    	foreach ($this->getInstallerArray() as $package) {
-    		if (isset($package['bootstrap'])) {
-    			$this->bootstrap = array_merge($this->bootstrap, $package['bootstrap']);
-    		}
+    	foreach ($this->getPackageInstaller()->getConfigs() as $config) {
+    		$this->bootstrap = array_merge($this->bootstrap, $config->bootstrap);
     	}
     	
     	parent::bootstrap();
