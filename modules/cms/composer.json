@@ -35,6 +35,10 @@
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
+        },
+        "luya" : {
+        	"bootstrap": ["luya/cms/frontend/Bootstrap"],
+        	"blocks" : ["src/frontend/blocks/*"]
         }
     },
     "config": {
