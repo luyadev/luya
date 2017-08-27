@@ -177,7 +177,9 @@ trait ApplicationTrait
     protected function bootstrap()
     {
     	foreach ($this->getInstallerArray() as $package) {
-    		$this->bootstrap = array_merge($this->bootstrap, $package['bootstrap']);	
+    		if (isset($package['bootstrap'])) {
+    			$this->bootstrap = array_merge($this->bootstrap, $package['bootstrap']);
+    		}
     	}
     	
     	parent::bootstrap();
