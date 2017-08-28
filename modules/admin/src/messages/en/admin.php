@@ -246,4 +246,5 @@ return [
     'layout_useronline_inactive' => 'inactive',
     'login_ssl_info' => 'Website uses encrypted secure connection.',
     'locked_info' => 'Someone already editing',
+	'menu_dashboard' => 'Dashboard',
 ];

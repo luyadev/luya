@@ -1,21 +1,24 @@
+<?php
+use luya\admin\Module;
+?>
 <div class="luya-main luya-main-crud" ng-controller="DefaultController">
     <div class="luya-subnav">
-        <input type="checkbox" name="modulenav-toggler" id="modulenav-toggler" checked>
         <div class="modulenav-mobile">
-            <div class="modulenav-mobile-title" ng-init="isOpenModulenav = false">Current subnav item name</div>
+            <div class="modulenav-mobile-title" ng-show="currentItem">{{ currentItem.alias }}</div>
+            <div class="modulenav-mobile-title" ng-show="!currentItem"><?= Module::t('menu_dashboard'); ?></div>
             <label for="modulenav-toggler" class="modulenav-toggler-icon" ng-click="isOpenModulenav = !isOpenModulenav">
-                <i class="material-icons" ng-show="!isOpenModulenav">close</i>
-                <i class="material-icons" ng-show="isOpenModulenav">menu</i>
+                <i class="material-icons" ng-show="!isOpenModulenav">menu</i>
+                <i class="material-icons" ng-show="isOpenModulenav">close</i>
             </label>
         </div>
-        <div class="modulenav">
+        <div class="modulenav" ng-class="{'modulenav-mobile-hidden': !isOpenModulenav}">
             <div class="modulenav-group">
                 <ul class="modulenav-list">
                     <li class="modulenav-item">
                         <span class="modulenav-link" ng-class="{'modulenav-link-active' :currentItem == null }" ng-click="loadDashboard()">
                             <i class="modulenav-icon material-icons">dashboard</i>
                             <span class="modulenav-label">
-                                Dashboard
+                                <?= Module::t('menu_dashboard'); ?>
                             </span>
                         </span>
                     </li>
@@ -37,7 +40,6 @@
         </div>
     </div>
     <div class="luya-content" ui-view>
-        <h1>Dashboard</h1>
         <div class="card-columns">
             <div class="card" ng-repeat="item in dashboard">
                 <div class="card-body">

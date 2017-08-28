@@ -1,13 +1,14 @@
 .modulenav {
     padding: 0 10px 20px;
-    display: none;
+    display: block;
     flex: 0 0 100%;
     font-size: 14px;
     width: 100%;
-
-    @media (min-width: $mobile-nav-breakpoint) {
-        display: block;
-    }
+    
+    
+        @media (min-width: $mobile-nav-breakpoint) {
+            display: block;
+        }
 }
 
 .modulenav-group {
@@ -92,8 +93,20 @@
     padding: 0 10px;
     position: relative;
 
-    @media (min-width: $mobile-nav-breakpoint) {
-        display: none;
+    
+        @media (min-width: $mobile-nav-breakpoint) {
+            display: none;
+        }
+
+    &-hidden {
+        
+        @media (min-width: $mobile-nav-breakpoint) {
+            display: block;
+        }
+    
+        display:none;
+        
+        
     }
 }
 
@@ -110,11 +123,4 @@
     transform: translateY(-50%);
 
     font-size: 14px;
-}
-
-#modulenav-toggler {
-    display: none;
-}
-#modulenav-toggler:checked ~ .modulenav {
-    display: block;
 }

@@ -23,7 +23,7 @@ use luya\admin\Module;
     <div class="col-md-3">
         <form ng-submit="saveTag()">
             <zaa-text model="newTagName" label="<?= Module::t('aws_tag_new')?>" />
-            <button type="submit" class="btn btn-primary"><?= Module::t('aws_tag_add')?></button>
+            <button type="submit" class="btn btn-icon btn-save"><?= Module::t('aws_tag_add')?></button>
         </form>
     </div>
 </div>
