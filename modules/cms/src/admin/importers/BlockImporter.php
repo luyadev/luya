@@ -7,41 +7,35 @@ use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\console\Importer;
 use luya\helpers\FileHelper;
-use luya\helpers\StringHelper;
+use luya\cms\base\BlockInterface;
 
+/**
+ * Import cms Blocks.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class BlockImporter extends Importer
 {
+	/**
+	 * {@inheritDoc}
+	 * @see \luya\console\Importer::run()
+	 */
     public function run()
     {
         $allblocks = Block::find()->all();
         $exists = [];
         
         foreach ($this->getImporter()->getDirectoryFiles('blocks') as $file) {
-            $ns = $file['ns'];
-            $model = Block::find()->where(['class' => $ns])->one();
-        
-            $blockObject = $this->createBlockObject($file['ns']);
-            $blockGroupId = $this->getBlockGroupId($blockObject);
-            
-            if (!$model) {
-                $block = new Block();
-                $block->group_id = $blockGroupId;
-                $block->class = $ns;
-                $block->save();
-                $this->addLog($ns.' new block has been added to database.');
-            } else {
-                $model->updateAttributes(['group_id' => $blockGroupId]);
-                $exists[] = $model->id;
-            }
+        	$exists[] = $this->saveBlock($file['ns']);
         }
         
         foreach (Yii::$app->packageInstaller->configs as $config) {
         	foreach ($config->blocks as $block) {
         		if (is_file($block)) {
-        			
+        			$exists[] = $this->saveBlockByPath($blockItem);
         		} elseif (is_dir($block)) {
         			foreach (FileHelper::findFiles($block) as $blockItem) {
-        				
+        				$exists[] = $this->saveBlockByPath($blockItem);
         			}
         		}
         	}
@@ -49,18 +43,72 @@ class BlockImporter extends Importer
         
         foreach ($allblocks as $block) {
             if (!in_array($block->id, $exists)) {
-                $this->addLog('block id '.$block->id.' removed from database.');
+                $this->addLog('- Deleted block ID '.$block->id.' from database.');
                 $block->delete();
             }
         }
     }
     
-    private function createBlockObject($ns)
+    /**
+     * 
+     * @param unknown $fullClassName
+     * @return number
+     */
+    protected function saveBlock($fullClassName)
     {
-        return new $ns();
+    	$model = Block::find()->where(['class' => $fullClassName])->one();
+    	
+    	$blockObject = $this->createBlockObject($fullClassName);
+    	
+    	$blockGroupId = $this->getBlockGroupId($blockObject);
+    	
+    	if (!$model) {
+    		$model = new Block();
+    		$model->group_id = $blockGroupId;
+    		$model->class = $fullClassName;
+    		$model->save();    		
+    		$this->addLog("+ Added block '{$fullClassName}' to database.");
+    	} else {
+    		$model->updateAttributes(['group_id' => $blockGroupId]);
+    	}
+    	
+    	return $model->id;
     }
     
-    private function getBlockGroupId($blockObject)
+    /**
+     * 
+     * @param unknown $path
+     * @return number|boolean
+     */
+    protected function saveBlockByPath($path)
+    {
+    	$info = FileHelper::classInfo($path);
+    	
+    	if ($info) {
+    		$className = $info['namespace'] . '\\' . $info['class'];
+    		
+    		return $this->saveBlock($className);
+    	}
+    	
+    	return false;
+    }
+    
+    /**
+     * 
+     * @param unknown $className
+     * @return object|mixed
+     */
+    protected function createBlockObject($className)
+    {
+    	return Yii::createObject(['class' => $className]);
+    }
+    
+    /**
+     * 
+     * @param BlockInterface $blockObject
+     * @return unknown
+     */
+    protected function getBlockGroupId(BlockInterface $blockObject)
     {
         $groupClassName = $blockObject->blockGroup();
         
