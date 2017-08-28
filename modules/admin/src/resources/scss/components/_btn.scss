@@ -35,26 +35,6 @@
     }
 }
 
-// ==================================================
-// Button without label ( Square )
-// ==================================================
-
-.btn-square {
-    padding: 5px 4px 5px 9px;
-
-
-    &.btn-link {
-        padding: 2px;
-    }
-}
-
-// Label outside of buttons
-
-.btn-square-label {
-    margin-left: 10px;
-    vertical-align: middle;
-    @include google-chrome-font-offset-fix;
-}
 
 // ==================================================
 // Button with Icons
@@ -65,49 +45,57 @@
     //Generic button colors and backgrounds
 
     &-save {
-        background: theme-color('primary');
+        background: theme-color('green');
+        border-color: theme-color('green');
         color: $btn-color-light !important;
     }
     &-delete {
         background: theme-color('danger');
+        border-color: theme-color('danger');
         color: $btn-color-light !important;
     }
     &-cancel {
         background: theme-color('light');
+        border-color: theme-color('light');
         color: $btn-color-dark !important;
 
     }
     &-edit {
         background: theme-color('light');
+        border-color: theme-color('light');
         color: $btn-color-dark !important;
     }
     &-add {
         background: theme-color('success');
+        border-color: theme-color('success');
         color: $btn-color-light !important;
     }
     &-help {
         background: theme-color('light');
+        border-color: theme-color('light');
         color: $btn-color-dark !important;
     }
     &-download {
         background: theme-color('success');
+        border-color: theme-color('success');
         color: $btn-color-light !important;
     }
     &-upload {
         background: theme-color('success');
+        border-color: theme-color('success');
         color: $btn-color-light !important;
     }
     &-config {
         background: theme-color('light');
+        border-color: theme-color('light');
         color: $btn-color-dark !important;
     }
-
 
     // Generic button icons
 
     &-icon {
 
-        padding-left: 30px;
+        padding-left: 25px;
         position: relative;
 
         &:after {
@@ -166,4 +154,42 @@
     }
 }
 
+
+.btn-nolabel {
+    padding-left: 0;
+    min-width: 35px;
+    min-height: 35px;
+
+    &:after {
+        left: 8px;
+        top: 17px;
+    }
+}
+
+// ==================================================
+// Symbol buttons, crud buttons
+// ==================================================
+
+.btn-symbol {
+    padding: 5px 4px 5px 9px;
+    min-width: 35px;
+    min-height: 35px;
+
+    &:hover {
+        color: theme-color(primary);
+    }
+
+    &.btn-link {
+        padding: 2px;
+        background: transparent;
+    }
+}
+
+// Label outside of buttons
+
+.btn-symbol-label {
+    margin-left: 10px;
+    vertical-align: middle;
+    @include google-chrome-font-offset-fix;
+}
 
