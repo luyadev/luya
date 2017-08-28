@@ -34,7 +34,7 @@
 }
 
 .luya-mainnav {
-    z-index: 10;
+    z-index: index($elements, before-content);
     @media (min-width: $mobile-nav-breakpoint) {
         position: relative;
         width: auto;
@@ -72,7 +72,7 @@
             top: 0;
             transform: translateX(calc(-100% + 50px));
             transition: .2s ease-in-out transform;
-            z-index: 20;
+            z-index: index($elements, before-content);
 
             &:hover {
                 transform: translateX(0);

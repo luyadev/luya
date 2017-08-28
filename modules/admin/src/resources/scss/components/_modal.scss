@@ -12,7 +12,7 @@
 }
 
 .modal-body-gray {
-    background-color: map-get($grays, 100);;
+    background-color: map-get($grays, 100);
 }
 
 .modal-xl {
@@ -29,9 +29,14 @@
 
 .modal-esc {
     position: absolute;
-    top: 2px;
+    top: 1px;
     left:-35px;
     font-size: 14px;
     line-height: 1.5rem;
     color: $gray-500;
+    cursor: pointer;
+}
+
+.modal-close {
+    cursor: pointer;
 }

@@ -93,7 +93,7 @@ textarea {
     position: absolute;
     right: 27px;
     top: 5.5px;
-    z-index: 10;
+    z-index: index($elements, form);;
 }
 
 .form-i18n-label {
@@ -141,7 +141,7 @@ input[type="radio"] {
             top: 3px;
             transition: .25s ease-in-out border;
             width: 16px;
-            z-index: 40;
+            z-index: index($elements, before-form);
         }
     }
 

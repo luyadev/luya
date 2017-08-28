@@ -27,9 +27,11 @@ use luya\admin\Module as Admin;
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{title}}</h5>
-                <button type="button" class="close" aria-label="Close" ng-click="isModalHidden=1">
-                    <span aria-hidden="true"><span class="modal-esc">ESC</span> &times;</span>
-                </button>
+                <div class="modal-close">
+                    <button type="button" class="close" aria-label="Close" ng-click="isModalHidden=1">
+                        <span aria-hidden="true"><span class="modal-esc">ESC</span> &times;</span>
+                    </button>
+                </div>
             </div>
         <div class="modal-body" ng-transclude />
     </div>
