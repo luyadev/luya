@@ -1,9 +1,13 @@
 # Admin CSS Styles
 
-All [Bootstrap4](https://v4-alpha.getbootstrap.com/) css style classes are available in der Admin Interface.
+All [Bootstrap 4](https://v4-alpha.getbootstrap.com/) css style classes are available in der Admin Interface.
 On top of this LUYA provides generic css classes for buttons with predefined icons and colors.
 
-### Default buttons
+## Predefined Buttons
+
+LUYA Admin has a set of Class you can use inside your admin views, this makes sure to render the elements the same in the whole UI. 
+
+Below a set of buttons:
 
 ```html
 <button type="button" class="btn btn-save">Save</button>
@@ -17,21 +21,18 @@ On top of this LUYA provides generic css classes for buttons with predefined ico
 <button type="button" class="btn btn-config">Configuration</button>
 ```
 
-### Default buttons with icons
-
-Simply add the css class ```btn-icon``` to the above listed buttons and the related icon will appear.
+You can either combine the btn class with predefined icons, to do so simply add the css class `btn-icon` to the above listed buttons and the related icon will appear.
 
 ```html
-<button type="button" class="btn btn-save btn-icon">Save</button>```
+<button type="button" class="btn btn-save btn-icon">Save</button>
 ```
 
-### Default buttons without label but icons
+Sometimes you just want to display the icon but without label, therefore use `btn-nolabel`:
 
 ```html
 <button type="button" class="btn btn-save btn-icon btn-nolabel"></button>
 ```
-
-### Mixed examples
+Below some examples
 
 ```html
 <button type="button" class="btn btn-icon btn-save">Safe button with icon and text</button>
@@ -39,7 +40,7 @@ Simply add the css class ```btn-icon``` to the above listed buttons and the rela
 <button type="button" class="btn btn-icon btn-cancel btn-nolabel"></button>
 ```
  
-## Default icons
+## Which icon stands for what
 
 Material Design Icons: https://material.io/icons/
 
