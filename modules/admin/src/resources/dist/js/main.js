@@ -5725,20 +5725,20 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		$scope.toggleAll = function() {
 			angular.forEach($scope.auths,function(value, key) {
 				$scope.rights[value.id] = {base: 1, create: 1, update: 1, 'delete': 1 };
-			})
+			});
 		};
 		
 		$scope.untoggleAll = function() {
 			angular.forEach($scope.auths,function(value, key) {
 				$scope.rights[value.id] = {base: 0, create: 0, update: 0, 'delete': 0 };
-			})
+			});
 		};
 		
 		$scope.getRights = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('getRights')).then(function(response) {
 				$scope.rights = response.data.rights;
 				$scope.auths = response.data.auths;
-			})
+			});
 		};
 		
 		$scope.$on('awloaded', function(e, d) {
@@ -5760,6 +5760,8 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 			$scope.currentItem = null;
 			return $state.go('default', { 'moduleId' : $scope.moduleId});
 		}
+		
+		$scope.isOpenModulenav = false;
 		
 		$scope.items = [];
 		
@@ -5806,6 +5808,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		};
 		
 		$scope.click = function(item) {
+			$scope.isOpenModulenav = false;
 			$scope.currentItem = item;
 			
 			var id = item.route;
@@ -5836,8 +5839,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 	zaa.controller("DashboardController", function ($scope) {
 		$scope.logItemOpen = false;
 	});
-	
-	// LayoutMenuController.js
 	
 	zaa.filter('lockFilter', function() {
 		return function(data, table, pk) {
@@ -6017,8 +6018,10 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		
 		$scope.currentItem = {};
 		
+		$scope.isOpen = false;
+		
 		$scope.click = function(menuItem) {
-			$scope.mobileOpen = false;
+			$scope.isOpen = false;
 			$scope.$broadcast('topMenuClick', { menuItem : menuItem });
 			if (menuItem.template) {
 				return $state.go('custom', { 'templateId' : menuItem.template });

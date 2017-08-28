@@ -27,10 +27,10 @@ $this->beginPage()
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
     <div class="luya-mainnav">
-        <div class="mainnav" ng-class="{'mainnav-small' : !isHover}" ng-init="isOpen = false">
+        <div class="mainnav" ng-class="{'mainnav-small' : !isHover}">
             <div class="mainnav-toggler-mobile">
                 <div class="mainnav-toggler-mobile-icon" ng-click="isOpen = !isOpen">
-                    <div class="mainnav-mobile-title">Current mainnav page name</div>
+                    <div class="mainnav-mobile-title">{{currentItem.alias}}</div>
                     <i class="material-icons" ng-show="!isOpen">menu</i>
                     <i class="material-icons" ng-show="isOpen">close</i>
                 </div>
