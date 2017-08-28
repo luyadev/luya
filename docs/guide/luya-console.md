@@ -51,7 +51,7 @@ CMS Module commands:
 
 You can create your own custom commands. Custom commands are stored as actions of controllers in the `commands` directory of a module. Commands can only be executed from the console and do not have view files to render.
 
-Let's assume you have a module *yourmodule* with a controller *NotifyController* that includes two actions *actionIndex* and *actionBar* (stored in the file *NotifyController.php* within the *commands* directory of your module):
+Let's assume you have a module `yourmodule` with a controller `NotifyController` that includes two actions `actionIndex` and `actionBar` (stored in the file `NotifyController.php` within the `commands` directory of your module):
 
 
 ```php
