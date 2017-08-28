@@ -21,6 +21,8 @@ final class Config extends ActiveRecord
     
     const CONFIG_SETUP_COMMAND_TIMESTAMP = 'setup_command_timestamp';
     
+    const CONFIG_INSTALLER_VENDOR_TIMESTAMP = 'installer_vendor_timestamp';
+    
     /**
      * @inheritdoc
      */

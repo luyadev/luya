@@ -61,6 +61,11 @@ abstract class Boot
     {
         $this->_baseYiiFile = $baseYiiFile;
     }
+    
+    public function getBaseYiiFile()
+    {
+    	return $this->_baseYiiFile;
+    }
 
     /**
      * Returns the current sapi name in lower case.
