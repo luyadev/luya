@@ -11,6 +11,6 @@ use luya\cms\admin\Module;
                 <td><menu-dropdown class="menu-dropdown" nav-id="data.httpExceptionNavId" /></td>
             </tr>
         </table>
-        <a ng-click="save()" class="btn btn-save btn-icon"><?= Module::t('view_update_btn_save'); ?></a>
+        <a ng-click="save()" class="btn btn-symbol btn-icon btn-icon-save"></a>
     </div>
 </div>

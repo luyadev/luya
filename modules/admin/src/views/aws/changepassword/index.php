@@ -17,8 +17,4 @@ use luya\admin\ngrest\aw\CallbackFormWidget;
 
     <?php $form::end(); ?>
 
-    <button type="button" class="btn btn-icon btn-save">UND DAS NO MIT TEXT</button>
-    <button type="button" class="btn btn-cancel">Cancel</button>
-    <button type="button" class="btn btn-icon btn-cancel">Cancel mit Icon</button>
-    <button type="button" class="btn btn-icon btn-cancel btn-nolabel"></button>
 </div>

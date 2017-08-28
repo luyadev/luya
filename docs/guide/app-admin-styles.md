@@ -1,5 +1,44 @@
 # Admin CSS Styles
 
+All [Bootstrap4](https://v4-alpha.getbootstrap.com/) css style classes are available in der Admin Interface.
+On top of this LUYA provides generic css classes for buttons with predefined icons and colors.
+
+### Default Buttons
+
+```html
+<button type="button" class="btn btn-save">Save</button>
+<button type="button" class="btn btn-delete">Delete</button>
+<button type="button" class="btn btn-cancel">Cancel</button>
+<button type="button" class="btn btn-edit">Edit</button>
+<button type="button" class="btn btn-add">Add</button>
+<button type="button" class="btn btn-help">Help</button>
+<button type="button" class="btn btn-download">Download</button>
+<button type="button" class="btn btn-upload">Upload</button>
+<button type="button" class="btn btn-config">Configuration</button>
+```
+
+### Default Buttons with icons
+
+Simply add the css class ```btn-icon``` to the above listed buttons and the related icon will appear.
+
+```html
+<button type="button" class="btn btn-save btn-icon">Save</button>```
+```
+
+### Default Buttons without label but icons
+
+```html
+<button type="button" class="btn btn-save btn-icon btn-nolabel"></button>
+```
+
+### Mixed examples
+
+```html
+<button type="button" class="btn btn-icon btn-save">Safe button with icon and text</button>
+<button type="button" class="btn btn-cancel">Cancel button without icon</button>
+<button type="button" class="btn btn-icon btn-cancel btn-nolabel"></button>
+```
+ 
 ## Default Icons
 
 Material Design Icons: https://material.io/icons/
@@ -10,6 +49,7 @@ Material Design Icons: https://material.io/icons/
 | Download icon | ![file_upload](img/app-admin-styles/default-icons/file_download.png) | file_download |
 | Edit icon | ![file_upload](img/app-admin-styles/default-icons/edit.png) | edit |
 | Add icon | ![file_upload](img/app-admin-styles/default-icons/add_box.png) | add_box |
+| Add icon for button | ![file_upload](img/app-admin-styles/default-icons/add.png) | add_box |
 | Delete icon | ![file_upload](img/app-admin-styles/default-icons/delete.png) | delete |
 | Save / Confirm icon | ![file_upload](img/app-admin-styles/default-icons/check.png) | check |
 | Abort / Clear icon | ![file_upload](img/app-admin-styles/default-icons/clear.png) | clear |
@@ -21,3 +61,6 @@ Material Design Icons: https://material.io/icons/
 | Offline icon | ![file_upload](img/app-admin-styles/default-icons/cloud_off.png) | cloud_off |
 | Sort icon | ![file_upload](img/app-admin-styles/default-icons/keyboard_arrow_down.png) ![file_upload](img/app-admin-styles/default-icons/keyboard_arrow_up.png) | keyboard\_arrow\_down / keyboard\_arrow\_up |
 | Folder icon | ![file_upload](img/app-admin-styles/default-icons/folder_open.png) | folder_open |
+
+
+
