@@ -3,10 +3,11 @@
     color: $white;
     display: block;
     padding: 5px 10px 10px;
-    position: relative;
     width: 100%;
 
     @media (min-width: $mobile-nav-breakpoint) {
+
+        position: relative;
         display: flex;
         flex: 0 0 200px;
         flex-direction: column;
@@ -34,6 +35,7 @@
 }
 
 .mainnav-toggler-mobile {
+    position: relative;
     cursor: pointer;
     font-size: 30px;
     text-align: right;
@@ -333,4 +335,13 @@
             }
         }
     }
+}
+
+.mainnav-mobile-title {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 14px;
 }

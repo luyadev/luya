@@ -3,7 +3,7 @@
 All [Bootstrap4](https://v4-alpha.getbootstrap.com/) css style classes are available in der Admin Interface.
 On top of this LUYA provides generic css classes for buttons with predefined icons and colors.
 
-### Default Buttons
+### Default buttons
 
 ```html
 <button type="button" class="btn btn-save">Save</button>
@@ -17,7 +17,7 @@ On top of this LUYA provides generic css classes for buttons with predefined ico
 <button type="button" class="btn btn-config">Configuration</button>
 ```
 
-### Default Buttons with icons
+### Default buttons with icons
 
 Simply add the css class ```btn-icon``` to the above listed buttons and the related icon will appear.
 
@@ -25,7 +25,7 @@ Simply add the css class ```btn-icon``` to the above listed buttons and the rela
 <button type="button" class="btn btn-save btn-icon">Save</button>```
 ```
 
-### Default Buttons without label but icons
+### Default buttons without label but icons
 
 ```html
 <button type="button" class="btn btn-save btn-icon btn-nolabel"></button>
@@ -39,7 +39,7 @@ Simply add the css class ```btn-icon``` to the above listed buttons and the rela
 <button type="button" class="btn btn-icon btn-cancel btn-nolabel"></button>
 ```
  
-## Default Icons
+## Default icons
 
 Material Design Icons: https://material.io/icons/
 

@@ -4,6 +4,7 @@
     height: 100%;
 
     @media (min-width: $mobile-nav-breakpoint) {
+
         display: flex;
         flex-direction: row;
         height: 100%;
@@ -33,16 +34,20 @@
 }
 
 .luya-mainnav {
-    z-index: 100;
+    z-index: 99999;
+    @media (min-width: $mobile-nav-breakpoint) {
+        position: relative;
+        width: auto;
+    }
 }
 
 .luya-subnav {
     background-color: map-get($grays, 100);
     color: color('gray');
     display: flex;
+    flex-direction: column;
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
-    padding: 0 10px 20px;
     width: 100%;
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
