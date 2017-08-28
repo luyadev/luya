@@ -34,7 +34,7 @@
 }
 
 .luya-mainnav {
-    z-index: 99999;
+    z-index: 10;
     @media (min-width: $mobile-nav-breakpoint) {
         position: relative;
         width: auto;

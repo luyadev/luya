@@ -2,7 +2,7 @@
     margin: 0;
     opacity: 1;
     position: fixed;
-    z-index: 100000;
+    z-index: index($elements, tooltip);
 
     &-right {
         margin-left: 3px;
