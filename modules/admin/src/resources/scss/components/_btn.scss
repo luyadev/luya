@@ -1,0 +1,169 @@
+// ==================================================
+// General button
+// ==================================================
+
+.btn {
+    cursor: pointer;
+    .material-icons {
+        font-size: 1.5em;
+        vertical-align: middle;
+    }
+    &.btn-link .material-icons {
+        font-size: 24px;
+    }
+    &.btn-link {
+        border-radius: 0;
+    }
+    > .material-icons:first-of-type {
+        margin-left: -6px;
+    }
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+// ==================================================
+// Link button
+// ==================================================
+
+.btn-link {
+    color: map-get($grays, 600);
+
+    &:hover {
+        color: theme-color(primary);
+    }
+}
+
+// ==================================================
+// Button without label ( Square )
+// ==================================================
+
+.btn-square {
+    padding: 5px 4px 5px 9px;
+
+
+    &.btn-link {
+        padding: 2px;
+    }
+}
+
+// Label outside of buttons
+
+.btn-square-label {
+    margin-left: 10px;
+    vertical-align: middle;
+    @include google-chrome-font-offset-fix;
+}
+
+// ==================================================
+// Button with Icons
+// ==================================================
+
+.btn {
+
+    //Generic button colors and backgrounds
+
+    &-save {
+        background: theme-color('primary');
+        color: $btn-color-light !important;
+    }
+    &-delete {
+        background: theme-color('danger');
+        color: $btn-color-light !important;
+    }
+    &-cancel {
+        background: theme-color('light');
+        color: $btn-color-dark !important;
+
+    }
+    &-edit {
+        background: theme-color('light');
+        color: $btn-color-dark !important;
+    }
+    &-add {
+        background: theme-color('success');
+        color: $btn-color-light !important;
+    }
+    &-help {
+        background: theme-color('light');
+        color: $btn-color-dark !important;
+    }
+    &-download {
+        background: theme-color('success');
+        color: $btn-color-light !important;
+    }
+    &-upload {
+        background: theme-color('success');
+        color: $btn-color-light !important;
+    }
+    &-config {
+        background: theme-color('light');
+        color: $btn-color-dark !important;
+    }
+
+
+    // Generic button icons
+
+    &-icon {
+
+        padding-left: 30px;
+        position: relative;
+
+        &:after {
+            position: absolute;
+            font-family: "Material Icons";
+            left: 6px;
+            top: calc(50% - 1px);
+            transform: translateY(-50%);
+        }
+
+        &.btn-save {
+            &:after {
+                content: 'check';
+            }
+        }
+        &.btn-delete {
+            &:after {
+                content: 'delete';
+            }
+        }
+        &.btn-cancel {
+            &:after {
+                content: 'clear';
+            }
+        }
+        &.btn-edit {
+            &:after {
+                content: 'edit';
+            }
+        }
+        &.btn-add {
+            &:after {
+                content: 'add';
+            }
+        }
+        &.btn-help {
+            &:after {
+                content: 'help';
+            }
+        }
+        &.btn-download {
+            &:after {
+                content: 'file_download';
+            }
+        }
+        &.btn-upload {
+            &:after {
+                content: 'file_upload';
+            }
+        }
+        &.btn-config {
+            &:after {
+                content: 'settings';
+            }
+        }
+    }
+}
+
+

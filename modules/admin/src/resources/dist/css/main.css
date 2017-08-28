@@ -8738,19 +8738,19 @@ html, body {
   .btn-link:hover {
     color: #FF006B; }
 
-.btn-icon {
+.btn-square {
   padding: 6px 5px 6px; }
-  .btn-icon.btn-link {
+  .btn-square.btn-link {
     padding: 2px; }
 
 .btn .material-icons,
-.btn-icon-label {
+.btn-square-label {
   vertical-align: middle; }
 
-.btn-icon-label {
+.btn-square-label {
   margin-left: 10px; }
   @media (-webkit-min-device-pixel-ratio: 0) {
-    .btn-icon-label {
+    .btn-square-label {
       margin-top: 2px; } }
 
 .cmsadmin {

@@ -87,7 +87,7 @@ use luya\cms\admin\Module;
             <div ng-switch-when="6">
                 <h1>Remove</h1>
                 <p>Remove this page.</p>
-                <p><a ng-click="trash()" class="btn btn-icon"><i class="material-icons">delete</i></a></p>
+                <p><a ng-click="trash()" class="btn btn-square"><i class="material-icons">delete</i></a></p>
             </div>
         </div>
     </div>

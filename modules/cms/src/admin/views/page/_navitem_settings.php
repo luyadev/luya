@@ -56,8 +56,8 @@ use luya\cms\admin\Module;
                     <td>{{versionItem.version_alias}}</td>
                     <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
                     <td>{{versionItem.timestamp_create}}</td>
-                    <td><button type="button" class="btn btn-icon btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button></td>
-                    <td><button type="button" class="btn btn-icon btn-sm btn-outline-danger" ng-click="removeVersion(versionItem)"><i class="material-icons">delete</i></button></td>
+                    <td><button type="button" class="btn btn-square btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button></td>
+                    <td><button type="button" class="btn btn-square btn-sm btn-outline-danger" ng-click="removeVersion(versionItem)"><i class="material-icons">delete</i></button></td>
                 </tr>
             </table>
         </div>

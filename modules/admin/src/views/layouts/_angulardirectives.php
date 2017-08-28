@@ -176,7 +176,7 @@ use luya\admin\Module as Admin;
             <div class="filemanager-add-folder">
                 <div class="btn btn-block text-left btn-success" ng-click="folderFormToggler()" ng-if="!showFolderForm">
                     <span class="material-icons">add</span>
-                    <span class="btn-icon-label"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
+                    <span class="btn-square-label"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
                 </div>
                 <div class="filemanager-add-folder-form" ng-if="showFolderForm">
                     <input class="filemanager-add-folder-input" type="text" placeholder="<?php echo Admin::t('layout_filemanager_folder'); ?>" title="<?php echo Admin::t('layout_filemanager_folder'); ?>" ng-model="newFolderName" />
@@ -213,7 +213,7 @@ use luya\admin\Module as Admin;
 
                             <div class="btn btn-success filemanager-upload-file"  ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
                                 <span class="material-icons">file_upload</span>
-                                <span class="btn-icon-label"><?= Admin::t('layout_filemanager_upload_files'); ?></span>
+                                <span class="btn-square-label"><?= Admin::t('layout_filemanager_upload_files'); ?></span>
                             </div>
 
                             <input class="filemanager-search" type="text"  ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />
@@ -224,12 +224,12 @@ use luya\admin\Module as Admin;
 
                             <div class="btn btn-info" ng-click="showFoldersToMove=!showFoldersToMove">
                                 <span class="material-icons">subdirectory_arrow_right</span>
-                                <span class="btn-icon-label"><?= Admin::t('layout_filemanager_move_selected_files'); ?></span>
+                                <span class="btn-square-label"><?= Admin::t('layout_filemanager_move_selected_files'); ?></span>
                             </div>
 
                             <div class="btn btn-danger" ng-click="removeFiles()">
                                 <span class="material-icons">delete_forever</span>
-                                <span class="btn-icon-label"><b>{{selectedFiles.length}}</b> <?= Admin::t('layout_filemanager_remove_selected_files'); ?></span>
+                                <span class="btn-square-label"><b>{{selectedFiles.length}}</b> <?= Admin::t('layout_filemanager_remove_selected_files'); ?></span>
                             </div>
 
                         </div>
@@ -303,7 +303,7 @@ use luya\admin\Module as Admin;
                                 <td ng-click="openFileDetail(file)">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
                                 <td ng-click="openFileDetail(file)">{{file.sizeReadable}}</td>
                                 <td class="text-right">
-                                    <button type="button" class="btn btn-sm btn-icon" ng-click="openFileDetail(file)">
+                                    <button type="button" class="btn btn-sm btn-square" ng-click="openFileDetail(file)">
                                         <i class="material-icons">zoom_in</i>
                                     </button>
                                 </td>
@@ -323,12 +323,12 @@ use luya\admin\Module as Admin;
 
         <a class="btn btn-success" ng-href="{{fileDetail.source}}" target="_blank">
             <span class="material-icons">file_download</span>
-            <span class="btn-icon-label">Download</span>
+            <span class="btn-square-label">Download</span>
         </a>
 
         <div class="btn btn-info ml-1" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">
             <span class="material-icons">file_upload</span>
-            <span class="btn-icon-label">Replace</span>
+            <span class="btn-square-label">Replace</span>
         </div>
 
         <div class="file-detail-view-close" ng-click="closeFileDetail()">

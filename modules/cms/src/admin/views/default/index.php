@@ -33,7 +33,7 @@ use \luya\admin\Module as AdminModule;
                 <li class="cmsnav-button" ui-sref="custom.cmsadd">
                     <div class="btn btn-block text-left btn-success">
                         <span class="material-icons">add_box</span>
-                        <span class="btn-icon-label"><?= Module::t('view_index_sidebar_new_page'); ?></span>
+                        <span class="btn-square-label"><?= Module::t('view_index_sidebar_new_page'); ?></span>
                     </div>
                 </li>
                 <?php endif; ?>
@@ -41,7 +41,7 @@ use \luya\admin\Module as AdminModule;
                 <li class="cmsnav-button" ui-sref="custom.cmsdraft">
                     <div class="btn btn-block text-left btn-info">
                         <span class="material-icons">receipt</span>
-                        <span class="btn-icon-label"><?= Module::t('view_index_sidebar_drafts'); ?></span>
+                        <span class="btn-square-label"><?= Module::t('view_index_sidebar_drafts'); ?></span>
                     </div>
                 </li>
                 <?php endif; ?>
