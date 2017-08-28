@@ -28,10 +28,11 @@ $this->beginPage()
 <div class="luya">
     <div class="luya-mainnav">
         <div class="mainnav" ng-class="{'mainnav-small' : !isHover}" ng-init="isOpen = false">
-
             <div class="mainnav-toggler-mobile">
                 <div class="mainnav-toggler-mobile-icon" ng-click="isOpen = !isOpen">
-                    <i class="material-icons">menu</i>
+                    <div class="mainnav-mobile-title">Current mainnav page name</div>
+                    <i class="material-icons" ng-show="!isOpen">menu</i>
+                    <i class="material-icons" ng-show="isOpen">close</i>
                 </div>
             </div>
 

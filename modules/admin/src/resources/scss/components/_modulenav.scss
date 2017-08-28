@@ -1,8 +1,13 @@
 .modulenav {
-    display: block;
+    padding: 0 10px 20px;
+    display: none;
     flex: 0 0 100%;
     font-size: 14px;
     width: 100%;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: block;
+    }
 }
 
 .modulenav-group {
@@ -77,4 +82,39 @@
 .modulenav-label {
     line-height: 20px;
     margin-left: 3px;
+}
+
+
+.modulenav-mobile {
+    max-width: 100%;
+    background: $gray-400;
+    color: theme-color(dark);
+    padding: 0 10px;
+    position: relative;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: none;
+    }
+}
+
+.modulenav-toggler-icon {
+    text-align: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modulenav-mobile-title {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 14px;
+}
+
+#modulenav-toggler {
+    display: none;
+}
+#modulenav-toggler:checked ~ .modulenav {
+    display: block;
 }

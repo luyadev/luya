@@ -1,5 +1,13 @@
 <div class="luya-main luya-main-crud" ng-controller="DefaultController">
     <div class="luya-subnav">
+        <input type="checkbox" name="modulenav-toggler" id="modulenav-toggler" checked>
+        <div class="modulenav-mobile">
+            <div class="modulenav-mobile-title" ng-init="isOpenModulenav = false">Current subnav item name</div>
+            <label for="modulenav-toggler" class="modulenav-toggler-icon" ng-click="isOpenModulenav = !isOpenModulenav">
+                <i class="material-icons" ng-show="!isOpenModulenav">close</i>
+                <i class="material-icons" ng-show="isOpenModulenav">menu</i>
+            </label>
+        </div>
         <div class="modulenav">
             <div class="modulenav-group">
                 <ul class="modulenav-list">
