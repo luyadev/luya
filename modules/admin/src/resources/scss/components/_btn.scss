@@ -45,8 +45,8 @@
     //Generic button colors and backgrounds
 
     &-save {
-        background: theme-color('green');
-        border-color: theme-color('green');
+        background: theme-color('success');
+        border-color: theme-color('success');
         color: $btn-color-light !important;
     }
     &-delete {
