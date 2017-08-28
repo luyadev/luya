@@ -14,6 +14,7 @@ use luya\admin\ngrest\aw\CallbackFormWidget;
     
     <?= $form->field('newpass', Module::t('aws_changepassword_new_pass'))->passwordInput(); ?>
     <?= $form->field('newpasswd', Module::t('aws_changepassword_new_pass_retry'))->passwordInput(); ?>
-    
+
     <?php $form::end(); ?>
+
 </div>

@@ -61,8 +61,16 @@ $theme-colors: (
     warning: $yellow,
     danger: $red,
     light: $gray-100,
-    dark: $gray-800
+    dark: $gray-800,
 );
+
+
+// =========================
+// General Button Colors
+// =========================
+
+$btn-color-light: $white;
+$btn-color-dark: $black;
 
 // =========================
 // Custom colors

@@ -20,7 +20,7 @@ $this->beginBody();
                 <h1 class="crud-title"><?= $currentMenu['alias']; ?></h1>
                 <div class="crud-toolbar">
                     <div class="btn-group" ng-class="{'show': toggleSettings}">
-                        <button class="btn btn-sm btn-link btn-icon" type="button" ng-click="toggleSettings=!toggleSettings">
+                        <button class="btn btn-sm btn-link btn-symbol" type="button" ng-click="toggleSettings=!toggleSettings">
                             <i class="material-icons">more_vert</i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
@@ -155,12 +155,12 @@ $this->beginBody();
                         <td class="text-right" ng-hide="isLocked(config.tableName, item[config.pk])">
                             <?php if (count($this->context->getButtons()) > 0): ?>
                                 <?php foreach ($this->context->getButtons() as $item): ?>
-                                    <button type="button" class="btn btn-sm btn-link btn-icon" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i></button>
+                                    <button type="button" class="btn btn-sm btn-symbol" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i><? if (!empty($item["label"])): echo "<span class=\"btn-crud-label\">". $item["label"] .  "</span>"; endif; ?></span></button>
                                 <?php endforeach; ?>
                              <?php endif; ?>
                         </td>
                         <td class="text-right" ng-show="isLocked(config.tableName, item[config.pk])">
-                            <small><i class="material-icons btn-icon">lock_outline</i><?= Module::t('locked_info'); ?></small>
+                            <small><i class="material-icons btn-symbol">lock_outline</i><?= Module::t('locked_info'); ?></small>
                         </td>
                     </tr>
                 </tbody>
