@@ -21,7 +21,7 @@
         left:50%;
         top:0;
         transform: translateX(-50%);
-        z-index: 99;
+        z-index: index($elements, before-content);
 
         img {
             width: 80px;

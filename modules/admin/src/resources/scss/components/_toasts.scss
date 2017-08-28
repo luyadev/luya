@@ -2,7 +2,9 @@
     position: absolute;
     bottom: 10px;
     left: 80px;
-    z-index: 100000;
+
+    display: block;
+    z-index: index($elements, modal-toast);
     transition: .25s ease-in-out transform;
 
     .alert {

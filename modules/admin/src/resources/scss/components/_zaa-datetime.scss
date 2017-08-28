@@ -21,7 +21,7 @@
     border: 1px solid rgba(0, 0, 0, 0);
     margin: 0 0 0 -4px;
     padding: 0;
-    z-index: 5;
+    z-index: index($elements, before-content);
 }
 
 .zaa-datetime-hour-input {
