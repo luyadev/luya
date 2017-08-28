@@ -132,9 +132,12 @@ final class UserOnline extends ActiveRecord
     /**
      * @param int $maxIdleTime Default value in seconds is a half hour (30 * 60) = 1800
      */
-    public static function clearList($maxIdleTime = 1800)
+    public static function clearList()
     {
         $time = time();
+        
+        $maxIdleTime = YII_ENV_PROD ? 2000 : 4000;
+        
         $items = self::find()->where(['<=', 'last_timestamp', $time - $maxIdleTime])->all();
         foreach ($items as $model) {
             $model->delete();
