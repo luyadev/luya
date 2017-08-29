@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1414](https://github.com/luyadev/luya/issues/1414) Renamed Angular Helper methods, removed all the zaa prefixes.
 - [#1308](https://github.com/luyadev/luya/issues/1308) Renamed `luya\admin\ngrest\plugins\CheckboxRelation::labelFields` to `luya\admin\ngrest\plugins\CheckboxRelation::labelField`
 - [#1301](https://github.com/luyadev/luya/issues/1301) Move the CRUD commands to the admin module `admin/crud/create` and `admin/crud/model`.
 - [#1289](https://github.com/luyadev/luya/issues/1289) Remove `luyaLanguage` application property and replace with admin module `interfaceLanguage` property.

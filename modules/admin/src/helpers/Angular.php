@@ -80,7 +80,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaSortRelationArray($ngModel, $label, array $sourceData, array $options = [])
+    public static function sortRelationArray($ngModel, $label, array $sourceData, array $options = [])
     {
         return self::injector('zaa-sort-relation-array', $ngModel, $label, ['sourceData' => $sourceData], $options);
     }
@@ -93,7 +93,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaText($ngModel, $label, array $options = [])
+    public static function text($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-text', $ngModel, $label, [], $options);
     }
@@ -106,7 +106,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaTextarea($ngModel, $label, array $options = [])
+    public static function textarea($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-textarea', $ngModel, $label, [], $options);
     }
@@ -119,7 +119,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaNumber($ngModel, $label, array $options = [])
+    public static function number($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-number', $ngModel, $label, [], $options);
     }
@@ -132,7 +132,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaDecimal($ngModel, $label, array $options = [])
+    public static function decimal($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-decimal', $ngModel, $label, [], $options);
     }
@@ -150,7 +150,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaSelect($ngModel, $label, array $data, array $options = [])
+    public static function select($ngModel, $label, array $data, array $options = [])
     {
         return self::injector('zaa-select', $ngModel, $label, $data, $options);
     }
@@ -163,7 +163,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaCheckbox($ngModel, $label, array $options = [])
+    public static function checkbox($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-checkbox', $ngModel, $label, [], $options);
     }
@@ -189,7 +189,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaCheckboxArray($ngModel, $label, array $data, array $options = [])
+    public static function checkboxArray($ngModel, $label, array $data, array $options = [])
     {
         return self::injector('zaa-checkbox-array', $ngModel, $label, ['items' => $data], $options);
     }
@@ -202,7 +202,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaDate($ngModel, $label, array $options = [])
+    public static function date($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-date', $ngModel, $label, [], $options);
     }
@@ -215,7 +215,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaDatetime($ngModel, $label, array $options = [])
+    public static function datetime($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-datetime', $ngModel, $label, [], $options);
     }
@@ -228,7 +228,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaTable($ngModel, $label, array $options = [])
+    public static function table($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-table', $ngModel, $label, [], $options);
     }
@@ -241,7 +241,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaListArray($ngModel, $label, array $options = [])
+    public static function listArray($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-list-array', $ngModel, $label, [], $options);
     }
@@ -254,7 +254,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaFileArrayUpload($ngModel, $label, array $options = [])
+    public static function fileArrayUpload($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-file-array-upload', $ngModel, $label, [], $options);
     }
@@ -267,7 +267,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaImageArrayUpload($ngModel, $label, array $options = [])
+    public static function imageArrayUpload($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-image-array-upload', $ngModel, $label, [], $options);
     }
@@ -280,7 +280,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaImageUpload($ngModel, $label, array $options = [])
+    public static function imageUpload($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-image-upload', $ngModel, $label, [], $options);
     }
@@ -293,7 +293,7 @@ class Angular
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @return string
      */
-    public static function zaaFileUpload($ngModel, $label, array $options = [])
+    public static function fileUpload($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-file-upload', $ngModel, $label, [], $options);
     }
