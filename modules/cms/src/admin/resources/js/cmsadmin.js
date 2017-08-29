@@ -1232,7 +1232,17 @@
 		 * drops items in an empty page placeholder of CMS LAYOUT PLACEHOLDER
 		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
-			if (dragged.hasOwnProperty('copystack')) {
+			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
+				$http.post('admin/api-cms-navitempageblockitem/create', {
+					prev_id: dropped.prev_id, 
+					sort_index:0, 
+					block_id: dragged.id, 
+					placeholder_var : dropped['var'], 
+					nav_item_page_id: dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.refreshNested(dropped['prev_id'], dropped['var']);
+				});
+			} else if (dragged.hasOwnProperty('copystack')) {
 				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
 					copyBlockId: dragged.id,
 					sort_index: 0,
@@ -1243,14 +1253,12 @@
 					$scope.refreshNested(dropped['prev_id'], dropped['var']);
 				});
 			} else {
-				$http.post('admin/api-cms-navitempageblockitem/create', {
-					prev_id: dropped.prev_id, 
-					sort_index:0, 
-					block_id: dragged.id, 
+				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
+					sort_index: 0,
+					prev_id:  dropped.prev_id,
 					placeholder_var : dropped['var'], 
-					nav_item_page_id: dropped.nav_item_page_id
 				}).then(function(response) {
-					$scope.refreshNested(dropped['prev_id'], dropped['var']);
+					$scope.refreshForce();
 				});
 			}
 			
@@ -1272,7 +1280,18 @@
 		 * drops an item in an empty placeholder of a BLOCK
 		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
-			if (dragged.hasOwnProperty('copystack')) {
+			
+			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
+				$http.post('admin/api-cms-navitempageblockitem/create', {
+					prev_id : dropped.prev_id,
+					sort_index:0, 
+					block_id : dragged.id,
+					placeholder_var : dropped.var,
+					nav_item_page_id : dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
+				});
+			} else if (dragged.hasOwnProperty('copystack')) {
 				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
 					copyBlockId: dragged.id,
 					sort_index: 0,
@@ -1283,14 +1302,12 @@
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
 			} else {
-				$http.post('admin/api-cms-navitempageblockitem/create', {
-					prev_id : dropped.prev_id,
-					sort_index:0, 
-					block_id : dragged.id,
+				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
+					sort_index: 0,
+					prev_id:  dropped.prev_id,
 					placeholder_var : dropped.var,
-					nav_item_page_id : dropped.nav_item_page_id
 				}).then(function(response) {
-					$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
+					$scope.refreshForce();
 				});
 			}
 		};

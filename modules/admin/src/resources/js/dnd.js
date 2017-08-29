@@ -63,6 +63,7 @@ angular.module('dnd', [])
 	        dragable.addEventListener(
 	            'dragstart',
 	            function(e) {
+	            	e.stopPropagation();
 	            	isValid = true;
 	            	dndFactory.content(scope.dndModel);
 	            	dndFactory.elmnSet(dragable);
