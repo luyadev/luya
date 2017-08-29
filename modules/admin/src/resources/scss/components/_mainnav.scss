@@ -19,8 +19,8 @@
         }
 
         &-small {
-            flex: 0 0 62px;
-            width: 62px;
+            flex: 0 0 $mainnav-width-small;
+            width: $mainnav-width-small;
 
             .mainnav-tooltip-big {
                 left: 50px;
@@ -344,4 +344,27 @@
     transform: translateY(-50%);
 
     font-size: 14px;
+}
+
+
+// Safari 100% height fix and flexbox override
+
+body.browser-safari {
+    .mainnav {
+        @media (min-width: $mobile-nav-breakpoint) {
+
+            min-height: 100vh;
+            height: 100%;
+            width: $mainnav-width;
+
+            &-small {
+                flex: 0 0 $mainnav-width-small;
+                width: $mainnav-width-small;
+            }
+            user-select: none;
+        }
+    }
+    .mainnav-link {
+        display: block;
+    }
 }

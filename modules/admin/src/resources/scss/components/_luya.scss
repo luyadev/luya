@@ -35,10 +35,20 @@
 
 .luya-mainnav {
     z-index: index($elements, navbar);
+    width: 100%;
+
     @media (min-width: $mobile-nav-breakpoint) {
         position: relative;
-        width: auto;
+        width: $mainnav-width;
     }
+
+    &-small {
+
+        @media (min-width: $mobile-nav-breakpoint) {
+            width: $mainnav-width-small;
+        }
+    }
+
 }
 
 .luya-subnav {
@@ -49,20 +59,25 @@
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
     width: 100%;
+
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
     -ms-overflow-style: none; // IE 10+
+
+    .cmsnav {
+        padding: $content-padding-y $content-padding-x;
+    }
 
     @media (min-width: $mobile-nav-breakpoint) {
         align-items: stretch;
         display: flex;
         flex: 0 0 250px;
         max-width: 250px;
-        padding: 0 10px;
+        padding: $content-padding-y $content-padding-x;
 
-        .luya-main-crud & {
-            padding: 0 0 20px 25px;
+        + .luya-content {
+            padding-left: 0;
         }
 
         &.overlaying {
@@ -85,11 +100,12 @@
     background-color: map-get($grays, 100);
     overflow: auto;
     overflow: -moz-scrollbars-none; // Firefox
-    padding: 15px 25px;
+    padding: $content-padding-y $content-padding-x;
     height: 100%;
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
+
     &-cmsadmin {
         padding: 0;
     }
@@ -102,5 +118,24 @@
         .luya-subnav.overlaying + & {
             padding-left: 50px;
         }
+    }
+}
+
+
+// Safari 100% height fix and flexbox override
+
+body.browser-safari {
+    .luya-mainnav {
+
+        margin-right: 30px;
+
+        &-small {
+            margin-right: 0;
+        }
+        @media (min-width: $mobile-nav-breakpoint) {
+        }
+    }
+    .mainnav-link {
+        display: block;
     }
 }

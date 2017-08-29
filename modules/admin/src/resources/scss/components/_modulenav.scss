@@ -1,21 +1,32 @@
 .modulenav {
-    padding: 0 10px 20px;
     display: block;
-    flex: 0 0 100%;
+    flex: 0 0;
     font-size: 14px;
     width: 100%;
-    
-    
-        @media (min-width: $mobile-nav-breakpoint) {
-            display: block;
-        }
+    padding: $content-padding-y $content-padding-x;
+
+    background: $gray-300;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: block;
+        padding: 0;
+        background: transparent;
+    }
 }
 
 .modulenav-group {
     display: block;
 
-    &:first-child {
-        margin-top: 14px;
+    &:first-of-type {
+        margin-top: 0;
+
+        ul {
+            margin-top: 0;
+
+            li {
+                margin-top: 0;
+            }
+        }
     }
     &:not(:first-child) {
         margin-top: 30px;
@@ -90,7 +101,7 @@
     max-width: 100%;
     background: $gray-400;
     color: theme-color(dark);
-    padding: 0 10px;
+    padding: 0 $content-padding-x;
     position: relative;
 
     
