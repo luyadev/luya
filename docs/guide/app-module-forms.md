@@ -80,7 +80,7 @@ In order to display the data inside the NgRest CRUD system you have to apply the
 public function ngRestAttributeTypes()
 {
     return [
-    	// ...
+        // ...
         'attachment' => 'fileArray',
     ];
 }

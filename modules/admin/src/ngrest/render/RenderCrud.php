@@ -40,7 +40,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     private $_view;
 
     /**
-     * 
+     *
      * @return \luya\admin\ngrest\render\RenderCrudView
      */
     public function getView()
@@ -65,7 +65,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             'canDelete' => $this->can(Auth::CAN_DELETE),
             'config' => $this->config,
             'isInline' => $this->getIsInline(),
-        	'modelSelection' => $this->getModelSelection(),
+            'modelSelection' => $this->getModelSelection(),
             'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
             'currentMenu' => Yii::$app->adminmenu->getApiDetail($this->getConfig()->getApiEndpoint()),
         ], $this);
@@ -118,12 +118,12 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     
     public function setModelSelection($selection)
     {
-    	$this->_modelSelection = $selection;
+        $this->_modelSelection = $selection;
     }
     
     public function getModelSelection()
     {
-    	return $this->_modelSelection;
+        return $this->_modelSelection;
     }
 
     public function getOrderBy()
@@ -139,12 +139,12 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     
     public function setGlobalButtons(array $buttons)
     {
-    	$this->_globalButtons = $buttons;
+        $this->_globalButtons = $buttons;
     }
     
     public function getGlobalButtons()
     {
-    	return $this->_globalButtons;
+        return $this->_globalButtons;
     }
     
     /*

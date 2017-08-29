@@ -1,6 +1,7 @@
 <?php
 use luya\admin\Module;
 use luya\helpers\Url;
+
 ?>
 <div class="luya-content" ng-controller="AccountController">
     <h1>

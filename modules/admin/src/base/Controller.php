@@ -27,33 +27,33 @@ class Controller extends \luya\web\Controller
 
     /**
      * @var array A list of actions which should be treated as api response, this will convert a returned array into an application/json header.
-     * 
+     *
      * An example controller with an api response action `actionQuery`.
-     * 
+     *
      * ```php
      * <?php
-     * 
+     *
      * namespace app\modules\mymodule\admin\controllers;
-     * 
+     *
      * use luya\admin\base\Controller;
-     * 
+     *
      * class MyTestController extends Controller
      * {
      *     public $disablePermissionCheck = true;
-     * 	
+     *
      * 	   public $apiResponseActions = ['query'];
-     * 	
+     *
      * 	   public function actionIndex()
      * 	   {
      * 	       return $this->render('index');
      * 	   }
-     * 	
+     *
      * 	   public function actionQuery()
      * 	   {
      * 		   return ['foo' => time()];
      * 	   }
      * }
-	 * ```
+     * ```
      */
     public $apiResponseActions = [];
     
@@ -109,13 +109,13 @@ class Controller extends \luya\web\Controller
         ];
         
         if (!empty($this->apiResponseActions)) {
-        	$behaviors['negotiator'] = [
-        		'class' => ContentNegotiator::className(),
-        		'only' => $this->apiResponseActions,
-        		'formats' => [
-        			'application/json' => Response::FORMAT_JSON,
-        		],
-        	];
+            $behaviors['negotiator'] = [
+                'class' => ContentNegotiator::className(),
+                'only' => $this->apiResponseActions,
+                'formats' => [
+                    'application/json' => Response::FORMAT_JSON,
+                ],
+            ];
         }
         
         return $behaviors;

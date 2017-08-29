@@ -247,5 +247,5 @@ return [
     'layout_useronline_inactive' => 'inactive',
     'login_ssl_info' => 'Die Webseite wird über eine sichere verschlüsselte Verbindung geschützt.',
     'locked_info' => 'Wird bearbeitet',
-	'menu_dashboard' => 'Dashboard',
+    'menu_dashboard' => 'Dashboard',
 ];

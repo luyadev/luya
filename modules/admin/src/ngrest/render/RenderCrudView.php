@@ -28,7 +28,7 @@ class RenderCrudView extends View
             'activeWindowRenderUrl' =>  $this->context->getApiEndpoint('active-window-render'),
             'pk' => $this->context->getConfig()->getPrimaryKey(),
             'inline' => $this->context->getIsInline(),
-        	'modelSelection' => $this->context->getModelSelection(),
+            'modelSelection' => $this->context->getModelSelection(),
             'orderBy' => $this->context->getOrderBy(),
             'tableName' => $this->context->getConfig()->getTableName(),
             'groupBy' => $this->context->getConfig()->getGroupByField() ? 1 : 0,

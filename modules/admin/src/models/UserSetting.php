@@ -78,19 +78,19 @@ final class UserSetting extends Object implements \ArrayAccess
     }
     
     /**
-     * 
+     *
      * @param array $keys
      * @param unknown $default
      * @return string[]|array[]|NULL[]
      */
     public function getArray(array $keys, $default = null)
     {
-    	$data = [];
-    	foreach ($keys as $key) {
-    		$data[$key] = $this->get($key, $default);
-    	}
-    	
-    	return $data;
+        $data = [];
+        foreach ($keys as $key) {
+            $data[$key] = $this->get($key, $default);
+        }
+        
+        return $data;
     }
 
     /**

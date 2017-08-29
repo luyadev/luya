@@ -36,23 +36,23 @@ class TimestampController extends RestController
                 
         // if developer is enabled, check if vendor has changed and run the required commands and force reload
         if (!YII_ENV_PROD) {
-        	$config = (int) Config::get(Config::CONFIG_INSTALLER_VENDOR_TIMESTAMP, null);
-        	$ts = Yii::$app->packageInstaller->timestamp;
-        	if ($config !== $ts) {
-        		/*
+            $config = (int) Config::get(Config::CONFIG_INSTALLER_VENDOR_TIMESTAMP, null);
+            $ts = Yii::$app->packageInstaller->timestamp;
+            if ($config !== $ts) {
+                /*
         		$this->cli('migrate/up --interactive=0');
         		$this->cli('import --interactive=0');
         		$forceReload = 1;
         		Yii::$app->adminuser->identity->updateAttributes(['force_reload' => false]);
         		*/
-        	}
+            }
         }
         
         // return users, verify force reload.
         $data = [
-        	'useronline' => UserOnline::getList(),
-        	'forceReload' => $forceReload,
-        	'locked' => UserOnline::find()->select(['lock_pk', 'lock_table', 'last_timestamp', 'u.firstname', 'u.lastname', 'u.id'])->where(['!=', 'u.id', Yii::$app->adminuser->id])->joinWith('user as u')->createCommand()->queryAll(),
+            'useronline' => UserOnline::getList(),
+            'forceReload' => $forceReload,
+            'locked' => UserOnline::find()->select(['lock_pk', 'lock_table', 'last_timestamp', 'u.firstname', 'u.lastname', 'u.id'])->where(['!=', 'u.id', Yii::$app->adminuser->id])->joinWith('user as u')->createCommand()->queryAll(),
         ];
         
         return $data;
@@ -66,13 +66,13 @@ class TimestampController extends RestController
      */
     protected function cli($cmd)
     {
-    	$cmd = PHP_BINDIR . '/php ' . Yii::getAlias('@vendor/bin/luya') . ' ' . $cmd;
-    	if ($this->isWindows() === true) {
-    		pclose(popen('start /b ' . $cmd, 'r'));
-    	} else {
-    		pclose(popen($cmd . ' > /dev/null &', 'r'));
-    	}
-    	return true;
+        $cmd = PHP_BINDIR . '/php ' . Yii::getAlias('@vendor/bin/luya') . ' ' . $cmd;
+        if ($this->isWindows() === true) {
+            pclose(popen('start /b ' . $cmd, 'r'));
+        } else {
+            pclose(popen($cmd . ' > /dev/null &', 'r'));
+        }
+        return true;
     }
     /**
      * Check operating system
@@ -81,10 +81,10 @@ class TimestampController extends RestController
      */
     protected function isWindows()
     {
-    	if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32') {
-    		return true;
-    	} else {
-    		return false;
-    	}
+        if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -85,7 +85,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      */
     public function extraFields()
     {
-    	return array_keys($this->ngRestExtraAttributeTypes());
+        return array_keys($this->ngRestExtraAttributeTypes());
     }
     
     /**

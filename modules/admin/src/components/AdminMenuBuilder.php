@@ -74,7 +74,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     public function getPermissionApis()
     {
-    	return $this->_permissionApis;
+        return $this->_permissionApis;
     }
     
     /**
@@ -84,7 +84,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     public function getPermissionRoutes()
     {
-    	return $this->_permissionRoutes;
+        return $this->_permissionRoutes;
     }
     
     /**
@@ -129,7 +129,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
         $this->_menu[self::$index] = [
             'id' => self::$index,
             'moduleId' => $this->moduleContext->id,
-        	'template' => $route, // as the template is equal to the route of the node which is loaded
+            'template' => $route, // as the template is equal to the route of the node which is loaded
             'routing' => 'custom',
             'alias' => $name,
             'icon' => $icon,

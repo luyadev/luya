@@ -32,8 +32,8 @@ class UserController extends Api
     public function actionSession()
     {
         return [
-        	'user' => Yii::$app->adminuser->identity->toArray(['title', 'firstname', 'lastname', 'email', 'id']),
-        	'settings' => Yii::$app->adminuser->identity->setting->getArray([User::USER_SETTING_ISDEVELOPER, User::USER_SETTING_UILANGUAGE]),
+            'user' => Yii::$app->adminuser->identity->toArray(['title', 'firstname', 'lastname', 'email', 'id']),
+            'settings' => Yii::$app->adminuser->identity->setting->getArray([User::USER_SETTING_ISDEVELOPER, User::USER_SETTING_UILANGUAGE]),
         ];
     }
 
@@ -48,13 +48,12 @@ class UserController extends Api
     
     public function actionChangeSettings()
     {
-    	
-    	$params = Yii::$app->request->bodyParams;
-    	
-    	foreach ($params as $param => $value) {
-    		Yii::$app->adminuser->identity->setting->set($param, $value);
-    	}
-    	
-    	return true;
+        $params = Yii::$app->request->bodyParams;
+        
+        foreach ($params as $param => $value) {
+            Yii::$app->adminuser->identity->setting->set($param, $value);
+        }
+        
+        return true;
     }
 }

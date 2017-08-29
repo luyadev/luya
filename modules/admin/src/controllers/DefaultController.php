@@ -42,15 +42,15 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-    	$tags = [];
-    	foreach (TagParser::getInstantiatedTagObjects() as $name => $object) {
-    		$tags[] = [
-    			'name' => $name,
-    			'example' => $object->example(),
-    			'readme' => Markdown::process($object->readme()),
-    		];
-    	}
-    	
+        $tags = [];
+        foreach (TagParser::getInstantiatedTagObjects() as $name => $object) {
+            $tags[] = [
+                'name' => $name,
+                'example' => $object->example(),
+                'readme' => Markdown::process($object->readme()),
+            ];
+        }
+        
         // register auth token
         //$this->view->registerJs("var authToken='".Yii::$app->adminuser->identity->authToken ."';", View::POS_HEAD);
         //$this->view->registerJs("var homeUrl='".Url::home(true)."';", View::POS_HEAD);
@@ -58,10 +58,10 @@ class DefaultController extends Controller
         //$this->view->registerJs('var helptags=' . Json::encode($tags), View::POS_HEAD);
         
         $this->view->registerJs('zaa.run(function($rootScope) { $rootScope.luyacfg = ' . Json::encode([
-        	'authToken' => Yii::$app->adminuser->identity->authToken,
-        	'homeUrl' => Url::home(true),
-        	'i18n' => $this->module->jsTranslations,
-        	'helptags' => $tags,
+            'authToken' => Yii::$app->adminuser->identity->authToken,
+            'homeUrl' => Url::home(true),
+            'i18n' => $this->module->jsTranslations,
+            'helptags' => $tags,
         ]). '; });', View::POS_END);
         
         return $this->render('index');
@@ -84,7 +84,7 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         if (!Yii::$app->adminuser->logout(false)) {
-        	Yii::$app->session->destroy();
+            Yii::$app->session->destroy();
         }
         
         return $this->redirect(['/admin/login/index', 'logout' => true]);

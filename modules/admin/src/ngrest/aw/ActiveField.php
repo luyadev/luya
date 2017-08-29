@@ -57,7 +57,7 @@ class ActiveField extends Object
     
     protected function getNgModel()
     {
-    	return 'params.'.$this->attribute;
+        return 'params.'.$this->attribute;
     }
     
     /**
@@ -68,9 +68,9 @@ class ActiveField extends Object
      */
     public function textInput(array $options = [])
     {
-    	$this->element = Angular::text($this->getNgModel(), '{label}', [
-    		'fieldid' => $this->form->getFieldId($this->attribute),
-    	]);
+        $this->element = Angular::text($this->getNgModel(), '{label}', [
+            'fieldid' => $this->form->getFieldId($this->attribute),
+        ]);
         
         return $this;
     }
@@ -83,10 +83,10 @@ class ActiveField extends Object
      */
     public function passwordInput(array $options = [])
     {
-    	$this->element = Angular::password($this->getNgModel(), '{label}', [
-    		'fieldid' => $this->form->getFieldId($this->attribute),
-    	]);
-    	
+        $this->element = Angular::password($this->getNgModel(), '{label}', [
+            'fieldid' => $this->form->getFieldId($this->attribute),
+        ]);
+        
         return $this;
     }
     
@@ -98,9 +98,9 @@ class ActiveField extends Object
      */
     public function textarea(array $options = [])
     {
-    	$this->element = Angular::textarea($this->getNgModel(), '{label}', [
-    		'fieldid' => $this->form->getFieldId($this->attribute),
-    	]);
+        $this->element = Angular::textarea($this->getNgModel(), '{label}', [
+            'fieldid' => $this->form->getFieldId($this->attribute),
+        ]);
         return $this;
     }
     
@@ -111,10 +111,10 @@ class ActiveField extends Object
      */
     private function render()
     {
-    	if (empty($this->element)) {
-    		$this->textInput();
-    	}
-    	
+        if (empty($this->element)) {
+            $this->textInput();
+        }
+        
         if (!isset($this->parts['{label}'])) {
             $this->label($this->label);
         }

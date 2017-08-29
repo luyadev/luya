@@ -4,7 +4,7 @@ The CMS Layouts let the Content Management System know where to render the conte
 
 If you are using the CMS Module in your application (which is installed by default in the kickstarter application) then you can use the CMS Layouts.
 
-## Create new Layout
+## Create new Layout
 
 All CMS Layouts are stored in the `views/cmslayouts` folder which is located in the base path of your project. If we create a new layout with 2 columns (for example) we just add a new view file to the cmslayouts folder like `views/cmslayouts/2columns.php`.
 
@@ -29,12 +29,12 @@ In order to provide a json, use the same name es for the layout with the ending 
 
 ```json
 {
-	"rows" : [
-	    [
-	        {"cols": 8, "var": "left", "label": "Main content Left"},
-	        {"cols": 4, "var": "right", "label": "Sidebar Right"}
-	    ],
-	]
+    "rows" : [
+        [
+            {"cols": 8, "var": "left", "label": "Main content Left"},
+            {"cols": 4, "var": "right", "label": "Sidebar Right"}
+        ],
+    ]
 }
 ```
 
@@ -44,18 +44,18 @@ You an also define multiple rows, here an advanced example for a layout with 4 p
 
 ```json
 {
-	"rows" : [
-		[
-			{"cols": 12, "var": "stage", "label": "Stage"},
-		],
-	    [
-	        {"cols": 8, "var": "left", "label": "Main content"},
-	        {"cols": 4, "var": "right", "label": "Sidebar"}
-	    ],
-	    [
-			{"cols": 12, "var": "footer", "label": "Footer"},
-		],
-	]
+    "rows" : [
+        [
+            {"cols": 12, "var": "stage", "label": "Stage"},
+        ],
+        [
+            {"cols": 8, "var": "left", "label": "Main content"},
+            {"cols": 4, "var": "right", "label": "Sidebar"}
+        ],
+        [
+            {"cols": 12, "var": "footer", "label": "Footer"},
+        ],
+    ]
 }
 ```
 

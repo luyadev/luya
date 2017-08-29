@@ -130,14 +130,14 @@ trait ApplicationTrait
      */
     public function getPackageInstaller()
     {
-    	$file = Yii::getAlias('@vendor' . DIRECTORY_SEPARATOR . 'luyadev' . DIRECTORY_SEPARATOR . 'installer.php');
-    	
-    	$data = [];
-    	if (is_file($file)) {
-    		$data = require($file);
-    	}
-    	 
-    	return new PackageInstaller($data);
+        $file = Yii::getAlias('@vendor' . DIRECTORY_SEPARATOR . 'luyadev' . DIRECTORY_SEPARATOR . 'installer.php');
+        
+        $data = [];
+        if (is_file($file)) {
+            $data = require($file);
+        }
+         
+        return new PackageInstaller($data);
     }
     
     /**
@@ -145,11 +145,11 @@ trait ApplicationTrait
      */
     protected function bootstrap()
     {
-    	foreach ($this->getPackageInstaller()->getConfigs() as $config) {
-    		$this->bootstrap = array_merge($this->bootstrap, $config->bootstrap);
-    	}
-    	
-    	parent::bootstrap();
+        foreach ($this->getPackageInstaller()->getConfigs() as $config) {
+            $this->bootstrap = array_merge($this->bootstrap, $config->bootstrap);
+        }
+        
+        parent::bootstrap();
     }
     
     /**

@@ -63,42 +63,42 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      * Provide class informations from a file path.
      *
      * This is used when working with file paths from composer, in order to detect class and namespace from a given file.
-     * 
+     *
      * @param string $file The file path to the class into order to get infos.
-     * 
+     *
      * @return array|boolean If the given filepath is a file, it will return an array with the keys:
      * + namespace: the namespace of the file
      * + class: the class name of the file
      */
     public static function classInfo($file)
     {
-    	if (!is_file($file)) {
-    		return false;
-    	}
-    	
-    	$phpCode = file_get_contents($file);
-    	$namespace = null;
-    	
-    	if (preg_match('#^namespace\s+(.+?);$#sm', $phpCode, $m)) {
-    		$namespace = $m[1];
-    	}
-    	
-    	$classes = self::classNameByTokens($phpCode);
-    	
-    	return ['namespace' => $namespace, 'class' => end($classes)];
+        if (!is_file($file)) {
+            return false;
+        }
+        
+        $phpCode = file_get_contents($file);
+        $namespace = null;
+        
+        if (preg_match('#^namespace\s+(.+?);$#sm', $phpCode, $m)) {
+            $namespace = $m[1];
+        }
+        
+        $classes = self::classNameByTokens($phpCode);
+        
+        return ['namespace' => $namespace, 'class' => end($classes)];
     }
     
     private static function classNameByTokens($phpCode)
     {
-    	$classes = [];
-    	$tokens = token_get_all($phpCode);
-    	$count = count($tokens);
-    	for ($i = 2; $i < $count; $i++) {
-    		if ($tokens[$i - 2][0] == T_CLASS && $tokens[$i - 1][0] == T_WHITESPACE && $tokens[$i][0] == T_STRING) {
-    			$classes[] = $tokens[$i][1];
-    		}
-    	}
-    	return $classes;
+        $classes = [];
+        $tokens = token_get_all($phpCode);
+        $count = count($tokens);
+        for ($i = 2; $i < $count; $i++) {
+            if ($tokens[$i - 2][0] == T_CLASS && $tokens[$i - 1][0] == T_WHITESPACE && $tokens[$i][0] == T_STRING) {
+                $classes[] = $tokens[$i][1];
+            }
+        }
+        return $classes;
     }
     
     /**

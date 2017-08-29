@@ -160,7 +160,7 @@ $this->beginBody();
                         <td class="text-right" ng-hide="isLocked(config.tableName, item[config.pk])">
                             <?php if (count($this->context->getButtons()) > 0): ?>
                                 <?php foreach ($this->context->getButtons() as $item): ?>
-                                    <button type="button" class="btn btn-sm btn-symbol" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i><? if (!empty($item["label"])): echo "<span class=\"btn-crud-label\">". $item["label"] .  "</span>"; endif; ?></span></button>
+                                    <button type="button" class="btn btn-sm btn-symbol" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i><?php if (!empty($item["label"])): echo "<span class=\"btn-crud-label\">". $item["label"] .  "</span>"; endif; ?></span></button>
                                 <?php endforeach; ?>
                              <?php endif; ?>
                         </td>

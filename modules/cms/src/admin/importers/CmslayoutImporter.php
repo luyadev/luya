@@ -61,9 +61,9 @@ class CmslayoutImporter extends Importer
                         // the rows column defines the placeholders
                         // if the rows column does not exists fail back to normal layout processing
                         if (isset($json['rows'])) {
-                        	$json = $json['rows'];
+                            $json = $json['rows'];
                         } else {
-                        	$json = false;
+                            $json = false;
                         }
                     } catch (\Exception $e) {
                         $json = false;

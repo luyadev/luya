@@ -214,16 +214,16 @@ class Api extends RestActiveController
      */
     public function actionFullResponse()
     {
-    	$query = Yii::$app->request->post('query');
-    	
-    	$find = $this->model->ngRestFind();
-    	
-    	foreach ($this->model->getTableSchema()->columns as $column) {
-    		if ($column->phpType !== "boolean") {
-    			$find->orFilterWhere(['like', $column->name, $query]);
-    		}
-    	}
-    	
+        $query = Yii::$app->request->post('query');
+        
+        $find = $this->model->ngRestFind();
+        
+        foreach ($this->model->getTableSchema()->columns as $column) {
+            if ($column->phpType !== "boolean") {
+                $find->orFilterWhere(['like', $column->name, $query]);
+            }
+        }
+        
         return new ActiveDataProvider([
             'query' => $find,
             'pagination' => false,
@@ -252,7 +252,7 @@ class Api extends RestActiveController
         $query = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
         
         if ($query instanceof ActiveQuery && !$query->multiple) {
-        	throw new InvalidConfigException("The relation defintion must be a hasMany() relation.");
+            throw new InvalidConfigException("The relation defintion must be a hasMany() relation.");
         }
         
         return new ActiveDataProvider([

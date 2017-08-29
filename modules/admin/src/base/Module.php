@@ -175,12 +175,12 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      */
     public function getAuthApis()
     {
-    	$menu = $this->getMenu();
-    	
-    	if (!$menu) {
-    		return $this->extendPermissionApis();
-    	}
-    	
+        $menu = $this->getMenu();
+        
+        if (!$menu) {
+            return $this->extendPermissionApis();
+        }
+        
         return ArrayHelper::merge($this->extendPermissionApis(), $menu->getPermissionApis());
     }
 
@@ -191,12 +191,12 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      */
     public function getAuthRoutes()
     {
-    	$menu = $this->getMenu();
-    	 
-    	if (!$menu) {
-    		return $this->extendPermissionRoutes();
-    	}
-    	
+        $menu = $this->getMenu();
+         
+        if (!$menu) {
+            return $this->extendPermissionRoutes();
+        }
+        
         return ArrayHelper::merge($this->extendPermissionRoutes(), $menu->getPermissionRoutes());
     }
 }

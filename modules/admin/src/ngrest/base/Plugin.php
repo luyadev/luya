@@ -19,7 +19,7 @@ use luya\helpers\ArrayHelper;
  *
  * Async:
  * + onCollectServiceData: A collection bag where you can provide data and access them trough angular, its not available inside the same model as this process runs async
- * 
+ *
  * Async:
  * + onFind: The model is used in your controller frontend logic to display and assign data into the view (developer use case)
  * + onListFind: The model is populated for the Admin Table list view where you can see all your items and click the edit/delete icons.
@@ -233,13 +233,12 @@ abstract class Plugin extends Component
         $menu = Yii::$app->adminmenu->getApiDetail($ngrestModelClass::ngRestApiEndpoint());
         
         if ($menu) {
-        	
-        	if ($ngRestModelSelectMode) {
-        		$options['model-setter'] = $ngRestModelSelectMode;
-        		$options['model-selection'] = 1;
-        	}
-        	
-        	return $this->createTag('crud-loader', null, array_merge(['api' => str_replace('-', '/', $menu['route']), 'alias' => $menu['alias']], $options));
+            if ($ngRestModelSelectMode) {
+                $options['model-setter'] = $ngRestModelSelectMode;
+                $options['model-selection'] = 1;
+            }
+            
+            return $this->createTag('crud-loader', null, array_merge(['api' => str_replace('-', '/', $menu['route']), 'alias' => $menu['alias']], $options));
         }
         
         return null;
@@ -456,7 +455,7 @@ abstract class Plugin extends Component
     
     /**
      * The ngrest services collector.
-     * 
+     *
      * > The service event is async to the other events, which means the service event collects data before the the other events are called.
      *
      * @param \luya\admin\ngrest\base\NgRestModel::EVENT_SERVICE_NGREST $event NgRestModel event EVENT_SERVICE_NGREST.

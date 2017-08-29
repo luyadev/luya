@@ -47,10 +47,10 @@ class ActiveWindowController extends Command
     
     public function renderWindowClassViewFile($className, $moduleId)
     {
-    	return $this->view->render('@admin/commands/views/aw/viewfile.php', [
-    		'className' => $className,
-    		'moduleId' => $moduleId,
-    	]);
+        return $this->view->render('@admin/commands/views/aw/viewfile.php', [
+            'className' => $className,
+            'moduleId' => $moduleId,
+        ]);
     }
     
     /**
@@ -75,13 +75,12 @@ class ActiveWindowController extends Command
         $namespace = $module->getNamespace() . '\\aws';
         
         if (FileHelper::createDirectory($folder) && FileHelper::writeFile($file, $this->renderWindowClassView($className, $namespace, $moduleId))) {
-        	
-        	$object = Yii::createObject(['class' => $namespace . '\\' . $className]);
-        	
-        	if (FileHelper::createDirectory($object->getViewPath()) && FileHelper::writeFile($object->getViewPath() . DIRECTORY_SEPARATOR . 'index.php', $this->renderWindowClassViewFile($className, $moduleId))) {
-        		$this->outputInfo("View file generated.");
-        	}
-        	
+            $object = Yii::createObject(['class' => $namespace . '\\' . $className]);
+            
+            if (FileHelper::createDirectory($object->getViewPath()) && FileHelper::writeFile($object->getViewPath() . DIRECTORY_SEPARATOR . 'index.php', $this->renderWindowClassViewFile($className, $moduleId))) {
+                $this->outputInfo("View file generated.");
+            }
+            
             return $this->outputSuccess("Active Window '$file' created.");
         }
         

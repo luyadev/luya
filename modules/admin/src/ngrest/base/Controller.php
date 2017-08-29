@@ -40,7 +40,7 @@ class Controller extends \luya\admin\base\Controller
 
     /**
      * @var array Define global ngrest controller buttons you can choose in the drop down menu of an ngrest page.
-     * 
+     *
      * ```php
      * 'globalButtons' => [
      *     'icon' => 'extension', 'label' => 'My Button', 'ng-click' => 'callMyFunction()'
@@ -77,7 +77,7 @@ class Controller extends \luya\admin\base\Controller
     }
     
     /**
-     * 
+     *
      * @param string $inline
      * @param string $relation
      * @param string $arrayIndex
