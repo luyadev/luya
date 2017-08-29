@@ -464,6 +464,12 @@
 			$scope.itemSelection = angular.copy(item);
 		};
 
+		$scope.$watch('itemSelection.title', function(n, o) {
+			if (n) {
+				$scope.aliasSuggestion();
+			}
+		});
+		
 		$scope.aliasSuggestion = function() {
 			$scope.itemSelection.alias = Slug.slugify($scope.itemSelection.title);
 		}
@@ -1135,9 +1141,9 @@
 								}
 							}
 						}
-						
-						$scope.loaded = true
 					}
+
+					$scope.loaded = true
 				}
 			});
 		};

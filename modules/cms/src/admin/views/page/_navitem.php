@@ -147,41 +147,24 @@ use luya\helpers\Html;
     </div>
 </div>
 <div class="cmsadmin-page" ng-show="!isTranslated && loaded">
-    <!-- TODO -->
     <div class="alert alert-info"><?= Module::t('view_update_no_translations'); ?></div>
     <div ng-controller="CopyPageController">
-        <h2><?= Module::t('view_index_add_page_from_language'); ?></h2>
+        <h3><?= Module::t('view_index_add_page_from_language'); ?></h3>
         <p><?= Module::t('view_index_add_page_from_language_info'); ?></p>
         <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
         <div ng-show="isOpen">
-            <hr />
-            <ul>
-                <li ng-repeat="item in items"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
+            <ul class="list-group" style="margin-bottom:25px;">
+                <li ng-repeat="item in items" class="list-group-item"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
             </ul>
-            <div ng-show="itemSelection">
-                <div class="row">
-                    <div class="input input--text col s12">
-                        <label class="input__label"><?= Module::t('view_index_page_title'); ?></label>
-                        <div class="input__field-wrapper">
-                            <input name="text" type="text" class="input__field" ng-change="aliasSuggestion()" ng-model="itemSelection.title" />
-                        </div>
-                    </div>
-                <div class="row">
-                </div>
-                    <div class="input input--text col s12">
-                        <label class="input__label"><?= Module::t('view_index_page_alias'); ?></label>
-                        <div class="input__field-wrapper">
-                            <input name="text" type="text" class="input__field" ng-model="itemSelection.alias" />
-                        </div>
-                    </div>
-                </div>
-
-                <button ng-click="save()" class="btn"><?= Module::t('view_index_page_btn_save'); ?></button>
+            <div ng-show="itemSelection" style=" margin-bottom:25px;">
+                <zaa-text label="<?= Module::t('view_index_page_title'); ?>" model="itemSelection.title"></zaa-text>
+                <zaa-text label="<?= Module::t('view_index_page_alias'); ?>" model="itemSelection.alias"></zaa-text>
+                <button ng-click="save()" class="btn btn-save btn-icon" type="button"><?= Module::t('view_index_page_btn_save'); ?></button>
             </div>
         </div>
     </div>
     <div ng-controller="CmsadminCreateInlineController">
-        <h2><?= Module::t('view_index_add_page_empty'); ?></h2>
+        <h3><?= Module::t('view_index_add_page_empty'); ?></h3>
         <create-form data="data"></create-form>
     </div>
 </div>
