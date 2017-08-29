@@ -11,6 +11,20 @@
 @import "../../../vendor/twbs/bootstrap/scss/functions";
 
 // ==================================================
+// Variables (To be used in bootstrap)
+// ==================================================
+
+@import "variables/zindex";
+
+// ==================================================
+// Helpers
+// ==================================================
+
+@import "helpers/google-chrome-font-offset-fix";
+@import "helpers/overflow-no-scrollbars";
+@import "helpers/zindex";
+
+// ==================================================
 // Variables
 // ==================================================
 
@@ -18,7 +32,6 @@
 @import "variables/bootstrap";
 @import "variables/custom";
 @import "variables/flags";
-@import "variables/z-indexes";
 
 // ==================================================
 // Include Bootstrap
@@ -63,13 +76,6 @@
 // Import vendor CSS files
 // ==================================================
 @import "../../../vendor/bower-asset/angularjs-datepicker/dist/angular-datepicker";
-
-// ==================================================
-// Helpers
-// ==================================================
-
-@import "helpers/google-chrome-font-offset-fix";
-@import "helpers/overflow-no-scrollbars";
 
 // ==================================================
 // Base
