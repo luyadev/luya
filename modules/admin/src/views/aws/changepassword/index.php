@@ -9,12 +9,8 @@ use luya\admin\ngrest\aw\CallbackFormWidget;
 ?>
 <div>
     <p><?= Module::t('aws_changepassword_info'); ?></p>
-
     <?php $form = CallbackFormWidget::begin(['callback' => 'save', 'buttonValue' => Module::t('button_save')]); ?>
-    
     <?= $form->field('newpass', Module::t('aws_changepassword_new_pass'))->passwordInput(); ?>
     <?= $form->field('newpasswd', Module::t('aws_changepassword_new_pass_retry'))->passwordInput(); ?>
-
     <?php $form::end(); ?>
-
 </div>

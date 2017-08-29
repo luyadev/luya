@@ -38,7 +38,11 @@ class Angular
      * @param string $label
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      * @param array $mergeOptions Additonal attributes to be set for the tag $type.
-     * @return string
+     * + fieldid: 
+     * + fieldname: 
+     * + placeholder: 
+     * + initvalue: 
+     * @return string: 
      */
     protected static function injector($type, $ngModel, $label, $options = [], array $mergeOptions = [])
     {
@@ -96,6 +100,18 @@ class Angular
     public static function text($ngModel, $label, array $options = [])
     {
         return self::injector('zaa-text', $ngModel, $label, [], $options);
+    }
+    
+    /**
+     * Passwort
+     * @param unknown $ngModel
+     * @param unknown $label
+     * @param array $options
+     * @return \luya\admin\helpers\string:
+     */
+    public static function password($ngModel, $label, array $options = []) 
+    {
+    	return self::injector('zaa-password', $ngModel, $label, [], $options);
     }
     
     /**

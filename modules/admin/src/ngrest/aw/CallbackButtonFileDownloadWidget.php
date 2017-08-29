@@ -43,7 +43,10 @@ class CallbackButtonFileDownloadWidget extends CallbackButtonWidget
      */
     public $angularCallbackFunction = 'function($response, $scope) { $scope.linkHref = $response.url; $scope.linkHrefHidden = false; $scope.buttonHidden = true; };';
     
-    public $options = ['class' => 'btn cyan btn--small'];
+    /**
+     * @inheritdoc
+     */
+    public $options = ['class' => 'btn btn-download btn-icon'];
     
     /**
      * Generates and returns the content output.

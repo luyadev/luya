@@ -81,7 +81,7 @@ class CallbackButtonWidget extends Widget
             'closeOnSuccess' => (isset($this->options['closeOnSuccess'])) ? '$scope.crud.closeActiveWindow();' : null,
             'reloadListOnSuccess' => (isset($this->options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
             'reloadWindowOnSuccess' => (isset($this->options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
-            'buttonClass' => ArrayHelper::getValue($this->options, 'class', 'btn'),
+            'buttonClass' => ArrayHelper::getValue($this->options, 'class', 'btn btn-save'),
             'linkLabel' => ArrayHelper::getValue($this->options, 'linkLabel', 'Download'),
             'angularCallbackFunction' => $this->angularCallbackFunction,
         ]);

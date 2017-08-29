@@ -156,7 +156,7 @@ class CallbackFormWidget extends Widget
             'reloadWindowOnSuccess' => (isset($this->options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
             'form' => $content,
             'angularCallbackFunction' => $this->angularCallbackFunction,
-            'buttonClass' => (isset($options['buttonClass'])) ? $options['buttonClass'] : 'btn',
+            'buttonClass' => (isset($options['buttonClass'])) ? $options['buttonClass'] : 'btn btn-save btn-icon',
         ]);
     }
 }

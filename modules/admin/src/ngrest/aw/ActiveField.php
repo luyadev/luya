@@ -3,7 +3,7 @@
 namespace luya\admin\ngrest\aw;
 
 use yii\base\Object;
-use yii\helpers\Html;
+use luya\admin\helpers\Angular;
 
 /**
  * ActiveWindow ActiveField Configration
@@ -33,12 +33,9 @@ class ActiveField extends Object
      */
     public $label = false;
     
-    /**
-     * @var string The template to build the element, the {} variables will be replace on render().
-     */
-    public $template = '<div class="{class}">{label}<div class="input__field-wrapper">{input}</div></div>';
-    
     protected $parts = [];
+    
+    protected $element;
     
     /**
      * Define a label for this field. If false, no label will be used, if a label is provided from the configration
@@ -52,9 +49,15 @@ class ActiveField extends Object
         if ($label === false) {
             $this->parts['{label}'] = '';
         } else {
-            $this->parts['{label}'] = '<label class="input__label" for="'.$this->form->getFieldId($this->attribute).'">'.$label.'</label>';
+            $this->parts['{label}'] = $label;
         }
+        
         return $this;
+    }
+    
+    protected function getNgModel()
+    {
+    	return 'params.'.$this->attribute;
     }
     
     /**
@@ -65,12 +68,9 @@ class ActiveField extends Object
      */
     public function textInput(array $options = [])
     {
-        $this->parts['{input}'] = Html::textInput($this->attribute, $this->value, [
-            'class' => 'input__field',
-            'id' => $this->form->getFieldId($this->attribute),
-            'ng-model' => 'params.'.$this->attribute,
-        ]);
-        $this->parts['{class}'] = 'input input--text input--vertical';
+    	$this->element = Angular::text($this->getNgModel(), '{label}', [
+    		'fieldid' => $this->form->getFieldId($this->attribute),
+    	]);
         
         return $this;
     }
@@ -83,13 +83,10 @@ class ActiveField extends Object
      */
     public function passwordInput(array $options = [])
     {
-        $this->parts['{input}'] = Html::passwordInput($this->attribute, $this->value, [
-            'class' => 'input__field',
-            'id' => $this->form->getFieldId($this->attribute),
-            'ng-model' => 'params.'.$this->attribute,
-        ]);
-        $this->parts['{class}'] = 'input input--text input--vertical';
-    
+    	$this->element = Angular::password($this->getNgModel(), '{label}', [
+    		'fieldid' => $this->form->getFieldId($this->attribute),
+    	]);
+    	
         return $this;
     }
     
@@ -101,13 +98,9 @@ class ActiveField extends Object
      */
     public function textarea(array $options = [])
     {
-        $this->parts['{input}'] = Html::textarea($this->attribute, $this->value, [
-            'class' => 'input__field',
-            'id' => $this->form->getFieldId($this->attribute),
-            'ng-model' => 'params.'.$this->attribute,
-        ]);
-        $this->parts['{class}'] = 'input input--textarea input--vertical';
-        
+    	$this->element = Angular::textarea($this->getNgModel(), '{label}', [
+    		'fieldid' => $this->form->getFieldId($this->attribute),
+    	]);
         return $this;
     }
     
@@ -118,27 +111,19 @@ class ActiveField extends Object
      */
     private function render()
     {
-        if (!isset($this->parts['{input}'])) {
-            $this->textInput();
-        }
-    
+    	if (empty($this->element)) {
+    		$this->textInput();
+    	}
+    	
         if (!isset($this->parts['{label}'])) {
             $this->label($this->label);
         }
     
-        if (!isset($this->parts['{class}'])) {
-            $this->parts['{class}'] = $this->class;
-        }
-    
         return str_replace([
-                '{input}',
-                '{label}',
-                '{class}',
+            '{label}',
         ], [
-                $this->parts['{input}'],
-                $this->parts['{label}'],
-                $this->parts['{class}'],
-        ], $this->template);
+            $this->parts['{label}'],
+        ], $this->element);
     }
     
     /**

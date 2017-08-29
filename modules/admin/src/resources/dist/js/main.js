@@ -2764,7 +2764,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     			"api": "@api",
     			"arrayIndex": "@arrayIndex",
     			"modelClass" : "@modelClass",
-    			"id": "@id",
+    			"id": "@id"
     		},
     		controller: function($scope) {
     			$scope.content = null;
@@ -2784,7 +2784,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
      * Usage inside another Angular Template:
      * 
      * ```php
-     * <zaa-injector dir="zaa-text" options="{}" fieldid="myFieldId" fieldname="myFieldName" initvalue="0" label="My Label" model="mymodel"></zaa-injector>
+     * <zaa-injector dir="zaa-text" options="{}" fieldid="myFieldId" initvalue="0" label="My Label" model="mymodel"></zaa-injector>
      * ```
      */
     zaa.directive("zaaInjector", function($compile) {
@@ -2799,12 +2799,11 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "grid": "@grid",
                 "fieldid": "@fieldid",
-                "fieldname": "@fieldname",
                 "placeholder": "@placeholder",
                 "initvalue": "@initvalue"
             },
             link: function($scope, $element) {
-                var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" initvalue="{{initvalue}}" fieldid="{{fieldid}}" fieldname="{{fieldname}}" placeholder="{{placeholder}}" model="model" label="{{label}}" i18n="{{grid}}" />'))($scope);
+                var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" initvalue="{{initvalue}}" fieldid="{{fieldid}}" placeholder="{{placeholder}}" model="model" label="{{label}}" i18n="{{grid}}" />'))($scope);
                 $element.replaceWith(elmn);
             },
         }
@@ -2841,8 +2840,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     			"options": "=",
     			"label": "@label",
     			"i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname",
+                "id": "@fieldid"
     		},
     		controller: function($scope, $filter) {
 
@@ -2969,8 +2967,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "label": "@label",
                 "i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname",
+                "id": "@fieldid"
             },
             controller: function($scope) {
             	$scope.unset = function() {
@@ -3038,8 +3035,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "label": "@label",
                 "i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname",
+                "id": "@fieldid"
             },
     		controller: function($scope, Slug) {
     			$scope.$watch(function() { return $scope.model; }, function(n, o) {
@@ -3049,7 +3045,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     			});
     		},
     		template:function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="form-control" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" insert-paste-listener ng-model="model" type="text" class="form-control" placeholder="{{placeholder}}" /></div></div>';
     		}
     	}
     });
@@ -3062,8 +3058,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "label": "@label",
                 "i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname",
+                "id": "@fieldid"
             },
             controller: function($scope) {
                 function getTextColor(){
@@ -3127,11 +3122,10 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "label": "@label",
                 "i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname"
+                "id": "@fieldid"
             },
             template: function() {
-                return '<ng-wig ng-disabled="false" ng-model="model" buttons="bold, italic, link, list1, list2" name="{{name}}"></ng-wig>';
+                return '<ng-wig ng-disabled="false" ng-model="model" buttons="bold, italic, link, list1, list2"></ng-wig>';
             }
         }
     });
@@ -3145,7 +3139,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "placeholder": "@placeholder",
                 "initvalue" : "@initvalue"
             }, link: function($scope) {
@@ -3160,7 +3153,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                     }
                 })
             }, template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" ng-model="model" type="number" min="0" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -3174,7 +3167,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "placeholder": "@placeholder"
             }, controller: function($scope) {
                 if ($scope.options === null) {
@@ -3191,7 +3183,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                     }
                 })
             }, template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" step="{{steps}}" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" ng-model="model" type="number" min="0" step="{{steps}}" class="form-control" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -3208,11 +3200,10 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "placeholder": "@placeholder"
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="form-control" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" insert-paste-listener ng-model="model" type="text" class="form-control" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -3229,8 +3220,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "fields" : "=",
                 "label": "@label",
                 "i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname",
+                "id": "@fieldid"
             },
             controller: function($scope, $timeout, $http) {
             	$timeout(function() {
@@ -3264,11 +3254,10 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "placeholder": "@placeholder"
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><textarea id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="form-control" auto-grow placeholder="{{placeholder}}"></textarea></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><textarea id="{{id}}" insert-paste-listener ng-model="model" type="text" class="form-control" auto-grow placeholder="{{placeholder}}"></textarea></div></div>';
             }
         }
     });
@@ -3281,11 +3270,10 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "label": "@label",
                 "i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname"
+                "id": "@fieldid"
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" name="{{name}}" ng-model="model" type="password" class="form-control" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><input id="{{id}}" ng-model="model" type="password" class="form-control" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -3321,7 +3309,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "initvalue": "@initvalue"
             },
             link: function(scope) {
@@ -3413,7 +3400,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "label": "@label",
                 "initvalue": "@initvalue"
             },
@@ -3442,7 +3428,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                             '</div>' +
                             '<div class="form-side">' +
                                 '<div class="form-check">' +
-                                    '<input id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" class="form-check-input-standalone" />' +
+                                    '<input id="{{id}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" class="form-check-input-standalone" />' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -3463,7 +3449,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "label": "@label"
             },
             controller: function($scope, $filter) {
@@ -3550,7 +3535,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "label": "@label",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "i18n": "@i18n"
             },
             controller: function($scope, $filter) {
@@ -3672,7 +3656,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "options": "=",
                 "label": "@label",
                 "id": "@fieldid",
-                "name": "@fieldname",
                 "i18n": "@i18n"
             },
         	controller: function($scope, $filter) {
@@ -3758,7 +3741,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname"
             },
             controller: function($scope) {
 
@@ -3899,7 +3881,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname"
             },
             template: function() {
                 return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
@@ -3923,7 +3904,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname"
             },
             template: function() {
                 return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
@@ -3947,7 +3927,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname"
             },
             controller: function($scope) {
 
@@ -4035,7 +4014,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname"
             },
             controller: function($scope, $element, $timeout) {
 
@@ -4123,7 +4101,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname"
             },
             controller: function ($scope) {
                 $scope.init = function() {
@@ -4173,7 +4150,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                                 '<div class="list zaa-file-array-upload">' +
                                     '<p class="alert alert-info" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                     '<div ng-repeat="(key,row) in model track by key" class="list-item">' +
-                                        '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" fieldname="{{opt.var}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
+                                        '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
                                         '<div class="list-buttons">' +
                                             '<div class="btn-group" role="group">' +
                                                 '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
@@ -4199,7 +4176,6 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname"
             },
             controller: function($scope, $element, $timeout) {
 
