@@ -22,11 +22,11 @@ $this->beginPage()
     </style>
     <?php $this->head(); ?>
 </head>
-<body ng-cloak flow-prevent-drop class="{{AdminClassService.getClassSpace('modalBody')}}">
+<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}}">
 <?php $this->beginBody(); ?>
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
-    <div class="luya-mainnav">
+    <div class="luya-mainnav" ng-class="{'luya-mainnav-small' : !isHover}">
         <div class="mainnav" ng-class="{'mainnav-small' : !isHover}">
             <div class="mainnav-toggler-mobile">
                 <div class="mainnav-toggler-mobile-icon" ng-click="isOpen = !isOpen">
