@@ -197,7 +197,7 @@
                     }
 
                     // If tooltip shall be display...
-                    if(typeof scope.tooltipDisabled === 'undefined' || scope.tooltipDisabled === false) {
+                    if(scope.pop && (typeof scope.tooltipDisabled === 'undefined' || scope.tooltipDisabled === false)) {
 
                         // ..check position
                         onScroll();
@@ -213,7 +213,10 @@
 
                 element.on('mouseleave', function () {
                     element.parents().off('scroll', onScroll);
-                    scope.pop.hide();
+
+                    if(scope.pop) {
+                        scope.pop.hide();
+                    }
                 });
 
                 scope.$on('$destroy', function() {
