@@ -167,7 +167,7 @@
                 element.on('mouseenter', function () {
 
                     // Generate tooltip HTML for the first time
-                    if(!scope.pop) {
+                    if(!scope.pop && (typeof scope.tooltipDisabled === 'undefined' || scope.tooltipDisabled === false)) {
                         if (scope.tooltipExpression) {
                             scope.tooltipText = scope.tooltipExpression;
                         }
