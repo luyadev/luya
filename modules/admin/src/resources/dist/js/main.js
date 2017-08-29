@@ -3283,6 +3283,42 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     });
 
     /**
+     * <zaa-radios model="model" options="[{label:'foo', value: 'bar'}, {...}]">
+     */
+    zaa.directive("zaaRadios", function() {
+    	return {
+	    	restrict: "E",
+	    	scope: {
+	            "model": "=",
+	            "options": "=",
+	            "label": "@label",
+	            "i18n": "@i18n",
+	            "id": "@fieldid",
+	            "initvalue": "@initvalue"
+	    	},
+	    	controller: function($scope) {
+	    		$scope.setModelValue = function(value) {
+	    			$scope.model = value;
+	    		};
+	    	},
+	    	template: function() {
+	    		return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+				            '<div class="form-side form-side-label">' +
+				            	'<label for="{{id}}">{{label}}</label>' +
+				            '</div>' +
+				            '<div class="form-side">' +
+					        	'<div ng-repeat="(key, item) in options" class="form-check">'+
+					        		'<label class="form-check-label">'+
+					        			'<input value="{{item.value}}" style="display:block;" type="radio" ng-click="setModelValue(item.value)" ng-checked="item.value == model" name="{{id}}_{{key}}" class="form-check-input"> {{item.label}}'+
+					        		'</label>'+
+					        	'</div>'+
+					        '</div>'+
+				        '</div>';
+	    	},
+    	};
+    });
+    
+    /**
      * 
      * Usage Example:
      * 

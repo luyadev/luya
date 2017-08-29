@@ -28,7 +28,7 @@ class TestProperty extends Property
     
     public function type()
     {
-        return 'zaa-select';
+        return 'zaa-radios';
     }
     
     public function defaultValue()
