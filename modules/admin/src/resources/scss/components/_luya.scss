@@ -34,7 +34,7 @@
 }
 
 .luya-mainnav {
-    z-index: index($elements, navbar);
+    z-index: z-index(navbar);
     width: 100%;
 
     @media (min-width: $mobile-nav-breakpoint) {
@@ -80,6 +80,10 @@
             padding-left: 0;
         }
 
+        .cmsnav {
+            padding: 0;
+        }
+
         &.overlaying {
             bottom: 0;
             box-shadow: 2px 0 10px 1px rgba(0, 0, 0, .1);
@@ -87,7 +91,7 @@
             top: 0;
             transform: translateX(calc(-100% + 50px));
             transition: .2s ease-in-out transform;
-            z-index: index($elements, before-content);
+            z-index: z-index(before-content);
 
             &:hover {
                 transform: translateX(0);

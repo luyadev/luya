@@ -65,7 +65,7 @@
     position: absolute;
     right: 0;
     transform: translateY(100%);
-    z-index: index($elements, dropdown);
+    z-index: z-index(dropdown);
 
     .zaaselect.open & {
         display: block;

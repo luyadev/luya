@@ -4,10 +4,15 @@
     left: 80px;
 
     display: block;
-    z-index: index($elements, modal-toast);
+    z-index: z-index(modal-toast);
     transition: .25s ease-in-out transform;
 
     .alert {
         margin-bottom: 5px;
     }
+}
+
+.toasts {
+    position: absolute;
+    z-index: z-index(modal-toast);
 }

@@ -10,7 +10,7 @@
     transform: translateX(100%);
     transition: .25s ease-in-out transform, .25s ease-in-out box-shadow;
     width: 100%;
-    z-index: index($elements, file-detail);
+    z-index: z-index(file-detail);
 
     &.open {
         border-left: 2px solid color(gray);

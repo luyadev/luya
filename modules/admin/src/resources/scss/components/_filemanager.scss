@@ -160,7 +160,7 @@
     position: fixed;
     right: 50px;
     top: 50px;
-    z-index: index($elements,filemanager);
+    z-index: z-index(filemanager);
 
     h2 {
         color: color(white);

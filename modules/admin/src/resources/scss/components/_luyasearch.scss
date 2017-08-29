@@ -6,7 +6,7 @@
     top: 0;
     bottom: 0;
     background: white;
-    z-index: index($elements, before-content);
+    z-index: z-index(before-content);
     padding-left: 62px;
     transition: .25s left ease-in-out;
     box-shadow: 0 0 10px -2px map-get($grays, 800);

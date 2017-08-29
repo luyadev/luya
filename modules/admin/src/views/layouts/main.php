@@ -207,8 +207,8 @@ $this->beginPage()
     </div> <!-- end of debug inner -->
 </div>
 <div class="toasts" ng-repeat="item in toastQueue">
-    <div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
-        <div class="modal-dialog" role="document">
+    <div class="modal toasts-modal fade show" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{item.title}}</h5>

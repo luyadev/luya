@@ -87,8 +87,11 @@
     margin-top: 5px;
 
     .mainnav-small & {
-        text-align: center;
+        text-align: left;
 
+        @media (min-width: $mobile-nav-breakpoint) {
+            text-align: center;
+        }
     }
 }
 
@@ -351,6 +354,8 @@
 
 body.browser-safari {
     .mainnav {
+
+
         @media (min-width: $mobile-nav-breakpoint) {
 
             min-height: 100vh;
