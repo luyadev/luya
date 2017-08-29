@@ -66,7 +66,11 @@ use luya\helpers\Html;
                                </div>
                             </div>
                             <button type="submit" class="btn btn-save btn-icon"><?= Module::t('view_update_btn_save'); ?></button>
-                            <button type="button" class="btn btn-primary-outline float-right" ng-click="showHelp=!showHelp"><i class="material-icons left">help</i> {{ showHelp == true ? 'Hide help' : 'Show help' }}</button>
+                            <button type="button" class="btn btn-icon btn-help float-right" ng-click="showHelp=!showHelp">{{ showHelp == true ? 'Hide help' : 'Show help' }}</button>
+							<select ng-if="block.variations" class="btn float-right" ng-model="block.variation" style="margin-right:10px;">
+                            	<option value="0" selected><?= Module::t('view_update_variation_select'); ?></option>
+                                <option value="{{variationKey}}" ng-repeat="(variationKey, variation) in block.variations">{{variation.title}}</option>
+                            </select>
                         </form>
                         </div>
 						<div ng-if="showHelp">

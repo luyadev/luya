@@ -1179,7 +1179,7 @@
                             }
                             scope.model = scope.initvalue;
                         }
-                    })
+                    });
                 });
                 
                 scope.setModelValue = function(option) {

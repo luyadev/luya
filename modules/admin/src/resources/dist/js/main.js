@@ -3337,7 +3337,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                             }
                             scope.model = scope.initvalue;
                         }
-                    })
+                    });
                 });
                 
                 scope.setModelValue = function(option) {
