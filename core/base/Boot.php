@@ -67,6 +67,11 @@ abstract class Boot
         return $this->_baseYiiFile;
     }
 
+    public function isCli()
+    {
+    	return $this->getSapiName() === 'cli';
+    }
+    
     /**
      * Returns the current sapi name in lower case.
      *
@@ -123,10 +128,15 @@ abstract class Boot
     {
         if ($this->_configArray === null) {
             if (!file_exists($this->configFile)) {
-                throw new Exception("Unable to load the config file '".$this->configFile."'.");
+            	if (!$this->isCli()) {
+            		throw new Exception("Unable to load the config file '".$this->configFile."'.");
+            	}
+            	
+            	$config = ['id' => 'consoleapp', 'basePath' => dirname(__DIR__)];
+                
+            } else {
+            	$config = require $this->configFile;
             }
-    
-            $config = require $this->configFile;
     
             if (!is_array($config)) {
                 throw new Exception("config file '".$this->configFile."' found but no array returning.");
@@ -155,7 +165,7 @@ abstract class Boot
      */
     public function run()
     {
-        if ($this->getSapiName() === 'cli') {
+        if ($this->isCli()) {
             return $this->applicationConsole();
         }
 
