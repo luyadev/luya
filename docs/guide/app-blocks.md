@@ -76,7 +76,7 @@ In order to retrieve values from configurations (`$this->[METHOD]`):
 
 Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
 
-#### Register and import
+## Register and import
 
 After creating a Block, you have to *Import* it into your application. The reason behind the import process is to avoid rely on database structure and to work with php files you can also check into version controller system. Run the [Import Command](luya-console.md):
 
@@ -85,16 +85,6 @@ After creating a Block, you have to *Import* it into your application. The reaso
 ```
 
 This will add or update the Block into the CMS system. If you rename or remove a Block from your application, the old block will be deleted from your database.
-
-#### Methods in detail
-
-|Name|Return|Description
-|----|--------|------------
-|icon|string|Return the [Materialize-Icon](https://design.google.com/icons/) name
-|name|string|Return the Humand Readable name for the administration area.
-|config|array|Define all config variables there user can input in the administration area `cfgs`, `vars` and `placeholders`. Read more about [CMS Block Config and different input types](app-block-types.md).
-|extraVars|array|Define additional variables to your template, so you can reuse them inside your view with `$extras.VAR_NAME`.
-|admin|string|Returns the [Twig.js](https://github.com/justjohn/twig.js/wiki) template to be display in the administration area.
 
 ### Module blocks
 
@@ -106,10 +96,6 @@ class TestBlock extends \luya\cms\base\PhpBlock
     public $module = 'mymodule';
 }
 ```
-
-#### Override default blocks
-
-> Overriding blocks is removed from the guide, as its encountert as a misfit practice.
 
 ## Caching
 
@@ -130,7 +116,7 @@ public $cacheExpiration = 60;
 
 You can enable block caching for a block event if the caching component is not registered, so you can redistribute blocks and the behavior of them.
 
-## Env option
+## Env / Context Informations
 
 Each block is placed in an Environemnt (Env) you can access those informations inside your block logic:
 
@@ -236,12 +222,12 @@ $this->createAjaxLink('HellWorld', ['time' => time()]);
 
 You could store this created link from above inside your extras vars and pass it to the javascript.
 
-#### Callback parameters
+###3 Callback parameters
 
 You can pass aditional values to the callback by using the post ajax method and collect them in your callback via Yii::$app->request->post(). The get parameters are used to resolve the callback.
 
 
-# Block Groups
+## Block Groups
 
 We have added the ability to manage the block groups via classes, so you can add new groups on your blocks can depend on a block group, when you run the import command luya will create the folders (block groups) and add/update the blocks into the provided groups.
 
@@ -290,7 +276,7 @@ You can also use one of the predefined group block class:
 + {{\luya\cms\frontend\blockgroups\MediaGroup}}
 + {{\luya\cms\frontend\blockgroups\TextGroup}}
 
-# Variations
+## Variations
 
 In order to provide block flavors configure your `blockVariation` property of the `cmsadmin` module inside your configuration file as follow:
 
