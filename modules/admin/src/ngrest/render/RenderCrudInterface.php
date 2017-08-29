@@ -15,4 +15,8 @@ interface RenderCrudInterface
     public function setModelSelection($selection);
     
     public function getModelSelection();
+    
+    public function setGlobalButtons(array $buttons);
+    
+    public function getGlobalButtons();
 }

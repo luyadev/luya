@@ -28,14 +28,6 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
     private $_permissions = [];
 
-    private $_buttons;
-
-    private $_view;
-
-    private $_fields = [];
-
-    private $_langs;
-
     public function can($type)
     {
         if (!array_key_exists($type, $this->_permissions)) {
@@ -44,7 +36,13 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
         return $this->_permissions[$type];
     }
+    
+    private $_view;
 
+    /**
+     * 
+     * @return \luya\admin\ngrest\render\RenderCrudView
+     */
     public function getView()
     {
         if ($this->_view === null) {
@@ -78,6 +76,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         if ($append) {
             $append = '/' . ltrim($append, '/');
         }
+        
         return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
     }
     
@@ -136,10 +135,25 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
     }
     
+    private $_globalButtons = [];
+    
+    public function setGlobalButtons(array $buttons)
+    {
+    	$this->_globalButtons = $buttons;
+    }
+    
+    public function getGlobalButtons()
+    {
+    	return $this->_globalButtons;
+    }
+    
     /*
      * OLD
      */
 
+    
+    private $_buttons;
+    
     /**
      * collection all the buttons in the crud list.
      *
@@ -222,6 +236,8 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         return http_build_query($query, '', '&');
     }
 
+    private $_fields = [];
+    
     /**
      * wrapper of $config->getPointer to get only the fields.
      */
@@ -250,6 +266,9 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     {
         return ($activeWindows = $this->config->getPointer('aw')) ? $activeWindows : [];
     }
+    
+    
+    private $_langs;
 
     public function getLangs()
     {

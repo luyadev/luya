@@ -25,8 +25,7 @@ class Controller extends \luya\admin\base\Controller
     public $layout = false;
     
     /**
-     * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
-     * is required.
+     * @var string Defines the related model for the NgRest Controller. The full qualified model name is required.
      *
      * ```php
      * public $modelClass = 'admin\models\User';
@@ -39,6 +38,17 @@ class Controller extends \luya\admin\base\Controller
      */
     public $disablePermissionCheck = true;
 
+    /**
+     * @var array Define global ngrest controller buttons you can choose in the drop down menu of an ngrest page.
+     * 
+     * ```php
+     * 'globalButtons' => [
+     *     'icon' => 'extension', 'label' => 'My Button', 'ng-click' => 'callMyFunction()'
+     * ];
+     * ```
+     */
+    public $globalButtons = [];
+    
     /**
      * @inheritdoc
      */
@@ -66,6 +76,16 @@ class Controller extends \luya\admin\base\Controller
         return $this->_model;
     }
     
+    /**
+     * 
+     * @param string $inline
+     * @param string $relation
+     * @param string $arrayIndex
+     * @param string $modelClass
+     * @param string $modelSelection
+     * @throws Exception
+     * @return string
+     */
     public function actionIndex($inline = false, $relation = false, $arrayIndex = false, $modelClass = false, $modelSelection = false)
     {
         $apiEndpoint = $this->model->ngRestApiEndpoint();
@@ -84,6 +104,7 @@ class Controller extends \luya\admin\base\Controller
         
         $ngrest = new NgRest($config);
         $crud = new RenderCrud();
+        $crud->setGlobalButtons($this->globalButtons);
         $crud->setIsInline($inline);
         $crud->setModelSelection($modelSelection);
         if ($relation && $arrayIndex !== false && $modelClass !== false) {

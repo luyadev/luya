@@ -1,6 +1,7 @@
 <?php
 use luya\admin\ngrest\render\RenderCrud;
 use luya\admin\Module;
+use luya\helpers\ArrayHelper;
 
 /* @var $config \luya\admin\ngrest\ConfigInterface */
 /* @var $this \luya\admin\ngrest\render\RenderCrudView */
@@ -33,7 +34,11 @@ $this->beginBody();
                             <a class="dropdown-item" ng-show="exportDownloadButton" ng-click="exportDownload()">
                                <i class="material-icons">get_app</i><span> <?= Module::t('ngrest_crud_csv_export_btn_dl'); ?></span>
                             </a>
-                            <?php // foreach buttons from external buttons list?>
+                            <?php foreach ($this->context->getGlobalButtons() as $button): ?>
+                            <a class="dropdown-item" ng-click="<?= $button['ng-click']; ?>">
+                               <i class="material-icons"><?= ArrayHelper::getValue($button, 'icon', 'extension')?></i><span> <?= $button['label']; ?></span>
+                            </a>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
