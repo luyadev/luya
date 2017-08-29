@@ -12,6 +12,12 @@
         padding-bottom: 6px;
         padding-top: 6px;
     }
+
+    tr,
+    td,
+    thead {
+        transition: .2s background-color ease-in-out;
+    }
 }
 
 .table-align-middle {

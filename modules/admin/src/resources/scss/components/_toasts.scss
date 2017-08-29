@@ -14,5 +14,11 @@
 
 .toasts {
     position: absolute;
+    min-width: 320px;
+    max-width: 100%;
     z-index: z-index(modal-toast);
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        min-width: 480px;
+    }
 }

@@ -26,19 +26,27 @@ You can either combine the btn class with predefined icons, to do so simply add 
 ```html
 <button type="button" class="btn btn-save btn-icon">Save</button>
 ```
-> Please keep in mind that ```<input type="button" class="btn btn-icon btn-save" value="Button label" /> ``` does <b>not</b> work because input fields don`t support the pseudo class ```:after``.
+> Please keep in mind that ```<input type="button" class="btn btn-icon btn-save" value="Button label" /> ``` does <b>not</b> work because input fields don`t support the pseudo css class ```:after``.
 
-Sometimes you just want to display the icon but without label, therefore use `btn-nolabel`:
+
+If you would like to display a button without predefined icon use `btn-icon` without a defined class:
 
 ```html
-<button type="button" class="btn btn-save btn-icon btn-nolabel"></button>
+<button type="button" class="btn btn-icon"><i class="material-icons">check</i>OK</button>
 ```
+
+
+and if you want a button `btn-icon` without a background simply add `btn-link`:
+```html
+<button type="button" class="btn btn-icon btn-link"><i class="material-icons">check</i>Link</button>
+```
+
 Below some examples
 
 ```html
 <button type="button" class="btn btn-icon btn-save">Safe button with icon and text</button>
 <button type="button" class="btn btn-cancel">Cancel button without icon</button>
-<button type="button" class="btn btn-icon btn-cancel btn-nolabel"></button>
+<button type="button" class="btn btn-icon btn-delete"></button> // Delete button without label but predefined icon and colors.
 ```
  
 ## Which icon stands for what
