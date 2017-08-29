@@ -24,15 +24,17 @@
 .modal-header {
     .close {
         position: relative;
+        cursor: pointer;
     }
 }
 
 .modal-esc {
     position: absolute;
-    top: 1px;
+    top: 0;
     left:-35px;
     font-size: 14px;
     line-height: 1.5rem;
+    padding-right: 10px;
     color: $gray-500;
     cursor: pointer;
 }

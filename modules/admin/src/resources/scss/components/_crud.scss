@@ -28,11 +28,11 @@
     }
 }
 
-.selectableRow td {
+.crud-selectable-row td {
     cursor: pointer;
 }
 
-.is-selected-row td {
+.crud-selected-row td {
     background-color: theme-color(primary);
     color: color(white);
 
