@@ -2029,7 +2029,7 @@
                                 '<label>{{label}}</label>' +
                             '</div>' +
                             '<div class="form-side">' +
-                                '<div class="list zaa-file-array-upload">' +
+                                '<div class="list zaa-multiple-inputs">' +
                                     '<p class="alert alert-info" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                     '<div ng-repeat="(key,row) in model track by key" class="list-item">' +
                                         '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
