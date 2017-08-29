@@ -1232,9 +1232,28 @@
 		 * drops items in an empty page placeholder of CMS LAYOUT PLACEHOLDER
 		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
-			$http.post('admin/api-cms-navitempageblockitem/create', {prev_id: dropped.prev_id, sort_index:0, block_id: dragged.id, placeholder_var : dropped['var'], nav_item_page_id: dropped.nav_item_page_id }).then(function(response) {
-				$scope.refreshNested(dropped['prev_id'], dropped['var']);
-			});
+			if (dragged.hasOwnProperty('copystack')) {
+				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
+					copyBlockId: dragged.id,
+					sort_index: 0,
+					prev_id:  dropped.prev_id,
+					placeholder_var : dropped['var'], 
+					nav_item_page_id: dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.refreshNested(dropped['prev_id'], dropped['var']);
+				});
+			} else {
+				$http.post('admin/api-cms-navitempageblockitem/create', {
+					prev_id: dropped.prev_id, 
+					sort_index:0, 
+					block_id: dragged.id, 
+					placeholder_var : dropped['var'], 
+					nav_item_page_id: dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.refreshNested(dropped['prev_id'], dropped['var']);
+				});
+			}
+			
 		};
 		
 		$scope.refresh();
@@ -1253,20 +1272,31 @@
 		 * drops an item in an empty placeholder of a BLOCK
 		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
-			$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : dropped.prev_id, sort_index:0, block_id : dragged.id , placeholder_var : dropped.var, nav_item_page_id : dropped.nav_item_page_id }).then(function(response) {
-				$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
-			});
+			if (dragged.hasOwnProperty('copystack')) {
+				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
+					copyBlockId: dragged.id,
+					sort_index: 0,
+					prev_id:  dropped.prev_id,
+					placeholder_var : dropped.var,
+					nav_item_page_id : dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+				});
+			} else {
+				$http.post('admin/api-cms-navitempageblockitem/create', {
+					prev_id : dropped.prev_id,
+					sort_index:0, 
+					block_id : dragged.id,
+					placeholder_var : dropped.var,
+					nav_item_page_id : dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
+				});
+			}
 		};
 		
 		$scope.dropItem = function(dragged,dropped,position) {
 			var sortIndex = $scope.$index;
-			
-			/*
-			console.log('dropped on block id', dropped.id);
-			console.log('dragged the block', dragged.name);
-			console.log('position', position);
-			console.log('originalSortIndex', sortIndex);
-			*/
 			
 			if (position == 'bottom') {
 				sortIndex = sortIndex + 1;
@@ -1286,8 +1316,8 @@
 			} else if (dragged.hasOwnProperty('copystack')) {
 				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
 					copyBlockId: dragged.id,
-					sortIndex: sortIndex,
-					prevId: $scope.placeholder.prev_id,
+					sort_index: sortIndex,
+					prev_id: $scope.placeholder.prev_id,
 					placeholder_var: $scope.placeholder['var'],
 					nav_item_page_id: $scope.placeholder.nav_item_page_id
 				}).then(function(response) {

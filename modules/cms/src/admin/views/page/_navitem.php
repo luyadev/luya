@@ -65,7 +65,7 @@ use luya\helpers\Html;
                                    <zaa-injector dir="cfgField.type"  options="cfgField.options" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}"  placeholder="{{cfgField.placeholder}}" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary"><i class="material-icons left">done</i> Save</button>
+                            <button type="submit" class="btn btn-save btn-icon"><?= Module::t('view_update_btn_save'); ?></button>
                             <button type="button" class="btn btn-primary-outline float-right" ng-click="showHelp=!showHelp"><i class="material-icons left">help</i> {{ showHelp == true ? 'Hide help' : 'Show help' }}</button>
                         </form>
                         </div>
