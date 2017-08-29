@@ -2,7 +2,7 @@
 use luya\cms\admin\Module;
 
 ?>
-<div class="cmsadmin" ng-controller="NavController" ng-show="!isDeleted" ng-init="settingsOverlay=true">
+<div class="cmsadmin" ng-controller="NavController" ng-show="!isDeleted">
 	<?= $this->render('_settings'); ?>
     <div class="row">
         <div class="col cmsadmin-frame-wrapper" ng-if="displayLiveContainer">
@@ -11,7 +11,6 @@ use luya\cms\admin\Module;
         <div class="col">
             <div class="row">
                 <div class="col">
-
                     <div class="cmsadmin-toolbar">
                         <div class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
                             <label class="switch" for="switch-visibility-status">
@@ -44,13 +43,31 @@ use luya\cms\admin\Module;
                                 </span>
                             </button>
                         </div>
-                        <div class="toolbar-item" ng-click="settingsOverlay=!settingsOverlay" ng-class="{'ml-auto': AdminLangService.data.length <= 1}">
-                            <button class="toolbar-button">
-                                <i class="material-icons">more_vert</i>
-                            </button>
+                        <div class="toolbar-item" ng-class="{'ml-auto': AdminLangService.data.length <= 1}">
+                            <div class="btn-group" ng-class="{'show': toggleSettings}"  ng-mouseover="toggleSettings=1" ng-mouseout="toggleSettings=0">
+		                        <button class="toolbar-button">
+	                                <i class="material-icons">more_vert</i>
+	                            </button>
+		                        <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
+		                           <a class="dropdown-item" ng-click="togglePageSettingsOverlay(2)">
+		                                <i class="material-icons">settings</i> <span><?= Module::t('view_update_properties_title'); ?></span>
+		                            </a>
+                                    <a class="dropdown-item" ng-click="togglePageSettingsOverlay(3)">
+                                        <i class="material-icons">web</i> <span><?= Module::t('page_update_actions_layout_title'); ?></span>
+                                    </a>
+                                    <a class="dropdown-item" ng-click="togglePageSettingsOverlay(4)">
+                                        <i class="material-icons">content_copy</i> <span><?= Module::t('page_update_actions_deepcopy_title'); ?></span>
+                                    </a>
+                                    <a class="dropdown-item" ng-click="togglePageSettingsOverlay(5)">
+                                        <i class="material-icons">home</i> <span>Startseite</span>
+                                    </a>
+                                    <a class="dropdown-item" ng-click="togglePageSettingsOverlay(6)">
+                                        <i class="material-icons">delete</i> <span>Remove</span>
+                                    </a>
+                                </div>
+		                    </div>
                         </div>
                     </div>
-
                     <div class="cmsadmin-pages">
                         <div class="row">
                             <div class="col" ng-repeat="lang in languagesData" ng-if="AdminLangService.isInSelection(lang.short_code)" ng-controller="NavItemController">

@@ -7,17 +7,17 @@ use luya\cms\admin\Module;
     <div class="col-md-3">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-                <a class="nav-link" ng-click="tab=1" ng-class="{'active':tab==1}">Title &amp; Slug</a>
+                <a class="nav-link" ng-click="changeTab(1)" ng-class="{'active':tab==1}">Title &amp; Slug</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" ng-click="tab=3" ng-class="{'active':tab==3}">Neue Version anlegen</a>
+                <a class="nav-link" ng-click="changeTab(3)" ng-class="{'active':tab==3}">Neue Version anlegen</a>
             </li>
             <li><hr /></li>
             <li class="nav-item">
-                <a class="nav-link" ng-click="tab=2" ng-class="{'active':tab==2}">Versions</a>
+                <a class="nav-link" ng-click="changeTab(2)" ng-class="{'active':tab==2}"><b>Versions</b></a>
             </li>
-            <li class="nav-item" ng-show="editVersionItem">
-                <a class="nav-link" ng-click="tab=4" ng-class="{'active':tab==4}">+ {{editVersionItem.version_alias}}</a>
+            <li ng-repeat="(key, versionItem) in typeData">
+                <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)">#{{key}} {{versionItem.version_alias}}</a>
             </li>
         </ul>
     </div>
@@ -39,7 +39,7 @@ use luya\cms\admin\Module;
                 <div ng-switch-when="3">
                     <update-form-redirect data="typeDataCopy"></update-form-redirect>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-save">Save</button>
             </form>
         </div>
         <div ng-switch-when="2">
@@ -57,15 +57,16 @@ use luya\cms\admin\Module;
                     <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
                     <td>{{versionItem.timestamp_create}}</td>
                     <td><button type="button" class="btn btn-symbol btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button></td>
-                    <td><button type="button" class="btn btn-symbol btn-sm btn-outline-danger" ng-click="removeVersion(versionItem)"><i class="material-icons">delete</i></button></td>
+                    <td><button type="button" class="btn btn-delete btn-icon btn-nolabel" ng-click="removeVersion(versionItem)"></button></td>
                 </tr>
             </table>
         </div>
         <div ng-switch-when="4">
             <h1><?= Module::t('version_edit_title'); ?></h1>
+            <h2>{{editVersionItem.version_alias}}</h2>
             <zaa-text model="editVersionItem.version_alias" label="<?= Module::t('version_input_name'); ?>" />
             <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name" />
-            <button type="button" class="btn btn-primary" ng-click="editVersionUpdate(editVersionItem)">Update</button>
+            <button type="button" class="btn btn-save btn-icon" ng-click="editVersionUpdate(editVersionItem)">Update</button>
         </div>
         <div ng-switch-when="3" ng-controller="PageVersionsController">
             <form ng-submit="createNewVersionSubmit(create)">
@@ -89,7 +90,7 @@ use luya\cms\admin\Module;
                     <select class="form-control" ng-model="create.fromVersionPageId" ng-options="versionItem.id as versionItem.version_alias for versionItem in typeData"></select>
                 </div>
                 <zaa-select ng-show="!create.copyExistingVersion" model="create.versionLayoutId" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionslabel="name" optionsvalue="id" />
-                <button class="btn btn-primary" type="submit"><?= Module::t('button_create_version'); ?></button>
+                <button class="btn btn-save btn-icon" type="submit"><?= Module::t('button_create_version'); ?></button>
             </form>
         </div>
     </div>

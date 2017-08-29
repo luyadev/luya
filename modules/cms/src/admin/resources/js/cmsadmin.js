@@ -750,6 +750,15 @@
 
 	zaa.controller("NavController", function($scope, $rootScope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService) {
 		
+		$scope.pageSettingsOverlayHidden = true;
+		
+		$scope.pageSettingsOverlayTab = 1;
+		
+		$scope.togglePageSettingsOverlay = function(t) {
+			$scope.pageSettingsOverlayTab = t;
+			$scope.pageSettingsOverlayHidden = false;
+		};
+		
 		$scope.navCfg = {
 			helptags: $rootScope.luyacfg.helptags,
 		};
@@ -899,7 +908,6 @@
 
 	    function initializer() {
 			$scope.navData = $filter('filter')($scope.menuData.items, {id: $scope.id}, true)[0];
-
 			if ($scope.navData == undefined) {
 				$scope.isDraft = true;
 			} else {
@@ -948,7 +956,7 @@
 			}
 		}
 
-		initializer();
+			initializer();
 	});
 
 	/**
@@ -1105,7 +1113,7 @@
     	$scope.tab = 1;
     	
     	$scope.editVersion = function(versionItem) {
-    		$scope.tab = 4;
+    		$scope.changeTab(4);
     		$scope.editVersionItem = versionItem;
     	};
 
@@ -1181,6 +1189,10 @@
 			if (tab) {
 				$scope.tab = tab;
 			}
+		}
+		
+		$scope.changeTab = function(tab) {
+			$scope.tab = tab;
 		}
 
 		/**
