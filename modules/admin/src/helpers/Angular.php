@@ -4,6 +4,7 @@ namespace luya\admin\helpers;
 
 use yii\helpers\Html;
 use yii\helpers\Inflector;
+use yii\base\InvalidConfigException;
 
 /**
  * Helper Method to create angular tags.
@@ -51,6 +52,31 @@ class Angular
             'label' => $label,
             'options' => $options,
         ]));
+    }
+    
+    /**
+     * Ensures the input structure for optional data for selects, radios etc.
+     *
+     * @param array $data Key value Paring or an array with label and value key.
+     * @return array
+     */
+    protected static function optionsArrayInput(array $data)
+    {
+    	$data = [];
+    	
+    	foreach ($data as $value => $label) {
+    		if (is_array($label)) {
+    			if (!isset($label['label']) || !isset($label['value'])) {
+    				throw new InvalidConfigException("The options array data for the given element must contain a label and value key.");
+    			}
+    			
+    			$data[] = $label;
+    		} else {
+    			$data[] = ['label' => $label, 'value' => $value];
+    		}
+    	}
+    	
+    	return $data;
     }
 
     /**
@@ -168,7 +194,20 @@ class Angular
      */
     public static function select($ngModel, $label, array $data, array $options = [])
     {
-        return self::injector('zaa-select', $ngModel, $label, $data, $options);
+    	return self::injector('zaa-select', $ngModel, $label, self::optionsArrayInput($data), $options);
+    }
+    
+    /**
+     * 
+     * @param unknown $ngModel
+     * @param unknown $label
+     * @param array $data
+     * @param array $options
+     * @return \luya\admin\helpers\string:
+     */
+    public static function radios($ngModel, $label, array $data, array $options = [])
+    {
+    	return self::injector('zaa-radios', $ngModel, $label, self::optionsArrayInput($data), $options);
     }
     
     /**
