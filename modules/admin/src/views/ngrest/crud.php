@@ -146,7 +146,7 @@ $this->beginBody();
                             <i class="material-icons right" ng-show="viewToggler[key]">keyboard_arrow_down</i>
                         </td>
                     </tr>
-                    <tr ng-repeat="(k, item) in items track by k | srcbox:config.searchString" ng-show="viewToggler[key]" <?php if ($isInline && !$relationCall): ?>ng-click="parentSelectInline(item)" <?php if ($modelSelection): ?>ng-class="{'is-selected-row': getRowPrimaryValue(item) == <?= $modelSelection?>}"<?php endif; ?> class="selectableRow"<?php endif; ?>>
+                    <tr ng-repeat="(k, item) in items track by k | srcbox:config.searchString" ng-show="viewToggler[key]" <?php if ($isInline && !$relationCall): ?>ng-click="parentSelectInline(item)" <?php if ($modelSelection): ?>ng-class="{'crud-selected-row': getRowPrimaryValue(item) == <?= $modelSelection?>}"<?php endif; ?> class="crud-selectable-row"<?php endif; ?>>
                         <?php $i = 0; foreach ($config->getPointer('list') as $item): $i++; ?>
                             <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
                                  <td class="<?= $i != 1 ?: 'tab-padding-left'; ?>"><?= $element['html']; ?></td>
