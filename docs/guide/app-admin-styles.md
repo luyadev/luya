@@ -46,7 +46,7 @@ Below some examples
 ```html
 <button type="button" class="btn btn-icon btn-save">Safe button with icon and text</button>
 <button type="button" class="btn btn-cancel">Cancel button without icon</button>
-<button type="button" class="btn btn-icon btn-delete"></button> // Delete button without label but predefined colors
+<button type="button" class="btn btn-icon btn-delete"></button> // Delete button without label but predefined icon and colors.
 ```
  
 ## Which icon stands for what
