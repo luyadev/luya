@@ -176,15 +176,14 @@ use luya\admin\Module as Admin;
         <!-- Folders -->
         <div class="col filemanager-folders">
             <div class="filemanager-add-folder">
-                <div class="btn btn-block text-left btn-success" ng-click="folderFormToggler()" ng-if="!showFolderForm">
-                    <span class="material-icons">add</span>
-                    <span class="btn-symbol-label"><?= Admin::t('layout_filemanager_add_folder'); ?></span>
+                <div class="btn btn-icon btn-add btn-success" ng-click="folderFormToggler()" ng-if="!showFolderForm">
+                   <?= Admin::t('layout_filemanager_add_folder'); ?>
                 </div>
                 <div class="filemanager-add-folder-form" ng-if="showFolderForm">
                     <input class="filemanager-add-folder-input" type="text" placeholder="<?php echo Admin::t('layout_filemanager_folder'); ?>" title="<?php echo Admin::t('layout_filemanager_folder'); ?>" ng-model="newFolderName" />
                     <div class="filemanager-add-folder-actions">
-                        <button class="btn btn-success" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></button>
-                        <button class="btn btn-danger" ng-click="folderFormToggler()"><i class="material-icons">cancel</i></button>
+                        <button class="btn btn-icon btn-save" ng-click="createNewFolder(newFolderName)"></button>
+                        <button class="btn btn-icon btn-cancel" ng-click="folderFormToggler()"></button>
                     </div>
                 </div>
             </div>
@@ -213,9 +212,8 @@ use luya\admin\Module as Admin;
                     <div class="filemanager-file-actions">
                         <div class="filemanager-file-actions-left" ng-class="{'filemanager-file-actions-left-spacing': selectedFiles.length > 0}">
 
-                            <div class="btn btn-success filemanager-upload-file"  ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
-                                <span class="material-icons">file_upload</span>
-                                <span class="btn-symbol-label"><?= Admin::t('layout_filemanager_upload_files'); ?></span>
+                            <div class="btn btn-icon btn-upload filemanager-upload-file"  ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
+                                <?= Admin::t('layout_filemanager_upload_files'); ?>
                             </div>
 
                             <input class="filemanager-search" type="text"  ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />

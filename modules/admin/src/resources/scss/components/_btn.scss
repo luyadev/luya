@@ -15,7 +15,7 @@
         border-radius: 0;
     }
     > .material-icons:first-of-type {
-        margin-left: -6px;
+        margin-left: -2px;
     }
 }
 
@@ -40,129 +40,147 @@
 // Button with Icons
 // ==================================================
 
+
+$btn-icons: (
+    'save': 'check',
+    'delete': 'delete',
+    'cancel': 'clear',
+    'edit': 'edit',
+    'add':'add',
+    'help':'help',
+    'download':'file_download',
+    'upload':'file_upload',
+    'config':'settings',
+);
+
 .btn {
 
     //Generic button colors and backgrounds
+    transition: .2s background ease-in-out, .2s color ease-in-out;
+
+    &:hover {
+        color: theme-color('primary');
+    }
 
     &-save {
         background: theme-color('success');
         border-color: theme-color('success');
         color: $btn-color-light !important;
+
+        &:hover {
+            background: rgba(theme-color('success'), .8);
+        }
     }
     &-delete {
         background: theme-color('danger');
         border-color: theme-color('danger');
         color: $btn-color-light !important;
+
+        /* hover example, lets talk about it */
+        &-hover {
+            &:hover {
+                background: theme-color('danger');
+                color: $btn-color-light !important;
+            }
+        }
+
+        &:hover {
+            background: rgba(theme-color('danger'), .8);
+        }
     }
     &-cancel {
         background: theme-color('light');
         border-color: theme-color('light');
         color: $btn-color-dark !important;
 
+        &:hover {
+            background: rgba(theme-color('light'), .8);
+        }
     }
     &-edit {
         background: theme-color('light');
         border-color: theme-color('light');
         color: $btn-color-dark !important;
+
+        &:hover {
+            background: rgba(theme-color('light'), .8);
+        }
     }
     &-add {
         background: theme-color('success');
         border-color: theme-color('success');
         color: $btn-color-light !important;
+
+        &:hover {
+            background: rgba(theme-color('success'), .8);
+        }
     }
     &-help {
         background: theme-color('light');
         border-color: theme-color('light');
         color: $btn-color-dark !important;
+
+        &:hover {
+            background: rgba(theme-color('light'), .8);
+        }
     }
     &-download {
         background: theme-color('success');
         border-color: theme-color('success');
         color: $btn-color-light !important;
+
+        &:hover {
+            background: rgba(theme-color('success'), .8);
+        }
     }
     &-upload {
         background: theme-color('success');
         border-color: theme-color('success');
         color: $btn-color-light !important;
+
+        &:hover {
+            background: rgba(theme-color('success'), .8);
+        }
     }
     &-config {
         background: theme-color('light');
         border-color: theme-color('light');
         color: $btn-color-dark !important;
+
+        &:hover {
+            background: rgba(theme-color('light'), .8);
+        }
     }
 
     // Generic button icons
 
     &-icon {
-
-        padding-left: 25px;
+        padding: 6px 10px 6px 10px;
         position: relative;
 
         &:after {
             position: absolute;
             font-family: "Material Icons";
-            left: 6px;
-            top: calc(50% - 1px);
+            left: 8px;
+            top: 50%;
             transform: translateY(-50%);
         }
 
-        &.btn-save {
-            &:after {
-                content: 'check';
-            }
-        }
-        &.btn-delete {
-            &:after {
-                content: 'delete';
-            }
-        }
-        &.btn-cancel {
-            &:after {
-                content: 'clear';
-            }
-        }
-        &.btn-edit {
-            &:after {
-                content: 'edit';
-            }
-        }
-        &.btn-add {
-            &:after {
-                content: 'add';
-            }
-        }
-        &.btn-help {
-            &:after {
-                content: 'help';
-            }
-        }
-        &.btn-download {
-            &:after {
-                content: 'file_download';
-            }
-        }
-        &.btn-upload {
-            &:after {
-                content: 'file_upload';
-            }
-        }
-        &.btn-config {
-            &:after {
-                content: 'settings';
-            }
-        }
-    }
-}
+        @each $className, $iconName in $btn-icons {
+            &.btn-#{$className} {
+                &.btn-icon {
+                    padding-left: 30px;
+                }
+                &:empty.btn-icon {
+                    padding-top: 25px;
+                    padding-left: 25px;
+                }
 
-
-.btn-nolabel {
-    padding-left: 0;
-    min-width: 35px;
-    min-height: 35px;
-
-    &:after {
-        left: 8px;
-        top: 17px;
+                &:after {
+                    content: '#{$iconName}';
+                }
+            }
+        }
     }
 }
 
@@ -170,25 +188,32 @@
 // Symbol buttons, crud buttons
 // ==================================================
 
-.btn-symbol {
-    padding: 5px 4px 5px 9px;
-    min-width: 35px;
+.btn-link {
+    color: color(gray);
+    padding: 2px;
+    background: transparent;
 
     &:hover {
         color: theme-color(primary);
     }
-
-    &.btn-link {
-        padding: 2px;
-        background: transparent;
-    }
 }
+
 
 // Label outside of buttons
 
-.btn-symbol-label {
+.btn-label {
     margin-left: 10px;
     vertical-align: middle;
     @include google-chrome-font-offset-fix;
 }
 
+
+.toolbar-button {
+    border-radius: 4px;
+    background: color(gray-light);
+    transition: color .2s ease-in-out;
+
+    &:hover {
+        color: theme-color(primary);
+    }
+}
