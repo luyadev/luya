@@ -17,6 +17,7 @@
     > .material-icons:first-of-type {
         margin-left: -2px;
     }
+
 }
 
 .dropdown-item {
@@ -57,10 +58,6 @@ $btn-icons: (
 
     //Generic button colors and backgrounds
     transition: .2s background ease-in-out, .2s color ease-in-out;
-
-    &:hover {
-        color: theme-color('primary');
-    }
 
     &-save {
         background: theme-color('success');
