@@ -53,6 +53,7 @@ class Application extends \yii\console\Application
     {
         return array_merge($this->luyaCoreComponents(), [
             'errorHandler' => ['class' => 'luya\console\ErrorHandler'],
+            'urlManager' => ['class' => 'luya\web\UrlManager'], // add for console commands with view files
         ]);
     }
 }
