@@ -31,54 +31,6 @@
     label {
         margin: 0;
     }
-
-    .toolbar-item {
-        flex: 0 0 auto;
-        padding: 5px 25px;
-
-        &:first-of-type {
-            padding-left: 0;
-        }
-        &:not(:first-of-type):not(.toolbar-item-lang) {
-            border-left: 1px solid $nav-tabs-border-color;
-        }
-
-        &-lang {
-            padding: 5px 15px;
-        }
-    }
-
-    .toolbar-button {
-        border: none;
-        cursor: pointer;
-        position: relative;
-
-        .material-icons {
-            font-size: 20px;
-        }
-    }
-
-    .toolbar-button-flag {
-        padding-left: 10px;
-        padding-right: 10px;
-
-        &:after {
-            background-color: theme-color(primary);
-            bottom: 0;
-            content: "";
-            height: 2px;
-            left: 50%;
-            position: absolute;
-            transform: translateX(-50%);
-            transition: .1s ease-in-out width;
-            width: 0;
-        }
-
-        &.active:after,
-        &:hover:after {
-            width: 100%;
-        }
-    }
 }
 
 .cmsadmin-nav-tabs {

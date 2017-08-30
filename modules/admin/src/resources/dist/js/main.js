@@ -2754,7 +2754,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     			};
     		},
     		template: function() {
-    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-symbol"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" modal-title="{{alias}}"><div compile-html ng-bind-html="content"></modal></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-sm"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" modal-title="{{alias}}"><div compile-html ng-bind-html="content"></modal></div>';
     		}
     	}
     });
@@ -3883,18 +3883,18 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                                                 '<th scope="col" width="35px"></th>' +
                                                 '<th scope="col" data-ng-repeat="(hk, hr) in model[0] track by hk" class="zaa-table-buttons">' +
                                                     '<div class="btn-group" role="group">' +
-                                                        '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveLeft(hk)" ng-if="hk > 0"><i class="material-icons">keyboard_arrow_left</i></button>' +
-                                                        '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveRight(hk)" ng-if="showRightButton(hk)"><i class="material-icons">keyboard_arrow_right</i></button>' +
-                                                        '<button type="button" class="btn btn-symbol btn-outline-danger" ng-click="removeColumn(hk)"><i class="material-icons">remove</i></button>' +
+                                                        '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveLeft(hk)" ng-if="hk > 0"><i class="material-icons">keyboard_arrow_left</i></button>' +
+                                                        '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveRight(hk)" ng-if="showRightButton(hk)"><i class="material-icons">keyboard_arrow_right</i></button>' +
+                                                        '<button type="button" class="btn btn-sm btn-outline-danger" ng-click="removeColumn(hk)"><i class="material-icons">remove</i></button>' +
                                                     '</div>' +
                                                 '</th>' +
                                             '</tr>' +
                                             '<tr data-ng-repeat="(key, row) in model track by key">' +
                                                 '<td width="35px" scope="row" class="zaa-table-buttons">' +
                                                     '<div class="btn-group-vertical" role="group">' +
-                                                        '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                                        '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                                        '<button type="button" class="btn btn-symbol btn-outline-danger" ng-click="removeRow(key)"><i class="material-icons">remove</i></button>' +
+                                                        '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                        '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                        '<button type="button" class="btn btn-sm btn-outline-danger" ng-click="removeRow(key)"><i class="material-icons">remove</i></button>' +
                                                     '</div>' +
                                                 '</td>' +
                                                 '<td data-ng-repeat="(field,value) in row track by field">'+
@@ -3903,8 +3903,8 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                                             '</tr>' +
                                         '</tbody>' +
                                     '</table>' +
-                                    '<button ng-click="addRow()" type="button" class="zaa-table-add-row btn btn-symbol btn-success"><i class="material-icons">add</i></button>'+
-                                    '<button ng-click="addColumn()" type="button" class="zaa-table-add-column btn btn-symbol btn-success"><i class="material-icons">add</i></button>'+
+                                    '<button ng-click="addRow()" type="button" class="zaa-table-add-row btn btn-sm btn-success"><i class="material-icons">add</i></button>'+
+                                    '<button ng-click="addColumn()" type="button" class="zaa-table-add-column btn btn-sm btn-success"><i class="material-icons">add</i></button>'+
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -4028,13 +4028,13 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                                         '</div>' +
                                         '<div class="list-buttons">' +
                                             '<div class="btn-group" role="group">' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<button ng-click="add()" type="button" class="btn btn-symbol btn-success list-add-button"><i class="material-icons">add</i></button>' +
+                                    '<button ng-click="add()" type="button" class="btn btn-sm btn-success list-add-button"><i class="material-icons">add</i></button>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -4118,14 +4118,14 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                                         '</div>' +
                                         '<div class="list-buttons"  ng-if="!file.hiddenStorageUploadSource">' +
                                             '<div class="btn-group" role="group">' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<button ng-click="add()" type="button" class="btn btn-symbol btn-success list-add-button"><i class="material-icons">add</i></button>' +
+                                '<button ng-click="add()" type="button" class="btn btn-sm btn-success list-add-button"><i class="material-icons">add</i></button>' +
                             '</div>' +
                         '</div>';
             }
@@ -4193,13 +4193,13 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                                         '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
                                         '<div class="list-buttons">' +
                                             '<div class="btn-group" role="group">' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<button ng-click="add()" type="button" class="btn btn-symbol btn-success list-add-button"><i class="material-icons">add</i></button>' +
+                                    '<button ng-click="add()" type="button" class="btn btn-sm btn-success list-add-button"><i class="material-icons">add</i></button>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -4291,13 +4291,13 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                                         '<input class="form-control list-input" type="text" ng-model="row.value" />' +
                                         '<div class="list-buttons">' +
                                             '<div class="btn-group" role="group">' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                                '<button type="button" class="btn btn-symbol btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<button ng-click="add()" type="button" class="btn btn-symbol btn-success list-add-button"><i class="material-icons">add</i></button>' +
+                                    '<button ng-click="add()" type="button" class="btn btn-sm btn-success list-add-button"><i class="material-icons">add</i></button>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
