@@ -190,7 +190,12 @@ abstract class Boot
         $this->app = new ConsoleApplication(ArrayHelper::merge([
             'bootstrap' => ['luya\console\Bootstrap'],
             'components' => [
-                'urlManager' => ['class' => 'yii\web\UrlManager', 'enablePrettyUrl' => true, 'showScriptName' => false],
+                'urlManager' => [
+                    'class' => 'yii\web\UrlManager', 
+                    'enablePrettyUrl' => true,
+                    'showScriptName' => false,
+                    'baseUrl' => !isset($config['consoleBaseUrl']) ?: $config['consoleBaseUrl'],
+                ],
             ],
         ], $config));
         if (!$this->mockOnly) {
