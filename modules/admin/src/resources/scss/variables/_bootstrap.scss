@@ -116,10 +116,10 @@ $pagination-line-height: 1.5;
 // Warning: Avoid customizing these values. They're used for a bird's eye view
 // of components dependent on the z-axis and are designed to all work together.
 
-$zindex-dropdown:           1000 !default;
+$zindex-dropdown:           z-index(dropdown);
 $zindex-sticky:             1020 !default;
 $zindex-fixed:              1030 !default;
-$zindex-modal-backdrop:     1040 !default;
+$zindex-modal-backdrop:     1040 !default; // We don't use that?
 $zindex-modal:              z-index(modal);
-$zindex-popover:            1060 !default;
-$zindex-tooltip:            1070 !default;
+$zindex-popover:            z-index(popover);
+$zindex-tooltip:            z-index(tooltip);

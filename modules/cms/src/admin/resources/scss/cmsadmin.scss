@@ -13,6 +13,7 @@
 @import "../../../../../admin/src/resources/scss/variables/bootstrap";
 @import "../../../../../admin/src/resources/scss/variables/custom";
 @import "../../../../../admin/src/resources/scss/variables/flags";
+@import "../../../../../admin/src/resources/scss/variables/zindex";
 
 // ==================================================
 // Include Bootstrap variables
@@ -26,6 +27,7 @@
 
 @import "../../../../../admin/src/resources/scss/helpers/google-chrome-font-offset-fix";
 @import "../../../../../admin/src/resources/scss/helpers/overflow-no-scrollbars";
+@import "../../../../../admin/src/resources/scss/helpers/zindex";
 
 // ==================================================
 // Components
