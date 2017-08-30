@@ -21,7 +21,7 @@ $this->beginBody();
                 <h1 class="crud-title"><?= $currentMenu['alias']; ?></h1>
                 <div class="crud-toolbar">
                     <div class="btn-group" ng-class="{'show': toggleSettings}">
-                        <button class="btn btn-sm btn-link btn-symbol" type="button" ng-click="toggleSettings=!toggleSettings">
+                        <button class="btn btn-sm toolbar-button" type="button" ng-click="toggleSettings=!toggleSettings">
                             <i class="material-icons">more_vert</i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
