@@ -3,7 +3,7 @@
     bottom: 0;
     display: block;
     max-width: 400px;
-    padding: 25px;
+    padding: $content-padding-y $content-padding-x;
     position: fixed;
     right: 0;
     top: 0;
@@ -13,7 +13,7 @@
     z-index: z-index(file-detail);
 
     &.open {
-        border-left: 2px solid color(gray);
+        border-left: 1px solid color(gray);
         transform: translateX(0);
     }
 }
@@ -24,12 +24,9 @@
 }
 
 .file-detail-view-close {
-    color: $red;
     cursor: pointer;
-    font-size: 40px;
-    line-height: 40px;
-    margin-left: auto;
-    transition: .25s ease-in-out color;
+    position: absolute;
+    right: $content-padding-x;
 
     &:hover {
         color: $red-dark;
@@ -47,7 +44,7 @@
 
     .file-detail-view.open & {
         border: solid color(gray);
-        border-width: 2px 0 2px 2px;
+        border-width: 1px 0 1px 1px;
         transform: translateX(-100%);
     }
 
