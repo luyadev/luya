@@ -81,6 +81,12 @@ $block-padding: 10px !default;
 
     .toolbar-item {
         font-size: 20px;
+        padding:  2px 4px;
+        border: none !important;
+
+        &:last-of-type {
+            padding-right: 0;
+        }
     }
 
     .toolbar-button {
@@ -89,7 +95,7 @@ $block-padding: 10px !default;
         color: $white;
         cursor: pointer;
         display: block;
-        margin-left: 10px;
+        margin-left: 5px;
         transition: .25s ease-in-out background-color;
 
         &:hover {
