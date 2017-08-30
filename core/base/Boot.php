@@ -187,7 +187,12 @@ abstract class Boot
             }
         }
         $this->includeYii();
-        $this->app = new ConsoleApplication(ArrayHelper::merge(['bootstrap' => ['luya\console\Bootstrap']], $config));
+        $this->app = new ConsoleApplication(ArrayHelper::merge([
+            'bootstrap' => ['luya\console\Bootstrap'],
+            'components' => [
+                'urlManager' => ['class' => 'yii\web\UrlManager', 'enablePrettyUrl' => true, 'showScriptName' => false],
+            ],
+        ], $config));
         if (!$this->mockOnly) {
             exit($this->app->run());
         }
