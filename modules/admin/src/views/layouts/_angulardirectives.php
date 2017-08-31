@@ -313,7 +313,7 @@ use luya\admin\Module as Admin;
 
     <div class="file-detail-view-head">
 
-        <button type="button" class="btn btn-icon btn-download" ng-href="{{fileDetail.source}}" target="_blank">Downlaod</button>
+        <button type="button" class="btn btn-icon btn-download" ng-href="{{fileDetail.source}}" target="_blank">Download</button>
 
         <button type="button" class="btn btn-icon btn-replace ml-2" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">Replace</button>
         <button type="button" class="btn btn-icon btn-cancel file-detail-view-close" ng-click="closeFileDetail()"></button>
