@@ -129,6 +129,7 @@ class BlockController extends \luya\console\Command
             'decimal' => 'Decimal Number Float',
             'wysiwyg' => 'What you see is what you get Editor',
             'select' => 'Dropdown Select',
+            'radios' => 'Radios Selection',
             'date' => 'Date Selector',
             'datetime' => 'Date and Time selector',
             'checkbox' => 'A single Checkbox',
@@ -168,6 +169,7 @@ class BlockController extends \luya\console\Command
             'link' => 'self::TYPE_LINK',
             'cms-page' => 'self::TYPE_CMS_PAGE',
             'slug' => 'self::TYPE_SLUG',
+            'radios' => 'self::TYPE_RADIOS',
         ];
     }
 
@@ -175,6 +177,7 @@ class BlockController extends \luya\console\Command
     {
         return [
             'select' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
+            'radios' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
             'checkbox-array' => "BlockHelper::checkboxArrayOption([1 => 'Label for 1'])",
             'image-upload' => "['no_filter' => false]",
             'image-array-upload' => "['no_filter' => false]",
