@@ -1,0 +1,102 @@
+.timeline {
+    display: block;
+    position: relative;
+    @include clearfix;
+
+    &:before {
+        background-color: theme-color(primary);
+        bottom: 0;
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 2px;
+    }
+
+    &-center {
+        &:before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    &-left {
+        &:before {
+            left: 4px;
+            transform: none;
+        }
+    }
+    &-right {
+        &:before {
+            right: 4px;
+            transform: none;
+        }
+    }
+}
+
+.timeline-item {
+    display: block;
+    position: relative;
+
+    &:not(:first-of-type) {
+        margin-top: 25px;
+    }
+    .timeline-compact > &:not(:first-of-type) {
+        margin-top: 10px;
+    }
+    .timeline-center.timeline-compact > &:not(:first-of-type) {
+        margin-top: 20px;
+    }
+
+    &:before {
+        background-color: theme-color(light);
+        border: 2px solid theme-color(primary);
+        border-radius: 50%;
+        content: "";
+        height: 10px;
+        position: absolute;
+        top: 0;
+        width: 10px;
+    }
+    &-center-point:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .timeline-center > & {
+        &:nth-of-type(odd) {
+            float: left;
+            padding-right: 20px;
+            text-align: right;
+            width: 50%;
+
+            &:before {
+                right: -5px;
+            }
+        }
+        &:nth-of-type(even) {
+            float: right;
+            padding-left: 20px;
+            width: 50%;
+
+            &:before {
+                left: -5px;
+            }
+        }
+    }
+
+    .timeline-left > & {
+        padding-left: 20px;
+
+        &:before {
+            left: 0;
+        }
+    }
+
+    .timeline-right > & {
+        padding-right: 20px;
+        text-align: right;
+
+        &:before {
+            right: 0;
+        }
+    }
+}
