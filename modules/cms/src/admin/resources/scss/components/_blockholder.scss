@@ -1,8 +1,8 @@
 .blockholder-column {
     max-width: 275px;
     min-width: 275px;
-    padding-right: 0;
     padding-left: 0;
+    padding-right: 0;
 }
 
 .blockholder {
@@ -89,9 +89,9 @@
     transition: .25s ease-in-out background-color;
 
     .material-icons {
+        color: color(red);
         font-size: 20px;
         margin: 0;
-        color: color(red);
     }
 
     &:hover {

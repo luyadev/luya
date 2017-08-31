@@ -20,3 +20,8 @@ datepicker {
 ._720kb-datepicker-calendar {
     margin-top: 38px;
 }
+
+._720kb-datepicker-active {
+    background-color: theme-color(primary) !important;
+    color: color(white) !important;
+}

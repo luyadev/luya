@@ -44,7 +44,7 @@ use luya\cms\admin\Module;
                             </button>
                         </div>
                         <div class="toolbar-item" ng-class="{'ml-auto': AdminLangService.data.length <= 1}">
-                            <div class="btn-group" ng-class="{'show': toggleSettings}"  ng-mouseover="toggleSettings=1" ng-mouseout="toggleSettings=0">
+                            <div class="btn-group" ng-class="{'show': toggleSettings}"  ng-click="toggleSettings=!toggleSettings">
 		                        <button class="toolbar-button btn-sm">
 	                                <i class="material-icons">more_vert</i>
 	                            </button>

@@ -20,10 +20,16 @@
 }
 
 .input-group-addon {
+    user-select: none;
+
     .form-control ~ & {
         margin-left: -1px;
     }
     & ~ .form-control {
         margin-left: -1px;
+    }
+
+    &[ng-click] {
+        cursor: pointer;
     }
 }
