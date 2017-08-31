@@ -143,7 +143,7 @@ use luya\admin\Module as Admin;
 			</button>
         </span>
         <span class="folders-text folders-label" ng-click="changeCurrentFolderId(folder.id)">
-            <span class="folders-folder-icon folders-folder-icon-active" ng-if="currentFolderId == folder.id">
+            <span class="folders-folder-icon" ng-if="currentFolderId == folder.id">
                 <i class="material-icons">folder</i>
             </span>
             <span class="folders-folder-icon" ng-if="currentFolderId != folder.id">
@@ -154,7 +154,7 @@ use luya\admin\Module as Admin;
         <span class="folder-text folder-edit" ng-show="editFolderLabel">
             <input class="folder-label-input" ng-model="folder.name" type="text" />
         </span>
-        <span class="folders-actions-right" ng-class="{'folders-actions-right-edit': editFolderLabel}" ng-show="!showFoldersToMove" ng-init="editFolderLabel = false;">
+        <span class="folders-actions-right" ng-class="{'folders-actions-right-edit': editFolderLabel, 'is-visible': editFolderLabel}" ng-show="!showFoldersToMove" ng-init="editFolderLabel = false;">
             <button class="folders-actions-edit" ng-hide="editFolderLabel" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">edit</i></button>
             <button class="folders-actions-delete" ng-hide="editFolderLabel || folder.subfolder" ng-click="deleteFolder(folder)"><i class="material-icons">delete</i></button>
             <button ng-show="editFolderLabel" class="folders-actions-save" ng-click="updateFolder(folder); editFolderLabel=!editFolderLabel"><i class="material-icons">check</i></button>
@@ -181,21 +181,21 @@ use luya\admin\Module as Admin;
                 <div class="filemanager-add-folder-form" ng-if="showFolderForm">
                     <input class="filemanager-add-folder-input" type="text" placeholder="<?php echo Admin::t('layout_filemanager_folder'); ?>" title="<?php echo Admin::t('layout_filemanager_folder'); ?>" ng-model="newFolderName" />
                     <div class="filemanager-add-folder-actions">
-                        <button class="btn btn-icon btn-save mr-1" ng-click="createNewFolder(newFolderName)"></button>
+                        <button class="btn btn-icon btn-save" ng-click="createNewFolder(newFolderName)"></button>
                         <button class="btn btn-icon btn-cancel" ng-click="folderFormToggler()"></button>
                     </div>
                 </div>
             </div>
             <ul class="folders mt-4">
-                <li class="folders-item" ng-class="{'is-active' : currentFolderId == 0}">
+                <li class="folders-item folders-item-main" ng-class="{'is-active' : currentFolderId == 0}">
                     <span class="folders-text folders-label" ng-click="changeCurrentFolderId(0)">
-                        <span class="folders-folder-icon folders-folder-icon-open">
+                        <span class="folders-folder-icon folders-folder-icon-active" ng-if="currentFolderId == 0">
                             <i class="material-icons">folder</i>
                         </span>
-                        <span class="folders-folder-icon">
+                        <span class="folders-folder-icon" ng-if="currentFolderId != 0">
                             <i class="material-icons">folder_open</i>
                         </span>
-                        <?= Admin::t('layout_filemanager_root_dir'); ?>
+                        <span><?= Admin::t('layout_filemanager_root_dir'); ?></span>
                     </span>
                     <ul class="folders">
                         <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>

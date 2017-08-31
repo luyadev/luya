@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Valor',
     'layout_filemanager_save_dir' => '¿Guardar?',
     'layout_filemanager_remove_dir' => '¿Eliminar directorio?',
-    'layout_filemanager_remove_dir_not_empty' => 'El directorio no está vacío.<br/>¿Eliminar de todos modos?',
+    'layout_filemanager_remove_dir_not_empty' => 'El directorio no está vacío.<br/>¿Eliminar de todos modos?', // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Eliminar archivos marcados',
     'layout_filemanager_move_selected_files' => 'Mover a',
     'layout_filemanager_upload_error' => 'Error al cargar el archivo',

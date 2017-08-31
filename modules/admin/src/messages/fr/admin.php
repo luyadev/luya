@@ -47,7 +47,7 @@ return [
     'layout_debug_table_value' => 'Valeur',
     'layout_filemanager_save_dir' => 'Enregistrer ?',
     'layout_filemanager_remove_dir' => 'Supprimer le répertoire ?',
-    'layout_filemanager_remove_dir_not_empty' => 'Le répertoire n\'est pas vide <br/> Voulez-vous le supprimer ?',
+    'layout_filemanager_remove_dir_not_empty' => 'Le répertoire n\'est pas vide <br/> Voulez-vous le supprimer ?',  // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Supprimer les fichiers selectionnés',
     'layout_filemanager_move_selected_files' => 'Déplacer dans',
     'layout_filemanager_upload_error' => 'Erreur lors du chargement du fichier',

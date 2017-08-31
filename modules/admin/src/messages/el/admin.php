@@ -31,7 +31,7 @@ return [
     'layout_debug_table_value' => 'Τιμή',
     'layout_filemanager_save_dir' => 'Αποθήκευση;',
     'layout_filemanager_remove_dir' => 'Διαγραφή Φακέλου;',
-    'layout_filemanager_remove_dir_not_empty' => 'Ο φάκελος δεν είναι άδειος.<br/>Να διαγραφεί έτσι κι αλλιώς;',
+    'layout_filemanager_remove_dir_not_empty' => 'Ο φάκελος δεν είναι άδειος.<br/>Να διαγραφεί έτσι κι αλλιώς;',  // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Διαγραφή επιλεγμένων αρχείων;',
     'layout_filemanager_move_selected_files' => 'Μετακίνηση σε',
     'layout_filemanager_upload_error' => 'Σφάλμα κατά την μεταφόρτωση αρχείου',

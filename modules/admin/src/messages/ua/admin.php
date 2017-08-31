@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Значення',
     'layout_filemanager_save_dir' => 'Зберегти?',
     'layout_filemanager_remove_dir' => 'Видалити теку?',
-    'layout_filemanager_remove_dir_not_empty' => 'Тека не пуста.<br/>Видалити в будь якому випадку?',
+    'layout_filemanager_remove_dir_not_empty' => 'Тека не пуста.<br/>Видалити в будь якому випадку?', // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Видалити вибрані файли',
     'layout_filemanager_move_selected_files' => 'Перемістити до',
     'layout_filemanager_upload_error' => 'Помилка при завантаженні файлу',

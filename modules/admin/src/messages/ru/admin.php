@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Значение',
     'layout_filemanager_save_dir' => 'Сохранить?',
     'layout_filemanager_remove_dir' => 'Удалить папку?',
-    'layout_filemanager_remove_dir_not_empty' => 'Папка не пуста - все равно удалить?',
+    'layout_filemanager_remove_dir_not_empty' => 'Папка не пуста - все равно удалить?', // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Удалить отмеченные файлы',
     'layout_filemanager_move_selected_files' => 'Переместить',
     'layout_filemanager_upload_error' => 'Ошибка при загрузке файла',

@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Value',
     'layout_filemanager_save_dir' => 'Lưu?',
     'layout_filemanager_remove_dir' => 'Xóa thư mục?',
-    'layout_filemanager_remove_dir_not_empty' => 'Thư mục có chứa nội dung.<br/>Tiếp tục xóa?',
+    'layout_filemanager_remove_dir_not_empty' => 'Thư mục có chứa nội dung.<br/>Tiếp tục xóa?', // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Xóa file đã chọn',
     'layout_filemanager_move_selected_files' => 'Chuyển đến',
     'layout_filemanager_upload_error' => 'Có lỗi trong lúc tải file lên',

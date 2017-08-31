@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Valor',
     'layout_filemanager_save_dir' => 'Gravar?',
     'layout_filemanager_remove_dir' => 'Excluir o diretório?',
-    'layout_filemanager_remove_dir_not_empty' => 'O diretório não está vazio.<br />Deseja excluir assim mesmo?',
+    'layout_filemanager_remove_dir_not_empty' => 'O diretório não está vazio.<br />Deseja excluir assim mesmo?', // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Excluir arquivos marcados',
     'layout_filemanager_move_selected_files' => 'Mover para',
     'layout_filemanager_upload_error' => 'Erro ao enviar o arquivo',

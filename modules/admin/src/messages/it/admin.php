@@ -31,7 +31,7 @@ return [
     'layout_debug_table_value' => 'Valore',
     'layout_filemanager_save_dir' => 'Salvare?',
     'layout_filemanager_remove_dir' => 'Cancellare la directory?',
-    'layout_filemanager_remove_dir_not_empty' => 'La directory non è vuota.<br/>Cancellare ugualmente?',
+    'layout_filemanager_remove_dir_not_empty' => 'La directory non è vuota.<br/>Cancellare ugualmente?',  // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Cancella i file selezionati',
     'layout_filemanager_move_selected_files' => 'Sposta a',
     'layout_filemanager_upload_error' => 'Errore duramente il caricamento del file',
