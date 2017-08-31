@@ -2664,7 +2664,7 @@
 
                 $scope.changeSortField = function(name) {
                 	$scope.sortField = name;
-                }
+                };
 
                 $scope.changeCurrentFolderId = function(folderId, noState) {
                     $scope.currentFolderId = folderId;

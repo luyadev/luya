@@ -164,7 +164,7 @@ use luya\admin\Module as Admin;
              <span class="folders-folder-move-icon" ng-click="moveFilesTo(folder.id)"><i class="material-icons">subdirectory_arrow_left</i></span>
         </span>
     </span>
-    <ul class="folders" ng-show="folder.toggle_open==1">
+    <ul class="folders" ng-show="folder.subfolder === true && folder.toggle_open==1">
         <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
     </ul>
 </script>
