@@ -1,8 +1,10 @@
 .filemanager {
     min-height: 100%;
+    display: flex;
+    flex-direction: column;
 
-    .row {
-        min-height: 100%;
+    @media (min-width: $mobile-nav-breakpoint) {
+        flex-direction: row;
     }
 
     th, td {
@@ -19,13 +21,47 @@
     }
 }
 
-.filemanager-actions-column {
-    width: 50px;
-}
 
 .filemanager-folders {
     align-self: stretch;
-    flex: 0 0 400px;
+    flex: 0 0 250px;
+
+    padding-top: $content-padding-y;
+    padding-bottom: $content-padding-y;
+    padding-left: $content-padding-x;
+
+    margin-top: -$content-padding-y;
+    margin-left: -$content-padding-x;
+    margin-right: -$content-padding-x;
+
+    margin-bottom: $content-padding-y;
+
+    background-color: map-get($grays, 200);
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        margin-right:0;
+        margin-bottom: -$content-padding-y;
+    }
+}
+
+.filemanager-files {
+    align-self: stretch;
+    flex: 1 0 auto;
+    width: auto;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+
+        padding-left: $content-padding-x;
+
+    }
+
+    .table .custom-checkbox {
+        margin-top: 8px;
+    }
+}
+
+.filemanager-actions-column {
+    width: 50px;
 }
 
 .filemanager-add-folder {
@@ -35,7 +71,7 @@
 
 .filemanager-add-folder-form {
     display: block;
-    padding-right: 100px;
+    padding-right: 95px;
     position: relative;
     width: 100%;
 }
@@ -47,23 +83,12 @@
 
 .filemanager-add-folder-actions {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 0;
 
     .btn {
         padding-left: 14px;
         padding-right: 8px;
-    }
-}
-
-.filemanager-files {
-    align-self: stretch;
-    flex: 1 0 auto;
-    padding-left: 20px;
-    width: auto;
-
-    .table .custom-checkbox {
-        margin-top: 8px;
     }
 }
 
@@ -136,9 +161,15 @@
 }
 
 .filemanager-search {
-    display: block;
+    display: none;
     flex: 1 1;
     padding: 3px 6px 3px 6px;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+
+        display: block;
+
+    }
 }
 
 .filemanager-file-actions-right {

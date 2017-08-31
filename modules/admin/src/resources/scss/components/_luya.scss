@@ -52,7 +52,7 @@
 }
 
 .luya-subnav {
-    background-color: map-get($grays, 100);
+    background-color: map-get($grays, 200);
     color: color('gray');
     display: flex;
     flex-direction: column;
@@ -75,10 +75,6 @@
         flex: 0 0 250px;
         max-width: 250px;
         padding: $content-padding-y $content-padding-x;
-
-        + .luya-content {
-            padding-left: 0;
-        }
 
         .cmsnav {
             padding: 0;

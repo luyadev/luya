@@ -1,10 +1,18 @@
 $icon-font-size: 20px;
-$icon-line-height: $icon-font-size + 10px;
+$icon-line-height: $icon-font-size + 5px;
 
 .folders {
     list-style: none;
     margin: 0;
     padding: 0;
+    max-width: 100%;
+    width: 320px;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+
+       width: 100%;
+
+    }
 }
 
 .folders-item {
@@ -12,9 +20,13 @@ $icon-line-height: $icon-font-size + 10px;
     display: flex;
     flex-wrap: wrap;
     position: relative;
+    margin-right: 4px;
+
+    overflow: hidden;
+    position: relative;
 
     &:not(:first-of-type) {
-        margin-top: 5px;
+        margin-top: 4px;
     }
 
     .material-icons {
@@ -34,6 +46,14 @@ $icon-line-height: $icon-font-size + 10px;
 .folders-text {
     display: block;
     flex: 1 1 auto;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 3px;
+    /*transition: background-color .2s ease-in-out;*/
+
+    &:hover {
+        background-color: map-get($grays, 300);
+    }
 }
 
 .folders-collapse {
@@ -50,16 +70,21 @@ $icon-line-height: $icon-font-size + 10px;
     align-items: center;
     border-radius: 5px;
     cursor: pointer;
-    display: flex;
-    padding: 2px 0 0;
-
-    &:hover {
-        background-color: map-get($grays, 100);;
-    }
+    padding: 0 4px;
+    display: block;
+    width: 100%;
+    margin-right: 3px;
 
     .edit > &,
     .delete > & {
         display: none;
+    }
+
+    &:hover {
+
+        ~ .folders-actions-right {
+            display: block;
+        }
     }
 }
 .folders-folder-name {
@@ -69,6 +94,12 @@ $icon-line-height: $icon-font-size + 10px;
     display: inline-block;
     margin-right: 5px;
     margin-top: -2px;
+
+    &-active {
+        i {
+            color: theme-color(primary);
+        }
+    }
 
     .is-active > .folders-label & {
         display: none;
@@ -97,11 +128,22 @@ $icon-line-height: $icon-font-size + 10px;
 }
 
 .folders-actions {
-    padding-left: 25px;
+    padding-left: 20px;
     width: 100%;
 
+    &-delete:hover {
+        color: theme-color(danger);
+    }
+
+    /*&-edit:hover {
+        color: theme-color(success);
+    }*/
+
     &:hover {
-        padding-right: 50px;
+
+        .folders-label {
+           background-color: map-get($grays, 300);
+        }
     }
 }
 
@@ -117,17 +159,27 @@ $icon-line-height: $icon-font-size + 10px;
 
 .folders-actions-right {
     display: none;
-    right: 0;
+    opacity: 1;
+    transition: opacity .2s ease-in-out;
+    right:0;
+    padding-left: 2px;
+    padding-right: 2px;
 
-    .folders-actions:hover & {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    background-color: map-get($grays, 500);
+
+    &:hover {
         display: block;
+
+        .folders-label & {
+            background: red;
+        }
     }
 }
 .folders-edit {
     position: relative;
-}
-.folders-actions-right-edit {
-    display: block;
 }
 
 .folders-actions-toggler,
@@ -144,14 +196,15 @@ $icon-line-height: $icon-font-size + 10px;
 
 .folder-label-input {
     position: absolute;
-    width: calc(100% - 100px);
+    width: calc(100% - 95px);
     max-width: 100%;
     left: 50px;
     right: 200px;
-    top:3px;
-    max-height: 24px;
+    top:0;
+    max-height: 26px;
 }
 
 .folders-folder-move-icon {
     cursor: pointer;
+    right: 10px;
 }

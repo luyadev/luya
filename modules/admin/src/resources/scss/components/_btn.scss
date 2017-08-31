@@ -14,10 +14,6 @@
     &.btn-link {
         border-radius: 0;
     }
-    > .material-icons:first-of-type {
-        margin-left: -2px;
-    }
-
 }
 
 .dropdown-item {
@@ -106,14 +102,14 @@ $btns: (
     ),
 
     'cancel': (
-            'background-color':     theme-color('light'),
-            'border-color':         theme-color('light'),
-            'color':                $btn-color-dark,
+            'background-color':     theme-color('secondary'),
+            'border-color':         theme-color('secondary'),
+            'color':                $btn-color-light,
             'icon': 'clear',
             'hover': (
-                    'background-color':     theme-color('light'),
-                    'border-color':         theme-color('light'),
-                    'color':                $btn-color-dark,
+                    'background-color':     theme-color('secondary'),
+                    'border-color':         theme-color('secondary'),
+                    'color':                $btn-color-light,
             )
     ),
     'outline-cancel': (
@@ -270,13 +266,60 @@ $btns: (
             )
     ),
 
+    'replace': (
+            'background-color':     theme-color('secondary'),
+            'border-color':         theme-color('secondary'),
+            'color':                $btn-color-light,
+            'icon': 'find_replace',
+            'hover': (
+                    'background-color':     theme-color('secondary'),
+                    'border-color':         theme-color('secondary'),
+                    'color':                $btn-color-light,
+            )
+    ),
+
+    'outline-replace': (
+            'background-color':     map-get($grays, 200),
+            'border-color':         theme-color('secondary'),
+            'color':                theme-color('secondary'),
+            'icon': 'find_replace',
+            'hover': (
+                    'background-color':     theme-color('secondary'),
+                    'border-color':         theme-color('secondary'),
+                    'color':                map-get($colors, white)
+            )
+    ),
+
+    'move': (
+            'background-color':     theme-color('secondary'),
+            'border-color':         theme-color('secondary'),
+            'color':                $btn-color-light,
+            'icon': 'subdirectory_arrow_right',
+            'hover': (
+                    'background-color':     theme-color('secondary'),
+                    'border-color':         theme-color('secondary'),
+                    'color':                $btn-color-light,
+            )
+    ),
+
+    'outline-move': (
+            'background-color':     map-get($grays, 200),
+            'border-color':         theme-color('secondary'),
+            'color':                theme-color('secondary'),
+            'icon': 'subdirectory_arrow_right',
+            'hover': (
+                    'background-color':     theme-color('secondary'),
+                    'border-color':         theme-color('secondary'),
+                    'color':                map-get($colors, white)
+            )
+    ),
 );
 
 .btn {
     transition: .2s background ease-in-out, .2s border-color ease-in-out, .1s color ease-in-out;
+    padding: 6px 10px 6px 10px;
 
     &-icon {
-        padding: 6px 10px 6px 10px;
         position: relative;
 
         &:after {
@@ -315,8 +358,8 @@ $btns: (
                 padding-left: 30px;
 
                 &:empty {
-                    padding-top: 25px;
-                    padding-left: 25px;
+                    padding-top: 26px;
+                    padding-left: 24px;
                 }
 
                 &:after {
