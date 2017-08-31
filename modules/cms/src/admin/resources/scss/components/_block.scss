@@ -35,7 +35,7 @@ $block-padding: 10px !default;
         left: 0;
         position: absolute;
         right: 0;
-        z-index: 1000;
+        z-index: z-index(block-drop-indicator);
     }
     &:before {
         top: -6px;
@@ -77,19 +77,26 @@ $block-padding: 10px !default;
     right: -$block-border-width;
     transform: translateY(-100%);
     transition: .2s ease-in-out opacity;
-    z-index: 1000;
+    z-index: z-index(block-toolbar);
 
     .toolbar-item {
+        border: none !important;
         font-size: 20px;
+        padding: 2px 4px;
+
+        &:last-of-type {
+            padding-right: 0;
+        }
     }
 
     .toolbar-button {
         background: none;
         border: none;
+        border-radius: 0;
         color: $white;
         cursor: pointer;
         display: block;
-        margin-left: 10px;
+        margin-left: 5px;
         transition: .25s ease-in-out background-color;
 
         &:hover {

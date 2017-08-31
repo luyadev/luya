@@ -3,7 +3,7 @@
         margin-bottom: 0;
     }
 
-    &:not(:first-of-type) {
+    &:not(:first-of-type):not(.list-buttons) {
         margin-top: 15px;
     }
 }

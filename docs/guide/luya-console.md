@@ -10,7 +10,7 @@ To execute a console command open your Terminal and go into the base directory o
 
 Where *command* is one of the following commands below:
 
-## Standard commands
+## Standard built in commands
 
 Global LUYA commands:
 
@@ -95,4 +95,16 @@ If you want to create a command without a module you can just add the the Comman
 ],
 ```
 
-Now you could run the sync command like all other commands with `./vendor/bin/luya sync`.   
+Now you could run the sync command like all other commands with `./vendor/bin/luya sync`
+
+### Views and UrlManger
+
+Its very often case where you like to render a view and send a mail inside a console command, like batch processing some data (newsletter for example). Therfore your views use the {{luya\helpers\Url}} class in order to generate urls.
+
+As the console command does not know your webservers URL and there is no parameter of your webserver url, therefore luya has a special configuration property called {{luya\traits\ApplicationTrait::$consoleBaseUrl}}.
+
+This value will be used in when defined as baseUrl for the urlManager.
+
+```php
+'consoleBaseUrl' => 'https://luya.io',
+```

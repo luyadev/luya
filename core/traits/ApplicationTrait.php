@@ -40,6 +40,11 @@ trait ApplicationTrait
     public $webrootDirectory = 'public_html';
     
     /**
+     * @var string This value is used when declared for console request as urlManger baseUrl in order to enable urlHandling
+     */
+    public $consoleBaseUrl;
+    
+    /**
      * @var array Add tags to the TagParser class. Example
      *
      * ```php
