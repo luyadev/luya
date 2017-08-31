@@ -2,7 +2,7 @@
 
 Here we are going to more deeply understand what the `config()` method of a block contains and what kind of types can be used. To understand of the config first we have to explain the available types of confiugrations and which are used to be configured by the user or the developer.
 
-### Types
+## Block Input / Output Configuration
 
 The `config()` method returns an array with all defined types for this current block, the first level defines the block types:
 
@@ -21,9 +21,6 @@ return [
 | vars | Contains all variables which are shown when editing the block in the administration.
 | cfgs | Those options are the config gear icon in the administration overview and can contain optional informations which could be more deeply or more for the developer context.
 | placeholders | Allows you to generate placeholders which creates an arra where other blocks can be dropped into, this is very common for layout blocks.
-
-### Field
-
 
 Now you can add a field into the above defined type, this is like a configuration of a field which must contain `var`, `label` and `type`:
 
@@ -45,7 +42,7 @@ return [
 ];
 ```
 
-## Input-Types
+## Input Types
 
 
 There are several types you can use to generate your block controlls. Each class which support those types implements the {{\luya\admin\base\TypesInterface}} where you can use the type names as constant.
@@ -60,6 +57,7 @@ There are several types you can use to generate your block controlls. Each class
 |zaa-link|TYPE_LINK|Create a link field for internal and external URLs
 |zaa-wysiwyg|TYPE_WYSIWYG|Create a small wysiwg editor
 |[zaa-select](app-block-type-select.md)|TYPE_SELECT|Create a select dropdown with options based on the options parameter. The Options item must contain a value and label key. Example `[["value" => "v1", "label" => "Value 1"], ["value" => "v2", "label" => "Value 2"]]`.
+|zaa-radios|TYPE_RADIOS|Create a radio button selection based on the options parameter. The Options item must contain a value and label key. Example `[["value" => "v1", "label" => "Value 1"], ["value" => "v2", "label" => "Value 2"]]`.
 |zaa-date|TYPE_DATE|Create a datepicker where the user can choose a date, the response inside the block will be a unix timestamp.
 |zaa-datetime|TYPE_DATETIME|Create a datepicker where the user can choose a date and provide an additional time, the response inside the block will be a unix timestamp.
 |[zaa-checkbox](app-block-type-checkbox.md)|TYPE_CHECKBOX|Create a single checkbox (e.g. to define on/off states)

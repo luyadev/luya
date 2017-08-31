@@ -60,6 +60,11 @@ interface TypesInterface
     const TYPE_SELECT = 'zaa-select';
     
     /**
+     * @var string Returns a radio selection based on an input array.
+     */
+    const TYPE_RADIOS = 'zaa-radios';
+    
+    /**
      * @var string
      */
     const TYPE_DATE = 'zaa-date';
