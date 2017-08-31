@@ -41,6 +41,7 @@
     @media (min-width: $mobile-nav-breakpoint) {
         margin-right:0;
         margin-bottom: -$content-padding-y;
+        background-color: map-get($grays, 100);
     }
 }
 
