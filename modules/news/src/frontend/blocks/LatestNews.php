@@ -8,8 +8,6 @@ use luya\cms\base\PhpBlock;
 
 class LatestNews extends PhpBlock
 {
-    public $module = 'news';
-
     private $_dropdown = [];
 
     public function icon()

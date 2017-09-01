@@ -8,8 +8,6 @@ use luya\cms\base\PhpBlock;
 
 class GalleryAlbum extends PhpBlock
 {
-    public $module = 'gallery';
-
     private $_dropdown = [];
 
     private $_alben = [];
