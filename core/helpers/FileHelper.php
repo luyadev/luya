@@ -100,6 +100,21 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         }
         return $classes;
     }
+
+    /**
+     * Create a unique hash name from a given file.
+     *
+     * Warning
+     * Because PHP's integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all crc32() results will be positive integers though.
+     * So you need to use the "%u" formatter of sprintf() or printf() to get the string representation of the unsigned crc32() checksum in decimal format.
+     *
+     * @var string $fileName The file name which should be hashed
+     * @return string
+     */
+    public static function hashName($fileName)
+    {
+    	return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
+    }
     
     /**
      * Get extension and name from a file for the provided source/path of the file.

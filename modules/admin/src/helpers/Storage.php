@@ -42,21 +42,6 @@ class Storage
     {
         return isset(self::$uploadErrors[$errorId]) ? self::$uploadErrors[$errorId] : 'unknown error';
     }
-
-    /**
-     * Create a unique file hash from the file name.
-     *
-     * Warning
-     * Because PHP's integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all crc32() results will be positive integers though.
-     * So you need to use the "%u" formatter of sprintf() or printf() to get the string representation of the unsigned crc32() checksum in decimal format.
-     *
-     * @var string $fileName The file name which should be hashed
-     * @return string
-     */
-    public static function createFileHash($fileName)
-    {
-        return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
-    }
     
     /**
      * Remove a file from the storage system.
@@ -185,6 +170,11 @@ class Storage
      */
     public static function replaceFile($oldFileSource, $newFileSource)
     {
+    	try {
+    		Yii::$app->storage->ensureFileUpload($newFileSource, $newFileSource);
+    	} catch (\Exception $e) {
+    		return false;
+    	}
         $toDelete = $oldFileSource . uniqid('oldfile') . '.bkl';
         if (rename($oldFileSource, $toDelete)) {
             if (copy($newFileSource, $oldFileSource)) {
