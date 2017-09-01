@@ -3,8 +3,12 @@ use luya\admin\Module;
 
 ?>
 <div ng-controller="ActiveWindowGroupAuth">
-    <button type="button" ng-click="toggleAll()" class="btn"><?= Module::t('aws_groupauth_select_all'); ?></button>
-    <button type="button" ng-click="untoggleAll()" class="btn"><?= Module::t('aws_groupauth_deselect_all'); ?></button>
+
+    <div class="text-right mb-3">
+        <button type="button" ng-click="toggleAll()" class="btn btn-secondary btn-icon"><i class="material-icons">done_all</i> <span><?= Module::t('aws_groupauth_select_all'); ?></span></button>
+        <button type="button" ng-click="untoggleAll()" class="btn btn-secondary btn-icon"><i class="material-icons">clear_all</i> <span><?= Module::t('aws_groupauth_deselect_all'); ?></span></button>
+    </div>
+
     <form id="updateSubscription">
         <table class="table table-sm">
             <thead>
@@ -25,5 +29,8 @@ use luya\admin\Module;
             </tr>
         </table>
     </form>
-    <button type="button" ng-click="save(rights)" class="btn btn-primary"><?= Module::t('button_save'); ?></button>
+
+    <div class="modal-footer">
+        <button type="button" ng-click="save(rights)" class="btn btn-save btn-icon"><?= Module::t('button_save'); ?></button>
+    </div>
 </div>

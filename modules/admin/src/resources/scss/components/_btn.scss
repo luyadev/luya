@@ -41,19 +41,6 @@
 // Button with Icons
 // ==================================================
 
-
-$btn-icons: (
-    'save': 'check',
-    'delete': 'delete',
-    'cancel': 'clear',
-    'edit': 'edit',
-    'add':'add',
-    'help':'help',
-    'download':'file_download',
-    'upload':'file_upload',
-    'config':'settings',
-);
-
 $btns: (
     'save': (
         'background-color':     theme-color('success'),
@@ -323,11 +310,12 @@ $btns: (
         position: relative;
 
         &:after {
+            @include material-icons;
             position: absolute;
-            font-family: "Material Icons";
             left: 8px;
             top: 50%;
             transform: translateY(-50%);
+            font-size: inherit;
         }
     }
 
