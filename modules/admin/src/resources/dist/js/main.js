@@ -5299,13 +5299,11 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 			if (n == o || n == undefined || n == null) {
 				return;
 			}
-			
-			$scope.applySearchQuery(n);
 		});
 		
 		$scope.applySearchQuery = function(n) {
 			
-			if (n == undefined || n == null || n.length == 0) {
+			if (n == undefined || n == null) {
 				return;
 			}
 			var blockRequest = false;
