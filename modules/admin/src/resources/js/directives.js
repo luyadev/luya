@@ -596,7 +596,7 @@
     			};
     		},
     		template: function() {
-    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-sm"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" modal-title="{{alias}}"><div compile-html ng-bind-html="content"></modal></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-primary btn-sm"><i class="material-icons">playlist_add</i></button><modal is-modal-hidden="input.showWindow" modal-title="{{alias}}"><div class="modal-body" compile-html ng-bind-html="content"></modal></div>';
     		}
     	}
     });
@@ -864,9 +864,14 @@
                         '</div>' +
                     '</div>' +
                     '<modal is-modal-hidden="data.modalState" modal-title="{{label}}">'+
-                        '<update-form-redirect data="data.model"></update-form-redirect>'+
-                        '<button ng-click="unset(); data.modalState=1" type="button" class="btn red"><i class="material-icons">cancel</i></button> '+
-                        '<button ng-click="data.modalState=1" class="btn" type="button"><i class="material-icons">check</i> '+i18n['js_link_set_value']+'</button>'+
+                        '<div class="modal-body">' +
+                            '<update-form-redirect data="data.model"></update-form-redirect>' +
+                        '</div>' +
+
+                        '<div class="modal-footer">'+
+                            '<button ng-click="unset(); data.modalState=1" type="button" class="btn btn-icon btn-cancel"></button> '+
+                            '<button ng-click="data.modalState=1" class="btn btn-icon btn-save" type="button">'+i18n['js_link_set_value']+'</button>' +
+                        '</div>'+
                     '</modal>'+
                 '</div></div>';
             }

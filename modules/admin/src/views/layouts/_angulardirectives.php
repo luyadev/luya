@@ -33,43 +33,51 @@ use luya\admin\Module as Admin;
                     </button>
                 </div>
             </div>
-        <div class="modal-body" ng-transclude />
+            <div class="modal-body" ng-transclude></div>
+        </div>
     </div>
 </div>
 </script>
 
 <!-- UPDATE REDIRECT FORM -->
 <script type="text/ng-template" id="updateformredirect.html">
-    <div class="row">
-        <div class="form-group form-side-by-side">
-            <div class="form-side form-side-label">
-                <label><?= Admin::t('view_index_redirect_type'); ?></label>
-            </div>
-            <div class="form-side">
-                <input type="radio" ng-model="data.type" ng-value="1" id="redirect_internal">
-                <label for="redirect_internal" ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label>
+    <div class="form-group form-side-by-side">
+        <div class="form-side form-side-label">
+            <label><?= Admin::t('view_index_redirect_type'); ?></label>
+        </div>
+        <div class="form-side">
+            <input type="radio" ng-model="data.type" ng-value="1" id="redirect_internal">
+            <label for="redirect_internal" ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label>
 
-                <input type="radio" ng-model="data.type" ng-value="2" id="redirect_external">
-                <label for="redirect_external" ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
-            </div>
+            <input type="radio" ng-model="data.type" ng-value="2" id="redirect_external">
+            <label for="redirect_external" ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
         </div>
     </div>
 
-    <div class="row" ng-switch on="data.type">
-        <div class="col s12" ng-switch-when="1">
-            <p><?= Admin::t('view_index_redirect_internal_select'); ?></p>
-            <menu-dropdown class="menu-dropdown" nav-id="data.value" />
-        </div>
+    <div class="form-group form-side-by-side">
+        <div class="form-side form-side-label"></div>
+        <div class="form-side">
 
-        <div class="col s12" ng-switch-when="2">
+            <div ng-switch on="data.type">
+                <div ng-switch-when="1">
 
-            <div class="input input--text col s12">
-                <label class="input-label"><?= Admin::t('view_index_redirect_external_link'); ?></label>
-                <div class="input-field-wrapper">
-                    <input name="text" type="text" class="input-field" ng-model="data.value" placeholder="http://" />
-                    <small><?= Admin::t('view_index_redirect_external_link_help'); ?></small>
+                    <p><?= Admin::t('view_index_redirect_internal_select'); ?></p>
+                    <menu-dropdown class="menu-dropdown" nav-id="data.value" />
+
+                </div>
+                <div ng-switch-when="2">
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="material-icons">link</i></div>
+                            <input type="email" class="form-control" ng-model="data.value" placeholder="http://">
+                        </div>
+                        <small id="emailHelp" class="form-text text-muted"><?= Admin::t('view_index_redirect_external_link_help'); ?></small>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </div>
 </script>

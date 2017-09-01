@@ -15,26 +15,29 @@
     background-color: map-get($grays, 100);
 }
 
+.modal-body .modal-footer {
+    margin: 15px -15px -15px -15px;
+}
+
 .modal-xl {
     margin: 30px 50px;
     max-width: 100%;
 }
 
-
 .modal-header {
     .close {
-        position: relative;
         cursor: pointer;
+        position: relative;
     }
 }
 
 .modal-esc {
-    position: absolute;
-    top: 0;
-    left:-35px;
-    font-size: 14px;
-    line-height: 1.5rem;
-    padding-right: 10px;
     color: $gray-500;
     cursor: pointer;
+    font-size: 14px;
+    left: -35px;
+    line-height: 1.5rem;
+    padding-right: 10px;
+    position: absolute;
+    top: 0;
 }
