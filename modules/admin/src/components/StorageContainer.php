@@ -100,7 +100,7 @@ class StorageContainer extends Component
     use CacheableTrait;
     
     /**
-     * @var array The mime types
+     * @var array The mime types which will be rejected.
      */
     public $dangerousMimeTypes = [
         'application/x-msdownload',
@@ -127,6 +127,19 @@ class StorageContainer extends Component
         'text/plain',
         'application/x-spss',
     ];
+    
+    /**
+     * @var array The extension which will be rejected.
+     */
+    public $dangerousExtensions = [
+    	'html', 'php', 'phtml', 'php3', 'exe', 'bat', 'js',	
+    ];
+
+    /**
+     * @var boolean Whether secure file upload is enabled or not. If enabled dangerous mime types and extensions will
+     * be rejected and the file mime type needs to be verified by phps `fileinfo` extension.
+     */
+    public $secureFileUpload = true;
     
     /**
      * @var \luya\web\Request Request object resolved by the Dependency Injector.
@@ -405,21 +418,42 @@ class StorageContainer extends Component
         
         $fileInfo = FileHelper::getFileInfo($fileName);
         
+        $mimeType = FileHelper::getMimeType($fileSource, null, !$this->secureFileUpload);
+        
+        if (empty($mimeType)) {
+        	if ($this->secureFileUpload) {
+        		throw new Exception("Unable to find mimeType for the given file, make sure the php extension 'fileinfo' is installed.");
+        	} else {
+        		// this is dangerous and not recommend
+        		$mimeType = FileHelper::getMimeType($fileName);
+        	}
+        }
+        
+        $extensionByMimeType = FileHelper::getExtensionsByMimeType($mimeType);
+        	
+        if (empty($extensionByMimeType)) {
+        	throw new Exception("Unable to find extension for type $mimeType or it contains insecure data.");
+        }
+	        
+	    if (!in_array($fileInfo->extension, $extensionByMimeType)) {
+	    	throw new Exception("The given file extension is not matching its mime type.");
+	    }
+	        
+        foreach ($extensionByMimeType as $extension) {
+        	if (in_array($extension, $this->dangerousExtensions)) {
+        		throw new Exception("This file extension seems to be dangerous and can not be stored.");
+        	}
+        }
+        
+        if (in_array($mimeType, $this->dangerousMimeTypes)) {
+            throw new Exception("This file type seems to be dangerous and can not be stored.");
+        }
+        
         $baseName = Inflector::slug($fileInfo->name, '-');
         
         $fileHashName = Storage::createFileHash($fileName);
         
         $fileHash = FileHelper::md5sum($fileSource);
-        
-        $mimeType = FileHelper::getMimeType($fileSource);
-        
-        if (empty($mimeType)) {
-            $mimeType = FileHelper::getMimeType($fileName);
-        }
-        
-        if (in_array($mimeType, $this->dangerousMimeTypes)) {
-            throw new Exception("This files is in the dangrous types list and can not be stored.");
-        }
         
         $newName = implode([$baseName.'_'.$fileHashName, $fileInfo->extension], '.');
         
@@ -441,7 +475,7 @@ class StorageContainer extends Component
             'name_new' => $baseName,
             'name_new_compound' => $newName,
             'mime_type' => $mimeType,
-            'extension' => strtolower($fileInfo->extension),
+            'extension' => $fileInfo->extension,
             'folder_id' => (int) $folderId,
             'hash_file' => $fileHash,
             'hash_name' => $fileHashName,
