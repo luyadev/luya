@@ -11,7 +11,7 @@ $this->beginPage();
 $this->beginBody();
 ?>
 <?php $this->registerAngularControllerScript(); ?>
-<div ng-controller="<?= $config->hash; ?>" ng-init="init()" class="crud">
+<div ng-controller="<?= $config->hash; ?>" class="crud">
 
     <!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
     <div style="display: none;" ui-view></div>
@@ -107,7 +107,7 @@ $this->beginBody();
                     </div>
                     <?php if (!empty($config->getFilters())): ?>
                     <div class="col-md-4 col-lg-3 col-xl-3 col-xxxl-2">
-                        <select class="form-control" ng-model="config.filter">
+                        <select class="form-control" ng-model="config.filter" ng-change="changeNgRestFilter()">
                             <option value="0"><?= Module::t('ngrest_crud_filter_prompt'); ?></option>
                             <?php foreach (array_keys($config->getFilters()) as $name): ?>
                                 <option value="<?= $name; ?>"><?= $name; ?></option>
