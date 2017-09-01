@@ -6,7 +6,7 @@ The LUYA Core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by 
 
 In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, sometimes with just an MVC provided by YII via the LUYA CORE sometimes you just need an administration area where you can manage data of your application and sometimes you also need a cms to manager the content.
 
-## LUYA CORE as MVC
+## Setup Core Application
 
 In order to run a LUYA core application without modules just create a applicatin with the following structure:
 
@@ -98,7 +98,6 @@ return [
             'default' => [
                 'langShortCode' => 'en'
             ],
-            'hidden' => true,
         ],
         'urlManager' => [
             'rules' => [
@@ -156,3 +155,13 @@ use yii\helpers\Html;
 </html>
 <?php $this->endPage() ?>
 ```
+
+## Using Core Kickstarter Project
+
+We have made a composer package to start a LUYA Core Application project very quickly using the `composer create-project` command.
+
+```
+composer create-project luyadev/luya-kickstarter-core:^1.0@dev
+```
+
+This will generate a folder `luya-kickstarter-core` containg all required controllers, views and configs based on the first section description.
