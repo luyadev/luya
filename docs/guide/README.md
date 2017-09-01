@@ -7,7 +7,7 @@
   + [Structure & Config](install-structures.md)
   + [Environment Configs](install-configs.md)
 + Key Concepts
-  + [The Core](concept-core.md)
+  + [LUYA Core](concept-core.md)
   + [Composition](concept-composition.md)
   + [Tags](concept-tags.md)
   + [HTML Element](concept-elements.md)
