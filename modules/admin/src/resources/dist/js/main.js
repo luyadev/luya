@@ -4805,6 +4805,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
                 $scope.showFolderForm = false;
 
                 $scope.createNewFolder = function(newFolderName) {
+                	if (!newFolderName) {
+                		return;
+                	}
                     $http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                     }).then(function() {
