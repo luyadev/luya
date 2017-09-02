@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fcd250c6223c9db5688c156b7c86670c",
+    "content-hash": "ff1fe47263f4d5cf94be10002a0f7a76",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -322,16 +322,16 @@
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "4e2fead7bd7bb5f99eb6f76651a99a75b24fb737"
+                "reference": "d38751971accbea722897c82e7670fa41214c317"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/4e2fead7bd7bb5f99eb6f76651a99a75b24fb737",
-                "reference": "4e2fead7bd7bb5f99eb6f76651a99a75b24fb737",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d38751971accbea722897c82e7670fa41214c317",
+                "reference": "d38751971accbea722897c82e7670fa41214c317",
                 "shasum": ""
             },
             "require": {
@@ -360,7 +360,7 @@
             "authors": [
                 {
                     "name": "Basil Suter",
-                    "email": "git@nadar.io"
+                    "email": "basil@nadar.io"
                 }
             ],
             "description": "LUYA composer core",
@@ -368,20 +368,20 @@
                 "composer",
                 "luya"
             ],
-            "time": "2017-08-27 06:58:14"
+            "time": "2017-09-02T07:47:35+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.24",
+            "version": "v5.2.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "22d04c6a58145a244696f3f254c1875aa653b26a"
+                "reference": "2baf20b01690fba8cf720c1ebcf9b988eda50915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/22d04c6a58145a244696f3f254c1875aa653b26a",
-                "reference": "22d04c6a58145a244696f3f254c1875aa653b26a",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2baf20b01690fba8cf720c1ebcf9b988eda50915",
+                "reference": "2baf20b01690fba8cf720c1ebcf9b988eda50915",
                 "shasum": ""
             },
             "require": {
@@ -445,7 +445,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-07-26T21:00:20+00:00"
+            "time": "2017-08-28T11:12:07+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -601,9 +601,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "luyadev/luya-composer": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
