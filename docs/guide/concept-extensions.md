@@ -9,7 +9,7 @@ As LUYA is built upon the composer package manager, every extension must be incl
 ```json
 {
     "name": "username/package",
-    "type": "luya-exxtension",
+    "type": "luya-extension",
     "minimum-stability": "stable",
     "require": {
         "luyadev/luya-core": "1.0.0-RC4"
