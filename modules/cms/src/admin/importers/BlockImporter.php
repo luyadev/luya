@@ -114,6 +114,15 @@ class BlockImporter extends Importer
         
         $identifier = Yii::createObject(['class' => $groupClassName])->identifier();
         
-        return BlockGroup::findOne(['identifier' => $identifier])->id;
+        $group = BlockGroup::findOne(['identifier' => $identifier]);
+        
+        // @TODO if not found, add group to database
+        
+        
+        if ($group) {
+        	return $group->id;
+        }
+        
+        return 0;
     }
 }
