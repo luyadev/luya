@@ -26,7 +26,6 @@ composer.phar
 
 # project config
 /configs/env-local-db.php
-/configs/server.php
 /configs/env.php
 
 # SASS
