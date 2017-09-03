@@ -1,44 +1,5 @@
 // ==================================================
-// General button
-// ==================================================
-
-.btn {
-    cursor: pointer;
-    .material-icons {
-        font-size: 1.5em;
-        vertical-align: middle;
-    }
-    &.btn-link .material-icons {
-        font-size: 24px;
-    }
-    &.btn-link {
-        border-radius: 0;
-    }
-}
-
-.dropdown-item {
-    cursor: pointer;
-}
-
-// ==================================================
-// Link button
-// ==================================================
-
-
-.btn-link {
-    color: color(gray);
-    border-color: transparent;
-    padding: 2px;
-    background: transparent;
-
-    &:hover {
-        color: theme-color(primary);
-    }
-}
-
-
-// ==================================================
-// Button with Icons
+// Predefined buttons with Icons
 // ==================================================
 
 $btns: (
@@ -303,8 +264,21 @@ $btns: (
 );
 
 .btn {
-    transition: .2s background ease-in-out, .2s border-color ease-in-out, .1s color ease-in-out;
+
     padding: 6px 10px 6px 10px;
+    cursor: pointer;
+
+
+    .material-icons {
+        vertical-align: middle;
+    }
+    &.btn-link .material-icons {
+        font-size: inherit;
+    }
+    &.btn-link {
+        border-radius: 0;
+    }
+
 
     &-icon {
         position: relative;
@@ -319,6 +293,23 @@ $btns: (
         }
     }
 
+    &:hover {
+
+        &:not([class*=" btn-"]) {
+            background-color: darken(map-get($grays, 400), 7.5%);
+            border-color: darken(map-get($grays, 400), 10%);
+        }
+
+        &.btn-sm, &.btn-lg {
+
+            background-color: darken(map-get($grays, 400), 7.5%);
+            border-color: darken(map-get($grays, 400), 10%);
+
+        }
+    }
+
+
+
     @each $iconName, $iconValues in $btns {
 
         // Generate background, border and color styles for all defined buttons in $btns map
@@ -331,10 +322,10 @@ $btns: (
                 $iconHoverValues: map-get($iconValues, 'hover');
                 &:hover {
                     @if map-has-key($iconHoverValues, 'background-color') {
-                        background-color: rgba(map-get($iconHoverValues, 'background-color'), .8);
+                        background-color: darken(map-get($iconHoverValues, 'background-color'), 7.5%);
                     }
                     @if map-has-key($iconHoverValues, 'border-color') {
-                        border-color: rgba(map-get($iconHoverValues, 'border-color'), .8);
+                        border-color: darken(map-get($iconHoverValues, 'border-color'), 10%);
                     }
                     @if map-has-key($iconHoverValues, 'color') {
                         color: map-get($iconHoverValues, 'color') !important;
@@ -358,12 +349,16 @@ $btns: (
     }
 }
 
+
+
 // ==================================================
-// Symbol buttons, crud buttons
+// Link button
 // ==================================================
+
 
 .btn-link {
     color: color(gray);
+    border-color: transparent;
     padding: 2px;
     background: transparent;
 
@@ -373,6 +368,19 @@ $btns: (
 }
 
 
+// ==================================================
+// Custom admin buttons
+// ==================================================
+
+
+.toolbar-button {
+    border-radius: $border-radius;
+
+    &:hover {
+        color: theme-color(primary);
+    }
+}
+
 // Label outside of buttons
 
 .btn-label {
@@ -381,13 +389,3 @@ $btns: (
     @include google-chrome-font-offset-fix;
 }
 
-
-.toolbar-button {
-    border-radius: 4px;
-    background: color(gray-light);
-    transition: color .2s ease-in-out;
-
-    &:hover {
-        color: theme-color(primary);
-    }
-}

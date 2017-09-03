@@ -52,7 +52,7 @@
 }
 
 .modulenav-link {
-    border-radius: 5px;
+    border-radius: $border-radius;
     color: color('gray');
     cursor: pointer;
     display: block;

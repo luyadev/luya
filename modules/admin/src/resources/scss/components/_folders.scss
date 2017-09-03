@@ -68,7 +68,7 @@ $icon-line-height: $icon-font-size + 5px;
 
 .folders-label {
     align-items: center;
-    border-radius: 5px;
+    border-radius: $border-radius;
     cursor: pointer;
     display: block;
     margin-right: 3px;
