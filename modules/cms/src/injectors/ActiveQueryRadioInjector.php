@@ -53,9 +53,7 @@ final class ActiveQueryRadioInjector extends BaseActiveQueryInjector
 			'var' => $this->varName,
 			'type' => TypesInterface::TYPE_RADIO,
 			'label' => $this->varLabel,
-			'options' => [
-				'items' => $this->getQueryData(),
-			],
+			'options' => $this->getQueryData(),
 		]);
 		// provide the extra data
 		$this->context->addExtraVar($this->varName, $this->getExtraAssignSingleData());
