@@ -33,7 +33,7 @@ class ActiveWindowController extends Command
      * @param string $moduleId The module identifier.
      * @return string
      */
-    public function renderWindowClassView($className, $namespace, $moduleId)
+    protected function renderWindowClassView($className, $namespace, $moduleId)
     {
         $alias = Inflector::humanize(Inflector::camel2words($className));
         return $this->view->render('@admin/commands/views/aw/classfile.php', [
@@ -45,7 +45,7 @@ class ActiveWindowController extends Command
         ]);
     }
     
-    public function renderWindowClassViewFile($className, $moduleId)
+    protected function renderWindowClassViewFile($className, $moduleId)
     {
         return $this->view->render('@admin/commands/views/aw/viewfile.php', [
             'className' => $className,

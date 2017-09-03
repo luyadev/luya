@@ -44,7 +44,7 @@ use yii\base\ArrayableTrait;
  * @property array $parents Return all parent elements **without** the current item.
  * @property array $sibilings Get all sibilings for the current item, this also includes the current item iteself.
  * @property array $teardown Return all parent elemtns **with** the current item.
- * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
+ * @property \luya\cms\menu\QueryIterator $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
  * @property boolean $isHome Returns true if the item is the home item, otherwise false.
  * @property string $absoluteLink The link path with prepand website host `http://luya.io/home/about-us`.
  * @property integer $sortIndex Sort index position for the current siblings list.

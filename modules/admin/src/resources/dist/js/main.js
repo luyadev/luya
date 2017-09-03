@@ -3288,9 +3288,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     });
 
     /**
-     * <zaa-radios model="model" options="[{label:'foo', value: 'bar'}, {...}]">
+     * <zaa-radio model="model" options="[{label:'foo', value: 'bar'}, {...}]">
      */
-    zaa.directive("zaaRadios", function() {
+    zaa.directive("zaaRadio", function() {
     	return {
 	    	restrict: "E",
 	    	scope: {

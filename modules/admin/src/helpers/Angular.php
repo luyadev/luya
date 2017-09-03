@@ -5,6 +5,7 @@ namespace luya\admin\helpers;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\base\InvalidConfigException;
+use luya\admin\base\TypesInterface;
 
 /**
  * Helper Method to create angular tags.
@@ -207,7 +208,7 @@ class Angular
      */
     public static function radios($ngModel, $label, array $data, array $options = [])
     {
-    	return self::injector('zaa-radios', $ngModel, $label, self::optionsArrayInput($data), $options);
+    	return self::injector(TypesInterface::TYPE_RADIO, $ngModel, $label, self::optionsArrayInput($data), $options);
     }
     
     /**

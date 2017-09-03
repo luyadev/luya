@@ -41,7 +41,7 @@ use luya\admin\base\TypesInterface;
  * @since 1.0.0-rc1
  * @author Basil Suter <basil@nadar.io>
  */
-final class ActiveQueryCheckboxInjector extends BaseActiveQueryInjector
+final class ActiveQueryRadioInjector extends BaseActiveQueryInjector
 {
 	/**
 	 * @inheritdoc
@@ -51,13 +51,13 @@ final class ActiveQueryCheckboxInjector extends BaseActiveQueryInjector
 		// injecto the config
 		$this->setContextConfig([
 			'var' => $this->varName,
-			'type' => TypesInterface::TYPE_CHECKBOX_ARRAY,
+			'type' => TypesInterface::TYPE_RADIO,
 			'label' => $this->varLabel,
 			'options' => [
 				'items' => $this->getQueryData(),
 			],
 		]);
 		// provide the extra data
-		$this->context->addExtraVar($this->varName, $this->getExtraAssignData());
+		$this->context->addExtraVar($this->varName, $this->getExtraAssignSingleData());
 	}
 }

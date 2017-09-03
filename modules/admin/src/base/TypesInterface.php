@@ -5,6 +5,11 @@ namespace luya\admin\base;
 /**
  * TypesInterface represents all possible types for properties or blocks.
  *
+ * The zaa types array are angular directives.
+ * 
+ * + If a type contain `-array` the return is an array with selections
+ * + Otherwise only 1 value can be returned
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 interface TypesInterface
@@ -60,9 +65,10 @@ interface TypesInterface
     const TYPE_SELECT = 'zaa-select';
     
     /**
-     * @var string Returns a radio selection based on an input array.
+     * @var string Returns a list of radio inputs based on an optiosn array, but allows only a selection of one. Therefore its
+     * not `radios` or `radio-array` it returns only a single value an is `radio`
      */
-    const TYPE_RADIOS = 'zaa-radios';
+    const TYPE_RADIO = 'zaa-radio';
     
     /**
      * @var string
@@ -132,7 +138,8 @@ interface TypesInterface
      * @var string Create an expandable list with plugins for each row.
      *
      * ```php
-     * ['var' => 'people', 'label' => 'People', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' => [
+     * ['var' => 'people', 'label' => 'People', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' =>
+     *     [
      *          [
      *              'type' => self::TYPE_SELECT,
      *              'var' => 'salutation',
@@ -141,13 +148,12 @@ interface TypesInterface
      *                  ['value' => 1, 'label' => 'Mr.'],
      *                  ['value' => 2, 'label' => 'Mrs.'],
      *              ]
-     *          ],
-     *          [
+     *          ], [
      *              'type' => self::TYPE_TEXT,
      *              'var' => 'name',
      *              'label' => 'Name'
-     *          ],
-     *      ],
+     *          ]
+     *      ]
      * ]
      * ```
      */

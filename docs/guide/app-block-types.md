@@ -57,7 +57,7 @@ There are several types you can use to generate your block controlls. Each class
 |zaa-link|TYPE_LINK|Create a link field for internal and external URLs
 |zaa-wysiwyg|TYPE_WYSIWYG|Create a small wysiwg editor
 |[zaa-select](app-block-type-select.md)|TYPE_SELECT|Create a select dropdown with options based on the options parameter. The Options item must contain a value and label key. Example `[["value" => "v1", "label" => "Value 1"], ["value" => "v2", "label" => "Value 2"]]`.
-|zaa-radios|TYPE_RADIOS|Create a radio button selection based on the options parameter. The Options item must contain a value and label key. Example `[["value" => "v1", "label" => "Value 1"], ["value" => "v2", "label" => "Value 2"]]`.
+|zaa-radio|TYPE_RADIO|Create a radio button selection based on the options parameter. The Options item must contain a value and label key. Example `[["value" => "v1", "label" => "Value 1"], ["value" => "v2", "label" => "Value 2"]]`.
 |zaa-date|TYPE_DATE|Create a datepicker where the user can choose a date, the response inside the block will be a unix timestamp.
 |zaa-datetime|TYPE_DATETIME|Create a datepicker where the user can choose a date and provide an additional time, the response inside the block will be a unix timestamp.
 |[zaa-checkbox](app-block-type-checkbox.md)|TYPE_CHECKBOX|Create a single checkbox (e.g. to define on/off states)
