@@ -5,6 +5,7 @@ namespace luya\cms\injectors;
 use yii\data\ActiveDataProvider;
 use luya\helpers\ArrayHelper;
 use luya\cms\base\BaseBlockInjector;
+use yii\db\ActiveQueryInterface;
 
 /**
  * 

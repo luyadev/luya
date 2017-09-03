@@ -207,7 +207,7 @@ class CrudController extends BaseCrudController
         return strtolower($this->moduleName).'/'.Inflector::camel2id($this->getModelNameCamlized()).'/index';
     }
     
-    protected function ensureBasePathAndNamespace()
+    public function ensureBasePathAndNamespace()
     {
         $nsItems = explode('\\', $this->getNamespace());
         // if there are more namespace paths then one, it means there is space for a sub folder models
@@ -231,7 +231,7 @@ class CrudController extends BaseCrudController
      * @param string $modelClass
      * @return string
      */
-    protected function generateApiContent($fileNamespace, $className, $modelClass)
+    public function generateApiContent($fileNamespace, $className, $modelClass)
     {
         $alias = Inflector::humanize(Inflector::camel2words($className));
         return $this->view->render('@admin/commands/views/crud/create_api.php', [
@@ -250,7 +250,7 @@ class CrudController extends BaseCrudController
      * @param string $modelClass
      * @return string
      */
-    protected function generateControllerContent($fileNamespace, $className, $modelClass)
+    public function generateControllerContent($fileNamespace, $className, $modelClass)
     {
         $alias = Inflector::humanize(Inflector::camel2words($className));
         return $this->view->render('@admin/commands/views/crud/create_controller.php', [
@@ -272,7 +272,7 @@ class CrudController extends BaseCrudController
      * @param boolean $i18nFields
      * @return string
      */
-    protected function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema, $i18nFields)
+    public function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema, $i18nFields)
     {
         $alias = Inflector::humanize(Inflector::camel2words($className));
         $dbTableName = $schema->fullName;
@@ -335,7 +335,7 @@ class CrudController extends BaseCrudController
      * @param string $controllerRoute
      * @return string
      */
-    protected function generateBuildSummery($apiEndpoint, $apiClassPath, $humanizeModelName, $controllerRoute)
+    public function generateBuildSummery($apiEndpoint, $apiClassPath, $humanizeModelName, $controllerRoute)
     {
         return $this->view->render('@admin/commands/views/crud/build_summary.php', [
             'apiEndpoint' => $apiEndpoint,

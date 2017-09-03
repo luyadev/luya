@@ -15,12 +15,17 @@ class FilterControllerTest extends AdminTestCase
         
         $this->assertTrue(is_object($ctrl));
     
-        $buff = <<<EOT
+        $buff = <<<'EOT'
+<?php
+
+namespace app\filters;
+        		
+use luya\admin\base\Filter;
 
 /**
  * Nam Filter.
  *
- * File has been created with `block/create` command on LUYA version 1.0.0-RC3. 
+ * File has been created with `block/create` command on LUYA version 1.0.0-RC4-dev. 
  */
 class className extends Filter
 {
@@ -45,6 +50,6 @@ class className extends Filter
     }
 }
 EOT;
-        $this->assertContains($buff, $ctrl->generateClassView('idf', 'Nam', ['method' => ['arg' => 'v', 'foo' => 'bar']], 'className'));
+        $this->assertSame($buff, $ctrl->generateClassView('idf', 'Nam', ['method' => ['arg' => 'v', 'foo' => 'bar']], 'className'));
     }
 }

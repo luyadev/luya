@@ -24,7 +24,7 @@
     },
     "require-dev" : {
         "nadar/github-markdown-fixer" : "^1.0",
-        "luyadev/luya-testsuite" : "~1.0.0",
+        "luyadev/luya-testsuite" : "^1.0@dev",
         "satooshi/php-coveralls": "~1.0"
     },
     "autoload" : {

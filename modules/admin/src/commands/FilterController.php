@@ -82,9 +82,9 @@ class FilterController extends Command
      * @param unknown $className
      * @return string
      */
-    protected function generateClassView($identifier, $name, array $chain, $className)
+    public function generateClassView($identifier, $name, array $chain, $className)
     {
-        return $this->view->render('@admin/views/commands/filter/filterClass.php', [
+        return $this->view->render('@admin/commands/views/filter/filterClass', [
             'identifier' => $identifier,
             'name' => $name,
             'chain' => $chain,

@@ -58,6 +58,6 @@ final class ActiveQueryCheckboxInjector extends BaseActiveQueryInjector
 			],
 		]);
 		// provide the extra data
-		$this->context->addExtraVar($this->varName, $this->getExtraAssignData());
+		$this->context->addExtraVar($this->varName, $this->getExtraAssignArrayData());
 	}
 }
