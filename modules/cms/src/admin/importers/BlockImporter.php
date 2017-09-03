@@ -56,6 +56,8 @@ class BlockImporter extends Importer
      */
     protected function saveBlock($fullClassName)
     {
+    	// ensure all classes start with trailing slash class name definition like `\foo\bar\Class`
+    	$fullClassName = '\\'  . ltrim($fullClassName, '\\');
         $model = Block::find()->where(['class' => $fullClassName])->one();
         
         $blockObject = $this->createBlockObject($fullClassName);
@@ -112,15 +114,20 @@ class BlockImporter extends Importer
     {
         $groupClassName = $blockObject->blockGroup();
         
-        $identifier = Yii::createObject(['class' => $groupClassName])->identifier();
+        $groupObject = Yii::createObject(['class' => $groupClassName]);
         
-        $group = BlockGroup::findOne(['identifier' => $identifier]);
-        
-        // @TODO if not found, add group to database
-        
+        $group = BlockGroup::findOne(['identifier' => $groupObject->identifier()]);
         
         if ($group) {
         	return $group->id;
+        } else {
+        	$model = new BlockGroup();
+        	$model->name = $groupObject->label();
+        	$model->identifier = $groupObject->identifier();
+        	$model->created_timestamp = time();
+        	if ($model->save()) {
+        		return $model->id;
+        	}
         }
         
         return 0;
