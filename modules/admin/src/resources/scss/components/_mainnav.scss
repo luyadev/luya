@@ -97,7 +97,7 @@
 
 .mainnav-link {
     border-radius: $border-radius;
-    color: map-get($grays, 400) !important;
+    color: map-get($grays, 400);
     cursor: pointer;
     display: flex;
     min-height: 42px;
@@ -170,6 +170,7 @@
 .mainnav-label {
     display: inline-block;
     line-height: 22px;
+    color: map-get($grays, 400);
 }
 
 .mainnav-icon {
@@ -349,6 +350,8 @@
     transform: translateY(-50%);
 
     font-size: 14px;
+
+    color: map-get($grays, 300);
 }
 
 
