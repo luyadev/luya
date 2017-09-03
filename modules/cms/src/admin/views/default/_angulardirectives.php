@@ -65,13 +65,11 @@ use luya\cms\admin\Module;
                     <create-form-redirect data="data"></create-form-redirect>
                 </div>
                 <div ng-show="success">
-                    <div class="alert alert--success">
-                        <i class="material-icons">check</i>
-                        <p><?= Module::t('view_index_page_success'); ?></p>
+                    <div class="alert alert-success">
+                        <i class="material-icons">check</i> <?= Module::t('view_index_page_success'); ?>
                     </div>
                 </div>
-                <div class="alert alert--danger" ng-show="error.length != 0">
-                    <i class="material-icons">error</i>
+                <div class="alert alert-danger" ng-show="error.length != 0">
                     <ul>
                         <li ng-repeat="err in error">{{ err[0] }}</li>
                     </ul>

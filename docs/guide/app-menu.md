@@ -130,7 +130,7 @@ foreach (Yii::$app->menu->getLevelContainer(2) as $secondItem):
 endforeach; 
 ```
 
-# Menu Item Injection
+## Menu Item Injection
 
 There is also a possibility to inject data into the menu component direct from every part of your web application. An item inject gives a module the possibility to add items into the menu Container.
 
