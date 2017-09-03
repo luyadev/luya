@@ -108,6 +108,7 @@ In the view you can access the values as follwed:
     <?= $this->extraValue('text'); ?>
     <a href="<?= $this->extraValue('download')->source; ?>">Download File</a>
 <?php endif; ?>
+```
 
 ## Injectors
 
