@@ -5,9 +5,9 @@ use luya\helpers\Url;
 ?>
 <div class="luya-content" ng-controller="AccountController">
     <h1>
-        <a href="<?= Url::toRoute(['/admin/default/logout']); ?>" class="btn btn-danger btn-icon"><i class="material-icons">exit_to_app</i> <?= Module::t('layout_btn_logout'); ?></a>
         <span><span ng-bind="profile.firstname"></span> <span ng-bind="profile.lastname"></span></span>
     </h1>
+    <a href="<?= Url::toRoute(['/admin/default/logout']); ?>" class="btn btn-danger btn-icon mb-3"><i class="material-icons">exit_to_app</i> <?= Module::t('layout_btn_logout'); ?></a>
     <div class="row">
         <div class="col-md-4">
             <div class="card">

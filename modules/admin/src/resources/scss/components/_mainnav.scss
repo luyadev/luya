@@ -96,7 +96,7 @@
 }
 
 .mainnav-link {
-    border-radius: 5px;
+    border-radius: $border-radius;
     color: map-get($grays, 400) !important;
     cursor: pointer;
     display: flex;
@@ -113,7 +113,7 @@
 
         .mainnav-small &:after {
             background-color: rgba(#fff, .1);
-            border-radius: 5px;
+            border-radius: $border-radius;
             content: "";
             height: 0;
             left: 50%;
@@ -211,6 +211,8 @@
     
     color: map-get($grays, 400);
 
+    color: map-get($grays, 400);
+
     &-small {
         margin-top: 0;
     }
@@ -231,7 +233,7 @@
 .mainnav-toggler {
     background: map-get($grays, 700);
     border: none;
-    border-radius: 5px;
+    border-radius: $border-radius;
     cursor: pointer;
     display: none;
     margin: 0;
@@ -285,7 +287,7 @@
 
 .mainnav-tooltip-big {
     background: $tooltip-bg;
-    border-radius: 5px;
+    border-radius: $border-radius;
     bottom: 0;
     display: none;
     opacity: 0;

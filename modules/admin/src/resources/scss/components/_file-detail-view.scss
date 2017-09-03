@@ -35,7 +35,7 @@
 
 .file-detail-view-arrows {
     background-color: color(white);
-    border-radius: 5px 0 0 5px;
+    border-radius: $border-radius 0 0 $border-radius;
     left: 0;
     position: absolute;
     top: 50%;
