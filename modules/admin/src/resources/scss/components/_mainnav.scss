@@ -97,7 +97,7 @@
 
 .mainnav-link {
     border-radius: 5px;
-    color: map-get($grays, 400);
+    color: map-get($grays, 400) !important;
     cursor: pointer;
     display: flex;
     min-height: 42px;
@@ -208,6 +208,8 @@
     min-width: 24px;
     width: 100%;
     max-width: 25px;
+    
+    color: map-get($grays, 400);
 
     &-small {
         margin-top: 0;
