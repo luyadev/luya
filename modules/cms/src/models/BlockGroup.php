@@ -56,12 +56,4 @@ class BlockGroup extends NgRestModel
             ['identifier', 'unique'],
         ];
     }
-
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['name', 'identifier'],
-            'restupdate' => ['name', 'identifier'],
-        ];
-    }
 }
