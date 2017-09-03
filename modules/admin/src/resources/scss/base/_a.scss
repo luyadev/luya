@@ -1,4 +1,5 @@
-a:not([disabled]):not([type="submit"]), a:not([disabled]):not([type="button"]) {
+a:not([disabled]):not([type="submit"]):not(.mainnav-link):not([type="button"]):not(.mainnav-link):not(.btn),
+a:not([href]):not([tabindex]):not(.mainnav-link) {
     color: inherit;
     &:hover {
         color: inherit;
