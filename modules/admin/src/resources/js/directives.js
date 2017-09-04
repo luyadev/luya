@@ -2779,7 +2779,11 @@
                 $scope.showFoldersToMove = false;
 
                 $scope.openFileDetail = function(file) {
-                    $scope.fileDetail = file;
+                	if ($scope.fileDetail.id == file.id) {
+                		$scope.closeFileDetail();
+                	} else {
+                		$scope.fileDetail = file;
+                	}
                 };
 
                 $scope.closeFileDetail = function() {

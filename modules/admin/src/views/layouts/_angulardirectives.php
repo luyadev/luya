@@ -320,12 +320,9 @@ use luya\admin\Module as Admin;
 <div class="file-detail-view" ng-class="{'open': fileDetail}">
 
     <div class="file-detail-view-head">
-
         <button type="button" class="btn btn-icon btn-download" ng-href="{{fileDetail.source}}" target="_blank">Download</button>
-
         <button type="button" class="btn btn-icon btn-replace ml-2" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">Replace</button>
         <button type="button" class="btn btn-icon btn-cancel file-detail-view-close" ng-click="closeFileDetail()"></button>
-
     </div>
     <table class="table table-striped table-hover table-align-middle mt-4">
         <tbody>
@@ -351,7 +348,6 @@ use luya\admin\Module as Admin;
         </tr>
         </tbody>
     </table>
-
     <div ng-if="fileDetail.isImage">
         <img class="img-fluid" ng-src="{{fileDetail.thumbnailMedium.source}}" />
     </div>
@@ -372,6 +368,7 @@ use luya\admin\Module as Admin;
 
     </form>
 
+	<!--
     <div class="file-detail-view-arrows">
         <div class="file-detail-view-arrow file-detail-view-arrow-prev disabled">
             <i class="material-icons">keyboard_arrow_up</i>
@@ -380,6 +377,7 @@ use luya\admin\Module as Admin;
             <i class="material-icons">keyboard_arrow_down</i>
         </div>
     </div>
+	-->
 
 </div>
 
