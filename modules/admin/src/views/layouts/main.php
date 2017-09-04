@@ -47,7 +47,7 @@ $this->beginPage()
                         </span>
                     </li>
                     <li class="mainnav-entry" tooltip tooltip-text="Dashboard" tooltip-position="right" tooltip-disabled="isHover">
-                        <span class="mainnav-link" ui-sref="home" ui-sref-active="mainnav-link-active">
+                        <span class="mainnav-link" ui-sref="home" ui-sref-active="mainnav-link-active" ng-click="isOpen=0">
                             <i class="mainnav-icon material-icons">home</i>
                             <span class="mainnav-label">
                                 Dashboard
@@ -110,14 +110,14 @@ $this->beginPage()
                         </span>
                     </li>
                     <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-position="right" tooltip-disabled="isHover">
-                        <a class="mainnav-link" ui-sref="custom({templateId:'admin/account/dashboard'})">
+                        <a class="mainnav-link" ui-sref="custom({templateId:'admin/account/dashboard'})" ng-click="isOpen=0">
                             <i class="mainnav-icon material-icons">account_circle</i>
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_profile'); ?>
                             </span>
                         </a>
                     </li>
-                    <li class="mainnav-entry" ng-show="settings.isDeveloper">
+                    <li class="mainnav-entry  hide-on-mobile" ng-show="settings.isDeveloper">
                         <a class="mainnav-link" ng-click="showDebugBar=!showDebugBar">
                             <span class="mainnav-icon">
                                 <img class="mainnav-image-icon" src="<?= $this->getAssetUrl('luya\admin\assets\Main'); ?>/images/luya-logo-small.png" />
