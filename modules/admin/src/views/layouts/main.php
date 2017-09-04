@@ -22,7 +22,7 @@ $this->beginPage()
     </style>
     <?php $this->head(); ?>
 </head>
-<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}}">
+<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}}" ng-class="{'debugToolbarOpen': showDebugBar}">
 <?php $this->beginBody(); ?>
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
@@ -173,38 +173,91 @@ $this->beginPage()
             </div>
         </div>
     </div>
-    
-    <div class="debug" ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}">
-        <button type="button" class="close" ng-click="showDebugBar=!showDebugBar" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="debug-inner">
-            <div class="debug-items" ng-show="debugItem" ng-hide="debugDetail">
-                <ul class="debug-item" ng-repeat="(key, item) in AdminDebugBar.data" ng-class="{'table-primary': key == debugDetailKey}">
-                    <li>URL: {{ item.url }}
 
-                    </li>
-                    <li>Status: {{ item.responseStatus }}</li>
-                    <li>Time: {{ item.parseTime }}ms</li>
-                    <li>
-                        <button class="btn btn-primary" type="button" ng-click="loadDebugDetail(item, key)">Details</button>
-                    </li>
-                </ul>
+    <div class="debug" ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}">
+
+        <ul class="nav nav-tabs debug-tabs">
+            <li class="nav-item">
+                <span class="nav-link active" ng-click="switchTab('infos')"  ng-class="{'active': isTab('infos')}">Network</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link" ng-click="switchTab('infos')" ng-class="{'active': isTab('infos')}">Infos</span>
+            </li>
+        </ul>
+
+        <div class="debug-panel debug-panel-network" ng-class="{'debug-panel-network-open': debugDetail}">
+
+            <div class="debug-network-items">
+                <table class="table table-striped table-sm table-hover table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th>Status</th>
+                            <th>Time (ms)</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="(key, item) in AdminDebugBar.data | orderBy: '-key'">
+                        <td>{{ item.url }}</td>
+                        <td>{{ item.responseStatus }}</td>
+                        <td>{{ item.parseTime }}</td>
+                        <td><button class="btn btn-sm btn-secondary btn-icon" type="button" ng-click="loadDebugDetail(item, key)"><i class="material-icons">search</i></button></td>
+                    </tr>
+                </table>
             </div>
-            <div class="debug-details">
-                <ul class="debug-detail" ng-show="debugDetail">
-                    <li>Request URL: {{debugDetail.url}}</li>
-                    <li>Parse Time: {{debugDetail.parseTime}}</li>
-                    <li>Request Data: {{debugDetail.requestData}}</li>
-                    <li>Response Status: {{debugDetail.responseStatus}}</li>
-                    <li>ResponseData: {{debugDetail.responseData}}</li>
-                    <li>
-                        <button class="btn btn-primary" type="button" ng-click="debugItem=!debugItem; debugDetail=!debugDetail">Hide Details</button>
-                    </li>
-                </ul>
+
+            <div class="debug-network-detail">
+
+                <table class="table table-striped table-bordered table-responsive">
+                    <tr>
+                        <th scope="col" colspan="2">Request</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">URL</th>
+                        <td>{{debugDetail.url}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Time</th>
+                        <td>
+                            <span ng-if="debugDetail.parseTime">{{debugDetail.parseTime}}</span>
+                            <span ng-if="!debugDetail.parseTime">-</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Data</th>
+                        <td>
+                            <code ng-if="debugDetail.requestData">{{debugDetail.requestData}}</code>
+                            <code ng-if="!debugDetail.requestData">-</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Response</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Status</th>
+                        <td>
+                            <span ng-if="debugDetail.responseStatus">{{debugDetail.responseStatus}}</span>
+                            <span ng-if="!debugDetail.responseStatus">-</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Data</th>
+                        <td>
+                            <code ng-if="debugDetail.responseData">{{debugDetail.responseData}}</code>
+                            <code ng-if="!debugDetail.responseData">-</code>
+                        </td>
+                    </tr>
+                </table>
+
             </div>
         </div>
-    </div> <!-- end of debug inner -->
+
+    </div>
+
+
 </div>
 <div class="toasts" ng-repeat="item in toastQueue">
     <div class="modal toasts-modal fade show" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">

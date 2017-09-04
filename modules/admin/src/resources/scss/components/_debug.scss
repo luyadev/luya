@@ -1,61 +1,99 @@
+$tabs-height: 0;
+
+.debugToolbarOpen {
+    padding-bottom: 400px;
+
+    .modal {
+        bottom: 400px;
+    }
+}
+
 .debug {
-    flex: 1 1 auto;
-    width: auto;
-    min-width: 280px;
-    padding: 40px 10px 20px 10px;
-    background: $gray-300;
-    border-radius: $border-radius;
+    background-color: $white;
+    bottom: 0;
+    height: 400px;
+    left: 0;
     position: absolute;
-    box-shadow: $tooltip-box-shadow;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: z-index(debug);
+    right: 0;
+    z-index: z-index(debug-toolbar);
 
-    .close {
-        margin-top: -30px;
-        cursor: pointer;
-        position: absolute;
-        right: 15px;
+    .row,
+    div[class*="col"] {
+        height: 100%;
     }
 
-    &-inner {
-        max-height: 480px;
-        overflow-y: scroll;
-        overflow-x: auto;
+    &-toggled {
+        left: 200px;
     }
+}
 
-    @media (min-width: $mobile-nav-breakpoint) {
-        position: absolute;
-        bottom: 10px;
-        left: 65px;
-        transform: none;
-        top:auto;
+.debug-tabs {
+    background-color: transparent;
+    border-color: theme-color(primary);
+    border-width: 2px;
+    left: 0;
+    padding-left: 80px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(-100%);
 
-        &-toggled {
-            left: 205px;
+    .nav-link {
+        border-color: map-get($grays, 600);
+        border-width: 2px 2px 0;
+        margin-bottom: -1px;
+        pointer-events: all;
+
+        &:hover {
+            border-color: theme-color(primary);
         }
-
-        &:after {
-            border-color: transparent  $gray-300 transparent transparent;
-            border-style: solid;
-            border-width: 5px 5px 5px 0;
-            bottom: 15px;
-            content: "";
-            left: -5px;
-            position: absolute;
+        &.active {
+            border-color: theme-color(primary);
         }
     }
+}
 
-    ul {
-        padding: 5px;
-        border-radius: $border-radius;
-        margin-bottom: 10px;
+.debug-panel {
+    bottom: 0;
+    left: 0;
+    padding: 25px 10px 10px;
+    position: absolute;
+    right: 0;
+    @include clearfix;
+    top: $tabs-height;
 
-        li {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 3px;
-        }
+    .table {
+        margin: 0;
     }
+}
+
+.debug-network-items,
+.debug-network-detail {
+    float: left;
+    height: 100%;
+    overflow: auto;
+}
+
+.debug-network-items {
+    display: block;
+    width: 100%;
+
+    .debug-panel-network-open & {
+        width: 40%;
+    }
+}
+
+.debug-network-detail {
+    display: none;
+
+    .debug-panel-network-open & {
+        display: block;
+        padding-left: 25px;
+        width: 60%;
+    }
+}
+
+.debug-panel-network-open {
+
 }

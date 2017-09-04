@@ -174,13 +174,16 @@
 }
 
 .nw-button:before {
-    font-family: 'Material Icons' !important;
-    font-size: 12px;
+    @include material-icons;
+    font-size: 20px;
     height: 30px;
+    line-height: 30px;
     left: 0;
     position: absolute;
     top: 0;
     width: 30px;
+    background-color: $white;
+    color: $black;
 }
 
 .nw-button.bold:before {
