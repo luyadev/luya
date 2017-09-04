@@ -15,7 +15,7 @@ $btns: (
         )
     ),
     'outline-save': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('success'),
             'color':                theme-color('success'),
             'icon': 'check',
@@ -38,7 +38,7 @@ $btns: (
             )
     ),
     'outline-delete': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('danger'),
             'color':                theme-color('danger'),
             'icon': 'delete',
@@ -61,7 +61,7 @@ $btns: (
             )
     ),
     'outline-cancel': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('danger'),
             'color':                theme-color('danger'),
             'icon': 'clear',
@@ -84,7 +84,7 @@ $btns: (
             )
     ),
     'outline-edit': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('dark'),
             'color':                theme-color('dark'),
             'icon': 'edit',
@@ -131,7 +131,7 @@ $btns: (
     ),
 
     'outline-folder': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('secondary'),
             'color':                theme-color('secondary'),
             'icon': 'subdirectory_arrow_right',
@@ -155,7 +155,7 @@ $btns: (
     ),
 
     'outline-help': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('dark'),
             'color':                $btn-color-dark,
             'icon': 'help',
@@ -179,7 +179,7 @@ $btns: (
     ),
 
     'outline-download': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('success'),
             'color':                theme-color('success'),
             'icon': 'file_download',
@@ -203,7 +203,7 @@ $btns: (
     ),
 
     'outline-upload': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('success'),
             'color':                theme-color('success'),
             'icon': 'file_upload',
@@ -227,7 +227,7 @@ $btns: (
     ),
 
     'outline-config': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('dark'),
             'color':                theme-color('dark'),
             'icon': 'settings',
@@ -251,7 +251,7 @@ $btns: (
     ),
 
     'outline-replace': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('secondary'),
             'color':                theme-color('secondary'),
             'icon': 'find_replace',
