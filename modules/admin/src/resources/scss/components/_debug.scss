@@ -29,7 +29,7 @@ $tabs-height: 0;
 
 .debug-tabs {
     background-color: transparent;
-    border-color: theme-color(primary);
+    border-color: map-get($grays, 900);
     border-width: 2px;
     left: 0;
     padding-left: 80px;
@@ -39,17 +39,23 @@ $tabs-height: 0;
     top: 0;
     transform: translateY(-100%);
 
+    .nav-item:not(:first-of-type) {
+        margin-left: 3px;
+    }
+
     .nav-link {
+        background-color: theme-color(light);
         border-color: map-get($grays, 600);
         border-width: 2px 2px 0;
         margin-bottom: -1px;
         pointer-events: all;
 
         &:hover {
-            border-color: theme-color(primary);
+            border-color: map-get($grays, 900);
         }
         &.active {
-            border-color: theme-color(primary);
+            border-color: map-get($grays, 900);
+            background-color: $white;
         }
     }
 }
