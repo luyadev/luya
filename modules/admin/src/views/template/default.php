@@ -44,7 +44,7 @@ use luya\admin\Module;
 
     <div class="luya-content" ui-view>
 
-        <div class="card mb-2" ng-repeat="item in dashboard">
+        <div class="card mb-2" ng-repeat="item in dashboard" ng-init="item.isToggled = ($index < 3)">
             <div class="card-header" ng-click="item.isToggled = !item.isToggled">
                 <span class="card-title">{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span>
             </div>
