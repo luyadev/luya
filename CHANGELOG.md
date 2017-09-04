@@ -43,6 +43,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1346](https://github.com/luyadev/luya/issues/1346) Fixed bug with ngrest scope delete defintions.
 - [#1355](https://github.com/luyadev/luya/issues/1355) Module migrations uses templates based on input data.
 - [#1248](https://github.com/luyadev/luya/issues/1248) Fixed caption of "block groups" does not obey the user's language option.
 - [#1272](https://github.com/luyadev/luya/issues/1272) Empty layout block reloading problem has been fixed due to rewrite of the cms controllers which reloads the placeholders.
