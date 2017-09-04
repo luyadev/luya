@@ -174,18 +174,44 @@ $this->beginPage()
         </div>
     </div>
 
-    <div class="debug" ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}">
+    <div class="debug" ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}" ng-init="debugTab=1">
 
         <ul class="nav nav-tabs debug-tabs">
-            <li class="nav-item">
-                <span class="nav-link active" ng-click="switchTab('infos')"  ng-class="{'active': isTab('infos')}">Network</span>
+            <li class="nav-item" ng-click="debugTab=1">
+                <span class="nav-link active" ng-click="switchTab('infos')" ng-class="{'active': debugTab==1}">Network</span>
             </li>
-            <li class="nav-item">
-                <span class="nav-link" ng-click="switchTab('infos')" ng-class="{'active': isTab('infos')}">Infos</span>
+            <li class="nav-item" ng-click="debugTab=2">
+                <span class="nav-link" ng-click="switchTab('infos')" ng-class="{'active': debugTab==2}">Infos</span>
             </li>
         </ul>
 
-        <div class="debug-panel debug-panel-network" ng-class="{'debug-panel-network-open': debugDetail}">
+        <div class="debug-panel" ng-if="debugTab==2">
+            <table class="table table-striped table-sm table-bordered table-responsive">
+	            <thead>
+		            <tr>
+		                <th><?= Admin::t('layout_debug_table_key'); ?></th>
+		                <th><?= Admin::t('layout_debug_table_value'); ?></th>
+		            </tr>
+	            </thead>
+	            <tr><td><?= Admin::t('layout_debug_luya_version'); ?>:</td><td><?= \luya\Boot::VERSION; ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_id'); ?>:</td><td><?= Yii::$app->id ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_sitetitle'); ?>:</td><td><?= Yii::$app->siteTitle ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_remotetoken'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_assetmanager_forcecopy'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_transfer_exceptions'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_caching'); ?>:</td><td><?= (Yii::$app->has('cache')) ? Yii::$app->cache->className() : $this->context->colorizeValue(false); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_yii_debug'); ?>:</td><td><?= $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_yii_env'); ?>:</td><td><?= YII_ENV; ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_yii_timezone'); ?>:</td><td><?= Yii::$app->timeZone; ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_php_timezone'); ?>:</td><td><?= date_default_timezone_get(); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_php_ini_memory_limit'); ?>:</td><td><?= ini_get('memory_limit'); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_php_ini_max_exec'); ?>:</td><td><?= ini_get('max_execution_time'); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_php_ini_post_max_size'); ?>:</td><td><?= ini_get('post_max_size'); ?></td></tr>
+	            <tr><td><?= Admin::t('layout_debug_php_ini_upload_max_file'); ?>:</td><td><?= ini_get('upload_max_filesize'); ?></td></tr>
+            </table>
+        </div>
+
+        <div class="debug-panel debug-panel-network" ng-class="{'debug-panel-network-open': debugDetail}" ng-if="debugTab==1">
 
             <div class="debug-network-items">
                 <table class="table table-striped table-sm table-hover table-bordered table-responsive">
