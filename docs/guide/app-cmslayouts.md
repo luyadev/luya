@@ -33,7 +33,7 @@ In order to provide a json, use the same name es for the layout with the ending 
         [
             {"cols": 8, "var": "left", "label": "Main content Left"},
             {"cols": 4, "var": "right", "label": "Sidebar Right"}
-        ],
+        ]
     ]
 }
 ```
