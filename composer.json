@@ -23,7 +23,6 @@
         "phpmailer/phpmailer": "~5.0"
     },
     "require-dev" : {
-        "nadar/github-markdown-fixer" : "^1.0",
         "luyadev/luya-testsuite" : "^1.0@dev",
         "satooshi/php-coveralls": "~1.0"
     },
