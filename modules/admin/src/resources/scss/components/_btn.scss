@@ -268,7 +268,6 @@ $btns: (
     padding: 6px 10px 6px 10px;
     cursor: pointer;
 
-
     .material-icons {
         vertical-align: middle;
     }
@@ -279,6 +278,9 @@ $btns: (
         border-radius: 0;
     }
 
+    > .material-icons:first-of-type {
+        margin-left: -2px;
+    }
 
     &-icon {
         position: relative;
@@ -294,6 +296,9 @@ $btns: (
     }
 
     &:hover {
+        background: theme-color('success');
+        border-color: theme-color('success');
+        color: $btn-color-light !important;
 
         &:not([class*=" btn-"]) {
             background-color: darken(map-get($grays, 400), 7.5%);
@@ -304,11 +309,8 @@ $btns: (
 
             background-color: darken(map-get($grays, 400), 7.5%);
             border-color: darken(map-get($grays, 400), 10%);
-
         }
     }
-
-
 
     @each $iconName, $iconValues in $btns {
 
