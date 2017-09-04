@@ -1066,7 +1066,7 @@
     });
     
     /**
-     * <zaa-async-value model="theModel" label="Hello world" fields="{foo,baar}" />
+     * <zaa-async-value model="theModel" label="Hello world" api="admin/admin-users" fields="[foo,bar]" />
      */
     zaa.directive("zaaAsyncValue", function(){
         return {
@@ -1098,10 +1098,11 @@
             	
             	$scope.resetValue = function() {
             		$scope.model = 0;
+            		$scope.value = null;
             	};
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><span ng-bind="value"></span><button type="button" class="btn btn-cancel" ng-click="resetValue()" ng-show="model"></button></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><span ng-bind="value"></span><button type="button" class="btn btn-icon btn-cancel" ng-click="resetValue()" ng-show="model"></button></div></div>';
             }
         }
     });
