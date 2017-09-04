@@ -118,6 +118,30 @@ $btns: (
             )
     ),
 
+    'add-folder': (
+            'background-color':     theme-color('success'),
+            'border-color':         theme-color('success'),
+            'color':                $btn-color-light,
+            'icon': 'subdirectory_arrow_right',
+            'hover': (
+                    'background-color':     theme-color('success'),
+                    'border-color':         theme-color('success'),
+                    'color':                $btn-color-light,
+            )
+    ),
+
+    'outline-folder': (
+            'background-color':     map-get($grays, 200),
+            'border-color':         theme-color('secondary'),
+            'color':                theme-color('secondary'),
+            'icon': 'subdirectory_arrow_right',
+            'hover': (
+                    'background-color':     theme-color('secondary'),
+                    'border-color':         theme-color('secondary'),
+                    'color':                map-get($colors, white)
+            )
+    ),
+
     'help': (
             'background-color':     theme-color('light'),
             'border-color':         theme-color('light'),
@@ -251,7 +275,7 @@ $btns: (
     ),
 
     'outline-move': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('secondary'),
             'color':                theme-color('secondary'),
             'icon': 'subdirectory_arrow_right',
@@ -278,8 +302,9 @@ $btns: (
         border-radius: 0;
     }
 
-    > .material-icons:first-of-type {
-        margin-left: -2px;
+    &:not([class*=" outline-"][class^=" outline-"]) {
+        background-color:  map-get($colors, gray-light);
+        color: $btn-color-dark;
     }
 
     &-icon {
@@ -295,20 +320,15 @@ $btns: (
         }
     }
 
+    &-outline {
+        background-color: transparent;
+    }
+
     &:hover {
-        background: theme-color('success');
-        border-color: theme-color('success');
-        color: $btn-color-light !important;
-
-        &:not([class*=" btn-"]) {
-            background-color: darken(map-get($grays, 400), 7.5%);
-            border-color: darken(map-get($grays, 400), 10%);
-        }
-
-        &.btn-sm, &.btn-lg {
-
-            background-color: darken(map-get($grays, 400), 7.5%);
-            border-color: darken(map-get($grays, 400), 10%);
+        &:not([class*=" btn-"]), &.btn-sm, &.btn-lg {
+            background-color: darken(map-get($colors, gray-light), 7.5%);
+            border-color: darken(map-get($colors, gray-light), 10%);
+            color: $btn-color-dark;
         }
     }
 
@@ -365,10 +385,9 @@ $btns: (
     background: transparent;
 
     &:hover {
-        color: theme-color(primary);
+    color: theme-color(primary);
     }
 }
-
 
 // ==================================================
 // Custom admin buttons
@@ -383,7 +402,7 @@ $btns: (
     }
 }
 
-// Label outside of buttons
+    // Label outside of buttons
 
 .btn-label {
     margin-left: 10px;
