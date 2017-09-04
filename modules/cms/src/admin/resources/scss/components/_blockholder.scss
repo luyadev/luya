@@ -1,8 +1,10 @@
 .blockholder-column {
-    max-width: 275px;
-    min-width: 275px;
+    max-width: 255px;
+    min-width: 255px;
     padding-left: 0;
     padding-right: 0;
+    transform: translateZ(0);
+    display: none;
 }
 
 .blockholder {
@@ -10,17 +12,11 @@
     color: map-get($grays, 500);
     display: block;
     height: 100%;
-    max-width: 275px;
-    min-width: 275px;
     padding: 15px;
-    position: relative;
+    position: fixed;
     width: 100%;
     user-select: none;
     @include overflow-no-scrollbars;
-
-    @media (min-width: $mobile-nav-breakpoint) {
-        position: fixed;
-    }
 }
 
 .blockholder-search {

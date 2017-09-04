@@ -15,8 +15,14 @@
         > .col,
         > .col > .row > .col {
             align-items: stretch;
-            display: flex;
+            // display: flex;
             flex-direction: column;
+        }
+    }
+    @media (min-width: $mobile-nav-breakpoint) {
+        > .row > .col,
+        > .row > .col > .row > .col {
+            display: flex;
         }
     }
 }
