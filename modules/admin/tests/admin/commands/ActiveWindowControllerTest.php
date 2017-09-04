@@ -3,8 +3,8 @@
 namespace admintests\admin\commands;
 
 use Yii;
-use luya\console\commands\ActiveWindowController;
 use admintests\AdminTestCase;
+use luya\admin\commands\ActiveWindowController;
 
 class ActiveWindowControllerTest extends AdminTestCase
 {
@@ -52,7 +52,7 @@ class MeinTestActiveWindow extends ActiveWindow
     public function index()
     {
         return $this->render('index', [
-            'id' => $this->itemId,
+            'model' => $this->model,
         ]);
     }
 }

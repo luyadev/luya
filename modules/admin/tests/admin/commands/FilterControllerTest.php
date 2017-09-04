@@ -19,7 +19,7 @@ class FilterControllerTest extends AdminTestCase
 <?php
 
 namespace app\filters;
-        		
+
 use luya\admin\base\Filter;
 
 /**
@@ -50,6 +50,8 @@ class className extends Filter
     }
 }
 EOT;
-        $this->assertSame($buff, $ctrl->generateClassView('idf', 'Nam', ['method' => ['arg' => 'v', 'foo' => 'bar']], 'className'));
+
+        $render = $this->removeNewline($ctrl->generateClassView('idf', 'Nam', ['method' => ['arg' => 'v', 'foo' => 'bar']], 'className'));
+        $this->assertSame($this->removeNewline($buff), $render);
     }
 }
