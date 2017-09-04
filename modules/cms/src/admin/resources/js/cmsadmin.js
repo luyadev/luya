@@ -1408,6 +1408,14 @@
 		$scope.$watch(function() { return $scope.block.variation }, function(n, o) {
 			$scope.evalVariationVisbility(n);
 		});
+		
+		$scope.getInfo = function(varFieldName) {
+			if ($scope.block.field_help.hasOwnProperty(varFieldName)) {
+				return $scope.block.field_help[varFieldName];
+			}
+			
+			return false;
+		}
 
 		$scope.evalVariationVisbility = function(variatenName) {
 			if ($scope.block.variations.hasOwnProperty(variatenName)) {

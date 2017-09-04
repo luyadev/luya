@@ -76,6 +76,17 @@ In order to retrieve values from configurations (`$this->[METHOD]`):
 
 Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
 
+Define help informations for the admin view:
+
+```php
+public function getFieldHelp()
+{
+    return [
+        'content' => 'An explain example of what this var does it where its displayed.',
+    ];
+}
+```
+
 ## Register and import
 
 After creating a Block, you have to *Import* it into your application. The reason behind the import process is to avoid rely on database structure and to work with php files you can also check into version controller system. Run the [Import Command](luya-console.md):
@@ -221,8 +232,6 @@ $this->createAjaxLink('HellWorld', ['time' => time()]);
 ```
 
 You could store this created link from above inside your extras vars and pass it to the javascript.
-
-###3 Callback parameters
 
 You can pass aditional values to the callback by using the post ajax method and collect them in your callback via Yii::$app->request->post(). The get parameters are used to resolve the callback.
 

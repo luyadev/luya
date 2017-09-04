@@ -29,6 +29,13 @@ class ColorWheelTestBlock extends PhpBlock
     {
         return ProjectGroup::class;
     }
+    
+    public function getFieldHelp()
+    {
+    	return [
+    			'entries' => 'alsdfjalsdkfjasd',
+    	];
+    }
 
     /**
      * @inheritDoc

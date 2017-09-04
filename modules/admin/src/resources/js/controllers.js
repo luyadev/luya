@@ -505,12 +505,21 @@
 			var deferred = $q.defer();
 			$http.get($scope.config.apiEndpoint + '/services').then(function(serviceResponse) {
 				$scope.service = serviceResponse.data.service;
+				$scope.serviceResponse = serviceResponse.data;
 				$scope.evalSettings(serviceResponse.data._settings);
 				deferred.resolve();
 			});
 			
 			return deferred.promise;
 		};
+		
+		$scope.getFieldHelp = function(fieldName) {
+			if ($scope.serviceResponse._hints.hasOwnProperty(fieldName)) {
+				return $scope.serviceResponse._hints[fieldName];
+			}
+			
+			return false;
+		}
 		
 		$scope.loadList = function(pageId) {
 			if (pageId == undefined && $scope.pager) {
