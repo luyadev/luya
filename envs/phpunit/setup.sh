@@ -2,7 +2,7 @@
 
 # Database credentials
 user="root"
-password="root"
+password="defaultPassword"
 db_name="luya_env_phpunit"
 
 cd public_html
