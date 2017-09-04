@@ -67,7 +67,12 @@ $tabs-height: 0;
     position: absolute;
     right: 0;
     @include clearfix;
+    overflow: auto;
     top: $tabs-height;
+
+    &-network {
+        overflow: hidden;
+    }
 
     .table {
         margin: 0;
