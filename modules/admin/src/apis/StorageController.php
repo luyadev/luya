@@ -198,7 +198,7 @@ class StorageController extends RestController
         if ($file = Yii::$app->storage->getFile($fileId)) {
             $serverSource = $file->getServerSource();
             if (is_uploaded_file($raw['tmp_name'])) {
-                if (Storage::replaceFile($serverSource, $raw['tmp_name'])) {
+                if (Storage::replaceFile($serverSource, $raw['tmp_name'], $raw['name'])) {
                     foreach (Yii::$app->storage->findImages(['file_id' => $file->id]) as $img) {
                         Storage::removeImage($img->id, false);
                     }

@@ -2515,20 +2515,21 @@
                 	
                 	file.upload.then(function (response) {
                         $timeout(function () {
-                            file.result = response.data;
-                            $scope.filesDataReload().then(function() {
-                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
-                            	var random = (new Date()).toString();
-                            	if (fileref.isImage) {
-	                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
-	                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
-	                            }
-                            	
-                            	$scope.fileDetail = fileref;
-                            	
-                            	LuyaLoading.stop();
-                            	AdminToastService.success('the file has been replaced successfull.', 4000);
-                            });
+                        	LuyaLoading.stop();
+                        	if (!response.data) {
+                        		AdminToastService.error('Error while replacing the file.', 6000);
+                        	} else {
+	                            $scope.filesDataReload().then(function() {
+	                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
+	                            	var random = (new Date()).toString();
+	                            	if (fileref.isImage) {
+		                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
+		                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+		                            }
+	                            	$scope.fileDetail = fileref;
+	                            	AdminToastService.success('the file has been replaced successfull.', 4000);
+	                            });
+                        	}
                         });
                     });
                 };
