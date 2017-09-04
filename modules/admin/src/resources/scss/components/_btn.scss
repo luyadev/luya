@@ -15,7 +15,7 @@ $btns: (
         )
     ),
     'outline-save': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('success'),
             'color':                theme-color('success'),
             'icon': 'check',
@@ -38,7 +38,7 @@ $btns: (
             )
     ),
     'outline-delete': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('danger'),
             'color':                theme-color('danger'),
             'icon': 'delete',
@@ -61,7 +61,7 @@ $btns: (
             )
     ),
     'outline-cancel': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('danger'),
             'color':                theme-color('danger'),
             'icon': 'clear',
@@ -84,7 +84,7 @@ $btns: (
             )
     ),
     'outline-edit': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('dark'),
             'color':                theme-color('dark'),
             'icon': 'edit',
@@ -118,6 +118,30 @@ $btns: (
             )
     ),
 
+    'add-folder': (
+            'background-color':     theme-color('success'),
+            'border-color':         theme-color('success'),
+            'color':                $btn-color-light,
+            'icon': 'subdirectory_arrow_right',
+            'hover': (
+                    'background-color':     theme-color('success'),
+                    'border-color':         theme-color('success'),
+                    'color':                $btn-color-light,
+            )
+    ),
+
+    'outline-folder': (
+            'background-color':     none,
+            'border-color':         theme-color('secondary'),
+            'color':                theme-color('secondary'),
+            'icon': 'subdirectory_arrow_right',
+            'hover': (
+                    'background-color':     theme-color('secondary'),
+                    'border-color':         theme-color('secondary'),
+                    'color':                map-get($colors, white)
+            )
+    ),
+
     'help': (
             'background-color':     theme-color('light'),
             'border-color':         theme-color('light'),
@@ -131,7 +155,7 @@ $btns: (
     ),
 
     'outline-help': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('dark'),
             'color':                $btn-color-dark,
             'icon': 'help',
@@ -155,7 +179,7 @@ $btns: (
     ),
 
     'outline-download': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('success'),
             'color':                theme-color('success'),
             'icon': 'file_download',
@@ -179,7 +203,7 @@ $btns: (
     ),
 
     'outline-upload': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('success'),
             'color':                theme-color('success'),
             'icon': 'file_upload',
@@ -203,7 +227,7 @@ $btns: (
     ),
 
     'outline-config': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('dark'),
             'color':                theme-color('dark'),
             'icon': 'settings',
@@ -227,7 +251,7 @@ $btns: (
     ),
 
     'outline-replace': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('secondary'),
             'color':                theme-color('secondary'),
             'icon': 'find_replace',
@@ -251,7 +275,7 @@ $btns: (
     ),
 
     'outline-move': (
-            'background-color':     map-get($grays, 200),
+            'background-color':     none,
             'border-color':         theme-color('secondary'),
             'color':                theme-color('secondary'),
             'icon': 'subdirectory_arrow_right',
@@ -268,7 +292,6 @@ $btns: (
     padding: 6px 10px 6px 10px;
     cursor: pointer;
 
-
     .material-icons {
         vertical-align: middle;
     }
@@ -279,6 +302,10 @@ $btns: (
         border-radius: 0;
     }
 
+    &:not([class*=" outline-"][class^=" outline-"]) {
+        background-color:  map-get($colors, gray-light);
+        color: $btn-color-dark;
+    }
 
     &-icon {
         position: relative;
@@ -293,22 +320,17 @@ $btns: (
         }
     }
 
-    &:hover {
-
-        &:not([class*=" btn-"]) {
-            background-color: darken(map-get($grays, 400), 7.5%);
-            border-color: darken(map-get($grays, 400), 10%);
-        }
-
-        &.btn-sm, &.btn-lg {
-
-            background-color: darken(map-get($grays, 400), 7.5%);
-            border-color: darken(map-get($grays, 400), 10%);
-
-        }
+    &-outline {
+        background-color: transparent;
     }
 
-
+    &:hover {
+        &:not([class*=" btn-"]), &.btn-sm, &.btn-lg {
+            background-color: darken(map-get($colors, gray-light), 7.5%);
+            border-color: darken(map-get($colors, gray-light), 10%);
+            color: $btn-color-dark;
+        }
+    }
 
     @each $iconName, $iconValues in $btns {
 
@@ -363,10 +385,9 @@ $btns: (
     background: transparent;
 
     &:hover {
-        color: theme-color(primary);
+    color: theme-color(primary);
     }
 }
-
 
 // ==================================================
 // Custom admin buttons
@@ -381,7 +402,7 @@ $btns: (
     }
 }
 
-// Label outside of buttons
+    // Label outside of buttons
 
 .btn-label {
     margin-left: 10px;
