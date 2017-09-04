@@ -40,7 +40,7 @@
 @import "../../../vendor/twbs/bootstrap/scss/variables";
 @import "../../../vendor/twbs/bootstrap/scss/mixins";
 @import "../../../vendor/twbs/bootstrap/scss/print";
-@import "../../../vendor/twbs/bootstrap/scss/reboot";
+// @import "../../../vendor/twbs/bootstrap/scss/reboot"; Disabled, causing issues, See https://github.com/twbs/bootstrap/issues/19402
 @import "../../../vendor/twbs/bootstrap/scss/type";
 @import "../../../vendor/twbs/bootstrap/scss/images";
 @import "../../../vendor/twbs/bootstrap/scss/code";
@@ -82,7 +82,7 @@
 // ==================================================
 
 @import "base/html";
-// @import "base/_a";  // extend bootstrap a styling
+@import "base/_reboot";  // modified bootstrap core file
 
 // ==================================================
 // Components
