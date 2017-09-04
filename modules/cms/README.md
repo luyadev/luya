@@ -8,6 +8,8 @@ LUYA CMS
 
 This module provides a full functional Content Management System to added contents based on Blocks.
 
+![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-rc4.png)
+
 To use the LUYA CMS module you have to run a LUYA Application which is provided by the Luya core.
 
 For installation and usage please check: [LUYA.IO](https://luya.io)
