@@ -3252,11 +3252,15 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
             					});
             				});
             			}
-            		})
+            		});
             	});
+            	
+            	$scope.resetValue = function() {
+            		$scope.model = 0;
+            	};
             },
             template: function() {
-                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><span ng-bind="value"></span></div></div>';
+                return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}"><div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div><div class="form-side"><span ng-bind="value"></span><button type="button" class="btn btn-cancel" ng-click="resetValue()" ng-show="model"></button></div></div>';
             }
         }
     });
