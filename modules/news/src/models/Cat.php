@@ -50,7 +50,7 @@ class Cat extends NgRestModel
     public function attributeLabels()
     {
     	return [
-    			'title' => Module::t('cat_title'),
+    		'title' => Module::t('cat_title'),
     	];
     }
 

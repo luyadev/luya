@@ -351,7 +351,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                     $return[] = [
                         'html' => '<div class="form-i18n">
                                        <label class="form-i18n-label">
-                                           ' . $element['alias'] . '
+                                           ' . $element['alias'] . $this->createFieldHelpButton($element, $configContext) . '
                                        </label>
                                            <div class="row">',
                     ];
@@ -375,11 +375,18 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
         return [
             [
-                'html' => $this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], false),
+            	'html' => $this->createFieldHelpButton($element, $configContext) . $this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], false),
             ],
         ];
     }
 
+    private function createFieldHelpButton(array $element, $configContext)
+    {
+    	if ($configContext !== self::TYPE_LIST) {
+    		return '<span ng-if="getFieldHelp(\''.$element['name'].'\')" class="btn btn-icon btn-help" tooltip tooltip-expression="getFieldHelp(\''.$element['name'].'\')"></span>';
+    	}
+    }
+    
     private function renderElementPlugins($configContext, $typeConfig, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)
     {
         $obj = NgRest::createPluginObject($typeConfig['class'], $elmnName, $elmnAlias, $elmni18n, $typeConfig['args']);
