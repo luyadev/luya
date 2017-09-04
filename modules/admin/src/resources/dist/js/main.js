@@ -2745,6 +2745,12 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
     				}
     			};
     			
+    			$scope.$watch('input.showWindow', function(n, o) {
+    				if (n !== o && n == 1) {
+    					$scope.$parent.loadService();
+    				}
+    			});
+    			
     			/**
     			 * @param integer $value contains the primary key
     			 * @param array $row contains the full row from the crud loader model in order to display data.
