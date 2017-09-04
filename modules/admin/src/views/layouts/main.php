@@ -22,7 +22,7 @@ $this->beginPage()
     </style>
     <?php $this->head(); ?>
 </head>
-<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}}">
+<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}}" ng-class="{'debugToolbarOpen': showDebugBar}">
 <?php $this->beginBody(); ?>
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
@@ -173,38 +173,117 @@ $this->beginPage()
             </div>
         </div>
     </div>
-    
-    <div class="debug" ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}">
-        <button type="button" class="close" ng-click="showDebugBar=!showDebugBar" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="debug-inner">
-            <div class="debug-items" ng-show="debugItem" ng-hide="debugDetail">
-                <ul class="debug-item" ng-repeat="(key, item) in AdminDebugBar.data" ng-class="{'table-primary': key == debugDetailKey}">
-                    <li>URL: {{ item.url }}
 
-                    </li>
-                    <li>Status: {{ item.responseStatus }}</li>
-                    <li>Time: {{ item.parseTime }}ms</li>
-                    <li>
-                        <button class="btn btn-primary" type="button" ng-click="loadDebugDetail(item, key)">Details</button>
-                    </li>
-                </ul>
+    <div class="debug" ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}" ng-init="debugTab=1">
+
+        <ul class="nav nav-tabs debug-tabs">
+            <li class="nav-item" ng-click="debugTab=1">
+                <span class="nav-link active" ng-click="switchTab('infos')" ng-class="{'active': debugTab==1}">Network</span>
+            </li>
+            <li class="nav-item" ng-click="debugTab=2">
+                <span class="nav-link" ng-click="switchTab('infos')" ng-class="{'active': debugTab==2}">Infos</span>
+            </li>
+        </ul>
+
+        <div class="debug-panel debug-panel-network" ng-class="{'debug-panel-network-open': debugDetail}" ng-if="debugTab==1">
+
+            <div class="debug-network-items">
+                <table class="table table-striped table-sm table-hover table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th>Status</th>
+                            <th>Time (ms)</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="(key, item) in AdminDebugBar.data | orderBy: '-key'">
+                        <td>{{ item.url }}</td>
+                        <td>{{ item.responseStatus }}</td>
+                        <td>{{ item.parseTime }}</td>
+                        <td><button class="btn btn-sm btn-secondary btn-icon" type="button" ng-click="loadDebugDetail(item, key)"><i class="material-icons">search</i></button></td>
+                    </tr>
+                </table>
             </div>
-            <div class="debug-details">
-                <ul class="debug-detail" ng-show="debugDetail">
-                    <li>Request URL: {{debugDetail.url}}</li>
-                    <li>Parse Time: {{debugDetail.parseTime}}</li>
-                    <li>Request Data: {{debugDetail.requestData}}</li>
-                    <li>Response Status: {{debugDetail.responseStatus}}</li>
-                    <li>ResponseData: {{debugDetail.responseData}}</li>
-                    <li>
-                        <button class="btn btn-primary" type="button" ng-click="debugItem=!debugItem; debugDetail=!debugDetail">Hide Details</button>
-                    </li>
-                </ul>
+
+            <div class="debug-network-detail">
+
+                <table class="table table-striped table-bordered table-responsive">
+                    <tr>
+                        <th scope="col" colspan="2">Request</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">URL</th>
+                        <td>{{debugDetail.url}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Time</th>
+                        <td>
+                            <span ng-if="debugDetail.parseTime">{{debugDetail.parseTime}}</span>
+                            <span ng-if="!debugDetail.parseTime">-</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Data</th>
+                        <td>
+                            <code ng-if="debugDetail.requestData">{{debugDetail.requestData}}</code>
+                            <code ng-if="!debugDetail.requestData">-</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Response</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Status</th>
+                        <td>
+                            <span ng-if="debugDetail.responseStatus">{{debugDetail.responseStatus}}</span>
+                            <span ng-if="!debugDetail.responseStatus">-</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Data</th>
+                        <td>
+                            <code ng-if="debugDetail.responseData">{{debugDetail.responseData}}</code>
+                            <code ng-if="!debugDetail.responseData">-</code>
+                        </td>
+                    </tr>
+                </table>
+
             </div>
         </div>
-    </div> <!-- end of debug inner -->
+
+        <div class="debug-panel" ng-if="debugTab==2">
+            <table class="table table-striped table-sm table-bordered table-responsive">
+                <thead>
+                <tr>
+                    <th><?= Admin::t('layout_debug_table_key'); ?></th>
+                    <th><?= Admin::t('layout_debug_table_value'); ?></th>
+                </tr>
+                </thead>
+                <tr><td><?= Admin::t('layout_debug_luya_version'); ?>:</td><td><?= \luya\Boot::VERSION; ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_id'); ?>:</td><td><?= Yii::$app->id ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_sitetitle'); ?>:</td><td><?= Yii::$app->siteTitle ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_remotetoken'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_assetmanager_forcecopy'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_transfer_exceptions'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_caching'); ?>:</td><td><?= (Yii::$app->has('cache')) ? Yii::$app->cache->className() : $this->context->colorizeValue(false); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_yii_debug'); ?>:</td><td><?= $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_yii_env'); ?>:</td><td><?= YII_ENV; ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_yii_timezone'); ?>:</td><td><?= Yii::$app->timeZone; ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_php_timezone'); ?>:</td><td><?= date_default_timezone_get(); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_php_ini_memory_limit'); ?>:</td><td><?= ini_get('memory_limit'); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_php_ini_max_exec'); ?>:</td><td><?= ini_get('max_execution_time'); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_php_ini_post_max_size'); ?>:</td><td><?= ini_get('post_max_size'); ?></td></tr>
+                <tr><td><?= Admin::t('layout_debug_php_ini_upload_max_file'); ?>:</td><td><?= ini_get('upload_max_filesize'); ?></td></tr>
+            </table>
+        </div>
+
+    </div>
+
+
 </div>
 <div class="toasts" ng-repeat="item in toastQueue">
     <div class="modal toasts-modal fade show" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
