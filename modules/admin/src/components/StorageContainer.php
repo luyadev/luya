@@ -423,7 +423,7 @@ class StorageContainer extends Component
     	}
     	 
     	if (!in_array($fileInfo->extension, $extensionByMimeType)) {
-    		throw new Exception("The given file extension is not matching its mime type.");
+    		throw new Exception("The given file extension {$fileInfo->extension} is not matching its mime type.");
     	}
     	 
     	foreach ($extensionByMimeType as $extension) {

@@ -503,6 +503,60 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 	return service;
 });
 
+/*
+ * 
+ * Saving data in Html Storage
+ * 
+ *	$scope.isHover = HtmlStorage.getValue('sidebarToggleState', false); 
+ *		
+ *	$scope.toggleMainNavSize = function() {
+ *	    $scope.isHover = !$scope.isHover;
+ *	    HtmlStorage.setValue('sidebarToggleState', $scope.isHover);
+ *	}
+ */
+zaa.factory('HtmlStorage', function() {
+	var service = {
+		
+		data: {},
+		
+		isLoaded : false,
+		
+		loadData : function() {
+			if (!service.isLoaded) {
+				if (localStorage.getItem("HtmlStorage")) {
+					var data = angular.fromJson(localStorage.getItem('HtmlStorage'));
+					
+					service.data = data;
+				}
+			}
+		},
+		
+		saveData : function() {
+			localStorage.removeItem('HtmlStorage');
+			localStorage.setItem('HtmlStorage', angular.toJson(service.data));
+		},
+		
+		getValue : function(key, defaultValue) {
+			service.loadData();
+			
+			if (service.data.hasOwnProperty(key)) {
+				return service.data[key];
+			}
+			
+			return defaultValue;
+		},
+		
+		setValue : function(key, value) {
+			service.loadData();
+			
+			service.data[key] = value;
+			
+			service.saveData();
+		}
+	};
+	
+	return service;
+});
 
 // end of use strict
 })();

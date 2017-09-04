@@ -851,7 +851,7 @@
         };
 	});
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, AdminDebugBar, LuyaLoading, AdminToastService, AdminClassService) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, HtmlStorage, CacheReloadService, AdminDebugBar, LuyaLoading, AdminToastService, AdminClassService) {
 	
 		$scope.AdminClassService = AdminClassService;
 		
@@ -863,10 +863,21 @@
 		
 		$scope.reload = function() {
 			CacheReloadService.reload();
-		}
+		};
 	
-
+		/* Main nav sidebar toggler */
+		
+		$scope.isHover = HtmlStorage.getValue('sidebarToggleState', false);
+		
+		$scope.toggleMainNavSize = function() {
+			$scope.isHover = !$scope.isHover;
+			HtmlStorage.setValue('sidebarToggleState', $scope.isHover);
+		}
+		
+		/* PROFIL SETTINS */
+		
 		$scope.profile = {};
+
 		$scope.settings = {};
 		
 		$scope.getProfileAndSettings = function() {
@@ -875,6 +886,8 @@
 				$scope.settings  = success.data.settings;
 			});
 		};
+		
+		/* Browser infos */
 
 		$scope.browser = null;
 

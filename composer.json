@@ -23,7 +23,6 @@
         "phpmailer/phpmailer": "~5.0"
     },
     "require-dev" : {
-        "nadar/github-markdown-fixer" : "^1.0",
         "luyadev/luya-testsuite" : "^1.0@dev",
         "satooshi/php-coveralls": "~1.0"
     },
@@ -41,5 +40,14 @@
             "dev-master": "1.0.x-dev"
         }
     },
-    "bin" : ["core/bin/luya"]
+    "bin" : ["core/bin/luya"],
+    "config": {
+        "platform": {"php": "7.0"}
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

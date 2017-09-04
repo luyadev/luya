@@ -9,6 +9,7 @@ This document will help you upgrading from a LUYA Version into another. For more
 - [#1408](https://github.com/luyadev/luya/issues/1408) THe CMS Module is now bootstraped over the luya composer plugin if you want explicit call the bootstrap process use `'bootstrap' => ['luya\cms\frontend\Bootstrap']` inside your config.
 + [#1414](https://github.com/luyadev/luya/issues/1414) Renamed Angular Helper methods, removed all the zaa prefixes.
 + [#1369](https://github.com/luyadev/luya/issues/1369) FlowActiveWindow dropped property `$modelClass` and does need to be configured anymore.
++ [#1308](https://github.com/luyadev/luya/issues/1308) API Breaks.
 
 1.0.0-RC3 (11. April 2017)
 -------------------

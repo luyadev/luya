@@ -585,7 +585,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             $scope = $arrayConfig[0];
             $fields = $arrayConfig[1];
 
-            if ($scope == 'delete') {
+            if ($scope == 'delete' || (is_array($scope) && in_array('delete', $scope))) {
                 $config->delete = $fields;
             } else {
                 $this->ngRestConfigDefine($config, $scope, $fields);

@@ -3,22 +3,39 @@
 namespace luya\news\models;
 
 use luya\news\admin\Module;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * News Category Model
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Cat extends \luya\admin\ngrest\base\NgRestModel
+class Cat extends NgRestModel
 {
+	/**
+	 * @inheritdoc
+	 */
     public $i18n = ['title'];
     
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+    	return 'news_cat';
+    }
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function eventBeforeDelete($event)
     {
         if (count($this->articles) > 0) {
@@ -27,19 +44,19 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
         }
     }
     
-    public static function tableName()
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
     {
-        return 'news_cat';
+    	return [
+    			'title' => Module::t('cat_title'),
+    	];
     }
 
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['title'],
-            'restupdate' => ['title'],
-        ];
-    }
-
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -48,17 +65,16 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Model::attributeLabels()
+     * @inheritdoc
      */
-    public function attributeLabels()
+    public static function ngRestApiEndpoint()
     {
-        return [
-            'title' => Module::t('cat_title'),
-        ];
+    	return 'api-news-cat';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -66,21 +82,15 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
         ];
     }
 
-    public static function ngRestApiEndpoint()
+    /**
+     * @inheritdoc
+     */
+    public function ngRestScopes()
     {
-        return 'api-news-cat';
-    }
-
-    public function ngRestConfig($config)
-    {
-        $this->ngRestConfigDefine($config, 'list', ['title']);
-
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
-
-        $config->delete = true;
-
-        return $config;
+    	return [
+    		[['list', 'create', 'update'], ['title']],
+    		[['delete'], true],
+    	];
     }
     
     /**
@@ -88,6 +98,6 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
      */
     public function getArticles()
     {
-        return $this->hasMany(Article::className(), ['cat_id' => 'id']);
+        return $this->hasMany(Article::class, ['cat_id' => 'id']);
     }
 }

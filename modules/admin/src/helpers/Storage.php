@@ -165,13 +165,14 @@ class Storage
      * The replaced file will have the name of the $oldFileSource but the file will be the content of the $newFileSource.
      *
      * @param string $oldFileSource The path to the old file which should be replace by the new file. e.g `path/to/old.jpp`
-     * @param string $newFileSource The path to the new file which is going to have the same name as the old file e.g. `path/of/new.jpg`.
+     * @param string $newFileSource The path to the new file which is going to have the same name as the old file e.g. `path/of/new.jpg`.  $_FILES['tmp_name']
+     * @param string $newFileName The new name of the file which is uploaded, mostly given from $_FILES['name']
      * @return boolean Whether moving was successfull or not.
      */
-    public static function replaceFile($oldFileSource, $newFileSource)
+    public static function replaceFile($oldFileSource, $newFileSource, $newFileName)
     {
     	try {
-    		Yii::$app->storage->ensureFileUpload($newFileSource, $newFileSource);
+    		Yii::$app->storage->ensureFileUpload($newFileSource, $newFileName);
     	} catch (\Exception $e) {
     		return false;
     	}
