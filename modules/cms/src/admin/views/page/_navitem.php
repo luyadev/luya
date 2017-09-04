@@ -8,7 +8,7 @@ use luya\helpers\Html;
 <div class="card">
     <div class="card-body">
         <div class="empty-placeholder" ng-if="placeholder.__nav_item_page_block_items.length == 0" dnd dnd-drag-disabled dnd-model="placeholder" dnd-isvalid="true" dnd-ondrop="dropItemPlaceholder(dragged,dropped,position)" dnd-css="{onDrag: 'empty-placeholder--is-dragging', onHover: 'empty-placeholder--drag-hover', onHoverTop: 'empty-placeholder--drag-top', onHoverMiddle: 'empty-placeholder--drag-middle', onHoverBottom: 'empty-placeholder--drag-bottom'}">Drop blocks here</div>
-        <div ng-class="{'block-is-layout' : block.is_container}" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items track by key" ng-controller="PageBlockEditController">
+        <div ng-class="{'block-is-layout' : block.is_container}" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
             <div class="block" ng-class="{ 'block-is-hidden': block.is_hidden == 1, 'block-is-virgin' : !block.is_dirty && isEditable() && block.is_dirty_dialog_enabled && !block.is_container, 'block-is-container': block.is_container, 'block-first': $first, 'block-last': $last }" dnd dnd-model="block" dnd-isvalid="true" dnd-disable-drag-middle dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'block--is-dragging', onHover: 'block--drag-hover', onHoverTop: 'block--drag-top', onHoverMiddle: 'block--drag-middle', onHoverBottom: 'block--drag-bottom'}">
                 <div class="block-toolbar">
                     <div class="toolbar-item">
@@ -84,7 +84,7 @@ use luya\helpers\Html;
                 </modal>
                 <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
                 <div ng-if="block.__placeholders.length" class="block-front">
-                    <div class="row" ng-repeat="(inlineRowKey, row) in block.__placeholders track by inlineRowKey">
+                    <div class="row" ng-repeat="(inlineRowKey, row) in block.__placeholders">
                         <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderInlineKey, placeholder) in row track by placeholderInlineKey" ng-include="'recursion.html'"></div>
                     </div>
                 </div>
