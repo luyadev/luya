@@ -8,6 +8,12 @@ class TagFixture extends ActiveFixture
 {
     public $modelClass = 'luya\admin\models\Tag';
 
+    public function load()
+    {
+    	parent::resetTable();
+    	parent::load();
+    }
+    
     public function getData()
     {
         return [
