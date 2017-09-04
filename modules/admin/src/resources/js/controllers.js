@@ -514,7 +514,7 @@
 		};
 		
 		$scope.getFieldHelp = function(fieldName) {
-			if ($scope.serviceResponse._hints.hasOwnProperty(fieldName)) {
+			if ($scope.serviceResponse && $scope.serviceResponse['_hints'] && $scope.serviceResponse._hints.hasOwnProperty(fieldName)) {
 				return $scope.serviceResponse._hints[fieldName];
 			}
 			
