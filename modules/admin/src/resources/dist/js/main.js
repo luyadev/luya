@@ -2032,6 +2032,60 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 	return service;
 });
 
+/*
+ * 
+ * Saving data in Html Storage
+ * 
+ *	$scope.isHover = HtmlStorage.getValue('sidebarToggleState', false); 
+ *		
+ *	$scope.toggleMainNavSize = function() {
+ *	    $scope.isHover = !$scope.isHover;
+ *	    HtmlStorage.setValue('sidebarToggleState', $scope.isHover);
+ *	}
+ */
+zaa.factory('HtmlStorage', function() {
+	var service = {
+		
+		data: {},
+		
+		isLoaded : false,
+		
+		loadData : function() {
+			if (!service.isLoaded) {
+				if (localStorage.getItem("HtmlStorage")) {
+					var data = angular.fromJson(localStorage.getItem('HtmlStorage'));
+					
+					service.data = data;
+				}
+			}
+		},
+		
+		saveData : function() {
+			localStorage.removeItem('HtmlStorage');
+			localStorage.setItem('HtmlStorage', angular.toJson(service.data));
+		},
+		
+		getValue : function(key, defaultValue) {
+			service.loadData();
+			
+			if (service.data.hasOwnProperty(key)) {
+				return service.data[key];
+			}
+			
+			return defaultValue;
+		},
+		
+		setValue : function(key, value) {
+			service.loadData();
+			
+			service.data[key] = value;
+			
+			service.saveData();
+		}
+	};
+	
+	return service;
+});
 
 // end of use strict
 })();
@@ -5934,7 +5988,7 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
         };
 	});
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, CacheReloadService, AdminDebugBar, LuyaLoading, AdminToastService, AdminClassService) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, HtmlStorage, CacheReloadService, AdminDebugBar, LuyaLoading, AdminToastService, AdminClassService) {
 	
 		$scope.AdminClassService = AdminClassService;
 		
@@ -5946,10 +6000,21 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		
 		$scope.reload = function() {
 			CacheReloadService.reload();
-		}
+		};
 	
-
+		/* Main nav sidebar toggler */
+		
+		$scope.isHover = HtmlStorage.getValue('sidebarToggleState', false);
+		
+		$scope.toggleMainNavSize = function() {
+			$scope.isHover = !$scope.isHover;
+			HtmlStorage.setValue('sidebarToggleState', $scope.isHover);
+		}
+		
+		/* PROFIL SETTINS */
+		
 		$scope.profile = {};
+
 		$scope.settings = {};
 		
 		$scope.getProfileAndSettings = function() {
@@ -5958,6 +6023,8 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 				$scope.settings  = success.data.settings;
 			});
 		};
+		
+		/* Browser infos */
 
 		$scope.browser = null;
 

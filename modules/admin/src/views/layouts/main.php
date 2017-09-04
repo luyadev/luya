@@ -129,7 +129,7 @@ $this->beginPage()
                     </li>
                 </ul>
             </div>
-            <button class="mainnav-toggler" ng-class="{'mainnav-toggler-open' : isHover}" ng-click="isHover = !isHover">
+            <button class="mainnav-toggler" ng-class="{'mainnav-toggler-open' : isHover}" ng-click="toggleMainNavSize()">
                 <i class="material-icons">chevron_right</i>
             </button>
         </div>
