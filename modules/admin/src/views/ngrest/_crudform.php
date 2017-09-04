@@ -14,6 +14,6 @@ use luya\admin\Module;
                     <?php endforeach; ?>
             <?php endforeach; ?>
         <?php endforeach; ?>
-        <button type="submit" class="btn btn-primary"><?= Module::t($type == 2 ? 'button_save' : 'ngrest_crud_btn_create'); ?></button>
+        <button type="submit" class="btn btn-save btn-icon"><?= Module::t($type == 2 ? 'button_save' : 'ngrest_crud_btn_create'); ?></button>
     </form>
 </div>
