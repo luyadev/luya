@@ -42,8 +42,12 @@
         }
     },
     "config": {
-        "fxp-asset" : {
-            "pattern-skip-version": "(-build|-patch)"
-        }   
-    }
+         "platform": {"php": "7.0"}  
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }
