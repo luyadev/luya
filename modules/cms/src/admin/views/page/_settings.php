@@ -7,20 +7,20 @@ use luya\cms\admin\Module;
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><i class="material-icons">settings</i> <?= Module::t('view_update_properties_title'); ?></a>
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><i class="material-icons">settings</i><span><?= Module::t('view_update_properties_title'); ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=3" ng-class="{'active':pageSettingsOverlayTab==3}"><i class="material-icons">web</i> <?= Module::t('page_update_actions_layout_title'); ?></a>
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=3" ng-class="{'active':pageSettingsOverlayTab==3}"><i class="material-icons">web</i><span><?= Module::t('page_update_actions_layout_title'); ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><i class="material-icons">content_copy</i> <?= Module::t('page_update_actions_deepcopy_title'); ?></a>
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><i class="material-icons">content_copy</i><span><?= Module::t('page_update_actions_deepcopy_title'); ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=5" ng-class="{'active':pageSettingsOverlayTab==5}"><i class="material-icons">home</i> <?= Module::t('cmsadmin_settings_homepage_title'); ?></a>
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=5" ng-class="{'active':pageSettingsOverlayTab==5}"><i class="material-icons">home</i><span><?= Module::t('cmsadmin_settings_homepage_title'); ?></span></a>
                 </li>
                 <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=6" ng-class="{'active':pageSettingsOverlayTab==6}"><i class="material-icons">delete</i> <?= Module::t('cmsadmin_settings_trashpage_title'); ?></a>
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=6" ng-class="{'active':pageSettingsOverlayTab==6}"><i class="material-icons">delete</i><span><?= Module::t('cmsadmin_settings_trashpage_title'); ?></span></a>
                 </li>
                 <?php endif; ?>
             </ul>

@@ -7,14 +7,14 @@ use luya\cms\admin\Module;
     <div class="col-md-3">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-                <a class="nav-link" ng-click="changeTab(1)" ng-class="{'active':tab==1}"><i class="material-icons">title</i> <?= Module::t('cmsadmin_item_settings_titleslug'); ?></a>
+                <a class="nav-link nav-link-icon" ng-click="changeTab(1)" ng-class="{'active':tab==1}"><i class="material-icons">title</i><span><?= Module::t('cmsadmin_item_settings_titleslug'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" ng-click="changeTab(3)" ng-class="{'active':tab==3}"><i class="material-icons">change_history</i> <?= Module::t('version_create_title'); ?></a>
+                <a class="nav-link nav-link-icon" ng-click="changeTab(3)" ng-class="{'active':tab==3}"><i class="material-icons">change_history</i><span><?= Module::t('version_create_title'); ?></span></a>
             </li>
             <li><hr /></li>
             <li class="nav-item">
-                <a class="nav-link" ng-click="changeTab(2)" ng-class="{'active':tab==2}"><i class="material-icons">track_changes</i> <?= Module::t('versions_selector'); ?></a>
+                <a class="nav-link nav-link-icon" ng-click="changeTab(2)" ng-class="{'active':tab==2}"><i class="material-icons">track_changes</i><span><?= Module::t('versions_selector'); ?></span></a>
             </li>
             <li ng-repeat="(key, versionItem) in typeData">
                 <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)">#{{key}} {{versionItem.version_alias}}</a>

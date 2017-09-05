@@ -27,16 +27,47 @@
 
 .nav-link {
     cursor: pointer;
-
     &:hover, .active:hover {
         cursor: pointer;
     }
 
-    .nav-tabs-mobile-icons & > span{
+    .nav-tabs-mobile-icons & > span {
         display: none;
 
         @media (min-width: 480px) {
             display: inline-block;
+        }
+    }
+
+    .nav-pills & {
+        font-size: 15px;
+        line-height: 20px;
+        padding: 5px;
+    }
+
+    user-select: none;
+}
+
+.nav-pills .nav-item:not(:first-of-type) {
+    margin-top: 5px;
+}
+
+.nav-pills .nav-link-icon {
+    padding: 5px 5px 5px 30px;
+    position: relative;
+
+    .material-icons {
+        font-size: 20px;
+        left: 6px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &.active,
+    &:hover {
+        .material-icons {
+            color: theme-color('primary');
         }
     }
 }
@@ -46,9 +77,9 @@
 
     .nav-link {
         border: none;
+        cursor: pointer;
         padding: 9px 15px;
         position: relative;
-        cursor: pointer;
 
         &:after {
             background-color: theme-color(primary);
@@ -65,9 +96,9 @@
 
     .nav-link.active,
     .nav-link:hover {
-        cursor: pointer;
         background-color: transparent;
         border: none;
+        cursor: pointer;
 
         &:after {
             width: 100%;
