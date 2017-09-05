@@ -61,6 +61,10 @@ class ClientTransfer extends Object
                         }
                     }
                 }
+                
+                $curl->close();
+                unset($curl);
+                gc_collect_cycles();
             }
         }
         
@@ -86,6 +90,10 @@ class ClientTransfer extends Object
                         $this->build->command->outputInfo('[+] Image ' . $image->source.' downloaded.');
                     }
                 }
+                
+                $curl->close();
+                unset($curl);
+                gc_collect_cycles();
             }
         }
         
