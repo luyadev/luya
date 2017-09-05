@@ -1165,13 +1165,14 @@
 				            '</div>' +
 				            '<div class="form-side">' +
 					        	'<div ng-repeat="(key, item) in options" class="form-check">'+
-					        		'<label class="form-check-label">'+
-					        			'<input value="{{item.value}}" style="display:block;" type="radio" ng-click="setModelValue(item.value)" ng-checked="item.value == model" name="{{id}}_{{key}}" class="form-check-input"> {{item.label}}'+
+                                    '<input value="{{item.value}}" type="radio" ng-click="setModelValue(item.value)" ng-checked="item.value == model" name="{{id}}_{{key}}" class="form-check-input" id="{{id}}_{{key}}">' +
+					        		'<label class="form-check-label" for="{{id}}_{{key}}">' +
+					        			'{{item.label}}' +
 					        		'</label>'+
 					        	'</div>'+
 					        '</div>'+
 				        '</div>';
-	    	},
+	    	}
     	};
     });
     
@@ -1409,8 +1410,8 @@
                                 '</div>' +
 
                                 '<div class="form-check" ng-repeat="(k, item) in optionitems track by k">' +
+                                    '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
                                     '<input type="checkbox" class="form-check-input" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
-                                        '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';

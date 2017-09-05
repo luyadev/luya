@@ -123,7 +123,7 @@ input[type="radio"] {
 input[type="radio"] {
     display: none;
 
-    + label {
+    & + label {
         display: block;
         padding-left: 25px;
         position: relative;

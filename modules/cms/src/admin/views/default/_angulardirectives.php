@@ -21,15 +21,13 @@ use luya\cms\admin\Module;
             <form ng-switch on="data.nav_item_type">
                 <div class="form-group" ng-show="data.nav_item_type == 1 && !data.isInline">
                     <label for="exampleInputEmail1"><?= Module::t('view_index_as_draft'); ?></label>
-                    <div class="form-check form-check-inline">
-                      <label class="form-check-label" ng-click="data.is_draft = 0">
-                        <input class="form-check-input" ng-checked="data.is_draft == 0" type="radio" name="inlineRadioOptions"> <?= Module::t('view_index_no'); ?>
-                      </label>
+                    <div class="form-check">
+                        <input class="form-check-input" ng-checked="data.is_draft == 1" type="radio" name="inlineRadioOptions" id="update-as-draft-yes" />
+                        <label class="form-check-label" ng-click="data.is_draft = 1" for="update-as-draft-yes"><?= Module::t('view_index_yes'); ?></label>
                     </div>
-                    <div class="form-check form-check-inline">
-                      <label class="form-check-label" ng-click="data.is_draft = 1">
-                        <input class="form-check-input" ng-checked="data.is_draft == 1" type="radio" name="inlineRadioOptions"> <?= Module::t('view_index_yes'); ?>
-                      </label>
+                    <div class="form-check">
+                        <input class="form-check-input" ng-checked="data.is_draft == 0" type="radio" name="inlineRadioOptions" id="update-as-draft-no" />
+                        <label class="form-check-label" ng-click="data.is_draft = 0" for="update-as-draft-no"><?= Module::t('view_index_no'); ?></label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -83,15 +81,13 @@ use luya\cms\admin\Module;
 <script type="text/ng-template" id="createformpage.html">
     <div class="form-group" ng-show="!data.isInline">
         <label class="input__label"><?= Module::t('view_index_page_use_draft'); ?></label>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label" ng-click="data.use_draft = 0; data.from_draft_id = 0">
-              <input class="form-check-input" type="radio" ng-checked="data.use_draft == 0"><?= Module::t('view_index_no'); ?>
-            </label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" ng-checked="data.use_draft == 1" id="create-as-draft-yes">
+            <label class="form-check-label" ng-click="data.use_draft = 1; data.layout_id = 0" for="create-as-draft-yes"><?= Module::t('view_index_yes'); ?></label>
         </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label" ng-click="data.use_draft = 1; data.layout_id = 0">
-              <input class="form-check-input" type="radio" ng-checked="data.use_draft == 1"><?= Module::t('view_index_yes'); ?>
-            </label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" ng-checked="data.use_draft == 0" id="create-as-draft-no" />
+            <label class="form-check-label" ng-click="data.use_draft = 0; data.from_draft_id = 0" for="create-as-draft-no"><?= Module::t('view_index_no'); ?></label>
         </div>
     </div>
     <div class="form-group" ng-show="data.use_draft==1">
