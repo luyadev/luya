@@ -15,6 +15,10 @@
     background-color: map-get($grays, 100);
 }
 
+.modal-body h1 {
+    margin-bottom: 25px;
+}
+
 .modal-body .modal-footer {
     margin: 15px -15px -15px -15px;
 }

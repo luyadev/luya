@@ -57,11 +57,13 @@ use luya\cms\admin\Module;
                                 <i class="material-icons">content_copy</i> <span><?= Module::t('page_update_actions_deepcopy_title'); ?></span>
                             </a>
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(5)">
-                                <i class="material-icons">home</i> <span>Startseite</span>
+                                <i class="material-icons">home</i> <span><?= Module::t('cmsadmin_settings_homepage_title'); ?></span>
                             </a>
+                            <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(6)">
-                                <i class="material-icons">delete</i> <span>Remove</span>
+                                <i class="material-icons">delete</i> <span><?= Module::t('cmsadmin_settings_trashpage_title'); ?></span>
                             </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

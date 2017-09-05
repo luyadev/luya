@@ -23,7 +23,7 @@
 	"require-dev" : {
 		"phpunit/phpunit" : "~5.0",
 		"luyadev/luya" : "^1.0@dev",
-       "luyadev/luya-module-admin" : "^1.0@dev",
+        "luyadev/luya-module-admin" : "^1.0@dev",
 		"satooshi/php-coveralls": "~1.0"
 	},
 	"autoload" : {
@@ -32,9 +32,9 @@
 		}
 	},
 	"autoload-dev" : {
-       "psr-4" : {
-           "crawlerests\\" : "tests/"
-       }
+        "psr-4" : {
+            "crawlerests\\" : "tests/"
+        }
     },
 	"extra": {
         "branch-alias": {
@@ -42,8 +42,13 @@
         }
     },
     "config": {
-        "fxp-asset" : {
-            "pattern-skip-version": "(-build|-patch)"
-        }   
-    }
+        "platform": {"php": "7.0"}  
+    },
+    
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

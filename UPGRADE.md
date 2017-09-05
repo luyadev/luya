@@ -33,6 +33,7 @@ Low level API changes:
 + [#1414](https://github.com/luyadev/luya/issues/1414) Renamed Angular Helper methods, removed all the zaa prefixes.
 + [#1369](https://github.com/luyadev/luya/issues/1369) FlowActiveWindow dropped property `$modelClass` and does need to be configured anymore.
 + [#1308](https://github.com/luyadev/luya/issues/1308) A list of changed properties and methods.
+- [#1448](https://github.com/luyadev/luya/issues/1448) Admin translations must be registered in Module::onLoad.
 
 1.0.0-RC3 (11. April 2017)
 -------------------

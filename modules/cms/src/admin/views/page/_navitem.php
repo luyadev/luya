@@ -106,6 +106,13 @@ use luya\helpers\Html;
                 <i class="material-icons">edit</i>
             </a>
         </li>
+        <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
+        <li class="nav-item nav-item-alternative nav-item-icon" ng-if="isTranslated && lang.is_default==0">
+            <a ng-click="trashItem()" class="nav-link">
+                <i class="material-icons">delete</i>
+            </a>
+        </li>
+        <?php endif; ?>
         <li class="nav-item nav-item-alternative nav-item-icon" ng-show="isTranslated">
             <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="nav-link" ng-show="!liveEditState">
                 <i class="material-icons">open_in_new</i>
@@ -127,7 +134,7 @@ use luya\helpers\Html;
                     </button>
                 </div>
                 <div class="dropdown-divider"></div>
-                <span class="dropdown-item" ng-click="toggleSettingsOverlay(3); toggleVersionsDropdown()"><i class="material-icons">add_box</i> <span>Add version</span></span>
+                <span class="dropdown-item" ng-click="toggleSettingsOverlay(3); toggleVersionsDropdown()"><i class="material-icons">add_box</i> <span><?= Module::t('button_create_version'); ?></span></span>
             </div>
         </li>
     </ul>

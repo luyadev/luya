@@ -26,10 +26,10 @@ final class Module extends \luya\admin\base\Module
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))->node('crawler', 'find_in_page')
-        ->group('crawler_indexing')
+        ->group('crawler_index')
         ->itemApi('crawler_index', 'crawleradmin/index/index', 'list', 'api-crawler-index')
-        ->group('Anylatics')
-        ->itemApi('Searchdata', 'crawleradmin/searchdata/index', 'label', 'api-crawler-searchdata');
+        ->group('crawler_analytics')
+        ->itemApi('crawler_anayltics_queries', 'crawleradmin/searchdata/index', 'label', 'api-crawler-searchdata');
     }
     
     /**
@@ -37,7 +37,7 @@ final class Module extends \luya\admin\base\Module
      */
     public static function onLoad()
     {
-    	self::registerTranslation('crawleradmin', static::staticBasePath() . ' /messages', [
+    	self::registerTranslation('crawleradmin', static::staticBasePath() . '/messages', [
     		'crawleradmin' => 'crawleradmin.php',
     	]);
     }
