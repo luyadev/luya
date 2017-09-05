@@ -349,9 +349,10 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             foreach ($this->getLangs() as $lang) {
                 if ($i == 0) {
                     $return[] = [
-                        'html' => '<div class="form-i18n">
+                        'html' => '<div class="form-i18n" ng-class="{\'has-field-help\': getFieldHelp(\''.$element['name'].'\')}">
+                                       ' . $this->createFieldHelpButton($element, $configContext) . '
                                        <label class="form-i18n-label">
-                                           ' . $element['alias'] . $this->createFieldHelpButton($element, $configContext) . '
+                                        ' . $element['alias'] . '
                                        </label>
                                            <div class="row">',
                     ];
@@ -383,7 +384,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     private function createFieldHelpButton(array $element, $configContext)
     {
     	if ($configContext !== self::TYPE_LIST) {
-    		return '<span ng-if="getFieldHelp(\''.$element['name'].'\')" class="btn btn-icon btn-help" tooltip tooltip-expression="getFieldHelp(\''.$element['name'].'\')"></span>';
+    		return '<span ng-if="getFieldHelp(\''.$element['name'].'\')" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getFieldHelp(\''.$element['name'].'\')" tooltip-position="left"></span>';
     	}
     }
     

@@ -1,0 +1,35 @@
+.has-field-help {
+    position: relative;
+    padding-right: 45px;
+}
+
+.help-button {
+    position: relative;
+    float: right;
+    right: 0;
+    margin-top: 2px;
+
+    &:hover {
+        background-color: theme-color('light');
+        border-color: theme-color('light');
+        cursor: default;
+    }
+
+    & + *:not(.crud-loader-tag) {
+        display: block;
+        padding-right: 45px;
+    }
+
+    & + .crud-loader-tag {
+        right: 5px;
+
+        & + * {
+            padding-right: 85px;
+        }
+    }
+
+    .has-field-help > & {
+        position: absolute;
+        right: 0;
+    }
+}

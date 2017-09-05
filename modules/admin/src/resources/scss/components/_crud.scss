@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    width: 100%;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .crud-title {
@@ -17,14 +17,18 @@
 }
 
 .crud-loader-tag {
+    float: right;
+    margin-top: 2px;
     position: relative;
     right: 0;
-    margin-top: 1px;
-    float: right;
+
+    .btn {
+        padding: 6px 9px;
+    }
 
     & + * {
         display: block;
-        padding-right: 50px;
+        padding-right: 45px;
     }
 }
 

@@ -57,13 +57,13 @@ use luya\helpers\Html;
                         <form class="block__edit" ng-submit="save()">
                             <div ng-if="modalMode==1" ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
                                <div class="col">
-									<span ng-if="getInfo(field.var)" class="btn btn-icon btn-help" tooltip tooltip-expression="getInfo(field.var)"></span>
+									<span ng-if="getInfo(field.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(field.var)" tooltip-position="left"></span>
 									<zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
 								</div>
                             </div>
                             <div ng-if="modalMode==2"  ng-repeat="cfgField in block.cfgs" ng-hide="cfgField.invisible" class="row">
                                 <div class="col">
-									<span ng-if="getInfo(cfgField.var)" class="btn btn-icon btn-help" tooltip tooltip-expression="getInfo(cfgField.var)"></span>
+									<span ng-if="getInfo(cfgField.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(cfgField.var)" tooltip-position="left"></span>
                                    <zaa-injector dir="cfgField.type"  options="cfgField.options" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}"  placeholder="{{cfgField.placeholder}}" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
                                </div>
                             </div>

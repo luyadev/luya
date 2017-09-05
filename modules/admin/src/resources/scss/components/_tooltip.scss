@@ -3,7 +3,7 @@
     opacity: 1;
     position: fixed;
     z-index: z-index(tooltip);
-
+    
     &-right {
         margin-left: 3px;
         padding-left: 5px;
@@ -45,7 +45,7 @@
     }
     .tooltip-left & {
         border-bottom: 5px solid transparent;
-        border-left: 5px solid transparent;
+        border-left: 5px solid $black;
         border-top: 5px solid transparent;
         right: 0;
         top: 50%;
