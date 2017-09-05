@@ -78,21 +78,16 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             ],
         ];
     }
-
     
-    
-    public $translations = [
-        [
-            'prefix' => 'cms',
-            'basePath' => '@cms/messages',
-            'fileMap' => [
-                'cms' => 'cms.php',
-            ],
-        ],
-    ];
+    public static function onLoad()
+    {
+    	self::registerTranslation('cms', '@cms/messages', [
+    		'cms' => 'cms.php',
+    	]);
+    }
     
     public static function t($message, array $params = [])
     {
-        return Yii::t('cms', $message, $params);
+    	return parent::baseT('cms', $message, $params);
     }
 }

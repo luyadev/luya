@@ -147,7 +147,7 @@ use luya\admin\Module as Admin;
         <span class="folders-actions-left">
             <button class="folders-actions-toggler" ng-click="toggleFolderItem(folder)" ng-if="folder.subfolder == true">
 				<i class="material-icons" ng-if="folder.toggle_open">keyboard_arrow_down</i>
-				<i class="material-icons" ng-if="!folder.toggle_open">keyboard_arrow_up</i>
+				<i class="material-icons" ng-if="!folder.toggle_open">keyboard_arrow_right</i>
 			</button>
         </span>
         <span class="folders-text folders-label" ng-click="changeCurrentFolderId(folder.id)">

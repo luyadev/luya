@@ -143,18 +143,12 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public $moduleMenus = [];
     
-    /**
-     * @var array Registering translation files for the admin module.
-     */
-    public $translations = [
-        [
-            'prefix' => 'admin*',
-            'basePath' => '@admin/messages',
-            'fileMap' => [
-                'admin' => 'admin.php',
-            ],
-        ],
-    ];
+    public static function onLoad()
+    {
+    	self::registerTranslation('admin*', '@admin/messages', [
+    		'admin' => 'admin.php',
+    	]);
+    }
     
     /**
      * Returns all Asset files to registered in the administration interfaces.
@@ -318,6 +312,6 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public static function t($message, array $params = [], $language = null)
     {
-        return Yii::t('admin', $message, $params, $language);
+    	return parent::baseT('admin', $message, $params, $language);
     }
 }

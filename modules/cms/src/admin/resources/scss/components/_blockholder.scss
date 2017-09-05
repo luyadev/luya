@@ -1,19 +1,28 @@
+
+
 .blockholder-column {
-    max-width: 255px;
-    min-width: 255px;
+    max-width: $blockholder-width;
+    min-width: $blockholder-width;
     padding-left: 0;
     padding-right: 0;
     transform: translateZ(0);
     display: none;
+    height: 100vh;
+    right: 0;
+    position: fixed;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: block;
+    }
 }
 
 .blockholder {
+    overflow-y: scroll;
     background-color: color(gray);
     color: map-get($grays, 500);
     display: block;
     height: 100%;
     padding: 15px;
-    position: fixed;
     width: 100%;
     user-select: none;
     @include overflow-no-scrollbars;

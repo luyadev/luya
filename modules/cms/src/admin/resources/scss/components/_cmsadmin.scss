@@ -3,6 +3,10 @@
     margin: 0 0 0 15px;
     min-height: 100%;
 
+    @media (min-width: $mobile-nav-breakpoint) {
+        margin: 0 $blockholder-width 0 15px;
+    }
+
     > .row {
         flex: 1 1 100%;
         margin-right: 0;
@@ -11,6 +15,7 @@
             flex: 1 1 100%;
             flex-wrap: nowrap;
         }
+
 
         > .col,
         > .col > .row > .col {

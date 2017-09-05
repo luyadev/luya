@@ -73,4 +73,12 @@ Material Design Icons: https://material.io/icons/
 | Folder icon | ![file_upload](img/app-admin-styles/default-icons/folder_open.png) | folder_open |
 
 
+## General Colors 
+
+@TDB
+
+| Element | Color | Variable|
+|---------|-------|---------|
+
+
 

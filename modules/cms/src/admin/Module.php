@@ -28,6 +28,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     
     const ROUTE_CONFIG = 'cmsadmin/config/index';
 
+    /**
+     * @inheritdoc
+     */
     public $apis = [
         'api-cms-admin' => 'luya\cms\admin\\apis\\AdminController',
         'api-cms-navitempageblockitem' => 'luya\cms\admin\\apis\\NavItemPageBlockItemController',
@@ -105,16 +108,16 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             'view_index_page_success', 'js_config_update_success', 'js_page_update_layout_save_success', 'js_page_create_copy_success',
         ];
     }
-
-    public $translations = [
-        [
-            'prefix' => 'cmsadmin*',
-            'basePath' => '@cmsadmin/messages',
-            'fileMap' => [
-                'cmsadmin' => 'cmsadmin.php',
-            ],
-        ],
-    ];
+    
+    /**
+     * @inheritdoc
+     */
+    public static function onLoad()
+    {
+    	self::registerTranslation('cmsadmin*', '@cmsadmin/messages', [
+    		'cmsadmin' => 'cmsadmin.php',
+    	]);
+    }
     
     /**
      * @var array Defined blocks to hidde from the cmsadmin. Those blocks are not listed in the Page Content blocks overview. You can override this
@@ -183,11 +186,19 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         $this->_blockVariation = $_variations;
     }
     
+    /**
+     * Getter method for blockVarionts.
+     * 
+     * @return mixed[]|array[]
+     */
     public function getBlockVariations()
     {
         return $this->_blockVariation;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))
@@ -203,6 +214,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
                     ->itemApi('menu_group_item_elements_blocks', 'cmsadmin/block/index', 'format_align_left', 'api-cms-block');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extendPermissionApis()
     {
         return [
@@ -210,6 +224,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extendPermissionRoutes()
     {
         return [
@@ -243,7 +260,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('cmsadmin', $message, $params);
+    	return parent::baseT('cmsadmin', $message, $params);
     }
     
     private static $_authorUserId = 0;

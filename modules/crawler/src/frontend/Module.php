@@ -76,6 +76,9 @@ final class Module extends \luya\base\Module
      */
     public $statisticRecipients = [];
     
+    /**
+     * @var integer Number of pages
+     */
     public $searchResultPageSize = 25;
     
     /**
