@@ -7,11 +7,8 @@ $icon-line-height: $icon-font-size + 5px;
     max-width: 100%;
     padding: 0;
     width: 320px;
-
     @media (min-width: $mobile-nav-breakpoint) {
-
         width: 100%;
-
     }
 }
 
@@ -40,6 +37,14 @@ $icon-line-height: $icon-font-size + 5px;
         padding-left: 10px;
         width: 100%;
     }
+
+    .folders-items {
+        padding-left: 3px;
+    }
+}
+
+.folders-item-root {
+    padding-left: 26px;
 }
 
 .folders-text {
@@ -93,13 +98,14 @@ $icon-line-height: $icon-font-size + 5px;
 }
 
 .folders-folder-name {
-    margin-bottom: 3px;
+    padding-left: 26px;
 }
 
 .folders-folder-icon {
     display: inline-block;
     margin-right: 5px;
     margin-top: -2px;
+    position: absolute;
 
     .is-active > .folders-label &,
     .is-active > .folders-actions > .folders-label & {
@@ -144,6 +150,7 @@ $icon-line-height: $icon-font-size + 5px;
 .folders-actions-right {
     position: absolute;
     top: 0;
+    height: 100%;
 }
 
 .folders-actions-left {
@@ -165,14 +172,10 @@ $icon-line-height: $icon-font-size + 5px;
     &.is-visible,
     &:hover {
         display: block;
-
-        .folders-label & {
-            background: red;
-        }
     }
 }
 
-.folders-edit {
+.folders-edit, .folders-actions {
     position: relative;
 }
 
@@ -187,6 +190,12 @@ $icon-line-height: $icon-font-size + 5px;
     margin: 0;
     padding: 0;
     outline: 0 !important;
+}
+
+.folders-actions-toggler {
+    i {
+        margin-top: -3px;
+    }
 }
 
 .folder-label-input {
