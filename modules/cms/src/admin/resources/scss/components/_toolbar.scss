@@ -1,6 +1,6 @@
 .toolbar-item {
     flex: 0 0 auto;
-    padding: 5px 25px;
+    padding: 0 20px;
 
     &:first-of-type {
         padding-left: 0;
@@ -10,41 +10,10 @@
     }
 
     &:last-of-type {
-        padding-right: 10px;
+        padding-right: 0;
     }
 
     &-lang {
-        padding: 5px 15px;
-    }
-}
-
-.toolbar-button {
-    border: none;
-    cursor: pointer;
-    position: relative;
-
-
-}
-
-.toolbar-button-flag {
-    background: transparent;
-    padding-left: 10px;
-    padding-right: 10px;
-
-    &:after {
-        background-color: theme-color(primary);
-        bottom: 0;
-        content: "";
-        height: 2px;
-        left: 50%;
-        position: absolute;
-        transform: translateX(-50%);
-        transition: .1s ease-in-out width;
-        width: 0;
-    }
-
-    &.active:after,
-    &:hover:after {
-        width: 100%;
+        padding: 5px 10px;
     }
 }
