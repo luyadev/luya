@@ -148,11 +148,10 @@ $icon-line-height: $icon-font-size + 5px;
 
 .folders-actions-left,
 .folders-actions-right {
+    height: 100%;
     position: absolute;
     top: 0;
-    height: 100%;
 }
-
 
 .folders-actions-left {
     left: 0;
@@ -189,8 +188,8 @@ $icon-line-height: $icon-font-size + 5px;
     border: none;
     cursor: pointer;
     margin: 0;
-    padding: 0;
     outline: 0 !important;
+    padding: 0;
 }
 
 .folders-actions-toggler {
@@ -200,13 +199,11 @@ $icon-line-height: $icon-font-size + 5px;
 }
 
 .folder-label-input {
-    left: 50px;
-    max-height: 26px;
-    max-width: 100%;
-    position: absolute;
-    right: 200px;
-    top: 0;
-    width: calc(100% - 95px);
+    display: inline-block;
+    margin: 0 0 0 30px;
+    max-height: 24px;
+    padding: 0;
+    width: 128px;
 }
 
 .folders-folder-move-icon {
