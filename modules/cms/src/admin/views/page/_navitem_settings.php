@@ -2,19 +2,19 @@
 use luya\cms\admin\Module;
 
 ?>
-<modal is-modal-hidden="settingsOverlayVisibility" modal-title="{{item.title}} Settings">
+<modal is-modal-hidden="settingsOverlayVisibility" modal-title="{{item.title}} <?= Module::t('cmsadmin_settings_modal_title'); ?>">
 <div class="row" ng-if="!settingsOverlayVisibility">
     <div class="col-md-3">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-                <a class="nav-link" ng-click="changeTab(1)" ng-class="{'active':tab==1}">Title &amp; Slug</a>
+                <a class="nav-link" ng-click="changeTab(1)" ng-class="{'active':tab==1}"><i class="material-icons">title</i> <?= Module::t('cmsadmin_item_settings_titleslug'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" ng-click="changeTab(3)" ng-class="{'active':tab==3}">Neue Version anlegen</a>
+                <a class="nav-link" ng-click="changeTab(3)" ng-class="{'active':tab==3}"><i class="material-icons">change_history</i> <?= Module::t('version_create_title'); ?></a>
             </li>
             <li><hr /></li>
             <li class="nav-item">
-                <a class="nav-link" ng-click="changeTab(2)" ng-class="{'active':tab==2}"><b>Versions</b></a>
+                <a class="nav-link" ng-click="changeTab(2)" ng-class="{'active':tab==2}"><i class="material-icons">track_changes</i> <?= Module::t('versions_selector'); ?></a>
             </li>
             <li ng-repeat="(key, versionItem) in typeData">
                 <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)">#{{key}} {{versionItem.version_alias}}</a>
@@ -23,7 +23,7 @@ use luya\cms\admin\Module;
     </div>
     <div class="col-md-9" ng-switch="tab">
         <div ng-switch-when="1">
-            <h1>Dashboard</h1>
+            <h1><?= Module::t('cmsadmin_item_settings_titleslug'); ?></h1>
             <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
                 <zaa-text model="itemCopy.title" label="<?= Module::t('view_index_page_title'); ?>" />
                 <zaa-text model="itemCopy.alias" label="<?= Module::t('view_index_page_alias'); ?>" />
@@ -39,25 +39,26 @@ use luya\cms\admin\Module;
                 <div ng-switch-when="3">
                     <update-form-redirect data="typeDataCopy"></update-form-redirect>
                 </div>
-                <button type="submit" class="btn btn-save">Save</button>
+                
+                <button style="margin-top:15px;" type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
             </form>
         </div>
         <div ng-switch-when="2">
-            <h1>Version</h1>
-            <table class="table">
+            <h1><?= Module::t('versions_selector'); ?></h1>
+            <table class="table table-bordered table-responsive">
                 <tr>
-                    <th>Name</th>
-                    <th>Layout</th>
-                    <th>Erstellt</th>
-                    <th>Edit</th>
-                    <th>Remove</th>
+                    <th><?= Module::t('version_input_name'); ?></th>
+                    <th><?= Module::t('version_input_layout'); ?></th>
+                    <th colspan="3"><?= Module::t('cmsadmin_created_at'); ?></th>
                 </tr>
                 <tr ng-repeat="versionItem in typeData" ng-class="{'table-success' : currentPageVersion == versionItem.id}">
                     <td>{{versionItem.version_alias}}</td>
                     <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
-                    <td>{{versionItem.timestamp_create}}</td>
-                    <td><button type="button" class="btn btn-symbol btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button></td>
-                    <td><button type="button" class="btn btn-delete btn-icon btn-nolabel" ng-click="removeVersion(versionItem)"></button></td>
+                    <td>{{versionItem.timestamp_create | date :'short'}}</td>
+                    <td>
+                        <button type="button" class="btn btn-symbol btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button>
+                        <button type="button" class="btn btn-delete btn-icon btn-nolabel" ng-if="currentPageVersion != versionItem.id" ng-click="removeVersion(versionItem)"></button>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -66,7 +67,7 @@ use luya\cms\admin\Module;
             <h2>{{editVersionItem.version_alias}}</h2>
             <zaa-text model="editVersionItem.version_alias" label="<?= Module::t('version_input_name'); ?>" />
             <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name" />
-            <button type="button" class="btn btn-save btn-icon" ng-click="editVersionUpdate(editVersionItem)">Update</button>
+            <button type="button" class="btn btn-save btn-icon" ng-click="editVersionUpdate(editVersionItem)"><?= Module::t('btn_save'); ?></button>
         </div>
         <div ng-switch-when="3" ng-controller="PageVersionsController">
             <form ng-submit="createNewVersionSubmit(create)">

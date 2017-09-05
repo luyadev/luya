@@ -184,5 +184,10 @@ return [
     'view_update_block_tooltip_close' => 'Bearbeiten schliessen',
     
 // 1.0.0
-    'cmsadmin_dashboard_lastupdate' => 'Zuletzt aktualisierte Seiten'
+    'cmsadmin_dashboard_lastupdate' => 'Zuletzt aktualisierte Seiten',
+	'cmsadmin_settings_homepage_title' => 'Startseite',
+	'cmsadmin_settings_trashpage_title' => 'Seite Löschen',
+	'cmsadmin_settings_modal_title' => 'Einstellungen',
+	'cmsadmin_item_settings_titleslug' => 'Seiten Informationen',
+	'cmsadmin_created_at' => 'Erstellt am',
 ];

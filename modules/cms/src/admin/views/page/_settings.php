@@ -2,25 +2,27 @@
 use luya\cms\admin\Module;
 
 ?>
-<modal is-modal-hidden="pageSettingsOverlayHidden" modal-title="Settings">
+<modal is-modal-hidden="pageSettingsOverlayHidden" modal-title="<?= Module::t('cmsadmin_settings_modal_title'); ?>">
     <div ng-if="!pageSettingsOverlayHidden" class="row">
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><?= Module::t('view_update_properties_title'); ?></a>
+                    <a class="nav-link" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><i class="material-icons">settings</i> <?= Module::t('view_update_properties_title'); ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=3" ng-class="{'active':pageSettingsOverlayTab==3}"><?= Module::t('page_update_actions_layout_title'); ?></a>
+                    <a class="nav-link" ng-click="pageSettingsOverlayTab=3" ng-class="{'active':pageSettingsOverlayTab==3}"><i class="material-icons">web</i> <?= Module::t('page_update_actions_layout_title'); ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><?= Module::t('page_update_actions_deepcopy_title'); ?></a>
+                    <a class="nav-link" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><i class="material-icons">content_copy</i> <?= Module::t('page_update_actions_deepcopy_title'); ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=5" ng-class="{'active':pageSettingsOverlayTab==5}">Startseite</a>
+                    <a class="nav-link" ng-click="pageSettingsOverlayTab=5" ng-class="{'active':pageSettingsOverlayTab==5}"><i class="material-icons">home</i> <?= Module::t('cmsadmin_settings_homepage_title'); ?></a>
                 </li>
+                <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
                 <li class="nav-item">
-                    <a class="nav-link" ng-click="pageSettingsOverlayTab=6" ng-class="{'active':pageSettingsOverlayTab==6}">Remove</a>
+                    <a class="nav-link" ng-click="pageSettingsOverlayTab=6" ng-class="{'active':pageSettingsOverlayTab==6}"><i class="material-icons">delete</i> <?= Module::t('cmsadmin_settings_trashpage_title'); ?></a>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="col-md-9" ng-switch="pageSettingsOverlayTab">
@@ -46,42 +48,31 @@ use luya\cms\admin\Module;
                 <h1><?= Module::t('page_update_actions_layout_title'); ?></h1>
                 <p><?= Module::t('page_update_actions_layout_text'); ?></p>
                 <form ng-submit="submitNavForm()">
-                <div class="row">
-                    <div class="input input--text col s12">
-                        <label class="input__label"><?= Module::t('page_update_actions_layout_file_field'); ?></label>
-                        <div class="input__field-wrapper">
-                            <input type="text" class="input__field validate" ng-model="navData.layout_file" />
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
+	                <zaa-text model="navData.layout_file" label="<?= Module::t('page_update_actions_layout_file_field'); ?>" />
+	                <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
                 </form>
             </div>
             <div ng-switch-when="4">
                 <h1><?= Module::t('page_update_actions_deepcopy_title'); ?></h1>
                 <p><?= Module::t('page_update_actions_deepcopy_text'); ?></p>
-                <p><button type="button" class="btn btn-save" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
+                <p><button type="button" class="btn btn-save btn-icon" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
             </div>
             <div ng-switch-when="5">
-                <h1>Startseite</h1>
+                <h1><?= Module::t('cmsadmin_settings_homepage_title'); ?></h1>
                 <p><?= Module::t('view_update_homepage_info'); ?></p>
                 <!-- OLD CODE -->
-                <div class="switch switch--with-icons">
-                    <label tooltip tooltip-text="<?= Module::t('view_update_homepage_info'); ?>" ng-if="!navData.is_home">
-                        <?= Module::t('view_update_is_homepage'); ?>
-                        <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
-                        <span class="lever switch__lever"></span>
-                    </label>
-                </div>
-                <span class="grey-text text-darken-2" ng-if="navData.is_home">
-                    <i class="material-icons cms__prop-toggle green-text text-darken-1" style="vertical-align: middle; margin-right: 3px;">check_circle</i>
-                    <span  style="vertical-align: bottom"><?= Module::t('view_update_is_homepage'); ?></span>
-                </span>
+                <label ng-if="!navData.is_home">
+                    <?= Module::t('view_update_is_homepage'); ?>
+                    <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_home"><?= Module::t('view_update_is_homepage'); ?></button>
             </div>
+            <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
             <div ng-switch-when="6">
-                <h1>Remove</h1>
+                <h1><?= Module::t('cmsadmin_settings_trashpage_title'); ?></h1>
                 <p><a ng-click="trash()" class="btn btn-delete btn-icon">Remove Page</a></p>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </modal>
