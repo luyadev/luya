@@ -302,7 +302,7 @@ $btns: (
         border-radius: 0;
     }
 
-    &:not([class*=" outline-"][class^=" outline-"]) {
+    &:not([class*="outline-"]):not([class^="outline-"]):not([class*="btn-"]):not([class^="btn-"]) {
         background-color:  map-get($colors, gray-light);
         color: $btn-color-dark;
     }
