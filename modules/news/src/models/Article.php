@@ -40,14 +40,6 @@ class Article extends NgRestModel
     
     public $i18n = ['title', 'text', 'teaser_text', 'image_list'];
 
-    public function attributeHints()
-    {
-        return [
-            'title' => 'fofofofofof i18n',
-            'cat_id' => 'nid i18n',
-        ];
-    }
-
     /**
      * @inheritdoc
      */

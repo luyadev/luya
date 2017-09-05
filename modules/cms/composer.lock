@@ -586,12 +586,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "5f4486a7f9afbb4c9ec97dfbefa2001c242ef80d"
+                "reference": "c85631f243e996d1ee878efaad32a30e12620876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/5f4486a7f9afbb4c9ec97dfbefa2001c242ef80d",
-                "reference": "5f4486a7f9afbb4c9ec97dfbefa2001c242ef80d",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/c85631f243e996d1ee878efaad32a30e12620876",
+                "reference": "c85631f243e996d1ee878efaad32a30e12620876",
                 "shasum": ""
             },
             "require": {
@@ -646,7 +646,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2017-09-05T08:26:29+00:00"
+            "time": "2017-09-05T15:24:29+00:00"
         },
         {
             "name": "luyadev/luya-composer",
@@ -704,12 +704,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "df502105e8fb2d22dedaa64be745408bf9185e96"
+                "reference": "5304e897ffc31a0afda7e5d8445dcde81ce4f425"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/df502105e8fb2d22dedaa64be745408bf9185e96",
-                "reference": "df502105e8fb2d22dedaa64be745408bf9185e96",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/5304e897ffc31a0afda7e5d8445dcde81ce4f425",
+                "reference": "5304e897ffc31a0afda7e5d8445dcde81ce4f425",
                 "shasum": ""
             },
             "require": {
@@ -767,7 +767,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-09-05T08:26:29+00:00"
+            "time": "2017-09-05T15:17:31+00:00"
         },
         {
             "name": "myclabs/deep-copy",
