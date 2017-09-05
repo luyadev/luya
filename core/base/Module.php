@@ -105,24 +105,6 @@ abstract class Module extends \yii\base\Module
      * @var string The default name of the moduleLayout
      */
     public $moduleLayout = 'layout';
-    
-    /**
-     * @var array Add translations for your module, all translation array must have the keys "prefix", "basePath" and "fileMap"
-     * For example:
-     *
-     * ```php
-     * $this->translations = [
-     *     ['prefix' => 'luya*', 'basePath' => '@luya/messages', 'fileMap' => ['luya/admin' => 'admin.php']],
-     * ],
-     * ```
-     *
-     * To use this translation run or createa a static helper method in your module.php
-     *
-     * ```php
-     * Yii::t('luya/admin', 'MyVariableInAdminPhp');
-     * ```
-     */
-    public static $translations = [];
 
     /**
      * @inheritdoc
@@ -283,8 +265,7 @@ abstract class Module extends \yii\base\Module
     /**
      * Register a Translation to the i18n component.
      *
-     * In order to register Translations you can either use the $translations array or calling this method
-     * straight after the init() method:
+     * In order to register Translations you can register them inside the {{luya\base\Module::onLoad()}} method.
      *
      * ```php
      * public function init()

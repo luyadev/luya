@@ -1102,12 +1102,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "8718a5ad9d6e457d31444128185e6c735d95d3fc"
+                "reference": "40f0e58e7a3a65863de00ea6b30d3d439f0db834"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/8718a5ad9d6e457d31444128185e6c735d95d3fc",
-                "reference": "8718a5ad9d6e457d31444128185e6c735d95d3fc",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/40f0e58e7a3a65863de00ea6b30d3d439f0db834",
+                "reference": "40f0e58e7a3a65863de00ea6b30d3d439f0db834",
                 "shasum": ""
             },
             "require": {
@@ -1151,7 +1151,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-09-02T07:58:18+00:00"
+            "time": "2017-09-05T08:22:46+00:00"
         },
         {
             "name": "luyadev/luya-module-cms",
@@ -1159,12 +1159,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "d46862d2b75e27f2fa2ba6855cb7884335391383"
+                "reference": "58902f9ac358608d82c5e3bd50fcc26ff33be785"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/d46862d2b75e27f2fa2ba6855cb7884335391383",
-                "reference": "d46862d2b75e27f2fa2ba6855cb7884335391383",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/58902f9ac358608d82c5e3bd50fcc26ff33be785",
+                "reference": "58902f9ac358608d82c5e3bd50fcc26ff33be785",
                 "shasum": ""
             },
             "require-dev": {
@@ -1217,7 +1217,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-09-04T09:09:08+00:00"
+            "time": "2017-09-05T08:22:46+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -1535,16 +1535,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.7.1",
+            "version": "v1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "15ea9ac619e37009edcda64089e3fa4cc88aa659"
+                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/15ea9ac619e37009edcda64089e3fa4cc88aa659",
-                "reference": "15ea9ac619e37009edcda64089e3fa4cc88aa659",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
+                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
                 "shasum": ""
             },
             "require": {
@@ -1594,7 +1594,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2017-09-03T09:38:53+00:00"
+            "time": "2017-09-04T11:05:03+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

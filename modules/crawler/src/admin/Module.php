@@ -2,27 +2,27 @@
 
 namespace luya\crawler\admin;
 
-use Yii;
 use luya\admin\components\AdminMenuBuilder;
 
+/**
+ * Crawler Admin Module.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 final class Module extends \luya\admin\base\Module
 {
+	/**
+	 * @inheritdoc
+	 */
     public $apis = [
         'api-crawler-builderindex' => 'luya\crawler\admin\apis\BuilderindexController',
         'api-crawler-index' => 'luya\crawler\admin\apis\IndexController',
         'api-crawler-searchdata' => 'luya\crawler\admin\apis\SearchdataController',
     ];
-
-    public static $translations = [
-        [
-            'prefix' => 'crawleradmin*',
-            'basePath' => '@crawleradmin/messages',
-            'fileMap' => [
-                'crawleradmin' => 'crawleradmin.php',
-            ],
-        ],
-    ];
     
+    /**
+     * @inheritdoc
+     */
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))->node('crawler', 'find_in_page')
@@ -32,6 +32,9 @@ final class Module extends \luya\admin\base\Module
         ->itemApi('Searchdata', 'crawleradmin/searchdata/index', 'label', 'api-crawler-searchdata');
     }
     
+    /**
+     * @inheritdoc
+     */
     public static function onLoad()
     {
     	self::registerTranslation('crawleradmin', static::staticBasePath() . ' /messages', [
@@ -39,8 +42,11 @@ final class Module extends \luya\admin\base\Module
     	]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function t($message, array $params = [])
     {
-        return Yii::t('crawleradmin', $message, $params);
+        return parent::baseT('crawleradmin', $message, $params);
     }
 }
