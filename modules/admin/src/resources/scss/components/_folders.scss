@@ -192,6 +192,12 @@ $icon-line-height: $icon-font-size + 5px;
     padding: 0;
 }
 
+.folders-actions-toggler {
+    i {
+        margin-top: -3px;
+    }
+}
+
 .folder-label-input {
     left: 50px;
     max-height: 26px;
@@ -205,4 +211,9 @@ $icon-line-height: $icon-font-size + 5px;
 .folders-folder-move-icon {
     cursor: pointer;
     right: 10px;
+}
+
+
+.folders-items {
+    padding-left: 0 !important;
 }
