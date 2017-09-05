@@ -177,11 +177,14 @@ $this->beginPage()
     <div class="debug" ng-show="showDebugBar" ng-class="{'debug-toggled': isHover}" ng-init="debugTab=1">
 
         <ul class="nav nav-tabs debug-tabs">
+            <li class="nav-item" ng-click="showDebugBar=0">
+                <span class="nav-link">x</span>
+            </li>
             <li class="nav-item" ng-click="debugTab=1">
-                <span class="nav-link active" ng-click="switchTab('infos')" ng-class="{'active': debugTab==1}">Network</span>
+                <span class="nav-link" ng-class="{'active': debugTab==1}">Network</span>
             </li>
             <li class="nav-item" ng-click="debugTab=2">
-                <span class="nav-link" ng-click="switchTab('infos')" ng-class="{'active': debugTab==2}">Infos</span>
+                <span class="nav-link" ng-class="{'active': debugTab==2}">Infos</span>
             </li>
         </ul>
 
