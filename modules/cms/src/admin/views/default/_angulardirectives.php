@@ -127,11 +127,11 @@ use luya\cms\admin\Module;
             <label><?= \luya\admin\Module::t('view_index_redirect_type'); ?></label>
         </div>
         <div class="form-side">
-            <input type="radio" ng-model="data.redirect_type" ng-value="1" id="redirect_internal">
-            <label for="redirect_internal" ng-click="data.redirect_type = 1"><?= \luya\admin\Module::t('view_index_redirect_internal'); ?></label>
+            <input type="radio" ng-model="data.redirect_type" ng-value="1" id="redirect_internal2">
+            <label for="redirect_internal2" ng-click="data.redirect_type = 1"><?= \luya\admin\Module::t('view_index_redirect_internal'); ?></label>
 
-            <input type="radio" ng-model="data.type" ng-value="2" id="redirect_external">
-            <label for="redirect_external" ng-click="data.redirect_type = 2"><?= \luya\admin\Module::t('view_index_redirect_external'); ?></label>
+            <input type="radio" ng-model="data.redirect_type" ng-value="2" id="redirect_external3">
+            <label for="redirect_external3" ng-click="data.redirect_type = 2"><?= \luya\admin\Module::t('view_index_redirect_external'); ?></label>
         </div>
     </div>
     <div class="form-group form-side-by-side">
