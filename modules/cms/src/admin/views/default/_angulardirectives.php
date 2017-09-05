@@ -116,48 +116,63 @@ use luya\cms\admin\Module;
 <!-- CREATE MODULE FORM -->
 <script type="text/ng-template" id="createformmodule.html">
     <zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
-    <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
+    <button type="button" class="btn btn-save btn-icon" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
 
 <!-- CREATE REDIRECT FORM -->
 <script type="text/ng-template" id="createformredirect.html">
-    <div class="form-check">
-        <label class="form-check-label" ng-click="data.redirect_type = 1">
-            <input class="form-check-input" type="radio" ng-model="data.redirect_type" ng-value="1"><?php echo \luya\admin\Module::t('view_index_redirect_internal'); ?>
-        </label>
+<div>
+    <div class="form-group form-side-by-side">
+        <div class="form-side form-side-label">
+            <label><?= \luya\admin\Module::t('view_index_redirect_type'); ?></label>
+        </div>
+        <div class="form-side">
+            <input type="radio" ng-model="data.redirect_type" ng-value="1" id="redirect_internal">
+            <label for="redirect_internal" ng-click="data.redirect_type = 1"><?= \luya\admin\Module::t('view_index_redirect_internal'); ?></label>
+
+            <input type="radio" ng-model="data.type" ng-value="2" id="redirect_external">
+            <label for="redirect_external" ng-click="data.redirect_type = 2"><?= \luya\admin\Module::t('view_index_redirect_external'); ?></label>
+        </div>
     </div>
-    <div class="form-check">
-        <label class="form-check-label" ng-click="data.redirect_type = 2">
-            <input class="form-check-input" type="radio" ng-model="data.redirect_type" ng-value="2"><?php echo \luya\admin\Module::t('view_index_redirect_external'); ?>
-        </label>
+    <div class="form-group form-side-by-side">
+        <div class="form-side form-side-label"></div>
+        <div class="form-side">
+            <div ng-switch on="data.redirect_type">
+                <div ng-switch-when="1">
+                    <p><?= \luya\admin\Module::t('view_index_redirect_internal_select'); ?></p>
+                    <menu-dropdown class="menu-dropdown" nav-id="data.redirect_type_value" />
+                </div>
+                <div ng-switch-when="2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="material-icons">link</i></div>
+                            <input type="text" class="form-control" ng-model="data.redirect_type_value" placeholder="http://">
+                        </div>
+                        <small class="form-text text-muted"><?= \luya\admin\Module::t('view_index_redirect_external_link_help'); ?></small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group" ng-show="data.redirect_type==1">
-        <label><?php echo \luya\admin\Module::t('view_index_redirect_internal_select'); ?></label>
-        <menu-dropdown class="menu-dropdown" nav-id="data.redirect_type_value" />
-    </div>
-    <div class="form-group" ng-show="data.redirect_type==2">
-        <label><?php echo \luya\admin\Module::t('view_index_redirect_external_link'); ?></label>
-        <input class="form-control" type="text" class="input__field" ng-model="data.redirect_type_value" placeholder="https://" />
-        <small class="form-text text-muted"><?php echo \luya\admin\Module::t('view_index_redirect_external_link_help'); ?></small>
-    </div>
-    <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
+</div>
+<button type="button" class="btn btn-save btn-icon" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
 
 <!-- CREATE DRAFT FORM -->
 <script type="text/ng-template" id="createformdraft.html">
-    <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
+    <button type="button" class="btn btn-save btn-icon" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
 
 <!-- PAGE UPDATE FORM -->
 <script type="text/ng-template" id="updateformpage.html">
-    <div class="row" ng-show="isEditAvailable()">
-        <div class="input input--select col s12">
-            <label class="input__label"><?php echo Module::t('view_index_page_version_chooser'); ?></label>
-            <div class="input__field-wrapper" ng-show="parent.typeData!==undefined">
-                <select ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
-            </div>
-        </div>
+<div class="form-group form-side-by-side" ng-show="isEditAvailable()">
+	<div class="form-side form-side-label">
+    	<label><?= \luya\admin\Module::t('view_index_page_version_chooser'); ?></label>
     </div>
+	<div class="form-side">
+		<select class="form-control" ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
+	</div>
+</div>
 </script>
 
 <!-- UPDATE MODULE FORM -->
