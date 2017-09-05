@@ -2,7 +2,7 @@ Finally – with this LUYA release, the new admin UI is available!
 
 It took us almost half a year to develop and integrate the new admin UI. We rewrote all HTML and CSS files on the basis of the Bootstrap 4 framework (which will make it easier for developers to style their own extensions to the LUYA backend). There was also plenty of work involved adapting the AngularJS scripts.
 
-< SCREENSHOT >
+![LUYA RC4 Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-rc4.png)
 
 Initially we had planned to release LUYA version 1.0.0 at this time, but the new admin UI brings too many changes, so that we are depending on all LUYA developers to report bugs and missing features. Therefore this is RC4.
 
