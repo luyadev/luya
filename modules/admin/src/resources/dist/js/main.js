@@ -3037,7 +3037,7 @@ zaa.factory('HtmlStorage', function() {
             	$scope.unset = function() {
             		$scope.model = null;
             		$scope.data.model = null;
-            	}
+            	};
             	
             	$scope.data = {
             		modalState: 1,
@@ -3077,7 +3077,7 @@ zaa.factory('HtmlStorage', function() {
                                     '<i class="material-icons left">insert_link</i>' +
                                     '<span>'+i18n['js_link_set_value']+'</span>' +
                                 '</div>' +
-                                '<span class="link-selector-path">Kein Link gesetzt</span>' +
+                                '<span style="margin-left:10px;">'+i18n['js_link_not_set']+'</span>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
@@ -3085,7 +3085,6 @@ zaa.factory('HtmlStorage', function() {
                         '<div class="modal-body">' +
                             '<update-form-redirect data="data.model"></update-form-redirect>' +
                         '</div>' +
-
                         '<div class="modal-footer">'+
                             '<button ng-click="unset(); data.modalState=1" type="button" class="btn btn-icon btn-cancel"></button> '+
                             '<button ng-click="data.modalState=1" class="btn btn-icon btn-save" type="button">'+i18n['js_link_set_value']+'</button>' +

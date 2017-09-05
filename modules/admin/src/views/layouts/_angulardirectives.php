@@ -41,6 +41,7 @@ use luya\admin\Module as Admin;
 
 <!-- UPDATE REDIRECT FORM -->
 <script type="text/ng-template" id="updateformredirect.html">
+<div>
     <div class="form-group form-side-by-side">
         <div class="form-side form-side-label">
             <label><?= Admin::t('view_index_redirect_type'); ?></label>
@@ -53,33 +54,27 @@ use luya\admin\Module as Admin;
             <label for="redirect_external" ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
         </div>
     </div>
-
     <div class="form-group form-side-by-side">
         <div class="form-side form-side-label"></div>
         <div class="form-side">
-
             <div ng-switch on="data.type">
                 <div ng-switch-when="1">
-
                     <p><?= Admin::t('view_index_redirect_internal_select'); ?></p>
                     <menu-dropdown class="menu-dropdown" nav-id="data.value" />
-
                 </div>
                 <div ng-switch-when="2">
-
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="material-icons">link</i></div>
-                            <input type="email" class="form-control" ng-model="data.value" placeholder="http://">
+                            <input type="text" class="form-control" ng-model="data.value" placeholder="http://">
                         </div>
-                        <small id="emailHelp" class="form-text text-muted"><?= Admin::t('view_index_redirect_external_link_help'); ?></small>
+                        <small class="form-text text-muted"><?= Admin::t('view_index_redirect_external_link_help'); ?></small>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
+</div>
 </script>
 <!-- /UPDATE REDIRECT FORM -->
 

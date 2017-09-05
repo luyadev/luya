@@ -248,4 +248,5 @@ return [
     'login_ssl_info' => 'Die Webseite wird über eine sichere verschlüsselte Verbindung geschützt.',
     'locked_info' => 'Wird bearbeitet',
     'menu_dashboard' => 'Dashboard',
+	'js_link_not_set' => 'Kein Link gesetzt',
 ];
