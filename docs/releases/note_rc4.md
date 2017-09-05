@@ -1,4 +1,4 @@
-Finally – with this release, the new admin UI is available!
+Finally – with this LUYA release, the new admin UI is available!
 
 It took us almost half a year to develop and integrate the new admin UI. We rewrote all HTML and CSS files on the basis of the Bootstrap 4 framework (which will make it easier for developers to style their own extensions to the LUYA backend). There was also plenty of work involved adapting the AngularJS scripts.
 
@@ -13,7 +13,7 @@ What else has been done?
 + Modules can now have custom dashboard objects: simply generate a dashboard object from your admin module (e.g. to display latest news, last logins etc.).
 + New Import and Export helper classes let you conveniently import and export CSV files (other formats to follow).
 + The admin UI now includes a developer toolbar which tracks all requests.
-+ New and extended scafolding commands let you create filters, active windows and cruds easier and with better results.
++ New and extended scaffolding commands let you create filters, active windows and cruds easier and with better results.
 + PostgreSQL support was added.
 + Additional ngrest plugins were added, including CheckboxRelationActiveQuery, Sortables and a beautiful Color Wheel.
 + Administration file uploading is now more secure.
@@ -28,6 +28,6 @@ Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CH
 
 If you have any problems or questions regarding the upgrade process, don't hesitate to create an [issue on GitHub](https://github.com/luyadev/luya/issues).
 
-5 September 2017
-LUYA developer team
+5 September 2017  
+LUYA developer team  
 [luya.io](https://luya.io)
