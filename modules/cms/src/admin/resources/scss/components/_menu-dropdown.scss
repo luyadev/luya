@@ -1,3 +1,13 @@
+.menu-dropdown {
+    clear: both;
+    display: block;
+    padding-top: 10px;
+
+    .form-side > & {
+        padding-top: 0;
+    }
+}
+
 .menu-dropdown-toggle-all {
     font-size: 14px;
     cursor: pointer;

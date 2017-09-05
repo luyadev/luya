@@ -73,9 +73,11 @@
                 "name": "@fieldname"
             },
             template: function() {
-                return '<div class="input input--image-upload" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
+            	return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label>{{label}}</label>' +
+                            '</div>' +
+                            '<div class="form-side">' +
                                 '<menu-dropdown class="menu-dropdown" nav-id="model" />' +
                             '</div>' +
                         '</div>';
