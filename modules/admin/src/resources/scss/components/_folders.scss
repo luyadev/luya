@@ -43,6 +43,10 @@ $icon-line-height: $icon-font-size + 5px;
     }
 }
 
+.folders-item-root {
+    padding-left: 26px;
+}
+
 .folders-text {
     display: block;
     flex: 1 1 auto;
@@ -94,7 +98,7 @@ $icon-line-height: $icon-font-size + 5px;
 }
 
 .folders-folder-name {
-    padding-left: 30px;
+    padding-left: 26px;
 }
 
 .folders-folder-icon {
@@ -147,7 +151,6 @@ $icon-line-height: $icon-font-size + 5px;
     position: absolute;
     top: 0;
     height: 100%;
-    align-items: center;
 }
 
 

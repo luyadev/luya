@@ -203,7 +203,7 @@ use luya\admin\Module as Admin;
                         <span class="folders-folder-icon" ng-if="currentFolderId != 0">
                             <i class="material-icons">folder_open</i>
                         </span>
-                        <span><?= Admin::t('layout_filemanager_root_dir'); ?></span>
+                        <div class="folders-item-root"><?= Admin::t('layout_filemanager_root_dir'); ?></div>
                     </span>
                     <ul class="folders">
                         <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
