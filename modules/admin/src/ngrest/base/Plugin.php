@@ -238,7 +238,7 @@ abstract class Plugin extends Component
                 $options['model-selection'] = 1;
             }
             
-            return $this->createTag('crud-loader', null, array_merge(['api' => str_replace('-', '/', $menu['route']), 'alias' => $menu['alias']], $options));
+            return $this->createTag('crud-loader', null, array_merge(['api' => $menu['route'], 'alias' => $menu['alias']], $options));
         }
         
         return null;
