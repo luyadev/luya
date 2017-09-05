@@ -13,7 +13,7 @@ final class Module extends \luya\admin\base\Module
         'api-crawler-searchdata' => 'luya\crawler\admin\apis\SearchdataController',
     ];
 
-    public $translations = [
+    public static $translations = [
         [
             'prefix' => 'crawleradmin*',
             'basePath' => '@crawleradmin/messages',
@@ -30,6 +30,13 @@ final class Module extends \luya\admin\base\Module
         ->itemApi('crawler_index', 'crawleradmin/index/index', 'list', 'api-crawler-index')
         ->group('Anylatics')
         ->itemApi('Searchdata', 'crawleradmin/searchdata/index', 'label', 'api-crawler-searchdata');
+    }
+    
+    public static function onLoad()
+    {
+    	self::registerTranslation('crawleradmin', static::staticBasePath() . ' /messages', [
+    		'crawleradmin' => 'crawleradmin.php',
+    	]);
     }
 
     public static function t($message, array $params = [])

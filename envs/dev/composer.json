@@ -11,7 +11,9 @@
         "fabpot/goutte" : "^3.1",
         "jakeasmith/http_build_url" : "^0.1",
         "ifsnop/mysqldump-php":"2.*",
-        "paypal/rest-api-sdk-php" : "~1.6.0"
+        "paypal/rest-api-sdk-php" : "~1.6.0",
+        "luyadev/luya-bootstrap4": "^1.0@dev",
+        "luyadev/luya-composer": "^1.0"
     },
     "extra": {
         "asset-installer-paths": {

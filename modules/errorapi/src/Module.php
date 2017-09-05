@@ -18,7 +18,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
         ['pattern' => 'errorapi/resolve', 'route' => 'errorapi/default/resolve'],
     ];
 
-    public $translations = [
+    public static $translations = [
         [
             'prefix' => 'errorapi*',
             'basePath' => '@errorapi/messages',
@@ -27,9 +27,16 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             ],
         ],
     ];
+    
+    public static function onLoad()
+    {
+    	self::registerTranslation('errorapi', '@errorapi/messages', [
+    		'errorapi' => 'errorapi.php',
+    	]);
+    }
 
     public static function t($message, array $params = [])
     {
-        return Yii::t('errorapi', $message, $params, Yii::$app->language);
+        return parent::baseT('errorapi', $message, $params);
     }
 }

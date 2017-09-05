@@ -2,7 +2,6 @@
 
 namespace luya\news\admin;
 
-use Yii;
 use luya\admin\components\AdminMenuBuilder;
 
 /**
@@ -18,16 +17,6 @@ final class Module extends \luya\admin\base\Module
         'api-news-cat' => 'luya\news\admin\apis\CatController',
     ];
 
-    public $translations = [
-        [
-            'prefix' => 'newsadmin*',
-            'basePath' => '@newsadmin/messages',
-            'fileMap' => [
-                'newsadmin' => 'newsadmin.php',
-            ],
-        ],
-    ];
-    
     /**
      * @inheritdoc
      */
@@ -40,6 +29,13 @@ final class Module extends \luya\admin\base\Module
                     ->itemApi('cat', 'newsadmin/cat/index', 'bookmark_border', 'api-news-cat');
     }
 
+    public static function onLoad()
+    {
+    	self::registerTranslation('newsadmin', '@newsadmin/messages', [
+    		'newsadmin' => 'newsadmin.php',
+    	]);
+    }
+    
     /**
      * Translat news messages.
      *
@@ -49,6 +45,6 @@ final class Module extends \luya\admin\base\Module
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('newsadmin', $message, $params);
+        return parent::baseT('newsadmin', $message, $params);
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d04e9277ea3c1f2aa96b427a8cc8a85",
+    "content-hash": "60c00cfd12eac7fac5485e3a153af171",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -824,6 +824,122 @@
             "time": "2014-11-17T16:24:50+00:00"
         },
         {
+            "name": "luyadev/luya-bootstrap4",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/luyadev/luya-bootstrap4.git",
+                "reference": "3dfff9e16820950d6de8bc6bb520351076ea5315"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/luyadev/luya-bootstrap4/zipball/3dfff9e16820950d6de8bc6bb520351076ea5315",
+                "reference": "3dfff9e16820950d6de8bc6bb520351076ea5315",
+                "shasum": ""
+            },
+            "require-dev": {
+                "luyadev/luya": "^1.0@dev",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "luya-module",
+            "extra": {
+                "luya": {
+                    "blocks": [
+                        "src/blocks"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                },
+                "asset-pattern-skip-version": "(-build|-patch)",
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "luya\\bootstrap4\\": "src/",
+                    "luya\\bootstrap4\\tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Basil",
+                    "email": "git@nadar.io",
+                    "homepage": "https://github.com/nadar"
+                }
+            ],
+            "description": "Bootstrap4 Assets and Helper classes like ActiveForm for LUYA and Yii2.",
+            "homepage": "http://luya.io",
+            "keywords": [
+                "assets",
+                "bootstrap",
+                "bootstrap4",
+                "cms",
+                "luya",
+                "luya-module",
+                "module",
+                "php",
+                "twbs4",
+                "yii2"
+            ],
+            "time": "2017-09-02T08:06:15+00:00"
+        },
+        {
+            "name": "luyadev/luya-composer",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/luyadev/luya-composer.git",
+                "reference": "d38751971accbea722897c82e7670fa41214c317"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d38751971accbea722897c82e7670fa41214c317",
+                "reference": "d38751971accbea722897c82e7670fa41214c317",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "luya\\composer\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "luya\\composer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Basil Suter",
+                    "email": "basil@nadar.io"
+                }
+            ],
+            "description": "LUYA composer core",
+            "keywords": [
+                "composer",
+                "luya"
+            ],
+            "time": "2017-09-02T07:47:35+00:00"
+        },
+        {
             "name": "paypal/rest-api-sdk-php",
             "version": "v1.6.4",
             "source": {
@@ -1613,7 +1729,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "luyadev/luya-bootstrap4": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -106,7 +106,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         ];
     }
 
-    public $translations = [
+    public static $translations = [
         [
             'prefix' => 'cmsadmin*',
             'basePath' => '@cmsadmin/messages',
@@ -115,6 +115,13 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             ],
         ],
     ];
+    
+    public static function onLoad()
+    {
+    	self::registerTranslation('cmsadmin*', '@cmsadmin/messages', [
+    		'cmsadmin' => 'cmsadmin.php',
+    	]);
+    }
     
     /**
      * @var array Defined blocks to hidde from the cmsadmin. Those blocks are not listed in the Page Content blocks overview. You can override this
@@ -243,7 +250,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('cmsadmin', $message, $params);
+    	return parent::baseT('cmsadmin', $message, $params);
     }
     
     private static $_authorUserId = 0;
