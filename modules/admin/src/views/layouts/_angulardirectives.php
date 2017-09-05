@@ -157,7 +157,7 @@ use luya\admin\Module as Admin;
             <span class="folders-folder-icon" ng-if="currentFolderId != folder.id">
                 <i class="material-icons">folder_open</i>
             </span>
-            <span class="folders-folder-name" ng-hide="editFolderLabel">{{folder.name }}</span>
+            <div class="folders-folder-name" ng-hide="editFolderLabel">{{folder.name }}</div>
         </span>
         <span class="folder-text folder-edit" ng-show="editFolderLabel">
             <input class="folder-label-input" ng-model="folder.name" type="text" />
