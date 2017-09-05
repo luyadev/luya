@@ -85,25 +85,6 @@
         }
     }
 
-    .toolbar-button {
-        background: none;
-        border: none;
-        border-radius: 0;
-        color: $white;
-        cursor: pointer;
-        display: block;
-        margin-left: 5px;
-        transition: .25s ease-in-out background-color;
-
-        &:hover {
-            background-color: rgba(255, 255, 255, .2);
-        }
-
-        .block--is-dragging & {
-            display: none;
-        }
-    }
-
     .block:hover > & {
         opacity: 1;
         pointer-events: all;
@@ -129,5 +110,25 @@
 
     .block-is-layout > .block > & {
         padding: 10px 0;
+    }
+}
+
+.block-toolbar-button {
+    background: none;
+    border: none;
+    border-radius: 0;
+    color: $white;
+    cursor: pointer;
+    display: block;
+    margin-left: 5px;
+    transition: .25s ease-in-out background-color;
+    background-color: transparent;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .2);
+    }
+
+    .block--is-dragging & {
+        display: none;
     }
 }

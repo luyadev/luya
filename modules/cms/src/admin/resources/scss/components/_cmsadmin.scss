@@ -35,7 +35,7 @@
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    margin: 15px 0 30px;
+    margin: $content-padding-y 0 30px;
     width: 100%;
 
     label {
@@ -45,6 +45,25 @@
 
 .cmsadmin-nav-tabs {
     display: flex;
+    min-height: 43px;
+
+    .nav-item:first-of-type {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+
+    .nav-item-title {
+        padding-left: 10px;
+    }
+
+    .nav-item-alternative {
+        margin-left: 5px;
+
+        > .flag {
+            line-height: 44px;
+            border-radius: $border-radius;
+        }
+    }
 }
 
 .cmsadmin-fallback-small {
@@ -89,10 +108,6 @@
                     &.active {
                         border-bottom: 1px solid map-get($grays, 100);
                     }
-                }
-
-                .nav-item-title {
-                    padding-left: 0;
                 }
 
                 .nav-item-alternative .nav-link {

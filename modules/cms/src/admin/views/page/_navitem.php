@@ -16,27 +16,27 @@ use luya\helpers\Html;
                         <span>{{block.name}}</span>
                     </div>
                     <div class="toolbar-item ml-auto" ng-click="copyBlock()">
-                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_copy'));?>" tooltip-position="top">
+                        <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_copy'));?>" tooltip-position="top">
                             <i class="material-icons">content_copy</i>
                         </button>
                     </div>
                     <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==0">
-                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_visible'));?>" tooltip-position="top">
+                        <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_visible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility</i>
                         </button>
                     </div>
                     <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==1">
-                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_invisible'));?>" tooltip-position="top">
+                        <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_invisible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility_off</i>
                         </button>
                     </div>
                     <div class="toolbar-item" ng-click="removeBlock()">
-                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_delete'));?>" tooltip-position="top">
+                        <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_delete'));?>" tooltip-position="top">
                             <i class="material-icons">delete</i>
                         </button>
                     </div>
                     <div ng-show="isEditable()" ng-click="toggleEdit()" class="toolbar-item">
-                        <button class="toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_edit'));?>" tooltip-position="top">
+                        <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_edit'));?>" tooltip-position="top">
                             <i class="material-icons">edit</i>
                         </button>
                     </div>
@@ -95,16 +95,13 @@ use luya\helpers\Html;
 </script>
 <?= $this->render('_navitem_settings'); ?>
 <div class="cmsadmin-nav-tabs" ng-if="loaded">
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item nav-item-title">
+    <ul class="nav nav-tabs flex-no-wrap" role="tablist">
+        <li class="nav-item nav-item-alternative nav-item-icon">
             <span class="flag flag-{{lang.short_code}}">
                 <span class="flag-fallback">{{lang.name}}</span>
             </span>
-            <span>{{ item.title }}</span>
         </li>
-    </ul>
-    <ul class="nav nav-tabs flex-no-wrap" role="tablist">
-        <li class="nav-item nav-item-alternative nav-item-icon" ng-show="isTranslated">
+        <li class="nav-item nav-item-alternative nav-item-icon ml-auto" ng-show="isTranslated">
             <a class="nav-link" ng-click="toggleSettingsOverlay(1)">
                 <i class="material-icons">edit</i>
             </a>
@@ -124,7 +121,9 @@ use luya\helpers\Html;
                 <i class="material-icons">open_in_new</i>
             </a>
         </li>
+        <li class="nav item nav-item-title"><span>{{ item.title }}</span></li>
     </ul>
+
     <ul class="nav nav-tabs ml-auto" role="tablist" ng-if="item.nav_item_type==1">
         <li class="nav-item dropdown" ng-class="{'show': versionDropDownVisbility}">
             <a class="nav-link dropdown-toggle" role="button" ng-click="toggleVersionsDropdown()">{{ currentPageVersionAlias }}</a>

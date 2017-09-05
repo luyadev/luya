@@ -393,17 +393,15 @@ $btns: (
 // Custom admin buttons
 // ==================================================
 
-
-.toolbar-button {
+.btn-toolbar {
+    border: none;
     border-radius: $border-radius;
+    cursor: pointer;
+    position: relative;
 
-    &:hover {
-        color: theme-color(primary);
-    }
 }
 
-    // Label outside of buttons
-
+// Label outside of buttons
 .btn-label {
     margin-left: 10px;
     vertical-align: middle;
