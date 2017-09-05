@@ -48,7 +48,6 @@
             width: $mainnav-width-small;
         }
     }
-
 }
 
 .luya-subnav {
@@ -126,7 +125,6 @@
 
 body.browser-safari {
     .luya-mainnav {
-
         margin-right: 30px;
 
         &-small {
@@ -137,5 +135,17 @@ body.browser-safari {
     }
     .mainnav-link {
         display: block;
+    }
+
+    .luya-mainnav-is-open {
+        .luya-subnav {
+            &.overlaying {
+                left: $mainnav-width;
+
+                &:hover {
+                    transform: translateX(0);
+                }
+            }
+        }
     }
 }

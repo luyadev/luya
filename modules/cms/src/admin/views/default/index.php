@@ -25,7 +25,7 @@ use \luya\admin\Module as AdminModule;
         <li class="treeview-item" ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'cmsNavReverse.html'" />
     </ul>
 </script>
-<div class="luya-main">
+<div class="luya-main" ng-class="{'luya-mainnav-is-open' : isHover}">
     <div class="luya-subnav" ng-controller="CmsMenuTreeController" ng-class="{'overlaying': liveEditStateToggler}">
         <div class="cmsnav">
             <ul class="cmsnav-list cmsnav-list-buttons">

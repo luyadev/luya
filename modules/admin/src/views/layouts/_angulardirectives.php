@@ -183,7 +183,7 @@ use luya\admin\Module as Admin;
         <!-- Folders -->
         <div class="filemanager-folders">
             <div class="filemanager-add-folder">
-                <div class="btn btn-icon btn-add btn-success" ng-click="folderFormToggler()" ng-if="!showFolderForm">
+                <div class="btn btn-icon btn-add-folder btn-success" ng-click="folderFormToggler()" ng-if="!showFolderForm">
                    <?= Admin::t('layout_filemanager_add_folder'); ?>
                 </div>
                 <div class="filemanager-add-folder-form" ng-if="showFolderForm">
@@ -205,7 +205,7 @@ use luya\admin\Module as Admin;
                         </span>
                         <div class="folders-item-root"><?= Admin::t('layout_filemanager_root_dir'); ?></div>
                     </span>
-                    <ul class="folders">
+                    <ul class="folders folders-items">
                         <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
                     </ul>
                 </li>
