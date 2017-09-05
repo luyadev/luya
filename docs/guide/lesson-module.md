@@ -2,7 +2,7 @@
 
 In this lesson we're going to create a module which handles all basic needs for maintaining a simple address book. We'll create the module, learn about the CRUD interface, establish an URL route and learning about the two ways of a possible module frontend presentation. 
 
-Our starting point is a fresh [LUYA kickstarter RC3 installation](https://luya.io/guide/install).
+Our starting point is a fresh [LUYA kickstarter installation](https://luya.io/guide/install).
 
 ## Create the module using the LUYA code wizard
 
@@ -124,7 +124,7 @@ namespace app\modules\addressbook\admin;
 /**
  * Addressbook Admin Module.
  *
- * File has been created with `module/create` command on LUYA version 1.0.0-RC3. 
+ * File has been created with `module/create` command on LUYA version 1.0.0. 
  */
 class Module extends \luya\admin\base\Module
 {

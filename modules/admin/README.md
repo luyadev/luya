@@ -24,7 +24,7 @@ Administration Interface based on [Angular JS](https://angularjs.org/), [Materia
 Install the module trough composer:
 
 ```sh
-composer require luyadev/luya-module-admin:1.0.0-RC3
+composer require luyadev/luya-module-admin:1.0.0-RC4
 ```
 
 Add the module to your configuration file within the modules section:

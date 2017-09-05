@@ -19,7 +19,7 @@ For installation and usage please check: [LUYA.IO](https://luya.io)
 Install the module trough composer:
 
 ```sh
-composer require luyadev/luya-module-cms:1.0.0-RC3
+composer require luyadev/luya-module-cms:1.0.0-RC4
 ```
 
 Add frontend and admin module of the cms module to your configuration modules section and bootstrap the cms frontend module:

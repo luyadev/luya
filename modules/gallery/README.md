@@ -9,7 +9,7 @@ The gallery module allows you create folders and collection and upload images to
 Require the modules in your composer.json
 
 ```
-"luyadev/luya-module-gallery" : "1.0.0-RC3"
+"luyadev/luya-module-gallery" : "1.0.0-RC4"
 ```
 
 Now add the modules to your configuration in the modules section:

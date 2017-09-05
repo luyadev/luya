@@ -2,7 +2,7 @@
 
 In this lesson we'll show you how to create an image slider block using the LUYA create commands, how to import an existent plugin, add the frontend view code and customize the block to show a preview in the admin view.
 
-Our starting point is a fresh [LUYA kickstarter RC3 installation](https://luya.io/guide/install).
+Our starting point is a fresh [LUYA kickstarter installation](https://luya.io/guide/install).
 
 ## Using the "cms/block/create" command
 Creating a block in LUYA is very simple when using our wizards. As [shown in the guides](https://luya.io/guide/app-blocks) the command for creating a new block is
@@ -73,7 +73,7 @@ The final frontend view file in ```views/blocks/ImagesliderBlock.php``` will loo
 /**
  * View file for block: ImagesliderBlock 
  *
- * File has been created with `block/create` command on LUYA version 1.0.0-RC3. 
+ * File has been created with `block/create` command on LUYA version 1.0.0. 
  *
  * @param $this->extraValue('images');
  * @param $this->varValue('images');

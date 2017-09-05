@@ -9,7 +9,7 @@ The news module will provided you a basic news system with categories and tags.
 In order to install the news module you have to require the `luyadev/luya-module-news`. To add the modules to your composer run:
 
 ```sh
-composer require luyadev/luya-module-news:1.0.0-RC3
+composer require luyadev/luya-module-news:1.0.0-RC4
 ```
 
 This will add the packages to your composer.json and run the update command. So now you have the modules in your vendor folder. Now you have the configure them in your configration (the `configs` folder) file:

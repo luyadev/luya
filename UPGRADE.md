@@ -3,7 +3,7 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
-1.0.0-RC4 (in progress)
+1.0.0-RC4 (5. September 2017)
 -------------------
 
 When upgrading from RC3, we use the luya composer plugin to bootstrap the cms module. Sometimes you have to delete your vendor folder once and run composer update again.
