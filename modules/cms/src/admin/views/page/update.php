@@ -10,7 +10,7 @@ use luya\cms\admin\Module;
         </div>
         <div class="col">
             <div class="cmsadmin-toolbar">
-                <div class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
+                <div ng-show="!isDraft" class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
                     <label class="switch" for="switch-visibility-status">
                         <span class="switch-label">
                             <i class="material-icons" ng-show="!navData.is_hidden">visibility</i>
@@ -22,7 +22,7 @@ use luya\cms\admin\Module;
                         </span>
                     </label>
                 </div>
-                <div class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_offline_info')?>" tooltip-position="bottom">
+                <div ng-show="!isDraft" class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_offline_info')?>" tooltip-position="bottom">
                     <label class="switch" for="switch-online-status">
                         <span class="switch-label">
                             <i class="material-icons" ng-show="!navData.is_offline">cloud_queue</i>
