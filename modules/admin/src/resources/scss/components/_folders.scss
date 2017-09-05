@@ -7,11 +7,8 @@ $icon-line-height: $icon-font-size + 5px;
     max-width: 100%;
     padding: 0;
     width: 320px;
-
     @media (min-width: $mobile-nav-breakpoint) {
-
         width: 100%;
-
     }
 }
 
@@ -40,6 +37,10 @@ $icon-line-height: $icon-font-size + 5px;
         margin-top: 5px;
         padding-left: 10px;
         width: 100%;
+    }
+
+    .folders-items {
+        padding-left: 3px;
     }
 }
 
@@ -153,7 +154,6 @@ $icon-line-height: $icon-font-size + 5px;
     height: 100%;
 }
 
-
 .folders-actions-left {
     left: 0;
 }
@@ -211,9 +211,4 @@ $icon-line-height: $icon-font-size + 5px;
 .folders-folder-move-icon {
     cursor: pointer;
     right: 10px;
-}
-
-
-.folders-items {
-    padding-left: 0 !important;
 }
