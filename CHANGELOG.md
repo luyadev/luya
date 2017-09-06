@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file. This projec
 1.0.0 (in progress)
 -------------------
 
+### Changed
+
+
+### Added
+
+
+### Fixed
+
+
 1.0.0-RC4 (5. September 2017)
 -------------------
 
