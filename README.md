@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://luya.io/img/luya_logo_flat_icon.png" alt="LUYA Logo"/>
+  <img src="https://luya.io/img/logo_destructed.png" alt="LUYA Logo"/>
 </p>
 
 > 5, September 2017: RC4 is ready! [1.0.0-RC4](https://luya.io/news/last-release-candidate-1-0-0-rc4).

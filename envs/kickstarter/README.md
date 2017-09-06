@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://luya.io/img/luya_logo_flat_icon.png" alt="LUYA Logo"/>
+  <img src="https://luya.io/img/logo_destructed.png" alt="LUYA Logo"/>
 </p>
 
 # LUYA Kickstarter Application
@@ -11,7 +11,7 @@
 
 [LUYA](https://github.com/luyadev/luya) is a [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
-![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta8.png)
+![LUYA RC4 Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-rc4.png)
 
 ### Installation
 

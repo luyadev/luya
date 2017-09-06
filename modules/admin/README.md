@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://luya.io/img/logo_destructed.png" alt="LUYA Logo"/>
+</p>
+
 LUYA Administration Interface
 ==========
 
