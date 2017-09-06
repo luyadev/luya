@@ -55,8 +55,8 @@
     color: color('gray');
     display: flex;
     flex-direction: column;
-    overflow: auto;
-    overflow: -moz-scrollbars-none; // Firefox
+    overflow-y: auto;
+    // overflow: -moz-scrollbars-none; // Firefox
     width: 100%;
 
     &::-webkit-scrollbar {
@@ -97,8 +97,8 @@
 
 .luya-content {
     background-color: map-get($grays, 100);
-    overflow: auto;
-    overflow: -moz-scrollbars-none; // Firefox
+    overflow-y: auto;
+    //overflow: -moz-scrollbars-none; // Firefox
     padding: $content-padding-y $content-padding-x;
     height: 100%;
     &::-webkit-scrollbar {

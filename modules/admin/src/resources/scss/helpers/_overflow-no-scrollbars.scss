@@ -1,6 +1,6 @@
 @mixin overflow-no-scrollbars() {
-    overflow: auto;
-    overflow: -moz-scrollbars-none; // Firefox
+    overflow-y: auto;
+    //overflow: -moz-scrollbars-none; // Firefox
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
