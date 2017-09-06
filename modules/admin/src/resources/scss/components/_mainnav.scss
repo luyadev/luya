@@ -64,8 +64,8 @@
 .mainnav-modules {
     flex: 1 0;
 
-    overflow: auto;
-    overflow: -moz-scrollbars-none; // Firefox
+    overflow-y: auto;
+    //overflow: -moz-scrollbars-none; // Firefox
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }

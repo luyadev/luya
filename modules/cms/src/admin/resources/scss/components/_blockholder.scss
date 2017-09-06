@@ -17,7 +17,6 @@
 }
 
 .blockholder {
-    overflow-y: scroll;
     background-color: color(gray);
     color: map-get($grays, 500);
     display: block;
