@@ -166,6 +166,7 @@
     font-size: 15px;
     font-weight: 300;
     color: $gray-800;
+    cursor: text;
 }
 
 .login-input {
@@ -185,17 +186,16 @@
         margin-bottom: 3px;
     }
 
-    &:focus, &:valid, &:-webkit-autofill {
-        outline: 0;
-        ~ .login-input-label {
-            top: -24px;
-            font-size: 13px;
-            left: 0;
-        }
+    &.is-not-empty ~ .login-input-label {
+        top: -24px;
+        font-size: 13px;
+        left: 0;
+        cursor: default;
     }
 
     &:focus, &:valid {
         border-bottom-color: $pink;
+        outline: 0;
     }
 }
 
