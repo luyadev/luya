@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1454](https://github.com/luyadev/luya/issues/1454) Fixed Problem with Admin UI and Firefox Browsers.
+
 
 1.0.0-RC4 (5. September 2017)
 -------------------
