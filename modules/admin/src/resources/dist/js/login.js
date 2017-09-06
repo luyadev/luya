@@ -97,19 +97,12 @@ var checkInputLabels = function () {
 
     var check = function(element) {
         var $element = element ? $(element) : $('.login-input');
-
-        console.log($element.length);
-
-
         if($element.length >= 2) {
             $element.each( function(key, element) {
                 check(element);
             });
         } else {
-
             var val = $element.val() ? $element.val() : '';
-            console.log(val.length);
-
             if(val.length >= 1) {
                 $element
                     .addClass('is-not-empty')

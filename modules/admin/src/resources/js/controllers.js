@@ -235,10 +235,11 @@
 			if (n == o || n == undefined || n == null) {
 				return;
 			}
+			
+			$scope.applySearchQuery(n);
 		});
 		
 		$scope.applySearchQuery = function(n) {
-			
 			if (n == undefined || n == null) {
 				return;
 			}
