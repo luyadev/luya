@@ -26,7 +26,7 @@ You can either combine the btn class with predefined icons, to do so simply add 
 ```html
 <button type="button" class="btn btn-save btn-icon">Save</button>
 ```
-> Please keep in mind that ```<input type="button" class="btn btn-icon btn-save" value="Button label" /> ``` does <b>not</b> work because input fields don`t support the pseudo css class ```:after```.
+Please keep in mind that ```<input type="button" class="btn btn-icon btn-save" value="Button label" /> ``` does <b>not</b> work because input fields don`t support the pseudo css class ```:after```.
 
 
 If you would like to display a button without predefined icon use `btn-icon` without a defined class:
