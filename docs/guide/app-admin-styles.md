@@ -26,7 +26,7 @@ You can either combine the btn class with predefined icons, to do so simply add 
 ```html
 <button type="button" class="btn btn-save btn-icon">Save</button>
 ```
-> Please keep in mind that ```<input type="button" class="btn btn-icon btn-save" value="Button label" /> ``` does <b>not</b> work because input fields don`t support the pseudo css class ```:after``.
+> Please keep in mind that ```<input type="button" class="btn btn-icon btn-save" value="Button label" /> ``` does <b>not</b> work because input fields don`t support the pseudo css class ```:after```.
 
 
 If you would like to display a button without predefined icon use `btn-icon` without a defined class:
@@ -55,30 +55,30 @@ Material Design Icons: https://material.io/icons/
 
 | Description | Icon            | Name         |
 | ------------- | ------------- | ------------- |
-| Upload icon | ![file_upload](img/app-admin-styles/default-icons/file_upload.png) | file_upload |
-| Download icon | ![file_upload](img/app-admin-styles/default-icons/file_download.png) | file_download |
-| Edit icon | ![file_upload](img/app-admin-styles/default-icons/edit.png) | edit |
-| Add icon | ![file_upload](img/app-admin-styles/default-icons/add_box.png) | add_box |
-| Add icon for button | ![file_upload](img/app-admin-styles/default-icons/add.png) | add_box |
-| Delete icon | ![file_upload](img/app-admin-styles/default-icons/delete.png) | delete |
-| Save / Confirm icon | ![file_upload](img/app-admin-styles/default-icons/check.png) | check |
-| Abort / Clear icon | ![file_upload](img/app-admin-styles/default-icons/clear.png) | clear |
-| Config icon | ![file_upload](img/app-admin-styles/default-icons/settings.png) | settings |
-| Settings icon | ![file_upload](img/app-admin-styles/default-icons/more_vert.png) | more_vert |
-| Visible icon | ![file_upload](img/app-admin-styles/default-icons/visibility.png) | visibility |
-| Invisible icon | ![file_upload](img/app-admin-styles/default-icons/visibility_off.png) | visibility_off |
-| Online icon | ![file_upload](img/app-admin-styles/default-icons/cloud_queue.png) | cloud_queue |
-| Offline icon | ![file_upload](img/app-admin-styles/default-icons/cloud_off.png) | cloud_off |
-| Sort icon | ![file_upload](img/app-admin-styles/default-icons/keyboard_arrow_down.png) ![file_upload](img/app-admin-styles/default-icons/keyboard_arrow_up.png) | keyboard\_arrow\_down / keyboard\_arrow\_up |
-| Folder icon | ![file_upload](img/app-admin-styles/default-icons/folder_open.png) | folder_open |
+| Upload icon | <i class="material-icons">file_upload</i> | file_upload |
+| Download icon | <i class="material-icons">file_download</i> | file_download |
+| Edit icon | <i class="material-icons">edit</i> | edit |
+| Add icon | <i class="material-icons">add_box</i> | add_box |
+| Add icon for button | <i class="material-icons">add</i> | add_box |
+| Delete icon | <i class="material-icons">delete</i> | delete |
+| Save / Confirm icon | <i class="material-icons">check.png) | check |
+| Abort / Clear icon | <i class="material-icons">clear</i>  | clear |
+| Config icon | <i class="material-icons">settings</i> | settings |
+| Settings icon | <i class="material-icons">more_vert</i> | more_vert |
+| Visible icon | <i class="material-icons">visibility</i> | visibility |
+| Invisible icon | <i class="material-icons">visibility_off</i> | visibility_off |
+| Online icon | <i class="material-icons">cloud_queue</i> | cloud_queue |
+| Offline icon | <i class="material-icons">cloud_off</i> | cloud_off |
+| Sort icon | <i class="material-icons">keyboard_arrow_down</i> <i class="material-icons">keyboard_arrow_up</i> | keyboard\_arrow\_down / keyboard\_arrow\_up |
+| Folder icon | <i class="material-icons">folder</i> | folder |
+| Create folder | <i class="material-icons">create_new_folder</i> | create_new_folder |
 
 
-## General Colors 
+## General Colors (in progress)
 
-@TDB
 
-| Element | Color | Variable|
-|---------|-------|---------|
-
+| Element | Color | HEX Color|used for|
+|---------|-------|---------|---------|
+|```<button type="button" class="btn btn-save">Save</button>```|green|#28a745|save, create, upload|
 
 
