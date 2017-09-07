@@ -157,6 +157,6 @@ We configured the *CallbackFormWidget* to use our defined callback function in t
 
 ## Result
 
-After saving the view file, we've successfully added an ActiveWindow to the *addressbook* module. As you can see, it's fully integrated in our CRUD view, utilizes the already defined [materialize table styles](http://materializecss.com/table.html) and uses the LUYA CMS notification service:
+After saving the view file, we've successfully added an ActiveWindow to the *addressbook* module. As you can see, it's fully integrated in our CRUD view, utilizes the already defined [bootstrap table styles](https://getbootstrap.com/docs/4.0/content/tables/) and uses the LUYA CMS notification service:
 
 ![Showing the ActiveWindow](img/aws-result.gif "Showing the ActiveWindow")
