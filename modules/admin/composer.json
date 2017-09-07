@@ -24,7 +24,7 @@
 		"luyadev/luya-core" : "^1.0@dev",
 		"luyadev/luya-testsuite" : "^1.0@dev",
 		"luyadev/luya-module-cms" : "^1.0@dev",
-		"satooshi/php-coveralls": "~1.0",
+		"php-coveralls/php-coveralls": "^1.0",
 		"twbs/bootstrap": "v4.0.0-beta",
 		"bower-asset/angular" : "^1.6.0",
 		"bower-asset/angular-loading-bar" : "^0.9",
