@@ -196,7 +196,7 @@ class ProxyController extends Command
             
             $process = new ClientTransfer(['build' => $build]);
             if ($process->start()) {
-                return $this->outputSuccess('sync process has been sucessfull finished.');
+                return $this->outputSuccess('Sync process has been successfully finished.');
             }
         }
         
