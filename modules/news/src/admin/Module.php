@@ -31,9 +31,9 @@ final class Module extends \luya\admin\base\Module
 
     public static function onLoad()
     {
-    	self::registerTranslation('newsadmin', '@newsadmin/messages', [
-    		'newsadmin' => 'newsadmin.php',
-    	]);
+        self::registerTranslation('newsadmin', '@newsadmin/messages', [
+            'newsadmin' => 'newsadmin.php',
+        ]);
     }
     
     /**

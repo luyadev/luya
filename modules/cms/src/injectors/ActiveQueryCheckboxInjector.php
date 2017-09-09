@@ -43,21 +43,21 @@ use luya\admin\base\TypesInterface;
  */
 final class ActiveQueryCheckboxInjector extends BaseActiveQueryInjector
 {
-	/**
-	 * @inheritdoc
-	 */
-	public function setup()
-	{
-		// injecto the config
-		$this->setContextConfig([
-			'var' => $this->varName,
-			'type' => TypesInterface::TYPE_CHECKBOX_ARRAY,
-			'label' => $this->varLabel,
-			'options' => [
-				'items' => $this->getQueryData(),
-			],
-		]);
-		// provide the extra data
-		$this->context->addExtraVar($this->varName, $this->getExtraAssignArrayData());
-	}
+    /**
+     * @inheritdoc
+     */
+    public function setup()
+    {
+        // injecto the config
+        $this->setContextConfig([
+            'var' => $this->varName,
+            'type' => TypesInterface::TYPE_CHECKBOX_ARRAY,
+            'label' => $this->varLabel,
+            'options' => [
+                'items' => $this->getQueryData(),
+            ],
+        ]);
+        // provide the extra data
+        $this->context->addExtraVar($this->varName, $this->getExtraAssignArrayData());
+    }
 }

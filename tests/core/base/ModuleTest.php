@@ -34,8 +34,8 @@ class ModuleTest extends LuyaWebTestCase
     
     public function testRegisterTranslation()
     {
-    	Module::registerTranslation('test*', '@luya/messages', ['luyua/test']);
-    	Module::registerTranslation('foo*', '@luya/foobar/message', ['foo' => 'foo.php']);
+        Module::registerTranslation('test*', '@luya/messages', ['luyua/test']);
+        Module::registerTranslation('foo*', '@luya/foobar/message', ['foo' => 'foo.php']);
         
         $this->assertArrayHasKey('foo*', Yii::$app->i18n->translations);
         $this->assertArrayHasKey('test*', Yii::$app->i18n->translations);

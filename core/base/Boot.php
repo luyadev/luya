@@ -69,7 +69,7 @@ abstract class Boot
 
     public function isCli()
     {
-    	return $this->getSapiName() === 'cli';
+        return $this->getSapiName() === 'cli';
     }
     
     /**
@@ -128,14 +128,13 @@ abstract class Boot
     {
         if ($this->_configArray === null) {
             if (!file_exists($this->configFile)) {
-            	if (!$this->isCli()) {
-            		throw new Exception("Unable to load the config file '".$this->configFile."'.");
-            	}
-            	
-            	$config = ['id' => 'consoleapp', 'basePath' => dirname(__DIR__)];
+                if (!$this->isCli()) {
+                    throw new Exception("Unable to load the config file '".$this->configFile."'.");
+                }
                 
+                $config = ['id' => 'consoleapp', 'basePath' => dirname(__DIR__)];
             } else {
-            	$config = require $this->configFile;
+                $config = require $this->configFile;
             }
     
             if (!is_array($config)) {
@@ -191,7 +190,7 @@ abstract class Boot
             'bootstrap' => ['luya\console\Bootstrap'],
             'components' => [
                 'urlManager' => [
-                    'class' => 'yii\web\UrlManager', 
+                    'class' => 'yii\web\UrlManager',
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
                     'baseUrl' => !isset($config['consoleBaseUrl']) ?: $config['consoleBaseUrl'],

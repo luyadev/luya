@@ -376,16 +376,16 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
         return [
             [
-            	'html' => $this->createFieldHelpButton($element, $configContext) . $this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], false),
+                'html' => $this->createFieldHelpButton($element, $configContext) . $this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], false),
             ],
         ];
     }
 
     private function createFieldHelpButton(array $element, $configContext)
     {
-    	if ($configContext !== self::TYPE_LIST) {
-    		return '<span ng-if="getFieldHelp(\''.$element['name'].'\')" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getFieldHelp(\''.$element['name'].'\')" tooltip-position="left"></span>';
-    	}
+        if ($configContext !== self::TYPE_LIST) {
+            return '<span ng-if="getFieldHelp(\''.$element['name'].'\')" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getFieldHelp(\''.$element['name'].'\')" tooltip-position="left"></span>';
+        }
     }
     
     private function renderElementPlugins($configContext, $typeConfig, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)

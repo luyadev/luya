@@ -248,7 +248,7 @@ abstract class Module extends \yii\base\Module
         return Yii::getAlias('@' . str_replace('\\', '/', $this->controllerNamespace), false);
     }
 
-	// STATIC METHODS
+    // STATIC METHODS
 
     /**
      * Internal used to register the translations from the translation array or set alias paths.
@@ -285,27 +285,27 @@ abstract class Module extends \yii\base\Module
      */
     public static function registerTranslation($prefix, $basePath, array $fileMap)
     {
-    	Yii::$app->i18n->translations[$prefix] = [
-    		'class' => 'yii\i18n\PhpMessageSource',
-    		'basePath' => $basePath,
-    		'fileMap' => $fileMap,
-    	];
+        Yii::$app->i18n->translations[$prefix] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => $basePath,
+            'fileMap' => $fileMap,
+        ];
     }
     
     /**
      * Get base path from static view port.
-     * 
+     *
      * @return string
      */
     public static function staticBasePath()
     {
-    	$class = new \ReflectionClass(get_called_class());
-    	
-    	return dirname($class->getFileName());
+        $class = new \ReflectionClass(get_called_class());
+        
+        return dirname($class->getFileName());
     }
 
     /**
-     * 
+     *
      * @param unknown $category
      * @param unknown $message
      * @param array $params
@@ -314,7 +314,7 @@ abstract class Module extends \yii\base\Module
      */
     public static function baseT($category, $message, array $params = [], $language = null)
     {
-    	static::onLoad();
-    	return Yii::t($category, $message, $params, $language);
+        static::onLoad();
+        return Yii::t($category, $message, $params, $language);
     }
 }

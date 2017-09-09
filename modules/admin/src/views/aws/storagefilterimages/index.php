@@ -34,6 +34,6 @@ use luya\admin\ngrest\aw\CallbackButtonWidget;
                 <td><a target="_blank" href="<?= $image->source; ?>"><?= $image->source; ?></a></td>
                 <td><?= $image->caption; ?></td>
             </tr>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>

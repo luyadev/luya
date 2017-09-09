@@ -120,8 +120,8 @@ $config = [
             'class' => 'yii\caching\DummyCache', // use: yii\caching\FileCache
         ],
 
-    	/*
-    	 * Translation component. If you don't have translations just remove this component and the folder `messages`. 
+        /*
+    	 * Translation component. If you don't have translations just remove this component and the folder `messages`.
     	 */
         'i18n' => [
             'translations' => [

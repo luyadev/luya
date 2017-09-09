@@ -56,8 +56,8 @@ class BlockImporter extends Importer
      */
     protected function saveBlock($fullClassName)
     {
-    	// ensure all classes start with trailing slash class name definition like `\foo\bar\Class`
-    	$fullClassName = '\\'  . ltrim($fullClassName, '\\');
+        // ensure all classes start with trailing slash class name definition like `\foo\bar\Class`
+        $fullClassName = '\\'  . ltrim($fullClassName, '\\');
         $model = Block::find()->where(['class' => $fullClassName])->one();
         
         $blockObject = $this->createBlockObject($fullClassName);
@@ -119,15 +119,15 @@ class BlockImporter extends Importer
         $group = BlockGroup::findOne(['identifier' => $groupObject->identifier()]);
         
         if ($group) {
-        	return $group->id;
+            return $group->id;
         } else {
-        	$model = new BlockGroup();
-        	$model->name = $groupObject->label();
-        	$model->identifier = $groupObject->identifier();
-        	$model->created_timestamp = time();
-        	if ($model->save()) {
-        		return $model->id;
-        	}
+            $model = new BlockGroup();
+            $model->name = $groupObject->label();
+            $model->identifier = $groupObject->identifier();
+            $model->created_timestamp = time();
+            if ($model->save()) {
+                return $model->id;
+            }
         }
         
         return 0;

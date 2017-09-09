@@ -63,21 +63,21 @@ class Angular
      */
     protected static function optionsArrayInput(array $data)
     {
-    	$data = [];
-    	
-    	foreach ($data as $value => $label) {
-    		if (is_array($label)) {
-    			if (!isset($label['label']) || !isset($label['value'])) {
-    				throw new InvalidConfigException("The options array data for the given element must contain a label and value key.");
-    			}
-    			
-    			$data[] = $label;
-    		} else {
-    			$data[] = ['label' => $label, 'value' => $value];
-    		}
-    	}
-    	
-    	return $data;
+        $data = [];
+        
+        foreach ($data as $value => $label) {
+            if (is_array($label)) {
+                if (!isset($label['label']) || !isset($label['value'])) {
+                    throw new InvalidConfigException("The options array data for the given element must contain a label and value key.");
+                }
+                
+                $data[] = $label;
+            } else {
+                $data[] = ['label' => $label, 'value' => $value];
+            }
+        }
+        
+        return $data;
     }
 
     /**
@@ -195,11 +195,11 @@ class Angular
      */
     public static function select($ngModel, $label, array $data, array $options = [])
     {
-    	return self::injector('zaa-select', $ngModel, $label, self::optionsArrayInput($data), $options);
+        return self::injector('zaa-select', $ngModel, $label, self::optionsArrayInput($data), $options);
     }
     
     /**
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $data
@@ -208,7 +208,7 @@ class Angular
      */
     public static function radios($ngModel, $label, array $data, array $options = [])
     {
-    	return self::injector(TypesInterface::TYPE_RADIO, $ngModel, $label, self::optionsArrayInput($data), $options);
+        return self::injector(TypesInterface::TYPE_RADIO, $ngModel, $label, self::optionsArrayInput($data), $options);
     }
     
     /**

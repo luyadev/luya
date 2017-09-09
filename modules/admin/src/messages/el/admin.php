@@ -234,7 +234,7 @@ return [
     'layout_useronline_activity' => 'Activity',
     'layout_useronline_inactive' => 'inactive',
     'login_ssl_info' => 'Website uses encrypted secure connection.',
-	'locked_info' => 'Someone already editing',
-	'menu_dashboard' => 'Dashboard',
-	'js_link_not_set' => 'No Link selected',
+    'locked_info' => 'Someone already editing',
+    'menu_dashboard' => 'Dashboard',
+    'js_link_not_set' => 'No Link selected',
 ];

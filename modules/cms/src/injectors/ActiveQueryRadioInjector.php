@@ -43,19 +43,19 @@ use luya\admin\base\TypesInterface;
  */
 final class ActiveQueryRadioInjector extends BaseActiveQueryInjector
 {
-	/**
-	 * @inheritdoc
-	 */
-	public function setup()
-	{
-		// injecto the config
-		$this->setContextConfig([
-			'var' => $this->varName,
-			'type' => TypesInterface::TYPE_RADIO,
-			'label' => $this->varLabel,
-			'options' => $this->getQueryData(),
-		]);
-		// provide the extra data
-		$this->context->addExtraVar($this->varName, $this->getExtraAssignSingleData());
-	}
+    /**
+     * @inheritdoc
+     */
+    public function setup()
+    {
+        // injecto the config
+        $this->setContextConfig([
+            'var' => $this->varName,
+            'type' => TypesInterface::TYPE_RADIO,
+            'label' => $this->varLabel,
+            'options' => $this->getQueryData(),
+        ]);
+        // provide the extra data
+        $this->context->addExtraVar($this->varName, $this->getExtraAssignSingleData());
+    }
 }

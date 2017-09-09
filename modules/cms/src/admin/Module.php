@@ -114,9 +114,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public static function onLoad()
     {
-    	self::registerTranslation('cmsadmin*', '@cmsadmin/messages', [
-    		'cmsadmin' => 'cmsadmin.php',
-    	]);
+        self::registerTranslation('cmsadmin*', '@cmsadmin/messages', [
+            'cmsadmin' => 'cmsadmin.php',
+        ]);
     }
     
     /**
@@ -188,7 +188,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     
     /**
      * Getter method for blockVarionts.
-     * 
+     *
      * @return mixed[]|array[]
      */
     public function getBlockVariations()
@@ -260,7 +260,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public static function t($message, array $params = [])
     {
-    	return parent::baseT('cmsadmin', $message, $params);
+        return parent::baseT('cmsadmin', $message, $params);
     }
     
     private static $_authorUserId = 0;

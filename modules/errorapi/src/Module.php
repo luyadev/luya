@@ -6,14 +6,14 @@ use luya\base\CoreModuleInterface;
 
 /**
  * Error API Module.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 final class Module extends \luya\base\Module implements CoreModuleInterface
 {
-	/**
-	 * @var array Mail recipients.
-	 */
+    /**
+     * @var array Mail recipients.
+     */
     public $recipient = [];
 
     /**
@@ -39,9 +39,9 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      */
     public static function onLoad()
     {
-    	self::registerTranslation('errorapi', '@errorapi/messages', [
-    		'errorapi' => 'errorapi.php',
-    	]);
+        self::registerTranslation('errorapi', '@errorapi/messages', [
+            'errorapi' => 'errorapi.php',
+        ]);
     }
 
     /**

@@ -6,14 +6,14 @@ use luya\admin\components\AdminMenuBuilder;
 
 /**
  * Crawler Admin Module.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 final class Module extends \luya\admin\base\Module
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $apis = [
         'api-crawler-builderindex' => 'luya\crawler\admin\apis\BuilderindexController',
         'api-crawler-index' => 'luya\crawler\admin\apis\IndexController',
@@ -37,9 +37,9 @@ final class Module extends \luya\admin\base\Module
      */
     public static function onLoad()
     {
-    	self::registerTranslation('crawleradmin', static::staticBasePath() . '/messages', [
-    		'crawleradmin' => 'crawleradmin.php',
-    	]);
+        self::registerTranslation('crawleradmin', static::staticBasePath() . '/messages', [
+            'crawleradmin' => 'crawleradmin.php',
+        ]);
     }
 
     /**

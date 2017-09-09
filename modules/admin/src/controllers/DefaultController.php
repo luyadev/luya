@@ -92,11 +92,11 @@ class DefaultController extends Controller
     
     public function colorizeValue($value, $displayValue = false)
     {
-    	$text = ($displayValue) ? $value : Module::t('debug_state_on');
-    	if ($value) {
-    		return '<span style="color:green;">'.$text.'</span>';
-    	}
-    	return '<span style="color:red;">'.Module::t('debug_state_off').'</span>';
+        $text = ($displayValue) ? $value : Module::t('debug_state_on');
+        if ($value) {
+            return '<span style="color:green;">'.$text.'</span>';
+        }
+        return '<span style="color:red;">'.Module::t('debug_state_off').'</span>';
     }
     
     public function getTags()

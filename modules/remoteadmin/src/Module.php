@@ -25,9 +25,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     }
     public static function onLoad()
     {
-    	self::registerTranslation('remoteadmin', '@remoteadmin/messages', [
-    		'remoteadmin' => 'remoteadmin.php',
-    	]);
+        self::registerTranslation('remoteadmin', '@remoteadmin/messages', [
+            'remoteadmin' => 'remoteadmin.php',
+        ]);
     }
     
     /**

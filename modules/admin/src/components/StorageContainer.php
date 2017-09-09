@@ -132,7 +132,7 @@ class StorageContainer extends Component
      * @var array The extension which will be rejected.
      */
     public $dangerousExtensions = [
-    	'html', 'php', 'phtml', 'php3', 'exe', 'bat', 'js',	
+        'html', 'php', 'phtml', 'php3', 'exe', 'bat', 'js',
     ];
 
     /**
@@ -386,7 +386,7 @@ class StorageContainer extends Component
 
     /**
      * Ensure a file uploads and return relevant file infos.
-     * 
+     *
      * @param string $fileSource The file on the server ($_FILES['tmp'])
      * @param string $fileName Original upload name of the file ($_FILES['name'])
      * @throws Exception
@@ -394,57 +394,57 @@ class StorageContainer extends Component
      */
     public function ensureFileUpload($fileSource, $fileName)
     {
-    	if (empty($fileSource) || empty($fileName)) {
-    		throw new Exception("Filename and source can not be empty.");
-    	}
-    	
-    	if ($fileName == 'blob') {
-    		$ext = FileHelper::getExtensionsByMimeType(FileHelper::getMimeType($fileSource));
-    		$fileName = 'paste-'.date("Y-m-d-H-i").'.'.$ext[0];
-    	}
-    	
-    	$fileInfo = FileHelper::getFileInfo($fileName);
-    	
-    	$mimeType = FileHelper::getMimeType($fileSource, null, !$this->secureFileUpload);
-    	
-    	if (empty($mimeType)) {
-    		if ($this->secureFileUpload) {
-    			throw new Exception("Unable to find mimeType for the given file, make sure the php extension 'fileinfo' is installed.");
-    		} else {
-    			// this is dangerous and not recommend
-    			$mimeType = FileHelper::getMimeType($fileName);
-    		}
-    	}
-    	
-    	$extensionByMimeType = FileHelper::getExtensionsByMimeType($mimeType);
-    	 
-    	if (empty($extensionByMimeType)) {
-    		throw new Exception("Unable to find extension for type $mimeType or it contains insecure data.");
-    	}
-    	 
-    	if (!in_array($fileInfo->extension, $extensionByMimeType)) {
-    		throw new Exception("The given file extension {$fileInfo->extension} is not matching its mime type.");
-    	}
-    	 
-    	foreach ($extensionByMimeType as $extension) {
-    		if (in_array($extension, $this->dangerousExtensions)) {
-    			throw new Exception("This file extension seems to be dangerous and can not be stored.");
-    		}
-    	}
-    	
-    	if (in_array($mimeType, $this->dangerousMimeTypes)) {
-    		throw new Exception("This file type seems to be dangerous and can not be stored.");
-    	}
-    	
-    	return [
-    		'fileInfo' => $fileInfo,
-    		'mimeType' => $mimeType,
-    		'fileName' => $fileName,
-    		'secureFileName' => Inflector::slug($fileInfo->name, '-'),
-    		'fileSource' => $fileSource,
-    		'extension' => $fileInfo->extension,
-    		'hashName' => FileHelper::hashName($fileName),
-    	];
+        if (empty($fileSource) || empty($fileName)) {
+            throw new Exception("Filename and source can not be empty.");
+        }
+        
+        if ($fileName == 'blob') {
+            $ext = FileHelper::getExtensionsByMimeType(FileHelper::getMimeType($fileSource));
+            $fileName = 'paste-'.date("Y-m-d-H-i").'.'.$ext[0];
+        }
+        
+        $fileInfo = FileHelper::getFileInfo($fileName);
+        
+        $mimeType = FileHelper::getMimeType($fileSource, null, !$this->secureFileUpload);
+        
+        if (empty($mimeType)) {
+            if ($this->secureFileUpload) {
+                throw new Exception("Unable to find mimeType for the given file, make sure the php extension 'fileinfo' is installed.");
+            } else {
+                // this is dangerous and not recommend
+                $mimeType = FileHelper::getMimeType($fileName);
+            }
+        }
+        
+        $extensionByMimeType = FileHelper::getExtensionsByMimeType($mimeType);
+         
+        if (empty($extensionByMimeType)) {
+            throw new Exception("Unable to find extension for type $mimeType or it contains insecure data.");
+        }
+         
+        if (!in_array($fileInfo->extension, $extensionByMimeType)) {
+            throw new Exception("The given file extension {$fileInfo->extension} is not matching its mime type.");
+        }
+         
+        foreach ($extensionByMimeType as $extension) {
+            if (in_array($extension, $this->dangerousExtensions)) {
+                throw new Exception("This file extension seems to be dangerous and can not be stored.");
+            }
+        }
+        
+        if (in_array($mimeType, $this->dangerousMimeTypes)) {
+            throw new Exception("This file type seems to be dangerous and can not be stored.");
+        }
+        
+        return [
+            'fileInfo' => $fileInfo,
+            'mimeType' => $mimeType,
+            'fileName' => $fileName,
+            'secureFileName' => Inflector::slug($fileInfo->name, '-'),
+            'fileSource' => $fileSource,
+            'extension' => $fileInfo->extension,
+            'hashName' => FileHelper::hashName($fileName),
+        ];
     }
     
     /**

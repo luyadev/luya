@@ -32,9 +32,9 @@ class ColorWheelTestBlock extends PhpBlock
     
     public function getFieldHelp()
     {
-    	return [
-    			'entries' => 'alsdfjalsdkfjasd',
-    	];
+        return [
+                'entries' => 'alsdfjalsdkfjasd',
+        ];
     }
 
     /**

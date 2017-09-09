@@ -113,7 +113,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      */
     public static function hashName($fileName)
     {
-    	return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
+        return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
     }
     
     /**

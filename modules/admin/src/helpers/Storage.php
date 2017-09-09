@@ -171,11 +171,11 @@ class Storage
      */
     public static function replaceFile($oldFileSource, $newFileSource, $newFileName)
     {
-    	try {
-    		Yii::$app->storage->ensureFileUpload($newFileSource, $newFileName);
-    	} catch (\Exception $e) {
-    		return false;
-    	}
+        try {
+            Yii::$app->storage->ensureFileUpload($newFileSource, $newFileName);
+        } catch (\Exception $e) {
+            return false;
+        }
         $toDelete = $oldFileSource . uniqid('oldfile') . '.bkl';
         if (rename($oldFileSource, $toDelete)) {
             if (copy($newFileSource, $oldFileSource)) {

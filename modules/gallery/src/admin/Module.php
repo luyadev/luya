@@ -21,9 +21,9 @@ final class Module extends \luya\admin\base\Module
 
     public static function onLoad()
     {
-    	self::registerTranslation('galleryadmin', '@galleryadmin/messages', [
-    		'galleryadmin' => 'galleryadmin.php',
-    	]);
+        self::registerTranslation('galleryadmin', '@galleryadmin/messages', [
+            'galleryadmin' => 'galleryadmin.php',
+        ]);
     }
     
     public static function t($message, array $params = [])

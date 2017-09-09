@@ -145,9 +145,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     
     public static function onLoad()
     {
-    	self::registerTranslation('admin*', '@admin/messages', [
-    		'admin' => 'admin.php',
-    	]);
+        self::registerTranslation('admin*', '@admin/messages', [
+            'admin' => 'admin.php',
+        ]);
     }
     
     /**
@@ -312,6 +312,6 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public static function t($message, array $params = [], $language = null)
     {
-    	return parent::baseT('admin', $message, $params, $language);
+        return parent::baseT('admin', $message, $params, $language);
     }
 }

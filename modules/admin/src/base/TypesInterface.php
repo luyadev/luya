@@ -6,7 +6,7 @@ namespace luya\admin\base;
  * TypesInterface represents all possible types for properties or blocks.
  *
  * The zaa types array are angular directives.
- * 
+ *
  * + If a type contain `-array` the return is an array with selections
  * + Otherwise only 1 value can be returned
  *

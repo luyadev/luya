@@ -68,8 +68,8 @@ class MultipleInputsTestBlock extends PhpBlock
     {
         $entries = [];
 
-        foreach($this->getVarValue('entries', []) as $entry) {
-            if( isset($entry['title']) && isset($entry['description']) && isset($entry['image']) ) {
+        foreach ($this->getVarValue('entries', []) as $entry) {
+            if (isset($entry['title']) && isset($entry['description']) && isset($entry['image'])) {
                 $entries[] = [
                     'title' => $entry['title'],
                     'description' => $entry['description'],

@@ -186,10 +186,10 @@ return [
     'view_update_block_tooltip_close' => 'Cerrar edición',
     
     // 1.0.0
-	'cmsadmin_dashboard_lastupdate' => 'Last page updates',
-	'cmsadmin_settings_homepage_title' => 'Default Page',
-	'cmsadmin_settings_trashpage_title' => 'Delete Page',
-	'cmsadmin_settings_modal_title' => 'Settings',
-	'cmsadmin_item_settings_titleslug' => 'Page Informations',
-	'cmsadmin_created_at' => 'Created at',
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates',
+    'cmsadmin_settings_homepage_title' => 'Default Page',
+    'cmsadmin_settings_trashpage_title' => 'Delete Page',
+    'cmsadmin_settings_modal_title' => 'Settings',
+    'cmsadmin_item_settings_titleslug' => 'Page Informations',
+    'cmsadmin_created_at' => 'Created at',
 ];

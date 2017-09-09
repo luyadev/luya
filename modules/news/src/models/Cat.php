@@ -12,9 +12,9 @@ use luya\admin\ngrest\base\NgRestModel;
  */
 class Cat extends NgRestModel
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $i18n = ['title'];
     
     /**
@@ -22,7 +22,7 @@ class Cat extends NgRestModel
      */
     public static function tableName()
     {
-    	return 'news_cat';
+        return 'news_cat';
     }
     /**
      * @inheritdoc
@@ -49,9 +49,9 @@ class Cat extends NgRestModel
      */
     public function attributeLabels()
     {
-    	return [
-    		'title' => Module::t('cat_title'),
-    	];
+        return [
+            'title' => Module::t('cat_title'),
+        ];
     }
 
     /**
@@ -69,7 +69,7 @@ class Cat extends NgRestModel
      */
     public static function ngRestApiEndpoint()
     {
-    	return 'api-news-cat';
+        return 'api-news-cat';
     }
 
     /**
@@ -87,10 +87,10 @@ class Cat extends NgRestModel
      */
     public function ngRestScopes()
     {
-    	return [
-    		[['list', 'create', 'update'], ['title']],
-    		[['delete'], true],
-    	];
+        return [
+            [['list', 'create', 'update'], ['title']],
+            [['delete'], true],
+        ];
     }
     
     /**
