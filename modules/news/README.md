@@ -15,8 +15,11 @@ composer require luyadev/luya-module-news:1.0.0-RC4
 This will add the packages to your composer.json and run the update command. So now you have the modules in your vendor folder. Now you have the configure them in your configration (the `configs` folder) file:
 
 ```php
-'news' => 'luya\news\frontend\Module',
-'newsadmin' => 'luya\news\admin\Module',
+'modules' => [
+    // ...
+    'news' => 'luya\news\frontend\Module',
+    'newsadmin' => 'luya\news\admin\Module',
+]
 ```
 
 The modules are now available in your project. Now you have to run the migration and import command and you will be able to access the news administration to add news articles.

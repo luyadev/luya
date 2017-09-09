@@ -41,7 +41,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Added
 
 - [#1292](https://github.com/luyadev/luya/issues/1292) NEW ADMIN UI!
-- [#1361](https://github.com/luyadev/luya/issues/1361) Added ability to provide json file for cms layouts in order to render the grid in the admin according to the frontend.
+- [#1361](https://github.com/luyadev/luya/issues/1361) Added ability to provide json file for cms layouts in order to render the grid in the admin according to the frontend.
 - [#1293](https://github.com/luyadev/luya/issues/1293) Dashboard objects can be used by admin modules.
 - [#1351](https://github.com/luyadev/luya/issues/1351) Frontend Storage Upload validator which stores images and files in admin storage component.
 - [#1375](https://github.com/luyadev/luya/issues/1375) Added Import Helper class which provides functions to parse CSV files to Arrays.
@@ -112,7 +112,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1225](https://github.com/luyadev/luya/issues/1225) Formatter component extends default formats for languages.
 - [#1222](https://github.com/luyadev/luya/issues/1222) Extend from BaseYii file in order to provide IDE Auto Complet.
 - [#1221](https://github.com/luyadev/luya/issues/1221) Added CMS Query `in` expression for where conditions.
-- [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $seoTitle (getSeoTitle()) function in order to return the alternative SEO title definition.
+- [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $seoTitle (getSeoTitle()) function in order to return the alternative SEO title definition.
 - [#1214](https://github.com/luyadev/luya/issues/1214) Adding JsonLd class in order to register Schema Microdata informations to the View.
 - [#1188](https://github.com/luyadev/luya/issues/1188) Change the layout file for cms page.
 - [#1202](https://github.com/luyadev/luya/issues/1202) Added Arrayable implementation for ExternalLink and menu\Item.

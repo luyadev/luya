@@ -36,13 +36,13 @@ class Module extends \luya\base\Module
 {
     public static function onLoad()
     {
-    	//Yii::setAlias('@mymodulealias', static::staticBasePath());
-    	
-    	self::registerTranslation('mymodule', static::staticBasePath() . '/messages', [
-    		'fileMap' => [
-    			'mymodule' => 'mymodule.php',
-    		],
-    	]);
+        //Yii::setAlias('@mymodulealias', static::staticBasePath());
+        
+        self::registerTranslation('mymodule', static::staticBasePath() . '/messages', [
+            'fileMap' => [
+                'mymodule' => 'mymodule.php',
+            ],
+        ]);
     }
 
     public static function t($message, array $params = [])
