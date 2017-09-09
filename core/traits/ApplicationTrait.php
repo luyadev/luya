@@ -135,12 +135,9 @@ trait ApplicationTrait
      */
     public function getPackageInstaller()
     {
-        $file = Yii::getAlias('@vendor' . DIRECTORY_SEPARATOR . 'luyadev' . DIRECTORY_SEPARATOR . 'installer.php');
+        $file = Yii::getAlias('@vendor/luyadev/installer.php');
         
-        $data = [];
-        if (is_file($file)) {
-            $data = require($file);
-        }
+        $data = is_file($file) ? include $file : [];
          
         return new PackageInstaller($data);
     }
