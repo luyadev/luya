@@ -49,3 +49,5 @@ The composer.json file can contain an extra section which can be read by the luy
 
 + blocks: Include the provide folders or blocks while import command.
 + bootstrap: Add the file to the LUYA bootstraping process.
+
+> When importing blocks, you have to provided a namespace for each block class. You can use the [composer autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading) feature to do so.
