@@ -1461,7 +1461,7 @@
 			if (template == undefined) {
 				return '';
 			}
-			var template = twig({
+			var template = Twig.twig({
 			    data: template
 			});
 

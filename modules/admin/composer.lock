@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c74e5a2a4400453e8d28ff22b9cb63c5",
+    "content-hash": "58b885d3833800b52601b1d54cc85723",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -18,23 +18,11 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/c0185ab7c75aab88762c5aae780b9d83b80eda72",
                 "reference": "c0185ab7c75aab88762c5aae780b9d83b80eda72",
-                "shasum": ""
+                "shasum": null
             },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "dist/jquery.js",
-                "bower-asset-ignore": [
-                    "package.json"
-                ]
-            },
+            "type": "bower-asset",
             "license": [
                 "MIT"
-            ],
-            "keywords": [
-                "browser",
-                "javascript",
-                "jquery",
-                "library"
             ]
         },
         {
@@ -49,51 +37,14 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/791d84990c4a98df1597e9d155be53a3725805dd",
                 "reference": "791d84990c4a98df1597e9d155be53a3725805dd",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "bower-asset/jquery": ">=1.7"
             },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "./dist/inputmask/inputmask.js",
-                    "./dist/inputmask/inputmask.extensions.js",
-                    "./dist/inputmask/inputmask.date.extensions.js",
-                    "./dist/inputmask/inputmask.numeric.extensions.js",
-                    "./dist/inputmask/inputmask.phone.extensions.js",
-                    "./dist/inputmask/jquery.inputmask.js",
-                    "./dist/inputmask/global/document.js",
-                    "./dist/inputmask/global/window.js",
-                    "./dist/inputmask/phone-codes/phone.js",
-                    "./dist/inputmask/phone-codes/phone-be.js",
-                    "./dist/inputmask/phone-codes/phone-nl.js",
-                    "./dist/inputmask/phone-codes/phone-ru.js",
-                    "./dist/inputmask/phone-codes/phone-uk.js",
-                    "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.jqlite.js",
-                    "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.jquery.js",
-                    "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.js",
-                    "./dist/inputmask/bindings/inputmask.binding.js"
-                ],
-                "bower-asset-ignore": [
-                    "**/*",
-                    "!dist/*",
-                    "!dist/inputmask/*",
-                    "!dist/min/*",
-                    "!dist/min/inputmask/*"
-                ]
-            },
+            "type": "bower-asset",
             "license": [
                 "http://opensource.org/licenses/mit-license.php"
-            ],
-            "description": "Inputmask is a javascript library which creates an input mask.  Inputmask can run against vanilla javascript, jQuery and jqlite.",
-            "keywords": [
-                "form",
-                "input",
-                "inputmask",
-                "jquery",
-                "mask",
-                "plugins"
             ]
         },
         {
@@ -108,21 +59,9 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "shasum": ""
+                "shasum": null
             },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "punycode.js",
-                "bower-asset-ignore": [
-                    "coverage",
-                    "tests",
-                    ".*",
-                    "component.json",
-                    "Gruntfile.js",
-                    "node_modules",
-                    "package.json"
-                ]
-            }
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -136,24 +75,12 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/60728da6ade5879e807a49ce59ef9a72039b8978",
                 "reference": "60728da6ade5879e807a49ce59ef9a72039b8978",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "bower-asset/jquery": ">=1.8"
             },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "./jquery.pjax.js",
-                "bower-asset-ignore": [
-                    ".travis.yml",
-                    "Gemfile",
-                    "Gemfile.lock",
-                    "CONTRIBUTING.md",
-                    "vendor/",
-                    "script/",
-                    "test/"
-                ]
-            },
+            "type": "bower-asset",
             "license": [
                 "MIT"
             ]
@@ -576,17 +503,39 @@
     "packages-dev": [
         {
             "name": "bower-asset/angular",
-            "version": "v1.6.7-patch5456",
+            "version": "v1.6.7-patch5457",
             "source": {
                 "type": "git",
                 "url": "https://github.com/angular/bower-angular.git",
-                "reference": "4120001af31db92a0f83f9122de5f432b60a3b0f"
+                "reference": "26e8ea48c234b6f3d6466f16846fa3243fd891bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/angular/bower-angular/zipball/4120001af31db92a0f83f9122de5f432b60a3b0f",
-                "reference": "4120001af31db92a0f83f9122de5f432b60a3b0f",
+                "url": "https://api.github.com/repos/angular/bower-angular/zipball/26e8ea48c234b6f3d6466f16846fa3243fd891bf",
+                "reference": "26e8ea48c234b6f3d6466f16846fa3243fd891bf",
                 "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/angular-filter",
+            "version": "v0.5.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/a8m/angular-filter.git",
+                "reference": "5d6772c9fac777054dfeb3ab0246416d639858e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/a8m/angular-filter/zipball/5d6772c9fac777054dfeb3ab0246416d639858e9",
+                "reference": "5d6772c9fac777054dfeb3ab0246416d639858e9",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/angular": ">=1.4.3"
             },
             "type": "bower-asset",
             "license": [
@@ -605,36 +554,12 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/chieffancypants/angular-loading-bar/zipball/d734873e52ded18fa27d67f52272ae43267dfd63",
                 "reference": "d734873e52ded18fa27d67f52272ae43267dfd63",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "bower-asset/angular": ">=1.2.9,<2.0.0"
             },
-            "require-dev": {
-                "bower-asset/angular": "~1.2.23",
-                "bower-asset/angular-1.3": "1.3",
-                "bower-asset/angular-1.4": "1.4",
-                "bower-asset/angular-animate": "~1.2.9",
-                "bower-asset/angular-animate-1.3": "1.3",
-                "bower-asset/angular-animate-1.4": "1.4",
-                "bower-asset/angular-mocks": "~1.2.9",
-                "bower-asset/angular-mocks-1.3": "1.3",
-                "bower-asset/angular-mocks-1.4": "1.4"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "build/loading-bar.js",
-                    "build/loading-bar.css"
-                ],
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "components",
-                    "test",
-                    "example"
-                ]
-            }
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/angular-slugify",
@@ -648,19 +573,12 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/paulsmith/angular-slugify/zipball/eff9ecc3c1234c9dd22bed8b647508f19d25c978",
                 "reference": "eff9ecc3c1234c9dd22bed8b647508f19d25c978",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "bower-asset/angular": ">=1.0.0,<2.0.0"
             },
-            "require-dev": {
-                "bower-asset/angular": ">=1.2.0,<2.0.0",
-                "bower-asset/angular-mocks": ">=1.2.0,<2.0.0"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "./angular-slugify.js"
-            }
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/angularjs-datepicker",
@@ -674,34 +592,11 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/720kb/angular-datepicker/zipball/12b53a4088c68c2905f05f000dbbcbb3cb50a974",
                 "reference": "12b53a4088c68c2905f05f000dbbcbb3cb50a974",
-                "shasum": ""
+                "shasum": null
             },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "./dist/angular-datepicker.css",
-                    "./dist/angular-datepicker.js",
-                    "./dist/angular-datepicker.sourcemap.map"
-                ],
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests"
-                ]
-            },
+            "type": "bower-asset",
             "license": [
                 "MIT"
-            ],
-            "description": "A datepicker directive for angularjs.",
-            "keywords": [
-                "angular",
-                "angularjs",
-                "date",
-                "datepicker",
-                "input",
-                "input"
             ]
         },
         {
@@ -716,25 +611,9 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/flowjs/flow.js/zipball/172e3d1b05d4089a735b24c394c0983a7d0e29c5",
                 "reference": "172e3d1b05d4089a735b24c394c0983a7d0e29c5",
-                "shasum": ""
+                "shasum": null
             },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "./dist/flow.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests",
-                    "samples",
-                    "CHANGELOG.md",
-                    "karma.conf.js",
-                    "package.json",
-                    "src/*",
-                    "Gruntfile.js"
-                ]
-            }
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/ng-file-upload",
@@ -748,20 +627,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/danialfarid/ng-file-upload-bower/zipball/4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
                 "reference": "4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "bower-asset/angular": ">1.2.0"
             },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "ng-file-upload.js",
-                "bower-asset-ignore": []
-            },
+            "type": "bower-asset",
             "license": [
                 "MIT"
-            ],
-            "description": "Lightweight Angular JS directive to upload files. Support drag&drop, paste image, progress and abort"
+            ]
         },
         {
             "name": "bower-asset/ng-flow",
@@ -775,31 +649,86 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/flowjs/ng-flow/zipball/a15c09ea7d36f36dee8d2b4bb27e61396267d997",
                 "reference": "a15c09ea7d36f36dee8d2b4bb27e61396267d997",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "bower-asset/angular": "~1",
                 "bower-asset/flow.js": "~2"
             },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/ng-wig",
+            "version": "v3.0.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stevermeister/ngWig.git",
+                "reference": "77708c4a7b0917aaab017398fb145d8f0a310389"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stevermeister/ngWig/zipball/77708c4a7b0917aaab017398fb145d8f0a310389",
+                "reference": "77708c4a7b0917aaab017398fb145d8f0a310389",
+                "shasum": ""
+            },
             "require-dev": {
-                "bower-asset/angular-mocks": "~1"
+                "bower-asset/angular": "1.6.0"
             },
             "type": "bower-asset-library",
             "extra": {
-                "bower-asset-main": "./dist/ng-flow.js",
+                "bower-asset-main": [
+                    "dist/ng-wig.js",
+                    "dist/css/ng-wig.css"
+                ],
+                "bower-asset-ignore": [
+                    "node_modules",
+                    "bower_components"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Small AngularJS WYSIWYG editor component",
+            "keywords": [
+                "angular",
+                "editor",
+                "wysiwyg"
+            ]
+        },
+        {
+            "name": "bower-asset/twigjs-bower",
+            "version": "0.10.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/philsbury/twigjs-bower.git",
+                "reference": "425d39571c91121e504dea4984b873306a60361f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/philsbury/twigjs-bower/zipball/425d39571c91121e504dea4984b873306a60361f",
+                "reference": "425d39571c91121e504dea4984b873306a60361f",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "twig/twig.min.js",
                 "bower-asset-ignore": [
                     "**/.*",
+                    "node_modules",
+                    "bower_components",
                     "test",
-                    "samples",
-                    "build",
-                    "*.md",
-                    "karma.conf.js",
-                    "LICENSE",
-                    "Gruntfile.js",
-                    "package.json",
-                    "bower.json"
+                    "tests"
                 ]
-            }
+            },
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "A version of Twig JS for use with Bower",
+            "keywords": [
+                "bower",
+                "js",
+                "twig"
+            ]
         },
         {
             "name": "bower-asset/ui-router",
@@ -813,30 +742,12 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/angular-ui/ui-router/zipball/ef5ce80fa6ec8a2c6a87cf1cf1c5809e1950af11",
                 "reference": "ef5ce80fa6ec8a2c6a87cf1cf1c5809e1950af11",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "bower-asset/angular": ">=1.0.8,<2.0.0"
             },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "./release/angular-ui-router.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "component.json",
-                    "package.json",
-                    "lib",
-                    "config",
-                    "sample",
-                    "test",
-                    "tests",
-                    "ngdoc_assets",
-                    "Gruntfile.js",
-                    "files.js"
-                ]
-            },
+            "type": "bower-asset",
             "license": [
                 "MIT"
             ]
@@ -1102,12 +1013,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "188423ca921616b8b54b2d456abb16055c60e2a0"
+                "reference": "c6637a2dd53232ca473222ae52060f028f9e47f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/188423ca921616b8b54b2d456abb16055c60e2a0",
-                "reference": "188423ca921616b8b54b2d456abb16055c60e2a0",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/c6637a2dd53232ca473222ae52060f028f9e47f2",
+                "reference": "c6637a2dd53232ca473222ae52060f028f9e47f2",
                 "shasum": ""
             },
             "require": {
@@ -1151,7 +1062,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-09-05T15:17:31+00:00"
+            "time": "2017-09-09T12:14:59+00:00"
         },
         {
             "name": "luyadev/luya-module-cms",
@@ -1159,19 +1070,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "967f1a6d8642c618ba9c28bb45d252cfa4776eda"
+                "reference": "fffa7444f67136416e5afe5f7e909340881da03c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/967f1a6d8642c618ba9c28bb45d252cfa4776eda",
-                "reference": "967f1a6d8642c618ba9c28bb45d252cfa4776eda",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/fffa7444f67136416e5afe5f7e909340881da03c",
+                "reference": "fffa7444f67136416e5afe5f7e909340881da03c",
                 "shasum": ""
             },
             "require-dev": {
                 "luyadev/luya": "^1.0@dev",
                 "luyadev/luya-module-admin": "^1.0@dev",
+                "php-coveralls/php-coveralls": "^1.0",
                 "phpunit/phpunit": "~5.0",
-                "satooshi/php-coveralls": "~1.0",
                 "twig/twig": "^1.0"
             },
             "type": "luya-core",
@@ -1217,7 +1128,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-09-05T15:17:31+00:00"
+            "time": "2017-09-11T09:31:06+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -1225,12 +1136,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "016504bd897a7290fe2ea29b54d39b0699b8ff18"
+                "reference": "d3eb96eaaf2ad6a8dea58894504f35fdfe78568f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/016504bd897a7290fe2ea29b54d39b0699b8ff18",
-                "reference": "016504bd897a7290fe2ea29b54d39b0699b8ff18",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/d3eb96eaaf2ad6a8dea58894504f35fdfe78568f",
+                "reference": "d3eb96eaaf2ad6a8dea58894504f35fdfe78568f",
                 "shasum": ""
             },
             "require": {
@@ -1266,7 +1177,7 @@
                 "module",
                 "php"
             ],
-            "time": "2017-09-04T09:30:28+00:00"
+            "time": "2017-09-09T18:10:46+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1309,6 +1220,64 @@
                 "object graph"
             ],
             "time": "2017-04-12T18:52:22+00:00"
+        },
+        {
+            "name": "php-coveralls/php-coveralls",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-coveralls/php-coveralls.git",
+                "reference": "da51d304fe8622bf9a6da39a8446e7afd432115c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/da51d304fe8622bf9a6da39a8446e7afd432115c",
+                "reference": "da51d304fe8622bf9a6da39a8446e7afd432115c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-simplexml": "*",
+                "guzzle/guzzle": "^2.8|^3.0",
+                "php": ">=5.3.3",
+                "psr/log": "^1.0",
+                "symfony/config": "^2.1|^3.0",
+                "symfony/console": "^2.1|^3.0",
+                "symfony/stopwatch": "^2.0|^3.0",
+                "symfony/yaml": "^2.0|^3.0"
+            },
+            "suggest": {
+                "symfony/http-kernel": "Allows Symfony integration"
+            },
+            "bin": [
+                "bin/coveralls"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Satooshi\\": "src/Satooshi/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kitamura Satoshi",
+                    "email": "with.no.parachute@gmail.com",
+                    "homepage": "https://www.facebook.com/satooshi.jp"
+                }
+            ],
+            "description": "PHP client library for Coveralls API",
+            "homepage": "https://github.com/satooshi/php-coveralls",
+            "keywords": [
+                "ci",
+                "coverage",
+                "github",
+                "test"
+            ],
+            "time": "2016-01-20T17:35:46+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2033,64 +2002,6 @@
                 "psr-3"
             ],
             "time": "2016-10-10T12:19:37+00:00"
-        },
-        {
-            "name": "satooshi/php-coveralls",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/satooshi/php-coveralls.git",
-                "reference": "da51d304fe8622bf9a6da39a8446e7afd432115c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/satooshi/php-coveralls/zipball/da51d304fe8622bf9a6da39a8446e7afd432115c",
-                "reference": "da51d304fe8622bf9a6da39a8446e7afd432115c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-simplexml": "*",
-                "guzzle/guzzle": "^2.8|^3.0",
-                "php": ">=5.3.3",
-                "psr/log": "^1.0",
-                "symfony/config": "^2.1|^3.0",
-                "symfony/console": "^2.1|^3.0",
-                "symfony/stopwatch": "^2.0|^3.0",
-                "symfony/yaml": "^2.0|^3.0"
-            },
-            "suggest": {
-                "symfony/http-kernel": "Allows Symfony integration"
-            },
-            "bin": [
-                "bin/coveralls"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Satooshi\\": "src/Satooshi/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kitamura Satoshi",
-                    "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp"
-                }
-            ],
-            "description": "PHP client library for Coveralls API",
-            "homepage": "https://github.com/satooshi/php-coveralls",
-            "keywords": [
-                "ci",
-                "coverage",
-                "github",
-                "test"
-            ],
-            "time": "2016-01-20T17:35:46+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -3253,7 +3164,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "RC",
+    "minimum-stability": "stable",
     "stability-flags": {
         "luyadev/luya-core": 20,
         "luyadev/luya-testsuite": 20,
