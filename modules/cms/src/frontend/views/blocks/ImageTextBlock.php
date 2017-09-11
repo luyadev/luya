@@ -11,7 +11,7 @@ use yii\helpers\Html;
             'class' => ($this->varValue('imagePosition', 'left') == 'left') ? 'pull-left img-responsive' : 'pull-right img-responsive',
             'width' => $this->cfgValue('width', null),
             'height' => $this->cfgValue('height', null),
-            'style' => (($this->varValue('imagePosition', 'left') == 'left') ? "margin-right:{$this->cfgValue('margin', '20px')}" : "margin-left:{$this->cfgValue('margin', '20px')}") . $this->cfgValue('margin', '20px', ';margin-bottom:{{margin}};max-width:50%;'),
+            'style' => (($this->varValue('imagePosition', 'left') == 'left') ? "margin-right:{$this->cfgValue('margin', '20px')}" : "margin-left:{$this->cfgValue('margin', '20px')}") . $this->cfgValue('', ';margin-bottom:20px;max-width:50%;'),
         ])?>
         <div>
             <?= $this->extraValue('text'); ?>
