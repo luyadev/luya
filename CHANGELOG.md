@@ -15,7 +15,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
-- [#1469](https://github.com/luyadev/luya/issues/1469) Fixed issue with when short open tag is disabled.
+- [#1475](https://github.com/luyadev/luya/issues/1475) Fixed bug in cms menu tree when moving an element after an existing element.
+- [#1469](https://github.com/luyadev/luya/issues/1469) Fixed bug where short open tags are required by default.
 - [#1468](https://github.com/luyadev/luya/issues/1468) Fixed bug where on windows platforms the alias for the luyadev installer vendor file not be retrieved.
 - [#1456](https://github.com/luyadev/luya/issues/1456) Fixed bug where login forms make problems on Firefox Browsers.
 - [#1458](https://github.com/luyadev/luya/issues/1458) Fixed bug where crud search does not apply the model changes.

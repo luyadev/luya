@@ -341,11 +341,25 @@ class NavItemController extends \luya\admin\base\RestController
         ];
     }
 
+    /**
+     * Move an item to a container.
+     * 
+     * @param unknown $moveItemId
+     * @param unknown $droppedOnCatId
+     * @return boolean[]
+     */
     public function actionMoveToContainer($moveItemId, $droppedOnCatId)
     {
         return ['success' => Nav::moveToContainer($moveItemId, $droppedOnCatId)];
     }
 
+    /**
+     * Move an item before an existing item.
+     * 
+     * @param unknown $moveItemId
+     * @param unknown $droppedBeforeItemId
+     * @return boolean[]|mixed[]
+     */
     public function actionMoveBefore($moveItemId, $droppedBeforeItemId)
     {
         $result = Nav::moveToBefore($moveItemId, $droppedBeforeItemId);
@@ -353,9 +367,17 @@ class NavItemController extends \luya\admin\base\RestController
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
+        
         return ['success' => $result];
     }
 
+    /**
+     * Move an item after an existing item.
+     * 
+     * @param unknown $moveItemId
+     * @param unknown $droppedAfterItemId
+     * @return boolean[]|mixed[]
+     */
     public function actionMoveAfter($moveItemId, $droppedAfterItemId)
     {
         $result = Nav::moveToAfter($moveItemId, $droppedAfterItemId);
@@ -363,9 +385,17 @@ class NavItemController extends \luya\admin\base\RestController
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
+        
         return ['success' => $result];
     }
 
+    /**
+     * Move an item to a child item (make the parent of).
+     * 
+     * @param unknown $moveItemId
+     * @param unknown $droppedOnItemId
+     * @return boolean[]|mixed[]
+     */
     public function actionMoveToChild($moveItemId, $droppedOnItemId)
     {
         $result = Nav::moveToChild($moveItemId, $droppedOnItemId);
@@ -373,16 +403,17 @@ class NavItemController extends \luya\admin\base\RestController
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
+        
         return ['success' => $result];
     }
-
-    /*
-    public function actionGetBlock($blockId)
-    {
-        return NavItemPage::getBlock($blockId);
-    }
-    */
     
+    /**
+     * Toggle visibilty of a block.
+     * 
+     * @param unknown $blockId
+     * @param unknown $hiddenState
+     * @return number|\yii\db\false|boolean
+     */
     public function actionToggleBlockHidden($blockId, $hiddenState)
     {
         $block = NavItemPageBlockItem::findOne($blockId);
@@ -395,7 +426,7 @@ class NavItemController extends \luya\admin\base\RestController
     }
 
     /**
-     * Get full constructed of a nav item.
+     * Get full constructed path of a nav item.
      *
      * @param $navId
      * @return string Path
@@ -420,6 +451,7 @@ class NavItemController extends \luya\admin\base\RestController
                 }
             }
         }
+        
         return $data;
     }
 
