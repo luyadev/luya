@@ -11,10 +11,6 @@
         user-select: none;
     }
 
-    th[ng-click],
-    td[ng-click] {
-        cursor: pointer;
-    }
     th[ng-click^="openFileDetail"],
     td[ng-click^="openFileDetail"] {
         cursor: zoom-in;
