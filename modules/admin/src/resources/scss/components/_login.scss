@@ -169,6 +169,13 @@
     cursor: text;
 }
 
+@mixin login-input-not-empty {
+    top: -24px;
+    font-size: 13px;
+    left: 0;
+    cursor: default;
+}
+
 .login-input {
     display:block;
     width: 100%;
@@ -186,11 +193,8 @@
         margin-bottom: 3px;
     }
 
-    &.is-not-empty ~ .login-input-label {
-        top: -24px;
-        font-size: 13px;
-        left: 0;
-        cursor: default;
+    &.is-not-empty + .login-input-label {
+        @include login-input-not-empty;
     }
 
     &:focus, &:valid {
