@@ -112,18 +112,12 @@ var checkInputLabels = function () {
                     .removeClass('is-empty')
                 ;
 
-
             } else {
                 $element
                     .addClass('is-empty')
                     .removeClass('is-not-empty')
                 ;
-
             }
-
-
-            console.log(autofillBg);
-
         }
     };
 
