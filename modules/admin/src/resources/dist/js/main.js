@@ -10401,9 +10401,11 @@ zaa.factory('HtmlStorage', function() {
                     }
                 });
                 // on blur event:
+                /*
                 element.bind('blur', function () {
                     scope.$apply(model.assign(scope, false));
                 });
+                */
             }
         };
     }]);
