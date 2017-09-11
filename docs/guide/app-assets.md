@@ -34,7 +34,7 @@ AppAsset::register($this);  // $this represents the view object
 
 If you are registering an asset bundle in other places, you should provide the needed view object. For example, to register an asset bundle in a widget class, you can get the view object by `$this->view`.
 
-When an asset bundle is registered with a view, behind the scenes Yii will register all its dependent asset bundles. And if an asset bundle is located in a directory inaccessible through the Web, it will be published to a Web directory. Later, when the view renders a page, it will generate <link> and <script> tags for the CSS and JavaScript files listed in the registered bundles. The order of these tags is determined by the dependencies among the registered bundles and the order of the assets listed in the {{yii\web\AssetBundle::$css}} and {{yii\web\AssetBundle::$js}} properties.
+When an asset bundle is registered with a view, behind the scenes Yii will register all its dependent asset bundles. And if an asset bundle is located in a directory inaccessible through the Web, it will be published to a Web directory. Later, when the view renders a page, it will generate `link` and `script` tags for the CSS and JavaScript files listed in the registered bundles. The order of these tags is determined by the dependencies among the registered bundles and the order of the assets listed in the {{yii\web\AssetBundle::$css}} and {{yii\web\AssetBundle::$js}} properties.
 
 ### Publish Options
 
@@ -60,7 +60,6 @@ public $publishOptions = [
 ```
 
 > Patterns ending with '/' apply to **directory** paths only, and patterns not ending with '/' apply to **file** paths only. For example, '/a/b' matches all file paths ending with '/a/b'; and '.svn/' matches directory paths ending with '.svn'.
-
 
 ### Accessing the asset path
 
