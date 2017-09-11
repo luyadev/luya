@@ -107,6 +107,8 @@
     @include clearfix;
     cursor: pointer;
     overflow: hidden;
+    white-space: normal;
+    word-break: break-all;
 
     .block-is-layout > .block > & {
         padding: 10px 0;
@@ -115,6 +117,7 @@
 
 .block-toolbar-button {
     background: none;
+    background-color: transparent;
     border: none;
     border-radius: 0;
     color: $white;
@@ -122,7 +125,6 @@
     display: block;
     margin-left: 5px;
     transition: .25s ease-in-out background-color;
-    background-color: transparent;
 
     &:hover {
         background-color: rgba(255, 255, 255, .2);
