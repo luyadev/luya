@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1478](https://github.com/luyadev/luya/issues/1478) Updated toast positioning if mainnav is expanded
 - [#1477](https://github.com/luyadev/luya/issues/1477) Fixed z-index issue with luya search bar
 - [#1475](https://github.com/luyadev/luya/issues/1475) Fixed bug in cms menu tree when moving an element after an existing element.
 - [#1469](https://github.com/luyadev/luya/issues/1469) Fixed bug where short open tags are required by default.

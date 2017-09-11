@@ -289,7 +289,7 @@ $this->beginPage()
 
 
 </div>
-<div class="toasts" ng-repeat="item in toastQueue">
+<div class="toasts" ng-repeat="item in toastQueue" ng-class="{'toasts--mainnav-small': !isHover}">
     <div class="modal toasts-modal fade show" ng-if="item.type == 'confirm'" zaa-esc="item.close()" style="display: block;">
         <div class="modal-dialog">
             <div class="modal-content">
