@@ -109,7 +109,7 @@ use luya\admin\Module as Admin;
             </span>
         </div>
         <div ng-if="!modal.state">
-            <modal is-modal-hidden="modal.state"><storage-file-manager selection="true" /></modal>
+            <modal is-modal-hidden="modal.state" modal-title="<?= Admin::t('layout_select_file'); ?>"><storage-file-manager selection="true" /></modal>
         </div>
     </div>
 </script>
