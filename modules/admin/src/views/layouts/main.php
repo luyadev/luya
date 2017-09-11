@@ -140,9 +140,9 @@ $this->beginPage()
     <div class="luyasearch" ng-class="{'luyasearch-open' : searchInputOpen, 'luyasearch-closed': !searchInputOpen, 'luyasearch-toggled': isHover}" zaa-esc="escapeSearchInput()">
         <div class="luyasearch-inner">
             <div class="luyasearch-form form-group">
-                <input id="global-search-input" ng-model="searchQuery" type="search" class="luyasearch-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>
-                <div class="luyasearch-close">
-                    <i class="material-icons luyasearch-close-icon" ng-click="closeSearchInput()">close</i>
+                <input id="global-search-input" focus-me="searchInputOpen" ng-model="searchQuery" type="search" class="luyasearch-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>
+                <div class="luyasearch-close" ng-click="closeSearchInput()">
+                    <i class="material-icons luyasearch-close-icon">close</i>
                 </div>
             </div>
             <div class="alert alert-info" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
@@ -156,10 +156,11 @@ $this->beginPage()
             </div>
             <div class="luyasearch-results">
                 <div class="luyasearch-result" ng-repeat="item in searchResponse">
-                    <div class="luyasearch-result-title"><i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
-                        <i class="material-icons luyasearch-toggler luyasearch-toggler-open">chevron_right</i>  <!-- toggle class "luyasearch-toggler-open" and "luyasearch-toggler-close" -->
+                    <div class="luyasearch-result-title" ng-click="groupVisibility=!groupVisibility"><i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
+                        <i class="material-icons luyasearch-toggler luyasearch-toggler-open" ng-if="groupVisibility">chevron_right</i>
+                        <i class="material-icons luyasearch-toggler luyasearch-toggler-closed" ng-if="!groupVisibility">chevron_right</i>
                     </div>
-                    <div class="luyasearch-table-wrapper">
+                    <div class="luyasearch-table-wrapper" ng-show="groupVisibility">
                         <table class="luyasearch-table">
                             <tr ng-repeat="row in item.data | limitTo:1">
                                 <th ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{k}}</th>

@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1461](https://github.com/luyadev/luya/issues/1461) Admin Search Panel does not auto focus the input and allows you to toggle the search groups.
 
 ### Fixed
 

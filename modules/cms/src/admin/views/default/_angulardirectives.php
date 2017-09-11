@@ -30,9 +30,9 @@ use luya\cms\admin\Module;
                         <label class="form-check-label" ng-click="data.is_draft = 0" for="update-as-draft-no"><?= Module::t('view_index_no'); ?></label>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-init="showFocus=true">
                     <label><?= Module::t('view_index_page_title'); ?></label>
-                    <input name="text" type="text" class="form-control" ng-model="data.title" ng-change="aliasSuggestion()" focus-me="true" />
+                    <input name="text" type="text" class="form-control" ng-model="data.title" ng-change="aliasSuggestion()" focus-me="showFocus" />
                 </div>
                 <div class="form-group">
                     <label><?= Module::t('view_index_page_alias'); ?></label>

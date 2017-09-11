@@ -423,19 +423,31 @@
         };
     });
 
-    zaa.directive("focusMe", function ($timeout) {
+    /**
+     * Focus a given input field if the statement is true.
+     * 
+     * ```
+     * <input type="text" focus-me="searchInputOpen" />
+     * ```
+     */
+    zaa.directive('focusMe', ['$timeout', '$parse', function ($timeout, $parse) {
         return {
-            scope: { trigger: "=focusMe" },
-            link: function (scope, element) {
-                scope.$watch("trigger", function (value) {
+            link: function (scope, element, attrs) {
+                var model = $parse(attrs.focusMe);
+                scope.$watch(model, function (value) {
                     if (value === true) {
-                        element[0].focus();
-                        scope.trigger = false;
+                        $timeout(function () {
+                            element[0].focus();
+                        });
                     }
-                })
+                });
+                // on blur event:
+                element.bind('blur', function () {
+                    scope.$apply(model.assign(scope, false));
+                });
             }
-        }
-    });
+        };
+    }]);
 
     /**
      * ```
