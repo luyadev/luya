@@ -1,9 +1,7 @@
 <?php
 use luya\admin\Module;
-
 ?>
 <div class="luya-main luya-main-crud" ng-controller="DefaultController">
-
     <div class="luya-subnav">
         <div class="modulenav-mobile">
             <div class="modulenav-mobile-title" ng-show="currentItem">{{ currentItem.alias }}</div>
@@ -41,30 +39,22 @@ use luya\admin\Module;
             </div>
         </div>
     </div>
-
     <div class="luya-content" ui-view>
-
         <div class="card mb-2" ng-repeat="item in dashboard" ng-init="item.isToggled = ($index < 3)">
             <div class="card-header" ng-click="item.isToggled = !item.isToggled">
                 <span class="card-title">{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span>
             </div>
             <div class="card-body" ng-show="item.isToggled">
-
                 <div class="timeline timeline-left timeline-compact">
                     <div class="timeline-item timeline-item-center-point" ng-repeat="(key, log) in item.items">
-
                         <i class="material-icons" ng-if="log.is_insert == 1">note_add</i>
                         <i class="material-icons" ng-if="log.is_update == 1">create</i>
                         <small>{{log.timestamp * 1000 | date:"HH:mm"}}</small>
                         <small>{{ log.name }}</small>
                         <small><span compile-html ng-bind-html="log.message | trustAsUnsafe"></span></small>
-
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
-
 </div>
