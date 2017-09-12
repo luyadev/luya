@@ -29,7 +29,7 @@ use luya\admin\Module;
             <div class="modulenav-group" ng-repeat="item in items" class="submenu-group">
                 <span class="modulenav-group-title">{{item.name}}</span>
                 <ul class="modulenav-list">
-                    <li class="modulenav-item" ng-repeat="sub in item.items">
+                    <li class="modulenav-item" ng-repeat="sub in item.items" ng-if="!sub.hiddenInMenu">
                         <span class="modulenav-link" ng-click="click(sub)"  ng-class="{'modulenav-link-active' : sub.route == currentItem.route }">
                             <i class="modulenav-icon material-icons">{{sub.icon}}</i>
                             <span class="modulenav-label">
