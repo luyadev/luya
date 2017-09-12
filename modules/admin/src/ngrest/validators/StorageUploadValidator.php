@@ -46,7 +46,7 @@ use yii\base\InvalidConfigException;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-RC4
+ * @since 1.0.0
  */
 class StorageUploadValidator extends Validator
 {
