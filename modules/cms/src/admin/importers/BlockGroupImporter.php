@@ -11,6 +11,7 @@ class BlockGroupImporter extends Importer
     
     public function run()
     {
+    	/*
         $handled = [];
         
         foreach ($this->getImporter()->getDirectoryFiles('blockgroups') as $file) {
@@ -43,5 +44,6 @@ class BlockGroupImporter extends Importer
                 $this->addLog('Old blockgroup has been deleted: ' . $oldBlockGroup->name);
             }
         }
+        */
     }
 }

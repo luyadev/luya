@@ -201,6 +201,13 @@
         border-bottom-color: $pink;
         outline: 0;
     }
+
+    &:focus {
+        + .login-input-label {
+            @include login-input-not-empty;
+        }
+    }
+
 }
 
 .login-link {

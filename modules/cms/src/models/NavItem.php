@@ -257,7 +257,10 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     public function updateTimestamp()
     {
-        $this->updateAttributes(['timestamp_update' => time()]);
+        $this->updateAttributes([
+        	'timestamp_update' => time(),
+        	'update_user_id' => Module::getAuthorUserId(),
+        ]);
     }
 
     /**

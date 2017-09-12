@@ -119,6 +119,9 @@ class BlockImporter extends Importer
         $group = BlockGroup::findOne(['identifier' => $groupObject->identifier()]);
         
         if ($group) {
+        	$group->updateAttributes([
+        		'name' => $groupObject->label(),
+        	]);
             return $group->id;
         } else {
             $model = new BlockGroup();

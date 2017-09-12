@@ -25,7 +25,7 @@ use luya\admin\base\Filter;
 /**
  * Nam Filter.
  *
- * File has been created with `block/create` command on LUYA version 1.0.0-RC4. 
+ * File has been created with `block/create` command on LUYA version 1.0.0-dev. 
  */
 class className extends Filter
 {

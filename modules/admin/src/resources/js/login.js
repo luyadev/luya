@@ -86,15 +86,14 @@ var observeLogin = function (form, url, secureUrl) {
         $('#loginForm').show();
         $('#success').hide();
     });
-
-    $(window).load(function () {
-        $('.login-logo').addClass('login-logo-loaded');
-        $('.login-form').addClass('login-form-loaded');
-    });
 };
 
-var checkInputLabels = function () {
+$(window).load(function () {
+    $('.login-logo').addClass('login-logo-loaded');
+    $('.login-form').addClass('login-form-loaded');
+});
 
+var checkInputLabels = function () {
     var check = function(element) {
         var $element = element ? $(element) : $('.login-input');
         if($element.length >= 2) {
@@ -103,18 +102,15 @@ var checkInputLabels = function () {
             });
         } else {
             var val = $element.val() ? $element.val() : '';
-            if(val.length >= 1) {
-                $element
-                    .addClass('is-not-empty')
-                    .removeClass('is-empty')
-                ;
-            } else {
-                $element
-                    .addClass('is-empty')
-                    .removeClass('is-not-empty')
-                ;
-            }
+            var mail = document.getElementById("login-user-email");
+            var pass = document.getElementById("login-user-password");
+            var autofillBg = window.getComputedStyle(mail || pass, null).getPropertyValue("background-color") === 'rgb(250, 255, 189)' ? true : false;
+            if(val.length >= 1 || autofillBg === true) {
+                $element.addClass('is-not-empty').removeClass('is-empty');
 
+            } else {
+                $element.addClass('is-empty').removeClass('is-not-empty');
+            }
         }
     };
 
@@ -124,5 +120,3 @@ var checkInputLabels = function () {
 
     check();
 };
-
-checkInputLabels();
