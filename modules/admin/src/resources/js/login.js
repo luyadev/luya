@@ -94,29 +94,25 @@ $(window).load(function () {
 });
 
 var checkInputLabels = function () {
-    var check = function(element) {
-        var $element = element ? $(element) : $('.login-input');
-        if($element.length >= 2) {
-            $element.each( function(key, element) {
-                check(element);
-            });
-        } else {
-            var val = $element.val() ? $element.val() : '';
-            var mail = document.getElementById("login-user-email");
-            var pass = document.getElementById("login-user-password");
-            var autofillBg = window.getComputedStyle(mail || pass, null).getPropertyValue("background-color") === 'rgb(250, 255, 189)' ? true : false;
-            if(val.length >= 1 || autofillBg === true) {
-                $element.addClass('is-not-empty').removeClass('is-empty');
+    var $loginInput = $('.login-input');
 
-            } else {
-                $element.addClass('is-empty').removeClass('is-not-empty');
-            }
+    var check = function($element) {
+        var val = $element.val() ? $element.val() : '';
+        
+        var autofillBg = window.getComputedStyle($element[0], null).getPropertyValue("background-color") === 'rgb(250, 255, 189)' ? true : false;
+
+        if(val.length >= 1 || autofillBg === true) {
+            $element.addClass('is-not-empty').removeClass('is-empty');
+        } else {
+            $element.addClass('is-empty').removeClass('is-not-empty');
         }
     };
 
-    $('.login-input').on('keyup', function() {
-        check(this);
+    $loginInput.on('keyup', function() {
+        check($(this));
     });
 
-    check();
+    $loginInput.each( function() {
+        check($(this));
+    });
 };
