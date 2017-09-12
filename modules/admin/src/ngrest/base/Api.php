@@ -217,13 +217,7 @@ class Api extends RestActiveController
     {
         $query = Yii::$app->request->post('query');
         
-        $find = $this->model->ngRestFind();
-        
-        foreach ($this->model->getTableSchema()->columns as $column) {
-            if ($column->phpType !== "boolean") {
-                $find->orFilterWhere(['like', $column->name, $query]);
-            }
-        }
+        $find = $this->model->ngRestFullQuerySearch($query);
         
         return new ActiveDataProvider([
             'query' => $find,
