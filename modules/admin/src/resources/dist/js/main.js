@@ -11240,8 +11240,8 @@ zaa.factory('HtmlStorage', function() {
                                     '</select>' +
                                     '<div class="zaaselect-selected">' +
                                         '<span class="zaaselect-selected-text" ng-click="isOpen=!isOpen">{{getSelectedValue()}}</span>' +
-                                        '<i class="material-icons zaaselect-dropdown-icon" ng-click="isOpen=!isOpen">keyboard_arrow_down</i>' +
                                         '<i class="material-icons zaaselect-clear-icon" ng-click="model=initvalue">clear</i>' +
+                                        '<i class="material-icons zaaselect-dropdown-icon" ng-click="isOpen=!isOpen">keyboard_arrow_down</i>' +
                                     '</div>' +
                                     '<div class="zaaselect-dropdown">' +
                                         '<div class="zaaselect-search">' +
