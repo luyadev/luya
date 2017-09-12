@@ -88,10 +88,6 @@ var observeLogin = function (form, url, secureUrl) {
     });
 };
 
-$(window).load(function () {
-    $('.login-logo').addClass('login-logo-loaded');
-    $('.login-form').addClass('login-form-loaded');
-});
 
 var checkInputLabels = function () {
     var $loginInput = $('.login-input');
@@ -116,5 +112,11 @@ var checkInputLabels = function () {
         check($(this));
     });
 };
+
+$(window).load(function () {
+    $('.login-logo').addClass('login-logo-loaded');
+    $('.login-form').addClass('login-form-loaded');
+    checkInputLabels();
+});
 
 

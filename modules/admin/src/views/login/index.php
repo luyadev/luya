@@ -92,5 +92,3 @@ $spinner = '<svg version="1.1"
         </li>
     </ul>
 </div>
-
-<? $this->registerJS('$(window).load(function () { checkInputLabels();});'); ?>
