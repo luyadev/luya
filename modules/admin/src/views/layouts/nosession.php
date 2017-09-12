@@ -12,7 +12,6 @@
             <?php $this->beginBody() ?>
                 <?= $content; ?>
             <?php $this->endBody() ?>
-            <? $this->registerJS('$(window).load(function () {checkInputLabels(); });'); ?>
         </body>
     </html>
 <?php $this->endPage() ?>

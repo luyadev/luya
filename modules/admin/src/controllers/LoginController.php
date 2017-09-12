@@ -47,7 +47,11 @@ class LoginController extends Controller
         
         $this->registerAsset('\luya\admin\assets\Login');
         
-        $this->view->registerJs("$(function(){ $('#email').focus(); observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."'); });", \luya\web\View::POS_END);
+        $this->view->registerJs("
+        		$('#email').focus(); 
+        		checkInputLabels();
+        		observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."');
+        ");
     
         return $this->render('index');
     }
