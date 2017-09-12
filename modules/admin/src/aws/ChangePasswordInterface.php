@@ -10,7 +10,7 @@ namespace luya\admin\aws;
  * ```php
  * class User extends \luya\admin\ngrest\base\NgRestModel implements \luya\admin\aws\ChangePasswordInterface
  * {
- *    public function changePassword($newPassword, $newPasswordRepetition)
+ *    public function changePassword($newPassword)
  *    {
  *        return $this->updateAttribute('password', Yii::$app->security->generatePasswordHash($newPassword));
  *    }
@@ -31,5 +31,5 @@ interface ChangePasswordInterface
      * @param string $newPassword The new password which must be set.
      * @param string $newPasswordRepetition The repeation in order to check whether does inputs are equal or not.
      */
-    public function changePassword($newPassword, $newPasswordRepetition);
+    public function changePassword($newPassword);
 }

@@ -61,7 +61,7 @@ class UserChangePassword extends Model
             return $this->addError('oldpass', 'The previous old password is invalid.');
         }
         
-        if (!$this->user->changePassword($this->newpass, $this->newpassrepeat)) {
+        if (!$this->user->changePassword($this->newpass)) {
             return $this->addErrors($this->user->getErrors());
         }
     }
