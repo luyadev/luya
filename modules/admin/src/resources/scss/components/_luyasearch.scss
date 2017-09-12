@@ -1,78 +1,104 @@
 .luyasearch {
-    position: absolute;
-    display: block;
-    width: 640px;
-    max-width: 100%;
-    top: 0;
-    bottom: 0;
-    background: white;
-    z-index: z-index(luyasearch);
-    padding-left: 62px;
-    transition: .25s left ease-in-out;
-    box-shadow: 0 0 10px -2px map-get($grays, 800);
-    overflow-y: auto;
 
-    @include media-breakpoint-up(lg) {
-        width: 70%;
-    }
+    display: none;
 
-    &-closed {
-        left: -100%;
-    }
+    @media (min-width: $mobile-nav-breakpoint) {
+        position: absolute;
+        display: block;
+        width: 640px;
+        max-width: 100%;
+        top: 0;
+        bottom: 0;
+        z-index: z-index(luyasearch);
+        padding-left: 62px;
+        transition: .25s left ease-in-out;
+        overflow-y: auto;
 
-    &-open {
-        left: 0;
-    }
+        @include media-breakpoint-up(lg) {
+            width: 70%;
+        }
 
-    &-inner {
-        padding: $content-padding-x;
-    }
+        &-closed {
+            left: -100%;
+        }
 
-    &-toggled {
-        padding-left: 200px;
+        &-open {
+            left: 0;
+        }
+
+        &-toggled {
+            padding-left: 200px;
+
+            .luyasearch-form {
+                @include media-breakpoint-up(lg) {
+                    width: calc(70% - 200px);
+                }
+            }
+        }
     }
+}
+
+.luyasearch-inner {
+
+    background: $white;
+    min-height: 100%;
+    padding: 72px $content-padding-y $content-padding-x $content-padding-y;
+    position: relative;
+
 }
 
 .luyasearch-form {
-    position: relative;
-    background: map-get($grays, 100);;
-    padding: $content-padding-x;
+
+    top: 0;
+    width: 440px;
+    background-color: color(gray);;
+    padding: $content-padding-x $content-padding-y $content-padding-x 0;
+    margin-bottom: 0;
+    border-bottom-right-radius: $border-radius;
+    position: fixed;
+    z-index: z-index(toast);
+
+    @include media-breakpoint-up(lg) {
+        width: calc(70% - 62px);
+    }
 }
 .luyasearch-input {
-    width: calc(100% - 50px);
+    width: calc(100% - 45px);
+    display: inline-block;
     max-width: 100%;
+    padding: 6px 5px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .luyasearch-close {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 31px;
-    height: 37px;
-    padding: 7px;
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 40px;
     cursor: pointer;
     transition: .25s color ease-in-out;
-    background: $white;
-    line-height: 1em;
 
     &:hover {
         color: $pink;
     }
 
-    &-icon {
+    i {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 12px;
+        top: -17px;
+        width: 100%;
+        height: 100%;
+        font-size: 24px !important;
+        color: $white;
     }
 }
 
-.luyasearch-results {
-    position: relative;
-}
 
 .luyasearch-result {
-    background: map-get($grays, 100);;
-    padding: $content-padding-x;
+    background: map-get($grays, 100);
     position: relative;
     margin-bottom: 15px;
 }
@@ -92,11 +118,10 @@
     right:0;
     top: 0;
     transform: translateY(-50%);
-    transition: transform .25s ease-in-out;
     cursor: pointer;
     padding: 5px;
     color: inherit;
-    transition: .25s color ease-in-out;
+    transition: .25s color ease-in-out, .25s ease-in-out transform;
 
     &:hover {
         color: $pink;
@@ -131,7 +156,6 @@
     position: absolute;
     right: -18px;
     top: -16px;
-    font-size: 9px;
     padding:1px;
     text-align: right;
     font-size: 16px;
