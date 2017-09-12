@@ -15,6 +15,8 @@ All notable changes to this project will be documented in this file. This projec
 - [#1461](https://github.com/luyadev/luya/issues/1461) Admin Search Panel does not auto focus the input and allows you to toggle the search groups.
 
 ### Fixed
+
+- [#1492](https://github.com/luyadev/luya/issues/1492) Fixed bug where CRUD pagination does not work anymore.
 - [#1464](https://github.com/luyadev/luya/issues/1464) Adjusted icon positions for dropdown list selection
 - [#1460](https://github.com/luyadev/luya/issues/1460) Fixed issue with login autofill and floating labels
 - [#1471](https://github.com/luyadev/luya/issues/1471) Added word-break: break-all to block-front; Could lead to other problems but couldn't see any so far

@@ -180,7 +180,7 @@ $this->beginBody();
                             <a class="page-link" ng-click="pagerPrevClick()"><i class="material-icons">keyboard_arrow_left</i></a>
                         </li>
                         <li class="page-item" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}">
-                            <a class="page-link" ng-click="realoadCrudList(pageId)">{{pageId}}</a>
+                            <a class="page-link" ng-click="reloadCrudList(pageId)">{{pageId}}</a>
                         </li>
                         <li class="page-item page-item-icon" ng-class="{'disabled' : pager.currentPage == pager.pageCount}">
                             <a class="page-link" ng-click="pagerNextClick();"><i class="material-icons">keyboard_arrow_right</i></a>
@@ -196,7 +196,7 @@ $this->beginBody();
                                     {{pager.currentPage}}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" ng-class="{'show': openDropdown}">
-                                    <button class="dropdown-item" ng-repeat="pageId in pager.pages" ng-show="pager.currentPage != pageId" ng-click="realoadCrudList(pageId); openDropdown = false;">{{pageId}}</button>
+                                    <button class="dropdown-item" ng-repeat="pageId in pager.pages" ng-show="pager.currentPage != pageId" ng-click="reloadCrudList(pageId); openDropdown = false;">{{pageId}}</button>
                                 </div>
                             </div>
                         </li>
