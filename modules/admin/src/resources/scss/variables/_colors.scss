@@ -86,10 +86,12 @@ $pink-alpha-25:             rgba($pink, .25);
 $pink-alpha-50:             rgba($pink, .5);
 $pink-alpha-75:             rgba($pink, .75);
 
+$tooltip-bg-alt:            #5C6268;
+$tooltip-bg:                $black;
+
 $mainnav-colors: (
     background-color: map_get($grays, 900),
     background: linear-gradient(to top, map_get($grays, 900), #35383D),
     color: $white,
 );
 
-$tooltip-box-shadow:            0 0 10px 2px rgba(0,0,0,.4);
