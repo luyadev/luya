@@ -103,18 +103,21 @@ var checkInputLabels = function () {
             });
         } else {
             var val = $element.val() ? $element.val() : '';
-            if(val.length >= 1) {
+            var mail = document.getElementById("login-user-email");
+            var pass = document.getElementById("login-user-password");
+            var autofillBg = window.getComputedStyle(mail || pass, null).getPropertyValue("background-color") === 'rgb(250, 255, 189)' ? true : false;
+            if(val.length >= 1 || autofillBg === true) {
                 $element
                     .addClass('is-not-empty')
                     .removeClass('is-empty')
                 ;
+
             } else {
                 $element
                     .addClass('is-empty')
                     .removeClass('is-not-empty')
                 ;
             }
-
         }
     };
 
@@ -124,5 +127,3 @@ var checkInputLabels = function () {
 
     check();
 };
-
-checkInputLabels();
