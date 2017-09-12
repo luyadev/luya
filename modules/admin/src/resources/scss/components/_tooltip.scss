@@ -69,20 +69,14 @@
     }
 }
 
-
 .tooltip-big-activity {
     background-color: theme-color(dark);
-
-
     padding: 5px;
     vertical-align: middle;
     color: $white;
     border-radius: $border-radius;
     cursor: pointer;
 
-     .tooltip-inner {
-         display: red !important;
-    }
 
     &.green {
         color: theme-color(success);
