@@ -51,7 +51,7 @@
 
     top: 0;
     width: 440px;
-    background-color: color(gray);;
+    background-color: color(gray);
     padding: $content-padding-x $content-padding-y $content-padding-x 0;
     margin-bottom: 0;
     border-bottom-right-radius: $border-radius;
@@ -165,7 +165,6 @@
 .luyasearch-table-wrapper {
     overflow-x: auto;
     margin-top: 10px;
-    // background: map-get($grays, 100);;
     padding: 5px;
 }
 
