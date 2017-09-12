@@ -94,8 +94,8 @@ $this->beginPage()
                                             <td>{{row.firstname}} {{row.lastname}}</td>
                                             <td>{{row.email}}</td>
                                             <td>
-                                                <div class="tooltip-big-activity" ng-class="{ 'green' : row.is_active, 'grey' : !row.is_active }">
-                                                    <i class="material-icons" tooltip tooltip-position="top" tooltip-text="<span><b>{{row.inactive_since}}</b>&nbsp;<?= Admin::t('layout_useronline_inactive'); ?></span><br /><small>{{ row.lock_description }}</small>">info_outline</i>
+                                                <div class="tooltip-big-activity" tooltip tooltip-position="top" tooltip-text="<span><b>{{row.inactive_since}}</b>&nbsp;<?= Admin::t('layout_useronline_inactive'); ?></span><br /><small>{{ row.lock_description }}</small>"ng-class="{ 'green' : row.is_active, 'grey' : !row.is_active }">
+                                                    <i class="material-icons">info_outline</i>
                                                 </div>
                                             </td>
                                         </tr>

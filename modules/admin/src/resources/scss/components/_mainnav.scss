@@ -162,6 +162,7 @@
         .mainnav-tooltip-big-wrapper {
             display: block;
             opacity: 1;
+            bottom: -2px;
         }
     }
 }
@@ -294,16 +295,18 @@
 
 .mainnav-tooltip-big {
     display: inline-block;
-    background: $tooltip-bg;
+    //background: $tooltip-bg;
+    background-color: $tooltip-bg-alt;
     border-radius: $border-radius;
     padding: 0 10px;
     box-shadow: $tooltip-box-shadow;
+    font-size: 14px;
 
     &:after {
-        border-color: transparent $tooltip-bg transparent transparent;
+        border-color: transparent $tooltip-bg-alt transparent transparent;
         border-style: solid;
         border-width: 5px 5px 5px 0;
-        bottom: 15px;
+        bottom: 18px;
         content: "";
         left: 17px;
         position: absolute;
