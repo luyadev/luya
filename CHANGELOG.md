@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1456](https://github.com/luyadev/luya/issues/1456) Fixed bug where login forms make problems on Firefox Browsers.
 - [#1458](https://github.com/luyadev/luya/issues/1458) Fixed bug where crud search does not apply the model changes.
 - [#1454](https://github.com/luyadev/luya/issues/1454) Fixed Problem with Admin UI and Firefox Browsers.
+- [#1371](https://github.com/luyadev/luya/issues/1371) Fixed issue where cms page last update does not refresh the user id
 
 
 1.0.0-RC4 (5. September 2017)
