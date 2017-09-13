@@ -1,6 +1,10 @@
 # Project Module
 
-A very important behavior in *LUYA* projects are **modules**. You can always use modules to put your own custom and reusable logic inside. For instance you can put database logic inside of the via ActiveRecord models. A module can also provide informations for other module, for example [CMS Blocks](app-blocks.md). There are two different types of Modules:
+A very important behavior in *LUYA* projects are **modules**. You can always use modules to put your own custom and reusable logic inside. For instance you can put database logic inside of the via ActiveRecord models. A module can also provide informations for other module, for example [CMS Blocks](app-blocks.md). 
+
+## Module Types
+
+There are two different types of Modules:
 
 + [Admin](app-admin-module.md) - Contains Models, Migrations Administration, [NgRest Crud](ngrest-concept.md).
 + [Frontend](app-module-frontend.md) - Contains controllers and views, logic for frontend implementations.
