@@ -88,17 +88,13 @@ var observeLogin = function (form, url, secureUrl) {
     });
 };
 
-$(window).load(function () {
-    $('.login-logo').addClass('login-logo-loaded');
-    $('.login-form').addClass('login-form-loaded');
-});
 
 var checkInputLabels = function () {
     var $loginInput = $('.login-input');
 
     var check = function($element) {
         var val = $element.val() ? $element.val() : '';
-        
+
         var autofillBg = window.getComputedStyle($element[0], null).getPropertyValue("background-color") === 'rgb(250, 255, 189)' ? true : false;
 
         if(val.length >= 1 || autofillBg === true) {
@@ -116,3 +112,11 @@ var checkInputLabels = function () {
         check($(this));
     });
 };
+
+$(window).load(function () {
+    $('.login-logo').addClass('login-logo-loaded');
+    $('.login-form').addClass('login-form-loaded');
+    checkInputLabels();
+});
+
+

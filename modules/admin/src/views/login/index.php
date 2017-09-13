@@ -9,7 +9,6 @@ $spinner = '<svg version="1.1"
                 y="0px"
                 viewBox="0 0 120 120" 
                 xml:space="preserve">
-            
                 <path
                     id="spinner" 
                     fill="#fff" 
@@ -18,7 +17,7 @@ $spinner = '<svg version="1.1"
                     s-2-0.9-2-2c0-15.4-12.6-28-28-28S12,24.6,12,40s12.6,
                     28,28,28c1.1,0,2,0.9,2,2S41.1,72,40,72z"
                 >
-                    <animateTransform
+                <animateTransform
                         attributeType="xml"
                         attributeName="transform"
                         type="rotate"
@@ -30,6 +29,7 @@ $spinner = '<svg version="1.1"
                 </path>
             </svg>';
 ?>
+
 <div class="login-frame">
     <div class="login-logo">
         <img src="<?= $this->getAssetUrl("luya\admin\assets\Login") .'/images/luyalogo_destructed.png' ?>" alt="<?= Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?>" />
@@ -39,7 +39,7 @@ $spinner = '<svg version="1.1"
         <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>" />
         <div class="login-inputs">
             <div class="login-form-field form-group">
-                <input class="login-input" id="login-user-email" id="email" name="login[email]" type="email" tabindex="1" required />
+                <input class="login-input" id="email" name="login[email]" type="email" tabindex="1" required />
                 <label for="email" class="login-input-label"><?= Module::t('login_mail'); ?></label>
             </div>
             <div class="login-form-field form-group">
