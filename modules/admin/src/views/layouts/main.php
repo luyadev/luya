@@ -187,6 +187,7 @@ $this->beginPage()
         <div class="debug-panel debug-panel-network" ng-class="{'debug-panel-network-open': debugDetail}" ng-if="debugTab==1">
 
             <div class="debug-network-items">
+            	<button type="button" ng-click="AdminDebugBar.clear()" class="btn btn-icon"><i class="material-icons">clear</i></button>
                 <table class="table table-striped table-sm table-hover table-bordered table-responsive">
                     <thead>
                         <tr>
@@ -196,7 +197,7 @@ $this->beginPage()
                             <th>Detail</th>
                         </tr>
                     </thead>
-                    <tr ng-repeat="(key, item) in AdminDebugBar.data | orderBy: '-key'">
+                    <tr ng-repeat="(key, item) in AdminDebugBar.data | reverse">
                         <td>{{ item.url }}</td>
                         <td>{{ item.responseStatus }}</td>
                         <td>{{ item.parseTime }}</td>

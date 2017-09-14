@@ -223,7 +223,9 @@ function typeCastValue(value) {
     zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService, AdminDebugBar) {
         return {
             request: function (config) {
-            	config.debugId = AdminDebugBar.pushRequest(config);
+            	if (!config.hasOwnProperty('ignoreLoadingBar')) {
+            		config.debugId = AdminDebugBar.pushRequest(config);
+            	}
                 config.headers = config.headers || {};
                 config.headers.Authorization = "Bearer " + $rootScope.luyacfg.authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
@@ -231,7 +233,9 @@ function typeCastValue(value) {
             },
             response: function(config) {
             	var isConfig = config;
-            	AdminDebugBar.pushResponse(config);
+            	if (!isConfig.hasOwnProperty('ignoreLoadingBar')) {
+            		AdminDebugBar.pushResponse(config);
+            	}
             	return isConfig;
             },
             responseError: function (data) {
