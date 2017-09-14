@@ -4,8 +4,8 @@ use luya\admin\Module;
 <div class="luya-main luya-main-crud" ng-controller="DefaultController">
     <div class="luya-subnav">
         <div class="modulenav-mobile">
-            <div class="modulenav-mobile-title" ng-show="currentItem">{{ currentItem.alias }}</div>
-            <div class="modulenav-mobile-title" ng-show="!currentItem"><?= Module::t('menu_dashboard'); ?></div>
+            <div class="modulenav-mobile-title" ng-show="currentItem"><i class="material-icons">{{currentItem.icon}}</i> {{ currentItem.alias }}</div>
+            <div class="modulenav-mobile-title" ng-show="!currentItem"><i class="material-icons">dashboard</i> <?= Module::t('menu_dashboard'); ?></div>
             <label for="modulenav-toggler" class="modulenav-toggler-icon" ng-click="isOpenModulenav = !isOpenModulenav">
                 <i class="material-icons" ng-show="!isOpenModulenav">menu</i>
                 <i class="material-icons" ng-show="isOpenModulenav">close</i>

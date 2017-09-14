@@ -30,7 +30,7 @@ $this->beginPage()
         <div class="mainnav" ng-class="{'mainnav-small' : !isHover}">
             <div class="mainnav-toggler-mobile">
                 <div class="mainnav-toggler-mobile-icon" ng-click="isOpen = !isOpen">
-                    <div class="mainnav-mobile-title">{{currentItem.alias}}</div>
+                    <div class="mainnav-mobile-title"><i class="material-icons">{{currentItem.icon}}</i> {{currentItem.alias}}</div>
                     <i class="material-icons" ng-show="!isOpen">menu</i>
                     <i class="material-icons" ng-show="isOpen">close</i>
                 </div>
