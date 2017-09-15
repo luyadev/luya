@@ -24,7 +24,7 @@ class User extends NgRestModel implements \yii\web\IdentityInterface
 
     public static function findByEmail($email)
     {
-        return self::find()->where(['email' => $email])->one();
+        return static::findOne(['email' => $email]);
     }
 
     public function rules()

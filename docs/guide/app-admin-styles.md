@@ -62,7 +62,7 @@ Material Design Icons: https://material.io/icons/
 | Add icon | <i class="material-icons">add_box</i> | add_box |
 | Add icon for button | <i class="material-icons">add</i> | add_box |
 | Delete icon | <i class="material-icons">delete</i> | delete |
-| Save / Confirm icon | <i class="material-icons">check.png) | check |
+| Save / Confirm icon | <i class="material-icons">check.png | check |
 | Abort / Clear icon | <i class="material-icons">clear</i>  | clear |
 | Config icon | <i class="material-icons">settings</i> | settings |
 | Settings icon | <i class="material-icons">more_vert</i> | more_vert |

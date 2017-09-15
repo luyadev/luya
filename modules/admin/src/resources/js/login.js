@@ -86,43 +86,37 @@ var observeLogin = function (form, url, secureUrl) {
         $('#loginForm').show();
         $('#success').hide();
     });
-
-    $(window).load(function () {
-        $('.login-logo').addClass('login-logo-loaded');
-        $('.login-form').addClass('login-form-loaded');
-    });
 };
 
+
 var checkInputLabels = function () {
+    var $loginInput = $('.login-input');
 
-    var check = function(element) {
-        var $element = element ? $(element) : $('.login-input');
-        if($element.length >= 2) {
-            $element.each( function(key, element) {
-                check(element);
-            });
+    var check = function($element) {
+        var val = $element.val() ? $element.val() : '';
+
+        var autofillBg = window.getComputedStyle($element[0], null).getPropertyValue("background-color") === 'rgb(250, 255, 189)' ? true : false;
+
+        if(val.length >= 1 || autofillBg === true) {
+            $element.addClass('is-not-empty').removeClass('is-empty');
         } else {
-            var val = $element.val() ? $element.val() : '';
-            if(val.length >= 1) {
-                $element
-                    .addClass('is-not-empty')
-                    .removeClass('is-empty')
-                ;
-            } else {
-                $element
-                    .addClass('is-empty')
-                    .removeClass('is-not-empty')
-                ;
-            }
-
+            $element.addClass('is-empty').removeClass('is-not-empty');
         }
     };
 
-    $('.login-input').on('keyup', function() {
-        check(this);
+    $loginInput.on('keyup', function() {
+        check($(this));
     });
 
-    check();
+    $loginInput.each( function() {
+        check($(this));
+    });
 };
 
-checkInputLabels();
+$(window).load(function () {
+    $('.login-logo').addClass('login-logo-loaded');
+    $('.login-form').addClass('login-form-loaded');
+    checkInputLabels();
+});
+
+

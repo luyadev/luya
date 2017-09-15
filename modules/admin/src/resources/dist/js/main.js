@@ -9250,7 +9250,9 @@ function typeCastValue(value) {
     zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService, AdminDebugBar) {
         return {
             request: function (config) {
-            	config.debugId = AdminDebugBar.pushRequest(config);
+            	if (!config.hasOwnProperty('ignoreLoadingBar')) {
+            		config.debugId = AdminDebugBar.pushRequest(config);
+            	}
                 config.headers = config.headers || {};
                 config.headers.Authorization = "Bearer " + $rootScope.luyacfg.authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
@@ -9258,7 +9260,9 @@ function typeCastValue(value) {
             },
             response: function(config) {
             	var isConfig = config;
-            	AdminDebugBar.pushResponse(config);
+            	if (!isConfig.hasOwnProperty('ignoreLoadingBar')) {
+            		AdminDebugBar.pushResponse(config);
+            	}
             	return isConfig;
             },
             responseError: function (data) {
@@ -9661,6 +9665,10 @@ zaa.factory("AdminDebugBar", function() {
 	var service = [];
 	
 	service.data = [];
+	
+	service.clear = function() {
+		service.data = [];
+	};
 	
 	service.pushRequest = function(request) {
 		return service.data.push({'url': request.url, 'requestData': request.data, 'responseData': null, 'responseStatus' : null, start:new Date(), end:null, parseTime: null});
@@ -11240,8 +11248,8 @@ zaa.factory('HtmlStorage', function() {
                                     '</select>' +
                                     '<div class="zaaselect-selected">' +
                                         '<span class="zaaselect-selected-text" ng-click="isOpen=!isOpen">{{getSelectedValue()}}</span>' +
-                                        '<i class="material-icons zaaselect-dropdown-icon" ng-click="isOpen=!isOpen">keyboard_arrow_down</i>' +
                                         '<i class="material-icons zaaselect-clear-icon" ng-click="model=initvalue">clear</i>' +
+                                        '<i class="material-icons zaaselect-dropdown-icon" ng-click="isOpen=!isOpen">keyboard_arrow_down</i>' +
                                     '</div>' +
                                     '<div class="zaaselect-dropdown">' +
                                         '<div class="zaaselect-search">' +

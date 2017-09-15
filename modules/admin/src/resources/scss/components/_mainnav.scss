@@ -14,16 +14,16 @@
         height: 100%;
         width: 200px;
 
-        .mainnav-tooltip-big {
-            left: 190px;
+        .mainnav-tooltip-big-wrapper {
+            left: 170px;
         }
 
         &-small {
             flex: 0 0 $mainnav-width-small;
             width: $mainnav-width-small;
 
-            .mainnav-tooltip-big {
-                left: 50px;
+            .mainnav-tooltip-big-wrapper {
+                left: 30px;
             }
 
             .mainnav-tooltip-toggle-hidden {
@@ -159,9 +159,10 @@
             color: map-get($grays, 100);;
         }
 
-        .mainnav-tooltip-big {
+        .mainnav-tooltip-big-wrapper {
             display: block;
             opacity: 1;
+            bottom: -2px;
         }
     }
 }
@@ -284,23 +285,30 @@
     transform: translateX(-50%);
 }
 
-.mainnav-tooltip-big {
-    background: $tooltip-bg;
-    border-radius: $border-radius;
-    bottom: 0;
+.mainnav-tooltip-big-wrapper {
+    padding-left: 22px;
     display: none;
     opacity: 0;
-    padding: 10px;
     position: absolute;
+    bottom: 0;
+}
+
+.mainnav-tooltip-big {
+    display: inline-block;
+    //background: $tooltip-bg;
+    background-color: $tooltip-bg-alt;
+    border-radius: $border-radius;
+    padding: 0 10px;
     box-shadow: $tooltip-box-shadow;
+    font-size: 14px;
 
     &:after {
-        border-color: transparent $tooltip-bg transparent transparent;
+        border-color: transparent $tooltip-bg-alt transparent transparent;
         border-style: solid;
         border-width: 5px 5px 5px 0;
-        bottom: 15px;
+        bottom: 18px;
         content: "";
-        left: -5px;
+        left: 17px;
         position: absolute;
     }
 
@@ -314,32 +322,17 @@
         }
 
         th, td {
-            min-width: 180px;
-            padding: 10px 0;
+            white-space: nowrap;
+            padding: 10px 10px 10px 0;
             text-align: left;
+            cursor: default;
 
             &:last-of-type {
-                min-width: 150px;
-            }
-            &:first-of-type {
-                padding-left: 5px;
+                padding-right: 0;
+                max-width: 37px;
             }
         }
 
-        tr {
-            padding: 10px;
-            &.mainnav-tooltip-big-green {
-                color: $green;
-            }
-
-            &.mainnav-tooltip-big-red {
-                color: $red;
-            }
-
-            &.mainnav-tooltip-big-gray {
-                color: map-get($grays, 600);
-            }
-        }
     }
 }
 

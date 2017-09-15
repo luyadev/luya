@@ -240,7 +240,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         return parent::find()->where(['is_deleted' => false]);
     }
 
-    public function changePassword($newpass, $newpasswd)
+    public function changePassword($newpass)
     {
         $this->password = $newpass;
 

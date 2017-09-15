@@ -1070,12 +1070,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "fffa7444f67136416e5afe5f7e909340881da03c"
+                "reference": "3830de297839076a26cd52a5caa954587f26de33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/fffa7444f67136416e5afe5f7e909340881da03c",
-                "reference": "fffa7444f67136416e5afe5f7e909340881da03c",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/3830de297839076a26cd52a5caa954587f26de33",
+                "reference": "3830de297839076a26cd52a5caa954587f26de33",
                 "shasum": ""
             },
             "require-dev": {
@@ -1128,7 +1128,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-09-11T09:31:06+00:00"
+            "time": "2017-09-12T08:21:10+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -1281,16 +1281,16 @@
         },
         {
             "name": "phpdocumentor/reflection-common",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
-                "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c"
+                "reference": "21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/144c307535e82c8fdcaacbcfc1d6d8eeb896687c",
-                "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6",
+                "reference": "21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6",
                 "shasum": ""
             },
             "require": {
@@ -1331,7 +1331,7 @@
                 "reflection",
                 "static analysis"
             ],
-            "time": "2015-12-27T11:43:31+00:00"
+            "time": "2017-09-11T18:02:19+00:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",

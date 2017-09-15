@@ -386,6 +386,10 @@ zaa.factory("AdminDebugBar", function() {
 	
 	service.data = [];
 	
+	service.clear = function() {
+		service.data = [];
+	};
+	
 	service.pushRequest = function(request) {
 		return service.data.push({'url': request.url, 'requestData': request.data, 'responseData': null, 'responseStatus' : null, start:new Date(), end:null, parseTime: null});
 	};

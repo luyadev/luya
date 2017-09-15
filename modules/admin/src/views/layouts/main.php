@@ -30,7 +30,7 @@ $this->beginPage()
         <div class="mainnav" ng-class="{'mainnav-small' : !isHover}">
             <div class="mainnav-toggler-mobile">
                 <div class="mainnav-toggler-mobile-icon" ng-click="isOpen = !isOpen">
-                    <div class="mainnav-mobile-title">{{currentItem.alias}}</div>
+                    <div class="mainnav-mobile-title"><i class="material-icons">{{currentItem.icon}}</i> {{currentItem.alias}}</div>
                     <i class="material-icons" ng-show="!isOpen">menu</i>
                     <i class="material-icons" ng-show="isOpen">close</i>
                 </div>
@@ -87,25 +87,20 @@ $this->beginPage()
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_useronline'); ?>
                             </span>
-                            <span class="mainnav-tooltip-big">
-                               <table>
-                                  <tr>
-                                    <th><?= Admin::t('layout_useronline_name'); ?></th>
-                                    <th><?= Admin::t('layout_useronline_mail'); ?></th>
-                                    <th><?= Admin::t('layout_useronline_activity'); ?></th>
-                                  </tr>
-                                  <tr ng-repeat="row in notify" ng-class="{ 'mainnav-tooltip-big-green' : row.is_active, 'mainnav-tooltip-big-gray' : !row.is_active }">
-                                    <td>{{row.firstname}} {{row.lastname}}</td>
-                                    <td>{{row.email}}</td>
-                                    <td class="tooltip-big-activity">
-                                        <span ng-show="!row.is_active">
-                                            <span><b>{{row.inactive_since}}</b>&nbsp;<?= Admin::t('layout_useronline_inactive'); ?></span><br />
-                                            <small>{{ row.lock_description }}</small>
-                                        </span>
-                                        <small ng-show="row.is_active">{{ row.lock_description }}</small>
-                                    </td>
-                                  </tr>
-                                </table>
+                            <span class="mainnav-tooltip-big-wrapper">
+                                <span class="mainnav-tooltip-big">
+                                    <table>
+                                        <tr ng-repeat="row in notify" ng-class="{ 'mainnav-tooltip-big-green' : row.is_active, 'mainnav-tooltip-big-gray' : !row.is_active }">
+                                            <td>{{row.firstname}} {{row.lastname}}</td>
+                                            <td>{{row.email}}</td>
+                                            <td>
+                                                <div class="tooltip-big-activity" tooltip tooltip-position="top" tooltip-text="<span><b>{{row.inactive_since}}</b>&nbsp;<?= Admin::t('layout_useronline_inactive'); ?></span><br /><small>{{ row.lock_description }}</small>"ng-class="{ 'green' : row.is_active, 'grey' : !row.is_active }">
+                                                    <i class="material-icons">info_outline</i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </span>
                             </span>
                         </span>
                     </li>
@@ -192,6 +187,7 @@ $this->beginPage()
         <div class="debug-panel debug-panel-network" ng-class="{'debug-panel-network-open': debugDetail}" ng-if="debugTab==1">
 
             <div class="debug-network-items">
+            	<button type="button" ng-click="AdminDebugBar.clear()" class="btn btn-icon"><i class="material-icons">clear</i></button>
                 <table class="table table-striped table-sm table-hover table-bordered table-responsive">
                     <thead>
                         <tr>
@@ -201,7 +197,7 @@ $this->beginPage()
                             <th>Detail</th>
                         </tr>
                     </thead>
-                    <tr ng-repeat="(key, item) in AdminDebugBar.data | orderBy: '-key'">
+                    <tr ng-repeat="(key, item) in AdminDebugBar.data | reverse">
                         <td>{{ item.url }}</td>
                         <td>{{ item.responseStatus }}</td>
                         <td>{{ item.parseTime }}</td>
