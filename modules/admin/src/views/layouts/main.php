@@ -144,7 +144,7 @@ $this->beginPage()
                 <i class="material-icons luyasearch-close-icon">close</i>
             </div>
         </div>
-        <div class="luyasearch-inner">
+        <div class="luyasearch-inner" ng-show="searchQuery.length" ng-class="{'luyasearch-inner-input' : searchQuery.length}">
             <div class="alert alert-info" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
                 <?= Admin::t('layout_search_min_letters'); ?>
             </div>

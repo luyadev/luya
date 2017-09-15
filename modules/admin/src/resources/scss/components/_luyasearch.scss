@@ -1,6 +1,6 @@
 .luyasearch {
-
     display: none;
+    padding-top: 50px;
 
     @media (min-width: $mobile-nav-breakpoint) {
         position: absolute;
@@ -27,10 +27,12 @@
         }
 
         &-toggled {
+
             padding-left: 200px;
 
-            .luyasearch-form {
-                @include media-breakpoint-up(lg) {
+            @include media-breakpoint-up(lg) {
+                .luyasearch-form {
+
                     width: calc(70% - 200px);
                 }
             }
@@ -39,24 +41,34 @@
 }
 
 .luyasearch-inner {
-
+    transition: max-height .25s ease-in-out;
     background: $white;
-    min-height: 100%;
-    padding: 72px $content-padding-y $content-padding-x $content-padding-y;
+    height: auto;
+    padding: 21px $content-padding-y $content-padding-x $content-padding-y;
     position: relative;
+    margin-right: $border-radius;
 
+    &-input {
+        box-shadow: 0 0 2px 0 color(grey);
+    }
+
+    .alert {
+        margin-bottom: 0;
+    }
 }
 
 .luyasearch-form {
 
     top: 0;
     width: 440px;
-    background-color: color(gray);
-    padding: $content-padding-x $content-padding-y $content-padding-x 0;
+    background: map-get($grays, 100);
+    padding: $content-padding-y $content-padding-x;
     margin-bottom: 0;
     border-bottom-right-radius: $border-radius;
+    box-shadow: 0 0 2px 0 color(grey);
+
     position: fixed;
-    z-index: z-index(toast);
+    z-index: z-index(search);
 
     @include media-breakpoint-up(lg) {
         width: calc(70% - 62px);
@@ -92,7 +104,7 @@
         width: 100%;
         height: 100%;
         font-size: 24px !important;
-        color: $white;
+        color: color(grey);
     }
 }
 
