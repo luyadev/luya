@@ -43,8 +43,44 @@
 
 .filemanager-files {
     align-self: stretch;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
     width: auto;
+    overflow-x: hidden;
+
+    th {
+        padding-top: 5px;
+        position: relative;
+
+        &:first-of-type {
+            min-width: 100px;
+        }
+    }
+
+    .table {
+        width: 100%;
+        overflow-y: hidden;
+        display: inline-table;
+        
+        .custom-checkbox {
+            margin-top: 8px;
+        }
+    }
+
+    .table-sorter {
+        display: block;
+        position: absolute;
+        left: -3px;
+        top: 7px;
+        width: 5px;
+        height: auto;
+
+        &-down {
+            top: 15px;
+        }
+        i {
+            visibility: visible;
+        }
+    }
 
     @media (min-width: $mobile-nav-breakpoint) {
 
@@ -52,9 +88,11 @@
 
     }
 
-    .table .custom-checkbox {
-        margin-top: 8px;
-    }
+}
+
+.filemanager-files-table {
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 .filemanager-actions-column {
@@ -150,6 +188,13 @@
 
     &-spacing {
         padding-right: 50px;
+
+        .filemanager-search {
+            display: none;
+            @media screen and (min-width: 1340px) {
+                display: block;
+            }
+        }
     }
 }
 
