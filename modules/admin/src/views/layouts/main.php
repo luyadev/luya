@@ -133,13 +133,13 @@ $this->beginPage()
     <div ui-view class="luya-main-wrapper"></div>
 
     <div class="luyasearch" ng-class="{'luyasearch-open' : searchInputOpen, 'luyasearch-closed': !searchInputOpen, 'luyasearch-toggled': isHover}" zaa-esc="escapeSearchInput()">
-        <div class="luyasearch-inner">
-            <div class="luyasearch-form form-group">
-                <input id="global-search-input" focus-me="searchInputOpen" ng-model="searchQuery" type="search" class="luyasearch-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>
-                <div class="luyasearch-close" ng-click="closeSearchInput()">
-                    <i class="material-icons luyasearch-close-icon">close</i>
-                </div>
+        <div class="luyasearch-form form-group">
+            <input id="global-search-input" focus-me="searchInputOpen" ng-model="searchQuery" type="search" class="luyasearch-input form-control" placeholder="<?= Admin::t('layout_filemanager_search_text'); ?>"/>
+            <div class="luyasearch-close" ng-click="closeSearchInput()">
+                <i class="material-icons luyasearch-close-icon">close</i>
             </div>
+        </div>
+        <div class="luyasearch-inner" ng-show="searchQuery.length" ng-class="{'luyasearch-inner-input' : searchQuery.length}">
             <div class="alert alert-info" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
                 <?= Admin::t('layout_search_min_letters'); ?>
             </div>
