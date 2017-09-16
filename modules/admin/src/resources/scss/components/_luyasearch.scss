@@ -1,116 +1,78 @@
 .luyasearch {
-    display: none;
-    padding-top: 50px;
+    position: absolute;
+    display: block;
+    width: 640px;
+    max-width: 100%;
+    top: 0;
+    bottom: 0;
+    background: white;
+    z-index: z-index(luyasearch);
+    padding-left: 62px;
+    transition: .25s left ease-in-out;
+    box-shadow: 0 0 10px -2px map-get($grays, 800);
+    overflow-y: auto;
 
-    @media (min-width: $mobile-nav-breakpoint) {
-        position: absolute;
-        display: block;
-        width: 640px;
-        max-width: 100%;
-        top: 0;
-        bottom: 0;
-        z-index: z-index(luyasearch);
-        padding-left: 62px;
-        transition: .25s left ease-in-out;
-        overflow-y: auto;
-
-        @include media-breakpoint-up(lg) {
-            width: 70%;
-        }
-
-        &-closed {
-            left: -100%;
-        }
-
-        &-open {
-            left: 0;
-        }
-
-        &-toggled {
-
-            padding-left: 200px;
-
-            @include media-breakpoint-up(lg) {
-                .luyasearch-form {
-
-                    width: calc(70% - 200px);
-                }
-            }
-        }
-    }
-}
-
-.luyasearch-inner {
-    transition: max-height .25s ease-in-out;
-    background: $white;
-    height: auto;
-    padding: 21px $content-padding-y $content-padding-x $content-padding-y;
-    position: relative;
-    margin-right: $border-radius;
-
-    &-input {
-        box-shadow: 0 0 2px 0 color(grey);
+    @include media-breakpoint-up(lg) {
+        width: 70%;
     }
 
-    .alert {
-        margin-bottom: 0;
+    &-closed {
+        left: -100%;
+    }
+
+    &-open {
+        left: 0;
+    }
+
+    &-inner {
+        padding: $content-padding-x;
+    }
+
+    &-toggled {
+        padding-left: 200px;
     }
 }
 
 .luyasearch-form {
-
-    top: 0;
-    width: 440px;
-    background: map-get($grays, 100);
-    padding: $content-padding-y $content-padding-x;
-    margin-bottom: 0;
-    border-bottom-right-radius: $border-radius;
-    box-shadow: 0 0 2px 0 color(grey);
-
-    position: fixed;
-    z-index: z-index(search);
-
-    @include media-breakpoint-up(lg) {
-        width: calc(70% - 62px);
-    }
+    position: relative;
+    background: map-get($grays, 100);;
+    padding: $content-padding-x;
 }
 .luyasearch-input {
-    width: calc(100% - 45px);
-    display: inline-block;
+    width: calc(100% - 50px);
     max-width: 100%;
-    padding: 6px 5px;
-    margin-top: 4px;
-    margin-bottom: 4px;
 }
 
 .luyasearch-close {
-    position: relative;
-    display: inline-block;
-    height: 100%;
-    width: 40px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 31px;
+    height: 37px;
+    padding: 7px;
     cursor: pointer;
     transition: .25s color ease-in-out;
+    background: $white;
+    line-height: 1em;
 
     &:hover {
         color: $pink;
     }
 
-    i {
+    &-icon {
         position: absolute;
-        display: inline-block;
-        padding-right: 5px;
-        padding-left: 12px;
-        top: -17px;
-        width: 100%;
-        height: 100%;
-        font-size: 24px !important;
-        color: color(grey);
+        top: 50%;
+        transform: translateY(-50%);
     }
 }
 
+.luyasearch-results {
+    position: relative;
+}
 
 .luyasearch-result {
-    background: map-get($grays, 100);
+    background: map-get($grays, 100);;
+    padding: $content-padding-x;
     position: relative;
     margin-bottom: 15px;
 }
@@ -130,10 +92,11 @@
     right:0;
     top: 0;
     transform: translateY(-50%);
+    transition: transform .25s ease-in-out;
     cursor: pointer;
     padding: 5px;
     color: inherit;
-    transition: .25s color ease-in-out, .25s ease-in-out transform;
+    transition: .25s color ease-in-out;
 
     &:hover {
         color: $pink;
@@ -168,6 +131,7 @@
     position: absolute;
     right: -18px;
     top: -16px;
+    font-size: 9px;
     padding:1px;
     text-align: right;
     font-size: 16px;
@@ -177,6 +141,7 @@
 .luyasearch-table-wrapper {
     overflow-x: auto;
     margin-top: 10px;
+    // background: map-get($grays, 100);;
     padding: 5px;
 }
 
