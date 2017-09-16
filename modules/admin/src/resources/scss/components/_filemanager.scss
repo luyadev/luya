@@ -47,12 +47,15 @@
     width: auto;
     overflow-x: hidden;
 
+    thead {
+        min-height: 44px;
+    }
+
     th {
         padding-top: 5px;
         position: relative;
 
         &:first-of-type {
-            min-width: 100px;
         }
     }
 
@@ -66,16 +69,25 @@
         }
     }
 
-    .table-sorter {
-        display: block;
+    .table-sorter-wrapper {
         position: absolute;
         left: -3px;
-        top: 7px;
+        top:0;
+        height: 100%;
+
+    }
+
+    .table-sorter {
+        display: block;
+        position: relative;
         width: 5px;
-        height: auto;
+        height: 0;
+        padding-top: 6px;
 
         &-down {
-            top: 15px;
+            padding-top: auto;
+            padding-bottom: 6px;
+
         }
         i {
             visibility: visible;
@@ -187,7 +199,7 @@
     flex-wrap: wrap;
 
     &-spacing {
-        padding-right: 50px;
+        padding-right: 35px;
 
         .filemanager-search {
             display: none;
