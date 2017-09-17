@@ -68,6 +68,8 @@ There are several types you can use to generate your block controlls. Each class
 |zaa-image-array-upload|TYPE_IMAGEUPLOAD_ARRAY|Create an array with image id an caption string
 |zaa-list-array|TYPE_LIST_ARRAY|Create an array with a key variable `value`
 |[zaa-multiple-inputs](app-block-type-multiple-inputs.md)| TYPE_MULTIPLE_INPUTS | Create an expandable list with plugins for each row
+|zaa-color|TYPE_COLOR|A color wheel to choose a color will return the hex code of the selected color.
+|zaa-slug|TYPE_SLUG|Input field which will generate url safe strings where only a-z, 0-9 and - is allowed.
 
 ### Examples with Types
 
