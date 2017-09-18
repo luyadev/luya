@@ -38,9 +38,7 @@ class ChangePasswordActiveWindow extends ActiveWindow
      */
     public function index()
     {
-        return $this->render('index', [
-            'itemId' => $this->getItemId(),
-        ]);
+        return $this->render('index');
     }
 
     /**
