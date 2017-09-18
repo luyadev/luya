@@ -9734,7 +9734,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		
 		var uuid = guid();
 		
-		service.queue[uuid] = {message: message, timeout: timeout, uuid: uuid, type: type};
+		service.queue[uuid] = {message: message, timeout: timeout, uuid: uuid, type: type, close: function() {
+			delete service.queue[this.uuid];
+		}};
 		
 		$timeout(function() {
 			delete service.queue[uuid];

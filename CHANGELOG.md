@@ -13,11 +13,12 @@ All notable changes to this project will be documented in this file. This projec
 ### Added
 
 - [#1439](https://github.com/luyadev/luya/issues/1439) Added icons to admin responsive menu.
-- [#1494](https://github.com/luyadev/luya/issues/1494) CMS Page selection hides container element by default, fixed arrow keys.
-- [#1461](https://github.com/luyadev/luya/issues/1461) Admin Search Panel does not auto focus the input and allows you to toggle the search groups.
+- [#1494](https://github.com/luyadev/luya/issues/1494) CMS page selection hides container element by default, fixed arrow keys.
+- [#1461](https://github.com/luyadev/luya/issues/1461) Admin search panel auto focus input field and search groups can be toggled.
 
 ### Fixed
 
+- [#1486](https://github.com/luyadev/luya/issues/1486) Toast messages displayed correctly with multiple lines.
 - [#1492](https://github.com/luyadev/luya/issues/1492) Fixed bug where CRUD pagination does not work anymore.
 - [#1464](https://github.com/luyadev/luya/issues/1464) Adjusted icon positions for dropdown list selection
 - [#1460](https://github.com/luyadev/luya/issues/1460) Fixed issue with login autofill and floating labels
