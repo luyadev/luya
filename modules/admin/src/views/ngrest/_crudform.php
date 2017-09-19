@@ -8,11 +8,29 @@ use luya\admin\Module;
 <div class="tab-pane tab-padded" role="tabpanel" ng-if="crudSwitchType==<?= $type; ?>" ng-class="{'active' : crudSwitchType==<?= $type; ?>}" <?php if (!$isInline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
     <form name="formCreate" class="js-form-side-by-side" ng-submit="<?php if ($type==2):?>submitUpdate()<?php else: ?>submitCreate()<?php endif; ?>">
         <?php foreach ($this->context->forEachGroups($renderer) as $key => $group): ?>
-            <?php foreach ($group['fields'] as $field => $fieldItem): ?>
-                    <?php foreach ($this->context->createElements($fieldItem, $renderer) as $element): ?>
-                        <?= $element['html']; ?>
-                    <?php endforeach; ?>
-            <?php endforeach; ?>
+
+            <?php if (!$group['is_default']): ?>
+                <div class="card crud-card" ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>" ng-class="{'card-closed': !groupToggler[<?= $key; ?>]}">
+                    <div class="card-header" ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]">
+                        <span class="material-icons card-toggle-indicator">keyboard_arrow_down</span>
+                        <?= $group['name']; ?>
+                    </div>
+                    <div class="card-body">
+            <?php endif; ?>
+
+
+                <?php foreach ($group['fields'] as $field => $fieldItem): ?>
+                        <?php foreach ($this->context->createElements($fieldItem, $renderer) as $element): ?>
+                            <?= $element['html']; ?>
+                        <?php endforeach; ?>
+                <?php endforeach; ?>
+
+
+            <?php if (!$group['is_default']): ?>
+                    </div> <!-- /.card-body -->
+                </div> <!-- /.card -->
+            <?php endif; ?>
+
         <?php endforeach; ?>
         <button type="submit" class="btn btn-save btn-icon"><?= Module::t($type == 2 ? 'button_save' : 'ngrest_crud_btn_create'); ?></button>
     </form>
