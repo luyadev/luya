@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1473](https://github.com/luyadev/luya/issues/1473) Fixed issue where user default language is not provided when user has no settings stored.
 - [#1491](https://github.com/luyadev/luya/issues/1491) Updated timeline styles to prevent line from overlapping first and last entry
 - [#1490](https://github.com/luyadev/luya/issues/1490) Updated tab styling to support nested tab contents (tab-content, tab-pane)
 - [#1489](https://github.com/luyadev/luya/issues/1489) Changed default checkbox styles and updated checkbox html in all files
