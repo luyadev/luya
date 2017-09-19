@@ -26,15 +26,6 @@ abstract class ItemAbstract extends Object implements Arrayable
     {
         $this->_itemArray = $item;
     }
-    
-    /**
-     * @deprecated Remove.
-     * @return unknown
-     */
-    public function getItemArray()
-    {
-        return $this->_itemArray;
-    }
 
     /**
      * Method to construct/build the item from Iterator or Query class.
