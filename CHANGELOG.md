@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1490](https://github.com/luyadev/luya/issues/1490) Updated tab styling to support nested tab contents (tab-content, tab-pane)
 - [#1489](https://github.com/luyadev/luya/issues/1489) Changed default checkbox styles and updated checkbox html in all files
 - [#1455](https://github.com/luyadev/luya/issues/1455) Re-Implemented the group function for crud; Updated card styles to support toggle icon
 - [#1504](https://github.com/luyadev/luya/issues/1504) Added is-empty class to zaa-list directives and updated flag positions based on this class.

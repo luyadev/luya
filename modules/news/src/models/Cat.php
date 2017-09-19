@@ -100,4 +100,11 @@ class Cat extends NgRestModel
     {
         return $this->hasMany(Article::class, ['cat_id' => 'id']);
     }
+
+    public function ngRestRelations()
+    {
+        return [
+           ['label' => 'Articles', 'apiEndpoint' => Article::ngRestApiEndpoint(), 'dataProvider' => $this->getArticles()],
+        ];
+    }
 }
