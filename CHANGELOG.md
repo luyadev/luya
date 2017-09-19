@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1505](https://github.com/luyadev/luya/issues/1505) Minor API Breaks and removed deprecated methods.
 - [#1341](https://github.com/luyadev/luya/issues/1341) Changed signature of `changePassword($newPassword)` in `luya\admin\aws\ChangePasswordInterface`.
 
 ### Added
