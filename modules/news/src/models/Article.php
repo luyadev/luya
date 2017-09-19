@@ -35,8 +35,7 @@ use luya\admin\traits\TagsTrait;
  */
 class Article extends NgRestModel
 {
-    use SoftDeleteTrait;
-    use TagsTrait;
+    use SoftDeleteTrait, TagsTrait;
     
     public $i18n = ['title', 'text', 'teaser_text', 'image_list'];
 
@@ -161,29 +160,40 @@ class Article extends NgRestModel
     /**
      * @inheritdoc
      */
-    public function ngRestConfig($config)
+    public function ngRestScopes()
     {
-        $config->aw->load(['class' => TagActiveWindow::class]);
+    	return [
+    		[['list'], ['cat_id', 'title', 'timestamp_create', 'image_id']],
+    		[['create', 'update'], ['cat_id', 'title', 'teaser_text', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']],
+    		[['delete'], true],
+    	];
+    }
     
-        $this->ngRestConfigDefine($config, 'list', ['cat_id', 'title', 'timestamp_create', 'image_id']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['cat_id', 'title', 'teaser_text', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']);
-    
-        $config->delete = true;
-    
-        return $config;
+    /**
+     * @inheritdoc 
+     */
+    public function ngRestActiveWindows()
+    {
+    	return [
+    		['class' => TagActiveWindow::class],
+    	];
     }
 
     /**
      *
      * @param false|int $limit
-     * @return Article[]
+     * @return Article
      */
     public static function getAvailableNews($limit = false)
     {
-        $q = self::find()->where('timestamp_display_from <= :time', ['time' => time()])->orderBy('timestamp_display_from DESC');
+        $q = self::find()
+        	->andWhere('timestamp_display_from <= :time', ['time' => time()])
+        	->orderBy('timestamp_display_from DESC');
+        
         if ($limit) {
             $q->limit($limit);
         }
+        
         $articles = $q->all();
 
         // filter if display time is limited

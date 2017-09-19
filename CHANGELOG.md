@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1503](https://github.com/luyadev/luya/issues/1503) Deleted news are now hidden in getAvailableNews() method.
 - [#1486](https://github.com/luyadev/luya/issues/1486) Toast messages displayed correctly with multiple lines.
 - [#1492](https://github.com/luyadev/luya/issues/1492) Fixed bug where CRUD pagination does not work anymore.
 - [#1464](https://github.com/luyadev/luya/issues/1464) Adjusted icon positions for dropdown list selection
