@@ -2,13 +2,14 @@ zaa-image-array-upload {
     & + .flag {
         margin-right: 70px;
     }
-    &.is-empty {
-        .alert {
-            margin-right: 45px;
-        }
+}
 
-        & + .flag {
-            margin-right: 0;
-        }
+.form-i18n zaa-image-array-upload.is-empty {
+    .alert {
+        margin-right: 45px;
+    }
+
+    & + .flag {
+        margin-right: 0;
     }
 }
