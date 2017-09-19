@@ -187,9 +187,9 @@ abstract class Boot
         
         $baseUrl = null;
         if (isset($config['consoleBaseUrl'])) {
-        	$baseUrl = $config['consoleBaseUrl'];
+            $baseUrl = $config['consoleBaseUrl'];
         } elseif (isset($config['consoleHostInfo'])) {
-        	$baseUrl = '/';
+            $baseUrl = '/';
         }
         
         $this->includeYii();
@@ -201,7 +201,7 @@ abstract class Boot
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
                     'baseUrl' => $baseUrl,
-                	'hostInfo' => isset($config['consoleHostInfo']) ? $config['consoleHostInfo'] : null,
+                    'hostInfo' => isset($config['consoleHostInfo']) ? $config['consoleHostInfo'] : null,
                 ],
             ],
         ], $config));

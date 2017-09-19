@@ -286,7 +286,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $moveNavId
      * @param unknown $toBeforeNavId
      * @return boolean|boolean|mixed
@@ -322,7 +322,7 @@ class Nav extends ActiveRecord
 
     /**
      * Moves an element ($moveNavId) after another one ($toAfterNavId).
-     * 
+     *
      * @param unknown $moveNavId
      * @param unknown $toAfterNavId
      * @return boolean|boolean|mixed
@@ -356,7 +356,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $moveNavId
      * @param unknown $droppedOnItemId
      * @return boolean|boolean|mixed
@@ -404,25 +404,25 @@ class Nav extends ActiveRecord
      * 2|2
      * 3|3
      * 4|4
-     * 
+     *
      * if you disabled $withCurrentElement the output would be:
-     * 
+     *
      * id|sort_index
      * 1|0
      * 2|1
      * 3|3
      * 4|4
-     * 
+     *
      * @param $withCurrentElement boolean Whether the current element should be moved along with the others or not.
      */
     public function moveUpstairs($withCurrentElement = true)
     {
-    	$operator = $withCurrentElement ? '>=' : '>';
-    	$startIndex = $withCurrentElement ? (int) $this->sort_index : (int) $this->sort_index + 1;
-    	foreach (self::find()->where('sort_index '.$operator.' :index', ['index' => (int) $this->sort_index])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
-    		++$startIndex;
-    		Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
-    	}
+        $operator = $withCurrentElement ? '>=' : '>';
+        $startIndex = $withCurrentElement ? (int) $this->sort_index : (int) $this->sort_index + 1;
+        foreach (self::find()->where('sort_index '.$operator.' :index', ['index' => (int) $this->sort_index])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+            ++$startIndex;
+            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
+        }
     }
     
     /**
@@ -447,11 +447,11 @@ class Nav extends ActiveRecord
      */
     public function moveDownstairs()
     {
-    	$startIndex = (int)$this->sort_index;
-    	foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
-    		--$startIndex;
-    		Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
-    	}
+        $startIndex = (int)$this->sort_index;
+        foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+            --$startIndex;
+            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
+        }
     }
 
     /**

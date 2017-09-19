@@ -162,21 +162,21 @@ class Article extends NgRestModel
      */
     public function ngRestScopes()
     {
-    	return [
-    		[['list'], ['cat_id', 'title', 'timestamp_create', 'image_id']],
-    		[['create', 'update'], ['cat_id', 'title', 'teaser_text', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']],
-    		[['delete'], true],
-    	];
+        return [
+            [['list'], ['cat_id', 'title', 'timestamp_create', 'image_id']],
+            [['create', 'update'], ['cat_id', 'title', 'teaser_text', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']],
+            [['delete'], true],
+        ];
     }
     
     /**
-     * @inheritdoc 
+     * @inheritdoc
      */
     public function ngRestActiveWindows()
     {
-    	return [
-    		['class' => TagActiveWindow::class],
-    	];
+        return [
+            ['class' => TagActiveWindow::class],
+        ];
     }
 
     /**
@@ -187,8 +187,8 @@ class Article extends NgRestModel
     public static function getAvailableNews($limit = false)
     {
         $q = self::find()
-        	->andWhere('timestamp_display_from <= :time', ['time' => time()])
-        	->orderBy('timestamp_display_from DESC');
+            ->andWhere('timestamp_display_from <= :time', ['time' => time()])
+            ->orderBy('timestamp_display_from DESC');
         
         if ($limit) {
             $q->limit($limit);
