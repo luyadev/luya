@@ -39,7 +39,7 @@ use luya\admin\aws\DetailViewActiveWindow;
  *
  * If there are multiple log informations on the same site and you like to seperate them use the group attribute.
  *
- * ```
+ * ```php
  * public function actionLogin()
  * {
  *     Yii::$app->user->login();
@@ -138,13 +138,13 @@ final class Logger extends NgRestModel
     {
         switch ($this->type) {
             case self::TYPE_INFO:
-                return '<span class="badge blue">info</span>';
+                return '<span class="badge badge-info">info</span>';
             case self::TYPE_WARNING:
-                return '<span class="badge yellow">Warning</span>';
+                return '<span class="badge badge-warning">Warning</span>';
             case self::TYPE_ERROR:
-                return '<span class="badge red">Error</span>';
+                return '<span class="badge badge-danger">Error</span>';
             case self::TYPE_SUCCESS:
-                return '<span class="badge green">success</span>';
+                return '<span class="badge badge-success">success</span>';
         }
     }
     
@@ -204,6 +204,11 @@ final class Logger extends NgRestModel
 
     private static $requestIdentifier;
 
+    /**
+     * Generate request identifier.
+     * 
+     * @return string
+     */
     private static function getRequestIdentifier()
     {
         if (self::$requestIdentifier === null) {
@@ -213,6 +218,13 @@ final class Logger extends NgRestModel
         return self::$requestIdentifier;
     }
     
+    /**
+     * Get array index based on identifiers.
+     * 
+     * @param unknown $message
+     * @param unknown $groupIdentifier
+     * @return string[]|mixed[]
+     */
     private static function getHashArray($message, $groupIdentifier)
     {
         $hash = md5(static::getRequestIdentifier() . Json::encode((array) $groupIdentifier));
@@ -230,6 +242,15 @@ final class Logger extends NgRestModel
         ];
     }
     
+    /**
+     * Internal generate log message.
+     * 
+     * @param unknown $type
+     * @param unknown $message
+     * @param unknown $trace
+     * @param unknown $groupIdentifier
+     * @return boolean
+     */
     private static function log($type, $message, $trace, $groupIdentifier)
     {
         $hashArray = static::getHashArray($message, $groupIdentifier);
