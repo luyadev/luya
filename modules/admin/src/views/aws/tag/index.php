@@ -33,8 +33,8 @@ use luya\admin\Module;
                 <input class="form-control" type="text" ng-model="searchString" placeholder="Enter search term...">
             </div>
             <div class="form-check" ng-repeat="tag in tags | filter:searchString | orderBy: 'name'">
-                <input for="id-{{tag.id}}" type="checkbox" class="form-check-input" ng-model="relation[tag.id]" ng-checked="relation[tag.id] == 1" ng-true-value="1" ng-false-value="0">
-                <label id="id-{{tag.id}}" ng-click="saveRelation(tag, relation[tag.id])">{{tag.name}}</label>
+                <input id="id-{{tag.id}}" type="checkbox" class="form-check-input" ng-model="relation[tag.id]" ng-checked="relation[tag.id] == 1" ng-true-value="1" ng-false-value="0">
+                <label for="id-{{tag.id}}" ng-click="saveRelation(tag, relation[tag.id])">{{tag.name}}</label>
             </div>
 
         </div>

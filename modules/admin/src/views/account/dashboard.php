@@ -57,7 +57,8 @@ use luya\helpers\Url;
                             <label for="layout-changer">Developer Mode</label>
                         </div>
                         <div class="form-side">
-                            <input type="checkbox" ng-model="settings.isDeveloper" />
+                            <input type="checkbox" ng-model="settings.isDeveloper" id="userSettings.isDeveloper" />
+                            <label for="userSettings.isDeveloper"></label>
                         </div>
                     </div>
                     <button type="button" class="btn btn-save btn-icon" ng-click="changeSettings(settings)">Save</button>

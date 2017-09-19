@@ -11310,6 +11310,7 @@ zaa.factory('HtmlStorage', function() {
                             '<div class="form-side">' +
                                 '<div class="form-check">' +
                                     '<input id="{{id}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" class="form-check-input-standalone" />' +
+                                    '<label for="{{id}}"></label>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -11393,8 +11394,8 @@ zaa.factory('HtmlStorage', function() {
                                 '</div>' +
 
                                 '<div class="form-check" ng-repeat="(k, item) in optionitems track by k">' +
-                                    '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
                                     '<input type="checkbox" class="form-check-input" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
+                                    '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';

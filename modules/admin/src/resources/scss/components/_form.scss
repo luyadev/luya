@@ -23,11 +23,11 @@ textarea {
 
 .form-check {
     @include clearfix;
-    user-select: none;
-
     .form-check-input + label {
         padding-left: 25px;
     }
+
+    user-select: none;
 }
 
 .form-check-label {
@@ -147,6 +147,55 @@ input[type="radio"] {
 
     &:checked + label:before {
         border-width: 8px;
+    }
+}
+
+input[type="checkbox"] {
+    display: none;
+
+    & + label {
+        display: block;
+        padding-left: 25px;
+        position: relative;
+        width: 100%;
+
+        &:before {
+            background-color: #c0c0c0;
+            border: 0 solid theme-color(primary);
+            border-radius: 3px;
+            content: "";
+            height: 16px;
+            left: 0;
+            margin: 0;
+            position: absolute;
+            top: 3px;
+            transition: .25s ease-in-out border;
+            width: 16px;
+            z-index: 10;
+        }
+        &:after {
+            @include material-icons;
+            content: "check";
+            display: block;
+            font-size: 13px;
+            left: 1px;
+            opacity: 0;
+            position: absolute;
+            transition: .25s ease-in-out opacity;
+            top: 5px;
+            z-index: 20;
+            color: $white;
+        }
+    }
+
+    &:checked + label {
+        &:before {
+            border-width: 8px;
+        }
+        &:after {
+            opacity: 1;
+            transition: .25s .25s ease-in-out opacity;
+        }
     }
 }
 
