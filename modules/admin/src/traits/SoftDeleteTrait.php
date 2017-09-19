@@ -6,7 +6,7 @@ namespace luya\admin\traits;
  * Trait to enable Soft Deletion for NgRest and ActiveRecord models.
  *
  * To override a match your custom field desribers (describers which is deleted and find state) you
- * can override the static `FieldStateDescriber()` method as described in the description of the method.
+ * can override the static `fieldStateDescriber()` method as described in the description of the method.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -24,7 +24,6 @@ trait SoftDeleteTrait
      * ];
      * ```
      *
-     * @todo rename to fieldStateDescriber!
      * @return array Returns an array with a key which desribes what field should be updated on delete and observed on find,
      * the value for the corresponding field can be an array or a string/numeric
      *
@@ -32,11 +31,8 @@ trait SoftDeleteTrait
      * - string/nummeric: The value will be inverted with "!" opposite operator, this can lead into problems
      *
      * if you want to override the default implemenation to match your custom models you should always use the former type of state description.
-     *
-     * @todo rename to fieldStateDescriber
-     * @deprecated remove in 1.0.0 replace with fieldStateDescriber
      */
-    public static function FieldStateDescriber()
+    public static function fieldStateDescriber()
     {
         return [
             'is_deleted' => [true, false]
@@ -52,7 +48,7 @@ trait SoftDeleteTrait
     {
         $query = [];
         
-        foreach (static::FieldStateDescriber() as $field => $value) {
+        foreach (static::fieldStateDescriber() as $field => $value) {
             $query[$field] = (is_array($value)) ? $value[1] : !$value;
         }
         
@@ -104,7 +100,7 @@ trait SoftDeleteTrait
     private static function internalUpdateValues()
     {
         $update = [];
-        foreach (static::FieldStateDescriber() as $field => $value) {
+        foreach (static::fieldStateDescriber() as $field => $value) {
             $update[$field] = (is_array($value)) ? $value[0] : $value;
         }
         return $update;

@@ -343,7 +343,7 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * Move an item to a container.
-     * 
+     *
      * @param unknown $moveItemId
      * @param unknown $droppedOnCatId
      * @return boolean[]
@@ -355,7 +355,7 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * Move an item before an existing item.
-     * 
+     *
      * @param unknown $moveItemId
      * @param unknown $droppedBeforeItemId
      * @return boolean[]|mixed[]
@@ -373,7 +373,7 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * Move an item after an existing item.
-     * 
+     *
      * @param unknown $moveItemId
      * @param unknown $droppedAfterItemId
      * @return boolean[]|mixed[]
@@ -391,7 +391,7 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * Move an item to a child item (make the parent of).
-     * 
+     *
      * @param unknown $moveItemId
      * @param unknown $droppedOnItemId
      * @return boolean[]|mixed[]
@@ -409,7 +409,7 @@ class NavItemController extends \luya\admin\base\RestController
     
     /**
      * Toggle visibilty of a block.
-     * 
+     *
      * @param unknown $blockId
      * @param unknown $hiddenState
      * @return number|\yii\db\false|boolean

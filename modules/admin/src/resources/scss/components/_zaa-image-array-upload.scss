@@ -3,3 +3,13 @@ zaa-image-array-upload {
         margin-right: 70px;
     }
 }
+
+.form-i18n zaa-image-array-upload.is-empty {
+    .alert {
+        margin-right: 45px;
+    }
+
+    & + .flag {
+        margin-right: 0;
+    }
+}

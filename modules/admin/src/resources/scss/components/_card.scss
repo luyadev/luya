@@ -1,0 +1,22 @@
+.card-header {
+    span {
+        vertical-align: middle;
+    }
+}
+
+.card-toggle-indicator {
+    position: relative;
+    font-size: 24px !important;
+    transition: .25s ease-in-out color, .2s ease-in-out transform;
+
+    .card-closed & {
+        transform: rotate(-90deg);
+    }
+}
+
+.card-body {
+
+    .card-closed & {
+        display: none;
+    }
+}

@@ -8,16 +8,25 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1505](https://github.com/luyadev/luya/issues/1505) Minor API Breaks and removed deprecated methods.
 - [#1341](https://github.com/luyadev/luya/issues/1341) Changed signature of `changePassword($newPassword)` in `luya\admin\aws\ChangePasswordInterface`.
 
 ### Added
 
+- [#1493](https://github.com/luyadev/luya/issues/1493) Show ability to search in relations when using large data tables.
 - [#1439](https://github.com/luyadev/luya/issues/1439) Added icons to admin responsive menu.
-- [#1494](https://github.com/luyadev/luya/issues/1494) CMS Page selection hides container element by default, fixed arrow keys.
-- [#1461](https://github.com/luyadev/luya/issues/1461) Admin Search Panel does not auto focus the input and allows you to toggle the search groups.
+- [#1494](https://github.com/luyadev/luya/issues/1494) CMS page selection hides container element by default, fixed arrow keys.
+- [#1461](https://github.com/luyadev/luya/issues/1461) Admin search panel auto focus input field and search groups can be toggled.
 
 ### Fixed
 
+- [#1491](https://github.com/luyadev/luya/issues/1491) Updated timeline styles to prevent line from overlapping first and last entry
+- [#1490](https://github.com/luyadev/luya/issues/1490) Updated tab styling to support nested tab contents (tab-content, tab-pane)
+- [#1489](https://github.com/luyadev/luya/issues/1489) Changed default checkbox styles and updated checkbox html in all files
+- [#1455](https://github.com/luyadev/luya/issues/1455) Re-Implemented the group function for crud; Updated card styles to support toggle icon
+- [#1504](https://github.com/luyadev/luya/issues/1504) Added is-empty class to zaa-list directives and updated flag positions based on this class.
+- [#1503](https://github.com/luyadev/luya/issues/1503) Deleted news are now hidden in getAvailableNews() method.
+- [#1486](https://github.com/luyadev/luya/issues/1486) Toast messages displayed correctly with multiple lines.
 - [#1492](https://github.com/luyadev/luya/issues/1492) Fixed bug where CRUD pagination does not work anymore.
 - [#1464](https://github.com/luyadev/luya/issues/1464) Adjusted icon positions for dropdown list selection
 - [#1460](https://github.com/luyadev/luya/issues/1460) Fixed issue with login autofill and floating labels

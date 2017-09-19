@@ -245,10 +245,10 @@ We have also added a soft delete trait {{\luya\admin\traits\SoftDeleteTrait}} wh
 use luya\admin\traits\SoftDeleteTrait;
 ```
 
-By default, soft delete trait will use the field `is_deleted` to find and delete data records, you can configure the field by overriding the `FieldStateDescriber` method as followed:
+By default, soft delete trait will use the field `is_deleted` to find and delete data records, you can configure the field by overriding the {{luya\admin\traits\SoftDeleteTrait::fieldStateDescriber()}} method as followed:
 
 ```php
-public static function FieldStateDescriber()
+public static function fieldStateDescriber()
 {
     return [
         'is_deleted' => [1, 0], // on delete sets `is_deleted = 1`; on find add where `where(['is_deleted' => 0]);`.

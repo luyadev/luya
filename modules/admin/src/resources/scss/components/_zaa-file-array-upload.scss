@@ -4,6 +4,16 @@ zaa-file-array-upload {
     }
 }
 
+.form-i18n zaa-file-array-upload.is-empty {
+    .alert {
+        margin-right: 45px;
+    }
+
+    & + .flag {
+        margin-right: 0;
+    }
+}
+
 .zaa-file-array-upload {
 
     .form-group {

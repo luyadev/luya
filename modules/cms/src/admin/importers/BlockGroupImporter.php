@@ -11,19 +11,19 @@ class BlockGroupImporter extends Importer
     
     public function run()
     {
-    	/*
+        /*
         $handled = [];
-        
+
         foreach ($this->getImporter()->getDirectoryFiles('blockgroups') as $file) {
             $obj = new $file['ns']();
-            
+
             if (!$obj) {
                 $this->addLog('Unable to create file object for: ' . $file['ns']);
                 continue;
             }
-            
+
             $model = BlockGroup::find()->where(['identifier' => $obj->identifier()])->one();
-            
+
             if ($model) {
                 $model->updateAttributes(['name' => $obj->label(), 'is_deleted' => false]);
                 $this->addLog('update blockgroup name: ' . $obj->label());
@@ -38,7 +38,7 @@ class BlockGroupImporter extends Importer
                 $handled[] = $model->id;
             }
         }
-        
+
         foreach (BlockGroup::find()->where(['not in', 'id', $handled])->all() as $oldBlockGroup) {
             if ($oldBlockGroup->delete()) {
                 $this->addLog('Old blockgroup has been deleted: ' . $oldBlockGroup->name);

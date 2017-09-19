@@ -9734,7 +9734,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		
 		var uuid = guid();
 		
-		service.queue[uuid] = {message: message, timeout: timeout, uuid: uuid, type: type};
+		service.queue[uuid] = {message: message, timeout: timeout, uuid: uuid, type: type, close: function() {
+			delete service.queue[this.uuid];
+		}};
 		
 		$timeout(function() {
 			delete service.queue[uuid];
@@ -11308,6 +11310,7 @@ zaa.factory('HtmlStorage', function() {
                             '<div class="form-side">' +
                                 '<div class="form-check">' +
                                     '<input id="{{id}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" class="form-check-input-standalone" />' +
+                                    '<label for="{{id}}"></label>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -11391,8 +11394,8 @@ zaa.factory('HtmlStorage', function() {
                                 '</div>' +
 
                                 '<div class="form-check" ng-repeat="(k, item) in optionitems track by k">' +
-                                    '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
                                     '<input type="checkbox" class="form-check-input" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
+                                    '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -11807,8 +11810,16 @@ zaa.factory('HtmlStorage', function() {
                 "i18n": "@i18n",
                 "id": "@fieldid",
             },
+            link: function(scope, element, attributes){
+                scope.$watch('model', function(newValue, oldValue) {
+                    if(newValue.length >= 1) {
+                        $(element).removeClass('is-empty').addClass('is-not-empty');
+                    } else {
+                        $(element).removeClass('is-not-empty').addClass('is-empty');
+                    }
+                }, true);
+            },
             controller: function($scope) {
-
                 if ($scope.model == undefined) {
                     $scope.model = [];
                 }

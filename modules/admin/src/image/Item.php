@@ -62,7 +62,7 @@ class Item extends ItemAbstract
      */
     public function getId()
     {
-        return (int) $this->itemArray['id'];
+    	return (int) $this->getKey('id');
     }
     
     /**
@@ -72,7 +72,7 @@ class Item extends ItemAbstract
      */
     public function getFileId()
     {
-        return (int) $this->itemArray['file_id'];
+    	return (int) $this->getKey('file_id');
     }
 
     /**
@@ -82,7 +82,7 @@ class Item extends ItemAbstract
      */
     public function getFilterId()
     {
-        return (int) $this->itemArray['filter_id'];
+    	return (int) $this->getKey('filter_id');
     }
     
     /**
@@ -115,7 +115,7 @@ class Item extends ItemAbstract
      */
     public function getServerSource()
     {
-        return ($this->getFile()) ? Yii::$app->storage->serverPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+        return $this->getFile() ? Yii::$app->storage->serverPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
     }
     
     /**
@@ -135,7 +135,7 @@ class Item extends ItemAbstract
      */
     public function getResolutionWidth()
     {
-        return (int) $this->itemArray['resolution_width'];
+    	return (int) $this->getKey('resolution_width');
     }
     
     /**
@@ -145,7 +145,7 @@ class Item extends ItemAbstract
      */
     public function getResolutionHeight()
     {
-        return (int) $this->itemArray['resolution_height'];
+    	return (int) $this->getKey('resolution_height');
     }
     
     /**

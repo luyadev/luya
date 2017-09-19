@@ -5,8 +5,8 @@ use luya\helpers\ArrayHelper;
 
 /* @var $config \luya\admin\ngrest\ConfigInterface */
 /* @var $this \luya\admin\ngrest\render\RenderCrudView */
-/* @var $isInline boolean Whether current window mode is inline or not */
-/* @var $relationCall boolena */
+/* @var $isInline boolean Whether current window mode is inline or not. $isInline means you are opening a ngrest crud inside a modal. */
+/* @var $relationCall boolean Whether the current request is a relation call, this means you can switch between tabs. */
 $this->beginPage();
 $this->beginBody();
 ?>

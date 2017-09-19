@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module;
+
 ?>
 <div class="luya-main luya-main-crud" ng-controller="DefaultController">
     <div class="luya-subnav">

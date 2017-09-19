@@ -74,18 +74,18 @@ use luya\cms\admin\Module;
                 <h2><?= Module::t('version_create_title'); ?></h2>
                 <div class="alert alert-info"><?= Module::t('version_create_info'); ?></div>
                 <zaa-text model="create.versionName" label="<?= Module::t('version_input_name'); ?>" />
+
                 <div class="form-group">
-                    <label class="custom-control custom-radio" ng-click="create.copyExistingVersion=true">
-                      <input id="radio1" name="radio" type="radio" class="custom-control-input" ng-checked="create.copyExistingVersion">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description"><?= Module::t('version_create_copy'); ?></span>
-                    </label>
-                    <label class="custom-control custom-radio" ng-click="create.copyExistingVersion=false">
-                      <input id="radio2" name="radio" type="radio" class="custom-control-input" ng-checked="!create.copyExistingVersion">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description"><?= Module::t('version_create_new'); ?></span>
-                    </label>
+                    <div class="form-check">
+                        <input id="copyExistingVersion" name="radio" type="radio" ng-checked="create.copyExistingVersion" />
+                        <label for="copyExistingVersion" ng-click="create.copyExistingVersion=true"><?= Module::t('version_create_copy'); ?></label>
+                    </div>
+                    <div class="form-check">
+                        <input id="createNewVersion" name="radio" type="radio" ng-checked="!create.copyExistingVersion" />
+                        <label for="createNewVersion" ng-click="create.copyExistingVersion=false"><?= Module::t('version_create_new'); ?></label>
+                    </div>
                 </div>
+
                 <div ng-show="create.copyExistingVersion" class="form-group">
                     <label><?= Module::t('version_input_copy_chooser'); ?></label>
                     <select class="form-control" ng-model="create.fromVersionPageId" ng-options="versionItem.id as versionItem.version_alias for versionItem in typeData"></select>
