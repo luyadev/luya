@@ -11809,8 +11809,16 @@ zaa.factory('HtmlStorage', function() {
                 "i18n": "@i18n",
                 "id": "@fieldid",
             },
+            link: function(scope, element, attributes){
+                scope.$watch('model', function(newValue, oldValue) {
+                    if(newValue.length >= 1) {
+                        $(element).removeClass('is-empty').addClass('is-not-empty');
+                    } else {
+                        $(element).removeClass('is-not-empty').addClass('is-empty');
+                    }
+                }, true);
+            },
             controller: function($scope) {
-
                 if ($scope.model == undefined) {
                     $scope.model = [];
                 }
