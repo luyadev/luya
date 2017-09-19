@@ -5,6 +5,7 @@ namespace luya\cms\models;
 use Yii;
 use luya\cms\base\BlockInterface;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\aws\DetailViewActiveWindow;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
@@ -30,7 +31,7 @@ class Block extends NgRestModel
     
     public function extraFields()
     {
-        return ['usageCount'];
+        return ['usageCount', 'translationName'];
     }
     
     public function ngRestAttributeTypes()
@@ -46,9 +47,13 @@ class Block extends NgRestModel
     {
         return [
             'usageCount' => 'number',
+        	'translationName' => 'text',
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -59,16 +64,44 @@ class Block extends NgRestModel
         ];
     }
 
-    public function ngRestConfig($config)
+    /**
+     * @inheritdoc
+     */
+    public function ngRestActiveWindows()
     {
-        $this->ngRestConfigDefine($config, ['list'], ['group_id', 'class', 'usageCount', 'is_disabled']);
-        
-        return $config;
+    	return [
+    		['class' => DetailViewActiveWindow::class],
+    	];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function ngRestScopes()
+    {
+    	return [
+    		['list', ['translationName', 'group_id', 'usageCount', 'is_disabled']],
+    	];
     }
 
+    /**
+     * Returns the amount where the block is used inside the content.
+     * 
+     * @return integer
+     */
     public function getUsageCount()
     {
         return NavItemPageBlockItem::find()->where(['block_id' => $this->id])->count();
+    }
+    
+	/**
+	 * Returns the name from the block label.
+	 * 
+	 * @return string
+	 */
+    public function getTranslationName()
+    {
+    	return $this->getObject()->name();
     }
     
     /**
@@ -112,6 +145,11 @@ class Block extends NgRestModel
         parent::afterDelete();
     }
 
+    /**
+     * Returns the object class based on the Active Record entry.
+     * 
+     * @return \luya\cms\base\BlockInterface
+     */
     public function getObject()
     {
         return Yii::createObject([
