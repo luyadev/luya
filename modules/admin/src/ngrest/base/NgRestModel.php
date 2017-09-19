@@ -234,10 +234,21 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *
      * This method is used when the angular crud view switches to a pages view and a search term is entered into
      * the query field. It differs to the generic search as it takes more performence to lookup all fields (except
-     * of boolean type of fields).
+     * of boolean types).
+     * 
+     * When you have relations to lookup you can extend the parent implementation, for example:
+     * 
+     * ```php
+     * public function ngRestFullQuerySearch($query)
+     * {
+     *	return parent::ngRestFullQuerySearch($query)
+     *		->joinWith(['production'])
+     *		->orFilterWhere(['like', 'title', $query]);
+     * }
+     * ```
      *
      * @param string $query The query which will be used in order to make the like statement request.
-     * @return yii\db\ActiveQuery Returns an ActiveQuery instance in order to send to the ActiveDataProvider.
+     * @return \yii\db\ActiveQuery Returns an ActiveQuery instance in order to send to the ActiveDataProvider.
      */
     public function ngRestFullQuerySearch($query)
     {
@@ -245,7 +256,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         
         foreach ($this->getTableSchema()->columns as $column) {
             if ($column->phpType !== "boolean") {
-                $find->orFilterWhere(['like', $column->name, $query]);
+                $find->orFilterWhere(['like', static::tableName() . '.' . $column->name, $query]);
             }
         }
         
