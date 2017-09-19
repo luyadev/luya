@@ -132,6 +132,8 @@ class Site extends NgRestModel
 
             $data = $curl->isSuccess() ? Json::decode($curl->response) : false;
             
+            $curl->close();
+            
             if ($data) {
                 $data['app_elapsed_time'] = round($data['app_elapsed_time'], 2);
                 $data['app_debug_style'] = $this->colorize($data['app_debug'], true);
@@ -185,7 +187,8 @@ class Site extends NgRestModel
         $curl = new Curl();
         $curl->get('https://packagist.org/packages/luyadev/luya-core.json');
         $json = Json::decode($curl->response);
-            
+        $curl->close();
+        
         foreach ($json['package']['versions'] as $version =>  $package) {
             if ($version == 'dev-master' || !is_numeric(substr($version, 0, 1))) {
                 continue;
