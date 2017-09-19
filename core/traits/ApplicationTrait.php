@@ -40,7 +40,23 @@ trait ApplicationTrait
     public $webrootDirectory = 'public_html';
     
     /**
-     * @var string This value is used when declared for console request as urlManger baseUrl in order to enable urlHandling
+     * @var string This value will be used as hostInfo when running console applications in urlManager. An example for using the hostInfo
+     * 
+     * ```php
+     * 'consoleHostInfo' => 'https://luya.io'
+     * ```
+     */
+    public $consoleHostInfo;
+    
+    /**
+     * @var string This value is used when declared for console request as urlManger baseUrl in order to enable urlHandling. If {{luya\web\traits\ApplicationTrait::$consoleHostInfo}}
+     * is defined, consoleBaseUrl will use `/` as default value. The base url is the path where the application is running after hostInfo like
+     * 
+     * ```php
+     * 'consoleBaseUrl' => '/luya-kickstarter'
+     * ```
+     * 
+     * But in the most cases when the website is online the baseUrl is `/` which is enabled by default when {{luya\web\traits\ApplicationTrait::$consoleHostInfo}} is defined.
      */
     public $consoleBaseUrl;
     

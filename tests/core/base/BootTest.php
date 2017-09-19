@@ -49,4 +49,30 @@ class BootTest extends \luyatests\LuyaWebTestCase
         $boot->setConfigArray(['foo' => 'bar']);
         $this->assertSame(['foo' => 'bar'], $boot->getConfigArray());
     }
+    
+    public function testConsoleHostInfo()
+    {
+    	$boot = new Boot();
+    	$boot->setBaseYiiFile(__DIR__ . '/../../../vendor/yiisoft/yii2/Yii.php');
+    	$boot->setConfigArray(['id' => 'test', 'basePath' => '../../../'.dirname(__DIR__), 'consoleHostInfo' => 'https://luya.io']);
+    	$boot->mockOnly = true;
+    	$boot->applicationConsole();
+    	
+    	$this->assertSame('https://luya.io', $boot->app->urlManager->hostInfo);
+    	$this->assertSame('', $boot->app->urlManager->baseUrl); // as the baseUrl setter method will ltrim
+    	
+    }
+    
+    public function testConsoleHostInfoAndBasePath()
+    {
+    	$boot = new Boot();
+    	$boot->setBaseYiiFile(__DIR__ . '/../../../vendor/yiisoft/yii2/Yii.php');
+    	$boot->setConfigArray(['id' => 'test', 'basePath' => '../../../'.dirname(__DIR__), 'consoleHostInfo' => 'https://luya.io', 'consoleBaseUrl' => '/luya-kickstarter']);
+    	$boot->mockOnly = true;
+    	$boot->applicationConsole();
+    	
+    	$this->assertSame('https://luya.io', $boot->app->urlManager->hostInfo);
+    	$this->assertSame('/luya-kickstarter', $boot->app->urlManager->baseUrl); // as the baseUrl setter method will ltrim
+    	
+    }
 }

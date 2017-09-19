@@ -105,8 +105,7 @@ abstract class Boot
     }
     
     /**
-     * The prependConfigArray will be merged into the config,
-     * this way you can prepand config values for a custom Boot class.
+     * The prependConfigArray will be merged into the config, this way you can prepand config values for a custom Boot class.
      *
      * > When using prependConfig inside a custom boot class, the custom boot class will not used in the vendor bin file `./vendor/bin/luya`,
      * > so make sure to generate your own bin file.
@@ -185,6 +184,14 @@ abstract class Boot
                 unset($config['components']['composition']);
             }
         }
+        
+        $baseUrl = null;
+        if (isset($config['consoleBaseUrl'])) {
+        	$baseUrl = $config['consoleBaseUrl'];
+        } elseif (isset($config['consoleHostInfo'])) {
+        	$baseUrl = '/';
+        }
+        
         $this->includeYii();
         $this->app = new ConsoleApplication(ArrayHelper::merge([
             'bootstrap' => ['luya\console\Bootstrap'],
@@ -193,7 +200,8 @@ abstract class Boot
                     'class' => 'yii\web\UrlManager',
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
-                    'baseUrl' => !isset($config['consoleBaseUrl']) ?: $config['consoleBaseUrl'],
+                    'baseUrl' => $baseUrl,
+                	'hostInfo' => isset($config['consoleHostInfo']) ? $config['consoleHostInfo'] : null,
                 ],
             ],
         ], $config));
