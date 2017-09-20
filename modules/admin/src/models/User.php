@@ -208,12 +208,18 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         ];
     }
 
+    /**
+     * Method which is called ON_BFORE_CREATE event.
+     */
     public function beforeCreate()
     {
         $this->auth_token = '';
         $this->is_deleted = false;
     }
 
+    /**
+     * Method which is called ON_BEFORE_VALIDATE
+     */
     public function eventBeforeValidate()
     {
         if ($this->scenario == 'restcreate') {
@@ -221,6 +227,11 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         }
     }
 
+    /**
+     * Generate, store and return the secure Login token.
+     * 
+     * @return string
+     */
     public function getAndStoreToken()
     {
         $token = Yii::$app->security->generateRandomString(6);
@@ -240,6 +251,9 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         return parent::find()->where(['is_deleted' => false]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function changePassword($newpass)
     {
         $this->password = $newpass;
@@ -255,10 +269,14 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         return $this->addError('newpass', 'Fehler beim Verschlüsseln des Passworts aufgetreten!');
     }
     
+    /**
+     * Encodes the current active record password field.
+     * @return boolean
+     */
     public function encodePassword()
     {
         if (empty($this->password) || strlen($this->password) < 8) {
-            $this->addError('password', 'Das neue Passwort muss mindestens 8 Zeichen lang sein.');
+            $this->addError('password', 'The password must be at least 8 chars.');
 
             return false;
         }
@@ -281,14 +299,24 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     }
 
     /**
-     *
-     * @return string[]
+     * Returns the available titles (mr, mrs index by numberic identifier
+     * 
+     * @return array
      */
     public static function getTitles()
     {
-        return [1 => Module::t('model_user_title_mr'), 2 => Module::t('model_user_title_mrs')];
+        return [
+        	1 => Module::t('model_user_title_mr'), 
+        	2 => Module::t('model_user_title_mrs'),
+        ];
     }
 
+    /**
+     * Return sensitive fields from api exposure.
+     * 
+     * {@inheritDoc}
+     * @see \yii\db\BaseActiveRecord::fields()
+     */
     public function fields()
     {
         $fields = parent::fields();
@@ -296,11 +324,18 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
         return $fields;
     }
 
+    /**
+     * Return the current related groups.
+     * @return \yii\db\ActiveQuery
+     */
     public function getGroups()
     {
         return $this->hasMany(Group::className(), ['id' => 'group_id'])->viaTable('admin_user_group', ['user_id' => 'id']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extraFields()
     {
         return ['groups', 'lastloginTimestamp'];
