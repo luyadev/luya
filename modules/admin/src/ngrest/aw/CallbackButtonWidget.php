@@ -83,6 +83,7 @@ class CallbackButtonWidget extends Widget
             'reloadWindowOnSuccess' => (isset($this->options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
             'buttonClass' => ArrayHelper::getValue($this->options, 'class', 'btn btn-save'),
             'linkLabel' => ArrayHelper::getValue($this->options, 'linkLabel', 'Download'),
+        	'linkClass' => ArrayHelper::getValue($this->options, 'linkClass', 'btn btn-info'),
             'angularCallbackFunction' => $this->angularCallbackFunction,
         ]);
     }
