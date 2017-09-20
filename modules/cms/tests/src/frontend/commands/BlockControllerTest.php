@@ -115,7 +115,21 @@ class MyTestBlock extends PhpBlock
     */
     public function admin()
     {
-        return '<p>My Test Block Admin View</p>';
+        return '</p><h5 class="mb-3">My Test Block</h5>' .
+            '<table class="table table-bordered">' .
+            '{% if vars.foo is not empty %}' .
+            '<tr><td><b>Foo</b></td><td>{{vars.foo}}</td></tr>' .
+            '{% endif %}'.
+            '{% if vars.bar is not empty %}' .
+            '<tr><td><b>Bar</b></td><td>{{vars.bar}}</td></tr>' .
+            '{% endif %}'.
+            '{% if cfgs.foo is not empty %}' .
+            '<tr><td><b>Foo</b></td><td>{{cfgs.foo}}</td></tr>' .
+            '{% endif %}'.
+            '{% if cfgs.bar is not empty %}' .
+            '<tr><td><b>Bar</b></td><td>{{cfgs.bar}}</td></tr>' .
+            '{% endif %}'.
+            '</table>';
     }
 }
 EOT;
@@ -247,7 +261,21 @@ class MyTestBlock extends PhpBlock
     */
     public function admin()
     {
-        return '<p>My Test Block Admin View</p>';
+        return '</p><h5 class="mb-3">My Test Block</h5>' .
+            '<table class="table table-bordered">' .
+            '{% if vars.foo is not empty %}' .
+            '<tr><td><b>Foo</b></td><td>{{vars.foo}}</td></tr>' .
+            '{% endif %}'.
+            '{% if vars.bar is not empty %}' .
+            '<tr><td><b>Bar</b></td><td>{{vars.bar}}</td></tr>' .
+            '{% endif %}'.
+            '{% if cfgs.foo is not empty %}' .
+            '<tr><td><b>Foo</b></td><td>{{cfgs.foo}}</td></tr>' .
+            '{% endif %}'.
+            '{% if cfgs.bar is not empty %}' .
+            '<tr><td><b>Bar</b></td><td>{{cfgs.bar}}</td></tr>' .
+            '{% endif %}'.
+            '</table>';
     }
 }
 EOT;
