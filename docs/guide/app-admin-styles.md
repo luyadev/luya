@@ -1,13 +1,10 @@
 # Admin CSS Styles
 
-All [Bootstrap 4](https://v4-alpha.getbootstrap.com/) css style classes are available in der Admin Interface.
-On top of this LUYA provides generic css classes for buttons with predefined icons and colors.
+All [Bootstrap 4](https://v4-alpha.getbootstrap.com/) css style classes are available in der Admin Interface. On top of this LUYA provides generic css classes for buttons with predefined icons and colors.
 
-## Predefined Buttons
+## Buttons
 
-LUYA Admin has a set of Class you can use inside your admin views, this makes sure to render the elements the same in the whole UI. 
-
-Below a set of buttons:
+We extend the bootstrap 4 `btn` class by some predefined colors assigned to a function. The following *function button* classes are available in the whole admin UI:
 
 ```html
 <button type="button" class="btn btn-save">Save</button>
@@ -27,10 +24,9 @@ You can either combine the btn class with predefined icons, to do so simply add 
 <button type="button" class="btn btn-save btn-icon">Save</button>
 ```
 
-Please keep in mind that `<input type="button" class="btn btn-icon btn-save" value="Button label" />` does <b>not</b> work because input fields don't support the pseudo css class *:after*.
+> Please keep in mind that `<input type="button" class="btn btn-icon btn-save" value="Button label" />` does <b>not</b> work because input fields don't support the pseudo css class *:after*. So use the `button` tag instead of `input`.
 
-
-If you would like to display a button without predefined icon use `btn-icon` without a defined class:
+If you would like to display a button with a generic predefined icon use `btn-icon` without a defined class:
 
 ```html
 <button type="button" class="btn btn-icon"><i class="material-icons">check</i>OK</button>
@@ -42,17 +38,17 @@ and if you want a button `btn-icon` without a background simply add `btn-link`:
 <button type="button" class="btn btn-icon btn-link"><i class="material-icons">check</i>Link</button>
 ```
 
-Below some examples
+Below some example combinations
 
 ```html
-<button type="button" class="btn btn-icon btn-save">Safe button with icon and text</button>
+<button type="button" class="btn btn-icon btn-save">Save button with icon and text</button>
 <button type="button" class="btn btn-cancel">Cancel button without icon</button>
 <button type="button" class="btn btn-icon btn-delete"></button> // Delete button without label but predefined icon and colors.
 ```
  
-## Which icon stands for what
+## Icons
 
-Material Design Icons: https://material.io/icons/
+The below tables shows you, what icon stands for what. The full set of usable icons is available under https://material.io/icons.
 
 | Description | Icon            | Name         |
 | ------------- | ------------- | ------------- |
@@ -74,6 +70,21 @@ Material Design Icons: https://material.io/icons/
 | Folder icon | <i class="material-icons">folder</i> | folder |
 | Create folder | <i class="material-icons">create_new_folder</i> | create_new_folder |
 
+
+## Forms
+
+In order to build 
+
+```html
+<div class="form-group form-side-by-side">
+    <div class="form-side form-side-label">
+        <label>Label</label>
+    </div>
+    <div class="form-side">
+        <input type="text" class="form-control" />
+    </div>
+</div>
+```
 
 ## General Colors (in progress)
 
