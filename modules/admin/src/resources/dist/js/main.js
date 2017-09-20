@@ -11327,10 +11327,11 @@ zaa.factory('HtmlStorage', function() {
                 "initvalue": "@initvalue"
             },
             controller: function($scope) {
-                if ($scope.options === null) {
+                if ($scope.options === null || $scope.options === undefined) {
                     $scope.valueTrue = 1;
                     $scope.valueFalse = 0;
                 } else {
+                	console.log($scope.options);
                     $scope.valueTrue = $scope.options['true-value'];
                     $scope.valueFalse = $scope.options['false-value'];
                 }
@@ -12081,13 +12082,13 @@ zaa.factory('HtmlStorage', function() {
                             '<div class="form-side">' +
                                 '<div class="list zaa-multiple-inputs">' +
                                     '<p class="alert alert-info" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
-                                    '<div ng-repeat="(key,row) in model track by key" class="list-item">' +
-                                        '<div ng-repeat="(optKey,opt) in options track by optKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{key}}-{{optKey}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
+                                    '<div ng-repeat="(msortKey,row) in model" class="list-item">' +
+                                        '<div ng-repeat="(mutliOptKey,opt) in options"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{msortKey}}-{{mutliOptKey}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
                                         '<div class="list-buttons">' +
                                             '<div class="btn-group" role="group">' +
-                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveUp(key)" ng-if="key > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
-                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveDown(key)" ng-if="showDownButton(key)"><i class="material-icons">keyboard_arrow_down</i></button>' +
-                                                '<button type="button" class="btn btn-sm btn-outline-danger" ng-click="remove(key)"><i class="material-icons">remove</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveUp(msortKey)" ng-if="msortKey > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveDown(msortKey)" ng-if="showDownButton(msortKey)"><i class="material-icons">keyboard_arrow_down</i></button>' +
+                                                '<button type="button" class="btn btn-sm btn-outline-danger" ng-click="remove(msortKey)"><i class="material-icons">remove</i></button>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
