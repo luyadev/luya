@@ -47,7 +47,7 @@ use luya\cms\admin\Module;
                             <i class="material-icons">more_vert</i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
-                           <a class="dropdown-item" ng-click="togglePageSettingsOverlay(2)">
+                            <a class="dropdown-item" ng-click="togglePageSettingsOverlay(2)" ng-if="propertiesData.length > 0">
                                 <i class="material-icons">settings</i> <span><?= Module::t('view_update_properties_title'); ?></span>
                             </a>
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(3)">
