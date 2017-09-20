@@ -52,7 +52,7 @@ use luya\cms\admin\Module;
                     <th colspan="3"><?= Module::t('cmsadmin_created_at'); ?></th>
                 </tr>
                 <tr ng-repeat="versionItem in typeData" ng-class="{'table-success' : currentPageVersion == versionItem.id}">
-                    <td>{{versionItem.version_alias}}</td>
+                    <td>{{versionItem.version_alias}} <span class="badge badge-primary" ng-if="currentPageVersion == versionItem.id"><?= Module::t('view_index_page_version_chooser'); ?></span></td>
                     <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
                     <td>{{versionItem.timestamp_create | date :'short'}}</td>
                     <td>
