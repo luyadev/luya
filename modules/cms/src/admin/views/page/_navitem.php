@@ -134,7 +134,7 @@ use luya\helpers\Html;
                     </button>
                 </div>
                 <div class="dropdown-divider"></div>
-                <span class="dropdown-item" ng-click="toggleSettingsOverlay(3); toggleVersionsDropdown()"><i class="material-icons">add_box</i> <span><?= Module::t('button_create_version'); ?></span></span>
+                <span class="dropdown-item" ng-click="toggleSettingsOverlay(3); toggleVersionsDropdown()"><i class="material-icons">add_box</i> <span><?= Module::t('version_create_title'); ?></span></span>
             </div>
         </li>
     </ul>
