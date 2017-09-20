@@ -30,6 +30,8 @@ The next what you will notice is `Setting unknown property: luya\web\Application
 ],
 ```
 
+> due to an rc3 typo, make sure there is no adresses method in your project instead us addresses.
+
 Low level API changes:
 
 - [#1408](https://github.com/luyadev/luya/issues/1408) THe CMS Module is now bootstraped over the luya composer plugin if you want explicit call the bootstrap process use `'bootstrap' => ['luya\cms\frontend\Bootstrap']` inside your config.
