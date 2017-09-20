@@ -12,12 +12,12 @@ use luya\cms\admin\Module;
             <li class="nav-item">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(3)" ng-class="{'active':tab==3}"><i class="material-icons">change_history</i><span><?= Module::t('version_create_title'); ?></span></a>
             </li>
-            <li><hr /></li>
             <li class="nav-item">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(2)" ng-class="{'active':tab==2}"><i class="material-icons">track_changes</i><span><?= Module::t('versions_selector'); ?></span></a>
             </li>
+            <li><hr /></li>
             <li ng-repeat="(key, versionItem) in typeData">
-                <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)">#{{key}} {{versionItem.version_alias}}</a>
+                <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)"><span class="badge badge-secondary">V{{$index+1}}</span> {{versionItem.version_alias}}</a>
             </li>
         </ul>
     </div>
@@ -63,8 +63,8 @@ use luya\cms\admin\Module;
             </table>
         </div>
         <div ng-switch-when="4">
-            <h1><?= Module::t('version_edit_title'); ?></h1>
-            <h2>{{editVersionItem.version_alias}}</h2>
+            <h1><?= Module::t('version_edit_title'); ?> <span class="badge badge-secondary">{{editVersionItem.version_alias}}</span></h1>
+            <h2></h2>
             <zaa-text model="editVersionItem.version_alias" label="<?= Module::t('version_input_name'); ?>" />
             <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name" />
             <button type="button" class="btn btn-save btn-icon" ng-click="editVersionUpdate(editVersionItem)"><?= Module::t('btn_save'); ?></button>

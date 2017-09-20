@@ -163,7 +163,7 @@ use luya\cms\admin\Module;
 <script type="text/ng-template" id="updateformpage.html">
 <div class="form-group form-side-by-side" ng-show="isEditAvailable()">
 	<div class="form-side form-side-label">
-    	<label><?= \luya\admin\Module::t('view_index_page_version_chooser'); ?></label>
+    	<label><?= Module::t('view_index_page_version_chooser'); ?></label>
     </div>
 	<div class="form-side">
 		<select class="form-control" ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
