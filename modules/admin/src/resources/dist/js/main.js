@@ -9213,7 +9213,7 @@ function typeCastValue(value) {
 
         var service = [];
 
-        service.vars = [];
+        service.vars = {};
 
         service.getClassSpace = function (spaceName) {
             if (service.vars.hasOwnProperty(spaceName)) {
@@ -9221,6 +9221,14 @@ function typeCastValue(value) {
             }
         };
 
+        service.hasClassSpace = function(spaceName) {
+        	 if (service.vars.hasOwnProperty(spaceName)) {
+        		 return true;
+        	 }
+        	 
+        	 return false;
+        };
+        
         service.setClassSpace = function (spaceName, className) {
             service.vars[spaceName] = className;
         };
@@ -9228,6 +9236,12 @@ function typeCastValue(value) {
         service.clearSpace = function(spaceName) {
         	if (service.vars.hasOwnProperty(spaceName)) {
         		service.vars[spaceName] = null;
+        	}
+        };
+        
+        service.removeSpace = function(spaceName) {
+        	if (service.hasClassSpace(spaceName)) {
+        		delete service.vars[spaceName];
         	}
         };
 
@@ -10490,13 +10504,27 @@ zaa.factory('HtmlStorage', function() {
     /**
      * Example usage of luya admin modal:
      *
-     * ```
+     * ```js
      * <button ng-click="modalState=!modalState">Toggle Modal</button>
      * <modal is-modal-hidden="modalState" modal-title="I am the Title">
      *     <h1>Modal Container</h1>
      *     <p>Hello world!</p>
      * </modal>
      * ```
+     * 
+     * If you want to hidden use ng-if with modals, you have to use ng-if inside the modal like:
+     * 
+     * ```js
+     * <modal is-modal-hidden="modalState">
+     *    <div ng-if="!modalState">
+     *        <p>This is only linked when modalState is visible</p>
+     *    </div>
+     * </modal>
+     * ```
+     * 
+     * > Using the ng-if outside of the modal wont work as it does not trigger the modalState due to child scope creation each time
+     * > the ng-if is visible.
+     * 
      */
     zaa.directive("modal", function ($timeout) {
         return {
@@ -10510,22 +10538,36 @@ zaa.factory('HtmlStorage', function() {
             templateUrl: "modal",
             controller : function($scope, AdminClassService) {
             	$scope.$watch('isModalHidden', function(n, o) {
-            		if (n!==o) {
-            			if (n) {
-                			AdminClassService.clearSpace('modalBody')
-                		} else {
-                			AdminClassService.setClassSpace('modalBody', 'modal-open')
+            		if (n !== o) {
+            			if (n) { // is hidden
+            				if (AdminClassService.hasClassSpace('childModalBody')) {
+            					AdminClassService.removeSpace('childModalBody');
+            				} else {
+            					AdminClassService.clearSpace('modalBody');
+            					AdminClassService.removeSpace('childModalBody');
+            				}
+                		} else { // is visible
+        					if (AdminClassService.getClassSpace('modalBody') == 'modal-open') {
+                				AdminClassService.setClassSpace('childModalBody', true);
+                			} else {
+                				AdminClassService.setClassSpace('modalBody', 'modal-open');
+                				AdminClassService.removeSpace('childModalBody');
+                			}
                 		}
             		}
-            		
             	});
+            	
+            	/* ESC Key will close ALL modals, therefore we ensure the correct spaces */
+            	$scope.escModal = function() {
+            		$scope.isModalHidden = true;
+            		AdminClassService.removeSpace('childModalBody');
+            		AdminClassService.clearSpace('modalBody');
+            	};
             },
             link: function (scope, element) {
-            	
             	scope.$on('$destroy', function() {
             		element.remove();
             	});
-            	
             	angular.element(document.body).append(element);
             }
         }
@@ -12163,45 +12205,52 @@ zaa.factory('HtmlStorage', function() {
                 ngModel : '='
             },
             link : function(scope) {
+            },
+            controller: function($scope) {
+
 
                 // ServiceFilesData inhertiance
 
-                scope.filesData = ServiceFilesData.data;
+            	$scope.filesData = ServiceFilesData.data;
 
-                scope.$on('service:FilesData', function(event, data) {
-                    scope.filesData = data;
+            	$scope.$on('service:FilesData', function(event, data) {
+            		$scope.filesData = data;
                 });
 
                 // controller logic
 
-                scope.modal = {state: 1};
-                scope.fileinfo = null;
+            	$scope.modal = {state: 1};
+            	
+            	$scope.modalContainer = false;
+            	
+            	$scope.fileinfo = null;
 
-                scope.select = function(fileId) {
-                    scope.toggleModal();
-                    scope.ngModel = fileId;
-                }
+            	$scope.select = function(fileId) {
+                	$scope.toggleModal();
+                	$scope.ngModel = fileId;
+                };
 
-                scope.reset = function() {
-                	scope.ngModel = 0;
-                	scope.fileinfo = null;
-                }
+            	$scope.reset = function() {
+            		$scope.ngModel = 0;
+            		$scope.fileinfo = null;
+                };
 
-                scope.toggleModal = function() {
-                    scope.modal.state = !scope.modal.state;
-                }
+            	$scope.toggleModal = function() {
+            		$scope.modalContainer = !$scope.modalContainer;
+            		$scope.modal.state = !$scope.modal.state;
+                };
 
-                scope.$watch(function() { return scope.ngModel }, function(n, o) {
+            	$scope.$watch(function() { return $scope.ngModel }, function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                        var filtering = $filter('filter')(scope.filesData, {id: n}, true);
+                        var filtering = $filter('filter')($scope.filesData, {id: n}, true);
                         if (filtering && filtering.length == 1) {
-                            scope.fileinfo = filtering[0];
+                        	$scope.fileinfo = filtering[0];
                         }
                     }
 
                     /* reset file directive if an event resets the image model to undefined */
                     if (n == 0) {
-                    	scope.reset();
+                    	$scope.reset();
                     }
                 });
             },

@@ -186,7 +186,7 @@ function typeCastValue(value) {
 
         var service = [];
 
-        service.vars = [];
+        service.vars = {};
 
         service.getClassSpace = function (spaceName) {
             if (service.vars.hasOwnProperty(spaceName)) {
@@ -194,6 +194,14 @@ function typeCastValue(value) {
             }
         };
 
+        service.hasClassSpace = function(spaceName) {
+        	 if (service.vars.hasOwnProperty(spaceName)) {
+        		 return true;
+        	 }
+        	 
+        	 return false;
+        };
+        
         service.setClassSpace = function (spaceName, className) {
             service.vars[spaceName] = className;
         };
@@ -201,6 +209,12 @@ function typeCastValue(value) {
         service.clearSpace = function(spaceName) {
         	if (service.vars.hasOwnProperty(spaceName)) {
         		service.vars[spaceName] = null;
+        	}
+        };
+        
+        service.removeSpace = function(spaceName) {
+        	if (service.hasClassSpace(spaceName)) {
+        		delete service.vars[spaceName];
         	}
         };
 

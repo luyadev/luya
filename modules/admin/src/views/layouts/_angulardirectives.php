@@ -7,7 +7,6 @@ use luya\admin\Module as Admin;
         <h3 class="loading-overlay-title">
             {{LuyaLoading.getStateMessage()}}
         </h3>
-
         <div class="loading-overlay-loader">
             <div class="loading-indicator">
                 <div class="rect1"></div><!--
@@ -19,10 +18,8 @@ use luya\admin\Module as Admin;
         </div>
     </div>
 </div>
-
-
 <script type="text/ng-template" id="modal">
-<div class="modal" tabindex="-1" aria-hidden="true" ng-class="{'show':!isModalHidden}" zaa-esc="isModalHidden=1">
+<div class="modal" tabindex="-1" aria-hidden="true" ng-class="{'show':!isModalHidden}" zaa-esc="escModal()">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -38,7 +35,6 @@ use luya\admin\Module as Admin;
     </div>
 </div>
 </script>
-
 <!-- UPDATE REDIRECT FORM -->
 <script type="text/ng-template" id="updateformredirect.html">
 <div>
@@ -108,9 +104,11 @@ use luya\admin\Module as Admin;
                 <i class="material-icons">remove_circle</i>
             </span>
         </div>
-        <div ng-if="!modal.state">
-            <modal is-modal-hidden="modal.state" modal-title="<?= Admin::t('layout_select_file'); ?>"><storage-file-manager selection="true" /></modal>
-        </div>
+        <modal is-modal-hidden="modal.state" modal-title="<?= Admin::t('layout_select_file'); ?>">
+			<div ng-if="!modal.state">
+				<storage-file-manager selection="true" />
+			</div>
+		</modal>
     </div>
 </script>
 
