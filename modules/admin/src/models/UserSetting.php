@@ -79,21 +79,21 @@ final class UserSetting extends Object implements \ArrayAccess
     
     /**
      * Returns multiple array keys from the user settings table.
-     * 
+     *
      * Example usage:
-     * 
+     *
      * ```php
      * getArray(['key1', 'key2', [
      *     'key1' => false,
      *     'key2' => true,
      * ]);
      * ```
-     * 
+     *
      * The above example would return the default value true for `key2` if this element is not found inside the
      * user settings.
-     * 
+     *
      * @param array $keys Provide an array of keys you to select.
-     * @param array $defaultMapping In order to define a default value for a given key, just use the variable name 
+     * @param array $defaultMapping In order to define a default value for a given key, just use the variable name
      * as array key.`
      * @return array
      */

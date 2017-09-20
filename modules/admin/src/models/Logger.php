@@ -206,7 +206,7 @@ final class Logger extends NgRestModel
 
     /**
      * Generate request identifier.
-     * 
+     *
      * @return string
      */
     private static function getRequestIdentifier()
@@ -220,7 +220,7 @@ final class Logger extends NgRestModel
     
     /**
      * Get array index based on identifiers.
-     * 
+     *
      * @param unknown $message
      * @param unknown $groupIdentifier
      * @return string[]|mixed[]
@@ -244,7 +244,7 @@ final class Logger extends NgRestModel
     
     /**
      * Internal generate log message.
-     * 
+     *
      * @param unknown $type
      * @param unknown $message
      * @param unknown $trace

@@ -23,7 +23,7 @@ class Item extends ItemAbstract
      */
     public function getId()
     {
-    	return (int) $this->getKey('id');
+        return (int) $this->getKey('id');
     }
     
     /**
@@ -33,7 +33,7 @@ class Item extends ItemAbstract
      */
     public function getName()
     {
-    	return $this->getKey('name');
+        return $this->getKey('name');
     }
     
     /**
@@ -45,7 +45,7 @@ class Item extends ItemAbstract
      */
     public function getParentId()
     {
-    	return (int) $this->getKey('parent_id');
+        return (int) $this->getKey('parent_id');
     }
     
     /**

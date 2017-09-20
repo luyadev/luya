@@ -229,7 +229,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
 
     /**
      * Generate, store and return the secure Login token.
-     * 
+     *
      * @return string
      */
     public function getAndStoreToken()
@@ -300,20 +300,20 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
 
     /**
      * Returns the available titles (mr, mrs index by numberic identifier
-     * 
+     *
      * @return array
      */
     public static function getTitles()
     {
         return [
-        	1 => Module::t('model_user_title_mr'), 
-        	2 => Module::t('model_user_title_mrs'),
+            1 => Module::t('model_user_title_mr'),
+            2 => Module::t('model_user_title_mrs'),
         ];
     }
 
     /**
      * Return sensitive fields from api exposure.
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\db\BaseActiveRecord::fields()
      */

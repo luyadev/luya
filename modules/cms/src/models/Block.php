@@ -47,7 +47,7 @@ class Block extends NgRestModel
     {
         return [
             'usageCount' => 'number',
-        	'translationName' => 'text',
+            'translationName' => 'text',
         ];
     }
     
@@ -69,9 +69,9 @@ class Block extends NgRestModel
      */
     public function ngRestActiveWindows()
     {
-    	return [
-    		['class' => DetailViewActiveWindow::class],
-    	];
+        return [
+            ['class' => DetailViewActiveWindow::class],
+        ];
     }
     
     /**
@@ -79,14 +79,14 @@ class Block extends NgRestModel
      */
     public function ngRestScopes()
     {
-    	return [
-    		['list', ['translationName', 'group_id', 'usageCount', 'is_disabled']],
-    	];
+        return [
+            ['list', ['translationName', 'group_id', 'usageCount', 'is_disabled']],
+        ];
     }
 
     /**
      * Returns the amount where the block is used inside the content.
-     * 
+     *
      * @return integer
      */
     public function getUsageCount()
@@ -94,14 +94,14 @@ class Block extends NgRestModel
         return NavItemPageBlockItem::find()->where(['block_id' => $this->id])->count();
     }
     
-	/**
-	 * Returns the name from the block label.
-	 * 
-	 * @return string
-	 */
+    /**
+     * Returns the name from the block label.
+     *
+     * @return string
+     */
     public function getTranslationName()
     {
-    	return $this->getObject()->name();
+        return $this->getObject()->name();
     }
     
     /**
@@ -147,7 +147,7 @@ class Block extends NgRestModel
 
     /**
      * Returns the object class based on the Active Record entry.
-     * 
+     *
      * @return \luya\cms\base\BlockInterface
      */
     public function getObject()

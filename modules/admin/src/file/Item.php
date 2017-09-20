@@ -74,7 +74,7 @@ class Item extends ItemAbstract
      */
     public function getCaptionArray()
     {
-    	return I18n::decode($this->getKey('caption'));
+        return I18n::decode($this->getKey('caption'));
     }
     
     /**
@@ -94,7 +94,7 @@ class Item extends ItemAbstract
      */
     public function getFolderId()
     {
-    	return (int) $this->getKey('folder_id');
+        return (int) $this->getKey('folder_id');
     }
     
     /**
@@ -116,7 +116,7 @@ class Item extends ItemAbstract
      */
     public function getName()
     {
-    	return $this->getKey('name_original');
+        return $this->getKey('name_original');
     }
     
     /**
@@ -129,7 +129,7 @@ class Item extends ItemAbstract
      */
     public function getSystemFileName()
     {
-    	return $this->getKey('name_new_compound');
+        return $this->getKey('name_new_compound');
     }
     
     /**
@@ -147,7 +147,7 @@ class Item extends ItemAbstract
      */
     public function getMimeType()
     {
-    	return $this->getKey('mime_type');
+        return $this->getKey('mime_type');
     }
     
     /**
@@ -167,7 +167,7 @@ class Item extends ItemAbstract
      */
     public function getExtension()
     {
-    	return $this->getKey('extension');
+        return $this->getKey('extension');
     }
     
     /**
@@ -177,7 +177,7 @@ class Item extends ItemAbstract
      */
     public function getSize()
     {
-    	return (int) $this->getKey('file_size');
+        return (int) $this->getKey('file_size');
     }
     
     /**
@@ -204,7 +204,7 @@ class Item extends ItemAbstract
      */
     public function getUploadTimestamp()
     {
-    	return (int) $this->getKey('upload_timestamp');
+        return (int) $this->getKey('upload_timestamp');
     }
     
     /**
@@ -237,7 +237,7 @@ class Item extends ItemAbstract
      */
     public function getHashName()
     {
-    	return $this->getKey('hash_name');
+        return $this->getKey('hash_name');
     }
     
     /**
@@ -249,7 +249,7 @@ class Item extends ItemAbstract
      */
     public function getFileHash()
     {
-    	return $this->getKey('hash_file');
+        return $this->getKey('hash_file');
     }
     
     /**
@@ -307,7 +307,7 @@ class Item extends ItemAbstract
      */
     public function getHttpSource()
     {
-    	return Yii::$app->storage->httpPath . '/' . $this->getKey('name_new_compound');
+        return Yii::$app->storage->httpPath . '/' . $this->getKey('name_new_compound');
     }
     
     /**
@@ -320,7 +320,7 @@ class Item extends ItemAbstract
      */
     public function getServerSource()
     {
-    	return Yii::$app->storage->serverPath . '/' . $this->getKey('name_new_compound');
+        return Yii::$app->storage->serverPath . '/' . $this->getKey('name_new_compound');
     }
     
     /**
@@ -335,7 +335,7 @@ class Item extends ItemAbstract
      */
     public function getIsHidden()
     {
-    	return (bool) $this->getKey('is_hidden');
+        return (bool) $this->getKey('is_hidden');
     }
     
     /**
@@ -360,7 +360,7 @@ class Item extends ItemAbstract
      */
     public function getIsDeleted()
     {
-    	return (bool) $this->getKey('is_deleted');
+        return (bool) $this->getKey('is_deleted');
     }
     
     /**

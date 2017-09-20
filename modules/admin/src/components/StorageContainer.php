@@ -440,7 +440,7 @@ class StorageContainer extends Component
             'fileInfo' => $fileInfo,
             'mimeType' => $mimeType,
             'fileName' => $fileName,
-            'secureFileName' => Inflector::slug($fileInfo->name, '-'),
+            'secureFileName' => Inflector::slug(str_replace('_', '-', $fileInfo->name), '-'),
             'fileSource' => $fileSource,
             'extension' => $fileInfo->extension,
             'hashName' => FileHelper::hashName($fileName),

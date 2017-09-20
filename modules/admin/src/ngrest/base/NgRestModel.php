@@ -235,9 +235,9 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * This method is used when the angular crud view switches to a pages view and a search term is entered into
      * the query field. It differs to the generic search as it takes more performence to lookup all fields (except
      * of boolean types).
-     * 
+     *
      * When you have relations to lookup you can extend the parent implementation, for example:
-     * 
+     *
      * ```php
      * public function ngRestFullQuerySearch($query)
      * {

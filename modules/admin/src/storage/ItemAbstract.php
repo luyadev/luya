@@ -30,27 +30,27 @@ abstract class ItemAbstract extends Object implements Arrayable
     
     /**
      * Returns the whole item array.
-     * 
+     *
      * @return array An array with all keys for the given item.
      */
     public function getItemArray()
     {
-    	return $this->_itemArray;
+        return $this->_itemArray;
     }
     
     /**
      * Returns a value for a given key inside the itemArray.
-     * 
+     *
      * @param string $key The requested key.
      * @throws Exception If the key is not found inside the array an exception is trhown.
      */
     public function getKey($key)
     {
-    	if (!array_key_exists($key, $this->_itemArray)) {
-    		throw new Exception("Unable to find the requested item key '$key' in item " . var_export($this->_itemArray, true));
-    	}
-    	
-    	return $this->_itemArray[$key];
+        if (!array_key_exists($key, $this->_itemArray)) {
+            throw new Exception("Unable to find the requested item key '$key' in item " . var_export($this->_itemArray, true));
+        }
+        
+        return $this->_itemArray[$key];
     }
 
     /**

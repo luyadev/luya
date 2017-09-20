@@ -34,10 +34,10 @@ class UserController extends Api
         return [
             'user' => Yii::$app->adminuser->identity->toArray(['title', 'firstname', 'lastname', 'email', 'id']),
             'settings' => Yii::$app->adminuser->identity->setting->getArray([
-            	User::USER_SETTING_ISDEVELOPER,
-            	User::USER_SETTING_UILANGUAGE,
+                User::USER_SETTING_ISDEVELOPER,
+                User::USER_SETTING_UILANGUAGE,
             ], [
-            	User::USER_SETTING_UILANGUAGE => $this->module->interfaceLanguage,
+                User::USER_SETTING_UILANGUAGE => $this->module->interfaceLanguage,
             ]),
         ];
     }

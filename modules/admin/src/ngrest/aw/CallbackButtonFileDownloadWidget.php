@@ -32,9 +32,9 @@ use luya\helpers\FileHelper;
  *     'label' => 'Create PDF Report,
  * ]); ?>
  * ```
- * 
+ *
  * In order to configure the second download button use:
- * 
+ *
  * ```php
  * <?= CallbackButtonFileDownloadWidget::widget([
  *     'callback' => 'createpdf',
@@ -46,7 +46,7 @@ use luya\helpers\FileHelper;
  *	   ]
  * ]); ?>
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
