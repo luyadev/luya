@@ -268,7 +268,7 @@
 				$scope.data.layout_id = 0;
 				$scope.data.from_draft_id = 0;
 
-				// layoutsData
+				/* layoutsData */
 
 				$scope.layoutsData = ServiceLayoutsData.data;
 
@@ -276,7 +276,7 @@
             		$scope.layoutsData = data;
             	});
 
-            	// menuData
+            	/* menuData */
 
     			$scope.menuData = ServiceMenuData.data;
 
@@ -336,7 +336,7 @@
 		}
 	});
 
-	// factory.js
+	/* factory.js */
 
 	zaa.factory('PlaceholderService', function() {
 		var service = [];
@@ -345,12 +345,12 @@
 
 		service.delegate = function(status) {
 			service.status = status;
-		}
+		};
 
 		return service;
 	});
 
-	// layout.js
+	/* layout.js */
 
 	zaa.config(function($stateProvider, resolverProvider) {
 		$stateProvider
@@ -408,7 +408,7 @@
  		 */
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 
-		// layoutsData
+		/* layoutsData */
 
 		$scope.layoutsData = ServiceLayoutsData.data;
 
@@ -416,7 +416,7 @@
     		$scope.layoutsData = data;
     	});
 
-    	// controller logic
+    	/* controller logic */
 
 		$scope.createNewVersionSubmit = function(data) {
 			if (data == undefined) {
@@ -523,7 +523,7 @@
 			});
 
 			return returnValue;
-		}
+		};
 	});
 
 	zaa.controller("CmsMenuTreeController", function($scope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
@@ -794,7 +794,7 @@
 
 		$scope.menuDataReload = function() {
 			return ServiceMenuData.load(true);
-		}
+		};
 
 		/* service ServiceLangaugesData inheritance */
 
@@ -818,11 +818,11 @@
 
 		/* Blockholder size toggler */
 
-        $scope.isBlockholderSmall = HtmlStorage.getValue('sidebarToggleState', false);
+        $scope.isBlockholderSmall = HtmlStorage.getValue('blockholderToggleState', false);
 
         $scope.toggleBlockholderSize = function() {
             $scope.isBlockholderSmall = !$scope.isBlockholderSmall;
-            HtmlStorage.setValue('sidebarToggleState', $scope.isBlockholderSmall);
+            HtmlStorage.setValue('blockholderToggleState', $scope.isBlockholderSmall);
         };
 
         /* sidebar logic */
@@ -1514,7 +1514,7 @@
 
 	zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, ServiceBlocksData, ServiceBlockCopyStack, $sce) {
 
-		// service ServiceBlocksData inheritance
+		/* service ServiceBlocksData inheritance */
 
 		$scope.blocksData = ServiceBlocksData.data;
 
