@@ -130,7 +130,7 @@ use luya\helpers\Html;
             <div class="dropdown-menu" ng-class="{'show': versionDropDownVisbility}">
                 <div ng-repeat="versionItem in typeData">
                     <button type="button" class="dropdown-item" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-click="switchVersion(versionItem.id)">
-                        <span><span class="badge badge-secondary">V{{$index+1}}</span> {{ versionItem.version_alias }}</span>
+                        <span><span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=versionItem.id, 'badge-primary': item.nav_item_type_id==versionItem.id}">V{{$index+1}}</span> {{ versionItem.version_alias }}</span>
                     </button>
                 </div>
                 <div class="dropdown-divider"></div>

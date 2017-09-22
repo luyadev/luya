@@ -17,7 +17,7 @@ use luya\cms\admin\Module;
             </li>
             <li><hr /></li>
             <li ng-repeat="(key, versionItem) in typeData">
-                <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)"><span class="badge badge-secondary">V{{$index+1}}</span> {{versionItem.version_alias}}</a>
+                <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)"><span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=versionItem.id, 'badge-primary': item.nav_item_type_id==versionItem.id}">V{{$index+1}}</span> {{versionItem.version_alias}}</a>
             </li>
         </ul>
     </div>
@@ -51,13 +51,13 @@ use luya\cms\admin\Module;
                     <th><?= Module::t('version_input_layout'); ?></th>
                     <th colspan="3"><?= Module::t('cmsadmin_created_at'); ?></th>
                 </tr>
-                <tr ng-repeat="versionItem in typeData" ng-class="{'table-success' : currentPageVersion == versionItem.id}">
-                    <td>{{versionItem.version_alias}} <span class="badge badge-primary" ng-if="currentPageVersion == versionItem.id"><?= Module::t('view_index_page_version_chooser'); ?></span></td>
+                <tr ng-repeat="versionItem in typeData">
+                    <td>{{versionItem.version_alias}} <span class="badge badge-primary" ng-if="item.nav_item_type_id == versionItem.id"><?= Module::t('view_index_page_version_chooser'); ?></span></td>
                     <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
                     <td>{{versionItem.timestamp_create | date :'short'}}</td>
                     <td>
                         <button type="button" class="btn btn-symbol btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button>
-                        <button type="button" class="btn btn-delete btn-icon btn-nolabel" ng-if="currentPageVersion != versionItem.id" ng-click="removeVersion(versionItem)"></button>
+                        <button type="button" class="btn btn-delete btn-icon btn-nolabel" ng-if="item.nav_item_type_id != versionItem.id" ng-click="removeVersion(versionItem)"></button>
                     </td>
                 </tr>
             </table>
