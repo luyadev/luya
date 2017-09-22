@@ -31,6 +31,14 @@
     }
 }
 
+.cmsadmin-blockholder-collapsed {
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        margin: 0 $blockholder-width-small 0 15px;
+    }
+
+}
+
 .cmsadmin-toolbar {
     align-items: center;
     display: flex;

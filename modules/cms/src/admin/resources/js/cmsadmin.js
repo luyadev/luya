@@ -474,7 +474,7 @@
 		
 		$scope.aliasSuggestion = function() {
 			$scope.itemSelection.alias = Slug.slugify($scope.itemSelection.title);
-		}
+		};
 
 		$scope.loadItems = function() {
 			$scope.navId = $scope.NavItemController.NavController.navData.id;
@@ -592,7 +592,7 @@
 			}
 			
 			return false;
-		}
+		};
 		
 		$scope.rritems = [];
 		
@@ -750,8 +750,9 @@
 
 	// update.js
 
-	zaa.controller("NavController", function($scope, $rootScope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService) {
-		
+	zaa.controller("NavController", function($scope, $rootScope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService, HtmlStorage) {
+
+
 		$scope.pageSettingsOverlayHidden = true;
 		
 		$scope.pageSettingsOverlayTab = 1;
@@ -815,7 +816,16 @@
 			}
 		});
 
-		/* sidebar logic */
+		/* Blockholder size toggler */
+
+        $scope.isBlockholderSmall = HtmlStorage.getValue('sidebarToggleState', false);
+
+        $scope.toggleBlockholderSize = function() {
+            $scope.isBlockholderSmall = !$scope.isBlockholderSmall;
+            HtmlStorage.setValue('sidebarToggleState', $scope.isBlockholderSmall);
+        };
+
+        /* sidebar logic */
 
 		$scope.sidebar = false;
 
@@ -1538,7 +1548,7 @@
 			}
 
 			$http.post('admin/api-cms-block/toggle-group', {group: group}, {ignoreLoadingBar: true});
-		}
+		};
 
 		// controller logic
 
@@ -1566,6 +1576,8 @@
 				$scope.blocksData = angular.copy($scope.blocksDataRestore);
 			}
 		});
+
+
 	});
 
 })();

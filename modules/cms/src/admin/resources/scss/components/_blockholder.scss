@@ -1,18 +1,59 @@
-
-
 .blockholder-column {
-    max-width: $blockholder-width;
-    min-width: $blockholder-width;
+    width: $blockholder-width;
     padding-left: 0;
     padding-right: 0;
-    transform: translateZ(0);
     display: none;
     height: 100vh;
     right: 0;
     position: fixed;
 
+    transform: translateX(0) translateZ(0);
+
     @media (min-width: $mobile-nav-breakpoint) {
         display: block;
+    }
+}
+
+.blockholder-column-small {
+
+    .blockholder  {
+        padding: 10px;
+    }
+
+    transform: translateX(205px);
+
+    .blockholder-search {
+        display: none;
+    }
+
+    .blockholder-item {
+
+        span {
+            visibility: hidden;
+        }
+
+        padding: 5px;
+
+        max-width: 30px;
+        max-height: 30px;
+    }
+
+    .blockholder-group-title {
+        span {
+            visibility: hidden;
+        }
+    }
+
+    .blockholder-favorite, .blockholder-clear-button {
+
+        display: none;
+
+        max-width: 12px;
+        padding-left: 2px;
+
+        i {
+            font-size: 8px;
+        }
     }
 }
 
@@ -162,11 +203,50 @@
     }
 
     &-clear {
-        font-size: 20px;
         padding: 0 6px 3px 6px;
     }
 }
 
 .blockholder-group-toggled .blockholder-toggle-icon {
     transform: rotate(-90deg);
+}
+
+.blockholder-toggler {
+    background: map-get($grays, 700);
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    display: none;
+    margin: 0;
+    min-height: 42px;
+    outline: none !important;
+    padding: 0;
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background .25s ease-in-out, min-height .2s ease-in-out;;
+    width: 16px;
+
+    i {
+        color: map-get($grays, 100);;
+        transition: transform .25s ease-in-out, color .25s ease-in-out
+    }
+
+    &:hover {
+        background: color(gray);
+        min-height: 72px;
+
+    }
+
+    &-open {
+
+        i {
+            transform: rotate(180deg);
+        }
+    }
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: block;
+    }
 }

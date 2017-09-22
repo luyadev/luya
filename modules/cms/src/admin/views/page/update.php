@@ -2,7 +2,7 @@
 use luya\cms\admin\Module;
 
 ?>
-<div class="cmsadmin" ng-controller="NavController" ng-show="!isDeleted">
+<div class="cmsadmin" ng-controller="NavController" ng-show="!isDeleted" ng-class="{'cmsadmin-blockholder-collapsed' : !isBlockholderSmall}">
 	<?= $this->render('_settings'); ?>
     <div class="row">
         <div class="col cmsadmin-frame-wrapper" ng-if="displayLiveContainer">
@@ -76,7 +76,7 @@ use luya\cms\admin\Module;
                 </div>
             </div>
         </div>
-        <div class="col blockholder-column" ng-controller="DroppableBlocksController">
+        <div class="col blockholder-column" ng-controller="DroppableBlocksController" ng-class="{'blockholder-column-small' : !isBlockholderSmall}" }>
             <div class="blockholder">
                 <div class="blockholder-search">
                     <input class="blockholder-search-input" id="blockholder-search" ng-model="searchQuery" />
@@ -106,7 +106,7 @@ use luya\cms\admin\Module;
                     </ul>
                 </div>
                 <div class="blockholder-group" ng-class="{'blockholder-group-favorites': item.group.is_fav, 'blockholder-group-toggled': !item.group.toggle_open}" ng-repeat="item in blocksData | orderBy:'groupPosition'" >
-                    <span class="blockholder-group-title" ng-click="toggleGroup(item.group)" ng-hide="searchQuery.length > 0">
+                    <span class="blockholder-group-title" tooltip tooltip-text="{{item.group.name}}" tooltip-position="left" tooltip-disabled="isBlockholderSmall" ng-click="toggleGroup(item.group)" ng-hide="searchQuery.length > 0">
                         <i class="material-icons" ng-if="item.group.is_fav">favorite</i>
                         <i class="material-icons blockholder-toggle-icon" ng-if="!item.group.is_fav">keyboard_arrow_down</i>
                         <span>{{item.group.name}}</span>
@@ -115,17 +115,20 @@ use luya\cms\admin\Module;
                         <li class="blockholder-item" ng-show="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
                             dnd dnd-model="block" dnd-isvalid="true" dnd-drop-disabled dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
                         >
-                            <i class="material-icons blockholder-icon">{{block.icon}}</i>
+                            <i class="material-icons blockholder-icon" tooltip tooltip-text="{{block.name}}" tooltip-position="left" tooltip-disabled="isBlockholderSmall">{{block.icon}}</i>
                             <span>{{block.name}}</span>
-                            <button class="blockholder-favorite" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">
+                            <button type="button" class="blockholder-favorite" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">
                                 <i class="material-icons">favorite</i>
                             </button>
-                            <button class="blockholder-favorite blockholder-favorite-clear" ng-click="removeFromFav(block)" ng-if="item.group.is_fav">
+                            <button type="button" class="blockholder-favorite blockholder-favorite-clear" ng-click="removeFromFav(block)" ng-if="item.group.is_fav">
                                 <i class="material-icons">clear</i>
                             </button>
                         </li>
                     </ul>
                 </div>
+                <button class="blockholder-toggler" type="button" ng-class="{'blockholder-toggler-open' : !isBlockholderSmall}" ng-click="toggleBlockholderSize()">
+                    <i class="material-icons">chevron_right</i>
+                </button>
             </div>
         </div>
     </div>
