@@ -23,6 +23,7 @@
  * ```
  * 
  */
+
 (function() {
 	"use strict";
 	
@@ -37,9 +38,7 @@ zaa.config(function(resolverProvider) {
 	});
 });
 
-/*
-block data copy stack
-*/
+/* block data copy stack */
 
 zaa.factory("ServiceBlockCopyStack", function($rootScope) {
 	var service = [];
@@ -75,6 +74,7 @@ $scope.menuDataReload = function() {
 }
 				
 */
+
 zaa.factory("ServiceMenuData", function($http, $q, $rootScope) {
 	var service = [];
 	
@@ -97,7 +97,6 @@ zaa.factory("ServiceMenuData", function($http, $q, $rootScope) {
 	return service;
 });
 
-
 /*
 
 $scope.blocksData = ServiceBlocksData.data;
@@ -111,6 +110,7 @@ $scope.blocksDataReload = function() {
 }
 				
 */
+
 zaa.factory("ServiceBlocksData", function($http, $q, $rootScope) {
 	var service = [];
 	
@@ -133,7 +133,6 @@ zaa.factory("ServiceBlocksData", function($http, $q, $rootScope) {
 	return service;
 });
 
-
 /*
 
 $scope.layoutsData = ServiceLayoutsData.data;
@@ -147,6 +146,7 @@ $scope.layoutsDataReload = function() {
 }
 				
 */
+
 zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
 	var service = [];
 	
@@ -169,12 +169,12 @@ zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
 	return service;
 });
 
-
 /*
  * CMS LIVE EDIT SERIVCE
  * 
  * $scope.liveEditMode = ServiceLiveEditMode.state
  */
+
 zaa.factory("ServiceLiveEditMode", function($rootScope) {
 	
 	var service = [];
@@ -185,8 +185,7 @@ zaa.factory("ServiceLiveEditMode", function($rootScope) {
 	
 	service.toggle = function() {
 		service.state = !service.state;
-	}
-	
+	};
 	service.setUrl = function(itemId, versionId) {
 		var d = new Date();
 		var n = d.getTime();
@@ -199,10 +198,11 @@ zaa.factory("ServiceLiveEditMode", function($rootScope) {
 		}
 		service.setUrl(itemId, versionId);
 		$rootScope.$broadcast('service:LiveEditModeUrlChange', service.url);
-	}
+	};
 	
 	return service;
 });
 
-// end of use strict
+/* end of use strict */
+
 })();
