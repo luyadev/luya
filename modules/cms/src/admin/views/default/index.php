@@ -12,12 +12,12 @@ use \luya\admin\Module as AdminModule;
         <span class="treeview-icon treeview-icon-right" ng-if="data.is_home==1">
             <i class="material-icons">home</i>
         </span>
-        <span class="treeview-link" ng-click="go(data)" tooltip tooltip-text="<?= AdminModule::t('locked_info'); ?>" tooltip-disabled="!isLocked('cms_nav_item', data.id)">
+        <span class="treeview-link" alt="id={{data.id}}" title="id={{data.id}}" ng-click="go(data)" tooltip tooltip-text="<?= AdminModule::t('locked_info'); ?>" tooltip-disabled="!isLocked('cms_nav_item', data.id)">
             <span class="google-chrome-font-offset-fix">{{data.title}}</span>
         </span>
     </span>
     <span ng-if="!data.is_editable" class="treeview-label treeview-label-page">
-        <span class="treeview-link" style="cursor: not-allowed;">
+        <span class="treeview-link" alt="id={{data.id}}" title="id={{data.id}}" style="cursor: not-allowed;">
             <span class="google-chrome-font-offset-fix">{{data.title}}</span>
         </span>
     </span>
