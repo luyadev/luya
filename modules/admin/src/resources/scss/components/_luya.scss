@@ -1,7 +1,6 @@
 .luya {
     display: block;
     width: 100%;
-    height: 100%;
 
     @media (min-width: $mobile-nav-breakpoint) {
 
@@ -97,10 +96,7 @@
 
 .luya-content {
     background-color: map-get($grays, 100);
-    overflow-y: auto;
-    //overflow: -moz-scrollbars-none; // Firefox
     padding: $content-padding-y $content-padding-x;
-    height: 100%;
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
@@ -109,10 +105,12 @@
         padding: 0;
     }
 
-    -ms-overflow-style: none; // IE 10+
-
     @media (min-width: $mobile-nav-breakpoint) {
         flex: 1 1;
+        height: 100%;
+        overflow-y: auto;
+        //overflow: -moz-scrollbars-none; // Firefox
+        -ms-overflow-style: none; // IE 10+
 
         .luya-subnav.overlaying + & {
             padding-left: 50px;
