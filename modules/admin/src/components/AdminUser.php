@@ -63,6 +63,11 @@ class AdminUser extends User
         Yii::$app->language = $this->getInterfaceLanguage();
     }
 
+    /**
+     * Return the interface language for the given logged in user.
+     *
+     * @return string
+     */
     public function getInterfaceLanguage()
     {
         return $this->getIsGuest() ? $this->defaultLanguage : $this->identity->setting->get('luyadminlanguage', $this->defaultLanguage);
@@ -74,6 +79,10 @@ class AdminUser extends User
     public function onBeforeLogout()
     {
         UserOnline::removeUser($this->getId());
+        
+        $this->identity->updateAttributes([
+            'auth_token' => Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $this->identity->password_salt),
+        ]);
     }
     
     /**

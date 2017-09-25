@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1494](https://github.com/luyadev/luya/issues/1494) CMS page selection hides container element by default, fixed arrow keys.
 - [#1461](https://github.com/luyadev/luya/issues/1461) Admin search panel auto focus input field and search groups can be toggled.
 - [#1462](https://github.com/luyadev/luya/issues/1462) CMS block holder toggler in order to optimize view for small screens.
+- [#1515](https://github.com/luyadev/luya/issues/1515) Change access token on logout provides a shorter periode of being violated.
 
 ### Fixed
 
