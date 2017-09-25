@@ -105,7 +105,8 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             'js_added_translation_ok', 'js_added_translation_error', 'js_page_add_exists', 'js_page_property_refresh', 'js_page_confirm_delete', 'js_page_delete_error_cause_redirects', 'js_state_online', 'js_state_offline',
             'js_state_hidden', 'js_state_visible', 'js_state_is_home', 'js_state_is_not_home', 'js_page_item_update_ok', 'js_page_block_update_ok', 'js_page_block_remove_ok', 'js_page_block_visbility_change', 'js_page_block_delete_confirm',
             'js_version_update_success', 'js_version_error_empty_fields', 'js_version_create_success', 'js_version_delete_confirm', 'js_version_delete_confirm_success',
-            'view_index_page_success', 'js_config_update_success', 'js_page_update_layout_save_success', 'js_page_create_copy_success',
+            'view_index_page_success', 'js_config_update_success', 'js_page_update_layout_save_success', 'js_page_create_copy_success', 'view_update_block_tooltip_delete',
+        	'cmsadmin_settings_trashpage_title', 'cmsadmin_version_remove',
         ];
     }
     

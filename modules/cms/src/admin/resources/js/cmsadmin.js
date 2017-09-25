@@ -893,7 +893,7 @@
 		};
 
 		$scope.trash = function() {
-			AdminToastService.confirm(i18n['js_page_confirm_delete'], 'Seite löschen', function($timeout, $toast) {
+			AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], function($timeout, $toast) {
 
 				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.id }}).then(function(response) {
 	    			$scope.isDeleted = true;
@@ -1040,7 +1040,7 @@
 
 		$scope.trashItem = function() {
 			if ($scope.lang.is_default == 0) {
-				AdminToastService.confirm(i18n['js_page_confirm_delete'], 'Seite Löschen', function($timeout, $toast) {
+				AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], function($timeout, $toast) {
 					$http.get('admin/api-cms-navitem/delete', { params : { navItemId : $scope.item.id }}).then(function(response) {
 						$scope.menuDataReload().then(function() {
 							$scope.isTranslated = false;
@@ -1111,7 +1111,7 @@
 		});
 
 		$scope.removeVersion = function(version) {
-			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: version.version_alias}), 'Version löschen', function($toast, $http) {
+			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: version.version_alias}), i18n['cmsadmin_version_remove'], function($toast, $http) {
 				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : version.id}).then(function(response) {
 					$scope.refreshForce();
 					$toast.close();
@@ -1486,7 +1486,7 @@
 		};
 
 		$scope.removeBlock = function() {
-			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), 'Block löschen', function($timeout, $toast) {
+			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), i18n['view_update_block_tooltip_delete'], function($timeout, $toast) {
 				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + $scope.block.id).then(function(response) {
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 					$scope.NavItemTypePageController.loadLiveUrl();

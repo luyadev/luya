@@ -2829,7 +2829,7 @@
                             });
 
                         } else {
-                            AdminToastService.confirm(i18nParam('layout_filemanager_remove_dir_not_empty', {folderName: folder.name, count: folder.filesCount}), 'Datei entfernen', function($timeout, $toast) {
+                            AdminToastService.confirm(i18nParam('layout_filemanager_remove_dir_not_empty', {folderName: folder.name, count: folder.filesCount}), i18n['js_dir_manager_rm_folder_confirm_title'], function($timeout, $toast) {
                                 $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.id, $.param({ name : folder.name }), {
                                     headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                                 }).then(function() {
@@ -2873,7 +2873,7 @@
                 };
 
                 $scope.removeFiles = function() {
-                    AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], 'Datei entfernen', function($timeout, $toast) {
+                    AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], i18n['js_dir_manager_rm_file_confirm_title'], function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                         }).then(function(transport) {

@@ -248,4 +248,10 @@ return [
     'locked_info' => 'Someone already editing',
     'menu_dashboard' => 'Dashboard',
     'js_link_not_set' => 'No Link selected',
+		
+// 1.0.0
+
+	'ngrest_button_delete' => 'Delete',
+	'js_dir_manager_rm_file_confirm_title' => 'Remove file',
+	'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
 ];
