@@ -65,8 +65,8 @@ interface TypesInterface
     const TYPE_SELECT = 'zaa-select';
     
     /**
-     * @var string Returns a list of radio inputs based on an optiosn array, but allows only a selection of one. Therefore its
-     * not `radios` or `radio-array` it returns only a single value an is `radio`
+     * @var string Returns a list of radio inputs based on an options array, but allows only a selection of one. Therefore its
+     * **not** `radios` or `radio-array` as the return value is not an array.
      */
     const TYPE_RADIO = 'zaa-radio';
     
