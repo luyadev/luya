@@ -249,4 +249,10 @@ return [
     'locked_info' => 'Wird bearbeitet',
     'menu_dashboard' => 'Dashboard',
     'js_link_not_set' => 'Kein Link gesetzt',
+        
+    // 1.0.0
+        
+        'ngrest_button_delete' => 'Delete',
+        'js_dir_manager_rm_file_confirm_title' => 'Remove file',
+        'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
 ];

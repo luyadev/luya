@@ -5,6 +5,7 @@ namespace luya\cms\helpers;
 use Yii;
 use luya\web\ExternalLink;
 use luya\TagParser;
+use luya\admin\helpers\Angular;
 
 /**
  * Helper methods for CMS Blocks.
@@ -20,6 +21,17 @@ use luya\TagParser;
  */
 class BlockHelper
 {
+    /**
+     * Create option inputs for radio type.
+     *
+     * @param array $options
+     * @return array
+     */
+    public static function radioArrayOption(array $options)
+    {
+        return Angular::optionsArrayInput($options);
+    }
+    
     /**
      * Create the options array for a zaa-select field based on an key value pairing
      * array.

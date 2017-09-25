@@ -61,7 +61,7 @@ class Angular
      * @param array $data Key value Paring or an array with label and value key.
      * @return array
      */
-    protected static function optionsArrayInput(array $data)
+    public static function optionsArrayInput(array $data)
     {
         $data = [];
         

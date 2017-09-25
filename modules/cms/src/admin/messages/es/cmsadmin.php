@@ -192,4 +192,5 @@ return [
     'cmsadmin_settings_modal_title' => 'Settings',
     'cmsadmin_item_settings_titleslug' => 'Page Informations',
     'cmsadmin_created_at' => 'Created at',
+    'cmsadmin_version_remove' => 'Remove version',
 ];
