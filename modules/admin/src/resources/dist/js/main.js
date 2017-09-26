@@ -8910,7 +8910,11 @@ angular.module('dnd', [])
 	            	dndFactory.content(scope.dndModel);
 	            	dndFactory.elmnSet(dragable);
 	                this.classList.add(scope.dndCss.onDrag);
-	                return false;
+	                
+	                if (e.dataTransfer) {
+	                	e.dataTransfer.setData('text', 1);
+	                }
+	                // return false;
 	            },
 	            false
 	        );
@@ -8919,7 +8923,7 @@ angular.module('dnd', [])
 	            'dragend',
 	            function(e) {
 	                this.classList.remove(scope.dndCss.onDrag);
-	                return false;
+	                // return false;
 	            },
 	            false
 	        );
@@ -8938,7 +8942,7 @@ angular.module('dnd', [])
 		        		e.stopPropagation();
 		        		e.preventDefault();
 		        		isValid = false;
-		        		return false;
+		        		// return false;
 		        	}
     		        
                     var re = el.getBoundingClientRect();
@@ -8977,7 +8981,7 @@ angular.module('dnd', [])
     		        }
     		        
     		        this.classList.add(scope.dndCss.onHover);
-    		        return false;
+    		        // return false;
     		    },
     		    false
     		);
@@ -8986,7 +8990,7 @@ angular.module('dnd', [])
     		    'dragenter',
     		    function(e) {
     		        this.classList.add(scope.dndCss.onHover);
-    		        return false;
+    		        // return false;
     		    },
     		    false
     		);
@@ -8998,7 +9002,7 @@ angular.module('dnd', [])
     		        this.classList.remove(scope.dndCss.onHoverTop);
     		        this.classList.remove(scope.dndCss.onHoverMiddle);
     		        this.classList.remove(scope.dndCss.onHoverBottom);
-    		        return false;
+    		        // return false;
     		    },
     		    false
     		);
@@ -9018,7 +9022,7 @@ angular.module('dnd', [])
 		                		scope.dndOndrop({dragged: dndFactory.get().content, dropped: scope.dndModel, position: dndFactory.get().pos});
 		                	});
 	    		        }
-	                	return false;
+	                	// return false;
 	                },
 	                false
 	            );
@@ -12989,7 +12993,7 @@ zaa.factory('HtmlStorage', function() {
 				
 				$scope.init();
 			}
-		})
+		});
 	});
 	
 	zaa.controller("DefaultDashboardObjectController", function($scope, $http, $sce) {

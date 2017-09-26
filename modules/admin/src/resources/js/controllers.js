@@ -21,7 +21,7 @@
 				
 				$scope.init();
 			}
-		})
+		});
 	});
 	
 	zaa.controller("DefaultDashboardObjectController", function($scope, $http, $sce) {
