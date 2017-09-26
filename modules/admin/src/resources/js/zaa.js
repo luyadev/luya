@@ -253,7 +253,7 @@ function typeCastValue(value) {
             	return isConfig;
             },
             responseError: function (data) {
-                if (data.status == 401) {
+                if (data.status == 401 || data.status == 403 || data.status == 405) {
                     window.location = "admin/default/logout";
                 }
                 if (data.status != 422) {
