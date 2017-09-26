@@ -17,7 +17,7 @@ class StatusController extends \luya\admin\base\Controller
     {
         return $this->renderPartial('index', [
             'sites' => Site::find()->all(),
-            'currentVersion' => Site::getCurrentLuyaVersion(),
+        	'currentVersion' => (new Site())->getCurrentVersion(),
         ]);
     }
 }

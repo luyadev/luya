@@ -18,7 +18,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     
     public function getMenu()
     {
-        return (new AdminMenuBuilder($this))->node('Remote', 'dashboard')
+        return (new AdminMenuBuilder($this))->node('Remote', 'settings_remote')
             ->group('Daten')
                 ->itemRoute('Status', 'remoteadmin/status/index', 'update')
                 ->itemApi('Pages', 'remoteadmin/site/index', 'cloud', 'api-remote-site');
