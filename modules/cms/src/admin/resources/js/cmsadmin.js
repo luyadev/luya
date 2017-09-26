@@ -818,7 +818,7 @@
 
 		/* Blockholder size toggler */
 
-        $scope.isBlockholderSmall = HtmlStorage.getValue('blockholderToggleState', false);
+        $scope.isBlockholderSmall = HtmlStorage.getValue('blockholderToggleState', true);
 
         $scope.toggleBlockholderSize = function() {
             $scope.isBlockholderSmall = !$scope.isBlockholderSmall;
