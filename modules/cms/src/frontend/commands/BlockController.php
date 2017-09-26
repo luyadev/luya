@@ -129,7 +129,6 @@ class BlockController extends \luya\console\Command
             'decimal' => 'Decimal Number Float',
             'wysiwyg' => 'What you see is what you get Editor',
             'select' => 'Dropdown Select',
-            'radios' => 'Radios Selection',
             'date' => 'Date Selector',
             'datetime' => 'Date and Time selector',
             'checkbox' => 'A single Checkbox',
