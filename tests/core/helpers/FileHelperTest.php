@@ -75,4 +75,19 @@ class FileHelperTest extends LuyaWebTestCase
         
         $this->assertFalse(FileHelper::getFileContent('doesNotExist.txt'));
     }
+    
+    public function testClassInfo()
+    {
+    	$ci = FileHelper::classInfo('<?php
+namespace foo\bar;
+class BarFoo {}');
+    	$this->assertSame('foo\\bar', $ci['namespace']);
+    	$this->assertSame('BarFoo', $ci['class']);
+    	
+    	$ci = FileHelper::classInfo('<?php
+namespace foo\bar;   
+class BarFoo {}');
+    	$this->assertSame('foo\\bar', $ci['namespace']);
+    	$this->assertSame('BarFoo', $ci['class']);
+    }
 }

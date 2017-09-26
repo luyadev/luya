@@ -64,23 +64,23 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      *
      * This is used when working with file paths from composer, in order to detect class and namespace from a given file.
      *
-     * @param string $file The file path to the class into order to get infos.
-     *
+     * @param string $file The file path to the class into order to get infos from, could also be the content directly from a given file.
      * @return array|boolean If the given filepath is a file, it will return an array with the keys:
      * + namespace: the namespace of the file
      * + class: the class name of the file
      */
     public static function classInfo($file)
     {
-        if (!is_file($file)) {
-            return false;
+        if (is_file($file)) {
+            $phpCode = file_get_contents($file);
+        } else {
+        	$phpCode = $file;
         }
         
-        $phpCode = file_get_contents($file);
         $namespace = null;
         
-        if (preg_match('#^namespace\s+(.+?);$#sm', $phpCode, $m)) {
-            $namespace = $m[1];
+        if (preg_match('/^namespace\s+(.+?);(\s+|\r\n)$/sm', $phpCode, $results) !== false) {
+            $namespace = $results[1];
         }
         
         $classes = self::classNameByTokens($phpCode);
@@ -88,6 +88,12 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         return ['namespace' => $namespace, 'class' => end($classes)];
     }
     
+    /**
+     * Tokenize the php code from a given class in in order to determine the class name.
+     * 
+     * @param string $phpCode
+     * @return array
+     */
     private static function classNameByTokens($phpCode)
     {
         $classes = [];

@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1517](https://github.com/luyadev/luya/issues/1517) Fixed issue where FileHelper::classInfo does not determine namespace correctly on windows.
 - [#1401](https://github.com/luyadev/luya/issues/1401) Multiple inputs key indexing problem fixed.
 - [#1474](https://github.com/luyadev/luya/issues/1474) Fixed problem where modal in modal does not apply `modal-body` class correctly.
 - [#1473](https://github.com/luyadev/luya/issues/1473) Fixed issue where user default language is not provided when user has no settings stored.
@@ -47,7 +48,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1456](https://github.com/luyadev/luya/issues/1456) Fixed bug where login forms make problems on Firefox Browsers.
 - [#1458](https://github.com/luyadev/luya/issues/1458) Fixed bug where crud search does not apply the model changes.
 - [#1454](https://github.com/luyadev/luya/issues/1454) Fixed Problem with Admin UI and Firefox Browsers.
-- [#1371](https://github.com/luyadev/luya/issues/1371) Fixed issue where cms page last update does not refresh the user id
+- [#1371](https://github.com/luyadev/luya/issues/1371) Fixed issue where cms page last update does not refresh the user id.
 
 
 1.0.0-RC4 (5. September 2017)
