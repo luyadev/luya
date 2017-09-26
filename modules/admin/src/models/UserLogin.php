@@ -13,6 +13,7 @@ use yii\db\ActiveRecord;
  * @property integer $timestamp_create
  * @property string $auth_token
  * @property string $ip
+ * @property string $session_id
  */
 final class UserLogin extends ActiveRecord
 {
@@ -50,9 +51,9 @@ final class UserLogin extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'timestamp_create', 'auth_token', 'ip'], 'required'],
+            [['user_id', 'timestamp_create', 'auth_token', 'ip', 'session_id'], 'required'],
             [['user_id', 'timestamp_create'], 'integer'],
-            [['auth_token'], 'string', 'max' => 120],
+            [['auth_token', 'session_id'], 'string', 'max' => 120],
             [['ip'], 'string', 'max' => 15],
         ];
     }

@@ -44,7 +44,7 @@ class LoginController extends Controller
         if (!Yii::$app->adminuser->isGuest) {
             return $this->redirect(['/admin/default/index']);
         }
-        
+       
         $this->registerAsset('\luya\admin\assets\Login');
         
         $this->view->registerJs("

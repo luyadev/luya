@@ -343,37 +343,50 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
 
     // AuthMethods
 
+    /**
+     * Finds a current user for a given email.
+     * 
+     * @param string $email The email adresse to find the user from.
+     * @return \yii\db\ActiveRecord|null
+     */
     public static function findByEmail($email)
     {
         return self::find()->where(['email' => $email, 'is_deleted' => false])->one();
     }
 
+    /**
+     * Validates the password for the current given user.
+     * 
+     * @param string $password The plain user input password.
+     * @return boolean
+     */
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password.$this->password_salt, $this->password);
+    }
+    
+    /**
+     * Get the user logins for the given user.
+     * 
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserLogins()
+    {
+    	return $this->hasMany(UserLogin::class, ['user_id' => 'id']);
     }
 
     // IdentityInterface
 
     /**
-     * Finds an identity by the given ID.
-     *
-     * @param string|int $id the ID to be looked for
-     *
-     * @return IdentityInterface|null the identity object that matches the given ID.
+     * @inheritdoc
      */
     public static function findIdentity($id)
     {
-        return static::findOne($id);
+    	return static::find()->joinWith(['userLogins ul'])->andWhere(['admin_user.id' => $id, 'session_id' => Yii::$app->session->get('sessionKeyId'), 'ip' => Yii::$app->request->userIP])->one();
     }
 
     /**
-     * Finds an identity by the given token.
-     *
-     * @param string $token the token to be looked for
-     *
-     * @param null $type
-     * @return null|IdentityInterface the identity object that matches the given token.
+     * @inheritdoc
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -381,20 +394,23 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     }
 
     /**
-     * @return int|string current user ID
+     * @inheritdoc
      */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getAuthToken()
     {
         return $this->auth_token;
     }
 
     /**
-     * @return string current user auth key
+     * @inheritdoc
      */
     public function getAuthKey()
     {
@@ -402,9 +418,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     }
 
     /**
-     * @param string $authKey
-     *
-     * @return bool if auth key is valid for current user
+     * @inheritdoc
      */
     public function validateAuthKey($authKey)
     {
