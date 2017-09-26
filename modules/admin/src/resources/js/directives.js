@@ -1348,7 +1348,6 @@
                     $scope.valueTrue = 1;
                     $scope.valueFalse = 0;
                 } else {
-                	console.log($scope.options);
                     $scope.valueTrue = $scope.options['true-value'];
                     $scope.valueFalse = $scope.options['false-value'];
                 }

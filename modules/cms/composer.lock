@@ -513,12 +513,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "4d15151df39b5542aaab93c94eef8793d5938c74"
+                "reference": "9e56074734c09bcaa0c1eb5363e1e8fd548aef0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/4d15151df39b5542aaab93c94eef8793d5938c74",
-                "reference": "4d15151df39b5542aaab93c94eef8793d5938c74",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/9e56074734c09bcaa0c1eb5363e1e8fd548aef0f",
+                "reference": "9e56074734c09bcaa0c1eb5363e1e8fd548aef0f",
                 "shasum": ""
             },
             "require": {
@@ -573,7 +573,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2017-09-12T09:18:28+00:00"
+            "time": "2017-09-26T14:37:19+00:00"
         },
         {
             "name": "luyadev/luya-composer",
@@ -631,12 +631,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "f794d5f92e484b41ff3eacddccd61dbf7aac5828"
+                "reference": "a213bd884328f253553d8c1a74d7dedd5c4ec78f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/f794d5f92e484b41ff3eacddccd61dbf7aac5828",
-                "reference": "f794d5f92e484b41ff3eacddccd61dbf7aac5828",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/a213bd884328f253553d8c1a74d7dedd5c4ec78f",
+                "reference": "a213bd884328f253553d8c1a74d7dedd5c4ec78f",
                 "shasum": ""
             },
             "require": {
@@ -644,7 +644,7 @@
                 "yiisoft/yii2-imagine": "~2.1.0"
             },
             "require-dev": {
-                "bower-asset/angular": "~1.6.0",
+                "bower-asset/angular": "1.6.5",
                 "bower-asset/angular-filter": "~0.5.15",
                 "bower-asset/angular-loading-bar": "^0.9",
                 "bower-asset/angular-slugify": "^1.0.0",
@@ -697,7 +697,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-09-12T07:18:52+00:00"
+            "time": "2017-09-26T14:37:01+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1336,16 +1336,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.21",
+            "version": "5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3b91adfb64264ddec5a2dee9851f354aa66327db"
+                "reference": "10df877596c9906d4110b5b905313829043f2ada"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3b91adfb64264ddec5a2dee9851f354aa66327db",
-                "reference": "3b91adfb64264ddec5a2dee9851f354aa66327db",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/10df877596c9906d4110b5b905313829043f2ada",
+                "reference": "10df877596c9906d4110b5b905313829043f2ada",
                 "shasum": ""
             },
             "require": {
@@ -1414,7 +1414,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-06-21T08:11:54+00:00"
+            "time": "2017-09-24T07:23:38+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
