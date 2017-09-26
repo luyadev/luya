@@ -68,7 +68,7 @@ final class StorageEffect extends NgRestModel
             'name' => 'text',
             'identifier' => 'text',
             'imagine_name' => 'text',
-            'imagine_json_params' => 'textarea',
+            'imagine_json_params' => ['textarea', 'encoding' => false],
         ];
     }
     

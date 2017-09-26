@@ -33,7 +33,7 @@ class Layout extends NgRestModel
     {
         return [
             'name' => 'text',
-            'json_config' => 'textarea',
+            'json_config' => ['textarea', 'encoding' => false],
             'view_file' => 'text',
         ];
     }

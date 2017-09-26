@@ -3,6 +3,7 @@
 namespace luya\admin\ngrest\plugins;
 
 use luya\admin\ngrest\base\Plugin;
+use luya\helpers\Html;
 
 /**
  * Create a text input select for a given field.
@@ -15,6 +16,11 @@ class Text extends Plugin
      * @var string Define a HTML placeholder attribute.
      */
     public $placeholder;
+    
+    /**
+     * @var boolean Whether the value should be encoded after find by {{luya\helpers\Html::encode()}} or not.
+     */
+    public $encoding = true;
     
     /**
      * @var array An array with options can be passed to the createListTag.
@@ -43,5 +49,15 @@ class Text extends Plugin
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function onAfterFind($event)
+    {
+    	if ($this->encoding) {
+    		$event->sender->setAttribute($this->name, Html::encode($event->sender->getAttribute($this->name)));
+    	}
     }
 }
