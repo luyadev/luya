@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1512](https://github.com/luyadev/luya/issues/1512) Drag and Drop does not work in Firefox Browsers.
 - [#1517](https://github.com/luyadev/luya/issues/1517) Fixed issue where FileHelper::classInfo does not determine namespace correctly on windows.
 - [#1401](https://github.com/luyadev/luya/issues/1401) Multiple inputs key indexing problem fixed.
 - [#1474](https://github.com/luyadev/luya/issues/1474) Fixed problem where modal in modal does not apply `modal-body` class correctly.
