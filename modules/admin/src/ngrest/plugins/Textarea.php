@@ -77,16 +77,16 @@ class Textarea extends Plugin
      */
     public function onAfterFind($event)
     {
+        if ($this->encoding) {
+            $event->sender->setAttribute($this->name, Html::encode($event->sender->getAttribute($this->name)));
+        }
+        
         if ($this->nl2br) {
             $event->sender->setAttribute($this->name, nl2br($event->sender->getAttribute($this->name)));
         }
         
         if ($this->markdown) {
             $event->sender->setAttribute($this->name, TagParser::convertWithMarkdown($event->sender->getAttribute($this->name)));
-        }
-        
-        if ($this->encoding) {
-        	$event->sender->setAttribute($this->name, Html::encode($event->sender->getAttribute($this->name)));
         }
     }
 }
