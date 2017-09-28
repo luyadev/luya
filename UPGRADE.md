@@ -30,11 +30,10 @@ The next what you will notice is `Setting unknown property: luya\web\Application
 ],
 ```
 
-> due to an rc3 typo, make sure there is no adresses method in your project instead us addresses.
-
 Low level API changes:
 
-- [#1408](https://github.com/luyadev/luya/issues/1408) THe CMS Module is now bootstraped over the luya composer plugin if you want explicit call the bootstrap process use `'bootstrap' => ['luya\cms\frontend\Bootstrap']` inside your config.
++ Mail component method `adresses()` is now correctly written as `addresses()`.
++ [#1408](https://github.com/luyadev/luya/issues/1408) THe CMS Module is now bootstraped over the luya composer plugin if you want explicit call the bootstrap process use `'bootstrap' => ['luya\cms\frontend\Bootstrap']` inside your config.
 + [#1414](https://github.com/luyadev/luya/issues/1414) Renamed Angular Helper methods, removed all the zaa prefixes.
 + [#1369](https://github.com/luyadev/luya/issues/1369) FlowActiveWindow dropped property `$modelClass` and does need to be configured anymore.
 + [#1308](https://github.com/luyadev/luya/issues/1308) A list of changed properties and methods.
