@@ -66,3 +66,80 @@
     }
 
 }
+
+.crud-buttons-column {
+    width: 50px;
+    position: relative;
+}
+
+.crud-buttons {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    background-color: color(gray);
+    font-size: 24px;
+
+    &:hover,
+    &:focus {
+        // background-color: lighten(color(gray), 10);
+        background-color: theme-color(primary);
+    }
+}
+
+.crud-buttons-toggler {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: $white;
+}
+
+.crud-buttons-pan {
+    position: absolute;
+    left: 0;
+    transform: translateX(-100%);
+    transition: .25s ease-in-out opacity, .25s ease-in-out z-index;
+    display: block;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    text-align: right;
+    opacity: 0;
+    background-color: $white;
+    font-size: 0;
+    white-space: nowrap;
+    z-index: -1;
+
+    .crud-buttons:hover &,
+    .crud-buttons:focus  & {
+        opacity: 1;
+        z-index: 100;
+    }
+}
+
+.crud-buttons-button {
+    position: relative;
+    border: none;
+    height: 100%;
+    vertical-align: top;
+    font-size: 16px;
+    background-color: transparent;
+    padding: 5px 15px;
+    transition: .25s ease-in-out background-color;
+
+    &:not(:first-of-type) {
+        border-left: 1px solid $black;
+    }
+
+    &:hover {
+        background-color: map_get($grays, 500);
+    }
+
+    i {
+        font-size: 20px;
+    }
+}

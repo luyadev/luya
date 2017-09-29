@@ -138,8 +138,8 @@ $this->beginBody();
                             </div>
                         </th>
                         <?php endforeach; ?>
-                        <th class="tab-padding-right text-right">
-                            <span class="crud-counter">{{data.listArray.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span>
+                        <th class="crud-buttons-column tab-padding-right text-right">
+                            <!--<span class="crud-counter">{{data.listArray.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span>-->
                         </th>
                     </tr>
                 </thead>
@@ -157,12 +157,17 @@ $this->beginBody();
                                  <td class="<?= $i != 1 ?: 'tab-padding-left'; ?>"><?= $element['html']; ?></td>
                              <?php endforeach; ?>
                          <?php endforeach; ?>
-                        <td class="text-right" ng-hide="isLocked(config.tableName, item[config.pk])">
+                        <td class="crud-buttons-column" ng-hide="isLocked(config.tableName, item[config.pk])">
                             <?php if (count($this->context->getButtons()) > 0): ?>
-                                <?php foreach ($this->context->getButtons() as $item): ?>
-                                    <button type="button" class="btn btn-sm" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i><?php if (!empty($item["label"])): echo "<span class=\"btn-crud-label\">". $item["label"] .  "</span>"; endif; ?></span></button>
-                                <?php endforeach; ?>
-                             <?php endif; ?>
+                                <div class="crud-buttons">
+                                    <i class="crud-buttons-toggler material-icons">menu</i>
+                                    <div class="crud-buttons-pan">
+                                        <?php foreach ($this->context->getButtons() as $item): ?>
+                                            <button type="button" class="crud-buttons-button" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i><?php if (!empty($item["label"])): echo "<span class=\"btn-crud-label\">". $item["label"] .  "</span>"; endif; ?></span></button>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </td>
                         <td class="text-right" ng-show="isLocked(config.tableName, item[config.pk])">
                             <small><i class="material-icons btn-symbol">lock_outline</i><?= Module::t('locked_info'); ?></small>
