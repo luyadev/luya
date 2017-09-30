@@ -5,13 +5,15 @@ namespace luya\admin\behaviors;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\Application;
+use yii\base\Behavior;
+use yii\helpers\Json;
 
 /**
  * LogBehavior stores informations when active records are updated or inserted.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class LogBehavior extends \yii\base\Behavior
+class LogBehavior extends Behavior
 {
     public $route = '';
 
@@ -31,7 +33,24 @@ class LogBehavior extends \yii\base\Behavior
             throw new \Exception('LogBehavior route or api property must be set.');
         }
     }
+    
+    /**
+     * 
+     * @param unknown $array
+     * @return string
+     */
+    private function toJson($array)
+    {
+    	$array = (array) $array;
+    	
+    	return Json::encode($array);
+    }
 
+    /**
+     * After Insert.
+     * 
+     * @param \yii\db\AfterSaveEvent $event
+     */
     public function eventAfterInsert($event)
     {
         if (Yii::$app instanceof Application) {
@@ -42,11 +61,19 @@ class LogBehavior extends \yii\base\Behavior
                 'api' => $this->api,
                 'is_insert' => true,
                 'is_update' => false,
-                'attributes_json' => json_encode($event->sender->getAttributes()),
+                'attributes_json' => $this->toJson($event->sender->getAttributes()),
+            	'attributes_diff_json' => null,
+            	'table_name' => $event->sender->tableName(),
+            	'pk_value' => implode("-", $event->sender->getPrimaryKey(true)),
             ])->execute();
         }
     }
 
+    /**
+     * After Update.
+     * 
+     * @param \yii\db\AfterSaveEvent $event
+     */
     public function eventAfterUpdate($event)
     {
         if (Yii::$app instanceof Application) {
@@ -57,7 +84,10 @@ class LogBehavior extends \yii\base\Behavior
                 'api' => $this->api,
                 'is_insert' => false,
                 'is_update' => true,
-                'attributes_json' => json_encode($event->sender->getAttributes()),
+                'attributes_json' => $this->toJson($event->sender->getAttributes()),
+            	'attributes_diff_json' => $this->toJson($event->changedAttributes),
+            	'table_name' => $event->sender->tableName(),
+            	'pk_value' => implode("-", $event->sender->getPrimaryKey(true)),
             ])->execute();
         }
     }
