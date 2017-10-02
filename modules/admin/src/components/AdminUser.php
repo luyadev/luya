@@ -6,6 +6,7 @@ use Yii;
 use yii\web\User;
 use luya\admin\models\UserOnline;
 use yii\web\UserEvent;
+use luya\web\Application;
 
 /**
  * AdminUser Component.
@@ -48,10 +49,16 @@ class AdminUser extends User
     {
         parent::init();
         
-        $this->idParam = '__luyaAdminId_' . md5(Yii::$app->id);
+        //$this->idParam = '__luyaAdminId_' . md5(Yii::$app->id);
+        $this->idParam = $this->uniqueHostVariable('id');
         
         $this->on(self::EVENT_BEFORE_LOGOUT, [$this, 'onBeforeLogout']);
         $this->on(self::EVENT_AFTER_LOGIN, [$this, 'onAfterLogin']);
+    }
+    
+    public function uniqueHostVariable($key)
+    {
+    	return '__luyaAdmin_' . md5(Yii::$app->id) . '_' . $key;
     }
 
     /**
@@ -61,6 +68,25 @@ class AdminUser extends User
     public function onAfterLogin(UserEvent $event)
     {
         Yii::$app->language = $this->getInterfaceLanguage();
+    }
+    
+    public function getSecureSessionId()
+    {
+    	if (Yii::$app->request->isAdmin) {
+    		return Yii::$app->session->get($this->uniqueHostVariable('secureSessionId'));
+    	}
+    }
+    
+    public function destroySecureSessionId()
+    {
+    	Yii::$app->session->remove($this->uniqueHostVariable('secureSessionId'));
+    }
+    
+    public function setSecureSessionId($id)
+    {
+    	if (Yii::$app->request->isAdmin) {
+    		Yii::$app->session->set($this->uniqueHostVariable('secureSessionId'), $id);
+    	}
     }
 
     /**
@@ -83,6 +109,8 @@ class AdminUser extends User
         $this->identity->updateAttributes([
             'auth_token' => Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $this->identity->password_salt),
         ]);
+        
+        $this->destroySecureSessionId();
     }
     
     /**

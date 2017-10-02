@@ -115,7 +115,7 @@ final class LoginForm extends Model
             
             $sessionId = Yii::$app->security->generateRandomString(64);
 
-            Yii::$app->session->set('sessionKeyId', $sessionId);
+            Yii::$app->adminuser->setSecureSessionId($sessionId);
             
 			$login = new UserLogin([
                 'auth_token' => $user->auth_token,
