@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1521](https://github.com/luyadev/luya/issues/1521) Bind session token to current IP in order to prevent session hijacking.
 - [#1511](https://github.com/luyadev/luya/issues/1511) Added page id information in cms menu tree on hover (alt,title).
 - [#1307](https://github.com/luyadev/luya/pull/1307) Block wizzard creates admin view according to given configs and vars.
 - [#1493](https://github.com/luyadev/luya/issues/1493) Show ability to search in relations when using large data tables.
