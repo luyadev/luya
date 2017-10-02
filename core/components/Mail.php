@@ -68,6 +68,12 @@ class Mail extends \yii\base\Component
     public $isSMTP = true;
 
     /**
+     * @var boolean Whether the SMTP requires authentication or not, if {{Mail::$isSMTP}} is disabled
+     * this property has no effect.
+     */
+    public $SMTPAuth = true;
+    
+    /**
      * @var string alternate text message if email client doesn't support HTML
      */
     public $altBody = 'Please use a HTML compatible E-Mail-Client to read this E-Mail.';
@@ -127,7 +133,7 @@ class Mail extends \yii\base\Component
                 $this->_mailer->isSMTP();
                 $this->_mailer->SMTPSecure = $this->smtpSecure;
                 $this->_mailer->Host = $this->host;
-                $this->_mailer->SMTPAuth = true;
+                $this->_mailer->SMTPAuth = $this->SMTPAuth;
                 $this->_mailer->Username = $this->username;
                 $this->_mailer->Password = $this->password;
                 $this->_mailer->Port = $this->port;
