@@ -12,7 +12,7 @@ There are few things people stumble upon mostly when installing LUYA.
 + When you encounter errors with composer install/update, make sure you have installed the version **1.0.0** of composer, in order to update your composer run `composer self-update`.
 + As Yii requies the `fxp/composer-asset-plugin` make sure you have at least version `1.3` installed of the plugin, in order to update the composer-asset-plugin run `composer global require "fxp/composer-asset-plugin:~1.3"`.
 
-### Server requirements
+## Server requirements
 
 In order to run LUYA with deployer nicely on a production server, the following components should be installed (we use the most common components apache2 and mysql, of course you can run LUYA with other database components and webservers like nginx):
 
