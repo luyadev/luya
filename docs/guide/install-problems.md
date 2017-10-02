@@ -14,13 +14,15 @@ There are few things people stumble upon mostly when installing LUYA.
 
 ### Server requirements
 
-In order to run LUYA with deployer nicely, the following components should be installed (we use the most common components apache2 and mysql, of course you can run LUYA with other database components and webservers like nginx):
+In order to run LUYA with deployer nicely on a production server, the following components should be installed (we use the most common components apache2 and mysql, of course you can run LUYA with other database components and webservers like nginx):
 
 + php 7.0 (or higher)
 + mysql 5.5 (or higher)
 + php extensions: curl, fileinfo, mbstring, icu, phar
++ apache modules: mod_rewrite
 + git (for deployer)
 + composer (for deployer)
++ ssh access (for deployer)
 
 ## Require the dev-master
 
