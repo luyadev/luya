@@ -79,6 +79,8 @@ module.exports = {
                 "../../vendor/bower-asset/twigjs-bower/twig/twig.js",
                 "../../vendor/bower-asset/angular-filter/dist/angular-filter.min.js",
                 "vendorlibs/ng-colorwheel/ng-colorwheel.js",
+                "../../vendor/bower-asset/bowser/src/useragent.js",
+                "../../vendor/bower-asset/bowser/src/bowser.js",
                 "js/dnd.js",
                 "js/zaa.js",
                 "js/services.js",

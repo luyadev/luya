@@ -34,7 +34,8 @@
 		"bower-asset/ng-flow" : "~2.7.0",
 		"bower-asset/ng-wig" : "~3.0.0",
 		"bower-asset/twigjs-bower": "~0.10.5",
-		"bower-asset/angular-filter" : "~0.5.15"
+		"bower-asset/angular-filter" : "~0.5.15",
+		"bower-asset/bowser": "~1.7.3"
 	},
 	"autoload" : {
 		"psr-4" : {

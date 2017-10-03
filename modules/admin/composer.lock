@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "424ca55fbabafcad62f5982f35fcf3a5",
+    "content-hash": "dcf45c654b80e54d3ce3a8efd03b896d",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -592,6 +592,25 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/720kb/angular-datepicker/zipball/12b53a4088c68c2905f05f000dbbcbb3cb50a974",
                 "reference": "12b53a4088c68c2905f05f000dbbcbb3cb50a974",
+                "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/bowser",
+            "version": "1.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lancedikson/bowser.git",
+                "reference": "64f1ac148f6d652f7ce993646387cfe096756351"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lancedikson/bowser/zipball/64f1ac148f6d652f7ce993646387cfe096756351",
+                "reference": "64f1ac148f6d652f7ce993646387cfe096756351",
                 "shasum": null
             },
             "type": "bower-asset",

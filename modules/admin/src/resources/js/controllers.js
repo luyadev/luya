@@ -882,7 +882,7 @@
 		$scope.toggleMainNavSize = function() {
 			$scope.isHover = !$scope.isHover;
 			HtmlStorage.setValue('sidebarToggleState', $scope.isHover);
-		}
+		};
 
 		/* PROFIL SETTINS */
 
@@ -902,37 +902,10 @@
 		$scope.browser = null;
 
 		$scope.detectBroswer = function() {
-            function getBrowser() {
-                var ua=navigator.userAgent,
-                    tem,
-                    M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*((\d|\.)+)/i) || [];
-
-                if(/trident/i.test(M[1])){
-                    tem=/\brv[ :]+(\d+)/g.exec(ua) || [];
-                    return {name:'IE',version:(tem[1]||'')};
-                }
-                if(M[1]==='Chrome'){
-                    tem=ua.match(/\bOPR|Edge\/(\d+)/);
-                    if(tem!=null)   {return {name:'Opera', versions:[tem[1]]};}
-                }
-                M=M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
-                if((tem=ua.match(/version\/(\d+)/i))!=null) {M.splice(1,1,tem[1]);}
-
-                var versions = [];
-                console.log(M[1]);
-                for(var i = 0; i < M[1].split('.').length; i++) {
-                    var version = M[1].split('.')[i];
-                    versions[i] = ((typeof versions[i - 1] != 'undefined') ? versions[i - 1] + '.' : '') + version;
-                }
-
-                return {
-                    name: M[0].toLowerCase(),
-                    versions: versions
-                };
-            }
-            var browser = getBrowser();
-
-            $scope.browser = browser.name + ' ' + browser.name + '-' + browser.versions.join(' ' + browser.name + '-');
+            $scope.browser = [
+                bowser.name.replace(' ', '-').toLowerCase() + '-' + bowser.version,
+                (bowser.mac ? 'mac-os-' + (bowser.osversion ? bowser.osversion : '') : 'windows-' + (bowser.osversion ? bowser.osversion : ''))
+            ].join(' ');
 		};
 
 		$scope.detectBroswer();
