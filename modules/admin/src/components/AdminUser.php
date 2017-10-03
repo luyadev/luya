@@ -58,7 +58,7 @@ class AdminUser extends User
     
     public function uniqueHostVariable($key)
     {
-    	return '__luyaAdmin_' . md5(Yii::$app->id) . '_' . $key;
+        return '__luyaAdmin_' . md5(Yii::$app->id) . '_' . $key;
     }
 
     /**
@@ -72,21 +72,21 @@ class AdminUser extends User
     
     public function getSecureSessionId()
     {
-    	if (Yii::$app->request->isAdmin) {
-    		return Yii::$app->session->get($this->uniqueHostVariable('secureSessionId'));
-    	}
+        if (Yii::$app->request->isAdmin) {
+            return Yii::$app->session->get($this->uniqueHostVariable('secureSessionId'));
+        }
     }
     
     public function destroySecureSessionId()
     {
-    	Yii::$app->session->remove($this->uniqueHostVariable('secureSessionId'));
+        Yii::$app->session->remove($this->uniqueHostVariable('secureSessionId'));
     }
     
     public function setSecureSessionId($id)
     {
-    	if (Yii::$app->request->isAdmin) {
-    		Yii::$app->session->set($this->uniqueHostVariable('secureSessionId'), $id);
-    	}
+        if (Yii::$app->request->isAdmin) {
+            Yii::$app->session->set($this->uniqueHostVariable('secureSessionId'), $id);
+        }
     }
 
     /**

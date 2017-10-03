@@ -39,7 +39,7 @@ class Site extends NgRestModel
     {
         return [
             [['token', 'url'], 'required'],
-        	[['url'], 'url'],
+            [['url'], 'url'],
             [['auth_is_enabled'], 'integer'],
             [['token', 'url', 'auth_user', 'auth_pass'], 'string', 'max' => 120],
         ];
@@ -114,12 +114,12 @@ class Site extends NgRestModel
     
     /**
      * Get clickable url.
-     * 
+     *
      * @return string
      */
     public function getSafeUrl()
     {
-    	return rtrim($this->url, '/');
+        return rtrim($this->url, '/');
     }
     
     public function extraFields()
@@ -163,7 +163,7 @@ class Site extends NgRestModel
     
     /**
      * Boolean expression to On/Off message.
-     * 
+     *
      * @param unknown $value
      * @return string
      */
@@ -173,7 +173,7 @@ class Site extends NgRestModel
     }
     
     /**
-     * 
+     *
      * @param unknown $value
      * @param string $invert
      * @return string
@@ -189,7 +189,7 @@ class Site extends NgRestModel
     }
     
     /**
-     * 
+     *
      * @param unknown $version
      * @return string
      */
@@ -206,28 +206,28 @@ class Site extends NgRestModel
     
     public function requestLuyaVersion()
     {
-    	$curl = new Curl();
-    	$curl->get('https://packagist.org/packages/luyadev/luya-core.json');
-    	$json = Json::decode($curl->response);
-    	$curl->close();
-    	
-    	foreach ($json['package']['versions'] as $version =>  $package) {
-    		if ($version == 'dev-master' || !is_numeric(substr($version, 0, 1))) {
-    			continue;
-    		}
-    		
-    		return $package;
-    	}
+        $curl = new Curl();
+        $curl->get('https://packagist.org/packages/luyadev/luya-core.json');
+        $json = Json::decode($curl->response);
+        $curl->close();
+        
+        foreach ($json['package']['versions'] as $version =>  $package) {
+            if ($version == 'dev-master' || !is_numeric(substr($version, 0, 1))) {
+                continue;
+            }
+            
+            return $package;
+        }
     }
     
     /**
-     * 
+     *
      * @return unknown|boolean
      */
     public function getCurrentVersion()
     {
-        return $this->getOrSetHasCache([__CLASS__, 'luyaVersion'], function() {
-        	return $this->requestLuyaVersion();
+        return $this->getOrSetHasCache([__CLASS__, 'luyaVersion'], function () {
+            return $this->requestLuyaVersion();
         }, (60*60));
     }
 }

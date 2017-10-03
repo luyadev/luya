@@ -117,10 +117,10 @@ final class LoginForm extends Model
 
             Yii::$app->adminuser->setSecureSessionId($sessionId);
             
-			$login = new UserLogin([
+            $login = new UserLogin([
                 'auth_token' => $user->auth_token,
                 'user_id' => $user->id,
-				'session_id' => $sessionId,
+                'session_id' => $sessionId,
             ]);
             $login->save();
             UserOnline::refreshUser($user->id, 'login');

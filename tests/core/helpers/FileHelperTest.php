@@ -78,24 +78,24 @@ class FileHelperTest extends LuyaWebTestCase
     
     public function testClassInfo()
     {
-    	$ci = FileHelper::classInfo('<?php
+        $ci = FileHelper::classInfo('<?php
 namespace foo\bar;
 class BarFoo {}');
-    	
-    	$this->assertSame('foo\\bar', $ci['namespace']);
-    	$this->assertSame('BarFoo', $ci['class']);
-    	
-    	$ci = FileHelper::classInfo('<?php
+        
+        $this->assertSame('foo\\bar', $ci['namespace']);
+        $this->assertSame('BarFoo', $ci['class']);
+        
+        $ci = FileHelper::classInfo('<?php
 namespace foo\bar;   
 class BarFoo {}');
-    	$this->assertSame('foo\\bar', $ci['namespace']);
-    	$this->assertSame('BarFoo', $ci['class']);
-    	
-    	$ci = FileHelper::classInfo('
+        $this->assertSame('foo\\bar', $ci['namespace']);
+        $this->assertSame('BarFoo', $ci['class']);
+        
+        $ci = FileHelper::classInfo('
  namespace foo\bar;
 class BarFoo {}');
-    	
-    	$this->assertFalse($ci['namespace']);
-    	$this->assertFalse($ci['class']);
+        
+        $this->assertFalse($ci['namespace']);
+        $this->assertFalse($ci['class']);
     }
 }

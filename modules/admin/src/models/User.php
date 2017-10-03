@@ -345,7 +345,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
 
     /**
      * Finds a current user for a given email.
-     * 
+     *
      * @param string $email The email adresse to find the user from.
      * @return \yii\db\ActiveRecord|null
      */
@@ -356,7 +356,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
 
     /**
      * Validates the password for the current given user.
-     * 
+     *
      * @param string $password The plain user input password.
      * @return boolean
      */
@@ -367,12 +367,12 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     
     /**
      * Get the user logins for the given user.
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getUserLogins()
     {
-    	return $this->hasMany(UserLogin::class, ['user_id' => 'id']);
+        return $this->hasMany(UserLogin::class, ['user_id' => 'id']);
     }
 
     // IdentityInterface
@@ -382,7 +382,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
      */
     public static function findIdentity($id)
     {
-    	return static::find()->joinWith(['userLogins ul'])->andWhere(['admin_user.id' => $id, 'session_id' => Yii::$app->adminuser->getSecureSessionId(), 'ip' => Yii::$app->request->userIP])->one();
+        return static::find()->joinWith(['userLogins ul'])->andWhere(['admin_user.id' => $id, 'session_id' => Yii::$app->adminuser->getSecureSessionId(), 'ip' => Yii::$app->request->userIP])->one();
     }
 
     /**

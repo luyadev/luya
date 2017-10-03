@@ -56,8 +56,8 @@ class Text extends Plugin
      */
     public function onAfterFind($event)
     {
-    	if ($this->encoding) {
-    		$event->sender->setAttribute($this->name, Html::encode($event->sender->getAttribute($this->name)));
-    	}
+        if ($this->encoding) {
+            $event->sender->setAttribute($this->name, Html::encode($event->sender->getAttribute($this->name)));
+        }
     }
 }

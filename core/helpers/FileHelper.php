@@ -74,7 +74,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         if (is_file($file)) {
             $phpCode = file_get_contents($file);
         } else {
-        	$phpCode = $file;
+            $phpCode = $file;
         }
         
         $namespace = false;
@@ -90,7 +90,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     
     /**
      * Tokenize the php code from a given class in in order to determine the class name.
-     * 
+     *
      * @param string $phpCode The php code to tokenize and find the clas name from
      * @return array
      */

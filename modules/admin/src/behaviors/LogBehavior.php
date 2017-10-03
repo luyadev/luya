@@ -35,20 +35,20 @@ class LogBehavior extends Behavior
     }
     
     /**
-     * 
+     *
      * @param unknown $array
      * @return string
      */
     private function toJson($array)
     {
-    	$array = (array) $array;
-    	
-    	return Json::encode($array);
+        $array = (array) $array;
+        
+        return Json::encode($array);
     }
 
     /**
      * After Insert.
-     * 
+     *
      * @param \yii\db\AfterSaveEvent $event
      */
     public function eventAfterInsert($event)
@@ -62,16 +62,16 @@ class LogBehavior extends Behavior
                 'is_insert' => true,
                 'is_update' => false,
                 'attributes_json' => $this->toJson($event->sender->getAttributes()),
-            	'attributes_diff_json' => null,
-            	'table_name' => $event->sender->tableName(),
-            	'pk_value' => implode("-", $event->sender->getPrimaryKey(true)),
+                'attributes_diff_json' => null,
+                'table_name' => $event->sender->tableName(),
+                'pk_value' => implode("-", $event->sender->getPrimaryKey(true)),
             ])->execute();
         }
     }
 
     /**
      * After Update.
-     * 
+     *
      * @param \yii\db\AfterSaveEvent $event
      */
     public function eventAfterUpdate($event)
@@ -85,9 +85,9 @@ class LogBehavior extends Behavior
                 'is_insert' => false,
                 'is_update' => true,
                 'attributes_json' => $this->toJson($event->sender->getAttributes()),
-            	'attributes_diff_json' => $this->toJson($event->changedAttributes),
-            	'table_name' => $event->sender->tableName(),
-            	'pk_value' => implode("-", $event->sender->getPrimaryKey(true)),
+                'attributes_diff_json' => $this->toJson($event->changedAttributes),
+                'table_name' => $event->sender->tableName(),
+                'pk_value' => implode("-", $event->sender->getPrimaryKey(true)),
             ])->execute();
         }
     }
