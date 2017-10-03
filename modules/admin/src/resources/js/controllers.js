@@ -1,6 +1,6 @@
 (function() {
 	"use strict";
-	
+
 	zaa.config(function($stateProvider, resolverProvider) {
 		$stateProvider
 		.state("default.route.detail", {
@@ -8,9 +8,9 @@
 			parent: 'default.route',
 			template: '<ui-view/>',
 			controller:function($scope, $stateParams) {
-				
+
 				$scope.crud = $scope.$parent;
-				
+
 				$scope.init = function() {
 					if (!$scope.crud.config.inline) {
 						if ($scope.crud.data.updateId != $stateParams.id) {
@@ -18,28 +18,28 @@
 						}
 					}
 				}
-				
+
 				$scope.init();
 			}
 		});
 	});
-	
+
 	zaa.controller("DefaultDashboardObjectController", function($scope, $http, $sce) {
-		
+
 		$scope.data;
-		
+
 		$scope.loadData = function(dataApiUrl) {
 			$http.get(dataApiUrl).then(function(success) {
 				$scope.data = success.data;
 			});
 		};
 	});
-	
+
 	/**
 	 * Base Crud Controller
-	 * 
+	 *
 	 * Assigned config variables from the php view assigned from child to parent:
-	 * 
+	 *
 	 * + bool $config.inline Determines whether this crud is in inline mode orno
 	 */
 	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, $injector, $q, AdminLangService, LuyaLoading, AdminToastService, CrudTabService) {
@@ -47,78 +47,78 @@
 		$scope.toast = AdminToastService;
 
 		$scope.AdminLangService = AdminLangService;
-		
+
 		$scope.tabService = CrudTabService;
-		
+
 		/***** TABS AND SWITCHES *////
-		
+
 		/**
 		 * 0 = list
 		 * 1 = add
 		 * 2 = edit
 		 */
 		$scope.crudSwitchType = 0;
-		
+
 		$scope.switchToTab = function(tab) {
 			angular.forEach($scope.tabService.tabs, function(item) {
 				item.active = false;
 			});
-			
+
 			tab.active = true;
-			
+
 			$scope.switchTo(4);
 		};
-		
+
 		$scope.closeTab = function(tab, index) {
 			$scope.tabService.remove(index, $scope);
 		};
-		
+
 		$scope.switchTo = function(type, reset) {
 			if ($scope.config.relationCall) {
 				$scope.crudSwitchType = type;
 				return;
 			}
-			
+
 			if (reset) {
 				$scope.resetData();
 			}
-			
+
 			if (type == 0) {
 				$http.get($scope.config.apiEndpoint + '/unlock');
 			}
-			
+
 			if (type == 0 || type == 1) {
 				if (!$scope.config.inline) {
 					$state.go('default.route');
 				}
 			}
 			$scope.crudSwitchType = type;
-			
+
 			if (type !== 4) {
 				angular.forEach($scope.tabService.tabs, function(item) {
 					item.active = false;
 				});
 			}
 		};
-		
+
 		$scope.closeUpdate = function () {
 			$scope.switchTo(0, true);
 	    };
-		
+
 		$scope.closeCreate = function() {
 			$scope.switchTo(0, true);
 		};
-		
+
 		$scope.activeWindowModal = true;
-		
+
 		$scope.openActiveWindow = function() {
 			$scope.activeWindowModal = false;
 		};
-		
+
 		$scope.closeActiveWindow = function() {
 			$scope.activeWindowModal = true;
 		};
-		
+
 		$scope.changeGroupByField = function() {
 			if ($scope.config.groupByField == 0) {
 				$scope.config.groupBy = 0;
@@ -126,15 +126,15 @@
 				$scope.config.groupBy = 1;
 			}
 		};
-		
+
 		/********** EXPORT *////
-		
+
 		$scope.exportLoading = false;
-		
+
 		$scope.exportResponse = false;
-		
+
 		$scope.exportDownloadButton = false;
-		
+
 		$scope.exportData = function() {
 			$scope.exportLoading = true;
 			$http.get($scope.config.apiEndpoint + '/export').then(function(response) {
@@ -143,53 +143,53 @@
 				$scope.exportDownloadButton = true;
 			});
 		};
-		
+
 		$scope.exportDownload = function() {
 			$scope.exportDownloadButton = false;
 			window.open($scope.exportResponse.url);
 			return false;
 		};
-		
+
 		$scope.applySaveCallback = function() {
 			if ($scope.config.saveCallback) {
 				$injector.invoke($scope.config.saveCallback, this);
 			}
 		};
-		
+
 		$scope.showCrudList = true;
-		
+
 		/*********** ORDER **********/
-		
+
 		$scope.isOrderBy = function(field) {
 			if (field == $scope.config.orderBy) {
 				return true;
 			}
-			
+
 			return false;
 		};
-		
+
 		$scope.changeOrder = function(field, sort) {
 			$scope.config.orderBy = sort + field;
-			
+
 			$http.post('admin/api-admin-common/ngrest-order', {'apiEndpoint' : $scope.config.apiEndpoint, sort: sort, field: field}, { ignoreLoadingBar: true });
-			
+
 			if ($scope.pager && !$scope.config.pagerHiddenByAjaxSearch) {
 				$scope.loadList(1);
 			} else {
 				$scope.data.listArray = $filter('orderBy')($scope.data.listArray, sort + field);
 			}
 		};
-		
+
 		$scope.reApplyOrder = function() {
 			$scope.data.listArray = $filter('orderBy')($scope.data.listArray, $scope.config.orderBy);
 		};
-		
+
 		/***************** ACTIVE WINDOW *********/
-		
+
 		$scope.activeWindowReload = function() {
 			$scope.getActiveWindow($scope.data.aw.hash, $scope.data.aw.itemId);
 		}
-		
+
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {
 			$http.post($scope.config.activeWindowRenderUrl, $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -205,11 +205,11 @@
 				$scope.$broadcast('awloaded', {id: activeWindowId});
 			})
 		};
-	
+
 		$scope.getActiveWindowCallbackUrl = function(callback) {
 			return $scope.data.aw.configCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + $scope.data.aw.configHash + '&activeWindowHash=' + $scope.data.aw.hash;
 		};
-		
+
 		/**
 		 * new returns a promise promise.hten(function(answer) {
 		 * 
@@ -218,7 +218,7 @@
 		 * }, function(progress) {
 		 * 
 		 * });
-		 * 
+		 *
 		 * instead of return variable
 		 */
 		$scope.sendActiveWindowCallback = function(callback, data) {
@@ -227,18 +227,18 @@
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			});
 		};
-		
+
 		/*************** SEARCH ******************/
-		
+
 
 		$scope.$watch('config.searchQuery', function(n, o) {
 			if (n == o || n == undefined || n == null) {
 				return;
 			}
-			
+
 			$scope.applySearchQuery(n);
 		});
-		
+
 		$scope.applySearchQuery = function(n) {
 			if (n == undefined || n == null) {
 				return;
@@ -251,11 +251,11 @@
 					$scope.config.pagerHiddenByAjaxSearch = false;
 				} else {
 					$timeout.cancel($scope.searchPromise);
-					
+
 					if (blockRequest) {
 						return;
 					}
-					
+
 					$scope.searchPromise = $timeout(function() {
 						blockRequest = true;
 						$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).then(function(response) {
@@ -271,22 +271,22 @@
 				$scope.data.listArray = $filter('filter')($scope.data.list, n);
 			}
 		};
-		
+
 		$scope.reApplySearch = function() {
 			$scope.applySearchQuery($scope.config.searchQuery);
 		}
-		
+
 		/******* RELATION CALLLS *********/
 
-		
+
 		$scope.parentSelectInline = function(item) {
 			$scope.$parent.$parent.$parent.setModelValue($scope.getRowPrimaryValue(item), item);
 		};
-		
+
 		$scope.relationItems = [];
-		
+
 		/****** DELETE, UPDATE, CREATE */
-		
+
 		$scope.deleteItem = function(id, $event) {
 			AdminToastService.confirm(i18n['js_ngrest_rm_page'], i18n['ngrest_button_delete'], function($timeout, $toast) {
 				$http.delete($scope.config.apiEndpoint + '/'+id).then(function(response) {
@@ -298,15 +298,15 @@
 				});
 			});
 		};
-		
+
 		$scope.toggleUpdate = function(id) {
 			$scope.resetData();
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).then(function(response) {
 				var data = response.data;
 				$scope.data.update = data;
-				
+
 				if ($scope.config.relationCall) {
-					
+
 					$scope.crudSwitchType = 2;
 				} else {
 					$scope.switchTo(2);
@@ -319,7 +319,7 @@
 				AdminToastService.error(i18n['js_ngrest_error'], 2000);
 			});
 		};
-		
+
 		$scope.submitUpdate = function () {
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).then(function(response) {
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
@@ -331,14 +331,14 @@
 				$scope.printErrors(response.data);
 			});
 		};
-		
-		
+
+
 		$scope.submitCreate = function() {
-			
+
 			if ($scope.config.relationCall) {
 				//$scope.data.create[$scope.relationCall.field] = parseInt($scope.relationCall.id);
 			}
-			
+
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).then(function(response) {
 				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
 				$scope.loadList();
@@ -354,38 +354,38 @@
 				AdminToastService.error(value.message, 4500);
 			});
 		};
-		
+
 		$scope.resetData = function() {
 			$scope.data.create = angular.copy({});
 			$scope.data.update = angular.copy({});
 		};
-		
+
 		/****** HIGHLIHGED ****/
-		
+
 		$scope.highlightId = 0;
-		
+
 		$scope.isHighlighted = function(itemId) {
 			if (itemId[$scope.config.pk] == $scope.highlightId) {
 				return true;
 			}
-			
+
 			return false;
 		};
-		
+
 		$scope.highlightItemId = function(id) {
 			$scope.highlightId = id;
 			$timeout(function() {
 				$scope.highlightId = 0;
 			}, 3000);
 		}
-		
+
 		$scope.changeNgRestFilter = function() {
 			$http.post('admin/api-admin-common/ngrest-filter', {'apiEndpoint' : $scope.config.apiEndpoint, 'filterName': $scope.config.filter}, { ignoreLoadingBar: true });
 			$scope.loadList();
 		}
-		
+
 		/*
-		
+
 		$scope.$watch('config.filter', function(n, o) {
 			if (n != o && n != undefined) {
 				$scope.blockFilterSeriveReload = true;
@@ -394,34 +394,34 @@
 			}
 		})
 		*/
-		
-		
-		
+
+
+
 		/*** PAGINIATION ***/
-		
+
 		$scope.pagerPrevClick = function() {
 			if ($scope.pager.currentPage != 1) {
 				$scope.loadList(parseInt($scope.pager.currentPage)-1);
 			}
 		};
-		
+
 		$scope.pagerNextClick = function() {
 			if ($scope.pager.currentPage != $scope.pager.pageCount) {
 				$scope.loadList(parseInt($scope.pager.currentPage)+1);
 			}
 		};
-		
+
 		$scope.pager = false;
-		
+
 		$scope.setPagination = function(currentPage, pageCount, perPage, totalItems) {
 			if (currentPage != null && pageCount != null && perPage != null && totalItems != null) {
-				
+
 				var i = 1;
 				var urls = [];
 				for (i = 1; i <= pageCount; i++) {
 					urls.push(i);
 				}
-				
+
 				$scope.pager = {
 					'currentPage': currentPage,
 					'pageCount': pageCount,
@@ -433,10 +433,10 @@
 				$scope.pager = false;
 			}
 		};
-		
+
 		/***** TOGGLER PLUGIN *****/
-		
-		
+
+
 		$scope.toggleStatus = function(row, fieldName, fieldLabel, bindValue) {
 			var invertValue = !bindValue;
 			var invert = invertValue ? 1 : 0;
@@ -451,23 +451,23 @@
 				$scope.printErrors(data);
 			});
 		};
-		
+
 		/**** SORTABLE PLUGIN ****/
-		
+
 		$scope.sortableUp = function(index, row, fieldName) {
 			var switchWith = $scope.data.listArray[index-1];
 			$scope.data.listArray[index-1] = row;
 			$scope.data.listArray[index] = switchWith;
 			$scope.updateSortableIndexPositions(fieldName);
 		};
-		
+
 		$scope.sortableDown = function(index, row, fieldName) {
 			var switchWith = $scope.data.listArray[index+1];
 			$scope.data.listArray[index+1] = row;
 			$scope.data.listArray[index] = switchWith;
 			$scope.updateSortableIndexPositions(fieldName);
 		};
-		
+
 		$scope.updateSortableIndexPositions = function(fieldName) {
 			angular.forEach($scope.data.listArray, function(value, key) {
 				var json = {};
@@ -478,30 +478,30 @@
 				});
 			});
 		};
-		
+
 		/***** LIST LOADERS ********/
-		
+
 		/**
 		 * This method is triggerd by the crudLoader directive to reload service data.
 		 */
 		$scope.loadService = function() {
 			$scope.initServiceAndConfig();
 		};
-		
+
 		$scope.evalSettings = function(settings) {
 			if (settings.hasOwnProperty('order')) {
 				$scope.config.orderBy = settings['order'];
 			}
-			
+
 			if (settings.hasOwnProperty('filterName')) {
 				$scope.config.filter = settings['filterName'];
 			}
 		};
-		
+
 		$scope.getRowPrimaryValue = function(row) {
 			return row[$scope.config.pk];
 		};
-		
+
 		$scope.initServiceAndConfig = function() {
 			var deferred = $q.defer();
 			$http.get($scope.config.apiEndpoint + '/services').then(function(serviceResponse) {
@@ -510,18 +510,18 @@
 				$scope.evalSettings(serviceResponse.data._settings);
 				deferred.resolve();
 			});
-			
+
 			return deferred.promise;
 		};
-		
+
 		$scope.getFieldHelp = function(fieldName) {
 			if ($scope.serviceResponse && $scope.serviceResponse['_hints'] && $scope.serviceResponse._hints.hasOwnProperty(fieldName)) {
 				return $scope.serviceResponse._hints[fieldName];
 			}
-			
+
 			return false;
 		}
-		
+
 		$scope.loadList = function(pageId) {
 			if (pageId == undefined && $scope.pager) {
 				$scope.reloadCrudList($scope.pager.currentPage);
@@ -529,7 +529,7 @@
 				$scope.reloadCrudList(pageId);
 			}
 		};
-		
+
 		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
 		$scope.reloadCrudList = function(pageId) {
 			if (parseInt($scope.config.filter) == 0) {
@@ -539,7 +539,7 @@
 				} else {
 					var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
 				}
-				
+
 				if (pageId !== undefined) {
 					url = url + '&page=' + pageId;
 				}
@@ -581,11 +581,11 @@
 				});
 			}
 		};
-		
+
 		$scope.service = false;
-		
+
 		/***** CONFIG AND INIT *****/
-		
+
 		$scope.data = {
 			create : {},
 			update : {},
@@ -593,7 +593,7 @@
 			list : {},
 			updateId : 0
 		};
-		
+
 		$scope.$watch('config', function(n, o) {
 			$timeout(function() {
 				$scope.initServiceAndConfig().then(function() {
@@ -602,25 +602,25 @@
 			})
 		});
 	});
-	
+
 // activeWindowController.js
-	
+
 	zaa.controller("ActiveWindowTagController", function($scope, $http, AdminToastService) {
 
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
-		
+
 		$scope.tags = [];
-		
+
 		$scope.relation = {};
-		
+
 		$scope.newTagName = null;
-		
+
 		$scope.loadTags = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadTags')).then(function(transport) {
 				$scope.tags = transport.data;
 			});
 		};
-		
+
 		$scope.loadRelations = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadRelations')).then(function(transport) {
 				$scope.relation = {};
@@ -629,7 +629,7 @@
 				});
 			});
 		};
-		
+
 		$scope.saveTag = function() {
 			var tagName = $scope.newTagName;
 
@@ -645,7 +645,7 @@
 				});
 			}
 		};
-		
+
 		$scope.saveRelation = function(tag, value) {
 			$scope.crud.sendActiveWindowCallback('SaveRelation', {'tagId': tag.id, 'value': value}).then(function(response) {
 
@@ -654,33 +654,33 @@
 				AdminToastService.success(i18n['js_tag_success'], 2000);
 			});
 		};
-		
+
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.loadRelations();
 		});
-		
+
 		$scope.loadTags();
-		
+
 	});
-	
+
 	/**
 	 * ActiveWindow GalleryController
-	 * 
+	 *
 	 * Ability to upload images, removed images from index, add new images via selecting from
 	 * filemanager.
-	 * 
+	 *
 	 * Changes content when parent crud controller changes value for active aw.itemId.
 	 */
 	zaa.controller("ActiveWindowGalleryController", function($scope, $http) {
-		
+
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
-		
+
 		$scope.files = {};
-		
+
 		$scope.isEmptyObject = function(files) {
 			return angular.equals({}, files);
 		};
-		
+
 		$scope.select = function(id) {
 			if (!(id in $scope.files)) {
 				$scope.crud.sendActiveWindowCallback('AddImageToIndex', {'fileId' : id }).then(function(response) {
@@ -689,7 +689,7 @@
 				});
 			}
 		};
-		
+
 		$scope.loadImages = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('loadAllImages')).then(function(response) {
 				$scope.files = {}
@@ -698,91 +698,91 @@
 				});
 			})
 		};
-		
+
 		$scope.remove = function(file) {
 			$scope.crud.sendActiveWindowCallback('RemoveFromIndex', {'imageId' : file.id }).then(function(response) {
 				delete $scope.files[file.fileId];
 			});
 		};
-		
+
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.loadImages();
 		});
-		
+
 	});
-	
+
 	zaa.controller("ActiveWindowGroupAuth", function($scope, $http, CacheReloadService) {
-		
+
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
-		
+
 		$scope.reload = function() {
 			CacheReloadService.reload();
 		};
-		
+
 		$scope.rights = [];
-		
+
 		$scope.auths = [];
-		
+
 		$scope.save = function(data) {
 			$scope.crud.sendActiveWindowCallback('saveRights', {'data' : data }).then(function(response) {
 				$scope.getRights();
 				$scope.reload();
 			});
 		};
-		
+
 		$scope.toggleAll = function() {
 			angular.forEach($scope.auths,function(value, key) {
 				$scope.rights[value.id] = {base: 1, create: 1, update: 1, 'delete': 1 };
 			});
 		};
-		
+
 		$scope.untoggleAll = function() {
 			angular.forEach($scope.auths,function(value, key) {
 				$scope.rights[value.id] = {base: 0, create: 0, update: 0, 'delete': 0 };
 			});
 		};
-		
+
 		$scope.getRights = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('getRights')).then(function(response) {
 				$scope.rights = response.data.rights;
 				$scope.auths = response.data.auths;
 			});
 		};
-		
+
 		$scope.$on('awloaded', function(e, d) {
 			$scope.getRights();
 		});
-		
+
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.getRights();
 		});
 	});
-	
+
 // DefaultController.js.
-	
+
 	zaa.controller("DefaultController", function ($scope, $http, $state, $stateParams, CrudTabService) {
-		
+
 		$scope.moduleId = $state.params.moduleId;
-		
+
 		$scope.loadDashboard = function() {
 			$scope.currentItem = null;
 			return $state.go('default', { 'moduleId' : $scope.moduleId});
 		}
-		
+
 		$scope.isOpenModulenav = false;
-		
+
 		$scope.items = [];
-		
+
 		$scope.itemRoutes = [];
-		
+
 		$scope.currentItem = null;
-		
+
 		$scope.dashboard = [];
-		
+
 		$scope.itemAdd = function (name, items) {
-			
+
 			$scope.items.push({name : name, items : items});
-			
+
 			for(var i in items) {
 				var data = items[i];
 				$scope.itemRoutes[data.route] = {
@@ -790,18 +790,18 @@
 				}
 			}
 		};
-		
+
 		$scope.getDashboard = function(nodeId) {
 			$http.get('admin/api-admin-menu/dashboard', { params : { 'nodeId' : nodeId }} ).then(function(data) {
 				$scope.dashboard = data.data;
 			});
 		};
-		
+
 		$scope.init = function() {
 			$scope.get();
 			$scope.getDashboard($scope.moduleId);
 		};
-		
+
 		$scope.resolveCurrentItem = function() {
 			if (!$scope.currentItem) {
 				if ($state.current.name == 'default.route' || $state.current.name == 'default.route.detail') {
@@ -814,40 +814,40 @@
 				}
 			}
 		};
-		
+
 		$scope.click = function(item) {
 			$scope.isOpenModulenav = false;
 			$scope.currentItem = item;
-			
+
 			var id = item.route;
 			var res = id.split("/");
 			CrudTabService.clear();
-			
+
 			$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]});
 		};
-		
+
 		$scope.get = function () {
 			$http.get('admin/api-admin-menu/items', { params : { 'nodeId' : $scope.moduleId }} ).then(function(response) {
 				var data = response.data;
 				for (var itm in data.groups) {
-					var grp = data.groups[itm];				
+					var grp = data.groups[itm];
 					$scope.itemAdd(grp.name, grp.items);
 				}
 				$scope.resolveCurrentItem();
 			})
 		};
-		
+
 		$scope.$on('topMenuClick', function(e) {
 			$scope.currentItem = null;
 		});
-		
+
 		$scope.init();
 	});
-	
+
 	zaa.controller("DashboardController", function ($scope) {
 		$scope.logItemOpen = false;
 	});
-	
+
 	zaa.filter('lockFilter', function() {
 		return function(data, table, pk) {
 			var has = false;
@@ -856,103 +856,122 @@
 					has = true;
 				}
 			});
-			
+
 			return has;
         };
 	});
-	
+
 	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, $filter, HtmlStorage, CacheReloadService, AdminDebugBar, LuyaLoading, AdminToastService, AdminClassService) {
-	
+
 		$scope.AdminClassService = AdminClassService;
-		
+
 		$scope.AdminDebugBar = AdminDebugBar;
-		
+
 		$scope.LuyaLoading = LuyaLoading;
-		
+
 		$scope.toastQueue = AdminToastService.queue;
-		
+
 		$scope.reload = function() {
 			CacheReloadService.reload();
 		};
-	
+
 		/* Main nav sidebar toggler */
-		
+
 		$scope.isHover = HtmlStorage.getValue('sidebarToggleState', false);
-		
+
 		$scope.toggleMainNavSize = function() {
 			$scope.isHover = !$scope.isHover;
 			HtmlStorage.setValue('sidebarToggleState', $scope.isHover);
 		}
-		
+
 		/* PROFIL SETTINS */
-		
+
 		$scope.profile = {};
 
 		$scope.settings = {};
-		
+
 		$scope.getProfileAndSettings = function() {
 			$http.get('admin/api-admin-user/session').then(function(success) {
 				$scope.profile = success.data.user;
 				$scope.settings  = success.data.settings;
 			});
 		};
-		
+
 		/* Browser infos */
 
 		$scope.browser = null;
 
 		$scope.detectBroswer = function() {
-            var ua = window.navigator.userAgent;
-            var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
-            //var webkit = !!ua.match(/WebKit/i);
-            var iOSSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            function getBrowser() {
+                var ua=navigator.userAgent,
+                    tem,
+                    M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*((\d|\.)+)/i) || [];
 
-            if (iOS) {
-				$scope.browser = "os-ios";
-            } else if (iOSSafari) {
-                $scope.browser = "browser-safari";
-            } else {
-            	$scope.browser = "unknown";
-			}
-		}
+                if(/trident/i.test(M[1])){
+                    tem=/\brv[ :]+(\d+)/g.exec(ua) || [];
+                    return {name:'IE',version:(tem[1]||'')};
+                }
+                if(M[1]==='Chrome'){
+                    tem=ua.match(/\bOPR|Edge\/(\d+)/);
+                    if(tem!=null)   {return {name:'Opera', versions:[tem[1]]};}
+                }
+                M=M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+                if((tem=ua.match(/version\/(\d+)/i))!=null) {M.splice(1,1,tem[1]);}
+
+                var versions = [];
+                console.log(M[1]);
+                for(var i = 0; i < M[1].split('.').length; i++) {
+                    var version = M[1].split('.')[i];
+                    versions[i] = ((typeof versions[i - 1] != 'undefined') ? versions[i - 1] + '.' : '') + version;
+                }
+
+                return {
+                    name: M[0].toLowerCase(),
+                    versions: versions
+                };
+            }
+            var browser = getBrowser();
+
+            $scope.browser = browser.name + ' ' + browser.name + '-' + browser.versions.join(' ' + browser.name + '-');
+		};
 
 		$scope.detectBroswer();
-		
+
 		$scope.getProfileAndSettings();
-		
+
 		$scope.debugDetail = null;
-		
+
 		$scope.debugDetailKey = null;
-		
+
 		$scope.loadDebugDetail = function(debugDetail, key) {
 			$scope.debugDetail = debugDetail;
 			$scope.debugDetailKey = key;
-		}
-		
+		};
+
 		/*
 		$scope.sidePanelUserMenu = false;
-		
+
 		$scope.sidePanelHelp = false;
-		
+
 		$scope.toggleHelpPanel = function() {
 			$scope.sidePanelHelp = !$scope.sidePanelHelp;
 			$scope.sidePanelUserMenu = false;
 		};
-		
+
 		$scope.toggleUserPanel = function() {
 			$scope.sidePanelUserMenu = !$scope.sidePanelUserMenu;
 			$scope.sidePanelHelp = false;
 		};
-		
+
 	    $scope.userMenuOpen = false;
 	    */
-	
+
 		$scope.notify = null;
-		
+
 		$scope.forceReload = 0;
-		
+
 		$scope.showOnlineContainer = false;
-		
+
 		$scope.searchDetailClick = function(itemConfig, itemData) {
 			if (itemConfig.type == 'custom') {
 				$scope.click(itemConfig.menuItem).then(function() {
@@ -961,7 +980,7 @@
 						angular.forEach(itemConfig.stateProvider.params, function(value, key) {
 							params[key] = itemData[value];
 						})
-						
+
 						$state.go(itemConfig.stateProvider.state, params).then(function() {
 							$scope.closeSearchInput();
 						})
@@ -969,7 +988,7 @@
 						$scope.closeSearchInput();
 					}
 				});
-				
+
 			} else {
 				$scope.click(itemConfig.menuItem.module).then(function() {
 					var res = itemConfig.menuItem.route.split("/");
@@ -989,9 +1008,9 @@
 				});
 			}
 		};
-		
+
 		$scope.visibleAdminReloadDialog = false;
-		
+
 		(function tick(){
 			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).then(function(response) {
 				$scope.forceReload = response.data.forceReload;
@@ -1002,43 +1021,43 @@
 						$scope.visibleAdminReloadDialog = false;
 					});
 				}
-				
+
 				$scope.locked = response.data.locked;
 				$scope.notify = response.data.useronline;
 				$timeout(tick, 20000);
 			})
 		})();
-		
+
 		$scope.isLocked = function(table, pk) {
 			return $filter('lockFilter')($scope.locked, table, pk);
 		}
-		
+
 		$scope.searchQuery = null;
-	
+
 	    $scope.searchInputOpen = false;
-	
+
 	    $scope.escapeSearchInput = function() {
 	        if ($scope.searchInputOpen) {
 	            $scope.closeSearchInput();
 	        }
 	    };
-	
+
 	    $scope.toggleSearchInput = function() {
 	    	$scope.searchInputOpen = !$scope.searchInputOpen;
 	    };
-	    
+
 	    $scope.openSearchInput = function() {
 	        $scope.searchInputOpen = true;
 	    };
-	
+
 	    $scope.closeSearchInput = function() {
 	        $scope.searchInputOpen = false;
 	    };
-		
+
 		$scope.searchResponse = null;
-		
+
 		$scope.searchPromise = null;
-	
+
 		$scope.$watch(function() { return $scope.searchQuery}, function(n, o) {
 			if (n !== o) {
 				if (n.length > 2) {
@@ -1053,13 +1072,13 @@
 				}
 			}
 		});
-		
+
 		$scope.items = [];
-		
+
 		$scope.currentItem = {};
-		
+
 		$scope.isOpen = false;
-		
+
 		$scope.click = function(menuItem) {
 			$scope.isOpen = false;
 			$scope.$broadcast('topMenuClick', { menuItem : menuItem });
@@ -1069,7 +1088,7 @@
 				return $state.go('default', { 'moduleId' : menuItem.id});
 			}
 		};
-		
+
 		$scope.isActive = function(item) {
 			if (item.template) {
 				if ($state.params.templateId == item.template) {
@@ -1083,16 +1102,16 @@
 				}
 			}
 		};
-		
+
 		$scope.get = function () {
 			$http.get('admin/api-admin-menu').then(function(response) {
 				$scope.items = response.data;
 			});
 		};
-		
+
 		$scope.get();
 	});
-	
+
 	zaa.controller("AccountController", function($scope, $http, $window, AdminToastService) {
 		$scope.changePassword = function(pass) {
 			$http.post('admin/api-admin-user/change-password', pass).then(function(response) {
@@ -1101,23 +1120,23 @@
 				AdminToastService.errorArray(error.data, 3000);
 			});
 		};
-		
+
 		$scope.changeSettings = function(settings) {
 			$http.post('admin/api-admin-user/change-settings', settings).then(function(response) {
 				$window.location.reload();
 			});
 		};
-		
+
 		$scope.profile = {};
 		$scope.settings = {};
-		
+
 		$scope.getProfile = function() {
 			$http.get('admin/api-admin-user/session').then(function(success) {
 				$scope.profile = success.data.user;
 				$scope.settings  = success.data.settings;
 			});
 		};
-		
+
 		$scope.changePersonData = function(data) {
 			$http.put('admin/api-admin-user/session-update', data).then(function(success) {
 				AdminToastService.success(i18n['js_account_update_profile_success'], 5000);
@@ -1125,7 +1144,7 @@
 				AdminToastService.errorArray(error.data, 3000);
 			});
 		};
-		
+
 		$scope.getProfile();
 	});
 })();
