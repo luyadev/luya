@@ -78,6 +78,10 @@
     user-select: none;
 }
 
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, .15);
+}
+
 // Copied from bootstrap to show table-responsive earlier
 
 .table-responsive {

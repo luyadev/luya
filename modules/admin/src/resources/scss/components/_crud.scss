@@ -68,75 +68,84 @@
 }
 
 .crud-buttons-column {
-    width: 50px;
     position: relative;
+    width: 50px;
 }
 
 .crud-buttons {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
     cursor: pointer;
-    background-color: color(gray);
+    display: inline-block;
     font-size: 24px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 
     &:hover,
     &:focus {
-        // background-color: lighten(color(gray), 10);
-        background-color: theme-color(primary);
+        background-color: color(gray);
     }
 }
 
 .crud-buttons-toggler {
+    color: color(gray);
+    left: 50%;
     position: absolute;
     top: 50%;
-    left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    color: $white;
+
+    .crud-buttons:hover &,
+    .crud-buttons:focus & {
+        color: $white;
+    }
 }
 
 .crud-buttons-pan {
-    position: absolute;
-    left: 0;
-    transform: translateX(-100%);
-    transition: .25s ease-in-out opacity, .25s ease-in-out z-index;
-    display: block;
-    padding: 0;
-    top: 0;
+    background-color: color(gray);
     bottom: 0;
-    text-align: right;
-    opacity: 0;
-    background-color: $white;
+    display: block;
     font-size: 0;
+    left: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    text-align: right;
+    top: 0;
+    transform: translateX(-100%);
     white-space: nowrap;
     z-index: -1;
 
     .crud-buttons:hover &,
-    .crud-buttons:focus  & {
+    .crud-buttons:focus & {
         opacity: 1;
         z-index: 100;
+    }
+
+    &:before {
+        bottom: -30px;
+        content: "";
+        display: block;
+        left: -40px;
+        position: absolute;
+        right: 0;
+        top: -30px;
     }
 }
 
 .crud-buttons-button {
-    position: relative;
-    border: none;
-    height: 100%;
-    vertical-align: top;
-    font-size: 16px;
     background-color: transparent;
+    border: none;
+    color: $white;
+    font-size: 16px;
+    height: 100%;
     padding: 5px 15px;
+    position: relative;
     transition: .25s ease-in-out background-color;
-
-    &:not(:first-of-type) {
-        border-left: 1px solid $black;
-    }
+    vertical-align: top;
 
     &:hover {
-        background-color: map_get($grays, 500);
+        background-color: map_get($grays, 800);
     }
 
     i {

@@ -160,7 +160,7 @@ $this->beginBody();
                         <td class="crud-buttons-column" ng-hide="isLocked(config.tableName, item[config.pk])">
                             <?php if (count($this->context->getButtons()) > 0): ?>
                                 <div class="crud-buttons">
-                                    <i class="crud-buttons-toggler material-icons">menu</i>
+                                    <i class="crud-buttons-toggler material-icons">more_vert</i>
                                     <div class="crud-buttons-pan">
                                         <?php foreach ($this->context->getButtons() as $item): ?>
                                             <button type="button" class="crud-buttons-button" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i><?php if (!empty($item["label"])): echo "<span class=\"btn-crud-label\">". $item["label"] .  "</span>"; endif; ?></span></button>
