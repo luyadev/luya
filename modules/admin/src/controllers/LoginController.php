@@ -102,6 +102,8 @@ class LoginController extends Controller
                     if ($model->sendSecureLogin()) {
                         Yii::$app->session->set('secureId', $model->getUser()->id);
                         return ['refresh' => false, 'errors' => false, 'enterSecureToken' => true];
+                    } else {
+                    	return ['refresh' => false, 'errors' => ['Unable to send and store secure token.'], 'enterSecureToken' => false];
                     }
                 } else {
                     if (Yii::$app->adminuser->login($userObject)) {

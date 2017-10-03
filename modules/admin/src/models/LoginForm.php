@@ -68,12 +68,13 @@ final class LoginForm extends Model
     {
         $token = $this->getUser()->getAndStoreToken();
 
-        Yii::$app->mail->compose(Module::t('login_securetoken_mail_subject'), Module::t('login_securetoken_mail', [
-            'url' => Url::base(true),
-            'token' => $token,
-        ]))->address($this->user->email)->send();
-
-        return true;
+        return Yii::$app->mail
+        	->compose(Module::t('login_securetoken_mail_subject'), Module::t('login_securetoken_mail', [
+	            'url' => Url::base(true),
+	            'token' => $token,
+	        ]))
+        	->address($this->user->email)
+        	->send();
     }
 
     /**
