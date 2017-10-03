@@ -2,12 +2,12 @@
 
 namespace luya\components;
 
-use Yii;
-use luya\Exception;
 use PHPMailer;
 use SMTP;
-
+use Yii;
 use yii\base\Controller;
+use yii\base\Component;
+use luya\Exception;
 
 /**
  * LUYA mail component to compose messages and send them via SMTP.
@@ -33,7 +33,7 @@ use yii\base\Controller;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Mail extends \yii\base\Component
+class Mail extends Component
 {
     private $_mailer;
 
@@ -48,50 +48,14 @@ class Mail extends \yii\base\Component
     public $fromName = 'php@zephir.ch';
 
     /**
-     * @var string email server host address
+     * @var boolean When enabled the debug print is echoed directly into the frontend output, this is built in PHPMailer debug.
      */
-    public $host = 'mail.zephir.ch';
+    public $debug = false;
 
-    /**
-     * @var string email server username
-     */
-    public $username = 'php@zephir.ch';
-
-    /**
-     * @var string email server password
-     */
-    public $password; // insert password
-
-    /**
-     * @var bool disable if you want to use old PHP sendmail
-     */
-    public $isSMTP = true;
-
-    /**
-     * @var boolean Whether the SMTP requires authentication or not, if {{Mail::$isSMTP}} is disabled
-     * this property has no effect.
-     */
-    public $SMTPAuth = true;
-    
     /**
      * @var string alternate text message if email client doesn't support HTML
      */
     public $altBody = 'Please use a HTML compatible E-Mail-Client to read this E-Mail.';
-
-    /**
-     * @var int email server port
-     */
-    public $port = 587;
-
-    /**
-     * @var bool enable debug output mode 'Data and commands'
-     */
-    public $debug = false;
-    
-    /**
-     * @var string Posible values are `tls` or `ssl`
-     */
-    public $smtpSecure = 'tls';
     
     /**
      * @var string|boolean Define a layout template file which is going to be wrapped around the body()
@@ -110,6 +74,53 @@ class Mail extends \yii\base\Component
      * ```
      */
     public $layout = false;
+    
+    /**
+     * @var boolean Whether mailer sends mails trough an an smtp server or via php mail() function. In order to configure the smtp use:
+     *
+     * + {{Mail::$username}}
+     * + {{Mail::$password}}
+     * + {{Mail::$host}}
+     * + {{Mail::$port}}
+     * + {{Mail::$smtpSecure}}
+     * + {{Mail::$smtpAuth}}
+     */
+    public $isSMTP = true;
+
+    // smtp settings
+    
+    /**
+     * @var string The host adresse of the SMTP server for authentification, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     */
+    public $host = 'mail.zephir.ch';
+    
+    /**
+     * @var string The username which should be used for SMTP auth, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     */
+    public $username = 'php@zephir.ch';
+    
+    /**
+     * @var string The password which should be used for SMTP auth, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     */
+    public $password;
+    
+    /**
+     * @var integer The port which is used to connect to the SMTP server, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     */
+    public $port = 587;
+    
+    /**
+     * @var string Posible values are `tls` or `ssl` or empty ``, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     */
+    public $smtpSecure = 'tls';
+    
+    /**
+     * @var boolean Whether the SMTP requires authentication or not, if {{Mail::$isSMTP}} is disabled, this property has no effect. If
+     * enabled the following properties can be used:
+     * + {{Mail::$username}}
+     * + {{Mail::$password}}
+     */
+    public $smtpAuth = true;
     
     /**
      * Getter for the mailer object
@@ -133,7 +144,7 @@ class Mail extends \yii\base\Component
                 $this->_mailer->isSMTP();
                 $this->_mailer->SMTPSecure = $this->smtpSecure;
                 $this->_mailer->Host = $this->host;
-                $this->_mailer->SMTPAuth = $this->SMTPAuth;
+                $this->_mailer->smtpAuth = $this->smtpAuth;
                 $this->_mailer->Username = $this->username;
                 $this->_mailer->Password = $this->password;
                 $this->_mailer->Port = $this->port;
@@ -429,7 +440,12 @@ class Mail extends \yii\base\Component
         if (empty($this->mailer->Subject) || empty($this->mailer->Body)) {
             throw new Exception("Mail subject() and body() can not be empty in order to send mail.");
         }
-        return $this->getMailer()->send();
+        if (!$this->getMailer()->send()) {
+            Yii::error($this->getError(), __METHOD__);
+            return false;
+        }
+        
+        return true;
     }
 
     /**
