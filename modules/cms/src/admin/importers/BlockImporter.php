@@ -114,6 +114,8 @@ class BlockImporter extends Importer
     {
         $groupClassName = $blockObject->blockGroup();
         
+        $groupClassName = '\\'  . ltrim($groupClassName, '\\');
+        
         $groupObject = Yii::createObject(['class' => $groupClassName]);
         
         $group = BlockGroup::findOne(['identifier' => $groupObject->identifier()]);
@@ -121,6 +123,7 @@ class BlockImporter extends Importer
         if ($group) {
             $group->updateAttributes([
                 'name' => $groupObject->label(),
+            	'class' => $groupClassName,
             ]);
             return $group->id;
         } else {
@@ -128,6 +131,7 @@ class BlockImporter extends Importer
             $model->name = $groupObject->label();
             $model->identifier = $groupObject->identifier();
             $model->created_timestamp = time();
+            $model->class = $groupClassName;
             if ($model->save()) {
                 return $model->id;
             }
