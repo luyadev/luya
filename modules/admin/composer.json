@@ -25,7 +25,7 @@
 		"luyadev/luya-module-cms" : "^1.0@dev",
 		"php-coveralls/php-coveralls": "^1.0",
 		"twbs/bootstrap": "v4.0.0-beta",
-		"bower-asset/angular" : "1.6.5",
+		"bower-asset/angular" : "~1.6.5",
 		"bower-asset/angular-loading-bar" : "^0.9",
 		"bower-asset/angular-slugify" : "^1.0.0",
 		"bower-asset/angularjs-datepicker" : "^2.1.0",
