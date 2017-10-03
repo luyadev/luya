@@ -9,10 +9,10 @@
 
         position: relative;
         display: flex;
-        flex: 0 0 200px;
+        flex: 0 0 $mainnav-width;
         flex-direction: column;
         height: 100%;
-        width: 200px;
+        width: $mainnav-width;
 
         .mainnav-tooltip-big-wrapper {
             left: 170px;
@@ -231,7 +231,7 @@
 }
 
 .mainnav-toggler {
-    background: map-get($grays, 700);
+    background-color: map-get($grays, 700);
     border: none;
     border-radius: $border-radius;
     cursor: pointer;
@@ -244,7 +244,7 @@
     right: -8px;
     top: 50%;
     transform: translateY(-50%);
-    transition: background .25s ease-in-out, min-height .2s ease-in-out;;
+    transition: background-color .25s ease-in-out, min-height .2s ease-in-out;;
     width: 16px;
 
     i {
@@ -253,7 +253,7 @@
     }
 
     &:hover {
-        background: color(gray);
+        background-color: color(gray);
         min-height: 72px;
     }
 

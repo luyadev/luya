@@ -136,3 +136,9 @@
 @import "components/zaa-multiple-inputs";
 @import "components/zaa-table";
 @import "components/zaaselect";
+
+// ==================================================
+// Browser fixes, always last cause they suck balls
+// ==================================================
+
+@import "browser-fixes/ie";

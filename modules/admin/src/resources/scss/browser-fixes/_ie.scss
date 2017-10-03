@@ -1,0 +1,78 @@
+// Internet Explorer
+
+// IE 10
+body[class*='internet-explorer-10.0'] {
+
+    .mainnav {
+        display: block;
+        overflow: visible;
+        -ms-overflow-style: none; // IE 10+
+    }
+    .mainnav-static {
+        height: auto;
+    }
+    .mainnav-modules {
+        height: auto;
+    }
+    .mainnav-toggler {
+        z-index: 1000;
+    }
+
+    .mainnav-label {
+        margin-left: 20px;
+        margin-top: 3px;
+    }
+
+    .luya-main-wrapper {
+        max-width: calc(100% - #{$mainnav-width});
+    }
+
+    .luya-mainnav-small + .luya-main-wrapper {
+        max-width: calc(100% - #{$mainnav-width-small});
+    }
+
+    .crud-buttons-column {
+        padding: 0;
+    }
+
+    .crud-buttons {
+        position: relative;
+        vertical-align: middle;
+        display: block;
+        overflow: hidden;
+        background-color: transparent;
+    }
+
+    .crud-buttons-toggler {
+        display: none;
+    }
+
+    .crud-buttons-pan {
+        background-color: transparent;
+        bottom: auto;
+        display: block;
+        font-size: 0;
+        left: auto;
+        opacity: 1;
+        padding: 0;
+        position: relative;
+        text-align: right;
+        top: auto;
+        z-index: 10;
+        transform: none;
+        white-space: nowrap;
+
+        &:before {
+            display: none;
+        }
+    }
+
+    .crud-buttons-button {
+        color: color(gray);
+
+        &:hover {
+            color: $white;
+        }
+    }
+
+}
