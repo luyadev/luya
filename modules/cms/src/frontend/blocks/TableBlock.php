@@ -85,11 +85,9 @@ final class TableBlock extends PhpBlock
             if ($hasHeader == 1 && $i == 1) {
                 continue;
             }
-            // if markdown enabled parse field values
-            if ($this->getCfgValue('parseMarkdown', false)) {
-                foreach ($row as $field => $value) {
-                    $row[$field] = TagParser::convertWithMarkdown($value);
-                }
+            // parse markdown for ceil value, if disable ensure newlines converts to br tags.
+            foreach ($row as $field => $value) {
+            	$row[$field] = $this->getCfgValue('parseMarkdown', false) ? TagParser::convertWithMarkdown($value) : nl2br($value);
             }
             
             $table[] = $row;

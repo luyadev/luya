@@ -45,4 +45,19 @@ class TableBlockTest extends BlockTestCase
         ]);
         $this->assertSame('<div class="foo-bar"><table class="table table-striped table-bordered"><thead><tr><th>1</th><th>2</th><th>3</th></tr></thead><tbody><tr><td class="col-md-4">*a*</td><td class="col-md-4">b</td><td class="col-md-4">c</td></tr></tbody></table></div>', $this->renderFrontendNoSpace());
     }
+    
+    public function testNewlineInCellMarkdown()
+    {
+    	$this->block->setVarValues(['table' => [['foo
+bar']]]);
+    	$this->block->setCfgValues(['parseMarkdown' => 1]);
+    	$this->assertContains('foo<br />bar', $this->renderFrontendNoSpace()); 
+    }
+    
+    public function testNewlineInCell()
+    {
+    	$this->block->setVarValues(['table' => [['foo
+bar']]]);
+    	$this->assertContains('foo<br />bar', $this->renderFrontendNoSpace());
+    }
 }
