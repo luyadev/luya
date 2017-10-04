@@ -1,11 +1,11 @@
 .modulenav {
+    background: $gray-300;
     display: block;
     flex: 0 0;
     font-size: 14px;
-    width: 100%;
     padding: $content-padding-y $content-padding-x;
 
-    background: $gray-300;
+    width: 100%;
 
     @media (min-width: $mobile-nav-breakpoint) {
         display: block;
@@ -52,13 +52,14 @@
 }
 
 .modulenav-link {
+    border: 1px solid transparent;
     border-radius: $border-radius;
     color: color('gray');
     cursor: pointer;
     display: block;
     padding: 5px 5px 5px 30px;
     position: relative;
-    transition: .25s ease-in-out background-color;
+    transition: .25s ease-in-out background-color, .25s ease-in-out border-color;
 
     &:focus {
         text-decoration: none;
@@ -66,9 +67,10 @@
 
     &-active,
     &:hover {
+        // background-color: $card-cap-bg;
+        border-color: $card-border-color;
         text-decoration: none;
-        background-color: rgba(0,0,0,0.1);
-
+        transition: .25s ease-in-out background-color, .25s ease-in-out border-color;
     }
 
     &-active {
@@ -89,8 +91,8 @@
 .modulenav-icon {
     font-size: 20px !important;
     left: 5px;
-    top: 4px;
     position: absolute;
+    top: 4px;
 }
 
 .modulenav-label {
@@ -98,42 +100,39 @@
     margin-left: 3px;
 }
 
-
 .modulenav-mobile {
-    max-width: 100%;
     background: $gray-400;
     color: theme-color(dark);
+    max-width: 100%;
     padding: 0 $content-padding-x;
     position: relative;
 
-    
-        @media (min-width: $mobile-nav-breakpoint) {
-            display: none;
-        }
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: none;
+    }
 
     &-hidden {
-        
+
         @media (min-width: $mobile-nav-breakpoint) {
             display: block;
         }
-    
-        display:none;
-        
-        
+
+        display: none;
+
     }
 }
 
 .modulenav-toggler-icon {
-    text-align: right;
-    font-size: 28px;
     cursor: pointer;
+    font-size: 28px;
+    text-align: right;
 }
 
 .modulenav-mobile-title {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-
     font-size: 14px;
+    left: 10px;
+    position: absolute;
+    top: 50%;
+
+    transform: translateY(-50%);
 }

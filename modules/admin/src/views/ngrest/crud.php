@@ -117,7 +117,8 @@ $this->beginBody();
                     <?php endif; ?>
                 </div>
             </div>
-            <table class="table table-hover table-align-middle table-responsive table-striped mt-4">
+            <small class="crud-counter">{{data.listArray.length}} of {{totalRows}}</small>
+            <table class="table table-hover table-align-middle table-responsive table-striped mt-0">
                 <thead class="thead-default">
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
@@ -138,9 +139,7 @@ $this->beginBody();
                             </div>
                         </th>
                         <?php endforeach; ?>
-                        <th class="crud-buttons-column tab-padding-right text-right" nowrap style="white-space: nowrap;">
-                            <span class="crud-counter"><small>{{data.listArray.length}} of {{totalRows}}</small></span>
-                        </th>
+                        <th class="crud-buttons-column"></th>
                     </tr>
                 </thead>
                 <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">

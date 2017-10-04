@@ -13,7 +13,12 @@
 
 .crud-counter {
     color: color('gray');
+    display: block;
+    font-size: 12px;
     font-weight: 300;
+    margin-top: 15px;
+    text-align: right;
+    padding-right: .75rem;
 }
 
 .crud-loader-tag {
@@ -103,6 +108,7 @@
 
 .crud-buttons-pan {
     background-color: color(gray);
+    border-radius: $border-radius 0 0 $border-radius;
     bottom: 0;
     display: block;
     font-size: 0;
@@ -146,6 +152,9 @@
 
     &:hover {
         background-color: map_get($grays, 800);
+    }
+    &:first-of-type {
+        border-radius: $border-radius 0 0 $border-radius;
     }
 
     i {
