@@ -4,6 +4,12 @@ namespace luya\base;
 
 use yii\base\Object;
 
+/**
+ * Represents the extracted data from the luya composer plugin installer.php file inside the vendor.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class PackageInstaller extends Object
 {
     private $_timestamp;

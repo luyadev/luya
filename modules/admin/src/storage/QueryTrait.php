@@ -58,6 +58,7 @@ use luya\Exception;
  * See the {{\luya\admin\storage\QueryTrait::where}} for more details.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 trait QueryTrait
 {

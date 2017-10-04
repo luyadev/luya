@@ -8,6 +8,12 @@ use luya\console\Command;
 use yii\base\InvalidConfigException;
 use luya\helpers\StringHelper;
 
+/**
+ * Admin Proxy Build.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class ClientBuild extends Object
 {
     /**

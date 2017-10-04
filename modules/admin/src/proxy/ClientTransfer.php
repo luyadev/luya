@@ -8,6 +8,12 @@ use luya\admin\file\Query;
 use luya\traits\CacheableTrait;
 use luya\helpers\FileHelper;
 
+/**
+ * Admin Proxy commands Transfer Files.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class ClientTransfer extends Object
 {
     use CacheableTrait;

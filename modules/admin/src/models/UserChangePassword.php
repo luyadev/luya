@@ -6,6 +6,7 @@ use yii\base\Model;
 use luya\admin\Module;
 
 /**
+ * User change Password model.
  *
  * @property \luya\admin\models\User $user
  *

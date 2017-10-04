@@ -7,10 +7,12 @@ use yii\helpers\Json;
 use yii\web\JsExpression;
 
 /**
- *
+ * The View renderer for RenderCrud class.
+ * 
  * @property \luya\admin\ngrest\render\RenderCrud $context
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RenderCrudView extends View
 {

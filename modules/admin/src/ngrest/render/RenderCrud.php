@@ -11,10 +11,12 @@ use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
 
 /**
- *
+ * Render the Crud view.
+ * 
  * @property \luya\admin\ngrest\render\RenderCrudView $view
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RenderCrud extends Render implements RenderInterface, ViewContextInterface, RenderCrudInterface
 {

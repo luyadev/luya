@@ -9,8 +9,10 @@ use luya\helpers\ObjectHelper;
 use luya\admin\ngrest\base\Render;
 
 /**
- * @todo sanitize post (\yii\helpers\HtmlPurifier::process(...)
+ * Render an Active Window Callback call.
+ * 
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RenderActiveWindowCallback extends Render implements RenderInterface
 {

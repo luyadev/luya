@@ -4,6 +4,12 @@ namespace luya\admin\ngrest\plugins;
 
 use luya\admin\ngrest\base\Plugin;
 
+/**
+ * Base class for Sort Relation Plugins.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 abstract class SortRelation extends Plugin
 {
     abstract public function getData();
