@@ -6,6 +6,7 @@ use Yii;
 use luya\cms\base\BlockInterface;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
+use luya\admin\ngrest\plugins\SelectModel;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
@@ -13,36 +14,60 @@ use luya\admin\aws\DetailViewActiveWindow;
  * @property integer $id
  * @property integer $group_id
  * @property string $class
+ * @property integer $usageCount returns the amount of how much this block is used inside a page.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Block extends NgRestModel
 {
     private $cachedDeletedId = 0;
 
+    /**
+     * @inheritdoc
+     */
     public static function ngRestApiEndpoint()
     {
         return 'api-cms-block';
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_block';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function extraFields()
     {
         return ['usageCount', 'translationName'];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
-            'group_id' => ['selectModel', 'modelClass' => BlockGroup::className(), 'valueField' => 'id', 'labelField' => 'name'],
+            'group_id' => [
+            	'class' => SelectModel::class, 
+            	'modelClass' => BlockGroup::className(),
+            	'labelField' => function($model) {
+            		return $model->getGroupLabel();
+            	}
+            ],
             'class' => 'text',
             'is_disabled' => 'toggleStatus',
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestExtraAttributeTypes()
     {
         return [
@@ -101,7 +126,7 @@ class Block extends NgRestModel
      */
     public function getTranslationName()
     {
-        return $this->getObject()->name();
+        return $this->getClassObject()->name();
     }
     
     /**
@@ -116,6 +141,9 @@ class Block extends NgRestModel
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestGroupByField()
     {
         return 'group_id';
@@ -149,12 +177,23 @@ class Block extends NgRestModel
      * Returns the object class based on the Active Record entry.
      *
      * @return \luya\cms\base\BlockInterface
+     * @deprecated use get ClassObject Instead
      */
     public function getObject()
     {
-        return Yii::createObject([
-            'class' => $this->class,
-        ]);
+    	trigger_error('This method is deprecated use getClassObject() instead.', E_USER_DEPRECATED);
+    	
+    	return $this->getClassObject();
+    }
+
+    /**
+     * Returns the origin block object based on the current active record entry.
+     *
+     * @return \luya\cms\base\BlockInterface
+     */
+    public function getClassObject()
+    {
+    	return Yii::createObject(['class' => $this->class]);
     }
     
     /**
@@ -178,7 +217,7 @@ class Block extends NgRestModel
      * @param unknown $id
      * @param unknown $context
      * @param unknown $pageObject
-     * @return boolean|object|mixed
+     * @return \luya\cms\base\BlockInterface
      */
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
