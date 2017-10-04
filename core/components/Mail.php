@@ -25,7 +25,7 @@ use luya\Exception;
  * SMTP debug help:
  *
  * ```
- * swaks -s HOST -p 587 -ehlo localhost -au AUTH_USER -to TO_ADRESSE -tls
+ * swaks -s HOST -p 587 -ehlo localhost -au AUTH_USER -to TO_ADDRESSE -tls
  * ```
  *
  * @property \PHPMailer $mailer The PHP Mailer object
