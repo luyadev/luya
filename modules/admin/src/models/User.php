@@ -346,7 +346,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
     /**
      * Finds a current user for a given email.
      *
-     * @param string $email The email adresse to find the user from.
+     * @param string $email The email address to find the user from.
      * @return \yii\db\ActiveRecord|null
      */
     public static function findByEmail($email)

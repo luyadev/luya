@@ -69,7 +69,7 @@ class CoordinatesActiveWindow extends ActiveWindow
         $response = Json::decode($curl->response);
         
         if (!isset($response['results']) || !isset($response['results'][0])) {
-            return $this->sendError('Error while collecting data for your adresse. Check if you adress was correct and try again.');
+            return $this->sendError('Error while collecting data for your address. Check if you address was correct and try again.');
         }
         
         $cords = $response['results'][0]['geometry']['location'];

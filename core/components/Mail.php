@@ -90,7 +90,7 @@ class Mail extends Component
     // smtp settings
     
     /**
-     * @var string The host adresse of the SMTP server for authentification, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     * @var string The host address of the SMTP server for authentification, if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
     public $host = 'mail.zephir.ch';
     
