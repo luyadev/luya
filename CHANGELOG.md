@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1470](https://github.com/luyadev/luya/issues/1470) Action columns in crud visibility fixed by button group overlay on hover.
 - [#1527](https://github.com/luyadev/luya/issues/1527) CMS Table block convert newlines to br when markdown is disabled.
 - [#1512](https://github.com/luyadev/luya/issues/1512) Drag and Drop does not work in Firefox Browsers.
 - [#1517](https://github.com/luyadev/luya/issues/1517) Fixed issue where FileHelper::classInfo does not determine namespace correctly on windows.
