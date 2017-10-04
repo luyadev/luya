@@ -138,8 +138,8 @@ $this->beginBody();
                             </div>
                         </th>
                         <?php endforeach; ?>
-                        <th class="crud-buttons-column tab-padding-right text-right">
-                            <!--<span class="crud-counter">{{data.listArray.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span>-->
+                        <th class="crud-buttons-column tab-padding-right text-right" nowrap style="white-space: nowrap;">
+                            <span class="crud-counter"><small>{{data.listArray.length}} of {{totalRows}}</small></span>
                         </th>
                     </tr>
                 </thead>

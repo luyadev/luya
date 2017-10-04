@@ -13989,6 +13989,7 @@ zaa.factory('HtmlStorage', function() {
 		$scope.setPagination = function(currentPage, pageCount, perPage, totalItems) {
 			if (currentPage != null && pageCount != null && perPage != null && totalItems != null) {
 
+				$scope.totalRows = totalItems;
 				var i = 1;
 				var urls = [];
 				for (i = 1; i <= pageCount; i++) {
@@ -14102,6 +14103,8 @@ zaa.factory('HtmlStorage', function() {
 				$scope.reloadCrudList(pageId);
 			}
 		};
+		
+		$scope.totalRows = 0;
 
 		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
 		$scope.reloadCrudList = function(pageId) {
@@ -14120,6 +14123,7 @@ zaa.factory('HtmlStorage', function() {
 					url = url + '&sort=' + $scope.config.orderBy.replace("+", "");
 				}
 				$http.get(url).then(function(response) {
+					$scope.totalRows = response.data.length;
 					$scope.setPagination(
 						response.headers('X-Pagination-Current-Page'),
 						response.headers('X-Pagination-Page-Count'),
@@ -14141,6 +14145,7 @@ zaa.factory('HtmlStorage', function() {
 					url = url + '&sort=' + $scope.config.orderBy.replace("+", "");
 				}
 				$http.get(url).then(function(response) {
+					$scope.totalRows = response.data.length;
 					$scope.setPagination(
 						response.headers('X-Pagination-Current-Page'),
 						response.headers('X-Pagination-Page-Count'),
