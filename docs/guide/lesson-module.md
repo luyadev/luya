@@ -327,7 +327,7 @@ After setting up the frontend module, we've to create a module page and choose o
 
 ![Creating module page](img/addressbook-createpage.gif "Create module page")
 
-With this last step, we've created our own module, more precisely two modules: `addressbook` for frontend rendering and `adressbookadmin` for the administration purpose. For the module `addressbookadmin` we've created a migration file and from this we've automatically generated the needed data tables. Using the LUYA code wizard, we also created the models with the CRUD view for each data table. We also learned how to link the `group` names to the `group_id` field in the `Contact` CRUD view and rendering them as a dropdown select.
+With this last step, we've created our own module, more precisely two modules: `addressbook` for frontend rendering and `addressbookadmin` for the administration purpose. For the module `addressbookadmin` we've created a migration file and from this we've automatically generated the needed data tables. Using the LUYA code wizard, we also created the models with the CRUD view for each data table. We also learned how to link the `group` names to the `group_id` field in the `Contact` CRUD view and rendering them as a dropdown select.
 For the frontend module implementation we heavily relied on Yii 2.0 great toolsets to render the table data and only added some inline styling and hover functionality.
 
 Depending on your test data, the final result will look something like this in the frontend view:
