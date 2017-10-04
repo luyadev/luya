@@ -46,6 +46,7 @@
   + [Custom Admin Controller &amp; View](app-admin-module-controllerview.md)
   + [Admin Permissions &amp; Menu](app-admin-module-permission.md)
   + [Admin Assets](app-admin-module-assets.md)
+  + [Admin Dashboard Objects](app-admin-module-dashboardobjects.md)
   + [Admin CSS Styles](app-admin-styles.md)
 + NgRest CRUD
   + [NgRest Concept](ngrest-concept.md)

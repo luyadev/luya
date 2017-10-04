@@ -70,9 +70,10 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public $dashboardObjects = [
         [
-               'template' => '<table class="table"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>',
-               'dataApiUrl' => 'admin/api-admin-common/last-logins',
-               'title' => ['admin', 'dashboard_lastlogin_title'],
+        	'class' => 'luya\admin\dashboard\ListDashboardObject',
+        	'template' => '<li class="list-group-item" ng-repeat="item in data">{{item.user.firstname}} {{item.user.lastname}}<span class="badge badge-info float-right">{{item.maxdate * 1000 | date:\'short\'}}</span></li>',
+            'dataApiUrl' => 'admin/api-admin-common/last-logins',
+            'title' => ['admin', 'dashboard_lastlogin_title'],
         ],
     ];
     

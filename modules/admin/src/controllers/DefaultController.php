@@ -72,7 +72,7 @@ class DefaultController extends Controller
         $items = [];
         foreach (Yii::$app->adminModules as $module) {
             foreach ($module->dashboardObjects as $config) {
-                $items[] = Yii::createObject(ArrayHelper::merge(['class' => '\luya\admin\dashboards\DefaultObject'], $config));
+                $items[] = Yii::createObject($config);
             }
         }
         

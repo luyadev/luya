@@ -49,7 +49,8 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public $dashboardObjects = [
         [
-            'template' => '<table class="table"><thead></thead><tr><th>Page</th><th>User</th><th>Time</ht></tr></thead><tr ng-repeat="item in data"><td><a ui-sref="custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})">{{item.title}}</a></td><td>{{item.updateUser.firstname}} {{item.updateUser.lastname}}</td><td>{{item.timestamp_update * 1000 | date:\'short\'}}</td></tr></table>',
+        	'class' => 'luya\admin\dashboard\TableDashboardObject',
+            'template' => '<thead><tr><th>Page</th><th>User</th><th>Time</ht></tr></thead><tr ng-repeat="item in data"><td><a ui-sref="custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})">{{item.title}}</a></td><td>{{item.updateUser.firstname}} {{item.updateUser.lastname}}</td><td>{{item.timestamp_update * 1000 | date:\'short\'}}</td></tr>',
             'dataApiUrl' => 'admin/api-cms-navitem/last-updates',
             'title' => ['cmsadmin', 'cmsadmin_dashboard_lastupdate'],
         ],

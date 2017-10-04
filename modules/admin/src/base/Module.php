@@ -18,19 +18,47 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     public $requiredComponents = ['db'];
     
     /**
-     * Dashboard Objects will be retrieved when the admin dashboard is loaded.
+     * @var array Dashboard Objects will be retrieved when the admin dashboard is loaded.
      * You can use either easy to use preconfigured objects or provide a custom dashboard widget
      * object class.
      *
      * ```php
      * public $dashboardObjects = [
-     *     ['template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>', 'dataApiUrl' => 'admin/api-news-article'],
+     *     [
+     *         'class' => 'luya\admin\dashboard\BasicDashboardObject',
+     *         'template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>',
+     *         'dataApiUrl' => 'admin/api-news-article',
+     *         'title' => 'Latest News',
+     *     ],
+     *     [
+     *         // ...
+     *     ]
      * ];
      * ```
+     * 
+     * In order to customize the template of a basic dashboard object you can override the  {{luya\admin\dashboard\BasicDashboardObject::$outerTemplate}}:
+     * 
+     * ```php
+     * [
+     *     'class' => 'luya\admin\dashboard\BasicDashboardObject',
+     *     'outerTemplate' => '<div class="wrap-around-template"><h1>{{title}}</h1><small>{{template}}</small></div>',
+     *     'template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>',
+     *     'dataApiUrl' => 'admin/api-news-article',
+     *     'title' => 'Latest News',
+     * ],
+     * ```
+     * 
+     * You can also choose from predefined dashboard object which provides wrappers so you don't have to modify the {{luya\admin\dashboard\BasicDashboardObject::$outerTemplate}} string.
+     * 
+     * + {{luya\admin\dashboard\ListDashboardObject}}
+     * + {{luya\admin\dashboard\TableDashboardObject}}
+     * 
      */
     public $dashboardObjects = [];
 
     /**
+     * > implementation discontinued but keep the concept comment for later usage.
+     * 
      * @var array The config linker property can specific the configuration class for ngRest model where the key
      * is the `api` and the value is the class to the config. An array could look like this:
      *
@@ -61,7 +89,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      *
      * The above example will override the api-admin-user ngrest config with your project specific config.
      */
-    public $ngrestConfigLinker = [];
+    //public $ngrestConfigLinker = [];
 
     
     /**
