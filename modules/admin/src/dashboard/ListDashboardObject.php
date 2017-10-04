@@ -25,6 +25,6 @@ class ListDashboardObject extends BasicDashboardObject
 	/**
 	 * @inheritdoc
 	 */
-	public $outerTemplate = '<div><div class="card-header">{{title}}</div><ul class="list-group list-group-flush">{{template}}</ul></div>';
+	public $outerTemplate = '<div class="card-header">{{title}}</div><ul class="list-group list-group-flush">{{template}}</ul>';
 	
 }
