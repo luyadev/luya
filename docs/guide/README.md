@@ -25,6 +25,7 @@
   + [Mails](luya-mail.md)
   + [Image Filters](app-filters.md)
   + [Filter Effects](app-filter-effects.md)
+  + [Page Speed](app-speed.md)
 + CMS
   + [Layouts](app-cmslayouts.md)
   + [Menus & Navigations](app-menu.md)
