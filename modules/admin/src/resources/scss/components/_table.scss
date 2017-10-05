@@ -102,8 +102,12 @@
 .table-responsive-wrapper {
     display: block;
     overflow: hidden;
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 100%;
+    &::-webkit-scrollbar {
+        display: none; // Safari and Chrome
+    }
+    -ms-overflow-style: none; // IE 10+
 
     table,
     .table-responsive {
