@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1509](https://github.com/luyadev/luya/issues/1509) Added a table-responsive-wrapper div to all responsive tables. This improves CRUD behaviour on mobile.
 - [#1479](https://github.com/luyadev/luya/issues/1479) Block group translation names where not displayed correctly. Old block groups where not deleted anymore.
 - [#1470](https://github.com/luyadev/luya/issues/1470) Action columns in crud visibility fixed by button group overlay on hover.
 - [#1527](https://github.com/luyadev/luya/issues/1527) CMS Table block convert newlines to br when markdown is disabled.
