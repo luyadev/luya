@@ -5,7 +5,7 @@
     &:first-of-type {
         padding-left: 0;
     }
-    &:not(:first-of-type):not(.toolbar-item-lang) {
+    &-lang + .toolbar-item:not(.toolbar-item-lang) {
         border-left: 1px solid $nav-tabs-border-color;
     }
 
