@@ -2954,12 +2954,7 @@
                             element.addClass('has-enough-space');
                         }
 
-                        console.log(element);
-
                         var currentElementSpace = element.parent().outerWidth();
-
-                        console.log(currentElementSpace);
-                        console.log(scope.elementOriginalWidth);
 
                         if(currentElementSpace < scope.elementOriginalWidth) {
                             element.removeClass('has-enough-space').addClass('not-enough-space');
