@@ -13,8 +13,8 @@
 
 .luya-main-wrapper {
     display: block;
-    width: 100%;
     height: 100%;
+    width: 100%;
 }
 
 .luya-main {
@@ -32,8 +32,8 @@
 }
 
 .luya-mainnav {
-    z-index: z-index(navbar);
     width: 100%;
+    z-index: z-index(navbar);
 
     @media (min-width: $mobile-nav-breakpoint) {
         position: relative;
@@ -52,7 +52,7 @@
     display: block;
     width: 100%;
 
-    @media (min-width:$mobile-nav-breakpoint) {
+    @media (min-width: $mobile-nav-breakpoint) {
         max-width: calc(100% - #{$mainnav-width});
 
         .luya-mainnav-small + & {
@@ -73,11 +73,11 @@
     &::-webkit-scrollbar {
         display: none; // Safari and Chrome
     }
-    -ms-overflow-style: none; // IE 10+
-
     .cmsnav {
         padding: $content-padding-y $content-padding-x;
     }
+
+    -ms-overflow-style: none; // IE 10+
 
     @media (min-width: $mobile-nav-breakpoint) {
         align-items: stretch;
@@ -129,7 +129,6 @@
         }
     }
 }
-
 
 // Safari 100% height fix and flexbox override
 

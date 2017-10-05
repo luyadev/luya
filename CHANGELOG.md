@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1526](https://github.com/luyadev/luya/issues/1526) Changed has-enough-space directive to use direct parent of element to check if there is enough space.
 - [#1509](https://github.com/luyadev/luya/issues/1509) Added a table-responsive-wrapper div to all responsive tables. This improves CRUD behaviour on mobile.
 - [#1479](https://github.com/luyadev/luya/issues/1479) Block group translation names where not displayed correctly. Old block groups where not deleted anymore.
 - [#1470](https://github.com/luyadev/luya/issues/1470) Action columns in crud visibility fixed by button group overlay on hover.

@@ -2922,7 +2922,6 @@
                 scope.elementWidth = 0;
 
                 var getElementOriginalWidth = function() {
-                    var elementOriginalWidth = 0;
                     var elementClone = element.clone().insertAfter(element);
 
                     elementClone.css({
@@ -2936,7 +2935,7 @@
                         elementClone.css('display', scope.isFlexBox ? 'flex' : 'block');
                     }
 
-                    elementOriginalWidth = elementClone.outerWidth();
+                    var elementOriginalWidth = elementClone.outerWidth();
 
                     elementClone.remove();
 
@@ -2955,8 +2954,14 @@
                             element.addClass('has-enough-space');
                         }
 
-                        var currentElementWidth = element.outerWidth();
-                        if(currentElementWidth < scope.elementOriginalWidth) {
+                        console.log(element);
+
+                        var currentElementSpace = element.parent().outerWidth();
+
+                        console.log(currentElementSpace);
+                        console.log(scope.elementOriginalWidth);
+
+                        if(currentElementSpace < scope.elementOriginalWidth) {
                             element.removeClass('has-enough-space').addClass('not-enough-space');
                         } else {
                             element.removeClass('not-enough-space').addClass('has-enough-space');
