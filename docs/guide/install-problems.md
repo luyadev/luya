@@ -10,7 +10,7 @@ There are few things people stumble upon mostly when installing LUYA.
 
 + During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 + When you encounter errors with composer install/update, make sure you have installed the version **1.0.0** of composer, in order to update your composer run `composer self-update`.
-+ As Yii requies the `fxp/composer-asset-plugin` make sure you have at least version `1.3` installed of the plugin, in order to update the composer-asset-plugin run `composer global require "fxp/composer-asset-plugin:~1.3"`.
++ As Yii requies the `fxp/composer-asset-plugin` make sure you have at least version `1.4` installed of the plugin, in order to update the composer-asset-plugin run `composer global require "fxp/composer-asset-plugin:~1.4"`.
 
 ## Server requirements
 
