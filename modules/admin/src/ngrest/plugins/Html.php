@@ -6,9 +6,11 @@ use luya\Exception;
 use luya\admin\ngrest\base\Plugin;
 
 /**
- * Renders HTML in List View. Update/Create are disabled.
+ * Renders HTML in List View.
  *
  * This will bind the Api Response as trusted html and allow the html injection.
+ * 
+ * The frontend output will not encoded, so make sure no user generated contnet is provided by the html plugin.
  *
  * @since 1.0.0-beta7
  * @author Basil Suter <basil@nadar.io>
@@ -28,7 +30,7 @@ class Html extends Plugin
      */
     public function renderCreate($id, $ngModel)
     {
-        throw new Exception("HTML Plugin does not support create form.");
+        return $this->createFormTag('zaa-textarea', $id, $ngModel);
     }
 
     /**
@@ -36,6 +38,6 @@ class Html extends Plugin
      */
     public function renderUpdate($id, $ngModel)
     {
-        throw new Exception("HTML Plugin does not support update form.");
+        return $this->renderCreate($id, $ngModel);
     }
 }
