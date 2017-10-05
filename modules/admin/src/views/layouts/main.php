@@ -188,97 +188,103 @@ $this->beginPage()
 
             <div class="debug-network-items">
             	<button type="button" ng-click="AdminDebugBar.clear()" class="btn btn-icon"><i class="material-icons">clear</i></button>
-                <table class="table table-striped table-sm table-hover table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th>URL</th>
-                            <th>Status</th>
-                            <th>Time (ms)</th>
-                            <th>Detail</th>
+                <div class="table-responsive-wrapper">
+                    <table class="table table-striped table-sm table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>URL</th>
+                                <th>Status</th>
+                                <th>Time (ms)</th>
+                                <th>Detail</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="(key, item) in AdminDebugBar.data | reverse">
+                            <td>{{ item.url }}</td>
+                            <td>{{ item.responseStatus }}</td>
+                            <td>{{ item.parseTime }}</td>
+                            <td><button class="btn btn-sm btn-secondary btn-icon" type="button" ng-click="loadDebugDetail(item, key)"><i class="material-icons">search</i></button></td>
                         </tr>
-                    </thead>
-                    <tr ng-repeat="(key, item) in AdminDebugBar.data | reverse">
-                        <td>{{ item.url }}</td>
-                        <td>{{ item.responseStatus }}</td>
-                        <td>{{ item.parseTime }}</td>
-                        <td><button class="btn btn-sm btn-secondary btn-icon" type="button" ng-click="loadDebugDetail(item, key)"><i class="material-icons">search</i></button></td>
-                    </tr>
-                </table>
+                    </table>
+                </div>
             </div>
 
             <div class="debug-network-detail">
 
-                <table class="table table-striped table-bordered table-responsive">
-                    <tr>
-                        <th scope="col" colspan="2">Request</th>
-                    </tr>
-                    <tr>
-                        <th scope="row">URL</th>
-                        <td>{{debugDetail.url}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Time</th>
-                        <td>
-                            <span ng-if="debugDetail.parseTime">{{debugDetail.parseTime}}</span>
-                            <span ng-if="!debugDetail.parseTime">-</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Data</th>
-                        <td>
-                            <code ng-if="debugDetail.requestData">{{debugDetail.requestData}}</code>
-                            <code ng-if="!debugDetail.requestData">-</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Response</th>
-                    </tr>
-                    <tr>
-                        <th scope="row">Status</th>
-                        <td>
-                            <span ng-if="debugDetail.responseStatus">{{debugDetail.responseStatus}}</span>
-                            <span ng-if="!debugDetail.responseStatus">-</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Data</th>
-                        <td>
-                            <code ng-if="debugDetail.responseData">{{debugDetail.responseData}}</code>
-                            <code ng-if="!debugDetail.responseData">-</code>
-                        </td>
-                    </tr>
-                </table>
+                <div class="table-responsive-wrapper">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th scope="col" colspan="2">Request</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">URL</th>
+                            <td>{{debugDetail.url}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Time</th>
+                            <td>
+                                <span ng-if="debugDetail.parseTime">{{debugDetail.parseTime}}</span>
+                                <span ng-if="!debugDetail.parseTime">-</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Data</th>
+                            <td>
+                                <code ng-if="debugDetail.requestData">{{debugDetail.requestData}}</code>
+                                <code ng-if="!debugDetail.requestData">-</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Response</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Status</th>
+                            <td>
+                                <span ng-if="debugDetail.responseStatus">{{debugDetail.responseStatus}}</span>
+                                <span ng-if="!debugDetail.responseStatus">-</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Data</th>
+                            <td>
+                                <code ng-if="debugDetail.responseData">{{debugDetail.responseData}}</code>
+                                <code ng-if="!debugDetail.responseData">-</code>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
             </div>
         </div>
 
         <div class="debug-panel" ng-if="debugTab==2">
-            <table class="table table-striped table-sm table-bordered table-responsive">
-                <thead>
-                <tr>
-                    <th><?= Admin::t('layout_debug_table_key'); ?></th>
-                    <th><?= Admin::t('layout_debug_table_value'); ?></th>
-                </tr>
-                </thead>
-                <tr><td><?= Admin::t('layout_debug_luya_version'); ?>:</td><td><?= \luya\Boot::VERSION; ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_id'); ?>:</td><td><?= Yii::$app->id ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_sitetitle'); ?>:</td><td><?= Yii::$app->siteTitle ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_remotetoken'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_assetmanager_forcecopy'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_transfer_exceptions'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_caching'); ?>:</td><td><?= (Yii::$app->has('cache')) ? Yii::$app->cache->className() : $this->context->colorizeValue(false); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_yii_debug'); ?>:</td><td><?= $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_yii_env'); ?>:</td><td><?= YII_ENV; ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_yii_timezone'); ?>:</td><td><?= Yii::$app->timeZone; ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_php_timezone'); ?>:</td><td><?= date_default_timezone_get(); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_php_ini_memory_limit'); ?>:</td><td><?= ini_get('memory_limit'); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_php_ini_max_exec'); ?>:</td><td><?= ini_get('max_execution_time'); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_php_ini_post_max_size'); ?>:</td><td><?= ini_get('post_max_size'); ?></td></tr>
-                <tr><td><?= Admin::t('layout_debug_php_ini_upload_max_file'); ?>:</td><td><?= ini_get('upload_max_filesize'); ?></td></tr>
-            </table>
+            <div class="table-responsive-wrapper">
+                <table class="table table-striped table-sm table-bordered">
+                    <thead>
+                    <tr>
+                        <th><?= Admin::t('layout_debug_table_key'); ?></th>
+                        <th><?= Admin::t('layout_debug_table_value'); ?></th>
+                    </tr>
+                    </thead>
+                    <tr><td><?= Admin::t('layout_debug_luya_version'); ?>:</td><td><?= \luya\Boot::VERSION; ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_id'); ?>:</td><td><?= Yii::$app->id ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_sitetitle'); ?>:</td><td><?= Yii::$app->siteTitle ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_remotetoken'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_assetmanager_forcecopy'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_transfer_exceptions'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_caching'); ?>:</td><td><?= (Yii::$app->has('cache')) ? Yii::$app->cache->className() : $this->context->colorizeValue(false); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_yii_debug'); ?>:</td><td><?= $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_yii_env'); ?>:</td><td><?= YII_ENV; ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_yii_timezone'); ?>:</td><td><?= Yii::$app->timeZone; ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_php_timezone'); ?>:</td><td><?= date_default_timezone_get(); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_php_ini_memory_limit'); ?>:</td><td><?= ini_get('memory_limit'); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_php_ini_max_exec'); ?>:</td><td><?= ini_get('max_execution_time'); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_php_ini_post_max_size'); ?>:</td><td><?= ini_get('post_max_size'); ?></td></tr>
+                    <tr><td><?= Admin::t('layout_debug_php_ini_upload_max_file'); ?>:</td><td><?= ini_get('upload_max_filesize'); ?></td></tr>
+                </table>
+            </div>
         </div>
 
     </div>

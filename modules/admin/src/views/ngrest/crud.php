@@ -118,62 +118,64 @@ $this->beginBody();
                 </div>
             </div>
             <small class="crud-counter">{{data.listArray.length}} of {{totalRows}}</small>
-            <table class="table table-hover table-align-middle table-responsive table-striped mt-0">
-                <thead class="thead-default">
-                    <tr>
-                        <?php foreach ($config->getPointer('list') as $item): ?>
-                        <th class="tab-padding-left">
-                            <div class="table-sorter-wrapper" ng-class="{'is-active' : isOrderBy('+<?= $item['name']; ?>') || isOrderBy('-<?= $item['name']; ?>') }">
-                                <?php if ($config->getDefaultOrderField()): ?>
-                                    <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-sorting': !isOrderBy('-<?= $item['name']; ?>')}">
+            <div class="table-responsive-wrapper">
+                <table class="table table-hover table-align-middle table-striped mt-0">
+                    <thead class="thead-default">
+                        <tr>
+                            <?php foreach ($config->getPointer('list') as $item): ?>
+                            <th class="tab-padding-left">
+                                <div class="table-sorter-wrapper" ng-class="{'is-active' : isOrderBy('+<?= $item['name']; ?>') || isOrderBy('-<?= $item['name']; ?>') }">
+                                    <?php if ($config->getDefaultOrderField()): ?>
+                                        <div class="table-sorter table-sorter-up" ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'is-sorting': !isOrderBy('-<?= $item['name']; ?>')}">
+                                            <span><?= $item['alias']; ?></span>
+                                            <i class="material-icons">keyboard_arrow_up</i>
+                                        </div>
+                                        <div class="table-sorter table-sorter-down" ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'is-sorting': !isOrderBy('+<?= $item['name']; ?>')}">
+                                            <span><?= $item['alias']; ?></span>
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </div>
+                                    <?php else: ?>
                                         <span><?= $item['alias']; ?></span>
-                                        <i class="material-icons">keyboard_arrow_up</i>
-                                    </div>
-                                    <div class="table-sorter table-sorter-down" ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'is-sorting': !isOrderBy('+<?= $item['name']; ?>')}">
-                                        <span><?= $item['alias']; ?></span>
-                                        <i class="material-icons">keyboard_arrow_down</i>
-                                    </div>
-                                <?php else: ?>
-                                    <span><?= $item['alias']; ?></span>
-                                <?php endif; ?>
-                            </div>
-                        </th>
-                        <?php endforeach; ?>
-                        <th class="crud-buttons-column"></th>
-                    </tr>
-                </thead>
-                <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
-                    <tr ng-if="config.groupBy" class="table-group" ng-click="viewToggler[key]=!viewToggler[key]">
-                        <td colspan="<?= count($config->getPointer('list')) + 1 ?>">
-                            <strong>{{key}}</strong>
-                            <i class="material-icons right" ng-show="!viewToggler[key]">keyboard_arrow_right</i>
-                            <i class="material-icons right" ng-show="viewToggler[key]">keyboard_arrow_down</i>
-                        </td>
-                    </tr>
-                    <tr ng-repeat="(k, item) in items track by k | srcbox:config.searchString" ng-show="viewToggler[key]" <?php if ($isInline && !$relationCall): ?>ng-click="parentSelectInline(item)" <?php if ($modelSelection): ?>ng-class="{'crud-selected-row': getRowPrimaryValue(item) == <?= $modelSelection?>}"<?php endif; ?> class="crud-selectable-row"<?php endif; ?>>
-                        <?php $i = 0; foreach ($config->getPointer('list') as $item): $i++; ?>
-                            <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
-                                 <td class="<?= $i != 1 ?: 'tab-padding-left'; ?>"><?= $element['html']; ?></td>
-                             <?php endforeach; ?>
-                         <?php endforeach; ?>
-                        <td class="crud-buttons-column" ng-hide="isLocked(config.tableName, item[config.pk])">
-                            <?php if (count($this->context->getButtons()) > 0): ?>
-                                <div class="crud-buttons">
-                                    <i class="crud-buttons-toggler material-icons">more_vert</i>
-                                    <div class="crud-buttons-pan">
-                                        <?php foreach ($this->context->getButtons() as $item): ?>
-                                            <button type="button" class="crud-buttons-button" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i><?php if (!empty($item["label"])): echo "<span class=\"btn-crud-label\">". $item["label"] .  "</span>"; endif; ?></span></button>
-                                        <?php endforeach; ?>
-                                    </div>
+                                    <?php endif; ?>
                                 </div>
-                            <?php endif; ?>
-                        </td>
-                        <td class="text-right" ng-show="isLocked(config.tableName, item[config.pk])">
-                            <small><i class="material-icons btn-symbol">lock_outline</i><?= Module::t('locked_info'); ?></small>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </th>
+                            <?php endforeach; ?>
+                            <th class="crud-buttons-column"></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
+                        <tr ng-if="config.groupBy" class="table-group" ng-click="viewToggler[key]=!viewToggler[key]">
+                            <td colspan="<?= count($config->getPointer('list')) + 1 ?>">
+                                <strong>{{key}}</strong>
+                                <i class="material-icons right" ng-show="!viewToggler[key]">keyboard_arrow_right</i>
+                                <i class="material-icons right" ng-show="viewToggler[key]">keyboard_arrow_down</i>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="(k, item) in items track by k | srcbox:config.searchString" ng-show="viewToggler[key]" <?php if ($isInline && !$relationCall): ?>ng-click="parentSelectInline(item)" <?php if ($modelSelection): ?>ng-class="{'crud-selected-row': getRowPrimaryValue(item) == <?= $modelSelection?>}"<?php endif; ?> class="crud-selectable-row"<?php endif; ?>>
+                            <?php $i = 0; foreach ($config->getPointer('list') as $item): $i++; ?>
+                                <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
+                                     <td class="<?= $i != 1 ?: 'tab-padding-left'; ?>"><?= $element['html']; ?></td>
+                                 <?php endforeach; ?>
+                             <?php endforeach; ?>
+                            <td class="crud-buttons-column" ng-hide="isLocked(config.tableName, item[config.pk])">
+                                <?php if (count($this->context->getButtons()) > 0): ?>
+                                    <div class="crud-buttons">
+                                        <i class="crud-buttons-toggler material-icons">more_vert</i>
+                                        <div class="crud-buttons-pan">
+                                            <?php foreach ($this->context->getButtons() as $item): ?>
+                                                <button type="button" class="crud-buttons-button" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?= $item['icon']; ?></i><?php if (!empty($item["label"])): echo "<span class=\"btn-crud-label\">". $item["label"] .  "</span>"; endif; ?></span></button>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </td>
+                            <td class="text-right" ng-show="isLocked(config.tableName, item[config.pk])">
+                                <small><i class="material-icons btn-symbol">lock_outline</i><?= Module::t('locked_info'); ?></small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <div ng-show="data.list.length == 0" class="alert"><?= Module::t('ngrest_crud_empty_row'); ?></div>
 

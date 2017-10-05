@@ -45,22 +45,24 @@ use luya\cms\admin\Module;
         </div>
         <div ng-switch-when="2">
             <h1><?= Module::t('versions_selector'); ?></h1>
-            <table class="table table-bordered table-responsive">
-                <tr>
-                    <th><?= Module::t('version_input_name'); ?></th>
-                    <th><?= Module::t('version_input_layout'); ?></th>
-                    <th colspan="3"><?= Module::t('cmsadmin_created_at'); ?></th>
-                </tr>
-                <tr ng-repeat="versionItem in typeData">
-                    <td>{{versionItem.version_alias}} <span class="badge badge-primary" ng-if="item.nav_item_type_id == versionItem.id"><?= Module::t('view_index_page_version_chooser'); ?></span></td>
-                    <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
-                    <td>{{versionItem.timestamp_create | date :'short'}}</td>
-                    <td>
-                        <button type="button" class="btn btn-symbol btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button>
-                        <button type="button" class="btn btn-delete btn-icon btn-nolabel" ng-if="item.nav_item_type_id != versionItem.id" ng-click="removeVersion(versionItem)"></button>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-responsive-wrapper">
+                <table class="table table-bordered">
+                    <tr>
+                        <th><?= Module::t('version_input_name'); ?></th>
+                        <th><?= Module::t('version_input_layout'); ?></th>
+                        <th colspan="3"><?= Module::t('cmsadmin_created_at'); ?></th>
+                    </tr>
+                    <tr ng-repeat="versionItem in typeData">
+                        <td>{{versionItem.version_alias}} <span class="badge badge-primary" ng-if="item.nav_item_type_id == versionItem.id"><?= Module::t('view_index_page_version_chooser'); ?></span></td>
+                        <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
+                        <td>{{versionItem.timestamp_create | date :'short'}}</td>
+                        <td>
+                            <button type="button" class="btn btn-symbol btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button>
+                            <button type="button" class="btn btn-delete btn-icon btn-nolabel" ng-if="item.nav_item_type_id != versionItem.id" ng-click="removeVersion(versionItem)"></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div ng-switch-when="4">
             <h1><?= Module::t('version_edit_title'); ?> <span class="badge badge-secondary">{{editVersionItem.version_alias}}</span></h1>

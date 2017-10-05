@@ -125,24 +125,26 @@ final class TableBlock extends PhpBlock
     public function admin()
     {
         return  '<p>{% if extras.table is empty %}<span class="block__empty-text">' . Module::t('block_table_no_table') . '</span>{% else %}'.
-                '<table class="table table-bordered table-striped table-align-middle table-responsive">'.
-                    '{% if cfgs.header %}'.
-                    '<thead class="thead-inverse">'.
-                        '<tr>'.
-                            '{% for column in extras.headerData %}<th>{{ column }}</th>{% endfor %}'.
-                        '</tr>'.
-                    '</thead>'.
-                    '{% endif %}'.
-                    '<tbody>'.
-                        '{% for row in extras.table %}'.
-                        '<tr>'.
-                            '{% for column in row %}'.
-                            '<td>{{ column }}</td>'.
+                '<div class="table-responsive-wrapper">' .
+                    '<table class="table table-bordered table-striped table-align-middle">'.
+                        '{% if cfgs.header %}'.
+                        '<thead class="thead-inverse">'.
+                            '<tr>'.
+                                '{% for column in extras.headerData %}<th>{{ column }}</th>{% endfor %}'.
+                            '</tr>'.
+                        '</thead>'.
+                        '{% endif %}'.
+                        '<tbody>'.
+                            '{% for row in extras.table %}'.
+                            '<tr>'.
+                                '{% for column in row %}'.
+                                '<td>{{ column }}</td>'.
+                                '{% endfor %}'.
+                            '</tr>'.
                             '{% endfor %}'.
-                        '</tr>'.
-                        '{% endfor %}'.
-                    '</tbody>'.
-                '</table>'.
+                        '</tbody>'.
+                    '</table>'.
+                '</div>'.
                 '{% endif %}';
     }
 }

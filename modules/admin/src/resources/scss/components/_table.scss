@@ -86,7 +86,7 @@
 
 .table-responsive {
 
-    @media (max-width:$reponsive-table-breakpoint) {
+    @media (max-width: $reponsive-table-breakpoint) {
         display: block;
         width: 100%;
         overflow-x: auto;
@@ -96,5 +96,19 @@
         &.table-bordered {
             border: 0;
         }
+    }
+}
+
+.table-responsive-wrapper {
+    display: block;
+    overflow: hidden;
+    overflow-x: scroll;
+    width: 100%;
+
+    table,
+    .table-responsive {
+        display: table;
+        overflow: hidden;
+        width: 100%;
     }
 }

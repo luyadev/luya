@@ -48,6 +48,19 @@
     }
 }
 
+.luya-main-wrapper {
+    display: block;
+    width: 100%;
+
+    @media (min-width:$mobile-nav-breakpoint) {
+        max-width: calc(100% - #{$mainnav-width});
+
+        .luya-mainnav-small + & {
+            max-width: calc(100% - #{$mainnav-width-small});
+        }
+    }
+}
+
 .luya-subnav {
     background-color: map-get($grays, 100);
     color: color('gray');

@@ -231,6 +231,7 @@ use luya\admin\Module as Admin;
                 </div>
             </div>
             <div class="filemanager-files-table">
+                <div class="table-responsive-wrapper"></div>
                 <table class="table table-hover table-responsive table-striped table-align-middle mt-4">
                     <thead class="thead-default">
                         <tr>
