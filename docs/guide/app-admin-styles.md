@@ -86,6 +86,23 @@ In order to build
 </div>
 ```
 
+## Tables
+
+You can use all the classes provided by bootstrap: https://getbootstrap.com/docs/4.0/content/tables/.
+
+### Responsive tables
+
+In addition to the bootstrap `table-responsive` version we have a wrapper to improve the overall behaviour of tables on mobile.  
+You can use the wrapper as following:
+
+```html
+<div class="table-responsive-wrapper">
+    <table class="table ..."></table>
+</div>
+```
+
+In this case you don't have to add the `table-responsive` class to the table.
+
 ## General Colors (in progress)
 
 
