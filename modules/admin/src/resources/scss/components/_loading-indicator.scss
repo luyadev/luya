@@ -8,6 +8,11 @@ $loading-indicator-height: 150px !default;
     margin: auto;
     text-align: center;
     width: ($loading-indicator-line-width * 5) + (($loading-indicator-margin-left-right * 2) * 5);
+
+    &-small {
+        height: $loading-indicator-height / 2;
+        width: (($loading-indicator-line-width * 5) + (($loading-indicator-margin-left-right * 2) * 5)) / 2;
+    }
 }
 
 .loading-indicator > div {
@@ -18,6 +23,11 @@ $loading-indicator-height: 150px !default;
     height: 100%;
     margin: 0 $loading-indicator-margin-left-right;
     width: $loading-indicator-line-width;
+}
+
+.loading-indicator-small > div {
+    margin: 0 ($loading-indicator-margin-left-right / 2);
+    width: ($loading-indicator-line-width / 2);
 }
 
 .loading-indicator .rect2 {

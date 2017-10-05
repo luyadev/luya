@@ -1,19 +1,21 @@
 .luyasearch {
-    position: absolute;
-    display: block;
-    width: 640px;
-    max-width: 100%;
-    top: 0;
-    bottom: 0;
     background: white;
-    z-index: z-index(luyasearch);
-    padding-left: 62px;
-    transition: .25s left ease-in-out;
+    bottom: 0;
     box-shadow: 0 0 10px -2px map-get($grays, 800);
+    display: none;
+    max-width: 640px;
     overflow-y: auto;
+    padding: 73px $content-padding-x 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: z-index(luyasearch);
 
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: block;
+    }
     @include media-breakpoint-up(lg) {
-        width: 70%;
+        max-width: 70%;
     }
 
     &-closed {
@@ -21,39 +23,60 @@
     }
 
     &-open {
-        left: 0;
-    }
+        left: 62px;
 
-    &-inner {
-        padding: $content-padding-x;
+        &.luyasearch-toggled {
+            left: 200px;
+        }
     }
+}
 
-    &-toggled {
-        padding-left: 200px;
-    }
+.luyasearch-loader {
+    margin-top: 25px;
 }
 
 .luyasearch-form {
-    position: relative;
     background: map-get($grays, 100);;
+    max-width: 640px;
     padding: $content-padding-x;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+    @include media-breakpoint-up(lg) {
+        max-width: 70%;
+    }
+
+    .luyasearch-closed & {
+        left: -100%;
+    }
+
+    .luyasearch-open & {
+        left: 62px;
+    }
+
+    .luyasearch-open.luyasearch-toggled & {
+        left: 200px;
+    }
 }
+
 .luyasearch-input {
-    width: calc(100% - 50px);
     max-width: 100%;
+    width: calc(100% - 50px);
 }
 
 .luyasearch-close {
+    background: $white;
+    cursor: pointer;
+    height: 37px;
+    line-height: 1em;
+    padding: 7px;
     position: absolute;
     right: 10px;
     top: 10px;
-    width: 31px;
-    height: 37px;
-    padding: 7px;
-    cursor: pointer;
     transition: .25s color ease-in-out;
-    background: $white;
-    line-height: 1em;
+    width: 31px;
 
     &:hover {
         color: $pink;
@@ -71,106 +94,6 @@
 }
 
 .luyasearch-result {
-    background: map-get($grays, 100);;
-    padding: $content-padding-x;
-    position: relative;
     margin-bottom: 15px;
-}
-
-.luyasearch-result-title {
-    color: map-get($grays, 800);
-    display: block;
-    font-size: 20px;
-    font-family: $font-family-sans-serif;
-    font-weight: 200;
-    position:relative;
-}
-
-.luyasearch-toggler {
-    background: $white;
-    position: absolute;
-    right:0;
-    top: 0;
-    transform: translateY(-50%);
-    transition: transform .25s ease-in-out;
-    cursor: pointer;
-    padding: 5px;
-    color: inherit;
-    transition: .25s color ease-in-out;
-
-    &:hover {
-        color: $pink;
-    }
-
-    &-open {
-
-        transform: rotate(90deg);
-    }
-    &-closed {
-
-        transform: rotate(-90deg);
-    }
-}
-
-.luyasearch-result-counter {
-    position: absolute;
-    right: -7px;
-    top: -7px;
-    font-size: 9px;
-    padding:1px;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: map-get($grays, 800);
-    color: $white;
-    text-align: center;
-}
-
-.luyasearch-result-counter-100 {
-    color: $black;
-    position: absolute;
-    right: -18px;
-    top: -16px;
-    font-size: 9px;
-    padding:1px;
-    text-align: right;
-    font-size: 16px;
-    font-weight: 400;
-}
-
-.luyasearch-table-wrapper {
-    overflow-x: auto;
-    margin-top: 10px;
-    // background: map-get($grays, 100);;
-    padding: 5px;
-}
-
-.luyasearch-table {
-    width: 100%;
-    td {
-        min-width: 100px;
-        transition: .25s padding ease-in-out;
-    }
-
-    tr {
-        line-height: 35px;
-        cursor: pointer;
-        transition: .25s background ease-in-out, .25s color ease-in-out;
-
-        &:hover {
-            &:first-of-type {
-                background: none;
-                color: $black;
-                cursor: default;
-            }
-            background: $pink;
-            color: $white;
-
-            td {
-                &:first-of-type {
-
-                }
-            }
-        }
-    }
+    position: relative;
 }

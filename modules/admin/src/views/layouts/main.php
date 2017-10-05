@@ -146,25 +146,41 @@ $this->beginPage()
             <div class="alert alert-info" ng-show="(searchResponse.length == 0 && searchResponse != null) && searchQuery.length > 2">
                 <?= Admin::t('layout_search_no_results'); ?>
             </div>
-            <div class="alert" ng-show="searchResponse==null && searchQuery.length > 2">
-                Loading ...
+            <div class="luyasearch-loader" ng-show="searchResponse==null && searchQuery.length > 2">
+                <div class="loading-indicator loading-indicator-small">
+                    <div class="rect1"></div><!--
+                --><div class="rect2"></div><!--
+                --><div class="rect3"></div><!--
+                --><div class="rect4"></div><!--
+                --><div class="rect5"></div>
+                </div>
             </div>
             <div class="luyasearch-results">
                 <div class="luyasearch-result" ng-repeat="item in searchResponse">
-                    <div class="luyasearch-result-title" ng-click="groupVisibility=!groupVisibility"><i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
-                        <i class="material-icons luyasearch-toggler luyasearch-toggler-open" ng-if="groupVisibility">chevron_right</i>
-                        <i class="material-icons luyasearch-toggler luyasearch-toggler-closed" ng-if="!groupVisibility">chevron_right</i>
+
+                    <div class="card" ng-class="{'card-closed': !groupVisibility}">
+                        <div class="card-header" ng-click="groupVisibility=!groupVisibility">
+                            <span class="material-icons card-toggle-indicator">keyboard_arrow_down</span>
+                            <i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive-wrapper">
+                                <table class="table table-hover table-align-middle">
+                                    <thead>
+                                        <tr ng-repeat="row in item.data | limitTo:1">
+                                            <th ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{k}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in item.data" ng-click="searchDetailClick(item, row)">
+                                            <td ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{v}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="luyasearch-table-wrapper" ng-show="groupVisibility">
-                        <table class="luyasearch-table">
-                            <tr ng-repeat="row in item.data | limitTo:1">
-                                <th ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{k}}</th>
-                            </tr>
-                            <tr ng-repeat="row in item.data" ng-click="searchDetailClick(item, row)">
-                                <td ng-hide="!item.hideFields.indexOf(k)" ng-repeat="(k,v) in row">{{v}}</td>
-                            </tr>
-                        </table>
-                    </div>
+
                 </div>
             </div>
         </div>
