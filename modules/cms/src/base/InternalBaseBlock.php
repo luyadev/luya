@@ -499,6 +499,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return $holders;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getConfigPlaceholdersByRowsExport()
     {
         $array =  (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
