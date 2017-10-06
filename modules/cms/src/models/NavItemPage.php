@@ -218,12 +218,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 
                 // see if its a valid block object
                 if ($blockObject) {
+                	$className = get_class($blockObject);
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
                     
                     // inject variations variables
-                    $possibleVariations = isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false;
+                    $possibleVariations = isset($variations[$className]) ? $variations[$className] : false;
                     
                     if (isset($possibleVariations[$placeholder['variation']])) {
                         $ensuredVariation = $possibleVariations[$placeholder['variation']];
@@ -417,6 +418,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
         $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
         
+        $className = get_class($blockObject);
+        
         return [
             'is_dirty' => (bool) $blockItem['is_dirty'],
             'is_container' => (int) $blockObject->getIsContainer(),
@@ -434,7 +437,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
-            'variations' => isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false,
+            'variations' => isset($variations[$className]) ? $variations[$className] : false,
             'variation' => empty($blockItem['variation'])? "0" : $blockItem['variation'], // as by angular selection
             'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
         ];
