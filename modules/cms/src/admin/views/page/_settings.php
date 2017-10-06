@@ -15,7 +15,7 @@ use luya\cms\admin\Module;
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><i class="material-icons">content_copy</i><span><?= Module::t('page_update_actions_deepcopy_title'); ?></span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" ng-show="!isDraft">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=5" ng-class="{'active':pageSettingsOverlayTab==5}"><i class="material-icons">home</i><span><?= Module::t('cmsadmin_settings_homepage_title'); ?></span></a>
                 </li>
                 <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
@@ -57,7 +57,7 @@ use luya\cms\admin\Module;
                 <p><?= Module::t('page_update_actions_deepcopy_text'); ?></p>
                 <p><button type="button" class="btn btn-save btn-icon" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
             </div>
-            <div ng-switch-when="5">
+            <div ng-switch-when="5" ng-show="!isDraft">
                 <h1><?= Module::t('cmsadmin_settings_homepage_title'); ?></h1>
                 <p><?= Module::t('view_update_homepage_info'); ?></p>
                 <!-- OLD CODE -->

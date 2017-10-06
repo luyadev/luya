@@ -1160,6 +1160,9 @@
 									$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
 								}
 							}
+						} else {
+							$scope.currentPageVersion = response.data.item.nav_item_type_id;
+							$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
 						}
 					}
 

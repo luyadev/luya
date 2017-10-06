@@ -124,7 +124,7 @@ use luya\helpers\Html;
         <li class="nav item nav-item-title"><span>{{ item.title }}</span></li>
     </ul>
 
-    <ul class="nav nav-tabs ml-auto" role="tablist" ng-if="item.nav_item_type==1">
+    <ul class="nav nav-tabs ml-auto" role="tablist" ng-if="item.nav_item_type==1 && !isDraft">
         <li class="nav-item dropdown" ng-class="{'show': versionDropDownVisbility}">
             <a class="nav-link dropdown-toggle" role="button" ng-click="toggleVersionsDropdown()">{{ currentPageVersionAlias }}</a>
             <div class="dropdown-menu" ng-class="{'show': versionDropDownVisbility}">

@@ -9,14 +9,14 @@ use luya\cms\admin\Module;
             <li class="nav-item">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(1)" ng-class="{'active':tab==1}"><i class="material-icons">title</i><span><?= Module::t('cmsadmin_item_settings_titleslug'); ?></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" ng-show="!isDraft">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(3)" ng-class="{'active':tab==3}"><i class="material-icons">change_history</i><span><?= Module::t('version_create_title'); ?></span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" ng-show="!isDraft">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(2)" ng-class="{'active':tab==2}"><i class="material-icons">track_changes</i><span><?= Module::t('versions_selector'); ?></span></a>
             </li>
-            <li><hr /></li>
-            <li ng-repeat="(key, versionItem) in typeData">
+            <li ng-show="!isDraft"><hr /></li>
+            <li ng-show="!isDraft" ng-repeat="(key, versionItem) in typeData">
                 <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)"><span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=versionItem.id, 'badge-primary': item.nav_item_type_id==versionItem.id}">V{{$index+1}}</span> {{versionItem.version_alias}}</a>
             </li>
         </ul>
@@ -39,8 +39,7 @@ use luya\cms\admin\Module;
                 <div ng-switch-when="3">
                     <update-form-redirect data="typeDataCopy"></update-form-redirect>
                 </div>
-                
-                <button style="margin-top:15px;" type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
+                <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
             </form>
         </div>
         <div ng-switch-when="2">
