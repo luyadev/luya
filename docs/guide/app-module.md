@@ -77,7 +77,7 @@ class Module extends \luya\admin\base\Module
 
 ## Import Method
 
-All modules can contain a `import(\luya\console\interfaces\ImportController $import)` import method, this method will be called when running the [console command `import`](luya-console.md). One of the main ideas behind LUYA is to store data from programmatic files into your database while importing. If the `import()` method returns an array each class must extend the `luya\console\Importer` class.
+All modules can contain a {{luya\admin\base\Module::import()}} method, this method will be called when running the [console command `import`](luya-console.md). One of the main ideas behind LUYA is to store data in files and import them into your database. If {{luya\admin\base\Module::import()}} method returns an array each class must extend from the {{luya\console\Importer}} class.
 
 Example response for multiple importer classes:
 
