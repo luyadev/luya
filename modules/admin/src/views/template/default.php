@@ -16,7 +16,7 @@ use luya\admin\Module;
             <div class="modulenav-group">
                 <ul class="modulenav-list">
                     <li class="modulenav-item">
-                        <span class="modulenav-link" ng-class="{'modulenav-link-active' :currentItem == null }" ng-click="loadDashboard()">
+                        <span class="modulenav-link" ng-class="{'modulenav-link-active' :currentItem == null }" ng-click="loadDashboard(); isOpenModulenav=false;">
                             <i class="modulenav-icon material-icons">dashboard</i>
                             <span class="modulenav-label">
                                 <?= Module::t('menu_dashboard'); ?>
