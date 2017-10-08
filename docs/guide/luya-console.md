@@ -16,7 +16,7 @@ Global LUYA commands:
 
 |Command|Description
 |--------|---------
-|`import`|Updates permission, import cms blocks, updates cms layouts, updates image filters. Create your custom [importer](app-module.md#import-method) to run jobs while importing. Import is base of the main concepts of LUYA. It tryes to synchronize your project data into the database. This way you can track your files within version control systems and you don't have to copy database between enviroments.
+|`import`|Updates permission, cms blocks, cms layouts, image filters. Import is a one of the main concepts of LUYA. Its saving your project data into the database. This way you can track your files within VCS (Git, SVN) and import them. [Create Import Commmand](app-module.md#import-method).
 |`migrate`|Execute all migrations from all modules, updates your database if any. The main difference to the Yii migrate command is its going to collect all migrations from all modules.
 |`migrate/create migration1 modulename`|Create new migration file named `mymigration1` in the module `modulename`: `migrate/create mymigration1 modulename`.
 |`health`|Tests all basic directory if they are writeable and existing.
