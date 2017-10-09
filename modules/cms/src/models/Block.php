@@ -201,8 +201,8 @@ class Block extends NgRestModel
      */
     public function getNameForLog()
     {
-        if ($this->object && $this->object instanceof BlockInterface) {
-            return $this->object->name();
+    	if ($this->getClassObject() && $this->getClassObject() instanceof BlockInterface) {
+    		return $this->getClassObject()->name();
         }
         
         return $this->class;
