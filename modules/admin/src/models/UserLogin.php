@@ -53,7 +53,7 @@ final class UserLogin extends ActiveRecord
         return [
             [['user_id', 'timestamp_create', 'auth_token', 'ip'], 'required'],
             [['user_id', 'timestamp_create'], 'integer'],
-        	[['is_destroyed'], 'boolean'],
+            [['is_destroyed'], 'boolean'],
             [['auth_token'], 'string', 'max' => 120],
             [['ip'], 'string', 'max' => 15],
         ];
@@ -70,7 +70,7 @@ final class UserLogin extends ActiveRecord
             'timestamp_create' => 'Timestamp Create',
             'auth_token' => 'Auth Token',
             'ip' => 'Ip',
-        	'is_destroyed' => 'Is Destroyed',
+            'is_destroyed' => 'Is Destroyed',
         ];
     }
 }

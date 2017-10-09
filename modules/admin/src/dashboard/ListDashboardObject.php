@@ -22,9 +22,8 @@ namespace luya\admin\dashboard;
  */
 class ListDashboardObject extends BasicDashboardObject
 {
-	/**
-	 * @inheritdoc
-	 */
-	public $outerTemplate = '<div class="card-header">{{title}}</div><ul class="list-group list-group-flush">{{template}}</ul>';
-	
+    /**
+     * @inheritdoc
+     */
+    public $outerTemplate = '<div class="card-header">{{title}}</div><ul class="list-group list-group-flush">{{template}}</ul>';
 }

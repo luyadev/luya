@@ -10,7 +10,7 @@ use luya\admin\ngrest\base\Render;
 
 /**
  * Render an Active Window Callback call.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

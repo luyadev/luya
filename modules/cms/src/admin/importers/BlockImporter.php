@@ -51,9 +51,9 @@ class BlockImporter extends Importer
         // remove unused block groups
         
         foreach (BlockGroup::find()->where(['not in', 'id', $this->blockGroupIds])->all() as $oldBlockGroup) {
-        	if ($oldBlockGroup->delete()) {
-        		$this->addLog('Old blockgroup has been deleted: ' . $oldBlockGroup->name);
-        	}
+            if ($oldBlockGroup->delete()) {
+                $this->addLog('Old blockgroup has been deleted: ' . $oldBlockGroup->name);
+            }
         }
     }
     
@@ -75,7 +75,7 @@ class BlockImporter extends Importer
         $blockGroupId = $this->getBlockGroupId($blockObject);
         
         if (!in_array($blockGroupId, $this->blockGroupIds)) {
-        	$this->blockGroupIds[] = $blockGroupId;
+            $this->blockGroupIds[] = $blockGroupId;
         }
         
         if (!$model) {
@@ -137,8 +137,8 @@ class BlockImporter extends Importer
         if ($group) {
             $group->updateAttributes([
                 'name' => $groupObject->label(),
-            	'class' => $groupClassName,
-            	'is_deleted' => false,
+                'class' => $groupClassName,
+                'is_deleted' => false,
             ]);
             return $group->id;
         } else {

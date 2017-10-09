@@ -71,7 +71,7 @@ final class UserOnline extends ActiveRecord
 
     /**
      * Lock the user for an action.
-     * 
+     *
      * @param unknown $userId
      * @param unknown $table
      * @param unknown $pk
@@ -95,7 +95,7 @@ final class UserOnline extends ActiveRecord
     
     /**
      * Unlock the user from an action.
-     * 
+     *
      * @param unknown $userId
      */
     public static function unlock($userId)
@@ -133,22 +133,22 @@ final class UserOnline extends ActiveRecord
 
     /**
      * Remove all rows for a given User Id.
-     * 
+     *
      * @param int $userId
      */
     public static function removeUser($userId)
     {
-    	self::deleteAll(['user_id' => $userId]);
+        self::deleteAll(['user_id' => $userId]);
     }
 
     /**
      * Clear all users which are not logged in anymore.
-     * 
+     *
      * Default value in seconds is a half hour (30 * 60) = 1800
      */
     public static function clearList()
-    {   
-    	self::deleteAll(['<=', 'last_timestamp', (time() - YII_ENV_PROD ? 2000 : 4000)]);
+    {
+        self::deleteAll(['<=', 'last_timestamp', (time() - YII_ENV_PROD ? 2000 : 4000)]);
     }
     
     /**

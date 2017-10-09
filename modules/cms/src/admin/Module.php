@@ -13,7 +13,7 @@ use luya\admin\components\AdminMenuBuilder;
 
 /**
  * CMS Admin Module.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -55,8 +55,8 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public $dashboardObjects = [
         [
-        	'class' => 'luya\admin\dashboard\ListDashboardObject',
-        	'template' => '
+            'class' => 'luya\admin\dashboard\ListDashboardObject',
+            'template' => '
 				<a ng-repeat="item in data" ui-sref="custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})" class="list-group-item list-group-item-action flex-column align-items-start">
 				    <div class="d-flex w-100 justify-content-between">
 				      <h5 class="mb-1">{{item.title}}</h5>

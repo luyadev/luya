@@ -8,7 +8,7 @@ use yii\web\JsExpression;
 
 /**
  * The View renderer for RenderCrud class.
- * 
+ *
  * @property \luya\admin\ngrest\render\RenderCrud $context
  *
  * @author Basil Suter <basil@nadar.io>

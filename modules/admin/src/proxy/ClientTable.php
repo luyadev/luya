@@ -10,9 +10,9 @@ use yii\helpers\Console;
 
 /**
  * Admin Proxy comands Sync Database.
- * 
+ *
  * @property \yii\db\TableSchema $schema Schema object
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -26,7 +26,7 @@ class ClientTable extends Object
     public $build;
     
     /**
-     * 
+     *
      * @param ClientBuild $build
      * @param array $data
      * @param array $config

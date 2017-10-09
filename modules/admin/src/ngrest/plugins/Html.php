@@ -9,7 +9,7 @@ use luya\admin\ngrest\base\Plugin;
  * Renders HTML in List View.
  *
  * This will bind the Api Response as trusted html and allow the html injection.
- * 
+ *
  * The frontend output will not encoded, so make sure no user generated contnet is provided by the html plugin.
  *
  * @since 1.0.0-beta7

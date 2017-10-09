@@ -58,7 +58,7 @@ class DefaultController extends Controller
         $authToken = UserLogin::find()->select(['auth_token'])->where(['user_id' => Yii::$app->adminuser->id, 'ip' => Yii::$app->request->userIP, 'is_destroyed' => false])->scalar();
         
         $this->view->registerJs('zaa.run(function($rootScope) { $rootScope.luyacfg = ' . Json::encode([
-        	'authToken' => $authToken,
+            'authToken' => $authToken,
             'homeUrl' => Url::home(true),
             'i18n' => $this->module->jsTranslations,
             'helptags' => $tags,

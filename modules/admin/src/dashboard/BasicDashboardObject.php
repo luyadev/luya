@@ -7,7 +7,7 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Fast generated Dashboard Objects.
- * 
+ *
  * The default object is the default class for all {{luya\admin\base\Module::$dashboardObjects}} items without a class defintion.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -22,12 +22,12 @@ class BasicDashboardObject extends BaseDashboardObject
      *     <!-- content from: $outerTemplate -->
      * </div>
      * ```
-     * 
+     *
      * The tag element `<div>` can be changed by overriding the key `tag`.
      */
     public $wrapperOptions = [
         'class' => 'card',
-    	'tag' => 'div',
+        'tag' => 'div',
     ];
     
     /**
@@ -36,13 +36,13 @@ class BasicDashboardObject extends BaseDashboardObject
      * ```
      * <h3>{{title}}</h3>{{template}}
      * ```
-     * 
-     * The variables 
-     * 
+     *
+     * The variables
+     *
      * + {{title}}
      * + {{template}}
      * + {{dataApiUrl}}
-     * 
+     *
      * Will be automatically parsed to its original input while rendering.
      */
     public $outerTemplate = '<div class="card-header">{{title}}</div><div class="card-body">{{template}}</div>';
@@ -52,11 +52,10 @@ class BasicDashboardObject extends BaseDashboardObject
      */
     public function getOuterTemplateContent()
     {
-    	$options = ArrayHelper::merge([
-    		'ng-controller' => 'DefaultDashboardObjectController',
-    		'ng-init' => 'loadData(\'{{dataApiUrl}}\')']
-    	, $this->wrapperOptions);
-    	
-    	return Html::tag(ArrayHelper::remove($this->wrapperOptions, 'tag', 'div'), $this->outerTemplate, $options);
+        $options = ArrayHelper::merge([
+            'ng-controller' => 'DefaultDashboardObjectController',
+            'ng-init' => 'loadData(\'{{dataApiUrl}}\')'], $this->wrapperOptions);
+        
+        return Html::tag(ArrayHelper::remove($this->wrapperOptions, 'tag', 'div'), $this->outerTemplate, $options);
     }
 }

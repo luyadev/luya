@@ -4,11 +4,11 @@ namespace luya\admin\dashboard;
 
 /**
  * Table Dashboard Object.
- * 
+ *
  * The table dashboard object does already wrap the table tag.
- * 
+ *
  * Example usage:
- * 
+ *
  * ```php
  * [
  *     'class' => 'luya\admin\dashboards\TableObject',
@@ -17,13 +17,13 @@ namespace luya\admin\dashboard;
  *     'title' => ['cmsadmin', 'cmsadmin_dashboard_lastupdate'],
  * ],
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class TableDashboardObject extends BasicDashboardObject
 {
-	/**
-	 * @inheritdoc
-	 */
-	public $outerTemplate = '<div class="card-header">{{title}}</div><div class="card-body"><div class="table-responsive-wrapper"><table class="table table-hover">{{template}}</table></div></div>';
+    /**
+     * @inheritdoc
+     */
+    public $outerTemplate = '<div class="card-header">{{title}}</div><div class="card-body"><div class="table-responsive-wrapper"><table class="table table-hover">{{template}}</table></div></div>';
 }

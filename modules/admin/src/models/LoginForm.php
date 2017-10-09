@@ -69,12 +69,12 @@ final class LoginForm extends Model
         $token = $this->getUser()->getAndStoreToken();
 
         return Yii::$app->mail
-        	->compose(Module::t('login_securetoken_mail_subject'), Module::t('login_securetoken_mail', [
-	            'url' => Url::base(true),
-	            'token' => $token,
-	        ]))
-        	->address($this->user->email)
-        	->send();
+            ->compose(Module::t('login_securetoken_mail_subject'), Module::t('login_securetoken_mail', [
+                'url' => Url::base(true),
+                'token' => $token,
+            ]))
+            ->address($this->user->email)
+            ->send();
     }
 
     /**
@@ -112,8 +112,8 @@ final class LoginForm extends Model
             
             // update user model
             $user->updateAttributes([
-            	'force_reload' => false,
-            	'auth_token' => Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt),
+                'force_reload' => false,
+                'auth_token' => Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt),
             ]);
             
             // kill prev user logins
@@ -123,7 +123,7 @@ final class LoginForm extends Model
             $login = new UserLogin([
                 'auth_token' => $user->auth_token,
                 'user_id' => $user->id,
-            	'is_destroyed' => false,
+                'is_destroyed' => false,
             ]);
             $login->save();
             

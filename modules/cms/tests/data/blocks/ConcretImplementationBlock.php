@@ -169,7 +169,7 @@ class ConcretImplementationBlock implements BlockInterface
 
     public function getConfigPlaceholdersByRowsExport()
     {
-    	return [];
+        return [];
     }
     
     /**

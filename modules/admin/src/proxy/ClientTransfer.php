@@ -10,7 +10,7 @@ use luya\helpers\FileHelper;
 
 /**
  * Admin Proxy commands Transfer Files.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

@@ -128,16 +128,16 @@ interface BlockInterface
      * This is used to render the grid system in the admin ui.
      *
      * The array which is returned contains rows which contains cols.
-     * 
+     *
      * ```php
      * return [
      *     [], // row 1
      *     [], // row 2
      * ];
      * ```
-     * 
+     *
      * each row can contain columns
-     * 
+     *
      * ```php
      * return [
      *     [ // row 1
@@ -149,7 +149,7 @@ interface BlockInterface
      *     ],
      * ];
      * ```
-     * 
+     *
      * @return array Returns an array where each element is a row containing informations about the placeholders.
      */
     public function getConfigPlaceholdersByRowsExport();

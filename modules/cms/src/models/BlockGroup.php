@@ -16,7 +16,7 @@ use luya\admin\ngrest\base\NgRestModel;
  * @property integer $created_timestamp
  * @property string $class
  * @property \luya\cms\base\BlockGroup $classObject returns the class object based on the current Active Record.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -45,12 +45,12 @@ class BlockGroup extends NgRestModel
      */
     public function rules()
     {
-    	return [
-    		[['name', 'identifier', 'class'], 'required'],
-    		[['name', 'identifier', 'class'], 'string'],
-    		[['created_timestamp', 'is_deleted'], 'integer'],
-    		['identifier', 'unique'],
-    	];
+        return [
+            [['name', 'identifier', 'class'], 'required'],
+            [['name', 'identifier', 'class'], 'string'],
+            [['created_timestamp', 'is_deleted'], 'integer'],
+            ['identifier', 'unique'],
+        ];
     }
 
     /**
@@ -61,9 +61,9 @@ class BlockGroup extends NgRestModel
         return [
             'name' => 'Name',
             'identifer' => 'Identifier',
-        	'class' => 'Class Name',
-        	'created_timestamp' => 'Created at',
-        	'is_deleted' => 'Is deleted',
+            'class' => 'Class Name',
+            'created_timestamp' => 'Created at',
+            'is_deleted' => 'Is deleted',
         ];
     }
     
@@ -75,8 +75,8 @@ class BlockGroup extends NgRestModel
         return [
             'name' => 'text',
             'identifier' => 'text',
-        	'class' => 'text',
-        	'created_timestamp' => 'datetime'
+            'class' => 'text',
+            'created_timestamp' => 'datetime'
         ];
     }
     
@@ -85,19 +85,19 @@ class BlockGroup extends NgRestModel
      */
     public function ngRestExtraAttributeTypes()
     {
-    	return [
-    		'groupLabel' => 'text',
-    	];
+        return [
+            'groupLabel' => 'text',
+        ];
     }
 
     /**
      * Get the Group label with translation evaled.
-     * 
+     *
      * @return string Returns the group name.
      */
     public function getGroupLabel()
     {
-    	return $this->classObject->label();
+        return $this->classObject->label();
     }
     
     /**
@@ -105,26 +105,26 @@ class BlockGroup extends NgRestModel
      */
     public function ngRestScopes()
     {
-    	return [
-    		[['list'], ['groupLabel', 'identifier', 'created_timestamp', 'class']],
-    	];
-    }    
+        return [
+            [['list'], ['groupLabel', 'identifier', 'created_timestamp', 'class']],
+        ];
+    }
     
     /**
      * @inheritdoc
      */
     public function extraFields()
     {
-    	return ['groupLabel'];
+        return ['groupLabel'];
     }
     
     /**
      * Returns the block group object in order to retrieve translation data.
-     * 
+     *
      * @return \luya\cms\base\BlockGroup
      */
     public function getClassObject()
     {
-    	return Yii::createObject(['class' => $this->class]);
+        return Yii::createObject(['class' => $this->class]);
     }
 }

@@ -199,6 +199,6 @@ class ConcreptImplementationBlock implements BlockInterface
     
     public function getConfigPlaceholdersByRowsExport()
     {
-    	return [];
+        return [];
     }
 }

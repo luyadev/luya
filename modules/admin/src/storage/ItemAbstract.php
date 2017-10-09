@@ -10,7 +10,7 @@ use luya\Exception;
 
 /**
  * Base class for file, image and folder Items.
- * 
+ *
  * @property $itemArray array An array with all elements assigned for this element.
  *
  * @author Basil Suter <basil@nadar.io>

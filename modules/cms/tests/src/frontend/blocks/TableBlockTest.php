@@ -48,16 +48,16 @@ class TableBlockTest extends BlockTestCase
     
     public function testNewlineInCellMarkdown()
     {
-    	$this->block->setVarValues(['table' => [['foo
+        $this->block->setVarValues(['table' => [['foo
 bar']]]);
-    	$this->block->setCfgValues(['parseMarkdown' => 1]);
-    	$this->assertContains('foo<br />bar', $this->renderFrontendNoSpace()); 
+        $this->block->setCfgValues(['parseMarkdown' => 1]);
+        $this->assertContains('foo<br />bar', $this->renderFrontendNoSpace());
     }
     
     public function testNewlineInCell()
     {
-    	$this->block->setVarValues(['table' => [['foo
+        $this->block->setVarValues(['table' => [['foo
 bar']]]);
-    	$this->assertContains('foo<br />bar', $this->renderFrontendNoSpace());
+        $this->assertContains('foo<br />bar', $this->renderFrontendNoSpace());
     }
 }

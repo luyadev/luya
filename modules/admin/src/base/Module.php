@@ -35,9 +35,9 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      *     ]
      * ];
      * ```
-     * 
+     *
      * In order to customize the template of a basic dashboard object you can override the  {{luya\admin\dashboard\BasicDashboardObject::$outerTemplate}}:
-     * 
+     *
      * ```php
      * [
      *     'class' => 'luya\admin\dashboard\BasicDashboardObject',
@@ -47,18 +47,18 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      *     'title' => 'Latest News',
      * ],
      * ```
-     * 
+     *
      * You can also choose from predefined dashboard object which provides wrappers so you don't have to modify the {{luya\admin\dashboard\BasicDashboardObject::$outerTemplate}} string.
-     * 
+     *
      * + {{luya\admin\dashboard\ListDashboardObject}}
      * + {{luya\admin\dashboard\TableDashboardObject}}
-     * 
+     *
      */
     public $dashboardObjects = [];
 
     /**
      * > implementation discontinued but keep the concept comment for later usage.
-     * 
+     *
      * @var array The config linker property can specific the configuration class for ngRest model where the key
      * is the `api` and the value is the class to the config. An array could look like this:
      *

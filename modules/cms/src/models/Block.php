@@ -54,11 +54,11 @@ class Block extends NgRestModel
     {
         return [
             'group_id' => [
-            	'class' => SelectModel::class, 
-            	'modelClass' => BlockGroup::className(),
-            	'labelField' => function($model) {
-            		return $model->getGroupLabel();
-            	}
+                'class' => SelectModel::class,
+                'modelClass' => BlockGroup::className(),
+                'labelField' => function ($model) {
+                    return $model->getGroupLabel();
+                }
             ],
             'class' => 'text',
             'is_disabled' => 'toggleStatus',
@@ -181,9 +181,9 @@ class Block extends NgRestModel
      */
     public function getObject()
     {
-    	trigger_error('This method is deprecated use getClassObject() instead.', E_USER_DEPRECATED);
-    	
-    	return $this->getClassObject();
+        trigger_error('This method is deprecated use getClassObject() instead.', E_USER_DEPRECATED);
+        
+        return $this->getClassObject();
     }
 
     /**
@@ -193,7 +193,7 @@ class Block extends NgRestModel
      */
     public function getClassObject()
     {
-    	return Yii::createObject(['class' => $this->class]);
+        return Yii::createObject(['class' => $this->class]);
     }
     
     /**

@@ -4,9 +4,9 @@ namespace luya\admin\ngrest\render;
 
 /**
  * Interface for CRUD renderers.
- * 
+ *
  * All CRUD renderers must implement this interface in order to interact with the API and Controllers.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
