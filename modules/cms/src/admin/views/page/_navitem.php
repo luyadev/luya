@@ -145,14 +145,16 @@ use luya\helpers\Html;
         <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'" />
     </div>
     <div class="row" ng-if="item.nav_item_type==2">
-        <?= Module::t('view_update_page_is_module'); ?>
+        <div class="col-md-12">
+            <?= Module::t('view_update_page_is_module'); ?>
+        </div>
     </div>
     <div class="row" ng-if="item.nav_item_type==3">
         <div ng-switch="typeData.type">
-            <div ng-switch-when="1">
+            <div ng-switch-when="1" class="col-md-12">
                 <p><?= Module::t('view_update_page_is_redirect_internal'); ?></p>
             </div>
-            <div ng-switch-when="2">
+            <div ng-switch-when="2" class="col-md-12">
                 <p><?= Module::t('view_update_page_is_redirect_external'); ?>.</p>
             </div>
         </div>
