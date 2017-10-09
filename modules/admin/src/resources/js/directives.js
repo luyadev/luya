@@ -1556,6 +1556,10 @@
             	$scope.hour = "0";
 
             	$scope.min = "0";
+            	
+            	$scope.reset = function() {
+            		$scope.model = null;
+            	};
             },
             template: function() {
             	return  '<div class="form-group form-side-by-side zaa-datetime" ng-class="{\'input--hide-label\': i18n, \'input--with-time\': model!=null && date!=null}">' +
@@ -1582,6 +1586,7 @@
                                         '<input class="form-control zaa-datetime-minute-input" type="text" ng-model="min" ng-change="autoRefactor()" />' +
                                     '</div>' +
             	                '</div>' +
+            	                '<div ng-show="model"><button type="button" ng-click="reset()" class="ml-2 btn btn-icon btn-cancel"></nutton></div>' +
                             '</div>' +
                         '</div>';
             }
@@ -1651,6 +1656,10 @@
                 $scope.closeDatePicker = function() {
                     $scope.datePickerToggler = false;
                 };
+                
+                $scope.reset = function() {
+            		$scope.model = null;
+            	};
 
             },
             template: function() {
@@ -1666,6 +1675,7 @@
                                         '<i class="material-icons" ng-show="datePickerToggler">close</i>' +
                                     '</div>' +
                                 '</datepicker>' +
+                                '<div ng-show="model"><button type="button" ng-click="reset()" class="ml-2 btn btn-icon btn-cancel"></nutton></div>' +
                             '</div>' +
                         '</div>';
             }

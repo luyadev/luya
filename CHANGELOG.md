@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1535](https://github.com/luyadev/luya/issues/1535) Date and Datetime reset model buttons.
 - [#1536](https://github.com/luyadev/luya/issues/1536) Link directive display wrong reset data button if empty object exists.
 - [#1533](https://github.com/luyadev/luya/issues/1533) Draft mode does not display first created version. Hide elements when page is draft.
 - [#1526](https://github.com/luyadev/luya/issues/1526) Changed has-enough-space directive to use direct parent of element to check if there is enough space.
