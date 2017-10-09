@@ -382,7 +382,7 @@ final class User extends NgRestModel implements IdentityInterface, ChangePasswor
      */
     public static function findIdentity($id)
     {
-        return static::find()->joinWith(['userLogins ul'])->andWhere(['admin_user.id' => $id, 'session_id' => Yii::$app->adminuser->getSecureSessionId(), 'ip' => Yii::$app->request->userIP])->one();
+        return static::find()->joinWith(['userLogins ul'])->andWhere(['admin_user.id' => $id, 'is_destroyed' => false, 'ip' => Yii::$app->request->userIP])->one();
     }
 
     /**

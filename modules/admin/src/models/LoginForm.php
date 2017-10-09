@@ -109,21 +109,25 @@ final class LoginForm extends Model
         if ($this->validate()) {
             $user = $this->getUser();
             $user->detachBehavior('LogBehavior');
-            $user->scenario = 'login';
-            $user->force_reload = false;
-            $user->auth_token = Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt);
-            $user->save();
             
-            $sessionId = Yii::$app->security->generateRandomString(64);
-
-            Yii::$app->adminuser->setSecureSessionId($sessionId);
+            // update user model
+            $user->updateAttributes([
+            	'force_reload' => false,
+            	'auth_token' => Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt),
+            ]);
             
+            // kill prev user logins
+            UserLogin::updateAll(['is_destroyed' => true], ['user_id' => $user->id]);
+            
+            // create new user login
             $login = new UserLogin([
                 'auth_token' => $user->auth_token,
                 'user_id' => $user->id,
-                'session_id' => $sessionId,
+            	'is_destroyed' => false,
             ]);
             $login->save();
+            
+            // refresh user online list
             UserOnline::refreshUser($user->id, 'login');
             return $user;
         } else {

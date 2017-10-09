@@ -11,6 +11,7 @@ use luya\TagParser;
 use luya\web\View;
 use luya\helpers\ArrayHelper;
 use yii\helpers\Markdown;
+use luya\admin\models\UserLogin;
 
 /**
  * Administration Controller provides, dashboard, logout and index.
@@ -51,14 +52,13 @@ class DefaultController extends Controller
             ];
         }
         
-        // register auth token
-        //$this->view->registerJs("var authToken='".Yii::$app->adminuser->identity->authToken ."';", View::POS_HEAD);
-        //$this->view->registerJs("var homeUrl='".Url::home(true)."';", View::POS_HEAD);
+        // register i18n
         $this->view->registerJs('var i18n=' . Json::encode($this->module->jsTranslations), View::POS_HEAD);
-        //$this->view->registerJs('var helptags=' . Json::encode($tags), View::POS_HEAD);
+        
+        $authToken = UserLogin::find()->select(['auth_token'])->where(['user_id' => Yii::$app->adminuser->id, 'ip' => Yii::$app->request->userIP, 'is_destroyed' => false])->scalar();
         
         $this->view->registerJs('zaa.run(function($rootScope) { $rootScope.luyacfg = ' . Json::encode([
-            'authToken' => Yii::$app->adminuser->identity->authToken,
+        	'authToken' => $authToken,
             'homeUrl' => Url::home(true),
             'i18n' => $this->module->jsTranslations,
             'helptags' => $tags,

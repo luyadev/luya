@@ -7,6 +7,7 @@ use yii\web\User;
 use luya\admin\models\UserOnline;
 use yii\web\UserEvent;
 use luya\web\Application;
+use luya\admin\models\UserLogin;
 
 /**
  * AdminUser Component.
@@ -69,25 +70,6 @@ class AdminUser extends User
     {
         Yii::$app->language = $this->getInterfaceLanguage();
     }
-    
-    public function getSecureSessionId()
-    {
-        if (Yii::$app->request->isAdmin) {
-            return Yii::$app->session->get($this->uniqueHostVariable('secureSessionId'));
-        }
-    }
-    
-    public function destroySecureSessionId()
-    {
-        Yii::$app->session->remove($this->uniqueHostVariable('secureSessionId'));
-    }
-    
-    public function setSecureSessionId($id)
-    {
-        if (Yii::$app->request->isAdmin) {
-            Yii::$app->session->set($this->uniqueHostVariable('secureSessionId'), $id);
-        }
-    }
 
     /**
      * Return the interface language for the given logged in user.
@@ -104,13 +86,14 @@ class AdminUser extends User
      */
     public function onBeforeLogout()
     {
-        UserOnline::removeUser($this->getId());
+        UserOnline::removeUser($this->id);
         
         $this->identity->updateAttributes([
             'auth_token' => Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $this->identity->password_salt),
         ]);
         
-        $this->destroySecureSessionId();
+        // kill all user logins for the given user
+        UserLogin::updateAll(['is_destroyed' => true], ['user_id' => $this->id]);
     }
     
     /**

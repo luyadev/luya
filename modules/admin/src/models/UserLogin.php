@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
  * @property integer $timestamp_create
  * @property string $auth_token
  * @property string $ip
- * @property string $session_id
+ * @property integer $is_destroyed
  */
 final class UserLogin extends ActiveRecord
 {
@@ -51,9 +51,10 @@ final class UserLogin extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'timestamp_create', 'auth_token', 'ip', 'session_id'], 'required'],
+            [['user_id', 'timestamp_create', 'auth_token', 'ip'], 'required'],
             [['user_id', 'timestamp_create'], 'integer'],
-            [['auth_token', 'session_id'], 'string', 'max' => 120],
+        	[['is_destroyed'], 'boolean'],
+            [['auth_token'], 'string', 'max' => 120],
             [['ip'], 'string', 'max' => 15],
         ];
     }
@@ -69,6 +70,7 @@ final class UserLogin extends ActiveRecord
             'timestamp_create' => 'Timestamp Create',
             'auth_token' => 'Auth Token',
             'ip' => 'Ip',
+        	'is_destroyed' => 'Is Destroyed',
         ];
     }
 }

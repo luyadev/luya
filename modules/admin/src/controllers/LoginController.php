@@ -8,6 +8,7 @@ use luya\helpers\Url;
 use luya\admin\models\LoginForm;
 use luya\admin\Module;
 use luya\admin\base\Controller;
+use luya\admin\models\UserOnline;
 
 /**
  * Login Controller contains async actions, async token send action and login mechanism.
@@ -48,11 +49,13 @@ class LoginController extends Controller
         $this->registerAsset('\luya\admin\assets\Login');
         
         $this->view->registerJs("
-        		$('#email').focus(); 
-        		checkInputLabels();
-        		observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."');
+        	$('#email').focus(); 
+        	checkInputLabels();
+        	observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."');
         ");
     
+        UserOnline::clearList();
+        
         return $this->render('index');
     }
     
