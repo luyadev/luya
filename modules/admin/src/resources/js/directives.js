@@ -865,7 +865,7 @@
             },
             controller: function($scope) {
             	$scope.unset = function() {
-            		$scope.model = null;
+            		$scope.model = false;
             		$scope.data.model = null;
             	};
             	
