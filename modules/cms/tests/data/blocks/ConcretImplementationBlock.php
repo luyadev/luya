@@ -166,6 +166,11 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return [];
     }
+
+    public function getConfigPlaceholdersByRowsExport()
+    {
+    	return [];
+    }
     
     /**
      * Whether cache is enabled for this block or not.

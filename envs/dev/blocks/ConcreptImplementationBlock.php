@@ -12,7 +12,7 @@ class ConcreptImplementationBlock implements BlockInterface
      */
     public function name()
     {
-        return 'Concrept Block';
+        return 'Concret Block';
     }
     
     /**
