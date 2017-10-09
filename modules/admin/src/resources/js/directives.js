@@ -895,7 +895,7 @@
                                     '<i class="material-icons left">insert_link</i>' +
                                     '<span>' + i18n['js_link_set_value'] + '</span>' +
                                 '</div>' +
-                                '<span class="link-selector-reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' +
+                                '<span ng-hide="model | isEmpty" class="link-selector-reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' +
                             '</div>' +
                             '<p class="link-selector-path"><link-object-to-string link="model"></link-object-to-string></p>' +
                         '</div>' +
@@ -916,7 +916,6 @@
                             '<update-form-redirect data="data.model"></update-form-redirect>' +
                         '</div>' +
                         '<div class="modal-footer">'+
-                            '<button ng-click="unset(); data.modalState=1" type="button" class="btn btn-icon btn-cancel"></button> '+
                             '<button ng-click="data.modalState=1" class="btn btn-icon btn-save" type="button">'+i18n['js_link_set_value']+'</button>' +
                         '</div>'+
                     '</modal>'+
