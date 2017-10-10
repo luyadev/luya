@@ -43,9 +43,33 @@ class Controller extends \luya\admin\base\Controller
      *
      * ```php
      * 'globalButtons' => [
-     *     'icon' => 'extension', 'label' => 'My Button', 'ng-click' => 'callMyFunction()'
+     *     ['icon' => 'extension', 'label' => 'My Button', 'ng-click' => 'callMyFunction()'],
      * ];
      * ```
+     * 
+     * An example for using the global buttons could be an action inside the controller
+     * 
+     * ```php
+     * class MyCrudController extends Controller
+     * {
+     *     public $modelClass = 'app\modules\myadmin\models\MyModel';
+     *     
+     *     public $globalButtons = [
+     *	       ['icon' => 'file_download', 'label' => 'XML Download', 'ui-sref' => "custom({templateId:'myadmin/mycrudcontroller/the-action'})"],
+     *     ];
+     *     
+     *     public function actionTheAction()
+     *     {
+     *         return $this->render('hello world!');
+     *     }
+     * }
+     * ```
+     * 
+     * Properties to make links with angular:
+     * 
+     * + ui-sref: custom({templateId:'myadmin/mycrudcontroller/the-action'}) (display the view without module navigation)
+     * + ui-sref: default.route({ moduleRouteId : 'mymodule', controllerId : 'mycrudcontroller', actionId : 'the-action'}); (display the view inside the default layout)
+     * + ng-href: 'katalogadmin/produkt/xml-download' (an example if you like to use yii response sendContentAsFile)
      */
     public $globalButtons = [];
     

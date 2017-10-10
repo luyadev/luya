@@ -9,6 +9,8 @@ use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
 use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
+use luya\helpers\Html;
+use luya\helpers\ArrayHelper;
 
 /**
  * Render the Crud view.
@@ -141,7 +143,19 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     
     public function setGlobalButtons(array $buttons)
     {
-        $this->_globalButtons = $buttons;
+    	$elements = [];
+    	foreach ($buttons as $config) {
+    		$innerContent = '<i class="material-icons">' . ArrayHelper::getValue($config, 'icon', 'extension') .'</i><span> '. $config['label'] . '</span>';
+    		
+    		$tagName = ArrayHelper::remove($config, 'tag', 'a');
+    		
+    		if (!array_key_exists('class', $config)) {
+    			$config['class'] = 'dropdown-item';
+    		}
+    		
+    		$elements[] = Html::tag($tagName, $innerContent, $config);
+    	}
+        $this->_globalButtons = $elements;
     }
     
     public function getGlobalButtons()

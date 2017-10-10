@@ -35,9 +35,7 @@ $this->beginBody();
                                <i class="material-icons">get_app</i><span> <?= Module::t('ngrest_crud_csv_export_btn_dl'); ?></span>
                             </a>
                             <?php foreach ($this->context->getGlobalButtons() as $button): ?>
-                            <a class="dropdown-item" ng-click="<?= $button['ng-click']; ?>">
-                               <i class="material-icons"><?= ArrayHelper::getValue($button, 'icon', 'extension')?></i><span> <?= $button['label']; ?></span>
-                            </a>
+                                <?= $button; ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
