@@ -2050,6 +2050,11 @@
         }
     });
 
+    /**
+     * Generates an array where each array element can contain another directive from zaa types.
+     * 
+     * @retunr array
+     */
     zaa.directive("zaaMultipleInputs", function() {
         return {
             restrict: "E",
@@ -2060,10 +2065,18 @@
                 "i18n": "@i18n",
                 "id": "@fieldid",
             },
-            controller: function ($scope) {
+            controller: function ($scope, $timeout) {
                 $scope.init = function() {
                     if ($scope.model == undefined || $scope.model == null) {
                         $scope.model = [];
+                    } else {
+                    	angular.forEach($scope.model, function(value, key) {
+                    		var len = Object.keys(value).length;
+                    		/* issue #1519: if there are no keys, ensure the item is an object */
+                    		if (len == 0) {
+                    			$scope.model[key] = {};
+                    		}
+                    	})
                     }
                 };
 
@@ -2097,7 +2110,9 @@
                     return parseInt(index) < Object.keys($scope.model).length - 1;
                 };
 
-                $scope.init();
+                $timeout(function() {
+                	$scope.init();
+                });
             },
             template: function() {
                 return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
@@ -2107,8 +2122,8 @@
                             '<div class="form-side">' +
                                 '<div class="list zaa-multiple-inputs">' +
                                     '<p class="alert alert-info" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
-                                    '<div ng-repeat="(msortKey,row) in model" class="list-item">' +
-                                        '<div ng-repeat="(mutliOptKey,opt) in options"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{msortKey}}-{{mutliOptKey}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
+                                    '<div ng-repeat="(msortKey,row) in model track by msortKey" class="list-item" ng-init="ensureRow(row)">' +
+                                        '<div ng-repeat="(mutliOptKey,opt) in options track by mutliOptKey"><zaa-injector dir="opt.type" options="opt.options" fieldid="id-{{msortKey}}-{{mutliOptKey}}" initvalue="{{opt.initvalue}}" label="{{opt.label}}" model="row[opt.var]"></zaa-injector></div>' +
                                         '<div class="list-buttons">' +
                                             '<div class="btn-group" role="group">' +
                                                 '<button type="button" class="btn btn-sm btn-outline-info" ng-click="moveUp(msortKey)" ng-if="msortKey > 0"><i class="material-icons">keyboard_arrow_up</i></button>' +

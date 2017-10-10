@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1519](https://github.com/luyadev/luya/issues/1519) Multiple inputs problem with empty item rows convert to object instead of array.
 - [#1535](https://github.com/luyadev/luya/issues/1535) Date and Datetime reset model buttons.
 - [#1536](https://github.com/luyadev/luya/issues/1536) Link directive display wrong reset data button if empty object exists.
 - [#1533](https://github.com/luyadev/luya/issues/1533) Draft mode does not display first created version. Hide elements when page is draft.
