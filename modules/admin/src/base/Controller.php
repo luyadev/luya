@@ -21,7 +21,7 @@ class Controller extends \luya\web\Controller
     public $layout = false;
 
     /**
-     * @var boolean When enabling `$disablePermissionCheck` all actions are not secured by access controller but are do require an authtenticated user (logged in user).
+     * @var boolean When enabling `$disablePermissionCheck` all actions are not secured by access controller but still require an authtenticated user (logged in user) by session.
      */
     public $disablePermissionCheck = false;
 
