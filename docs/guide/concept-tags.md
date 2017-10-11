@@ -1,6 +1,7 @@
 # Tags
 
-LUYA tags are a very strong and useful BBCode alike tag parsing concept. You can just add your own tags within an application or ship them directly with modules. The basic idea behind the tag parser is to enhance the Markdown syntax with your customized tags.
+The basic idea behind the tag parser is to enhance the Markdown syntax with your customized tags.
+LUYA tags are a very strong and useful BBCode (Bulletin Board Code) alike tag parsing concept. You can just add your own tags within an application or ship them directly with modules.
 
 Let's assume you want to create a [Bootstrap Tooltip](http://getbootstrap.com/javascript/#tooltips) right at the fingertips of all contents in all modules or views. As the [Elements](concept-elements.md) is thought to be a tool for the developer itself, the tag differs from this idea. It can be easily used by all editors of the administration area.
 
