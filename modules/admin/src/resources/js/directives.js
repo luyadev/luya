@@ -2590,29 +2590,26 @@
                 	}
                 	
                 	LuyaLoading.start();
-                	file.upload = Upload.upload({
+                	
+                	Upload.upload({
                 		url: 'admin/api-admin-storage/file-replace',
                         data: {file: file, fileId: $scope.fileDetail.id}
-                    });
-                	
-                	file.upload.then(function (response) {
-                        $timeout(function () {
-                        	LuyaLoading.stop();
-                        	if (!response.data) {
-                        		AdminToastService.error('Error while replacing the file.', 6000);
-                        	} else {
-	                            $scope.filesDataReload().then(function() {
-	                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
-	                            	var random = (new Date()).toString();
-	                            	if (fileref.isImage) {
-		                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
-		                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
-		                            }
-	                            	$scope.fileDetail = fileref;
-	                            	AdminToastService.success('the file has been replaced successfull.', 4000);
-	                            });
-                        	}
-                        });
+                    }).then(function (response) {
+                    	LuyaLoading.stop();
+                    	if (response.status == 200) {
+                            $scope.filesDataReload().then(function() {
+                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
+                            	var random = (new Date()).toString();
+                            	if (fileref.isImage) {
+	                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
+	                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+	                            }
+                            	$scope.fileDetail = fileref;
+                            	AdminToastService.success('the file has been replaced successfull.', 4000);
+                            });
+                    	}
+                    }, function() {
+                    	LuyaLoading.stop();
                     });
                 };
 

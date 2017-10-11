@@ -390,7 +390,14 @@ class StorageContainer extends Component
      * @param string $fileSource The file on the server ($_FILES['tmp'])
      * @param string $fileName Original upload name of the file ($_FILES['name'])
      * @throws Exception
-     * @return array
+     * @return array Returns an array with the following KeywordPatch
+     * + fileInfo:
+     * + mimeType:
+     * + fileName:
+     * + secureFileName: The file name with all insecure chars removed
+     * + fileSource: 
+     * + extension: jpg, png, etc.
+     * + hashName: a short hash name for the given file, not the md5 sum.
      */
     public function ensureFileUpload($fileSource, $fileName)
     {

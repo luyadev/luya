@@ -9877,23 +9877,30 @@ function typeCastValue(value) {
                 config.headers = config.headers || {};
                 config.headers.Authorization = "Bearer " + $rootScope.luyacfg.authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
-                return config;
+                
+                return config || $q.when(config);
             },
             response: function(config) {
-            	var isConfig = config;
-            	if (!isConfig.hasOwnProperty('ignoreLoadingBar')) {
+            	if (!config.hasOwnProperty('ignoreLoadingBar')) {
             		AdminDebugBar.pushResponse(config);
             	}
-            	return isConfig;
+            	
+            	return config || $q.when(config);
             },
             responseError: function (data) {
                 if (data.status == 401 || data.status == 403 || data.status == 405) {
                     window.location = "admin/default/logout";
+                } else if (data.status != 422) {
+                	var message = data.data.hasOwnProperty('message');
+                	if (message) {
+                		AdminToastService.error(data.data.message, 10000);
+                	} else {
+                		AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 10000);
+                	}
+                    
                 }
-                if (data.status != 422) {
-                    AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 5000);
-                }
-                return $q.reject(data);
+                
+                return data || $q.when(data);
             }
         };
     });
@@ -13180,29 +13187,26 @@ zaa.factory('HtmlStorage', function() {
                 	}
                 	
                 	LuyaLoading.start();
-                	file.upload = Upload.upload({
+                	
+                	Upload.upload({
                 		url: 'admin/api-admin-storage/file-replace',
                         data: {file: file, fileId: $scope.fileDetail.id}
-                    });
-                	
-                	file.upload.then(function (response) {
-                        $timeout(function () {
-                        	LuyaLoading.stop();
-                        	if (!response.data) {
-                        		AdminToastService.error('Error while replacing the file.', 6000);
-                        	} else {
-	                            $scope.filesDataReload().then(function() {
-	                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
-	                            	var random = (new Date()).toString();
-	                            	if (fileref.isImage) {
-		                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
-		                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
-		                            }
-	                            	$scope.fileDetail = fileref;
-	                            	AdminToastService.success('the file has been replaced successfull.', 4000);
-	                            });
-                        	}
-                        });
+                    }).then(function (response) {
+                    	LuyaLoading.stop();
+                    	if (response.status == 200) {
+                            $scope.filesDataReload().then(function() {
+                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
+                            	var random = (new Date()).toString();
+                            	if (fileref.isImage) {
+	                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
+	                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+	                            }
+                            	$scope.fileDetail = fileref;
+                            	AdminToastService.success('the file has been replaced successfull.', 4000);
+                            });
+                    	}
+                    }, function() {
+                    	LuyaLoading.stop();
                     });
                 };
 

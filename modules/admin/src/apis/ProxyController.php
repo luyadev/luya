@@ -11,6 +11,9 @@ use luya\admin\models\ProxyBuild;
 use yii\helpers\Json;
 use luya\helpers\Url;
 use luya\admin\models\StorageFile;
+use yii\web\HttpException;
+use yii\web\ServerErrorHttpException;
+use yii\web\NotFoundHttpException;
 
 /**
  * Proxy API.
@@ -150,17 +153,17 @@ class ProxyController extends Controller
         
         if ($build) {
             if (!is_numeric($fileId)) {
-                throw new \InvalidArgumentException("Invalid file id provided.");
+            	throw new ForbiddenHttpException("Invalid file id input.");
             }
             
             $file = Yii::$app->storage->getFile($fileId);
             /* @var $file \luya\admin\file\Item */
             if ($file->fileExists) {
-                return Yii::$app->response->sendFile($file->serverSource)->send();
+                return Yii::$app->response->sendFile($file->serverSource, ['mimeType' => $file->mimeType])->send();
             }
+            
+            throw new NotFoundHttpException("The requested file '".$file->serverSource."' does not exist in the storage folder.");
         }
-        
-        return null;
     }
     
     public function actionImageProvider($machine, $buildToken, $imageId)
@@ -169,7 +172,7 @@ class ProxyController extends Controller
     
         if ($build) {
             if (!is_numeric($imageId)) {
-                throw new \InvalidArgumentException("Invalid image id provided.");
+            	throw new ForbiddenHttpException("Invalid image id input.");
             }
     
             $image = Yii::$app->storage->getImage($imageId);
@@ -177,9 +180,9 @@ class ProxyController extends Controller
             if ($image->fileExists) {
                 return Yii::$app->response->sendFile($image->serverSource)->send();
             }
+            
+            throw new NotFoundHttpException("The requested image '".$image->serverSource."' does not exist in the storage folder.");
         }
-    
-        return null;
     }
     
     public function actionClose($buildToken)

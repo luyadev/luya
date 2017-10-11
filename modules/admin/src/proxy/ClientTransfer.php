@@ -62,10 +62,12 @@ class ClientTransfer extends Object
                             $fileCount++;
                             $this->build->command->outputInfo('[+] File ' . $file->name . ' ('.$file->systemFileName.') downloaded.');
                         } else {
-                            $this->build->command->outputError('[!] File ' . $file->name . ' ('.$file->systemFileName.') download error (invalid md5 checksum).');
+                        	$this->build->command->outputError('[!] Downloaded file checksum "'.$md5.'" does not match server checksum "'.$file->getFileHash().'" for file ' . $file->systemFileName.'.');
                             @unlink($file->serverSource);
                         }
                     }
+                } else {
+                	$this->build->command->outputError('[!] File ' . $file->systemFileName. ' download request error: "'. $curl->error_message.'".');
                 }
                 
                 $curl->close();

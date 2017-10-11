@@ -243,23 +243,30 @@ function typeCastValue(value) {
                 config.headers = config.headers || {};
                 config.headers.Authorization = "Bearer " + $rootScope.luyacfg.authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
-                return config;
+                
+                return config || $q.when(config);
             },
             response: function(config) {
-            	var isConfig = config;
-            	if (!isConfig.hasOwnProperty('ignoreLoadingBar')) {
+            	if (!config.hasOwnProperty('ignoreLoadingBar')) {
             		AdminDebugBar.pushResponse(config);
             	}
-            	return isConfig;
+            	
+            	return config || $q.when(config);
             },
             responseError: function (data) {
                 if (data.status == 401 || data.status == 403 || data.status == 405) {
                     window.location = "admin/default/logout";
+                } else if (data.status != 422) {
+                	var message = data.data.hasOwnProperty('message');
+                	if (message) {
+                		AdminToastService.error(data.data.message, 10000);
+                	} else {
+                		AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 10000);
+                	}
+                    
                 }
-                if (data.status != 422) {
-                    AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 5000);
-                }
-                return $q.reject(data);
+                
+                return data || $q.when(data);
             }
         };
     });
