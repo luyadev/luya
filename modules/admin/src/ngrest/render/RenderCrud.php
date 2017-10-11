@@ -28,23 +28,11 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
     const TYPE_UPDATE = 'update';
 
-    public $viewFile = 'crud.php';
-
-    private $_permissions = [];
-
-    public function can($type)
-    {
-        if (!array_key_exists($type, $this->_permissions)) {
-            $this->_permissions[$type] = Yii::$app->auth->matchApi(Yii::$app->adminuser->getId(), $this->config->apiEndpoint, $type);
-        }
-
-        return $this->_permissions[$type];
-    }
-    
     private $_view;
 
     /**
-     *
+     * Returns the current view object.
+     * 
      * @return \luya\admin\ngrest\render\RenderCrudView
      */
     public function getView()
@@ -56,14 +44,20 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         return $this->_view;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getViewPath()
     {
         return '@admin/views/ngrest';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function render()
     {
-        return $this->view->render($this->viewFile, [
+        return $this->view->render('crud', [
             'canCreate' => $this->can(Auth::CAN_CREATE),
             'canUpdate' => $this->can(Auth::CAN_UPDATE),
             'canDelete' => $this->can(Auth::CAN_DELETE),
@@ -75,27 +69,21 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         ], $this);
     }
 
-    public function getApiEndpoint($append = null)
-    {
-        if ($append) {
-            $append = '/' . ltrim($append, '/');
-        }
-        
-        return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
-    }
-    
-    public function getPrimaryKey()
-    {
-        return $this->config->primaryKey;
-    }
+    // RenderCrudInterface
     
     private $_relationCall = false;
     
+    /**
+     * @inheritdoc
+     */
     public function getRelationCall()
     {
         return $this->_relationCall;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function setRelationCall(array $options)
     {
         $this->_relationCall = $options;
@@ -104,15 +92,16 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     private $_isInline = false;
 
     /**
-     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
-     * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
-     * @return bool
+     * @inheritdoc
      */
     public function getIsInline()
     {
         return $this->_isInline;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function setIsInline($inline)
     {
         $this->_isInline = $inline;
@@ -120,28 +109,28 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     
     private $_modelSelection;
     
+    /**
+     * @inheritdoc
+     */
     public function setModelSelection($selection)
     {
         $this->_modelSelection = $selection;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getModelSelection()
     {
         return $this->_modelSelection;
     }
-
-    public function getOrderBy()
-    {
-        if ($this->getConfig()->getDefaultOrderField() === false) {
-            return false;
-        }
-        
-        return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
-    }
     
-    private $_globalButtons = [];
+    private $_settingButtonDefinitions = [];
     
-    public function setGlobalButtons(array $buttons)
+    /**
+     * @inheritdoc
+     */
+    public function setSettingButtonDefinitions(array $buttons)
     {
     	$elements = [];
     	foreach ($buttons as $config) {
@@ -155,19 +144,81 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     		
     		$elements[] = Html::tag($tagName, $innerContent, $config);
     	}
-        $this->_globalButtons = $elements;
+    	
+    	$this->_settingButtonDefinitions= $elements;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettingButtonDefinitions()
+    {
+    	return $this->_settingButtonDefinitions;
     }
     
-    public function getGlobalButtons()
+    // methods used inside the view context: RenderCrudView
+    
+    /**
+     * Returns the current order by state.
+     *
+     * @return string angular order by statements like `+id` or `-name`.
+     */
+    public function getOrderBy()
     {
-        return $this->_globalButtons;
+    	if ($this->getConfig()->getDefaultOrderField() === false) {
+    		return false;
+    	}
+    	
+    	return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
+    }
+    
+    /**
+     * Returns the primary key from the config.
+     * 
+     * @return unknown
+     */
+    public function getPrimaryKey()
+    {
+    	return $this->config->primaryKey;
+    }
+    
+    /**
+     * Returns the api endpoint, but can add appendix.
+     * 
+     * @return string
+     */
+    public function getApiEndpoint($append = null)
+    {
+    	if ($append) {
+    		$append = '/' . ltrim($append, '/');
+    	}
+    	
+    	return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
+    }
+    
+    // generic methods
+    
+    private $_canTypes = [];
+    
+    /**
+     * Checks whether a given type can or can not.
+     *
+     * @param string $type
+     * @return boolean
+     */
+    protected function can($type)
+    {
+    	if (!array_key_exists($type, $this->_canTypes)) {
+    		$this->_canTypes[$type] = Yii::$app->auth->matchApi(Yii::$app->adminuser->getId(), $this->config->apiEndpoint, $type);
+    	}
+    	
+    	return $this->_canTypes[$type];
     }
     
     /*
      * OLD
      */
 
-    
     private $_buttons;
     
     /**
@@ -351,7 +402,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     }
 
     /**
-     * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file!
+     * @todo do not return the specific type content, but return an array contain more infos also about is multi linguage and foreach in view file!
      *
      * @param unknown_type $element
      * @param string $configContext list,create,update

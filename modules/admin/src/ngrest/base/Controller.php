@@ -13,7 +13,7 @@ use yii\web\ForbiddenHttpException;
 /**
  * Base Controller for all NgRest Controllers.
  *
- * @property luya\admin\ngrest\base\NgRestModel $model The model based from the modelClass instance
+ * @property \luya\admin\ngrest\base\NgRestModel $model The model based from the modelClass instance
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -55,7 +55,11 @@ class Controller extends \luya\admin\base\Controller
      *     public $modelClass = 'app\modules\myadmin\models\MyModel';
      *     
      *     public $globalButtons = [
-     *	       ['icon' => 'file_download', 'label' => 'XML Download', 'ui-sref' => "custom({templateId:'myadmin/mycrudcontroller/the-action'})"],
+     *	       [
+     *				'icon' => 'file_download', 
+     *				'label' => 'XML Download', 
+     *				'ui-sref' => "custom({templateId:'myadmin/mycrudcontroller/the-action'})"
+     *         ]
      *     ];
      *     
      *     public function actionTheAction()
@@ -68,7 +72,7 @@ class Controller extends \luya\admin\base\Controller
      * Properties to make links with angular:
      * 
      * + ui-sref: custom({templateId:'myadmin/mycrudcontroller/the-action'}) (display the view without module navigation)
-     * + ui-sref: default.route({ moduleRouteId : 'mymodule', controllerId : 'mycrudcontroller', actionId : 'the-action'}); (display the view inside the default layout)
+     * + ui-sref: default.route({moduleRouteId:'mymodule', controllerId:'mycrudcontroller', actionId:'the-action'}); (display the view inside the default layout)
      * + ng-href: 'katalogadmin/produkt/xml-download' (an example if you like to use yii response sendContentAsFile)
      */
     public $globalButtons = [];
@@ -116,27 +120,23 @@ class Controller extends \luya\admin\base\Controller
 
         $config = $this->model->getNgRestConfig();
 
-        if (!$config) {
-            throw new Exception("Provided NgRest config for controller '' is invalid.");
-        }
-
         $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
         
         if ($userSortSettings && is_array($userSortSettings) && $config->getDefaultOrder() !== false) {
             $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
         }
         
-        $ngrest = new NgRest($config);
+        // generate crud renderer
         $crud = new RenderCrud();
-        $crud->setGlobalButtons($this->globalButtons);
+        $crud->setSettingButtonDefinitions($this->globalButtons);
         $crud->setIsInline($inline);
         $crud->setModelSelection($modelSelection);
         if ($relation && $arrayIndex !== false && $modelClass !== false) {
             $crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
         }
-        if ($relation) {
-            //$crud->viewFile = 'crud_relation.php';
-        }
+        
+        // generate ngrest object from config and render renderer
+        $ngrest = new NgRest($config);
         return $ngrest->render($crud);
     }
     

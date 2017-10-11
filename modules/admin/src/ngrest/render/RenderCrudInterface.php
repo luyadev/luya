@@ -16,15 +16,26 @@ interface RenderCrudInterface
     
     public function setRelationCall(array $options);
     
+    /**
+     * Get whether the inline mode is enabled or not.
+     * 
+     * @return boolena Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
+     * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
+     */
     public function getIsInline();
     
+    /**
+     * Setter method for inline mode.
+     * 
+     * @param boolean $inline
+     */
     public function setIsInline($inline);
     
     public function setModelSelection($selection);
     
     public function getModelSelection();
     
-    public function setGlobalButtons(array $buttons);
+    public function setSettingButtonDefinitions(array $buttons);
     
-    public function getGlobalButtons();
+    public function getSettingButtonDefinitions();
 }

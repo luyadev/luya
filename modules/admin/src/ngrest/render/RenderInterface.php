@@ -14,7 +14,15 @@ use luya\admin\ngrest\ConfigInterface;
  */
 interface RenderInterface
 {
+	/**
+	 * Setter method for the NgRestConfig.
+	 * 
+	 * @param ConfigInterface $config
+	 */
     public function setConfig(ConfigInterface $config);
 
+    /**
+     * Renders the current ngrest renderer.
+     */
     public function render();
 }

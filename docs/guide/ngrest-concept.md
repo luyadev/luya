@@ -105,7 +105,7 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
      }
      
      /**
-      *
+      * @return array Returns an array with each scope containing which fields.
       */
      public function ngRestScopes()
      {
@@ -137,6 +137,25 @@ class MemberController extends \luya\admin\ngrest\base\Controller
     public $modelClass = 'teamadmin\models\Member';
 }
 ```
+
+In order to extend the settings dropdown menu on right top corner you can define {{luya\admin\ngrest\base\Controller::$globalButtons}} which can interact with angular or a controller action.
+
+```php
+public $globalButtons = [
+    [
+        'icon' => 'extension', 
+        'label' => 'Say Hello', 
+        'ui-sref' => "default.route({moduleRouteId:'teamadmin', controllerId:'member', actionId:'hello-world'})",
+    ]
+];
+     
+public function actionHelloWorld()
+{
+    return $this->render('hello-world');
+}
+```
+
+This would generate a new button in the settings dropdown which would call the actionHelloWorld() render and return the output.
 
 ### NgRest Api
 
