@@ -144,11 +144,12 @@ final class UserOnline extends ActiveRecord
     /**
      * Clear all users which are not logged in anymore.
      *
-     * Default value in seconds is a half hour (30 * 60) = 1800
+     * On production its 30 minutes on test system 60 minutes.
      */
     public static function clearList()
     {
-        self::deleteAll(['<=', 'last_timestamp', (time() - YII_ENV_PROD ? 2000 : 4000)]);
+    	$max = YII_ENV_PROD ? 1800 : 3600;
+        self::deleteAll(['<=', 'last_timestamp', time() - $max]);
     }
     
     /**
