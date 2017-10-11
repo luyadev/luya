@@ -11834,7 +11834,7 @@ zaa.factory('HtmlStorage', function() {
      * <zaa-select model="create.fromVersionPageId" label="My Label" options="typeData" optionslabel="version_alias" optionsvalue="id" />
      * ```
      */
-    zaa.directive("zaaSelect", function($timeout){
+    zaa.directive("zaaSelect", function($timeout, $rootScope) {
         return {
             restrict: "E",
             scope: {
@@ -11847,41 +11847,63 @@ zaa.factory('HtmlStorage', function() {
                 "id": "@fieldid",
                 "initvalue": "@initvalue"
             },
-            link: function(scope) {
+            controller: function($scope) {
+            	
+            	$scope.isOpen = 0;
+            	
+            	$scope.$on('closeAllSelects', function() {
+            		if ($scope.isOpen) {
+            			$scope.closeSelect();
+            		}
+            	});
+            	
+            	$scope.toggleIsOpen = function() {
+            		
+            		if (!$scope.isOpen) {
+            			$rootScope.$broadcast('closeAllSelects');
+            		}
+            		
+            		$scope.isOpen = !$scope.isOpen;
+            		
+            	}
+            		
+            	$scope.closeSelect = function() {
+            		$scope.isOpen = 0;
+            	}
     			
-            	if (scope.optionsvalue == undefined) {
-            		scope.optionsvalue = 'value';
+            	if ($scope.optionsvalue == undefined) {
+            		$scope.optionsvalue = 'value';
             	}
             	
-            	if (scope.optionslabel == undefined) {
-            		scope.optionslabel = 'label';
+            	if ($scope.optionslabel == undefined) {
+            		$scope.optionslabel = 'label';
             	}
             	
-		        if (jQuery.isNumeric(scope.model)){
-		            scope.model = typeCastValue(scope.model);
+		        if (jQuery.isNumeric($scope.model)){
+		            $scope.model = typeCastValue($scope.model);
 		        }
 
                 $timeout(function(){
-                    scope.$watch(function() { return scope.model }, function(n, o) {
+                    $scope.$watch(function() { return $scope.model }, function(n, o) {
                         if (n == undefined || n == null || n == '') {
-                            if (jQuery.isNumeric(scope.initvalue)) {
-                                scope.initvalue = typeCastValue(scope.initvalue);
+                            if (jQuery.isNumeric($scope.initvalue)) {
+                                $scope.initvalue = typeCastValue($scope.initvalue);
                             }
-                            scope.model = scope.initvalue;
+                            $scope.model = $scope.initvalue;
                         }
                     });
                 });
                 
-                scope.setModelValue = function(option) {
-                	scope.model = option[scope.optionsvalue];
-                	scope.isOpen = 0;
+                $scope.setModelValue = function(option) {
+                	$scope.model = option[$scope.optionsvalue];
+                	$scope.closeSelect();
                 };
                 
-                scope.getSelectedValue = function() {
+                $scope.getSelectedValue = function() {
                 	var defaultLabel = i18n['ngrest_select_no_selection'];
-                	angular.forEach(scope.options, function(item) {
-                		if (scope.model == item[scope.optionsvalue]) {
-                			defaultLabel = item[scope.optionslabel];
+                	angular.forEach($scope.options, function(item) {
+                		if ($scope.model == item[$scope.optionsvalue]) {
+                			defaultLabel = item[$scope.optionslabel];
                 		}
                 	})
                 	
@@ -11904,9 +11926,9 @@ zaa.factory('HtmlStorage', function() {
                                         '<option ng-repeat="opt in options" ng-value="opt[optionsvalue]">{{opt[optionslabel]}}</option>' +
                                     '</select>' +
                                     '<div class="zaaselect-selected">' +
-                                        '<span class="zaaselect-selected-text" ng-click="isOpen=!isOpen">{{getSelectedValue()}}</span>' +
+                                        '<span class="zaaselect-selected-text" ng-click="toggleIsOpen()">{{getSelectedValue()}}</span>' +
                                         '<i class="material-icons zaaselect-clear-icon" ng-click="model=initvalue">clear</i>' +
-                                        '<i class="material-icons zaaselect-dropdown-icon" ng-click="isOpen=!isOpen">keyboard_arrow_down</i>' +
+                                        '<i class="material-icons zaaselect-dropdown-icon" ng-click="toggleIsOpen()">keyboard_arrow_down</i>' +
                                     '</div>' +
                                     '<div class="zaaselect-dropdown">' +
                                         '<div class="zaaselect-search">' +
