@@ -4,7 +4,11 @@ use luya\admin\Module;
 /* @var integer $renderer */
 /* @var integer $type */
 /* @var boolean $isInline */
+/* @var boolean $relationCall */
 ?>
+<?php if ($relationCall): ?>
+<div class="ml-3 mr-3">
+<?php endif; ?>
 <div class="tab-pane tab-padded" role="tabpanel" ng-if="crudSwitchType==<?= $type; ?>" ng-class="{'active' : crudSwitchType==<?= $type; ?>}" <?php if (!$isInline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
     <form name="formCreate" class="js-form-side-by-side" ng-submit="<?php if ($type==2):?>submitUpdate()<?php else: ?>submitCreate()<?php endif; ?>">
         <?php foreach ($this->context->forEachGroups($renderer) as $key => $group): ?>
@@ -33,5 +37,13 @@ use luya\admin\Module;
 
         <?php endforeach; ?>
         <button type="submit" class="btn btn-save btn-icon"><?= Module::t($type == 2 ? 'button_save' : 'ngrest_crud_btn_create'); ?></button>
+        <?php if ($type == 1): ?>
+        <button type="button" class="btn btn-cancel btn-icon" ng-click="closeCreate()"></button>
+        <?php else: ?>
+        <button type="button" class="btn btn-cancel btn-icon" ng-click="closeUpdate()"></button>
+        <?php endif;?>
     </form>
 </div>
+<?php if ($relationCall): ?>
+</div>
+<?php endif; ?>

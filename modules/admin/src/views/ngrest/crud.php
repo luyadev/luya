@@ -212,10 +212,10 @@ $this->beginBody();
             </div>
         </div>
         <?php if ($canCreate && $config->getPointer('create')): ?>
-        	<?= $this->render('_crudform', ['type' => '1', 'renderer' => RenderCrud::TYPE_CREATE, 'isInline' => $isInline]); ?>
+        	<?= $this->render('_crudform', ['type' => '1', 'renderer' => RenderCrud::TYPE_CREATE, 'isInline' => $isInline, 'relationCall' => $relationCall]); ?>
         <?php endif; ?>
         <?php if ($canUpdate && $config->getPointer('update')): ?>
-        	<?= $this->render('_crudform', ['type' => '2', 'renderer' => RenderCrud::TYPE_UPDATE, 'isInline' => $isInline]); ?>
+        	<?= $this->render('_crudform', ['type' => '2', 'renderer' => RenderCrud::TYPE_UPDATE, 'isInline' => $isInline, 'relationCall' => $relationCall]); ?>
         <?php endif; ?>
         <?= $this->render('_awform'); ?>
     </div>
