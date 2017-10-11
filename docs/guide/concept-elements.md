@@ -2,7 +2,7 @@
 
 The basic idea behind the {{\luya\web\Element}} component is based on a behavior known from *Angular Directives*. In a huge web project you have several html parts you may have to use an several locations but with different contents. Lets assume you have a Teaser-Box which contains a title and a picture, so the variables are the picture and the title, but the html base will be the same on all pages.
 
-Casual Example of an html partial you may reuse in different pages with different content.
+Casual example of a html partial wich will be reused in different pages with different contents:
 
 ```html
 <div class="teaser-box">
@@ -12,12 +12,12 @@ Casual Example of an html partial you may reuse in different pages with differen
 </div>
 ```
 
-Now you can create an html element component for this.
+Now you can create a html element component for this.
 
 
-## Create Element and Use
+## Create Html Element Component and use it
 
-To add a new html element component, go into your Application Folder (@app) and create a php file with the name `elements.php`. This file will contain all the element partials for this Project. An element is defined by a *name* and a corresponding *closure*. Below en example setup for `elements.php` file:
+To add a new html element component, go into your Application Folder (@app) and create a php file with the name `elements.php`. This file will contain all the element partials for this project. An element is defined by a *name* and a corresponding *closure*. Below an example setup for the `elements.php` file:
 
 ```php
 <?php
@@ -31,9 +31,10 @@ return [
 ];
 ```
 
-> Elements can also be added in a more dynamic way, by accessing the *element* component in your controller:  `Yii::$app->element->addElement('elementName', function() { });`.
+> Elements can also be added in a more dynamic way, by accessing the *element* component in your controller: 
+`Yii::$app->element->addElement('elementName', function() { });`
 
-To use a defined element you can access the `element` Component which is registered to any LUYA project by default, `Yii::$app->element`.
+To use a defined element you can access the `element` component which is registered to any LUYA project by default, `Yii::$app->element`.
 
 You can directly call the name of your element:
 
@@ -76,15 +77,15 @@ Of course the above example requires also that you have assigned the variables `
 
 # Automatic Styleguide from Elements 
 
-We have build a styleguide modules which renders all the available elements with example content, so you can share all the elements with other designer and make and discuss changes based on elements on not just on a finished web page, this gives you the ability to make more specific changes.
+We have build a styleguide modules which renders all the available elements with example content, so you can share all the elements with other designer to make and discuss changes based on elements instead on a finished web page. This gives you the ability to make more specific changes and test them before implementation.
 
-Add the luya style guide module to your composer json
+Adding the luya style guide module to your composer json:
 
 ```sh
-require luyadev/luya-module-styleguide
+composer require luyadev/luya-module-styleguide
 ```
 
-Configure the Module in your project config, the password is protected this page by default.
+Configure the module in your project config, the password protects this page by default:
 
 ```php
 return [
