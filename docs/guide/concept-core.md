@@ -2,9 +2,16 @@
 
 What is LUYA core? Why do i need it, and what can i do with?
 
-The LUYA Core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by helpers and a structured way to run your application. There is clear vision of how to use configuration files, how directories are arranged, small configuration files, components are already set by the core and a DRY concept for your application.
+The LUYA Core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by helpers and a structured way to run your application. 
 
-In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, sometimes with just an MVC provided by YII via the LUYA CORE sometimes you just need an administration area where you can manage data of your application and sometimes you also need a cms to manager the content.
+There is a clear vision for your modern web application:
+
+- how to use configuration files and keep them small 
+- arrangement and structure of directories 
+- components wich are already set by the core 
+- bulletproof DRY concept 
+
+In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, sometimes with just an MVC provided by Yii via the LUYA CORE sometimes you just need an administration area where you can manage data of your application and sometimes you also need a cms to manage the content.
 
 ## Setup Core Application
 
@@ -158,10 +165,10 @@ use yii\helpers\Html;
 
 ## Using Core Kickstarter Project
 
-We have made a composer package to start a LUYA Core Application project very quickly using the `composer create-project` command.
+We have made a composer package to start a LUYA Core Application project very quickly by using the `composer create-project` command.
 
 ```
 composer create-project luyadev/luya-kickstarter-core:^1.0@dev
 ```
 
-This will generate a folder `luya-kickstarter-core` containg all required controllers, views and configs based on the first section description.
+This will generate a folder `luya-kickstarter-core` containg all required controllers, views and configs based on the description from the first section.
