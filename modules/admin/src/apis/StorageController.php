@@ -199,14 +199,14 @@ class StorageController extends RestController
         if ($file = Yii::$app->storage->getFile($fileId)) {
             $serverSource = $file->getServerSource();
             if (is_uploaded_file($raw['tmp_name'])) {
-            	
-            	// check for same extension / mimeType
-            	$fileData = Yii::$app->storage->ensureFileUpload($raw['tmp_name'], $raw['name']);
-            	
-            	if ($fileData['mimeType'] != $file->mimeType) {
-            		throw new BadRequestHttpException("The type must be the same as the original file in order to replace.");
-            	}
-            	
+                
+                // check for same extension / mimeType
+                $fileData = Yii::$app->storage->ensureFileUpload($raw['tmp_name'], $raw['name']);
+                
+                if ($fileData['mimeType'] != $file->mimeType) {
+                    throw new BadRequestHttpException("The type must be the same as the original file in order to replace.");
+                }
+                
                 if (Storage::replaceFile($serverSource, $raw['tmp_name'], $raw['name'])) {
                     foreach (Yii::$app->storage->findImages(['file_id' => $file->id]) as $img) {
                         Storage::removeImage($img->id, false);

@@ -43,9 +43,9 @@ use yii\helpers\VarDumper;
  */
 class RobotsFilter extends ActionFilter
 {
-	/**
-	 * @var float The number of seconds a human would have to fill up the form, before the form is triggered as invalid.
-	 */
+    /**
+     * @var float The number of seconds a human would have to fill up the form, before the form is triggered as invalid.
+     */
     public $delay = 2.5;
     
     const ROBOTS_FILTER_SESSION_IDENTIFIER = '__robotsFilterRenderTime';
@@ -60,7 +60,7 @@ class RobotsFilter extends ActionFilter
     
     /**
      * Render Time Setter.
-     * 
+     *
      * @param integer $time Set the last action timestamp.
      */
     protected function setRenderTime($time)
@@ -70,7 +70,7 @@ class RobotsFilter extends ActionFilter
     
     /**
      * Return the elapsed process time to fill in the form.
-     * 
+     *
      * @return number The elapsed time in seconds.
      */
     protected function getElapsedProcessTime()

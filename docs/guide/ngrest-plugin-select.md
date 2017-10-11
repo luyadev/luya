@@ -68,7 +68,7 @@ In order to generate a custom labelField you can also pass a closure function:
 > }
 > ```
 
-## SelectRelationActiveQuery
+## SelectRelationActiveQuery
 
 When deailing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data, but there is no model callback for the label fields, its raw sql data based. In order to use this plugin you need to have a has many relation.
 

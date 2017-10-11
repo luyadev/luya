@@ -32,7 +32,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
     /**
      * Returns the current view object.
-     * 
+     *
      * @return \luya\admin\ngrest\render\RenderCrudView
      */
     public function getView()
@@ -132,20 +132,20 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
      */
     public function setSettingButtonDefinitions(array $buttons)
     {
-    	$elements = [];
-    	foreach ($buttons as $config) {
-    		$innerContent = '<i class="material-icons">' . ArrayHelper::getValue($config, 'icon', 'extension') .'</i><span> '. $config['label'] . '</span>';
-    		
-    		$tagName = ArrayHelper::remove($config, 'tag', 'a');
-    		
-    		if (!array_key_exists('class', $config)) {
-    			$config['class'] = 'dropdown-item';
-    		}
-    		
-    		$elements[] = Html::tag($tagName, $innerContent, $config);
-    	}
-    	
-    	$this->_settingButtonDefinitions= $elements;
+        $elements = [];
+        foreach ($buttons as $config) {
+            $innerContent = '<i class="material-icons">' . ArrayHelper::getValue($config, 'icon', 'extension') .'</i><span> '. $config['label'] . '</span>';
+            
+            $tagName = ArrayHelper::remove($config, 'tag', 'a');
+            
+            if (!array_key_exists('class', $config)) {
+                $config['class'] = 'dropdown-item';
+            }
+            
+            $elements[] = Html::tag($tagName, $innerContent, $config);
+        }
+        
+        $this->_settingButtonDefinitions= $elements;
     }
 
     /**
@@ -153,7 +153,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
      */
     public function getSettingButtonDefinitions()
     {
-    	return $this->_settingButtonDefinitions;
+        return $this->_settingButtonDefinitions;
     }
     
     // methods used inside the view context: RenderCrudView
@@ -165,35 +165,35 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
      */
     public function getOrderBy()
     {
-    	if ($this->getConfig()->getDefaultOrderField() === false) {
-    		return false;
-    	}
-    	
-    	return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
+        if ($this->getConfig()->getDefaultOrderField() === false) {
+            return false;
+        }
+        
+        return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
     }
     
     /**
      * Returns the primary key from the config.
-     * 
+     *
      * @return unknown
      */
     public function getPrimaryKey()
     {
-    	return $this->config->primaryKey;
+        return $this->config->primaryKey;
     }
     
     /**
      * Returns the api endpoint, but can add appendix.
-     * 
+     *
      * @return string
      */
     public function getApiEndpoint($append = null)
     {
-    	if ($append) {
-    		$append = '/' . ltrim($append, '/');
-    	}
-    	
-    	return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
+        if ($append) {
+            $append = '/' . ltrim($append, '/');
+        }
+        
+        return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
     }
     
     // generic methods
@@ -208,11 +208,11 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
      */
     protected function can($type)
     {
-    	if (!array_key_exists($type, $this->_canTypes)) {
-    		$this->_canTypes[$type] = Yii::$app->auth->matchApi(Yii::$app->adminuser->getId(), $this->config->apiEndpoint, $type);
-    	}
-    	
-    	return $this->_canTypes[$type];
+        if (!array_key_exists($type, $this->_canTypes)) {
+            $this->_canTypes[$type] = Yii::$app->auth->matchApi(Yii::$app->adminuser->getId(), $this->config->apiEndpoint, $type);
+        }
+        
+        return $this->_canTypes[$type];
     }
     
     /*

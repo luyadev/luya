@@ -395,7 +395,7 @@ class StorageContainer extends Component
      * + mimeType:
      * + fileName:
      * + secureFileName: The file name with all insecure chars removed
-     * + fileSource: 
+     * + fileSource:
      * + extension: jpg, png, etc.
      * + hashName: a short hash name for the given file, not the md5 sum.
      */

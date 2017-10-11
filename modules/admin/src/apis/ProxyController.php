@@ -153,7 +153,7 @@ class ProxyController extends Controller
         
         if ($build) {
             if (!is_numeric($fileId)) {
-            	throw new ForbiddenHttpException("Invalid file id input.");
+                throw new ForbiddenHttpException("Invalid file id input.");
             }
             
             $file = Yii::$app->storage->getFile($fileId);
@@ -172,7 +172,7 @@ class ProxyController extends Controller
     
         if ($build) {
             if (!is_numeric($imageId)) {
-            	throw new ForbiddenHttpException("Invalid image id input.");
+                throw new ForbiddenHttpException("Invalid image id input.");
             }
     
             $image = Yii::$app->storage->getImage($imageId);
