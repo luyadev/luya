@@ -268,20 +268,18 @@ abstract class Module extends \yii\base\Module
      * In order to register Translations you can register them inside the {{luya\base\Module::onLoad()}} method.
      *
      * ```php
-     * public function init()
+     * public static function onLoad()
      * {
-     *     parent::init();
-     *
-     *     $this->registerTranslation('mymodule*', '@mymoduleid/messages', [
+     *     $this->registerTranslation('mymodule*', static::staticBasePath() . '/messages', [
      *         'mymodule' => 'mymodule.php',
      *         'mymodule/sub' => 'sub.php',
      *     ]);
      * }
      * ```
      *
-     * @param string $prefix
-     * @param string $basePath
-     * @param array $fileMap
+     * @param string $prefix The prefix of which the messages are indicated
+     * @param string $basePath The path to the messages folder where the messages are located.
+     * @param array $fileMap The files mapping inside the messages folder.
      */
     public static function registerTranslation($prefix, $basePath, array $fileMap)
     {
