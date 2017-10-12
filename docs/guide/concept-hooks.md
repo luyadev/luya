@@ -2,7 +2,7 @@
 
 LUYA has a built in Hooking mechanism, which allows you to print code in various sections. The {{luya\Hook}} class is similar to Yii Events.
 
-Assuming to have a Layout file which has section output which can be used sometimes, but could also be blank.
+Let´s assume we have a layout file with a section output which is used sometimes but could be blank as well:
 
 ```php
 <html>
@@ -27,7 +27,7 @@ Assuming to have a Layout file which has section output which can be used someti
 
 Now a hooking listener is setup which listens to the identifier `layoutFooter`. After setting up the hook listener, the Hook can be filled with content from various files like Blocks, Controllers or Widgets.
 
-Assuming to have a Controller with an action.
+Let´s assume we have a Controller with an action:
 
 ```php
 class DefaultController extends \luya\web\Controller
@@ -43,7 +43,7 @@ class DefaultController extends \luya\web\Controller
 }
 ```
 
-You can also provide an array instead of callable function in order to have a more structured object oriented way.
+You can also provide an array instead of a callable function in order to have a more structured object oriented way:
 
 ```php
 class DefaultController extends \luya\web\Controller
@@ -67,7 +67,7 @@ When {{luya\Hook::on()}} is called multiple times in a request cycle, the output
 
 ## Using Array Output
 
-Sometimes its more convenient to iterate elements instead of concant the output. This can be helpfull when working with list output:
+Sometimes it ´s more convenient to iterate elements instead of concant the output. This can be helpfull when working with list output:
 
 ```php
 Hook::on('fooBarArray', function($hook) {
@@ -84,9 +84,11 @@ As the {{luya\Hook::iterate()}} method can be called multiple times the hook ite
 
 ```php
 <ul>
-<?php foreach (Hook::iterate('fooBarArray') as $item): ?>
-    <li><?= $item; ?></li>
-<?php endforeach; ?>
+    <?php foreach (Hook::iterate('fooBarArray') as $item): ?>
+        <li>
+            <?= $item; ?>
+        </li>
+    <?php endforeach; ?>
 </ul>
 ```
 
@@ -101,7 +103,7 @@ The rendered output for the iteration example:
 </ul>
 ```
 
-Its possible to use assoc arrays with keys.
+It´s also possible to use assoc arrays with keys:
 
 ```php
 Hook::on('fooBarArrayLinks', function($hook) {
@@ -114,9 +116,11 @@ Hook::on('fooBarArrayLinks', function($hook) {
 
 ```php
 <ul>
-<?php foreach (Hook::iterate('fooBarArrayLinks') as $url => $name): ?>
-    <li><a href="<?= $url; ?>"><?= $name; ?></a></li>
-<?php endforeach; ?>
+    <?php foreach (Hook::iterate('fooBarArrayLinks') as $url => $name): ?>
+        <li>
+            <a href="<?= $url; ?>"><?= $name; ?></a>
+        </li>
+    <?php endforeach; ?>
 </ul>
 ```
 
