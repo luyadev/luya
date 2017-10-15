@@ -32,7 +32,7 @@ class BlockImporter extends Importer
         foreach (Yii::$app->packageInstaller->configs as $config) {
             foreach ($config->blocks as $block) {
                 if (is_file($block)) {
-                    $exists[] = $this->saveBlockByPath($blockItem);
+                    $exists[] = $this->saveBlockByPath($block);
                 } elseif (is_dir($block)) {
                     foreach (FileHelper::findFiles($block) as $blockItem) {
                         $exists[] = $this->saveBlockByPath($blockItem);
