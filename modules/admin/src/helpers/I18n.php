@@ -10,7 +10,7 @@ use yii\base\InvalidParamException;
  * I18n Encode/Decode helper method
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta6
+ * @since 1.0.0
  */
 class I18n
 {

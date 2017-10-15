@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
  * In order to understand the permission weights read the [[app-admin-module-permission.md]] section.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Auth extends \yii\base\Component
 {

@@ -14,6 +14,7 @@ use luya\admin\models\UserOnline;
  * Login Controller contains async actions, async token send action and login mechanism.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class LoginController extends Controller
 {

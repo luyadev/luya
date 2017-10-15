@@ -16,9 +16,8 @@ use luya\rest\ActiveController;
  *
  * usage like described in the yii2 guide.
  *
- *
- *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RestActiveController extends ActiveController implements UserBehaviorInterface
 {

@@ -6,6 +6,7 @@ namespace luya\admin\assets;
  * Main Asset contains all administration area depending files and should be a dependency for all other assets.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Main extends \luya\web\Asset
 {

@@ -32,6 +32,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  *
  * There is also a helper Trait {{\luya\admin\aws\FlowActiveWindowTrait}} you can include in order to work with a relation table.
  *
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class FlowActiveWindow extends ActiveWindow

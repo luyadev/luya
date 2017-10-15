@@ -12,6 +12,7 @@ use yii\helpers\Json;
  * LogBehavior stores informations when active records are updated or inserted.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class LogBehavior extends Behavior
 {

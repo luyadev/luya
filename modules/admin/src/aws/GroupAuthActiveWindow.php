@@ -9,6 +9,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  * Active Window to set permissions for a specific Group, used in groups ngrest model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class GroupAuthActiveWindow extends ActiveWindow
 {

@@ -38,7 +38,9 @@ use luya\admin\ngrest\base\ActiveWindow;
  * ```
  *
  * @property string $tableName Define a table name if not automaticaly alocated from model.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class TagActiveWindow extends ActiveWindow
 {

@@ -12,6 +12,7 @@ use luya\base\AdminModuleInterface;
  * store menu data, register translations.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Module extends \luya\base\Module implements AdminModuleInterface
 {

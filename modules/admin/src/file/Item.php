@@ -34,6 +34,7 @@ use luya\admin\storage\ItemAbstract;
  * @property booelan $fileExists Whether the file resource exists in the storage folder or not.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Item extends ItemAbstract
 {

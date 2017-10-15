@@ -15,6 +15,7 @@ use luya\admin\models\StorageImage;
  * admin module is provided.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Storage
 {

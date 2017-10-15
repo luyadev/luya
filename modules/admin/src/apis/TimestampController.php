@@ -6,14 +6,13 @@ use Yii;
 use luya\admin\models\UserOnline;
 use luya\admin\base\RestController;
 use luya\admin\models\Config;
-use luya\console\commands\MigrateController;
 use luya\console\Application;
-use luya\Boot;
 
 /**
  * Timestamp API, refreshes the UserOnline system of the administration area.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class TimestampController extends RestController
 {

@@ -18,7 +18,9 @@ use luya\admin\traits\SoftDeleteTrait;
  * @property string $short_code
  * @property integer $is_default
  * @property integer $is_deleted
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Lang extends NgRestModel
 {

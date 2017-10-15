@@ -8,6 +8,7 @@ use luya\admin\base\Controller;
  * TemplateController renders angular templates.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class TemplateController extends Controller
 {

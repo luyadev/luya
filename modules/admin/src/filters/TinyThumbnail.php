@@ -8,6 +8,7 @@ use luya\admin\base\Filter;
  * Admin Module default Filter: Tiny Thumbnail (40xnull)
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class TinyThumbnail extends Filter
 {

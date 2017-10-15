@@ -39,6 +39,9 @@ use luya\admin\ngrest\base\ActiveWindow;
  * + shortSize
  *
  * See [Formatting Guide](http://www.yiiframework.com/doc-2.0/guide-output-formatting.html)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class DetailViewActiveWindow extends ActiveWindow
 {

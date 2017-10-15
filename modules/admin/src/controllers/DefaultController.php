@@ -17,6 +17,7 @@ use luya\admin\models\UserLogin;
  * Administration Controller provides, dashboard, logout and index.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class DefaultController extends Controller
 {

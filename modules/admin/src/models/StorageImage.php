@@ -11,6 +11,7 @@ use luya\helpers\FileHelper;
  * StorageImage Model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageImage extends ActiveRecord
 {

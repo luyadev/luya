@@ -5,9 +5,8 @@ namespace luya\admin\file;
 /**
  * Iterator class for file items.
  *
- * @since 1.0.0-beta2
- *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Iterator extends \luya\admin\storage\IteratorAbstract
 {

@@ -14,6 +14,9 @@ use yii\db\ActiveRecord;
  * @property string $auth_token
  * @property string $ip
  * @property integer $is_destroyed
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class UserLogin extends ActiveRecord
 {

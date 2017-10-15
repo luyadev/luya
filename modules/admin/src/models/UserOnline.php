@@ -17,6 +17,9 @@ use yii\helpers\Json;
  * @property string $lock_table
  * @property string $lock_translation
  * @property string $lock_translation_args
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class UserOnline extends ActiveRecord
 {

@@ -14,6 +14,9 @@ use luya\admin\aws\GroupAuthActiveWindow;
  * @property string $name
  * @property string $text
  * @property integer $is_deleted
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Group extends NgRestModel
 {

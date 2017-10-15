@@ -22,6 +22,7 @@ use luya\admin\storage\ItemAbstract;
  * @property \admin\file\Item $file The file object where the image was created from.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Item extends ItemAbstract
 {

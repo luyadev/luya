@@ -19,6 +19,7 @@ namespace luya\admin\dashboard;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class TableDashboardObject extends BasicDashboardObject
 {

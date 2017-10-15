@@ -15,7 +15,7 @@ use luya\admin\base\TypesInterface;
  * allows you the quickly generate a Html Tag for directives.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta8
+ * @since 1.0.0
  */
 class Angular
 {

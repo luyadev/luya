@@ -7,6 +7,9 @@ use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Storage Effect Active Window.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageFilterImagesActiveWindow extends ActiveWindow
 {

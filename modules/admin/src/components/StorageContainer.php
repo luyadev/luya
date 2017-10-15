@@ -94,6 +94,7 @@ use luya\admin\filters\MediumThumbnail;
  * @property array $filtersArray An array with all filters
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class StorageContainer extends Component
 {

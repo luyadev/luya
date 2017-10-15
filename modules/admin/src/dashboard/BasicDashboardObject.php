@@ -11,6 +11,7 @@ use luya\helpers\ArrayHelper;
  * The default object is the default class for all {{luya\admin\base\Module::$dashboardObjects}} items without a class defintion.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class BasicDashboardObject extends BaseDashboardObject
 {

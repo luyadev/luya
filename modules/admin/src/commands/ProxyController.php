@@ -44,7 +44,7 @@ use luya\console\Command;
  *
  * which is equals to:
  *
-  * ```sh
+ * ```sh
  * ./vendor/bin/luya admin/proxy -s=0 -t=large_table
  * ```
  *
@@ -63,6 +63,7 @@ use luya\console\Command;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ProxyController extends Command
 {

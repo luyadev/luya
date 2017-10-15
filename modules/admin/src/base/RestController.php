@@ -20,6 +20,7 @@ use luya\rest\Controller;
  * }
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RestController extends Controller implements UserBehaviorInterface
 {

@@ -12,6 +12,7 @@ use yii\web\Response;
  * Base controller for all Admin-Module controllers.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Controller extends \luya\web\Controller
 {

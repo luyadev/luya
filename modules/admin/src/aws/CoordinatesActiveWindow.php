@@ -8,8 +8,10 @@ use yii\helpers\Json;
 use luya\admin\ngrest\base\ActiveWindow;
 
 /**
- * Active Window created at 18.02.2016 13:22 on LUYA Version 1.0.0-beta5.
- * @todo handling multiple resources in gmaps
+ * Coordinates Collector.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CoordinatesActiveWindow extends ActiveWindow
 {

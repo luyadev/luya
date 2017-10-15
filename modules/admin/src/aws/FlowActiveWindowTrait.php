@@ -26,7 +26,7 @@ use luya\helpers\ArrayHelper;
  *
  * This trait allows you also to easy get all images from the storage system by using the `flowGetImages()` method.
  *
- * @since 1.0.0-beta7
+ * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
 trait FlowActiveWindowTrait

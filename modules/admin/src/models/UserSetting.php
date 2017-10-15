@@ -39,7 +39,7 @@ use yii\db\ActiveRecordInterface;
  * If the key does not exists, null will be returned by default.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta8
+ * @since 1.0.0
  */
 final class UserSetting extends Object implements \ArrayAccess
 {

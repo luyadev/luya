@@ -34,6 +34,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ImageSelectCollectionActiveWindow extends ActiveWindow
 {
