@@ -4,7 +4,6 @@ namespace luya\cms\admin;
 
 use Yii;
 use luya\console\interfaces\ImportControllerInterface;
-use luya\cms\admin\importers\BlockGroupImporter;
 use luya\cms\admin\importers\BlockImporter;
 use luya\cms\admin\importers\CmslayoutImporter;
 use luya\cms\admin\importers\PropertyConsistencyImporter;
@@ -260,7 +259,6 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     public function import(ImportControllerInterface $importer)
     {
         return [
-            BlockGroupImporter::className(),
             BlockImporter::className(),
             CmslayoutImporter::className(),
             PropertyConsistencyImporter::className(),

@@ -21,6 +21,7 @@ use luya\cms\admin\Module;
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItemController extends \luya\admin\base\RestController
 {

@@ -12,6 +12,7 @@ use luya\cms\base\PhpBlock;
  * This block provides a very basic What you see is what you get input.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class WysiwygBlock extends PhpBlock
 {

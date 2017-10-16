@@ -9,6 +9,9 @@ use luya\traits\RegistryTrait;
  *
  * @property integer $name
  * @property string $value
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Config extends \yii\db\ActiveRecord
 {

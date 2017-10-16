@@ -10,6 +10,7 @@ use luya\cms\injectors\LinkInjector;
  * Simple button element with a link function
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class LinkButtonBlock extends PhpBlock
 {

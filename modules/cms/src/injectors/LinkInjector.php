@@ -32,6 +32,7 @@ use luya\cms\helpers\BlockHelper;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class LinkInjector extends BaseBlockInjector
 {

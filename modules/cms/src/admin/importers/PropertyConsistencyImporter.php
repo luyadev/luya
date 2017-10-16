@@ -6,6 +6,12 @@ use luya\console\Importer;
 use luya\cms\models\Property as CmsProperty;
 use luya\admin\models\Property as AdminProperty;
 
+/**
+ * Property Consistency Check Importer.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class PropertyConsistencyImporter extends Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_LAST;

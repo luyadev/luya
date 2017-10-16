@@ -11,6 +11,7 @@ use luya\web\ErrorHandler;
  * Cms Module.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Module extends \luya\base\Module implements CoreModuleInterface
 {

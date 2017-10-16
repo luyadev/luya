@@ -86,8 +86,8 @@ use luya\cms\menu\QueryOperatorFieldInterface;
  * @property \luya\cms\menu\Item $current Get the current active menu item.
  * @property \luya\cms\menu\Item $home Get the home menu item.
  *
- * @since 1.0.0-beta1
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
 {

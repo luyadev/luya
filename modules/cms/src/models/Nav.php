@@ -35,6 +35,7 @@ use luya\cms\admin\Module;
  * @property \luya\cms\models\NavContainer $navContainer Returns the nav container model
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Nav extends ActiveRecord
 {

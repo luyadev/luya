@@ -18,8 +18,8 @@ use luya\cms\helpers\BlockHelper;
  *
  * + {{\luya\cms\base\PhpBlock}}
  *
- * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class InternalBaseBlock extends Object implements BlockInterface, TypesInterface, \ArrayAccess
 {

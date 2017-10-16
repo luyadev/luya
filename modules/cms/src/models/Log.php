@@ -23,6 +23,7 @@ use yii\base\InvalidParamException;
  * @property integer $row_id
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Log extends \yii\db\ActiveRecord
 {

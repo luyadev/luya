@@ -10,8 +10,8 @@ use yii\base\ViewContextInterface;
  *
  * @property \luya\cms\base\PhpBlockView $view View Object.
  *
- * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, ViewContextInterface
 {

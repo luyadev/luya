@@ -13,6 +13,7 @@ use luya\base\ModuleReflection;
  * Represents the type MODULE for a NavItem.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItemModule extends NavItemType implements NavItemTypeInterface
 {

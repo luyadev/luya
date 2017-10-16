@@ -10,9 +10,10 @@ use luya\helpers\FileHelper;
 use luya\cms\base\BlockInterface;
 
 /**
- * Import cms Blocks.
+ * CMS Blocks Importer.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class BlockImporter extends Importer
 {

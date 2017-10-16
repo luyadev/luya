@@ -9,9 +9,10 @@ use luya\cms\frontend\Module;
 use luya\cms\base\PhpBlock;
 
 /**
- *
+ * Form generation Block.
+ * 
  * @author Basil Suter <basil@nadar.io>
- *
+ * @since 1.0.0
  */
 final class FormBlock extends PhpBlock
 {

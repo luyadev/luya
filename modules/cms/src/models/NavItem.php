@@ -34,6 +34,7 @@ use luya\admin\models\User;
  * @property \luya\cms\models\Nav $nav Nav Model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 {

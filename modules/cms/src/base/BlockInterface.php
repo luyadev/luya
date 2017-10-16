@@ -8,6 +8,7 @@ namespace luya\cms\base;
  * The below methods are required in order to create your own block abstraction layer.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface BlockInterface
 {

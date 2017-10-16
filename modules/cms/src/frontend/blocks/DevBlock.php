@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * Development Block in order to print data.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class DevBlock extends PhpBlock
 {

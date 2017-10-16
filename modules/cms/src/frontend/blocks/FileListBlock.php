@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * File list block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class FileListBlock extends PhpBlock
 {

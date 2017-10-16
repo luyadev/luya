@@ -14,6 +14,7 @@ use luya\cms\models\Config;
  * Admin Api delievers common api tasks like blocks and layouts.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class AdminController extends \luya\admin\base\RestController
 {

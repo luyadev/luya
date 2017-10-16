@@ -43,8 +43,8 @@ use yii\base\Object;
  *
  * @property \luya\cms\Menu $menu Application menu component object.
  *
- * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Query extends Object implements QueryOperatorFieldInterface
 {

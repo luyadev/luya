@@ -14,6 +14,7 @@ use Exception;
  * + {{\luya\cms\base\BlockVar}}
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class BlockConfigElement
 {

@@ -9,6 +9,7 @@ use luya\cms\base\PhpBlock;
  * Google Maps Block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class MapBlock extends PhpBlock
 {

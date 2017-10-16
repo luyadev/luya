@@ -14,7 +14,9 @@ use luya\cms\admin\Module;
  * @property integer $id
  * @property integer $type The type of redirect (1 = page, 2 = URL, 3 = Link to File)
  * @property string $value Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItemRedirect extends NavItemType implements NavItemTypeInterface
 {
