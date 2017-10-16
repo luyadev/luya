@@ -9,6 +9,7 @@ namespace luya\admin\traits;
  * can override the static `fieldStateDescriber()` method as described in the description of the method.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 trait SoftDeleteTrait
 {

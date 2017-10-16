@@ -24,6 +24,7 @@ use luya\helpers\Html;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Textarea extends Plugin
 {

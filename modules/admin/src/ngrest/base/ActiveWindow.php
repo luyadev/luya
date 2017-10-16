@@ -24,6 +24,7 @@ use luya\helpers\FileHelper;
  * @property \luya\admin\ngrest\base\NgRestModel $model The model evaluated by the `findOne` of the called ng rest model ActiveRecord.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class ActiveWindow extends Object implements ViewContextInterface, ActiveWindowInterface
 {

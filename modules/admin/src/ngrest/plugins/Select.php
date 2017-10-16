@@ -9,6 +9,7 @@ use luya\admin\ngrest\base\Plugin;
  * Base class for select dropdowns via Array or Model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Select extends Plugin
 {

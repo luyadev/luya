@@ -10,6 +10,7 @@ namespace luya\admin\ngrest\base\actions;
  * provided from the luya\rest\ActiveController.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class IndexAction extends \yii\rest\IndexAction
 {

@@ -2,7 +2,6 @@
 
 namespace luya\admin\ngrest\plugins;
 
-use luya\Exception;
 use luya\admin\ngrest\base\Plugin;
 
 /**
@@ -12,8 +11,8 @@ use luya\admin\ngrest\base\Plugin;
  *
  * The frontend output will not encoded, so make sure no user generated contnet is provided by the html plugin.
  *
- * @since 1.0.0-beta7
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Html extends Plugin
 {

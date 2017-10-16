@@ -41,6 +41,7 @@ use luya\admin\ngrest\NgRest;
  * ```
  *
  * @property \yii\db\ActiveQuery $query Active Query relation.
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

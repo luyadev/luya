@@ -33,6 +33,7 @@ use luya\admin\importers\StorageImporter;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {

@@ -23,6 +23,7 @@ use luya\helpers\StringHelper;
  * The plugin stores the value of the selected checkbox items as json into the database.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CheckboxList extends Plugin
 {

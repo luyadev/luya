@@ -27,6 +27,7 @@ use luya\helpers\ArrayHelper;
  * + onSave: Before Update / Create of the new data set.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Plugin extends Component
 {

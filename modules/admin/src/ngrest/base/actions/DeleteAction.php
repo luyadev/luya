@@ -13,6 +13,7 @@ use yii\web\ServerErrorHttpException;
  * ServerErrorHttpException.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class DeleteAction extends \yii\rest\DeleteAction
 {

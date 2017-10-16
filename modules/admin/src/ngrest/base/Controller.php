@@ -16,6 +16,7 @@ use yii\web\ForbiddenHttpException;
  * @property \luya\admin\ngrest\base\NgRestModel $model The model based from the modelClass instance
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Controller extends \luya\admin\base\Controller
 {

@@ -8,8 +8,8 @@ use luya\admin\helpers\Angular;
 /**
  * ActiveWindow ActiveField Configration
  *
- * @since 1.0.0-beta7
- * @author Basil Sutert <basil@nadar.io>
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ActiveField extends Object
 {
