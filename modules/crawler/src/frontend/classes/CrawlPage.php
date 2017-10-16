@@ -8,6 +8,15 @@ use yii\base\InvalidConfigException;
 use luya\helpers\StringHelper;
 use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Crawl Page.
+ * 
+ * The Crawl Page is the process where the content of a given url is inspected and returns 
+ * the required informations in order to return those data into the build.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class CrawlPage extends \yii\base\Object
 {
     public $pageUrl;

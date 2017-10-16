@@ -9,6 +9,15 @@ use luya\crawler\models\Builderindex;
 use luya\crawler\models\Index;
 use luya\helpers\Url;
 
+/**
+ * Crawler Container.
+ * 
+ * The Crawler Container contains the whole process of the build. Returns a log and contains the informations about the pages
+ * which should be crawle.d
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class CrawlContainer extends \yii\base\Object
 {
     public $baseUrl;

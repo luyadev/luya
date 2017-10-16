@@ -6,6 +6,14 @@ use luya\web\Controller;
 use luya\crawler\models\Click;
 use luya\crawler\models\Index;
 
+/**
+ * Click Index Controller.
+ * 
+ * Add a click for a given url and redirect to its origin target.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class ClickController extends Controller
 {
     public function actionIndex($searchId, $indexId, $position)

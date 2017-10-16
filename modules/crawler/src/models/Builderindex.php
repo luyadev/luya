@@ -5,6 +5,15 @@ namespace luya\crawler\models;
 use luya\crawler\admin\Module;
 use luya\helpers\StringHelper;
 
+/**
+ * Temporary Builder Index Model.
+ * 
+ * The Builder Index is used while the crawl process. After a success crawl for the given website, the whole BuilderIndex
+ * will be synced into the {{luya\crawler\models\Index}} model.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class Builderindex extends \luya\admin\ngrest\base\NgRestModel
 {
     public function init()

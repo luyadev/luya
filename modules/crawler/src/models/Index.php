@@ -9,7 +9,9 @@ use Nadar\Stemming\Stemm;
 use yii\db\Expression;
 
 /**
- * This is the model class for table "crawler_index".
+ * The Crawler Index Model.
+ * 
+ * This table contains the crawler content for a given Website.
  *
  * @property integer $id
  * @property string $url
@@ -22,6 +24,9 @@ use yii\db\Expression;
  * @property integer $added_to_index
  * @property integer $last_update
  * @property string $clickUrl
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Index extends \luya\admin\ngrest\base\NgRestModel
 {

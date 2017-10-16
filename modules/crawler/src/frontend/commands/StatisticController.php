@@ -12,11 +12,12 @@ use yii\console\Exception;
  *
  * Console command use:
  *
- * ```
+ * ```sh
  * ./vendor/bin/luya crawler/statistic
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class StatisticController extends Command
 {

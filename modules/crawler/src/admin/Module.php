@@ -5,9 +5,10 @@ namespace luya\crawler\admin;
 use luya\admin\components\AdminMenuBuilder;
 
 /**
- * Crawler Admin Module.
+ * LUYA Crawler Admin Module.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Module extends \luya\admin\base\Module
 {
