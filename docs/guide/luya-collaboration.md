@@ -99,3 +99,51 @@ git push origin
 Visit your *LUYA* Fork on GitHub now and you will see a **PULL REQUEST** Button where you can create a Pull-Request:
 
 ![pull-request](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
+
+## Module development
+
+If you start developing your own module its recommend to place the module development directory not inside of the LUYA installation and treat it as separated project on github or on your preferred VCS. 
+Include the module via `psr-4 binding` in your your `luyadev/envs/dev/composer.json` for development.
+
+Below an example of a module inclusion for development:
+
+1. Include your module in the `composer.json` file in the autoload section.
+
+```php
+"autoload" : {
+        "psr-4" : {
+        
+            // other psr-4 modules
+            
+            "dev7\\restapi\\" : "../../../module-development/restapi/src"
+        }
+    }
+    ```
+
+2. Run inside of `luyadev\envs\dev` the command `composer dump-autoload` the update the autoload script.
+3. Include the module in `luyadev\envs\dev\config\env.php` in the module section.
+
+```php
+
+// ..
+
+modules => [
+  
+  // other modules
+  
+  'restapi' => 'dev7\restapi\frontend\Module',
+  'restapiadmin' => 'dev7\restapi\admin\Module'
+  
+],
+
+// ..
+
+```
+
+4. Ensure the namespace in your `Module.php` files match the same as in the `luyadev\envs\dev\config\env.php`, e.g. `dev7\restapi\frontend\`.
+
+
+
+
+
+
