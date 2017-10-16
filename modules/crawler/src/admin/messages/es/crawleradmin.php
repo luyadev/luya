@@ -1,11 +1,9 @@
 <?php
-
 return [
-  
-// added translation in 1.0.0-beta5:
-
     'crawler' => 'Rastreador',
     'crawler_indexing' => 'Indexación',
+	'crawler_analytics' => 'Analytics',
+	'crawler_anayltics_queries' => 'Search Queries',
 
     //builderindex
     'crawler_index' => 'Índice de página',
@@ -22,5 +20,4 @@ return [
     'index_language_info' => 'Información del idioma',
     'index_content' => 'Contenido',
     'index_url_found' => 'Url encontrado en la página',
-    
 ];

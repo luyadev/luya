@@ -1,5 +1,4 @@
 <?php
-
 return [
     'crawler' => 'Crawler',
     'crawler_indexing' => 'Indexing',

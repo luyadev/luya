@@ -1,9 +1,10 @@
 <?php
-
 return [
-    /* added translation in 1.0.0-beta5: */
     'crawler' => 'Crawler', // untranslatable
     'crawler_indexing' => 'Indexage',
+	'crawler_analytics' => 'Analytics',
+	'crawler_anayltics_queries' => 'Search Queries',
+		
     //builderindex
     'crawler_index' => 'Index des pages',
     'builderindex_url' => 'Url',
@@ -11,6 +12,7 @@ return [
     'builderindex_language_info' => 'Information sur la langue',
     'builderindex_content' => 'Contenu',
     'builderindex_url_found' => 'Url introuvable sur la page',
+		
     //index
     'crawler_builderindex' => 'Cache de la page',
     'index_url' => 'Url',

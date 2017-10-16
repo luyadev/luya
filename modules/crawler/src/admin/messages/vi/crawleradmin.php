@@ -1,12 +1,10 @@
 <?php
-
 return [
-
-// added translation in 1.0.0-beta5:
-
     'crawler' => 'Crawler',
     'crawler_indexing' => 'Indexing',
-
+	'crawler_analytics' => 'Analytics',
+	'crawler_anayltics_queries' => 'Search Queries',
+		
     //builderindex
     'crawler_index' => 'Trang chính',
     'builderindex_url' => 'Url',
@@ -22,5 +20,4 @@ return [
     'index_language_info' => 'Chi tiết ngôn ngữ',
     'index_content' => 'Nội dung',
     'index_url_found' => 'Url tìm thấy trên trang',
-
 ];

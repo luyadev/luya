@@ -1,12 +1,10 @@
 <?php
-
 return [
-
-// added translation in 1.0.0-beta5:
-
     'crawler' => 'Пошуковий двигун',
     'crawler_indexing' => 'Індексація',
-
+	'crawler_analytics' => 'Analytics',
+	'crawler_anayltics_queries' => 'Search Queries',
+	
     //builderindex
     'crawler_index' => 'Індекс сторінки',
     'builderindex_url' => 'Url',
@@ -22,5 +20,4 @@ return [
     'index_language_info' => 'Інформація про мову',
     'index_content' => 'Контент',
     'index_url_found' => 'Такий Url знайдений на іншій сторінці',
-
 ];
