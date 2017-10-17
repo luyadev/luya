@@ -57,9 +57,9 @@ class Controller extends \luya\admin\base\Controller
      *
      *     public $globalButtons = [
      *	       [
-     *				'icon' => 'file_download',
-     *				'label' => 'XML Download',
-     *				'ui-sref' => "custom({templateId:'myadmin/mycrudcontroller/the-action'})"
+     *              'icon' => 'file_download',
+     *              'label' => 'XML Download',
+     *              'ui-sref' => "custom({templateId:'myadmin/mycrudcontroller/the-action'})"
      *         ]
      *     ];
      *
