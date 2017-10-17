@@ -24,7 +24,7 @@ use yii\db\ActiveQuery;
  * The RestActiveController for all NgRest implementations.
  *
  * @property \luya\admin\ngrest\NgRestModel $model Get the model object based on the $modelClass property.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

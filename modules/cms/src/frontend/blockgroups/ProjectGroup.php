@@ -7,9 +7,9 @@ use luya\cms\frontend\Module;
 
 /**
  * Project Block Group.
- * 
+ *
  * This group belongs to all new project based blocks by default.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

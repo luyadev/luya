@@ -7,12 +7,12 @@ use yii\db\ActiveRecord;
 
 /**
  * Error Data Model.
- * 
+ *
  * @property integer $id
  * @property string $identifier
  * @property string $error_json
  * @property integer $timestamp_create
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -34,12 +34,12 @@ class Data extends ActiveRecord
      */
     public function rules()
     {
-    	return [
-    		[['error_json'], 'required'],
-    		[['error_json'], 'string'],
-    		[['timestamp_create'], 'integer'],
-    		[['identifier'], 'string', 'max' => 255],
-    	];
+        return [
+            [['error_json'], 'required'],
+            [['error_json'], 'string'],
+            [['timestamp_create'], 'integer'],
+            [['identifier'], 'string', 'max' => 255],
+        ];
     }
     
     /**
@@ -47,12 +47,12 @@ class Data extends ActiveRecord
      */
     public function attributeLabels()
     {
-    	return [
-    		'id' => 'ID',
-    		'identifier' => 'Identifier',
-    		'error_json' => 'Error Json',
-    		'timestamp_create' => 'Timestamp Create',
-    	];
+        return [
+            'id' => 'ID',
+            'identifier' => 'Identifier',
+            'error_json' => 'Error Json',
+            'timestamp_create' => 'Timestamp Create',
+        ];
     }
 
     public function init()

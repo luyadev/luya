@@ -8,9 +8,9 @@ use yii\helpers\Html;
 
 /**
  * File Tag.
- * 
+ *
  * Generates a link to a target file in a new window.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

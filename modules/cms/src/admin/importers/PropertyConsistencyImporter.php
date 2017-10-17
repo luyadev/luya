@@ -8,7 +8,7 @@ use luya\admin\models\Property as AdminProperty;
 
 /**
  * Property Consistency Check Importer.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

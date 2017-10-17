@@ -10,7 +10,7 @@ use yii\db\Expression;
 
 /**
  * The Crawler Index Model.
- * 
+ *
  * This table contains the crawler content for a given Website.
  *
  * @property integer $id

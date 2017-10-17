@@ -1,10 +1,10 @@
 <?php
 return [
-	'crawler' => 'Crawler',
+    'crawler' => 'Crawler',
     'crawler_indexing' => 'Δεικτοδότηση (Indexing)',
-	'crawler_analytics' => 'Analytics',
-	'crawler_anayltics_queries' => 'Search Queries',
-		
+    'crawler_analytics' => 'Analytics',
+    'crawler_anayltics_queries' => 'Search Queries',
+        
     //builderindex
     'crawler_index' => 'Δείκτης (index) Σέλιδας',
     'builderindex_url' => 'Url',

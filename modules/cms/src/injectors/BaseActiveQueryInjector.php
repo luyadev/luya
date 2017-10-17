@@ -9,7 +9,7 @@ use yii\db\ActiveQueryInterface;
 
 /**
  * Base class for ActiveQuery Injectors.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

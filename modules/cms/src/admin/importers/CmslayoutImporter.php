@@ -12,7 +12,7 @@ use yii\helpers\Json;
 
 /**
  * CMS Layouts Importer.
- * 
+ *
  * Import cmslayout files from the folder and analyise placeholders.
  *
  * @author Basil Suter <basil@nadar.io>

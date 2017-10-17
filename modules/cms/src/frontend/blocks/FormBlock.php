@@ -10,7 +10,7 @@ use luya\cms\base\PhpBlock;
 
 /**
  * Form generation Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

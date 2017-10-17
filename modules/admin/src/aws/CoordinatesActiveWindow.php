@@ -9,7 +9,7 @@ use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Coordinates Collector.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

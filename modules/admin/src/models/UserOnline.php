@@ -151,7 +151,7 @@ final class UserOnline extends ActiveRecord
      */
     public static function clearList()
     {
-    	$max = YII_ENV_PROD ? 1800 : 3600;
+        $max = YII_ENV_PROD ? 1800 : 3600;
         self::deleteAll(['<=', 'last_timestamp', time() - $max]);
     }
     

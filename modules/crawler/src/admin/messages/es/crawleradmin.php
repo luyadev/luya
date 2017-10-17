@@ -2,8 +2,8 @@
 return [
     'crawler' => 'Rastreador',
     'crawler_indexing' => 'Indexación',
-	'crawler_analytics' => 'Analytics',
-	'crawler_anayltics_queries' => 'Search Queries',
+    'crawler_analytics' => 'Analytics',
+    'crawler_anayltics_queries' => 'Search Queries',
 
     //builderindex
     'crawler_index' => 'Índice de página',

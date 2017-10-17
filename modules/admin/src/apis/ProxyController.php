@@ -38,7 +38,7 @@ class ProxyController extends Controller
     
     /**
      * Gathers basic informations about the build.
-     * 
+     *
      * @param string $identifier
      * @param string $token
      * @throws ForbiddenHttpException
@@ -109,7 +109,7 @@ class ProxyController extends Controller
     
     /**
      * Make sure the machine and token are valid.
-     * 
+     *
      * @param string $machine
      * @param string $buildToken
      * @throws ForbiddenHttpException
@@ -136,7 +136,7 @@ class ProxyController extends Controller
     
     /**
      * Return sql table data.
-     * 
+     *
      * @param unknown $machine
      * @param unknown $buildToken
      * @param unknown $table
@@ -198,7 +198,7 @@ class ProxyController extends Controller
     
     /**
      * Return image storage data.
-     * 
+     *
      * @param unknown $machine
      * @param unknown $buildToken
      * @param unknown $imageId

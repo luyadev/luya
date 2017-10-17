@@ -2,9 +2,9 @@
 return [
     'crawler' => 'Пошуковий двигун',
     'crawler_indexing' => 'Індексація',
-	'crawler_analytics' => 'Analytics',
-	'crawler_anayltics_queries' => 'Search Queries',
-	
+    'crawler_analytics' => 'Analytics',
+    'crawler_anayltics_queries' => 'Search Queries',
+    
     //builderindex
     'crawler_index' => 'Індекс сторінки',
     'builderindex_url' => 'Url',

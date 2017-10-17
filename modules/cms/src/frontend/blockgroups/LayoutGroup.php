@@ -7,7 +7,7 @@ use luya\cms\frontend\Module;
 
 /**
  * Layout Block Group.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

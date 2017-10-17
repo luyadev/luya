@@ -2,9 +2,9 @@
 return [
     'crawler' => 'Crawler',
     'crawler_indexing' => 'Indexierung',
-	'crawler_analytics' => 'Analytics',
-	'crawler_anayltics_queries' => 'Such Eingaben',
-		
+    'crawler_analytics' => 'Analytics',
+    'crawler_anayltics_queries' => 'Such Eingaben',
+        
     //builderindex
     'crawler_index' => 'Seiten Index',
     'builderindex_url' => 'Url',

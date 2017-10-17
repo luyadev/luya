@@ -6,7 +6,7 @@ use luya\admin\ngrest\base\Controller;
 
 /**
  * Block Controller.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

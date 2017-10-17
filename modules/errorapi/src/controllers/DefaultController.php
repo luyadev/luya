@@ -7,7 +7,7 @@ use luya\errorapi\models\Data;
 
 /**
  * Default Controller for the Error API.
- * 
+ *
  * The `create` action is used in order to recieve error reports from a given website.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -15,9 +15,9 @@ use luya\errorapi\models\Data;
  */
 class DefaultController extends \luya\rest\Controller
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function userAuthClass()
     {
         return false;
@@ -25,11 +25,11 @@ class DefaultController extends \luya\rest\Controller
 
     /**
      * Create a new error report.
-     * 
+     *
      * In order to create new error report send a post request with the key `error_json` containing a json.
-     * 
+     *
      * Example:
-     * 
+     *
      * ```php
      * $_POST['error_json'] = json_encode(['message' => 'What?', 'serverName' => 'example.com']);
      * ```
@@ -61,8 +61,8 @@ class DefaultController extends \luya\rest\Controller
 
     /**
      * Send a message to given slack channel.
-     * 
-     * @param string $message The message to be sent. 
+     *
+     * @param string $message The message to be sent.
      * @param string $channel The channel where the message should appear.
      * @return mixed
      */

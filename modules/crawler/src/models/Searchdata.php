@@ -8,7 +8,7 @@ use luya\admin\aws\DetailViewActiveWindow;
 
 /**
  * Searchdata contains Search Queries from Users.
- * 
+ *
  * This table represents all search queries made by the users from the frontend. This is also used in order to
  * send weekly search report.
  *

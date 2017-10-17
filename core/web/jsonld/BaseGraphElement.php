@@ -8,7 +8,5 @@ use yii\base\ArrayableTrait;
 
 abstract class BaseGraphElement extends Object implements Arrayable
 {
-	use ArrayableTrait;
-	
-	
+    use ArrayableTrait;
 }

@@ -12,14 +12,14 @@ use luya\web\ErrorHandler;
 
 /**
  * CMS Bootstrap.
- * 
+ *
  * The CMS bootstrap class injects the cms specific url rules
- * 
+ *
  * + {{luya\cms\frontend\components\RouteBehaviorUrlRule}}
  * + {{luya\cms\frontend\components\CatchAllUrlRule}}
- * 
+ *
  * And changes the behavior if an exception appears in order to redirect users to a custom cms page.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

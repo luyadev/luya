@@ -4,7 +4,7 @@ namespace luya\crawler\admin\apis;
 
 /**
  * Builder Index Api.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

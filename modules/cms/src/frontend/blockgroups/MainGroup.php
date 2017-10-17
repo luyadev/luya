@@ -7,9 +7,9 @@ use luya\cms\frontend\Module;
 
 /**
  * Main Block Group.
- * 
+ *
  * This is the default group for new blocks.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
