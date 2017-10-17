@@ -26,13 +26,13 @@ $this->beginBody();
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
                             <a class="dropdown-item" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()">
-                                <i class="material-icons">get_app</i> <span><?= Module::t('ngrest_crud_csv_export_btn'); ?></span>
+                                <i class="material-icons">get_app</i><span><?= Module::t('ngrest_crud_csv_export_btn'); ?></span>
                             </a>
                             <a class="dropdown-item" ng-show="exportLoading">
                                 <i class="material-icons spin">cached</i>
                             </a>
                             <a class="dropdown-item" ng-show="exportDownloadButton" ng-click="exportDownload()">
-                               <i class="material-icons">get_app</i><span> <?= Module::t('ngrest_crud_csv_export_btn_dl'); ?></span>
+                               <i class="material-icons">get_app</i><span><?= Module::t('ngrest_crud_csv_export_btn_dl'); ?></span>
                             </a>
                             <?php foreach ($this->context->getSettingButtonDefinitions() as $button): ?>
                                 <?= $button; ?>
