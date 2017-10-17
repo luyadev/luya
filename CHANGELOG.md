@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1550](https://github.com/luyadev/luya/issues/1550) Readded option to change the page type in CMS Module.
 - [#1480](https://github.com/luyadev/luya/issues/1480) Dropdown select overlay z-index fixed by closing all other selects. 
 - [#1519](https://github.com/luyadev/luya/issues/1519) Multiple inputs problem with empty item rows convert to object instead of array.
 - [#1535](https://github.com/luyadev/luya/issues/1535) Date and Datetime reset model buttons.

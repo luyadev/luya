@@ -179,7 +179,7 @@ class BlockController extends \luya\console\Command
     {
         return [
             'select' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
-            'radios' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
+            'radio' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
             'checkbox-array' => "BlockHelper::checkboxArrayOption([1 => 'Label for 1'])",
             'image-upload' => "['no_filter' => false]",
             'image-array-upload' => "['no_filter' => false]",
