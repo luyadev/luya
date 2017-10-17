@@ -384,6 +384,13 @@
 
 	/* controllers */
 
+	zaa.controller("CmsDashboard", function($scope, $http) {
+		$scope.dashboard = [];
+		$http.get('admin/api-cms-admin/dashboard-log').then(function(response) {
+			$scope.dashboard = response.data;
+		});
+	});
+	
 	zaa.controller("ConfigController", function($scope, $http, AdminToastService) {
 		$scope.data = {};
 

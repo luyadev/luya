@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1540](https://github.com/luyadev/luya/issues/1540) CMS Log Dashboard.
 - [#1304](https://github.com/luyadev/luya/issues/1304) Crud indicates the total amount of rows with pagination enabled or disabled.
 - [#1521](https://github.com/luyadev/luya/issues/1521) Bind session token to current IP in order to prevent session hijacking.
 - [#1511](https://github.com/luyadev/luya/issues/1511) Added page id information in cms menu tree on hover (alt,title).

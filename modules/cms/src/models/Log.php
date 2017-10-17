@@ -112,6 +112,21 @@ class Log extends \yii\db\ActiveRecord
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+    	return [
+    		'is_insertion',
+    		'is_update',
+    		'is_deletion',
+    		'timestamp',
+    		'action',
+    		'user',
+    	];
+    }
+    
     public function getAction()
     {
         if ($this->is_insertion) {
@@ -154,6 +169,10 @@ class Log extends \yii\db\ActiveRecord
         }
     }
     
+    /**
+     * 
+     * @return \yii\db\ActiveQuery
+     */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);

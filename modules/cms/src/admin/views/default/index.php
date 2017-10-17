@@ -80,5 +80,25 @@ use \luya\admin\Module as AdminModule;
             </ul>
         </div>
     </div>
-    <div class="luya-content luya-content-cmsadmin" ui-view></div>
+    <div class="luya-content luya-content-cmsadmin" ui-view>
+        <div ng-controller="CmsDashboard" class="luya-content">
+            <div class="card mb-2" ng-repeat="item in dashboard" ng-init="item.isToggled = ($index < 3)">
+	            <div class="card-header" ng-click="item.isToggled = !item.isToggled">
+	                <span class="card-title">{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span>
+	            </div>
+	            <div class="card-body" ng-show="item.isToggled">
+	                <div class="timeline timeline-left timeline-compact">
+	                    <div class="timeline-item timeline-item-center-point" ng-repeat="(key, log) in item.items">
+	                        <i class="material-icons" ng-if="log.is_insertion == 1">note_add</i>
+	                        <i class="material-icons" ng-if="log.is_update == 1">create</i>
+                            <i class="material-icons" ng-if="log.is_deletion == 1">delete</i>
+                            <small class="pr-4"><i>{{log.timestamp * 1000 | date:"HH:mm"}}</i></small>
+                            <small class="pr-4">{{ log.user.firstname }} {{log.user.lastname}}</small>
+	                        <small><span compile-html ng-bind-html="log.action | trustAsUnsafe"></span></small>
+	                    </div>
+	                </div>
+	            </div>
+            </div>
+        </div>
+    </div>
 </div>
