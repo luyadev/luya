@@ -912,12 +912,8 @@
                         '</div>' +
                     '</div>' +
                     '<modal is-modal-hidden="data.modalState" modal-title="{{label}}">'+
-                        '<div class="modal-body">' +
-                            '<update-form-redirect data="data.model"></update-form-redirect>' +
-                        '</div>' +
-                        '<div class="modal-footer">'+
-                            '<button ng-click="data.modalState=1" class="btn btn-icon btn-save" type="button">'+i18n['js_link_set_value']+'</button>' +
-                        '</div>'+
+                        '<update-form-redirect data="data.model"></update-form-redirect>' +
+                        '<button ng-click="data.modalState=1" class="btn btn-icon btn-save" type="button">'+i18n['js_link_set_value']+'</button>' +
                     '</modal>'+
                 '</div></div>';
             }
