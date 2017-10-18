@@ -3,13 +3,13 @@
 namespace luyatests\core\web;
 
 use luyatests\LuyaWebTestCase;
-use luya\web\ExternalLink;
+use luya\web\WebsiteLink;
 
-class ExternalLinkTest extends LuyaWebTestCase
+class WebsiteLinkTest extends LuyaWebTestCase
 {
     public function testLinkable()
     {
-        $link = new ExternalLink(['href' => 'https://luya.io']);
+    	$link = new WebsiteLink(['href' => 'https://luya.io']);
         
         $this->assertInstanceOf('luya\web\LinkInterface', $link);
         
@@ -21,12 +21,12 @@ class ExternalLinkTest extends LuyaWebTestCase
     public function testMissingHrefException()
     {
         $this->expectException('yii\base\InvalidConfigException');
-        $link = new ExternalLink();
+        $link = new WebsiteLink();
     }
     
     public function testSchemaHttpMissing()
     {
-        $link = new ExternalLink(['href' => '//go/there?p=1']);
+    	$link = new WebsiteLink(['href' => '//go/there?p=1']);
 
         $this->assertContains('public_html/go/there?p=1', $link->href);
     }

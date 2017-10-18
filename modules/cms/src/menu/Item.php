@@ -95,12 +95,24 @@ class Item extends Object implements LinkInterface, Arrayable
         return $this->getLink();
     }
     
+    private $_target;
+    
+    /**
+     * Setter method for the link target.
+     * 
+     * @param string $target
+     */
+    public function setTarget($target)
+    {
+    	$this->_target = $target;
+    }
+    
     /**
      * @inheritdoc
      */
     public function getTarget()
     {
-        return '_self';
+    	return empty($this->_target) ? '_self' : $this->_target;
     }
     
     /**

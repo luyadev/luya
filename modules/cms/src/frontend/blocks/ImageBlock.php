@@ -8,7 +8,7 @@ use luya\TagParser;
 use luya\cms\frontend\blockgroups\MediaGroup;
 use luya\cms\helpers\BlockHelper;
 use luya\cms\base\PhpBlock;
-use luya\web\ExternalLink;
+use luya\web\WebsiteLink;
 
 /**
  * Image Block.
@@ -99,12 +99,12 @@ final class ImageBlock extends PhpBlock
      *
      * Linkable resources must implement {{luya\web\LinkInterface}}.
      *
-     * @return \luya\web\ExternalLink|\luya\cms\menu\Item|boolean
+     * @return \luya\web\WebsiteLink|\luya\cms\menu\Item|boolean
      */
     public function getLinkObject()
     {
         if ($this->getCfgValue('externalLink', false)) {
-            return new ExternalLink(['href' => $this->getCfgValue('externalLink', false)]);
+        	return new WebsiteLink(['href' => $this->getCfgValue('externalLink', false)]);
         }
         
         if ($this->getCfgValue('internalLink', false)) {

@@ -63,11 +63,6 @@ final class LinkButtonBlock extends PhpBlock
             ],
             'cfgs' => [
                 [
-                    'var' => 'targetBlank',
-                    'label' => Module::t('block_link_button_targetblank_label'),
-                    'type' => 'zaa-checkbox'
-                ],
-                [
                     'var' => 'simpleLink',
                     'label' => Module::t('block_link_button_simpleLink_label'),
                     'type' => 'zaa-checkbox'

@@ -97,9 +97,9 @@ return [
     'aws_changepassword_succes' => 'Dein neues Passwort wurde erfolgreich verschlüsselt und gespeichert.',
     'aws_changepassword_new_pass' => 'Neues Passwort',
     'aws_changepassword_new_pass_retry' => 'Neues Passwort wiederholen',
-    'view_index_redirect_type' => 'Art der Weiterleitung',
-    'view_index_redirect_internal' => 'Interne-Seite',
-    'view_index_redirect_external' => 'Externe URL',
+    'view_index_redirect_type' => 'Verlinkung mit',
+    'view_index_redirect_internal' => 'interner Seite',
+    'view_index_redirect_external' => 'externer Adresse',
     'view_index_redirect_internal_select' => 'Wähle die interne Seite aus, auf welche weitergeleitet werden soll.',
     'view_index_redirect_external_link' => 'Externer Link',
     'view_index_redirect_external_link_help' => 'Externe Links beginnen mit http:// oder https://',
@@ -250,9 +250,15 @@ return [
     'menu_dashboard' => 'Dashboard',
     'js_link_not_set' => 'Kein Link gesetzt',
         
-    // 1.0.0
+// 1.0.0
         
-        'ngrest_button_delete' => 'Delete',
-        'js_dir_manager_rm_file_confirm_title' => 'Remove file',
-        'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
+    'ngrest_button_delete' => 'Löschen',
+    'js_dir_manager_rm_file_confirm_title' => 'Datei löschen',
+    'js_dir_manager_rm_folder_confirm_title' => 'Verzeichnis löschen',
+	'link_dir_target' => 'Link-Ziel',
+	'link_dir_target_same' => 'Gleiches Fenster',
+	'link_dir_target_blank' => 'Neues Fenster',
+	'view_index_redirect_file' => 'Datei',
+	'view_index_redirect_mail' => 'E-Mail-Adresse',
+	'view_index_redirect_mail_help' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
 ];

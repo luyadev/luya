@@ -16,10 +16,12 @@ use luya\helpers\StringHelper;
  * by the current base absolute base URL.
  *
  * @property string $href The external href link will be http ensured on set.
+ * @property string $target Returns the link target.
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ExternalLink extends Object implements LinkInterface, Arrayable
+class WebsiteLink extends Object implements LinkInterface, Arrayable
 {
     use LinkTrait, ArrayableTrait;
     
@@ -67,11 +69,23 @@ class ExternalLink extends Object implements LinkInterface, Arrayable
         return $this->_href;
     }
     
+    private $_target;
+    
+    /**
+     * Setter method for the link target.
+     * 
+     * @param string $target A valid html link target attribute value.
+     */
+    public function setTarget($target)
+    {
+    	$this->_target = $target;
+    }
+    
     /**
      * @inheritdoc
      */
     public function getTarget()
     {
-        return '_blank';
+    	return empty($this->_target) ? '_blank' : $this->_target;
     }
 }

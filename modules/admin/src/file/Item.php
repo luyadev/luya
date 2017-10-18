@@ -7,6 +7,8 @@ use luya\helpers\Url;
 use luya\helpers\FileHelper;
 use luya\admin\helpers\I18n;
 use luya\admin\storage\ItemAbstract;
+use luya\web\LinkInterface;
+use luya\web\LinkTrait;
 
 /**
  * Storage File Item.
@@ -36,11 +38,41 @@ use luya\admin\storage\ItemAbstract;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Item extends ItemAbstract
+class Item extends ItemAbstract implements LinkInterface
 {
+	use LinkTrait;
+	
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
     private $_caption;
+    
+    /**
+     * @inheritdoc
+     */
+    public function getHref()
+    {
+    	return $this->sourceStatic;
+    }
+    
+    private $_target;
+    
+    /**
+     * Setter method for Link target.
+     * 
+     * @param string $target The target must be a valid link target attribute value.
+     */
+    public function setTarget($target)
+    {
+    	$this->_target = $target;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getTarget()
+    {
+    	return empty($this->_target) ? '_blank' : $this->_target;
+    }
     
     /**
      * Set caption for file item, override existings values

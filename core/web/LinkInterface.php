@@ -10,6 +10,8 @@ namespace luya\web;
  * ```php
  * <a href="<?= $object->getHref(); ?>" target="<?= $object->getTarget(); ?>">Go To</a>
  * ```
+ * 
+ * When implementing the LinkInterface its very common to also use the {{luya\web\LinkTrait}}.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
