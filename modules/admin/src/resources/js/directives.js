@@ -49,10 +49,10 @@
             },
             template: function () {
                 return '<span>' +
-                	'<span ng-if="link.type==1">Intern: <show-internal-redirection nav-id="link.value" /></span>' +
-                	'<span ng-if="link.type==2">Extern: {{link.value}}</span>' +
-                    '<span ng-if="link.type==3">File: <storage-file-display file-id="{{link.value}}"></storage-file-display></span>' +
-                    '<span ng-if="link.type==4">E-Mail: {{link.value}}</span>' +
+                	'<span ng-if="link.type==1"><show-internal-redirection nav-id="link.value" /></span>' +
+                	'<span ng-if="link.type==2">{{link.value}}</span>' +
+                    '<span ng-if="link.type==3"><storage-file-display file-id="{{link.value}}"></storage-file-display></span>' +
+                    '<span ng-if="link.type==4">{{link.value}}</span>' +
                 '</span>';
             }
         }
@@ -897,9 +897,8 @@
                                     '<i class="material-icons left">insert_link</i>' +
                                     '<span>' + i18n['js_link_set_value'] + '</span>' +
                                 '</div>' +
-                                '<span ng-hide="model | isEmpty" class="link-selector-reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' +
-                            '</div>' +
-                            '<p class="link-selector-path"><link-object-to-string link="model"></link-object-to-string></p>' +
+                                '<span ng-hide="model | isEmpty" class="link-selector-reset" ng-click="unset()"><i class="material-icons">remove_circle</i></span>' + 
+                            '</div><link-object-to-string class="ml-2" link="model"></link-object-to-string>' +
                         '</div>' +
                     '</div>' +
                     '<div ng-if="!model">' +
@@ -2303,7 +2302,7 @@
 
             	$scope.$watch(function() { return $scope.ngModel }, function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                        var filtering = $filter('filter')($scope.filesData, {id: n}, true);
+                        var filtering = $filter('filter')($scope.filesData, {id: parseInt(n)}, true);
                         if (filtering && filtering.length == 1) {
                         	$scope.fileinfo = filtering[0];
                         }
@@ -2341,7 +2340,7 @@
 
                 $scope.$watch('fileId', function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                    	var filtering = $filter('filter')($scope.filesData, {id: n}, true);
+                    	var filtering = $filter('filter')($scope.filesData, {id: parseInt(n)}, true);
                         if (filtering && filtering.length == 1) {
                         	$scope.fileinfo = filtering[0];
                         }
