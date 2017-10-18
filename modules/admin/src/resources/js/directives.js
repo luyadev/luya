@@ -49,9 +49,11 @@
             },
             template: function () {
                 return '<span>' +
-                    '<span ng-if="link.type==2">Extern: {{link.value}}</span>' +
-                    '<span ng-if="link.type==1"><show-internal-redirection nav-id="link.value" /></span>' +
-                    '</span>';
+                	'<span ng-if="link.type==1">Intern: <show-internal-redirection nav-id="link.value" /></span>' +
+                	'<span ng-if="link.type==2">Extern: {{link.value}}</span>' +
+                    '<span ng-if="link.type==3">File: <storage-file-display file-id="{{link.value}}"></storage-file-display></span>' +
+                    '<span ng-if="link.type==4">E-Mail: {{link.value}}</span>' +
+                '</span>';
             }
         }
     });
@@ -911,9 +913,9 @@
                             '</div>' +
                         '</div>' +
                     '</div>' +
-                    '<modal is-modal-hidden="data.modalState" modal-title="{{label}}">'+
+                    '<modal is-modal-hidden="data.modalState" modal-title="{{label}}"><form ng-submit="data.modalState=1">'+
                         '<update-form-redirect data="data.model"></update-form-redirect>' +
-                        '<button ng-click="data.modalState=1" class="btn btn-icon btn-save" type="button">'+i18n['js_link_set_value']+'</button>' +
+                        '<button ng-click="data.modalState=1" class="btn btn-icon btn-save" type="submit">'+i18n['js_link_set_value']+'</button></form>' +
                     '</modal>'+
                 '</div></div>';
             }
