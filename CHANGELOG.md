@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1515](https://github.com/luyadev/luya/issues/1515) Change access token on logout provides a shorter periode of being violated.
 
 ### Fixed
-
+- [#1480](https://github.com/luyadev/luya/issues/1480) Close other open dropdown selections if a new one is opened.
 - [#1549](https://github.com/luyadev/luya/issues/1549) Hide version informations for other page types then page content.
 - [#1550](https://github.com/luyadev/luya/issues/1550) Readded option to change the page type in CMS Module.
 - [#1480](https://github.com/luyadev/luya/issues/1480) Dropdown select overlay z-index fixed by closing all other selects. 
