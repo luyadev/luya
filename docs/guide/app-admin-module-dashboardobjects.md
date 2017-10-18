@@ -12,7 +12,7 @@ You can choose from predefined dashboard objects, which are easy to implement:
 + {{luya\admin\dashboard\TableDashboardObject}}
 + {{luya\admin\dashboard\ListDashboardObject}}
 
- ```php
+```php
 public $dashboardObjects = [
     [
         'class' => 'luya\admin\dashboard\BasicDashboardObject',
