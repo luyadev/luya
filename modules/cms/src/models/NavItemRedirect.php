@@ -69,7 +69,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
     public function resolveValue()
     {
         switch ($this->type) {
-        	// internal page redirect
+            // internal page redirect
             case self::TYPE_INTERNAL_PAGE:
                 $item = Yii::$app->menu->find()->where(['nav_id' => $this->value])->with('hidden')->one();
                 if (!$item) {
@@ -86,19 +86,19 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
                 
             // link to storage file
             case self::TYPE_LINK_TO_FILE:
-            	$file = Yii::$app->storage->getFile($this->value);
-            	if (!$file) {
-            		throw new Excetion("Unable to find the file with id " . $this->value);
-            	}
-            	
-            	return $file->sourceStatic;
-            	break;
+                $file = Yii::$app->storage->getFile($this->value);
+                if (!$file) {
+                    throw new Excetion("Unable to find the file with id " . $this->value);
+                }
+                
+                return $file->sourceStatic;
+                break;
             
             // link to an email address
-            case self::TYPE_LINK_TO_EMAIL;
-            	$mail = new EmailLink(['email' => $this->value]);
-            	return $mail->getHref();
-            	break;
+            case self::TYPE_LINK_TO_EMAIL:
+                $mail = new EmailLink(['email' => $this->value]);
+                return $mail->getHref();
+                break;
         }
     }
 
