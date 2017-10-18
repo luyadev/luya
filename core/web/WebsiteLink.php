@@ -17,13 +17,18 @@ use luya\helpers\StringHelper;
  *
  * @property string $href The external href link will be http ensured on set.
  * @property string $target Returns the link target.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class WebsiteLink extends Object implements LinkInterface, Arrayable
 {
     use LinkTrait, ArrayableTrait;
+    
+    /**
+     * @var string The default value which is used for website links is `_blank` you can override this property in order to change the default value.
+     */
+    public $defaultTarget = '_blank';
     
     /**
      * @inheritdoc
@@ -73,12 +78,12 @@ class WebsiteLink extends Object implements LinkInterface, Arrayable
     
     /**
      * Setter method for the link target.
-     * 
+     *
      * @param string $target A valid html link target attribute value.
      */
     public function setTarget($target)
     {
-    	$this->_target = $target;
+        $this->_target = $target;
     }
     
     /**
@@ -86,6 +91,6 @@ class WebsiteLink extends Object implements LinkInterface, Arrayable
      */
     public function getTarget()
     {
-    	return empty($this->_target) ? '_blank' : $this->_target;
+        return empty($this->_target) ? $this->defaultTarget : $this->_target;
     }
 }

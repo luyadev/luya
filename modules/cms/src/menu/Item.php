@@ -99,12 +99,12 @@ class Item extends Object implements LinkInterface, Arrayable
     
     /**
      * Setter method for the link target.
-     * 
+     *
      * @param string $target
      */
     public function setTarget($target)
     {
-    	$this->_target = $target;
+        $this->_target = $target;
     }
     
     /**
@@ -112,7 +112,7 @@ class Item extends Object implements LinkInterface, Arrayable
      */
     public function getTarget()
     {
-    	return empty($this->_target) ? '_self' : $this->_target;
+        return empty($this->_target) ? '_self' : $this->_target;
     }
     
     /**

@@ -40,8 +40,8 @@ use luya\web\LinkTrait;
  */
 class Item extends ItemAbstract implements LinkInterface
 {
-	use LinkTrait;
-	
+    use LinkTrait;
+    
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
     private $_caption;
@@ -51,19 +51,19 @@ class Item extends ItemAbstract implements LinkInterface
      */
     public function getHref()
     {
-    	return $this->sourceStatic;
+        return $this->sourceStatic;
     }
     
     private $_target;
     
     /**
      * Setter method for Link target.
-     * 
+     *
      * @param string $target The target must be a valid link target attribute value.
      */
     public function setTarget($target)
     {
-    	$this->_target = $target;
+        $this->_target = $target;
     }
     
     /**
@@ -71,7 +71,7 @@ class Item extends ItemAbstract implements LinkInterface
      */
     public function getTarget()
     {
-    	return empty($this->_target) ? '_blank' : $this->_target;
+        return empty($this->_target) ? '_blank' : $this->_target;
     }
     
     /**

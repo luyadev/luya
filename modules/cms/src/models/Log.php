@@ -117,14 +117,14 @@ class Log extends \yii\db\ActiveRecord
      */
     public function fields()
     {
-    	return [
-    		'is_insertion',
-    		'is_update',
-    		'is_deletion',
-    		'timestamp',
-    		'action',
-    		'user',
-    	];
+        return [
+            'is_insertion',
+            'is_update',
+            'is_deletion',
+            'timestamp',
+            'action',
+            'user',
+        ];
     }
     
     public function getAction()
@@ -170,7 +170,7 @@ class Log extends \yii\db\ActiveRecord
     }
     
     /**
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getUser()

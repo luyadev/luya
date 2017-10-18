@@ -261,31 +261,31 @@ class BlockHelper
     public static function linkObject($config)
     {
         if (!empty($config) && isset($config['type']) && isset($config['value'])) {
-        	// get the target config value from the object.
-        	$target = isset($config['target']) ? $config['target'] : null;
-        	
+            // get the target config value from the object.
+            $target = isset($config['target']) ? $config['target'] : null;
+            
             switch ($config['type']) {
                 case 1: // cms page link
                     $link =  Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();
-					// if a page is found, set the target value from the config.
+                    // if a page is found, set the target value from the config.
                     if ($link) {
-                    	$link->setTarget($target);
+                        $link->setTarget($target);
                     }
                     return $link;
                     break;
                 case 2: // website link
-                	return new WebsiteLink(['href' => $config['value'], 'target' => $target]);
+                    return new WebsiteLink(['href' => $config['value'], 'target' => $target]);
                     break;
                 case 3: // file link
-                	$file = Yii::$app->storage->getFile($config['value']);
-                	if ($file) {
-                		$file->setTarget($target);
-                	}
-                	return $file;
-                	break;
+                    $file = Yii::$app->storage->getFile($config['value']);
+                    if ($file) {
+                        $file->setTarget($target);
+                    }
+                    return $file;
+                    break;
                 case 4: // email link
-                	return new EmailLink(['email' => $config['value']]);
-                	break;
+                    return new EmailLink(['email' => $config['value']]);
+                    break;
             }
         }
     

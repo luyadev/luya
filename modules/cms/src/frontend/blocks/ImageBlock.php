@@ -104,7 +104,7 @@ final class ImageBlock extends PhpBlock
     public function getLinkObject()
     {
         if ($this->getCfgValue('externalLink', false)) {
-        	return new WebsiteLink(['href' => $this->getCfgValue('externalLink', false)]);
+            return new WebsiteLink(['href' => $this->getCfgValue('externalLink', false)]);
         }
         
         if ($this->getCfgValue('internalLink', false)) {

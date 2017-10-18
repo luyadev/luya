@@ -73,7 +73,7 @@ class Angular
                 
                 $output[] = $label;
             } else {
-            	$output[] = ['label' => $label, 'value' => $value];
+                $output[] = ['label' => $label, 'value' => $value];
             }
         }
         
@@ -200,9 +200,9 @@ class Angular
     
     /**
      * Radio Input.
-     * 
+     *
      * Generate a list of radios where you can select only one element.
-     * 
+     *
      * @param string $ngModel The name of the ng model which should be used for data binding.
      * @param string $label The label to display for the form input.
      * @param array $data An array with data where the array key is what is stored in the model e.g. `[1 => 'Mrs', 2 => 'Mr']`

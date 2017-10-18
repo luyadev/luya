@@ -9,7 +9,7 @@ class WebsiteLinkTest extends LuyaWebTestCase
 {
     public function testLinkable()
     {
-    	$link = new WebsiteLink(['href' => 'https://luya.io']);
+        $link = new WebsiteLink(['href' => 'https://luya.io']);
         
         $this->assertInstanceOf('luya\web\LinkInterface', $link);
         
@@ -26,7 +26,7 @@ class WebsiteLinkTest extends LuyaWebTestCase
     
     public function testSchemaHttpMissing()
     {
-    	$link = new WebsiteLink(['href' => '//go/there?p=1']);
+        $link = new WebsiteLink(['href' => '//go/there?p=1']);
 
         $this->assertContains('public_html/go/there?p=1', $link->href);
     }

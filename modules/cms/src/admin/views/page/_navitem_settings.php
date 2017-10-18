@@ -32,9 +32,9 @@ use luya\admin\helpers\Angular;
                 <zaa-textarea model="itemCopy.description" label="<?= Module::t('view_index_page_meta_description'); ?>" />
                 <zaa-textarea model="itemCopy.keywords" label="<?= Module::t('view_index_page_meta_keywords'); ?>" />
                 <?= Angular::radio('itemCopy.nav_item_type', Module::t('view_index_add_type'), [
-                	1 => Module::t('view_index_type_page'),
-                	2 => Module::t('view_index_type_module'),
-                	3 => Module::t('view_index_type_redirect'),
+                    1 => Module::t('view_index_type_page'),
+                    2 => Module::t('view_index_type_module'),
+                    3 => Module::t('view_index_type_redirect'),
                 ]); ?>
                 <div ng-switch-when="1">
                     <update-form-page data="typeDataCopy"></update-form-page>

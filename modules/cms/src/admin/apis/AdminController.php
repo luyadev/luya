@@ -38,24 +38,24 @@ class AdminController extends \luya\admin\base\RestController
     
     public function actionDashboardLog()
     {
-    	$data = Log::find()->orderBy(['timestamp' => SORT_DESC])->with(['user'])->limit(60)->all();
-    	$log= [];
-    	foreach ($data as $item) {
-    		$log[strtotime('today', $item->timestamp)][] = $item;
-    	}
-    	
-    	$array = [];
-    	
-    	krsort($log, SORT_NUMERIC);
-    	
-    	foreach ($log as $day => $values) {
-    		$array[] = [
-    			'day' => $day,
-    			'items' => $values,
-    		];
-    	}
-    	
-    	return $array;
+        $data = Log::find()->orderBy(['timestamp' => SORT_DESC])->with(['user'])->limit(60)->all();
+        $log= [];
+        foreach ($data as $item) {
+            $log[strtotime('today', $item->timestamp)][] = $item;
+        }
+        
+        $array = [];
+        
+        krsort($log, SORT_NUMERIC);
+        
+        foreach ($log as $day => $values) {
+            $array[] = [
+                'day' => $day,
+                'items' => $values,
+            ];
+        }
+        
+        return $array;
     }
     
     public function actionDataBlocks()
