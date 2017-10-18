@@ -931,10 +931,10 @@
                 "i18n": "@i18n",
                 "id": "@fieldid"
             },
-    		controller: function($scope, Slug) {
+    		controller: function($scope, $filter) {
     			$scope.$watch(function() { return $scope.model; }, function(n, o) {
     				if (n!=o) {
-    					$scope.model = Slug.slugify(n);
+    					$scope.model = $filter('slugify')(n);
     				}
     			});
     		},

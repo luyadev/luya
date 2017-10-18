@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1557](https://github.com/luyadev/luya/issues/1557) Allow unicode chars for cms page aliases and slugify directives.
 - [#1534](https://github.com/luyadev/luya/issues/1534) Link ability for files and e-mail addresses.
 - [#1540](https://github.com/luyadev/luya/issues/1540) CMS Log Dashboard.
 - [#1304](https://github.com/luyadev/luya/issues/1304) Crud indicates the total amount of rows with pagination enabled or disabled.

@@ -27,7 +27,6 @@
 		"twbs/bootstrap": "v4.0.0-beta",
 		"bower-asset/angular" : "~1.6.5",
 		"bower-asset/angular-loading-bar" : "^0.9",
-		"bower-asset/angular-slugify" : "^1.0.0",
 		"bower-asset/angularjs-datepicker" : "^2.1.0",
 		"bower-asset/ui-router" : "~0.4.0",
 		"bower-asset/ng-file-upload" : "~12.2.0",
