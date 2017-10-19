@@ -34,7 +34,7 @@ Setup Crud:
 
 ## Creating the Model
 
-We assume you have a made a table via the migrations (in your example below we assume you make a team module with members) and executue the migrations so you can no creat an `ActiveRecord` model for the provided table. The model represents the datasource for the REST API, you can create the model with the gii module extension or you can also generate the model and the rest of the classes with the `admin/crud/create` cli command.
+We assume you have a made a table via the migrations (in your example below we assume you make a team module with members) and executue the migrations so you can no create an `ActiveRecord` model for the provided table. The model represents the datasource for the REST API, you can create the model with the gii module extension or you can also generate the model and the rest of the classes with the `admin/crud/create` cli command.
 
 Lets have close look at what you model should look like, in our member example of the teammodule:
 
