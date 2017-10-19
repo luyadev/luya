@@ -261,4 +261,5 @@ return [
     'view_index_redirect_file' => 'Datei',
     'view_index_redirect_mail' => 'E-Mail-Adresse',
     'view_index_redirect_mail_help' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+    'menu_button_search' => 'Suchen',
 ];

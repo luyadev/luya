@@ -1180,12 +1180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "7915f43e1292d46ca358a38c5508f5ef9b3786f5"
+                "reference": "db67086901049b33474d1cb5c5dbd35030520ae4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/7915f43e1292d46ca358a38c5508f5ef9b3786f5",
-                "reference": "7915f43e1292d46ca358a38c5508f5ef9b3786f5",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/db67086901049b33474d1cb5c5dbd35030520ae4",
+                "reference": "db67086901049b33474d1cb5c5dbd35030520ae4",
                 "shasum": ""
             },
             "require-dev": {
@@ -1238,7 +1238,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-10-18T15:12:17+00:00"
+            "time": "2017-10-18T20:27:47+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",

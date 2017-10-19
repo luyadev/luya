@@ -42,7 +42,7 @@ $this->beginPage()
                         <span class="mainnav-link" ng-click="toggleSearchInput()" ng-class="{'mainnav-link-active' : searchInputOpen }">
                             <i class="mainnav-icon material-icons">search</i>
                             <span class="mainnav-label">
-                                Search
+                                <?= Admin::t('menu_button_search'); ?>
                             </span>
                         </span>
                     </li>
@@ -50,7 +50,7 @@ $this->beginPage()
                         <span class="mainnav-link" ui-sref="home" ui-sref-active="mainnav-link-active" ng-click="isOpen=0">
                             <i class="mainnav-icon material-icons">home</i>
                             <span class="mainnav-label">
-                                Dashboard
+                                <?= Admin::t('menu_dashboard');?>
                             </span>
                         </span>
                     </li>
