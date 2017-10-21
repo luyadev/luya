@@ -2,7 +2,7 @@
 
 namespace luya\web\jsonld;
 
-class Address extends BaseGraphElement
+class Address extends BaseThing
 {
     private $_street;
     

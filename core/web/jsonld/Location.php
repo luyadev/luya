@@ -2,13 +2,14 @@
 
 namespace luya\web\jsonld;
 
-class Location extends BaseGraphElement
+class Location extends BaseThing
 {
     private $_name;
     
     public function setName($name)
     {
         $this->_name = $name;
+        
         return $this;
     }
 
@@ -19,13 +20,11 @@ class Location extends BaseGraphElement
     
     private $_addresses;
     
-    public function setAddress(array $config = [])
+    public function setAddress(Address $address)
     {
-        $object = new Address();
+        $this->_addresses[] = $address;
         
-        $this->_addresses[] = $object;
-        
-        return $object;
+        return $this;
     }
     
     public function getAddresses()

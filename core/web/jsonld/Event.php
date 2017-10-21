@@ -2,7 +2,7 @@
 
 namespace luya\web\jsonld;
 
-class Event extends BaseGraphElement
+class Event extends BaseThing
 {
     private $_locations = [];
     
@@ -11,20 +11,17 @@ class Event extends BaseGraphElement
         return $this->_locations;
     }
     
-    public function setLocation(array $config = [])
+    public function setLocation(Location $location)
     {
-        $object = new Location($config);
-        
-        $this->_locations[] = $object;
-
-        return $object;
+        $this->_locations[] = $location;
+    
+        return $this;
     }
     
     public function fields()
     {
         return [
             'locations',
-            
         ];
     }
 }
