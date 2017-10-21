@@ -1,3 +1,8 @@
+@mixin label-background {
+
+    background-color: rgba($white, .1);
+}
+
 .mainnav {
     background: color(gray);
     color: $white;
@@ -112,7 +117,7 @@
         }
 
         .mainnav-small &:after {
-            background-color: rgba(#fff, .1);
+           @include label-background;
             border-radius: $border-radius;
             content: "";
             height: 0;
@@ -136,7 +141,7 @@
 
     &:hover,
     &-active {
-        background-color: rgba(#fff, .1);
+        @include label-background;
         color: $white;
         text-decoration: none;
 
@@ -165,6 +170,16 @@
             bottom: -2px;
         }
     }
+    &-parent-active {
+        @include label-background;
+        color: $white;
+        text-decoration: none;
+
+        .mainnav-label {
+            color: map-get($grays, 100);;
+        }
+
+    }
 }
 
 .mainnav-icon,
@@ -191,6 +206,7 @@
         }
     }
 
+    .mainnav-link-parent-active &,
     .mainnav-link-active &,
     .mainnav-link:hover & {
         color: theme-color(primary);
@@ -294,6 +310,7 @@
 }
 
 .mainnav-tooltip-big {
+    min-height: 42px;
     display: inline-block;
     //background: $tooltip-bg;
     background-color: $tooltip-bg-alt;
@@ -330,6 +347,56 @@
             &:last-of-type {
                 padding-right: 0;
                 max-width: 37px;
+            }
+        }
+
+    }
+
+    ul, &-menu {
+        padding-left: 0;
+        padding-bottom: 0;
+        padding-top: 5px;
+        margin-right: -5px;
+        margin-left: -5px;
+
+         li, &-item {
+             list-style: none;
+             position: relative;
+             display: block;
+             text-align: left;
+             border-radius: $border-radius;
+             padding: 5px 10px 5px 30px;
+             margin-bottom: 5px;
+
+
+            i {
+                position: absolute;
+                left: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 18px;
+                transition: color .1s ease-in-out;
+            }
+            a, &-link {
+                color: map-get($grays, 400);
+                line-height: 24px;
+                transition: color .25s ease-in-out;
+
+                &:hover, &-active {
+                     text-decoration: none;
+                 }
+            }
+
+            &:hover, &-active {
+                @include label-background;
+
+                i {
+                    color: map-get($theme-colors, primary);
+                }
+
+                a {
+                    color: $white !important;
+                }
             }
         }
 
