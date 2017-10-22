@@ -262,4 +262,5 @@ return [
     'view_index_redirect_mail' => 'e-mail address',
     'view_index_redirect_mail_help' => 'Please enter a valid e-mail address.',
     'menu_button_search' => 'Search',
+    'layout_btn_user_settings' => 'Preferences',
 ];

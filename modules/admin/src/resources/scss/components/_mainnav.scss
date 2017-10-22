@@ -302,14 +302,19 @@
 }
 
 .mainnav-tooltip-big-wrapper {
-    padding-left: 22px;
+    padding-left: 30px;
     display: none;
     opacity: 0;
     position: absolute;
     bottom: 0;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        padding-left: 22px;
+    }
 }
 
 .mainnav-tooltip-big {
+    max-width: 100%;
     min-height: 42px;
     display: inline-block;
     //background: $tooltip-bg;
@@ -325,8 +330,12 @@
         border-width: 5px 5px 5px 0;
         bottom: 18px;
         content: "";
-        left: 17px;
+        left: 25px;
         position: absolute;
+
+        @media (min-width: $mobile-nav-breakpoint) {
+            left: 17px;
+        }
     }
 
     tbody {
@@ -375,7 +384,6 @@
                 top: 50%;
                 transform: translateY(-50%);
                 font-size: 18px;
-                transition: color .1s ease-in-out;
             }
             a, &-link {
                 color: map-get($grays, 400);
