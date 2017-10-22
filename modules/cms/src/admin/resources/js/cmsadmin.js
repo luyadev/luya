@@ -446,7 +446,7 @@
 		};
 	});
 
-	zaa.controller("CopyPageController", function($scope, $http, AdminToastService) {
+	zaa.controller("CopyPageController", function($scope, $http, $filter, AdminToastService) {
 
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 
