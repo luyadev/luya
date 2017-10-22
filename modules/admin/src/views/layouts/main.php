@@ -104,13 +104,33 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-position="right" tooltip-disabled="isHover">
-                        <a class="mainnav-link" ui-sref="custom({templateId:'admin/account/dashboard'})" ng-click="isOpen=0">
+                    <li class="mainnav-entry">
+                        <!-- needs to be fixed -->
+                        <span class="mainnav-parent" active-class="mainnav-parent-active">
+                        <!-- needs to be fixed end -->
                             <i class="mainnav-icon material-icons">account_circle</i>
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_profile'); ?>
                             </span>
-                        </a>
+                            <span class="mainnav-tooltip-big-wrapper">
+                                <span class="mainnav-tooltip-big">
+                                    <ul class="mainnav-tooltip-big-menu">
+                                        <li class="mainnav-tooltip-big-menu-item" ui-sref-active="mainnav-tooltip-big-menu-item-active" ui-sref="custom({templateId:'admin/account/dashboard'})" ng-click="isOpen=0">
+                                            <a class="mainnav-tooltip-big-menu-link">
+                                                <i class="material-icons">face</i>
+                                                 <?= Admin::t('layout_btn_user_settings'); ?>
+                                            </a>
+                                        </li>
+                                        <li class="mainnav-tooltip-big-menu-item" >
+                                            <a href="<?= Url::toRoute(['/admin/default/logout']); ?>">
+                                                <i class="material-icons">exit_to_app</i>
+                                                <?= Admin::t('layout_btn_logout'); ?>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </span>
+                            </span>
+                        </span>
                     </li>
                     <li class="mainnav-entry  hide-on-mobile" ng-show="settings.isDeveloper">
                         <a class="mainnav-link" ng-click="showDebugBar=!showDebugBar">
