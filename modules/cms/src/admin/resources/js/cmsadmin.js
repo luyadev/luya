@@ -446,7 +446,7 @@
 		};
 	});
 
-	zaa.controller("CopyPageController", function($scope, $http, AdminToastService) {
+	zaa.controller("CopyPageController", function($scope, $http, $filter, AdminToastService) {
 
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 
@@ -1049,7 +1049,7 @@
 		$scope.trashItem = function() {
 			if ($scope.lang.is_default == 0) {
 				AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], function($timeout, $toast) {
-					$http.get('admin/api-cms-navitem/delete', { params : { navItemId : $scope.item.id }}).then(function(response) {
+					$http.delete('admin/api-cms-navitem/delete?navItemId=' + $scope.item.id).then(function(response) {
 						$scope.menuDataReload().then(function() {
 							$scope.isTranslated = false;
 							$scope.item = [];
