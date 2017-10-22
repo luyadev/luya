@@ -105,7 +105,9 @@ $this->beginPage()
                         </span>
                     </li>
                     <li class="mainnav-entry">
-                        <span class="mainnav-link" ui-sref="custom({templateId:'admin/account/dashboard'})"  ui-sref-active="mainnav-link-parent-active"  ng-click="isOpen=0">
+                        <!-- needs to be fixed -->
+                        <span class="mainnav-link" ng-class="{'mainnav-link-parent-active' : zaa.config.state.templateUrl == 'admin/account/dashboard'}">
+                        <!-- needs to be fixed end -->
                             <i class="mainnav-icon material-icons">account_circle</i>
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_profile'); ?>
@@ -120,7 +122,7 @@ $this->beginPage()
                                             </a>
                                         </li>
                                         <li class="mainnav-tooltip-big-menu-item" >
-                                            <a ui-sref="<?= Url::toRoute(['/admin/default/logout']); ?>">
+                                            <a href="<?= Url::toRoute(['/admin/default/logout']); ?>">
                                                 <i class="material-icons">exit_to_app</i>
                                                 <?= Admin::t('layout_btn_logout'); ?>
                                             </a>
