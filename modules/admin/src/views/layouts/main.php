@@ -106,7 +106,7 @@ $this->beginPage()
                     </li>
                     <li class="mainnav-entry">
                         <!-- needs to be fixed -->
-                        <span class="mainnav-link" ng-class="{'mainnav-link-parent-active' : zaa.config.state.templateUrl == 'admin/account/dashboard'}">
+                        <span class="mainnav-parent" active-class="mainnav-parent-active" ng-mouseover="active(true);" ng-mouseout="active(false);">
                         <!-- needs to be fixed end -->
                             <i class="mainnav-icon material-icons">account_circle</i>
                             <span class="mainnav-label">

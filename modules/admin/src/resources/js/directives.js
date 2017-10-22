@@ -3018,5 +3018,25 @@
         }
     });
 
+    zaa.directive('activeClass', function () {
+        return {
+            restrict: 'A',
+            scope: {
+                activeClass: '@'
+            },
+            link: function (scope, element) {
+                element.on('mouseenter', function() {
+                    element.addClass(scope.activeClass);
+                });
+                element.on('mouseleave', function() {
+                    element.removeClass(scope.activeClass);
+                });
+                element.on('click', function() {
+                    element.toggleClass(scope.activeClass);
+                });
+            }
+        };
+    });
+
 
 })();
