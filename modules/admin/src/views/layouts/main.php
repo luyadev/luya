@@ -106,7 +106,7 @@ $this->beginPage()
                     </li>
                     <li class="mainnav-entry">
                         <!-- needs to be fixed -->
-                        <span class="mainnav-parent" active-class="mainnav-parent-active" ng-mouseover="active(true);" ng-mouseout="active(false);">
+                        <span class="mainnav-parent" active-class="mainnav-parent-active">
                         <!-- needs to be fixed end -->
                             <i class="mainnav-icon material-icons">account_circle</i>
                             <span class="mainnav-label">
