@@ -14224,14 +14224,14 @@ zaa.factory('HtmlStorage', function() {
 
 		$scope.browser = null;
 
-		$scope.detectBroswer = function() {
+		$scope.detectBrowser = function() {
             $scope.browser = [
                 bowser.name.replace(' ', '-').toLowerCase() + '-' + bowser.version,
                 (bowser.mac ? 'mac-os-' + (bowser.osversion ? bowser.osversion : '') : 'windows-' + (bowser.osversion ? bowser.osversion : ''))
             ].join(' ');
 		};
 
-		$scope.detectBroswer();
+		$scope.detectBrowser();
 
 		$scope.getProfileAndSettings();
 
