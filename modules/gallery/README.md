@@ -1,6 +1,10 @@
 # Gallery Module
 
+
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+[![Total Downloads](https://poser.pugx.org/luyadev/luya-module-gallery/downloads)](https://packagist.org/packages/luyadev/luya-module-gallery)
+[![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-gallery/v/stable)](https://packagist.org/packages/luyadev/luya-module-gallery)
+[![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya)
 
 The gallery module allows you create folders and collection and upload images to the collections. Its an easy way to create a gallery very quick and create your own view files.
 
@@ -8,7 +12,7 @@ The gallery module allows you create folders and collection and upload images to
 
 Require the modules in your composer.json
 
-```
+```sh
 "luyadev/luya-module-gallery" : "1.0.0-RC4"
 ```
 
