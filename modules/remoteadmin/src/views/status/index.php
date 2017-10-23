@@ -5,6 +5,8 @@ use luya\remoteadmin\Module;
 <script>
 zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
 
+    $scope.searchQuery = '';
+    
     $scope.sites = [];
 
     $scope.hasError = false;
@@ -48,7 +50,8 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
     	<div class="card-body">
     		<h3><?= Module::t('status_index_heading'); ?></h3>
             <p><?= Module::t('status_index_intro', ['version' => $currentVersion['version'], 'date' => Yii::$app->formatter->asDate(strtotime($currentVersion['time']))]); ?></p>
-    		<table class="table table-striped">
+    		<input type="text" ng-model="searchQuery" class="form-control" />
+            <table class="table table-striped">
     			<thead>
 	    			<tr>
 	    			    <th><?= Module::t('model_site_url'); ?></th>
@@ -62,7 +65,7 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
 	    			    <th></th>
 	    			</tr>
     			</thead>
-    	        <tr ng-repeat="site in sites">
+    	        <tr ng-repeat="site in sites | filter:searchQuery">
     	            <td style="text-align:left;"><a ng-href="{{site.safeUrl}}" target="_blank">{{site.safeUrl}}</a></td>
     	            <td ng-if="!site.status.error && !site.status.loading">{{site.status.time}}</td>
     	            <td ng-if="!site.status.error && !site.status.loading" style="{{site.status.debugstyle}}">{{site.status.debug}}</td>
