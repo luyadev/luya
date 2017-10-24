@@ -96,11 +96,17 @@ class I18n
     }
     
     /**
-     * Find the corresponding element inside an array for the current active language
+     * Find the corresponding element inside an array for the current active language.
+     * 
+     * ```php
+     * // assume the default language is `en`
+     * $output = I18n::findActive(['de' => 'Hallo', 'en' => 'Hello']);
+     * echo $output; // output is "Hello"
+     * ```
      *
      * @param array $fieldValues The array you want to to find the current
      * @param mixed $onEmptyValue The value you can set when the language could not be found
-     * @return string|unknown
+     * @return mixed
      */
     public static function findActive(array $fieldValues, $onEmptyValue = '')
     {
@@ -114,7 +120,7 @@ class I18n
      *
      * @param array $fieldValues The array you want to to find the current
      * @param mixed $onEmptyValue The value you can set when the language could not be found
-     * @return string
+     * @return array
      */
     public static function findActiveArray(array $array, $onEmptyValue = '')
     {
@@ -128,10 +134,16 @@ class I18n
     
     /**
      * Decodes a json string and returns the current active language item.
+     * 
+     * ```php
+     * // assume the default language is `en`
+     * $output = I18n::decodeActive('{"de":"Hallo","en":"Hello"}');
+     * echo $output; // output is "Hello"
+     * ```
      *
-     * @param string $input
-     * @param string $onEmptyValue
-     * @return string
+     * @param string $input The json string
+     * @param string $onEmptyValue If element is not found, this value is returned instead.
+     * @return string The value from the json for the current active language or if not found the value from onEmptyValue.
      */
     public static function decodeActive($input, $onEmptyValue = '')
     {
@@ -142,7 +154,7 @@ class I18n
      * Decodes an array with json strings and returns the current active language item for each entry.
      *
      * @param array $input
-     * @param unknown $onEmptyValue
+     * @param mixed $onEmptyValue
      * @return array
      */
     public static function decodeActiveArray(array $input, $onEmptyValue = '')
