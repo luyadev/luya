@@ -371,8 +371,6 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
             return false;
         }
 
-        
-        // @TODO replace with NavItemPage::copyBlocks($sourcePageItem->id, $pageItem->id);
         $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $sourcePageItem->id]);
 
         $idLink = [];

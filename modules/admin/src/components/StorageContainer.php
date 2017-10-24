@@ -156,7 +156,7 @@ class StorageContainer extends Component
     private $_filterCacheKey = 'storage_filterCacheKey';
     
     /**
-     * @var boolean When enabled the storage component will try to recreated missing images when `getSource()` of an
+     * @var boolean When enabled the storage component will try to recreated missing images when {{luya\admin\image\Item::getHttpSource()}} of an
      * image is called but the `getFileExists()` does return false, which means that the source file has been deleted.
      * So in those cases the storage component will automatiaccly try to recreated this image based on the filterId and
      * fileId.

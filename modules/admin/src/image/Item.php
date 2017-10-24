@@ -14,7 +14,7 @@ use luya\admin\storage\ItemAbstract;
  * @property integer $id The unique image identifier number.
  * @property integer $fileId The file id where this image depends on.
  * @property integer $filterId The applied filter id for this image
- * @property string $source The source of the image where you can access the image by the web.
+ * @property string $httpSource The source of the image where you can access the image by the web.
  * @property string $serverSource The source to the image internal used on the Server.
  * @property boolean $fileExists Return boolean whether the file server source exsits on the server or not.
  * @property integer $resolutionWidth Get the image resolution width.
@@ -87,12 +87,23 @@ class Item extends ItemAbstract
     }
     
     /**
+     * @deprecated Deprectaed in 1.0.1
+     * @param string $schema
+     * @return string|boolean
+     */
+    public function getSource($schema = false)
+    {
+    	trigger_error('This method is depreacted, use getHttpSource() instead or via getter method use $httpSource', E_USER_DEPRECATED);
+ 		return $this->getHttpSource($schema);
+    }
+    
+    /**
      * The source of the image where you can access the image by the web.
      *
      * @param boolean $scheme Whether the source path should be absolute or not.
      * @return string|boolean
      */
-    public function getSource($scheme = false)
+    public function getHttpSource($scheme = false)
     {
         if (!$this->getFileExists()) {
             if (Yii::$app->storage->autoFixMissingImageSources === false) {
@@ -179,6 +190,6 @@ class Item extends ItemAbstract
      */
     public function fields()
     {
-        return ['id', 'fileId', 'filterId', 'source', 'serverSource', 'resolutionWidth', 'resolutionHeight', 'caption'];
+        return ['id', 'fileId', 'filterId', 'httpSource', 'serverSource', 'resolutionWidth', 'resolutionHeight', 'caption'];
     }
 }

@@ -286,7 +286,7 @@ class Item extends ItemAbstract implements LinkInterface
     }
     
     /**
-     * Get the realtive url to the source of the file.
+     * Get the file trough url to the source of the file.
      *
      * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For
      * example you may want users to see the file (assuming its a PDF).

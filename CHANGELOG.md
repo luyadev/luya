@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1559](https://github.com/luyadev/luya/issues/1569) Renamed luya\admin\image\Item::getSource to getHttpSource this will affect also the getter methods.
 - [#1564](https://github.com/luyadev/luya/issues/1564) Refactoring of gallery module, removed old unused methods, switch to ActiveQuery relation usage.
 - [#1522](https://github.com/luyadev/luya/issues/1522) Text and Textarea NgRest plugins auto encode input data after find.
 - [#1505](https://github.com/luyadev/luya/issues/1505) Minor API Breaks and removed deprecated methods.
