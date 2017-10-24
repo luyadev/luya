@@ -7,6 +7,7 @@ use luya\helpers\Url;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\ImageSelectCollectionActiveWindow;
 use luya\admin\traits\SortableTrait;
+use yii\helpers\Inflector;
 
 /**
  * This is the model class for table "gallery_album".
@@ -57,6 +58,18 @@ class Album extends NgRestModel
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+        parent::init();
+        
+        $this->on(self::EVENT_BEFORE_DELETE, function($event) {
+            $this->unlinkAll('albumImages', true);
+        });
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -87,15 +100,6 @@ class Album extends NgRestModel
     /**
      * @inheritdoc
      */
-    public function init()
-    {
-        parent::init();
-        
-        $this->on(self::EVENT_BEFORE_DELETE, function($event) {
-            $this->unlinkAll('albumImages', true);
-        });
-    }
-
     public function ngRestAttributeTypes()
     {
         return [
@@ -108,6 +112,9 @@ class Album extends NgRestModel
         ];
     }
 
+   /**
+    * @inheritdoc
+    */
     public function ngRestActiveWindows()
     {
         return [
@@ -116,6 +123,7 @@ class Album extends NgRestModel
                 'refTableName' => 'gallery_album_image',
                 'imageIdFieldName' => 'image_id',
                 'refFieldName' => 'album_id',
+                'sortIndexFieldName' => 'sortindex',
                 'alias' => Module::t('album_upload')
             ]
         ];
@@ -151,6 +159,16 @@ class Album extends NgRestModel
     public function getAlbumImages()
     {
         return $this->hasMany(AlbumImage::class, ['album_id' => 'id']);
+    }
+    
+    /**
+     * Return the detail link for the current model.
+     * 
+     * @return string
+     */
+    public function getDetailLink()
+    {
+        return Url::toRoute(['/gallery/album/index', 'albumId' => $this->id, 'title' => Inflector::slug($this->title)]);
     }
     
     // deprecated methods  for 1.0.0

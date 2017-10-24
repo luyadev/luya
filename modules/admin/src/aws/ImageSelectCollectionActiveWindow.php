@@ -6,6 +6,7 @@ use Yii;
 use luya\admin\ngrest\base\ActiveWindow;
 use yii\base\InvalidConfigException;
 use yii\db\Query;
+use luya\admin\filters\MediumCrop;
 
 /**
  * Create an Active Window where you can select Images and store them into a Ref Table.
@@ -16,11 +17,12 @@ use yii\db\Query;
  * public function ngRestActiveWindows()
  * {
  *     return [
- *         ['class' => 'admin\aws\ImageCollectionActiveWindow',
+ *         [
+ *          'class' => 'admin\aws\ImageCollectionActiveWindow',
  *          'refTableName' => 'gallery_album_image',
  *          'imageIdFieldName' => 'image_id',
  *          'refFieldName' => 'album_id',
- *          'alias' => 'Select Image',
+ *          'sortIndexFieldName' => 'sortindex',
  *         ],
  *     ];
  * }
@@ -30,10 +32,14 @@ use yii\db\Query;
  *
  * ```php
  * $this->createTable("gallery_album_image", [
- *     "image_id" => "int(11) NOT NULL default 0",
- *     "album_id" => "int(11) NOT NULL default 0",
+ *     "image_id" => $this->integer()->notNull(),
+ *     "album_id" => $this->integer()->notNull(),
+ *     "sortindex" => $this->integer()->defaultValue(0),
  * ]);
  * ```
+ * 
+ * If you have a table without sortindex field, the {{ImageSelectCollectionActiveWindow::$sortIndex}} is disable by default. You have to define
+ * this attribute in order to enable sorting.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -54,6 +60,11 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
      * @var string The fieldname inside the {{luya\admin\aws\ImageSelectCollectionActiveWindow::$refTableName}} to store the reference id where this active is attached.
      */
     public $refFieldName;
+    
+    /**
+     * @var string The name of the field which contains the sort index for the current reference entry, if no value is given the sort ability is disabled.
+     */
+    public $sortIndexFieldName;
 
     /**
      * @var string The name of the module where the active windows is located in order to finde the view path.
@@ -84,7 +95,9 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
      */
     public function index()
     {
-        return $this->render('index');
+        return $this->render('index', [
+            'sortIndexFieldName' => $this->sortIndexFieldName,
+        ]);
     }
 
     /**
@@ -94,14 +107,57 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
      */
     public function callbackLoadAllImages()
     {
+        $query = (new Query())
+            ->select(['image_id' => $this->imageIdFieldName])
+            ->where([$this->refFieldName => $this->getItemId()])
+            ->from($this->refTableName);
+        
+        if ($this->isSortEnabled()) {
+            $query->orderBy([$this->sortIndexFieldName => SORT_ASC]);
+        }
+            
+        $data = $query->all();
         $images = [];
-        foreach ((new Query())->select(['image_id' => $this->imageIdFieldName])->where([$this->refFieldName => $this->getItemId()])->from($this->refTableName)->all() as $image) {
-            $images[] = Yii::$app->storage->getImage($image['image_id'])->toArray();
+        foreach ($data as $image) {
+            $images[] = $this->getImageArray($image['image_id']);
         }
 
         return $images;
     }
+    
+    /**
+     * Get the image array for a given image id.
+     * 
+     * @param integer $imageId
+     * @return array
+     */
+    private function getImageArray($imageId)
+    {
+        $array = Yii::$app->storage->getImage($imageId)->applyFilter(MediumCrop::identifier())->toArray();
+        
+        $array['originalImageId'] = $imageId;
+        
+        return $array;
+    }
 
+    /**
+     * Whether sorting is enabled and provided or not.
+     * @return boolean
+     */
+    public function isSortEnabled()
+    {
+        return !empty($this->sortIndexFieldName);
+    }
+    
+    /**
+     * Returns the max (highest) value from sort.
+     * @return mixed|boolean|string
+     */
+    public function getMaxSortIndex()
+    {
+        return (new Query())->from($this->refTableName)->where([$this->refFieldName => $this->itemId])->max($this->sortIndexFieldName);
+    }
+    
     /**
      * Remove a given image id from the index.
      * 
@@ -130,11 +186,55 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
             return $this->sendError("Unable to create image from given file Id.");
         }
 
-        Yii::$app->db->createCommand()->insert($this->refTableName, [
+        Yii::$app->db->createCommand()->insert($this->refTableName, $this->prepareInsertFields([
             $this->imageIdFieldName => (int) $image->id,
-            $this->refFieldName => (int) $this->getItemId(),
-        ])->execute();
+            $this->refFieldName => (int) $this->itemId,
+        ]))->execute();
 
-        return Yii::$app->storage->getImage($imageId)->toArray();
+        return $this->getImageArray($image->id);
+    }
+    
+    /**
+     * Switch position between two images.
+     * 
+     * @param integer $new
+     * @param integer $old
+     * @return boolean
+     */
+    public function callbackChangeSortIndex($new, $old)
+    {
+        // get old position
+        $newPos = (new Query)->select([$this->sortIndexFieldName])->from($this->refTableName)->where([$this->imageIdFieldName => $new['originalImageId']])->scalar();
+        $oldPos = (new Query)->select([$this->sortIndexFieldName])->from($this->refTableName)->where([$this->imageIdFieldName => $old['originalImageId']])->scalar();
+        
+        // switch positions
+        $changeNewPos = Yii::$app->db->createCommand()->update($this->refTableName, [$this->sortIndexFieldName => $oldPos], [
+            $this->imageIdFieldName => $new['originalImageId'],
+            $this->refFieldName => $this->itemId,
+        ])->execute();
+        
+        $changeOldPos = Yii::$app->db->createCommand()->update($this->refTableName, [$this->sortIndexFieldName => $newPos], [
+            $this->imageIdFieldName => $old['originalImageId'],
+            $this->refFieldName => $this->itemId,
+        ])->execute();
+        
+        return true;
+    }
+    
+    /**
+     * Prepare and parse the insert fields for a given array.
+     * 
+     * if sort is enabled, the latest sort index is provided.
+     * 
+     * @param array $fields
+     * @return number
+     */
+    public function prepareInsertFields(array $fields)
+    {
+        if ($this->isSortEnabled()){
+            $fields[$this->sortIndexFieldName] = $this->getMaxSortIndex() + 1;
+        }
+        
+        return $fields;
     }
 }

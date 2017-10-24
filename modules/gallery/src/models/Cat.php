@@ -3,31 +3,65 @@
 namespace luya\gallery\models;
 
 use luya\gallery\admin\Module;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\helpers\Url;
+use yii\helpers\Inflector;
 
-class Cat extends \luya\admin\ngrest\base\NgRestModel
+/**
+ * This is the model class for table "gallery_cat".
+ *
+ * @property integer $id
+ * @property string $title
+ * @property integer $cover_image_id
+ * @property string $description
+ */
+class Cat extends NgRestModel
 {
-    /* yii model properties */
-
+    /**
+     * @inheritdoc
+     */
+    public $i18n = ['title', 'description'];
+    
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'gallery_cat';
     }
-
+    
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-gallery-cat';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            ['title', 'required', 'message' => Module::t('cat_title_create_error')],
+            [['title'], 'required'],
+            [['title', 'description'], 'string'],
+            [['cover_image_id'], 'integer'],
         ];
     }
-
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['title', 'cover_image_id', 'description'],
-            'restupdate' => ['title', 'cover_image_id', 'description'],
-        ];
-    }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -37,35 +71,25 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
         ];
     }
 
-    public function init()
-    {
-        parent::init();
-        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
-    }
-
+    /**
+     * Ensure if deleteion is available or not.
+     * 
+     * @param unknown $event
+     */
     public function eventBeforeDelete($event)
     {
-        $items = Album::find()->where(['cat_id' => $this->id])->all();
+        $items = Album::find()->where(['cat_id' => $this->id])->count();
 
-        if (count($items) > 0) {
+        if ($items > 0) {
             $this->addError('id', Module::t('cat_delete_error'));
             $event->isValid = false;
-
             return;
         }
-
-        $event->isValid = true;
     }
-
-    // ngrest
-
-    public $i18n = ['title', 'description'];
-
-    public static function ngRestApiEndpoint()
-    {
-        return 'api-gallery-cat';
-    }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -75,16 +99,24 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
         ];
     }
 
-    public function ngRestConfig($config)
+    /**
+     * @inheritdoc
+     */
+    public function ngRestScopes()
     {
-        $this->ngRestConfigDefine($config, 'list', ['title', 'description']);
-
-        $config->create->copyFrom('list', ['id']);
-        $this->ngRestConfigDefine($config, 'create', ['cover_image_id']);
-        $config->update->copyFrom('create');
-
-        $config->delete = true;
-
-        return $config;
+        return [
+            [['list', 'create', 'update'], ['title', 'description', 'cover_image_id']],
+            [['delete'], true],
+        ];
+    }
+    
+    /**
+     * Get Cat detail Link.
+     * 
+     * @return string
+     */
+    public function getDetailLink()
+    {
+        return Url::toRoute(['/gallery/alben/index', 'catId' => $category->id, 'title' => Inflector::slug($category->title)]);
     }
 }

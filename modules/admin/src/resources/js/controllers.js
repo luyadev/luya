@@ -680,33 +680,49 @@
 
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
 
-		$scope.files = {};
+		$scope.files = [];
 
-		$scope.isEmptyObject = function(files) {
-			return angular.equals({}, files);
-		};
 
 		$scope.select = function(id) {
-			if (!(id in $scope.files)) {
 				$scope.crud.sendActiveWindowCallback('AddImageToIndex', {'fileId' : id }).then(function(response) {
 					var data = response.data;
-					$scope.files[data.fileId] = data;
+					console.log(data);
+					$scope.files.push(data);
 				});
-			}
 		};
 
 		$scope.loadImages = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('loadAllImages')).then(function(response) {
-				$scope.files = {}
-				response.data.forEach(function(value, key) {
-					$scope.files[value.fileId] = value;
-				});
+				$scope.files = response.data;
 			})
 		};
+		
+		$scope.changePosition = function(file, index, direction) {
+			var index = parseInt(index);
+			var oldRow = $scope.files[index];
+			if (direction == 'up') {
+                $scope.files[index] = $scope.files[index-1];
+                $scope.files[index-1] = oldRow;
+			} else if (direction == 'down') {
+                $scope.files[index] = $scope.files[index+1];
+                $scope.files[index+1] = oldRow;
+			}
+			var newRow = $scope.files[index];
+			
+			$scope.crud.sendActiveWindowCallback('ChangeSortIndex', {'new': newRow, 'old': oldRow});
+		};
+		
+		$scope.moveUp = function(file, index) {
+			$scope.changePosition(file, index, 'up');
+		};
+		
+		$scope.moveDown = function(file, index) {
+			$scope.changePosition(file, index, 'down');
+		}
 
-		$scope.remove = function(file) {
-			$scope.crud.sendActiveWindowCallback('RemoveFromIndex', {'imageId' : file.id }).then(function(response) {
-				delete $scope.files[file.fileId];
+		$scope.remove = function(file, index) {
+			$scope.crud.sendActiveWindowCallback('RemoveFromIndex', {'imageId' : file.originalImageId }).then(function(response) {
+				$scope.files.splice(index, 1);
 			});
 		};
 
