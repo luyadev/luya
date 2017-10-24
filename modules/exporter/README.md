@@ -1,9 +1,11 @@
-LUYA MODEL EXPORTER
-===========
+LUYA EXPORTER MODULE
+=================
 
-> We recommend to use the LUYA Content Proxy instead of the Exporter Module!
 
-[![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+> This module will not recieve any updates in future and will not release in a stable version as its not recomend to use, use the luya admin proxy instead!
+
+> How to use luya proxy instead: https://luya.io/guide/concept-depandsync#sync
+
 
 The exporter module allowss you to easily download the full database and storage data from a project for a local import and thus, to setup a state of a website at a given time.
 
