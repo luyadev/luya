@@ -676,19 +676,21 @@
 	 *
 	 * Changes content when parent crud controller changes value for active aw.itemId.
 	 */
-	zaa.controller("ActiveWindowGalleryController", function($scope, $http) {
+	zaa.controller("ActiveWindowGalleryController", function($scope, $http, $filter) {
 
-		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
+		$scope.crud = $scope.$parent;
 
 		$scope.files = [];
 
-
 		$scope.select = function(id) {
+			var exists = $filter('filter')($scope.files, {'fileId' : id}, true);
+			
+			if (exists.length == 0) {
 				$scope.crud.sendActiveWindowCallback('AddImageToIndex', {'fileId' : id }).then(function(response) {
 					var data = response.data;
-					console.log(data);
 					$scope.files.push(data);
 				});
+			}
 		};
 
 		$scope.loadImages = function() {
