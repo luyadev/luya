@@ -117,6 +117,6 @@ class Cat extends NgRestModel
      */
     public function getDetailLink()
     {
-        return Url::toRoute(['/gallery/alben/index', 'catId' => $category->id, 'title' => Inflector::slug($category->title)]);
+        return Url::toRoute(['/gallery/alben/index', 'catId' => $this->id, 'title' => Inflector::slug($this->title)]);
     }
 }

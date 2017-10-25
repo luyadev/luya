@@ -173,26 +173,37 @@ class Album extends NgRestModel
     
     // deprecated methods  for 1.0.0
     
+    /**
+     * @deprecated deprecated for version 1.0.1
+     */
     public function getCategoryUrl()
     {
-        trigger_error('getCategoryUrl() is deprecated use the getCat() / $cat relation ActiveQuery instead.', E_USER_DEPRECATED);
+        trigger_error('Method "$model->getCategoryUrl()" is deprecated, use "$model->cat->detailLink" instead.', E_USER_DEPRECATED);
         
         $category = Cat::findOne($this->cat_id);
         
         return Url::toRoute(['/gallery/alben/index', 'catId' => $category->id, 'title' => \yii\helpers\Inflector::slug($category->title)]);
     }
     
+    /**
+     * @deprecated deprecated for version 1.0.1
+     */
     public function getCategoryName()
     {
-        trigger_error('getCategoryName() is deprecated use the getCat() / $cat relation ActiveQuery instead.', E_USER_DEPRECATED);
+        trigger_error('Method "$model->getCategoryName()" is deprecated, use "$model->cat->title" instead', E_USER_DEPRECATED);
+        
         $category = Cat::findOne($this->cat_id);
         
         return $category->title;
     }
     
+    /**
+     * @deprecated deprecated for version 1.0.1
+     */
     public function getDetailUrl($contextNavItemId = null)
     {
-        trigger_error('getDetailUrl() is deprecated use the getCat() / $cat relation ActiveQuery instead.', E_USER_DEPRECATED);
+        trigger_error('Method "$model->getDetailUrl()" is deprectaed, use "$model->detailLink" instead.', E_USER_DEPRECATED);
+        
         if ($contextNavItemId) {
             return \luya\cms\helpers\Url::toMenuItem($contextNavItemId, 'gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
         }
@@ -200,9 +211,13 @@ class Album extends NgRestModel
         return Url::toRoute(['/gallery/album/index', 'albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
     }
     
+    /**
+     * @deprecated deprecated for version 1.0.1
+     */
     public function images()
     {
-        trigger_error('images() is depreacted use the getAlbumImages() / $albumImages relation ActiveQuery instead.', E_USER_DEPRECATED);
+        trigger_error('Method "images()" is depreacted, use the" getAlbumImages()" or "$albumImages" relation ActiveQuery instead.', E_USER_DEPRECATED);
+        
         return (new \yii\db\Query())->from('gallery_album_image')->where(['album_id' => $this->id])->all();
     }
 }
