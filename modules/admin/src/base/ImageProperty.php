@@ -77,9 +77,9 @@ abstract class ImageProperty extends Property
             /* @var $image \luya\admin\image\Item */
             if ($image) {
                 if ($this->filterName()) {
-                    return $image->applyFilter($this->filterName())->source;
+                    return $image->applyFilter($this->filterName())->httpSource;
                 }
-                return $image->source;
+                return $image->httpSource;
             }
         }
         
