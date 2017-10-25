@@ -68,7 +68,7 @@ trait RestBehaviorsTrait
      * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `contentNegotiator` behavior ({{yii\filters\ContentNegotiator}}) is enabled.
      * + The `rateLimiter` behavior filter is **removed** by default.
      *
-     * @return array Returns an array with regiered behavior filters based on the implementation type.
+     * @return array Returns an array with registered behavior filters based on the implementation type.
      */
     public function behaviors()
     {
