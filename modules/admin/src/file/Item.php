@@ -286,6 +286,21 @@ class Item extends ItemAbstract implements LinkInterface
     }
     
     /**
+     * Get the absolute source path to the file location on the webserver.
+     *
+     * This will return raw the path to the storage file inside the sotorage folder without readable urls.
+     *
+     * @param boolean $scheme Whether the source path should be absolute or not.
+     * @return string The raw path to the file inside the storage folder.
+     */
+    public function getHttpSource($scheme = false)
+    {
+        $httpPath = $scheme ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
+        
+        return $httpPath . '/' . $this->getKey('name_new_compound');
+    }
+    
+    /**
      * Get the file trough url to the source of the file.
      *
      * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For
@@ -329,18 +344,6 @@ class Item extends ItemAbstract implements LinkInterface
     public function getSourceStatic()
     {
         return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()], true);
-    }
-    
-    /**
-     * Get the source path without beautiful urls.
-     *
-     * This will return raw the path to the storage file inside the sotorage folder without readable urls.
-     *
-     * @return string The raw path to the file inside the storage folder.
-     */
-    public function getHttpSource()
-    {
-        return Yii::$app->storage->httpPath . '/' . $this->getKey('name_new_compound');
     }
     
     /**

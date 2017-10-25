@@ -98,7 +98,7 @@ class Item extends ItemAbstract
     }
     
     /**
-     * The source of the image where you can access the image by the web.
+     * Get the absolute source path to the image location on the webserver.
      *
      * @param boolean $scheme Whether the source path should be absolute or not.
      * @return string|boolean
@@ -115,9 +115,9 @@ class Item extends ItemAbstract
             $apply = Yii::$app->storage->addImage($this->getFileId(), $this->getFilterId());
         }
        
-        $httpPath = ($scheme) ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
+        $httpPath = $scheme ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
         
-        return ($this->getFile()) ? $httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+        return $this->getFile() ? $httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
     }
     
     /**
