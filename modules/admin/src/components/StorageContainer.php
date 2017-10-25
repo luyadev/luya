@@ -846,7 +846,7 @@ class StorageContainer extends Component
         
         foreach ($this->findImages() as $image) {
             if (!empty($image->file) && !$image->file->isHidden && !$image->file->isDeleted) {
-                $image->source; // which forces to recreate missing sources.
+                $image->httpSource; // which forces to recreate missing sources.
             }
         }
         
