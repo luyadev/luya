@@ -45,6 +45,12 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
     
     /**
+     * @var boolean Whether CORS filter is enabled or not. By default its disabled, but you can enable this option
+     * when using luya as headless app.
+     */
+    public $cors = false;
+    
+    /**
      * @var string The default language for the admin interrace (former known as luyaLanguage).
      * Currently supported: "en", "de", "fr", "es", "ru", "it", "ua", "el".
      */
@@ -272,20 +278,21 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         return [
             'adminLanguage' => [
-                'class' => AdminLanguage::className(),
+                'class' => AdminLanguage::class,
             ],
             'adminuser' => [
-                'class' => AdminUser::className(),
+                'class' => AdminUser::class,
                 'defaultLanguage' => $this->interfaceLanguage,
             ],
             'adminmenu' => [
-                'class' => AdminMenu::className(),
+                'class' => AdminMenu::class,
             ],
             'storage' => [
-                'class' => StorageContainer::className(),
+                'class' => StorageContainer::class,
             ],
             'auth' => [
-                'class' => Auth::className(),
+                'class' => Auth::class,
+            	'cors' => $this->cors,
             ],
         ];
     }

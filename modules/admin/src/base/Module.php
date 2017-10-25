@@ -16,6 +16,9 @@ use luya\base\AdminModuleInterface;
  */
 class Module extends \luya\base\Module implements AdminModuleInterface
 {
+	/**
+	 * @inheritdoc
+	 */
     public $requiredComponents = ['db'];
     
     /**
@@ -138,17 +141,6 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     public function getJsTranslationMessages()
     {
         return [];
-    }
-    
-    /**
-     * Checks if a config exist in the linked property based on the provided `$apiEndpoint`.
-     *
-     * @param string $apiEndpoint The identifier of an apiEndpoint. ApiEndpoints are listed in the module class.
-     * @return bool|string If apiEndpoint exists in the linker property returns className, otherwhise false.
-     */
-    public function getLinkedNgRestConfig($apiEndpoint)
-    {
-        return array_key_exists($apiEndpoint, $this->ngrestConfigLinker) ? $this->ngrestConfigLinker[$apiEndpoint] : false;
     }
 
     /**
