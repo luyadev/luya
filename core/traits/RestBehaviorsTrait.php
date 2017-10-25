@@ -9,6 +9,7 @@ use yii\filters\auth\QueryParamAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\ContentNegotiator;
 use luya\rest\UserBehaviorInterface;
+use yii\filters\Cors;
 
 /**
  * Rest Behaviors Trait.
@@ -29,6 +30,11 @@ use luya\rest\UserBehaviorInterface;
  */
 trait RestBehaviorsTrait
 {
+	/**
+	 * @var boolean Whether CORS is enabled or not.
+	 */
+	public $enableCors = false;
+	
     /**
      * Whether the rest controller is protected or not.
      *
@@ -66,7 +72,6 @@ trait RestBehaviorsTrait
      */
     public function behaviors()
     {
-        // get the parent behaviors to overwrite
         $behaviors = parent::behaviors();
 
         if (!$this->getUserAuthClass()) {
@@ -81,6 +86,14 @@ trait RestBehaviorsTrait
                     HttpBearerAuth::className(),
                 ],
             ];
+            
+            if ($this->enableCors) {
+            	$behaviors['authenticator']['except'] = ['options'];
+            }
+        }
+        
+        if ($this->enableCors) {
+        	$behaviors['cors'] = Cors::class;
         }
 
         $behaviors['contentNegotiator'] = [
@@ -91,7 +104,8 @@ trait RestBehaviorsTrait
             ],
         ];
         
-        // by default rate limiter behavior is removed as its not implememented.
+        // by default rate limiter behavior is removed as it requires a database
+        // user given from the admin module.
         if (isset($behaviors['rateLimiter'])) {
             unset($behaviors['rateLimiter']);
         }
