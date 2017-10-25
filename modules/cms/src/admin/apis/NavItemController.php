@@ -279,15 +279,10 @@ class NavItemController extends \luya\admin\base\RestController
             // store updated type model and nav item model!
             return $model->save();
         } else {
-            // complety switch the type of this item (delete old type)
-            $oldType = $model->getType();
             // set the new type
             $model->nav_item_type = $navItemType;
             switch ($navItemType) {
                 case 1:
-                    if ($oldType) {
-                        $oldType->delete();
-                    }
                     $model->nav_item_type_id = 0;
                     return $model->update();
                 case 2:
@@ -295,9 +290,6 @@ class NavItemController extends \luya\admin\base\RestController
                     $this->setPostAttribute($typeModel, 'module_name');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
-                    }
-                    if ($oldType) {
-                        $oldType->delete();
                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
@@ -310,9 +302,6 @@ class NavItemController extends \luya\admin\base\RestController
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
-                     if ($oldType) {
-                         $oldType->delete();
-                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
                     return $model->update();
