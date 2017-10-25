@@ -124,7 +124,7 @@ class Album extends NgRestModel
                 'imageIdFieldName' => 'image_id',
                 'refFieldName' => 'album_id',
                 'sortIndexFieldName' => 'sortindex',
-                'alias' => Module::t('album_upload')
+                'label' => Module::t('album_upload')
             ]
         ];
     }

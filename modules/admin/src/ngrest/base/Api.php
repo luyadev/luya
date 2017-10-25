@@ -314,7 +314,7 @@ class Api extends RestActiveController
         return [
             'content' => $ngrest->render($render),
             'icon' => $render->getActiveWindowObject()->getIcon(),
-            'alias' => $render->getActiveWindowObject()->getAlias(),
+            'label' => $render->getActiveWindowObject()->getLabel(),
             'requestDate' => time(),
         ];
     }

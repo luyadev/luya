@@ -42,17 +42,6 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
      * @var string the module name in where the active window context is loaded, in order to find view files.
      */
     public $module;
-    
-    /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'extension';
-    
-    /**
-     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
-     */
-    public $alias = false;
-
     /**
      * @inheritdoc
      */
@@ -142,9 +131,9 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     /**
      *
      * MIME: https://wiki.selfhtml.org/wiki/Referenz:MIME-Typen
-     * @param unknown $fileName
-     * @param unknown $mimeType
-     * @param unknown $content
+     * @param string $fileName
+     * @param string $mimeType
+     * @param string $content
      * @return string
      */
     public function createDownloadableFileUrl($fileName, $mimeType, $content)
@@ -169,23 +158,66 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     }
     
     /**
-     * Get the alias for this ActiveWIndow
-     *
+     * If no label value is provided via getter/setter, this value is used.
+     * 
+     * You can override this method in order to provide a default label for your Active Window.
+     * 
      * @return boolean|string
      */
-    public function getAlias()
+    public function defaultLabel()
     {
-        return $this->alias;
+        return false;
+    }
+    
+    private $_label;
+    
+    /**
+     * Setter method for the Label.
+     * 
+     * @param string $label The active window label.
+     */
+    public function setLabel($label)
+    {
+        $this->_label = $label;
     }
     
     /**
-     * Get the Google-Icons name for the current Active Window
-     *
+     * @inheritdoc
+     */
+    public function getLabel()
+    {
+        return empty($this->_label) ? $this->defaultLabel() : $this->_label;
+    }
+    
+    /**
+     * If no extenion is set, this value is used.
+     * 
+     * You can override this method in order to provide a default icon for your Active Window.
+     * 
      * @return string
+     */
+    public function defaultIcon()
+    {
+        return 'extension';
+    }
+    
+    private $_icon;
+    
+    /**
+     * Setter method for the icon
+     * @param string $icon
+     */
+    public function setIcon($icon)
+    {
+        $this->_icon = $icon;
+    }
+    
+    /**
+     * @inheritdoc
      */
     public function getIcon()
     {
-        return $this->icon;
+        return empty($this->_icon) ? $this->defaultIcon() : $this->_icon;
     }
     
     private $_name;
@@ -229,7 +261,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     private $_hashName;
     
     /**
-     * Get a unique identifier hash based on the name and config values like icon and alias.
+     * Get a unique identifier hash based on the name and config values like icon and label.
      *
      * @return string
      */

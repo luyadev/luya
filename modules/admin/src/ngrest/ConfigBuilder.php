@@ -214,7 +214,7 @@ class ConfigBuilder implements ConfigBuilderInterface
         
         $this->config[$this->pointer][$object->getHashName()] = [
             'objectConfig' => $config,
-            'alias' => $object->getAlias(),
+            'label' => $object->getLabel(),
             'icon' => $object->getIcon(),
         ];
         

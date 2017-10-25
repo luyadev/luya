@@ -19,17 +19,7 @@ class CoordinatesActiveWindow extends ActiveWindow
      * @var string The name of the module where the active windows is located in order to finde the view path.
      */
     public $module = '@admin';
-    
-    /**
-     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
-     */
-    public $alias = 'Coordinates';
-    
-    /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'pin_drop';
-    
+   
     /**
      * @var string Register your maps application and enter your api key here
      * while configure the active window (https://console.developers.google.com).
@@ -44,6 +34,22 @@ class CoordinatesActiveWindow extends ActiveWindow
         if ($this->mapsApiKey === null) {
             throw new Exception('A google maps API key can not be null.');
         }
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultLabel()
+    {
+        return 'Coordinates';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'pin_drop';
     }
     
     /**

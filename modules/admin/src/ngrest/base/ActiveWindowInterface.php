@@ -37,7 +37,7 @@ interface ActiveWindowInterface
      * Set the hash of the current active window which is calculated by the ActiveWindow.
      *
      * Setting the the hash happens in the {{luya\admin\ngrest\render\RenderActiveWindow::render}} method.
-     * @param unknown $hash
+     * @param string $hash
      */
     public function setActiveWindowHash($hash);
     
@@ -49,9 +49,9 @@ interface ActiveWindowInterface
     public function index();
     
     /**
-     * Return the current alias defined for this Active Window.
+     * Return the current label defined for this Active Window.
      */
-    public function getAlias();
+    public function getLabel();
     
     /**
      * Return the current icon defined for this Active Window.

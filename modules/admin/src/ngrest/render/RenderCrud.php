@@ -259,7 +259,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                     $buttons[] = [
                         'ngClick' => 'getActiveWindow(\''.$hash.'\', item.'.$this->config->primaryKey.')',
                         'icon' => $config['icon'],
-                        'label' => $config['alias'],
+                        'label' => $config['label'],
                     ];
                 }
             }

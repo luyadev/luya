@@ -26,17 +26,27 @@ class <?= $className; ?> extends ActiveWindow
      * @var string The name of the module where the ActiveWindow is located in order to finde the view path.
      */
     public $module = '@<?= $moduleId; ?>';
-	
+
     /**
-     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
+     * Default label if not set in the ngrest model.
+     *
+     * @return string The name of of the ActiveWindow. This is displayed in the CRUD list.
      */
-    public $alias = '<?= $alias; ?>';
-	
+    public function defaultLabel()
+    {
+        return '<?= $alias; ?>';
+    }
+
     /**
+     * Default icon if not set in the ngrest model.
+     *
      * @var string The icon name from goolges material icon set (https://material.io/icons/)
      */
-    public $icon = 'extension';
-	
+    public function defaultIcon()
+    {
+        return 'extension';    
+    }
+
     /**
      * The default action which is going to be requested when clicking the ActiveWindow.
      * 

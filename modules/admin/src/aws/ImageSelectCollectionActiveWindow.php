@@ -72,11 +72,6 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
     public $module = 'admin';
 
     /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'photo_library';
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -98,6 +93,14 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
         return $this->render('index', [
             'sortIndexFieldName' => $this->sortIndexFieldName,
         ]);
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'photo_library';
     }
 
     /**

@@ -23,7 +23,7 @@ use luya\admin\ngrest\base\ActiveWindow;
  * public function ngRestActiveWindows()
  * {
  *   return [
- *       ['class' => \luya\admin\aws\FlowActiveWindow::class, 'alias' => 'My Gallery'],
+ *       ['class' => \luya\admin\aws\FlowActiveWindow::class, 'label' => 'My Gallery'],
  *   ];
  * }
  * ```
@@ -43,14 +43,28 @@ class FlowActiveWindow extends ActiveWindow
     public $module = '@admin';
     
     /**
-     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
+     * @inheritdoc
      */
-    public $alias = 'Flow Uploader';
+    public function index()
+    {
+        return $this->render('index');
+    }
     
     /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
+     * @inheritdoc
      */
-    public $icon = 'cloud_upload';
+    public function defaultLabel()
+    {
+        return 'Flow Uploader';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'cloud_upload';
+    }
     
     /**
      * @inheritdoc
@@ -64,14 +78,6 @@ class FlowActiveWindow extends ActiveWindow
         }
         
         return $model;
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function index()
-    {
-        return $this->render('index');
     }
     
     /**

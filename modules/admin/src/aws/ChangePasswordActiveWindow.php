@@ -22,16 +22,12 @@ class ChangePasswordActiveWindow extends ActiveWindow
      * @var string The name of the module where the active windows is located in order to finde the view path.
      */
     public $module = 'admin';
-
-    /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'vpn_key';
     
     /**
      * @var integer The minimum length of the password.
      */
     public $minCharLength = 8;
+    
     /**
      * The default action which is going to be requested when clicking the active window.
      *
@@ -42,6 +38,14 @@ class ChangePasswordActiveWindow extends ActiveWindow
         return $this->render('index');
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'vpn_key';
+    }
+    
     /**
      * The method which is going to change the password on the current model.
      *
