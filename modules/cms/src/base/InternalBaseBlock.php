@@ -595,7 +595,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      *     ->add('bold', 'Bold Videos')->cfgs([])->register(),
      * ```
      *
-     * @return \luya\cms\base\BlockFlavor
+     * @return \luya\cms\base\BlockVariationRegister
      */
     public static function variations()
     {
