@@ -49,6 +49,7 @@ use yii\helpers\Html;
  * ```
  *
  * @property \luya\cms\menu\Item $startItem Get the start Item entry.
+ *
  * @author Marc Stampfli <kontakt@marcstampfli.guru>
  * @since 1.0.0
  */

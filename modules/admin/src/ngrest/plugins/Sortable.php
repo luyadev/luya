@@ -13,6 +13,7 @@ use luya\admin\ngrest\base\Plugin;
  * ensure the default ordering for your fields and disabled the sorting inside the grid.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Sortable extends Plugin
 {

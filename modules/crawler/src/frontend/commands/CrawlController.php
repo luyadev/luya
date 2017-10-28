@@ -6,19 +6,20 @@ use luya\crawler\frontend\classes\CrawlContainer;
 use luya\helpers\FileHelper;
 
 /**
- * Crawler command to build the index:
+ * Crawler console Command.
  *
- * ```
+ * ```sh
  * ./vendor/bin/luya crawler/crawl
  * ```
  *
- * Verbose while crawling
+ * Add verbositiy while crawling:
  *
- * ```
+ * ```sh
  * ./vendor/bin/luya crawler/crawl --verbose
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CrawlController extends \luya\console\Command
 {

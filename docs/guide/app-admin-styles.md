@@ -56,7 +56,7 @@ The below tables shows you, what icon stands for what. The full set of usable ic
 | Download icon | <i class="material-icons">file_download</i> | file_download |
 | Edit icon | <i class="material-icons">edit</i> | edit |
 | Add icon | <i class="material-icons">add_box</i> | add_box |
-| Add icon for button | <i class="material-icons">add</i> | add_box |
+| Add icon for button | <i class="material-icons">add</i> | add |
 | Delete icon | <i class="material-icons">delete</i> | delete |
 | Save / Confirm icon | <i class="material-icons">check.png | check |
 | Abort / Clear icon | <i class="material-icons">clear</i>  | clear |

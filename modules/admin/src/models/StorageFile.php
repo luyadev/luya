@@ -30,6 +30,7 @@ use luya\helpers\FileHelper;
  * @property string $caption
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageFile extends ActiveRecord
 {

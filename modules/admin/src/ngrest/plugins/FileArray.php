@@ -28,6 +28,7 @@ use luya\admin\file\Query;
  * Now when accessing the `$myfiles` variabled defined from above the {{luya\admin\file\Iterator}} will be returned ottherwise false.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class FileArray extends Plugin
 {

@@ -38,8 +38,9 @@ use luya\admin\base\TypesInterface;
  * ```
  *
  * @property \yii\db\ActiveQueryInterface $query The ActiveQuery object
- * @since 1.0.0-rc1
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class ActiveQueryRadioInjector extends BaseActiveQueryInjector
 {

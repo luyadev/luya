@@ -42,7 +42,7 @@ $this->beginPage()
                         <span class="mainnav-link" ng-click="toggleSearchInput()" ng-class="{'mainnav-link-active' : searchInputOpen }">
                             <i class="mainnav-icon material-icons">search</i>
                             <span class="mainnav-label">
-                                Search
+                                <?= Admin::t('menu_button_search'); ?>
                             </span>
                         </span>
                     </li>
@@ -50,7 +50,7 @@ $this->beginPage()
                         <span class="mainnav-link" ui-sref="home" ui-sref-active="mainnav-link-active" ng-click="isOpen=0">
                             <i class="mainnav-icon material-icons">home</i>
                             <span class="mainnav-label">
-                                Dashboard
+                                <?= Admin::t('menu_dashboard');?>
                             </span>
                         </span>
                     </li>
@@ -104,13 +104,33 @@ $this->beginPage()
                             </span>
                         </span>
                     </li>
-                    <li class="mainnav-entry" tooltip tooltip-text="<?= Admin::t('layout_btn_profile'); ?>" tooltip-position="right" tooltip-disabled="isHover">
-                        <a class="mainnav-link" ui-sref="custom({templateId:'admin/account/dashboard'})" ng-click="isOpen=0">
+                    <li class="mainnav-entry">
+                        <!-- needs to be fixed -->
+                        <span class="mainnav-parent" active-class="mainnav-parent-active">
+                        <!-- needs to be fixed end -->
                             <i class="mainnav-icon material-icons">account_circle</i>
                             <span class="mainnav-label">
                                 <?= Admin::t('layout_btn_profile'); ?>
                             </span>
-                        </a>
+                            <span class="mainnav-tooltip-big-wrapper">
+                                <span class="mainnav-tooltip-big">
+                                    <ul class="mainnav-tooltip-big-menu">
+                                        <li class="mainnav-tooltip-big-menu-item" ui-sref-active="mainnav-tooltip-big-menu-item-active" ui-sref="custom({templateId:'admin/account/dashboard'})" ng-click="isOpen=0">
+                                            <a class="mainnav-tooltip-big-menu-link">
+                                                <i class="material-icons">face</i>
+                                                 <?= Admin::t('layout_btn_user_settings'); ?>
+                                            </a>
+                                        </li>
+                                        <li class="mainnav-tooltip-big-menu-item" >
+                                            <a href="<?= Url::toRoute(['/admin/default/logout']); ?>">
+                                                <i class="material-icons">exit_to_app</i>
+                                                <?= Admin::t('layout_btn_logout'); ?>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </span>
+                            </span>
+                        </span>
                     </li>
                     <li class="mainnav-entry  hide-on-mobile" ng-show="settings.isDeveloper">
                         <a class="mainnav-link" ng-click="showDebugBar=!showDebugBar">
@@ -161,7 +181,7 @@ $this->beginPage()
                     <div class="card" ng-class="{'card-closed': !groupVisibility}">
                         <div class="card-header" ng-click="groupVisibility=!groupVisibility">
                             <span class="material-icons card-toggle-indicator">keyboard_arrow_down</span>
-                            <i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span>
+                            <i class="material-icons">{{item.menuItem.icon}}</i>&nbsp;<span>{{item.menuItem.alias}}</span><small class="ml-1"><i>({{item.data.length}})</i></small>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive-wrapper">

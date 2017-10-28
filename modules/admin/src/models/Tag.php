@@ -10,6 +10,9 @@ use luya\admin\Module;
  *
  * @property integer $id
  * @property string $name
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Tag extends NgRestModel
 {

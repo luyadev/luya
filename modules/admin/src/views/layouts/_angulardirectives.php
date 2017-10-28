@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module as Admin;
+use luya\admin\helpers\Angular;
 
 ?>
 <div class="loading-overlay" ng-if="LuyaLoading.getState()">
@@ -38,6 +39,17 @@ use luya\admin\Module as Admin;
 <!-- UPDATE REDIRECT FORM -->
 <script type="text/ng-template" id="updateformredirect.html">
 <div>
+	<div class="form-group form-side-by-side">
+		<div class="form-side form-side-label">
+			<label><?= Admin::t('link_dir_target'); ?></label>
+		</div>
+		<div class="form-side">
+			<select ng-model="data.target">
+				<option value="_self"><?= Admin::t('link_dir_target_same'); ?></option>
+				<option value="_blank"><?= Admin::t('link_dir_target_blank'); ?></option>
+			</select>
+		</div>
+	</div>
     <div class="form-group form-side-by-side">
         <div class="form-side form-side-label">
             <label><?= Admin::t('view_index_redirect_type'); ?></label>
@@ -48,6 +60,12 @@ use luya\admin\Module as Admin;
 
             <input type="radio" ng-model="data.type" ng-value="2" id="redirect_external">
             <label for="redirect_external" ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
+
+			<input type="radio" ng-model="data.type" ng-value="3" id="to_file">
+            <label for="to_file" ng-click="data.type = 3"><?= Admin::t('view_index_redirect_file'); ?></label>
+
+			<input type="radio" ng-model="data.type" ng-value="4" id="to_mail">
+            <label for="to_mail" ng-click="data.type = 4"><?= Admin::t('view_index_redirect_mail'); ?></label>
         </div>
     </div>
     <div class="form-group form-side-by-side">
@@ -67,6 +85,13 @@ use luya\admin\Module as Admin;
                         <small class="form-text text-muted"><?= Admin::t('view_index_redirect_external_link_help'); ?></small>
                     </div>
                 </div>
+				<div ng-switch-when="3">
+					<storage-file-upload ng-model="data.value"></storage-file-upload>
+			    </div>
+				<div ng-switch-when="4">
+					<input class="form-control" type="text" ng-model="data.value" />
+					<p class="mt-1"><small><?= Admin::t('view_index_redirect_mail_help'); ?></small></p>
+			    </div>
             </div>
         </div>
     </div>
@@ -243,24 +268,56 @@ use luya\admin\Module as Admin;
                             <th ng-if="selectedFileFromParent" style="width:15px;"></th>
                             <th></th><!-- image thumbnail / file icon -->
                             <th>
-                                <span><?= Admin::t('layout_filemanager_col_name'); ?></span>
-                                <!-- <div class="table-sorter-wrapper">
-                                    <div class="table-sorter table-sorter-up">
+                                <span ng-if="sortField!='name' && sortField!='-name'" ng-click="changeSortField('-name')"><?= Admin::t('layout_filemanager_col_name'); ?></span>    
+                                <div class="table-sorter-wrapper is-active">
+                                    <div ng-if="sortField=='name'" class="table-sorter table-sorter-up is-sorting" ng-click="changeSortField('-name')">
+                                        <span><?= Admin::t('layout_filemanager_col_name'); ?></span>    
                                         <i class="material-icons">keyboard_arrow_up</i>
                                     </div>
-                                    <div class="table-sorter table-sorter-down">
+                                    <div ng-if="sortField=='-name'" class="table-sorter table-sorter-up is-sorting" ng-click="changeSortField('name')">
+                                        <span><?= Admin::t('layout_filemanager_col_name'); ?></span>    
                                         <i class="material-icons">keyboard_arrow_down</i>
                                     </div>
-                                </div> -->
+                                </div>
                             </th>
                             <th>
-                                <span><?= Admin::t('layout_filemanager_col_type'); ?></span>
+                                <span ng-if="sortField!='extension' && sortField!='-extension'" ng-click="changeSortField('-extension')"><?= Admin::t('layout_filemanager_col_type'); ?></span>    
+                                <div class="table-sorter-wrapper is-active">
+                                    <div ng-if="sortField=='extension'" class="table-sorter table-sorter-up is-sorting" ng-click="changeSortField('-extension')">
+                                        <span><?= Admin::t('layout_filemanager_col_type'); ?></span>    
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </div>
+                                    <div ng-if="sortField=='-extension'" class="table-sorter table-sorter-up is-sorting" ng-click="changeSortField('extension')">
+                                        <span><?= Admin::t('layout_filemanager_col_type'); ?></span>    
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </div>
                             </th>
                             <th>
-                                <span><?= Admin::t('layout_filemanager_col_date'); ?></span>
+                                <span ng-if="sortField!='uploadTimestamp' && sortField!='-uploadTimestamp'" ng-click="changeSortField('-uploadTimestamp')"><?= Admin::t('layout_filemanager_col_date'); ?></span>    
+                                <div class="table-sorter-wrapper is-active">
+                                    <div ng-if="sortField=='uploadTimestamp'" class="table-sorter table-sorter-up is-sorting" ng-click="changeSortField('-uploadTimestamp')">
+                                        <span><?= Admin::t('layout_filemanager_col_date'); ?></span>    
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </div>
+                                    <div ng-if="sortField=='-uploadTimestamp'" class="table-sorter table-sorter-up is-sorting" ng-click="changeSortField('uploadTimestamp')">
+                                        <span><?= Admin::t('layout_filemanager_col_date'); ?></span>    
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </div>
                             </th>
                             <th>
-                                <span><?= Admin::t('layout_filemanager_col_size'); ?></span>
+                                <span ng-if="sortField!='size' && sortField!='-size'" ng-click="changeSortField('-size')"><?= Admin::t('layout_filemanager_col_size'); ?></span>    
+                                <div class="table-sorter-wrapper is-active">
+                                    <div ng-if="sortField=='size'" class="table-sorter table-sorter-up is-sorting" ng-click="changeSortField('-size')">
+                                        <span><?= Admin::t('layout_filemanager_col_size'); ?></span>    
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </div>
+                                    <div ng-if="sortField=='-size'" class="table-sorter table-sorter-up is-sorting" ng-click="changeSortField('size')">
+                                        <span><?= Admin::t('layout_filemanager_col_size'); ?></span>    
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </div>
                             </th>
                             <th class="tab-padding-right text-right filemanager-actions-column"></th>
                         </tr>

@@ -8,6 +8,7 @@ use luya\admin\ngrest\base\Plugin;
  * Color Wheel Plugin.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Color extends Plugin
 {

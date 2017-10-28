@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * Embed YouTube and Vimeo video Block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class VideoBlock extends PhpBlock
 {

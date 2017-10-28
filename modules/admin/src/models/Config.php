@@ -12,6 +12,7 @@ use luya\traits\RegistryTrait;
  * @property string $value
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Config extends ActiveRecord
 {

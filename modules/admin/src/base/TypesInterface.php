@@ -11,6 +11,7 @@ namespace luya\admin\base;
  * + Otherwise only 1 value can be returned
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface TypesInterface
 {

@@ -9,6 +9,7 @@ use luya\cms\base\PhpBlock;
  * Simple horizontal line block
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class LineBlock extends PhpBlock
 {

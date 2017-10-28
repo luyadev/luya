@@ -6,10 +6,10 @@ The LUYA Core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by 
 
 There is a clear vision for your modern web application:
 
-- how to use configuration files and keep them small 
-- arrangement and structure of directories 
-- components wich are already set by the core 
-- bulletproof DRY concept 
++ How to use configuration files and keep them small 
++ Arrangement and structure of directories 
++ Components wich are already set by the core 
++ Bulletproof DRY concept 
 
 In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, sometimes with just an MVC provided by Yii via the LUYA CORE sometimes you just need an administration area where you can manage data of your application and sometimes you also need a cms to manage the content.
 

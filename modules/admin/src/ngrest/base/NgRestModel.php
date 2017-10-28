@@ -21,6 +21,7 @@ use luya\admin\base\RestActiveController;
  * This class extends the {{yii\db\ActiveRecord}}.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class NgRestModel extends ActiveRecord implements GenericSearchInterface, NgRestModelInterface
 {

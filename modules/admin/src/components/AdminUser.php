@@ -15,6 +15,7 @@ use luya\admin\models\UserLogin;
  * The administration user Identity extends from {{yii\web\User}} in order to configure customized behaviors.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class AdminUser extends User
 {

@@ -34,20 +34,23 @@ Setup Crud:
 
 ## Creating the Model
 
-We assume you have a made a table via the migrations (in your example below we assume you make a team module with members) and executue the migrations so you can no creat an `ActiveRecord` model for the provided table. The model represents the datasource for the REST API, you can create the model with the gii module extension or you can also generate the model and the rest of the classes with the `admin/crud/create` cli command.
+We assume you have a made a table via the migrations (in your example below we assume you make a team module with members) and executue the migrations so you can no create an `ActiveRecord` model for the provided table. The model represents the datasource for the REST API, you can create the model with the gii module extension or you can also generate the model and the rest of the classes with the `admin/crud/create` cli command.
 
 Lets have close look at what you model should look like, in our member example of the teammodule:
 
-> In order to read more about configuration and other abilitys to customize your CRUD read the [NgRest Model Config Section](ngrest-model.md).
-
 ```php
 <?php
-namespace teamadmin\models;
+namespace app\modules\team\models;
 
 class Member extends \luya\admin\ngrest\base\NgRestModel
 {
     /**
-     * Yii2 related ActiveRecord code
+     * Enable which fields should automatically be available as multilingual fields. Make sure those are text types in db.
+     */
+    public $i18n = ['text'];
+    
+    /**
+     * Database table name.
      */
     public static function tableName()
     {
@@ -55,17 +58,18 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
     }
     
     /**
-     * Yii2 related ActiveRecord code
+     * Rules definition which are applied when perform insert/update calls.
      */
     public function rules()
     {
         return [
             [['name', 'title', 'text'], 'required'],
+            [['name', 'text'], 'string'],
         ];
     }
     
     /**
-     * Yii related ActiveRecord code
+     * Attribute labels to display form labels.
      */
     public function attributeLabels()
     {
@@ -76,15 +80,8 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
         ];
     }
     
-    /* NGREST SPECIFIC CONFIGURATIONS */
-    
     /**
-     * Enable which fields should automaticcally be available as multilingual fields!
-     */
-    public $i18n = ['text'];
-    
-    /**
-     * @return array An array define the field types of each field
+     * @return array An array define the field types of each field.
      */
     public function ngrestAttributeTypes()
     {
@@ -118,7 +115,7 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
 }
 ```
 
-You can read more about the configuration of the NgRest in [NgRest Model Guide](ngrest-model.md).
+You can read more about the configuration of the [[ngrest-model.md]].
 
 ## Creating Controller and API
 
@@ -126,15 +123,15 @@ Each NgRest Crud needs an API (to make the rest call, create, update, list which
 
 ### NgRest Controller
 
-Example of an ngrest controller (which are located in `<module>/controllers`):
+The NgRest Controller will prepare and render the forms based on your model. Therefore define the {{luya\admin\ngrest\base\Controller::$modelClass}} property with fresh created {{luya\admin\ngrest\base\NgRestModel}}.
 
 ```php
 <?php
-namespace teamadmin\controllers;
+namespace app\modules\team\admin\controllers;
 
 class MemberController extends \luya\admin\ngrest\base\Controller
 {
-    public $modelClass = 'teamadmin\models\Member';
+    public $modelClass = 'app\modules\team\models\Member';
 }
 ```
 
@@ -159,57 +156,59 @@ This would generate a new button in the settings dropdown which would call the a
 
 ### NgRest Api
 
-Example of an api controller (which are located in `<module>/apis`):
+The API Controller will return the REST formated data from your model.
+
+The API Controller needs to know from what configuration the API should be build from, there fore define the {{luya\admin\ngrest\base\Api::$modelClass}} property with your defined {{luya\admin\ngrest\base\NgRestModel}}.
 
 ```php
 <?php
-namespace news\apis;
+namespace app\modules\team\admin\apis;
 
 class MemberController extends \luya\admin\ngrest\base\Api
 {
-    public $modelClass = 'teamadmin\models\Member';
+    public $modelClass = 'app\modules\team\models\Member';
 }
 ```
 
-By default the pagination (pager) will be enabled if the count of rows is more then 250. You can disabled this behavior by turning of the `$autoEnablePagination`
+By default the pagination (pager) will be enabled if the count of rows is more then 250. You can disabled this behavior by turning of the {{luya\admin\ngrest\base\Api::$autoEnablePagination}}.
 
 ```php
 public $autoEnablePagination = false;
 ```
 
-and you can also force the api to always generate a pagination by setting `$pagination` property as followed:
+and you can also force the api to always generate a pagination by setting {{luya\admin\ngrest\base\Api::$pagination}} property as followed:
 
 ```php
 public $pagination = ['pageSize' => 100];
 ```
 
-## Creating the Api-Endpoint & Authorization
+## Api-Endpoint, Menu & Priviliges
 
-The last part of the ngrest process is the let your application know where your api is located (Yii2 controller namespace) and to make permission entries for the ngrest (who can create, update, delete and see the crud).
+The last part of the ngrest process is to let your application know where your API is located, add them to the admin UI menu and establish permission priviliges in order to manage how can create, delete, update or see the CRUD.
 
-### Endpoint
+### API Endpoint
 
-To let your application know what apis are registered you have to open the Module class of the module where the ngrest crud is located and add a linkin entry into the `$apis` propertie.
+To let your application know what apis are registered and where to find them, you have to open the admin module class of the module where the ngrest crud is located and add a linkin entry into the {luya\admin\base\Module::$apis}} property.
 
 ```php
 <?php
-namespace teamadmin;
+namespace app\modules\team\admin;
 
 class Module extends \luya\admin\base\Module
 {
     public $apis = [
-        'api-team-member' => 'teamadmin\apis\MemberController',
+        'api-team-member' => 'app\modules\team\admin\apis\MemberController',
     ];
 }
 ```
 
-There are a few rules while defining the api endpoint name:
+There are a few rules in how to choose the correct API Endpoint name:
 
-+ An Endpoint is always build like `api-<module>-<model>` where *<module>* is always the frontend module.
-+ API Endpoints does never have an admin prefix in the module, by defintion. So event when you have only one module `foobaradmin` the choosen module name for the endpoint would be `foobar`.
-+ APIs are alaways **singular** described, its not ~~members~~ its *member*.
++ They always contain the **prefix api**, a **module name** and the **model name**, like `api-<module>-<model>`.
++ They never have an admin prefix in the module name. So even when you have only a `foobaradmin` module, use the name `foobar` for the module, like `api-foobar-<model>`.
++ Always use the **singular** word variation, its not members its **member**, like `api-<module->member`.
 
-### Menu
+### Add to Menu
 
 The store the permission informations of your newly created ngrest crud you have to override the `getMenu()` method of your Module class where the ngrest crud belongs to.
 
@@ -225,8 +224,6 @@ public function getMenu()
 
 The Icons `account` and `extension` are choosem from the google material icons: https://design.google.com/icons/. You can add as much nodes, groups and items as you want. The first argument of `node`, `group` and `itemApi` as the navigation button display in the administration area, you can wrapp them with Yii::t in order to make internalisations.
 
-## Import and Priviliges
+### Import and Priviliges
 
-Run `./vendor/bin/luya import`, open the administration area and allocate the new menu items to a group. 
-
-> Don't forget to set the correct privileges in `System > User > Authorizations` otherwise you won't see the created menu items!
+Run the `./vendor/bin/luya import` command in order to add new permissions and menu entries. After the import process is finished, log into your admin interface and set the correct privileges in **System > User > Authorizations** otherwise you won't see the created menu items.

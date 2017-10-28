@@ -7,7 +7,7 @@ use yii\helpers\Html;
 ?>
 <?php if ($this->extraValue('image') && $this->extraValue('text')): ?>
     <div>
-        <?= Html::img($this->extraValue('image')['source'], [
+        <?= Html::img($this->extraValue('image')['httpSource'], [
             'class' => ($this->varValue('imagePosition', 'left') == 'left') ? 'pull-left img-responsive' : 'pull-right img-responsive',
             'width' => $this->cfgValue('width', null),
             'height' => $this->cfgValue('height', null),

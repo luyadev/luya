@@ -2,7 +2,7 @@
     "minimum-stability" : "RC",
     "name" : "luyadev/luya",
     "description" : "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
-    "type" : "luya-core",
+    "type" : "project",
     "keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular", "yii2-wrapper"],
     "license": "MIT",
     "homepage" : "https://luya.io",

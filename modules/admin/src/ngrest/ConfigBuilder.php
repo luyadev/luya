@@ -16,6 +16,7 @@ use luya\helpers\ArrayHelper;
  * @property boolean $delete Define whether the delete button is availabe or not
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ConfigBuilder implements ConfigBuilderInterface
 {
@@ -213,7 +214,7 @@ class ConfigBuilder implements ConfigBuilderInterface
         
         $this->config[$this->pointer][$object->getHashName()] = [
             'objectConfig' => $config,
-            'alias' => $object->getAlias(),
+            'label' => $object->getLabel(),
             'icon' => $object->getIcon(),
         ];
         

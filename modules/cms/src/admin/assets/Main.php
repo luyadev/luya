@@ -6,6 +6,7 @@ namespace luya\cms\admin\assets;
  * CMS Main Asset Bundle.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Main extends \yii\web\AssetBundle
 {

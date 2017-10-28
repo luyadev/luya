@@ -13,6 +13,7 @@ use yii\base\Event;
  * This Behavior is attached to all {{luya\admin\ngrest\base\NgRestModel}} Objects.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NgRestEventBehavior extends Behavior
 {

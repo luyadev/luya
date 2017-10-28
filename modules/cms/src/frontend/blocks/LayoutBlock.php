@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * Layout/Grid Block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class LayoutBlock extends PhpBlock
 {

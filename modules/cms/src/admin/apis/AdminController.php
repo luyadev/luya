@@ -9,11 +9,13 @@ use luya\cms\models\BlockGroup;
 use luya\helpers\ArrayHelper;
 use luya\cms\frontend\Module;
 use luya\cms\models\Config;
+use luya\cms\models\Log;
 
 /**
  * Admin Api delievers common api tasks like blocks and layouts.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class AdminController extends \luya\admin\base\RestController
 {
@@ -32,6 +34,28 @@ class AdminController extends \luya\admin\base\RestController
         $data[Config::HTTP_EXCEPTION_NAV_ID] = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
         
         return $data;
+    }
+    
+    public function actionDashboardLog()
+    {
+        $data = Log::find()->orderBy(['timestamp' => SORT_DESC])->with(['user'])->limit(60)->all();
+        $log= [];
+        foreach ($data as $item) {
+            $log[strtotime('today', $item->timestamp)][] = $item;
+        }
+        
+        $array = [];
+        
+        krsort($log, SORT_NUMERIC);
+        
+        foreach ($log as $day => $values) {
+            $array[] = [
+                'day' => $day,
+                'items' => $values,
+            ];
+        }
+        
+        return $array;
     }
     
     public function actionDataBlocks()

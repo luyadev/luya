@@ -28,7 +28,7 @@ return [
 
 The above example will generate a language and country specific prefix urls for example `http://example.com/en-us/` and the `hostInfoMapping` domains who points to this website would have the predefined settings defined in the array.
 
-In order to access data from the composition component you can array access the composition component by its keys:
+In order to access data from the composition component you can access the composition component by its keys:
 
 ```php
 $langShortCode = Yii::$app->composition['langShortCode'];
@@ -39,7 +39,7 @@ $countryShortCode = Yii::$app->composition['countryShortCode'];
 
 ## Disable the Component
 
-When your website is not running in an multi lingual context you do not want to make use of the composition component you can turn it off by setting {{luya\web\Composition::hidden}} to true. As the Composition will be loaded always, you can only tell the component to **not** prefix your urls with the composition patterns.
+When your website is not running in an multi lingual context and/or you do not want to make use of the composition component you can turn it off by setting {{luya\web\Composition::hidden}} to true. As the composition will be loaded always, you can only tell the component to **not** prefix your urls with the composition patterns.
 
 ```php
 return [

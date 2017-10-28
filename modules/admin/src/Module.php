@@ -33,6 +33,7 @@ use luya\admin\importers\StorageImporter;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
@@ -42,6 +43,12 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      * @var string Event Name
      */
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
+    
+    /**
+     * @var boolean Whether CORS filter is enabled or not. By default its disabled, but you can enable this option
+     * when using luya as headless app.
+     */
+    public $cors = false;
     
     /**
      * @var string The default language for the admin interrace (former known as luyaLanguage).
@@ -271,20 +278,21 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         return [
             'adminLanguage' => [
-                'class' => AdminLanguage::className(),
+                'class' => AdminLanguage::class,
             ],
             'adminuser' => [
-                'class' => AdminUser::className(),
+                'class' => AdminUser::class,
                 'defaultLanguage' => $this->interfaceLanguage,
             ],
             'adminmenu' => [
-                'class' => AdminMenu::className(),
+                'class' => AdminMenu::class,
             ],
             'storage' => [
-                'class' => StorageContainer::className(),
+                'class' => StorageContainer::class,
             ],
             'auth' => [
-                'class' => Auth::className(),
+                'class' => Auth::class,
+            	'cors' => $this->cors,
             ],
         ];
     }

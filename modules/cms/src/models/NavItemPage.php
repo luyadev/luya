@@ -24,6 +24,7 @@ use yii\base\ViewContextInterface;
  * @property string $version_alias
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewContextInterface
 {

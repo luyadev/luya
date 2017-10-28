@@ -13,6 +13,7 @@ use yii\base\Component;
  * Reade more in the Guide [[app-cmsproperties.md]].
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Property extends Component implements TypesInterface
 {

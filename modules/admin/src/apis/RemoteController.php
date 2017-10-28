@@ -14,6 +14,7 @@ use luya\rest\Controller;
  * The remote api can only access with the oken but is not secured by a loggged in user.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RemoteController extends Controller
 {

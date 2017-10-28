@@ -172,7 +172,7 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : function($scope, $http, $filter, ServiceMenuData, Slug, ServiceLanguagesData, AdminToastService) {
+			controller : function($scope, $http, $filter, ServiceMenuData, ServiceLanguagesData, AdminToastService) {
 
 				$scope.error = [];
 				$scope.success = false;
@@ -223,12 +223,12 @@
 				});
 
 				$scope.aliasSuggestion = function() {
-					$scope.data.alias = Slug.slugify($scope.data.title);
+					$scope.data.alias = $filter('slugify')($scope.data.title);
 				};
 
 				$scope.$watch('data.alias', function(n, o) {
 					if (n!=o && n!=null) {
-						$scope.data.alias = Slug.slugify(n);
+						$scope.data.alias = $filter('slugify')(n);
 					}
 				});
 
@@ -384,6 +384,13 @@
 
 	/* controllers */
 
+	zaa.controller("CmsDashboard", function($scope, $http) {
+		$scope.dashboard = [];
+		$http.get('admin/api-cms-admin/dashboard-log').then(function(response) {
+			$scope.dashboard = response.data;
+		});
+	});
+	
 	zaa.controller("ConfigController", function($scope, $http, AdminToastService) {
 		$scope.data = {};
 
@@ -439,7 +446,7 @@
 		};
 	});
 
-	zaa.controller("CopyPageController", function($scope, $http, AdminToastService, Slug) {
+	zaa.controller("CopyPageController", function($scope, $http, $filter, AdminToastService) {
 
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 
@@ -473,7 +480,8 @@
 		});
 		
 		$scope.aliasSuggestion = function() {
-			$scope.itemSelection.alias = Slug.slugify($scope.itemSelection.title);
+			
+			$scope.itemSelection.alias = $filter('slugify')($scope.itemSelection.title);
 		};
 
 		$scope.loadItems = function() {
@@ -974,7 +982,7 @@
 	/**
 	 * @param $scope.lang from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $rootScope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
+	zaa.controller("NavItemController", function($scope, $rootScope, $http, $filter, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
 
 		$scope.loaded = false;
 
@@ -1041,7 +1049,7 @@
 		$scope.trashItem = function() {
 			if ($scope.lang.is_default == 0) {
 				AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], function($timeout, $toast) {
-					$http.get('admin/api-cms-navitem/delete', { params : { navItemId : $scope.item.id }}).then(function(response) {
+					$http.delete('admin/api-cms-navitem/delete?navItemId=' + $scope.item.id).then(function(response) {
 						$scope.menuDataReload().then(function() {
 							$scope.isTranslated = false;
 							$scope.item = [];
@@ -1106,7 +1114,7 @@
 
 		$scope.$watch('itemCopy.alias', function(n, o) {
 			if (n!=o && n!=null) {
-				$scope.itemCopy.alias = Slug.slugify(n);
+				$scope.itemCopy.alias = $filter('slugify')(n);
 			}
 		});
 

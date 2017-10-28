@@ -9,6 +9,7 @@ use luya\admin\ngrest\base\NgRestModel;
  * Layout Model for CMS-Layouts.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Layout extends NgRestModel
 {

@@ -44,8 +44,7 @@ class Url extends \luya\helpers\Url
      * to the rules' pattern. Example:
      *
      * ```php
-     * Url::toModuleRoute('blog', ['/blog/default/index', 'year' => 2016, 'month' => '07]); // recommend
-     * Url::toModuleRoute('blog', 'blog/default/index', ['year' => '2016', 'month' => '07']); // equals to above
+     * Url::toModuleRoute('blog', ['/blog/default/index', 'year' => 2016, 'month' => '07]);
      * ```
      *
      * generates the following URL, assuming the blog module is located on the CMS page /my-super-blog:
@@ -72,6 +71,11 @@ class Url extends \luya\helpers\Url
     {
         $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
         
+        if (!empty($params)) {
+            trigger_error('third argument $params is deprecated use the array notation', E_USER_DEPRECATED);
+        }
+        
+        
         if ($item) {
             return static::toMenuItem($item->id, $route, $params);
         }
@@ -93,6 +97,9 @@ class Url extends \luya\helpers\Url
         if (is_array($route)) {
             $routeParams = array_merge($route, $params);
         } else {
+            
+            trigger_error('third argument $params is deprecated use the array notation', E_USER_DEPRECATED);
+            
             $routeParams = [$route];
             foreach ($params as $key => $value) {
                 $routeParams[$key] = $value;

@@ -11,7 +11,9 @@ use yii\base\Model;
  * Admin Login Form Model.
  *
  * @property \luya\admin\models\User $user The user model.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class LoginForm extends Model
 {

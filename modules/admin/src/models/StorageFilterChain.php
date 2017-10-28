@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  * Contains all information about filter effects for a single Chain element (like: thumbnail, 200x200).
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageFilterChain extends ActiveRecord
 {

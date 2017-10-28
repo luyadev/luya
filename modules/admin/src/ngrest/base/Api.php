@@ -24,6 +24,9 @@ use yii\db\ActiveQuery;
  * The RestActiveController for all NgRest implementations.
  *
  * @property \luya\admin\ngrest\NgRestModel $model Get the model object based on the $modelClass property.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Api extends RestActiveController
 {
@@ -77,6 +80,9 @@ class Api extends RestActiveController
         $actions['create']['class'] = 'luya\admin\ngrest\base\actions\CreateAction';
         $actions['update']['class'] = 'luya\admin\ngrest\base\actions\UpdateAction';
         $actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
+        if ($this->enableCors) {
+        	$actions['options']['class'] = 'luya\admin\ngrest\base\actions\OptionsAction';
+        }
         return $actions;
     }
     
@@ -311,7 +317,7 @@ class Api extends RestActiveController
         return [
             'content' => $ngrest->render($render),
             'icon' => $render->getActiveWindowObject()->getIcon(),
-            'alias' => $render->getActiveWindowObject()->getAlias(),
+            'label' => $render->getActiveWindowObject()->getLabel(),
             'requestDate' => time(),
         ];
     }

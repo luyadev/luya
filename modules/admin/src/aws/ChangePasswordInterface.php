@@ -20,6 +20,7 @@ namespace luya\admin\aws;
  * The changePassword method must return whether the password change was successfull or not.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface ChangePasswordInterface
 {

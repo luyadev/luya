@@ -9,6 +9,7 @@ use luya\helpers\Html;
  * Create a text input select for a given field.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Text extends Plugin
 {

@@ -11,6 +11,7 @@ use luya\admin\models\User;
  * User API, provides ability to manager and list all administration users.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class UserController extends Api
 {

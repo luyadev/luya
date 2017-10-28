@@ -31,8 +31,8 @@ use yii\helpers\Json;
  * @property integer $sort_index
  * @property integer $is_hidden
  *
- * @todo remove scenarios?
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItemPageBlockItem extends \yii\db\ActiveRecord
 {

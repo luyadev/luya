@@ -7,6 +7,10 @@ use yii\base\Object;
 use yii\helpers\Json;
 use luya\helpers\Url;
 use luya\helpers\ArrayHelper;
+use luya\web\jsonld\Person;
+use luya\Exception;
+use luya\web\jsonld\BaseThing;
+use luya\web\jsonld\Event;
 
 /**
  * Registerin Microdata as JsonLD.
@@ -42,21 +46,27 @@ class JsonLd extends Object
     }
     
     /**
-     * Register a Person.
-     *
-     * @param string $firstname
-     * @param string $lastname
-     * @param string $jobTitle
+     * Register new Event.
+     * 
+     * @param array $config
+     * 
+     * @return \luya\web\jsonld\Event
      */
-    public static function person($firstname, $lastname, $jobTitle = null)
+    public static function event(array $config = [])
     {
-        self::addGraph([
-            "@context" => "http://schema.org",
-            "name" => $firstname . ' ' . $lastname,
-            "givenName" => $firstname,
-            "familyName" => $lastname,
-            "jobTitle" => $jobTitle
-        ]);
+        return self::addGraph((new Event($config)));
+    }
+    
+    /**
+     * Register new Person.
+     * 
+     * @param array $config Optional config array to provided person data via setter methods.
+     * 
+     * @return \luya\web\jsonld\Person
+     */
+    public static function person(array $config = [])
+    {
+        return self::addGraph((new Person($config)));
     }
     
     /**
@@ -91,27 +101,41 @@ class JsonLd extends Object
     }
     
     /**
-     * Register an json array to the view.
-     *
-     * If an array value is null, it will be filtered and removed.
-     *
-     * @param array $json The json tag. If values with null available, the element will be removed.
+     * Register graph data.
+     * 
+     * @param \luya\web\jsonld\BaseThing|array $data Can be either an array or an object based on {{luya\web\jsonld\BaseThing}} which contains the Arrayable Inteface.
+     * @return 
      */
-    public static function addGraph(array $json)
+    public static function addGraph($data)
     {
         self::registerView();
         
-        foreach ($json as $key => $value) {
-            if ($value === null) {
-                unset($json[$key]);
-            }
+        if (is_scalar($data)) {
+            throw new Exception("data must be either an array or an object of type luya\web\jsonld\BaseThing.");
         }
-        Yii::$app->view->params['@graph'][] = $json;
+        
+        Yii::$app->view->params['@graph'][] = $data;
+        
+        return $data;
+    }
+    
+    /**
+     * Reset the JsonLd Data.
+     * 
+     * This method is mainly usefull when working with unit tests for JsonLd.
+     */
+    public static function reset()
+    {
+        self::$_view = null;
+        Yii::$app->view->params['@graph'] = [];
     }
     
     private static $_view;
     
-    private static function registerView()
+    /**
+     * Register the view file an observe the event which then reads the data from @graph params key.
+     */
+    protected static function registerView()
     {
         if (self::$_view === null) {
             Yii::$app->view->on(View::EVENT_BEGIN_BODY, function ($event) {

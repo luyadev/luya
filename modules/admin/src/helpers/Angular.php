@@ -15,7 +15,7 @@ use luya\admin\base\TypesInterface;
  * allows you the quickly generate a Html Tag for directives.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta8
+ * @since 1.0.0
  */
 class Angular
 {
@@ -63,7 +63,7 @@ class Angular
      */
     public static function optionsArrayInput(array $data)
     {
-        $data = [];
+        $output = [];
         
         foreach ($data as $value => $label) {
             if (is_array($label)) {
@@ -71,13 +71,13 @@ class Angular
                     throw new InvalidConfigException("The options array data for the given element must contain a label and value key.");
                 }
                 
-                $data[] = $label;
+                $output[] = $label;
             } else {
-                $data[] = ['label' => $label, 'value' => $value];
+                $output[] = ['label' => $label, 'value' => $value];
             }
         }
         
-        return $data;
+        return $output;
     }
 
     /**
@@ -183,7 +183,7 @@ class Angular
     /**
      * Select directive
      *
-     * ```
+     * ```php
      * return AngularInput::zaaSelect($ngModel, $this->alias, [['value' => 123, 'label' => 123123]]);
      * ```
      *
@@ -199,14 +199,17 @@ class Angular
     }
     
     /**
+     * Radio Input.
      *
-     * @param unknown $ngModel
-     * @param unknown $label
-     * @param array $data
-     * @param array $options
+     * Generate a list of radios where you can select only one element.
+     *
+     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $label The label to display for the form input.
+     * @param array $data An array with data where the array key is what is stored in the model e.g. `[1 => 'Mrs', 2 => 'Mr']`
+     * @param array $options Additonal arguments to create the tag.
      * @return \luya\admin\helpers\string:
      */
-    public static function radios($ngModel, $label, array $data, array $options = [])
+    public static function radio($ngModel, $label, array $data, array $options = [])
     {
         return self::injector(TypesInterface::TYPE_RADIO, $ngModel, $label, self::optionsArrayInput($data), $options);
     }

@@ -16,6 +16,7 @@ use luya\admin\models\UserLogin;
  * it does only return 1 assoc array wich reperents the default row.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CommonController extends RestController
 {

@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+use luya\admin\helpers\Angular;
 
 ?>
 <modal is-modal-hidden="settingsOverlayVisibility" modal-title="{{item.title}} <?= Module::t('cmsadmin_settings_modal_title'); ?>">
@@ -9,14 +10,14 @@ use luya\cms\admin\Module;
             <li class="nav-item">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(1)" ng-class="{'active':tab==1}"><i class="material-icons">title</i><span><?= Module::t('cmsadmin_item_settings_titleslug'); ?></a>
             </li>
-            <li class="nav-item" ng-show="!isDraft">
+            <li class="nav-item" ng-show="!isDraft && item.nav_item_type == 1">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(3)" ng-class="{'active':tab==3}"><i class="material-icons">change_history</i><span><?= Module::t('version_create_title'); ?></span></a>
             </li>
-            <li class="nav-item" ng-show="!isDraft">
+            <li class="nav-item" ng-show="!isDraft && item.nav_item_type == 1">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(2)" ng-class="{'active':tab==2}"><i class="material-icons">track_changes</i><span><?= Module::t('versions_selector'); ?></span></a>
             </li>
-            <li ng-show="!isDraft"><hr /></li>
-            <li ng-show="!isDraft" ng-repeat="(key, versionItem) in typeData">
+            <li ng-show="!isDraft && item.nav_item_type == 1"><hr /></li>
+            <li ng-show="!isDraft && item.nav_item_type == 1" ng-repeat="(key, versionItem) in typeData">
                 <a class="nav-link" ng-class="{'active' : editVersionItem.id == versionItem.id && tab == 4}" ng-click="editVersion(versionItem)"><span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=versionItem.id, 'badge-primary': item.nav_item_type_id==versionItem.id}">V{{$index+1}}</span> {{versionItem.version_alias}}</a>
             </li>
         </ul>
@@ -30,6 +31,11 @@ use luya\cms\admin\Module;
                 <zaa-text model="itemCopy.title_tag" label="<?= Module::t('model_navitem_title_tag_label'); ?>" />
                 <zaa-textarea model="itemCopy.description" label="<?= Module::t('view_index_page_meta_description'); ?>" />
                 <zaa-textarea model="itemCopy.keywords" label="<?= Module::t('view_index_page_meta_keywords'); ?>" />
+                <?= Angular::radio('itemCopy.nav_item_type', Module::t('view_index_add_type'), [
+                    1 => Module::t('view_index_type_page'),
+                    2 => Module::t('view_index_type_module'),
+                    3 => Module::t('view_index_type_redirect'),
+                ]); ?>
                 <div ng-switch-when="1">
                     <update-form-page data="typeDataCopy"></update-form-page>
                 </div>
@@ -64,7 +70,7 @@ use luya\cms\admin\Module;
             </div>
         </div>
         <div ng-switch-when="4">
-            <h1><?= Module::t('version_edit_title'); ?> <span class="badge badge-secondary">{{editVersionItem.version_alias}}</span></h1>
+            <h1><?= Module::t('version_edit_title'); ?> <span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=editVersionItem.id, 'badge-primary': item.nav_item_type_id==editVersionItem.id}">{{editVersionItem.version_alias}}</span></h1>
             <h2></h2>
             <zaa-text model="editVersionItem.version_alias" label="<?= Module::t('version_input_name'); ?>" />
             <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name" />

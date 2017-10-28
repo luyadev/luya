@@ -25,6 +25,7 @@ use yii\web\BadRequestHttpException;
  * The storage controller is used to make the luya angular file manager work with the {{luya\admin\components\StorageContainer}}.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class StorageController extends RestController
 {

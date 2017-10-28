@@ -7,6 +7,9 @@ use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Storage Effect Active Window.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageFilterImagesActiveWindow extends ActiveWindow
 {
@@ -14,16 +17,6 @@ final class StorageFilterImagesActiveWindow extends ActiveWindow
      * @var string The name of the module where the ActiveWindow is located in order to finde the view path.
      */
     public $module = '@admin';
-    
-    /**
-     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
-     */
-    public $alias = 'Images';
-    
-    /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'filter_vintage';
     
     /**
      * The default action which is going to be requested when clicking the ActiveWindow.
@@ -38,6 +31,26 @@ final class StorageFilterImagesActiveWindow extends ActiveWindow
         ]);
     }
     
+    /**
+     * @inheritdoc
+     */
+    public function defaultLabel()
+    {
+        return 'Images';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'filter_vintage';
+    }
+    
+    /**
+     * 
+     * @return array
+     */
     public function callbackRemove()
     {
         $this->model->removeImageSources();

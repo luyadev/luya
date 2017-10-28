@@ -94,6 +94,7 @@ use luya\admin\filters\MediumThumbnail;
  * @property array $filtersArray An array with all filters
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class StorageContainer extends Component
 {
@@ -155,7 +156,7 @@ class StorageContainer extends Component
     private $_filterCacheKey = 'storage_filterCacheKey';
     
     /**
-     * @var boolean When enabled the storage component will try to recreated missing images when `getSource()` of an
+     * @var boolean When enabled the storage component will try to recreated missing images when {{luya\admin\image\Item::getHttpSource()}} of an
      * image is called but the `getFileExists()` does return false, which means that the source file has been deleted.
      * So in those cases the storage component will automatiaccly try to recreated this image based on the filterId and
      * fileId.
@@ -845,7 +846,7 @@ class StorageContainer extends Component
         
         foreach ($this->findImages() as $image) {
             if (!empty($image->file) && !$image->file->isHidden && !$image->file->isDeleted) {
-                $image->source; // which forces to recreate missing sources.
+                $image->httpSource; // which forces to recreate missing sources.
             }
         }
         

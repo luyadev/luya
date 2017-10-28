@@ -1,8 +1,8 @@
 # NgRest Model
 
-The `NgRest` crud model class is the based class for the api, based on this Active Record class the find, update and created validation rules will be perfomed. The main different to the Yii2 Restful implementation is the to use {{luya\admin\ngrest\base\NgRestModel}} as base class. So the ngrest crud model provides additianl informations to what fields you want to edit, create or list in your crud view.
+The {{luya\admin\ngrest\base\NgRestModel}} is the base class for the api. Its implementing the {{yii\db\ActiveRecord}} class in order to find, update, create and delete database table data.
 
-> You should read the [Admin NgRest Crud Concept](ngrest-concept.md) in order to understand what the NgRest Model is all about.
+> You should read the [[ngrest-concept.md]] in order to understand what the NgRest Model is all about.
 
 ## Where do i configure?
 
@@ -34,15 +34,15 @@ A defintion contains always the attribute (as key) and the ngrest plugin config,
 
 #### Scope and ngRestConfig
 
-There are 4 specific Scope you can use to configure. A pointer as like a section of your config:
+There are different scope pointers you can configure, in order to tell your forms and list what fields should be displayed.
 
 |Scope Name   |Description
 |---       |---
-|list      |List the data rows of the Table (like a data table)
-|create    |The form to create a new data record.
-|update    |Update form to update the value of an existing data record.
-|delete    |Define whether items of the data table can be deleted or not. To activate deletion us `$config->delete = true`.
-|aw        |[ActiveWindows](ngrest-activewindow.md) Register/add active windows, to this config. Active windows are like buttons you can add to each item record.
+|list      |List all table rows with the given columns.
+|create    |Formular to create a new record with the given columns.
+|update    |Formular to update an existing record with the given columns.
+|delete    |Define whether items of the data table can be deleted or not. To activate deletion set this pointer to `true`.
+|aw        |Attach an [[ngrest-activewindow.md]] to each row in the list overview, like a button next to edit button.
 
 As you know what section/Scope you can define with your already defined attributes you have to define the {{luya\admin\ngrest\base\NgRestModel::ngRestConfig()}} method, this could look as followed:
 
@@ -71,7 +71,7 @@ public function ngRestScopes()
 }
 ``` 
 
-This will trigger the  [Yii AR delete methode](http://www.yiiframework.com/doc-2.0/yii-db-activerecord.html#delete()-detail) and removes the item irrevocable, you can override the `delete()` method to change the behavior of a deletion.
+This will trigger the {{luya\admin\ngrest\base\NgRestModel::delete()} method and will irrevocable remove the given record, you can override the {{luya\admin\ngrest\base\NgRestModel::delete()} method to change the behavior of a deletion or using {{luya\admin\traits\SoftDeleteTrait}}.
 
 ## Multlingual / i18n Fields
 

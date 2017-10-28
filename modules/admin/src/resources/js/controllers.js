@@ -201,7 +201,7 @@
 				$scope.data.aw.configHash = $scope.config.ngrestConfigHash;
 				$scope.data.aw.hash = activeWindowId;
 				$scope.data.aw.content = $sce.trustAsHtml(response.data.content);
-				$scope.data.aw.title = response.data.alias;
+				$scope.data.aw.title = response.data.label;
 				$scope.$broadcast('awloaded', {id: activeWindowId});
 			})
 		};
@@ -676,37 +676,55 @@
 	 *
 	 * Changes content when parent crud controller changes value for active aw.itemId.
 	 */
-	zaa.controller("ActiveWindowGalleryController", function($scope, $http) {
+	zaa.controller("ActiveWindowGalleryController", function($scope, $http, $filter) {
 
-		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
+		$scope.crud = $scope.$parent;
 
-		$scope.files = {};
-
-		$scope.isEmptyObject = function(files) {
-			return angular.equals({}, files);
-		};
+		$scope.files = [];
 
 		$scope.select = function(id) {
-			if (!(id in $scope.files)) {
+			var exists = $filter('filter')($scope.files, {'fileId' : id}, true);
+			
+			if (exists.length == 0) {
 				$scope.crud.sendActiveWindowCallback('AddImageToIndex', {'fileId' : id }).then(function(response) {
 					var data = response.data;
-					$scope.files[data.fileId] = data;
+					$scope.files.push(data);
 				});
 			}
 		};
 
 		$scope.loadImages = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('loadAllImages')).then(function(response) {
-				$scope.files = {}
-				response.data.forEach(function(value, key) {
-					$scope.files[value.fileId] = value;
-				});
+				$scope.files = response.data;
 			})
 		};
+		
+		$scope.changePosition = function(file, index, direction) {
+			var index = parseInt(index);
+			var oldRow = $scope.files[index];
+			if (direction == 'up') {
+                $scope.files[index] = $scope.files[index-1];
+                $scope.files[index-1] = oldRow;
+			} else if (direction == 'down') {
+                $scope.files[index] = $scope.files[index+1];
+                $scope.files[index+1] = oldRow;
+			}
+			var newRow = $scope.files[index];
+			
+			$scope.crud.sendActiveWindowCallback('ChangeSortIndex', {'new': newRow, 'old': oldRow});
+		};
+		
+		$scope.moveUp = function(file, index) {
+			$scope.changePosition(file, index, 'up');
+		};
+		
+		$scope.moveDown = function(file, index) {
+			$scope.changePosition(file, index, 'down');
+		}
 
-		$scope.remove = function(file) {
-			$scope.crud.sendActiveWindowCallback('RemoveFromIndex', {'imageId' : file.id }).then(function(response) {
-				delete $scope.files[file.fileId];
+		$scope.remove = function(file, index) {
+			$scope.crud.sendActiveWindowCallback('RemoveFromIndex', {'imageId' : file.originalImageId }).then(function(response) {
+				$scope.files.splice(index, 1);
 			});
 		};
 
@@ -906,14 +924,14 @@
 
 		$scope.browser = null;
 
-		$scope.detectBroswer = function() {
+		$scope.detectBrowser = function() {
             $scope.browser = [
                 bowser.name.replace(' ', '-').toLowerCase() + '-' + bowser.version,
                 (bowser.mac ? 'mac-os-' + (bowser.osversion ? bowser.osversion : '') : 'windows-' + (bowser.osversion ? bowser.osversion : ''))
             ].join(' ');
 		};
 
-		$scope.detectBroswer();
+		$scope.detectBrowser();
 
 		$scope.getProfileAndSettings();
 

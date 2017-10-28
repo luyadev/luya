@@ -8,6 +8,7 @@ use Yii;
  * Block Api delivers all availables CMS Blocks.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class BlockController extends \luya\admin\ngrest\base\Api
 {

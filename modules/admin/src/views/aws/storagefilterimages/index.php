@@ -29,9 +29,9 @@ use luya\admin\ngrest\aw\CallbackButtonWidget;
         <?php foreach ($images as $image): /* @var $image \luya\admin\image\Item */?>
             <tr>
                 <th>
-                    <img style="max-width: 200px;" src="<?= $image->source; ?>" alt="" class="responsive-img">
+                    <img style="max-width: 200px;" src="<?= $image->httpSource; ?>" alt="" class="responsive-img">
                 </th>
-                <td><a target="_blank" href="<?= $image->source; ?>"><?= $image->source; ?></a></td>
+                <td><a target="_blank" href="<?= $image->httpSource; ?>"><?= $image->httpSource; ?></a></td>
                 <td><?= $image->caption; ?></td>
             </tr>
         <?php endforeach; ?>

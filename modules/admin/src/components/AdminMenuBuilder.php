@@ -32,7 +32,7 @@ use luya\base\AdminModuleInterface;
  * }
  * ```
  *
- * @since 1.0.0-RC2
+ * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
 class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface

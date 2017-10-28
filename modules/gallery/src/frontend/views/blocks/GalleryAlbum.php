@@ -11,7 +11,7 @@ use luya\admin\filters\MediumThumbnail;
     <?php if ($album->cover_image_id): ?>
     <p>
         <a href="<?= $album->getDetailUrl($this->cfgValue('nav_item_id')); ?>">
-            <img class="img-responsive img-rounded" src="<?= Yii::$app->storage->getImage($album->cover_image_id)->applyFilter(MediumThumbnail::identifier())->source; ?>" border="0" />
+            <img class="img-responsive img-rounded" src="<?= Yii::$app->storage->getImage($album->cover_image_id)->applyFilter(MediumThumbnail::identifier())->httpSource; ?>" border="0" />
         </a>
     <?php endif; ?>
 <?php endif; ?>

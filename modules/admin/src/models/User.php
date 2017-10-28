@@ -31,6 +31,7 @@ use luya\admin\aws\ChangePasswordActiveWindow;
  * @property \luya\admin\models\UserSetting $setting Setting object to store data.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class User extends NgRestModel implements IdentityInterface, ChangePasswordInterface
 {

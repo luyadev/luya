@@ -3,9 +3,10 @@
 namespace luya\cms\helpers;
 
 use Yii;
-use luya\web\ExternalLink;
+use luya\web\WebsiteLink;
 use luya\TagParser;
 use luya\admin\helpers\Angular;
+use luya\web\EmailLink;
 
 /**
  * Helper methods for CMS Blocks.
@@ -260,12 +261,30 @@ class BlockHelper
     public static function linkObject($config)
     {
         if (!empty($config) && isset($config['type']) && isset($config['value'])) {
+            // get the target config value from the object.
+            $target = isset($config['target']) ? $config['target'] : null;
+            
             switch ($config['type']) {
-                case 1:
-                    return Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();
+                case 1: // cms page link
+                    $link =  Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();
+                    // if a page is found, set the target value from the config.
+                    if ($link) {
+                        $link->setTarget($target);
+                    }
+                    return $link;
                     break;
-                case 2:
-                    return new ExternalLink(['href' => $config['value']]);
+                case 2: // website link
+                    return new WebsiteLink(['href' => $config['value'], 'target' => $target]);
+                    break;
+                case 3: // file link
+                    $file = Yii::$app->storage->getFile($config['value']);
+                    if ($file) {
+                        $file->setTarget($target);
+                    }
+                    return $file;
+                    break;
+                case 4: // email link
+                    return new EmailLink(['email' => $config['value']]);
                     break;
             }
         }

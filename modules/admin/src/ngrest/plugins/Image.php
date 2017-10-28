@@ -35,6 +35,7 @@ use luya\admin\ngrest\base\Plugin;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Image extends Plugin
 {

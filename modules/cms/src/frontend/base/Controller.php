@@ -16,6 +16,7 @@ use luya\helpers\StringHelper;
  * Abstract Controller for CMS Controllers.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Controller extends \luya\web\Controller
 {

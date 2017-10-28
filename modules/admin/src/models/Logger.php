@@ -67,6 +67,9 @@ use luya\admin\aws\DetailViewActiveWindow;
  * @property string $server
  * @property string $group_identifier If provided the group_identifier is used to group multiple logging informations into one trace in order to see what messages should be display togher (trace behavior).
  * @property integer $group_identifier_index
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Logger extends NgRestModel
 {

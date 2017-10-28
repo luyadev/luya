@@ -6,7 +6,7 @@ use luya\cms\admin\Module;
     <div ng-if="!pageSettingsOverlayHidden" class="row">
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column">
-                <li class="nav-item" ng-if="propertiesData.length > 0">
+                <li class="nav-item" ng-show="propertiesData.length > 0">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><i class="material-icons">settings</i><span><?= Module::t('view_update_properties_title'); ?></span></a>
                 </li>
                 <li class="nav-item">

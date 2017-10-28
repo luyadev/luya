@@ -11,9 +11,12 @@ use yii\helpers\Inflector;
 use yii\helpers\Json;
 
 /**
+ * CMS Layouts Importer.
+ *
  * Import cmslayout files from the folder and analyise placeholders.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CmslayoutImporter extends Importer
 {

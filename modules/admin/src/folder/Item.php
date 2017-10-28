@@ -12,7 +12,9 @@ use luya\admin\storage\ItemAbstract;
  * @property string $name The name of the Folder.
  * @property integer $parentId The id of the parent folder.
  * @property integer filesCount The number of files inside the folder.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Item extends ItemAbstract
 {

@@ -39,6 +39,7 @@ use yii\db\ActiveQuery;
  * @property string $valueField The field name which should represent the value of the data array. This value will be stored in the database and is mostly the primary key of the $modelClass Model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class SelectModel extends Select
 {

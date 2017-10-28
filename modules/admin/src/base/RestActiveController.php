@@ -11,19 +11,31 @@ use yii\web\ForbiddenHttpException;
 use luya\rest\ActiveController;
 
 /**
+ * Base class for Rest Active Controllers.
+ * 
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
  * change behaviours and overwrite the indexAction.
  *
- * usage like described in the yii2 guide.
- *
- *
- *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RestActiveController extends ActiveController implements UserBehaviorInterface
 {
     use RestBehaviorsTrait;
 
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+    	parent::init();
+    
+    	$this->enableCors = Yii::$app->auth->cors;
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function userAuthClass()
     {
         return Yii::$app->adminuser;

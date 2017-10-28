@@ -12,7 +12,7 @@ use yii\helpers\Html;
 			<a class="text-teaser" href="<?= $this->extraValue('link')->href; ?>" target="<?= $this->extraValue('link')->target; ?>">
 		<?php endif; ?>
 		<?= Html::tag('img', '', [
-            'src' => $this->extraValue('image')['source'],
+            'src' => $this->extraValue('image')['httpSource'],
             'alt' => $this->varValue('caption', ''),
             'title' => $this->varValue('caption', null),
             'width' => $this->cfgValue('width', null),

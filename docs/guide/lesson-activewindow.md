@@ -23,7 +23,7 @@ As stated in the [ActiveWindow Documentation]() we'll have to add the button for
 public function ngRestActiveWindows()
 {
     return [
-        ['class' => \app\modules\addressbook\admin\aws\GroupEmailActiveWindow::className(), 'alias' => 'Email to group', 'icon' => 'email'],
+        ['class' => \app\modules\addressbook\admin\aws\GroupEmailActiveWindow::className(), 'label' => 'Email to group', 'icon' => 'email'],
     ];
 }
 ```
@@ -77,10 +77,6 @@ use app\modules\addressbook\models;
 class GroupEmailActiveWindow extends ActiveWindow
 {
     public $module = '@addressbookadmin';
-    
-    public $alias = 'Group Email Active Window';
-    
-    public $icon = 'extension';
     
     public function index()
     {

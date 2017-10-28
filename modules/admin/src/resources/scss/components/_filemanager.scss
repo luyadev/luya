@@ -69,31 +69,6 @@
         }
     }
 
-    .table-sorter-wrapper {
-        position: absolute;
-        left: -3px;
-        top:0;
-        height: 100%;
-
-    }
-
-    .table-sorter {
-        display: block;
-        position: relative;
-        width: 5px;
-        height: 0;
-        padding-top: 6px;
-
-        &-down {
-            padding-top: auto;
-            padding-bottom: 6px;
-
-        }
-        i {
-            visibility: visible;
-        }
-    }
-
     @media (min-width: $mobile-nav-breakpoint) {
 
         padding-left: $content-padding-x;

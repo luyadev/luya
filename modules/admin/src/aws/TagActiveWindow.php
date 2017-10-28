@@ -38,7 +38,9 @@ use luya\admin\ngrest\base\ActiveWindow;
  * ```
  *
  * @property string $tableName Define a table name if not automaticaly alocated from model.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class TagActiveWindow extends ActiveWindow
 {
@@ -46,29 +48,28 @@ class TagActiveWindow extends ActiveWindow
      * @var string The name of the module where the active windows is located in order to finde the view path.
      */
     public $module = 'admin';
-
-    /**
-     * @inheritdoc
-     */
-    public $alias = 'Tags';
     
-    /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = "view_list";
-
     private $_tableName;
     
+    /**
+     * Getter tableName.
+     * 
+     * @return unknown|string
+     */
     public function getTableName()
     {
         if ($this->_tableName === null) {
             $this->_tableName = $this->model->tableName();
-            ;
         }
         
         return $this->_tableName;
     }
     
+    /**
+     * Setter tableName.
+     * 
+     * @param unknown $tableName
+     */
     public function setTableName($tableName)
     {
         $this->_tableName = $tableName;
@@ -82,6 +83,22 @@ class TagActiveWindow extends ActiveWindow
     public function index()
     {
         return $this->render('index');
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultLabel()
+    {
+        return 'Tags';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'view_list';
     }
 
     public function callbackLoadTags()

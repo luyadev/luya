@@ -1,4 +1,4 @@
-var zaa = angular.module("zaa", ["ui.router", "dnd", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier", "flow", "angular.filter", "720kb.datepicker", "directive.ngColorwheel"]);
+var zaa = angular.module("zaa", ["ui.router", "dnd", "angular-loading-bar", "ngFileUpload", "ngWig", "flow", "angular.filter", "720kb.datepicker", "directive.ngColorwheel"]);
 
 /**
  * guid creator

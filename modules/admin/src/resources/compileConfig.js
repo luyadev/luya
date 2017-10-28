@@ -69,7 +69,6 @@ module.exports = {
             "dist/js/main.js": [
                 "../../vendor/bower-asset/angular/angular.min.js",
                 "../../vendor/bower-asset/angular-loading-bar/build/loading-bar.min.js",
-                "../../vendor/bower-asset/angular-slugify/angular-slugify.js",
                 "../../vendor/bower-asset/angularjs-datepicker/dist/angular-datepicker.min.js",
                 "../../vendor/bower-asset/ui-router/release/angular-ui-router.min.js",
                 "../../vendor/bower-asset/ng-file-upload/ng-file-upload-shim.min.js",

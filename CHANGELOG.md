@@ -8,12 +8,20 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1559](https://github.com/luyadev/luya/issues/1569) Renamed luya\admin\image\Item::getSource() to getHttpSource() this will affect also the getter properties.
+- [#1564](https://github.com/luyadev/luya/issues/1564) Refactoring of gallery module, removed old unused methods, switch to ActiveQuery relation usage.
 - [#1522](https://github.com/luyadev/luya/issues/1522) Text and Textarea NgRest plugins auto encode input data after find.
 - [#1505](https://github.com/luyadev/luya/issues/1505) Minor API Breaks and removed deprecated methods.
 - [#1341](https://github.com/luyadev/luya/issues/1341) Changed signature of `changePassword($newPassword)` in `luya\admin\aws\ChangePasswordInterface`.
+- [#1574](https://github.com/luyadev/luya/issues/1574) Changed Active Window $alias property to $label. Use defaultLabel() in order to set a default label.
+- [#1567](https://github.com/luyadev/luya/issues/1567) Discontinue development of Exporter Module.
 
 ### Added
 
+- [#1467](https://github.com/luyadev/luya/issues/1467) Main nav context menu for logout and account preferences.
+- [#1557](https://github.com/luyadev/luya/issues/1557) Allow unicode chars for cms page aliases and slugify directives.
+- [#1534](https://github.com/luyadev/luya/issues/1534) Link ability for files and e-mail addresses.
+- [#1540](https://github.com/luyadev/luya/issues/1540) CMS Log Dashboard.
 - [#1304](https://github.com/luyadev/luya/issues/1304) Crud indicates the total amount of rows with pagination enabled or disabled.
 - [#1521](https://github.com/luyadev/luya/issues/1521) Bind session token to current IP in order to prevent session hijacking.
 - [#1511](https://github.com/luyadev/luya/issues/1511) Added page id information in cms menu tree on hover (alt,title).
@@ -27,6 +35,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1549](https://github.com/luyadev/luya/issues/1549) Hide version informations for other page types then page content.
+- [#1550](https://github.com/luyadev/luya/issues/1550) Readded option to change the page type in CMS Module.
 - [#1480](https://github.com/luyadev/luya/issues/1480) Dropdown select overlay z-index fixed by closing all other selects. 
 - [#1519](https://github.com/luyadev/luya/issues/1519) Multiple inputs problem with empty item rows convert to object instead of array.
 - [#1535](https://github.com/luyadev/luya/issues/1535) Date and Datetime reset model buttons.

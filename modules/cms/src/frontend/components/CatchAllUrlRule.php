@@ -5,11 +5,14 @@ namespace luya\cms\frontend\components;
 use Yii;
 
 /**
+ * Catch rule for UrlManager.
+ *
  * CMS UrlRule who catches all calls in order to allow cms oversteering of not previous catched requests of other url rules.
  *
  * The CatchAllUrlRule must be the LAST UrlRule of the UrlManager.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CatchAllUrlRule extends \yii\web\UrlRule
 {

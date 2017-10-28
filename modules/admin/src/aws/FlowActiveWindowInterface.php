@@ -45,7 +45,7 @@ use luya\admin\image\Item;
  * }
  * ```
  *
- * @since 1.0.0-beta7
+ * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
 interface FlowActiveWindowInterface

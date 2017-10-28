@@ -11,6 +11,7 @@ use luya\admin\ngrest\base\Plugin;
  * to the angular model if nothing is set.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Slug extends Plugin
 {

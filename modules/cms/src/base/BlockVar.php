@@ -6,6 +6,7 @@ namespace luya\cms\base;
  * Block VAR variables ensurence.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class BlockVar extends BlockConfigElement
 {

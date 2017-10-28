@@ -7,6 +7,8 @@ use luya\helpers\Url;
 use luya\helpers\FileHelper;
 use luya\admin\helpers\I18n;
 use luya\admin\storage\ItemAbstract;
+use luya\web\LinkInterface;
+use luya\web\LinkTrait;
 
 /**
  * Storage File Item.
@@ -34,12 +36,43 @@ use luya\admin\storage\ItemAbstract;
  * @property booelan $fileExists Whether the file resource exists in the storage folder or not.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Item extends ItemAbstract
+class Item extends ItemAbstract implements LinkInterface
 {
+    use LinkTrait;
+    
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
     private $_caption;
+    
+    /**
+     * @inheritdoc
+     */
+    public function getHref()
+    {
+        return $this->sourceStatic;
+    }
+    
+    private $_target;
+    
+    /**
+     * Setter method for Link target.
+     *
+     * @param string $target The target must be a valid link target attribute value.
+     */
+    public function setTarget($target)
+    {
+        $this->_target = $target;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getTarget()
+    {
+        return empty($this->_target) ? '_blank' : $this->_target;
+    }
     
     /**
      * Set caption for file item, override existings values
@@ -253,7 +286,22 @@ class Item extends ItemAbstract
     }
     
     /**
-     * Get the realtive url to the source of the file.
+     * Get the absolute source path to the file location on the webserver.
+     *
+     * This will return raw the path to the storage file inside the sotorage folder without readable urls.
+     *
+     * @param boolean $scheme Whether the source path should be absolute or not.
+     * @return string The raw path to the file inside the storage folder.
+     */
+    public function getHttpSource($scheme = false)
+    {
+        $httpPath = $scheme ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
+        
+        return $httpPath . '/' . $this->getKey('name_new_compound');
+    }
+    
+    /**
+     * Get the file trough url to the source of the file.
      *
      * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For
      * example you may want users to see the file (assuming its a PDF).
@@ -296,18 +344,6 @@ class Item extends ItemAbstract
     public function getSourceStatic()
     {
         return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()], true);
-    }
-    
-    /**
-     * Get the source path without beautiful urls.
-     *
-     * This will return raw the path to the storage file inside the sotorage folder without readable urls.
-     *
-     * @return string The raw path to the file inside the storage folder.
-     */
-    public function getHttpSource()
-    {
-        return Yii::$app->storage->httpPath . '/' . $this->getKey('name_new_compound');
     }
     
     /**

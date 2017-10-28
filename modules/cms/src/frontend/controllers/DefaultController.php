@@ -12,6 +12,7 @@ use luya\cms\frontend\base\Controller;
  * CMS Default Rendering
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class DefaultController extends Controller
 {

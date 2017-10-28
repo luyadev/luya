@@ -250,9 +250,17 @@ return [
     'menu_dashboard' => 'Dashboard',
     'js_link_not_set' => 'No Link selected',
         
-    // 1.0.0
+// 1.0.0
         
-        'ngrest_button_delete' => 'Delete',
-        'js_dir_manager_rm_file_confirm_title' => 'Remove file',
-        'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
+    'ngrest_button_delete' => 'Delete',
+    'js_dir_manager_rm_file_confirm_title' => 'Remove file',
+    'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
+    'link_dir_target' => 'Link target',
+    'link_dir_target_same' => 'Same window',
+    'link_dir_target_blank' => 'New window',
+    'view_index_redirect_file' => 'file',
+    'view_index_redirect_mail' => 'e-mail address',
+    'view_index_redirect_mail_help' => 'Please enter a valid e-mail address.',
+    'menu_button_search' => 'Search',
+    'layout_btn_user_settings' => 'Preferences',
 ];

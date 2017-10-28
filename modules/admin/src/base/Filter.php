@@ -13,6 +13,7 @@ use yii\base\Object;
  * Base class for all storage component filters.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Filter extends Object implements FilterInterface
 {

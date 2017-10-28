@@ -5,9 +5,10 @@ namespace luya\cms\admin\controllers;
 use luya\admin\base\Controller;
 
 /**
- * Controller for Angular Permissions
+ * Permission Controller.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class PermissionController extends Controller
 {

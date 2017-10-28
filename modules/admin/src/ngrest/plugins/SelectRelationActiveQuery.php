@@ -21,6 +21,7 @@ use yii\helpers\Json;
  * @property yii\db\ActiveQuery $query The query with the relation.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class SelectRelationActiveQuery extends Plugin
 {
