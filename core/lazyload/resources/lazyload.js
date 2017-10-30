@@ -25,8 +25,11 @@
             if ($image.length <= 0)
                 return false;
 
-            var docViewTop = $(window).scrollTop() - 200 - settings.threshold;
-            var docViewBottom = (docViewTop + $(window).height()) + 200 + settings.threshold;
+            var windowTop = $(window).scrollTop();
+            var windowHeight = $(window).height();
+
+            var docViewTop = windowTop - 200 - settings.threshold;
+            var docViewBottom = (windowTop + windowHeight) + 200 + settings.threshold;
             var elemTop = $image.offset().top;
             var elemBottom = elemTop + $image.outerHeight();
 
