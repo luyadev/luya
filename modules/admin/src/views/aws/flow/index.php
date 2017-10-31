@@ -58,7 +58,7 @@ zaa.bootstrap.register('FlowController', function($scope, $rootScope, $controlle
             <div class="row">
                 <div class="col-md-1" ng-repeat="(imageId, file) in list">
                     <button type="button" class="btn btn-outline-danger btn-sm" ng-click="removeItem(imageId)" style="position:absolute;"><i class="material-icons">delete</i></button>
-                    <img class="img-fluid img-thumbnail" ng-src="{{file.source}}" alt="{{file.source}}" />
+                    <img class="img-fluid img-thumbnail" ng-src="{{file.httpSource}}" alt="{{file.httpSource}}" />
                 </div>
             </div>
        </div>

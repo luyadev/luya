@@ -137,8 +137,8 @@ final class ImageTextBlock extends PhpBlock
                 '{% if not extras.text %}'.
                     '<span class="block__empty-text">' . Module::t('block_image_text_no_text') . '</span>'.
                 '{% endif %}'.
-                '{% if extras.image.source and extras.text %}'.
-                    '<img src="{{ extras.image.source }}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="{% if vars.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if vars.imagePosition == "right" %}margin-left:{{ cfgs.margin }}{% else %}margin-right:{{ cfgs.margin }}{% endif %};margin-bottom:{{ cfgs.margin }}; max-width: 50%;"">'.
+                '{% if extras.image.httpSource and extras.text %}'.
+                    '<img src="{{ extras.image.httpSource }}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="{% if vars.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if vars.imagePosition == "right" %}margin-left:{{ cfgs.margin }}{% else %}margin-right:{{ cfgs.margin }}{% endif %};margin-bottom:{{ cfgs.margin }}; max-width: 50%;"">'.
                     '{{ extras.text }}'.
                 '{% endif %}';
     }

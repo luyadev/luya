@@ -14,7 +14,7 @@ use luya\admin\Module;
             <div class="row">
                 <div class="col-sm-3" ng-repeat="(key, file) in files track by key">
                   <div class="card mb-3">
-                        <img class="card-img-top" ng-src="{{file.source}}" />
+                        <img class="card-img-top" ng-src="{{file.httpSource}}" />
                         <div class="card-block p-1">
                             <p class="card-text">
                                 <small class="text-muted">
