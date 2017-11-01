@@ -40,14 +40,12 @@ $icon-line-height: $icon-font-size + 5px;
     .folders-items {
         padding-left: 3px;
     }
-
     .is-movable {
         .folders-label {
             background-color: map-get($grays, 300);
         }
-
         .folders-actions-right {
-            display: block !important;
+            display: block;
         }
     }
 }
@@ -75,7 +73,6 @@ $icon-line-height: $icon-font-size + 5px;
     &:hover {
         color: theme-color(primary);
     }
-
     order: -2;
 }
 
@@ -103,6 +100,10 @@ $icon-line-height: $icon-font-size + 5px;
     .folders-item-main > & > span {
         display: inline-block;
         vertical-align: middle;
+    }
+
+    .is-moveable & {
+        display: block;
     }
 }
 
@@ -142,11 +143,9 @@ $icon-line-height: $icon-font-size + 5px;
     &-delete:hover {
         color: theme-color(danger);
     }
-
     /*&-edit:hover {
         color: theme-color(success);
     }*/
-
     &:hover {
 
         .folders-label {
@@ -175,10 +174,8 @@ $icon-line-height: $icon-font-size + 5px;
     padding-left: 2px;
     padding-right: 2px;
     right: 0;
-
     transition: opacity .2s ease-in-out;
 
-    &.is-visible,
     &:hover {
         display: block;
     }
