@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1545](https://github.com/luyadev/luya/issues/1545) Adjust position of page version dropdown content on admin edit section. 
 - [#1549](https://github.com/luyadev/luya/issues/1549) Hide version informations for other page types then page content.
 - [#1550](https://github.com/luyadev/luya/issues/1550) Readded option to change the page type in CMS Module.
 - [#1480](https://github.com/luyadev/luya/issues/1480) Dropdown select overlay z-index fixed by closing all other selects. 
