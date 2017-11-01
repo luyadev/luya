@@ -23,7 +23,7 @@ When dealing with Controller, Action and other PHP names use single quotes \`MyC
 
 ### Wording
 
-This represents a guidline how words and proper nouns should been written in the documentation.
+This represents a guideline how words and proper nouns should been written in the documentation.
 
 + LUYA
 + Composer
@@ -34,6 +34,8 @@ This represents a guidline how words and proper nouns should been written in the
 + Action
 + Module
 + API
+
+Further it should be avoided to use personal pronouns (e.g. we have ..., we recommed ..., etc.), please use unpersonal pronouns ( e.g. there is ..., it´s recommend ..., etc.).
 
 
 ## PHPDOC
