@@ -293,7 +293,7 @@ class Item extends ItemAbstract implements LinkInterface
      * @param boolean $scheme Whether the source path should be absolute or not.
      * @return string The raw path to the file inside the storage folder.
      */
-    public function getHttpSource($scheme = false)
+    public function getSource($scheme = false)
     {
         $httpPath = $scheme ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
         
@@ -301,7 +301,17 @@ class Item extends ItemAbstract implements LinkInterface
     }
     
     /**
-     * Get the file trough url to the source of the file.
+     * Path to the source with sheme includes, means including server location.
+     * 
+     * @return string The absolute source url to the file inside the storage folder with nice Urls.
+     */
+    public function getSourceAbsolute()
+    {
+        return $this->getSource(true);
+    }
+    
+    /**
+     * Get the link to a file.
      *
      * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For
      * example you may want users to see the file (assuming its a PDF).
@@ -324,15 +334,15 @@ class Item extends ItemAbstract implements LinkInterface
      *
      * @return string The relative source url to the file inside the storage folder with nice Urls.
      */
-    public function getSource()
+    public function getLink($scheme = false)
     {
-        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()]);
+        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName(), $scheme]);
     }
     
     /**
-     * Get the absolute source url but with the sheme includes, means including server location.
+     * Get the absolute link url but with the sheme includes, means including server location.
      *
-     * This is equals to `getSource()` method but alos includes the sheme of the current running websites as prefix
+     * This is equals to `getLink()` method but alos includes the sheme of the current running websites as prefix
      * and is not a relativ url its a static one.
      *
      * ```
@@ -341,9 +351,9 @@ class Item extends ItemAbstract implements LinkInterface
      *
      * @return string The absolute source url to the file inside the storage folder with nice Urls.
      */
-    public function getSourceStatic()
+    public function getLinkAbsolute()
     {
-        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()], true);
+        return $this->getLink(true);
     }
     
     /**
@@ -405,7 +415,7 @@ class Item extends ItemAbstract implements LinkInterface
     public function fields()
     {
         return [
-            'id','folderId', 'name', 'systemFileName', 'source', 'httpSource', 'serverSource', 'isImage', 'mimeType', 'extension', 'uploadTimestamp', 'size', 'sizeReadable', 'caption', 'captionArray'
+            'id','folderId', 'name', 'systemFileName', 'source', 'link', 'serverSource', 'isImage', 'mimeType', 'extension', 'uploadTimestamp', 'size', 'sizeReadable', 'caption', 'captionArray'
         ];
     }
 }

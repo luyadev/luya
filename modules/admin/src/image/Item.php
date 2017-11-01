@@ -87,23 +87,12 @@ class Item extends ItemAbstract
     }
     
     /**
-     * @deprecated Deprectaed in 1.0.1
-     * @param string $schema
+     * Get the source path to the image location on the webserver.
+     * 
+     * @param string $schema Whether the source path should be absolute or not.
      * @return string|boolean
      */
     public function getSource($schema = false)
-    {
-    	trigger_error('This method is depreacted, use getHttpSource() instead or via getter method use $httpSource', E_USER_DEPRECATED);
- 		return $this->getHttpSource($schema);
-    }
-    
-    /**
-     * Get the absolute source path to the image location on the webserver.
-     *
-     * @param boolean $scheme Whether the source path should be absolute or not.
-     * @return string|boolean
-     */
-    public function getHttpSource($scheme = false)
     {
         if (!$this->getFileExists()) {
             if (Yii::$app->storage->autoFixMissingImageSources === false) {
@@ -114,10 +103,34 @@ class Item extends ItemAbstract
             // Storage-Component is going go try to re-create this image now.
             $apply = Yii::$app->storage->addImage($this->getFileId(), $this->getFilterId());
         }
-       
+        
         $httpPath = $scheme ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
         
         return $this->getFile() ? $httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+    }
+    
+    /**
+     * Absolute url to the image source.
+     * 
+     * @return string|boolean
+     */
+    public function getSourceAbsolute()
+    {
+        return $this->getSource(true);
+    }
+    
+    /**
+     * Get the absolute source path to the image location on the webserver.
+     *
+     *
+     * @deprecated Deprectaed in 1.0.1 ! REMOVE from fields() array!
+     * 
+     * @param boolean $scheme Whether the source path should be absolute or not.
+     * @return string|boolean
+     */
+    public function getHttpSource($scheme = false)
+    {
+        return $this->getSource($scheme);
     }
     
     /**
@@ -190,6 +203,6 @@ class Item extends ItemAbstract
      */
     public function fields()
     {
-        return ['id', 'fileId', 'filterId', 'httpSource', 'serverSource', 'resolutionWidth', 'resolutionHeight', 'caption'];
+        return ['id', 'fileId', 'filterId', 'source', 'httpSource', 'serverSource', 'resolutionWidth', 'resolutionHeight', 'caption'];
     }
 }
