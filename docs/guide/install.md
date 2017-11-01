@@ -2,7 +2,7 @@
 
 The LUYA installation requires Composer, please have a look at the [official Composer website](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) if you haven´t installed on your system yet.
 
-> We have made an [installation Video on Youtube](https://www.youtube.com/watch?v=7StCJviSGkg) in order to help you install LUYA.
+> Find the [installation Video on Youtube](https://www.youtube.com/watch?v=7StCJviSGkg) in order to help you install LUYA.
 
 First of all it´s mandatory to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. To install the `fxp/composer-asset-plugin` globally open your terminal and run the following command:
 
@@ -10,7 +10,7 @@ First of all it´s mandatory to install the global `fxp/composer-asset-plugin` p
 composer global require "fxp/composer-asset-plugin:~1.4"
 ```
 
-After setting up Composer, we execute the Composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup enabling you run your website directly. It´s recommend to run the `create-project` command directly from your htdocs/webserver folder:
+After setting up Composer, we execute the Composer command `create-project` to checkout the **luya-kickstarter** application, an *out of the box* LUYA setup to run your website directly. It´s recommend to run the `create-project` command directly from your htdocs/webserver folder like this:
 
 ```sh
 composer create-project luyadev/luya-kickstarter:1.0.0-RC4
@@ -27,7 +27,8 @@ cp env-local-db.php.dist env-local-db.php
 ```
 
 Now the database connection inside the `configs/env-local-db.php` file needs to fit your mysql servers configuration. 
-You should open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-configs.md). After successfully setting up your database connection, you have to reopen your terminal and change into your project directory and excute the **luya** binary files which has been installed into your vendor folder by composer as described in the follwing.
+It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-configs.md). 
+After successfully setting up your database connection, you have to reopen your terminal and change into your project directory and excute the **luya** binary files which has been installed into your vendor folder by composer as described in the follwing.
 
 Run the migration files with the [migrate console command](luya-console.md):
 
@@ -43,16 +44,16 @@ Build and import all filesystem configurations into the database with the [impor
 ./vendor/bin/luya import
 ```
 
-At last we execute the [setup console command](luya-console.md) which is going to setup a user, group and permissions:
+Finally execute the [setup console command](luya-console.md) command which is going to setup a user, group and permissions:
 
 ```sh
 ./vendor/bin/luya admin/setup
 ```
 
-The setup proccess will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).
+The setup process will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).
 
 > `./vendor/bin/luya health` will make a small check if several directories exist and readable/writable.
 
-You can now log in into your administration interface `http://localhost/luya-kickstarter/admin` (depending on where you have located the LUYA files).
+You can now log in into the administration interface, e.g. `http://localhost/luya-kickstarter/public_html/admin` (dependings on the location of the LUYA files).
 
-> Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA Setup.
+> Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA setup.
