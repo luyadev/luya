@@ -21,6 +21,18 @@ In order to make links from the API PHPdocs to the Guide use:
 
 When dealing with Controller, Action and other PHP names use single quotes \`MyController\`. Like `MyController` is the file `MyController.php` with the action `indexAction()`, this is also for Variables `$foobar`.
 
+### Wording
+
+This represents a guidline how words and proper nouns should been written in the documentation.
+
++ LUYA
++ Composer
++ AngularJS or 
++ ngRest
++ Admin UI
++ @TDB
+
+
 ## PHPDOC
 
 All classes must have a php doc block which is sorted as follow including author and since tag.
