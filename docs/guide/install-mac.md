@@ -1,6 +1,6 @@
 # Installation on MAC OSX
 
-> The installation process does not differ to the [general installation](install.md) but on several osx systems you may use different config values as described below.
+> The installation process does not differ to the [general installation](install.md) but on several OSX systems you may use different config values as described below.
 
 ## Installation
 
