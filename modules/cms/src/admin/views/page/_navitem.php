@@ -127,7 +127,7 @@ use luya\helpers\Html;
     <ul class="nav nav-tabs ml-auto" role="tablist" ng-if="item.nav_item_type==1 && !isDraft">
         <li class="nav-item dropdown" ng-class="{'show': versionDropDownVisbility}">
             <a class="nav-link dropdown-toggle" role="button" ng-click="toggleVersionsDropdown()">{{ currentPageVersionAlias }}</a>
-            <div class="dropdown-menu" ng-class="{'show': versionDropDownVisbility}">
+            <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': versionDropDownVisbility}">
                 <div ng-repeat="versionItem in typeData">
                     <button type="button" class="dropdown-item" ng-class="{'active' : currentPageVersion == versionItem.id}" ng-click="switchVersion(versionItem.id)">
                         <span><span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=versionItem.id, 'badge-primary': item.nav_item_type_id==versionItem.id}">V{{$index+1}}</span> {{ versionItem.version_alias }}</span>
