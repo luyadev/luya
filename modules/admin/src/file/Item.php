@@ -27,9 +27,12 @@ use luya\web\LinkTrait;
  * @property integer $uploadTimestamp Unix timestamp when the file has been uploaded.
  * @property boolean $isImage Whether the file is of type image or not.
  * @property string $hashName The 8 chars long unique hash name of the file.
+ * @property string $href Get the href value for the item based from $link
+ * @property string $target Get the link target attribute value.
+ * @property string $link Get the link path to the file.
+ * @property string $linkAbsolute Get the absolute link path to the file.
  * @property string $source The source url to the file inside the storage folder with nice Urls.
- * @property string $sourceStatic The absolute source url to the file inside the storage folder with nice Urls.
- * @property string $httpSource The raw path to the file inside the storage folder.
+ * @property string $sourceAbsolute The absolute source url to the file inside the storage folder with nice Urls.
  * @property string $serverSource The path to the file on the filesystem of the server.
  * @property boolean $isHidden Whether the file is marked as hidden or not.
  * @property boolean $isDeleted Return whether the file has been removed from the filesytem or not.
@@ -51,7 +54,7 @@ class Item extends ItemAbstract implements LinkInterface
      */
     public function getHref()
     {
-        return $this->sourceStatic;
+        return $this->sourceAbsolute;
     }
     
     private $_target;
@@ -301,6 +304,19 @@ class Item extends ItemAbstract implements LinkInterface
     }
     
     /**
+     * @deprecated Deprecated in 1.0.1
+     * 
+     * @param boolean $scheme
+     * @return string
+     */
+    public function getHttpSource($scheme = false)
+    {
+        trigger_error('deprecated, use getSource() instead of getHttpSource().', E_USER_DEPRECATED);
+        
+        return $this->getSource($scheme);
+    }
+    
+    /**
      * Path to the source with sheme includes, means including server location.
      * 
      * @return string The absolute source url to the file inside the storage folder with nice Urls.
@@ -317,7 +333,7 @@ class Item extends ItemAbstract implements LinkInterface
      * example you may want users to see the file (assuming its a PDF).
      *
      * ```php
-     * echo '<a href="{Yii::$app->storage->getFile(123)->source}">Download PDF</a>';
+     * echo '<a href="{Yii::$app->storage->getFile(123)->link}">Download PDF</a>'; // you could also us href instead in order to be more semantic.
      * ```
      *
      * The output of source is a url which is provided by a UrlRUle of the admin module and returns nice readable source links:
