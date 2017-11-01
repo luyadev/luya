@@ -8,7 +8,7 @@ This document will help you upgrading from a LUYA Version into another. For more
 
 A few changes you will surely notice when upgrading to version 1.0.0 and you should check in your application:
 
-+ Storage image `source` is now `httpSource`, even when `toArray()` is called, like in blocks and block admin twigs. (Search for `->source`, `'source'`, `"source"`, `.source`). Why? image->httpSource has now the same value as file->httpSource, while file->source is still available but also returns a different url 
++ Storage file `source` is now `link` or `href`, even when `toArray()` is called, like in blocks and block admin twigs. (Search for `->source`, `'source'`, `"source"`, `.source`). Why? We follow semantic naming of html structure, therefource source points to webserver accessable file directory for the file or image, link instead is used to download files (link to a file).
 + Active Windows `alias` property is now `label`, so take a look at your `ngRestActiveWindows` config in your NgRest Models. (Search for `'alias'` or `"alias"`)
 
 1.0.0-RC4 (5. September 2017)

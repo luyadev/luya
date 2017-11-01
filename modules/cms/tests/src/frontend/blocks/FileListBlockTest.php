@@ -16,7 +16,7 @@ class FileListBlockTest extends BlockTestCase
     public function testFiles()
     {
         $this->block->addExtraVar('fileList', [
-                ['source' => 'path/to/image.jpg', 'caption' => 'foobar', 'extension' => 'jpg'],
+                ['href' => 'path/to/image.jpg', 'caption' => 'foobar', 'extension' => 'jpg'],
         ]);
         $this->assertContains('<ul><li><a target="_blank" href="path/to/image.jpg">foobar</a></li></ul>', $this->renderFrontendNoSpace());
     }
@@ -25,7 +25,7 @@ class FileListBlockTest extends BlockTestCase
     {
         $this->block->setCfgValues(['showType' => 1]);
         $this->block->addExtraVar('fileList', [
-                ['source' => 'path/to/image.jpg', 'caption' => 'foobar', 'extension' => 'jpg'],
+                ['href' => 'path/to/image.jpg', 'caption' => 'foobar', 'extension' => 'jpg'],
         ]);
         $this->assertContains('<ul><li><a target="_blank" href="path/to/image.jpg">foobar (jpg)</a></li></ul>', $this->renderFrontendNoSpace());
     }
