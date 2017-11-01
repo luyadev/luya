@@ -36,6 +36,6 @@ EOT;
             return false;
         }
         
-        return Html::a(!empty($sub) ? $sub : $file->name, $file->sourceStatic, ['target' => '_blank']);
+        return Html::a(!empty($sub) ? $sub : $file->name, $file->href, ['target' => '_blank']);
     }
 }

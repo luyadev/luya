@@ -27,7 +27,7 @@ use luya\web\LinkTrait;
  * @property integer $uploadTimestamp Unix timestamp when the file has been uploaded.
  * @property boolean $isImage Whether the file is of type image or not.
  * @property string $hashName The 8 chars long unique hash name of the file.
- * @property string $href Get the href value for the item based from $link
+ * @property string $href Get the href value for the item based from $linkAbsolute
  * @property string $target Get the link target attribute value.
  * @property string $link Get the link path to the file.
  * @property string $linkAbsolute Get the absolute link path to the file.
@@ -54,7 +54,7 @@ class Item extends ItemAbstract implements LinkInterface
      */
     public function getHref()
     {
-        return $this->sourceAbsolute;
+        return $this->linkAbsolute;
     }
     
     private $_target;
@@ -431,7 +431,7 @@ class Item extends ItemAbstract implements LinkInterface
     public function fields()
     {
         return [
-            'id','folderId', 'name', 'systemFileName', 'source', 'link', 'serverSource', 'isImage', 'mimeType', 'extension', 'uploadTimestamp', 'size', 'sizeReadable', 'caption', 'captionArray'
+            'id','folderId', 'name', 'systemFileName', 'source', 'link', 'href', 'serverSource', 'isImage', 'mimeType', 'extension', 'uploadTimestamp', 'size', 'sizeReadable', 'caption', 'captionArray'
         ];
     }
 }

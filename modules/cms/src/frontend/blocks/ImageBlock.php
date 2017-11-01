@@ -132,7 +132,7 @@ final class ImageBlock extends PhpBlock
      */
     public function admin()
     {
-        $image = '{% if extras.imageAdmin.httpSource %}<p><img src="{{extras.imageAdmin.httpSource}}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="max-width: 100%;"></p>';
+        $image = '{% if extras.imageAdmin.source %}<p><img src="{{extras.imageAdmin.source}}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="max-width: 100%;"></p>';
         $image.= '{% else %}<span class="block__empty-text">' . Module::t('block_image_no_image') . '</span>{% endif %}';
         $image.= '{% if vars.caption is not empty %}{{extras.text}}{% endif %}';
 

@@ -206,6 +206,6 @@ class Item extends ItemAbstract
      */
     public function fields()
     {
-        return ['id', 'fileId', 'filterId', 'source', 'httpSource', 'serverSource', 'resolutionWidth', 'resolutionHeight', 'caption'];
+        return ['id', 'fileId', 'filterId', 'source', 'serverSource', 'resolutionWidth', 'resolutionHeight', 'caption'];
     }
 }

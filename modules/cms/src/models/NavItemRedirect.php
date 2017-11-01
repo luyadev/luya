@@ -91,7 +91,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
                     throw new Excetion("Unable to find the file with id " . $this->value);
                 }
                 
-                return $file->sourceStatic;
+                return $file->href;
                 break;
             
             // link to an email address
