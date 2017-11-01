@@ -6,7 +6,7 @@
 
 **[Follow the general installation guide](install.md) and then use the OSX specific settings below.**
 
-Most OSX Apache services does not work with the default unix socket defined in your php.ini (as it could be of the wrong loaded php profile), so you have to define an additional unix socket inside your dsn configuration of the database component:
+Most OSX Apache services does not work with the default unix socket defined in your php.ini (as it could be of the wrong loaded PHP profile), so you have to define an additional unix socket inside your dsn configuration of the database component:
 
 #### MAMP
 
@@ -22,19 +22,24 @@ Most OSX Apache services does not work with the default unix socket defined in y
 
 ## Misc issues
 
-Create a .bash_profile file in your home folder (cd ~) with following content
+Create or use the existing `.bash_profile` or `.profile` file in your home folder (cd ~) with following content
 
 ```sh
 export PATH=/Applications/MAMP/bin/php/php5.6.2/bin:$PATH
 ```
+After editing this file needs be reloaded by running the following command in your terminal:
+
+```sh
+source ~/.bash_profile
+```
 
 If you've [ZSH](https://github.com/robbyrussell/oh-my-zsh) installed, add the above "export" line to the *end* of the .zshrc file in your home directory (~/.zshrc).
 
-change the php version to your current active php version. To verify and test this informations use:
+Change the PHP version to your current active PHP version. To verify and test this informations use:
 
 ```sh
 which php
 php -i
 ```
 
-> Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA Setup.
+> Visit the [Installation Problems and Questions Site](install-problems.md) if you get any problems with the LUYA setup.
