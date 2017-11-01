@@ -191,7 +191,7 @@ use luya\admin\helpers\Angular;
         </span>
     </span>
     <ul class="folders" ng-show="folder.subfolder === true && folder.toggle_open==1">
-        <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
+        <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id, 'is-movable' : showFoldersToMove}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
     </ul>
 </script>
 
@@ -224,7 +224,7 @@ use luya\admin\helpers\Angular;
                         <div class="folders-item-root"><?= Admin::t('layout_filemanager_root_dir'); ?></div>
                     </span>
                     <ul class="folders folders-items">
-                        <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
+                        <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id, 'is-movable' : showFoldersToMove}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
                     </ul>
                 </li>
             </ul>
