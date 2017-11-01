@@ -108,7 +108,7 @@ In the view you can access the values as follwed:
 <?php if ($this->extraValue('download') && $this->extraValue('image')): ?>
     <img src="<?= $this->extraValue('image')->source; ?>" />
     <?= $this->extraValue('text'); ?>
-    <a href="<?= $this->extraValue('download')->source; ?>">Download File</a>
+    <a href="<?= $this->extraValue('download')->href; ?>">Download File</a>
 <?php endif; ?>
 ```
 

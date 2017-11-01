@@ -145,7 +145,7 @@ use luya\admin\helpers\Angular;
         </div>
         <div class="imageupload-preview" ng-show="imageinfo != null">
             <div class="imageupload-preview-sizer"></div>
-            <img ng-src="{{thumb.httpSource}}" ng-show="imageinfo != null" class="imageupload-preview-image" />
+            <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="imageupload-preview-image" />
             <div class="imageupload-infos">
                 <div class="imageupload-size" ng-show="!imageLoading">{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</div>
             </div>
@@ -332,8 +332,8 @@ use luya\admin\helpers\Angular;
                                 <div class="filemanager-fakebox" ng-class="{'filemanager-fakebox-active': inSelection(file)}"></div>
                             </th>
 
-                            <td class="text-center" ng-click="toggleSelection(file)" tooltip tooltip-image-url="{{file.thumbnailMedium.httpSource}}" tooltip-disabled="!file.isImage">
-                                <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.httpSource}}" /></span>
+                            <td class="text-center" ng-click="toggleSelection(file)" tooltip tooltip-image-url="{{file.thumbnailMedium.source}}" tooltip-disabled="!file.isImage">
+                                <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
                                 <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
                             </td>
                             <td ng-click="toggleSelection(file)">{{file.name | truncateMiddle: 30}}</td>
@@ -356,7 +356,7 @@ use luya\admin\helpers\Angular;
 <div class="file-detail-view" ng-class="{'open': fileDetail}">
 
     <div class="file-detail-view-head">
-        <a class="btn btn-icon btn-download" ng-href="{{fileDetail.source}}" target="_blank">Download</a>
+        <a class="btn btn-icon btn-download" ng-href="{{fileDetail.link}}" target="_blank">Download</a>
         <button type="button" class="btn btn-icon btn-replace ml-2" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">Replace</button>
         <button type="button" class="btn btn-icon btn-cancel file-detail-view-close" ng-click="closeFileDetail()"></button>
     </div>
@@ -385,7 +385,7 @@ use luya\admin\helpers\Angular;
         </tbody>
     </table>
     <div ng-if="fileDetail.isImage">
-        <img class="img-fluid" ng-src="{{fileDetail.thumbnailMedium.httpSource}}" />
+        <img class="img-fluid" ng-src="{{fileDetail.thumbnailMedium.source}}" />
     </div>
 
     <form class="bg-faded p-2 mt-4">

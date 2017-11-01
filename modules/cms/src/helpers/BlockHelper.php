@@ -190,7 +190,7 @@ class BlockHelper
      *
      * ```html
      * <?php if ($this->extraValue('file')): ?>
-     *      <a href="<?= $this->extraValue('file')->source; ?>">File Download</a>
+     *      <a href="<?= $this->extraValue('file')->href; ?>">File Download</a>
      * <?php endif; ?>
      * ```
      *

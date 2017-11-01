@@ -14,7 +14,8 @@ use luya\admin\storage\ItemAbstract;
  * @property integer $id The unique image identifier number.
  * @property integer $fileId The file id where this image depends on.
  * @property integer $filterId The applied filter id for this image
- * @property string $httpSource The source of the image where you can access the image by the web.
+ * @property string $source The source of the image where you can access the image by the web.
+ * @property string $sourceAbsolute The absolute source of the image where you can access the image by the web.
  * @property string $serverSource The source to the image internal used on the Server.
  * @property boolean $fileExists Return boolean whether the file server source exsits on the server or not.
  * @property integer $resolutionWidth Get the image resolution width.
@@ -87,23 +88,12 @@ class Item extends ItemAbstract
     }
     
     /**
-     * @deprecated Deprectaed in 1.0.1
-     * @param string $schema
+     * Get the source path to the image location on the webserver.
+     * 
+     * @param string $scheme Whether the source path should be absolute or not.
      * @return string|boolean
      */
-    public function getSource($schema = false)
-    {
-    	trigger_error('This method is depreacted, use getHttpSource() instead or via getter method use $httpSource', E_USER_DEPRECATED);
- 		return $this->getHttpSource($schema);
-    }
-    
-    /**
-     * Get the absolute source path to the image location on the webserver.
-     *
-     * @param boolean $scheme Whether the source path should be absolute or not.
-     * @return string|boolean
-     */
-    public function getHttpSource($scheme = false)
+    public function getSource($scheme = false)
     {
         if (!$this->getFileExists()) {
             if (Yii::$app->storage->autoFixMissingImageSources === false) {
@@ -111,13 +101,39 @@ class Item extends ItemAbstract
             }
             
             // The image source does not exist, probably it has been deleted due to filter changes.
-            // Storage-Component is going go try to re-create this image now.
+            // storage component is going go try to re-create this image now.
             $apply = Yii::$app->storage->addImage($this->getFileId(), $this->getFilterId());
         }
-       
+        
         $httpPath = $scheme ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
         
         return $this->getFile() ? $httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+    }
+    
+    /**
+     * Absolute url to the image source.
+     * 
+     * @return string|boolean
+     */
+    public function getSourceAbsolute()
+    {
+        return $this->getSource(true);
+    }
+    
+    /**
+     * Get the absolute source path to the image location on the webserver.
+     *
+     *
+     * @deprecated Deprecated in 1.0.1 - REMOVE from fields() array!
+     * 
+     * @param boolean $scheme Whether the source path should be absolute or not.
+     * @return string|boolean
+     */
+    public function getHttpSource($scheme = false)
+    {
+        trigger_error('deprecated, use getSource() instead of getHttpSource().', E_USER_DEPRECATED);
+        
+        return $this->getSource($scheme);
     }
     
     /**
@@ -190,6 +206,6 @@ class Item extends ItemAbstract
      */
     public function fields()
     {
-        return ['id', 'fileId', 'filterId', 'httpSource', 'serverSource', 'resolutionWidth', 'resolutionHeight', 'caption'];
+        return ['id', 'fileId', 'filterId', 'source', 'serverSource', 'resolutionWidth', 'resolutionHeight', 'caption'];
     }
 }
