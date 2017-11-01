@@ -90,10 +90,10 @@ class Item extends ItemAbstract
     /**
      * Get the source path to the image location on the webserver.
      * 
-     * @param string $$scheme Whether the source path should be absolute or not.
+     * @param string $scheme Whether the source path should be absolute or not.
      * @return string|boolean
      */
-    public function getSource($$scheme = false)
+    public function getSource($scheme = false)
     {
         if (!$this->getFileExists()) {
             if (Yii::$app->storage->autoFixMissingImageSources === false) {
