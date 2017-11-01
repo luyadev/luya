@@ -606,7 +606,7 @@ class StorageContainer extends Component
             
             if (!$fileQuery || !$fileQuery->fileExists) {
                 if ($fileQuery !== false) {
-                    throw new Exception("Unable to create image, the base file source '{$fileQuery->serverSource}' does not exist.");
+                    throw new Exception("Unable to create image, the base file server source '{$fileQuery->serverSource}' does not exist.");
                 }
                 
                 throw new Exception("Unable to find the file with id '{$fileId}', image can not be created.");

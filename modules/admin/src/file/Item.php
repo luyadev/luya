@@ -352,7 +352,7 @@ class Item extends ItemAbstract implements LinkInterface
      */
     public function getLink($scheme = false)
     {
-        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName(), $scheme]);
+        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()], $scheme);
     }
     
     /**

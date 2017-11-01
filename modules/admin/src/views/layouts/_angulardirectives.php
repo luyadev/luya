@@ -356,7 +356,7 @@ use luya\admin\helpers\Angular;
 <div class="file-detail-view" ng-class="{'open': fileDetail}">
 
     <div class="file-detail-view-head">
-        <a class="btn btn-icon btn-download" ng-href="{{fileDetail.link}}" target="_blank">Download</a>
+        <a class="btn btn-icon btn-download" ng-href="{{fileDetail.href}}" target="_blank">Download</a>
         <button type="button" class="btn btn-icon btn-replace ml-2" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">Replace</button>
         <button type="button" class="btn btn-icon btn-cancel file-detail-view-close" ng-click="closeFileDetail()"></button>
     </div>
