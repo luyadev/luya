@@ -27,10 +27,13 @@ This represents a guidline how words and proper nouns should been written in the
 
 + LUYA
 + Composer
-+ AngularJS or 
-+ ngRest
++ AngularJS
++ NgRest
 + Admin UI
-+ @TDB
++ Controller
++ Action
++ Module
++ API
 
 
 ## PHPDOC
