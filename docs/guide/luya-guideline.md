@@ -34,8 +34,10 @@ This represents a guideline how words and proper nouns should been written in th
 + Action
 + Module
 + API
++ OSX
++ PHP
 
-Further it should be avoided to use personal pronouns (e.g. we have ..., we recommed ..., etc.), please use unpersonal pronouns ( e.g. there is ..., it´s recommend ..., etc.).
+Further it should be avoided to use personal pronouns (e.g. we have this, we recommed that, etc.), please use unpersonal pronouns ( e.g. there is this, it´s recommend that, etc.).
 
 
 ## PHPDOC
@@ -167,7 +169,7 @@ The css and html files for the admin module are based on the following rules.
 To compile css and js to one file we use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow).  
 To install gulp and the dependencies on your System [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).
 
-Everything will be compiled to a folder `dist/` in the corresponding `{module}/resources` folder.
+Everything will be compiled to the folder `dist/` in the corresponding `{module}/resources` folder.
 
 > **Important:** The JS files and their order are all defined in the `compileConfig.js`. If you add a new JS file, make sure to add it in the config as well.
 
