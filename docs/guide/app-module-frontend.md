@@ -129,7 +129,8 @@ class DefaultController extends Controller
     }
 }
 ```
-Those actios are already accesible by an exact url, because we have a `DefaultController` in our `frontendmodule` most likely the url for the `actionHello()` is:
+
+Those actions are already accesible by an exact url, because we have a `DefaultController` in our `frontendmodule` most likely the url for the `actionHello()` is:
 
 `your-public-project-domain/frontendmodule/default/hello`
 
@@ -138,6 +139,3 @@ Please keep in mind that those action are case sensitive, this means `actionWhoA
 `your-public-project-domain/frontendmodule/default/who-am-i`
 
 Of course the url rules in the `Module.php` can be used for pointing to controlles and views.
-
-
-
