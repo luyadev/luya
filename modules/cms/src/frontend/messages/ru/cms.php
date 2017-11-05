@@ -178,8 +178,8 @@ return [
     'block_spacing_large_space' => 'Большой пробел',
     
     // 1.0.0
-    'block_module_strictrender' => 'Strict Render',
-    'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.',
-    'block_html_cfg_raw_label' => 'Render HTML in Admin',
+    'block_module_strictrender' => 'Строгое отображение',
+    'block_module_strictrender_help' => 'Когда включено строгое отображение, модуль будет выполнять только предоставленный маршрут (модуль, контроллер, действие, параметры) без выполнения действий и маршрутов контроллера.',
+    'block_html_cfg_raw_label' => 'Отображение HTML в админ панели',
     
 ];

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     'view_index_add_type' => 'Тип страницы',
     'view_index_type_page' => 'Страница',
     'view_index_type_module' => 'Модуль',
@@ -62,7 +62,7 @@ return [
     'model_navitempage_layout_label' => 'Шаблон',
     'model_navitemredirect_type_label' => 'Тип редиректа',
     'model_navitemredirect_value_label' => 'Цель редиректа',
-    
+
     'view_index_add_title' => 'Доавить новую страницу',
     'view_index_add_page_from_language' => 'Добавить перевод для страницы',
     'view_index_add_page_from_language_info' => 'Хотите скопировать контент другого языка для создания записи?',
@@ -95,12 +95,12 @@ return [
 
 // added translation in 1.0.0-beta5:
 
-    
+
     'view_update_blockholder_clipboard' => 'Буфер обмена',
 
 // added translation in 1.0.0-beta6:
 
-    
+
     'js_page_block_delete_confirm' => 'Удалить блок «%name%»?',
     'view_index_page_meta_keywords' => 'Ключевые слова для SEO аналитики (пример: ресторан, пицца, италия)',
     'current_version' => 'Рабочая версия',
@@ -122,7 +122,7 @@ return [
 
 // added translation in 1.0.0-beta7:
 
-    
+
     'view_index_create_page_please_choose' => 'Пожалуйста, выберите',
     'view_index_sidebar_autopreview' => 'Автоматический предпросмотр',
 
@@ -157,7 +157,7 @@ return [
 
 // rc2
     'model_navitem_title_tag_label' => 'Название тегов (SEO)',
-    
+
 // rc3
     'model_navitempage_empty_draft_id' => 'Не удалось создать страницу из пустого шаблона черновика.',
     'view_update_variation_select' => 'Не выбрано ни одного изменения блока',
@@ -183,13 +183,13 @@ return [
     'view_update_block_tooltip_editcfg' => 'Настройки',
     'view_update_block_tooltip_delete' => 'Удалить',
     'view_update_block_tooltip_close' => 'Закрыть редактирование',
-    
+
     // 1.0.0
-        'cmsadmin_dashboard_lastupdate' => 'Last page updates',
-        'cmsadmin_settings_homepage_title' => 'Default Page',
-        'cmsadmin_settings_trashpage_title' => 'Delete Page',
-        'cmsadmin_settings_modal_title' => 'Settings',
-        'cmsadmin_item_settings_titleslug' => 'Page Informations',
-        'cmsadmin_created_at' => 'Created at',
-    'cmsadmin_version_remove' => 'Remove version',
+    'cmsadmin_dashboard_lastupdate' => 'Обновления последней страницы',
+    'cmsadmin_settings_homepage_title' => 'Главная страница',
+    'cmsadmin_settings_trashpage_title' => 'Удалить страницу',
+    'cmsadmin_settings_modal_title' => 'Настройки',
+    'cmsadmin_item_settings_titleslug' => 'Информация о странице',
+    'cmsadmin_created_at' => 'Создан',
+    'cmsadmin_version_remove' => 'Удалить версию',
 ];
