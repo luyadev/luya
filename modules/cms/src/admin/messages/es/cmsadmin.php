@@ -1,4 +1,3 @@
-
 <?php
 return [
     'view_index_add_type' => 'Tipo de página',
