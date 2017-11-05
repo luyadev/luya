@@ -18,7 +18,7 @@ use luya\helpers\ArrayHelper;
  * ];
  * ```
  *
- * If you like to get the {{luya\admin\image\Iterator}} object directly from the {{luya\admin\components\StorageContainer}} component just enable `$imageIterator`.
+ * If you like to get the {{luya\admin\image\Iterator}} object directly from the {{luya\admin\storage\BaseFileSystemStorage}} component just enable `$imageIterator`.
  *
  * ```php
  * return [

@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1341](https://github.com/luyadev/luya/issues/1341) Changed signature of `changePassword($newPassword)` in `luya\admin\aws\ChangePasswordInterface`.
 - [#1574](https://github.com/luyadev/luya/issues/1574) Changed Active Window $alias property to $label. Use defaultLabel() in order to set a default label.
 - [#1567](https://github.com/luyadev/luya/issues/1567) Discontinue development of Exporter Module.
+- [#1568](https://github.com/luyadev/luya/issues/1568) Add file system layer for Storage component.
 
 ### Added
 

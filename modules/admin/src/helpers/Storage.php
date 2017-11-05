@@ -11,7 +11,7 @@ use luya\admin\models\StorageImage;
  * Helper class to handle remove, upload and moving of storage files.
  *
  * The class provides common functions in order to work with the Storage component. This helper method will only work
- * if the {{luya\admin\components\StorageContainer}} component is registered which is by default the case when the LUYA
+ * if the {{luya\admin\storage\BaseFileSystemStorage}} component is registered which is by default the case when the LUYA
  * admin module is provided.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -177,14 +177,8 @@ class Storage
         } catch (\Exception $e) {
             return false;
         }
-        $toDelete = $oldFileSource . uniqid('oldfile') . '.bkl';
-        if (rename($oldFileSource, $toDelete)) {
-            if (copy($newFileSource, $oldFileSource)) {
-                @unlink($toDelete);
-                return true;
-            }
-        }
-        return false;
+
+        return Yii::$app->storage->replaceFile($oldFileSource, $newFileSource);
     }
     
     /**
@@ -204,7 +198,7 @@ class Storage
      * ```
      *
      * @param array $fileArray Its an entry of the files array like $_FILES['logo_image'].
-     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\components\StorageContainer::findFolders}}
+     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\storage\BaseFileSystemStorage::findFolders}}
      * @param string $isHidden Whether the file should be hidden or not.
      * @return array An array with key `upload`, `message` and `file_id`. When upload is false, an error occured otherwise true. The message key contains the error messages. If no error happend `file_id` will contain the new uploaded file id.
      */
@@ -237,7 +231,7 @@ class Storage
      *
      * @todo what happen if $files does have more then one entry, as the response is limit to 1
      * @param array $filesArray Use $_FILES array.
-     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\components\StorageContainer::findFolders}}
+     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\storage\BaseFileSystemStorage::findFolders}}
      * @param string $isHidden Whether the file should be hidden or not.
      * @return array An array with key `upload`, `message` and `file_id`. When upload is false, an error occured otherwise true. The message key contains the error messages. If no error happend `file_id` will contain the new uploaded file id.
      */

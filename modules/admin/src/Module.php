@@ -9,13 +9,13 @@ use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminLanguage;
 use luya\admin\components\AdminUser;
 use luya\admin\components\AdminMenu;
-use luya\admin\components\StorageContainer;
 use luya\admin\components\Auth;
 use luya\admin\components\AdminMenuBuilder;
 use luya\admin\importers\AuthImporter;
 use luya\admin\importers\FilterImporter;
 use luya\admin\importers\PropertyImporter;
 use luya\admin\importers\StorageImporter;
+use luya\admin\filesystem\LocalFileSystem;
 
 /**
  * Admin Module.
@@ -288,7 +288,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
                 'class' => AdminMenu::class,
             ],
             'storage' => [
-                'class' => StorageContainer::class,
+                'class' => LocalFileSystem::class,
             ],
             'auth' => [
                 'class' => Auth::class,

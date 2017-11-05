@@ -56,7 +56,7 @@ final class StorageImage extends ActiveRecord
     {
         $image = Yii::$app->storage->getImage($this->id);
         if ($image) {
-            if (!FileHelper::unlink($image->serverSource)) {
+            if (!Yii::$app->storage->deleteFile($image->serverSource)) {
                 return false; // unable to unlink image
             }
         } else {

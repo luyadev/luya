@@ -16,7 +16,7 @@ use luya\admin\ngrest\base\Plugin;
  * ];
  * ```
  *
- * If you like to get the {{luya\admin\image\Item}} object directly from the {{luya\admin\components\StorageContainer}} component just enable `$imageItem`.
+ * If you like to get the {{luya\admin\image\Item}} object directly from the {{luya\admin\storage\BaseFileSystemStorage}} component just enable `$imageItem`.
  *
  * ```php
  * return [

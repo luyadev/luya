@@ -17,7 +17,7 @@ use luya\admin\file\Query;
  * ];
  * ```
  *
- * If you like to get the {{luya\admin\file\Iterator}} object directly from the {{luya\admin\components\StorageContainer}} component just enable `$fileIterator`.
+ * If you like to get the {{luya\admin\file\Iterator}} object directly from the {{luya\admin\storage\BaseFileSystemStorage}} component just enable `$fileIterator`.
  *
  * ```php
  * return [

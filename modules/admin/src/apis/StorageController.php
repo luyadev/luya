@@ -22,7 +22,7 @@ use yii\web\BadRequestHttpException;
  *
  * Storage API, provides data from system image, files, filters and folders to build the filemanager, allows create/delete process to manipulate storage data.
  *
- * The storage controller is used to make the luya angular file manager work with the {{luya\admin\components\StorageContainer}}.
+ * The storage controller is used to make the luya angular file manager work with the {{luya\admin\storage\BaseFileSystemStorage}}.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
