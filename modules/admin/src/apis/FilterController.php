@@ -8,6 +8,7 @@ use luya\admin\ngrest\base\Api;
  * Filters API, provides all available system filters.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class FilterController extends Api
 {

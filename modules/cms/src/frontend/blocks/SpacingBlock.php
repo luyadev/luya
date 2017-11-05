@@ -10,6 +10,7 @@ use luya\cms\helpers\BlockHelper;
  * Margin Top/Bottom block with Paragraph.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class SpacingBlock extends PhpBlock
 {

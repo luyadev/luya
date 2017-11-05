@@ -8,11 +8,13 @@ use luya\helpers\Url;
 use luya\admin\models\LoginForm;
 use luya\admin\Module;
 use luya\admin\base\Controller;
+use luya\admin\models\UserOnline;
 
 /**
  * Login Controller contains async actions, async token send action and login mechanism.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class LoginController extends Controller
 {
@@ -35,7 +37,7 @@ class LoginController extends Controller
 
     /**
      * Show Login Form.
-     * 
+     *
      * @return \yii\web\Response|string
      */
     public function actionIndex()
@@ -44,17 +46,23 @@ class LoginController extends Controller
         if (!Yii::$app->adminuser->isGuest) {
             return $this->redirect(['/admin/default/index']);
         }
-        
+       
         $this->registerAsset('\luya\admin\assets\Login');
         
-        $this->view->registerJs("$(function(){ $('#email').focus(); observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."'); });", \luya\web\View::POS_END);
+        $this->view->registerJs("
+        	$('#email').focus(); 
+        	checkInputLabels();
+        	observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."');
+        ");
     
+        UserOnline::clearList();
+        
         return $this->render('index');
     }
     
     /**
      * Async Secure Token Login.
-     * 
+     *
      * @return array
      */
     public function actionAsyncToken()
@@ -81,7 +89,7 @@ class LoginController extends Controller
 
     /**
      * Async Login Form.
-     * 
+     *
      * @return array
      */
     public function actionAsync()
@@ -98,6 +106,8 @@ class LoginController extends Controller
                     if ($model->sendSecureLogin()) {
                         Yii::$app->session->set('secureId', $model->getUser()->id);
                         return ['refresh' => false, 'errors' => false, 'enterSecureToken' => true];
+                    } else {
+                        return ['refresh' => false, 'errors' => ['Unable to send and store secure token.'], 'enterSecureToken' => false];
                     }
                 } else {
                     if (Yii::$app->adminuser->login($userObject)) {

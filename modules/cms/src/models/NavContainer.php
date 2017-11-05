@@ -9,6 +9,7 @@ use luya\admin\ngrest\base\NgRestModel;
  * Represents the Navigation-Containers.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavContainer extends NgRestModel
 {

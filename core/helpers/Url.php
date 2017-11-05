@@ -9,10 +9,10 @@ use Yii;
  *
  * Extends the {{yii\helpers\BaseUrl}} class by some usefull functions like:
  *
- * + {{luya\helpers\Url::trailing}}
- * + {{luya\helpers\Url::toInternal}}
- * + {{luya\helpers\Url::toAjax}}
- * + {{luya\helpers\Url::ensureHttp}}
+ * + {{luya\helpers\Url::trailing()}}
+ * + {{luya\helpers\Url::toInternal()}}
+ * + {{luya\helpers\Url::toAjax()}}
+ * + {{luya\helpers\Url::ensureHttp()}}
  *
  * An example of create an URL based on Route in the UrlManager:
  *
@@ -52,38 +52,12 @@ class Url extends \yii\helpers\BaseUrl
         
         return Yii::$app->getUrlManager()->internalCreateUrl($routeParams);
     }
-    
-    /**
-     * Only stil exists to avoid bc break, former known as `to()`. Use `Url::toRoute(['/module/controller/action', 'arg1' => 'arg1value']);` instead.
-     * Wrapper functions for the createUrl function of the url manager.
-     *
-     * @param string $route The route to find from the url manager.
-     * @param array $params The parameters to pass for this url rule.
-     * @param boolean $scheme Whether to return static url or not
-     * @return string The generated url.
-     * @deprecated Will be removed in 1.0.0 release.
-     */
-    public static function toManager($route, array $params = [], $scheme = false)
-    {
-        trigger_error('Deprecated method us Url::toRoute() instead.', E_USER_DEPRECATED);
-        
-        $routeParams = [$route];
-        foreach ($params as $key => $value) {
-            $routeParams[$key] = $value;
-        }
-
-        if ($scheme) {
-            return Yii::$app->getUrlManager()->createAbsoluteUrl($routeParams);
-        }
-        
-        return Yii::$app->getUrlManager()->createUrl($routeParams);
-    }
 
     /**
      * Create a link to use when point to an ajax script.
      *
      * @param string $route  The base routing path defined in yii. module/controller/action
-     * @param array  $params Optional array containing get parameters with key value pairing
+     * @param array $params Optional array containing get parameters with key value pairing
      * @return string The ajax url link.
      */
     public static function toAjax($route, array $params = [])

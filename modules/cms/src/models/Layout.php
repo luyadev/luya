@@ -9,48 +9,45 @@ use luya\admin\ngrest\base\NgRestModel;
  * Layout Model for CMS-Layouts.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Layout extends NgRestModel
 {
-    public static function ngRestApiEndpoint()
-    {
-        return 'api-cms-layout';
-    }
-
-    public function ngRestConfig($config)
-    {
-        $config->list->field('name', 'Name')->text();
-        $config->list->field('json_config', 'JSON Config')->textarea();
-        $config->list->field('view_file', 'Filename (*.php)')->text();
-
-        $config->create->copyFrom('list', ['id']);
-
-        $config->update->copyFrom('list', ['id']);
-        $config->update->field('json_config', 'JSON Konfiguration')->textarea();
-
-        return $config;
-    }
-
     public static function tableName()
     {
         return 'cms_layout';
     }
-
+    
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-cms-layout';
+    }
+    
     public function rules()
     {
         return [
             [['name', 'json_config', 'view_file'], 'required'],
         ];
     }
-
-    public function scenarios()
+    
+    public function ngRestAttributeTypes()
     {
         return [
-            'restcreate' => ['name', 'json_config', 'view_file'],
-            'restupdate' => ['name', 'json_config', 'view_file'],
+            'name' => 'text',
+            'json_config' => ['textarea', 'encoding' => false],
+            'view_file' => 'text',
+        ];
+    }
+    
+    public function ngRestScopes()
+    {
+        return [
+            ['list', ['name', 'json_config', 'view_file'], ],
+            [['create', 'update'], ['name']],
         ];
     }
 
+    
     public function getJsonConfig($node = false)
     {
         $json = Json::decode($this->json_config);

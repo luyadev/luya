@@ -62,24 +62,23 @@ use luya\cms\admin\Module;
         $scope.init();
     });
 </script>
-<div ng-controller="PermissionController" class="card-panel">
-    <h3><?= Module::t('menu_group_item_env_permission'); ?></h3>
-    <div class="permissions">
-        <table>
+<h1><?= Module::t('menu_group_item_env_permission'); ?></h1>
+<div ng-controller="PermissionController" class="card">
+    <div class="card-body">
+        <table class="table table-hover table-sm">
             <thead>
                 <tr>
                     <th>
                         
                     </th>
                     <th ng-repeat="group in data.groups">
-                        <a class="btn btn-floating green permissions__group-button" ng-if="group.fullPermission"><i class="material-icons">check_circle</i></a>
-                        <a class="btn btn-floating grey permissions__group-button" ng-click="grantFullPermission(group.id)" ng-if="!group.fullPermission"><i class="material-icons">check_circle</i></a>
+                        <a class="btn btn-outline-success" ng-if="group.fullPermission"><i class="material-icons">check_circle</i></a>
+                        <a class="btn btn-outline-secondary" ng-click="grantFullPermission(group.id)" ng-if="!group.fullPermission"><i class="material-icons">check_circle</i></a>
                         {{ group.name }}
                     </th>
                 </tr>
             </thead>
             <tbody ng-repeat="container in data.containers">
-                <tr><td class="permissions__container-spacing"></td></tr>
                 <tr class="permissions__container-row">
                     <th colspan="{{data.groups.length + 1}}">{{ container.containerInfo.name }}</th>
                 </tr>
@@ -88,19 +87,19 @@ use luya\cms\admin\Module;
                     <td ng-repeat="group in item.groups">
                         <!-- {{ group.name }} -->
                         <div ng-if="group.groupFullPermission">
-                            <a class="btn btn-floating grey" ng-click="insertPermission(item.id, group.id)"><i class="material-icons">check</i></a>
-                            <a class="btn btn-floating grey" ng-click="insertInheritance(item.id, group.id)"><i class="material-icons">playlist_add_check</i></a>
+                            <a class="btn btn-outline-secondary" ng-click="insertPermission(item.id, group.id)"><i class="material-icons">check</i></a>
+                            <a class="btn btn-outline-secondary" ng-click="insertInheritance(item.id, group.id)"><i class="material-icons">playlist_add_check</i></a>
                         </div>
                         <div ng-if="group.isInheritedFromParent && !group.groupFullPermission">
-                            <a class="btn btn-floating green disabled"><i class="material-icons">check</i></a>
-                            <a class="btn btn-floating green disabled"><i class="material-icons">playlist_add_check</i></a>
+                            <a class="btn btn-outline-success disabled"><i class="material-icons">check</i></a>
+                            <a class="btn btn-outline-success disabled"><i class="material-icons">playlist_add_check</i></a>
                         </div>
                         <div ng-if="!group.isInheritedFromParent && !group.groupFullPermission">
-                            <a class="btn btn-floating green" ng-if="group.permissionCheckbox" ng-click="deletePermission(item.id, group.id)"><i class="material-icons">check</i></a>
-                            <a class="btn btn-floating red" ng-if="!group.permissionCheckbox" ng-click="insertPermission(item.id, group.id)"><i class="material-icons">check</i></a>
-
-                            <a class="btn btn-floating green" ng-if="group.isGroupPermissionInheritNode" ng-click="deleteInheritance(item.id, group.id)"><i class="material-icons">playlist_add_check</i></a>
-                            <a class="btn btn-floating red" ng-if="!group.isGroupPermissionInheritNode" ng-click="insertInheritance(item.id, group.id)"><i class="material-icons">playlist_add_check</i></a>
+                            <a class="btn btn-success" ng-if="group.permissionCheckbox" ng-click="deletePermission(item.id, group.id)"><i class="material-icons">check</i></a>
+                            <a class="btn btn-danger" ng-if="!group.permissionCheckbox" ng-click="insertPermission(item.id, group.id)"><i class="material-icons">check</i></a>
+    
+                            <a class="btn btn-success" ng-if="group.isGroupPermissionInheritNode" ng-click="deleteInheritance(item.id, group.id)"><i class="material-icons">playlist_add_check</i></a>
+                            <a class="btn btn-danger" ng-if="!group.isGroupPermissionInheritNode" ng-click="insertInheritance(item.id, group.id)"><i class="material-icons">playlist_add_check</i></a>
                         </div>
                     </td>
                 </tr>

@@ -60,5 +60,7 @@ class ZipHelper
         $z->addEmptyDir($dirName);
         self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
         $z->close();
+        
+        return true;
     }
 }

@@ -377,7 +377,40 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData, $rootScope) {
 	return service;
 });
 
-
+/*
+ * Admin Debug Bar provides an array with debug information from the last request in order to find bugs without the developer tools of the browser 
+ */
+zaa.factory("AdminDebugBar", function() {
+	
+	var service = [];
+	
+	service.data = [];
+	
+	service.clear = function() {
+		service.data = [];
+	};
+	
+	service.pushRequest = function(request) {
+		return service.data.push({'url': request.url, 'requestData': request.data, 'responseData': null, 'responseStatus' : null, start:new Date(), end:null, parseTime: null});
+	};
+	
+	service.pushResponse = function(response) {
+		var responseCopy = response;
+		
+		var serviceData = service.data[responseCopy.config.debugId];
+		
+		if (serviceData) {
+			serviceData.responseData = responseCopy.data;
+			serviceData.responseStatus = responseCopy.status;
+			serviceData.end = new Date();
+			serviceData.parseTime = new Date() - serviceData.start;
+		}
+		
+		return response;
+	};
+	
+	return service;
+});
 
 /*
 
@@ -391,7 +424,7 @@ Examples
 
 AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds', 2000');
 
-AdminToastService.confirm('Hello i am a callback and wait for your', function($q, $http) {
+AdminToastService.confirm('Hello i am a callback and wait for your', 'Das löschen?', function($q, $http) {
 	// do some ajax call
 	$http.get().then(function() {
 		promise.resolve();
@@ -421,7 +454,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		
 		var uuid = guid();
 		
-		service.queue[uuid] = {message: message, timeout: timeout, uuid: uuid, type: type};
+		service.queue[uuid] = {message: message, timeout: timeout, uuid: uuid, type: type, close: function() {
+			delete service.queue[this.uuid];
+		}};
 		
 		$timeout(function() {
 			delete service.queue[uuid];
@@ -431,6 +466,14 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 	service.success = function(message, timeout) {
 		service.notify(message, timeout, 'success');
 	};
+
+    service.info = function(message, timeout) {
+        service.notify(message, timeout, 'info');
+    };
+
+    service.warning = function(message, timeout) {
+        service.notify(message, timeout, 'warning');
+    };
 	
 	service.error = function(message, timeout) {
 		service.notify(message, timeout, 'error');
@@ -442,9 +485,9 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 		});
 	};
 	
-	service.confirm = function(message, callback) {
+	service.confirm = function(message, title, callback) {
 		var uuid = guid();
-		service.queue[uuid] = {message: message, click: function() {
+		service.queue[uuid] = {message: message, title:title, click: function() {
 			var queue = this;
 			var response = $injector.invoke(this.callback, this, { $toast : this });
 			if (response !== undefined) {
@@ -466,6 +509,60 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 	return service;
 });
 
+/*
+ * 
+ * Saving data in Html Storage
+ * 
+ *	$scope.isHover = HtmlStorage.getValue('sidebarToggleState', false); 
+ *		
+ *	$scope.toggleMainNavSize = function() {
+ *	    $scope.isHover = !$scope.isHover;
+ *	    HtmlStorage.setValue('sidebarToggleState', $scope.isHover);
+ *	}
+ */
+zaa.factory('HtmlStorage', function() {
+	var service = {
+		
+		data: {},
+		
+		isLoaded : false,
+		
+		loadData : function() {
+			if (!service.isLoaded) {
+				if (localStorage.getItem("HtmlStorage")) {
+					var data = angular.fromJson(localStorage.getItem('HtmlStorage'));
+					
+					service.data = data;
+				}
+			}
+		},
+		
+		saveData : function() {
+			localStorage.removeItem('HtmlStorage');
+			localStorage.setItem('HtmlStorage', angular.toJson(service.data));
+		},
+		
+		getValue : function(key, defaultValue) {
+			service.loadData();
+			
+			if (service.data.hasOwnProperty(key)) {
+				return service.data[key];
+			}
+			
+			return defaultValue;
+		},
+		
+		setValue : function(key, value) {
+			service.loadData();
+			
+			service.data[key] = value;
+			
+			service.saveData();
+		}
+	};
+	
+	return service;
+});
 
 // end of use strict
 })();

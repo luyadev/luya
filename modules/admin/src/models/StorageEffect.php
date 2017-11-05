@@ -13,6 +13,9 @@ use luya\admin\Module;
  * @property string $name
  * @property string $imagine_name
  * @property string $imagine_json_params
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageEffect extends NgRestModel
 {
@@ -68,7 +71,7 @@ final class StorageEffect extends NgRestModel
             'name' => 'text',
             'identifier' => 'text',
             'imagine_name' => 'text',
-            'imagine_json_params' => 'textarea',
+            'imagine_json_params' => ['textarea', 'encoding' => false],
         ];
     }
     

@@ -9,13 +9,16 @@ use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
 use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
-
+use luya\helpers\Html;
+use luya\helpers\ArrayHelper;
 
 /**
- * 
+ * Render the Crud view.
+ *
  * @property \luya\admin\ngrest\render\RenderCrudView $view
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RenderCrud extends Render implements RenderInterface, ViewContextInterface, RenderCrudInterface
 {
@@ -25,27 +28,13 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
     const TYPE_UPDATE = 'update';
 
-    public $viewFile = 'crud.php';
-
-    private $_permissions = [];
-
-    private $_buttons;
-
     private $_view;
 
-    private $_fields = [];
-
-    private $_langs;
-
-    public function can($type)
-    {
-        if (!array_key_exists($type, $this->_permissions)) {
-            $this->_permissions[$type] = Yii::$app->auth->matchApi(Yii::$app->adminuser->getId(), $this->config->apiEndpoint, $type);
-        }
-
-        return $this->_permissions[$type];
-    }
-
+    /**
+     * Returns the current view object.
+     *
+     * @return \luya\admin\ngrest\render\RenderCrudView
+     */
     public function getView()
     {
         if ($this->_view === null) {
@@ -55,78 +44,183 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         return $this->_view;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getViewPath()
     {
-    	return '@admin/views/ngrest';
+        return '@admin/views/ngrest';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function render()
     {
-    	return $this->view->render($this->viewFile, [
+        return $this->view->render('crud', [
             'canCreate' => $this->can(Auth::CAN_CREATE),
             'canUpdate' => $this->can(Auth::CAN_UPDATE),
             'canDelete' => $this->can(Auth::CAN_DELETE),
             'config' => $this->config,
-    		'isInline' => $this->getIsInline(),
-    		//'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
+            'isInline' => $this->getIsInline(),
+            'modelSelection' => $this->getModelSelection(),
+            'relationCall' => $this->getRelationCall(), // this is currently only used for the curd_relation view file, there for split the RenderCrud into two sepeare renderes.
+            'currentMenu' => Yii::$app->adminmenu->getApiDetail($this->getConfig()->getApiEndpoint()),
         ], $this);
     }
 
-    public function getApiEndpoint($append = null)
-    {
-        if ($append) {
-            $append = '/' . ltrim($append, '/');
-        }
-        return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
-    }
-    
-    public function getPrimaryKey()
-    {
-        return $this->config->primaryKey;
-    }
+    // RenderCrudInterface
     
     private $_relationCall = false;
     
+    /**
+     * @inheritdoc
+     */
     public function getRelationCall()
     {
-    	return $this->_relationCall;
+        return $this->_relationCall;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function setRelationCall(array $options)
     {
-    	$this->_relationCall = $options;
+        $this->_relationCall = $options;
     }
     
     private $_isInline = false;
 
     /**
-     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
-     * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
-     * @return bool
+     * @inheritdoc
      */
     public function getIsInline()
     {
-    	return $this->_isInline;	
+        return $this->_isInline;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function setIsInline($inline)
     {
-    	$this->_isInline = $inline;
+        $this->_isInline = $inline;
+    }
+    
+    private $_modelSelection;
+    
+    /**
+     * @inheritdoc
+     */
+    public function setModelSelection($selection)
+    {
+        $this->_modelSelection = $selection;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getModelSelection()
+    {
+        return $this->_modelSelection;
+    }
+    
+    private $_settingButtonDefinitions = [];
+    
+    /**
+     * @inheritdoc
+     */
+    public function setSettingButtonDefinitions(array $buttons)
+    {
+        $elements = [];
+        foreach ($buttons as $config) {
+            $innerContent = '<i class="material-icons">' . ArrayHelper::getValue($config, 'icon', 'extension') .'</i><span> '. $config['label'] . '</span>';
+            
+            $tagName = ArrayHelper::remove($config, 'tag', 'a');
+            
+            if (!array_key_exists('class', $config)) {
+                $config['class'] = 'dropdown-item';
+            }
+            
+            $elements[] = Html::tag($tagName, $innerContent, $config);
+        }
+        
+        $this->_settingButtonDefinitions= $elements;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getSettingButtonDefinitions()
+    {
+        return $this->_settingButtonDefinitions;
+    }
+    
+    // methods used inside the view context: RenderCrudView
+    
+    /**
+     * Returns the current order by state.
+     *
+     * @return string angular order by statements like `+id` or `-name`.
+     */
     public function getOrderBy()
     {
         if ($this->getConfig()->getDefaultOrderField() === false) {
             return false;
         }
         
-    	return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
+        return $this->getConfig()->getDefaultOrderDirection() . $this->getConfig()->getDefaultOrderField();
+    }
+    
+    /**
+     * Returns the primary key from the config.
+     *
+     * @return unknown
+     */
+    public function getPrimaryKey()
+    {
+        return $this->config->primaryKey;
+    }
+    
+    /**
+     * Returns the api endpoint, but can add appendix.
+     *
+     * @return string
+     */
+    public function getApiEndpoint($append = null)
+    {
+        if ($append) {
+            $append = '/' . ltrim($append, '/');
+        }
+        
+        return 'admin/'.$this->getConfig()->getApiEndpoint() . $append;
+    }
+    
+    // generic methods
+    
+    private $_canTypes = [];
+    
+    /**
+     * Checks whether a given type can or can not.
+     *
+     * @param string $type
+     * @return boolean
+     */
+    protected function can($type)
+    {
+        if (!array_key_exists($type, $this->_canTypes)) {
+            $this->_canTypes[$type] = Yii::$app->auth->matchApi(Yii::$app->adminuser->getId(), $this->config->apiEndpoint, $type);
+        }
+        
+        return $this->_canTypes[$type];
     }
     
     /*
      * OLD
      */
 
+    private $_buttons;
+    
     /**
      * collection all the buttons in the crud list.
      *
@@ -165,7 +259,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                     $buttons[] = [
                         'ngClick' => 'getActiveWindow(\''.$hash.'\', item.'.$this->config->primaryKey.')',
                         'icon' => $config['icon'],
-                        'label' => $config['alias'],
+                        'label' => $config['label'],
                     ];
                 }
             }
@@ -209,6 +303,8 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         return http_build_query($query, '', '&');
     }
 
+    private $_fields = [];
+    
     /**
      * wrapper of $config->getPointer to get only the fields.
      */
@@ -237,6 +333,9 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     {
         return ($activeWindows = $this->config->getPointer('aw')) ? $activeWindows : [];
     }
+    
+    
+    private $_langs;
 
     public function getLangs()
     {
@@ -261,6 +360,10 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
     private function evalGroupFields($pointerElements)
     {
+        if (!$pointerElements) {
+            return [];
+        }
+        
         $names = [];
         foreach ($pointerElements as $elmn) {
             $names[$elmn['name']] = $elmn['name'];
@@ -299,7 +402,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     }
 
     /**
-     * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file!
+     * @todo do not return the specific type content, but return an array contain more infos also about is multi linguage and foreach in view file!
      *
      * @param unknown_type $element
      * @param string $configContext list,create,update
@@ -313,19 +416,24 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             foreach ($this->getLangs() as $lang) {
                 if ($i == 0) {
                     $return[] = [
-                        'html' => '<label class="i18n__label">'.$element['alias'].'</label><div class="i18n__fields">',
+                        'html' => '<div class="form-i18n" ng-class="{\'has-field-help\': getFieldHelp(\''.$element['name'].'\')}">
+                                       ' . $this->createFieldHelpButton($element, $configContext) . '
+                                       <label class="form-i18n-label">
+                                        ' . $element['alias'] . '
+                                       </label>
+                                           <div class="row">',
                     ];
                 }
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $lang['short_code']);
                 $id = 'id-'.md5($ngModel.$lang['short_code']);
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
-                    'html' => '<div class="crud__i18n-col crud__i18n-col--{{(12/AdminLangService.selection.length)}}" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], true).'<div class="crud__flag"><span class="flag flag--'.$lang['short_code'].'"><span class="flag__fallback flag__fallback--colorized">'.$lang['short_code'].'</span></span></div></div>',
+                    'html' => '<div class="col" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], true).'<span class="flag flag-'.$lang['short_code'].' form-col-flag"><span class="flag-fallback">'.$lang['short_code'].'</span></span></div>',
                 ];
 
                 ++$i;
             }
-            $return[] = ['html' => '</div>'];
+            $return[] = ['html' => '</div><!-- /row --> </div><!-- /i18n -->'];
 
             return $return;
         }
@@ -335,18 +443,25 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
 
         return [
             [
-                'html' => $this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], false),
+                'html' => $this->createFieldHelpButton($element, $configContext) . $this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], false),
             ],
         ];
     }
 
+    private function createFieldHelpButton(array $element, $configContext)
+    {
+        if ($configContext !== self::TYPE_LIST) {
+            return '<span ng-if="getFieldHelp(\''.$element['name'].'\')" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getFieldHelp(\''.$element['name'].'\')" tooltip-position="left"></span>';
+        }
+    }
+    
     private function renderElementPlugins($configContext, $typeConfig, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)
     {
         $obj = NgRest::createPluginObject($typeConfig['class'], $elmnName, $elmnAlias, $elmni18n, $typeConfig['args']);
         $method = 'render'.ucfirst($configContext);
         $html = $obj->$method($elmnId, $elmnModel);
 
-        return (is_array($html)) ? implode(" ", $html) : $html;
+        return is_array($html) ? implode(" ", $html) : $html;
     }
 
     private function ngModelString($configContext, $fieldId)

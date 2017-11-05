@@ -14,6 +14,7 @@ A few plugins can be configured, make sure to check out the class reference of t
 |password            |{{\luya\admin\ngrest\plugins\Password}}|string        |Input type password field.
 |[selectArray](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectArray}}|string    |Select Dropdown with options from input configuration.
 |[selectModel](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectModel}}|string    |Select Dropdown with options given from an Active Record Model class.
+|SelectRelationActiveQuery|{{luya\admin\ngrest\plugins\SelectRelationActiveQuery}}|string |Select Dropdown based on an ActiveQuery relation defintion.
 |toggleStatus       |{{\luya\admin\ngrest\plugins\ToggleStatus}}|integer/string    |Create checkbox where you can toggle on or off.
 |image                |{{\luya\admin\ngrest\plugins\Image}}|integer    |Create an image upload and returns the imageId from storage system.
 |imageArray            |{{\luya\admin\ngrest\plugins\ImageArray}}|array        |Creates an uploader for multiple images and returns an array with the image ids from the storage system.

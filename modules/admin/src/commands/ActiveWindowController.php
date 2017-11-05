@@ -36,12 +36,20 @@ class ActiveWindowController extends Command
     public function renderWindowClassView($className, $namespace, $moduleId)
     {
         $alias = Inflector::humanize(Inflector::camel2words($className));
-        return $this->view->render('@admin/commands/views/aw/create.php', [
+        return $this->view->render('@admin/commands/views/aw/classfile.php', [
             'className' => $className,
             'namespace' => $namespace,
             'luyaText' => $this->getGeneratorText('aw/create'),
             'moduleId' => $moduleId,
             'alias' => $alias,
+        ]);
+    }
+    
+    public function renderWindowClassViewFile($className, $moduleId)
+    {
+        return $this->view->render('@admin/commands/views/aw/viewfile.php', [
+            'className' => $className,
+            'moduleId' => $moduleId,
         ]);
     }
     
@@ -64,12 +72,16 @@ class ActiveWindowController extends Command
         
         $file = $folder . DIRECTORY_SEPARATOR . $className . '.php';
         
-        $content = $this->renderWindowClassView($className, $module->getNamespace() . '\\aws', $moduleId);
+        $namespace = $module->getNamespace() . '\\aws';
         
-        FileHelper::createDirectory($folder);
-        
-        if (FileHelper::writeFile($file, $content)) {
-            return $this->outputSuccess("The Active Window file '$file' has been writtensuccessfull.");
+        if (FileHelper::createDirectory($folder) && FileHelper::writeFile($file, $this->renderWindowClassView($className, $namespace, $moduleId))) {
+            $object = Yii::createObject(['class' => $namespace . '\\' . $className]);
+            
+            if (FileHelper::createDirectory($object->getViewPath()) && FileHelper::writeFile($object->getViewPath() . DIRECTORY_SEPARATOR . 'index.php', $this->renderWindowClassViewFile($className, $moduleId))) {
+                $this->outputInfo("View file generated.");
+            }
+            
+            return $this->outputSuccess("Active Window '$file' created.");
         }
         
         return $this->outputError("Error while writing the Actice Window file '$file'.");

@@ -8,6 +8,7 @@ use luya\admin\ngrest\base\Api;
  * Effects API, provides all available system effects.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class EffectController extends Api
 {

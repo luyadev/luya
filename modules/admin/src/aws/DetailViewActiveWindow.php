@@ -39,6 +39,9 @@ use luya\admin\ngrest\base\ActiveWindow;
  * + shortSize
  *
  * See [Formatting Guide](http://www.yiiframework.com/doc-2.0/guide-output-formatting.html)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class DetailViewActiveWindow extends ActiveWindow
 {
@@ -46,16 +49,6 @@ class DetailViewActiveWindow extends ActiveWindow
      * @var string The name of the module where the active windows is located in order to finde the view path.
      */
     public $module = '@admin';
-    
-    /**
-     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
-     */
-    public $alias = 'Detail';
-    
-    /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'zoom_in';
     
     /**
      * @var array a list of attributes to be displayed in the detail view. Each array element
@@ -91,6 +84,22 @@ class DetailViewActiveWindow extends ActiveWindow
      *   Please refer to [[\yii\helpers\BaseHtml::renderTagAttributes()]] for the supported syntax.
      */
     public $attributes;
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultLabel()
+    {
+        return 'Detail';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'zoom_in';
+    }
     
     /**
      * Renders the index file of the ActiveWindow.

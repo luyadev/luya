@@ -1,0 +1,9 @@
+.empty-placeholder {
+    padding: 10px;
+    text-align: center;
+
+    &--drag-hover {
+        background-color: theme-color(primary);
+        color: $white;
+    }
+}

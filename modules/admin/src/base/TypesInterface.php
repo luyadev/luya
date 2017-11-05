@@ -5,7 +5,13 @@ namespace luya\admin\base;
 /**
  * TypesInterface represents all possible types for properties or blocks.
  *
+ * The zaa types array are angular directives.
+ *
+ * + If a type contain `-array` the return is an array with selections
+ * + Otherwise only 1 value can be returned
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface TypesInterface
 {
@@ -54,10 +60,16 @@ interface TypesInterface
     const TYPE_WYSIWYG = 'zaa-wysiwyg';
     
     /**
-     * @var string Retuns the selected value from the options array. Where key is what will be stored and returned and value 
+     * @var string Retuns the selected value from the options array. Where key is what will be stored and returned and value
      * will be display in the admin interfaces dropdown.
      */
     const TYPE_SELECT = 'zaa-select';
+    
+    /**
+     * @var string Returns a list of radio inputs based on an options array, but allows only a selection of one. Therefore its
+     * **not** `radios` or `radio-array` as the return value is not an array.
+     */
+    const TYPE_RADIO = 'zaa-radio';
     
     /**
      * @var string
@@ -127,7 +139,8 @@ interface TypesInterface
      * @var string Create an expandable list with plugins for each row.
      *
      * ```php
-     * ['var' => 'people', 'label' => 'People', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' => [
+     * ['var' => 'people', 'label' => 'People', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' =>
+     *     [
      *          [
      *              'type' => self::TYPE_SELECT,
      *              'var' => 'salutation',
@@ -136,13 +149,12 @@ interface TypesInterface
      *                  ['value' => 1, 'label' => 'Mr.'],
      *                  ['value' => 2, 'label' => 'Mrs.'],
      *              ]
-     *          ],
-     *          [
+     *          ], [
      *              'type' => self::TYPE_TEXT,
      *              'var' => 'name',
      *              'label' => 'Name'
-     *          ],
-     *      ],
+     *          ]
+     *      ]
      * ]
      * ```
      */

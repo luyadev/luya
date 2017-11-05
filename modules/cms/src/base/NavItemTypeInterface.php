@@ -3,6 +3,7 @@
 namespace luya\cms\base;
 
 /**
+ * Navigation Model Type Interface.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta6

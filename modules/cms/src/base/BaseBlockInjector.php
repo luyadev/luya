@@ -5,7 +5,6 @@ namespace luya\cms\base;
 use yii\base\Object;
 use yii\base\InvalidConfigException;
 
-
 /**
  * The base injector class for all Injectors.
  *
@@ -27,8 +26,9 @@ use yii\base\InvalidConfigException;
  * vars variables definitions `$extra['myvariable']`.
  *
  * @property \luya\cms\base\BlockInterface $context The context block object where the injector is placed.
- * @since 1.0.0-rc1
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class BaseBlockInjector extends Object
 {

@@ -11,6 +11,7 @@ use luya\admin\models\UserOnline;
  * Admin Menu API, provides all menu items and dashabord informations for a node or the entire system.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class MenuController extends RestController
 {

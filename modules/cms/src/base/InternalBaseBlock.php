@@ -2,7 +2,6 @@
 
 namespace luya\cms\base;
 
-
 use yii\base\Object;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
@@ -19,8 +18,8 @@ use luya\cms\helpers\BlockHelper;
  *
  * + {{\luya\cms\base\PhpBlock}}
  *
- * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class InternalBaseBlock extends Object implements BlockInterface, TypesInterface, \ArrayAccess
 {
@@ -483,7 +482,42 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     public function getConfigPlaceholdersExport()
     {
-        return (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
+        $array =  (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
+        
+        $holders = [];
+        
+        foreach ($array as $holder) {
+            if (isset($holder['var'])) {
+                $holders[] = $holder;
+            } else {
+                foreach ($holder as $columnHolder) {
+                    $holders[] = $columnHolder;
+                }
+            }
+        }
+        
+        return $holders;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getConfigPlaceholdersByRowsExport()
+    {
+        $array =  (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
+        
+        $rows = [];
+        
+        foreach ($array as $holder) {
+            if (isset($holder['var'])) {
+                $holder['cols'] = 12;
+                $rows[] = [$holder];
+            } else {
+                $rows[] = $holder;
+            }
+        }
+        
+        return $rows;
     }
     
     private $_cfgs = [];
@@ -561,124 +595,10 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      *     ->add('bold', 'Bold Videos')->cfgs([])->register(),
      * ```
      *
-     * @return \luya\cms\base\BlockFlavor
+     * @return \luya\cms\base\BlockVariationRegister
      */
     public static function variations()
     {
         return (new BlockVariationRegister(new static));
-    }
-
-    /**
-     * Create the options array for a zaa-select field based on an key value pairing
-     * array.
-     *
-     * @deprecated Will be removed in 1.0.0
-     * @param array $options The key value array pairing the select array should be created from.
-     * @since 1.0.0-beta5
-     * @return array
-     */
-    protected function zaaSelectArrayOption(array $options)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::selectArrayOption() instead.', E_USER_DEPRECATED);
-        return BlockHelper::selectArrayOption($options);
-    }
-
-    /**
-     * Create the Options list in the config for a zaa-checkbox-array based on an
-     * key => value pairing array.
-     *
-     * @deprecated Will be removed in 1.0.0
-     * @param array $options The array who cares the options with items
-     * @since 1.0.0-beta5
-     * @return array
-     */
-    protected function zaaCheckboxArrayOption(array $options)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::checkboxArrayOption() instead.', E_USER_DEPRECATED);
-        return BlockHelper::checkboxArrayOption($options);
-    }
-    
-    /**
-     * Get all informations from an zaa-image-upload type:
-     *
-     * ```php
-     * 'image' => $this->zaaImageUpload($this->getVarValue('myImage')),
-     * ```
-     *
-     * apply a filter for the image
-     *
-     * ```php
-     * 'imageFiltered' => $this->zaaImageUpload($this->getVarValue('myImage'), 'small-thumbnail'),
-     * ```
-     *
-     * @deprecated Will be removed in 1.0.0
-     * @param string|int $value Provided the value
-     * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
-     * @param boolean $returnObject Whether the storage object should be returned or an array.
-     * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
-     */
-    protected function zaaImageUpload($value, $applyFilter = false, $returnObject = false)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::imageUpload() instead.', E_USER_DEPRECATED);
-        return BlockHelper::imageUpload($value, $applyFilter, $returnObject);
-    }
-    
-    /**
-     * Return all informations for a file if exists
-     *
-     * ```php
-     * 'file' => $this->zaaFileUpload($this->getVarValue('myFile')),
-     * ```
-     *
-     * @deprecated Will be removed in 1.0.0
-     * @param string|int $value Provided the value
-     * @param boolean $returnObject Whether the storage object should be returned or an array.
-     * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
-     */
-    protected function zaaFileUpload($value, $returnObject = false)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::fileUpload() instead.', E_USER_DEPRECATED);
-        return BlockHelper::fileUpload($value, $returnObject);
-    }
-    
-    /**
-     * Get the full array for the specific zaa-file-array-upload type
-     *
-     * ```php
-     * 'fileList' => $this->zaaFileArrayUpload($this->getVarValue('files')),
-     * ```
-     *
-     * Each array item will have all file query item data and a caption key.
-     *
-     * @deprecated Will be removed in 1.0.0
-     * @param string|int $value The specific var or cfg fieldvalue.
-     * @param boolean $returnObject Whether the storage object should be returned or an array.
-     * @return array Returns an array in any case, even an empty array.
-     */
-    protected function zaaFileArrayUpload($value, $returnObject = false)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::fileArrayUpload() instead.', E_USER_DEPRECATED);
-        return BlockHelper::fileArrayUpload($value, $returnObject);
-    }
-
-    /**
-     * Get the full array for the specific zaa-file-image-upload type
-     *
-     * ```php
-     * 'imageList' => $this->zaaImageArrayUpload($this->getVarValue('images')),
-     * ```
-     *
-     * Each array item will have all file query item data and a caption key.
-     *
-     * @deprecated Will be removed in 1.0.0
-     * @param string|int $value The specific var or cfg fieldvalue.
-     * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
-     * @param boolean $returnObject Whether the storage object should be returned or an array.
-     * @return array Returns an array in any case, even an empty array.
-     */
-    protected function zaaImageArrayUpload($value, $applyFilter = false, $returnObject = false)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::imageArrayUpload() instead.', E_USER_DEPRECATED);
-        return BlockHelper::imageArrayUpload($value, $applyFilter, $returnObject);
     }
 }

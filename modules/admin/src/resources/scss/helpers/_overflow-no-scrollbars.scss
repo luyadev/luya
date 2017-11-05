@@ -1,0 +1,8 @@
+@mixin overflow-no-scrollbars() {
+    overflow-y: auto;
+    //overflow: -moz-scrollbars-none; // Firefox
+    &::-webkit-scrollbar {
+        display: none; // Safari and Chrome
+    }
+    -ms-overflow-style: none; // IE 10+
+}

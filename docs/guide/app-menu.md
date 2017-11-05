@@ -1,41 +1,54 @@
 # Menu Component
 
-The {{\luya\cms\Menu}} component allows you to collect data to build the websites navigations. The menu component is part of the `cms` module.
+The {{\luya\cms\Menu}} component allows you to build the websites navigations. The menu component is part of the **cms** module.
 
-You can access the {{\luya\cms\Menu}} component trough `Yii::$app->menu`. This component will help you to create menus, find childs, get items of containers, etc. The menu component will automatically registered as component when you the CMS Module to your config (menu component is part of the cms module).
+You can access the {{\luya\cms\Menu}} component trough `Yii::$app->menu`. This component help you to create menus, find childs, get items of containers, get propertie data and much more. The menu component is automatically registered when adding the CMS Module to your config.
 
-When you request a menu item you will always get a {{\luya\cms\menu\Item}} object which provides a lot of getter methods.
+When you request a menu item, you will always get a {{\luya\cms\menu\Item}} object which provides a lot of getter methods.
 
-The menu component will automatic load the current active menu items based on your current language which will be evulated by the {{\luya\web\Composition}} component.
+The menu component automatically loads the {{\luya\cms\Menu::getCurrent()}} active menu item based on your current language which will be evaluated by the {{\luya\web\Composition}} component.
 
 ## Get the current Page
 
-One of the most important features is to get the current active menu item, to access this {{\luya\cms\Menu}} you can use {{\luya\cms\Menu::getCurrent}}.
+One of the most important features is to get the current active menu item, to retrieve the current menu object use {{\luya\cms\Menu::getCurrent()}}. 
 
 ```php
 echo Yii::$app->menu->current->link; // equal: Yii::$app->menu->getCurrent()->getLink():
 ```
 
-Where {{\luya\cms\Menu::getCurrent}} returns a {{\luya\cms\menu\Item}} you can access other informations then {{\luya\cms\menu\Item::getLink}}, {{\luya\cms\menu\Item::getTitle}} etc.
+Where {{\luya\cms\Menu::getCurrent()}} returns a {{\luya\cms\menu\Item}} you can access other informations like {{\luya\cms\menu\Item::getLink()}}, {{\luya\cms\menu\Item::getTitle()}} etc.
 
 ## Get the Homepage
 
-To get the homepage us the {{\luya\cms\Menu::getHome}} property which will return a {{\luya\cms\menu\Item}}.
+To get the homepage object use {{\luya\cms\Menu::getHome}} method which will return a {{\luya\cms\menu\Item}} as well.
 
 ```php
 echo Yii::$app->menu->home->title; // equal: Yii::$app->menu->getHome()->getTitle();
 ```
 
-## Build menu Navigations
+## Building menu Navigations
 
-#### findAll()
+To list navigation data of the menu use the {{\luya\cms\Menu::find()}} method which returns a {{\luya\cms\menu\Query}} object you can defined where statements and return either {{\luya\cms\menu\Query::one()}}, {{\luya\cms\menu\Query::all()}} or {{\luya\cms\menu\Query::count()}}. To shorten you can use the {{\luya\cms\Menu::findAll()}} or {{\luya\cms\Menu::findOne()}} method.
 
-To list navigation data of the menu use the {{\luya\cms\Menu::find}} method (which is somehwat equilvalent implementation of Yii2 ActiveRecord pattern) you can use the {{\luya\cms\Menu::findAll}} method. This will return and array iterator you can foreach based on an where expression. Below a very common example of how to build a menu with one level:
+Using {{\luya\cms\menu\Query::one()}} or {{\luya\cms\Menu::findOne()}} return an {{\luya\cms\menu\Item}}. Foreachable responses from {{\luya\cms\menu\Query::all()}} or {{\luya\cms\Menu::findAll()}} return an {{\luya\cms\menu\Iterator}} instead.
+
+#### find()
+
+As Navigations are stored in containers you mostly want to return the root level of a navigation inside a specific container, where default is the standard container which is initialized when setting up LUYA with the CMS module:
 
 ```php
 <ul>
-<?php foreach (Yii::$app->menu->findAll(['parent_nav_id' => 0]) as $item): ?>
+<?php foreach (Yii::$app->menu->find()->container('default')->root()->all() as $item): ?>
     <li><a href="<?= $item->link;"><?= $item->title; ?></a>
+<?php endforeach; ?>
+</ul>
+```
+Which is equals to the {{\luya\cms\Menu::findAll()}} method with where parameters:
+
+```php
+<ul>
+<?php foreach (Yii::$app->menu->findAll(['parent_nav_id' => 0, 'container' => 'default']) as $item): ?>
+    <li><a href="<?= $item->link; ?>"><?= $item->title; ?></a></li>
 <?php endforeach; ?>
 </ul>
 ```
@@ -46,28 +59,35 @@ You can also add more where parameters by adding another key with value expressi
 findAll(['parent_nav_id' => 0, 'container' => 'footer']);
 ```
 
-#### find()
+#### where()
 
-Sometimes you are looking for more complex operator expression there for you can build menu query with the {{\luya\cms\Menu::find}} method:
+You can also use where expression to customize the menu output:
 
 ```php
 Yii::$app->menu->find()->where(['!=', 'is_active', 0])->andWhere(['==', 'parent_nav_id', 0])->all();
 ```
 
-Therefore you can use different operators inside the where query:
+Using in conditions:
 
-|Operator |Equals
+```php
+Yii::$app->menu->find()->where(['in', 'id', [1,2,3,4,5,6]])->all();
+```
+
+The following where operators are available inside a condition:
+
+|Operator|Equals
 |---|---
-|<= | Smaller as and equal
-|<  | Smaller as
-|>  | Bigger as
-|>= | Bigger as and equal
-|=  | Equals
-|== | Equal and type comparison
+|<= |Smaller as and equal
+|<  |Smaller as
+|>  |Bigger as
+|>= |Bigger as and equal
+|=  |Equals
+|== |Equal and type comparison
+|in |Whether a value is in the array definition
 
 #### findOne()
 
-To retrieve just a single menu item from the menu component based on parameters, you can use the {{\luya\cms\Menu::findOne}} method:
+To retrieve just a single menu item from the menu component based on *equal* where condition, you can use the {{\luya\cms\Menu::findOne}} method:
 
 ```php
 echo Yii::$app->menu->findOne(['id' => 1])->link;
@@ -110,7 +130,7 @@ foreach (Yii::$app->menu->getLevelContainer(2) as $secondItem):
 endforeach; 
 ```
 
-# Menu Item Injection
+## Menu Item Injection
 
 There is also a possibility to inject data into the menu component direct from every part of your web application. An item inject gives a module the possibility to add items into the menu Container.
 

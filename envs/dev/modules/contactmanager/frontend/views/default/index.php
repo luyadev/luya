@@ -4,7 +4,6 @@ use yii\captcha\Captcha;
 use yii\helpers\Url;
 use luya\helpers\Url as LuyaUrl;
 
-
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>

@@ -6,6 +6,7 @@ namespace luya\admin\ngrest\base;
  * Active Window Interface.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface ActiveWindowInterface
 {
@@ -36,7 +37,7 @@ interface ActiveWindowInterface
      * Set the hash of the current active window which is calculated by the ActiveWindow.
      *
      * Setting the the hash happens in the {{luya\admin\ngrest\render\RenderActiveWindow::render}} method.
-     * @param unknown $hash
+     * @param string $hash
      */
     public function setActiveWindowHash($hash);
     
@@ -46,4 +47,14 @@ interface ActiveWindowInterface
      * @return string The response string, render and displayed trough the angular ajax request.
      */
     public function index();
+    
+    /**
+     * Return the current label defined for this Active Window.
+     */
+    public function getLabel();
+    
+    /**
+     * Return the current icon defined for this Active Window.
+     */
+    public function getIcon();
 }

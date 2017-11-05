@@ -1,45 +1,118 @@
-table {
-    font-size: 14px;
+.table {
+    .dropdown-menu {
+        min-width: 0;
+    }
+
+    .custom-checkbox {
+        margin: 0;
+    }
+
+    th,
+    td {
+        padding-bottom: 6px;
+        padding-top: 6px;
+    }
+
+    tr,
+    td,
+    thead {
+        transition: .2s background-color ease-in-out;
+    }
 }
 
-.grid-sort-btn {
+.table-align-middle {
+    th,
+    td {
+        vertical-align: middle;
+    }
+}
+
+.thead-default th,
+.thead-inverse th {
+    border-top: 0;
+    color: color(gray);
+    font-weight: 400;
+
+    span {
+        vertical-align: middle;
+    }
+}
+
+.table-sorter-wrapper {
+    display: block;
+}
+
+.table-sorter {
+    color: color('gray');
     cursor: pointer;
-    display: inline-block;
-    font-size: 20px;
-    line-height: 1;
+    display: none;
+    margin: 0;
     vertical-align: middle;
 
-    &.active-orderby {
-        color: color("blue", "base");
-        font-weight: 700;
+    .material-icons {
+        visibility: hidden;
+    }
+
+    &.table-sorter-down {
+        display: inline-block;
+    }
+    .is-active & {
+        color: theme-color(primary);
+    }
+    &.is-sorting {
+        display: inline-block;
+    }
+    &.is-sorting + .table-sorter-down {
+        display: none;
+    }
+
+    .is-active &.is-sorting .material-icons {
+        visibility: visible;
     }
 }
 
-.table__group {
-    background-color: color('grey', 'base') !important;
-    border-left: 2px solid color('grey', 'base');
-    border-right: 2px solid color('grey', 'base');
-    color: color('shades', 'white');
+.table-group td {
+    background-color: theme-color(secondary);
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+}
 
-    > td {
-        border-bottom: 2px solid color('grey', 'base');
-        cursor: pointer;
-        padding: 10px 5px;
-    }
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, .15);
+}
 
-    &:first-child > td {
-        padding-top: 10px;
-    }
+// Copied from bootstrap to show table-responsive earlier
 
-    & ~ tr {
-        border-left: 2px solid color('grey', 'base');
+.table-responsive {
 
-        td:last-child {
-            border-right: 2px solid color('grey', 'base');
+    @media (max-width: $reponsive-table-breakpoint) {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        //-ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
+
+        // Prevent double border on horizontal scroll due to use of `display: block;`
+        &.table-bordered {
+            border: 0;
         }
+    }
+}
 
-        &:last-child td {
-            border-bottom: 2px solid color('grey', 'base');
-        }
+.table-responsive-wrapper {
+    display: block;
+    overflow: hidden;
+    overflow-x: auto;
+    width: 100%;
+    &::-webkit-scrollbar {
+        display: none; // Safari and Chrome
+    }
+    -ms-overflow-style: none; // IE 10+
+
+    table,
+    .table-responsive {
+        display: table;
+        overflow: hidden;
+        width: 100%;
     }
 }

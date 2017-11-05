@@ -56,7 +56,7 @@ abstract class Controller extends \yii\web\Controller
     }
 
     /**
-     * Returns the path for layout files when using {{\luya\web\Controller::renderLayout}} method. Those module layouts are located in @app/views folder.
+     * Returns the path for layout files when using {{\luya\web\Controller::renderLayout()}} method. Those module layouts are located in @app/views folder.
      *
      * @return string The path to the layout for the current Module.
      */

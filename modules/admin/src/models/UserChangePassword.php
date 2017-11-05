@@ -6,9 +6,10 @@ use yii\base\Model;
 use luya\admin\Module;
 
 /**
- * 
+ * User change Password model.
+ *
  * @property \luya\admin\models\User $user
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -61,7 +62,7 @@ class UserChangePassword extends Model
             return $this->addError('oldpass', 'The previous old password is invalid.');
         }
         
-        if (!$this->user->changePassword($this->newpass, $this->newpassrepeat)) {
+        if (!$this->user->changePassword($this->newpass)) {
             return $this->addErrors($this->user->getErrors());
         }
     }

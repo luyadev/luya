@@ -1,0 +1,11 @@
+zaa-checkbox-array .form-check {
+    margin-bottom: 0;
+}
+
+.zaa-checkbox-array-counter {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: z-index(before-content);
+}

@@ -16,7 +16,7 @@ use luya\admin\ngrest\base\Plugin;
  * ];
  * ```
  *
- * If you like to get the {{luya\admin\file\Item}} object directly from the {{luya\admin\components\StorageContainer}} component just enable `$fileItem`.
+ * If you like to get the {{luya\admin\file\Item}} object directly from the {{luya\admin\storage\BaseFileSystemStorage}} component just enable `$fileItem`.
  *
  * ```php
  * return [
@@ -27,6 +27,7 @@ use luya\admin\ngrest\base\Plugin;
  * Now when accessing the `$myfile` variabled defined from above the {{luya\admin\file\Item}} will be returned ottherwise false.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class File extends Plugin
 {

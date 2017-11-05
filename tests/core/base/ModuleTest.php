@@ -4,6 +4,8 @@ namespace luyatests\core\base;
 
 use Yii;
 use luyatests\LuyaWebTestCase;
+use luyatests\data\modules\UnitAdminModule;
+use luyatests\data\modules\unitmodule\Module;
 
 class ModuleTest extends LuyaWebTestCase
 {
@@ -32,9 +34,8 @@ class ModuleTest extends LuyaWebTestCase
     
     public function testRegisterTranslation()
     {
-        Yii::$app->getModule('unitmodule')->translations[] = ['prefix' => 'test*', 'basePath' => '@luya/messages', 'fileMap' => ['luya/test']];
-        Yii::$app->getModule('unitmodule')->init();
-        Yii::$app->getModule('unitmodule')->registerTranslation('foo*', '@luya/foobar/message', ['foo' => 'foo.php']);
+        Module::registerTranslation('test*', '@luya/messages', ['luyua/test']);
+        Module::registerTranslation('foo*', '@luya/foobar/message', ['foo' => 'foo.php']);
         
         $this->assertArrayHasKey('foo*', Yii::$app->i18n->translations);
         $this->assertArrayHasKey('test*', Yii::$app->i18n->translations);

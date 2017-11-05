@@ -8,6 +8,7 @@ namespace luya\admin\ngrest\base;
  * Each Active-Record which is used as an NgRest Configuration must implement this Interface.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface NgRestModelInterface
 {
@@ -25,4 +26,11 @@ interface NgRestModelInterface
      * @return string
      */
     public static function ngRestApiEndpoint();
+    
+    /**
+     * Whether current model is in ngrest context or not
+     *
+     * @return boolean
+     */
+    public function getIsNgRestContext();
 }

@@ -2,7 +2,6 @@
 
 namespace luya\admin\ngrest\plugins;
 
-
 use luya\admin\ngrest\base\Plugin;
 use luya\cms\helpers\BlockHelper;
 
@@ -19,8 +18,8 @@ use luya\cms\helpers\BlockHelper;
  * <a href="<?= $model->link->getHref(); ?>" target="<?= $model->link->getTarget(); ?>>">Go There</a>
  * ```
  *
- * @since 1.0.0-RC2
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Link extends Plugin
 {

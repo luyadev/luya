@@ -105,24 +105,6 @@ abstract class Module extends \yii\base\Module
      * @var string The default name of the moduleLayout
      */
     public $moduleLayout = 'layout';
-    
-    /**
-     * @var array Add translations for your module, all translation array must have the keys "prefix", "basePath" and "fileMap"
-     * For example:
-     *
-     * ```php
-     * $this->translations = [
-     *     ['prefix' => 'luya*', 'basePath' => '@luya/messages', 'fileMap' => ['luya/admin' => 'admin.php']],
-     * ],
-     * ```
-     *
-     * To use this translation run or createa a static helper method in your module.php
-     *
-     * ```php
-     * Yii::t('luya/admin', 'MyVariableInAdminPhp');
-     * ```
-     */
-    public $translations = [];
 
     /**
      * @inheritdoc
@@ -137,49 +119,7 @@ abstract class Module extends \yii\base\Module
             }
         }
         
-        $this->registerTranslationArray($this->translations);
-    }
-    
-    /**
-     * Internal used to register the translations from the translation array.
-     * @param array $translations
-     */
-    protected function registerTranslationArray(array $translations)
-    {
-        foreach ($translations as $translation) {
-            $this->registerTranslation($translation['prefix'], $translation['basePath'], $translation['fileMap']);
-        }
-    }
-    
-    /**
-     * Register a Translation to the i18n component.
-     *
-     * In order to register Translations you can either use the $translations array or calling this method
-     * straight after the init() method:
-     *
-     * ```php
-     * public function init()
-     * {
-     *     parent::init();
-     *
-     *     $this->registerTranslation('mymodule*', '@mymoduleid/messages', [
-     *         'mymodule' => 'mymodule.php',
-     *         'mymodule/sub' => 'sub.php',
-     *     ]);
-     * }
-     * ```
-     *
-     * @param string $prefix
-     * @param string $basePath
-     * @param array $fileMap
-     */
-    public function registerTranslation($prefix, $basePath, array $fileMap)
-    {
-        Yii::$app->i18n->translations[$prefix] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'basePath' => $basePath,
-            'fileMap' => $fileMap,
-        ];
+        static::onLoad();
     }
 
     /**
@@ -306,5 +246,73 @@ abstract class Module extends \yii\base\Module
     public function getControllerPath()
     {
         return Yii::getAlias('@' . str_replace('\\', '/', $this->controllerNamespace), false);
+    }
+
+    // STATIC METHODS
+
+    /**
+     * Internal used to register the translations from the translation array or set alias paths.
+     *
+     * This is a static behavior, so we can call this call without the object context, for example when
+     * the composer plugin registers blocks but the module is not registered with translations.
+     *
+     * @return void
+     */
+    public static function onLoad()
+    {
+    }
+    
+    /**
+     * Register a Translation to the i18n component.
+     *
+     * In order to register Translations you can register them inside the {{luya\base\Module::onLoad()}} method.
+     *
+     * ```php
+     * public static function onLoad()
+     * {
+     *     $this->registerTranslation('mymodule*', static::staticBasePath() . '/messages', [
+     *         'mymodule' => 'mymodule.php',
+     *         'mymodule/sub' => 'sub.php',
+     *     ]);
+     * }
+     * ```
+     *
+     * @param string $prefix The prefix of which the messages are indicated
+     * @param string $basePath The path to the messages folder where the messages are located.
+     * @param array $fileMap The files mapping inside the messages folder.
+     */
+    public static function registerTranslation($prefix, $basePath, array $fileMap)
+    {
+        Yii::$app->i18n->translations[$prefix] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => $basePath,
+            'fileMap' => $fileMap,
+        ];
+    }
+    
+    /**
+     * Get base path from static view port.
+     *
+     * @return string
+     */
+    public static function staticBasePath()
+    {
+        $class = new \ReflectionClass(get_called_class());
+        
+        return dirname($class->getFileName());
+    }
+
+    /**
+     *
+     * @param unknown $category
+     * @param unknown $message
+     * @param array $params
+     * @param unknown $language
+     * @return string
+     */
+    public static function baseT($category, $message, array $params = [], $language = null)
+    {
+        static::onLoad();
+        return Yii::t($category, $message, $params, $language);
     }
 }

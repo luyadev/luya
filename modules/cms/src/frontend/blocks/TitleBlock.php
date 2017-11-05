@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * Heading-Title Block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class TitleBlock extends PhpBlock
 {

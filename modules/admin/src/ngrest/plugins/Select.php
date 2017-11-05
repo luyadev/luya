@@ -9,14 +9,20 @@ use luya\admin\ngrest\base\Plugin;
  * Base class for select dropdowns via Array or Model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Select extends Plugin
 {
     public $initValue = 0;
+    
+    /**
+     * @var string This value will be displayed in the ngrest list overview if the given value is empty().
+     */
+    public $emptyListValue = "-";
 
     /**
      * Getter method for data array.
-     * 
+     *
      * @return array
      */
     abstract public function getData();
@@ -50,7 +56,7 @@ abstract class Select extends Plugin
      */
     public function serviceData($event)
     {
-        return ['selectdata' => $this->data];
+        return ['selectdata' => $this->getData()];
     }
     
     /**
@@ -59,9 +65,14 @@ abstract class Select extends Plugin
     public function onAfterListFind($event)
     {
         $value = StringHelper::typeCast($event->sender->getAttribute($this->name));
-        foreach ($this->data as $item) {
-            if (StringHelper::typeCast($item['value']) === $value) {
-                $event->sender->setAttribute($this->name, $item['label']);
+        
+        if ($this->emptyListValue && empty($value)) {
+            $event->sender->setAttribute($this->name, $this->emptyListValue);
+        } else {
+            foreach ($this->getData() as $item) {
+                if (StringHelper::typeCast($item['value']) === $value) {
+                    $event->sender->setAttribute($this->name, $item['label']);
+                }
             }
         }
     }

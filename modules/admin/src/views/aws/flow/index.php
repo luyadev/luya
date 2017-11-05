@@ -1,5 +1,5 @@
 <script>
-zaa.bootstrap.register('FlowController', function($scope, $controller) {
+zaa.bootstrap.register('FlowController', function($scope, $rootScope, $controller) {
     $scope.$watch(function() { return $scope.$flow }, function(n, o) {
         $scope.$flow.opts.target = $scope.$parent.getActiveWindowCallbackUrl('upload');
     });
@@ -28,54 +28,39 @@ zaa.bootstrap.register('FlowController', function($scope, $controller) {
         });
     };
 
+    $scope.flowOptions = {
+        headers : {Authorization : 'Bearer ' + $rootScope.luyacfg.authToken}
+    };
+    
     $scope.loadList();
 });
 </script>
-<div ng-controller="FlowController" flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-complete="loadList()" flow-file-success="$file.upload = true" class="flow">
-
+<div ng-controller="FlowController" flow-init="flowOptions" flow-files-submitted="$flow.upload()" flow-complete="loadList()" flow-file-success="$file.upload = true">
     <div class="row">
-
-        <div class="col s10">
-            <div class="flow__dropzone" flow-drop flow-drag-enter="style={background:'#dcedc8'}" flow-drag-leave="style={}" ng-style="style">
-                Drag and Drop your images here
+        <div class="col md-4">
+            <button type="button" class="btn btn-primary" flow-btn><i class="material-icons">file_upload</i> Image Upload</button>
+            <div ng-show="$flow.files.length > 0">
+                <h3 style="margin-top:40px;">Upload list</h3>
+	            <table class="table table-sm">
+	                <tr ng-repeat="file in $flow.files" ng-class="{'table-success' : file.upload, 'table-active' : !file.upload}">
+	                    <td>
+                            <i class="material-icons" ng-if="file.upload">done</i>
+	                        <i class="material-icons spin" ng-if="!file.upload">cached</i>
+	                    </td>
+	                    <td>{{file.name}}</td>
+	                </tr>
+	            </table>
+	            <button type="button" class="btn btn-secondary" ng-click="clearFlowList()">Clear List</button>
             </div>
         </div>
 
-        <div class="col s2">
-            <span class="btn" flow-btn>Upload images</span>
-        </div>
-
-    </div>
-
-
-    <div class="row flow__lower">
-
-        <div class="col s4">
-            <table class="striped">
-                <tr>
-                    <th colspan="3">Upload list</th>
-                </tr>
-                <tr ng-repeat="file in $flow.files">
-                    <!--<td>{{$index+1}}</td>-->
-                    <td>
-                        <div ng-if="file.upload"><button tyle="button" class="btn btn-floating"><i class="material-icons">done</i></button></div>
-                        <div ng-if="!file.upload"><i class="material-icons spin">cached</i></div>
-                    </td>
-                    <td>{{file.name}}</td>
-                </tr>
-            </table>
-            <button ng-if="$flow.files.length > 0" type="button" class="flow__clear right btn btn--small blue lighten-2" ng-click="clearFlowList()">Clear List</button>
-        </div>
-
-        <div class="col s8">
-            <div class="row flow__images">
-                <div class="col s4 m3 l2" ng-repeat="(imageId, file) in list">
-                    <div class="flow__image-wrap">
-                        <img class="flow__image" ng-src="{{file.source}}" />
-                        <div class="flow__delete" ng-click="removeItem(imageId)"><i class="material-icons">delete</i></div>
-                    </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-1" ng-repeat="(imageId, file) in list">
+                    <button type="button" class="btn btn-outline-danger btn-sm" ng-click="removeItem(imageId)" style="position:absolute;"><i class="material-icons">delete</i></button>
+                    <img class="img-fluid img-thumbnail" ng-src="{{file.source}}" alt="{{file.source}}" />
                 </div>
             </div>
-        </div>
+       </div>
     </div>
 </div>

@@ -8,9 +8,8 @@ use Countable;
 /**
  * Iterator class for file items.
  *
- * @since 1.0.0-beta2
- *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class IteratorAbstract extends \yii\base\Object implements Iterator, Countable
 {

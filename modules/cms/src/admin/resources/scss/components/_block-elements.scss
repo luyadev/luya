@@ -1,0 +1,82 @@
+.block-front {
+
+    h1, h2, h3, h4, h5 {
+        color: $black;
+    }
+
+    > *:last-of-type {
+        margin-bottom: 0;
+    }
+
+    table {
+        margin: 0;
+
+        td > p:first-of-type:last-of-type,
+        th > p:first-of-type:last-of-type {
+            margin: 0;
+        }
+    }
+
+    hr {
+        margin-bottom: 1rem !important;
+        margin-top: 1rem !important;
+    }
+
+    img {
+        max-width: 100%;
+        width: auto;
+    }
+
+    blockquote {
+        background-color: map-get($grays, 100);
+        border-left: 3px solid theme-color(primary);
+        display: block;
+        padding: 15px;
+        position: relative;
+        width: 100%;
+
+        p {
+            font-family: $font-family-sans-serif;
+            font-style: italic;
+            margin: 0;
+            position: relative;
+            text-indent: 40px;
+
+            &:before {
+                color: theme-color(primary);
+                content: '\201C';
+                font-size: 70px;
+                font-weight: 700;
+                left: 0;
+                line-height: 0;
+                position: absolute;
+                text-indent: 0;
+                text-shadow: 3px 7px 5px rgba(0, 0, 0, 0.1);
+                top: 20px;
+            }
+        }
+    }
+
+    iframe {
+        max-width: 100%;
+    }
+
+    .iframe-container {
+        height: 0;
+        margin: 0;
+        overflow: hidden;
+        padding-bottom: 56.25%; /* ratio 16x9 */
+        pointer-events: none;
+        position: relative;
+        width: 100%;
+
+        iframe {
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    }
+
+}

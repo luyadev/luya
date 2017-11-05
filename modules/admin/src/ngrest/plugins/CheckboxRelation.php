@@ -66,7 +66,9 @@ use luya\admin\helpers\I18n;
  *
  * @property \luya\admin\ngrest\base\NgRestModel $model The model object
  * @property string $modelPrimaryKey The primary key string.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CheckboxRelation extends Plugin
 {

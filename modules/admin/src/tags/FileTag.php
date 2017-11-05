@@ -6,6 +6,14 @@ use Yii;
 use luya\tag\BaseTag;
 use yii\helpers\Html;
 
+/**
+ * File Tag.
+ *
+ * Generates a link to a target file in a new window.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class FileTag extends BaseTag
 {
     public function example()
@@ -28,6 +36,6 @@ EOT;
             return false;
         }
         
-        return Html::a(!empty($sub) ? $sub : $file->name, $file->sourceStatic, ['target' => '_blank']);
+        return Html::a(!empty($sub) ? $sub : $file->name, $file->href, ['target' => '_blank']);
     }
 }

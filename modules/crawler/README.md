@@ -12,13 +12,7 @@ An easy to use Full-Website page crawler to make provide search results on your 
 Add the package to your composer file
 
 ```sh
-composer require luyadev/luya-module-crawler:1.0.0-RC3
-```
-
-or add it directly to your composer.json file:
-
-```sh
-"luyadev/luya-module-crawler" : "1.0.0-RC3"
+composer require luyadev/luya-module-crawler:1.0.0-RC4
 ```
 
 Add the modules to your configuration (config) in the modules section:

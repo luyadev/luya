@@ -11,10 +11,11 @@ use luya\admin\models\StorageImage;
  * Helper class to handle remove, upload and moving of storage files.
  *
  * The class provides common functions in order to work with the Storage component. This helper method will only work
- * if the {{luya\admin\components\StorageContainer}} component is registered which is by default the case when the LUYA
+ * if the {{luya\admin\storage\BaseFileSystemStorage}} component is registered which is by default the case when the LUYA
  * admin module is provided.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Storage
 {
@@ -41,21 +42,6 @@ class Storage
     public static function getUploadErrorMessage($errorId)
     {
         return isset(self::$uploadErrors[$errorId]) ? self::$uploadErrors[$errorId] : 'unknown error';
-    }
-
-    /**
-     * Create a unique file hash from the file name.
-     *
-     * Warning
-     * Because PHP's integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all crc32() results will be positive integers though.
-     * So you need to use the "%u" formatter of sprintf() or printf() to get the string representation of the unsigned crc32() checksum in decimal format.
-     *
-     * @var string $fileName The file name which should be hashed
-     * @return string
-     */
-    public static function createFileHash($fileName)
-    {
-        return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
     }
     
     /**
@@ -180,19 +166,19 @@ class Storage
      * The replaced file will have the name of the $oldFileSource but the file will be the content of the $newFileSource.
      *
      * @param string $oldFileSource The path to the old file which should be replace by the new file. e.g `path/to/old.jpp`
-     * @param string $newFileSource The path to the new file which is going to have the same name as the old file e.g. `path/of/new.jpg`.
+     * @param string $newFileSource The path to the new file which is going to have the same name as the old file e.g. `path/of/new.jpg`.  $_FILES['tmp_name']
+     * @param string $newFileName The new name of the file which is uploaded, mostly given from $_FILES['name']
      * @return boolean Whether moving was successfull or not.
      */
-    public static function replaceFile($oldFileSource, $newFileSource)
+    public static function replaceFile($oldFileSource, $newFileSource, $newFileName)
     {
-        $toDelete = $oldFileSource . uniqid('oldfile') . '.bkl';
-        if (rename($oldFileSource, $toDelete)) {
-            if (copy($newFileSource, $oldFileSource)) {
-                @unlink($toDelete);
-                return true;
-            }
+        try {
+            Yii::$app->storage->ensureFileUpload($newFileSource, $newFileName);
+        } catch (\Exception $e) {
+            return false;
         }
-        return false;
+
+        return Yii::$app->storage->fileSystemReplaceFile($oldFileSource, $newFileSource);
     }
     
     /**
@@ -212,7 +198,7 @@ class Storage
      * ```
      *
      * @param array $fileArray Its an entry of the files array like $_FILES['logo_image'].
-     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\components\StorageContainer::findFolders}}
+     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\storage\BaseFileSystemStorage::findFolders}}
      * @param string $isHidden Whether the file should be hidden or not.
      * @return array An array with key `upload`, `message` and `file_id`. When upload is false, an error occured otherwise true. The message key contains the error messages. If no error happend `file_id` will contain the new uploaded file id.
      */
@@ -245,7 +231,7 @@ class Storage
      *
      * @todo what happen if $files does have more then one entry, as the response is limit to 1
      * @param array $filesArray Use $_FILES array.
-     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\components\StorageContainer::findFolders}}
+     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\storage\BaseFileSystemStorage::findFolders}}
      * @param string $isHidden Whether the file should be hidden or not.
      * @return array An array with key `upload`, `message` and `file_id`. When upload is false, an error occured otherwise true. The message key contains the error messages. If no error happend `file_id` will contain the new uploaded file id.
      */
@@ -263,12 +249,133 @@ class Storage
         return ['upload' => false, 'message' => 'no files selected or empty files list.', 'file_id' => 0];
     }
     
-    
-    private static function extractFilesDataFromFilesArray(array $file)
+    /**
+     * Example Input unform:
+     *
+     * ```php
+        Array
+        (
+            [name] => Array
+                (
+                    [attachment] => Array
+                        (
+                            [0] => Altersfragen-Leimental (4).pdf
+                            [1] => Altersfragen-Leimental (2).pdf
+                        )
+
+                )
+
+            [type] => Array
+                (
+                    [attachment] => Array
+                        (
+                            [0] => application/pdf
+                            [1] => application/pdf
+                        )
+
+                )
+
+            [tmp_name] => Array
+                (
+                    [attachment] => Array
+                        (
+                            [0] => /tmp/phpNhqnwR
+                            [1] => /tmp/phpbZ8XSn
+                        )
+
+                )
+
+            [error] => Array
+                (
+                    [attachment] => Array
+                        (
+                            [0] => 0
+                            [1] => 0
+                        )
+
+                )
+
+            [size] => Array
+                (
+                    [attachment] => Array
+                        (
+                            [0] => 261726
+                            [1] => 255335
+                        )
+
+                )
+
+        )
+     * ```
+     *
+     * to:
+     *
+     * ```php
+     *
+        Array
+        (
+            [0] => Array
+                (
+                    [name] => Altersfragen-Leimental (4).pdf
+                    [type] => application/pdf
+                    [tmp_name] => /tmp/phpNhqnwR
+                    [error] => 0
+                    [size] => 261726
+                )
+
+            [1] => Array
+                (
+                    [name] => Altersfragen-Leimental (2).pdf
+                    [type] => application/pdf
+                    [tmp_name] => /tmp/phpbZ8XSn
+                    [error] => 0
+                    [size] => 255335
+                )
+
+        )
+     * ```
+     * @param array $files
+     * @return array|unknown
+     */
+    public static function extractFilesDataFromMultipleFiles(array $files)
     {
+        $data = [];
+        $i=0;
+        foreach ($files as $type => $field) {
+            foreach ($field as $fieldName => $values) {
+                if (is_array($values)) {
+                    foreach ($values as $key => $value) {
+                        $data[$key][$type] = $value;
+                    }
+                } else {
+                    $data[$i][$type] = $values;
+                }
+            }
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * Extract $_FILES array.
+     *
+     * @param array $file
+     * @return array
+     */
+    public static function extractFilesDataFromFilesArray(array $file)
+    {
+        if (!isset($file['tmp_name'])) {
+            return [];
+        }
+        
         $files = [];
         if (is_array($file['tmp_name'])) {
             foreach ($file['tmp_name'] as $index => $value) {
+                // skip empty or none exsting tmp file names
+                if (!isset($file['tmp_name'][$index]) || empty($file['tmp_name'][$index])) {
+                    continue;
+                }
+                // create files structure array
                 $files[] = [
                     'name' => $file['name'][$index],
                     'type' => $file['type'][$index],
@@ -277,7 +384,7 @@ class Storage
                     'size' => $file['size'][$index],
                 ];
             }
-        } else {
+        } elseif (isset($file['tmp_name']) && !empty($file['tmp_name'])) {
             $files[] = [
                 'name' => $file['name'],
                 'type' => $file['type'],
@@ -290,7 +397,19 @@ class Storage
         return $files;
     }
     
-    private static function verifyAndSaveFile(array $file, $toFolder = 0, $isHidden = false)
+    /**
+     *
+     * @param array $file An array with the following keys available:
+     * - name:
+     * - type:
+     * - tmp_name:
+     * - error:
+     * - size:
+     * @param number $toFolder
+     * @param string $isHidden
+     * @return array
+     */
+    protected static function verifyAndSaveFile(array $file, $toFolder = 0, $isHidden = false)
     {
         try {
             if ($file['error'] !== UPLOAD_ERR_OK) {

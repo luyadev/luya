@@ -12,7 +12,7 @@ class ConcreptImplementationBlock implements BlockInterface
      */
     public function name()
     {
-        return 'Concrept Block';
+        return 'Concret Block';
     }
     
     /**
@@ -32,7 +32,7 @@ class ConcreptImplementationBlock implements BlockInterface
      */
     public function icon()
     {
-        return '<i class="fa fa-icon">icon</i>';
+        return 'volumne';
     }
     
     /**
@@ -195,5 +195,10 @@ class ConcreptImplementationBlock implements BlockInterface
     public function getIsDirtyDialogEnabled()
     {
         return true;
+    }
+    
+    public function getConfigPlaceholdersByRowsExport()
+    {
+        return [];
     }
 }

@@ -17,17 +17,17 @@ use luya\helpers\ArrayHelper;
  * Event trigger cycle for different use cases, the following use cases are available with its
  * event cycles.
  *
- * + onFind
- * + onListFind
- * + onExpandFind
+ * Async:
+ * + onCollectServiceData: A collection bag where you can provide data and access them trough angular, its not available inside the same model as this process runs async
  *
- * + find = The model is used in your controller frontend logic to display and assign data into the view (developer use case)
- * + list find = The model is populated for the Admin Table list view where you can see all your items and click the edit/delete icons.
- *   1. onListFind
- * + update = The update form to update an item from the list view
- * + create = The create form to create a new record.
+ * Async:
+ * + onFind: The model is used in your controller frontend logic to display and assign data into the view (developer use case)
+ * + onListFind: The model is populated for the Admin Table list view where you can see all your items and click the edit/delete icons.
+ * + onExpandFind: Equals to onFind but only for the view api of the model, which means the data which is used for edit.
+ * + onSave: Before Update / Create of the new data set.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Plugin extends Component
 {
@@ -229,12 +229,17 @@ abstract class Plugin extends Component
      * @param string $ngrestModelClass
      * @return string The generated tag or null if permission does not exists
      */
-    public function createCrudLoaderTag($ngrestModelClass)
+    public function createCrudLoaderTag($ngrestModelClass, $ngRestModelSelectMode = null, array $options = [])
     {
         $menu = Yii::$app->adminmenu->getApiDetail($ngrestModelClass::ngRestApiEndpoint());
         
         if ($menu) {
-            return $this->createTag('crud-loader', null, ['api' => str_replace('-', '/', $menu['route'])]);
+            if ($ngRestModelSelectMode) {
+                $options['model-setter'] = $ngRestModelSelectMode;
+                $options['model-selection'] = 1;
+            }
+            
+            return $this->createTag('crud-loader', null, array_merge(['api' => $menu['route'], 'alias' => $menu['alias']], $options));
         }
         
         return null;
@@ -256,7 +261,7 @@ abstract class Plugin extends Component
     }
     
     /**
-     * Remeves and event from the events stack by its trigger name.
+     * Remove an event from the events stack by its trigger name.
      *
      * In order to remove an event trigger from stack you have to do this right
      * after the initializer.
@@ -301,14 +306,14 @@ abstract class Plugin extends Component
         return true;
     }
     
-     /**
-     * This event will be triggered `onSave` event. If the model property is not writeable the event will not trigger.
-     *
-     * If the beforeSave method returns true and i18n is enabled, the value will be json encoded.
-     *
-     * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
-     * @return void
-     */
+    /**
+    * This event will be triggered `onSave` event. If the model property is not writeable the event will not trigger.
+    *
+    * If the beforeSave method returns true and i18n is enabled, the value will be json encoded.
+    *
+    * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
+    * @return void
+    */
     public function onSave($event)
     {
         if ($this->isAttributeWriteable($event) && $this->onBeforeSave($event)) {
@@ -451,6 +456,8 @@ abstract class Plugin extends Component
     
     /**
      * The ngrest services collector.
+     *
+     * > The service event is async to the other events, which means the service event collects data before the the other events are called.
      *
      * @param \luya\admin\ngrest\base\NgRestModel::EVENT_SERVICE_NGREST $event NgRestModel event EVENT_SERVICE_NGREST.
      */

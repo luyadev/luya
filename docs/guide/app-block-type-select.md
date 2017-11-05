@@ -21,3 +21,16 @@ Using select with string values:
     ['value' => 'jane', 'label' => 'Jane Doe'],
 ]],
 ```
+
+The {{\luya\cms\helpers\BlockHelper}} provides you an optimized markup for the select options array.
+
+```php
+ ['var' => 'width', 'label' => 'Width', 'type' => self::TYPE_SELECT, 'options' => BlockHelper::selectArrayOption(
+     [
+         1 => '1/3 Column',
+         2 => '2/3 Column',
+         3 => '2/3 Column',
+     ]
+ )],
+
+ ```

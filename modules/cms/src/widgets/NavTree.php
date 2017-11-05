@@ -2,7 +2,6 @@
 
 namespace luya\cms\widgets;
 
-
 use luya\cms\menu\QueryIteratorFilter;
 use luya\helpers\ArrayHelper;
 use Yii;
@@ -50,6 +49,7 @@ use yii\helpers\Html;
  * ```
  *
  * @property \luya\cms\menu\Item $startItem Get the start Item entry.
+ *
  * @author Marc Stampfli <kontakt@marcstampfli.guru>
  * @since 1.0.0
  */

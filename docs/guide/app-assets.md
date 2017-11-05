@@ -23,36 +23,22 @@ From the example above the css file `style.css` would be looked up in the locati
 
 ### Using the Asset
 
-To register an asset file you have to put those files into the config of a module. Each module can have assets. All controllers of this module will register those assets into the view automaticaly. If you are in a cms context, all asset files must be registered to the cms module, otherwise they will not be available in the cmslayouts. An example of registering assets into the cms module:
+To use an asset bundle, register it with a view by calling the {{yii\web\AssetBundle::register()}} method. For example, in a view template you can register an asset bundle like the following:
 
 ```php
-return [
-    'modules' => [
-        ...
-        'cms' => [
-            'class' => 'cms\Module',
-            'assets' => [
-                '\\app\\assets\\LuyaioAsset',
-                '\\app\\assets\\FooBarAsset',
-            ]
-        ],
-        ...
-    ]
-];
+use app\assets\AppAsset;
+AppAsset::register($this);  // $this represents the view object
 ```
 
-The original Yii way of including Assets is good as well, therefore you have to register the asset in any view file (views, layouts), an example of registering an asset:
+> The yii\web\AssetBundle::register() method returns an asset bundle object containing the information about the published assets, such as basePath or baseUrl.
 
-```php
-use app\assets\MyTestAsset;
+If you are registering an asset bundle in other places, you should provide the needed view object. For example, to register an asset bundle in a widget class, you can get the view object by `$this->view`.
 
-$asset = MyTestAsset::register($this); // $this represents the view object
-```
+When an asset bundle is registered with a view, behind the scenes Yii will register all its dependent asset bundles. And if an asset bundle is located in a directory inaccessible through the Web, it will be published to a Web directory. Later, when the view renders a page, it will generate `link` and `script` tags for the CSS and JavaScript files listed in the registered bundles. The order of these tags is determined by the dependencies among the registered bundles and the order of the assets listed in the {{yii\web\AssetBundle::$css}} and {{yii\web\AssetBundle::$js}} properties.
 
 ### Publish Options
 
-To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders to be published.
-For example in the LUYA kickstarter project, you'll find both the 'boostrap' and the 'css' folder in the publish options:
+To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders to be published. For example in the LUYA kickstarter project, you'll find both the 'boostrap' and the 'css' folder in the publish options:
 
 ```php
 public $publishOptions = [
@@ -63,6 +49,17 @@ public $publishOptions = [
 ];
 ```
 
+Or you can do also the opposite of this behavior by select which folder should **not** be copied within the assets folder. To do so configure the `except` property:
+
+```php
+public $publishOptions = [
+    'except' => [
+        'node_modules/',
+    ]
+];
+```
+
+> Patterns ending with '/' apply to **directory** paths only, and patterns not ending with '/' apply to **file** paths only. For example, '/a/b' matches all file paths ending with '/a/b'; and '.svn/' matches directory paths ending with '.svn'.
 
 ### Accessing the asset path
 

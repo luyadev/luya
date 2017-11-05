@@ -7,11 +7,11 @@ use luya\web\ErrorHandlerExceptionRenderEvent;
 
 class ErrorHandlerExceptionRenderEventTest extends LuyaWebTestCase
 {
-	public function testTriggerException()
-	{
-		$event = new ErrorHandlerExceptionRenderEvent();
-		$event->exception = new \Exception('Exception');
+    public function testTriggerException()
+    {
+        $event = new ErrorHandlerExceptionRenderEvent();
+        $event->exception = new \Exception('Exception');
 
-		$this->assertInstanceOf('\Exception', $event->exception);
-	}
+        $this->assertInstanceOf('\Exception', $event->exception);
+    }
 }

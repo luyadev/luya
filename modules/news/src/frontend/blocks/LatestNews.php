@@ -6,10 +6,21 @@ use luya\cms\models\NavItem;
 use luya\news\models\Article;
 use luya\cms\base\PhpBlock;
 
+/**
+ * Get the latest news from the news system.
+ *
+ * This block requires an application view file which is formated as followed.
+ *
+ * ```php
+ * <?php foreach ($this->extraValue('items') as $item): ?>
+ *     <?= $item->title; ?>
+ * <?php endforeach; ?>
+ * ```
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class LatestNews extends PhpBlock
 {
-    public $module = 'news';
-
     private $_dropdown = [];
 
     public function icon()

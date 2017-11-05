@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
  * Storage Folder Model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageFolder extends ActiveRecord
 {

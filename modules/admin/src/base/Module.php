@@ -12,25 +12,57 @@ use luya\base\AdminModuleInterface;
  * store menu data, register translations.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Module extends \luya\base\Module implements AdminModuleInterface
 {
+    /**
+     * @inheritdoc
+     */
     public $requiredComponents = ['db'];
     
     /**
-     * Dashboard Objects will be retrieved when the admin dashboard is loaded.
+     * @var array Dashboard Objects will be retrieved when the admin dashboard is loaded.
      * You can use either easy to use preconfigured objects or provide a custom dashboard widget
      * object class.
      *
      * ```php
      * public $dashboardObjects = [
-     *     ['template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>', 'dataApiUrl' => 'admin/api-news-article'],
+     *     [
+     *         'class' => 'luya\admin\dashboard\BasicDashboardObject',
+     *         'template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>',
+     *         'dataApiUrl' => 'admin/api-news-article',
+     *         'title' => 'Latest News',
+     *     ],
+     *     [
+     *         // ...
+     *     ]
      * ];
      * ```
+     *
+     * In order to customize the template of a basic dashboard object you can override the  {{luya\admin\dashboard\BasicDashboardObject::$outerTemplate}}:
+     *
+     * ```php
+     * [
+     *     'class' => 'luya\admin\dashboard\BasicDashboardObject',
+     *     'outerTemplate' => '<div class="wrap-around-template"><h1>{{title}}</h1><small>{{template}}</small></div>',
+     *     'template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>',
+     *     'dataApiUrl' => 'admin/api-news-article',
+     *     'title' => 'Latest News',
+     * ],
+     * ```
+     *
+     * You can also choose from predefined dashboard object which provides wrappers so you don't have to modify the {{luya\admin\dashboard\BasicDashboardObject::$outerTemplate}} string.
+     *
+     * + {{luya\admin\dashboard\ListDashboardObject}}
+     * + {{luya\admin\dashboard\TableDashboardObject}}
+     *
      */
     public $dashboardObjects = [];
 
     /**
+     * > implementation discontinued but keep the concept comment for later usage.
+     *
      * @var array The config linker property can specific the configuration class for ngRest model where the key
      * is the `api` and the value is the class to the config. An array could look like this:
      *
@@ -61,7 +93,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      *
      * The above example will override the api-admin-user ngrest config with your project specific config.
      */
-    public $ngrestConfigLinker = [];
+    //public $ngrestConfigLinker = [];
 
     
     /**
@@ -110,20 +142,9 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     {
         return [];
     }
-    
-    /**
-     * Checks if a config exist in the linked property based on the provided `$apiEndpoint`.
-     *
-     * @param string $apiEndpoint The identifier of an apiEndpoint. ApiEndpoints are listed in the module class.
-     * @return bool|string If apiEndpoint exists in the linker property returns className, otherwhise false.
-     */
-    public function getLinkedNgRestConfig($apiEndpoint)
-    {
-        return array_key_exists($apiEndpoint, $this->ngrestConfigLinker) ? $this->ngrestConfigLinker[$apiEndpoint] : false;
-    }
 
     /**
-     * @inheritdoc
+     * @return array|\luya\admin\components\AdminMenuBuilderInterface
      */
     public function getMenu()
     {
@@ -177,13 +198,11 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     {
         $menu = $this->getMenu();
         
-        if (is_object($menu)) {
-            $perm = $menu->permissionApis;
-        } else {
-            $perm = $this->_permissionApis;
+        if (!$menu) {
+            return $this->extendPermissionApis();
         }
         
-        return ArrayHelper::merge($this->extendPermissionApis(), $perm);
+        return ArrayHelper::merge($this->extendPermissionApis(), $menu->getPermissionApis());
     }
 
     /**
@@ -194,118 +213,11 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     public function getAuthRoutes()
     {
         $menu = $this->getMenu();
-        
-        if (is_object($menu)) {
-            $perm = $menu->permissionRoutes;
-        } else {
-            $perm = $this->_permissionRoutes;
+         
+        if (!$menu) {
+            return $this->extendPermissionRoutes();
         }
-
-        return ArrayHelper::merge($this->extendPermissionRoutes(), $perm);
-    }
-    
-    // THE CODE BELOW WILL BE REMOVED IN 1.0.0 AND IS MAKRED AS DEPRECATED
-
-    private $_menu = [];
-    
-    private $_pointers = [];
-    
-    private $_permissionApis = [];
-    
-    private $_permissionRoutes = [];
-    
-    protected function node($name, $icon, $template = false)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\admin\components\AdminMenuBuilder() class instead in the `getMenu()` method of your Module.', E_USER_DEPRECATED);
         
-        $this->_pointers['node'] = $name;
-        $this->_menu[$name] = [
-            'moduleId' => $this->id,
-            'template' => $template,
-            'routing' => $template ? 'custom' : 'default',
-            'alias' => $name,
-            'icon' => $icon,
-            'permissionRoute' => false,
-            'permissionIsRoute' => false,
-            'searchModelClass' => false,
-        ];
-    
-        return $this;
-    }
-    
-    protected function nodeRoute($name, $icon, $template, $route, $searchModelClass = null)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\admin\components\AdminMenuBuilder() class instead in the `getMenu()` method of your Module.', E_USER_DEPRECATED);
-        
-        $this->_pointers['node'] = $name;
-        $this->_menu[$name] = [
-            'moduleId' => $this->id,
-            'template' => $template,
-            'routing' => $template ? 'custom' : 'default',
-            'alias' => $name,
-            'icon' => $icon,
-            'permissionRoute' => $route,
-            'permissionIsRoute' => true,
-            'searchModelClass' => $searchModelClass,
-        ];
-    
-        $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
-    
-        return $this;
-    }
-    
-    protected function group($name)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\admin\components\AdminMenuBuilder() class instead in the `getMenu()` method of your Module.', E_USER_DEPRECATED);
-        
-        $this->_pointers['group'] = $name;
-        $this->_menu[$this->_pointers['node']]['groups'][$name] = ['name' => $name, 'items' => []];
-    
-        return $this;
-    }
-    
-    protected function itemApi($name, $route, $icon, $apiEndpoint)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\admin\components\AdminMenuBuilder() class instead in the `getMenu()` method of your Module.', E_USER_DEPRECATED);
-        
-        $this->_menu[$this->_pointers['node']]['groups'][$this->_pointers['group']]['items'][] = [
-            'alias' => $name,
-            'route' => $route,
-            'icon' => $icon,
-            'permssionApiEndpoint' => $apiEndpoint,
-            'permissionIsRoute' => false,
-            'permissionIsApi' => true,
-            'searchModelClass' => false,
-        ];
-    
-        $this->_permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
-    
-        return $this;
-    }
-    
-    protected function itemRoute($name, $route, $icon, $searchModelClass = null)
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\admin\components\AdminMenuBuilder() class instead in the `getMenu()` method of your Module.', E_USER_DEPRECATED);
-        
-        $this->_menu[$this->_pointers['node']]['groups'][$this->_pointers['group']]['items'][] = [
-            'alias' => $name,
-            'route' => $route,
-            'icon' => $icon,
-            'permssionApiEndpoint' => null,
-            'permissionIsRoute' => true,
-            'permissionIsApi' => false,
-            'searchModelClass' => $searchModelClass,
-        ];
-    
-        $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
-    
-        return $this;
-    }
-    
-    public function menu()
-    {
-        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\admin\components\AdminMenuBuilder() class instead in the `getMenu()` method of your Module.', E_USER_DEPRECATED);
-        
-        return $this->_menu;
+        return ArrayHelper::merge($this->extendPermissionRoutes(), $menu->getPermissionRoutes());
     }
 }

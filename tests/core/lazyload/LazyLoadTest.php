@@ -5,7 +5,6 @@ namespace luyatests\core\lazyload;
 use luyatests\LuyaWebTestCase;
 use luya\lazyload\LazyLoad;
 
-
 class LazyLoadTest extends LuyaWebTestCase
 {
     public function testWidget()

@@ -3,7 +3,10 @@
 namespace luya\crawler\admin\apis;
 
 /**
- * NgRest API created at 24.05.2016 15:56 on LUYA Version 1.0.0-beta7-dev.
+ * Search API.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class SearchdataController extends \luya\admin\ngrest\base\Api
 {

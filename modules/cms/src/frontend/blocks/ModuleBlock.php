@@ -15,6 +15,7 @@ use luya\cms\base\PhpBlock;
  * Module integration Block to render controller and/or actions.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class ModuleBlock extends PhpBlock
 {

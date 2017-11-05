@@ -17,8 +17,9 @@ use luya\helpers\ArrayHelper;
  * ```
  *
  * @property array $data Setter/Getter for the dropdown values.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class SelectArray extends Select
 {
@@ -35,7 +36,7 @@ class SelectArray extends Select
     }
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\admin\ngrest\plugins\Select::getData()
      */

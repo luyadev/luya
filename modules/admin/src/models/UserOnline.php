@@ -17,6 +17,9 @@ use yii\helpers\Json;
  * @property string $lock_table
  * @property string $lock_translation
  * @property string $lock_translation_args
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class UserOnline extends ActiveRecord
 {
@@ -69,6 +72,15 @@ final class UserOnline extends ActiveRecord
     
     // static methods
 
+    /**
+     * Lock the user for an action.
+     *
+     * @param unknown $userId
+     * @param unknown $table
+     * @param unknown $pk
+     * @param unknown $translation
+     * @param array $translationArgs
+     */
     public static function lock($userId, $table, $pk, $translation, array $translationArgs = [])
     {
         $model = self::findOne(['user_id' => $userId]);
@@ -84,6 +96,11 @@ final class UserOnline extends ActiveRecord
         }
     }
     
+    /**
+     * Unlock the user from an action.
+     *
+     * @param unknown $userId
+     */
     public static function unlock($userId)
     {
         $model = self::findOne(['user_id' => $userId]);
@@ -118,27 +135,24 @@ final class UserOnline extends ActiveRecord
     }
 
     /**
-     * Remove the given user id if exists.
+     * Remove all rows for a given User Id.
+     *
      * @param int $userId
      */
     public static function removeUser($userId)
     {
-        $model = self::findOne(['user_id' => $userId]);
-        if ($model) {
-            $model->delete();
-        }
+        self::deleteAll(['user_id' => $userId]);
     }
 
     /**
-     * @param int $maxIdleTime Default value in seconds is a half hour (30 * 60) = 1800
+     * Clear all users which are not logged in anymore.
+     *
+     * On production its 30 minutes on test system 60 minutes.
      */
-    public static function clearList($maxIdleTime = 1800)
+    public static function clearList()
     {
-        $time = time();
-        $items = self::find()->where(['<=', 'last_timestamp', $time - $maxIdleTime])->all();
-        foreach ($items as $model) {
-            $model->delete();
-        }
+        $max = YII_ENV_PROD ? 1800 : 3600;
+        self::deleteAll(['<=', 'last_timestamp', time() - $max]);
     }
     
     /**

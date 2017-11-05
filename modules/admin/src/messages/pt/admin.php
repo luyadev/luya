@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Valor',
     'layout_filemanager_save_dir' => 'Gravar?',
     'layout_filemanager_remove_dir' => 'Excluir o diretório?',
-    'layout_filemanager_remove_dir_not_empty' => 'O diretório não está vazio.<br />Deseja excluir assim mesmo?',
+    'layout_filemanager_remove_dir_not_empty' => 'O diretório não está vazio.<br />Deseja excluir assim mesmo?', // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Excluir arquivos marcados',
     'layout_filemanager_move_selected_files' => 'Mover para',
     'layout_filemanager_upload_error' => 'Erro ao enviar o arquivo',
@@ -236,10 +236,30 @@ return [
     'js_link_set_value' => 'Definir link',
     'callback_button_file_download_widget_success' => 'O arquivo está pronto. Você pode baixá-lo agora.',
     
-// 1.0.0
+// rc4
     
     'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
     'model_user_oldpassword' => 'Previous (old) Password',
     'js_account_update_profile_success' => 'The profile data has been successfull updated.',
     'dashboard_lastlogin_title' => 'Last User Logins',
+    'layout_useronline_activity' => 'Activity',
+    'layout_useronline_inactive' => 'inactive',
+    'login_ssl_info' => 'Website uses encrypted secure connection.',
+    'locked_info' => 'Someone already editing',
+    'menu_dashboard' => 'Dashboard',
+    'js_link_not_set' => 'No Link selected',
+        
+// 1.0.0
+        
+    'ngrest_button_delete' => 'Delete',
+    'js_dir_manager_rm_file_confirm_title' => 'Remove file',
+    'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
+    'link_dir_target' => 'Link target',
+    'link_dir_target_same' => 'Same window',
+    'link_dir_target_blank' => 'New window',
+    'view_index_redirect_file' => 'file',
+    'view_index_redirect_mail' => 'e-mail address',
+    'view_index_redirect_mail_help' => 'Please enter a valid e-mail address.',
+    'menu_button_search' => 'Search',
+    'layout_btn_user_settings' => 'Preferences',
 ];

@@ -7,13 +7,19 @@ use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
 
 /**
- * Searchdata Model.
+ * Searchdata contains Search Queries from Users.
+ *
+ * This table represents all search queries made by the users from the frontend. This is also used in order to
+ * send weekly search report.
  *
  * @property integer $id
  * @property string $query
  * @property integer $results
  * @property integer $timestamp
  * @property string $language
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Searchdata extends NgRestModel
 {
@@ -99,7 +105,7 @@ class Searchdata extends NgRestModel
     {
         return [
             ['class' => DetailViewActiveWindow::class, 'attributes' => [
-               'language', 'query', 'results', 'timestamp:date', 
+               'language', 'query', 'results', 'timestamp:date',
             ]],
         ];
     }

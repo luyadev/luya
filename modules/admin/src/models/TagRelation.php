@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * The above example will return all
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class TagRelation extends ActiveRecord
 {

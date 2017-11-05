@@ -1,0 +1,120 @@
+.modal {
+    background-color: #fff;
+    border-radius: 7px;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: block;
+    left: 5%;
+    max-height: 90%;
+    overflow: auto;
+    padding: 20px;
+    position: fixed;
+    right: 5%;
+    top: 5% !important;
+    width: 90%;
+    z-index: 1010;
+}
+
+.modal__background {
+    background-color: rgba(#000, 0.5);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.modal__close {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+}
+
+.modal--bottom-sheet {
+    border-radius: 0;
+    bottom: 0 !important;
+    left: 0 !important;
+    margin: 0;
+    max-height: 45%;
+    overflow: auto;
+    right: 0 !important;
+    top: auto !important;
+    transform: translateY(100%);
+    transition: 0.25s ease transform;
+    width: 100%;
+    will-change: transform;
+
+    &.modal--active {
+        transform: translateY(0%);
+    }
+}
+
+.modal__header {
+
+    // Look & feel
+    background-color: color("blue", "base");
+    color: #fff;
+
+    // Spacing
+    // The Materialize columns will give the content hotizontal padding
+    padding: 10px 0;
+
+    // Custom override for modal__header
+    h5 {
+        margin: 0;
+        padding-top: 4px;
+    }
+
+    // Custom overwrite for icons in modal__header h5
+    h5 i {
+        vertical-align: text-top;
+    }
+
+    // Custom pointer style for close icon in modal__header
+    .mdi-navigation-close {
+        cursor: pointer;
+    }
+
+    &.modal__header--light {
+        background-color: transparent;
+        color: #000;
+
+        * {
+            margin: 0;
+        }
+    }
+
+    &.modal__header--for-form {
+        padding-left: 203px;
+    }
+}
+
+.modal__content {
+    padding: 20px 0;
+
+    .alert--info {
+        margin-top: 0;
+    }
+}
+
+.modal__footer {
+    border-top: 1px solid color("teal", "base");
+    padding: 20px 0;
+}
+
+.modal__overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.modal--full-width {
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+}

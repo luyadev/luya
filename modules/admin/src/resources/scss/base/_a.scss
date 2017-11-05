@@ -1,0 +1,14 @@
+a {
+    color: $gray-900;
+    &:hover, &:focus {
+        color: $gray-700;
+    }
+}
+
+a:not([disabled]):not([type="submit"]):not(.mainnav-link):not([type="button"]):not(.btn):not([href]):not([tabindex]):not([class*=" mainnav-"][class^=" mainnav-"]) {
+    color: inherit;
+    &:hover {
+        color: inherit;
+    }
+}
+

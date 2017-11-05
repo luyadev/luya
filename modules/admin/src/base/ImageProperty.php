@@ -31,6 +31,7 @@ use Yii;
  * In order to get use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage')->getValue(); ?>" />`.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class ImageProperty extends Property
 {

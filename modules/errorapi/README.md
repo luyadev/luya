@@ -12,7 +12,7 @@ With the Error Api module, you can send all exceptions to your personal Error Ap
 add this line to your composer.json and run the `composer install` command
 
 ```
-"luyadev/luya-module-errorapi" : "1.0.0-RC3",
+"luyadev/luya-module-errorapi" : "1.0.0-RC4",
 ```
 
 add the module to your application config:

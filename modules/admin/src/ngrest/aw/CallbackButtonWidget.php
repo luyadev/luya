@@ -35,7 +35,7 @@ class CallbackButtonWidget extends Widget
     public $label;
     
     /**
-     * @param array $options Define behavior of the button, options are name-value pairs. The following options are available:
+     * @var array $options Define behavior of the button, options are name-value pairs. The following options are available:
      * - closeOnSuccess: boolean, if enabled, the active window will close after successfully sendSuccess() response from callback.
      * - reloadListOnSuccess: boolean, if enabled, the active window will reload the ngrest crud list after success response from callback via sendSuccess().
      * - reloadWindowOnSuccess: boolean, if enabled the active window will reload itself after success (when successResponse is returnd).
@@ -81,8 +81,9 @@ class CallbackButtonWidget extends Widget
             'closeOnSuccess' => (isset($this->options['closeOnSuccess'])) ? '$scope.crud.closeActiveWindow();' : null,
             'reloadListOnSuccess' => (isset($this->options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
             'reloadWindowOnSuccess' => (isset($this->options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
-            'buttonClass' => ArrayHelper::getValue($this->options, 'class', 'btn'),
+            'buttonClass' => ArrayHelper::getValue($this->options, 'class', 'btn btn-save'),
             'linkLabel' => ArrayHelper::getValue($this->options, 'linkLabel', 'Download'),
+            'linkClass' => ArrayHelper::getValue($this->options, 'linkClass', 'btn btn-info'),
             'angularCallbackFunction' => $this->angularCallbackFunction,
         ]);
     }

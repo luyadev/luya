@@ -2,7 +2,15 @@
 
 namespace luya\cms\admin\controllers;
 
-class NavcontainerController extends \luya\admin\ngrest\base\Controller
+use luya\admin\ngrest\base\Controller;
+
+/**
+ * Navigation Container Controller.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
+class NavcontainerController extends Controller
 {
     public $modelClass = 'luya\cms\models\NavContainer';
 }

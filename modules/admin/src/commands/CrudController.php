@@ -202,7 +202,7 @@ class CrudController extends BaseCrudController
      *
      * @return string The summary route like module/controller/action
      */
-    public function getSummaryControllerRoute()
+    protected function getSummaryControllerRoute()
     {
         return strtolower($this->moduleName).'/'.Inflector::camel2id($this->getModelNameCamlized()).'/index';
     }

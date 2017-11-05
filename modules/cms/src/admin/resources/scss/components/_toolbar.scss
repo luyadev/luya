@@ -1,0 +1,19 @@
+.toolbar-item {
+    flex: 0 0 auto;
+    padding: 0 20px;
+
+    &:first-of-type {
+        padding-left: 0;
+    }
+    &-lang + .toolbar-item:not(.toolbar-item-lang) {
+        border-left: 1px solid $nav-tabs-border-color;
+    }
+
+    &:last-of-type {
+        padding-right: 0;
+    }
+
+    &-lang {
+        padding: 5px 10px;
+    }
+}

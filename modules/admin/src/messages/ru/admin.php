@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Значение',
     'layout_filemanager_save_dir' => 'Сохранить?',
     'layout_filemanager_remove_dir' => 'Удалить папку?',
-    'layout_filemanager_remove_dir_not_empty' => 'Папка не пуста - все равно удалить?',
+    'layout_filemanager_remove_dir_not_empty' => 'Папка не пуста - все равно удалить?', // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Удалить отмеченные файлы',
     'layout_filemanager_move_selected_files' => 'Переместить',
     'layout_filemanager_upload_error' => 'Ошибка при загрузке файла',
@@ -239,10 +239,30 @@ return [
     'callback_button_file_download_widget_success' => 'Файл подготовлен. Вы можете скачать его.',
     
     
-// 1.0.0
+// rc4
     
     'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
     'model_user_oldpassword' => 'Previous (old) Password',
     'js_account_update_profile_success' => 'The profile data has been successfull updated.',
     'dashboard_lastlogin_title' => 'Last User Logins',
+    'layout_useronline_activity' => 'Activity',
+    'layout_useronline_inactive' => 'inactive',
+    'login_ssl_info' => 'Website uses encrypted secure connection.',
+    'locked_info' => 'Someone already editing',
+    'menu_dashboard' => 'Dashboard',
+    'js_link_not_set' => 'No Link selected',
+        
+// 1.0.0
+        
+    'ngrest_button_delete' => 'Delete',
+    'js_dir_manager_rm_file_confirm_title' => 'Remove file',
+    'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
+    'link_dir_target' => 'Link target',
+    'link_dir_target_same' => 'Same window',
+    'link_dir_target_blank' => 'New window',
+    'view_index_redirect_file' => 'file',
+    'view_index_redirect_mail' => 'e-mail address',
+    'view_index_redirect_mail_help' => 'Please enter a valid e-mail address.',
+    'menu_button_search' => 'Search',
+    'layout_btn_user_settings' => 'Preferences',
 ];

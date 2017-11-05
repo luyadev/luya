@@ -12,7 +12,9 @@ use luya\admin\storage\ItemAbstract;
  * @property string $name The name of the Folder.
  * @property integer $parentId The id of the parent folder.
  * @property integer filesCount The number of files inside the folder.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Item extends ItemAbstract
 {
@@ -23,7 +25,7 @@ class Item extends ItemAbstract
      */
     public function getId()
     {
-        return (int) $this->itemArray['id'];
+        return (int) $this->getKey('id');
     }
     
     /**
@@ -33,7 +35,7 @@ class Item extends ItemAbstract
      */
     public function getName()
     {
-        return $this->itemArray['name'];
+        return $this->getKey('name');
     }
     
     /**
@@ -45,7 +47,7 @@ class Item extends ItemAbstract
      */
     public function getParentId()
     {
-        return (int) $this->itemArray['parent_id'];
+        return (int) $this->getKey('parent_id');
     }
     
     /**

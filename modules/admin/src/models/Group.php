@@ -14,6 +14,9 @@ use luya\admin\aws\GroupAuthActiveWindow;
  * @property string $name
  * @property string $text
  * @property integer $is_deleted
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Group extends NgRestModel
 {
@@ -27,6 +30,14 @@ final class Group extends NgRestModel
     public static function tableName()
     {
         return 'admin_group';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-admin-group';
     }
 
     /**
@@ -49,14 +60,6 @@ final class Group extends NgRestModel
     public function extraFields()
     {
         return ['users'];
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public static function ngRestApiEndpoint()
-    {
-        return 'api-admin-group';
     }
     
     /**
@@ -99,23 +102,26 @@ final class Group extends NgRestModel
             ],
         ];
     }
-
+    
     /**
      * @inheritdoc
      */
-    public function ngRestConfig($config)
+    public function ngRestActiveWindows()
     {
-        // load active window to config
-        $config->aw->load(['class' => GroupAuthActiveWindow::className(), 'alias' => Module::t('model_group_btn_aws_groupauth')]);
-        
-        // define config
-        $this->ngRestConfigDefine($config, 'list', ['name', 'text']);
-        $this->ngRestConfigDefine($config, 'create', ['name', 'text', 'users']);
-        $this->ngRestConfigDefine($config, 'update', ['name', 'text', 'users']);
-        
-        // add ability to delete items
-        $config->delete = true;
-        
-        return $config;
+        return [
+            ['class' => GroupAuthActiveWindow::class],
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function ngRestScopes()
+    {
+        return [
+            [['list'], ['name', 'text']],
+            [['create', 'update'], ['name', 'text', 'users']],
+            [['delete'], true],
+        ];
     }
 }

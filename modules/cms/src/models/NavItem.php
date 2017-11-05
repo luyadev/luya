@@ -34,6 +34,7 @@ use luya\admin\models\User;
  * @property \luya\cms\models\Nav $nav Nav Model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 {
@@ -257,7 +258,10 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     public function updateTimestamp()
     {
-        $this->updateAttributes(['timestamp_update' => time()]);
+        $this->updateAttributes([
+            'timestamp_update' => time(),
+            'update_user_id' => Module::getAuthorUserId(),
+        ]);
     }
 
     /**
@@ -301,11 +305,13 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $data = [];
         
         foreach (self::find()->select(['nav_id', 'title'])->orWhere(['like', 'title', $searchQuery])->with('nav')->distinct()->each() as $item) {
-            $data[] = [
-                'title' => $item->title,
-                'nav_id' => $item->nav_id,
-                'container' => $item->nav->navContainer->name,
-            ];
+            if ($item->nav) {
+                $data[] = [
+                    'title' => $item->title,
+                    'nav_id' => $item->nav_id,
+                    'container' => $item->nav->navContainer->name,
+                ];
+            }
         }
         
         return $data;
@@ -365,8 +371,6 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
             return false;
         }
 
-        
-        // @TODO replace with NavItemPage::copyBlocks($sourcePageItem->id, $pageItem->id);
         $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $sourcePageItem->id]);
 
         $idLink = [];

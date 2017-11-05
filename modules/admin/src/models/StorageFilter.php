@@ -14,6 +14,9 @@ use luya\admin\aws\StorageFilterImagesActiveWindow;
  * @property integer $id
  * @property string $identifier
  * @property string $name
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageFilter extends NgRestModel
 {

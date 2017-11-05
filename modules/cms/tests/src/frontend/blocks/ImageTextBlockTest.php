@@ -13,7 +13,7 @@ class ImageTextBlockTest extends BlockTestCase
         $this->assertSame('', $this->renderFrontend());
     }
     
-    public function testImageSource()
+    public function testImagehttpSource()
     {
         $this->block->setVarValues(['text' => 'Text']);
         $this->block->addExtraVar('image', ['source' => 'image.jpg', ]);

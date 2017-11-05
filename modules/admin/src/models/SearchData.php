@@ -13,6 +13,9 @@ use yii\db\ActiveRecord;
  * @property integer $timestamp_create
  * @property string $query
  * @property integer $num_rows
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class SearchData extends ActiveRecord
 {

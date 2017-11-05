@@ -10,6 +10,7 @@ class ZipHelperTest extends LuyaWebTestCase
 {
     public function testZipDir()
     {
-        ZipHelper::dir(__DIR__, Yii::getAlias('@runtime/test.zip'));
+        $this->assertTrue(ZipHelper::dir(__DIR__, Yii::getAlias('@runtime/test.zip')));
+        $this->assertTrue(is_file(Yii::getAlias('@runtime/test.zip')));
     }
 }

@@ -10,6 +10,7 @@ use luya\cms\injectors\LinkInjector;
  * Simple button element with a link function
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class LinkButtonBlock extends PhpBlock
 {
@@ -61,11 +62,6 @@ final class LinkButtonBlock extends PhpBlock
                 ['var' => 'label', 'label' => Module::t('block_link_button_btnlabel_label'), 'type' => 'zaa-text'],
             ],
             'cfgs' => [
-                [
-                    'var' => 'targetBlank',
-                    'label' => Module::t('block_link_button_targetblank_label'),
-                    'type' => 'zaa-checkbox'
-                ],
                 [
                     'var' => 'simpleLink',
                     'label' => Module::t('block_link_button_simpleLink_label'),

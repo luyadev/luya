@@ -1,218 +1,136 @@
-/**
- * #BLOCK
- */
 .block {
-	background-color: $block--background;
-	padding: 0;
-	margin: 10px 0;
-	position: relative;
-	transition: 0.5s ease opacity;
-	border-top: none;
-	border-left: 0 solid transparent;
-	border-bottom: 0 solid transparent;
-	border-right: 0 solid transparent;
-	min-height: 50px;
-	border:1px solid #fbfbfb;
+    background-color: $white;
+    border: $block-border-width dashed $block-border-color;
+    border-radius: $nav-tabs-border-radius;
+    margin-top: 5px;
+    padding: 0;
+    position: relative;
+    transition: .2s ease-in-out border-color, 0s .2s ease-in-out z-index;
 
- 	&:hover:not(.block--is-container):not(.block--edit) {
- 		border:1px solid #9E9E9E;	
- 	}
-
-	&:hover > .block__toolbar,
-	&.block--edit .block__toolbar,
-	&.block--config .block__toolbar,
-	&.block--is-container > .block__toolbar {
-		display: block;
-	}
-	&:last-of-type {
-		margin-bottom: 0;
-	}
-	&.block--is-dirty:not(.block--edit):not(.block--config) {
-		background-color: $block--background-is-dirty;
-	}
-	&:not(.block--edit):not(.block--config).block--is-hidden {
-		opacity: 0.5;
-	}
-	&.block--edit, &.block--config {
-		background-color: $block--active-background;
-		border-left: 4px solid $block--toolbar--background;
-		border-bottom: 4px solid $block--toolbar--background;
-		border-right: 4px solid $block--toolbar--background;
-	}
-
-	.accordion {
-		margin: 0 10px 10px 10px;
-	}
-	&.block--is-container > .accordion {
-		margin: 0;
-	}
-
-	&.block--is-container {
-		padding-top: 32px;
-	}
-
-	&--first {
-		margin-top: 0;
-	}
-	&--last {
-		margin-bottom: 0;
-	}
-}
-
-.page--drag-active .block--is-container {
-	border-color: $grey--darken !important;
-}
-
-.block__toolbar {
-	background-color: $block__toolbar--background;
-	color: $block__toolbar--color;
-	font-size: 18px;
-	padding: 2px 10px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	user-select: none;
-	z-index: 10;
-	transition: 0.5s ease background-color, 0.3s ease color;
-
-	i {
-		font-size: 22px;
-		vertical-align: middle;
-		cursor: pointer;
-	}
-	span {
-		vertical-align: middle;
-		cursor: pointer;
-	}
-
-	display: none;
-}
-
-.block__toolbar__icon {
-    transition: 0.2s ease color;
+    &:not(:last-of-type) {
+        margin-bottom: 25px;
+    }
 
     &:hover {
-        color: $block__toolbar__icon--hover;
+        border-color: $block-border-color;
+        border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
+        transition: .2s ease-in-out border-color;
+        z-index: 1;
     }
-    &.block__toolbar__icon--active {
-        color: $block__toolbar__icon--active;
+
+    .block-is-layout > & {
+        border-color: transparent;
+    }
+
+    &:before,
+    &:after {
+        background-color: theme-color(primary);
+        content: "";
+        display: none;
+        height: 5px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        z-index: z-index(block-drop-indicator);
+    }
+    &:before {
+        top: -6px;
+    }
+    &:after {
+        bottom: -6px;
+    }
+
+    &--drag-top:before {
+        display: block;
+    }
+    &--drag-bottom:after {
+        display: block;
+    }
+
+    &-is-hidden .block-front {
+        opacity: .3;
+    }
+    &-is-virgin .block-front {
+        background-color: lighten(color(blue), 30);
+    }
+
+    .show-block-lines & {
+        border-color: rgba($block-border-color, .5);
     }
 }
 
-.block--is-hidden:not(.block--is-container):not(.block--edit):not(.block--config) .block__toolbar {
-	background-color: $block--hidden__toolbar-background;
-	color: $black;
-}
-.page--drag-active .block:not(.block--is-container) .block__toolbar {
-	display: none;
-}
-.page--drag-active .block--is-container .block__toolbar {
-	background-color: $grey--darken !important;
-	z-index: 1;
+.block-toolbar {
+    background-color: map-get($grays, 900);
+    border-radius: $nav-tabs-border-radius $nav-tabs-border-radius 0 0;
+    color: $white;
+    display: flex;
+    flex-wrap: wrap;
+    left: -$block-border-width;
+    opacity: 0;
+    padding: 0 $block-padding;
+    pointer-events: none;
+    position: absolute;
+    right: -$block-border-width;
+    transform: translateY(-100%);
+    transition: .2s ease-in-out opacity;
+    z-index: z-index(block-toolbar);
+
+    .toolbar-item {
+        border: none !important;
+        font-size: 20px;
+        padding: 2px 4px;
+
+        &:last-of-type {
+            padding-right: 0;
+        }
+    }
+
+    .block:hover > & {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .block-is-layout > &,
+    .block-is-layout:hover > & {
+        background-color: $block-border-color;
+        opacity: 1;
+        pointer-events: all;
+    }
 }
 
-.block__move {
-	cursor: move;
-	margin-right: 15px;
+.block-front,
+.block-edit {
+    padding: $block-padding;
 }
 
-.block__title {
-	display: inline-block;
+.block-front {
+    @include clearfix;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-all;
 
-	p {
-		display: inline-block;
-		vertical-align: middle;
-	}
+    .block-is-layout > .block > & {
+        padding: 10px 0;
+    }
 }
 
-.block__body {
-	display: block;
-	height: 100%;
-	padding: 20px 10px;
-	cursor: pointer;
-	@include clearfix;
-}
-.block--is-container > .block__body {
-	display: none;
-}
-.block--edit .block__body {
-	display: none;
-}
+.block-toolbar-button {
+    background: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    color: $white;
+    cursor: pointer;
+    display: block;
+    margin-left: 5px;
+    transition: .25s ease-in-out background-color;
 
-.block__edit {
-	display: none;
+    &:hover {
+        background-color: rgba(255, 255, 255, .2);
+    }
 
-	.collapsible {
-		margin-top: 30px;
-	}
-}
-.block__edit-content {
-	display: none;
-	padding-right: 40px; // This padding is needed to give a little bit of space if there is a "help" icon
-}
-.block--edit .block__edit {
-	display: block;
-	height: 100%;
-	padding: ($block__toolbar--height + 5px) 10px 0 10px;
-
-	.block__edit-content {
-		display: block;
-	}
-}
-
-.block--config .block__body {
-	display: none;
-
-	.collapsible {
-		margin-top: 30px;
-	}
-}
-.block--config .block__edit {
-	display: block;
-	height: 100%;
-	padding: ($block__toolbar--height + 5px) 10px 0 10px;
-
-	.block__config-content {
-		display: block;
-	}
-}
-.block__config-content {
-	display: none;
-}
-
-.block__config__text {
-    font-size: 1rem;
-    font-weight: bold;
-    line-height: 36px;
-    text-align: left;
-    text-transform: uppercase;
-    vertical-align: middle;
-}
-.block__config__text-section {
-    color: $lime;
-}
-
-.block__help {
-	position: absolute;
-	right: 10px;
-}
-
-@each $depth, $color in $container-block--colors {
-	$selector: "";
-	@while $depth > 0 {
-		$selector: $selector + ".block--is-container ";
-		$depth: $depth - 1;
-	}
-
-	#{$selector} {
-		//border-left: 4px solid #{$color};
-		//border-bottom: 4px solid #{$color};
-		//border-right: 4px solid #{$color};
-
-
-		> .block__toolbar {
-			background-color: #{$color};
-		}
-	}
+    .block--is-dragging & {
+        display: none;
+    }
 }

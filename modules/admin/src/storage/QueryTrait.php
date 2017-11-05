@@ -55,9 +55,10 @@ use luya\Exception;
  * return (new \luya\admin\file\Query())->where($args)->offset(5)->limit(10)->all();
  * ```
  *
- * See the {{\luya\admin\storage\QueryTrait::where}} for more details.
+ * See the {{\luya\admin\storage\QueryTrait::where()}} for more details.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 trait QueryTrait
 {
@@ -270,7 +271,7 @@ trait QueryTrait
      * Add another where statement to the existing, this is the case when using compare operators, as then only
      * one where definition can bet set.
      *
-     * See {{luya\admin\storage\QueryTrait::where}}
+     * See {{luya\admin\storage\QueryTrait::where()}}
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
      * @return \luya\admin\storage\QueryTrait

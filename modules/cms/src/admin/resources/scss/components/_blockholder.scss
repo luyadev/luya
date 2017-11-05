@@ -1,230 +1,252 @@
-.blockholder {
-    z-index: 10 !important;
+.blockholder-column {
+    width: $blockholder-width;
+    padding-left: 0;
+    padding-right: 0;
+    display: none;
+    height: 100vh;
+    right: 0;
+    position: fixed;
 
-    overflow: auto;
+    transform: translateX(0) translateZ(0);
 
-    height: 100%;
-    padding: 20px 10px;
-
-    background-color: #4e4e4e;
-}
-
-.blockholder__group {
-    margin-bottom: 20px;
-
-    &--clipboard {
-        margin-top: -20px;
-        margin-right: -10px;
-        margin-bottom: 0;
-        margin-left: -10px;
-        padding: 10px;
-
-        @include clearfix;
-    }
-    &--favorite {
-        margin-right: -10px;
-        margin-left: -10px;
-        padding: 10px;
-
-        background-color: $red;
-    }
-}
-
-.blockholder__group-toggler {
-    transition: .25s ease transform;
-
-    &--rotated {
-        transform: rotate(-90deg);
-    }
-}
-
-.blockholder__group-title {
-    font-weight: 400;
-
-    position: relative;
-
-    display: block;
-
-    width: 100%;
-    margin-bottom: 10px;
-
-    user-select: none;
-
-    color: #fff;
-
-    i {
-        font-size: 20px;
-
-        position: absolute;
-        top: 2px;
-
-        &.left {
-            left: 0;
-        }
-        &.right {
-            right: 0;
-        }
-        &.right + span {
-            padding-right: 22px;
-        }
-    }
-    span {
+    @media (min-width: $mobile-nav-breakpoint) {
         display: block;
-
-        padding: 0 0 0 22px;
-    }
-
-    &:first-of-type {
-        margin-top: 0;
-    }
-
-    &[ng-click] {
-        cursor: pointer;
-    }
-
-    &--collapsed {
-        margin-bottom: 0;
     }
 }
 
-.blockholder__clear-clipboard {
-    float: right;
+.blockholder-column-small {
 
-    margin-top: 5px;
-
-    cursor: pointer;
-
-    color: $red;
-}
-
-.blockholder__search {
-    position: relative;
-
-    margin-bottom: 15px;
-
-    color: white;
-}
-
-.blockholder__input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 2rem;
-    padding: 6px 15px 5px 30px;
-
-    border: 1px solid #fff;
-    outline: none;
-    background-color: transparent;
-}
-
-.blockholder__input:focus, .blockholder__search--active .blockholder__input {
-    color: #000;
-    background-color: #fff;
-}
-
-.blockholder__icon {
-    position: absolute;
-    top: 0;
-
-    height: 100%;
-
-    cursor: pointer;
-
-    &.blockholder__icon--search {
-        left: 0;
-
-        padding-top: 4px;
-        padding-left: 4px;
+    .blockholder  {
+        padding: 10px;
     }
 
-    &.blockholder__icon--cancel {
-        right: 0;
+    transform: translateX(205px);
 
-        padding-top: 2px;
-        padding-right: 2px;
+    .blockholder-search {
+        display: none;
+    }
 
-        color: black;
+    .blockholder-item {
+
+        span {
+            visibility: hidden;
+        }
+
+        padding: 5px;
+
+        max-width: 30px;
+        max-height: 30px;
+    }
+
+    .blockholder-group-title {
+        span {
+            visibility: hidden;
+        }
+    }
+
+    .blockholder-favorite, .blockholder-clear-button {
+
+        display: none;
+
+        max-width: 12px;
+        padding-left: 2px;
 
         i {
-            font-size: 16px;
+            font-size: 8px;
         }
     }
 }
 
-.blockholder__input:focus + .blockholder__icon--search, .blockholder__search--active .blockholder__icon--search {
-    color: #000;
+.blockholder {
+    background-color: color(gray);
+    color: map-get($grays, 500);
+    display: block;
+    height: 100%;
+    padding: 15px;
+    width: 100%;
+    user-select: none;
+    @include overflow-no-scrollbars;
 }
 
-.blockholder__block {
-    font-size: 13px;
-    line-height: 20px;
-
-    z-index: 100 !important;
-
-    display: inline-block;
-
+.blockholder-search {
+    border-bottom: 1px solid $white;
+    display: block;
+    margin: 0 0 30px;
+    padding-right: 25px;
+    position: relative;
     width: 100%;
-    margin-right: 10px;
+}
+
+.blockholder-search-input {
+    background: none;
+    border: none;
+    color: $white;
+    outline: 0;
+    padding-top: 5px;
+    width: 100%;
+}
+
+.blockholder-search-label {
+    color: $white;
+    display: inline-block;
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.blockholder-group-title {
+    color: color(white);
+    cursor: pointer;
+    display: block;
     margin-bottom: 5px;
-    padding: 4px 5px;
+    padding-left: 32px;
 
-    cursor: move;
-    user-select: none;
-    transition: .2s ease background-color, .2s ease color, .2s ease border-color, .2s ease box-shadow;
-    text-align: left;
+    .blockholder-group:not(:first-of-type) & {
+        margin-top: 30px;
+    }
 
-    color: rgba($white, .5);
-    border: 1px dashed rgba($white, .5);
-    background-color: #4e4e4e;
+    .material-icons {
+        font-size: 20px;
+        margin-left: -28px;
+        margin-right: -3px;
+    }
+
+    .blockholder-group-favorites & {
+        color: theme-color(primary);
+    }
+
+    .blockholder-group-copy-stack & {
+        padding-right: 40px;
+        position: relative;
+    }
+}
+
+.blockholder-clear-button {
+    display: block;
+    padding: 3px 6px 5px 6px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .25s ease-in-out background-color;
+
+    .material-icons {
+        color: color(red);
+        font-size: 20px;
+        margin: 0;
+    }
+
+    &:hover {
+        background-color: color(white);
+    }
+}
+
+.blockholder-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.blockholder-item {
+    border: 1px dashed transparent;
+    padding: 4px 2px 3px 30px;
+    position: relative;
+    transition: .2s ease-in-out border;
+
+    &:not(:first-of-type) {
+        margin-top: 5px;
+    }
+
+    &:hover {
+        border-color: $white;
+        cursor: move;
+    }
+
+    .blockholder-icon {
+        font-size: 20px;
+        left: 3px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        + span {
+            margin-left: 0;
+        }
+    }
+}
+
+.blockholder-favorite {
+    background-color: rgba(color(gray), .8);
+    border: none;
+    bottom: 0;
+    color: theme-color(primary);
+    font-size: 16px;
+    opacity: 0;
+    padding: 0 8px 3px 8px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .25s ease-in-out opacity, .25s ease-in-out color, .25s ease-in-out background-color;
+
+    .blockholder-item:hover & {
+        cursor: pointer;
+        opacity: 1;
+        pointer-events: all;
+    }
+    &:hover {
+        background-color: $white;
+        color: color(red);
+    }
+
+    &-clear {
+        padding: 0 6px 3px 6px;
+    }
+}
+
+.blockholder-group-toggled .blockholder-toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.blockholder-toggler {
+    background: map-get($grays, 700);
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    display: none;
+    margin: 0;
+    min-height: 42px;
+    outline: none !important;
+    padding: 0;
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background .25s ease-in-out, min-height .2s ease-in-out;;
+    width: 16px;
 
     i {
-        font-size: 16px;
-
-        width: 16px;
-        margin: 0 !important;
-
-        vertical-align: middle;
+        color: map-get($grays, 100);;
+        transition: transform .25s ease-in-out, color .25s ease-in-out
     }
 
-    span {
-        display: inline-block;
+    &:hover {
+        background: color(gray);
+        min-height: 72px;
 
-        width: calc(100% - 20px);
-        margin-top: 1px;
-
-        vertical-align: middle;
     }
 
-    &:hover, &.ui-draggable-dragging {
-        color: $black;
-        border-color: $black;
-        background-color: $white;
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    &-open {
+
+        i {
+            transform: rotate(180deg);
+        }
     }
 
-    &.ui-draggable-dragging {
-        z-index: 10000 !important;
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: block;
     }
-}
-
-.blockholder__group--favorite .blockholder__block {
-    color: #4e4e4e;
-    border-color: #4e4e4e;
-    background-color: $white;
-}
-
-.blockholder__fav-icon {
-    pointer-events: none;
-
-    opacity: 0;
-
-    &--red {
-        color: $red;
-    }
-}
-
-.blockholder__block:hover .blockholder__fav-icon {
-    cursor: pointer;
-    pointer-events: all;
-
-    opacity: 1;
 }

@@ -7,7 +7,7 @@ use luya\console\Importer;
 
 /**
  * Import Auth Apis and Routes.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

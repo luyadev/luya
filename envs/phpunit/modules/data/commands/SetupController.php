@@ -2,7 +2,6 @@
 
 namespace app\modules\data\commands;
 
-
 use luya\console\Command;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;

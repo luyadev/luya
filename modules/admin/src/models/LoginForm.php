@@ -11,7 +11,9 @@ use yii\base\Model;
  * Admin Login Form Model.
  *
  * @property \luya\admin\models\User $user The user model.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class LoginForm extends Model
 {
@@ -68,12 +70,13 @@ final class LoginForm extends Model
     {
         $token = $this->getUser()->getAndStoreToken();
 
-        Yii::$app->mail->compose(Module::t('login_securetoken_mail_subject'), Module::t('login_securetoken_mail', [
-            'url' => Url::base(true),
-            'token' => $token,
-        ]))->address($this->user->email)->send();
-
-        return true;
+        return Yii::$app->mail
+            ->compose(Module::t('login_securetoken_mail_subject'), Module::t('login_securetoken_mail', [
+                'url' => Url::base(true),
+                'token' => $token,
+            ]))
+            ->address($this->user->email)
+            ->send();
     }
 
     /**
@@ -108,16 +111,25 @@ final class LoginForm extends Model
         if ($this->validate()) {
             $user = $this->getUser();
             $user->detachBehavior('LogBehavior');
-            $user->scenario = 'login';
-            $user->force_reload = false;
-            $user->auth_token = Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt);
-            $user->save();
-
+            
+            // update user model
+            $user->updateAttributes([
+                'force_reload' => false,
+                'auth_token' => Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt),
+            ]);
+            
+            // kill prev user logins
+            UserLogin::updateAll(['is_destroyed' => true], ['user_id' => $user->id]);
+            
+            // create new user login
             $login = new UserLogin([
                 'auth_token' => $user->auth_token,
                 'user_id' => $user->id,
+                'is_destroyed' => false,
             ]);
             $login->save();
+            
+            // refresh user online list
             UserOnline::refreshUser($user->id, 'login');
             return $user;
         } else {

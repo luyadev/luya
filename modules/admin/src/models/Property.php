@@ -14,7 +14,9 @@ use yii\db\ActiveRecord;
  * @property string $module_name
  * @property string $var_name
  * @property string $class_name
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Property extends ActiveRecord
 {

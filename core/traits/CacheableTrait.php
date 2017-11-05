@@ -79,34 +79,34 @@ trait CacheableTrait
         return $this->_cachable;
     }
     
-     /**
-     * Method combines both [[setHasCache()]] and [[getHasCache()]] methods to retrieve value identified by a $key,
-     * or to store the result of $closure execution if there is no cache available for the $key.
-     *
-     * Usage example:
-     *
-     * ```php
-     * use CacheableTrait;
-     *
-     * public function getTopProducts($count = 10)
-     * {
-     *     return $this->getOrSetHasCache(['top-n-products', 'n' => $count], function ($cache) use ($count) {
-     *         return Products::find()->mostPopular()->limit(10)->all();
-     *     }, 1000);
-     * }
-     * ```
-     *
-     * @param mixed $key a key identifying the value to be cached. This can be a simple string or
-     * a complex data structure consisting of factors representing the key.
-     * @param \Closure $closure the closure that will be used to generate a value to be cached.
-     * In case $closure returns `false`, the value will not be cached.
-     * @param int $duration default duration in seconds before the cache will expire. If not set,
-     * [[defaultDuration]] value will be used.
-     * @param Dependency $dependency dependency of the cached item. If the dependency changes,
-     * the corresponding value in the cache will be invalidated when it is fetched via [[get()]].
-     * This parameter is ignored if [[serializer]] is `false`.
-     * @return mixed result of $closure execution
-     */
+    /**
+    * Method combines both [[setHasCache()]] and [[getHasCache()]] methods to retrieve value identified by a $key,
+    * or to store the result of $closure execution if there is no cache available for the $key.
+    *
+    * Usage example:
+    *
+    * ```php
+    * use CacheableTrait;
+    *
+    * public function getTopProducts($count = 10)
+    * {
+    *     return $this->getOrSetHasCache(['top-n-products', 'n' => $count], function ($cache) use ($count) {
+    *         return Products::find()->mostPopular()->limit(10)->all();
+    *     }, 1000);
+    * }
+    * ```
+    *
+    * @param mixed $key a key identifying the value to be cached. This can be a simple string or
+    * a complex data structure consisting of factors representing the key.
+    * @param \Closure $closure the closure that will be used to generate a value to be cached.
+    * In case $closure returns `false`, the value will not be cached.
+    * @param int $duration default duration in seconds before the cache will expire. If not set,
+    * [[defaultDuration]] value will be used.
+    * @param Dependency $dependency dependency of the cached item. If the dependency changes,
+    * the corresponding value in the cache will be invalidated when it is fetched via [[get()]].
+    * This parameter is ignored if [[serializer]] is `false`.
+    * @return mixed result of $closure execution
+    */
     public function getOrSetHasCache($key, \Closure $closure, $duration = null, $dependency = null)
     {
         if (($value = $this->getHasCache($key)) !== false) {

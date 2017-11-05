@@ -3,7 +3,7 @@
 namespace luya\crawler\frontend;
 
 /**
- * LUYA Crawler
+ * LUYA Crawler Frontend Module.
  *
  * The Crawler will create an index with all pages based on your defined `baseUrl`. You can run the crawler by using the command
  *
@@ -16,9 +16,11 @@ namespace luya\crawler\frontend;
  *
  * @link https://github.com/FriendsOfPHP/Goutte
  * @link http://api.symfony.com/2.7/Symfony/Component/DomCrawler.html
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Module extends \luya\base\Module
+final class Module extends \luya\base\Module
 {
     /**
      * @var boolean This module enables by default to lookup for view files in the apps/views folder.
@@ -76,6 +78,9 @@ class Module extends \luya\base\Module
      */
     public $statisticRecipients = [];
     
+    /**
+     * @var integer Number of pages
+     */
     public $searchResultPageSize = 25;
     
     /**

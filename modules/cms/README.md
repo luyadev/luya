@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
+</p>
+
 LUYA CMS
 ========
 
@@ -8,6 +12,8 @@ LUYA CMS
 
 This module provides a full functional Content Management System to added contents based on Blocks.
 
+![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-rc4.png)
+
 To use the LUYA CMS module you have to run a LUYA Application which is provided by the Luya core.
 
 For installation and usage please check: [LUYA.IO](https://luya.io)
@@ -17,7 +23,7 @@ For installation and usage please check: [LUYA.IO](https://luya.io)
 Install the module trough composer:
 
 ```sh
-composer require luyadev/luya-module-cms:1.0.0-RC3
+composer require luyadev/luya-module-cms:1.0.0-RC4
 ```
 
 Add frontend and admin module of the cms module to your configuration modules section and bootstrap the cms frontend module:

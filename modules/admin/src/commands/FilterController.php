@@ -10,7 +10,7 @@ use luya\helpers\FileHelper;
 
 /**
  * Create Storage Filters
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -24,7 +24,7 @@ class FilterController extends Command
     
     /**
      * Create a new image filter to apply on an Image Object.
-     * 
+     *
      * @return number
      */
     public function actionIndex()
@@ -43,9 +43,9 @@ class FilterController extends Command
             }
             
             if ($select == Filter::EFFECT_THUMBNAIL) {
-            	$namedSelect = 'self::EFFECT_THUMBNAIL';
+                $namedSelect = 'self::EFFECT_THUMBNAIL';
             } else {
-            	$namedSelect = 'self::EFFECT_CROP';
+                $namedSelect = 'self::EFFECT_CROP';
             }
             
             $xp = explode("x", $dimension);
@@ -70,12 +70,12 @@ class FilterController extends Command
         $filePath = $folder . DIRECTORY_SEPARATOR . $className . '.php';
         
         if (FileHelper::createDirectory($folder) && FileHelper::writeFile($filePath, $content)) {
-        	return $this->outputSuccess('Successfully generated ' . $filePath);	
+            return $this->outputSuccess('Successfully generated ' . $filePath);
         }
     }
     
     /**
-     * 
+     *
      * @param unknown $identifier
      * @param unknown $name
      * @param array $chain
@@ -84,12 +84,12 @@ class FilterController extends Command
      */
     public function generateClassView($identifier, $name, array $chain, $className)
     {
-    	return $this->view->render('@admin/views/commands/filter/filterClass.php', [
-    		'identifier' => $identifier,
-    		'name' => $name,
-    		'chain' => $chain,
-    		'className' => $className,
-    		'luyaText' => $this->getGeneratorText('block/create'),
-    	]);
+        return $this->view->render('@admin/commands/views/filter/filterClass', [
+            'identifier' => $identifier,
+            'name' => $name,
+            'chain' => $chain,
+            'className' => $className,
+            'luyaText' => $this->getGeneratorText('block/create'),
+        ]);
     }
 }

@@ -4,7 +4,7 @@ return [
 
 // added translation in 1.0.0-beta5:
 
-    'news' => 'Notícias', 
+    'news' => 'Notícias',
     'news_administrate' => 'Administrar',
     'article' => 'Entrada de notícias',
     'article_cat_id' => 'Categoria',

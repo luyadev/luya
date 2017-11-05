@@ -12,6 +12,7 @@ use yii\base\Object;
  * and has no affect to frontend implementations.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class BlockGroup extends Object
 {

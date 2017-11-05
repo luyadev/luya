@@ -2,7 +2,7 @@
     "minimum-stability" : "RC",
     "name" : "luyadev/luya",
     "description" : "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
-    "type" : "luya-core",
+    "type" : "project",
     "keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular", "yii2-wrapper"],
     "license": "MIT",
     "homepage" : "https://luya.io",
@@ -17,14 +17,14 @@
         "issues" : "https://github.com/luyadev/luya/issues"
     },
     "require" : {
+    	"luyadev/luya-composer" : "~1.0.0",
         "yiisoft/yii2": "~2.0.0",
         "curl/curl" : "~1.0",
         "phpmailer/phpmailer": "~5.0"
     },
     "require-dev" : {
-        "nadar/github-markdown-fixer" : "^1.0",
-        "luyadev/luya-testsuite" : "~1.0.0",
-        "satooshi/php-coveralls": "~1.0"
+        "luyadev/luya-testsuite" : "^1.0@dev",
+        "php-coveralls/php-coveralls": "^1.0"
     },
     "autoload" : {
         "psr-4" : {
@@ -40,5 +40,14 @@
             "dev-master": "1.0.x-dev"
         }
     },
-    "bin" : ["core/bin/luya"]
+    "bin" : ["core/bin/luya"],
+    "config": {
+        "platform": {"php": "7.0"}
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * Layout/Grid Block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class LayoutBlock extends PhpBlock
 {
@@ -67,8 +68,10 @@ final class LayoutBlock extends PhpBlock
                 ['var' => 'rowDivClass', 'label' => Module::t('block_layout_row_column_css_class'), 'type' => 'zaa-text'],
             ],
             'placeholders' => [
-                ['var' => 'left', 'label' => Module::t('block_layout_placeholders_left')],
-                ['var' => 'right', 'label' => Module::t('block_layout_placeholders_right')],
+                [
+                    ['var' => 'left', 'cols' => $this->getExtraValue('leftWidth'), 'label' => Module::t('block_layout_placeholders_left')],
+                    ['var' => 'right', 'cols' => $this->getExtraValue('rightWidth'), 'label' => Module::t('block_layout_placeholders_right')],
+                ]
             ],
         ];
     }

@@ -1,4 +1,4 @@
-# Frontend Modul
+# Frontend module
 
 When you have specific logic you want to apply to your website, this can be a form where user can input data, or you may load data from a database and render a custom view then you can create a frontend module. You can then integrate the module into your cms or open the url of the module directly, depends on what you wish to do.
 
@@ -94,3 +94,48 @@ class MyController extends \luya\web\Controller
     // action content ...
 }
 ```
+
+### Controller actions
+
+Controller provides a very flexible way to impelement logic into your module following the methodology from [Yii controller structure](http://www.yiiframework.com/doc-2.0/guide-structure-controllers.html).
+
+Controller actions are pretty powerful functions to enrich your application, basically `module/controller/actions` is the concept in short, therefore some basic examples of use cases is explained below.
+
+Lets assume we have this default controller with following actions:
+
+```php
+namespace app\modules\frontendmodule\controllers;
+
+use Yii;
+use luya\web\Controller;
+
+class DefaultController extends Controller
+{
+    
+    public function actionHello() 
+    {
+        return 'I am the hello action';
+    }
+    
+    public function actionBye() 
+    {
+        return 'I am the bye action';
+    }
+    
+    public function actionWhoAmI()
+    {
+        $id = $this->id;  // returns the controller id
+        return $id;
+    }
+}
+```
+
+Those actions are already accesible by an exact url, because we have a `DefaultController` in our `frontendmodule` most likely the url for the `actionHello()` is:
+
+`your-public-project-domain/frontendmodule/default/hello`
+
+Please keep in mind that those action are case sensitive, this means `actionWhoAmI`is accessible via the url:
+
+`your-public-project-domain/frontendmodule/default/who-am-i`
+
+Of course the url rules in the `Module.php` can be used for pointing to controlles and views.

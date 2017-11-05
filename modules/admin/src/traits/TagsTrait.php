@@ -23,8 +23,8 @@ use luya\admin\models\Tag;
  * $allTags = Model::findTags();
  * ```
  *
- * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 trait TagsTrait
 {

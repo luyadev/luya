@@ -47,7 +47,7 @@ class DefaultController extends \luya\web\Controller
     
     /**
      * Get all articles for a given categorie ids string seperated by command.
-     * 
+     *
      * @param string $ids The categorie ids: `1,2,3`
      * @return \yii\web\Response|string
      */

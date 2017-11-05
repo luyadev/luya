@@ -7,7 +7,7 @@ use luya\web\Asset;
 
 class TestAsset extends Asset
 {
-	public $sourcePath = '@app';
+    public $sourcePath = '@app';
 }
 
 class ViewTest extends \luyatests\LuyaWebTestCase
@@ -47,15 +47,15 @@ class ViewTest extends \luyatests\LuyaWebTestCase
     
     public function testUknownAssetUrl()
     {
-    	$this->expectException('luya\Exception');
-    	$view = new View();
-    	$view->getAssetUrl('Uknown');
+        $this->expectException('luya\Exception');
+        $view = new View();
+        $view->getAssetUrl('Uknown');
     }
     
     public function testGetPublicHtml()
     {
-    	$view = new View();
-    	$url = $view->getPublicHtml();
-    	$this->assertContains('public_html', $url);
+        $view = new View();
+        $url = $view->getPublicHtml();
+        $this->assertContains('public_html', $url);
     }
 }

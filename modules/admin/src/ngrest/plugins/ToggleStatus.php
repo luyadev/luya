@@ -20,6 +20,7 @@ use luya\admin\ngrest\base\Plugin;
  * Checkbox is by default interactive toggleable in the crud overview in order to disable this behavior set $interactive to false.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ToggleStatus extends Plugin
 {

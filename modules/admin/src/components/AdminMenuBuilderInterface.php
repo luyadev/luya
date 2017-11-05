@@ -7,26 +7,26 @@ namespace luya\admin\components;
  *
  * If the AdminMenuBuilder class is instance of the AdminMenuBuilderInterface we can ensure to get the menu data with `menu()` method.
  *
- * @since 1.0.0-RC2
+ * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
 interface AdminMenuBuilderInterface
 {
     /**
      * Get the Menu Array.
-     * 
+     *
      * Example Response:
-     * 
+     *
      * ```php
      * Array (
      * [moduleId] => admin
-     * [template] => 
+     * [template] =>
      * [routing] => default
      * [alias] => menu_node_system
      * [icon] => layers
-     * [permissionRoute] => 
-     * [permissionIsRoute] => 
-     * [searchModelClass] => 
+     * [permissionRoute] =>
+     * [permissionIsRoute] =>
+     * [searchModelClass] =>
      * [groups] => Array (
      *        [menu_group_access] => Array  (
      *               [name] => menu_group_access
@@ -36,9 +36,9 @@ interface AdminMenuBuilderInterface
      *                               [route] => admin/user/index
      *                               [icon] => person
      *                               [permssionApiEndpoint] => api-admin-user
-     *                               [permissionIsRoute] => 
+     *                               [permissionIsRoute] =>
      *                               [permissionIsApi] => 1
-     *                               [searchModelClass] => 
+     *                               [searchModelClass] =>
      *                               [options] => Array ()
      *                           )
      *                       [1] => Array  (
@@ -46,17 +46,21 @@ interface AdminMenuBuilderInterface
      *                               [route] => admin/group/index
      *                               [icon] => group
      *                               [permssionApiEndpoint] => api-admin-group
-     *                               [permissionIsRoute] => 
+     *                               [permissionIsRoute] =>
      *                               [permissionIsApi] => 1
-     *                               [searchModelClass] => 
+     *                               [searchModelClass] =>
      *                               [options] => Array ( )
      *                           )
      *                   )
      *           )
      * )
      * ```
-     * 
+     *
      * @return array The menu array with all its nodes, subnodes routes and apis.
      */
     public function menu();
+    
+    public function getPermissionApis();
+    
+    public function getPermissionRoutes();
 }

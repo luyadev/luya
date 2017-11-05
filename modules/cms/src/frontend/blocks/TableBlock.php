@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * Table Block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class TableBlock extends PhpBlock
 {
@@ -85,11 +86,9 @@ final class TableBlock extends PhpBlock
             if ($hasHeader == 1 && $i == 1) {
                 continue;
             }
-            // if markdown enabled parse field values
-            if ($this->getCfgValue('parseMarkdown', false)) {
-                foreach ($row as $field => $value) {
-                    $row[$field] = TagParser::convertWithMarkdown($value);
-                }
+            // parse markdown for ceil value, if disable ensure newlines converts to br tags.
+            foreach ($row as $field => $value) {
+                $row[$field] = $this->getCfgValue('parseMarkdown', false) ? TagParser::convertWithMarkdown($value) : nl2br($value);
             }
             
             $table[] = $row;
@@ -127,24 +126,26 @@ final class TableBlock extends PhpBlock
     public function admin()
     {
         return  '<p>{% if extras.table is empty %}<span class="block__empty-text">' . Module::t('block_table_no_table') . '</span>{% else %}'.
-                '<table class="bordered striped" style="border:1px solid #d0d0d0">'.
-                    '{% if cfgs.header %}'.
-                    '<thead>'.
-                        '<tr>'.
-                            '{% for column in extras.headerData %}<th>{{ column }}</th>{% endfor %}'.
-                        '</tr>'.
-                    '</thead>'.
-                    '{% endif %}'.
-                    '<tbody>'.
-                        '{% for row in extras.table %}'.
-                        '<tr>'.
-                            '{% for column in row %}'.
-                            '<td {% if cfgs.equaldistance %}class="col s{{ (12/(row|length))|round }}"{% endif %}>{{ column }}</td>'.
+                '<div class="table-responsive-wrapper">' .
+                    '<table class="table table-bordered table-striped table-align-middle">'.
+                        '{% if cfgs.header %}'.
+                        '<thead class="thead-inverse">'.
+                            '<tr>'.
+                                '{% for column in extras.headerData %}<th>{{ column }}</th>{% endfor %}'.
+                            '</tr>'.
+                        '</thead>'.
+                        '{% endif %}'.
+                        '<tbody>'.
+                            '{% for row in extras.table %}'.
+                            '<tr>'.
+                                '{% for column in row %}'.
+                                '<td>{{ column }}</td>'.
+                                '{% endfor %}'.
+                            '</tr>'.
                             '{% endfor %}'.
-                        '</tr>'.
-                        '{% endfor %}'.
-                    '</tbody>'.
-                '</table>'.
+                        '</tbody>'.
+                    '</table>'.
+                '</div>'.
                 '{% endif %}';
     }
 }

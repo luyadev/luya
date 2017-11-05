@@ -8,6 +8,12 @@ use luya\admin\file\Query;
 use luya\traits\CacheableTrait;
 use luya\helpers\FileHelper;
 
+/**
+ * Admin Proxy commands Transfer Files.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class ClientTransfer extends Object
 {
     use CacheableTrait;
@@ -56,11 +62,17 @@ class ClientTransfer extends Object
                             $fileCount++;
                             $this->build->command->outputInfo('[+] File ' . $file->name . ' ('.$file->systemFileName.') downloaded.');
                         } else {
-                            $this->build->command->outputError('[!] File ' . $file->name . ' ('.$file->systemFileName.') download error (invalid md5 checksum).');
+                            $this->build->command->outputError('[!] Downloaded file checksum "'.$md5.'" does not match server checksum "'.$file->getFileHash().'" for file ' . $file->systemFileName.'.');
                             @unlink($file->serverSource);
                         }
                     }
+                } else {
+                    $this->build->command->outputError('[!] File ' . $file->systemFileName. ' download request error: "'. $curl->error_message.'".');
                 }
+                
+                $curl->close();
+                unset($curl);
+                gc_collect_cycles();
             }
         }
         
@@ -86,6 +98,10 @@ class ClientTransfer extends Object
                         $this->build->command->outputInfo('[+] Image ' . $image->source.' downloaded.');
                     }
                 }
+                
+                $curl->close();
+                unset($curl);
+                gc_collect_cycles();
             }
         }
         

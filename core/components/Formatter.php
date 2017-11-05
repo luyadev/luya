@@ -40,7 +40,7 @@ class Formatter extends \yii\i18n\Formatter
      * ]
      * ```
      *
-     * See {{\luya\component\Formatter::dateFormat}} for more informations about valid values.
+     * See {{\luya\component\Formatter::$dateFormat}} for more informations about valid values.
      */
     public $dateFormats = [];
 
@@ -55,7 +55,7 @@ class Formatter extends \yii\i18n\Formatter
      * ]
      * ```
      *
-     * See {{\luya\component\Formatter::datetimeFormat}} for more informations about valid values.
+     * See {{\luya\component\Formatter::$datetimeFormat}} for more informations about valid values.
      */
     public $datetimeFormats = [];
     
@@ -70,7 +70,7 @@ class Formatter extends \yii\i18n\Formatter
      * ],
      * ```
      *
-     * See {{\luya\component\Formatter::timeFormat}} for more informations about valid values.
+     * See {{\luya\component\Formatter::$timeFormat}} for more informations about valid values.
      */
     public $timeFormats = [];
 

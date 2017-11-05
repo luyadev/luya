@@ -29,8 +29,9 @@ use yii\helpers\Inflector;
  * VideoBlock::variations()
  *     ->add('bold', 'Bold Videos')->cfgs([])->register(),
  * ```
- * @author Basil Suter <basil@nadar.io>
  *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class BlockVariationRegister
 {

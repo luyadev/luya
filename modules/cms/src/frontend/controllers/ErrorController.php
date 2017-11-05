@@ -8,6 +8,7 @@ use Yii;
  * CMS Error Handler Rendering
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ErrorController extends \luya\web\Controller
 {

@@ -191,23 +191,6 @@ class Element extends \yii\base\Component
     }
 
     /**
-     * Run an element and return the closures return value.
-     *
-     * @param string $name   The name of the elemente to execute.
-     * @param array  $params The params to pass to the closure methode.
-     *
-     * @return mixed The return value of the executed closure function.
-     *
-     * @throws Exception
-     * @deprecated Depracted in 1.0.0 and will be removed.
-     */
-    public function run($name, array $params = [])
-    {
-        trigger_error('method `run()` is deprectaed, use `getElement` instead.', E_NOTICE);
-        return $this->getElement($name, $params);
-    }
-
-    /**
      * Returns the path to the view files used for the render() method. Singleton method the return
      * the evaluated viewFolder path once.
      *

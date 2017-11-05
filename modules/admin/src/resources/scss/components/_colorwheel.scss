@@ -1,32 +1,28 @@
 .colorwheel {
     display: block;
-    padding-left: 200px;
+    padding-left: 175px;
     position: relative;
 }
 
-.colorwheel__input-wrapper {
-    display: inline-block;
-    height: 160px;
+.colorwheel-background {
+    height: 150px;
     position: relative;
-    vertical-align: middle;
-    width: 100%;
 }
 
-.colorwheel__input {
+.colorwheel-input {
     background-color: transparent;
-    border: none;
-    border-bottom: 2px solid;
-    left: 50%;
-    outline: none;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    left: 25px;
     position: absolute;
     top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    transition: .25s ease-in-out color, .25s ease-in-out border-color;
+    transform: translateY(-50%);
 }
 
-.colorwheel__wheel {
-    display: inline-block;
+.colorwheel-wheel {
+    height: 150px;
+    left: 0;
     position: absolute;
-    left: 25px;
-    top: 5px;
+    top: 0;
+    width: 150px;
 }

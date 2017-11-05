@@ -8,6 +8,12 @@ class UserFixture extends ActiveFixture
 {
     public $modelClass = 'luya\admin\models\User';
 
+    public function load()
+    {
+        parent::resetTable();
+        parent::load();
+    }
+    
     public function getData()
     {
         return [

@@ -17,6 +17,7 @@ use luya\admin\models\Lang;
  * @property array $activeLanguage Get the array of the current active language (its not an AR object!).
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class AdminLanguage extends Component
 {

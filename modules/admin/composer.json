@@ -1,5 +1,4 @@
 {
-    "minimum-stability" : "RC",
 	"name" : "luyadev/luya-module-admin",
 	"description" : "Administration core module for all LUYA admin modules",
 	"type" : "luya-core",
@@ -21,9 +20,21 @@
 	    "flowjs/flow-php-server": "^1.0"
 	},
 	"require-dev" : {
-		"luyadev/luya-testsuite" : "~1.0.0",
+		"luyadev/luya-core" : "^1.0@dev",
+		"luyadev/luya-testsuite" : "^1.0@dev",
 		"luyadev/luya-module-cms" : "^1.0@dev",
-		"satooshi/php-coveralls": "~1.0"
+		"php-coveralls/php-coveralls": "^1.0",
+		"twbs/bootstrap": "v4.0.0-beta",
+		"bower-asset/angular" : "~1.6.5",
+		"bower-asset/angular-loading-bar" : "^0.9",
+		"bower-asset/angularjs-datepicker" : "^2.1.0",
+		"bower-asset/ui-router" : "~0.4.0",
+		"bower-asset/ng-file-upload" : "~12.2.0",
+		"bower-asset/ng-flow" : "~2.7.0",
+		"bower-asset/ng-wig" : "~3.0.0",
+		"bower-asset/twigjs-bower": "~0.10.5",
+		"bower-asset/angular-filter" : "~0.5.15",
+		"bower-asset/bowser": "~1.7.3"
 	},
 	"autoload" : {
 		"psr-4" : {
@@ -41,8 +52,12 @@
         }
     },
     "config": {
-        "fxp-asset" : {
-            "pattern-skip-version": "(-build|-patch)"
-        }   
-    }
+        "platform": {"php": "7.0"}
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }
