@@ -219,29 +219,29 @@ return [
     'callback_button_file_download_widget_success' => 'El archivo ha sido preparado. Puedes descargarlo ahora.',
     
 // rc4
-    
-    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
-    'model_user_oldpassword' => 'Previous (old) Password',
-    'js_account_update_profile_success' => 'The profile data has been successfull updated.',
-    'dashboard_lastlogin_title' => 'Last User Logins',
-    'layout_useronline_activity' => 'Activity',
-    'layout_useronline_inactive' => 'inactive',
-    'login_ssl_info' => 'Website uses encrypted secure connection.',
-    'locked_info' => 'Someone already editing',
-    'menu_dashboard' => 'Dashboard',
-    'js_link_not_set' => 'No Link selected',
+ 
+    'api_storage_file_upload_folder_error' => 'Error al guardar el archivo en la carpeta de almacenamiento. Un error de permiso podría causar este problema. Asegúrese de que la carpeta de almacenamiento sea escribible.',
+    'model_user_oldpassword' => 'Contraseña anterior',
+    'js_account_update_profile_success' => 'Los datos de perfil se han actualizado con éxito.',
+    'dashboard_lastlogin_title' => 'Últimos inicios de sesión de usuario',
+    'layout_useronline_activity' => 'Actividad',
+    'layout_useronline_inactive' => 'inactivo',
+    'login_ssl_info' => 'El sitio web utiliza una conexión segura cifrada.',
+    'locked_info' => 'Alguien ya está editando',
+    'menu_dashboard' => 'Tablero',
+    'js_link_not_set' => 'Sin enlace seleccionado',
         
 // 1.0.0
-        
-    'ngrest_button_delete' => 'Delete',
-    'js_dir_manager_rm_file_confirm_title' => 'Remove file',
-    'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
-    'link_dir_target' => 'Link target',
-    'link_dir_target_same' => 'Same window',
-    'link_dir_target_blank' => 'New window',
-    'view_index_redirect_file' => 'file',
-    'view_index_redirect_mail' => 'e-mail address',
-    'view_index_redirect_mail_help' => 'Please enter a valid e-mail address.',
-    'menu_button_search' => 'Search',
-    'layout_btn_user_settings' => 'Preferences',
+
+    'ngrest_button_delete' => 'Borrar',
+    'js_dir_manager_rm_file_confirm_title' => 'Eliminar archivo',
+    'js_dir_manager_rm_folder_confirm_title' => 'Eliminar carpeta',
+    'link_dir_target' => 'Enlace objetivo',
+    'link_dir_target_same' => 'Misma ventana',
+    'link_dir_target_blank' => 'Nueva ventana',
+    'view_index_redirect_file' => 'archivo',
+    'view_index_redirect_mail' => 'dirección de e-mail',
+    'view_index_redirect_mail_help' => 'Por favor, introduzca una dirección de e-mail válida.',
+    'menu_button_search' => 'Buscar',
+    'layout_btn_user_settings' => 'Preferencias',
 ];

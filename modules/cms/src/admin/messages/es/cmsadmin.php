@@ -165,11 +165,11 @@ return [
     'view_update_block_tooltip_close' => 'Cerrar edición',
     
     // 1.0.0
-    'cmsadmin_dashboard_lastupdate' => 'Last page updates',
-    'cmsadmin_settings_homepage_title' => 'Default Page',
-    'cmsadmin_settings_trashpage_title' => 'Delete Page',
-    'cmsadmin_settings_modal_title' => 'Settings',
-    'cmsadmin_item_settings_titleslug' => 'Page Informations',
-    'cmsadmin_created_at' => 'Created at',
-    'cmsadmin_version_remove' => 'Remove version',
+    'cmsadmin_dashboard_lastupdate' => 'Últimas actualizaciones de la página',
+    'cmsadmin_settings_homepage_title' => 'Página por defecto',
+    'cmsadmin_settings_trashpage_title' => 'Eliminar página',
+    'cmsadmin_settings_modal_title' => 'Configuración',
+    'cmsadmin_item_settings_titleslug' => 'Información de la página',
+    'cmsadmin_created_at' => 'Creado en',
+    'cmsadmin_version_remove' => 'Eliminar versión',
 ];
