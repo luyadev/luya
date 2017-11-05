@@ -36,14 +36,27 @@
                 init();
             },
             template : function() {
-                return '<div class="menu-dropdown__category">' +
-                    '<b class="menu-dropdown__toggle-all" ng-click="toggler=!toggler"><i class="material-icons" ng-if="!toggler">keyboard_arrow_down</i><i class="material-icons" ng-if="toggler">keyboard_arrow_up</i> <span>Toggle all</span></b><br />' +
-                    '<div class="menu-dropdown__container" ng-show="toggler" ng-repeat="container in menuData.containers">' +
-                    '<b class="menu-dropdown__title" ng-click="container.isHidden=!container.isHidden"><i class="material-icons" ng-if="container.isHidden">keyboard_arrow_down</i><i class="material-icons" ng-if="!container.isHidden">keyboard_arrow_up</i> <span>{{container.name}}</span></b>' +
-                    '<ul class="menu-dropdown__list" ng-hide="container.isHidden">' +
-                    '<li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse\'"></li>' +
-                    '</ul>' +
-                    '</div><div>';
+                return '<div class="menu-dropdown-category">' +
+                        '<b class="menu-dropdown-toggle-all" ng-click="toggler=!toggler"><i class="material-icons" ng-if="!toggler">keyboard_arrow_right</i><i class="material-icons" ng-if="toggler">keyboard_arrow_down</i><span>Toggle Containers</span></b><br />' +
+                        '<div class="menu-dropdown-container" ng-show="toggler">' +
+                            '<ul class="treeview treeview-chooser">' +
+                                '<li class="treeview-container" ng-repeat="container in menuData.containers" ng-show="(menuData.items | menuparentfilter:container.id:0).length > 0">' +
+                                    '<div class="treeview-label treeview-label-container" ng-click="container.isHidden=!container.isHidden">' +
+                                        '<span class="treeview-icon treeview-icon-collapse">' +
+                                            '<i class="material-icons" ng-show="!container.isHidden">keyboard_arrow_right</i>' +
+                                            '<i class="material-icons" ng-show="container.isHidden">keyboard_arrow_down</i>' +
+                                        '</span>' +
+                                        '<span class="treeview-link">' +
+                                            '<span class="google-chrome-font-offset-fix">{{container.name}}</span>' +
+                                        '</span>' +
+                                    '</div>' +
+                                    '<ul class="treeview-items treeview-items-lvl1" ng-hide="!container.isHidden">' +
+                                        '<li class="treeview-item treeview-item-lvl1" ng-class="{\'treeview-item-has-children\' : (menuData.items | menuparentfilter:container.id:0).length}" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse\'"></li>' +
+                                    '</ul>' +
+                                '</li>' +
+                            '</ul>' +
+                        '</div>' +
+                    '<div>';
             }
         }
     });
@@ -60,9 +73,11 @@
                 "name": "@fieldname"
             },
             template: function() {
-                return '<div class="input input--image-upload" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
+            	return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<div class="form-side form-side-label">' +
+                                '<label>{{label}}</label>' +
+                            '</div>' +
+                            '<div class="form-side">' +
                                 '<menu-dropdown class="menu-dropdown" nav-id="model" />' +
                             '</div>' +
                         '</div>';
@@ -157,7 +172,7 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : function($scope, $http, $filter, ServiceMenuData, Slug, ServiceLanguagesData, AdminToastService) {
+			controller : function($scope, $http, $filter, ServiceMenuData, ServiceLanguagesData, AdminToastService) {
 
 				$scope.error = [];
 				$scope.success = false;
@@ -208,12 +223,12 @@
 				});
 
 				$scope.aliasSuggestion = function() {
-					$scope.data.alias = Slug.slugify($scope.data.title);
+					$scope.data.alias = $filter('slugify')($scope.data.title);
 				};
 
 				$scope.$watch('data.alias', function(n, o) {
 					if (n!=o && n!=null) {
-						$scope.data.alias = Slug.slugify(n);
+						$scope.data.alias = $filter('slugify')(n);
 					}
 				});
 
@@ -253,7 +268,7 @@
 				$scope.data.layout_id = 0;
 				$scope.data.from_draft_id = 0;
 
-				// layoutsData
+				/* layoutsData */
 
 				$scope.layoutsData = ServiceLayoutsData.data;
 
@@ -261,7 +276,7 @@
             		$scope.layoutsData = data;
             	});
 
-            	// menuData
+            	/* menuData */
 
     			$scope.menuData = ServiceMenuData.data;
 
@@ -321,7 +336,7 @@
 		}
 	});
 
-	// factory.js
+	/* factory.js */
 
 	zaa.factory('PlaceholderService', function() {
 		var service = [];
@@ -330,12 +345,12 @@
 
 		service.delegate = function(status) {
 			service.status = status;
-		}
+		};
 
 		return service;
 	});
 
-	// layout.js
+	/* layout.js */
 
 	zaa.config(function($stateProvider, resolverProvider) {
 		$stateProvider
@@ -369,6 +384,13 @@
 
 	/* controllers */
 
+	zaa.controller("CmsDashboard", function($scope, $http) {
+		$scope.dashboard = [];
+		$http.get('admin/api-cms-admin/dashboard-log').then(function(response) {
+			$scope.dashboard = response.data;
+		});
+	});
+	
 	zaa.controller("ConfigController", function($scope, $http, AdminToastService) {
 		$scope.data = {};
 
@@ -391,10 +413,9 @@
 		 * @var integer $fromVersionPageId From ng-model the version copy from or 0 = new empty/blank version
 		 * @var integer $versionLayoutId From ng-model, only if fromVersionPageId is 0
  		 */
-
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 
-		// layoutsData
+		/* layoutsData */
 
 		$scope.layoutsData = ServiceLayoutsData.data;
 
@@ -402,40 +423,7 @@
     		$scope.layoutsData = data;
     	});
 
-    	$scope.closeCreateModal = function() {
-    		$scope.createVersionModalState = true;
-    	}
-
-    	$scope.editVersionModalState = true;
-
-    	$scope.closeEditModal = function() {
-    		$scope.editVersionModalState = true;
-    	}
-
-    	$scope.openEditModal = function() {
-    		$scope.editVersionModalState = false;
-    	}
-
-		$scope.toggleVersionEdit = function(versionId) {
-			$scope.$parent.switchVersion(versionId);
-			$scope.openEditModal();
-		};
-
-		$scope.toggleRemoveVersion = function(versionid) {
-			$scope.$parent.switchVersion(versionid);
-			$scope.$parent.removeCurrentVersion();
-
-		}
-
-    	// controller logic
-
-    	$scope.changeVersionLayout = function(versionItem) {
-    		$http.post('admin/api-cms-navitem/change-page-version-layout', $.param({'pageItemId': versionItem.id, 'layoutId': versionItem.layout_id, 'alias': versionItem.version_alias}), headers).then(function(response) {
-    			$scope.refreshForce();
-    			$scope.closeEditModal();
-    			AdminToastService.success(i18n['js_version_update_success'], 4000);
-			});
-    	};
+    	/* controller logic */
 
 		$scope.createNewVersionSubmit = function(data) {
 			if (data == undefined) {
@@ -452,14 +440,13 @@
 				}
 
 				$scope.refreshForce();
-				$scope.closeCreateModal();
 
 				AdminToastService.success(i18n['js_version_create_success'], 4000);
 			});
 		};
 	});
 
-	zaa.controller("CopyPageController", function($scope, $http, AdminToastService, Slug) {
+	zaa.controller("CopyPageController", function($scope, $http, $filter, AdminToastService) {
 
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 
@@ -486,9 +473,16 @@
 			$scope.itemSelection = angular.copy(item);
 		};
 
+		$scope.$watch('itemSelection.title', function(n, o) {
+			if (n) {
+				$scope.aliasSuggestion();
+			}
+		});
+		
 		$scope.aliasSuggestion = function() {
-			$scope.itemSelection.alias = Slug.slugify($scope.itemSelection.title);
-		}
+			
+			$scope.itemSelection.alias = $filter('slugify')($scope.itemSelection.title);
+		};
 
 		$scope.loadItems = function() {
 			$scope.navId = $scope.NavItemController.NavController.navData.id;
@@ -512,57 +506,6 @@
 		}
 
 	});
-
-	zaa.controller("DropNavController", function($scope, $http, ServiceMenuData, AdminToastService) {
-
-		$scope.droppedNavItem = null;
-
-		$scope.showVersionList = false;
-
-		$scope.errorMessageOnDuplicateAlias = function(response) {
-			AdminToastService.error(i18nParam('js_page_add_exists', {title: response.success.title, id: response.success.nav_id}), 5000);
-		}
-
-	    $scope.onBeforeDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-			$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-
-	    $scope.onAfterDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-			$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-
-	    $scope.onChildDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-			$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnItemId : itemid }}).then(function(r) {
-				ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-
-	    $scope.onEmptyDrop = function($event, $ui) {
-	    	var itemid = $($event.target).data('itemid');
-	    	$http.get('admin/api-cms-navitem/move-to-container', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnCatId : itemid }}).then(function(r) {
-	    		ServiceMenuData.load(true);
-			}, function(r) {
-				$scope.errorMessageOnDuplicateAlias(r.data);
-				ServiceMenuData.load(true);
-			});
-	    }
-	})
 
 	zaa.filter("menuparentfilter", function() {
 		return function(input, containerId, parentNavId) {
@@ -588,25 +531,7 @@
 			});
 
 			return returnValue;
-		}
-	});
-
-	zaa.controller("CmsLiveEdit", function($scope, ServiceLiveEditMode) {
-
-		$scope.display = 0;
-
-		$scope.url = homeUrl;
-
-		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
-			$scope.display = n;
-		});
-
-		$scope.$on('service:LiveEditModeUrlChange', function(event, url) {
-			var d = new Date();
-			var n = d.getTime();
-			$scope.url = url + '&' + n;
-		});
-
+		};
 	});
 
 	zaa.controller("CmsMenuTreeController", function($scope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
@@ -632,6 +557,61 @@
 		};
 
 		// controller logic
+		
+		$scope.dropEmptyContainer = function(dragged,dropped,position,catId) {
+			$http.get('admin/api-cms-navitem/move-to-container', { params: {moveItemId: dragged.id, droppedOnCatId: catId}}).then(function(succes) {
+				ServiceMenuData.load(true);
+			});
+		};
+		
+		$scope.dropItem = function(drag,drop,pos) {
+			if (pos == 'bottom') {
+				var api = 'admin/api-cms-navitem/move-after';
+				var params = {moveItemId: drag.id, droppedAfterItemId: drop.id};
+			} else if (pos == 'top') {
+				var api = 'admin/api-cms-navitem/move-before';
+				var params = {moveItemId: drag.id, droppedBeforeItemId: drop.id};
+
+			} else if (pos == 'middle') {
+				var api = 'admin/api-cms-navitem/move-to-child';
+				var params = {moveItemId: drag.id, droppedOnItemId: drop.id};
+			}
+			
+			$http.get(api, { params : params }).then(function(success) {
+				ServiceMenuData.load(true);
+			}, function(error) {
+				console.log(error);
+				console.log('throw error message errorMessageOnDuplicateAlias');
+				ServiceMenuData.load(true);
+			});
+		};
+		
+		$scope.validItem = function(hover, draged) {
+			
+			if (hover.id == draged.id) {
+				return false;
+			}
+			
+			$scope.rritems = [];
+			$scope.recursivItemValidity(draged.nav_container_id, draged.id);
+			
+			if ($scope.rritems.indexOf(hover.id) == -1) {
+				return true;
+			}
+			
+			return false;
+		};
+		
+		$scope.rritems = [];
+		
+		$scope.recursivItemValidity = function(containerId, parentNavId) {
+			var items = $filter('menuparentfilter')($scope.menuData.items, containerId, parentNavId);
+			
+			angular.forEach(items, function(item) {
+				$scope.rritems.push(item.id);
+				$scope.recursivItemValidity(containerId, item.id);
+			});
+		};
 
 		$scope.toggleItem = function(data) {
 			if (data.toggle_open == undefined) {
@@ -778,8 +758,30 @@
 
 	// update.js
 
-	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminToastService, AdminClassService, AdminLangService) {
+	zaa.controller("NavController", function($scope, $rootScope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService, HtmlStorage) {
 
+
+		$scope.pageSettingsOverlayHidden = true;
+		
+		$scope.pageSettingsOverlayTab = 1;
+		
+		$scope.togglePageSettingsOverlay = function(t) {
+			$scope.pageSettingsOverlayTab = t;
+			$scope.pageSettingsOverlayHidden = false;
+		};
+		
+		$scope.navCfg = {
+			helptags: $rootScope.luyacfg.helptags,
+		};
+		
+		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
+			$scope.displayLiveContainer = n;
+		});
+		
+		$scope.$watch(function() { return ServiceLiveEditMode.url }, function(n, o) {
+			$scope.liveUrl = n;
+		});
+		
 		$scope.AdminLangService = AdminLangService;
 
 		/* service AdminPropertyService inheritance */
@@ -800,7 +802,7 @@
 
 		$scope.menuDataReload = function() {
 			return ServiceMenuData.load(true);
-		}
+		};
 
 		/* service ServiceLangaugesData inheritance */
 
@@ -822,13 +824,22 @@
 			}
 		});
 
-		/* sidebar logic */
+		/* Blockholder size toggler */
+
+        $scope.isBlockholderSmall = HtmlStorage.getValue('blockholderToggleState', true);
+
+        $scope.toggleBlockholderSize = function() {
+            $scope.isBlockholderSmall = !$scope.isBlockholderSmall;
+            HtmlStorage.setValue('blockholderToggleState', $scope.isBlockholderSmall);
+        };
+
+        /* sidebar logic */
 
 		$scope.sidebar = false;
 
 	    $scope.enableSidebar = function() {
 	    	$scope.sidebar = true;
-	    }
+	    };
 
 	    $scope.toggleSidebar = function() {
 	        $scope.sidebar = !$scope.sidebar;
@@ -854,7 +865,7 @@
 	    		item.toggle_open = 1;
 	    		$scope.bubbleParents(item.parent_nav_id, item.nav_container_id);
 	    	}
-	    }
+	    };
 
 		$scope.createDeepPageCopy = function() {
 			$http.post('admin/api-cms-nav/deep-page-copy', {navId: $scope.id}).then(function(response) {
@@ -876,7 +887,7 @@
 
 		$scope.togglePropMask = function() {
 			$scope.showPropForm = !$scope.showPropForm;
-		}
+		};
 
 		$scope.showPropForm = false;
 
@@ -887,10 +898,10 @@
 				$scope.loadNavProperties();
 				$scope.showPropForm = false;
 			});
-		}
+		};
 
 		$scope.trash = function() {
-			AdminToastService.confirm(i18n['js_page_confirm_delete'], function($timeout, $toast) {
+			AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], function($timeout, $toast) {
 
 				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.id }}).then(function(response) {
 	    			$scope.isDeleted = true;
@@ -913,11 +924,10 @@
 	    			AdminToastService.error(value.message, 4000);
 	    		});
 	    	});
-	    }
+	    };
 
 	    function initializer() {
 			$scope.navData = $filter('filter')($scope.menuData.items, {id: $scope.id}, true)[0];
-
 			if ($scope.navData == undefined) {
 				$scope.isDraft = true;
 			} else {
@@ -930,9 +940,9 @@
 			    	if (n !== o && n !== undefined) {
 			    		$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).then(function(response) {
 							if ($scope.navData.is_offline == 1) {
-								AdminToastService.notify(i18nParam('js_state_offline', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_offline', {title: $scope.navData.title}), 2000);
 							} else {
-								AdminToastService.notify(i18nParam('js_state_online', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_online', {title: $scope.navData.title}), 2000);
 							}
 			    		});
 			    	}
@@ -942,9 +952,9 @@
 					if (n !== o && n !== undefined) {
 						$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).then(function(response) {
 							if ($scope.navData.is_hidden == 1) {
-								AdminToastService.notify(i18nParam('js_state_hidden', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_hidden', {title: $scope.navData.title}), 2000);
 							} else {
-								AdminToastService.notify(i18nParam('js_state_visible', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_visible', {title: $scope.navData.title}), 2000);
 							}
 						});
 					}
@@ -955,9 +965,9 @@
 						$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).then(function(response) {
 							$scope.menuDataReload().then(function() {
 								if ($scope.navData.is_home == 1) {
-									AdminToastService.notify(i18nParam('js_state_is_home', {title: $scope.navData.title}), 2000);
+									AdminToastService.info(i18nParam('js_state_is_home', {title: $scope.navData.title}), 2000);
 								} else {
-									AdminToastService.notify(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 2000);
+									AdminToastService.info(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 2000);
 								}
 			    			});
 						});
@@ -966,13 +976,13 @@
 			}
 		}
 
-		initializer();
+			initializer();
 	});
 
 	/**
 	 * @param $scope.lang from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
+	zaa.controller("NavItemController", function($scope, $rootScope, $http, $filter, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
 
 		$scope.loaded = false;
 
@@ -990,13 +1000,21 @@
 
 		$scope.loadLiveUrl = function() {
 			ServiceLiveEditMode.changeUrl($scope.item.id, $scope.currentPageVersion);
-		}
+		};
 
+		// layoutsData
+
+		$scope.layoutsData = ServiceLayoutsData.data;
+
+    	$scope.$on('service:BlocksData', function(event, data) {
+    		$scope.layoutsData = data;
+    	});
+		
 		// serviceMenuData inheritance
 
 		$scope.menuDataReload = function() {
 			return ServiceMenuData.load(true);
-		}
+		};
 
 		$scope.$on('service:LoadLanguage', function(event, data) {
 			if (!$scope.loaded) {
@@ -1020,18 +1038,18 @@
 
 		$scope.container = [];
 
-		$scope.currentVersionInformation = null;
-
 		$scope.errors = [];
 
-		$scope.homeUrl = homeUrl;
+		$scope.homeUrl = $rootScope.luyacfg.homeUrl;
 
 		$scope.currentPageVersion = 0;
+		
+		$scope.currentPageVersionAlias;
 
 		$scope.trashItem = function() {
 			if ($scope.lang.is_default == 0) {
-				AdminToastService.confirm(i18n['js_page_confirm_delete'], function($timeout, $toast) {
-					$http.get('admin/api-cms-navitem/delete', { params : { navItemId : $scope.item.id }}).then(function(response) {
+				AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], function($timeout, $toast) {
+					$http.delete('admin/api-cms-navitem/delete?navItemId=' + $scope.item.id).then(function(response) {
 						$scope.menuDataReload().then(function() {
 							$scope.isTranslated = false;
 							$scope.item = [];
@@ -1040,7 +1058,6 @@
 							$scope.typeDataCopy = [];
 							$scope.typeData = [];
 							$scope.container = [];
-							$scope.currentVersionInformation = null;
 							$scope.errors = [];
 							$scope.currentPageVersion = 0;
 							$scope.$broadcast('deletedNavItem');
@@ -1060,8 +1077,7 @@
 			} else {
 				$scope.typeDataCopy = angular.copy($scope.typeData);
 			}
-
-		}
+		};
 
 		$scope.updateNavItemData = function(itemCopy, typeDataCopy) {
 			$scope.errors = [];
@@ -1098,22 +1114,36 @@
 
 		$scope.$watch('itemCopy.alias', function(n, o) {
 			if (n!=o && n!=null) {
-				$scope.itemCopy.alias = Slug.slugify(n);
+				$scope.itemCopy.alias = $filter('slugify')(n);
 			}
 		});
 
-		$scope.removeCurrentVersion = function() {
-			// {alias: $scope.currentVersionInformation.version_alias}
-			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: $scope.currentVersionInformation.version_alias}), function($toast, $http) {
-				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : $scope.currentVersionInformation.id}).then(function(response) {
-					var aliasName = $scope.currentVersionInformation.version_alias;
+		$scope.removeVersion = function(version) {
+			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: version.version_alias}), i18n['cmsadmin_version_remove'], function($toast, $http) {
+				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : version.id}).then(function(response) {
 					$scope.refreshForce();
 					$toast.close();
-					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: aliasName}), 5000);
+					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: version.version_alias}), 5000);
 				});
 			});
-		}
+		};
+		
+    	$scope.editVersionItem;
+    	
+    	$scope.tab = 1;
+    	
+    	$scope.editVersion = function(versionItem) {
+    		$scope.changeTab(4);
+    		$scope.editVersionItem = versionItem;
+    	};
 
+    	$scope.editVersionUpdate = function(editVersionItem) {
+    		$http.post('admin/api-cms-navitem/change-page-version-layout', {'pageItemId': editVersionItem.id, 'layoutId': editVersionItem.layout_id, 'alias': editVersionItem.version_alias}).then(function(response) {
+    			$scope.refreshForce();
+    			AdminToastService.success(i18n['js_version_update_success'], 4000);
+			});
+    	};
+    	
 		$scope.getItem = function(langId, navId) {
 			$http({
 			    url: 'admin/api-cms-navitem/nav-lang-item',
@@ -1134,37 +1164,65 @@
 									$scope.currentPageVersion = response.data.item.nav_item_type_id;
 								}
 								if (response.data.item.nav_item_type_id in response.data.typeData) {
-									$scope.currentVersionInformation = response.data.typeData[$scope.currentPageVersion];
+									$scope.currentPageVersionAlias = $scope.container = response.data.typeData[$scope.currentPageVersion]['version_alias'];
 									$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
 								}
 							}
+						} else {
+							$scope.currentPageVersion = response.data.item.nav_item_type_id;
+							$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
 						}
 					}
+
+					$scope.loaded = true
 				}
-				$scope.loaded = true
 			});
 		};
-
+		
+		$scope.versionDropDownVisbility = false;
+		
+		$scope.toggleVersionsDropdown = function() {
+			$scope.versionDropDownVisbility = !$scope.versionDropDownVisbility;
+		};
+		
 		$scope.switchVersion = function(pageVersionid) {
 			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
-			$scope.currentVersionInformation = $scope.typeData[pageVersionid];
+			$scope.currentPageVersionAlias = $scope.typeData[pageVersionid]['version_alias'];
 			$scope.currentPageVersion = pageVersionid;
 			$scope.loadLiveUrl();
+			$scope.toggleVersionsDropdown();
 		};
 
 		$scope.refreshForce = function() {
 			$scope.getItem($scope.lang.id, $scope.NavController.id);
-		}
+		};
 
 		$scope.refresh = function() {
 			if (AdminLangService.isInSelection($scope.lang.short_code)) {
 				$scope.getItem($scope.lang.id, $scope.NavController.id);
 			}
-
 		};
+		
+		/* new settings overlay */
+		
+		$scope.settingsOverlayVisibility = true;
+		
+		$scope.toggleSettingsOverlay = function(tab) {
+			$scope.settingsOverlayVisibility = !$scope.settingsOverlayVisibility;
+			if (tab) {
+				$scope.tab = tab;
+			}
+		}
+		
+		$scope.changeTab = function(tab) {
+			$scope.tab = tab;
+		}
 
-		// <!-- NavItemTypePageController CODE
-
+		/**
+		 * Refresh the current layout container blocks.
+		 * 
+		 * After successfull api response all cms layout are foreach and the values are passed to revPlaceholders() method.
+		 */
 		$scope.refreshNested = function(prevId, placeholderVar) {
 			$http({
 				url : 'admin/api-cms-navitem/reload-placeholder',
@@ -1172,100 +1230,171 @@
 				params : { navItemPageId : $scope.currentPageVersion, prevId : prevId, placeholderVar : placeholderVar}
 			}).then(function(response) {
 				ServiceLiveEditMode.changeUrl($scope.item.id, $scope.currentPageVersion);
-				for (var i in $scope.container.__placeholders) {
-					var out = $scope.revPlaceholders($scope.container.__placeholders[i], prevId, placeholderVar, response.data);
-					if (out !== false ) {
-						return;
-					}
-				}
-
+				angular.forEach($scope.container.__placeholders, function(placeholder) {
+					$scope.revPlaceholders(placeholder, prevId, placeholderVar, response.data);
+				});
 			});
-		}
-		$scope.revPlaceholders = function(placeholder, prevId, placeholderVar, replaceContent) {
-			var tmp = placeholder['prev_id'];
-			if (parseInt(prevId) == parseInt(tmp) && placeholderVar == placeholder['var']) {
-				placeholder['__nav_item_page_block_items'] = replaceContent;
-				return true;
-			}
-
-			var find = $scope.revFind(placeholder, prevId, placeholderVar, replaceContent)
-			if (find !== false) {
-				return find;
-			}
-			return false;
-		}
-
+		};
+		
+		/**
+		 * The revPlaceholders method goes trourgh the new row/col (grid) system container json layout where:
+		 * 
+		 * rows[][1] = col left
+		 * rows[][2] = col right
+		 * 
+		 * Where a layout have at least on row which can have cols inside. So there revPlaceholders method goes trough the cols
+		 * and check if the col is equal the given col to replace the content with  (from refreshNested method).
+		 */
+		$scope.revPlaceholders = function(placeholders, prevId, placeholderVar, replaceContent) {
+			angular.forEach(placeholders, function(placeholderRow, placeholderKey) {
+				if (parseInt(prevId) == parseInt(placeholderRow.prev_id) && placeholderVar == placeholderRow['var']) {
+					placeholders[placeholderKey]['__nav_item_page_block_items'] = replaceContent;
+				} else {
+					$scope.revFind(placeholderRow, prevId, placeholderVar, replaceContent);
+				}
+			});
+		};
+		
+		
+		/**
+		 * The revFind method does the recursiv job within a block an passes the value back to revPlaceholders().
+		 */
 		$scope.revFind = function(placeholder, prevId, placeholderVar, replaceContent) {
 			for (var i in placeholder['__nav_item_page_block_items']) {
-				for (var holder in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
-					var rsp = $scope.revPlaceholders(placeholder['__nav_item_page_block_items'][i]['__placeholders'][holder], prevId, placeholderVar, replaceContent);
-					if (rsp !== false) {
-						return rsp;
+				for (var holderKey in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
+					for (var holder in placeholder['__nav_item_page_block_items'][i]['__placeholders'][holderKey]) {
+						$scope.revPlaceholders(placeholder['__nav_item_page_block_items'][i]['__placeholders'][holderKey], prevId, placeholderVar, replaceContent);
 					}
 				}
 			}
-			return false;
-		}
-
-		// NavItemTypePageController -->
-
-		function init() {
-			$scope.refresh();
-		}
-
-		init();
-	});
-
-
-	/**
-	 * @param $scope.placeholder
-	 *            from ng-repeat
-	 */
-	zaa.controller("PagePlaceholderController", function($scope, AdminClassService, PlaceholderService) {
-
-		$scope.NavItemTypePageController = $scope.$parent;
-
-		$scope.PlaceholderService = PlaceholderService;
-
-		$scope.$watch(function() { return $scope.PlaceholderService.status }, function(n,o) {
-			if (n) {
-				$scope.isOpen = true;
-			} else {
-				$scope.isOpen = false;
-			}
-		});
-
-		$scope.isOpen = false;
-
-		$scope.toggleOpen = function() {
-			$scope.isOpen = !$scope.isOpen;
-		}
-
-		$scope.mouseEnter = function() {
-			var status = AdminClassService.getClassSpace('onDragStart');
-			if (status !== undefined && !$scope.isOpen) {
-				$scope.isOpen = true;
-			}
 		};
+		
+		/**
+		 * drops items in an empty page placeholder of CMS LAYOUT PLACEHOLDER
+		 */
+		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
+			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
+				$http.post('admin/api-cms-navitempageblockitem/create', {
+					prev_id: dropped.prev_id, 
+					sort_index:0, 
+					block_id: dragged.id, 
+					placeholder_var : dropped['var'], 
+					nav_item_page_id: dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.refreshNested(dropped['prev_id'], dropped['var']);
+				});
+			} else if (dragged.hasOwnProperty('copystack')) {
+				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
+					copyBlockId: dragged.id,
+					sort_index: 0,
+					prev_id:  dropped.prev_id,
+					placeholder_var : dropped['var'], 
+					nav_item_page_id: dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.refreshNested(dropped['prev_id'], dropped['var']);
+				});
+			} else {
+				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
+					sort_index: 0,
+					prev_id:  dropped.prev_id,
+					placeholder_var : dropped['var'], 
+				}).then(function(response) {
+					$scope.refreshForce();
+				});
+			}
+			
+		};
+		
+		$scope.refresh();
 	});
 
 
+
 	/**
-	 * @param $scope.block
-	 *            from ng-repeat
+	 * @param $scope.block From ng-repeat scope assignment
 	 */
 	zaa.controller("PageBlockEditController", function($scope, $sce, $http, AdminClassService, AdminToastService, ServiceBlockCopyStack, ServiceLiveEditMode) {
 
-		$scope.PagePlaceholderController = $scope.$parent;
+		$scope.NavItemTypePageController = $scope.$parent;
 
-		$scope.onStart = function() {
-			$scope.$apply(function() {
-				AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
-			});
+		/**
+		 * drops an item in an empty placeholder of a BLOCK
+		 */
+		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
+			
+			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
+				$http.post('admin/api-cms-navitempageblockitem/create', {
+					prev_id : dropped.prev_id,
+					sort_index:0, 
+					block_id : dragged.id,
+					placeholder_var : dropped.var,
+					nav_item_page_id : dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
+				});
+			} else if (dragged.hasOwnProperty('copystack')) {
+				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
+					copyBlockId: dragged.id,
+					sort_index: 0,
+					prev_id:  dropped.prev_id,
+					placeholder_var : dropped.var,
+					nav_item_page_id : dropped.nav_item_page_id
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+				});
+			} else {
+				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
+					sort_index: 0,
+					prev_id:  dropped.prev_id,
+					placeholder_var : dropped.var,
+				}).then(function(response) {
+					$scope.refreshForce();
+				});
+			}
 		};
-
+		
+		$scope.dropItem = function(dragged,dropped,position) {
+			var sortIndex = $scope.$index;
+			
+			if (position == 'bottom') {
+				sortIndex = sortIndex + 1;
+			}
+			
+			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
+				// its a new block
+				$http.post('admin/api-cms-navitempageblockitem/create', { 
+					prev_id: $scope.placeholder.prev_id,
+					sort_index: sortIndex, 
+					block_id: dragged.id, 
+					placeholder_var: $scope.placeholder['var'], 
+					nav_item_page_id: $scope.placeholder.nav_item_page_id
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+				});
+			} else if (dragged.hasOwnProperty('copystack')) {
+				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
+					copyBlockId: dragged.id,
+					sort_index: sortIndex,
+					prev_id: $scope.placeholder.prev_id,
+					placeholder_var: $scope.placeholder['var'],
+					nav_item_page_id: $scope.placeholder.nav_item_page_id
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+				});
+			} else {
+				// moving an existing block
+				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
+					prev_id: $scope.placeholder.prev_id,
+					placeholder_var: $scope.placeholder['var'],
+					sort_index: sortIndex
+				}).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+				});
+			}
+		};
+		
 		$scope.copyBlock = function() {
-			ServiceBlockCopyStack.push($scope.block.id, $scope.block.name);
+			ServiceBlockCopyStack.push($scope.block);
 		};
 
 		$scope.toggleHidden = function() {
@@ -1281,42 +1410,20 @@
 			    params: { blockId : $scope.block.id, hiddenState: $scope.block.is_hidden }
 			}).then(function(response) {
 				/* load live url on hidden trigger */
-				$scope.PagePlaceholderController.NavItemTypePageController.$parent.$parent.loadLiveUrl();
+				$scope.NavItemTypePageController.$parent.$parent.loadLiveUrl();
 				// successfull toggle hidden state of block
-				AdminToastService.notify(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}), 2000);
+				AdminToastService.info(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}), 2000);
 			});
-		}
-
-		$scope.hasInfo = function(varFieldName) {
-			if (varFieldName in $scope.block.field_help) {
-				return true;
-			}
-
-			return false;
-		}
-
-		$scope.getInfo = function(varFieldName) {
-			return $scope.block.field_help[varFieldName];
-		}
+		};
 
         $scope.isEditable = function() {
             return typeof $scope.block.vars != "undefined" && $scope.block.vars.length > 0;
         };
 
-        $scope.isConfigable = function() {
+        $scope.isConfigurable = function() {
             return typeof $scope.block.cfgs != "undefined" && $scope.block.cfgs.length > 0;
         };
-
-		$scope.safe = function(html) {
-			return $sce.trustAsHtml(html);
-		};
-
-		$scope.onStop = function() {
-			$scope.$apply(function() {
-				AdminClassService.setClassSpace('onDragStart', undefined);
-			});
-		};
-
+        
 		$scope.$watch(function() { return $scope.block.values }, function(n, o) {
 			$scope.data = n;
 		});
@@ -1324,6 +1431,14 @@
 		$scope.$watch(function() { return $scope.block.variation }, function(n, o) {
 			$scope.evalVariationVisbility(n);
 		});
+		
+		$scope.getInfo = function(varFieldName) {
+			if ($scope.block.field_help.hasOwnProperty(varFieldName)) {
+				return $scope.block.field_help[varFieldName];
+			}
+			
+			return false;
+		}
 
 		$scope.evalVariationVisbility = function(variatenName) {
 			if ($scope.block.variations.hasOwnProperty(variatenName)) {
@@ -1347,40 +1462,27 @@
 					object.invisible = false;
 				});
 			}
-		}
+		};
 
 		$scope.cfgdata = $scope.block.cfgvalues || {};
 
 		$scope.edit = false;
-		$scope.config = false;
-
-		$scope.toggleBlockSettings = function() {
-			$scope.edit = false;
-			$scope.config = false;
-		};
+		
+		$scope.modalHidden = true;
 
 		$scope.toggleEdit = function() {
 			if (!$scope.isEditable()) {
 				return;
 			}
+			$scope.modalHidden = !$scope.modalHidden;
 			$scope.edit = !$scope.edit;
-			$scope.config = false;
-		};
-
-		$scope.toggleConfig = function() {
-			if (!$scope.isConfigable()) {
-				return;
-			}
-
-			$scope.config = !$scope.config;
-			$scope.edit = false;
 		};
 
 		$scope.renderTemplate = function(template, dataVars, cfgVars, block, extras) {
 			if (template == undefined) {
 				return '';
 			}
-			var template = twig({
+			var template = Twig.twig({
 			    data: template
 			});
 
@@ -1394,13 +1496,13 @@
 			return $sce.trustAsHtml(content);
 		};
 
-		$scope.removeBlock = function(block) {
-			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: block.name}), function($timeout, $toast) {
-				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + block.id).then(function(response) {
-					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
-					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
+		$scope.removeBlock = function() {
+			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), i18n['view_update_block_tooltip_delete'], function($timeout, $toast) {
+				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + $scope.block.id).then(function(response) {
+					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+					$scope.NavItemTypePageController.loadLiveUrl();
 					$toast.close();
-					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: block.name}), 2000);
+					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: $scope.block.name}), 2000);
 				});
 			});
 		};
@@ -1412,70 +1514,18 @@
 				variation: $scope.block.variation
 			}).then(function(response) {
 				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}), 2000);
-				$scope.edit = false;
-				$scope.config = false;
+				$scope.toggleEdit();
 				$scope.block.is_dirty = 1;
 				$scope.block = angular.copy(response.data.objectdetail);
-				$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
+				$scope.NavItemTypePageController.loadLiveUrl();
 				$scope.evalVariationVisbility($scope.block.variation);
 			});
-		}
-
-	});
-
-	/**
-	 * @TODO HANDLING SORT INDEX OF EACH BLOCK
-	 */
-	zaa.controller("DropBlockController", function($scope, $http, AdminClassService) {
-
-		$scope.PagePlaceholderController = $scope.$parent;
-
-		$scope.droppedBlock = {};
-
-		$scope.onDrop = function($event, $ui) {
-
-			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
-
-			var sortIndex = $($event.target).data('sortindex');
-			var moveBlock = $scope.droppedBlock['vars'] || false;
-			var event = $scope.droppedBlock['event'] || false;
-
-			if (event === 'isServiceBlockCopyInstance') {
-				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', $.param({
-					copyBlockId: $scope.droppedBlock.blockId,
-					sortIndex: sortIndex,
-					prevId:  $scope.placeholder.prev_id,
-					placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id
-				}), headers).then(function(response) {
-					$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
-					$scope.droppedBlock = {};
-				});
-			} else {
-				if (moveBlock === false) {
-					$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).then(function(response) {
-						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
-						$scope.droppedBlock = {};
-					});
-				} else {
-					$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.droppedBlock.id, {
-						prev_id : $scope.placeholder.prev_id,
-						placeholder_var : $scope.placeholder['var'],
-						sort_index : sortIndex
-					}).then(function(response) {
-						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
-						$scope.droppedBlock = {};
-						$($ui.helper).remove(); //destroy clone
-			            $($ui.draggable).remove(); //remove from list
-					});
-				}
-			}
-			AdminClassService.setClassSpace('onDragStart', undefined);
-		}
+		};
 	});
 
 	zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, ServiceBlocksData, ServiceBlockCopyStack, $sce) {
 
-		// service ServiceBlocksData inheritance
+		/* service ServiceBlocksData inheritance */
 
 		$scope.blocksData = ServiceBlocksData.data;
 
@@ -1509,7 +1559,7 @@
 			}
 
 			$http.post('admin/api-cms-block/toggle-group', {group: group}, {ignoreLoadingBar: true});
-		}
+		};
 
 		// controller logic
 
@@ -1536,23 +1586,9 @@
 			} else if($scope.searchIsDirty) {
 				$scope.blocksData = angular.copy($scope.blocksDataRestore);
 			}
-		})
+		});
 
-		$scope.onStart = function() {
-			$scope.$apply(function() {
-				AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
-			});
-		}
 
-		$scope.safe = function(html) {
-			return $sce.trustAsHtml(html);
-		}
-
-		$scope.onStop = function() {
-			$scope.$apply(function() {
-				AdminClassService.setClassSpace('onDragStart', undefined);
-			});
-		}
 	});
 
 })();

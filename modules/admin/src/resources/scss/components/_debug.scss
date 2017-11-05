@@ -1,0 +1,110 @@
+$tabs-height: 0;
+
+.debugToolbarOpen {
+    padding-bottom: 400px;
+
+    .modal {
+        bottom: 400px;
+    }
+}
+
+.debug {
+    background-color: $white;
+    bottom: 0;
+    height: 400px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: z-index(debug-toolbar);
+
+    .row,
+    div[class*="col"] {
+        height: 100%;
+    }
+
+    &-toggled {
+        left: 200px;
+    }
+}
+
+.debug-tabs {
+    background-color: transparent;
+    border-color: map-get($grays, 900);
+    border-width: 2px;
+    left: 0;
+    padding-left: 80px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(-100%);
+
+    .nav-item:not(:first-of-type) {
+        margin-left: 3px;
+    }
+
+    .nav-link {
+        background-color: theme-color(light);
+        border-color: map-get($grays, 600);
+        border-width: 2px 2px 0;
+        margin-bottom: -1px;
+        pointer-events: all;
+
+        &:hover {
+            border-color: map-get($grays, 900);
+        }
+        &.active {
+            border-color: map-get($grays, 900);
+            background-color: $white;
+        }
+    }
+}
+
+.debug-panel {
+    bottom: 0;
+    left: 0;
+    padding: 25px 10px 10px;
+    position: absolute;
+    right: 0;
+    @include clearfix;
+    overflow: auto;
+    top: $tabs-height;
+
+    &-network {
+        overflow: hidden;
+    }
+
+    .table {
+        margin: 0;
+    }
+}
+
+.debug-network-items,
+.debug-network-detail {
+    float: left;
+    height: 100%;
+    overflow: auto;
+}
+
+.debug-network-items {
+    display: block;
+    width: 100%;
+
+    .debug-panel-network-open & {
+        width: 40%;
+    }
+}
+
+.debug-network-detail {
+    display: none;
+
+    .debug-panel-network-open & {
+        display: block;
+        padding-left: 25px;
+        width: 60%;
+    }
+}
+
+.debug-panel-network-open {
+
+}

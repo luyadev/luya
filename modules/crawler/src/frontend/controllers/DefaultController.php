@@ -15,6 +15,7 @@ use yii\data\ArrayDataProvider;
  * Returns an {{\yii\data\ActiveDataProvider}} within $provider.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class DefaultController extends \luya\web\Controller
 {

@@ -13,7 +13,7 @@ return [
     'login_securetoken' => 'Sicherheitscode',
     'login_securetoken_info' => 'Gib den Sicherheitscode ein, der dir per E-Mail zugeschickt wurde.',
     'menu_node_system' => 'System',
-    'menu_node_filemanager' => 'Dateimanager',
+    'menu_node_filemanager' => 'Dateien',
     'menu_group_access' => 'Zugriff',
     'menu_group_system' => 'System',
     'menu_group_images' => 'Bilder',
@@ -32,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Wert',
     'layout_filemanager_save_dir' => 'Speichern?',
     'layout_filemanager_remove_dir' => 'Verzeichnis löschen?',
-    'layout_filemanager_remove_dir_not_empty' => 'Das Verzeichnis ist nicht leer.<br/>Trotzdem löschen?',
+    'layout_filemanager_remove_dir_not_empty' => 'Möchten Sie das Verzeichnis "%folderName%" mit %count% Dateien löschen?',
     'layout_filemanager_remove_selected_files' => 'Markierte Dateien löschen',
     'layout_filemanager_move_selected_files' => 'Verschieben nach',
     'layout_filemanager_upload_error' => 'Fehler beim Hochladen der Datei',
@@ -45,9 +45,9 @@ return [
     'layout_filemanager_detail_size' => 'Größe',
     'layout_filemanager_detail_id' => 'Interne ID',
     'layout_filemanager_detail_download' => 'Download',
-    'layout_btn_reload' => 'Neuladen',
+    'layout_btn_reload' => 'Aktualisieren',
     'layout_btn_version' => 'Version',
-    'layout_btn_useronline' => 'Online Benutzer',
+    'layout_btn_useronline' => 'Aktive Benutzer',
     'layout_btn_logout' => 'Ausloggen',
     'layout_btn_profile' => 'Profil',
     'layout_debug_luya_version' => 'Luya Version',
@@ -97,9 +97,9 @@ return [
     'aws_changepassword_succes' => 'Dein neues Passwort wurde erfolgreich verschlüsselt und gespeichert.',
     'aws_changepassword_new_pass' => 'Neues Passwort',
     'aws_changepassword_new_pass_retry' => 'Neues Passwort wiederholen',
-    'view_index_redirect_type' => 'Art der Weiterleitung',
-    'view_index_redirect_internal' => 'Interne-Seite',
-    'view_index_redirect_external' => 'Externe URL',
+    'view_index_redirect_type' => 'Verlinkung mit',
+    'view_index_redirect_internal' => 'interner Seite',
+    'view_index_redirect_external' => 'externer Adresse',
     'view_index_redirect_internal_select' => 'Wähle die interne Seite aus, auf welche weitergeleitet werden soll.',
     'view_index_redirect_external_link' => 'Externer Link',
     'view_index_redirect_external_link_help' => 'Externe Links beginnen mit http:// oder https://',
@@ -108,7 +108,7 @@ return [
 
     'model_loginform_email_label' => 'E-Mail',
     'model_loginform_password_label' => 'Passwort',
-    'model_loginform_wrong_user_or_password' => 'Falscher Benutzer oder Passwort.',
+    'model_loginform_wrong_user_or_password' => 'Falsche E-Mail-Adresse oder Passwort.',
     'ngrest_select_no_selection' => 'Keine Auswahl',
     'js_ngrest_error' => 'Während des Ladens ist ein Fehler aufgetreten.',
     'js_ngrest_rm_page' => 'Soll dieser Eintrage wirklich entfernt werden? Diese Aktion kann nicht rückgängig gemacht werden.',
@@ -237,10 +237,30 @@ return [
     'callback_button_file_download_widget_success' => 'Die Datei wurde vorbereitet. Sie können die Datei jetzt herunterladen.',
     
     
-// 1.0.0
+// rc4
     
     'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
     'model_user_oldpassword' => 'Altes Passwort',
     'js_account_update_profile_success' => 'Das Profil wurde erfolgreich aktualisiert.',
     'dashboard_lastlogin_title' => 'Neuste Benutzer logins',
+    'layout_useronline_activity' => 'Activity',
+    'layout_useronline_inactive' => 'inactive',
+    'login_ssl_info' => 'Die Webseite wird über eine sichere verschlüsselte Verbindung geschützt.',
+    'locked_info' => 'Wird bearbeitet',
+    'menu_dashboard' => 'Dashboard',
+    'js_link_not_set' => 'Kein Link gesetzt',
+        
+// 1.0.0
+        
+    'ngrest_button_delete' => 'Löschen',
+    'js_dir_manager_rm_file_confirm_title' => 'Datei löschen',
+    'js_dir_manager_rm_folder_confirm_title' => 'Verzeichnis löschen',
+    'link_dir_target' => 'Link-Ziel',
+    'link_dir_target_same' => 'Gleiches Fenster',
+    'link_dir_target_blank' => 'Neues Fenster',
+    'view_index_redirect_file' => 'Datei',
+    'view_index_redirect_mail' => 'E-Mail-Adresse',
+    'view_index_redirect_mail_help' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+    'menu_button_search' => 'Suchen',
+    'layout_btn_user_settings' => 'Einstellungen',
 ];

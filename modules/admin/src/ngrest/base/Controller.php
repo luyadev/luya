@@ -13,9 +13,10 @@ use yii\web\ForbiddenHttpException;
 /**
  * Base Controller for all NgRest Controllers.
  *
- * @property luya\admin\ngrest\base\NgRestModel $model The model based from the modelClass instance
+ * @property \luya\admin\ngrest\base\NgRestModel $model The model based from the modelClass instance
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Controller extends \luya\admin\base\Controller
 {
@@ -25,8 +26,7 @@ class Controller extends \luya\admin\base\Controller
     public $layout = false;
     
     /**
-     * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
-     * is required.
+     * @var string Defines the related model for the NgRest Controller. The full qualified model name is required.
      *
      * ```php
      * public $modelClass = 'admin\models\User';
@@ -39,6 +39,45 @@ class Controller extends \luya\admin\base\Controller
      */
     public $disablePermissionCheck = true;
 
+    /**
+     * @var array Define global ngrest controller buttons you can choose in the drop down menu of an ngrest page.
+     *
+     * ```php
+     * 'globalButtons' => [
+     *     ['icon' => 'extension', 'label' => 'My Button', 'ng-click' => 'callMyFunction()'],
+     * ];
+     * ```
+     *
+     * An example for using the global buttons could be an action inside the controller
+     *
+     * ```php
+     * class MyCrudController extends Controller
+     * {
+     *     public $modelClass = 'app\modules\myadmin\models\MyModel';
+     *
+     *     public $globalButtons = [
+     *	       [
+     *              'icon' => 'file_download',
+     *              'label' => 'XML Download',
+     *              'ui-sref' => "custom({templateId:'myadmin/mycrudcontroller/the-action'})"
+     *         ]
+     *     ];
+     *
+     *     public function actionTheAction()
+     *     {
+     *         return $this->render('hello world!');
+     *     }
+     * }
+     * ```
+     *
+     * Properties to make links with angular:
+     *
+     * + ui-sref: custom({templateId:'myadmin/mycrudcontroller/the-action'}) (display the view without module navigation)
+     * + ui-sref: default.route({moduleRouteId:'mymodule', controllerId:'mycrudcontroller', actionId:'the-action'}); (display the view inside the default layout)
+     * + ng-href: 'katalogadmin/produkt/xml-download' (an example if you like to use yii response sendContentAsFile)
+     */
+    public $globalButtons = [];
+    
     /**
      * @inheritdoc
      */
@@ -66,15 +105,21 @@ class Controller extends \luya\admin\base\Controller
         return $this->_model;
     }
     
-    public function actionIndex($inline = false, $relation = false, $arrayIndex = false, $modelClass = false)
+    /**
+     *
+     * @param string $inline
+     * @param string $relation
+     * @param string $arrayIndex
+     * @param string $modelClass
+     * @param string $modelSelection
+     * @throws Exception
+     * @return string
+     */
+    public function actionIndex($inline = false, $relation = false, $arrayIndex = false, $modelClass = false, $modelSelection = false)
     {
         $apiEndpoint = $this->model->ngRestApiEndpoint();
 
         $config = $this->model->getNgRestConfig();
-
-        if (!$config) {
-            throw new Exception("Provided NgRest config for controller '' is invalid.");
-        }
 
         $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
         
@@ -82,15 +127,17 @@ class Controller extends \luya\admin\base\Controller
             $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
         }
         
-        $ngrest = new NgRest($config);
+        // generate crud renderer
         $crud = new RenderCrud();
+        $crud->setSettingButtonDefinitions($this->globalButtons);
         $crud->setIsInline($inline);
+        $crud->setModelSelection($modelSelection);
         if ($relation && $arrayIndex !== false && $modelClass !== false) {
-        	$crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
+            $crud->setRelationCall(['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass]);
         }
-        if ($relation) {
-            $crud->viewFile = 'crud_relation.php';
-        }
+        
+        // generate ngrest object from config and render renderer
+        $ngrest = new NgRest($config);
         return $ngrest->render($crud);
     }
     

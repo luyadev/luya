@@ -6,7 +6,7 @@ return [
 
     'news' => 'News',
     'news_administrate' => 'Verwalten',
-    'article' => 'News Eintrag',
+    'article' => 'Artikel',
     'article_cat_id' => 'Kategorie',
     'article_title' => 'Titel',
     'article_text' => 'Inhalt',

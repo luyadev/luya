@@ -1,0 +1,55 @@
+.imageupload {
+    // display: block;
+}
+
+.imageupload__filter,
+.imageupload__preview {
+    vertical-align: top;
+    margin-top: 10px;
+    float: left;
+}
+
+.imageupload__filter {
+    width: 100%;
+    select {
+        max-width: 100%;
+    }
+    label {
+        display: block;
+    }
+    @media (min-width: 1200px) {
+        box-sizing: border-box;
+        width: calc(100% - 245px) !important;
+        margin-left: 15px !important;
+    }
+}
+
+.imageupload__preview {
+    position: relative;
+    font-size: 0;
+    min-height: 100px;
+    width: 225px;
+    height: auto;
+    text-align: center;
+}
+
+.imageupload__size {
+    font-size: 14px;
+}
+
+.imageupload__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(color("shades", "black"), 0.5);
+}
+
+.imageupload__loading .preloader-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -32px;
+    margin-left: -32px;
+}

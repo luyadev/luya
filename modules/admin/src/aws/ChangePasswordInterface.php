@@ -10,18 +10,17 @@ namespace luya\admin\aws;
  * ```php
  * class User extends \luya\admin\ngrest\base\NgRestModel implements \luya\admin\aws\ChangePasswordInterface
  * {
- *    public function changePassword($newPassword, $newPasswordRepetition)
+ *    public function changePassword($newPassword)
  *    {
- *        if ($newPassword !== $newPasswordRepetition) {
- *            $this->addError('password', 'The new password as not equals the old.');
- *        }
- *
- *        $this->updateAttribute('password', sha1($newPassword));
+ *        return $this->updateAttribute('password', Yii::$app->security->generatePasswordHash($newPassword));
  *    }
  * }
  * ```
  *
+ * The changePassword method must return whether the password change was successfull or not.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface ChangePasswordInterface
 {
@@ -30,8 +29,7 @@ interface ChangePasswordInterface
      *
      * The implementation of this must make sure if the $newPassword and $newPasswordRepetition are equals!
      *
-     * @param string $newPassword The new password which must be set.
-     * @param string $newPasswordRepetition The repeation in order to check whether does inputs are equal or not.
+     * @param string $newPassword The new password (as plain input) which must be encoded an set.
      */
-    public function changePassword($newPassword, $newPasswordRepetition);
+    public function changePassword($newPassword);
 }

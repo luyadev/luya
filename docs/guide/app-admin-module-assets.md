@@ -30,7 +30,7 @@ class MyAdminAsset extends \luya\web\Asset
 
 ### Embed the asset
 
-To embed the above created example asset file stored in your admin module you hav to add the asset bundle into the {{\luya\base\AdminModuleInterface::getAdminAssets}} method of the belonging `Module.php` file as shown below:
+To embed the above created example asset file stored in your admin module you hav to add the asset bundle into the {{\luya\base\AdminModuleInterface::getAdminAssets()}} method of the belonging `Module.php` file as shown below:
 
 ```php
 <?php

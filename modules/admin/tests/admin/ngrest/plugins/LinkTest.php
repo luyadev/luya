@@ -27,7 +27,7 @@ class LinkTest extends AdminTestCase
 
         $plugin->onFind($event);
 
-        $this->assertInstanceOf('luya\web\ExternalLink', $user->firstname);
+        $this->assertInstanceOf('luya\web\WebsiteLink', $user->firstname);
     }
     
     public function testExternalLinkI18n()
@@ -47,6 +47,6 @@ class LinkTest extends AdminTestCase
     
         $plugin->onFind($event);
     
-        $this->assertInstanceOf('luya\web\ExternalLink', $user->firstname);
+        $this->assertInstanceOf('luya\web\WebsiteLink', $user->firstname);
     }
 }

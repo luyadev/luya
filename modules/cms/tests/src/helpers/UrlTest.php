@@ -15,11 +15,11 @@ class UrlTest extends CmsFrontendTestCase
     public function testToModuleRoute()
     {
         $this->expectException('luya\cms\Exception');
-        Url::toModuleRoute('foobar', 'module/controller/action');
+        Url::toModuleRoute('foobar', ['/module/controller/action']);
     }
 
     public function testToMenuItem()
     {
-        $this->assertContains('en/module/controller/action', Url::toMenuItem(1, 'module/controller/action'));
+        $this->assertContains('en/module/controller/action', Url::toMenuItem(1, ['/module/controller/action']));
     }
 }

@@ -18,7 +18,6 @@ use Yii;
  *   "bower-asset/angular-ui-router" : "0.2.15",
  *   "bower-asset/angular-loading-bar" : "0.8.0",
  *   "bower-asset/angular-dragdrop" : "1.0.13",
- *   "bower-asset/angular-slugify" : "1.0.1",
  *   "bower-asset/twig.js" : "0.8.6",
  *   "bower-asset/ng-file-upload" : "11.0.2",
  *   "bower-asset/ng-wig" : "2.3.3",

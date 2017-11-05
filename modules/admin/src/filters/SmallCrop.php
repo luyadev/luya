@@ -8,6 +8,7 @@ use luya\admin\base\Filter;
  * Admin Module default Filter: Small Crop (100x100)
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class SmallCrop extends Filter
 {

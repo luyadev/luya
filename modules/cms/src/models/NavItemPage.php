@@ -24,6 +24,7 @@ use yii\base\ViewContextInterface;
  * @property string $version_alias
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewContextInterface
 {
@@ -157,8 +158,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         if ($this->layout) {
             $layoutFile = $this->layout->view_file;
             $placholders = [];
-            foreach ($this->layout->getJsonConfig('placeholders') as $item) {
-                $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
+            foreach ($this->layout->getJsonConfig('placeholders') as $row) {
+                foreach ($row as $item) {
+                    $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
+                }
             }
             return $this->getView()->render($layoutFile, ['placeholders' => $placholders], $this);
         }
@@ -216,12 +219,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 
                 // see if its a valid block object
                 if ($blockObject) {
+                    $className = get_class($blockObject);
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
                     
                     // inject variations variables
-                    $possibleVariations = isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false;
+                    $possibleVariations = isset($variations[$className]) ? $variations[$className] : false;
                     
                     if (isset($possibleVariations[$placeholder['variation']])) {
                         $ensuredVariation = $possibleVariations[$placeholder['variation']];
@@ -328,16 +332,21 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $nav_item_page['json_config'] = json_decode($nav_item_page['json_config'], true);
         
         if (isset($nav_item_page['json_config']['placeholders'])) {
-            foreach ($nav_item_page['json_config']['placeholders'] as $placeholderKey => $placeholder) {
-                $placeholder['nav_item_page_id'] = $this->id;
-                $placeholder['prev_id'] = 0;
-                $placeholder['__nav_item_page_block_items'] = [];
-        
-                $return['__placeholders'][$placeholderKey] = $placeholder;
-        
-                $placeholderVar = $placeholder['var'];
-        
-                $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
+            foreach ($nav_item_page['json_config']['placeholders'] as $rowKey => $row) {
+                foreach ($row as $placeholderKey => $placeholder) {
+                    $placeholder['nav_item_page_id'] = $this->id;
+                    $placeholder['prev_id'] = 0;
+                    $placeholder['__nav_item_page_block_items'] = [];
+                    if (!isset($placeholder['cols'])) {
+                        $placeholder['cols'] = '12';
+                    }
+            
+                    $return['__placeholders'][$rowKey][$placeholderKey] = $placeholder;
+            
+                    $placeholderVar = $placeholder['var'];
+            
+                    $return['__placeholders'][$rowKey][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
+                }
             }
         }
         
@@ -386,16 +395,18 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
         $placeholders = [];
     
-        foreach ($blockObject->getConfigPlaceholdersExport() as $pk => $pv) {
-            $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
-            $pv['prev_id'] = $blockItem['id'];
-            $placeholderVar = $pv['var'];
-    
-            $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
-    
-            $placeholder = $pv;
-    
-            $placeholders[] = $placeholder;
+        foreach ($blockObject->getConfigPlaceholdersByRowsExport() as $rowKey => $row) {
+            foreach ($row as $pk => $pv) {
+                $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
+                $pv['prev_id'] = $blockItem['id'];
+                $placeholderVar = $pv['var'];
+        
+                $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
+        
+                $placeholder = $pv;
+                
+                $placeholders[$rowKey][] = $placeholder;
+            }
         }
     
         if (empty($blockItem['json_config_values'])) {
@@ -408,10 +419,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
         $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
         
+        $className = get_class($blockObject);
+        
         return [
             'is_dirty' => (bool) $blockItem['is_dirty'],
             'is_container' => (int) $blockObject->getIsContainer(),
             'id' => $blockItem['id'],
+            'block_id' => $blockItem['block_id'],
             'is_hidden' => $blockItem['is_hidden'],
             'name' => $blockObject->name(),
             'icon' => $blockObject->icon(),
@@ -424,7 +438,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
-            'variations' => isset($variations[$blockObject->className()]) ? $variations[$blockObject->className()] : false,
+            'variations' => isset($variations[$className]) ? $variations[$className] : false,
             'variation' => empty($blockItem['variation'])? "0" : $blockItem['variation'], // as by angular selection
             'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
         ];

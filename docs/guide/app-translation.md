@@ -27,22 +27,32 @@ Now all the message with the prefix `app` will be loaded into the message compon
         └── app-otherparts.php
 ```
 
-In order to register an {{luya\base\Module}} translation call the {{luya\base\Module::registerTranslation}} method after the init() of your Module as followed:
+## Module Translations
+
+In order to register an {{luya\base\Module}} translation call the {{luya\base\Module::onLoad()}} method, there you can also define an alias you can reuse.
 
 ```php
-public function init()
+class Module extends \luya\base\Module
 {
-    parent::init();
-    
-    $this->registerTranslation('mymodule*', '@mymoduleid/messages', [
-        'mymodule' => 'mymodule.php',
-        'mymodule/sub' => 'sub.php',
-    );
+    public static function onLoad()
+    {
+        //Yii::setAlias('@mymodulealias', static::staticBasePath());
+        
+        self::registerTranslation('mymodule', static::staticBasePath() . '/messages', [
+            'fileMap' => [
+                'mymodule' => 'mymodule.php',
+            ],
+        ]);
+    }
+
+    public static function t($message, array $params = [])
+    {
+        return parent::baseT('mymodule', $message, $params);
+    }
 }
 ```
 
-
-The above registered module translation messages can be retrieved as `Yii::t('mymodule', 'Key', 'Value')` or for the subsection `Yii::t('mymodule/subsection', 'Key', 'Value')`.
+The above registered module translation messages can be retrieved as `Module::t('Key', 'Value')`.
 
 ### Message Source Content
 

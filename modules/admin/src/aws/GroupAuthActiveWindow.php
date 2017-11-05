@@ -4,11 +4,13 @@ namespace luya\admin\aws;
 
 use Yii;
 use luya\admin\ngrest\base\ActiveWindow;
+use luya\admin\Module;
 
 /**
  * Active Window to set permissions for a specific Group, used in groups ngrest model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class GroupAuthActiveWindow extends ActiveWindow
 {
@@ -18,11 +20,6 @@ class GroupAuthActiveWindow extends ActiveWindow
     public $module = 'admin';
 
     /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'verified_user';
-    
-    /**
      * The default action which is going to be requested when clicking the ActiveWindow.
      *
      * @return string The response string, render and displayed trough the angular ajax request.
@@ -31,7 +28,27 @@ class GroupAuthActiveWindow extends ActiveWindow
     {
         return $this->render('index');
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultLabel()
+    {
+        return Module::t('model_group_btn_aws_groupauth');
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'verified_user';
+    }
 
+    /**
+     *
+     * @return boolean[]
+     */
     public function callbackSaveRights()
     {
         $rights = Yii::$app->request->post('data', []);
@@ -59,6 +76,10 @@ class GroupAuthActiveWindow extends ActiveWindow
         return ['success' => true];
     }
 
+    /**
+     *
+     * @return number[][][]|string[]|array[]
+     */
     public function callbackGetRights()
     {
         return [
@@ -67,6 +88,10 @@ class GroupAuthActiveWindow extends ActiveWindow
         ];
     }
 
+    /**
+     *
+     * @return string|array
+     */
     private function getAuthData()
     {
         $data = (new \yii\db\Query())->select('*')->from('admin_auth')->orderBy('module_name, alias_name ASC')->all();
@@ -84,6 +109,10 @@ class GroupAuthActiveWindow extends ActiveWindow
         return $data;
     }
 
+    /**
+     *
+     * @return number[][]
+     */
     private function getRightsData()
     {
         $query = (new \yii\db\Query())->select('*')->from('admin_group_auth')->where(['group_id' => $this->getItemId()])->all();

@@ -9,11 +9,12 @@ use luya\admin\ngrest\base\ActiveWindow;
 /**
  * Change Passwort Active Window.
  *
- * This Change Password ActiveWindow allows you to enter a new password and a password repetition which is going to call the {{\luya\admin\aws\ChangePasswordInterface::changePassword}} in order to change the password of an user or other models.
+ * This Change Password ActiveWindow allows you to enter a new password and a password repetition which is going to call the {{\luya\admin\aws\ChangePasswordInterface::changePassword()}} in order to change the password of an user or other models.
  *
  * The model where you apply the ChangePassword ActiveWindow must implement the {{\luya\admin\aws\ChangePasswordInterface}}.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ChangePasswordActiveWindow extends ActiveWindow
 {
@@ -21,16 +22,12 @@ class ChangePasswordActiveWindow extends ActiveWindow
      * @var string The name of the module where the active windows is located in order to finde the view path.
      */
     public $module = 'admin';
-
-    /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'vpn_key';
     
     /**
      * @var integer The minimum length of the password.
      */
     public $minCharLength = 8;
+    
     /**
      * The default action which is going to be requested when clicking the active window.
      *
@@ -38,11 +35,17 @@ class ChangePasswordActiveWindow extends ActiveWindow
      */
     public function index()
     {
-        return $this->render('index', [
-            'itemId' => $this->getItemId(),
-        ]);
+        return $this->render('index');
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'vpn_key';
+    }
+    
     /**
      * The method which is going to change the password on the current model.
      *
@@ -67,7 +70,7 @@ class ChangePasswordActiveWindow extends ActiveWindow
             return $this->sendError(Module::t('aws_changepassword_notequal'));
         }
         
-        if ($this->model->changePassword($newpass, $newpasswd)) {
+        if ($this->model->changePassword($newpass)) {
             return $this->sendSuccess(Module::t('aws_changepassword_succes'));
         }
         

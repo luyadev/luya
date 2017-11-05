@@ -28,7 +28,7 @@ class TestProperty extends Property
     
     public function type()
     {
-        return 'zaa-select';
+        return self::TYPE_RADIO;
     }
     
     public function defaultValue()

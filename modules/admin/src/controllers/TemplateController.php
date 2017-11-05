@@ -2,13 +2,13 @@
 
 namespace luya\admin\controllers;
 
-
 use luya\admin\base\Controller;
 
 /**
  * TemplateController renders angular templates.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class TemplateController extends Controller
 {
@@ -16,6 +16,6 @@ class TemplateController extends Controller
 
     public function actionDefault()
     {
-        return $this->renderPartial('default');
+        return $this->render('default');
     }
 }

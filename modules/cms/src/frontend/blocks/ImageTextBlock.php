@@ -12,6 +12,7 @@ use luya\cms\base\PhpBlock;
  * Image with Text block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class ImageTextBlock extends PhpBlock
 {

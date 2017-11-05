@@ -19,7 +19,7 @@
 	   "phpunit/phpunit" : "~5.0",
 	   "luyadev/luya" : "^1.0@dev",
 	   "luyadev/luya-module-admin" : "^1.0@dev",
-	   "satooshi/php-coveralls": "~1.0",
+	   "php-coveralls/php-coveralls": "^1.0",
 	   "twig/twig" : "^1.0"
 	},
 	"autoload" : {
@@ -35,11 +35,19 @@
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
+        },
+        "luya" : {
+        	"bootstrap": ["\\luya\\cms\\frontend\\Bootstrap"],
+        	"blocks" : ["src/frontend/blocks"]
         }
     },
     "config": {
-        "fxp-asset" : {
-            "pattern-skip-version": "(-build|-patch)"
-        }   
-    }
+         "platform": {"php": "7.0"}  
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

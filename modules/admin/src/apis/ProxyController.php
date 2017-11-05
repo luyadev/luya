@@ -11,6 +11,7 @@ use luya\admin\models\ProxyBuild;
 use yii\helpers\Json;
 use luya\helpers\Url;
 use luya\admin\models\StorageFile;
+use yii\web\NotFoundHttpException;
 
 /**
  * Proxy API.
@@ -28,10 +29,21 @@ use luya\admin\models\StorageFile;
  */
 class ProxyController extends Controller
 {
+    /**
+     * @var array A list of tables which will be ignored and can not be synced with the proxy command.
+     */
     protected $ignoreTables = [
-        'admin_proxy_build', 'admin_proxy_machine', 'migration', 'admin_config',
+        'migration', 'admin_proxy_build', 'admin_proxy_machine', 'admin_config',
     ];
     
+    /**
+     * Gathers basic informations about the build.
+     *
+     * @param string $identifier
+     * @param string $token
+     * @throws ForbiddenHttpException
+     * @return array
+     */
     public function actionIndex($identifier, $token)
     {
         $machine = ProxyMachine::findOne(['identifier' => $identifier, 'is_deleted' => false]);
@@ -95,6 +107,14 @@ class ProxyController extends Controller
         return $build->getErrors();
     }
     
+    /**
+     * Make sure the machine and token are valid.
+     *
+     * @param string $machine
+     * @param string $buildToken
+     * @throws ForbiddenHttpException
+     * @return \luya\admin\models\ProxyBuild
+     */
     private function ensureBuild($machine, $buildToken)
     {
         $build = ProxyBuild::findOne(['build_token' => $buildToken, 'is_complet' => 0]);
@@ -114,6 +134,15 @@ class ProxyController extends Controller
         return $build;
     }
     
+    /**
+     * Return sql table data.
+     *
+     * @param unknown $machine
+     * @param unknown $buildToken
+     * @param unknown $table
+     * @param unknown $offset
+     * @return array
+     */
     public function actionDataProvider($machine, $buildToken, $table, $offset)
     {
         $build = $this->ensureBuild($machine, $buildToken);
@@ -139,34 +168,50 @@ class ProxyController extends Controller
         return $query->all();
     }
     
-    
-    
+    /**
+     * Return file storage data.
+     *
+     * @param unknown $machine
+     * @param unknown $buildToken
+     * @param unknown $fileId
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     */
     public function actionFileProvider($machine, $buildToken, $fileId)
     {
         $build = $this->ensureBuild($machine, $buildToken);
         
         if ($build) {
             if (!is_numeric($fileId)) {
-                throw new \InvalidArgumentException("Invalid file id provided.");
+                throw new ForbiddenHttpException("Invalid file id input.");
             }
             
             $file = Yii::$app->storage->getFile($fileId);
             /* @var $file \luya\admin\file\Item */
             if ($file->fileExists) {
-                return Yii::$app->response->sendFile($file->serverSource)->send();
+                return Yii::$app->response->sendFile($file->serverSource, null, ['mimeType' => $file->mimeType])->send();
             }
+            
+            throw new NotFoundHttpException("The requested file '".$file->serverSource."' does not exist in the storage folder.");
         }
-        
-        return null;
     }
     
+    /**
+     * Return image storage data.
+     *
+     * @param unknown $machine
+     * @param unknown $buildToken
+     * @param unknown $imageId
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     */
     public function actionImageProvider($machine, $buildToken, $imageId)
     {
         $build = $this->ensureBuild($machine, $buildToken);
     
         if ($build) {
             if (!is_numeric($imageId)) {
-                throw new \InvalidArgumentException("Invalid image id provided.");
+                throw new ForbiddenHttpException("Invalid image id input.");
             }
     
             $image = Yii::$app->storage->getImage($imageId);
@@ -174,11 +219,17 @@ class ProxyController extends Controller
             if ($image->fileExists) {
                 return Yii::$app->response->sendFile($image->serverSource)->send();
             }
+            
+            throw new NotFoundHttpException("The requested image '".$image->serverSource."' does not exist in the storage folder.");
         }
-    
-        return null;
     }
     
+    /**
+     * Close the current build.
+     *
+     * @param string $buildToken
+     * @throws ForbiddenHttpException
+     */
     public function actionClose($buildToken)
     {
         $build = ProxyBuild::findOne(['build_token' => $buildToken, 'is_complet' => 0]);

@@ -1,0 +1,9 @@
+.zaa-multiple-inputs .list-item > div {
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    &:not(:first-of-type):not(.list-buttons) {
+        margin-top: 15px;
+    }
+}

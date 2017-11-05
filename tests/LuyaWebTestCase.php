@@ -5,7 +5,6 @@ namespace luyatests;
 use luya\testsuite\cases\BaseTestSuite;
 use luya\base\Boot;
 
-
 require 'vendor/autoload.php';
 require 'data/env.php';
 

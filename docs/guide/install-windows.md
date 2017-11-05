@@ -6,13 +6,13 @@ With those few steps you can install *LUYA* on your System. To install *LUYA* yo
 First of all you have to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. So open your Command Prompt go into your Webserver folder and insert:
 
 ```sh
-composer global require "fxp/composer-asset-plugin:~1.3"
+composer global require "fxp/composer-asset-plugin:~1.4"
 ```
 
 After setting up composer, we execute the composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup enabling you to directly run your website. We recommend to run the `create-project` command directly from your htdocs/webserver folder:
 
 ```sh
-composer create-project luyadev/luya-kickstarter:1.0.0-RC3
+composer create-project luyadev/luya-kickstarter:1.0.0-RC4
 ```
 
 > Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).

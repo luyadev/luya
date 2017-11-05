@@ -15,15 +15,17 @@ use yii\caching\DbDependency;
 use luya\admin\filters\TinyCrop;
 use luya\admin\filters\MediumThumbnail;
 use luya\helpers\FileHelper;
+use yii\web\BadRequestHttpException;
 
 /**
  * Filemanager and Storage API.
  *
  * Storage API, provides data from system image, files, filters and folders to build the filemanager, allows create/delete process to manipulate storage data.
  *
- * The storage controller is used to make the luya angular file manager work with the {{luya\admin\components\StorageContainer}}.
+ * The storage controller is used to make the luya angular file manager work with the {{luya\admin\storage\BaseFileSystemStorage}}.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class StorageController extends RestController
 {
@@ -198,7 +200,15 @@ class StorageController extends RestController
         if ($file = Yii::$app->storage->getFile($fileId)) {
             $serverSource = $file->getServerSource();
             if (is_uploaded_file($raw['tmp_name'])) {
-                if (Storage::replaceFile($serverSource, $raw['tmp_name'])) {
+                
+                // check for same extension / mimeType
+                $fileData = Yii::$app->storage->ensureFileUpload($raw['tmp_name'], $raw['name']);
+                
+                if ($fileData['mimeType'] != $file->mimeType) {
+                    throw new BadRequestHttpException("The type must be the same as the original file in order to replace.");
+                }
+                
+                if (Storage::replaceFile($serverSource, $raw['tmp_name'], $raw['name'])) {
                     foreach (Yii::$app->storage->findImages(['file_id' => $file->id]) as $img) {
                         Storage::removeImage($img->id, false);
                     }

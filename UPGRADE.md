@@ -6,6 +6,44 @@ This document will help you upgrading from a LUYA Version into another. For more
 1.0.0 (in progress)
 -------------------
 
+A few changes you will surely notice when upgrading to version 1.0.0 and you should check in your application:
+
++ Storage file `source` is now `link` or `href`, even when `toArray()` is called, like in blocks and block admin twigs. (Search for `->source`, `'source'`, `"source"`, `.source`). Why? We follow semantic naming of html structure, therefource source points to webserver accessable file directory for the file or image, link instead is used to download files (link to a file).
++ Active Windows `alias` property is now `label`, so take a look at your `ngRestActiveWindows` config in your NgRest Models. (Search for `'alias'` or `"alias"`)
+
+1.0.0-RC4 (5. September 2017)
+-------------------
+
+When upgrading from RC3, we use the luya composer plugin to bootstrap the cms module. Sometimes you have to delete your vendor folder once and run composer update again.
+
+```sh
+rm -rf vendor && composer install
+```
+
+Now run the migrate and import commands
+
+```php
+./vendor/bin/luya migrate && ./vendor/bin/luya import
+```
+
+The next what you will notice is `Setting unknown property: luya\web\Application::luyaLanguage`, property `luyaLanguage` is not available anymore so remove this from your config. If you like to define the admin ui language to the admin module section in your config and use
+
+```php
+ 'admin' => [
+    'class' => 'luya\admin\Module',
+    'interfaceLanguage' => 'en',
+],
+```
+
+Low level API changes:
+
++ Mail component method `adresses()` is now correctly written as `addresses()`.
++ [#1408](https://github.com/luyadev/luya/issues/1408) THe CMS Module is now bootstraped over the luya composer plugin if you want explicit call the bootstrap process use `'bootstrap' => ['luya\cms\frontend\Bootstrap']` inside your config.
++ [#1414](https://github.com/luyadev/luya/issues/1414) Renamed Angular Helper methods, removed all the zaa prefixes.
++ [#1369](https://github.com/luyadev/luya/issues/1369) FlowActiveWindow dropped property `$modelClass` and does need to be configured anymore.
++ [#1308](https://github.com/luyadev/luya/issues/1308) A list of changed properties and methods.
+- [#1448](https://github.com/luyadev/luya/issues/1448) Admin translations must be registered in Module::onLoad.
+
 1.0.0-RC3 (11. April 2017)
 -------------------
 

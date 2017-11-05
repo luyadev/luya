@@ -21,6 +21,7 @@ use luya\admin\base\RestActiveController;
  * This class extends the {{yii\db\ActiveRecord}}.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class NgRestModel extends ActiveRecord implements GenericSearchInterface, NgRestModelInterface
 {
@@ -81,9 +82,17 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return array_keys($this->ngRestExtraAttributeTypes());
+    }
+    
+    /**
      * Whether a field is i18n or not.
-     * 
-     * @param string $fieldName The name of the field which is 
+     *
+     * @param string $fieldName The name of the field which is
      * @return boolean
      */
     public function isI18n($fieldName)
@@ -119,7 +128,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *     return ['created_at' => SORT_ASC];
      * }
      * ```
-     * 
+     *
      * If the return value is `false` the sorting **is disabled** for this NgRest CRUD.
      *
      * @return array Return an Array where the key is the field and value the direction. Example `['timestamp' => SORT_ASC]`.
@@ -222,6 +231,40 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
+     * Search trough the whole table as ajax fallback when pagination is enabled.
+     *
+     * This method is used when the angular crud view switches to a pages view and a search term is entered into
+     * the query field. It differs to the generic search as it takes more performence to lookup all fields (except
+     * of boolean types).
+     *
+     * When you have relations to lookup you can extend the parent implementation, for example:
+     *
+     * ```php
+     * public function ngRestFullQuerySearch($query)
+     * {
+     *	return parent::ngRestFullQuerySearch($query)
+     *		->joinWith(['production'])
+     *		->orFilterWhere(['like', 'title', $query]);
+     * }
+     * ```
+     *
+     * @param string $query The query which will be used in order to make the like statement request.
+     * @return \yii\db\ActiveQuery Returns an ActiveQuery instance in order to send to the ActiveDataProvider.
+     */
+    public function ngRestFullQuerySearch($query)
+    {
+        $find = $this->ngRestFind();
+        
+        foreach ($this->getTableSchema()->columns as $column) {
+            if ($column->phpType !== "boolean") {
+                $find->orFilterWhere(['like', static::tableName() . '.' . $column->name, $query]);
+            }
+        }
+        
+        return $find;
+    }
+
+    /**
      * @inheritdoc
      */
     public function afterFind()
@@ -312,6 +355,22 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
 
         return $this->_ngrestCallType;
     }
+    
+    /**
+     * Whether the current model is in api context (REST SCENARIOS or CALL TYPE) context or not.
+     *
+     * @return boolean Whether the current model is in api context or not.
+     */
+    public function getIsNgRestContext()
+    {
+        if ($this->scenario == RestActiveController::SCENARIO_RESTCREATE
+            || $this->scenario == RestActiveController::SCENARIO_RESTUPDATE
+            || $this->getNgRestCallType()) {
+            return true;
+        }
+        
+        return false;
+    }
 
     private $_ngRestPrimaryKey;
 
@@ -359,7 +418,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *
      * @return mixed The service data.
      */
-    public function getNgrestServices()
+    public function getNgRestServices()
     {
         $this->trigger(self::EVENT_SERVICE_NGREST);
 
@@ -548,6 +607,9 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
         }
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestConfig($config)
     {
         foreach ($this->ngRestScopes() as $arrayConfig) {
@@ -558,7 +620,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             $scope = $arrayConfig[0];
             $fields = $arrayConfig[1];
 
-            if ($scope == 'delete') {
+            if ($scope == 'delete' || (is_array($scope) && in_array('delete', $scope))) {
                 $config->delete = $fields;
             } else {
                 $this->ngRestConfigDefine($config, $scope, $fields);
@@ -580,8 +642,6 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
-            //$config = Yii::createObject(['class' => Config::class, 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
-            
             $config = new Config();
             $config->apiEndpoint = static::ngRestApiEndpoint();
             $config->primaryKey = $this->getNgRestPrimaryKey();
@@ -592,8 +652,6 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             foreach ($this->i18n as $fieldName) {
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
-            
-           
 
             // COPY FROM NgRestController to Builder of the config
             // ensure what must be removed and added from outside

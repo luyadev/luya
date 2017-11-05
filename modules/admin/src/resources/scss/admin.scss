@@ -1,113 +1,145 @@
-/**
-/* Materialize font
-*/
+// ==================================================
+// Fonts
+// ==================================================
 
-$roboto-font-path: "../../fonts/roboto/";
+@import "fonts/all";
 
-/**
- * Materialize CSS
- * http://materializecss.com/
- */
+// ==================================================
+// Include required Bootstrap functions
+// ==================================================
 
-@import 'materialize/materialize';
+@import "../../../vendor/twbs/bootstrap/scss/functions";
 
-/**
- * Basic styles
- * 		variables:				Variables to use later
- * 		base: 					HTML & Body tags
- * 		typography: 			Typography styles
- * 		materialize-overwrite: 	Overwrite styles from Materialize that we don't need
- */
-@import 'base/variables';
-@import 'base/base';
-@import 'base/typography';
-@import 'base/materialize-overwrite';
-@import 'base/breakpoints';
+// ==================================================
+// Variables (To be used in bootstrap)
+// ==================================================
 
-/**
- * Helpers
- */
-@import 'helpers/clearfix';
+@import "variables/zindex";
 
-/**
- * Components
- * 		btn:					Extends the default Materialize behavior with some useful classes
- * 		luya-container:			Size and position of the Sidebar and the Main container (luya-container__sidebar, luya-container__main)
- * 		modal:					Sizes and styling for modals
- * 		navbar:					Some Improvements to the normal materialize navbar
- * 		navbar:					Default styles for submenu (left side)
- *		toolbar:				Defines the .toolbar background and proportions
- */
+// ==================================================
+// Helpers
+// ==================================================
 
-@import 'components/material-icons';
+@import "helpers/google-chrome-font-offset-fix";
+@import "helpers/overflow-no-scrollbars";
+@import "helpers/zindex";
 
-@import 'components/alert';
-@import 'components/angular-datepicker';
-@import 'components/aws-gallery';
-@import 'components/breadcrumb';
-@import 'components/btn';
-@import 'components/button-right';
-@import 'components/checkbox-column-fix';
-@import 'components/chosen';
-@import 'components/colorwheel';
-@import 'components/crud';
-@import 'components/crud-loader-tag';
-@import 'components/editlog';
-@import 'components/filearray';
-@import 'components/filemanager';
-@import 'components/flag';
-@import 'components/floating-form';
-@import 'components/flow';
-@import 'components/floating-button-label';
-@import 'components/form';
-@import 'components/form-group';
-@import 'components/help';
-@import 'components/help-overlay';
-@import 'components/i18n';
-@import 'components/icon';
-@import 'components/imagearray';
-@import 'components/imageupload';
-@import 'components/input';
-@import 'components/input-offset';
-@import 'components/iconbar';
-@import 'components/link-selector';
-@import 'components/list';
-@import 'components/loading-bar';
-@import 'components/loading-indicator';
-@import 'components/loading-overlay';
-@import 'components/log';
-@import 'components/luya-container';
-@import 'components/menu-dropdown';
-@import 'components/modal';
-@import 'components/navbar';
-@import 'components/ng-wig';
-@import 'components/pagination';
-@import 'components/search-box';
-@import 'components/side-nav';
-@import 'components/sidebar';
-@import 'components/sortable';
-@import 'components/spin';
-@import 'components/submenu';
-@import 'components/switch';
-@import 'components/table';
-@import 'components/toolbar';
-@import 'components/tooltip';
-@import 'components/useronline';
-@import 'components/waves';
-@import 'components/langswitch';
-@import 'components/tabs';
-@import 'components/toggler';
-@import 'components/toasts';
-@import 'components/variations';
-@import 'components/debug-container';
-@import 'components/zaa-sortrelation';
-@import 'components/zaa-table';
+// ==================================================
+// Variables
+// ==================================================
 
-// Curently disabled
-// @import "components/user-menu";
+@import "variables/colors";
+@import "variables/bootstrap";
+@import "variables/custom";
+@import "variables/flags";
 
-/**
- * Layouts
- *		luya-container:			Dimensiions and positionng of the luya-container
- */
-@import 'layouts/luya-container';
+// ==================================================
+// Include Bootstrap
+// ==================================================
+
+@import "../../../vendor/twbs/bootstrap/scss/variables";
+@import "../../../vendor/twbs/bootstrap/scss/mixins";
+@import "../../../vendor/twbs/bootstrap/scss/print";
+// @import "../../../vendor/twbs/bootstrap/scss/reboot"; Disabled, causing issues, See https://github.com/twbs/bootstrap/issues/19402
+@import "../../../vendor/twbs/bootstrap/scss/type";
+@import "../../../vendor/twbs/bootstrap/scss/images";
+@import "../../../vendor/twbs/bootstrap/scss/code";
+@import "../../../vendor/twbs/bootstrap/scss/grid";
+@import "../../../vendor/twbs/bootstrap/scss/tables";
+@import "../../../vendor/twbs/bootstrap/scss/forms";
+@import "../../../vendor/twbs/bootstrap/scss/buttons";
+@import "../../../vendor/twbs/bootstrap/scss/transitions";
+@import "../../../vendor/twbs/bootstrap/scss/dropdown";
+@import "../../../vendor/twbs/bootstrap/scss/button-group";
+@import "../../../vendor/twbs/bootstrap/scss/input-group";
+@import "../../../vendor/twbs/bootstrap/scss/custom-forms";
+@import "../../../vendor/twbs/bootstrap/scss/nav";
+@import "../../../vendor/twbs/bootstrap/scss/navbar";
+@import "../../../vendor/twbs/bootstrap/scss/card";
+@import "../../../vendor/twbs/bootstrap/scss/breadcrumb";
+@import "../../../vendor/twbs/bootstrap/scss/pagination";
+@import "../../../vendor/twbs/bootstrap/scss/badge";
+@import "../../../vendor/twbs/bootstrap/scss/jumbotron";
+@import "../../../vendor/twbs/bootstrap/scss/alert";
+@import "../../../vendor/twbs/bootstrap/scss/progress";
+@import "../../../vendor/twbs/bootstrap/scss/media";
+@import "../../../vendor/twbs/bootstrap/scss/list-group";
+@import "../../../vendor/twbs/bootstrap/scss/close";
+@import "../../../vendor/twbs/bootstrap/scss/modal";
+@import "../../../vendor/twbs/bootstrap/scss/tooltip";
+@import "../../../vendor/twbs/bootstrap/scss/popover";
+@import "../../../vendor/twbs/bootstrap/scss/carousel";
+@import "../../../vendor/twbs/bootstrap/scss/utilities";
+
+
+// ==================================================
+// Import vendor CSS files
+// ==================================================
+@import "../../../vendor/bower-asset/angularjs-datepicker/dist/angular-datepicker";
+
+// ==================================================
+// Base
+// ==================================================
+
+@import "base/html";
+@import "base/ng-click";
+@import "base/_reboot";  // modified bootstrap core file
+
+// ==================================================
+// Components
+// ==================================================
+
+@import "components/btn";
+@import "components/card";
+@import "components/colorwheel";
+@import "components/crud";
+@import "components/datepicker";
+@import "components/dropdown-item";
+@import "components/debug";
+@import "components/dropdown";
+@import "components/file-detail-view";
+@import "components/filemanager";
+@import "components/flag";
+@import "components/flag-btn";
+@import "components/folders";
+@import "components/form";
+@import "components/help";
+@import "components/help-button";
+@import "components/imageupload";
+@import "components/input-group";
+@import "components/link-selector";
+@import "components/list";
+@import "components/loading-bar";
+@import "components/loading-indicator";
+@import "components/loading-overlay";
+@import "components/login";
+@import "components/luya";
+@import "components/luyasearch";
+@import "components/mainnav";
+@import "components/material-icons";
+@import "components/modal";
+@import "components/modulenav";
+@import "components/sortable";
+@import "components/switch";
+@import "components/tab";
+@import "components/nav";
+@import "components/ng-wig";
+@import "components/pagination";
+@import "components/table";
+@import "components/timeline";
+@import "components/toasts";
+@import "components/tooltip";
+@import "components/zaa-checkbox-array";
+@import "components/zaa-date";
+@import "components/zaa-datetime";
+@import "components/zaa-file-array-upload";
+@import "components/zaa-image-array-upload";
+@import "components/zaa-multiple-inputs";
+@import "components/zaa-table";
+@import "components/zaaselect";
+
+// ==================================================
+// Browser fixes, always last cause they suck balls
+// ==================================================
+
+@import "browser-fixes/ie";

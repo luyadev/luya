@@ -2,7 +2,6 @@
 
 namespace admintests\admin\commands;
 
-
 use admintests\AdminTestCase;
 use luya\admin\commands\SetupController;
 use luya\console\Application;

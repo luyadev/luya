@@ -1,11 +1,15 @@
 # Project Module
 
-A very important behvaior in *LUYA* projects are **modules**. You can always use modules to put your own custom and reusable logic inside. For instance you can put database logic inside of the via ActiveRecord models. A module can also provided informations for other module, for example [CMS Blocks](app-blocks.md). There are two different types of Modules:
+A very important behavior in *LUYA* projects are **modules**. You can always use modules to put your own custom and reusable logic inside. For instance you can put database logic inside of the via ActiveRecord models. A module can also provide informations for other module, for example [CMS Blocks](app-blocks.md). 
+
+## Module Types
+
+There are two different types of Modules:
 
 + [Admin](app-admin-module.md) - Contains Models, Migrations Administration, [NgRest Crud](ngrest-concept.md).
 + [Frontend](app-module-frontend.md) - Contains controllers and views, logic for frontend implementations.
 
-> In order to create your custom modules you can run the [Console Command](luya-console.md) `module/create` wizzard.
+> In order to create your custom modules you can run the [Console Command](luya-console.md) `module/create` wizard.
 
 Structure of Modules
 
@@ -73,7 +77,7 @@ class Module extends \luya\admin\base\Module
 
 ## Import Method
 
-All modules can contain a `import(\luya\console\interfaces\ImportController $import)` import method, this method will be called when running the [console command `import`](luya-console.md). One of the main ideas behind LUYA is to store data from programmatic files into your databse while importing. If the `import()` method returns an array each class must extend the `luya\console\Importer` class.
+All modules can contain a {{luya\admin\base\Module::import()}} method, this method will be called when running the [console command `import`](luya-console.md). One of the main ideas behind LUYA is to store data in files and import them into your database. If {{luya\admin\base\Module::import()}} method returns an array each class must extend from the {{luya\console\Importer}} class.
 
 Example response for multiple importer classes:
 

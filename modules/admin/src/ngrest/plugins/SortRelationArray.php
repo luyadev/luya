@@ -2,6 +2,12 @@
 
 namespace luya\admin\ngrest\plugins;
 
+/**
+ * Sortable Relation from Array Input.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class SortRelationArray extends SortRelation
 {
     private $_data;

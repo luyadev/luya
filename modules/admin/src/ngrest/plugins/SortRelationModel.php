@@ -3,11 +3,11 @@
 namespace luya\admin\ngrest\plugins;
 
 /**
- * Create a releation array based on an ActiveRecord Model.
+ * Sortable Relation from Active Record Input.
  *
  * Example usage:
  *
- * ```
+ * ```php
  * public function ngRestAttributeTypes()
  * {
  * 		'genres' => ['sortRelationModel', 'modelClass' => path\to\Genres::className(), 'valueField' => 'id', 'labelField' => 'title']],
@@ -15,6 +15,7 @@ namespace luya\admin\ngrest\plugins;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class SortRelationModel extends SortRelation
 {

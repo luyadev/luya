@@ -1,17 +1,44 @@
 # Developer Guidelines
 
-Below some rules how to deail with documentations, linking or using the php docs.
+Below some rules how to deal with documentations, linking or using the php docs.
 
 ## Documentation & Guide
 
+Informations about creating guides and how they are rendered on luya.io:
+
++ Heading 1 titles will automatically removed from the rendering on luya.io, therefore the navigation title will be used instead. So you add a heading markdown notation on a file, but you don't have to.
++ Heading 2 titles will be used in order to auto generate a table of contents on luya.io.
+
 In order to make a Link somewhere inside the Guide or PHPDoc to a PHP Class use:
 
-+ `{{\luya\base\Module}}` This will generate a link to the API for this class.
-+ `{{\luya\base\Module::resolveRoute}}` Genrate a link to the luya\base\Module and method `resolveRoute()`.
++ `{{luya\base\Module}}` This will generate a link to the API for this class.
++ `{{luya\base\Module::resolveRoute()}}` Genrate a link to the luya\base\Module and method `resolveRoute()`.
++ `{{luya\base\Module::$apis}}` Genrate a link to the luya\base\Module and property `$apis`.
 
 In order to make links from the API PHPdocs to the Guide use:
 
-+ `[[concept-tags.md]]` where the markdown file is a file located in `/docs/guide` folder..
++ `[[concept-tags.md]]` where the markdown file is a file located in `/docs/guide` folder.
+
+When dealing with Controller, Action and other PHP names use single quotes \`MyController\`. Like `MyController` is the file `MyController.php` with the action `indexAction()`, this is also for Variables `$foobar`.
+
+### Wording
+
+This represents a guideline how words and proper nouns should been written in the documentation.
+
++ LUYA
++ Composer
++ AngularJS
++ NgRest
++ Admin UI
++ Controller
++ Action
++ Module
++ API
++ OSX
++ PHP
+
+Further it should be avoided to use personal pronouns (e.g. we have this, we recommed that, etc.), please use unpersonal pronouns ( e.g. there is this, it´s recommend that, etc.).
+
 
 ## PHPDOC
 
@@ -142,7 +169,7 @@ The css and html files for the admin module are based on the following rules.
 To compile css and js to one file we use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow).  
 To install gulp and the dependencies on your System [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).
 
-Everything will be compiled to a folder `dist/` in the corresponding `{module}/resources` folder.
+Everything will be compiled to the folder `dist/` in the corresponding `{module}/resources` folder.
 
 > **Important:** The JS files and their order are all defined in the `compileConfig.js`. If you add a new JS file, make sure to add it in the config as well.
 

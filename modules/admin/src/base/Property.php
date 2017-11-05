@@ -13,6 +13,7 @@ use yii\base\Component;
  * Reade more in the Guide [[app-cmsproperties.md]].
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Property extends Component implements TypesInterface
 {
@@ -169,10 +170,10 @@ abstract class Property extends Component implements TypesInterface
      * This is what will be returned when the property is requested in the frontend.
      *
      * You can override this function in order to provide your own output logic.
-     * 
+     *
      * Make sure to call the parent implementation of getValue when overriding this function in
      * order to make sure the usage of i18n variables:
-     * 
+     *
      * ```php
      * public function getValue()
      * {

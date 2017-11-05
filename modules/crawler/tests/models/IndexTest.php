@@ -50,7 +50,6 @@ class IndexTest extends CrawlerTestCase
         
         $test = Index::flatSearchByQuery('ccc', 'en');
         $this->assertSame('aaa', $test[0]->title);
-        
     }
     
     public function testsearchByQuery()
@@ -118,7 +117,6 @@ class IndexTest extends CrawlerTestCase
         $this->assertSame('index5/item', $test1[0]->url);
         $this->assertSame('index6/else/item', $test1[1]->url);
         $this->assertSame('index7.php', $test1[2]->url);
-        
     }
     
     public function testSameSortByUrl()
@@ -141,6 +139,5 @@ class IndexTest extends CrawlerTestCase
         
         $this->assertSame('offnungszeiten', Index::searchByQuery('öff', 'de')[0]->title);
         $this->assertSame('offnungszeiten', Index::searchByQuery('Öff', 'de')[0]->title);
-        
     }
 }

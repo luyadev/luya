@@ -12,11 +12,12 @@ use luya\admin\ngrest\base\Plugin;
  *
  * Example empty Date configuration
  *
- * ```
+ * ```php
  * ['timestamp', ['Date', 'emptyMessage' => 'No Date']],
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Date extends Plugin
 {

@@ -1,80 +1,48 @@
-$toast-space-window: 15px;
+.toasts {
+    position: absolute;
+    min-width: 320px;
+    max-width: 100%;
+    z-index: z-index(modal-toast);
 
-.toasts {}
-
-.toasts__info {}
-
-.toasts__confirm {
-	display: block;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 10000;
+    @media (min-width: $mobile-nav-breakpoint) {
+        min-width: 480px;
+    }
 }
 
-.toasts__item {
-	@include clearfix;
+.toasts-toast {
+    position: fixed;
+    bottom: 11px;
+    left: 15px;
+    display: block;
+    z-index: z-index(modal-toast);
+    transition: .25s ease-in-out transform;
 
-	// Font
-	font-size: 1.2rem;
+    @media (min-width: $mobile-nav-breakpoint) {
 
-	// Position (bottom, left)
-	position: fixed;
-	bottom: $toast-space-window - 5px;
-	left: $toast-space-window;
-	z-index: 12000;
+        left: 218px;
 
-	// Spacing
-	padding: 10px 20px;
+        .toasts--mainnav-small & {
+            left: 80px;
+        }
+    }
 
-	// Animation
-	transition: 0.25s ease transform;
+    .alert {
+        position: relative;
+        margin-bottom: 5px;
+        padding: $content-padding-x $content-padding-y $content-padding-x 20px;
+    }
 
-	// Colors | default
-	background-color: color("grey", "darken-3");
-	color: color("shades", "white");
+    &-icon {
+        position: absolute;
+        left: 5px;
+        top: 13px;
+    }
 
-	// Colors | success
-	&.toasts__item--success {
-		background-color: color("green", "base");
-	}
-
-	// Colors | error
-	&.toasts__item--error {
-		background-color: color("red", "base");
-	}
-
-	// Colors | confirmation
-	&.toasts__item--confirm {
-
-		// Align in the middle
-		bottom: 50%;
-		left: 50%;
-		transform: translateX(-50%) translateY(50%) !important;
-
-		// Colors
-		background-color: color("shades", "white");
-		color: color("shades", "black");
-
-		& + .toasts__background {
-			display: block;
-		}
-	}
-}
-
-.toasts__item-buttons {
-	float: right;
-}
-
-.toasts__text, .toasts__text-icon {
-	display: inline-block;
-	vertical-align: middle;
-	margin: 0;
-}
-
-.toasts__text-icon {
-	margin-right: 10px;
+    &-close {
+        position: absolute;
+        right: 1px;
+        top: 3px;
+        font-size: 12px;
+        opacity: .3;
+    }
 }

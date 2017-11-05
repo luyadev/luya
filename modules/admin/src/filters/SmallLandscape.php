@@ -8,6 +8,7 @@ use luya\admin\base\Filter;
  * Admin Module default Filter: Small Landscape (150x50)
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class SmallLandscape extends Filter
 {

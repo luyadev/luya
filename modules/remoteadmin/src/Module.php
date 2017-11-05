@@ -6,11 +6,11 @@ use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminMenuBuilder;
 
 /**
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  *
  */
-class Module extends \luya\admin\base\Module implements CoreModuleInterface
+final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     public $apis = [
         'api-remote-site' => 'luya\remoteadmin\apis\SiteController',
@@ -18,24 +18,17 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     public function getMenu()
     {
-        return (new AdminMenuBuilder($this))->node('Remote', 'dashboard')
+        return (new AdminMenuBuilder($this))->node('Remote', 'settings_remote')
             ->group('Daten')
                 ->itemRoute('Status', 'remoteadmin/status/index', 'update')
                 ->itemApi('Pages', 'remoteadmin/site/index', 'cloud', 'api-remote-site');
     }
-    
-    /**
-     * @var array Registering translation files for the admin module.
-     */
-    public $translations = [
-        [
-            'prefix' => 'remoteadmin*',
-            'basePath' => '@remoteadmin/messages',
-            'fileMap' => [
-                'admin' => 'remoteadmin.php',
-            ],
-        ],
-    ];
+    public static function onLoad()
+    {
+        self::registerTranslation('remoteadmin', '@remoteadmin/messages', [
+            'remoteadmin' => 'remoteadmin.php',
+        ]);
+    }
     
     /**
      * Remoteadmin
@@ -46,6 +39,6 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('remoteadmin', $message, $params);
+        return parent::baseT('remoteadmin', $message, $params);
     }
 }

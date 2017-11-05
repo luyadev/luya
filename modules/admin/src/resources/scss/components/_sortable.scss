@@ -1,16 +1,7 @@
-.sortable {
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    position: relative;
-    vertical-align: middle;
+.sortable-up-first {
+    visibility: hidden;
+}
 
-    &:hover {
-        color: color("blue", "base");
-    }
-
-    &--up.ng-hide + .sortable--down {
-        margin-left: 32px;
-    }
+.sortable-up-last {
+    visibility: hidden;
 }

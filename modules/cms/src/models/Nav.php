@@ -35,6 +35,7 @@ use luya\cms\admin\Module;
  * @property \luya\cms\models\NavContainer $navContainer Returns the nav container model
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Nav extends ActiveRecord
 {
@@ -203,8 +204,12 @@ class Nav extends ActiveRecord
             'nav_container_id' => $this->nav_container_id,
             'parent_nav_id' => $this->parent_nav_id
         ])->orderBy('sort_index ASC')->asArray()->all() as $model) {
-            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id',
-                ['id' => $model['id']])->execute();
+            Yii::$app->db->createCommand()->update(
+                self::tableName(),
+                ['sort_index' => $i],
+                'id=:id',
+                ['id' => $model['id']]
+            )->execute();
             ++$i;
         }
 
@@ -281,6 +286,12 @@ class Nav extends ActiveRecord
         return true;
     }
 
+    /**
+     *
+     * @param unknown $moveNavId
+     * @param unknown $toBeforeNavId
+     * @return boolean|boolean|mixed
+     */
     public static function moveToBefore($moveNavId, $toBeforeNavId)
     {
         $move = self::findOne($moveNavId);
@@ -310,6 +321,13 @@ class Nav extends ActiveRecord
         return true;
     }
 
+    /**
+     * Moves an element ($moveNavId) after another one ($toAfterNavId).
+     *
+     * @param unknown $moveNavId
+     * @param unknown $toAfterNavId
+     * @return boolean|boolean|mixed
+     */
     public static function moveToAfter($moveNavId, $toAfterNavId)
     {
         $move = self::findOne($moveNavId);
@@ -324,12 +342,11 @@ class Nav extends ActiveRecord
         if ($response !== true) {
             return $response;
         }
-
-        $to->moveDownstairs();
-
+        
+        $to->moveUpstairs(false);
         $move->nav_container_id = $to->nav_container_id;
         $move->parent_nav_id = $to->parent_nav_id;
-        $move->sort_index = $to->sort_index;
+        $move->sort_index = $to->sort_index + 1;
         $move->update();
 
         foreach ($move->getRecursiveChildren() as $child) {
@@ -339,6 +356,12 @@ class Nav extends ActiveRecord
         return true;
     }
 
+    /**
+     *
+     * @param unknown $moveNavId
+     * @param unknown $droppedOnItemId
+     * @return boolean|boolean|mixed
+     */
     public static function moveToChild($moveNavId, $droppedOnItemId)
     {
         $move = self::findOne($moveNavId);
@@ -365,15 +388,64 @@ class Nav extends ActiveRecord
         return true;
     }
 
-    public function moveUpstairs()
+    /**
+     * Raise the sort_index value for all elements where the current sort index is larger or equal.
+     *
+     * id|sort_index
+     * --------
+     * 1|0
+     * 2|1
+     * 3|2
+     * 4|3
+     *
+     * apply moveUpstairs() to id 2 would produce the following output:
+     *
+     * id|sort_index
+     * 1|0
+     * 2|2
+     * 3|3
+     * 4|4
+     *
+     * if you disabled $withCurrentElement the output would be:
+     *
+     * id|sort_index
+     * 1|0
+     * 2|1
+     * 3|3
+     * 4|4
+     *
+     * @param $withCurrentElement boolean Whether the current element should be moved along with the others or not.
+     */
+    public function moveUpstairs($withCurrentElement = true)
     {
-        $startIndex = (int)$this->sort_index;
-        foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+        $operator = $withCurrentElement ? '>=' : '>';
+        $startIndex = $withCurrentElement ? (int) $this->sort_index : (int) $this->sort_index + 1;
+        foreach (self::find()->where('sort_index '.$operator.' :index', ['index' => (int) $this->sort_index])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
             ++$startIndex;
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
     }
-
+    
+    /**
+     * Reduces the sort_index value for all elements where the current sort index is larger or equal.
+     *
+     * id|index
+     * --------
+     * 1|0
+     * 2|1
+     * 3|2
+     * 4|3
+     *
+     * apply moveDownstairs() to id 2 would produce the following output:
+     *
+     * id|index
+     * 1|0
+     * 2|0
+     * 3|1
+     * 4|2
+     *
+     * > This method is therefore only usefull when you want to push the latest item upstairs.
+     */
     public function moveDownstairs()
     {
         $startIndex = (int)$this->sort_index;

@@ -9,8 +9,12 @@ use yii\helpers\Json;
 use yii\helpers\Console;
 
 /**
+ * Admin Proxy comands Sync Database.
+ *
+ * @property \yii\db\TableSchema $schema Schema object
+ *
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
- * @var \yii\db\TableSchema $schema Schema object
  */
 class ClientTable extends Object
 {
@@ -21,6 +25,12 @@ class ClientTable extends Object
      */
     public $build;
     
+    /**
+     *
+     * @param ClientBuild $build
+     * @param array $data
+     * @param array $config
+     */
     public function __construct(ClientBuild $build, array $data, array $config = [])
     {
         $this->build = $build;

@@ -1,0 +1,27 @@
+zaa-file-array-upload {
+    & + .flag {
+        margin-right: 70px;
+    }
+}
+
+.form-i18n zaa-file-array-upload.is-empty {
+    .alert {
+        margin-right: 45px;
+    }
+
+    & + .flag {
+        margin-right: 0;
+    }
+}
+
+.zaa-file-array-upload {
+
+    .form-group {
+        margin: 0;
+    }
+}
+
+.zaa-file-array-upload-description {
+    display: block;
+    width: 100%;
+}

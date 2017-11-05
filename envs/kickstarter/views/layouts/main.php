@@ -39,7 +39,7 @@ $this->beginPage();
                 </ul>
                 <?= LangSwitcher::widget([
                     'listElementOptions' => ['class' => 'nav navbar-nav navbar-right hidden-xs'],
-                    'linkLabel' => function($lang) {
+                    'linkLabel' => function ($lang) {
                         return strtoupper($lang['short_code']);
                     }
                 ]); ?>

@@ -1,77 +1,31 @@
-.list {
-    margin-bottom: 20px;
-}
-
-.list__item {
+.list-item {
+    padding-bottom: 20px;
+    padding-right: 130px;
     position: relative;
 
-    display: block;
+    &:not(:last-of-type) {
+        border-bottom: 1px solid map-get($grays, 300);
+        margin-bottom: 20px;
+    }
+}
 
+.list-section {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 15px;
-
-    &--bordered {
-        border: 1px solid color('grey', 'base');
-        padding: 10px;
-    }
 }
 
-.list__left, .list__right {
-    display: inline-block;
-
-    vertical-align: middle;
+.list-right {
+    flex: 1 1;
+    padding-left: 30px;
 }
 
-.list__left {
-    width: calc(100% - 140px);
-
-    input {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        margin-top: -8px;
-        margin-bottom: 0;
-        padding-top: 10px;
-        padding-bottom: 5px;
-    }
+.list-left {
+    min-width: 300px;
 }
 
-.list__right {
-    width: 130px;
-    margin-left: 10px;
-    vertical-align: middle;
-    text-align: right;
-
-    .list__item--bordered & {
-        vertical-align: top;
-    }
-}
-
-.list__button {
-    width: 2rem;
-    height: 2rem;
-
-    outline: none;
-
-    &:not(:last-child) {
-        margin-right: 10px;
-    }
-
-    i {
-        font-size: 1.4rem;
-        line-height: 2rem;
-    }
-}
-
-.list__add-button {
-    margin-top: 5px;
-}
-
-.list__no-entry {
-    font-style: italic;
-
-    position: relative;
-    z-index: 60;
-
-    margin: 1px 0 20px 0 !important;
+.list-buttons {
+    position: absolute;
+    right: 0;
+    top: 0;
 }

@@ -133,4 +133,15 @@ class QueryTest extends CmsFrontendTestCase
         
         $this->assertNotNull($default->getInnerIterator()->getLoadedModel(1));
     }
+    
+    public function testRootQueryHelperMethod()
+    {
+        Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuContainerArray());
+         
+        $one = (new Query())->container('c1')->one();
+        $this->assertSame(3, $one->id);
+        
+        $all = (new Query())->container('c1')->root()->count();
+        $this->assertSame(1, $all);
+    }
 }

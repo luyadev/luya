@@ -8,6 +8,83 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1559](https://github.com/luyadev/luya/issues/1569) Renamed luya\admin\image\Item::getSource() to getHttpSource() this will affect also the getter properties.
+- [#1564](https://github.com/luyadev/luya/issues/1564) Refactoring of gallery module, removed old unused methods, switch to ActiveQuery relation usage.
+- [#1522](https://github.com/luyadev/luya/issues/1522) Text and Textarea NgRest plugins auto encode input data after find.
+- [#1505](https://github.com/luyadev/luya/issues/1505) Minor API Breaks and removed deprecated methods.
+- [#1341](https://github.com/luyadev/luya/issues/1341) Changed signature of `changePassword($newPassword)` in `luya\admin\aws\ChangePasswordInterface`.
+- [#1574](https://github.com/luyadev/luya/issues/1574) Changed Active Window $alias property to $label. Use defaultLabel() in order to set a default label.
+- [#1567](https://github.com/luyadev/luya/issues/1567) Discontinue development of Exporter Module.
+- [#1568](https://github.com/luyadev/luya/issues/1568) Add file system layer for Storage component.
+
+### Added
+
+- [#1467](https://github.com/luyadev/luya/issues/1467) Main nav context menu for logout and account preferences.
+- [#1557](https://github.com/luyadev/luya/issues/1557) Allow unicode chars for cms page aliases and slugify directives.
+- [#1534](https://github.com/luyadev/luya/issues/1534) Link ability for files and e-mail addresses.
+- [#1540](https://github.com/luyadev/luya/issues/1540) CMS Log Dashboard.
+- [#1304](https://github.com/luyadev/luya/issues/1304) Crud indicates the total amount of rows with pagination enabled or disabled.
+- [#1521](https://github.com/luyadev/luya/issues/1521) Bind session token to current IP in order to prevent session hijacking.
+- [#1511](https://github.com/luyadev/luya/issues/1511) Added page id information in cms menu tree on hover (alt,title).
+- [#1307](https://github.com/luyadev/luya/pull/1307) Block wizzard creates admin view according to given configs and vars.
+- [#1493](https://github.com/luyadev/luya/issues/1493) Show ability to search in relations when using large data tables.
+- [#1439](https://github.com/luyadev/luya/issues/1439) Added icons to admin responsive menu.
+- [#1494](https://github.com/luyadev/luya/issues/1494) CMS page selection hides container element by default, fixed arrow keys.
+- [#1461](https://github.com/luyadev/luya/issues/1461) Admin search panel auto focus input field and search groups can be toggled.
+- [#1462](https://github.com/luyadev/luya/issues/1462) CMS block holder toggler in order to optimize view for small screens.
+- [#1515](https://github.com/luyadev/luya/issues/1515) Change access token on logout provides a shorter periode of being violated.
+
+### Fixed
+
+- [#1563](https://github.com/luyadev/luya/issues/1563) Adjust position of first sortable arrow as desired.
+- [#1545](https://github.com/luyadev/luya/issues/1545) Adjust position of page version dropdown content on admin edit section. 
+- [#1549](https://github.com/luyadev/luya/issues/1549) Hide version informations for other page types then page content.
+- [#1550](https://github.com/luyadev/luya/issues/1550) Readded option to change the page type in CMS Module.
+- [#1480](https://github.com/luyadev/luya/issues/1480) Dropdown select overlay z-index fixed by closing all other selects. 
+- [#1519](https://github.com/luyadev/luya/issues/1519) Multiple inputs problem with empty item rows convert to object instead of array.
+- [#1535](https://github.com/luyadev/luya/issues/1535) Date and Datetime reset model buttons.
+- [#1536](https://github.com/luyadev/luya/issues/1536) Link directive display wrong reset data button if empty object exists.
+- [#1533](https://github.com/luyadev/luya/issues/1533) Draft mode does not display first created version. Hide elements when page is draft.
+- [#1526](https://github.com/luyadev/luya/issues/1526) Changed has-enough-space directive to use direct parent of element to check if there is enough space.
+- [#1509](https://github.com/luyadev/luya/issues/1509) Added a table-responsive-wrapper div to all responsive tables. This improves CRUD behaviour on mobile.
+- [#1479](https://github.com/luyadev/luya/issues/1479) Block group translation names where not displayed correctly. Old block groups where not deleted anymore.
+- [#1470](https://github.com/luyadev/luya/issues/1470) Action columns in crud visibility fixed by button group overlay on hover.
+- [#1527](https://github.com/luyadev/luya/issues/1527) CMS Table block convert newlines to br when markdown is disabled.
+- [#1512](https://github.com/luyadev/luya/issues/1512) Drag and Drop does not work in Firefox Browsers.
+- [#1517](https://github.com/luyadev/luya/issues/1517) Fixed issue where FileHelper::classInfo does not determine namespace correctly on windows.
+- [#1401](https://github.com/luyadev/luya/issues/1401) Multiple inputs key indexing problem fixed.
+- [#1474](https://github.com/luyadev/luya/issues/1474) Fixed problem where modal in modal does not apply `modal-body` class correctly.
+- [#1473](https://github.com/luyadev/luya/issues/1473) Fixed issue where user default language is not provided when user has no settings stored.
+- [#1491](https://github.com/luyadev/luya/issues/1491) Updated timeline styles to prevent line from overlapping first and last entry
+- [#1490](https://github.com/luyadev/luya/issues/1490) Updated tab styling to support nested tab contents (tab-content, tab-pane)
+- [#1489](https://github.com/luyadev/luya/issues/1489) Changed default checkbox styles and updated checkbox html in all files
+- [#1455](https://github.com/luyadev/luya/issues/1455) Re-Implemented the group function for crud; Updated card styles to support toggle icon
+- [#1504](https://github.com/luyadev/luya/issues/1504) Added is-empty class to zaa-list directives and updated flag positions based on this class.
+- [#1503](https://github.com/luyadev/luya/issues/1503) Deleted news are now hidden in getAvailableNews() method.
+- [#1486](https://github.com/luyadev/luya/issues/1486) Toast messages displayed correctly with multiple lines.
+- [#1492](https://github.com/luyadev/luya/issues/1492) Fixed bug where CRUD pagination does not work anymore.
+- [#1464](https://github.com/luyadev/luya/issues/1464) Adjusted icon positions for dropdown list selection
+- [#1460](https://github.com/luyadev/luya/issues/1460) Fixed issue with login autofill and floating labels
+- [#1471](https://github.com/luyadev/luya/issues/1471) Added word-break: break-all to block-front; Could lead to other problems but couldn't see any so far
+- [#1478](https://github.com/luyadev/luya/issues/1476) Cursor pointer and user-select none on [ng-click] elements
+- [#1478](https://github.com/luyadev/luya/issues/1478) Updated toast positioning if mainnav is expanded
+- [#1477](https://github.com/luyadev/luya/issues/1477) Fixed z-index issue with luya search bar
+- [#1475](https://github.com/luyadev/luya/issues/1475) Fixed bug in cms menu tree when moving an element after an existing element.
+- [#1469](https://github.com/luyadev/luya/issues/1469) Fixed bug where short open tags are required by default.
+- [#1468](https://github.com/luyadev/luya/issues/1468) Fixed bug where on windows platforms the alias for the luyadev installer vendor file not be retrieved.
+- [#1456](https://github.com/luyadev/luya/issues/1456) Fixed bug where login forms make problems on Firefox Browsers.
+- [#1458](https://github.com/luyadev/luya/issues/1458) Fixed bug where crud search does not apply the model changes.
+- [#1454](https://github.com/luyadev/luya/issues/1454) Fixed Problem with Admin UI and Firefox Browsers.
+- [#1371](https://github.com/luyadev/luya/issues/1371) Fixed issue where cms page last update does not refresh the user id.
+
+
+1.0.0-RC4 (5. September 2017)
+-------------------
+
+### Changed
+
+- [#1408](https://github.com/luyadev/luya/issues/1408) CMS Module removed bootstrap process inside module, use Bootstrap class instead.
+- [#1414](https://github.com/luyadev/luya/issues/1414) Renamed Angular Helper methods, removed all the zaa prefixes.
 - [#1308](https://github.com/luyadev/luya/issues/1308) Renamed `luya\admin\ngrest\plugins\CheckboxRelation::labelFields` to `luya\admin\ngrest\plugins\CheckboxRelation::labelField`
 - [#1301](https://github.com/luyadev/luya/issues/1301) Move the CRUD commands to the admin module `admin/crud/create` and `admin/crud/model`.
 - [#1289](https://github.com/luyadev/luya/issues/1289) Remove `luyaLanguage` application property and replace with admin module `interfaceLanguage` property.
@@ -16,9 +93,16 @@ All notable changes to this project will be documented in this file. This projec
 - [#1273](https://github.com/luyadev/luya/issues/1273) Mail component remove `adresses()` replace with `addresses()`.
 - [#1264](https://github.com/luyadev/luya/issues/1264) Renamed `$LinkActiveClass` property to `$linkActiveClass` in luya\cms\widgets\LangSwitcher.
 - [#1295](https://github.com/luyadev/luya/issues/1295) Fully removed all Twig files, tests and components as announced.
+- [#1448](https://github.com/luyadev/luya/issues/1448) Admin translations must be registered in Module::onLoad.
 
 ### Added
 
+- [#1292](https://github.com/luyadev/luya/issues/1292) NEW ADMIN UI!
+- [#1361](https://github.com/luyadev/luya/issues/1361) Added ability to provide json file for cms layouts in order to render the grid in the admin according to the frontend.
+- [#1293](https://github.com/luyadev/luya/issues/1293) Dashboard objects can be used by admin modules.
+- [#1351](https://github.com/luyadev/luya/issues/1351) Frontend Storage Upload validator which stores images and files in admin storage component.
+- [#1375](https://github.com/luyadev/luya/issues/1375) Added Import Helper class which provides functions to parse CSV files to Arrays.
+- [#1332](https://github.com/luyadev/luya/issues/1332) Added Export Helper class in order to generate CSV Files from Arrays.
 - [#1312](https://github.com/luyadev/luya/issues/1312) ArrayHelper::generateRange for select dropdowns with numeric values.
 - [#1303](https://github.com/luyadev/luya/issues/1303) NgRest SelectModel valueField is automatically retrieved from the model class if no value is provided.
 - [#1291](https://github.com/luyadev/luya/issues/1291) Replace User Sidebar with User Dashboard to change Password.
@@ -31,9 +115,16 @@ All notable changes to this project will be documented in this file. This projec
 - [#1269](https://github.com/luyadev/luya/issues/1269) Add raw option for html block in order to render the html output in admin view.
 - [#1215](https://github.com/luyadev/luya/issues/1215) Added type float and double in ngrest data types to use decimal.
 - [#1119](https://github.com/luyadev/luya/issues/1119) Added PostgreSQL Compatibility.
+- [#1331](https://github.com/luyadev/luya/issues/1331) Active Window generator generates index action view file.
 
 ### Fixed
 
+- [#1346](https://github.com/luyadev/luya/issues/1346) Fixed bug with ngrest scope delete defintions.
+- [#1355](https://github.com/luyadev/luya/issues/1355) Module migrations uses templates based on input data.
+- [#1248](https://github.com/luyadev/luya/issues/1248) Fixed caption of "block groups" does not obey the user's language option.
+- [#1272](https://github.com/luyadev/luya/issues/1272) Empty layout block reloading problem has been fixed due to rewrite of the cms controllers which reloads the placeholders.
+- [#1356](https://github.com/luyadev/luya/issues/1356) Fixed problem with when ngrest plugin SelectModel target class is the same model.
+- [#1369](https://github.com/luyadev/luya/issues/1369) Flow Uploader lost bearer token while uploading images.
 - [#1290](https://github.com/luyadev/luya/issues/1290) Fixed Tooltip Bug, cause of lexer parser error. Wrong directive variable scope declaration.
 - [#1286](https://github.com/luyadev/luya/issues/1286) Filemanager show error message on error.
 - [#1267](https://github.com/luyadev/luya/issues/1267) Fixed bug where module block action params overrides the default values, merge instead.
@@ -78,7 +169,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1225](https://github.com/luyadev/luya/issues/1225) Formatter component extends default formats for languages.
 - [#1222](https://github.com/luyadev/luya/issues/1222) Extend from BaseYii file in order to provide IDE Auto Complet.
 - [#1221](https://github.com/luyadev/luya/issues/1221) Added CMS Query `in` expression for where conditions.
-- [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $seoTitle (getSeoTitle()) function in order to return the alternative SEO title definition.
+- [#1220](https://github.com/luyadev/luya/issues/1220) Menu Item object added new $seoTitle (getSeoTitle()) function in order to return the alternative SEO title definition.
 - [#1214](https://github.com/luyadev/luya/issues/1214) Adding JsonLd class in order to register Schema Microdata informations to the View.
 - [#1188](https://github.com/luyadev/luya/issues/1188) Change the layout file for cms page.
 - [#1202](https://github.com/luyadev/luya/issues/1202) Added Arrayable implementation for ExternalLink and menu\Item.
@@ -153,7 +244,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1082](https://github.com/luyadev/luya/issues/1082) Link plugin for ngRest configuration in order to provide internal or external links.
 - [#1003](https://github.com/luyadev/luya/issues/1003) The crawler tag CRAWL_TITLE has been added to ensure a customization of the titles.
 - [#1008](https://github.com/luyadev/luya/issues/1008) Administration interface language can be changed and stored in the user settings.
-- [#1014](https://github.com/luyadev/luya/issues/1014) NgRest Crud has a new possibility to work with relation data via the `ngRestRelation()` method inside the NgRestModel. This allows you to open relation data in new tabs.
+- [#1014](https://github.com/luyadev/luya/issues/1014) NgRest Crud has a new possibility to work with relation data via the `ngRestRelations()` method inside the NgRestModel. This allows you to open relation data in new tabs.
 - [#1038](https://github.com/luyadev/luya/issues/1038) Method `createCallbackUrl($callback)` added for ActiveWindows in order to get the absolut url for a callback, this is usefull when creating callbacks which can return a pdf for example.
 - [#1007](https://github.com/luyadev/luya/issues/1007) French translations available for all core modules.
 - [#1046](https://github.com/luyadev/luya/issues/1046) Hide menu items in the administration in order to enable crud relations with permissions but hide the menu point of the ngrest crud inside the admin interface.

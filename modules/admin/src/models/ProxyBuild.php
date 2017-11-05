@@ -2,7 +2,6 @@
 
 namespace luya\admin\models;
 
-
 use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
@@ -18,6 +17,9 @@ use luya\admin\aws\DetailViewActiveWindow;
  * @property integer $is_complet
  * @property integer $expiration_time
  * @property array $arrayConfig
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ProxyBuild extends NgRestModel
 {

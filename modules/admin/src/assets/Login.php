@@ -6,6 +6,7 @@ namespace luya\admin\assets;
  * Login Asset contains all required files for the administration login screen.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Login extends \luya\web\Asset
 {
@@ -26,7 +27,7 @@ class Login extends \luya\web\Asset
      * @var array A list of javascript files located in the $sourcePath folder.
      */
     public $js = [
-        'js/login.js',
+        'dist/js/login.js',
     ];
 
     /**

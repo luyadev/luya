@@ -34,6 +34,7 @@ use yii\base\InvalidConfigException;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Config extends Object implements ConfigInterface
 {
@@ -41,112 +42,112 @@ class Config extends Object implements ConfigInterface
     
     public function setConfig(array $config)
     {
-    	if (!empty($this->_config)) {
-    		throw new InvalidConfigException("Unable to override an already provided Config.");	
-    	}
-    	
-    	$this->_config = $config;
+        if (!empty($this->_config)) {
+            throw new InvalidConfigException("Unable to override an already provided Config.");
+        }
+        
+        $this->_config = $config;
     }
     
     public function getConfig()
     {
-    	return $this->_config;
+        return $this->_config;
     }
     
     private $_relations = [];
     
     public function getRelataions()
     {
-    	return $this->_relations;
+        return $this->_relations;
     }
 
     public function setRelations(array $relations)
     {
-    	$this->_relations = $relations;
+        $this->_relations = $relations;
     }
     
     private $_apiEndpoint;
     
     public function getApiEndpoint()
     {
-    	return $this->_apiEndpoint;
+        return $this->_apiEndpoint;
     }
     
     public function setApiEndpoint($apiEndpoint)
     {
-    	$this->_apiEndpoint = $apiEndpoint;
+        $this->_apiEndpoint = $apiEndpoint;
     }
     
     private $_attributeGroups = false;
     
     public function getAttributeGroups()
     {
-    	return $this->_attributeGroups;
+        return $this->_attributeGroups;
     }
     
     public function setAttributeGroups(array $groups)
     {
-    	$this->_attributeGroups = $groups;
+        $this->_attributeGroups = $groups;
     }
     
     private $_filters = false;
     
     public function getFilters()
     {
-    	return $this->_filters;
+        return $this->_filters;
     }
     
     public function setFilters(array $filters)
     {
-    	$this->_filters = $filters;
+        $this->_filters = $filters;
     }
     
     private $_defaultOrder;
     
     public function getDefaultOrder()
     {
-    	return $this->_defaultOrder;
+        return $this->_defaultOrder;
     }
     
     public function setDefaultOrder($defaultOrder)
     {
-    	$this->_defaultOrder = $defaultOrder;
+        $this->_defaultOrder = $defaultOrder;
     }
     
     private $_groupByField;
     
     public function getGroupByField()
     {
-    	return $this->_groupByField;
+        return $this->_groupByField;
     }
     
     public function setGroupByField($groupByField)
     {
-    	$this->_groupByField = $groupByField;
+        $this->_groupByField = $groupByField;
     }
     
     private $_tableName;
     
     public function getTableName()
     {
-    	return $this->_tableName;
+        return $this->_tableName;
     }
     
     public function setTableName($tableName)
     {
-    	$this->_tableName = $tableName;
+        $this->_tableName = $tableName;
     }
     
     private $_primaryKey;
     
     public function getPrimaryKey()
     {
-    	return $this->_primaryKey;
+        return $this->_primaryKey;
     }
     
     public function setPrimaryKey($key)
     {
-    	$this->_primaryKey = $key;
+        $this->_primaryKey = $key;
     }
     
     public function getDefaultOrderField()
@@ -160,7 +161,7 @@ class Config extends Object implements ConfigInterface
     
     public function getDefaultOrderDirection()
     {
-    	if (!$this->getDefaultOrder()) {
+        if (!$this->getDefaultOrder()) {
             return false;
         }
         

@@ -23,6 +23,7 @@ use yii\web\ForbiddenHttpException;
  * example.com/admin/api-cms-nav/create-item-module.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavController extends \luya\admin\base\RestController
 {

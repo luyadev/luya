@@ -83,13 +83,13 @@ class GroupAuthProperty extends Property
     
     public function getAdminValue()
     {
-    	$value = parent::getValue();
-    	return Json::decode($value);
+        $value = parent::getValue();
+        return Json::decode($value);
     }
     
     public function getValue()
     {
-    	$value = parent::getValue();
+        $value = parent::getValue();
         return Json::decode($value);
     }
 }

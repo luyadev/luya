@@ -13,7 +13,7 @@ As in the previous examples we'll use a LUYA code wizard to create a generic bas
 ```
 See the GIF below:
 
-![Creating an ActiveWindow](img/aws-create.gif "Creating an ActiveWindow with LUYA code wizard")
+![Creating an ActiveWindow](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aws-create.gif "Creating an ActiveWindow with LUYA code wizard")
 
 ## Adding the ActiveWindow to our group model
 
@@ -23,7 +23,7 @@ As stated in the [ActiveWindow Documentation]() we'll have to add the button for
 public function ngRestActiveWindows()
 {
     return [
-        ['class' => \app\modules\addressbook\admin\aws\GroupEmailActiveWindow::className(), 'alias' => 'Email to group', 'icon' => 'email'],
+        ['class' => \app\modules\addressbook\admin\aws\GroupEmailActiveWindow::className(), 'label' => 'Email to group', 'icon' => 'email'],
     ];
 }
 ```
@@ -77,10 +77,6 @@ use app\modules\addressbook\models;
 class GroupEmailActiveWindow extends ActiveWindow
 {
     public $module = '@addressbookadmin';
-    
-    public $alias = 'Group Email Active Window';
-    
-    public $icon = 'extension';
     
     public function index()
     {
@@ -157,6 +153,6 @@ We configured the *CallbackFormWidget* to use our defined callback function in t
 
 ## Result
 
-After saving the view file, we've successfully added an ActiveWindow to the *addressbook* module. As you can see, it's fully integrated in our CRUD view, utilizes the already defined [materialize table styles](http://materializecss.com/table.html) and uses the LUYA CMS notification service:
+After saving the view file, we've successfully added an ActiveWindow to the *addressbook* module. As you can see, it's fully integrated in our CRUD view, utilizes the already defined [bootstrap table styles](https://getbootstrap.com/docs/4.0/content/tables/) and uses the LUYA CMS notification service:
 
-![Showing the ActiveWindow](img/aws-result.gif "Showing the ActiveWindow")
+![Showing the ActiveWindow](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aws-result.gif "Showing the ActiveWindow")

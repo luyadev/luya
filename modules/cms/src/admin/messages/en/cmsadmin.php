@@ -42,8 +42,8 @@ return [
     'view_update_page_is_module' => 'This page is a <strong>module</strong>.',
     'view_update_page_is_redirect_internal' => 'This page is an <strong>internal redirection</strong> to <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'This page is an <strong>external redirection</strong> to <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
-    'menu_node_cms' => 'Page Content',
-    'menu_node_cmssettings' => 'CMS Settings',
+    'menu_node_cms' => 'Pages',
+    'menu_node_cmssettings' => 'Settings',
     'menu_group_env' => 'Environment',
     'menu_group_item_env_container' => 'Containers',
     'menu_group_item_env_layouts' => 'Layouts',
@@ -185,5 +185,11 @@ return [
     'view_update_block_tooltip_close' => 'Close',
 
 // 1.0.0
-    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates',
+    'cmsadmin_settings_homepage_title' => 'Default Page',
+    'cmsadmin_settings_trashpage_title' => 'Delete Page',
+    'cmsadmin_settings_modal_title' => 'Settings',
+    'cmsadmin_item_settings_titleslug' => 'Page Informations',
+    'cmsadmin_created_at' => 'Created at',
+    'cmsadmin_version_remove' => 'Remove version',
 ];

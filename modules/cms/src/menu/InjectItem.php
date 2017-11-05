@@ -68,6 +68,7 @@ use yii\base\Object;
  * @property $description Alternative page descriptions.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class InjectItem extends Object implements InjectItemInterface
 {

@@ -4,7 +4,6 @@ namespace cmstests\src\frontend\blocks;
 
 use cmstests\BlockTestCase;
 
-
 class ImageBlockTest extends BlockTestCase
 {
     public $blockClass = 'luya\cms\frontend\blocks\ImageBlock';

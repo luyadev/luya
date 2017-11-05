@@ -10,7 +10,7 @@ use luya\console\Importer;
 
 /**
  * Storage Importer.
- * 
+ *
  * Storage system importer behavior to cleanup the storage database and folder.
  *
  * @author Basil Suter <basil@nadar.io>

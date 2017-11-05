@@ -5,6 +5,12 @@ namespace luya\cms\frontend\blockgroups;
 use luya\cms\base\BlockGroup;
 use luya\cms\frontend\Module;
 
+/**
+ * Layout Block Group.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class LayoutGroup extends BlockGroup
 {
     public function identifier()

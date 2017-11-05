@@ -10,8 +10,10 @@ use luya\admin\storage\QueryTrait;
  *
  * See the {{\luya\admin\storage\QueryTrait}} for more informations.
  *
- * @property \luya\admin\components\StorageContainer $storage The storage component
+ * @property \luya\admin\storage\BaseFileSystemStorage $storage The storage component
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Query extends \yii\base\Object
 {
@@ -22,7 +24,7 @@ class Query extends \yii\base\Object
     /**
      * Singleton behavior for storage component getter.
      *
-     * @return \luya\admin\components\StorageContainer
+     * @return \luya\admin\storage\BaseFileSystemStorage
      */
     public function getStorage()
     {

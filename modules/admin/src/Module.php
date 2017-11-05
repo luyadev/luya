@@ -9,13 +9,13 @@ use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminLanguage;
 use luya\admin\components\AdminUser;
 use luya\admin\components\AdminMenu;
-use luya\admin\components\StorageContainer;
 use luya\admin\components\Auth;
 use luya\admin\components\AdminMenuBuilder;
 use luya\admin\importers\AuthImporter;
 use luya\admin\importers\FilterImporter;
 use luya\admin\importers\PropertyImporter;
 use luya\admin\importers\StorageImporter;
+use luya\admin\filesystem\LocalFileSystem;
 
 /**
  * Admin Module.
@@ -33,8 +33,9 @@ use luya\admin\importers\StorageImporter;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Module extends \luya\admin\base\Module implements CoreModuleInterface
+final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * This event gets trigger before some trys to download a file.
@@ -42,6 +43,12 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      * @var string Event Name
      */
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
+    
+    /**
+     * @var boolean Whether CORS filter is enabled or not. By default its disabled, but you can enable this option
+     * when using luya as headless app.
+     */
+    public $cors = false;
     
     /**
      * @var string The default language for the admin interrace (former known as luyaLanguage).
@@ -62,19 +69,20 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'it' => 'Italiano',
         'el' => 'Ελληνικά',
         'vi' => 'Việt Nam',
-    	'pt' => 'Português',
+        'pt' => 'Português',
     ];
     
     /**
      * @array Provide dashboard objects from last user logins.
      */
     public $dashboardObjects = [
-   		[
-       		'template' => '<table class="striped"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>', 
-       		'dataApiUrl' => 'admin/api-admin-common/last-logins',
-       		'title' => ['admin', 'dashboard_lastlogin_title'],
-   		],
-  	];
+        [
+            'class' => 'luya\admin\dashboard\ListDashboardObject',
+            'template' => '<li class="list-group-item" ng-repeat="item in data">{{item.user.firstname}} {{item.user.lastname}}<span class="badge badge-info float-right">{{item.maxdate * 1000 | date:\'short\'}}</span></li>',
+            'dataApiUrl' => 'admin/api-admin-common/last-logins',
+            'title' => ['admin', 'dashboard_lastlogin_title'],
+        ],
+    ];
     
     /**
      * @var boolean Enables a two-way factor auth system before logging into the admin
@@ -134,27 +142,21 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     ];
 
     /**
-     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected asset files to assign.
+     * @var array This property is used by the {{luya\web\Bootstrap::run()}} method in order to set the collected asset files to assign.
      */
     public $assets = [];
     
     /**
-     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected menu items from all admin modules and build the menu.
+     * @var array This property is used by the {{luya\web\Bootstrap::run()}} method in order to set the collected menu items from all admin modules and build the menu.
      */
     public $moduleMenus = [];
     
-    /**
-     * @var array Registering translation files for the admin module.
-     */
-    public $translations = [
-        [
-            'prefix' => 'admin*',
-            'basePath' => '@admin/messages',
-            'fileMap' => [
-                'admin' => 'admin.php',
-            ],
-        ],
-    ];
+    public static function onLoad()
+    {
+        self::registerTranslation('admin*', '@admin/messages', [
+            'admin' => 'admin.php',
+        ]);
+    }
     
     /**
      * Returns all Asset files to registered in the administration interfaces.
@@ -206,7 +208,8 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         return [
             'js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error', 'js_ngrest_rm_update', 'js_ngrest_rm_success', 'js_tag_exists', 'js_tag_success', 'js_admin_reload', 'js_dir_till', 'js_dir_set_date', 'js_dir_table_add_row', 'js_dir_table_add_column', 'js_dir_image_description',
             'js_dir_no_selection', 'js_dir_image_upload_ok', 'js_dir_image_filter_error', 'js_dir_upload_wait', 'js_dir_manager_upload_image_ok', 'js_dir_manager_rm_file_confirm', 'js_dir_manager_rm_file_ok', 'js_zaa_server_proccess',
-            'ngrest_select_no_selection', 'js_ngrest_toggler_success', 'js_filemanager_count_files_overlay', 'js_link_set_value', 'js_link_change_value', 'aws_changepassword_succes', 'js_account_update_profile_success',
+            'ngrest_select_no_selection', 'js_ngrest_toggler_success', 'js_filemanager_count_files_overlay', 'js_link_set_value', 'js_link_not_set', 'js_link_change_value', 'aws_changepassword_succes', 'js_account_update_profile_success', 'layout_filemanager_remove_dir_not_empty',
+            'ngrest_button_delete', 'layout_btn_reload', 'js_dir_manager_rm_file_confirm_title'
         ];
     }
     
@@ -231,7 +234,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     /**
      * Setter for js translations files.
      *
-     * This setter method is used by the {{luya\web\Bootstrap::run}} to assign all js transaltion files from the admin modules.
+     * This setter method is used by the {{luya\web\Bootstrap::run()}} to assign all js transaltion files from the admin modules.
      *
      * @param array $translations
      */
@@ -249,8 +252,8 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))
-            ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin/storage/index', 'admin/storage/index')
-            ->node('menu_node_system', 'layers')
+            ->nodeRoute('menu_node_filemanager', 'cloud_upload', 'admin/storage/index')
+            ->node('menu_node_system', 'settings_applications')
                 ->group('menu_group_access')
                     ->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')
                     ->itemApi('menu_access_item_group', 'admin/group/index', 'group', 'api-admin-group')
@@ -275,20 +278,21 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     {
         return [
             'adminLanguage' => [
-                'class' => AdminLanguage::className(),
+                'class' => AdminLanguage::class,
             ],
             'adminuser' => [
-                'class' => AdminUser::className(),
+                'class' => AdminUser::class,
                 'defaultLanguage' => $this->interfaceLanguage,
             ],
             'adminmenu' => [
-                'class' => AdminMenu::className(),
+                'class' => AdminMenu::class,
             ],
             'storage' => [
-                'class' => StorageContainer::className(),
+                'class' => LocalFileSystem::class,
             ],
             'auth' => [
-                'class' => Auth::className(),
+                'class' => Auth::class,
+                'cors' => $this->cors,
             ],
         ];
     }
@@ -318,6 +322,6 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public static function t($message, array $params = [], $language = null)
     {
-        return Yii::t('admin', $message, $params, $language);
+        return parent::baseT('admin', $message, $params, $language);
     }
 }

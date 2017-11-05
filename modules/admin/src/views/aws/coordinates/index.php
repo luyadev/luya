@@ -11,7 +11,7 @@ use luya\admin\ngrest\aw\CallbackFormWidget;
 
 };']); ?>
 
-<?= $form->field('address', 'Adresse:'); ?>
+<?= $form->field('address', 'Address:'); ?>
 <?php $form::end(); ?>
 
 <div id="map" style="height:800px; width:100%;"></div>

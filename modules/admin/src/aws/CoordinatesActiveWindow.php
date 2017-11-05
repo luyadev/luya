@@ -8,8 +8,10 @@ use yii\helpers\Json;
 use luya\admin\ngrest\base\ActiveWindow;
 
 /**
- * Active Window created at 18.02.2016 13:22 on LUYA Version 1.0.0-beta5.
- * @todo handling multiple resources in gmaps
+ * Coordinates Collector.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class CoordinatesActiveWindow extends ActiveWindow
 {
@@ -17,17 +19,7 @@ class CoordinatesActiveWindow extends ActiveWindow
      * @var string The name of the module where the active windows is located in order to finde the view path.
      */
     public $module = '@admin';
-    
-    /**
-     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
-     */
-    public $alias = 'Coordinates';
-    
-    /**
-     * @var string The icon name from goolges material icon set (https://material.io/icons/)
-     */
-    public $icon = 'pin_drop';
-    
+   
     /**
      * @var string Register your maps application and enter your api key here
      * while configure the active window (https://console.developers.google.com).
@@ -42,6 +34,22 @@ class CoordinatesActiveWindow extends ActiveWindow
         if ($this->mapsApiKey === null) {
             throw new Exception('A google maps API key can not be null.');
         }
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultLabel()
+    {
+        return 'Coordinates';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function defaultIcon()
+    {
+        return 'pin_drop';
     }
     
     /**
@@ -69,7 +77,7 @@ class CoordinatesActiveWindow extends ActiveWindow
         $response = Json::decode($curl->response);
         
         if (!isset($response['results']) || !isset($response['results'][0])) {
-            return $this->sendError('Error while collecting data for your adresse. Check if you adress was correct and try again.');
+            return $this->sendError('Error while collecting data for your address. Check if you address was correct and try again.');
         }
         
         $cords = $response['results'][0]['geometry']['location'];

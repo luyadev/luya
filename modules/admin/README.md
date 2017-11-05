@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
+</p>
+
 LUYA Administration Interface
 ==========
 
@@ -6,7 +10,7 @@ LUYA Administration Interface
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-admin/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-admin?branch=master)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-admin/downloads)](https://packagist.org/packages/luyadev/luya-module-admin)
 
-Administration Interface based on [Angular JS](https://angularjs.org/), [Materialize CSS](http://materializecss.com/) and [Yii 2](http://www.yiiframework.com/) (which is wrapped in the LUYA CORE).
+Administration Interface based on [AngularJs](https://angularjs.org/), [Bootstrap 4](https://getbootstrap.com) and [Yii 2 Framework](http://www.yiiframework.com/) (which is wrapped in the LUYA CORE).
 
 ![LUYA Admin Interface](https://raw.githubusercontent.com/luyadev/luya-module-admin/master/luya_admin.png)
 
@@ -24,7 +28,7 @@ Administration Interface based on [Angular JS](https://angularjs.org/), [Materia
 Install the module trough composer:
 
 ```sh
-composer require luyadev/luya-module-admin:1.0.0-RC3
+composer require luyadev/luya-module-admin:1.0.0-RC4
 ```
 
 Add the module to your configuration file within the modules section:

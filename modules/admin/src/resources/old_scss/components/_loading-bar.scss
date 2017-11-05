@@ -1,0 +1,17 @@
+#loading-bar {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 50000;
+}
+
+#loading-bar .bar {
+    background-color: #fff;
+    height: 4px;
+    transition: 0.25s ease width;
+}
+
+.loading-bar-spinner {
+    display: none;
+}

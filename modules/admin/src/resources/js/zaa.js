@@ -1,4 +1,4 @@
-var zaa = angular.module("zaa", ["ui.router", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier", "flow", "angular.filter", "720kb.datepicker", "localytics.directives", "directive.ngColorwheel"]);
+var zaa = angular.module("zaa", ["ui.router", "dnd", "angular-loading-bar", "ngFileUpload", "ngWig", "flow", "angular.filter", "720kb.datepicker", "directive.ngColorwheel"]);
 
 /**
  * guid creator
@@ -33,7 +33,7 @@ function i18nParam(varName, params) {
 
     angular.forEach(params, function (value, key) {
         varValue = varValue.replace("%" + key + "%", value);
-    })
+    });
 
     return varValue;
 }
@@ -48,12 +48,13 @@ function typeCastValue(value) {
     return $.isNumeric(value) ? parseInt(value) : value;
 }
 
-/* zephir angular admin */
-/* resolve controller: https://github.com/angular-ui/ui-router/wiki#resolve */
 (function () {
     "use strict";
 
+    /* CONFIG */
+    
     zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, $urlMatcherFactoryProvider) {
+    	
         $httpProvider.interceptors.push("authInterceptor");
 
         zaa.bootstrap = $controllerProvider;
@@ -95,6 +96,8 @@ function typeCastValue(value) {
             });
     });
 
+    /* PROVIDERS */
+    
     /**
      * attach custom callback function to the custom state resolve. Use the resolverProvider in
      * your configuration part:
@@ -120,442 +123,13 @@ function typeCastValue(value) {
                 }
             })
         }
-    })
-
-    zaa.filter('trustAsUnsafe', function ($sce) {
-        return function (val, enabled) {
-            return $sce.trustAsHtml(val);
-        };
     });
 
+    /* FACTORIES */
+    
     /**
-     * Controller: $scope.content = $sce.trustAsHtml(response.data);
-     * Template: <div compile-html ng-bind-html="content | trustAsUnsafe"></div>
+     * LUYA LOADING
      */
-    zaa.directive("compileHtml", function ($compile, $parse) {
-        return {
-            restrict: "A",
-            link: function (scope, element, attr) {
-                var parsed = $parse(attr.ngBindHtml);
-                scope.$watch(function () {
-                    return (parsed(scope) || "").toString();
-                }, function () {
-                    $compile(element, null, -9999)(scope);  //The -9999 makes it skip directives so that we do not recompile ourselves
-                });
-            }
-        };
-    });
-
-    /**
-     * Usage:
-     *
-     * ```
-     * <div zaa-esc="methodClosesThisDiv()" />
-     * ```
-     */
-    zaa.directive("zaaEsc", function () {
-        return function (scope, element, attrs) {
-            $(document).on("keyup", function (e) {
-                if (e.keyCode == 27) {
-                    scope.$apply(function () {
-                        scope.$eval(attrs.zaaEsc);
-                    });
-                }
-            });
-        };
-    });
-
-    zaa.directive("linkObjectToString", function () {
-        return {
-            restrict: 'E',
-            relace: true,
-            scope: {
-                'link': '='
-            },
-            template: function () {
-                return '<span>' +
-                    '<span ng-if="link.type==2">Extern: {{link.value}}</span>' +
-                    '<span ng-if="link.type==1"><show-internal-redirection nav-id="link.value" /></span>' +
-                    '</span>';
-            }
-        }
-    });
-
-    /**
-     * Generate a Tool Tip Overlay, usager:
-     *
-     * ```
-     * <span tooltip tooltip-text="Trigger this Message on Hover">Span Text</span>
-     * ```
-     * 
-     * In order to trigger an expression call instead of a static text use:
-     * 
-     * ```
-     * <span tooltip tooltip-expression="scopeFunction(fooBar)">Span Text</span>
-     * ```
-     */
-    zaa.directive("tooltip", function () {
-        return {
-            restrict: 'A',
-            scope: {
-                'tooltipText': '@',
-                'tooltipExpression': '=',
-                'tooltipOffsetTop': '=',
-                'tooltipOffsetLeft': '='
-            },
-            link: function (scope, element, attr) {
-            	
-            	if (scope.tooltipExpression) {
-            		scope.tooltipText = scope.tooltipExpression;
-            	}
-                var html = '<div class="tooltip">' + scope.tooltipText + '</div>';
-                var pop = $(html);
-                element.after(pop);
-                pop.hide();
-
-                element.on('mouseenter', function () {
-                    var offset = {
-                        top: this.getBoundingClientRect().top + this.offsetHeight,
-                        left: this.getBoundingClientRect().left
-                    };
-
-                    if (typeof scope.tooltipOffsetTop == 'number') {
-                        offset.top = offset.top + scope.tooltipOffsetTop;
-                    }
-
-                    if (typeof scope.tooltipOffsetLeft == 'number') {
-                        offset.left = offset.left + scope.tooltipOffsetLeft;
-                    }
-
-                    pop.css(offset);
-
-                    pop.show();
-                });
-
-                element.on('mouseleave', function () {
-                    pop.hide();
-                });
-
-            }
-        }
-    })
-
-    /**
-     * Convert a string to number value, usefull in selects.
-     *
-     * ```
-     * <select name="filterId" ng-model="filterId" convert-to-number>
-     * ```
-     */
-    zaa.directive('convertToNumber', function () {
-        return {
-            require: 'ngModel',
-            link: function (scope, element, attrs, ngModel) {
-                ngModel.$parsers.push(function (val) {
-                    return val != null ? parseInt(val, 10) : null;
-                });
-                ngModel.$formatters.push(function (val) {
-                    return val != null ? '' + val : null;
-                });
-            }
-        };
-    });
-
-    /**
-     * Directive to trigger fixed table head
-     */
-    zaa.directive("fixedTableHead", function ($window) {
-        return function (scope, element, attrs) {
-            /**
-             * Calculate the offset of the "thead" and apply it as transform
-             */
-            var onScroll = function () {
-                var table = angular.element(element.find('table'));
-                var thead = angular.element(table.find('thead'));
-
-                if (table.length > 0 && thead.length > 0) {
-                    thead.css('background-color', '#fff');
-
-                    var tableOffset = table.offset().top - $('.navbar-fixed').height();
-
-                    if (tableOffset <= 0) {
-                        thead.css('transform', 'translateY(' + (-1 - tableOffset) + 'px)');
-                        thead.css('box-shadow', '0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 5px 0 rgba(0, 0, 0, 0.04), 0 3px 1px -2px rgba(0, 0, 0, 0.1)');
-                    } else {
-                        thead.css('transform', 'none');
-                        thead.css('box-shadow', 'none');
-                    }
-                }
-            };
-
-            onScroll();
-
-            angular.element(element).bind("scroll", function () {
-                onScroll();
-            });
-        };
-    });
-
-    /**
-     * Apply auto generated height for textareas based on input values
-     */
-    zaa.directive('autoGrow', function () {
-        return function (scope, element, attr) {
-            var $shadow = null;
-
-            var destroy = function () {
-                if ($shadow != null) {
-                    $shadow.remove();
-                    $shadow = null;
-                }
-            };
-
-            var update = function () {
-                if ($shadow == null) {
-                    $shadow = angular.element('<div></div>').css({
-                        position: 'absolute',
-                        top: -10000,
-                        left: -10000,
-                        resize: 'none'
-                    });
-
-                    angular.element(document.body).append($shadow);
-                }
-
-                $shadow.css({
-                    fontSize: element.css('font-size'),
-                    fontFamily: element.css('font-family'),
-                    lineHeight: element.css('line-height'),
-                    width: element.width(),
-                    paddingTop: element.css('padding-top'),
-                    paddingBottom: element.css('padding-bottom')
-                });
-
-                var times = function (string, number) {
-                    for (var i = 0, r = ''; i < number; i++) {
-                        r += string;
-                    }
-                    return r;
-                };
-
-                var val = element.val().replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/&/g, '&amp;')
-                    .replace(/\n$/, '<br/>&nbsp;')
-                    .replace(/\n/g, '<br/>')
-                    .replace(/\s{2,}/g, function (space) {
-                        return times('&nbsp;', space.length - 1) + ' '
-                    });
-
-                $shadow.html(val);
-
-                element.css('height', $shadow.outerHeight() + 10 + 'px');
-            };
-
-            element.bind('keyup keydown keypress change click', update);
-            element.bind('blur', destroy);
-            update();
-        }
-    });
-
-    zaa.directive('resizer', function ($document) {
-
-        return {
-            scope: {
-                trigger: '@'
-            },
-            link: function ($scope, $element, $attrs) {
-
-                $scope.$watch('trigger', function (n, o) {
-                    if (n == 0) {
-                        $($attrs.resizerLeft).removeAttr('style');
-                        $($attrs.resizerRight).removeAttr('style');
-                    }
-                })
-
-                $element.on('mousedown', function (event) {
-                    event.preventDefault();
-                    $document.on('mousemove', mousemove);
-                    $document.on('mouseup', mouseup);
-                });
-
-                function mousemove(event) {
-
-                    $($attrs.resizerCover).show();
-                    // Handle vertical resizer
-                    var x = event.pageX;
-                    var i = window.innerWidth;
-
-                    if (x < 600) {
-                        x = 600;
-                    }
-
-                    if (x > (i - 400)) {
-                        x = (i - 400);
-                    }
-
-                    var wl = $($attrs.resizerLeft).width();
-                    var wr = $($attrs.resizerRight).width();
-
-                    $($attrs.resizerLeft).css({
-                        width: x + 'px'
-                    });
-                    $($attrs.resizerRight).css({
-                        width: (i - x) + 'px'
-                    });
-                }
-
-                function mouseup() {
-                    $($attrs.resizerCover).hide();
-                    $document.unbind('mousemove', mousemove);
-                    $document.unbind('mouseup', mouseup);
-                }
-            }
-        }
-    });
-
-    /**
-     * Readded ng-confirm-click in order to provide quick ability to implement confirm boxes.
-     *
-     * ```
-     * <button ng-confirm-click="Are you sure you want to to delete {{data.title}}?" confirmed-click="remove(data)">Remove</button>
-     * ```
-     */
-    zaa.directive("ngConfirmClick", function () {
-        return {
-            link: function (scope, element, attr) {
-                var msg = attr.ngConfirmClick || "Are you sure?";
-                var clickAction = attr.confirmedClick;
-                element.bind("click", function (event) {
-                    if (window.confirm(msg)) {
-                        scope.$eval(clickAction)
-                    }
-                });
-            }
-        };
-    });
-
-    zaa.directive("focusMe", function ($timeout) {
-        return {
-            scope: { trigger: "=focusMe" },
-            link: function (scope, element) {
-                scope.$watch("trigger", function (value) {
-                    if (value === true) {
-                        element[0].focus();
-                        scope.trigger = false;
-                    }
-                })
-            }
-        }
-    });
-
-    /**
-     * ```
-     * <a href="#" click-paste-pusher="foobar">Test</a>
-     * ```
-     */
-    zaa.directive("clickPastePusher", ['$rootScope', '$compile', function ($rootScope, $compile) {
-        return {
-            restrict: 'A',
-            replace: false,
-            link: function (scope, element, attrs) {
-                element.bind('click', function () {
-                    $rootScope.$broadcast('insertPasteListener', attrs['clickPastePusher']);
-                })
-            }
-        }
-    }]);
-
-    /**
-     *
-     * ```
-     * $rootScope.$broadcast('insertPasteListener', $scope.someInput);
-     * ```
-     *
-     * ```
-     * <textarea insert-paste-listener></textarea>
-     * ```
-     */
-    zaa.directive('insertPasteListener', ['$rootScope', function ($rootScope) {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attrs) {
-                element.bind("focus", function () {
-                    $rootScope.lastElement = element[0];
-                    var offCallFn = $rootScope.$on('insertPasteListener', function (e, val) {
-                        var domElement = $rootScope.lastElement;
-
-                        if (domElement != element[0] || !domElement) {
-                            return false;
-                        }
-
-                        $rootScope.$$listeners.insertPasteListener = [];
-
-                        if (document.selection) {
-                            domElement.focus();
-                            var sel = document.selection.createRange();
-                            sel.text = val;
-                            domElement.focus();
-                        } else if (domElement.selectionStart || domElement.selectionStart === 0) {
-                            var startPos = domElement.selectionStart;
-                            var endPos = domElement.selectionEnd;
-                            var scrollTop = domElement.scrollTop;
-                            domElement.value = domElement.value.substring(0, startPos) + val + domElement.value.substring(endPos, domElement.value.length);
-                            domElement.focus();
-                            domElement.selectionStart = startPos + val.length;
-                            domElement.selectionEnd = startPos + val.length;
-                            domElement.scrollTop = scrollTop;
-                        } else {
-                            domElement.value += val;
-                            domElement.focus();
-                        }
-                    });
-                });
-            }
-        }
-    }]);
-
-    zaa.factory('CacheReloadService', function ($http, $window) {
-
-        var service = [];
-
-        service.reload = function () {
-            $http.get("admin/api-admin-common/cache").then(function (response) {
-                $window.location.reload();
-            });
-        }
-
-        return service;
-
-    });
-
-    zaa.filter('srcbox', function () {
-        return function (input, search) {
-            if (!input) return input;
-            if (!search) return input;
-            var expected = ('' + search).toLowerCase();
-            var result = {};
-            angular.forEach(input, function (value, key) {
-                angular.forEach(value, function (kv, kk) {
-                    var actual = ('' + kv).toLowerCase();
-                    if (actual.indexOf(expected) !== -1) {
-                        result[key] = value;
-                    }
-                });
-            });
-            return result;
-        }
-    });
-
-    zaa.filter('trustAsResourceUrl', function ($sce) {
-        return function (val, enabled) {
-            if (!enabled) {
-                return null;
-            }
-            return $sce.trustAsResourceUrl(val);
-        };
-    });
-
     zaa.factory("LuyaLoading", function ($timeout) {
 
         var state = false;
@@ -588,72 +162,111 @@ function typeCastValue(value) {
             }
         }
     });
-
+    
+    /**
+     * Inside your Directive or Controller:
+     * 
+     * ```js
+     * AdminClassService.setClassSpace('modalBody', 'modal-open')
+     * ```
+     * 
+     * Inside your HTML layout file:
+     * 
+     * ```html
+     * <div class="{{AdminClassService.getClassSpace('modalBody')}}" />
+     * ```
+     * 
+     * In order to clear the class space afterwards:
+     * 
+     * ```js
+     * AdminClassService.clearSpace('modalBody');
+     * ```
+     */
     zaa.factory("AdminClassService", function () {
 
         var service = [];
 
-        service.vars = [];
+        service.vars = {};
 
         service.getClassSpace = function (spaceName) {
             if (service.vars.hasOwnProperty(spaceName)) {
                 return service.vars[spaceName];
             }
-        }
+        };
 
+        service.hasClassSpace = function(spaceName) {
+        	 if (service.vars.hasOwnProperty(spaceName)) {
+        		 return true;
+        	 }
+        	 
+        	 return false;
+        };
+        
         service.setClassSpace = function (spaceName, className) {
             service.vars[spaceName] = className;
+        };
+        
+        service.clearSpace = function(spaceName) {
+        	if (service.vars.hasOwnProperty(spaceName)) {
+        		service.vars[spaceName] = null;
+        	}
+        };
+        
+        service.removeSpace = function(spaceName) {
+        	if (service.hasClassSpace(spaceName)) {
+        		delete service.vars[spaceName];
+        	}
+        };
+
+        return service;
+    });
+    
+    zaa.factory('CacheReloadService', function ($http, $window) {
+
+        var service = [];
+
+        service.reload = function () {
+            $http.get("admin/api-admin-common/cache").then(function (response) {
+                $window.location.reload();
+            });
         }
 
         return service;
     });
-
-    /**
-     * Example usage of luya admin modal:
-     *
-     * ```
-     * <button ng-click="modalState=!modalState">Toggle Modal</button>
-     * <modal is-modal-hidden="modalState">
-     *      <h1>Modal Container</h1>
-     *    <p>Hello world!</p>
-     * </modal>
-     * ```
-     */
-    zaa.directive("modal", function ($timeout) {
-        return {
-            restrict: "E",
-            scope: {
-                isModalHidden: "="
-            },
-            replace: true,
-            transclude: true,
-            templateUrl: "modal",
-        }
-    });
-
-    zaa.controller("DashboardController", function ($scope) {
-
-        $scope.date = null;
-
-    });
-
-    // factory.js
-    zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService) {
+    
+    zaa.factory("authInterceptor", function ($rootScope, $q, AdminToastService, AdminDebugBar) {
         return {
             request: function (config) {
+            	if (!config.hasOwnProperty('ignoreLoadingBar')) {
+            		config.debugId = AdminDebugBar.pushRequest(config);
+            	}
                 config.headers = config.headers || {};
-                config.headers.Authorization = "Bearer " + authToken;
+                config.headers.Authorization = "Bearer " + $rootScope.luyacfg.authToken;
                 config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
-                return config;
+                
+                return config || $q.when(config);
+            },
+            response: function(config) {
+            	if (!config.hasOwnProperty('ignoreLoadingBar')) {
+            		AdminDebugBar.pushResponse(config);
+            	}
+            	
+            	return config || $q.when(config);
             },
             responseError: function (data) {
-                if (data.status == 401) {
+                if (data.status == 401 || data.status == 403 || data.status == 405) {
                     window.location = "admin/default/logout";
+                } else if (data.status != 422) {
+                	var message = data.data.hasOwnProperty('message');
+                	if (message) {
+                		AdminToastService.error(data.data.message, 10000);
+                	} else {
+                		AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 10000);
+                	}
+                    
                 }
-                if (data.status != 422) {
-                    AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 5000);
-                }
-                return $q.reject(data);
+                
+                return data || $q.when(data);
             }
         };
     });

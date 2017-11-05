@@ -123,6 +123,18 @@ class <?= $className; ?> extends PhpBlock
     */
     public function admin()
     {
-        return '<p><?= $name; ?> Admin View</p>';
+        return '<h5 class="mb-3"><?= $name; ?></h5>' .
+            '<table class="table table-bordered">' .
+<?php foreach ($config['vars'] as $var): ?>
+            '{% if vars.<?= $var['var']; ?> is not empty %}' .
+            '<tr><td><b><?= $var['label']; ?></b></td><td>{{vars.<?= $var['var']; ?>}}</td></tr>' .
+            '{% endif %}'.
+<?php endforeach; ?>
+<?php foreach ($config['cfgs'] as $config): ?>
+            '{% if cfgs.<?= $config['var']; ?> is not empty %}' .
+            '<tr><td><b><?= $config['label']; ?></b></td><td>{{cfgs.<?= $config['var']; ?>}}</td></tr>' .
+            '{% endif %}'.
+<?php endforeach; ?>
+            '</table>';
     }
 }

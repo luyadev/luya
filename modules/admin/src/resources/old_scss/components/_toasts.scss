@@ -1,0 +1,80 @@
+$toast-space-window: 15px;
+
+.toasts {}
+
+.toasts__info {}
+
+.toasts__confirm {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 10000;
+}
+
+.toasts__item {
+	@include clearfix;
+
+	// Font
+	font-size: 1.2rem;
+
+	// Position (bottom, left)
+	position: fixed;
+	bottom: $toast-space-window - 5px;
+	left: $toast-space-window;
+	z-index: 12000;
+
+	// Spacing
+	padding: 10px 20px;
+
+	// Animation
+	transition: 0.25s ease transform;
+
+	// Colors | default
+	background-color: color("grey", "darken-3");
+	color: color("shades", "white");
+
+	// Colors | success
+	&.toasts__item--success {
+		background-color: color("green", "base");
+	}
+
+	// Colors | error
+	&.toasts__item--error {
+		background-color: color("red", "base");
+	}
+
+	// Colors | confirmation
+	&.toasts__item--confirm {
+
+		// Align in the middle
+		bottom: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(50%) !important;
+
+		// Colors
+		background-color: color("shades", "white");
+		color: color("shades", "black");
+
+		& + .toasts__background {
+			display: block;
+		}
+	}
+}
+
+.toasts__item-buttons {
+	float: right;
+}
+
+.toasts__text, .toasts__text-icon {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0;
+}
+
+.toasts__text-icon {
+	margin-right: 10px;
+}

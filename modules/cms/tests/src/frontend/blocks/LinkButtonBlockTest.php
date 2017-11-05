@@ -18,13 +18,13 @@ class LinkButtonBlockTest extends BlockTestCase
         $this->block->setVarValues([
             'linkData' => ['type' => 2, 'value' => 'https://luya.io']
         ]);
-        $this->assertSame('<a class="btn btn-default" href="https://luya.io"></a>', $this->renderFrontendNoSpace());
+        $this->assertSame('<a class="btn btn-default" href="https://luya.io" target="_blank"></a>', $this->renderFrontendNoSpace());
     }
     
     public function testLinkLinkSourceWithLabel()
     {
         $this->block->setVarValues(['label' => 'label', 'linkData' => ['type' => 2, 'value' => 'https://luya.io']]);
-        $this->assertSame('<a class="btn btn-default" href="https://luya.io">label</a>', $this->renderFrontendNoSpace());
+        $this->assertSame('<a class="btn btn-default" href="https://luya.io" target="_blank">label</a>', $this->renderFrontendNoSpace());
     }
     
     public function testLinkLinkSourceWithLabelBlank()

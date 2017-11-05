@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://luya.io/img/luya_logo_flat_icon.png" alt="LUYA Logo"/>
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
 </p>
 
-> 11, April 2017: We have released another RC Version of LUYA: [1.0.0-RC3](https://luya.io/news/third-release-candidate-1-0-0-rc3).
+> 5, September 2017: RC4 is ready! [1.0.0-RC4](https://luya.io/news/last-release-candidate-1-0-0-rc4).
 
 The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
@@ -10,16 +10,16 @@ The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provide
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/luyadev/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/luyadev/luya/?branch=master)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
-[![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya)
+[![Join the Slack Team](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 
-![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta8.png)
+![LUYA RC4 Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-rc4.png)
 
 ## Installation
 
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUYA:
 
-+ [How to install](https://luya.io)
++ [How to install](https://luya.io/guide/install)
 + [Video Tutorials](https://luya.io/videos)
 + [How to upgrade current website](https://luya.io/guide/install-upgrade)
 
@@ -33,6 +33,7 @@ Other helpfull informations
 If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/luyadev/luya/issues/new) on the project repository.
 
 + [Issues on GitHub](https://github.com/luyadev/luya/issues)
++ [Join the Slack Team](https://slack.luya.io)
 + [Ask us in Gitter](https://gitter.im/luyadev/luya)
 
 #### Contribution
@@ -48,12 +49,13 @@ We are always looking for people who share their thoughts, code and problems wit
 + ✓ rc1 release (October 2016) - Merge admin and frontend modules into each other. Add luya vendor namespace prefix to all modules.
 + ✓ rc2 release (November 2016) - Bug fixes, PHP Doc and Guide improvements, basic features implementation.
 + ✓ rc3 release (April 2017) - Large API breaks and new features, therefore the rc3 release in order to get latest bugs reports and informations from Developers.
-+ version 1.0.0 (Q3 2017) - First stable release of LUYA.
++ ✓ rc4 release (September 2017) - Introduce new Admin UI.
++ version 1.0.0 (12.12.2017) - Fix new Admin UI bugs and release first stable version of LUYA.
 
 #### Unit Test
 
 1. Create Database (example luya_env_phpunit)
-2. Insert Database dump from `tests/data/sql/1.0.0-RC3.sql`
+2. Insert Database dump from `tests/data/sql/1.0.0-RC4.sql`
 3. Rename phpunit.xml.dist to phpunit.xml
 4. Change dsn, username and passwort in phpunit.xml
 5. Ensure you have installed current composer packages `composer install` with dev packages.

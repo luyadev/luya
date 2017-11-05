@@ -18,8 +18,8 @@ use luya\web\View;
  * @property integer $equalIndex Get the index number within the equal elements.
  * @property \luya\web\View $appView The application view object in order to register data to the layout view.
  *
- * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class PhpBlockView extends View
 {

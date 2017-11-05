@@ -2,7 +2,6 @@
 
 namespace luyatests\core\web;
 
-
 use luyatests\LuyaWebTestCase;
 use luya\web\GroupUser;
 use luya\web\GroupUserIdentityInterface;

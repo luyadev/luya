@@ -9,10 +9,11 @@ use yii\base\Event;
 
 /**
  * NgRest Event Behavior.
- * 
+ *
  * This Behavior is attached to all {{luya\admin\ngrest\base\NgRestModel}} Objects.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NgRestEventBehavior extends Behavior
 {
@@ -32,7 +33,7 @@ class NgRestEventBehavior extends Behavior
     
     /**
      * Bing all plugin Events to the corresponding Owner Object.
-     * 
+     *
      * @param \yii\base\Event $event
      */
     public function bindPluginEvents(Event $event)
@@ -47,7 +48,7 @@ class NgRestEventBehavior extends Behavior
     
     /**
      * Singleton Container for Plugin Objects.
-     * 
+     *
      * @param string $field
      * @param array $plugin
      * @param string $tableName

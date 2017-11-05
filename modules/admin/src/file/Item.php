@@ -7,6 +7,8 @@ use luya\helpers\Url;
 use luya\helpers\FileHelper;
 use luya\admin\helpers\I18n;
 use luya\admin\storage\ItemAbstract;
+use luya\web\LinkInterface;
+use luya\web\LinkTrait;
 
 /**
  * Storage File Item.
@@ -25,21 +27,55 @@ use luya\admin\storage\ItemAbstract;
  * @property integer $uploadTimestamp Unix timestamp when the file has been uploaded.
  * @property boolean $isImage Whether the file is of type image or not.
  * @property string $hashName The 8 chars long unique hash name of the file.
+ * @property string $href Get the href value for the item based from $linkAbsolute
+ * @property string $target Get the link target attribute value.
+ * @property string $link Get the link path to the file.
+ * @property string $linkAbsolute Get the absolute link path to the file.
  * @property string $source The source url to the file inside the storage folder with nice Urls.
- * @property string $sourceStatic The absolute source url to the file inside the storage folder with nice Urls.
- * @property string $httpSource The raw path to the file inside the storage folder.
+ * @property string $sourceAbsolute The absolute source url to the file inside the storage folder with nice Urls.
  * @property string $serverSource The path to the file on the filesystem of the server.
  * @property boolean $isHidden Whether the file is marked as hidden or not.
  * @property boolean $isDeleted Return whether the file has been removed from the filesytem or not.
  * @property booelan $fileExists Whether the file resource exists in the storage folder or not.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Item extends ItemAbstract
+class Item extends ItemAbstract implements LinkInterface
 {
+    use LinkTrait;
+    
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/tiff'];
     
     private $_caption;
+    
+    /**
+     * @inheritdoc
+     */
+    public function getHref()
+    {
+        return $this->linkAbsolute;
+    }
+    
+    private $_target;
+    
+    /**
+     * Setter method for Link target.
+     *
+     * @param string $target The target must be a valid link target attribute value.
+     */
+    public function setTarget($target)
+    {
+        $this->_target = $target;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getTarget()
+    {
+        return empty($this->_target) ? '_blank' : $this->_target;
+    }
     
     /**
      * Set caption for file item, override existings values
@@ -74,7 +110,7 @@ class Item extends ItemAbstract
      */
     public function getCaptionArray()
     {
-        return I18n::decode($this->itemArray['caption']);
+        return I18n::decode($this->getKey('caption'));
     }
     
     /**
@@ -84,7 +120,7 @@ class Item extends ItemAbstract
      */
     public function getId()
     {
-        return (int) $this->itemArray['id'];
+        return (int) $this->getKey('id');
     }
     
     /**
@@ -94,7 +130,7 @@ class Item extends ItemAbstract
      */
     public function getFolderId()
     {
-        return (int) $this->itemArray['folder_id'];
+        return (int) $this->getKey('folder_id');
     }
     
     /**
@@ -116,7 +152,7 @@ class Item extends ItemAbstract
      */
     public function getName()
     {
-        return $this->itemArray['name_original'];
+        return $this->getKey('name_original');
     }
     
     /**
@@ -129,7 +165,7 @@ class Item extends ItemAbstract
      */
     public function getSystemFileName()
     {
-        return $this->itemArray['name_new_compound'];
+        return $this->getKey('name_new_compound');
     }
     
     /**
@@ -147,7 +183,7 @@ class Item extends ItemAbstract
      */
     public function getMimeType()
     {
-        return $this->itemArray['mime_type'];
+        return $this->getKey('mime_type');
     }
     
     /**
@@ -167,7 +203,7 @@ class Item extends ItemAbstract
      */
     public function getExtension()
     {
-        return $this->itemArray['extension'];
+        return $this->getKey('extension');
     }
     
     /**
@@ -177,7 +213,7 @@ class Item extends ItemAbstract
      */
     public function getSize()
     {
-        return (int) $this->itemArray['file_size'];
+        return (int) $this->getKey('file_size');
     }
     
     /**
@@ -204,7 +240,7 @@ class Item extends ItemAbstract
      */
     public function getUploadTimestamp()
     {
-        return (int) $this->itemArray['upload_timestamp'];
+        return (int) $this->getKey('upload_timestamp');
     }
     
     /**
@@ -237,7 +273,7 @@ class Item extends ItemAbstract
      */
     public function getHashName()
     {
-        return $this->itemArray['hash_name'];
+        return $this->getKey('hash_name');
     }
     
     /**
@@ -249,17 +285,55 @@ class Item extends ItemAbstract
      */
     public function getFileHash()
     {
-        return $this->itemArray['hash_file'];
+        return $this->getKey('hash_file');
     }
     
     /**
-     * Get the realtive url to the source of the file.
+     * Get the absolute source path to the file location on the webserver.
+     *
+     * This will return raw the path to the storage file inside the sotorage folder without readable urls.
+     *
+     * @param boolean $scheme Whether the source path should be absolute or not.
+     * @return string The raw path to the file inside the storage folder.
+     */
+    public function getSource($scheme = false)
+    {
+        $httpPath = $scheme ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
+        
+        return $httpPath . '/' . $this->getKey('name_new_compound');
+    }
+    
+    /**
+     * @deprecated Deprecated in 1.0.1
+     *
+     * @param boolean $scheme
+     * @return string
+     */
+    public function getHttpSource($scheme = false)
+    {
+        trigger_error('deprecated, use getSource() instead of getHttpSource().', E_USER_DEPRECATED);
+        
+        return $this->getSource($scheme);
+    }
+    
+    /**
+     * Path to the source with sheme includes, means including server location.
+     *
+     * @return string The absolute source url to the file inside the storage folder with nice Urls.
+     */
+    public function getSourceAbsolute()
+    {
+        return $this->getSource(true);
+    }
+    
+    /**
+     * Get the link to a file.
      *
      * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For
      * example you may want users to see the file (assuming its a PDF).
      *
      * ```php
-     * echo '<a href="{Yii::$app->storage->getFile(123)->source}">Download PDF</a>';
+     * echo '<a href="{Yii::$app->storage->getFile(123)->link}">Download PDF</a>'; // you could also us href instead in order to be more semantic.
      * ```
      *
      * The output of source is a url which is provided by a UrlRUle of the admin module and returns nice readable source links:
@@ -276,15 +350,15 @@ class Item extends ItemAbstract
      *
      * @return string The relative source url to the file inside the storage folder with nice Urls.
      */
-    public function getSource()
+    public function getLink($scheme = false)
     {
-        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()]);
+        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()], $scheme);
     }
     
     /**
-     * Get the absolute source url but with the sheme includes, means including server location.
+     * Get the absolute link url but with the sheme includes, means including server location.
      *
-     * This is equals to `getSource()` method but alos includes the sheme of the current running websites as prefix
+     * This is equals to `getLink()` method but alos includes the sheme of the current running websites as prefix
      * and is not a relativ url its a static one.
      *
      * ```
@@ -293,21 +367,9 @@ class Item extends ItemAbstract
      *
      * @return string The absolute source url to the file inside the storage folder with nice Urls.
      */
-    public function getSourceStatic()
+    public function getLinkAbsolute()
     {
-        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()], true);
-    }
-    
-    /**
-     * Get the source path without beautiful urls.
-     *
-     * This will return raw the path to the storage file inside the sotorage folder without readable urls.
-     *
-     * @return string The raw path to the file inside the storage folder.
-     */
-    public function getHttpSource()
-    {
-        return Yii::$app->storage->httpPath . '/' . $this->itemArray['name_new_compound'];
+        return $this->getLink(true);
     }
     
     /**
@@ -320,7 +382,7 @@ class Item extends ItemAbstract
      */
     public function getServerSource()
     {
-        return Yii::$app->storage->serverPath . '/' . $this->itemArray['name_new_compound'];
+        return Yii::$app->storage->serverPath . '/' . $this->getKey('name_new_compound');
     }
     
     /**
@@ -335,7 +397,7 @@ class Item extends ItemAbstract
      */
     public function getIsHidden()
     {
-        return (bool) $this->itemArray['is_hidden'];
+        return (bool) $this->getKey('is_hidden');
     }
     
     /**
@@ -360,7 +422,7 @@ class Item extends ItemAbstract
      */
     public function getIsDeleted()
     {
-        return (bool) $this->itemArray['is_deleted'];
+        return (bool) $this->getKey('is_deleted');
     }
     
     /**
@@ -369,7 +431,7 @@ class Item extends ItemAbstract
     public function fields()
     {
         return [
-            'id','folderId', 'name', 'systemFileName', 'source', 'httpSource', 'serverSource', 'isImage', 'mimeType', 'extension', 'uploadTimestamp', 'size', 'sizeReadable', 'caption', 'captionArray'
+            'id','folderId', 'name', 'systemFileName', 'source', 'link', 'href', 'serverSource', 'isImage', 'mimeType', 'extension', 'uploadTimestamp', 'size', 'sizeReadable', 'caption', 'captionArray'
         ];
     }
 }

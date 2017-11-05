@@ -23,6 +23,7 @@
  * ```
  * 
  */
+
 (function() {
 	"use strict";
 	
@@ -37,9 +38,7 @@ zaa.config(function(resolverProvider) {
 	});
 });
 
-/*
-block data copy stack
-*/
+/* block data copy stack */
 
 zaa.factory("ServiceBlockCopyStack", function($rootScope) {
 	var service = [];
@@ -51,11 +50,11 @@ zaa.factory("ServiceBlockCopyStack", function($rootScope) {
 		$rootScope.$broadcast('service:CopyStack', service.stack);
 	};
 	
-	service.push = function(blockId, name) {
+	service.push = function(block) {
 		if (service.stack.length > 4) {
 			service.stack.shift();
 		}
-		service.stack.push({blockId: blockId, name: name, event: 'isServiceBlockCopyInstance'});
+		service.stack.push({blockId: block.block_id, name: block.name, icon:block.icon, id: block.id, copystack: 1});
 		$rootScope.$broadcast('service:CopyStack', service.stack);
 	};
 	
@@ -75,6 +74,7 @@ $scope.menuDataReload = function() {
 }
 				
 */
+
 zaa.factory("ServiceMenuData", function($http, $q, $rootScope) {
 	var service = [];
 	
@@ -97,7 +97,6 @@ zaa.factory("ServiceMenuData", function($http, $q, $rootScope) {
 	return service;
 });
 
-
 /*
 
 $scope.blocksData = ServiceBlocksData.data;
@@ -111,6 +110,7 @@ $scope.blocksDataReload = function() {
 }
 				
 */
+
 zaa.factory("ServiceBlocksData", function($http, $q, $rootScope) {
 	var service = [];
 	
@@ -133,7 +133,6 @@ zaa.factory("ServiceBlocksData", function($http, $q, $rootScope) {
 	return service;
 });
 
-
 /*
 
 $scope.layoutsData = ServiceLayoutsData.data;
@@ -147,6 +146,7 @@ $scope.layoutsDataReload = function() {
 }
 				
 */
+
 zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
 	var service = [];
 	
@@ -169,26 +169,27 @@ zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
 	return service;
 });
 
-
 /*
  * CMS LIVE EDIT SERIVCE
  * 
  * $scope.liveEditMode = ServiceLiveEditMode.state
  */
+
 zaa.factory("ServiceLiveEditMode", function($rootScope) {
 	
 	var service = [];
 	
 	service.state = 0;
 	
-	service.url = null;
+	service.url = $rootScope.luyacfg.homeUrl;
 	
 	service.toggle = function() {
 		service.state = !service.state;
-	}
-	
+	};
 	service.setUrl = function(itemId, versionId) {
-		service.url = homeUrl  + 'preview/' + itemId + '?version=' + versionId;
+		var d = new Date();
+		var n = d.getTime();
+		service.url = $rootScope.luyacfg.homeUrl  + 'preview/' + itemId + '?version=' + versionId + '&date=' + n;
 	};
 	
 	service.changeUrl = function(itemId, versionId) {
@@ -197,10 +198,11 @@ zaa.factory("ServiceLiveEditMode", function($rootScope) {
 		}
 		service.setUrl(itemId, versionId);
 		$rootScope.$broadcast('service:LiveEditModeUrlChange', service.url);
-	}
+	};
 	
 	return service;
 });
 
-// end of use strict
+/* end of use strict */
+
 })();

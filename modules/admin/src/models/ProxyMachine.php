@@ -17,6 +17,9 @@ use luya\admin\traits\SoftDeleteTrait;
  * @property string $access_token
  * @property smallint $is_deleted
  * @property smallint $is_disabled
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ProxyMachine extends NgRestModel
 {

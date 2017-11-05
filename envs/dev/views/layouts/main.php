@@ -3,7 +3,6 @@ use app\assets\ResourcesAsset;
 
 use luya\cms\widgets\LangSwitcher;
 
-
 ResourcesAsset::register($this);
 
 /* @var $this luya\web\View */

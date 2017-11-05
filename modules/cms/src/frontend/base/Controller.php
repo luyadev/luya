@@ -16,6 +16,7 @@ use luya\helpers\StringHelper;
  * Abstract Controller for CMS Controllers.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class Controller extends \luya\web\Controller
 {
@@ -120,7 +121,7 @@ abstract class Controller extends \luya\web\Controller
         }
         
         if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {
-            $this->view->registerCssFile('https://fonts.googleapis.com/icon?family=Material+Icons');
+            $this->view->registerCssFile('//fonts.googleapis.com/icon?family=Material+Icons');
             $this->getView()->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar'], ['content' => $content]);
         }
         
@@ -130,12 +131,8 @@ abstract class Controller extends \luya\web\Controller
     public function renderToolbar($event)
     {
         Yii::info('LUYA CMS Toolbar rendering start', __METHOD__);
-        $view = $event->sender;
-    
-        $folder = Yii::getAlias('@cms');
     
         $props = [];
-    
         foreach (Yii::$app->menu->current->model->properties as $prop) {
             $o = $prop->getObject();
             $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
@@ -166,10 +163,11 @@ abstract class Controller extends \luya\web\Controller
         }
         
         // echo is used in order to support cases where asset manager is not available
-        echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';
-        echo '<script>' . $view->renderPhpFile($folder . '/assets/toolbar.js') . '</script>';
+        echo '<style>' . $this->renderPartial('/inline/toolbar.css') . '</style>';
+        // mabye ensure that jquery is loaded,  better put this at the End of body tag
+        echo '<script>' . $this->renderPartial('/inline/toolbar.js') . '</script>';
     
-        echo $view->renderPhpFile($folder . '/views/_toolbar.php', [
+        echo $this->renderPartial('/_toolbar.php', [
             'keywords' => $keywords,
             'seoAlertCount' => $seoAlert,
             'menu' => $menu,

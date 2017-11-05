@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * Audio Block for Soundcloude Service
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class AudioBlock extends PhpBlock
 {

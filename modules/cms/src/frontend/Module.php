@@ -3,20 +3,17 @@
 namespace luya\cms\frontend;
 
 use Yii;
-use yii\base\BootstrapInterface;
 use luya\web\Application;
 use luya\base\CoreModuleInterface;
 use luya\web\ErrorHandler;
-use luya\web\ErrorHandlerExceptionRenderEvent;
-use yii\web\HttpException;
-use luya\cms\models\Config;
 
 /**
  * Cms Module.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
+final class Module extends \luya\base\Module implements CoreModuleInterface
 {
     /**
      * @var array We have no urlRules in cms Module. the UrlRoute file will only be used when
@@ -82,49 +79,16 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
             ],
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function bootstrap($app)
-    {
-        $app->on(Application::EVENT_BEFORE_REQUEST, function ($event) {
-            if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin) {
-                $event->sender->urlManager->addRules([
-                    ['class' => 'luya\cms\frontend\components\RouteBehaviorUrlRule'],
-                    ['class' => 'luya\cms\frontend\components\CatchAllUrlRule'],
-                ]);
-            }
-        });
-        
-        Yii::$app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) {
-            if ($event->exception instanceof HttpException && !YII_DEBUG) {
-                // see whether a config value exists
-                // if a redirect page id exists, redirect.
-                $navId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
-                if ($navId) {
-                    $menu = Yii::$app->menu->find()->with(['hidden'])->where(['nav_id' => $navId])->one();
-                    if ($menu) {
-                        Yii::$app->getResponse()->redirect($menu->absoluteLink, 301)->send();
-                        exit;
-                    }
-                }
-            }
-        });
-    }
     
-    public $translations = [
-        [
-            'prefix' => 'cms',
-            'basePath' => '@cms/messages',
-            'fileMap' => [
-                'cms' => 'cms.php',
-            ],
-        ],
-    ];
+    public static function onLoad()
+    {
+        self::registerTranslation('cms', '@cms/messages', [
+            'cms' => 'cms.php',
+        ]);
+    }
     
     public static function t($message, array $params = [])
     {
-        return Yii::t('cms', $message, $params);
+        return parent::baseT('cms', $message, $params);
     }
 }

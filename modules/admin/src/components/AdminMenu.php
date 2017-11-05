@@ -10,11 +10,11 @@ use luya\helpers\ArrayHelper;
  * Admin Menu Data.
  *
  * Collect informations from the menu data based on the admin modules in order to generate the different admin menu levels and containers.
- * 
+ *
  * @property array $menu Returns an array with all menu elements.
  * @property integer $userId Returns the current admin user id.
  * @property array $adminModuleMenus An array with \luya\admin\components\AdminMenuBuilderInterface objects.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -22,7 +22,7 @@ class AdminMenu extends \yii\base\Component
 {
     /**
      * Get current admin user id.
-     * 
+     *
      * @return integer
      */
     public function getUserId()
@@ -32,7 +32,7 @@ class AdminMenu extends \yii\base\Component
     
     /**
      * Get the module menus.
-     * 
+     *
      * @return \luya\admin\components\AdminMenuBuilderInterface An array with AdminMenuBuilderInterface objects.
      */
     public function getAdminModuleMenus()
@@ -44,26 +44,26 @@ class AdminMenu extends \yii\base\Component
 
     /**
      * Return the menu array entries from all registered admin modules.
-     * 
+     *
      * Response array is organized as follow:
-     * 
+     *
      * + Node (Root level menu)
      *   + Group
      *      + Items
-     *      
+     *
      * Example array response:
-     * 
+     *
      * ```php
      * Array (
      * [id] => 1, // auto assigned
      * [moduleId] => admin
-     * [template] => 
+     * [template] =>
      * [routing] => default
      * [alias] => menu_node_system
      * [icon] => layers
-     * [permissionRoute] => 
-     * [permissionIsRoute] => 
-     * [searchModelClass] => 
+     * [permissionRoute] =>
+     * [permissionIsRoute] =>
+     * [searchModelClass] =>
      * [groups] => Array ( // Optional
      *        [menu_group_access] => Array  (
      *               [name] => menu_group_access
@@ -73,9 +73,9 @@ class AdminMenu extends \yii\base\Component
      *                               [route] => admin/user/index
      *                               [icon] => person
      *                               [permssionApiEndpoint] => api-admin-user
-     *                               [permissionIsRoute] => 
+     *                               [permissionIsRoute] =>
      *                               [permissionIsApi] => 1
-     *                               [searchModelClass] => 
+     *                               [searchModelClass] =>
      *                               [options] => Array ()
      *                           )
      *                       [1] => Array  (
@@ -83,16 +83,16 @@ class AdminMenu extends \yii\base\Component
      *                               [route] => admin/group/index
      *                               [icon] => group
      *                               [permssionApiEndpoint] => api-admin-group
-     *                               [permissionIsRoute] => 
+     *                               [permissionIsRoute] =>
      *                               [permissionIsApi] => 1
-     *                               [searchModelClass] => 
+     *                               [searchModelClass] =>
      *                               [options] => Array ( )
      *                           )
      *                   )
      *           )
      * )
      * ```
-     * 
+     *
      * @return array
      */
     public function getMenu()
@@ -119,7 +119,7 @@ class AdminMenu extends \yii\base\Component
 
     /**
      * Get the node for a given array key.
-     * 
+     *
      * @param integer $id
      * @return boolean|array
      */
@@ -136,9 +136,9 @@ class AdminMenu extends \yii\base\Component
     
     /**
      * Returns an Array with modules and checks the permission for those.
-     * 
+     *
      * Example Response:
-     * 
+     *
      * ```php
      * Array (
      * 'moduleId' => 'admin',
@@ -150,7 +150,7 @@ class AdminMenu extends \yii\base\Component
      * 'searchModelClass' => $item['searchModelClass'],
      * )
      * ```
-     * 
+     *
      * @throws \Exception
      * @return array Returns an array with all modules you have permission for.
      */
@@ -238,7 +238,7 @@ class AdminMenu extends \yii\base\Component
 
     /**
      * Returns the node with a groups array where each groups contains an items array with the item.
-     * 
+     *
      * @param integer $nodeId
      * @throws \Exception
      * @return array If there are not groups, or not items for a group an empty array will be returned.
@@ -307,7 +307,7 @@ class AdminMenu extends \yii\base\Component
     
     /**
      * Get all items for all nodes.
-     * 
+     *
      * @return array
      */
     public function getItems()

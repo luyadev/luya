@@ -7,7 +7,7 @@ We have build a styleguide modules which renders all the available elements with
 Add the luya style guide module to your composer json
 
 ```sh
-require luyadev/luya-module-styleguide:1.0.0-RC3
+require luyadev/luya-module-styleguide:1.0.0-RC4
 ```
 
 Configure the Module in your project config, the password is protected this page by default.

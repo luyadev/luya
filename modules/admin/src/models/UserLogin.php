@@ -13,6 +13,10 @@ use yii\db\ActiveRecord;
  * @property integer $timestamp_create
  * @property string $auth_token
  * @property string $ip
+ * @property integer $is_destroyed
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class UserLogin extends ActiveRecord
 {
@@ -52,6 +56,7 @@ final class UserLogin extends ActiveRecord
         return [
             [['user_id', 'timestamp_create', 'auth_token', 'ip'], 'required'],
             [['user_id', 'timestamp_create'], 'integer'],
+            [['is_destroyed'], 'boolean'],
             [['auth_token'], 'string', 'max' => 120],
             [['ip'], 'string', 'max' => 15],
         ];
@@ -68,6 +73,7 @@ final class UserLogin extends ActiveRecord
             'timestamp_create' => 'Timestamp Create',
             'auth_token' => 'Auth Token',
             'ip' => 'Ip',
+            'is_destroyed' => 'Is Destroyed',
         ];
     }
 }

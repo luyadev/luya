@@ -41,8 +41,8 @@ return [
     'view_update_page_is_module' => 'Diese Seite ist als <b>Module</b> hinterlegt.',
     'view_update_page_is_redirect_internal' => 'Diese Seite ist eine <b>interne Umleitung</b> auf <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Diese Seite ist eine <b>externe Umleitung</b> auf <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
-    'menu_node_cms' => 'Seiteninhalte',
-    'menu_node_cmssettings' => 'CMS-Einstellungen',
+    'menu_node_cms' => 'Seiten',
+    'menu_node_cmssettings' => 'Einstellungen',
     'menu_group_env' => 'Umgebung',
     'menu_group_item_env_container' => 'Container',
     'menu_group_item_env_layouts' => 'Layouts',
@@ -184,5 +184,11 @@ return [
     'view_update_block_tooltip_close' => 'Bearbeiten schliessen',
     
 // 1.0.0
-    'cmsadmin_dashboard_lastupdate' => 'Zuletzt aktualisierte Seiten'
+    'cmsadmin_dashboard_lastupdate' => 'Zuletzt aktualisierte Seiten',
+    'cmsadmin_settings_homepage_title' => 'Startseite',
+    'cmsadmin_settings_trashpage_title' => 'Seite Löschen',
+    'cmsadmin_settings_modal_title' => 'Einstellungen',
+    'cmsadmin_item_settings_titleslug' => 'Seiten Informationen',
+    'cmsadmin_created_at' => 'Erstellt am',
+    'cmsadmin_version_remove' => 'Remove version',
 ];

@@ -10,6 +10,7 @@ use luya\cms\base\PhpBlock;
  * UL/OL list block.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class ListBlock extends PhpBlock
 {

@@ -15,26 +15,26 @@ use yii\base\Object;
  * Basic example of making a menu selection:
  *
  * ```php
- * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->all();
+ * $items = (new \luya\cms\menu\Query())->where([self::FIELD_PARENTNAVID => 0])->all();
  * ```
  *
  * By default the Menu Query will get the default language, or the current active language. To force
  * a specific language use the `lang()` method in your query chain:
  *
  * ```php
- * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->lang('en')->all();
+ * $items = (new \luya\cms\menu\Query())->where([self::FIELD_PARENTNAVID => 0])->lang('en')->all();
  * ```
  *
  * You can also find one element instead of all
  *
  * ```php
- * $item = (new \luya\cms\menu\Query())->where(['id' => 1])->one();
+ * $item = (new \luya\cms\menu\Query())->where([self::ID => 1])->one();
  * ```
  *
  * To include hidden pages to your selection use with:
  *
  * ```php
- * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->with(['hidden'])->all();
+ * $items = (new \luya\cms\menu\Query())->where([self::FIELD_PARENTNAVID => 0])->with(['hidden'])->all();
  * ```
  *
  * Attention: When you append the `with['hidden']` state, the visibility of the item will be overriden, even when you
@@ -43,10 +43,10 @@ use yii\base\Object;
  *
  * @property \luya\cms\Menu $menu Application menu component object.
  *
- * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
-class Query extends Object
+class Query extends Object implements QueryOperatorFieldInterface
 {
     /**
      * @var array An array with all available where operators.
@@ -67,6 +67,27 @@ class Query extends Object
         }
 
         return $this->_menu;
+    }
+    
+    /**
+     * Helper method to retrieve only the root elements for a given query.
+     *
+     * @return \luya\cms\menu\Query
+     */
+    public function root()
+    {
+        return $this->where([self::FIELD_PARENTNAVID => 0]);
+    }
+    
+    /**
+     * Helper method to define the container to retrieve all elements from.
+     *
+     * @param string $alias The alias name from a given container to retrieve items from.
+     * @return \luya\cms\menu\Query
+     */
+    public function container($alias)
+    {
+        return $this->where([self::FIELD_CONTAINER => $alias]);
     }
 
     private $_where = [];

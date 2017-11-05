@@ -5,13 +5,12 @@
  */
 .ng-wig,
 [class^="nw-"] {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
 }
-
 
 /**
  *   main wrapper for the editor
@@ -20,11 +19,10 @@
  *
  */
 .ng-wig {
-  display: block;
-  padding: 0;
-  margin: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
 }
-
 
 /**
  *  styling for toolbar and its items
@@ -34,37 +32,37 @@
  *
  */
 .nw-toolbar {
-  display: block;
-  margin: 0 !important;
-  padding: 0 !important;
-  list-style: none !important;
-  font-size: 12px;
-  color: #6B7277;
+    background: -webkit-linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
+    background: -moz-linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 0 0;
+    color: #6B7277;
 
-  background: -webkit-linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
-  background:    -moz-linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
-  background:         linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
-  border: 1px solid #CCCCCC;
-  border-radius: 3px 3px 0 0;
+    display: block;
+    font-size: 12px;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .nw-toolbar__item {
-  display: inline-block;
-  vertical-align: top;
-  margin: 0;
+    border-right: 1px solid #DEDEDE;
+    display: inline-block;
+    margin: 0;
 
-  border-right: 1px solid #DEDEDE;
+    vertical-align: top;
 }
 
 .nw-toolbar label {
-  line-height: 30px;
-  display: inline-block;
-  padding: 0 6px 0 3px;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0 6px 0 3px;
 }
 
 .nw-toolbar input[type=checkbox] {
-  vertical-align: -3px;
-  margin-right: -1px;
+    margin-right: -1px;
+    vertical-align: -3px;
 }
 
 /**
@@ -76,70 +74,70 @@
  *
  */
 .nw-editor {
-  display: table;
-  /* Default when height is not set */
-  height: 300px;
-  background: #fff;
-  cursor: text;
-  width:100%;
+    background: #fff;
+    /* Default when height is not set */
+    cursor: text;
+    display: table;
+    height: 300px;
+    width: 100%;
 }
 
 .nw-editor-container {
-  border: 1px solid #CCCCCC;
-  border-top: none;
-  border-radius: 0 0 3px 3px;
-  position: relative;
+    border: 1px solid #CCCCCC;
+    border-radius: 0 0 3px 3px;
+    border-top: none;
+    position: relative;
 }
 
 .nw-editor__res {
-  min-height: 100%;
-  padding: 0 8px;
-  display: table-cell;
+    display: table-cell;
+    min-height: 100%;
+    padding: 0 8px;
 }
 
 .nw-editor__src,
 .nw-editor__res {
-  width: 100%;
-  outline: none;
-  box-sizing: border-box;
-  border: none;
-  margin: 0;
+    border: none;
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    width: 100%;
 }
 
 .nw-editor__src-container {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .nw-editor__src {
-  height: 100%;
-  resize: none;
-  padding: 0 8px;
+    height: 100%;
+    padding: 0 8px;
+    resize: none;
 }
 
 .nw-editor--fixed .nw-editor {
-  display:block;
-  overflow-y: auto;
+    display: block;
+    overflow-y: auto;
 }
 
 .nw-editor--fixed .nw-editor__res {
-  padding: 1px 8px;
-  display:block;
+    display: block;
+    padding: 1px 8px;
 }
 
 .nw-invisible {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .nw-editor--fixed .nw-invisible {
-  display: none;
+    display: none;
 }
 
 .nw-editor.nw-disabled {
-	cursor: default;
+    cursor: default;
 }
 
 /**
@@ -151,84 +149,94 @@
  *
  */
 .nw-button {
-  -webkit-appearance: none;
-  -moz-appearance:    none;
-  appearance:         none;
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
 
-  display: block;
-  width: 30px;
-  height: 30px;
-  margin: 0;
-  padding: 0;
-  opacity: 0.5;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    display: block;
+    font-size: 10px;
+    height: 30px;
 
-  background-color: transparent;
-  background-position: center center;
-  background-repeat: no-repeat;
-  border: none;
-  border-radius: 2px;
+    margin: 0;
 
-  font-size: 0;
+    opacity: 0.5;
+    padding: 0;
+    position: relative;
+    width: 30px;
+    -webkit-appearance: none;
 
-  cursor: pointer;
-  
-  font-family: 'Material Icons';
+    -moz-appearance: none;
+
+    appearance: none;
 }
 
 .nw-button:before {
-  font-size: 12px;
+    @include material-icons;
+    font-size: 20px;
+    height: 30px;
+    line-height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 30px;
+    background-color: $white;
+    color: $black;
 }
 
 .nw-button.bold:before {
-  content: "format_bold";
+    content: "format_bold";
 }
 
 .nw-button.italic:before {
-content: "format_italic";
+    content: "format_italic";
 }
 
 .nw-button.list-ul:before {
-content: "format_list_bulleted";
+    content: "format_list_bulleted";
 }
 
 .nw-button.list-ol:before {
-content: "format_list_numbered";
+    content: "format_list_numbered";
 }
 
 .nw-button.link:before {
-content: "insert_link";
+    content: "insert_link";
 }
 
 .nw-button.font-color:before {
-  content: '\f031';
+    content: '\f031';
 }
 
 .nw-button.nw-button--source:before {
-  content: '\f040';
+    content: '\f040';
 }
 
 .nw-button.clear-styles:before {
-  content: '\f12d';
+    content: '\f12d';
 }
 
 .nw-button:focus {
-  outline: none;
+    outline: none;
 }
 
 .nw-button:hover,
 .nw-button.nw-button--active {
-  opacity: 1
+    opacity: 1
 }
 
 .nw-button--active {
-  background-color: #EEEEEE;
+    background-color: #EEEEEE;
 }
 
 .nw-button:disabled {
-  cursor: default;
+    cursor: default;
 }
+
 .nw-button:disabled:hover {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 /**
@@ -238,30 +246,32 @@ content: "insert_link";
  *
  */
 .nw-content {
-  padding: 12px;
-  margin: 0;
+    font-family: sans-serif;
+    font-size: 14px;
 
-  font-family: sans-serif;
-  font-size: 14px;
-  line-height: 24px;
+    line-height: 24px;
+    margin: 0;
+    padding: 12px;
 }
 
 .nw-select {
-  height: 30px;
-  padding: 6px;
-  color: #555;
-  background-color: inherit;
-  border: 0;
+    background-color: inherit;
+    border: 0;
+    color: #555;
+    height: 30px;
+    padding: 6px;
 }
 
 .nw-select:disabled {
-	opacity: 0.5;
+    opacity: 0.5;
 }
 
-.nw-select:focus { outline: none; }
+.nw-select:focus {
+    outline: none;
+}
 
 [contenteditable]:empty:before {
-    content: attr(placeholder);
     color: grey;
+    content: attr(placeholder);
     display: inline-block;
 }

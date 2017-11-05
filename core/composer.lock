@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5f24ab45124910ec8a69fb76ba50096",
+    "content-hash": "ff1fe47263f4d5cf94be10002a0f7a76",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -39,16 +39,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.3.6",
+            "version": "3.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/Inputmask.git",
-                "reference": "e42852f4afa01a80815394a5b2f9ce504c1a8d0b"
+                "reference": "791d84990c4a98df1597e9d155be53a3725805dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/e42852f4afa01a80815394a5b2f9ce504c1a8d0b",
-                "reference": "e42852f4afa01a80815394a5b2f9ce504c1a8d0b",
+                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/791d84990c4a98df1597e9d155be53a3725805dd",
+                "reference": "791d84990c4a98df1597e9d155be53a3725805dd",
                 "shasum": ""
             },
             "require": {
@@ -160,16 +160,16 @@
         },
         {
             "name": "cebe/markdown",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
+                "reference": "25b28bae8a6f185b5030673af77b32e1163d5c6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
-                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/25b28bae8a6f185b5030673af77b32e1163d5c6e",
+                "reference": "25b28bae8a6f185b5030673af77b32e1163d5c6e",
                 "shasum": ""
             },
             "require": {
@@ -216,20 +216,20 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14T20:40:20+00:00"
+            "time": "2017-07-16T21:13:23+00:00"
         },
         {
             "name": "curl/curl",
-            "version": "1.6.1",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "96f5bd47bab8d76f1883c257c6659091987ef662"
+                "reference": "16e8489b048ef57ffbf74591a201f7808155b2db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/96f5bd47bab8d76f1883c257c6659091987ef662",
-                "reference": "96f5bd47bab8d76f1883c257c6659091987ef662",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/16e8489b048ef57ffbf74591a201f7808155b2db",
+                "reference": "16e8489b048ef57ffbf74591a201f7808155b2db",
                 "shasum": ""
             },
             "require": {
@@ -271,7 +271,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2017-04-03T15:04:35+00:00"
+            "time": "2017-08-12T11:44:08+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -322,16 +322,16 @@
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "dd78b248c200624e4707c92c6b8d90a21cf50915"
+                "reference": "d38751971accbea722897c82e7670fa41214c317"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/dd78b248c200624e4707c92c6b8d90a21cf50915",
-                "reference": "dd78b248c200624e4707c92c6b8d90a21cf50915",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d38751971accbea722897c82e7670fa41214c317",
+                "reference": "d38751971accbea722897c82e7670fa41214c317",
                 "shasum": ""
             },
             "require": {
@@ -360,7 +360,7 @@
             "authors": [
                 {
                     "name": "Basil Suter",
-                    "email": "git@nadar.io"
+                    "email": "basil@nadar.io"
                 }
             ],
             "description": "LUYA composer core",
@@ -368,23 +368,24 @@
                 "composer",
                 "luya"
             ],
-            "time": "2017-05-02T15:02:16+00:00"
+            "time": "2017-09-02T07:47:35+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.23",
+            "version": "v5.2.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "7115df4a6f76281109ebe352900c42403b728bb4"
+                "reference": "2baf20b01690fba8cf720c1ebcf9b988eda50915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/7115df4a6f76281109ebe352900c42403b728bb4",
-                "reference": "7115df4a6f76281109ebe352900c42403b728bb4",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2baf20b01690fba8cf720c1ebcf9b988eda50915",
+                "reference": "2baf20b01690fba8cf720c1ebcf9b988eda50915",
                 "shasum": ""
             },
             "require": {
+                "ext-ctype": "*",
                 "php": ">=5.0.0"
             },
             "require-dev": {
@@ -444,7 +445,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-03-15T19:32:56+00:00"
+            "time": "2017-08-28T11:12:07+00:00"
         },
         {
             "name": "yiisoft/yii2",

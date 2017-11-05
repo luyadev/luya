@@ -1,7 +1,6 @@
+
 <?php
-
 return [
-
     'view_index_add_type' => 'Tipo de página',
     'view_index_type_page' => 'Página',
     'view_index_type_module' => 'Módulo',
@@ -53,16 +52,13 @@ return [
     'btn_abort' => 'Cancelar',
     'btn_refresh' => 'Actualizar',
     'btn_save' => 'Guardar',
-
 // added translation in 1.0.0-beta3:
-
     'model_navitemmodule_module_name_label' => 'Nombre del módulo',
     'model_navitem_title_label' => 'Título de página',
     'model_navitem_alias_label' => 'Ruta URL',
     'model_navitempage_layout_label' => 'Diseño',
     'model_navitemredirect_type_label' => 'Tipo de redirección',
     'model_navitemredirect_value_label' => 'Objetivo de redirección',
-
     'view_index_add_title' => 'Añadir nueva página',
     'view_index_add_page_from_language' => 'Añadir página de idioma',
     'view_index_add_page_from_language_info' => '¿Le gustaría copiar el contenido de otro idioma al crear esta página?',
@@ -90,17 +86,10 @@ return [
     'js_page_block_update_ok' => 'El bloque «%name%», a sido actualizado!',
     'js_page_block_remove_ok' => 'El bloque «%name%», a sido eliminado!',
     'js_page_block_visbility_change' => 'La visibilidad de «%name%», se cambió correctamente.',
-
 // added translation in 1.0.0-beta4:
-
 // added translation in 1.0.0-beta5:
-
-
     'view_update_blockholder_clipboard' => 'Portapapeles',
-
 // added translation in 1.0.0-beta6:
-
-
     'js_page_block_delete_confirm' => '¿Desea borrar el bloque «%name%»?',
     'view_index_page_meta_keywords' => 'Palabra clave de análisis de SEO (ejemplo: restaurante, pizza, Italia)',
     'current_version' => 'Versión actual',
@@ -119,15 +108,10 @@ return [
     'js_version_update_success' => 'La versión se ha actualizado correctamente.',
     'js_version_error_empty_fields' => 'Uno o más campos están vacíos o tienen un valor no válido.',
     'js_version_create_success' => 'La nueva versión ha sido guardada con éxito.',
-
 // added translation in 1.0.0-beta7:
-
-
     'view_index_create_page_please_choose' => 'Por favor seleccione',
     'view_index_sidebar_autopreview' => 'Vista previa',
-
 // added translation in 1.0.0-beta8
-
     'module_permission_add_new_page' => 'Crear nueva página',
     'module_permission_update_pages' => 'Editar página',
     'module_permission_edit_drafts' => 'Editar borrador',
@@ -150,15 +134,11 @@ return [
     'button_create_version' => 'Crear versión',
     'button_update_version' => 'Actualizar versión',
     'menu_group_item_env_permission' => 'Permisos de página',
-
 // rc1
-
     'page_update_actions_deepcopy_text' => 'Crear una copia de la página actual con todo su contenido. Todos los idiomas se copiarán, pero sólo la versión publicada.',
     'page_update_actions_deepcopy_btn' => 'Crear copia',
-
 // rc2
     'model_navitem_title_tag_label' => 'Etiqueta de título (SEO)',
-
 // rc3
     'model_navitempage_empty_draft_id' => 'No se puede crear la página desde la plantilla de borrador vacía.',
     'view_update_variation_select' => 'No se seleccionó ninguna variación de bloque',
@@ -184,10 +164,13 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configurar',
     'view_update_block_tooltip_delete' => 'Eliminar',
     'view_update_block_tooltip_close' => 'Cerrar edición',
-<<<<<<< HEAD
-=======
     
-// 1.0.0
-    'cmsadmin_dashboard_lastupdate' => 'Last page updates'
->>>>>>> 5e78ac2d0410bbf74e427290851725b557b8b51a
+    // 1.0.0
+    'cmsadmin_dashboard_lastupdate' => 'Last page updates',
+    'cmsadmin_settings_homepage_title' => 'Default Page',
+    'cmsadmin_settings_trashpage_title' => 'Delete Page',
+    'cmsadmin_settings_modal_title' => 'Settings',
+    'cmsadmin_item_settings_titleslug' => 'Page Informations',
+    'cmsadmin_created_at' => 'Created at',
+    'cmsadmin_version_remove' => 'Remove version',
 ];

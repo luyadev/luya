@@ -11,6 +11,7 @@ use luya\helpers\FileHelper;
  * StorageImage Model.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class StorageImage extends ActiveRecord
 {
@@ -55,7 +56,7 @@ final class StorageImage extends ActiveRecord
     {
         $image = Yii::$app->storage->getImage($this->id);
         if ($image) {
-            if (!FileHelper::unlink($image->serverSource)) {
+            if (!Yii::$app->storage->fileSystemDeleteFile($image->serverSource)) {
                 return false; // unable to unlink image
             }
         } else {

@@ -37,7 +37,7 @@ class UrlManager extends \yii\web\UrlManager
     /**
      * @var integer In order to build urls, the nav item id from cms module can be stored in the UrlManager as `$contextNavItemId`.
      *
-     * This context setter is called in {{luya\cms\frontend\base\Controller::renderItem}} method and is used when calling {{\luya\web\UrlManager::createUrl}} method.
+     * This context setter is called in {{luya\cms\frontend\base\Controller::renderItem()}} method and is used when calling {{\luya\web\UrlManager::createUrl}} method.
      */
     public $contextNavItemId;
 
@@ -218,7 +218,7 @@ class UrlManager extends \yii\web\UrlManager
      *
      * The URL created is a relative one. Use [[createAbsoluteUrl()]] to create an absolute URL.
      *
-     * Note that unlike [[\yii\helpers\Url::toRoute()]], this method always treats the given route
+     * Note that unlike {{luya\helpers\Url::toRoute()}}, this method always treats the given route
      * as an absolute route.
      *
      * @see \yii\web\UrlManager::createUrl()

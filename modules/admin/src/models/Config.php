@@ -12,10 +12,17 @@ use luya\traits\RegistryTrait;
  * @property string $value
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class Config extends ActiveRecord
 {
     use RegistryTrait;
+    
+    const CONFIG_LAST_IMPORT_TIMESTAMP = 'last_import_timestamp';
+    
+    const CONFIG_SETUP_COMMAND_TIMESTAMP = 'setup_command_timestamp';
+    
+    const CONFIG_INSTALLER_VENDOR_TIMESTAMP = 'installer_vendor_timestamp';
     
     /**
      * @inheritdoc

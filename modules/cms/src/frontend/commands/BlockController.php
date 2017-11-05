@@ -142,6 +142,8 @@ class BlockController extends \luya\console\Command
             'link' => 'Generats a linkable internal or external resource (use Link Injector!)',
             'cms-page' => 'Returns CMS page selection tree (only when cms is registered).',
             'slug' => 'Slugified input field which allows only lower chars and - for url rules.',
+            'radio' => 'Generate radio inputs which allows to select and return a single value.',
+            'multiple-inputs' => 'Nesting all types inside an array.'
         ];
     }
     
@@ -168,6 +170,8 @@ class BlockController extends \luya\console\Command
             'link' => 'self::TYPE_LINK',
             'cms-page' => 'self::TYPE_CMS_PAGE',
             'slug' => 'self::TYPE_SLUG',
+            'radio' => 'self::TYPE_RADIO',
+            'multiple-inputs' => 'self::TYPE_MULTIPLE_INPUTS',
         ];
     }
 
@@ -175,9 +179,11 @@ class BlockController extends \luya\console\Command
     {
         return [
             'select' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
+            'radio' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
             'checkbox-array' => "BlockHelper::checkboxArrayOption([1 => 'Label for 1'])",
             'image-upload' => "['no_filter' => false]",
             'image-array-upload' => "['no_filter' => false]",
+            'radio' => "BlockHelper::radioArrayOption([1 => 'Label for 1'])",
         ];
     }
     

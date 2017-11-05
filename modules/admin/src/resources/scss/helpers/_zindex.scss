@@ -1,0 +1,3 @@
+@function z-index($element: "default") {
+    @return index($zindex-elements, $element) * 10;
+}

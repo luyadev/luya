@@ -6,9 +6,12 @@ use Yii;
 use yii\web\UrlRule;
 
 /**
+ * Routing Rule for UrlManager.
+ *
  * UrlRule to enable default routing behavior as the CatchAllRule will catch default routing behavior otherwhise.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class RouteBehaviorUrlRule extends \yii\web\UrlRule
 {

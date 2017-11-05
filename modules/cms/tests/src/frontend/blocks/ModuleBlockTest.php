@@ -2,7 +2,6 @@
 
 namespace cmstests\src\frontend\blocks;
 
-
 use luya\cms\frontend\blocks\ModuleBlock;
 use cmstests\BlockTestCase;
 

@@ -47,7 +47,7 @@ return [
     'layout_debug_table_value' => 'Valeur',
     'layout_filemanager_save_dir' => 'Enregistrer ?',
     'layout_filemanager_remove_dir' => 'Supprimer le répertoire ?',
-    'layout_filemanager_remove_dir_not_empty' => 'Le répertoire n\'est pas vide <br/> Voulez-vous le supprimer ?',
+    'layout_filemanager_remove_dir_not_empty' => 'Le répertoire n\'est pas vide <br/> Voulez-vous le supprimer ?',  // Update in RC4
     'layout_filemanager_remove_selected_files' => 'Supprimer les fichiers selectionnés',
     'layout_filemanager_move_selected_files' => 'Déplacer dans',
     'layout_filemanager_upload_error' => 'Erreur lors du chargement du fichier',
@@ -236,9 +236,30 @@ return [
     'js_link_set_value' => 'Définir le lien',
     'callback_button_file_download_widget_success' => 'Le fichier a été préparé. Vous pouvez le télécharger maintenant.',
     
-    /* 1.0.0 */
+// rc4
+
     'api_storage_file_upload_folder_error' => 'Erreur lors de l\'enregistrement du fichier. Une erreur d\'autorisation pourrait être la cause de ce problème. Assurez-vous que le dossier de stockage est accessible en écriture !',
     'model_user_oldpassword' => 'Ancien mot de passe',
     'js_account_update_profile_success' => 'Les informations de profil ont été mises à jour avec succès',
     'dashboard_lastlogin_title' => 'Dernières connexions de l\'utilisateur',
+    'layout_useronline_activity' => 'Activity',
+    'layout_useronline_inactive' => 'inactive',
+    'login_ssl_info' => 'Website uses encrypted secure connection.',
+    'locked_info' => 'Someone already editing',
+    'menu_dashboard' => 'Dashboard',
+    'js_link_not_set' => 'No Link selected',
+        
+// 1.0.0
+        
+    'ngrest_button_delete' => 'Delete',
+    'js_dir_manager_rm_file_confirm_title' => 'Remove file',
+    'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
+    'link_dir_target' => 'Link target',
+    'link_dir_target_same' => 'Same window',
+    'link_dir_target_blank' => 'New window',
+    'view_index_redirect_file' => 'file',
+    'view_index_redirect_mail' => 'e-mail address',
+    'view_index_redirect_mail_help' => 'Please enter a valid e-mail address.',
+    'menu_button_search' => 'Search',
+    'layout_btn_user_settings' => 'Paramètres',
 ];

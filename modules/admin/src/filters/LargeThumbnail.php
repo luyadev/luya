@@ -8,6 +8,7 @@ use luya\admin\base\Filter;
  * Admin Module default Filter: Large Thumbanil (800xnull)
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class LargeThumbnail extends Filter
 {

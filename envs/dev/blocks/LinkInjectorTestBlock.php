@@ -2,7 +2,6 @@
 
 namespace app\blocks;
 
-
 use luya\cms\injectors\LinkInjector;
 
 /**

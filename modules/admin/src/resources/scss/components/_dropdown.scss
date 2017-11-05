@@ -1,0 +1,15 @@
+.dropdown-menu {
+    width: auto;
+    min-width: 0;
+
+    &-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+.dropdown-item {
+    .material-icons + span {
+        margin-top: 2px;
+    }
+}

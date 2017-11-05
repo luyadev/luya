@@ -13,6 +13,7 @@ use luya\cms\models\NavContainer;
  * Menu Api provides commont tasks to retrieve cmsadmin menu data and cms group permissions setting tasks.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class MenuController extends \luya\admin\base\RestController
 {

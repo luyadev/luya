@@ -4,6 +4,7 @@ namespace luya\admin\ngrest\plugins;
 
 use luya\admin\ngrest\base\Plugin;
 use luya\TagParser;
+use luya\helpers\Html;
 
 /**
  * Create a textarea input for a given field.
@@ -23,6 +24,7 @@ use luya\TagParser;
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Textarea extends Plugin
 {
@@ -30,6 +32,11 @@ class Textarea extends Plugin
      * @var string Html5 placholder attribute value to set and example for the user
      */
     public $placeholder;
+    
+    /**
+     * @var boolean Whether the value should be encoded after find by {{luya\helpers\Html::encode()}} or not.
+     */
+    public $encoding = true;
 
     /**
      * @var boolean Defines whether the textarea output value should be nl2br or not. This only will be triggerd after find (in frontend output).
@@ -71,6 +78,10 @@ class Textarea extends Plugin
      */
     public function onAfterFind($event)
     {
+        if ($this->encoding) {
+            $event->sender->setAttribute($this->name, Html::encode($event->sender->getAttribute($this->name)));
+        }
+        
         if ($this->nl2br) {
             $event->sender->setAttribute($this->name, nl2br($event->sender->getAttribute($this->name)));
         }

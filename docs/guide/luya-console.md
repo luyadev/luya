@@ -10,13 +10,13 @@ To execute a console command open your Terminal and go into the base directory o
 
 Where *command* is one of the following commands below:
 
-### Available commands
+## Standard built in commands
 
 Global LUYA commands:
 
 |Command|Description
 |--------|---------
-|`import`|Updates permission, import cms blocks, updates cms layouts, updates image filters. Create your custom [importer](app-module.md#import-method) to run jobs while importing. Import is base of the main concepts of LUYA. It tryes to synchronize your project data into the database. This way you can track your files within version control systems and you don't have to copy database between enviroments.
+|`import`|Updates permission, cms blocks, cms layouts, image filters. Import is a one of the main concepts of LUYA. Its saving your project data into the database. This way you can track your files within VCS (Git, SVN) and import them. [Create Import Commmand](app-module.md#import-method).
 |`migrate`|Execute all migrations from all modules, updates your database if any. The main difference to the Yii migrate command is its going to collect all migrations from all modules.
 |`migrate/create migration1 modulename`|Create new migration file named `mymigration1` in the module `modulename`: `migrate/create mymigration1 modulename`.
 |`health`|Tests all basic directory if they are writeable and existing.
@@ -49,7 +49,9 @@ CMS Module commands:
 
 ## Create your own command
 
-You can always create your custom command. Custom commands are stored within a module in the folder `commands`. The main differenc is that commands can only be execute from the console command and does not have view files to render, an example command. We assume you have moulde *yourmodule* with a contorller *NotifyController* with two actions *actionIndex* and *actionBar*:
+You can create your own custom commands. Custom commands are stored as actions of controllers in the `commands` directory of a module. Commands can only be executed from the console and do not have view files to render.
+
+Let's assume you have a module `yourmodule` with a controller `NotifyController` that includes two actions `actionIndex` and `actionBar` (stored in the file `NotifyController.php` within the `commands` directory of your module):
 
 
 ```php
@@ -93,4 +95,16 @@ If you want to create a command without a module you can just add the the Comman
 ],
 ```
 
-Now you could run the sync command like all other commands with `./vendor/bin/luya sync`.   
+Now you could run the sync command like all other commands with `./vendor/bin/luya sync`
+
+### Views and UrlManger
+
+Its very often case where you like to render a view and send a mail inside a console command, like batch processing some data (newsletter for example). Therfore your views use the {{luya\helpers\Url}} class in order to generate urls.
+
+As the console command does not know your webservers URL and there is no parameter of your webserver url, therefore luya has a special configuration property called {{luya\traits\ApplicationTrait::$consoleHostInfo}}.
+
+This value will be used in when defined as baseUrl for the urlManager.
+
+```php
+'consoleHostInfo' => 'https://luya.io',
+```

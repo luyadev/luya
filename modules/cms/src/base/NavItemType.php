@@ -10,7 +10,9 @@ use yii\base\Controller;
  *
  * @property \yii\base\Controller $controller The controller object.
  * @property array $options Optional settings for the nav item type.
+ *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 abstract class NavItemType extends \yii\db\ActiveRecord
 {

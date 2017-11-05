@@ -2,7 +2,6 @@
 
 namespace crawlerests;
 
-
 use luyatests\data\MessageFileComperatorTrait;
 use PHPUnit\Framework\TestCase;
 

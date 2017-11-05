@@ -21,6 +21,7 @@ use luya\cms\admin\Module;
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class NavItemController extends \luya\admin\base\RestController
 {
@@ -47,8 +48,8 @@ class NavItemController extends \luya\admin\base\RestController
 
     public function actionLastUpdates()
     {
-        return NavItem::find()->select(['cms_nav_item.title', 'timestamp_update', 'update_user_id', 'nav_id'])->limit(10)->orderBy(['timestamp_update' => SORT_DESC])->joinWith(['updateUser' => function($q) {
-            $q->select(['firstname', 'lastname', 'id']);  
+        return NavItem::find()->select(['cms_nav_item.title', 'timestamp_update', 'update_user_id', 'nav_id'])->limit(10)->orderBy(['timestamp_update' => SORT_DESC])->joinWith(['updateUser' => function ($q) {
+            $q->select(['firstname', 'lastname', 'id']);
         }])->asArray(true)->all();
     }
     
@@ -102,9 +103,10 @@ class NavItemController extends \luya\admin\base\RestController
     
     public function actionChangePageVersionLayout()
     {
-        $pageItemId = Yii::$app->request->post('pageItemId');
-        $layoutId = Yii::$app->request->post('layoutId');
-        $alias = Yii::$app->request->post('alias');
+        $params =  Yii::$app->request->bodyParams;
+        $pageItemId = $params['pageItemId'];
+        $layoutId =  $params['layoutId'];
+        $alias =  $params['alias'];
 
         $model = NavItemPage::findOne(['id' => $pageItemId]);
         
@@ -194,7 +196,7 @@ class NavItemController extends \luya\admin\base\RestController
         $model = NavItem::find()->where(['id' => $navItemId])->one();
 
         if (!$model) {
-            throw new Exception('Unable to find item id '.$navItemId);
+            throw new Exception('Unable to find nav item id '.$navItemId . ' in order to update data.');
         }
         $model->setParentFromModel();
         $model->attributes = Yii::$app->request->post();
@@ -277,15 +279,10 @@ class NavItemController extends \luya\admin\base\RestController
             // store updated type model and nav item model!
             return $model->save();
         } else {
-            // complety switch the type of this item (delete old type)
-            $oldType = $model->getType();
             // set the new type
             $model->nav_item_type = $navItemType;
             switch ($navItemType) {
                 case 1:
-                    if ($oldType) {
-                        $oldType->delete();
-                    }
                     $model->nav_item_type_id = 0;
                     return $model->update();
                 case 2:
@@ -293,9 +290,6 @@ class NavItemController extends \luya\admin\base\RestController
                     $this->setPostAttribute($typeModel, 'module_name');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
-                    }
-                    if ($oldType) {
-                        $oldType->delete();
                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
@@ -308,9 +302,6 @@ class NavItemController extends \luya\admin\base\RestController
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
-                     if ($oldType) {
-                         $oldType->delete();
-                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
                     return $model->update();
@@ -340,11 +331,25 @@ class NavItemController extends \luya\admin\base\RestController
         ];
     }
 
+    /**
+     * Move an item to a container.
+     *
+     * @param unknown $moveItemId
+     * @param unknown $droppedOnCatId
+     * @return boolean[]
+     */
     public function actionMoveToContainer($moveItemId, $droppedOnCatId)
     {
         return ['success' => Nav::moveToContainer($moveItemId, $droppedOnCatId)];
     }
 
+    /**
+     * Move an item before an existing item.
+     *
+     * @param unknown $moveItemId
+     * @param unknown $droppedBeforeItemId
+     * @return boolean[]|mixed[]
+     */
     public function actionMoveBefore($moveItemId, $droppedBeforeItemId)
     {
         $result = Nav::moveToBefore($moveItemId, $droppedBeforeItemId);
@@ -352,9 +357,17 @@ class NavItemController extends \luya\admin\base\RestController
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
+        
         return ['success' => $result];
     }
 
+    /**
+     * Move an item after an existing item.
+     *
+     * @param unknown $moveItemId
+     * @param unknown $droppedAfterItemId
+     * @return boolean[]|mixed[]
+     */
     public function actionMoveAfter($moveItemId, $droppedAfterItemId)
     {
         $result = Nav::moveToAfter($moveItemId, $droppedAfterItemId);
@@ -362,9 +375,17 @@ class NavItemController extends \luya\admin\base\RestController
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
+        
         return ['success' => $result];
     }
 
+    /**
+     * Move an item to a child item (make the parent of).
+     *
+     * @param unknown $moveItemId
+     * @param unknown $droppedOnItemId
+     * @return boolean[]|mixed[]
+     */
     public function actionMoveToChild($moveItemId, $droppedOnItemId)
     {
         $result = Nav::moveToChild($moveItemId, $droppedOnItemId);
@@ -372,16 +393,17 @@ class NavItemController extends \luya\admin\base\RestController
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
+        
         return ['success' => $result];
     }
-
-    /*
-    public function actionGetBlock($blockId)
-    {
-        return NavItemPage::getBlock($blockId);
-    }
-    */
     
+    /**
+     * Toggle visibilty of a block.
+     *
+     * @param unknown $blockId
+     * @param unknown $hiddenState
+     * @return number|\yii\db\false|boolean
+     */
     public function actionToggleBlockHidden($blockId, $hiddenState)
     {
         $block = NavItemPageBlockItem::findOne($blockId);
@@ -394,7 +416,7 @@ class NavItemController extends \luya\admin\base\RestController
     }
 
     /**
-     * Get full constructed of a nav item.
+     * Get full constructed path of a nav item.
      *
      * @param $navId
      * @return string Path
@@ -407,15 +429,19 @@ class NavItemController extends \luya\admin\base\RestController
             $data .= $node->title;
             $parentNavId = $navId;
             while ($parentNavId != 0) {
-                $parentNavId = Nav::findOne($parentNavId)->parent_nav_id;
-                if ($parentNavId != 0) {
-                    $node = NavItem::find()->where(['nav_id' => $parentNavId])->one();
-                    if ($parentNavId) {
-                        $data = $node->title . '/' . $data;
+                $parentNavIdModel = Nav::findOne($parentNavId);
+                if ($parentNavIdModel) {
+                    $parentNavId = $parentNavIdModel->parent_nav_id;
+                    if ($parentNavId != 0) {
+                        $node = NavItem::find()->where(['nav_id' => $parentNavId])->one();
+                        if ($parentNavId) {
+                            $data = $node->title . '/' . $data;
+                        }
                     }
                 }
             }
         }
+        
         return $data;
     }
 

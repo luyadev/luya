@@ -2,7 +2,6 @@
 
 namespace luya\cms\menu;
 
-
 use Iterator;
 use yii\base\Object;
 use luya\cms\models\Nav;
@@ -13,9 +12,8 @@ use luya\helpers\ArrayHelper;
  *
  * The main goal is to to createa an object for the item on the current() iteration.
  *
- * @since 1.0.0-beta1
- *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class QueryIterator extends Object implements Iterator
 {

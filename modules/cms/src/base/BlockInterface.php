@@ -8,6 +8,7 @@ namespace luya\cms\base;
  * The below methods are required in order to create your own block abstraction layer.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface BlockInterface
 {
@@ -121,6 +122,38 @@ interface BlockInterface
      * @return array
      */
     public function getConfigPlaceholdersExport();
+    
+    /**
+     * Returns the placeholder based rows.
+     *
+     * This is used to render the grid system in the admin ui.
+     *
+     * The array which is returned contains rows which contains cols.
+     *
+     * ```php
+     * return [
+     *     [], // row 1
+     *     [], // row 2
+     * ];
+     * ```
+     *
+     * each row can contain columns
+     *
+     * ```php
+     * return [
+     *     [ // row 1
+     *         ['var' => 'left', 'col' => 6],
+     *         ['var' => 'right', 'col' => 6]
+     *     ],
+     *     [ // row 2
+     *         ['var' => 'bottom', 'col' => 12]
+     *     ],
+     * ];
+     * ```
+     *
+     * @return array Returns an array where each element is a row containing informations about the placeholders.
+     */
+    public function getConfigPlaceholdersByRowsExport();
 
     /**
      * Whether cache is enabled for this block or not.

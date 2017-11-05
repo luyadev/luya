@@ -5,7 +5,6 @@ namespace luya\admin\components;
 use yii\base\Object;
 use luya\base\AdminModuleInterface;
 
-
 /**
  * Builder class for the Administration Menu/Navigation.
  *
@@ -18,7 +17,7 @@ use luya\base\AdminModuleInterface;
  * public function getMenu()
  * {
  *     return (new AdminMenuBuilder($this))
- *         ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin-storage-index', 'admin/storage/index')
+ *         ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin/storage/index')
  *         ->node('menu_node_system', 'layers')
  *             ->group('menu_group_access')
  *                 ->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')
@@ -33,7 +32,7 @@ use luya\base\AdminModuleInterface;
  * }
  * ```
  *
- * @since 1.0.0-RC2
+ * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
 class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
@@ -54,15 +53,9 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      */
     protected $moduleContext;
     
-    /**
-     * @var array List of all permission APIs.
-     */
-    public $permissionApis = [];
     
-    /**
-     * @var array List of all permission Routes.
-     */
-    public $permissionRoutes = [];
+    
+    
     
     /**
      * @param \luya\base\AdminModuleInterface $module
@@ -72,6 +65,26 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     {
         $this->moduleContext = $module;
         parent::__construct($config);
+    }
+    
+    /**
+     * @var array List of all permission APIs.
+     */
+    private $_permissionApis = [];
+    
+    public function getPermissionApis()
+    {
+        return $this->_permissionApis;
+    }
+    
+    /**
+     * @var array List of all permission Routes.
+     */
+    private $_permissionRoutes = [];
+    
+    public function getPermissionRoutes()
+    {
+        return $this->_permissionRoutes;
     }
     
     /**
@@ -106,19 +119,18 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      *
      * @param string $name The name of the node, all names will process trough the `Yii::t` function with its module name as prefix.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
-     * @param string $template Whether to use a custom template or not.
      * @param string $route The route to the template which is going to be render by angular, example `cmsadmin/default/index`.
      * @param string $searchModelClass The path to the model to search inside the admin global search, must implement the {{luya\admin\base\GenericSearchInterface}}.
      * @return \luya\admin\components\AdminMenuBuilder
      */
-    public function nodeRoute($name, $icon, $template, $route, $searchModelClass = null)
+    public function nodeRoute($name, $icon, $route, $searchModelClass = null)
     {
         $this->_pointers['node'] = self::$index;
         $this->_menu[self::$index] = [
             'id' => self::$index,
             'moduleId' => $this->moduleContext->id,
-            'template' => $template,
-            'routing' => $template ? 'custom' : 'default',
+            'template' => $route, // as the template is equal to the route of the node which is loaded
+            'routing' => 'custom',
             'alias' => $name,
             'icon' => $icon,
             'permissionRoute' => $route,
@@ -126,7 +138,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'searchModelClass' => $searchModelClass,
         ];
     
-        $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
+        $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
         self::$index++;
         return $this;
@@ -169,7 +181,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'options' => $this->verifyOptions($options),
         ];
     
-        $this->permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
+        $this->_permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
     
         return $this;
     }
@@ -197,7 +209,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'options' => $this->verifyOptions($options),
         ];
     
-        $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
+        $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
         return $this;
     }

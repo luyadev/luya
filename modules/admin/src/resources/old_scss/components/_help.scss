@@ -1,0 +1,46 @@
+.help {
+	display: inline-block;
+	position: relative;
+	cursor: help;
+	white-space: nowrap;
+	z-index: 500;
+}
+
+.help__button {
+	padding: 5px 5px 2px 5px;
+	border-radius: 5px 5px 0 0;
+	color: color("shades", "black");
+
+	.help:hover & {
+		background-color: color("blue", "darken-3");
+		color: color("shades", "white");
+	}
+}
+
+.help__text {
+	background-color: color("blue", "darken-3");
+	color: color("shades", "white");
+	display: none;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 5px 10px;
+	width: 500px;
+	white-space: normal;
+	border-radius: 5px 0 5px 5px;
+
+	.help--is-right-aligned & {
+		right: 0;
+		left: auto;
+		transform: translateX(0);
+	}
+
+	.help--is-left-aligned & {
+		left: 0;
+		transform: translateX(0);
+	}
+
+	.help:hover & {
+		display: block;
+	}
+}

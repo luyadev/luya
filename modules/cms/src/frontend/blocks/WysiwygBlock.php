@@ -7,9 +7,12 @@ use luya\cms\frontend\blockgroups\TextGroup;
 use luya\cms\base\PhpBlock;
 
 /**
- * WYSIWYG Block with ng-wig.
+ * WYSIWYG Text Editor Input Block.
+ *
+ * This block provides a very basic What you see is what you get input.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 final class WysiwygBlock extends PhpBlock
 {

@@ -3,8 +3,20 @@
 namespace luya\errorapi\models;
 
 use luya\errorapi\Module;
+use yii\db\ActiveRecord;
 
-class Data extends \yii\db\ActiveRecord
+/**
+ * Error Data Model.
+ *
+ * @property integer $id
+ * @property string $identifier
+ * @property string $error_json
+ * @property integer $timestamp_create
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
+class Data extends ActiveRecord
 {
     public $message;
 
@@ -16,11 +28,30 @@ class Data extends \yii\db\ActiveRecord
     {
         return 'error_data';
     }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['error_json'], 'required'],
+            [['error_json'], 'string'],
+            [['timestamp_create'], 'integer'],
+            [['identifier'], 'string', 'max' => 255],
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'identifier' => 'Identifier',
+            'error_json' => 'Error Json',
+            'timestamp_create' => 'Timestamp Create',
         ];
     }
 

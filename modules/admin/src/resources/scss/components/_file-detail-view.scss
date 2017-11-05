@@ -1,0 +1,77 @@
+.file-detail-view {
+    background-color: color(white);
+    bottom: 0;
+    display: block;
+    max-width: 400px;
+    padding: $content-padding-y $content-padding-x;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: .25s ease-in-out transform, .25s ease-in-out box-shadow;
+    width: 100%;
+    z-index: z-index(file-detail);
+
+    &.open {
+        border-left: 1px solid color(gray);
+        transform: translateX(0);
+    }
+}
+
+.file-detail-view-head {
+    align-items: center;
+    display: flex;
+}
+
+.file-detail-view-close {
+    cursor: pointer;
+    position: absolute;
+    right: $content-padding-x;
+
+    &:hover {
+        color: $red-dark;
+    }
+}
+
+.file-detail-view-arrows {
+    background-color: color(white);
+    border-radius: $border-radius 0 0 $border-radius;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .25s ease-in-out transform, .25s ease-in-out box-shadow;
+
+    .file-detail-view.open & {
+        border: solid color(gray);
+        border-width: 1px 0 1px 1px;
+        transform: translateX(-100%);
+    }
+
+    user-select: none;
+}
+
+.file-detail-view-arrow {
+    padding: 8px;
+    transition: .25s ease-in-out background-color, .15s ease-in-out color;
+
+    &.disabled {
+        color: map-get($grays, 300);
+    }
+
+    &:not(.disabled):hover {
+        background-color: theme-color(dark);
+        color: color(white);
+        cursor: pointer;
+    }
+
+    &:after {
+        background-color: #fff;
+        bottom: 0;
+        content: "";
+        position: absolute;
+        right: -5px;
+        top: 0;
+        width: 5px;
+    }
+}

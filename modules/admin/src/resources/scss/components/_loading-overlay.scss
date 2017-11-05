@@ -1,26 +1,30 @@
 .loading-overlay {
-	  position: fixed;
-	  top: 0;
-	  left: 0;
-	  right: 0;
-	  bottom: 0;
-	  background-color: rgba(0,0,0,0.8);
-	  z-index: 1000;
+    background-color: rgb(66, 66, 74);
+    bottom: 0;
+    color: $white;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: z-index(overlay);
+
 }
 
-.loading-overlay__content {
-	position: absolute;
-	top: 50%;
-	width: 100%;
-	text-align: center;
-	transform: translateY(-50%);
+.loading-overlay-title {
+    font-size: 40px;
+    font-weight: 400;
+    margin: 150px 0 0 0;
+    text-align: center;
+    color: $white;
 }
 
-.loading-overlay__title {
-	text-align: center;
- 	line-height: 1.4;
-	color: #fff;
-}
-.filemanager__loader {
-	margin-top: 100px;
+.loading-logo {
+    background: url('../../images/luyalogo-animation-6.gif');
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
 }

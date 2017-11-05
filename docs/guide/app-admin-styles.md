@@ -1,265 +1,113 @@
 # Admin CSS Styles
 
-This style guide is going to help you creating customized forms and buttons when working with the LUYA admin modules.
-
-## Input Fields
-
-##### Text Input
-
-![input--text](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--text.jpg "Einfaches Inputfeld")
-
-```html
-<div class="input input--text">
-    <label class="input__label" for="[input-id]">[input-label]</label>
-    <div class="input__field-wrapper">
-        <input class="input__field" id="[input-id]" name="[input-name]" type="text" placeholder="[input-placeholder]" />
-    </div>
-</div>
-```
-
-##### Textarea
-
-![input--textarea](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--textarea.jpg "Einfaches Textfeld")
-
-```html
-<div class="input input--textarea">
-    <label class="input__label" for="[textarea-id]">[textarea-label]</label>
-    <div class="input__field-wrapper">
-        <textarea class="input__field" id="[textarea-id]" name="[textarea-name]" placeholder="[textarea-placeholder]"></textarea>
-    </div>
-</div>
-```
-
-##### Select
-
-![input--select](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--select.jpg "Select dropdown")
-
-```html
-<div class="input input--select">
-    <label class="input__label" for="[input-id]">[input-label]</label>
-    <select class="input__field" id="[input-id]" name="[input-name]">
-        <option selected="selected" value="0">[input-option-default]</option>
-        <option value="m">[input-option-second]</option>
-    </select>
-</div>
-```
-
-##### Radio buttons
-
-![input--radios](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--radios.jpg "Radio group")
-
-```html
-<div class="input input--radios">
-    <label class="input__label">[input-label]</label>
-    <div class="input__field-wrapper">
-        <input id="[radio-id-1]" name="[radio-name-1]" type="radio" value="[radio-value-1]"><label for="[radio-id-1]">[radio-label-1]</label> <br />
-        <input id="[radio-id-2]" name="[radio-name-2]" type="radio" value="[radio-value-2]"><label for="[radio-id-2]">[radio-label-2]</label> <br />
-        <input id="[radio-id-3]" name="[radio-name-3]" type="radio" value="[radio-value-3]"><label for="[radio-id-3]">[radio-label-3]</label>
-    </div>
-</div>
-```
-
-##### Single Checkbox
-
-![input--single-checkbox](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--single-checkbox.jpg "Alleinstehende Checkbox - Gut für Einstellungen (On / Off)")
-
-```html
-<div class="input input--single-checkbox">
-    <input id="[checkbox-id]" name="[checkbox-name]" type="checkbox" />
-    <label class="input__label" for="[checkbox-id]">[checkbox-label]</label>
-</div>
-```
-
-##### Checkboxes
-
-![input--multiple-checkboxes](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--multiple-checkboxes.jpg "Checkbox Gruppe")
-
-```html
-<div class="input input--multiple-checkboxes">
-    <label class="input__label">[input-label]</label>
-    <div class="input__field-wrapper">
-        <input id="[checkbox-id-1]" name="[checkbox-name-1]" type="checkbox" />
-        <label for="[checkbox-id-1]">[checkbox-label-1]</label> <br />
-        <input id="[checkbox-id-2]" name="[checkbox-name-2]" type="checkbox" />
-        <label for="[checkbox-id-2]">[checkbox-label-2]</label> <br />
-        <input id="[checkbox-id-3]" name="[checkbox-name-3]" type="checkbox" />
-        <label for="[checkbox-id-3]">[checkbox-label-3]</label>
-    </div>
-</div>
-```
-
-#### Label above the form
-
-By default all labels of forms are display on the left side with the input to the right. In order to use a the label above the input you can to the following: lediglich dem `.input` div die Klasse `.input--vertical` hinzufügen.  
-  
-Example form with label above:
-
-![input--text--vertical](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--text--vertical.jpg "Einfaches Inputfeld, Label darüber")
-
-```html
-<div class="input input--text input--vertical">
-    <label class="input__label" for="[input-id]">[input-label]</label>
-    <div class="input__field-wrapper">
-        <input class="input__field" id="[input-id]" name="[input-name]" type="text" placeholder="[input-placeholder]" />
-    </div>
-</div>
-```
-
-## Icons
-
-We have implemented the google material design icons, you can check the reference for all icons [https://www.google.com/design/icons/](https://www.google.com/design/icons/).
-
-##### Default Icons
-| Usage (action context) | Icon                                                                          | Example                                          |
-| ------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------- |
-| Save                 | [check](https://www.google.com/design/icons/#ic_check)                        | `<i class="material-icons">check</i>`             |
-| Edit                | [create](https://www.google.com/design/icons/#ic_create)                      | `<i class="material-icons">create</i>`            |
-| Delete/trash                   | [remove](https://www.google.com/design/icons/#ic_remove)                      | `<i class="material-icons">remove</i>`            |
-| Cance                 | [cancel](https://www.google.com/design/icons/#ic_cancel)                      | `<i class="material-icons">cancel</i>`            |
-| Settings             | [settings](https://www.google.com/design/icons/#ic_settings)                  | `<i class="material-icons">settings</i>`          |
-| Add (in Listen)    | [add](https://www.google.com/design/icons/#ic_add)                            | `<i class="material-icons">add</i>`               |
-| Remove (in Listen)     | [remove](https://www.google.com/design/icons/#ic_remove)                      | `<i class="material-icons">remove</i>`            |
-| Online                    | [cloud_queue](https://www.google.com/design/icons/#ic_cloud_queue)            | `<i class="material-icons">cloud_queue</i>`       |
-| Offline                   | [cloud_off](https://www.google.com/design/icons/#ic_cloud_off)                | `<i class="material-icons">cloud_off</i>`         |
-| Visible                  | [visibility](https://www.google.com/design/icons/#ic_visibility)              | `<i class="material-icons">visibility</i>`        |
-| Invisible                | [visibility_off](https://www.google.com/design/icons/#ic_visibility_off)      | `<i class="material-icons">visibility_off</i>`    |
-
-##### Icons and Buttons combination
-
-If you are going to use icons within a text you have to pull them to a side, therefore use the predefined class `left` or `right`.
-
-```html
-<button class="btn-flat">Example Label <i class="material-icons right">check</i></button>
-```
+All [Bootstrap 4](https://v4-alpha.getbootstrap.com/) css style classes are available in der Admin Interface. On top of this LUYA provides generic css classes for buttons with predefined icons and colors.
 
 ## Buttons
 
-You can use all buttons from the [Materialize CSS Design Guide](http://materializecss.com/buttons.html):
-
-##### Default Buttons 
-
-![Default button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn.png "Default Button")  
-
+We extend the bootstrap 4 `btn` class by some predefined colors assigned to a function. The following *function button* classes are available in the whole admin UI:
 
 ```html
-<button class="btn">
-    Button default
-</button>
+<button type="button" class="btn btn-save">Save</button>
+<button type="button" class="btn btn-delete">Delete</button>
+<button type="button" class="btn btn-cancel">Cancel</button>
+<button type="button" class="btn btn-edit">Edit</button>
+<button type="button" class="btn btn-add">Add</button>
+<button type="button" class="btn btn-help">Help</button>
+<button type="button" class="btn btn-download">Download</button>
+<button type="button" class="btn btn-upload">Upload</button>
+<button type="button" class="btn btn-config">Configuration</button>
 ```
 
-##### Flat-Buttons
-
-![Flat button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn--flat.png "Flat Button")  
+You can either combine the btn class with predefined icons, to do so simply add the css class `btn-icon` to the above listed buttons and the related icon will appear.
 
 ```html
-<button class="btn-flat">
-    Button Flat
-</button>
+<button type="button" class="btn btn-save btn-icon">Save</button>
 ```
 
-##### Small Buttons
+> Please keep in mind that `<input type="button" class="btn btn-icon btn-save" value="Button label" />` does <b>not</b> work because input fields don't support the pseudo css class *:after*. So use the `button` tag instead of `input`.
 
-![Small button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn--small.png "Kleine Button")  
+If you would like to display a button with a generic predefined icon use `btn-icon` without a defined class:
 
 ```html
-<button class="btn btn--small">
-    Button small
-</button>
+<button type="button" class="btn btn-icon"><i class="material-icons">check</i>OK</button>
 ```
 
-##### Bold-Buttons
-
-![Bold button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn--bold.png "Fett Button")  
+and if you want a button `btn-icon` without a background simply add `btn-link`:
 
 ```html
-<button class="btn btn--bold">
-    Button bold
-</button>
+<button type="button" class="btn btn-icon btn-link"><i class="material-icons">check</i>Link</button>
 ```
 
-##### Rounded-Buttons
-
-![Round button with icon](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn-floating.png "Runde Button mit Icon")  
-
-```
-<button class="btn btn-floating">
-    <i class="material-icons">done</i>
-</button>
-```
-
-The rounded buttons can not be combined with the `btn--small` class.
-
-Info divs
----------
-
-**Info**
-
-![alert alert--info](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/alert.alert--info.jpg "alert alert--info")  
+Below some example combinations
 
 ```html
-<div class="alert alert--info">Lorem ipsum dolor sit amet...</div>
+<button type="button" class="btn btn-icon btn-save">Save button with icon and text</button>
+<button type="button" class="btn btn-cancel">Cancel button without icon</button>
+<button type="button" class="btn btn-icon btn-delete"></button> // Delete button without label but predefined icon and colors.
 ```
+ 
+## Icons
 
-**Warning**
+The below tables shows you, what icon stands for what. The full set of usable icons is available under https://material.io/icons.
 
-![alert alert--warning](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/alert.alert--warning.jpg "alert alert--warning")  
+| Description | Icon            | Name         |
+| ------------- | ------------- | ------------- |
+| Upload icon | <i class="material-icons">file_upload</i> | file_upload |
+| Download icon | <i class="material-icons">file_download</i> | file_download |
+| Edit icon | <i class="material-icons">edit</i> | edit |
+| Add icon | <i class="material-icons">add_box</i> | add_box |
+| Add icon for button | <i class="material-icons">add</i> | add |
+| Delete icon | <i class="material-icons">delete</i> | delete |
+| Save / Confirm icon | <i class="material-icons">check.png | check |
+| Abort / Clear icon | <i class="material-icons">clear</i>  | clear |
+| Config icon | <i class="material-icons">settings</i> | settings |
+| Settings icon | <i class="material-icons">more_vert</i> | more_vert |
+| Visible icon | <i class="material-icons">visibility</i> | visibility |
+| Invisible icon | <i class="material-icons">visibility_off</i> | visibility_off |
+| Online icon | <i class="material-icons">cloud_queue</i> | cloud_queue |
+| Offline icon | <i class="material-icons">cloud_off</i> | cloud_off |
+| Sort icon | <i class="material-icons">keyboard_arrow_down</i> <i class="material-icons">keyboard_arrow_up</i> | keyboard\_arrow\_down / keyboard\_arrow\_up |
+| Folder icon | <i class="material-icons">folder</i> | folder |
+| Create folder | <i class="material-icons">create_new_folder</i> | create_new_folder |
+
+
+## Forms
+
+In order to build 
 
 ```html
-<div class="alert alert--warning">Lorem ipsum dolor sit amet...</div>
+<div class="form-group form-side-by-side">
+    <div class="form-side form-side-label">
+        <label>Label</label>
+    </div>
+    <div class="form-side">
+        <input type="text" class="form-control" />
+    </div>
+</div>
 ```
-
-**Success**
-
-![alert alert--success](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/alert.alert--success.jpg "alert alert--success")  
-
-```html
-<div class="alert alert--success">Lorem ipsum dolor sit amet...</div>
-```
-
-**Danger**
-
-![alert alert--danger](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/alert.alert--danger.jpg "alert alert--danger")  
-
-```html
-<div class="alert alert--danger">Lorem ipsum dolor sit amet...</div>
-```
-
-## Badges
-
-You can use all the [Badges from Materialize](http://materializecss.com/badges.html).
 
 ## Tables
 
-You can use all the [Tables from Materialize](http://materializecss.com/table.html).
+You can use all the classes provided by bootstrap: https://getbootstrap.com/docs/4.0/content/tables/.
+
+### Responsive tables
+
+In addition to the bootstrap `table-responsive` version we have a wrapper to improve the overall behaviour of tables on mobile.  
+You can use the wrapper as following:
 
 ```html
-<table class="striped responsive-table hoverable">
-  <thead>
-    <tr>
-      <th>Table head 1 </th>
-      <th>Table head 2 </th>
-      <th>Table head 3 </th>
-      <th>Table head 4 </th>
-      <th>Table head 5 </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Table cell 1</td>
-      <td>Table cell 2</td>
-      <td>Table cell 3</td>
-      <td>Table cell 4</td>
-      <td>Table cell 5</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive-wrapper">
+    <table class="table ..."></table>
+</div>
 ```
 
-## Colors
+In this case you don't have to add the `table-responsive` class to the table.
 
-You can use the [Google Material Colors](https://www.google.com/design/spec/style/color.html#).  
+## General Colors (in progress)
 
-+ Green: `#4CAF50`
-+ Red: `#EF5350`
-+ LUYA blue `#2196F3`
-+ LUYA bright-blue `#b3e5fc`
+
+| Element | Color | HEX Color|used for|
+|---------|-------|---------|---------|
+|`<button type="button" class="btn btn-save">Save</button>`|green|#28a745|save, create, upload|
+
+

@@ -29,7 +29,7 @@ use luya\base\CoreModuleInterface;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module implements CoreModuleInterface
+final class Module extends \luya\base\Module implements CoreModuleInterface
 {
     /**
      * @inheritdoc

@@ -4,7 +4,7 @@ namespace luya\admin\base;
 
 /**
  * Generic Search Interface.
- * 
+ *
  * A searchable Active Record must integrate this Interface in order to make usage of the Administration Search UI.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -21,7 +21,7 @@ interface GenericSearchInterface
 
     /**
      * The Query which is going to be performend to the concret implementation.
-     * 
+     *
      * @param string $searchQuery An HTML encoded string to lookup the database table.
      */
     public function genericSearch($searchQuery);

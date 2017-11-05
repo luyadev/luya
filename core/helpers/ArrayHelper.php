@@ -7,10 +7,13 @@ namespace luya\helpers;
  *
  * Extends the {{yii\helpers\ArrayHelper}} class by some usefull functions like:
  *
- * + {{luya\helpers\ArrayHelper::toObject}}
- * + {{luya\helpers\ArrayHelper::arrayUnshiftAssoc}}
- * + {{luya\helpers\ArrayHelper::typeCast}}
- * + {{luya\helpers\ArrayHelper::search}}
+ * + {{luya\helpers\ArrayHelper::toObject()}}
+ * + {{luya\helpers\ArrayHelper::arrayUnshiftAssoc()}}
+ * + {{luya\helpers\ArrayHelper::typeCast()}}
+ * + {{luya\helpers\ArrayHelper::search()}}
+ * + {{luya\helpers\ArrayHelper::searchColumn()}}
+ * + {{luya\helpers\ArrayHelper::searchColumns()}}
+ * + {{luya\helpers\ArrayHelper::generateRange()}}
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -113,7 +116,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     /**
      * Search for a Column Value inside a Multidimension array and return the array with the found key.
      *
-     * If several results with the same key value exists, the first result is picked.
+     * Compare to searchColumns() this function return will return the first found result.
      *
      * ```php
      * $array = [
@@ -144,6 +147,8 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     /**
      * Search for columns with the given search value, returns the full array with all valid items.
      *
+     * Compare to searchColumn() this function return will return all found results.
+     *
      * > This function is not casesensitive, which means FOO will match Foo, foo and FOO
      *
      * ```php
@@ -152,7 +157,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      *     ['name' => 'nadar', 'userId' => 1],
      * ];
      *
-     * $result = ArrayHelper::searchColumn($array, 'userId', '1');
+     * $result = ArrayHelper::searchColumns($array, 'userId', '1');
      *
      * // output:
      * // array (

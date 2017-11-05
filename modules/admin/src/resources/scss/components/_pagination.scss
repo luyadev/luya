@@ -1,30 +1,74 @@
 .pagination {
-    margin: 30px 0;
-}
+    display: block;
+    line-height: 0;
+    text-align: center;
+    width: 100%;
+    user-select: none;
 
-.pagination__number {
-    cursor: pointer;
-    margin: 0 2px;
-
-    &.active a {
-        background-color: color('red', 'lighten-2');
-        color: color('shades', 'white');
-    }
-
-    &:hover a {
-        background-color: color('red', 'lighten-2');
-        color: color('shades', 'white');
+    .dropdown-menu {
+        max-height: 150px;
+        overflow: auto;
     }
 }
 
-.pagination__arrow {
-    cursor: pointer;
+.pagination-list {
+    align-items: center;
+    border-radius: 0;
+    display: inline-block;
+    justify-content: center;
+    line-height: 1em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-    a {
-        line-height: 0;
+    .table + & {
+        margin-top: 30px;
+    }
+    .tab-pane .table + & {
+        margin-bottom: -15px;
     }
 
-    &:hover a {
-        color: color('red', 'base');
+    &-small {
+        display: none;
+    }
+    &.not-enough-space {
+        display: none;
+
+        & + .pagination-list-small {
+            display: inline-block;
+        }
+    }
+}
+
+.page-item {
+    float: left;
+
+    &:not(:first-of-type) {
+        margin-left: 1px;
+    }
+}
+
+.page-link {
+    cursor: pointer;
+
+    &:hover {
+        color: theme-color(primary) !important;
+    }
+
+    .active > & {
+        background-color: theme-color(primary) !important;
+        color: color(white) !important;
+    }
+    .active > &:hover {
+        color: color(white) !important;
+    }
+}
+
+.page-item-icon .page-link {
+    font-size: 20px;
+    padding: 3px 8px 6px 8px;
+
+    .material-icons {
+        margin-top: -2px;
     }
 }

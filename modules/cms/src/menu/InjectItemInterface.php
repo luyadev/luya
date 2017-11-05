@@ -11,6 +11,7 @@ namespace luya\cms\menu;
  * In order to see an example of how to use the injection of items read the [[app-menu.md]] Guide in the injectors section.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 interface InjectItemInterface
 {

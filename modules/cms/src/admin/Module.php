@@ -4,14 +4,19 @@ namespace luya\cms\admin;
 
 use Yii;
 use luya\console\interfaces\ImportControllerInterface;
-use luya\cms\admin\importers\BlockGroupImporter;
 use luya\cms\admin\importers\BlockImporter;
 use luya\cms\admin\importers\CmslayoutImporter;
 use luya\cms\admin\importers\PropertyConsistencyImporter;
 use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminMenuBuilder;
 
-class Module extends \luya\admin\base\Module implements CoreModuleInterface
+/**
+ * CMS Admin Module.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
+final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * @var string The version label name of the first version, version alias is running through yii2 messaging system.
@@ -28,6 +33,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     const ROUTE_CONFIG = 'cmsadmin/config/index';
 
+    /**
+     * @inheritdoc
+     */
     public $apis = [
         'api-cms-admin' => 'luya\cms\admin\\apis\\AdminController',
         'api-cms-navitempageblockitem' => 'luya\cms\admin\\apis\\NavItemPageBlockItemController',
@@ -46,7 +54,16 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public $dashboardObjects = [
         [
-            'template' => '<table class="striped"><thead></thead><tr><th>Page</th><th>User</th><th>Time</ht></tr></thead><tr ng-repeat="item in data"><td><a ui-sref="custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})">{{item.title}}</a></td><td>{{item.updateUser.firstname}} {{item.updateUser.lastname}}</td><td>{{item.timestamp_update * 1000 | date:\'short\'}}</td></tr></table>',
+            'class' => 'luya\admin\dashboard\ListDashboardObject',
+            'template' => '
+				<a ng-repeat="item in data" ui-sref="custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})" class="list-group-item list-group-item-action flex-column align-items-start">
+				    <div class="d-flex w-100 justify-content-between">
+				      <h5 class="mb-1">{{item.title}}</h5>
+				      <small>{{item.timestamp_update * 1000 | date:\'short\'}}</small>
+				    </div>
+				    <small>by {{item.updateUser.firstname}} {{item.updateUser.lastname}}</small>
+				</a>
+			',
             'dataApiUrl' => 'admin/api-cms-navitem/last-updates',
             'title' => ['cmsadmin', 'cmsadmin_dashboard_lastupdate'],
         ],
@@ -102,19 +119,20 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             'js_added_translation_ok', 'js_added_translation_error', 'js_page_add_exists', 'js_page_property_refresh', 'js_page_confirm_delete', 'js_page_delete_error_cause_redirects', 'js_state_online', 'js_state_offline',
             'js_state_hidden', 'js_state_visible', 'js_state_is_home', 'js_state_is_not_home', 'js_page_item_update_ok', 'js_page_block_update_ok', 'js_page_block_remove_ok', 'js_page_block_visbility_change', 'js_page_block_delete_confirm',
             'js_version_update_success', 'js_version_error_empty_fields', 'js_version_create_success', 'js_version_delete_confirm', 'js_version_delete_confirm_success',
-            'view_index_page_success', 'js_config_update_success', 'js_page_update_layout_save_success', 'js_page_create_copy_success',
+            'view_index_page_success', 'js_config_update_success', 'js_page_update_layout_save_success', 'js_page_create_copy_success', 'view_update_block_tooltip_delete',
+            'cmsadmin_settings_trashpage_title', 'cmsadmin_version_remove',
         ];
     }
-
-    public $translations = [
-        [
-            'prefix' => 'cmsadmin*',
-            'basePath' => '@cmsadmin/messages',
-            'fileMap' => [
-                'cmsadmin' => 'cmsadmin.php',
-            ],
-        ],
-    ];
+    
+    /**
+     * @inheritdoc
+     */
+    public static function onLoad()
+    {
+        self::registerTranslation('cmsadmin*', '@cmsadmin/messages', [
+            'cmsadmin' => 'cmsadmin.php',
+        ]);
+    }
     
     /**
      * @var array Defined blocks to hidde from the cmsadmin. Those blocks are not listed in the Page Content blocks overview. You can override this
@@ -183,15 +201,23 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         $this->_blockVariation = $_variations;
     }
     
+    /**
+     * Getter method for blockVarionts.
+     *
+     * @return mixed[]|array[]
+     */
     public function getBlockVariations()
     {
         return $this->_blockVariation;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))
-            ->nodeRoute('menu_node_cms', 'content_copy', 'cmsadmin/default/index', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
+            ->nodeRoute('menu_node_cms', 'note_add', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
             ->node('menu_node_cmssettings', 'settings')
                 ->group('menu_group_env')
                     ->itemRoute('menu_group_item_env_permission', "cmsadmin/permission/index", 'gavel')
@@ -203,6 +229,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
                     ->itemApi('menu_group_item_elements_blocks', 'cmsadmin/block/index', 'format_align_left', 'api-cms-block');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extendPermissionApis()
     {
         return [
@@ -210,6 +239,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function extendPermissionRoutes()
     {
         return [
@@ -227,7 +259,6 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     public function import(ImportControllerInterface $importer)
     {
         return [
-            BlockGroupImporter::className(),
             BlockImporter::className(),
             CmslayoutImporter::className(),
             PropertyConsistencyImporter::className(),
@@ -243,7 +274,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public static function t($message, array $params = [])
     {
-        return Yii::t('cmsadmin', $message, $params);
+        return parent::baseT('cmsadmin', $message, $params);
     }
     
     private static $_authorUserId = 0;
