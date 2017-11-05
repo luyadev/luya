@@ -101,7 +101,7 @@ class LocalFileSystem extends BaseFileSystemStorage
 	/**
 	 * @inheritdoc
 	 */
-	public function saveFile($source, $fileName)
+	public function fileSystemSaveFile($source, $fileName)
 	{
 		$savePath = $this->getServerPath() . '/' . $fileName;
 		
@@ -121,7 +121,7 @@ class LocalFileSystem extends BaseFileSystemStorage
 	/**
 	 * @inheritdoc
 	 */
-	public function replaceFile($oldSource, $newSource)
+	public function fileSystemReplaceFile($oldSource, $newSource)
 	{
 		$toDelete = $oldSource . uniqid('oldfile') . '.bkl';
 		if (rename($oldSource, $toDelete)) {
@@ -136,7 +136,7 @@ class LocalFileSystem extends BaseFileSystemStorage
 	/**
 	 * @inheritdoc
 	 */
-	public function deleteFile($source)
+	public function fileSystemDeleteFile($source)
 	{
 		return FileHelper::unlink($source);
 	}

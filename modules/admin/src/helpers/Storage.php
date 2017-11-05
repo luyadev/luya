@@ -178,7 +178,7 @@ class Storage
             return false;
         }
 
-        return Yii::$app->storage->replaceFile($oldFileSource, $newFileSource);
+        return Yii::$app->storage->fileSystemReplaceFile($oldFileSource, $newFileSource);
     }
     
     /**

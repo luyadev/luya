@@ -69,7 +69,7 @@ final class StorageFile extends ActiveRecord
         $file = Yii::$app->storage->getFile($this->id);
         
         if ($file) {
-            if (!Yii::$app->storage->deleteFile($file->serverSource)) {
+            if (!Yii::$app->storage->fileSystemDeleteFile($file->serverSource)) {
                 Logger::error("Unable to remove storage file: " . $file->serverSource);
             }
         }

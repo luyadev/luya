@@ -134,7 +134,7 @@ abstract class BaseFileSystemStorage extends Component
 	 * @param string $fileName The new of the file on the file system like `MyNewFile.jpg`.
 	 * @return boolean Whether the file has been stored or not.
 	 */
-	abstract public function saveFile($source, $fileName);
+	abstract public function fileSystemSaveFile($source, $fileName);
 	
 	/**
 	 * Replace an existing file source with a new one on the filesystem.
@@ -143,14 +143,14 @@ abstract class BaseFileSystemStorage extends Component
 	 * @param string $newSource The absolute file source path and filename, like `/tmp/upload/myfile.jpg`.
 	 * @return boolean Whether the file has replaced stored or not.
 	 */
-	abstract public function replaceFile($oldSource, $newSource);
+	abstract public function fileSystemReplaceFile($oldSource, $newSource);
 	
 	/**
 	 * Delete a given file source on the filesystem.
 	 * @param string $source The absolute file source path and filename, like `/tmp/upload/myfile.jpg`.
 	 * @return boolean Whether the file has been deleted or not.
 	 */
-	abstract public function deleteFile($source);
+	abstract public function fileSystemDeleteFile($source);
 	
 	/**
 	 * @var array The mime types which will be rejected.
@@ -428,7 +428,7 @@ abstract class BaseFileSystemStorage extends Component
 
 		$newName = implode([$fileData['secureFileName'].'_'.$fileData['hashName'], $fileData['extension']], '.');
 
-		if (!$this->saveFile($fileSource, $newName)) {
+		if (!$this->fileSystemSaveFile($fileSource, $newName)) {
 			return false;
 		}
 
