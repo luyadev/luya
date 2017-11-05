@@ -24,7 +24,7 @@ return [
     'cat_title_create_error' => 'Будь ласка виберіть назву категорії.',
     'tag' => 'Теги',
     'tag_title' => 'Тег',
-    'tag_title_create_error' => 'Будьласка віберіть назву тега.',
+    'tag_title_create_error' => 'Будьласка виберіть назву тега.',
     
 // 1.0.0
     
