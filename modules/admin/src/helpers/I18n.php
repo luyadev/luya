@@ -97,7 +97,7 @@ class I18n
     
     /**
      * Find the corresponding element inside an array for the current active language.
-     * 
+     *
      * ```php
      * // assume the default language is `en`
      * $output = I18n::findActive(['de' => 'Hallo', 'en' => 'Hello']);
@@ -134,7 +134,7 @@ class I18n
     
     /**
      * Decodes a json string and returns the current active language item.
-     * 
+     *
      * ```php
      * // assume the default language is `en`
      * $output = I18n::decodeActive('{"de":"Hallo","en":"Hello"}');

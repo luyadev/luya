@@ -81,7 +81,7 @@ class Api extends RestActiveController
         $actions['update']['class'] = 'luya\admin\ngrest\base\actions\UpdateAction';
         $actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
         if ($this->enableCors) {
-        	$actions['options']['class'] = 'luya\admin\ngrest\base\actions\OptionsAction';
+            $actions['options']['class'] = 'luya\admin\ngrest\base\actions\OptionsAction';
         }
         return $actions;
     }

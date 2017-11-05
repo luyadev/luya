@@ -69,7 +69,6 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ob_end_clean();
         
         $this->assertContains('{"@graph":[{"name":"John Doe","givenName":null,"familyName":null}]}', $out);
-        
     }
     
     public function testEvent()
@@ -86,6 +85,5 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ob_end_clean();
         
         $this->assertContains('{"@graph":[{"locations":[{"name":"My Location","addresses":[{"street":null,"zip":null,"city":"Aarau"}]}]}]}', $out);
-        
     }
 }

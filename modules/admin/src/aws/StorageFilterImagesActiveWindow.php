@@ -48,7 +48,7 @@ final class StorageFilterImagesActiveWindow extends ActiveWindow
     }
     
     /**
-     * 
+     *
      * @return array
      */
     public function callbackRemove()

@@ -44,7 +44,7 @@ class AlbumImage extends \yii\db\ActiveRecord
     
     /**
      * Return image object if exists.
-     * 
+     *
      * @return \luya\admin\image\Item|boolean
      */
     public function getImage()

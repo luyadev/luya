@@ -305,7 +305,7 @@ class Item extends ItemAbstract implements LinkInterface
     
     /**
      * @deprecated Deprecated in 1.0.1
-     * 
+     *
      * @param boolean $scheme
      * @return string
      */
@@ -318,7 +318,7 @@ class Item extends ItemAbstract implements LinkInterface
     
     /**
      * Path to the source with sheme includes, means including server location.
-     * 
+     *
      * @return string The absolute source url to the file inside the storage folder with nice Urls.
      */
     public function getSourceAbsolute()

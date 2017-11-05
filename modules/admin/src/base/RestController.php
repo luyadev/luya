@@ -8,7 +8,7 @@ use luya\rest\Controller;
 
 /**
  * Base class for RestControllers.
- * 
+ *
  * provides the basic functionality to access and serialize this controller via rest
  * api. Does not define the method names!
  *
@@ -27,19 +27,19 @@ use luya\rest\Controller;
  */
 class RestController extends Controller implements UserBehaviorInterface
 {
-	/**
-	 * @inheritdoc
-	 */
-	public function init()
-	{
-		parent::init();
-		
-		$this->enableCors = Yii::$app->auth->cors;
-	}
-	
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        
+        $this->enableCors = Yii::$app->auth->cors;
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function userAuthClass()
     {
         return Yii::$app->adminuser;

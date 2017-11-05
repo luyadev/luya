@@ -53,7 +53,7 @@ class TagActiveWindow extends ActiveWindow
     
     /**
      * Getter tableName.
-     * 
+     *
      * @return unknown|string
      */
     public function getTableName()
@@ -67,7 +67,7 @@ class TagActiveWindow extends ActiveWindow
     
     /**
      * Setter tableName.
-     * 
+     *
      * @param unknown $tableName
      */
     public function setTableName($tableName)

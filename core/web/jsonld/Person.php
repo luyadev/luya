@@ -6,7 +6,7 @@ class Person extends BaseThing
 {
     private $_name;
     
-    public function setName($name)   
+    public function setName($name)
     {
         $this->_name = $name;
         

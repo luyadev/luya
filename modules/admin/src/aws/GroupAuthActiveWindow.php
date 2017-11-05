@@ -46,7 +46,7 @@ class GroupAuthActiveWindow extends ActiveWindow
     }
 
     /**
-     * 
+     *
      * @return boolean[]
      */
     public function callbackSaveRights()
@@ -77,7 +77,7 @@ class GroupAuthActiveWindow extends ActiveWindow
     }
 
     /**
-     * 
+     *
      * @return number[][][]|string[]|array[]
      */
     public function callbackGetRights()
@@ -89,7 +89,7 @@ class GroupAuthActiveWindow extends ActiveWindow
     }
 
     /**
-     * 
+     *
      * @return string|array
      */
     private function getAuthData()
@@ -110,7 +110,7 @@ class GroupAuthActiveWindow extends ActiveWindow
     }
 
     /**
-     * 
+     *
      * @return number[][]
      */
     private function getRightsData()

@@ -62,7 +62,7 @@ class Album extends NgRestModel
     {
         parent::init();
         
-        $this->on(self::EVENT_BEFORE_DELETE, function($event) {
+        $this->on(self::EVENT_BEFORE_DELETE, function ($event) {
             $this->unlinkAll('albumImages', true);
         });
     }
@@ -112,9 +112,9 @@ class Album extends NgRestModel
         ];
     }
 
-   /**
-    * @inheritdoc
-    */
+    /**
+     * @inheritdoc
+     */
     public function ngRestActiveWindows()
     {
         return [
@@ -135,7 +135,7 @@ class Album extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            [['list'], ['title', 'sort_index', 'is_highlight', 'cover_image_id']],  
+            [['list'], ['title', 'sort_index', 'is_highlight', 'cover_image_id']],
             [['update', 'create'], ['cat_id', 'title', 'description', 'cover_image_id', 'is_highlight']],
             [['delete'], true],
         ];
@@ -143,7 +143,7 @@ class Album extends NgRestModel
     
     /**
      * Get the Album Category.
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getCat()
@@ -153,7 +153,7 @@ class Album extends NgRestModel
     
     /**
      * Get Album Images.
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getAlbumImages()
@@ -163,7 +163,7 @@ class Album extends NgRestModel
     
     /**
      * Return the detail link for the current model.
-     * 
+     *
      * @return string
      */
     public function getDetailLink()

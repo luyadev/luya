@@ -292,7 +292,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             ],
             'auth' => [
                 'class' => Auth::class,
-            	'cors' => $this->cors,
+                'cors' => $this->cors,
             ],
         ];
     }

@@ -97,7 +97,6 @@ class Url extends \luya\helpers\Url
         if (is_array($route)) {
             $routeParams = array_merge($route, $params);
         } else {
-            
             trigger_error('third argument $params is deprecated use the array notation', E_USER_DEPRECATED);
             
             $routeParams = [$route];

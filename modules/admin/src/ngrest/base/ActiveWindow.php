@@ -159,9 +159,9 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     
     /**
      * If no label value is provided via getter/setter, this value is used.
-     * 
+     *
      * You can override this method in order to provide a default label for your Active Window.
-     * 
+     *
      * @return boolean|string
      */
     public function defaultLabel()
@@ -173,7 +173,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     
     /**
      * Setter method for the Label.
-     * 
+     *
      * @param string $label The active window label.
      */
     public function setLabel($label)
@@ -191,9 +191,9 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     
     /**
      * If no extenion is set, this value is used.
-     * 
+     *
      * You can override this method in order to provide a default icon for your Active Window.
-     * 
+     *
      * @return string
      */
     public function defaultIcon()

@@ -12,7 +12,7 @@ use luya\rest\ActiveController;
 
 /**
  * Base class for Rest Active Controllers.
- * 
+ *
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
  * change behaviours and overwrite the indexAction.
  *
@@ -28,9 +28,9 @@ class RestActiveController extends ActiveController implements UserBehaviorInter
      */
     public function init()
     {
-    	parent::init();
+        parent::init();
     
-    	$this->enableCors = Yii::$app->auth->cors;
+        $this->enableCors = Yii::$app->auth->cors;
     }
     
     /**

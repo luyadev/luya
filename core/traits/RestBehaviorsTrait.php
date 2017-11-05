@@ -30,11 +30,11 @@ use yii\filters\Cors;
  */
 trait RestBehaviorsTrait
 {
-	/**
-	 * @var boolean Whether CORS is enabled or not.
-	 */
-	public $enableCors = false;
-	
+    /**
+     * @var boolean Whether CORS is enabled or not.
+     */
+    public $enableCors = false;
+    
     /**
      * Whether the rest controller is protected or not.
      *
@@ -88,12 +88,12 @@ trait RestBehaviorsTrait
             ];
             
             if ($this->enableCors) {
-            	$behaviors['authenticator']['except'] = ['options'];
+                $behaviors['authenticator']['except'] = ['options'];
             }
         }
         
         if ($this->enableCors) {
-        	$behaviors['cors'] = Cors::class;
+            $behaviors['cors'] = Cors::class;
         }
 
         $behaviors['contentNegotiator'] = [

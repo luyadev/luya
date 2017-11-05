@@ -47,9 +47,9 @@ class JsonLd extends Object
     
     /**
      * Register new Event.
-     * 
+     *
      * @param array $config
-     * 
+     *
      * @return \luya\web\jsonld\Event
      */
     public static function event(array $config = [])
@@ -59,9 +59,9 @@ class JsonLd extends Object
     
     /**
      * Register new Person.
-     * 
+     *
      * @param array $config Optional config array to provided person data via setter methods.
-     * 
+     *
      * @return \luya\web\jsonld\Person
      */
     public static function person(array $config = [])
@@ -102,9 +102,9 @@ class JsonLd extends Object
     
     /**
      * Register graph data.
-     * 
+     *
      * @param \luya\web\jsonld\BaseThing|array $data Can be either an array or an object based on {{luya\web\jsonld\BaseThing}} which contains the Arrayable Inteface.
-     * @return 
+     * @return
      */
     public static function addGraph($data)
     {
@@ -121,7 +121,7 @@ class JsonLd extends Object
     
     /**
      * Reset the JsonLd Data.
-     * 
+     *
      * This method is mainly usefull when working with unit tests for JsonLd.
      */
     public static function reset()

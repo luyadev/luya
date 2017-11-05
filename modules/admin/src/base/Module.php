@@ -16,9 +16,9 @@ use luya\base\AdminModuleInterface;
  */
 class Module extends \luya\base\Module implements AdminModuleInterface
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $requiredComponents = ['db'];
     
     /**

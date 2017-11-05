@@ -37,7 +37,7 @@ use luya\admin\filters\MediumCrop;
  *     "sortindex" => $this->integer()->defaultValue(0),
  * ]);
  * ```
- * 
+ *
  * If you have a table without sortindex field, the {{ImageSelectCollectionActiveWindow::$sortIndex}} is disable by default. You have to define
  * this attribute in order to enable sorting.
  *
@@ -105,8 +105,8 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
 
     /**
      * Load all images.
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function callbackLoadAllImages()
     {
@@ -130,7 +130,7 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
     
     /**
      * Get the image array for a given image id.
-     * 
+     *
      * @param integer $imageId
      * @return array
      */
@@ -163,7 +163,7 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
     
     /**
      * Remove a given image id from the index.
-     * 
+     *
      * @param integer $imageId The image to delete from the index.
      * @return number
      */
@@ -177,7 +177,7 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
 
     /**
      * Generate an image for a given file id and store the image in the index.
-     * 
+     *
      * @param integer $fileId The file id to create the image from and store the image id in the database.
      * @return array
      */
@@ -199,7 +199,7 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
     
     /**
      * Switch position between two images.
-     * 
+     *
      * @param integer $new
      * @param integer $old
      * @return boolean
@@ -226,15 +226,15 @@ class ImageSelectCollectionActiveWindow extends ActiveWindow
     
     /**
      * Prepare and parse the insert fields for a given array.
-     * 
+     *
      * if sort is enabled, the latest sort index is provided.
-     * 
+     *
      * @param array $fields
      * @return number
      */
     public function prepareInsertFields(array $fields)
     {
-        if ($this->isSortEnabled()){
+        if ($this->isSortEnabled()) {
             $fields[$this->sortIndexFieldName] = $this->getMaxSortIndex() + 1;
         }
         

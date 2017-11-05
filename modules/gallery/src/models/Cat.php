@@ -73,7 +73,7 @@ class Cat extends NgRestModel
 
     /**
      * Ensure if deleteion is available or not.
-     * 
+     *
      * @param unknown $event
      */
     public function eventBeforeDelete($event)
@@ -112,7 +112,7 @@ class Cat extends NgRestModel
     
     /**
      * Get Cat detail Link.
-     * 
+     *
      * @return string
      */
     public function getDetailLink()

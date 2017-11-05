@@ -89,7 +89,7 @@ class Item extends ItemAbstract
     
     /**
      * Get the source path to the image location on the webserver.
-     * 
+     *
      * @param string $scheme Whether the source path should be absolute or not.
      * @return string|boolean
      */
@@ -112,7 +112,7 @@ class Item extends ItemAbstract
     
     /**
      * Absolute url to the image source.
-     * 
+     *
      * @return string|boolean
      */
     public function getSourceAbsolute()
@@ -125,7 +125,7 @@ class Item extends ItemAbstract
      *
      *
      * @deprecated Deprecated in 1.0.1 - REMOVE from fields() array!
-     * 
+     *
      * @param boolean $scheme Whether the source path should be absolute or not.
      * @return string|boolean
      */
