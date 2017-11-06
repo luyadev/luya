@@ -21,8 +21,6 @@ use luya\rest\ActiveController;
  */
 class RestActiveController extends ActiveController implements UserBehaviorInterface
 {
-    use RestBehaviorsTrait;
-
     /**
      * @inheritdoc
      */
