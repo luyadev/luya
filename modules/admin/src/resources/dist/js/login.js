@@ -88,7 +88,6 @@ var observeLogin = function (form, url, secureUrl) {
     });
 };
 
-
 var checkInputLabels = function () {
     var $loginInput = $('.login-input');
 
@@ -113,7 +112,7 @@ var checkInputLabels = function () {
     });
 };
 
-$(window).load(function () {
+$(window).on('load', function () {
     $('.login-logo').addClass('login-logo-loaded');
     $('.login-form').addClass('login-form-loaded');
     checkInputLabels();
