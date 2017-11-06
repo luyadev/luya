@@ -2,8 +2,8 @@
 return [
     'crawler' => 'Пошуковий двигун',
     'crawler_indexing' => 'Індексація',
-    'crawler_analytics' => 'Analytics',
-    'crawler_anayltics_queries' => 'Search Queries',
+    'crawler_analytics' => 'Аналітика',
+    'crawler_anayltics_queries' => 'Пошукові запити',
     
     //builderindex
     'crawler_index' => 'Індекс сторінки',
