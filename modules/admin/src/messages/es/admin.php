@@ -1,5 +1,4 @@
 <?php
-
 return [
     'language_name' => 'Español',
     'button_save' => 'Guardar',
@@ -103,9 +102,7 @@ return [
     'view_index_redirect_internal_select' => 'Seleccione la página interna en la que se debe enviar al usuario.',
     'view_index_redirect_external_link' => 'Enlace externo',
     'view_index_redirect_external_link_help' => 'Enlaces externos comienzan con http:// ó https://',
-
 // 1.0.0-beta3:
-
     'model_loginform_email_label' => 'Email',
     'model_loginform_password_label' => 'Contraseña',
     'model_loginform_wrong_user_or_password' => 'Usuario o contraseña no válido.',
@@ -131,27 +128,19 @@ return [
     'js_dir_manager_rm_file_confirm' => '¿Realmente desea eliminar este archivo?',
     'js_dir_manager_rm_file_ok' => 'El archivo se eliminó correctamente.',
     'js_zaa_server_proccess' => 'El servidor esta procesando los datos. Por favor espere',
-
 // 1.0.0-beta4:
-
     'ngrest_crud_empty_row' => 'No se añadió datos en esta tabla todavía.',
-
 // 1.0.0-beta5:
-
     'aws_gallery_empty' => 'Por favor seleccione algunas imágenes de la izquierda para añadir en el álbum de la galería.',
     'aws_gallery_images' => 'Galería de imágenes',
     'layout_useronline_name' => 'Nombre',
     'layout_useronline_mail' => 'E-Mail',
     'layout_useronline_inactivesince' => 'Inactivo desde',
-
 // 1.0.0-beta6
-
     'layout_debug_caching' => 'Almacenamiento caché',
     'debug_state_on' => 'Encedido',
     'debug_state_off' => 'Apagado',
-
 // 1.0.0-beta7
-
     'login_securetoken_mail_subject' => 'Código de Seguridad LUYA',
     'login_securetoken_mail' => '<h1>Código de Seguridad LUYA</h1><p>Use el siguiente código de seguridad para acceder a su interfaz de administración de {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
     'login_async_token_error' => 'Código de seguridad incorrecto.',
@@ -166,26 +155,20 @@ return [
     'mode_user_lastname' => 'Apellido',
     'mode_user_email' => 'E-Mail',
     'mode_user_password' => 'Contraseña',
-
 // 1.0.0-beta8
-
     'aws_tag_new' => 'Añadir nueva entrada',
     'aws_tag_add' => 'Añadir',
     'aws_tag_search' => 'Buscar entradas',
     'aws_tag_list' => 'Lista de todas las entradas',
     'dashboard_log_message_add' => 'Se añadió una nueva fila a <b>{container}</b>.',
     'dashboard_log_message_edit' => 'Actualizar una fila existente en <b>{container}</b>.',
-
 // rc1
-
     'layout_btn_help' => 'Ayuda',
     'right_panel_support_title' => 'Informaciones &amp; Ayuda',
     'right_panel_support_tags_title' => 'Etiquetas',
     'right_panel_support_support_title' => 'Soporte',
     'right_panel_support_support_text' => 'Si tiene alguna duda, por favor, póngase en contacto con su webmaster o consulte <a target="_blank" href="https://luya.io">luya.io</a>.',
-
 // rc2
-
     'ngrest_crud_group_prompt' => 'Agrupar por campo',
     'ngrest_crud_filter_prompt' => 'Seleccione filtro',
     'ngrest_crud_ajax_search_length' => 'La consulta de búsqueda debe tener al menos 3 caracteres.',
@@ -195,9 +178,7 @@ return [
     'layout_rightbar_savebtn' => 'Guardar',
     'aws_changepassword_notequal' => 'La nueva contraseña y la repetición de contraseña no son iguales.',
     'aws_changeapssword_minchar' => 'La nueva contraseña debe tener al menos {min} caracteres.',
-
 // rc3
-
     'model_pk_id' => 'ID',
     'model_lang_name' => 'Nombre',
     'model_lang_short_code' => 'Código corto',
@@ -238,29 +219,29 @@ return [
     'callback_button_file_download_widget_success' => 'El archivo ha sido preparado. Puedes descargarlo ahora.',
     
 // rc4
-    
-    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
-    'model_user_oldpassword' => 'Previous (old) Password',
-    'js_account_update_profile_success' => 'The profile data has been successfull updated.',
-    'dashboard_lastlogin_title' => 'Last User Logins',
-    'layout_useronline_activity' => 'Activity',
-    'layout_useronline_inactive' => 'inactive',
-    'login_ssl_info' => 'Website uses encrypted secure connection.',
-    'locked_info' => 'Someone already editing',
-    'menu_dashboard' => 'Dashboard',
-    'js_link_not_set' => 'No Link selected',
+ 
+    'api_storage_file_upload_folder_error' => 'Error al guardar el archivo en la carpeta de almacenamiento. Un error de permiso podría causar este problema. Asegúrese de que la carpeta de almacenamiento sea escribible.',
+    'model_user_oldpassword' => 'Contraseña anterior',
+    'js_account_update_profile_success' => 'Los datos de perfil se han actualizado con éxito.',
+    'dashboard_lastlogin_title' => 'Últimos inicios de sesión de usuario',
+    'layout_useronline_activity' => 'Actividad',
+    'layout_useronline_inactive' => 'inactivo',
+    'login_ssl_info' => 'El sitio web utiliza una conexión segura cifrada.',
+    'locked_info' => 'Alguien ya está editando',
+    'menu_dashboard' => 'Tablero',
+    'js_link_not_set' => 'Sin enlace seleccionado',
         
 // 1.0.0
-        
-    'ngrest_button_delete' => 'Delete',
-    'js_dir_manager_rm_file_confirm_title' => 'Remove file',
-    'js_dir_manager_rm_folder_confirm_title' => 'Remove folder',
-    'link_dir_target' => 'Link target',
-    'link_dir_target_same' => 'Same window',
-    'link_dir_target_blank' => 'New window',
-    'view_index_redirect_file' => 'file',
-    'view_index_redirect_mail' => 'e-mail address',
-    'view_index_redirect_mail_help' => 'Please enter a valid e-mail address.',
-    'menu_button_search' => 'Search',
-    'layout_btn_user_settings' => 'Preferences',
+
+    'ngrest_button_delete' => 'Borrar',
+    'js_dir_manager_rm_file_confirm_title' => 'Eliminar archivo',
+    'js_dir_manager_rm_folder_confirm_title' => 'Eliminar carpeta',
+    'link_dir_target' => 'Enlace objetivo',
+    'link_dir_target_same' => 'Misma ventana',
+    'link_dir_target_blank' => 'Nueva ventana',
+    'view_index_redirect_file' => 'archivo',
+    'view_index_redirect_mail' => 'dirección de e-mail',
+    'view_index_redirect_mail_help' => 'Por favor, introduzca una dirección de e-mail válida.',
+    'menu_button_search' => 'Buscar',
+    'layout_btn_user_settings' => 'Preferencias',
 ];
