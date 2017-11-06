@@ -11,7 +11,7 @@ return [
     'model_site_on' => 'Encendido',
     'status_index_heading' => 'Descripción general de sitios remotos',
     'status_index_intro' => 'La versión actual de LUYA es <a href="https://packagist.org/packages/luyadev/luya-core" target="_blank"><strong>{version}</strong></a>, publicada en {date}.',
-    'status_index_caching_info' => 'Los datos remotos se almacenarán en caché durante <strong>2 minutos</strong>. Puede usar el botón de recarga de caché para vaciar todo el caché de la página.',
+    'status_index_caching_info' => 'Los datos remotos se almacenarán en caché durante <strong>15 minutos</strong>. Puede usar el botón de recarga de caché para vaciar todo el caché de la página.',
     'status_index_time_info' => '* Hora: Devuelve el tiempo total transcurrido desde el inicio de la solicitud en la aplicación remota. Es la velocidad de la aplicación, no el tiempo transcurrido para realizar la solicitud remota.',
     'status_index_error_text' => 'Si la solicitud a una página remota devuelve un error, los siguientes problemas podrían haber causado su solicitud:',
     'status_index_error_1' => 'El sitio web solicitado está protegido por una autorización de httpauth, puede agregar las credenciales de httpauth en la sección de configuración de la página',

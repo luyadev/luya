@@ -158,7 +158,7 @@ class Site extends NgRestModel
             }
             
             return $data;
-        }, (60*2));
+        }, (60*15));
     }
     
     /**
