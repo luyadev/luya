@@ -1,8 +1,8 @@
-# Composition Concept
+# Composition concept
 
-When dealing with multiple language websites the {{\luya\web\Composition}} component is a powerfull tool to help building **multi lingual url rules**, generate websites with **localisation prefixes** (like www.example.com/de/ch) or define domains which should automatic trigger a website language trough **host info mapping**.
+When dealing with multi lingual websites the {{\luya\web\Composition}} component is a powerful tool to help building **multi lingual url rules**, generate websites with **localization prefixes** (e.g. www.example.com/de/ch) or define domains which should automatic trigger a website language trough **host info mapping**.
 
-To configure and setup the composition component you have to open the application configuration file and update the composition component in the components section. The below examples shows a very advanced use of the composition in order to show all possibilities.
+To configure and setup the composition component you have to open the application configuration file and update the composition component in the components section. The below examples shows a very advanced use of the composition in order to expose all possibilities.
 
 ```php
 return [
@@ -28,14 +28,14 @@ return [
 
 The above example will generate a language and country specific prefix urls for example `http://example.com/en-us/` and the `hostInfoMapping` domains who points to this website would have the predefined settings defined in the array.
 
-In order to access data from the composition component you can access the composition component by its keys:
+In order to retrieve data from the composition component you can access the composition component by its keys:
 
 ```php
 $langShortCode = Yii::$app->composition['langShortCode'];
 $countryShortCode = Yii::$app->composition['countryShortCode'];
 ```
 
-> Note: In the CMS context, the **langShortCode** is **required** by default. Other patterns can be added, but the langShortCode is bound to the CMS language table from the database. When creating a LUYA website without the CMS module you can complet change those patterns.
+> Note: In the CMS context, the **langShortCode** is **required** by default. Other patterns can be added, but the **langShortCode** is bound to the CMS language table from the database. In case a LUYA website without the CMS module is created you can completely change those patterns.
 
 ## Disable the Component
 
