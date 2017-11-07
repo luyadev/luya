@@ -99,7 +99,7 @@ $config = [
         
         /*
          * The composition component handles your languages and they way your urls will look like. The composition components will
-         * automatically add the language prefix which is defined in `default` to your url (the language part in the url  f.e. "yourdomain.com/en/homepage").
+         * automatically add the language prefix which is defined in `default` to your url (the language part in the url  e.g. "yourdomain.com/en/homepage").
          *
          * hidden: (boolean) If this website is not multi lingual you can hide the composition, other whise you have to enable this.
          * default: (array) Contains the default setup for the current language, this must match your language system configuration.
