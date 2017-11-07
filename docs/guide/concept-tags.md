@@ -58,6 +58,10 @@ Now you can just use the tag everywhere within CMS or CRUD with the following no
 I am tooltip[John Doe](This tooltip text appears when hovering over John Doe).
 ```
 
-## Parse a tag
+## Parse content
 
 Perhaps you are not in a context where the parsing is enabled. In this case you can parse your content by using {{luya\TagParser::convert()}} or with markdown integration {{luya\TagParser::convertWithMarkdown()}}. This enables the availabilty to parse tags even in your controller or view files.
+
+```php
+echo TagParser::convert('Hello this is: tooltip[John Doe]'); // Parse content with tags
+```
