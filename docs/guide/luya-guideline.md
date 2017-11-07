@@ -34,6 +34,7 @@ This represents a guideline how words and proper nouns should been written in th
 + API
 + OSX
 + PHP
++ HTML
 + DRY
 + e.g. - instead of f.e., for example or similar expressions
 
