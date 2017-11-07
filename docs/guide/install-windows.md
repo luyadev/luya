@@ -1,6 +1,6 @@
 # Create a LUYA application on Windows and XAMPP
 
-The LUYA installation requires Composer, please have a look at the [official Composer website](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) if you haven´t installed on your system yet.
+The LUYA installation requires Composer, please have a look at the [official Composer website](https://getcomposer.org/doc/00-intro.md#installation-windows) if you haven´t installed on your system yet.
 
 > Find the [installation Video on Youtube](https://www.youtube.com/watch?v=7StCJviSGkg) in order to help you install LUYA.
 
@@ -22,8 +22,8 @@ The `create-project` command will create a folder (inside of your current folder
 If the Composer installation is done change into the **configs** folder inside the application and copy the `.dist` template files to original `.php` files.
 
 ```sh
-cp env.php.dist env.php
-cp env-local-db.php.dist env-local-db.php
+copy env.php.dist env.php
+copy env-local-db.php.dist env-local-db.php
 ```
 
 Now the database connection inside the `configs/env-local-db.php` file needs to fit your mysql servers configuration. 
