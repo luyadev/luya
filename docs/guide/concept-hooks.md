@@ -75,7 +75,7 @@ Hook::on('fooBarArray', function($hook) {
     $hook[] = 'World';
 });
 Hook::on('fooBarArray', function($hook) {
-    $hook[] = 'Hello';
+    $hook[] = 'Hola';
     $hook[] = 'LUYA!';
 });
 ```
@@ -98,7 +98,7 @@ The rendered output for the iteration example:
 <ul>
     <li>Hello</li>
     <li>World</li>
-    <li>Hello</li>
+    <li>Hola</li>
     <li>LUYA!</li>
 </ul>
 ```
