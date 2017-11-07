@@ -1,21 +1,19 @@
-# LUYA Core concept
+# Core
 
-What is LUYA core? Why do i need it, and what can i do with?
+The LUYA core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by helpers and a structured way to run and build any web application you can think of. 
 
-The LUYA Core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by helpers and a structured way to run your application. 
+There is a clear vision of the structure for modern web applications, in particluar:
 
-There is a clear vision for your modern web application:
-
-+ How to use configuration files and keep them small 
++ How to use configuration files and keep them small
 + Arrangement and structure of directories 
 + Components wich are already set by the core 
-+ Bulletproof DRY concept 
++ Bulletproof DRY concept for secure and fast developemnt
 
-In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, sometimes with just an MVC provided by Yii via the LUYA CORE sometimes you just need an administration area where you can manage data of your application and sometimes you also need a cms to manage the content.
+In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, f.e. with just an MVC provided by Yii via the LUYA core or if you just need an admin UI where you can manage data of your application or as well if you also need a cms to manage the content.
 
-## Setup Core Application
+## Setup core application
 
-In order to run a LUYA core application without modules just create a applicatin with the following structure:
+To run a LUYA core application without modules just create a project with the following structure:
 
 ```
 .
@@ -33,7 +31,7 @@ In order to run a LUYA core application without modules just create a applicatin
     └── layouts
 ```
 
-The content for the `composer.json` would be:
+The content for `composer.json` would be:
 
 ```json
 {
@@ -51,7 +49,7 @@ The content for the `composer.json` would be:
 }
 ```
 
-The content for the `index.php`:
+The content for `index.php`:
 
 ```php
 <?php
@@ -63,7 +61,7 @@ $boot->setBaseYiiFile(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 $boot->run();
 ```
 
-The content for the `.htaccess` file:
+The content for `.htaccess` file:
 
 ```
 Options +FollowSymLinks
@@ -89,7 +87,7 @@ RewriteRule . index.php
 </IfModule>
 ```
 
-An example for a configuration file `configs/env.php` (which env.php is the default value used from the {{luya\Boot}} class):
+Example for a configuration file `configs/env.php` could look like this:
 
 ```php
 <?php
@@ -116,7 +114,9 @@ return [
 ];
 ```
 
-Example content for the `SiteController.php`:
+Note: `env.php` is the default value used from the {{luya\Boot}} class.
+
+Example for the `controllers/SiteController.php`:
 
 ```php
 <?php
@@ -138,7 +138,7 @@ class SiteController extends Controller
 }
 ```
 
-Example content for the layout file `views/layouts/main.php`:
+Example content for layout file `views/layouts/main.php`:
 
 ```php
 <?php
@@ -163,12 +163,12 @@ use yii\helpers\Html;
 <?php $this->endPage() ?>
 ```
 
-## Using Core Kickstarter Project
+## Using core kickstarter project
 
-We have made a composer package to start a LUYA Core Application project very quickly by using the `composer create-project` command.
+There is a composer package to start a LUYA core application project very quickly by using the `composer create-project` command.
 
 ```
 composer create-project luyadev/luya-kickstarter-core:^1.0@dev
 ```
 
-This will generate a folder `luya-kickstarter-core` containg all required controllers, views and configs based on the description from the first section.
+This will generate a folder `luya-kickstarter-core` containg all required controllers, views and configs based on the description from above.
