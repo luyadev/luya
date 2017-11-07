@@ -1,6 +1,6 @@
-# Image Lazy Loading
+# Image lazy loading
 
-To reduce server load and speed up page requests, LUYA is shipped with a built in {{\luya\lazyload\LazyLoad}} Widget.
+To reduce server load and speed up page requests, LUYA is shipped with a built in {{\luya\lazyload\LazyLoad}} widget.
 
 ## Basic usage
 
@@ -16,9 +16,9 @@ To reduce server load and speed up page requests, LUYA is shipped with a built i
 
 > The basic usage already provides a no-script fallback.
 
-### Working with Background Images
+### Working with background images
 
-To use the lazyloader with a background image, for example on a DIV, you just have to set the `attributesOnly` parameter to `true`.
+To use the lazyloader with a background image, e.g. on a `<div class="lazy-image"></div>`, you just have to set the `attributesOnly` parameter to `true`.
 
 > Remember to use a noscript tag to show the image if no javascript is present.
 
@@ -38,8 +38,8 @@ To use the lazyloader with a background image, for example on a DIV, you just ha
 
 ## Event
 
-Each image loaded will trigger an event `lazyimage-loaded` on the `document`.
-The event provides an object with the imageId (ID selector) and the type of the event (`success` or `error`).
+Each image wich is fully loaded will trigger an event `lazyimage-loaded` on the `document`.
+The event provides an object with the image id (ID selector) and the type of the event (`success` or `error`).
 
 ```
 $(document).on("lazyimage-loaded", function(e, response) {
@@ -47,9 +47,9 @@ $(document).on("lazyimage-loaded", function(e, response) {
 });
 ```
 
-## Using LazyLoader with Storage Component
+## Using lazy loader with storage component
 
-Using the lazyloader with a storage component {{\luya\admin\image\Item}} is easier because you can automatically get the width and height from the storage component:
+Using the lazy loader with a storage component {{\luya\admin\image\Item}} is easier because you can automatically get the width and height from the storage component:
 
 ```php
 $image = Yii::$app->storage->getImage(123);
