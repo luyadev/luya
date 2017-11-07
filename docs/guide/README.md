@@ -5,7 +5,7 @@
   + [Common Setup Problems](install-problems.md)
   + [Upgrade](install-upgrade.md)
   + [Structure & Config](install-structures.md)
-  + [Environments](install-configs.md)
+  + [Environments](install-environments.md)
 + Key Concepts
   + [Core](concept-core.md)
   + [Tags](concept-tags.md)
