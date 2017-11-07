@@ -26,4 +26,16 @@ class StorageTest extends AdminTestCase
     
         $this->assertFalse($response['upload']);
     }
+    
+    public function testGetImageResolution()
+    {
+        $res = Storage::getImageResolution(__DIR__ . '/../../data/image.jpg');
+        
+        $this->assertSame(['width' => 2560, 'height' => 1600], $res);
+    }
+    
+    public function testUploadErrorMessages()
+    {
+        $this->assertSame('The uploaded file exceeds the upload_max_filesize directive in php.ini.', Storage::getUploadErrorMessage(UPLOAD_ERR_INI_SIZE));
+    }
 }

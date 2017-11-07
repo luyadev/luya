@@ -6,6 +6,7 @@ use Exception;
 use Yii;
 use luya\admin\models\StorageFile;
 use luya\admin\models\StorageImage;
+use luya\admin\Module;
 
 /**
  * Helper class to handle remove, upload and moving of storage files.
@@ -20,18 +21,23 @@ use luya\admin\models\StorageImage;
 class Storage
 {
     /**
-     * @var array All possible error codes when uploading files with its given message and meaning.
+     * Get the file upload error messages.
+     * 
+     * @return array All possible error codes when uploading files with its given message and meaning.
      */
-    public static $uploadErrors = [
-        0 => 'There is no error, the file uploaded with success.',
-        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
-        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
-        3 => 'The uploaded file was only partially uploaded.',
-        4 => 'No file was uploaded.',
-        6 => 'Missing a temporary folder.',
-        7 => 'Failed to write file to disk.',
-        8 => 'A PHP extension stopped the file upload.',
-    ];
+    public static function getUploadErrorMessages()
+    {
+        return [
+            UPLOAD_ERR_OK => Module::t('upload_err_message_0'),
+            UPLOAD_ERR_INI_SIZE => Module::t('upload_err_message_1'),
+            UPLOAD_ERR_FORM_SIZE =>  Module::t('upload_err_message_2'),
+            UPLOAD_ERR_PARTIAL =>  Module::t('upload_err_message_3'),
+            UPLOAD_ERR_NO_FILE =>  Module::t('upload_err_message_4'),
+            UPLOAD_ERR_NO_TMP_DIR =>  Module::t('upload_err_message_6'),
+            UPLOAD_ERR_CANT_WRITE =>  Module::t('upload_err_message_7'),
+            UPLOAD_ERR_EXTENSION =>  Module::t('upload_err_message_8'),
+        ];
+    }
     
     /**
      * Get the upload error message from a given $_FILES error code id.
@@ -41,7 +47,8 @@ class Storage
      */
     public static function getUploadErrorMessage($errorId)
     {
-        return isset(self::$uploadErrors[$errorId]) ? self::$uploadErrors[$errorId] : 'unknown error';
+        $messagesArray = self::getUploadErrorMessages();
+        return isset($messagesArray[$errorId]) ? $messagesArray[$errorId] : 'Unknown upload error.';
     }
     
     /**
@@ -109,7 +116,7 @@ class Storage
      */
     public static function getImageResolution($filePath, $throwException = false)
     {
-        $dimensions = @getimagesize($filePath);
+        $dimensions = @getimagesize(Yii::getAlias($filePath));
         
         $width = 0;
         $height = 0;
@@ -131,7 +138,7 @@ class Storage
      * Move an array of storage fileIds to another folder.
      *
      * @param array $fileIds
-     * @param unknown $folderId
+     * @param integer $folderId
      */
     public static function moveFilesToFolder(array $fileIds, $folderId)
     {
@@ -253,86 +260,76 @@ class Storage
      * Example Input unform:
      *
      * ```php
-        Array
-        (
-            [name] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => Altersfragen-Leimental (4).pdf
-                            [1] => Altersfragen-Leimental (2).pdf
-                        )
-
-                )
-
-            [type] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => application/pdf
-                            [1] => application/pdf
-                        )
-
-                )
-
-            [tmp_name] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => /tmp/phpNhqnwR
-                            [1] => /tmp/phpbZ8XSn
-                        )
-
-                )
-
-            [error] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => 0
-                            [1] => 0
-                        )
-
-                )
-
-            [size] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => 261726
-                            [1] => 255335
-                        )
-
-                )
-
-        )
+     *   Array
+     *   (
+     *       [name] => Array
+     *           (
+     *               [attachment] => Array
+     *                   (
+     *                       [0] => Altersfragen-Leimental (4).pdf
+     *                       [1] => Altersfragen-Leimental (2).pdf
+     *                   )
+     *
+     *           )
+     *
+     *       [type] => Array
+     *           (
+     *               [attachment] => Array
+     *                   (
+     *                       [0] => application/pdf
+     *                       [1] => application/pdf
+     *                   )
+     *           )
+     *       [tmp_name] => Array
+     *           (
+     *               [attachment] => Array
+     *                   (
+     *                       [0] => /tmp/phpNhqnwR
+     *                       [1] => /tmp/phpbZ8XSn
+     *                   )
+     *           )
+     *       [error] => Array
+     *           (
+     *               [attachment] => Array
+     *                   (
+     *                       [0] => 0
+     *                       [1] => 0
+     *                   )
+     *           )
+     *       [size] => Array
+     *           (
+     *               [attachment] => Array
+     *                   (
+     *                       [0] => 261726
+     *                       [1] => 255335
+     *                   )
+     *           )
+     *   )
      * ```
      *
      * to:
      *
      * ```php
      *
-        Array
-        (
-            [0] => Array
-                (
-                    [name] => Altersfragen-Leimental (4).pdf
-                    [type] => application/pdf
-                    [tmp_name] => /tmp/phpNhqnwR
-                    [error] => 0
-                    [size] => 261726
-                )
-
-            [1] => Array
-                (
-                    [name] => Altersfragen-Leimental (2).pdf
-                    [type] => application/pdf
-                    [tmp_name] => /tmp/phpbZ8XSn
-                    [error] => 0
-                    [size] => 255335
-                )
-
-        )
+     *   Array
+     *   (
+     *       [0] => Array
+     *           (
+     *               [name] => Altersfragen-Leimental (4).pdf
+     *               [type] => application/pdf
+     *               [tmp_name] => /tmp/phpNhqnwR
+     *               [error] => 0
+     *               [size] => 261726
+     *           )
+     *       [1] => Array
+     *           (
+     *               [name] => Altersfragen-Leimental (2).pdf
+     *               [type] => application/pdf
+     *               [tmp_name] => /tmp/phpbZ8XSn
+     *               [error] => 0
+     *               [size] => 255335
+     *           )
+     *   )
      * ```
      * @param array $files
      * @return array|unknown
@@ -413,7 +410,7 @@ class Storage
     {
         try {
             if ($file['error'] !== UPLOAD_ERR_OK) {
-                return ['upload' => false, 'message' => static::$uploadErrors[$file['error']], 'file_id' => 0];
+                return ['upload' => false, 'message' => static::getUploadErrorMessage($file['error']), 'file_id' => 0];
             }
     
             $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], $toFolder, $isHidden);

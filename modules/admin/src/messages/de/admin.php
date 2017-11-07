@@ -263,4 +263,12 @@ return [
     'view_index_redirect_mail_help' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
     'menu_button_search' => 'Suchen',
     'layout_btn_user_settings' => 'Einstellungen',
+    'upload_err_message_0' => 'Es gab keinen Fehler beim hochladen der Datei.',
+    'upload_err_message_1' => 'Die hochgeladene Datei überschreitet das Datei limit welches durch die php.ini definiert ist.',
+    'upload_err_message_2' => 'Die hochgeladene Datei überschreitet das MAX_FILE_SIZE limit des HTML form.',
+    'upload_err_message_3' => 'Die Datei wurde nur teilweise hochgeladen.',
+    'upload_err_message_4' => 'Keine Datei wurde hochgeladen.',
+    'upload_err_message_6' => 'Der Temporäre Ordner zum speichern der Datei fehlt.',
+    'upload_err_message_7' => 'Fehler beim speichern der Datei auf dem Datenträger.',
+    'upload_err_message_8' => 'Eine PHP extension hat den Datei upload prozess gestoppt.',
 ];
