@@ -5,7 +5,7 @@ The current version of LUYA is `1.0.0-RC4`.
 
 > **Before upgrading, [read carefully the backward compatibility breaks Guide](https://github.com/luyadev/luya/blob/master/UPGRADE.md)**
 
-### Composer
+## Composer
 
 Change the LUYA versions for each modules and LUYA itself in your composer.json
 
@@ -25,7 +25,7 @@ composer update
 
 Now you got a new composer lock file, which can be used for other team members to install the new LUYA version.
 
-### Console
+## Console
 
 After updating with composer, run the following command to upgrade the database:
 
@@ -45,6 +45,6 @@ Sometimes image filters changes and you should reprocess all images in the filem
 ./vendor/bin/luya admin/storage/process-thumbnails
 ```
 
-### Upgrade the application code
+## Upgrade the application code
 
 Read the [CHANGELOG](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) to see all new, fixed and breaking features. The **most important** when upgrading into another version is to [read the BC Breaks Guide](https://github.com/luyadev/luya/blob/master/UPGRADE.md) in order to see all changes which have to be done in your application to run the newest version of LUYA.
