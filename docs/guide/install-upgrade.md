@@ -23,11 +23,11 @@ After updating the file, execute the update command of Composer which could take
 composer update
 ```
 
-Now you got a new composer lock file, which can be used for other team members to install the new LUYA version.
+Now you got a new Composer lock file, which can be used for other team members to install the new LUYA version.
 
 ### Console
 
-After updating with composer, run the following command to upgrade the database:
+After updating with Composer, run the following command to upgrade the database:
 
 ```sh
 ./vendor/bin/luya migrate
