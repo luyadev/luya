@@ -1,4 +1,4 @@
-# Create a LUYA application on Windows and XAMP
+# Create a LUYA application on Windows and XAMPP
 
 The LUYA installation requires Composer, please have a look at the [official Composer website](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) if you haven´t installed on your system yet.
 
