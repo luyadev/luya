@@ -61,7 +61,7 @@ return [
     'modules' => [
         
         /*
-         * If you have other administration module (f.e. cmsadmin) then you going to need this module. The Admin UI module provides
+         * If you have other administration module (e.g. cmsadmin) then you going to need this module. The Admin UI module provides
          * a lot of functionalitiy like storage system etc. But the basic concept of LUYA is also that you can use LUYA without the
          * admin module.
          * 
