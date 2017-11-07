@@ -34,6 +34,7 @@ This represents a guideline how words and proper nouns should been written in th
 + API
 + OSX
 + PHP
++ DRY
 + e.g. - instead of f.e., for example or similar expressions
 
 Further it should be avoided to use personal pronouns (e.g. we have this, we recommed that, etc.), please use unpersonal pronouns ( e.g. there is this, it´s recommend that, etc.).
