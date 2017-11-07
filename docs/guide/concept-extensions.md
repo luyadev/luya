@@ -2,9 +2,9 @@
 
 LUYA provides a flexible way to extend the system with your custom modules, blocks and functions.
 
-## Composer Types
+## Composer types
 
-As LUYA is built upon the composer package manager, every extension must be included via composer. Thefore first create your own composer package by creating a `composer.json` file.
+As LUYA is built upon the composer package manager every extension must be included via composer. Therefore first create your own composer package by creating a `composer.json` file, e.g.:
 
 ```json
 {
@@ -20,7 +20,7 @@ As LUYA is built upon the composer package manager, every extension must be incl
 }
 ```
 
-The following **type**s are supported by luya composer
+The following **types** are supported by LUYA composer
 
 + luya-extension
 + luya-module
@@ -28,11 +28,11 @@ The following **type**s are supported by luya composer
 |type|description
 |----|----------
 |luya-extension|Is used when you have blocks, helpers, assets and other files but no module.
-|luya-module|Can contain the same as luya-extension but also modules. This packages are also listed on luya.io guide section.
+|luya-module|Can contain the same as luya-extension but also modules. This packages are also listed on luya.io in the guide section.
 
-## Extra Section
+## Extra section
 
-The composer.json file can contain an extra section which can be read by the luya composer. We can do the following things
+The composer.json file can contain an extra section which can be read by the LUYA composer. E.g. we could do the following things:
 
 ```json
 "extra" : {
@@ -47,7 +47,7 @@ The composer.json file can contain an extra section which can be read by the luy
 }
 ```
 
-+ blocks: Include the provide folders or blocks while import command.
++ blocks: Include the provided folders or blocks while import command.
 + bootstrap: Add the file to the LUYA bootstraping process.
 
-> When importing blocks, you have to provided a namespace for each block class. You can use the [composer autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading) feature to do so.
+> When importing blocks a namespace for each block class have to be provided. You can use the [Composer autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading) feature handle namespaces.
