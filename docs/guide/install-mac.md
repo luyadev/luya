@@ -42,4 +42,4 @@ which php
 php -i
 ```
 
-> Visit the [Installation Problems and Questions Site](install-problems.md) if you get any problems with the LUYA setup.
+> Visit the [installation problems and questions site](install-problems.md) if you get any problems with the LUYA setup.
