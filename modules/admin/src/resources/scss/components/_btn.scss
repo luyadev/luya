@@ -409,3 +409,9 @@ $btns: (
     @include google-chrome-font-offset-fix;
 }
 
+// Active state for move to button in file manager
+
+.btn-move-active {
+    background: theme-color(primary);
+}
+

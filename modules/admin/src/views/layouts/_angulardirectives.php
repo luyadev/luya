@@ -245,7 +245,7 @@ use luya\admin\helpers\Angular;
 
                 <div class="filemanager-file-actions-right" ng-show="selectedFiles.length > 0">
 
-                    <button class="btn btn-icon btn-move" ng-click="showFoldersToMove=!showFoldersToMove">
+                    <button class="btn btn-icon btn-move" ng-class="{'btn-move-active' : showFoldersToMove}" ng-click="showFoldersToMove=!showFoldersToMove">
                        <?= Admin::t('layout_filemanager_move_selected_files'); ?>
                     </button>
 
