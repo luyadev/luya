@@ -3,7 +3,7 @@ use luya\remoteadmin\Module;
 
 ?>
 <script>
-zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
+zaa.bootstrap.register('SitesStatusController', function($scope, $http, $q) {
 
     $scope.searchQuery = '';
     
@@ -14,11 +14,16 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
     $scope.loadSites = function() {
         $http.get('admin/api-remote-site?expand=safeUrl').then(function(response) {
             $scope.sites = response.data;
+
+          //INITIAL empty promise
+            var promise = $q.when();
+
+            
             angular.forEach($scope.sites, function(value, key) {
-                $scope.sites[key]['status'] = {loading:true, error:false, time:null, debug:null, app_debug_style:null, exceptions:null, exceptionsstyle:null, online:null, env:null, luya:null, luyastyle:null, yii:null};
-                
-                $http.get('admin/api-remote-site/' + value.id +'?expand=remote&fields=remote').then(function(response2) {
-                    data = response2.data.remote;
+            	promise = promise.then(function () {
+                    return $http.get('admin/api-remote-site/' + value.id +'?expand=remote&fields=remote')
+                }).then(function (response2) {
+                	data = response2.data.remote;
                     $scope.sites[key]['status'] = {
                        loading:false, 
                        error:data.error,
@@ -33,12 +38,13 @@ zaa.bootstrap.register('SitesStatusController', function($scope, $http) {
                        luyastyle: data.luya_version_style,
                        yii:data.yii_version
                     };
-                    
                     if (data.error) {
                         $scope.hasError = true;
                     }
                 });
             });
+
+            return promise;
         });
     };
 
