@@ -48,7 +48,7 @@ public function chain()
         [self::EFFECT_THUMBNAIL, [
             'width' => 600,
             'height' => null,
-            'mode' => \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET,
+            'mode' => self::THUMBNAIL_MODE_INSET,
         ]],
         [self::EFFECT_CROP, [
             'width' => 400,
@@ -60,7 +60,7 @@ public function chain()
 
 In order to read more about the differnt fileters and chain visit the [[app-filter-effects.md]] section.
 
-As you can see the effect thumbnail use the Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET mode, this is as the filter image manipulation system is based on the [Imagine Library](https://github.com/avalanche123/Imagine).
+As you can see the effect thumbnail use the {{luya\admin\base\Filter::THUMBNAIL_MODE_INSET}} mode, this is as the filter image manipulation system is based on the [Imagine Library](https://github.com/avalanche123/Imagine).
 
 ## Using the Filters
 

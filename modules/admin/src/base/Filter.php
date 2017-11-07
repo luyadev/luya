@@ -11,6 +11,12 @@ use yii\base\Object;
 
 /**
  * Base class for all storage component filters.
+ * 
+ * The available effects for the chain are stored in the database, here the default effects which are
+ * provided when installing luya:
+ * 
+ * + thumbnail: width, height, mode, saveOptions
+ * + crop: width, height, saveOptions
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -22,6 +28,10 @@ abstract class Filter extends Object implements FilterInterface
      */
     //const EFFECT_RESIZE = 'resize';
 
+	const THUMBNAIL_MODE_INSET = 'inset';
+	
+	const THUMBNAIL_MODE_OUTBOUND = 'outbound';
+	
     /**
      * Thumbnail-Effect.
      */
