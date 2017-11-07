@@ -39,7 +39,7 @@ $config = [
     'modules' => [
 
         /*
-         * If you have other admin modules (f.e. cmsadmin) then you going to need the admin. The Admin module provides
+         * If you have other admin modules (e.g. cmsadmin) then you going to need the admin. The Admin module provides
          * a lot of functionality, like storage, user, permission, crud, etc. But the basic concept of LUYA is also that you can use LUYA without the
          * admin module.
          *
