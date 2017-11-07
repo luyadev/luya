@@ -1,6 +1,6 @@
 # Hook
 
-LUYA has a built in Hooking mechanism, which allows you to print code in various sections. The {{luya\Hook}} class is similar to Yii Events.
+LUYA has a built in hooking mechanism which allows you to print code in various sections. The {{luya\Hook}} class is similar to [Yii events](http://www.yiiframework.com/doc-2.0/guide-concept-events.html).
 
 Let´s assume we have a layout file with a section output which is used sometimes but could be blank as well:
 
@@ -23,11 +23,11 @@ Let´s assume we have a layout file with a section output which is used sometime
 </html>
 ```
 
-## Hooks Setup
+## Hooks setup
 
-Now a hooking listener is setup which listens to the identifier `layoutFooter`. After setting up the hook listener, the Hook can be filled with content from various files like Blocks, Controllers or Widgets.
+Now a hooking listener is setup which is listening to the identifier `layoutFooter`. After setting up the hook listener, the {{luya\Hook}} can be filled with content from various files like blocks, controllers or widgets.
 
-Let´s assume we have a Controller with an action:
+Let´s assume we have a controller with an action:
 
 ```php
 class DefaultController extends \luya\web\Controller
@@ -63,11 +63,11 @@ class DefaultController extends \luya\web\Controller
 }
 ```
 
-When {{luya\Hook::on()}} is called multiple times in a request cycle, the output will concated and is sorted by execution time.
+If {{luya\Hook::on()}} is called multiple times in a request cycle the output will concated and sorted by execution time.
 
-## Using Array Output
+## Using array output
 
-Sometimes it ´s more convenient to iterate elements instead of concant the output. This can be helpfull when working with list output:
+Sometimes it is more convenient to iterate elements instead of concant the output. This can be helpful e.g. if you are working with list outputs:
 
 ```php
 Hook::on('fooBarArray', function($hook) {
@@ -75,7 +75,7 @@ Hook::on('fooBarArray', function($hook) {
     $hook[] = 'World';
 });
 Hook::on('fooBarArray', function($hook) {
-    $hook[] = 'Its';
+    $hook[] = 'Hello';
     $hook[] = 'LUYA!';
 });
 ```
@@ -98,12 +98,12 @@ The rendered output for the iteration example:
 <ul>
     <li>Hello</li>
     <li>World</li>
-    <li>Its</li>
+    <li>Hello</li>
     <li>LUYA!</li>
 </ul>
 ```
 
-It´s also possible to use assoc arrays with keys:
+It´s also possible to use associated arrays with keys:
 
 ```php
 Hook::on('fooBarArrayLinks', function($hook) {
