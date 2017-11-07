@@ -15,7 +15,7 @@ defined('YII_DEBUG') or define('YII_DEBUG', true);
 $config = [
     
     /*
-     * For best interoperability it is recommended that you use only alphanumeric characters when specifying an application ID
+     * For best interoperability it is recommend to use only alphanumeric characters when specifying an application ID.
      */
     'id' => 'myproject',
     
@@ -27,7 +27,7 @@ $config = [
     /*
      * Let the application know which module should be executed by default (if no url is set). This module must be included
      * in the modules section. In the most cases you are using the cms as default handler for your website. But the concept
-     * of LUYA is also that you can use the Website without the CMS module!
+     * of LUYA is also that you can use a website without the CMS module!
      */
     'defaultRoute' => 'cms',
     
@@ -39,7 +39,7 @@ $config = [
     'modules' => [
 
         /*
-         * If you have other admin modules (like cmsadmin) then you going to need the admin. The Admin module provides
+         * If you have other admin modules (e.g. cmsadmin) then you going to need the admin. The Admin module provides
          * a lot of functionality, like storage, user, permission, crud, etc. But the basic concept of LUYA is also that you can use LUYA without the
          * admin module.
          *
@@ -98,20 +98,20 @@ $config = [
         ],
         
         /*
-         * The composition component handles your languages and they way your urls will look like. The composition componentn will
-         * automatically add the language prefix you have defined in `default` to your url (the language part in the url "example.com/EN/homepage").
+         * The composition component handles your languages and they way your urls will look like. The composition components will
+         * automatically add the language prefix which is defined in `default` to your url (the language part in the url  e.g. "yourdomain.com/en/homepage").
          *
-         * hidden: (boolean) If this website is not multilingual you can hidde the composition, other whise you have to enable this.
+         * hidden: (boolean) If this website is not multi lingual you can hide the composition, other whise you have to enable this.
          * default: (array) Contains the default setup for the current language, this must match your language system configuration.
          */
         'composition' => [
-            'hidden' => true, // you will not have languages in your url (most case for pages which are not multi lingual)
+            'hidden' => true, // no languages in your url (most case for pages which are not multi lingual)
             'default' => ['langShortCode' => 'en'], // the default language for the composition should match your default language shortCode in the langauge table.
         ],
         
         /*
-         * When you are enabling the cache, luya will cache cms blocks and speed up the system in different ways. In the prep config
-         * we use the DummyCache to "fake" the caching behavior, but actually nothing gets cached, when your in production you should
+         * If cache is enabled LUYA will cache cms blocks and speed up the system in different ways. In the prep config
+         * we use the DummyCache to imitate the caching behavior, but actually nothing gets cached. In production you should
          * use caching which matches your hosting environment. In most cases yii\caching\FileCache will result in fast website.
          *
          * http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-apis
