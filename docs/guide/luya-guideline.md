@@ -23,7 +23,7 @@ When dealing with Controller, Action and other PHP names use single quotes \`MyC
 
 ### Wording
 
-This represents a guideline how words and proper nouns should been written in the documentation.
+This represents a guideline how words and proper nouns should be written in the documentation.
 
 + LUYA - always capitalized
 + Composer 
@@ -37,6 +37,7 @@ This represents a guideline how words and proper nouns should been written in th
 + HTML
 + DRY
 + e.g. - instead of f.e., for example or similar expressions
++ yourdomain.com -- instead of example.com, yourproject.com, etc
 
 Further it should be avoided to use personal pronouns (e.g. we have this, we recommed that, etc.), please use unpersonal pronouns ( e.g. there is this, it´s recommend that, etc.).
 
