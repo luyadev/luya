@@ -2,7 +2,9 @@
 
 namespace luya\cms\admin\controllers;
 
+use Yii;
 use luya\admin\base\Controller;
+use luya\admin\components\Auth;
 
 /**
  * Page Controller.
@@ -21,7 +23,11 @@ class PageController extends Controller
 
     public function actionUpdate()
     {
-        return $this->render('update');
+        return $this->render('update', [
+        	'canBlockUpdate' => Yii::$app->auth->matchApi(Yii::$app->adminuser->id, 'api-cms-navitempageblockitem', Auth::CAN_UPDATE),
+        	'canBlockDelete' => Yii::$app->auth->matchApi(Yii::$app->adminuser->id, 'api-cms-navitempageblockitem', Auth::CAN_DELETE),
+        	'canBlockCreate' => Yii::$app->auth->matchApi(Yii::$app->adminuser->id, 'api-cms-navitempageblockitem', Auth::CAN_CREATE),
+        ]);
     }
     
     public function actionDrafts()

@@ -9,7 +9,7 @@ use luya\helpers\Html;
     <div class="card-body">
         <div class="empty-placeholder" ng-if="placeholder.__nav_item_page_block_items.length == 0" dnd dnd-drag-disabled dnd-model="placeholder" dnd-isvalid="true" dnd-ondrop="dropItemPlaceholder(dragged,dropped,position)" dnd-css="{onDrag: 'empty-placeholder--is-dragging', onHover: 'empty-placeholder--drag-hover', onHoverTop: 'empty-placeholder--drag-top', onHoverMiddle: 'empty-placeholder--drag-middle', onHoverBottom: 'empty-placeholder--drag-bottom'}"><?= Module::t('view_update_drop_blocks'); ?></div>
         <div ng-class="{'block-is-layout' : block.is_container}" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-            <div class="block" ng-class="{ 'block-is-hidden': block.is_hidden == 1, 'block-is-virgin' : !block.is_dirty && isEditable() && block.is_dirty_dialog_enabled && !block.is_container, 'block-is-container': block.is_container, 'block-first': $first, 'block-last': $last }" dnd dnd-model="block" dnd-isvalid="true" dnd-disable-drag-middle dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'block--is-dragging', onHover: 'block--drag-hover', onHoverTop: 'block--drag-top', onHoverMiddle: 'block--drag-middle', onHoverBottom: 'block--drag-bottom'}">
+            <div class="block" ng-class="{ 'block-is-hidden': block.is_hidden == 1, 'block-is-virgin' : !block.is_dirty && isEditable() && block.is_dirty_dialog_enabled && !block.is_container, 'block-is-container': block.is_container, 'block-first': $first, 'block-last': $last }" <?php if ($canBlockUpdate): ?>dnd dnd-model="block" dnd-isvalid="true" dnd-disable-drag-middle dnd-ondrop="dropItem(dragged,dropped,position)" dnd-css="{onDrag: 'block--is-dragging', onHover: 'block--drag-hover', onHoverTop: 'block--drag-top', onHoverMiddle: 'block--drag-middle', onHoverBottom: 'block--drag-bottom'}"<?php endif; ?>>
                 <div class="block-toolbar">
                     <div class="toolbar-item">
                         <i class="material-icons">{{block.icon}}</i>
@@ -20,6 +20,7 @@ use luya\helpers\Html;
                             <i class="material-icons">content_copy</i>
                         </button>
                     </div>
+					<?php if ($canBlockUpdate): ?>
                     <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==0">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_visible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility</i>
@@ -30,16 +31,21 @@ use luya\helpers\Html;
                             <i class="material-icons">visibility_off</i>
                         </button>
                     </div>
+					<?php endif; ?>
+					<?php if ($canBlockDelete): ?>
                     <div class="toolbar-item" ng-click="removeBlock()">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_delete'));?>" tooltip-position="top">
                             <i class="material-icons">delete</i>
                         </button>
                     </div>
+					<?php endif; ?>
+					<?php if ($canBlockUpdate): ?>
                     <div ng-show="isEditable()" ng-click="toggleEdit()" class="toolbar-item">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_edit'));?>" tooltip-position="top">
                             <i class="material-icons">edit</i>
                         </button>
                     </div>
+					<?php endif; ?>
                 </div>
                 <modal is-modal-hidden="modalHidden" modal-title="{{block.name}}">
                     <div ng-if="!modalHidden" class="card" ng-init="modalMode=1">

@@ -71,11 +71,12 @@ use luya\cms\admin\Module;
             <div class="cmsadmin-pages">
                 <div class="row">
                     <div class="col" ng-repeat="lang in languagesData" ng-if="AdminLangService.isInSelection(lang.short_code)" ng-controller="NavItemController">
-                        <?= $this->render('_navitem'); ?>
+                        <?= $this->render('_navitem', ['canBlockUpdate' => $canBlockUpdate, 'canBlockDelete' => $canBlockDelete, 'canBlockCreate' => $canBlockCreate]); ?>
                     </div>
                 </div>
             </div>
         </div>
+        <?php if ($canBlockCreate): ?>
         <div class="col blockholder-column" ng-controller="DroppableBlocksController" ng-class="{'blockholder-column-small' : !isBlockholderSmall}" }>
             <div class="blockholder">
                 <div class="blockholder-search">
@@ -131,5 +132,6 @@ use luya\cms\admin\Module;
                 </button>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 </div>
