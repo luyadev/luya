@@ -1,17 +1,7 @@
-# netbeans
-/nbproject
-
-# PHPStorm
-.idea/
-
-# eclipse
-.buildpath
-.project
-.settings
-
-# general folders and files
+# folders and files
 /vendor
 /bin
+/runtime
 /luya
 composer.phar
 .DS_Store
@@ -20,5 +10,17 @@ composer.phar
 /configs/env-local-db.php
 /configs/env.php
 
-# SASS
+# SASS & GULP
 /resources/.sass-cache
+/resources/local/
+
+#IDE: netbeans
+/nbproject
+
+#IDE: PHPStorm
+.idea/
+
+#IDE: eclipse
+.buildpath
+.project
+.settings
