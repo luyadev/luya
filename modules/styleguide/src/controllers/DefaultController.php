@@ -9,6 +9,7 @@ use yii\helpers\Html;
  * Display the Styleguide Elements.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class DefaultController extends \luya\web\Controller
 {

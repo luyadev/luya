@@ -6,9 +6,9 @@ use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminMenuBuilder;
 
 /**
- *
+ * Remote Module.
  * @author Basil Suter <basil@nadar.io>
- *
+ * @since 1.0.0
  */
 final class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {

@@ -19,6 +19,9 @@ use luya\helpers\StringHelper;
  * @property integer $auth_is_enabled
  * @property string $auth_user
  * @property string $auth_pass
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class Site extends NgRestModel
 {
