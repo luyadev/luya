@@ -421,28 +421,3 @@
 
     color: map-get($grays, 300);
 }
-
-
-// Safari 100% height fix and flexbox override
-
-body.browser-safari {
-    .mainnav {
-
-
-        @media (min-width: $mobile-nav-breakpoint) {
-
-            min-height: 100vh;
-            height: 100%;
-            width: $mainnav-width;
-
-            &-small {
-                flex: 0 0 $mainnav-width-small;
-                width: $mainnav-width-small;
-            }
-            user-select: none;
-        }
-    }
-    .mainnav-link {
-        display: block;
-    }
-}

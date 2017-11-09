@@ -2,7 +2,6 @@
 
 // IE 10
 body[class*='internet-explorer-'] {
-
     .mainnav {
         display: block;
         overflow: visible;
@@ -36,11 +35,11 @@ body[class*='internet-explorer-'] {
     }
 
     .crud-buttons {
-        position: relative;
-        vertical-align: middle;
+        background-color: transparent;
         display: block;
         overflow: hidden;
-        background-color: transparent;
+        position: relative;
+        vertical-align: middle;
     }
 
     .crud-buttons-toggler {
@@ -58,9 +57,9 @@ body[class*='internet-explorer-'] {
         position: relative;
         text-align: right;
         top: auto;
-        z-index: 10;
         transform: none;
         white-space: nowrap;
+        z-index: 10;
 
         &:before {
             display: none;
@@ -75,4 +74,7 @@ body[class*='internet-explorer-'] {
         }
     }
 
+    .mainnav-user-online {
+        left: 13px;
+    }
 }

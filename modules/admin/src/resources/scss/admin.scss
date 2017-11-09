@@ -139,7 +139,8 @@
 @import "components/zaaselect";
 
 // ==================================================
-// Browser fixes, always last cause they suck balls
+// Browser fixes – always last cause they suck balls
 // ==================================================
 
 @import "browser-fixes/ie";
+@import "browser-fixes/safari";
