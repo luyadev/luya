@@ -97,7 +97,7 @@
             top: 0;
             transform: translateX(calc(-100% + 50px));
             transition: .2s ease-in-out transform;
-            z-index: z-index(before-content);
+            z-index: z-index(above-content);
 
             &:hover {
                 transform: translateX(0);

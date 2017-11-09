@@ -17,7 +17,7 @@
         position: absolute;
         top: 0;
         width: 2px;
-        z-index: 10;
+        z-index: z-index(content);
     }
     &:after {
         background-color: theme-color(light);
@@ -29,7 +29,7 @@
         position: absolute;
         top: 3px;
         width: 10px;
-        z-index: 20;
+        z-index: z-index(content) + 1;
     }
 
     &:first-of-type:before {

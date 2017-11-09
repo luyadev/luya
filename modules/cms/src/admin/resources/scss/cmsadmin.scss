@@ -49,3 +49,10 @@
 @import "components/menu-dropdown";
 @import "components/toolbar";
 @import "components/treeview";
+
+// ==================================================
+// Browser fixes – always last cause they suck balls
+// ==================================================
+
+@import "browser-fixes/ie";
+@import "browser-fixes/safari";

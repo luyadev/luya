@@ -2,17 +2,55 @@
 
 // IE 10
 body[class*='internet-explorer-'] {
+
+    /**
+     * ====================
+     * LUYA Wrappers
+     * ====================
+     */
+
+    // Main / Mainnav
+
+    .luya-main-wrapper {
+        max-width: calc(100% - #{$mainnav-width});
+    }
+
+    .luya-mainnav-small + .luya-main-wrapper {
+        max-width: calc(100% - #{$mainnav-width-small});
+    }
+
+    // Subnav
+
+    .luya-subnav.overlaying {
+        @media (min-width: $mobile-nav-breakpoint) {
+            transform: translateX(-80%);
+
+            &:hover {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    /**
+     * ====================
+     * Mainnav
+     * ====================
+     */
+
     .mainnav {
         display: block;
         overflow: visible;
         -ms-overflow-style: none; // IE 10+
     }
+
     .mainnav-static {
         height: auto;
     }
+
     .mainnav-modules {
         height: auto;
     }
+
     .mainnav-toggler {
         z-index: 1000;
     }
@@ -22,13 +60,15 @@ body[class*='internet-explorer-'] {
         margin-top: 3px;
     }
 
-    .luya-main-wrapper {
-        max-width: calc(100% - #{$mainnav-width});
+    .mainnav-user-online {
+        left: 13px;
     }
 
-    .luya-mainnav-small + .luya-main-wrapper {
-        max-width: calc(100% - #{$mainnav-width-small});
-    }
+    /**
+     * ====================
+     * CRUD
+     * ====================
+     */
 
     .crud-buttons-column {
         padding: 0;
@@ -72,9 +112,5 @@ body[class*='internet-explorer-'] {
         &:hover {
             color: $white;
         }
-    }
-
-    .mainnav-user-online {
-        left: 13px;
     }
 }
