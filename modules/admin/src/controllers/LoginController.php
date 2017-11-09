@@ -53,7 +53,7 @@ class LoginController extends Controller
         	$('#email').focus(); 
         	checkInputLabels();
         	observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."');
-        ");
+        ", \luya\web\View::POS_END);
     
         UserOnline::clearList();
         
