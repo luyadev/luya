@@ -18,7 +18,7 @@ Now you can create a HTML element component for this.
 
 ## Create HTML element component and use it
 
-To add a new HTML element component, chnage into your porject root folder (@app) and create a PHP file with the name `elements.php`. This file will contain all the element partials for this project. An element is defined by a *name* and a corresponding *closure*. Below, an example setup for the `elements.php` file:
+To add a new HTML element component, change into your porject root folder (@app) and create a PHP file with the name `elements.php`. This file will contain all the element partials for this project. An element is defined by a *name* and a corresponding *closure*. Below, an example setup for the `elements.php` file:
 
 ```php
 <?php
