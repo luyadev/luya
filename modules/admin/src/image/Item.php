@@ -35,7 +35,7 @@ class Item extends ItemAbstract
      * Set caption for image item, override existings values
      *
      * @param string $text The caption text for this image
-     * @since 1.0.0-beta7
+     * @since 1.0.0
      */
     public function setCaption($text)
     {
@@ -46,7 +46,7 @@ class Item extends ItemAbstract
      * Return the caption text for this image, if not defined or none give its null
      *
      * @return string The caption text for this image
-     * @since 1.0.0-beta7
+     * @since 1.0.0
      */
     public function getCaption()
     {

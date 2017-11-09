@@ -347,7 +347,7 @@ class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
      * not work of changed urls).
      *
      * @param \luya\cms\menu\Item $item The current item object
-     * @since 1.0.0-beta6
+     * @since 1.0.0
      */
     public function setCurrent(Item $item)
     {

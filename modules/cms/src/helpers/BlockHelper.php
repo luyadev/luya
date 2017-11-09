@@ -48,7 +48,7 @@ class BlockHelper
      * @param array $options The key value array pairing the select array should be created from.
      * @param string $prompt The prompt message when nothing is selected (contains the value 0 by default).
      * @return array
-     * @since 1.0.0-beta5
+     * @since 1.0.0
      */
     public static function selectArrayOption(array $options, $prompt = null)
     {
@@ -77,7 +77,7 @@ class BlockHelper
      *
      * @param array $options The array who cares the options with items
      * @return array
-     * @since 1.0.0-beta5
+     * @since 1.0.0
      */
     public static function checkboxArrayOption(array $options)
     {

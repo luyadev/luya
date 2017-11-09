@@ -81,7 +81,7 @@ class Item extends ItemAbstract implements LinkInterface
      * Set caption for file item, override existings values
      *
      * @param string $text The caption text for this image
-     * @since 1.0.0-beta7
+     * @since 1.0.0
      */
     public function setCaption($text)
     {
@@ -92,7 +92,7 @@ class Item extends ItemAbstract implements LinkInterface
      * Return the caption text for this file, if not defined the item array will be collected
      *
      * @return string The caption text for this image
-     * @since 1.0.0-beta7
+     * @since 1.0.0
      */
     public function getCaption()
     {
@@ -392,7 +392,7 @@ class Item extends ItemAbstract implements LinkInterface
      * frontend can also be uploaded with the storage system but are hidden from the administration area
      * then the file is hidden but still available and usable.
      *
-     * @since 1.0.0-beta7
+     * @since 1.0.0
      * @return boolean Whether the file is marked as hidden or not.
      */
     public function getIsHidden()
@@ -417,7 +417,7 @@ class Item extends ItemAbstract implements LinkInterface
      * in the administration area or by any other process who can delete files, the file will be removed from
      * the disk but will still exist in the database but is marked as *is_deleted*.
      *
-     * @since 1.0.0-beta7
+     * @since 1.0.0
      * @return boolean Return whether the file has been removed from the filesytem or not.
      */
     public function getIsDeleted()

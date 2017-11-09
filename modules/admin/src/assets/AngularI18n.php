@@ -33,7 +33,7 @@ use Yii;
  * files into a single file which reduces the number of admin requests on load (TBD).
  *
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta4
+ * @since 1.0.0
  */
 class AngularI18n extends \luya\web\Asset
 {

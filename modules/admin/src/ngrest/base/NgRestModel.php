@@ -111,7 +111,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * ```
      *
      * @return array Return an array where key is the name and value is the find() condition for the filters.
-     * @since 1.0.0-beta8
+     * @since 1.0.0
      */
     public function ngRestFilters()
     {
@@ -132,7 +132,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * If the return value is `false` the sorting **is disabled** for this NgRest CRUD.
      *
      * @return array Return an Array where the key is the field and value the direction. Example `['timestamp' => SORT_ASC]`.
-     * @since 1.0.0-beta8
+     * @since 1.0.0
      */
     public function ngRestListOrder()
     {
@@ -155,7 +155,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * If collapsed is `true` then the form group is hidden when opening the form, otherwhise its open by default (which is default value when not provided).
      *
      * @return array An array with groups where offset 1 are the fields, 2 the name of the group `collapsed` key if default collapsed or not.
-     * @since 1.0.0-beta8
+     * @since 1.0.0
      */
     public function ngRestAttributeGroups()
     {
@@ -176,7 +176,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * to none.
      *
      * @return string The field of what the default grouping should be, false disables the default grouping (default).
-     * @since 1.0.0-beta8
+     * @since 1.0.0
      */
     public function ngRestGroupByField()
     {
@@ -548,7 +548,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * @param string|array $assignedType This can be a string with a type or an array with multiple types
      * @param array $fields An array with fields assign to types type based on the an `ngRestAttributeTypes` defintion.
      * @throws \yii\base\InvalidConfigException
-     * @since 1.0.0-beta4
+     * @since 1.0.0
      */
     public function ngRestConfigDefine(ConfigBuilder $config, $assignedType, array $fields)
     {

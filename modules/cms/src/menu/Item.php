@@ -383,7 +383,7 @@ class Item extends Object implements LinkInterface, Arrayable
      * Returns the current item link relative path with composition (language). The
      * path is always relativ to the host.
      *
-     * As changed in 1.0.0-beta6, hidden links will be returned from getLink. So if you make a link
+     * Hidden links will be returned from getLink. So if you make a link
      * from a page to a hidden page, the link of the hidden page will be returned and the link
      * will be successfully displayed
      *

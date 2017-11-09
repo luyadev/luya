@@ -141,7 +141,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * Contains the class name for the block group class
      *
      * @return string The classname on which the block should be stored in.
-     * @since 1.0.0-beta6
+     * @since 1.0.0
      */
     public function blockGroup()
     {

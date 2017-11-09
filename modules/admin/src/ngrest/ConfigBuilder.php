@@ -95,7 +95,7 @@ class ConfigBuilder implements ConfigBuilderInterface
         $args = (isset($args[0])) ? $args[0] : [];
         
         if (!is_array($args)) {
-            throw new Exception("Since 1.0.0-beta6 ngrest plugin constructors must be provided as array config. Error in $name: $args");
+            throw new Exception("Ngrest plugin constructors must be provided as array config. Error in $name: $args");
         }
         
         return $this->addPlugin($this->prepandAdminPlugin($name), $args);
@@ -106,7 +106,7 @@ class ConfigBuilder implements ConfigBuilderInterface
      *
      * @param unknown $name
      * @return string
-     * @since 1.0.0-beta8
+     * @since 1.0.0
      */
     public function prepandAdminPlugin($name)
     {
@@ -120,7 +120,7 @@ class ConfigBuilder implements ConfigBuilderInterface
      * @param string $name The name of the ngrest\plugin
      * @param array $args
      * @return \luya\admin\ngrest\ConfigBuilder
-     * @since 1.0.0-beta4
+     * @since 1.0.0
      */
     public function addPlugin($name, array $args)
     {
@@ -194,7 +194,7 @@ class ConfigBuilder implements ConfigBuilderInterface
      *   and the rest of the name-value pairs will be used to initialize the corresponding object properties
      * @return $this
      * @throws Exception
-     * @since 1.0.0-beta4
+     * @since 1.0.0
      */
     public function load($objectType)
     {
