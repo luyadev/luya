@@ -315,7 +315,6 @@ class CheckboxRelation extends Plugin
         if (!empty($batch)) {
             Yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
         }
-        // @todo check if an error happends wile the delete and/or update proccess.
         return true;
     }
 }

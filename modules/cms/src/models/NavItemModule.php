@@ -79,10 +79,7 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     private $_content;
     
     /**
-     * @todo: see if $pathAfterRoute could be available in the urlRules, otherwise display default
-     * (non-PHPdoc)
-     *
-     * @see luya\cms\base\NavItemType::getContent()
+     * @inheritdoc
      */
     public function getContent()
     {

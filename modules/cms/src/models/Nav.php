@@ -460,13 +460,14 @@ class Nav extends ActiveRecord
      * @param unknown $title
      * @param unknown $langId
      * @return boolean
+     * @deprecated remove in 1.0.1 in favor of static method.
      */
     public function createDraft($title, $langId)
     {
         $_errors = [];
 
         // nav
-        $nav = $this; // @todo use new self and make static method instead
+        $nav = $this;
         $nav->attributes = [
             'parent_nav_id' => 0,
             'nav_container_id' => 0,

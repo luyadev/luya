@@ -23,7 +23,7 @@ When using the CMS Module the configuration must match your configuration of the
 
 ![set-default-language](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/set-default-language.jpg "Set CMS default language")
 
-@TODO
+## Other language related topcis
 
 + Language Switcher
 + Multi Language Url Rules

@@ -323,8 +323,8 @@ class Api extends RestActiveController
     }
 
     /**
-     * Prepare a temp file to
-     * @todo added very basic csv support, must be stored as class, just a temp solution
+     * Export the Data into a temp CSV.
+     * 
      * @return array
      * @throws ErrorException
      */

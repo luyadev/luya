@@ -402,8 +402,8 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
     }
 
     /**
-     * @todo do not return the specific type content, but return an array contain more infos also about is multi linguage and foreach in view file!
-     *
+     * Create element for given element and config pointer context.
+     * 
      * @param unknown_type $element
      * @param string $configContext list,create,update
      * @return array

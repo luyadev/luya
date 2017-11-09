@@ -36,7 +36,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     /**
      * Context properts array.
      *
-     * @todo verify
+     * @return array
      */
     public function getContextPropertysArray()
     {

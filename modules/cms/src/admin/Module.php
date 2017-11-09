@@ -292,8 +292,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     /**
      * Get the user id of the logged in user in web appliation context.
      *
-     * @todo add isGuest check
-     * @return nummeric|0
+     * @return integer
      */
     public static function getAuthorUserId()
     {

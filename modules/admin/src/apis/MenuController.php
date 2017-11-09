@@ -60,7 +60,6 @@ class MenuController extends RestController
                         $row['alias'] = Yii::t($data['moduleId'], $row['alias'], [], Yii::$app->language);
                     } catch (\Exception $e) {
                     }
-                    // @todo check if the user can access this api, otherwise hide this log informations?
                     $accessList[] = $row;
                 }
             }

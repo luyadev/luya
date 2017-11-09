@@ -288,7 +288,9 @@ class Config extends Object implements ConfigInterface
     private $_plugins;
     
     /**
-     * @todo: combine getPlugins and getExtraFields()
+     * Get all plugins.
+     * 
+     * @return array
      */
     public function getPlugins()
     {
@@ -315,7 +317,9 @@ class Config extends Object implements ConfigInterface
     private $_extraFields;
     
     /**
-     * @todo: combine getPlugins and getExtraFields()
+     * Get all extra fields.
+     * 
+     * @return array
      */
     public function getExtraFields()
     {

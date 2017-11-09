@@ -116,7 +116,6 @@ class ConfigBuilder implements ConfigBuilderInterface
     /**
      * Add a Plugin to the current field pointer plugins array.
      *
-     * @todo rename to addType
      * @param string $name The name of the ngrest\plugin
      * @param array $args
      * @return \luya\admin\ngrest\ConfigBuilder
@@ -144,7 +143,7 @@ class ConfigBuilder implements ConfigBuilderInterface
             'name' => $name,
             'i18n' => $i18n,
             'alias' => (is_null($alias)) ? $name : $alias,
-            'type' => null, // @todo use text as default?
+            'type' => null,
             'extraField' => false,
         ];
 

@@ -236,7 +236,6 @@ class Storage
      * ['upload' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
      * ```
      *
-     * @todo what happen if $files does have more then one entry, as the response is limit to 1
      * @param array $filesArray Use $_FILES array.
      * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\storage\BaseFileSystemStorage::findFolders}}
      * @param string $isHidden Whether the file should be hidden or not.
