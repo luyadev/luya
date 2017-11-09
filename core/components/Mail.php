@@ -38,14 +38,14 @@ class Mail extends Component
     private $_mailer;
 
     /**
-     * @var string sender email address
+     * @var string sender email address, like `php@luya.io`.
      */
-    public $from = 'php@zephir.ch';
+    public $from;
 
     /**
-     * @var string sender name
+     * @var string The from sender name like `LUYA Mailer`.
      */
-    public $fromName = 'php@zephir.ch';
+    public $fromName;
 
     /**
      * @var boolean When enabled the debug print is echoed directly into the frontend output, this is built in PHPMailer debug.
@@ -90,14 +90,14 @@ class Mail extends Component
     // smtp settings
     
     /**
-     * @var string The host address of the SMTP server for authentification, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     * @var string The host address of the SMTP server for authentification like `mail.luya.io`, if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
-    public $host = 'mail.zephir.ch';
+    public $host;
     
     /**
-     * @var string The username which should be used for SMTP auth, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     * @var string The username which should be used for SMTP auth e.g `php@luya.io`, if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
-    public $username = 'php@zephir.ch';
+    public $username;
     
     /**
      * @var string The password which should be used for SMTP auth, if {{Mail::$isSMTP}} is disabled, this property has no effect.
@@ -105,17 +105,17 @@ class Mail extends Component
     public $password;
     
     /**
-     * @var integer The port which is used to connect to the SMTP server, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     * @var integer The port which is used to connect to the SMTP server (default is 587), if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
     public $port = 587;
     
     /**
-     * @var string Posible values are `tls` or `ssl` or empty ``, if {{Mail::$isSMTP}} is disabled, this property has no effect.
+     * @var string Posible values are `tls` or `ssl` or empty `` (default is tls), if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
     public $smtpSecure = 'tls';
     
     /**
-     * @var boolean Whether the SMTP requires authentication or not, if {{Mail::$isSMTP}} is disabled, this property has no effect. If
+     * @var boolean Whether the SMTP requires authentication or not, enabled by default. If {{Mail::$isSMTP}} is disabled, this property has no effect. If
      * enabled the following properties can be used:
      * + {{Mail::$username}}
      * + {{Mail::$password}}
