@@ -79,7 +79,7 @@ return [
          */
         'cms' => [
             'class' => 'luya\cms\frontend\Module',
-            'enableCompression' => true, // compressing the cms output (removing white spaces and newlines)
+            'contentCompression' => true, // compressing the cms output (removing white spaces and newlines)
         ],
         
         /*

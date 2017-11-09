@@ -53,9 +53,8 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
 
     /**
      * @var bool If enabled the cms content will be compressed (removing of whitespaces and tabs).
-     * @todo rename to $contentCompression (as enable is expressed by the boolean value)
      */
-    public $enableCompression = true;
+    public $contentCompression= true;
 
     /**
      * @var boolean Whether the overlay toolbar of the CMS should be enabled or disabled.

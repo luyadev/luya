@@ -94,9 +94,9 @@ class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
     use CacheableTrait;
     
     /**
-     * @todo rename to EVENT_ON_ITEM_FIND
+     * @var string Event is triggered when an item is created via {{luya\cms\Menu::find()}} method.
      */
-    const MENU_ITEM_EVENT = 'menuItemEvent';
+    const EVENT_ON_ITEM_FIND = 'eventOnItemFind';
     
     /**
      * @var string Event which is triggere after the menu component is loaded and registered.

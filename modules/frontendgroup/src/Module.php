@@ -28,14 +28,14 @@ final class Module extends \luya\base\Module implements BootstrapInterface, Core
     {
         $findProperty = Property::findOne(['class_name' => GroupAuthProperty::className()]);
         if ($findProperty) {
-            Yii::$app->menu->on(Menu::MENU_ITEM_EVENT, [$this, 'hideElements'], CmsProperty::findAll(['admin_prop_id' => $findProperty->id]));
+            Yii::$app->menu->on(Menu::EVENT_ON_ITEM_FIND, [$this, 'hideElements'], CmsProperty::findAll(['admin_prop_id' => $findProperty->id]));
         }
     }
 
     /**
      * Hide the elements which are protected by the propertie.
      *
-     * @param \luya\cms\Menu::MENU_ITEM_EVENT $event
+     * @param \luya\cms\Menu::EVENT_ON_ITEM_FIND $event
      */
     public function hideElements($event)
     {

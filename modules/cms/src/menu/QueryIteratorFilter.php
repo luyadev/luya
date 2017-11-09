@@ -29,7 +29,7 @@ class QueryIteratorFilter extends FilterIterator implements Countable
         if (isset($this->getInnerIterator()->with['hidden'])) {
             $event->visible = true;
         }
-        Yii::$app->menu->trigger(Menu::MENU_ITEM_EVENT, $event);
+        Yii::$app->menu->trigger(Menu::EVENT_ON_ITEM_FIND, $event);
         return $event->visible;
     }
     

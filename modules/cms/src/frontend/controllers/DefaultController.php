@@ -22,7 +22,7 @@ class DefaultController extends Controller
     {
         parent::init();
         // enable content compression to remove whitespace when YII_DEBUG is disabled.
-        if (!YII_DEBUG && YII_ENV == 'prod' && $this->module->enableCompression) {
+        if (!YII_DEBUG && YII_ENV == 'prod' && $this->module->contentCompression) {
             $this->view->on(View::EVENT_AFTER_RENDER, [$this, 'minify']);
         }
     }
