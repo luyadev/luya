@@ -5,9 +5,9 @@ Generate a expandable list with custom plugins inside each row.
 ### Definition in Block
 
 ```php
-['var' => 'people', 'label' => 'People', 'type' => 'zaa-multiple-inputs', 'options' => [
+['var' => 'people', 'label' => 'People', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' => [
         [
-            'type' => 'zaa-select',
+            'type' => self::TYPE_SELECT,
             'var' => 'salutation',
             'label' => 'Salutation',
             'options' => [
@@ -16,7 +16,7 @@ Generate a expandable list with custom plugins inside each row.
             ]
         ],
         [
-            'type' => 'zaa-text',
+            'type' => self::TYPE_TEXT,
             'var' => 'name',
             'label' => 'Name'
         ],
