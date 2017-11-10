@@ -66,7 +66,7 @@ use \luya\admin\Module as AdminModule;
                             <i class="material-icons" ng-show="!toggleIsHidden(catitem.id)">keyboard_arrow_down</i>
                             <i class="material-icons" ng-show="toggleIsHidden(catitem.id)">keyboard_arrow_right</i>
                         </span>
-                        <span class="treeview-link"><span class="google-chrome-font-offset-fix">{{catitem.alias}}</span></span>
+                        <span class="treeview-link"><span class="google-chrome-font-offset-fix">{{catitem.name}}</span></span>
                     </div>
                     <div ng-show="(menuData.items|menuparentfilter:catitem.id:0).length == 0 && !toggleIsHidden(catitem.id)">
                         <div dnd dnd-drag-disabled dnd-isvalid="true" dnd-ondrop="dropEmptyContainer(dragged,dropped,position, catitem.id)" dnd-css="{onDrag: 'a5', onHover: 'a4', onHoverTop: 'a3', onHoverMiddle: 'a2', onHoverBottom: 'a1'}">

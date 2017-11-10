@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1640](https://github.com/luyadev/luya/issues/1640) Use container name for page overview instead of alias.
 - [#1598](https://github.com/luyadev/luya/issues/1598) Hide block delete button when insufficient permissions, disable draging and editing if there is no update permissions.
 - [#1563](https://github.com/luyadev/luya/issues/1563) Adjust position of first sortable arrow as desired.
 - [#1545](https://github.com/luyadev/luya/issues/1545) Adjust position of page version dropdown content on admin edit section. 
