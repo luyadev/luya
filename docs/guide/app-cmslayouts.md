@@ -59,6 +59,8 @@ You an also define multiple rows, here an advanced example for a layout with 4 p
 }
 ```
 
+> If a json file is used for the cmslayout, when adding new placeholders they must be available in the json file as well, as this will be the priority source for importing cms layouts.
+
 ## Import and Use
 
 To enable the new cmslayout file, or after updating an existing layout file, you have to run the `import` command from the Terminal.
