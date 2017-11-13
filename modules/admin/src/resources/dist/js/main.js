@@ -9241,6 +9241,7 @@ angular.module('dnd', [])
     		        e.dataTransfer.dropEffect = 'move';
     		        // allows us to drop
     		        if (e.preventDefault) { e.preventDefault(); }
+                    if (e.stopPropagation) { e.stopPropagation(); }
     		        if (!scope.dndIsvalid({hover:  scope.dndModel, dragged: dndFactory.get().content})) {
 		        		e.stopPropagation();
 		        		e.preventDefault();
