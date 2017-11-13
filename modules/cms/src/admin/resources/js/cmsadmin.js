@@ -1400,7 +1400,7 @@
 					 * The moved block, should removed from the previous array. This is only the case when dragging from an OUTER block into an INNER block
 					 * is this will not refresh the OUTER block, but always will in the opposite way.
 					 */
-					element.remove();
+					angular.element(element).remove();
 					// as the block has been removed from existing, refresh the new placeholder.
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});

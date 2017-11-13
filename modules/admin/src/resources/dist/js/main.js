@@ -9144,25 +9144,49 @@ angular.module('dnd', [])
 
 .factory('dndFactory', function() {
 	return {
+		/**
+		 * variables to write
+		 */
 		data : {
 			content: null, 
 			pos:null, 
 			element : null
 		},
-		content : function(value) {
-			this.data.content = value;
-		},
-		elmnSet : function(e) {
-			this.data.element = e;
-		},
-		elmnGet : function() {
+		/**
+		 * Element Getter
+		 */
+		getElement : function() {
 			return this.data.element;
 		},
-		get : function() {
-			return this.data;
+		/**
+		 * Elementer Setter
+		 */
+		setElement : function(e) {
+			this.data.element = e;
 		},
-		pos: function(pos) {
+		/**
+		 * Content Setter
+		 */
+		setContent : function(value) {
+			this.data.content = value;
+		},
+		/**
+		 * Content Getter
+		 */
+		getContent : function() {
+			return this.data.content;
+		},
+		/**
+		 * Pos Setter
+		 */
+		setPos: function(pos) {
 			this.data.pos = pos;
+		},
+		/**
+		 * Pos Getter
+		 */
+		getPos : function() {
+			return this.data.pos;
 		}
 	}
 })
@@ -9178,8 +9202,10 @@ angular.module('dnd', [])
  * + dnd-disable-drag-middle
  * + dnd-drag-disabled
  * + dnd-is-valid
+ * 
+ * Parts of the scripts are inspired by: https://github.com/marceljuenemann/angular-drag-and-drop-lists
  */
-.directive('dnd', function(dndFactory) {
+.directive('dnd', function(dndFactory, $timeout) {
 	return {
 		restrict : 'A',
 		transclude: false,
@@ -9193,143 +9219,193 @@ angular.module('dnd', [])
 			dndIsvalid : '&',
 		},
 		link: function(scope, element, attrs) {
+			// In standard-compliant browsers we use a custom mime type and also encode the dnd-type in it.
+			// However, IE and Edge only support a limited number of mime types. The workarounds are described
+			// in https://github.com/marceljuenemann/angular-drag-and-drop-lists/wiki/Data-Transfer-Design
+			var MIME_TYPE = 'application/x-dnd';
+			// EDGE MIME TYPE
+			var EDGE_MIME_TYPE = 'application/json';
+			// IE MIME TYPE
+			var MSIE_MIME_TYPE = 'Text';
+			// if current droping is valid, defaults to true
 			var isValid = true;
-			
+			// whether middle dropping is disabled or not
 			var disableMiddleDrop = attrs.hasOwnProperty('dndDisableDragMiddle');
-			
-	        // this gives us the native JS object
-	        var dragable = element[0];
-	
-	        /* DRAGABLE */
 	        
+			/* DRAGABLE */
+	        
+			/**
+			 * Enable dragging if not disabled.
+			 */
 	        if (!attrs.hasOwnProperty('dndDragDisabled')) {
-	        	dragable.draggable = true;
+	        	element.attr("draggable", "true");
 	        }
+	        
+	        /**
+	         * Add a class to the current element
+	         */
+	        scope.addClass = function(className) {
+	        	element.addClass(className);
+	        };
+	        
+	        /**
+	         * Remove a class from the current element, including timeout delay.
+	         */
+	        scope.removeClass = function(className, delay) {
+	        	element.removeClass(className);
+	        	if (delay) {
+		        	$timeout(function() {
+		        		element.removeClass(className);
+		        	});
+	        	}
+	        };
 	
-	        dragable.addEventListener(
-	            'dragstart',
-	            function(e) {
-	            	e.stopPropagation();
-	            	isValid = true;
-	            	dndFactory.content(scope.dndModel);
-	            	dndFactory.elmnSet(dragable);
-	                this.classList.add(scope.dndCss.onDrag);
-	                
-	                if (e.dataTransfer) {
-	                	e.dataTransfer.setData('text', 1);
+	        /**
+	         * DRAG START
+	         */
+	        element.on('dragstart', function(e) {
+	        	e = e.originalEvent || e;
+	        	
+	        	e.stopPropagation();
+	        	
+	        	// Check whether the element is draggable, since dragstart might be triggered on a child.
+	            if (element.attr('draggable') == 'false') {
+	            	return true;
+	            }
+	        	
+            	isValid = true;
+            	dndFactory.setContent(scope.dndModel);
+            	dndFactory.setElement(element[0]);
+            	scope.addClass(scope.dndCss.onDrag);
+                
+                var mimeType = 'text';
+                var data = "1";
+                
+                try {
+                    e.dataTransfer.setData(mimeType, data);
+                } catch (e) {
+                	try {
+                		e.dataTransfer.setData(EDGE_MIME_TYPE, data);
+	                } catch (e) {
+            			e.dataTransfer.setData(MSIE_MIME_TYPE, data);
 	                }
-	                // return false;
-	            },
-	            false
-	        );
+                }
+            });
 	
-	        dragable.addEventListener(
-	            'dragend',
-	            function(e) {
-	                this.classList.remove(scope.dndCss.onDrag);
-	            },
-	            false
-	        );
+	        /**
+	         * DRAG END
+	         */
+	        element.on('dragend', function(e) {
+	        	e = e.originalEvent || e;
+	        	scope.removeClass(scope.dndCss.onDrag);
+                e.stopPropagation();
+            });
 	        
 	        /* DROPABLE */
 	        
-	        var el = element[0];
-	          
-        	el.addEventListener(
-    		    'dragover',
-    		    function(e) {
-    		        e.dataTransfer.dropEffect = 'move';
-    		        // allows us to drop
-    		        if (e.preventDefault) { e.preventDefault(); }
-                    if (e.stopPropagation) { e.stopPropagation(); }
-    		        if (!scope.dndIsvalid({hover:  scope.dndModel, dragged: dndFactory.get().content})) {
-		        		e.stopPropagation();
-		        		e.preventDefault();
-		        		isValid = false;
-		        		// return false;
-		        	}
-    		        
-                    var re = el.getBoundingClientRect();
-    		        var height = re.height;
-    		        var mouseHeight = e.clientY - re.top;
-    		        var percentage = (100 / height) * mouseHeight;
-    		        if (disableMiddleDrop) {
-    		        	if (percentage <= 50) {
-        		        	this.classList.add(scope.dndCss.onHoverTop);
-        		        	this.classList.remove(scope.dndCss.onHoverMiddle);
-        		        	this.classList.remove(scope.dndCss.onHoverBottom);
-        		        	dndFactory.pos('top');
-        		        } else {
-        		        	this.classList.remove(scope.dndCss.onHoverTop);
-        		        	this.classList.remove(scope.dndCss.onHoverMiddle);
-        		        	this.classList.add(scope.dndCss.onHoverBottom);
-        		        	dndFactory.pos('bottom');
-        		        }
+	        /**
+	         * DRAG OVER ELEMENT
+	         */
+        	element.on('dragover',  function(e) {
+        		e = e.originalEvent || e;
+        		
+        		try {
+        			e.dataTransfer.dropEffect = 'move';
+        		} catch(e) {
+        			// catch ie exceptions
+        		}
+                
+        		e.preventDefault();
+	        	e.stopPropagation();
+        		
+		        if (!scope.dndIsvalid({hover: scope.dndModel, dragged: dndFactory.getContent()})) {
+	        		isValid = false;
+	        		return false;
+	        	}
+		        
+                var re = element[0].getBoundingClientRect();
+		        var height = re.height;
+		        var mouseHeight = e.clientY - re.top;
+		        var percentage = (100 / height) * mouseHeight;
+		        if (disableMiddleDrop) {
+		        	if (percentage <= 50) {
+    		        	scope.addClass(scope.dndCss.onHoverTop);
+    		        	scope.removeClass(scope.dndCss.onHoverMiddle);
+    		        	scope.removeClass(scope.dndCss.onHoverBottom);
+    		        	dndFactory.setPos('top');
     		        } else {
-    		        	if (percentage <= 25) {
-        		        	this.classList.add(scope.dndCss.onHoverTop);
-        		        	this.classList.remove(scope.dndCss.onHoverMiddle);
-        		        	this.classList.remove(scope.dndCss.onHoverBottom);
-        		        	dndFactory.pos('top');
-        		        } else if (percentage >= 65) {
-        		        	this.classList.remove(scope.dndCss.onHoverTop);
-        		        	this.classList.remove(scope.dndCss.onHoverMiddle);
-        		        	this.classList.add(scope.dndCss.onHoverBottom);
-        		        	dndFactory.pos('bottom');
-        		        } else {
-        		        	this.classList.remove(scope.dndCss.onHoverTop);
-        		        	this.classList.add(scope.dndCss.onHoverMiddle);
-        		        	this.classList.remove(scope.dndCss.onHoverBottom);
-        		        	dndFactory.pos('middle');
-        		        }
+    		        	scope.removeClass(scope.dndCss.onHoverTop);
+    		        	scope.removeClass(scope.dndCss.onHoverMiddle);
+    		        	scope.addClass(scope.dndCss.onHoverBottom);
+    		        	dndFactory.setPos('bottom');
     		        }
-    		        
-    		        this.classList.add(scope.dndCss.onHover);
-    		        // return false;
-    		    },
-    		    false
-    		);
+		        } else {
+		        	if (percentage <= 25) {
+    		        	scope.addClass(scope.dndCss.onHoverTop);
+    		        	scope.removeClass(scope.dndCss.onHoverMiddle);
+    		        	scope.removeClass(scope.dndCss.onHoverBottom);
+    		        	dndFactory.setPos('top');
+    		        } else if (percentage >= 65) {
+    		        	scope.removeClass(scope.dndCss.onHoverTop);
+    		        	scope.removeClass(scope.dndCss.onHoverMiddle);
+    		        	scope.addClass(scope.dndCss.onHoverBottom);
+    		        	dndFactory.setPos('bottom');
+    		        } else {
+    		        	scope.removeClass(scope.dndCss.onHoverTop);
+    		        	scope.addClass(scope.dndCss.onHoverMiddle);
+    		        	scope.removeClass(scope.dndCss.onHoverBottom);
+    		        	dndFactory.setPos('middle');
+    		        }
+		        }
+		        
+		        scope.addClass(scope.dndCss.onHover);
+		        
+		        return false;
+		    });
         	
-        	el.addEventListener(
-    		    'dragenter',
-    		    function(e) {
-    		        this.classList.add(scope.dndCss.onHover);
-    		        // return false;
-    		    },
-    		    false
-    		);
+        	/**
+        	 * DRAG ENTER element
+        	 */
+        	element.on('dragenter', function(e) {
+        		e = e.originalEvent || e;
+        		scope.addClass(scope.dndCss.onHover);
+        		e.preventDefault();
+		    });
 
-    		el.addEventListener(
-    		    'dragleave',
-    		    function(e) {
-    		        this.classList.remove(scope.dndCss.onHover);
-    		        this.classList.remove(scope.dndCss.onHoverTop);
-    		        this.classList.remove(scope.dndCss.onHoverMiddle);
-    		        this.classList.remove(scope.dndCss.onHoverBottom);
-    		        // return false;
-    		    },
-    		    false
-    		);
+        	/**
+        	 * DRAG LEAVE
+        	 */
+    		element.on('dragleave', function(e) {
+    			scope.removeClass(scope.dndCss.onHover, true);
+    			scope.removeClass(scope.dndCss.onHoverTop, true);
+    			scope.removeClass(scope.dndCss.onHoverMiddle, true);
+    			scope.removeClass(scope.dndCss.onHoverBottom, true);
+		    });
 
+    		/**
+    		 * DROP (if enabled)
+    		 */
     		if (!attrs.hasOwnProperty('dndDropDisabled')) {
-	            el.addEventListener(
-	                'drop',
-	                function(e) {
-	                	if (e.preventDefault) { e.preventDefault(); }
-	                    if (e.stopPropagation) { e.stopPropagation(); }
-	                    this.classList.remove(scope.dndCss.onHover);
-	    		        this.classList.remove(scope.dndCss.onHoverTop);
-	    		        this.classList.remove(scope.dndCss.onHoverMiddle);
-	    		        this.classList.remove(scope.dndCss.onHoverBottom);
-	    		        if (isValid) {
-		                	scope.$apply(function() {
-		                		scope.dndOndrop({dragged: dndFactory.get().content, dropped: scope.dndModel, position: dndFactory.get().pos, element: dndFactory.elmnGet()});
-		                	});
-	    		        }
-	    		        return false;
-	                },
-	                false
-	            );
+	            element.on('drop', function(e) {
+	            	e = e.originalEvent || e;
+	            	// The default behavior in Firefox is to interpret the dropped element as URL and
+	                // forward to it. We want to prevent that even if our drop is aborted.
+	                e.preventDefault();
+	                e.stopPropagation();
+	                
+	                scope.removeClass(scope.dndCss.onHover, true);
+	    			scope.removeClass(scope.dndCss.onHoverTop, true);
+	    			scope.removeClass(scope.dndCss.onHoverMiddle, true);
+	    			scope.removeClass(scope.dndCss.onHoverBottom, true);
+	    			
+    		        if (isValid) {
+	                	scope.$apply(function() {
+	                		scope.dndOndrop({dragged: dndFactory.getContent(), dropped: scope.dndModel, position: dndFactory.getPos(), element: dndFactory.getElement()});
+	                	});
+	                	return true;
+    		        }
+    		        return false;
+                });
     		}
 		}
 	};
