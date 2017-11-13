@@ -1217,7 +1217,7 @@
 		$scope.changeTab = function(tab) {
 			$scope.tab = tab;
 		}
-
+		
 		/**
 		 * Refresh the current layout container blocks.
 		 * 
@@ -1255,7 +1255,6 @@
 			});
 		};
 		
-		
 		/**
 		 * The revFind method does the recursiv job within a block an passes the value back to revPlaceholders().
 		 */
@@ -1274,6 +1273,7 @@
 		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
 			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
+				// its a new block
 				$http.post('admin/api-cms-navitempageblockitem/create', {
 					prev_id: dropped.prev_id, 
 					sort_index:0, 
@@ -1284,6 +1284,7 @@
 					$scope.refreshNested(dropped['prev_id'], dropped['var']);
 				});
 			} else if (dragged.hasOwnProperty('copystack')) {
+				// its a block from copy stack
 				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
 					copyBlockId: dragged.id,
 					sort_index: 0,
@@ -1294,6 +1295,7 @@
 					$scope.refreshNested(dropped['prev_id'], dropped['var']);
 				});
 			} else {
+				// moving an existing block
 				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
 					sort_index: 0,
 					prev_id:  dropped.prev_id,
@@ -1321,8 +1323,8 @@
 		 * drops an item in an empty placeholder of a BLOCK
 		 */
 		$scope.dropItemPlaceholder = function(dragged,dropped,position) {
-			
 			if (dragged.hasOwnProperty('favorized') || dragged.hasOwnProperty('newblock')) {
+				// its a new block
 				$http.post('admin/api-cms-navitempageblockitem/create', {
 					prev_id : dropped.prev_id,
 					sort_index:0, 
@@ -1333,6 +1335,7 @@
 					$scope.NavItemTypePageController.refreshNested(dropped.prev_id, dropped.var);
 				});
 			} else if (dragged.hasOwnProperty('copystack')) {
+				// its a block from copy stack
 				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
 					copyBlockId: dragged.id,
 					sort_index: 0,
@@ -1343,6 +1346,7 @@
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
 			} else {
+				// moving an existing block
 				$http.put('admin/api-cms-navitempageblockitem/update?id=' + dragged.id, {
 					sort_index: 0,
 					prev_id:  dropped.prev_id,
@@ -1353,7 +1357,10 @@
 			}
 		};
 		
-		$scope.dropItem = function(dragged,dropped,position) {
+		/**
+		 * Drops a block above/below an EXISTING BLOCK
+		 */
+		$scope.dropItem = function(dragged,dropped,position,element) {
 			var sortIndex = $scope.$index;
 			
 			if (position == 'bottom') {
@@ -1372,6 +1379,7 @@
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
 			} else if (dragged.hasOwnProperty('copystack')) {
+				// its a block from copy stack
 				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', {
 					copyBlockId: dragged.id,
 					sort_index: sortIndex,
@@ -1388,6 +1396,13 @@
 					placeholder_var: $scope.placeholder['var'],
 					sort_index: sortIndex
 				}).then(function(response) {
+					/*
+					 * @issue: https://github.com/luyadev/luya/issues/1629
+					 * The moved block, should removed from the previous array. This is only the case when dragging from an OUTER block into an INNER block
+					 * is this will not refresh the OUTER block, but always will in the opposite way.
+					 */
+					element.remove();
+					// as the block has been removed from existing, refresh the new placeholder.
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				});
 			}
