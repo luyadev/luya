@@ -22,7 +22,7 @@ $this->beginPage()
     </style>
     <?php $this->head(); ?>
 </head>
-<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}}" ng-class="{'debugToolbarOpen': showDebugBar}">
+<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}} {{AdminClassService.getClassSpace('dnd')}}" ng-class="{'debugToolbarOpen': showDebugBar}">
 <?php $this->beginBody(); ?>
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">

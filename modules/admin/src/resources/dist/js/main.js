@@ -9205,7 +9205,7 @@ angular.module('dnd', [])
  * 
  * Parts of the scripts are inspired by: https://github.com/marceljuenemann/angular-drag-and-drop-lists
  */
-.directive('dnd', function(dndFactory, $timeout) {
+.directive('dnd', function(dndFactory, AdminClassService) {
 	return {
 		restrict : 'A',
 		transclude: false,
@@ -9268,6 +9268,8 @@ angular.module('dnd', [])
 	            	return true;
 	            }
 	        	
+	            AdminClassService.setClassSpace('dnd', 'is-dragging');
+	            
             	isValid = true;
             	dndFactory.setContent(scope.dndModel);
             	dndFactory.setElement(element[0]);
@@ -9293,6 +9295,7 @@ angular.module('dnd', [])
 	        element.on('dragend', function(e) {
 	        	e = e.originalEvent || e;
 	        	scope.removeClass(scope.dndCss.onDrag);
+	        	AdminClassService.clearSpace('dnd');
                 e.stopPropagation();
             });
 	        
