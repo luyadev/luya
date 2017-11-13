@@ -111,11 +111,6 @@ angular.module('dnd', [])
 	         */
 	        scope.removeClass = function(className, delay) {
 	        	element.removeClass(className);
-	        	if (delay) {
-		        	$timeout(function() {
-		        		element.removeClass(className);
-		        	});
-	        	}
 	        };
 	
 	        /**
