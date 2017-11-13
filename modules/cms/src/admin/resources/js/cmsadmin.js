@@ -580,7 +580,6 @@
 			$http.get(api, { params : params }).then(function(success) {
 				ServiceMenuData.load(true);
 			}, function(error) {
-				console.log(error);
 				console.log('throw error message errorMessageOnDuplicateAlias');
 				ServiceMenuData.load(true);
 			});
