@@ -121,7 +121,14 @@ class ClientTable extends Object
             
             $progress = 1;
             for ($i=0; $i<$this->getOffsetTotal(); $i++) {
-                $data = array_merge($this->request($i), $data);
+                
+                $requestData = $this->request($i);
+                
+                if (!$requestData) {
+                    continue;
+                }
+                
+                $data = array_merge($requestData, $data);
                 gc_collect_cycles();
                 Console::updateProgress($progress++, $this->getOffsetTotal());
             }
@@ -156,6 +163,10 @@ class ClientTable extends Object
             $curl->close();
             unset($curl);
             return $response;
+        } else {
+            $this->build->command->outputError("Error while collecting data from server: " . $curl->error_message);
         }
+        
+        return false;
     }
 }
