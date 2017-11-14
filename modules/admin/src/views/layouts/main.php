@@ -17,12 +17,12 @@ $this->beginPage()
   			display: none !important;
 		}
 		.dragover {
-		    border: 5px dashed #2196F3;
+            background-color: #FF006B !important; border:1px solid white !important;
 		}
     </style>
     <?php $this->head(); ?>
 </head>
-<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}} {{AdminClassService.getClassSpace('dnd')}}" ng-class="{'debugToolbarOpen': showDebugBar}">
+<body ng-cloak flow-prevent-drop class="{{browser}} {{AdminClassService.getClassSpace('modalBody')}}" ng-class="{'debugToolbarOpen': showDebugBar}">
 <?php $this->beginBody(); ?>
 <?= $this->render('_angulardirectives'); ?>
 <div class="luya">
