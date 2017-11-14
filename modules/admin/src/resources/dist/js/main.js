@@ -9267,8 +9267,6 @@ angular.module('dnd', [])
 	            if (element.attr('draggable') == 'false') {
 	            	return true;
 	            }
-	        	
-	            AdminClassService.setClassSpace('dnd', 'is-dragging');
 	            
             	isValid = true;
             	dndFactory.setContent(scope.dndModel);
@@ -9295,7 +9293,6 @@ angular.module('dnd', [])
 	        element.on('dragend', function(e) {
 	        	e = e.originalEvent || e;
 	        	scope.removeClass(scope.dndCss.onDrag);
-	        	AdminClassService.clearSpace('dnd');
                 e.stopPropagation();
             });
 	        
