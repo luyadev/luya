@@ -2,19 +2,17 @@
   <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
 </p>
 
-LUYA Administration Interface
-==========
+# LUYA Administration Interface module
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Build Status](https://travis-ci.org/luyadev/luya-module-admin.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-admin)
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-admin/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-admin?branch=master)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-admin/downloads)](https://packagist.org/packages/luyadev/luya-module-admin)
+[![Slack Support](https://github.com/luyadev/luya/tree/master/docs/guide/img/icons/Slack_Mark_Monochrome_Black.svg)](https://luyadev.slack.com/)
 
 Administration Interface based on [AngularJs](https://angularjs.org/), [Bootstrap 4](https://getbootstrap.com) and [Yii 2 Framework](http://www.yiiframework.com/) (which is wrapped in the LUYA CORE).
 
 ![LUYA Admin Interface](https://raw.githubusercontent.com/luyadev/luya-module-admin/master/luya_admin.png)
-
-## Features:
 
 + CRUD (based on RESTful and Angular)
 + Scaffolding CRUDs
@@ -25,38 +23,42 @@ Administration Interface based on [AngularJs](https://angularjs.org/), [Bootstra
 
 ## Installation
 
-Install the module trough composer:
+For the installation of modules Composer is required.
 
 ```sh
 composer require luyadev/luya-module-admin:1.0.0-RC4
 ```
 
-Add the module to your configuration file within the modules section:
+### Configuration 
+
+After installation via Composer include the module to your configuration file within the modules section.
 
 ```php
 'modules' => [
-    // ...
+    // ... 
     'admin' => [
         'class' => 'luya\admin\Module',
     ]
 ]
 ```
 
-The module is now registered and installed. In order to comple the installation run the migrate, import and setup command:
+### Initialization 
 
-Database Migration:
+After successfully installation and configuration run the migrate, import and setup command to initialize the module in your project.
+
+1.) Migrate your database.
 
 ```sh
 ./vendor/bin/luya migrate
 ```
 
-Import:
+2.) Import the module and migrations into your LUYA project.
 
 ```sh
 ./vendor/bin/luya import
 ```
 
-Setup (Setting up the User and Group)
+3.) Create admin user and and user groups.
 
 ```sh
 ./vendor/bin/luya admin/setup

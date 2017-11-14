@@ -1,19 +1,19 @@
-Frontend User Group Module
-==========================
+# Frontend User Group Module
+
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 
 The main purpose of this module to provide the ability to allow cms pages for specific user groups. This can also be only one group with one users or different users in the same group or different groups with different users.
 
-Installation
--------------
+## Installation
 
-Add the module to your composer.json:
+For the installation of modules Composer is required
 
 ```sh
 composer require luyadev/luya-module-frontendgroup:1.0.0-RC4
 ```
 
+### Configuration
 After adding to your composer json you have to include the frontendgroup module into your Yii/LUYA config of your project and bootstrap the Module (otherwhise it can not catch the menu before item event).
 
 ```php
@@ -78,3 +78,19 @@ class User1 extends \yii\db\ActiveRecord implements GroupUserIdentityInterface
 ```
 
 The the above user class of `User1` is now allowed to access all pages which are defined for `groupA` and `groupB`.
+
+### Initialization 
+
+After successfully installation and configuration run the migrate, import and setup command to initialize the module in your project.
+
+1.) Migrate your database.
+
+```sh
+./vendor/bin/luya migrate
+```
+
+2.) Import the module and migrations into your LUYA project.
+
+```sh
+./vendor/bin/luya import
+```

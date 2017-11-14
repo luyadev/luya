@@ -10,13 +10,16 @@ The gallery module allows you create folders and collection and upload images to
 
 ## Installation
 
-Require the modules in your composer.json
+For the installation of modules Composer is required.
 
 ```sh
-"luyadev/luya-module-gallery" : "1.0.0-RC4"
+composer require luyadev/luya-module-gallery:1.0.0-RC4
 ```
 
-Now add the modules to your configuration in the modules section:
+
+### Configuration
+
+After installation via Composer include the module to your configuration file within the modules section.
 
 ```php
 'modules' => [
@@ -25,21 +28,21 @@ Now add the modules to your configuration in the modules section:
     'galleryadmin' => 'luya\gallery\admin\Module',
 ]
 ```
+### Initialization 
 
-After runing the `composer update` command you have to run the migration command in order to setup the database:
+After successfully installation and configuration run the migrate, import and setup command to initialize the module in your project.
+
+1.) Migrate your database.
 
 ```sh
 ./vendor/bin/luya migrate
 ```
 
-and import the module to your database:
+2.) Import the module and migrations into your LUYA project.
 
 ```sh
 ./vendor/bin/luya import
 ```
-
-You can now login to your administration area and setup the permissions in order to see the gallery module in your administration area. To integrate the module to your page you can create a page with *type* module or use the *module block*.
-
 
 ## View files
 
