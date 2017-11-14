@@ -56,24 +56,6 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         $this->assertInstanceOf('luya\web\jsonld\BaseThing', $event);
     }
 
-    /*
-    public function testPerson()
-    {
-        $person = (new Person())->setName('John Doe');
-        
-        $this->assertSame(['name' => 'John Doe', 'givenName' => null, 'familyName' => null], $person->toArray());
-      
-        JsonLd::reset();
-        $staticPerson = JsonLd::person()->setName('John Doe');
-        
-        ob_start();
-        $this->app->view->beginBody();
-        $out = ob_get_contents();
-        ob_end_clean();
-        
-        $this->assertContains('{"@graph":[{"name":"John Doe","givenName":null,"familyName":null}]}', $out);
-    }
-    */
     public function testThing()
     {
         $thing = (new Thing())->setName('The Thing');
@@ -168,7 +150,6 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
             'subjectOf' => null,
             'url' => null
         ], $thing->toArray());
-        
 
         JsonLd::reset();
         $staticThing = JsonLd::organization()->setName('The Organization');
@@ -180,7 +161,90 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
 
         $this->assertContains('{"@graph":[{"actionableFeedbackPolicy":null,"address":null,"aggregateRating":null,"alumni":null,"areaServed":null,"award":null,"brand":null,"contactPoint":null,"correctionsPolicy":null,"department":null,"dissolutionDate":null,"diversityPolicy":null,"duns":null,"email":null,"employee":null,"ethicsPolicy":null,"event":null,"faxNumber":null,"founder":null,"foundingDate":null,"foundingLocation":null,"funder":null,"globalLocationNumber":null,"hasOfferCatalog":null,"hasPOS":null,"isicV4":null,"legalName":null,"leiCode":null,"location":null,"logo":null,"makesOffer":null,"member":null,"memberOf":null,"naics":null,"numberOfEmployees":null,"owns":null,"parentOrganization":null,"publishingPrinciples":null,"review":null,"seeks":null,"sponsor":null,"subOrganization":null,"taxID":null,"telephone":null,"unnamedSourcesPolicy":null,"vatID":null,"additionalType":null,"alternateName":null,"description":null,"disambiguatingDescription":null,"identifier":null,"image":null,"mainEntityOfPage":null,"name":"The Organization","potentialAction":null,"sameAs":null,"subjectOf":null,"url":null}]}', $out);
     }
-    
+
+    public function testPerson()
+    {
+        $thing = (new Person())->setName('The Person');
+
+        $this->assertSame([
+            'additionalName' => null,
+            'address' => null,
+            'affiliation' => null,
+            'alumniOf' => null,
+            'award' => null,
+            'birthDate' => null,
+            'birthPlace' => null,
+            'brand' => null,
+            'children' => null,
+            'colleague' => null,
+            'contactPoint' => null,
+            'deathDate' => null,
+            'deathPlace' => null,
+            'duns' => null,
+            'email' => null,
+            'familyName' => null,
+            'faxNumber' => null,
+            'follows' => null,
+            'funder' => null,
+            'gender' => null,
+            'givenName' => null,
+            'globalLocationNumber' => null,
+            'hasOccupation' => null,
+            'hasOfferCatalog' => null,
+            'hasPOS' => null,
+            'height' => null,
+            'homeLocation' => null,
+            'honorificPrefix' => null,
+            'honorificSuffix' => null,
+            'isicV4' => null,
+            'jobTitle' => null,
+            'knows' => null,
+            'makesOffer' => null,
+            'memberOf' => null,
+            'naics' => null,
+            'nationality' => null,
+            'netWorth' => null,
+            'owns' => null,
+            'parent' => null,
+            'performerIn' => null,
+            'publishingPrinciples' => null,
+            'relatedTo' => null,
+            'seeks' => null,
+            'sibling' => null,
+            'sponsor' => null,
+            'spouse' => null,
+            'taxID' => null,
+            'telephone' => null,
+            'vatID' => null,
+            'weight' => null,
+            'workLocation' => null,
+            'worksFor' => null,
+            'additionalType' => null,
+            'alternateName' => null,
+            'description' => null,
+            'disambiguatingDescription' => null,
+            'identifier' => null,
+            'image' => null,
+            'mainEntityOfPage' => null,
+            'name' => 'The Person',
+            'potentialAction' => null,
+            'sameAs' => null,
+            'subjectOf' => null,
+            'url' => null
+        ], $thing->toArray());
+
+        JsonLd::reset();
+        $staticThing = JsonLd::person()->setName('The Person');
+
+        ob_start();
+        $this->app->view->beginBody();
+        $out = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertContains('{"@graph":[{"additionalName":null,"address":null,"affiliation":null,"alumniOf":null,"award":null,"birthDate":null,"birthPlace":null,"brand":null,"children":null,"colleague":null,"contactPoint":null,"deathDate":null,"deathPlace":null,"duns":null,"email":null,"familyName":null,"faxNumber":null,"follows":null,"funder":null,"gender":null,"givenName":null,"globalLocationNumber":null,"hasOccupation":null,"hasOfferCatalog":null,"hasPOS":null,"height":null,"homeLocation":null,"honorificPrefix":null,"honorificSuffix":null,"isicV4":null,"jobTitle":null,"knows":null,"makesOffer":null,"memberOf":null,"naics":null,"nationality":null,"netWorth":null,"owns":null,"parent":null,"performerIn":null,"publishingPrinciples":null,"relatedTo":null,"seeks":null,"sibling":null,"sponsor":null,"spouse":null,"taxID":null,"telephone":null,"vatID":null,"weight":null,"workLocation":null,"worksFor":null,"additionalType":null,"alternateName":null,"description":null,"disambiguatingDescription":null,"identifier":null,"image":null,"mainEntityOfPage":null,"name":"The Person","potentialAction":null,"sameAs":null,"subjectOf":null,"url":null}]}', $out);
+    }
+
+    /*
     public function testEvent()
     {
         JsonLd::reset();
@@ -196,6 +260,6 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         
         $this->assertContains('{"@graph":[{"locations":[{"name":"My Location","addresses":[{"street":null,"zip":null,"city":"Aarau"}]}]}]}', $out);
     }
-
+    */
 
 }
