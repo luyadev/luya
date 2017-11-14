@@ -99,6 +99,7 @@ use luya\admin\helpers\Angular;
 </script>
 <!-- /UPDATE REDIRECT FORM -->
 
+
 <script type="text/ng-template" id="menuDropdownReverse">
     <span class="treeview-label treeview-label-page" ng-click="changeModel(data)">
         <span class="treeview-icon">
