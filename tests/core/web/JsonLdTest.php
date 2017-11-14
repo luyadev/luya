@@ -100,7 +100,7 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         $out = ob_get_contents();
         ob_end_clean();
 
-        $this->assertContains('{"@graph":[{"name":"The Thing","description":null,"$sameAs":null}]}', $out);
+        $this->assertContains('{"@graph":[{"additionalType":null,"alternateName":null,"description":null,"disambiguatingDescription":null,"identifier":null,"image":null,"mainEntityOfPage":null,"name":"The Thing","potentialAction":null,"sameAs":null,"subjectOf":null,"url":null}]}', $out);
     }
     
     public function testEvent()
