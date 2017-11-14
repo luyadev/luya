@@ -47,7 +47,8 @@
   + [Admin Permissions &amp; Menu](app-admin-module-permission.md)
   + [Admin Assets](app-admin-module-assets.md)
   + [Admin Dashboard Objects](app-admin-module-dashboardobjects.md)
-  + [Admin CSS Styles](app-admin-styles.md)
+  + [Admin CSS Styles](app-admin-module-styles.md)
+  + [Admin Forms](app-admin-module-forms.md)
 + NgRest CRUD
   + [NgRest Concept](ngrest-concept.md)
   + [NgRest Model](ngrest-model.md)
