@@ -4,20 +4,6 @@ namespace luya\web\jsonld;
 
 class Person extends BaseThing
 {
-    private $_name;
-    
-    public function setName($name)
-    {
-        $this->_name = $name;
-        
-        return $this;
-    }
-    
-    public function getName()
-    {
-        return $this->_name;
-    }
-    
     private $_givenName;
     
     public function setGivenName($givenName)
