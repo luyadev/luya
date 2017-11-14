@@ -1,6 +1,7 @@
 <?php
 namespace luyatests\core\web;
 
+use luya\web\jsonld\Thing;
 use Yii;
 use luya\web\JsonLd;
 use luya\web\jsonld\Event;
@@ -53,7 +54,8 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         
         $this->assertInstanceOf('luya\web\jsonld\BaseThing', $event);
     }
-    
+
+    /*
     public function testPerson()
     {
         $person = (new Person())->setName('John Doe');
@@ -69,6 +71,36 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ob_end_clean();
         
         $this->assertContains('{"@graph":[{"name":"John Doe","givenName":null,"familyName":null}]}', $out);
+    }
+    */
+    public function testThing()
+    {
+        $thing = (new Thing())->setName('The Thing');
+
+        $this->assertSame([
+            'additionalType' => null,
+            'alternateName' => null,
+            'description' => null,
+            'disambiguatingDescription' => null,
+            'identifier' => null,
+            'image' => null,
+            'mainEntityOfPage' => null,
+            'name' => 'The Thing',
+            'potentialAction' => null,
+            'sameAs' => null,
+            'subjectOf' => null,
+            'url' => null
+        ], $thing->toArray());
+
+        JsonLd::reset();
+        $staticThing = JsonLd::thing()->setName('The Thing');
+
+        ob_start();
+        $this->app->view->beginBody();
+        $out = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertContains('{"@graph":[{"name":"The Thing","description":null,"$sameAs":null}]}', $out);
     }
     
     public function testEvent()
@@ -86,4 +118,6 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         
         $this->assertContains('{"@graph":[{"locations":[{"name":"My Location","addresses":[{"street":null,"zip":null,"city":"Aarau"}]}]}]}', $out);
     }
+
+
 }

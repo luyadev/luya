@@ -368,10 +368,10 @@ class Organization extends Thing implements OrganizationInterface
     private $_vatID;
 
     public function fields() {
-        return ['actionableFeedbackPolicy', 'address', 'aggregateRating', 'alumni', 'areaServed', 'award', 'brand', 'contactPoint', 'correctionsPolicy', 'department',
+        return array_merge(['actionableFeedbackPolicy', 'address', 'aggregateRating', 'alumni', 'areaServed', 'award', 'brand', 'contactPoint', 'correctionsPolicy', 'department',
                 'dissolutionDate', 'diversityPolicy', 'duns', 'email', 'employee', 'ethicsPolicy', 'event', 'faxNumber', 'founder', 'foundingDate', 'foundingLocation',
                 'funder', 'globalLocationNumber', 'hasOfferCatalog', 'hasPOS', 'isicV4', 'legalName', 'leiCode', 'location', 'logo', 'makesOffer', 'member', 'memberOf',
                 'naics', 'numberOfEmployees', 'owns', 'parentOrganization', 'publishingPrinciples', 'review', 'seeks', 'sponsor', 'subOrganization', 'taxID', 'telephone',
-                'unnamedSourcesPolicy', 'vatID'].join(parent::fields());
+                'unnamedSourcesPolicy', 'vatID'], parent::fields());
     }
 }
