@@ -122,6 +122,7 @@ class Angular
      * @param string $ngModel The name of the ng model which should be used for data binding.
      * @param string $label The label to display for the form input.
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
+     * + placeholder: Optionally add placeholder value to text inputs.
      * @return string
      */
     public static function text($ngModel, $label, array $options = [])
