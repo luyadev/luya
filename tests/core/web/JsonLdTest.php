@@ -1,6 +1,7 @@
 <?php
 namespace luyatests\core\web;
 
+use luya\web\jsonld\Organization;
 use luya\web\jsonld\Thing;
 use Yii;
 use luya\web\JsonLd;
@@ -101,6 +102,83 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ob_end_clean();
 
         $this->assertContains('{"@graph":[{"additionalType":null,"alternateName":null,"description":null,"disambiguatingDescription":null,"identifier":null,"image":null,"mainEntityOfPage":null,"name":"The Thing","potentialAction":null,"sameAs":null,"subjectOf":null,"url":null}]}', $out);
+    }
+
+    public function testOrganization()
+    {
+        $thing = (new Organization())->setName('The Organization');
+
+        $this->assertSame([
+            'actionableFeedbackPolicy' => null,
+            'address' => null,
+            'aggregateRating' => null,
+            'alumni' => null,
+            'areaServed' => null,
+            'award' => null,
+            'brand' => null,
+            'contactPoint' => null,
+            'correctionsPolicy' => null,
+            'department' => null,// ""=null,
+            'dissolutionDate' => null,
+            'diversityPolicy' => null,
+            'duns' => null,
+            'email' => null,
+            'employee' => null,
+            'ethicsPolicy' => null,
+            'event' => null,
+            'faxNumber' => null,
+            'founder' => null,
+            'foundingDate' => null,//
+            'foundingLocation' => null,
+            'funder' => null,
+            'globalLocationNumber' => null,
+            'hasOfferCatalog' => null,
+            'hasPOS' => null,
+            'isicV4' => null,
+            'legalName' => null,
+            'leiCode' => null,
+            'location' => null,
+            'logo' => null,
+            'makesOffer' => null,
+            'member' => null,
+            'memberOf' => null,
+            'naics' => null,
+            'numberOfEmployees' => null,
+            'owns' => null,
+            'parentOrganization' => null,
+            'publishingPrinciples' => null,
+            'review' => null,
+            'seeks' => null,
+            'sponsor' => null,
+            'subOrganization' => null,
+            'taxID' => null,
+            'telephone' => null,
+            'unnamedSourcesPolicy' => null,
+            'vatID' => null,
+            'additionalType' => null,
+            'alternateName' => null,
+            'description' => null,
+            'disambiguatingDescription' => null,
+            'identifier' => null,
+            'image' => null,
+            'mainEntityOfPage' => null,
+            'name' => 'The Organization',
+            'potentialAction' => null,
+            'sameAs' => null,
+            'subjectOf' => null,
+            'url' => null
+        ], $thing->toArray());
+        
+
+        JsonLd::reset();
+        $staticThing = JsonLd::organization()->setName('The Organization');
+
+        ob_start();
+        $this->app->view->beginBody();
+        $out = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertContains('{"@graph":[{"actionableFeedbackPolicy":null,"address":null,"aggregateRating":null,"alumni":null,"areaServed":null,"award":null,"brand":null,"contactPoint":null,"correctionsPolicy":null,"department":null,"dissolutionDate":null,"diversityPolicy":null,"duns":null,"email":null,"employee":null,"ethicsPolicy":null,"event":null,"faxNumber":null,"founder":null,"foundingDate":null,"foundingLocation":null,"funder":null,"globalLocationNumber":null,"hasOfferCatalog":null,"hasPOS":null,"isicV4":null,"legalName":null,"leiCode":null,"location":null,"logo":null,"makesOffer":null,"member":null,"memberOf":null,"naics":null,"numberOfEmployees":null,"owns":null,"parentOrganization":null,"publishingPrinciples":null,"review":null,"seeks":null,"sponsor":null,"subOrganization":null,"taxID":null,"telephone":null,"unnamedSourcesPolicy":null,"vatID":null,"additionalType":null,"alternateName":null,"description":null,"disambiguatingDescription":null,"identifier":null,"image":null,"mainEntityOfPage":null,"name":"The Organization","potentialAction":null,"sameAs":null,"subjectOf":null,"url":null}]}', $out);
     }
     
     public function testEvent()

@@ -1,15 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 14.11.17
- * Time: 19:01
- */
 
 namespace luya\web\jsonld;
 
-
+/**
+ * JsonLd - Person interface
+ *
+ * @see http://schema.org/Organization
+ *
+ * @author Alex Schmid
+ * @since 1.0.0
+ */
 interface PersonInterface
 {
-
+    /**
+     * Return the fields
+     */
+    public function fields();
 }
