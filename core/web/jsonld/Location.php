@@ -31,12 +31,4 @@ class Location extends BaseThing
     {
         return $this->_addresses;
     }
-    
-    public function fields()
-    {
-        return [
-            'name',
-            'addresses',
-        ];
-    }
 }

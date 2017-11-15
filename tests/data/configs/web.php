@@ -1,5 +1,4 @@
 <?php
-
 return [
     'id' => 'testenv',
     'siteTitle' => 'Luya Tests',
