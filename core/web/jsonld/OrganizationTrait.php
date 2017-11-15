@@ -10,10 +10,6 @@ namespace luya\web\jsonld;
  */
 trait OrganizationTrait
 {
-    use ThingTrait {
-        fields as thingFields;
-    }
-
     /**
      * For a NewsMediaOrganization or other news-related Organization,
      * a statement about public engagement activities (for news media, the newsroom’s),
@@ -1192,16 +1188,5 @@ trait OrganizationTrait
     {
         $this->_vatID[] = $vatID;
         return $this;
-    }
-
-    /**
-     * Return fields
-     */
-    public function fields() {
-        return array_merge(['actionableFeedbackPolicy', 'address', 'aggregateRating', 'alumni', 'areaServed', 'award', 'brand', 'contactPoint', 'correctionsPolicy', 'department',
-            'dissolutionDate', 'diversityPolicy', 'duns', 'email', 'employee', 'ethicsPolicy', 'event', 'faxNumber', 'founder', 'foundingDate', 'foundingLocation',
-            'funder', 'globalLocationNumber', 'hasOfferCatalog', 'hasPOS', 'isicV4', 'legalName', 'leiCode', 'location', 'logo', 'makesOffer', 'member', 'memberOf',
-            'naics', 'numberOfEmployees', 'owns', 'parentOrganization', 'publishingPrinciples', 'review', 'seeks', 'sponsor', 'subOrganization', 'taxID', 'telephone',
-            'unnamedSourcesPolicy', 'vatID'], $this->thingFields());
     }
 }

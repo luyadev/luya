@@ -14,5 +14,4 @@ namespace luya\web\jsonld;
  */
 class Thing extends BaseThing
 {
-    use ThingTrait;
 }

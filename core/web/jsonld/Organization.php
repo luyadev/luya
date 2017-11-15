@@ -10,7 +10,7 @@ namespace luya\web\jsonld;
  * @author Alex Schmid
  * @since 1.0.0
  */
-class Organization extends BaseThing implements ThingInterface, OrganizationInterface
+class Organization extends BaseThing implements OrganizationInterface
 {
     use OrganizationTrait;
 }

@@ -44,12 +44,4 @@ class Address extends BaseThing
     {
         return $this->_city;
     }
-    
-    
-    public function fields()
-    {
-        return [
-            'street', 'zip', 'city',
-        ];
-    }
 }

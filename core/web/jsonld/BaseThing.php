@@ -15,8 +15,9 @@ use luya\helpers\StringHelper;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class BaseThing extends Object implements Arrayable
+abstract class BaseThing extends Object implements Arrayable, ThingInterface
 {
+    use ThingTrait;
     use ArrayableTrait;
     
     public function resolveGetterMethods()

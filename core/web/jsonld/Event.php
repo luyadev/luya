@@ -17,11 +17,4 @@ class Event extends BaseThing
     
         return $this;
     }
-    
-    public function fields()
-    {
-        return [
-            'locations',
-        ];
-    }
 }

@@ -18,10 +18,10 @@ interface PersonInterface
     public function getAdditionalName();
 
     /**
-     * @param string $additionalName
+     * @param $additionalName
      * @return PersonTrait
      */
-    public function setAdditionalName(string $additionalName);
+    public function setAdditionalName($additionalName);
 
     /**
      * @return PostalAddress|string
@@ -29,7 +29,7 @@ interface PersonInterface
     public function getAddress();
 
     /**
-     * @param PostalAddress|string $address
+     * @param PostalAddress|$address
      * @return PersonTrait
      */
     public function setAddress($address);
@@ -62,10 +62,10 @@ interface PersonInterface
     public function getAward();
 
     /**
-     * @param string $award
+     * @param $award
      * @return PersonTrait
      */
-    public function setAward(string $award);
+    public function setAward($award);
 
     /**
      * @return Date
@@ -76,7 +76,7 @@ interface PersonInterface
      * @param Date $birthDate
      * @return PersonTrait
      */
-    public function setBirthDate(Date $birthDate);
+    public function setBirthDate($birthDate);
 
     /**
      * @return Place
@@ -87,7 +87,7 @@ interface PersonInterface
      * @param Place $birthPlace
      * @return PersonTrait
      */
-    public function setBirthPlace(Place $birthPlace);
+    public function setBirthPlace($birthPlace);
 
     /**
      * @return Brand|Organization
@@ -130,7 +130,7 @@ interface PersonInterface
      * @param ContactPoint $contactPoint
      * @return PersonTrait
      */
-    public function setContactPoint(ContactPoint $contactPoint);
+    public function setContactPoint($contactPoint);
 
     /**
      * @return Date
@@ -141,7 +141,7 @@ interface PersonInterface
      * @param Date $deathDate
      * @return PersonTrait
      */
-    public function setDeathDate(Date $deathDate);
+    public function setDeathDate($deathDate);
 
     /**
      * @return Place
@@ -152,7 +152,7 @@ interface PersonInterface
      * @param Place $deathPlace
      * @return PersonTrait
      */
-    public function setDeathPlace(Place $deathPlace);
+    public function setDeathPlace($deathPlace);
 
     /**
      * @return string
@@ -160,10 +160,10 @@ interface PersonInterface
     public function getDuns();
 
     /**
-     * @param string $duns
+     * @param $duns
      * @return PersonTrait
      */
-    public function setDuns(string $duns);
+    public function setDuns($duns);
 
     /**
      * @return string
@@ -171,10 +171,10 @@ interface PersonInterface
     public function getEmail();
 
     /**
-     * @param string $email
+     * @param $email
      * @return PersonTrait
      */
-    public function setEmail(string $email);
+    public function setEmail($email);
 
     /**
      * @return string
@@ -182,10 +182,10 @@ interface PersonInterface
     public function getFamilyName();
 
     /**
-     * @param string $familyName
+     * @param $familyName
      * @return PersonTrait
      */
-    public function setFamilyName(string $familyName);
+    public function setFamilyName($familyName);
 
     /**
      * @return string
@@ -193,10 +193,10 @@ interface PersonInterface
     public function getFaxNumber();
 
     /**
-     * @param string $faxNumber
+     * @param $faxNumber
      * @return PersonTrait
      */
-    public function setFaxNumber(string $faxNumber);
+    public function setFaxNumber($faxNumber);
 
     /**
      * @return Person
@@ -226,7 +226,7 @@ interface PersonInterface
     public function getGender();
 
     /**
-     * @param GenderType|string $gender
+     * @param GenderType|$gender
      * @return PersonTrait
      */
     public function setGender($gender);
@@ -237,10 +237,10 @@ interface PersonInterface
     public function getGivenName();
 
     /**
-     * @param string $givenName
+     * @param $givenName
      * @return PersonTrait
      */
-    public function setGivenName(string $givenName);
+    public function setGivenName($givenName);
 
     /**
      * @return string
@@ -248,10 +248,10 @@ interface PersonInterface
     public function getGlobalLocationNumber();
 
     /**
-     * @param string $globalLocationNumber
+     * @param $globalLocationNumber
      * @return PersonTrait
      */
-    public function setGlobalLocationNumber(string $globalLocationNumber);
+    public function setGlobalLocationNumber($globalLocationNumber);
 
     /**
      * @return Occupation
@@ -262,7 +262,7 @@ interface PersonInterface
      * @param Occupation $hasOccupation
      * @return PersonTrait
      */
-    public function setHasOccupation(Occupation $hasOccupation);
+    public function setHasOccupation($hasOccupation);
 
     /**
      * @return OfferCatalog
@@ -273,7 +273,7 @@ interface PersonInterface
      * @param OfferCatalog $hasOfferCatalog
      * @return PersonTrait
      */
-    public function setHasOfferCatalog(OfferCatalog $hasOfferCatalog);
+    public function setHasOfferCatalog($hasOfferCatalog);
 
     /**
      * @return Place
@@ -284,7 +284,7 @@ interface PersonInterface
      * @param Place $hasPOS
      * @return PersonTrait
      */
-    public function setHasPOS(Place $hasPOS);
+    public function setHasPOS($hasPOS);
 
     /**
      * @return Distance|QuantitativeValue
@@ -313,10 +313,10 @@ interface PersonInterface
     public function getHonorificPrefix();
 
     /**
-     * @param string $honorificPrefix
+     * @param $honorificPrefix
      * @return PersonTrait
      */
-    public function setHonorificPrefix(string $honorificPrefix);
+    public function setHonorificPrefix($honorificPrefix);
 
     /**
      * @return string
@@ -324,10 +324,10 @@ interface PersonInterface
     public function getHonorificSuffix();
 
     /**
-     * @param string $honorificSuffix
+     * @param $honorificSuffix
      * @return PersonTrait
      */
-    public function setHonorificSuffix(string $honorificSuffix);
+    public function setHonorificSuffix($honorificSuffix);
 
     /**
      * @return string
@@ -335,19 +335,19 @@ interface PersonInterface
     public function getIsicV4();
 
     /**
-     * @param string $isicV4
+     * @param $isicV4
      * @return PersonTrait
      */
-    public function setIsicV4(string $isicV4);
+    public function setIsicV4($isicV4);
     /**
      * @return string
      */
     public function getJobTitle();
     /**
-     * @param string $jobTitle
+     * @param $jobTitle
      * @return PersonTrait
      */
-    public function setJobTitle(string $jobTitle);
+    public function setJobTitle($jobTitle);
 
     /**
      * @return Person
@@ -367,7 +367,7 @@ interface PersonInterface
      * @param Offer $makesOffer
      * @return PersonTrait
      */
-    public function setMakesOffer(Offer $makesOffer);
+    public function setMakesOffer($makesOffer);
 
     /**
      * @return Organization|ProgramMembership
@@ -386,10 +386,10 @@ interface PersonInterface
     public function getNaics();
 
     /**
-     * @param string $naics
+     * @param $naics
      * @return PersonTrait
      */
-    public function setNaics(string $naics);
+    public function setNaics($naics);
 
     /**
      * @return Country
@@ -399,7 +399,7 @@ interface PersonInterface
      * @param Country $nationality
      * @return PersonTrait
      */
-    public function setNationality(Country $nationality);
+    public function setNationality($nationality);
     /**
      * @return MonetaryAmount|PriceSpecification
      */
@@ -474,7 +474,7 @@ interface PersonInterface
      * @param Demand $seeks
      * @return PersonTrait
      */
-    public function setSeeks(Demand $seeks);
+    public function setSeeks($seeks);
 
     /**
      * @return Person
@@ -515,10 +515,10 @@ interface PersonInterface
     public function getTaxID();
 
     /**
-     * @param string $taxID
+     * @param $taxID
      * @return PersonTrait
      */
-    public function setTaxID(string $taxID);
+    public function setTaxID($taxID);
 
     /**
      * @return string
@@ -526,10 +526,10 @@ interface PersonInterface
     public function getTelephone();
 
     /**
-     * @param string $telephone
+     * @param $telephone
      * @return PersonTrait
      */
-    public function setTelephone(string $telephone);
+    public function setTelephone($telephone);
 
     /**
      * @return string
@@ -537,10 +537,10 @@ interface PersonInterface
     public function getVatID();
 
     /**
-     * @param string $vatID
+     * @param $vatID
      * @return PersonTrait
      */
-    public function setVatID(string $vatID);
+    public function setVatID($vatID);
 
     /**
      * @return QuantitativeValue
@@ -551,7 +551,7 @@ interface PersonInterface
      * @param QuantitativeValue $weight
      * @return PersonTrait
      */
-    public function setWeight(QuantitativeValue $weight);
+    public function setWeight($weight);
 
     /**
      * @return ContactPoint|Place
@@ -574,9 +574,4 @@ interface PersonInterface
      * @return PersonTrait
      */
     public function setWorksFor(Organization $worksFor);
-
-    /**
-     * Return the fields
-     */
-    public function fields();
 }

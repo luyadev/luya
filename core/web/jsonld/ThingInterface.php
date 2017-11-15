@@ -19,7 +19,7 @@ interface ThingInterface
      * @param URL $additionalType
      * @return Thing
      */
-    public function setAdditionalType(URL $additionalType);
+    public function setAdditionalType($additionalType);
 
     /**
      * @return string
@@ -30,7 +30,7 @@ interface ThingInterface
      * @param string $alternateName
      * @return Thing
      */
-    public function setAlternateName(string $alternateName);
+    public function setAlternateName($alternateName);
 
     /**
      * @return string
@@ -41,7 +41,7 @@ interface ThingInterface
      * @param string $description
      * @return Thing
      */
-    public function setDescription(string $description);
+    public function setDescription($description);
 
     /**
      * @return string
@@ -52,7 +52,7 @@ interface ThingInterface
      * @param string $disambiguatingDescription
      * @return Thing
      */
-    public function setDisambiguatingDescription(string $disambiguatingDescription);
+    public function setDisambiguatingDescription($disambiguatingDescription);
 
     /**
      * @return PropertyValue|URL|string
@@ -96,7 +96,7 @@ interface ThingInterface
      * @param string $name
      * @return Thing
      */
-    public function setName(string $name);
+    public function setName($name);
 
     /**
      * @return Action
@@ -107,7 +107,7 @@ interface ThingInterface
      * @param Action $potentialAction
      * @return Thing
      */
-    public function setPotentialAction(Action $potentialAction);
+    public function setPotentialAction($potentialAction);
 
     /**
      * @return URL
@@ -118,7 +118,7 @@ interface ThingInterface
      * @param URL $sameAs
      * @return Thing
      */
-    public function setSameAs(URL $sameAs);
+    public function setSameAs($sameAs);
 
     /**
      * @return CreativeWork|Event
@@ -140,10 +140,5 @@ interface ThingInterface
      * @param URL $url
      * @return Thing
      */
-    public function setUrl(URL $url);
-
-    /**
-     * Return the fields
-     */
-    public function fields();
+    public function setUrl($url);
 }

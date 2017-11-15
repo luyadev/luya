@@ -15,7 +15,7 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
     public function testAssignView()
     {
         Jsonld::addGraph(['foo' => 'bar']);
-        
+        // this test should only be run once, this its testing the script to view ld part.
         ob_start();
         $this->app->view->beginBody();
         $out = ob_get_contents();
@@ -24,15 +24,14 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         $this->assertContains('<script type="application/ld+json">{"@graph":[{"foo":"bar"}]}</script>', $out);
         JsonLd::reset();
     }
-    
-
 
     public function testBaseThingGetters()
     {
     	$thing = (new Location());
     	$fields = $thing->resolveGetterMethods();
     	 
-    	$this->assertSame(['name', 'addresses'], $fields);
+    	$this->assertSame([
+    	    'name', 'addresses', 'additionalType', 'alternateName', 'description', 'disambiguatingDescription', 'identifier', 'image', 'mainEntityOfPage', 'potentialAction', 'sameAs', 'subjectOf', 'url'], $fields);
     }
     
     public function testJsonLdElementGraphNesting()
@@ -51,7 +50,6 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         $event->setLocation($hallenstadion);
         $event->setLocation($jakobspark);
         
-
         $this->assertSame([
             'locations' => [
                 ['name' => 'Hallenstadion', 'addresses' => [
@@ -224,23 +222,5 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
             'url' => null
         ], $thing->toArray());
     }
-
-    /*
-    public function testEvent()
-    {
-        JsonLd::reset();
-        
-        $address = (new Address())->setCity('Aarau');
-        $location = (new Location())->setName('My Location')->setAddress($address);
-        JsonLd::event()->setLocation($location);
-        
-        ob_start();
-        $this->app->view->beginBody();
-        $out = ob_get_contents();
-        ob_end_clean();
-        
-        $this->assertContains('{"@graph":[{"locations":[{"name":"My Location","addresses":[{"street":null,"zip":null,"city":"Aarau"}]}]}]}', $out);
-    }
-    */
 
 }

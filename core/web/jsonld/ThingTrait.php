@@ -27,10 +27,10 @@ trait ThingTrait
     }
 
     /**
-     * @param URL $additionalType
+     * @param string $additionalType
      * @return Thing
      */
-    public function setAdditionalType(URL $additionalType)
+    public function setAdditionalType($additionalType)
     {
         $this->_additionalType = $additionalType;
         return $this;
@@ -55,7 +55,7 @@ trait ThingTrait
      * @param string $alternateName
      * @return Thing
      */
-    public function setAlternateName(string $alternateName)
+    public function setAlternateName($alternateName)
     {
         $this->_alternateName = $alternateName;
         return $this;
@@ -80,7 +80,7 @@ trait ThingTrait
      * @param string $description
      * @return Thing
      */
-    public function setDescription(string $description)
+    public function setDescription($description)
     {
         $this->_description = $description;
         return $this;
@@ -106,7 +106,7 @@ trait ThingTrait
      * @param string $disambiguatingDescription
      * @return Thing
      */
-    public function setDisambiguatingDescription(string $disambiguatingDescription)
+    public function setDisambiguatingDescription($disambiguatingDescription)
     {
         $this->_disambiguatingDescription = $disambiguatingDescription;
         return $this;
@@ -208,7 +208,7 @@ trait ThingTrait
      * @param string $name
      * @return Thing
      */
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->_name = $name;
         return $this;
@@ -233,7 +233,7 @@ trait ThingTrait
      * @param Action $potentialAction
      * @return Thing
      */
-    public function setPotentialAction(Action $potentialAction)
+    public function setPotentialAction($potentialAction)
     {
         $this->_potentialAction = $potentialAction;
         return $this;
@@ -259,7 +259,7 @@ trait ThingTrait
      * @param URL $sameAs
      * @return Thing
      */
-    public function setSameAs(URL $sameAs)
+    public function setSameAs($sameAs)
     {
         $this->_sameAs = $sameAs;
         return $this;
@@ -310,17 +310,9 @@ trait ThingTrait
      * @param URL $url
      * @return Thing
      */
-    public function setUrl(URL $url)
+    public function setUrl($url)
     {
         $this->_url = $url;
         return $this;
-    }
-
-    /**
-     * Return the fields
-     */
-    public function fields()
-    {
-        return ['additionalType', 'alternateName', 'description', 'disambiguatingDescription', 'identifier', 'image', 'mainEntityOfPage', 'name', 'potentialAction', 'sameAs', 'subjectOf', 'url'];
     }
 }

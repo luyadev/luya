@@ -12,10 +12,6 @@ namespace luya\web\jsonld;
  */
 trait PersonTrait
 {
-    use ThingTrait {
-        fields as thingFields;
-    }
-
     /**
      * 	An additional name for a Person, can be used for a middle name.
      *
@@ -35,7 +31,7 @@ trait PersonTrait
      * @param string $additionalName
      * @return PersonTrait
      */
-    public function setAdditionalName(string $additionalName)
+    public function setAdditionalName($additionalName)
     {
         $this->_additionalName = $additionalName;
         return $this;
@@ -136,7 +132,7 @@ trait PersonTrait
      * @param string $award
      * @return PersonTrait
      */
-    public function setAward(string $award)
+    public function setAward($award)
     {
         $this->_award = $award;
         return $this;
@@ -161,7 +157,7 @@ trait PersonTrait
      * @param Date $birthDate
      * @return PersonTrait
      */
-    public function setBirthDate(Date $birthDate)
+    public function setBirthDate($birthDate)
     {
         $this->_birthDate = $birthDate;
         return $this;
@@ -186,7 +182,7 @@ trait PersonTrait
      * @param Place $birthPlace
      * @return PersonTrait
      */
-    public function setBirthPlace(Place $birthPlace)
+    public function setBirthPlace($birthPlace)
     {
         $this->_birthPlace = $birthPlace;
         return $this;
@@ -288,7 +284,7 @@ trait PersonTrait
      * @param ContactPoint $contactPoint
      * @return PersonTrait
      */
-    public function setContactPoint(ContactPoint $contactPoint)
+    public function setContactPoint($contactPoint)
     {
         $this->_contactPoint = $contactPoint;
         return $this;
@@ -313,7 +309,7 @@ trait PersonTrait
      * @param Date $deathDate
      * @return PersonTrait
      */
-    public function setDeathDate(Date $deathDate)
+    public function setDeathDate($deathDate)
     {
         $this->_deathDate = $deathDate;
         return $this;
@@ -338,7 +334,7 @@ trait PersonTrait
      * @param Place $deathPlace
      * @return PersonTrait
      */
-    public function setDeathPlace(Place $deathPlace)
+    public function setDeathPlace($deathPlace)
     {
         $this->_deathPlace = $deathPlace;
         return $this;
@@ -363,7 +359,7 @@ trait PersonTrait
      * @param string $duns
      * @return PersonTrait
      */
-    public function setDuns(string $duns)
+    public function setDuns($duns)
     {
         $this->_duns = $duns;
         return $this;
@@ -388,7 +384,7 @@ trait PersonTrait
      * @param string $email
      * @return PersonTrait
      */
-    public function setEmail(string $email)
+    public function setEmail($email)
     {
         $this->_email = $email;
         return $this;
@@ -414,7 +410,7 @@ trait PersonTrait
      * @param string $familyName
      * @return PersonTrait
      */
-    public function setFamilyName(string $familyName)
+    public function setFamilyName($familyName)
     {
         $this->_familyName = $familyName;
         return $this;
@@ -439,7 +435,7 @@ trait PersonTrait
      * @param string $faxNumber
      * @return PersonTrait
      */
-    public function setFaxNumber(string $faxNumber)
+    public function setFaxNumber($faxNumber)
     {
         $this->_faxNumber = $faxNumber;
         return $this;
@@ -541,7 +537,7 @@ trait PersonTrait
      * @param string $givenName
      * @return PersonTrait
      */
-    public function setGivenName(string $givenName)
+    public function setGivenName($givenName)
     {
         $this->_givenName = $givenName;
         return $this;
@@ -568,7 +564,7 @@ trait PersonTrait
      * @param string $globalLocationNumber
      * @return PersonTrait
      */
-    public function setGlobalLocationNumber(string $globalLocationNumber)
+    public function setGlobalLocationNumber($globalLocationNumber)
     {
         $this->_globalLocationNumber = $globalLocationNumber;
         return $this;
@@ -593,7 +589,7 @@ trait PersonTrait
      * @param Occupation $hasOccupation
      * @return PersonTrait
      */
-    public function setHasOccupation(Occupation $hasOccupation)
+    public function setHasOccupation($hasOccupation)
     {
         $this->_hasOccupation = $hasOccupation;
         return $this;
@@ -618,7 +614,7 @@ trait PersonTrait
      * @param OfferCatalog $hasOfferCatalog
      * @return PersonTrait
      */
-    public function setHasOfferCatalog(OfferCatalog $hasOfferCatalog)
+    public function setHasOfferCatalog($hasOfferCatalog)
     {
         $this->_hasOfferCatalog = $hasOfferCatalog;
         return $this;
@@ -643,7 +639,7 @@ trait PersonTrait
      * @param Place $hasPOS
      * @return PersonTrait
      */
-    public function setHasPOS(Place $hasPOS)
+    public function setHasPOS($hasPOS)
     {
         $this->_hasPOS = $hasPOS;
         return $this;
@@ -718,7 +714,7 @@ trait PersonTrait
      * @param string $honorificPrefix
      * @return PersonTrait
      */
-    public function setHonorificPrefix(string $honorificPrefix)
+    public function setHonorificPrefix($honorificPrefix)
     {
         $this->_honorificPrefix = $honorificPrefix;
         return $this;
@@ -743,7 +739,7 @@ trait PersonTrait
      * @param string $honorificSuffix
      * @return PersonTrait
      */
-    public function setHonorificSuffix(string $honorificSuffix)
+    public function setHonorificSuffix($honorificSuffix)
     {
         $this->_honorificSuffix = $honorificSuffix;
         return $this;
@@ -769,7 +765,7 @@ trait PersonTrait
      * @param string $isicV4
      * @return PersonTrait
      */
-    public function setIsicV4(string $isicV4)
+    public function setIsicV4($isicV4)
     {
         $this->_isicV4 = $isicV4;
         return $this;
@@ -794,7 +790,7 @@ trait PersonTrait
      * @param string $jobTitle
      * @return PersonTrait
      */
-    public function setJobTitle(string $jobTitle)
+    public function setJobTitle($jobTitle)
     {
         $this->_jobTitle = $jobTitle;
         return $this;
@@ -845,7 +841,7 @@ trait PersonTrait
      * @param Offer $makesOffer
      * @return PersonTrait
      */
-    public function setMakesOffer(Offer $makesOffer)
+    public function setMakesOffer($makesOffer)
     {
         $this->_makesOffer = $makesOffer;
         return $this;
@@ -896,7 +892,7 @@ trait PersonTrait
      * @param string $naics
      * @return PersonTrait
      */
-    public function setNaics(string $naics)
+    public function setNaics($naics)
     {
         $this->_naics = $naics;
         return $this;
@@ -921,7 +917,7 @@ trait PersonTrait
      * @param Country $nationality
      * @return PersonTrait
      */
-    public function setNationality(Country $nationality)
+    public function setNationality($nationality)
     {
         $this->_nationality = $nationality;
         return $this;
@@ -1102,7 +1098,7 @@ trait PersonTrait
      * @param Demand $seeks
      * @return PersonTrait
      */
-    public function setSeeks(Demand $seeks)
+    public function setSeeks($seeks)
     {
         $this->_seeks = $seeks;
         return $this;
@@ -1203,7 +1199,7 @@ trait PersonTrait
      * @param string $taxID
      * @return PersonTrait
      */
-    public function setTaxID(string $taxID)
+    public function setTaxID($taxID)
     {
         $this->_taxID = $taxID;
         return $this;
@@ -1228,7 +1224,7 @@ trait PersonTrait
      * @param string $telephone
      * @return PersonTrait
      */
-    public function setTelephone(string $telephone)
+    public function setTelephone($telephone)
     {
         $this->_telephone = $telephone;
         return $this;
@@ -1253,7 +1249,7 @@ trait PersonTrait
      * @param string $vatID
      * @return PersonTrait
      */
-    public function setVatID(string $vatID)
+    public function setVatID($vatID)
     {
         $this->_vatID = $vatID;
         return $this;
@@ -1278,7 +1274,7 @@ trait PersonTrait
      * @param QuantitativeValue $weight
      * @return PersonTrait
      */
-    public function setWeight(QuantitativeValue $weight)
+    public function setWeight($weight)
     {
         $this->_weight = $weight;
         return $this;
@@ -1332,19 +1328,5 @@ trait PersonTrait
     {
         $this->_worksFor = $worksFor;
         return $this;
-    }
-
-    /**
-     * Return the fields
-     */
-    public function fields()
-    {
-        return array_merge(['additionalName', 'address', 'affiliation', 'alumniOf', 'award', 'birthDate', 'birthPlace',
-            'brand', 'children', 'colleague', 'contactPoint', 'deathDate', 'deathPlace', 'duns', 'email', 'familyName',
-            'faxNumber', 'follows', 'funder', 'gender', 'givenName', 'globalLocationNumber', 'hasOccupation',
-            'hasOfferCatalog', 'hasPOS', 'height', 'homeLocation', 'honorificPrefix', 'honorificSuffix', 'isicV4',
-            'jobTitle', 'knows', 'makesOffer', 'memberOf', 'naics', 'nationality', 'netWorth', 'owns', 'parent',
-            'performerIn', 'publishingPrinciples', 'relatedTo', 'seeks', 'sibling', 'sponsor', 'spouse', 'taxID',
-            'telephone', 'vatID', 'weight', 'workLocation', 'worksFor'],$this->thingFields());
     }
 }
