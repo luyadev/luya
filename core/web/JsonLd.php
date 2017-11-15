@@ -2,6 +2,8 @@
 
 namespace luya\web;
 
+use luya\web\jsonld\Organization;
+use luya\web\jsonld\Thing;
 use Yii;
 use yii\base\Object;
 use yii\helpers\Json;
@@ -30,19 +32,27 @@ use luya\web\jsonld\Event;
 class JsonLd extends Object
 {
     /**
-     * Register Organization.
+     * Register new Thing.
      *
-     * @param unknown $companyName
-     * @param unknown $website
+     * @param array $config Optional config array to provided person data via setter methods.
+     *
+     * @return \luya\web\jsonld\Thing
      */
-    public static function organization($companyName, $website = null)
+    public static function thing(array $config = [])
     {
-        self::addGraph([
-            '@context' => 'http://schema.org',
-            '@type' => 'Organization',
-            'name' => $companyName,
-            'url' => Url::home(true),
-        ]);
+        return self::addGraph((new Thing($config)));
+    }
+
+    /**
+     * Register new Organization.
+     *
+     * @param array $config Optional config array to provided person data via setter methods.
+     *
+     * @return \luya\web\jsonld\Organization
+     */
+    public static function organization(array $config = [])
+    {
+        return self::addGraph((new Organization($config)));
     }
     
     /**
