@@ -35,6 +35,8 @@ abstract class BaseThing extends Object implements Arrayable, ThingInterface
     		}
     	}
     	
+    	asort($resolved);
+    	
     	return $resolved;
     }
     
