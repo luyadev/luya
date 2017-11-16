@@ -266,7 +266,7 @@ function typeCastValue(value) {
                     
                 }
                 
-                return data || $q.when(data);
+                return $q.reject(data);
             }
         };
     });
