@@ -27,6 +27,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
     public $tags = [
         'menu' => ['class' => 'luya\cms\tags\MenuTag'],
         'page' => ['class' => 'luya\cms\tags\PageTag'],
+    	'alias' => ['class' => 'luya\cms\tags\AliasTag'],
     ];
     
     /**
