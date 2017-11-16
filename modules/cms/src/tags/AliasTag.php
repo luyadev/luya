@@ -19,12 +19,12 @@ class AliasTag extends BaseTag
 {
 	public function example()
 	{
-		return 'alias[@webroot]';
+		return 'alias[@web]';
 	}
 	
 	public function readme()
 	{
-		return 'The alias tag allows you to use aliaes defined in your application and predefined. Image link to public html folder <img src=\"alias[@webroot]/image.jpg\">';
+		return 'The alias tag allows you to use aliaes defined in your application and predefined. Image link to public html folder <img src=\"alias[@web]/image.jpg\">';
 	}
 	
 	public function parse($value, $sub)
