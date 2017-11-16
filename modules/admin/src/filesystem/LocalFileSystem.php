@@ -6,6 +6,7 @@ use Yii;
 use luya\admin\storage\BaseFileSystemStorage;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
+use luya\Exception;
 
 class LocalFileSystem extends BaseFileSystemStorage
 {
