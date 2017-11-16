@@ -70,7 +70,7 @@ use \luya\admin\Module as AdminModule;
                     </div>
                     <div ng-show="(menuData.items|menuparentfilter:catitem.id:0).length == 0 && !toggleIsHidden(catitem.id)">
                         <div dnd dnd-drag-disabled dnd-isvalid="true" dnd-ondrop="dropEmptyContainer(dragged,dropped,position, catitem.id)" dnd-css="{onHover: 'drag-hover', onHoverTop: 'drag-hover-top', onHoverMiddle: 'drag-hover-top', onHoverBottom: 'drag-hover-top'}">
-                            <p><small><i><?= Module::t('view_index_sidebar_container_no_pages'); ?></i></small></p>
+                            <p class="treeview-no-entry"><small><i><?= Module::t('view_index_sidebar_container_no_pages'); ?></i></small></p>
                         </div>
                     </div>
                     <ul class="treeview-items treeview-items-lvl1" ng-show="!toggleIsHidden(catitem.id)">
