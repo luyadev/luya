@@ -58,7 +58,8 @@ class MultipleInputsTestBlock extends PhpBlock
                     ['var' => 'title', 'label' => 'Title', 'type' => self::TYPE_TEXT],
                     ['var' => 'description', 'label' => 'Description', 'type' => self::TYPE_TEXTAREA],
                     ['var' => 'image', 'label' => 'Images', 'type' => self::TYPE_IMAGEUPLOAD],
-                    ['var' => 'checkbox', 'label' => 'Checkbox', 'type' => self::TYPE_CHECKBOX]
+                    ['var' => 'checkbox', 'label' => 'Checkbox', 'type' => self::TYPE_CHECKBOX],
+                    ['var' => 'link', 'label' => 'Link', 'type' => self::TYPE_LINK],
                 ]],
             ],
         ];
