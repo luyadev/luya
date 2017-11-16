@@ -190,5 +190,6 @@ return [
     'cmsadmin_settings_modal_title' => 'Einstellungen',
     'cmsadmin_item_settings_titleslug' => 'Seiten Informationen',
     'cmsadmin_created_at' => 'Erstellt am',
-    'cmsadmin_version_remove' => 'Remove version',
+    'cmsadmin_version_remove' => 'Versione löschen',
+    'view_index_sidebar_container_no_pages' => 'Keine Seiten',
 ];

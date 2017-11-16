@@ -181,4 +181,5 @@ return [
     'cmsadmin_item_settings_titleslug' => 'Page Informations',
     'cmsadmin_created_at' => 'Created at',
     'cmsadmin_version_remove' => 'Remove version',
+    'view_index_sidebar_container_no_pages' => 'Empty container',
 ];

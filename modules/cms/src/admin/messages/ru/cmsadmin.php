@@ -192,4 +192,5 @@ return [
     'cmsadmin_item_settings_titleslug' => 'Информация о странице',
     'cmsadmin_created_at' => 'Создан',
     'cmsadmin_version_remove' => 'Удалить версию',
+    'view_index_sidebar_container_no_pages' => 'Empty container',
 ];

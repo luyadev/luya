@@ -172,4 +172,5 @@ return [
     'cmsadmin_item_settings_titleslug' => 'Información de la página',
     'cmsadmin_created_at' => 'Creado en',
     'cmsadmin_version_remove' => 'Eliminar versión',
+    'view_index_sidebar_container_no_pages' => 'Empty container',
 ];

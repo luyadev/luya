@@ -186,11 +186,12 @@ return [
     'view_update_block_tooltip_close' => 'Закрити редагування',
     
     // 1.0.0
-        'cmsadmin_dashboard_lastupdate' => 'Останній раз оновлювалась',
-        'cmsadmin_settings_homepage_title' => 'Сторінка за замовчуванням',
-        'cmsadmin_settings_trashpage_title' => 'Видалити сторінку',
-        'cmsadmin_settings_modal_title' => 'Налаштування',
-        'cmsadmin_item_settings_titleslug' => 'Сторінка информації',
-        'cmsadmin_created_at' => 'Створена',
+    'cmsadmin_dashboard_lastupdate' => 'Останній раз оновлювалась',
+    'cmsadmin_settings_homepage_title' => 'Сторінка за замовчуванням',
+    'cmsadmin_settings_trashpage_title' => 'Видалити сторінку',
+    'cmsadmin_settings_modal_title' => 'Налаштування',
+    'cmsadmin_item_settings_titleslug' => 'Сторінка информації',
+    'cmsadmin_created_at' => 'Створена',
     'cmsadmin_version_remove' => 'Видалити версію',
+    'view_index_sidebar_container_no_pages' => 'Empty container',
 ];
