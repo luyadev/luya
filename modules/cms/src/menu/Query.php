@@ -219,12 +219,12 @@ class Query extends Object implements QueryOperatorFieldInterface
     private $_preloadModels = false;
     
     /**
-     * Preload Mmodels for the given Menu Query.
+     * Preload models for the given Menu Query.
      *
-     * When menu a {{luya\cms\menu\Item::getModel}} method is called it will lazy the given {{luya\cms\models\Nav}} Model.
-     * This can be slow on large menus, therfore you can preload all models for given Menu Query by enabling this method.
+     * When menu item method {{luya\cms\menu\Item::getModel()}} is called, it will lazy load the given {{luya\cms\models\Nav}} model.
+     * This can be slow on large menus, therfore you can preload those models for the given Menu Query by enabling this method.
      *
-     * @param boolean $preloadModels Whether to preload all {{luya\cms\menu\Item}} models for {{luya\cms\menu\Item::getModel}} or not.
+     * @param boolean $preloadModels Whether to preload all {{luya\cms\menu\Item}} models for {{luya\cms\menu\Item::getModel()}} or not.
      * @return \luya\cms\menu\Query
      */
     public function preloadModels($preloadModels = true)
