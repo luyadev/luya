@@ -35,8 +35,8 @@ use yii\base\ArrayableTrait;
  * @property string $alias Returns the alias name of this page.
  * @property integer $dateCreated Returns an unix timestamp when the page was created.
  * @property integer $dateUpdated Returns an unix timestamp when the page was last time updated.
- * @property object $userCreated Returns an active record object for the admin user who created this page.
- * @property object $userUpdated Returns an active record object for the admin user who last time updated this page.
+ * @property \luya\admin\models\User $userCreated Returns an active record object for the admin user who created this page.
+ * @property \luya\admin\models\User $userUpdated Returns an active record object for the admin user who last time updated this page.
  * @property string $link  Returns the current item link relative path with composition (language). The path is always relativ to the host.
  * @property boolean $isActive Returns a boolean value whether the current item is an active link or not, this is also for all parent elements. If a child item is active, the parent element is activ as well.
  * @property integer $depth Returns the depth of the navigation tree start with 1. Also known as menu level.
