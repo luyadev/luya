@@ -8,7 +8,7 @@ use luya\base\HookEvent;
 /**
  * Simple Hooking mechanism.
  *
- * Attaching callables or object methods to the Hook mechnism in your controller, block or elsewhere.
+ * Attaching callables or object methods to the Hook mechnism in your controller, block or elsewhere. Read more in the guide [[concept-hooks.md]].
  *
  * A simple string output behavior:
  *
