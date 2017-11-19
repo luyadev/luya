@@ -51,7 +51,7 @@ class Query extends Object implements QueryOperatorFieldInterface
     /**
      * @var array An array with all available where operators.
      */
-    protected $whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
+    protected $whereOperators = ['<', '<=', '>', '>=', '=', '!=', '==', 'in'];
     
     private $_menu;
     
@@ -412,6 +412,8 @@ class Query extends Object implements QueryOperatorFieldInterface
                         return ($value <= $expression['value']);
                     case 'in':
                         return in_array($value, $expression['value']);
+                    case '!=':
+                    	return ($value != $expression['value']);
                     default:
                         return ($value == $expression['value']);
                 }

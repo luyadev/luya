@@ -80,6 +80,7 @@ class QueryTest extends CmsFrontendTestCase
         $this->assertSame(1, Yii::$app->menu->find()->where(['=', 'id', 5])->count());
         $this->assertSame(1, Yii::$app->menu->find()->where(['==', 'id', 5])->count());
         $this->assertSame(0, Yii::$app->menu->find()->where(['==', 'id', "5"])->count());
+        $this->assertSame(9, Yii::$app->menu->find()->where(['!=', 'id', "4"])->count());
     }
     
     public function testAndWhereOperatorComperators()
