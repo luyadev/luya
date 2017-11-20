@@ -766,7 +766,7 @@
 		
 		$scope.togglePageSettingsOverlay = function(t) {
 			$scope.pageSettingsOverlayTab = t;
-			$scope.pageSettingsOverlayHidden = false;
+			$scope.pageSettingsOverlayHidden = !$scope.pageSettingsOverlayHidden;
 		};
 		
 		$scope.navCfg = {
@@ -871,6 +871,7 @@
 				$scope.menuDataReload();
 				AdminToastService.success(i18n['js_page_create_copy_success'], 4000);
 				$scope.showActions = 1;
+				$scope.togglePageSettingsOverlay();
 			});
 		};
 
@@ -896,6 +897,7 @@
 				AdminToastService.success(i18n['js_page_property_refresh'], 4000);
 				$scope.loadNavProperties();
 				$scope.showPropForm = false;
+				$scope.togglePageSettingsOverlay();
 			});
 		};
 
@@ -906,6 +908,7 @@
 	    			$scope.isDeleted = true;
 	    			$scope.menuDataReload().then(function() {
 	    				$toast.close();
+	    				$scope.togglePageSettingsOverlay();
 	    			});
 	    		}, function(response) {
 					AdminToastService.error(i18n['js_page_delete_error_cause_redirects'], 5000);
@@ -917,7 +920,8 @@
 
 	    $scope.submitNavForm = function() {
 	    	$http.post('admin/api-cms-nav/update?id=' + $scope.navData.id, {layout_file: $scope.navData.layout_file}).then(function(response) {
-	    		AdminToastService.success(i18nParam('js_page_update_layout_save_success'), 3000);
+	    		AdminToastService.success(i18nParam('js_page_update_layout_save_success'), 4000);
+	    		$scope.togglePageSettingsOverlay();
 	    	}, function(response) {
 	    		angular.forEach(response.data, function(value) {
 	    			AdminToastService.error(value.message, 4000);
@@ -939,9 +943,9 @@
 			    	if (n !== o && n !== undefined) {
 			    		$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).then(function(response) {
 							if ($scope.navData.is_offline == 1) {
-								AdminToastService.info(i18nParam('js_state_offline', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_offline', {title: $scope.navData.title}), 4000);
 							} else {
-								AdminToastService.info(i18nParam('js_state_online', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_online', {title: $scope.navData.title}), 4000);
 							}
 			    		});
 			    	}
@@ -951,9 +955,9 @@
 					if (n !== o && n !== undefined) {
 						$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).then(function(response) {
 							if ($scope.navData.is_hidden == 1) {
-								AdminToastService.info(i18nParam('js_state_hidden', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_hidden', {title: $scope.navData.title}), 4000);
 							} else {
-								AdminToastService.info(i18nParam('js_state_visible', {title: $scope.navData.title}), 2000);
+								AdminToastService.info(i18nParam('js_state_visible', {title: $scope.navData.title}), 4000);
 							}
 						});
 					}
@@ -964,10 +968,11 @@
 						$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).then(function(response) {
 							$scope.menuDataReload().then(function() {
 								if ($scope.navData.is_home == 1) {
-									AdminToastService.info(i18nParam('js_state_is_home', {title: $scope.navData.title}), 2000);
+									AdminToastService.success(i18nParam('js_state_is_home', {title: $scope.navData.title}), 4000);
 								} else {
-									AdminToastService.info(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 2000);
+									AdminToastService.success(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 4000);
 								}
+								$scope.togglePageSettingsOverlay();
 			    			});
 						});
 					}
@@ -1100,15 +1105,11 @@
 				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}), 2000);
 				$scope.menuDataReload();
 				$scope.refresh();
-				$scope.toggleSettings();
+				$scope.toggleSettingsOverlay();
+				$scope.reset();
 			}, function errorCallback(response) {
 				$scope.errors = response.data;
 			});
-		};
-
-		$scope.toggleSettings = function() {
-			$scope.reset();
-			$scope.settings = !$scope.settings;
 		};
 
 		$scope.$watch('itemCopy.alias', function(n, o) {
@@ -1140,6 +1141,7 @@
     		$http.post('admin/api-cms-navitem/change-page-version-layout', {'pageItemId': editVersionItem.id, 'layoutId': editVersionItem.layout_id, 'alias': editVersionItem.version_alias}).then(function(response) {
     			$scope.refreshForce();
     			AdminToastService.success(i18n['js_version_update_success'], 4000);
+    			$scope.toggleSettingsOverlay();
 			});
     	};
     	

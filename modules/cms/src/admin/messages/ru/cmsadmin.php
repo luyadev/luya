@@ -193,4 +193,5 @@ return [
     'cmsadmin_created_at' => 'Создан',
     'cmsadmin_version_remove' => 'Удалить версию',
     'view_index_sidebar_container_no_pages' => 'Empty container',
+    'view_update_set_as_homepage_btn' => 'Set as homepage',
 ];

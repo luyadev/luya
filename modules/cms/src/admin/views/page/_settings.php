@@ -62,9 +62,7 @@ use luya\cms\admin\Module;
                 <p><?= Module::t('view_update_homepage_info'); ?></p>
                 <!-- OLD CODE -->
                 <label ng-if="!navData.is_home">
-                    <?= Module::t('view_update_is_homepage'); ?>
-                    <input id="updateIsHome" type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
-                    <label for="updateIsHome"></label>
+                    <button type="button" ng-click="navData.is_home=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_homepage_btn'); ?></button>
                 </label>
                 <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_home"><?= Module::t('view_update_is_homepage'); ?></button>
             </div>

@@ -182,4 +182,5 @@ return [
     'cmsadmin_created_at' => 'Created at',
     'cmsadmin_version_remove' => 'Remove version',
     'view_index_sidebar_container_no_pages' => 'Empty container',
+    'view_update_set_as_homepage_btn' => 'Set as homepage',
 ];
