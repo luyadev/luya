@@ -8,6 +8,8 @@ use luya\cms\models\BlockGroup;
 use luya\console\Importer;
 use luya\helpers\FileHelper;
 use luya\cms\base\BlockInterface;
+use luya\admin\models\Config;
+use luya\cms\Exception;
 
 /**
  * CMS Blocks Importer.
@@ -18,11 +20,14 @@ use luya\cms\base\BlockInterface;
 class BlockImporter extends Importer
 {
     /**
-     * {@inheritDoc}
-     * @see \luya\console\Importer::run()
+     * @inheritdoc
      */
     public function run()
     {
+        if (!Config::has('100genericBlockUpdate')) {
+            throw new Exception("You have to run the generic block updater. ./vendor/bin/luya cms/updater/generic");
+        }
+        
         $allblocks = Block::find()->all();
         $exists = [];
         
