@@ -5,7 +5,7 @@
 # Frontend User Group Module
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
-[![Slack](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
+[![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
 The main purpose of this module to provide the ability to allow cms pages for specific user groups. This can also be only one group with one users or different users in the same group or different groups with different users.
 
