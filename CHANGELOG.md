@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1567](https://github.com/luyadev/luya/issues/1567) Discontinue development of Exporter Module.
 - [#1568](https://github.com/luyadev/luya/issues/1568) Add file system layer for Storage component.
 - [#1505](https://github.com/luyadev/luya/issues/1505) Renamed property of luya\cms\frontend\Module from `$enableCompression` to `$contentCompression`.
+- [#1557](https://github.com/luyadev/luya/issues/1557) Support non transliterated CMS URLs by providing the new `Inflection` class. This will enable non-latin URLs.
 
 ### Added
 
