@@ -5,10 +5,9 @@
 </p>
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
-[![Build Status](https://travis-ci.org/luyadev/luya-module-crawler.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-crawler)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-crawler/v/stable)](https://packagist.org/packages/luyadev/luya-module-crawler)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-crawler/downloads)](https://packagist.org/packages/luyadev/luya-module-crawler)
-[![Slack Support](https://github.com/luyadev/luya/tree/master/docs/guide/img/icons/Slack_Mark_Monochrome_Black.svg)](https://luyadev.slack.com/)
+[![Slack Support](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/icons/Slack_Mark_Black_Web.png)](https://luyadev.slack.com/)
 
 An easy to use full-website page crawler to make provide search results on your page. The crawler module gather all information about the sites on the configured domain and stores the index in the database. From there you can now create search queries to provide search results. There are also helper methods which provide intelligent search results by splitting the input into multiple search queries (used by default).
 
