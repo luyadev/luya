@@ -6,7 +6,7 @@
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Build Status](https://travis-ci.org/luyadev/luya-module-crawler.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-crawler)
-[![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-crawler/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-crawler?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-crawler/v/stable)](https://packagist.org/packages/luyadev/luya-module-crawler)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-crawler/downloads)](https://packagist.org/packages/luyadev/luya-module-crawler)
 [![Slack Support](https://github.com/luyadev/luya/tree/master/docs/guide/img/icons/Slack_Mark_Monochrome_Black.svg)](https://luyadev.slack.com/)
 
