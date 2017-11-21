@@ -562,6 +562,8 @@ class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
         ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
         ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
         ->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
+        ->andWhere(['or', ['publish_from' => null], ['<=', 'publish_from', time()]])
+        ->andWhere(['or', ['publish_till' => null], ['>=', 'publish_till', time()]])
         ->orderBy(['container' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
         ->indexBy('id')
         ->all();

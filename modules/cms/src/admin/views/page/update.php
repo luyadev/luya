@@ -50,14 +50,17 @@ use luya\cms\admin\Module;
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(2)" ng-if="propertiesData.length > 0">
                                 <i class="material-icons">settings</i> <span><?= Module::t('view_update_properties_title'); ?></span>
                             </a>
-                            <a class="dropdown-item" ng-click="togglePageSettingsOverlay(3)">
-                                <i class="material-icons">web</i> <span><?= Module::t('page_update_actions_layout_title'); ?></span>
+			                <a class="dropdown-item" ng-click="togglePageSettingsOverlay(7)">
+                                <i class="material-icons">timelapse</i> <span><?= Module::t('cmsadmin_sestings_time_title'); ?></span>
                             </a>
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(4)">
                                 <i class="material-icons">content_copy</i> <span><?= Module::t('page_update_actions_deepcopy_title'); ?></span>
                             </a>
                             <a class="dropdown-item" ng-show="!isDraft" ng-click="togglePageSettingsOverlay(5)">
                                 <i class="material-icons">home</i> <span><?= Module::t('cmsadmin_settings_homepage_title'); ?></span>
+                            </a>
+                            <a class="dropdown-item" ng-click="togglePageSettingsOverlay(3)">
+                                <i class="material-icons">web</i> <span><?= Module::t('page_update_actions_layout_title'); ?></span>
                             </a>
                             <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(6)">

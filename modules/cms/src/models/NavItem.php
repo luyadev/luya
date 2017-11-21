@@ -107,6 +107,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         return [
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
             [['nav_id', 'description', 'keywords', 'nav_item_type_id', 'title_tag'], 'safe'],
+        	[['timestamp_create'], 'integer'],
         ];
     }
 

@@ -38,7 +38,7 @@ class Angular
      * @param string $type
      * @param string $ngModel
      * @param string $label
-     * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
+     * @param array $options The options parameter is mostly a data provider for the directive an is depending on the type.
      * @param array $mergeOptions Additonal attributes to be set for the tag $type.
      * + fieldid:
      * + fieldname:
@@ -48,6 +48,12 @@ class Angular
      */
     protected static function injector($type, $ngModel, $label, $options = [], array $mergeOptions = [])
     {
+    	// parse boolean values to integer values is it would not bind the values correctly to the angular directive.
+    	foreach ($mergeOptions as $key => $value) {
+    		if (!is_array($value) && is_bool($value)) {
+    			$mergeOptions[$key] = (int) $value;
+    		}
+    	}
         return static::directive($type, array_merge($mergeOptions, [
             'model' => $ngModel,
             'label' => $label,
@@ -260,6 +266,7 @@ class Angular
      * @param string $ngModel The name of the ng model which should be used for data binding.
      * @param string $label The label to display for the form input.
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
+     * + resetable: boolean, Whether the date can be reseted to null or not.
      * @return string
      */
     public static function date($ngModel, $label, array $options = [])
@@ -273,6 +280,7 @@ class Angular
      * @param string $ngModel The name of the ng model which should be used for data binding.
      * @param string $label The label to display for the form input.
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
+     * + resetable: boolean, Whether the datetime can be reseted to null or not.
      * @return string
      */
     public static function datetime($ngModel, $label, array $options = [])

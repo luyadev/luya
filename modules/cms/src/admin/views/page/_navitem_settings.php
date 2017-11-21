@@ -31,6 +31,7 @@ use luya\admin\helpers\Angular;
                 <zaa-text model="itemCopy.title_tag" label="<?= Module::t('model_navitem_title_tag_label'); ?>" />
                 <zaa-textarea model="itemCopy.description" label="<?= Module::t('view_index_page_meta_description'); ?>" />
                 <zaa-textarea model="itemCopy.keywords" label="<?= Module::t('view_index_page_meta_keywords'); ?>" />
+                <?= Angular::datetime('itemCopy.timestamp_create', Module::t('view_index_page_meta_timestamp_create'), ['resetable' => false]); ?>
                 <?= Angular::radio('itemCopy.nav_item_type', Module::t('view_index_add_type'), [
                     1 => Module::t('view_index_type_page'),
                     2 => Module::t('view_index_type_module'),

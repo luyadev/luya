@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+use luya\admin\helpers\Angular;
 
 ?>
 <modal is-modal-hidden="pageSettingsOverlayHidden" modal-title="<?= Module::t('cmsadmin_settings_modal_title'); ?>">
@@ -9,14 +10,17 @@ use luya\cms\admin\Module;
                 <li class="nav-item" ng-show="propertiesData.length > 0">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><i class="material-icons">settings</i><span><?= Module::t('view_update_properties_title'); ?></span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=3" ng-class="{'active':pageSettingsOverlayTab==3}"><i class="material-icons">web</i><span><?= Module::t('page_update_actions_layout_title'); ?></span></a>
+                <li class="nav-item" ng-show="!isDraft">
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=7" ng-class="{'active':pageSettingsOverlayTab==7}"><i class="material-icons">timelapse</i><span><?= Module::t('cmsadmin_settings_time_title'); ?></span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><i class="material-icons">content_copy</i><span><?= Module::t('page_update_actions_deepcopy_title'); ?></span></a>
                 </li>
                 <li class="nav-item" ng-show="!isDraft">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=5" ng-class="{'active':pageSettingsOverlayTab==5}"><i class="material-icons">home</i><span><?= Module::t('cmsadmin_settings_homepage_title'); ?></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=3" ng-class="{'active':pageSettingsOverlayTab==3}"><i class="material-icons">web</i><span><?= Module::t('page_update_actions_layout_title'); ?></span></a>
                 </li>
                 <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
                 <li class="nav-item">
@@ -47,7 +51,7 @@ use luya\cms\admin\Module;
             <div ng-switch-when="3">
                 <h1><?= Module::t('page_update_actions_layout_title'); ?></h1>
                 <p><?= Module::t('page_update_actions_layout_text'); ?></p>
-                <form ng-submit="submitNavForm()">
+                <form ng-submit="submitNavForm({layout_file: navData.layout_file})">
 	                <zaa-text model="navData.layout_file" label="<?= Module::t('page_update_actions_layout_file_field'); ?>" />
 	                <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
                 </form>
@@ -72,6 +76,15 @@ use luya\cms\admin\Module;
                 <p><a ng-click="trash()" class="btn btn-delete btn-icon">Remove Page</a></p>
             </div>
             <?php endif; ?>
+            
+            <div ng-switch-when="7">
+                <h1><?= Module::t('cmsadmin_settings_time_title'); ?></h1>
+                <form ng-submit="submitNavForm({publish_from: navData.publish_from, publish_till: navData.publish_till})">
+                	<?= Angular::datetime('navData.publish_from', Module::t('cmsadmin_settings_time_title_from')); ?>
+                	<?= Angular::datetime('navData.publish_till', Module::t('cmsadmin_settings_time_title_till')); ?>
+	                <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
+                </form>
+            </div>
         </div>
     </div>
 </modal>

@@ -918,8 +918,8 @@
 
 	    $scope.isDraft = false;
 
-	    $scope.submitNavForm = function() {
-	    	$http.post('admin/api-cms-nav/update?id=' + $scope.navData.id, {layout_file: $scope.navData.layout_file}).then(function(response) {
+	    $scope.submitNavForm = function(data) {
+	    	$http.post('admin/api-cms-nav/update?id=' + $scope.navData.id, data).then(function(response) {
 	    		AdminToastService.success(i18nParam('js_page_update_layout_save_success'), 4000);
 	    		$scope.togglePageSettingsOverlay();
 	    	}, function(response) {
@@ -1093,6 +1093,7 @@
 			typeDataCopy.title_tag = itemCopy.title_tag;
 			typeDataCopy.description = itemCopy.description;
 			typeDataCopy.keywords = itemCopy.keywords;
+			typeDataCopy.timestamp_create = itemCopy.timestamp_create;
 			$http.post(
 				'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type,
 				$.param(typeDataCopy),

@@ -1485,6 +1485,8 @@
      * http://jsfiddle.net/bateast/Q6py9/1/ - Date Parse
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date - Date Objects
      * https://docs.angularjs.org/api/ng/filter/date - Angular Date Filter
+     * 
+     * resetable: 1/0, This will enable or disable the ability to press the reset (set to null) button. use integer value
      */
     zaa.directive("zaaDatetime", function() {
         return {
@@ -1494,7 +1496,8 @@
                 "options": "=",
                 "label": "@label",
                 "id": "@fieldid",
-                "i18n": "@i18n"
+                "i18n": "@i18n",
+                "resetable" : "@resetable",
             },
             controller: function($scope, $filter) {
 
@@ -1579,6 +1582,14 @@
             	$scope.reset = function() {
             		$scope.model = null;
             	};
+            	
+            	$scope.getIsResetable = function() {
+            		if ($scope.resetable) {
+            			return parseInt($scope.resetable);
+            		}
+            		
+            		return true;
+            	};
             },
             template: function() {
             	return  '<div class="form-group form-side-by-side zaa-datetime" ng-class="{\'input--hide-label\': i18n, \'input--with-time\': model!=null && date!=null}">' +
@@ -1605,13 +1616,16 @@
                                         '<input class="form-control zaa-datetime-minute-input" type="text" ng-model="min" ng-change="autoRefactor()" />' +
                                     '</div>' +
             	                '</div>' +
-            	                '<div ng-show="model"><button type="button" ng-click="reset()" class="ml-2 btn btn-icon btn-cancel"></nutton></div>' +
+            	                '<div ng-show="model && getIsResetable()"><button type="button" ng-click="reset()" class="ml-2 btn btn-icon btn-cancel"></nutton></div>' +
                             '</div>' +
                         '</div>';
             }
         }
     });
 
+    /**
+     * resetable: whether rest button is enabled or not.
+     */
     zaa.directive("zaaDate", function() {
         return {
             restrict: "E",
@@ -1620,7 +1634,8 @@
                 "options": "=",
                 "label": "@label",
                 "id": "@fieldid",
-                "i18n": "@i18n"
+                "i18n": "@i18n",
+                "resetable" : "@resetable"
             },
         	controller: function($scope, $filter) {
 
@@ -1679,7 +1694,14 @@
                 $scope.reset = function() {
             		$scope.model = null;
             	};
-
+            	
+            	$scope.getIsResetable = function() {
+            		if ($scope.resetable) {
+            			return parseInt($scope.resetable);
+            		}
+            		
+            		return true;
+            	};
             },
             template: function() {
             	return  '<div class="form-group form-side-by-side zaa-date" ng-class="{\'input--hide-label\': i18n}">' +
@@ -1694,7 +1716,7 @@
                                         '<i class="material-icons" ng-show="datePickerToggler">close</i>' +
                                     '</div>' +
                                 '</datepicker>' +
-                                '<div ng-show="model"><button type="button" ng-click="reset()" class="ml-2 btn btn-icon btn-cancel"></nutton></div>' +
+                                '<div ng-show="model && getIsResetable()"><button type="button" ng-click="reset()" class="ml-2 btn btn-icon btn-cancel"></nutton></div>' +
                             '</div>' +
                         '</div>';
             }
