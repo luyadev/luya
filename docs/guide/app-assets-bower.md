@@ -1,7 +1,6 @@
-load assets via composer bower
-==============================
+# Load assets via composer bower
 
-> The LUYA team discontinued to user bower assets, as it makes the composer update process very slow.
+> Attention: The LUYA team discontinued to user bower assets, as it makes the composer update process very slow.
 
 require
 --------

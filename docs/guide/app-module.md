@@ -1,17 +1,18 @@
 # Project Module
 
-A very important behavior in *LUYA* projects are **modules**. You can always use modules to put your own custom and reusable logic inside. For instance you can put database logic inside of the via ActiveRecord models. A module can also provide informations for other module, for example [CMS Blocks](app-blocks.md). 
+A very important behavior in *LUYA* projects are **modules**. You can always use modules to put your own custom and reusable logic inside. 
+For instance you can put database logic inside of the ActiveRecord models. A module can also provide information for other module, e.g.  [CMS Blocks](app-blocks.md). 
 
 ## Module Types
 
-There are two different types of Modules:
+There are two different types of modules:
 
 + [Admin](app-admin-module.md) - Contains Models, Migrations Administration, [NgRest Crud](ngrest-concept.md).
 + [Frontend](app-module-frontend.md) - Contains controllers and views, logic for frontend implementations.
 
-> In order to create your custom modules you can run the [Console Command](luya-console.md) `module/create` wizard.
+> In order to create your custom module you can run the [Console Command](luya-console.md) `module/create` wizard.
 
-Structure of Modules
+Structure of modules
 
 ```
 .
@@ -34,7 +35,8 @@ Structure of Modules
 
 ### Use and configure
 
-To integrate a module you have to define it in your config file `env-prep.php` and / or `env-prod.php`, depending on which environment your `env.php` is returning, in the modules section:
+To integrate a module you have to define it in your config file `env-prep.php` and / or `env-prod.php`, it depends on which environment your `env.php` is returning.
+E.g. add this to your configs in the modules section:
 
 ```php
 $config = [
@@ -44,9 +46,9 @@ $config = [
 ];
 ``` 
 
-## Example Module
+## Example module
 
-In our example we make a *TEAM Module* which has a frontend and admin module part. All admin modules have by defintion the suffix **admin**, the naming of the modules would look like this in our case:
+In our example we make a *TEAM module* which has a frontend and admin module part. All admin modules have by defintion the suffix **admin**, the naming of the modules would look like this in our case:
 
 + team *Frontend* `modules/team/Module.php`
 + teamadmin *Admin* `modules/teamadmin/Module.php`
@@ -62,7 +64,7 @@ class Module extends \luya\base\Module
 }
 ```
 
-The *Admin* Module `modules/teamadmin/Module.php`:
+The *Admin* module `modules/teamadmin/Module.php`:
 
 ```php
 <?php
@@ -77,7 +79,10 @@ class Module extends \luya\admin\base\Module
 
 ## Import Method
 
-All modules can contain a {{luya\admin\base\Module::import()}} method, this method will be called when running the [console command `import`](luya-console.md). One of the main ideas behind LUYA is to store data in files and import them into your database. If {{luya\admin\base\Module::import()}} method returns an array each class must extend from the {{luya\console\Importer}} class.
+All modules can contain a {{luya\admin\base\Module::import()}} method wich will be called when running the [console command `import`](luya-console.md). 
+If {{luya\admin\base\Module::import()}} method returns an array each class must extend from the {{luya\console\Importer}} class.
+
+> One of the main ideas behind LUYA is to store data in files and import them into your database.
 
 Example response for multiple importer classes:
 
@@ -108,7 +113,8 @@ public function import(\luya\console\interfaces\ImportControllerInterface $impor
 
 ## PSR-4 binding with composer
 
-Sometimes you dont want to use the long namespaces names like `app\modules\mymodule` and create a shorter way to access your files. In order to add a shorter *alias* to your namespace you psr-4 bind them in your composer.json file. To do so open the `composer.json` file and add the *autoload* section (if not exists):
+Sometimes you do not want to use the long namespaces names like `app\modules\mymodule` and create a shortcut to access your files. In order to add a shorter *alias* to your namespace you psr-4 bind them in your composer.json file. 
+To do so open the `composer.json` file and add the *autoload* section (if not exists):
 
 ```json
 "autoload" : {
@@ -118,7 +124,7 @@ Sometimes you dont want to use the long namespaces names like `app\modules\mymod
 }
 ```
 
-Run the `composer dump-autoload` command in order to refresh the autoload section of your composer file. Now you are able to access the *mymodule* files directly with the *mymodule* module namepsace.
+Run the `composer dump-autoload` command in order to refresh the autoload section of your composer file. Now you are able to access the *app/modules/mymodule* files directly with the *mymodule* module namepsace.
 
 ## Links
 

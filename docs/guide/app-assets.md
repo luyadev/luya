@@ -1,8 +1,8 @@
 # Application Assets
 
-Asset files like CSS or JavaScript are resources you have to integrate in your web project but organize them in "package" like folders, so called Asset Bundles. Assets are based on [Yii2 Asset Bundles](http://www.yiiframework.com/doc-2.0/guide-structure-assets.html) you may read more detailed informations about. The LUYA assets describe just another way of including them into you project.
+Asset files like CSS or JavaScript are resources which you have to integrate in your web project but organize them in a "package" like folders, called Asset Bundles. Assets are based on [Yii2 Asset Bundles](http://www.yiiframework.com/doc-2.0/guide-structure-assets.html) you may read more detailed information about. The LUYA assets describe just another way of including them into you project.
 
-An example class of an asset where files are located in `@app/resources` and includes the `css/styles.css` into the view files where the asset is loaded.
+Below, an example class of an asset where files are located in `@app/resources` and includes the `css/styles.css` into the view files where the asset is loaded.
 
 ```php
 namespace app\assets;
@@ -23,7 +23,7 @@ From the example above the css file `style.css` would be looked up in the locati
 
 ### Using the Asset
 
-To use an asset bundle, register it with a view by calling the {{yii\web\AssetBundle::register()}} method. For example, in a view template you can register an asset bundle like the following:
+To use an asset bundle, register it with a view by calling the {{yii\web\AssetBundle::register()}} method. E. g. in a view template you can register an asset bundle like the following:
 
 ```php
 use app\assets\AppAsset;
@@ -32,13 +32,14 @@ AppAsset::register($this);  // $this represents the view object
 
 > The yii\web\AssetBundle::register() method returns an asset bundle object containing the information about the published assets, such as basePath or baseUrl.
 
-If you are registering an asset bundle in other places, you should provide the needed view object. For example, to register an asset bundle in a widget class, you can get the view object by `$this->view`.
+If you are registering an asset bundle in other places, you should provide the needed view object. E. g. to register an asset bundle in a widget class you can get the view object by `$this->view`.
 
-When an asset bundle is registered with a view, behind the scenes Yii will register all its dependent asset bundles. And if an asset bundle is located in a directory inaccessible through the Web, it will be published to a Web directory. Later, when the view renders a page, it will generate `link` and `script` tags for the CSS and JavaScript files listed in the registered bundles. The order of these tags is determined by the dependencies among the registered bundles and the order of the assets listed in the {{yii\web\AssetBundle::$css}} and {{yii\web\AssetBundle::$js}} properties.
+When an asset bundle is registered with a view, behind the scenes Yii will register all its dependent asset bundles. And if an asset bundle is located in a directory inaccessible through the Web, it will be published to a Web directory. 
+Only when the view renders a page, it will generate `link` and `script` tags for the CSS and JavaScript files listed in the registered bundles. The order of these tags is determined by the dependencies among the registered bundles and the order of the assets listed in the {{yii\web\AssetBundle::$css}} and {{yii\web\AssetBundle::$js}} properties.
 
 ### Publish Options
 
-To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders to be published. For example in the LUYA kickstarter project, you'll find both the 'boostrap' and the 'css' folder in the publish options:
+To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders which should be published. E. g. in the LUYA kickstarter project you'll find a 'boostrap' and a 'css' folder in the publish options:
 
 ```php
 public $publishOptions = [
