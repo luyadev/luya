@@ -15,15 +15,15 @@ LUYA is shipped with a {{luya\components\Mail}} component who is using the PHPMa
 ]
 ```
 
-> Often there are different configuration needed wich are depending on your hosting provider. Please have a closer look to  {{luya\components\Mail}} to understand how and what can be configured to match the requirenments of your email hoster.
+> Often there are different configuration needed which are depending on your hosting provider. Please have a closer look to {{luya\components\Mail}} to understand how and what can be configured to match the requirements of your email hosting provider.
 
-In order to test your configurations you can run the console command `health/mailer`. The command will try to connect to your mail server trough your provided credentials. By default the mailer component requires an SMTP Server and is not using PHPs mail function.
+In order to test your configurations you can run the console command `health/mailer`. The command will try to connect to your mail server trough your provided credentials. By default the mailer component requires a SMTP Server and is not using PHPs mail function.
 
 ```sh
 ./vendor/bin/luya health/mailer
 ```
 
-## Compose new E-Mail
+## Compose new email
 
 To quickly send an email in one line you can use the object chain mode like the example below:
 
@@ -31,7 +31,7 @@ To quickly send an email in one line you can use the object chain mode like the 
 $mail = Yii::$app->mail->compose('Mail Subject', 'My HTML email content goes here.')->address('recipient@luya.io')->send();
 ```
 
-You can also use the method `addresses` with an array of all mail addresses you would like to add as recipients.
+You can also use the method `addresses` with an array of all email addresses you would like to add as recipients.
 
 ```php
 Yii::$app->mail->compose('Subject', '<p>Html</p>')->addresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])->send();
@@ -44,7 +44,7 @@ bccAddresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])
 ccAddresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])
 ```
 
-The response value of `$mail` (actually its the response of the method `send()`) is a boolean value. If something happens wrong during the send process, you can access the error inside the component like following:
+The response value of `$mail` (actually its the response of the method `send()`) is a boolean value. If something happens wrong during the send process you can access the error inside the component like following:
 
 ```php
 if (!$mail) {
@@ -78,7 +78,7 @@ if (!$mail->send()) {
 
 ## Define a Mail Template
 
-In order to define a HTML template for your mails, add `'layout' => '@app/views/maillayout.php'` to the mail component's configuration above.
+In order to define a HTML template for your emails add `'layout' => '@app/views/maillayout.php'` to the mail component's configuration above.
 
 Example template:
 
