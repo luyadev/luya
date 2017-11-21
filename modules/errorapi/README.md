@@ -6,7 +6,7 @@
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-errorapi/v/stable)](https://packagist.org/packages/luyadev/luya-module-errorapi)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-errorapi/downloads)](https://packagist.org/packages/luyadev/luya-module-errorapi)
-[![Slack Support](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/icons/Slack_Mark_Black_Web.png)](https://luyadev.slack.com/)
+[![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
 For a strong and secure website, it is important to get access to all the errors and exceptions that occur in the background before your customer complain and make sure that it only happens once.
 

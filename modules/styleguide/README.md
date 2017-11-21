@@ -6,7 +6,7 @@
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-styleguide/v/stable)](https://packagist.org/packages/luyadev/luya-module-styleguide)
-![Total Downloads](https://poser.pugx.org/luyadev/luya-module-styleguide/downloads)](https://packagist.org/packages/luyadev/luya-module-styleguide)
+[![Total Downloads](https://poser.pugx.org/luyadev/luya-module-styleguide/downloads)](https://packagist.org/packages/luyadev/luya-module-styleguide)
 [![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
 The basic idea behind the stylegiude is to give you the ability to ensure an advanced development cycle for functions and design of enhanced elements.
