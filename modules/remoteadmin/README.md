@@ -5,6 +5,8 @@
 # REMOTE Admin Module
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+[![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-remoteadmin/v/stable)](https://packagist.org/packages/luyadev/luya-module-remoteadmin)
+![Total Downloads](https://poser.pugx.org/luyadev/luya-module-remoteadmin/downloads)](https://packagist.org/packages/luyadev/luya-module-remoteadmin)
 [![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
 
