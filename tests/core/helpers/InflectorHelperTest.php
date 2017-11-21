@@ -18,9 +18,15 @@ class InflectorHelperTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('這是-LUYA', Inflector::slug('這是 LUYA', '-', false, false));
         // testing without transliteration and without lowercase transformation
         $this->assertEquals('新-新-新-新', Inflector::slug('新-新-新-新', '-', true, false));
-        $this->assertEquals('這是-luya', Inflector::slug('這是 LUYA ', '-', true, false));
+        $this->assertEquals('這是-luya', Inflector::slug('這是                  LUYA ', '-', true, false));
         // filter critical string elements whithout inflection
         $this->assertEquals('這是-luya', Inflector::slug('<這是> {LUYA} ', '-', true, false));
         $this->assertEquals('a1Zあ新~!@#$^&*()_[];\',:?', Inflector::slug('a1Zあ新`~!@#$%^&*()_+[]\;\\\',./{}|:<>?', '-', false, false));
+
+        // test lowercase and german special char
+        $this->assertEquals('ÖöÜäüü-!?Hallo-hH', Inflector::slug('ÖöÜäüü  !?Hallo hH ', '-', false, false));
+        $this->assertEquals('ööüäüü-!?hallo-hh', Inflector::slug('ÖöÜäüü  !?Hallo hH ', '-', true, false));
+        $this->assertEquals('ööüäüü-新新新', Inflector::slug('ÖöÜäüü  新新新 ', '-', true, false));
+        $this->assertEquals('ß', Inflector::slug('ß', '-', true, false));
     }
 }

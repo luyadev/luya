@@ -39,6 +39,6 @@ class Inflector extends \yii\helpers\BaseInflector
         $string = preg_replace('/[`%\+=\{\}\|\\\.<>\/]+/u', '', $string);
         $string = preg_replace('/[=\s—–-]+/u', $replacement, $string);
         $string = trim($string, $replacement);
-        return $lowercase ? strtolower($string) : $string;
+        return $lowercase ? mb_strtolower($string) : $string;
     }
 }
