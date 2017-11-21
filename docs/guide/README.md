@@ -65,4 +65,5 @@
 + Developers
   + [LUYA Guidelines](luya-guideline.md)
   + [Collaboration](luya-collaboration.md)
+  + [LUYA Unit Test](luya-unittest.md)
   + [Admin Browser Compatibility](luya-browser.md)
