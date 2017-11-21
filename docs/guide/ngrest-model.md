@@ -51,7 +51,7 @@ public function ngRestScopes()
 {
     return [
         ['list',  ['title', 'name', 'timestamp']],
-        [['create', 'update'],  ['title', 'name', 'text', 'timestamp', 'description', 'size]],
+        [['create', 'update'],  ['title', 'name', 'text', 'timestamp', 'description', 'size']],
         ['delete', false],
     ];
 }
