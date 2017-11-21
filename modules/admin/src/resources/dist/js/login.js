@@ -34,10 +34,9 @@ var observeLogin = function (form, url, secureUrl) {
                 }
 
                 if (refresh) {
-                    $('#luya-loading-overlay').show();
+                    $('#success').show();
                     $('#secureForm').hide();
                     $('#loginForm').hide();
-                    $('#success').show();
                     $('.login-logo').hide();
                     location.reload();
                 }
@@ -50,6 +49,7 @@ var observeLogin = function (form, url, secureUrl) {
         $('#errorsSecureContainer').hide();
         $('.login-btn[type="submit"]').attr('disabled', true);
         $('.login-spinner').show();
+        $('.login-btn-label').hide();
         e.preventDefault();
         $.ajax({
             type: "POST",
@@ -57,6 +57,7 @@ var observeLogin = function (form, url, secureUrl) {
             data: $(this).serialize(),
             success: function (response) {
                 $('.login-spinner').hide();
+                $('.login-btn-label').show();
                 $('.login-btn[type="submit"]').attr('disabled', false);
                 var refresh = response['refresh'];
 
@@ -66,10 +67,9 @@ var observeLogin = function (form, url, secureUrl) {
                 }
 
                 if (refresh) {
-                    $('#luya-loading-overlay').show();
+                    $('#success').show();
                     $('#secureForm').hide();
                     $('#loginForm').hide();
-                    $('#success').show();
                     $('.login-logo').hide();
                     location.reload();
                 }
