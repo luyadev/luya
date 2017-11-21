@@ -1,14 +1,14 @@
 # CMS Layout
 
-The CMS Layouts let the Content Management System know where to render the content blocks.
+The CMS layouts let the "Content Management System" know where to render the content blocks.
 
-If you are using the CMS Module in your application (which is installed by default in the kickstarter application) then you can use the CMS Layouts.
+If you are using the CMS module in your application (which is installed by default in the LUYA kickstarter application) then you can use the CMS layouts.
 
 ## Create new Layout
 
-All CMS Layouts are stored in the `views/cmslayouts` folder which is located in the base path of your project. If we create a new layout with 2 columns (for example) we just add a new view file to the cmslayouts folder like `views/cmslayouts/2columns.php`.
+All CMS layouts are stored in the `views/cmslayouts` folder which is located in the base path of your project. If we create a new layout with e.g. 2 columns we just add a new view file to the `cmslayouts folder like `views/cmslayouts/2columns.php`.
 
-You can now add html content to the new cmslayout file *2columns.php* but the most important is to let the cms know on which part of the file the user can add content (blocks). To mark the area which can be filled with user content is called placeholder a can be defined with the $placeholders array `<?= $placeholders['YOUR_VARIABLE_NAME']; ?>`. In the example below we have made 2 placeholders for each column (left and right):
+You can now add html content to the new CMS layout file `2columns.php` but the most important is to let the CMS know on which part of the file the user can add content (blocks). To mark the area which can be filled with user content is called placeholder a can be defined with the $placeholders array `<?= $placeholders['YOUR_VARIABLE_NAME']; ?>`. In the example below we have made 2 placeholders for each column (left and right):
 
 ```php
 <div class="row">
@@ -21,11 +21,11 @@ You can now add html content to the new cmslayout file *2columns.php* but the mo
 </div>
 ```
 
-> Info: File names starting with *.* or *_* will be ignored. CMS Layouts in subfolders will be ignored to.
+> Info: File names starting with *.* or *_* will be ignored. CMS layouts in sub folders will be ignored too.
 
-Since version RC4 you can also add a json file to configure the cmslayout for the admin view, this is optional and will also work without a json file. It can be very helpfull if you want to let the adminarea know how your layout structured with rows and columns, like a grid system.
+Since LUYA version RC4 you can also add a json file to configure the CMS layout for the admin view, this is optional and will also work without a json file. It can be very helpful if you want to let the Admin UI know how your layout is structured with rows and columns, e.g. like a grid system.
 
-In order to provide a json, use the same name es for the layout with the ending json, in our example *2columns.json*:
+In order to provide a json, use the same name as for the layout with the ending `.json`, in our example `2columns.json:
 
 ```json
 {
@@ -38,7 +38,7 @@ In order to provide a json, use the same name es for the layout with the ending 
 }
 ```
 
-Now the administration area knows how the placeholder columns are structured, known from the bootstrap 4 grid system. The max amount of cols is 12.
+Now the administration area knows how the placeholder columns are structured based on the the bootstrap4 grid system. The max amount of cols is 12.
 
 You an also define multiple rows, here an advanced example for a layout with 4 placeholders:
 
@@ -59,11 +59,11 @@ You an also define multiple rows, here an advanced example for a layout with 4 p
 }
 ```
 
-> If a json file is used for the cmslayout, when adding new placeholders they must be available in the json file as well, as this will be the priority source for importing cms layouts.
+> If a json file is used for the CMS layout the addition of new placeholders must be available in the json file as well as this will be the priority source for importing CMS layouts.
 
-## Import and Use
+## Import and use
 
-To enable the new cmslayout file, or after updating an existing layout file, you have to run the `import` command from the Terminal.
+To enable the new CMS layout file or after updating an existing layout file you have to run the `import` command from the terminal.
 
 ```sh
 ./vendor/bin/luya import
