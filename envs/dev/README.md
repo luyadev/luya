@@ -8,9 +8,9 @@ Dev Environment
 5. Execute `php index.php migrate`, then import files into database `php index.php import` and afterwards execute the setup command `php index.php admin/setup`.
 6. Access the *public_html* folder in your browser and your ready to go!
 
-+ [Installation instructions](http://luya.io/de/dokumentation/install)
-+ [Documentation](http://luya.io)
-+ [Collaboration Guide](http://luya.io/de/dokumentation/luya-collaboration)
++ [Installation instructions](https://luya.io/guide/install)
++ [API Documentation](https://luya.io/api)
++ [Collaboration Guide](https://luya.io/guide/luya-collaboration)
 
 Questions and Problems
 ----------------------
