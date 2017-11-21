@@ -18,21 +18,3 @@ Questions and Problems
 If you have any question or problem, don't hesitate to create a `New issue` on the project repository.
 
 + [Questions & Issues](https://github.com/zephir/luya/issues)
-
-Bower assets
-
-```sh
-"require-dev": {
-    "bower-asset/jquery-ui" : "1.11.4",
-    "bower-asset/angular" : "1.4.8",
-    "bower-asset/angular-i18n" : "1.4.8",
-    "bower-asset/angular-resource": "1.4.8",
-    "bower-asset/angular-ui-router" : "0.2.15",
-    "bower-asset/angular-loading-bar" : "0.8.0",
-    "bower-asset/angular-dragdrop" : "1.0.13",
-    "bower-asset/angular-slugify" : "1.0.1",
-    "bower-asset/twig.js" : "0.8.6",
-    "bower-asset/ng-file-upload" : "11.0.2",
-    "bower-asset/ng-wig" : "2.3.3"
-},
-```
