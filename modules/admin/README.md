@@ -9,8 +9,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-admin/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-admin?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-admin/v/stable)](https://packagist.org/packages/luyadev/luya-module-admin)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-admin/downloads)](https://packagist.org/packages/luyadev/luya-module-admin)
-[![Slack Support](https://github.com/luyadev/luya/tree/master/docs/guide/img/icons/Slack_Mark_Monochrome_Black.svg)](https://luyadev.slack.com/)
-
+[![Slack Support](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/icons/Slack_Mark_Black_Web.png)](https://luyadev.slack.com/)
 
 Administration Interface based on [AngularJs](https://angularjs.org/), [Bootstrap 4](https://getbootstrap.com) and [Yii 2 Framework](http://www.yiiframework.com/) (which is wrapped in the LUYA CORE).
 
