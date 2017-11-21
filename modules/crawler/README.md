@@ -1,21 +1,30 @@
 # Page Crawler
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
+</p>
+
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Build Status](https://travis-ci.org/luyadev/luya-module-crawler.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-crawler)
-[![Coverage Status](https://coveralls.io/repos/github/luyadev/luya-module-crawler/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya-module-crawler?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-crawler/v/stable)](https://packagist.org/packages/luyadev/luya-module-crawler)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-crawler/downloads)](https://packagist.org/packages/luyadev/luya-module-crawler)
+[![Slack Support](https://github.com/luyadev/luya/tree/master/docs/guide/img/icons/Slack_Mark_Monochrome_Black.svg)](https://luyadev.slack.com/)
 
-An easy to use Full-Website page crawler to make provide search results on your page. The crawlermodule gather all informations about the sides on the configured domain and stores the index in the database. From there you can now create search querys to provide search results, there are also helper methods which provides inteligent search results by spliting the input into multiple search querys (used by default).
+An easy to use full-website page crawler to make provide search results on your page. The crawler module gather all information about the sites on the configured domain and stores the index in the database. From there you can now create search queries to provide search results. There are also helper methods which provide intelligent search results by splitting the input into multiple search queries (used by default).
 
-## Install
+## Installation
 
-Add the package to your composer file
+For the installation of modules Composer is required.
+
+### Composer
 
 ```sh
 composer require luyadev/luya-module-crawler:1.0.0-RC4
 ```
 
-Add the modules to your configuration (config) in the modules section:
+### Configuration
+
+After installation via Composer include the module to your configuration file within the modules section.
 
 ```php
 'crawler' => [
@@ -25,8 +34,9 @@ Add the modules to your configuration (config) in the modules section:
 'crawleradmin' => 'luya\crawler\admin\Module',
 ```
 
-Where `baseUrl` is the domain you want to crawler all informations.
+Where `baseUrl` is the domain you want to crawler all information.
 
+### Initialization
 After setup the module in your config you have to run the migrations and import command (to setup permissions):
 
 ```sh
@@ -34,7 +44,7 @@ After setup the module in your config you have to run the migrations and import 
 ./vendor/bin/luya import
 ```
 
-### Running the Crawler
+## Running the Crawler
 
 To execute the command (and run the crawler proccess) use the crawler command `crawl`, you should put this command in cronjob to make sure your index is up-to-date:
 
@@ -46,7 +56,7 @@ To execute the command (and run the crawler proccess) use the crawler command `c
 
 > In order to provide current crawl results you should create a cronjob which crawls the page each night: `cd httpdocs/current && ./vendor/bin/luya crawler/crawl`
 
-You can also get statistic Results enabling a cronjob executing each week:
+You can also get statistic results enabling a cronjob executing each week:
  
 ```
 ./vendor/bin/luya crawler/statistic
@@ -83,7 +93,7 @@ use yii\widgets\LinkPager;
 
 ### ASYNC Request
 
-To make async search queries use the restcontroller route (jquery example):
+To make async search queries use the rest controller route (jquery example):
 
 
 ```php
@@ -98,13 +108,13 @@ $.ajax({
 
 ## Crawler Settings
 
-Set the language in your html markup
+Set the language in your html markup.
 
 ```html
 <html lang="<?= Yii::$app->composition->language; ?>">
 ```
 
-Partial ignore a content from the crawler:
+Partially ignore a content from the crawler:
 
 ```html
 <div>
@@ -114,7 +124,7 @@ Partial ignore a content from the crawler:
 </div>
 ```
 
-Ignore a page complet:
+Ignore a page complete:
 
 ```html
 <div>

@@ -1,22 +1,29 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
+</p>
+
 # Gallery Module
 
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-gallery/downloads)](https://packagist.org/packages/luyadev/luya-module-gallery)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-gallery/v/stable)](https://packagist.org/packages/luyadev/luya-module-gallery)
-[![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya)
+[![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
 The gallery module allows you create folders and collection and upload images to the collections. Its an easy way to create a gallery very quick and create your own view files.
 
 ## Installation
 
-Require the modules in your composer.json
+For the installation of modules Composer is required.
 
 ```sh
-"luyadev/luya-module-gallery" : "1.0.0-RC4"
+composer require luyadev/luya-module-gallery:1.0.0-RC4
 ```
 
-Now add the modules to your configuration in the modules section:
+
+### Configuration
+
+After installation via Composer include the module to your configuration file within the modules section.
 
 ```php
 'modules' => [
@@ -25,21 +32,21 @@ Now add the modules to your configuration in the modules section:
     'galleryadmin' => 'luya\gallery\admin\Module',
 ]
 ```
+### Initialization 
 
-After runing the `composer update` command you have to run the migration command in order to setup the database:
+After successfully installation and configuration run the migrate, import and setup command to initialize the module in your project.
+
+1.) Migrate your database.
 
 ```sh
 ./vendor/bin/luya migrate
 ```
 
-and import the module to your database:
+2.) Import the module and migrations into your LUYA project.
 
 ```sh
 ./vendor/bin/luya import
 ```
-
-You can now login to your administration area and setup the permissions in order to see the gallery module in your administration area. To integrate the module to your page you can create a page with *type* module or use the *module block*.
-
 
 ## View files
 

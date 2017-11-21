@@ -1,7 +1,14 @@
-REMOTE ADMIN
-=============
+<p align="center">
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
+</p>
+
+# REMOTE Admin Module
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+[![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-remoteadmin/v/stable)](https://packagist.org/packages/luyadev/luya-module-remoteadmin)
+![Total Downloads](https://poser.pugx.org/luyadev/luya-module-remoteadmin/downloads)](https://packagist.org/packages/luyadev/luya-module-remoteadmin)
+[![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
+
 
 **The powerful tool for Agencies!**
 
@@ -16,20 +23,18 @@ We will add more features in future, to make the [LUYA](https://github.com/zephi
 
 ![Remote Admin](https://raw.githubusercontent.com/luyadev/luya-module-remoteadmin/master/remote-admin.png)
 
-How to
-------
 
 Remote Admin will work out of the box with all [LUYA](https://github.com/zephir/luya#readme) instances you create, just add a `remoteToken` in your project application config and install the remoteadmin module on your privat/company Server/Website and you are able to add all instances.
 
-### Your LUYA Website Cockpit instance
+## Installation
 
-require remoteadmin in composer.json:
+For the installation of modules Composer is required.
 
 ```
-"luyadev/luya-module-remoteadmin" : "1.0.0-RC4",
+composer require luyadev/luya-module-remoteadmin:1.0.0-RC4,
 ```
 
-add remote admin to the list of your modules:
+## Configuration
 
 ```
 'remoteadmin' => [

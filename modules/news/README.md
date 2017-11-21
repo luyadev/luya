@@ -1,18 +1,27 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
+</p>
+
 # LUYA News Module
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+[![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-news/v/stable)](https://packagist.org/packages/luyadev/luya-module-news)
+![Total Downloads](https://poser.pugx.org/luyadev/luya-module-news/downloads)](https://packagist.org/packages/luyadev/luya-module-news)
+[![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
 The news module will provided you a basic news system with categories and tags.
 
 ## Installation
 
-In order to install the news module you have to require the `luyadev/luya-module-news`. To add the modules to your composer run:
+For the installation of modules Composer is required.
 
 ```sh
 composer require luyadev/luya-module-news:1.0.0-RC4
 ```
 
-This will add the packages to your composer.json and run the update command. So now you have the modules in your vendor folder. Now you have the configure them in your configration (the `configs` folder) file:
+### Configuration
+
+After installation via Composer include the module to your configuration file within the modules section.
 
 ```php
 'modules' => [
@@ -22,15 +31,17 @@ This will add the packages to your composer.json and run the update command. So 
 ]
 ```
 
-The modules are now available in your project. Now you have to run the migration and import command and you will be able to access the news administration to add news articles.
+### Initialization 
 
-migration command:
+After successfully installation and configuration run the migrate, import and setup command to initialize the module in your project.
+
+1.) Migrate your database.
 
 ```sh
 ./vendor/bin/luya migrate
 ```
 
-and import command:
+2.) Import the module and migrations into your LUYA project.
 
 ```sh
 ./vendor/bin/luya import

@@ -1,6 +1,10 @@
 <?php
-
-
+/**
+ * @var $humanName  The human readable name.
+ * @var $luyaText The markdown intro text
+ * @var $name The module name (lowercase)
+ * @var $ns The namespace where the module is stored in.
+ */
 ?># <?= $humanName; ?> Module
  
 <?= $luyaText; ?> 
