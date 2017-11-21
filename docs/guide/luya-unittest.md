@@ -4,10 +4,10 @@ Unit testing is an integral part of LUYA. Every new class and function should be
 
 ## Unit test a single class
 
-1. Create the test for your class in `tests/core/` within the appropriate folder (for example `InflectorHelperTest.php` in `tests/core/helpers`).
+1. Create the test for your class in `tests/` within the appropriate folder (for example `InflectorHelperTest.php` in `tests/core/helpers`).
 For a general guide to create PHP Unit Tests refer to [Getting Started with PHPUnit](https://phpunit.de/getting-started.html) or the [Official Documentation](https://phpunit.de/manual/current/en/index.html).
 2. Make sure your composer packages are updated by running `composer install` within the local LUYA dev package.
-3. Run the tests for your class by executing `php ./vendor/bin/phpunit tests/core/helpers/InflectorHelperTest.php` (if you want to test to the `InflectorHelperTest.php` for example)
+3. Run the tests for your class by executing `./vendor/bin/phpunit tests/core/helpers/InflectorHelperTest.php` (if you want to test to the `InflectorHelperTest.php` for example)
 
 ## Unit test everything with a complete suite test
 

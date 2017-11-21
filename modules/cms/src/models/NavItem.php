@@ -5,11 +5,11 @@ namespace luya\cms\models;
 use Yii;
 use luya\admin\models\Lang;
 use yii\base\Exception;
-use yii\helpers\Inflector;
 use luya\cms\admin\Module;
 use luya\admin\base\GenericSearchInterface;
 use yii\db\ActiveRecordInterface;
 use luya\admin\models\User;
+use luya\helpers\Inflector;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each
@@ -129,7 +129,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     
     public function slugifyAlias()
     {
-        $this->alias = Inflector::slug($this->alias);
+        $this->alias = Inflector::slug($this->alias, '-', true, false);
     }
     
     private $_type;
