@@ -14,6 +14,7 @@ LUYA is shipped with a {{luya\components\Mail}} component who is using the PHPMa
     ]
 ]
 ```
+> Sometimes it is also needed so set the port or more configs to connect to your mail hoster.
 
 In order to test your configurations you can run the console command `health/mailer`. The command will try to connect to your mail server trough your provided credentials. By default the mailer component requires an SMTP Server and is not using PHPs mail function.
 
