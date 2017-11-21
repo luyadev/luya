@@ -93,7 +93,7 @@ use yii\widgets\LinkPager;
 
 ### ASYNC Request
 
-To make async search queries use the restv controller route (jquery example):
+To make async search queries use the rest controller route (jquery example):
 
 
 ```php
