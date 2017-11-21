@@ -1,5 +1,8 @@
-# Error API Module
+<p align="center">
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
+</p>
 
+# Error API Module
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Build Status](https://travis-ci.org/luyadev/luya-module-errorapi.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-errorapi)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-luya-module-errorapi/downloads)](https://packagist.org/packages/luyadev/luya-module-errorapi)
