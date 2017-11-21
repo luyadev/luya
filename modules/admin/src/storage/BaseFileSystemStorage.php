@@ -256,6 +256,18 @@ abstract class BaseFileSystemStorage extends Component
 
         return $this->_filesArray;
     }
+    
+    /**
+     * Setter method for fiels array.
+     * 
+     * This is mainly used when working with unit tests.
+     * 
+     * @param array $files
+     */
+    public function setFilesArray(array $files)
+    {
+        $this->_filesArray = $files;
+    }
 
     /**
      * Get a single file by file id from the files array.
@@ -286,6 +298,18 @@ abstract class BaseFileSystemStorage extends Component
         return $this->_imagesArray;
     }
 
+    /**
+     * Setter method for images array.
+     * 
+     * This is mainly used when working with unit tests.
+     * 
+     * @param array $images
+     */
+    public function setImagesArray(array $images)
+    {
+        $this->_imagesArray = $images;
+    }
+    
     /**
      * Get a single image by image id from the files array.
      *
@@ -723,6 +747,18 @@ abstract class BaseFileSystemStorage extends Component
         }
 
         return $this->_filtersArray;
+    }
+    
+    /**
+     * Setter method for filters array.
+     * 
+     * This is mainly used when working with unit tests.
+     * 
+     * @param array $filters
+     */
+    public function setFiltersArray(array $filters)
+    {
+        $this->_filtersArray = $data;
     }
 
     /**
