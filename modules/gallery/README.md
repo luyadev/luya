@@ -6,8 +6,8 @@
 
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
-[![Total Downloads](https://poser.pugx.org/luyadev/luya-module-gallery/downloads)](https://packagist.org/packages/luyadev/luya-module-gallery)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-gallery/v/stable)](https://packagist.org/packages/luyadev/luya-module-gallery)
+[![Total Downloads](https://poser.pugx.org/luyadev/luya-module-gallery/downloads)](https://packagist.org/packages/luyadev/luya-module-gallery)
 [![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
 The gallery module allows you create folders and collection and upload images to the collections. Its an easy way to create a gallery very quick and create your own view files.
