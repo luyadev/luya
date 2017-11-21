@@ -11,7 +11,6 @@
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-module-admin/downloads)](https://packagist.org/packages/luyadev/luya-module-admin)
 [![Slack Support](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/icons/Slack_Mark_Black_Web.png)](https://luyadev.slack.com/)
 
-
 Administration Interface based on [AngularJs](https://angularjs.org/), [Bootstrap 4](https://getbootstrap.com) and [Yii 2 Framework](http://www.yiiframework.com/) (which is wrapped in the LUYA CORE).
 
 ![LUYA Admin Interface](https://raw.githubusercontent.com/luyadev/luya-module-admin/master/luya_admin.png)
