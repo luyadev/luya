@@ -758,7 +758,7 @@ abstract class BaseFileSystemStorage extends Component
      */
     public function setFiltersArray(array $filters)
     {
-        $this->_filtersArray = $data;
+        $this->_filtersArray = $filters;
     }
 
     /**
