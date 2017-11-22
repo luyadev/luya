@@ -1222,6 +1222,8 @@
      * <zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
      * ```
      * 
+     * If an initvalue is provided, you can not reset the model to null.
+     * 
      * Options value defintion:
      * 
      * ```js
@@ -1249,28 +1251,10 @@
             },
             controller: function($scope) {
             	
+            	/* default scope values */
+            	
             	$scope.isOpen = 0;
             	
-            	$scope.$on('closeAllSelects', function() {
-            		if ($scope.isOpen) {
-            			$scope.closeSelect();
-            		}
-            	});
-            	
-            	$scope.toggleIsOpen = function() {
-            		
-            		if (!$scope.isOpen) {
-            			$rootScope.$broadcast('closeAllSelects');
-            		}
-            		
-            		$scope.isOpen = !$scope.isOpen;
-            		
-            	}
-            		
-            	$scope.closeSelect = function() {
-            		$scope.isOpen = 0;
-            	}
-    			
             	if ($scope.optionsvalue == undefined) {
             		$scope.optionsvalue = 'value';
             	}
@@ -1282,57 +1266,97 @@
 		        if (jQuery.isNumeric($scope.model)){
 		            $scope.model = typeCastValue($scope.model);
 		        }
-
+            	
+		        /* listeners */
+		        
+            	$scope.$on('closeAllSelects', function() {
+            		if ($scope.isOpen) {
+            			$scope.closeSelect();
+            		}
+            	});
+            	
                 $timeout(function(){
                     $scope.$watch(function() { return $scope.model }, function(n, o) {
                         if (n == undefined || n == null || n == '') {
                             if (jQuery.isNumeric($scope.initvalue)) {
                                 $scope.initvalue = typeCastValue($scope.initvalue);
                             }
-                            $scope.model = $scope.initvalue;
+                            var exists = $scope.valueExistsInOptions(n);
+                            
+                            if (!exists) {
+                            	$scope.model = $scope.initvalue;
+                            }
                         }
                     });
                 });
+            	
+                /* methods */
+                
+                $scope.valueExistsInOptions = function(value) {
+                	var exists = false;
+                	angular.forEach($scope.options, function(item) {
+                		if (value == item.value) {
+                			exists = true;
+                		}
+                	});
+                	return exists;
+                };
+                
+            	$scope.toggleIsOpen = function() {
+            		if (!$scope.isOpen) {
+            			$rootScope.$broadcast('closeAllSelects');
+            		}
+            		$scope.isOpen = !$scope.isOpen;
+            	};
+            		
+            	$scope.closeSelect = function() {
+            		$scope.isOpen = 0;
+            	};
                 
                 $scope.setModelValue = function(option) {
                 	$scope.model = option[$scope.optionsvalue];
                 	$scope.closeSelect();
                 };
                 
-                $scope.getSelectedValue = function() {
+                $scope.getSelectedLabel = function() {
                 	var defaultLabel = i18n['ngrest_select_no_selection'];
                 	angular.forEach($scope.options, function(item) {
                 		if ($scope.model == item[$scope.optionsvalue]) {
                 			defaultLabel = item[$scope.optionslabel];
                 		}
-                	})
+                	});
                 	
                 	return defaultLabel;
-                }
-
+                };
+                
+                $scope.hasSelectedValue = function() {
+                	var modelValue = $scope.model;
+                	
+                	if ($scope.valueExistsInOptions(modelValue) && modelValue != $scope.initvalue) {
+                		return true;
+                	}
+                	
+                	return false;
+                };
             },
             template: function() {
-
-                // onclick ".zaaselect-selected" -> add class "open" to ".zaaselect"
-                // "zaaselect-clear-icon" clears selection
-
                 return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
                             '<div class="form-side form-side-label">' +
                                 '<label for="{{id}}">{{label}}</label>' +
                             '</div>' +
                             '<div class="form-side">' +
-                                '<div class="zaaselect" ng-class="{\'open\':isOpen, \'selected\':model}">' +
+                                '<div class="zaaselect" ng-class="{\'open\':isOpen, \'selected\':hasSelectedValue()}">' +
                                     '<select class="zaaselect-select" ng-model="model">' +
                                         '<option ng-repeat="opt in options" ng-value="opt[optionsvalue]">{{opt[optionslabel]}}</option>' +
                                     '</select>' +
                                     '<div class="zaaselect-selected">' +
-                                        '<span class="zaaselect-selected-text" ng-click="toggleIsOpen()">{{getSelectedValue()}}</span>' +
+                                        '<span class="zaaselect-selected-text" ng-click="toggleIsOpen()">{{getSelectedLabel()}}</span>' +
                                         '<i class="material-icons zaaselect-clear-icon" ng-click="model=initvalue">clear</i>' +
                                         '<i class="material-icons zaaselect-dropdown-icon" ng-click="toggleIsOpen()">keyboard_arrow_down</i>' +
                                     '</div>' +
                                     '<div class="zaaselect-dropdown">' +
                                         '<div class="zaaselect-search">' +
-                                            '<input class="zaaselect-search-input" type="search" ng-model="searchQuery" />' +
+                                            '<input class="zaaselect-search-input" type="search" focus-me="isOpen" ng-model="searchQuery" />' +
                                         '</div>' +
                                         '<div class="zaaselect-overflow">' +
                                             '<div class="zaaselect-item" ng-repeat="opt in options | filter:searchQuery" ng-click="setModelValue(opt)">' +

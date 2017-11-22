@@ -13,6 +13,10 @@ use luya\admin\ngrest\base\Plugin;
  */
 abstract class Select extends Plugin
 {
+    /**
+     * @var integer|string If an init value is available which is matching with the select data, you can not reset the model to null. So initvalue ensures
+     * that a value must be selected, or selects your initvalue by default.
+     */
     public $initValue = 0;
     
     /**

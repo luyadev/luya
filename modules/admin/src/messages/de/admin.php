@@ -134,7 +134,7 @@ return [
     
 // added translation in 1.0.0-beta4:
 
-    'ngrest_crud_empty_row' => 'Es wurden noch keine Datensätze erfasst.',
+    'ngrest_crud_empty_row' => 'Es wurden keine Datensätze gefunden.',
     
 // added translation in 1.0.0-beta5:
 

@@ -38,6 +38,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1520](https://github.com/luyadev/luya/issues/1520) Selects with initvalue can no longer reset to null values.
 - [#1562](https://github.com/luyadev/luya/issues/1562) Hide CMS Page settings overlay after save.
 - [#1629](https://github.com/luyadev/luya/issues/1629) Fixed bug when moving blocks from placeholder block into parent placeholder.
 - [#1654](https://github.com/luyadev/luya/issues/1654) Updated styling for treeview empty placheolder message and added styling for drag hover.
