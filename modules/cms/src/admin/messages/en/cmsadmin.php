@@ -186,10 +186,10 @@ return [
 
 // 1.0.0
     'cmsadmin_dashboard_lastupdate' => 'Last page updates',
-    'cmsadmin_settings_homepage_title' => 'Default Page',
-    'cmsadmin_settings_trashpage_title' => 'Delete Page',
+    'cmsadmin_settings_homepage_title' => 'Default page',
+    'cmsadmin_settings_trashpage_title' => 'Delete page',
     'cmsadmin_settings_modal_title' => 'Settings',
-    'cmsadmin_item_settings_titleslug' => 'Page Informations',
+    'cmsadmin_item_settings_titleslug' => 'Page informations',
     'cmsadmin_created_at' => 'Created at',
     'cmsadmin_version_remove' => 'Remove version',
     'view_index_sidebar_container_no_pages' => 'Empty container',
@@ -197,5 +197,5 @@ return [
 	'cmsadmin_settings_time_title' => 'Scheduler',
 	'cmsadmin_settings_time_title_from' => 'From',
 	'cmsadmin_settings_time_title_till' => 'Till',
-	'view_index_page_meta_timestamp_create' => 'Creation Timestamp',
+	'view_index_page_meta_timestamp_create' => 'Page creation date',
 ];

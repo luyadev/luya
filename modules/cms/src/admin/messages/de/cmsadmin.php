@@ -193,4 +193,8 @@ return [
     'cmsadmin_version_remove' => 'Version löschen',
     'view_index_sidebar_container_no_pages' => 'Keine Seiten',
     'view_update_set_as_homepage_btn' => 'Als Startseite setzen',
+    'cmsadmin_settings_time_title' => 'Zeitplaner',
+    'cmsadmin_settings_time_title_from' => 'Von',
+    'cmsadmin_settings_time_title_till' => 'Bis',
+    'view_index_page_meta_timestamp_create' => 'Erstellungsdatum',
 ];

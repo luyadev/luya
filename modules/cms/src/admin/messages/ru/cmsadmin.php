@@ -194,4 +194,8 @@ return [
     'cmsadmin_version_remove' => 'Удалить версию',
     'view_index_sidebar_container_no_pages' => 'Empty container',
     'view_update_set_as_homepage_btn' => 'Set as homepage',
+    'cmsadmin_settings_time_title' => 'Scheduler',
+    'cmsadmin_settings_time_title_from' => 'From',
+    'cmsadmin_settings_time_title_till' => 'Till',
+    'view_index_page_meta_timestamp_create' => 'Page creation date',
 ];
