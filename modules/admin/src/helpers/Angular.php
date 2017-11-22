@@ -109,7 +109,9 @@ class Angular
     }
     
     /**
-     * zaaSortRelationArray directive
+     * Sort Relation Array.
+     * 
+     * Generates a multi selection and sortable list and returns a json array with the selected values.
      *
      * @param string $ngModel The name of the ng model which should be used for data binding.
      * @param string $label The label to display for the form input.
@@ -119,7 +121,7 @@ class Angular
      */
     public static function sortRelationArray($ngModel, $label, array $sourceData, array $options = [])
     {
-        return self::injector('zaa-sort-relation-array', $ngModel, $label, ['sourceData' => $sourceData], $options);
+        return self::injector(TypesInterface::TYPE_SORT_RELATION_ARRAY, $ngModel, $label, ['sourceData' => $sourceData], $options);
     }
         
     /**
@@ -133,7 +135,7 @@ class Angular
      */
     public static function text($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-text', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_TEXT, $ngModel, $label, [], $options);
     }
     
     /**
@@ -145,7 +147,7 @@ class Angular
      */
     public static function password($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-password', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_PASSWORD, $ngModel, $label, [], $options);
     }
     
     /**
@@ -158,7 +160,7 @@ class Angular
      */
     public static function textarea($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-textarea', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_TEXTAREA, $ngModel, $label, [], $options);
     }
     
     /**
@@ -171,7 +173,7 @@ class Angular
      */
     public static function number($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-number', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_NUMBER, $ngModel, $label, [], $options);
     }
     
     /**
@@ -184,7 +186,7 @@ class Angular
      */
     public static function decimal($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-decimal', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_DECIMAL, $ngModel, $label, [], $options);
     }
     
     /**
@@ -202,7 +204,7 @@ class Angular
      */
     public static function select($ngModel, $label, array $data, array $options = [])
     {
-        return self::injector('zaa-select', $ngModel, $label, self::optionsArrayInput($data), $options);
+        return self::injector(TypesInterface::TYPE_SELECT, $ngModel, $label, self::optionsArrayInput($data), $options);
     }
     
     /**
@@ -231,7 +233,7 @@ class Angular
      */
     public static function checkbox($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-checkbox', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_CHECKBOX, $ngModel, $label, [], $options);
     }
     
     /**
@@ -257,7 +259,7 @@ class Angular
      */
     public static function checkboxArray($ngModel, $label, array $data, array $options = [])
     {
-        return self::injector('zaa-checkbox-array', $ngModel, $label, ['items' => $data], $options);
+        return self::injector(TypesInterface::TYPE_CHECKBOX_ARRAY, $ngModel, $label, ['items' => $data], $options);
     }
     
     /**
@@ -271,7 +273,7 @@ class Angular
      */
     public static function date($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-date', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_DATE, $ngModel, $label, [], $options);
     }
     
     /**
@@ -285,7 +287,7 @@ class Angular
      */
     public static function datetime($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-datetime', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_DATETIME, $ngModel, $label, [], $options);
     }
     
     /**
@@ -298,7 +300,7 @@ class Angular
      */
     public static function table($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-table', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_TABLE, $ngModel, $label, [], $options);
     }
     
     /**
@@ -311,7 +313,7 @@ class Angular
      */
     public static function listArray($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-list-array', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_LIST_ARRAY, $ngModel, $label, [], $options);
     }
     
     /**
@@ -324,7 +326,7 @@ class Angular
      */
     public static function fileArrayUpload($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-file-array-upload', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_FILEUPLOAD_ARRAY, $ngModel, $label, [], $options);
     }
     
     /**
@@ -337,7 +339,7 @@ class Angular
      */
     public static function imageArrayUpload($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-image-array-upload', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_IMAGEUPLOAD_ARRAY, $ngModel, $label, [], $options);
     }
     
     /**
@@ -350,7 +352,7 @@ class Angular
      */
     public static function imageUpload($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-image-upload', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_IMAGEUPLOAD, $ngModel, $label, [], $options);
     }
     
     /**
@@ -363,6 +365,6 @@ class Angular
      */
     public static function fileUpload($ngModel, $label, array $options = [])
     {
-        return self::injector('zaa-file-upload', $ngModel, $label, [], $options);
+        return self::injector(TypesInterface::TYPE_FILEUPLOAD, $ngModel, $label, [], $options);
     }
 }

@@ -3,6 +3,7 @@
 namespace luya\admin\ngrest\plugins;
 
 use luya\admin\ngrest\base\Plugin;
+use luya\admin\base\TypesInterface;
 
 /**
  * Sort Relation Plugin.
@@ -40,7 +41,7 @@ abstract class SortRelation extends Plugin
      */
     public function renderCreate($id, $ngModel)
     {
-        return $this->createFormTag('zaa-sort-relation-array', $id, $ngModel, ['options' => $this->getServiceName('sortrelationdata')]);
+        return $this->createFormTag(TypesInterface::TYPE_SORT_RELATION_ARRAY, $id, $ngModel, ['options' => $this->getServiceName('sortrelationdata')]);
     }
     
     /**

@@ -740,7 +740,7 @@
     		},
     		controller: function($scope, $filter) {
 
-    			$scope.searchString = null;
+    			$scope.searchString;
 
     			$scope.sourceData = [];
 
@@ -774,10 +774,9 @@
     					if (value.value == option.value) {
     						match = true;
     					}
-    				})
+    				});
 
     				if (!match) {
-    					$scope.searchString = null;
     					$scope.model.push({'value': option.value, 'label': option.label});
     				}
     			};
@@ -800,13 +799,6 @@
                     $scope.model[index+1] = oldRow;
                 };
 
-                $scope.showDownButton = function(index) {
-                    if (parseInt(index) < Object.keys($scope.model).length - 1) {
-                        return true;
-                    }
-                    return false;
-                }
-
                 $scope.elementInModel = function(item) {
             		var match = false;
 
@@ -823,33 +815,32 @@
     			return '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
                     '<div class="form-side form-side-label"><label for="{{id}}">{{label}}</label></div>' +
                     '<div class="form-side">' +
-                        '<div class="zaa-sortrelation">' +
-                            '<ul class="zaa-sortrelation__list>">' +
-                                '<li class="zaa-sortrelation__entry" ng-repeat="(key, item) in getModelItems() track by key">' +
-                                    '<div class="zaa-sortrelation__arrows">' +
-                                        '<i ng-show="{{key > 0}}" ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i>' +
-                                        '<i ng-show="showDownButton(key)" ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i>' +
+                            '<div class="list">' +
+                                '<div class="list-item" ng-repeat="(key, item) in getModelItems() track by key">' +
+                                    '<div class="list-buttons">' +
+                                        '<i ng-show="!$first" ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i>' +
+                                        '<i ng-show="!$last" ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i>' +
                                     '</div>' +
 
-                                    '<span class="zaa-sortrelation__text">{{item.label}}</span>' +
+                                    '<span>{{item.label}}</span>' +
 
-                                    '<div class="zaa-sortrelation__trash">' +
+                                    '<div class="float-right">' +
                                         '<i ng-click="removeFromModel(key)" class="material-icons">delete</i>' +
                                     '</div>' +
-                                '</li>' +
-                                '<li class="zaa-sortrelation__dropdown-filter" ng-class="{\'zaa-sortrelation__dropdown-filter--open\': dropdownOpen}">' +
-                                    '<input class="zaa-sortrelation__filter" type="search" ng-model="searchString" placeholder="Hinzufügen..." ng-focus="dropdownOpen = true" />' +
-                                    '<ul class="zaa-sortrelation__dropdown">' +
-                                        '<li class="zaa-sortrelation__dropdown-entry" ng-repeat="option in getSourceOptions() | filter:searchString" ng-show="dropdownOpen && elementInModel(option)" ng-click="addToModel(option)">' +
+                                '</div>' +
+                                '<div class="list-item" ng-show="sourceData.length != model.length">' +
+                                    '<input class="form-control" type="search" ng-model="searchString" ng-focus="dropdownOpen = true" />' +
+                                    '<ul class="list-group">' +
+                                        '<li class="list-group-item list-group-item-action" ng-repeat="option in getSourceOptions() | filter:searchString" ng-show="dropdownOpen && elementInModel(option)" ng-click="addToModel(option)">' +
                                             '<i class="material-icons">add_circle</i><span>{{ option.label }}</span>' +
                                         '</li>' +
                                     '</ul>' +
-                                    '<div class="zaa-sortrelation__dropdown-arrow" ng-class="{\'zaa-sortrelation__dropdown-arrow--active\': dropdownOpen}">' +
-                                        '<i ng-click="dropdownOpen = !dropdownOpen" class="material-icons">arrow_drop_down</i>' +
+                                    '<div class="float-right">' +
+                                        '<i ng-click="dropdownOpen=!dropdownOpen" class="material-icons" ng-show="dropdownOpen">arrow_drop_down</i>' +
+                                        '<i ng-click="dropdownOpen=!dropdownOpen" class="material-icons" ng-show="!dropdownOpen">arrow_drop_up</i>' +
                                     '</div>' +
-                                '</li>' +
-                            '</ul>' +
-                        '</div>' +
+                                '</div>' +
+                            '</div>' +
                     '</div>';
     		}
     	}

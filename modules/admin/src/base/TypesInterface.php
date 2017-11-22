@@ -159,4 +159,9 @@ interface TypesInterface
      * ```
      */
     const TYPE_MULTIPLE_INPUTS = 'zaa-multiple-inputs';
+    
+    /**
+     * @var string Generates a multi selection and sortable list and returns a json array with the selected values.
+     */
+    const TYPE_SORT_RELATION_ARRAY = 'zaa-sort-relation-array';
 }
