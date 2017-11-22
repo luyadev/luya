@@ -59,7 +59,7 @@ class ItemTest extends CmsFrontendTestCase
     	
     	$injectCount = (new Query(['menu' => $menu]))->lang('de')->count();
     	
-    	$this->assertSame(2, $injectCount());
+    	$this->assertSame(2, $injectCount);
     }
     
     public function testChildItem()
