@@ -12,7 +12,7 @@ use luya\helpers\ArrayHelper;
  * ```php
  * public function ngRestAttributeTypes()
  * {
- * 		'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
+ *     'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
  * }
  * ```
  *
