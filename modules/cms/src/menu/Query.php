@@ -5,6 +5,7 @@ namespace luya\cms\menu;
 use Yii;
 use luya\cms\Exception;
 use yii\base\Object;
+use luya\cms\Menu;
 
 /**
  * Menu Query Builder.
@@ -67,6 +68,16 @@ class Query extends Object implements QueryOperatorFieldInterface
         }
 
         return $this->_menu;
+    }
+    
+    /**
+     * Setter method for menu Container.
+     * 
+     * @param Menu $menu
+     */
+    public function setMenu(Menu $menu)
+    {
+    	$this->_menu = $menu;
     }
     
     /**

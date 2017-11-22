@@ -65,6 +65,7 @@ use yii\base\Object;
  * @property $link string The link to the detail view.
  * @property $alias The alias path.
  * @property $title The navigation menu title.
+ * @property $lang The language container name.
  * @property $description Alternative page descriptions.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -293,6 +294,8 @@ class InjectItem extends Object implements InjectItemInterface
         return count(explode('/', $this->alias));
     }
     
+    private $_lang;
+    
     /**
      * Returns the language from the childOf item.
      *
@@ -300,10 +303,23 @@ class InjectItem extends Object implements InjectItemInterface
      */
     public function getLang()
     {
-        return $this->item->lang;
+    	if ($this->_lang === null) {
+    		$this->_lang = $this->item->lang;
+    	}
+    	
+    	return $this->_lang;
     }
     
-    
+    /**
+     * Setter method for language container.
+     * 
+     * @param string $lang The language short code for the given item, if nothing set the item will be resolved
+     * due to useage of the parent item from $this->item.
+     */
+    public function setLang($lang)
+    {
+    	$this->_lang = $lang;
+    }
     
     /**
      * Getter method for the parent nav id from the childOf item.

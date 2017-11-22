@@ -5,6 +5,10 @@ namespace cmstests\src\menu;
 use Yii;
 use cmstests\CmsFrontendTestCase;
 use luya\cms\menu\Query;
+use luya\cms\Menu;
+use luya\web\Request;
+use luya\cms\menu\InjectItem;
+use cmstests\data\items\RootItem;
 
 class ItemTest extends CmsFrontendTestCase
 {
@@ -35,6 +39,27 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertTrue($obj->isHome);
         $this->assertSame('Homepage', $obj->getSeoTitle());
         $this->assertSame('Homepage', $obj->seoTitle);
+    }
+    
+    public function testInjectionsWithParentElements()
+    {
+    	$menu = new Menu((new Request));
+    
+    	// generate 
+    	$rootItem = new RootItem();
+    	$menu->injectItem($rootItem);
+    	
+    	$inject = new InjectItem(['childOf' => 1, 'title' => 't1', 'id' => 2000]);
+    	$menu->injectItem($inject);
+    	
+    	$rootItemFromMenu = (new Query(['menu' => $menu]))->lang('de')->one();
+    	
+    	$inject = new InjectItem(['item' => $rootItemFromMenu, 'title' => 't1', 'id' => 2000]);
+    	$menu->injectItem($inject);
+    	
+    	$injectCount = (new Query(['menu' => $menu]))->lang('de')->count();
+    	
+    	$this->assertSame(2, $injectCount());
     }
     
     public function testChildItem()

@@ -721,6 +721,8 @@ CREATE TABLE `cms_nav` (
   `is_home` tinyint(1) DEFAULT '0',
   `is_offline` tinyint(1) DEFAULT '0',
   `is_draft` tinyint(1) DEFAULT '0',
+  `publish_till` int(11) NULL,
+  `publish_from` int(11) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -731,7 +733,7 @@ CREATE TABLE `cms_nav` (
 
 LOCK TABLES `cms_nav` WRITE;
 /*!40000 ALTER TABLE `cms_nav` DISABLE KEYS */;
-INSERT INTO `cms_nav` VALUES (1,1,0,1,0,0,1,0,0),(2,1,0,2,0,0,0,0,0),(3,1,0,3,0,0,0,0,0),(4,1,0,4,0,0,0,0,0),(5,1,0,5,0,0,0,0,0),(6,1,0,6,0,0,0,0,0),(7,1,0,7,0,0,0,0,0),(8,1,2,1,0,0,0,0,0),(9,1,2,2,0,0,0,0,0),(10,1,2,3,0,0,0,0,0),(11,1,2,4,0,0,0,0,0),(12,1,2,5,0,0,0,0,0),(13,1,2,6,0,0,0,0,0),(14,1,0,8,0,0,0,0,0),(15,1,0,9,0,0,0,0,0),(16,1,0,10,0,0,0,0,0),(17,1,0,11,0,0,0,0,0);
+INSERT INTO `cms_nav` VALUES (1,1,0,1,0,0,1,0,0, NULL, NULL),(2,1,0,2,0,0,0,0,0, NULL, NULL),(3,1,0,3,0,0,0,0,0, NULL, NULL),(4,1,0,4,0,0,0,0,0, NULL, NULL),(5,1,0,5,0,0,0,0,0, NULL, NULL),(6,1,0,6,0,0,0,0,0, NULL, NULL),(7,1,0,7,0,0,0,0,0, NULL, NULL),(8,1,2,1,0,0,0,0,0, NULL, NULL),(9,1,2,2,0,0,0,0,0, NULL, NULL),(10,1,2,3,0,0,0,0,0, NULL, NULL),(11,1,2,4,0,0,0,0,0, NULL, NULL),(12,1,2,5,0,0,0,0,0, NULL, NULL),(13,1,2,6,0,0,0,0,0, NULL, NULL),(14,1,0,8,0,0,0,0,0, NULL, NULL),(15,1,0,9,0,0,0,0,0, NULL, NULL),(16,1,0,10,0,0,0,0,0, NULL, NULL),(17,1,0,11,0,0,0,0,0, NULL, NULL);
 /*!40000 ALTER TABLE `cms_nav` ENABLE KEYS */;
 UNLOCK TABLES;
 
