@@ -187,7 +187,7 @@ class Table extends NgRestModel
             'i18n_password' => 'textarea',
             'i18n_selectClass' => 'textarea',
             'i18n_toggleStatus' => 'textarea',
-            'i18n_sortRelationArray' => 'textarea',
+            'i18n_sortRelationArray' => ['sortRelationArray', 'data' => [1 => 'Foo', 2 => 'Bar']],
             'i18n_sortRelationModel' => 'textarea',
         ];
     }
@@ -202,7 +202,7 @@ class Table extends NgRestModel
     {
         // define fields for types based from ngrestAttributeTypes
         $this->ngRestConfigDefine($config, 'list', ['image']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['image']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['image', 'i18n_sortRelationArray']);
         
         // enable or disable ability to delete;
         $config->delete = false;

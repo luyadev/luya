@@ -15,10 +15,10 @@ class Module extends \luya\admin\base\Module
     {
         return (new \luya\admin\components\AdminMenuBuilder($this))
         ->node('Table', 'extension')
-        ->group('Group')
+        ->group('Group1')
         ->itemApi('Table', 'ngresttest/table/index', 'label', 'api-ngresttest-table')
         
-        ->group('Group')
+        ->group('Group2')
         ->itemApi('Order', 'ngresttest/order/index', 'label', 'api-ngresttest-order')
         ->itemApi('Customer', 'ngresttest/customer/index', 'label', 'api-ngresttest-customer');
     }

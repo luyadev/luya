@@ -5,32 +5,55 @@ namespace luya\admin\ngrest\plugins;
 use luya\admin\ngrest\base\Plugin;
 
 /**
- * Base class for Sort Relation Plugins.
+ * Sort Relation Plugin.
+ * 
+ * The SortRelation provides the abilitie to select **multiple** items and to **sort** them. This plugin
+ * does NOT work with a relation table, the selected data will be stored as json in a text field.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 abstract class SortRelation extends Plugin
 {
+    /**
+     * Provide an array with data where key is the value and value the label.
+     * 
+     * @return array
+     */
     abstract public function getData();
     
+    /**
+     * @inheritdoc
+     */
     public $i18nEmptyValue = [];
     
+    /**
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return $this->createFormTag('zaa-sort-relation-array', $id, $ngModel, ['options' => $this->getServiceName('sortrelationdata')]);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function serviceData($event)
     {
         return [
@@ -38,9 +61,11 @@ abstract class SortRelation extends Plugin
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeSave($event)
     {
-        // if its not i18n casted field we have to serialize the the image array as json and abort further event excution.
         if (!$this->i18n) {
             $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
             return false;
@@ -49,6 +74,9 @@ abstract class SortRelation extends Plugin
         return true;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeFind($event)
     {
         if (!$this->i18n) {
@@ -58,6 +86,9 @@ abstract class SortRelation extends Plugin
         return true;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeExpandFind($event)
     {
         if (!$this->i18n) {

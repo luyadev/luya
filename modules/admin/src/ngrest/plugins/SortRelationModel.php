@@ -3,14 +3,16 @@
 namespace luya\admin\ngrest\plugins;
 
 /**
- * Sortable Relation from Active Record Input.
+ * Sort Relation Model Plugin.
+ *
+ * Generate a multi selectable and sortable input from an ActiveRecord Model.
  *
  * Example usage:
  *
  * ```php
  * public function ngRestAttributeTypes()
  * {
- * 		'genres' => ['sortRelationModel', 'modelClass' => path\to\Genres::className(), 'valueField' => 'id', 'labelField' => 'title']],
+ *     'genres' => ['sortRelationModel', 'modelClass' => 'app\models\GenresActiveRecord', 'valueField' => 'id', 'labelField' => 'title']]
  * }
  * ```
  *
@@ -19,12 +21,25 @@ namespace luya\admin\ngrest\plugins;
  */
 class SortRelationModel extends SortRelation
 {
+    /**
+     * @var string The model class to take the data from.
+     */
     public $modelClass;
-    
+
+    /**
+     * @var string The name of the field which should be used as value, like the id or any other identifier.
+     */
     public $valueField;
     
+    /**
+     * 
+     * @var string The name of the field which should display the record label.
+     */
     public $labelField;
     
+    /**
+     * @inheritdoc
+     */
     public function getData()
     {
         $class = $this->modelClass;
@@ -50,6 +65,9 @@ class SortRelationModel extends SortRelation
         return ['sourceData' => $data];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onAfterFind($event)
     {
         $data = $event->sender->getAttribute($this->name);
@@ -57,7 +75,7 @@ class SortRelationModel extends SortRelation
         if (!empty($data)) {
             $ids = [];
             foreach ($data as $key) {
-                $ids[]=$key['value'];
+                $ids[] = $key['value'];
             }
             $class = $this->modelClass;
             $event->sender->setAttribute($this->name, $class::find()->where(['in', 'id', $ids])->all());

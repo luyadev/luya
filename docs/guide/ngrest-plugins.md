@@ -14,7 +14,7 @@ A few plugins can be configured, make sure to check out the class reference of t
 |password            |{{\luya\admin\ngrest\plugins\Password}}|string        |Input type password field.
 |[selectArray](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectArray}}|string    |Select Dropdown with options from input configuration.
 |[selectModel](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectModel}}|string    |Select Dropdown with options given from an Active Record Model class.
-|SelectRelationActiveQuery|{{luya\admin\ngrest\plugins\SelectRelationActiveQuery}}|string |Select Dropdown based on an ActiveQuery relation defintion.
+|[selectRelationActiveQuery](ngrest-plugin-select.md)|{{luya\admin\ngrest\plugins\SelectRelationActiveQuery}}|string |Select Dropdown based on an ActiveQuery relation defintion.
 |toggleStatus       |{{\luya\admin\ngrest\plugins\ToggleStatus}}|integer/string    |Create checkbox where you can toggle on or off.
 |image                |{{\luya\admin\ngrest\plugins\Image}}|integer    |Create an image upload and returns the imageId from storage system.
 |imageArray            |{{\luya\admin\ngrest\plugins\ImageArray}}|array        |Creates an uploader for multiple images and returns an array with the image ids from the storage system.
@@ -32,6 +32,9 @@ A few plugins can be configured, make sure to check out the class reference of t
 |slug               |{{\luya\admin\ngrest\plugins\Slug}}|string|Generates a slugified string which can be used for url rules.
 |color                |{{\luya\admin\ngrest\plugins\Color}}|string|A color wheel to pick a color.
 |sortable            |{{\luya\admin\ngrest\plugins\Sortable}}|integer|Sort items in crud list with arrow keys up/down. Commonly used in combination of {{luya\admin\traits\SortableTrait}}.
+|sortRelationArray|{{luya\admin\ngrest\plugins\SortRelationArray}}|array|Similar to selectArray but with the ability to sort and to selected multiple items.
+|sortRelationModel|{{luya\admin\ngrest\plugins\SortRelationModel}}|array|Similar to selectModel but with the ability to sort and to selected multiple items.
+|html|{{luya\admin\ngrest\plugins\Html}}|string|HTML data without encoding.
 
 ## Create a custom project Plugin
 
