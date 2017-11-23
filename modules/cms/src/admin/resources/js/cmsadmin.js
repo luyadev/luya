@@ -245,7 +245,7 @@
 						AdminToastService.success(i18n['view_index_page_success'], 4000);
 					}, function(reason) {
 						angular.forEach(reason, function(value, key) {
-							AdminToastService.error(value[0], 2000);
+							AdminToastService.error(value[0], 6000);
 						});
 						$scope.error = reason;
 					});

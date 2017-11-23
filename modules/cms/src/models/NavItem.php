@@ -213,17 +213,17 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     public function verifyAlias($alias, $langId)
     {
         if (Yii::$app->hasModule($alias) && $this->parent_nav_id == 0) {
-            $this->addError('alias', 'Die URL darf nicht verwendet werden da es ein Modul mit dem gleichen Namen gibt.');
+            $this->addError('alias', Module::t('nav_item_model_error_modulenameexists', ['alias' => $alias]));
 
             return false;
         }
 
         if ($this->parent_nav_id === null) {
-            $this->addError('parent_nav_id', 'parent_nav_id can not be null to verify the alias validation process.');
+            $this->addError('parent_nav_id', Module::t('nav_item_model_error_parentnavidcannotnull'));
         }
 
         if ($this->find()->where(['alias' => $alias, 'lang_id' => $langId])->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')->andWhere(['=', 'cms_nav.parent_nav_id', $this->parent_nav_id])->one()) {
-            $this->addError('alias', 'Diese URL existiert bereits und ist deshalb ungültig.');
+            $this->addError('alias', Module::t('nav_item_model_error_urlsegementexistsalready'));
 
             return false;
         }
