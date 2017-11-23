@@ -62,16 +62,12 @@ use luya\cms\admin\Module;
                 <div ng-switch-when="3">
                     <create-form-redirect data="data"></create-form-redirect>
                 </div>
-                <div ng-show="success">
-                    <div class="alert alert-success">
-                        <i class="material-icons">check</i> <?= Module::t('view_index_page_success'); ?>
-                    </div>
+                <div class="alert alert-success mt-3 mb-0" ng-show="success">
+                    <i class="material-icons">check_circle</i> <?= Module::t('view_index_page_success'); ?>
                 </div>
-                <div class="alert alert-danger" ng-show="error.length != 0">
-                    <ul>
-                        <li ng-repeat="err in error">{{ err[0] }}</li>
-                    </ul>
-                </div>
+                <ul class="list-group mt-3" ng-show="error.length != 0">
+                    <li class="list-group-item list-group-item-danger" ng-repeat="err in error">{{ err[0] }}</li>
+                </ul>
             </form>
         </div>
     </div>
