@@ -292,7 +292,7 @@
 				$http.delete($scope.config.apiEndpoint + '/'+id).then(function(response) {
 					$scope.loadList();
 					$toast.close();
-					AdminToastService.success(i18n['js_ngrest_rm_confirm'], 2000);
+					AdminToastService.success(i18n['js_ngrest_rm_confirm']);
 				}, function(data) {
 					$scope.printErrors(data);
 				});
@@ -316,13 +316,13 @@
 				}
 				$scope.data.updateId = id;
 			}, function(data) {
-				AdminToastService.error(i18n['js_ngrest_error'], 2000);
+				AdminToastService.error(i18n['js_ngrest_error']);
 			});
 		};
 
 		$scope.submitUpdate = function () {
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).then(function(response) {
-				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
+				AdminToastService.success(i18n['js_ngrest_rm_update']);
 				$scope.loadList();
 				$scope.applySaveCallback();
 				$scope.switchTo(0, true);
@@ -340,7 +340,7 @@
 			}
 
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).then(function(response) {
-				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
+				AdminToastService.success(i18n['js_ngrest_rm_success']);
 				$scope.loadList();
 				$scope.applySaveCallback();
 				$scope.switchTo(0, true);
@@ -351,7 +351,7 @@
 
 		$scope.printErrors = function(data) {
 			angular.forEach(data, function(value, key) {
-				AdminToastService.error(value.message, 4500);
+				AdminToastService.error(value.message);
 			});
 		};
 
@@ -447,7 +447,7 @@
 			$http.put($scope.config.apiEndpoint + '/' + rowId +'?ngrestCallType=update&fields='+fieldName, angular.toJson(json, true)).then(function(response) {
 				row[fieldName] = invert;
 				$scope.highlightItemId(rowId);
-				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}), 1500);
+				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}));
 			}, function(data) {
 				$scope.printErrors(data);
 			});
@@ -642,9 +642,9 @@
 				$scope.crud.sendActiveWindowCallback('SaveTag', {'tagName': tagName}).then(function(response) {
 					if (response.data) {
 						$scope.tags.push({id: response.data, name: tagName});
-						AdminToastService.success(tagName + ' wurde gespeichert.', 2000);
+						AdminToastService.success(tagName + ' wurde gespeichert.');
 					} else {
-						AdminToastService.error(tagName + ' ' + i18n['js_tag_exists'], 2000);
+						AdminToastService.error(tagName + ' ' + i18n['js_tag_exists']);
 					}
 					$scope.newTagName = null;
 				});
@@ -656,7 +656,7 @@
 
 				$scope.relation[tag.id] = response.data;
 
-				AdminToastService.success(i18n['js_tag_success'], 2000);
+				AdminToastService.success(i18n['js_tag_success']);
 			});
 		};
 
@@ -1111,9 +1111,9 @@
 	zaa.controller("AccountController", function($scope, $http, $window, AdminToastService) {
 		$scope.changePassword = function(pass) {
 			$http.post('admin/api-admin-user/change-password', pass).then(function(response) {
-				AdminToastService.success(i18n['aws_changepassword_succes'], 5000);
+				AdminToastService.success(i18n['aws_changepassword_succes']);
 			}, function(error) {
-				AdminToastService.errorArray(error.data, 3000);
+				AdminToastService.errorArray(error.data);
 			});
 		};
 
@@ -1135,9 +1135,9 @@
 
 		$scope.changePersonData = function(data) {
 			$http.put('admin/api-admin-user/session-update', data).then(function(success) {
-				AdminToastService.success(i18n['js_account_update_profile_success'], 5000);
+				AdminToastService.success(i18n['js_account_update_profile_success']);
 			}, function(error) {
-				AdminToastService.errorArray(error.data, 3000);
+				AdminToastService.errorArray(error.data);
 			});
 		};
 

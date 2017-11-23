@@ -242,10 +242,10 @@
 						if ($scope.data.isInline) {
 							$scope.$parent.$parent.getItem($scope.data.lang_id, $scope.data.nav_id);
 						}
-						AdminToastService.success(i18n['view_index_page_success'], 4000);
+						AdminToastService.success(i18n['view_index_page_success']);
 					}, function(reason) {
 						angular.forEach(reason, function(value, key) {
-							AdminToastService.error(value[0], 6000);
+							AdminToastService.error(value[0]);
 						});
 						$scope.error = reason;
 					});
@@ -400,7 +400,7 @@
 
 		$scope.save = function() {
 			$http.post('admin/api-cms-admin/config', $scope.data).then(function(response) {
-				AdminToastService.success(i18n['js_config_update_success'], 4000);
+				AdminToastService.success(i18n['js_config_update_success']);
 			});
 		}
 	});
@@ -427,7 +427,7 @@
 
 		$scope.createNewVersionSubmit = function(data) {
 			if (data == undefined) {
-				AdminToastService.error(i18n['js_version_error_empty_fields'], 4000);
+				AdminToastService.error(i18n['js_version_error_empty_fields']);
 				return null;
 			}
 			if (data.copyExistingVersion) {
@@ -435,13 +435,13 @@
 			}
 			$http.post('admin/api-cms-navitem/create-page-version', $.param({'layoutId': data.versionLayoutId, 'navItemId': $scope.item.id, 'name': data.versionName, 'fromPageId': data.fromVersionPageId}), headers).then(function(response) {
 				if (response.data.error) {
-					AdminToastService.error(i18n['js_version_error_empty_fields'], 4000);
+					AdminToastService.error(i18n['js_version_error_empty_fields']);
 					return null;
 				}
 
 				$scope.refreshForce();
 
-				AdminToastService.success(i18n['js_version_create_success'], 4000);
+				AdminToastService.success(i18n['js_version_create_success']);
 			});
 		};
 	});
@@ -497,10 +497,10 @@
 			$scope.itemSelection['toLangId'] = $scope.NavItemController.lang.id;
 			$http.post('admin/api-cms-nav/create-from-page', $.param($scope.itemSelection), headers).then(function(response) {
 				if (response.data) {
-					AdminToastService.success(i18n['js_added_translation_ok'], 3000);
+					AdminToastService.success(i18n['js_added_translation_ok']);
 					$scope.NavItemController.refresh();
 				} else {
-					AdminToastService.error(i18n['js_added_translation_error'], 5000);
+					AdminToastService.error(i18n['js_added_translation_error']);
 				}
 			});
 		}
@@ -869,7 +869,7 @@
 		$scope.createDeepPageCopy = function() {
 			$http.post('admin/api-cms-nav/deep-page-copy', {navId: $scope.id}).then(function(response) {
 				$scope.menuDataReload();
-				AdminToastService.success(i18n['js_page_create_copy_success'], 4000);
+				AdminToastService.success(i18n['js_page_create_copy_success']);
 				$scope.showActions = 1;
 				$scope.togglePageSettingsOverlay();
 			});
@@ -894,7 +894,7 @@
 		$scope.storePropValues = function() {
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).then(function(response) {
-				AdminToastService.success(i18n['js_page_property_refresh'], 4000);
+				AdminToastService.success(i18n['js_page_property_refresh']);
 				$scope.loadNavProperties();
 				$scope.showPropForm = false;
 				$scope.togglePageSettingsOverlay();
@@ -911,7 +911,7 @@
 	    				$scope.togglePageSettingsOverlay();
 	    			});
 	    		}, function(response) {
-					AdminToastService.error(i18n['js_page_delete_error_cause_redirects'], 5000);
+					AdminToastService.error(i18n['js_page_delete_error_cause_redirects']);
 				});
 			});
 	    };
@@ -920,11 +920,11 @@
 
 	    $scope.submitNavForm = function(data) {
 	    	$http.post('admin/api-cms-nav/update?id=' + $scope.navData.id, data).then(function(response) {
-	    		AdminToastService.success(i18nParam('js_page_update_layout_save_success'), 4000);
+	    		AdminToastService.success(i18nParam('js_page_update_layout_save_success'));
 	    		$scope.togglePageSettingsOverlay();
 	    	}, function(response) {
 	    		angular.forEach(response.data, function(value) {
-	    			AdminToastService.error(value.message, 4000);
+	    			AdminToastService.error(value.message);
 	    		});
 	    	});
 	    };
@@ -943,9 +943,9 @@
 			    	if (n !== o && n !== undefined) {
 			    		$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).then(function(response) {
 							if ($scope.navData.is_offline == 1) {
-								AdminToastService.info(i18nParam('js_state_offline', {title: $scope.navData.title}), 4000);
+								AdminToastService.info(i18nParam('js_state_offline', {title: $scope.navData.title}));
 							} else {
-								AdminToastService.info(i18nParam('js_state_online', {title: $scope.navData.title}), 4000);
+								AdminToastService.info(i18nParam('js_state_online', {title: $scope.navData.title}));
 							}
 			    		});
 			    	}
@@ -955,9 +955,9 @@
 					if (n !== o && n !== undefined) {
 						$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).then(function(response) {
 							if ($scope.navData.is_hidden == 1) {
-								AdminToastService.info(i18nParam('js_state_hidden', {title: $scope.navData.title}), 4000);
+								AdminToastService.info(i18nParam('js_state_hidden', {title: $scope.navData.title}));
 							} else {
-								AdminToastService.info(i18nParam('js_state_visible', {title: $scope.navData.title}), 4000);
+								AdminToastService.info(i18nParam('js_state_visible', {title: $scope.navData.title}));
 							}
 						});
 					}
@@ -968,9 +968,9 @@
 						$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).then(function(response) {
 							$scope.menuDataReload().then(function() {
 								if ($scope.navData.is_home == 1) {
-									AdminToastService.success(i18nParam('js_state_is_home', {title: $scope.navData.title}), 4000);
+									AdminToastService.success(i18nParam('js_state_is_home', {title: $scope.navData.title}));
 								} else {
-									AdminToastService.success(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 4000);
+									AdminToastService.success(i18nParam('js_state_is_not_home', {title: $scope.navData.title}));
 								}
 								$scope.togglePageSettingsOverlay();
 			    			});
@@ -1068,7 +1068,7 @@
 							$toast.close();
 		    			});
 		    		}, function(response) {
-						AdminToastService.error(i18n['js_page_delete_error_cause_redirects'], 5000);
+						AdminToastService.error(i18n['js_page_delete_error_cause_redirects']);
 					});
 				});
 			}
@@ -1103,13 +1103,15 @@
 					$scope.currentPageVersion = 0;
 				}
 				$scope.loaded = false;
-				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}), 2000);
+				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}));
 				$scope.menuDataReload();
 				$scope.refresh();
 				$scope.toggleSettingsOverlay();
 				$scope.reset();
 			}, function errorCallback(response) {
-				$scope.errors = response.data;
+				angular.forEach(response.data, function(item) {
+					AdminToastService.error(item.message);
+				});
 			});
 		};
 
@@ -1124,7 +1126,7 @@
 				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : version.id}).then(function(response) {
 					$scope.refreshForce();
 					$toast.close();
-					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: version.version_alias}), 5000);
+					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: version.version_alias}));
 				});
 			});
 		};
@@ -1141,7 +1143,7 @@
     	$scope.editVersionUpdate = function(editVersionItem) {
     		$http.post('admin/api-cms-navitem/change-page-version-layout', {'pageItemId': editVersionItem.id, 'layoutId': editVersionItem.layout_id, 'alias': editVersionItem.version_alias}).then(function(response) {
     			$scope.refreshForce();
-    			AdminToastService.success(i18n['js_version_update_success'], 4000);
+    			AdminToastService.success(i18n['js_version_update_success']);
     			$scope.toggleSettingsOverlay();
 			});
     	};
@@ -1429,7 +1431,7 @@
 				/* load live url on hidden trigger */
 				$scope.NavItemTypePageController.$parent.$parent.loadLiveUrl();
 				// successfull toggle hidden state of block
-				AdminToastService.info(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}), 2000);
+				AdminToastService.info(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}));
 			});
 		};
 
@@ -1519,7 +1521,7 @@
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 					$scope.NavItemTypePageController.loadLiveUrl();
 					$toast.close();
-					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: $scope.block.name}), 2000);
+					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: $scope.block.name}));
 				});
 			});
 		};
@@ -1530,7 +1532,7 @@
 				json_config_cfg_values: $scope.cfgdata,
 				variation: $scope.block.variation
 			}).then(function(response) {
-				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}), 2000);
+				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}));
 				$scope.toggleEdit();
 				$scope.block.is_dirty = 1;
 				$scope.block = angular.copy(response.data.objectdetail);

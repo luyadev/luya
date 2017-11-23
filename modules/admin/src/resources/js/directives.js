@@ -2497,12 +2497,12 @@
                             if (!transport.data.error) {
                                 scope.imagesDataReload().then(function(r) {
                                     scope.ngModel = transport.data.id;
-                                    AdminToastService.success(i18n['js_dir_image_upload_ok'], 2000);
+                                    AdminToastService.success(i18n['js_dir_image_upload_ok']);
                                     scope.imageLoading = false;
                                 });
                             }
                         }, function(error) {
-                        	AdminToastService.error(i18n['js_dir_image_filter_error'], 7000);
+                        	AdminToastService.error(i18n['js_dir_image_filter_error']);
                             scope.imageLoading = false;
                         });
                     } else {
@@ -2661,7 +2661,7 @@
 	                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
 	                            }
                             	$scope.fileDetail = fileref;
-                            	AdminToastService.success('the file has been replaced successfull.', 4000);
+                            	AdminToastService.success('the file has been replaced successfull.');
                             });
                     	}
                     }, function() {
@@ -2688,7 +2688,7 @@
                     if ($scope.uploadingfiles != null) {
                         if (n == $scope.uploadingfiles.length && $scope.errorMsg == null) {
                             $scope.filesDataReload().then(function() {
-                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok']);
                                 LuyaLoading.stop();
                             });
                         }
@@ -2709,11 +2709,11 @@
 	                        }).then(function(response) {
                         		if (response.data.upload) {
 		                        	$scope.filesDataReload().then(function() {
-		                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+		                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok']);
 		                            	LuyaLoading.stop();
 		                            });
                         		} else {
-                        			AdminToastService.error(response.data.message, 6000);
+                        			AdminToastService.error(response.data.message);
                         			LuyaLoading.stop();
                         		}
 	                        	
@@ -2735,7 +2735,7 @@
                             file.processed = true;
                             file.result = response.data;
                             if (!file.result.upload) {
-                            	AdminToastService.error(file.result.message, 6000);
+                            	AdminToastService.error(file.result.message);
                             	LuyaLoading.stop();
                                 $scope.errorMsg = true
                             }
@@ -2955,7 +2955,7 @@
                         }).then(function(transport) {
                             $scope.filesDataReload().then(function() {
                                 $toast.close();
-                                AdminToastService.success(i18n['js_dir_manager_rm_file_ok'], 2000);
+                                AdminToastService.success(i18n['js_dir_manager_rm_file_ok']);
                                 $scope.selectedFiles = [];
                             });
                         });
@@ -2968,7 +2968,7 @@
                 	$http.post('admin/api-admin-storage/filemanager-update-caption', $.param({'id': fileDetail.id, 'captionsText' : fileDetail.captionArray}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                     }).then(function(transport) {
-                    	AdminToastService.success('Captions has been updated', 2000);
+                    	AdminToastService.success('Captions has been updated');
                     });
                 }
                

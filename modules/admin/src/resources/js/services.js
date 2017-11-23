@@ -422,7 +422,7 @@ $scope.$on('service:AdminToast', function(event, data) {
 
 Examples
 
-AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds', 2000');
+AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds');
 
 AdminToastService.confirm('Hello i am a callback and wait for your', 'Das löschen?', function($q, $http) {
 	// do some ajax call
@@ -435,7 +435,7 @@ AdminToastService.confirm('Hello i am a callback and wait for your', 'Das lösch
 
 you can also close this dialog by sourself in the callback
 
-AdminToastService.confi('Message', function() {
+AdminToastService.confirm('Message', function() {
 	// do something
 	this.close();
 });
@@ -451,6 +451,10 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 	var service = [];
 	
 	service.notify = function(message, timeout, type) {
+		
+		if (timeout == undefined) {
+			timeout = 6000;
+		}
 		
 		var uuid = guid();
 		

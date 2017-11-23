@@ -10103,7 +10103,7 @@ $scope.$on('service:AdminToast', function(event, data) {
 
 Examples
 
-AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds', 2000');
+AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds');
 
 AdminToastService.confirm('Hello i am a callback and wait for your', 'Das löschen?', function($q, $http) {
 	// do some ajax call
@@ -10116,7 +10116,7 @@ AdminToastService.confirm('Hello i am a callback and wait for your', 'Das lösch
 
 you can also close this dialog by sourself in the callback
 
-AdminToastService.confi('Message', function() {
+AdminToastService.confirm('Message', function() {
 	// do something
 	this.close();
 });
@@ -10132,6 +10132,10 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 	var service = [];
 	
 	service.notify = function(message, timeout, type) {
+		
+		if (timeout == undefined) {
+			timeout = 6000;
+		}
 		
 		var uuid = guid();
 		
@@ -12867,12 +12871,12 @@ zaa.factory('HtmlStorage', function() {
                             if (!transport.data.error) {
                                 scope.imagesDataReload().then(function(r) {
                                     scope.ngModel = transport.data.id;
-                                    AdminToastService.success(i18n['js_dir_image_upload_ok'], 2000);
+                                    AdminToastService.success(i18n['js_dir_image_upload_ok']);
                                     scope.imageLoading = false;
                                 });
                             }
                         }, function(error) {
-                        	AdminToastService.error(i18n['js_dir_image_filter_error'], 7000);
+                        	AdminToastService.error(i18n['js_dir_image_filter_error']);
                             scope.imageLoading = false;
                         });
                     } else {
@@ -13031,7 +13035,7 @@ zaa.factory('HtmlStorage', function() {
 	                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
 	                            }
                             	$scope.fileDetail = fileref;
-                            	AdminToastService.success('the file has been replaced successfull.', 4000);
+                            	AdminToastService.success('the file has been replaced successfull.');
                             });
                     	}
                     }, function() {
@@ -13058,7 +13062,7 @@ zaa.factory('HtmlStorage', function() {
                     if ($scope.uploadingfiles != null) {
                         if (n == $scope.uploadingfiles.length && $scope.errorMsg == null) {
                             $scope.filesDataReload().then(function() {
-                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok']);
                                 LuyaLoading.stop();
                             });
                         }
@@ -13079,11 +13083,11 @@ zaa.factory('HtmlStorage', function() {
 	                        }).then(function(response) {
                         		if (response.data.upload) {
 		                        	$scope.filesDataReload().then(function() {
-		                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+		                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok']);
 		                            	LuyaLoading.stop();
 		                            });
                         		} else {
-                        			AdminToastService.error(response.data.message, 6000);
+                        			AdminToastService.error(response.data.message);
                         			LuyaLoading.stop();
                         		}
 	                        	
@@ -13105,7 +13109,7 @@ zaa.factory('HtmlStorage', function() {
                             file.processed = true;
                             file.result = response.data;
                             if (!file.result.upload) {
-                            	AdminToastService.error(file.result.message, 6000);
+                            	AdminToastService.error(file.result.message);
                             	LuyaLoading.stop();
                                 $scope.errorMsg = true
                             }
@@ -13325,7 +13329,7 @@ zaa.factory('HtmlStorage', function() {
                         }).then(function(transport) {
                             $scope.filesDataReload().then(function() {
                                 $toast.close();
-                                AdminToastService.success(i18n['js_dir_manager_rm_file_ok'], 2000);
+                                AdminToastService.success(i18n['js_dir_manager_rm_file_ok']);
                                 $scope.selectedFiles = [];
                             });
                         });
@@ -13338,7 +13342,7 @@ zaa.factory('HtmlStorage', function() {
                 	$http.post('admin/api-admin-storage/filemanager-update-caption', $.param({'id': fileDetail.id, 'captionsText' : fileDetail.captionArray}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                     }).then(function(transport) {
-                    	AdminToastService.success('Captions has been updated', 2000);
+                    	AdminToastService.success('Captions has been updated');
                     });
                 }
                
@@ -13742,7 +13746,7 @@ zaa.factory('HtmlStorage', function() {
 				$http.delete($scope.config.apiEndpoint + '/'+id).then(function(response) {
 					$scope.loadList();
 					$toast.close();
-					AdminToastService.success(i18n['js_ngrest_rm_confirm'], 2000);
+					AdminToastService.success(i18n['js_ngrest_rm_confirm']);
 				}, function(data) {
 					$scope.printErrors(data);
 				});
@@ -13766,13 +13770,13 @@ zaa.factory('HtmlStorage', function() {
 				}
 				$scope.data.updateId = id;
 			}, function(data) {
-				AdminToastService.error(i18n['js_ngrest_error'], 2000);
+				AdminToastService.error(i18n['js_ngrest_error']);
 			});
 		};
 
 		$scope.submitUpdate = function () {
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).then(function(response) {
-				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
+				AdminToastService.success(i18n['js_ngrest_rm_update']);
 				$scope.loadList();
 				$scope.applySaveCallback();
 				$scope.switchTo(0, true);
@@ -13790,7 +13794,7 @@ zaa.factory('HtmlStorage', function() {
 			}
 
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).then(function(response) {
-				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
+				AdminToastService.success(i18n['js_ngrest_rm_success']);
 				$scope.loadList();
 				$scope.applySaveCallback();
 				$scope.switchTo(0, true);
@@ -13801,7 +13805,7 @@ zaa.factory('HtmlStorage', function() {
 
 		$scope.printErrors = function(data) {
 			angular.forEach(data, function(value, key) {
-				AdminToastService.error(value.message, 4500);
+				AdminToastService.error(value.message);
 			});
 		};
 
@@ -13897,7 +13901,7 @@ zaa.factory('HtmlStorage', function() {
 			$http.put($scope.config.apiEndpoint + '/' + rowId +'?ngrestCallType=update&fields='+fieldName, angular.toJson(json, true)).then(function(response) {
 				row[fieldName] = invert;
 				$scope.highlightItemId(rowId);
-				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}), 1500);
+				AdminToastService.success(i18nParam('js_ngrest_toggler_success', {field: fieldLabel}));
 			}, function(data) {
 				$scope.printErrors(data);
 			});
@@ -14092,9 +14096,9 @@ zaa.factory('HtmlStorage', function() {
 				$scope.crud.sendActiveWindowCallback('SaveTag', {'tagName': tagName}).then(function(response) {
 					if (response.data) {
 						$scope.tags.push({id: response.data, name: tagName});
-						AdminToastService.success(tagName + ' wurde gespeichert.', 2000);
+						AdminToastService.success(tagName + ' wurde gespeichert.');
 					} else {
-						AdminToastService.error(tagName + ' ' + i18n['js_tag_exists'], 2000);
+						AdminToastService.error(tagName + ' ' + i18n['js_tag_exists']);
 					}
 					$scope.newTagName = null;
 				});
@@ -14106,7 +14110,7 @@ zaa.factory('HtmlStorage', function() {
 
 				$scope.relation[tag.id] = response.data;
 
-				AdminToastService.success(i18n['js_tag_success'], 2000);
+				AdminToastService.success(i18n['js_tag_success']);
 			});
 		};
 
@@ -14561,9 +14565,9 @@ zaa.factory('HtmlStorage', function() {
 	zaa.controller("AccountController", function($scope, $http, $window, AdminToastService) {
 		$scope.changePassword = function(pass) {
 			$http.post('admin/api-admin-user/change-password', pass).then(function(response) {
-				AdminToastService.success(i18n['aws_changepassword_succes'], 5000);
+				AdminToastService.success(i18n['aws_changepassword_succes']);
 			}, function(error) {
-				AdminToastService.errorArray(error.data, 3000);
+				AdminToastService.errorArray(error.data);
 			});
 		};
 
@@ -14585,9 +14589,9 @@ zaa.factory('HtmlStorage', function() {
 
 		$scope.changePersonData = function(data) {
 			$http.put('admin/api-admin-user/session-update', data).then(function(success) {
-				AdminToastService.success(i18n['js_account_update_profile_success'], 5000);
+				AdminToastService.success(i18n['js_account_update_profile_success']);
 			}, function(error) {
-				AdminToastService.errorArray(error.data, 3000);
+				AdminToastService.errorArray(error.data);
 			});
 		};
 
