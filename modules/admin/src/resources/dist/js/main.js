@@ -11209,9 +11209,9 @@ zaa.factory('HtmlStorage', function() {
                                             '<i class="material-icons">add_circle</i><span>{{ option.label }}</span>' +
                                         '</li>' +
                                     '</ul>' +
-                                    '<div class="float-right">' +
-                                        '<i ng-click="dropdownOpen=!dropdownOpen" class="material-icons" ng-show="dropdownOpen">arrow_drop_down</i>' +
-                                        '<i ng-click="dropdownOpen=!dropdownOpen" class="material-icons" ng-show="!dropdownOpen">arrow_drop_up</i>' +
+                                    '<div class="list-chevron">' +
+                                        '<i ng-click="dropdownOpen=!dropdownOpen" class="material-icons" ng-show="dropdownOpen">arrow_drop_up</i>' +
+                                        '<i ng-click="dropdownOpen=!dropdownOpen" class="material-icons" ng-show="!dropdownOpen">arrow_drop_down</i>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>' +
