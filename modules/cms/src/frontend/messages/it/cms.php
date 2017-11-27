@@ -171,13 +171,13 @@ return [
     'block_audio_admin_hasurl' => 'Il codice incorporato dell\'audio è stato fornito.',
     'block_file_list_admin_empty' => 'Nessun file è stato selezionato.',
     'block_html_name' => 'HTML',
-    'block_module_modulename_help' => 'Only in the config registered frontend modules are available.',
-    'block_spacing_small_space' => 'Small space',
-    'block_spacing_medium_space' => 'Medium space',
-    'block_spacing_large_space' => 'Large space',
+    'block_module_modulename_help' => 'Sono elencati solo i moduli che sono registrati nel file di configurazione.',
+    'block_spacing_small_space' => 'Spazio piccolo',
+    'block_spacing_medium_space' => 'Spazio medio',
+    'block_spacing_large_space' => 'Spazio largo',
     
     // 1.0.0
-    'block_module_strictrender' => 'Strict Render',
-    'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.',
-    'block_html_cfg_raw_label' => 'Render HTML in Admin',
+    'block_module_strictrender' => 'Rendering stretto',
+    'block_module_strictrender_help' => 'Quando il rendering stretto è abilitato, il modulo eseguirà solo le rott previste (module, controller, action, params) senza elaborare azioni e rotte del controller.',
+    'block_html_cfg_raw_label' => 'Rendering HTML nell\'Admin',
 ];
