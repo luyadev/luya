@@ -12,9 +12,10 @@
         "jakeasmith/http_build_url" : "^0.1",
         "ifsnop/mysqldump-php":"2.*",
         "paypal/rest-api-sdk-php" : "~1.6.0",
-        "luyadev/luya-bootstrap4": "^1.0@dev",
         "luyadev/luya-composer": "^1.0",
-        "luyadev/luya-generic" : "^1.0@dev"
+        "luyadev/luya-bootstrap4": "^1.0@dev",
+        "luyadev/luya-generic" : "^1.0@dev",
+        "luyadev/luya-bootstrap3" : "^1.0@dev"
     },
     "extra": {
         "asset-installer-paths": {

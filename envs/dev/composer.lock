@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e83c8700e174d004d9b0b4075a395b2f",
+    "content-hash": "198a9c07eec90942a6466866fb0f02cb",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -836,17 +836,74 @@
             "time": "2014-11-17T16:24:50+00:00"
         },
         {
+            "name": "luyadev/luya-bootstrap3",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/luyadev/luya-bootstrap3.git",
+                "reference": "40c9b0441aa7f416865fbd14f4c26b0e413c3b0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/luyadev/luya-bootstrap3/zipball/40c9b0441aa7f416865fbd14f4c26b0e413c3b0c",
+                "reference": "40c9b0441aa7f416865fbd14f4c26b0e413c3b0c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "luyadev/luya-core": "^1.0@dev",
+                "luyadev/luya-module-admin": "^1.0@dev",
+                "luyadev/luya-module-cms": "^1.0@dev",
+                "luyadev/luya-testsuite": "^1.0@dev"
+            },
+            "type": "luya-extension",
+            "extra": {
+                "luya": {
+                    "blocks": [
+                        "src/blocks"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "luya\\bootstrap3\\": "src/",
+                    "luya\\bootstrap3\\tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Basil Suter",
+                    "email": "git@nadar.io",
+                    "homepage": "https://github.com/nadar"
+                }
+            ],
+            "description": "LUYA Bootstrap 3 content",
+            "homepage": "https://luya.io",
+            "keywords": [
+                "bootstrap3",
+                "luya",
+                "luya-blocks"
+            ],
+            "time": "2017-11-27T13:14:37+00:00"
+        },
+        {
             "name": "luyadev/luya-bootstrap4",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-bootstrap4.git",
-                "reference": "ac6111be57bf286b99e68ce607d591e2153eb736"
+                "reference": "fe7b8617a14e1018037155371840b46df5e395aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-bootstrap4/zipball/ac6111be57bf286b99e68ce607d591e2153eb736",
-                "reference": "ac6111be57bf286b99e68ce607d591e2153eb736",
+                "url": "https://api.github.com/repos/luyadev/luya-bootstrap4/zipball/fe7b8617a14e1018037155371840b46df5e395aa",
+                "reference": "fe7b8617a14e1018037155371840b46df5e395aa",
                 "shasum": ""
             },
             "require-dev": {
@@ -899,7 +956,7 @@
                 "twbs4",
                 "yii2"
             ],
-            "time": "2017-11-08T14:30:52+00:00"
+            "time": "2017-11-27T13:01:23+00:00"
         },
         {
             "name": "luyadev/luya-composer",
@@ -957,12 +1014,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-generic.git",
-                "reference": "23dfe9d030debd04a6696d263dd7e5c59be42f71"
+                "reference": "fc6460ac55b3d41a89c190347372d714dbdcfaa7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-generic/zipball/23dfe9d030debd04a6696d263dd7e5c59be42f71",
-                "reference": "23dfe9d030debd04a6696d263dd7e5c59be42f71",
+                "url": "https://api.github.com/repos/luyadev/luya-generic/zipball/fc6460ac55b3d41a89c190347372d714dbdcfaa7",
+                "reference": "fc6460ac55b3d41a89c190347372d714dbdcfaa7",
                 "shasum": ""
             },
             "require-dev": {
@@ -999,12 +1056,14 @@
                     "homepage": "https://github.com/nadar"
                 }
             ],
-            "description": "Generic LUYA Blocks",
+            "description": "LUYA Generic content",
             "homepage": "https://luya.io",
             "keywords": [
+                "generic",
+                "luya",
                 "luya-blocks"
             ],
-            "time": "2017-11-21T12:59:56+00:00"
+            "time": "2017-11-27T13:14:25+00:00"
         },
         {
             "name": "paypal/rest-api-sdk-php",
@@ -1794,7 +1853,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "luyadev/luya-bootstrap4": 20,
-        "luyadev/luya-generic": 20
+        "luyadev/luya-generic": 20,
+        "luyadev/luya-bootstrap3": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

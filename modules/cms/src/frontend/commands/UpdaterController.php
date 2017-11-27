@@ -56,8 +56,8 @@ class UpdaterController extends Command
         }
         
         $mappings = [
-            //'AudioBlock.php => DROP
-            //'DevBlock.php => DROP
+            'AudioBlock' => 'delete',
+            'DevBlock' => 'delete',
             'FileListBlock' => 'luya\\generic\\blocks',
             'FormBlock' => 'luya\\bootstrap3\\blocks',
             'HtmlBlock' => 'luya\\cms\\frontend\\blocks',
@@ -81,13 +81,22 @@ class UpdaterController extends Command
         // change namespace from existing cms block to new generic block package.
         foreach (Block::find()->where(['like', 'class', '\\luya\\cms'])->all() as $block) {
             
-            $originClassName = str_replace("luya\\cms\\frontend\\", "", $block->class);
+            $originClassName = str_replace("luya\\cms\\frontend\\blocks\\", "", $block->class);
+            
+            $originClassName = ltrim($originClassName, '\\');
             
             if (!array_key_exists($originClassName, $mappings)) {
                 throw new Exception("The class '{$originClassName}' does not exists in the mapping list!");
             }
             
-            $newClassName = $mappings[$originClassName] . '\\' . $originClassName;
+            
+            if ($mappings[$originClassName] == 'delete') {
+                $this->outputInfo("Delete: " . $block->class);
+                $block->delete();
+                continue;
+            }
+            
+            $newClassName = '\\' . $mappings[$originClassName] . '\\' . $originClassName;
             
             //$genericClassName = str_replace("luya\\cms\\frontend\\", "luya\\generic\\", $block->class);
             
@@ -105,7 +114,7 @@ class UpdaterController extends Command
     {
         Config::set($var, true);
         
-        //return $this->outputSuccess("Update migration (code {$var}) has been applied successful.");
+        return $this->outputSuccess("Update migration (code: {$var}) applied successful.");
     }
     
     public function actionVersions()
