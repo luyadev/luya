@@ -12,15 +12,17 @@ use luya\admin\ngrest\base\ActiveWindow;
  * Thefore you can customize all attributes to display and how to convert them:
  *
  * ```php
- * $config->aw->load([
- *     'class' => 'luya\admin\aws\DetailViewActiveWindow',
- *     'attributes' => [
- *         'title', // nothing define will use `text`
- *         'description:html', // renders html tags
- *         'timestamp:datetime', // unix timetsamp to readable date
- *         'description:text:My Description' // Changes the label to `My Description`
- *     ],
- * ]);
+ * public function ngRestActiveWindows()
+ * {
+ *     return [
+ *         ['class' => 'luya\admin\aws\DetailViewActiveWindow', 'attributes' => [
+ *             'title', // nothing define will use `text`
+ *             'description:html', // renders html tags
+ *             'timestamp:datetime', // unix timetsamp to readable date
+ *             'description:text:My Description' // Changes the label to `My Description`
+ *         ]]
+ *     ];
+ * }
  * ```
  *
  * Available Formatters:
