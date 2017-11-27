@@ -27,6 +27,8 @@ class UpdaterController extends Command
             return $this->outputError("Command already executed. System is up-to-date.");
         }
         
+        $this->outputInfo("Questions or Problems? read more at https://github.com/luyadev/luya/issues/1572");
+        
         if (!$this->confirm("Warning: Have you made a database backup? If something goes wrong, the website content is unrecoverable lost!")) {
             return $this->outputError("Make a backup first!");
         }
@@ -52,7 +54,7 @@ class UpdaterController extends Command
             }
         }
         if (!$genericExists || !$bs3Exists) {
-            return $this->outputError("You have to register the luyadev/luya-generic and luyadev/luya-bootstrap3 package in your composer.json first and rerun the updater again afterwards.");
+            return $this->outputError("Register the `luyadev/luya-generic` and `luyadev/luya-bootstrap3` package in your composer.json run update and run this command again.");
         }
         
         $mappings = [
@@ -89,7 +91,7 @@ class UpdaterController extends Command
                 throw new Exception("The class '{$originClassName}' does not exists in the mapping list!");
             }
             
-            
+            // delete blocks from delete section (audio and dev)
             if ($mappings[$originClassName] == 'delete') {
                 $this->outputInfo("Delete: " . $block->class);
                 $block->delete();
@@ -97,8 +99,6 @@ class UpdaterController extends Command
             }
             
             $newClassName = '\\' . $mappings[$originClassName] . '\\' . $originClassName;
-            
-            //$genericClassName = str_replace("luya\\cms\\frontend\\", "luya\\generic\\", $block->class);
             
             $this->outputInfo("Update from '{$block->class}' to '{$newClassName}'");
             
@@ -114,7 +114,7 @@ class UpdaterController extends Command
     {
         Config::set($var, true);
         
-        return $this->outputSuccess("Update migration (code: {$var}) applied successful.");
+        return $this->outputSuccess("Updater applied (code: {$var}). Now run the import command!");
     }
     
     public function actionVersions()
