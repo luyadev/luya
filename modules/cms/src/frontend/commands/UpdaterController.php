@@ -27,7 +27,7 @@ class UpdaterController extends Command
             return $this->outputError("Command already executed. System is up-to-date.");
         }
         
-        if (!$this->confirm("Warning: Have you made a Database Backup? If something goes wrong, the website content is unrecoverable lost!")) {
+        if (!$this->confirm("Warning: Have you made a database backup? If something goes wrong, the website content is unrecoverable lost!")) {
             return $this->outputError("Make a backup first!");
         }
         
@@ -42,24 +42,59 @@ class UpdaterController extends Command
         
         // check if this application has registered the new generic block package.
         $genericExists = false;
+        $bs3Exists = false;
         foreach (Yii::$app->packageInstaller->configs as $config) {
             if ($config->package['name'] == "luyadev/luya-generic") {
                 $genericExists = true;
             }
+            if ($config->package['name'] == "luyadev/luya-bootstrap3") {
+                $bs3Exists = true;
+            }
         }
-        if (!$genericExists) {
-            return $this->outputError("You have to register the luyadev/luya-generic package in your composer.json first and rerun the updater again afterwards.");
+        if (!$genericExists || !$bs3Exists) {
+            return $this->outputError("You have to register the luyadev/luya-generic and luyadev/luya-bootstrap3 package in your composer.json first and rerun the updater again afterwards.");
         }
+        
+        $mappings = [
+            //'AudioBlock.php => DROP
+            //'DevBlock.php => DROP
+            'FileListBlock' => 'luya\\generic\\blocks',
+            'FormBlock' => 'luya\\bootstrap3\\blocks',
+            'HtmlBlock' => 'luya\\cms\\frontend\\blocks',
+            'ImageBlock' => 'luya\\bootstrap3\\blocks',
+            'ImageTextBlock' => 'luya\\bootstrap3\\blocks',
+            'LayoutBlock' => 'luya\\bootstrap3\\blocks',
+            'LineBlock' => 'luya\\generic\\blocks',
+            'LinkButtonBlock' => 'luya\\bootstrap3\\blocks',
+            'ListBlock' => 'luya\\generic\\blocks',
+            'MapBlock' => 'luya\\bootstrap3\\blocks',
+            'ModuleBlock' => 'luya\\cms\\frontend\\blocks',
+            'QuoteBlock' => 'luya\\generic\\blocks',
+            'SpacingBlock' => 'luya\\bootstrap3\\blocks',
+            'TableBlock' => 'luya\\bootstrap3\\blocks',
+            'TextBlock' => 'luya\\generic\\blocks',
+            'TitleBlock' => 'luya\\generic\\blocks',
+            'VideoBlock' => 'luya\\bootstrap3\\blocks',
+            'WysiwygBlock' => 'luya\\generic\\blocks',
+        ];
         
         // change namespace from existing cms block to new generic block package.
         foreach (Block::find()->where(['like', 'class', '\\luya\\cms'])->all() as $block) {
             
-            $genericClassName = str_replace("luya\\cms\\frontend\\", "luya\\generic\\", $block->class);
+            $originClassName = str_replace("luya\\cms\\frontend\\", "", $block->class);
             
-            $this->outputInfo("Update from '{$block->class}' to '{$genericClassName}'");
+            if (!array_key_exists($originClassName, $mappings)) {
+                throw new Exception("The class '{$originClassName}' does not exists in the mapping list!");
+            }
+            
+            $newClassName = $mappings[$originClassName] . '\\' . $originClassName;
+            
+            //$genericClassName = str_replace("luya\\cms\\frontend\\", "luya\\generic\\", $block->class);
+            
+            $this->outputInfo("Update from '{$block->class}' to '{$newClassName}'");
             
             $block->updateAttributes([
-                'class' => $genericClassName,
+                'class' => $newClassName,
             ]);
         }
         
@@ -70,7 +105,7 @@ class UpdaterController extends Command
     {
         Config::set($var, true);
         
-        return $this->outputSuccess("Migration has been applied successfull.");
+        //return $this->outputSuccess("Update migration (code {$var}) has been applied successful.");
     }
     
     public function actionVersions()
