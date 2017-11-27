@@ -24,6 +24,12 @@ class BlockImporter extends Importer
      */
     public function run()
     {
+        // when the setup timestamp is not yet set, its a fresh installation, therefore skip the 1.0.0 generic block upgrade
+        // otherwise its an existing/upgrading instance which is doing the import command.
+        if (!Config::has(Config::CONFIG_SETUP_COMMAND_TIMESTAMP)) {
+            Config::set('100genericBlockUpdate', true);
+        }
+        
         if (!Config::has('100genericBlockUpdate')) {
             throw new Exception("You have to run the generic block updater. ./vendor/bin/luya cms/updater/generic");
         }
