@@ -1,12 +1,12 @@
 # Frontend module
 
-When you have specific logic you want to apply to your website, this can be a form where user can input data, or you may load data from a database and render a custom view then you can create a frontend module. You can then integrate the module into your cms or open the url of the module directly, depends on what you wish to do.
+If specific logic have to be applied to your website, e. g. a form where user can input data or you may load data from a database and render a custom view then you can create a frontend module. The module can be integrated into your CMS or called directly via the module url.
 
-Frontend module are also a very common way to redistributed logic of a controller, but let the user implement the view files to fit their look.
+Frontend modules are also a very common way to redistributed logic of a controller but still let the user implement the view files to fit their look.
 
 ### View rendering options
 
-As already mentioned, frontend modules commonly contain controller logic, but my use the view files from the project you integrate the module, therefore we have created an possibility you can regulate where the view files of a module should be rendered.
+As already mentioned, frontend modules commonly contain controller logic but may use the view files from the project where the module in integrated. Therefore a possibility is provided which let you regulate where the view files of a module should be rendered.
 
 ```php
 <?php
@@ -18,16 +18,16 @@ class Module extends \luya\base\Module
 }
 ```
 
-You can enable this option for all modules by chaning the default value inside your module class or you can even configure the views location inside your configuration afterwards.
+You can enable this option for all modules by changing the default value inside your module class or you can even configure the views location inside your configuration afterwards.
 
 - `$useAppViewPath = true` = The view path of the module will be: *@app/views*
 - `$useAppViewPath = false` = The view path of the module will be: *@modulename/views*
 
-#### CMS-Context
+#### CMS context
 
-When including a module in the cms, the rendering of your modules view file will automaticcaly ignore the layout, oterhiwse you would have a mess with html as the cms already wraps its cmslayout and afterwards also wraps the layout. But you may use the [Frontend Layouts](app-module-layouts.md) which allows you to use a sub layout for all the module controller views.
+When including a module into the CMS, the rendering of your module view file will automatically ignore the layout, otherwise you would have a mess with html as the CMS already wraps its cmslayout and afterwards also wraps the layout. But you may use the [frontend layouts](app-module-layouts.md) which allows you to use a sub layout for all the module controller views.
 
-## Title and Meta-Informations
+## Title and meta information
 
 LUYA uses the default implementation of the title variable inside the [Yii Titel-Tag](http://www.yiiframework.com/doc-2.0/guide-structure-views.html#setting-page-titles) view object, you can override the title inside an action:
 
@@ -42,38 +42,38 @@ public function actionIndex()
 }
 ```
 
-But you can also directly set the title inside your view file
+But you can also directly set the title inside your view file:
 
 ```php
 <? $this->title = 'Hello World title'; ?>
 <p>...</p>
 ```
 
-This is equals for meta tags or descriptions:
+This is equal for meta tags or descriptions:
 
 ```php
 public function actionIndex()
 {
     // register meta tag
     $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'Luya, Yii, PHP']);
-    $this->view->registerMetaTag(['name' => 'description', 'content' => 'Description of this Page.'], 'metaDescription');
+    $this->view->registerMetaTag(['name' => 'description', 'content' => 'Description of this page.'], 'metaDescription');
     
     return $this->render('index');
 }
 ```
 
-or in the view file:
+Or in the view file:
 
 ```php
 $this->registerMetaTag(['name' => 'keywords', 'content' => 'Luya, Yii, PHP']);
-$this->registerMetaTag(['name' => 'description', 'content' => 'Description of this Page.'], 'metaDescription');
+$this->registerMetaTag(['name' => 'description', 'content' => 'Description of this page.'], 'metaDescription');
 ```
 
 ## Additional notes
 
 ### Forms
 
-As the csrf validation is enabled by default, you've to integrate them into your forms (if you're not using the ActiveForm Widget). You'll find all information here: [Guide to include CSRF Token forms](http://zero-exception.blogspot.ch/2015/01/yii2-using-csrf-token.html). Luya will auto insert the csrf meta tag to your head section if you are using the CMS Modul.
+As the csrf validation is enabled by default, you have to integrate them into your forms (if you are not using the ActiveForm Widget). You will find all information here: [Guide to include CSRF Token forms](http://zero-exception.blogspot.ch/2015/01/yii2-using-csrf-token.html). LUYA will auto insert the csrf meta tag to your head section if you are using the CMS Module.
 
 Quick fix without disabling csrf validation and not using the ActiveForm Widget: 
 
@@ -97,11 +97,11 @@ class MyController extends \luya\web\Controller
 
 ### Controller actions
 
-Controller provides a very flexible way to impelement logic into your module following the methodology from [Yii controller structure](http://www.yiiframework.com/doc-2.0/guide-structure-controllers.html).
+Controller provides a very flexible way to implement logic into your module following the methodology from [Yii controller structure](http://www.yiiframework.com/doc-2.0/guide-structure-controllers.html).
 
-Controller actions are pretty powerful functions to enrich your application, basically `module/controller/actions` is the concept in short, therefore some basic examples of use cases is explained below.
+Controller actions are pretty powerful functions to enrich your application, basically `module/controller/actions` is the concept in short, therefore some basic examples of use cases are explained below.
 
-Lets assume we have this default controller with following actions:
+Let´s assume we have this default controller with following actions:
 
 ```php
 namespace app\modules\frontendmodule\controllers;
@@ -130,12 +130,12 @@ class DefaultController extends Controller
 }
 ```
 
-Those actions are already accesible by an exact url, because we have a `DefaultController` in our `frontendmodule` most likely the url for the `actionHello()` is:
+Those actions are already accessible by an exact url, because we have a `DefaultController` in our `frontendmodule` most likely the url for the `actionHello()` is:
 
 `your-public-project-domain/frontendmodule/default/hello`
 
-Please keep in mind that those action are case sensitive, this means `actionWhoAmI`is accessible via the url:
+Please keep in mind that those actions are case sensitive, which means `actionWhoAmI` it is accessible via the url:
 
 `your-public-project-domain/frontendmodule/default/who-am-i`
 
-Of course the url rules in the `Module.php` can be used for pointing to controlles and views.
+Of course the url rules in the `Module.php` can be used for pointing to controllers and views.
