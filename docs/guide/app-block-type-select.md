@@ -1,6 +1,6 @@
-# Selects in Blocks
+# Select array in blocks
 
-Creating a select with numeric values and initvalue
+Creating a select with numeric values and init value
 
 ```php
 ['var' => 'col', 'label' => 'Sizes', 'type' => 'zaa-select', 'initvalue' => 3, 'options' => [
@@ -11,7 +11,7 @@ Creating a select with numeric values and initvalue
 ]],
 ```
 
-> Take care with the data types, do not use `"1"` when dealing with numeric values, use `1` instead otherwhise the type cast will change your values.
+> Take care with the data types, do not use `"1"` when dealing with numeric values, use `1` instead otherwise the type cast will change your values.
 
 Using select with string values:
 

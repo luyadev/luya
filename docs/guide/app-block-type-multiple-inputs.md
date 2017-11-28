@@ -1,8 +1,8 @@
 # Multiple inputs
 
-Generate a expandable list with custom plugins inside each row.
+Generate a expandable list with custom nested fields and/or plugins inside each row.
 
-### Definition in Block
+### Definition in block
 
 ```php
 ['var' => 'people', 'label' => 'People', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' => [
@@ -24,7 +24,7 @@ Generate a expandable list with custom plugins inside each row.
 ]
 ```
 
-### LUYA Admin view
+### LUYA admin UI
 
 ![Example of multiple inputs in action](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-block-type-multiple-inputs-example.png "Multiple inputs in action")
 

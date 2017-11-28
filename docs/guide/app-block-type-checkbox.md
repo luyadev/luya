@@ -1,4 +1,4 @@
-# Single Checkbox
+# Single checkbox
 
 Generate a checkbox which is **checked** by default:
 
