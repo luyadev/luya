@@ -1,10 +1,10 @@
-# Admin Assets
+# Admin assets
 
-This section describes how to add assets (css or javascript) files to your administration module, to make sure are depending and initializing your files at the right point, all your custom assets should depend on the `admin\assets\Main` packaged.
+This section describes how to add assets (css or javascript) files to your administration module. To ensure that they are depending and initializing your files at the right point all your custom assets should depend on the `admin\assets\Main` package.
 
-### Example Bundle
+### Example bundle
 
-Below en example administration asset file depending on the administration main asset bundle:
+Below an example administration asset file depending on the administration main asset bundle:
 
 ```php
 <?php
@@ -19,7 +19,7 @@ class MyAdminAsset extends \luya\web\Asset
         'js/johndoe.js',
     ];
 
-    // important to solve all javascript dependency issues relating jquery, bower, angular, ...
+    // important to solve all javascript dependency issues here, e.g. jquery, bower, angular, ...
     public $depends = [
         'luya\admin\assets\Main',
     ];
@@ -28,9 +28,9 @@ class MyAdminAsset extends \luya\web\Asset
 
 > The asset bundle itself should always stored in a `assets` folder where the resource files for the asset should always located in a `resources` folder.
 
-### Embed the asset
+### Embedding the assets
 
-To embed the above created example asset file stored in your admin module you hav to add the asset bundle into the {{\luya\base\AdminModuleInterface::getAdminAssets()}} method of the belonging `Module.php` file as shown below:
+To embed the above created example asset file which is stored in your admin module you have to add the asset bundle into the {{\luya\base\AdminModuleInterface::getAdminAssets()}} method of the belonging `Module.php` file as shown below:
 
 ```php
 <?php
@@ -41,7 +41,7 @@ class Module extends \luya\admin\base\Module
     /**
      * Returns all Asset files to registered in the administration interfaces.
      * 
-     * As the adminstration UI is written in angular, the assets must be pre assigned to the adminisration there for the `getAdminAssets()` method exists.
+     * As the admin UI is written in angular the assets must be pre assigned to the admin UI therefore the `getAdminAssets()` method exists.
      * 
      * ```php
      * public function getAdminAssets()
