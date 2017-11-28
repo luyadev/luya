@@ -18,8 +18,13 @@ use luya\helpers\StringHelper;
 abstract class BaseThing extends Object implements Arrayable, ThingInterface
 {
     use ThingTrait;
-    use ArrayableTrait;
+    use ArrayableTrait { toArray as protected internalToArray; }
     
+    /**
+     * Find all getter methods.
+     * 
+     * @return array
+     */
     public function resolveGetterMethods()
     {
     	$resolved = [];
@@ -41,10 +46,39 @@ abstract class BaseThing extends Object implements Arrayable, ThingInterface
     }
     
     /**
+     * @inheritdoc
+     */
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return $this->removeNullValues($this->internalToArray($fields, $expand, $recursive));
+    }
+    
+    /**
      * @inheritdoc 
      */
     public function fields()
     {
     	return $this->resolveGetterMethods();
+    }
+    
+    /**
+     * Cleanup array from null values.
+     * 
+     * @param array $haystack
+     * @return array
+     */
+    private function removeNullValues(array $haystack)
+    {
+        foreach ($haystack as $key => $value) {
+            if (is_array($value)) {
+                $haystack[$key] = $this->removeNullValues($value);
+            }
+            
+            if ($value === null) {
+                unset($haystack[$key]);
+            }
+        }
+        
+        return $haystack;
     }
 }
