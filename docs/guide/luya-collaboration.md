@@ -1,78 +1,84 @@
 Help us improve LUYA
 ==================
 
-If you like to contribute to the LUYA project you can easy follow these few steps:
+If you like to contribute to the LUYA project, you only have to follow five steps:
 
-1. Fork the [luyadev/luya](https://github.com/luyadev/luya) project to your account.
+1. Fork the [luyadev/luya](https://github.com/luyadev/luya) project to your account
 2. Define your working environment
 3. Rebase the master
 4. Create a new branch
-5. Commit, push and create pull-request
+5. Commit, push and create a pull-request
 
 Fork
 ------
-To Fork the the [LUYA](https://github.com/luyadev/luya) project click on the FORK Button, this will create a copy of the repository on your account. After forking the repository you have to clone it into your local composer  via `git clone https://github.com/yourusername/luya`. 
+To fork [LUYA](https://github.com/luyadev/luya) click on the *"fork"* button in GitHub, this will create a copy of the repository on your account.
+After forking the repository you have to clone it via `git clone https://github.com/yourusername/luya` to create a local copy on your computer or webserver.
 
 ![fork-luya](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
 
-> Tipps with [git clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/).
+> Tips with [git clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/).
 
 Working environment
 ---------------
 
-After successfull clone into your webserver or local computer you will find a folder `envs/dev` in your *LUYA* fork project. This is the working environment you can test all functions and modules directly against the *LUYA* source code (even of the modules).
+After successfully cloning the repository into your webserver or local computer, you will find a folder `envs/dev` in your forked *LUYA* project.
+This is the working environment where you can test all functions and modules directly with your local *LUYA* source code (including all modules).
 
-Now the envs/dev environment needs to be configured. To do so, go into the configs folder `envs/dev/configs` and copy the file `env.php.dist` to `env.php` and modify all the components and modules to fit your needs. The most important will be the *Database Component* you have to configure matching your server settings.
+But the `envs/dev` environment needs to be configured first. To do so, go into the *configs* folder `envs/dev/configs` and duplicate the file `env.php.dist` to `env.php`.
+Modify all components and modules to fit your needs. Don't forget to create a database and configure your *database settings* by entering your specific database server settings.
 
 ```sh
 cp  env.php.dist env.php
 ```
 > Make sure your database information and setting are correctly configured in `configs/env.php`.
 
-As we assume you have [installed composer](install.md) already on your computer now you can run `composer install` inside of your `envs/dev` folder, this will install all required depenencies and create the psr4 mappings to the local *LUYA* library files (src, modules, etc.).
+Assuming you've have already [installed composer](install.md) on your computer, you can now run `composer install` inside of your `envs/dev` folder, this will install
+all required dependencies and create the PSR-4 mappings to your local *LUYA* library files (*src*, *modules*, etc.).
 
-After `composer install` simply run this terminal commands in your console:
+After `composer install` simply run these terminal commands in your console:
 
-1.) Navigate into your public_html folder:
+1.) Navigate into your *public_html* folder:
 
 ```sh
 cd public_html
 ```
 
-2.) Install Database:
+2.) Create all needed database structures:
 
 ```sh
 php index.php migrate
 ```
 
-3.) Import data from env to database
+3.) Import all provided block and module data from *envs* to your database:
 
 ```sh
 php index.php import
 ```
 
-4.) and finally after importer has been run successfully setup the envs instance and configure your user account:
+4.) Finally after finishing the import process, you've to setup the environment instance by configuring your user account:
 
 ```sh
 php index.php admin/setup
 ```
 
-5.) Open the *public_html* folder of your dev environment in your browser`localhost/luya/envs/dev/public_html`.
+5.) Open the *public_html* folder of your dev environment in your browser `localhost/luya/envs/dev/public_html`.
 
 > To access the admin area visit `localhost/luya/envs/dev/public_html/admin` 
 
-Rebase your Master
+Rebase your master
 ------------------
 
-We have added a little script where you can rebase your master to create new branches from an clean dev-master branch. The rebasemaster script will configure the original `luyadev/luya` repo as upstream, switch into the master branch and update the code.
+We have added a little script which will rebase your master and bring your local version up to date. From this clean base you're able to create new
+branches from the dev-master branch where you'll check in your changes.
+The *rebasemaster* script will configure the original `luyadev/luya` repo as upstream, switch into the master branch and update the code.
 
-> When you run the rebasemaster script for the first time, you have to add the init flag, this will configure the upstream.
+> When you run the *rebasemaster* script for the first time, you have to add the init flag, this will configure the upstream.
 
 ```sh
 ./scripts/rebasemaster.sh init
 ```
 
-When you have configure the upstream with init, then just fo with the following code:
+When you have configured the upstream with init, just execute the following command:
 
 ```
 ./scripts/rebasemaster.sh
@@ -81,21 +87,23 @@ When you have configure the upstream with init, then just fo with the following 
 Create a branch
 ----------------
 
-To have no conflicts with your Master branch, you should always create a new branch from the current upstream branch, so run the rebmaster master script and after that create a new branch
+To avoid having conflicts with your master branch, always create a new branch from the current upstream branch.
+Just run the *rebmastermaster* script and create a new branch afterwards.
 
 ```sh
 git checkout -b your-fix-branch master
 ```
 
-Commit, Push and Pull Request
+Commit, push and pull request
 -----------------------------
 
-You can now commit all your changes into the new branch you just created, after commiting all the changes you have to push to changes to your repository on GitHub:
+You're now able to commit all your changes into this new branch you've just created. After committing all the changes, you've to push the changes to
+your forked repository on GitHub:
 
 ```sh
 git push origin
 ```
 
-Visit your *LUYA* Fork on GitHub now and you will see a **PULL REQUEST** Button where you can create a Pull-Request:
+Visit your *LUYA* fork on GitHub and you'll see a **pull request** Button. Click to create a pull request:
 
 ![pull-request](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
