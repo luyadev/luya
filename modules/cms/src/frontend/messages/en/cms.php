@@ -25,6 +25,12 @@ return [
     'block_module_integration' => 'Module integration',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Only frontend modules that are registered in the config file are listed.',
+    'block_group_dev_elements' => 'Development',
+    'block_group_layout_elements' => 'Layout',
+    'block_group_basic_elements' => 'Basics',
+    'block_group_project_elements' => 'Project',
+    'block_group_text_elements' => 'Texts',
+    'block_group_media_group' => 'Media',
     
     // 1.0.0
     'block_module_strictrender' => 'Strict Render',

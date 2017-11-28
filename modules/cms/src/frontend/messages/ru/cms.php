@@ -25,6 +25,12 @@ return [
     'block_module_integration' => 'Индеграция модуля',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Доступны только зарегистрированные конфигурационные модули.',
+    'block_group_dev_elements' => 'Разработка',
+    'block_group_layout_elements' => 'Шаблон',
+    'block_group_basic_elements' => 'Общие',
+    'block_group_project_elements' => 'Проект',
+    'block_group_text_elements' => 'Текста',
+    'block_group_media_group' => 'Медиа',
     
     // 1.0.0
     'block_module_strictrender' => 'Строгое отображение',

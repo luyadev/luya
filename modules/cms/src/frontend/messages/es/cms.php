@@ -25,7 +25,13 @@ return [
     'block_module_integration' => 'Integración de módulos',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Sólo en los módulos de frontend config registrados están disponibles.',
-
+    'block_group_dev_elements' => 'Desarrollo',
+    'block_group_layout_elements' => 'Diseño',
+    'block_group_basic_elements' => 'Lo esencial',
+    'block_group_project_elements' => 'Proyecto',
+    'block_group_text_elements' => 'Textos',
+    'block_group_media_group' =>  'Media',
+    
     // 1.0.0
     'block_module_strictrender' => 'Render estricto',
     'block_module_strictrender_help' => 'Cuando se habilita el procesamiento estricto, el módulo sólo ejecutará la ruta proporcionada (módulo, controlador, acción, parámetros) sin escuchar las rutas de acción y controlador.',

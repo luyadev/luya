@@ -25,6 +25,12 @@ return [
     'block_module_no_module' => 'Es wurde noch kein Modul angegeben.',
     'block_module_integration' => 'Modulintegration',
     'block_module_modulename_help' => 'Nur frontend module aus der Konfiguration sind verfügbar.',
+    'block_group_dev_elements' => 'Entwickler',
+    'block_group_layout_elements' => 'Layouts',
+    'block_group_basic_elements' => 'Standard',
+    'block_group_project_elements' => 'Projekt',
+    'block_group_text_elements' => 'Texte',
+    'block_group_media_group' => 'Medien',
     
     // 1.0.0
     'block_module_strictrender' => 'Striktes rendern',

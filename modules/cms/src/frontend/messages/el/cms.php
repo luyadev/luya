@@ -25,6 +25,12 @@ return [
     'block_module_integration' => 'Ενσωμάτωση Module',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Only frontend modules that are registered in the config file are listed.',
+    'block_group_dev_elements' => 'Ανάπτυξη',
+    'block_group_layout_elements' => 'Διάταξη',
+    'block_group_basic_elements' => 'Βασικά',
+    'block_group_project_elements' => 'Εργο - Project',
+    'block_group_text_elements' => 'Κείμενα',
+    'block_group_media_group' => 'Πολυμέσα',
     
     // 1.0.0
     'block_module_strictrender' => 'Strict Render',

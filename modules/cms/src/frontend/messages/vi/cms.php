@@ -25,6 +25,12 @@ return [
     'block_module_integration' => 'Module integration',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Chỉ có frontend module mởi có thể đăng ký vào listed.',
+    'block_group_dev_elements' => 'Phát triển',
+    'block_group_layout_elements' => 'Layout',
+    'block_group_basic_elements' => 'Cơ bản',
+    'block_group_project_elements' => 'Dự án',
+    'block_group_text_elements' => 'Nội dung',
+    'block_group_media_group' => 'Media',
     
     // 1.0.0
     'block_module_strictrender' => 'Strict Render',

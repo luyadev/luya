@@ -25,6 +25,12 @@ return [
     'block_module_integration' => 'Integração do módulo',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Somente as configurações dos módulos de frontend registrados estão disponíveis.',
+    'block_group_dev_elements' => 'Desenvolvimento',
+    'block_group_layout_elements' => 'Layout',
+    'block_group_basic_elements' => 'Noções básicas',
+    'block_group_project_elements' => 'Projeto',
+    'block_group_text_elements' => 'Textos',
+    'block_group_media_group' => 'Mídia',
     
     // 1.0.0
     'block_module_strictrender' => 'Strict Render',

@@ -25,6 +25,12 @@ return [
     'block_module_integration' => 'Integrazione modulo',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Sono elencati solo i moduli che sono registrati nel file di configurazione.',
+    'block_group_dev_elements' => 'Sviluppo',
+    'block_group_layout_elements' => 'Layout',
+    'block_group_basic_elements' => 'Elementi base',
+    'block_group_project_elements' => 'Progetto',
+    'block_group_text_elements' => 'Testi',
+    'block_group_media_group' => 'Media',
     
     // 1.0.0
     'block_module_strictrender' => 'Rendering stretto',

@@ -25,6 +25,12 @@ return [
     'block_module_integration' => 'Integration du module',
     'block_html_name' => 'HTML',
     'block_module_modulename_help' => 'Seuls les modules frontend enregistrés dans la configuration sont disponibles',
+    'block_group_dev_elements' => 'Développement',
+    'block_group_layout_elements' => 'Disposition',
+    'block_group_basic_elements' => 'Bases',
+    'block_group_project_elements' => 'Projet',
+    'block_group_text_elements' => 'Textes',
+    'block_group_media_group' => 'Médias',
     
     // 1.0.0
     'block_module_strictrender' => 'Rendu stricte',
