@@ -1,9 +1,9 @@
 
-# Working with Forms
+# Working with forms
 
 This example shows how to use a {{yii\widgets\ActiveForm}} in a controller which uses a [[ngrest-model.md]].
 
-## Controller Logic
+## Controller logic
 
 ```php
 public function actionIndex()
@@ -31,10 +31,9 @@ public function actionIndex()
 }
 ```
 
-## View File
+## View file
 
-The corresponding view file could look like this:  
-File: `views/controller/index.php`
+The corresponding view file `views/controller/index.php` could look like this:
 
 ```php
 <?php if(Yii::$app->session->getFlash('success')): ?>
@@ -54,11 +53,11 @@ File: `views/controller/index.php`
 <?php endif; ?>
 ```
 
-The `success` variable is used to determine if the model was successfully saved - that's only requried if you don't redirect the user to another page.
+The `success` variable is used to determine if the model was successfully saved - that's only required if you do not redirect the user to another page.
 
-See [Yii 2 ActiveForm](http://www.yiiframework.com/doc-2.0/yii-widgets-activeform.html) for more informations.
+See [Yii 2 ActiveForm](http://www.yiiframework.com/doc-2.0/yii-widgets-activeform.html) for more information.
 
-## Image and File Uploads
+## Image and file uploads
 
 In order to enable image and file upload you can just use the file input:
 
