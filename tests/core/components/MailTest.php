@@ -18,7 +18,7 @@ class MailTest extends \luyatests\LuyaWebTestCase
     public function testMailerObject()
     {
         $mail = new Mail();
-        $this->assertInstanceOf('PHPMailer', $mail->getMailer());
+        $this->assertInstanceOf('PHPMailer\PHPMailer\PHPMailer', $mail->getMailer());
     }
     
     public function testRealdSendMailError()
