@@ -168,7 +168,9 @@ class Mail extends Component
     }
     
     /**
-     * Compose a new mail message, this will first flush existing mailer objects
+     * Compose a new mail message.
+     * 
+     * Make sure to change mailer object or global variables after composer command, as before it will flush the mailer object.
      *
      * @param string $subject The subject of the mail
      * @param string $body The HTML body of the mail message.
@@ -176,6 +178,7 @@ class Mail extends Component
      */
     public function compose($subject = null, $body = null)
     {
+        $this->cleanup();
         if ($subject !== null) {
             $this->subject($subject);
         }
@@ -441,10 +444,8 @@ class Mail extends Component
         }
         if (!$this->getMailer()->send()) {
             Yii::error($this->getError(), __METHOD__);
-            $this->cleanup();
             return false;
         }
-        $this->cleanup();
         return true;
     }
 
