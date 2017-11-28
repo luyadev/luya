@@ -6,13 +6,15 @@ This document will help you upgrading from a LUYA Version into another. For more
 1.0.0 (in progress)
 -------------------
 
-A few changes you will surely notice when upgrading to version 1.0.0 and you should check in your application:
+> When upgrading from RC4 to 1.0.0 you have run the updater as we have moved all blocks into seperate repos: [https://github.com/luyadev/luya/issues/1572](https://github.com/luyadev/luya/issues/1572)
 
-> When upgrading from RC4 to 1.0.0 you have run the updater as we have moved all blocks into seperate repos: https://github.com/luyadev/luya/issues/1572
+A few changes you will surely notice when upgrading to version 1.0.0 and you should check in your application:
 
 + Storage file `source` is now `href`, even when `toArray()` is called, like in blocks and block admin twigs. (Search for `->source`, `'source'`, `"source"`, `.source`). Why? We follow semantic naming of html structure, therefource source points to webserver accessable file directory for the file or image, link instead is used to download files (link to a file).
 + Active Windows `alias` property is now `label`, so take a look at your `ngRestActiveWindows` config in your NgRest Models. (Search for `'alias'` or `"alias"`).
 + CMS Module property `enableCompression` renamed to `contentCompression`. Check your config file.
+
+There are also few other changes, which are less significant, [see https://github.com/luyadev/luya/issues/1505](https://github.com/luyadev/luya/issues/1505)
 
 1.0.0-RC4 (5. September 2017)
 -------------------
