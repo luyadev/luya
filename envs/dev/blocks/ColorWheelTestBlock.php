@@ -61,7 +61,8 @@ class ColorWheelTestBlock extends PhpBlock
         return [
             'vars' => [
                 ['var' => 'entries', 'label' => 'Einträge', 'type' => self::TYPE_MULTIPLE_INPUTS, 'options' => [
-                    ['var' => 'color', 'label' => 'Color', 'type' => self::TYPE_COLOR],
+                    ['var' => 'color', 'label' => 'Color', 'type' => self::TYPE_LINK],
+                		
                 ]],
             ],
         ];
