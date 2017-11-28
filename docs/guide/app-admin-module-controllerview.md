@@ -1,10 +1,10 @@
-# Admin Controller and View File
+# Admin controller and view file
 
-In order to use a controller to prepare your data,  assigne those into the view file and final generate a new menu entry for this view you can follow this guide.
+In order to use a controller to prepare your data you have to assign those into the view file and finally generate a new menu entry for this view as described in this guide.
 
-## Generate Custom Controller and View
+## Generate custom controller and view
 
-We assume you have already registered your admin module ([[app-admin-module.md]]). Lets create a new controller in the `controllers` folder of your admin folder:
+Let´s assume you have already registered your admin module ([[app-admin-module.md]]). Next let´s create a new controller in the `controllers` folder of your admin folder:
 
 ```php
 <?php
@@ -33,11 +33,11 @@ The controller will now try to find the view file `app/modules/mymodule/admin/vi
 Hello World!
 ```
 
-Now your Controller and View files are ready, read the next section in order to create a new menu entry for your Controller.
+Now your controller and view files are ready, head over to the next section to learn how create a new menu entry for your controller.
 
-## Register the Controller in the Menu
+## Register the controller in the menu
 
-In order to register your custom controller you have to extend (or create if not yet done) the {{luya\admin\base\Module::getMenu()}} function in order to match your route. We assume you have assigned your Admin Module as `mymoduleadmin` in your application configuration, so the route to your controller would be `mymoduleadmin/stats/index`: 
+In order to register your custom controller you have to extend (or create if not done already) the {{luya\admin\base\Module::getMenu()}} function in order to match your route. We assume you have assigned your admin module as `mymoduleadmin` in your application configuration, so the route to your controller would be `mymoduleadmin/stats/index`: 
 
 ```php
 public function getMenu()
@@ -49,21 +49,21 @@ public function getMenu()
 }
 ```
 
-You have now told the administration module that there is a new menu entry, all you have to do is now run the `import` command and assign the new permissions your administration interface.
+You have now told the administration module that there is a new menu entry. All you have to do is now run the `./vendor/bin/luya import` command and assign the new permissions to your admin UI.
 
-> Do not forget to run `import` command and assign the permission to your Administration Group in the Admin UI!
+> Important! Do not forget to run `import` command **and** assign the permission to your Administration Group in the Admin UI afterwards!
 
 You could also use {{luya\admin\componenets\AdminMenuBuilder::nodeRoute()}} which would not have a group and item which gives you a larger screen to build your custom views.
 
-## Custom View inline Angular Controller
+## Custom view inline AngularJS controller
 
-If you like to make a view file without any asset integration you can just bootstrap an inline angular controller like this within your view file:
+If you would like to make a view file without any asset integration you can just bootstrap an inline angular controller within your view file like this :
 
 ```php
 <script>
 zaa.bootstrap.register('FinderController', function($scope, $controller) {
     
-    // add your angular controller logic
+    // add your angular controller logic here
 
     $scope.title = 'Hello World';    
 });

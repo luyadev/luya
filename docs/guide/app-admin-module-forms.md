@@ -1,12 +1,12 @@
-# Admin Forms
+# Admin forms
 
 LUYA provides predefined form to easily add custom forms in admin context which are following the Bootstrap4 forms style guidelines.
 
 Below, the examples show how forms should be used in the admin UI to get the desired results.
 
-## Form with two columns ( label left and input right)
+## Form with two columns (label left and input right)
 
-This is a basic example how a text input with a checkbox right next to it could be achieved. 
+This is a basic example how a text input with a checkbox right next to it could be achieved:
 
 
 ```html 
@@ -20,7 +20,7 @@ This is a basic example how a text input with a checkbox right next to it could 
 </div>
 ```
 
-If you would line to arrange two forms vertically side by side this could be done with following markup.
+If you would like to arrange two forms vertically side by side this could be done with following markup:
 
 ```html 
 <div class="form-group form-side-by-side">
@@ -47,7 +47,7 @@ If you would line to arrange two forms vertically side by side this could be don
 
 ## Generate form with AngularJS 
 
-Using of the angular directive to generate forms as described in the html markup before:
+Using the angular directive to generate forms as described in the html markup before:
 
 ```html 
 <?= Angular::text('ngModel', 'Left text input', ['placeholder' => 'text input here ...']); ?>
