@@ -78,6 +78,18 @@ class JsonLd extends Object
     {
         return self::addGraph((new Person($config)));
     }
+
+    /**
+     * Register new Place
+     *
+     * @param array $config Optional config array to provided person data via setter methods.
+     *
+     * @return \luya\web\jsonld\Place
+     */
+    public static function place(array $config = [])
+    {
+        return self::addGraph((new Place($config)));
+    }
     
     /**
      * Register Image Microodata.
