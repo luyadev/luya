@@ -36,6 +36,7 @@ This represents a guideline how words and proper nouns should be written in the 
 + PHP
 + HTML
 + DRY
++ CRUD
 + e.g. - instead of f.e., for example or similar expressions
 + yourdomain.com -- instead of example.com, yourproject.com, etc
 
