@@ -1,6 +1,7 @@
+
 # Working with Forms
 
-This example shows how to use a {{yii\widgets\ActiveForm}}  in a controller. It uses a [[ngrest-model.md]].
+This example shows how to use a {{yii\widgets\ActiveForm}} in a controller which uses a [[ngrest-model.md]].
 
 ## Controller Logic
 
