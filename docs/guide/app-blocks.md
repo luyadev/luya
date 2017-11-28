@@ -1,16 +1,16 @@
-# CMS Blocks
+# CMS blocks
 
-Blocks are elements used in the CMS Module to display and configure data. Blocks are dropped into the placeholders of a [CMS Layout](app-cmslayouts.md). An example of a Block could be a paragraph tag where the user can add the content. LUYA CMS Module is shipped with some default Blocks, but you can create your own elements.
+Blocks are elements used in the CMS module to display and configure data. Blocks are dropped into the placeholders of a [CMS Layout](app-cmslayouts.md). An example of a block could be a paragraph tag where the user can add the content. LUYA CMS module is shipped with some default blocks, but you can create your own elements.
 
-## Create a new Block
+## Create a new block
 
 > use `./vendor/bin/luya cms/block/create` console command to generate a Block.
 
-You can add Blocks to your application or to a module. In either case, the folder where the blocks are stored must be named as **blocks**. Additionaly blocks should have the suffix `Block`. 
+You can add blocks to your application or to a module. In either case, the folder where the blocks are stored must be named as **blocks**. Additionally blocks should have the suffix `Block` in their filename.
 
 For example, we create a Block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
 
-This is what the `TextTransformBlock` could looke like in your code:
+This is how the `TextTransformBlock` could look like in your code:
 
 ```php
 <?php
@@ -51,9 +51,9 @@ class TextTransformBlock extends \luya\cms\base\PhpBlock
 }
 ```
 
-As we have switched to PHPBlock by default (in beta8) you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block: `TextTransformBlock.php`. 
+As we have switched to PHPBlock by default (since beta8) you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block, e.g. `TextTransformBlock.php`. 
 
-In the example above, the view file should looke like this:
+In the example above, the view file should look like this:
 
 ```php
 <?php
@@ -76,20 +76,20 @@ In order to retrieve values from configurations (`$this->[METHOD]`):
 
 Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
 
-Define help informations for the admin view:
+Define help information for the admin view:
 
 ```php
 public function getFieldHelp()
 {
     return [
-        'content' => 'An explain example of what this var does it where its displayed.',
+        'content' => 'An explain example of what this var does and where it is displayed.',
     ];
 }
 ```
 
 ## Register and import
 
-After creating a Block, you have to *Import* it into your application. The reason behind the import process is to avoid rely on database structure and to work with php files you can also check into version controller system. Run the [Import Command](luya-console.md):
+After creating a block, you have to *import* it into your application. The reason behind the import process is to avoid rely on database structure (which cant be tracked in a VCS or SVN easily) and to work with php files you can manage in version control system (e.g. GitHub or Bitbucket). Run the [Import Command](luya-console.md):
 
 ```sh
 ./vendor/bin/luya import
@@ -99,7 +99,7 @@ This will add or update the Block into the CMS system. If you rename or remove a
 
 ### Module blocks
 
-When you add a Block inside of a module you have to define the `$module` properties, this is will make sure the view file are found in the correct folder. This way, you can redistributed Blocks with your own package to other users.
+When you add a block inside of a module you have to define the `$module` properties, this will ensure the view file will be found in the correct folder. This way, you can redistributed blocks with your own package to other users.
 
 ```php
 class TestBlock extends \luya\cms\base\PhpBlock
@@ -110,7 +110,7 @@ class TestBlock extends \luya\cms\base\PhpBlock
 
 ## Caching
 
-To speed up your system you can enable the cache for each block, to enable the caching you have to define a [caching component](http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-components) in your config. By default block caching is disabled for all blocks.
+To speed up your system you can enable the cache for each block by the definition of a [caching component](http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-components) in your configs. Block caching is disabled by default for all blocks.
 
 ```php
 class MyTestBlock extends \luya\cms\base\PhpBlock
@@ -119,7 +119,7 @@ class MyTestBlock extends \luya\cms\base\PhpBlock
 }
 ```
 
-This will cache the block for 60 minutes but you can adjust the number of seconds the block should be cached by defining the cacheExpiration propertie:
+This will cache the block for 60 minutes but you can adjust the number of seconds the block should be cached by defining the cacheExpiration property:
 
 ```php
 public $cacheExpiration = 60;
@@ -127,15 +127,15 @@ public $cacheExpiration = 60;
 
 You can enable block caching for a block event if the caching component is not registered, so you can redistribute blocks and the behavior of them.
 
-## Env / Context Informations
+## Env / Context Information
 
-Each block is placed in an Environemnt (Env) you can access those informations inside your block logic:
+Each block is placed in an environment (env) you can access those information inside your block logic:
 
 ```php
 $this->getEnvOption($key, $defaultValue);
 ```
 
-the following keys are available:
+The following keys are available:
 
 + **id**: Return the unique identifier from the cms context
 + **blockId**: Returns the id of this block (unique identifier)
@@ -167,7 +167,7 @@ The properties can help you in order to make a container layout block which auto
 
 The above example would only open the row element once and closes the row container when the next element is not an element of the current block.
 
-#### Properties from CMS Page
+#### Properties from CMS page
 
 If there are any CMS properties defined you can access them like this:
 
@@ -175,11 +175,11 @@ If there are any CMS properties defined you can access them like this:
 $propObject = $this->getEnvOption('pageObject')->nav->getProperty('myCustomProperty');
 ```
 
-If there is a property defined you will get the property object otherwhise returning `false`.
+If there is a property defined you will get the property object otherwise returning `false`.
 
-## Using assets in Blocks
+## Using assets in blocks
 
-Sometimes your block should also register some css or js files, therfore you can access the global {{\luya\web\View}} Object inside of your PHP view template. Its like registering other assets, by the difference that you are accessing the global scope view instead of the view on `$this`. An example of how to integrate an asset file:
+Sometimes your block should also register some css or js files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
 
 Assuming the below code is the PHP View of your Block:
 
@@ -187,11 +187,11 @@ Assuming the below code is the PHP View of your Block:
 MyBlockAsset::register($this->appView);
 ```
 
-Now your [[app-assets.md]] is registered in the appliation view object.
+Now your [[app-assets.md]] is registered in the application view object.
 
-## Register JS or CSS in Block View (inline)
+## Register JS or CSS in block View (inline)
 
-Sometimes your block needs to pass data to JS (or CSS). The easiest way to do that is to register your data in the Blocks View file.
+Sometimes your block needs to pass data to JS (or CSS). The easiest way to do that is to register your data in the blocks View file.
 
 ### JS
 
@@ -214,9 +214,9 @@ $this->appView->registerCss("
 To implement ajax inside a block the following concept is used:
 
 + {{\luya\cms\base\InternalBaseBlock::createAjaxLink()}}: Create the link to the callback, this url must be used for your ajax requests.
-+ `callback...()`: Define a callbacked, you have to prefix the method with *callback*.
++ `callback...()`: Define a callback, you have to prefix the method with *callback*.
 
-Create a callback and define all parameters. The callback is what the url returns to your javascript, can be html or json.
+Create a callback and define all parameters. The callback is what the url returns to your javascript which can be html or json.
 
 ```php
 public function callbackHelloWorld($time)
@@ -233,14 +233,15 @@ $this->createAjaxLink('HellWorld', ['time' => time()]);
 
 You could store this created link from above inside your extras vars and pass it to the javascript.
 
-You can pass aditional values to the callback by using the post ajax method and collect them in your callback via Yii::$app->request->post(). The get parameters are used to resolve the callback.
+You can pass additional values to the callback by using the post ajax method and collect them in your callback via Yii::$app->request->post(). The get parameters are used to resolve the callback.
 
 
-## Block Groups
+## Block groups
 
-We have added the ability to manage the block groups via classes, so you can add new groups on your blocks can depend on a block group, when you run the import command luya will create the folders (block groups) and add/update the blocks into the provided groups.
+There is the ability to manage the block groups via classes. 
+You can add new `blockgroups` to your application on which your block depends, when you run the import command LUYA will add/update the blocks into the provided groups.
 
-To add new blockgroups create folder in your `@app` namespace, or inside a module with the name `blockgroups`, to add a folder create class like this `app\blockgroups\MySuperGroup`:
+To add new block groups create folder in your `@app` namespace, or inside a module with the name `blockgroups`, to add a folder create class like this `app\blockgroups\MySuperGroup`:
 
 ```php
 <?php
@@ -267,7 +268,7 @@ class MySuperGroup extends \luya\cms\base\BlockGroup
 
 > The position of the block will start from lower to higher, means 1 will be at the top of the groups list in the administration and even higher will be more at the bottom.
 
-the folder will be created on import. Now blocks can belong to this folder, to do so override the {{\luya\cms\base\BlockInterface::blockGroup}} method of your block:
+The folder will be created on import. Now blocks can belong to this folder, to do so override the {{\luya\cms\base\BlockInterface::blockGroup}} method of your block:
 
 ```php
 public function blockGroup()
@@ -285,9 +286,9 @@ You can also use one of the predefined group block class:
 + {{\luya\cms\frontend\blockgroups\MediaGroup}}
 + {{\luya\cms\frontend\blockgroups\TextGroup}}
 
-## Variations
+## Block variations
 
-In order to provide block flavors configure your `blockVariation` property of the `cmsadmin` module inside your configuration file as follow:
+In order to extend a block with a special behaviour the `blockVariations` property of the `cmsadmin` module can be configured inside your general config like in the example below:
 
 ```php
 'cmsadmin' => [
