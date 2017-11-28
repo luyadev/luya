@@ -176,7 +176,6 @@ class Mail extends Component
      */
     public function compose($subject = null, $body = null)
     {
-        $this->cleanup();
         if ($subject !== null) {
             $this->subject($subject);
         }
@@ -442,9 +441,10 @@ class Mail extends Component
         }
         if (!$this->getMailer()->send()) {
             Yii::error($this->getError(), __METHOD__);
+            $this->cleanup();
             return false;
         }
-        
+        $this->cleanup();
         return true;
     }
 
