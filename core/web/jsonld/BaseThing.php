@@ -18,7 +18,18 @@ use luya\helpers\StringHelper;
 abstract class BaseThing extends Object implements Arrayable, ThingInterface
 {
     use ThingTrait;
+    
     use ArrayableTrait { toArray as protected internalToArray; }
+    
+    /**
+     * Contains the jsonLd definton @type value if not null or false.
+     * 
+     * @return boolean|string Generates the @type field.
+     */
+    public function typeDefintion()
+    {
+        return false;
+    }
     
     /**
      * Find all getter methods.
@@ -50,7 +61,13 @@ abstract class BaseThing extends Object implements Arrayable, ThingInterface
      */
     public function toArray(array $fields = [], array $expand = [], $recursive = true)
     {
-        return $this->removeNullValues($this->internalToArray($fields, $expand, $recursive));
+        $array = $this->removeNullValues($this->internalToArray($fields, $expand, $recursive));
+        
+        if ($this->typeDefintion()) {
+            $array['@type'] = $this->typeDefintion();
+        }
+        
+        return $array;
     }
     
     /**

@@ -13,6 +13,7 @@ use luya\web\jsonld\Person;
 use luya\Exception;
 use luya\web\jsonld\BaseThing;
 use luya\web\jsonld\Event;
+use luya\web\jsonld\Place;
 
 /**
  * Registerin Microdata as JsonLD.
@@ -102,6 +103,7 @@ class JsonLd extends Object
      * - datePublished: A unix timestamp (or string e.g. 2008-01-25) when the image was published.
      * - name: The name of the picture.
      */
+    /*
     public static function image($url, $caption, array $options = [])
     {
         $date = ArrayHelper::remove($options, 'datePublished', null);
@@ -121,6 +123,7 @@ class JsonLd extends Object
             "name" => ArrayHelper::remove($options, 'name', null),
         ]);
     }
+    */
     
     /**
      * Register graph data.

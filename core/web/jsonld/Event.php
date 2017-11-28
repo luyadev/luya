@@ -12,5 +12,10 @@ namespace luya\web\jsonld;
  */
 class Event extends BaseThing implements EventInterface
 {
+    public function typeDefintion()
+    {
+        return 'Event';
+    }
+    
     use EventTrait;
 }
