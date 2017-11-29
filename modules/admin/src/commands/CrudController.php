@@ -22,6 +22,16 @@ use luya\admin\ngrest\base\NgRestModelInterface;
 class CrudController extends BaseCrudController
 {
     /**
+     * @var boolean Whether the core modules should be hidden from selection list or not.
+     */
+    public $hideCoreModules = true;
+    
+    /**
+     * @var boolean Whether the frontend modules should be hidden from selection list or not.
+     */
+    public $hideFrontendModules = true;
+    
+    /**
      * @inheritdoc
      */
     public $defaultAction = 'create';
@@ -50,6 +60,22 @@ class CrudController extends BaseCrudController
      * @var boolean Whether the i18n text fields will be casted or not.
      */
     public $enableI18n;
+    
+    /**
+     * @inheritdoc
+     */
+    public function options($actionID)
+    {
+        return ['hideCoreModules', 'hideFrontendModules'];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function optionAliases()
+    {
+        return ['hidecore' => 'hideCoreModules', 'hidefrontend' => 'hideFrontendModules'];
+    }
     
     /**
      * Get the $moduleName without admin suffix (if any).
@@ -354,7 +380,7 @@ class CrudController extends BaseCrudController
     {
         if ($this->moduleName === null) {
             Console::clearScreenBeforeCursor();
-            $this->moduleName = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the CRUD files should be saved:']);
+            $this->moduleName = $this->selectModule(['onlyAdmin' => $this->hideFrontendModules, 'hideCore' => $this->hideCoreModules, 'text' => 'Select the Module where the CRUD files should be saved:']);
         }
         
         if ($this->modelName === null) {
