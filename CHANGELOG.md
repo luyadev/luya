@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1679](https://github.com/luyadev/luya/issues/1679) Updated styles to support up to 3 icons in the treeview item context.
 - [#1559](https://github.com/luyadev/luya/issues/1569) Renamed luya\admin\image\Item::getSource() to getHttpSource() this will affect also the getter properties.
 - [#1564](https://github.com/luyadev/luya/issues/1564) Refactoring of gallery module, removed old unused methods, switch to ActiveQuery relation usage.
 - [#1522](https://github.com/luyadev/luya/issues/1522) Text and Textarea NgRest plugins auto encode input data after find.

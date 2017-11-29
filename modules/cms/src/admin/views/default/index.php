@@ -12,6 +12,13 @@ use \luya\admin\Module as AdminModule;
         <span class="treeview-icon treeview-icon-right" ng-if="data.is_home==1">
             <i class="material-icons">home</i>
         </span>
+        <!--
+        Template for additional icons (max 3 including "homepage"):
+
+        <span class="treeview-icon treeview-icon-right" ng-if="1===1">
+            <i class="material-icons">access_time</i>
+        </span>
+        -->
         <span class="treeview-link" alt="id={{data.id}}" title="id={{data.id}}" ng-click="go(data)" tooltip tooltip-text="<?= AdminModule::t('locked_info'); ?>" tooltip-disabled="!isLocked('cms_nav_item', data.id)">
             <span class="google-chrome-font-offset-fix">{{data.title}}</span>
         </span>

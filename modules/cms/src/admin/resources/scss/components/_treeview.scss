@@ -127,7 +127,7 @@
     border: solid transparent;
     border-width: 2px 0 2px 0;
     display: block;
-    padding: 0 35px 0 23px;
+    padding: 0 0 0 23px;
     position: relative;
     width: 100%;
 
@@ -193,6 +193,26 @@
     &-right {
         left: auto;
         right: 10px;
+
+        & + .treeview-link {
+            width: calc(100% - 30px);
+        }
+
+        & + .treeview-icon-right {
+            right: 30px;
+
+            & + .treeview-link {
+                width: calc(100% - 50px);
+            }
+
+            & + .treeview-icon-right {
+                right: 50px;
+
+                & + .treeview-link {
+                    width: calc(100% - 70px);
+                }
+            }
+        }
     }
 
     &-collapse {
@@ -214,18 +234,22 @@
 }
 
 .treeview-link {
+    border: 1px solid transparent;
     border-radius: 5px;
+    border-radius: $border-radius;
     cursor: pointer;
     display: block;
     padding: 0 7px;
-    width: 100%;
+    width: calc(100% - 10px);
+    word-break: break-word;
+    word-wrap: break-word;
 
     .treeview-item-active > .treeview-label > &,
     &:hover {
-        background-color: rgba(0, 0, 0, .1);
+        border-color: $card-border-color;
 
         .treeview-label-container & {
-            background-color: transparent;
+            border-color: transparent;
         }
     }
 }
