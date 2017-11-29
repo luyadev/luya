@@ -4,6 +4,7 @@ namespace luya\admin\models;
 
 use yii\db\ActiveRecord;
 use luya\traits\RegistryTrait;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * This is the model class for table "admin_config".
@@ -14,7 +15,7 @@ use luya\traits\RegistryTrait;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-final class Config extends ActiveRecord
+final class Config extends NgRestModel
 {
     use RegistryTrait;
     
@@ -35,11 +36,20 @@ final class Config extends ActiveRecord
     /**
      * @inheritdoc
      */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-admin-config';
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['name', 'value'], 'required'],
             [['name'], 'unique'],
+            [['is_system'], 'integer'],
         ];
     }
     
@@ -51,6 +61,39 @@ final class Config extends ActiveRecord
         return [
             'name' => 'Name',
             'value' => 'Value',
+            'is_system' => 'System Config',
         ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function ngRestAttributeTypes()
+    {
+        return [
+            'value' => 'text',
+            'name' => 'slug',
+            'is_system' => ['hidden', 'value' => 0],
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function ngRestScopes()
+    {
+        return [
+            [['list'], ['name', 'value']],
+            [['create', 'update'], ['name', 'value', 'is_system']],
+            [['delete'], true],
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestFind()
+    {
+        return parent::ngRestFind()->where(['is_system' => false]);
     }
 }

@@ -33,7 +33,7 @@ class ProxyController extends Controller
      * @var array A list of tables which will be ignored and can not be synced with the proxy command.
      */
     protected $ignoreTables = [
-        'migration', 'admin_proxy_build', 'admin_proxy_machine', 'admin_config',
+        'migration', 'admin_proxy_build', 'admin_proxy_machine',
     ];
     
     /**
