@@ -876,7 +876,7 @@
 			var has = false;
 			angular.forEach(data, function(value) {
 				if (value.lock_table == table && value.lock_pk == pk) {
-					has = true;
+					has = value;
 				}
 			});
 
@@ -1026,7 +1026,13 @@
 
 		$scope.isLocked = function(table, pk) {
 			return $filter('lockFilter')($scope.locked, table, pk);
-		}
+		};
+		
+		$scope.getLockedName = function(table, pk) {
+			var response = $scope.isLocked(table, pk);
+			
+			return response.firstname + ' ' + response.lastname;
+		};
 
 		$scope.searchQuery = null;
 
