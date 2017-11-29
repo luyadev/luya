@@ -7,6 +7,7 @@ use yii\base\InvalidConfigException;
 
 use luya\helpers\StringHelper;
 use Symfony\Component\DomCrawler\Crawler;
+use yii\base\BaseObject;
 
 /**
  * Crawl Page.
@@ -17,7 +18,7 @@ use Symfony\Component\DomCrawler\Crawler;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class CrawlPage extends \yii\base\Object
+class CrawlPage extends BaseObject
 {
     public $pageUrl;
 

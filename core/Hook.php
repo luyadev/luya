@@ -2,8 +2,8 @@
 
 namespace luya;
 
-use yii\base\Object;
 use luya\base\HookEvent;
+use yii\base\BaseObject;
 
 /**
  * Simple Hooking mechanism.
@@ -42,7 +42,7 @@ use luya\base\HookEvent;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Hook extends Object
+class Hook extends BaseObject
 {
     private static $_hooks = [];
 

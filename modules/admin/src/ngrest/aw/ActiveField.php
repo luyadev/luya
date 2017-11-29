@@ -2,8 +2,8 @@
 
 namespace luya\admin\ngrest\aw;
 
-use yii\base\Object;
 use luya\admin\helpers\Angular;
+use yii\base\BaseObject;
 
 /**
  * ActiveWindow ActiveField Configration
@@ -11,7 +11,7 @@ use luya\admin\helpers\Angular;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ActiveField extends Object
+class ActiveField extends BaseObject
 {
     /**
      * @var \luya\admin\ngrest\aw\CallbackFormWidget The form widget object

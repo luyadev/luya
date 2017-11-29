@@ -2,10 +2,10 @@
 
 namespace luya\web\jsonld;
 
-use yii\base\Object;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
 use luya\helpers\StringHelper;
+use yii\base\BaseObject;
 
 /**
  * Base Thing.
@@ -15,7 +15,7 @@ use luya\helpers\StringHelper;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class BaseThing extends Object implements Arrayable, ThingInterface
+abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
 {
     use ThingTrait;
     

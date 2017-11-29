@@ -2,7 +2,7 @@
 
 namespace luya\base;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * HookEvent Object.
@@ -12,7 +12,7 @@ use yii\base\Object;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-final class HookEvent extends Object implements \ArrayAccess
+final class HookEvent extends BaseObject implements \ArrayAccess
 {
     /**
      * @var array|callable The executable handler to use when calling the hook event in order to generate the $output.

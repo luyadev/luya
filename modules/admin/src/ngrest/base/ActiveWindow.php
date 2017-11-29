@@ -6,11 +6,10 @@ use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\base\ViewContextInterface;
-use yii\base\Object;
-
 use luya\Exception;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
+use yii\base\BaseObject;
 
 /**
  * Base class for all ActiveWindow classes.
@@ -26,7 +25,7 @@ use luya\helpers\FileHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class ActiveWindow extends Object implements ViewContextInterface, ActiveWindowInterface
+abstract class ActiveWindow extends BaseObject implements ViewContextInterface, ActiveWindowInterface
 {
     /**
      * @var string $suffix The suffix to use for all classes

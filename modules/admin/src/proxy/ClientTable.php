@@ -3,10 +3,10 @@
 namespace luya\admin\proxy;
 
 use Yii;
-use yii\base\Object;
 use Curl\Curl;
 use yii\helpers\Json;
 use yii\helpers\Console;
+use yii\base\BaseObject;
 
 /**
  * Admin Proxy comands Sync Database.
@@ -16,7 +16,7 @@ use yii\helpers\Console;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ClientTable extends Object
+class ClientTable extends BaseObject
 {
     private $_data;
     

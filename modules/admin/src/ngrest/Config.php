@@ -2,11 +2,10 @@
 
 namespace luya\admin\ngrest;
 
-use yii\base\Object;
-
 use luya\helpers\ArrayHelper;
 use luya\admin\Module;
 use yii\base\InvalidConfigException;
+use yii\base\BaseObject;
 
 /**
  * Defines and holds an NgRest Config.
@@ -36,7 +35,7 @@ use yii\base\InvalidConfigException;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Config extends Object implements ConfigInterface
+class Config extends BaseObject implements ConfigInterface
 {
     private $_config = [];
     

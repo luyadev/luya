@@ -2,8 +2,8 @@
 
 namespace luya\admin\models;
 
-use yii\base\Object;
 use yii\db\ActiveRecordInterface;
+use yii\base\BaseObject;
 
 /**
  * Store and read user settings.
@@ -41,7 +41,7 @@ use yii\db\ActiveRecordInterface;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-final class UserSetting extends Object implements \ArrayAccess
+final class UserSetting extends BaseObject implements \ArrayAccess
 {
     const SEPERATOR = '.';
 

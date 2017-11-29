@@ -4,7 +4,7 @@ namespace luya\admin\dashboard;
 
 use Yii;
 use luya\admin\base\DashboardObjectInterface;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Base Implementation of an Dashboard Object.
@@ -14,7 +14,7 @@ use yii\base\Object;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class BaseDashboardObject extends Object implements DashboardObjectInterface
+abstract class BaseDashboardObject extends BaseObject implements DashboardObjectInterface
 {
     /**
      * Get the Outer Template.

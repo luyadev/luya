@@ -89,7 +89,7 @@ When casting a field as i18n it will save the multi lingual data in json format 
 
 ## Extra fields
 
-Sometimes you want to define fields which are not part of the ActiveRecord model and are not part of the database table, e. g. you want to display a count of registered users on the CRUD list. To achieve this you may use the `extraFields` principal combined with the yii\base\Object getter/setter information.
+Sometimes you want to define fields which are not part of the ActiveRecord model and are not part of the database table, e. g. you want to display a count of registered users on the CRUD list. To achieve this you may use the `extraFields` principal combined with the {{yii\base\BaseObject}} getter/setter information.
 
 ```php
 public function getRegisteredCount()

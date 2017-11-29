@@ -3,7 +3,7 @@
 namespace luya\tag;
 
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * The BaseTag for all Tags.
@@ -13,7 +13,7 @@ use yii\base\Object;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class BaseTag extends Object implements TagInterface
+abstract class BaseTag extends BaseObject implements TagInterface
 {
     private $_view;
     

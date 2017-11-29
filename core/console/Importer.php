@@ -3,6 +3,7 @@
 namespace luya\console;
 
 use luya\console\interfaces\ImportControllerInterface;
+use yii\base\BaseObject;
 
 /**
  * Base class for all Importer classes.
@@ -28,7 +29,7 @@ use luya\console\interfaces\ImportControllerInterface;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class Importer extends \yii\base\Object
+abstract class Importer extends BaseObject
 {
     const QUEUE_POSITION_FIRST = 0;
 

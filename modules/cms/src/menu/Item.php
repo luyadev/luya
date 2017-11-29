@@ -3,22 +3,21 @@
 namespace luya\cms\menu;
 
 use Yii;
-use yii\base\Object;
 use luya\admin\models\User;
 use luya\cms\Exception;
 use luya\cms\models\Nav;
 use luya\web\LinkInterface;
 use luya\web\LinkTrait;
-
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
+use yii\base\BaseObject;
 
 /**
  * Menu item Object.
  *
  * Each menu itaration will return in an Item-Object. The Item-Object contains several methods like
  * returning title, url and ids or retrieve depending item iterations like parents or childs. As the
- * Item Object extends the yii\base\Object all getter methods can be access as property.
+ * Item Object extends the {{yii\base\BaseObject}} all getter methods can be access as property.
  *
  * Read more in the [[app-menu.md]] Guide.
  *
@@ -58,7 +57,7 @@ use yii\base\ArrayableTrait;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Item extends Object implements LinkInterface, Arrayable
+class Item extends BaseObject implements LinkInterface, Arrayable
 {
     use LinkTrait, ArrayableTrait;
     

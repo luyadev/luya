@@ -4,6 +4,7 @@ namespace luya\admin\storage;
 
 use Iterator;
 use Countable;
+use yii\base\BaseObject;
 
 /**
  * Iterator class for file items.
@@ -11,7 +12,7 @@ use Countable;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class IteratorAbstract extends \yii\base\Object implements Iterator, Countable
+abstract class IteratorAbstract extends BaseObject implements Iterator, Countable
 {
     /**
      * @var array An array containing the data to iterate.

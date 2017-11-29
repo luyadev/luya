@@ -2,8 +2,8 @@
 
 namespace luya\admin\components;
 
-use yii\base\Object;
 use luya\base\AdminModuleInterface;
+use yii\base\BaseObject;
 
 /**
  * Builder class for the Administration Menu/Navigation.
@@ -35,7 +35,7 @@ use luya\base\AdminModuleInterface;
  * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
-class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
+class AdminMenuBuilder extends BaseObject implements AdminMenuBuilderInterface
 {
     private static $index = 0;
     

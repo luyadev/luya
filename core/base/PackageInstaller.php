@@ -2,7 +2,7 @@
 
 namespace luya\base;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Represents the extracted data from the luya composer plugin installer.php file inside the vendor.
@@ -10,7 +10,7 @@ use yii\base\Object;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class PackageInstaller extends Object
+class PackageInstaller extends BaseObject
 {
     private $_timestamp;
     

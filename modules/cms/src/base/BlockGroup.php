@@ -2,7 +2,7 @@
 
 namespace luya\cms\base;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Base class for all Block Groups.
@@ -14,7 +14,7 @@ use yii\base\Object;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class BlockGroup extends Object
+abstract class BlockGroup extends BaseObject
 {
     /**
      * The unique identifier of the block group

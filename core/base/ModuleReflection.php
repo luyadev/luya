@@ -5,9 +5,9 @@ namespace luya\base;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\base\InvalidConfigException;
-use yii\base\Object;
 use luya\web\Request;
 use luya\web\UrlManager;
+use yii\base\BaseObject;
 
 /**
  * Run any route inside the provided module.
@@ -36,7 +36,7 @@ use luya\web\UrlManager;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ModuleReflection extends Object
+class ModuleReflection extends BaseObject
 {
     /**
      * @var \luya\web\Request Request object from DI-Container.

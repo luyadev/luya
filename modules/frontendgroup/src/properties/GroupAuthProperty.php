@@ -14,9 +14,7 @@ use luya\admin\base\Property;
 class GroupAuthProperty extends Property
 {
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
+     * @inheritdoc
      */
     public function init()
     {

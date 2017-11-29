@@ -2,13 +2,12 @@
 
 namespace luya\cms\base;
 
-use yii\base\Object;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
 use luya\helpers\ArrayHelper;
 use luya\admin\base\TypesInterface;
 use luya\cms\frontend\blockgroups\MainGroup;
-use luya\cms\helpers\BlockHelper;
+use yii\base\BaseObject;
 
 /**
  * Concret Block implementation based on BlockInterface.
@@ -21,7 +20,7 @@ use luya\cms\helpers\BlockHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class InternalBaseBlock extends Object implements BlockInterface, TypesInterface, \ArrayAccess
+abstract class InternalBaseBlock extends BaseObject implements BlockInterface, TypesInterface, \ArrayAccess
 {
     /**
      * Returns the configuration array.

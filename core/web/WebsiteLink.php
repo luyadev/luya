@@ -2,12 +2,12 @@
 
 namespace luya\web;
 
-use yii\base\Object;
 use luya\helpers\Url;
 use yii\base\InvalidConfigException;
 use yii\base\ArrayableTrait;
 use yii\base\Arrayable;
 use luya\helpers\StringHelper;
+use yii\base\BaseObject;
 
 /**
  * Generate External Link object.
@@ -21,7 +21,7 @@ use luya\helpers\StringHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class WebsiteLink extends Object implements LinkInterface, Arrayable
+class WebsiteLink extends BaseObject implements LinkInterface, Arrayable
 {
     use LinkTrait, ArrayableTrait;
     

@@ -5,15 +5,12 @@ namespace luya\web;
 use luya\web\jsonld\Organization;
 use luya\web\jsonld\Thing;
 use Yii;
-use yii\base\Object;
 use yii\helpers\Json;
-use luya\helpers\Url;
-use luya\helpers\ArrayHelper;
 use luya\web\jsonld\Person;
 use luya\Exception;
-use luya\web\jsonld\BaseThing;
 use luya\web\jsonld\Event;
 use luya\web\jsonld\Place;
+use yii\base\BaseObject;
 
 /**
  * Registerin Microdata as JsonLD.
@@ -30,7 +27,7 @@ use luya\web\jsonld\Place;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class JsonLd extends Object
+class JsonLd extends BaseObject
 {
     /**
      * Register new Thing.
