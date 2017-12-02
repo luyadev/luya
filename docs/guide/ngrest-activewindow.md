@@ -8,7 +8,7 @@ An example of an active window (Change Password) when clicked:
 
 ![overlay-window](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aw_window.png "Active Window Overlay")
 
-### Create an Active Window
+## Create an Active Window
 
 > Use the [`admin/active-window` console command](luya-console.md) to generate a new Active Window.
 
@@ -44,6 +44,10 @@ Working with callbacks
 + To return successful data use `sendSuccess($message)`.
 + To return error data use `sendError($message)`.
 
+Calling the callbacks
+
++ When call a ActiveWindow callback the lower camecase prefix method `callbackHelloWorld` must be called as `hello-world`.
+
 ## Attaching the Class
 
 In order to add an Active Window into your NgRest config, you have to add the config in the {{luya\admin\ngrest\base\NgRestModel::ngRestActiveWindows()}} method. As the Active Window contains the {{yii\base\BaseObject}} as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `label` and `icon` public properties. The alias and icon propierties does exist in every Active Window an can always be overwritten.
@@ -61,7 +65,7 @@ public function ngRestActiveWindows()
 
 To render view files you can run the method `$this->render()` inside your active window class. The render method will lookup for php view file based on the base path of your `$module` property. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` property and your Active Window name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
 
-### How to make a Button
+## How to make a Button
 
 In order to create a button with a callback we use the {{luya\admin\ngrest\aw\CallbackButtonWidget}} Widget. Example view File
 
@@ -78,7 +82,7 @@ public function callbackHelloWolrd($name)
 }
 ```
 
-### Generate a Form
+## Generate a Form
 
 You can also use the callback from widget to create a form sending data to a callback
 
@@ -108,7 +112,7 @@ public function callbackPostData($firstname, $lastname)
 }
 ```
 
-### Angular in View files
+## Angular in View files
 
 As the administration interface is written in angular you can aso create inline Angular Controllers and interact with your Active Window class.
 
