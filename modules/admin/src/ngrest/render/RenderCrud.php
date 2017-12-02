@@ -263,7 +263,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                 }
                 
                 $buttons[] = [
-                    'ngClick' => 'tabService.addTab('.$this->getCompositionKeysForButtonActions('item').', \''.$api['route'].'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
+                    'ngClick' => 'tabService.addTab(item.'.$this->getPrimaryKey().', \''.$api['route'].'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
                     'icon' => 'chrome_reader_mode',
                     'label' => $rel['label'],
                 ];

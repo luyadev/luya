@@ -115,6 +115,12 @@ $this->beginBody();
                     <?php endif; ?>
                 </div>
             </div>
+            <?php if ($relationCall && $canCreate && $config->getPointer('create')): ?>
+            <button type="button" class="btn btn-add ml-3 mt-3" ng-click="switchTo(1)">
+                    <i class="material-icons">add_box</i>
+                    <span><?= Module::t('ngrest_crud_btn_add'); ?></span>
+            </button>
+            <?php endif; ?>
             <small class="crud-counter">{{data.listArray.length}} of {{totalRows}}</small>
             <div class="table-responsive-wrapper">
                 <table class="table table-hover table-align-middle table-striped mt-0">

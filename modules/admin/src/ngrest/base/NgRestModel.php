@@ -663,10 +663,15 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             $config->groupByField = $this->ngRestGroupByField();
             
             $rel = [];
-            foreach ($this->ngRestRelations() as $key => $item) {
-                $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->className())];
+            
+            // ensure relations are made not on composite table.
+            if ($this->ngRestRelations() && count($this->getNgRestPrimaryKey()) > 1) {
+                throw new InvalidConfigException("You can not use the ngRestRelations() on composite key model.");
             }
             
+            foreach ($this->ngRestRelations() as $key => $item) {
+                $rel[] = ['label' => $item['label'], 'relationLink' => $item['dataProvider']->link, 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->className())];
+            }
             
             $config->relations = $rel;
             $config->tableName = $this->tableName();
