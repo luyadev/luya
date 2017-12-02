@@ -4,6 +4,7 @@ namespace ngresttest\models;
 
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\aws\DetailViewActiveWindow;
 
 /**
  * Price.
@@ -56,6 +57,13 @@ class Price extends NgRestModel
         ];
     }
 
+    public function ngRestActiveWindows()
+    {
+        return [
+            'class' => DetailViewActiveWindow::class,
+        ];
+    }
+    
     /**
      * @inheritdoc
      */
@@ -84,7 +92,7 @@ class Price extends NgRestModel
         return [
             ['list', ['amount']],
             [['create', 'update'], ['amount', 'event_id', 'category_id']],
-            ['delete', false],
+            ['delete', true],
         ];
     }
 }

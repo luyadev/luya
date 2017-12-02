@@ -4,6 +4,7 @@ namespace ngresttest\models;
 
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\aws\DetailViewActiveWindow;
 
 /**
  * Category.
@@ -53,6 +54,13 @@ class Category extends NgRestModel
         ];
     }
 
+    public function ngRestActiveWindows()
+    {
+        return [
+            'class' => DetailViewActiveWindow::class,
+        ];
+    }
+    
     /**
      * @inheritdoc
      */
@@ -79,7 +87,7 @@ class Category extends NgRestModel
         return [
             ['list', ['name']],
             [['create', 'update'], ['name']],
-            ['delete', false],
+            ['delete', true],
         ];
     }
 }
