@@ -63,7 +63,7 @@ abstract class ActiveWindow extends BaseObject implements ViewContextInterface, 
     public function getModel()
     {
         if ($this->_model === null && $this->ngRestModelClass !== null) {
-            $this->_model = call_user_func_array([$this->ngRestModelClass, 'findOne'], [$this->itemId]);
+            $this->_model = call_user_func_array([$this->ngRestModelClass, 'findOne'], $this->itemId);
         }
         
         return $this->_model;
@@ -325,11 +325,7 @@ abstract class ActiveWindow extends BaseObject implements ViewContextInterface, 
      */
     public function setItemId($id)
     {
-        if (is_int($id)) {
-            return $this->_itemId = $id;
-        }
-        
-        throw new Exception("Unable to set active window item id, item id value must be integer.");
+        $this->_itemId = $id;
     }
 
     /**
@@ -337,7 +333,7 @@ abstract class ActiveWindow extends BaseObject implements ViewContextInterface, 
      */
     public function getItemId()
     {
-        return $this->_itemId;
+        return explode(",", $this->_itemId);
     }
     
     /**

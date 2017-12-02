@@ -11,6 +11,7 @@ use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
 use luya\helpers\Html;
 use luya\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * Render the Crud view.
@@ -179,7 +180,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
      */
     public function getPrimaryKey()
     {
-        return $this->config->primaryKey;
+        return implode(",", $this->config->getPrimaryKey());
     }
     
     /**
@@ -215,6 +216,20 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         return $this->_canTypes[$type];
     }
     
+    /**
+     * 
+     * @param unknown $modelPrefix In common case its `item`.
+     */
+    public function getCompositionKeysForButtonActions($modelPrefix)
+    {
+        $output = [];
+        foreach ($this->config->getPrimaryKey() as $key) {
+            $output[] = $modelPrefix . '.' . $key;
+        }
+        
+        return "[". implode(",", $output) . "]";
+    }
+    
     /*
      * OLD
      */
@@ -247,7 +262,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                 }
                 
                 $buttons[] = [
-                    'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$api['route'].'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
+                    'ngClick' => 'tabService.addTab('.$this->getCompositionKeysForButtonActions('item').', \''.$api['route'].'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
                     'icon' => 'chrome_reader_mode',
                     'label' => $rel['label'],
                 ];
@@ -257,7 +272,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
                 // get all activeWindows assign to the crud
                 foreach ($this->getActiveWindows() as $hash => $config) {
                     $buttons[] = [
-                        'ngClick' => 'getActiveWindow(\''.$hash.'\', item.'.$this->config->primaryKey.')',
+                        'ngClick' => 'getActiveWindow(\''.$hash.'\', '.$this->getCompositionKeysForButtonActions('item').')',
                         'icon' => $config['icon'],
                         'label' => $config['label'],
                     ];
@@ -267,7 +282,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             // check if deletable is enabled
             if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
-                    'ngClick' => 'deleteItem(item.'.$this->config->primaryKey.')',
+                    'ngClick' => 'deleteItem('.$this->getCompositionKeysForButtonActions('item').')',
                     'icon' => 'delete',
                     'label' => '',
                 ];
@@ -275,7 +290,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
             // do we have an edit button
             if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
                 $buttons[] = [
-                    'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.')',
+                    'ngClick' => 'toggleUpdate('.$this->getCompositionKeysForButtonActions('item').')',
                     'icon' => 'mode_edit',
                     'label' => '',
                 ];

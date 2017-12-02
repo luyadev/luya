@@ -136,7 +136,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      */
     public function ngRestListOrder()
     {
-        return [$this->getNgRestPrimaryKey() => SORT_DESC];
+        return [$this->getNgRestPrimaryKey()[0] => SORT_DESC];
     }
     
     /**
@@ -387,7 +387,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
                 throw new InvalidConfigException("The NgRestModel '".__CLASS__."' requires at least one primaryKey in order to work.");
             }
             
-            $this->_ngRestPrimaryKey = $keys[0];
+            return $keys;
         }
 
         return $this->_ngRestPrimaryKey;

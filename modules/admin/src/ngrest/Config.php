@@ -354,15 +354,17 @@ class Config extends BaseObject implements ConfigInterface
 
     public function onFinish()
     {
-        if (!$this->hasField('list', $this->primaryKey)) {
-            $this->addField('list', $this->primaryKey, [
-                'name' => $this->primaryKey,
-                'alias' => Module::t('model_pk_id'),
-                'type' => [
-                    'class' => 'luya\admin\ngrest\plugins\Text',
-                    'args' => [],
-                ],
-            ]);
+        foreach ($this->primaryKey as $pk) {
+            if (!$this->hasField('list', $pk)) {
+                $this->addField('list', $pk, [
+                    'name' => $pk,
+                    'alias' => $pk,
+                    'type' => [
+                        'class' => 'luya\admin\ngrest\plugins\Text',
+                        'args' => [],
+                    ],
+                ]);
+            }
         }
     }
 }

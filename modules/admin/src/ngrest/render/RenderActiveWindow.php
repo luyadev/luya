@@ -37,10 +37,10 @@ class RenderActiveWindow extends Render implements RenderInterface
         if ($this->_activeWindowObject === null) {
             $activeWindow = $this->findActiveWindow($this->activeWindowHash);
             $object = Yii::createObject($activeWindow['objectConfig']);
-            $object->setItemId($this->_itemId);
+            $object->setItemId($this->itemId);
             $object->setConfigHash($this->config->getHash());
             $object->setActiveWindowHash($this->activeWindowHash);
-            Yii::$app->session->set($this->activeWindowHash, $this->_itemId);
+            Yii::$app->session->set($this->activeWindowHash, $this->itemId);
             $this->_activeWindowObject = $object;
         }
         
@@ -78,7 +78,7 @@ class RenderActiveWindow extends Render implements RenderInterface
      */
     public function setItemId($id)
     {
-        $this->_itemId = (int) $id;
+        $this->_itemId = implode(",", $id);
     }
     
     /**
