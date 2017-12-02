@@ -72,6 +72,23 @@ class Event extends NgRestModel
     }
 
     /**
+     * 
+     * {@inheritDoc}
+     * @see \luya\admin\ngrest\base\NgRestModel::ngRestRelations()
+     */
+    public function ngRestRelations()
+    {
+        return [
+            ['label' => 'Prices', 'apiEndpoint' => Price::ngRestApiEndpoint(), 'dataProvider' => $this->getPrices()],
+        ];
+    }
+
+    public function getPrices()
+    {
+        return $this->hasMany(Price::class, ['event_id' => 'id']);
+    }
+    
+    /**
      * @inheritdoc
      */
     public function ngRestScopes()
