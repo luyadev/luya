@@ -81,7 +81,6 @@ class GroupEmailActiveWindow extends ActiveWindow
     public function index()
     {
         return $this->render('index', [
-            'id' => $this->itemId,
             'contacts' => $this->model->contacts,
         ]);
     }
@@ -115,7 +114,9 @@ One of the main purpose of the concept of an Activewindow is to be able to defin
 In our view we'll include an overview of all contacts in the group, similar to the CRUD view and add an embedded email form with the email subject input field and a textarea for the actual email text: 
 
 ```php
-<? use luya\admin\ngrest\aw\CallbackFormWidget; ?>
+<?php
+use luya\admin\ngrest\aw\CallbackFormWidget;
+?>
 <h4>Group Contacts</h4>
 <table class="striped">
     <thead>
@@ -125,26 +126,26 @@ In our view we'll include an overview of all contacts in the group, similar to t
         <th>Email</th>
     </tr>
     </thead>
-    <? foreach ($contacts as $contact): ?>
+    <?php foreach ($contacts as $contact): ?>
         <tr>
             <td><?= $contact->firstname; ?></td>
             <td><?= $contact->lastname; ?></td>
             <td><?= $contact->email; ?></td>
         </tr>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </table>
 
 <h4>Send email</h4>
 <p>Write an email to all contacts in this group.</p>
 
-<? $form = CallbackFormWidget::begin([
+<?php $form = CallbackFormWidget::begin([
     'callback' => 'send-mail',
     'buttonValue' => 'Send',
     'options' => ['closeOnSuccess' => true]
 ]); ?>
 <?= $form->field('subject', 'Subject'); ?>
 <?= $form->field('text', 'Text')->textarea(); ?>
-<? $form::end(); ?>
+<?php $form::end(); ?>
 ```
 
 As you can see, we've used the [CallbackFormWidget](https://luya.io/api/luya-admin-ngrest-aw-CallbackFormWidget). Besides the [CallbackButtonWidget](https://luya.io/api/luya-admin-ngrest-aw-CallbackButtonWidget), they're mostly what you'll need to create a simple ActiveWindow with additional functionality. 
