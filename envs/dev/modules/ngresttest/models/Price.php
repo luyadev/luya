@@ -5,6 +5,7 @@ namespace ngresttest\models;
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
+use luya\admin\ngrest\plugins\SelectModel;
 
 /**
  * Price.
@@ -80,7 +81,7 @@ class Price extends NgRestModel
         return [
             'amount' => 'text',
             'event_id' => 'number',
-            'category_id' => 'number',
+            'category_id' => ['class' => SelectModel::class, 'modelClass' => Category::class, 'labelField' => 'name'],
         ];
     }
 
@@ -90,7 +91,7 @@ class Price extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['amount']],
+            ['list', ['category_id', 'amount']],
             [['create', 'update'], ['amount', 'event_id', 'category_id']],
             ['delete', true],
         ];

@@ -17,13 +17,11 @@ class m171202_113422_issue1682 extends Migration
             'name' => $this->string()->notNull(),
         ]);
         $this->createTable('ngresttest_price', [
-            'event_id' => $this->integer(),
-            'category_id' => $this->integer(),
+            'id' => $this->primaryKey(),
+            'event_id' => $this->integer()->notNull(),
+            'category_id' => $this->integer()->notNull(),
             'amount' => $this->string()->notNull(),
         ]);
-        
-        // we could also just so a primary key for the junction table, but we want to have a far more complex usacse.
-        $this->addPrimaryKey('ngresttest_price_pk', 'ngresttest_price', ['event_id', 'category_id']);
         
         $this->createTable('ngresttest_category', [
             'id' => $this->primaryKey(),
@@ -36,9 +34,10 @@ class m171202_113422_issue1682 extends Migration
      */
     public function safeDown()
     {
-        echo "m171202_113422_issue1682 cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('ngresttest_event');
+        $this->dropTable('ngresttest_price');
+        
+        $this->dropTable('ngresttest_category');
     }
 
     /*
