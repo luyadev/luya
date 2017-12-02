@@ -254,6 +254,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         if ($this->_buttons === null) {
             $buttons = [];
             
+            
             foreach ($this->getConfig()->getRelataions() as $rel) {
                 $api = Yii::$app->adminmenu->getApiDetail($rel['apiEndpoint']);
                 

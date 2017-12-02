@@ -63,7 +63,7 @@ abstract class ActiveWindow extends BaseObject implements ViewContextInterface, 
     public function getModel()
     {
         if ($this->_model === null && $this->ngRestModelClass !== null) {
-            $this->_model = call_user_func_array([$this->ngRestModelClass, 'findOne'], $this->itemId);
+            $this->_model = call_user_func_array([$this->ngRestModelClass, 'findOne'], $this->itemIds);
         }
         
         return $this->_model;
@@ -332,6 +332,22 @@ abstract class ActiveWindow extends BaseObject implements ViewContextInterface, 
      * @inheritdoc
      */
     public function getItemId()
+    {
+        return $this->getIsCompositeItem() ? $this->getItemIds() : $this->getItemIds()[0];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getIsCompositeItem()
+    {
+        return count($this->_itemId) > 1 ? true : false;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getItemIds()
     {
         return explode(",", $this->_itemId);
     }
