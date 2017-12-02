@@ -41,6 +41,7 @@ class RenderCrudView extends View
             'minLengthWarning' => false,
             'saveCallback' => $this->context->getConfig()->getOption('saveCallback') ? new JsExpression($this->context->getConfig()->getOption('saveCallback')) : false,
             'relationCall' => $this->context->getRelationCall(),
+            'relations' => $this->context->getConfig()->getRelataions(),
         ];
         
         $client = 'zaa.bootstrap.register(\''.$this->context->config->getHash().'\', function($scope, $controller) {

@@ -278,10 +278,33 @@
 
 		/******* RELATION CALLLS *********/
 
-
+		/**
+		 * Modal view select a value from a modal into its parent plugin.
+		 */
 		$scope.parentSelectInline = function(item) {
 			$scope.$parent.$parent.$parent.setModelValue($scope.getRowPrimaryValue(item), item);
 		};
+		
+		/**
+		 * Check if a field exists in the parents relation list, if yes hide the field
+		 * for the given form and return the relation call value instead in order to auto store those.
+		 */
+		$scope.checkIfFieldExistsInParentRelation = function(field) {
+			// this call is relation call, okay check for the parent relation defition
+			if ($scope.config.relationCall) {
+				var relations = $scope.$parent.$parent.config.relations;
+				
+				var definition = relations[parseInt($scope.config.relationCall.arrayIndex)];
+				
+				var linkDefintion = definition.relationLink;
+				
+				if (linkDefintion.hasOwnProperty(field)) {
+					return parseInt($scope.config.relationCall.id);
+				}
+			}
+			
+			return false;
+		}
 
 		$scope.relationItems = [];
 

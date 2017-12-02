@@ -480,7 +480,7 @@ class RenderCrud extends Render implements RenderInterface, ViewContextInterface
         return is_array($html) ? implode(" ", $html) : $html;
     }
 
-    private function ngModelString($configContext, $fieldId)
+    public function ngModelString($configContext, $fieldId)
     {
         return ($configContext == self::TYPE_LIST) ? 'item.'.$fieldId : 'data.'.$configContext.'.'.$fieldId;
     }

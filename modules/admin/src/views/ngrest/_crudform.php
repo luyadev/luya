@@ -2,7 +2,7 @@
 use luya\admin\Module;
 
 /* @var integer $renderer */
-/* @var integer $type */
+/* @var integer $type 1 = create, 2 = update*/
 /* @var boolean $isInline */
 /* @var boolean $relationCall */
 ?>
@@ -22,9 +22,12 @@ use luya\admin\Module;
             <?php endif; ?>
 
                 <?php foreach ($group['fields'] as $field => $fieldItem): ?>
+                    <div ng-if="!checkIfFieldExistsInParentRelation('<?= $field; ?>')">
                         <?php foreach ($this->context->createElements($fieldItem, $renderer) as $element): ?>
                             <?= $element['html']; ?>
                         <?php endforeach; ?>
+                    </div>
+                    <div ng-if="checkIfFieldExistsInParentRelation('<?= $field; ?>')" ng-init="<?= $this->context->ngModelString($renderer, $field); ?>=checkIfFieldExistsInParentRelation('<?= $field; ?>')"></div>
                 <?php endforeach; ?>
 
             <?php if (!$group['is_default']): ?>
