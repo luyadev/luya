@@ -50,7 +50,7 @@
 
 		$scope.tabService = CrudTabService;
 
-		/***** TABS AND SWITCHES *////
+		/***** TABS AND SWITCHES *****/
 
 		/**
 		 * 0 = list
@@ -94,7 +94,7 @@
 			}
 			$scope.crudSwitchType = type;
 
-			if (type !== 4) {
+			if (type !== 4 && !$scope.config.inline) {
 				angular.forEach($scope.tabService.tabs, function(item) {
 					item.active = false;
 				});
@@ -127,7 +127,7 @@
 			}
 		};
 
-		/********** EXPORT *////
+		/********** EXPORT ****/
 
 		$scope.exportLoading = false;
 

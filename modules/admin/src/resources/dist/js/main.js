@@ -13505,7 +13505,7 @@ zaa.factory('HtmlStorage', function() {
 
 		$scope.tabService = CrudTabService;
 
-		/***** TABS AND SWITCHES *////
+		/***** TABS AND SWITCHES *****/
 
 		/**
 		 * 0 = list
@@ -13549,7 +13549,7 @@ zaa.factory('HtmlStorage', function() {
 			}
 			$scope.crudSwitchType = type;
 
-			if (type !== 4) {
+			if (type !== 4 && !$scope.config.inline) {
 				angular.forEach($scope.tabService.tabs, function(item) {
 					item.active = false;
 				});
@@ -13582,7 +13582,7 @@ zaa.factory('HtmlStorage', function() {
 			}
 		};
 
-		/********** EXPORT *////
+		/********** EXPORT ****/
 
 		$scope.exportLoading = false;
 
