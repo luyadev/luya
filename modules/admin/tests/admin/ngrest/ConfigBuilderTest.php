@@ -155,7 +155,7 @@ class ConfigBuilderTest extends AdminTestCase
     public function testOnFinish()
     {
         $configData = $this->getConfig();
-        $ngRestConfig = Yii::createObject(['class' => '\luya\admin\ngrest\Config', 'apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
+        $ngRestConfig = Yii::createObject(['class' => '\luya\admin\ngrest\Config', 'apiEndpoint' => 'api-admin-test', 'primaryKey' => ['id']]);
         //$ngRestConfig = new \admin\ngrest\Config('api-admin-test', 'id');
         $this->assertEquals(false, $ngRestConfig->hasField('list', 'id'));
         $ngRestConfig->setConfig($configData);

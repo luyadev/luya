@@ -323,11 +323,12 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function genericSearch($searchQuery)
     {
         $fields = $this->genericSearchFields();
-        $pk = $this->getNgRestPrimaryKey();
         
-        // add pk to fields list automatically to make click able state providers
-        if (!in_array($pk, $fields)) {
-            $fields[] = $pk;
+        foreach ($this->getNgRestPrimaryKey() as $pk) {
+	        // add pk to fields list automatically to make click able state providers
+	        if (!in_array($pk, $fields)) {
+	            $fields[] = $pk;
+	        }
         }
         
         // create active query object
