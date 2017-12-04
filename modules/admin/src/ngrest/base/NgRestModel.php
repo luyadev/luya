@@ -672,12 +672,18 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             }
             
             // generate relations
-            $rel = [];
             foreach ($this->ngRestRelations() as $key => $item) {
-                // generate RelationObject class.
-                $rel[] = ['label' => $item['label'], 'tabLabelAttribute' => isset($item['tabLabelAttribute']) ? $item['tabLabelAttribute'] : null, 'relationLink' => $item['dataProvider']->link, 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->className())];
+                /** @var $item \luya\admin\ngrest\base\NgRestRelationInterface */
+                if (!$item instanceof NgRestRelation) {
+                    if (!isset($item['class'])) {
+                        $item['class'] = 'luya\admin\ngrest\base\NgRestRelation';
+                    }
+                    $item = Yii::createObject($item);
+                }
+                $item->setModelClass($this->className());
+                $item->setArrayIndex($key);
+                $config->setRelation($item);
             }
-            $config->setRelations($rel);
             
             $this->_config = $config;
         }

@@ -13766,7 +13766,7 @@ zaa.factory('HtmlStorage', function() {
 				
 				var linkDefintion = definition.relationLink;
 				
-				if (linkDefintion.hasOwnProperty(field)) {
+				if (linkDefintion !== null && linkDefintion.hasOwnProperty(field)) {
 					return parseInt($scope.config.relationCall.id);
 				}
 			}

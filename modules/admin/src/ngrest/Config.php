@@ -6,6 +6,7 @@ use luya\helpers\ArrayHelper;
 use luya\admin\Module;
 use yii\base\InvalidConfigException;
 use yii\base\BaseObject;
+use luya\admin\ngrest\base\NgRestRelation;
 
 /**
  * Defines and holds an NgRest Config.
@@ -64,18 +65,32 @@ class Config extends BaseObject implements ConfigInterface
     /**
      * @inheritdoc
      */
-    public function getRelataions()
+    public function getRelations()
     {
-        return $this->_relations;
+        $array = [];
+        
+        foreach ($this->_relations as $relation) {
+            /** @var $relation \luya\admin\ngrest\base\NgRestRelationInterface */
+            $array[] = [
+                'label' => $relation->getLabel(),
+                'apiEndpoint' => $relation->getApiEndpoint(),
+                'arrayIndex' => $relation->getArrayIndex(),
+                'modelClass' => $relation->getModelClass(),
+                'tabLabelAttribute' => $relation->getTabLabelAttribute(),
+                'relationLink' => $relation->getRelationLink(),
+            ];
+        }
+        
+        return $array;
     }
 
     /**
      * 
      * @param array $relations
      */
-    public function setRelations(array $relations)
+    public function setRelation(NgRestRelation $relation)
     {
-        $this->_relations = $relations;
+        $this->_relations[] = $relation;
     }
     
     private $_apiEndpoint;
