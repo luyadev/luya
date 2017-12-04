@@ -39,6 +39,9 @@ class Config extends BaseObject implements ConfigInterface
 {
     private $_config = [];
     
+    /**
+     * @inheritdoc
+     */
     public function setConfig(array $config)
     {
         if (!empty($this->_config)) {
@@ -48,6 +51,9 @@ class Config extends BaseObject implements ConfigInterface
         $this->_config = $config;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getConfig()
     {
         return $this->_config;
@@ -55,11 +61,18 @@ class Config extends BaseObject implements ConfigInterface
     
     private $_relations = [];
     
+    /**
+     * @inheritdoc
+     */
     public function getRelataions()
     {
         return $this->_relations;
     }
 
+    /**
+     * 
+     * @param array $relations
+     */
     public function setRelations(array $relations)
     {
         $this->_relations = $relations;
@@ -67,11 +80,18 @@ class Config extends BaseObject implements ConfigInterface
     
     private $_apiEndpoint;
     
+    /**
+     * @inheritdoc
+     */
     public function getApiEndpoint()
     {
         return $this->_apiEndpoint;
     }
     
+    /**
+     * 
+     * @param unknown $apiEndpoint
+     */
     public function setApiEndpoint($apiEndpoint)
     {
         $this->_apiEndpoint = $apiEndpoint;
@@ -79,23 +99,47 @@ class Config extends BaseObject implements ConfigInterface
     
     private $_attributeGroups = false;
     
+    /**
+     * @inheritdoc
+     */
     public function getAttributeGroups()
     {
         return $this->_attributeGroups;
     }
     
+    /**
+     * 
+     * @param array $groups
+     */
     public function setAttributeGroups(array $groups)
     {
         $this->_attributeGroups = $groups;
     }
     
+    private $_attributeLabels;
+    
+    /**
+     * @inheritdoc
+     */
+    public function setAttributeLabels(array $labels)
+    {
+        $this->_attributeLabels = $labels;   
+    }
+    
     private $_filters = false;
     
+    /**
+     * @inheritdoc
+     */
     public function getFilters()
     {
         return $this->_filters;
     }
     
+    /**
+     * 
+     * @param array $filters
+     */
     public function setFilters(array $filters)
     {
         $this->_filters = $filters;
@@ -103,23 +147,39 @@ class Config extends BaseObject implements ConfigInterface
     
     private $_defaultOrder;
     
+    /**
+     * 
+     * @return unknown
+     */
     public function getDefaultOrder()
     {
         return $this->_defaultOrder;
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \luya\admin\ngrest\ConfigInterface::setDefaultOrder()
+     */
     public function setDefaultOrder($defaultOrder)
     {
         $this->_defaultOrder = $defaultOrder;
     }
     
     private $_groupByField;
-    
+
+    /**
+     * @inheritdoc
+     */
     public function getGroupByField()
     {
         return $this->_groupByField;
     }
     
+    /**
+     * 
+     * @param unknown $groupByField
+     */
     public function setGroupByField($groupByField)
     {
         $this->_groupByField = $groupByField;
@@ -138,17 +198,27 @@ class Config extends BaseObject implements ConfigInterface
     }
     
     private $_primaryKey;
-    
+
+    /**
+     * @inheritdoc
+     */
     public function getPrimaryKey()
     {
         return $this->_primaryKey;
     }
     
+    /**
+     * 
+     * @param unknown $key
+     */
     public function setPrimaryKey($key)
     {
         $this->_primaryKey = $key;
     }
-    
+
+    /**
+     * @inheritdoc
+     */
     public function getDefaultOrderField()
     {
         if (!$this->getDefaultOrder()) {
@@ -158,6 +228,9 @@ class Config extends BaseObject implements ConfigInterface
         return key($this->getDefaultOrder());
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getDefaultOrderDirection()
     {
         if (!$this->getDefaultOrder()) {
@@ -179,6 +252,9 @@ class Config extends BaseObject implements ConfigInterface
 
     private $_hash;
     
+    /**
+     * @inheritdoc
+     */
     public function getHash()
     {
         if ($this->_hash === null) {
@@ -188,26 +264,55 @@ class Config extends BaseObject implements ConfigInterface
         return $this->_hash;
     }
 
+    /**
+     * 
+     * @param unknown $pointer
+     * @return boolean
+     */
     public function hasPointer($pointer)
     {
         return array_key_exists($pointer, $this->_config);
     }
 
+    /**
+     * 
+     * @param unknown $pointer
+     * @param boolean $defaultValue
+     * @return string
+     */
     public function getPointer($pointer, $defaultValue = false)
     {
         return ($this->hasPointer($pointer)) ? $this->_config[$pointer] : $defaultValue;
     }
 
+    /**
+     * 
+     * @param unknown $pointer
+     * @param unknown $field
+     * @return boolean
+     */
     public function hasField($pointer, $field)
     {
         return ($this->getPointer($pointer)) ? array_key_exists($field, $this->_config[$pointer]) : false;
     }
 
+    /**
+     * 
+     * @param unknown $pointer
+     * @param unknown $field
+     * @return boolean
+     */
     public function getField($pointer, $field)
     {
         return ($this->hasField($pointer, $field)) ? $this->_config[$pointer][$field] : false;
     }
-    
+
+    /**
+     * 
+     * @param unknown $pointer
+     * @param array $fields
+     * @return boolean[]
+     */
     public function getFields($pointer, array $fields)
     {
         $data = [];
@@ -240,6 +345,13 @@ class Config extends BaseObject implements ConfigInterface
         return ($this->hasPointer('options') && array_key_exists($key, $this->_config['options'])) ? $this->_config['options'][$key] : false;
     }
 
+    /**
+     * 
+     * @param unknown $pointer
+     * @param unknown $field
+     * @param array $options
+     * @return boolean
+     */
     public function addField($pointer, $field, array $options = [])
     {
         if ($this->hasField($pointer, $field)) {
@@ -264,6 +376,12 @@ class Config extends BaseObject implements ConfigInterface
         return true;
     }
 
+    /**
+     * 
+     * @param unknown $fieldName
+     * @param unknown $optionKey
+     * @param unknown $optionValue
+     */
     public function appendFieldOption($fieldName, $optionKey, $optionValue)
     {
         foreach ($this->getConfig() as $pointer => $fields) {
@@ -279,6 +397,11 @@ class Config extends BaseObject implements ConfigInterface
         }
     }
 
+    /**
+     * Whether delete is enabled or not.
+     * 
+     * @return boolean
+     */
     public function isDeletable()
     {
         return ($this->getPointer('delete') === true) ? true : false;
@@ -341,6 +464,9 @@ class Config extends BaseObject implements ConfigInterface
         return $this->_extraFields;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getPointerExtraFields($pointer)
     {
         $extraFields = [];
@@ -352,13 +478,24 @@ class Config extends BaseObject implements ConfigInterface
         return $extraFields;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function onFinish()
     {
         foreach ($this->primaryKey as $pk) {
             if (!$this->hasField('list', $pk)) {
+                $alias = $pk;
+                
+                if (array_key_exists($alias, $this->_attributeLabels)) {
+                    $alias = $this->_attributeLabels[$alias];
+                } elseif (strtolower($alias) == 'id') {
+                    $alias = Module::t('model_pk_id'); // use default translation for IDs if not label is given
+                }
+                
                 $this->addField('list', $pk, [
                     'name' => $pk,
-                    'alias' => $pk,
+                    'alias' => $alias,
                     'type' => [
                         'class' => 'luya\admin\ngrest\plugins\Text',
                         'args' => [],

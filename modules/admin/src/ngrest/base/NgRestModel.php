@@ -644,9 +644,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     {
         if ($this->_config == null) {
             $config = new Config();
-            $config->apiEndpoint = static::ngRestApiEndpoint();
-            $config->primaryKey = $this->getNgRestPrimaryKey();
             
+            // Generate config builder object
             $configBuilder = new ConfigBuilder(static::class);
             $this->ngRestConfig($configBuilder);
             $config->setConfig($configBuilder->getConfig());
@@ -654,28 +653,27 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
 
-            // COPY FROM NgRestController to Builder of the config
-            // ensure what must be removed and added from outside
-            $config->filters = $this->ngRestFilters();
-            $config->defaultOrder = $this->ngRestListOrder();
-            
-            
-            $config->attributeGroups = $this->ngRestAttributeGroups();
-            $config->groupByField = $this->ngRestGroupByField();
-            
-            $rel = [];
+            // copy model data into config
+            $config->setApiEndpoint(static::ngRestApiEndpoint());
+            $config->setPrimaryKey($this->getNgRestPrimaryKey());
+            $config->setFilters($this->ngRestFilters());
+            $config->setDefaultOrder($this->ngRestListOrder());
+            $config->setAttributeGroups($this->ngRestAttributeGroups());
+            $config->setGroupByField($this->ngRestGroupByField());
+            $config->setTableName($this->tableName());
+            $config->setAttributeLabels($this->attributeLabels());
             
             // ensure relations are made not on composite table.
             if ($this->ngRestRelations() && count($this->getNgRestPrimaryKey()) > 1) {
                 throw new InvalidConfigException("You can not use the ngRestRelations() on composite key model.");
             }
             
+            // generate relations
+            $rel = [];
             foreach ($this->ngRestRelations() as $key => $item) {
                 $rel[] = ['label' => $item['label'], 'relationLink' => $item['dataProvider']->link, 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->className())];
             }
-            
-            $config->relations = $rel;
-            $config->tableName = $this->tableName();
+            $config->setRelations($rel);
             
             $this->_config = $config;
         }

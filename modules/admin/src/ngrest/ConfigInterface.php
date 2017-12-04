@@ -43,4 +43,6 @@ interface ConfigInterface
     public function getApiEndpoint();
 
     public function getRelataions();
+    
+    public function setAttributeLabels(array $labels);
 }
