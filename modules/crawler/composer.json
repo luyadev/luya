@@ -16,8 +16,8 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-		"fabpot/goutte" : "^3.1",
-		"jakeasmith/http_build_url" : "~1.0",
+		"fabpot/goutte" : "~3.1.0",
+		"jakeasmith/http_build_url" : "~1.0.0",
 		"nadar/stemming" : "~1.0.0"
 	},
 	"require-dev" : {
