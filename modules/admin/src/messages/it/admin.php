@@ -259,4 +259,9 @@ return [
     'upload_err_message_6' => 'Manca una cartella temporanea.',
     'upload_err_message_7' => 'Impossibile salvare il file su disco.',
     'upload_err_message_8' => 'Un\'estensione PHP ha stoppato l\'upload del file.',
+    'model_config_atr_name' => 'Identifier',
+    'model_config_atr_name_hint' => 'Unique identifier for this variable. You can access system config with Config::get(identifier) in your application.',
+    'model_config_atr_value' => 'Value',
+    'model_config_atr_is_system' => 'Is system',
+    'menu_system_item_config' => 'Config variables'
 ];

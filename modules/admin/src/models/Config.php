@@ -5,6 +5,7 @@ namespace luya\admin\models;
 use yii\db\ActiveRecord;
 use luya\traits\RegistryTrait;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\Module;
 
 /**
  * This is the model class for table "admin_config".
@@ -59,9 +60,16 @@ final class Config extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
-            'value' => 'Value',
-            'is_system' => 'System Config',
+            'name' => Module::t('model_config_atr_name'),
+            'value' => Module::t('model_config_atr_value'),
+            'is_system' => Module::t('model_config_atr_is_system'),
+        ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'name' => Module::t('model_config_atr_name_hint'),
         ];
     }
     

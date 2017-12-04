@@ -260,7 +260,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
                     ->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')
                     ->itemApi('menu_access_item_group', 'admin/group/index', 'group', 'api-admin-group')
                 ->group('menu_group_system')
-                    ->itemApi('Config', 'admin/config/index', 'label', 'api-admin-config')
+                    ->itemApi('menu_system_item_config', 'admin/config/index', 'storage', 'api-admin-config')
                     ->itemApi('menu_system_item_language', 'admin/lang/index', 'language', 'api-admin-lang')
                     ->itemApi('menu_system_item_tags', 'admin/tag/index', 'view_list', 'api-admin-tag')
                     ->itemApi('menu_system_logger', 'admin/logger/index', 'notifications', 'api-admin-logger')

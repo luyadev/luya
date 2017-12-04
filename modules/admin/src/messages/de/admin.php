@@ -271,4 +271,9 @@ return [
     'upload_err_message_6' => 'Der Temporäre Ordner zum speichern der Datei fehlt.',
     'upload_err_message_7' => 'Fehler beim speichern der Datei auf dem Datenträger.',
     'upload_err_message_8' => 'Eine PHP extension hat den Datei upload prozess gestoppt.',
+    'model_config_atr_name' => 'Identifier',
+    'model_config_atr_name_hint' => 'Unique identifier for this variable. You can access system config with Config::get(identifier) in your application.',
+    'model_config_atr_value' => 'Value',
+    'model_config_atr_is_system' => 'Is system',
+    'menu_system_item_config' => 'Config variables'
 ];
