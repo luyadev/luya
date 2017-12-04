@@ -79,7 +79,7 @@ class Event extends NgRestModel
     public function ngRestRelations()
     {
         return [
-            ['label' => 'Prices', 'apiEndpoint' => Price::ngRestApiEndpoint(), 'dataProvider' => $this->getPrices()],
+            ['label' => 'Prices', 'tabLabelAttribute' => 'name', 'apiEndpoint' => Price::ngRestApiEndpoint(), 'dataProvider' => $this->getPrices()],
         ];
     }
 

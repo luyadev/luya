@@ -68,6 +68,12 @@
 
 			$scope.switchTo(4);
 		};
+		
+		$scope.addAndswitchToTab = function(pk, route, index, label, model) {
+			$scope.tabService.addTab(pk, route, index, label, model);
+			
+			$scope.switchTo(4);
+		}
 
 		$scope.closeTab = function(tab, index) {
 			$scope.tabService.remove(index, $scope);

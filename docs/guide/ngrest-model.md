@@ -237,6 +237,8 @@ The above example will use the `getSales()` method of the current model where yo
 
 > Tip: If you generate an NgRest model for a relation which is not used in any other situations you can hide those items from the menu, but not from the permission system. To hide en element add the hiddenInMenu option in the {{\luya\admin\base\Module::getMenu()}} method of the module as following: `itemApi('name', 'route', 'icon', 'api', ['hiddenInMenu' => true])`.
 
+If you like to display the name of the current element in the tabe you can define `'tabLabelAttribute' => 'fieldName'` where fieldName is the name of the attribute in the list overview.
+
 ## Soft Deletion 
 
 We have also added a soft delete trait {{\luya\admin\traits\SoftDeleteTrait}} which is going to override the default implementation of the `delete` method. When enabled and configure, the soft delete trait will only mark the datarecord to `is_deleted = 1` instead of removing it from the database.

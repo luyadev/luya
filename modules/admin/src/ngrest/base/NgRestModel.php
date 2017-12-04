@@ -200,6 +200,9 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * The above example will use the `getSales()` method of the current model where you are implementing this relation. The `getSales()` must return
      * an {{yii\db\QueryInterface}} Object, for example you can use `$this->hasMany(Model, ['key' => 'rel'])` or `new \yii\db\Query()`.
      *
+     * You can also define the `tabLabelAttribute` key with the name of a field you like the display as tab name. Assuming your table as a column `title` you
+     * can set `'tabLabelAttribute'  => 'title'` in order to display this value in the tab label.
+     *
      * @return array
      */
     public function ngRestRelations()
@@ -671,7 +674,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             // generate relations
             $rel = [];
             foreach ($this->ngRestRelations() as $key => $item) {
-                $rel[] = ['label' => $item['label'], 'relationLink' => $item['dataProvider']->link, 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->className())];
+                // generate RelationObject class.
+                $rel[] = ['label' => $item['label'], 'tabLabelAttribute' => isset($item['tabLabelAttribute']) ? $item['tabLabelAttribute'] : null, 'relationLink' => $item['dataProvider']->link, 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->className())];
             }
             $config->setRelations($rel);
             
