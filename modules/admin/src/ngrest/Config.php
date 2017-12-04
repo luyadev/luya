@@ -116,7 +116,7 @@ class Config extends BaseObject implements ConfigInterface
         $this->_attributeGroups = $groups;
     }
     
-    private $_attributeLabels;
+    private $_attributeLabels = [];
     
     /**
      * @inheritdoc
