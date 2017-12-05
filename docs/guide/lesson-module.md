@@ -1,12 +1,12 @@
 # How to create a LUYA module
 
-In this lesson we're going to create a module which handles all basic needs for maintaining a simple address book. We'll create the module, learn about the CRUD interface, establish an URL route and learning about the two ways of a possible module frontend presentation. 
+In this lesson we are going to create a module which handles all basic needs for maintaining a simple address book. We will create the module, learn about the CRUD interface, establish an URL route and learning about the two ways of a possible module frontend presentation. 
 
 Our starting point is a fresh [LUYA kickstarter installation](https://luya.io/guide/install).
 
 ## Create the module using the LUYA code wizard
 
-As described in the [LUYA  guide](https://luya.io/guide/app-admin-module) we'll create the module by using the LUYA code wizard:
+As described in the [LUYA  guide](https://luya.io/guide/app-admin-module) we will create the module by using the LUYA code wizard:
 
 `./vendor/bin/luya module/create`
 
@@ -20,7 +20,7 @@ After successfully executing you'll notice the created file structure in the `mo
 
 ## Configure the module
 
-To register the module in LUYA you [have to edit the config file](https://luya.io/guide/app-module) according to your working environment. We'll edit the `configs/env-local.php` because we're developing in the local environment. To register both modules (admin and frontend), we're adding the `addressbook` and `addressbookadmin` module to the existent module section in the config file:
+To register the module in LUYA you [have to edit the config file](https://luya.io/guide/app-module) according to your working environment. We will edit the `configs/env-local.php` because we are developing in the local environment. To register both modules (admin and frontend), we are adding the `addressbook` and `addressbookadmin` module to the existent module section in the config file:
 
 ```php
 'modules' => [
@@ -33,19 +33,19 @@ To register the module in LUYA you [have to edit the config file](https://luya.i
 
 ## Creating the models and migrations
 
-Our first step is the creation of our data model and the migration files to create the associated database tables.
-Again, we're using the code wizard to [create the migration file](https://luya.io/guide/ngrest-concept) for our registered admin module *addressbookadmin*. We'll need two tables, one for the contact data itself and one for the different contact groups.
+Our first step for the creation of our data model and the migration files is to create the associated database tables.
+Again, we're using the code wizard to [create the migration file](https://luya.io/guide/ngrest-concept) for our registered admin module **addressbookadmin**. We will need two tables, one for the contact data itself and one for the different contact groups.
 
 ```sh
 ./vendor/bin/luya migrate/create addressbook_contact addressbookadmin
 ./vendor/bin/luya migrate/create addressbook_group addressbookadmin
 ```
 
-You'll find both migration files in `modules/addressbook/admin/migrations/`.
+You will find both migration files in `modules/addressbook/admin/migrations/`.
 
 ### Adding migration details
 
-We'll provide a basic data set (first name, last name, etc.) for the contact details and only a name and id for the group table. 
+We will provide a basic data set (first name, last name, etc.) for the contact details and only a name and id for the group table. 
 
 Your migration file should look like this:
 
@@ -90,7 +90,7 @@ Note that your migration class name will differ because of the included timestam
 
 ### Executing the migrations
 
-To create the database tables from the migration files, you've to execute the `migrate` command:
+To create the database tables from the migration files, you have to execute the `migrate` console command:
 
 ```sh
 ./vendor/bin/luya migrate
@@ -98,21 +98,21 @@ To create the database tables from the migration files, you've to execute the `m
 
 ### Creating the models
 
-Again we're using the LUYA code wizard to help us create the corresponding models with a preconfigured CRUD view for the database tables:
+Again we are using the LUYA code wizard to help us create the corresponding models with a pre configured CRUD view for the database tables:
 
 ```sh
 ./vendor/bin/luya admin/crud/create
 ```
 
-Below you see how to use the wizard to automatically create the contact model`models/Contact.php` and all associated files like the API controller `modules/addressbook/admin/apis/ContactController.php` and the controller `modules/addressbook/admin/controllers/ContactController.php`:
+Below you see how to use the wizard to automatically create the contact model `models/Contact.php` and all associated files like the API controller `modules/addressbook/admin/apis/ContactController.php` and the controller `modules/addressbook/admin/controllers/ContactController.php`:
 
 ![Creating contact model](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/addressbook-contact-modelcreate.gif "Creating contact model")
 
 Repeat the process for the `Group` model.
 
-## Adding the module to the admin menue
+## Adding the module to the admin menu
 
-In order to see the new module, you've to define the menue appearance in the `modules/addressbook/admin/Module.php`. After succesfully executing the `admin/crud/create` command you'll also get a generated code proposal (green color) in the command line (see the GIF above). We want to see both the contacts and the groups in the admin menue and have to modify the generated code accordingly.
+In order to see the new module, you have to define the menu appearance in the `modules/addressbook/admin/Module.php`. After successfully executing the `admin/crud/create` command you will also get a generated code proposal (green color) in the command line (see the GIF above). We want to see both the contacts and the groups in the admin menu and have to modify the generated code accordingly.
 
 Your admin `Module.php` should look like this:
 
@@ -144,19 +144,19 @@ class Module extends \luya\admin\base\Module
 
 ## Importing the module
 
-Finally, we're going to import the new modules with the import command:
+Finally, we are going to import the new modules with the import command:
 
 ```
 ./vendor/bin/luya import
 ```
 
-Before we'll see the module in the admin view, we've to set the permissions for the `addressbookadmin` for our user in `System/Groups/Permissions`:
+Before we will see the module in the admin view, we have to set the permissions for the `addressbookadmin` for our user in `System/Groups/Permissions`:
 
 ![Settings permissions](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/addressbook-permissions.gif "Settings permissions")
 
 ## Linking the group table in the contact table
 
-We don't want to put the group id in a contact record. In order to get a nice dropdown with all available `Groups`, we've to modify the `ngRestAttributeTypes()` function in the `Contact.php` model. We'll use the [selectModel](https://luya.io/guide/ngrest-plugin-select) attribute type for the field `group_id`. 
+We do not want to put the group ID in a contact record. In order to get a nice dropdown with all available `Groups`, we have to modify the `ngRestAttributeTypes()` function in the `Contact.php` model. We will use the [selectModel](https://luya.io/guide/ngrest-plugin-select) attribute type for the field `group_id`. 
 
 Our `ngRestAttributeTypes()` function should look like this:
 
@@ -183,30 +183,30 @@ public function ngRestAttributeTypes()
     }
 ```
 
-Now add a new contact record in the admin panel under `Addressbook/Contact/Add` and notice the dropdown under the label `Group ID`. Don't forget to create some test groups before. 
+Now add a new contact record in the admin panel under `Addressbook/Contact/Add` and notice the dropdown under the label `Group ID`. Do not forget to create some test groups before. 
 Change the labels in the `attributeLabels()` function to your liking.
 
 ## Frontend presentation
 
-After adding some sample data it's time to add a representation of our module to the frontend. To do this we'll have two options: using a module page or using the module block. Both cases need an implementation of the [frontend module](https://luya.io/guide/app-module-frontend)
+After adding some sample data it is time to add a representation of our module to the frontend. To do this we will have two options: using a module page or using the module block. Both cases need an implementation of the [frontend module](https://luya.io/guide/app-module-frontend)
 
 ### Module block 
 
-If you're using the module block to render the frontend module, you can place other blocks above and below because you're in the CMS context. This is most useful for simple modules which have only one view (i.e. a simple form). If you're linking a details view inside the module view, you'll not leave the page and detail view will get rendered in the same block. Another disadvantage is the static URL to the page. No matter what you're doing in the module block view, the site URL won't change as you're still in the context of the CMS page where you've placed the module block.
+If you're using the module block to render the frontend module, you can place other blocks above and below because you are in the CMS context. This is most useful for simple modules which have only one view (e.g. a simple form). If you are linking a details view inside the module view, you will not leave the page and detail view will get rendered in the same block. Another disadvantage is the static URL to the page. No matter what you are doing in the module block view, the site URL will not change as you are still in the context of the CMS page where you have placed the module block.
 
 ### Module page
 
-Using a module page offers all possibilities: you can define your own layout, you've full control of the URL routes and you've control over the whole page not just a part of it (from setting the page title tag to defining all detail views). 
+Using a module page offers all possibilities: you can define your own layout, you have full control of the URL routes and you have control over the whole page not just a part of it (from setting the page title tag to defining all detail views). 
 
 ## Set up the frontend module
 
-We're choosing the module page path because we want full control over the site and we want to define two views, a list and a detail view. These two views should fill the whole page and not just a part of it (like a module block).
+We are choosing the module page path because we want full control over the site and we want to define two views, a list and a detail view. These two views should fill the whole page and not just a part of it (like a module block).
 
 ### Setting up the DefaultController
 
-First we want the functionality of a list view of all contacts. We're using an [active data provider](http://www.yiiframework.com/doc-2.0/guide-output-data-providers.html) for this task. Additionally we want the data output to be grouped by the defined contact groups. After fetching the correct contacts for each group and configuring our desired page size and sort order, we're rendering the *index* view and assigning our active data providers and group models.
+First we want the functionality of a list view of all contacts. We are using an [active data provider](http://www.yiiframework.com/doc-2.0/guide-output-data-providers.html) for this task. Additionally we want the data output to be grouped by the defined contact groups. After fetching the correct contacts for each group and configuring our desired page size and sort order, we are rendering the **index** view and assigning our active data providers and group models.
 
-We also want a detail view of a selected contact. For this we're defining another action function: *actionDetail* with using the contact id as parameter. We're querying the selected record by the assigned id and render it with the *detail* view template.
+We also want a detail view of a selected contact. For this we are defining another action function: **actionDetail** with using the contact id as parameter. We are querying the selected record by the assigned id and render it with the **detail** view template.
 
 ```php
 <?php
@@ -260,7 +260,7 @@ class DefaultController extends Controller
 
 ### Setting up the index view
 
-For our first view, the list view, we'll create the `views/default/index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our *$dataproviders* and *$groups* which were defined in our *DefaultController* above. We parse each contact group, print the group name and render the contact data from the data provider for the current group. We're setting up some styling options for the grid view and define some custom row options as we want to be able to click on a table entry and see the mouse hovering. For the *onclick* event we define the `location.href` change to link to the detail view and some background color changes for the *onmouseover* and *onmouseout* event. This is how it looks in the end:
+For our first view, the list view, we will create the `views/default/index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our **$dataproviders** and **$groups** which were defined in our **DefaultController** above. We parse each contact group, print the group name and render the contact data from the data provider for the current group. We are setting up some styling options for the grid view and define some custom row options as we want to be able to click on a table entry and see the mouse hovering. For the **onclick** event we define the `location.href` change to link to the detail view and some background color changes for the **onmouseover** and **onmouseout** event. This is how it looks in the end:
 
 ```php
 <? foreach ($groups as $group): ?>
@@ -301,11 +301,11 @@ For our first view, the list view, we'll create the `views/default/index.php` an
 <? endforeach; ?>
 ```
 
-Again you should work with style sheets, CSS class names and external javascript files, but for the sake of a short example we'll define everything inline.
+Again you should work with style sheets, CSS class names and external javascript files but for the sake of a short example we will define everything inline.
 
 ### Setting up the detail view
 
-When clicking on an entry in the list view, we'll end up in our detail view. To be able to get back fast, we're creating a back button with the correct URL route to our list view. Our detail view uses a Yii widget again: the [DetailView](http://www.yiiframework.com/doc-2.0/yii-widgets-detailview.html) widget.
+When clicking on an entry in the list view, we will end up in our detail view. To be able to get back fast, we are creating a back button with the correct URL route to our list view. Our detail view uses a Yii2 widget again: the [DetailView](http://www.yiiframework.com/doc-2.0/yii-widgets-detailview.html) widget.
 
 ```php
 <a href="<?= $route = \luya\helpers\Url::toRoute(['/addressbook']); ?>">Back</a>
@@ -323,11 +323,11 @@ When clicking on an entry in the list view, we'll end up in our detail view. To 
 
 ## Result
 
-After setting up the frontend module, we've to create a module page and choose our new `addressbook` module:
+After setting up the frontend module, we have to create a module page and choose our new `addressbook` module:
 
 ![Creating module page](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/addressbook-createpage.gif "Create module page")
 
-With this last step, we've created our own module, more precisely two modules: `addressbook` for frontend rendering and `addressbookadmin` for the administration purpose. For the module `addressbookadmin` we've created a migration file and from this we've automatically generated the needed data tables. Using the LUYA code wizard, we also created the models with the CRUD view for each data table. We also learned how to link the `group` names to the `group_id` field in the `Contact` CRUD view and rendering them as a dropdown select.
+With this last step, we have created our own module, more precisely two modules: `addressbook` for frontend rendering and `addressbookadmin` for the administration purpose. For the module `addressbookadmin` we have created a migration file and from this we have automatically generated the needed data tables. Using the LUYA code wizard, we also created the models with the CRUD view for each data table. We also learned how to link the `group` names to the `group_id` field in the `Contact` CRUD view and rendering them as a dropdown select.
 For the frontend module implementation we heavily relied on Yii 2.0 great toolsets to render the table data and only added some inline styling and hover functionality.
 
 Depending on your test data, the final result will look something like this in the frontend view:

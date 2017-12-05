@@ -1,10 +1,10 @@
-# Create a Custom Angular Controller and Admin View
+# Create a custom AngularJS controller and an admin view
 
-Sometimes you just want to create your own view within the admin module with your own angular controller, view and api responses. Therefore this lessions shows you what you need, how to register and create a quick basic view within minutes.
+Sometimes you just want to create your own view within the admin module with your own AngularJS controller, view and api responses. Therefore this lessons shows you what is needed, how to register and create a quick basic view within minutes.
 
-This lession assumes, that you already have an admin module registered and running, see [[lesson-module.md]].
+This lesson assumes, that you already have an admin UI module registered and running, see [[lesson-module.md]].
 
-## Register Menu
+## Register menu
 
 Let your menu know that you have a new menu node.
 
@@ -20,7 +20,7 @@ When clicking on the menu point the route `myadminmodule/finder/index` will be t
 
 > More about permissions and menus in the [[app-admin-module-permission.md]] section.
 
-## Create Controller
+## Create controller
 
 Creating the controller `FinderController` with an `index` action and a api callable action named `data`:
 
@@ -55,7 +55,7 @@ class FinderController extends Controller
 }
 ```
 
-## Create View File
+## Create view file
 
 Create a the view file for the index action of the controller:
 
@@ -84,4 +84,4 @@ zaa.bootstrap.register('MyController', function($scope, $http) {
 </div>
 ```
 
-Its very common to just write the angular controller code inside the view, of course you can also make a javascript file add this to an asset an register the [[app-admin-module-assets.md]].
+Its very common to just write the angular controller code inside the view, of course you can also make a javascript file and add this to an asset and register the [[app-admin-module-assets.md]].
