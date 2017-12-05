@@ -7,7 +7,6 @@
     right: 0;
     top: 0;
     z-index: z-index(overlay);
-
 }
 
 .loading-overlay-title {
@@ -16,15 +15,4 @@
     margin: 150px 0 0 0;
     text-align: center;
     color: $white;
-}
-
-.loading-logo {
-    background: url('../../images/luyalogo-animation-6.gif');
-    background-size: cover;
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    top: 48%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
 }

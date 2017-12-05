@@ -32,7 +32,7 @@ $spinner = '<svg version="1.1"
 
 <div class="login-frame">
     <div class="login-logo">
-        <img src="<?= $this->getAssetUrl("luya\admin\assets\Login") .'/images/luyalogo_destructed.png' ?>" alt="<?= Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?>" />
+        <img src="<?= $this->getAssetUrl("luya\admin\assets\Login") .'/images/logo/luya_logo.svg' ?>" alt="<?= Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?>" />
     </div>
     <!-- normal login form -->
     <form class="login-form" method="post" id="loginForm">
