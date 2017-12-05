@@ -1,10 +1,10 @@
-# Dropdown Selection
+# Dropdown selection
 
 The {{luya\admin\ngrest\plugins\SelectArray}} and {{luya\admin\ngrest\plugins\SelectModel}} plugins generate a dropdown selection list from an array or a database table.
 
 ### Select from an Array
 
-Create a dropdown selection based on an assoc array:
+Create a dropdown selection based on an associated array:
 
 ```php
 public function ngrestAttributeTypes()
@@ -16,9 +16,9 @@ public function ngrestAttributeTypes()
 }
 ```
 
-### Select from a Model
+### Select from a model
 
-Create a dropdown selection based on an {{yii\db\ActiveRecord}} model class:
+Create a dropdown selection based on a {{yii\db\ActiveRecord}} model class:
 
 ```php
 public function ngrestAttributeTypes()
@@ -35,9 +35,9 @@ public function ngrestAttributeTypes()
 }
 ```
 
-You can define more options for the select model like where statements and which fields should be displayed take a look at class api {{luya\admin\ngrest\plugins\SelectModel}} for more informations.
+You can define more options for the select model like `where statements and which fields should be displayed take a look at class api {{luya\admin\ngrest\plugins\SelectModel}} for more information.
 
-In order to generate a custom labelField you can also pass a closure function:
+In order to generate a custom label field you can also pass a closure function:
 
 ```php
 'labelField' => function($model) {
@@ -45,7 +45,7 @@ In order to generate a custom labelField you can also pass a closure function:
 }
 ```
 
-> **Attention** Keep in mind the plugin will override the default values from the database to display the rest api data.
+> **Attention** Please keep in mind the plugin will override the default values from the database to display the rest api data.
 > 
 > ```php
 > public function getCustomer()
@@ -54,7 +54,7 @@ In order to generate a custom labelField you can also pass a closure function:
 > }
 > ```
 > 
-> The above example **won't work** as the customer_id field is already observed from the `selectModel` plugin. You can always access the old data (before the after find event) like this:
+> The above example **will not work** if the customer_id field is already observed from the `selectModel` plugin. You can always access the old data (before the after find event) like this:
 > 
 > ```php
 > public function getOriginalCustomerId()
@@ -70,7 +70,7 @@ In order to generate a custom labelField you can also pass a closure function:
 
 ## SelectRelationActiveQuery
 
-When deailing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data, but there is no model callback for the label fields, its raw sql data based. In order to use this plugin you need to have a has many relation.
+When dealing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data but there is no model callback for the label fields, it returns raw sql data. In order to use this plugin you need to have a `hasMany` relation.
 
 ```php
 'user_id' => [
