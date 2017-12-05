@@ -10,6 +10,7 @@ This document will help you upgrading from a LUYA Version into another. For more
 
 A few changes you will surely notice when upgrading to version 1.0.0 and you should check in your application:
 
++ [#1572](https://github.com/luyadev/luya/issues/1572) CMS blocks are now deliverd trough [generic](https://github.com/luyadev/luya-generic) and [bootstrap3](https://github.com/luyadev/luya-bootstrap3) repos. Register them in your composer.json file and run the updater `./luya cms/updater/generic` afterwards.
 + Storage file `source` is now `href`, even when `toArray()` is called, like in blocks and block admin twigs. (Search for `->source`, `'source'`, `"source"`, `.source`). Why? We follow semantic naming of html structure, therefource source points to webserver accessable file directory for the file or image, link instead is used to download files (link to a file).
 + Active Windows `alias` property is now `label`, so take a look at your `ngRestActiveWindows` config in your NgRest Models. (Search for `'alias'` or `"alias"`).
 + CMS Module property `enableCompression` renamed to `contentCompression`. Check your config file.
