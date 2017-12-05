@@ -1,10 +1,10 @@
-# NgRest Config Plugins
+# NgRest config plugins
 
-An NgRest Plugin is like the type of an input. You can create selects, date pickers, file or image uploads, etc. Each NgRest Config Plugin can have its configuration options. You should read the [[ngrest-model.md]] Guide-Section to understand how to use the plugins.
+An NgRest plugin is like the type of an input which means you can create selects, date pickers, file or image uploads and more. Each NgRest Config Plugin can have its configuration options. You should read the [[ngrest-model.md]] guide section to understand how to use the plugins.
 
-### Available Plugins
+### Available plugins
 
-A few plugins can be configured, make sure to check out the class reference of the plugin to find all details.
+The plugins listed below can be configured but make sure your are familiar with the class reference of the plugin to be informed about all details.
 
 |Name            |Class|Return        |Description
 |--------------    |-----|---        |-------------
@@ -12,9 +12,9 @@ A few plugins can be configured, make sure to check out the class reference of t
 |textArray            |{{\luya\admin\ngrest\plugins\TextArray}}|array        |Multiple input type text fields.
 |textarea              |{{\luya\admin\ngrest\plugins\Textarea}}|string        |Textarea input type field.
 |password            |{{\luya\admin\ngrest\plugins\Password}}|string        |Input type password field.
-|[selectArray](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectArray}}|string    |Select Dropdown with options from input configuration.
-|[selectModel](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectModel}}|string    |Select Dropdown with options given from an Active Record Model class.
-|[selectRelationActiveQuery](ngrest-plugin-select.md)|{{luya\admin\ngrest\plugins\SelectRelationActiveQuery}}|string |Select Dropdown based on an ActiveQuery relation defintion.
+|[selectArray](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectArray}}|string    |Select dropdown with options from input configuration.
+|[selectModel](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectModel}}|string    |Select dropdown with options given from an Active Record Model class.
+|[selectRelationActiveQuery](ngrest-plugin-select.md)|{{luya\admin\ngrest\plugins\SelectRelationActiveQuery}}|string |Select dropdown based on an ActiveQuery relation definition.
 |toggleStatus       |{{\luya\admin\ngrest\plugins\ToggleStatus}}|integer/string    |Create checkbox where you can toggle on or off.
 |image                |{{\luya\admin\ngrest\plugins\Image}}|integer    |Create an image upload and returns the imageId from storage system.
 |imageArray            |{{\luya\admin\ngrest\plugins\ImageArray}}|array        |Creates an uploader for multiple images and returns an array with the image ids from the storage system.
@@ -22,13 +22,13 @@ A few plugins can be configured, make sure to check out the class reference of t
 |fileArray          |{{\luya\admin\ngrest\plugins\FileArray}}|array        |Creates an uploader for multiple files and returns an array with the file ids from the storage system.
 |checkboxList        |{{\luya\admin\ngrest\plugins\CheckboxList}}|array        |Create multiple checkboxes and return the selected items as array.
 |[checkboxRelation](ngrest-plugin-checkboxrelation.md) |{{\luya\admin\ngrest\plugins\CheckboxRelation}}|array |Create multiple checkbox based on another model with a via table.
-|[CheckboxRelationActiveQuery](ngrest-plugin-checkboxrelation.md)|{{\luya\admin\ngrest\plugins\CheckboxRelationActiveQuery}}|array |Create an Checkbox Relation based on a current existing relation definition inside the Model.
-|date                |{{\luya\admin\ngrest\plugins\Date}}|integer |Datepicker to choose date, month and year. Returns the unix timestamp of the selection.
-|datetime             |{{\luya\admin\ngrest\plugins\Datetime}}|integer |Datepicker to choose date, month, year hour and minute. Returns the unix timestamp of the selection.
+|[CheckboxRelationActiveQuery](ngrest-plugin-checkboxrelation.md)|{{\luya\admin\ngrest\plugins\CheckboxRelationActiveQuery}}|array |Create an Checkbox relation based on a current existing relation definition inside the Model.
+|date                |{{\luya\admin\ngrest\plugins\Date}}|integer |Date picker to choose date, month and year. Returns the unix timestamp of the selection.
+|datetime             |{{\luya\admin\ngrest\plugins\Datetime}}|integer |Date picker to choose date, month, year hour and minute. Returns the unix timestamp of the selection.
 |decimal            |{{\luya\admin\ngrest\plugins\Decimal}}|float    |Creates a decimal input field. First parameter defines optional step size. Default = 0.001
 |number                |{{\luya\admin\ngrest\plugins\Number}}|integer |Input field where only numbers are allowed.
-|cmsPage            |{{\luya\admin\ngrest\plugins\CmsPage}}|{{luya\cms\menu\Item}}|Cms Page selection and returns the menu component item.
-|link               |{{\luya\admin\ngrest\plugins\Link}}|{{luya\web\LinkInterface}}|Select an internal page or enter an external link, the database field must be a varchar field in order to store informations and the cms module is required.
+|cmsPage            |{{\luya\admin\ngrest\plugins\CmsPage}}|{{luya\cms\menu\Item}}|Cms page selection and returns the menu component item.
+|link               |{{\luya\admin\ngrest\plugins\Link}}|{{luya\web\LinkInterface}}|Select an internal page or enter an external link, the database field must be a varchar field in order to store information and the cms module is required.
 |slug               |{{\luya\admin\ngrest\plugins\Slug}}|string|Generates a slugified string which can be used for url rules.
 |color                |{{\luya\admin\ngrest\plugins\Color}}|string|A color wheel to pick a color.
 |sortable            |{{\luya\admin\ngrest\plugins\Sortable}}|integer|Sort items in crud list with arrow keys up/down. Commonly used in combination of {{luya\admin\traits\SortableTrait}}.
@@ -38,7 +38,7 @@ A few plugins can be configured, make sure to check out the class reference of t
 
 ## Create a custom project Plugin
 
-Sometimes you need to have project specific input behaviour. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:
+Sometimes you need to have project specific input behaviour. To achieve this you have to create your own custom NgRest plugin. First create a plugin class:
 
 ```php
 <?php
@@ -76,7 +76,8 @@ class TestPlugin extends Plugin
 }
 ```
 
-The above class is abstracted from the {{luya\admin\ngrest\base\Plugin}} which requires the {{luya\admin\ngrest\base\Plugin::renderUpdate}}, {{luya\admin\ngrest\base\Plugin::renderList}} and {{luya\admin\ngrest\base\Plugin::renderCreate}} methods which are basically taking care of the form input or the element in the crud list view. As you can see we use the helper method {{luya\admin\helpers\Angular::directive}} to return a Form Input Tag with a custom directive named `my-directive`. The directive has to be stored in an admin javascript file that you can assign by using [Admin Module Assets](app-admin-module-assets.md). For example:
+The above class is abstracted from the {{luya\admin\ngrest\base\Plugin}} which requires the {{luya\admin\ngrest\base\Plugin::renderUpdate}}, {{luya\admin\ngrest\base\Plugin::renderList}} and {{luya\admin\ngrest\base\Plugin::renderCreate}} methods which are basically taking care of the form input or the element in the crud list view. As you can see the helper method {{luya\admin\helpers\Angular::directive}} is in charge to return a form input tag with a custom directive named `my-directive`. 
+The directive has to be stored in a javascript file related to the admin UI which you can include by using [Admin Module Assets](app-admin-module-assets.md), e.g.:
 
 ```js
 zaa.directive("myDirective", function() {
@@ -98,7 +99,7 @@ zaa.directive("myDirective", function() {
 });
 ```
 
-Now in order to use the custom `TestPlugin` in your [NgRest Config Model](ngrest-model.md) you can define an extra Field which takes care of getting (list) and setting (update/create) the value in your `admin\ngrest\base\Model` ActiveRecord class model.
+Now in order to use the custom `TestPlugin` in your [NgRest config model](ngrest-model.md) you can define an extra field which takes care of getting (list) and setting (update/create) the value in your `admin\ngrest\base\Model` ActiveRecord class model.
 
 ```php
 class Product extends \luya\admin\ngrest\base\NgRestModel
@@ -107,7 +108,7 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
     
     public function setField($data)
     {
-        // This is triggered when the value from the angular api response tries to save or update the model with $data.
+        // This is triggered when the value from the AngularJS api response tries to save or update the model with $data.
     }
     
     public function getField()
@@ -136,7 +137,7 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
 }
 ```
 
-Make sure the the `field` extra field is part of the validation rules.
+Make sure the `field` extra field is part of the validation rules as mentioned below:
 
 ```php
 public function rules()
