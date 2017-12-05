@@ -9626,6 +9626,28 @@ function typeCastValue(value) {
         	}
         };
 
+        service.stack = 0;
+        
+        service.modalStackPush = function() {
+        	service.stack += 1;
+        };
+        
+        service.modalStackRemove = function() {
+        	service.stack -= 1;
+        };
+        
+        service.modalStackRemoveAll = function() {
+        	service.stack = 0;
+        };
+        
+        service.modalStackIsEmpty = function() {
+        	if (service.stack == 0) {
+        		return true;
+        	}
+        	
+        	return false;
+        };
+        
         return service;
     });
     
@@ -10941,19 +10963,9 @@ zaa.factory('HtmlStorage', function() {
             	$scope.$watch('isModalHidden', function(n, o) {
             		if (n !== o) {
             			if (n) { // is hidden
-            				if (AdminClassService.hasClassSpace('childModalBody')) {
-            					AdminClassService.removeSpace('childModalBody');
-            				} else {
-            					AdminClassService.clearSpace('modalBody');
-            					AdminClassService.removeSpace('childModalBody');
-            				}
+            				AdminClassService.modalStackRemove();
                 		} else { // is visible
-        					if (AdminClassService.getClassSpace('modalBody') == 'modal-open') {
-                				AdminClassService.setClassSpace('childModalBody', true);
-                			} else {
-                				AdminClassService.setClassSpace('modalBody', 'modal-open');
-                				AdminClassService.removeSpace('childModalBody');
-                			}
+                			AdminClassService.modalStackPush();
                 		}
             		}
             	});
@@ -10961,8 +10973,7 @@ zaa.factory('HtmlStorage', function() {
             	/* ESC Key will close ALL modals, therefore we ensure the correct spaces */
             	$scope.escModal = function() {
             		$scope.isModalHidden = true;
-            		AdminClassService.removeSpace('childModalBody');
-            		AdminClassService.clearSpace('modalBody');
+            		AdminClassService.modalStackRemoveAll();
             	};
             },
             link: function (scope, element) {

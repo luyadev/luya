@@ -218,6 +218,28 @@ function typeCastValue(value) {
         	}
         };
 
+        service.stack = 0;
+        
+        service.modalStackPush = function() {
+        	service.stack += 1;
+        };
+        
+        service.modalStackRemove = function() {
+        	service.stack -= 1;
+        };
+        
+        service.modalStackRemoveAll = function() {
+        	service.stack = 0;
+        };
+        
+        service.modalStackIsEmpty = function() {
+        	if (service.stack == 0) {
+        		return true;
+        	}
+        	
+        	return false;
+        };
+        
         return service;
     });
     
