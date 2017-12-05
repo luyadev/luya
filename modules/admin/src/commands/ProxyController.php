@@ -199,7 +199,7 @@ class ProxyController extends Command
             if ($process->start()) {
                 // as the admin_config table is synced to, we have to restore the current active config which has been used.
                 Config::set(self::CONFIG_VAR_IDENTIFIER, $identifier);
-                Config::set(self::CONFIG_VAR_IDENTIFIER, $token);
+                Config::set(self::CONFIG_VAR_TOKEN, $token);
                 Config::set(self::CONFIG_VAR_URL, $url);
                 
                 return $this->outputSuccess('Sync process has been successfully finished.');
