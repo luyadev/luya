@@ -9,7 +9,7 @@ $this->beginPage()
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?= Yii::$app->siteTitle; ?> &rsaquo; {{currentItem.alias}}</title>
+    <title ng-bind-template="<?= Yii::$app->siteTitle; ?> &rsaquo; {{currentItem.alias}}"><?= Yii::$app->siteTitle; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="<?= Url::base(true); ?>/admin" />
     <style type="text/css">
