@@ -142,6 +142,18 @@ zaa.bootstrap.register('InlineController', function($scope, $controller) {
 
 After the ActiveWindow response from the function `addToList` has received the ActiveWindow will be reloaded. This is just a very quick integration example and it does not give the user a true AngularJS experience but shows you how to deliver solutions in a very short time.
 
+When working with angular you might want to trigger some of the functions of the crud, here a list of what functions are callable and what they do:
+
+|Function|Description
+|--------|-----------
+|`$scope.$parent.closeActiveWindow()`|Close the current ActiveWindow
+|`$scope.$parent.loadList()`|Reload the active window list.
+|`$scope.$parent.activeWindowReload()`|Reload (Rerender) the ActiveWindow.
+|`$scope.$parent.toast.error(message)`|Display an error toast message.
+|`$scope.$parent.toast.success(message)`|Display a success toast message.
+|`$scope.$parent.sendActiveWindowCallback(callbackName, params)`|XHR request for given callbackName with additional params.
+
+
 ## Existing reusable ActiveWindows
 
 The admin UI of LUYA provides some basic reusable ActiveWindows which you can reuse and use out of the box. Just attach them to your NgRest config and maybe adjust some properties.
