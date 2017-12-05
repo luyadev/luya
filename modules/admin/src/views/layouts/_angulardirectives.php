@@ -266,7 +266,6 @@ use luya\admin\helpers\Angular;
                                     <i class="material-icons">done_all</i>
                                 </span>
                             </th>
-                            <th ng-if="selectedFileFromParent" style="width:15px;"></th>
                             <th></th><!-- image thumbnail / file icon -->
                             <th>
                                 <span ng-if="sortField!='name' && sortField!='-name'" ng-click="changeSortField('-name')"><?= Admin::t('layout_filemanager_col_name'); ?></span>    
@@ -335,7 +334,7 @@ use luya\admin\helpers\Angular;
 
                             <td class="text-center" ng-click="toggleSelection(file)" tooltip tooltip-image-url="{{file.thumbnailMedium.source}}" tooltip-disabled="!file.isImage">
                                 <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
-                                <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
+                                <span ng-if="!file.isImage"><i class="material-icons custom-color-icon">attach_file</i></span>
                             </td>
                             <td ng-click="toggleSelection(file)">{{file.name | truncateMiddle: 30}}</td>
                             <td ng-click="toggleSelection(file)">{{file.extension}}</td>
