@@ -29,6 +29,7 @@ This represents a guideline how words and proper nouns should be written in the 
 + Composer 
 + AngularJS
 + NgRest
++ ActiveWindow
 + admin UI - instead of Admin, admin module or Admin UI
 + GitHub
 + API
