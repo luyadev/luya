@@ -202,7 +202,7 @@
     }
 
     &:focus, &:valid {
-        border-bottom-color: $pink;
+        border-bottom-color: theme-color(primary);
         outline: 0;
     }
 
