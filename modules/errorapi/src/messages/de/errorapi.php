@@ -9,6 +9,6 @@ return [
     'data_content_error' => '"error_json" muss "message" und "serverName" als Schlüssel enthalten.',
 
     //mail view
-    'mail_create_issue' => 'Ein neues "Issue" auf GitHub anlegen',
+    'mail_create_issue' => 'Ein neues "Issue" auf GitHub anlegen.',
 
 ];

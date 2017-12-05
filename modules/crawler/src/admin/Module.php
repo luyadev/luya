@@ -30,7 +30,7 @@ final class Module extends \luya\admin\base\Module
         ->group('crawler_index')
         ->itemApi('crawler_index', 'crawleradmin/index/index', 'list', 'api-crawler-index')
         ->group('crawler_analytics')
-        ->itemApi('crawler_anayltics_queries', 'crawleradmin/searchdata/index', 'label', 'api-crawler-searchdata');
+        ->itemApi('crawler_analytics_queries', 'crawleradmin/searchdata/index', 'label', 'api-crawler-searchdata');
     }
     
     /**

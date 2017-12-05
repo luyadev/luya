@@ -3,7 +3,7 @@ return [
     'crawler' => 'Crawler',
     'crawler_indexing' => 'Indexierung',
     'crawler_analytics' => 'Analytics',
-    'crawler_anayltics_queries' => 'Such Eingaben',
+    'crawler_analytics_queries' => 'Suchanfragen',
         
     //builderindex
     'crawler_index' => 'Seiten Index',
