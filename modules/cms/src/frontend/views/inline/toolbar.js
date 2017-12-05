@@ -19,6 +19,10 @@ var toggleDetails = function (source, containerId) {
 };
 
 var toggleClass = function (element, className) {
+    if(element === null) {
+        return false;
+    }
+
     if(element.className.indexOf(className) < 0) {
         element.className += ' ' + className;
         element.className = element.className.trim();

@@ -43,6 +43,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1644](https://github.com/luyadev/luya/issues/1644) Added element null check to cms toolbar.js
 - [#1556](https://github.com/luyadev/luya/issues/1556) Updated arrow position; Removed wrong & unecessary <th> in filemanager (fixes position and table display in modal)
 - [#1520](https://github.com/luyadev/luya/issues/1520) Selects with initvalue can no longer reset to null values.
 - [#1562](https://github.com/luyadev/luya/issues/1562) Hide CMS Page settings overlay after save.
