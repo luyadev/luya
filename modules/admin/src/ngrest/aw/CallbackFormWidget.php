@@ -154,7 +154,7 @@ class CallbackFormWidget extends Widget
             'buttonNameValue' => $this->buttonValue,
             'closeOnSuccess' => (isset($this->options['closeOnSuccess'])) ? '$scope.crud.closeActiveWindow();' : null,
             'reloadListOnSuccess' => (isset($this->options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
-            'reloadWindowOnSuccess' => (isset($this->options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
+            'reloadWindowOnSuccess' => (isset($this->options['reloadWindowOnSuccess'])) ? '$scope.$parent.reloadActiveWindow();' : null,
             'form' => $content,
             'angularCallbackFunction' => $this->angularCallbackFunction,
             'buttonClass' => (isset($options['buttonClass'])) ? $options['buttonClass'] : 'btn btn-save btn-icon',

@@ -128,7 +128,7 @@ zaa.bootstrap.register('InlineController', function($scope, $controller) {
 
     $scope.addToList = function(member) {
         $scope.$parent.sendActiveWindowCallback('add-to-list', {member:member}).then(function(response) {
-            $scope.$parent.activeWindowReload();
+            $scope.$parent.reloadActiveWindow();
         });
     };
 });
@@ -148,7 +148,7 @@ When working with angular you might want to trigger some of the functions of the
 |--------|-----------
 |`$scope.$parent.closeActiveWindow()`|Close the current ActiveWindow
 |`$scope.$parent.loadList()`|Reload the active window list.
-|`$scope.$parent.activeWindowReload()`|Reload (Rerender) the ActiveWindow.
+|`$scope.$parent.reloadActiveWindow()`|Reload (Rerender) the ActiveWindow.
 |`$scope.$parent.toast.error(message)`|Display an error toast message.
 |`$scope.$parent.toast.success(message)`|Display a success toast message.
 |`$scope.$parent.sendActiveWindowCallback(callbackName, params)`|XHR request for given callbackName with additional params.

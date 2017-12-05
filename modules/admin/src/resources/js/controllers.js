@@ -192,7 +192,7 @@
 
 		/***************** ACTIVE WINDOW *********/
 
-		$scope.activeWindowReload = function() {
+		$scope.reloadActiveWindow = function() {
 			$scope.getActiveWindow($scope.data.aw.hash, $scope.data.aw.itemId);
 		}
 
