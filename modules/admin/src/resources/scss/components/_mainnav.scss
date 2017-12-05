@@ -178,7 +178,7 @@
     display: inline-block;
     line-height: 22px;
     color: map-get($grays, 400);
-    z-index: 1;
+    z-index: zindex(before-content);
 }
 
 .mainnav-icon {
