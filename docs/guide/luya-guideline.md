@@ -19,7 +19,7 @@ In order to make links from the API PHPdocs to the Guide use:
 
 + `[[concept-tags.md]]` where the markdown file is a file located in `/docs/guide` folder.
 
-When dealing with Controller, Action and other PHP names use single quotes \`MyController\`. Like `MyController` is the file `MyController.php` with the action `indexAction()`, this is also for Variables `$foobar`.
+When dealing with Controller, Action and other PHP names use single quotes \`MyController\`. Like `MyController` is the file `MyController.php` with the action `indexAction()`, same for variables `$foobar`.
 
 ### Wording
 
@@ -30,6 +30,7 @@ This represents a guideline how words and proper nouns should be written in the 
 + AngularJS
 + NgRest
 + ActiveWindow
++ ActiveRecord
 + admin UI - instead of Admin, admin module or Admin UI
 + GitHub
 + API
