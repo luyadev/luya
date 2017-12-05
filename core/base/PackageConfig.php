@@ -2,7 +2,7 @@
 
 namespace luya\base;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Represents a package config item from the PackageInstaller.
@@ -10,7 +10,7 @@ use yii\base\Object;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class PackageConfig extends Object
+class PackageConfig extends BaseObject
 {
     public $bootstrap = [];
     

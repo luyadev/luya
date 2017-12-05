@@ -2,12 +2,12 @@
 
 namespace luya\components;
 
-use PHPMailer;
-use SMTP;
 use Yii;
 use yii\base\Controller;
 use yii\base\Component;
 use luya\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 /**
  * LUYA mail component to compose messages and send them via SMTP.
@@ -130,7 +130,7 @@ class Mail extends Component
     public function getMailer()
     {
         if ($this->_mailer === null) {
-            $this->_mailer = new PHPmailer;
+            $this->_mailer = new PHPMailer();
             $this->_mailer->CharSet = 'UTF-8';
             $this->_mailer->From = $this->from;
             $this->_mailer->FromName = $this->fromName;
@@ -168,7 +168,9 @@ class Mail extends Component
     }
     
     /**
-     * Compose a new mail message, this will first flush existing mailer objects
+     * Compose a new mail message.
+     * 
+     * Make sure to change mailer object or global variables after composer command, as before it will flush the mailer object.
      *
      * @param string $subject The subject of the mail
      * @param string $body The HTML body of the mail message.
@@ -444,7 +446,6 @@ class Mail extends Component
             Yii::error($this->getError(), __METHOD__);
             return false;
         }
-        
         return true;
     }
 
@@ -490,7 +491,7 @@ class Mail extends Component
             } else {
                 throw new Exception('Connect failed');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $smtp->quit(true);
             throw new \yii\base\Exception($e->getMessage());
         }

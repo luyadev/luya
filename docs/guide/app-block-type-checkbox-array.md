@@ -1,4 +1,4 @@
-# Checkbox Array
+# Checkbox array
 
 ```php
 ['var' => 'col', 'label' => 'Sizes', 'type' => 'zaa-checkbox-array', 'options' => [

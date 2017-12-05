@@ -3,9 +3,9 @@
 namespace luya\cms\menu;
 
 use Iterator;
-use yii\base\Object;
 use luya\cms\models\Nav;
 use luya\helpers\ArrayHelper;
+use yii\base\BaseObject;
 
 /**
  * Iterator class for menu items.
@@ -15,7 +15,7 @@ use luya\helpers\ArrayHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class QueryIterator extends Object implements Iterator
+class QueryIterator extends BaseObject implements Iterator
 {
     /**
      * @var array An array containing the data to iterate.

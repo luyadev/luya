@@ -136,7 +136,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      */
     public function ngRestListOrder()
     {
-        return [$this->getNgRestPrimaryKey() => SORT_DESC];
+        return [$this->getNgRestPrimaryKey()[0] => SORT_DESC];
     }
     
     /**
@@ -199,6 +199,9 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *
      * The above example will use the `getSales()` method of the current model where you are implementing this relation. The `getSales()` must return
      * an {{yii\db\QueryInterface}} Object, for example you can use `$this->hasMany(Model, ['key' => 'rel'])` or `new \yii\db\Query()`.
+     *
+     * You can also define the `tabLabelAttribute` key with the name of a field you like the display as tab name. Assuming your table as a column `title` you
+     * can set `'tabLabelAttribute'  => 'title'` in order to display this value in the tab label.
      *
      * @return array
      */
@@ -323,11 +326,12 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function genericSearch($searchQuery)
     {
         $fields = $this->genericSearchFields();
-        $pk = $this->getNgRestPrimaryKey();
         
-        // add pk to fields list automatically to make click able state providers
-        if (!in_array($pk, $fields)) {
-            $fields[] = $pk;
+        foreach ($this->getNgRestPrimaryKey() as $pk) {
+	        // add pk to fields list automatically to make click able state providers
+	        if (!in_array($pk, $fields)) {
+	            $fields[] = $pk;
+	        }
         }
         
         // create active query object
@@ -387,7 +391,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
                 throw new InvalidConfigException("The NgRestModel '".__CLASS__."' requires at least one primaryKey in order to work.");
             }
             
-            $this->_ngRestPrimaryKey = $keys[0];
+            return $keys;
         }
 
         return $this->_ngRestPrimaryKey;
@@ -643,9 +647,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     {
         if ($this->_config == null) {
             $config = new Config();
-            $config->apiEndpoint = static::ngRestApiEndpoint();
-            $config->primaryKey = $this->getNgRestPrimaryKey();
             
+            // Generate config builder object
             $configBuilder = new ConfigBuilder(static::class);
             $this->ngRestConfig($configBuilder);
             $config->setConfig($configBuilder->getConfig());
@@ -653,23 +656,34 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
 
-            // COPY FROM NgRestController to Builder of the config
-            // ensure what must be removed and added from outside
-            $config->filters = $this->ngRestFilters();
-            $config->defaultOrder = $this->ngRestListOrder();
+            // copy model data into config
+            $config->setApiEndpoint(static::ngRestApiEndpoint());
+            $config->setPrimaryKey($this->getNgRestPrimaryKey());
+            $config->setFilters($this->ngRestFilters());
+            $config->setDefaultOrder($this->ngRestListOrder());
+            $config->setAttributeGroups($this->ngRestAttributeGroups());
+            $config->setGroupByField($this->ngRestGroupByField());
+            $config->setTableName($this->tableName());
+            $config->setAttributeLabels($this->attributeLabels());
             
-            
-            $config->attributeGroups = $this->ngRestAttributeGroups();
-            $config->groupByField = $this->ngRestGroupByField();
-            
-            $rel = [];
-            foreach ($this->ngRestRelations() as $key => $item) {
-                $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->className())];
+            // ensure relations are made not on composite table.
+            if ($this->ngRestRelations() && count($this->getNgRestPrimaryKey()) > 1) {
+                throw new InvalidConfigException("You can not use the ngRestRelations() on composite key model.");
             }
             
-            
-            $config->relations = $rel;
-            $config->tableName = $this->tableName();
+            // generate relations
+            foreach ($this->ngRestRelations() as $key => $item) {
+                /** @var $item \luya\admin\ngrest\base\NgRestRelationInterface */
+                if (!$item instanceof NgRestRelation) {
+                    if (!isset($item['class'])) {
+                        $item['class'] = 'luya\admin\ngrest\base\NgRestRelation';
+                    }
+                    $item = Yii::createObject($item);
+                }
+                $item->setModelClass($this->className());
+                $item->setArrayIndex($key);
+                $config->setRelation($item);
+            }
             
             $this->_config = $config;
         }

@@ -2,19 +2,20 @@
 
 namespace luya\web\jsonld;
 
-class Event extends BaseThing
+/**
+ * JsonLd - Event
+ *
+ * @see http://schema.org/Event
+ *
+ * @author Alex Schmid
+ * @since 1.0.0
+ */
+class Event extends BaseThing implements EventInterface
 {
-    private $_locations = [];
-    
-    public function getLocations()
+    public function typeDefintion()
     {
-        return $this->_locations;
+        return 'Event';
     }
     
-    public function setLocation(Location $location)
-    {
-        $this->_locations[] = $location;
-    
-        return $this;
-    }
+    use EventTrait;
 }

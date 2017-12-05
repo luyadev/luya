@@ -63,12 +63,14 @@ $this->beginBody();
                     <span><?= Module::t('ngrest_crud_btn_close'); ?></span>
                 </a>
             </li>
+            <?php if (!$isInline): ?>
             <li class="nav-item" ng-repeat="(index,btn) in tabService.tabs">
                 <a class="nav-link" ng-class="{'active' : btn.active}">
                     <i class="material-icons" ng-click="closeTab(btn, index)">cancel</i>
-                    <span ng-click="switchToTab(btn)">{{btn.name}} #{{btn.id}}</span>
+                    <span ng-click="switchToTab(btn)">{{btn.name}} <small class="badge badge-secondary">#{{btn.id}}</small></span>
                 </a>
             </li>
+            <?php endif; ?>
             <li class="nav-item nav-item-alternative" ng-repeat="lang in AdminLangService.data" ng-class="{'ml-auto' : $first}" ng-show="AdminLangService.data.length > 1">
                 <a class="nav-link" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" role="tab">
                     <span class="flag flag-{{lang.short_code}}">
@@ -79,7 +81,7 @@ $this->beginBody();
         </ul>
     <?php endif; ?>
     <div class="tab-content">
-        <?php if (!$relationCall): ?>
+        <?php if (!$relationCall && !$isInline): ?>
         <div class="tab-pane" ng-repeat="btn in tabService.tabs" ng-class="{'active' : btn.active}" ng-if="btn.active">
             <crud-relation-loader api="{{btn.api}}" array-index="{{btn.arrayIndex}}" model-class="{{btn.modelClass}}" id="{{btn.id}}"></crud-relation-loader>
         </div>
@@ -115,6 +117,12 @@ $this->beginBody();
                     <?php endif; ?>
                 </div>
             </div>
+            <?php if ($relationCall && $canCreate && $config->getPointer('create')): ?>
+            <button type="button" class="btn btn-add ml-3 mt-3" ng-click="switchTo(1)">
+                    <i class="material-icons">add_box</i>
+                    <span><?= Module::t('ngrest_crud_btn_add'); ?></span>
+            </button>
+            <?php endif; ?>
             <small class="crud-counter">{{data.listArray.length}} of {{totalRows}}</small>
             <div class="table-responsive-wrapper">
                 <table class="table table-hover table-align-middle table-striped mt-0">

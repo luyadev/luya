@@ -1,22 +1,22 @@
-# CMS Page Properties
+# CMS page properties
 
 Page properties are personalised settings you can apply to specific pages. 
 
-For example, if you want to use different colors on different pages, you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files for [Blocks](app-blocks.md) or [Layouts](app-cmslayouts.md) components.
+Let´s assume you would like to use different colors on different pages, therefore you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files for [blocks](app-blocks.md) or [layouts](app-cmslayouts.md) components.
 
 Use cases:
 
 + Background image
 + Colors, css properties for contents
-+ Specific meta informations
++ Specific meta information
 + Protecting a page
 
 ## Creating a new property
 
 
-All properties must be in a folder called `properties` and must contain the suffix `Property`. LUYA will automatically detect and setup all properties when you run the [import](luya-console.md) command. You can either create the properties folder inside your application or module folder to enable reusable modules with properties which will be attached automatically.
+All properties must be in a folder called `properties` and must contain suffix `Property` inside the filename. LUYA will automatically detect and setup all properties when you run the [import](luya-console.md) command. You can either create the properties folder inside your application or module folder to enable reusable modules with properties which will be attached automatically too.
 
-Example of a property for creating a textfield wich can be attached somewhere in your view files:
+Example of a property for creating a text field wich can be attached somewhere in your view files:
 
 ```php
 <?php
@@ -42,13 +42,13 @@ class TestProperty extends \luya\admin\base\Property
 }
 ```
 
-After running the import command you will see the property in the CMS admin. In order to understand the methods used in details refer to the API Guide {{\luya\admin\base\Property}}.
+After running the import command you will see the property in the CMS admin. In order to understand the methods used in dept refer to the API Guide {{\luya\admin\base\Property}}.
 
-We are also have a set of predefined propertys you can extend from, this i cause some blocks have to override the `getValue()` method in order to change the value output, as this is common scenario we have built classes you can abstract from.
+There is a set of predefined properties provided from which you can extend, this because some blocks have to override the `getValue()` method in order to change the value output, as this is common scenario we have built classes you can do abstraction from.
 
-#### Image Property
+#### Image property
 
-The image property is often used to return upload an image and return the path for, so you can abstract your property from {{\luya\admin\base\ImageProperty}} like the example below:
+The image property is often used to return the path of an uploaded image, so you can abstract your property from {{\luya\admin\base\ImageProperty}} like the example below:
 
 ```php
 class MyImage extends \luya\admin\base\ImageProperty
@@ -65,7 +65,7 @@ class MyImage extends \luya\admin\base\ImageProperty
 }
 ```
 
-In order to get use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage'); ?>" />`.
+In order to use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage'); ?>" />`.
 
 > All properties implement the magical method `__toString()` and will return the return value from the `getValue()` method by default. Keep in mind that this is only true for the echo or return context. When checking for the existance of a value, explicitely use the `getValue()` method as otherwise the Property object is returned, which always resolves to true.
 
@@ -74,7 +74,7 @@ Predefined properties
 + {{luya\admin\base\ImageProperty}}
 + {{luya\admin\base\CheckboxProperty}}
 
-## Get the Propety
+## Get a property
 
 You can access the properties in
 
@@ -82,17 +82,17 @@ You can access the properties in
 + [CMS Layouts](app-cmslayouts.md) or Layouts
 + [Menus Item](app-menu.md)
 
-#### in Menus
+#### In menus
 
-A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item the menu component does have a `getProperty($varName)` method on each item. For example collecting the menu and retrieving the page property `navImage` could be done as followed:
+A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item the menu component does have a `getProperty($varName)` method on each item, e. g. collecting the menu and retrieving the page property `navImage` could be done as followed:
 
-Getting the value of a Property, if not found null will be returned.
+Getting the value of a property, if not found null will be returned.
 
 ```php
 echo Yii::$app->menu->current->getPropertyValue('myProperty');
 ```
 
-Working with the Property Object:
+Working with a property object:
 
 ```php
 <?php foreach(Yii::$app->menu->findAll(['parent_nav_id' => 0, 'container' => 'default']) as $item): ?>
@@ -107,19 +107,19 @@ Working with the Property Object:
 <?php endforeach; ?>
 ```
 
-This method allows you find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')`.
+This method allows you to find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')`.
 
-> When dealing with large menus you can preload the models (with its properties) for a given menu query use {{luya\cms\menu\Query::preloadModels}} or {{luya\cms\Menu::findAll}} with second statement `true`.
+> When dealing with large menus you can preload the models (including properties) for a given menu query by using {{luya\cms\menu\Query::preloadModels}} or {{luya\cms\Menu::findAll}} with the second statement `true`.
 
-#### in Layouts
+#### in layouts
 
-In the layout you can always get the current propertys based on the current active menu item.
+In the layout you can always get the current properties based on the current active menu item.
 
 ```php
 Yii::$app->menu->current->getProperty('my-prop');
 ```
 
-#### in Blocks
+#### in blocks
 
 ```php
 $this->getEnvOption('pageObject')->nav->getProperty('foobar');

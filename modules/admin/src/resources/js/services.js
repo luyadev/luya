@@ -303,7 +303,14 @@ zaa.factory("CrudTabService", function() {
 	};
 	
 	service.addTab = function(id, api, arrayIndex, name, modelClass) {
-		service.tabs.push({id: id, api: api, arrayIndex: arrayIndex, active: false, name: name, modelClass:modelClass});
+		var tab = {id: id, api: api, arrayIndex: arrayIndex, active: true, name: name, modelClass:modelClass};
+		
+		angular.forEach(service.tabs, function(item) {
+			item.active = false;
+		});
+		
+		service.tabs.push(tab);
+		
 	};
 	
 	service.clear = function() {

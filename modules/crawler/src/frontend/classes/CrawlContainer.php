@@ -8,6 +8,7 @@ use yii\base\InvalidConfigException;
 use luya\crawler\models\Builderindex;
 use luya\crawler\models\Index;
 use luya\helpers\Url;
+use yii\base\BaseObject;
 
 /**
  * Crawler Container.
@@ -18,7 +19,7 @@ use luya\helpers\Url;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class CrawlContainer extends \yii\base\Object
+class CrawlContainer extends BaseObject
 {
     public $baseUrl;
 

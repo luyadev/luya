@@ -3,10 +3,10 @@
 namespace luya\admin\proxy;
 
 use Yii;
-use yii\base\Object;
 use luya\console\Command;
 use yii\base\InvalidConfigException;
 use luya\helpers\StringHelper;
+use yii\base\BaseObject;
 
 /**
  * Admin Proxy Build.
@@ -14,7 +14,7 @@ use luya\helpers\StringHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ClientBuild extends Object
+class ClientBuild extends BaseObject
 {
     /**
      * @var \luya\console\Command $command object

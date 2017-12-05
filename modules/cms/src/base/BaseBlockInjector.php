@@ -2,8 +2,8 @@
 
 namespace luya\cms\base;
 
-use yii\base\Object;
 use yii\base\InvalidConfigException;
+use yii\base\BaseObject;
 
 /**
  * The base injector class for all Injectors.
@@ -30,7 +30,7 @@ use yii\base\InvalidConfigException;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class BaseBlockInjector extends Object
+abstract class BaseBlockInjector extends BaseObject
 {
     /**
      * @var string The name of the variable on what the injector should use and listen to.

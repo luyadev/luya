@@ -111,7 +111,6 @@ class DetailViewActiveWindow extends ActiveWindow
     public function index()
     {
         return $this->render('index', [
-            'id' => $this->itemId,
             'model' => $this->model,
             'attributes' => $this->attributes,
         ]);

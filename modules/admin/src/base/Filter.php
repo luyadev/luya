@@ -7,7 +7,7 @@ use luya\admin\models\StorageEffect;
 use luya\admin\models\StorageFilterChain;
 use luya\Exception;
 use yii\helpers\Json;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Base class for all storage component filters.
@@ -21,7 +21,7 @@ use yii\base\Object;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class Filter extends Object implements FilterInterface
+abstract class Filter extends BaseObject implements FilterInterface
 {
     /**
      * Resize-Effect.

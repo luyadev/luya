@@ -6,3 +6,5 @@
 + Page scheduler
 + JsonLd
 + UI Bugs and improvements
++ Admin Config Registry (#1639)
++ Crud Tabs improvement

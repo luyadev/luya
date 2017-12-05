@@ -60,7 +60,6 @@ class CoordinatesActiveWindow extends ActiveWindow
     public function index()
     {
         return $this->render('index', [
-            'id' => $this->itemId,
             'mapsApiKey' => $this->mapsApiKey,
         ]);
     }

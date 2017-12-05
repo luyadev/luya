@@ -16,6 +16,7 @@
         border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
         transition: .2s ease-in-out border-color;
         z-index: 1;
+        cursor: move;
     }
 
     .block-is-layout > & {

@@ -83,13 +83,13 @@ abstract class Command extends \luya\console\Controller
             if (!$object instanceof \luya\base\Module) {
                 continue;
             }
-            if (isset($options['onlyAdmin'])) {
+            if (isset($options['onlyAdmin']) && $options['onlyAdmin']) {
                 if (!$object instanceof AdminModuleInterface) {
                     continue;
                 }
             }
     
-            if (isset($options['hideCore'])) {
+            if (isset($options['hideCore']) && $options['hideCore']) {
                 if ($object instanceof CoreModuleInterface) {
                     continue;
                 }

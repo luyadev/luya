@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1572](https://github.com/luyadev/luya/issues/1572) CMS blocks are now deliverd trough [generic](https://github.com/luyadev/luya-generic) and [bootstrap3](https://github.com/luyadev/luya-bootstrap3) repos, therefore run the updater `./luya cms/updater/generic`.
+- [#1679](https://github.com/luyadev/luya/issues/1679) Updated styles to support up to 3 icons in the treeview item context.
 - [#1559](https://github.com/luyadev/luya/issues/1569) Renamed luya\admin\image\Item::getSource() to getHttpSource() this will affect also the getter properties.
 - [#1564](https://github.com/luyadev/luya/issues/1564) Refactoring of gallery module, removed old unused methods, switch to ActiveQuery relation usage.
 - [#1522](https://github.com/luyadev/luya/issues/1522) Text and Textarea NgRest plugins auto encode input data after find.
@@ -21,6 +23,9 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1682](https://github.com/luyadev/luya/issues/1682) NgRest relations can now handle auto set the primary model value, auto open the tab and define a tab label from the crud list.
+- [#1695](https://github.com/luyadev/luya/issues/1695) NgRest Crud can handle composite primary keys.
+- [#1639](https://github.com/luyadev/luya/issues/1639) Application wide configuration table which can be managed in the admin.
 - [#1467](https://github.com/luyadev/luya/issues/1467) Main nav context menu for logout and account preferences.
 - [#1557](https://github.com/luyadev/luya/issues/1557) Allow unicode chars for cms page aliases and slugify directives.
 - [#1534](https://github.com/luyadev/luya/issues/1534) Link ability for files and e-mail addresses.
@@ -38,6 +43,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1644](https://github.com/luyadev/luya/issues/1644) Added element null check to cms toolbar.js
+- [#1556](https://github.com/luyadev/luya/issues/1556) Updated arrow position; Removed wrong & unecessary <th> in filemanager (fixes position and table display in modal)
 - [#1520](https://github.com/luyadev/luya/issues/1520) Selects with initvalue can no longer reset to null values.
 - [#1562](https://github.com/luyadev/luya/issues/1562) Hide CMS Page settings overlay after save.
 - [#1629](https://github.com/luyadev/luya/issues/1629) Fixed bug when moving blocks from placeholder block into parent placeholder.

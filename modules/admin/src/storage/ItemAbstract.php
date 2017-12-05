@@ -3,10 +3,10 @@
 namespace luya\admin\storage;
 
 use Yii;
-use yii\base\Object;
 use yii\base\ArrayableTrait;
 use yii\base\Arrayable;
 use luya\Exception;
+use yii\base\BaseObject;
 
 /**
  * Base class for file, image and folder Items.
@@ -16,7 +16,7 @@ use luya\Exception;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class ItemAbstract extends Object implements Arrayable
+abstract class ItemAbstract extends BaseObject implements Arrayable
 {
     use ArrayableTrait;
     

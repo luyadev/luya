@@ -84,12 +84,12 @@ class SetupController extends \luya\console\Command
             return $this->outputError('Unable to setup, unable to find image library: ' . $e->getMessage());
         }
         
-        if (!Config::has('last_import_timestamp')) {
+        if (!Config::has(Config::CONFIG_LAST_IMPORT_TIMESTAMP)) {
             return $this->outputError("You have to run the 'import' process first. run in terminal: ./vendor/bin/luya import");
         }
     
-        if (Config::has('setup_command_timestamp')) {
-            return $this->outputError('The setup process already have been executed at '.date('d.m.Y H:i', Config::get('setup_command_timestamp')).'. If you like to reinstall your application. Drop all tables from your Database, run the migrate and import command and then re-run the setup command.');
+        if (Config::has(Config::CONFIG_SETUP_COMMAND_TIMESTAMP)) {
+            return $this->outputError('The setup process already have been executed at '.date('d.m.Y H:i', Config::get(Config::CONFIG_SETUP_COMMAND_TIMESTAMP)).'. If you like to reinstall your application. Drop all tables from your Database, run the migrate and import command and then re-run the setup command.');
         }
     
         if (empty($this->email)) {
@@ -178,7 +178,7 @@ class SetupController extends \luya\console\Command
             $this->insert('cms_nav_item_page', ['layout_id' => 1, 'create_user_id' => 1, 'timestamp_create' => time(), 'version_alias' => 'Initial', 'nav_item_id' => 1]);
         }
     
-        Config::set('setup_command_timestamp', time());
+        Config::set(Config::CONFIG_SETUP_COMMAND_TIMESTAMP, time());
     
         return $this->outputSuccess("Setup is finished. You can now login into the Administration-Area with the E-Mail '{$this->email}'.");
     }

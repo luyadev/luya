@@ -180,6 +180,6 @@ class ImportController extends Command implements ImportControllerInterface
             }
         }
         
-        return $this->outputSuccess("Importer run successfull.");
+        return $this->outputSuccess("Importer run successful.");
     }
 }

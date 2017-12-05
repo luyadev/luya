@@ -6,11 +6,10 @@ use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\base\ViewContextInterface;
-use yii\base\Object;
-
 use luya\Exception;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
+use yii\base\BaseObject;
 
 /**
  * Base class for all ActiveWindow classes.
@@ -26,7 +25,7 @@ use luya\helpers\FileHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class ActiveWindow extends Object implements ViewContextInterface, ActiveWindowInterface
+abstract class ActiveWindow extends BaseObject implements ViewContextInterface, ActiveWindowInterface
 {
     /**
      * @var string $suffix The suffix to use for all classes
@@ -64,7 +63,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     public function getModel()
     {
         if ($this->_model === null && $this->ngRestModelClass !== null) {
-            $this->_model = call_user_func_array([$this->ngRestModelClass, 'findOne'], [$this->itemId]);
+            $this->_model = call_user_func_array([$this->ngRestModelClass, 'findOne'], $this->itemIds);
         }
         
         return $this->_model;
@@ -326,11 +325,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
      */
     public function setItemId($id)
     {
-        if (is_int($id)) {
-            return $this->_itemId = $id;
-        }
-        
-        throw new Exception("Unable to set active window item id, item id value must be integer.");
+        $this->_itemId = $id;
     }
 
     /**
@@ -338,7 +333,23 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
      */
     public function getItemId()
     {
-        return $this->_itemId;
+        return $this->getIsCompositeItem() ? $this->getItemIds() : $this->getItemIds()[0];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getIsCompositeItem()
+    {
+        return count($this->_itemId) > 1 ? true : false;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getItemIds()
+    {
+        return explode(",", $this->_itemId);
     }
     
     /**

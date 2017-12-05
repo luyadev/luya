@@ -50,7 +50,7 @@
 
 		$scope.tabService = CrudTabService;
 
-		/***** TABS AND SWITCHES *////
+		/***** TABS AND SWITCHES *****/
 
 		/**
 		 * 0 = list
@@ -68,6 +68,12 @@
 
 			$scope.switchTo(4);
 		};
+		
+		$scope.addAndswitchToTab = function(pk, route, index, label, model) {
+			$scope.tabService.addTab(pk, route, index, label, model);
+			
+			$scope.switchTo(4);
+		}
 
 		$scope.closeTab = function(tab, index) {
 			$scope.tabService.remove(index, $scope);
@@ -94,7 +100,7 @@
 			}
 			$scope.crudSwitchType = type;
 
-			if (type !== 4) {
+			if (type !== 4 && !$scope.config.inline) {
 				angular.forEach($scope.tabService.tabs, function(item) {
 					item.active = false;
 				});
@@ -127,7 +133,7 @@
 			}
 		};
 
-		/********** EXPORT *////
+		/********** EXPORT ****/
 
 		$scope.exportLoading = false;
 
@@ -278,10 +284,33 @@
 
 		/******* RELATION CALLLS *********/
 
-
+		/**
+		 * Modal view select a value from a modal into its parent plugin.
+		 */
 		$scope.parentSelectInline = function(item) {
 			$scope.$parent.$parent.$parent.setModelValue($scope.getRowPrimaryValue(item), item);
 		};
+		
+		/**
+		 * Check if a field exists in the parents relation list, if yes hide the field
+		 * for the given form and return the relation call value instead in order to auto store those.
+		 */
+		$scope.checkIfFieldExistsInParentRelation = function(field) {
+			// this call is relation call, okay check for the parent relation defition
+			if ($scope.config.relationCall) {
+				var relations = $scope.$parent.$parent.config.relations;
+				
+				var definition = relations[parseInt($scope.config.relationCall.arrayIndex)];
+				
+				var linkDefintion = definition.relationLink;
+				
+				if (linkDefintion !== null && linkDefintion.hasOwnProperty(field)) {
+					return parseInt($scope.config.relationCall.id);
+				}
+			}
+			
+			return false;
+		}
 
 		$scope.relationItems = [];
 
@@ -876,7 +905,7 @@
 			var has = false;
 			angular.forEach(data, function(value) {
 				if (value.lock_table == table && value.lock_pk == pk) {
-					has = true;
+					has = value;
 				}
 			});
 
@@ -1026,7 +1055,13 @@
 
 		$scope.isLocked = function(table, pk) {
 			return $filter('lockFilter')($scope.locked, table, pk);
-		}
+		};
+		
+		$scope.getLockedName = function(table, pk) {
+			var response = $scope.isLocked(table, pk);
+			
+			return response.firstname + ' ' + response.lastname;
+		};
 
 		$scope.searchQuery = null;
 

@@ -1,12 +1,12 @@
-# Admin Dashboard Objects
+# Admin dashboard objects
 
-Dashboard objects are elements defined by your admin module attached to the Admin UI start dashboard screen. Basically the dashboard objects are returning a template which is feed by an api response.
+Dashboard objects are elements defined by your admin module attached to the admin UI entry dashboard screen after the login. Basically the dashboard objects are returning a template which is feed by an api response.
 
 All dashboard objects are defined inside the {{luya\admin\base\Module::$dashboardObjects}} property.
 
-## Predefined Dashboards
+## Predefined dashboards
 
-You can choose from predefined dashboard objects, which are easy to implement:
+You can choose from predefined dashboard objects which are pretty easy to implement:
 
 + {{luya\admin\dashboard\BasicDashboardObject}}
 + {{luya\admin\dashboard\TableDashboardObject}}
@@ -26,7 +26,7 @@ public $dashboardObjects = [
 ];
 ```
 
-In order to customize the template of a basic dashboard object you can override the  {{luya\admin\dashboard\BasicDashboardObject::$outerTemplate}}:
+In order to customize the template of a basic dashboard object you can override the {{luya\admin\dashboard\BasicDashboardObject::$outerTemplate}}:
 
 ```php
 [
@@ -38,6 +38,6 @@ In order to customize the template of a basic dashboard object you can override 
 ],
 ```
 
-## Custom Dashboard Object
+## Custom dashboard object
 
-You can also write your own dashboard object make sure to extend {{luya\admin\base\DashboardObjectInterface}}
+You can also write your own dashboard object but make sure you extend the {{luya\admin\base\DashboardObjectInterface}} class.

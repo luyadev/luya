@@ -12,5 +12,10 @@ namespace luya\web\jsonld;
  */
 class Person extends BaseThing implements PersonInterface
 {
+    public function typeDefintion()
+    {
+        return 'Person';
+    }
+    
     use PersonTrait;
 }

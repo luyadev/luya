@@ -2,8 +2,8 @@
 
 namespace luya\web;
 
-use yii\base\Object;
 use yii\validators\EmailValidator;
+use yii\base\BaseObject;
 
 /**
  * Email Link.
@@ -13,7 +13,7 @@ use yii\validators\EmailValidator;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class EmailLink extends Object implements LinkInterface
+class EmailLink extends BaseObject implements LinkInterface
 {
     use LinkTrait;
     

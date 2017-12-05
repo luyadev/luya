@@ -6,7 +6,7 @@ use Yii;
 use luya\cms\Exception;
 use yii\helpers\Inflector;
 use luya\cms\Menu;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * An item inject gives a module the possibility to add items into the menu Container.
@@ -71,7 +71,7 @@ use yii\base\Object;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class InjectItem extends Object implements InjectItemInterface
+class InjectItem extends BaseObject implements InjectItemInterface
 {
     /**
      * @var integer The user id who created this page.

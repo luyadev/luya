@@ -2,11 +2,11 @@
 
 namespace luya\admin\proxy;
 
-use yii\base\Object;
 use Curl\Curl;
 use luya\admin\file\Query;
 use luya\traits\CacheableTrait;
 use luya\helpers\FileHelper;
+use yii\base\BaseObject;
 
 /**
  * Admin Proxy commands Transfer Files.
@@ -14,7 +14,7 @@ use luya\helpers\FileHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ClientTransfer extends Object
+class ClientTransfer extends BaseObject
 {
     use CacheableTrait;
     

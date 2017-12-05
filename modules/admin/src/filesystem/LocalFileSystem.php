@@ -99,6 +99,11 @@ class LocalFileSystem extends BaseFileSystemStorage
     
         return $this->_serverPath;
     }
+    
+    public function setServerPath($path)
+    {
+        $this->_serverPath = $path;   
+    }
 
     /**
      * @inheritdoc

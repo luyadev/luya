@@ -5,11 +5,11 @@ namespace tests\admin\storage;
 use Yii;
 use admintests\AdminTestCase;
 use luya\admin\storage\QueryTrait;
-use yii\base\Object;
 use luya\admin\storage\IteratorAbstract;
 use luya\admin\storage\ItemAbstract;
+use yii\base\BaseObject;
 
-class FixtureQueryTrait extends Object
+class FixtureQueryTrait extends BaseObject
 {
     use QueryTrait;
     

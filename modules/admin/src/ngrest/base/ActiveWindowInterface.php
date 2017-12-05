@@ -13,9 +13,21 @@ interface ActiveWindowInterface
     /**
      * Get the item id of the current ActiveWindow context item id.
      *
-     * @return integer The id of the current context item.
+     * @return integer|array If its a composite key an array is returned, otherwise the integer number for the PK.
      */
     public function getItemId();
+    
+    /**
+     * @return Whether the current item is a composite key or not.
+     */
+    public function getIsCompositeItem();
+    
+    /**
+     * Returns an array with all items if its a composite key.
+     * 
+     * @return array
+     */
+    public function getItemIds();
     
     /**
      * Set the value of the item Id in where the active window context is initialized.

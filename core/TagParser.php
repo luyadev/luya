@@ -3,8 +3,8 @@
 namespace luya;
 
 use Yii;
-use yii\base\Object;
 use luya\tag\TagMarkdownParser;
+use yii\base\BaseObject;
 
 /**
  * TagParser allows you to inject Tags and parse them.
@@ -33,7 +33,7 @@ use luya\tag\TagMarkdownParser;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class TagParser extends Object
+class TagParser extends BaseObject
 {
     /**
      * @var string Base regular expression to determine function, values and value-sub informations.
@@ -53,7 +53,7 @@ class TagParser extends Object
      * Inject a new tag with a given name and a configurable array config.
      *
      * @param string $name The name of the tag on what the tag should be found. Must be [a-z] chars.
-     * @param string|array $config The configurable object context can be either a string with a class or a configurable array base on yii\base\Object concept.
+     * @param string|array $config The configurable object context can be either a string with a class or a configurable array base on {{yii\base\BaseObject}} concept.
      */
     public static function inject($name, $config)
     {

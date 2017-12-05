@@ -1,13 +1,13 @@
-# Browser Support
+# Browser support
 
-LUYA ADMIN is currently supported by the following operating systems and browsers:
+LUYA admin UI is currently supported by following operating systems and browsers:
 
 ## Mac OSX Sierra and up
 
 + Firefox 47
 + Chrome 52
 + Opera 47
-+ Safari: ONLY PARTIALLY SUPPORT YET (Flexbox Browser bugs)
++ Safari: *ONLY PARTIALLY SUPPORT YET* (flexbox browser bugs)
 
 ## Windows 10 and up
 
@@ -25,7 +25,7 @@ iPad 2, iOS 8.0
 Android 4.4 and up
 + Chrome
 
-The admin ui is partial supported by mobile devices.
+Admin UI is only partially supported by mobile devices.
 
-> For the best *LUYA* experience we currently recommend you to use the `Google Chrome` or `Firefox`
+> For the best *LUYA* experience we currently recommend you to use `Google Chrome` or `Firefox`.
 

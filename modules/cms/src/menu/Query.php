@@ -4,8 +4,8 @@ namespace luya\cms\menu;
 
 use Yii;
 use luya\cms\Exception;
-use yii\base\Object;
 use luya\cms\Menu;
+use yii\base\BaseObject;
 
 /**
  * Menu Query Builder.
@@ -47,7 +47,7 @@ use luya\cms\Menu;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Query extends Object implements QueryOperatorFieldInterface
+class Query extends BaseObject implements QueryOperatorFieldInterface
 {
     /**
      * @var array An array with all available where operators.

@@ -5,14 +5,12 @@ namespace luya\web;
 use luya\web\jsonld\Organization;
 use luya\web\jsonld\Thing;
 use Yii;
-use yii\base\Object;
 use yii\helpers\Json;
-use luya\helpers\Url;
-use luya\helpers\ArrayHelper;
 use luya\web\jsonld\Person;
 use luya\Exception;
-use luya\web\jsonld\BaseThing;
 use luya\web\jsonld\Event;
+use luya\web\jsonld\Place;
+use yii\base\BaseObject;
 
 /**
  * Registerin Microdata as JsonLD.
@@ -29,7 +27,7 @@ use luya\web\jsonld\Event;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class JsonLd extends Object
+class JsonLd extends BaseObject
 {
     /**
      * Register new Thing.
@@ -78,6 +76,18 @@ class JsonLd extends Object
     {
         return self::addGraph((new Person($config)));
     }
+
+    /**
+     * Register new Place
+     *
+     * @param array $config Optional config array to provided person data via setter methods.
+     *
+     * @return \luya\web\jsonld\Place
+     */
+    public static function place(array $config = [])
+    {
+        return self::addGraph((new Place($config)));
+    }
     
     /**
      * Register Image Microodata.
@@ -90,6 +100,7 @@ class JsonLd extends Object
      * - datePublished: A unix timestamp (or string e.g. 2008-01-25) when the image was published.
      * - name: The name of the picture.
      */
+    /*
     public static function image($url, $caption, array $options = [])
     {
         $date = ArrayHelper::remove($options, 'datePublished', null);
@@ -109,6 +120,7 @@ class JsonLd extends Object
             "name" => ArrayHelper::remove($options, 'name', null),
         ]);
     }
+    */
     
     /**
      * Register graph data.

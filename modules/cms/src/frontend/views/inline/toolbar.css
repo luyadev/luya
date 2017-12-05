@@ -1,4 +1,5 @@
 #luya-cms-toolbar-wrapper {
+    font-family: "Roboto", Helvetica, Arial, sans-serif !important;
     left: 0;
     position: fixed;
     right: 0;
@@ -6,11 +7,16 @@
     transform: translateY(-100%);
     transition: 0.25s ease transform;
     z-index: 10000;
-    font-family: "Roboto", Helvetica, Arial, sans-serif !important;
 }
 
-#luya-cms-toolbar-wrapper a, #luya-cms-toolbar-wrapper p, #luya-cms-toolbar-wrapper span, #luya-cms-toolbar-wrapper label {
+#luya-cms-toolbar-wrapper * {
     font-family: "Roboto", Helvetica, Arial, sans-serif !important;
+    font-size: 14px !important;
+}
+
+#luya-cms-toolbar-wrapper .material-icons {
+    font-family: "Material Icons" !important;
+    font-size: 24px !important;
 }
 
 @media screen and (max-width: 900px) {
@@ -48,10 +54,10 @@
 
 .luya-cms-toolbar__logo {
     display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 10px;
+    font-size: 10px !important;
     padding: 0 15px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .luya-cms-toolbar__logo a {
@@ -79,21 +85,20 @@
  * ================================================== */
 
 .luya-cms-toolbar__button {
+    border-right: 1px solid #fff;
     color: #FF006B;
     display: inline-block;
-    font-size: 14px;
+    float: left;
     line-height: 1;
     margin: 0;
     vertical-align: middle;
-    border-right: 1px solid #fff;
-    float: left;
 }
-
 
 .luya-cms-toolbar__button a,
 .luya-cms-toolbar__button .luya-cms-toolbar__button-text {
     color: #333;
     display: block;
+    font-size: 14px !important;
     height: 100%;
     padding: 12px 25px;
     text-decoration: none !important;
@@ -142,11 +147,11 @@
  * ================================================== */
 
 .luya-cms-toolbar__badge {
-    display: inline-block;
     background-color: #f0f0f0;
     border-radius: 5px;
     color: #000;
-    font-size: 12px;
+    display: inline-block;
+    font-size: 12px !important;
     line-height: 1;
     padding: 2px 8px;
     text-align: center;
@@ -192,17 +197,17 @@
 
 .luya-cms-toolbar-container__toggler-badge {
     background-color: #FF006B;
+    border-radius: 50%;
     bottom: -15px;
     color: #fff;
-    left: -15px;
-    position: absolute;
-    line-height: 25px;
-    width: 25px;
     height: 25px;
-    text-align: center;
-    border-radius: 50%;
+    left: -15px;
+    line-height: 25px;
     opacity: 1;
+    position: absolute;
+    text-align: center;
     transition: 0.5s ease-in-out opacity;
+    width: 25px;
 }
 
 .luya-cms-toolbar-wrapper--open .luya-cms-toolbar-container__toggler-badge {
@@ -268,7 +273,8 @@
  * Text colors
  * ================================================== */
 
-.luya-cms-toolbar__text {}
+.luya-cms-toolbar__text {
+}
 
 .luya-cms-toolbar__text--danger {
     color: #FF4E50;

@@ -4,6 +4,7 @@ namespace luya\admin\folder;
 
 use Yii;
 use luya\admin\storage\QueryTrait;
+use yii\base\BaseObject;
 
 /**
  * Storage Folders Querying.
@@ -15,7 +16,7 @@ use luya\admin\storage\QueryTrait;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Query extends \yii\base\Object
+class Query extends BaseObject
 {
     use QueryTrait;
     
