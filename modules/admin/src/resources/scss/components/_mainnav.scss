@@ -1,5 +1,5 @@
 @mixin label-background {
-    background-color: rgba($black, .1);
+    background-color: rgba($black, .15);
 }
 
 .mainnav {
@@ -178,7 +178,7 @@
     display: inline-block;
     line-height: 22px;
     color: map-get($grays, 400);
-    z-index: zindex(before-content);
+    z-index: zindex(popover);
 }
 
 .mainnav-icon {
