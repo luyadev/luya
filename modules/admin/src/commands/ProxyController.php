@@ -118,7 +118,7 @@ class ProxyController extends Command
      */
     public function options($actionID)
     {
-        return ['strict', 'table', 'url', 'idf', 'token'];
+        return array_merge(parent::options($actionID), ['strict', 'table', 'url', 'idf', 'token']);
     }
     
     /**
@@ -126,7 +126,7 @@ class ProxyController extends Command
      */
     public function optionAliases()
     {
-        return ['s' => 'strict', 't' => 'table', 'u' => 'url', 'i' => 'idf', 'tk' => 'token'];
+        return array_merge(parent::optionAliases(), ['s' => 'strict', 't' => 'table', 'u' => 'url', 'i' => 'idf', 'tk' => 'token']);
     }
     
     /**
