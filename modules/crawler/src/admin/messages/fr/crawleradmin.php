@@ -3,7 +3,7 @@ return [
     'crawler' => 'Crawler', // untranslatable
     'crawler_indexing' => 'Indexage',
     'crawler_analytics' => 'Analytics',
-    'crawler_anayltics_queries' => 'Search Queries',
+    'crawler_analytics_queries' => 'Search Queries',
         
     //builderindex
     'crawler_index' => 'Index des pages',

@@ -17,14 +17,14 @@ return [
     'article_is_display_limit' => 'Anzeige einschränken',
     'article_image_list' => 'Bilderliste',
     'article_file_list' => 'Dateiliste',
-    'article_tag' => 'Tag-Name',
+    'article_tag' => 'Schlagwort',
     'cat' => 'Kategorien',
     'cat_title' => 'Kategorie',
     'cat_delete_error' => 'Diese Kategorie wird noch von einem oder mehreren Terminen benutzt und kann nicht gelöscht werden.',
-    'cat_title_create_error' => 'Bitte geben Sie einen Kategorienamen ein.',
-    'tag' => 'Tags',
-    'tag_title' => 'Tag-Name',
-    'tag_title_create_error' => 'Bitte geben Sie einen Tag-Namen ein.',
+    'cat_title_create_error' => 'Bitte geben sie einen Kategorienamen ein.',
+    'tag' => 'Schlagworte',
+    'tag_title' => 'Schlagwort',
+    'tag_title_create_error' => 'Bitte geben sie ein Schlagwort an.',
     
 // 1.0.0
     

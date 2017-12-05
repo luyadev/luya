@@ -223,7 +223,7 @@ return [
     'model_storagefilter_identifier' => 'Kurzbezeichnung',
     'model_storagefilter_name' => 'Beschreibung',
     'model_tag_name' => 'Schlagwort-Bezeichnung',
-    'model_user_lastlogintimestamp' => 'Letztes Login',
+    'model_user_lastlogintimestamp' => 'Letzter Login',
     'model_user_title_mr' => 'Herr',
     'model_user_title_mrs' => 'Frau',
     'js_ngrest_toggler_success' => '%field% wurde erfolgreich aktualisiert.',
@@ -238,15 +238,15 @@ return [
     
     
 // rc4
-    
-    'api_storage_file_upload_folder_error' => 'Error while saveing the file in the storage folder. A permission error could cause this problem. Make sure the storage folder is writeable.',
+
+    'api_storage_file_upload_folder_error' => 'Es ist ein Fehler beim Speichern der Datei im Storage Ordner aufgetreten. Eine ungenügende Berechtigungsvergabe könnte der Grund dafür sein. Stelle sicher, dass der Storage-Ordner Schreibrechte besitzt.',
     'model_user_oldpassword' => 'Altes Passwort',
     'js_account_update_profile_success' => 'Das Profil wurde erfolgreich aktualisiert.',
-    'dashboard_lastlogin_title' => 'Neuste Benutzer logins',
-    'layout_useronline_activity' => 'Activity',
-    'layout_useronline_inactive' => 'inactive',
+    'dashboard_lastlogin_title' => 'Letzte Benutzer-Logins',
+    'layout_useronline_activity' => 'Aktivität',
+    'layout_useronline_inactive' => 'Inaktiv',
     'login_ssl_info' => 'Die Webseite wird über eine sichere verschlüsselte Verbindung geschützt.',
-    'locked_info' => 'Wird bearbeitet',
+    'locked_info' => 'Wird gerade bearbeitet',
     'menu_dashboard' => 'Dashboard',
     'js_link_not_set' => 'Kein Link gesetzt',
         
@@ -263,17 +263,17 @@ return [
     'view_index_redirect_mail_help' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
     'menu_button_search' => 'Suchen',
     'layout_btn_user_settings' => 'Einstellungen',
-    'upload_err_message_0' => 'Es gab keinen Fehler beim hochladen der Datei.',
-    'upload_err_message_1' => 'Die hochgeladene Datei überschreitet das Datei limit welches durch die php.ini definiert ist.',
-    'upload_err_message_2' => 'Die hochgeladene Datei überschreitet das MAX_FILE_SIZE limit des HTML form.',
+    'upload_err_message_0' => 'Die Datei wurde fehlerfrei hochgeladen.',
+    'upload_err_message_1' => 'Die hochgeladene Datei überschreitet das "upload_max_filesize"-Limit, welches in der php.ini definiert ist.',
+    'upload_err_message_2' => 'Die hochgeladene Datei überschreitet das "MAX_FILE_SIZE"-Limit des HTML Formulars.',
     'upload_err_message_3' => 'Die Datei wurde nur teilweise hochgeladen.',
-    'upload_err_message_4' => 'Keine Datei wurde hochgeladen.',
-    'upload_err_message_6' => 'Der Temporäre Ordner zum speichern der Datei fehlt.',
-    'upload_err_message_7' => 'Fehler beim speichern der Datei auf dem Datenträger.',
-    'upload_err_message_8' => 'Eine PHP extension hat den Datei upload prozess gestoppt.',
-    'model_config_atr_name' => 'Identifier',
-    'model_config_atr_name_hint' => 'Unique identifier for this variable. You can access system config with Config::get(identifier) in your application.',
-    'model_config_atr_value' => 'Value',
-    'model_config_atr_is_system' => 'Is system',
-    'menu_system_item_config' => 'Config variables'
+    'upload_err_message_4' => 'Es wurde keine Datei hochgeladen.',
+    'upload_err_message_6' => 'Der temporäre Ordner zum Speichern der Datei fehlt.',
+    'upload_err_message_7' => 'Fehler beim Speichern der Datei auf dem Datenträger.',
+    'upload_err_message_8' => 'Eine PHP-Extension hat den Datei-Upload-Prozess gestoppt.',
+    'model_config_atr_name' => 'Bezeichnung',
+    'model_config_atr_name_hint' => 'Eindeutige Bezeichnung für diese Variable. Die Systemkonfiguration kann über Config::get(identifier) in der Applikation abgefragt werden.',
+    'model_config_atr_value' => 'Wert',
+    'model_config_atr_is_system' => 'System-Attribut',
+    'menu_system_item_config' => 'Konfigurationsvariablen'
 ];
