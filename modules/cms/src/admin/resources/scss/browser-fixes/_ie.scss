@@ -20,7 +20,7 @@ body[class*='internet-explorer-'] {
     }
 
     .cmsadmin-frame {
-        height: 100%;
+        height: calc(100vh - 25px);
     }
 
 }
