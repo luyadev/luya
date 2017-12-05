@@ -1,6 +1,5 @@
 @mixin label-background {
-
-    background-color: rgba($white, .1);
+    background-color: rgba($black, .1);
 }
 
 .mainnav {
@@ -101,6 +100,7 @@
 }
 
 .mainnav-link, .mainnav-parent {
+    border: 1px solid transparent;
     border-radius: $border-radius;
     color: map-get($grays, 400);
     cursor: pointer;
@@ -146,10 +146,6 @@
         color: map-get($grays, 100);
         text-decoration: none;
 
-        .mainnav-user-online {
-            color: theme-color(primary);
-        }
-
         @media (min-width: $mobile-nav-breakpoint) {
             .mainnav-small & {
                 background-color: transparent;
@@ -165,10 +161,6 @@
             color: map-get($grays, 100);
         }
 
-        .mainnav-icon {
-            color: theme-color(primary);
-        }
-
         .mainnav-tooltip-big-wrapper {
             display: block;
             opacity: 1;
@@ -178,7 +170,6 @@
                 visibility: visible;
             }
         }
-
     }
 }
 
@@ -187,6 +178,7 @@
     display: inline-block;
     line-height: 22px;
     color: map-get($grays, 400);
+    z-index: zindex(before-content);
 }
 
 .mainnav-icon {
@@ -206,9 +198,7 @@
         }
     }
 
-    .mainnav-parent-active &,
-    .mainnav-link-active &,
-    .mainnav-link:hover & {
+    .mainnav-link-active & {
         color: theme-color(primary);
     }
 
@@ -226,7 +216,6 @@
     min-width: 24px;
     width: 100%;
     max-width: 25px;
-    
     color: map-get($grays, 400);
 
     &-small {
@@ -407,7 +396,6 @@
                 }
             }
         }
-
     }
 }
 
@@ -416,8 +404,6 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-
     font-size: 14px;
-
     color: map-get($grays, 300);
 }

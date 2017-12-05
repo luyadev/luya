@@ -37,6 +37,10 @@ $green:   #28a745;
 $teal:    #20c997;
 $cyan:    #17a2b8;
 
+// new luya logo colors v1.0.0
+
+$luya: #D40043;
+
 $colors: (
     blue: $blue,
     indigo: $indigo,
@@ -57,7 +61,7 @@ $colors: (
 );
 
 $theme-colors: (
-    primary: $pink,
+    primary: $luya,
     secondary: $gray-600,
     success: $green,
     info: $cyan,

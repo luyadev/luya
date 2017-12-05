@@ -4,7 +4,6 @@
     flex: 0 0;
     font-size: 14px;
     padding: $content-padding-y $content-padding-x;
-
     width: 100%;
 
     @media (min-width: $mobile-nav-breakpoint) {
@@ -70,7 +69,6 @@
         // background-color: $card-cap-bg;
         border-color: $card-border-color;
         text-decoration: none;
-        transition: .25s ease-in-out background-color, .25s ease-in-out border-color;
     }
 
     &-active {
@@ -116,9 +114,7 @@
         @media (min-width: $mobile-nav-breakpoint) {
             display: block;
         }
-
         display: none;
-
     }
 }
 
