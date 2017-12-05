@@ -216,7 +216,6 @@
     min-width: 24px;
     width: 100%;
     max-width: 25px;
-    
     color: map-get($grays, 400);
 
     &-small {
@@ -397,7 +396,6 @@
                 }
             }
         }
-
     }
 }
 
@@ -406,8 +404,6 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-
     font-size: 14px;
-
     color: map-get($grays, 300);
 }
