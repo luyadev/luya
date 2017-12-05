@@ -1601,7 +1601,7 @@
                                 '<label>{{label}}</label>' +
                             '</div>' +
                             '<div class="form-side form-inline datepicker-wrapper">' +
-                                '<datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy">' +
+                                '<datepicker date-set="{{pickerPreselect.toString()}}" date-week-start-day="1" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy">' +
                                         '<input class="form-control datepicker-date-input" ng-model="date" type="text" ng-focus="openDatePicker()" />' +
                                         '<div class="input-group-addon" ng-click="toggleDatePicker()">' +
                                             '<i class="material-icons" ng-hide="datePickerToggler">date_range</i>' +
@@ -1713,7 +1713,7 @@
                                 '<label>{{label}}</label>' +
                             '</div>' +
                             '<div class="form-side datepicker-wrapper">' +
-                                '<datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy">' +
+                                '<datepicker date-set="{{pickerPreselect.toString()}}" date-week-start-day="1" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy">' +
                                     '<input class="form-control datepicker-date-input" ng-model="date" type="text" ng-focus="openDatePicker()" />' +
                                     '<div class="input-group-addon" ng-click="toggleDatePicker()">' +
                                         '<i class="material-icons" ng-hide="datePickerToggler">date_range</i>' +
