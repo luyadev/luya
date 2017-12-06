@@ -17,9 +17,9 @@ use Yii;
  *
  * ```php
  *  <?= Svg::widget([
- *     'folder' => Yii::alias("@webroot/images/svg"),
+ *     'folder' => "@webroot/images/svg",
  *     'file' => 'logos/logo.svg',
- *     'cssClss' => 'additianl-class-for-css'
+ *     'cssClss' => 'additional-class-for-css'
  * ]); ?>
  * ```
  *
