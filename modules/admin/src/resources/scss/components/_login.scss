@@ -1,30 +1,32 @@
 .login-screen {
     background-color: $white;
-    position: relative;
     height: 100%;
+    position: relative;
     width: 100%;
 }
 
 .login-logo {
-    position:absolute;
-    left:10px;
+    left: 10px;
+    opacity: 0;
+    position: absolute;
     top: -65px;
     transform: translateX(0);
-    transition: .35s all ease-in-out;
+    transition: .35s ease-in-out top, .15s .2s ease-in-out opacity;
 
-    img {
+    .login-logo-svg {
+        transition: .2s ease-in-out width;
         width: 45px;
-        transition: .2s width ease-in-out;
     }
 
     @media screen and (min-height: 600px) {
-        left:50%;
-        top:0;
+        left: 50%;
+        top: 0;
         transform: translateX(-50%);
         z-index: z-index(above-content);
 
-        img {
+        .login-logo-svg {
             width: 80px;
+
             @include media-breakpoint-up(sm) {
                 width: 100px;
             }
@@ -36,6 +38,7 @@
 
         &-loaded {
             top: -100px;
+            opacity: 1;
 
             @include media-breakpoint-up(sm) {
                 top: -160px;
@@ -57,19 +60,19 @@
 }
 
 .login-frame {
-    width: 320px;
+    left: 0;
+    margin: 40px auto;
     max-width: 100%;
+    padding: 15px 15px 40px 15px;
     position: relative;
     top: 0;
-    left:0;
-    margin: 40px auto;
     transform: translate(0, 0);
-    padding: 15px 15px 40px 15px;
+    width: 320px;
 
     @media screen and (min-height: 320px) {
         margin: 0;
         top: 50%;
-        left:50%;
+        left: 50%;
         transform: translate(-50%, -50%);
     }
 }
@@ -86,40 +89,40 @@
 }
 
 .login-buttons {
-    width: 100%;
-    max-width: 100%;
     display: inline-block;
+    max-width: 100%;
     position: relative;
+    width: 100%;
 
     &-center {
-        left:50%;
-        transform: translateX(-50%);
+        left: 50%;
         position: relative;
+        transform: translateX(-50%);
     }
     &-right {
+        right: 0;
         width: 100%;
-        right:0;
 
         .login-btn {
-            right:0;
             margin-left: 50%;
             max-width: 50%;
+            right: 0;
         }
     }
     &-left {
-        left:0;
+        left: 0;
     }
 }
 
 .login-btn {
-    position: relative;
-    width:100%;
-    max-width: 100%;
-    cursor: pointer;
     box-shadow: none;
-    transition: .25s background ease-in-out;
+    cursor: pointer;
     font-weight: 300;
+    max-width: 100%;
     min-height: 38px;
+    position: relative;
+    transition: .25s background ease-in-out;
+    width: 100%;
 }
 
 .login-btn-50 {
@@ -129,19 +132,20 @@
         margin-bottom: 10px;
     }
     @include media-breakpoint-up(sm) {
-        width: calc(50% - 5px);
         float: left;
+        width: calc(50% - 5px);
         &:first-of-type {
             margin-right: 10px;
         }
     }
 }
+
 .login-title {
-    text-align: left;
     font-size: $font-size-h4;
-    margin-bottom: 20px;
     line-height: 1.05;
-    @include media-breakpoint-up(sm){
+    margin-bottom: 20px;
+    text-align: left;
+    @include media-breakpoint-up(sm) {
         font-size: $font-size-h3;
     }
 }
@@ -151,22 +155,22 @@
 }
 
 .login-form-field {
-    position: relative;
     margin-bottom: 35px;
+    position: relative;
 }
 
 .login-input-label {
-    position: absolute;
-    margin-bottom: 0;
-    top: 10px;
-    left: 10px;
-    display: inline-block;
-    width: auto;
-    transition: top .25s ease-in-out, color .25s ease-in-out, font-size .25s ease-in-out, left .25s ease-in-out;
-    font-size: 15px;
-    font-weight: 300;
     color: $gray-800;
     cursor: text;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 300;
+    left: 10px;
+    margin-bottom: 0;
+    position: absolute;
+    top: 10px;
+    transition: top .25s ease-in-out, color .25s ease-in-out, font-size .25s ease-in-out, left .25s ease-in-out;
+    width: auto;
 }
 
 @mixin login-input-not-empty {
@@ -177,12 +181,12 @@
 }
 
 .login-input {
-    display:block;
-    width: 100%;
     border: solid 1px $gray-300;
-    padding: 9px;
-    margin-bottom: 10px;
+    display: block;
     font-weight: 300;
+    margin-bottom: 10px;
+    padding: 9px;
+    width: 100%;
 
     &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 30px white inset;
@@ -223,12 +227,12 @@
 }
 
 .login-status {
-    min-height: 25px;
     margin-bottom: 35px;
+    min-height: 25px;
 
     ul {
-        padding-left: 10px;
         margin: 0;
+        padding-left: 10px;
 
         li {
             list-style: none;
@@ -240,23 +244,23 @@
 
 .login-info {
 
-    display: block;
-    position: absolute;
     bottom: 0;
-    left:0;
-    width: 100%;
-    padding: 25px;
-    text-align: center;
+    display: block;
+    left: 0;
     opacity: 1;
+    padding: 25px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
 
     &-text {
         font-weight: 300;
         .material-icons {
-            padding-right: 5px;
             color: $green;
+            font-size: 25px;
             line-height: 1;
             margin-top: -2px;
-            font-size: 25px;
+            padding-right: 5px;
         }
     }
 
@@ -266,12 +270,12 @@
 
     @include media-breakpoint-up(sm) {
 
+        padding: 25px;
+
+        text-align: left;
         h1 {
             text-align: left;
         }
-
-        padding: 25px;
-        text-align: left;
     }
 
     @media screen and (max-height: 400px) {
@@ -290,26 +294,26 @@
 }
 
 .login-success {
+    left: 50%;
     position: absolute;
     top: 50%;
-    left: 50%;
     transform: translate(-60%, -50%);
 
     i {
-        font-size: 95px;
         color: $green;
+        font-size: 95px;
     }
 }
 
 .login-links {
-    position: absolute;
     display: none;
+    position: absolute;
 
     @include media-breakpoint-up(sm) {
-        display: block;
-        right:0;
         bottom: 0;
+        display: block;
         padding: 25px;
+        right: 0;
     }
 
     @media screen and (max-height: 400px) {
@@ -318,29 +322,40 @@
     }
 
     ul {
-        padding: 0;
         margin: 0;
+        padding: 0;
 
         li {
             list-style: none;
-            padding: 0;
             margin: 0;
+            padding: 0;
         }
     }
 }
 
 .login-spinner {
+    bottom: 0;
     display: none;
-    max-height: 100%;
-    max-width: 100%;
+    left: 0;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    
-    svg {
-        width: 40px;
-        padding-top: 7px;
-        padding-left: 7px;
+    right: 0;
+    top: 0;
+
+    .svg-spinner {
+        animation: spinner .5s linear infinite;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 28px;
+    }
+}
+
+@keyframes spinner {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg)
     }
 }
