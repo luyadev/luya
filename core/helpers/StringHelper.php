@@ -45,7 +45,8 @@ class StringHelper extends \yii\helpers\BaseStringHelper
      *
      * @param string $string The string which should be checked with $with comperator
      * @param string $with The with string which must end with the wildcard symbol * e.g. `foo*` would match string `foobar`.
-     * @return boolean Whether the string starts with the wildcard marked string or not, if no wildcard symbol is contained
+     * @param boolean $caseSensitive Whether to compare the starts with string as case sensitive or not, defaults to true.
+     * @return boolean Whether the string starts with the wildcard marked string or not, if no wildcard symbol is contained.
      * in the $with it always returns false.
      */
     public static function startsWithWildcard($string, $with, $caseSensitive = true)
