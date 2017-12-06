@@ -90,13 +90,6 @@ $icon-line-height: $icon-font-size + 5px;
         display: none;
     }
 
-    &:hover {
-
-        ~ .folders-actions-right {
-            display: block;
-        }
-    }
-
     .folders-item-main > & > span {
         display: inline-block;
         vertical-align: middle;
@@ -146,10 +139,15 @@ $icon-line-height: $icon-font-size + 5px;
     /*&-edit:hover {
         color: theme-color(success);
     }*/
+
     &:hover {
 
         .folders-label {
             background-color: map-get($grays, 300);
+        }
+
+        .folders-actions-right {
+            display: block;
         }
     }
 }

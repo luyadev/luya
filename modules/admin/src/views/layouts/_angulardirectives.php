@@ -329,7 +329,10 @@ use luya\admin\helpers\Angular;
                         >
 
                             <th scope="row" ng-click="toggleSelection(file)">
-                                <div class="filemanager-fakebox" ng-class="{'filemanager-fakebox-active': inSelection(file)}"></div>
+                                <div class="form-check" ng-class="{'form-check-active': inSelection(file)}">
+                                    <input type="checkbox"  id="file_{{file.id}}" class="form-check-input">
+                                    <label for="file_{{file.id}}"></label>
+                                </div>
                             </th>
 
                             <td class="text-center" ng-click="toggleSelection(file)" tooltip tooltip-image-url="{{file.thumbnailMedium.source}}" tooltip-disabled="!file.isImage">
