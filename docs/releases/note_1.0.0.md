@@ -1,14 +1,15 @@
 Features:
 
-+ CORS enabling option
-+ Swappable filesystem
-+ Enhanced security
++ CORS enabling option (ASYNC requests from another domain)
++ Swappable filesystem (enable ec2 storage, for example)
++ Enhanced security 
 + Links to E-Mail and Files added
 + Page scheduler
-+ JsonLd
-+ UI Bugs and improvements
-+ Admin Config Registry (#1639)
-+ Crud Tabs improvement
++ JsonLd (Microdata)
++ UI Bugs and improvements 
++ Admin Config Registry (#1639) (Make config variables in the admin ui in order to use them in the frontend.. or somewhere)
++ Crud Tabs improvement ..
++ CMS Redirect Map
 
 Repos & Universe:
 
