@@ -147,7 +147,7 @@ return [
     'block_group_favorites' => 'Favoriten',
     'button_create_version' => 'Neue Version speichern',
     'button_update_version' => 'Speichern',
-    'menu_group_item_env_permission' => 'Seiten-Zugriffsberechtigungen',
+    'menu_group_item_env_permission' => 'Seiten Berechtigungen',
     
 // rc1
 

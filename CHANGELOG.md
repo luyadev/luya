@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1700](https://github.com/luyadev/luya/issues/1700) Redirection mappings in CMS Module.
 - [#1682](https://github.com/luyadev/luya/issues/1682) NgRest relations can now handle auto set the primary model value, auto open the tab and define a tab label from the crud list.
 - [#1695](https://github.com/luyadev/luya/issues/1695) NgRest Crud can handle composite primary keys.
 - [#1639](https://github.com/luyadev/luya/issues/1639) Application wide configuration table which can be managed in the admin.

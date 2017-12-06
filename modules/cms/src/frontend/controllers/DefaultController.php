@@ -7,6 +7,8 @@ use yii\web\View;
 use yii\web\NotFoundHttpException;
 use Exception;
 use luya\cms\frontend\base\Controller;
+use luya\helpers\StringHelper;
+use luya\cms\models\Redirect;
 
 /**
  * CMS Default Rendering
@@ -16,27 +18,52 @@ use luya\cms\frontend\base\Controller;
  */
 class DefaultController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public $enableCsrfValidation = false;
     
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
-        // enable content compression to remove whitespace when YII_DEBUG is disabled.
-        if (!YII_DEBUG && YII_ENV == 'prod' && $this->module->contentCompression) {
+        
+        // enable content compression to remove whitespace
+        if (!YII_DEBUG && YII_ENV_PROD && $this->module->contentCompression) {
             $this->view->on(View::EVENT_AFTER_RENDER, [$this, 'minify']);
         }
     }
 
-    public function minify($e)
+    /**
+     * Minify the view content.
+     * 
+     * @param \yii\base\ViewEvent $event
+     * @return string
+     */
+    public function minify($event)
     {
-        return $e->output = $this->view->compress($e->output);
+        return $event->output = $this->view->compress($event->output);
     }
 
+    /**
+     * 
+     * @throws NotFoundHttpException
+     * @return string
+     */
     public function actionIndex()
     {
         try {
             $current = Yii::$app->menu->current;
         } catch (Exception $e) {
+            $path = Yii::$app->request->pathInfo;
+            foreach (Redirect::find()->all() as $redirect) {
+                if ($redirect->matchRequestPath($path)) {
+                    return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
+                }
+            }
+            
             throw new NotFoundHttpException($e->getMessage());
         }
 
