@@ -1,0 +1,17 @@
+.alert-tight {
+    padding: 3px 6px;
+}
+
+.alert-outline {
+    background-color: transparent;
+}
+
+/* geneally overwrite all alert in zaa class prefixed */
+
+[class*='zaa-'] {
+    [class*='alert-']{
+        padding: 3px 6px;
+        background-color: lighten(theme-color(secondary), 40%);
+        border-color: lighten(theme-color(secondary), 30%);
+    }
+}
