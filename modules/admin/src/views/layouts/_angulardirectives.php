@@ -327,14 +327,12 @@ use luya\admin\helpers\Angular;
                             ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" class="filemanager-file"
                             ng-class="{ 'clickable selectable' : allowSelection == 'false', 'filemanager-file-selected': selectedFileFromParent && selectedFileFromParent.id == file.id, 'filemanager-file-detail-open': fileDetail.id === file.id}"
                         >
-
                             <th scope="row" ng-click="toggleSelection(file)">
                                 <div class="form-check" ng-class="{'form-check-active': inSelection(file)}">
-                                    <input type="checkbox"  id="file_{{file.id}}" class="form-check-input">
-                                    <label for="file_{{file.id}}"></label>
+                                    <input type="checkbox" ng-checked="inSelection(file)" class="form-check-input">
+                                    <label></label>
                                 </div>
                             </th>
-
                             <td class="text-center" ng-click="toggleSelection(file)" tooltip tooltip-image-url="{{file.thumbnailMedium.source}}" tooltip-disabled="!file.isImage">
                                 <span ng-if="file.isImage"><img class="responsive-img filmanager-thumb" ng-src="{{file.thumbnail.source}}" /></span>
                                 <span ng-if="!file.isImage"><i class="material-icons custom-color-icon">attach_file</i></span>
