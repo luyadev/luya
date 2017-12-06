@@ -122,7 +122,7 @@ class Redirect extends NgRestModel
         return [
             ['list', ['catch_path', 'redirect_path', 'redirect_status_code']],
             [['create', 'update'], ['catch_path', 'redirect_path', 'redirect_status_code']],
-            ['delete', false],
+            ['delete', true],
         ];
     }
     
