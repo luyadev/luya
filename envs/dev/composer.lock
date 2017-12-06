@@ -841,12 +841,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-bootstrap3.git",
-                "reference": "40c9b0441aa7f416865fbd14f4c26b0e413c3b0c"
+                "reference": "e9f9ab701bcc4de0f4dc4268449751f12957fe55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-bootstrap3/zipball/40c9b0441aa7f416865fbd14f4c26b0e413c3b0c",
-                "reference": "40c9b0441aa7f416865fbd14f4c26b0e413c3b0c",
+                "url": "https://api.github.com/repos/luyadev/luya-bootstrap3/zipball/e9f9ab701bcc4de0f4dc4268449751f12957fe55",
+                "reference": "e9f9ab701bcc4de0f4dc4268449751f12957fe55",
                 "shasum": ""
             },
             "require-dev": {
@@ -890,7 +890,7 @@
                 "luya",
                 "luya-blocks"
             ],
-            "time": "2017-11-27T13:14:37+00:00"
+            "time": "2017-12-05T16:35:37+00:00"
         },
         {
             "name": "luyadev/luya-bootstrap4",
@@ -898,12 +898,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-bootstrap4.git",
-                "reference": "fe7b8617a14e1018037155371840b46df5e395aa"
+                "reference": "1c96af3dcdc22f07b32e159b702269f87ae3d1e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-bootstrap4/zipball/fe7b8617a14e1018037155371840b46df5e395aa",
-                "reference": "fe7b8617a14e1018037155371840b46df5e395aa",
+                "url": "https://api.github.com/repos/luyadev/luya-bootstrap4/zipball/1c96af3dcdc22f07b32e159b702269f87ae3d1e8",
+                "reference": "1c96af3dcdc22f07b32e159b702269f87ae3d1e8",
                 "shasum": ""
             },
             "require-dev": {
@@ -956,20 +956,20 @@
                 "twbs4",
                 "yii2"
             ],
-            "time": "2017-11-27T13:01:23+00:00"
+            "time": "2017-12-01T15:19:43+00:00"
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "d38751971accbea722897c82e7670fa41214c317"
+                "reference": "d2cb071f72a0652832615e18b5134478a510e0db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d38751971accbea722897c82e7670fa41214c317",
-                "reference": "d38751971accbea722897c82e7670fa41214c317",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d2cb071f72a0652832615e18b5134478a510e0db",
+                "reference": "d2cb071f72a0652832615e18b5134478a510e0db",
                 "shasum": ""
             },
             "require": {
@@ -1006,7 +1006,7 @@
                 "composer",
                 "luya"
             ],
-            "time": "2017-09-02T07:47:35+00:00"
+            "time": "2017-12-03T12:32:47+00:00"
         },
         {
             "name": "luyadev/luya-generic",
@@ -1014,12 +1014,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-generic.git",
-                "reference": "fc6460ac55b3d41a89c190347372d714dbdcfaa7"
+                "reference": "cccf27253bd14fcc61d9daa2510c59140e983350"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-generic/zipball/fc6460ac55b3d41a89c190347372d714dbdcfaa7",
-                "reference": "fc6460ac55b3d41a89c190347372d714dbdcfaa7",
+                "url": "https://api.github.com/repos/luyadev/luya-generic/zipball/cccf27253bd14fcc61d9daa2510c59140e983350",
+                "reference": "cccf27253bd14fcc61d9daa2510c59140e983350",
                 "shasum": ""
             },
             "require-dev": {
@@ -1063,7 +1063,7 @@
                 "luya",
                 "luya-blocks"
             ],
-            "time": "2017-11-27T13:14:25+00:00"
+            "time": "2017-12-05T16:35:20+00:00"
         },
         {
             "name": "paypal/rest-api-sdk-php",
@@ -1280,25 +1280,25 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.3.13",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "03f957cd24bf939524f07b8b910c89cfcad722a8"
+                "reference": "3fcf2f6a67c8c10c8667b16bbd62189b9605618b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/03f957cd24bf939524f07b8b910c89cfcad722a8",
-                "reference": "03f957cd24bf939524f07b8b910c89cfcad722a8",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/3fcf2f6a67c8c10c8667b16bbd62189b9605618b",
+                "reference": "3fcf2f6a67c8c10c8667b16bbd62189b9605618b",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
-                "symfony/dom-crawler": "~2.8|~3.0"
+                "php": "^7.1.3",
+                "symfony/dom-crawler": "~3.4|~4.0"
             },
             "require-dev": {
-                "symfony/css-selector": "~2.8|~3.0",
-                "symfony/process": "~2.8|~3.0"
+                "symfony/css-selector": "~3.4|~4.0",
+                "symfony/process": "~3.4|~4.0"
             },
             "suggest": {
                 "symfony/process": ""
@@ -1306,7 +1306,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -1333,29 +1333,29 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-07T14:12:55+00:00"
+            "time": "2017-11-07T14:45:01+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.3.13",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "66e6e046032ebdf1f562c26928549f613d428bd1"
+                "reference": "4d007264ba31da78685a92f49aa13b62cbbd89b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/66e6e046032ebdf1f562c26928549f613d428bd1",
-                "reference": "66e6e046032ebdf1f562c26928549f613d428bd1",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/4d007264ba31da78685a92f49aa13b62cbbd89b4",
+                "reference": "4d007264ba31da78685a92f49aa13b62cbbd89b4",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8"
+                "php": "^7.1.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -1386,28 +1386,28 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-05T15:47:03+00:00"
+            "time": "2017-11-07T14:45:01+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.3.13",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "cebe3c068867956e012d9135282ba6a05d8a259e"
+                "reference": "d260a4e14ff4fb82eff98c88494396814962bf77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/cebe3c068867956e012d9135282ba6a05d8a259e",
-                "reference": "cebe3c068867956e012d9135282ba6a05d8a259e",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/d260a4e14ff4fb82eff98c88494396814962bf77",
+                "reference": "d260a4e14ff4fb82eff98c88494396814962bf77",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
+                "php": "^7.1.3",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
-                "symfony/css-selector": "~2.8|~3.0"
+                "symfony/css-selector": "~3.4|~4.0"
             },
             "suggest": {
                 "symfony/css-selector": ""
@@ -1415,7 +1415,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -1442,7 +1442,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-05T15:47:03+00:00"
+            "time": "2017-11-15T14:17:34+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1701,20 +1701,20 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.0.12",
+            "version": "2.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "93082f46d3568b4431a26f264e0d16a12c42bd50"
+                "reference": "b37f414959c2fafefb332020b42037cd17c1cb7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/93082f46d3568b4431a26f264e0d16a12c42bd50",
-                "reference": "93082f46d3568b4431a26f264e0d16a12c42bd50",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/b37f414959c2fafefb332020b42037cd17c1cb7f",
+                "reference": "b37f414959c2fafefb332020b42037cd17c1cb7f",
                 "shasum": ""
             },
             "require": {
-                "yiisoft/yii2": "~2.0.11",
+                "yiisoft/yii2": "~2.0.13",
                 "yiisoft/yii2-bootstrap": "~2.0.0"
             },
             "type": "yii2-extension",
@@ -1744,7 +1744,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2017-10-09T20:30:01+00:00"
+            "time": "2017-12-05T07:36:23+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",

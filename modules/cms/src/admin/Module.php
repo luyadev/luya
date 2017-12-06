@@ -41,12 +41,13 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'api-cms-navitempageblockitem' => 'luya\cms\admin\\apis\\NavItemPageBlockItemController',
         'api-cms-nav' => 'luya\cms\admin\apis\NavController',
         'api-cms-navitem' => 'luya\cms\admin\\apis\\NavItemController',
-        'api-cms-menu' => 'luya\cms\admin\apis\MenuController', // should put into api-cms-admin
+        'api-cms-menu' => 'luya\cms\admin\apis\MenuController',
         'api-cms-layout' => 'luya\cms\admin\\apis\\LayoutController',
         'api-cms-block' => 'luya\cms\admin\\apis\\BlockController',
         'api-cms-blockgroup' => 'luya\cms\admin\\apis\\BlockgroupController',
         'api-cms-navcontainer' => 'luya\cms\admin\apis\NavContainerController',
         'api-cms-navitemblock' => 'luya\cms\admin\apis\NavItemBlockController',
+        'api-cms-redirect' => 'luya\cms\admin\apis\RedirectController',
     ];
 
     /**
@@ -224,6 +225,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
                     ->itemApi('menu_group_item_env_container', 'cmsadmin/navcontainer/index', 'label_outline', 'api-cms-navcontainer')
                     ->itemApi('menu_group_item_env_layouts', 'cmsadmin/layout/index', 'view_quilt', 'api-cms-layout')
                     ->itemRoute('menu_group_item_env_config', 'cmsadmin/config/index', 'build')
+                    ->itemApi('menu_group_item_env_redirections', 'cmsadmin/redirect/index', 'compare_arrows', 'api-cms-redirect')
                 ->group('menu_group_elements')
                     ->itemApi('menu_group_item_elements_group', 'cmsadmin/blockgroup/index', 'view_module', 'api-cms-blockgroup')
                     ->itemApi('menu_group_item_elements_blocks', 'cmsadmin/block/index', 'format_align_left', 'api-cms-block');
