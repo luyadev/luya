@@ -10,6 +10,24 @@ Features:
 + Admin Config Registry (#1639)
 + Crud Tabs improvement
 
+Repos & Universe:
+
++ 2 new repos (bootstrap3, generic)
++ current available in stable release
+ + core
+ + admin
+ + cms
+ + contact
+ + deployer
+ + testsuite
+ + crawler
+ + errorapi
+ + frontendgroup
+ + gallery
+ + news
+ + remoteadmin
+ + styleguide
+
 Dev Facts:
 
 + 6500 commits
