@@ -6,10 +6,11 @@
     background-color: transparent;
 }
 
-/* geneally overwrite all alert in zaa class prefixed */
+/* generally overwrite all alerts inside zaa prefixed css class */
 
 [class*='zaa-'] {
-    [class*='alert-']{
+    [class*='alert-'] {
+        font-size: 13px;
         padding: 3px 6px;
         background-color: lighten(theme-color(secondary), 40%);
         border-color: lighten(theme-color(secondary), 30%);
