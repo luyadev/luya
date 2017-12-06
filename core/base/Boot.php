@@ -193,7 +193,7 @@ abstract class Boot
         }
         
         $this->includeYii();
-        $this->app = new ConsoleApplication(ArrayHelper::merge([
+        $mergedConfig = ArrayHelper::merge($config, [
             'bootstrap' => ['luya\console\Bootstrap'],
             'components' => [
                 'urlManager' => [
@@ -204,7 +204,8 @@ abstract class Boot
                     'hostInfo' => isset($config['consoleHostInfo']) ? $config['consoleHostInfo'] : null,
                 ],
             ],
-        ], $config));
+        ]);
+        $this->app = new ConsoleApplication($mergedConfig);
         if (!$this->mockOnly) {
             exit($this->app->run());
         }
@@ -219,7 +220,8 @@ abstract class Boot
     {
         $config = $this->getConfigArray();
         $this->includeYii();
-        $this->app = new WebApplication(ArrayHelper::merge(['bootstrap' => ['luya\web\Bootstrap']], $config));
+        $mergedConfig = ArrayHelper::merge($config, ['bootstrap' => ['luya\web\Bootstrap']]);
+        $this->app = new WebApplication($mergedConfig);
         if (!$this->mockOnly) {
             return $this->app->run();
         }

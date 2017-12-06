@@ -114,7 +114,7 @@ class UrlManager extends \yii\web\UrlManager
     public function addRules($rules, $append = true)
     {
         foreach ($rules as $key => $rule) {
-            if (isset($rule['composition'])) {
+            if (is_array($rule) && isset($rule['composition'])) {
                 foreach ($rule['composition'] as $composition => $pattern) {
                     $rules[] = [
                         'pattern' => $pattern,
