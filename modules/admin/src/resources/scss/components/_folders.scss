@@ -6,211 +6,143 @@ $icon-line-height: $icon-font-size + 5px;
     margin: 0;
     max-width: 100%;
     padding: 0;
-    width: 320px;
+    // width: 320px;
+
     @media (min-width: $mobile-nav-breakpoint) {
         width: 100%;
     }
 }
 
-.folders-item {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: 4px;
-    overflow: hidden;
+.folders-folder-item {
+    display: block;
+    width: 100%;
+}
+
+.folders-folder {
+    display: block;
+    padding: 2px 75px 2px 20px;
     position: relative;
 
-    &:not(:first-of-type) {
-        margin-top: 4px;
+    &-main {
+        padding: 0;
     }
 
     .material-icons {
-        font-size: $icon-font-size;
-        line-height: $icon-line-height;
+        font-size: 20px;
+        line-height: 20px;
     }
 
     .folders {
-        display: block;
-        flex: 0 0 100%;
-        margin-top: 5px;
         padding-left: 10px;
-        width: 100%;
-    }
-
-    .folders-items {
-        padding-left: 3px;
-    }
-    .is-movable {
-        .folders-label {
-            background-color: map-get($grays, 300);
-        }
-        .folders-actions-right {
-            display: block;
-        }
     }
 }
 
-.folders-item-root {
-    padding-left: 26px;
-}
-
-.folders-text {
-    display: block;
-    flex: 1 1 auto;
-    margin-right: 3px;
-    padding-left: 3px;
-    padding-right: 3px;
-    /*transition: background-color .2s ease-in-out;*/
-
-    &:hover {
-        background-color: map-get($grays, 300);
-    }
-}
-
-.folders-collapse {
-    cursor: pointer;
-    flex: 0 0 20px;
-    &:hover {
-        color: theme-color(primary);
-    }
-    order: -2;
-}
-
-.folders-label {
-    align-items: center;
-    border-radius: $border-radius;
-    cursor: pointer;
-    display: block;
-    margin-right: 3px;
-    padding: 0 4px;
-    width: 100%;
-
-    .edit > &,
-    .delete > & {
-        display: none;
-    }
-
-    .folders-item-main > & > span {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    .is-moveable & {
-        display: block;
-    }
-}
-
-.folders-folder-name {
-    padding-left: 26px;
-}
-
-.folders-folder-icon {
-    display: inline-block;
-    margin-right: 5px;
-    margin-top: -2px;
-    position: absolute;
-
-    .is-active > .folders-label &,
-    .is-active > .folders-actions > .folders-label & {
-        color: theme-color(primary);
-    }
-}
-
-.folders-input {
-    display: none;
-
-    .form-control {
-        padding-bottom: 4px;
-        padding-top: 4px;
-    }
-
-    .edit > & {
-        display: block;
-    }
-}
-
-.folders-actions {
-    padding-left: 20px;
-    width: 100%;
-
-    &-delete:hover {
-        color: theme-color(danger);
-    }
-    /*&-edit:hover {
-        color: theme-color(success);
-    }*/
-
-    &:hover {
-
-        .folders-label {
-            background-color: map-get($grays, 300);
-        }
-
-        .folders-actions-right {
-            display: block;
-        }
-    }
-}
-
-.folders-actions-left,
-.folders-actions-right {
-    height: 100%;
-    position: absolute;
-    top: 0;
-}
-
-.folders-actions-left {
+.folder-left {
     left: 0;
+    position: absolute;
+    top: 3px;
 }
 
-.folders-actions-right {
-    background-color: map-get($grays, 500);
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-    display: none;
-    opacity: 1;
-    padding-left: 2px;
-    padding-right: 2px;
-    right: 0;
-    transition: opacity .2s ease-in-out;
-
-    &:hover {
-        display: block;
-    }
+.folder-toggler {
+    background: none;
+    border: none;
+    margin: 0;
+    outline: none;
+    padding: 0;
 }
 
-.folders-edit, .folders-actions {
+.folder-middle {
+    display: block;
+    padding-left: 25px;
     position: relative;
 }
 
-.folders-actions-toggler,
-.folders-actions-edit,
-.folders-actions-delete,
-.folders-actions-abort,
-.folders-actions-save {
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin: 0;
-    outline: 0 !important;
-    padding: 0;
+.folder-icon {
+    left: 0;
+    position: absolute;
+    top: -1px;
 }
 
-.folders-actions-toggler {
-    i {
-        margin-top: -3px;
+.folder-label {
+    display: block;
+
+    .folders-folder--edit & {
+        opacity: 0;
     }
 }
 
-.folder-label-input {
-    display: inline-block;
-    margin: 0 0 0 30px;
-    max-height: 24px;
-    padding: 0;
-    width: 128px;
+.folder-edit {
+    display: none;
+    left: 25px;
+    position: absolute;
+    right: 0;
+    top: -3px;
+
+    .folders-folder--edit & {
+        display: block;
+    }
 }
 
-.folders-folder-move-icon {
-    cursor: pointer;
-    right: 10px;
+.folder-edit-input {
+    display: block;
+    width: 100%;
+}
+
+.folder-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.folder-action-default {
+    display: none;
+
+    .folders-folder:not(.folders-folder--edit):not(.folders-folder--move-to):hover > & {
+        display: block;
+    }
+
+    .folders-folder--edit > &,
+    .folders-folder--move-to > & {
+        display: none;
+    }
+}
+
+.folder-action-edit {
+    display: none;
+
+    .folders-folder--edit > & {
+        display: block;
+    }
+}
+
+.folder-action-move-to {
+    display: none;
+
+    .folders-folder--move-to > & {
+        display: block;
+    }
+}
+
+.folder-button {
+    background-color: color(gray-light);
+    border: none;
+    border-radius: 0;
+    outline: none;
+
+    &:hover {
+        background-color: color(gray);
+        color: color(white);
+    }
+    &--delete:hover {
+        background-color: color(red);
+        color: color(white);
+    }
+
+    &:first-of-type {
+        border-radius: $border-radius 0 0 $border-radius;
+    }
+
+    & + .folder-button {
+        margin-left: -4px;
+    }
 }

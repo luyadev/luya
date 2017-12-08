@@ -20,7 +20,7 @@
 
 .filemanager-folders {
     align-self: stretch;
-    flex: 0 0 250px;
+    flex: 0 0 350px;
 
     padding-top: $content-padding-y;
     padding-bottom: $content-padding-y;
@@ -70,11 +70,8 @@
     }
 
     @media (min-width: $mobile-nav-breakpoint) {
-
         padding-left: $content-padding-x;
-
     }
-
 }
 
 .filemanager-files-table {
