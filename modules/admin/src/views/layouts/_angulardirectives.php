@@ -162,35 +162,47 @@ use luya\admin\helpers\Angular;
 </script>
 
 <script type="text/ng-template" id="reverseFolders">
-    <span class="folders-actions" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-position="right">
-        <span class="folders-actions-left">
-            <button class="folders-actions-toggler" ng-click="toggleFolderItem(folder)" ng-if="folder.subfolder == true">
-				<i class="material-icons" ng-if="folder.toggle_open">keyboard_arrow_down</i>
-				<i class="material-icons" ng-if="!folder.toggle_open">keyboard_arrow_right</i>
-			</button>
-        </span>
-        <span class="folders-text folders-label" ng-click="changeCurrentFolderId(folder.id)">
-            <span class="folders-folder-icon" ng-if="currentFolderId == folder.id">
-                <i class="material-icons">folder</i>
-            </span>
-            <span class="folders-folder-icon" ng-if="currentFolderId != folder.id">
-                <i class="material-icons">folder_open</i>
-            </span>
-            <div class="folders-folder-name" ng-hide="editFolderLabel">{{folder.name }}</div>
-        </span>
-        <span class="folder-text folder-edit" ng-show="editFolderLabel">
-            <input class="folder-label-input" ng-model="folder.name" type="text" />
-        </span>
-        <span class="folders-actions-right" ng-class="{'folders-actions-right-edit': editFolderLabel, 'is-visible': editFolderLabel}" ng-show="!showFoldersToMove" ng-init="editFolderLabel = false;">
-            <button class="folders-actions-edit" ng-hide="editFolderLabel" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">edit</i></button>
-            <button class="folders-actions-delete" ng-hide="editFolderLabel || folder.subfolder" ng-click="deleteFolder(folder)"><i class="material-icons">delete</i></button>
-            <button ng-show="editFolderLabel" class="folders-actions-save" ng-click="updateFolder(folder); editFolderLabel=!editFolderLabel"><i class="material-icons">check</i></button>
-            <button ng-show="editFolderLabel" class="folders-actions-abort" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">cancel</i></button>
-        </span>
-        <span class="folders-actions-right folders-actions-right-edit" ng-show="showFoldersToMove">
-             <span class="folders-folder-move-icon" ng-click="moveFilesTo(folder.id)"><i class="material-icons">subdirectory_arrow_left</i></span>
-        </span>
-    </span>
+    <div class="folders-folder" ng-class="{'folders-folder--edit': editFolderLabel && !showFoldersToMove, 'folders-folder--move-to': showFoldersToMove}" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-position="right">
+
+        <div class="folder-left">
+            <button class="folder-toggler" ng-click="toggleFolderItem(folder)" ng-if="folder.subfolder == true">
+                <i class="material-icons" ng-if="folder.toggle_open">keyboard_arrow_down</i>
+                <i class="material-icons" ng-if="!folder.toggle_open">keyboard_arrow_right</i>
+            </button>
+        </div>
+
+        <div class="folder-middle" ng-click="changeCurrentFolderId(folder.id)">
+            <div class="folder-icon">
+                <span class="folders-folder-icon" ng-if="currentFolderId == folder.id">
+                    <i class="material-icons">folder</i>
+                </span>
+                <span class="folders-folder-icon" ng-if="currentFolderId != folder.id">
+                    <i class="material-icons">folder_open</i>
+                </span>
+            </div>
+
+            <div class="folder-label" ng-hide="editFolderLabel">{{folder.name }}</div>
+
+            <div class="folder-edit">
+                <input class="folder-edit-input" ng-model="folder.name" type="text" />
+            </div>
+        </div>
+
+        <div class="folder-right folder-action-default">
+            <button class="folders-edit" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">edit</i></button>
+            <button class="folders-delete" ng-hide="folder.subfolder" ng-click="deleteFolder(folder)"><i class="material-icons">delete</i></button>
+        </div>
+
+        <div class="folder-right folder-action-edit">
+            <button class="folder-save" ng-click="updateFolder(folder); editFolderLabel=!editFolderLabel"><i class="material-icons">check</i></button>
+            <button class="folder-abort" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">cancel</i></button>
+        </div>
+
+        <div class="folder-right folder-action-mobe-to">
+            <button class="folder-move-to" ng-click="moveFilesTo(folder.id)"><i class="material-icons">subdirectory_arrow_left</i></button>
+        </div>
+
+    </div>
     <ul class="folders" ng-show="folder.subfolder === true && folder.toggle_open==1">
         <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id, 'is-movable' : showFoldersToMove}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
     </ul>
