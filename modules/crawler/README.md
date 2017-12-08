@@ -1,8 +1,8 @@
-# Page Crawler
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/logo/luya-logo-0.2x.png" alt="LUYA Logo"/>
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/logo/luya-logo-0.2x.png" alt="LUYA Logo"/>
 </p>
+
+# Crawler
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-crawler/v/stable)](https://packagist.org/packages/luyadev/luya-module-crawler)
