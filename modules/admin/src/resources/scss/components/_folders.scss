@@ -6,13 +6,148 @@ $icon-line-height: $icon-font-size + 5px;
     margin: 0;
     max-width: 100%;
     padding: 0;
-    width: 320px;
+    // width: 320px;
+
     @media (min-width: $mobile-nav-breakpoint) {
         width: 100%;
     }
 }
 
-.folders-item {
+.folders-folder-item {
+    display: block;
+    width: 100%;
+}
+
+.folders-folder {
+    display: block;
+    padding: 2px 75px 2px 20px;
+    position: relative;
+
+    &-main {
+        padding: 0;
+    }
+
+    .material-icons {
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    .folders {
+        padding-left: 10px;
+    }
+}
+
+.folder-left {
+    left: 0;
+    position: absolute;
+    top: 3px;
+}
+
+.folder-toggler {
+    background: none;
+    border: none;
+    margin: 0;
+    outline: none;
+    padding: 0;
+}
+
+.folder-middle {
+    display: block;
+    padding-left: 25px;
+    position: relative;
+}
+
+.folder-icon {
+    left: 0;
+    position: absolute;
+    top: -1px;
+}
+
+.folder-label {
+    display: block;
+
+    .folders-folder--edit & {
+        opacity: 0;
+    }
+}
+
+.folder-edit {
+    display: none;
+    left: 25px;
+    position: absolute;
+    right: 0;
+    top: -3px;
+
+    .folders-folder--edit & {
+        display: block;
+    }
+}
+
+.folder-edit-input {
+    display: block;
+    width: 100%;
+}
+
+.folder-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.folder-action-default {
+    display: none;
+
+    .folders-folder:not(.folders-folder--edit):not(.folders-folder--move-to):hover > & {
+        display: block;
+    }
+
+    .folders-folder--edit > &,
+    .folders-folder--move-to > & {
+        display: none;
+    }
+}
+
+.folder-action-edit {
+    display: none;
+
+    .folders-folder--edit > & {
+        display: block;
+    }
+}
+
+.folder-action-move-to {
+    display: none;
+
+    .folders-folder--move-to > & {
+        display: block;
+    }
+}
+
+.folder-button {
+    background-color: color(gray-light);
+    border: none;
+    border-radius: 0;
+    outline: none;
+
+    &:hover {
+        background-color: color(gray);
+        color: color(white);
+    }
+    &--delete:hover {
+        background-color: color(red);
+        color: color(white);
+    }
+
+    &:first-of-type {
+        border-radius: $border-radius 0 0 $border-radius;
+    }
+
+    & + .folder-button {
+        margin-left: -4px;
+    }
+}
+
+/*.folders-item {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -52,4 +187,5 @@ $icon-line-height: $icon-font-size + 5px;
 
 .folders-item-root {
     padding-left: 26px;
-}
+}*/
+

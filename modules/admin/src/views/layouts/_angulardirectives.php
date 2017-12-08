@@ -162,7 +162,7 @@ use luya\admin\helpers\Angular;
 </script>
 
 <script type="text/ng-template" id="reverseFolders">
-    <div class="folders-folder" ng-class="{'folders-folder--edit': editFolderLabel && !showFoldersToMove, 'folders-folder--move-to': showFoldersToMove}" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-position="right">
+    <div class="folders-folder" ng-init="editFolderLabel = false" ng-class="{'folders-folder--edit': editFolderLabel && !showFoldersToMove, 'folders-folder--move-to': showFoldersToMove}" tooltip tooltip-expression="folderCountMessage(folder)" tooltip-position="right">
 
         <div class="folder-left">
             <button class="folder-toggler" ng-click="toggleFolderItem(folder)" ng-if="folder.subfolder == true">
@@ -171,17 +171,15 @@ use luya\admin\helpers\Angular;
             </button>
         </div>
 
-        <div class="folder-middle" ng-click="changeCurrentFolderId(folder.id)">
-            <div class="folder-icon">
-                <span class="folders-folder-icon" ng-if="currentFolderId == folder.id">
-                    <i class="material-icons">folder</i>
-                </span>
-                <span class="folders-folder-icon" ng-if="currentFolderId != folder.id">
-                    <i class="material-icons">folder_open</i>
-                </span>
-            </div>
+        <div class="folder-middle">
+            <span ng-click="changeCurrentFolderId(folder.id)">
+                <div class="folder-icon">
+                    <i class="material-icons" ng-if="currentFolderId == folder.id">folder</i>
+                    <i class="material-icons" ng-if="currentFolderId != folder.id">folder_open</i>
+                </div>
 
-            <div class="folder-label" ng-hide="editFolderLabel">{{folder.name }}</div>
+                <div class="folder-label">{{folder.name }}</div>
+            </span>
 
             <div class="folder-edit">
                 <input class="folder-edit-input" ng-model="folder.name" type="text" />
@@ -189,22 +187,22 @@ use luya\admin\helpers\Angular;
         </div>
 
         <div class="folder-right folder-action-default">
-            <button class="folders-edit" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">edit</i></button>
-            <button class="folders-delete" ng-hide="folder.subfolder" ng-click="deleteFolder(folder)"><i class="material-icons">delete</i></button>
+            <button class="folder-button folder-button--edit" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">edit</i></button>
+            <button class="folder-button folder-button--delete" ng-hide="folder.subfolder" ng-click="deleteFolder(folder)"><i class="material-icons">delete</i></button>
         </div>
 
         <div class="folder-right folder-action-edit">
-            <button class="folder-save" ng-click="updateFolder(folder); editFolderLabel=!editFolderLabel"><i class="material-icons">check</i></button>
-            <button class="folder-abort" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">cancel</i></button>
+            <button class="folder-button folder-button--save" ng-click="updateFolder(folder); editFolderLabel=!editFolderLabel"><i class="material-icons">check</i></button>
+            <button class="folder-button folder-button--abort" ng-click="editFolderLabel=!editFolderLabel;"><i class="material-icons">cancel</i></button>
         </div>
 
-        <div class="folder-right folder-action-mobe-to">
-            <button class="folder-move-to" ng-click="moveFilesTo(folder.id)"><i class="material-icons">subdirectory_arrow_left</i></button>
+        <div class="folder-right folder-action-move-to">
+            <button class="folder-button folder-button--move-to" ng-click="moveFilesTo(folder.id)"><i class="material-icons">subdirectory_arrow_left</i></button>
         </div>
 
     </div>
     <ul class="folders" ng-show="folder.subfolder === true && folder.toggle_open==1">
-        <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id, 'is-movable' : showFoldersToMove}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
+        <li class="folders-folder-item" ng-class="{'is-active' : currentFolderId == folder.id, 'is-movable' : showFoldersToMove}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:folder.id" ng-include="'reverseFolders'"></li>
     </ul>
 </script>
 
@@ -226,18 +224,19 @@ use luya\admin\helpers\Angular;
                 </div>
             </div>
             <ul class="folders mt-4">
-                <li class="folders-item folders-item-main" ng-class="{'is-active' : currentFolderId == 0}">
-                    <span class="folders-text folders-label" ng-click="changeCurrentFolderId(0)">
-                        <span class="folders-folder-icon folders-folder-icon-active" ng-if="currentFolderId == 0">
-                            <i class="material-icons">folder</i>
+                <li class="folders-folder folders-folder-main" ng-class="{'is-active' : currentFolderId == 0}">
+                    <div class="folder-middle">
+                        <span ng-click="changeCurrentFolderId(0)">
+                            <div class="folder-icon">
+                                <i class="material-icons" ng-if="currentFolderId == 0">folder</i>
+                                <i class="material-icons" ng-if="currentFolderId != 0">folder_open</i>
+                            </div>
+
+                            <div class="folder-label"><?= Admin::t('layout_filemanager_root_dir'); ?></div>
                         </span>
-                        <span class="folders-folder-icon" ng-if="currentFolderId != 0">
-                            <i class="material-icons">folder_open</i>
-                        </span>
-                        <div class="folders-item-root"><?= Admin::t('layout_filemanager_root_dir'); ?></div>
-                    </span>
-                    <ul class="folders folders-items">
-                        <li class="folders-item" ng-class="{'is-active' : currentFolderId == folder.id, 'is-movable' : showFoldersToMove}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
+                    </div>
+                    <ul class="folders">
+                        <li class="folders-folder-item" ng-class="{'is-active' : currentFolderId == folder.id, 'is-movable' : showFoldersToMove}" ng-repeat="folder in foldersData | toArray:false | orderBy:'name' | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
                     </ul>
                 </li>
             </ul>
