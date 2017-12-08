@@ -1,7 +1,7 @@
 # Page Crawler
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/images/luya_logo_rc4.png" alt="LUYA Logo"/>
+  <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/internals/logo/luya-logo-0.2x.png" alt="LUYA Logo"/>
 </p>
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
