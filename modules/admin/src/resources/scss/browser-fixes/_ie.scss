@@ -113,4 +113,20 @@ body[class*='internet-explorer-'] {
             color: $white;
         }
     }
+
+    /**
+     * ====================
+     * ZAA
+     * ====================
+     */
+    .zaa-datetime .hour-selection .input-group-addon,
+    .zaa-datetime-hour-input,
+    .zaa-datetime-minute-input {
+        height: 39px;
+    }
+
+    .zaa-datetime ._720kb-datepicker-calendar {
+        position: absolute;
+        left: 0;
+    }
 }
