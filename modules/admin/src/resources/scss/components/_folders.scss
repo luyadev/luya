@@ -11,6 +11,10 @@ $icon-line-height: $icon-font-size + 5px;
     @media (min-width: $mobile-nav-breakpoint) {
         width: 100%;
     }
+
+    button:focus {
+        outline: none;
+    }
 }
 
 .folders-folder-item {
@@ -22,6 +26,10 @@ $icon-line-height: $icon-font-size + 5px;
     display: block;
     padding: 2px 75px 2px 20px;
     position: relative;
+
+    &--undeletable {
+        padding-right: 40px;
+    }
 
     &-main {
         padding: 0;
@@ -47,24 +55,31 @@ $icon-line-height: $icon-font-size + 5px;
     background: none;
     border: none;
     margin: 0;
-    outline: none;
     padding: 0;
+    outline: none;
 }
 
 .folder-middle {
     display: block;
     padding-left: 25px;
     position: relative;
+    border: 1px solid transparent;
+    border-radius: $border-radius;
+
+    &:hover {
+        border-color: color(gray-light);
+    }
 }
 
 .folder-icon {
-    left: 0;
+    left: 2px;
     position: absolute;
     top: -1px;
 }
 
 .folder-label {
     display: block;
+    padding-right: 4px;
 
     .folders-folder--edit & {
         opacity: 0;
@@ -91,7 +106,7 @@ $icon-line-height: $icon-font-size + 5px;
 .folder-right {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 2px;
 }
 
 .folder-action-default {
@@ -133,6 +148,7 @@ $icon-line-height: $icon-font-size + 5px;
         background-color: color(gray);
         color: color(white);
     }
+
     &--delete:hover {
         background-color: color(red);
         color: color(white);
