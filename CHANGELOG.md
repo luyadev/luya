@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1639](https://github.com/luyadev/luya/issues/1639) Application wide configuration table which can be managed in the admin.
 - [#1467](https://github.com/luyadev/luya/issues/1467) Main nav context menu for logout and account preferences.
 - [#1557](https://github.com/luyadev/luya/issues/1557) Allow unicode chars for cms page aliases and slugify directives.
+- [#1551](https://github.com/luyadev/luya/issues/1551) JsonLd basic implementation.
 - [#1534](https://github.com/luyadev/luya/issues/1534) Link ability for files and e-mail addresses.
 - [#1540](https://github.com/luyadev/luya/issues/1540) CMS Log Dashboard.
 - [#1304](https://github.com/luyadev/luya/issues/1304) Crud indicates the total amount of rows with pagination enabled or disabled.
