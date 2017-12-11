@@ -36,11 +36,11 @@ LUYA 1.0 includes common content blocks and widgets that are available in two fl
 
 **Additions and enhancements since RC4 include:**
 
-+ Cross Origin Resource Sharing (CORS) can be enabled to accept AJAX requests from other domains
++ Cross Origin Resource Sharing (CORS) can be enabled to accept AJAX requests from other domains
 + The local file system can be swapped for other storages like Amazon's EC2
 + The link plugin can target mail addresses and storage files besides menu items and external URLs
 + Web pages can be scheduled to become active and inactive at specific dates and times
-+ Web page content can be accompanied by microdata in JSON-LD format 
++ Web page content can be accompanied by microdata in JSON-LD format 
 + The tabs to open relational data in CRUD views have been improved (they open automatically and are labelled)
 + The administration UI includes the feature to define variables (key/value) that can be used throughout the frontend and elsewhere
 + URL redirections can be defined directly in the administration UI (e.g. to forward old URLs or to provide short URLs for communication purposes)

@@ -41,7 +41,7 @@ There are different scope pointers you can configure in order to tell your forms
 |list      |List all table rows with the given columns.
 |create    |Forms to create a new record with the given columns.
 |update    |Forms to update an existing record with the given columns.
-|delete    |Define whether items of the data table can be deleted or not. To activate deletion set this pointer to `true`.
+|delete    |Define whether items of the data table can be deleted or not. To activate deletion set this pointer to `true`.
 |aw        |Attach a [[ngrest-activewindow.md]] to each row in the list overview, e.g. a button next to edit button.
 
 As you know what section/scope you can define with your already defined attributes you have to define the {{luya\admin\ngrest\base\NgRestModel::ngRestConfig()}} method, this could look as followed:

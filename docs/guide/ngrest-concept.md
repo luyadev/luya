@@ -124,7 +124,7 @@ Each NgRest CRUD needs an API (to make the REST call, create, update, list which
 
 ### NgRest Controller
 
-The NgRest controller will prepare and render the forms based on your model. Therefore define the {{luya\admin\ngrest\base\Controller::$modelClass}} property with fresh created {{luya\admin\ngrest\base\NgRestModel}}.
+The NgRest controller will prepare and render the forms based on your model. Therefore define the {{luya\admin\ngrest\base\Controller::$modelClass}} property with fresh created {{luya\admin\ngrest\base\NgRestModel}}.
 
 ```php
 <?php
@@ -159,7 +159,7 @@ This would generate a new button in the settings dropdown which would call the a
 
 The API controller will return the REST formatted data from your model.
 
-The API controller needs to know from which configuration of the API it should be build from, therefore define the {{luya\admin\ngrest\base\Api::$modelClass}} property with your defined {{luya\admin\ngrest\base\NgRestModel}}.
+The API controller needs to know from which configuration of the API it should be build from, therefore define the {{luya\admin\ngrest\base\Api::$modelClass}} property with your defined {{luya\admin\ngrest\base\NgRestModel}}.
 
 ```php
 <?php
@@ -225,6 +225,6 @@ public function getMenu()
 
 The icons `account` and `extension` have been chosen from the google material icons: https://design.google.com/icons/. You can add as much nodes, groups and items as you want. The first argument of `node`, `group` and `itemApi` as the navigation button display in the admin UI. You can wrap them with Yii::t in order to make internalisation available.
 
-### Import and privileges
+### Import and privileges
 
 Run the `./vendor/bin/luya import` command in order to add new permissions and menu entries. After the import process is finished, log into your admin UI and set the correct privileges in **System > User > Authorizations** otherwise you won't see the created menu items.
