@@ -82,7 +82,7 @@ Where *139* could be the image `id` from your database source active record. If 
 <? endforeach; ?>
 ```
 
-or you can use the filter name directly which is not recommend as if the filter name change you have to search and replace trough the whole project for the deprached names.
+Or you can use the filter name directly which is not recommend as if the filter name change you have to search and replace trough the whole project for the deprached names.
 
 ```php
 <? foreach($newsData as $item): ?>
@@ -90,6 +90,6 @@ or you can use the filter name directly which is not recommend as if the filter 
 <? endforeach; ?>
 ```
 
-the filter must be exact name like the method identifier() returns from the filter class.
+The filter must be exact name like the method identifier() returns from the filter class.
 
 > The {{luya\admin\image\Item::applyFilter}} returns the new generated {{\luya\admin\image\Item}} Object where you can access other methods and informations.
