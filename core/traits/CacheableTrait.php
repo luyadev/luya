@@ -101,7 +101,7 @@ trait CacheableTrait
     * @param \Closure $closure the closure that will be used to generate a value to be cached.
     * In case $closure returns `false`, the value will not be cached.
     * @param int $duration default duration in seconds before the cache will expire. If not set,
-    * [[defaultDuration]] value will be used.
+    * [[defaultDuration]] value will be used. 0 means never expire.
     * @param Dependency $dependency dependency of the cached item. If the dependency changes,
     * the corresponding value in the cache will be invalidated when it is fetched via [[get()]].
     * This parameter is ignored if [[serializer]] is `false`.
@@ -127,6 +127,7 @@ trait CacheableTrait
      * @param mixed $value The value to store in the cache component.
      * @param \yii\caching\Dependency|array $dependency Dependency of the cached item. If the dependency changes, the corresponding value in the cache will be invalidated when it is fetched
      * via get(). This parameter is ignored if $serializer is false. You can also define an array with defintion which will generate the Object instead of object is provided.
+     * @param $cacheExpiration integer The time in seconds before the cache data expires, 0 means never expire.
      * @return boolean Whether set has been success or not
      */
     public function setHasCache($key, $value, $dependency = null, $cacheExpiration = null)
