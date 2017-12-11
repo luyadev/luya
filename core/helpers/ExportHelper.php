@@ -34,10 +34,11 @@ class ExportHelper
     }
 
     /**
-     *
+     * Generate content by rows.
+     * 
      * @param array $contentRows
-     * @param unknown $delimiter
-     * @param unknown $keys
+     * @param string $delimiter
+     * @param string $keys
      * @param string $generateHeader
      * @return string
      */
@@ -94,15 +95,19 @@ class ExportHelper
     }
 
     /**
-     *
+     * Generate a row by its items.
+     * 
      * @param array $row
-     * @param unknown $delimiter
-     * @param unknown $enclose
+     * @param string $delimiter
+     * @param string $enclose
      * @return string
      */
     protected static function generateRow(array $row, $delimiter, $enclose)
     {
         array_walk($row, function (&$item) use ($enclose) {
+            if (!is_scalar($item)) {
+                $item = "array";
+            }
             $item = $enclose.Html::encode($item).$enclose;
         });
         
