@@ -1,6 +1,6 @@
 # LUYA 1.0.0 Release Notes
 
-Today, after more than two years of development, we are proud to announce the release of version 1.0 of LUYA. Along the way to this milestone, the system has seen 6'500 commits, 16 alpha releases, 8 beta releases and 4 release candidates. 35 developers have contributed to the source code and provided translations for 10 languages. LUYA has been downloaded XXXX times and has been used for more than 100 web projects, some popular high-traffic websites among them. But more important than looking back is looking forward to the further development and adoption of LUYA and the growth of its community in the months and years to come!
+Today, after more than two years of development, we are proud to announce the release of version 1.0 of LUYA. Along the way to this milestone, the system has seen 6'500 commits, 16 alpha releases, 8 beta releases and 4 release candidates. 35 developers have contributed to the source code and provided translations for 10 languages. LUYA has been downloaded 79565 (overall) times and has been used for more than 100 web projects, some popular high-traffic websites among them. But more important than looking back is looking forward to the further development and adoption of LUYA and the growth of its community in the months and years to come!
 
 **Why use LUYA for your next web project?**
 
