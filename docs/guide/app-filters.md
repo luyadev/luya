@@ -66,7 +66,7 @@ As you can see the effect thumbnail use the {{luya\admin\base\Filter::THUMBNAIL_
 
 You can apply filters directly inside the view scripts to an image. In our examples we have static image number *139* which would be the `id in the admin_storage_table and we use the above created filter identifier *my-filter*.
 
-### apply filter in php view
+### Apply filter in PHP view
 
 An example of how to apply a filter in real`time to a retrieved image:
 
