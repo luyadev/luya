@@ -20,7 +20,7 @@ abstract class Select extends Plugin
     public $initValue = 0;
     
     /**
-     * @var string This value will be displayed in the ngrest list overview if the given value is empty().
+     * @var string This value will be displayed in the ngrest list overview if the given value is empty(). In order to turn off this behavior set `emptyListValue` to false.
      */
     public $emptyListValue = "-";
 
