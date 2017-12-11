@@ -281,7 +281,7 @@ You can also use one of the predefined group block class:
 
 + {{\luya\cms\frontend\blockgroups\MainGroup}} (this is default group for all blocks)
 + {{\luya\cms\frontend\blockgroups\LayoutGroup}}
-+ {{{luya\cms\frontend\blockgroups\ProjectGroup}}
++ {{\luya\cms\frontend\blockgroups\ProjectGroup}}
 + {{\luya\cms\frontend\blockgroups\DevelopmentGroup}}
 + {{\luya\cms\frontend\blockgroups\MediaGroup}}
 + {{\luya\cms\frontend\blockgroups\TextGroup}}
