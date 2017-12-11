@@ -7,7 +7,8 @@ LUYA admin UI is currently supported by following operating systems and browsers
 + Firefox 47
 + Chrome 52
 + Opera 47
-+ Safari: *ONLY PARTIALLY SUPPORT YET* (flexbox browser bugs)
++ Safari (10.1)
++ Yandex 14.12
 
 ## Windows 10 and up
 
@@ -15,15 +16,26 @@ LUYA admin UI is currently supported by following operating systems and browsers
 + Firefox 47
 + Chrome 52
 + Opera 47
-+ IE 11: is not supported at the moment (under construction)
++ IE 11
++ Yandex 14.12
+
+## Windows 7
+
++ Edge 14
++ Firefox 47
++ Chrome 52
++ Opera 47
++ IE 10
++ Yandex 14.12
 
 ## Mobile Systems
 
-iPad 2, iOS 8.0
+iPad Pro iOS 10.3
 + Safari
 
 Android 4.4 and up
 + Chrome
+(for example Galaxy Tab 4 10.4)
 
 Admin UI is only partially supported by mobile devices.
 
