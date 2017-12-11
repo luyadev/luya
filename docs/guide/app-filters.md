@@ -64,9 +64,9 @@ As you can see the effect thumbnail use the {{luya\admin\base\Filter::THUMBNAIL_
 
 ## Using the Filters
 
-You can apply filters directly inside the view scripts to an image. In our examples we have static image number *139* which would be the `id in the admin_storage_table and we use the above created filter identifier *my-filter*.
+You can apply filters directly inside the view scripts to an image. In our examples we have static image number **139** which would be the `id` in the admin_storage_table and we use the above created filter identifier **my-filter**.
 
-### apply filter in php view
+### Apply filter in PHP view
 
 An example of how to apply a filter in real`time to a retrieved image:
 
@@ -74,7 +74,7 @@ An example of how to apply a filter in real`time to a retrieved image:
 <img src="<?= Yii::$app->storage->getImage(139)->applyFilter('my-filter')->source; ?>" border="0" />
 ```
 
-Where *139* could be the image `id` from your database source active record. If you have a field with image() in your ngRest model you can access directly this variable:
+Where **139** could be the image `id` from your database source active record. If you have a field with image() in your ngRest model you can access directly this variable:
 
 ```php
 <? foreach($newsData as $item): ?>
@@ -90,6 +90,6 @@ or you can use the filter name directly which is not recommend as if the filter 
 <? endforeach; ?>
 ```
 
-the filter must be exact name like the method identifier() returns from the filter class.
+The filter must be exact name like the method identifier() returns from the filter class.
 
 > The {{luya\admin\image\Item::applyFilter}} returns the new generated {{\luya\admin\image\Item}} Object where you can access other methods and informations.
