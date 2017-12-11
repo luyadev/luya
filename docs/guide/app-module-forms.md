@@ -40,7 +40,7 @@ The corresponding view file `views/controller/index.php` could look like this:
     <p>Thank you for your request</p>
 <?php else: ?>
         
-    <? $form = \yii\widgets\ActiveForm::begin(); ?> <!-- start of form -->
+    <?php $form = \yii\widgets\ActiveForm::begin(); ?> <!-- start of form -->
 
     <?= $form->field($model, 'field1'); ?> <!-- example field definition -->
     <?= $form->field($model, 'field2'); ?> <!-- example field definition -->
@@ -48,7 +48,7 @@ The corresponding view file `views/controller/index.php` could look like this:
 
     <?= yii\helpers\Html::submitButton('Verify', ['class' => 'button']) ?>
 
-    <? \yii\widgets\ActiveForm::end(); ?> <!-- end of form -->
+    <?php \yii\widgets\ActiveForm::end(); ?> <!-- end of form -->
 
 <?php endif; ?>
 ```

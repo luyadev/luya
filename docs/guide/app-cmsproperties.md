@@ -101,7 +101,7 @@ Working with a property object:
         <?php /* now depending on the if the property `navImage` is set for this page item we can access this property object. */
         if ($item->getProperty('navImage')): ?>
         <img src="<?= $item->getProperty('navImage'); ?>" /> // equals to: <img src="<?= $item->getProperty('navImage')->getValue(); ?>" />
-        <? endif; ?>
+        <?php endif; ?>
     </a>
 </li>
 <?php endforeach; ?>

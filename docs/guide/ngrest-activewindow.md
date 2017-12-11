@@ -97,11 +97,11 @@ use luya\admin\ngrest\aw\CallbackFormWidget;
 
 ?>
 <div>
-    <? $form = CallbackFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
+    <?php $form = CallbackFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
     <?= $form->field('firstname', 'Firstname'); ?>
     <?= $form->field('password', 'Password')->passwordInput(); ?>
     <?= $form->field('message', 'Message')->textarea(); ?>
-    <? $form::end(); ?>
+    <?php $form::end(); ?>
 </div>
 ```
 

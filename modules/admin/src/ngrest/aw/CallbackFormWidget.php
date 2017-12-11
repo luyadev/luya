@@ -15,7 +15,7 @@ use luya\base\Widget;
  * Example usage:
  *
  * ```php
- * <? $form = CallbackFormWidget::begin(['callback' => 'get-coordinates', 'buttonValue' => 'Verify', 'angularCallbackFunction' => 'function($response) {
+ * <?php $form = CallbackFormWidget::begin(['callback' => 'get-coordinates', 'buttonValue' => 'Verify', 'angularCallbackFunction' => 'function($response) {
  *
  * console.log($response)
  *
@@ -33,7 +33,7 @@ use luya\base\Widget;
  * // textarea
  * <?= $form->field('text')->textarea(); ?>
  *
- * <? $form::end(); ?>
+ * <?php $form::end(); ?>
  * ```
  *
  * @author Basil Suter <basil@nadar.io>

@@ -57,9 +57,9 @@ The only part which missing is the rendered view code. We want to parse each ima
 ```php
 <div style="background-color:#00b0ff; width:100%">
     <div class="slider" style="margin:50px;padding:50px;">
-        <? foreach($this->extraValue("images") as $image): ?>
+        <?php foreach($this->extraValue("images") as $image): ?>
         <div><img class="slider__image img-fluid" src="<?= $image->source ?>" /></div>
-        <? endforeach;?>
+        <?php endforeach;?>
     </div>
 </div>
 ```
@@ -98,9 +98,9 @@ $this->appView->registerJs("$('.slider').slick({
 
 <div style="background-color:#00b0ff; width:100%">
     <div class="slider" style="margin:50px;padding:50px;">
-        <? foreach($this->extraValue("images") as $image): ?>
+        <?php foreach($this->extraValue("images") as $image): ?>
         <div><img class="slider__image img-fluid" src="<?= $image->source ?>" /></div>
-        <? endforeach;?>
+        <?php endforeach;?>
     </div>
 </div>
 ```

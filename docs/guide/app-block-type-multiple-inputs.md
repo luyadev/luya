@@ -31,7 +31,7 @@ Generate a expandable list with custom nested fields and/or plugins inside each 
 ### Output in frontend
 
 ```php
-<? print_r($this->varValue('people')); ?>
+<?php print_r($this->varValue('people')); ?>
 
 Array (
     [0] => Array

@@ -263,7 +263,7 @@ class DefaultController extends Controller
 For our first view, the list view, we will create the `views/default/index.php` and define a [Yii 2 grid view](http://www.yiiframework.com/doc-2.0/yii-grid-gridview.html). We pass over our **$dataproviders** and **$groups** which were defined in our **DefaultController** above. We parse each contact group, print the group name and render the contact data from the data provider for the current group. We are setting up some styling options for the grid view and define some custom row options as we want to be able to click on a table entry and see the mouse hovering. For the **onclick** event we define the `location.href` change to link to the detail view and some background color changes for the **onmouseover** and **onmouseout** event. This is how it looks in the end:
 
 ```php
-<? foreach ($groups as $group): ?>
+<?php foreach ($groups as $group): ?>
     <h3><?= $group->name ?></h3>    
     <?= \yii\grid\GridView::widget([
         'dataProvider' => $this->context->getGroupProvider($group),
@@ -298,7 +298,7 @@ For our first view, the list view, we will create the `views/default/index.php` 
         },
         'tableOptions' => ['class' => 'table table-bordered']
     ]); ?>
-<? endforeach; ?>
+<?php endforeach; ?>
 ```
 
 Again you should work with style sheets, CSS class names and external javascript files but for the sake of a short example we will define everything inline.

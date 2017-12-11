@@ -45,7 +45,7 @@ public function actionIndex()
 But you can also directly set the title inside your view file:
 
 ```php
-<? $this->title = 'Hello World title'; ?>
+<?php $this->title = 'Hello World title'; ?>
 <p>...</p>
 ```
 

@@ -77,17 +77,17 @@ An example of how to apply a filter in real`time to a retrieved image:
 Where **139** could be the image `id` from your database source active record. If you have a field with image() in your ngRest model you can access directly this variable:
 
 ```php
-<? foreach($newsData as $item): ?>
+<?php foreach($newsData as $item): ?>
     <img src="<?= Yii::$app->storage->getImage($item['imageId'])->applyFilter(\app\filters\MyFilter::identifier())->source; ?>" border="0" />
-<? endforeach; ?>
+<?php endforeach; ?>
 ```
 
 or you can use the filter name directly which is not recommend as if the filter name change you have to search and replace trough the whole project for the deprecated names.
 
 ```php
-<? foreach($newsData as $item): ?>
+<?php foreach($newsData as $item): ?>
     <img src="<?= Yii::$app->storage->getImage($item['imageId'])->applyFilter('my-filter')->source; ?>" border="0" />
-<? endforeach; ?>
+<?php endforeach; ?>
 ```
 
 The filter must be exact name like the method identifier() returns from the filter class.
