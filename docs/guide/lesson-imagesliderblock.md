@@ -14,7 +14,7 @@ Creating a block in LUYA is very simple when using our wizards. As [shown in the
 For our image slider block we will create an app block named ImagesliderBlock" with one `var named **images** and labeled **Images**.
 See the GIF below:
 
-![Creating ImagesliderBlock](img/imagesliderblock-create.gif "Creating block with commands")
+![Creating ImagesliderBlock](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/imagesliderblock-create.gif "Creating block with commands")
 
 This will automatically create an pre filled "ImagesliderBlock.php" in our **blocks** directory and an empty view file with the same name in **views/blocks**
 
