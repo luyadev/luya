@@ -32,5 +32,4 @@ The {{\luya\cms\helpers\BlockHelper}} provides you an optimized markup for the s
          3 => '2/3 Column',
      ]
  )],
-
  ```
