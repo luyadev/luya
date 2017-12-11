@@ -7,7 +7,7 @@ use luya\admin\base\TypesInterface;
 
 /**
  * Sort Relation Plugin.
- * 
+ *
  * The SortRelation provides the abilitie to select **multiple** items and to **sort** them. This plugin
  * does NOT work with a relation table, the selected data will be stored as json in a text field.
  *
@@ -18,7 +18,7 @@ abstract class SortRelation extends Plugin
 {
     /**
      * Provide an array with data where key is the value and value the label.
-     * 
+     *
      * @return array
      */
     abstract public function getData();

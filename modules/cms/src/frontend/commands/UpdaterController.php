@@ -82,7 +82,6 @@ class UpdaterController extends Command
         
         // change namespace from existing cms block to new generic block package.
         foreach (Block::find()->where(['like', 'class', '\\luya\\cms'])->all() as $block) {
-            
             $originClassName = str_replace("luya\\cms\\frontend\\blocks\\", "", $block->class);
             
             $originClassName = ltrim($originClassName, '\\');

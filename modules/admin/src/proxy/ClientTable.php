@@ -121,7 +121,6 @@ class ClientTable extends BaseObject
             
             $progress = 1;
             for ($i=0; $i<$this->getOffsetTotal(); $i++) {
-                
                 $requestData = $this->request($i);
                 
                 if (!$requestData) {

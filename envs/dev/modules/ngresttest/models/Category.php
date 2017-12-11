@@ -8,8 +8,8 @@ use luya\admin\aws\DetailViewActiveWindow;
 
 /**
  * Category.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  *
  * @property integer $id
  * @property string $name

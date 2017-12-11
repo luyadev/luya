@@ -18,7 +18,7 @@ trait ErrorHandlerTrait
     /**
      * @var string The url of the error api without trailing slash. Make sure you have installed the error api
      * module on the requested api url (https://luya.io/guide/module/luyadev---luya-module-errorapi).
-     * 
+     *
      * An example when using the erroapi module, the url could look like this `https://luya.io/errorapi`.
      */
     public $api;

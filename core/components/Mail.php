@@ -169,7 +169,7 @@ class Mail extends Component
     
     /**
      * Compose a new mail message.
-     * 
+     *
      * Make sure to change mailer object or global variables after composer command, as before it will flush the mailer object.
      *
      * @param string $subject The subject of the mail

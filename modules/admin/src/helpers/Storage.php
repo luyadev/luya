@@ -22,7 +22,7 @@ class Storage
 {
     /**
      * Get the file upload error messages.
-     * 
+     *
      * @return array All possible error codes when uploading files with its given message and meaning.
      */
     public static function getUploadErrorMessages()

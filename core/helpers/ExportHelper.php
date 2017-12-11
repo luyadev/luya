@@ -35,7 +35,7 @@ class ExportHelper
 
     /**
      * Generate content by rows.
-     * 
+     *
      * @param array $contentRows
      * @param string $delimiter
      * @param string $keys
@@ -96,7 +96,7 @@ class ExportHelper
 
     /**
      * Generate a row by its items.
-     * 
+     *
      * @param array $row
      * @param string $delimiter
      * @param string $enclose

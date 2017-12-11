@@ -4,8 +4,8 @@ namespace ngresttest\controllers;
 
 /**
  * Event Controller.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  */
 class EventController extends \luya\admin\ngrest\base\Controller
 {

@@ -4,7 +4,7 @@ namespace luya\admin\ngrest\plugins;
 
 /**
  * Sort Relation Array Plugin.
- * 
+ *
  * Generate a multi selectable and sortable list based on an arry input.
  *
  * Example usage:
@@ -38,7 +38,7 @@ class SortRelationArray extends SortRelation
     
     /**
      * Setter method for the data.
-     * 
+     *
      * @param array $data
      */
     public function setData(array $data)

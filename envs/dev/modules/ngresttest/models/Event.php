@@ -7,8 +7,8 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Event.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  *
  * @property integer $id
  * @property string $name
@@ -72,7 +72,7 @@ class Event extends NgRestModel
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\admin\ngrest\base\NgRestModel::ngRestRelations()
      */

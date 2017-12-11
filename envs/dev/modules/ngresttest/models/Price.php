@@ -9,8 +9,8 @@ use luya\admin\ngrest\plugins\SelectModel;
 
 /**
  * Price.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  *
  * @property integer $event_id
  * @property integer $category_id

@@ -85,7 +85,7 @@ class Config extends BaseObject implements ConfigInterface
     }
 
     /**
-     * 
+     *
      * @param array $relations
      */
     public function setRelation(NgRestRelation $relation)
@@ -104,7 +104,7 @@ class Config extends BaseObject implements ConfigInterface
     }
     
     /**
-     * 
+     *
      * @param unknown $apiEndpoint
      */
     public function setApiEndpoint($apiEndpoint)
@@ -123,7 +123,7 @@ class Config extends BaseObject implements ConfigInterface
     }
     
     /**
-     * 
+     *
      * @param array $groups
      */
     public function setAttributeGroups(array $groups)
@@ -138,7 +138,7 @@ class Config extends BaseObject implements ConfigInterface
      */
     public function setAttributeLabels(array $labels)
     {
-        $this->_attributeLabels = $labels;   
+        $this->_attributeLabels = $labels;
     }
     
     private $_filters = false;
@@ -152,7 +152,7 @@ class Config extends BaseObject implements ConfigInterface
     }
     
     /**
-     * 
+     *
      * @param array $filters
      */
     public function setFilters(array $filters)
@@ -163,7 +163,7 @@ class Config extends BaseObject implements ConfigInterface
     private $_defaultOrder;
     
     /**
-     * 
+     *
      * @return unknown
      */
     public function getDefaultOrder()
@@ -172,7 +172,7 @@ class Config extends BaseObject implements ConfigInterface
     }
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\admin\ngrest\ConfigInterface::setDefaultOrder()
      */
@@ -192,7 +192,7 @@ class Config extends BaseObject implements ConfigInterface
     }
     
     /**
-     * 
+     *
      * @param unknown $groupByField
      */
     public function setGroupByField($groupByField)
@@ -223,7 +223,7 @@ class Config extends BaseObject implements ConfigInterface
     }
     
     /**
-     * 
+     *
      * @param unknown $key
      */
     public function setPrimaryKey($key)
@@ -280,7 +280,7 @@ class Config extends BaseObject implements ConfigInterface
     }
 
     /**
-     * 
+     *
      * @param unknown $pointer
      * @return boolean
      */
@@ -290,7 +290,7 @@ class Config extends BaseObject implements ConfigInterface
     }
 
     /**
-     * 
+     *
      * @param unknown $pointer
      * @param boolean $defaultValue
      * @return string
@@ -301,7 +301,7 @@ class Config extends BaseObject implements ConfigInterface
     }
 
     /**
-     * 
+     *
      * @param unknown $pointer
      * @param unknown $field
      * @return boolean
@@ -312,7 +312,7 @@ class Config extends BaseObject implements ConfigInterface
     }
 
     /**
-     * 
+     *
      * @param unknown $pointer
      * @param unknown $field
      * @return boolean
@@ -323,7 +323,7 @@ class Config extends BaseObject implements ConfigInterface
     }
 
     /**
-     * 
+     *
      * @param unknown $pointer
      * @param array $fields
      * @return boolean[]
@@ -361,7 +361,7 @@ class Config extends BaseObject implements ConfigInterface
     }
 
     /**
-     * 
+     *
      * @param unknown $pointer
      * @param unknown $field
      * @param array $options
@@ -392,7 +392,7 @@ class Config extends BaseObject implements ConfigInterface
     }
 
     /**
-     * 
+     *
      * @param unknown $fieldName
      * @param unknown $optionKey
      * @param unknown $optionValue
@@ -414,7 +414,7 @@ class Config extends BaseObject implements ConfigInterface
 
     /**
      * Whether delete is enabled or not.
-     * 
+     *
      * @return boolean
      */
     public function isDeletable()
@@ -426,7 +426,7 @@ class Config extends BaseObject implements ConfigInterface
     
     /**
      * Get all plugins.
-     * 
+     *
      * @return array
      */
     public function getPlugins()
@@ -455,7 +455,7 @@ class Config extends BaseObject implements ConfigInterface
     
     /**
      * Get all extra fields.
-     * 
+     *
      * @return array
      */
     public function getExtraFields()

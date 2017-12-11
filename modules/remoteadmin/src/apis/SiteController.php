@@ -4,7 +4,7 @@ namespace luya\remoteadmin\apis;
 
 /**
  * Site model API.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

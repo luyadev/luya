@@ -5,7 +5,6 @@ namespace tests\web\cmsadmin\models;
 use cmstests\CmsFrontendTestCase;
 use luya\cms\models\NavItem;
 
-
 class NavItemTest extends CmsFrontendTestCase
 {
     public function testSlugifyAlias()

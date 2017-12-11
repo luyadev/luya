@@ -259,9 +259,9 @@ abstract class BaseFileSystemStorage extends Component
     
     /**
      * Setter method for fiels array.
-     * 
+     *
      * This is mainly used when working with unit tests.
-     * 
+     *
      * @param array $files
      */
     public function setFilesArray(array $files)
@@ -300,9 +300,9 @@ abstract class BaseFileSystemStorage extends Component
 
     /**
      * Setter method for images array.
-     * 
+     *
      * This is mainly used when working with unit tests.
-     * 
+     *
      * @param array $images
      */
     public function setImagesArray(array $images)
@@ -751,9 +751,9 @@ abstract class BaseFileSystemStorage extends Component
     
     /**
      * Setter method for filters array.
-     * 
+     *
      * This is mainly used when working with unit tests.
-     * 
+     *
      * @param array $filters
      */
     public function setFiltersArray(array $filters)

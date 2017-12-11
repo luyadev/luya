@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 
 /**
  * NgRest Relation Defintion.
- * 
+ *
  * An NgRest Relation defined which is used by {{luya\admin\ngrest\base\NgRestModel::ngRestRelations()}} array.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -31,13 +31,13 @@ class NgRestRelation extends BaseObject implements NgRestRelationInterface
      */
     public function getModelClass()
     {
-        return $this->_modelClass;    
+        return $this->_modelClass;
     }
     
     private $_apiEndpoint;
     
     /**
-     * 
+     *
      * @param string $apiEndpoint
      */
     public function setApiEndpoint($apiEndpoint)
@@ -56,7 +56,7 @@ class NgRestRelation extends BaseObject implements NgRestRelationInterface
     private $_relationLink;
     
     /**
-     * 
+     *
      * @param string $relationLink
      */
     public function setRelationLink($relationLink)
@@ -82,7 +82,7 @@ class NgRestRelation extends BaseObject implements NgRestRelationInterface
     private $_tabLabelAttribute;
     
     /**
-     * 
+     *
      * @param string $attribute
      */
     public function setTabLabelAttribute($attribute)
@@ -101,7 +101,7 @@ class NgRestRelation extends BaseObject implements NgRestRelationInterface
     private $_dataProvider;
     
     /**
-     * 
+     *
      * @param QueryInterface $query
      */
     public function setDataProvider(QueryInterface $query)
@@ -120,7 +120,7 @@ class NgRestRelation extends BaseObject implements NgRestRelationInterface
     private $_label;
 
     /**
-     * 
+     *
      * @param string $label
      */
     public function setLabel($label)

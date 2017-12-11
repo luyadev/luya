@@ -104,11 +104,11 @@ class JsonLd extends BaseObject
     public static function image($url, $caption, array $options = [])
     {
         $date = ArrayHelper::remove($options, 'datePublished', null);
-        
+
         if ($date !== null && is_numeric($date)) {
             $date = date("Y-d-m", $date);
         }
-        
+
         self::addGraph([
             "@context" => "http://schema.org",
             "@type" => "ImageObject",

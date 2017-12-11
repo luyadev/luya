@@ -48,12 +48,12 @@ class Angular
      */
     protected static function injector($type, $ngModel, $label, $options = [], array $mergeOptions = [])
     {
-    	// parse boolean values to integer values is it would not bind the values correctly to the angular directive.
-    	foreach ($mergeOptions as $key => $value) {
-    		if (!is_array($value) && is_bool($value)) {
-    			$mergeOptions[$key] = (int) $value;
-    		}
-    	}
+        // parse boolean values to integer values is it would not bind the values correctly to the angular directive.
+        foreach ($mergeOptions as $key => $value) {
+            if (!is_array($value) && is_bool($value)) {
+                $mergeOptions[$key] = (int) $value;
+            }
+        }
         return static::directive($type, array_merge($mergeOptions, [
             'model' => $ngModel,
             'label' => $label,
@@ -110,7 +110,7 @@ class Angular
     
     /**
      * Sort Relation Array.
-     * 
+     *
      * Generates a multi selection and sortable list and returns a json array with the selected values.
      *
      * @param string $ngModel The name of the ng model which should be used for data binding.

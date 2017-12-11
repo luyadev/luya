@@ -9,10 +9,10 @@ use yii\base\BaseObject;
 
 /**
  * Base Thing.
- * 
+ *
  * Every JsonLD object must implement BaseThing. Therfore BaseThing auto resolves the fields, in
  * order to provide the Arrayable::fields() methods.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
@@ -23,7 +23,7 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
     
     /**
      * Contains the jsonLd definton @type value if not null or false.
-     * 
+     *
      * @return boolean|string Generates the @type field.
      */
     public function typeDefintion()
@@ -33,27 +33,27 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
     
     /**
      * Find all getter methods.
-     * 
+     *
      * @return array
      */
     public function resolveGetterMethods()
     {
-    	$resolved = [];
-    	$methods = get_class_methods($this);
-    	
-    	if (!$methods) {
-    		return [];
-    	}
-    	
-    	foreach ($methods as $method) {
-    		if (StringHelper::startsWith($method, 'get', true)) {
-    			$resolved[] = lcfirst(StringHelper::replaceFirst('get', '', $method));
-    		}
-    	}
-    	
-    	asort($resolved);
-    	
-    	return $resolved;
+        $resolved = [];
+        $methods = get_class_methods($this);
+        
+        if (!$methods) {
+            return [];
+        }
+        
+        foreach ($methods as $method) {
+            if (StringHelper::startsWith($method, 'get', true)) {
+                $resolved[] = lcfirst(StringHelper::replaceFirst('get', '', $method));
+            }
+        }
+        
+        asort($resolved);
+        
+        return $resolved;
     }
     
     /**
@@ -71,16 +71,16 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
     }
     
     /**
-     * @inheritdoc 
+     * @inheritdoc
      */
     public function fields()
     {
-    	return $this->resolveGetterMethods();
+        return $this->resolveGetterMethods();
     }
     
     /**
      * Cleanup array from null values.
-     * 
+     *
      * @param array $haystack
      * @return array
      */

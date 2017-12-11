@@ -23,10 +23,10 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
 
     public function testBaseThingGetters()
     {
-    	$thing = (new Thing());
-    	$same = ['name', 'additionalType', 'alternateName', 'description', 'disambiguatingDescription', 'identifier', 'image', 'mainEntityOfPage', 'potentialAction', 'sameAs', 'subjectOf', 'url'];
-    	sort($same);
-    	$this->assertSame($same, $thing->resolveGetterMethods());
+        $thing = (new Thing());
+        $same = ['name', 'additionalType', 'alternateName', 'description', 'disambiguatingDescription', 'identifier', 'image', 'mainEntityOfPage', 'potentialAction', 'sameAs', 'subjectOf', 'url'];
+        sort($same);
+        $this->assertSame($same, $thing->resolveGetterMethods());
     }
 
     public function testThing()
@@ -48,7 +48,7 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ];
         
         $this->assertSame($fields, $thing->toArray());
-	}
+    }
 
     public function testPerson()
     {
@@ -59,5 +59,4 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
             '@type' => 'Person',
         ], $thing->toArray());
     }
-
 }

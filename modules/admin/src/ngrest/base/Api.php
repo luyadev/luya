@@ -330,7 +330,7 @@ class Api extends RestActiveController
 
     /**
      * Export the Data into a temp CSV.
-     * 
+     *
      * @return array
      * @throws ErrorException
      */

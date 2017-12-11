@@ -32,7 +32,7 @@ class SortRelationModel extends SortRelation
     public $valueField;
     
     /**
-     * 
+     *
      * @var string The name of the field which should display the record label.
      */
     public $labelField;

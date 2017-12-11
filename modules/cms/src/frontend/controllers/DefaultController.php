@@ -38,7 +38,7 @@ class DefaultController extends Controller
 
     /**
      * Minify the view content.
-     * 
+     *
      * @param \yii\base\ViewEvent $event
      * @return string
      */
@@ -48,7 +48,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * 
+     *
      * @throws NotFoundHttpException
      * @return string
      */

@@ -24,22 +24,22 @@ class BaseFileSystemStorageTest extends AdminTestCase
     
     public function testBaseFileSystemStorage()
     {
-    	/** @var $mock \luya\admin\storage\BaseFileSystemStorage */
-    	$mock = $this->getMockForAbstractClass('luya\admin\storage\BaseFileSystemStorage', ['request' => Yii::$app->request]);
-    	
-    	// just test wrong get file and get image methods which sure return false and empty arrays
-    	$this->assertFalse($mock->getFile(0));
-    	$this->assertEmpty($mock->findFiles([]));
-    	$this->assertEmpty($mock->findFile([]));
-    	
-    	$this->assertFalse($mock->getImage(0));
-    	$this->assertEmpty($mock->findImages([]));
-    	$this->assertEmpty($mock->findImage([]));
-    	
-    	$this->assertFalse($mock->getFolder(0));
-    	$this->assertEmpty($mock->findFolder([]));
-    	$this->assertEmpty($mock->findFolders([]));
-    	
-    	$this->assertNull($mock->flushArrays());
+        /** @var $mock \luya\admin\storage\BaseFileSystemStorage */
+        $mock = $this->getMockForAbstractClass('luya\admin\storage\BaseFileSystemStorage', ['request' => Yii::$app->request]);
+        
+        // just test wrong get file and get image methods which sure return false and empty arrays
+        $this->assertFalse($mock->getFile(0));
+        $this->assertEmpty($mock->findFiles([]));
+        $this->assertEmpty($mock->findFile([]));
+        
+        $this->assertFalse($mock->getImage(0));
+        $this->assertEmpty($mock->findImages([]));
+        $this->assertEmpty($mock->findImage([]));
+        
+        $this->assertFalse($mock->getFolder(0));
+        $this->assertEmpty($mock->findFolder([]));
+        $this->assertEmpty($mock->findFolders([]));
+        
+        $this->assertNull($mock->flushArrays());
     }
 }

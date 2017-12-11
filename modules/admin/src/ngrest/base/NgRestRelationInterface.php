@@ -4,9 +4,9 @@ namespace luya\admin\ngrest\base;
 
 /**
  * NgRest Relation Interface.
- * 
+ *
  * Each relation defintion must be an instance of this class.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 interface NgRestRelationInterface
@@ -15,14 +15,14 @@ interface NgRestRelationInterface
     
     /**
      * Set the model class of the current ngRestModel.
-     * 
+     *
      * @param string $modelClass
      */
     public function setModelClass($modelClass);
 
     /**
      * Set the index of the relation in the relations array.
-     * 
+     *
      * @param integer $arrayIndex
      */
     public function setArrayIndex($arrayIndex);

@@ -4,7 +4,7 @@ namespace luya\remoteadmin\controllers;
 
 /**
  * SiteController provides Site management via Active Record.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

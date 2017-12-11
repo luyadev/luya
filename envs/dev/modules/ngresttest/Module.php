@@ -30,6 +30,5 @@ class Module extends \luya\admin\base\Module
         ->itemApi('Event', 'ngresttestadmin/event/index', 'label', 'api-ngresttest-event')
         ->itemApi('Price', 'ngresttestadmin/price/index', 'label', 'api-ngresttest-price')
         ->itemApi('Category', 'ngresttestadmin/category/index', 'label', 'api-ngresttest-category');
-        
     }
 }

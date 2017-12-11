@@ -72,12 +72,12 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     
     /**
      * Setter method for menu Container.
-     * 
+     *
      * @param Menu $menu
      */
     public function setMenu(Menu $menu)
     {
-    	$this->_menu = $menu;
+        $this->_menu = $menu;
     }
     
     /**
@@ -424,7 +424,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
                     case 'in':
                         return in_array($value, $expression['value']);
                     case '!=':
-                    	return ($value != $expression['value']);
+                        return ($value != $expression['value']);
                     default:
                         return ($value == $expression['value']);
                 }

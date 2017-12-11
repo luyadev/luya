@@ -10,8 +10,8 @@ use luya\cms\admin\Module;
 
 /**
  * Redirect.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
  *
  * @property integer $id
  * @property integer $timestamp_create
@@ -83,7 +83,7 @@ class Redirect extends NgRestModel
             [['timestamp_create', 'redirect_status_code'], 'integer'],
             [['catch_path', 'redirect_path', 'redirect_status_code'], 'required'],
             [['catch_path', 'redirect_path'], 'string', 'max' => 255],
-            [['catch_path'], function($attribute) {
+            [['catch_path'], function ($attribute) {
                 if (!StringHelper::startsWith($this->catch_path, '/')) {
                     $this->addError($attribute, Module::t('redirect_model_atr_catch_path_error'));
                 }
@@ -128,7 +128,7 @@ class Redirect extends NgRestModel
     
     /**
      * Match Request Path against catch_path.
-     * 
+     *
      * @param string $requestPath
      * @return boolean
      */
@@ -140,12 +140,12 @@ class Redirect extends NgRestModel
         if (StringHelper::startsWithWildcard($requestPath, $this->catch_path)) {
             return true;
         }
-        // compare strings        
+        // compare strings
         return ($requestPath == $this->catch_path);
     }
     
     /**
-     * 
+     *
      * @return string
      */
     public function getRedirectUrl()

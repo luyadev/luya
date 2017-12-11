@@ -303,22 +303,22 @@ class InjectItem extends BaseObject implements InjectItemInterface
      */
     public function getLang()
     {
-    	if ($this->_lang === null) {
-    		$this->_lang = $this->item->lang;
-    	}
-    	
-    	return $this->_lang;
+        if ($this->_lang === null) {
+            $this->_lang = $this->item->lang;
+        }
+        
+        return $this->_lang;
     }
     
     /**
      * Setter method for language container.
-     * 
+     *
      * @param string $lang The language short code for the given item, if nothing set the item will be resolved
      * due to useage of the parent item from $this->item.
      */
     public function setLang($lang)
     {
-    	$this->_lang = $lang;
+        $this->_lang = $lang;
     }
     
     /**

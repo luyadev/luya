@@ -102,7 +102,7 @@ class LocalFileSystem extends BaseFileSystemStorage
     
     public function setServerPath($path)
     {
-        $this->_serverPath = $path;   
+        $this->_serverPath = $path;
     }
 
     /**

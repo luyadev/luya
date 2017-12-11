@@ -43,23 +43,23 @@ class ItemTest extends CmsFrontendTestCase
     
     public function testInjectionsWithParentElements()
     {
-    	$menu = new Menu((new Request));
+        $menu = new Menu((new Request));
     
-    	// generate 
-    	$rootItem = new RootItem();
-    	$menu->injectItem($rootItem);
-    	
-    	$inject = new InjectItem(['childOf' => 1, 'title' => 't1', 'id' => 2000]);
-    	$menu->injectItem($inject);
-    	
-    	$rootItemFromMenu = (new Query(['menu' => $menu]))->lang('de')->one();
-    	
-    	$inject = new InjectItem(['item' => $rootItemFromMenu, 'title' => 't1', 'id' => 2000]);
-    	$menu->injectItem($inject);
-    	
-    	$injectCount = (new Query(['menu' => $menu]))->lang('de')->count();
-    	
-    	$this->assertSame(2, $injectCount);
+        // generate
+        $rootItem = new RootItem();
+        $menu->injectItem($rootItem);
+        
+        $inject = new InjectItem(['childOf' => 1, 'title' => 't1', 'id' => 2000]);
+        $menu->injectItem($inject);
+        
+        $rootItemFromMenu = (new Query(['menu' => $menu]))->lang('de')->one();
+        
+        $inject = new InjectItem(['item' => $rootItemFromMenu, 'title' => 't1', 'id' => 2000]);
+        $menu->injectItem($inject);
+        
+        $injectCount = (new Query(['menu' => $menu]))->lang('de')->count();
+        
+        $this->assertSame(2, $injectCount);
     }
     
     public function testChildItem()

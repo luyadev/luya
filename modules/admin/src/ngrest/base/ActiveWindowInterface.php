@@ -24,7 +24,7 @@ interface ActiveWindowInterface
     
     /**
      * Returns an array with all items if its a composite key.
-     * 
+     *
      * @return array
      */
     public function getItemIds();
