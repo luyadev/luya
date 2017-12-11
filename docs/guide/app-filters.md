@@ -82,7 +82,7 @@ Where **139** could be the image `id` from your database source active record. I
 <? endforeach; ?>
 ```
 
-Or you can use the filter name directly which is not recommend as if the filter name change you have to search and replace trough the whole project for the deprached names.
+or you can use the filter name directly which is not recommend as if the filter name change you have to search and replace trough the whole project for the deprecated names.
 
 ```php
 <? foreach($newsData as $item): ?>
