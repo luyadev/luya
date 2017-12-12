@@ -525,12 +525,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "51db7e9c1e2c0ff0d490068b2e045180f1ea52ea"
+                "reference": "213f6fbab5cfb05df54ae46eeccca95e5644cb72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/51db7e9c1e2c0ff0d490068b2e045180f1ea52ea",
-                "reference": "51db7e9c1e2c0ff0d490068b2e045180f1ea52ea",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/213f6fbab5cfb05df54ae46eeccca95e5644cb72",
+                "reference": "213f6fbab5cfb05df54ae46eeccca95e5644cb72",
                 "shasum": ""
             },
             "require": {
@@ -585,20 +585,20 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2017-11-29T14:31:11+00:00"
+            "time": "2017-12-12T10:02:52+00:00"
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "d38751971accbea722897c82e7670fa41214c317"
+                "reference": "d2cb071f72a0652832615e18b5134478a510e0db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d38751971accbea722897c82e7670fa41214c317",
-                "reference": "d38751971accbea722897c82e7670fa41214c317",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d2cb071f72a0652832615e18b5134478a510e0db",
+                "reference": "d2cb071f72a0652832615e18b5134478a510e0db",
                 "shasum": ""
             },
             "require": {
@@ -635,7 +635,7 @@
                 "composer",
                 "luya"
             ],
-            "time": "2017-09-02T07:47:35+00:00"
+            "time": "2017-12-03T12:32:47+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -643,12 +643,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "e12c2b5d2a7f5de7de24978458c0b6b2059a93e5"
+                "reference": "c1f09cc104eadf031abcc55f008736af922cb8a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/e12c2b5d2a7f5de7de24978458c0b6b2059a93e5",
-                "reference": "e12c2b5d2a7f5de7de24978458c0b6b2059a93e5",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/c1f09cc104eadf031abcc55f008736af922cb8a7",
+                "reference": "c1f09cc104eadf031abcc55f008736af922cb8a7",
                 "shasum": ""
             },
             "require": {
@@ -709,7 +709,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-11-29T14:31:11+00:00"
+            "time": "2017-12-12T10:02:16+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -758,16 +758,16 @@
         },
         {
             "name": "php-coveralls/php-coveralls",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-coveralls/php-coveralls.git",
-                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127"
+                "reference": "37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/9c07b63acbc9709344948b6fd4f63a32b2ef4127",
-                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad",
+                "reference": "37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad",
                 "shasum": ""
             },
             "require": {
@@ -815,7 +815,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-10-14T23:15:34+00:00"
+            "time": "2017-12-06T23:17:56+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -971,16 +971,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.1",
+            "version": "v6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "992392437c2e2784e0dc41446024fe411d293c96"
+                "reference": "7a4459cff6abeb86b63cdbad760f567252f3f39c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/992392437c2e2784e0dc41446024fe411d293c96",
-                "reference": "992392437c2e2784e0dc41446024fe411d293c96",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/7a4459cff6abeb86b63cdbad760f567252f3f39c",
+                "reference": "7a4459cff6abeb86b63cdbad760f567252f3f39c",
                 "shasum": ""
             },
             "require": {
@@ -1032,7 +1032,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-09-14T16:47:12+00:00"
+            "time": "2017-11-30T17:20:24+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -2236,7 +2236,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.31",
+            "version": "v2.8.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",

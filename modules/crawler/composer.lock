@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "01d5a737e2cdc1b319f2ea7f2bc96f41",
+    "content-hash": "017e4c0ce980e18c0d9564cad211568d",
     "packages": [
         {
             "name": "fabpot/goutte",
@@ -1096,12 +1096,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "54153d48f5f18e33e55fdf88f792b2ac1d42aedb"
+                "reference": "213f6fbab5cfb05df54ae46eeccca95e5644cb72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/54153d48f5f18e33e55fdf88f792b2ac1d42aedb",
-                "reference": "54153d48f5f18e33e55fdf88f792b2ac1d42aedb",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/213f6fbab5cfb05df54ae46eeccca95e5644cb72",
+                "reference": "213f6fbab5cfb05df54ae46eeccca95e5644cb72",
                 "shasum": ""
             },
             "require": {
@@ -1156,7 +1156,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2017-12-04T15:20:58+00:00"
+            "time": "2017-12-12T10:02:52+00:00"
         },
         {
             "name": "luyadev/luya-composer",
@@ -1214,12 +1214,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "4a599ef0b40b1137b17e460d989eea83cfffcc83"
+                "reference": "c1f09cc104eadf031abcc55f008736af922cb8a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/4a599ef0b40b1137b17e460d989eea83cfffcc83",
-                "reference": "4a599ef0b40b1137b17e460d989eea83cfffcc83",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/c1f09cc104eadf031abcc55f008736af922cb8a7",
+                "reference": "c1f09cc104eadf031abcc55f008736af922cb8a7",
                 "shasum": ""
             },
             "require": {
@@ -1280,7 +1280,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-12-04T15:20:58+00:00"
+            "time": "2017-12-12T10:02:16+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1329,16 +1329,16 @@
         },
         {
             "name": "php-coveralls/php-coveralls",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-coveralls/php-coveralls.git",
-                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127"
+                "reference": "37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/9c07b63acbc9709344948b6fd4f63a32b2ef4127",
-                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad",
+                "reference": "37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad",
                 "shasum": ""
             },
             "require": {
@@ -1386,7 +1386,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-10-14T23:15:34+00:00"
+            "time": "2017-12-06T23:17:56+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2807,7 +2807,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.31",
+            "version": "v2.8.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",

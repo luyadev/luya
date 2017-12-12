@@ -53,8 +53,7 @@
                 "mobile-first",
                 "responsive",
                 "web"
-            ],
-            "time": "2016-07-25T15:51:55+00:00"
+            ]
         },
         {
             "name": "bower-asset/inputmask",
@@ -174,8 +173,7 @@
                     "node_modules",
                     "package.json"
                 ]
-            },
-            "time": "2014-10-22T12:02:42+00:00"
+            }
         },
         {
             "name": "bower-asset/typeahead.js",
@@ -202,8 +200,7 @@
             "type": "bower-asset-library",
             "extra": {
                 "bower-asset-main": "dist/typeahead.bundle.js"
-            },
-            "time": "2015-04-27T04:02:14+00:00"
+            }
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -841,12 +838,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-bootstrap3.git",
-                "reference": "e9f9ab701bcc4de0f4dc4268449751f12957fe55"
+                "reference": "823d185ed3231813a399a02e43f81021c400924c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-bootstrap3/zipball/e9f9ab701bcc4de0f4dc4268449751f12957fe55",
-                "reference": "e9f9ab701bcc4de0f4dc4268449751f12957fe55",
+                "url": "https://api.github.com/repos/luyadev/luya-bootstrap3/zipball/823d185ed3231813a399a02e43f81021c400924c",
+                "reference": "823d185ed3231813a399a02e43f81021c400924c",
                 "shasum": ""
             },
             "require-dev": {
@@ -890,7 +887,7 @@
                 "luya",
                 "luya-blocks"
             ],
-            "time": "2017-12-05T16:35:37+00:00"
+            "time": "2017-12-12T08:42:53+00:00"
         },
         {
             "name": "luyadev/luya-bootstrap4",
@@ -1014,12 +1011,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-generic.git",
-                "reference": "cccf27253bd14fcc61d9daa2510c59140e983350"
+                "reference": "0d022dedb3386118e923318c31658402f29a6bb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-generic/zipball/cccf27253bd14fcc61d9daa2510c59140e983350",
-                "reference": "cccf27253bd14fcc61d9daa2510c59140e983350",
+                "url": "https://api.github.com/repos/luyadev/luya-generic/zipball/0d022dedb3386118e923318c31658402f29a6bb0",
+                "reference": "0d022dedb3386118e923318c31658402f29a6bb0",
                 "shasum": ""
             },
             "require-dev": {
@@ -1063,7 +1060,7 @@
                 "luya",
                 "luya-blocks"
             ],
-            "time": "2017-12-05T16:35:20+00:00"
+            "time": "2017-12-12T08:43:53+00:00"
         },
         {
             "name": "paypal/rest-api-sdk-php",

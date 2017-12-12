@@ -33,7 +33,7 @@
             "version": "3.2.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e"
             },
             "dist": {
@@ -620,12 +620,12 @@
             "version": "12.2.13",
             "source": {
                 "type": "git",
-                "url": "https://github.com/danialfarid/ng-file-upload-bower.git",
+                "url": "git@github.com:danialfarid/angular-file-upload-bower.git",
                 "reference": "4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danialfarid/ng-file-upload-bower/zipball/4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
+                "url": "https://api.github.com/repos/danialfarid/angular-file-upload-bower/zipball/4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
                 "reference": "4ba3e7eb34c3ced628699e3e20bfca32ea5be1f5",
                 "shasum": null
             },
@@ -642,7 +642,7 @@
             "version": "v2.7.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/flowjs/ng-flow.git",
+                "url": "git@github.com:flowjs/ng-flow.git",
                 "reference": "a15c09ea7d36f36dee8d2b4bb27e61396267d997"
             },
             "dist": {
@@ -659,16 +659,16 @@
         },
         {
             "name": "bower-asset/ng-wig",
-            "version": "v3.0.14",
+            "version": "v3.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stevermeister/ngWig.git",
-                "reference": "77708c4a7b0917aaab017398fb145d8f0a310389"
+                "reference": "0b9392c3c1f38bedd3b5a1c3b2e36b0667f2c4f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stevermeister/ngWig/zipball/77708c4a7b0917aaab017398fb145d8f0a310389",
-                "reference": "77708c4a7b0917aaab017398fb145d8f0a310389",
+                "url": "https://api.github.com/repos/stevermeister/ngWig/zipball/0b9392c3c1f38bedd3b5a1c3b2e36b0667f2c4f2",
+                "reference": "0b9392c3c1f38bedd3b5a1c3b2e36b0667f2c4f2",
                 "shasum": ""
             },
             "require-dev": {
@@ -694,7 +694,7 @@
                 "editor",
                 "wysiwyg"
             ],
-            "time": "2017-01-07T15:07:34+00:00"
+            "time": "2017-09-30T08:49:56+00:00"
         },
         {
             "name": "bower-asset/twigjs-bower",
@@ -961,16 +961,16 @@
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "d38751971accbea722897c82e7670fa41214c317"
+                "reference": "d2cb071f72a0652832615e18b5134478a510e0db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d38751971accbea722897c82e7670fa41214c317",
-                "reference": "d38751971accbea722897c82e7670fa41214c317",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d2cb071f72a0652832615e18b5134478a510e0db",
+                "reference": "d2cb071f72a0652832615e18b5134478a510e0db",
                 "shasum": ""
             },
             "require": {
@@ -1007,7 +1007,7 @@
                 "composer",
                 "luya"
             ],
-            "time": "2017-09-02T07:47:35+00:00"
+            "time": "2017-12-03T12:32:47+00:00"
         },
         {
             "name": "luyadev/luya-core",
@@ -1015,12 +1015,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "f3c4cdb12c1a87a0f70192837441b096ddc54eba"
+                "reference": "975045608be0ef75b309b0bf0e87cf58ff9687c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/f3c4cdb12c1a87a0f70192837441b096ddc54eba",
-                "reference": "f3c4cdb12c1a87a0f70192837441b096ddc54eba",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/975045608be0ef75b309b0bf0e87cf58ff9687c9",
+                "reference": "975045608be0ef75b309b0bf0e87cf58ff9687c9",
                 "shasum": ""
             },
             "require": {
@@ -1064,7 +1064,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-11-29T13:20:09+00:00"
+            "time": "2017-12-12T10:02:16+00:00"
         },
         {
             "name": "luyadev/luya-module-cms",
@@ -1072,12 +1072,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "9c5d4727b47eb354613ef7097f81a8483fbf8298"
+                "reference": "3249e0eeeac0edadd0a1a6f3832e2d23fb098931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/9c5d4727b47eb354613ef7097f81a8483fbf8298",
-                "reference": "9c5d4727b47eb354613ef7097f81a8483fbf8298",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/3249e0eeeac0edadd0a1a6f3832e2d23fb098931",
+                "reference": "3249e0eeeac0edadd0a1a6f3832e2d23fb098931",
                 "shasum": ""
             },
             "require-dev": {
@@ -1130,7 +1130,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2017-11-29T14:31:11+00:00"
+            "time": "2017-12-12T10:02:16+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -1232,16 +1232,16 @@
         },
         {
             "name": "php-coveralls/php-coveralls",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-coveralls/php-coveralls.git",
-                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127"
+                "reference": "37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/9c07b63acbc9709344948b6fd4f63a32b2ef4127",
-                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad",
+                "reference": "37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad",
                 "shasum": ""
             },
             "require": {
@@ -1289,7 +1289,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-10-14T23:15:34+00:00"
+            "time": "2017-12-06T23:17:56+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1445,16 +1445,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.1",
+            "version": "v6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "992392437c2e2784e0dc41446024fe411d293c96"
+                "reference": "7a4459cff6abeb86b63cdbad760f567252f3f39c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/992392437c2e2784e0dc41446024fe411d293c96",
-                "reference": "992392437c2e2784e0dc41446024fe411d293c96",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/7a4459cff6abeb86b63cdbad760f567252f3f39c",
+                "reference": "7a4459cff6abeb86b63cdbad760f567252f3f39c",
                 "shasum": ""
             },
             "require": {
@@ -1506,7 +1506,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-09-14T16:47:12+00:00"
+            "time": "2017-11-30T17:20:24+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -2757,7 +2757,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.31",
+            "version": "v2.8.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",

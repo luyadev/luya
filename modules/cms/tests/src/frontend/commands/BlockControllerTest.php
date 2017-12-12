@@ -30,7 +30,7 @@ use luya\cms\helpers\BlockHelper;
 /**
  * My Test Block.
  *
- * File has been created with `block/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `block/create` command on LUYA version 1.0.0. 
  */
 class MyTestBlock extends PhpBlock
 {
@@ -172,7 +172,7 @@ use luya\cms\helpers\BlockHelper;
 /**
  * My Test Block.
  *
- * File has been created with `block/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `block/create` command on LUYA version 1.0.0. 
  */
 class MyTestBlock extends PhpBlock
 {
@@ -317,7 +317,7 @@ EOT;
 /**
  * View file for block: MySuperBlock 
  *
- * File has been created with `block/create` command on LUYA version 1.0.0-dev. 
+ * File has been created with `block/create` command on LUYA version 1.0.0. 
  *
  * @param $this->cfgValue('foo');
  * @param $this->extraValue('foo');
