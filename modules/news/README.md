@@ -16,7 +16,7 @@ The news module will provided you a basic news system with categories and tags.
 For the installation of modules Composer is required.
 
 ```sh
-composer require luyadev/luya-module-news:1.0.0-RC4
+composer require luyadev/luya-module-news:~1.0.0
 ```
 
 ### Configuration

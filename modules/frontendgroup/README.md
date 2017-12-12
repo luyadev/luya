@@ -16,7 +16,7 @@ The main purpose of this module to provide the ability to allow cms pages for sp
 For the installation of modules Composer is required
 
 ```sh
-composer require luyadev/luya-module-frontendgroup:1.0.0-RC4
+composer require luyadev/luya-module-frontendgroup:~1.0.0
 ```
 
 ### Configuration

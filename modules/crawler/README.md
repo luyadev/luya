@@ -18,7 +18,7 @@ For the installation of modules Composer is required.
 ### Composer
 
 ```sh
-composer require luyadev/luya-module-crawler:1.0.0-RC4
+composer require luyadev/luya-module-crawler:~1.0.0
 ```
 
 ### Configuration

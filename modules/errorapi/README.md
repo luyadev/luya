@@ -20,7 +20,7 @@ For the installation of modules Composer is required.
 ### Composer
 
 ```
-composer require luyadev/luya-module-errorapi:1.0.0-RC4
+composer require luyadev/luya-module-errorapi:~1.0.0
 ```
 ### Configuration
 

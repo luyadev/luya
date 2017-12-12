@@ -16,7 +16,7 @@ The gallery module allows you create folders and collection and upload images to
 For the installation of modules Composer is required.
 
 ```sh
-composer require luyadev/luya-module-gallery:1.0.0-RC4
+composer require luyadev/luya-module-gallery:~1.0.0
 ```
 
 

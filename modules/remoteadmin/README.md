@@ -30,7 +30,7 @@ Remote Admin will work out of the box with all [LUYA](https://github.com/zephir/
 For the installation of modules Composer is required.
 
 ```
-composer require luyadev/luya-module-remoteadmin:1.0.0-RC4,
+composer require luyadev/luya-module-remoteadmin:~1.0.0
 ```
 
 ## Configuration
