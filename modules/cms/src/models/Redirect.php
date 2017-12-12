@@ -11,7 +11,7 @@ use luya\cms\admin\Module;
 /**
  * Redirect.
  *
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
+ * File has been created with `crud/create` command on LUYA version 1.0.0.
  *
  * @property integer $id
  * @property integer $timestamp_create

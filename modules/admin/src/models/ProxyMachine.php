@@ -9,7 +9,7 @@ use luya\admin\traits\SoftDeleteTrait;
 /**
  * Proxy Machine.
  *
- * File has been created with `crud/create` command on LUYA version 1.0.0-dev.
+ * File has been created with `crud/create` command on LUYA version 1.0.0.
  *
  * @property integer $id
  * @property string $name
