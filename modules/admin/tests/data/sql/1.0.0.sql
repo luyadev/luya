@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
 --
 -- Host: localhost    Database: luya_env_phpunit
 -- ------------------------------------------------------
--- Server version	5.7.16-0ubuntu0.16.04.1
+-- Server version	5.7.20-0ubuntu0.17.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `admin_auth` (
   `route` varchar(200) DEFAULT NULL,
   `api` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `admin_auth` (
 
 LOCK TABLES `admin_auth` WRITE;
 /*!40000 ALTER TABLE `admin_auth` DISABLE KEYS */;
-INSERT INTO `admin_auth` VALUES (1,'Page Contentblocks','cmsadmin',1,'0','api-cms-navitempageblockitem'),(2,'menu_group_item_env_container','cmsadmin',1,'0','api-cms-navcontainer'),(3,'menu_group_item_env_layouts','cmsadmin',1,'0','api-cms-layout'),(4,'menu_group_item_elements_group','cmsadmin',1,'0','api-cms-blockgroup'),(5,'menu_group_item_elements_blocks','cmsadmin',1,'0','api-cms-block'),(6,'Create new Page','cmsadmin',0,'cmsadmin/page/create','0'),(7,'Page Edit','cmsadmin',0,'cmsadmin/page/update','0'),(8,'Draft Edit','cmsadmin',0,'cmsadmin/page/drafts','0'),(9,'menu_node_cms','cmsadmin',0,'cmsadmin/default/index','0'),(10,'menu_group_item_env_permission','cmsadmin',0,'cmsadmin/permission/index','0'),(11,'menu_access_item_user','admin',1,'0','api-admin-user'),(12,'menu_access_item_group','admin',1,'0','api-admin-group'),(13,'menu_system_item_language','admin',1,'0','api-admin-lang'),(14,'menu_system_item_tags','admin',1,'0','api-admin-tag'),(15,'menu_system_logger','admin',1,'0','api-admin-logger'),(16,'menu_images_item_effects','admin',1,'0','api-admin-effect'),(17,'menu_images_item_filters','admin',1,'0','api-admin-filter'),(18,'menu_node_filemanager','admin',0,'admin/storage/index','0');
+INSERT INTO `admin_auth` VALUES (1,'module_permission_page_blocks','cmsadmin',1,'0','api-cms-navitempageblockitem'),(2,'menu_group_item_env_container','cmsadmin',1,'0','api-cms-navcontainer'),(3,'menu_group_item_env_layouts','cmsadmin',1,'0','api-cms-layout'),(4,'menu_group_item_env_redirections','cmsadmin',1,'0','api-cms-redirect'),(5,'menu_group_item_elements_group','cmsadmin',1,'0','api-cms-blockgroup'),(6,'menu_group_item_elements_blocks','cmsadmin',1,'0','api-cms-block'),(7,'module_permission_add_new_page','cmsadmin',0,'cmsadmin/page/create','0'),(8,'module_permission_update_pages','cmsadmin',0,'cmsadmin/page/update','0'),(9,'module_permission_delete_pages','cmsadmin',0,'cmsadmin/page/delete','0'),(10,'module_permission_edit_drafts','cmsadmin',0,'cmsadmin/page/drafts','0'),(11,'menu_group_item_env_config','cmsadmin',0,'cmsadmin/config/index','0'),(12,'menu_node_cms','cmsadmin',0,'cmsadmin/default/index','0'),(13,'menu_group_item_env_permission','cmsadmin',0,'cmsadmin/permission/index','0'),(14,'menu_access_item_user','admin',1,'0','api-admin-user'),(15,'menu_access_item_group','admin',1,'0','api-admin-group'),(16,'menu_system_item_config','admin',1,'0','api-admin-config'),(17,'menu_system_item_language','admin',1,'0','api-admin-lang'),(18,'menu_system_item_tags','admin',1,'0','api-admin-tag'),(19,'menu_system_logger','admin',1,'0','api-admin-logger'),(20,'menu_images_item_effects','admin',1,'0','api-admin-effect'),(21,'menu_images_item_filters','admin',1,'0','api-admin-filter'),(22,'Machines','admin',1,'0','api-admin-proxymachine'),(23,'Builds','admin',1,'0','api-admin-proxybuild'),(24,'menu_node_filemanager','admin',0,'admin/storage/index','0');
 /*!40000 ALTER TABLE `admin_auth` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,8 +53,10 @@ DROP TABLE IF EXISTS `admin_config`;
 CREATE TABLE `admin_config` (
   `name` varchar(80) NOT NULL,
   `value` varchar(255) NOT NULL,
-  PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `is_system` tinyint(1) DEFAULT '1',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +65,7 @@ CREATE TABLE `admin_config` (
 
 LOCK TABLES `admin_config` WRITE;
 /*!40000 ALTER TABLE `admin_config` DISABLE KEYS */;
-INSERT INTO `admin_config` VALUES ('last_import_timestamp','1482226240'),('rc1_block_classes_renameing','1'),('setup_command_timestamp','1482226241');
+INSERT INTO `admin_config` VALUES ('100genericBlockUpdate','1',1,1),('last_import_timestamp','1513077719',1,2),('setup_command_timestamp','1513077719',1,3);
 /*!40000 ALTER TABLE `admin_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +117,7 @@ CREATE TABLE `admin_group_auth` (
 
 LOCK TABLES `admin_group_auth` WRITE;
 /*!40000 ALTER TABLE `admin_group_auth` DISABLE KEYS */;
-INSERT INTO `admin_group_auth` VALUES (1,11,1,1,1),(1,12,1,1,1);
+INSERT INTO `admin_group_auth` VALUES (1,1,1,1,1),(1,2,1,1,1),(1,3,1,1,1),(1,4,1,1,1),(1,5,1,1,1),(1,6,1,1,1),(1,7,1,1,1),(1,8,1,1,1),(1,9,1,1,1),(1,10,1,1,1),(1,11,1,1,1),(1,12,1,1,1),(1,13,1,1,1),(1,14,1,1,1),(1,15,1,1,1),(1,16,1,1,1),(1,17,1,1,1),(1,18,1,1,1),(1,19,1,1,1),(1,20,1,1,1),(1,21,1,1,1),(1,22,1,1,1),(1,23,1,1,1),(1,24,1,1,1);
 /*!40000 ALTER TABLE `admin_group_auth` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,6 +199,9 @@ CREATE TABLE `admin_ngrest_log` (
   `is_update` tinyint(1) DEFAULT '0',
   `is_insert` tinyint(1) DEFAULT '0',
   `attributes_json` text NOT NULL,
+  `attributes_diff_json` text,
+  `pk_value` varchar(255) DEFAULT NULL,
+  `table_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -234,6 +239,63 @@ CREATE TABLE `admin_property` (
 LOCK TABLES `admin_property` WRITE;
 /*!40000 ALTER TABLE `admin_property` DISABLE KEYS */;
 /*!40000 ALTER TABLE `admin_property` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admin_proxy_build`
+--
+
+DROP TABLE IF EXISTS `admin_proxy_build`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin_proxy_build` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `machine_id` int(11) NOT NULL,
+  `timestamp` int(11) NOT NULL,
+  `build_token` varchar(255) NOT NULL,
+  `config` text NOT NULL,
+  `is_complet` tinyint(1) DEFAULT '0',
+  `expiration_time` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `build_token` (`build_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_proxy_build`
+--
+
+LOCK TABLES `admin_proxy_build` WRITE;
+/*!40000 ALTER TABLE `admin_proxy_build` DISABLE KEYS */;
+/*!40000 ALTER TABLE `admin_proxy_build` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admin_proxy_machine`
+--
+
+DROP TABLE IF EXISTS `admin_proxy_machine`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin_proxy_machine` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `access_token` varchar(255) NOT NULL,
+  `identifier` varchar(255) NOT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
+  `is_disabled` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `identifier` (`identifier`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_proxy_machine`
+--
+
+LOCK TABLES `admin_proxy_machine` WRITE;
+/*!40000 ALTER TABLE `admin_proxy_machine` DISABLE KEYS */;
+/*!40000 ALTER TABLE `admin_proxy_machine` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -316,7 +378,6 @@ CREATE TABLE `admin_storage_file` (
   `passthrough_file_password` varchar(40) DEFAULT NULL,
   `passthrough_file_stats` int(11) DEFAULT '0',
   `caption` text,
-  `internal_note` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -503,6 +564,7 @@ CREATE TABLE `admin_user` (
   `secure_token_timestamp` int(11) DEFAULT '0',
   `force_reload` tinyint(1) DEFAULT '0',
   `settings` text,
+  `cookie_token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -514,7 +576,7 @@ CREATE TABLE `admin_user` (
 
 LOCK TABLES `admin_user` WRITE;
 /*!40000 ALTER TABLE `admin_user` DISABLE KEYS */;
-INSERT INTO `admin_user` VALUES (1,'John','Doe',1,'test@luya.io','$2y$13$KxhtLmSCx/rdXG28bQF7suFPzDvIaLxUoe/VzEfKzKrCn9dC9DOy6','DzaHGIZQx1rMJ6aaQBoK48WystXWrWFY',NULL,0,NULL,0,0,NULL);
+INSERT INTO `admin_user` VALUES (1,'John','Doe',1,'test@luya.io','$2y$13$7TZy10K41AwgkIjn51OwFuHnafecDt.B5w/2RrA9frxExOh6biWRG','sWuayGA8P5PlEQBUirj0-BTdKimgQSj1',NULL,0,NULL,0,0,NULL,NULL);
 /*!40000 ALTER TABLE `admin_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -556,6 +618,7 @@ CREATE TABLE `admin_user_login` (
   `timestamp_create` int(11) NOT NULL,
   `auth_token` varchar(120) NOT NULL,
   `ip` varchar(15) NOT NULL,
+  `is_destroyed` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -581,6 +644,10 @@ CREATE TABLE `admin_user_online` (
   `user_id` int(11) NOT NULL,
   `last_timestamp` int(11) NOT NULL,
   `invoken_route` varchar(120) NOT NULL,
+  `lock_pk` varchar(255) DEFAULT NULL,
+  `lock_table` varchar(255) DEFAULT NULL,
+  `lock_translation` varchar(255) DEFAULT NULL,
+  `lock_translation_args` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -605,8 +672,9 @@ CREATE TABLE `cms_block` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
   `class` varchar(255) NOT NULL,
+  `is_disabled` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -615,7 +683,7 @@ CREATE TABLE `cms_block` (
 
 LOCK TABLES `cms_block` WRITE;
 /*!40000 ALTER TABLE `cms_block` DISABLE KEYS */;
-INSERT INTO `cms_block` VALUES (1,4,'\\luya\\cms\\frontend\\blocks\\AudioBlock'),(2,1,'\\luya\\cms\\frontend\\blocks\\DevBlock'),(3,3,'\\luya\\cms\\frontend\\blocks\\FileListBlock'),(4,3,'\\luya\\cms\\frontend\\blocks\\FormBlock'),(5,1,'\\luya\\cms\\frontend\\blocks\\HtmlBlock'),(6,4,'\\luya\\cms\\frontend\\blocks\\ImageBlock'),(7,4,'\\luya\\cms\\frontend\\blocks\\ImageTextBlock'),(8,2,'\\luya\\cms\\frontend\\blocks\\LayoutBlock'),(9,3,'\\luya\\cms\\frontend\\blocks\\LineBlock'),(10,3,'\\luya\\cms\\frontend\\blocks\\LinkButtonBlock'),(11,6,'\\luya\\cms\\frontend\\blocks\\ListBlock'),(12,3,'\\luya\\cms\\frontend\\blocks\\MapBlock'),(13,1,'\\luya\\cms\\frontend\\blocks\\ModuleBlock'),(14,6,'\\luya\\cms\\frontend\\blocks\\QuoteBlock'),(15,3,'\\luya\\cms\\frontend\\blocks\\SpacingBlock'),(16,3,'\\luya\\cms\\frontend\\blocks\\TableBlock'),(17,6,'\\luya\\cms\\frontend\\blocks\\TextBlock'),(18,6,'\\luya\\cms\\frontend\\blocks\\TitleBlock'),(19,4,'\\luya\\cms\\frontend\\blocks\\VideoBlock'),(20,6,'\\luya\\cms\\frontend\\blocks\\WysiwygBlock');
+INSERT INTO `cms_block` VALUES (1,1,'\\luya\\cms\\frontend\\blocks\\HtmlBlock',0),(2,1,'\\luya\\cms\\frontend\\blocks\\ModuleBlock',0);
 /*!40000 ALTER TABLE `cms_block` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -632,8 +700,9 @@ CREATE TABLE `cms_block_group` (
   `is_deleted` tinyint(1) DEFAULT '0',
   `identifier` varchar(120) NOT NULL,
   `created_timestamp` int(11) DEFAULT '0',
+  `class` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -642,8 +711,31 @@ CREATE TABLE `cms_block_group` (
 
 LOCK TABLES `cms_block_group` WRITE;
 /*!40000 ALTER TABLE `cms_block_group` DISABLE KEYS */;
-INSERT INTO `cms_block_group` VALUES (1,'Development',0,'development-group',1482226240),(2,'Layout',0,'layout-group',1482226240),(3,'Basics',0,'main-group',1482226240),(4,'Media',0,'media-group',1482226240),(5,'Project',0,'project-group',1482226240),(6,'Texts',0,'text-group',1482226240);
+INSERT INTO `cms_block_group` VALUES (1,'block_group_dev_elements',0,'development-group',1513077718,'\\luya\\cms\\frontend\\blockgroups\\DevelopmentGroup');
 /*!40000 ALTER TABLE `cms_block_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cms_config`
+--
+
+DROP TABLE IF EXISTS `cms_config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cms_config` (
+  `name` varchar(80) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cms_config`
+--
+
+LOCK TABLES `cms_config` WRITE;
+/*!40000 ALTER TABLE `cms_config` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cms_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -668,7 +760,7 @@ CREATE TABLE `cms_layout` (
 
 LOCK TABLES `cms_layout` WRITE;
 /*!40000 ALTER TABLE `cms_layout` DISABLE KEYS */;
-INSERT INTO `cms_layout` VALUES (1,'Main','{\"placeholders\":[{\"label\":\"Content\",\"var\":\"content\"}]}','main.php'),(2,'Sidebar','{\"placeholders\":[{\"label\":\"Content\",\"var\":\"content\"},{\"label\":\"Sidebar\",\"var\":\"sidebar\"}]}','sidebar.php');
+INSERT INTO `cms_layout` VALUES (1,'Main','{\"placeholders\":[[{\"label\":\"Content\",\"var\":\"content\"}]]}','main.php'),(2,'Sidebar','{\"placeholders\":[[{\"label\":\"Content\",\"var\":\"content\"},{\"label\":\"Sidebar\",\"var\":\"sidebar\"}]]}','sidebar.php');
 /*!40000 ALTER TABLE `cms_layout` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -700,7 +792,7 @@ CREATE TABLE `cms_log` (
 
 LOCK TABLES `cms_log` WRITE;
 /*!40000 ALTER TABLE `cms_log` DISABLE KEYS */;
-INSERT INTO `cms_log` VALUES (1,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":2}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":1,\"id\":2}','cms_nav',2),(2,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":2}','{\"lang_id\":1,\"title\":\"Page 1\",\"alias\":\"page1\",\"description\":\"Description of Page 1\",\"nav_item_type\":1,\"nav_item_type_id\":2,\"nav_id\":2,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":2}','cms_nav_item',2),(3,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":3}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":3,\"id\":3}','cms_nav',3),(4,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":3}','{\"lang_id\":1,\"title\":\"Page 2\",\"alias\":\"page2\",\"description\":\"Description of Page 2\",\"nav_item_type\":1,\"nav_item_type_id\":3,\"nav_id\":3,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":3}','cms_nav_item',3),(5,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":4}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":4,\"id\":4}','cms_nav',4),(6,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":4}','{\"lang_id\":1,\"title\":\"Page 3\",\"alias\":\"page3\",\"description\":\"Description of Page 3\",\"nav_item_type\":1,\"nav_item_type_id\":4,\"nav_id\":4,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":4}','cms_nav_item',4),(7,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":5}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":5,\"id\":5}','cms_nav',5),(8,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":5}','{\"lang_id\":1,\"title\":\"Page 4\",\"alias\":\"page4\",\"description\":\"Description of Page 4\",\"nav_item_type\":1,\"nav_item_type_id\":5,\"nav_id\":5,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":5}','cms_nav_item',5),(9,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":6}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":6,\"id\":6}','cms_nav',6),(10,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":6}','{\"lang_id\":1,\"title\":\"Page 5\",\"alias\":\"page5\",\"description\":\"Description of Page 5\",\"nav_item_type\":1,\"nav_item_type_id\":6,\"nav_id\":6,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":6}','cms_nav_item',6),(11,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":7}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":7,\"id\":7}','cms_nav',7),(12,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":7}','{\"lang_id\":1,\"title\":\"Page 6\",\"alias\":\"page6\",\"description\":\"Description of Page 6\",\"nav_item_type\":1,\"nav_item_type_id\":7,\"nav_id\":7,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":7}','cms_nav_item',7),(13,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":8}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":1,\"id\":8}','cms_nav',8),(14,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":8}','{\"lang_id\":1,\"title\":\"Page 1\",\"alias\":\"p1-page1\",\"description\":\"Description of Page 1\",\"nav_item_type\":1,\"nav_item_type_id\":8,\"nav_id\":8,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":8}','cms_nav_item',8),(15,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":9}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":2,\"id\":9}','cms_nav',9),(16,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":9}','{\"lang_id\":1,\"title\":\"Page 2\",\"alias\":\"p1-page2\",\"description\":\"Description of Page 2\",\"nav_item_type\":1,\"nav_item_type_id\":9,\"nav_id\":9,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":9}','cms_nav_item',9),(17,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":10}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":3,\"id\":10}','cms_nav',10),(18,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":10}','{\"lang_id\":1,\"title\":\"Page 3\",\"alias\":\"p1-page3\",\"description\":\"Description of Page 3\",\"nav_item_type\":1,\"nav_item_type_id\":10,\"nav_id\":10,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":10}','cms_nav_item',10),(19,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":11}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":4,\"id\":11}','cms_nav',11),(20,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":11}','{\"lang_id\":1,\"title\":\"Page 4\",\"alias\":\"p1-page4\",\"description\":\"Description of Page 4\",\"nav_item_type\":1,\"nav_item_type_id\":11,\"nav_id\":11,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":11}','cms_nav_item',11),(21,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":12}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":5,\"id\":12}','cms_nav',12),(22,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":12}','{\"lang_id\":1,\"title\":\"Page 5\",\"alias\":\"p1-page5\",\"description\":\"Description of Page 5\",\"nav_item_type\":1,\"nav_item_type_id\":12,\"nav_id\":12,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":12}','cms_nav_item',12),(23,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":13}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"is_draft\":0,\"sort_index\":6,\"id\":13}','cms_nav',13),(24,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":13}','{\"lang_id\":1,\"title\":\"Page 6\",\"alias\":\"p1-page6\",\"description\":\"Description of Page 6\",\"nav_item_type\":1,\"nav_item_type_id\":13,\"nav_id\":13,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":13}','cms_nav_item',13),(25,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":14}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"sort_index\":8,\"id\":14}','cms_nav',14),(26,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":14}','{\"lang_id\":1,\"title\":\"Redirect to Page 1\",\"alias\":\"redirect-1\",\"description\":\"Description of Redirect to Page 1\",\"nav_item_type\":3,\"nav_item_type_id\":1,\"nav_id\":14,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":14}','cms_nav_item',14),(27,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":15}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"sort_index\":9,\"id\":15}','cms_nav',15),(28,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":15}','{\"lang_id\":1,\"title\":\"Redirect to Page 2\",\"alias\":\"redirect-2\",\"description\":\"Description of Redirect to Page 2\",\"nav_item_type\":3,\"nav_item_type_id\":2,\"nav_id\":15,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":15}','cms_nav_item',15),(29,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":16}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"sort_index\":10,\"id\":16}','cms_nav',16),(30,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":16}','{\"lang_id\":1,\"title\":\"Redirect to Sub Page 2\",\"alias\":\"redirect-3\",\"description\":\"Description of Redirect to Sub Page 2\",\"nav_item_type\":3,\"nav_item_type_id\":3,\"nav_id\":16,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":16}','cms_nav_item',16),(31,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":17}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":1,\"is_offline\":1,\"sort_index\":11,\"id\":17}','cms_nav',17),(32,0,1,0,0,1482226241,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":17}','{\"lang_id\":1,\"title\":\"Redirect to luya.io\",\"alias\":\"redirect-4\",\"description\":\"Description of Redirect to luya.io\",\"nav_item_type\":3,\"nav_item_type_id\":4,\"nav_id\":17,\"timestamp_create\":1482226241,\"timestamp_update\":0,\"create_user_id\":0,\"update_user_id\":0,\"id\":17}','cms_nav_item',17);
+INSERT INTO `cms_log` VALUES (1,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":2}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":1,\"id\":2}','cms_nav',2),(2,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":2}','{\"lang_id\":1,\"title\":\"Page 1\",\"alias\":\"page1\",\"description\":\"Description of Page 1\",\"nav_item_type\":1,\"nav_item_type_id\":2,\"nav_id\":2,\"timestamp_create\":1513077719,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":2}','cms_nav_item',2),(3,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":3}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":3,\"id\":3}','cms_nav',3),(4,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":3}','{\"lang_id\":1,\"title\":\"Page 2\",\"alias\":\"page2\",\"description\":\"Description of Page 2\",\"nav_item_type\":1,\"nav_item_type_id\":3,\"nav_id\":3,\"timestamp_create\":1513077719,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":3}','cms_nav_item',3),(5,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":4}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":4,\"id\":4}','cms_nav',4),(6,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":4}','{\"lang_id\":1,\"title\":\"Page 3\",\"alias\":\"page3\",\"description\":\"Description of Page 3\",\"nav_item_type\":1,\"nav_item_type_id\":4,\"nav_id\":4,\"timestamp_create\":1513077719,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":4}','cms_nav_item',4),(7,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":5}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":5,\"id\":5}','cms_nav',5),(8,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":5}','{\"lang_id\":1,\"title\":\"Page 4\",\"alias\":\"page4\",\"description\":\"Description of Page 4\",\"nav_item_type\":1,\"nav_item_type_id\":5,\"nav_id\":5,\"timestamp_create\":1513077719,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":5}','cms_nav_item',5),(9,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":6}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":6,\"id\":6}','cms_nav',6),(10,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":6}','{\"lang_id\":1,\"title\":\"Page 5\",\"alias\":\"page5\",\"description\":\"Description of Page 5\",\"nav_item_type\":1,\"nav_item_type_id\":6,\"nav_id\":6,\"timestamp_create\":1513077719,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":6}','cms_nav_item',6),(11,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":7}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":7,\"id\":7}','cms_nav',7),(12,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":7}','{\"lang_id\":1,\"title\":\"Page 6\",\"alias\":\"page6\",\"description\":\"Description of Page 6\",\"nav_item_type\":1,\"nav_item_type_id\":7,\"nav_id\":7,\"timestamp_create\":1513077719,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":7}','cms_nav_item',7),(13,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":8}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":1,\"id\":8}','cms_nav',8),(14,0,1,0,0,1513077719,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":8}','{\"lang_id\":1,\"title\":\"Page 1\",\"alias\":\"p1-page1\",\"description\":\"Description of Page 1\",\"nav_item_type\":1,\"nav_item_type_id\":8,\"nav_id\":8,\"timestamp_create\":1513077719,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":8}','cms_nav_item',8),(15,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":9}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":2,\"id\":9}','cms_nav',9),(16,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":9}','{\"lang_id\":1,\"title\":\"Page 2\",\"alias\":\"p1-page2\",\"description\":\"Description of Page 2\",\"nav_item_type\":1,\"nav_item_type_id\":9,\"nav_id\":9,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":9}','cms_nav_item',9),(17,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":10}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":3,\"id\":10}','cms_nav',10),(18,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":10}','{\"lang_id\":1,\"title\":\"Page 3\",\"alias\":\"p1-page3\",\"description\":\"Description of Page 3\",\"nav_item_type\":1,\"nav_item_type_id\":10,\"nav_id\":10,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":10}','cms_nav_item',10),(19,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":11}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":4,\"id\":11}','cms_nav',11),(20,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":11}','{\"lang_id\":1,\"title\":\"Page 4\",\"alias\":\"p1-page4\",\"description\":\"Description of Page 4\",\"nav_item_type\":1,\"nav_item_type_id\":11,\"nav_id\":11,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":11}','cms_nav_item',11),(21,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":12}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":5,\"id\":12}','cms_nav',12),(22,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":12}','{\"lang_id\":1,\"title\":\"Page 5\",\"alias\":\"p1-page5\",\"description\":\"Description of Page 5\",\"nav_item_type\":1,\"nav_item_type_id\":12,\"nav_id\":12,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":12}','cms_nav_item',12),(23,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":13}','{\"parent_nav_id\":2,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"is_draft\":0,\"sort_index\":6,\"id\":13}','cms_nav',13),(24,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":13}','{\"lang_id\":1,\"title\":\"Page 6\",\"alias\":\"p1-page6\",\"description\":\"Description of Page 6\",\"nav_item_type\":1,\"nav_item_type_id\":13,\"nav_id\":13,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":13}','cms_nav_item',13),(25,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":14}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"sort_index\":8,\"id\":14}','cms_nav',14),(26,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":14}','{\"lang_id\":1,\"title\":\"Redirect to Page 1\",\"alias\":\"redirect-1\",\"description\":\"Description of Redirect to Page 1\",\"nav_item_type\":3,\"nav_item_type_id\":1,\"nav_id\":14,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":14}','cms_nav_item',14),(27,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":15}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"sort_index\":9,\"id\":15}','cms_nav',15),(28,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":15}','{\"lang_id\":1,\"title\":\"Redirect to Page 2\",\"alias\":\"redirect-2\",\"description\":\"Description of Redirect to Page 2\",\"nav_item_type\":3,\"nav_item_type_id\":2,\"nav_id\":15,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":15}','cms_nav_item',15),(29,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":16}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"sort_index\":10,\"id\":16}','cms_nav',16),(30,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":16}','{\"lang_id\":1,\"title\":\"Redirect to Sub Page 2\",\"alias\":\"redirect-3\",\"description\":\"Description of Redirect to Sub Page 2\",\"nav_item_type\":3,\"nav_item_type_id\":3,\"nav_id\":16,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":16}','cms_nav_item',16),(31,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav\",\"action\":\"insert\",\"row\":17}','{\"parent_nav_id\":0,\"nav_container_id\":1,\"is_hidden\":true,\"is_offline\":true,\"sort_index\":11,\"id\":17}','cms_nav',17),(32,0,1,0,0,1513077720,'{\"tableName\":\"cms_nav_item\",\"action\":\"insert\",\"row\":17}','{\"lang_id\":1,\"title\":\"Redirect to luya.io\",\"alias\":\"redirect-4\",\"description\":\"Description of Redirect to luya.io\",\"nav_item_type\":3,\"nav_item_type_id\":4,\"nav_id\":17,\"timestamp_create\":1513077720,\"timestamp_update\":0,\"create_user_id\":1,\"update_user_id\":1,\"id\":17}','cms_nav_item',17);
 /*!40000 ALTER TABLE `cms_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -721,6 +813,9 @@ CREATE TABLE `cms_nav` (
   `is_home` tinyint(1) DEFAULT '0',
   `is_offline` tinyint(1) DEFAULT '0',
   `is_draft` tinyint(1) DEFAULT '0',
+  `layout_file` varchar(255) DEFAULT NULL,
+  `publish_from` int(11) DEFAULT NULL,
+  `publish_till` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -731,7 +826,7 @@ CREATE TABLE `cms_nav` (
 
 LOCK TABLES `cms_nav` WRITE;
 /*!40000 ALTER TABLE `cms_nav` DISABLE KEYS */;
-INSERT INTO `cms_nav` VALUES (1,1,0,1,0,0,1,0,0),(2,1,0,2,0,0,0,0,0),(3,1,0,3,0,0,0,0,0),(4,1,0,4,0,0,0,0,0),(5,1,0,5,0,0,0,0,0),(6,1,0,6,0,0,0,0,0),(7,1,0,7,0,0,0,0,0),(8,1,2,1,0,0,0,0,0),(9,1,2,2,0,0,0,0,0),(10,1,2,3,0,0,0,0,0),(11,1,2,4,0,0,0,0,0),(12,1,2,5,0,0,0,0,0),(13,1,2,6,0,0,0,0,0),(14,1,0,8,0,0,0,0,0),(15,1,0,9,0,0,0,0,0),(16,1,0,10,0,0,0,0,0),(17,1,0,11,0,0,0,0,0);
+INSERT INTO `cms_nav` VALUES (1,1,0,1,0,0,1,0,0,NULL,NULL,NULL),(2,1,0,2,0,0,0,0,0,NULL,NULL,NULL),(3,1,0,3,0,0,0,0,0,NULL,NULL,NULL),(4,1,0,4,0,0,0,0,0,NULL,NULL,NULL),(5,1,0,5,0,0,0,0,0,NULL,NULL,NULL),(6,1,0,6,0,0,0,0,0,NULL,NULL,NULL),(7,1,0,7,0,0,0,0,0,NULL,NULL,NULL),(8,1,2,1,0,0,0,0,0,NULL,NULL,NULL),(9,1,2,2,0,0,0,0,0,NULL,NULL,NULL),(10,1,2,3,0,0,0,0,0,NULL,NULL,NULL),(11,1,2,4,0,0,0,0,0,NULL,NULL,NULL),(12,1,2,5,0,0,0,0,0,NULL,NULL,NULL),(13,1,2,6,0,0,0,0,0,NULL,NULL,NULL),(14,1,0,8,0,0,0,0,0,NULL,NULL,NULL),(15,1,0,9,0,0,0,0,0,NULL,NULL,NULL),(16,1,0,10,0,0,0,0,0,NULL,NULL,NULL),(17,1,0,11,0,0,0,0,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `cms_nav` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -793,7 +888,7 @@ CREATE TABLE `cms_nav_item` (
 
 LOCK TABLES `cms_nav_item` WRITE;
 /*!40000 ALTER TABLE `cms_nav_item` DISABLE KEYS */;
-INSERT INTO `cms_nav_item` VALUES (1,1,1,1,1,1,1,1482226241,0,'Homepage','homepage',NULL,NULL,NULL),(2,2,1,1,2,0,0,1482226241,0,'Page 1','page1','Description of Page 1',NULL,NULL),(3,3,1,1,3,0,0,1482226241,0,'Page 2','page2','Description of Page 2',NULL,NULL),(4,4,1,1,4,0,0,1482226241,0,'Page 3','page3','Description of Page 3',NULL,NULL),(5,5,1,1,5,0,0,1482226241,0,'Page 4','page4','Description of Page 4',NULL,NULL),(6,6,1,1,6,0,0,1482226241,0,'Page 5','page5','Description of Page 5',NULL,NULL),(7,7,1,1,7,0,0,1482226241,0,'Page 6','page6','Description of Page 6',NULL,NULL),(8,8,1,1,8,0,0,1482226241,0,'Page 1','p1-page1','Description of Page 1',NULL,NULL),(9,9,1,1,9,0,0,1482226241,0,'Page 2','p1-page2','Description of Page 2',NULL,NULL),(10,10,1,1,10,0,0,1482226241,0,'Page 3','p1-page3','Description of Page 3',NULL,NULL),(11,11,1,1,11,0,0,1482226241,0,'Page 4','p1-page4','Description of Page 4',NULL,NULL),(12,12,1,1,12,0,0,1482226241,0,'Page 5','p1-page5','Description of Page 5',NULL,NULL),(13,13,1,1,13,0,0,1482226241,0,'Page 6','p1-page6','Description of Page 6',NULL,NULL),(14,14,1,3,1,0,0,1482226241,0,'Redirect to Page 1','redirect-1','Description of Redirect to Page 1',NULL,NULL),(15,15,1,3,2,0,0,1482226241,0,'Redirect to Page 2','redirect-2','Description of Redirect to Page 2',NULL,NULL),(16,16,1,3,3,0,0,1482226241,0,'Redirect to Sub Page 2','redirect-3','Description of Redirect to Sub Page 2',NULL,NULL),(17,17,1,3,4,0,0,1482226241,0,'Redirect to luya.io','redirect-4','Description of Redirect to luya.io',NULL,NULL);
+INSERT INTO `cms_nav_item` VALUES (1,1,1,1,1,1,1,1513077719,0,'Homepage','homepage',NULL,NULL,NULL),(2,2,1,1,2,1,1,1513077719,0,'Page 1','page1','Description of Page 1',NULL,NULL),(3,3,1,1,3,1,1,1513077719,0,'Page 2','page2','Description of Page 2',NULL,NULL),(4,4,1,1,4,1,1,1513077719,0,'Page 3','page3','Description of Page 3',NULL,NULL),(5,5,1,1,5,1,1,1513077719,0,'Page 4','page4','Description of Page 4',NULL,NULL),(6,6,1,1,6,1,1,1513077719,0,'Page 5','page5','Description of Page 5',NULL,NULL),(7,7,1,1,7,1,1,1513077719,0,'Page 6','page6','Description of Page 6',NULL,NULL),(8,8,1,1,8,1,1,1513077719,0,'Page 1','p1-page1','Description of Page 1',NULL,NULL),(9,9,1,1,9,1,1,1513077720,0,'Page 2','p1-page2','Description of Page 2',NULL,NULL),(10,10,1,1,10,1,1,1513077720,0,'Page 3','p1-page3','Description of Page 3',NULL,NULL),(11,11,1,1,11,1,1,1513077720,0,'Page 4','p1-page4','Description of Page 4',NULL,NULL),(12,12,1,1,12,1,1,1513077720,0,'Page 5','p1-page5','Description of Page 5',NULL,NULL),(13,13,1,1,13,1,1,1513077720,0,'Page 6','p1-page6','Description of Page 6',NULL,NULL),(14,14,1,3,1,1,1,1513077720,0,'Redirect to Page 1','redirect-1','Description of Redirect to Page 1',NULL,NULL),(15,15,1,3,2,1,1,1513077720,0,'Redirect to Page 2','redirect-2','Description of Redirect to Page 2',NULL,NULL),(16,16,1,3,3,1,1,1513077720,0,'Redirect to Sub Page 2','redirect-3','Description of Redirect to Sub Page 2',NULL,NULL),(17,17,1,3,4,1,1,1513077720,0,'Redirect to luya.io','redirect-4','Description of Redirect to luya.io',NULL,NULL);
 /*!40000 ALTER TABLE `cms_nav_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -844,7 +939,7 @@ CREATE TABLE `cms_nav_item_page` (
 
 LOCK TABLES `cms_nav_item_page` WRITE;
 /*!40000 ALTER TABLE `cms_nav_item_page` DISABLE KEYS */;
-INSERT INTO `cms_nav_item_page` VALUES (1,1,1,1482226241,1,'Initial'),(2,1,2,1482226241,0,'Initial'),(3,1,3,1482226241,0,'Initial'),(4,1,4,1482226241,0,'Initial'),(5,1,5,1482226241,0,'Initial'),(6,1,6,1482226241,0,'Initial'),(7,1,7,1482226241,0,'Initial'),(8,1,8,1482226241,0,'Initial'),(9,1,9,1482226241,0,'Initial'),(10,1,10,1482226241,0,'Initial'),(11,1,11,1482226241,0,'Initial'),(12,1,12,1482226241,0,'Initial'),(13,1,13,1482226241,0,'Initial');
+INSERT INTO `cms_nav_item_page` VALUES (1,1,1,1513077719,1,'Initial'),(2,1,2,1513077719,1,'Initial'),(3,1,3,1513077719,1,'Initial'),(4,1,4,1513077719,1,'Initial'),(5,1,5,1513077719,1,'Initial'),(6,1,6,1513077719,1,'Initial'),(7,1,7,1513077719,1,'Initial'),(8,1,8,1513077719,1,'Initial'),(9,1,9,1513077719,1,'Initial'),(10,1,10,1513077720,1,'Initial'),(11,1,11,1513077720,1,'Initial'),(12,1,12,1513077720,1,'Initial'),(13,1,13,1513077720,1,'Initial');
 /*!40000 ALTER TABLE `cms_nav_item_page` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -870,6 +965,7 @@ CREATE TABLE `cms_nav_item_page_block_item` (
   `timestamp_update` int(11) DEFAULT '0',
   `sort_index` int(11) DEFAULT '0',
   `is_hidden` tinyint(1) DEFAULT '0',
+  `variation` varchar(255) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -957,6 +1053,32 @@ LOCK TABLES `cms_nav_property` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `cms_redirect`
+--
+
+DROP TABLE IF EXISTS `cms_redirect`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cms_redirect` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp_create` int(11) DEFAULT NULL,
+  `catch_path` varchar(255) NOT NULL,
+  `redirect_path` varchar(255) NOT NULL,
+  `redirect_status_code` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cms_redirect`
+--
+
+LOCK TABLES `cms_redirect` WRITE;
+/*!40000 ALTER TABLE `cms_redirect` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cms_redirect` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `migration`
 --
 
@@ -976,7 +1098,7 @@ CREATE TABLE `migration` (
 
 LOCK TABLES `migration` WRITE;
 /*!40000 ALTER TABLE `migration` DISABLE KEYS */;
-INSERT INTO `migration` VALUES ('m000000_000000_base',1482226238),('m141104_104622_admin_group',1482226238),('m141104_104631_admin_user_group',1482226238),('m141104_114809_admin_user',1482226239),('m141203_121042_admin_lang',1482226239),('m141203_143052_cms_cat',1482226239),('m141203_143059_cms_nav',1482226239),('m141203_143111_cms_nav_item',1482226239),('m141208_134038_cms_nav_item_page',1482226239),('m150106_095003_cms_layout',1482226239),('m150108_154017_cms_block',1482226239),('m150108_155009_cms_nav_item_page_block_item',1482226239),('m150122_125429_cms_nav_item_module',1482226239),('m150205_141350_block_group',1482226239),('m150304_152220_admin_storage_folder',1482226239),('m150304_152238_admin_storage_file',1482226239),('m150304_152244_admin_storage_filter',1482226239),('m150304_152250_admin_storage_effect',1482226239),('m150304_152256_admin_storage_image',1482226239),('m150309_142652_admin_storage_filter_chain',1482226239),('m150323_125407_admin_auth',1482226239),('m150323_132625_admin_group_auth',1482226239),('m150331_125022_admin_ngrest_log',1482226239),('m150615_094744_admin_user_login',1482226239),('m150617_200836_admin_user_online',1482226239),('m150626_084948_admin_search_data',1482226239),('m150915_081559_admin_config',1482226239),('m150924_112309_cms_nav_prop',1482226239),('m150924_120914_admin_prop',1482226240),('m151012_072207_cms_log',1482226240),('m151022_143429_cms_nav_item_redirect',1482226240),('m151026_161841_admin_tag',1482226240),('m160629_092417_cmspermissiontable',1482226240),('m160915_081618_create_admin_logger_table',1482226240),('m161219_150240_admin_lang_soft_delete',1482226240);
+INSERT INTO `migration` VALUES ('m000000_000000_base',1513077715),('m141104_104622_admin_group',1513077715),('m141104_104631_admin_user_group',1513077715),('m141104_114809_admin_user',1513077716),('m141203_121042_admin_lang',1513077716),('m141203_143052_cms_cat',1513077716),('m141203_143059_cms_nav',1513077716),('m141203_143111_cms_nav_item',1513077716),('m141208_134038_cms_nav_item_page',1513077716),('m150106_095003_cms_layout',1513077716),('m150108_154017_cms_block',1513077716),('m150108_155009_cms_nav_item_page_block_item',1513077716),('m150122_125429_cms_nav_item_module',1513077716),('m150205_141350_block_group',1513077716),('m150304_152220_admin_storage_folder',1513077716),('m150304_152238_admin_storage_file',1513077716),('m150304_152244_admin_storage_filter',1513077716),('m150304_152250_admin_storage_effect',1513077716),('m150304_152256_admin_storage_image',1513077716),('m150309_142652_admin_storage_filter_chain',1513077716),('m150323_125407_admin_auth',1513077716),('m150323_132625_admin_group_auth',1513077716),('m150331_125022_admin_ngrest_log',1513077716),('m150615_094744_admin_user_login',1513077716),('m150617_200836_admin_user_online',1513077716),('m150626_084948_admin_search_data',1513077716),('m150915_081559_admin_config',1513077716),('m150924_112309_cms_nav_prop',1513077717),('m150924_120914_admin_prop',1513077717),('m151012_072207_cms_log',1513077717),('m151022_143429_cms_nav_item_redirect',1513077717),('m151026_161841_admin_tag',1513077717),('m160629_092417_cmspermissiontable',1513077717),('m160915_081618_create_admin_logger_table',1513077717),('m161219_150240_admin_lang_soft_delete',1513077717),('m161220_183300_lcp_base_tables',1513077717),('m170116_120553_cms_block_variation_field',1513077717),('m170131_104109_user_model_updates',1513077717),('m170218_215610_cms_nav_layout_file',1513077717),('m170301_084325_cms_config',1513077717),('m170619_103728_cms_blocksettings',1513077717),('m170926_144137_add_admin_user_session_id_column',1513077718),('m170926_164913_add_ngrest_log_diff_data',1513077718),('m171003_065811_add_class_column_to_block_group_table',1513077718),('m171009_083835_add_admin_user_login_destroy_info',1513077718),('m171121_170909_add_publish_at_date',1513077718),('m171129_104706_config_add_system_type',1513077718),('m171206_113949_cms_redirection_table',1513077718);
 /*!40000 ALTER TABLE `migration` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -989,4 +1111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-20 10:30:42
+-- Dump completed on 2017-12-12 12:22:00

@@ -2,7 +2,7 @@
 
 # Database credentials
 user="root"
-password="defaultPassword"
+password="root"
 db_name="luya_env_phpunit"
 
 cd public_html
@@ -13,4 +13,4 @@ php index.php import
 php index.php admin/setup --email=test@luya.io --password=luyaio --firstname=John --lastname=Doe --interactive=0
 php index.php data/setup
 chmod 0777 ../sql
-mysqldump --user=$user --password=$password $db_name > ../sql/1.0.0-RC4.sql
+mysqldump --user=$user --password=$password $db_name > ../sql/1.0.0.sql
