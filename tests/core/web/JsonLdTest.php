@@ -17,7 +17,7 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         $out = ob_get_contents();
         ob_end_clean();
         
-        $this->assertContains('<script type="application/ld+json">{"@graph":[{"foo":"bar"}]}</script>', $out);
+        $this->assertContains('<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"foo":"bar"}]}</script>', $out);
         JsonLd::reset();
     }
 

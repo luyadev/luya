@@ -136,6 +136,7 @@ class JsonLd extends BaseObject
             throw new Exception("data must be either an array or an object of type luya\web\jsonld\BaseThing.");
         }
         
+        Yii::$app->view->params['@context'] = 'https://schema.org';
         Yii::$app->view->params['@graph'][] = $data;
         
         return $data;
