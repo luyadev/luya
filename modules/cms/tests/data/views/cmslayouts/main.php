@@ -1,1 +1,0 @@
-<div id="layout-test"><?= $placeholders['content']; ?></div>
