@@ -23,6 +23,20 @@ class StubIndex extends Index
 
 class IndexTest extends CrawlerTestCase
 {
+    public $fixture;
+    
+    public function setUp()
+    {
+        parent::setUp();
+        $this->fixture = new IndexFixture();
+        $this->fixture->load();
+    }
+    
+    public function tearDown()
+    {
+        $this->fixture->unload();
+    }
+    
     public function testPreview()
     {
         $model = new StubIndex();
@@ -36,9 +50,6 @@ class IndexTest extends CrawlerTestCase
     
     public function testFlatSearchByQuery()
     {
-        $fixture = new IndexFixture();
-        $fixture->load();
-        
         $test = Index::flatSearchByQuery('aaa', 'en');
         $this->assertSame('aaa', $test[0]->title);
         
@@ -54,9 +65,6 @@ class IndexTest extends CrawlerTestCase
     
     public function testsearchByQuery()
     {
-        $fixture = new IndexFixture();
-        $fixture->load();
-    
         $test1 = Index::searchByQuery('aaa', 'en');
         $this->assertSame('aaa', $test1[0]->title);
         $test1 = Index::searchByQuery('AAA', 'en');
@@ -71,9 +79,6 @@ class IndexTest extends CrawlerTestCase
     
     public function testEnhancedSearchByQuery()
     {
-        $fixture = new IndexFixture();
-        $fixture->load();
-        
         $test1 = Index::searchByQuery('drink bug', 'en');
         $this->assertSame('index2', $test1[0]->title);
         
@@ -99,9 +104,6 @@ class IndexTest extends CrawlerTestCase
     
     public function testEmptySearchs()
     {
-        $fixture = new IndexFixture();
-        $fixture->load();
-        
         $test1 = Index::searchByQuery('1', 'en');
         $this->assertEmpty($test1);
         $test2 = Index::flatSearchByQuery('1', 'en');
@@ -111,7 +113,6 @@ class IndexTest extends CrawlerTestCase
     public function testSortByUrl()
     {
         $test1 = Index::searchByQuery('item', 'en');
-        
         $this->assertSame(3, count($test1));
         
         $this->assertSame('index5/item', $test1[0]->url);
