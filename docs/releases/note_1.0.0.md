@@ -20,7 +20,7 @@ These are just some of the advantages:
 - the administration UI is clearly structured and easy to use
 - LUYA is and will always be free to use
 
-Give LUYA a try! We provide kickstarter repositories as well as a an online demo ([https://demo.luya.io/)].
+Give LUYA a try! We provide [kickstarter](https://github.com/luyadev/luya-kickstarter) repositories as well as a an [online demo](https://demo.luya.io/).
 
 **LUYA 1.0 includes the following components in stable release:**
 
@@ -54,3 +54,15 @@ LUYA 1.0 includes common content blocks and widgets that are available in two fl
 + URL redirections can be defined directly in the administration UI (e.g. to forward old URLs or to provide short URLs for communication purposes)
 + The administration's UI has seen many other improvements and bug fixes
 + Security has been enhanced
+
+Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and the [Upgrading Guide](https://luya.io/guide/install-upgrade) where you will find a list of all breaking changes.
+
+If you have any problems or questions regarding the upgrade process, don't hesitate to create an [issue on GitHub](https://github.com/luyadev/luya/issues).
+
++ [Twitter](https://twitter.com/luyadev)
++ [Gitter](https://gitter.im/luyadev/luya)
++ [Slack](https://slack.luya.io/)
+
+12 December 2017  
+LUYA developer team  
+[luya.io](https://luya.io)
