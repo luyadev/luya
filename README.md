@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/logo/luya-logo-0.2x.png" alt="LUYA Logo"/>
 </p>
 
-> 5, September 2017: RC4 is ready! [1.0.0-RC4](https://luya.io/news/last-release-candidate-1-0-0-rc4).
+> 12, December 2017: Version 1.0 is ready for download. [Read the 1.0.0 news](https://luya.io/news/version-1-online).
 
 The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
@@ -50,7 +50,7 @@ We are always looking for people who share their thoughts, code and problems wit
 + ✓ rc2 release (November 2016) - Bug fixes, PHP Doc and Guide improvements, basic features implementation.
 + ✓ rc3 release (April 2017) - Large API breaks and new features, therefore the rc3 release in order to get latest bugs reports and informations from Developers.
 + ✓ rc4 release (September 2017) - Introduce new Admin UI.
-+ version 1.0.0 (12.12.2017) - Fix new Admin UI bugs and release first stable version of LUYA.
++ ✓ version 1.0.0 (12.12.2017) - Fix new Admin UI bugs and release first stable version of LUYA.
 
 #### Unit Test
 
