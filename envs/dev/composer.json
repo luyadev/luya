@@ -12,10 +12,10 @@
         "jakeasmith/http_build_url" : "^0.1",
         "ifsnop/mysqldump-php":"2.*",
         "paypal/rest-api-sdk-php" : "~1.6.0",
-        "luyadev/luya-composer": "^1.0",
+        "luyadev/luya-composer": "~1.0.0",
         "luyadev/luya-bootstrap4": "^1.0@dev",
-        "luyadev/luya-generic" : "^1.0@dev",
-        "luyadev/luya-bootstrap3" : "^1.0@dev"
+        "luyadev/luya-generic" : "~1.0.0",
+        "luyadev/luya-bootstrap3" : "~1.0.0"
     },
     "extra": {
         "asset-installer-paths": {
@@ -25,21 +25,9 @@
     "autoload" : {
         "psr-4" : {
             "ngresttest\\" : "modules/ngresttest",
-            "moduletest\\" : "modules/moduletest",
             "luya\\" : "../../core/",
-            "luya\\admin\\" : "../../modules/admin/src",
-            "luya\\cms\\" : "../../modules/cms/src",
-            "luya\\crawler\\" : "../../modules/crawler/src",
-            "luya\\errorapi\\" : "../../modules/errorapi/src",
-            "luya\\gallery\\" : "../../modules/gallery/src",
-            "luya\\frontendgroup\\" : "../../modules/frontendgroup/src",
-            "luya\\news\\" : "../../modules/news/src",
-            "luya\\remoteadmin\\" : "../../modules/remoteadmin/src",
-            "luya\\styleguide\\" : "../../modules/styleguide/src",
-            "luya\\payment\\" : "../../../luya-module-payment/src",
-            "luya\\basicauth\\" : "../../../luya-module-basicauth/src",
-            "luya\\bootstrap4\\" : "../../../luya-bootstrap4/src",
-            "luya\\estore\\" : "../../../luya-module-estore/src/"
+            "luya\\admin\\" : "modules/luya-module-admin/src",
+            "luya\\cms\\" : "modules/luya-module-cms/src"
         }
     }
 }
