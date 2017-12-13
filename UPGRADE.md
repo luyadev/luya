@@ -3,7 +3,7 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
-1.0.0 (in progress)
+1.0.0 (12. December 2017)
 -------------------
 
 > When upgrading from RC4 to 1.0.0 you have run the updater as we have moved all blocks into seperate repos: [https://github.com/luyadev/luya/issues/1572](https://github.com/luyadev/luya/issues/1572)
