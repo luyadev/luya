@@ -55,6 +55,8 @@ LUYA 1.0 includes common content blocks and widgets that are available in two fl
 + The administration's UI has seen many other improvements and bug fixes
 + Security has been enhanced
 
+[Download LUYA Version 1.0](https://luya.io)
+
 Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and the [Upgrading Guide](https://luya.io/guide/install-upgrade) where you will find a list of all breaking changes.
 
 If you have any problems or questions regarding the upgrade process, don't hesitate to create an [issue on GitHub](https://github.com/luyadev/luya/issues).
