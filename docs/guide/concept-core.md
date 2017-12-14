@@ -36,7 +36,7 @@ The content for `composer.json` would be:
 ```json
 {
     "require": {
-        "luyadev/luya-core" : "^1.0@dev"
+        "luyadev/luya-core" : "~1.0.0"
     },
     "config": {
         "fxp-asset" : {
