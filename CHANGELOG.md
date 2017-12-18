@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.1 (in progress)
 
-### Fixed
+### Fixed
 
 - [#1731](https://github.com/luyadev/luya/issues/1731) JsonLd Thing definition must be from type Thing.
 
