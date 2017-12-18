@@ -14,4 +14,11 @@ namespace luya\web\jsonld;
  */
 class Thing extends BaseThing
 {
+	/**
+	 * @inheritdoc
+	 */
+	public function typeDefintion()
+	{
+		return 'Thing';
+	}
 }

@@ -35,6 +35,7 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
 
         $this->assertSame([
             'name' => 'The Thing',
+        	'@type' => 'Thing',
         ], $thing->toArray());
     }
 

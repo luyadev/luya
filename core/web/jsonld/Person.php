@@ -12,6 +12,9 @@ namespace luya\web\jsonld;
  */
 class Person extends BaseThing implements PersonInterface
 {
+	/**
+	 * @inheritdoc
+	 */
     public function typeDefintion()
     {
         return 'Person';
