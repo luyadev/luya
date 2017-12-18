@@ -30,27 +30,25 @@ Other helpfull informations:
 
 ## Questions and Problems
 
-If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/luyadev/luya/issues/new) on the project repository.
+If you have any questions or problems, don't hesitate to find support in the following channels.
 
 + [Issues on GitHub](https://github.com/luyadev/luya/issues)
 + [Join the Slack Team](https://slack.luya.io)
 + [Ask us in Gitter](https://gitter.im/luyadev/luya)
+
+## Bug Report
+
+When reporting bugs, its important to understand where to create the issue. The most common modules are:
+
++ [Core](github.com/luyadev/luya) The core library, which extends the Yii Framework.
++ [CMS](github.com/luyadev/luya-module-cms) The Content Mangement System Admin and Frontend. Working with Blocks, render CMS Pages, etc.
++ [Admin](github.com/luyadev/luya-module-admin) The admin UI itself, including all CURD operations belongs to this module.
 
 #### Contribution
 
 We are always looking for people who share their thoughts, code and problems with us. Below the links to the contribution guides:
 
 [Help us building LUYA](https://luya.io/guide/luya-collaboration)
-
-#### ROADMAP
-
-+ ✓ beta7 release (June 2016)
-+ ✓ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
-+ ✓ rc1 release (October 2016) - Merge admin and frontend modules into each other. Add luya vendor namespace prefix to all modules.
-+ ✓ rc2 release (November 2016) - Bug fixes, PHP Doc and Guide improvements, basic features implementation.
-+ ✓ rc3 release (April 2017) - Large API breaks and new features, therefore the rc3 release in order to get latest bugs reports and informations from Developers.
-+ ✓ rc4 release (September 2017) - Introduce new Admin UI.
-+ ✓ version 1.0.0 (12.12.2017) - Fix new Admin UI bugs and release first stable version of LUYA.
 
 #### Unit Test
 
