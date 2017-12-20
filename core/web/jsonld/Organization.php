@@ -5,6 +5,8 @@ namespace luya\web\jsonld;
 /**
  * JsonLd - Organization
  *
+ * An organization such as a school, NGO, corporation, club, etc.
+ *
  * @see http://schema.org/Organization
  *
  * @author Alex Schmid
