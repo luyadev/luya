@@ -10,7 +10,7 @@ namespace luya\web\jsonld;
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1
  */
-interface CreativeWorkInterface
+interface CreativeWorkInterface extends ThingInterface
 {
     /**
      * @return Thing

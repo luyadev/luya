@@ -12,6 +12,8 @@ namespace luya\web\jsonld;
  */
 trait CreativeWorkTrait
 {
+    use ThingTrait;
+
     /**
      * The subject matter of the content.
      * Inverse property: subjectOf.
