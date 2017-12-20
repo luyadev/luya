@@ -2,8 +2,11 @@
 
 namespace luya\web;
 
+use luya\web\jsonld\Article;
+use luya\web\jsonld\BlogPosting;
 use luya\web\jsonld\CreativeWork;
 use luya\web\jsonld\Organization;
+use luya\web\jsonld\SocialMediaPosting;
 use luya\web\jsonld\Thing;
 use Yii;
 use yii\helpers\Json;
@@ -30,6 +33,31 @@ use yii\base\BaseObject;
  */
 class JsonLd extends BaseObject
 {
+
+    /**
+     * Register new Article.
+     *
+     * @param array $config Optional config array to provided article data via setter methods.
+     *
+     * @return \luya\web\jsonld\Article
+     */
+    public static function article(array $config = [])
+    {
+        return self::addGraph((new Article($config)));
+    }
+
+    /**
+     * Register new Blog Posting.
+     *
+     * @param array $config Optional config array to provided blog posting data via setter methods.
+     *
+     * @return \luya\web\jsonld\BlogPosting
+     */
+    public static function blogPosting(array $config = [])
+    {
+        return self::addGraph((new BlogPosting($config)));
+    }
+
     /**
      * Register new Thing.
      *
@@ -67,6 +95,18 @@ class JsonLd extends BaseObject
     }
 
     /**
+     * Register new Live Blog Posting.
+     *
+     * @param array $config Optional config array to provided live blog posting data via setter methods.
+     *
+     * @return \luya\web\jsonld\LiveBlogPosting
+     */
+    public static function liveBlogPosting(array $config = [])
+    {
+        return self::addGraph((new LiveBlogPosting($config)));
+    }
+
+    /**
      * Register new Organization.
      *
      * @param array $config Optional config array to provided organization data via setter methods.
@@ -100,6 +140,18 @@ class JsonLd extends BaseObject
     public static function place(array $config = [])
     {
         return self::addGraph((new Place($config)));
+    }
+
+    /**
+     * Register new Social Media Posting.
+     *
+     * @param array $config Optional config array to provided social media posting data via setter methods.
+     *
+     * @return \luya\web\jsonld\SocialMediaPosting
+     */
+    public static function socialMediaPosting(array $config = [])
+    {
+        return self::addGraph((new SocialMediaPosting($config)));
     }
     
     /**
