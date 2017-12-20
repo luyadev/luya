@@ -2,6 +2,7 @@
 
 namespace luya\web;
 
+use luya\web\jsonld\CreativeWork;
 use luya\web\jsonld\Organization;
 use luya\web\jsonld\Thing;
 use Yii;
@@ -42,15 +43,15 @@ class JsonLd extends BaseObject
     }
 
     /**
-     * Register new Organization.
+     * Register new CreativeWork.
      *
-     * @param array $config Optional config array to provided person data via setter methods.
+     * @param array $config Optional config array to provided creative work data via setter methods.
      *
-     * @return \luya\web\jsonld\Organization
+     * @return \luya\web\jsonld\CreativeWork
      */
-    public static function organization(array $config = [])
+    public static function creativeWork(array $config = [])
     {
-        return self::addGraph((new Organization($config)));
+        return self::addGraph((new CreativeWork($config)));
     }
     
     /**
@@ -63,6 +64,18 @@ class JsonLd extends BaseObject
     public static function event(array $config = [])
     {
         return self::addGraph((new Event($config)));
+    }
+
+    /**
+     * Register new Organization.
+     *
+     * @param array $config Optional config array to provided organization data via setter methods.
+     *
+     * @return \luya\web\jsonld\Organization
+     */
+    public static function organization(array $config = [])
+    {
+        return self::addGraph((new Organization($config)));
     }
     
     /**
@@ -80,7 +93,7 @@ class JsonLd extends BaseObject
     /**
      * Register new Place
      *
-     * @param array $config Optional config array to provided person data via setter methods.
+     * @param array $config Optional config array to provided place data via setter methods.
      *
      * @return \luya\web\jsonld\Place
      */
