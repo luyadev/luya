@@ -27,8 +27,8 @@ The following **types** are supported by LUYA composer
 
 |type|description
 |----|----------
-|luya-extension|Is used when you have blocks, helpers, assets and other files but no module.
-|luya-module|Can contain the same as luya-extension but also modules. This packages are also listed on luya.io in the guide section.
+|luya-extension|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
+|luya-module|Can contain the same as luya-extension but also modules and controllers.
 
 ## Extra section
 
