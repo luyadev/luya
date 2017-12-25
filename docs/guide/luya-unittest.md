@@ -1,6 +1,6 @@
-# LUYA Unit Test
+# Unit Test
 
-Unit testing is an integral part of LUYA. Every new class and function should be accompanied by a dedicated unit test.
+Unit testing is an integral part of LUYA. Every new class and function should be accompanied by a dedicated unit test. We recommend you to use [LUYA Testsuite](https://github.com/luyadev/luya-testsuite)
 
 ## Unit test a single class
 
