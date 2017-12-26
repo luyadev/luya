@@ -38,7 +38,7 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
 
         $this->assertSame([
             'name' => 'The Article',
-            '@type' => 'BlogPosting',
+            '@type' => 'Article',
         ], $thing->toArray());
     }
 
@@ -58,7 +58,7 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
 
         $this->assertSame([
             'name' => 'The CreativeWork',
-            '@type' => 'Person',
+            '@type' => 'CreativeWork',
         ], $thing->toArray());
     }
 
