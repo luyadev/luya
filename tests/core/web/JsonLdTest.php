@@ -2,7 +2,9 @@
 namespace luyatests\core\web;
 
 use luya\web\jsonld\Article;
+use luya\web\jsonld\BlogPosting;
 use luya\web\jsonld\CreativeWork;
+use luya\web\jsonld\LiveBlogPosting;
 use luya\web\jsonld\Organization;
 use luya\web\jsonld\SocialMediaPosting;
 use luya\web\jsonld\Thing;
