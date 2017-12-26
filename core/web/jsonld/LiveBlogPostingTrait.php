@@ -14,8 +14,6 @@ trait LiveBlogPostingTrait
     use BlogPostingTrait;
 
     /**
-     * The time when the live blog will stop covering the Event. Note that coverage may continue after the Event concludes.
-     *
      * @var DateTime
      */
     private $_coverageEndTime;
@@ -29,6 +27,8 @@ trait LiveBlogPostingTrait
     }
 
     /**
+     * The time when the live blog will stop covering the Event. Note that coverage may continue after the Event concludes.
+     *
      * @param DateTime $coverageEndTime
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */
@@ -39,9 +39,6 @@ trait LiveBlogPostingTrait
     }
 
     /**
-     * The time when the live blog will begin covering the Event. Note that coverage may begin before the Event's start time.
-     * The LiveBlogPosting may also be created before coverage begins.
-     *
      * @var DateTime
      */
     private $_coverageStartTime;
@@ -55,6 +52,9 @@ trait LiveBlogPostingTrait
     }
 
     /**
+     * The time when the live blog will begin covering the Event. Note that coverage may begin before the Event's start time.
+     * The LiveBlogPosting may also be created before coverage begins.
+     *
      * @param DateTime $coverageStartTime
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */
@@ -65,8 +65,6 @@ trait LiveBlogPostingTrait
     }
 
     /**
-     * An update to the LiveBlog.
-     *
      * @var BlogPosting
      */
     private $_liveBlogUpdate;
@@ -80,6 +78,8 @@ trait LiveBlogPostingTrait
     }
 
     /**
+     * An update to the LiveBlog.
+     *
      * @param BlogPosting $liveBlogUpdate
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */

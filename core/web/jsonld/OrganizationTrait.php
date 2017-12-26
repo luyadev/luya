@@ -11,11 +11,6 @@ namespace luya\web\jsonld;
 trait OrganizationTrait
 {
     /**
-     * For a NewsMediaOrganization or other news-related Organization,
-     * a statement about public engagement activities (for news media, the newsroom’s),
-     * including involving the public - digitally or otherwise
-     * -- in coverage decisions, reporting and activities after publication.
-     *
      * @var CreativeWork|URL
      */
     private $_actionableFeedbackPolicy;
@@ -29,6 +24,11 @@ trait OrganizationTrait
     }
 
     /**
+     * For a NewsMediaOrganization or other news-related Organization,
+     * a statement about public engagement activities (for news media, the newsroom’s),
+     * including involving the public - digitally or otherwise
+     * -- in coverage decisions, reporting and activities after publication.
+     *
      * @param mixed $actionableFeedbackPolicy
      * @return Organization
      */
@@ -39,8 +39,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Physical address of the item.
-     *
      * @var PostalAddress|string
      */
     private $_address;
@@ -54,6 +52,8 @@ trait OrganizationTrait
     }
 
     /**
+     * Physical address of the item.
+     *
      * @param mixed $address
      * @return Organization
      */
@@ -64,8 +64,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The overall rating, based on a collection of reviews or ratings, of the item.
-     *
      * @var AggregateRating
      */
     private $_aggregateRating;
@@ -79,6 +77,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The overall rating, based on a collection of reviews or ratings, of the item.
+     *
      * @param mixed $aggregateRating
      * @return Organization
      */
@@ -89,9 +89,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Alumni of an organization.
-     * Inverse property: alumniOf.
-     *
      * @var Person
      */
     private $_alumni;
@@ -105,6 +102,9 @@ trait OrganizationTrait
     }
 
     /**
+     * Alumni of an organization.
+     * Inverse property: alumniOf.
+     *
      * @param mixed $alumni
      * @return Organization
      */
@@ -115,8 +115,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The geographic area where a service or offered item is provided. Supersedes serviceArea.
-     *
      * @var AdministrativeArea|GeoShape|Place|string
      */
     private $_areaServed;
@@ -130,6 +128,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The geographic area where a service or offered item is provided. Supersedes serviceArea.
+     *
      * @param mixed $areaServed
      * @return Organization
      */
@@ -140,8 +140,6 @@ trait OrganizationTrait
     }
 
     /**
-     * An award won by or for this item. Supersedes awards.
-     *
      * @var string
      */
     private $_award;
@@ -155,6 +153,8 @@ trait OrganizationTrait
     }
 
     /**
+     * An award won by or for this item. Supersedes awards.
+     *
      * @param mixed $award
      * @return Organization
      */
@@ -165,9 +165,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The brand(s) associated with a product or service,
-     * or the brand(s) maintained by an organization or business person.
-     *
      * @var Brand|Organization
      */
     private $_brand;
@@ -181,6 +178,9 @@ trait OrganizationTrait
     }
 
     /**
+     * The brand(s) associated with a product or service,
+     * or the brand(s) maintained by an organization or business person.
+     *
      * @param mixed $brand
      * @return Organization
      */
@@ -191,8 +191,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A contact point for a person or organization. Supersedes contactPoints.
-     *
      * @var ContactPoint
      */
     private $_contactPoint;
@@ -206,6 +204,8 @@ trait OrganizationTrait
     }
 
     /**
+     * A contact point for a person or organization. Supersedes contactPoints.
+     *
      * @param mixed $contactPoint
      * @return Organization
      */
@@ -216,9 +216,6 @@ trait OrganizationTrait
     }
 
     /**
-     * For an Organization (e.g. NewsMediaOrganization),
-     * a statement describing (in news media, the newsroom’s) disclosure and correction policy for errors.
-     *
      * @var CreativeWork|URL
      */
     private $_correctionsPolicy;
@@ -232,6 +229,9 @@ trait OrganizationTrait
     }
 
     /**
+     * For an Organization (e.g. NewsMediaOrganization),
+     * a statement describing (in news media, the newsroom’s) disclosure and correction policy for errors.
+     *
      * @param mixed $correctionsPolicy
      * @return Organization
      */
@@ -242,10 +242,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A relationship between an organization and a department of that organization,
-     * also described as an organization (allowing different urls, logos, opening hours).
-     * For example: a store with a pharmacy, or a bakery with a cafe.
-     *
      * @var Organization
      */
     private $_department;
@@ -259,6 +255,10 @@ trait OrganizationTrait
     }
 
     /**
+     * A relationship between an organization and a department of that organization,
+     * also described as an organization (allowing different urls, logos, opening hours).
+     * For example: a store with a pharmacy, or a bakery with a cafe.
+     *
      * @param mixed $department
      * @return Organization
      */
@@ -269,8 +269,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The date that this organization was dissolved.
-     *
      * @var Date
      */
     private $_dissolutionDate;
@@ -284,6 +282,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The date that this organization was dissolved.
+     *
      * @param mixed $dissolutionDate
      * @return Organization
      */
@@ -294,10 +294,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Statement on diversity policy by an Organization e.g. a NewsMediaOrganization.
-     * For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources,
-     * typically providing staffing data.
-     *
      * @var CreativeWork|URL
      */
     private $_diversityPolicy;
@@ -310,6 +306,10 @@ trait OrganizationTrait
     }
 
     /**
+     * Statement on diversity policy by an Organization e.g. a NewsMediaOrganization.
+     * For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources,
+     * typically providing staffing data.
+     *
      * @param mixed $diversityPolicy
      * @return Organization
      */
@@ -320,8 +320,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The Dun & Bradstreet DUNS number for identifying an organization or business person.
-     *
      * @var string
      */
     private $_duns;
@@ -335,6 +333,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The Dun & Bradstreet DUNS number for identifying an organization or business person.
+     *
      * @param mixed $duns
      * @return Organization
      */
@@ -345,8 +345,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Email address
-     *
      * @var string
      */
     private $_email;
@@ -360,6 +358,8 @@ trait OrganizationTrait
     }
 
     /**
+     * Email address
+     *
      * @param mixed $email
      * @return Organization
      */
@@ -370,9 +370,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Someone working for this organization.
-     * Supersedes employees.
-     *
      * @var Person
      */
     private $_employee;
@@ -386,6 +383,9 @@ trait OrganizationTrait
     }
 
     /**
+     * Someone working for this organization.
+     * Supersedes employees.
+     *
      * @param mixed $employee
      * @return Organization
      */
@@ -396,11 +396,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Statement about ethics policy, e.g. of a NewsMediaOrganization regarding journalistic and publishing practices,
-     * or of a Restaurant, a page describing food source policies. In the case of a NewsMediaOrganization,
-     * an ethicsPolicy is typically a statement describing the personal, organizational,
-     * and corporate standards of behavior expected by the organization.
-     *
      * @var CreativeWork|URL
      */
     private $_ethicsPolicy;
@@ -414,6 +409,11 @@ trait OrganizationTrait
     }
 
     /**
+     * Statement about ethics policy, e.g. of a NewsMediaOrganization regarding journalistic and publishing practices,
+     * or of a Restaurant, a page describing food source policies. In the case of a NewsMediaOrganization,
+     * an ethicsPolicy is typically a statement describing the personal, organizational,
+     * and corporate standards of behavior expected by the organization.
+     *
      * @param mixed $ethicsPolicy
      * @return Organization
      */
@@ -424,8 +424,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Upcoming or past event associated with this place, organization, or action. Supersedes events.
-     *
      * @var Event
      */
     private $_event;
@@ -439,6 +437,8 @@ trait OrganizationTrait
     }
 
     /**
+     * Upcoming or past event associated with this place, organization, or action. Supersedes events.
+     *
      * @param mixed $event
      * @return Organization
      */
@@ -449,8 +449,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The fax number.
-     *
      * @var string
      */
     private $_faxNumber;
@@ -464,6 +462,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The fax number.
+     *
      * @param mixed $faxNumber
      * @return Organization
      */
@@ -474,8 +474,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A person who founded this organization. Supersedes founders.
-     *
      * @var Person
      */
     private $_founder;
@@ -489,6 +487,8 @@ trait OrganizationTrait
     }
 
     /**
+     * A person who founded this organization. Supersedes founders.
+     *
      * @param mixed $founder
      * @return Organization
      */
@@ -499,8 +499,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The date that this organization was founded.
-     *
      * @var Date
      */
     private $_foundingDate;
@@ -514,6 +512,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The date that this organization was founded.
+     *
      * @param mixed $foundingDate
      * @return Organization
      */
@@ -524,8 +524,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The place where the Organization was founded.
-     *
      * @var Place
      */
     private $_foundingLocation;
@@ -539,6 +537,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The place where the Organization was founded.
+     *
      * @param mixed $foundingLocation
      * @return Organization
      */
@@ -549,8 +549,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A person or organization that supports (sponsors) something through some kind of financial contribution.
-     *
      * @var Organization|Person
      */
     private $_funder;
@@ -564,6 +562,8 @@ trait OrganizationTrait
     }
 
     /**
+     * A person or organization that supports (sponsors) something through some kind of financial contribution.
+     *
      * @param mixed $funder
      * @return Organization
      */
@@ -574,10 +574,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN)
-     * of the respective organization, person, or place.
-     * The GLN is a 13-digit number used to identify parties and physical locations.
-     *
      * @var string
      */
     private $_globalLocationNumber;
@@ -591,6 +587,10 @@ trait OrganizationTrait
     }
 
     /**
+     * The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN)
+     * of the respective organization, person, or place.
+     * The GLN is a 13-digit number used to identify parties and physical locations.
+     *
      * @param mixed $globalLocationNumber
      * @return Organization
      */
@@ -601,8 +601,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Indicates an OfferCatalog listing for this Organization, Person, or Service.
-     *
      * @var OfferCatalog
      */
     private $_hasOfferCatalog;
@@ -616,6 +614,8 @@ trait OrganizationTrait
     }
 
     /**
+     * Indicates an OfferCatalog listing for this Organization, Person, or Service.
+     *
      * @param mixed $hasOfferCatalog
      * @return Organization
      */
@@ -626,8 +626,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Points-of-Sales operated by the organization or person.
-     *
      * @var Place
      */
     private $_hasPOS;
@@ -641,6 +639,8 @@ trait OrganizationTrait
     }
 
     /**
+     * Points-of-Sales operated by the organization or person.
+     *
      * @param mixed $hasPOS
      * @return Organization
      */
@@ -651,9 +651,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The International Standard of Industrial Classification of All Economic Activities (ISIC),
-     * Revision 4 code for a particular organization, business person, or place.
-     *
      * @var string
      */
     private $_isicV4;
@@ -667,6 +664,9 @@ trait OrganizationTrait
     }
 
     /**
+     * The International Standard of Industrial Classification of All Economic Activities (ISIC),
+     * Revision 4 code for a particular organization, business person, or place.
+     *
      * @param mixed $isicV4
      * @return Organization
      */
@@ -677,8 +677,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The official name of the organization, e.g. the registered company name.
-     *
      * @var string
      */
     private $_legalName;
@@ -692,6 +690,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The official name of the organization, e.g. the registered company name.
+     *
      * @param mixed $legalName
      * @return Organization
      */
@@ -702,8 +702,6 @@ trait OrganizationTrait
     }
 
     /**
-     * An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.
-     *
      * @var string
      */
     private $_leiCode;
@@ -717,6 +715,8 @@ trait OrganizationTrait
     }
 
     /**
+     * An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.
+     *
      * @param mixed $leiCode
      * @return Organization
      */
@@ -727,9 +727,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The location of for example where the event is happening, an organization is located,
-     * or where an action takes place.
-     *
      * @var Place|PostalAddress|string
      */
     private $_location;
@@ -743,6 +740,9 @@ trait OrganizationTrait
     }
 
     /**
+     * The location of for example where the event is happening, an organization is located,
+     * or where an action takes place.
+     *
      * @param mixed $location
      * @return Organization
      */
@@ -753,8 +753,6 @@ trait OrganizationTrait
     }
 
     /**
-     * An associated logo.
-     *
      * @var ImageObject|URL
      */
     private $_logo;
@@ -768,6 +766,8 @@ trait OrganizationTrait
     }
 
     /**
+     * An associated logo.
+     *
      * @param mixed $logo
      * @return Organization
      */
@@ -778,9 +778,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A pointer to products or services offered by the organization or person.
-     * Inverse property: offeredBy.
-     *
      * @var Offer
      */
     private $_makesOffer;
@@ -794,6 +791,9 @@ trait OrganizationTrait
     }
 
     /**
+     * A pointer to products or services offered by the organization or person.
+     * Inverse property: offeredBy.
+     *
      * @param mixed $makesOffer
      * @return Organization
      */
@@ -804,11 +804,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A member of an Organization or a ProgramMembership.
-     * Organizations can be members of organizations; ProgramMembership is typically for individuals.
-     * Supersedes members, musicGroupMember.
-     * Inverse property: memberOf.
-     *
      * @var Organization|Person
      */
     private $_member;
@@ -822,6 +817,11 @@ trait OrganizationTrait
     }
 
     /**
+     * A member of an Organization or a ProgramMembership.
+     * Organizations can be members of organizations; ProgramMembership is typically for individuals.
+     * Supersedes members, musicGroupMember.
+     * Inverse property: memberOf.
+     *
      * @param mixed $member
      * @return Organization
      */
@@ -832,9 +832,6 @@ trait OrganizationTrait
     }
 
     /**
-     * An Organization (or ProgramMembership) to which this Person or Organization belongs.
-     * Inverse property: member.
-     *
      * @var Organization|ProgramMembership
      */
     private $_memberOf;
@@ -848,6 +845,9 @@ trait OrganizationTrait
     }
 
     /**
+     * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+     * Inverse property: member.
+     *
      * @param mixed $memberOf
      * @return Organization
      */
@@ -858,8 +858,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The North American Industry Classification System (NAICS) code for a particular organization or business person.
-     *
      * @var string
      */
     private $_naics;
@@ -873,6 +871,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The North American Industry Classification System (NAICS) code for a particular organization or business person.
+     *
      * @param mixed $naics
      * @return Organization
      */
@@ -883,8 +883,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The number of employees in an organization e.g. business.
-     *
      * @var QuantitativeValue
      */
     private $_numberOfEmployees;
@@ -898,6 +896,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The number of employees in an organization e.g. business.
+     *
      * @param mixed $numberOfEmployees
      * @return Organization
      */
@@ -908,8 +908,6 @@ trait OrganizationTrait
     }
 
     /**
-     * Products owned by the organization or person.
-     *
      * @var OwnershipInfo|Product
      */
     private $_owns;
@@ -923,6 +921,8 @@ trait OrganizationTrait
     }
 
     /**
+     * Products owned by the organization or person.
+     *
      * @param mixed $owns
      * @return Organization
      */
@@ -933,10 +933,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The larger organization that this organization is a subOrganization of, if any.
-     * Supersedes branchOf.
-     * Inverse property: subOrganization.
-     *
      * @var Organization
      */
     private $_parentOrganization;
@@ -950,6 +946,10 @@ trait OrganizationTrait
     }
 
     /**
+     * The larger organization that this organization is a subOrganization of, if any.
+     * Supersedes branchOf.
+     * Inverse property: subOrganization.
+     *
      * @param mixed $parentOrganization
      * @return Organization
      */
@@ -960,11 +960,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles
-     * of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher,
-     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those
-     * of the party primarily responsible for the creation of the CreativeWork.
-     *
      * @var CreativeWork|URL
      */
     private $_publishingPrinciples;
@@ -978,6 +973,11 @@ trait OrganizationTrait
     }
 
     /**
+     * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles
+     * of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher,
+     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those
+     * of the party primarily responsible for the creation of the CreativeWork.
+     *
      * @param mixed $publishingPrinciples
      * @return Organization
      */
@@ -988,8 +988,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A review of the item. Supersedes reviews.
-     *
      * @var Review
      */
     private $_review;
@@ -1003,6 +1001,9 @@ trait OrganizationTrait
     }
 
     /**
+     * A review of the item.
+     * Supersedes reviews.
+     *
      * @param mixed $review
      * @return Organization
      */
@@ -1013,8 +1014,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A pointer to products or services sought by the organization or person (demand).
-     *
      * @var Demand
      */
     private $_seeks;
@@ -1028,6 +1027,8 @@ trait OrganizationTrait
     }
 
     /**
+     * A pointer to products or services sought by the organization or person (demand).
+     *
      * @param mixed $seeks
      * @return Organization
      */
@@ -1038,8 +1039,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g.
-     *
      * @var Organization|Person
      */
     private $_sponsor;
@@ -1053,6 +1052,8 @@ trait OrganizationTrait
     }
 
     /**
+     * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g.
+     *
      * @param mixed $sponsor
      * @return Organization
      */
@@ -1063,10 +1064,6 @@ trait OrganizationTrait
     }
 
     /**
-     * A relationship between two organizations where the first includes the second, e.g., as a subsidiary.
-     * See also: the more specific 'department' property.
-     * Inverse property: parentOrganization.
-     *
      * @var Organization
      */
     private $_subOrganization;
@@ -1080,6 +1077,10 @@ trait OrganizationTrait
     }
 
     /**
+     * A relationship between two organizations where the first includes the second, e.g., as a subsidiary.
+     * See also: the more specific 'department' property.
+     * Inverse property: parentOrganization.
+     *
      * @param mixed $subOrganization
      * @return Organization
      */
@@ -1090,8 +1091,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
-     *
      * @var string
      */
     private $_taxID;
@@ -1105,6 +1104,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
+     *
      * @param mixed $taxID
      * @return Organization
      */
@@ -1115,8 +1116,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The telephone number.
-     *
      * @var string
      */
     private $_telephone;
@@ -1130,6 +1129,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The telephone number.
+     *
      * @param mixed $telephone
      * @return Organization
      */
@@ -1140,9 +1141,6 @@ trait OrganizationTrait
     }
 
     /**
-     * For an Organization (typically a NewsMediaOrganization), a statement about policy on use of unnamed sources
-     * and the decision process required.
-     *
      * @var CreativeWork|URL
      */
     private $_unnamedSourcesPolicy;
@@ -1156,6 +1154,9 @@ trait OrganizationTrait
     }
 
     /**
+     * For an Organization (typically a NewsMediaOrganization), a statement about policy on use of unnamed sources
+     * and the decision process required.
+     *
      * @param mixed $unnamedSourcesPolicy
      * @return Organization
      */
@@ -1166,8 +1167,6 @@ trait OrganizationTrait
     }
 
     /**
-     * The Value-added Tax ID of the organization or person.
-     *
      * @var string
      */
     private $_vatID;
@@ -1181,6 +1180,8 @@ trait OrganizationTrait
     }
 
     /**
+     * The Value-added Tax ID of the organization or person.
+     *
      * @param mixed $vatID
      * @return Organization
      */

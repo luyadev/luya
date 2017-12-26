@@ -15,8 +15,6 @@ trait ArticleTrait
     use CreativeWorkTrait;
 
     /**
-     * The actual body of the article.
-     *
      * @var string
      */
     private $_articleBody;
@@ -30,6 +28,8 @@ trait ArticleTrait
     }
 
     /**
+     * The actual body of the article.
+     *
      * @param string $articleBody
      * @return Article|ArticleTrait
      */
@@ -40,8 +40,6 @@ trait ArticleTrait
     }
 
     /**
-     * Articles may belong to one or more 'sections' in a magazine or newspaper, such as Sports, Lifestyle, etc.
-     *
      * @var string
      */
     private $_articleSection;
@@ -55,6 +53,8 @@ trait ArticleTrait
     }
 
     /**
+     * Articles may belong to one or more 'sections' in a magazine or newspaper, such as Sports, Lifestyle, etc.
+     *
      * @param string $articleSection
      * @return Article|ArticleTrait
      */
@@ -65,8 +65,6 @@ trait ArticleTrait
     }
 
     /**
-     * The page on which the work ends; for example "138" or "xvi".
-     *
      * @var int|string
      */
     private $_pageEnd;
@@ -80,6 +78,8 @@ trait ArticleTrait
     }
 
     /**
+     * The page on which the work ends; for example "138" or "xvi".
+     *
      * @param int|string $pageEnd
      * @return Article|ArticleTrait
      */
@@ -90,8 +90,6 @@ trait ArticleTrait
     }
 
     /**
-     * The page on which the work starts; for example "135" or "xiii".
-     *
      * @var int|string
      */
     private $_pageStart;
@@ -105,6 +103,8 @@ trait ArticleTrait
     }
 
     /**
+     * The page on which the work starts; for example "135" or "xiii".
+     *
      * @param int|string $pageStart
      * @return Article|ArticleTrait
      */
@@ -115,9 +115,6 @@ trait ArticleTrait
     }
 
     /**
-     * Any description of pages that is not separated into pageStart and pageEnd;
-     * for example, "1-6, 9, 55" or "10-12, 46-49".
-     *
      * @var string
      */
     private $_pagination;
@@ -131,6 +128,9 @@ trait ArticleTrait
     }
 
     /**
+     * Any description of pages that is not separated into pageStart and pageEnd;
+     * for example, "1-6, 9, 55" or "10-12, 46-49".
+     *
      * @param string $pagination
      * @return Article|ArticleTrait
      */
@@ -138,6 +138,19 @@ trait ArticleTrait
     {
         $this->_pagination = $pagination;
         return $this;
+    }
+
+    /**
+     * @var SpeakableSpecification|URL
+     */
+    private $_speakable;
+
+    /**
+     * @return SpeakableSpecification|URL
+     */
+    public function getSpeakable()
+    {
+        return $this->_speakable;
     }
 
     /**
@@ -160,19 +173,6 @@ trait ArticleTrait
      * or XPath expressions to pick out document section(s) as speakable. For this we define a supporting type,
      * SpeakableSpecification which is defined to be a possible value of the speakable property.
      *
-     * @var SpeakableSpecification|URL
-     */
-    private $_speakable;
-
-    /**
-     * @return SpeakableSpecification|URL
-     */
-    public function getSpeakable()
-    {
-        return $this->_speakable;
-    }
-
-    /**
      * @param SpeakableSpecification|URL $speakable
      * @return Article|ArticleTrait
      */
@@ -183,8 +183,6 @@ trait ArticleTrait
     }
 
     /**
-     * The number of words in the text of the Article.
-     *
      * @var int
      */
     private $_wordCount;
@@ -198,6 +196,8 @@ trait ArticleTrait
     }
 
     /**
+     * The number of words in the text of the Article.
+     *
      * @param int $wordCount
      * @return Article|ArticleTrait
      */

@@ -13,12 +13,6 @@ namespace luya\web\jsonld;
 trait PlaceTrait
 {
     /**
-     * A property-value pair representing an additional characteristics of the entitity,
-     * e.g. a product feature or another characteristic for which there is no matching property in schema.org.
-     * Note: Publishers should be aware that applications designed to use specific schema.org properties
-     * (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect
-     * such data to be provided using those properties, rather than using the generic
-     *
      * @var PropertyValue
      */
     private $_additionalProperty;
@@ -32,6 +26,12 @@ trait PlaceTrait
     }
 
     /**
+     * A property-value pair representing an additional characteristics of the entitity,
+     * e.g. a product feature or another characteristic for which there is no matching property in schema.org.
+     * Note: Publishers should be aware that applications designed to use specific schema.org properties
+     * (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect
+     * such data to be provided using those properties, rather than using the generic
+     *
      * @param PropertyValue $additionalProperty
      * @return PlaceTrait
      */
@@ -42,8 +42,6 @@ trait PlaceTrait
     }
 
     /**
-     * Physical address of the item.
-     *
      * @var PostalAddress|string
      */
     private $_address;
@@ -57,6 +55,8 @@ trait PlaceTrait
     }
 
     /**
+     * Physical address of the item.
+     *
      * @param PostalAddress|string $address
      * @return PlaceTrait
      */
@@ -67,8 +67,6 @@ trait PlaceTrait
     }
 
     /**
-     * The overall rating, based on a collection of reviews or ratings, of the item.
-     *
      * @var AggregateRating
      */
     private $_aggregateRating;
@@ -82,6 +80,8 @@ trait PlaceTrait
     }
 
     /**
+     * The overall rating, based on a collection of reviews or ratings, of the item.
+     *
      * @param AggregateRating $aggregateRating
      * @return PlaceTrait
      */
@@ -92,10 +92,6 @@ trait PlaceTrait
     }
 
     /**
-     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
-     * This generic property does not make a statement about whether the feature is included in an offer
-     * for the main accommodation or available at extra costs.
-     *
      * @var LocationFeatureSpecification
      */
     private $_amenityFeature;
@@ -109,6 +105,10 @@ trait PlaceTrait
     }
 
     /**
+     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
+     * This generic property does not make a statement about whether the feature is included in an offer
+     * for the main accommodation or available at extra costs.
+     *
      * @param LocationFeatureSpecification $amenityFeature
      * @return PlaceTrait
      */
@@ -119,11 +119,6 @@ trait PlaceTrait
     }
 
     /**
-     * A short textual code (also called "store code") that uniquely identifies a place of business.
-     * The code is typically assigned by the parentOrganization and used in structured URLs.
-     * For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
-     * the code "3047" is a branchCode for a particular branch.
-     *
      * @var string
      */
     private $_branchCode;
@@ -137,6 +132,11 @@ trait PlaceTrait
     }
 
     /**
+     * A short textual code (also called "store code") that uniquely identifies a place of business.
+     * The code is typically assigned by the parentOrganization and used in structured URLs.
+     * For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
+     * the code "3047" is a branchCode for a particular branch.
+     *
      * @param string $branchCode
      * @return PlaceTrait
      */
@@ -147,10 +147,6 @@ trait PlaceTrait
     }
 
     /**
-     * The basic containment relation between a place and one that contains it.
-     * Supersedes containedIn.
-     * Inverse property: containsPlace.
-     *
      * @var Place
      */
     private $_containedInPlace;
@@ -164,6 +160,10 @@ trait PlaceTrait
     }
 
     /**
+     * The basic containment relation between a place and one that contains it.
+     * Supersedes containedIn.
+     * Inverse property: containsPlace.
+     *
      * @param Place $containedInPlace
      * @return PlaceTrait
      */
@@ -174,9 +174,6 @@ trait PlaceTrait
     }
 
     /**
-     * The basic containment relation between a place and another that it contains.
-     * Inverse property: containedInPlace.
-     *
      * @var Place
      */
     private $_containsPlace;
@@ -190,6 +187,9 @@ trait PlaceTrait
     }
 
     /**
+     * The basic containment relation between a place and another that it contains.
+     * Inverse property: containedInPlace.
+     *
      * @param Place $containsPlace
      * @return PlaceTrait
      */
@@ -200,9 +200,6 @@ trait PlaceTrait
     }
 
     /**
-     * Upcoming or past event associated with this place, organization, or action.
-     * Supersedes events.
-     *
      * @var Event
      */
     private $_event;
@@ -216,6 +213,9 @@ trait PlaceTrait
     }
 
     /**
+     * Upcoming or past event associated with this place, organization, or action.
+     * Supersedes events.
+     *
      * @param Event $event
      * @return PlaceTrait
      */
@@ -226,8 +226,6 @@ trait PlaceTrait
     }
 
     /**
-     * The fax number.
-     *
      * @var string
      */
     private $_faxNumber;
@@ -241,6 +239,8 @@ trait PlaceTrait
     }
 
     /**
+     * The fax number.
+     *
      * @param string $faxNumber
      * @return PlaceTrait
      */
@@ -251,8 +251,6 @@ trait PlaceTrait
     }
 
     /**
-     * The geo coordinates of the place.
-     *
      * @var GeoCoordinates|GeoShape
      */
     private $_geo;
@@ -266,6 +264,8 @@ trait PlaceTrait
     }
 
     /**
+     * The geo coordinates of the place.
+     *
      * @param GeoCoordinates|GeoShape $geo
      * @return PlaceTrait
      */
@@ -276,10 +276,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents a relationship between two geometries (or the places they represent), relating a containing geometry
-     * to a contained geometry. "a contains b iff no points of b lie in the exterior of a, and at least one point
-     * of the interior of b lies in the interior of a". As defined in DE-9IM.
-     *
      * @var
      */
     private $_geospatiallyContains;
@@ -293,6 +289,10 @@ trait PlaceTrait
     }
 
     /**
+     * Represents a relationship between two geometries (or the places they represent), relating a containing geometry
+     * to a contained geometry. "a contains b iff no points of b lie in the exterior of a, and at least one point
+     * of the interior of b lies in the interior of a". As defined in DE-9IM.
+     *
      * @param mixed $geospatiallyContains
      * @return PlaceTrait
      */
@@ -303,9 +303,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents a relationship between two geometries (or the places they represent),
-     * relating a geometry to another that covers it. As defined in DE-9IM.
-     *
      * @var
      */
     private $_geospatiallyCoveredBy;
@@ -319,6 +316,9 @@ trait PlaceTrait
     }
 
     /**
+     * Represents a relationship between two geometries (or the places they represent),
+     * relating a geometry to another that covers it. As defined in DE-9IM.
+     *
      * @param mixed $geospatiallyCoveredBy
      * @return PlaceTrait
      */
@@ -329,9 +329,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents a relationship between two geometries (or the places they represent), relating a covering geometry
-     * to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in DE-9IM.
-     *
      * @var GeospatialGeometry|Place
      */
     private $_geospatiallyCovers;
@@ -345,6 +342,9 @@ trait PlaceTrait
     }
 
     /**
+     * Represents a relationship between two geometries (or the places they represent), relating a covering geometry
+     * to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in DE-9IM.
+     *
      * @param GeospatialGeometry|Place $geospatiallyCovers
      * @return PlaceTrait
      */
@@ -355,10 +355,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents a relationship between two geometries (or the places they represent), relating a geometry to another
-     * that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the
-     * intersection is less than that of at least one of them". As defined in DE-9IM.
-     *
      * @var GeospatialGeometry|Place
      */
     private $_geospatiallyCrosses;
@@ -372,6 +368,10 @@ trait PlaceTrait
     }
 
     /**
+     * Represents a relationship between two geometries (or the places they represent), relating a geometry to another
+     * that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the
+     * intersection is less than that of at least one of them". As defined in DE-9IM.
+     *
      * @param GeospatialGeometry|Place $geospatiallyCrosses
      * @return PlaceTrait
      */
@@ -382,10 +382,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint:
-     * they have no point in common. They form a set of disconnected geometries."
-     * (a symmetric relationship, as defined in DE-9IM)
-     *
      * @var GeospatialGeometry|Place
      */
     private $_geospatiallyDisjoint;
@@ -399,6 +395,10 @@ trait PlaceTrait
     }
 
     /**
+     * Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint:
+     * they have no point in common. They form a set of disconnected geometries."
+     * (a symmetric relationship, as defined in DE-9IM)
+     *
      * @param GeospatialGeometry|Place $geospatiallyDisjoint
      * @return PlaceTrait
      */
@@ -409,10 +409,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents spatial relations in which two geometries (or the places they represent) are topologically equal,
-     * as defined in DE-9IM. "Two geometries are topologically equal if their interiors intersect and no part
-     * of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship)
-     *
      * @var GeospatialGeometry|Place
      */
     private $_geospatiallyEquals;
@@ -426,6 +422,10 @@ trait PlaceTrait
     }
 
     /**
+     * Represents spatial relations in which two geometries (or the places they represent) are topologically equal,
+     * as defined in DE-9IM. "Two geometries are topologically equal if their interiors intersect and no part
+     * of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship)
+     *
      * @param GeospatialGeometry|Place $geospatiallyEquals
      * @return PlaceTrait
      */
@@ -436,9 +436,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents spatial relations in which two geometries (or the places they represent) have at least one point
-     * in common. As defined in DE-9IM.
-     *
      * @var GeospatialGeometry|Place
      */
     private $_geospatiallyIntersects;
@@ -452,6 +449,9 @@ trait PlaceTrait
     }
 
     /**
+     * Represents spatial relations in which two geometries (or the places they represent) have at least one point
+     * in common. As defined in DE-9IM.
+     *
      * @param mixed $geospatiallyIntersects
      * @return PlaceTrait
      */
@@ -462,9 +462,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents a relationship between two geometries (or the places they represent), relating a geometry
-     * to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.
-     *
      * @var GeospatialGeometry|Place
      */
     private $_geospatiallyOverlaps;
@@ -478,6 +475,9 @@ trait PlaceTrait
     }
 
     /**
+     * Represents a relationship between two geometries (or the places they represent), relating a geometry
+     * to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.
+     *
      * @param GeospatialGeometry|Place $geospatiallyOverlaps
      * @return PlaceTrait
      */
@@ -488,9 +488,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents spatial relations in which two geometries (or the places they represent) touch: they have
-     * at least one boundary point in common, but no interior points." (a symmetric relationship, as defined in DE-9IM )
-     *
      * @var GeospatialGeometry|Place
      */
     private $_geospatiallyTouches;
@@ -504,6 +501,9 @@ trait PlaceTrait
     }
 
     /**
+     * Represents spatial relations in which two geometries (or the places they represent) touch: they have
+     * at least one boundary point in common, but no interior points." (a symmetric relationship, as defined in DE-9IM )
+     *
      * @param GeospatialGeometry|Place $geospatiallyTouches
      * @return PlaceTrait
      */
@@ -514,9 +514,6 @@ trait PlaceTrait
     }
 
     /**
-     * Represents a relationship between two geometries (or the places they represent), relating a geometry to one
-     * that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.
-     *
      * @var GeospatialGeometry|Place
      */
     private $_geospatiallyWithin;
@@ -530,6 +527,9 @@ trait PlaceTrait
     }
 
     /**
+     * Represents a relationship between two geometries (or the places they represent), relating a geometry to one
+     * that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.
+     *
      * @param GeospatialGeometry|Place $geospatiallyWithin
      * @return PlaceTrait
      */
@@ -540,10 +540,6 @@ trait PlaceTrait
     }
 
     /**
-     * The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN)
-     * of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties
-     * and physical locations.
-     *
      * @var string
      */
     private $_globalLocationNumber;
@@ -557,6 +553,10 @@ trait PlaceTrait
     }
 
     /**
+     * The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN)
+     * of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties
+     * and physical locations.
+     *
      * @param string $globalLocationNumber
      * @return PlaceTrait
      */
@@ -567,9 +567,6 @@ trait PlaceTrait
     }
 
     /**
-     * A URL to a map of the place.
-     * Supersedes map, maps.
-     *
      * @var Map, URL
      */
     private $_hasMap;
@@ -583,6 +580,9 @@ trait PlaceTrait
     }
 
     /**
+     * A URL to a map of the place.
+     * Supersedes map, maps.
+     *
      * @param Map $hasMap
      * @return PlaceTrait
      */
@@ -593,9 +593,6 @@ trait PlaceTrait
     }
 
     /**
-     * A flag to signal that the item, event, or place is accessible for free.
-     * Supersedes free.
-     *
      * @var Boolean
      */
     private $_isAccessibleForFree;
@@ -609,6 +606,9 @@ trait PlaceTrait
     }
 
     /**
+     * A flag to signal that the item, event, or place is accessible for free.
+     * Supersedes free.
+     *
      * @param bool $isAccessibleForFree
      * @return PlaceTrait
      */
@@ -619,9 +619,6 @@ trait PlaceTrait
     }
 
     /**
-     * The International Standard of Industrial Classification of All Economic Activities (ISIC),
-     * Revision 4 code for a particular organization, business person, or place.
-     *
      * @var string
      */
     private $_isicV4;
@@ -635,6 +632,9 @@ trait PlaceTrait
     }
 
     /**
+     * The International Standard of Industrial Classification of All Economic Activities (ISIC),
+     * Revision 4 code for a particular organization, business person, or place.
+     *
      * @param string $isicV4
      * @return PlaceTrait
      */
@@ -645,8 +645,6 @@ trait PlaceTrait
     }
 
     /**
-     * An associated logo.
-     *
      * @var ImageObject|URL
      */
     private $_logo;
@@ -660,6 +658,8 @@ trait PlaceTrait
     }
 
     /**
+     * An associated logo.
+     *
      * @param ImageObject|URL $logo
      * @return PlaceTrait
      */
@@ -670,8 +670,6 @@ trait PlaceTrait
     }
 
     /**
-     * The total number of individuals that may attend an event or venue.
-     *
      * @var Integer
      */
     private $_maximumAttendeeCapacity;
@@ -685,6 +683,8 @@ trait PlaceTrait
     }
 
     /**
+     * The total number of individuals that may attend an event or venue.
+     *
      * @param int $maximumAttendeeCapacity
      * @return PlaceTrait
      */
@@ -695,8 +695,6 @@ trait PlaceTrait
     }
 
     /**
-     * The opening hours of a certain place.
-     *
      * @var OpeningHoursSpecification
      */
     private $_openingHoursSpecification;
@@ -710,6 +708,8 @@ trait PlaceTrait
     }
 
     /**
+     * The opening hours of a certain place.
+     *
      * @param OpeningHoursSpecification $openingHoursSpecification
      * @return PlaceTrait
      */
@@ -720,8 +720,6 @@ trait PlaceTrait
     }
 
     /**
-     * A photograph of this place. Supersedes photos.
-     *
      * @var ImageObject|Photograph
      */
     private $_photo;
@@ -735,6 +733,8 @@ trait PlaceTrait
     }
 
     /**
+     * A photograph of this place. Supersedes photos.
+     *
      * @param ImageObject|Photograph $photo
      * @return PlaceTrait
      */
@@ -745,9 +745,6 @@ trait PlaceTrait
     }
 
     /**
-     * A flag to signal that the Place is open to public visitors.
-     * If this property is omitted there is no assumed default boolean value
-     *
      * @var Boolean
      */
     private $_publicAccess;
@@ -761,6 +758,9 @@ trait PlaceTrait
     }
 
     /**
+     * A flag to signal that the Place is open to public visitors.
+     * If this property is omitted there is no assumed default boolean value
+     *
      * @param bool $publicAccess
      * @return PlaceTrait
      */
@@ -771,8 +771,6 @@ trait PlaceTrait
     }
 
     /**
-     * A review of the item. Supersedes reviews.
-     *
      * @var Review
      */
     private $_review;
@@ -786,6 +784,8 @@ trait PlaceTrait
     }
 
     /**
+     * A review of the item. Supersedes reviews.
+     *
      * @param Review $review
      * @return PlaceTrait
      */
@@ -796,8 +796,6 @@ trait PlaceTrait
     }
 
     /**
-     * Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
-     *
      * @var Boolean
      */
     private $_smokingAllowed;
@@ -811,6 +809,8 @@ trait PlaceTrait
     }
 
     /**
+     * Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
+     *
      * @param bool $smokingAllowed
      * @return PlaceTrait
      */
@@ -821,10 +821,6 @@ trait PlaceTrait
     }
 
     /**
-     * The special opening hours of a certain place.
-     * Use this to explicitly override general opening hours brought in scope by
-     * openingHoursSpecification or openingHours.
-     *
      * @var OpeningHoursSpecification
      */
     private $_specialOpeningHoursSpecification;
@@ -838,6 +834,10 @@ trait PlaceTrait
     }
 
     /**
+     * The special opening hours of a certain place.
+     * Use this to explicitly override general opening hours brought in scope by
+     * openingHoursSpecification or openingHours.
+     *
      * @param OpeningHoursSpecification $specialOpeningHoursSpecification
      * @return PlaceTrait
      */
@@ -848,8 +848,6 @@ trait PlaceTrait
     }
 
     /**
-     * The telephone number.
-     *
      * @var string
      */
     private $_telephone;
@@ -863,6 +861,8 @@ trait PlaceTrait
     }
 
     /**
+     * The telephone number.
+     *
      * @param string $telephone
      * @return PlaceTrait
      */

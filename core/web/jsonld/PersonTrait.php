@@ -13,8 +13,6 @@ namespace luya\web\jsonld;
 trait PersonTrait
 {
     /**
-     * 	An additional name for a Person, can be used for a middle name.
-     *
      * @var string
      */
     private $_additionalName;
@@ -28,6 +26,8 @@ trait PersonTrait
     }
 
     /**
+     * 	An additional name for a Person, can be used for a middle name.
+     *
      * @param string $additionalName
      * @return PersonTrait
      */
@@ -38,8 +38,6 @@ trait PersonTrait
     }
 
     /**
-     * Physical address of the item.
-     *
      * @var PostalAddress|string
      */
     private $_address;
@@ -53,6 +51,8 @@ trait PersonTrait
     }
 
     /**
+     * Physical address of the item.
+     *
      * @param PostalAddress|string $address
      * @return PersonTrait
      */
@@ -63,8 +63,6 @@ trait PersonTrait
     }
 
     /**
-     * An organization that this person is affiliated with. For example, a school/university, a club, or a team.
-     *
      * @var Organization
      */
     private $_affiliation;
@@ -78,6 +76,8 @@ trait PersonTrait
     }
 
     /**
+     * An organization that this person is affiliated with. For example, a school/university, a club, or a team.
+     *
      * @param Organization $affiliation
      * @return PersonTrait
      */
@@ -88,8 +88,6 @@ trait PersonTrait
     }
 
     /**
-     * An organization that the person is an alumni of.
-     *
      * @var EducationalOrganization|Organization
      */
     private $_alumniOf;
@@ -103,6 +101,8 @@ trait PersonTrait
     }
 
     /**
+     * An organization that the person is an alumni of.
+     *
      * @param EducationalOrganization|Organization $alumniOf
      * @return PersonTrait
      */
@@ -113,9 +113,6 @@ trait PersonTrait
     }
 
     /**
-     * An award won by or for this item.
-     * Supersedes awards.
-     *
      * @var string
      */
     private $_award;
@@ -129,6 +126,9 @@ trait PersonTrait
     }
 
     /**
+     * An award won by or for this item.
+     * Supersedes awards.
+     *
      * @param string $award
      * @return PersonTrait
      */
@@ -139,8 +139,6 @@ trait PersonTrait
     }
 
     /**
-     * Date of birth.
-     *
      * @var Date
      */
     private $_birthDate;
@@ -154,6 +152,8 @@ trait PersonTrait
     }
 
     /**
+     * Date of birth.
+     *
      * @param Date $birthDate
      * @return PersonTrait
      */
@@ -164,8 +164,6 @@ trait PersonTrait
     }
 
     /**
-     * The place where the person was born.
-     *
      * @var Place
      */
     private $_birthPlace;
@@ -179,6 +177,8 @@ trait PersonTrait
     }
 
     /**
+     * The place where the person was born.
+     *
      * @param Place $birthPlace
      * @return PersonTrait
      */
@@ -189,8 +189,6 @@ trait PersonTrait
     }
 
     /**
-     * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
-     *
      * @var Brand|Organization
      */
     private $_brand;
@@ -204,6 +202,8 @@ trait PersonTrait
     }
 
     /**
+     * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
+     *
      * @param Brand|Organization $brand
      * @return PersonTrait
      */
@@ -214,8 +214,6 @@ trait PersonTrait
     }
 
     /**
-     * A child of the person.
-     *
      * @var Person
      */
     private $_children;
@@ -229,6 +227,8 @@ trait PersonTrait
     }
 
     /**
+     * A child of the person.
+     *
      * @param Person $children
      * @return PersonTrait
      */
@@ -239,9 +239,6 @@ trait PersonTrait
     }
 
     /**
-     * A colleague of the person.
-     * Supersedes colleagues.
-     *
      * @var Person
      */
     private $_colleague;
@@ -255,6 +252,10 @@ trait PersonTrait
     }
 
     /**
+     * A colleague of the person.
+     *
+     * Supersedes colleagues.
+     *
      * @param Person $colleague
      * @return PersonTrait
      */
@@ -265,9 +266,6 @@ trait PersonTrait
     }
 
     /**
-     * A contact point for a person or organization.
-     * Supersedes contactPoints.
-     *
      * @var ContactPoint
      */
     private $_contactPoint;
@@ -281,6 +279,10 @@ trait PersonTrait
     }
 
     /**
+     * A contact point for a person or organization.
+     *
+     * Supersedes contactPoints.
+     *
      * @param ContactPoint $contactPoint
      * @return PersonTrait
      */
@@ -291,8 +293,6 @@ trait PersonTrait
     }
 
     /**
-     * Date of death.
-     *
      * @var Date
      */
     private $_deathDate;
@@ -306,6 +306,8 @@ trait PersonTrait
     }
 
     /**
+     * Date of death.
+     *
      * @param Date $deathDate
      * @return PersonTrait
      */
@@ -316,8 +318,6 @@ trait PersonTrait
     }
 
     /**
-     * The place where the person died.
-     *
      * @var Place
      */
     private $_deathPlace;
@@ -331,6 +331,8 @@ trait PersonTrait
     }
 
     /**
+     * The place where the person died.
+     *
      * @param Place $deathPlace
      * @return PersonTrait
      */
@@ -341,8 +343,6 @@ trait PersonTrait
     }
 
     /**
-     * The Dun & Bradstreet DUNS number for identifying an organization or business person.
-     *
      * @var string
      */
     private $_duns;
@@ -356,6 +356,8 @@ trait PersonTrait
     }
 
     /**
+     * The Dun & Bradstreet DUNS number for identifying an organization or business person.
+     *
      * @param string $duns
      * @return PersonTrait
      */
@@ -366,8 +368,6 @@ trait PersonTrait
     }
 
     /**
-     * Email address.
-     *
      * @var string
      */
     private $_email;
@@ -381,6 +381,8 @@ trait PersonTrait
     }
 
     /**
+     * Email address.
+     *
      * @param string $email
      * @return PersonTrait
      */
@@ -391,9 +393,6 @@ trait PersonTrait
     }
 
     /**
-     * Family name. In the U.S., the last name of an Person.
-     * This can be used along with givenName instead of the name property.
-     *
      * @var string
      */
     private $_familyName;
@@ -407,6 +406,9 @@ trait PersonTrait
     }
 
     /**
+     * Family name. In the U.S., the last name of an Person.
+     * This can be used along with givenName instead of the name property.
+     *
      * @param string $familyName
      * @return PersonTrait
      */
@@ -417,8 +419,6 @@ trait PersonTrait
     }
 
     /**
-     * The fax number.
-     *
      * @var string
      */
     private $_faxNumber;
@@ -432,6 +432,8 @@ trait PersonTrait
     }
 
     /**
+     * The fax number.
+     *
      * @param string $faxNumber
      * @return PersonTrait
      */
@@ -442,8 +444,6 @@ trait PersonTrait
     }
 
     /**
-     * The most generic uni-directional social relation.
-     *
      * @var Person
      */
     private $_follows;
@@ -457,6 +457,8 @@ trait PersonTrait
     }
 
     /**
+     * The most generic uni-directional social relation.
+     *
      * @param Person $follows
      * @return PersonTrait
      */
@@ -467,8 +469,6 @@ trait PersonTrait
     }
 
     /**
-     * A person or organization that supports (sponsors) something through some kind of financial contribution.
-     *
      * @var Organization|Person
      */
     private $_funder;
@@ -482,6 +482,8 @@ trait PersonTrait
     }
 
     /**
+     * A person or organization that supports (sponsors) something through some kind of financial contribution.
+     *
      * @param Organization|Person $funder
      * @return PersonTrait
      */
@@ -492,9 +494,6 @@ trait PersonTrait
     }
 
     /**
-     * Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used,
-     * text strings are also acceptable for people who do not identify as a binary gender.
-     *
      * @var GenderType|string
      */
     private $_gender;
@@ -508,6 +507,9 @@ trait PersonTrait
     }
 
     /**
+     * Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used,
+     * text strings are also acceptable for people who do not identify as a binary gender.
+     *
      * @param GenderType|string $gender
      * @return PersonTrait
      */
@@ -518,9 +520,6 @@ trait PersonTrait
     }
 
     /**
-     * Given name. In the U.S., the first name of a Person.
-     * This can be used along with familyName instead of the name property.
-     *
      * @var string
      */
     private $_givenName;
@@ -534,6 +533,9 @@ trait PersonTrait
     }
 
     /**
+     * Given name. In the U.S., the first name of a Person.
+     * This can be used along with familyName instead of the name property.
+     *
      * @param string $givenName
      * @return PersonTrait
      */
@@ -544,10 +546,6 @@ trait PersonTrait
     }
 
     /**
-     * The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN)
-     * of the respective organization, person, or place.
-     * The GLN is a 13-digit number used to identify parties and physical locations.
-     *
      * @var string
      */
     private $_globalLocationNumber;
@@ -561,6 +559,10 @@ trait PersonTrait
     }
 
     /**
+     * The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN)
+     * of the respective organization, person, or place.
+     * The GLN is a 13-digit number used to identify parties and physical locations.
+     *
      * @param string $globalLocationNumber
      * @return PersonTrait
      */
@@ -571,8 +573,6 @@ trait PersonTrait
     }
 
     /**
-     * The Person's occupation. For past professions, use Role for expressing dates.
-     *
      * @var Occupation
      */
     private $_hasOccupation;
@@ -586,6 +586,8 @@ trait PersonTrait
     }
 
     /**
+     * The Person's occupation. For past professions, use Role for expressing dates.
+     *
      * @param Occupation $hasOccupation
      * @return PersonTrait
      */
@@ -596,8 +598,6 @@ trait PersonTrait
     }
 
     /**
-     * Indicates an OfferCatalog listing for this Organization, Person, or Service.
-     *
      * @var OfferCatalog
      */
     private $_hasOfferCatalog;
@@ -611,6 +611,8 @@ trait PersonTrait
     }
 
     /**
+     * Indicates an OfferCatalog listing for this Organization, Person, or Service.
+     *
      * @param OfferCatalog $hasOfferCatalog
      * @return PersonTrait
      */
@@ -621,8 +623,6 @@ trait PersonTrait
     }
 
     /**
-     * Points-of-Sales operated by the organization or person.
-     *
      * @var Place
      */
     private $_hasPOS;
@@ -636,6 +636,8 @@ trait PersonTrait
     }
 
     /**
+     * Points-of-Sales operated by the organization or person.
+     *
      * @param Place $hasPOS
      * @return PersonTrait
      */
@@ -646,8 +648,6 @@ trait PersonTrait
     }
 
     /**
-     * The height of the item.
-     *
      * @var Distance|QuantitativeValue
      */
     private $_height;
@@ -661,6 +661,8 @@ trait PersonTrait
     }
 
     /**
+     * The height of the item.
+     *
      * @param Distance|QuantitativeValue $height
      * @return PersonTrait
      */
@@ -671,8 +673,6 @@ trait PersonTrait
     }
 
     /**
-     * A contact location for a person's residence.
-     *
      * @var ContactPoint|Place
      */
     private $_homeLocation;
@@ -686,6 +686,8 @@ trait PersonTrait
     }
 
     /**
+     * A contact location for a person's residence.
+     *
      * @param ContactPoint|Place $homeLocation
      * @return PersonTrait
      */
@@ -696,8 +698,6 @@ trait PersonTrait
     }
 
     /**
-     * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
-     *
      * @var string
      */
     private $_honorificPrefix;
@@ -711,6 +711,8 @@ trait PersonTrait
     }
 
     /**
+     * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
+     *
      * @param string $honorificPrefix
      * @return PersonTrait
      */
@@ -721,8 +723,6 @@ trait PersonTrait
     }
 
     /**
-     * An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW.
-     *
      * @var string
      */
     private $_honorificSuffix;
@@ -736,6 +736,8 @@ trait PersonTrait
     }
 
     /**
+     * An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW.
+     *
      * @param string $honorificSuffix
      * @return PersonTrait
      */
@@ -746,9 +748,6 @@ trait PersonTrait
     }
 
     /**
-     * The International Standard of Industrial Classification of All Economic Activities (ISIC),
-     * Revision 4 code for a particular organization, business person, or place.
-     *
      * @var string
      */
     private $_isicV4;
@@ -762,6 +761,9 @@ trait PersonTrait
     }
 
     /**
+     * The International Standard of Industrial Classification of All Economic Activities (ISIC),
+     * Revision 4 code for a particular organization, business person, or place.
+     *
      * @param string $isicV4
      * @return PersonTrait
      */
@@ -772,8 +774,6 @@ trait PersonTrait
     }
 
     /**
-     * The job title of the person (for example, Financial Manager).
-     *
      * @var string
      */
     private $_jobTitle;
@@ -787,6 +787,8 @@ trait PersonTrait
     }
 
     /**
+     * The job title of the person (for example, Financial Manager).
+     *
      * @param string $jobTitle
      * @return PersonTrait
      */
@@ -797,8 +799,6 @@ trait PersonTrait
     }
 
     /**
-     * The most generic bi-directional social/work relation.
-     *
      * @var Person
      */
     private $_knows;
@@ -812,6 +812,8 @@ trait PersonTrait
     }
 
     /**
+     * The most generic bi-directional social/work relation.
+     *
      * @param Person $knows
      * @return PersonTrait
      */
@@ -822,9 +824,6 @@ trait PersonTrait
     }
 
     /**
-     * A pointer to products or services offered by the organization or person.
-     * Inverse property: offeredBy.
-     *
      * @var Offer
      */
     private $_makesOffer;
@@ -838,6 +837,9 @@ trait PersonTrait
     }
 
     /**
+     * A pointer to products or services offered by the organization or person.
+     * Inverse property: offeredBy.
+     *
      * @param Offer $makesOffer
      * @return PersonTrait
      */
@@ -848,9 +850,6 @@ trait PersonTrait
     }
 
     /**
-     * An Organization (or ProgramMembership) to which this Person or Organization belongs.
-     * Inverse property: member.
-     *
      * @var Organization|ProgramMembership
      */
     private $_memberOf;
@@ -864,6 +863,9 @@ trait PersonTrait
     }
 
     /**
+     * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+     * Inverse property: member.
+     *
      * @param Organization|ProgramMembership $memberOf
      * @return PersonTrait
      */
@@ -874,8 +876,6 @@ trait PersonTrait
     }
 
     /**
-     * The North American Industry Classification System (NAICS) code for a particular organization or business person.
-     *
      * @var string
      */
     private $_naics;
@@ -889,6 +889,8 @@ trait PersonTrait
     }
 
     /**
+     * The North American Industry Classification System (NAICS) code for a particular organization or business person.
+     *
      * @param string $naics
      * @return PersonTrait
      */
@@ -899,8 +901,6 @@ trait PersonTrait
     }
 
     /**
-     * Nationality of the person.
-     *
      * @var Country
      */
     private $_nationality;
@@ -914,6 +914,8 @@ trait PersonTrait
     }
 
     /**
+     * Nationality of the person.
+     *
      * @param Country $nationality
      * @return PersonTrait
      */
@@ -924,8 +926,6 @@ trait PersonTrait
     }
 
     /**
-     * The total financial value of the person as calculated by subtracting assets from liabilities.
-     *
      * @var MonetaryAmount|PriceSpecification
      */
     private $_netWorth;
@@ -939,6 +939,8 @@ trait PersonTrait
     }
 
     /**
+     * The total financial value of the person as calculated by subtracting assets from liabilities.
+     *
      * @param MonetaryAmount|PriceSpecification $netWorth
      * @return PersonTrait
      */
@@ -949,8 +951,6 @@ trait PersonTrait
     }
 
     /**
-     * Products owned by the organization or person.
-     *
      * @var OwnershipInfo|Product
      */
     private $_owns;
@@ -964,6 +964,8 @@ trait PersonTrait
     }
 
     /**
+     * Products owned by the organization or person.
+     *
      * @param OwnershipInfo|Product $owns
      * @return PersonTrait
      */
@@ -974,8 +976,6 @@ trait PersonTrait
     }
 
     /**
-     * A parent of this person. Supersedes parents.
-     *
      * @var Person
      */
     private $_parent;
@@ -989,6 +989,8 @@ trait PersonTrait
     }
 
     /**
+     * A parent of this person. Supersedes parents.
+     *
      * @param Person $parent
      * @return PersonTrait
      */
@@ -999,8 +1001,6 @@ trait PersonTrait
     }
 
     /**
-     * Event that this person is a performer or participant in.
-     *
      * @var Event
      */
     private $_performerIn;
@@ -1014,6 +1014,8 @@ trait PersonTrait
     }
 
     /**
+     * Event that this person is a performer or participant in.
+     *
      * @param Event $performerIn
      * @return PersonTrait
      */
@@ -1024,14 +1026,6 @@ trait PersonTrait
     }
 
     /**
-     * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles
-     * of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher,
-     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those
-     * of the party primarily responsible for the creation of the CreativeWork.
-     *
-     * While such policies are most typically expressed in natural language, sometimes related information
-     * (e.g. indicating a funder) can be expressed using schema.org terminology.
-     *
      * @var CreativeWork|URL
      */
     private $_publishingPrinciples;
@@ -1045,6 +1039,14 @@ trait PersonTrait
     }
 
     /**
+     * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles
+     * of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher,
+     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those
+     * of the party primarily responsible for the creation of the CreativeWork.
+     *
+     * While such policies are most typically expressed in natural language, sometimes related information
+     * (e.g. indicating a funder) can be expressed using schema.org terminology.
+     *
      * @param CreativeWork|URL $publishingPrinciples
      * @return PersonTrait
      */
@@ -1055,8 +1057,6 @@ trait PersonTrait
     }
 
     /**
-     * The most generic familial relation.
-     *
      * @var Person
      */
     private $_relatedTo;
@@ -1070,6 +1070,8 @@ trait PersonTrait
     }
 
     /**
+     * The most generic familial relation.
+     *
      * @param Person $relatedTo
      * @return PersonTrait
      */
@@ -1080,8 +1082,6 @@ trait PersonTrait
     }
 
     /**
-     * A pointer to products or services sought by the organization or person (demand).
-     *
      * @var Demand
      */
     private $_seeks;
@@ -1095,6 +1095,8 @@ trait PersonTrait
     }
 
     /**
+     * A pointer to products or services sought by the organization or person (demand).
+     *
      * @param Demand $seeks
      * @return PersonTrait
      */
@@ -1105,8 +1107,6 @@ trait PersonTrait
     }
 
     /**
-     * A sibling of the person. Supersedes siblings.
-     *
      * @var Person
      */
     private $_sibling;
@@ -1120,6 +1120,8 @@ trait PersonTrait
     }
 
     /**
+     * A sibling of the person. Supersedes siblings.
+     *
      * @param Person $sibling
      * @return PersonTrait
      */
@@ -1130,9 +1132,6 @@ trait PersonTrait
     }
 
     /**
-     * A person or organization that supports a thing through a pledge, promise, or financial contribution.
-     * e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-     *
      * @var Organization|Person
      */
     private $_sponsor;
@@ -1146,6 +1145,9 @@ trait PersonTrait
     }
 
     /**
+     * A person or organization that supports a thing through a pledge, promise, or financial contribution.
+     * e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+     *
      * @param Organization|Person $sponsor
      * @return PersonTrait
      */
@@ -1156,8 +1158,6 @@ trait PersonTrait
     }
 
     /**
-     * The person's spouse.
-     *
      * @var Person
      */
     private $_spouse;
@@ -1171,6 +1171,8 @@ trait PersonTrait
     }
 
     /**
+     * The person's spouse.
+     *
      * @param Person $spouse
      * @return PersonTrait
      */
@@ -1181,8 +1183,6 @@ trait PersonTrait
     }
 
     /**
-     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
-     *
      * @var string
      */
     private $_taxID;
@@ -1196,6 +1196,8 @@ trait PersonTrait
     }
 
     /**
+     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
+     *
      * @param string $taxID
      * @return PersonTrait
      */
@@ -1206,8 +1208,6 @@ trait PersonTrait
     }
 
     /**
-     * The telephone number.
-     *
      * @var string
      */
     private $_telephone;
@@ -1221,6 +1221,8 @@ trait PersonTrait
     }
 
     /**
+     * The telephone number.
+     *
      * @param string $telephone
      * @return PersonTrait
      */
@@ -1231,8 +1233,6 @@ trait PersonTrait
     }
 
     /**
-     * The Value-added Tax ID of the organization or person.
-     *
      * @var string
      */
     private $_vatID;
@@ -1246,6 +1246,8 @@ trait PersonTrait
     }
 
     /**
+     * The Value-added Tax ID of the organization or person.
+     *
      * @param string $vatID
      * @return PersonTrait
      */
@@ -1256,8 +1258,6 @@ trait PersonTrait
     }
 
     /**
-     * The weight of the product or person.
-     *
      * @var QuantitativeValue
      */
     private $_weight;
@@ -1271,6 +1271,8 @@ trait PersonTrait
     }
 
     /**
+     * The weight of the product or person.
+     *
      * @param QuantitativeValue $weight
      * @return PersonTrait
      */
@@ -1281,8 +1283,6 @@ trait PersonTrait
     }
 
     /**
-     * A contact location for a person's place of work.
-     *
      * @var ContactPoint|Place
      */
     private $_workLocation;
@@ -1296,6 +1296,8 @@ trait PersonTrait
     }
 
     /**
+     * A contact location for a person's place of work.
+     *
      * @param ContactPoint|Place $workLocation
      * @return PersonTrait
      */
@@ -1306,8 +1308,6 @@ trait PersonTrait
     }
 
     /**
-     * Organizations that the person works for.
-     *
      * @var Organization
      */
     private $_worksFor;
@@ -1321,6 +1321,8 @@ trait PersonTrait
     }
 
     /**
+     * Organizations that the person works for.
+     *
      * @param Organization $worksFor
      * @return PersonTrait
      */

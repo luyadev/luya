@@ -11,9 +11,6 @@ namespace luya\web\jsonld;
 trait ThingTrait
 {
     /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax.
-     * This is a relationship between something and a class that the thing is in.
-     *
      * @var URL
      */
     private $_additionalType;
@@ -27,6 +24,9 @@ trait ThingTrait
     }
 
     /**
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax.
+     * This is a relationship between something and a class that the thing is in.
+     *
      * @param string $additionalType
      * @return Thing
      */
@@ -37,8 +37,6 @@ trait ThingTrait
     }
 
     /**
-     * An alias for the item
-     *
      * @var string
      */
     private $_alternateName;
@@ -52,6 +50,8 @@ trait ThingTrait
     }
 
     /**
+     * An alias for the item
+     *
      * @param string $alternateName
      * @return Thing
      */
@@ -62,8 +62,6 @@ trait ThingTrait
     }
 
     /**
-     * A description of the item.
-     *
      * @var string
      */
     private $_description;
@@ -77,6 +75,8 @@ trait ThingTrait
     }
 
     /**
+     * A description of the item.
+     *
      * @param string $description
      * @return Thing
      */
@@ -87,9 +87,6 @@ trait ThingTrait
     }
 
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items.
-     * Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
-     *
      * @var string
      */
     private $_disambiguatingDescription;
@@ -103,6 +100,9 @@ trait ThingTrait
     }
 
     /**
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items.
+     * Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     *
      * @param string $disambiguatingDescription
      * @return Thing
      */
@@ -113,8 +113,6 @@ trait ThingTrait
     }
 
     /**
-     * The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.
-     *
      * @var PropertyValue|string|URL
      */
     private $_identifier;
@@ -128,6 +126,8 @@ trait ThingTrait
     }
 
     /**
+     * The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.
+     *
      * @param PropertyValue|URL|string $identifier
      * @return Thing
      */
@@ -138,9 +138,6 @@ trait ThingTrait
     }
 
     /**
-     * An image of the item.
-     * This can be a URL or a fully described ImageObject.
-     *
      * @var ImageObject|URL
      */
     private $_image;
@@ -154,6 +151,9 @@ trait ThingTrait
     }
 
     /**
+     * An image of the item.
+     * This can be a URL or a fully described ImageObject.
+     *
      * @param ImageObject|URL $image
      * @return Thing
      */
@@ -164,9 +164,6 @@ trait ThingTrait
     }
 
     /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described.
-     * Inverse property: mainEntity.
-     *
      * @var CreativeWork|URL
      */
     private $_mainEntityOfPage;
@@ -180,6 +177,9 @@ trait ThingTrait
     }
 
     /**
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described.
+     * Inverse property: mainEntity.
+     *
      * @param CreativeWork|URL $mainEntityOfPage
      * @return Thing
      */
@@ -190,8 +190,6 @@ trait ThingTrait
     }
 
     /**
-     * The name of the item.
-     *
      * @var string
      */
     private $_name;
@@ -205,6 +203,8 @@ trait ThingTrait
     }
 
     /**
+     * The name of the item.
+     *
      * @param string $name
      * @return Thing
      */
@@ -215,8 +215,6 @@ trait ThingTrait
     }
 
     /**
-     * 	Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     *
      * @var Action
      */
     private $_potentialAction;
@@ -230,6 +228,8 @@ trait ThingTrait
     }
 
     /**
+     * 	Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     *
      * @param Action $potentialAction
      * @return Thing
      */
@@ -240,9 +240,6 @@ trait ThingTrait
     }
 
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity.
-     * E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-     *
      * @var URL
      */
     private $_sameAs;
@@ -256,6 +253,9 @@ trait ThingTrait
     }
 
     /**
+     * URL of a reference Web page that unambiguously indicates the item's identity.
+     * E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     *
      * @param URL $sameAs
      * @return Thing
      */
@@ -266,9 +266,6 @@ trait ThingTrait
     }
 
     /**
-     * A CreativeWork or Event about this Thing.
-     * Inverse property: about.
-     *
      * @var CreativeWork|Event
      */
     private $_subjectOf;
@@ -282,6 +279,9 @@ trait ThingTrait
     }
 
     /**
+     * A CreativeWork or Event about this Thing.
+     * Inverse property: about.
+     *
      * @param CreativeWork|Event $subjectOf
      * @return Thing
      */
@@ -292,8 +292,6 @@ trait ThingTrait
     }
 
     /**
-     * URL of the item.
-     *
      * @var URL
      */
     private $_url;
@@ -307,6 +305,8 @@ trait ThingTrait
     }
 
     /**
+     * URL of the item.
+     *
      * @param URL $url
      * @return Thing
      */

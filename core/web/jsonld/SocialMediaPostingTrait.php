@@ -14,8 +14,6 @@ trait SocialMediaPostingTrait
     use ArticleTrait;
 
     /**
-     * A CreativeWork such as an image, video, or audio clip shared as part of this posting.
-     *
      * @var CreativeWork
      */
     private $_sharedContent;
@@ -29,6 +27,8 @@ trait SocialMediaPostingTrait
     }
 
     /**
+     * A CreativeWork such as an image, video, or audio clip shared as part of this posting.
+     *
      * @param CreativeWork $sharedContent
      * @return SocialMediaPosting|SocialMediaPostingTrait
      */
