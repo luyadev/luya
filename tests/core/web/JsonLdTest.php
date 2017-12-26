@@ -32,6 +32,9 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         $this->assertSame($same, $thing->resolveGetterMethods());
     }
 
+    /**
+     * @since 1.0.1
+     */
     public function testArticle()
     {
         $thing = (new Article())->setName('The Article');
@@ -42,6 +45,9 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ], $thing->toArray());
     }
 
+    /**
+     * @since 1.0.1
+     */
     public function testBlogPosting()
     {
         $thing = (new BlogPosting())->setName('The BlogPosting');
@@ -52,6 +58,9 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ], $thing->toArray());
     }
 
+    /**
+     * @since 1.0.1
+     */
     public function testCreativeWork()
     {
         $thing = (new CreativeWork())->setName('The CreativeWork');
@@ -62,6 +71,9 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ], $thing->toArray());
     }
 
+    /**
+     * @since 1.0.1
+     */
     public function testLiveBlogPosting()
     {
         $thing = (new LiveBlogPosting())->setName('The LiveBlogPosting');
@@ -104,6 +116,9 @@ class JsonLdTest extends \luyatests\LuyaWebTestCase
         ], $thing->toArray());
     }
 
+    /**
+     * @since 1.0.1
+     */
     public function testSocialMediaPosting()
     {
         $thing = (new SocialMediaPosting())->setName('The SocialMediaPosting');
