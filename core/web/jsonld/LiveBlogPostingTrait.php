@@ -13,9 +13,6 @@ trait LiveBlogPostingTrait
 {
     use BlogPostingTrait;
 
-    /**
-     * @var DateTime
-     */
     private $_coverageEndTime;
 
     /**
@@ -38,9 +35,6 @@ trait LiveBlogPostingTrait
         return $this;
     }
 
-    /**
-     * @var DateTime
-     */
     private $_coverageStartTime;
 
     /**
@@ -64,9 +58,6 @@ trait LiveBlogPostingTrait
         return $this;
     }
 
-    /**
-     * @var BlogPosting
-     */
     private $_liveBlogUpdate;
 
     /**

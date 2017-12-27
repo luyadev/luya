@@ -12,9 +12,6 @@ namespace luya\web\jsonld;
  */
 trait PlaceTrait
 {
-    /**
-     * @var PropertyValue
-     */
     private $_additionalProperty;
 
     /**
@@ -41,9 +38,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var PostalAddress|string
-     */
     private $_address;
 
     /**
@@ -66,9 +60,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var AggregateRating
-     */
     private $_aggregateRating;
 
     /**
@@ -91,9 +82,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var LocationFeatureSpecification
-     */
     private $_amenityFeature;
 
     /**
@@ -118,9 +106,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_branchCode;
 
     /**
@@ -146,9 +131,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_containedInPlace;
 
     /**
@@ -173,9 +155,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_containsPlace;
 
     /**
@@ -199,9 +178,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Event
-     */
     private $_event;
 
     /**
@@ -225,9 +201,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_faxNumber;
 
     /**
@@ -250,9 +223,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeoCoordinates|GeoShape
-     */
     private $_geo;
 
     /**
@@ -275,9 +245,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var
-     */
     private $_geospatiallyContains;
 
     /**
@@ -302,9 +269,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var
-     */
     private $_geospatiallyCoveredBy;
 
     /**
@@ -328,9 +292,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeospatialGeometry|Place
-     */
     private $_geospatiallyCovers;
 
     /**
@@ -354,9 +315,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeospatialGeometry|Place
-     */
     private $_geospatiallyCrosses;
 
     /**
@@ -381,9 +339,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeospatialGeometry|Place
-     */
     private $_geospatiallyDisjoint;
 
     /**
@@ -408,9 +363,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeospatialGeometry|Place
-     */
     private $_geospatiallyEquals;
 
     /**
@@ -435,9 +387,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeospatialGeometry|Place
-     */
     private $_geospatiallyIntersects;
 
     /**
@@ -461,9 +410,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeospatialGeometry|Place
-     */
     private $_geospatiallyOverlaps;
 
     /**
@@ -487,9 +433,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeospatialGeometry|Place
-     */
     private $_geospatiallyTouches;
 
     /**
@@ -513,9 +456,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var GeospatialGeometry|Place
-     */
     private $_geospatiallyWithin;
 
     /**
@@ -539,9 +479,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_globalLocationNumber;
 
     /**
@@ -566,9 +503,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Map, URL
-     */
     private $_hasMap;
 
     /**
@@ -592,9 +526,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Boolean
-     */
     private $_isAccessibleForFree;
 
     /**
@@ -618,9 +549,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_isicV4;
 
     /**
@@ -644,9 +572,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var ImageObject|URL
-     */
     private $_logo;
 
     /**
@@ -669,9 +594,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Integer
-     */
     private $_maximumAttendeeCapacity;
 
     /**
@@ -694,9 +616,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var OpeningHoursSpecification
-     */
     private $_openingHoursSpecification;
 
     /**
@@ -719,9 +638,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var ImageObject|Photograph
-     */
     private $_photo;
 
     /**
@@ -744,9 +660,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Boolean
-     */
     private $_publicAccess;
 
     /**
@@ -770,9 +683,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Review
-     */
     private $_review;
 
     /**
@@ -795,9 +705,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var Boolean
-     */
     private $_smokingAllowed;
 
     /**
@@ -820,9 +727,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var OpeningHoursSpecification
-     */
     private $_specialOpeningHoursSpecification;
 
     /**
@@ -847,9 +751,6 @@ trait PlaceTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_telephone;
 
     /**

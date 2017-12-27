@@ -13,9 +13,6 @@ trait SocialMediaPostingTrait
 {
     use ArticleTrait;
 
-    /**
-     * @var CreativeWork
-     */
     private $_sharedContent;
 
     /**

@@ -14,9 +14,6 @@ trait CreativeWorkTrait
 {
     use ThingTrait;
 
-    /**
-     * @var Thing
-     */
     private $_about;
 
     /**
@@ -40,9 +37,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_accessMode;
 
     /**
@@ -69,9 +63,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_accessModeSufficient;
 
     /**
@@ -97,9 +88,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_accessibilityAPI;
 
     /**
@@ -123,9 +111,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_accessibilityControl;
 
     /**
@@ -149,9 +134,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_accessibilityFeature;
 
     /**
@@ -175,9 +157,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_accessibilityHazard;
 
     /**
@@ -201,9 +180,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_accessibilitySummary;
 
     /**
@@ -228,9 +204,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_accountablePerson;
 
     /**
@@ -253,9 +226,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var AggregateRating
-     */
     private $_aggregateRating;
 
     /**
@@ -278,9 +248,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_alternativeHeadline;
 
     /**
@@ -303,9 +270,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var MediaObject
-     */
     private $_associatedMedia;
 
     /**
@@ -328,9 +292,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Audience
-     */
     private $_audience;
 
     /**
@@ -353,9 +314,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var AudioObject
-     */
     private $_audio;
 
     /**
@@ -378,9 +336,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Person|Organization
-     */
     private $_author;
 
     /**
@@ -404,9 +359,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_award;
 
     /**
@@ -430,9 +382,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_character;
 
     /**
@@ -455,9 +404,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|string
-     */
     private $_citation;
 
     /**
@@ -480,9 +426,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Comment
-     */
     private $_comment;
 
     /**
@@ -505,9 +448,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var int
-     */
     private $_commentCount;
 
     /**
@@ -531,9 +471,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_contentLocation;
 
     /**
@@ -556,9 +493,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_contentRating;
 
     /**
@@ -581,9 +515,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var DateTime
-     */
     private $_contentReferenceTime;
 
     /**
@@ -607,9 +538,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_contributor;
 
     /**
@@ -632,9 +560,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_copyrightHolder;
 
     /**
@@ -657,9 +582,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var int
-     */
     private $_copyrightYear;
 
     /**
@@ -682,9 +604,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_creator;
 
     /**
@@ -707,9 +626,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Date|DateTime
-     */
     private $_dateCreated;
 
     /**
@@ -732,9 +648,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Date|DateTime
-     */
     private $_dateModified;
 
     /**
@@ -758,9 +671,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Date
-     */
     private $_datePublished;
 
     /**
@@ -783,9 +693,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var URL
-     */
     private $_discussionUrl;
 
     /**
@@ -808,9 +715,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_editor;
 
     /**
@@ -831,9 +735,6 @@ trait CreativeWorkTrait
         $this->_editor = $editor;
     }
 
-    /**
-     * @var AlignmentObject
-     */
     private $_educationalAlignment;
 
     /**
@@ -856,9 +757,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_educationalUse;
 
     /**
@@ -881,9 +779,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var MediaObject
-     */
     private $_encoding;
 
     /**
@@ -907,9 +802,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_exampleOfWork;
 
     /**
@@ -933,9 +825,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Date
-     */
     private $_expires;
 
     /**
@@ -960,9 +849,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string|URL
-     */
     private $_fileFormat;
 
     /**
@@ -988,9 +874,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_funder;
 
     /**
@@ -1013,9 +896,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var URL|string
-     */
     private $_genre;
 
     /**
@@ -1038,9 +918,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_hasPart;
 
     /**
@@ -1064,9 +941,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_headline;
 
     /**
@@ -1089,9 +963,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Language|string
-     */
     private $_inLanguage;
 
     /**
@@ -1116,9 +987,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var InteractionCounter
-     */
     private $_interactionStatistic;
 
     /**
@@ -1144,9 +1012,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_interactivityType;
 
     /**
@@ -1170,9 +1035,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var boolean
-     */
     private $_isAccessibleForFree;
 
     /**
@@ -1196,9 +1058,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|Product|Url
-     */
     private $_isBasedOn;
 
     /**
@@ -1224,9 +1083,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var boolean
-     */
     private $_isFamilyFriendly;
 
     /**
@@ -1249,9 +1105,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_isPartOf;
 
     /**
@@ -1275,9 +1128,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_keywords;
 
     /**
@@ -1301,9 +1151,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_learningResourceType;
 
     /**
@@ -1326,9 +1173,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_license;
 
     /**
@@ -1351,9 +1195,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_locationCreated;
 
     /**
@@ -1376,9 +1217,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Thing
-     */
     private $_mainEntity;
 
     /**
@@ -1402,9 +1240,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Product|URL|string
-     */
     private $_material;
 
     /**
@@ -1427,9 +1262,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Thing
-     */
     private $_mentions;
 
     /**
@@ -1452,9 +1284,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Offer
-     */
     private $_offers;
 
     /**
@@ -1478,9 +1307,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var int|string
-     */
     private $_position;
 
     /**
@@ -1503,9 +1329,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_producer;
 
     /**
@@ -1528,9 +1351,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_provider;
 
     /**
@@ -1555,9 +1375,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var PublicationEvent
-     */
     private $_publication;
 
     /**
@@ -1580,9 +1397,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_publisher;
 
     /**
@@ -1605,9 +1419,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization
-     */
     private $_publisherImprint;
 
     /**
@@ -1630,9 +1441,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_publishingPrinciples;
 
     /**
@@ -1661,9 +1469,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Event
-     */
     private $_recordedAt;
 
     /**
@@ -1687,9 +1492,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var PublicationEvent
-     */
     private $_releasedEvent;
 
     /**
@@ -1712,9 +1514,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Review
-     */
     private $_review;
 
     /**
@@ -1737,9 +1536,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var URL|string
-     */
     private $_schemaVersion;
 
     /**
@@ -1764,9 +1560,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization
-     */
     private $_sourceOrganization;
 
     /**
@@ -1789,9 +1582,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_spatialCoverage;
 
     /**
@@ -1817,9 +1607,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_sponsor;
 
     /**
@@ -1843,9 +1630,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var DateTime|URL|string
-     */
     private $_temporalCoverage;
 
     /**
@@ -1875,9 +1659,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_text;
 
     /**
@@ -1900,9 +1681,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var URL
-     */
     private $_thumbnailUrl;
 
     /**
@@ -1925,9 +1703,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Duration
-     */
     private $_timeRequired;
 
     /**
@@ -1951,9 +1726,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_translationOfWork;
 
     /**
@@ -1977,9 +1749,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_translator;
 
     /**
@@ -2003,9 +1772,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_typicalAgeRange;
 
     /**
@@ -2028,9 +1794,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var int|string
-     */
     private $_version;
 
     /**
@@ -2053,9 +1816,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var VideoObject
-     */
     private $_video;
 
     /**
@@ -2078,9 +1838,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_workExample;
 
     /**
@@ -2105,9 +1862,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_workTranslation;
 
     /**

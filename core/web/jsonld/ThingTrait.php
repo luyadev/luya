@@ -10,9 +10,6 @@ namespace luya\web\jsonld;
  */
 trait ThingTrait
 {
-    /**
-     * @var URL
-     */
     private $_additionalType;
 
     /**
@@ -36,9 +33,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_alternateName;
 
     /**
@@ -61,9 +55,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_description;
 
     /**
@@ -86,9 +77,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_disambiguatingDescription;
 
     /**
@@ -112,9 +100,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var PropertyValue|string|URL
-     */
     private $_identifier;
 
     /**
@@ -137,9 +122,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var ImageObject|URL
-     */
     private $_image;
 
     /**
@@ -163,9 +145,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_mainEntityOfPage;
 
     /**
@@ -189,9 +168,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_name;
 
     /**
@@ -214,9 +190,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var Action
-     */
     private $_potentialAction;
 
     /**
@@ -239,9 +212,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var URL
-     */
     private $_sameAs;
 
     /**
@@ -265,9 +235,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|Event
-     */
     private $_subjectOf;
 
     /**
@@ -291,9 +258,6 @@ trait ThingTrait
         return $this;
     }
 
-    /**
-     * @var URL
-     */
     private $_url;
 
     /**

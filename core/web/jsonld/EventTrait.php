@@ -12,9 +12,6 @@ namespace luya\web\jsonld;
  */
 trait EventTrait
 {
-    /**
-     * @var Thing
-     */
     private $_about;
 
     /**
@@ -38,9 +35,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_actor;
 
     /**
@@ -64,9 +58,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var AggregateRating
-     */
     private $_aggregateRating;
 
     /**
@@ -89,9 +80,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_attendee;
 
     /**
@@ -114,9 +102,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Audience
-     */
     private $_audience;
 
     /**
@@ -139,9 +124,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_composer;
 
     /**
@@ -164,9 +146,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_contributor;
 
     /**
@@ -189,9 +168,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_director;
 
     /**
@@ -216,9 +192,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var DateTime
-     */
     private $_doorTime;
 
     /**
@@ -241,9 +214,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Duration
-     */
     private $_duration;
 
     /**
@@ -266,9 +236,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Date|DateTime
-     */
     private $_endDate;
 
     /**
@@ -291,9 +258,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var EventStatusType
-     */
     private $_eventStatus;
 
     /**
@@ -316,9 +280,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_funder;
 
     /**
@@ -341,9 +302,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Language|Text
-     */
     private $_inLanguage;
 
     /**
@@ -368,9 +326,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Boolean
-     */
     private $_isAccessibleForFree;
 
     /**
@@ -393,9 +348,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Place|PostalAddress|string
-     */
     private $_location;
 
     /**
@@ -419,9 +371,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Integer
-     */
     private $_maximumAttendeeCapacity;
 
     /**
@@ -442,9 +391,6 @@ trait EventTrait
         $this->_maximumAttendeeCapacity = $maximumAttendeeCapacity;
     }
 
-    /**
-     * @var Offer
-     */
     private $_offers;
 
     /**
@@ -468,9 +414,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_organizer;
 
     /**
@@ -493,9 +436,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_performer;
 
     /**
@@ -519,9 +459,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Date
-     */
     private $_previousStartDate;
 
     /**
@@ -548,9 +485,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_recordedIn;
 
     /**
@@ -574,9 +508,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Integer
-     */
     private $_remainingAttendeeCapacity;
 
     /**
@@ -599,9 +530,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Review
-     */
     private $_review;
 
     /**
@@ -625,9 +553,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_sponsor;
 
     /**
@@ -651,9 +576,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Date|DateTime
-     */
     private $_startDate;
 
     /**
@@ -676,9 +598,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Event
-     */
     private $_subEvent;
 
     /**
@@ -702,9 +621,6 @@ trait EventTrait
         $this->_subEvent = $subEvent;
     }
 
-    /**
-     * @var Event
-     */
     private $_superEvent;
 
     /**
@@ -729,9 +645,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_translator;
 
     /**
@@ -755,9 +668,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_typicalAgeRange;
 
     /**
@@ -780,9 +690,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_workFeatured;
 
     /**
@@ -807,9 +714,6 @@ trait EventTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork
-     */
     private $_workPerformed;
 
     /**

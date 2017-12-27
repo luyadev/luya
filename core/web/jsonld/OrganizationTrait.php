@@ -10,9 +10,6 @@ namespace luya\web\jsonld;
  */
 trait OrganizationTrait
 {
-    /**
-     * @var CreativeWork|URL
-     */
     private $_actionableFeedbackPolicy;
 
     /**
@@ -38,9 +35,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var PostalAddress|string
-     */
     private $_address;
 
     /**
@@ -63,9 +57,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var AggregateRating
-     */
     private $_aggregateRating;
 
     /**
@@ -88,9 +79,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_alumni;
 
     /**
@@ -114,9 +102,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var AdministrativeArea|GeoShape|Place|string
-     */
     private $_areaServed;
 
     /**
@@ -139,9 +124,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_award;
 
     /**
@@ -164,9 +146,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Brand|Organization
-     */
     private $_brand;
 
     /**
@@ -190,9 +169,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var ContactPoint
-     */
     private $_contactPoint;
 
     /**
@@ -215,9 +191,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_correctionsPolicy;
 
     /**
@@ -241,9 +214,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Organization
-     */
     private $_department;
 
     /**
@@ -268,9 +238,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Date
-     */
     private $_dissolutionDate;
 
     /**
@@ -293,10 +260,8 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_diversityPolicy;
+
     /**
      * @return mixed
      */
@@ -319,9 +284,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_duns;
 
     /**
@@ -344,9 +306,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_email;
 
     /**
@@ -369,9 +328,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_employee;
 
     /**
@@ -395,9 +351,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_ethicsPolicy;
 
     /**
@@ -423,9 +376,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Event
-     */
     private $_event;
 
     /**
@@ -448,9 +398,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_faxNumber;
 
     /**
@@ -473,9 +420,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_founder;
 
     /**
@@ -498,9 +442,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Date
-     */
     private $_foundingDate;
 
     /**
@@ -523,9 +464,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_foundingLocation;
 
     /**
@@ -548,9 +486,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_funder;
 
     /**
@@ -573,9 +508,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_globalLocationNumber;
 
     /**
@@ -600,9 +532,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var OfferCatalog
-     */
     private $_hasOfferCatalog;
 
     /**
@@ -625,9 +554,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_hasPOS;
 
     /**
@@ -650,9 +576,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_isicV4;
 
     /**
@@ -676,9 +599,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_legalName;
 
     /**
@@ -701,9 +621,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_leiCode;
 
     /**
@@ -726,9 +643,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Place|PostalAddress|string
-     */
     private $_location;
 
     /**
@@ -752,9 +666,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var ImageObject|URL
-     */
     private $_logo;
 
     /**
@@ -777,9 +688,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Offer
-     */
     private $_makesOffer;
 
     /**
@@ -803,9 +711,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_member;
 
     /**
@@ -831,9 +736,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Organization|ProgramMembership
-     */
     private $_memberOf;
 
     /**
@@ -857,9 +759,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_naics;
 
     /**
@@ -882,9 +781,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var QuantitativeValue
-     */
     private $_numberOfEmployees;
 
     /**
@@ -907,9 +803,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var OwnershipInfo|Product
-     */
     private $_owns;
 
     /**
@@ -932,9 +825,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Organization
-     */
     private $_parentOrganization;
 
     /**
@@ -959,9 +849,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_publishingPrinciples;
 
     /**
@@ -987,9 +874,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Review
-     */
     private $_review;
 
     /**
@@ -1013,9 +897,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Demand
-     */
     private $_seeks;
 
     /**
@@ -1038,9 +919,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_sponsor;
 
     /**
@@ -1063,9 +941,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var Organization
-     */
     private $_subOrganization;
 
     /**
@@ -1090,9 +965,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_taxID;
 
     /**
@@ -1115,9 +987,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_telephone;
 
     /**
@@ -1140,9 +1009,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_unnamedSourcesPolicy;
 
     /**
@@ -1166,9 +1032,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_vatID;
 
     /**

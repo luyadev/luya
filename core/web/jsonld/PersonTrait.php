@@ -12,9 +12,6 @@ namespace luya\web\jsonld;
  */
 trait PersonTrait
 {
-    /**
-     * @var string
-     */
     private $_additionalName;
 
     /**
@@ -37,9 +34,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var PostalAddress|string
-     */
     private $_address;
 
     /**
@@ -62,9 +56,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Organization
-     */
     private $_affiliation;
 
     /**
@@ -87,9 +78,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var EducationalOrganization|Organization
-     */
     private $_alumniOf;
 
     /**
@@ -112,9 +100,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_award;
 
     /**
@@ -138,9 +123,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Date
-     */
     private $_birthDate;
 
     /**
@@ -163,9 +145,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_birthPlace;
 
     /**
@@ -188,9 +167,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Brand|Organization
-     */
     private $_brand;
 
     /**
@@ -213,9 +189,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_children;
 
     /**
@@ -238,9 +211,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_colleague;
 
     /**
@@ -265,9 +235,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var ContactPoint
-     */
     private $_contactPoint;
 
     /**
@@ -292,9 +259,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Date
-     */
     private $_deathDate;
 
     /**
@@ -317,9 +281,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_deathPlace;
 
     /**
@@ -342,9 +303,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_duns;
 
     /**
@@ -367,9 +325,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_email;
 
     /**
@@ -392,9 +347,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_familyName;
 
     /**
@@ -418,9 +370,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_faxNumber;
 
     /**
@@ -443,9 +392,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_follows;
 
     /**
@@ -468,9 +414,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_funder;
 
     /**
@@ -493,9 +436,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var GenderType|string
-     */
     private $_gender;
 
     /**
@@ -519,9 +459,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_givenName;
 
     /**
@@ -545,9 +482,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_globalLocationNumber;
 
     /**
@@ -572,9 +506,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Occupation
-     */
     private $_hasOccupation;
 
     /**
@@ -597,9 +528,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var OfferCatalog
-     */
     private $_hasOfferCatalog;
 
     /**
@@ -622,9 +550,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Place
-     */
     private $_hasPOS;
 
     /**
@@ -647,9 +572,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Distance|QuantitativeValue
-     */
     private $_height;
 
     /**
@@ -672,9 +594,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var ContactPoint|Place
-     */
     private $_homeLocation;
 
     /**
@@ -697,9 +616,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_honorificPrefix;
 
     /**
@@ -722,9 +638,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_honorificSuffix;
 
     /**
@@ -747,9 +660,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_isicV4;
 
     /**
@@ -773,9 +683,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_jobTitle;
 
     /**
@@ -798,9 +705,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_knows;
 
     /**
@@ -823,9 +727,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Offer
-     */
     private $_makesOffer;
 
     /**
@@ -849,9 +750,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Organization|ProgramMembership
-     */
     private $_memberOf;
 
     /**
@@ -875,9 +773,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_naics;
 
     /**
@@ -900,9 +795,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Country
-     */
     private $_nationality;
 
     /**
@@ -925,9 +817,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var MonetaryAmount|PriceSpecification
-     */
     private $_netWorth;
 
     /**
@@ -950,9 +839,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var OwnershipInfo|Product
-     */
     private $_owns;
 
     /**
@@ -975,9 +861,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_parent;
 
     /**
@@ -1000,9 +883,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Event
-     */
     private $_performerIn;
 
     /**
@@ -1025,9 +905,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var CreativeWork|URL
-     */
     private $_publishingPrinciples;
 
     /**
@@ -1056,9 +933,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_relatedTo;
 
     /**
@@ -1081,9 +955,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Demand
-     */
     private $_seeks;
 
     /**
@@ -1106,9 +977,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_sibling;
 
     /**
@@ -1131,9 +999,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Organization|Person
-     */
     private $_sponsor;
 
     /**
@@ -1157,9 +1022,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Person
-     */
     private $_spouse;
 
     /**
@@ -1182,9 +1044,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_taxID;
 
     /**
@@ -1207,9 +1066,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_telephone;
 
     /**
@@ -1232,9 +1088,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_vatID;
 
     /**
@@ -1257,9 +1110,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var QuantitativeValue
-     */
     private $_weight;
 
     /**
@@ -1282,9 +1132,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var ContactPoint|Place
-     */
     private $_workLocation;
 
     /**
@@ -1307,9 +1154,6 @@ trait PersonTrait
         return $this;
     }
 
-    /**
-     * @var Organization
-     */
     private $_worksFor;
 
     /**

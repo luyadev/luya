@@ -14,9 +14,6 @@ trait ArticleTrait
 {
     use CreativeWorkTrait;
 
-    /**
-     * @var string
-     */
     private $_articleBody;
 
     /**
@@ -39,9 +36,6 @@ trait ArticleTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_articleSection;
 
     /**
@@ -64,9 +58,6 @@ trait ArticleTrait
         return $this;
     }
 
-    /**
-     * @var int|string
-     */
     private $_pageEnd;
 
     /**
@@ -89,9 +80,6 @@ trait ArticleTrait
         return $this;
     }
 
-    /**
-     * @var int|string
-     */
     private $_pageStart;
 
     /**
@@ -114,9 +102,6 @@ trait ArticleTrait
         return $this;
     }
 
-    /**
-     * @var string
-     */
     private $_pagination;
 
     /**
@@ -140,9 +125,6 @@ trait ArticleTrait
         return $this;
     }
 
-    /**
-     * @var SpeakableSpecification|URL
-     */
     private $_speakable;
 
     /**
@@ -182,9 +164,6 @@ trait ArticleTrait
         return $this;
     }
 
-    /**
-     * @var int
-     */
     private $_wordCount;
 
     /**
