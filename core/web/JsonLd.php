@@ -38,8 +38,10 @@ class JsonLd extends BaseObject
      * Register new Article.
      *
      * @param array $config Optional config array to provided article data via setter methods.
+     * @since 1.0.1
      *
      * @return \luya\web\jsonld\Article
+     *
      */
     public static function article(array $config = [])
     {
@@ -50,6 +52,7 @@ class JsonLd extends BaseObject
      * Register new Blog Posting.
      *
      * @param array $config Optional config array to provided blog posting data via setter methods.
+     * @since 1.0.1
      *
      * @return \luya\web\jsonld\BlogPosting
      */
@@ -74,6 +77,7 @@ class JsonLd extends BaseObject
      * Register new CreativeWork.
      *
      * @param array $config Optional config array to provided creative work data via setter methods.
+     * @since 1.0.1
      *
      * @return \luya\web\jsonld\CreativeWork
      */
@@ -98,6 +102,7 @@ class JsonLd extends BaseObject
      * Register new Live Blog Posting.
      *
      * @param array $config Optional config array to provided live blog posting data via setter methods.
+     * @since 1.0.1
      *
      * @return \luya\web\jsonld\LiveBlogPosting
      */
@@ -146,6 +151,7 @@ class JsonLd extends BaseObject
      * Register new Social Media Posting.
      *
      * @param array $config Optional config array to provided social media posting data via setter methods.
+     * @since 1.0.1
      *
      * @return \luya\web\jsonld\SocialMediaPosting
      */
