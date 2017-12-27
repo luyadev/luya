@@ -23,7 +23,7 @@ trait PersonTrait
     }
 
     /**
-     * 	An additional name for a Person, can be used for a middle name.
+     * An additional name for a Person, can be used for a middle name.
      *
      * @param string $additionalName
      * @return PersonTrait
