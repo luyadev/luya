@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file. This projec
 
 - [#1731](https://github.com/luyadev/luya/issues/1731) JsonLd Thing definition must be from type Thing.
 
+### Added
+
+- [#1735](https://github.com/luyadev/luya/pull/1735) JsonLd: CreativeWork, Article, SocialMediaPosting, BlogPosting, LiveBlogPosting
+
 1.0.0 (12. December 2017)
 -------------------
 
