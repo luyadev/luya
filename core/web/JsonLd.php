@@ -15,6 +15,7 @@ use luya\Exception;
 use luya\web\jsonld\Event;
 use luya\web\jsonld\Place;
 use yii\base\BaseObject;
+use luya\web\jsonld\LiveBlogPosting;
 
 /**
  * Registerin Microdata as JsonLD.
