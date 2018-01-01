@@ -303,12 +303,17 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
-     *
-     * @param unknown $category
-     * @param unknown $message
-     * @param array $params
-     * @param unknown $language
-     * @return string
+     * Base translation method which invokes the onLoad function.
+     * 
+     * This makes it possible to register module translations without adding the module
+     * to the components list. This is very important for luya extensions.
+     * 
+     * @param string $category the message category.
+     * @param string $message the message to be translated.
+     * @param array $params the parameters that will be used to replace the corresponding placeholders in the message.
+     * @param string $language the language code (e.g. `en-US`, `en`). If this is null, the current
+     * [[\yii\base\Application::language|application language]] will be used.
+     * @return string the translated message.
      */
     public static function baseT($category, $message, array $params = [], $language = null)
     {
