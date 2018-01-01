@@ -43,7 +43,7 @@
         }
     },
     "bin" : [
-    	"core/bin/luya", "envs/dev/luyadev"
+    	"core/bin/luya", "dev/luyadev"
     ],
     "config": {
         "platform": {"php": "7.0"}
