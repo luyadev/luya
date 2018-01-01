@@ -23,9 +23,9 @@ $boot->setConfigArray([
     'aliases' => [
         'appFolder' => getcwd(),
     ],
-    'defaultRoute' => 'env',
+    'defaultRoute' => 'repo',
     'controllerMap' => [
-        'env' => 'luya\dev\EnvController',
+        'env' => 'luya\dev\RepoController',
     ],
 ]);
 $boot->applicationConsole();

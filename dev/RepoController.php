@@ -13,11 +13,36 @@ use yii\helpers\Console;
  * 
  * Provdes functions to clone and update the repos.
  * 
+ * Usage
+ * 
+ * ```sh
+ * ./vendor/bin/luyadev repo/init
+ * ./vendor/bin/luyadev repo/update
+ * ```
+ * 
+ * Or clone a custom repo into the repos folder:
+ * 
+ * ```sh
+ * ./venodr/bin/luyadev repo/clone luya-module-news luyadev
+ * ```
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.1
  */
-class EnvController extends BaseDevCommand
+class RepoController extends BaseDevCommand
 {
+	const CONFIG_VAR_USERNAME = 'username';
+	
+	const CONFIG_VAR_CLONETYPE = 'cloneType';
+	
+	/**
+	 * @var string Default action is actionInit();
+	 */
+	public $defaultAction = 'init';
+	
+	/**
+	 * @var array The default repos from luyadev
+	 */
     public $repos = [
         'luya',
         'luya-module-admin',
@@ -25,7 +50,6 @@ class EnvController extends BaseDevCommand
     ];
     
     public $text = <<<EOT
-
 **CLONE REPOS**
 
 We've detected that you don't have all module repos forked to your account. You can only push changes to the forked repos, all others are **READ ONLY**.
@@ -37,61 +61,25 @@ You can also skip this command, fork the repos and rerun this command again.
 **FORK ME**
 EOT;
     
-    private $_gitWrapper;
-    
     /**
-     * @return \GitWrapper\GitWrapper
+     * Initilize the main repos.
+     * 
+     * @return number
      */
-    protected function getGitWrapper()
-    {
-        if ($this->_gitWrapper === null) {
-            $this->_gitWrapper = new GitWrapper();
-            $this->_gitWrapper->setTimeout(300);
-        }
-        
-        return $this->_gitWrapper;
-    }
-    
-    private function summaryItem($repo, $isFork, $exists)
-    {
-        return [$repo, $exists, $isFork];
-    }
-    
-    private function getFilesystemRepoPath($repo)
-    {
-        return 'repos' . DIRECTORY_SEPARATOR . $repo;
-    }
-
-    private function forkExists($username, $repo)
-    {
-        return (new Curl())->get('https://api.github.com/repos/'.$username.'/'.$repo)->isSuccess(); 
-    }
-    
-    private function markdown($text, $paragraph = false)
-    {
-        $parser = new Markdown();
-        
-        if ($paragraph) {
-            return $parser->parseParagraph($text);
-        }
-        
-        return $parser->parse($text);
-    }
-    
     public function actionInit()
     {
         // username
-        $username = $this->getConfig('username');
+        $username = $this->getConfig(self::CONFIG_VAR_USERNAME);
         if (!$username) {
             $username = $this->prompt('Whats your Github username?');
-            $this->saveConfig('username', $username);
+            $this->saveConfig(self::CONFIG_VAR_USERNAME, $username);
         }
         
         // clonetype
-        $cloneType = $this->getConfig('cloneType');
+        $cloneType = $this->getConfig(self::CONFIG_VAR_CLONETYPE);
         if (!$cloneType) {
             $cloneType = $this->select('Are you connected via ssh or https?', ['ssh' => 'ssh', 'http' => 'http']);
-            $this->saveConfig('cloneType', $cloneType);
+            $this->saveConfig(self::CONFIG_VAR_CLONETYPE, $cloneType);
         }
         
         $summary = [];
@@ -145,20 +133,15 @@ EOT;
                 $cloneUrl = ($cloneType == 'ssh') ? "git@github.com:luyadev/{$repo}.git" : "https://github.com/{$username}/{$repo}.git";
             }
             
-            $this->cloneRepo($repo, $cloneUrl, $newRepoHome);
+            $this->cloneRepo($repo, $cloneUrl, $newRepoHome, 'luyadev');
         }
         
         return $this->outputSuccess("init complete.");
     }
     
-    private function cloneRepo($repo, $cloneUrl, $newRepoHome)
-    {
-        $this->outputSuccess("{$repo}: cloning ...");
-        $this->getGitWrapper()->cloneRepository($cloneUrl, $newRepoHome);
-        $this->getGitWrapper()->git('remote add upstream https://github.com/luyadev/'.$repo.'.git',  $newRepoHome);
-        $this->outputSuccess("{$repo}: ✔ complete");
-    }
-    
+    /**
+     * Update all repos to master branch from upstream.
+     */
     public function actionUpdate()
     {
         $wrapper = new GitWrapper();
@@ -173,5 +156,96 @@ EOT;
             $wrapper->git('rebase upstream/master master',  'repos' . DIRECTORY_SEPARATOR . $repo);
             $this->outputInfo("{$repo}: rebase master ✔");
         }
+    }
+    
+    /**
+     * 
+     * @param unknown $repo
+     * @param unknown $vendor
+     * @return unknown
+     */
+    public function actionClone($repo = null, $vendor = null)
+    {
+    	if (empty($repo)) {
+    		$repo = $this->prompt("Enter the name of the repo you like to clone (e.g. luya-module-news)");
+    	}
+    	
+    	if (empty($vendor)) {
+    		$vendor = $this->prompt("Enter the username/vendor for this repo (e.g. luyadev)");
+    	}
+    	
+    	return $this->cloneRepo($repo, $this->getCloneUrlBasedOnType($repo, $vendor), $this->getFilesystemRepoPath($repo), $vendor);
+    }
+    
+    private $_gitWrapper;
+    
+    /**
+     * @return \GitWrapper\GitWrapper
+     */
+    protected function getGitWrapper()
+    {
+    	if ($this->_gitWrapper === null) {
+    		$this->_gitWrapper = new GitWrapper();
+    		$this->_gitWrapper->setTimeout(300);
+    	}
+    
+    	return $this->_gitWrapper;
+    }
+    
+    private function summaryItem($repo, $isFork, $exists)
+    {
+    	return [$repo, $exists, $isFork];
+    }
+    
+    private function getFilesystemRepoPath($repo)
+    {
+    	return 'repos' . DIRECTORY_SEPARATOR . $repo;
+    }
+    
+    private function forkExists($username, $repo)
+    {
+    	return (new Curl())->get('https://api.github.com/repos/'.$username.'/'.$repo)->isSuccess();
+    }
+    
+    private function markdown($text, $paragraph = false)
+    {
+    	$parser = new Markdown();
+    
+    	if ($paragraph) {
+    		return $parser->parseParagraph($text);
+    	}
+    
+    	return $parser->parse($text);
+    }
+    
+    /**
+     * Return the url to clone based on config clone type (ssh/https).
+     * 
+     * @param unknown $repo
+     * @param unknown $username
+     * @return string
+     */
+    private function getCloneUrlBasedOnType($repo, $username)
+    {
+    	return ($this->getConfig(self::CONFIG_VAR_CLONETYPE) == 'ssh') ? "git@github.com:{$username}/{$repo}.git" : "https://github.com/{$username}/{$repo}.git";
+    }
+    
+    /**
+     * Clone a repo into the repos folder.
+     * 
+     * @param string $repo
+     * @param string $cloneUrl
+     * @param string $newRepoHome
+     * @param string $upstreamUsername The upstream vendor name of the repo if available.
+     */
+    private function cloneRepo($repo, $cloneUrl, $newRepoHome, $upstreamUsername)
+    {
+    	$this->outputSuccess("{$repo}: cloning ...");
+    	$this->getGitWrapper()->cloneRepository($cloneUrl, $newRepoHome);
+    	if (!empty($upstreamUsername)) {
+    		$this->getGitWrapper()->git('remote add upstream https://github.com/'.$upstreamUsername.'/'.$repo.'.git',  $newRepoHome);
+    		$this->outputInfo("Configure upstream https://github.com/{$upstreamUsername}/{$repo}.git");
+    	}
+    	$this->outputSuccess("{$repo}: ✔ complete");
     }
 }
