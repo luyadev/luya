@@ -7,6 +7,7 @@ use yii\helpers\StringHelper;
 use yii\helpers\Inflector;
 use luya\base\AdminModuleInterface;
 use luya\base\CoreModuleInterface;
+use luya\Boot;
 
 /**
  * Console Command base class.
@@ -124,10 +125,11 @@ abstract class Command extends \luya\console\Controller
      * Get the current Luya Version
      *
      * @return string
+     * @deprecated in version 1.0.2
      */
     public function getLuyaVersion()
     {
-        return \luya\Boot::VERSION;
+        return Boot::VERSION;
     }
     
     /**
@@ -138,6 +140,6 @@ abstract class Command extends \luya\console\Controller
      */
     public function getGeneratorText($command)
     {
-        return 'File has been created with `'.$command.'` command on LUYA version '.$this->getLuyaVersion().'.';
+        return 'File has been created with `'.$command.'` command on LUYA version '.Boot::VERSION.'.';
     }
 }
