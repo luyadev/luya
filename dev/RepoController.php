@@ -164,14 +164,19 @@ EOT;
      * @param unknown $vendor
      * @return unknown
      */
-    public function actionClone($repo = null, $vendor = null)
+    public function actionClone($vendor = null, $repo = null)
     {
-        if (empty($repo)) {
-            $repo = $this->prompt("Enter the name of the repo you like to clone (e.g. luya-module-news)");
-        }
-        
+    	// if `vendor/repo` notation is provided
+    	if ($vendor !== null && strpos($vendor, '/')) {
+    		list($vendor, $repo) = explode("/", $vendor);	
+    	}
+    	
         if (empty($vendor)) {
             $vendor = $this->prompt("Enter the username/vendor for this repo (e.g. luyadev)");
+        }
+        
+        if (empty($repo)) {
+        	$repo = $this->prompt("Enter the name of the repo you like to clone (e.g. luya-module-news)");
         }
         
         return $this->cloneRepo($repo, $this->getCloneUrlBasedOnType($repo, $vendor), $this->getFilesystemRepoPath($repo), $vendor);
@@ -240,7 +245,7 @@ EOT;
      */
     private function cloneRepo($repo, $cloneUrl, $newRepoHome, $upstreamUsername)
     {
-        $this->outputSuccess("{$repo}: cloning ...");
+        $this->outputSuccess("{$repo}: cloning {$cloneUrl} ...");
         $this->getGitWrapper()->cloneRepository($cloneUrl, $newRepoHome);
         if (!empty($upstreamUsername)) {
             $this->getGitWrapper()->git('remote add upstream https://github.com/'.$upstreamUsername.'/'.$repo.'.git', $newRepoHome);

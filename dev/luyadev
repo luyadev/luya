@@ -25,7 +25,7 @@ $boot->setConfigArray([
     ],
     'defaultRoute' => 'repo',
     'controllerMap' => [
-        'env' => 'luya\dev\RepoController',
+        'repo' => 'luya\dev\RepoController',
     ],
 ]);
 $boot->applicationConsole();
