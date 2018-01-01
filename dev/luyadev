@@ -18,7 +18,8 @@ $boot = new \luya\Boot();
 $boot->setBaseYiiFile($vendor . '/yiisoft/yii2/Yii.php');
 $boot->setConfigArray([
     'id' => 'devenv', 
-    'basePath' => dirname(__DIR__), 
+    'basePath' => dirname(__DIR__),
+    'enableCoreCommands' => false,
     'aliases' => [
         'devenvroot' => __DIR__,
     ],

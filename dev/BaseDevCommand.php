@@ -15,7 +15,7 @@ use yii\helpers\Json;
  */
 class BaseDevCommand extends Command
 {
-    public $configFile = '@devenvroot/cachestorage.json';
+    public $configFile = '@app/devconfig.json';
     
     public function readConfig()
     {
