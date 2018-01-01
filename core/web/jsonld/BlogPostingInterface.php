@@ -11,5 +11,4 @@ namespace luya\web\jsonld;
  */
 interface BlogPostingInterface extends SocialMediaPostingInterface
 {
-
 }

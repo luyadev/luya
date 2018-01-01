@@ -6,7 +6,7 @@ use luya\traits\ApplicationTrait;
 
 /**
  * Console/CLI Application.
- * 
+ *
  * @property \luya\console\ErrorHandler $errorHandler The error handler component.
  *
  * @author Basil Suter <basil@nadar.io>

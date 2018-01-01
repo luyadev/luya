@@ -14,9 +14,9 @@ namespace luya\web\jsonld;
  */
 class Organization extends BaseThing implements OrganizationInterface
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function typeDefintion()
     {
         return 'Organization';

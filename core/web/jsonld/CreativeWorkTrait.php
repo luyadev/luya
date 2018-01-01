@@ -1885,5 +1885,4 @@ trait CreativeWorkTrait
         $this->_workTranslation = $workTranslation;
         return $this;
     }
-
 }

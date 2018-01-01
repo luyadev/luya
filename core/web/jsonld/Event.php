@@ -16,9 +16,9 @@ namespace luya\web\jsonld;
  */
 class Event extends BaseThing implements EventInterface
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function typeDefintion()
     {
         return 'Event';

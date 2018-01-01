@@ -2,7 +2,6 @@
 
 namespace luya\web;
 
-
 use Yii;
 use yii\helpers\Json;
 use yii\base\BaseObject;
@@ -119,7 +118,7 @@ class JsonLd extends BaseObject
 
     /**
      * Register new Organization.
-     * 
+     *
      * An organization such as a school, NGO, corporation, club, etc.
      *
      * @param array $config Optional config array to provided organization data via setter methods.
@@ -145,7 +144,7 @@ class JsonLd extends BaseObject
 
     /**
      * Register new Place
-     * 
+     *
      * Entities that have a somewhat fixed, physical extension.
      *
      * @param array $config Optional config array to provided place data via setter methods.

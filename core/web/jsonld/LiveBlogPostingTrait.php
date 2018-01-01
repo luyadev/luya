@@ -79,5 +79,4 @@ trait LiveBlogPostingTrait
         $this->_liveBlogUpdate = $liveBlogUpdate;
         return $this;
     }
-
 }

@@ -14,9 +14,9 @@ namespace luya\web\jsonld;
  */
 class Place extends BaseThing implements PlaceInterface
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function typeDefintion()
     {
         return 'Place';
