@@ -2,6 +2,7 @@
 
 namespace luya\dev;
 
+use Yii;
 use luya\console\Command;
 use luya\helpers\FileHelper;
 use yii\helpers\Json;
