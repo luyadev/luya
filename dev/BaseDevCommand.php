@@ -15,9 +15,37 @@ use yii\helpers\Json;
  */
 class BaseDevCommand extends Command
 {
-    public $configFile = '@app/devconfig.json';
+	/**
+	 * @var string The location of the devconfig json where data is stored.
+	 */
+    public $configFile = '@appFolder/devconfig.json';
     
-    public function readConfig()
+    /**
+     * Display config data and location.
+     * 
+     * @return boolean|void
+     */
+    public function actionConfigInfo()
+    {
+    	$this->outputInfo("dev config file: " . Yii::getAlias($this->configFile));
+    	
+    	$config = $this->readConfig();
+    	
+    	if (!$config) {
+    		return $this->outputError("Unable to open config file.");
+    	}
+    	
+    	foreach ($config as $key => $value) {
+    		$this->output("{$key} => {$value}");
+    	}
+    }
+    
+    /**
+     * Read entire config and return as array.
+     * 
+     * @return array|boolean
+     */
+    protected function readConfig()
     {
         $data = FileHelper::getFileContent($this->configFile);
         
@@ -28,14 +56,27 @@ class BaseDevCommand extends Command
         return false;
     }
     
-    public function getConfig($key)
+    /**
+     * Get a specific value for a given key.
+     * 
+     * @param string $key
+     * @return boolean
+     */
+    protected function getConfig($key)
     {
         $config = $this->readConfig();
         
         return isset($config[$key]) ? $config[$key] : false;
     }
     
-    public function saveConfig($key, $value)
+    /**
+     * Save a value in the config for a given key.
+     * 
+     * @param string $key
+     * @param mixed $value
+     * @return mixed
+     */
+    protected function saveConfig($key, $value)
     {
         $content = $this->readConfig();
      

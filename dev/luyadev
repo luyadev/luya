@@ -21,7 +21,7 @@ $boot->setConfigArray([
     'basePath' => dirname(__DIR__),
     'enableCoreCommands' => false,
     'aliases' => [
-        'devenvroot' => __DIR__,
+        'appFolder' => getcwd(),
     ],
     'defaultRoute' => 'env',
     'controllerMap' => [
