@@ -13,6 +13,7 @@ use yii\helpers\Json;
  * Provides the IO for the configuration storage.
  * 
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.1
  */
 class BaseDevCommand extends Command
 {
