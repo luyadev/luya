@@ -6,6 +6,7 @@ use Yii;
 use luya\console\Command;
 use luya\helpers\FileHelper;
 use yii\helpers\Json;
+use yii\helpers\VarDumper;
 
 /**
  * BaseDevCommand Controller.
@@ -38,7 +39,7 @@ class BaseDevCommand extends Command
         }
         
         foreach ($config as $key => $value) {
-            $this->output("{$key} => {$value}");
+            $this->output("{$key} => ".VarDumper::dumpAsString($value));
         }
     }
     
@@ -62,13 +63,14 @@ class BaseDevCommand extends Command
      * Get a specific value for a given key.
      *
      * @param string $key
+     * @param mixed $defaultValue The value used when nothing is given
      * @return boolean
      */
-    protected function getConfig($key)
+    protected function getConfig($key, $defaultValue = null)
     {
         $config = $this->readConfig();
         
-        return isset($config[$key]) ? $config[$key] : false;
+        return isset($config[$key]) ? $config[$key] : $defaultValue;
     }
     
     /**

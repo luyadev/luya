@@ -7,6 +7,7 @@ use GitWrapper\GitWrapper;
 use yii\console\widgets\Table;
 use yii\console\Markdown;
 use yii\helpers\Console;
+use luya\helpers\FileHelper;
 
 /**
  * Dev Env cloning and updating.
@@ -26,6 +27,12 @@ use yii\helpers\Console;
  * ./venodr/bin/luyadev repo/clone luya-module-news luyadev
  * ```
  *
+ * In order to remove an existing repo from update list
+ * 
+ * ```sh
+ * ./vendor/bin/luyadev repo/remove luya-module-news
+ * ```
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.1
  */
@@ -34,6 +41,8 @@ class RepoController extends BaseDevCommand
     const CONFIG_VAR_USERNAME = 'username';
     
     const CONFIG_VAR_CLONETYPE = 'cloneType';
+    
+    const CONFIG_VAR_CUSTOMCLONES = 'customClones';
     
     /**
      * @var string Default action is actionInit();
@@ -144,17 +153,12 @@ EOT;
      */
     public function actionUpdate()
     {
-        $wrapper = new GitWrapper();
-        
         foreach ($this->repos as $repo) {
-            $wrapper->git('checkout master', 'repos' . DIRECTORY_SEPARATOR . $repo);
-            $this->outputInfo("{$repo}: checkout master ✔");
-            
-            $wrapper->git('fetch upstream', 'repos' . DIRECTORY_SEPARATOR . $repo);
-            $this->outputInfo("{$repo}: fetch upstream ✔");
-            
-            $wrapper->git('rebase upstream/master master', 'repos' . DIRECTORY_SEPARATOR . $repo);
-            $this->outputInfo("{$repo}: rebase master ✔");
+        	$this->rebaseRepo($repo, $this->getFilesystemRepoPath($repo));
+        }
+        
+        foreach ($this->getConfig(self::CONFIG_VAR_CUSTOMCLONES, []) as $repo => $path) {
+        	$this->rebaseRepo($repo, $path);
         }
     }
     
@@ -163,7 +167,6 @@ EOT;
      * 
      * @param string $repo
      * @param string $vendor
-     * @return unknown
      */
     public function actionClone($vendor = null, $repo = null)
     {
@@ -180,7 +183,32 @@ EOT;
         	$repo = $this->prompt("Enter the name of the repo you like to clone (e.g. luya-module-news)");
         }
         
-        return $this->cloneRepo($repo, $this->getCloneUrlBasedOnType($repo, $vendor), $this->getFilesystemRepoPath($repo), $vendor);
+        $clones = $this->getConfig(self::CONFIG_VAR_CUSTOMCLONES, []);
+        
+        $repoFileSystemPath = $this->getFilesystemRepoPath($repo);
+        
+        $clones[$repo] = $repoFileSystemPath;
+        
+        $this->cloneRepo($repo, $this->getCloneUrlBasedOnType($repo, $vendor), $repoFileSystemPath, $vendor);
+        
+        $this->saveConfig(self::CONFIG_VAR_CUSTOMCLONES, $clones);
+    }
+    
+    /**
+     * Remove a given repo from filesystem.
+     * 
+     * @param string $repo The repo name like `luya-module-cms` without vendor.
+     */
+    public function actionRemove($repo)
+    {
+    	FileHelper::removeDirectory($this->getFilesystemRepoPath($repo));
+    	$clones = $this->getConfig(self::CONFIG_VAR_CUSTOMCLONES, []);
+    	if (isset($clones[$repo])) {
+	    	unset($clones[$repo]);
+	    	$this->saveConfig(self::CONFIG_VAR_CUSTOMCLONES, $clones);
+    	}
+    	
+    	return $this->outputSuccess("Removed repo {$repo}.");
     }
     
     private $_gitWrapper;
@@ -261,6 +289,26 @@ EOT;
     }
     
     /**
+     * Rebase existing repo.
+     * 
+     * @param string $repo
+     * @param string $repoFileSystemPath
+     */
+    private function rebaseRepo($repo, $repoFileSystemPath)
+    {
+    	$wrapper = new GitWrapper();
+    	 
+    	$wrapper->git('checkout master', $repoFileSystemPath);
+    	$this->outputInfo("{$repo}: checkout master ✔");
+    	 
+    	$wrapper->git('fetch upstream', $repoFileSystemPath);
+    	$this->outputInfo("{$repo}: fetch upstream ✔");
+    	 
+    	$wrapper->git('rebase upstream/master master', $repoFileSystemPath);
+    	$this->outputInfo("{$repo}: rebase master ✔");
+    }
+    
+    /**
      * Clone a repo into the repos folder.
      *
      * @param string $repo
@@ -272,10 +320,12 @@ EOT;
     {
         $this->outputSuccess("{$repo}: cloning {$cloneUrl} ...");
         $this->getGitWrapper()->cloneRepository($cloneUrl, $newRepoHome);
+        
         if (!empty($upstreamUsername)) {
             $this->getGitWrapper()->git('remote add upstream https://github.com/'.$upstreamUsername.'/'.$repo.'.git', $newRepoHome);
             $this->outputInfo("Configure upstream https://github.com/{$upstreamUsername}/{$repo}.git");
         }
+        
         $this->outputSuccess("{$repo}: ✔ complete");
     }
 }
