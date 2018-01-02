@@ -2,13 +2,12 @@
 
 namespace luya\base;
 
-use yii;
-
-use luya\helpers\FileHelper;
+use Yii;
 use yii\helpers\Inflector;
-use luya\console\interfaces\ImportControllerInterface;
 use yii\base\InvalidParamException;
 use yii\base\InvalidConfigException;
+use luya\helpers\FileHelper;
+use luya\console\interfaces\ImportControllerInterface;
 
 /**
  * LUYA Module base class.
@@ -223,16 +222,29 @@ abstract class Module extends \yii\base\Module
      */
     public function getControllerFiles()
     {
-        try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L235
-            $files = [];
+        $files = [];
+        try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L253
             foreach (FileHelper::findFiles($this->controllerPath) as $file) {
-                $value = ltrim(str_replace([$this->controllerPath, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR);
-                $files[Inflector::camel2id($value)] = $file;
+                $files[$this->fileToName($this->controllerPath, $file)] = $file;
             }
-            return $files;
         } catch (InvalidParamException $e) {
-            return [];
+            try {
+                $staticPath = static::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
+                foreach (FileHelper::findFiles($staticPath) as $file) {
+                    $files[$this->fileToName($staticPath, $file)] = $file;
+                }
+            } catch (InvalidParamException $e) {
+                 // catch if folder not found.
+            }
         };
+        
+        return $files;
+    }
+    
+    private function fileToName($prefix, $file)
+    {
+        $value = ltrim(str_replace([$prefix, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR);
+        return Inflector::camel2id($value);
     }
     
     /**
