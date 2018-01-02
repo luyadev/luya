@@ -159,9 +159,10 @@ EOT;
     }
     
     /**
-     *
-     * @param unknown $repo
-     * @param unknown $vendor
+     * Clone a repo into the repos folder.
+     * 
+     * @param string $repo
+     * @param string $vendor
      * @return unknown
      */
     public function actionClone($vendor = null, $repo = null)
@@ -197,21 +198,45 @@ EOT;
         return $this->_gitWrapper;
     }
     
+    /**
+     * 
+     * @param string $repo
+     * @param string $isFork
+     * @param string $exists
+     * @return array
+     */
     private function summaryItem($repo, $isFork, $exists)
     {
         return [$repo, $exists, $isFork];
     }
     
+    /**
+     * 
+     * @param string $repo
+     * @return string
+     */
     private function getFilesystemRepoPath($repo)
     {
         return 'repos' . DIRECTORY_SEPARATOR . $repo;
     }
     
+    /**
+     * 
+     * @param string $username
+     * @param string $repo
+     * @return boolean
+     */
     private function forkExists($username, $repo)
     {
         return (new Curl())->get('https://api.github.com/repos/'.$username.'/'.$repo)->isSuccess();
     }
     
+    /**
+     * 
+     * @param string $text
+     * @param boolean $paragraph
+     * @return string
+     */
     private function markdown($text, $paragraph = false)
     {
         $parser = new Markdown();
@@ -226,8 +251,8 @@ EOT;
     /**
      * Return the url to clone based on config clone type (ssh/https).
      *
-     * @param unknown $repo
-     * @param unknown $username
+     * @param string $repo
+     * @param string $username
      * @return string
      */
     private function getCloneUrlBasedOnType($repo, $username)
