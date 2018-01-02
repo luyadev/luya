@@ -37,12 +37,10 @@ class Module extends \luya\base\Module
 {
     public static function onLoad()
     {
-        //Yii::setAlias('@mymodulealias', static::staticBasePath());
+        // Yii::setAlias('@mymodulealias', static::staticBasePath());
         
         self::registerTranslation('mymodule', static::staticBasePath() . '/messages', [
-            'fileMap' => [
-                'mymodule' => 'mymodule.php',
-            ],
+            'mymodule' => 'mymodule.php',
         ]);
     }
 
