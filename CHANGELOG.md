@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.1 (in progress)
 
+### Changed
+
+- [#1739](https://github.com/luyadev/luya/issues/1739) Mark getLuyaVersion() as deprecated in luya\console\Command.
+
 ### Fixed
 
 - [#1745](https://github.com/luyadev/luya/issues/1745) Provide controller files fallback for LUYA core modules.
