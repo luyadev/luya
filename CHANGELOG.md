@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1745](https://github.com/luyadev/luya/issues/1745) Provide controller files fallback for LUYA core modules.
 - [#1731](https://github.com/luyadev/luya/issues/1731) JsonLd Thing definition must be from type Thing.
 
 ### Added
