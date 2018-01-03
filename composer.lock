@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9478527bd940f5e3457f697c4dbcb6a6",
+    "content-hash": "f939b17489cf1d587fda6c56b7d08783",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -366,16 +366,16 @@
         },
         {
             "name": "nadar/php-composer-reader",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nadar/php-composer-reader.git",
-                "reference": "07328cbcbd27a5b4bfdb98bb25df0ffc486f014f"
+                "reference": "5561e0a541660dd7419ca15de95c57c3e185c3cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nadar/php-composer-reader/zipball/07328cbcbd27a5b4bfdb98bb25df0ffc486f014f",
-                "reference": "07328cbcbd27a5b4bfdb98bb25df0ffc486f014f",
+                "url": "https://api.github.com/repos/nadar/php-composer-reader/zipball/5561e0a541660dd7419ca15de95c57c3e185c3cd",
+                "reference": "5561e0a541660dd7419ca15de95c57c3e185c3cd",
                 "shasum": ""
             },
             "require-dev": {
@@ -398,7 +398,7 @@
                 }
             ],
             "description": "Read and manipulate composer.json",
-            "time": "2018-01-03T12:23:49+00:00"
+            "time": "2018-01-03T15:53:35+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -3213,9 +3213,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "nadar/php-composer-reader": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
