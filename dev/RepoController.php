@@ -31,7 +31,7 @@ use Nadar\PhpComposerReader\Autoload;
  * ```
  *
  * In order to remove an existing repo from update list
- * 
+ *
  * ```sh
  * ./vendor/bin/luyadev repo/remove luya-module-news
  * ```
@@ -157,33 +157,33 @@ EOT;
     public function actionUpdate()
     {
         foreach ($this->repos as $repo) {
-        	$this->rebaseRepo($repo, $this->getFilesystemRepoPath($repo));
+            $this->rebaseRepo($repo, $this->getFilesystemRepoPath($repo));
         }
         
         foreach ($this->getConfig(self::CONFIG_VAR_CUSTOMCLONES, []) as $repo => $path) {
-        	$this->rebaseRepo($repo, $path);
+            $this->rebaseRepo($repo, $path);
         }
     }
     
     /**
      * Clone a repo into the repos folder.
-     * 
+     *
      * @param string $repo
      * @param string $vendor
      */
     public function actionClone($vendor = null, $repo = null)
     {
-    	// if `vendor/repo` notation is provided
-    	if ($vendor !== null && strpos($vendor, '/')) {
-    		list($vendor, $repo) = explode("/", $vendor);	
-    	}
-    	
+        // if `vendor/repo` notation is provided
+        if ($vendor !== null && strpos($vendor, '/')) {
+            list($vendor, $repo) = explode("/", $vendor);
+        }
+        
         if (empty($vendor)) {
             $vendor = $this->prompt("Enter the username/vendor for this repo (e.g. luyadev)");
         }
         
         if (empty($repo)) {
-        	$repo = $this->prompt("Enter the name of the repo you like to clone (e.g. luya-module-news)");
+            $repo = $this->prompt("Enter the name of the repo you like to clone (e.g. luya-module-news)");
         }
         
         $clones = $this->getConfig(self::CONFIG_VAR_CUSTOMCLONES, []);
@@ -215,32 +215,35 @@ EOT;
                         $section = new AutoloadSection($projectComposer);
                         $section->add($new)->save();
                         
-                        $this->outputSuccess("added psr4 entry {$item['autoload']->namespace}");
+                        $this->outputSuccess("+ Added autoload entry '{$item['autoload']->namespace}' for '{$item['autoload']->source}'.");
                     }
                 }
+                
+                $projectComposer = $this->getProjectComposerReader();
+                $projectComposer->runCommand('dump-autoload');
             }
         }
     }
     
     /**
      * Remove a given repo from filesystem.
-     * 
+     *
      * @param string $repo The repo name like `luya-module-cms` without vendor.
      */
     public function actionRemove($repo)
     {
-    	FileHelper::removeDirectory($this->getFilesystemRepoPath($repo));
-    	$clones = $this->getConfig(self::CONFIG_VAR_CUSTOMCLONES, []);
-    	if (isset($clones[$repo])) {
-	    	unset($clones[$repo]);
-	    	$this->saveConfig(self::CONFIG_VAR_CUSTOMCLONES, $clones);
-    	}
-    	
-    	return $this->outputSuccess("Removed repo {$repo}.");
+        FileHelper::removeDirectory($this->getFilesystemRepoPath($repo));
+        $clones = $this->getConfig(self::CONFIG_VAR_CUSTOMCLONES, []);
+        if (isset($clones[$repo])) {
+            unset($clones[$repo]);
+            $this->saveConfig(self::CONFIG_VAR_CUSTOMCLONES, $clones);
+        }
+        
+        return $this->outputSuccess("Removed repo {$repo}.");
     }
     
     /**
-     * 
+     *
      * @return \Nadar\PhpComposerReader\ComposerReader
      */
     protected function getProjectComposerReader()
@@ -264,7 +267,7 @@ EOT;
     }
     
     /**
-     * 
+     *
      * @param string $repo
      * @param string $isFork
      * @param string $exists
@@ -276,7 +279,7 @@ EOT;
     }
     
     /**
-     * 
+     *
      * @param string $repo
      * @return string
      */
@@ -286,7 +289,7 @@ EOT;
     }
     
     /**
-     * 
+     *
      * @param string $username
      * @param string $repo
      * @return boolean
@@ -297,7 +300,7 @@ EOT;
     }
     
     /**
-     * 
+     *
      * @param string $text
      * @param boolean $paragraph
      * @return string
@@ -327,22 +330,22 @@ EOT;
     
     /**
      * Rebase existing repo.
-     * 
+     *
      * @param string $repo
      * @param string $repoFileSystemPath
      */
     private function rebaseRepo($repo, $repoFileSystemPath)
     {
-    	$wrapper = new GitWrapper();
-    	 
-    	$wrapper->git('checkout master', $repoFileSystemPath);
-    	$this->outputInfo("{$repo}: checkout master ✔");
-    	 
-    	$wrapper->git('fetch upstream', $repoFileSystemPath);
-    	$this->outputInfo("{$repo}: fetch upstream ✔");
-    	 
-    	$wrapper->git('rebase upstream/master master', $repoFileSystemPath);
-    	$this->outputInfo("{$repo}: rebase master ✔");
+        $wrapper = new GitWrapper();
+         
+        $wrapper->git('checkout master', $repoFileSystemPath);
+        $this->outputInfo("{$repo}: checkout master ✔");
+         
+        $wrapper->git('fetch upstream', $repoFileSystemPath);
+        $this->outputInfo("{$repo}: fetch upstream ✔");
+         
+        $wrapper->git('rebase upstream/master master', $repoFileSystemPath);
+        $this->outputInfo("{$repo}: rebase master ✔");
     }
     
     /**
