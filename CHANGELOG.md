@@ -2,16 +2,11 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.1 (in progress)
+## 1.0.1 (3. January 2018)
 
 ### Changed
 
 - [#1739](https://github.com/luyadev/luya/issues/1739) Mark getLuyaVersion() as deprecated in luya\console\Command.
-
-### Fixed
-
-- [#1745](https://github.com/luyadev/luya/issues/1745) Provide controller files fallback for LUYA core modules.
-- [#1731](https://github.com/luyadev/luya/issues/1731) JsonLd Thing definition must be from type Thing.
 
 ### Added
 
@@ -20,8 +15,12 @@ All notable changes to this project will be documented in this file. This projec
 - [#1737](https://github.com/luyadev/luya/issues/1737) Added luyadev command to clone and update repos. This command is used in the luya-env-dev project in order to develope on the LUYA modules or create your own extensions/modules.
 - [#1738](https://github.com/luyadev/luya/issues/1738) Update module create readme with useAppViewPath information.
 
-1.0.0 (12. December 2017)
--------------------
+### Fixed
+
+- [#1745](https://github.com/luyadev/luya/issues/1745) Provide controller files fallback for LUYA core modules.
+- [#1731](https://github.com/luyadev/luya/issues/1731) JsonLd Thing definition must be from type Thing.
+
+## 1.0.0 (12. December 2017)
 
 ### Changed
 
