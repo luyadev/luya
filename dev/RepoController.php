@@ -8,6 +8,9 @@ use yii\console\widgets\Table;
 use yii\console\Markdown;
 use yii\helpers\Console;
 use luya\helpers\FileHelper;
+use Nadar\PhpComposerReader\ComposerReader;
+use Nadar\PhpComposerReader\AutoloadSection;
+use Nadar\PhpComposerReader\Autoload;
 
 /**
  * Dev Env cloning and updating.
@@ -192,6 +195,31 @@ EOT;
         $this->cloneRepo($repo, $this->getCloneUrlBasedOnType($repo, $vendor), $repoFileSystemPath, $vendor);
         
         $this->saveConfig(self::CONFIG_VAR_CUSTOMCLONES, $clones);
+        
+        $composerReader = new ComposerReader($repoFileSystemPath . DIRECTORY_SEPARATOR . 'composer.json');
+        
+        if ($composerReader->canRead()) {
+            $section = new AutoloadSection($composerReader);
+            $autoloaders = [];
+            foreach ($section as $autoload) {
+                $newSrc = $repoFileSystemPath . DIRECTORY_SEPARATOR . $autoload->source;
+                $autoloaders[] = ['autoload' => $autoload, 'src' => $newSrc];
+            }
+            
+            if (!empty($autoloaders)) {
+                foreach ($autoloaders as $item) {
+                    $projectComposer = $this->getProjectComposerReader();
+                    if ($projectComposer->canWrite()) {
+                        $new = new Autoload($projectComposer, $item['autoload']->namespace, $item['src'], $item['autoload']->type);
+                        
+                        $section = new AutoloadSection($projectComposer);
+                        $section->add($new)->save();
+                        
+                        $this->outputSuccess("added psr4 entry {$item['autoload']->namespace}");
+                    }
+                }
+            }
+        }
     }
     
     /**
@@ -209,6 +237,15 @@ EOT;
     	}
     	
     	return $this->outputSuccess("Removed repo {$repo}.");
+    }
+    
+    /**
+     * 
+     * @return \Nadar\PhpComposerReader\ComposerReader
+     */
+    protected function getProjectComposerReader()
+    {
+        return new ComposerReader(getcwd() . DIRECTORY_SEPARATOR . 'composer.json');
     }
     
     private $_gitWrapper;

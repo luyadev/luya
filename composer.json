@@ -20,7 +20,8 @@
         "yiisoft/yii2": "~2.0.0",
         "curl/curl" : "~1.0",
         "phpmailer/phpmailer": "^6.0",
-        "cpliakas/git-wrapper": "~1.0"
+        "cpliakas/git-wrapper": "~1.0",
+        "nadar/php-composer-reader" : "dev-master"
     },
     "require-dev" : {
         "luyadev/luya-testsuite" : "~1.0.0",

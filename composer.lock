@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "40728c24b99861979b44d14441516a7b",
+    "content-hash": "9478527bd940f5e3457f697c4dbcb6a6",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -363,6 +363,42 @@
                 "luya"
             ],
             "time": "2017-12-03T12:32:47+00:00"
+        },
+        {
+            "name": "nadar/php-composer-reader",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nadar/php-composer-reader.git",
+                "reference": "07328cbcbd27a5b4bfdb98bb25df0ffc486f014f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nadar/php-composer-reader/zipball/07328cbcbd27a5b4bfdb98bb25df0ffc486f014f",
+                "reference": "07328cbcbd27a5b4bfdb98bb25df0ffc486f014f",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nadar\\PhpComposerReader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Basil Suter",
+                    "email": "git@nadar.io"
+                }
+            ],
+            "description": "Read and manipulate composer.json",
+            "time": "2018-01-03T12:23:49+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1246,16 +1282,16 @@
         },
         {
             "name": "nadar/github-markdown-fixer",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nadar/github-markdown-fixer.git",
-                "reference": "00a761bb500361bdaca87084fff7f3d784938a74"
+                "reference": "01cb3d636fd3b509262705e430747d110512cdf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nadar/github-markdown-fixer/zipball/00a761bb500361bdaca87084fff7f3d784938a74",
-                "reference": "00a761bb500361bdaca87084fff7f3d784938a74",
+                "url": "https://api.github.com/repos/nadar/github-markdown-fixer/zipball/01cb3d636fd3b509262705e430747d110512cdf8",
+                "reference": "01cb3d636fd3b509262705e430747d110512cdf8",
                 "shasum": ""
             },
             "require": {
@@ -1297,7 +1333,7 @@
                 "github",
                 "markdown"
             ],
-            "time": "2017-12-14T17:03:20+00:00"
+            "time": "2018-01-01T12:07:44+00:00"
         },
         {
             "name": "php-coveralls/php-coveralls",
@@ -3177,7 +3213,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "nadar/php-composer-reader": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

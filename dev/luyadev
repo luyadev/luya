@@ -14,6 +14,7 @@ foreach ($loaders as $file) {
         $vendor = pathinfo($file, PATHINFO_DIRNAME);
     }
 }
+define('YII_DEBUG', true);
 $boot = new \luya\Boot();
 $boot->setBaseYiiFile($vendor . '/yiisoft/yii2/Yii.php');
 $boot->setConfigArray([
