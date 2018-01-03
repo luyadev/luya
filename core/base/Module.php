@@ -16,6 +16,21 @@ use luya\console\interfaces\ImportControllerInterface;
  *
  * In order to use a module within the CMS context it must extend from this base module class.
  *
+ * @property array $urlRules Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}} object configuration as array like this:
+ * ```php
+ * 'urlRules' => [
+ *     ['pattern' => 'mymodule/detail/<id:\d+>', 'route' => 'mymodule/detail/user'],
+ * ],
+ * ```
+ *
+ * Or you can provide a key value pairing where key is the pattern and the value is the route:
+ *
+ * ```php
+ * 'urlRules' => [
+ *     'mymodule/detail/<id:\d+>' => 'mymodule/detail/user',
+ * ],
+ * ```
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -48,8 +63,10 @@ abstract class Module extends \yii\base\Module
      */
     public $tags = [];
     
+    private $_urlRules = [];
+    
     /**
-     * @var array Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}}
+     * UrlRules for this module. You can either provide a full {{luya\web\UrlRule}}
      * object configuration as array like this:
      *
      * ```php
@@ -65,8 +82,28 @@ abstract class Module extends \yii\base\Module
      *     'mymodule/detail/<id:\d+>' => 'mymodule/detail/user',
      * ],
      * ```
+     *
+     * @var array $rules Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}}
+     * object configuration as array
+     * @since 1.0.1
      */
-    public $urlRules = [];
+    public function setUrlRules(array $rules)
+    {
+        $this->_urlRules = $rules;
+    }
+
+    /**
+     * Getter method for urlRules.
+     *
+     * > Never use the getter method, use the $urlRules virtual property as it provides backwards compatibility.
+     *
+     * @return array
+     * @since 1.0.1
+     */
+    public function getUrlRules()
+    {
+        return $this->_urlRules;
+    }
 
     /**
      * @var array An array containing all components which should be registered for the current module. If
@@ -234,7 +271,7 @@ abstract class Module extends \yii\base\Module
                     $files[$this->fileToName($staticPath, $file)] = $file;
                 }
             } catch (InvalidParamException $e) {
-                 // catch if folder not found.
+                // catch if folder not found.
             }
         };
         
@@ -316,10 +353,10 @@ abstract class Module extends \yii\base\Module
 
     /**
      * Base translation method which invokes the onLoad function.
-     * 
+     *
      * This makes it possible to register module translations without adding the module
      * to the components list. This is very important for luya extensions.
-     * 
+     *
      * @param string $category the message category.
      * @param string $message the message to be translated.
      * @param array $params the parameters that will be used to replace the corresponding placeholders in the message.

@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1744](https://github.com/luyadev/luya/issues/1744) New getter and setter method for urlRules, provides backwards compatibility trough none virtual property access.
 - [#1735](https://github.com/luyadev/luya/pull/1735) JsonLd: CreativeWork, Article, SocialMediaPosting, BlogPosting, LiveBlogPosting
 - [#1737](https://github.com/luyadev/luya/issues/1737) Added luyadev command to clone and update repos. This command is used in the luya-env-dev project in order to develope on the LUYA modules or create your own extensions/modules.
 - [#1738](https://github.com/luyadev/luya/issues/1738) Update module create readme with useAppViewPath information.
