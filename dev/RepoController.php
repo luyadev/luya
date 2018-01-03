@@ -215,7 +215,7 @@ EOT;
                         $section = new AutoloadSection($projectComposer);
                         $section->add($new)->save();
                         
-                        $this->outputSuccess("+ Added autoload entry '{$item['autoload']->namespace}' for '{$item['autoload']->source}'.");
+                        $this->outputSuccess("{$repo}: autoload ✔ (namespace '{$item['autoload']->namespace}' for '{$item['autoload']->source}')");
                     }
                 }
                 
@@ -363,9 +363,9 @@ EOT;
         
         if (!empty($upstreamUsername)) {
             $this->getGitWrapper()->git('remote add upstream https://github.com/'.$upstreamUsername.'/'.$repo.'.git', $newRepoHome);
-            $this->outputInfo("Configure upstream https://github.com/{$upstreamUsername}/{$repo}.git");
+            $this->outputInfo("{$repo}: Configure upstream https://github.com/{$upstreamUsername}/{$repo}.git ✔");
         }
         
-        $this->outputSuccess("{$repo}: ✔ complete");
+        $this->outputSuccess("{$repo}: cloning ✔");
     }
 }
