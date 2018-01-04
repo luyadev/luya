@@ -124,6 +124,8 @@ trait ApplicationTrait
                     return 'ru_RU';
                 case 'en':
                     return 'en_US';
+                case 'cn':
+                    return 'cn_CN';
                 default:
                     return strtolower($lang) . '_' . strtoupper($lang);
             }
