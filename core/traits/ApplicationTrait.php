@@ -17,15 +17,14 @@ use luya\base\PackageInstaller;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-trait ApplicationTrait
-{
+trait ApplicationTrait {
     private $_webroot;
-    
+
     /**
      * @var string Title for the application used in different sections like Login screen
      */
     public $siteTitle = 'LUYA Application';
-    
+
     /**
      * @var string|boolean Set a token, which will be used to collect data from a central host, if you want to enable this feature.
      * Use http://passwordsgenerator.net/ to create complex strings. When you have enabled this feature you can collect information's from
@@ -38,7 +37,7 @@ trait ApplicationTrait
      * in the console mode, cause some importer classes need those variables.
      */
     public $webrootDirectory = 'public_html';
-    
+
     /**
      * @var string This value will be used as hostInfo when running console applications in urlManager. An example for using the hostInfo
      *
@@ -47,7 +46,7 @@ trait ApplicationTrait
      * ```
      */
     public $consoleHostInfo;
-    
+
     /**
      * @var string This value is used when declared for console request as urlManger baseUrl in order to enable urlHandling. If {{luya\web\traits\ApplicationTrait::$consoleHostInfo}}
      * is defined, consoleBaseUrl will use `/` as default value. The base url is the path where the application is running after hostInfo like
@@ -59,7 +58,7 @@ trait ApplicationTrait
      * But in the most cases when the website is online the baseUrl is `/` which is enabled by default when {{luya\web\traits\ApplicationTrait::$consoleHostInfo}} is defined.
      */
     public $consoleBaseUrl;
-    
+
     /**
      * @var array Add tags to the TagParser class. Example
      *
@@ -84,20 +83,19 @@ trait ApplicationTrait
      * ```
      */
     public $locales = [];
-    
+
     /**
      * Add trace info to luya application trait
      */
-    public function init()
-    {
+    public function init(){
         parent::init();
-        
+
         // add trace info
         Yii::trace('initialize LUYA Application', __METHOD__);
-        
+
         $this->setLocale($this->language);
     }
-    
+
     /**
      * Transform the $language into a locale sign to set php env settings.
      *
@@ -106,12 +104,11 @@ trait ApplicationTrait
      * @param string $lang Find the locale POSIX for the provided $lang short code.
      * @return string The localisation code for the provided lang short code.
      */
-    public function ensureLocale($lang)
-    {
+    public function ensureLocale($lang){
         if (array_key_exists($lang, $this->locales)) {
             return $this->locales[$lang];
         }
-        
+
         if (strlen($lang) == 2) {
             switch ($lang) {
                 case 'de':
@@ -124,52 +121,51 @@ trait ApplicationTrait
                     return 'ru_RU';
                 case 'en':
                     return 'en_US';
+                case 'cn':
+                    return 'zh_CN';
                 default:
                     return strtolower($lang) . '_' . strtoupper($lang);
             }
         }
-        
+
         return $lang;
     }
-    
+
     /**
      * Setter method ensures the locilations POSIX from {{ensureLocale}} for the provided lang
      * and changes the Yii::$app->langauge and sets the `setlocale()` code from ensureLocale().
      *
      * @param string $lang The language short code to set the locale for.
      */
-    public function setLocale($lang)
-    {
+    public function setLocale($lang){
         $locale = str_replace('.utf8', '', $this->ensureLocale($lang));
         $this->language = $locale;
-        setlocale(LC_ALL, $locale.'.utf8', $locale);
+        setlocale(LC_ALL, $locale . '.utf8', $locale);
     }
 
     /**
      * Get the package Installer
      * @return \luya\base\PackageInstaller
      */
-    public function getPackageInstaller()
-    {
+    public function getPackageInstaller(){
         $file = Yii::getAlias('@vendor/luyadev/installer.php');
-        
+
         $data = is_file($file) ? include $file : [];
-         
+
         return new PackageInstaller($data);
     }
-    
+
     /**
      * @inheritdoc
      */
-    protected function bootstrap()
-    {
+    protected function bootstrap(){
         foreach ($this->getPackageInstaller()->getConfigs() as $config) {
             $this->bootstrap = array_merge($this->bootstrap, $config->bootstrap);
         }
-        
+
         parent::bootstrap();
     }
-    
+
     /**
      * Read only property which is used in cli bootstrap process to set the @webroot alias
      *
@@ -177,20 +173,18 @@ trait ApplicationTrait
      * Yii::setAlias('@webroot', $app->webroot);
      * ```
      */
-    public function getWebroot()
-    {
+    public function getWebroot(){
         if ($this->_webroot === null) {
             $this->_webroot = realpath(realpath($this->basePath) . DIRECTORY_SEPARATOR . $this->webrootDirectory);
         }
-        
+
         return $this->_webroot;
     }
 
     /**
      * Add additional core components to the yii2 base core components.
      */
-    public function luyaCoreComponents()
-    {
+    public function luyaCoreComponents(){
         return array_merge(parent::coreComponents(), [
             'mail' => ['class' => 'luya\components\Mail'],
             'formatter' => ['class' => 'luya\components\Formatter'],
@@ -202,8 +196,7 @@ trait ApplicationTrait
      *
      * @return \luya\base\Module
      */
-    public function getApplicationModules()
-    {
+    public function getApplicationModules(){
         $modules = [];
 
         foreach ($this->getModules() as $id => $obj) {
@@ -220,8 +213,7 @@ trait ApplicationTrait
      *
      * @return \luya\base\Module
      */
-    public function getFrontendModules()
-    {
+    public function getFrontendModules(){
         $modules = [];
 
         foreach ($this->getModules() as $id => $obj) {
@@ -232,22 +224,21 @@ trait ApplicationTrait
 
         return $modules;
     }
-    
+
     /**
      * Return all Admin Module Interface implementing modules.
      *
      * @return \luya\base\AdminModuleInterface
      */
-    public function getAdminModules()
-    {
+    public function getAdminModules(){
         $modules = [];
-        
+
         foreach ($this->getModules() as $id => $obj) {
             if ($obj instanceof Module && $obj instanceof AdminModuleInterface) {
                 $modules[$id] = $obj;
             }
         }
-        
+
         return $modules;
     }
 }

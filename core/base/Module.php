@@ -20,8 +20,7 @@ use yii\base\InvalidConfigException;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class Module extends \yii\base\Module
-{
+abstract class Module extends \yii\base\Module {
     /**
      * @var array Contains the apis for each module to provided them in the admin module. They represents
      * the name of the api and the value represents the class. Example value:
@@ -48,7 +47,7 @@ abstract class Module extends \yii\base\Module
      * As by default the yii2 configurable object you can also pass properties to your tag object in order to configure them.
      */
     public $tags = [];
-    
+
     /**
      * @var array Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}}
      * object configuration as array like this:
@@ -84,7 +83,7 @@ abstract class Module extends \yii\base\Module
      * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
      */
     public $useAppLayoutPath = true;
-    
+
     /**
      * @var bool Define the location of the view files inside the controller actions
      *
@@ -93,7 +92,7 @@ abstract class Module extends \yii\base\Module
      *
      */
     public $useAppViewPath = false;
-    
+
     /**
      * @var string if this/the module is included via another module (parent module), the parent module will write its
      * name inside the child modules $context variable. For example the cms includes the news module, the context variable
@@ -109,8 +108,7 @@ abstract class Module extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public function init()
-    {
+    public function init(){
         parent::init();
         // verify all the components
         foreach ($this->requiredComponents as $component) {
@@ -118,7 +116,7 @@ abstract class Module extends \yii\base\Module
                 throw new InvalidConfigException(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
-        
+
         static::onLoad();
     }
 
@@ -130,10 +128,9 @@ abstract class Module extends \yii\base\Module
      * @return string
      * @see \yii\base\Module::getLayoutPath()
      */
-    public function getLayoutPath()
-    {
+    public function getLayoutPath(){
         if ($this->useAppLayoutPath) {
-            $this->setLayoutPath('@app/views/'.$this->id.'/layouts');
+            $this->setLayoutPath('@app/views/' . $this->id . '/layouts');
         }
 
         return parent::getLayoutPath();
@@ -146,8 +143,7 @@ abstract class Module extends \yii\base\Module
      * @return string The resolved route without the module id `default/index` when input was `admin/default/index`
      * and the current module id is `admin`.
      */
-    public function resolveRoute($route)
-    {
+    public function resolveRoute($route){
         $routeParts = explode('/', $route);
         foreach ($routeParts as $k => $v) {
             if (($k == 0 && $v == $this->id) || (empty($v))) {
@@ -166,8 +162,7 @@ abstract class Module extends \yii\base\Module
      *
      * @return array
      */
-    public function registerComponents()
-    {
+    public function registerComponents(){
         return [];
     }
 
@@ -200,29 +195,26 @@ abstract class Module extends \yii\base\Module
      * @param \luya\console\interfaces\ImportControllerInterface $importer The importer controller class which will be invoke to the import method.
      * @return boolean|array If an array is returned it must contain object class to created extending from {{luya\console\Command}}.
      */
-    public function import(ImportControllerInterface $importer)
-    {
+    public function import(ImportControllerInterface $importer){
         return false;
     }
-    
+
     /**
      * returns "luya\base" for example.
      *
      * @return string
      */
-    public function getNamespace()
-    {
+    public function getNamespace(){
         return implode('\\', array_slice(explode('\\', get_class($this)), 0, -1));
     }
-    
+
     /**
      * Returns all controller files of this module from the `getControllerPath()` folder, where the key is the reusable
      * id of this controller and value the file on the server.
      *
      * @return array Returns an array where the key is the controller id and value the original file.
      */
-    public function getControllerFiles()
-    {
+    public function getControllerFiles(){
         try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L235
             $files = [];
             foreach (FileHelper::findFiles($this->controllerPath) as $file) {
@@ -234,7 +226,7 @@ abstract class Module extends \yii\base\Module
             return [];
         };
     }
-    
+
     /**
      * Overrides the yii2 default behavior by not throwing an exception if no alias has been defined
      * for the controller namespace. Otherwise each module requires an alias for its first namepsace entry
@@ -243,8 +235,7 @@ abstract class Module extends \yii\base\Module
      *
      * @inheritdoc
      */
-    public function getControllerPath()
-    {
+    public function getControllerPath(){
         return Yii::getAlias('@' . str_replace('\\', '/', $this->controllerNamespace), false);
     }
 
@@ -258,10 +249,9 @@ abstract class Module extends \yii\base\Module
      *
      * @return void
      */
-    public static function onLoad()
-    {
+    public static function onLoad(){
     }
-    
+
     /**
      * Register a Translation to the i18n component.
      *
@@ -281,24 +271,24 @@ abstract class Module extends \yii\base\Module
      * @param string $basePath The path to the messages folder where the messages are located.
      * @param array $fileMap The files mapping inside the messages folder.
      */
-    public static function registerTranslation($prefix, $basePath, array $fileMap)
-    {
-        Yii::$app->i18n->translations[$prefix] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'basePath' => $basePath,
-            'fileMap' => $fileMap,
-        ];
+    public static function registerTranslation($prefix, $basePath, array $fileMap){
+        if (!isset(Yii::$app->i18n->translations[$prefix])) {
+            Yii::$app->i18n->translations[$prefix] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => $basePath,
+                'fileMap' => $fileMap,
+            ];
+        }
     }
-    
+
     /**
      * Get base path from static view port.
      *
      * @return string
      */
-    public static function staticBasePath()
-    {
+    public static function staticBasePath(){
         $class = new \ReflectionClass(get_called_class());
-        
+
         return dirname($class->getFileName());
     }
 
@@ -310,8 +300,7 @@ abstract class Module extends \yii\base\Module
      * @param unknown $language
      * @return string
      */
-    public static function baseT($category, $message, array $params = [], $language = null)
-    {
+    public static function baseT($category, $message, array $params = [], $language = null){
         static::onLoad();
         return Yii::t($category, $message, $params, $language);
     }
