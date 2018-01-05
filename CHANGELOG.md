@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.2 (in progress)
 
+### Fixed
+
+- [#1747](https://github.com/luyadev/luya/pull/1747) Allow to override translations files trough application config.
+
 ## 1.0.1 (3. January 2018)
 
 ### Changed

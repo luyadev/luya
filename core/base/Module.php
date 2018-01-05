@@ -332,11 +332,13 @@ abstract class Module extends \yii\base\Module
      */
     public static function registerTranslation($prefix, $basePath, array $fileMap)
     {
-        Yii::$app->i18n->translations[$prefix] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'basePath' => $basePath,
-            'fileMap' => $fileMap,
-        ];
+        if(!isset(Yii::$app->i18n->translations[$prefix])){
+            Yii::$app->i18n->translations[$prefix] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => $basePath,
+                'fileMap' => $fileMap,
+            ];
+        }
     }
     
     /**
