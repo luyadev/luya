@@ -70,12 +70,12 @@ In order to generate a custom label field you can also pass a closure function:
 
 ## SelectRelationActiveQuery
 
-When dealing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data but there is no model callback for the label fields, it returns raw sql data. In order to use this plugin you need to have a `hasMany` relation.
+When dealing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data but there is no model callback for the label fields, it returns raw sql data. In order to use this plugin you need to have a `hasOne` relation.
 
 ```php
 'user_id' => [
     'class' => SelectRelationActiveQuery::class, 
-    'query' => $this->getUsers(), 
+    'query' => $this->getUser(), 
     'labelField' => 'firstname,lastname'
 ]
 ```
