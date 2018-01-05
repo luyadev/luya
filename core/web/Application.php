@@ -14,6 +14,7 @@ use luya\traits\ApplicationTrait;
  * @property \luya\web\Element $element The element component.
  * @property \luya\web\View $view The view component.
  * @property \luya\web\Request $request The request component.
+ * @property \luya\web\ErrorHandler $errorHandler The error handler component.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

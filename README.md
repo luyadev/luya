@@ -40,9 +40,9 @@ If you have any questions or problems, don't hesitate to find support in the fol
 
 When reporting bugs, its important to understand where to create the issue. The most common modules are:
 
-+ [Core](github.com/luyadev/luya) The core library, which extends the Yii Framework.
-+ [CMS](github.com/luyadev/luya-module-cms) The Content Mangement System Admin and Frontend. Working with Blocks, render CMS Pages, etc.
-+ [Admin](github.com/luyadev/luya-module-admin) The admin UI itself, including all CURD operations belongs to this module.
++ [Core](https://github.com/luyadev/luya) The core library, which extends the Yii Framework.
++ [CMS](https://github.com/luyadev/luya-module-cms) The Content Mangement System Admin and Frontend. Working with Blocks, render CMS Pages, etc.
++ [Admin](https://github.com/luyadev/luya-module-admin) The admin UI itself, including all CURD operations belongs to this module.
 
 #### Contribution
 

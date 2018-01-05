@@ -5,6 +5,8 @@ namespace luya\web\jsonld;
 /**
  * JsonLd - Place
  *
+ * Entities that have a somewhat fixed, physical extension.
+ *
  * @see http://schema.org/Place
  *
  * @author Alex Schmid
@@ -12,9 +14,9 @@ namespace luya\web\jsonld;
  */
 class Place extends BaseThing implements PlaceInterface
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function typeDefintion()
     {
         return 'Place';

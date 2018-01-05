@@ -33,3 +33,5 @@ scripts/.sass_log
 .sass-cache
 /.php_cs.cache
 node_modules/
+/repos/
+/devconfig.json

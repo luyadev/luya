@@ -7,7 +7,7 @@ There is a clear vision of the structure for modern web applications, in particl
 + How to use configuration files and keep them small
 + Arrangement and structure of directories 
 + Components wich are already set by the core 
-+ Bulletproof DRY concept for secure and fast developemnt
++ Bulletproof DRY concept for secure and fast development
 
 In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, e.g. with just an MVC provided by Yii via the LUYA core or if you just need an admin UI where you can manage data of your application or as well if you also need a cms to manage the content.
 

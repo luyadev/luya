@@ -5,6 +5,8 @@ namespace luya\web\jsonld;
 /**
  * JsonLd - Person
  *
+ * A person (alive, dead, undead, or fictional).
+ *
  * @see http://schema.org/Person
  *
  * @author Alex Schmid
@@ -12,9 +14,9 @@ namespace luya\web\jsonld;
  */
 class Person extends BaseThing implements PersonInterface
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function typeDefintion()
     {
         return 'Person';

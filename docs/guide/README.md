@@ -63,7 +63,7 @@
   + [Create an Active Window](lesson-activewindow.md)
   + [Custom Angular Controller and Admin View](lesson-admin-custom-angular-view.md)
 + Developers
-  + [LUYA Guidelines](luya-guideline.md)
+  + [Guidelines](luya-guideline.md)
   + [Collaboration](luya-collaboration.md)
-  + [LUYA Unit Test](luya-unittest.md)
+  + [Unit Test](luya-unittest.md)
   + [Admin Browser Compatibility](luya-browser.md)

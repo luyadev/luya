@@ -26,10 +26,15 @@ To register the module in LUYA you [have to edit the config file](https://luya.i
 'modules' => [
     /* ... */
         
-    'addressbook' => 'app\modules\addressbook\frontend\Module',
+    'addressbook' => [
+        'class' => 'app\modules\addressbook\frontend\Module',
+        'useAppViewPath' => true, // When enabled the views will be looked up in the @app/views folder, otherwise the views shipped with the module will be used.
+    ],
     'addressbookadmin' => 'app\modules\addressbook\admin\Module',
 ],
-``` 
+```
+
+> When creating an open source module, you should provide frontend views which the the developer then could trough `useAppViewPath` or not.
 
 ## Creating the models and migrations
 

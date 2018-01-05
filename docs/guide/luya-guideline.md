@@ -79,6 +79,27 @@ public function init()
 }
 ```
 
+Example for using since tags in a new method of a class:
+
+```php
+class FooBar
+{
+    /**
+     * Register new Article.
+     *
+     * An article, such as a news article or piece of investigative report.
+     * Newspapers and magazines have articles of many different types and this is intended to cover them all.
+     *
+     * @param array $config Optional config array to provided article data via setter methods.
+     * @return \luya\web\jsonld\Article
+     * @since 1.0.1
+     */
+     public static function article(array $config = [])
+     {
+         return self::addGraph((new Article($config)));
+     }
+}
+
 ## Versioning
 
 This project implements the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md).

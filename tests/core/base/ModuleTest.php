@@ -4,8 +4,7 @@ namespace luyatests\core\base;
 
 use Yii;
 use luyatests\LuyaWebTestCase;
-use luyatests\data\modules\UnitAdminModule;
-use luyatests\data\modules\unitmodule\Module;
+use luyatests\data\modules\urlmodule\Module;
 
 class ModuleTest extends LuyaWebTestCase
 {
@@ -59,5 +58,22 @@ class ModuleTest extends LuyaWebTestCase
     {
         $f = Yii::$app->getModule('unitmodule')->getControllerFiles();
         $this->assertArrayHasKey('other', $f);
+    }
+    
+    public function testUrlRulesSetterGetter()
+    {
+        $m = new Module('mod');
+        
+        $this->assertSame([
+            ['pattern' => 'urlmodule/bar', 'route' => 'urlmodule/bar/index'],
+            ['pattern' => 'urlmodule', 'route' => 'urlmodule/default/index'],
+        ], $m->urlRules);
+        
+        $m->setUrlRules(['foo' => 'bar']);
+        
+        // accessing the virtual property will lead into accessing the original backwards compatibale
+        // $urlRules property defined trough the module.
+        $this->assertNotSame(['foo' => 'bar'], $m->urlRules);
+        $this->assertSame(['foo' => 'bar'], $m->getUrlRules());
     }
 }

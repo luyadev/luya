@@ -2,13 +2,12 @@
 
 namespace luya\base;
 
-use yii;
-
-use luya\helpers\FileHelper;
+use Yii;
 use yii\helpers\Inflector;
-use luya\console\interfaces\ImportControllerInterface;
 use yii\base\InvalidParamException;
 use yii\base\InvalidConfigException;
+use luya\helpers\FileHelper;
+use luya\console\interfaces\ImportControllerInterface;
 
 /**
  * LUYA Module base class.
@@ -16,6 +15,21 @@ use yii\base\InvalidConfigException;
  * The module class provides url rule defintions and other helper methods.
  *
  * In order to use a module within the CMS context it must extend from this base module class.
+ *
+ * @property array $urlRules Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}} object configuration as array like this:
+ * ```php
+ * 'urlRules' => [
+ *     ['pattern' => 'mymodule/detail/<id:\d+>', 'route' => 'mymodule/detail/user'],
+ * ],
+ * ```
+ *
+ * Or you can provide a key value pairing where key is the pattern and the value is the route:
+ *
+ * ```php
+ * 'urlRules' => [
+ *     'mymodule/detail/<id:\d+>' => 'mymodule/detail/user',
+ * ],
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -49,8 +63,10 @@ abstract class Module extends \yii\base\Module
      */
     public $tags = [];
     
+    private $_urlRules = [];
+    
     /**
-     * @var array Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}}
+     * UrlRules for this module. You can either provide a full {{luya\web\UrlRule}}
      * object configuration as array like this:
      *
      * ```php
@@ -66,8 +82,28 @@ abstract class Module extends \yii\base\Module
      *     'mymodule/detail/<id:\d+>' => 'mymodule/detail/user',
      * ],
      * ```
+     *
+     * @var array $rules Contains all urlRules for this module. You can either provide a full {{luya\web\UrlRule}}
+     * object configuration as array
+     * @since 1.0.1
      */
-    public $urlRules = [];
+    public function setUrlRules(array $rules)
+    {
+        $this->_urlRules = $rules;
+    }
+
+    /**
+     * Getter method for urlRules.
+     *
+     * > Never use the getter method, use the $urlRules virtual property as it provides backwards compatibility.
+     *
+     * @return array
+     * @since 1.0.1
+     */
+    public function getUrlRules()
+    {
+        return $this->_urlRules;
+    }
 
     /**
      * @var array An array containing all components which should be registered for the current module. If
@@ -223,16 +259,29 @@ abstract class Module extends \yii\base\Module
      */
     public function getControllerFiles()
     {
-        try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L235
-            $files = [];
+        $files = [];
+        try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L253
             foreach (FileHelper::findFiles($this->controllerPath) as $file) {
-                $value = ltrim(str_replace([$this->controllerPath, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR);
-                $files[Inflector::camel2id($value)] = $file;
+                $files[$this->fileToName($this->controllerPath, $file)] = $file;
             }
-            return $files;
         } catch (InvalidParamException $e) {
-            return [];
+            try {
+                $staticPath = static::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
+                foreach (FileHelper::findFiles($staticPath) as $file) {
+                    $files[$this->fileToName($staticPath, $file)] = $file;
+                }
+            } catch (InvalidParamException $e) {
+                // catch if folder not found.
+            }
         };
+        
+        return $files;
+    }
+    
+    private function fileToName($prefix, $file)
+    {
+        $value = ltrim(str_replace([$prefix, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR);
+        return Inflector::camel2id($value);
     }
     
     /**
@@ -305,12 +354,17 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
+     * Base translation method which invokes the onLoad function.
      *
-     * @param unknown $category
-     * @param unknown $message
-     * @param array $params
-     * @param unknown $language
-     * @return string
+     * This makes it possible to register module translations without adding the module
+     * to the components list. This is very important for luya extensions.
+     *
+     * @param string $category the message category.
+     * @param string $message the message to be translated.
+     * @param array $params the parameters that will be used to replace the corresponding placeholders in the message.
+     * @param string $language the language code (e.g. `en-US`, `en`). If this is null, the current
+     * [[\yii\base\Application::language|application language]] will be used.
+     * @return string the translated message.
      */
     public static function baseT($category, $message, array $params = [], $language = null)
     {
