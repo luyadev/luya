@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
+- [#1749](https://github.com/luyadev/luya/pull/1749) Ensure bin file app can find autoloader when running from an outside folder.
 - [#1747](https://github.com/luyadev/luya/pull/1747) Allow to override translations files trough application config.
 
 ## 1.0.1 (3. January 2018)
