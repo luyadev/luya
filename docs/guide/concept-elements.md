@@ -55,7 +55,7 @@ When you have a more complex HTML element, the possibility to concate all the HT
 }
 ```
 
-The above example will render the element file, e.g. `myElementButton.php` with the parameters `['href' => $href, 'name' => $name ]`. 
+The above example will render the element file, e.g. `button.php` with the parameters `['href' => $href, 'name' => $name ]`. 
 The view file for the button must be stored in the folder `@app/views/elements` with the name `button.php`. An example content of `@app/views/elements/button.php` could look like this:
 
 ```php
@@ -79,7 +79,7 @@ Of course the above example requires as well that the variables `title`, `descri
 # Automatic styleguide from elements 
 
 LUYA provides a styleguide module which renders all the available elements with example content, so you can share all the elements with other designer to discuss and test changes based on elements instead on a finished web page. 
-This gives you the ability to make more specific changes and test them propperly before the final implementation.
+This gives you the ability to make more specific changes and test them properly before the final implementation.
 
 First adding the LUYA styleguide module to your Composer json:
 
