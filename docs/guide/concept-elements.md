@@ -18,13 +18,13 @@ Now you can create a HTML element component for this.
 
 ## Create HTML element component and use it
 
-To add a new HTML element component, change into your project root folder (@app) and create a PHP file with the name `elements.php`. This file will contain all the element partials for this project. An element is defined by a *name* and a corresponding *closure*. Below, an example setup for the `elements.php` file:
+The default path for the file which contains all configured elements is `@app/views/elements.php` defined by {{luya\web\Element::$configFile}}. An element is defined by a *name* and a corresponding *closure*. Below, an example setup for the `elements.php` file:
 
 ```php
 <?php
 return [
     'button' => function($href, $name) {
-        return '<a class="btn btn-primary" href="'.$href.'">'.$name.'</a>';
+        return "<a class=\"btn btn-primary\" href=\"{$href}\">{$name}</a>";
     },
     'teaserbox' => function($title, $description, $buttonHref, $buttonName) {
         return '<div class="teaser-box"><h1>'.$title.'</h1><p>'.$description.'</p>'.$this->button($buttonHref, $buttonName).'</div>';
