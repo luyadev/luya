@@ -141,6 +141,6 @@ class ModuleController extends \luya\console\Command
             FileHelper::writeFile($fileName, $content);
         }
         
-        return $this->outputSuccess("Module files has been created successfull. Check the README file to understand how to added the module to your config.");
+        return $this->outputSuccess("Module files has been created successfully. Check the README file to understand how to add the module to your config.");
     }
 }
