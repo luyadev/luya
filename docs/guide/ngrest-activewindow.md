@@ -78,7 +78,7 @@ CallbackButtonWidget::widget(['label' => 'My button', 'callback' => 'hello-world
 The callback of this button should look like this:
 
 ```php
-public function callbackHelloWolrd($name)
+public function callbackHelloWorld($name)
 {
     return $this->sendSuccess('Hello ' . $name);
 }
