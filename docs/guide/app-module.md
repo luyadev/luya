@@ -50,13 +50,13 @@ $config = [
 
 In our example we make a *TEAM module* which has a frontend and admin module part. All admin modules have by defintion the suffix **admin**, the naming of the modules would look like this in our case:
 
-+ team *Frontend* `modules/team/Module.php`
-+ teamadmin *Admin* `modules/teamadmin/Module.php`
++ team *Frontend* `modules/frontend/Module.php`
++ teamadmin *Admin* `modules/admin/Module.php`
 
 
 ```php
 <?php
-namespace app\modules\team;
+namespace app\modules\team\frontend;
 
 class Module extends \luya\base\Module
 {
@@ -68,7 +68,7 @@ The *Admin* module `modules/teamadmin/Module.php`:
 
 ```php
 <?php
-namespace app\modules\teamadmin;
+namespace app\modules\team\admin;
 
 class Module extends \luya\admin\base\Module
 {
@@ -128,5 +128,5 @@ Run the `composer dump-autoload` command in order to refresh the autoload sectio
 
 ## Links
 
-+ [Frontend Modul guide](app-module-frontend.md)
-+ [Admin Modul guide](app-admin-module.md)
++ [Frontend Module guide](app-module-frontend.md)
++ [Admin Module guide](app-admin-module.md)
