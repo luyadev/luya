@@ -183,7 +183,7 @@ You can also force the API to always generate a pagination by setting {{luya\adm
 public $pagination = ['pageSize' => 100];
 ```
 
-## API endpoint, menu & privileges
+## API endpoint, menu and privileges
 
 The last part of the NgRest process is to let your application know where your API is located. Add them to the admin UI menu and establish the permission privileges in order to manage how can create, delete, update or see the CRUD.
 
