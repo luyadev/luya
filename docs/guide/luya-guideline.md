@@ -99,6 +99,7 @@ class FooBar
          return self::addGraph((new Article($config)));
      }
 }
+```
 
 ## Versioning
 
