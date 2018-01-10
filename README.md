@@ -24,8 +24,8 @@ We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUY
 
 Other helpfull informations:
 
-+ [Changelog](CHANGELOG.md)
-+ [Version upgrade Breaks](UPGRADE.md)
++ [Changelog](core/CHANGELOG.md)
++ [Version upgrade Breaks](core/UPGRADE.md)
 
 ## Questions and Problems
 
@@ -52,7 +52,7 @@ We are always looking for people who share their thoughts, code and problems wit
 #### Unit Test
 
 1. Create Database (example luya_env_phpunit)
-2. Insert Database dump from `tests/data/sql/1.0.0-RC4.sql`
+2. Insert Database dump from `tests/data/sql/1.0.0.sql`
 3. Rename phpunit.xml.dist to phpunit.xml
 4. Change dsn, username and password in phpunit.xml
 5. Ensure you have installed current composer packages `composer install` with dev packages.
