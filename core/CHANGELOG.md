@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.2 (in progress)
 
+### Changed
+
+- [#1739](https://github.com/luyadev/luya/issues/1739) Removed deprecated getLuyaVersion() method in luya\console\Command class.
+
 ### Fixed
 
 - [#1749](https://github.com/luyadev/luya/pull/1749) Ensure bin file app can find autoloader when running from an outside folder.

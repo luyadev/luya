@@ -122,17 +122,6 @@ abstract class Command extends \luya\console\Controller
     }
     
     /**
-     * Get the current Luya Version
-     *
-     * @return string
-     * @deprecated in version 1.0.2
-     */
-    public function getLuyaVersion()
-    {
-        return Boot::VERSION;
-    }
-    
-    /**
      * Generates the LUYA text which all generator files should include.
      *
      * @param string $command The command which is used like `admin/crud/create``.
