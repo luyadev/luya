@@ -23,14 +23,10 @@ class CommandTest extends LuyaConsoleTestCase
         $this->assertEquals('FooActiveWindow', $cmd->createClassName('FooActiveWindow', 'ActiveWindow'));
         $this->assertEquals('FooActiveWindow', $cmd->createClassName('foo-active-window', 'ActiveWindow'));
         $this->assertEquals('FooActiveWindow', $cmd->createClassName('foo', 'ActiveWindow'));
-        
-        $this->assertEquals(\luya\Boot::VERSION, $cmd->getLuyaVersion());
     }
     
     public function testHelper()
     {
         $cmd = new SubCommand('myid', Yii::$app->getModule('unitmodule'));
-        
-        $this->assertEquals(\luya\Boot::VERSION, $cmd->getLuyaVersion());
     }
 }
