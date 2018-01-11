@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.2 (in progress)
 
-### Changed
+### Changed
 
 - [#1739](https://github.com/luyadev/luya/issues/1739) Removed deprecated getLuyaVersion() method in luya\console\Command class.
 - [#1753](https://github.com/luyadev/luya/issues/1753) Removed version info from generated files trough commands.
