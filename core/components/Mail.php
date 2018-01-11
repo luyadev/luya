@@ -3,7 +3,6 @@
 namespace luya\components;
 
 use Yii;
-use yii\base\Controller;
 use yii\base\Component;
 use luya\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -28,7 +27,7 @@ use PHPMailer\PHPMailer\SMTP;
  * swaks -s HOST -p 587 -ehlo localhost -au AUTH_USER -to TO_ADDRESSE -tls
  * ```
  *
- * @property \PHPMailer $mailer The PHP Mailer object
+ * @property \PHPMailer\PHPMailer\PHPMailer $mailer The PHP Mailer object
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -125,7 +124,7 @@ class Mail extends Component
     /**
      * Getter for the mailer object
      *
-     * @return \PHPMailer
+     * @return \PHPMailer\PHPMailer\PHPMailer
      */
     public function getMailer()
     {
@@ -460,8 +459,9 @@ class Mail extends Component
     }
 
     /**
+     * Test connection for smtp.
+     * 
      * @see https://github.com/PHPMailer/PHPMailer/blob/master/examples/smtp_check.phps
-     *
      * @throws Exception
      */
     public function smtpTest($verbose)
