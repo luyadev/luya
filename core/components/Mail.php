@@ -460,7 +460,7 @@ class Mail extends Component
 
     /**
      * Test connection for smtp.
-     * 
+     *
      * @see https://github.com/PHPMailer/PHPMailer/blob/master/examples/smtp_check.phps
      * @throws Exception
      */
