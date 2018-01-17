@@ -57,3 +57,12 @@ The setup process will ask you for an email and password to store your personal 
 You can now log in into the administration interface, e.g. `http://localhost/luya-kickstarter/public_html/admin` (dependings on the location of the LUYA files).
 
 > Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA setup.
+
+---
+
+### Whats next?
+
++ [Understanding the LUYA Core](concept-core.md)
++ [Create new CMS layout](app-cmslayouts.md)
++ [Create new CMS block](app-blocks.md)
++ [Build navigations / Menus](app-menu.md)
