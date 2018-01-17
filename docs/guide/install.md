@@ -60,7 +60,7 @@ You can now log in into the administration interface, e.g. `http://localhost/luy
 
 ---
 
-### Whats next?
+### Whats next?
 
 + [Understanding the LUYA Core](concept-core.md)
 + [Create new CMS layout](app-cmslayouts.md)
