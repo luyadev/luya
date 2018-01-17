@@ -21,7 +21,7 @@ interface CreativeWorkInterface extends ThingInterface
      * @param Thing $about
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setAbout($about);
+    public function setAbout(Thing $about);
 
     /**
      * @return string

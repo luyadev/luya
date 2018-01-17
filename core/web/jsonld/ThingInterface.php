@@ -74,7 +74,7 @@ interface ThingInterface
      * @param ImageObject|URL $image
      * @return Thing
      */
-    public function setImage($image);
+    public function setImage(ImageObject $image);
 
     /**
      * @return CreativeWork|URL
