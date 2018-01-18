@@ -9,7 +9,7 @@ We will learn how to add and integrate an [ActiveWindow](https://luya.io/guide/n
 As in the previous examples we will use a LUYA code wizard to create a generic base for our ActiveWindow:
 
 ```sh
-./vendor/bin/luya aw/create
+./vendor/bin/luya admin/active-window/create
 ```
 See the GIF below:
 
