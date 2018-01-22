@@ -29,4 +29,10 @@ class InflectorHelperTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('ööüäüü-新新新', Inflector::slug('ÖöÜäüü  新新新 ', '-', true, false));
         $this->assertEquals('ß', Inflector::slug('ß', '-', true, false));
     }
+    
+    public function testSlugWithUnderscoreAndDoubleSpaces()
+    {
+        $this->assertEquals('foo-barbaz', Inflector::slug('Foo  Bar__Baz', '-', true, false));
+        $this->assertEquals('foo-barbaz', Inflector::slug('Foo  Bar__Baz'));
+    }
 }

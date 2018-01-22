@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.3 (in progress)
 
+### Changed
+
+- [#1754](https://github.com/luyadev/luya/issues/1754) Remove underscore when transliteration is disabled.
+
 ## 1.0.2 (17. January 2018)
 
 ### Changed
