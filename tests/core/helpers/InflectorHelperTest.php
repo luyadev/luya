@@ -21,7 +21,7 @@ class InflectorHelperTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('這是-luya', Inflector::slug('這是                  LUYA ', '-', true, false));
         // filter critical string elements whithout inflection
         $this->assertEquals('這是-luya', Inflector::slug('<這是> {LUYA} ', '-', true, false));
-        $this->assertEquals('a1Zあ新~!@#$^&*()_[];\',:?', Inflector::slug('a1Zあ新`~!@#$%^&*()_+[]\;\\\',./{}|:<>?', '-', false, false));
+        $this->assertEquals('a1Zあ新~!@#$^&*()[];\',:?', Inflector::slug('a1Zあ新`~!@#$%^&*()_+[]\;\\\',./{}|:<>?', '-', false, false));
 
         // test lowercase and german special char
         $this->assertEquals('ÖöÜäüü-!?Hallo-hH', Inflector::slug('ÖöÜäüü  !?Hallo hH ', '-', false, false));
