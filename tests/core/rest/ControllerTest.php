@@ -47,4 +47,18 @@ class ControllerTest extends LuyaWebTestCase
         $this->assertSame('firstname', $response[0]['field']);
         $this->arrayHasKey('message', $response[0]);
     }
+    
+    public function testSendArrayError()
+    {
+        $ctrl = new Controller('test', Yii::$app);
+        
+        $this->assertSame([
+            ['field' => 'field1', 'message' => 'message1'],
+            ['field' => 'field2', 'message' => 'message2a'],
+            ['field' => 'field2', 'message' => 'message2b'],
+        ], $ctrl->sendArrayError([
+            'field1' => 'message1',
+            'field2' => ['message2a', 'message2b'],
+        ]));
+    }
 }

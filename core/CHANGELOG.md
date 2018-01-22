@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file. This projec
 
 - [#1754](https://github.com/luyadev/luya/issues/1754) Remove underscore when transliteration is disabled.
 
+### Added
+
+- Added new sendArrayError() method to luya\rest\Controller. Moved helper classes into RestBehvaiorsTrait as they can be used in both situations.
+
 ## 1.0.2 (17. January 2018)
 
 ### Changed

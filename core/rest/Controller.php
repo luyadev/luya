@@ -2,10 +2,7 @@
 
 namespace luya\rest;
 
-use Yii;
-use yii\base\Model;
 use luya\traits\RestBehaviorsTrait;
-use yii\base\InvalidParamException;
 
 /**
  * Basic Rest Controller.
@@ -47,49 +44,4 @@ use yii\base\InvalidParamException;
 class Controller extends \yii\rest\Controller
 {
     use RestBehaviorsTrait;
-    
-    /**
-     * Send Model errors with correct headers.
-     *
-     * Helper method to correctly send model errors with the correct response headers.
-     *
-     * Example return value:
-     *
-     * ```php
-     * Array
-     * (
-     *     [0] => Array
-     *         (
-     *             [field] => firstname
-     *             [message] => Firstname cannot be blank.
-     *         )
-     *     [1] => Array
-     *         (
-     *             [field] => email
-     *             [message] => Email cannot be blank.
-     *         )
-     * )
-     * ```
-     *
-     * @param \yii\base\Model $model The model to find the first error.
-     * @throws \yii\base\InvalidParamException
-     * @return array If the model has errors InvalidParamException will be thrown
-     */
-    public function sendModelError(Model $model)
-    {
-        if (!$model->hasErrors()) {
-            throw new InvalidParamException('The model as thrown an uknown Error.');
-        }
-
-        Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');
-        $result = [];
-        foreach ($model->getFirstErrors() as $name => $message) {
-            $result[] = [
-                'field' => $name,
-                'message' => $message,
-            ];
-        }
-
-        return $result;
-    }
 }
