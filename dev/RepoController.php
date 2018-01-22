@@ -337,15 +337,18 @@ EOT;
     private function rebaseRepo($repo, $repoFileSystemPath)
     {
         $wrapper = new GitWrapper();
-         
-        $wrapper->git('checkout master', $repoFileSystemPath);
-        $this->outputInfo("{$repo}: checkout master ✔");
-         
-        $wrapper->git('fetch upstream', $repoFileSystemPath);
-        $this->outputInfo("{$repo}: fetch upstream ✔");
-         
-        $wrapper->git('rebase upstream/master master', $repoFileSystemPath);
-        $this->outputInfo("{$repo}: rebase master ✔");
+        try {
+            $wrapper->git('checkout master', $repoFileSystemPath);
+            $this->outputInfo("{$repo}: checkout master ✔");
+             
+            $wrapper->git('fetch upstream', $repoFileSystemPath);
+            $this->outputInfo("{$repo}: fetch upstream ✔");
+             
+            $wrapper->git('rebase upstream/master master', $repoFileSystemPath);
+            $this->outputInfo("{$repo}: rebase master ✔");
+        } catch (\Exception $err) {
+            $this->outputError("{$repo}: error while updating ({$repoFileSystemPath}) with message: " . $err->getMessage());
+        }
     }
     
     /**
