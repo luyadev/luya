@@ -12,7 +12,7 @@ The plugins listed below can be configured but make sure your are familiar with 
 |textArray            |{{\luya\admin\ngrest\plugins\TextArray}}|array        |Multiple input type text fields.
 |textarea              |{{\luya\admin\ngrest\plugins\Textarea}}|string        |Textarea input type field.
 |password            |{{\luya\admin\ngrest\plugins\Password}}|string        |Input type password field.
-|[selectArray](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectArray}}|string    |Select dropdown with options from input configuration.
+|[selectArray](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectArray}}|string    |Select via modal selection with options from input configuration.
 |[selectModel](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectModel}}|string    |Select dropdown with options given from an Active Record Model class.
 |[selectRelationActiveQuery](ngrest-plugin-select.md)|{{luya\admin\ngrest\plugins\SelectRelationActiveQuery}}|string |Select dropdown based on an ActiveQuery relation definition.
 |toggleStatus       |{{\luya\admin\ngrest\plugins\ToggleStatus}}|integer/string    |Create checkbox where you can toggle on or off.
