@@ -2,6 +2,8 @@
 
 namespace luya\helpers;
 
+use yii\helpers\BaseInflector;
+
 /**
  * Helper methods which can be used for string transformations
  *
@@ -12,7 +14,7 @@ namespace luya\helpers;
  * @author Martin Petrasch <martin.petrasch@zephir.ch>
  * @since 1.0.0
  */
-class Inflector extends \yii\helpers\BaseInflector
+class Inflector extends BaseInflector
 {
     /**
      * From yii/helpers/BaseInflector:

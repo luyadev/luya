@@ -2,6 +2,8 @@
 
 namespace luya\helpers;
 
+use yii\helpers\BaseStringHelper;
+
 /**
  * Helper methods when dealing with Strings.
  *
@@ -17,7 +19,7 @@ namespace luya\helpers;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class StringHelper extends \yii\helpers\BaseStringHelper
+class StringHelper extends BaseStringHelper
 {
     /**
      * TypeCast a string to its specific types.

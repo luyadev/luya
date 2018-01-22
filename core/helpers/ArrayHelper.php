@@ -2,6 +2,8 @@
 
 namespace luya\helpers;
 
+use yii\helpers\BaseArrayHelper;
+
 /**
  * Helper methods when dealing with Arrays.
  *
@@ -18,7 +20,7 @@ namespace luya\helpers;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ArrayHelper extends \yii\helpers\BaseArrayHelper
+class ArrayHelper extends BaseArrayHelper
 {
     /**
      * Create an object from an array.
