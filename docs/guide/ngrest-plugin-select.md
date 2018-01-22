@@ -2,7 +2,7 @@
 
 The {{luya\admin\ngrest\plugins\SelectArray}} and {{luya\admin\ngrest\plugins\SelectModel}} plugins generate a dropdown selection list from an array or a database table.
 
-### Select from an Array
+## Select from an Array
 
 Create a dropdown selection based on an associated array:
 
@@ -16,7 +16,7 @@ public function ngrestAttributeTypes()
 }
 ```
 
-### Select from a model
+## Select from a model
 
 Create a dropdown selection based on a {{yii\db\ActiveRecord}} model class:
 
