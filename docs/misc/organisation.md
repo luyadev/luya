@@ -25,7 +25,17 @@
 + Muss commit´s haben
 + Qualität von PR´s
 
-## 5) Mitglieder Rollen
+## 5) Mitglieder
+
+|Github|Name|Role
+|------|----|----
+|[nadar](https://github.com/nadar)|Basil Suter|Project Lead
+|[TheMaaarc](https://github.com/TheMaaarc)|Marc Stampfli|Core Member
+|[dev7ch](https://github.com/dev7ch)|Silvan Hahn|Maintainer
+|[rolandschaub](https://github.com/rolandschaub)|Roland Schaub|Maintainer
+|[martinpetrasch](https://github.com/martinpetrasch)|Martin Petrasch|Extension Manager
+
+## 6) Rollen
 
 |Rolle|Beschreibung|Planung/Strategy|Reaction** (48h)|Voting|Commit Access/PR
 |-----|------------|----------------|--------------|------|----------------
@@ -38,7 +48,7 @@
 * Only for the given extensions.
 ** Mentiones, Comments, PR, Assignements, Issues, PRs, Review
 
-## 6) Rechte und Möglichkeiten der Mitglieder
+## 7) Rechte und Möglichkeiten der Mitglieder
 
 + Abstimmungen
   + Das issue/PR muss das label “requires decision” haben.
