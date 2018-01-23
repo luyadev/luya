@@ -12,25 +12,25 @@ namespace luya\web\jsonld;
 interface LiveBlogPostingInterface extends BlogPostingInterface
 {
     /**
-     * @return DateTime
+     * @return string
      */
     public function getCoverageEndTime();
     /**
-     * @param DateTime $coverageEndTime
+     * @param DateTimeValue $coverageEndTime
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */
-    public function setCoverageEndTime($coverageEndTime);
+    public function setCoverageEndTime(DateTimeValue $coverageEndTime);
 
     /**
-     * @return DateTime
+     * @return string
      */
     public function getCoverageStartTime();
 
     /**
-     * @param DateTime $coverageStartTime
+     * @param DateTimeValue $coverageStartTime
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */
-    public function setCoverageStartTime($coverageStartTime);
+    public function setCoverageStartTime(DateTimeValue $coverageStartTime);
 
     /**
      * @return BlogPosting
@@ -41,5 +41,5 @@ interface LiveBlogPostingInterface extends BlogPostingInterface
      * @param BlogPosting $liveBlogUpdate
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */
-    public function setLiveBlogUpdate($liveBlogUpdate);
+    public function setLiveBlogUpdate(BlogPosting $liveBlogUpdate);
 }

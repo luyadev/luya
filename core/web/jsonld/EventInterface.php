@@ -19,7 +19,7 @@ interface EventInterface
      * @param Thing $about
      * @return EventTrait
      */
-    public function setAbout($about);
+    public function setAbout(Thing $about);
 
     /**
      * @return Person
@@ -30,18 +30,7 @@ interface EventInterface
      * @param Person $actor
      * @return EventTrait
      */
-    public function setActor($actor);
-
-    /**
-     * @return AggregateRating
-     */
-    public function getAggregateRating();
-
-    /**
-     * @param AggregateRating $aggregateRating
-     * @return EventTrait
-     */
-    public function setAggregateRating($aggregateRating);
+    public function setActor(Person $actor);
 
     /**
      * @return Organization|Person
@@ -53,17 +42,6 @@ interface EventInterface
      * @return EventTrait
      */
     public function setAttendee($attendee);
-
-    /**
-     * @return Audience
-     */
-    public function getAudience();
-
-    /**
-     * @param Audience $audience
-     * @return EventTrait
-     */
-    public function setAudience($audience);
 
     /**
      * @return Organization|Person
@@ -96,51 +74,40 @@ interface EventInterface
      * @param Person $director
      * @return EventTrait
      */
-    public function setDirector($director);
+    public function setDirector(Person $director);
 
     /**
-     * @return DateTime
+     * @return string
      */
     public function getDoorTime();
 
     /**
-     * @param DateTime $doorTime
+     * @param DateTimeValue $doorTime
      * @return EventTrait
      */
-    public function setDoorTime($doorTime);
+    public function setDoorTime(DateTimeValue $doorTime);
 
     /**
-     * @return Duration
+     * @return string
      */
     public function getDuration();
 
     /**
-     * @param Duration $duration
+     * @param DurationValue $duration
      * @return EventTrait
      */
-    public function setDuration($duration);
+    public function setDuration(DurationValue $duration);
 
     /**
-     * @return Date|DateTime
+     * @return string
      */
     public function getEndDate();
 
     /**
-     * @param Date|DateTime $endDate
+     * @param DateTimeValue $endDate
      * @return EventTrait
      */
-    public function setEndDate($endDate);
-
-    /**
-     * @return EventStatusType
-     */
-    public function getEventStatus();
-
-    /**
-     * @param EventStatusType $eventStatus
-     * @return EventTrait
-     */
-    public function setEventStatus($eventStatus);
+    public function setEndDate(DateTimeValue $endDate);
 
     /**
      * @return Organization|Person
@@ -197,17 +164,6 @@ interface EventInterface
     public function setMaximumAttendeeCapacity($maximumAttendeeCapacity);
 
     /**
-     * @return Offer
-     */
-    public function getOffers();
-
-    /**
-     * @param Offer $offers
-     * @return EventTrait
-     */
-    public function setOffers($offers);
-
-    /**
      * @return Organization|Person
      */
     public function getOrganizer();
@@ -230,15 +186,15 @@ interface EventInterface
     public function setPerformer($performer);
 
     /**
-     * @return Date
+     * @return string
      */
     public function getPreviousStartDate();
 
     /**
-     * @param Date $previousStartDate
+     * @param DateValue $previousStartDate
      * @return EventTrait
      */
-    public function setPreviousStartDate($previousStartDate);
+    public function setPreviousStartDate(DateValue $previousStartDate);
 
     /**
      * @return CreativeWork
@@ -249,7 +205,7 @@ interface EventInterface
      * @param CreativeWork $recordedIn
      * @return EventTrait
      */
-    public function setRecordedIn($recordedIn);
+    public function setRecordedIn(CreativeWork $recordedIn);
 
     /**
      * @return int
@@ -263,17 +219,6 @@ interface EventInterface
     public function setRemainingAttendeeCapacity($remainingAttendeeCapacity);
 
     /**
-     * @return Review
-     */
-    public function getReview();
-
-    /**
-     * @param Review $review
-     * @return EventTrait
-     */
-    public function setReview($review);
-
-    /**
      * @return Organization|Person
      */
     public function getSponsor();
@@ -285,15 +230,15 @@ interface EventInterface
     public function setSponsor($sponsor);
 
     /**
-     * @return Date|DateTime
+     * @return string
      */
     public function getStartDate();
 
     /**
-     * @param Date|DateTime $startDate
+     * @param DateTimeValue $startDate
      * @return EventTrait
      */
-    public function setStartDate($startDate);
+    public function setStartDate(DateTimeValue $startDate);
 
     /**
      * @return Event
@@ -303,7 +248,7 @@ interface EventInterface
     /**
      * @param Event $subEvent
      */
-    public function setSubEvent($subEvent);
+    public function setSubEvent(Event $subEvent);
 
     /**
      * @return Event
@@ -314,7 +259,7 @@ interface EventInterface
      * @param Event $superEvent
      * @return EventTrait
      */
-    public function setSuperEvent($superEvent);
+    public function setSuperEvent(Event $superEvent);
 
     /**
      * @return Organization|Person
@@ -347,7 +292,7 @@ interface EventInterface
      * @param CreativeWork $workFeatured
      * @return EventTrait
      */
-    public function setWorkFeatured($workFeatured);
+    public function setWorkFeatured(CreativeWork $workFeatured);
 
     /**
      * @return CreativeWork
@@ -358,5 +303,5 @@ interface EventInterface
      * @param CreativeWork $workPerformed
      * @return EventTrait
      */
-    public function setWorkPerformed($workPerformed);
+    public function setWorkPerformed(CreativeWork $workPerformed);
 }

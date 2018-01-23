@@ -1,6 +1,6 @@
 <?php
 
-use luya\web\jsonld\BaseThing;
+namespace luya\web\jsonld;
 
 /**
  * http://schema.org/PropertyValue
@@ -8,8 +8,10 @@ use luya\web\jsonld\BaseThing;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
-class PropertyValue extends BaseThing
+class PropertyValue extends BaseThing implements PropertyValueInterface
 {
+    use PropertyValueTrait;
+    
 	/**
 	 * @inheritdoc
 	 */
@@ -17,6 +19,4 @@ class PropertyValue extends BaseThing
 	{
 		return 'PropertyValue';
 	}
-	
-	use PropertyValueTrait;
 }

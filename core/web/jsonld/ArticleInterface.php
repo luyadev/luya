@@ -62,15 +62,6 @@ interface ArticleInterface extends CreativeWorkInterface
      */
     public function setPagination($pagination);
 
-    /**
-     * @return SpeakableSpecification|URL
-     */
-    public function getSpeakable();
-
-    /**
-     * @param SpeakableSpecification|URL $speakable
-     */
-    public function setSpeakable($speakable);
 
     /**
      * @return int

@@ -1,8 +1,9 @@
 <?php
 
-use luya\web\jsonld\ThingInterface;
+namespace luya\web\jsonld;
 
 /**
+ * http://schema.org/PropertyValue
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3

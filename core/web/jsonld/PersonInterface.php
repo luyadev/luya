@@ -24,15 +24,15 @@ interface PersonInterface
     public function setAdditionalName($additionalName);
 
     /**
-     * @return PostalAddress|string
+     * @return PostalAddress
      */
     public function getAddress();
 
     /**
-     * @param PostalAddress|$address
+     * @param PostalAddress $address
      * @return PersonTrait
      */
-    public function setAddress($address);
+    public function setAddress(PostalAddress $address);
 
     /**
      * @return Organization
@@ -46,17 +46,6 @@ interface PersonInterface
     public function setAffiliation(Organization $affiliation);
 
     /**
-     * @return EducationalOrganization|Organization
-     */
-    public function getAlumniOf();
-
-    /**
-     * @param EducationalOrganization|Organization $alumniOf
-     * @return PersonTrait
-     */
-    public function setAlumniOf($alumniOf);
-
-    /**
      * @return string
      */
     public function getAward();
@@ -68,15 +57,15 @@ interface PersonInterface
     public function setAward($award);
 
     /**
-     * @return Date
+     * @return string
      */
     public function getBirthDate();
 
     /**
-     * @param Date $birthDate
+     * @param DateValue $birthDate
      * @return PersonTrait
      */
-    public function setBirthDate($birthDate);
+    public function setBirthDate(DateValue $birthDate);
 
     /**
      * @return Place
@@ -130,18 +119,18 @@ interface PersonInterface
      * @param ContactPoint $contactPoint
      * @return PersonTrait
      */
-    public function setContactPoint($contactPoint);
+    public function setContactPoint(ContactPoint $contactPoint);
 
     /**
-     * @return Date
+     * @return DateValue
      */
     public function getDeathDate();
 
     /**
-     * @param Date $deathDate
+     * @param DateValue $deathDate
      * @return PersonTrait
      */
-    public function setDeathDate($deathDate);
+    public function setDeathDate(DateValue $deathDate);
 
     /**
      * @return Place
@@ -152,7 +141,7 @@ interface PersonInterface
      * @param Place $deathPlace
      * @return PersonTrait
      */
-    public function setDeathPlace($deathPlace);
+    public function setDeathPlace(Place $deathPlace);
 
     /**
      * @return string
@@ -163,7 +152,7 @@ interface PersonInterface
      * @param $duns
      * @return PersonTrait
      */
-    public function setDuns($duns);
+    public function setDuns(Person $duns);
 
     /**
      * @return string
@@ -253,27 +242,6 @@ interface PersonInterface
      */
     public function setGlobalLocationNumber($globalLocationNumber);
 
-    /**
-     * @return Occupation
-     */
-    public function getHasOccupation();
-
-    /**
-     * @param Occupation $hasOccupation
-     * @return PersonTrait
-     */
-    public function setHasOccupation($hasOccupation);
-
-    /**
-     * @return OfferCatalog
-     */
-    public function getHasOfferCatalog();
-
-    /**
-     * @param OfferCatalog $hasOfferCatalog
-     * @return PersonTrait
-     */
-    public function setHasOfferCatalog($hasOfferCatalog);
 
     /**
      * @return Place
@@ -358,6 +326,7 @@ interface PersonInterface
      * @return PersonTrait
      */
     public function setKnows(Person $knows);
+    
     /**
      * @return Offer
      */
@@ -367,7 +336,7 @@ interface PersonInterface
      * @param Offer $makesOffer
      * @return PersonTrait
      */
-    public function setMakesOffer($makesOffer);
+    public function setMakesOffer(Offer $makesOffer);
 
     /**
      * @return Organization|ProgramMembership
@@ -399,29 +368,7 @@ interface PersonInterface
      * @param Country $nationality
      * @return PersonTrait
      */
-    public function setNationality($nationality);
-    /**
-     * @return MonetaryAmount|PriceSpecification
-     */
-    public function getNetWorth();
-
-    /**
-     * @param MonetaryAmount|PriceSpecification $netWorth
-     * @return PersonTrait
-     */
-    public function setNetWorth($netWorth);
-
-    /**
-     * @return OwnershipInfo|Product
-     */
-    public function getOwns();
-
-    /**
-     * @param OwnershipInfo|Product $owns
-     * @return PersonTrait
-     */
-    public function setOwns($owns);
-
+    public function setNationality(Country $nationality);
     /**
      * @return Person
      */
@@ -465,16 +412,6 @@ interface PersonInterface
      */
     public function setRelatedTo(Person $relatedTo);
 
-    /**
-     * @return Demand
-     */
-    public function getSeeks();
-
-    /**
-     * @param Demand $seeks
-     * @return PersonTrait
-     */
-    public function setSeeks($seeks);
 
     /**
      * @return Person
@@ -541,17 +478,6 @@ interface PersonInterface
      * @return PersonTrait
      */
     public function setVatID($vatID);
-
-    /**
-     * @return QuantitativeValue
-     */
-    public function getWeight();
-
-    /**
-     * @param QuantitativeValue $weight
-     * @return PersonTrait
-     */
-    public function setWeight($weight);
 
     /**
      * @return ContactPoint|Place

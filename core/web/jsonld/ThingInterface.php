@@ -11,15 +11,15 @@ namespace luya\web\jsonld;
 interface ThingInterface
 {
     /**
-     * @return URL
+     * @return string
      */
     public function getAdditionalType();
 
     /**
-     * @param URL $additionalType
+     * @param UrlValue $additionalType
      * @return Thing
      */
-    public function setAdditionalType($additionalType);
+    public function setAdditionalType(UrlValue $additionalType);
 
     /**
      * @return string
@@ -55,37 +55,37 @@ interface ThingInterface
     public function setDisambiguatingDescription($disambiguatingDescription);
 
     /**
-     * @return PropertyValue|URL|string
+     * @return PropertyValue
      */
     public function getIdentifier();
 
     /**
-     * @param PropertyValue|URL|string $identifier
+     * @param PropertyValue
      * @return Thing
      */
-    public function setIdentifier($identifier);
+    public function setIdentifier(PropertyValue $identifier);
 
     /**
-     * @return ImageObject|URL
+     * @return ImageObject
      */
     public function getImage();
 
     /**
-     * @param ImageObject|URL $image
+     * @param ImageObject $image
      * @return Thing
      */
     public function setImage(ImageObject $image);
 
     /**
-     * @return CreativeWork|URL
+     * @return CreativeWork
      */
     public function getMainEntityOfPage();
 
     /**
-     * @param CreativeWork|URL $mainEntityOfPage
+     * @param CreativeWork $mainEntityOfPage
      * @return Thing
      */
-    public function setMainEntityOfPage($mainEntityOfPage);
+    public function setMainEntityOfPage(CreativeWork $mainEntityOfPage);
 
     /**
      * @return string
@@ -99,26 +99,15 @@ interface ThingInterface
     public function setName($name);
 
     /**
-     * @return Action
-     */
-    public function getPotentialAction();
-
-    /**
-     * @param Action $potentialAction
-     * @return Thing
-     */
-    public function setPotentialAction($potentialAction);
-
-    /**
-     * @return URL
+     * @return string
      */
     public function getSameAs();
 
     /**
-     * @param URL $sameAs
+     * @param UrlValue $sameAs
      * @return Thing
      */
-    public function setSameAs($sameAs);
+    public function setSameAs(UrlValue $sameAs);
 
     /**
      * @return CreativeWork|Event
@@ -132,13 +121,13 @@ interface ThingInterface
     public function setSubjectOf($subjectOf);
 
     /**
-     * @return URL
+     * @return string
      */
     public function getUrl();
 
     /**
-     * @param URL $url
+     * @param UrlValue $url
      * @return Thing
      */
-    public function setUrl($url);
+    public function setUrl(UrlValue $url);
 }

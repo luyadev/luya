@@ -16,7 +16,7 @@ trait LiveBlogPostingTrait
     private $_coverageEndTime;
 
     /**
-     * @return DateTime
+     * @return string
      */
     public function getCoverageEndTime()
     {
@@ -26,19 +26,19 @@ trait LiveBlogPostingTrait
     /**
      * The time when the live blog will stop covering the Event. Note that coverage may continue after the Event concludes.
      *
-     * @param DateTime $coverageEndTime
+     * @param DateTimeValue $coverageEndTime
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */
-    public function setCoverageEndTime($coverageEndTime)
+    public function setCoverageEndTime(DateTimeValue $coverageEndTime)
     {
-        $this->_coverageEndTime = $coverageEndTime;
+        $this->_coverageEndTime = $coverageEndTime->getValue();
         return $this;
     }
 
     private $_coverageStartTime;
 
     /**
-     * @return DateTime
+     * @return string
      */
     public function getCoverageStartTime()
     {
@@ -49,12 +49,12 @@ trait LiveBlogPostingTrait
      * The time when the live blog will begin covering the Event. Note that coverage may begin before the Event's start time.
      * The LiveBlogPosting may also be created before coverage begins.
      *
-     * @param DateTime $coverageStartTime
+     * @param DateTimeValue $coverageStartTime
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */
-    public function setCoverageStartTime($coverageStartTime)
+    public function setCoverageStartTime(DateTimeValue $coverageStartTime)
     {
-        $this->_coverageStartTime = $coverageStartTime;
+        $this->_coverageStartTime = $coverageStartTime->getValue();
         return $this;
     }
 
@@ -74,7 +74,7 @@ trait LiveBlogPostingTrait
      * @param BlogPosting $liveBlogUpdate
      * @return LiveBlogPosting|LiveBlogPostingTrait
      */
-    public function setLiveBlogUpdate($liveBlogUpdate)
+    public function setLiveBlogUpdate(BlogPosting $liveBlogUpdate)
     {
         $this->_liveBlogUpdate = $liveBlogUpdate;
         return $this;

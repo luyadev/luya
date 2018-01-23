@@ -13,7 +13,7 @@ trait ThingTrait
     private $_additionalType;
 
     /**
-     * @return URL
+     * @return string
      */
     public function getAdditionalType()
     {
@@ -27,9 +27,9 @@ trait ThingTrait
      * @param string $additionalType
      * @return Thing
      */
-    public function setAdditionalType($additionalType)
+    public function setAdditionalType(UrlValue $additionalType)
     {
-        $this->_additionalType = $additionalType;
+        $this->_additionalType = $additionalType->getValue();
         return $this;
     }
 
@@ -103,7 +103,7 @@ trait ThingTrait
     private $_identifier;
 
     /**
-     * @return PropertyValue|URL|string
+     * @return PropertyValue
      */
     public function getIdentifier()
     {
@@ -113,10 +113,10 @@ trait ThingTrait
     /**
      * The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.
      *
-     * @param PropertyValue|URL|string $identifier
+     * @param PropertyValue $identifier
      * @return Thing
      */
-    public function setIdentifier($identifier)
+    public function setIdentifier(PropertyValue $identifier)
     {
         $this->_identifier = $identifier;
         return $this;
@@ -125,7 +125,7 @@ trait ThingTrait
     private $_image;
 
     /**
-     * @return ImageObject|URL
+     * @return ImageObject
      */
     public function getImage()
     {
@@ -136,10 +136,10 @@ trait ThingTrait
      * An image of the item.
      * This can be a URL or a fully described ImageObject.
      *
-     * @param ImageObject|URL $image
+     * @param ImageObject $image
      * @return Thing
      */
-    public function setImage($image)
+    public function setImage(ImageObject $image)
     {
         $this->_image = $image;
         return $this;
@@ -148,7 +148,7 @@ trait ThingTrait
     private $_mainEntityOfPage;
 
     /**
-     * @return CreativeWork|URL
+     * @return CreativeWork
      */
     public function getMainEntityOfPage()
     {
@@ -159,10 +159,10 @@ trait ThingTrait
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described.
      * Inverse property: mainEntity.
      *
-     * @param CreativeWork|URL $mainEntityOfPage
+     * @param CreativeWork $mainEntityOfPage
      * @return Thing
      */
-    public function setMainEntityOfPage($mainEntityOfPage)
+    public function setMainEntityOfPage(CreativeWork $mainEntityOfPage)
     {
         $this->_mainEntityOfPage = $mainEntityOfPage;
         return $this;
@@ -190,32 +190,10 @@ trait ThingTrait
         return $this;
     }
 
-    private $_potentialAction;
-
-    /**
-     * @return Action
-     */
-    public function getPotentialAction()
-    {
-        return $this->_potentialAction;
-    }
-
-    /**
-     * 	Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     *
-     * @param Action $potentialAction
-     * @return Thing
-     */
-    public function setPotentialAction($potentialAction)
-    {
-        $this->_potentialAction = $potentialAction;
-        return $this;
-    }
-
     private $_sameAs;
 
     /**
-     * @return URL
+     * @return string
      */
     public function getSameAs()
     {
@@ -226,12 +204,12 @@ trait ThingTrait
      * URL of a reference Web page that unambiguously indicates the item's identity.
      * E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
      *
-     * @param URL $sameAs
+     * @param UrlValue $sameAs
      * @return Thing
      */
-    public function setSameAs($sameAs)
+    public function setSameAs(UrlValue $sameAs)
     {
-        $this->_sameAs = $sameAs;
+        $this->_sameAs = $sameAs->getValue();
         return $this;
     }
 
@@ -261,7 +239,7 @@ trait ThingTrait
     private $_url;
 
     /**
-     * @return URL
+     * @return string
      */
     public function getUrl()
     {
@@ -271,12 +249,12 @@ trait ThingTrait
     /**
      * URL of the item.
      *
-     * @param URL $url
+     * @param UrlValue $url
      * @return Thing
      */
-    public function setUrl($url)
+    public function setUrl(UrlValue $url)
     {
-        $this->_url = $url;
+        $this->_url = $url->getValue();
         return $this;
     }
 }

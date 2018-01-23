@@ -32,7 +32,7 @@ trait PlaceTrait
      * @param PropertyValue $additionalProperty
      * @return PlaceTrait
      */
-    public function setAdditionalProperty($additionalProperty)
+    public function setAdditionalProperty(PropertyValue $additionalProperty)
     {
         $this->_additionalProperty = $additionalProperty;
         return $this;
@@ -54,7 +54,7 @@ trait PlaceTrait
      * @param PostalAddress|string $address
      * @return PlaceTrait
      */
-    public function setAddress($address)
+    public function setAddress(PostalAddress $address)
     {
         $this->_address = $address;
         return $this;
@@ -76,7 +76,7 @@ trait PlaceTrait
      * @param AggregateRating $aggregateRating
      * @return PlaceTrait
      */
-    public function setAggregateRating($aggregateRating)
+    public function setAggregateRating(AggregateRating $aggregateRating)
     {
         $this->_aggregateRating = $aggregateRating;
         return $this;
@@ -149,7 +149,7 @@ trait PlaceTrait
      * @param Place $containedInPlace
      * @return PlaceTrait
      */
-    public function setContainedInPlace($containedInPlace)
+    public function setContainedInPlace(Place $containedInPlace)
     {
         $this->_containedInPlace = $containedInPlace;
         return $this;
@@ -172,7 +172,7 @@ trait PlaceTrait
      * @param Place $containsPlace
      * @return PlaceTrait
      */
-    public function setContainsPlace($containsPlace)
+    public function setContainsPlace(Place $containsPlace)
     {
         $this->_containsPlace = $containsPlace;
         return $this;
@@ -195,7 +195,7 @@ trait PlaceTrait
      * @param Event $event
      * @return PlaceTrait
      */
-    public function setEvent($event)
+    public function setEvent(Event $event)
     {
         $this->_event = $event;
         return $this;
@@ -575,7 +575,7 @@ trait PlaceTrait
     private $_logo;
 
     /**
-     * @return ImageObject|URL
+     * @return ImageObject
      */
     public function getLogo()
     {
@@ -585,10 +585,10 @@ trait PlaceTrait
     /**
      * An associated logo.
      *
-     * @param ImageObject|URL $logo
+     * @param ImageObject $logo
      * @return PlaceTrait
      */
-    public function setLogo($logo)
+    public function setLogo(ImageObject $logo)
     {
         $this->_logo = $logo;
         return $this;

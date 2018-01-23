@@ -31,7 +31,7 @@ trait CreativeWorkTrait
      * @param Thing $about
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setAbout($about)
+    public function setAbout(Thing $about)
     {
         $this->_about = $about;
         return $this;
@@ -220,31 +220,9 @@ trait CreativeWorkTrait
      * @param Person $accountablePerson
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setAccountablePerson($accountablePerson)
+    public function setAccountablePerson(Person $accountablePerson)
     {
         $this->_accountablePerson = $accountablePerson;
-        return $this;
-    }
-
-    private $_aggregateRating;
-
-    /**
-     * @return AggregateRating
-     */
-    public function getAggregateRating()
-    {
-        return $this->_aggregateRating;
-    }
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the item.
-     *
-     * @param AggregateRating $aggregateRating
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setAggregateRating($aggregateRating)
-    {
-        $this->_aggregateRating = $aggregateRating;
         return $this;
     }
 
@@ -286,53 +264,9 @@ trait CreativeWorkTrait
      * @param MediaObject $associatedMedia
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setAssociatedMedia($associatedMedia)
+    public function setAssociatedMedia(MediaObject $associatedMedia)
     {
         $this->_associatedMedia = $associatedMedia;
-        return $this;
-    }
-
-    private $_audience;
-
-    /**
-     * @return Audience
-     */
-    public function getAudience()
-    {
-        return $this->_audience;
-    }
-
-    /**
-     * An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.
-     *
-     * @param Audience $audience
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setAudience($audience)
-    {
-        $this->_audience = $audience;
-        return $this;
-    }
-
-    private $_audio;
-
-    /**
-     * @return AudioObject
-     */
-    public function getAudio()
-    {
-        return $this->_audio;
-    }
-
-    /**
-     * 	An embedded audio object.
-     *
-     * @param AudioObject $audio
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setAudio($audio)
-    {
-        $this->_audio = $audio;
         return $this;
     }
 
@@ -398,7 +332,7 @@ trait CreativeWorkTrait
      * @param Person $character
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setCharacter($character)
+    public function setCharacter(Person $character)
     {
         $this->_character = $character;
         return $this;
@@ -407,7 +341,7 @@ trait CreativeWorkTrait
     private $_citation;
 
     /**
-     * @return CreativeWork|string
+     * @return CreativeWork
      */
     public function getCitation()
     {
@@ -417,10 +351,10 @@ trait CreativeWorkTrait
     /**
      * A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.
      *
-     * @param CreativeWork|string $citation
+     * @param CreativeWork $citation
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setCitation($citation)
+    public function setCitation(CreativeWork $citation)
     {
         $this->_citation = $citation;
         return $this;
@@ -442,7 +376,7 @@ trait CreativeWorkTrait
      * @param Comment $comment
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setComment($comment)
+    public function setComment(Comment $comment)
     {
         $this->_comment = $comment;
         return $this;
@@ -487,7 +421,7 @@ trait CreativeWorkTrait
      * @param Place $contentLocation
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setContentLocation($contentLocation)
+    public function setContentLocation(Place $contentLocation)
     {
         $this->_contentLocation = $contentLocation;
         return $this;
@@ -518,7 +452,7 @@ trait CreativeWorkTrait
     private $_contentReferenceTime;
 
     /**
-     * @return DateTime
+     * @return string
      */
     public function getContentReferenceTime()
     {
@@ -529,12 +463,12 @@ trait CreativeWorkTrait
      * The specific time described by a creative work, for works (e.g. articles, video objects etc.) that emphasise
      * a particular moment within an Event.
      *
-     * @param DateTime $contentReferenceTime
+     * @param DateTimeValue $contentReferenceTime
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setContentReferenceTime($contentReferenceTime)
+    public function setContentReferenceTime(DateTimeValue $contentReferenceTime)
     {
-        $this->_contentReferenceTime = $contentReferenceTime;
+        $this->_contentReferenceTime = $contentReferenceTime->getValue();
         return $this;
     }
 
@@ -629,7 +563,7 @@ trait CreativeWorkTrait
     private $_dateCreated;
 
     /**
-     * @return Date|DateTime
+     * @return string
      */
     public function getDateCreated()
     {
@@ -639,19 +573,19 @@ trait CreativeWorkTrait
     /**
      * The date on which the CreativeWork was created or the item was added to a DataFeed.
      *
-     * @param Date|DateTime $dateCreated
+     * @param DateTimeValue $dateCreated
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setDateCreated($dateCreated)
+    public function setDateCreated(DateTimeValue $dateCreated)
     {
-        $this->_dateCreated = $dateCreated;
+        $this->_dateCreated = $dateCreated->getValue();
         return $this;
     }
 
     private $_dateModified;
 
     /**
-     * @return Date|DateTime
+     * @return string
      */
     public function getDateModified()
     {
@@ -662,19 +596,19 @@ trait CreativeWorkTrait
      * The date on which the CreativeWork was most recently modified
      * or when the item's entry was modified within a DataFeed.
      *
-     * @param Date|DateTime $dateModified
+     * @param DateTimeValue $dateModified
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setDateModified($dateModified)
+    public function setDateModified(DateTimeValue $dateModified)
     {
-        $this->_dateModified = $dateModified;
+        $this->_dateModified = $dateModified->getValue();
         return $this;
     }
 
     private $_datePublished;
 
     /**
-     * @return Date
+     * @return string
      */
     public function getDatePublished()
     {
@@ -684,19 +618,19 @@ trait CreativeWorkTrait
     /**
      * Date of first broadcast/publication.
      *
-     * @param Date $datePublished
+     * @param DateTimeValue $datePublished
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setDatePublished($datePublished)
+    public function setDatePublished(DateTimeValue $datePublished)
     {
-        $this->_datePublished = $datePublished;
+        $this->_datePublished = $datePublished->getValue();
         return $this;
     }
 
     private $_discussionUrl;
 
     /**
-     * @return URL
+     * @return string
      */
     public function getDiscussionUrl()
     {
@@ -706,12 +640,12 @@ trait CreativeWorkTrait
     /**
      * A link to the page containing the comments of the CreativeWork.
      *
-     * @param URL $discussionUrl
+     * @param UrlValue $discussionUrl
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setDiscussionUrl($discussionUrl)
+    public function setDiscussionUrl(UrlValue $discussionUrl)
     {
-        $this->_discussionUrl = $discussionUrl;
+        $this->_discussionUrl = $discussionUrl->getValue();
         return $this;
     }
 
@@ -730,34 +664,13 @@ trait CreativeWorkTrait
      *
      * @param Person $editor
      */
-    public function setEditor($editor)
+    public function setEditor(Person $editor)
     {
         $this->_editor = $editor;
     }
 
-    private $_educationalAlignment;
-
-    /**
-     * @return AlignmentObject
-     */
-    public function getEducationalAlignment()
-    {
-        return $this->_educationalAlignment;
-    }
-
-    /**
-     * An alignment to an established educational framework.
-     *
-     * @param AlignmentObject $educationalAlignment
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setEducationalAlignment($educationalAlignment)
-    {
-        $this->_educationalAlignment = $educationalAlignment;
-        return $this;
-    }
-
     private $_educationalUse;
+
 
     /**
      * @return string
@@ -773,7 +686,7 @@ trait CreativeWorkTrait
      * @param string $educationalUse
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setEducationalUse($educationalUse)
+    public function setEducationalUse(CreativeWork $educationalUse)
     {
         $this->_educationalUse = $educationalUse;
         return $this;
@@ -796,7 +709,7 @@ trait CreativeWorkTrait
      * @param MediaObject $encoding
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setEncoding($encoding)
+    public function setEncoding(MediaObject $encoding)
     {
         $this->_encoding = $encoding;
         return $this;
@@ -819,7 +732,7 @@ trait CreativeWorkTrait
      * @param CreativeWork $exampleOfWork
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setExampleOfWork($exampleOfWork)
+    public function setExampleOfWork(CreativeWork $exampleOfWork)
     {
         $this->_exampleOfWork = $exampleOfWork;
         return $this;
@@ -828,7 +741,7 @@ trait CreativeWorkTrait
     private $_expires;
 
     /**
-     * @return Date
+     * @return string
      */
     public function getExpires()
     {
@@ -840,12 +753,12 @@ trait CreativeWorkTrait
      * availability or relevance is time-limited, or a ClaimReview fact check whose publisher wants to indicate that
      * it may no longer be relevant (or helpful to highlight) after some date.
      *
-     * @param Date $expires
+     * @param DateValue $expires
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setExpires($expires)
+    public function setExpires(DateValue $expires)
     {
-        $this->_expires = $expires;
+        $this->_expires = $expires->getValue();
         return $this;
     }
 
@@ -935,7 +848,7 @@ trait CreativeWorkTrait
      * @param CreativeWork $hasPart
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setHasPart($hasPart)
+    public function setHasPart(CreativeWork $hasPart)
     {
         $this->_hasPart = $hasPart;
         return $this;
@@ -963,54 +876,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    private $_inLanguage;
-
-    /**
-     * @return Language|string
-     */
-    public function getInLanguage()
-    {
-        return $this->_inLanguage;
-    }
-
-    /**
-     * The language of the content or performance or used in an action.
-     * Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage.
-     * Supersedes language.
-     *
-     * @param Language|string $inLanguage
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setInLanguage($inLanguage)
-    {
-        $this->_inLanguage = $inLanguage;
-        return $this;
-    }
-
-    private $_interactionStatistic;
-
-    /**
-     * @return InteractionCounter
-     */
-    public function getInteractionStatistic()
-    {
-        return $this->_interactionStatistic;
-    }
-
-    /**
-     * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication.
-     * The most specific child type of InteractionCounter should be used.
-     *
-     * Supersedes interactionCount.
-     *
-     * @param InteractionCounter $interactionStatistic
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setInteractionStatistic($interactionStatistic)
-    {
-        $this->_interactionStatistic = $interactionStatistic;
-        return $this;
-    }
 
     private $_interactivityType;
 
@@ -1058,31 +923,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    private $_isBasedOn;
-
-    /**
-     * @return CreativeWork|Product|Url
-     */
-    public function getisBasedOn()
-    {
-        return $this->_isBasedOn;
-    }
-
-    /**
-     * A resource that was used in the creation of this resource. This term can be repeated for multiple sources.
-     * For example, http://example.com/great-multiplication-intro.html.
-     *
-     * Supersedes isBasedOnUrl.
-     *
-     * @param CreativeWork|Product|Url $isBasedOn
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setIsBasedOn($isBasedOn)
-    {
-        $this->_isBasedOn = $isBasedOn;
-        return $this;
-    }
-
     private $_isFamilyFriendly;
 
     /**
@@ -1122,7 +962,7 @@ trait CreativeWorkTrait
      * @param CreativeWork $isPartOf
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setIsPartOf($isPartOf)
+    public function setIsPartOf(CreativeWork $isPartOf)
     {
         $this->_isPartOf = $isPartOf;
         return $this;
@@ -1173,28 +1013,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    private $_license;
-
-    /**
-     * @return CreativeWork|URL
-     */
-    public function getLicense()
-    {
-        return $this->_license;
-    }
-
-    /**
-     * A license document that applies to this content, typically indicated by URL.
-     *
-     * @param CreativeWork|URL $license
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setLicense($license)
-    {
-        $this->_license = $license;
-        return $this;
-    }
-
     private $_locationCreated;
 
     /**
@@ -1211,7 +1029,7 @@ trait CreativeWorkTrait
      * @param Place $locationCreated
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setLocationCreated($locationCreated)
+    public function setLocationCreated(Place $locationCreated)
     {
         $this->_locationCreated = $locationCreated;
         return $this;
@@ -1234,31 +1052,9 @@ trait CreativeWorkTrait
      * @param Thing $mainEntity
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setMainEntity($mainEntity)
+    public function setMainEntity(Thing $mainEntity)
     {
         $this->_mainEntity = $mainEntity;
-        return $this;
-    }
-
-    private $_material;
-
-    /**
-     * @return Product|URL|string
-     */
-    public function getMaterial()
-    {
-        return $this->_material;
-    }
-
-    /**
-     * A material that something is made from, e.g. leather, wool, cotton, paper.
-     *
-     * @param Product|URL|string $material
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setMaterial($material)
-    {
-        $this->_material = $material;
         return $this;
     }
 
@@ -1278,32 +1074,9 @@ trait CreativeWorkTrait
      * @param Thing $mentions
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setMentions($mentions)
+    public function setMentions(Thing $mentions)
     {
         $this->_mentions = $mentions;
-        return $this;
-    }
-
-    private $_offers;
-
-    /**
-     * @return Offer
-     */
-    public function getOffers()
-    {
-        return $this->_offers;
-    }
-
-    /**
-     * An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie,
-     * perform a service, or give away tickets to an event.
-     *
-     * @param Offer $offers
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setOffers($offers)
-    {
-        $this->_offers = $offers;
         return $this;
     }
 
@@ -1375,28 +1148,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    private $_publication;
-
-    /**
-     * @return PublicationEvent
-     */
-    public function getPublication()
-    {
-        return $this->_publication;
-    }
-
-    /**
-     * A publication event associated with the item.
-     *
-     * @param PublicationEvent $publication
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setPublication($publication)
-    {
-        $this->_publication = $publication;
-        return $this;
-    }
-
     private $_publisher;
 
     /**
@@ -1435,7 +1186,7 @@ trait CreativeWorkTrait
      * @param Organization $publisherImprint
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setPublisherImprint($publisherImprint)
+    public function setPublisherImprint(Organization $publisherImprint)
     {
         $this->_publisherImprint = $publisherImprint;
         return $this;
@@ -1463,7 +1214,7 @@ trait CreativeWorkTrait
      * @param CreativeWork|URL $publishingPrinciples
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setPublishingPrinciples($publishingPrinciples)
+    public function setPublishingPrinciples(CreativeWork $publishingPrinciples)
     {
         $this->_publishingPrinciples = $publishingPrinciples;
         return $this;
@@ -1486,60 +1237,16 @@ trait CreativeWorkTrait
      * @param Event $recordedAt
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setRecordedAt($recordedAt)
+    public function setRecordedAt(Event $recordedAt)
     {
         $this->_recordedAt = $recordedAt;
-        return $this;
-    }
-
-    private $_releasedEvent;
-
-    /**
-     * @return PublicationEvent
-     */
-    public function getReleasedEvent()
-    {
-        return $this->_releasedEvent;
-    }
-
-    /**
-     * The place and time the release was issued, expressed as a PublicationEvent.
-     *
-     * @param PublicationEvent $releasedEvent
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setReleasedEvent($releasedEvent)
-    {
-        $this->_releasedEvent = $releasedEvent;
-        return $this;
-    }
-
-    private $_review;
-
-    /**
-     * @return Review
-     */
-    public function getReview()
-    {
-        return $this->_review;
-    }
-
-    /**
-     * 	A review of the item. Supersedes reviews.
-     *
-     * @param Review $review
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setReview($review)
-    {
-        $this->_review = $review;
         return $this;
     }
 
     private $_schemaVersion;
 
     /**
-     * @return URL|string
+     * @return string
      */
     public function getSchemaVersion()
     {
@@ -1551,12 +1258,12 @@ trait CreativeWorkTrait
      * For example, a document could declare a schemaVersion using an URL such as http://schema.org/version/2.0/
      * if precise indication of schema version was required by some application.
      *
-     * @param URL|string $schemaVersion
+     * @param UrlValue $schemaVersion
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setSchemaVersion($schemaVersion)
+    public function setSchemaVersion(UrlValue $schemaVersion)
     {
-        $this->_schemaVersion = $schemaVersion;
+        $this->_schemaVersion = $schemaVersion->getValue();
         return $this;
     }
 
@@ -1576,7 +1283,7 @@ trait CreativeWorkTrait
      * @param Organization $sourceOrganization
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setSourceOrganization($sourceOrganization)
+    public function setSourceOrganization(Organization $sourceOrganization)
     {
         $this->_sourceOrganization = $sourceOrganization;
         return $this;
@@ -1601,7 +1308,7 @@ trait CreativeWorkTrait
      * @param Place $spatialCoverage
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setSpatialCoverage($spatialCoverage)
+    public function setSpatialCoverage(Place $spatialCoverage)
     {
         $this->_spatialCoverage = $spatialCoverage;
         return $this;
@@ -1694,37 +1401,15 @@ trait CreativeWorkTrait
     /**
      * 	A thumbnail image relevant to the Thing.
      *
-     * @param URL $thumbnailUrl
+     * @param UrlValue $thumbnailUrl
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setThumbnailUrl($thumbnailUrl)
+    public function setThumbnailUrl(UrlValue $thumbnailUrl)
     {
         $this->_thumbnailUrl = $thumbnailUrl;
         return $this;
     }
 
-    private $_timeRequired;
-
-    /**
-     * @return Duration
-     */
-    public function getTimeRequired()
-    {
-        return $this->_timeRequired;
-    }
-
-    /**
-     * Approximate or typical time it takes to work with or through this learning resource for the typical intended
-     * target audience, e.g. 'P30M', 'P1H25M'.
-     *
-     * @param Duration $timeRequired
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setTimeRequired($timeRequired)
-    {
-        $this->_timeRequired = $timeRequired;
-        return $this;
-    }
 
     private $_translationOfWork;
 
@@ -1743,7 +1428,7 @@ trait CreativeWorkTrait
      * @param CreativeWork $translationOfWork
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setTranslationOfWork($translationOfWork)
+    public function setTranslationOfWork(CreativeWork $translationOfWork)
     {
         $this->_translationOfWork = $translationOfWork;
         return $this;
@@ -1816,27 +1501,6 @@ trait CreativeWorkTrait
         return $this;
     }
 
-    private $_video;
-
-    /**
-     * @return VideoObject
-     */
-    public function getVideo()
-    {
-        return $this->_video;
-    }
-
-    /**
-     * 	An embedded video object.
-     *
-     * @param VideoObject $video
-     * @return CreativeWork|CreativeWorkTrait
-     */
-    public function setVideo($video)
-    {
-        $this->_video = $video;
-        return $this;
-    }
 
     private $_workExample;
 
@@ -1856,7 +1520,7 @@ trait CreativeWorkTrait
      * @param CreativeWork $workExample
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setWorkExample($workExample)
+    public function setWorkExample(CreativeWork $workExample)
     {
         $this->_workExample = $workExample;
         return $this;
@@ -1880,7 +1544,7 @@ trait CreativeWorkTrait
      * @param CreativeWork $workTranslation
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setWorkTranslation($workTranslation)
+    public function setWorkTranslation(CreativeWork $workTranslation)
     {
         $this->_workTranslation = $workTranslation;
         return $this;

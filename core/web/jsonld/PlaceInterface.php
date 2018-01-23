@@ -19,7 +19,7 @@ interface PlaceInterface
      * @param PropertyValue $additionalProperty
      * @return PlaceTrait
      */
-    public function setAdditionalProperty($additionalProperty);
+    public function setAdditionalProperty(PropertyValue $additionalProperty);
 
     /**
      * @return PostalAddress|string
@@ -30,7 +30,7 @@ interface PlaceInterface
      * @param PostalAddress|string $address
      * @return PlaceTrait
      */
-    public function setAddress($address);
+    public function setAddress(PostalAddress $address);
 
     /**
      * @return AggregateRating
@@ -41,7 +41,7 @@ interface PlaceInterface
      * @param AggregateRating $aggregateRating
      * @return PlaceTrait
      */
-    public function setAggregateRating($aggregateRating);
+    public function setAggregateRating(AggregateRating $aggregateRating);
 
     /**
      * @return LocationFeatureSpecification
@@ -74,7 +74,7 @@ interface PlaceInterface
      * @param Place $containedInPlace
      * @return PlaceTrait
      */
-    public function setContainedInPlace($containedInPlace);
+    public function setContainedInPlace(Place $containedInPlace);
 
     /**
      * @return Place
@@ -85,7 +85,7 @@ interface PlaceInterface
      * @param Place $containsPlace
      * @return PlaceTrait
      */
-    public function setContainsPlace($containsPlace);
+    public function setContainsPlace(Place $containsPlace);
 
     /**
      * @return Event
@@ -96,7 +96,7 @@ interface PlaceInterface
      * @param Event $event
      * @return PlaceTrait
      */
-    public function setEvent($event);
+    public function setEvent(Event $event);
 
     /**
      * @return string
@@ -274,15 +274,15 @@ interface PlaceInterface
     public function setIsicV4($isicV4);
 
     /**
-     * @return ImageObject|URL
+     * @return ImageObject
      */
     public function getLogo();
 
     /**
-     * @param ImageObject|URL $logo
+     * @param ImageObject $logo
      * @return PlaceTrait
      */
-    public function setLogo($logo);
+    public function setLogo(ImageObject $logo);
 
     /**
      * @return int

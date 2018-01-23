@@ -29,7 +29,7 @@ trait SocialMediaPostingTrait
      * @param CreativeWork $sharedContent
      * @return SocialMediaPosting|SocialMediaPostingTrait
      */
-    public function setSharedContent($sharedContent)
+    public function setSharedContent(CreativeWork $sharedContent)
     {
         $this->_sharedContent = $sharedContent;
         return $this;

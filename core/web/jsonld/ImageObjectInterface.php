@@ -1,13 +1,14 @@
 <?php
 
-use luya\web\jsonld\CreativeWorkInterface;
+namespace luya\web\jsonld;
 
 /**
+ * http://schema.org/ImageObject
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
-interface ImageObjectInterface extends CreativeWorkInterface
+interface ImageObjectInterface extends MediaObjectInterface
 {
 	public function setCaption($caption);
 	

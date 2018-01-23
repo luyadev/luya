@@ -1,15 +1,17 @@
 <?php
 
-use luya\web\jsonld\BaseThing;
+namespace luya\web\jsonld;
 
 /**
  * http://schema.org/ImageObject
  * 
- * @author nadar
- *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.3
  */
 class ImageObject extends BaseThing implements ImageObjectInterface
 {
+    use ImageObjectTrait;
+    
 	/**
 	 * @inheritdoc
  	 */
@@ -17,6 +19,4 @@ class ImageObject extends BaseThing implements ImageObjectInterface
 	{
 		return 'ImageObject';
 	}
-	
-	use ImageObjectTrait;
 }
