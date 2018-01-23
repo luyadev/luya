@@ -46,15 +46,15 @@ You an also define multiple rows, here an advanced example for a layout with 4 p
 {
     "rows" : [
         [
-            {"cols": 12, "var": "stage", "label": "Stage"},
+            {"cols": 12, "var": "stage", "label": "Stage"}
         ],
         [
             {"cols": 8, "var": "left", "label": "Main content"},
             {"cols": 4, "var": "right", "label": "Sidebar"}
         ],
         [
-            {"cols": 12, "var": "footer", "label": "Footer"},
-        ],
+            {"cols": 12, "var": "footer", "label": "Footer"}
+        ]
     ]
 }
 ```
