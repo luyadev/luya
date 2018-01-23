@@ -10,5 +10,13 @@ use luya\web\jsonld\BaseThing;
  */
 class ImageObject extends BaseThing implements ImageObjectInterface
 {
+	/**
+	 * @inheritdoc
+ 	 */
+	public function typeDefintion()
+	{
+		return 'ImageObject';
+	}
+	
 	use ImageObjectTrait;
 }

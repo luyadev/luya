@@ -2,6 +2,11 @@
 
 use luya\web\jsonld\ThingInterface;
 
+/**
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.3
+ */
 interface PropertyValueInterface extends ThingInterface
 {
 	public function setMaxValue($maxValue);

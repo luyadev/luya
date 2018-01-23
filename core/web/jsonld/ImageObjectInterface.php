@@ -2,6 +2,11 @@
 
 use luya\web\jsonld\CreativeWorkInterface;
 
+/**
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.3
+ */
 interface ImageObjectInterface extends CreativeWorkInterface
 {
 	public function setCaption($caption);
