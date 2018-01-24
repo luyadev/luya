@@ -42,7 +42,7 @@ class TextValue extends BaseValue
     
     /**
      * Html encode the text data.
-     * 
+     *
      * @return \luya\web\jsonld\TextValue
      */
     public function encode()
