@@ -679,10 +679,10 @@ trait OrganizationTrait
     /**
      * An associated logo.
      *
-     * @param mixed $logo
+     * @param ImageObject $logo
      * @return Organization
      */
-    public function setLogo($logo)
+    public function setLogo(ImageObject $logo)
     {
         $this->_logo[] = $logo;
         return $this;

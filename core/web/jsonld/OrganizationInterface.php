@@ -338,7 +338,7 @@ interface OrganizationInterface
      * @param mixed $logo
      * @return Organization
      */
-    public function setLogo($logo);
+    public function setLogo(ImageObject $logo);
 
     /**
      * @return mixed
