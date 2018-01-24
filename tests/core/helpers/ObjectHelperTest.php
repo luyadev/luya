@@ -111,5 +111,8 @@ class ObjectHelperTest extends \luyatests\LuyaWebTestCase
         $this->assertTrue(ObjectHelper::instanceOf($validObject, [ObjectHelper::class], false));
         $this->assertTrue(ObjectHelper::instanceOf($validObject, [$validObject], false));
         $this->assertTrue(ObjectHelper::instanceOf($validObject, $validObject, false));
+        
+        $this->expectException('luya\Exception');
+        $this->assertFalse(ObjectHelper::instanceOf('fooBar', ['\Exception']));
     }
 }

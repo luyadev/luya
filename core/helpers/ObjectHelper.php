@@ -40,7 +40,7 @@ class ObjectHelper
         }
         
         if ($throwException) {
-            throw new Exception("The given variable must be an instance of: " . implode(",", tell));
+            throw new Exception("The given variable must be an instance of: " . implode(",", $instances));
         }
         
         return false;
