@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
+- [#1756](https://github.com/luyadev/luya/issues/1756) Changed invalid JsonLd method calls, added new objects, value and type checks.
 - [#1754](https://github.com/luyadev/luya/issues/1754) Remove underscore when transliteration is disabled.
 
 ### Added
