@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1759](https://github.com/luyadev/luya/issues/1759) Added luya\helpers\ObjectHelper instanceOf() method.
 - [#1755](https://github.com/luyadev/luya/issues/1755) Add json helper with isJson() method.
 - [#1757](https://github.com/luyadev/luya/issues/1757) Added new sendArrayError() method to luya\rest\Controller. Moved helper classes into RestBehvaiorsTrait as they can be used in both situations.
 
