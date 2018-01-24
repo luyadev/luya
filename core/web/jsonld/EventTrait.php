@@ -2,6 +2,8 @@
 
 namespace luya\web\jsonld;
 
+use luya\helpers\ObjectHelper;
+
 /**
  * JsonLd - Event trait
  *
@@ -76,6 +78,8 @@ trait EventTrait
      */
     public function setAttendee($attendee)
     {
+        ObjectHelper::instanceOf($attendee, [Organization::class, PersonInterface::class]);
+        
         $this->_attendee = $attendee;
         return $this;
     }
@@ -98,6 +102,8 @@ trait EventTrait
      */
     public function setComposer($composer)
     {
+        ObjectHelper::instanceOf($author, [Organization::class, PersonInterface::class]);
+        
         $this->_composer = $composer;
         return $this;
     }
@@ -120,6 +126,8 @@ trait EventTrait
      */
     public function setContributor($contributor)
     {
+        ObjectHelper::instanceOf($contributor, [Organization::class, PersonInterface::class]);
+        
         $this->_contributor = $contributor;
         return $this;
     }
@@ -232,6 +240,8 @@ trait EventTrait
      */
     public function setFunder($funder)
     {
+        ObjectHelper::instanceOf($funder, [Organization::class, PersonInterface::class]);
+        
         $this->_funder = $funder;
         return $this;
     }
@@ -343,6 +353,8 @@ trait EventTrait
      */
     public function setOrganizer($organizer)
     {
+        ObjectHelper::instanceOf($organizer, [Organization::class, PersonInterface::class]);
+        
         $this->_organizer = $organizer;
         return $this;
     }
@@ -366,6 +378,8 @@ trait EventTrait
      */
     public function setPerformer($performer)
     {
+        ObjectHelper::instanceOf($performer, [Organization::class, PersonInterface::class]);
+        
         $this->_performer = $performer;
         return $this;
     }
@@ -460,6 +474,8 @@ trait EventTrait
      */
     public function setSponsor($sponsor)
     {
+        ObjectHelper::instanceOf($sponsor, [Organization::class, PersonInterface::class]);
+        
         $this->_sponsor = $sponsor;
         return $this;
     }
@@ -552,6 +568,8 @@ trait EventTrait
      */
     public function setTranslator($translator)
     {
+        ObjectHelper::instanceOf($translator, [Organization::class, PersonInterface::class]);
+        
         $this->_translator = $translator;
         return $this;
     }

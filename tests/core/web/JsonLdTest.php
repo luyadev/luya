@@ -102,10 +102,14 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
      */
     public function testCreativeWork()
     {
-        $thing = (new CreativeWork())->setName('The CreativeWork');
+        $thing = (new CreativeWork())->setName('The CreativeWork')->setPublisher((new Person())->setName('John Doe'));
 
         $this->assertSame([
             'name' => 'The CreativeWork',
+            'publisher' => [
+                'name' => 'John Doe',
+                '@type' => 'Person',
+            ],
             '@type' => 'CreativeWork',
         ], $thing->toArray());
     }

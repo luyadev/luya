@@ -2,6 +2,8 @@
 
 namespace luya\web\jsonld;
 
+use luya\helpers\ObjectHelper;
+
 /**
  * JsonLd - Person trait
  *
@@ -410,6 +412,8 @@ trait PersonTrait
      */
     public function setFunder($funder)
     {
+        ObjectHelper::instanceOf($funder, [Organization::class, PersonInterface::class]);
+        
         $this->_funder = $funder;
         return $this;
     }
@@ -886,6 +890,8 @@ trait PersonTrait
      */
     public function setSponsor($sponsor)
     {
+        ObjectHelper::instanceOf($sponsor, [Organization::class, PersonInterface::class]);
+        
         $this->_sponsor = $sponsor;
         return $this;
     }
