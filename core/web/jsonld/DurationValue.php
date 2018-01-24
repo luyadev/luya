@@ -17,7 +17,6 @@ namespace luya\web\jsonld;
  * new DurationValue("1 hour 30 minutes");
  * ```
  * 
- * @see https://stackoverflow.com/a/13301472/4611030
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
@@ -26,11 +25,19 @@ class DurationValue extends BaseValue
 {
     private $_duration;
     
+    /**
+     * Set duration data.
+     * 
+     * @param string|integer $duration
+     */
     public function __construct($duration)
     {
         $this->_duration = $duration;    
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function getValue()
     {
         // if its not a unix timestamp, try to convert "strtotime("1 hour 30 minutes", 0);"
@@ -41,6 +48,13 @@ class DurationValue extends BaseValue
         return $this->timeToIso8601Duration($this->_duration);
     }
     
+    /**
+     * Convert time to iso date.
+     * 
+     * @see https://stackoverflow.com/a/13301472/4611030
+     * @param integer $time
+     * @return string
+     */
     protected function timeToIso8601Duration($time)
     {
         $units = array(

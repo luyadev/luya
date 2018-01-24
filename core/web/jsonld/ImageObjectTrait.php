@@ -3,8 +3,9 @@
 namespace luya\web\jsonld;
 
 /**
- * http://schema.org/ImageObject
+ * JsonLd ImageObject.
  * 
+ * @see http://schema.org/ImageObject
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
@@ -14,12 +15,18 @@ trait ImageObjectTrait
 	
 	private $_caption;
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function setCaption($caption)
 	{
 	    $this->_caption = $caption;
 	    return $this;
 	}
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function getCaption()
 	{
 	    return $this->_caption;
@@ -27,6 +34,9 @@ trait ImageObjectTrait
 	
 	private $_exifData;
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function setExifData(PropertyValue $propertyValue)
 	{
 	   $this->_exifData = $propertyValue;
@@ -34,6 +44,9 @@ trait ImageObjectTrait
 	   return $this;
 	}
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function getExifData()
 	{
 	    return $this->_exifData;
@@ -41,6 +54,9 @@ trait ImageObjectTrait
 	
 	private $_representativeOfPage;
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function setRepresentativeOfPage($representativeOfPage)
 	{
 	   $this->_representativeOfPage = $representativeOfPage;
@@ -48,6 +64,9 @@ trait ImageObjectTrait
 	   return $this;
 	}
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function getRepresentativeOfPage()
 	{
 	    return $this->_representativeOfPage;
@@ -55,6 +74,9 @@ trait ImageObjectTrait
 	
 	private $_thumbnail;
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function setThumbnail(ImageObject $imageObject)
 	{
 	    $this->_thumbnail = $imageObject;
@@ -62,6 +84,9 @@ trait ImageObjectTrait
 	    return $this;
 	}
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function getThumbnail()
 	{
 	    return $this->_thumbnail;

@@ -17,6 +17,9 @@ class UrlValue extends BaseValue
         $this->_url = $url;    
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function getValue()
     {
         return $this->_url;

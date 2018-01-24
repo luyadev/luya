@@ -3,8 +3,9 @@
 namespace luya\web\jsonld;
 
 /**
- * http://schema.org/AggregateRating
- *
+ * JsonLd AggregateRating Interface.
+ * 
+ * @see http://schema.org/AggregateRating
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

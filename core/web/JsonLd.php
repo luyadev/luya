@@ -16,6 +16,15 @@ use luya\web\jsonld\CreativeWork;
 use luya\web\jsonld\Organization;
 use luya\web\jsonld\SocialMediaPosting;
 use luya\web\jsonld\Thing;
+use luya\web\jsonld\ImageObject;
+use luya\web\jsonld\AggregateRating;
+use luya\web\jsonld\Rating;
+use luya\web\jsonld\Comment;
+use luya\web\jsonld\ContactPoint;
+use luya\web\jsonld\Country;
+use luya\web\jsonld\Offer;
+use luya\web\jsonld\PostalAddress;
+use luya\web\jsonld\PropertyValue;
 
 /**
  * Registerin Microdata as JsonLD.
@@ -168,52 +177,131 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new SocialMediaPosting($config)));
     }
+
+    /**
+     * Register new Image Object.
+     * 
+     * @param array $config
+     * @return \luya\web\jsonld\ImageObject
+     * @since 1.0.3
+     */
+    public static function imageObject(array $config = [])
+    {
+        return self::addGraph((new ImageObject($config)));
+    }
     
     /**
-     * Register Image Microodata.
-     *
-     * @param string $url
-     * @param string $caption The image caption about what is on the picture.
-     * @param array $options An array with optional informations, allowed:
-     * - contentLocation: The location where the image was taken.
-     * - author: The author who made the picture.
-     * - datePublished: A unix timestamp (or string e.g. 2008-01-25) when the image was published.
-     * - name: The name of the picture.
+     * Register new Aggregated Rating.
+     * 
+     * @param array $config
+     * @return \luya\web\jsonld\AggregateRating
+     * @since 1.0.3
      */
-    /*
-    public static function image($url, $caption, array $options = [])
+    public static function aggregateRating(array $config = [])
     {
-        $date = ArrayHelper::remove($options, 'datePublished', null);
-
-        if ($date !== null && is_numeric($date)) {
-            $date = date("Y-d-m", $date);
-        }
-
-        self::addGraph([
-            "@context" => "http://schema.org",
-            "@type" => "ImageObject",
-            "author" => ArrayHelper::remove($options, 'author', null),
-            "contentLocation" => ArrayHelper::remove($options, 'contentLocation', null),
-            "contentUrl" => $url,
-            "datePublished" => $date,
-            "description" => $caption,
-            "name" => ArrayHelper::remove($options, 'name', null),
-        ]);
+        return self::addGraph((new AggregateRating($config)));        
     }
-    */
+
+    /**
+     * Register new Rating.
+     * 
+     * @param array $config
+     * @return \luya\web\jsonld\Rating
+     * @since 1.0.3
+     */
+    public static function rating(array $config = [])
+    {
+        return self::addGraph((new Rating($config)));  
+    }
+    
+    /**
+     * Register new Comment.
+     * 
+     * @param array $config
+     * @return \luya\web\jsonld\Comment
+     * @since 1.0.3
+     */
+    public static function comment(array $config = [])
+    {
+        return self::addGraph((new Comment($config)));
+    }
+    
+    /**
+     * Register new Contact Point.
+     * 
+     * This is mainly used for addresses or user coordinates like email, telephone etc.
+     * 
+     * @param array $config
+     * @return \luya\web\jsonld\ContactPoint
+     * @since 1.0.3
+     */
+    public static function contactPoin(array $config = [])
+    {
+        return self::addGraph((new ContactPoint($config)));
+    }
+    
+    /**
+     * Register new Country.
+     *
+     * @param array $config
+     * @return \luya\web\jsonld\Country
+     * @since 1.0.3
+     */
+    public static function country(array $config = [])
+    {
+        return self::addGraph((new Country($config)));
+    }
+
+    /**
+     * Register new Offer.
+     * 
+     * This is used for selling products.
+     * 
+     * @param array $config
+     * @return \luya\web\jsonld\Offer
+     * @since 1.0.3
+     */
+    public static function offer(array $config = [])
+    {
+        return self::addGraph((new Offer($config)));        
+    }
+    
+    /**
+     * Register new Postal Address.
+     * 
+     * @param array $config
+     * @return \luya\web\jsonld\PostalAddress
+     * @since 1.0.3
+     */
+    public static function postalAddress(array $config = [])
+    {
+        return self::addGraph((new PostalAddress()));    
+    }
+    
+    /**
+     * Register new Property Value.
+     *
+     * @param array $config
+     * @return \luya\web\jsonld\PropertyValue
+     * @since 1.0.3
+     */
+    public static function propertyValue(array $config = [])
+    {
+        return self::addGraph((new PropertyValue($config)));    
+    }
     
     /**
      * Register graph data.
      *
      * @param \luya\web\jsonld\BaseThing|array $data Can be either an array or an object based on {{luya\web\jsonld\BaseThing}} which contains the Arrayable Inteface.
-     * @return
+     * @return array|object
      */
     public static function addGraph($data)
     {
         self::registerView();
         
         if (is_scalar($data)) {
-            throw new Exception("data must be either an array or an object of type luya\web\jsonld\BaseThing.");
+            throw new Exception("Data must be either an array or an object of type luya\web\jsonld\BaseThing.");
         }
         
         Yii::$app->view->params['@context'] = 'https://schema.org';

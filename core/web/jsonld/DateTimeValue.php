@@ -12,11 +12,19 @@ class DateTimeValue extends BaseValue
 {
     private $_datetime;
     
+    /**
+     * Provide datetime value.
+     * 
+     * @param string|integer $datetime
+     */
     public function __construct($datetime)
     {
         $this->_datetime = $datetime;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function getValue()
     {
         if (is_numeric($this->_datetime)) {

@@ -14,11 +14,19 @@ class DateValue extends BaseValue
 {
     private $_date;
     
+    /**
+     * Provide date data.
+     * 
+     * @param string|integer $date
+     */
     public function __construct($date)
     {
         $this->_date = $date;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function getValue()
     {
         if (is_numeric($this->_date)) {

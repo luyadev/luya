@@ -3,10 +3,11 @@
 namespace luya\web\jsonld;
 
 /**
- * http://schema.org/Comment
+ * JsonLd ContactPoint.
  * 
- * @author nadar
- *
+ * @see http://schema.org/ContactPoint
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.3
  */
 class ContactPoint extends BaseThing implements ContactPointInterface
 {
