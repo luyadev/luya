@@ -413,10 +413,10 @@ interface CreativeWorkInterface extends ThingInterface
     public function getHeadline();
 
     /**
-     * @param string $headline
+     * @param TextValue $headline
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setHeadline($headline);
+    public function setHeadline(TextValue $headline);
 
     /**
      * @return string

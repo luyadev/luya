@@ -867,12 +867,12 @@ trait CreativeWorkTrait
     /**
      * Headline of the article.
      *
-     * @param string $headline
+     * @param TextValue $headline
      * @return CreativeWork|CreativeWorkTrait
      */
-    public function setHeadline($headline)
+    public function setHeadline(TextValue $headline)
     {
-        $this->_headline = $headline;
+        $this->_headline = $headline->truncate(100)->getValue();
         return $this;
     }
 
