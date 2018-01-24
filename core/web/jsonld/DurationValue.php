@@ -4,20 +4,20 @@ namespace luya\web\jsonld;
 
 /**
  * Convert Timestamp or String to duration.
- * 
+ *
  * Example usage:
- * 
+ *
  * ```php
  * new DurationValue(strtotime("1 hour 30 minutes", 0));
  * ```
- * 
+ *
  * Or as string
- * 
+ *
  * ```php
  * new DurationValue("1 hour 30 minutes");
  * ```
- * 
- * 
+ *
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
@@ -27,22 +27,22 @@ class DurationValue extends BaseValue
     
     /**
      * Set duration data.
-     * 
+     *
      * @param string|integer $duration
      */
     public function __construct($duration)
     {
-        $this->_duration = $duration;    
+        $this->_duration = $duration;
     }
     
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getValue()
     {
         // if its not a unix timestamp, try to convert "strtotime("1 hour 30 minutes", 0);"
         if (!is_numeric($this->_duration)) {
-            $this->_duration = strtotime($this->_duration, 0);   
+            $this->_duration = strtotime($this->_duration, 0);
         }
         
         return $this->timeToIso8601Duration($this->_duration);
@@ -50,7 +50,7 @@ class DurationValue extends BaseValue
     
     /**
      * Convert time to iso date.
-     * 
+     *
      * @see https://stackoverflow.com/a/13301472/4611030
      * @param integer $time
      * @return string

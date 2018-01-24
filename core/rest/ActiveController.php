@@ -64,7 +64,7 @@ abstract class ActiveController extends BaseActiveController
      * ```
      *
      * To make access restrictions checks in your Rest controller you have to override this method, otherwise there is no access check.
-     * {@inheritDoc}
+     * @inheritDoc
      * @see \yii\rest\ActiveController::checkAccess()
      */
     public function checkAccess($action, $model = null, $params = [])

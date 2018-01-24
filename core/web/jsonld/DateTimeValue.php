@@ -4,7 +4,7 @@ namespace luya\web\jsonld;
 
 /**
  * A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] (see Chapter 5.4 of ISO 8601).
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
@@ -14,7 +14,7 @@ class DateTimeValue extends BaseValue
     
     /**
      * Provide datetime value.
-     * 
+     *
      * @param string|integer $datetime
      */
     public function __construct($datetime)
@@ -23,7 +23,7 @@ class DateTimeValue extends BaseValue
     }
     
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getValue()
     {

@@ -4,9 +4,9 @@ namespace luya\web\jsonld;
 
 /**
  * A date value in ISO 8601 date format.
- * 
+ *
  * Auto convert timestamp values to iso 8601 date.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
@@ -16,7 +16,7 @@ class DateValue extends BaseValue
     
     /**
      * Provide date data.
-     * 
+     *
      * @param string|integer $date
      */
     public function __construct($date)
@@ -25,7 +25,7 @@ class DateValue extends BaseValue
     }
     
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getValue()
     {

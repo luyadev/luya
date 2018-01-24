@@ -4,7 +4,7 @@ namespace luya\web\jsonld;
 
 /**
  * http://schema.org/URL
- * 
+ *
  * @author nadar
  *
  */
@@ -14,11 +14,11 @@ class UrlValue extends BaseValue
     
     public function __construct($url)
     {
-        $this->_url = $url;    
+        $this->_url = $url;
     }
     
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getValue()
     {

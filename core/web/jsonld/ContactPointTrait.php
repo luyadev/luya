@@ -17,7 +17,7 @@ trait ContactPointTrait
     
     /**
      * Setter method for email.
-     * 
+     *
      * @param string $email
      * @return \luya\web\jsonld\ContactPoint
      */
@@ -30,7 +30,7 @@ trait ContactPointTrait
     
     /**
      * Getter method for email.
-     * 
+     *
      * @return string
      */
     public function getEmail()
@@ -42,7 +42,7 @@ trait ContactPointTrait
     
     /**
      * Setter method for telephone.
-     * 
+     *
      * @param string $telephone
      * @return \luya\web\jsonld\ContactPoint
      */
@@ -55,7 +55,7 @@ trait ContactPointTrait
     
     /**
      * Getter method for telephone.
-     * 
+     *
      * @return string
      */
     public function getTelephone()

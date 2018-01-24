@@ -4,7 +4,7 @@ namespace luya\web\jsonld;
 
 /**
  * JsonLd ContactPoint.
- * 
+ *
  * @see http://schema.org/ContactPoint
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3

@@ -31,7 +31,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
     }
     
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      *
      * @see https://github.com/yiisoft/yii2/issues/384
      * @see \yii\console\controllers\BaseMigrateController::actionCreate()

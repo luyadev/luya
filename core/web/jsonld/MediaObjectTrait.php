@@ -20,7 +20,7 @@ trait MediaObjectTrait
      * @param UrlValue $url
      */
     public function setContentUrl(UrlValue $url)
-    {   
+    {
         $this->_contentUrl = $url->getValue();
         return $this;
     }

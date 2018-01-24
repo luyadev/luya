@@ -180,7 +180,7 @@ class JsonLd extends BaseObject
 
     /**
      * Register new Image Object.
-     * 
+     *
      * @param array $config
      * @return \luya\web\jsonld\ImageObject
      * @since 1.0.3
@@ -192,31 +192,31 @@ class JsonLd extends BaseObject
     
     /**
      * Register new Aggregated Rating.
-     * 
+     *
      * @param array $config
      * @return \luya\web\jsonld\AggregateRating
      * @since 1.0.3
      */
     public static function aggregateRating(array $config = [])
     {
-        return self::addGraph((new AggregateRating($config)));        
+        return self::addGraph((new AggregateRating($config)));
     }
 
     /**
      * Register new Rating.
-     * 
+     *
      * @param array $config
      * @return \luya\web\jsonld\Rating
      * @since 1.0.3
      */
     public static function rating(array $config = [])
     {
-        return self::addGraph((new Rating($config)));  
+        return self::addGraph((new Rating($config)));
     }
     
     /**
      * Register new Comment.
-     * 
+     *
      * @param array $config
      * @return \luya\web\jsonld\Comment
      * @since 1.0.3
@@ -228,9 +228,9 @@ class JsonLd extends BaseObject
     
     /**
      * Register new Contact Point.
-     * 
+     *
      * This is mainly used for addresses or user coordinates like email, telephone etc.
-     * 
+     *
      * @param array $config
      * @return \luya\web\jsonld\ContactPoint
      * @since 1.0.3
@@ -254,28 +254,28 @@ class JsonLd extends BaseObject
 
     /**
      * Register new Offer.
-     * 
+     *
      * This is used for selling products.
-     * 
+     *
      * @param array $config
      * @return \luya\web\jsonld\Offer
      * @since 1.0.3
      */
     public static function offer(array $config = [])
     {
-        return self::addGraph((new Offer($config)));        
+        return self::addGraph((new Offer($config)));
     }
     
     /**
      * Register new Postal Address.
-     * 
+     *
      * @param array $config
      * @return \luya\web\jsonld\PostalAddress
      * @since 1.0.3
      */
     public static function postalAddress(array $config = [])
     {
-        return self::addGraph((new PostalAddress()));    
+        return self::addGraph((new PostalAddress()));
     }
     
     /**
@@ -287,7 +287,7 @@ class JsonLd extends BaseObject
      */
     public static function propertyValue(array $config = [])
     {
-        return self::addGraph((new PropertyValue($config)));    
+        return self::addGraph((new PropertyValue($config)));
     }
     
     /**
