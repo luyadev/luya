@@ -31,6 +31,7 @@ class TextValue extends BaseValue
      * Truncate the string for a given lenth.
      *
      * @param integer $length
+     * @return \luya\web\jsonld\TextValue
      */
     public function truncate($length)
     {
@@ -40,10 +41,22 @@ class TextValue extends BaseValue
     }
     
     /**
+     * Html encode the text data.
+     * 
+     * @return \luya\web\jsonld\TextValue
+     */
+    public function encode()
+    {
+        $this->_text = Html::encode($this->_text);
+        
+        return $this;
+    }
+    
+    /**
      * @inheritDoc
      */
     public function getValue()
     {
-        return Html::encode($this->_text);
+        return $this->_text;
     }
 }
