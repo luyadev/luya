@@ -27,13 +27,12 @@ class ObjectHelper
     {
         // if instances is an object (compare object directly) we have to extra the class name to compare with instanceof later
         if (is_object($instances)) {
-            $instances = get_class($instances);    
+            $instances = get_class($instances);
         }
         
         $instances = (array) $instances;
         
         foreach ($instances as $class) {
-            
             if ($variable instanceof $class) {
                 return true;
             }
