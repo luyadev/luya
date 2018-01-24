@@ -14,10 +14,10 @@ use ReflectionMethod;
 class ObjectHelper
 {
     /**
-     * Checks a given variable if its an instance of an element in the $instances array.
+     * Checks a given variable if its an instance of an element in the $instances list.
      *
      * @param string $variable The variable to type check against instances.
-     * @param string|array $instances A list of classes
+     * @param string|array|object $instances A list of classes, a string for a given class, or an object.
      * @param boolean $throwException Whether an exception should be thrown or not.
      * @throws \luya\Exception
      * @return boolean
@@ -25,16 +25,22 @@ class ObjectHelper
      */
     public static function instanceOf($variable, $instances, $throwException = true)
     {
+        // if instances is an object (compare object directly) we have to extra the class name to compare with instanceof later
+        if (is_object($instances)) {
+            $instances = get_class($instances);    
+        }
+        
         $instances = (array) $instances;
         
         foreach ($instances as $class) {
-            if ($variable instanceof  $class) {
+            
+            if ($variable instanceof $class) {
                 return true;
             }
         }
         
         if ($throwException) {
-            throw new Exception("The variable must be an instance of: " . implode(",", $instances));
+            throw new Exception("The given variable must be an instance of: " . implode(",", tell));
         }
         
         return false;

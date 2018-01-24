@@ -94,4 +94,22 @@ class ObjectHelperTest extends \luyatests\LuyaWebTestCase
     {
         ObjectHelper::callMethodSanitizeArguments((new TestObject()), 'm3');
     }
+    
+    public function testInstanceOf()
+    {
+        $var = 'foo';
+        
+        $this->assertFalse(ObjectHelper::instanceOf($var, new ObjectHelper(), false));
+        $this->assertFalse(ObjectHelper::instanceOf($var, 'luya\helpers\ObjectHelper', false));
+        $this->assertFalse(ObjectHelper::instanceOf($var, 'DoesNotExists', false));
+        $this->assertFalse(ObjectHelper::instanceOf($var, ['luya\helpers\ObjectHelper', ObjectHelper::class], false));
+        
+        $validObject = new ObjectHelper();
+        
+        $this->assertTrue(ObjectHelper::instanceOf($validObject, 'luya\helpers\ObjectHelper', false));
+        $this->assertTrue(ObjectHelper::instanceOf($validObject, ['invalid\Object', 'luya\helpers\ObjectHelper'], false));
+        $this->assertTrue(ObjectHelper::instanceOf($validObject, [ObjectHelper::class], false));
+        $this->assertTrue(ObjectHelper::instanceOf($validObject, [$validObject], false));
+        $this->assertTrue(ObjectHelper::instanceOf($validObject, $validObject, false));
+    }
 }
