@@ -3,8 +3,9 @@
 namespace luya\web\jsonld;
 
 /**
- * http://schema.org/PropertyValue
+ * JsonLd PropertyValue.
  *
+ * @see http://schema.org/PropertyValue
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
@@ -14,6 +15,9 @@ trait PropertyValueTrait
     
     private $_maxValue;
     
+    /**
+     * @inheritdoc
+     */
     public function setMaxValue($maxValue)
     {
         $this->_maxValue = $maxValue;
@@ -21,6 +25,9 @@ trait PropertyValueTrait
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getMaxValue()
     {
         return $this->_maxValue;
@@ -28,6 +35,9 @@ trait PropertyValueTrait
     
     private $_minValue;
     
+    /**
+     * @inheritdoc
+     */
     public function setMinValue($minValue)
     {
         $this->_minValue = $minValue;
@@ -35,6 +45,9 @@ trait PropertyValueTrait
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getMinValue()
     {
         return $this->_minValue;
@@ -42,6 +55,9 @@ trait PropertyValueTrait
     
     private $_measurementTechnique;
     
+    /**
+     * @inheritdoc
+     */
     public function setMeasurementTechnique($measurementTechnique)
     {
         $this->_measurementTechnique = $measurementTechnique;
@@ -49,6 +65,9 @@ trait PropertyValueTrait
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getMeasurementTechnique()
     {
         return $this->_measurementTechnique;
@@ -56,6 +75,9 @@ trait PropertyValueTrait
     
     private $_propertyId;
     
+    /**
+     * @inheritdoc
+     */
     public function setPropertyID($propertyID)
     {
         $this->_propertyId = $propertyID;
@@ -63,6 +85,9 @@ trait PropertyValueTrait
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getPropertyID()
     {
         return $this->_propertyId;
@@ -70,6 +95,9 @@ trait PropertyValueTrait
     
     private $_unitCode;
     
+    /**
+     * @inheritdoc
+     */
     public function setUnitCode($unitCode)
     {
         $this->_unitCode = $unitCode;
@@ -77,6 +105,9 @@ trait PropertyValueTrait
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getUnitCode()
     {
         return $this->_unitCode;
@@ -84,6 +115,9 @@ trait PropertyValueTrait
     
     private $_unitText;
     
+    /**
+     * @inheritdoc
+     */
     public function setUnitText($uniText)
     {
         $this->_unitText = $uniText;
@@ -91,6 +125,9 @@ trait PropertyValueTrait
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getUnitText()
     {
         return $this->_unitText;
@@ -98,6 +135,9 @@ trait PropertyValueTrait
     
     private $_value;
     
+    /**
+     * @inheritdoc
+     */
     public function setValue($value)
     {
         $this->_value = $value;
@@ -105,6 +145,9 @@ trait PropertyValueTrait
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getValue()
     {
         return $this->_value;

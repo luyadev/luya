@@ -3,8 +3,9 @@
 namespace luya\web\jsonld;
 
 /**
- * http://schema.org/PropertyValue
+ * JsonLd PropertyValue.
  *
+ * @see http://schema.org/PropertyValue
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

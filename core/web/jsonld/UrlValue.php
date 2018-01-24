@@ -3,15 +3,21 @@
 namespace luya\web\jsonld;
 
 /**
- * http://schema.org/URL
+ * Value object for Urls.
  *
- * @author nadar
- *
+ * @see http://schema.org/URL
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.3
  */
 class UrlValue extends BaseValue
 {
     private $_url;
     
+    /**
+     * Provide url data.
+     *
+     * @param string $url
+     */
     public function __construct($url)
     {
         $this->_url = $url;

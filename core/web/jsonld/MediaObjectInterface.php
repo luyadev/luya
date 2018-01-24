@@ -3,8 +3,9 @@
 namespace luya\web\jsonld;
 
 /**
- * http://schema.org/MediaObject
+ * JsonLd MediaObject Interface.
  *
+ * @see http://schema.org/MediaObject
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
@@ -17,6 +18,9 @@ interface MediaObjectInterface extends CreativeWorkInterface
      */
     public function setContentUrl(UrlValue $url);
     
+    /**
+     * Getter method for contentUrl.
+     */
     public function getContentUrl();
     
     /**
@@ -26,6 +30,9 @@ interface MediaObjectInterface extends CreativeWorkInterface
      */
     public function setEmbedUrl(UrlValue $url);
     
+    /**
+     * Getter method for embedUrl.
+     */
     public function getEmbedUrl();
     
     /**
@@ -34,5 +41,8 @@ interface MediaObjectInterface extends CreativeWorkInterface
      */
     public function setUploadDate(DateValue $date);
     
+    /**
+     * Getter method for uploadDate.
+     */
     public function getUploadDate();
 }

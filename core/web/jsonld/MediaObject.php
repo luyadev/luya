@@ -3,8 +3,9 @@
 namespace luya\web\jsonld;
 
 /**
- * http://schema.org/MediaObject
+ * JsonLd MediaObject.
  *
+ * @see http://schema.org/MediaObject
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */
