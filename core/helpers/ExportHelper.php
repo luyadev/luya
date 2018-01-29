@@ -52,7 +52,7 @@ class ExportHelper
         $writer = new XLSXWriter();
         $writer->writeSheet($array);
 
-        return $writer->writeToStdOut();
+        return $writer->writeToString();
     }
 
     /**

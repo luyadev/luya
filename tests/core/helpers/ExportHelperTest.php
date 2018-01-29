@@ -2,6 +2,7 @@
 
 namespace luyatests\core\helpers;
 
+use luya\helpers\FileHelper;
 use Yii;
 use luyatests\LuyaWebTestCase;
 use luya\helpers\ExportHelper;
@@ -94,6 +95,6 @@ class ExportHelperTest extends LuyaWebTestCase
 
     public function testXlsArrayExport()
     {
-        $this->assertSame("---", ExportHelper::xlsx($this->getArray(), ['id'], false));
+        $this->assertSame(FileHelper::getFileContent('tests/data/export/export.xlsx'), ExportHelper::xlsx($this->getArray(), ['id', 'name'], true));
     }
 }

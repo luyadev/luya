@@ -2,6 +2,8 @@
 
 namespace luya\helpers;
 
+use ZipArchive;
+
 /*
  * @license MIT License
  *
