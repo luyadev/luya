@@ -91,4 +91,9 @@ class ExportHelperTest extends LuyaWebTestCase
         $this->expectException("luya\Exception");
         ExportHelper::csv('foobarstring');
     }
+
+    public function testXlsArrayExport()
+    {
+        $this->assertSame("---", ExportHelper::xlsx($this->getArray(), ['id'], false));
+    }
 }
