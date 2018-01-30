@@ -26,28 +26,68 @@ class ExportHelper
      */
     public static function csv($input, array $keys = [], $header = true)
     {
+        $delimiter = ",";
+        $input = self::transformInput($input);
+        $array = self::generateContentArray($input, $keys, $header);
+
+        return self::generateOutputString($array, $delimiter);
+    }
+
+    /**
+     * Export an Array or ActiveQuery instance into a Excel formatted string.
+     *
+     * @param array|ActiveQueryInterface $input
+     * @param array $keys Defines which keys should be packed into the generated xlsx. The defined keys does not change the sort behavior of the generated xls.
+     * @param bool $header
+     * @return mixed
+     * @throws Exception
+     * @since 1.0.4
+     */
+    public static function xlsx($input, array $keys = [], $header = true)
+    {
+        $input = self::transformInput($input);
+
+        $array = self::generateContentArray($input, $keys, $header);
+
+        $writer = new XLSXWriter();
+        $writer->writeSheet($array);
+
+        return $writer->writeToString();
+    }
+
+    /**
+     * Check type of input and return correct array.
+     *
+     * @param array|object $input
+     * @return array
+     * @since 1.0.4
+     */
+    protected static function transformInput($input)
+    {
         if ($input instanceof ActiveQueryInterface) {
-            $input = $input->all();
+            return $input->all();
         }
 
-        return self::generateContent($input, ',', $keys, $header);
+        return $input;
     }
 
     /**
      * Generate content by rows.
      *
      * @param array $contentRows
-     * @param string $delimiter
+     * @param string$delimiter
      * @param string $keys
-     * @param string $generateHeader
-     * @return string
+     * @param bool $generateHeader
+     * @return array
+     * @throws Exception
+     * @since 1.0.4
      */
-    protected static function generateContent($contentRows, $delimiter, $keys, $generateHeader = true)
+    protected static function generateContentArray($contentRows, $keys, $generateHeader = true)
     {
         if (is_scalar($contentRows)) {
-            throw new Exception("Content must be either an array, object or Travarsable");
+            throw new Exception("Content must be either an array, object or traversable");
         }
-        
+
         $attributeKeys = $keys;
         $header = [];
         $rows = [];
@@ -64,7 +104,7 @@ class ExportHelper
                 $attributeKeys[get_class($content)] = $keys;
             }
             $rows[$i] = ArrayHelper::toArray($content, $attributeKeys, false);
-            
+
             // handler header
             if ($i == 0 && $generateHeader) {
                 if ($content instanceof ActiveRecordInterface) {
@@ -79,15 +119,27 @@ class ExportHelper
                     $header = array_keys($rows[0]);
                 }
             }
-            
+
             $i++;
         }
 
-        $output = null;
         if ($generateHeader) {
-            $output.= self::generateRow($header, $delimiter, '"');
+            return ArrayHelper::merge([$header], $rows);
         }
-        foreach ($rows as $row) {
+
+        return $rows;
+    }
+
+    /**
+     * @param array $input
+     * @param $delimiter
+     * @return null|string
+     * @since 1.0.4
+     */
+    protected static function generateOutputString(array $input, $delimiter)
+    {
+        $output = null;
+        foreach ($input as $row) {
             $output.= self::generateRow($row, $delimiter, '"');
         }
 
@@ -101,6 +153,7 @@ class ExportHelper
      * @param string $delimiter
      * @param string $enclose
      * @return string
+     * @since 1.0.4
      */
     protected static function generateRow(array $row, $delimiter, $enclose)
     {
@@ -110,7 +163,7 @@ class ExportHelper
             }
             $item = $enclose.Html::encode($item).$enclose;
         });
-        
+
         return implode($delimiter, $row) . PHP_EOL;
     }
 }

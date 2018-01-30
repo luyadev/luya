@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.4 (in progress)
 
+### Added
+
+- [#1760](https://github.com/luyadev/luya/issues/1760) Added Excel export to ExportHelper.
+
 ## 1.0.3 (24. January 2018)
 
 ### Changed
