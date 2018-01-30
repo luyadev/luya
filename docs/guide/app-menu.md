@@ -148,13 +148,13 @@ Yii::$app->menu->injectItem(new InjectItem([
 ]));
 ```
 
-To attach the item at right moment you can bootstrap your module and use the `eventAfterLoad` event of the menu component:
+To attach the item at right moment you can bootstrap your module and use the {{luya\cms\Menu::EVENT_AFTER_LOAD}} event of the menu component. The event observed could be done as configuration or inside a Bootstraping file.
 
 ```php
 use luya\cms\Menu;
+use luya\cms\menu\InjectItem;
 
 Yii::$app->menu->on(Menu::EVENT_AFTER_LOAD, function($event) {
-
     $newItem = new InjectItem([
         'childOf' => 123,
         'title' => 'Inject Title',
@@ -163,4 +163,21 @@ Yii::$app->menu->on(Menu::EVENT_AFTER_LOAD, function($event) {
 
     $event->sender->injectItem($newItem);
 });
+```
+
+Or as example inside the application configuration
+
+```php
+'components' => [
+   'menu' => [
+         'class' => 'luya\cms\Menu',
+         'on eventAfterLoad'  => function($event) {
+            $event->sender->injectItem(new \luya\cms\menu\InjectItem([
+                'childOf' => 123,
+                'title' => 'Inject Title',
+                'alias' => 'inject-title',
+            ]));
+         }
+   ]
+]
 ```
