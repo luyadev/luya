@@ -151,7 +151,9 @@ Yii::$app->menu->injectItem(new InjectItem([
 To attach the item at right moment you can bootstrap your module and use the `eventAfterLoad` event of the menu component:
 
 ```php
-Yii::$app->menu->on(Container::MENU_AFTER_LOAD, function($event) {
+use luya\cms\Menu;
+
+Yii::$app->menu->on(Menu::EVENT_AFTER_LOAD, function($event) {
 
     $newItem = new InjectItem([
         'childOf' => 123,
