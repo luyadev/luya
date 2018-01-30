@@ -14,7 +14,7 @@ The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational
 > 2. Add the module to your application config within the modules section (see the generated README.md file in the module).
 > 3. Create a migration with a database table `./vendor/bin/luya migrate/create mytable modulename`.
 > 4. After preparation of the migration file (adding table and fields) run the migration command `./vendor/bin/luya migrate`.
-> 5. Run `./vendor/bin/luya crud/create` and provide the needed information (like module name, table name, etc.).
+> 5. Run `./vendor/bin/luya admin/crud/create` and provide the needed information (like module name, table name, etc.).
 > 6. Copy the terminal output to the previous generated module file: `<YOUR_MODULE>/admin/Module.php`.
 > 7. Run the import command `./vendor/bin/luya import`
 > 8. Set permission in admin UI under `System -> User groups -> Permission`
