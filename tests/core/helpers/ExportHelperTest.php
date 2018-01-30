@@ -3,6 +3,7 @@
 namespace luyatests\core\helpers;
 
 use luya\helpers\FileHelper;
+use luya\helpers\XLSXWriter;
 use Yii;
 use luyatests\LuyaWebTestCase;
 use luya\helpers\ExportHelper;
@@ -37,7 +38,7 @@ class ExportHelperTest extends LuyaWebTestCase
             ['id' => 2, 'name' => 'Jane'],
         ];
     }
-    
+
     private function initActiveRecord()
     {
         Yii::$app->sqllite->createCommand()->createTable('csvmodelstub', [
@@ -93,8 +94,35 @@ class ExportHelperTest extends LuyaWebTestCase
         ExportHelper::csv('foobarstring');
     }
 
-    public function testXlsArrayExport()
+    public function testXlsArrayExportWithHeader()
     {
-        $this->assertSame(FileHelper::getFileContent('tests/data/export/export.xlsx'), ExportHelper::xlsx($this->getArray(), ['id', 'name'], true));
+        $filename = tempnam('', 'xlsx_test');
+        $this->saveArrayToXlsx($filename, $this->getArray(), ['id', 'name'], true);
+        $this->assertSame($this->getXmlSheetContent($filename), $this->getXmlSheetContent('tests/data/export/withheader.xlsx'));
+    }
+
+    public function testXlsArrayExportWithoutHeader()
+    {
+        $filename = tempnam('', 'xlsx_test');
+        $this->saveArrayToXlsx($filename, $this->getArray(), ['id', 'name'], false);
+        $this->assertSame($this->getXmlSheetContent($filename), $this->getXmlSheetContent('tests/data/export/withoutheader.xlsx'));
+    }
+
+    protected function getXmlSheetContent($filename)
+    {
+        $zip = new \ZipArchive();
+        $zip->open($filename);
+        for ($z = 0; $z < $zip->numFiles; $z++) {
+            $inside_zip_filename = $zip->getNameIndex($z);
+            if (basename($inside_zip_filename) == 'sheet1.xml') {
+                return $zip->getFromName($inside_zip_filename);
+            }
+        }
+    }
+
+    protected function saveArrayToXlsx($filename, array $input, array $keys = [], $header = true)
+    {
+        $string = ExportHelper::xlsx($input,$keys, $header);
+        file_put_contents($filename, $string);
     }
 }
