@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file. This projec
 
 - [#1760](https://github.com/luyadev/luya/issues/1760) Added Excel export to ExportHelper.
 
+### Fixed
+
+- [#1730](https://github.com/luyadev/luya/issues/1730) Problem when using relativ url rule handling which are resolved trough current $app->controller.
+
 ## 1.0.3 (24. January 2018)
 
 ### Changed
