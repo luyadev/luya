@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.4 (in progress)
 
+### Changed
+
+- [#1765](https://github.com/luyadev/luya/issues/1765) Changed ObjectHelper::instanceOf to ObjectHelper::isInstanceOf in order to fix php 5.6 compatibility bug.
+
 ### Added
 
 - [#1760](https://github.com/luyadev/luya/issues/1760) Added Excel export to ExportHelper.

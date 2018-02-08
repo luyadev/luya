@@ -412,7 +412,7 @@ trait PersonTrait
      */
     public function setFunder($funder)
     {
-        ObjectHelper::instanceOf($funder, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($funder, [Organization::class, PersonInterface::class]);
         
         $this->_funder = $funder;
         return $this;
@@ -890,7 +890,7 @@ trait PersonTrait
      */
     public function setSponsor($sponsor)
     {
-        ObjectHelper::instanceOf($sponsor, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($sponsor, [Organization::class, PersonInterface::class]);
         
         $this->_sponsor = $sponsor;
         return $this;

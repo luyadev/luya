@@ -291,7 +291,7 @@ trait CreativeWorkTrait
      */
     public function setAuthor($author)
     {
-        ObjectHelper::instanceOf($author, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($author, [Organization::class, PersonInterface::class]);
         
         $this->_author = $author;
         return $this;
@@ -494,7 +494,7 @@ trait CreativeWorkTrait
      */
     public function setContributor($contributor)
     {
-        ObjectHelper::instanceOf($contributor, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($contributor, [Organization::class, PersonInterface::class]);
         
         $this->_contributor = $contributor;
         return $this;
@@ -518,7 +518,7 @@ trait CreativeWorkTrait
      */
     public function setCopyrightHolder($copyrightHolder)
     {
-        ObjectHelper::instanceOf($copyrightHolder, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($copyrightHolder, [Organization::class, PersonInterface::class]);
         
         $this->_copyrightHolder = $copyrightHolder;
         return $this;
@@ -564,7 +564,7 @@ trait CreativeWorkTrait
      */
     public function setCreator($creator)
     {
-        ObjectHelper::instanceOf($creator, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($creator, [Organization::class, PersonInterface::class]);
         
         $this->_creator = $creator;
         return $this;
@@ -815,7 +815,7 @@ trait CreativeWorkTrait
      */
     public function setFunder($funder)
     {
-        ObjectHelper::instanceOf($funder, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($funder, [Organization::class, PersonInterface::class]);
         
         $this->_funder = $funder;
         return $this;
@@ -1132,7 +1132,7 @@ trait CreativeWorkTrait
      */
     public function setProducer($producer)
     {
-        ObjectHelper::instanceOf($producer, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($producer, [Organization::class, PersonInterface::class]);
         
         $this->_producer = $producer;
         return $this;
@@ -1158,7 +1158,7 @@ trait CreativeWorkTrait
      */
     public function setProvider($provider)
     {
-        ObjectHelper::instanceOf($provider, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($provider, [Organization::class, PersonInterface::class]);
         
         $this->_provider = $provider;
         return $this;
@@ -1182,7 +1182,7 @@ trait CreativeWorkTrait
      */
     public function setPublisher($publisher)
     {
-        ObjectHelper::instanceOf($publisher, [Organization::class, Person::class]);
+        ObjectHelper::isInstanceOf($publisher, [Organization::class, Person::class]);
         
         $this->_publisher = $publisher;
         return $this;
@@ -1351,7 +1351,7 @@ trait CreativeWorkTrait
      */
     public function setSponsor($sponsor)
     {
-        ObjectHelper::instanceOf($sponsor, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($sponsor, [Organization::class, PersonInterface::class]);
         
         $this->_sponsor = $sponsor;
         return $this;
@@ -1473,7 +1473,7 @@ trait CreativeWorkTrait
      */
     public function setTranslator($translator)
     {
-        ObjectHelper::instanceOf($translator, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($translator, [Organization::class, PersonInterface::class]);
         
         $this->_translator = $translator;
         return $this;

@@ -23,7 +23,7 @@ class ObjectHelper
      * @return boolean
      * @since 1.0.3
      */
-    public static function instanceOf($variable, $instances, $throwException = true)
+    public static function isInstanceOf($variable, $instances, $throwException = true)
     {
         // if instances is an object (compare object directly) we have to extra the class name to compare with instanceof later
         if (is_object($instances)) {
@@ -64,12 +64,14 @@ class ObjectHelper
      * ```php
      * ObjectHelper::callMethodSanitizeArguments(new MyClass(), 'methodToCall', ['paramName' => 'paramValue']);
      * ```
+     * 
+     * The response is the return value from the called method of the object.
      *
      * @param object $object The class object where the method must be found.
      * @param string $method The class method to call inside the object.
-     * @param array  $argumentsList A massiv assigned list of array items, where the key is bind to the method argument and the value to be passed in the method on call.
+     * @param array $argumentsList A massiv assigned list of array items, where the key is bind to the method argument and the value to be passed in the method on call.
      * @throws \luya\Exception Throws an exception if a argument coult not be found.
-     * @return object
+     * @return mixed
      */
     public static function callMethodSanitizeArguments($object, $method, array $argumentsList = [])
     {
