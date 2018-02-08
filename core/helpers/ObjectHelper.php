@@ -64,7 +64,7 @@ class ObjectHelper
      * ```php
      * ObjectHelper::callMethodSanitizeArguments(new MyClass(), 'methodToCall', ['paramName' => 'paramValue']);
      * ```
-     * 
+     *
      * The response is the return value from the called method of the object.
      *
      * @param object $object The class object where the method must be found.

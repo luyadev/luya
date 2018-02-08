@@ -252,13 +252,13 @@ class ModuleReflection extends BaseObject
         /**
          * Override the current application controller in order to ensure current() url handling which is used
          * for relativ urls/rules.
-         * 
+         *
          * Maybe we have to restore the original controller in the EVENT_AFTER_RENDER event.
          *
          * @see https://github.com/luyadev/luya/issues/1730
          */
-        $this->controller->view->on(View::EVENT_BEFORE_RENDER, function($event) {
-        	 Yii::$app->controller = $this->controller;
+        $this->controller->view->on(View::EVENT_BEFORE_RENDER, function ($event) {
+            Yii::$app->controller = $this->controller;
         });
         
         // run the action on the provided controller object

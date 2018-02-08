@@ -122,7 +122,7 @@ class ExportHelperTest extends LuyaWebTestCase
 
     protected function saveArrayToXlsx($filename, array $input, array $keys = [], $header = true)
     {
-        $string = ExportHelper::xlsx($input,$keys, $header);
+        $string = ExportHelper::xlsx($input, $keys, $header);
         file_put_contents($filename, $string);
     }
 }
