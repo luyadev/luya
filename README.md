@@ -20,10 +20,11 @@ We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUY
 
 + [How to install](https://luya.io/guide/install)
 + [Video Tutorials](https://luya.io/videos)
-+ [How to upgrade current website](https://luya.io/guide/install-upgrade)
 
 Other helpfull informations:
 
++ [Read in the Guide](https://luya.io/guide)
++ [Checkout the API documentation](https://luya.io/api)
 + [Changelog](core/CHANGELOG.md)
 + [Version upgrade Breaks](core/UPGRADE.md)
 
