@@ -255,10 +255,9 @@ class ModuleReflection extends BaseObject
          *
          * @see https://github.com/luyadev/luya/issues/1730
          */
-        $this->controller->view->on(View::EVENT_BEFORE_RENDER, function($event) {
-        	 Yii::$app->controller = $this->controller;
+        $this->controller->view->on(View::EVENT_BEFORE_RENDER, function ($event) {
+            Yii::$app->controller = $this->controller;
         });
-        
         /**
          * Restore the original controller instance after rendering.
          * 

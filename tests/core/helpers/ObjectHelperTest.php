@@ -99,20 +99,20 @@ class ObjectHelperTest extends \luyatests\LuyaWebTestCase
     {
         $var = 'foo';
         
-        $this->assertFalse(ObjectHelper::instanceOf($var, new ObjectHelper(), false));
-        $this->assertFalse(ObjectHelper::instanceOf($var, 'luya\helpers\ObjectHelper', false));
-        $this->assertFalse(ObjectHelper::instanceOf($var, 'DoesNotExists', false));
-        $this->assertFalse(ObjectHelper::instanceOf($var, ['luya\helpers\ObjectHelper', ObjectHelper::class], false));
+        $this->assertFalse(ObjectHelper::isInstanceOf($var, new ObjectHelper(), false));
+        $this->assertFalse(ObjectHelper::isInstanceOf($var, 'luya\helpers\ObjectHelper', false));
+        $this->assertFalse(ObjectHelper::isInstanceOf($var, 'DoesNotExists', false));
+        $this->assertFalse(ObjectHelper::isInstanceOf($var, ['luya\helpers\ObjectHelper', ObjectHelper::class], false));
         
         $validObject = new ObjectHelper();
         
-        $this->assertTrue(ObjectHelper::instanceOf($validObject, 'luya\helpers\ObjectHelper', false));
-        $this->assertTrue(ObjectHelper::instanceOf($validObject, ['invalid\Object', 'luya\helpers\ObjectHelper'], false));
-        $this->assertTrue(ObjectHelper::instanceOf($validObject, [ObjectHelper::class], false));
-        $this->assertTrue(ObjectHelper::instanceOf($validObject, [$validObject], false));
-        $this->assertTrue(ObjectHelper::instanceOf($validObject, $validObject, false));
+        $this->assertTrue(ObjectHelper::isInstanceOf($validObject, 'luya\helpers\ObjectHelper', false));
+        $this->assertTrue(ObjectHelper::isInstanceOf($validObject, ['invalid\Object', 'luya\helpers\ObjectHelper'], false));
+        $this->assertTrue(ObjectHelper::isInstanceOf($validObject, [ObjectHelper::class], false));
+        $this->assertTrue(ObjectHelper::isInstanceOf($validObject, [$validObject], false));
+        $this->assertTrue(ObjectHelper::isInstanceOf($validObject, $validObject, false));
         
         $this->expectException('luya\Exception');
-        $this->assertFalse(ObjectHelper::instanceOf('fooBar', ['\Exception']));
+        $this->assertFalse(ObjectHelper::isInstanceOf('fooBar', ['\Exception']));
     }
 }
