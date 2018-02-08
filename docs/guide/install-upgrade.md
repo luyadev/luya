@@ -47,4 +47,4 @@ Sometimes image filters changes and you should reprocess all images in the filem
 
 ## Upgrade the application code
 
-Read the [CHANGELOG](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) to see all new, fixed and breaking features. The **most important** when upgrading into another version is to [read the BC Breaks Guide](https://github.com/luyadev/luya/blob/master/UPGRADE.md) in order to see all changes which have to be done in your application to run the newest version of LUYA.
+Read the [CHANGELOG](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) to see all new, fixed and breaking features. The **most important** when upgrading into another version is to [read the BC Breaks Guide](https://github.com/luyadev/luya/blob/master/core/UPGRADE.md) in order to see all changes which have to be done in your application to run the newest version of LUYA.
