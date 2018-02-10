@@ -10,10 +10,9 @@ use luya\traits\CacheableTrait;
 use Yii;
 
 /**
- * @property string $folder The base folder path. Default is "@webroot/svg"
- *
  * Svg "inserter"
- * This Widget will insert the contents of a given SVG file at the widgets position
+ *
+ * This Widget will insert the contents of a given SVG file at the widgets position.
  *
  * ```php
  *  <?= Svg::widget([
@@ -22,6 +21,8 @@ use Yii;
  *     'cssClss' => 'additional-class-for-css'
  * ]); ?>
  * ```
+ *
+ * @property string $folder The base folder path. Default is "@webroot/svg"
  *
  * @author Marc Stampfli <marc@zephir.ch>
  * @since 1.0.0
@@ -46,8 +47,9 @@ class Svg extends Widget
     private $_folder;
 
     /**
-     * @param $folder
-     * Sets $_folder to the given string (parsed trough Yii::getAlias())
+     * Setter method for $folder.
+     *
+     * @param $folder Sets $_folder to the given string (parsed trough Yii::getAlias())
      */
     public function setFolder($folder)
     {
@@ -55,8 +57,9 @@ class Svg extends Widget
     }
 
     /**
-     * @return string
-     * Returns the folder string, if none is set it will return the default value "@webroot/svg"
+     * Getter method for $folder.
+     *
+     * @return string Returns the folder string, if none is set it will return the default value "@webroot/svg"
      */
     public function getFolder()
     {
