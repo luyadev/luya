@@ -260,11 +260,11 @@ class ModuleReflection extends BaseObject
         });
         /**
          * Restore the original controller instance after rendering.
-         * 
+         *
          * @see https://github.com/luyadev/luya/issues/1768
          */
-        $this->controller->view->on(View::EVENT_AFTER_RENDER, function($event) use ($originalController) {
-        	Yii::$app->controller = $originalController;
+        $this->controller->view->on(View::EVENT_AFTER_RENDER, function ($event) use ($originalController) {
+            Yii::$app->controller = $originalController;
         });
         
         // run the action on the provided controller object
