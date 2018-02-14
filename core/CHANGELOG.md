@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Fixed
 
 - [#1730](https://github.com/luyadev/luya/issues/1730) Problem when using relativ url rule handling which are resolved trough current $app->controller.
+- [#55](https://github.com/luyadev/luya-module-admin/issues/55) Fixed issue where admin APIs can not access module context.
 
 ## 1.0.3 (24. January 2018)
 

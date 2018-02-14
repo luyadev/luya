@@ -46,7 +46,7 @@ class Bootstrap extends BaseBootstrap
             }
             
             foreach ($module->apis as $alias => $class) {
-                $this->_apis[$alias] = $class;
+                $this->_apis[$alias] = ['class' => $class, 'module' => $module];
             }
             
             foreach ($module->tags as $name => $config) {
