@@ -124,14 +124,14 @@ Sometimes you have navigation which should stick based on the previous item, ass
 
 ```php
 // you print the first menu somewhere:
-foreach (Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all() as $item):
+foreach (Yii::$app->menu->find()->container('default')->root()->all() as $item) {
     echo $item->title;
-endforeach; ?>
+}
 
 // but have a second menu based on the first menu somewhere else:
-foreach (Yii::$app->menu->getLevelContainer(2) as $secondItem):
+foreach (Yii::$app->menu->getLevelContainer(2) as $secondItem) {
     echo $secondItem->title;
-endforeach; 
+}
 ```
 
 ## Menu Item Injection
