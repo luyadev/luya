@@ -87,6 +87,8 @@ When casting a field as i18n it will save the multi lingual data in json format 
 
 > All i18n fields must be type of varchar or text in the database as it is json encodes the input array in the database table field.
 
+The i18n fields will be saved as JSON with a string entry for every CMS language. If you access a field, the value for the current CMS language will be automatically extracted. To access the i18n fields as JSON without the automatic conversion, use `$this->getOldAttribute('FIELDNAME')`. This is helpful when manually wanting to check/validate the entries for every language.
+
 ## Extra fields
 
 Sometimes you want to define fields which are not part of the ActiveRecord model and are not part of the database table, e. g. you want to display a count of registered users on the CRUD list. To achieve this you may use the `extraFields` principal combined with the {{yii\base\BaseObject}} getter/setter information.
