@@ -9,6 +9,9 @@ use yii\web\NotFoundHttpException;
 
 class ErrorHandlerTest extends LuyaWebTestCase
 {
+    /**
+     * @runInSeparateProcess
+     */
     public function testTriggerException()
     {
         $handler = new ErrorHandler();

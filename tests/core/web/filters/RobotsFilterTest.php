@@ -27,9 +27,9 @@ class StubRobotsController extends Controller
 
 class RobotsFilterTest extends LuyaWebTestCase
 {
-	/**
-	 * @runInSeparateProcess
-	 */
+    /**
+     * @runInSeparateProcess
+     */
     public function testRobotsFilter()
     {
         $ctrl = new StubRobotsController('stub', Yii::$app);

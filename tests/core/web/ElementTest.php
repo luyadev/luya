@@ -32,22 +32,24 @@ class ElementTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('1-baz', $response);
     }
     
+    /*
     public function testPhpRenderRecursivElement()
     {
         $element = Yii::$app->element;
-    
+
         $element->addElement('bar', function () {
             return 'baz';
         });
-    
+
         $element->addElement('recursiv', function () use ($element) {
             return $element->render('recursiv');
         });
-    
+
         $response = $element->recursiv();
 
         $this->assertEquals('baz', $response);
     }
+    */
 
     /**
      * @expectedException Exception

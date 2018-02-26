@@ -54,6 +54,9 @@ class GroupUserTest extends LuyaWebTestCase
         $this->assertFalse($user->inGroup('group-a'));
     }
     
+    /**
+     * @runInSeparateProcess
+     */
     public function testIsGuestInGroup()
     {
         $user = new GroupUser(['identityClass' => 'GroupAUserIdentity']);
@@ -66,6 +69,9 @@ class GroupUserTest extends LuyaWebTestCase
         $this->assertTrue($user->inGroup(['group-c', 'group-b', 'group-a']));
     }
     
+    /**
+     * @runInSeparateProcess
+     */
     public function testIsGuestInGroupButNoInterface()
     {
         $user = new GroupUser(['identityClass' => 'luyatests\data\models\UserIdentity']);
