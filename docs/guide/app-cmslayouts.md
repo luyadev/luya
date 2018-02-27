@@ -6,7 +6,7 @@ If you are using the CMS module in your application (which is installed by defau
 
 ## Create new Layout
 
-All CMS layouts are stored in the `views/cmslayouts` folder which is located in the base path of your project. If we create a new layout with e.g. 2 columns we just add a new view file to the `cmslayouts folder like `views/cmslayouts/2columns.php`.
+All CMS layouts are stored in the `views/cmslayouts` folder which is located in the base path of your project. If we create a new layout with e.g. 2 columns we just add a new view file to the cmslayouts folder like `views/cmslayouts/2columns.php`.
 
 You can now add html content to the new CMS layout file `2columns.php` but the most important is to let the CMS know on which part of the file the user can add content (blocks). To mark the area which can be filled with user content is called placeholder a can be defined with the $placeholders array `<?= $placeholders['YOUR_VARIABLE_NAME']; ?>`. In the example below we have made 2 placeholders for each column (left and right):
 
