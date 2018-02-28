@@ -21,14 +21,17 @@ namespace app\modules\admin;
 /**
  * Foo Admin Module.
  *
- * File has been created with `module/create` command. 
+ * File has been created with `module/create` command.
+ *
+ * @author
+ * @since 1.0.0
  */
 class Module extends \luya\admin\base\Module
 {
 
 }
 EOT;
-        $this->assertSame($tpl, $content);
+        $this->assertSameNoSpace($tpl, $content);
     }
     
     public function testRenderFrontend()
@@ -44,14 +47,17 @@ namespace app\modules\frontend;
 /**
  * Foo Admin Module.
  *
- * File has been created with `module/create` command. 
+ * File has been created with `module/create` command.
+ *
+ * @author
+ * @since 1.0.0
  */
 class Module extends \luya\base\Module
 {
 
 }
 EOT;
-        $this->assertSame($tpl, $content);
+        $this->assertSameNoSpace($tpl, $content);
     }
     
     public function testRenderReadme()
