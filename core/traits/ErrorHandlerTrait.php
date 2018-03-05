@@ -2,10 +2,10 @@
 
 namespace luya\traits;
 
-use yii\web\NotFoundHttpException;
 use yii\helpers\Json;
 use Curl\Curl;
 use luya\helpers\Url;
+use luya\helpers\ObjectHelper;
 
 /**
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
@@ -29,10 +29,22 @@ trait ErrorHandlerTrait
     public $transferException = false;
 
     /**
+     * @var \Curl\Curl|null The curl object from the last error api call.
+     * @since 1.0.5
+     */
+    public $lastTransferCall;
+    
+    /**
+     * @var array An array of exceptions which are whitelisted and therefore NOT TRANSFERED.
+     * @since 1.0.5
+     */
+    public $whitelist = ['yii\web\NotFoundHttpException'];
+    
+    /**
      * Send a custom message to the api server event its not related to an exception.
      *
-     * Sometimes you just want to pass informations to your application, this method allows you to transfer
-     * a message to your error api server.
+     * Sometimes you just want to pass informations from your application, this method allows you to transfer
+     * a message to the error api server.
      *
      * Example of sending a message
      *
@@ -64,10 +76,15 @@ trait ErrorHandlerTrait
     {
         if ($this->transferException) {
             $curl = new Curl();
+            $curl->setOpt(CURLOPT_CONNECTTIMEOUT, 2);
+            $curl->setOpt(CURLOPT_TIMEOUT, 2);
             $curl->post(Url::ensureHttp(rtrim($this->api, '/')).'/create', [
                 'error_json' => Json::encode($data),
             ]);
-            return !$curl->error;
+            
+            $this->lastTransferCall = $curl;
+            
+            return $curl->isSuccess();
         }
         
         return null;
@@ -78,11 +95,9 @@ trait ErrorHandlerTrait
      */
     public function renderException($exception)
     {
-        if ($exception instanceof NotFoundHttpException || !$this->transferException) {
-            return parent::renderException($exception);
+        if (!ObjectHelper::isInstanceOf($exception, $this->whitelist, false) && $this->transferException) {
+            $this->apiServerSendData($this->getExceptionArray($exception));
         }
-        
-        $this->apiServerSendData($this->getExceptionArray($exception));
         
         return parent::renderException($exception);
     }
@@ -142,6 +157,12 @@ trait ErrorHandlerTrait
         ];
     }
     
+    /**
+     * Build trace array from exception.
+     * 
+     * @param object $exception
+     * @return array
+     */
     private function buildTrace($exception)
     {
         $_trace = [];
@@ -153,6 +174,7 @@ trait ErrorHandlerTrait
                 'class' => isset($item['class']) ? $item['class'] : null,
             ];
         }
+        
         return $_trace;
     }
 }

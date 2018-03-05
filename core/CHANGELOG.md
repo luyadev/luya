@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.5 (in progress)
 
+### Added
+
+- [#1774](https://github.com/luyadev/luya/issues/1774) Provide option to configure transfer whitelist. Whitelisted exception will not transfered to the error API.
+
 ## 1.0.4 (28. February 2018)
 
 ### Changed

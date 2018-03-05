@@ -2,7 +2,7 @@
 
 namespace luyatests\core\traits;
 
-use Exception;
+use luya\Exception;
 use luyatests\LuyaWebTestCase;
 use luya\console\ErrorHandler;
 
@@ -24,7 +24,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
             $this->assertArrayHasKey('ip', $response);
             $this->assertArrayHasKey('get', $response);
             $this->assertArrayHasKey('post', $response);
-            $this->assertTrue(is_Array($response['trace']));
+            $this->assertTrue(is_array($response['trace']));
         } catch (Exception $e) {
             $this->assertEquals('Error: foobar', $e->getMessage());
         }
@@ -46,7 +46,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
             $this->assertArrayHasKey('ip', $response);
             $this->assertArrayHasKey('get', $response);
             $this->assertArrayHasKey('post', $response);
-            $this->assertTrue(is_Array($response['trace']));
+            $this->assertTrue(is_array($response['trace']));
         } catch (Exception $e) {
             $this->assertEquals('Error: foobar', $e->getMessage());
         }
@@ -68,7 +68,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
             $this->assertArrayHasKey('ip', $response);
             $this->assertArrayHasKey('get', $response);
             $this->assertArrayHasKey('post', $response);
-            $this->assertTrue(is_Array($response['trace']));
+            $this->assertTrue(is_array($response['trace']));
         } catch (Exception $e) {
             $this->assertEquals('Error: foobar', $e->getMessage());
         }
