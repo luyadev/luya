@@ -15,6 +15,7 @@
   + [Composition](concept-composition.md)
   + [Deployment & Sync](concept-depandsync.md)
   + [Extensions](concept-extensions.md)
+  + [Headless](concept-headless.md)
 + Application
   + [Modules](app-module.md)
   + [Translations](app-translation.md)
