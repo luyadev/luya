@@ -2,6 +2,7 @@
 
 namespace luya\traits;
 
+use Yii;
 use yii\helpers\Json;
 use Curl\Curl;
 use luya\helpers\Url;
@@ -154,6 +155,8 @@ trait ErrorHandlerTrait
             'post' => (isset($_POST)) ? $_POST : [],
             'session' => (isset($_SESSION)) ? $_SESSION : [],
             'server' => (isset($_SERVER)) ? $_SERVER : [],
+            'profiling' => Yii::getLogger()->profiling,
+            'logger' => Yii::getLogger()->messages,
         ];
     }
     
