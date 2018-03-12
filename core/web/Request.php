@@ -2,8 +2,6 @@
 
 namespace luya\web;
 
-use Yii;
-
 /**
  * Request Component.
  *
@@ -37,6 +35,19 @@ class Request extends \yii\web\Request
         'application/json' => 'yii\web\JsonParser',
     ];
     
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        
+        // if an admin request is detected, change the csrf param.
+        if ($this->isAdmin) {
+            $this->csrfParam = '_csrf-admin';
+        }
+    }
+    
     private $_isAdmin;
     
     /**
@@ -62,9 +73,8 @@ class Request extends \yii\web\Request
             if ($this->getIsConsoleRequest() && !$this->forceWebRequest) {
                 $this->_isAdmin = false;
             } else {
-                $resolver = Yii::$app->composition->getResolvedPathInfo($this);
-                $pathInfo = $resolver['route'];
-                $parts = explode('/', $pathInfo);
+                $resolver = (new Composition($this))->getResolvedPathInfo($this);
+                $parts = explode('/', $resolver['route']);
                 $first = reset($parts);
                 
                 if (preg_match('/admin/i', $first, $results)) {
