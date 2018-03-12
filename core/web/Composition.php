@@ -5,10 +5,28 @@ namespace luya\web;
 use Yii;
 use yii\base\Component;
 use luya\Exception;
+use luya\helpers\StringHelper;
+use yii\web\ForbiddenHttpException;
 
 /**
- * Composition provides multi lingual handling and detection.
- *
+ * Composition parseRequest Handler.
+ * 
+ * The composition is run for every {{luya\web\UrlManager::parseRequest()} call in order to determine
+ * the language of the application based on {{luya\web\Composition::$hostInfoMapping}} or from the given
+ * {{luya\web\Request::$hostInfo}}.
+ * 
+ * It also provides common functions in order to make complex regional language detection for urls
+ * like `https://example.com/fr/ch`, its possible to set {{luya\web\Composition::$pattern}} and retrieve
+ * the value later inside your application. The `langShortCode` must be provided as long as working with the 
+ * cms, as its bound to the administration are language database table.
+ * 
+ * It also provides security checks like
+ * 
+ * + {{luya\web\Composition::$allowedHosts}}
+ * 
+ * The Composition component is registered by the {{luya\base\Boot}} object and can therefore always access
+ * trough `Yii::$app->composition` as "singleton" instance.
+ * 
  * @property string $full Return `getFull()` method represents full composition
  * @property string $defaultLangShortCode Return default defined language shord code
  * @property string $language Return wrapper of getKey('langShortCode')
@@ -74,6 +92,23 @@ class Composition extends Component implements \ArrayAccess
      * The above configuration must be defined in your compostion componeont configuration in your config file.
      */
     public $hostInfoMapping = [];
+    
+    /**
+     * 
+     * @var array|string An array with all valid hosts in order to ensure the request host is equals to valid hosts.
+     * This filter provides protection against ['host header' attacks](https://www.acunetix.com/vulnerabilities/web/host-header-attack).
+     * 
+     * ```php
+     * 'allowedHosts' => [
+     *     'example.com',
+     *     '*.example.com',
+     * ]
+     * ```
+     * 
+     * If null is defined, the allow host filtering is disabled, default value.
+     * @since 1.0.5
+     */
+    public $allowedHosts = null;
 
     /**
      * Class constructor, to get data from DiContainer.
@@ -111,6 +146,10 @@ class Composition extends Component implements \ArrayAccess
             throw new Exception("The composition default rule must contain a langShortCode.");
         }
 
+        if ($this->allowedHosts !== null && !$this->isHostAllowed($this->allowedHosts)) {
+            throw new ForbiddenHttpException("The current host '{$this->request->hostName}' is not in the list valid of hosts.");
+        }
+        
         if (array_key_exists($this->request->hostInfo, $this->hostInfoMapping)) {
             $this->default = $this->hostInfoMapping[$this->request->hostInfo];
         }
@@ -125,9 +164,32 @@ class Composition extends Component implements \ArrayAccess
         }
         $this->_compositionKeys = $resolve['keys'];
     }
+    
+    /**
+     * Checks if the current request name against the allowedHosts list.
+     *
+     * If the list of 
+     *
+     * @return boolean Whether the current hostName is allowed or not.
+     * @since 1.0.5
+     */
+    public function isHostAllowed($allowedHosts)
+    {
+        $currentHost = $this->request->hostName;
+        
+        $rules = (array) $allowedHosts;
+        
+        foreach ($rules as $allowedHost) {
+            if (StringHelper::matchWildcard($allowedHost, $currentHost)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
     /**
-     * This event will method will triggere after setKey method is proccessed. The
+     * This event will method will trigge after setKey method is proccessed. The
      * main purpose of this function to change the localisation based on the required
      * key 'langShortCode'.
      *
@@ -143,7 +205,7 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
      *
-     * @param \yii\web\Request $request
+     * @param \luya\web\Request $request
      * @return array An array containing the route and the resolvedValues. Example array output when request path is `de/hello/world`:
      *
      * ```php
@@ -155,7 +217,7 @@ class Composition extends Component implements \ArrayAccess
      * ]
      * ```
      */
-    public function getResolvedPathInfo(\yii\web\Request $request)
+    public function getResolvedPathInfo(Request $request)
     {
         // contains all resolved values
         $resolvedValues = [];
@@ -251,7 +313,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function createRouteEnsure(array $overrideKeys = [])
     {
-        return ($this->hidden) ? '' : $this->createRoute($overrideKeys);
+        return $this->hidden ? '' : $this->createRoute($overrideKeys);
     }
 
     /**
@@ -326,7 +388,7 @@ class Composition extends Component implements \ArrayAccess
     /**
      * ArrayAccess offset exists.
      *
-     * @see ArrayAccess::offsetExists()
+     * @see \ArrayAccess::offsetExists()
      * @return boolean
      */
     public function offsetExists($offset)
@@ -337,7 +399,7 @@ class Composition extends Component implements \ArrayAccess
     /**
      * ArrayAccess set value to array.
      *
-     * @see ArrayAccess::offsetSet()
+     * @see \ArrayAccess::offsetSet()
      * @param string $offset The key of the array
      * @param mixed $value The value for the offset key.
      * @throws \luya\Exception
@@ -353,7 +415,7 @@ class Composition extends Component implements \ArrayAccess
     /**
      * ArrayAccess get the value for a key.
      *
-     * @see ArrayAccess::offsetGet()
+     * @see \ArrayAccess::offsetGet()
      * @param string $offset The key to get from the array.
      * @return mixed The value for the offset key from the array.
      */
@@ -367,7 +429,7 @@ class Composition extends Component implements \ArrayAccess
      *
      * Unsetting data via array access is not allowed.
      *
-     * @see ArrayAccess::offsetUnset()
+     * @see \ArrayAccess::offsetUnset()
      * @param string $offset The key to unset from the array.
      * @throws \luya\Exception
      */

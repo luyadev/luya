@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- [#1762](https://github.com/luyadev/luya/issues/1762) Add luya\web\Composition::$allowedHosts to ensure the hostName from a list of valid host names. Otherwise throw forbidden exception.
 - [#1774](https://github.com/luyadev/luya/issues/1774) Provide option to configure transfer whitelist. Whitelisted exception will not transfered to the error API.
 
 ## 1.0.4 (28. February 2018)

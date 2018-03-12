@@ -200,4 +200,36 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         
         $this->assertEquals('this-should/be-left', $comp->removeFrom('en/this-should/be-left'));
     }
+    
+    public function testAllowedHosts()
+    {
+        $request = new Request();
+        $comp = new Composition($request);
+        $this->assertTrue($comp->isHostAllowed(['localhost']));
+    }
+    
+    public function testAllowedHostsItems()
+    {
+        $request = new Request();
+        $request->hostInfo = 'http://www.foobar.com';
+        $comp = new Composition($request);
+        $this->assertTrue($comp->isHostAllowed(['www.foobar.com']));
+    }
+    
+    public function testAllowedHostsItemsWildcard()
+    {
+        $request = new Request();
+        $request->hostInfo = 'http://www.foobar.com';
+        $comp = new Composition($request);
+        $this->assertTrue($comp->isHostAllowed(['*.foobar.com']));
+        $this->assertFalse($comp->isHostAllowed(['luya.io']));
+        $this->assertTrue($comp->isHostAllowed(['luya.io', 'www.foobar.com']));
+    }
+    
+    public function testAllowedHostsExceptions()
+    {
+        $request = new Request();
+        $comp = new Composition($request);
+        $this->assertFalse($comp->isHostAllowed(['foobar.com']));
+    }
 }
