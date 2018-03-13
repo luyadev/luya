@@ -19,7 +19,7 @@ use luya\base\PackageInstaller;
  */
 trait ApplicationTrait
 {
-    private $_webroot;
+    
     
     /**
      * @var string Title for the application used in different sections like Login screen
@@ -171,6 +171,8 @@ trait ApplicationTrait
         
         parent::bootstrap();
     }
+    
+    private $_webroot;
     
     /**
      * Read only property which is used in cli bootstrap process to set the @webroot alias
