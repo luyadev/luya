@@ -85,6 +85,9 @@ class UrlManager extends \yii\web\UrlManager
         // @see https://github.com/luyadev/luya/issues/1146
         $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver['compositionKeys']['langShortCode']);
         
+        // set the application language based from the parsed composition request:
+        Yii::$app->setLocale($this->composition->langShortCode);
+        
         // if enableStrictParsing is enabled and the route is not found, $parsedRequest will return `false`.
         if ($res === false && ($this->composition->hidden || $parsedRequest === false)) {
             return $parsedRequest;

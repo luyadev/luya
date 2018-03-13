@@ -27,20 +27,16 @@ use yii\web\ForbiddenHttpException;
  * The Composition component is registered by the {{luya\base\Boot}} object and can therefore always access
  * trough `Yii::$app->composition` as "singleton" instance.
  * 
- * @property string $full Return `getFull()` method represents full composition
+ * @property string $prefixPath Return the current composition prefix path for the request based on request input and hidden option.
+ * @property array $keys Return an array with key and value of all resolve composition values for the current request.
  * @property string $defaultLangShortCode Return default defined language shord code
- * @property string $language Return wrapper of getKey('langShortCode')
+ * @property string $langShortCode Return wrapper of getKey('langShortCode')
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class Composition extends Component implements \ArrayAccess
 {
-    /**
-     * @var string This event will method will triggere after setKey method is proccessed
-     */
-    const EVENT_AFTER_SET = 'EVENT_AFTER_SET';
-
     /**
      * @var string The Regular-Expression matching the var finder inside the url parts
      */
@@ -123,19 +119,7 @@ class Composition extends Component implements \ArrayAccess
     }
 
     /**
-     * Return the the default langt short code.
-     *
-     * @return string
-     */
-    public function getDefaultLangShortCode()
-    {
-        return $this->default['langShortCode'];
-    }
-
-    private $_compositionKeys = [];
-    
-    /**
-     * Resolve the the composition on init.
+     * @inheritdoc
      */
     public function init()
     {
@@ -153,22 +137,10 @@ class Composition extends Component implements \ArrayAccess
         if (array_key_exists($this->request->hostInfo, $this->hostInfoMapping)) {
             $this->default = $this->hostInfoMapping[$this->request->hostInfo];
         }
-
-        // atach event to component
-        $this->on(self::EVENT_AFTER_SET, [$this, 'eventAfterSet']);
-        // resolved data
-        $resolve = $this->getResolvedPathInfo($this->request);
-        // set initializer comosition
-        foreach ($resolve['compositionKeys'] as $key => $value) {
-            $this->setKey($key, $value);
-        }
-        $this->_compositionKeys = $resolve['keys'];
     }
     
     /**
      * Checks if the current request name against the allowedHosts list.
-     *
-     * If the list of 
      *
      * @return boolean Whether the current hostName is allowed or not.
      * @since 1.0.5
@@ -188,25 +160,32 @@ class Composition extends Component implements \ArrayAccess
         return false;
     }
 
+    private $_keys;
+    
     /**
-     * This event will method will trigge after setKey method is proccessed. The
-     * main purpose of this function to change the localisation based on the required
-     * key 'langShortCode'.
-     *
-     * @param \luya\web\CompositionAfterSetEvent $event The event object.
+     * Resolves the current key and value objects based on the current pathInto and pattern from Request component.
+     * 
+     * @return array An array with key values like `['langShortCode' => 'en']`.
+     * @since 1.0.5
      */
-    public function eventAfterSet($event)
+    public function getKeys()
     {
-        if ($event->key == 'langShortCode') {
-            Yii::$app->setLocale($event->value);
+        if ($this->_keys === null) {
+            // resolved data
+            $resolve = $this->getResolvedPathInfo($this->request);
+            
+            $this->_keys = $resolve['compositionKeys'];
         }
+        
+        return $this->_keys;
     }
-
+    
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
      *
      * @param \luya\web\Request $request
-     * @return array An array containing the route and the resolvedValues. Example array output when request path is `de/hello/world`:
+     * @return array An array containing the route and the resolvedValues.
+     * Example array output when request path is `de/hello/world`:
      *
      * ```php
      * [
@@ -214,10 +193,38 @@ class Composition extends Component implements \ArrayAccess
      *     'resolvedValues' => [
      *         0 => 'de'
      *     ],
+     *     'compositionKeys' => [],
+     *     'keys' => [],
      * ]
      * ```
      */
     public function getResolvedPathInfo(Request $request)
+    {
+        return $this->extractCompositionData($request, $this->pattern, $this->default);
+    }
+    
+    /**
+     * Resolve the current url request and retun an array contain resolved route and the resolved values.
+     *
+     * @param \luya\web\Request $request
+     * @param string $regexPattern The pattern to resolve the values against request pathInfo, example <langShortCode:[a-z]{2}>'
+     * @param array $defaultValues An array with a key and a value.
+     * @return array An array containing the route and the resolvedValues.
+     * Example array output when request path is `de/hello/world`:
+     * 
+     * ```php
+     * [
+     *     'route' => 'hello/world',
+     *     'resolvedValues' => [
+     *         0 => 'de'
+     *     ],
+     *     'compositionKeys' => ['langShortCode' => 'de'],
+     *     'keys' => ['langShortCode'],
+     * ]
+     * ```
+     * @since 1.0.5
+     */
+    public function extractCompositionData(Request $request, $regexPattern, array $defaultValues)
     {
         // contains all resolved values
         $resolvedValues = [];
@@ -225,7 +232,7 @@ class Composition extends Component implements \ArrayAccess
         // array with all url parts, seperated by slash
         $requestUrlParts = explode('/', $request->pathInfo);
         // catch all results matching the var match regular expression
-        preg_match_all(static::VAR_MATCH_REGEX, $this->pattern, $matches, PREG_SET_ORDER);
+        preg_match_all(static::VAR_MATCH_REGEX, $regexPattern, $matches, PREG_SET_ORDER);
         // get all matches
         foreach ($matches as $index => $match) {
             $foundKeys[] = $match[1];
@@ -243,32 +250,29 @@ class Composition extends Component implements \ArrayAccess
         }
         // get default values if nothing have been resolved
         if (count($resolvedValues) == 0) {
-            $keys = $this->default;
+            $keys = $defaultValues;
         } else {
             $keys = $resolvedValues;
         }
-        // return array with route and resolvedValues
-        return ['route' => implode('/', $requestUrlParts), 'resolvedValues' => $resolvedValues, 'compositionKeys' => $keys, 'keys' => $foundKeys];
+        
+        return [
+            'route' => implode('/', $requestUrlParts),
+            'resolvedValues' => $resolvedValues,
+            'compositionKeys' => $keys,
+            'keys' => $foundKeys,
+        ];
     }
-    
-    private $_composition = [];
 
     /**
      * Set a new composition key and value in composition array. If the key already exists, it will
-     * be overwritten. The setKey method triggers the CompositionAfterSetEvent class.
+     * be overwritten.
      *
      * @param string $key The key in the array, e.g. langShortCode
      * @param string $value The value coresponding to the key e.g. de
      */
     public function setKey($key, $value)
     {
-        // set and override composition
-        $this->_composition[$key] = $value;
-        // trigger event
-        $event = new CompositionAfterSetEvent();
-        $event->key = $key;
-        $event->value = $value;
-        $this->trigger(self::EVENT_AFTER_SET, $event);
+        $this->_keys[$key] = $value;
     }
 
     /**
@@ -276,37 +280,32 @@ class Composition extends Component implements \ArrayAccess
      * will be return. The standard value of the defaultValue is false, so if nothing defined and the could not
      * be found, the return value is `false`.
      *
-     * @param string $key          The key to find in the composition array e.g. langShortCode
+     * @param string $key The key to find in the composition array e.g. langShortCode
      * @param string $defaultValue The default value if they could not be found
      * @return string|bool
      */
     public function getKey($key, $defaultValue = false)
     {
-        return (isset($this->_composition[$key])) ? $this->_composition[$key] : $defaultValue;
+        $this->getKeys();
+        
+        return isset($this->_keys[$key]) ? $this->_keys[$key] : $defaultValue;
     }
-
+    
     /**
-     * Return the whole composition array.
-     *
-     * @return array
-     */
-    public function get()
-    {
-        return $this->_composition;
-    }
-
-    /**
-     * Return a path like string with all composition with trailing slash e.g. us/e.
-     *
+     * Get the composition prefix path based on current provided request.
+     * 
+     * An example response could be `de` or with other composition keys and patters `de/ch` or `de-CH`.
+     * 
      * @return string
+     * @since 1.0.5
      */
-    public function getFull()
+    public function getPrefixPath()
     {
         return $this->createRouteEnsure();
     }
 
     /**
-     * create a route but ensures if composition is hidden anywho.
+     * Create a route but ensures if composition is hidden anyhow.
      *
      * @param array $overrideKeys
      * @return string
@@ -315,7 +314,7 @@ class Composition extends Component implements \ArrayAccess
     {
         return $this->hidden ? '' : $this->createRoute($overrideKeys);
     }
-
+    
     /**
      * Create compositon route based on the provided keys (to override), if no keys provided
      * all the default values will be used.
@@ -325,14 +324,13 @@ class Composition extends Component implements \ArrayAccess
      */
     public function createRoute(array $overrideKeys = [])
     {
-        $composition = $this->_composition;
-
+        $composition = $this->getKeys();
+        
         foreach ($overrideKeys as $key => $value) {
-            if (in_array($key, $this->_compositionKeys)) {
+            if (isset($key, $composition)) {
                 $composition[$key] = $value;
             }
         }
-
         return implode('/', $composition);
     }
 
@@ -346,7 +344,7 @@ class Composition extends Component implements \ArrayAccess
     public function prependTo($route, $prefix = null)
     {
         if ($prefix === null) {
-            $prefix = $this->getFull();
+            $prefix = $this->getPrefixPath();
         }
 
         if (empty($prefix)) {
@@ -370,19 +368,29 @@ class Composition extends Component implements \ArrayAccess
      */
     public function removeFrom($route)
     {
-        $pattern = preg_quote($this->getFull().'/', '#');
+        $pattern = preg_quote($this->prefixPath.'/', '#');
 
         return preg_replace("#$pattern#", '', $route, 1);
     }
-
+    
     /**
      * Wrapper for `getKey('langShortCode')` to load language to set php env settings.
      *
      * @return string|boolean Get the language value from the langShortCode key, false if not set.
      */
-    public function getLanguage()
+    public function getLangShortCode()
     {
         return $this->getKey('langShortCode');
+    }
+    
+    /**
+     * Return the the default langt short code.
+     *
+     * @return string
+     */
+    public function getDefaultLangShortCode()
+    {
+        return $this->default['langShortCode'];
     }
 
     /**
@@ -393,7 +401,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return isset($this->_composition[$offset]);
+        return isset($this->_keys[$offset]);
     }
 
     /**
@@ -406,9 +414,6 @@ class Composition extends Component implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
-            throw new Exception('Unable to set array value without key. Empty keys not allowed.');
-        }
         $this->setKey($offset, $value);
     }
 
@@ -436,5 +441,40 @@ class Composition extends Component implements \ArrayAccess
     public function offsetUnset($offset)
     {
         throw new Exception('Deleting keys in Composition is not allowed.');
+    }
+    
+    // Deprecated methods
+    
+    /**
+     * Wrapper for `getKey('langShortCode')` to load language to set php env settings.
+     *
+     * @return string|boolean Get the language value from the langShortCode key, false if not set.
+     * @deprecated in 1.1.0 use `getLangShortCode()` instead.
+     */
+    public function getLanguage()
+    {
+        return $this->getKey('langShortCode');
+    }
+    
+    /**
+     * Return the whole composition array.
+     *
+     * @return array
+     * @deprecated Remove in 1.1.0 use `getKeys()` instead.
+     */
+    public function get()
+    {
+        return $this->_keys;
+    }
+    
+    /**
+     * Return a path like string with all composition with trailing slash e.g. us/e.
+     *
+     * @return string
+     * @deprecated Remove in 1.1.0 use `getPrefixPath()` instead.
+     */
+    public function getFull()
+    {
+        return $this->createRouteEnsure();
     }
 }

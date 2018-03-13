@@ -7,6 +7,7 @@ namespace luya\web;
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
+ * @deprecated in 1.1.0
  */
 class CompositionAfterSetEvent extends \yii\base\Event
 {

@@ -2,6 +2,8 @@
 
 namespace luya\web;
 
+use Yii;
+
 /**
  * Request Component.
  *
@@ -18,7 +20,7 @@ class Request extends \yii\web\Request
      * @var boolean Force web request to enable unit tests with simulated web requests
      */
     public $forceWebRequest = false;
-
+    
     /**
      * @var string The validation cookie for cookies, should be overwritten in your configuration.
      *
@@ -35,19 +37,6 @@ class Request extends \yii\web\Request
         'application/json' => 'yii\web\JsonParser',
     ];
     
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-        
-        // if an admin request is detected, change the csrf param.
-        if ($this->isAdmin) {
-            $this->csrfParam = '_csrf-admin';
-        }
-    }
-    
     private $_isAdmin;
     
     /**
@@ -59,7 +48,7 @@ class Request extends \yii\web\Request
     {
         $this->_isAdmin = $state;
     }
-
+    
     /**
      * Getter method resolves the current url request and check if admin context.
      *
@@ -73,8 +62,9 @@ class Request extends \yii\web\Request
             if ($this->getIsConsoleRequest() && !$this->forceWebRequest) {
                 $this->_isAdmin = false;
             } else {
-                $resolver = (new Composition($this))->getResolvedPathInfo($this);
-                $parts = explode('/', $resolver['route']);
+                $resolver = Yii::$app->composition->getResolvedPathInfo($this);
+                $pathInfo = $resolver['route'];
+                $parts = explode('/', $pathInfo);
                 $first = reset($parts);
                 
                 if (preg_match('/admin/i', $first, $results)) {

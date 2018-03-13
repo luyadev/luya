@@ -12,7 +12,7 @@ class RequestTest extends \luyatests\LuyaWebTestCase
         $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'admin/test/';
-        $this->assertEquals(true, $request->isAdmin);
+        $this->assertEquals(true, $request->getIsAdmin(true));
         
         $request = new Request();
         $request->forceWebRequest = true;

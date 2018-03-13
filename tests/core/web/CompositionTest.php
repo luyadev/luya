@@ -157,8 +157,7 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
     {
         $request = new Request();
         $comp = new Composition($request);
-        $this->assertTrue(is_array($comp->get()));
-        $this->assertArrayHasKey('langShortCode', $comp->get());
+        $this->assertArrayHasKey('langShortCode', $comp->getKeys());
     }
     
     /**
