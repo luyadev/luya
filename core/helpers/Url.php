@@ -34,7 +34,7 @@ class Url extends \yii\helpers\BaseUrl
      */
     public static function trailing($url, $slash = '/')
     {
-        return $url.(substr($url, -1) == $slash ? '' : $slash);
+        return rtrim($url, $slash) . $slash;
     }
 
     /**

@@ -11,9 +11,9 @@ class UrlTest extends \luyatests\LuyaWebTestCase
     {
         Yii::$app->composition->hidden = true;
         $this->assertEquals('foo/', Url::trailing('foo'));
+        $this->assertEquals('foo/', Url::trailing('foo/'));
+        $this->assertEquals('foo/', Url::trailing('foo//'));
     }
-
-    
 
     public function testToAjax()
     {
