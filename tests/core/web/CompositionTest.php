@@ -25,6 +25,25 @@ use luya\web\Composition;
  */
 class CompositionTest extends \luyatests\LuyaWebTestCase
 {
+    private function resolveHelper($url, $compUrl)
+    {
+        $request = new Request();
+        $request->pathInfo = $url;
+        
+        $composition = new Composition($request);
+        $composition->pattern = $compUrl;
+        
+        return $composition->getResolvedPathInfo($request);
+    }
+    
+    public function testEmptyRouteResolver()
+    {
+        $resolve = $this->resolveHelper('ch/', '<countryShortCode:[a-z]{2}>');
+        $this->assertEquals('', $resolve->resolvedPath);
+        $this->assertEquals(['countryShortCode' => 'ch'], $resolve->resolvedValues);
+        
+    }
+    
     public function testResolvedPaths()
     {
         $request = new Request();
@@ -33,14 +52,11 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $composition = new \luya\web\Composition($request);
 
         $resolver = $composition->getResolvedPathInfo($request);
-        $resolve = $resolver['route'];
-        $resolved = $resolver['resolvedValues'];
-
-        $this->assertEquals('hello/world', $resolve);
-        $this->assertEquals(true, is_array($resolved));
-        $this->assertEquals(1, count($resolved));
-        $this->assertArrayHasKey('langShortCode', $resolved);
-        $this->assertEquals('de', $resolved['langShortCode']);
+        
+        $this->assertEquals('hello/world', $resolver->resolvedPath);
+        $this->assertSame(['langShortCode' => 'de'], $resolver->resolvedValues);
+        $this->assertSame(['langShortCode'], $resolver->resolvedKeys);
+        
     }
 
     public function testMultipleResolvedPaths()
@@ -52,8 +68,8 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $composition->pattern = '<countryShortCode:[a-z]{2}>/<langShortCode:[a-z]{2}>';
 
         $resolver = $composition->getResolvedPathInfo($request);
-        $resolve = $resolver['route'];
-        $resolved = $resolver['resolvedValues'];
+        $resolve = $resolver->resolvedPath;
+        $resolved = $resolver->resolvedValues;
 
         $this->assertEquals('hello/world', $resolve);
         $this->assertEquals(true, is_array($resolved));
@@ -64,58 +80,50 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('de', $resolved['langShortCode']);
     }
 
-    private function resolveHelper($url, $compUrl)
-    {
-        $request = new Request();
-        $request->pathInfo = $url;
-
-        $composition = new \luya\web\Composition($request);
-        $composition->pattern = $compUrl;
-
-        return $composition->getResolvedPathInfo($request);
-    }
+   
 
     public function testGetResolvedPathInfo()
     {
         $comp = '<countryShortCode:[a-z]{2}>';
 
         $resolve = $this->resolveHelper('ch/de/hello/world', $comp);
-        $this->assertEquals('de/hello/world', $resolve['route']);
-        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        $this->assertEquals('de/hello/world', $resolve->resolvedPath);
+        $this->assertEquals('ch', $resolve->resolvedValues['countryShortCode']);
 
         $resolve = $this->resolveHelper('ch/de/hello', $comp);
-        $this->assertEquals('de/hello', $resolve['route']);
-        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        $this->assertEquals('de/hello', $resolve->resolvedPath);
+        $this->assertEquals('ch', $resolve->resolvedValues['countryShortCode']);
 
         $resolve = $this->resolveHelper('ch/de', $comp);
-        $this->assertEquals('de', $resolve['route']);
-        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        $this->assertEquals('de', $resolve->resolvedPath);
+        $this->assertEquals('ch', $resolve->resolvedValues['countryShortCode']);
 
         $resolve = $this->resolveHelper('ch/', $comp);
-        $this->assertEquals('', $resolve['route']);
-        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        $this->assertEquals('', $resolve->resolvedPath);
+        $this->assertEquals('ch', $resolve->resolvedValues['countryShortCode']);
 
         $comp = '<countryShortCode:[a-z]{2}>/<do:[a-z]{2}>';
 
         $resolve = $this->resolveHelper('ch/de/hello/world', $comp);
-        $this->assertEquals('hello/world', $resolve['route']);
-        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
-        $this->assertEquals('de', $resolve['resolvedValues']['do']);
+        $this->assertEquals('hello/world', $resolve->resolvedPath);
+        $this->assertEquals('ch', $resolve->resolvedValues['countryShortCode']);
+        $this->assertEquals('de', $resolve->resolvedValues['do']);
 
         $resolve = $this->resolveHelper('ch/de/hello', $comp);
-        $this->assertEquals('hello', $resolve['route']);
-        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
-        $this->assertEquals('de', $resolve['resolvedValues']['do']);
+        $this->assertEquals('hello', $resolve->resolvedPath);
+        $this->assertEquals('ch', $resolve->resolvedValues['countryShortCode']);
+        $this->assertEquals('de', $resolve->resolvedValues['do']);
 
         $resolve = $this->resolveHelper('ch/de', $comp);
-        $this->assertEquals('', $resolve['route']);
-        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
-        $this->assertEquals('de', $resolve['resolvedValues']['do']);
+        $this->assertEquals('', $resolve->resolvedPath);
+        $this->assertEquals('ch', $resolve->resolvedValues['countryShortCode']);
+        $this->assertEquals('de', $resolve->resolvedValues['do']);
 
+        // this rule wont match the the composition pattern, therfore the composition would not apply ore remove
+        // any data from the path and returns the default values from the composition.
         $resolve = $this->resolveHelper('ch/', $comp);
-
-        $this->assertEquals('', $resolve['route']);
-        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        $this->assertEquals('ch', $resolve->resolvedPath);
+        $this->assertEquals('en', $resolve->resolvedValues['langShortCode']);
     }
     
     public function testMultiDomainMapping()
@@ -130,8 +138,7 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         
         $resolv = $composition->getResolvedPathInfo($request);
         
-        $this->assertEquals('fr', $resolv['compositionKeys']['langShortCode']);
-        $this->assertTrue(isset($resolv['compositionKeys']['x']));
+        $this->assertSame(['langShortCode' => 'fr', 'x' => 'y'], $resolv->resolvedValues);
     }
     
     public function testGetDefaultLanguage()
@@ -160,34 +167,50 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $this->assertArrayHasKey('langShortCode', $comp->getKeys());
     }
     
-    /**
-     * @expectedException Exception
-     */
-    public function testExceptionOnInit()
+    
+    public function testNewDefaultMethods()
     {
         $request = new Request();
-        $comp = new Composition($request, ['default' => ['noLangShortCode' => 'ch']]);
+        $request->pathInfo = 'fr/hello-world';
+        $comp = new Composition($request);
+        $comp->hidden = false;
+        
+        $this->assertSame('en', $comp->getDefaultLangShortCode());
+        $this->assertSame('fr', $comp->getLangShortCode());
+        $this->assertSame('fr', $comp->getPrefixPath());
     }
     
-    /**
-     * @expectedException Exception
-     */
-    public function testEmptyAssignException()
+    public function testNewDefaultMehtodsPattern()
     {
+        // change pathInfo and pattern
         $request = new Request();
+        $request->pathInfo = 'de/ch/hello-world';
         $comp = new Composition($request);
-        $comp[] = 'bar';
+        $comp->pattern = '<langShortCode:[a-z]{2}>/<countryShortCode:[a-z]{2}>';
+        $comp->hidden = false;
+        
+        $this->assertSame('en', $comp->getDefaultLangShortCode());
+        $this->assertSame('de', $comp->getLangShortCode());
+        $this->assertSame('de/ch', $comp->getPrefixPath());
     }
     
-    /**
-     * @expectedException Exception
-     */
-    public function testNotAllowedUnset()
+    public function testExtractCompositionData()
     {
         $request = new Request();
+        $request->pathInfo = 'de-ch/hello-world';
+        
         $comp = new Composition($request);
-        unset($comp['langShortCode']);
+        $result = $comp->extractCompositionData($request, '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>', [], true);
+        
+        
+        $this->assertSame('hello-world', $result['route']);
+        $this->assertSame([
+            'langShortCode' => 'de',
+            'countryShortCode' => 'ch',
+        ], $result['compositionKeys']);
     }
+    
+   
     
     public function testRemoval()
     {
@@ -230,5 +253,23 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $request = new Request();
         $comp = new Composition($request);
         $this->assertFalse($comp->isHostAllowed(['foobar.com']));
+    }
+    /**
+     * @expectedException Exception
+     */
+    public function testExceptionOnInit()
+    {
+        $request = new Request();
+        $comp = new Composition($request, ['default' => ['noLangShortCode' => 'ch']]);
+    }
+    
+    /**
+     * @expectedException Exception
+     */
+    public function testNotAllowedUnset()
+    {
+        $request = new Request();
+        $comp = new Composition($request);
+        unset($comp['langShortCode']);
     }
 }

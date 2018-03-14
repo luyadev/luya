@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.5 (in progress)
 
+### Changed
+
+- [#1779](https://github.com/luyadev/luya/issues/1779) Refactor of luya\web\Composition component.
+
 ### Added
 
 - [#1762](https://github.com/luyadev/luya/issues/1762) Add luya\web\Composition::$allowedHosts to ensure the hostName from a list of valid host names. Otherwise throw forbidden exception.

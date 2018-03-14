@@ -4,9 +4,9 @@ namespace luya\web;
 
 use Yii;
 use yii\base\Component;
+use yii\web\ForbiddenHttpException;
 use luya\Exception;
 use luya\helpers\StringHelper;
-use yii\web\ForbiddenHttpException;
 
 /**
  * Composition parseRequest Handler.
@@ -48,7 +48,7 @@ class Composition extends Component implements \ArrayAccess
     public $request;
 
     /**
-     * @var bool Enable or disable the->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
+     * @var boolean Enable or disable composition prefix out when using `prefixPath`. If disabled the response of prefixPath would be empty, otherwhise it
      * returns the full prefix composition pattern based url.
      */
     public $hidden = true;
@@ -58,12 +58,10 @@ class Composition extends Component implements \ArrayAccess
      * as the cms needs this informations too). After proccessing this informations, they will be removed
      * from the url for further proccessing.
      *
-     * The fullqualified composer key will be stored in `$request->get('urlPrefixCompositionKey')`.
-     *
-     * Examples of how to use urlPrefixComposition
+     * Examples of how to use patterns:
      *
      * ```php
-     * $urlPrefixComposition = '<langShortCode:[a-z]{2}>/<countryShortCode:[a-z]{2}>'; // de/ch; fr/ch
+     * 'pattern' => '<langShortCode:[a-z]{2}>/<countryShortCode:[a-z]{2}>', // de/ch; fr/ch
      * ```
      */
     public $pattern = '<langShortCode:[a-z]{2}>';
@@ -78,7 +76,7 @@ class Composition extends Component implements \ArrayAccess
      * the default behvaior via `$default` will be used.
      * An array where the key is the host info and value the array with the default configuration .e.g.
      *
-     * ```
+     * ```php
      * 'hostInfoMapping' => [
      *     'http://mydomain.com' => ['langShortCode' => 'en'],
      *     'http://meinedomain.de' => ['langShortCode' => 'de'],
@@ -171,10 +169,7 @@ class Composition extends Component implements \ArrayAccess
     public function getKeys()
     {
         if ($this->_keys === null) {
-            // resolved data
-            $resolve = $this->getResolvedPathInfo($this->request);
-            
-            $this->_keys = $resolve['compositionKeys'];
+            $this->_keys = $this->getResolvedPathInfo($this->request)->resolvedValues;
         }
         
         return $this->_keys;
@@ -182,85 +177,13 @@ class Composition extends Component implements \ArrayAccess
     
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
-     *
-     * @param \luya\web\Request $request
-     * @return array An array containing the route and the resolvedValues.
-     * Example array output when request path is `de/hello/world`:
-     *
-     * ```php
-     * [
-     *     'route' => 'hello/world',
-     *     'resolvedValues' => [
-     *         0 => 'de'
-     *     ],
-     *     'compositionKeys' => [],
-     *     'keys' => [],
-     * ]
-     * ```
+     * 
+     * @param Request $request
+     * @return \luya\web\CompositionResolver
      */
     public function getResolvedPathInfo(Request $request)
     {
-        return $this->extractCompositionData($request, $this->pattern, $this->default);
-    }
-    
-    /**
-     * Resolve the current url request and retun an array contain resolved route and the resolved values.
-     *
-     * @param \luya\web\Request $request
-     * @param string $regexPattern The pattern to resolve the values against request pathInfo, example <langShortCode:[a-z]{2}>'
-     * @param array $defaultValues An array with a key and a value.
-     * @return array An array containing the route and the resolvedValues.
-     * Example array output when request path is `de/hello/world`:
-     * 
-     * ```php
-     * [
-     *     'route' => 'hello/world',
-     *     'resolvedValues' => [
-     *         0 => 'de'
-     *     ],
-     *     'compositionKeys' => ['langShortCode' => 'de'],
-     *     'keys' => ['langShortCode'],
-     * ]
-     * ```
-     * @since 1.0.5
-     */
-    public function extractCompositionData(Request $request, $regexPattern, array $defaultValues)
-    {
-        // contains all resolved values
-        $resolvedValues = [];
-        $foundKeys = [];
-        // array with all url parts, seperated by slash
-        $requestUrlParts = explode('/', $request->pathInfo);
-        // catch all results matching the var match regular expression
-        preg_match_all(static::VAR_MATCH_REGEX, $regexPattern, $matches, PREG_SET_ORDER);
-        // get all matches
-        foreach ($matches as $index => $match) {
-            $foundKeys[] = $match[1];
-            // check if the index of the match is existing in the requestUrlParts array as the match always
-            // starts from the begin of a string.
-            if (isset($requestUrlParts[$index])) {
-                $requestUrlValue = $requestUrlParts[$index];
-                // check if the value of the requeste url value matches the regex of the compositoin
-                if (preg_match('/^'.$match[2].'$/', $requestUrlValue)) {
-                    $resolvedValues[$match[1]] = $requestUrlValue;
-                    // cause the part is matched by the composition, we have to unset the key from the array.
-                    unset($requestUrlParts[$index]);
-                }
-            }
-        }
-        // get default values if nothing have been resolved
-        if (count($resolvedValues) == 0) {
-            $keys = $defaultValues;
-        } else {
-            $keys = $resolvedValues;
-        }
-        
-        return [
-            'route' => implode('/', $requestUrlParts),
-            'resolvedValues' => $resolvedValues,
-            'compositionKeys' => $keys,
-            'keys' => $foundKeys,
-        ];
+        return new CompositionResolver($request, ['pattern' => $this->pattern, 'defaultValues' => $this->default]);
     }
 
     /**

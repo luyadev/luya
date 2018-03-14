@@ -63,8 +63,7 @@ class Request extends \yii\web\Request
                 $this->_isAdmin = false;
             } else {
                 $resolver = Yii::$app->composition->getResolvedPathInfo($this);
-                $pathInfo = $resolver['route'];
-                $parts = explode('/', $pathInfo);
+                $parts = explode('/', $resolver->resolvedPath);
                 $first = reset($parts);
                 
                 if (preg_match('/admin/i', $first, $results)) {

@@ -75,7 +75,7 @@ class UrlManager extends \yii\web\UrlManager
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
         $resolver = $this->getComposition()->getResolvedPathInfo($request);
 
-        $request->setPathInfo($resolver['route']);
+        $request->setPathInfo($resolver->resolvedPath);
         
         $parsedRequest = parent::parseRequest($request);
 
@@ -83,7 +83,7 @@ class UrlManager extends \yii\web\UrlManager
         // This can be the case when composition is hidden, but not default language is loaded and a
         // url composition route is loaded!
         // @see https://github.com/luyadev/luya/issues/1146
-        $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver['compositionKeys']['langShortCode']);
+        $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver->getResolvedKeyValue('langShortCode'));
         
         // set the application language based from the parsed composition request:
         Yii::$app->setLocale($this->composition->langShortCode);

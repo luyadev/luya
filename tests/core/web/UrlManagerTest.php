@@ -84,7 +84,7 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         
         $route = $urlManager->parseRequest($request);
         
-        $this->assertSame('foobar//', $route[0]);
+        $this->assertSame('foobar', $route[0]);
     }
     
     public function testEnableStrictParsingRequest()
