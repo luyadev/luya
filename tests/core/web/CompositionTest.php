@@ -198,17 +198,16 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $request->pathInfo = 'de-ch/hello-world';
         
         $comp = new Composition($request);
-        $result = $comp->extractCompositionData($request, '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>', [], true);
+        $comp->pattern = '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>';
+        $result = $comp->getResolvedPathInfo($request);
         
         
-        $this->assertSame('hello-world', $result['route']);
+        $this->assertSame('hello-world', $result->resolvedPath);
         $this->assertSame([
             'langShortCode' => 'de',
             'countryShortCode' => 'ch',
-        ], $result['compositionKeys']);
+        ], $result->resolvedValues);
     }
-    
-   
     
     public function testRemoval()
     {
