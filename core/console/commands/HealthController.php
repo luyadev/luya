@@ -5,8 +5,6 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\FileHelper;
 
-use yii\imagine\Image;
-
 /**
  * Health/Status informations about the Application itself.
  *
@@ -81,24 +79,15 @@ class HealthController extends \luya\console\Command
                 $this->outputError("$file: file does not exists!");
             }
         }
-
-        /*
-         * move to admin/setup command as part of admin setup.
-        try {
-            Image::getImagine();
-        } catch (\Exception $e) {
-            $this->outputError('Imagine Error: ' . $e->getMessage());
-        }
-        */
         
-        return ($error) ? $this->outputError('Health check found errors!') : $this->outputSuccess('O.K.');
+        return $error ? $this->outputError('Health check found errors!') : $this->outputSuccess('O.K.');
     }
 
     /**
      * Test Mail-Component (Use --verbose=1 to enable smtp debug output)
      *
      * @return boolean Whether successfull or not.
-     * @throws Exception On smtp failure
+     * @throws \Exception On smtp failure
      */
     public function actionMailer()
     {
