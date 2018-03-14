@@ -162,7 +162,7 @@ trait ErrorHandlerTrait
     
     /**
      * Build trace array from exception.
-     * 
+     *
      * @param object $exception
      * @return array
      */

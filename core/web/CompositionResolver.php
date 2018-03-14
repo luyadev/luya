@@ -9,11 +9,11 @@ use luya\helpers\StringHelper;
 
 /**
  * Resolve composition values from a given path and pattern.
- * 
+ *
  * @property string $resolvedPath
  * @property array $resolvedValues
  * @property array $resolvedKeys
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.5
  */
@@ -49,7 +49,7 @@ class CompositionResolver extends BaseObject
     
     /**
      * Constructor ensures given Request component.
-     * 
+     *
      * @param Request $request
      * @param array $config
      */
@@ -71,7 +71,7 @@ class CompositionResolver extends BaseObject
     
     /**
      * Get resolved composition values as array.
-     * 
+     *
      * @return array
      */
     public function getResolvedValues()
@@ -90,7 +90,7 @@ class CompositionResolver extends BaseObject
     
     /**
      * Get a value for a given resolved pattern key.
-     * 
+     *
      * @param string $key
      * @return boolean|mixed
      */
@@ -103,7 +103,7 @@ class CompositionResolver extends BaseObject
     
     /**
      * Add trailing slash to the request pathinfo.
-     * 
+     *
      * @return string
      */
     protected function trailingPathInfo()
@@ -125,13 +125,12 @@ class CompositionResolver extends BaseObject
     
     /**
      * Resolve the current data.
-     * 
+     *
      * @return array
      */
     protected function getInternalResolverArray()
     {
         if ($this->_resolved === null) {
-            
             $requestPathInfo = $this->trailingPathInfo();
             $newRegex = $this->buildRegexPattern();
             
@@ -152,7 +151,7 @@ class CompositionResolver extends BaseObject
              */
             preg_match_all(static::VAR_MATCH_REGEX, $this->pattern, $patternDefinitions, PREG_SET_ORDER);
             
-            foreach($patternDefinitions as $definition) {
+            foreach ($patternDefinitions as $definition) {
                 $newRegex = str_replace($definition[0], "(".$definition[2].")", $newRegex);
             }
             
@@ -171,7 +170,6 @@ class CompositionResolver extends BaseObject
                 }
                 
                 $route = StringHelper::replaceFirst($compositionPrefix, '', $requestPathInfo);
-                
             } else {
                 $matches = [];
                 $keys = $this->defaultValues;

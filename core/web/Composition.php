@@ -10,23 +10,23 @@ use luya\helpers\StringHelper;
 
 /**
  * Composition parseRequest Handler.
- * 
+ *
  * The composition is run for every {{luya\web\UrlManager::parseRequest()} call in order to determine
  * the language of the application based on {{luya\web\Composition::$hostInfoMapping}} or from the given
  * {{luya\web\Request::$hostInfo}}.
- * 
+ *
  * It also provides common functions in order to make complex regional language detection for urls
  * like `https://example.com/fr/ch`, its possible to set {{luya\web\Composition::$pattern}} and retrieve
- * the value later inside your application. The `langShortCode` must be provided as long as working with the 
+ * the value later inside your application. The `langShortCode` must be provided as long as working with the
  * cms, as its bound to the administration are language database table.
- * 
+ *
  * It also provides security checks like
- * 
+ *
  * + {{luya\web\Composition::$allowedHosts}}
- * 
+ *
  * The Composition component is registered by the {{luya\base\Boot}} object and can therefore always access
  * trough `Yii::$app->composition` as "singleton" instance.
- * 
+ *
  * @property string $prefixPath Return the current composition prefix path for the request based on request input and hidden option.
  * @property array $keys Return an array with key and value of all resolve composition values for the current request.
  * @property string $defaultLangShortCode Return default defined language shord code
@@ -88,17 +88,17 @@ class Composition extends Component implements \ArrayAccess
     public $hostInfoMapping = [];
     
     /**
-     * 
+     *
      * @var array|string An array with all valid hosts in order to ensure the request host is equals to valid hosts.
      * This filter provides protection against ['host header' attacks](https://www.acunetix.com/vulnerabilities/web/host-header-attack).
-     * 
+     *
      * ```php
      * 'allowedHosts' => [
      *     'example.com',
      *     '*.example.com',
      * ]
      * ```
-     * 
+     *
      * If null is defined, the allow host filtering is disabled, default value.
      * @since 1.0.5
      */
@@ -162,7 +162,7 @@ class Composition extends Component implements \ArrayAccess
     
     /**
      * Resolves the current key and value objects based on the current pathInto and pattern from Request component.
-     * 
+     *
      * @return array An array with key values like `['langShortCode' => 'en']`.
      * @since 1.0.5
      */
@@ -177,7 +177,7 @@ class Composition extends Component implements \ArrayAccess
     
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
-     * 
+     *
      * @param Request $request
      * @return \luya\web\CompositionResolver
      */
@@ -216,9 +216,9 @@ class Composition extends Component implements \ArrayAccess
     
     /**
      * Get the composition prefix path based on current provided request.
-     * 
+     *
      * An example response could be `de` or with other composition keys and patters `de/ch` or `de-CH`.
-     * 
+     *
      * @return string
      * @since 1.0.5
      */

@@ -41,7 +41,6 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $resolve = $this->resolveHelper('ch/', '<countryShortCode:[a-z]{2}>');
         $this->assertEquals('', $resolve->resolvedPath);
         $this->assertEquals(['countryShortCode' => 'ch'], $resolve->resolvedValues);
-        
     }
     
     public function testResolvedPaths()
@@ -56,7 +55,6 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('hello/world', $resolver->resolvedPath);
         $this->assertSame(['langShortCode' => 'de'], $resolver->resolvedValues);
         $this->assertSame(['langShortCode'], $resolver->resolvedKeys);
-        
     }
 
     public function testMultipleResolvedPaths()
