@@ -64,6 +64,10 @@ class Bootstrap extends BaseBootstrap
     {
         if (!$app->request->getIsConsoleRequest()) {
             if ($this->hasModule('admin') && $app->request->isAdmin) {
+                // When admin context, change csrf token, this will not terminate the frontend csrf token:
+                // @see https://github.com/luyadev/luya/issues/1778
+                $app->request->csrfParam = '_csrf_admin';
+                
                 foreach ($this->getModules() as $id => $module) {
                     if ($module instanceof AdminModuleInterface) {
                         $this->_adminAssets = ArrayHelper::merge($module->getAdminAssets(), $this->_adminAssets);

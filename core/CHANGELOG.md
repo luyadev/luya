@@ -14,6 +14,10 @@ All notable changes to this project will be documented in this file. This projec
 + [#1762](https://github.com/luyadev/luya/issues/1762) Add luya\web\Composition::$allowedHosts to ensure the hostName from a list of valid host names. Otherwise throw forbidden exception.
 + [#1774](https://github.com/luyadev/luya/issues/1774) Provide option to configure transfer whitelist. Whitelisted exception will not transfered to the error API.
 
+### Fixed
+
++ [#1778](https://github.com/luyadev/luya/issues/1778) Changed admin csrf param name in order to not terminate the frontend csrf validation process.
+
 ## 1.0.4 (28. February 2018)
 
 ### Changed
