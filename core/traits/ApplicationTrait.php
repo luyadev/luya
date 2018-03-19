@@ -19,8 +19,6 @@ use luya\base\PackageInstaller;
  */
 trait ApplicationTrait
 {
-    
-    
     /**
      * @var string Title for the application used in different sections like Login screen
      */
@@ -59,6 +57,13 @@ trait ApplicationTrait
      * But in the most cases when the website is online the baseUrl is `/` which is enabled by default when {{luya\web\traits\ApplicationTrait::$consoleHostInfo}} is defined.
      */
     public $consoleBaseUrl;
+    
+    /**
+     * @var boolean If enabled, the application will throw an exception if a request is not from a secure connection (https). So any none secure request will throw
+     * a {{yii\web\ForbiddenHttpException}}. This option can also be enabled for REST APIs.
+     * @since 1.0.5
+     */
+    public $ensureSecureConnection;
     
     /**
      * @var array Add tags to the TagParser class. Example

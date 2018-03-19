@@ -3,6 +3,7 @@
 namespace luya\web;
 
 use luya\traits\ApplicationTrait;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Luya Web Application.
@@ -23,6 +24,18 @@ class Application extends \yii\web\Application
 {
     use ApplicationTrait;
 
+    /**
+     * @inheritdoc
+     */
+    public function handleRequest($request)
+    {
+        if ($this->ensureSecureConnection && !$request->isSecureConnection) {
+            throw new ForbiddenHttpException("Insecure connection is not allowed.");
+        }
+        
+        return parent::handleRequest($request);
+    }
+    
     /**
      * @inheritdoc
      */
