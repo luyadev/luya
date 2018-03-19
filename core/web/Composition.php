@@ -18,13 +18,13 @@ use luya\helpers\StringHelper;
  * It also provides common functions in order to make complex regional language detection for urls
  * like `https://example.com/fr/ch`, its possible to set {{luya\web\Composition::$pattern}} and retrieve
  * the value later inside your application. The `langShortCode` must be provided as long as working with the
- * cms, as its bound to the administration are language database table.
+ * cms, as its bound to the administration language `admin_lang` database table.
  *
- * It also provides security checks like
+ * It also provides security check options:
  *
  * + {{luya\web\Composition::$allowedHosts}}
  *
- * The Composition component is registered by the {{luya\base\Boot}} object and can therefore always access
+ * The Composition component is registered by the {{luya\base\Boot}} object and is therefore accessible
  * trough `Yii::$app->composition` as "singleton" instance.
  *
  * @property string $prefixPath Return the current composition prefix path for the request based on request input and hidden option.
