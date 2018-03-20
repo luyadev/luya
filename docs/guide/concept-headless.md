@@ -1,4 +1,4 @@
-# LUYA Headless system
+# LUYA Headless system
 
 As LUYA is built upon the concept of REST APIs, providing headless access to the database content of LUYA is a no brainer. You can either access the [[ngrest.md]] APIs or the CMS admin APIs. Since LUYA admin version 1.1.0 we have added the ability to create users only for API request and an overview of which endpoints they can request data from:
 
