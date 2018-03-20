@@ -1,14 +1,12 @@
 # LUYA Headless system
 
-As LUYA is built upon the concept of REST APIs, providing headless access to the database content of LUYA is a no brainer. You can either access the [[ngrest.md]] APIs or the CMS admin APIs. Since LUYA admin version 1.1.0 we have added the ability to create users only for API request and an overview of which endpoints they can request data from:
+As LUYA is built upon the concept of REST APIs, providing headless access to the database content of LUYA is a no brainer. You can either access the [[ngrest.md]] APIs or the CMS admin APIs. Since LUYA admin version 1.1.0 we've added the ability to create API-Users and an overview of which endpoints they can request data from:
 
 ![API User overview](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/api-user-overview.png "API User overview")
 
-In order to make calls from your application to a luya headless admin you can use the [luya-headless client](github.com/luyadev/luya-headless).
-
 ## Make calls
 
-In order to make calls to the LUYA Admin APIs you can either use your own library or use the [luya-headless client](github.com/luyadev/luya-headless) which provides a very easy to use wrapper which will continiuesly developed in order to match the needs of a true headless system.
+In order to make calls to the LUYA Admin APIs you can either use your own library or the [luya-headless client](github.com/luyadev/luya-headless) whicht provides a very easy to use wrapper. The headless client will be continuously developed in order to match the changing needs of a true headless system.
 
 Example usage with the client library:
 
@@ -46,7 +44,7 @@ foreach (ApiAdminLang::find()->all($client) as $item) {
 
 ## Options
 
-When building a website with LUYA CMS but rendering the content with the headless client you may want to configure the preview url matching your environment.
+If you build a website with the LUYA CMS but use the headless client to render the content, you may want to configure the preview url to point to your headless page.
 
 ```php
 'modules' => [
