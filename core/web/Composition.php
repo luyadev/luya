@@ -41,6 +41,11 @@ class Composition extends Component implements \ArrayAccess
      * @var string The Regular-Expression matching the var finder inside the url parts
      */
     const VAR_MATCH_REGEX = '/<(\w+):?([^>]+)?>/';
+    
+    /**
+     * @deprecated Deprecated in 1.0.5 remove in 1.1.x
+     */
+    const EVENT_AFTER_SET = 'EVENT_AFTER_SET';
 
     /**
      * @var \yii\web\Request Request-Object container from DI
