@@ -27,6 +27,7 @@
   + [Image Filters](app-filters.md)
   + [Filter Effects](app-filter-effects.md)
   + [Page Speed](app-speed.md)
+  + [Security](app-security.md)
 + CMS
   + [Layouts](app-cmslayouts.md)
   + [Menus & Navigations](app-menu.md)
