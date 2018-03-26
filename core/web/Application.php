@@ -6,8 +6,7 @@ use luya\traits\ApplicationTrait;
 use yii\web\ForbiddenHttpException;
 
 /**
- * Luya Web Application.
- *
+ * LUYA Web Application.
  *
  * @property \luya\cms\Menu $menu Menu component in order to build navigation from CMS module.
  * @property \luya\admin\storage\BaseFileSystemStorage $storage Storage component for reading, saving and holding files from the Admin module.

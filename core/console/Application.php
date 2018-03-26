@@ -5,7 +5,7 @@ namespace luya\console;
 use luya\traits\ApplicationTrait;
 
 /**
- * Console/CLI Application.
+ * LUYA Console/CLI Application.
  *
  * @property \luya\console\ErrorHandler $errorHandler The error handler component.
  *
