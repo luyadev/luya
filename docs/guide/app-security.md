@@ -31,6 +31,17 @@ return [
 ]
 ```
 
+## Secure login
+
+We recommend to enable {{luya\admin\Module::$secureLogin}} which will send you a token by email you have to enter. As maybe your customers do not use strong passwords we recommend to enable this option. In order to use $secureLogin your mail component must be configure well in order to send emails with secure tokens.
+
+```php
+'admin' => [
+    'class' => 'luya\admin\Module',
+    'secureLogin' => true,
+]
+```
+
 ## Deployment
 
 We recommend to use the LUYA deployer in order to deploy your website. To do so you have to provide credentials to your VCS and webserver. In order to increase security, you should use a `PEM` file to make the webserver connection. By default, the LUYA deployer will remove sensitive files like README, deployer.php, composer.json, composer.lock after deployment.
