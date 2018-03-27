@@ -6,14 +6,14 @@ As LUYA is built upon the concept of REST APIs, providing headless access to the
 
 ## Make calls
 
-In order to make calls to the LUYA Admin APIs you can either use your own library or the [luya-headless client](github.com/luyadev/luya-headless) whicht provides a very easy to use wrapper. The headless client will be continuously developed in order to match the changing needs of a true headless system.
+In order to make calls to the LUYA Admin APIs you can either use your own library or the [LUYA headless client](https://github.com/luyadev/luya-headless) which provides a very easy to use wrapper. The headless client will be continuously developed in order to match the changing needs of a true headless system.
 
 Example usage with the client library:
 
 ```php
 use luya\headless\Client;
 
-// bild client object with token and server infos
+// build client object with token and server infos
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
 
 // create get request for `api-admin-lang` endpoint
@@ -33,7 +33,7 @@ Using API wrappers (above example as short hand wrapper):
 use luya\headless\Client;
 use luya\headless\endpoints\ApiAdminLang;
 
-// bild client object with token and server infos
+// build client object with token and server infos
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
 
 // run the pre-built ActivQuery for the `api-admin-lang` endpoint
