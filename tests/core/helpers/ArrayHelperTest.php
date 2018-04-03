@@ -151,4 +151,54 @@ class ArrayHelperTest extends LuyaWebTestCase
         $this->assertSame([1 => "1 Foo", 2 => "2 Foos", 3 => "3 Foos"], ArrayHelper::generateRange(1, 3, ['Foo', 'Foos']));
         $this->assertSame([2 => "2 Foos", 3 => "3 Foos"], ArrayHelper::generateRange(2, 3, ['Foo', 'Foos']));
     }
+    
+    public function testCoverSensitiveValues()
+    {
+        
+        $response = ArrayHelper::coverSensitiveValues([
+            'password' => 'foo',
+            'PassWordString' => 'foobar',
+            'username' => 'john',
+            'applepass' => 'none',
+        ], [
+            'password', 'pwd', 'pass'
+        ]);
+        
+        $this->assertSame([
+            'password' => '***',
+            'PassWordString' => '******',
+            'username' => 'john',
+            'applepass' => 'none',
+        ], $response);
+    }
+    
+    public function testCoverSensitiveValuesRecursive()
+    {
+        $response = ArrayHelper::coverSensitiveValues([
+            'login' => [
+                'username' => 'foo',
+                'password' => 'bar',
+                'depper' => [
+                    ['password' => 'deep']
+                ]
+            ]
+        ], [ 'password', 'pwd', 'pass']);
+        
+        $this->assertSame([
+            'login' => [
+                'username' => 'foo',
+                'password' => '***',
+                'depper' => [
+                    ['password' => '****']
+                ]
+            ]
+        ], $response);
+    }
+
+    public function testCoverSensitiveValuesNonScalar()
+    {
+        $response = ArrayHelper::coverSensitiveValues(['object' => new \stdClass(), 'array' => [], 'string' => 'string', 'integer' => 1], ['pass']);
+        
+        $this->assertTrue(is_object($response['object']));
+    }
 }

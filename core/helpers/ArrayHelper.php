@@ -34,6 +34,42 @@ class ArrayHelper extends BaseArrayHelper
     }
 
     /**
+     * Cover senstive values from a given list of keys.
+     *
+     * The main purpose is to remove passwords transferd to api when existing in post, get or session.
+     * 
+     * Example:
+     * 
+     * ```php
+     * $data = ArrayHelper::coverSensitiveValues(['username' => 'foo', 'password' => 'bar'], ['password']];
+     * 
+     * var_dump($data); // array('username' => 'foo', 'password' => '***');
+     * ```
+     *
+     * @param array $data The input data to cover given sensitive key values. `['username' => 'foo', 'password' => 'bar']`.
+     * @param array $key The keys which can contain sensitive data inside the $data array. `['password', 'pwd', 'pass']`.
+     * @since 1.0.6
+     */
+    public static function coverSensitiveValues(array $data, array $keys)
+    {
+        $clean = [];
+        foreach ($keys as $key) {
+            $kw = strtolower($key);
+            foreach ($data as $k => $v) {
+                if (is_array($v)) {
+                    $clean[$k] = static::coverSensitiveValues($v, $keys);
+                } elseif (is_scalar($v) && ($kw == strtolower($k) || StringHelper::startsWith(strtolower($k), $kw))) {
+                    $v = str_repeat("*", strlen($v));
+                    $clean[$k] = $v;
+                }
+            }
+        }
+        
+        // the later overrides the former
+        return array_replace($data, $clean);
+    }
+    
+    /**
      * Prepend an assoc array item as first entry for a given array.
      *
      * @param array $arr The array where the value should be prepend
