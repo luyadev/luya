@@ -170,8 +170,6 @@ trait ErrorHandlerTrait
     /**
      * Cover senstive values from a given list of keys.
      * 
-     * This applys only for the first key inside the array and does not work recursive.
-     * 
      * The main purpose is to remove passwords transferd to api when existing in post, get or session.
      * 
      * @param array $data
@@ -184,7 +182,10 @@ trait ErrorHandlerTrait
         foreach ($keys as $key) {
             $kw = strtolower($key);
             foreach ($data as $k => $v) {
-                if ($kw == strtolower($k) || StringHelper::startsWith(strtolower($k), $kw)) {
+                
+                if (is_array($v)) {
+                    $clean[$k] = $this->coverSensitiveValues($v, $keys);
+                } elseif ($kw == strtolower($k) || StringHelper::startsWith(strtolower($k), $kw)) {
                     $v = str_repeat("*", strlen($v));
                     $clean[$k] = $v;
                 }
@@ -192,7 +193,7 @@ trait ErrorHandlerTrait
         }
         
         // the later overrides the former
-        return array_merge($data, $clean);
+        return array_replace($data, $clean);
     }
     
     /**

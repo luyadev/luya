@@ -94,4 +94,29 @@ class ErrorHandlerTest extends LuyaWebTestCase
             'applepass' => 'none',
         ], $response);
     }
+    
+    public function testCoverSensitiveValuesRecursive()
+    {
+        $stud = new ErrorHandler();
+        
+        $response = $stud->coverSensitiveValues([
+            'login' => [
+                'username' => 'foo',
+                'password' => 'bar',
+                'depper' => [
+                    ['password' => 'deep']
+                ]
+            ]
+        ], [ 'password', 'pwd', 'pass']);
+        
+        $this->assertSame([
+            'login' => [
+                'username' => 'foo',
+                'password' => '***',
+                'depper' => [
+                    ['password' => '****']
+                ]
+            ]
+        ], $response);
+    }
 }
