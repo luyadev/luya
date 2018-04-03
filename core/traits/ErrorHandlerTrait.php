@@ -7,6 +7,7 @@ use yii\helpers\Json;
 use Curl\Curl;
 use luya\helpers\Url;
 use luya\helpers\ObjectHelper;
+use luya\helpers\StringHelper;
 
 /**
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
@@ -40,6 +41,12 @@ trait ErrorHandlerTrait
      * @since 1.0.5
      */
     public $whitelist = ['yii\web\NotFoundHttpException'];
+    
+    /**
+     * @var array
+     * @since 1.0.6
+     */
+    public $sensitiveKeys = ['password', 'pwd', 'pass', 'passwort', 'pw', 'token', 'hash', 'authorization'];
     
     /**
      * Send a custom message to the api server event its not related to an exception.
@@ -145,19 +152,47 @@ trait ErrorHandlerTrait
             'message' => $_message,
             'file' => $_file,
             'line' => $_line,
-            'requestUri' => (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null,
-            'serverName' => (isset($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : null,
+            'requestUri' => isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null,
+            'serverName' => isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null,
             'date' => date('d.m.Y H:i'),
             'trace' => $_trace,
             'previousException' => $_previousException,
-            'ip' => (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : null,
-            'get' => (isset($_GET)) ? $_GET : [],
-            'post' => (isset($_POST)) ? $_POST : [],
-            'session' => (isset($_SESSION)) ? $_SESSION : [],
-            'server' => (isset($_SERVER)) ? $_SERVER : [],
+            'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null,
+            'get' => isset($_GET) ? $this->coverSensitiveValues($_GET, $this->sensitiveKeys) : [],
+            'post' => isset($_POST) ? $this->coverSensitiveValues($_POST, $this->sensitiveKeys) : [],
+            'session' => isset($_SESSION) ? $this->coverSensitiveValues($_SESSION, $this->sensitiveKeys) : [],
+            'server' => isset($_SERVER) ? $this->coverSensitiveValues($_SERVER, $this->sensitiveKeys) : [],
             'profiling' => Yii::getLogger()->profiling,
             'logger' => Yii::getLogger()->messages,
         ];
+    }
+    
+    /**
+     * Cover senstive values from a given list of keys.
+     * 
+     * This applys only for the first key inside the array and does not work recursive.
+     * 
+     * The main purpose is to remove passwords transferd to api when existing in post, get or session.
+     * 
+     * @param array $data
+     * @param array $key
+     * @since 1.0.6
+     */
+    public function coverSensitiveValues(array $data, array $keys)
+    {
+        $clean = [];
+        foreach ($keys as $key) {
+            $kw = strtolower($key);
+            foreach ($data as $k => $v) {
+                if ($kw == strtolower($k) || StringHelper::startsWith(strtolower($k), $kw)) {
+                    $v = str_repeat("*", strlen($v));
+                    $clean[$k] = $v;
+                }
+            }
+        }
+        
+        // the later overrides the former
+        return array_merge($data, $clean);
     }
     
     /**

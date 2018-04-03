@@ -73,4 +73,25 @@ class ErrorHandlerTest extends LuyaWebTestCase
             $this->assertEquals('Error: foobar', $e->getMessage());
         }
     }
+    
+    public function testCoverSensitiveValues()
+    {
+        $stud = new ErrorHandler();
+        
+        $response = $stud->coverSensitiveValues([
+            'password' => 'foo',
+            'PassWordString' => 'foobar',
+            'username' => 'john',
+            'applepass' => 'none',
+        ], [
+            'password', 'pwd', 'pass'
+        ]);
+        
+        $this->assertSame([
+            'password' => '***',
+            'PassWordString' => '******',
+            'username' => 'john',
+            'applepass' => 'none',
+        ], $response);
+    }
 }
