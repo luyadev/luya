@@ -29,7 +29,7 @@
   + [Page Speed](app-speed.md)
   + [Security](app-security.md)
 + CMS
-  + [Layouts](app-cmslayouts.md)
+  + [CMS Layouts](app-cmslayouts.md)
   + [Menus & Navigations](app-menu.md)
   + [Blocks](app-blocks.md)
   + [Block Types](app-block-types.md)
