@@ -139,11 +139,6 @@ abstract class Boot
             if (!is_array($config)) {
                 throw new Exception("config file '".$this->configFile."' found but no array returning.");
             }
-    
-            // adding default configuration timezone if not set
-            if (!array_key_exists('timezone', $config)) {
-                $config['timezone'] = 'Europe/Berlin';
-            }
             
             // preset the values from the defaultConfigArray
             if (!empty($this->prependConfigArray())) {

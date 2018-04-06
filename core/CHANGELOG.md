@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.6 (in progress)
 
+### Changed
+
++ [#1783](https://github.com/luyadev/luya/issues/1783) Remove auto setter for timezone as it is not compatible with yii timeZone propertie.
+
 ### Added
 
 + [#1784](https://github.com/luyadev/luya/issues/1784) Added auto cover sensitive data for error api transfer.
