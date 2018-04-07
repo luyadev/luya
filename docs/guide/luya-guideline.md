@@ -39,7 +39,7 @@ This represents a guideline how words and proper nouns should be written in the 
 + HTML
 + DRY
 + CRUD
-+ e.g. - instead of f.e., for example or similar expressions
++ e.g. - instead of i.e., for example or similar expressions
 + yourdomain.com -- instead of example.com, yourproject.com, etc
 
 It should be avoided to use personal pronouns (e.g. we have this, we recommend that, etc.), please use impersonal pronouns ( e.g. there is this, it´s recommend that, etc.).
