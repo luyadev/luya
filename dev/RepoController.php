@@ -346,6 +346,9 @@ EOT;
             
             $wrapper->git('rebase upstream/master master', $repoFileSystemPath);
             $this->outputInfo("{$repo}: rebase master ✔");
+            
+            $wrapper->git('pull', $repoFileSystemPath);
+            $this->outputInfo("{$repo}: pull ✔");
         } catch (\Exception $err) {
             $this->outputError("{$repo}: error while updating ({$repoFileSystemPath}) with message: " . $err->getMessage());
         }
