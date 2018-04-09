@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
++ [#1788](https://github.com/luyadev/luya/issues/1788) Remove phpmailer header (X-HEADER) information from `luya\components\Mail` component to prevent information disclosure.
 + [#1783](https://github.com/luyadev/luya/issues/1783) Remove auto setter for timezone as it is not compatible with yii timeZone propertie.
 
 ### Added

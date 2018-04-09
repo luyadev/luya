@@ -134,4 +134,12 @@ class MailTest extends \luyatests\LuyaWebTestCase
             'hello@luya.io', 'hello@luya.io'
         ]], $mail->mailer->getReplyToAddresses());
     }
+    
+    public function testPhpmailerXMailer()
+    {
+        $mail = new Mail();
+        $mailer = $mail->mailer;
+        $header = $mailer->createHeader();
+        $this->assertNotContains('X-Mailer', $header);
+    }
 }

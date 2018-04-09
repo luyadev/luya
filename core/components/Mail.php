@@ -135,6 +135,7 @@ class Mail extends Component
             $this->_mailer->FromName = $this->fromName;
             $this->_mailer->isHTML(true);
             $this->_mailer->AltBody = $this->altBody;
+            $this->_mailer->XMailer = ' ';
             // if sending over smtp, define the settings for the smpt server
             if ($this->isSMTP) {
                 if ($this->debug) {
