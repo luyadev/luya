@@ -41,6 +41,7 @@ class StrengthValidatorTest extends LuyaWebTestCase
         $this->assertTrue($this->getValidator('prefixfoobar')->hasErrors());
         $this->assertTrue($this->getValidator('prefixfoobar%')->hasErrors());
         $this->assertTrue($this->getValidator('prefixfoobar4')->hasErrors());
+        $this->assertTrue($this->getValidator('smallchars2018?`!')->hasErrors());
         $this->assertTrue($this->getValidator('prefixfoobarA')->hasErrors());
         $this->assertTrue($this->getValidator('12319237192837192')->hasErrors());
         $this->assertTrue($this->getValidator('dhfdkjfdlkfjdlfjldkfj')->hasErrors());
