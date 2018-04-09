@@ -42,7 +42,7 @@ class StrengthValidator extends Validator
     /**
      * @var boolean Whether at least one lower case char must exist in the string or not.
      */
-    public $lowercase;
+    public $lowercase = true;
     
     /**
      * @inheritdoc
