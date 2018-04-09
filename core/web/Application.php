@@ -2,6 +2,7 @@
 
 namespace luya\web;
 
+use Yii;
 use luya\traits\ApplicationTrait;
 use yii\web\ForbiddenHttpException;
 
@@ -30,6 +31,16 @@ class Application extends \yii\web\Application
     {
         if ($this->ensureSecureConnection && !$request->isSecureConnection) {
             throw new ForbiddenHttpException("Insecure connection is not allowed.");
+        }
+        
+        if ($this->ensureSecureConnection) {
+            // add secure flag to cookie
+            Yii::$app->request->csrfCookie = ['httpOnly' => true, 'secure' => true];
+            Yii::$app->session->cookieParams = ['httpOnly' => true, 'secure' => true];
+            // apply strict, hsts and x-* headers
+            Yii::$app->response->headers->set('Strict-Transport-Security', 'max-age=31536000');
+            Yii::$app->response->headers->set('X-XSS-Protection', "1; mode=block");
+            Yii::$app->response->headers->set('X-Frame-Options', "SAMEORIGIN");
         }
         
         return parent::handleRequest($request);

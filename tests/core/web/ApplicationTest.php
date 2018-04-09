@@ -15,4 +15,20 @@ class ApplicationTest extends LuyaWebTestCase
         $this->expectException('yii\web\ForbiddenHttpException');
         $app->handleRequest($request);
     }
+    
+    public function testSecureConnectionCookieAndHeaders()
+    {
+        $_SERVER['HTTPS'] = 'on';
+        $request = new Request(['pathInfo' => 'foo']);
+        $app = new Application(['id' => 'insecure-app', 'basePath' => __DIR__, 'ensureSecureConnection' => true]);
+        $app->controllerMap = ['foo' => 'luyatests\data\controllers\FooController'];
+        
+        $response = $app->handleRequest($request);
+        
+        $this->assertSame('max-age=31536000', $response->headers->get('Strict-Transport-Security'));
+        $this->assertSame('1; mode=block', $response->headers->get('X-XSS-Protection'));
+        $this->assertSame('SAMEORIGIN', $response->headers->get('X-Frame-Options'));
+        
+        $this->assertSame('bar', $response->data);
+    }
 }
