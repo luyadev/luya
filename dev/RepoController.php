@@ -338,12 +338,12 @@ EOT;
     {
         $wrapper = new GitWrapper();
         try {
-            $wrapper->git('checkout master', $repoFileSystemPath);
-            $this->outputInfo("{$repo}: checkout master ✔");
-             
             $wrapper->git('fetch upstream', $repoFileSystemPath);
             $this->outputInfo("{$repo}: fetch upstream ✔");
-             
+            
+            $wrapper->git('checkout master', $repoFileSystemPath);
+            $this->outputInfo("{$repo}: checkout master ✔");
+            
             $wrapper->git('rebase upstream/master master', $repoFileSystemPath);
             $this->outputInfo("{$repo}: rebase master ✔");
         } catch (\Exception $err) {
