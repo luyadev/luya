@@ -16,6 +16,9 @@ class ApplicationTest extends LuyaWebTestCase
         $app->handleRequest($request);
     }
     
+    /**
+     * @runInSeparateProcess
+     */
     public function testSecureConnectionCookieAndHeaders()
     {
         $_SERVER['HTTPS'] = 'on';
