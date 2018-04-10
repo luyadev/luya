@@ -29,6 +29,14 @@ abstract class BaseBootstrap implements BootstrapInterface
         // add trace
         Yii::beginProfile('LUYA Boostrap process profiling', __METHOD__);
         
+        // register luya core translation message source
+        if (!isset($app->i18n->translations['luya'])) {
+            $app->i18n->translations['luya'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => '@luya/messages',
+            ];
+        }
+        
         $this->extractModules($app);
         $this->beforeRun($app);
         $this->registerComponents($app);
