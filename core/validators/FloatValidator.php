@@ -47,7 +47,7 @@ class FloatValidator extends Validator
     {
         $value = $model->$attribute;
         if (!is_numeric($value) && !is_float($value)) {
-            return $model->addError($attribute, Yii::t('yii', $this->message, ['attribute' => $model->getAttributeLabel($attribute)]));
+            return $model->addError($attribute, Yii::t('luya', $this->message, ['attribute' => $model->getAttributeLabel($attribute)]));
         }
     }
 }

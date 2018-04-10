@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
++ [#89](https://github.com/luyadev/luya-module-admin/issues/89) Strength validator to check string complexity for password validation.
 + [#1784](https://github.com/luyadev/luya/issues/1784) Added auto cover sensitive data for error api transfer.
 
 ## 1.0.5 (26. March 2018)

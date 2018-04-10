@@ -55,6 +55,6 @@ class StrengthValidatorTest extends LuyaWebTestCase
     public function testValidatorTranslationError()
     {
         Yii::$app->language = 'de';
-        $this->assertSame(['value' => ['Die Zeichenkette muss mindistens über 8 Zeichen verfügen.']], $this->getValidator('a')->getErrors());
+        $this->assertSame(['value' => ['Value muss mindestens über 8 Zeichen verfügen.']], $this->getValidator('a')->getErrors());
     }
 }
