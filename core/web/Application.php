@@ -41,7 +41,7 @@ class Application extends \yii\web\Application
             Yii::$app->response->headers->set('Strict-Transport-Security', 'max-age=31536000');
             Yii::$app->response->headers->set('X-XSS-Protection', "1; mode=block");
             Yii::$app->response->headers->set('X-Frame-Options', "SAMEORIGIN");
-            Yii::$app->response->headers->set('Content-Security-Policy', "default-src 'self'; img-src *");
+            Yii::$app->response->headers->set('Content-Security-Policy', "default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline';");
         }
         
         return parent::handleRequest($request);
