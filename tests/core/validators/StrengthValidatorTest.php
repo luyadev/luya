@@ -2,6 +2,7 @@
 
 namespace luyatests\core\validators;
 
+use Yii;
 use luyatests\LuyaWebTestCase;
 use yii\base\Model;
 use luya\validators\StrengthValidator;
@@ -49,5 +50,11 @@ class StrengthValidatorTest extends LuyaWebTestCase
         
         // success
         $this->assertFalse($this->getValidator('fOobar%1B')->hasErrors());
+    }
+    
+    public function testValidatorTranslationError()
+    {
+        Yii::$app->language = 'de';
+        $this->assertSame(['value' => ['Foobar']], $this->getValidator('a')->getErrors());
     }
 }
