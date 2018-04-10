@@ -53,27 +53,27 @@ class StrengthValidator extends Validator
         $value = $model->{$attribute};
         
         if ($this->length && strlen($value) <= $this->length) {
-            return $model->addError($attribute, Yii::t('luya', 'The string must have at least {length} chars.', ['length' => $this->length]));
+            return $model->addError($attribute, Yii::t('luya', 'The string must have a minimum length of {length} characters.', ['length' => $this->length]));
         }
         
         if ($this->specials && !preg_match('/\W/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', 'The string must contain any special char.'));
+            return $model->addError($attribute, Yii::t('luya', 'The string must include at least one special character.'));
         }
         
         if ($this->numbers && !preg_match('/\d/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', 'The string must contain at least one digit'));
+            return $model->addError($attribute, Yii::t('luya', 'The string must include at least one digit'));
         }
         
         if ($this->letters && !preg_match('/\p{L}/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', 'The string must at least have one letter sign.'));
+            return $model->addError($attribute, Yii::t('luya', 'The string must include at least one letter.'));
         }
         
         if ($this->uppercase && !preg_match('/[A-Z]/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', 'The string must at least have one upper case letter.'));
+            return $model->addError($attribute, Yii::t('luya', 'The string must include at least one uppercase letter.'));
         }
         
         if ($this->lowercase && !preg_match('/[a-z]/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', 'The string must at least have one lower case letter.'));
+            return $model->addError($attribute, Yii::t('luya', 'The string must include at least one lowercase letter.'));
         }
     }
 }
