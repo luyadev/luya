@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.7 (in progress)
 
+### Addded
+
++ Added minify string helper method.
+
 ## 1.0.6 (11. April 2018)
 
 ### Changed

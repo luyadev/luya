@@ -152,4 +152,16 @@ class StringHelper extends BaseStringHelper
 
         return $state;
     }
+    
+    /**
+     * Minify html by removing spaces, tabs.
+     * 
+     * @param string $content
+     * @return mixed
+     * @since 1.0.7
+     */
+    public static function minify($content)
+    {
+        return preg_replace(['/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'], ['>', '<', '\\1'], trim($content));
+    }
 }
