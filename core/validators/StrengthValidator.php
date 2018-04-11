@@ -61,19 +61,19 @@ class StrengthValidator extends Validator
         }
         
         if ($this->numbers && !preg_match('/\d/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', '{attribute} must include at least one digit.'), ['attribute' => $model->getAttributeLabel($attribute)]);
+            return $model->addError($attribute, Yii::t('luya', '{attribute} must include at least one digit.', ['attribute' => $model->getAttributeLabel($attribute)]));
         }
         
         if ($this->letters && !preg_match('/\p{L}/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', '{attribute} must include at least one letter.'), ['attribute' => $model->getAttributeLabel($attribute)]);
+            return $model->addError($attribute, Yii::t('luya', '{attribute} must include at least one letter.', ['attribute' => $model->getAttributeLabel($attribute)]));
         }
         
         if ($this->uppercase && !preg_match('/[A-Z]/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', '{attribute} must include at least one uppercase letter.'), ['attribute' => $model->getAttributeLabel($attribute)]);
+            return $model->addError($attribute, Yii::t('luya', '{attribute} must include at least one uppercase letter.', ['attribute' => $model->getAttributeLabel($attribute)]));
         }
         
         if ($this->lowercase && !preg_match('/[a-z]/', $value)) {
-            return $model->addError($attribute, Yii::t('luya', '{attribute} must include at least one lowercase letter.'), ['attribute' => $model->getAttributeLabel($attribute)]);
+            return $model->addError($attribute, Yii::t('luya', '{attribute} must include at least one lowercase letter.', ['attribute' => $model->getAttributeLabel($attribute)]));
         }
     }
 }
