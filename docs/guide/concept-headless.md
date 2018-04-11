@@ -4,6 +4,8 @@ As LUYA is built upon the concept of REST APIs, providing headless access to the
 
 ![API User overview](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/api-user-overview.png "API User overview")
 
+In order to see the API Users menu make sure to use luya-admin module in version ~1.1.0 and your group has all permissions.
+
 ## Make calls
 
 In order to make calls to the LUYA Admin APIs you can either use your own library or the [LUYA headless client](https://github.com/luyadev/luya-headless) which provides a very easy to use wrapper. The headless client will be continuously developed in order to match the changing needs of a true headless system.

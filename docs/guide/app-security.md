@@ -31,6 +31,8 @@ return [
 ]
 ```
 
+When enabling `ensureSecureConnection` a few other security mechnism are triggered as well, like cookies use secure flag and a few headers will be set (Strict-Transport-Security, X-XSS-Protection, X-Frame-Options => "SAMEORIGIN".
+
 ## Secure login
 
 We recommend to enable {{luya\admin\Module::$secureLogin}} which will send you a token by email you have to enter. As maybe your customers do not use strong passwords we recommend to enable this option. In order to use $secureLogin your mail component must be configure well in order to send emails with secure tokens.
