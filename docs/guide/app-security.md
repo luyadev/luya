@@ -44,6 +44,17 @@ We recommend to enable {{luya\admin\Module::$secureLogin}} which will send you a
 ]
 ```
 
+## Strong admin user passwords
+
+We recommend to enable the {{luya\admin\Module::$strongPassword}} property which is availabe since `luya-module-admin` version 1.1.1. This property makes sure the user has to enter a strong passwird with: uppercase, lowercase, special chars, digits and numbers with an min length of 8 chars.
+
+```php
+'admin' => [
+    'class' => 'luya\admin\Module',
+    'strongPassword' => true,
+]
+```
+
 ## Deployment
 
 We recommend to use the LUYA deployer in order to deploy your website. To do so you have to provide credentials to your VCS and webserver. In order to increase security, you should use a `PEM` file to make the webserver connection. By default, the LUYA deployer will remove sensitive files like README, deployer.php, composer.json, composer.lock after deployment.
