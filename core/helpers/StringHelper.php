@@ -154,14 +154,28 @@ class StringHelper extends BaseStringHelper
     }
     
     /**
-     * Minify html by removing spaces, tabs.
+     * "Minify" html content.
      * 
-     * @param string $content
-     * @return mixed
+     * + remove space
+     * + remove tabs
+     * + remove newlines
+     * + remove html comments
+     * 
+     * @param string $content The content to minify.
+     * @param array $options Optional arguments to provide for minification:
+     * - comments: boolean, where html comments should be removed or not. defaults to false
+     * @return mixed Returns the minified content.
      * @since 1.0.7
      */
-    public static function minify($content)
+    public static function minify($content, array $options = [])
     {
-        return preg_replace(['/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'], ['>', '<', '\\1'], trim($content));
+        $min = preg_replace(['/[\n\r]/', '/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s', ], ['', '>', '<', '\\1'], trim($content));
+        $min = str_replace(['> <'], ['><'], $min);
+        
+        if (ArrayHelper::getValue($options, 'comments', false)) {
+            $min = preg_replace('/<!--(.*)-->/Uis', '', $min);
+        }
+        
+        return $min;
     }
 }

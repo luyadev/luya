@@ -90,4 +90,40 @@ class StringHelperTest extends LuyaWebTestCase
         $this->assertFalse(StringHelper::startsWithWildcard('ABCDEFGHI', 'abc*'));
         $this->assertTrue(StringHelper::startsWithWildcard('ABCDEFGHI', 'abc*', false));
     }
+    
+    public function testMinify()
+    {
+        $this->assertSame('foo bar', StringHelper::minify('    foo       bar     '));
+        $content = <<<EOT
+    foo
+    
+bar
+EOT;
+        $this->assertSame('foo bar', StringHelper::minify($content));
+        $html = <<<EOT
+<html>
+    <head>
+        <title>foobar</title>
+        <script>
+            function alert = function(msg) {
+                console.log(msg);
+            };
+        </script>
+    </head>
+    <body>
+        <p>foo bar</p>  <p>bar foo</p> <p>qux</p>
+    </body>
+</html>
+EOT;
+        
+        $this->assertSame('<html><head><title>foobar</title><script> function alert = function(msg) { console.log(msg); }; </script></head><body><p>foo bar</p><p>bar foo</p><p>qux</p></body></html>', StringHelper::minify($html));
+    
+        $comment = <<<EOT
+<div>
+    <p>foo bar</p>
+    <!-- foo bar end is near! -->
+</div>
+EOT;
+        $this->assertSame('<div><p>foo bar</p></div>', StringHelper::minify($comment, ['comments' => true]));
+    }
 }
