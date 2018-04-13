@@ -93,7 +93,7 @@ zaa.directive("myDirective", function() {
             });
         },
         template : function() {
-            return '<div>{{data | json }} - {{ model }} - <input type="text" ng-model="model" /></div>';
+            return '<div>Use data and model as they are assigned trough scope defintion: <input type="text" ng-model="model" /></div>';
         }
     }
 });
