@@ -55,6 +55,17 @@ We recommend to enable the {{luya\admin\Module::$strongPasswordPolicy}} property
 ]
 ```
 
+## Email verification
+
+With enabling of {{luya\admin\Module::$emailVerification}} the user can not change its e-mail until the verification code (which has been sent to the current email) has been entered. This makes it impossiable to overtake the current account and also not to lock yourself out by entering a wrong email.
+
+```php
+'admin' => [
+    'class' => 'luya\admin\Module',
+    'emailVerification' => true,
+]
+```
+
 ## Deployment
 
 We recommend to use the LUYA deployer in order to deploy your website. To do so you have to provide credentials to your VCS and webserver. In order to increase security, you should use a `PEM` file to make the webserver connection. By default, the LUYA deployer will remove sensitive files like README, deployer.php, composer.json, composer.lock after deployment.
