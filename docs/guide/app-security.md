@@ -1,6 +1,6 @@
 # Security
 
-A few tips to increase the security of your application in a production environment:
+A few tips to increase the security of your LUYA application in a production environment.
 
 ## Webserver & Files
 
@@ -68,4 +68,4 @@ With enabling of {{luya\admin\Module::$emailVerification}} the user can not chan
 
 ## Deployment
 
-We recommend to use the LUYA deployer in order to deploy your website. To do so you have to provide credentials to your VCS and webserver. In order to increase security, you should use a `PEM` file to make the webserver connection. By default, the LUYA deployer will remove sensitive files like README, deployer.php, composer.json, composer.lock after deployment.
+We recommend to use the [LUYA deployer](https://github.com/luyadev/luya-deployer) in order to deploy your website. To do so you have to provide credentials to your VCS and webserver. In order to increase security, you should use a `PEM` file to make the webserver connection. By default, the LUYA deployer will remove sensitive files like README, deployer.php, composer.json, composer.lock and .git data after deployment.
