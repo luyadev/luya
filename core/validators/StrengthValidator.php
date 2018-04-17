@@ -52,7 +52,7 @@ class StrengthValidator extends Validator
     {
         $value = $model->{$attribute};
         
-        if ($this->length && strlen($value) <= $this->length) {
+        if ($this->length && strlen($value) < $this->length) {
             return $model->addError($attribute, Yii::t('luya', '{attribute} must have a minimum length of {length} characters.', ['length' => $this->length, 'attribute' => $model->getAttributeLabel($attribute)]));
         }
         

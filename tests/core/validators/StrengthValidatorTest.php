@@ -50,6 +50,7 @@ class StrengthValidatorTest extends LuyaWebTestCase
         
         // success
         $this->assertFalse($this->getValidator('fOobar%1B')->hasErrors());
+        $this->assertFalse($this->getValidator('12345!Ba')->hasErrors());
     }
     
     public function testValidatorTranslationError()
