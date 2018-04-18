@@ -61,7 +61,7 @@ Create a the view file for the index action of the controller:
 
 ```
 <script>
-zaa.bootstrap.register('MyController', function($scope, $http) {
+zaa.bootstrap.register('MyController', ['$scope', '$http', function($scope, $http) {
 
     $scope.dataResponse;
 
@@ -71,7 +71,7 @@ zaa.bootstrap.register('MyController', function($scope, $http) {
         });
     };
     
-});
+}]);
 </script>
 <div class="luya-content" ng-controller="MyController">
     <h1>My Custom View</h1>

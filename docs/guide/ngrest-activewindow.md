@@ -122,7 +122,7 @@ The below view file shows an AngularJS controller which collects data from the t
 
 ```php
 <script>
-zaa.bootstrap.register('InlineController', function($scope, $controller) {
+zaa.bootstrap.register('InlineController', ['$scope', function($scope,) {
 
     $scope.data = <?= $dataFromController; ?>;
 
@@ -131,7 +131,7 @@ zaa.bootstrap.register('InlineController', function($scope, $controller) {
             $scope.$parent.reloadActiveWindow();
         });
     };
-});
+}]);
 </script>
 <div class="row" ng-controller="InlineController">
     <ul>
