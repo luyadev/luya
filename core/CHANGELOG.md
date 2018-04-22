@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Addded
 
++ [#1795](https://github.com/luyadev/luya/issues/1795) Added JsonCruftFilter to prepend cruft string to every json response.
 + [#1791](https://github.com/luyadev/luya/issues/1791) Added minify string helper method.
 
 ## 1.0.6 (11. April 2018)
