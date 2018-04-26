@@ -38,6 +38,19 @@ trait RestBehaviorsTrait
     public $enableCors = false;
     
     /**
+     * @var array An array with languages which are passed to {{yii\filters\ContentNegotiator::$languages}}. Example
+     * 
+     * ```php
+     * 'languages' => [
+     *     'en',
+     *     'de',
+     * ],
+     * ```        
+     * @since 1.0.7
+     */
+    public $languages = [];
+    
+    /**
      * Whether the rest controller is protected or not.
      *
      * @return boolean|\yii\web\User
@@ -104,6 +117,7 @@ trait RestBehaviorsTrait
                 'application/json' => Response::FORMAT_JSON,
                 'application/xml' => Response::FORMAT_XML,
             ],
+            'languages' => $this->languages,
         ];
         
         // by default rate limiter behavior is removed as it requires a database
