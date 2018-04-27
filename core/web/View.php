@@ -34,8 +34,7 @@ class View extends \yii\web\View
         parent::init();
         // auto register csrf tags if enabled
         if ($this->autoRegisterCsrf && Yii::$app->request->enableCsrfValidation) {
-            $this->registerMetaTag(['name' => 'csrf-param', 'content' => Yii::$app->request->csrfParam], 'csrfParam');
-            $this->registerMetaTag(['name' => 'csrf-token', 'content' => Yii::$app->request->getCsrfToken()], 'csrfToken');
+            $this->registerCsrfMetaTags();
         }
     }
 
