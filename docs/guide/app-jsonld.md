@@ -1,10 +1,10 @@
 ## JsonLd 
 
-Modern web applications needs to provide the websites informations in structure way for search engines, therefore you can use {{luya\web\JsonLd}}. The inheritation and full documentation is available at http://schema.org.
+Modern web applications needs to provide the websites informations in structure way for search engines, therefore you can use {{luya\web\JsonLd}}. The inheritation and full documentation about the schema itself is available under http://schema.org.
 
 ## Basic usage
 
-Every JsonLd property starts within a given group like `person`. The following list highlights just the most common used types:
+Every JsonLd property starts within a given type like `Person` the base of every type is `Thing`. The following list highlights the most common used types:
 
 |Name|Usage
 |----|-----
@@ -26,7 +26,7 @@ JsonLd::person()
    ->setBirthPlace('Ulm, Germany');
 ```
 
-Keep in mind that a lot of objects require a certain sub object like, this makes it more complex to build, but it allows all possible chaining as the schema defintion is inheriting different objects. For example can the blogPosting publisher requires and organisation object:
+Keep in mind that a lot of objects require a certain sub object. This makes it more complex to build and understand, but also provides the possibility for the nesting which are required by the schema defintions. For example the `BlogPosting` publisher requires an `Organisation` object and the organisation logo requires an `ImageObject` object.
 
 ```php
 $logo = (new ImageObject())
@@ -40,7 +40,7 @@ JsonLd::blogPosting()
 	->setPublisher($organisation)
 ```
 
-Currently we do not have all possible objects implemented, but you can always register them by yourself by calling {{luya\web\JsonLd::addGraph()}} with an array.
+Currently we do not have all possible types implemented but you can always register them by yourself by calling {{luya\web\JsonLd::addGraph()}} with an array which contains the defintions.
 
 ```php
 luya\web\JsonLd::addGraph([
@@ -51,7 +51,7 @@ luya\web\JsonLd::addGraph([
 
 ## Value Types
 
-Some values require a given type of value, therefore we have Value objects. Some methods can require those objects in order to make sure the correct values is provided otherwise you could enter values which are not valid for the given key. 
+Some properties require a given type of value, therefore we have Value objects. Some methods can require those objects in order to make sure the correct value is passed to the properties, otherwise you could enter values which are not valid for the given key. 
 
 An example for a value object with an url to a given image:
 
@@ -60,19 +60,19 @@ $image = (new ImageObject())
 	->setUrl(new UrlValue('https://example.com/johndoe.jpg'));
 ```
 
-The value object will then parse the input correctly for the given object key.
+The value object will then parse the input correctly for the given schema property.
 
 |Name|Usage|
 |----|-----|
 |{{luya\web\jsonld\DateTimeValue}}|Used for timestamps with time.
 |{{luya\web\jsonld\DateValue}}|Used for date values.
-|{{luya\web\jsonld\DurationValue}}|Timeperiods as duration. The value will be passed to strtotime.
-|{{luya\web\jsonld\UrlValue}}|Used for paths to images or websites.
-|{{luya\web\jsonld\TextValue}}|Used when objects needs to shorten or encode the text values.
+|{{luya\web\jsonld\DurationValue}}|Time periods as duration.
+|{{luya\web\jsonld\UrlValue}}|Used for paths to images or websites (links).
+|{{luya\web\jsonld\TextValue}}|Used when objects needs to get shorten or encode the text values is required.
 
 ## Advanced usage
 
-An example for providing json ld for a blog with LUYA cms module:
+An example for providing structured JsonLd for a blog with LUYA cms module:
 
 ```php
 $current = Yii::$app->menu->current;
