@@ -30,22 +30,22 @@ Keep in mind that a lot of objects require a certain sub object. This makes it m
 
 ```php
 $logo = (new ImageObject())
-	->setUrl(new UrlValue('https://example.com/johndoe.jpg'));
+    ->setUrl(new UrlValue('https://example.com/johndoe.jpg'));
 
 $organisation = (new Organization())
-	->setName('John Doe')
-	->setLogo($logo);
-		
+    ->setName('John Doe')
+    ->setLogo($logo);
+        
 JsonLd::blogPosting()
-	->setPublisher($organisation)
+    ->setPublisher($organisation)
 ```
 
 Currently we do not have all possible types implemented but you can always register them by yourself by calling {{luya\web\JsonLd::addGraph()}} with an array which contains the defintions.
 
 ```php
 luya\web\JsonLd::addGraph([
-	"url" => "https://heartbeat.gmbh/blog/2018/5-jahre-heartbeat-aarau",
-	"@type" => "BlogPosting",
+    "url" => "https://heartbeat.gmbh/blog/2018/5-jahre-heartbeat-aarau",
+    "@type" => "BlogPosting",
 |);
 ```
 
@@ -57,7 +57,7 @@ An example for a value object with an url to a given image:
 
 ```php
 $image = (new ImageObject())
-	->setUrl(new UrlValue('https://example.com/johndoe.jpg'));
+    ->setUrl(new UrlValue('https://example.com/johndoe.jpg'));
 ```
 
 The value object will then parse the input correctly for the given schema property.
@@ -79,35 +79,35 @@ $current = Yii::$app->menu->current;
 
 // register general thing information about the current page
 JsonLd::thing()
-	->setName($current->title)
-	->setDescription($current->description)
-	->setUrl(new UrlValue($current->absoluteLink))
-	
+    ->setName($current->title)
+    ->setDescription($current->description)
+    ->setUrl(new UrlValue($current->absoluteLink))
+    
 // author
 $author = (new Person())
-	->setName($current->userCreated->firstname . " " . $current->userCreated->lastname);
-	
+    ->setName($current->userCreated->firstname . " " . $current->userCreated->lastname);
+    
 // about
 $about = (new Thing())
-	->setDescription($current->title);
-	
+    ->setDescription($current->title);
+    
 // company logo definition
 $companyLogo = (new ImageObject())
-	->setUrl(new UrlValue('https://example.com/company-logo.jpg'));
-	
+    ->setUrl(new UrlValue('https://example.com/company-logo.jpg'));
+    
 // publisher
 $publisher = (new Organization())
-	->setName('My company')
-	->setLogo($companyLogo);
-	
+    ->setName('My company')
+    ->setLogo($companyLogo);
+    
 // register the blog post
 JsonLd::blogPosting()
-	->setAbout($about)
-	->setAuthor($author)
-	->setPublisher($publisher)
-	->setDateCreated(new DateTimeValue($current->dateCreated))
-	->setDateModified(new DateTimeValue($current->dateUpdated))
-	->setDatePublished(new DateTimeValue($current->dateCreated))
-	->setHeadline(new TextValue($current->description))
-	->setUrl(new UrlValue($current->absoluteLink));
+    ->setAbout($about)
+    ->setAuthor($author)
+    ->setPublisher($publisher)
+    ->setDateCreated(new DateTimeValue($current->dateCreated))
+    ->setDateModified(new DateTimeValue($current->dateUpdated))
+    ->setDatePublished(new DateTimeValue($current->dateCreated))
+    ->setHeadline(new TextValue($current->description))
+    ->setUrl(new UrlValue($current->absoluteLink));
 ```
