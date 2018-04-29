@@ -91,20 +91,23 @@ $author = (new Person())
 $about = (new Thing())
 	->setDescription($current->title);
 	
+// company logo definition
+$companyLogo = (new ImageObject())
+	->setUrl(new UrlValue('https://example.com/company-logo.jpg'));
+	
 // publisher
 $publisher = (new Organization())
 	->setName('My company')
-	->setLogo((new ImageObject())
-	->setUrl(new UrlValue('https://example.com/compynlogo.jpg')))
+	->setLogo($companyLogo);
 	
 // register the blog post
 JsonLd::blogPosting()
 	->setAbout($about)
 	->setAuthor($author)
+	->setPublisher($publisher)
 	->setDateCreated(new DateTimeValue($current->dateCreated))
 	->setDateModified(new DateTimeValue($current->dateUpdated))
 	->setDatePublished(new DateTimeValue($current->dateCreated))
-	->setPublisher($publisher)
 	->setHeadline(new TextValue($current->description))
 	->setUrl(new UrlValue($current->absoluteLink));
 ```
