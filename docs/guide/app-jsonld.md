@@ -49,7 +49,7 @@ luya\web\JsonLd::addGraph([
 |);
 ```
 
-## Value Types
+## Value Types
 
 Some properties require a given type of value, therefore we have Value objects. Some methods can require those objects in order to make sure the correct value is passed to the properties, otherwise you could enter values which are not valid for the given key. 
 
@@ -70,28 +70,41 @@ The value object will then parse the input correctly for the given schema proper
 |{{luya\web\jsonld\UrlValue}}|Used for paths to images or websites (links).
 |{{luya\web\jsonld\TextValue}}|Used when objects needs to get shorten or encode the text values is required.
 
-## Advanced usage
+## Advanced usage
 
 An example for providing structured JsonLd for a blog with LUYA cms module:
 
 ```php
 $current = Yii::$app->menu->current;
 
+// register general thing information about the current page
 JsonLd::thing()
 	->setName($current->title)
 	->setDescription($current->description)
 	->setUrl(new UrlValue($current->absoluteLink))
-	->setImage((new ImageObject())->setUrl(new UrlValue($image->sourceAbsolute)));
 	
+// author
+$author = (new Person())
+	->setName($current->userCreated->firstname . " " . $current->userCreated->lastname);
 	
+// about
+$about = (new Thing())
+	->setDescription($current->title);
+	
+// publisher
+$publisher = (new Organization())
+	->setName('My company')
+	->setLogo((new ImageObject())
+	->setUrl(new UrlValue('https://example.com/compynlogo.jpg')))
+	
+// register the blog post
 JsonLd::blogPosting()
-	->setAbout((new Thing())->setDescription($current->title))
-	->setAuthor((new Person())->setName($current->userCreated->firstname . " " . $current->userCreated->lastname))
+	->setAbout($about)
+	->setAuthor($author)
 	->setDateCreated(new DateTimeValue($current->dateCreated))
 	->setDateModified(new DateTimeValue($current->dateUpdated))
 	->setDatePublished(new DateTimeValue($current->dateCreated))
-	->setPublisher((new Organization())->setName('John Doe')->setLogo((new ImageObject())->setUrl(new UrlValue('https://example.com/johndoe.jpg'))))
+	->setPublisher($publisher)
 	->setHeadline(new TextValue($current->description))
-	->setImage((new ImageObject())->setUrl(new UrlValue($image->sourceAbsolute)))
 	->setUrl(new UrlValue($current->absoluteLink));
 ```
