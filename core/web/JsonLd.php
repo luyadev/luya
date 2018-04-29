@@ -235,7 +235,7 @@ class JsonLd extends BaseObject
      * @return \luya\web\jsonld\ContactPoint
      * @since 1.0.3
      */
-    public static function contactPoin(array $config = [])
+    public static function contactPoint(array $config = [])
     {
         return self::addGraph((new ContactPoint($config)));
     }
