@@ -46,7 +46,7 @@ We recommend to enable {{luya\admin\Module::$secureLogin}} which will send you a
 
 ## Strong admin user password policy
 
-We recommend to enable the {{luya\admin\Module::$strongPasswordPolicy}} property which is availabe since `luya-module-admin` version 1.1.1. This property makes sure the user has to enter a strong passwird with: uppercase, lowercase, special chars, digits and numbers with an min length of 8 chars.
+We recommend to enable the {{luya\admin\Module::$strongPasswordPolicy}} property which is availabe since `luya-module-admin` version 1.1.1 and enabled by default since 1.2.0. This property makes sure the user has to enter a strong passwird with: uppercase, lowercase, special chars, digits and numbers with an min length of 8 chars.
 
 ```php
 'admin' => [
@@ -65,6 +65,19 @@ With enabling of {{luya\admin\Module::$emailVerification}} the user can not chan
     'emailVerification' => true,
 ]
 ```
+
+## Json response cruft prepend
+
+A JSON vulnerability allows third party website to turn your JSON resource URL into JSONP request under some conditions. To counter this your server can prefix all JSON requests with following string ")]}',\n". This is auto enabled for all json responses which are provided by the admin module.
+
+```php
+'admin' => [
+    'class' => 'luya\admin\Module',
+    'jsonCruft' => true,
+]
+```
+
+You should never disabled this behavior, but you can if are unable to parse the response content. Every response which contains cruf prepend has the response header `X-CRUFT-LENGTH` therefore you can remove the first string with this length like the luya headless client does.
 
 ## Deployment
 
