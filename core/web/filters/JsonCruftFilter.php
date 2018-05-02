@@ -24,6 +24,8 @@ use yii\web\Response;
  * On the client side (example using angular) you have to remove the cruft string from every response content
  * in order to have a valid json response.
  * 
+ * AngularJs built in protection: https://docs.angularjs.org/api/ng/service/$http#interceptors => JSON Vulnerability Protection
+ * 
  * @see http://blog.portswigger.net/2016/11/json-hijacking-for-modern-web.html
  * @see https://stackoverflow.com/a/3270390
  * @author Basil Suter <basil@nadar.io>
@@ -31,25 +33,44 @@ use yii\web\Response;
  */
 class JsonCruftFilter extends ActionFilter
 {
+    const CRUFT_HEADER_NAME = 'X-CRUFT-LENGTH';
+    
     /**
      * @var string The curft string which is appended to every json rest response.
      */
-    public $cruft = 'throw 1;<dont be evil>';
+    public $cruft = ")]}',\n";
     
+    /**
+     * Get the string lengt from the cruf.
+     * 
+     * @return number
+     */
     public function getCruftLength()
     {
         return strlen($this->cruft);
     }
     
+    /**
+     * Prepend the cruft string to a given content.
+     * 
+     * @param string $content
+     * @return string
+     */
     public function prependCruft($content)
     {
         return $this->cruft . trim($content);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function afterAction($action, $result)
     {
         if (Yii::$app->response->format == Response::FORMAT_JSON) {
-            return $this->prependCruft($result);    
+            Yii::$app->response->headers->set(self::CRUFT_HEADER_NAME, $this->getCruftLength());
+            Yii::$app->response->on(Response::EVENT_AFTER_PREPARE, function($event) {
+                $event->sender->content = $this->prependCruft($event->sender->content);
+            });
         }
         
         return $result;

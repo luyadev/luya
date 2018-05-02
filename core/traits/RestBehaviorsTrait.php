@@ -12,6 +12,7 @@ use yii\filters\Cors;
 use yii\base\Model;
 use yii\base\InvalidParamException;
 use luya\rest\UserBehaviorInterface;
+use luya\web\filters\JsonCruftFilter;
 
 /**
  * Rest Behaviors Trait.
@@ -49,6 +50,13 @@ trait RestBehaviorsTrait
      * @since 1.0.7
      */
     public $languages = [];
+    
+    /**
+     * @var boolean Whether a unparsable cruf should be added to the json response or not. When enabled you have to parse the json response first before interpreting
+     * as json.
+     * @since 1.0.7
+     */
+    public $jsonCruft = false;
     
     /**
      * Whether the rest controller is protected or not.
@@ -110,6 +118,9 @@ trait RestBehaviorsTrait
         if ($this->enableCors) {
             $behaviors['cors'] = Cors::class;
         }
+        
+        
+        
 
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::className(),
@@ -126,6 +137,10 @@ trait RestBehaviorsTrait
             unset($behaviors['rateLimiter']);
         }
 
+        if ($this->jsonCruft) {
+            $behaviors['cruft'] = JsonCruftFilter::class;
+        }
+        
         return $behaviors;
     }
     
