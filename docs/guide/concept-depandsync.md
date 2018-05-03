@@ -29,7 +29,7 @@ You are now ready to deploy your website to the server and can start to add cont
 
 ![luya-proxy](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-proxy.gif "LUYA Proxy Sync")
 
-The developed `./vendro/bin/luya admin/proxy` sync command synchronize the database and files from the production environment to a number of local clients. 
+The developed `./vendor/bin/luya admin/proxy` sync command synchronize the database and files from the production environment to a number of local clients. 
 In order to set up this command login to your LUYA admin UI on the production server, navigate to `System -> Machines` and create a new one. 
 
 After creation of your local machine you have to copy the `identifier` and `token` that is generated in the next step.
