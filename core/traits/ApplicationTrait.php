@@ -60,10 +60,10 @@ trait ApplicationTrait
     
     /**
      * @var boolean If enabled, the application will throw an exception if a request is not from a secure connection (https). So any none secure request will throw
-     * a {{yii\web\ForbiddenHttpException}}. This option can also be enabled for REST APIs.
+     * a {{yii\web\ForbiddenHttpException}}. This option will also make sure REST APIs are requested by a secure connection.
      * @since 1.0.5
      */
-    public $ensureSecureConnection;
+    public $ensureSecureConnection = false;
     
     /**
      * @var array Add tags to the TagParser class. Example
@@ -78,7 +78,7 @@ trait ApplicationTrait
 
     /**
      * @var array Can override the localisation value used for php internal `setlocale()` method for specific language. For example
-     * the language is de but the it should use the locale charset `de_CH.utf` (locale -a will return all locales installed on the server)
+     * the language is de but the it should use the locale charset `de_CH.utf8` (locale -a will return all locales installed on the server)
      * you can define them inside an array where key is the language and value the locale value to be used.
      *
      * ```php
