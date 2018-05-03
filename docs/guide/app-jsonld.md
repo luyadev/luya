@@ -11,6 +11,7 @@ Every JsonLd property starts within a given type like `Person` the base of every
 |{{luya\web\jsonld\Thing}}|This is the base object for every json ld object.
 |{{luya\web\jsonld\Person}}|Authors for serveral things like blog post, comments or used when having text about a person.
 |{{luya\web\jsonld\BlogPosting}}|Used for Blog posts or news articles.
+|{{luya\web\jsonld\Organization}}|Provides information about an organization such as a school, NGO, corporation, club, etc.
 |{{luya\web\jsonld\CreativeWork}}|Providing informations about a given work.
 |{{luya\web\jsonld\Place}}|Describes location, for example to provide the company location.
 |{{luya\web\jsonld\ImageObject}}|Used for images or galleries.
