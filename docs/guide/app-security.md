@@ -68,7 +68,7 @@ With enabling of {{luya\admin\Module::$emailVerification}} the user can not chan
 
 ## Json response cruft prepend
 
-A JSON vulnerability allows third party website to turn your JSON resource URL into JSONP request under some conditions. To counter this your server can prefix all JSON requests with following string ")]}',\n". This is auto enabled for all json responses which are provided by the admin module.
+A JSON vulnerability allows third party website to turn your JSON resource URL into JSONP request under some conditions. To encounter this, the server can prefix all JSON requests with following cruft `")]}',\n"`. This is auto enabled for all json responses which are provided by the admin module trough the APIs.
 
 ```php
 'admin' => [
@@ -77,7 +77,7 @@ A JSON vulnerability allows third party website to turn your JSON resource URL i
 ]
 ```
 
-You should never disabled this behavior, but you can if are unable to parse the response content. Every response which contains cruf prepend has the response header `X-CRUFT-LENGTH` therefore you can remove the first string with this length like the luya headless client does.
+You should never disabled this behavior, but if you are unable to parse the response content you can turn it off. Every response which contains a prepend cruft has the response header `X-CRUFT-LENGTH` therefore you can remove the first chars with this length, like the LUYA headless client does.
 
 ## Deployment
 
