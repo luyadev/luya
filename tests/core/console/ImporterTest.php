@@ -13,6 +13,11 @@ class StubImporter extends Importer
     {
         return $this->importer->id;
     }
+    
+    public function getTestModuleId()
+    {
+        return $this->module->id;
+    }
 }
 
 class ImporterTest extends LuyaConsoleTestCase
@@ -21,8 +26,9 @@ class ImporterTest extends LuyaConsoleTestCase
     {
         $importRunner = new ImportController('import-runner', Yii::$app);
         
-        $import = new StubImporter($importRunner);
+        $import = new StubImporter($importRunner, Yii::$app->getModule('unitmodule'));
         $this->assertSame('import-runner', $import->run());
+        $this->assertSame('unitmodule', $import->getTestModuleId());
         
         $import->addLog('value');
         

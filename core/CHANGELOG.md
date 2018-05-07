@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.8 (in progress)
 
+### Added
+
++ [#1800](https://github.com/luyadev/luya/issues/1800) Added module context for importers.
+
 ## 1.0.7 (2. May 2018)
 
 ### Addded
