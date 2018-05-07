@@ -27,7 +27,7 @@ interface ImportControllerInterface
      *
      * If there are no files found getDirectoryFiles will return an empty array.
      *
-     * @param stirng $folderName The folder name to find all files from.
+     * @param string $folderName The folder name to find all files from.
      * @return array If no files found for the given folder an empty array will be returned, otherwise a list of all files inside the given folder.
      */
     public function getDirectoryFiles($folderName);

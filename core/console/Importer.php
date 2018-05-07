@@ -4,6 +4,7 @@ namespace luya\console;
 
 use luya\console\interfaces\ImportControllerInterface;
 use yii\base\BaseObject;
+use luya\base\Module;
 
 /**
  * Base class for all Importer classes.
@@ -24,7 +25,8 @@ use yii\base\BaseObject;
  * }
  * ```
  *
- * @property \luya\console\interfaces\ImportControllerInterface $importer Importer Object
+ * @property \luya\console\interfaces\ImportControllerInterface $importer Importer object.
+ * @property \luya\base\Module $module The module context object.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -45,18 +47,25 @@ abstract class Importer extends BaseObject
     public $queueListPosition = self::QUEUE_POSITION_MIDDLE;
 
     /**
-     * @var mixed|array Read only property contains the importer object.
+     * @var \luya\console\interfaces\ImportControllerInterface Read only property contains the importer object.
      */
     private $_importer;
 
+    /**
+     * @var \luya\base\Module Read only module object property.
+     */
+    private $_module;
+    
     /**
      * Class constructor containing the importer object from where its called.
      *
      * @param \luya\console\interfaces\ImportControllerInterface $importer Import Object `\luya\commands\ImportController`.
      */
-    public function __construct(ImportControllerInterface $importer, $config = [])
+    public function __construct(ImportControllerInterface $importer, Module $module, $config = [])
     {
         $this->_importer = $importer;
+        $this->_module = $module;
+        
         parent::__construct($config);
     }
 
@@ -68,6 +77,17 @@ abstract class Importer extends BaseObject
     public function getImporter()
     {
         return $this->_importer;
+    }
+    
+    /**
+     * Returns the module object where the command has been found.
+     * 
+     * @return \luya\base\Module
+     * @since 1.0.8
+     */
+    public function getModule()
+    {
+        return $this->_module;
     }
 
     /**

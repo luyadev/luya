@@ -230,7 +230,7 @@ abstract class BaseCrudController extends Command
     }
     
     /**
-     * @return Connection the DB connection as specified by [[db]].
+     * @return \yii\db\Connection the DB connection as specified by [[db]].
      */
     protected function getDbConnection()
     {

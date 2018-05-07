@@ -7,6 +7,9 @@ use Yii;
 use luya\admin\models\Config;
 use luya\console\Command;
 use luya\console\interfaces\ImportControllerInterface;
+use luya\Boot;
+use yii\console\widgets\Table;
+use yii\helpers\VarDumper;
 
 /**
  * Import controller runs the module defined importer classes.
@@ -100,7 +103,7 @@ class ImportController extends Command implements ImportControllerInterface
     public function addLog($section, $value)
     {
         $this->_log[$section][] = $value;
-    }
+}
     
     /**
      * Get all log data.
@@ -122,11 +125,10 @@ class ImportController extends Command implements ImportControllerInterface
         $queue = [];
         foreach (Yii::$app->getApplicationModules() as $id => $module) {
             $response = $module->import($this);
-            
             // if there response is an array, the it will be added to the queue
             if (is_array($response)) {
                 foreach ($response as $class) {
-                    $object = new $class($this);
+                    $object = new $class($this, $module);
                     $position = $object->queueListPosition;
                     while (true) {
                         if (!array_key_exists($position, $queue)) {
@@ -154,6 +156,7 @@ class ImportController extends Command implements ImportControllerInterface
 
         foreach ($queue as $pos => $object) {
             $this->verbosePrint("Run importer object '{$object->className()}' on position '{$pos}'.", __METHOD__);
+            $this->verbosePrint('Module context id: ' . $object->module->id);
             $object->run();
         }
 
@@ -163,23 +166,36 @@ class ImportController extends Command implements ImportControllerInterface
             Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
         }
         
+        $this->output('LUYA import command (based on LUYA ' . Boot::VERSION . ')');
+        
         foreach ($this->getLog() as $section => $value) {
             $this->outputInfo(PHP_EOL . $section . ":");
-            foreach ($value as $k => $v) {
-                if (is_array($v)) {
-                    foreach ($v as $kk => $kv) {
-                        if (is_array($kv)) {
-                            $this->output(" - {$kk}: " . print_r($kv, true));
-                        } else {
-                            $this->output(" - {$kk}: {$kv}");
-                        }
-                    }
-                } else {
-                    $this->output(" - " . $v);
-                }
-            }
+            $this->logValueToTable($value); 
         }
         
         return $this->outputSuccess("Importer run successful.");
+    }
+    
+    private function logValueToTable(array $logs)
+    {
+        $table = new Table();
+        $table->setHeaders(['Key', 'Value']);
+        $rows = [];
+     
+        foreach ($logs as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $kk => $kv) {
+                    if (!is_scalar($kv)) {;
+                        $rows[] = [$kk, VarDumper::dumpAsString($kv)];
+                    } else {
+                        $rows[] = [$kk, $kv];
+                    }
+                }
+            } else {
+                $rows[] = [$key, $value];
+            }
+        }
+        $table->setRows($rows);
+        echo $table->run();
     }
 }

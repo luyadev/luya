@@ -190,7 +190,7 @@ class ModuleReflection extends BaseObject
 
     /**
      * Setter method for the requested route
-     * @param unknown $route
+     * @param string $route
      * @param array $args
      */
     public function setRequestRoute($route, array $args = [])
