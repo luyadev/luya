@@ -128,7 +128,7 @@ class ImportController extends Command implements ImportControllerInterface
             // if there response is an array, the it will be added to the queue
             if (is_array($response)) {
                 foreach ($response as $class) {
-                    $object = new $class($this, $module);
+                    $object = Yii::createObject($class, [$this, $module]);
                     $position = $object->queueListPosition;
                     while (true) {
                         if (!array_key_exists($position, $queue)) {
