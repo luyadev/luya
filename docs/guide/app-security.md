@@ -46,7 +46,7 @@ We recommend to enable {{luya\admin\Module::$secureLogin}} which will send you a
 
 ## Strong admin user password policy
 
-We recommend to enable the {{luya\admin\Module::$strongPasswordPolicy}} property which is availabe since `luya-module-admin` version 1.1.1 and enabled by default since 1.2.0. This property makes sure the user has to enter a strong passwird with: uppercase, lowercase, special chars, digits and numbers with an min length of 8 chars.
+We recommend to enable the {{luya\admin\Module::$strongPasswordPolicy}} property which is availabe since `luya-module-admin` version 1.1.1 and enabled by default since 1.2.0. This property makes sure the user has to enter a strong password with: uppercase, lowercase, special chars, digits and numbers with an min length of 8 chars.
 
 ```php
 'admin' => [
