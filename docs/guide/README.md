@@ -28,7 +28,7 @@
   + [Filter Effects](app-filter-effects.md)
   + [Page Speed](app-speed.md)
   + [Security](app-security.md)
-  ± [JsonLd](app-jsonld.md)
+  + [JsonLd](app-jsonld.md)
 + CMS
   + [CMS Layouts](app-cmslayouts.md)
   + [Menus & Navigations](app-menu.md)
