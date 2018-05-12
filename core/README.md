@@ -2,6 +2,8 @@
   <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/logo/luya-logo-0.2x.png" alt="LUYA Logo"/>
 </p>
 
+**READ ONLY REPOSITORY - PULL REQUESTS MUST BE SUBMITED TO [LUYADEV/LUYA](https://github.com/luyadev/luya)**
+
 The LUYA core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by helpers and a structured way to run and build any web application you can think of. 
 
 [![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
