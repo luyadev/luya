@@ -49,6 +49,9 @@ class ApplicationTraitTest extends LuyaWebTestCase
         $app = Yii::$app;
         
         $this->assertSame('xx_XX', $app->ensureLocale('xx_XX'));
+        $this->assertSame('en_EN', $app->ensureLocale('en'));
+        
+        $app->locales = ['en' => 'en_US'];
         $this->assertSame('en_US', $app->ensureLocale('en'));
     }
 }
