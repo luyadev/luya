@@ -106,34 +106,25 @@ trait ApplicationTrait
     /**
      * Transform the $language into a locale sign to set php env settings.
      *
-     * Example transform input `de` to `de_CH` when available $locales property.
+     * Example transform input `de` to `de_CH` when available $locales property as
+     * 
+     * ```php
+     * 'locales' => ['de' => 'de_CH']
+     * ```
      *
      * @param string $lang Find the locale POSIX for the provided $lang short code.
      * @return string The localisation code for the provided lang short code.
      */
     public function ensureLocale($lang)
     {
+        // see if the $lang is available in the $locales map.
         if (array_key_exists($lang, $this->locales)) {
             return $this->locales[$lang];
         }
         
+        // generate from `de` the locale `de_DE` or from `en` `en_EN` only if $lang is 2 chars.
         if (strlen($lang) == 2) {
-            switch ($lang) {
-                case 'de':
-                    return 'de_DE';
-                case 'fr':
-                    return 'fr_FR';
-                case 'it':
-                    return 'it_IT';
-                case 'ru':
-                    return 'ru_RU';
-                case 'en':
-                    return 'en_US';
-                case 'cn':
-                    return 'cn_CN';
-                default:
-                    return strtolower($lang) . '_' . strtoupper($lang);
-            }
+            return strtolower($lang) . '_' . strtoupper($lang);
         }
         
         return $lang;
@@ -143,13 +134,19 @@ trait ApplicationTrait
      * Setter method ensures the locilations POSIX from {{ensureLocale}} for the provided lang
      * and changes the Yii::$app->langauge and sets the `setlocale()` code from ensureLocale().
      *
+     * From the setlocale docs about, try different locales:
+     *
+     * > If locale is an array or followed by additional parameters then each array element or parameter
+     * > is tried to be set as new locale until success. This is useful if a locale is known under different
+     * > names on different systems or for providing a fallback for a possibly not available locale.
+     *
      * @param string $lang The language short code to set the locale for.
      */
     public function setLocale($lang)
     {
-        $locale = str_replace('.utf8', '', $this->ensureLocale($lang));
+        $locale = str_replace(['.utf8', '.UTF-8'], '', $this->ensureLocale($lang));
         $this->language = $locale;
-        setlocale(LC_ALL, $locale.'.utf8', $locale);
+        setlocale(LC_ALL, $locale.'.utf8', $locale.'UTF-8', $locale);
     }
 
     /**
