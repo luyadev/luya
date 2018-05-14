@@ -4,7 +4,6 @@ namespace luya\console\commands;
 
 use Yii;
 use yii\console\widgets\Table;
-use yii\helpers\VarDumper;
 use luya\Boot;
 use luya\admin\models\Config;
 use luya\console\Command;
@@ -209,11 +208,7 @@ class ImportController extends Command implements ImportControllerInterface
         foreach ($logs as $key => $value) {
             if (is_array($value)) {
                 foreach ($value as $kk => $kv) {
-                    if (!is_scalar($kv)) {
-                        $rows[] = [$kk, VarDumper::dumpAsString($kv)];
-                    } else {
-                        $rows[] = [$kk, $kv];
-                    }
+                    $rows[] = [$kk, $kv];
                 }
             } else {
                 $rows[] = [$key, $value];
