@@ -218,6 +218,18 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('this-is-a-cms-link/controller/action', $r);
     }
     
+    public function testCreateMenuItemUrlWithHomeItem()
+    {
+        Yii::$app->set('menu', ['class' => UnitMenu::class, 'getHome' => true]);
+        $urlManager = new UrlManager();
+        $menu = $urlManager->getMenu();
+        $this->assertNotFalse($menu);
+        
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3);
+        
+        $this->assertContains('/unitmodule/controller/action', $r);
+    }
+    
     public function testCreateMenuItemUrlRedirectType2()
     {
         Yii::$app->set('menu', ['class' => UnitMenu::class]);

@@ -36,6 +36,8 @@ class UnitMenu extends Component
     {
         return $this;
     }
+
+    public $getHome = false;
     
     public function one()
     {
@@ -47,6 +49,10 @@ class UnitMenu extends Component
             return new ItemRedirect();
         }
         
+        if ($this->getHome) {
+            return new ItemHome();
+        }
+        
         return new Item();
     }
 }
@@ -56,6 +62,17 @@ class Item
     public $type = 1;
     
     public $link = 'this-is-a-cms-link';
+    
+    public $isHome = false;
+}
+
+class ItemHome
+{
+    public $type = 1;
+    
+    public $link = 'this-is-a-cms-link';
+    
+    public $isHome = true;
 }
 
 class ItemRedirect
@@ -65,4 +82,6 @@ class ItemRedirect
     public $link = 'this-is-a-module-type-page';
     
     public $moduleName = 'unitmodule';
+    
+    public $isHome = false;
 }
