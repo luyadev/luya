@@ -40,13 +40,13 @@ trait RestBehaviorsTrait
     
     /**
      * @var array An array with languages which are passed to {{yii\filters\ContentNegotiator::$languages}}. Example
-     * 
+     *
      * ```php
      * 'languages' => [
      *     'en',
      *     'de',
      * ],
-     * ```        
+     * ```
      * @since 1.0.7
      */
     public $languages = [];

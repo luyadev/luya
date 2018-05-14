@@ -155,12 +155,12 @@ class StringHelper extends BaseStringHelper
     
     /**
      * "Minify" html content.
-     * 
+     *
      * + remove space
      * + remove tabs
      * + remove newlines
      * + remove html comments
-     * 
+     *
      * @param string $content The content to minify.
      * @param array $options Optional arguments to provide for minification:
      * - comments: boolean, where html comments should be removed or not. defaults to false

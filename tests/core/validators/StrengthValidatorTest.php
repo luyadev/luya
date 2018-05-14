@@ -17,7 +17,7 @@ class StrengthValidatorTest extends LuyaWebTestCase
 {
     /**
      * Test a given value inside the strength validator.
-     * 
+     *
      * @param string $value The value to assign to the model.
      * @return \luya\base\DynamicModel
      */

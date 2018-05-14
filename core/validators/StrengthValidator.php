@@ -7,9 +7,9 @@ use yii\validators\Validator;
 
 /**
  * Checks a given string for given strength attributes.
- * 
+ *
  * This validator is commonly used to validate the strength of passwords.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.6
  */

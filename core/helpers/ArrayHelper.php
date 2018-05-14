@@ -37,12 +37,12 @@ class ArrayHelper extends BaseArrayHelper
      * Cover senstive values from a given list of keys.
      *
      * The main purpose is to remove passwords transferd to api when existing in post, get or session.
-     * 
+     *
      * Example:
-     * 
+     *
      * ```php
      * $data = ArrayHelper::coverSensitiveValues(['username' => 'foo', 'password' => 'bar'], ['password']];
-     * 
+     *
      * var_dump($data); // array('username' => 'foo', 'password' => '***');
      * ```
      *

@@ -27,11 +27,10 @@ use yii\helpers\VarDumper;
  */
 class ImportController extends Command implements ImportControllerInterface
 {
-    private $_dirs = [];
-
-    private $_log = [];
-
-    private $_scanFolders = ['blocks', 'filters', 'properties', 'blockgroups'];
+    /**
+     * @var array An array with all folder names inside an application/module to scan for files.
+     */
+    protected $scanFolders = ['blocks', 'filters', 'properties', 'blockgroups'];
 
     /**
      * @inheritdoc
@@ -42,17 +41,47 @@ class ImportController extends Command implements ImportControllerInterface
         
         // foreach scanFolders of all modules
         foreach (Yii::$app->getApplicationModules() as $id => $module) {
-            foreach ($this->_scanFolders as $folderName) {
+            foreach ($this->scanFolders as $folderName) {
                 $this->addToDirectory($module->getBasePath().DIRECTORY_SEPARATOR.$folderName, $folderName, '\\'.$module->getNamespace().'\\'.$folderName, $module->id);
             }
         }
         // foreach scanFolder inside the app namespace
-        foreach ($this->_scanFolders as $folderName) {
+        foreach ($this->scanFolders as $folderName) {
             $this->addToDirectory(Yii::getAlias("@app/$folderName"), $folderName, '\\app\\'.$folderName, '@app');
         }
     }
 
-    private function scanDirectoryFiles($path, $ns, $module)
+    private $_dirs = [];
+    
+    /**
+     * Add a given directory to the list of folders.
+     *
+     * @param string $path
+     * @param string $folderName
+     * @param string $ns
+     * @param string $module The name/id of the module.
+     */
+    protected function addToDirectory($path, $folderName, $ns, $module)
+    {
+        if (file_exists($path)) {
+            $this->_dirs[$folderName][] = [
+                'ns' => $ns,
+                'module' => $module,
+                'folderPath' => $path.DIRECTORY_SEPARATOR,
+                'files' => $this->scanDirectoryFiles($path, $ns, $module),
+            ];
+        }
+    }
+    
+    /**
+     * Scan a given directory path and return an array with namespace, module and file.
+     *
+     * @param string $path
+     * @param string $ns
+     * @param string $module The name/id of the module.
+     * @return array
+     */
+    protected function scanDirectoryFiles($path, $ns, $module)
     {
         $files = [];
         foreach (scandir($path) as $file) {
@@ -64,20 +93,8 @@ class ImportController extends Command implements ImportControllerInterface
                 ];
             }
         }
-
+        
         return $files;
-    }
-
-    private function addToDirectory($path, $folderName, $ns, $module)
-    {
-        if (file_exists($path)) {
-            $this->_dirs[$folderName][] = [
-                'ns' => $ns,
-                'module' => $module,
-                'folderPath' => $path.DIRECTORY_SEPARATOR,
-                'files' => $this->scanDirectoryFiles($path, $ns, $module),
-            ];
-        }
     }
     
     /**
@@ -96,6 +113,8 @@ class ImportController extends Command implements ImportControllerInterface
         
         return $files;
     }
+    
+    private $_log = [];
 
     /**
      * @inheritdoc
@@ -103,7 +122,7 @@ class ImportController extends Command implements ImportControllerInterface
     public function addLog($section, $value)
     {
         $this->_log[$section][] = $value;
-}
+    }
     
     /**
      * Get all log data.
@@ -170,12 +189,18 @@ class ImportController extends Command implements ImportControllerInterface
         
         foreach ($this->getLog() as $section => $value) {
             $this->outputInfo(PHP_EOL . $section . ":");
-            $this->logValueToTable($value); 
+            $this->logValueToTable($value);
         }
         
         return $this->outputSuccess("Importer run successful.");
     }
     
+    /**
+     * Print the log values as a table.
+     *
+     * @param array $logs
+     * @since 1.0.8
+     */
     private function logValueToTable(array $logs)
     {
         $table = new Table();
@@ -185,7 +210,7 @@ class ImportController extends Command implements ImportControllerInterface
         foreach ($logs as $key => $value) {
             if (is_array($value)) {
                 foreach ($value as $kk => $kv) {
-                    if (!is_scalar($kv)) {;
+                    if (!is_scalar($kv)) {
                         $rows[] = [$kk, VarDumper::dumpAsString($kv)];
                     } else {
                         $rows[] = [$kk, $kv];

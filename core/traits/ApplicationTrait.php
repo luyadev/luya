@@ -107,7 +107,7 @@ trait ApplicationTrait
      * Transform the $language into a locale sign to set php env settings.
      *
      * Example transform input `de` to `de_CH` when available $locales property as
-     * 
+     *
      * ```php
      * 'locales' => ['de' => 'de_CH']
      * ```

@@ -8,10 +8,10 @@ use yii\web\Response;
 
 /**
  * Json Cruft Filter.
- * 
+ *
  * This ActionFilter will append the {{luya\web\filters\JsonCruftFilter::$cruft}} string before every request
  * in order to disallow json hijacking.
- * 
+ *
  * ```php
  * public function behaviors()
  * {
@@ -20,12 +20,12 @@ use yii\web\Response;
  *     ];
  * }
  * ```
- * 
+ *
  * On the client side (example using angular) you have to remove the cruft string from every response content
  * in order to have a valid json response.
- * 
+ *
  * AngularJs built in protection: https://docs.angularjs.org/api/ng/service/$http#interceptors => JSON Vulnerability Protection
- * 
+ *
  * @see http://blog.portswigger.net/2016/11/json-hijacking-for-modern-web.html
  * @see https://stackoverflow.com/a/3270390
  * @author Basil Suter <basil@nadar.io>
@@ -42,7 +42,7 @@ class JsonCruftFilter extends ActionFilter
     
     /**
      * Get the string lengt from the cruf.
-     * 
+     *
      * @return number
      */
     public function getCruftLength()
@@ -52,7 +52,7 @@ class JsonCruftFilter extends ActionFilter
     
     /**
      * Prepend the cruft string to a given content.
-     * 
+     *
      * @param string $content
      * @return string
      */
@@ -68,7 +68,7 @@ class JsonCruftFilter extends ActionFilter
     {
         if (Yii::$app->response->format == Response::FORMAT_JSON) {
             Yii::$app->response->headers->set(self::CRUFT_HEADER_NAME, $this->getCruftLength());
-            Yii::$app->response->on(Response::EVENT_AFTER_PREPARE, function($event) {
+            Yii::$app->response->on(Response::EVENT_AFTER_PREPARE, function ($event) {
                 $event->sender->content = $this->prependCruft($event->sender->content);
             });
         }

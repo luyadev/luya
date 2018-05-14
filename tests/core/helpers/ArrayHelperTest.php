@@ -154,7 +154,6 @@ class ArrayHelperTest extends LuyaWebTestCase
     
     public function testCoverSensitiveValues()
     {
-        
         $response = ArrayHelper::coverSensitiveValues([
             'password' => 'foo',
             'PassWordString' => 'foobar',

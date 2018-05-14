@@ -81,7 +81,7 @@ abstract class Importer extends BaseObject
     
     /**
      * Returns the module object where the command has been found.
-     * 
+     *
      * @return \luya\base\Module
      * @since 1.0.8
      */
