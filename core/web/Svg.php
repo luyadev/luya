@@ -49,7 +49,7 @@ class Svg extends Widget
     /**
      * Setter method for $folder.
      *
-     * @param $folder Sets $_folder to the given string (parsed trough Yii::getAlias())
+     * @param string $folder Set folder for the given string (parsed trough Yii::getAlias())
      */
     public function setFolder($folder)
     {

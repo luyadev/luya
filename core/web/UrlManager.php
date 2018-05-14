@@ -358,9 +358,11 @@ class UrlManager extends \yii\web\UrlManager
             throw new BadRequestHttpException("Unable to find nav_item_id '$navItemId' to generate the module link for url '$url'.");
         }
     
-        // if the item type is (2) module and the current context module is not equals we don't have to remove to replace the module name
-        // as this is an url rule not related to the current module.
-        if ($item->type == 2 && $module !== $item->moduleName) {
+        // 1. if the current page is a module and the requested url is not the same module, its an outgoing link to
+        // another module which should not be modificated.
+        // 2. If the current page (nav) context is the homepage, we have to keep the original link as it wont work because the homepage
+        // does not have a route prefix.
+        if (($item->type == 2 && $module !== $item->moduleName) || $item->isHome) {
             return $url;
         }
     
