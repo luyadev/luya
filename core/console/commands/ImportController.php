@@ -3,13 +3,12 @@
 namespace luya\console\commands;
 
 use Yii;
-
+use yii\console\widgets\Table;
+use yii\helpers\VarDumper;
+use luya\Boot;
 use luya\admin\models\Config;
 use luya\console\Command;
 use luya\console\interfaces\ImportControllerInterface;
-use luya\Boot;
-use yii\console\widgets\Table;
-use yii\helpers\VarDumper;
 
 /**
  * Import controller runs the module defined importer classes.
