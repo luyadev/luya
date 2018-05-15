@@ -250,7 +250,7 @@ class UrlManager extends \yii\web\UrlManager
      */
     public function createMenuItemUrl($params, $navItemId, $composition = null)
     {
-        $composition = (empty($composition)) ? $this->getComposition() : $composition;
+        $composition = empty($composition) ? $this->getComposition() : $composition;
         $url = $this->internalCreateUrl($params, $composition);
 
         if (!$this->menu) {
