@@ -4,7 +4,6 @@ namespace luya\helpers;
 
 use yii\db\ActiveQueryInterface;
 use yii\db\ActiveRecordInterface;
-use luya\helpers\ArrayHelper;
 use yii\helpers\Html;
 use luya\Exception;
 
@@ -158,8 +157,12 @@ class ExportHelper
     protected static function generateRow(array $row, $delimiter, $enclose)
     {
         array_walk($row, function (&$item) use ($enclose) {
-            if (!is_scalar($item)) {
-                $item = "array";
+            if (is_bool($item)) {
+                $item = (int) $item;
+            } elseif (is_null($item)) {
+                $item = '';
+            } elseif (!is_scalar($item)) {
+                $item = "[array]";
             }
             $item = $enclose.Html::encode($item).$enclose;
         });

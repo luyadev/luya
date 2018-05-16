@@ -2,8 +2,6 @@
 
 namespace luyatests\core\helpers;
 
-use luya\helpers\FileHelper;
-use luya\helpers\XLSXWriter;
 use Yii;
 use luyatests\LuyaWebTestCase;
 use luya\helpers\ExportHelper;
@@ -49,6 +47,15 @@ class ExportHelperTest extends LuyaWebTestCase
     public function testCsvArrayExport()
     {
         $this->assertEquals('"id","name"'.PHP_EOL.'"1","John"'.PHP_EOL.'"2","Jane"'. PHP_EOL, ExportHelper::csv($this->getArray()));
+    }
+    
+    public function testCsvArrayRowTypes()
+    {
+        $this->assertEquals('"1","0","0","","[array]","string","1","1"'. PHP_EOL, ExportHelper::csv([
+            [
+                true, false, 0, null, ['bar'], 'string', 1, '1'
+            ]
+        ], [], false));
     }
     
     public function testCsvArrayExportWithProperties()
