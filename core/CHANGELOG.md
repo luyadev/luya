@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
++ [#1804](https://github.com/luyadev/luya/issues/1804) Use new minify method for view compress function.
 + [#1803](https://github.com/luyadev/luya/issues/1803) Mark Encode and Timestamp as deprecated. Added JsonBehavior to encode/deocde values.
 
 ### Fixed

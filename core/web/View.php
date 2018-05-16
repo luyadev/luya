@@ -5,6 +5,7 @@ namespace luya\web;
 use Yii;
 
 use luya\Exception;
+use luya\helpers\StringHelper;
 
 /**
  * LUYA web view wrapper.
@@ -67,7 +68,7 @@ class View extends \yii\web\View
      */
     public function compress($content)
     {
-        return preg_replace(['/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'], ['>', '<', '\\1'], $content);
+        return StringHelper::minify($content);
     }
 
     /**
