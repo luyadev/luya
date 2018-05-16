@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.9 (in progress)
 
+### Changed
+
++ [#1803](https://github.com/luyadev/luya/issues/1803) Mark Encode and Timestamp as deprecated. Added JsonBehavior to encode/deocde values.
+
 ### Fixed
 
 + [#1802](https://github.com/luyadev/luya/issues/1802) Fix problem with export helper variable values.
