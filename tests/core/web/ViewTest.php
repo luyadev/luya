@@ -18,21 +18,13 @@ class ViewTest extends \luyatests\LuyaWebTestCase
 
         $string = '  ';
         $resultString = $view->compress($string);
-        $this->assertEquals(1, strlen($resultString));
+        $this->assertEquals(0, strlen($resultString));
 
         $string = ' ';
         $resultString = $view->compress($string);
-        $this->assertEquals(1, strlen($resultString));
+        $this->assertEquals(0, strlen($resultString));
 
-        $string = '<test>
-
-        </test>';
-        $resultString = $view->compress($string);
-        $this->assertEquals(14, strlen($resultString));
-
-        $string = 'test  test test';
-        $resultString = $view->compress($string);
-        $this->assertEquals(14, strlen($resultString));
+        $this->assertSame('<p> foo bar </p>', $view->compress('    <p> foo    bar      </p>'));
     }
     
     /*
