@@ -69,7 +69,7 @@ class NotifyController extends \luya\console\Command
 
     public function actionBar()
     {
-        return $this->ouputError('Something failed inside this action');
+        return $this->outputError('Something failed inside this action');
     }
 }
 ```
