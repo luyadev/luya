@@ -11,7 +11,7 @@ use luya\helpers\StringHelper;
 /**
  * Composition parseRequest Handler.
  *
- * The composition is run for every {{luya\web\UrlManager::parseRequest()} call in order to determine
+ * The composition is run for every {{luya\web\UrlManager::parseRequest()}} call in order to determine
  * the language of the application based on {{luya\web\Composition::$hostInfoMapping}} or from the given
  * {{luya\web\Request::$hostInfo}}.
  *
