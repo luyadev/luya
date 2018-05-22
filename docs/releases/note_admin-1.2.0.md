@@ -11,6 +11,8 @@ Security is a top priority for any web framework and web application, therefore 
 + Login attempts are now tracked by the session (session based attemption limit). If the user email is correct, another limit for user identifed login is available. After five attempts, a lockout for one hour is enabled by default. The max number of attempts can be configured.
 + The maximum idle time of admin users can now be configured.
 
+There is also a new [LUYA security best practice](https://luya.io/guide/app-security) guide.
+
 ## Admin General Improvments
 
 + NgRest attributes can now be displayed based on conditions. Assuming you have a select with categories, this allows you to display a certain field only when a specific category is selected. [Read more](https://github.com/luyadev/luya-module-admin/blob/master/src/ngrest/base/Plugin.php#L53-L71)
