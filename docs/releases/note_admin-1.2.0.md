@@ -22,7 +22,7 @@ Security is a top priority for any web framework and web application, therefore 
 
 You can download and install LUYA admin version 1.2 (`~1.2.0` in composer). Make sure to run the `migrate` command afterwards as the update includes database migrations. See the full [changelog](https://github.com/luyadev/luya-module-admin/blob/master/CHANGELOG.md) und [upgrade](https://github.com/luyadev/luya-module-admin/blob/master/UPGRADE.md) document.
 
-## CMS
+## CMS
 
 Along with the Admin module we also released CMS module version 1.0.4, which includes:
 
@@ -31,6 +31,4 @@ Along with the Admin module we also released CMS module version 1.0.4, which inc
 + New property to provide import paths for blocks: `luya\cms\frontend\Module::$blocks`.
 + New commands to list blocks and migrate them from the console: `cms/block/find` and `cms/block/migrate`. The migrate command is helpful when you want to delete an old block but assign its contents to a new block.
 
-22 May 2018,
-LUYA developer team
-luya.io
+22 May 2018, LUYA developer team
