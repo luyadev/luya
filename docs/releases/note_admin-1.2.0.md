@@ -1,4 +1,4 @@
-LUYA Admin module release 1.2 and cms 1.0.4
+LUYA Admin module release 1.2 and CMS module release 1.0.4
 
 ## Admin Security Improvements
 
