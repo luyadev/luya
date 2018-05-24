@@ -44,3 +44,5 @@ return [
     ],
 ];
 ```
+
+> Hint: Keep in mind, if you are creating a module for admin usage, the admin name in the config must contain a suffix like `mymoduleadmin` otherwise using only `mymodule` for admin modules will give you some disadvantages.
