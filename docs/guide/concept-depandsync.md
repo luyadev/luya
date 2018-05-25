@@ -21,7 +21,7 @@ We recommend that you deploy the website to the server in an early stadium of th
 
 1. Set up your production environment on the server (create database, enable ssh, etc.)
 2. Change the `env-prod.php` config.
-3. Install and configure the [LUYA deployer](https://luya.io/guide/module/luyadev---luya-deployer) that you can deploy your website with the `./vendor/bin/dep luya prod` command.
+3. Install and configure the [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer) that you can deploy your website with the `./vendor/bin/dep luya prod` command.
 
 You are now ready to deploy your website to the server and can start to add content on the production environment.
 
