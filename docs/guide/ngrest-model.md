@@ -207,20 +207,15 @@ If collapsed is `true` then the form group is hidden when opening the form, othe
 Sometimes you just want to trigger some javascript functions after the save/update process in the NgRest model, therefore you can add config options with wrapped inside a javascript function which will be evaluated in triggered, please take care of javascript errors and eval injections when using this method!
 
 ```php
-
-public function ngRestConfig($config)
+public function ngRestConfigOptions()
 {
-    // ...
-    
-    $config->options = [
-        'saveCallback' => 'function(ServiceMenuData) { ServiceMenuData.load(true); }', // this function callback will be trigger after save/update success calls.
+    return [
+        'saveCallback' => "['ServiceMenuData', function(ServiceMenuData) { ServiceMenuData.load(true); }]",
     ];
-    
-    // ...
-    
-    return $config;
 }
 ```
+
+When using an angular service injection, make sure to use strict di which is required since luya admin module version 1.2.
 
 ## Crud Relation Tabs
 
