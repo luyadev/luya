@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
++ [#1814](https://github.com/luyadev/luya/issues/1814) Added new json behavior in order to encode/deocde given class attributes.
 + [#1809](https://github.com/luyadev/luya/issues/1809) Add new `autoFormat` in formatter component in order to format values based on the input type.
 
 ### Changed
