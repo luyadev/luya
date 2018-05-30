@@ -27,6 +27,7 @@ use luya\helpers\Html;
  * attached like a trait would.
  *
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.9
  */
 class HtmlEncodeBehavior extends Behavior
 {
