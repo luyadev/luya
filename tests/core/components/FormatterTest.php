@@ -19,6 +19,7 @@ class FormatterTest extends LuyaWebTestCase
             'locale' => 'de',
         ]);
         
+        // only with php intl extension the response will be like this!
         $this->assertSame('2017/2017/2017', $formatter->asDate($ts));
         
         $formatter = new Formatter([
@@ -42,5 +43,16 @@ class FormatterTest extends LuyaWebTestCase
         ]);
         
         $this->assertSame('14:00:33', $formatter->asTime($ts));
+    }
+    
+    public function testautoFormat()
+    {
+        $formatter = new Formatter();
+        
+        $this->assertSame(1, $formatter->autoFormat(1));
+        $this->assertSame('Yes', $formatter->autoFormat(true));
+        $this->assertSame('No', $formatter->autoFormat(false));
+        $this->assertSame('<a href="mailto:demo@luya.io">demo@luya.io</a>', $formatter->autoFormat('demo@luya.io'));
+        $this->assertSame('<a href="https://luya.io">https://luya.io</a>', $formatter->autoFormat('https://luya.io'));
     }
 }

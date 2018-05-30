@@ -2,6 +2,9 @@
 
 namespace luya\components;
 
+use yii\validators\EmailValidator;
+use yii\validators\UrlValidator;
+
 /**
  * Formating Dates.
  *
@@ -92,5 +95,37 @@ class Formatter extends \yii\i18n\Formatter
         if (isset($this->timeFormats[$this->locale])) {
             $this->timeFormat = $this->timeFormats[$this->locale];
         }
+    }
+   
+    /**
+     * Auto format the value to a given format like url, email.
+     * 
+     * The following rules will apply to auto format the value:
+     * 
+     * + boolean: asBool
+     * + email: asEmail
+     * + url: asUrl
+     * 
+     * @param mixed $value Returns the formated value otherwise the original input value.
+     * @since 1.0.9
+     */
+    public function autoFormat($value)
+    {
+        // email validation
+        if ((new EmailValidator())->validate($value)) {
+            return $this->asEmail($value);
+        }
+        
+        // url validator
+        if ((new UrlValidator())->validate($value)) {
+            return $this->asUrl($value);
+        }
+        
+        // boolean type
+        if (is_bool($value)) {
+            return $this->asBoolean($value);
+        }
+        
+        return $value;
     }
 }

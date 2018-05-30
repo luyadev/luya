@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.9 (in progress)
 
+### Added
+
++ [#1809](https://github.com/luyadev/luya/issues/1809) Add new `autoFormat` in formatter component in order to format values based on the input type.
+
 ### Changed
 
 + [#1804](https://github.com/luyadev/luya/issues/1804) Use new minify method for view compress function.
