@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#1251](https://github.com/luyadev/luya/issues/1251) Fix url creation for modules which are implemented on the homepage.
 + [#1802](https://github.com/luyadev/luya/issues/1802) Fix problem with export helper variable values.
 
 ## 1.0.8 (14. May 2018)
