@@ -50,6 +50,8 @@ class ArrayHelperTest extends LuyaWebTestCase
             'minus1float' => -1.5,
             'minus1string' => '-1',
             'minus1stringfloat' => '-1.5',
+            'leadingplus' => '+123456',
+            'leadingplusint' => +123456,
         ];
         
         $typecasted = ArrayHelper::typeCast($array);
@@ -74,6 +76,9 @@ class ArrayHelperTest extends LuyaWebTestCase
         $this->assertSame(-1.5, $typecasted['minus1float']);
         $this->assertSame(-1, $typecasted['minus1string']);
         $this->assertSame(-1.5, $typecasted['minus1stringfloat']);
+        
+        $this->assertSame(123456, $typecasted['leadingplus']);
+        $this->assertSame(123456, $typecasted['leadingplusint']);
     }
     
     public function testSearch()
