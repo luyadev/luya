@@ -3,12 +3,15 @@
 namespace luya\web;
 
 use yii\base\BaseObject;
+use yii\base\InvalidConfigException;
 use yii\validators\RegularExpressionValidator;
 
 /**
  * Telephone Link.
  *
  * Represent a {{luya\web\LinkInterface}} of an telephone link.
+ *
+ * @property $telephone
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since 1.0.9
@@ -18,6 +21,18 @@ class TelephoneLink extends BaseObject implements LinkInterface
     use LinkTrait;
 
     private $_telephone;
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if ($this->telephone === null) {
+            throw new InvalidConfigException('The telephone attribute can not be empty and must be set trough configuration array.');
+        }
+    }
 
     /**
      * Setter method for telephone number.
@@ -36,7 +51,7 @@ class TelephoneLink extends BaseObject implements LinkInterface
         $telephone = ltrim($telephone, '\\');
 
         $validator = new RegularExpressionValidator([
-            'pattern' => '#^(?:0|\+[0-9]{2})[\d- ]+$#'
+            'pattern' => '#^(?:0|\+[0-9]{2})[\d- ()]+$#'
         ]);
         if ($validator->validate($telephone, $error)) {
             $this->_telephone = $telephone;
@@ -58,7 +73,15 @@ class TelephoneLink extends BaseObject implements LinkInterface
      */
     public function getHref()
     {
-        return empty($this->getTelephone()) ?: 'tel:' . $this->getTelephone();
+        $href = null;
+
+        if (!empty($this->getTelephone())) {
+            // Remove all chars expect digits and "+"
+            $number = preg_replace('#[^\d+]#', '', $this->getTelephone());
+            $href = 'tel:' . $number;
+        }
+
+        return $href;
     }
 
     /**
