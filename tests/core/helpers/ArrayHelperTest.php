@@ -79,6 +79,8 @@ class ArrayHelperTest extends LuyaWebTestCase
         
         $this->assertSame(123456, $typecasted['leadingplus']);
         $this->assertSame(123456, $typecasted['leadingplusint']);
+        
+        $this->assertSame([123], ArrayHelper::typeCast([ltrim('+123', '\\')]));
     }
     
     public function testSearch()
