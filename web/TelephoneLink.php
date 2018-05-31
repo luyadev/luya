@@ -2,8 +2,6 @@
 
 namespace luya\web;
 
-use luya\cms\models\NavItemPageBlockItem;
-use luya\tag\tags\TelTag;
 use yii\base\BaseObject;
 use yii\validators\RegularExpressionValidator;
 
@@ -32,7 +30,8 @@ class TelephoneLink extends BaseObject implements LinkInterface
     {
         /**
          * Hack to support leading + sign
-         * @see ArrayHelper::typeCast in NavItemPageBlockItem::rules()
+         * @see \luya\cms\models\NavItemPageBlockItem::rules()
+         * @link https://github.com/luyadev/luya/pull/1815
          */
         $telephone = ltrim($telephone, '\\');
 
