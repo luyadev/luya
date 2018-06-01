@@ -22,9 +22,9 @@ use luya\helpers\ArrayHelper;
 abstract class Boot
 {
     /**
-     * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/CHANGELOG.md)
+     * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/core/CHANGELOG.md)
      */
-    const VERSION = '1.0.9';
+    const VERSION = '1.0.10';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
