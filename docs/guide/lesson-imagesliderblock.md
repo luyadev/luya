@@ -24,7 +24,7 @@ As LUYA is build upon Yii2, we can use the built in asset system. We register ex
 
 ```php
 <?php 
-$this->appView->registerJsFile(
+$this->registerJsFile(
     '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js', 
     ['depends' => ['\yii\web\JqueryAsset']]
 );
@@ -36,8 +36,8 @@ We are using the open source Javascript slider plugin [slick](http://kenwheeler.
 Additionally we will add the link to the needed slick CSS files:
 
 ```php
-$this->appView->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css');
-$this->appView->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css');
+$this->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css');
+$this->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css');
 ```
 
 ## Init JS plugin and add view code
@@ -45,7 +45,7 @@ $this->appView->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-the
 Finally we initialize the slick plugin:
 
 ```php
-$this->appView->registerJs("$('.slider').slick({
+$this->registerJs("$('.slider').slick({
   infinite: true,
   slidesToShow: 3,
   slidesToScroll: 3
@@ -81,15 +81,15 @@ The final frontend view file in `views/blocks/ImagesliderBlock.php` will look li
  * @var $this \luya\cms\base\PhpBlockView
  */
 
-$this->appView->registerJsFile(
+$this->registerJsFile(
     '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js',
     ['depends' => ['\yii\web\JqueryAsset']]
 );
 
-$this->appView->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css');
-$this->appView->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css');
+$this->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css');
+$this->registerCssFile('//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css');
 
-$this->appView->registerJs("$('.slider').slick({
+$this->registerJs("$('.slider').slick({
   infinite: true,
   slidesToShow: 3,
   slidesToScroll: 3

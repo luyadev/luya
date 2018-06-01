@@ -1,7 +1,7 @@
 # Checkbox array
 
 ```php
-['var' => 'col', 'label' => 'Sizes', 'type' => 'zaa-checkbox-array', 'options' => [
+['var' => 'col', 'label' => 'Sizes', 'type' => self::TYPE_CHECKBOX_ARRAY, 'options' => [
     'items' => [
         ['value' => 1, 'label' => '30%'],
         ['value' => 2, 'label' => '40%'],

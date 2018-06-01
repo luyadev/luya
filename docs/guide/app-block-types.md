@@ -28,7 +28,7 @@ Now you can add a field into the above defined type, this is like a configuratio
 [
     'var' => 'userInputText',
     'label' => 'Form Label for the User',
-    'type' => 'zaa-text', // or as class constant: self::TYPE_TEXT
+    'type' => self::TYPE_TEXT, // or as class constant: self::TYPE_TEXT
 ] 
 ```
 
@@ -48,7 +48,7 @@ return [
 
 There are several types you can use to generate your block controllers. Each class which support those types implements the {{\luya\admin\base\TypesInterface}} where you can use the type names as constant.
 
-|Type Name            |Constante|Description
+|Type Name            |Constants|Description
 |---------------------|---------|-----------
 |zaa-text|TYPE_TEXT|Creates a simple string input text value field.
 |zaa-textarea|TYPE_TEXTAREA|Creates a multirow text input element known as textarea

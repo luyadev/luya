@@ -32,7 +32,7 @@ class TextTransformBlock extends \luya\cms\base\PhpBlock
     {
         return [
             'vars' => [
-                ['var' => 'mytext', 'label' => 'The Text', 'type' => 'zaa-text'],
+                ['var' => 'mytext', 'label' => 'The Text', 'type' => self::TYPE_TEXT],
             ],
         ];
     }
@@ -177,6 +177,8 @@ $propObject = $this->getEnvOption('pageObject')->nav->getProperty('myCustomPrope
 
 If there is a property defined you will get the property object otherwise returning `false`.
 
+> Since LUYA admin module 1.3 `$appView` is deprecated, use `$this` instead!
+
 ## Using assets in blocks
 
 Sometimes your block should also register some css or js files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
@@ -184,7 +186,7 @@ Sometimes your block should also register some css or js files, therefore you ca
 Assuming the below code is the PHP View of your Block:
 
 ```php
-MyBlockAsset::register($this->appView);
+MyBlockAsset::register($this->);
 ```
 
 Now your [[app-assets.md]] is registered in the application view object.
@@ -196,7 +198,7 @@ Sometimes your block needs to pass data to JS (or CSS). The easiest way to do th
 ### JS
 
 ```php
-$this->appView->registerJs("
+$this->registerJs("
     var data = ['some', 'data'];
 ", luya\web\View::POS_READY); 
 ```
@@ -204,7 +206,7 @@ $this->appView->registerJs("
 ### CSS
 
 ```php
-$this->appView->registerCss("
+$this->registerCss("
     .data { color: red; }
 "); 
 ```
