@@ -8,9 +8,9 @@ use luya\helpers\Json;
 
 /**
  * Json Behavior.
- * 
+ *
  * Provides auto encoding for array values after validation in order to store in the database.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.9
  */
@@ -48,7 +48,7 @@ class JsonBehavior extends Behavior
     
     /**
      * Encodes the given value into a JSON string.
-     * 
+     *
      * @param mixed $value This is commonly an array.
      * @return string
      */
@@ -59,7 +59,7 @@ class JsonBehavior extends Behavior
     
     /**
      * Decodes the given JSON string into a PHP data structure.
-     * 
+     *
      * @param string $value
      * @return array
      */

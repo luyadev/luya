@@ -99,13 +99,13 @@ class Formatter extends \yii\i18n\Formatter
    
     /**
      * Auto format the value to a given format like url, email.
-     * 
+     *
      * The following rules will apply to auto format the value:
-     * 
+     *
      * + boolean: asBool
      * + email: asEmail
      * + url: asUrl
-     * 
+     *
      * @param mixed $value Returns the formated value otherwise the original input value.
      * @since 1.0.9
      */

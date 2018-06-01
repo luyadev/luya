@@ -11,5 +11,4 @@ namespace luya\behaviors;
  */
 class Timestamp extends TimestampBehavior
 {
-    
 }
