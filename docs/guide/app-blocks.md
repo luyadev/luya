@@ -51,7 +51,7 @@ class TextTransformBlock extends \luya\cms\base\PhpBlock
 }
 ```
 
-As we have switched to PHPBlock by default (since beta8) you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block, e.g. `TextTransformBlock.php`. 
+As we have switched to PHPBlock by default you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block, e.g. `TextTransformBlock.php`. 
 
 In the example above, the view file should look like this:
 
@@ -177,7 +177,7 @@ $propObject = $this->getEnvOption('pageObject')->nav->getProperty('myCustomPrope
 
 If there is a property defined you will get the property object otherwise returning `false`.
 
-> Since LUYA admin module 1.3 `$appView` is deprecated, use `$this` instead!
+> Since LUYA cms module 1.1 `$appView` is deprecated, use `$this` instead!
 
 ## Using assets in blocks
 
@@ -186,7 +186,7 @@ Sometimes your block should also register some css or js files, therefore you ca
 Assuming the below code is the PHP View of your Block:
 
 ```php
-MyBlockAsset::register($this->);
+MyBlockAsset::register($this);
 ```
 
 Now your [[app-assets.md]] is registered in the application view object.
@@ -200,7 +200,7 @@ Sometimes your block needs to pass data to JS (or CSS). The easiest way to do th
 ```php
 $this->registerJs("
     var data = ['some', 'data'];
-", luya\web\View::POS_READY); 
+");
 ```
 
 ### CSS
