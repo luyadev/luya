@@ -1,6 +1,6 @@
 # How to create a LUYA ActiveWindow
 
-In this lesson we are going to add a special email function to the [address book](https://github.com/luyadev/luya-module-addressbook) which we have created in the [previous lesson](https://github.com/luyadev/luya/blob/master/docs/guide/lesson-module.md). Ww will extend the original CRUD view for the contact group list in the CMS with another button. This button will open a window overlay which will give us the possibility to freely add custom actions and views. In our case, we want to add the feature to send all contacts in the group list an email. 
+In this lesson we are going to add a special email function to the [address book](https://github.com/luyadev/luya-module-addressbook) which we have created in the [previous lesson](https://github.com/luyadev/luya/blob/master/docs/guide/lesson-module.md). We will extend the original CRUD view for the contact group list in the CMS with another button. This button will open a window overlay which will give us the possibility to freely add custom actions and views. In our case, we want to add the feature to send all contacts in the group list an email. 
 
 We will learn how to add and integrate an [ActiveWindow](https://luya.io/guide/ngrest-activewindow) to an existing LUYA module.
 
