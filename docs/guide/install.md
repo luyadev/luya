@@ -27,7 +27,7 @@ cp env-local-db.php.dist env-local-db.php
 ```
 
 Now the database connection inside the `configs/env-local-db.php` file needs to fit your mysql servers configuration. 
-It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-structures.md). 
+It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-environments.md). 
 After successfully setting up your database connection, you have to reopen your terminal and change into your project directory and excute the **luya** binary files which has been installed into your vendor folder by composer as described in the follwing.
 
 Run the migration files with the [migrate console command](luya-console.md):
