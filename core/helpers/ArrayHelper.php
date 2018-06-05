@@ -23,6 +23,12 @@ use yii\helpers\BaseArrayHelper;
 class ArrayHelper extends BaseArrayHelper
 {
     /**
+     * @var array An array with sensitive keys which are used if no keys will be passed to {{luya\helpers\ArrayHelper::coverSensitiveValues()}}.
+     * @since 1.0.10
+     */
+    public static $sensitiveDefaultKeys = ['password', 'pwd', 'pass', 'passwort', 'pw', 'token', 'hash', 'authorization', 'auth'];
+    
+    /**
      * Create an object from an array.
      *
      * @param array $array
@@ -47,11 +53,15 @@ class ArrayHelper extends BaseArrayHelper
      * ```
      *
      * @param array $data The input data to cover given sensitive key values. `['username' => 'foo', 'password' => 'bar']`.
-     * @param array $key The keys which can contain sensitive data inside the $data array. `['password', 'pwd', 'pass']`.
+     * @param array $key The keys which can contain sensitive data inside the $data array. `['password', 'pwd', 'pass']` if no keys provided the {{luya\helpers\ArrayHelper::$sensitiveDefaultKeys}} is used.
      * @since 1.0.6
      */
-    public static function coverSensitiveValues(array $data, array $keys)
+    public static function coverSensitiveValues(array $data, array $keys = [])
     {
+        if (empty($keys)) {
+            $keys = self::$sensitiveDefaultKeys;
+        }
+        
         $clean = [];
         foreach ($keys as $key) {
             $kw = strtolower($key);

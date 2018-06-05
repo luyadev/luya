@@ -176,6 +176,24 @@ class ArrayHelperTest extends LuyaWebTestCase
             'username' => 'john',
             'applepass' => 'none',
         ], $response);
+        
+    }
+    
+    public function testCoverSensitiveValuesWithDefaultKeysFromStaticProperty()
+    {
+        $response = ArrayHelper::coverSensitiveValues([
+            'password' => 'foo',
+            'PassWordString' => 'foobar',
+            'username' => 'john',
+            'applepass' => 'none',
+        ]);
+        
+        $this->assertSame([
+            'password' => '***',
+            'PassWordString' => '******',
+            'username' => 'john',
+            'applepass' => 'none',
+        ], $response);
     }
     
     public function testCoverSensitiveValuesRecursive()

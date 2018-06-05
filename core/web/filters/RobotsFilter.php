@@ -6,6 +6,7 @@ use Yii;
 use yii\base\ActionFilter;
 use yii\base\InvalidCallException;
 use yii\helpers\VarDumper;
+use luya\helpers\ArrayHelper;
 
 /**
  * Prevent Robots from sending Forms.
@@ -85,7 +86,7 @@ class RobotsFilter extends ActionFilter
     {
         if (Yii::$app->request->isPost) {
             if ($this->getElapsedProcessTime() < $this->delay) {
-                throw new InvalidCallException("Robots Filter has detected an invalid Request: " . VarDumper::export(Yii::$app->request->post()));
+                throw new InvalidCallException("Robots Filter has detected an invalid Request: " . VarDumper::export(ArrayHelper::coverSensitiveValues(Yii::$app->request->post())));
             }
         }
         
