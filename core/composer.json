@@ -1,6 +1,6 @@
 {
     "name" : "luyadev/luya-core",
-    "description" : "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
+    "description" : "LUYA is a scalable web framework and content management system with the goal to please developers, clients and users alike.",
     "type" : "luya-core",
     "keywords" : ["luya", "core", "yii2", "yii", "cms", "admin"],
     "license": "MIT",
