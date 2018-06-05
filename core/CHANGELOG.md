@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.10 (in progress)
 
+### Changed
+
++ [#1821](https://github.com/luyadev/luya/issues/1821) Remove public properties from `luya\traits\CacheableTrait` in order to prevent conflicts, as they only contain fallback informations.
+
 ## 1.0.9 (1. June 2018)
 
 ### Added

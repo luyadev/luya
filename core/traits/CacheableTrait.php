@@ -47,17 +47,11 @@ use Yii;
  * @since 1.0.0
  */
 trait CacheableTrait
-{
-    /**
-     * @var boolean If enabled and the cache component is available. If disabled it will fully ignore the any caching but
-     * does not throw exception.
-     */
-    public $cacheEnabled = true;
-    
+{   
     /**
      * @var integer Defined the duration of the caching lifetime in seconds. 3600 = 1 hour, 86400 = 24 hours. 0 is forever
      */
-    public $cacheExpiration = 86400;
+    private $_cacheExpiration = 86400;
 
     /**
      * @var boolean Whether the caching is enabled or disabled.
@@ -73,7 +67,7 @@ trait CacheableTrait
     public function isCachable()
     {
         if ($this->_cachable === null) {
-            $this->_cachable = ($this->cacheEnabled && Yii::$app->has('cache')) ? true : false;
+            $this->_cachable = Yii::$app->has('cache') ? true : false;
         }
     
         return $this->_cachable;
@@ -102,7 +96,7 @@ trait CacheableTrait
     * In case $closure returns `false`, the value will not be cached.
     * @param int $duration default duration in seconds before the cache will expire. If not set,
     * [[defaultDuration]] value will be used. 0 means never expire.
-    * @param Dependency $dependency dependency of the cached item. If the dependency changes,
+    * @param \yii\caching\Dependency $dependency dependency of the cached item. If the dependency changes,
     * the corresponding value in the cache will be invalidated when it is fetched via [[get()]].
     * This parameter is ignored if [[serializer]] is `false`.
     * @return mixed result of $closure execution
@@ -137,7 +131,7 @@ trait CacheableTrait
                 $dependency = Yii::createObject($dependency);
             }
             
-            return Yii::$app->cache->set($key, $value, (is_null($cacheExpiration)) ? $this->cacheExpiration : $cacheExpiration, $dependency);
+            return Yii::$app->cache->set($key, $value, is_null($cacheExpiration) ? $this->_cacheExpiration : $cacheExpiration, $dependency);
         }
         
         return false;
