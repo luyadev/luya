@@ -139,6 +139,24 @@ The above example would generate 1 row with 2 columns. As bootstrap 4 has max 12
 
 When enabling the cache for layout blocks, the full placeholder content will be cached to. So its very common to disable caching for blocks with placeholders.
 
+An example of how a view file for this layout block with placeholders could look like:
+
+```php
+<?php
+/**
+ * @var $this \luya\cms\base\PhpBlockView
+ */
+?>
+<div class="row">
+    <div class="col-md-8">
+        <?= $this->placeholderValue('left'); ?>
+    </div>
+    <div class="col-md-4">
+        <?= $this->placeholderValue('right'); ?>
+    </div>
+</div>
+```
+
 ## Block injectors
 
 A very common scenario is to collect data from an active record model, display the items and select them (e.g. via select or checkbox) and then access the selected model rows via `extraVars`. To achieve this a lot of code is required inside your blocks, which is good to understand what and why things happens, but if you need to get results quickly injectors are going to help you manage this kind of tasks.
