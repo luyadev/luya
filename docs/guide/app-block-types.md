@@ -16,11 +16,11 @@ return [
 
 > You only have to return the types you like to use in your block, if do not have placeholders your do not have to return it at all.
 
-| Name | Function
-| ---- | --------
-| vars | Contain all variables which are shown when editing the block in the admin UI.
-| cfgs | Those options are shown as well in the admin UI and are meant to be used optional options which could be more deeply or more for the developer context.
-| placeholders | Allows you to generate placeholders which creates an array where other blocks can be dropped in, which is very common for layout blocks.
+|Name|Function
+|----|--------
+|vars|Variables where to user can enter data according to your type (select, text, radio, etc.).
+|cfgs|Those options are shown as well in the admin UI and are meant to be used optional options which could be use for developers.
+|placeholders|Defined placeholders allows you to mark an area where other blocks can be dropped and rendered. A common usecase could be a div with given class where dropping nested blocks is allowed. Its very common to enable {{luya\cms\base\InternalBaseBlock::$isContainer}} property when working with placeholders, this will render the block nicely with cols and rows (if configured).
 
 Now you can add a field into the above defined type, this is like a configuration of a field which must contain `var`, `label` and `type`:
 
@@ -112,6 +112,32 @@ In the view you can access the values as follwed:
     <a href="<?= $this->extraValue('download')->href; ?>">Download File</a>
 <?php endif; ?>
 ```
+
+## Placeholders
+
+This is very strong feature of LUYA CMS block system. It allows you to create an infinite amount of recursions. Thinking of GRID system like Bootstrap, the placeholders are like cols where you can put other blocks. An example of a block configuration with placeholders:
+
+```php
+public function config()
+{
+    return [
+        'placeholders' => [
+            [
+                ['var' => 'left', 'cols' => 8, 'label' => 'Left'],
+                ['var' => 'right', 'cols' => 4, 'label' => 'Right'],
+            ]
+        ],
+    ];
+}
+```
+
+The above example would generate 1 row with 2 columns. As bootstrap 4 has max 12 cols the first column would be larger then the second. Now you can enable {{luya\cms\base\InternalBaseBlock::$isContainer}} which will render the placeholders nicely and different to casual blocks.
+
+> important: When enabling the {{luya\cms\base\InternalBaseBlock::$isContainer}} the {{luya\cms\base\InternalBaseBlock::admin()}} output wont have **no effect** and is not rendered!
+
+![block with placeholders](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/block-placeholders.png)
+
+When enabling the cache for layout blocks, the full placeholder content will be cached to. So its very common to disable caching for blocks with placeholders.
 
 ## Block injectors
 
