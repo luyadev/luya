@@ -1,4 +1,4 @@
-# LUYA Package
+# Create package (Extension/Module)
 
 This guide is intended to provide the very basic steps to create a LUYA Package (also known as extension or module). 
 There are different type of packages:
@@ -49,7 +49,7 @@ class HeroBlock extends PhpBlock
 4. In order to test the blocks you can register with Composer https://getcomposer.org/doc/05-repositories.md#path or provide the cms admin the path to the blocks `'cmsadmin' => ['blocks' => 'path/to/blocks/src']]`.
 5. Now you should commit and push the code to github and register the package on packagist: https://packagist.org/packages/submit
 
-## Composer defintions
+## Composer definition informations
 
 As LUYA is built upon the composer package manager every extension must be included via composer. Therefore first create your own composer package by creating a `composer.json` file, e.g.:
 
@@ -66,7 +66,6 @@ As LUYA is built upon the composer package manager every extension must be inclu
     }
 }
 ```
-2. Create your blocks in src folder like ` 
 
 The following **types** are supported by LUYA composer
 
@@ -78,7 +77,7 @@ The following **types** are supported by LUYA composer
 |luya-extension|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
 |luya-module|Can contain the same as luya-extension but also modules and controllers.
 
-## Extra section
+### Extra section
 
 The composer.json file can contain an extra section which can be read by the LUYA composer. E.g. we could do the following things:
 
