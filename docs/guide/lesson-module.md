@@ -42,11 +42,10 @@ Our first step for the creation of our data model and the migration files is to 
 Again, we're using the code wizard to [create the migration file](https://luya.io/guide/ngrest-concept) for our registered admin module **addressbookadmin**. We will need two tables, one for the contact data itself and one for the different contact groups.
 
 ```sh
-./vendor/bin/luya migrate/create addressbook_contact addressbookadmin
-./vendor/bin/luya migrate/create addressbook_group addressbookadmin
+./vendor/bin/luya migrate/create addressbook_basetables addressbookadmin
 ```
 
-You will find both migration files in `modules/addressbook/admin/migrations/`.
+You will find the migration file in `modules/addressbook/admin/migrations/`.
 
 ### Adding migration details
 
