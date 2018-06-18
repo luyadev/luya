@@ -6,7 +6,7 @@ There are different type of packages:
 |type|description
 |----|----------
 |extension|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
-|module|Can contain the same as luya-extension but also modules and controllers.
+|module|Can contain the same as an extension but also modules and controllers which needs to be registered in the config of the application.
 
 In this guide we will give you a very basic step by step instruction in **how to create an extension** with a block for the cms which will be distributed over the packagist package manager.
 
@@ -36,6 +36,7 @@ In this guide we will give you a very basic step by step instruction in **how to
       }
     }
 }
+```
 3. As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, exmpale `src/HeroBlock.php`:
 
 ```php
