@@ -14,14 +14,12 @@ In this guide we will give you a very basic step by step instruction in **how to
 
 1. Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
 2. Create a composer.json with basic informations about the vendor and package name. Replace username with your github username or vendor name, and package with the package name. Example `nadar/luya-material-blocks`.
-
 ```json
 {
     "name": "username/package",
     "type": "luya-extension",
-    "minimum-stability": "stable",
-    "require": {
-        "luyadev/luya-core": "~1.0.0"
+    "require-dev": {
+        "luyadev/luya-testsuite": "~1.0.0"
     },
     "autoload" : {
         "psr-4" : {
@@ -38,7 +36,6 @@ In this guide we will give you a very basic step by step instruction in **how to
 }
 ```
 3. As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, exmpale `src/HeroBlock.php`:
-
 ```php
 namespace username\package;
 
