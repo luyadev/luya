@@ -4,10 +4,7 @@ namespace luya\web;
 
 use luya\helpers\Url;
 use yii\base\InvalidConfigException;
-use yii\base\ArrayableTrait;
-use yii\base\Arrayable;
 use luya\helpers\StringHelper;
-use yii\base\BaseObject;
 
 /**
  * Generate External Link object.
@@ -21,10 +18,8 @@ use yii\base\BaseObject;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class WebsiteLink extends BaseObject implements LinkInterface, Arrayable
+class WebsiteLink extends BaseLink
 {
-    use LinkTrait, ArrayableTrait;
-    
     /**
      * @var string The default value which is used for website links is `_blank` you can override this property in order to change the default value.
      */
@@ -40,14 +35,6 @@ class WebsiteLink extends BaseObject implements LinkInterface, Arrayable
         if ($this->href === null) {
             throw new InvalidConfigException('The href attribute can not be empty and must be set trough configuration array.');
         }
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        return ['href', 'target'];
     }
     
     private $_href;
