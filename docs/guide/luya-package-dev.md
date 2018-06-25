@@ -14,6 +14,11 @@ In this guide we will give you a very basic step by step instruction in **how to
 
 You can use this sekeleton for a new package: https://github.com/luyadev/luya-package-skeleton
 
+```sh
+git clone https://github.com/luyadev/luya-package-skeleton
+cd luya-package-skeleton
+```
+
 1. Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
 2. Create a composer.json with basic informations about the vendor and package name. Replace username with your github username or vendor name, and package with the package name. Example `nadar/luya-material-blocks`.
 ```json
