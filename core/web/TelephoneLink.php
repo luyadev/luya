@@ -2,7 +2,6 @@
 
 namespace luya\web;
 
-use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 use yii\validators\RegularExpressionValidator;
 
@@ -16,10 +15,8 @@ use yii\validators\RegularExpressionValidator;
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since 1.0.9
  */
-class TelephoneLink extends BaseObject implements LinkInterface
+class TelephoneLink extends BaseLink
 {
-    use LinkTrait;
-
     private $_telephone;
 
     /**
