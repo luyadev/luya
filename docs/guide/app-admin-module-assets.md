@@ -38,23 +38,6 @@ namespace app\modules\myadmin;
 
 class Module extends \luya\admin\base\Module
 {
-    /**
-     * Returns all Asset files to registered in the administration interfaces.
-     * 
-     * As the admin UI is written in angular the assets must be pre assigned to the admin UI therefore the `getAdminAssets()` method exists.
-     * 
-     * ```php
-     * public function getAdminAssets()
-     * {
-     *     return [
-     *          'luya\admin\assets\Main',
-     *          'luya\admin\assets\Flow',
-     *     ];
-     * }
-     * ```
-     * 
-     * @return array An array with with assets files where the array has no key and the value is the path to the asset class.
-     */
     public function getAdminAssets()
     {
         return [
@@ -63,3 +46,7 @@ class Module extends \luya\admin\base\Module
     }
 }
 ```
+
+As the admin UI is written in angular the assets must be pre assigned to the admin UI therefore the `getAdminAssets()` method exists.
+
+Keep in mind that you have to register this module in order to register the asset files.
