@@ -14,7 +14,6 @@
   + [Image Lazyloading](concept-lazyload.md)
   + [Composition](concept-composition.md)
   + [Deployment & Sync](concept-depandsync.md)
-  + [Extensions](concept-extensions.md)
   + [Headless](concept-headless.md)
 + Application
   + [Modules](app-module.md)
@@ -66,6 +65,7 @@
   + [Create an Active Window](lesson-activewindow.md)
   + [Custom Angular Controller and Admin View](lesson-admin-custom-angular-view.md)
 + Developers
+  + [Create Package (ext/module)](luya-package-dev.md)
   + [Guidelines](luya-guideline.md)
   + [Collaboration](luya-collaboration.md)
   + [Unit Test](luya-unittest.md)
