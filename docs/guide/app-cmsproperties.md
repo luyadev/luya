@@ -100,7 +100,8 @@ Working with a property object:
     <a href="<?= $item->link; ?>">
         <!-- check if the property `navImage` is set for this page item we can access this property object. -->
         <?php if ($item->getProperty('navImage')): ?>
-        <img src="<?= $item->getProperty('navImage'); ?>" /> // equals to: <img src="<?= $item->getProperty('navImage')->getValue(); ?>" />
+            <img src="<?= $item->getProperty('navImage'); ?>" /> 
+            <!-- equals to: <img src="<?= $item->getProperty('navImage')->getValue(); ?>" /> -->
         <?php endif; ?>
     </a>
 </li>
