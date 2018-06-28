@@ -98,9 +98,10 @@ Working with a property object:
 <?php foreach(Yii::$app->menu->findAll(['parent_nav_id' => 0, 'container' => 'default']) as $item): ?>
 <li>
     <a href="<?= $item->link; ?>">
-        <?php /* now depending on the if the property `navImage` is set for this page item we can access this property object. */
-        if ($item->getProperty('navImage')): ?>
-        <img src="<?= $item->getProperty('navImage'); ?>" /> // equals to: <img src="<?= $item->getProperty('navImage')->getValue(); ?>" />
+        <!-- check if the property `navImage` is set for this page item we can access this property object. -->
+        <?php if ($item->getProperty('navImage')): ?>
+            <img src="<?= $item->getProperty('navImage'); ?>" alt="some-text"/> 
+            <!-- equals to: <img src="<?= $item->getProperty('navImage')->getValue(); ?>" /> -->
         <?php endif; ?>
     </a>
 </li>
