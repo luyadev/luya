@@ -30,7 +30,7 @@ You can use the [[app-console.md]] `module/create` to scaffold quickly all the r
     └── README.md
 ```
 
-Let´s assume we use the module name `mymodule`, so you will have a new folder `mymodule` inside the modules folder of your application with the folders `admin` and `frontend` and `models`. As models can be in booth admin and frontend context this is where your module shared data belongs to.
+Let´s assume we use the module name `mymodule`, so you will have a new folder `mymodule` inside the modules folder of your application with the folders `admin` and `frontend` and `models`. As models can be in both admin and frontend context this is where your module shared data belongs to.
 
 In order to add the modules to your application go into the modules section of your config and add your frontend and admin modules as following:
 
