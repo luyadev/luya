@@ -14,16 +14,19 @@ You always have to define the default language of your application configs:
 
 ```php
 'composition' => [
-    'hidden' => false, // if it is a single language page probably you do not want to add the language prefix `en/my-test`, it would be `my-test` only.
-    'default' => ['langShortCode' => 'en'], // the default language for the composition should match your default language shortCode in the langauge table.
+    'hidden' => true,
+    'default' => ['langShortCode' => 'en'],
 ],
 ```
+
++ {{luya\web\Composition::$hidden}}: (boolean) If this website is not multi lingual you can hide the composition, other whise you have to enable this.
++ {{luya\web\Composition::$default}}: (array) Contains the default setup for the current language, this must match your language system configuration.
 
 Now you have set the default language of the application to **en** and the language prefix is available and will be appended to all urls. If hidden is enabled, it would still set the language, but would not prepend the string ot every url.
 
 When using the CMS Module the configuration must match your configuration of the system languages (which is stored in the database) below a screen shot where the language short code *en* is set as *default language*:
 
-![set-default-language](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/set-default-language.jpg "Set CMS default language")
+![set-default-language](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/set-default-language.png "Set CMS default language")
 
 ## Localisation with locales
 
@@ -38,11 +41,36 @@ As the composition component can override the {{yii\base\Application::$language}
 
 This is configured in the root level of your application config.
 
+## Domain Mapping
+
+In order to map a given domain to language use {{luya\web\Composition::$hostInfoMapping}}:
+
+```php
+'hostInfoMapping' => [
+    'http://example.us' => ['langShortCode' => 'en', 'countryShortCode' => 'us'],
+    'http://example.co.uk' => ['langShortCode' => 'en', 'countryShortCode' => 'uk'],
+    'http://example.de' => ['langShortCode' => 'de', 'countryShortCode' => 'de'],
+],
+```
+
+## Localisation prefix
+
+```php
+pattern' => '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>',
+'default' => [
+    'countryShortCode' => 'us',
+    'langShortCode' => 'en',
+],
+```
+
+In order to retrieve data from the composition component you can access the composition component by its keys:
+
+```php
+$langShortCode = Yii::$app->composition['langShortCode'];
+$countryShortCode = Yii::$app->composition['countryShortCode'];
+```
+
 ## Other language related topics
 
-+ Language switcher
-+ Multi language url rules
-+ Crud i18n
-+ Domain matching language
-+ Composition add another pattern
-+ Get current application language within controllers
++ {{luya\cms\widgets\LangSwitcher}} - A widget to easy switch between languages.
++ {{luya\admin\ngrest\base\NgRestModel::$i18n}} - Option to enable i18n for ngrest models.
