@@ -222,9 +222,9 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Get the composition prefix path based on current provided request.
      *
-     * An example response could be `de` or with other composition keys and patters `de/ch` or `de-CH`.
+     * An example response could be `de` or with other composition keys and patterns `de/ch` or `de-CH`.
      *
-     * @return string
+     * @return string A prefix path like `de/ch`
      * @since 1.0.5
      */
     public function getPrefixPath()
@@ -255,7 +255,7 @@ class Composition extends Component implements \ArrayAccess
         $composition = $this->getKeys();
         
         foreach ($overrideKeys as $key => $value) {
-            if (isset($key, $composition)) {
+            if (array_key_exists($key, $composition)) {
                 $composition[$key] = $value;
             }
         }
@@ -265,6 +265,15 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Prepend to current composition (or to provided composition prefix-route) to a given route.
      *
+     * Assuming the current composition returns `en/gb` and the route is `foo/bar` the return
+     * value would be `en/gb/foo/bar`.
+     * 
+     * If a trailing slash is provided from a route, this will be returned as well, assuming:
+     * 
+     * ```php
+     * echo prepentTo('/foobar', 'en/gb'); // ouput: /en/gb/foobar
+     * echo prepentTo('foobar', 'en/gb'); // output: en/gb/foobar
+     * 
      * @param string $route The route where the composition prefix should be prepended.
      * @param null|string $prefix Define the value you want to prepend to the route or not.
      * @return string
@@ -281,7 +290,8 @@ class Composition extends Component implements \ArrayAccess
 
         $prepend = '';
 
-        if (substr($route, 0, 1) == '/') {
+        // if it contains a prepend slash, we keep this, as long as the route is also longer then just a slash.
+        if (substr($route, 0, 1) == '/' && strlen($route) > 1) {
             $prepend = '/';
         }
 

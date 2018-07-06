@@ -37,7 +37,7 @@ class CompositionResolver extends BaseObject
      * Examples of how to use patterns:
      *
      * ```php
-     * 'pattern' => '<langShortCode:[a-z]{2}>.<countryShortCode:[a-z]{2}>', // de-ch; fr-ch
+     * 'pattern' => '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>', // de-ch; fr-ch
      * ```
      */
     public $pattern;
@@ -152,7 +152,7 @@ class CompositionResolver extends BaseObject
             preg_match_all(static::VAR_MATCH_REGEX, $this->pattern, $patternDefinitions, PREG_SET_ORDER);
             
             foreach ($patternDefinitions as $definition) {
-                $newRegex = str_replace($definition[0], "(".$definition[2].")", $newRegex);
+                $newRegex = str_replace($definition[0], '('.rtrim(ltrim($definition[2], '('), ')').')', $newRegex);
             }
             
             preg_match_all($newRegex, $requestPathInfo, $matches, PREG_SET_ORDER);

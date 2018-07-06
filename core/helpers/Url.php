@@ -36,7 +36,7 @@ class Url extends \yii\helpers\BaseUrl
     {
         return rtrim($url, $slash) . $slash;
     }
-
+    
     /**
      * This helper method will not concern any context informations
      *

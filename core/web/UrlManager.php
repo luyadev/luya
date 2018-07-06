@@ -271,7 +271,7 @@ class UrlManager extends \yii\web\UrlManager
     {
         $params = (array) $params;
         
-        $composition = (empty($composition)) ? $this->getComposition() : $composition;
+        $composition = empty($composition) ? $this->getComposition() : $composition;
         
         $originalParams = $params;
         
@@ -282,7 +282,7 @@ class UrlManager extends \yii\web\UrlManager
         $response = parent::createUrl($params);
 
         // Check if the parsed route with the prepand composition has been found or not.
-        if (strpos($response, $params[0]) !== false) {
+        if (strpos($response, rtrim($params[0], '/')) !== false) {
             // we got back the same url from the createUrl, no match against composition route.
             $response = parent::createUrl($originalParams);
         }

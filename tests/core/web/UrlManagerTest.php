@@ -306,4 +306,14 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $url = $urlManager->createUrl(['/wirpre/default/imprint']);
         $this->assertContains('/mentions-legales', $url);
     }
+    
+    public function testUrlCreationWithComplexCompositionPattern()
+    {
+        $request = new Request(['hostInfo' => 'http://localhost', 'pathInfo' => 'en-GB/admin', 'baseUrl' => '/']);
+        $comp = new Composition($request, ['hidden' => false, 'pattern' => '<langShortCode:([a-z]{2}[\-]{1}[A-Z]{2})>', 'default' => ['langShortCode' => 'de-CH']]);
+        
+        $manager = new UrlManager();
+        
+        $this->assertSame('/luya/envs/dev/public_html/en-GB/', $manager->internalCreateUrl(['/'], $comp));
+    }
 }
