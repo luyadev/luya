@@ -30,6 +30,10 @@ return [
         'request' => [
             'forceWebRequest' => true,
         ],
+        'assetManager' => [
+            'bundles' => false,
+            'basePath' => dirname(__DIR__),
+        ],
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => DB_DSN,

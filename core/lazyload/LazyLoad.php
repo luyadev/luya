@@ -14,7 +14,7 @@ use luya\web\View;
  * <?= LazyLoad::widget(['src' => 'http://www.zephir.ch/img/zephir-logo.png']); ?>
  * ```
  *
- * In order to read more visit the [[concept-lazyload.md]] Guide section.
+ * In order to read more visit the [[concept-lazyload.md]] guide section.
  *
  * @author Basil Suter <basil@nadar.io>
  * @author Marc Stampfli <marc.stampfli@zephir.ch>
@@ -22,6 +22,10 @@ use luya\web\View;
  */
 class LazyLoad extends Widget
 {
+    const JS_ASSET_KEY = 'lazyload.js.register';
+    
+    const CSS_ASSET_KEY = 'lazyload.css.register';
+    
     /**
      * @var string The path to the image you want to lazy load.
      */
@@ -58,13 +62,12 @@ class LazyLoad extends Widget
             throw new InvalidConfigException("The parameter src is required by the lazyload widget.");
         }
         
-        static::$counter++;
+        // register the asset file
+        LazyLoadAsset::register($this->view);
         
-        if (static::$counter == 1) {
-            LazyLoadAsset::register($this->view);
-            $this->view->registerJs("$('.lazy-image').lazyLoad();", View::POS_READY);
-            $this->view->registerCss(".lazy-image { display: none; }");
-        }
+        // register js and css code with keys in order to ensure the registration is done only once
+        $this->view->registerJs("$('.lazy-image').lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
+        $this->view->registerCss(".lazy-image { display: none; }", [], self::CSS_ASSET_KEY);
     }
     
     /**

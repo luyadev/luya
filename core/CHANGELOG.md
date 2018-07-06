@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Fixed
 
 + [#1826](https://github.com/luyadev/luya/issues/1826) Ensure arrayable implementation for Link objects.
++ [#1830](https://github.com/luyadev/luya/issues/1830) Lazyload widget asset registration issue fixed when used in nested context.
 
 ## 1.0.9 (1. June 2018)
 
