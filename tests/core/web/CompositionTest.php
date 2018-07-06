@@ -269,4 +269,29 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $comp = new Composition($request);
         unset($comp['langShortCode']);
     }
+
+    public function testComplexLangShortCode()
+    {
+        $request = new Request(['hostInfo' => 'http://localhost', 'pathInfo' => 'en-GB/admin']);
+        $comp = new Composition($request, ['hidden' => false, 'pattern' => '<langShortCode:([a-z]{2}[\-]{1}[A-Z]{2})>', 'default' => ['langShortCode' => 'de-CH']]);
+        
+        $this->assertSame('en-GB', $comp->createRoute());
+        $this->assertSame('de-CH', $comp->getDefaultLangShortCode());
+        $this->assertSame('en-GB/foobar', $comp->prependTo('foobar'));
+        $this->assertSame('en-GB', $comp->getPrefixPath());
+        $this->assertSame('en-GB/', $comp->prependTo('/'));
+        $this->assertSame(['langShortCode' => 'en-GB'], $comp->getKeys());
+        
+        // test prepending
+        $this->assertSame('en-GB/', $comp->prependTo('', $comp->createRoute()));
+        $this->assertSame('en-GB/f', $comp->prependTo('f', $comp->createRoute()));
+        $this->assertSame('en-GB/f', $comp->prependTo('f'));
+        $this->assertSame('en-GB/', $comp->prependTo(''));
+        
+        $resolver = $comp->getResolvedPathInfo($request);
+        
+        $this->assertSame('admin', $resolver->resolvedPath);
+        $this->assertSame(['langShortCode' => 'en-GB'], $resolver->resolvedValues);
+        $this->assertSame(['langShortCode'], $resolver->resolvedKeys);
+    }
 }
