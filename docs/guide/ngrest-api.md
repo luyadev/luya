@@ -7,7 +7,7 @@ Every API endpoint must be extending from the {{luya\admin\ngrest\base\Api}} cl
 ```php
 class MyEndpoint extends Api
 {
-    public $modelClass = 'app\modles\MyModel';
+    public $modelClass = 'app\models\MyModel';
 }
 ```
 
