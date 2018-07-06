@@ -54,6 +54,7 @@
 + NgRest CRUD
   + [NgRest Concept](ngrest-concept.md)
   + [NgRest Model](ngrest-model.md)
+  + [NgRest API](ngrest-api.md)
   + [Active Windows](ngrest-activewindow.md)
   + [Plugins](ngrest-plugins.md)
     + [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
