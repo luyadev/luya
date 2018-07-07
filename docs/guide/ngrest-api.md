@@ -45,7 +45,7 @@ The LUYA Api automaticcally enabled pagination after 200 rows, but you can also 
 public $pagination = ['pageSize' => 50];
 ```
 
-In order to enable the `per-page` get request option you can define the range for such a request by using:
+In order to enable the `per-page` get request option the `$pagination` property has to be declared like in the example above, by default you can then choose between 0 and 50 items. In order to configure the page size limit use:
 
 ```php
 public $pagination = [
