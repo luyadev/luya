@@ -66,3 +66,37 @@ public function prepareIndexQuery()
 ```
 
 Make sure to call the parent implementation!
+
+## Extra Url Rules
+
+Since core 1.0.10 and admin 1.2.2 you can also provide some extra patterns for your APIs. With the configuration of {{luya\base\Module::$apiRules}} you can give every API a customized setup. As the rules are defined trough {{yii\rest\UrlRule}} you can now set extra pattern, exclude given actions or change tokens.
+
+An example of adding a semantic get request action could look like this:
+
+```php
+class NewsController extends \luya\admin\ngrest\base\Api
+{
+    public $modelClass = 'app\models\News';
+    
+    public function actionComments($id)
+    {
+        // return comments for given id
+    }
+}
+```
+
+The apis entry would be
+
+```php
+public $apis = [
+    'api-module-news' => 'app\modules\admin\apis\NewsController',
+];
+```
+
+In the traditional way you would have to run the action `actionComments` like following `example.com/admin/api-module-news/comments?id=1` but as you want to unfold the comments with `example.com/admin/api-module-news/1/comments` you can now add this rule to the extra pattersn for the rule defintion:
+
+```php
+ public $apiRules = [
+    'api-module-news' => ['extraPatterns' => ['GET {id}/comments' => 'comments']]
+];
+```    
