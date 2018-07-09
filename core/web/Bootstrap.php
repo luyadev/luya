@@ -18,6 +18,8 @@ class Bootstrap extends BaseBootstrap
     private $_apis = [];
 
     private $_urlRules = [];
+    
+    private $_apiRules = [];
 
     private $_adminAssets = [];
 
@@ -45,6 +47,15 @@ class Bootstrap extends BaseBootstrap
                 }
             }
             
+            // get all api reuls (since 1.0.10)
+            foreach ($module->apiRules as $endpoint => $rule) {
+                $this->_apiRules[$endpoint] = $rule;
+            }
+            
+            /**
+             * 'api-admin-user' => 'admin\apis\UserController',
+             * 'api-cms-navcontainer' => 'admin\apis\NavContainerController'
+             */
             foreach ($module->apis as $alias => $class) {
                 $this->_apis[$alias] = ['class' => $class, 'module' => $module];
             }
@@ -53,6 +64,35 @@ class Bootstrap extends BaseBootstrap
                 TagParser::inject($name, $config);
             }
         }
+    }
+
+    /**
+     * Generate the rest rule defintions for {{luya\admin\Module::$apiDefintions}}.
+     * 
+     * @param array $apis The array of apis where key is the api name `['api-admin-user' => 'admin\apis\UserController', ...]`.
+     * @param array $rules The new {{luya\base\Module::$apiRules}} defintion `['api-admin-user' => [...], 'api-admin-group' => []]`.
+     * @return array
+     */
+    protected function generateApiRuleDefintions(array $apis, array $rules)
+    {
+        // generate the url rules which are collected as ONE with an array of controllers:
+        $collection = [];
+        foreach ($apis as $alias => $array) {
+            if (!isset($rules[$alias])) {
+                $collection[] = 'admin/'.$alias;
+            }
+        }
+        
+        $result = [];
+        $result[] = ['controller' => $collection];
+        
+        // generate the rules from apiRules defintions as they are own entries:
+        foreach ($rules as $api => $rule) {
+            $rule['controller'] = 'admin/' . $api;
+            $result[] = $rule;
+        }
+        
+        return $result;
     }
 
     /**
@@ -82,6 +122,11 @@ class Bootstrap extends BaseBootstrap
                 $app->getModule('admin')->controllerMap = $this->_apis;
                 $app->getModule('admin')->moduleMenus = $this->_adminMenus;
                 $app->getModule('admin')->setJsTranslations($this->_jsTranslations);
+                
+                // calculate api defintions
+                $app->getModule('admin')->apiDefintions = $this->generateApiRuleDefintions($this->_apis, $this->_apiRules);
+                // as the admin module needs to listen for $apiDefintions we have to get the urlRules from the admin and merge with the existing rules:
+                $this->_urlRules = array_merge($this->_urlRules, $app->getModule('admin')->urlRules);
             }
         }
         

@@ -48,6 +48,23 @@ abstract class Module extends \yii\base\Module
      * ```
      */
     public $apis = [];
+    
+    /**
+     * @var array An array with additional rules for a given api name. This allows you to extend and customize the {{yii\rest\UrlRule}} for
+     * a given API. Example:
+     *
+     * ```php
+     * 'apiRules' => [
+     *     'api-admin-user' => ['extraPattern' => ['GET {id}/login-list' => 'logins']],
+     *     'api-admin-group' => ['exception' => ['this-action']],
+     * ],
+     * ```
+     * 
+     * You can define all properties from {{yii\rest\UrlRule}}.
+     * 
+     * @since 1.0.10
+     */
+    public $apiRules = [];
 
     /**
      * @var array An array with Tag class names to inject into the tag parser on luya boot, where key is the identifier and value the create object conifg:

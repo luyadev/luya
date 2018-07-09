@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file. This projec
 + [#1821](https://github.com/luyadev/luya/issues/1821) Remove public properties from `luya\traits\CacheableTrait` in order to prevent conflicts, as they only contain fallback informations.
 + [#1820](https://github.com/luyadev/luya/issues/1820) Cover sensitive data in robots filter post data.
 
+### Added
+
++ [#174](https://github.com/luyadev/luya-module-admin/issues/174) Added new option $apiRules in order to provide custom url rules for APIS.
+
 ### Fixed
 
 + [#1831](https://github.com/luyadev/luya/issues/1831) Fixed issue with create url and complex composition patterns.
