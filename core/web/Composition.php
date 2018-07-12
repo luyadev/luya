@@ -59,6 +59,12 @@ class Composition extends Component implements \ArrayAccess
     public $hidden = true;
 
     /**
+     * @var boolean Disable composition prefixes in URLs only for default language. Takes effect only when `hidden` option is disabled.
+     * @since 1.0.10
+     */
+    public $hideDefaultPrefixOnly = false;
+
+    /**
      * @var string Url matching prefix, which is used for all the modules (e.g. an e-store requireds a language
      * as the cms needs this informations too). After proccessing this informations, they will be removed
      * from the url for further proccessing.
@@ -240,9 +246,9 @@ class Composition extends Component implements \ArrayAccess
      */
     public function createRouteEnsure(array $overrideKeys = [])
     {
-        return $this->hidden ? '' : $this->createRoute($overrideKeys);
+        return $this->hidden || (!$this->hidden && $this->langShortCode == $this->defaultLangShortCode && $this->hideDefaultPrefixOnly) ? '' : $this->createRoute($overrideKeys);
     }
-    
+
     /**
      * Create compositon route based on the provided keys (to override), if no keys provided
      * all the default values will be used.
