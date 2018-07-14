@@ -1,7 +1,10 @@
 # Translation / Messages
 
-This section explains as a summary how to use the [Yii Messaging system](http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html#message-translation) inside a LUYA project. 
-To use the translation/messaging system in your controller or view files you have to configure the yii2 i18n component:
+This section explains as a summary how to use the [Yii Messaging system](http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html#message-translation) inside a LUYA project.
+
+## Application translation
+
+To use the translation/messaging system in your controller or view files you have to configure the Yii i18n component:
 
 ```php
 'components' => [
@@ -28,7 +31,7 @@ Now all the message with the prefix `app` will be loaded into the message compon
         └── app-otherparts.php
 ```
 
-## Module translations
+## Register module translations
 
 In order to register a {{luya\base\Module}} translation call the {{luya\base\Module::onLoad()}} method, a reusable alias can be defined here too.
 
@@ -37,8 +40,6 @@ class Module extends \luya\base\Module
 {
     public static function onLoad()
     {
-        // Yii::setAlias('@mymodulealias', static::staticBasePath());
-        
         self::registerTranslation('mymodule', static::staticBasePath() . '/messages', [
             'mymodule' => 'mymodule.php',
         ]);
@@ -53,7 +54,9 @@ class Module extends \luya\base\Module
 
 The above registered module translation messages can be retrieved as `Module::t('Key', 'Value')`.
 
-### Message source content
+In order to provide translations for the admin menu ({{luya\admin\base\Module::getMenu()}}) just use the registered key in a translation file, like: `->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')` where `menu_access_item_user` is the key registered in your message file.
+
+## Message source content
 
 The message source file itself which contains the translations for the specific language is an array with a key where you can identifier the message and a value which is the content. Example content for `messages/de/app.php`:
 
@@ -73,7 +76,7 @@ echo Yii::t('app', 'title_top');
 
 This would return *Hello everyone, i am title top!*.
 
-### Placeholders as parameters
+## Placeholders as parameters
 
 Sometimes you may want to add a placeholder you can fill up with specific content. You can use a key for the placeholder or using the array keys:
 
@@ -96,7 +99,7 @@ While the second example needs a specific key `date` as parameter:
 echo Yii::t('app', 'tomorrow', ['date' => time()]);
 ```
 
-#### Conditions with parameters
+## Conditions with parameters
 
 Sometimes you want to change the output inside the translation file based on input parameter values, lets assume the variables $slots has been assigned with the amount of left seats:
 
@@ -111,4 +114,3 @@ Lets see what happens when the value of `Yii::t("app", "placesAvailable", ["slot
 + if `$slots` =  1 : Only 1 place available
 + if `$slots` =  2 : Only 2 places available
 + if `$slots` =  3 : Places available
-
