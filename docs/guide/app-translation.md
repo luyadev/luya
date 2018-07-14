@@ -52,9 +52,11 @@ class Module extends \luya\base\Module
 }
 ```
 
-The above registered module translation messages can be retrieved as `Module::t('Key', 'Value')`.
+The above registered module translation messages can be retrieved as `Module::t('Key', 'Value')` assuming the messages are located in `messages/en/mymodule.php`.
 
 In order to provide translations for the admin menu ({{luya\admin\base\Module::getMenu()}}) just use the registered key in a translation file, like: `->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')` where `menu_access_item_user` is the key registered in your message file.
+
+> Keep in mind when using the admin module menu translations you should name them after your module, assuming `myadminmodule` is the module name then this name should be used to register your translations, otherwise menu translations wont work!
 
 ## Message source content
 
