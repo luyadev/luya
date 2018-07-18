@@ -27,6 +27,8 @@
 
 ## 5. Members
 
+Current LUYA Organisation members with the respective role:
+
 |Github|Name|Role
 |------|----|----
 |[nadar](https://github.com/nadar)|Basil Suter|Project Lead
