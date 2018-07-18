@@ -294,4 +294,28 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $this->assertSame(['langShortCode' => 'en-GB'], $resolver->resolvedValues);
         $this->assertSame(['langShortCode'], $resolver->resolvedKeys);
     }
+    
+    public function testHideDefaultPrefixOnly()
+    {
+        // none hidden
+        $request = new Request(['hostInfo' => 'http://localhost', 'pathInfo' => 'de/hello/world']);
+        $composition = new Composition($request, ['hidden' => false, 'default' => ['langShortCode' => 'en']]);
+        $this->assertSame('de', $composition->createRouteEnsure());
+        $composition = new Composition($request, ['hidden' => false, 'default' => ['langShortCode' => 'de']]);
+        $this->assertSame('de', $composition->createRouteEnsure());
+
+        // hidden
+        $request = new Request(['hostInfo' => 'http://localhost', 'pathInfo' => 'de/hello/world']);
+        $composition = new Composition($request, ['hidden' => true, 'default' => ['langShortCode' => 'en']]);
+        $this->assertSame('', $composition->createRouteEnsure());
+        $composition = new Composition($request, ['hidden' => true, 'default' => ['langShortCode' => 'de']]);
+        $this->assertSame('', $composition->createRouteEnsure());
+
+        // not hidden but hide default prefix only
+        $request = new Request(['hostInfo' => 'http://localhost', 'pathInfo' => 'de/hello/world']);
+        $composition = new Composition($request, ['hidden' => false, 'hideDefaultPrefixOnly' => true, 'default' => ['langShortCode' => 'en']]);
+        $this->assertSame('de', $composition->createRouteEnsure()); // is not hidden cause default is `en` and provided in the url is `de/hello/world`.
+        $composition = new Composition($request, ['hidden' => false, 'hideDefaultPrefixOnly' => true, 'default' => ['langShortCode' => 'de']]);
+        $this->assertSame('', $composition->createRouteEnsure()); // is default `de` and also provided in the url `de/hello/world`
+    }
 }
