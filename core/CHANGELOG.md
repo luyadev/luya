@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Added
 
 + [#174](https://github.com/luyadev/luya-module-admin/issues/174) Added new option $apiRules in order to provide custom url rules for APIS.
++ [#1834](https://github.com/luyadev/luya/pull/1834) Added new option `Composer::$hideDefaultPrefixOnly`. When enabled, composition prefixes will be hidden only for default language. Takes effect only when `hidden` option is disabled.
 
 ### Fixed
 
