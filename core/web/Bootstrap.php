@@ -124,7 +124,9 @@ class Bootstrap extends BaseBootstrap
                 $app->getModule('admin')->setJsTranslations($this->_jsTranslations);
                 
                 // calculate api defintions
-                $app->getModule('admin')->apiDefintions = $this->generateApiRuleDefintions($this->_apis, $this->_apiRules);
+                if ($app->getModule('admin')->hasProperty('apiDefintions')) { // ensure backwards compatibility
+                    $app->getModule('admin')->apiDefintions = $this->generateApiRuleDefintions($this->_apis, $this->_apiRules);
+                }
                 // as the admin module needs to listen for $apiDefintions we have to get the urlRules from the admin and merge with the existing rules:
                 $this->_urlRules = array_merge($this->_urlRules, $app->getModule('admin')->urlRules);
             }
