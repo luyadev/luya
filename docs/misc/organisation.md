@@ -47,8 +47,8 @@ Current LUYA Organisation Members with the respective role:
 |Contributor|Allows to invite members to the team without long-term obligations but still with a sense of being part of the project.|No|No|No|No
 |Extension Manager|Has commit access to specific extensions and has to react as far as these are concerned|No|Yes*|Yes|Yes*
 
-* Only for the given extensions.  
-** Mentiones, comments, pull requests, assignements, issues, reviews
+\* Only for the given extensions.  
+\*\* Mentiones, comments, pull requests, assignements, issues, reviews
 
 ## 7) Rights and possibilities of the members
 
