@@ -47,7 +47,7 @@ use Yii;
  * @since 1.0.0
  */
 trait CacheableTrait
-{   
+{
     /**
      * @var integer Defined the duration of the caching lifetime in seconds. 3600 = 1 hour, 86400 = 24 hours. 0 is forever
      */

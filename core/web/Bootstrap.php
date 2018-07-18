@@ -68,7 +68,7 @@ class Bootstrap extends BaseBootstrap
 
     /**
      * Generate the rest rule defintions for {{luya\admin\Module::$apiDefintions}}.
-     * 
+     *
      * @param array $apis The array of apis where key is the api name `['api-admin-user' => 'admin\apis\UserController', ...]`.
      * @param array $rules The new {{luya\base\Module::$apiRules}} defintion `['api-admin-user' => [...], 'api-admin-group' => []]`.
      * @return array

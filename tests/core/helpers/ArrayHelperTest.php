@@ -176,7 +176,6 @@ class ArrayHelperTest extends LuyaWebTestCase
             'username' => 'john',
             'applepass' => 'none',
         ], $response);
-        
     }
     
     public function testCoverSensitiveValuesWithDefaultKeysFromStaticProperty()

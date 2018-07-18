@@ -59,23 +59,23 @@ class ResponseCacheTest extends LuyaWebTestCase
     public function testInsideActionListAndExistsInCache()
     {
         Yii::$app->set('cache', ['class' => UnitCache::className(), 'data' => []]);
-        
+
         $controller = new StubController('fooctrl', Yii::$app);
         $action = new StubAction('fooaction', $controller);
-        
+
         //Yii::$app->response->isSent = true; // mark response as sent, otherwise the unit test would output "foobar" as the caching behavior sends the content!
-        
+
         $filter = new ResponseCache(['actions' => ['fooaction']]);
-        
+
         // whether the action should continue to be executed.
         $content = $filter->beforeAction($action);
-        
+
         $controller->runAction('fooaction');
-        
-        
+
+
         $this->assertFalse(false);
         $this->assertSame('foobar', Yii::$app->response->content);
-        
+
     }
     */
     
@@ -96,9 +96,9 @@ class ResponseCacheTest extends LuyaWebTestCase
         Yii::$app->set('cache', ['class' => UnitCache::className()]);
         $controller = new StubBehaviorController('fooctrl', Yii::$app);
         $controller->runAction('foobar');
-        
+
         Yii::$app->response->trigger('afterSend');
-        
+
         $this->assertSame('FooBarContent', Yii::$app->cache->data['032b8391b2fab93f9dca5e5cd08cbe9b']);
     }
     */

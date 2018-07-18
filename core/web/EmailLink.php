@@ -13,7 +13,7 @@ use yii\validators\EmailValidator;
  * @since 1.0.0
  */
 class EmailLink extends BaseLink
-{   
+{
     private $_email;
     
     /**

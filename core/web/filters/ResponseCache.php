@@ -10,7 +10,7 @@ use yii\filters\PageCache;
  * Filter to enable Response Cache.
  *
  * Extends the {{yii\filters\PageCache}} class by using the {{luya\traits\CacheableTrait}} whether caching
- * is enabled or not. Thefore you can attach this page cache to any controller whether caching is enabled 
+ * is enabled or not. Thefore you can attach this page cache to any controller whether caching is enabled
  * or not, it will not throw an exception
  *
  * @author Basil Suter <basil@nadar.io>

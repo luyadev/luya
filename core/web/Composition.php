@@ -273,14 +273,14 @@ class Composition extends Component implements \ArrayAccess
      *
      * Assuming the current composition returns `en/gb` and the route is `foo/bar` the return
      * value would be `en/gb/foo/bar`.
-     * 
+     *
      * If a trailing slash is provided from a route, this will be returned as well, assuming:
-     * 
+     *
      * ```php
      * echo prependTo('/foobar', 'en/gb'); // ouput: /en/gb/foobar
      * echo prependTo('foobar', 'en/gb'); // output: en/gb/foobar
      * ```
-     * 
+     *
      * @param string $route The route where the composition prefix should be prepended.
      * @param null|string $prefix Define the value you want to prepend to the route or not.
      * @return string

@@ -8,9 +8,9 @@ use yii\base\ArrayableTrait;
 
 /**
  * The basic class for LinkInterface object.
- * 
+ *
  * It ensures the Arrayable and Linkinterface for a given Link implementation.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.10
  */
