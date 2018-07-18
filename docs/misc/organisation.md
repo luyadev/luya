@@ -50,10 +50,10 @@
 
 ## 7. Rights and possibilities of members
 
-+ Voting required
++ **Voting required**
   + Issue/pull request must have the label “requires decision” assigned.
-  + All members with allowed voting role (Project Lead, Core Member, Maintainer, Extension Manager) have 7 days time to vote after a issue/pull request was created with “requires decision” label.	+  + All members with the role XYZ have 7 days time to vote after a issue/pull request was created.
+  + All members with allowed voting role (Project Lead, Core Member, Maintainer, Extension Manager) have 7 days time to vote after a issue/pull request was created with “requires decision” label.
   + Long-term intentions and objectives may not be changed, see [Long-term intention and objectives](#2-long-term-intention-and-objectives).
-+ No voting required
++ **No voting required**
   + Use of the technology.
   + Profound changes to the administration interface. General UI changes.
