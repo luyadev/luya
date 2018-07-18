@@ -1,31 +1,31 @@
-# LUYA as Organisation
+# LUYA as an organisation
 
-## 1) Rechtliche Form
+## 1) Legal Form
 
-+ Ist an keine Firma oder Privat person gebunden.
-+ Entscheide welche nicht Punkt 2) tangieren werden demokatrisch unter den Mitgliedern mit Voting berechtigung entschieden.
++ Is not bound to any company or private person.
++ Decisions, which are not covered by 2), will be taken democratically among the members entitled to vote.
 
-## 2) Langfristige absichten und Ziele
+## 2) Long-term intention and objectives
 
-+ Keine “One-Click” installations Produkt a la Wordpress
-+ Daten strategy im VCS System
-+ DRY Concept
-+ Programm Code soll aus dem vendor kommen
++ LUYA is not a one-click installation product like WordPress and others.
++ Configuration data is stored in versioned files (not in the database).
++ DRY concept
++ System code belongs into the vendor directory.
 
 ## 3) Code of conduct
 
-+ Wohlwollend, möge die Frage noch so komisch sein.
-+ Kein gegenseitiges bloß stellen, niemand ist allwissend.
-+ Wir sind ein Vorbild. Keine Kraftausdrücke. Keine Diskriminierung.
-+ English
++ Always benevolent, no matter what question is posed.
++ No one will be embarrassed, no one knows it all.
++ We are good role models. No swearwords. No Discrimination.
++ Communication is in English.
 
-## 4) Mitglied werden
+## 4) Becoming a member
 
-+ Langfristige Leistung muss stimmen.
-+ Muss commit´s haben
-+ Qualität von PR´s
++ Intention for a long-term contribution
++ Must have commits
++ Pull requests must be of high quality
 
-## 5) Mitglieder
+## 5) Members
 
 |Github|Name|Role
 |------|----|----
@@ -35,25 +35,25 @@
 |[rolandschaub](https://github.com/rolandschaub)|Roland Schaub|Maintainer
 |[martinpetrasch](https://github.com/martinpetrasch)|Martin Petrasch|Extension Manager
 
-## 6) Rollen
+## 6) Roles
 
-|Rolle|Beschreibung|Planung/Strategy|Reaction** (48h)|Voting|Commit Access/PR
+|Role|Description|Planning/Strategy|Reaction** within 48h|Voting|Commit Access/PR
 |-----|------------|----------------|--------------|------|----------------
-|Project Lead|Core member inklusive Plannung und Strategy Funktion|Yes|Yes|Yes|Yes
+|Project Lead|Core member inclusive Planning and Strategy Function|Yes|Yes|Yes|Yes
 |Core Member|Can commit and merge PR, must react within 48 to PR, mention, assignments|No|Yes|Yes|Yes
 |Maintainer| ... |No|No|Yes|No
-|Contributor|Ergibt die Möglichkeit, kurzfristig Mitglieder in das Team zu holen, ohne langfristige Verpflichtung, aber trotzdem mit einem Zugehörigkeitsgefühl|No|No|No|No
-|Extension Manager|Hat commit access für bestimmte extensions und muss auch bei diesen reagieren|No|Yes*|Yes|Yes*
+|Contributor|Allows to invite members to the team without long-term obligations but still with a sense of being part of the project.|No|No|No|No
+|Extension Manager|Has commit access to specific extensions and has to react as far as these are concerned|No|Yes*|Yes|Yes*
 
-* Only for the given extensions.
-** Mentiones, Comments, PR, Assignements, Issues, PRs, Review
+* Only for the given extensions.  
+** Mentiones, comments, pull requests, assignements, issues, reviews
 
-## 7) Rechte und Möglichkeiten der Mitglieder
+## 7) Rights and possibilities of the members
 
-+ Abstimmungen
-  + Das issue/PR muss das label “requires decision” haben.
-  + Nach dem erstellungs Zeitpunkts haben alle Mitglieder Rolle XYZ 7 Tage Zeit abzustimmen.
-  + Langfristige Absichten & Ziele dürfen nicht verändert werden (Punkt 2)
-+ Keine Abstimmungen
-  + Verwendung der Technology.
-  + “Schwerwiegend” änderung im Administrations Interface. Generelle UI änderungen.
++ Voting required
+  + Issue/pull request must have the label “requires decision” assigned.
+  + All members with the role XYZ have 7 days time to vote after a issue/pull request was created.
+  + Long-term intentions and objectives may not be changed, see 2).
++ No voting required
+  + Use of the technology.
+  + Profound changes to the administration interface. General UI changes.
