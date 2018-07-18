@@ -59,9 +59,9 @@ abstract class Module extends \yii\base\Module
      *     'api-admin-group' => ['exception' => ['this-action']],
      * ],
      * ```
-     * 
+     *
      * You can define all properties from {{yii\rest\UrlRule}}.
-     * 
+     *
      * @since 1.0.10
      */
     public $apiRules = [];
