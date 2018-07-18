@@ -42,8 +42,9 @@ cd luya-package-skeleton
     }
 }
 ```
-3. As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, exmpale `src/HeroBlock.php`:
+3. As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, example `src/HeroBlock.php`.
 ```php
+<?php
 namespace username\package;
 
 use luya\cms\base\PhpBlock;
