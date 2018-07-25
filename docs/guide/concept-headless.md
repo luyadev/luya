@@ -8,43 +8,11 @@ In order to see the API Users menu make sure to use luya-admin module in version
 
 ## Make calls
 
-In order to make calls to the LUYA Admin APIs you can either use your own library or the [LUYA headless client](https://github.com/luyadev/luya-headless) which provides a very easy to use wrapper. The headless client will be continuously developed in order to match the changing needs of a true headless system.
+**Read the [LUYA Headless client documentation](https://luya.io/packages/luyadev--luya-headless) in order to see how to make calls!**
 
-Example usage with the client library:
+To extend, improve or speed up your APIs, take a look at [[ngrest-api.md]] guide section.
 
-```php
-use luya\headless\Client;
-
-// build client object with token and server infos
-$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
-
-// create get request for `api-admin-lang` endpoint
-$request = $client->getRequest()->setEndpoint('api-admin-lang')->get();
-
-// if successfull request, iterate over language items from `api-admin-lang` endpoint
-if ($request->isSuccess()) {
-    foreach ($request->getParsedResponse() as $item) {
-        var_dump($item);
-    }
-}
-```
-
-Using API wrappers (above example as short hand wrapper):
-
-```php
-use luya\headless\Client;
-use luya\headless\endpoints\ApiAdminLang;
-
-// build client object with token and server infos
-$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
-
-// run the pre-built ActivQuery for the `api-admin-lang` endpoint
-foreach (ApiAdminLang::find()->all($client) as $item) {
-    var_dump($item);
-}
-```
-
-## Options
+## Additional Configuration
 
 If you build a website with the LUYA CMS but use the headless client to render the content, you may want to configure the preview url to point to your headless page.
 
