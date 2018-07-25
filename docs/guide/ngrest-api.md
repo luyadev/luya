@@ -99,4 +99,37 @@ In the traditional way you would have to run the action `actionComments` like fo
  public $apiRules = [
     'api-module-news' => ['extraPatterns' => ['GET {id}/comments' => 'comments']]
 ];
-```    
+```
+
+## Filtering
+
+Sometimes you need to have additional filtering methods for a given API requests. Assuming you'd like filter row for a given where condition, like groups you have to create a Filtering Model and declare the filter model in the API.
+
+Define the filter model:
+
+```php
+class MyApiFilter extends \yii\base\Model
+{
+    public $group_id;
+    
+    public function rules()
+    {
+        return [
+            [['group_id'], 'integer'],
+        ];
+    }
+}
+```
+
+Assigne the filter model to the API:
+
+```php
+class MyApi extends luya\admin\ngrest\base\Api
+{
+    public $modelClass = 'app\models\Users';
+     
+    public $filterSearchModelClass = 'app\models\MyApiFilter';
+}
+```
+
+Now as you have declared the filtering model to the api, this allows you to use the `filter` param, assuming you d like to filter for a given group_id in the users lise there url would like this `my-api-filter?filter[group_id]=1`.
