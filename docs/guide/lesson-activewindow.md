@@ -115,7 +115,7 @@ In our view we will include an overview of all contacts in the group, similar to
 
 ```php
 <?php
-use luya\admin\ngrest\aw\CallbackFormWidget;
+use luya\admin\ngrest\aw\ActiveWindowFormWidget;
 ?>
 <h4>Group Contacts</h4>
 <table class="striped">
@@ -138,7 +138,7 @@ use luya\admin\ngrest\aw\CallbackFormWidget;
 <h4>Send email</h4>
 <p>Write an email to all contacts in this group.</p>
 
-<?php $form = CallbackFormWidget::begin([
+<?php $form = ActiveWindowFormWidget::begin([
     'callback' => 'send-mail',
     'buttonValue' => 'Send',
     'options' => ['closeOnSuccess' => true]
@@ -148,9 +148,9 @@ use luya\admin\ngrest\aw\CallbackFormWidget;
 <?php $form::end(); ?>
 ```
 
-As you can see, we have used the [CallbackFormWidget](https://luya.io/api/luya-admin-ngrest-aw-CallbackFormWidget). Besides the [CallbackButtonWidget](https://luya.io/api/luya-admin-ngrest-aw-CallbackButtonWidget) it is mostly what you will need to create a simple ActiveWindow with additional functionality. 
+As you can see, we have used the {{luya\admin\ngrest\aw\ActiveWindowFormWidget}}. Besides the {{luya\admin\ngrest\aw\CallbackButtonWidget}} it is mostly what you will need to create a simple ActiveWindow form with additional functionality. 
 
-We configured the *CallbackFormWidget* to use our defined callback function in the ActiveWindow class and show a button label. We have also used the option to close the ActiveWindow when receiving a success message from the callback.
+We configured the widget to use our defined callback function in the ActiveWindow class and show a button label. We have also used the option to close the ActiveWindow when receiving a success message from the callback.
 
 ## Result
 
