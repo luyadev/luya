@@ -90,14 +90,14 @@ You can also use the callback from the widget to create a form sending data to a
 
 ```php
 <?php
-use luya\admin\ngrest\aw\CallbackFormWidget;
+use luya\admin\ngrest\aw\ActiveWindowFormWidget;
 
 /* @var $this \luya\admin\ngrest\base\ActiveWindowView */
-/* @var $this \luya\admin\ngrest\aw\CallbackFormWidget */ 
+/* @var $form \luya\admin\ngrest\aw\ActiveWindowFormWidget */ 
 
 ?>
 <div>
-    <?php $form = CallbackFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
+    <?php $form = ActiveWindowFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
     <?= $form->field('firstname', 'Firstname'); ?>
     <?= $form->field('password', 'Password')->passwordInput(); ?>
     <?= $form->field('message', 'Message')->textarea(); ?>
@@ -147,7 +147,7 @@ When working with angular you might want to trigger some of the functions of the
 |Function|Description
 |--------|-----------
 |`$scope.$parent.closeActiveWindow()`|Close the current ActiveWindow
-|`$scope.$parent.loadList()`|Reload the active window list.
+|`$scope.$parent.loadList()`|Reload the ActiveWindow list.
 |`$scope.$parent.reloadActiveWindow()`|Reload (Rerender) the ActiveWindow.
 |`$scope.$parent.toast.error(message)`|Display an error toast message.
 |`$scope.$parent.toast.success(message)`|Display a success toast message.
@@ -156,12 +156,13 @@ When working with angular you might want to trigger some of the functions of the
 
 ## Existing reusable ActiveWindows
 
-The admin UI of LUYA provides some basic reusable ActiveWindows which you can reuse and use out of the box. Just attach them to your NgRest config and maybe adjust some properties.
+The admin UI of LUYA provides some basic reusable ActiveWindows which you can reuse and use out of the box. Just attach them to your NgRest config with the given configuration. Take a look at the API reference for more details in how to attach the specific ActiveWindow.
 
-|Name   |Class |Public Properties
-|--     |--     |--
-|Tag    |{{\luya\admin\aws\TagActiveWindow}}|<ul><li>$tableName</li></ul>
-|Image collection selector from File Manager|{{\luya\admin\aws\ImageSelectCollectionActiveWindow}}|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
-|Change password|{{\luya\admin\aws\ChangePasswordActiveWindow}}|<ul><li>$className</li></ul>
-|Coordinates collector|{{\luya\admin\aws\CoordinatesActiveWindow}}|<ul><li>$ampsApikey</li></ul>
-|Image collection uploader with Flow|{{\luya\admin\aws\FlowActiveWindow}}|<ul><li>$modelClass</li></ul>
+|Class|Description
+|--|--|
+|{{\luya\admin\aws\TagActiveWindow}}|Provides the option to set tags for the given record.
+|{{\luya\admin\aws\ImageSelectCollectionActiveWindow}}|Select images from the file manager and store them in a reference table.
+|{{\luya\admin\aws\FlowActiveWindow}}|Provides an image uploader (flow uploader) which are hidden in the filemanager and stored in a reference table.
+|{{\luya\admin\aws\DetailViewActiveWindow}}|A detail view where you can define the attributes with the given type or just print all fields with the corresponding value.
+|{{\luya\admin\aws\ChangePasswordActiveWindow}}|An option to change the password.
+|{{\luya\admin\aws\CoordinatesActiveWindow}}|Provides a view where you can find coordinates for a given location.
