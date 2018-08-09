@@ -9,6 +9,7 @@ use luya\helpers\Url;
 use luya\helpers\ObjectHelper;
 use luya\helpers\StringHelper;
 use luya\helpers\ArrayHelper;
+use yii\web\Application;
 
 /**
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
@@ -161,6 +162,7 @@ trait ErrorHandlerTrait
             'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null,
             'get' => isset($_GET) ? ArrayHelper::coverSensitiveValues($_GET, $this->sensitiveKeys) : [],
             'post' => isset($_POST) ? ArrayHelper::coverSensitiveValues($_POST, $this->sensitiveKeys) : [],
+            'bodyParams' => Yii::$app instanceof Application ? ArrayHelper::coverSensitiveValues(Yii::$app->request->bodyParams) : [],
             'session' => isset($_SESSION) ? ArrayHelper::coverSensitiveValues($_SESSION, $this->sensitiveKeys) : [],
             'server' => isset($_SERVER) ? ArrayHelper::coverSensitiveValues($_SERVER, $this->sensitiveKeys) : [],
             'profiling' => Yii::getLogger()->profiling,

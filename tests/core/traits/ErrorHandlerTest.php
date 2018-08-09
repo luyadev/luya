@@ -2,9 +2,11 @@
 
 namespace luyatests\core\traits;
 
+use Yii;
 use luya\Exception;
 use luyatests\LuyaWebTestCase;
 use luya\console\ErrorHandler;
+use yii\web\Application;
 
 class ErrorHandlerTest extends LuyaWebTestCase
 {
@@ -72,5 +74,14 @@ class ErrorHandlerTest extends LuyaWebTestCase
         } catch (Exception $e) {
             $this->assertEquals('Error: foobar', $e->getMessage());
         }
+    }
+    
+    public function testBodyParams()
+    {
+        $stud = new ErrorHandler();
+        $response = $stud->getExceptionArray(['array', 'is', 'exception']);
+        
+        $this->assertTrue(Yii::$app instanceof Application);
+        $this->assertSame([], $response['bodyParams']);
     }
 }
