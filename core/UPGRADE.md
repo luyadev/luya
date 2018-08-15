@@ -65,7 +65,7 @@ Low level API changes:
 > }
 > ```
 
-If there is an error after the migrate command (missing column `title_tag`) sadly you have to create this field manual in table `cms_nav_item` name `title_tag` type `varchar(200)`. This is due to migration prepare for 1.0.0 release.
+If there is an error after the `migrate` command (missing column `title_tag`), unfortunately you will have to create this field manually in table `cms_nav_item`: name = `title_tag`, type = `varchar(200)`. This is due to migration preparations for 1.0.0 release. (Alternatively, you can delete all tables and then execute the `migrate` command. But be aware that you will loose all local data doing so. You can sync remote data with the `admin/proxy` command after the migrations have been executed.)
 
 + [#1127](https://github.com/luyadev/luya/issues/1127) Deprecated Methods, Classes and Properties.
 + [#1076](https://github.com/luyadev/luya/issues/1076) *ALL* your blocks now have to extend from luya\cms\base\PhpBlock. Twig blocks are deprecated! 
