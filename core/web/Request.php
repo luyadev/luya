@@ -59,17 +59,22 @@ class Request extends \yii\web\Request
     public function getIsAdmin()
     {
         if ($this->_isAdmin === null) {
-            if ($this->getIsConsoleRequest() && !$this->forceWebRequest) {
+            if ($this->getIsConsoleRequest() && !$this->forceWebRequest && !Yii::$app->hasModule('admin')) {
                 $this->_isAdmin = false;
             } else {
-                $resolver = Yii::$app->composition->getResolvedPathInfo($this);
-                $parts = explode('/', $resolver->resolvedPath);
-                $first = reset($parts);
-                
-                if (preg_match('/admin/i', $first, $results)) {
+                // if there is only an application with admin module and set as default route
+                // this might by the admin module even when pathInfo is empty
+                if (Yii::$app->defaultRoute == 'admin' && empty($this->pathInfo)) {
                     $this->_isAdmin = true;
                 } else {
-                    $this->_isAdmin = false;
+                    $resolver = Yii::$app->composition->getResolvedPathInfo($this);
+                    $parts = explode('/', $resolver->resolvedPath);
+                    $first = reset($parts);
+                    if (preg_match('/admin/i', $first, $results)) {
+                        $this->_isAdmin = true;
+                    } else {
+                        $this->_isAdmin = false;
+                    }
                 }
             }
         }
