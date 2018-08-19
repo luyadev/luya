@@ -142,4 +142,23 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $header = $mailer->createHeader();
         $this->assertNotContains('X-Mailer', $header);
     }
+    
+    public function testAltBody()
+    {
+        $mail = new Mail();
+        $mail->body('<html><head><title>Foo</title></head><body><h1>Foo</h1><p>Bar</p></body></html>');
+        $this->assertEquals("Foo". PHP_EOL . "Bar", $mail->getMailer()->AltBody);
+        
+        $this->assertSame('Bar', $mail->convertMessageToAltBody('<p>Bar</p>'));
+    }
+    
+    public function testAltBodySetBySetter()
+    {
+        $mail = new Mail();
+        $mail->altBody = 'Alt Body!';
+        $mail->compose('Subject', 'Content');
+        $this->assertSame('Alt Body!', $mail->getMailer()->AltBody);
+        
+        $this->assertSame('Bar', $mail->convertMessageToAltBody('<p>Bar</p>'));
+    }
 }
