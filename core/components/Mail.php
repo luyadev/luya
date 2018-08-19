@@ -54,7 +54,7 @@ class Mail extends Component
     /**
      * @var string alternate text message if email client doesn't support HTML
      */
-    public $altBody = 'Please use a HTML compatible E-Mail-Client to read this E-Mail.';
+    public $altBody;
     
     /**
      * @var string|boolean Define a layout template file which is going to be wrapped around the body()
@@ -134,7 +134,6 @@ class Mail extends Component
             $this->_mailer->From = $this->from;
             $this->_mailer->FromName = $this->fromName;
             $this->_mailer->isHTML(true);
-            $this->_mailer->AltBody = $this->altBody;
             $this->_mailer->XMailer = ' ';
             // if sending over smtp, define the settings for the smpt server
             if ($this->isSMTP) {
@@ -209,10 +208,31 @@ class Mail extends Component
      */
     public function body($body)
     {
-        $this->getMailer()->Body = $this->wrapLayout($body);
+        $message = $this->wrapLayout($body);
+        $this->getMailer()->Body = $message;
+        if (empty($this->altBody)) {
+            $this->altBody = $this->convertMessageToAltBody($message);
+        }
+        $this->getMailer()->AltBody = $this->altBody;
         return $this;
     }
 
+    /**
+     * Try to convert the message into an alt body tag.
+     * 
+     * The alt body can only contain chars and newline. Therefore strip all tags and replace ending tags with newlines.
+     * Also remove html head if there is any.
+     * 
+     * @param string $message The message to convert into alt body format.
+     * @return string
+     */
+    public function convertMessageToAltBody($message)
+    {
+        $message = preg_replace('/<head>(.*?)<\/head>/s', '', $message);
+        $tags = ['</p>', '<br />', '<br>', '<hr />', '<hr>', '</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</h6>'];
+        return trim(strip_tags(str_replace($tags, PHP_EOL, $message)));
+    }
+    
     /**
      * Render a view file for the given Controller context.
      *
