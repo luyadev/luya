@@ -10,7 +10,6 @@ class StubController extends \luya\web\Controller
 
 class ControllerTest extends \luyatests\LuyaWebTestCase
 {
-    /** @var StubController */
     public $controller;
 
     public function setUp()
