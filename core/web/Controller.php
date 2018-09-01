@@ -42,9 +42,9 @@ abstract class Controller extends \yii\web\Controller
 
                     // Special case for map all views of controller
                     if ($action === '*') {
-                        return \Yii::getAlias($viewPath . '/' . $this->id);
+                        return $viewPath . '/' . $this->id;
                     } elseif (fnmatch($action, $currentAction)) {
-                        return \Yii::getAlias($viewPath);
+                        return $viewPath;
                     }
                 }
             }
