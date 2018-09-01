@@ -26,4 +26,18 @@ class ModuleApplicationTest extends \luyatests\LuyaWebModuleAppTestCase
         $this->assertEquals('baz', Yii::$app->runAction('unitmodule/other/baz', []));
         $this->assertEquals('baz', Yii::$app->runAction('unitmodule/other/baz/', []));
     }
+
+    public function testViewMap()
+    {
+        // Works only with disabled $useAppViewPath
+        Yii::$app->getModule('unitmodule')->useAppViewPath = false;
+
+        // Test ViewmapController
+        $this->assertEquals('viewmap1', Yii::$app->runAction('unitmodule/viewmap/viewmap1'));
+        $this->assertEquals('viewmap2', Yii::$app->runAction('unitmodule/viewmap/viewmap2'));
+        $this->assertEquals('viewmap3', Yii::$app->runAction('unitmodule/viewmap/viewmap3'));
+
+        // Test ViewmapAllController
+        $this->assertEquals('viewmapAll', Yii::$app->runAction('unitmodule/viewmap-all'));
+    }
 }

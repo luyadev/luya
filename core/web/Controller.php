@@ -37,14 +37,14 @@ abstract class Controller extends \yii\web\Controller
                 return '@app/views/' . $this->module->id . '/' . $this->id;
             } elseif (is_array($this->module->viewMap)) {
 
-                $currentAction = $this->id . '/' . $this->action->id;
+                $currentAction = $this->id . '/' . ($this->action->id ?: $this->defaultAction);
                 foreach ($this->module->viewMap as $action => $viewPath) {
 
                     // Special case for map all views of controller
                     if ($action === '*') {
-                        return $viewPath . '/' . $this->id;
+                        return \Yii::getAlias($viewPath . '/' . $this->id);
                     } elseif (fnmatch($action, $currentAction)) {
-                        return $viewPath;
+                        return \Yii::getAlias($viewPath);
                     }
                 }
             }
