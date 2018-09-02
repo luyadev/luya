@@ -14,7 +14,7 @@ namespace luya\dev;
  * ```
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
- * @since  1.0.6
+ * @since  1.0.11
  */
 class TranslationController extends BaseDevCommand
 {
