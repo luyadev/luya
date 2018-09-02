@@ -146,7 +146,26 @@ abstract class Module extends \yii\base\Module
      *
      */
     public $useAppViewPath = false;
-    
+
+    /**
+     * @var array mapping from action ID to view configurations.
+     * Each name-value pair specifies the configuration of a specifed oder wildcard action to a single view folder.
+     * The first match
+     * For example,
+     *
+     * ```php
+     * [
+     *   'default/index' => '@app/views/mymodule/default',
+     *   'login/info' => '@app/views/mymodule/login',
+     *   'default/*' => '@app/views/mymodule/default',
+     *   '*' => '@app/views/mymodule',
+     * ]
+     * ```
+     *
+     * @since 1.0.11
+     */
+    public $viewMap = [];
+
     /**
      * @var string if this/the module is included via another module (parent module), the parent module will write its
      * name inside the child modules $context variable. For example the cms includes the news module, the context variable

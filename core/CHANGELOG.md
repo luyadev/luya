@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file. This projec
 ## 1.0.11 (in progress)
 
 + [#1840](https://github.com/luyadev/luya/issues/1840) Convert mail message into alt body automatically.
++ [#1816](https://github.com/luyadev/luya/issues/1816) View mapping to change the view folder of actions inside modules.
 
 ## 1.0.10 (18. July 2018)
 
