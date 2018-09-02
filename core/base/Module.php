@@ -161,6 +161,8 @@ abstract class Module extends \yii\base\Module
      *   '*' => '@app/views/mymodule',
      * ]
      * ```
+     *
+     * @since 1.0.11
      */
     public $viewMap = [];
 
