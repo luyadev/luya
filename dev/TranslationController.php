@@ -2,8 +2,6 @@
 
 namespace luya\dev;
 
-use luya\helpers\StringHelper;
-
 /**
  * Dev tool for translators. This is only a helper tool for developer to edit the many translation files in different repositories.
  *
@@ -14,8 +12,6 @@ use luya\helpers\StringHelper;
  * ```sh
  * ./vendor/bin/luyadev translation/add luya-module-cms cmsadmin
  * ```
- *
- *
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since 1.0.6
