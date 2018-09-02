@@ -15,7 +15,7 @@ use Nadar\PhpComposerReader\Autoload;
 /**
  * Dev Env cloning and updating.
  *
- * Provdes functions to clone and update the repos.
+ * Provides functions to clone and update the repos.
  *
  * Usage
  *
