@@ -31,10 +31,25 @@ abstract class Controller extends \yii\web\Controller
      */
     public function getViewPath()
     {
-        if ($this->module instanceof Module && $this->module->useAppViewPath) {
-            return '@app/views/'.$this->module->id.'/'.$this->id;
+        if ($this->module instanceof Module) {
+
+            if ($this->module->useAppViewPath) {
+                return '@app/views/' . $this->module->id . '/' . $this->id;
+            } elseif (is_array($this->module->viewMap)) {
+
+                $currentAction = $this->id . '/' . ($this->action ? $this->action->id : $this->defaultAction);
+                foreach ($this->module->viewMap as $action => $viewPath) {
+
+                    // Special case for map all views of controller
+                    if ($action === '*') {
+                        return $viewPath . '/' . $this->id;
+                    } elseif (fnmatch($action, $currentAction)) {
+                        return $viewPath;
+                    }
+                }
+            }
         }
-        
+
         return parent::getViewPath();
     }
 
