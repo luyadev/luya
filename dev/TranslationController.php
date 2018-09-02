@@ -14,7 +14,7 @@ namespace luya\dev;
  * ```
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
- * @since 1.0.6
+ * @since  1.0.6
  */
 class TranslationController extends BaseDevCommand
 {
@@ -31,7 +31,7 @@ class TranslationController extends BaseDevCommand
     /**
      * Add a new translation to a repository by filename (for admin and frondend).
      *
-     * @param string $repo Name of the repo directory (e.g. luya-module-cms)
+     * @param string $repo     Name of the repo directory (e.g. luya-module-cms)
      * @param string $filename Name of the php file without suffix (e.g. cmsadmin)
      * @param string $language (Optional) Add the translation only to one language. Use shortcode e.g. en, de, ...
      */
@@ -52,8 +52,7 @@ class TranslationController extends BaseDevCommand
 
             if (!$this->dry) {
                 file_put_contents($messageFile, $newContent);
-            }
-            else {
+            } else {
                 $this->outputInfo($messageFile);
             }
         }
@@ -61,7 +60,7 @@ class TranslationController extends BaseDevCommand
         if (!$this->dry) {
             if (exec("[ -d $repoPath/.git ] && command -v git")) {
                 $diffCommand = "git --git-dir=$repoPath/.git --work-tree=$repoPath diff -- " . str_replace($repoPath . '/', '', implode(" ", $messageFiles));
-                exec($diffCommand,$diff);
+                exec($diffCommand, $diff);
                 $this->output(implode("\n", $diff));
             }
 
