@@ -4,10 +4,11 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.11 (in progress)
 
++ [#1848](https://github.com/luyadev/luya/issues/1848) Fix issue where frontend rules have precedence over admin API rules.
 + [#1840](https://github.com/luyadev/luya/issues/1840) Convert mail message into alt body automatically.
 + [#1816](https://github.com/luyadev/luya/issues/1816) View mapping to change the view folder of actions inside modules.
 + [#1844](https://github.com/luyadev/luya/pull/1844) Added translation command to add easier a new record to the translation files. This command is used in the luya-env-dev project in order to develop on the LUYA modules or create your own extensions/modules.
-+ [admin#185](https://github.com/luyadev/luya-module-admin/issues/185) Fixed issue where applications with default route admin throw exception for assets.
++ [#185](https://github.com/luyadev/luya-module-admin/issues/185) Fixed issue where applications with default route admin throw exception for assets.
 
 ## 1.0.10 (18. July 2018)
 

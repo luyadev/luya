@@ -19,7 +19,7 @@ class Bootstrap extends BaseBootstrap
 
     private $_urlRules = [];
     
-    private $_apiRules = [];
+    private $_apiRules = [];z
 
     private $_adminAssets = [];
 
@@ -47,7 +47,7 @@ class Bootstrap extends BaseBootstrap
                 }
             }
             
-            // get all api reuls (since 1.0.10)
+            // get all api rules (since 1.0.10)
             foreach ($module->apiRules as $endpoint => $rule) {
                 $this->_apiRules[$endpoint] = $rule;
             }
@@ -128,7 +128,8 @@ class Bootstrap extends BaseBootstrap
                     $app->getModule('admin')->apiDefintions = $this->generateApiRuleDefintions($this->_apis, $this->_apiRules);
                 }
                 // as the admin module needs to listen for $apiDefintions we have to get the urlRules from the admin and merge with the existing rules:
-                $this->_urlRules = array_merge($this->_urlRules, $app->getModule('admin')->urlRules);
+                // in admin context, admin url rules have always precedence over frontend rules.
+                $this->_urlRules = array_merge($app->getModule('admin')->urlRules, $this->_urlRules);
             }
         }
         
