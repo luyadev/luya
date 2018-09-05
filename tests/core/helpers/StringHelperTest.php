@@ -126,4 +126,13 @@ EOT;
 EOT;
         $this->assertSame('<div><p>foo bar</p></div>', StringHelper::minify($comment, ['comments' => true]));
     }
+
+    public function testCut()
+    {
+        $this->assertSame('foo abc bar', StringHelper::truncateMiddle('foo abc bar', 'abc', 4));
+        $this->assertSame('..o abc b..', StringHelper::truncateMiddle('foo abc bar', 'abc', 2));
+        $this->assertSame('foo abc bar..', StringHelper::truncateMiddle('foo abc barbazquax', 'abc', 4));
+        $this->assertSame('..uax abc bar', StringHelper::truncateMiddle('barbazquax abc bar', 'abc', 4));
+        $this->assertSame('..e quick fox jumped over the la..', StringHelper::truncateMiddle('the quick fox jumped over the lazy dog', 'jumped', 12));
+    }
 }

@@ -178,4 +178,37 @@ class StringHelper extends BaseStringHelper
         
         return $min;
     }
+
+    /**
+     * Cut the given word/string from the content. Its truncates to the left side and to the right side of the word.
+     * 
+     * An example of how a sentenced is cut:
+     * 
+     * ```php
+     * $cut = StringHelper::truncateMiddle('the quick fox jumped over the lazy dog', 'jumped', 12);
+     * echo $cut; // ..e quick fox jumped over the la..
+     * ```
+     * 
+     * @param string $content The content to cut the words from.
+     * @param string $word The word which should be in the middle of the string
+     * @param integer $length The amount of the chars to cut on the left and right side from the word.
+     * @param string $affix The chars which should be used for prefix and suffix when string is cuted.
+     * @since 1.0.12
+     */
+    public static function truncateMiddle($content, $word, $length, $affix = '..')
+    {
+        $array = str_split($content);
+        $first = mb_strpos($content, $word);
+        $last = $first + mb_strlen($word);
+
+        // left and right array chars from word
+        $left = array_slice($array, 0, $first, true);
+        $right = array_slice($array, $last, null, true);
+
+        // string before
+        $before = (count($left) > $length) ? $affix.implode("", array_slice($left, -$length)) : implode("", $left);
+        $after = (count($right) > $length) ? implode("", array_slice($right, 0, $length)) . $affix : implode("", $right);
+
+        return $before . $word . $after;
+    }
 }
