@@ -224,7 +224,8 @@ class Mail extends Component
      * Also remove html head if there is any.
      *
      * @param string $message The message to convert into alt body format.
-     * @return string
+     * @return string Returns the alt body message compatible content
+     * @since 1.0.11
      */
     public function convertMessageToAltBody($message)
     {
