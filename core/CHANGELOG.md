@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.0.12 (in progress)
+
 ## 1.0.11 (5. September 2018)
 
 + [#1848](https://github.com/luyadev/luya/issues/1848) Fix issue where frontend rules have precedence over admin API rules.
