@@ -19,7 +19,7 @@ class Bootstrap extends BaseBootstrap
 
     private $_urlRules = [];
     
-    private $_apiRules = [];z
+    private $_apiRules = [];
 
     private $_adminAssets = [];
 
