@@ -59,9 +59,21 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "shasum": null
+                "shasum": ""
             },
-            "type": "bower-asset"
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "punycode.js",
+                "bower-asset-ignore": [
+                    "coverage",
+                    "tests",
+                    ".*",
+                    "component.json",
+                    "Gruntfile.js",
+                    "node_modules",
+                    "package.json"
+                ]
+            }
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -1038,16 +1050,16 @@
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "11ff9381ce34dbe66d1eac58b8506ed883266a2a"
+                "reference": "69ddd37bfaea64ac2ecd3f6c8d853604bb7ac6ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/11ff9381ce34dbe66d1eac58b8506ed883266a2a",
-                "reference": "11ff9381ce34dbe66d1eac58b8506ed883266a2a",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/69ddd37bfaea64ac2ecd3f6c8d853604bb7ac6ce",
+                "reference": "69ddd37bfaea64ac2ecd3f6c8d853604bb7ac6ce",
                 "shasum": ""
             },
             "require": {
@@ -1059,6 +1071,7 @@
                 "bower-asset/angular-filter": "~0.5.15",
                 "bower-asset/angular-loading-bar": "^0.9",
                 "bower-asset/angularjs-datepicker": "^2.1.0",
+                "bower-asset/angularjs-slider": "~6.6.0",
                 "bower-asset/bowser": "~1.7.3",
                 "bower-asset/echarts": "~3.8.5",
                 "bower-asset/ng-file-upload": "~12.2.0",
@@ -1107,20 +1120,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-06-05T13:23:29+00:00"
+            "time": "2018-09-03T13:32:44+00:00"
         },
         {
             "name": "luyadev/luya-module-cms",
-            "version": "1.0.5.1",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "2bb4096befb6de9ad2aab52c19556068dec3a7fb"
+                "reference": "4a547473c63af224d7137691679e97762536ec14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/2bb4096befb6de9ad2aab52c19556068dec3a7fb",
-                "reference": "2bb4096befb6de9ad2aab52c19556068dec3a7fb",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/4a547473c63af224d7137691679e97762536ec14",
+                "reference": "4a547473c63af224d7137691679e97762536ec14",
                 "shasum": ""
             },
             "require-dev": {
@@ -1171,7 +1184,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2018-06-09T08:36:36+00:00"
+            "time": "2018-09-03T13:34:40+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
