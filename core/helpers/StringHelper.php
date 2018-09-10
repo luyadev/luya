@@ -181,14 +181,14 @@ class StringHelper extends BaseStringHelper
 
     /**
      * Cut the given word/string from the content. Its truncates to the left side and to the right side of the word.
-     * 
+     *
      * An example of how a sentenced is cut:
-     * 
+     *
      * ```php
      * $cut = StringHelper::truncateMiddle('the quick fox jumped over the lazy dog', 'jumped', 12);
      * echo $cut; // ..e quick fox jumped over the la..
      * ```
-     * 
+     *
      * @param string $content The content to cut the words from.
      * @param string $word The word which should be in the middle of the string
      * @param integer $length The amount of the chars to cut on the left and right side from the word.
@@ -197,7 +197,8 @@ class StringHelper extends BaseStringHelper
      */
     public static function truncateMiddle($content, $word, $length, $affix = '..')
     {
-        $array = str_split($content);
+        $content = strip_tags($content);
+        $array = self::mb_str_split($content);
         $first = mb_strpos($content, $word);
         $last = $first + mb_strlen($word);
 
@@ -210,5 +211,37 @@ class StringHelper extends BaseStringHelper
         $after = (count($right) > $length) ? implode("", array_slice($right, 0, $length)) . $affix : implode("", $right);
 
         return $before . $word . $after;
+    }
+
+    /**
+     * Highlight a word within a content.
+     *
+     * @param string $content The content to find the word.
+     * @param string $word The word to find within the content.
+     * @param string $markup The markup used wrap the word to highlight.
+     * @since 1.0.12
+     */
+    public static function highlightWord($content, $word, $markup = '<b>%s</b>')
+    {
+        return preg_replace("/\p{L}*?".preg_quote($word)."\p{L}*/ui", sprintf($markup, $word), strip_tags($content));
+    }
+
+    /**
+     * Multibyte-safe str_split funciton.
+     *
+     * @param string $string The string to split into an array
+     * @param integer $length The length of the chars to cut.
+     * @since 1.0.12
+     */
+    public static function mb_str_split($string, $length = 1)
+    {
+        $arrary	= [];
+        $stringLength = mb_strlen($string, 'UTF-8');
+    
+        for ($i = 0; $i < $stringLength; $i += $length) {
+            $array[] = mb_substr($string, $i, $length, 'UTF-8');
+        }
+    
+        return $array;
     }
 }

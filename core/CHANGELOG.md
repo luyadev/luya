@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.12 (in progress)
 
++ [#1851](https://github.com/luyadev/luya/issues/1851) Add string helper method highlightWord() to highlight a given word withing a string.
++ [#1850](https://github.com/luyadev/luya/issues/1850) Add string helper method truncateMiddle() to truncate a string around a given word.
+
 ## 1.0.11 (5. September 2018)
 
 + [#1848](https://github.com/luyadev/luya/issues/1848) Fix issue where frontend rules have precedence over admin API rules.
