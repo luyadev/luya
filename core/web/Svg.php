@@ -47,11 +47,13 @@ class Svg extends Widget
 
     /**
      * @var bool If symbolMode is true the widget will create a svg > use
+     * @since 1.0.12
      */
     public $symbolMode;
 
     /**
      * @var string The name of the symbol that will be referenced
+     * @since 1.0.12
      */
     public $symbolName;
 

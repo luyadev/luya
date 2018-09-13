@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.12 (in progress)
 
++ [#1852](https://github.com/luyadev/luya/pull/1852) Updated Svg widget to enable usage of symbols (svg sprite) via svg > use implementation
 + [#1851](https://github.com/luyadev/luya/issues/1851) Add string helper method highlightWord() to highlight a given word withing a string.
 + [#1850](https://github.com/luyadev/luya/issues/1850) Add string helper method truncateMiddle() to truncate a string around a given word.
 
@@ -204,10 +205,10 @@ All notable changes to this project will be documented in this file. This projec
 + [#1640](https://github.com/luyadev/luya/issues/1640) Use container name for page overview instead of alias.
 + [#1598](https://github.com/luyadev/luya/issues/1598) Hide block delete button when insufficient permissions, disable draging and editing if there is no update permissions.
 + [#1563](https://github.com/luyadev/luya/issues/1563) Adjust position of first sortable arrow as desired.
-+ [#1545](https://github.com/luyadev/luya/issues/1545) Adjust position of page version dropdown content on admin edit section. 
++ [#1545](https://github.com/luyadev/luya/issues/1545) Adjust position of page version dropdown content on admin edit section.
 + [#1549](https://github.com/luyadev/luya/issues/1549) Hide version informations for other page types then page content.
 + [#1550](https://github.com/luyadev/luya/issues/1550) Readded option to change the page type in CMS Module.
-+ [#1480](https://github.com/luyadev/luya/issues/1480) Dropdown select overlay z-index fixed by closing all other selects. 
++ [#1480](https://github.com/luyadev/luya/issues/1480) Dropdown select overlay z-index fixed by closing all other selects.
 + [#1519](https://github.com/luyadev/luya/issues/1519) Multiple inputs problem with empty item rows convert to object instead of array.
 + [#1535](https://github.com/luyadev/luya/issues/1535) Date and Datetime reset model buttons.
 + [#1536](https://github.com/luyadev/luya/issues/1536) Link directive display wrong reset data button if empty object exists.
@@ -302,7 +303,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
-+ [#1229](https://github.com/luyadev/luya/issues/1229) The ngRest CheckboxRelation plugin dropped the support for ActiveRecord object getters inside the labelTemplates, use the closure function inside the labelFields propertie instead. 
++ [#1229](https://github.com/luyadev/luya/issues/1229) The ngRest CheckboxRelation plugin dropped the support for ActiveRecord object getters inside the labelTemplates, use the closure function inside the labelFields propertie instead.
 + [#1208](https://github.com/luyadev/luya/issues/1208) Renamed `luya\cms\widgets\LanguageSwitcher` to `LangSwitcher` and removed the template usage as it should not be part of the widget.
 + [#1180](https://github.com/luyadev/luya/issues/1180) Replaced `luya\admin\ngrest\base\ActiveWindowView::callbackButton()` by widget `luya\admin\ngrest\aw\CallbackButtonWidget::widget()`.
 + [#1177](https://github.com/luyadev/luya/issues/1177) The luya\web\Elements component looks for the elements.php inside the @app/views folder instead of @app.
@@ -398,7 +399,7 @@ All notable changes to this project will be documented in this file. This projec
 + [#1058](https://github.com/luyadev/luya/issues/1058) **[BC BREAK]** Removed all massive assigned vars, cfgs, extras and placeholders from the PHP Block view.
 + [#1069](https://github.com/luyadev/luya/issues/1069) **[BC BREAK]** Removed CMS Block assets propertie in order to reduce RAM usage and follow Yii guidelines in order to register assets.
 + [#1068](https://github.com/luyadev/luya/issues/1068) **[BC BREAK]** Cms Block zaa() helper methods moved to \luya\cms\helpers\BlockHelper and marked methods as deprecated.
-+ [#1067](https://github.com/luyadev/luya/issues/1067) **[BC BREAK]** Admin Module Menu: itemApi() routes are now separeted by slashes instead of dashes. As this supports native Yii handling. 
++ [#1067](https://github.com/luyadev/luya/issues/1067) **[BC BREAK]** Admin Module Menu: itemApi() routes are now separeted by slashes instead of dashes. As this supports native Yii handling.
 + [#1045](https://github.com/luyadev/luya/issues/1045) **[BC BREAK]** Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
 + [#1075](https://github.com/luyadev/luya/issues/1075) **[BC BREAK]** Frontend and Admin Controller and Module assets can not be stored in the `$assets` property of a module or controller any more.
 + [#1086](https://github.com/luyadev/luya/issues/1086) Mark $page component as deprecated as properties can be accessed trough the menu component.
@@ -438,7 +439,7 @@ All notable changes to this project will be documented in this file. This projec
 + [#1011](https://github.com/luyadev/luya/issues/1011) The ViewContext implementation for cmslayout rendering allows you now to render other templates inside a cmslayout.
 + [#1044](https://github.com/luyadev/luya/issues/1044) Changing the cms permission force menu reload in order to fix bug with old menu permissions.
 + [#1013](https://github.com/luyadev/luya/issues/1013) Delete a cms page displays blank page and reloads menu, fixed bug where page was still visible.
-+ [#1061](https://github.com/luyadev/luya/issues/1061) CMS Page properties with overriden default implementation returns wrong administration api value. 
++ [#1061](https://github.com/luyadev/luya/issues/1061) CMS Page properties with overriden default implementation returns wrong administration api value.
 + [#1062](https://github.com/luyadev/luya/issues/1062) CMS Layout files will ignore prefixed files with . and _ and folders inside the cmslayout folder.
 + [#987](https://github.com/luyadev/luya/issues/987) Fixed issue with image auto rotate and moved to imagine extension version ~2.1.0
 
