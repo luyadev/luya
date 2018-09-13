@@ -12,13 +12,27 @@ use Yii;
 /**
  * Svg "inserter"
  *
- * This Widget will insert the contents of a given SVG file at the widgets position.
+ * This Widget will insert the contents of a given SVG file at the widgets position
+ * or create an svg>use element for a given file + symbol.
+ *
+ * Inline the SVG contents:
  *
  * ```php
  *  <?= Svg::widget([
  *     'folder' => "@webroot/images/svg",
  *     'file' => 'logos/logo.svg',
- *     'cssClss' => 'additional-class-for-css'
+ *     'cssClass' => 'additional-class-for-css'
+ * ]); ?>
+ * ```
+ *
+ * SVG > Use implementation:
+ *
+ * ```php
+ * <?= Svg::widget([
+ *     'symbolMode' => true,
+ *     'symbolName' => 'example'
+ *     'file' => 'images/svg-sprite.svg',
+ *     'cssClass' => 'additional-class-for-css'
  * ]); ?>
  * ```
  *
@@ -32,7 +46,19 @@ class Svg extends Widget
     use CacheableTrait;
 
     /**
-     * @var string Relative path to the SVG file base on $folder
+     * @var bool If symbolMode is true the widget will create a svg > use
+     * @since 1.0.12
+     */
+    public $symbolMode;
+
+    /**
+     * @var string The name of the symbol that will be referenced
+     * @since 1.0.12
+     */
+    public $symbolName;
+
+    /**
+     * @var string Relative path to the SVG file based on $folder
      */
     public $file;
 
@@ -81,19 +107,25 @@ class Svg extends Widget
             // Check if file ends with .svg, if not add the extension
             $svgFile = StringHelper::endsWith($this->file, '.svg') ? $this->file : $this->file . '.svg';
 
-            // Build the full svg file path
-            $svgPath = $this->folder . DIRECTORY_SEPARATOR . $svgFile;
+            if ($this->symbolMode) {
+                $svgPath = Yii::$app->view->publicHtml . '/' . $svgFile;
 
-            // Get the svg contents
-            $content = FileHelper::getFileContent($svgPath);
+                return '<svg class="symbol symbol--' . $this->symbolName . '' . ($this->cssClass ? ' ' . $this->cssClass : '') . '"><use class="symbol__use" xlink:href="' . $svgPath . '#' . $this->symbolName . '" /></svg>';
+            } else {
+                // Build the full svg file path
+                $svgPath = $this->folder . DIRECTORY_SEPARATOR . $svgFile;
 
-            // If a cssClass string is given, add it to the <svg> tag
-            if ($this->cssClass && is_string($this->cssClass)) {
-                $content = preg_replace('/<svg/', '<svg class="' . $this->cssClass . '"', $content);
-            }
+                // Get the svg contents
+                $content = FileHelper::getFileContent($svgPath);
 
-            if ($content) {
-                return $content;
+                // If a cssClass string is given, add it to the <svg> tag
+                if ($this->cssClass && is_string($this->cssClass)) {
+                    $content = preg_replace('/<svg/', '<svg class="' . $this->cssClass . '"', $content);
+                }
+
+                if ($content) {
+                    return $content;
+                }
             }
 
             throw new Exception('Unable to access SVG File: ' . $svgPath);
