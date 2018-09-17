@@ -61,6 +61,10 @@ use luya\helpers\FileHelper;
  *
  * The styleguide will now insert the mocked values instead of generic values.
  *
+ * > Important: If you want to pass database values from active records objects or things which are more memory intense, you should add this method into a lambda / callable function
+ * > which is then lazy loaded only when creating the guide. For example:
+ * > ['myModel' => function() { return MyModel::findOne(1); } ]
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -228,7 +232,11 @@ class Element extends \yii\base\Component
     public function getMockedArgValue($elementName, $argName)
     {
         if (isset($this->_mockedArguments[$elementName]) && isset($this->_mockedArguments[$elementName][$argName])) {
-            return $this->_mockedArguments[$elementName][$argName];
+            $response = $this->_mockedArguments[$elementName][$argName];
+            if (is_callable($response)) {
+                $response = call_user_func($response);
+            }
+            return $response;
         }
         
         return false;
@@ -246,6 +254,7 @@ class Element extends \yii\base\Component
     public function render($file, array $args = [])
     {
         $view = new View();
+        $view->autoRegisterCsrf = false;
         return $view->renderPhpFile(rtrim($this->getFolder(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . FileHelper::ensureExtension($file, 'php'), $args);
     }
 }
