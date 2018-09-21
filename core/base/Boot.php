@@ -15,9 +15,6 @@ use luya\helpers\ArrayHelper;
  * Run the Luya/Yii Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
  * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
  * the default config `../configs/env.php`.
- *
- * @property boolean $isCli Whether current request is runing in cli env or not.
- * @property string $baseYiiFile Returns the path to the yii base file.
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -173,7 +170,7 @@ abstract class Boot
     {
         if ($this->_configArray === null) {
             if (!file_exists($this->configFile)) {
-                if (!$this->isCli) {
+                if (!$this->getIsCli()) {
                     throw new Exception("Unable to load the config file '".$this->configFile."'.");
                 }
                 
@@ -204,7 +201,7 @@ abstract class Boot
      */
     public function run()
     {
-        if ($this->isCli) {
+        if ($this->getIsCli()) {
             return $this->applicationConsole();
         }
 
