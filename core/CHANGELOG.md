@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.12 (in progress)
 
++ [#1856](https://github.com/luyadev/luya/issues/1856) If application console method is runing, the cli determination should be forced.
 + [#1853](https://github.com/luyadev/luya/issues/1853) Add option to lazy load mocked arguments.
 + [#1852](https://github.com/luyadev/luya/pull/1852) Updated Svg widget to enable usage of symbols (svg sprite) via svg > use implementation
 + [#1851](https://github.com/luyadev/luya/issues/1851) Add string helper method highlightWord() to highlight a given word withing a string.

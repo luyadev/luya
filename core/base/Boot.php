@@ -16,6 +16,9 @@ use luya\helpers\ArrayHelper;
  * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
  * the default config `../configs/env.php`.
  *
+ * @property boolean $isCli Whether current request is runing in cli env or not.
+ * @property string $baseYiiFile Returns the path to the yii base file.
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -62,14 +65,57 @@ abstract class Boot
         $this->_baseYiiFile = $baseYiiFile;
     }
     
+    /**
+     * Getter method for Yii base file.
+     * 
+     * @return string
+     */
     public function getBaseYiiFile()
     {
         return $this->_baseYiiFile;
     }
 
+    /**
+     * Whether current request is runing in cli env or not.
+     * 
+     * This is determined by php_sapi_name().
+     * 
+     * @return boolean
+     * @deprecated Depreacted since 1.0.12 use getisCli() or $isCli instead.
+     */
     public function isCli()
     {
-        return $this->getSapiName() === 'cli';
+        return $this->getIsCli();
+    }
+
+    private $_isCli;
+
+    /**
+     * Getter method whether current request is cli or not.
+     * 
+     * If not set via setIsCli() the value is determined trough php_sapi_name();
+     * 
+     * @return boolean Whether current request is console env or not.
+     * @since 1.0.12
+     */
+    public function getIsCli()
+    {
+        if ($this->_isCli === null) {
+            $this->_isCli = $this->getSapiName() === 'cli';
+        }
+
+        return $this->_isCli;
+    }
+
+    /**
+     * Setter method for isCli.
+     * 
+     * @param boolean $isCli
+     * @since 1.0.12
+     */
+    public function setIsCli($isCli)
+    {
+        $this->_isCli = $isCli;
     }
     
     /**
@@ -127,7 +173,7 @@ abstract class Boot
     {
         if ($this->_configArray === null) {
             if (!file_exists($this->configFile)) {
-                if (!$this->isCli()) {
+                if (!$this->isCli) {
                     throw new Exception("Unable to load the config file '".$this->configFile."'.");
                 }
                 
@@ -158,7 +204,7 @@ abstract class Boot
      */
     public function run()
     {
-        if ($this->isCli()) {
+        if ($this->isCli) {
             return $this->applicationConsole();
         }
 
@@ -172,6 +218,7 @@ abstract class Boot
      */
     public function applicationConsole()
     {
+        $this->setIsCli(true);
         $config = $this->getConfigArray();
         $config['defaultRoute'] = 'help';
         if (isset($config['components'])) {
