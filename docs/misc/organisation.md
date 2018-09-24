@@ -42,7 +42,7 @@ Current LUYA Organisation members with the respective role:
 |Role|Description|Planning/Strategy|Reaction** within 48h|Voting|Commit Access/PR
 |-----|------------|----------------|--------------|------|----------------
 |Project Lead|Core member, including planning and strategy tasks|Yes|Yes|Yes|Yes
-|Core Member|Can commit and merge pull requests, must react within 48 to pull requests, mentions, assignments|No|Yes|Yes|Yes
+|Core Member|Can commit and merge pull requests, must react within 48 hours to pull requests, mentions, assignments|No|Yes|Yes|Yes
 |Maintainer|Can comment, assign and set labels but can not write into the repos.|No|No|Yes|No
 |Contributor|Allows to invite members to the team without long-term obligations but still with a sense of being part of the project.|No|No|No|No
 |Extension Manager|Has commit access to specific extensions and has to react as far as these are concerned|No|Yes*|Yes|Yes*
