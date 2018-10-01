@@ -62,7 +62,7 @@ And a the parameterized route:
 
 ## Multilingual language patterns
 
-If you have multi lingual pages you need patterns for different languages which can be defined in your `$urlRules` configuration too.
+If you have multi lingual pages you need patterns for different languages which can be defined in your `$urlRules` configuration too. This will only work when defining the rules inside a module.
 
 ```php
 public $urlRules = [
@@ -73,6 +73,18 @@ public $urlRules = [
         ]
     ],
 ];
+```
+
+In order to define the url rules from the urlManager config scope, you can just prefix the route with the given composition pattern. So the same example from above inside the config would look like this:
+
+```php
+'urlManager' => [
+    'rules' => [
+        'basket' => 'en/estore/basket/default',
+        'warenkorb' => 'de/estore/basket/default',
+        'panier' => 'fr/estore/basek/default',
+    ],
+],
 ```
 
 To verify which composition language is used you can dump `Yii::$app->composition->language`. The {{luya\web\Composition}} component is taking care of LUYA multi language websites and is registered by default for all LUYA projects.
