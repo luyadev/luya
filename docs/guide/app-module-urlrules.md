@@ -80,9 +80,9 @@ In order to define the url rules from the urlManager config scope, you can just 
 ```php
 'urlManager' => [
     'rules' => [
-        'basket' => 'en/estore/basket/default',
-        'warenkorb' => 'de/estore/basket/default',
-        'panier' => 'fr/estore/basek/default',
+        'en/basket' => 'en/estore/basket/default',
+        'de/warenkorb' => 'de/estore/basket/default',
+        'fr/panier' => 'fr/estore/basek/default',
     ],
 ],
 ```
