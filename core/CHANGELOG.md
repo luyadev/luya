@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.12 (in progress)
+## 1.0.12 (8. October 2018)
 
 + [#1856](https://github.com/luyadev/luya/issues/1856) If application console method is runing, the cli determination should be forced.
 + [#1853](https://github.com/luyadev/luya/issues/1853) Add option to lazy load mocked arguments.
