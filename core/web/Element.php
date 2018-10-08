@@ -64,7 +64,7 @@ use luya\helpers\FileHelper;
  * > Important: If you want to pass database values from active records objects or things which are more memory intense, you should add this method into a lambda / callable function
  * > which is then lazy loaded only when creating the guide. For example:
  * > ['myModel' => function() { return MyModel::findOne(1); } ]
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

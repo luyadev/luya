@@ -235,7 +235,7 @@ class StringHelper extends BaseStringHelper
      */
     public static function mb_str_split($string, $length = 1)
     {
-        $arrary	= [];
+        $array = [];
         $stringLength = mb_strlen($string, 'UTF-8');
     
         for ($i = 0; $i < $stringLength; $i += $length) {

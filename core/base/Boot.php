@@ -15,7 +15,7 @@ use luya\helpers\ArrayHelper;
  * Run the Luya/Yii Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
  * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
  * the default config `../configs/env.php`.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -64,7 +64,7 @@ abstract class Boot
     
     /**
      * Getter method for Yii base file.
-     * 
+     *
      * @return string
      */
     public function getBaseYiiFile()
@@ -74,11 +74,11 @@ abstract class Boot
 
     /**
      * Whether current request is runing in cli env or not.
-     * 
+     *
      * This is determined by php_sapi_name().
-     * 
+     *
      * @return boolean
-     * @deprecated Depreacted since 1.0.12 use getisCli() or $isCli instead.
+     * @deprecated Depreacted since 1.0.12 use getisCli() instead.
      */
     public function isCli()
     {
@@ -89,9 +89,9 @@ abstract class Boot
 
     /**
      * Getter method whether current request is cli or not.
-     * 
+     *
      * If not set via setIsCli() the value is determined trough php_sapi_name();
-     * 
+     *
      * @return boolean Whether current request is console env or not.
      * @since 1.0.12
      */
@@ -106,7 +106,7 @@ abstract class Boot
 
     /**
      * Setter method for isCli.
-     * 
+     *
      * @param boolean $isCli
      * @since 1.0.12
      */
