@@ -8,12 +8,13 @@ To configure a new rule you have to open the module file (`Module.php`) of the {
 
 ```php
 <?php
-namespace app\modules\team;
+namespace app\modules\estore;
 
 class Module extends \luya\base\Module
 {
     public $urlRules = [
-        ['pattern' => 'my-basket', 'route' => 'estore/basket/index']
+        ['pattern' => 'my-basket', 'route' => 'estore/basket/index'], // equals to: 'my-basket' => 'estore/basket/index'
+        
     ];
 }
 ```
@@ -33,9 +34,9 @@ You can also use parameters in url rules:
 
 Visit the [Yii Documentation](http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#parameterizing-routes) for more details about parameters.
 
-> If you are using the module in a CMS context your patterns must be prefix with the module name like `team/my-basket`, otherwise the CMS can not auto replace the new pattern with the CMS context information.
+> If you are using the module in a CMS context your patterns must be prefix with the module name, otherwise the CMS can not auto replace the new pattern with the CMS context information. For example redirecting from controller foo action index to controller bar action index inside a module both url rules must be prefix. For foo `['name-for-foo-index' => 'MODULE/foo/index']` for bar `['name-for-bar-index' => 'MODULE/bar/index']` so they must have the full qualified route with the name of the module used in the config to register the module
 
-Below, a helping list of regex expressions you may use to generate your variables inside the urls:
+Below, a short list of regex expressions you may use to parameterize the urls:
 
 |Regex      |Description        |Example
 |---        |---                |---
