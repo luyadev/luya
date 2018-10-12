@@ -24,7 +24,7 @@ abstract class Boot
     /**
      * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/core/CHANGELOG.md)
      */
-    const VERSION = '1.0.11';
+    const VERSION = '1.0.13';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
@@ -62,14 +62,57 @@ abstract class Boot
         $this->_baseYiiFile = $baseYiiFile;
     }
     
+    /**
+     * Getter method for Yii base file.
+     *
+     * @return string
+     */
     public function getBaseYiiFile()
     {
         return $this->_baseYiiFile;
     }
 
+    /**
+     * Whether current request is runing in cli env or not.
+     *
+     * This is determined by php_sapi_name().
+     *
+     * @return boolean
+     * @deprecated Depreacted since 1.0.12 use getisCli() instead.
+     */
     public function isCli()
     {
-        return $this->getSapiName() === 'cli';
+        return $this->getIsCli();
+    }
+
+    private $_isCli;
+
+    /**
+     * Getter method whether current request is cli or not.
+     *
+     * If not set via setIsCli() the value is determined trough php_sapi_name();
+     *
+     * @return boolean Whether current request is console env or not.
+     * @since 1.0.12
+     */
+    public function getIsCli()
+    {
+        if ($this->_isCli === null) {
+            $this->_isCli = $this->getSapiName() === 'cli';
+        }
+
+        return $this->_isCli;
+    }
+
+    /**
+     * Setter method for isCli.
+     *
+     * @param boolean $isCli
+     * @since 1.0.12
+     */
+    public function setIsCli($isCli)
+    {
+        $this->_isCli = $isCli;
     }
     
     /**
@@ -127,7 +170,7 @@ abstract class Boot
     {
         if ($this->_configArray === null) {
             if (!file_exists($this->configFile)) {
-                if (!$this->isCli()) {
+                if (!$this->getIsCli()) {
                     throw new Exception("Unable to load the config file '".$this->configFile."'.");
                 }
                 
@@ -158,7 +201,7 @@ abstract class Boot
      */
     public function run()
     {
-        if ($this->isCli()) {
+        if ($this->getIsCli()) {
             return $this->applicationConsole();
         }
 
@@ -172,6 +215,7 @@ abstract class Boot
      */
     public function applicationConsole()
     {
+        $this->setIsCli(true);
         $config = $this->getConfigArray();
         $config['defaultRoute'] = 'help';
         if (isset($config['components'])) {
