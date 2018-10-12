@@ -39,10 +39,12 @@ You will be asked to enter the URL of your production environment (e.g. `https:/
 
 Terminal commands:
 
-`./vendor/bin/luya admin/proxy` --> run or setup proxy urls and secret token
-`./vendor/bin/luya admin/proxy/clear` --> clear and reset local stored proxy configurariont
+`./vendor/bin/luya admin/proxy` --> run or setup proxy urls and secret token  
+`./vendor/bin/luya admin/proxy/clear` --> clear and reset local stored proxy configuration
 
-Get more commands and infos about der {{luya\admin\commands\ProxyController}}.
+In case an error occurs when executing the `admin\proxy` command, executing the `admin/proxy/clear` command first might help (you will have to enter the url, identifier and token after resetting the configuration with the `clear` command).
+
+For details and more commands, see {{luya\admin\commands\ProxyController}}.
 
 ## Deploy prep env
 
