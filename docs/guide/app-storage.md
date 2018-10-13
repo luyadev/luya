@@ -12,7 +12,9 @@ This is the default configuration your config:
 return [
     // ...
     'components' => [
-        'class' => 'luya\admin\storage\LocalFileSystem',
+        'storage' => [
+            'class' => 'luya\admin\storage\LocalFileSystem',
+        ],
     ]
 ]
 ```
@@ -25,9 +27,11 @@ Here is an example file configuration if you need to have the option to upload i
 return [
     // ...
     'components' => [
-        'class' => 'luya\admin\storage\LocalFileSystem',
-        'whitelistExtensions' => ['csv', 'svg'],
-        'whitelistMimeTypes' => ['text/plain'], // as this is the mime type for csv files
+        'storage' => [
+            'class' => 'luya\admin\storage\LocalFileSystem',
+            'whitelistExtensions' => ['csv', 'svg'],
+            'whitelistMimeTypes' => ['text/plain'], // as this is the mime type for csv files
+         ]
     ]
 ]
 ```
