@@ -8,6 +8,10 @@ use luya\web\Request;
 use luyatests\data\classes\UnitMenu;
 use luya\web\Composition;
 
+class UrlStubController extends \luya\web\Controller
+{
+}
+
 /**
  * @author nadar
  */
@@ -212,10 +216,26 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $urlManager = new UrlManager();
         $menu = $urlManager->getMenu();
         $this->assertNotFalse($menu);
-        
+
+        Yii::$app->controller = new UrlStubController('stub', Yii::$app->getModule('unitmodule'));
+
         $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3);
        
         $this->assertSame('this-is-a-cms-link/controller/action', $r);
+    }
+
+    public function testCreateMenuItemUrlToOtherModule()
+    {
+        Yii::$app->set('menu', ['class' => UnitMenu::class]);
+        $urlManager = new UrlManager();
+        $menu = $urlManager->getMenu();
+        $this->assertNotFalse($menu);
+
+        Yii::$app->controller = new UrlStubController('stub', Yii::$app->getModule('unitmodule'));
+
+        $r = $urlManager->createMenuItemUrl(['othermodule/controller/action'], 3);
+
+        $this->assertContains('/othermodule/controller/action', $r);
     }
     
     public function testCreateMenuItemUrlWithHomeItem()
@@ -236,10 +256,26 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $urlManager = new UrlManager();
         $menu = $urlManager->getMenu();
         $this->assertNotFalse($menu);
-    
+
+        Yii::$app->controller = new UrlStubController('stub', Yii::$app->getModule('unitmodule'));
+
         $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 2);
          
         $this->assertSame('this-is-a-module-type-page/controller/action', $r);
+    }
+
+    public function testCreateMenuItemUrlRedirectType2ToOtherModule()
+    {
+        Yii::$app->set('menu', ['class' => UnitMenu::class]);
+        $urlManager = new UrlManager();
+        $menu = $urlManager->getMenu();
+        $this->assertNotFalse($menu);
+
+        Yii::$app->controller = new UrlStubController('stub', Yii::$app->getModule('unitmodule'));
+
+        $r = $urlManager->createMenuItemUrl(['othermodule/controller/action'], 2);
+
+        $this->assertContains('/othermodule/controller/action', $r);
     }
     
     public function testCreateMenuItemUrlWithException()
