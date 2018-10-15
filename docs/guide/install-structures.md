@@ -213,46 +213,46 @@ use luya\web\Application;
  */
 class Bootstrap implements BootstrapInterface
 {
-	public function bootstrap($app)
-	{
-		Yii::$container->set('luya\components\Mail', [
-			'from' => '***',
-			'fromName' => '**',
-			'isSMTP' => true,
-			'host' => '***',
-			'username' => '***',
-			'password' => '***',
-			'port' => 587,
-			'smtpSecure' => 'tls',
-			'smtpAuth' => true,
-		]);
-		
-		if (YII_ENV_PROD) {
-		    
-		    /**
-		     * As the error handler is already registered before the bootstraping sequence, we can not configure properties via 
-		     * DI container and have to override the application component properties.
-		     */
-		    if ($app instanceof Application) {
-		        $app->set('errorHandler', [
-		            'class' => 'luya\web\ErrorHandler',
-		            'api' => 'https://copmany/luya-master-admin/errorapi',
-		            'transferException' => true,
-		        ]);
-		    } else {
-		        $app->set('errorHandler', [
-		            'class' => 'luya\console\ErrorHandler',
-		            'api' => 'https://copmany/luya-master-admin/errorapi',
-		            'transferException' => true,
-		        ]);
-		    }
-		    
-		    // as the error handler is already registered on preInit() stage, we have to
-		    // unregister the existing handler, and re-register the handler with new settings from above.
-		    $app->errorHandler->unregister();
-		    $app->errorHandler->register();
-		}
-	}
+    public function bootstrap($app)
+    {
+        Yii::$container->set('luya\components\Mail', [
+            'from' => '***',
+            'fromName' => '**',
+            'isSMTP' => true,
+            'host' => '***',
+            'username' => '***',
+            'password' => '***',
+            'port' => 587,
+            'smtpSecure' => 'tls',
+            'smtpAuth' => true,
+        ]);
+        
+        if (YII_ENV_PROD) {
+            
+            /**
+             * As the error handler is already registered before the bootstraping sequence, we can not configure properties via 
+             * DI container and have to override the application component properties.
+             */
+            if ($app instanceof Application) {
+                $app->set('errorHandler', [
+                    'class' => 'luya\web\ErrorHandler',
+                    'api' => 'https://copmany/luya-master-admin/errorapi',
+                    'transferException' => true,
+                ]);
+            } else {
+                $app->set('errorHandler', [
+                    'class' => 'luya\console\ErrorHandler',
+                    'api' => 'https://copmany/luya-master-admin/errorapi',
+                    'transferException' => true,
+                ]);
+            }
+            
+            // as the error handler is already registered on preInit() stage, we have to
+            // unregister the existing handler, and re-register the handler with new settings from above.
+            $app->errorHandler->unregister();
+            $app->errorHandler->register();
+        }
+    }
 }
 ```
 
