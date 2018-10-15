@@ -34,6 +34,10 @@ This is how a standard LUYA kickstarter application hierarchy should look and wh
 This is how a default config file (e.g. `configs/env-local.php` or `configs/env-prod.php`) would look like:
 
 ```php
+
+define('YII_DEBUG', true);
+define('YII_ENV', 'prep');
+
 return [
     
     /*
@@ -142,6 +146,159 @@ return [
     ],
 ];
 ```
+
+## Production config
+
+In production we try to keep the configs as small as possible, there fore an example.
+
+> Notice that YII_DEBUG and YII_ENV is removed, as this by default the production ready setting, this allows us to keep the config small and clean.
+
+```php
+
+return [
+    'id' => 'myproject',
+    'siteTitle' => 'My Project',
+    'defaultRoute' => 'cms',
+    'basePath' => dirname(__DIR__),
+    'modules' => [
+        'admin' => [
+            'class' => 'luya\admin\Module',
+            'secureLogin' => true,
+            'interfaceLanguage' => 'en',
+        ],
+        'cms' => [
+            'class' => 'luya\cms\frontend\Module',
+        ],
+        'cmsadmin' => 'luya\cms\admin\Module',
+    ],
+    'components' => [
+        'mail' => [
+            'host' => null,
+            'username' => null,
+            'password' => null,
+            'from' => null,
+            'fromName' => null,
+        ],
+        'errorHandler' => [
+            'transferException' => true,
+        ],
+        'composition' => [
+            'hidden' => true, 
+            'default' => ['langShortCode' => 'en'],
+        ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache', // use: yii\caching\FileCache
+        ],
+    ],
+    'bootstrap' => [
+        'cms',
+    ],
+];
+```
+
+## Create company wide config
+
+Its very common that you like to share configuration values over different projects, therefore we encourage you to create your own LUYA DI repo, create a private repository on your VCS Platform (example Github) add a Bootstrap file like:
+
+```php
+<?php
+namespace mycompanyvendor\luya\di;
+
+use Yii;
+use yii\base\BootstrapInterface;
+use luya\web\Application;
+
+/**
+ *
+ */
+class Bootstrap implements BootstrapInterface
+{
+	public function bootstrap($app)
+	{
+		Yii::$container->set('luya\components\Mail', [
+			'from' => '***',
+			'fromName' => '**',
+			'isSMTP' => true,
+			'host' => '***',
+			'username' => '***',
+			'password' => '***',
+			'port' => 587,
+			'smtpSecure' => 'tls',
+			'smtpAuth' => true,
+		]);
+		
+		if (YII_ENV_PROD) {
+		    
+		    /**
+		     * As the error handler is already registered before the bootstraping sequence, we can not configure properties via 
+		     * DI container and have to override the application component properties.
+		     */
+		    if ($app instanceof Application) {
+		        $app->set('errorHandler', [
+		            'class' => 'luya\web\ErrorHandler',
+		            'api' => 'https://copmany/luya-master-admin/errorapi',
+		            'transferException' => true,
+		        ]);
+		    } else {
+		        $app->set('errorHandler', [
+		            'class' => 'luya\console\ErrorHandler',
+		            'api' => 'https://copmany/luya-master-admin/errorapi',
+		            'transferException' => true,
+		        ]);
+		    }
+		    
+		    // as the error handler is already registered on preInit() stage, we have to
+		    // unregister the existing handler, and re-register the handler with new settings from above.
+		    $app->errorHandler->unregister();
+		    $app->errorHandler->register();
+		}
+	}
+}
+```
+
+Create a composer.json
+
+```json
+{
+    "name": "mycompanyvendor/luya-di",
+    "description": "LUYA DI",
+    "type" : "luya-extension",
+    "autoload" : {
+        "psr-4" : {
+            "mycompanyvendor\\luya\\di\\" : "src/"
+        }
+    },
+    "require-dev" : {
+        "luyadev/luya-core" : "~1.0.0"
+    },
+    "extra" : {
+        "luya" : {
+            "bootstrap": [
+                "mycompanyvendor\\luya\\di\\Bootstrap"
+            ]
+        },
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
+```
+
+Now you can include the private LUYA DI package into your projects:
+
+```
+"require" : {
+    "mycompanyvendor/luya-di" : "~1.0.0",
+},
+"repositories": [
+    {
+        "type": "vcs",
+        "url":  "https://zephirbot:__TOKEN__@github.com/mycompanyvendor/luya-di.git"
+    }
+]
+```
+
+So now there is no need to configure `errorHandler` or `mail` component, as its done by default whenever the application is running (due to luya bootstrap file).
 
 ## Changing the root directory
 
