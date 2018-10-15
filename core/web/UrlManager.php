@@ -346,9 +346,9 @@ class UrlManager extends \yii\web\UrlManager
     private function urlReplaceModule($url, $navItemId, Composition $composition)
     {
         $route = $composition->removeFrom($this->removeBaseUrl($url));
-        $module = $this->findModuleInRoute($route);
+        $moduleName = $this->findModuleInRoute($route);
     
-        if ($module === false || $this->menu === false) {
+        if ($moduleName === false || $this->menu === false) {
             return $url;
         }
     
@@ -362,10 +362,15 @@ class UrlManager extends \yii\web\UrlManager
         // another module which should not be modificated.
         // 2. If the current page (nav) context is the homepage, we have to keep the original link as it wont work because the homepage
         // does not have a route prefix.
-        if (($item->type == 2 && $module !== $item->moduleName) || $item->isHome) {
+        if (($item->type == 2 && $moduleName !== $item->moduleName) || $item->isHome) {
             return $url;
         }
-    
-        return preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
+
+        // if current controller context has an other module as the requested url, its an outgoing link to another module which should not be modificated.
+        if ($moduleName !== Yii::$app->controller->module->id) {
+            return $url;
+        }
+
+        return preg_replace("/$moduleName/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
     }
 }
