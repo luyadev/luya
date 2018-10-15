@@ -29,20 +29,20 @@ return [
     'components' => [
         'storage' => [
             'class' => 'luya\admin\storage\LocalFileSystem',
-            'whitelistExtensions' => ['csv', 'svg'],
+            'whitelistExtensions' => ['csv', 'svg'],
             'whitelistMimeTypes' => ['text/plain'], // as this is the mime type for csv files
          ]
     ]
 ]
 ```
 
-## Upload Files
+## Upload Files
 
 TBD
 
 Take a look at {{luya\admin\storage\BaseFileSystemStorage}}.
 
-## Upload Images
+## Upload Images
 
 TBD
 
