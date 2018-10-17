@@ -202,7 +202,7 @@ Field name examples (for table *admin_user*):
 + password_salt
 + group_id
 
-### (S)CSS
+### Resources (SCSS, JS)
 
 **Folder structure**
 
@@ -256,7 +256,7 @@ HTML:
 
 > You can see that all classes for the `crud` component are prefixed with `crud-`. That way we always know what we can find in which SCSS file. In the HTML you can see that there is a standalone component `table`, wrapped by the class `crud-table`. This results in an extra scss component `_table.scss`.
 
-### Javascript
+**Javascript**
 
 https://github.com/airbnb/javascript
 
