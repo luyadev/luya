@@ -91,3 +91,37 @@ In order to define the url rules from the urlManager config scope, you can just 
 > When composition is enabled, it will take the correct route for the current language and prefix the pattern if enable in composition config.
 
 To verify which composition language is used you can dump `Yii::$app->composition->language`. The {{luya\web\Composition}} component is taking care of LUYA multi language websites and is registered by default for all LUYA projects.
+
+## Application Controller Routes
+
+When the cms is enabled it will take over all urls which are not covered by url rules, otherwise the cms wont have the ability to generate pages with slugs and nested pages. When working with "classic" Yii Framework controller an url rule is required to get access this url. Lets assume we have a controller which returns data for an async request, we would like to access the url in order to make an ajax call in the layout. Create the controller:
+
+```php
+<?php
+
+namespace app\controllers;
+
+class AjaxController extends \luya\web\Controller
+{
+    public function actionData()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return ['foo' => 'bar'];
+    }
+}
+```
+
+In order to get a route from the url manager which can be parsed we need to set an url rule in the config of the components section:
+
+```php
+// ... 
+'urlManager' => [
+    'rules' => ['ajax-data' => 'ajax/data']
+]
+```
+
+Now the you can create the url with {{luya\helpers\Url}} helper as the rule will take predence over the CMS {{luya\cms\frontend\components\CatchAllUrlRule}}.
+
+```php
+$url = \luya\helpers\Url::toRoute(['/ajax/data']);
+```
