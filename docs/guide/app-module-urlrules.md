@@ -94,7 +94,9 @@ To verify which composition language is used you can dump `Yii::$app->compositio
 
 ## Application Controller Routes
 
-When the cms is enabled it will take over all urls which are not covered by url rules, otherwise the cms wont have the ability to generate pages with slugs and nested pages. When working with "classic" Yii Framework controller an url rule is required to get access this url. Lets assume we have a controller which returns data for an async request, we would like to access the url in order to make an ajax call in the layout. Create the controller:
+When the CMS module is enabled it will take over all URLs who are not covered by URL rules in the URL manager, otherwise the CMS won't have the ability to generate pages with slugs and nested subpages. When working with "default" Yii Framework controllers an URL rule is required to get accessable web URL. Let's assume we have a controller which returns data for an async request, we would like to access the url in order to make an ajax call somewhere in the layout.
+
+Create the controller, change response format to json and return an array:
 
 ```php
 <?php
@@ -111,16 +113,18 @@ class AjaxController extends \luya\web\Controller
 }
 ```
 
-In order to get a route from the url manager which can be parsed we need to set an url rule in the config of the components section:
+In order to get an URL which is accessable, we need to set an URL rule in the config of the components section:
 
 ```php
 // ... 
 'urlManager' => [
-    'rules' => ['ajax-data' => 'ajax/data']
+    'rules' => [
+        'ajax-data' => 'ajax/data',
+    ]
 ]
 ```
 
-Now the you can create the url with {{luya\helpers\Url}} helper as the rule will take predence over the CMS {{luya\cms\frontend\components\CatchAllUrlRule}}.
+Now the url creation can be done with the {{luya\helpers\Url}} helper, as the rule will take precedence over the CMS {{luya\cms\frontend\components\CatchAllUrlRule}}:
 
 ```php
 $url = \luya\helpers\Url::toRoute(['/ajax/data']);
