@@ -29,4 +29,11 @@ class ControllerTest extends \luyatests\LuyaWebTestCase
         $view2 = $this->controller->renderLayout('view2');
         $this->assertEquals('view2', $view2);
     }
+
+    public function testViewLayoutRenderWithAliasPath()
+    {
+        $view3 = $this->controller->renderLayout('@viewmodule/views/stub/view2');
+
+        $this->assertSame('view2', $view3);
+    }
 }
