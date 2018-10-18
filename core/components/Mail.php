@@ -210,10 +210,8 @@ class Mail extends Component
     {
         $message = $this->wrapLayout($body);
         $this->getMailer()->Body = $message;
-        if (empty($this->altBody)) {
-            $this->altBody = $this->convertMessageToAltBody($message);
-        }
-        $this->getMailer()->AltBody = $this->altBody;
+        $alt = empty($this->altBody) ? $this->convertMessageToAltBody($message) : $this->altBody;
+        $this->getMailer()->AltBody = $alt;
         return $this;
     }
 
