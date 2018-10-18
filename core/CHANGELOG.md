@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.13 (in progress)
 
++ [#1859](https://github.com/luyadev/luya/issues/1859) Fixed issue where alt body is not clean up when sending multiple messages in the same mail object.
 + [#1855](https://github.com/luyadev/luya/issues/1855) If create a url to an other module, don't replace the url with current module context. 
 
 ## 1.0.12 (8. October 2018)
