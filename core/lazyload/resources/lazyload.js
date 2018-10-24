@@ -109,7 +109,8 @@
             var imageWidth = $(this).attr('data-width'),
                 imageHeight = $(this).attr('data-height'),
                 imageAspectRatio = settings.defaultAspectRatio,
-                imageAsBackground = $(this).attr('data-as-background');
+                imageAsBackground = $(this).attr('data-as-background'),
+                placeholder = $(this).prev('.lazy-image-placeholder').length > 0 ? $(this).prev('.lazy-image-placeholder') : false;
 
             if (imageWidth && imageHeight) {
                 imageAspectRatio = imageHeight / imageWidth;
@@ -123,22 +124,25 @@
                 aspectRatio: imageAspectRatio,
                 asBackground: imageAsBackground,
                 html: $(this)[0].outerHTML,
+                placeholder: placeholder,
                 sources: {
                     default: $(this).attr('data-src')
                 }
             });
 
-            var $placeholder = $('<div/>', {
-                class: 'lazyload-placeholder ' + $(this).attr('class'),
-                id: settings.imageIdentifierPrefix + index,
-            }).css({
-                position: 'relative'
-            }).append($('<div/>').css({
-                'height': 0,
-                'padding-bottom': imageAspectRatio * 100 + '%'
-            })).append($(settings.loaderHtml));
+            if(!placeholder) {
+                var $placeholder = $('<div/>', {
+                    class: 'lazy-placeholder ' + $(this).attr('class'),
+                    id: settings.imageIdentifierPrefix + index,
+                }).css({
+                    position: 'relative'
+                }).append($('<div/>').css({
+                    'height': 0,
+                    'padding-bottom': imageAspectRatio * 100 + '%'
+                })).append($(settings.loaderHtml));
 
-            $(this).replaceWith($placeholder);
+                $(this).replaceWith($placeholder);
+            }
         });
 
         loadVisibleImages();
