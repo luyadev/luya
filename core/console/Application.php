@@ -39,7 +39,10 @@ class Application extends \yii\console\Application
             'fixture' => 'yii\console\controllers\FixtureController',
             'help' => 'yii\console\controllers\HelpController',
             'message' => 'yii\console\controllers\MessageController',
-            'serve' => 'yii\console\controllers\ServeController',
+            'serve' => [
+                'class' => 'yii\console\controllers\ServeController',
+                'docroot' => '@app/public_html',
+            ],
             // luya default commands
             'migrate' => 'luya\console\commands\MigrateController',
             'module' => 'luya\console\commands\ModuleController',
