@@ -32,6 +32,11 @@ class LazyLoad extends Widget
     public $src;
 
     /**
+     * @var string Path for the placeholder image that will be base64 encoded.
+     */
+    public $placeholderSrc;
+
+    /**
      * @var integer The width of the image, this information should be provided in order to display a placeholder.
      */
     public $width;
@@ -51,8 +56,6 @@ class LazyLoad extends Widget
      */
     public $extraClass;
 
-    public $base64Src = false;
-
     /**
      * @inheritdoc
      */
@@ -70,15 +73,15 @@ class LazyLoad extends Widget
         // register js and css code with keys in order to ensure the registration is done only once
         $this->view->registerJs("$('.lazy-image').lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
 
-        if ($this->base64Src) {
+        if ($this->placeholderSrc) {
             $this->view->registerCss("
-                .lazy-image-wrapper {
+                .lazyimage {
                     display: block;
                     width: 100%;
                     position: relative;
                     overflow: hidden;
                 }
-                .lazy-image {
+                .lazyimage-image {
                     position: absolute;
                     top: 50%;
                     left: 50%;
@@ -96,15 +99,15 @@ class LazyLoad extends Widget
                     -o-object-position: center center;
                     object-position: center center;
                 }
-                .lazy-image-placeholder {
+                .lazyimage-placeholder-image {
                     display: block;
                     width: 100%;
-                    heoght: auto;
+                    height: auto;
                 }
-                .nojs .lazy-image,
-                .nojs .lazy-image-placeholder,
-                .no-js .lazy-image,
-                .no-js .lazy-image-placeholder {
+                .nojs .lazyimage-image,
+                .nojs .lazyimage-placeholder-image,
+                .no-js .lazyimage-image,
+                .no-js .lazyimage-placeholder-image {
                     display: none;
                 }
             ", [], self::CSS_ASSET_KEY);
@@ -118,18 +121,22 @@ class LazyLoad extends Widget
      */
     public function run()
     {
-        $class = 'lazy-image ' . $this->extraClass;
+        $class = 'lazy-image lazyimage ' . $this->extraClass;
 
         if ($this->attributesOnly) {
             return "class=\"{$class}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
         }
 
-        $tag = '';
-        $tag .= $this->base64Src ? '<div class="lazy-image-wrapper">' : '';
-        $tag .= $this->base64Src ? Html::tag('img', '', ['class' => 'lazy-image-placeholder', 'src' => $this->base64Src]) : '';
-        $tag .= Html::tag('img', '', ['class' => $class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
-        $tag .= '<noscript><img class="'.$class.'" src="'.$this->src.'" /></noscript>';
-        $tag .= $this->base64Src ? '</div>' : '';
+        if ($this->placeholderSrc) {
+            $tag = '<div class="' . $class . '">';
+            $tag .= Html::tag('img', '', ['class' => 'lazyimage-image', 'data-src' => $this->src]);
+            $tag .= Html::tag('img', '', ['class' => 'lazyimage-placeholder-image', 'src' => $this->placeholderSrc]);
+            $tag .= '<noscript><img class="lazyimage-image" src="' . $this->src . '" /></noscript>';
+            $tag .= '</div>';
+        } else {
+            $tag = Html::tag('img', '', ['class' => $class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
+            $tag .= '<noscript><img class="'.$class.'" src="'.$this->src.'" /></noscript>';
+        }
 
         return $tag;
     }
