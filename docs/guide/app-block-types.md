@@ -217,3 +217,34 @@ public function injectors()
 ```
 
 Now you are able to access the TagInjector object trough the `$this['tags']` ArrayAccess getter method.
+
+## Custom Types
+
+In order to develop custom directive types you need to create a few things are required:
+
+1. A module which is registered and loaded (the module will provide the registration of the asset files). [[app-admin-module.md]]
+2. An asset file which holds the angular directive code. [[app-admin-module-assets.md]]]
+3. The angular directive itself which is compatible with luya injector API.
+
+An example code for a directive which is compatible with the injector API directive:
+
+```js
+zaa.directive("myInput", function(){
+    return {
+        restrict: "E",
+        scope: {
+            "model": "=",
+            "options": "=",
+            "label": "@label",
+            "i18n": "@i18n",
+            "id": "@fieldid",
+            "placeholder": "@placeholder"
+        },
+        template: function() {
+            return '<div>Here you can add your code where {{$model}} is the value to change for your input.</div>';
+        }
+    }
+});
+```
+
+Now after creating the module with the asset file and the javascript. You can use `my-input` directive (example code above) inside your block config as type.
