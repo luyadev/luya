@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.13 (in progress)
 
++ [#1866](https://github.com/luyadev/luya/pull/1866) Make ./luya serve command work out of the box
 + [#1863](https://github.com/luyadev/luya/issues/1863) Enabled the usage of alias paths when using renderLayout() method.
 + [#1859](https://github.com/luyadev/luya/issues/1859) Fixed issue where alt body is not clean up when sending multiple messages in the same mail object.
 + [#1855](https://github.com/luyadev/luya/issues/1855) If create a url to an other module, don't replace the url with current module context. 
