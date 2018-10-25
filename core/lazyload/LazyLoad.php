@@ -75,13 +75,13 @@ class LazyLoad extends Widget
 
         if ($this->placeholderSrc) {
             $this->view->registerCss("
-                .lazyimage {
+                .lazyimage-wrapper {
                     display: block;
                     width: 100%;
                     position: relative;
                     overflow: hidden;
                 }
-                .lazyimage-image {
+                .lazyimage {
                     position: absolute;
                     top: 50%;
                     left: 50%;
@@ -89,7 +89,7 @@ class LazyLoad extends Widget
                     right: 0;
                     opacity: 0;
                     height: 100%;
-                    width: auto;
+                    width: 100%;
                     -webkit-transition: 1s ease-in-out opacity;
                     transition: 1s ease-in-out opacity;
                     -webkit-transform: translate(-50%,-50%);
@@ -98,21 +98,35 @@ class LazyLoad extends Widget
                     object-fit: cover;
                     -o-object-position: center center;
                     object-position: center center;
+                    z-index: 20;
+                }
+                .lazyimage.loaded {
+                    opacity: 1;
                 }
                 .lazyimage-placeholder-image {
                     display: block;
                     width: 100%;
                     height: auto;
                 }
-                .nojs .lazyimage-image,
+                .nojs .lazyimage,
                 .nojs .lazyimage-placeholder-image,
-                .no-js .lazyimage-image,
+                .no-js .lazyimage,
                 .no-js .lazyimage-placeholder-image {
                     display: none;
                 }
             ", [], self::CSS_ASSET_KEY);
         } else {
-            $this->view->registerCss(".lazy-image { display: none; }", [], self::CSS_ASSET_KEY);
+            $this->view->registerCss("
+                .lazy-image {
+                    display: none;
+                }
+                .lazy-image.loaded {
+                    display: block;
+                }
+                .lazy-placeholder {
+                    background-color: #f2f2f2;
+                }
+            ", [], self::CSS_ASSET_KEY);
         }
     }
 
@@ -121,15 +135,15 @@ class LazyLoad extends Widget
      */
     public function run()
     {
-        $class = 'lazy-image lazyimage ' . $this->extraClass;
+        $class = ($this->placeholderSrc ? 'lazyimage-wrapper' : 'lazy-image') . ' ' . $this->extraClass;
 
-        if ($this->attributesOnly) {
+        if ($this->attributesOnly && !$this->placeholderSrc) {
             return "class=\"{$class}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
         }
 
         if ($this->placeholderSrc) {
             $tag = '<div class="' . $class . '">';
-            $tag .= Html::tag('img', '', ['class' => 'lazyimage-image', 'data-src' => $this->src]);
+            $tag .= Html::tag('img', '', ['class' => 'lazy-image lazyimage', 'data-src' => $this->src]);
             $tag .= Html::tag('img', '', ['class' => 'lazyimage-placeholder-image', 'src' => $this->placeholderSrc]);
             $tag .= '<noscript><img class="lazyimage-image" src="' . $this->src . '" /></noscript>';
             $tag .= '</div>';

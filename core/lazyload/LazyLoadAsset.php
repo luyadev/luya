@@ -21,7 +21,7 @@ class LazyLoadAsset extends Asset
      * @var array An array with all javascript files for this asset located in the source path folder.
      */
     public $js = [
-        'lazyload.js',
+        'lazyload.min.js',
     ];
 
     /**
