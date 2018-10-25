@@ -33,8 +33,15 @@ class LazyLoad extends Widget
 
     /**
      * @var string Path for the placeholder image that will be base64 encoded.
+     * @since 1.0.13
      */
     public $placeholderSrc;
+
+    /**
+     * @var boolean Inline the placeholder source as base64 encoded string
+     * @since 1.0.13
+     */
+    public $placeholderAsBase64 = false;
 
     /**
      * @var integer The width of the image, this information should be provided in order to display a placeholder.
@@ -136,6 +143,10 @@ class LazyLoad extends Widget
     public function run()
     {
         $class = ($this->placeholderSrc ? 'lazyimage-wrapper' : 'lazy-image') . ' ' . $this->extraClass;
+
+        if ($this->placeholderSrc && $this->placeholderAsBase64) {
+            $this->placeholderSrc = 'data:image/jpg;base64,' . base64_encode(file_get_contents($this->placeholderSrc));
+        }
 
         if ($this->attributesOnly && !$this->placeholderSrc) {
             return "class=\"{$class}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";

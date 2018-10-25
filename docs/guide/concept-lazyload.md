@@ -16,7 +16,7 @@ This just displays a grey area instead of the image while loading.
         'width' => 'the-image-width-in-px',
         'height' => 'the-image-height-in-px',
         'extraClass' => 'custom-classes'
-    ]); 
+    ]);
 ?>
 ```
 
@@ -33,7 +33,7 @@ the smaller version should have 10x10, 20x20 or 30x30px.
 Based on what styles you apply to your image (`custom-classes`) this might work or not.
 You can try to update the placeholder-image styles by using its class and your custom class: `.custom-classes .lazyimage-placeholder-image`
 
-> Includes a noscript fallback.  
+> Includes a noscript fallback.
 > Make sure to implement a `nojs` or `no-js` class into you `body` or `html` tag.
 
 ```
@@ -41,7 +41,7 @@ You can try to update the placeholder-image styles by using its class and your c
         'src' =>  $this->publicHtml . '/path/to/image',
         'placeholderSrc' => $this->publicHtml . '/path/to/image_very_small',
         'extraClass' => 'custom-classes'
-    ]); 
+    ]);
 ?>
 ```
 
@@ -50,16 +50,24 @@ You can try to update the placeholder-image styles by using its class and your c
 
 ### Base64 encode
 
-You can encode you tiny preview image in base64 to inline them.
+To enable base64 encoding of your placeholder image, you have to make sure that your placeholderSrc is an absolute URL and then set `placeholderAsBase64` to `true`.
 
-`'placeholderSrc' => 'data:image/jpg;base64,' . base64_encode(file_get_contents('/absolute/path/to/your/image')),`
+```
+<?= LazyLoad::widget([
+        'src' =>  $this->publicHtml . '/path/to/image',
+        'placeholderSrc' => $this->publicHtml . '/path/to/image_very_small',
+        'placeholderAsBase64' => true,
+        'extraClass' => 'custom-classes'
+    ]);
+?>
+```
 
 
 ## As background image
 
 To use the lazyloader with a background image, e.g. on a `<div class="lazy-image"></div>`, you just have to set the `attributesOnly` parameter to `true`.
 
-> Remember to use a noscript tag to show the image if no javascript is present.  
+> Remember to use a noscript tag to show the image if no javascript is present.
 > The plugin doesn't need any width or height information in this mode, make sure to define these
 > yourself.
 
@@ -70,7 +78,7 @@ To use the lazyloader with a background image, e.g. on a `<div class="lazy-image
         'extraClass' => 'custom-classes'
     ]); ?> >
 </div>
-    
+
 <!-- Fallback for no-js -->
 <noscript><div class="custom-classes" style="background-image: url(<?= $extras['image']->source ?>);"></div></noscript>
 ```
