@@ -25,6 +25,7 @@ class LazyLoad extends Widget
     const JS_ASSET_KEY = 'lazyload.js.register';
 
     const CSS_ASSET_KEY = 'lazyload.css.register';
+    const CSS_ASSET_KEY_PLACEHOLDER = 'lazyload.placeholder.css.register';
 
     /**
      * @var string The path to the image you want to lazy load.
@@ -121,7 +122,7 @@ class LazyLoad extends Widget
                 .no-js .lazyimage-placeholder-image {
                     display: none;
                 }
-            ", [], self::CSS_ASSET_KEY);
+            ", [], self::CSS_ASSET_KEY_PLACEHOLDER);
         } else {
             $this->view->registerCss("
                 .lazy-image {
