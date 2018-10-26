@@ -93,9 +93,6 @@
                 // insert it after the image.
                 var $placeholder = $('<div/>', {
                     class: settings.placeholderClass + ' ' + cssClass,
-                }).css({
-                    position: 'relative',
-                    display: 'block'
                 });
 
                 $placeholder.append($('<div/>').css({

@@ -132,6 +132,8 @@ class LazyLoad extends Widget
                 }
                 .lazy-placeholder {
                     background-color: #f2f2f2;
+                    position: relative;
+                    display: block;
                 }
             ", [], self::CSS_ASSET_KEY);
         }
