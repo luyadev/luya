@@ -19,8 +19,8 @@ git clone https://github.com/luyadev/luya-package-skeleton
 cd luya-package-skeleton
 ```
 
-1. Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
-2. Create a composer.json with basic informations about the vendor and package name. Replace username with your github username or vendor name, and package with the package name. Example `nadar/luya-material-blocks`.
+1) Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
+2) Create a composer.json with basic informations about the vendor and package name. Replace username with your github username or vendor name, and package with the package name. Example `nadar/luya-material-blocks`.
 ```json
 {
     "name": "username/package",
@@ -42,7 +42,9 @@ cd luya-package-skeleton
     }
 }
 ```
-3. As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, example `src/HeroBlock.php`.
+
+3) As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, example `src/HeroBlock.php`.
+
 ```php
 <?php
 namespace username\package;
@@ -54,8 +56,9 @@ class HeroBlock extends PhpBlock
     // code for block goes here ...
 }
 ```
-4. In order to test the blocks you can register with Composer https://getcomposer.org/doc/05-repositories.md#path or provide the cms admin the path to the blocks `'cmsadmin' => ['blocks' => 'path/to/blocks/src']]`.
-5. Now you should commit and push the code to github and register the package on packagist: https://packagist.org/packages/submit
+
+4) In order to test the blocks you can register with Composer https://getcomposer.org/doc/05-repositories.md#path or provide the cms admin the path to the blocks `'cmsadmin' => ['blocks' => 'path/to/blocks/src']]`.
+5) Now you should commit and push the code to github and register the package on packagist: https://packagist.org/packages/submit
 
 ## Composer definition informations
 
