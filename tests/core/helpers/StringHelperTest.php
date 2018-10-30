@@ -143,6 +143,10 @@ EOT;
         $this->assertSame('foo <b>1</b> foo', StringHelper::highlightWord('foo 1 foo', '1'));
         $this->assertSame('<b>foo</b> bar <b>foo</b>', StringHelper::highlightWord('foo bar foo', 'foo'));
         $this->assertSame('Не следует, <b>однако</b>, забывать', StringHelper::highlightWord('Не следует, однако, забывать', 'однако'));
+
+        $str = 'Durch unsere kompetenten und motivierten Mitarbeitenden ist eine bedarfsgerechte Betreuung und Pflege stets gewährleistet.
+        Neben verschiedenen Veranstaltungen, die im Blumenrain stattfinden, wird ein wöchentliches Aktivierungsprogramm vor Ort angeboten.';
+        $this->assertContains('<b>bedarf</b>sgerechte', StringHelper::highlightWord($str, 'bedarf'));
     }
 
     public function testCutAndHighlightWord()

@@ -223,7 +223,7 @@ class StringHelper extends BaseStringHelper
      */
     public static function highlightWord($content, $word, $markup = '<b>%s</b>')
     {
-        return preg_replace("/\p{L}*?".preg_quote($word)."\p{L}*/ui", sprintf($markup, $word), strip_tags($content));
+        return str_replace($word, sprintf($markup, $word), strip_tags($content));
     }
 
     /**
