@@ -242,7 +242,8 @@ Component: `_crud.scss`
 
 Classes in component: `.crud`, `.crud-header`, `.crud-title`, `.crud-table`
 
-HTML: 
+HTML:
+
 ```html
 <div class="crud">
  <div class="crud-header">
