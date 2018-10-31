@@ -152,6 +152,9 @@ EOT;
         $this->assertContains('<b>bedarf</b>sgerechte', StringHelper::highlightWord($str, 'bedarf'));
 
         $this->assertContains(' unsere <b>kompetent</b>en und <b>motiviert</b>en', StringHelper::highlightWord($str, ['kompetent', 'motiviert']));
+
+        $this->assertContains(' unsere <b>kompetent</b>en und <b>motiviert</b>en', StringHelper::highlightWord($str, ['Kompetent', 'Motiviert']));
+        $this->assertContains('vor <b>Ort</b> angebot', StringHelper::highlightWord($str, 'ort'));
     }
 
     public function testCutAndHighlightWord()
