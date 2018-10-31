@@ -216,6 +216,8 @@ class StringHelper extends BaseStringHelper
     /**
      * Highlight a word within a content.
      *
+     * Since version 1.0.14 an array of words to highlight is possible.
+     * 
      * @param string $content The content to find the word.
      * @param string $word The word to find within the content.
      * @param string $markup The markup used wrap the word to highlight.
@@ -223,7 +225,12 @@ class StringHelper extends BaseStringHelper
      */
     public static function highlightWord($content, $word, $markup = '<b>%s</b>')
     {
-        return str_replace($word, sprintf($markup, $word), strip_tags($content));
+        $word = (array) $word;
+        $replace = [];
+        foreach ($word as $value) {
+            $replace[] = sprintf($markup, $value);
+        }
+        return str_replace($word, $replace, strip_tags($content));
     }
 
     /**

@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.14 (in progress)
 
++ [#1871](https://github.com/luyadev/luya/issues/1871) String helper highlight supports a list of words provided as array to highlight.
+
 ## 1.0.13 (30. October 2018)
 
 + [#1869](https://github.com/luyadev/luya/issues/1869) Fix bug with word highlight in string helper.

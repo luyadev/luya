@@ -147,6 +147,8 @@ EOT;
         $str = 'Durch unsere kompetenten und motivierten Mitarbeitenden ist eine bedarfsgerechte Betreuung und Pflege stets gewährleistet.
         Neben verschiedenen Veranstaltungen, die im Blumenrain stattfinden, wird ein wöchentliches Aktivierungsprogramm vor Ort angeboten.';
         $this->assertContains('<b>bedarf</b>sgerechte', StringHelper::highlightWord($str, 'bedarf'));
+
+        $this->assertContains(' unsere <b>kompetent</b>en und <b>motiviert</b>en', StringHelper::highlightWord($str, ['kompetent', 'motiviert']));
     }
 
     public function testCutAndHighlightWord()
