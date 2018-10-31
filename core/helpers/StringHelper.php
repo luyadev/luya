@@ -193,29 +193,44 @@ class StringHelper extends BaseStringHelper
      * @param string $word The word which should be in the middle of the string
      * @param integer $length The amount of the chars to cut on the left and right side from the word.
      * @param string $affix The chars which should be used for prefix and suffix when string is cuted.
+     * @param boolean $caseSensitive Whether the search word in the string even when lower/upper case is not correct.
      * @since 1.0.12
      */
-    public static function truncateMiddle($content, $word, $length, $affix = '..')
+    public static function truncateMiddle($content, $word, $length, $affix = '..', $caseSensitive = false)
     {
         $content = strip_tags($content);
         $array = self::mb_str_split($content);
-        $first = mb_strpos($content, $word);
+        $first = mb_strpos($caseSensitive ? $content : mb_strtolower($content), $caseSensitive ? $word : mb_strtolower($word));
+
+        // we could not find any match, therefore use casual truncate method.
+        if ($first === false) {
+            // as the length value in truncate middle stands for to the left and to the right, we multiple this value with 2
+            return self::truncate($content, ($length*2), $affix);
+        }
+
         $last = $first + mb_strlen($word);
 
         // left and right array chars from word
         $left = array_slice($array, 0, $first, true);
         $right = array_slice($array, $last, null, true);
+        $middle = array_splice($array, $first, mb_strlen($word));
 
         // string before
         $before = (count($left) > $length) ? $affix.implode("", array_slice($left, -$length)) : implode("", $left);
         $after = (count($right) > $length) ? implode("", array_slice($right, 0, $length)) . $affix : implode("", $right);
 
-        return $before . $word . $after;
+        return $before . implode("", $middle) . $after;
     }
 
     /**
      * Highlight a word within a content.
      *
+     * Since version 1.0.14 an array of words to highlight is possible.
+     * 
+     * > This function IS NOT case sensitive!
+     * 
+     * 
+     * 
      * @param string $content The content to find the word.
      * @param string $word The word to find within the content.
      * @param string $markup The markup used wrap the word to highlight.
@@ -223,7 +238,24 @@ class StringHelper extends BaseStringHelper
      */
     public static function highlightWord($content, $word, $markup = '<b>%s</b>')
     {
-        return preg_replace("/\p{L}*?".preg_quote($word)."\p{L}*/ui", sprintf($markup, $word), strip_tags($content));
+        $word = (array) $word;
+        $content = strip_tags($content);
+        $latest = null;
+        foreach ($word as $needle) {
+            preg_match_all("/$needle+/i", $content, $matches);
+            if (is_array($matches[0]) && count($matches[0]) >= 1) {
+                foreach ($matches[0] as $match) {
+                    // ensure if a word is found twice we don't replace again.
+                    if ($latest === $match) {
+                        continue;
+                    }
+                    $content = str_replace($match, sprintf($markup, $match), $content);
+                    $latest = $match;
+                }
+            }
+        }
+
+        return $content;
     }
 
     /**

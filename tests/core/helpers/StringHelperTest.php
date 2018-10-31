@@ -135,14 +135,26 @@ EOT;
         $this->assertSame('..uax abc bar', StringHelper::truncateMiddle('barbazquax abc bar', 'abc', 4));
         $this->assertSame('..e quick fox jumped over the la..', StringHelper::truncateMiddle('the quick fox jumped over the lazy dog', 'jumped', 12));
         $this->assertSame('..нный путь влечет за собой процесс внедрения и..', StringHelper::truncateMiddle('Не следует, однако, забывать, что высокое качество позиционных исследований выявляет срочную потребность анализа существующих паттернов поведения. Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: экономическая повестка сегодняшнего дня в значительной степени обусловливает важность первоочередных требований. Равным образом, реализация намеченных плановых заданий обеспечивает актуальность системы массового участия. Следует отметить, что выбранный нами инновационный путь влечет за собой процесс внедрения и модернизации первоочередных требований. Сложно сказать, почему сделанные на базе интернет-аналитики выводы призваны к ответу. Но дальнейшее развитие различных форм деятельности создает необходимость включения в производственный план целого ряда внеочередных мероприятий с учетом комплекса как самодостаточных, так и внешне зависимых концептуальных решений. Как уже неоднократно упомянуто, акционеры крупнейших компаний, которые представляют собой яркий пример континентально-европейского типа политической культуры, будут преданы социально-демократической анафеме. Ясность нашей позиции очевидна: перспективное планирование, в своем классическом представлении, допускает внедрение поставленных обществом задач. Учитывая ключевые сценарии поведения, существующая теория однозначно определяет каждого участника как способного принимать собственные решения касаемо кластеризации усилий. Имеется спорная точка зрения, гласящая примерно следующее: базовые сценарии поведения пользователей, превозмогая сложившуюся непростую экономическую ситуацию, смешаны с неуникальными данными до степени совершенной неузнаваемости, из-за чего возрастает их статус бесполезности. Приятно, граждане, наблюдать, как базовые сценарии поведения пользователей будут призваны к ответу.', 'собой', 20));
+        $this->assertSame('..oo abc ba..', StringHelper::truncateMiddle('foo abc bar', 'ABC', 3));
+        $this->assertSame('..oo ABC ba..', StringHelper::truncateMiddle('foo ABC bar', 'abc', 3));
+        $this->assertSame('foo abc..', StringHelper::truncateMiddle('foo abc bar', 'notfound', 4));
     }
-    
+
     public function testHighlightWord()
     {
         $this->assertSame('foo <b>bar</b> foo', StringHelper::highlightWord('foo bar foo', 'bar'));
         $this->assertSame('foo <b>1</b> foo', StringHelper::highlightWord('foo 1 foo', '1'));
         $this->assertSame('<b>foo</b> bar <b>foo</b>', StringHelper::highlightWord('foo bar foo', 'foo'));
         $this->assertSame('Не следует, <b>однако</b>, забывать', StringHelper::highlightWord('Не следует, однако, забывать', 'однако'));
+
+        $str = 'Durch unsere kompetenten und motivierten Mitarbeitenden ist eine bedarfsgerechte Betreuung und Pflege stets gewährleistet.
+        Neben verschiedenen Veranstaltungen, die im Blumenrain stattfinden, wird ein wöchentliches Aktivierungsprogramm vor Ort angeboten.';
+        $this->assertContains('<b>bedarf</b>sgerechte', StringHelper::highlightWord($str, 'bedarf'));
+
+        $this->assertContains(' unsere <b>kompetent</b>en und <b>motiviert</b>en', StringHelper::highlightWord($str, ['kompetent', 'motiviert']));
+
+        $this->assertContains(' unsere <b>kompetent</b>en und <b>motiviert</b>en', StringHelper::highlightWord($str, ['Kompetent', 'Motiviert']));
+        $this->assertContains('vor <b>Ort</b> angebot', StringHelper::highlightWord($str, 'ort'));
     }
 
     public function testCutAndHighlightWord()
