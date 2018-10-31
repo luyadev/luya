@@ -4,16 +4,16 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.14 (in progress)
 
++ [#1867](https://github.com/luyadev/luya/issues/1867) Rewritten lazyload js and added new placeholderSrc. Updated lazyload docs.
 + [#1870](https://github.com/luyadev/luya/issues/1870) String helper truncate middle use default truncate if no results found and added new option for case sensitive comparing.
 + [#1871](https://github.com/luyadev/luya/issues/1871) String helper highlight supports a list of words provided as array to highlight.
 
 ## 1.0.13 (30. October 2018)
 
-+ [#1869](https://github.com/luyadev/luya/issues/1869) Fix bug with word highlight in string helper.
 + [#1866](https://github.com/luyadev/luya/pull/1866) Make ./luya serve command work out of the box
 + [#1863](https://github.com/luyadev/luya/issues/1863) Enabled the usage of alias paths when using renderLayout() method.
 + [#1859](https://github.com/luyadev/luya/issues/1859) Fixed issue where alt body is not clean up when sending multiple messages in the same mail object.
-+ [#1855](https://github.com/luyadev/luya/issues/1855) If create a url to an other module, don't replace the url with current module context. 
++ [#1855](https://github.com/luyadev/luya/issues/1855) If create a url to an other module, don't replace the url with current module context.
 
 ## 1.0.12 (8. October 2018)
 
