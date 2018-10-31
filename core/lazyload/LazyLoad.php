@@ -34,13 +34,13 @@ class LazyLoad extends Widget
 
     /**
      * @var string Path for the placeholder image that will be base64 encoded.
-     * @since 1.0.13
+     * @since 1.0.14
      */
     public $placeholderSrc;
 
     /**
      * @var boolean Inline the placeholder source as base64 encoded string
-     * @since 1.0.13
+     * @since 1.0.14
      */
     public $placeholderAsBase64 = false;
 
