@@ -16,7 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'vendor/bower-asset/jquery/dist/jquery.js',
-      'core/lazyload/resources/lazyload.js',
+      'core/lazyload/resources/lazyload.min.js',
       'tests/js/*.js'
     ],
 

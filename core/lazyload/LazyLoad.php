@@ -136,6 +136,10 @@ class LazyLoad extends Widget
                     position: relative;
                     display: block;
                 }
+                .nojs .lazy-placeholder,
+                .no-js .lazy-placeholder {
+                    display: none;
+                }
             ", [], self::CSS_ASSET_KEY);
         }
     }
@@ -163,6 +167,7 @@ class LazyLoad extends Widget
             $tag .= '</div>';
         } else {
             $tag = Html::tag('img', '', ['class' => $class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
+            $tag .= '<div class="lazy-placeholder ' . $class .'"><div style="height: 0px; padding-bottom: 75%;"></div><div class="loader"></div></div>';
             $tag .= '<noscript><img class="'.$class.'" src="'.$this->src.'" /></noscript>';
         }
 

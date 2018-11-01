@@ -1,7 +1,7 @@
-describe("Test LazyLoading: Placheolder", function() {
+describe("Test LazyLoading: Placeholder", function() {
     var basicLazyLoadImageFixture = '<img class="lazy-image" data-src="https://source.unsplash.com/random/500x250" data-width="500" data-height="250">';
 
-    it("should have a placeholder", function () {
+    it("should exist", function () {
         setFixtures(basicLazyLoadImageFixture);
 
         // Init lazyload which should insert placeholder
@@ -54,7 +54,7 @@ describe("Test LazyLoading: Image loading", function() {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
     });
 
-    it("should have class loaded", function () {
+    it("should have class `loaded`", function () {
         // Check if this.imageId has class loaded
         expect($(imageId).hasClass('loaded')).toBe(true);
     });
