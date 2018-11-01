@@ -54,8 +54,9 @@
                 aspectRatio = imageHeight / imageWidth;
             }
 
+            var divPlaceholderExists = false;
             if($(this).next('.' + settings.placeholderClass).length >= 1) {
-                this.divPlaceholderExists = true;
+                divPlaceholderExists = true;
             }
 
             images.push({
@@ -63,7 +64,7 @@
                 source: $(this).attr('data-src'),
                 boundaries: {},
                 hasPlaceholderImage: $(this).hasClass('lazyimage'),
-                divPlaceholderExists: false,
+                divPlaceholderExists: divPlaceholderExists,
                 width: imageWidth,
                 height: imageHeight,
                 aspectRatio: aspectRatio,
