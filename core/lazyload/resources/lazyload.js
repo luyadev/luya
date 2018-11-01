@@ -10,7 +10,7 @@
         // General settings
         threshold: 200,
         imageIdentifierPrefix: 'lazy-image-',
-        imageSelector: '.lazy-image',
+        imageSelector: '.lazy-image:not(.lazy-placeholder)',
         placeholderClass: 'lazy-placeholder',
 
         // Settings for non image placeholder
@@ -54,11 +54,16 @@
                 aspectRatio = imageHeight / imageWidth;
             }
 
+            if($(this).next('.' + settings.placeholderClass).length >= 1) {
+                this.divPlaceholderExists = true;
+            }
+
             images.push({
                 id: index,
                 source: $(this).attr('data-src'),
                 boundaries: {},
                 hasPlaceholderImage: $(this).hasClass('lazyimage'),
+                divPlaceholderExists: false,
                 width: imageWidth,
                 height: imageHeight,
                 aspectRatio: aspectRatio,
@@ -79,7 +84,7 @@
      */
     var insertPlaceholder = function() {
         $(images).each(function () {
-            if(!this.hasPlaceholderImage && !this.asBackground) {
+            if(!this.hasPlaceholderImage && !this.asBackground && !this.divPlaceholderExists) {
                 // Get the image by id
                 var $image = $('.' + settings.imageIdentifierPrefix + this.id);
                 var cssClass = $image.attr('class');
@@ -103,6 +108,10 @@
                 $placeholder.append($(settings.loaderHtml));
 
                 $placeholder.insertAfter($image);
+
+                if(images[this.id]) {
+                    images[this.id].divPlaceholderExists = true;
+                }
             }
         });
     };
