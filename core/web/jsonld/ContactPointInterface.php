@@ -15,7 +15,7 @@ interface ContactPointInterface extends ThingInterface
      * Setter method for email.
      *
      * @param string $email
-     * @return \luya\web\jsonld\ContactPoint
+     * @return static
      */
     public function setEmail($email);
     
@@ -30,7 +30,7 @@ interface ContactPointInterface extends ThingInterface
      * Setter method for telephone.
      *
      * @param string $telephone
-     * @return \luya\web\jsonld\ContactPoint
+     * @return static
      */
     public function setTelephone($telephone);
     

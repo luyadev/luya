@@ -15,6 +15,7 @@ interface ImageObjectInterface extends MediaObjectInterface
      * Setter methdo for Caption.
      *
      * @param string $caption
+     * @return static
      */
     public function setCaption($caption);
     
@@ -27,6 +28,7 @@ interface ImageObjectInterface extends MediaObjectInterface
      * Setter method for exif data via PropertyValue.
      *
      * @param PropertyValue $propertyValue
+     * @return static
      */
     public function setExifData(PropertyValue $propertyValue);
     
@@ -39,6 +41,7 @@ interface ImageObjectInterface extends MediaObjectInterface
      * Setter method for representative of page value
      *
      * @param string $representativeOfPage
+     * @return static
      */
     public function setRepresentativeOfPage($representativeOfPage);
     
@@ -51,6 +54,7 @@ interface ImageObjectInterface extends MediaObjectInterface
      * Setter method for Thumbnail.
      *
      * @param ImageObject $imageObject
+     * @return static
      */
     public function setThumbnail(ImageObject $imageObject);
     

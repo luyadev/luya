@@ -17,6 +17,8 @@ trait MediaObjectTrait
     
     /**
      * @inheritdoc
+     * 
+     * @return static
      */
     public function setContentUrl(UrlValue $url)
     {
@@ -36,6 +38,8 @@ trait MediaObjectTrait
     
     /**
      * @inheritdoc
+     * 
+     * @return static
      */
     public function setEmbedUrl(UrlValue $url)
     {
@@ -54,6 +58,8 @@ trait MediaObjectTrait
     
     /**
      * @inheritdoc
+     * 
+     * @return static
      */
     public function setUploadDate(DateValue $date)
     {

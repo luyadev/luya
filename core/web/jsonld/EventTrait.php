@@ -17,7 +17,7 @@ trait EventTrait
     private $_about;
 
     /**
-     * @return Thing
+     * @return static
      */
     public function getAbout()
     {
@@ -29,9 +29,9 @@ trait EventTrait
      * Inverse property: subjectOf.
      *
      * @param Thing $about
-     * @return EventTrait
+     * @return static
      */
-    public function setAbout($about)
+    public function setAbout(Thing $about)
     {
         $this->_about = $about;
         return $this;
@@ -52,9 +52,9 @@ trait EventTrait
      * Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.
      *
      * @param Person $actor
-     * @return EventTrait
+     * @return static
      */
-    public function setActor($actor)
+    public function setActor(Person $actor)
     {
         $this->_actor = $actor;
         return $this;
@@ -74,7 +74,7 @@ trait EventTrait
      * A person or organization attending the event. Supersedes attendees.
      *
      * @param Organization|Person $attendee
-     * @return EventTrait
+     * @return static
      */
     public function setAttendee($attendee)
     {
@@ -98,7 +98,7 @@ trait EventTrait
      * The person or organization who wrote a composition, or who is the composer of a work performed at some event.
      *
      * @param Organization|Person $composer
-     * @return EventTrait
+     * @return static
      */
     public function setComposer($composer)
     {
@@ -122,7 +122,7 @@ trait EventTrait
      * A secondary contributor to the CreativeWork or Event.
      *
      * @param Organization|Person $contributor
-     * @return EventTrait
+     * @return static
      */
     public function setContributor($contributor)
     {
@@ -148,9 +148,9 @@ trait EventTrait
      * Supersedes directors.
      *
      * @param Person $director
-     * @return EventTrait
+     * @return static
      */
-    public function setDirector($director)
+    public function setDirector(Person $director)
     {
         $this->_director = $director;
         return $this;
@@ -170,11 +170,11 @@ trait EventTrait
      * The time admission will commence.
      *
      * @param DateTime $doorTime
-     * @return EventTrait
+     * @return static
      */
-    public function setDoorTime($doorTime)
+    public function setDoorTime(DateTimeValue $doorTime)
     {
-        $this->_doorTime = $doorTime;
+        $this->_doorTime = $doorTime->getValue();
         return $this;
     }
 
@@ -192,11 +192,11 @@ trait EventTrait
      * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.
      *
      * @param Duration $duration
-     * @return EventTrait
+     * @return static
      */
-    public function setDuration($duration)
+    public function setDuration(DurationValue $duration)
     {
-        $this->_duration = $duration;
+        $this->_duration = $duration->getValue();
         return $this;
     }
 
@@ -214,11 +214,11 @@ trait EventTrait
      * The end date and time of the item (in ISO 8601 date format).
      *
      * @param Date|DateTime $endDate
-     * @return EventTrait
+     * @return static
      */
-    public function setEndDate($endDate)
+    public function setEndDate(DateTimeValue $endDate)
     {
-        $this->_endDate = $endDate;
+        $this->_endDate = $endDate->getValue();
         return $this;
     }
 
@@ -236,7 +236,7 @@ trait EventTrait
      * A person or organization that supports (sponsors) something through some kind of financial contribution.
      *
      * @param Organization|Person $funder
-     * @return EventTrait
+     * @return static
      */
     public function setFunder($funder)
     {
@@ -262,11 +262,11 @@ trait EventTrait
      * Supersedes language.
      *
      * @param Language|Text $inLanguage
-     * @return EventTrait
+     * @return static
      */
-    public function setInLanguage($inLanguage)
+    public function setInLanguage(LanguageValue $inLanguage)
     {
-        $this->_inLanguage = $inLanguage;
+        $this->_inLanguage = $inLanguage->getValue();
         return $this;
     }
 
@@ -284,7 +284,7 @@ trait EventTrait
      * A flag to signal that the item, event, or place is accessible for free. Supersedes free.
      *
      * @param bool $isAccessibleForFree
-     * @return EventTrait
+     * @return static
      */
     public function setIsAccessibleForFree($isAccessibleForFree)
     {
@@ -307,7 +307,7 @@ trait EventTrait
      * or where an action takes place.
      *
      * @param Place|PostalAddress|string $location
-     * @return EventTrait
+     * @return static
      */
     public function setLocation($location)
     {
@@ -349,7 +349,7 @@ trait EventTrait
      * An organizer of an Event.
      *
      * @param Organization|Person $organizer
-     * @return EventTrait
+     * @return static
      */
     public function setOrganizer($organizer)
     {
@@ -374,7 +374,7 @@ trait EventTrait
      * Supersedes performers.
      *
      * @param Organization|Person $performer
-     * @return EventTrait
+     * @return static
      */
     public function setPerformer($performer)
     {
@@ -402,11 +402,11 @@ trait EventTrait
      * this field may be repeated.
      *
      * @param DateValue $previousStartDate
-     * @return EventTrait
+     * @return static
      */
     public function setPreviousStartDate(DateValue $previousStartDate)
     {
-        $this->_previousStartDate = $previousStartDate;
+        $this->_previousStartDate = $previousStartDate->getValue();
         return $this;
     }
 
@@ -425,7 +425,7 @@ trait EventTrait
      * Inverse property: recordedAt
      *
      * @param CreativeWork $recordedIn
-     * @return EventTrait
+     * @return static
      */
     public function setRecordedIn(CreativeWork $recordedIn)
     {
@@ -447,7 +447,7 @@ trait EventTrait
      * The number of attendee places for an event that remain unallocated.
      *
      * @param int $remainingAttendeeCapacity
-     * @return EventTrait
+     * @return static
      */
     public function setRemainingAttendeeCapacity($remainingAttendeeCapacity)
     {
@@ -470,7 +470,7 @@ trait EventTrait
      * e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
      *
      * @param Organization|Person $sponsor
-     * @return EventTrait
+     * @return static
      */
     public function setSponsor($sponsor)
     {
@@ -494,11 +494,11 @@ trait EventTrait
      * The start date and time of the item (in ISO 8601 date format).
      *
      * @param DateTimeValue $startDate
-     * @return EventTrait
+     * @return static
      */
     public function setStartDate(DateTimeValue $startDate)
     {
-        $this->_startDate = $startDate;
+        $this->_startDate = $startDate->getValue();
         return $this;
     }
 
@@ -541,7 +541,7 @@ trait EventTrait
      * Inverse property: subEvent.
      *
      * @param Event $superEvent
-     * @return EventTrait
+     * @return static
      */
     public function setSuperEvent(Event $superEvent)
     {
@@ -564,7 +564,7 @@ trait EventTrait
      * and technical requirements of a target market, or that translates during some event.
      *
      * @param Organization|Person $translator
-     * @return EventTrait
+     * @return static
      */
     public function setTranslator($translator)
     {
@@ -588,7 +588,7 @@ trait EventTrait
      * The typical expected age range, e.g. '7-9', '11-'.
      *
      * @param string $typicalAgeRange
-     * @return EventTrait
+     * @return static
      */
     public function setTypicalAgeRange($typicalAgeRange)
     {
@@ -612,7 +612,7 @@ trait EventTrait
      * or a workPresented (a Movie at a ScreeningEvent).
      *
      * @param CreativeWork $workFeatured
-     * @return EventTrait
+     * @return static
      */
     public function setWorkFeatured(CreativeWork $workFeatured)
     {
@@ -634,7 +634,7 @@ trait EventTrait
      * A work performed in some event, for example a play performed in a TheaterEvent.
      *
      * @param CreativeWork $workPerformed
-     * @return EventTrait
+     * @return static
      */
     public function setWorkPerformed(CreativeWork $workPerformed)
     {

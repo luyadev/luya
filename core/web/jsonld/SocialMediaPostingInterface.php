@@ -18,7 +18,7 @@ interface SocialMediaPostingInterface extends ArticleInterface
 
     /**
      * @param CreativeWork $sharedContent
-     * @return SocialMediaPosting|SocialMediaPostingTrait
+     * @return static
      */
     public function setSharedContent(CreativeWork $sharedContent);
 }

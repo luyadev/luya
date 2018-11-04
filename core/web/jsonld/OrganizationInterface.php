@@ -17,7 +17,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $actionableFeedbackPolicy
-     * @return Organization
+     * @return static
      */
     public function setActionableFeedbackPolicy($actionableFeedbackPolicy);
 
@@ -28,7 +28,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $address
-     * @return Organization
+     * @return static
      */
     public function setAddress($address);
 
@@ -39,7 +39,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $aggregateRating
-     * @return Organization
+     * @return static
      */
     public function setAggregateRating($aggregateRating);
 
@@ -50,7 +50,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $alumni
-     * @return Organization
+     * @return static
      */
     public function setAlumni($alumni);
 
@@ -61,7 +61,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $areaServed
-     * @return Organization
+     * @return static
      */
     public function setAreaServed($areaServed);
 
@@ -72,7 +72,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $award
-     * @return Organization
+     * @return static
      */
     public function setAward($award);
 
@@ -83,7 +83,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $brand
-     * @return Organization
+     * @return static
      */
     public function setBrand($brand);
 
@@ -94,7 +94,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $contactPoint
-     * @return Organization
+     * @return static
      */
     public function setContactPoint($contactPoint);
 
@@ -105,7 +105,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $correctionsPolicy
-     * @return Organization
+     * @return static
      */
     public function setCorrectionsPolicy($correctionsPolicy);
 
@@ -116,7 +116,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $department
-     * @return Organization
+     * @return static
      */
     public function setDepartment($department);
 
@@ -127,7 +127,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $dissolutionDate
-     * @return Organization
+     * @return static
      */
     public function setDissolutionDate($dissolutionDate);
 
@@ -138,7 +138,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $diversityPolicy
-     * @return Organization
+     * @return static
      */
     public function setDiversityPolicy($diversityPolicy);
 
@@ -149,7 +149,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $duns
-     * @return Organization
+     * @return static
      */
     public function setDuns($duns);
 
@@ -160,7 +160,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $email
-     * @return Organization
+     * @return static
      */
     public function setEmail($email);
 
@@ -171,7 +171,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $employee
-     * @return Organization
+     * @return static
      */
     public function setEmployee($employee);
 
@@ -182,7 +182,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $ethicsPolicy
-     * @return Organization
+     * @return static
      */
     public function setEthicsPolicy($ethicsPolicy);
 
@@ -193,7 +193,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $event
-     * @return Organization
+     * @return static
      */
     public function setEvent($event);
 
@@ -204,7 +204,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $faxNumber
-     * @return Organization
+     * @return static
      */
     public function setFaxNumber($faxNumber);
 
@@ -215,7 +215,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $founder
-     * @return Organization
+     * @return static
      */
     public function setFounder($founder);
 
@@ -226,7 +226,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $foundingDate
-     * @return Organization
+     * @return static
      */
     public function setFoundingDate($foundingDate);
 
@@ -237,7 +237,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $foundingLocation
-     * @return Organization
+     * @return static
      */
     public function setFoundingLocation($foundingLocation);
 
@@ -248,7 +248,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $funder
-     * @return Organization
+     * @return static
      */
     public function setFunder($funder);
 
@@ -259,7 +259,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $globalLocationNumber
-     * @return Organization
+     * @return static
      */
     public function setGlobalLocationNumber($globalLocationNumber);
 
@@ -270,7 +270,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $hasOfferCatalog
-     * @return Organization
+     * @return static
      */
     public function setHasOfferCatalog($hasOfferCatalog);
 
@@ -281,7 +281,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $hasPOS
-     * @return Organization
+     * @return static
      */
     public function setHasPOS($hasPOS);
 
@@ -292,7 +292,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $isicV4
-     * @return Organization
+     * @return static
      */
     public function setIsicV4($isicV4);
 
@@ -303,7 +303,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $legalName
-     * @return Organization
+     * @return static
      */
     public function setLegalName($legalName);
 
@@ -314,7 +314,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $leiCode
-     * @return Organization
+     * @return static
      */
     public function setLeiCode($leiCode);
 
@@ -325,7 +325,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $location
-     * @return Organization
+     * @return static
      */
     public function setLocation($location);
 
@@ -336,7 +336,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $logo
-     * @return Organization
+     * @return static
      */
     public function setLogo(ImageObject $logo);
 
@@ -347,7 +347,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $makesOffer
-     * @return Organization
+     * @return static
      */
     public function setMakesOffer($makesOffer);
 
@@ -358,7 +358,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $member
-     * @return Organization
+     * @return static
      */
     public function setMember($member);
 
@@ -369,7 +369,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $memberOf
-     * @return Organization
+     * @return static
      */
     public function setMemberOf($memberOf);
 
@@ -380,7 +380,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $naics
-     * @return Organization
+     * @return static
      */
     public function setNaics($naics);
 
@@ -391,7 +391,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $numberOfEmployees
-     * @return Organization
+     * @return static
      */
     public function setNumberOfEmployees($numberOfEmployees);
 
@@ -402,7 +402,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $owns
-     * @return Organization
+     * @return static
      */
     public function setOwns($owns);
 
@@ -413,7 +413,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $parentOrganization
-     * @return Organization
+     * @return static
      */
     public function setParentOrganization($parentOrganization);
 
@@ -424,7 +424,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $publishingPrinciples
-     * @return Organization
+     * @return static
      */
     public function setPublishingPrinciples($publishingPrinciples);
 
@@ -435,7 +435,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $review
-     * @return Organization
+     * @return static
      */
     public function setReview($review);
 
@@ -446,7 +446,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $seeks
-     * @return Organization
+     * @return static
      */
     public function setSeeks($seeks);
 
@@ -457,7 +457,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $sponsor
-     * @return Organization
+     * @return static
      */
     public function setSponsor($sponsor);
 
@@ -468,7 +468,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $subOrganization
-     * @return Organization
+     * @return static
      */
     public function setSubOrganization($subOrganization);
 
@@ -479,7 +479,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $taxID
-     * @return Organization
+     * @return static
      */
     public function setTaxID($taxID);
 
@@ -490,7 +490,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $telephone
-     * @return Organization
+     * @return static
      */
     public function setTelephone($telephone);
 
@@ -501,7 +501,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $unnamedSourcesPolicy
-     * @return Organization
+     * @return static
      */
     public function setUnnamedSourcesPolicy($unnamedSourcesPolicy);
 
@@ -512,7 +512,7 @@ interface OrganizationInterface
 
     /**
      * @param mixed $vatID
-     * @return Organization
+     * @return static
      */
     public function setVatID($vatID);
 }

@@ -25,7 +25,7 @@ trait ThingTrait
      * This is a relationship between something and a class that the thing is in.
      *
      * @param string $additionalType
-     * @return Thing
+     * @return static
      */
     public function setAdditionalType(UrlValue $additionalType)
     {
@@ -47,7 +47,7 @@ trait ThingTrait
      * An alias for the item
      *
      * @param string $alternateName
-     * @return Thing
+     * @return static
      */
     public function setAlternateName($alternateName)
     {
@@ -69,7 +69,7 @@ trait ThingTrait
      * A description of the item.
      *
      * @param string $description
-     * @return Thing
+     * @return static
      */
     public function setDescription($description)
     {
@@ -92,7 +92,7 @@ trait ThingTrait
      * Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      *
      * @param string $disambiguatingDescription
-     * @return Thing
+     * @return static
      */
     public function setDisambiguatingDescription($disambiguatingDescription)
     {
@@ -114,7 +114,7 @@ trait ThingTrait
      * The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.
      *
      * @param PropertyValue $identifier
-     * @return Thing
+     * @return static
      */
     public function setIdentifier(PropertyValue $identifier)
     {
@@ -137,7 +137,7 @@ trait ThingTrait
      * This can be a URL or a fully described ImageObject.
      *
      * @param ImageObject $image
-     * @return Thing
+     * @return static
      */
     public function setImage(ImageObject $image)
     {
@@ -160,7 +160,7 @@ trait ThingTrait
      * Inverse property: mainEntity.
      *
      * @param CreativeWork $mainEntityOfPage
-     * @return Thing
+     * @return static
      */
     public function setMainEntityOfPage(CreativeWork $mainEntityOfPage)
     {
@@ -182,7 +182,7 @@ trait ThingTrait
      * The name of the item.
      *
      * @param string $name
-     * @return Thing
+     * @return static
      */
     public function setName($name)
     {
@@ -205,7 +205,7 @@ trait ThingTrait
      * E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
      *
      * @param UrlValue $sameAs
-     * @return Thing
+     * @return static
      */
     public function setSameAs(UrlValue $sameAs)
     {
@@ -228,7 +228,7 @@ trait ThingTrait
      * Inverse property: about.
      *
      * @param CreativeWork|Event $subjectOf
-     * @return Thing
+     * @return static
      */
     public function setSubjectOf($subjectOf)
     {
@@ -250,7 +250,7 @@ trait ThingTrait
      * URL of the item.
      *
      * @param UrlValue $url
-     * @return Thing
+     * @return static
      */
     public function setUrl(UrlValue $url)
     {

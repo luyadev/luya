@@ -17,7 +17,7 @@ interface ThingInterface
 
     /**
      * @param UrlValue $additionalType
-     * @return Thing
+     * @return static
      */
     public function setAdditionalType(UrlValue $additionalType);
 
@@ -28,7 +28,7 @@ interface ThingInterface
 
     /**
      * @param string $alternateName
-     * @return Thing
+     * @return static
      */
     public function setAlternateName($alternateName);
 
@@ -39,7 +39,7 @@ interface ThingInterface
 
     /**
      * @param string $description
-     * @return Thing
+     * @return static
      */
     public function setDescription($description);
 
@@ -50,7 +50,7 @@ interface ThingInterface
 
     /**
      * @param string $disambiguatingDescription
-     * @return Thing
+     * @return static
      */
     public function setDisambiguatingDescription($disambiguatingDescription);
 
@@ -61,7 +61,7 @@ interface ThingInterface
 
     /**
      * @param PropertyValue
-     * @return Thing
+     * @return static
      */
     public function setIdentifier(PropertyValue $identifier);
 
@@ -72,7 +72,7 @@ interface ThingInterface
 
     /**
      * @param ImageObject $image
-     * @return Thing
+     * @return static
      */
     public function setImage(ImageObject $image);
 
@@ -83,7 +83,7 @@ interface ThingInterface
 
     /**
      * @param CreativeWork $mainEntityOfPage
-     * @return Thing
+     * @return static
      */
     public function setMainEntityOfPage(CreativeWork $mainEntityOfPage);
 
@@ -94,7 +94,7 @@ interface ThingInterface
 
     /**
      * @param string $name
-     * @return Thing
+     * @return static
      */
     public function setName($name);
 
@@ -105,7 +105,7 @@ interface ThingInterface
 
     /**
      * @param UrlValue $sameAs
-     * @return Thing
+     * @return static
      */
     public function setSameAs(UrlValue $sameAs);
 
@@ -116,7 +116,7 @@ interface ThingInterface
 
     /**
      * @param CreativeWork|Event $subjectOf
-     * @return Thing
+     * @return static
      */
     public function setSubjectOf($subjectOf);
 
@@ -127,7 +127,7 @@ interface ThingInterface
 
     /**
      * @param UrlValue $url
-     * @return Thing
+     * @return static
      */
     public function setUrl(UrlValue $url);
 }

@@ -17,7 +17,7 @@ interface PlaceInterface
 
     /**
      * @param PropertyValue $additionalProperty
-     * @return PlaceTrait
+     * @return static
      */
     public function setAdditionalProperty(PropertyValue $additionalProperty);
 
@@ -28,7 +28,7 @@ interface PlaceInterface
 
     /**
      * @param PostalAddress|string $address
-     * @return PlaceTrait
+     * @return static
      */
     public function setAddress(PostalAddress $address);
 
@@ -39,7 +39,7 @@ interface PlaceInterface
 
     /**
      * @param AggregateRating $aggregateRating
-     * @return PlaceTrait
+     * @return static
      */
     public function setAggregateRating(AggregateRating $aggregateRating);
 
@@ -50,7 +50,7 @@ interface PlaceInterface
 
     /**
      * @param LocationFeatureSpecification $amenityFeature
-     * @return PlaceTrait
+     * @return static
      */
     public function setAmenityFeature($amenityFeature);
 
@@ -61,7 +61,7 @@ interface PlaceInterface
 
     /**
      * @param string $branchCode
-     * @return PlaceTrait
+     * @return static
      */
     public function setBranchCode($branchCode);
 
@@ -72,7 +72,7 @@ interface PlaceInterface
 
     /**
      * @param Place $containedInPlace
-     * @return PlaceTrait
+     * @return static
      */
     public function setContainedInPlace(Place $containedInPlace);
 
@@ -83,7 +83,7 @@ interface PlaceInterface
 
     /**
      * @param Place $containsPlace
-     * @return PlaceTrait
+     * @return static
      */
     public function setContainsPlace(Place $containsPlace);
 
@@ -94,7 +94,7 @@ interface PlaceInterface
 
     /**
      * @param Event $event
-     * @return PlaceTrait
+     * @return static
      */
     public function setEvent(Event $event);
 
@@ -105,7 +105,7 @@ interface PlaceInterface
 
     /**
      * @param string $faxNumber
-     * @return PlaceTrait
+     * @return static
      */
     public function setFaxNumber($faxNumber);
 
@@ -116,7 +116,7 @@ interface PlaceInterface
 
     /**
      * @param GeoCoordinates|GeoShape $geo
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeo($geo);
 
@@ -127,7 +127,7 @@ interface PlaceInterface
 
     /**
      * @param mixed $geospatiallyContains
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyContains($geospatiallyContains);
 
@@ -138,7 +138,7 @@ interface PlaceInterface
 
     /**
      * @param mixed $geospatiallyCoveredBy
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyCoveredBy($geospatiallyCoveredBy);
 
@@ -149,7 +149,7 @@ interface PlaceInterface
 
     /**
      * @param GeospatialGeometry|Place $geospatiallyCovers
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyCovers($geospatiallyCovers);
     /**
@@ -159,7 +159,7 @@ interface PlaceInterface
 
     /**
      * @param GeospatialGeometry|Place $geospatiallyCrosses
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyCrosses($geospatiallyCrosses);
 
@@ -170,7 +170,7 @@ interface PlaceInterface
 
     /**
      * @param GeospatialGeometry|Place $geospatiallyDisjoint
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyDisjoint($geospatiallyDisjoint);
 
@@ -181,7 +181,7 @@ interface PlaceInterface
 
     /**
      * @param GeospatialGeometry|Place $geospatiallyEquals
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyEquals($geospatiallyEquals);
 
@@ -192,7 +192,7 @@ interface PlaceInterface
 
     /**
      * @param mixed $geospatiallyIntersects
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyIntersects($geospatiallyIntersects);
 
@@ -203,7 +203,7 @@ interface PlaceInterface
 
     /**
      * @param GeospatialGeometry|Place $geospatiallyOverlaps
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyOverlaps($geospatiallyOverlaps);
 
@@ -214,7 +214,7 @@ interface PlaceInterface
 
     /**
      * @param GeospatialGeometry|Place $geospatiallyTouches
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyTouches($geospatiallyTouches);
 
@@ -225,7 +225,7 @@ interface PlaceInterface
 
     /**
      * @param GeospatialGeometry|Place $geospatiallyWithin
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyWithin($geospatiallyWithin);
 
@@ -236,7 +236,7 @@ interface PlaceInterface
 
     /**
      * @param string $globalLocationNumber
-     * @return PlaceTrait
+     * @return static
      */
     public function setGlobalLocationNumber($globalLocationNumber);
 
@@ -247,7 +247,7 @@ interface PlaceInterface
 
     /**
      * @param Map $hasMap
-     * @return PlaceTrait
+     * @return static
      */
     public function setHasMap($hasMap);
 
@@ -258,7 +258,7 @@ interface PlaceInterface
 
     /**
      * @param bool $isAccessibleForFree
-     * @return PlaceTrait
+     * @return static
      */
     public function setIsAccessibleForFree($isAccessibleForFree);
 
@@ -269,7 +269,7 @@ interface PlaceInterface
 
     /**
      * @param string $isicV4
-     * @return PlaceTrait
+     * @return static
      */
     public function setIsicV4($isicV4);
 
@@ -280,7 +280,7 @@ interface PlaceInterface
 
     /**
      * @param ImageObject $logo
-     * @return PlaceTrait
+     * @return static
      */
     public function setLogo(ImageObject $logo);
 
@@ -291,7 +291,7 @@ interface PlaceInterface
 
     /**
      * @param int $maximumAttendeeCapacity
-     * @return PlaceTrait
+     * @return static
      */
     public function setMaximumAttendeeCapacity($maximumAttendeeCapacity);
 
@@ -302,7 +302,7 @@ interface PlaceInterface
 
     /**
      * @param OpeningHoursSpecification $openingHoursSpecification
-     * @return PlaceTrait
+     * @return static
      */
     public function setOpeningHoursSpecification($openingHoursSpecification);
 
@@ -313,7 +313,7 @@ interface PlaceInterface
 
     /**
      * @param ImageObject|Photograph $photo
-     * @return PlaceTrait
+     * @return static
      */
     public function setPhoto($photo);
 
@@ -324,7 +324,7 @@ interface PlaceInterface
 
     /**
      * @param bool $publicAccess
-     * @return PlaceTrait
+     * @return static
      */
     public function setPublicAccess($publicAccess);
     /**
@@ -334,7 +334,7 @@ interface PlaceInterface
 
     /**
      * @param Review $review
-     * @return PlaceTrait
+     * @return static
      */
     public function setReview($review);
     /**
@@ -344,7 +344,7 @@ interface PlaceInterface
 
     /**
      * @param bool $smokingAllowed
-     * @return PlaceTrait
+     * @return static
      */
     public function setSmokingAllowed($smokingAllowed);
 
@@ -355,7 +355,7 @@ interface PlaceInterface
 
     /**
      * @param OpeningHoursSpecification $specialOpeningHoursSpecification
-     * @return PlaceTrait
+     * @return static
      */
     public function setSpecialOpeningHoursSpecification($specialOpeningHoursSpecification);
 
@@ -366,7 +366,7 @@ interface PlaceInterface
 
     /**
      * @param string $telephone
-     * @return PlaceTrait
+     * @return static
      */
     public function setTelephone($telephone);
 }

@@ -28,7 +28,7 @@ trait PersonTrait
      * An additional name for a Person, can be used for a middle name.
      *
      * @param string $additionalName
-     * @return PersonTrait
+     * @return static
      */
     public function setAdditionalName($additionalName)
     {
@@ -50,7 +50,7 @@ trait PersonTrait
      * Physical address of the item.
      *
      * @param PostalAddress|string $address
-     * @return PersonTrait
+     * @return static
      */
     public function setAddress(PostalAddress $address)
     {
@@ -72,7 +72,7 @@ trait PersonTrait
      * An organization that this person is affiliated with. For example, a school/university, a club, or a team.
      *
      * @param Organization $affiliation
-     * @return PersonTrait
+     * @return static
      */
     public function setAffiliation(Organization $affiliation)
     {
@@ -95,7 +95,7 @@ trait PersonTrait
      * Supersedes awards.
      *
      * @param string $award
-     * @return PersonTrait
+     * @return static
      */
     public function setAward($award)
     {
@@ -117,7 +117,7 @@ trait PersonTrait
      * Date of birth.
      *
      * @param DateValue $birthDate
-     * @return PersonTrait
+     * @return static
      */
     public function setBirthDate(DateValue $birthDate)
     {
@@ -139,7 +139,7 @@ trait PersonTrait
      * The place where the person was born.
      *
      * @param Place $birthPlace
-     * @return PersonTrait
+     * @return static
      */
     public function setBirthPlace($birthPlace)
     {
@@ -161,7 +161,7 @@ trait PersonTrait
      * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
      *
      * @param Brand|Organization $brand
-     * @return PersonTrait
+     * @return static
      */
     public function setBrand($brand)
     {
@@ -183,7 +183,7 @@ trait PersonTrait
      * A child of the person.
      *
      * @param Person $children
-     * @return PersonTrait
+     * @return static
      */
     public function setChildren(Person $children)
     {
@@ -207,7 +207,7 @@ trait PersonTrait
      * Supersedes colleagues.
      *
      * @param Person $colleague
-     * @return PersonTrait
+     * @return static
      */
     public function setColleague(Person $colleague)
     {
@@ -231,7 +231,7 @@ trait PersonTrait
      * Supersedes contactPoints.
      *
      * @param ContactPoint $contactPoint
-     * @return PersonTrait
+     * @return static
      */
     public function setContactPoint(ContactPoint $contactPoint)
     {
@@ -253,7 +253,7 @@ trait PersonTrait
      * Date of death.
      *
      * @param DateValue $deathDate
-     * @return PersonTrait
+     * @return static
      */
     public function setDeathDate(DateValue $deathDate)
     {
@@ -275,7 +275,7 @@ trait PersonTrait
      * The place where the person died.
      *
      * @param Place $deathPlace
-     * @return PersonTrait
+     * @return static
      */
     public function setDeathPlace(Place $deathPlace)
     {
@@ -297,7 +297,7 @@ trait PersonTrait
      * The Dun & Bradstreet DUNS number for identifying an organization or business person.
      *
      * @param string $duns
-     * @return PersonTrait
+     * @return static
      */
     public function setDuns(Person $duns)
     {
@@ -319,7 +319,7 @@ trait PersonTrait
      * Email address.
      *
      * @param string $email
-     * @return PersonTrait
+     * @return static
      */
     public function setEmail($email)
     {
@@ -342,7 +342,7 @@ trait PersonTrait
      * This can be used along with givenName instead of the name property.
      *
      * @param string $familyName
-     * @return PersonTrait
+     * @return static
      */
     public function setFamilyName($familyName)
     {
@@ -364,7 +364,7 @@ trait PersonTrait
      * The fax number.
      *
      * @param string $faxNumber
-     * @return PersonTrait
+     * @return static
      */
     public function setFaxNumber($faxNumber)
     {
@@ -386,7 +386,7 @@ trait PersonTrait
      * The most generic uni-directional social relation.
      *
      * @param Person $follows
-     * @return PersonTrait
+     * @return static
      */
     public function setFollows(Person $follows)
     {
@@ -408,7 +408,7 @@ trait PersonTrait
      * A person or organization that supports (sponsors) something through some kind of financial contribution.
      *
      * @param Organization|Person $funder
-     * @return PersonTrait
+     * @return static
      */
     public function setFunder($funder)
     {
@@ -433,7 +433,7 @@ trait PersonTrait
      * text strings are also acceptable for people who do not identify as a binary gender.
      *
      * @param GenderType|string $gender
-     * @return PersonTrait
+     * @return static
      */
     public function setGender($gender)
     {
@@ -456,7 +456,7 @@ trait PersonTrait
      * This can be used along with familyName instead of the name property.
      *
      * @param string $givenName
-     * @return PersonTrait
+     * @return static
      */
     public function setGivenName($givenName)
     {
@@ -480,7 +480,7 @@ trait PersonTrait
      * The GLN is a 13-digit number used to identify parties and physical locations.
      *
      * @param string $globalLocationNumber
-     * @return PersonTrait
+     * @return static
      */
     public function setGlobalLocationNumber($globalLocationNumber)
     {
@@ -502,7 +502,7 @@ trait PersonTrait
      * Points-of-Sales operated by the organization or person.
      *
      * @param Place $hasPOS
-     * @return PersonTrait
+     * @return static
      */
     public function setHasPOS($hasPOS)
     {
@@ -524,7 +524,7 @@ trait PersonTrait
      * The height of the item.
      *
      * @param Distance|QuantitativeValue $height
-     * @return PersonTrait
+     * @return static
      */
     public function setHeight($height)
     {
@@ -546,7 +546,7 @@ trait PersonTrait
      * A contact location for a person's residence.
      *
      * @param ContactPoint|Place $homeLocation
-     * @return PersonTrait
+     * @return static
      */
     public function setHomeLocation($homeLocation)
     {
@@ -568,7 +568,7 @@ trait PersonTrait
      * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
      *
      * @param string $honorificPrefix
-     * @return PersonTrait
+     * @return static
      */
     public function setHonorificPrefix($honorificPrefix)
     {
@@ -590,7 +590,7 @@ trait PersonTrait
      * An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW.
      *
      * @param string $honorificSuffix
-     * @return PersonTrait
+     * @return static
      */
     public function setHonorificSuffix($honorificSuffix)
     {
@@ -613,7 +613,7 @@ trait PersonTrait
      * Revision 4 code for a particular organization, business person, or place.
      *
      * @param string $isicV4
-     * @return PersonTrait
+     * @return static
      */
     public function setIsicV4($isicV4)
     {
@@ -635,7 +635,7 @@ trait PersonTrait
      * The job title of the person (for example, Financial Manager).
      *
      * @param string $jobTitle
-     * @return PersonTrait
+     * @return static
      */
     public function setJobTitle($jobTitle)
     {
@@ -657,7 +657,7 @@ trait PersonTrait
      * The most generic bi-directional social/work relation.
      *
      * @param Person $knows
-     * @return PersonTrait
+     * @return static
      */
     public function setKnows(Person $knows)
     {
@@ -680,7 +680,7 @@ trait PersonTrait
      * Inverse property: offeredBy.
      *
      * @param Offer $makesOffer
-     * @return PersonTrait
+     * @return static
      */
     public function setMakesOffer(Offer $makesOffer)
     {
@@ -703,7 +703,7 @@ trait PersonTrait
      * Inverse property: member.
      *
      * @param Organization|ProgramMembership $memberOf
-     * @return PersonTrait
+     * @return static
      */
     public function setMemberOf($memberOf)
     {
@@ -725,7 +725,7 @@ trait PersonTrait
      * The North American Industry Classification System (NAICS) code for a particular organization or business person.
      *
      * @param string $naics
-     * @return PersonTrait
+     * @return static
      */
     public function setNaics($naics)
     {
@@ -747,7 +747,7 @@ trait PersonTrait
      * Nationality of the person.
      *
      * @param Country $nationality
-     * @return PersonTrait
+     * @return static
      */
     public function setNationality(Country $nationality)
     {
@@ -769,7 +769,7 @@ trait PersonTrait
      * A parent of this person. Supersedes parents.
      *
      * @param Person $parent
-     * @return PersonTrait
+     * @return static
      */
     public function setParent(Person $parent)
     {
@@ -791,7 +791,7 @@ trait PersonTrait
      * Event that this person is a performer or participant in.
      *
      * @param Event $performerIn
-     * @return PersonTrait
+     * @return static
      */
     public function setPerformerIn(Event $performerIn)
     {
@@ -819,7 +819,7 @@ trait PersonTrait
      * (e.g. indicating a funder) can be expressed using schema.org terminology.
      *
      * @param CreativeWork|URL $publishingPrinciples
-     * @return PersonTrait
+     * @return static
      */
     public function setPublishingPrinciples($publishingPrinciples)
     {
@@ -841,7 +841,7 @@ trait PersonTrait
      * The most generic familial relation.
      *
      * @param Person $relatedTo
-     * @return PersonTrait
+     * @return static
      */
     public function setRelatedTo(Person $relatedTo)
     {
@@ -863,7 +863,7 @@ trait PersonTrait
      * A sibling of the person. Supersedes siblings.
      *
      * @param Person $sibling
-     * @return PersonTrait
+     * @return static
      */
     public function setSibling(Person $sibling)
     {
@@ -886,7 +886,7 @@ trait PersonTrait
      * e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
      *
      * @param Organization|Person $sponsor
-     * @return PersonTrait
+     * @return static
      */
     public function setSponsor($sponsor)
     {
@@ -910,7 +910,7 @@ trait PersonTrait
      * The person's spouse.
      *
      * @param Person $spouse
-     * @return PersonTrait
+     * @return static
      */
     public function setSpouse(Person $spouse)
     {
@@ -932,7 +932,7 @@ trait PersonTrait
      * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
      *
      * @param string $taxID
-     * @return PersonTrait
+     * @return static
      */
     public function setTaxID($taxID)
     {
@@ -954,7 +954,7 @@ trait PersonTrait
      * The telephone number.
      *
      * @param string $telephone
-     * @return PersonTrait
+     * @return static
      */
     public function setTelephone($telephone)
     {
@@ -976,7 +976,7 @@ trait PersonTrait
      * The Value-added Tax ID of the organization or person.
      *
      * @param string $vatID
-     * @return PersonTrait
+     * @return static
      */
     public function setVatID($vatID)
     {
@@ -998,7 +998,7 @@ trait PersonTrait
      * A contact location for a person's place of work.
      *
      * @param ContactPoint|Place $workLocation
-     * @return PersonTrait
+     * @return static
      */
     public function setWorkLocation($workLocation)
     {
@@ -1020,7 +1020,7 @@ trait PersonTrait
      * Organizations that the person works for.
      *
      * @param Organization $worksFor
-     * @return PersonTrait
+     * @return static
      */
     public function setWorksFor(Organization $worksFor)
     {
