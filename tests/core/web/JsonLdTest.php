@@ -27,6 +27,7 @@ use luya\web\jsonld\Event;
 use luya\web\jsonld\LocalBusiness;
 use luya\web\jsonld\OpeningHoursValue;
 use luya\web\jsonld\CurrencyValue;
+use luya\web\jsonld\FoodEstablishment;
 
 class JsonLdTest extends \luyatests\LuyaConsoleTestCase
 {
@@ -291,6 +292,26 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
         ], $biz->toArray());
     }
     
+    public function testFoodEsablishment()
+    {
+        $foe = new FoodEstablishment();
+        $foe->setAcceptsReservations(true);
+        $foe->setHasMenu('Pizza');
+        $foe->setServesCuisine('Italian');
+        $foe->setStarRating((new Rating())->setDescription('Rating Description'));
+
+        $this->assertSame([
+            'acceptsReservations' => true,
+            'hasMenu' => 'Pizza',
+            'servesCuisine' => 'Italian',
+            'starRating' => [
+                'description' => 'Rating Description',
+                '@type' => 'Rating',
+            ],
+            '@type' => 'FoodEstablishment',
+        ], $foe->toArray());
+    }
+
     public function testValuesObjects()
     {
         $this->assertSame('1970-01-02', (new DateValue(123123))->getValue());
