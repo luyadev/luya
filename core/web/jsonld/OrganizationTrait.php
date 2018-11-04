@@ -27,7 +27,7 @@ trait OrganizationTrait
      * -- in coverage decisions, reporting and activities after publication.
      *
      * @param mixed $actionableFeedbackPolicy
-     * @return Organization
+     * @return static
      */
     public function setActionableFeedbackPolicy($actionableFeedbackPolicy)
     {
@@ -49,7 +49,7 @@ trait OrganizationTrait
      * Physical address of the item.
      *
      * @param mixed $address
-     * @return Organization
+     * @return static
      */
     public function setAddress($address)
     {
@@ -71,7 +71,7 @@ trait OrganizationTrait
      * The overall rating, based on a collection of reviews or ratings, of the item.
      *
      * @param mixed $aggregateRating
-     * @return Organization
+     * @return static
      */
     public function setAggregateRating($aggregateRating)
     {
@@ -94,7 +94,7 @@ trait OrganizationTrait
      * Inverse property: alumniOf.
      *
      * @param mixed $alumni
-     * @return Organization
+     * @return static
      */
     public function setAlumni($alumni)
     {
@@ -116,7 +116,7 @@ trait OrganizationTrait
      * The geographic area where a service or offered item is provided. Supersedes serviceArea.
      *
      * @param mixed $areaServed
-     * @return Organization
+     * @return static
      */
     public function setAreaServed($areaServed)
     {
@@ -138,7 +138,7 @@ trait OrganizationTrait
      * An award won by or for this item. Supersedes awards.
      *
      * @param mixed $award
-     * @return Organization
+     * @return static
      */
     public function setAward($award)
     {
@@ -161,7 +161,7 @@ trait OrganizationTrait
      * or the brand(s) maintained by an organization or business person.
      *
      * @param mixed $brand
-     * @return Organization
+     * @return static
      */
     public function setBrand($brand)
     {
@@ -183,7 +183,7 @@ trait OrganizationTrait
      * A contact point for a person or organization. Supersedes contactPoints.
      *
      * @param mixed $contactPoint
-     * @return Organization
+     * @return static
      */
     public function setContactPoint($contactPoint)
     {
@@ -206,7 +206,7 @@ trait OrganizationTrait
      * a statement describing (in news media, the newsroom’s) disclosure and correction policy for errors.
      *
      * @param mixed $correctionsPolicy
-     * @return Organization
+     * @return static
      */
     public function setCorrectionsPolicy($correctionsPolicy)
     {
@@ -230,7 +230,7 @@ trait OrganizationTrait
      * For example: a store with a pharmacy, or a bakery with a cafe.
      *
      * @param mixed $department
-     * @return Organization
+     * @return static
      */
     public function setDepartment($department)
     {
@@ -252,7 +252,7 @@ trait OrganizationTrait
      * The date that this organization was dissolved.
      *
      * @param mixed $dissolutionDate
-     * @return Organization
+     * @return static
      */
     public function setDissolutionDate($dissolutionDate)
     {
@@ -276,7 +276,7 @@ trait OrganizationTrait
      * typically providing staffing data.
      *
      * @param mixed $diversityPolicy
-     * @return Organization
+     * @return static
      */
     public function setDiversityPolicy($diversityPolicy)
     {
@@ -298,7 +298,7 @@ trait OrganizationTrait
      * The Dun & Bradstreet DUNS number for identifying an organization or business person.
      *
      * @param mixed $duns
-     * @return Organization
+     * @return static
      */
     public function setDuns($duns)
     {
@@ -320,7 +320,7 @@ trait OrganizationTrait
      * Email address
      *
      * @param mixed $email
-     * @return Organization
+     * @return static
      */
     public function setEmail($email)
     {
@@ -343,7 +343,7 @@ trait OrganizationTrait
      * Supersedes employees.
      *
      * @param mixed $employee
-     * @return Organization
+     * @return static
      */
     public function setEmployee($employee)
     {
@@ -368,7 +368,7 @@ trait OrganizationTrait
      * and corporate standards of behavior expected by the organization.
      *
      * @param mixed $ethicsPolicy
-     * @return Organization
+     * @return static
      */
     public function setEthicsPolicy($ethicsPolicy)
     {
@@ -390,7 +390,7 @@ trait OrganizationTrait
      * Upcoming or past event associated with this place, organization, or action. Supersedes events.
      *
      * @param mixed $event
-     * @return Organization
+     * @return static
      */
     public function setEvent($event)
     {
@@ -412,7 +412,7 @@ trait OrganizationTrait
      * The fax number.
      *
      * @param mixed $faxNumber
-     * @return Organization
+     * @return static
      */
     public function setFaxNumber($faxNumber)
     {
@@ -434,7 +434,7 @@ trait OrganizationTrait
      * A person who founded this organization. Supersedes founders.
      *
      * @param mixed $founder
-     * @return Organization
+     * @return static
      */
     public function setFounder($founder)
     {
@@ -456,7 +456,7 @@ trait OrganizationTrait
      * The date that this organization was founded.
      *
      * @param mixed $foundingDate
-     * @return Organization
+     * @return static
      */
     public function setFoundingDate($foundingDate)
     {
@@ -478,7 +478,7 @@ trait OrganizationTrait
      * The place where the Organization was founded.
      *
      * @param mixed $foundingLocation
-     * @return Organization
+     * @return static
      */
     public function setFoundingLocation($foundingLocation)
     {
@@ -500,7 +500,7 @@ trait OrganizationTrait
      * A person or organization that supports (sponsors) something through some kind of financial contribution.
      *
      * @param mixed $funder
-     * @return Organization
+     * @return static
      */
     public function setFunder($funder)
     {
@@ -524,7 +524,7 @@ trait OrganizationTrait
      * The GLN is a 13-digit number used to identify parties and physical locations.
      *
      * @param mixed $globalLocationNumber
-     * @return Organization
+     * @return static
      */
     public function setGlobalLocationNumber($globalLocationNumber)
     {
@@ -546,7 +546,7 @@ trait OrganizationTrait
      * Indicates an OfferCatalog listing for this Organization, Person, or Service.
      *
      * @param mixed $hasOfferCatalog
-     * @return Organization
+     * @return static
      */
     public function setHasOfferCatalog($hasOfferCatalog)
     {
@@ -568,7 +568,7 @@ trait OrganizationTrait
      * Points-of-Sales operated by the organization or person.
      *
      * @param mixed $hasPOS
-     * @return Organization
+     * @return static
      */
     public function setHasPOS($hasPOS)
     {
@@ -591,7 +591,7 @@ trait OrganizationTrait
      * Revision 4 code for a particular organization, business person, or place.
      *
      * @param mixed $isicV4
-     * @return Organization
+     * @return static
      */
     public function setIsicV4($isicV4)
     {
@@ -613,7 +613,7 @@ trait OrganizationTrait
      * The official name of the organization, e.g. the registered company name.
      *
      * @param mixed $legalName
-     * @return Organization
+     * @return static
      */
     public function setLegalName($legalName)
     {
@@ -635,7 +635,7 @@ trait OrganizationTrait
      * An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.
      *
      * @param mixed $leiCode
-     * @return Organization
+     * @return static
      */
     public function setLeiCode($leiCode)
     {
@@ -658,7 +658,7 @@ trait OrganizationTrait
      * or where an action takes place.
      *
      * @param mixed $location
-     * @return Organization
+     * @return static
      */
     public function setLocation($location)
     {
@@ -680,7 +680,7 @@ trait OrganizationTrait
      * An associated logo.
      *
      * @param ImageObject $logo
-     * @return Organization
+     * @return static
      */
     public function setLogo(ImageObject $logo)
     {
@@ -703,7 +703,7 @@ trait OrganizationTrait
      * Inverse property: offeredBy.
      *
      * @param mixed $makesOffer
-     * @return Organization
+     * @return static
      */
     public function setMakesOffer($makesOffer)
     {
@@ -728,7 +728,7 @@ trait OrganizationTrait
      * Inverse property: memberOf.
      *
      * @param mixed $member
-     * @return Organization
+     * @return static
      */
     public function setMember($member)
     {
@@ -751,7 +751,7 @@ trait OrganizationTrait
      * Inverse property: member.
      *
      * @param mixed $memberOf
-     * @return Organization
+     * @return static
      */
     public function setMemberOf($memberOf)
     {
@@ -773,7 +773,7 @@ trait OrganizationTrait
      * The North American Industry Classification System (NAICS) code for a particular organization or business person.
      *
      * @param mixed $naics
-     * @return Organization
+     * @return static
      */
     public function setNaics($naics)
     {
@@ -795,7 +795,7 @@ trait OrganizationTrait
      * The number of employees in an organization e.g. business.
      *
      * @param mixed $numberOfEmployees
-     * @return Organization
+     * @return static
      */
     public function setNumberOfEmployees($numberOfEmployees)
     {
@@ -817,7 +817,7 @@ trait OrganizationTrait
      * Products owned by the organization or person.
      *
      * @param mixed $owns
-     * @return Organization
+     * @return static
      */
     public function setOwns($owns)
     {
@@ -841,7 +841,7 @@ trait OrganizationTrait
      * Inverse property: subOrganization.
      *
      * @param mixed $parentOrganization
-     * @return Organization
+     * @return static
      */
     public function setParentOrganization($parentOrganization)
     {
@@ -866,7 +866,7 @@ trait OrganizationTrait
      * of the party primarily responsible for the creation of the CreativeWork.
      *
      * @param mixed $publishingPrinciples
-     * @return Organization
+     * @return static
      */
     public function setPublishingPrinciples($publishingPrinciples)
     {
@@ -889,7 +889,7 @@ trait OrganizationTrait
      * Supersedes reviews.
      *
      * @param mixed $review
-     * @return Organization
+     * @return static
      */
     public function setReview($review)
     {
@@ -911,7 +911,7 @@ trait OrganizationTrait
      * A pointer to products or services sought by the organization or person (demand).
      *
      * @param mixed $seeks
-     * @return Organization
+     * @return static
      */
     public function setSeeks($seeks)
     {
@@ -933,7 +933,7 @@ trait OrganizationTrait
      * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g.
      *
      * @param mixed $sponsor
-     * @return Organization
+     * @return static
      */
     public function setSponsor($sponsor)
     {
@@ -957,7 +957,7 @@ trait OrganizationTrait
      * Inverse property: parentOrganization.
      *
      * @param mixed $subOrganization
-     * @return Organization
+     * @return static
      */
     public function setSubOrganization($subOrganization)
     {
@@ -979,7 +979,7 @@ trait OrganizationTrait
      * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
      *
      * @param mixed $taxID
-     * @return Organization
+     * @return static
      */
     public function setTaxID($taxID)
     {
@@ -1001,7 +1001,7 @@ trait OrganizationTrait
      * The telephone number.
      *
      * @param mixed $telephone
-     * @return Organization
+     * @return static
      */
     public function setTelephone($telephone)
     {
@@ -1024,7 +1024,7 @@ trait OrganizationTrait
      * and the decision process required.
      *
      * @param mixed $unnamedSourcesPolicy
-     * @return Organization
+     * @return static
      */
     public function setUnnamedSourcesPolicy($unnamedSourcesPolicy)
     {
@@ -1046,7 +1046,7 @@ trait OrganizationTrait
      * The Value-added Tax ID of the organization or person.
      *
      * @param mixed $vatID
-     * @return Organization
+     * @return static
      */
     public function setVatID($vatID)
     {

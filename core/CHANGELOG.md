@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.14 (in progress)
 
++ [#1872](https://github.com/luyadev/luya/issues/1872) Added LocalBusiness Json-Ld. Fixed Event Json-Ld, and TypeHinting.
 + [#1867](https://github.com/luyadev/luya/issues/1867) Rewritten lazyload js and added new placeholderSrc. Updated lazyload docs.
 + [#1870](https://github.com/luyadev/luya/issues/1870) String helper truncate middle use default truncate if no results found and added new option for case sensitive comparing.
 + [#1871](https://github.com/luyadev/luya/issues/1871) String helper highlight supports a list of words provided as array to highlight.

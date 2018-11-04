@@ -15,9 +15,10 @@ interface LiveBlogPostingInterface extends BlogPostingInterface
      * @return string
      */
     public function getCoverageEndTime();
+
     /**
      * @param DateTimeValue $coverageEndTime
-     * @return LiveBlogPosting|LiveBlogPostingTrait
+     * @return static
      */
     public function setCoverageEndTime(DateTimeValue $coverageEndTime);
 
@@ -28,7 +29,7 @@ interface LiveBlogPostingInterface extends BlogPostingInterface
 
     /**
      * @param DateTimeValue $coverageStartTime
-     * @return LiveBlogPosting|LiveBlogPostingTrait
+     * @return static
      */
     public function setCoverageStartTime(DateTimeValue $coverageStartTime);
 
@@ -39,7 +40,7 @@ interface LiveBlogPostingInterface extends BlogPostingInterface
 
     /**
      * @param BlogPosting $liveBlogUpdate
-     * @return LiveBlogPosting|LiveBlogPostingTrait
+     * @return static
      */
     public function setLiveBlogUpdate(BlogPosting $liveBlogUpdate);
 }

@@ -23,6 +23,10 @@ use luya\web\jsonld\MediaObject;
 use luya\web\jsonld\Offer;
 use luya\web\jsonld\PostalAddress;
 use luya\web\jsonld\Rating;
+use luya\web\jsonld\Event;
+use luya\web\jsonld\LocalBusiness;
+use luya\web\jsonld\OpeningHoursValue;
+use luya\web\jsonld\CurrencyValue;
 
 class JsonLdTest extends \luyatests\LuyaConsoleTestCase
 {
@@ -236,6 +240,17 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
         
         $this->assertSame(['description' => 'My offer', '@type' => 'Offer'], $offer->toArray());
     }
+
+    public function testEvent()
+    {
+        $event = new Event();
+        $event->setStartDate(new DateTimeValue(12345));
+
+        $this->assertSame([
+            'startDate' => '1970-01-01T03:25:45+00:00',
+            '@type' => 'Event',
+        ], $event->toArray());
+    }
     
     public function testPostalAddress()
     {
@@ -251,6 +266,29 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
         $rating->setDescription('my rating');
         
         $this->assertSame(['description' => 'my rating', '@type' => 'Rating'], $rating->toArray());
+    }
+
+    public function testLocalBusiness()
+    {
+        $biz = new LocalBusiness();
+        $hours = new OpeningHoursValue();
+        $hours->setDay(OpeningHoursValue::DAY_MONDAY, ['08:00' => '12:00', '14:00' => '18:00']);
+        $hours->setDay(OpeningHoursValue::DAY_WEDNESDAY, ['08:00' => '20:00']);
+
+        $biz->setOpeningHours($hours);
+        $biz->setCurrenciesAccepted(new CurrencyValue('CHF'));
+        $biz->setPaymentAccepted('Credit Card');
+        $biz->setPriceRange('$$$');
+        $biz->setDescription('Description from nested orgaisation method');
+
+        $this->assertSame([
+            'currenciesAccepted' => 'CHF',
+            'description' => 'Description from nested orgaisation method',
+            'openingHours' => 'Mo 08:00-12:00, Mo 14:00-18:00, We 08:00-20:00',
+            'paymentAccepted' => 'Credit Card',
+            'priceRange' => '$$$',
+            '@type' => 'LocalBusiness',
+        ], $biz->toArray());
     }
     
     public function testValuesObjects()

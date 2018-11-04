@@ -30,7 +30,7 @@ trait PlaceTrait
      * such data to be provided using those properties, rather than using the generic
      *
      * @param PropertyValue $additionalProperty
-     * @return PlaceTrait
+     * @return static
      */
     public function setAdditionalProperty(PropertyValue $additionalProperty)
     {
@@ -52,7 +52,7 @@ trait PlaceTrait
      * Physical address of the item.
      *
      * @param PostalAddress|string $address
-     * @return PlaceTrait
+     * @return static
      */
     public function setAddress(PostalAddress $address)
     {
@@ -74,7 +74,7 @@ trait PlaceTrait
      * The overall rating, based on a collection of reviews or ratings, of the item.
      *
      * @param AggregateRating $aggregateRating
-     * @return PlaceTrait
+     * @return static
      */
     public function setAggregateRating(AggregateRating $aggregateRating)
     {
@@ -98,7 +98,7 @@ trait PlaceTrait
      * for the main accommodation or available at extra costs.
      *
      * @param LocationFeatureSpecification $amenityFeature
-     * @return PlaceTrait
+     * @return static
      */
     public function setAmenityFeature($amenityFeature)
     {
@@ -123,7 +123,7 @@ trait PlaceTrait
      * the code "3047" is a branchCode for a particular branch.
      *
      * @param string $branchCode
-     * @return PlaceTrait
+     * @return static
      */
     public function setBranchCode($branchCode)
     {
@@ -147,7 +147,7 @@ trait PlaceTrait
      * Inverse property: containsPlace.
      *
      * @param Place $containedInPlace
-     * @return PlaceTrait
+     * @return static
      */
     public function setContainedInPlace(Place $containedInPlace)
     {
@@ -170,7 +170,7 @@ trait PlaceTrait
      * Inverse property: containedInPlace.
      *
      * @param Place $containsPlace
-     * @return PlaceTrait
+     * @return static
      */
     public function setContainsPlace(Place $containsPlace)
     {
@@ -193,7 +193,7 @@ trait PlaceTrait
      * Supersedes events.
      *
      * @param Event $event
-     * @return PlaceTrait
+     * @return static
      */
     public function setEvent(Event $event)
     {
@@ -215,7 +215,7 @@ trait PlaceTrait
      * The fax number.
      *
      * @param string $faxNumber
-     * @return PlaceTrait
+     * @return static
      */
     public function setFaxNumber($faxNumber)
     {
@@ -237,7 +237,7 @@ trait PlaceTrait
      * The geo coordinates of the place.
      *
      * @param GeoCoordinates|GeoShape $geo
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeo($geo)
     {
@@ -261,7 +261,7 @@ trait PlaceTrait
      * of the interior of b lies in the interior of a". As defined in DE-9IM.
      *
      * @param mixed $geospatiallyContains
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyContains($geospatiallyContains)
     {
@@ -284,7 +284,7 @@ trait PlaceTrait
      * relating a geometry to another that covers it. As defined in DE-9IM.
      *
      * @param mixed $geospatiallyCoveredBy
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyCoveredBy($geospatiallyCoveredBy)
     {
@@ -307,7 +307,7 @@ trait PlaceTrait
      * to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in DE-9IM.
      *
      * @param GeospatialGeometry|Place $geospatiallyCovers
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyCovers($geospatiallyCovers)
     {
@@ -331,7 +331,7 @@ trait PlaceTrait
      * intersection is less than that of at least one of them". As defined in DE-9IM.
      *
      * @param GeospatialGeometry|Place $geospatiallyCrosses
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyCrosses($geospatiallyCrosses)
     {
@@ -355,7 +355,7 @@ trait PlaceTrait
      * (a symmetric relationship, as defined in DE-9IM)
      *
      * @param GeospatialGeometry|Place $geospatiallyDisjoint
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyDisjoint($geospatiallyDisjoint)
     {
@@ -379,7 +379,7 @@ trait PlaceTrait
      * of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship)
      *
      * @param GeospatialGeometry|Place $geospatiallyEquals
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyEquals($geospatiallyEquals)
     {
@@ -402,7 +402,7 @@ trait PlaceTrait
      * in common. As defined in DE-9IM.
      *
      * @param mixed $geospatiallyIntersects
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyIntersects($geospatiallyIntersects)
     {
@@ -425,7 +425,7 @@ trait PlaceTrait
      * to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.
      *
      * @param GeospatialGeometry|Place $geospatiallyOverlaps
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyOverlaps($geospatiallyOverlaps)
     {
@@ -448,7 +448,7 @@ trait PlaceTrait
      * at least one boundary point in common, but no interior points." (a symmetric relationship, as defined in DE-9IM )
      *
      * @param GeospatialGeometry|Place $geospatiallyTouches
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyTouches($geospatiallyTouches)
     {
@@ -471,7 +471,7 @@ trait PlaceTrait
      * that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.
      *
      * @param GeospatialGeometry|Place $geospatiallyWithin
-     * @return PlaceTrait
+     * @return static
      */
     public function setGeospatiallyWithin($geospatiallyWithin)
     {
@@ -495,7 +495,7 @@ trait PlaceTrait
      * and physical locations.
      *
      * @param string $globalLocationNumber
-     * @return PlaceTrait
+     * @return static
      */
     public function setGlobalLocationNumber($globalLocationNumber)
     {
@@ -518,7 +518,7 @@ trait PlaceTrait
      * Supersedes map, maps.
      *
      * @param Map $hasMap
-     * @return PlaceTrait
+     * @return static
      */
     public function setHasMap($hasMap)
     {
@@ -541,7 +541,7 @@ trait PlaceTrait
      * Supersedes free.
      *
      * @param bool $isAccessibleForFree
-     * @return PlaceTrait
+     * @return static
      */
     public function setIsAccessibleForFree($isAccessibleForFree)
     {
@@ -564,7 +564,7 @@ trait PlaceTrait
      * Revision 4 code for a particular organization, business person, or place.
      *
      * @param string $isicV4
-     * @return PlaceTrait
+     * @return static
      */
     public function setIsicV4($isicV4)
     {
@@ -586,7 +586,7 @@ trait PlaceTrait
      * An associated logo.
      *
      * @param ImageObject $logo
-     * @return PlaceTrait
+     * @return static
      */
     public function setLogo(ImageObject $logo)
     {
@@ -608,7 +608,7 @@ trait PlaceTrait
      * The total number of individuals that may attend an event or venue.
      *
      * @param int $maximumAttendeeCapacity
-     * @return PlaceTrait
+     * @return static
      */
     public function setMaximumAttendeeCapacity($maximumAttendeeCapacity)
     {
@@ -630,7 +630,7 @@ trait PlaceTrait
      * The opening hours of a certain place.
      *
      * @param OpeningHoursSpecification $openingHoursSpecification
-     * @return PlaceTrait
+     * @return static
      */
     public function setOpeningHoursSpecification($openingHoursSpecification)
     {
@@ -652,7 +652,7 @@ trait PlaceTrait
      * A photograph of this place. Supersedes photos.
      *
      * @param ImageObject|Photograph $photo
-     * @return PlaceTrait
+     * @return static
      */
     public function setPhoto($photo)
     {
@@ -675,7 +675,7 @@ trait PlaceTrait
      * If this property is omitted there is no assumed default boolean value
      *
      * @param bool $publicAccess
-     * @return PlaceTrait
+     * @return static
      */
     public function setPublicAccess($publicAccess)
     {
@@ -697,7 +697,7 @@ trait PlaceTrait
      * A review of the item. Supersedes reviews.
      *
      * @param Review $review
-     * @return PlaceTrait
+     * @return static
      */
     public function setReview($review)
     {
@@ -719,7 +719,7 @@ trait PlaceTrait
      * Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
      *
      * @param bool $smokingAllowed
-     * @return PlaceTrait
+     * @return static
      */
     public function setSmokingAllowed($smokingAllowed)
     {
@@ -743,7 +743,7 @@ trait PlaceTrait
      * openingHoursSpecification or openingHours.
      *
      * @param OpeningHoursSpecification $specialOpeningHoursSpecification
-     * @return PlaceTrait
+     * @return static
      */
     public function setSpecialOpeningHoursSpecification($specialOpeningHoursSpecification)
     {
@@ -765,7 +765,7 @@ trait PlaceTrait
      * The telephone number.
      *
      * @param string $telephone
-     * @return PlaceTrait
+     * @return static
      */
     public function setTelephone($telephone)
     {

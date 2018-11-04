@@ -15,7 +15,7 @@ interface PropertyValueInterface extends ThingInterface
      * Setter method for maxValue.
      *
      * @param string $maxValue
-     * @return \luya\web\jsonld\PropertyValue
+     * @return static
      */
     public function setMaxValue($maxValue);
     
@@ -28,7 +28,7 @@ interface PropertyValueInterface extends ThingInterface
      * Setter method for measurement Technique.
      *
      * @param string $measurementTechnique
-     * @return \luya\web\jsonld\PropertyValue
+     * @return static
      */
     public function setMeasurementTechnique($measurementTechnique);
     
@@ -41,7 +41,7 @@ interface PropertyValueInterface extends ThingInterface
      * Setter method for minValue.
      *
      * @param string $minValue
-     * @return \luya\web\jsonld\PropertyValue
+     * @return static
      */
     public function setMinValue($minValue);
     
@@ -54,7 +54,7 @@ interface PropertyValueInterface extends ThingInterface
      * Setter method for propertyId.
      *
      * @param string $propertyID
-     * @return \luya\web\jsonld\PropertyValue
+     * @return static
      */
     public function setPropertyID($propertyID);
 
@@ -67,7 +67,7 @@ interface PropertyValueInterface extends ThingInterface
      * Setter method for unitCode.
      *
      * @param string $unitCode
-     * @return \luya\web\jsonld\PropertyValue
+     * @return static
      */
     public function setUnitCode($unitCode);
     
@@ -80,7 +80,7 @@ interface PropertyValueInterface extends ThingInterface
      * Setter method for unitText.
      *
      * @param string $uniText
-     * @return \luya\web\jsonld\PropertyValue
+     * @return static
      */
     public function setUnitText($uniText);
 
@@ -93,7 +93,7 @@ interface PropertyValueInterface extends ThingInterface
      * Setter method for value.
      *
      * @param string $value
-     * @return \luya\web\jsonld\PropertyValue
+     * @return static
      */
     public function setValue($value);
 
