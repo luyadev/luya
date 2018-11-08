@@ -27,10 +27,10 @@ interface OrganizationInterface
     public function getAddress();
 
     /**
-     * @param mixed $address
+     * @param mixePostalAddressd $address
      * @return static
      */
-    public function setAddress($address);
+    public function setAddress(PostalAddress $address);
 
     /**
      * @return mixed
@@ -38,10 +38,10 @@ interface OrganizationInterface
     public function getAggregateRating();
 
     /**
-     * @param mixed $aggregateRating
+     * @param AggregateRating $aggregateRating
      * @return static
      */
-    public function setAggregateRating($aggregateRating);
+    public function setAggregateRating(AggregateRating $aggregateRating);
 
     /**
      * @return mixed
@@ -192,10 +192,10 @@ interface OrganizationInterface
     public function getEvent();
 
     /**
-     * @param mixed $event
+     * @param Event $event
      * @return static
      */
-    public function setEvent($event);
+    public function setEvent(Event $event);
 
     /**
      * @return mixed
@@ -429,15 +429,15 @@ interface OrganizationInterface
     public function setPublishingPrinciples($publishingPrinciples);
 
     /**
-     * @return mixed
+     * @return Review
      */
     public function getReview();
 
     /**
-     * @param mixed $review
+     * @param Review $review
      * @return static
      */
-    public function setReview($review);
+    public function setReview(Review $review);
 
     /**
      * @return mixed

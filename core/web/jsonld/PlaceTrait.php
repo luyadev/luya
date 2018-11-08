@@ -197,7 +197,7 @@ trait PlaceTrait
      */
     public function setEvent(Event $event)
     {
-        $this->_event = $event;
+        $this->_event[] = $event;
         return $this;
     }
 
@@ -226,7 +226,7 @@ trait PlaceTrait
     private $_geo;
 
     /**
-     * @return GeoCoordinates|GeoShape
+     * @return GeoCoordinates
      */
     public function getGeo()
     {
@@ -236,10 +236,10 @@ trait PlaceTrait
     /**
      * The geo coordinates of the place.
      *
-     * @param GeoCoordinates|GeoShape $geo
+     * @param GeoCoordinates $geo
      * @return static
      */
-    public function setGeo($geo)
+    public function setGeo(GeoCoordinates $geo)
     {
         $this->_geo = $geo;
         return $this;
@@ -699,9 +699,9 @@ trait PlaceTrait
      * @param Review $review
      * @return static
      */
-    public function setReview($review)
+    public function setReview(Review $review)
     {
-        $this->_review = $review;
+        $this->_review[] = $review;
         return $this;
     }
 

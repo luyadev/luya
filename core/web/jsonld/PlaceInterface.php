@@ -22,12 +22,12 @@ interface PlaceInterface
     public function setAdditionalProperty(PropertyValue $additionalProperty);
 
     /**
-     * @return PostalAddress|string
+     * @return PostalAddress
      */
     public function getAddress();
 
     /**
-     * @param PostalAddress|string $address
+     * @param PostalAddress $address
      * @return static
      */
     public function setAddress(PostalAddress $address);
@@ -110,15 +110,15 @@ interface PlaceInterface
     public function setFaxNumber($faxNumber);
 
     /**
-     * @return GeoCoordinates|GeoShape
+     * @return GeoCoordinates
      */
     public function getGeo();
 
     /**
-     * @param GeoCoordinates|GeoShape $geo
+     * @param GeoCoordinates $geo
      * @return static
      */
-    public function setGeo($geo);
+    public function setGeo(GeoCoordinates $geo);
 
     /**
      * @return mixed
@@ -336,7 +336,7 @@ interface PlaceInterface
      * @param Review $review
      * @return static
      */
-    public function setReview($review);
+    public function setReview(Review $review);
     /**
      * @return bool
      */
