@@ -48,12 +48,12 @@ trait OrganizationTrait
     /**
      * Physical address of the item.
      *
-     * @param mixed $address
+     * @param PostalAddress $address
      * @return static
      */
-    public function setAddress($address)
+    public function setAddress(PostalAddress $address)
     {
-        $this->_address[] = $address;
+        $this->_address = $address;
         return $this;
     }
 
@@ -73,9 +73,9 @@ trait OrganizationTrait
      * @param mixed $aggregateRating
      * @return static
      */
-    public function setAggregateRating($aggregateRating)
+    public function setAggregateRating(AggregateRating $aggregateRating)
     {
-        $this->_aggregateRating[] = $aggregateRating;
+        $this->_aggregateRating = $aggregateRating;
         return $this;
     }
 
@@ -392,7 +392,7 @@ trait OrganizationTrait
      * @param mixed $event
      * @return static
      */
-    public function setEvent($event)
+    public function setEvent(Event $event)
     {
         $this->_event[] = $event;
         return $this;
@@ -891,7 +891,7 @@ trait OrganizationTrait
      * @param mixed $review
      * @return static
      */
-    public function setReview($review)
+    public function setReview(Review $review)
     {
         $this->_review[] = $review;
         return $this;
