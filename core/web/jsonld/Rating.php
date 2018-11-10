@@ -57,13 +57,12 @@ class Rating extends BaseThing
      * 
      * The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.
      *
-     * @param RangeValue $bestRating
+     * @param integer $bestRating
      * @return static
      */
-    public function setBestRating(RangeValue $bestRating)
+    public function setBestRating($bestRating)
     {
-        $bestRating->ensureRange(1,5);
-        $this->_bestRating = $bestRating->getValue();
+        $this->_bestRating = $bestRating;
         return $this;
     }
 
@@ -77,6 +76,32 @@ class Rating extends BaseThing
         return $this->_bestRating;
     }
 
+    private $_worstRating;
+
+    /**
+     * Set Worst Rating.
+     *
+     * The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.
+     * 
+     * @param integer $worstRating
+     * @return static
+     */
+    public function setWorstRating($worstRating)
+    {
+        $this->_worstRating = $worstRating;
+        return $this;
+    }
+
+    /**
+     * Get Worst Rating
+     *
+     * @return integer
+     */
+    public function getWorstRating()
+    {
+        return $this->_worstRating;
+    }
+
     private $_ratingValue;
 
     /**
@@ -84,13 +109,12 @@ class Rating extends BaseThing
      * 
      * The rating for the content.
      *
-     * @param RangeValue $ratingValue
+     * @param integer $ratingValue
      * @return static
      */
-    public function setRatingValue(RangeValue $ratingValue)
+    public function setRatingValue($ratingValue)
     {
-        $ratingValue->ensureRange(1,5);
-        $this->_ratingValue = $ratingValue->getValue();
+        $this->_ratingValue = $ratingValue;
         return $this;
     }
 
@@ -101,7 +125,14 @@ class Rating extends BaseThing
      */
     public function getRatingValue()
     {
-        return $this->_ratingValue;
+        if ($this->_ratingValue === null) {
+            return null;
+        }
+
+        $range = new RangeValue($this->_ratingValue);
+        $range->ensureRange($this->_worstRating ?: 0, $this->_bestRating ?: 5);
+
+        return $this->_ratingValue = $range->getValue();
     }
     
     private $_reviewAspect;
@@ -128,32 +159,5 @@ class Rating extends BaseThing
     public function getReviewAspect()
     {
         return $this->_reviewAspect;
-    }
-
-    private $_worstRating;
-
-    /**
-     * Set Worst Rating.
-     *
-     * The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.
-     * 
-     * @param RangeValue $worstRating
-     * @return static
-     */
-    public function setWorstRating(RangeValue $worstRating)
-    {
-        $worstRating->ensureRange(1,5);
-        $this->_worstRating = $worstRating->getValue();
-        return $this;
-    }
-
-    /**
-     * Get Worst Rating
-     *
-     * @return integer
-     */
-    public function getWorstRating()
-    {
-        return $this->_worstRating;
     }
 }
