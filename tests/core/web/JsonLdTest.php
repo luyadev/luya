@@ -324,14 +324,24 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
         $this->assertSame('1.1.2017 17:00', (new DateTimeValue('1.1.2017 17:00'))->getValue());
     }
 
+    public function testAggregateRatingRangeException()
+    {
+        $ar = new AggregateRating();
+        $ar->setBestRating(4);
+        $ar->setWorstRating(2);
+        $ar->setRatingValue(1);
+        $this->expectException("yii\base\InvalidConfigException");
+        $ar->toArray();
+    }
+
     public function testRestaurantWithPlaceGeoCordinates()
     {
         $r = new Restaurant();
         $r->setDescription("luya.io restaurant!");
 
         $ar = new AggregateRating();
-        $ar->setBestRating(new RangeValue(4));
-        $ar->setWorstRating(new RangeValue(2));
+        $ar->setBestRating(4);
+        $ar->setWorstRating(2);
         $ar->setReviewCount(2);
         $ar->setRatingCount(0); // will be removed as its an empty value.
         $r->setAggregateRating($ar);
