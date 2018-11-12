@@ -166,10 +166,10 @@ trait CacheableTrait
             $enumKey = (is_array($key)) ? implode(",", $key) : $key;
             
             if ($data) {
-                Yii::info("Cacheable trait key '$enumKey' successfully loaded from cache.", __METHOD__);
+                Yii::debug("Cacheable trait key '$enumKey' successfully loaded from cache.", __METHOD__);
                 return $data;
             }
-            Yii::info("Cacheable trait key '$enumKey' has not been found in cache.", __METHOD__);
+            Yii::debug("Cacheable trait key '$enumKey' has not been found in cache.", __METHOD__);
         }
     
         return false;
