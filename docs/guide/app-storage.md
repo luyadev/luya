@@ -13,7 +13,7 @@ return [
     // ...
     'components' => [
         'storage' => [
-            'class' => 'luya\admin\storage\LocalFileSystem',
+            'class' => 'luya\admin\filesystem\LocalFileSystem',
         ],
     ]
 ]
@@ -28,7 +28,7 @@ return [
     // ...
     'components' => [
         'storage' => [
-            'class' => 'luya\admin\storage\LocalFileSystem',
+            'class' => 'luya\admin\filesystem\LocalFileSystem',
             'whitelistExtensions' => ['csv', 'svg'],
             'whitelistMimeTypes' => ['text/plain'], // as this is the mime type for csv files
          ]
