@@ -6,6 +6,8 @@ Permissions are commonly part of the {{luya\admin\base\Module::getMenu()}} metho
 
 ## The menu
 
+To see the module in the admin menu, please enable permission for installed module, without assignment the module will not appear in menu view. You can enable permissions under menu item Settings -> Groups -> click on permission (icon on right side -> mouse over) in the Entries tab, and assign permission.
+
 Each admin module does have a {{luya\admin\base\Module::getMenu()}} method where you can put your module navigation. The response must be an instance of {{luya\admin\components\AdminMenuBuilder}}.
 
 ![menu](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/admin-menu-structure.jpg "LUYA Menu")
