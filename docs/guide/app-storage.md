@@ -4,7 +4,7 @@ The storage component provies the possibility to upload files and images, also a
 
 In general the storage component is configure by default and available via `Yii::$app->storage`. The main component where all configuration options are display is the {{luya\admin\storage\BaseFileSystemStorage}}.
 
-As storage can have different faces, for example local storage where all files are stored in `@webroot/storage` or an [Amazon S3](https://github.com/luyadev/luya-aws) Adapter which stores all files in an Amazon S3 Bucket, by default the {{luya\admin\storage\LocalFileSystem}} is implement and configured.
+As storage can have different faces, for example local storage where all files are stored in `@webroot/storage` or an [Amazon S3](https://github.com/luyadev/luya-aws) Adapter which stores all files in an Amazon S3 Bucket, by default the {{luya\admin\filesystem\LocalFileSystem}} is implement and configured.
 
 This is the default configuration your config:
 
