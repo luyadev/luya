@@ -27,7 +27,7 @@ use Nadar\PhpComposerReader\Autoload;
  * Or clone a custom repo into the repos folder:
  *
  * ```sh
- * ./venodr/bin/luyadev repo/clone luya-module-news luyadev
+ * ./venodr/bin/luyadev repo/clone luyadev luya-module-news
  * ```
  *
  * In order to remove an existing repo from update list
@@ -168,8 +168,8 @@ EOT;
     /**
      * Clone a repo into the repos folder.
      *
-     * @param string $repo
      * @param string $vendor
+     * @param string $repo
      */
     public function actionClone($vendor = null, $repo = null)
     {
