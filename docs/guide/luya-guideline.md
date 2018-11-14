@@ -101,6 +101,36 @@ class FooBar
 }
 ```
 
+## CSS & JS Compilation
+
+### The GULP Workflow
+
+To compile CSS and Javascript into one file, use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow).
+To install gulp.js and all needed dependencies [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).
+
+Everything will be compiled into the folder `dist/` in the corresponding `{module}/resources` folder.
+
+> **Important:** The Javascript files and their loading order are all defined in the `compileConfig.js`. If you add a new Javascript file, make sure to add it in the config as well.
+
+**Commands**
+
+| Command                | Description                                   |
+| ---------------------- | --------------------------------------------- |
+| `gulp`                 | Compile all files and watch for changes       |
+| `gulp dist`            | Compile all files once                        |
+| `gulp dist --env prod` | Compile all files once, uglify / minification |
+
+**Locations**
+
+| Module                                                            | Path                              |
+| ----------------------------------------------------------------- | --------------------------------- |
+| [luya-module-admin](https://github.com/luyadev/luya-module-admin) | `modules/admin/src/resources`     |
+| [luya-modle-cms](https://github.com/luyadev/luya-module-cms)      | `modules/cms/src/admin/resources` |                     
+
+**Before commiting changes / opening a pull request**
+
+Run `gulp dist --env prod` in the corresponding directory and push the uglified/minified files.
+
 ## Versioning
 
 This project implements the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md).
@@ -172,34 +202,57 @@ Field name examples (for table *admin_user*):
 + password_salt
 + group_id
 
-### CSS
+### Resources (SCSS, JS)
 
-http://cssguidelin.es/
+**Folder structure**
 
-### Javascript
+In a module, all frontend files are stored under `resources/` (SCSS, JS, SVG, Images ...).
+The `resources/` folder should be structured as follows:
 
-https://github.com/airbnb/javascript
+```
+resources/
+ js/
+ scss/
+ gulp-config.js
+```
 
-### JSON Schema:
+Those are the folders that will always exist.
 
-http://json-schema.org/latest/json-schema-core.html
+**SCSS**
 
+The SCSS folder contains all SCSS files and is structured as follows:
 
-## Admin module CSS information
+| Folders | Description |
+|---------|-------------|
+| `base/` | Contains basic styles like the reboot, angular fixes and default styles for tags |
+| `browser-fixes/` | Contains specific browser fixes, for each fix we use a different file (e.g. _ie.scss) |
+| `components/` | Here all the components are stored. See "components" further down |
+| `fonts/` | Contains font-face and mixins for the specific font. |
+| `helpers/` | Mixins and functions |
+| `variables/` | All variables used in this project |
 
-The CSS and HTML files for the admin module are based on the following rules.
+**Components/**
 
-### Admin design compile
+All classes for a component are prefixed with the components name. If you have to select something by HTML tag, be sure that there is no way to select it by a specific class (if you can add a class to the element, go for it).
+Children of a component are seperated with a `-`.
 
-To compile CSS and Javascript into one file, use [our Gulp Workflow](https://github.com/zephir/zephir-gulp-workflow).
-To install gulp.js and all needed dependencies [follow the guide](https://github.com/zephir/zephir-gulp-workflow#dependencies).
+Example:
 
-Everything will be compiled into the folder `dist/` in the corresponding `{module}/resources` folder.
+Component: `_crud.scss`
 
-> **Important:** The Javascript files and their loading order are all defined in the `compileConfig.js`. If you add a new Javascript file, make sure to add it in the config as well.
+Classes in component: `.crud`, `.crud-header`, `.crud-title`, `.crud-table`
 
-**Module: admin**  
-Run `gulp` in the following directory: `modules/admin/src/resources`.
+HTML:
 
-**Module: cmsadmin**  
-Run `gulp` in the following directory: `modules/cms/src/admin/resources`.
+```html
+<div class="crud">
+ <div class="crud-header">
+  <h1 class="crud-title">Title</h1>
+ </div>
+ <div class="crud-table">
+  <table class="table">...</table>
+ </div>
+</div>
+```
+
+> You can see that all classes for the `crud` component are prefixed with `crud-`. That way we always know what we can find in which SCSS file. In the HTML you can see that there is a standalone component `table`, wrapped by the class `crud-table`. This results in an extra scss component `_table.scss`.

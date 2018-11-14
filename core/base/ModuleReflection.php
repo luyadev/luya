@@ -245,7 +245,7 @@ class ModuleReflection extends BaseObject
             throw new NotFoundHttpException(sprintf("Unable to create controller '%s' for module '%s'.", $requestRoute['route'], $this->module->id));
         }
         
-        Yii::info('LUYA module run module "'.$this->module->id.'" route ' . $requestRoute['route'], __METHOD__);
+        Yii::debug('LUYA module run module "'.$this->module->id.'" route ' . $requestRoute['route'], __METHOD__);
         
         $this->controller = $controller[0];
         $originalController = Yii::$app->controller;

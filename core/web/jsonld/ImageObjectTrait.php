@@ -16,7 +16,8 @@ trait ImageObjectTrait
     private $_caption;
     
     /**
-     * @inheritDoc
+     * 
+     * @return static
      */
     public function setCaption($caption)
     {
@@ -35,7 +36,8 @@ trait ImageObjectTrait
     private $_exifData;
     
     /**
-     * @inheritDoc
+     * 
+     * @return static
      */
     public function setExifData(PropertyValue $propertyValue)
     {
@@ -55,7 +57,8 @@ trait ImageObjectTrait
     private $_representativeOfPage;
     
     /**
-     * @inheritDoc
+     * 
+     * @return static
      */
     public function setRepresentativeOfPage($representativeOfPage)
     {
@@ -75,7 +78,8 @@ trait ImageObjectTrait
     private $_thumbnail;
     
     /**
-     * @inheritDoc
+     * 
+     * @return static
      */
     public function setThumbnail(ImageObject $imageObject)
     {

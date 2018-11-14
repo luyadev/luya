@@ -23,6 +23,15 @@ use luya\web\jsonld\MediaObject;
 use luya\web\jsonld\Offer;
 use luya\web\jsonld\PostalAddress;
 use luya\web\jsonld\Rating;
+use luya\web\jsonld\Event;
+use luya\web\jsonld\LocalBusiness;
+use luya\web\jsonld\OpeningHoursValue;
+use luya\web\jsonld\CurrencyValue;
+use luya\web\jsonld\FoodEstablishment;
+use luya\web\jsonld\Restaurant;
+use luya\web\jsonld\GeoCoordinates;
+use luya\web\jsonld\Review;
+use luya\web\jsonld\RangeValue;
 
 class JsonLdTest extends \luyatests\LuyaConsoleTestCase
 {
@@ -236,6 +245,17 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
         
         $this->assertSame(['description' => 'My offer', '@type' => 'Offer'], $offer->toArray());
     }
+
+    public function testEvent()
+    {
+        $event = new Event();
+        $event->setStartDate(new DateTimeValue(12345));
+
+        $this->assertSame([
+            'startDate' => '1970-01-01T03:25:45+00:00',
+            '@type' => 'Event',
+        ], $event->toArray());
+    }
     
     public function testPostalAddress()
     {
@@ -252,12 +272,134 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
         
         $this->assertSame(['description' => 'my rating', '@type' => 'Rating'], $rating->toArray());
     }
+
+    public function testLocalBusiness()
+    {
+        $biz = new LocalBusiness();
+        $hours = new OpeningHoursValue();
+        $hours->setDay(OpeningHoursValue::DAY_MONDAY, ['08:00' => '12:00', '14:00' => '18:00']);
+        $hours->setDay(OpeningHoursValue::DAY_WEDNESDAY, ['08:00' => '20:00']);
+
+        $biz->setOpeningHours($hours);
+        $biz->setCurrenciesAccepted(new CurrencyValue('CHF'));
+        $biz->setPaymentAccepted('Credit Card');
+        $biz->setPriceRange('$$$');
+        $biz->setDescription('Description from nested orgaisation method');
+
+        $this->assertSame([
+            'currenciesAccepted' => 'CHF',
+            'description' => 'Description from nested orgaisation method',
+            'openingHours' => 'Mo 08:00-12:00, Mo 14:00-18:00, We 08:00-20:00',
+            'paymentAccepted' => 'Credit Card',
+            'priceRange' => '$$$',
+            '@type' => 'LocalBusiness',
+        ], $biz->toArray());
+    }
     
+    public function testFoodEsablishment()
+    {
+        $foe = new FoodEstablishment();
+        $foe->setAcceptsReservations(true);
+        $foe->setHasMenu('Pizza');
+        $foe->setServesCuisine('Italian');
+        $foe->setStarRating((new Rating())->setDescription('Rating Description'));
+
+        $this->assertSame([
+            'acceptsReservations' => true,
+            'hasMenu' => 'Pizza',
+            'servesCuisine' => 'Italian',
+            'starRating' => [
+                'description' => 'Rating Description',
+                '@type' => 'Rating',
+            ],
+            '@type' => 'FoodEstablishment',
+        ], $foe->toArray());
+    }
+
     public function testValuesObjects()
     {
         $this->assertSame('1970-01-02', (new DateValue(123123))->getValue());
         $this->assertSame('1.1.2017', (new DateValue('1.1.2017'))->getValue());
         $this->assertSame('1970-01-02T10:12:03+00:00', (new DateTimeValue(123123))->getValue());
         $this->assertSame('1.1.2017 17:00', (new DateTimeValue('1.1.2017 17:00'))->getValue());
+    }
+
+    public function testAggregateRatingRangeException()
+    {
+        $ar = new AggregateRating();
+        $ar->setBestRating(4);
+        $ar->setWorstRating(2);
+        $ar->setRatingValue(1);
+        $this->expectException("yii\base\InvalidConfigException");
+        $ar->toArray();
+    }
+
+    public function testRestaurantWithPlaceGeoCordinates()
+    {
+        $r = new Restaurant();
+        $r->setDescription("luya.io restaurant!");
+
+        $ar = new AggregateRating();
+        $ar->setBestRating(4);
+        $ar->setWorstRating(2);
+        $ar->setReviewCount(2);
+        $ar->setRatingCount(0); // will be removed as its an empty value.
+        $r->setAggregateRating($ar);
+
+        $geo = new GeoCoordinates();
+        $geo->setLatitude(123);
+        $geo->setLongitude(456);
+        $r->setGeo($geo);
+
+
+        $review1 = new Review();
+        $review1->setAuthor((new Person())->setFamilyName('John'));
+        $review1->setDatePublished(new DateTimeVAlue(123123));
+        $review1->setDescription("Top!");
+
+        $r->setReview($review1);
+
+        $review2 = new Review();
+        $review2->setAuthor((new Person())->setFamilyName('Jane'));
+        $review2->setDatePublished(new DateTimeVAlue(456456));
+        $review2->setDescription("Nope!");
+        $r->setReview($review2);
+
+        $this->assertSame([
+            'aggregateRating' => [
+                'bestRating' => 4,
+                'reviewCount' => 2,
+                'worstRating' => 2,
+                '@type' => 'AggregateRating',
+            ],        
+            'description' => 'luya.io restaurant!',
+            'geo' => [
+                'latitude' => 123,
+                'longitude' => 456,
+                '@type' => 'GeoCoordinates',
+            ],
+            'review' => [
+                0 => [
+                    'author' => [
+                        'familyName' => 'John',
+                        '@type' => 'Person',
+                    ],
+                    'datePublished' => '1970-01-02T10:12:03+00:00',
+                    'description' => 'Top!',
+                    '@type' => 'Review',
+                ],
+                1 => [
+                    'author' => [
+                        'familyName' => 'Jane',
+                        '@type' => 'Person',
+                    ],
+                    'datePublished' => '1970-01-06T06:47:36+00:00',
+                    'description' => 'Nope!',
+                    '@type' => 'Review',
+                ],
+            ],
+            '@type' => 'Restaurant'
+
+        ], $r->toArray());
     }
 }

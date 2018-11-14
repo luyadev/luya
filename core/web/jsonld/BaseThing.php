@@ -61,7 +61,7 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
      */
     public function toArray(array $fields = [], array $expand = [], $recursive = true)
     {
-        $array = $this->removeNullValues($this->internalToArray($fields, $expand, $recursive));
+        $array = $this->removeEmptyValues($this->internalToArray($fields, $expand, $recursive));
         
         if ($this->typeDefintion()) {
             $array['@type'] = $this->typeDefintion();
@@ -84,14 +84,14 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
      * @param array $haystack
      * @return array
      */
-    private function removeNullValues(array $haystack)
+    private function removeEmptyValues(array $haystack)
     {
         foreach ($haystack as $key => $value) {
             if (is_array($value)) {
-                $haystack[$key] = $this->removeNullValues($value);
+                $haystack[$key] = $this->removeEmptyValues($value);
             }
-            
-            if ($value === null) {
+            // remove empty values as there is no property which allows empty values.
+            if (empty($value)) {
                 unset($haystack[$key]);
             }
         }

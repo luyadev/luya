@@ -28,7 +28,7 @@ trait ArticleTrait
      * The actual body of the article.
      *
      * @param string $articleBody
-     * @return Article|ArticleTrait
+     * @return static
      */
     public function setArticleBody($articleBody)
     {
@@ -50,7 +50,7 @@ trait ArticleTrait
      * Articles may belong to one or more 'sections' in a magazine or newspaper, such as Sports, Lifestyle, etc.
      *
      * @param string $articleSection
-     * @return Article|ArticleTrait
+     * @return static
      */
     public function setArticleSection($articleSection)
     {
@@ -72,7 +72,7 @@ trait ArticleTrait
      * The page on which the work ends; for example "138" or "xvi".
      *
      * @param int|string $pageEnd
-     * @return Article|ArticleTrait
+     * @return static
      */
     public function setPageEnd($pageEnd)
     {
@@ -94,7 +94,7 @@ trait ArticleTrait
      * The page on which the work starts; for example "135" or "xiii".
      *
      * @param int|string $pageStart
-     * @return Article|ArticleTrait
+     * @return static
      */
     public function setPageStart($pageStart)
     {
@@ -117,7 +117,7 @@ trait ArticleTrait
      * for example, "1-6, 9, 55" or "10-12, 46-49".
      *
      * @param string $pagination
-     * @return Article|ArticleTrait
+     * @return static
      */
     public function setPagination($pagination)
     {
@@ -139,7 +139,7 @@ trait ArticleTrait
      * The number of words in the text of the Article.
      *
      * @param int $wordCount
-     * @return Article|ArticleTrait
+     * @return static
      */
     public function setWordCount($wordCount)
     {

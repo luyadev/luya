@@ -19,7 +19,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Thing $about
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAbout(Thing $about);
 
@@ -30,7 +30,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $accessMode
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessMode($accessMode);
 
@@ -41,7 +41,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $accessModeSufficient
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessModeSufficient($accessModeSufficient);
 
@@ -52,7 +52,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $accessibilityAPI
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilityAPI($accessibilityAPI);
 
@@ -63,7 +63,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $accessibilityControl
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilityControl($accessibilityControl);
 
@@ -74,7 +74,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $accessibilityFeature
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilityFeature($accessibilityFeature);
 
@@ -85,7 +85,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $accessibilityHazard
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilityHazard($accessibilityHazard);
 
@@ -96,7 +96,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $accessibilitySummary
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilitySummary($accessibilitySummary);
 
@@ -107,7 +107,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Person $accountablePerson
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccountablePerson(Person $accountablePerson);
 
@@ -118,7 +118,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $alternativeHeadline
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAlternativeHeadline($alternativeHeadline);
 
@@ -129,7 +129,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param MediaObject $associatedMedia
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAssociatedMedia(MediaObject $associatedMedia);
 
@@ -140,7 +140,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $author
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAuthor($author);
 
@@ -151,7 +151,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $award
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAward($award);
 
@@ -162,7 +162,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Person $character
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCharacter(Person $character);
 
@@ -173,7 +173,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param CreativeWork|string $citation
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCitation(CreativeWork $citation);
 
@@ -184,7 +184,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Comment $comment
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setComment(Comment $comment);
 
@@ -195,7 +195,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param int $commentCount
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCommentCount($commentCount);
 
@@ -206,7 +206,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Place $contentLocation
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setContentLocation(Place $contentLocation);
 
@@ -217,7 +217,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $contentRating
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setContentRating($contentRating);
 
@@ -228,7 +228,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param DateTimeValue $contentReferenceTime
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setContentReferenceTime(DateTimeValue $contentReferenceTime);
 
@@ -239,7 +239,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $contributor
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setContributor($contributor);
 
@@ -250,7 +250,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $copyrightHolder
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCopyrightHolder($copyrightHolder);
 
@@ -261,7 +261,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param mixed $copyrightYear
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCopyrightYear($copyrightYear);
 
@@ -272,7 +272,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $creator
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCreator($creator);
 
@@ -283,7 +283,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param DateTimeValue $dateCreated
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setDateCreated(DateTimeValue $dateCreated);
 
@@ -294,7 +294,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param DateTimeValue $dateModified
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setDateModified(DateTimeValue $dateModified);
 
@@ -305,7 +305,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param DateTimeValue $datePublished
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setDatePublished(DateTimeValue $datePublished);
 
@@ -316,7 +316,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param UrlValue $discussionUrl
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setDiscussionUrl(UrlValue $discussionUrl);
 
@@ -359,7 +359,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param CreativeWork $exampleOfWork
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setExampleOfWork(CreativeWork $exampleOfWork);
 
@@ -370,7 +370,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param DateValue $expires
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setExpires(DateValue $expires);
 
@@ -381,7 +381,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $fileFormat
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setFileFormat($fileFormat);
 
@@ -392,7 +392,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $genre
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setGenre($genre);
 
@@ -403,7 +403,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param CreativeWork $hasPart
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setHasPart(CreativeWork $hasPart);
 
@@ -414,7 +414,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param TextValue $headline
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setHeadline(TextValue $headline);
 
@@ -425,7 +425,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $interactivityType
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setInteractivityType($interactivityType);
 
@@ -436,7 +436,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param bool $isAccessibleForFree
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setIsAccessibleForFree($isAccessibleForFree);
 
@@ -447,7 +447,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param bool $isFamilyFriendly
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setIsFamilyFriendly($isFamilyFriendly);
 
@@ -458,7 +458,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param CreativeWork $isPartOf
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setIsPartOf(CreativeWork $isPartOf);
 
@@ -469,7 +469,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $keywords
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setKeywords($keywords);
 
@@ -480,7 +480,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $learningResourceType
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setLearningResourceType($learningResourceType);
 
@@ -491,7 +491,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Place $locationCreated
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setLocationCreated(Place $locationCreated);
 
@@ -502,7 +502,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Thing $mainEntity
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setMainEntity(Thing $mainEntity);
 
@@ -513,7 +513,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Thing $mentions
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setMentions(Thing $mentions);
 
@@ -524,7 +524,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param int|string $position
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setPosition($position);
 
@@ -535,7 +535,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $producer
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setProducer($producer);
 
@@ -546,7 +546,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $provider
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setProvider($provider);
 
@@ -557,7 +557,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $publisher
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setPublisher($publisher);
 
@@ -568,7 +568,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization $publisherImprint
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setPublisherImprint(Organization $publisherImprint);
 
@@ -579,7 +579,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param CreativeWork $publishingPrinciples
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setPublishingPrinciples(CreativeWork $publishingPrinciples);
 
@@ -590,7 +590,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Event $recordedAt
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setRecordedAt(Event $recordedAt);
 
@@ -602,7 +602,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $schemaVersion
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setSchemaVersion(UrlValue $schemaVersion);
 
@@ -613,7 +613,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization $sourceOrganization
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setSourceOrganization(Organization $sourceOrganization);
 
@@ -624,7 +624,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Place $spatialCoverage
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setSpatialCoverage(Place $spatialCoverage);
 
@@ -635,7 +635,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $sponsor
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setSponsor($sponsor);
 
@@ -646,7 +646,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param DateTime|URL|string $temporalCoverage
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setTemporalCoverage($temporalCoverage);
 
@@ -657,7 +657,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $text
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setText($text);
 
@@ -668,7 +668,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param UrlValue $thumbnailUrl
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setThumbnailUrl(UrlValue $thumbnailUrl);
     
@@ -679,7 +679,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param CreativeWork $translationOfWork
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setTranslationOfWork(CreativeWork $translationOfWork);
 
@@ -690,7 +690,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param Organization|Person $translator
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setTranslator($translator);
 
@@ -701,7 +701,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param string $typicalAgeRange
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setTypicalAgeRange($typicalAgeRange);
 
@@ -712,7 +712,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param int|string $version
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setVersion($version);
     
@@ -723,7 +723,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param CreativeWork $workExample
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setWorkExample(CreativeWork $workExample);
 
@@ -734,7 +734,7 @@ interface CreativeWorkInterface extends ThingInterface
 
     /**
      * @param CreativeWork $workTranslation
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setWorkTranslation(CreativeWork $workTranslation);
 }

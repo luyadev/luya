@@ -17,7 +17,7 @@ interface EventInterface
 
     /**
      * @param Thing $about
-     * @return EventTrait
+     * @return static
      */
     public function setAbout(Thing $about);
 
@@ -28,7 +28,7 @@ interface EventInterface
 
     /**
      * @param Person $actor
-     * @return EventTrait
+     * @return static
      */
     public function setActor(Person $actor);
 
@@ -39,7 +39,7 @@ interface EventInterface
 
     /**
      * @param Organization|Person $attendee
-     * @return EventTrait
+     * @return static
      */
     public function setAttendee($attendee);
 
@@ -50,7 +50,7 @@ interface EventInterface
 
     /**
      * @param Organization|Person $composer
-     * @return EventTrait
+     * @return static
      */
     public function setComposer($composer);
 
@@ -61,7 +61,7 @@ interface EventInterface
 
     /**
      * @param Organization|Person $contributor
-     * @return EventTrait
+     * @return static
      */
     public function setContributor($contributor);
 
@@ -72,7 +72,7 @@ interface EventInterface
 
     /**
      * @param Person $director
-     * @return EventTrait
+     * @return static
      */
     public function setDirector(Person $director);
 
@@ -83,7 +83,7 @@ interface EventInterface
 
     /**
      * @param DateTimeValue $doorTime
-     * @return EventTrait
+     * @return static
      */
     public function setDoorTime(DateTimeValue $doorTime);
 
@@ -94,7 +94,7 @@ interface EventInterface
 
     /**
      * @param DurationValue $duration
-     * @return EventTrait
+     * @return static
      */
     public function setDuration(DurationValue $duration);
 
@@ -105,7 +105,7 @@ interface EventInterface
 
     /**
      * @param DateTimeValue $endDate
-     * @return EventTrait
+     * @return static
      */
     public function setEndDate(DateTimeValue $endDate);
 
@@ -116,7 +116,7 @@ interface EventInterface
 
     /**
      * @param Organization|Person $funder
-     * @return EventTrait
+     * @return static
      */
     public function setFunder($funder);
 
@@ -127,9 +127,9 @@ interface EventInterface
 
     /**
      * @param Language|Text $inLanguage
-     * @return EventTrait
+     * @return static
      */
-    public function setInLanguage($inLanguage);
+    public function setInLanguage(LanguageValue $inLanguage);
 
     /**
      * @return bool
@@ -138,7 +138,7 @@ interface EventInterface
 
     /**
      * @param bool $isAccessibleForFree
-     * @return EventTrait
+     * @return static
      */
     public function setIsAccessibleForFree($isAccessibleForFree);
 
@@ -149,7 +149,7 @@ interface EventInterface
 
     /**
      * @param Place|PostalAddress|string $location
-     * @return EventTrait
+     * @return static
      */
     public function setLocation($location);
 
@@ -170,7 +170,7 @@ interface EventInterface
 
     /**
      * @param Organization|Person $organizer
-     * @return EventTrait
+     * @return static
      */
     public function setOrganizer($organizer);
 
@@ -181,7 +181,7 @@ interface EventInterface
 
     /**
      * @param Organization|Person $performer
-     * @return EventTrait
+     * @return static
      */
     public function setPerformer($performer);
 
@@ -192,7 +192,7 @@ interface EventInterface
 
     /**
      * @param DateValue $previousStartDate
-     * @return EventTrait
+     * @return static
      */
     public function setPreviousStartDate(DateValue $previousStartDate);
 
@@ -203,7 +203,7 @@ interface EventInterface
 
     /**
      * @param CreativeWork $recordedIn
-     * @return EventTrait
+     * @return static
      */
     public function setRecordedIn(CreativeWork $recordedIn);
 
@@ -214,7 +214,7 @@ interface EventInterface
 
     /**
      * @param int $remainingAttendeeCapacity
-     * @return EventTrait
+     * @return static
      */
     public function setRemainingAttendeeCapacity($remainingAttendeeCapacity);
 
@@ -225,7 +225,7 @@ interface EventInterface
 
     /**
      * @param Organization|Person $sponsor
-     * @return EventTrait
+     * @return static
      */
     public function setSponsor($sponsor);
 
@@ -236,7 +236,7 @@ interface EventInterface
 
     /**
      * @param DateTimeValue $startDate
-     * @return EventTrait
+     * @return static
      */
     public function setStartDate(DateTimeValue $startDate);
 
@@ -257,7 +257,7 @@ interface EventInterface
 
     /**
      * @param Event $superEvent
-     * @return EventTrait
+     * @return static
      */
     public function setSuperEvent(Event $superEvent);
 
@@ -268,7 +268,7 @@ interface EventInterface
 
     /**
      * @param Organization|Person $translator
-     * @return EventTrait
+     * @return static
      */
     public function setTranslator($translator);
 
@@ -279,7 +279,7 @@ interface EventInterface
 
     /**
      * @param string $typicalAgeRange
-     * @return EventTrait
+     * @return static
      */
     public function setTypicalAgeRange($typicalAgeRange);
 
@@ -290,7 +290,7 @@ interface EventInterface
 
     /**
      * @param CreativeWork $workFeatured
-     * @return EventTrait
+     * @return static
      */
     public function setWorkFeatured(CreativeWork $workFeatured);
 
@@ -301,7 +301,7 @@ interface EventInterface
 
     /**
      * @param CreativeWork $workPerformed
-     * @return EventTrait
+     * @return static
      */
     public function setWorkPerformed(CreativeWork $workPerformed);
 }

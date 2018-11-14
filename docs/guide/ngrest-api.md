@@ -2,7 +2,7 @@
 
 As APIs are the base concept of LUYA admin, you can modify and tweak them with a few changes in order to increase or customize the default behavior.
 
-Every API endpoint must be extending from the {{luya\admin\ngrest\base\Api}} class and define the {{luya\admin\ngrest\base\Api::$modelClass}}. A very basic implementation could look like this:
+Every API endpoint must be extending from the {{luya\admin\ngrest\base\Api}} class and define the {{luya\admin\ngrest\base\Api::$modelClass}}. A very basic implementation could look like this:
 
 ```php
 class MyEndpoint extends Api
@@ -56,7 +56,7 @@ public $pagination = [
 
 ## Extend index query
 
-You can override the prepare index query to preload relation data with {{luya\admin\ngrest\base\Api::prepareIndexQuery()}} if you just have to load relations we recommend to use {{luya\admin\ngrest\base\Api::withRelations()}} instead.
+You can override the prepare index query to preload relation data with {{luya\admin\ngrest\base\Api::prepareIndexQuery()}} if you just have to load relations we recommend to use {{luya\admin\ngrest\base\Api::withRelations()}} instead.
 
 ```php
 public function prepareIndexQuery()

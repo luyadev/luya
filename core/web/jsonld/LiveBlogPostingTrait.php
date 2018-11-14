@@ -27,7 +27,7 @@ trait LiveBlogPostingTrait
      * The time when the live blog will stop covering the Event. Note that coverage may continue after the Event concludes.
      *
      * @param DateTimeValue $coverageEndTime
-     * @return LiveBlogPosting|LiveBlogPostingTrait
+     * @return static
      */
     public function setCoverageEndTime(DateTimeValue $coverageEndTime)
     {
@@ -50,7 +50,7 @@ trait LiveBlogPostingTrait
      * The LiveBlogPosting may also be created before coverage begins.
      *
      * @param DateTimeValue $coverageStartTime
-     * @return LiveBlogPosting|LiveBlogPostingTrait
+     * @return static
      */
     public function setCoverageStartTime(DateTimeValue $coverageStartTime)
     {
@@ -72,7 +72,7 @@ trait LiveBlogPostingTrait
      * An update to the LiveBlog.
      *
      * @param BlogPosting $liveBlogUpdate
-     * @return LiveBlogPosting|LiveBlogPostingTrait
+     * @return static
      */
     public function setLiveBlogUpdate(BlogPosting $liveBlogUpdate)
     {

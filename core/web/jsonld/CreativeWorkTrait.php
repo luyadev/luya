@@ -31,7 +31,7 @@ trait CreativeWorkTrait
      * Inverse property: subjectOf.
      *
      * @param Thing $about
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAbout(Thing $about)
     {
@@ -57,7 +57,7 @@ trait CreativeWorkTrait
      * diagramOnVisual, mathOnVisual, musicOnVisual, textOnVisual.
      *
      * @param string $accessMode
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessMode($accessMode)
     {
@@ -82,7 +82,7 @@ trait CreativeWorkTrait
      * Expected values include: auditory, tactile, textual, visual.
      *
      * @param string $accessModeSufficient
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessModeSufficient($accessModeSufficient)
     {
@@ -105,7 +105,7 @@ trait CreativeWorkTrait
      * (WebSchemas wiki lists possible values).
      *
      * @param string $accessibilityAPI
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilityAPI($accessibilityAPI)
     {
@@ -128,7 +128,7 @@ trait CreativeWorkTrait
      * (WebSchemas wiki lists possible values).
      *
      * @param string $accessibilityControl
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilityControl($accessibilityControl)
     {
@@ -151,7 +151,7 @@ trait CreativeWorkTrait
      * (WebSchemas wiki lists possible values).
      *
      * @param string $accessibilityFeature
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilityFeature($accessibilityFeature)
     {
@@ -174,7 +174,7 @@ trait CreativeWorkTrait
      * Related to WCAG 2.0 guideline 2.3 (WebSchemas wiki lists possible values).
      *
      * @param string $accessibilityHazard
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilityHazard($accessibilityHazard)
     {
@@ -198,7 +198,7 @@ trait CreativeWorkTrait
      * will be needed for non-visual users" or "short descriptions are present and no long descriptions are needed."
      *
      * @param string $accessibilitySummary
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccessibilitySummary($accessibilitySummary)
     {
@@ -220,7 +220,7 @@ trait CreativeWorkTrait
      * Specifies the Person that is legally accountable for the CreativeWork.
      *
      * @param Person $accountablePerson
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAccountablePerson(Person $accountablePerson)
     {
@@ -242,7 +242,7 @@ trait CreativeWorkTrait
      * A secondary title of the CreativeWork.
      *
      * @param string $alternativeHeadline
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAlternativeHeadline($alternativeHeadline)
     {
@@ -264,7 +264,7 @@ trait CreativeWorkTrait
      * A media object that encodes this CreativeWork. This property is a synonym for encoding.
      *
      * @param MediaObject $associatedMedia
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAssociatedMedia(MediaObject $associatedMedia)
     {
@@ -287,7 +287,7 @@ trait CreativeWorkTrait
      * mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
      *
      * @param Organization|Person $author
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAuthor($author)
     {
@@ -312,7 +312,7 @@ trait CreativeWorkTrait
      * Supersedes awards.
      *
      * @param string $award
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setAward($award)
     {
@@ -334,7 +334,7 @@ trait CreativeWorkTrait
      * Fictional person connected with a creative work.
      *
      * @param Person $character
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCharacter(Person $character)
     {
@@ -356,7 +356,7 @@ trait CreativeWorkTrait
      * A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.
      *
      * @param CreativeWork $citation
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCitation(CreativeWork $citation)
     {
@@ -378,7 +378,7 @@ trait CreativeWorkTrait
      * Comments, typically from users.
      *
      * @param Comment $comment
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setComment(Comment $comment)
     {
@@ -401,7 +401,7 @@ trait CreativeWorkTrait
      * applicable to works published in Web sites with commenting system; additional comments may exist elsewhere.
      *
      * @param int $commentCount
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCommentCount($commentCount)
     {
@@ -423,7 +423,7 @@ trait CreativeWorkTrait
      * The location depicted or described in the content. For example, the location in a photograph or painting.
      *
      * @param Place $contentLocation
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setContentLocation(Place $contentLocation)
     {
@@ -445,7 +445,7 @@ trait CreativeWorkTrait
      * Official rating of a piece of content—for example,'MPAA PG-13'.
      *
      * @param string $contentRating
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setContentRating($contentRating)
     {
@@ -468,7 +468,7 @@ trait CreativeWorkTrait
      * a particular moment within an Event.
      *
      * @param DateTimeValue $contentReferenceTime
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setContentReferenceTime(DateTimeValue $contentReferenceTime)
     {
@@ -490,7 +490,7 @@ trait CreativeWorkTrait
      * A secondary contributor to the CreativeWork or Event.
      *
      * @param Organization|Person $contributor
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setContributor($contributor)
     {
@@ -514,7 +514,7 @@ trait CreativeWorkTrait
      * The party holding the legal copyright to the CreativeWork.
      *
      * @param Organization|Person $copyrightHolder
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCopyrightHolder($copyrightHolder)
     {
@@ -538,7 +538,7 @@ trait CreativeWorkTrait
      * The year during which the claimed copyright for the CreativeWork was first asserted.
      *
      * @param mixed $copyrightYear
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCopyrightYear($copyrightYear)
     {
@@ -560,7 +560,7 @@ trait CreativeWorkTrait
      * The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.
      *
      * @param Organization|Person $creator
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setCreator($creator)
     {
@@ -584,7 +584,7 @@ trait CreativeWorkTrait
      * The date on which the CreativeWork was created or the item was added to a DataFeed.
      *
      * @param DateTimeValue $dateCreated
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setDateCreated(DateTimeValue $dateCreated)
     {
@@ -607,7 +607,7 @@ trait CreativeWorkTrait
      * or when the item's entry was modified within a DataFeed.
      *
      * @param DateTimeValue $dateModified
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setDateModified(DateTimeValue $dateModified)
     {
@@ -629,7 +629,7 @@ trait CreativeWorkTrait
      * Date of first broadcast/publication.
      *
      * @param DateTimeValue $datePublished
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setDatePublished(DateTimeValue $datePublished)
     {
@@ -651,7 +651,7 @@ trait CreativeWorkTrait
      * A link to the page containing the comments of the CreativeWork.
      *
      * @param UrlValue $discussionUrl
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setDiscussionUrl(UrlValue $discussionUrl)
     {
@@ -694,7 +694,7 @@ trait CreativeWorkTrait
      * The purpose of a work in the context of education; for example, 'assignment', 'group work'.
      *
      * @param string $educationalUse
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setEducationalUse(CreativeWork $educationalUse)
     {
@@ -717,7 +717,7 @@ trait CreativeWorkTrait
      * Supersedes encodings.
      *
      * @param MediaObject $encoding
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setEncoding(MediaObject $encoding)
     {
@@ -740,7 +740,7 @@ trait CreativeWorkTrait
      * Inverse property: workExample.
      *
      * @param CreativeWork $exampleOfWork
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setExampleOfWork(CreativeWork $exampleOfWork)
     {
@@ -764,7 +764,7 @@ trait CreativeWorkTrait
      * it may no longer be relevant (or helpful to highlight) after some date.
      *
      * @param DateValue $expires
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setExpires(DateValue $expires)
     {
@@ -789,7 +789,7 @@ trait CreativeWorkTrait
      * instead via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.
      *
      * @param URL|string $fileFormat
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setFileFormat($fileFormat)
     {
@@ -811,7 +811,7 @@ trait CreativeWorkTrait
      * A person or organization that supports (sponsors) something through some kind of financial contribution.
      *
      * @param Organization|Person $funder
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setFunder($funder)
     {
@@ -835,7 +835,7 @@ trait CreativeWorkTrait
      * Genre of the creative work, broadcast channel or group.
      *
      * @param URL|string $genre
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setGenre($genre)
     {
@@ -858,7 +858,7 @@ trait CreativeWorkTrait
      * Inverse property: isPartOf.
      *
      * @param CreativeWork $hasPart
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setHasPart(CreativeWork $hasPart)
     {
@@ -880,7 +880,7 @@ trait CreativeWorkTrait
      * Headline of the article.
      *
      * @param TextValue $headline
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setHeadline(TextValue $headline)
     {
@@ -904,7 +904,7 @@ trait CreativeWorkTrait
      * Acceptable values are 'active', 'expositive', or 'mixed'.
      *
      * @param string $interactivityType
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setInteractivityType($interactivityType)
     {
@@ -927,7 +927,7 @@ trait CreativeWorkTrait
      * Supersedes free.
      *
      * @param bool $isAccessibleForFree
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setIsAccessibleForFree($isAccessibleForFree)
     {
@@ -949,7 +949,7 @@ trait CreativeWorkTrait
      * Indicates whether this content is family friendly.
      *
      * @param bool $isFamilyFriendly
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setIsFamilyFriendly($isFamilyFriendly)
     {
@@ -972,7 +972,7 @@ trait CreativeWorkTrait
      * Inverse property: hasPart.
      *
      * @param CreativeWork $isPartOf
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setIsPartOf(CreativeWork $isPartOf)
     {
@@ -995,7 +995,7 @@ trait CreativeWorkTrait
      * Multiple entries in a keywords list are typically delimited by commas.
      *
      * @param string $keywords
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setKeywords($keywords)
     {
@@ -1017,7 +1017,7 @@ trait CreativeWorkTrait
      * The predominant type or kind characterizing the learning resource. For example, 'presentation', 'handout'.
      *
      * @param string $learningResourceType
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setLearningResourceType($learningResourceType)
     {
@@ -1039,7 +1039,7 @@ trait CreativeWorkTrait
      * The location where the CreativeWork was created, which may not be the same as the location depicted in the CreativeWork.
      *
      * @param Place $locationCreated
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setLocationCreated(Place $locationCreated)
     {
@@ -1062,7 +1062,7 @@ trait CreativeWorkTrait
      * Inverse property: mainEntityOfPage.
      *
      * @param Thing $mainEntity
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setMainEntity(Thing $mainEntity)
     {
@@ -1084,7 +1084,7 @@ trait CreativeWorkTrait
      * Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.
      *
      * @param Thing $mentions
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setMentions(Thing $mentions)
     {
@@ -1106,7 +1106,7 @@ trait CreativeWorkTrait
      * The position of an item in a series or sequence of items.
      *
      * @param int|string $position
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setPosition($position)
     {
@@ -1128,7 +1128,7 @@ trait CreativeWorkTrait
      * The person or organization who produced the work (e.g. music album, movie, tv/radio series etc.).
      *
      * @param Organization|Person $producer
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setProducer($producer)
     {
@@ -1154,7 +1154,7 @@ trait CreativeWorkTrait
      * Supersedes carrier.
      *
      * @param Organization|Person $provider
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setProvider($provider)
     {
@@ -1178,7 +1178,7 @@ trait CreativeWorkTrait
      * The publisher of the creative work.
      *
      * @param Organization|Person $publisher
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setPublisher($publisher)
     {
@@ -1202,7 +1202,7 @@ trait CreativeWorkTrait
      * The publishing division which published the comic.
      *
      * @param Organization $publisherImprint
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setPublisherImprint(Organization $publisherImprint)
     {
@@ -1230,7 +1230,7 @@ trait CreativeWorkTrait
      * (e.g. indicating a funder) can be expressed using schema.org terminology.
      *
      * @param CreativeWork|URL $publishingPrinciples
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setPublishingPrinciples(CreativeWork $publishingPrinciples)
     {
@@ -1253,7 +1253,7 @@ trait CreativeWorkTrait
      * Inverse property: recordedIn.
      *
      * @param Event $recordedAt
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setRecordedAt(Event $recordedAt)
     {
@@ -1277,7 +1277,7 @@ trait CreativeWorkTrait
      * if precise indication of schema version was required by some application.
      *
      * @param UrlValue $schemaVersion
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setSchemaVersion(UrlValue $schemaVersion)
     {
@@ -1299,7 +1299,7 @@ trait CreativeWorkTrait
      * The Organization on whose behalf the creator was working.
      *
      * @param Organization $sourceOrganization
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setSourceOrganization(Organization $sourceOrganization)
     {
@@ -1324,7 +1324,7 @@ trait CreativeWorkTrait
      * have spatialCoverage which was the place: the state of New York. Supersedes spatial.
      *
      * @param Place $spatialCoverage
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setSpatialCoverage(Place $spatialCoverage)
     {
@@ -1347,7 +1347,7 @@ trait CreativeWorkTrait
      * e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
      *
      * @param Organization|Person $sponsor
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setSponsor($sponsor)
     {
@@ -1378,7 +1378,7 @@ trait CreativeWorkTrait
      * Supersedes datasetTimeInterval, temporal.
      *
      * @param DateTime|URL|string $temporalCoverage
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setTemporalCoverage($temporalCoverage)
     {
@@ -1400,7 +1400,7 @@ trait CreativeWorkTrait
      * The textual content of this CreativeWork.
      *
      * @param string $text
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setText($text)
     {
@@ -1422,7 +1422,7 @@ trait CreativeWorkTrait
      * 	A thumbnail image relevant to the Thing.
      *
      * @param UrlValue $thumbnailUrl
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setThumbnailUrl(UrlValue $thumbnailUrl)
     {
@@ -1446,7 +1446,7 @@ trait CreativeWorkTrait
      * Inverse property: workTranslation.
      *
      * @param CreativeWork $translationOfWork
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setTranslationOfWork(CreativeWork $translationOfWork)
     {
@@ -1469,7 +1469,7 @@ trait CreativeWorkTrait
      * requirements of a target market, or that translates during some event.
      *
      * @param Organization|Person $translator
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setTranslator($translator)
     {
@@ -1493,7 +1493,7 @@ trait CreativeWorkTrait
      * The typical expected age range, e.g. '7-9', '11-'.
      *
      * @param string $typicalAgeRange
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setTypicalAgeRange($typicalAgeRange)
     {
@@ -1515,7 +1515,7 @@ trait CreativeWorkTrait
      * The version of the CreativeWork embodied by a specified resource.
      *
      * @param int|string $version
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setVersion($version)
     {
@@ -1540,7 +1540,7 @@ trait CreativeWorkTrait
      * Inverse property: exampleOfWork.
      *
      * @param CreativeWork $workExample
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setWorkExample(CreativeWork $workExample)
     {
@@ -1564,7 +1564,7 @@ trait CreativeWorkTrait
      * Inverse property: translationOfWork.
      *
      * @param CreativeWork $workTranslation
-     * @return CreativeWork|CreativeWorkTrait
+     * @return static
      */
     public function setWorkTranslation(CreativeWork $workTranslation)
     {

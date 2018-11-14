@@ -19,7 +19,7 @@ interface PersonInterface
 
     /**
      * @param $additionalName
-     * @return PersonTrait
+     * @return static
      */
     public function setAdditionalName($additionalName);
 
@@ -30,7 +30,7 @@ interface PersonInterface
 
     /**
      * @param PostalAddress $address
-     * @return PersonTrait
+     * @return static
      */
     public function setAddress(PostalAddress $address);
 
@@ -41,7 +41,7 @@ interface PersonInterface
 
     /**
      * @param Organization $affiliation
-     * @return PersonTrait
+     * @return static
      */
     public function setAffiliation(Organization $affiliation);
 
@@ -52,7 +52,7 @@ interface PersonInterface
 
     /**
      * @param $award
-     * @return PersonTrait
+     * @return static
      */
     public function setAward($award);
 
@@ -63,7 +63,7 @@ interface PersonInterface
 
     /**
      * @param DateValue $birthDate
-     * @return PersonTrait
+     * @return static
      */
     public function setBirthDate(DateValue $birthDate);
 
@@ -74,7 +74,7 @@ interface PersonInterface
 
     /**
      * @param Place $birthPlace
-     * @return PersonTrait
+     * @return static
      */
     public function setBirthPlace($birthPlace);
 
@@ -85,7 +85,7 @@ interface PersonInterface
 
     /**
      * @param Brand|Organization $brand
-     * @return PersonTrait
+     * @return static
      */
     public function setBrand($brand);
     /**
@@ -95,7 +95,7 @@ interface PersonInterface
 
     /**
      * @param Person $children
-     * @return PersonTrait
+     * @return static
      */
     public function setChildren(Person $children);
 
@@ -106,7 +106,7 @@ interface PersonInterface
 
     /**
      * @param Person $colleague
-     * @return PersonTrait
+     * @return static
      */
     public function setColleague(Person $colleague);
 
@@ -117,7 +117,7 @@ interface PersonInterface
 
     /**
      * @param ContactPoint $contactPoint
-     * @return PersonTrait
+     * @return static
      */
     public function setContactPoint(ContactPoint $contactPoint);
 
@@ -128,7 +128,7 @@ interface PersonInterface
 
     /**
      * @param DateValue $deathDate
-     * @return PersonTrait
+     * @return static
      */
     public function setDeathDate(DateValue $deathDate);
 
@@ -139,7 +139,7 @@ interface PersonInterface
 
     /**
      * @param Place $deathPlace
-     * @return PersonTrait
+     * @return static
      */
     public function setDeathPlace(Place $deathPlace);
 
@@ -150,7 +150,7 @@ interface PersonInterface
 
     /**
      * @param $duns
-     * @return PersonTrait
+     * @return static
      */
     public function setDuns(Person $duns);
 
@@ -161,7 +161,7 @@ interface PersonInterface
 
     /**
      * @param $email
-     * @return PersonTrait
+     * @return static
      */
     public function setEmail($email);
 
@@ -172,7 +172,7 @@ interface PersonInterface
 
     /**
      * @param $familyName
-     * @return PersonTrait
+     * @return static
      */
     public function setFamilyName($familyName);
 
@@ -183,7 +183,7 @@ interface PersonInterface
 
     /**
      * @param $faxNumber
-     * @return PersonTrait
+     * @return static
      */
     public function setFaxNumber($faxNumber);
 
@@ -194,7 +194,7 @@ interface PersonInterface
 
     /**
      * @param Person $follows
-     * @return PersonTrait
+     * @return static
      */
     public function setFollows(Person $follows);
 
@@ -205,7 +205,7 @@ interface PersonInterface
 
     /**
      * @param Organization|Person $funder
-     * @return PersonTrait
+     * @return static
      */
     public function setFunder($funder);
 
@@ -216,7 +216,7 @@ interface PersonInterface
 
     /**
      * @param GenderType|$gender
-     * @return PersonTrait
+     * @return static
      */
     public function setGender($gender);
 
@@ -227,7 +227,7 @@ interface PersonInterface
 
     /**
      * @param $givenName
-     * @return PersonTrait
+     * @return static
      */
     public function setGivenName($givenName);
 
@@ -238,7 +238,7 @@ interface PersonInterface
 
     /**
      * @param $globalLocationNumber
-     * @return PersonTrait
+     * @return static
      */
     public function setGlobalLocationNumber($globalLocationNumber);
 
@@ -250,7 +250,7 @@ interface PersonInterface
 
     /**
      * @param Place $hasPOS
-     * @return PersonTrait
+     * @return static
      */
     public function setHasPOS($hasPOS);
 
@@ -260,7 +260,7 @@ interface PersonInterface
     public function getHeight();
     /**
      * @param Distance|QuantitativeValue $height
-     * @return PersonTrait
+     * @return static
      */
     public function setHeight($height);
 
@@ -271,7 +271,7 @@ interface PersonInterface
 
     /**
      * @param ContactPoint|Place $homeLocation
-     * @return PersonTrait
+     * @return static
      */
     public function setHomeLocation($homeLocation);
 
@@ -282,7 +282,7 @@ interface PersonInterface
 
     /**
      * @param $honorificPrefix
-     * @return PersonTrait
+     * @return static
      */
     public function setHonorificPrefix($honorificPrefix);
 
@@ -293,7 +293,7 @@ interface PersonInterface
 
     /**
      * @param $honorificSuffix
-     * @return PersonTrait
+     * @return static
      */
     public function setHonorificSuffix($honorificSuffix);
 
@@ -304,7 +304,7 @@ interface PersonInterface
 
     /**
      * @param $isicV4
-     * @return PersonTrait
+     * @return static
      */
     public function setIsicV4($isicV4);
     /**
@@ -313,7 +313,7 @@ interface PersonInterface
     public function getJobTitle();
     /**
      * @param $jobTitle
-     * @return PersonTrait
+     * @return static
      */
     public function setJobTitle($jobTitle);
 
@@ -323,7 +323,7 @@ interface PersonInterface
     public function getKnows();
     /**
      * @param Person $knows
-     * @return PersonTrait
+     * @return static
      */
     public function setKnows(Person $knows);
     
@@ -334,7 +334,7 @@ interface PersonInterface
 
     /**
      * @param Offer $makesOffer
-     * @return PersonTrait
+     * @return static
      */
     public function setMakesOffer(Offer $makesOffer);
 
@@ -345,7 +345,7 @@ interface PersonInterface
 
     /**
      * @param Organization|ProgramMembership $memberOf
-     * @return PersonTrait
+     * @return static
      */
     public function setMemberOf($memberOf);
 
@@ -356,7 +356,7 @@ interface PersonInterface
 
     /**
      * @param $naics
-     * @return PersonTrait
+     * @return static
      */
     public function setNaics($naics);
 
@@ -366,7 +366,7 @@ interface PersonInterface
     public function getNationality();
     /**
      * @param Country $nationality
-     * @return PersonTrait
+     * @return static
      */
     public function setNationality(Country $nationality);
     /**
@@ -376,7 +376,7 @@ interface PersonInterface
 
     /**
      * @param Person $parent
-     * @return PersonTrait
+     * @return static
      */
     public function setParent(Person $parent);
 
@@ -386,7 +386,7 @@ interface PersonInterface
     public function getPerformerIn();
     /**
      * @param Event $performerIn
-     * @return PersonTrait
+     * @return static
      */
     public function setPerformerIn(Event $performerIn);
 
@@ -397,7 +397,7 @@ interface PersonInterface
 
     /**
      * @param CreativeWork|URL $publishingPrinciples
-     * @return PersonTrait
+     * @return static
      */
     public function setPublishingPrinciples($publishingPrinciples);
 
@@ -408,7 +408,7 @@ interface PersonInterface
 
     /**
      * @param Person $relatedTo
-     * @return PersonTrait
+     * @return static
      */
     public function setRelatedTo(Person $relatedTo);
 
@@ -420,7 +420,7 @@ interface PersonInterface
 
     /**
      * @param Person $sibling
-     * @return PersonTrait
+     * @return static
      */
     public function setSibling(Person $sibling);
 
@@ -431,7 +431,7 @@ interface PersonInterface
 
     /**
      * @param Organization|Person $sponsor
-     * @return PersonTrait
+     * @return static
      */
     public function setSponsor($sponsor);
 
@@ -442,7 +442,7 @@ interface PersonInterface
 
     /**
      * @param Person $spouse
-     * @return PersonTrait
+     * @return static
      */
     public function setSpouse(Person $spouse);
 
@@ -453,7 +453,7 @@ interface PersonInterface
 
     /**
      * @param $taxID
-     * @return PersonTrait
+     * @return static
      */
     public function setTaxID($taxID);
 
@@ -464,7 +464,7 @@ interface PersonInterface
 
     /**
      * @param $telephone
-     * @return PersonTrait
+     * @return static
      */
     public function setTelephone($telephone);
 
@@ -475,7 +475,7 @@ interface PersonInterface
 
     /**
      * @param $vatID
-     * @return PersonTrait
+     * @return static
      */
     public function setVatID($vatID);
 
@@ -486,7 +486,7 @@ interface PersonInterface
 
     /**
      * @param ContactPoint|Place $workLocation
-     * @return PersonTrait
+     * @return static
      */
     public function setWorkLocation($workLocation);
 
@@ -497,7 +497,7 @@ interface PersonInterface
 
     /**
      * @param Organization $worksFor
-     * @return PersonTrait
+     * @return static
      */
     public function setWorksFor(Organization $worksFor);
 }
