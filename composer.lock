@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1db422d322a43db39c95454887236f8",
+    "content-hash": "9ccb0c93692c6d389048ab6a87275fbf",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -33,7 +33,7 @@
             "version": "3.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e"
             },
             "dist": {
@@ -390,16 +390,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.5",
+            "version": "v6.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32"
+                "reference": "8190d73eb5def11a43cfb020b7f36db65330698c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/cb3ea134d4d3729e7857737d5f320cce9caf4d32",
-                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/8190d73eb5def11a43cfb020b7f36db65330698c",
+                "reference": "8190d73eb5def11a43cfb020b7f36db65330698c",
                 "shasum": ""
             },
             "require": {
@@ -452,7 +452,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2018-03-27T13:49:45+00:00"
+            "time": "2018-11-16T00:41:32+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -981,16 +981,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.12",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "82ae26e7b47f840f235fe2f0f40e0a1df29255c6"
+                "reference": "ac920503016031b39a24ef998d2267ce543031ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/82ae26e7b47f840f235fe2f0f40e0a1df29255c6",
-                "reference": "82ae26e7b47f840f235fe2f0f40e0a1df29255c6",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/ac920503016031b39a24ef998d2267ce543031ba",
+                "reference": "ac920503016031b39a24ef998d2267ce543031ba",
                 "shasum": ""
             },
             "require": {
@@ -1034,7 +1034,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-10-08T14:45:51+00:00"
+            "time": "2018-10-30T11:06:56+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -1112,16 +1112,16 @@
         },
         {
             "name": "luyadev/luya-module-cms",
-            "version": "1.0.7",
+            "version": "1.0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "020c4161ade189c01b72304ee0765652a279a9f2"
+                "reference": "4b57893b2d847c0cbddf4796332c225188f7c6ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/020c4161ade189c01b72304ee0765652a279a9f2",
-                "reference": "020c4161ade189c01b72304ee0765652a279a9f2",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/4b57893b2d847c0cbddf4796332c225188f7c6ca",
+                "reference": "4b57893b2d847c0cbddf4796332c225188f7c6ca",
                 "shasum": ""
             },
             "require-dev": {
@@ -1172,20 +1172,20 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2018-10-08T14:57:12+00:00"
+            "time": "2018-10-17T19:22:23+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.12",
+            "version": "1.0.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "9857ccc904ae59b5f828462b561e933f0dcac6d6"
+                "reference": "941544dd0d46e1ac6df818bc42dfd291fba62f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/9857ccc904ae59b5f828462b561e933f0dcac6d6",
-                "reference": "9857ccc904ae59b5f828462b561e933f0dcac6d6",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/941544dd0d46e1ac6df818bc42dfd291fba62f12",
+                "reference": "941544dd0d46e1ac6df818bc42dfd291fba62f12",
                 "shasum": ""
             },
             "require": {
@@ -1220,7 +1220,7 @@
                 "module",
                 "php"
             ],
-            "time": "2018-10-08T15:16:16+00:00"
+            "time": "2018-10-25T21:44:20+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2833,7 +2833,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -2891,16 +2891,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8"
+                "reference": "c79c051f5b3a46be09205c73b80b346e4153e494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d0cd638f4634c16d8df4508e847f14e9e43168b8",
-                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/c79c051f5b3a46be09205c73b80b346e4153e494",
+                "reference": "c79c051f5b3a46be09205c73b80b346e4153e494",
                 "shasum": ""
             },
             "require": {
@@ -2946,7 +2946,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-08-06T14:22:27+00:00"
+            "time": "2018-09-21T13:07:52+00:00"
         },
         {
             "name": "symfony/stopwatch",
