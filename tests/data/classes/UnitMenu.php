@@ -63,6 +63,8 @@ class Item
     
     public $link = 'this-is-a-cms-link';
     
+    public $moduleName = null;
+    
     public $isHome = false;
 }
 
@@ -71,6 +73,8 @@ class ItemHome
     public $type = 1;
     
     public $link = 'this-is-a-cms-link';
+    
+    public $moduleName = null;
     
     public $isHome = true;
 }
