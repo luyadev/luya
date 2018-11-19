@@ -303,3 +303,21 @@ In order to extend a block with a special behaviour the `blockVariations` proper
     ]
 ],
 ```
+
+Maybe the application block is now known inside the config files, then there is an alternative option to define block variations:
+
+```php
+'cmsadmin' => [
+    'class' => 'luya\cms\admin\Module',
+    'blockVariations' => [
+         'app\blocks\TextBlock' => [
+             'variation1' => [
+                 'title' => 'Super Bold Text',
+                 'vars' => ['cssClass' => 'bold-font-css-class'],
+                 'cfgs' => [], // will be ignore as its empty, so you can also just remove this part.
+                 'extras' => [], // will be ignore as its empty, so you can also just remove this part.
+             ],
+         ]
+    ]
+]
+```
