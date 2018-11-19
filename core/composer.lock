@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "caac377e2db59c616d74e01b704accfb",
+    "content-hash": "ee6e85d73449541e5f2d425c18f4bfc7",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -224,24 +224,24 @@
         },
         {
             "name": "curl/curl",
-            "version": "1.9.2",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "8fa349f9f82f8d892137fe87239a70b0d358d160"
+                "reference": "63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/8fa349f9f82f8d892137fe87239a70b0d358d160",
-                "reference": "8fa349f9f82f8d892137fe87239a70b0d358d160",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6",
+                "reference": "63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.3.0"
+                "php": "^5.6 | ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*",
+                "phpunit/phpunit": "^5.7",
                 "squizlabs/php_codesniffer": "~2.1"
             },
             "type": "library",
@@ -275,7 +275,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2018-08-18T15:32:01+00:00"
+            "time": "2018-11-17T10:32:36+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -376,16 +376,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.5",
+            "version": "v6.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32"
+                "reference": "8190d73eb5def11a43cfb020b7f36db65330698c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/cb3ea134d4d3729e7857737d5f320cce9caf4d32",
-                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/8190d73eb5def11a43cfb020b7f36db65330698c",
+                "reference": "8190d73eb5def11a43cfb020b7f36db65330698c",
                 "shasum": ""
             },
             "require": {
@@ -438,7 +438,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2018-03-27T13:49:45+00:00"
+            "time": "2018-11-16T00:41:32+00:00"
         },
         {
             "name": "yiisoft/yii2",
