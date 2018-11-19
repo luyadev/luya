@@ -367,7 +367,7 @@ class UrlManager extends \yii\web\UrlManager
         }
 
         // if current controller context has an other module as the requested url, its an outgoing link to another module which should not be modificated.
-        if ($moduleName !== Yii::$app->controller->module->id) {
+        if ($moduleName !== $item->moduleName && $moduleName !== Yii::$app->controller->module->id) {
             return $url;
         }
 
