@@ -15,6 +15,11 @@ class MyController extends \luya\admin\base\RestController
     {
         return ['content' => 'foobar'];
     }
+    
+    public function actionHello()
+    {
+        return ['world'];
+    }
 }
 ```
 
@@ -42,6 +47,4 @@ public $apiRules = [
 
 ## Make Request / How to access
 
-Depending on your definition including your language code definition, your API should now be reachable under `http://host/yourlanguagecode/admin/api-yourmodule-yourcontroller`.
-
-Dont forget to create an API user in admin and assign him the permission to access the API.
+Depending on your definition including your language code definition, your API should now be reachable under `http://host/yourlanguagecode/admin/api-yourmodule-yourcontroller`. In order to access the actionWorld use `http://host/yourlanguagecode/admin/api-yourmodule-yourcontroller/hello`.
