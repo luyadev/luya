@@ -52,6 +52,7 @@
   + [Forms](app-admin-module-forms.md)
   + [Permissions &amp; Menu](app-admin-module-permission.md)
   + [Icons &amp; CSS Styles](app-admin-module-styles.md)
+  + [Create Admin API](app-admin-module-api.md)
 + NgRest CRUD
   + [Concept](ngrest-concept.md)
   + [Model](ngrest-model.md)
