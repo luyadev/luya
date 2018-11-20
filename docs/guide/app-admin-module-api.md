@@ -33,15 +33,16 @@ public $apis = [
 ];
 ```
 
-If you want to use a custom route, define it in `$apiRules`. For example if you want to create a PUT request with a custom path to `yourFunction`:
+In order to make your api listen to differnt method types you can use $apiRules:
 
 ```php
 public $apiRules = [
-  'api-yourmodule-yourcontroller => [
-    'extraPatterns' => [
-      'PUT {yourvar}/your-function' => 'your-function',
-    ]
-  ],
+    'api-yourmodule-yourcontroller => [
+        'extraPatterns' => [
+            'POST new-comment' => 'new-comment' // the action actionNewComment() which listens only to post
+            'PUT update-comment' => 'update-comment', // the action actionUpdateComment() which listens only to put
+        ]
+    ],
 ];
 ```
 
