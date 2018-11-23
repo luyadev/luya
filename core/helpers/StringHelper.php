@@ -242,7 +242,7 @@ class StringHelper extends BaseStringHelper
         $content = strip_tags($content);
         $latest = null;
         foreach ($word as $needle) {
-            preg_match_all("/$needle+/i", $content, $matches);
+            preg_match_all("/".preg_quote($needle)."+/i", $content, $matches);
             if (is_array($matches[0]) && count($matches[0]) >= 1) {
                 foreach ($matches[0] as $match) {
                     // ensure if a word is found twice we don't replace again.

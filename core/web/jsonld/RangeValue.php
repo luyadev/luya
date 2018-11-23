@@ -16,7 +16,7 @@ class RangeValue extends BaseValue
 
     public function ensureRange($min, $max)
     {
-        if (!in_array($this->_value, range($min, $max))) {
+        if ($this->_value < $min || $this->_value > $max) {
             throw new InvalidConfigException("Value {$this->_value} must be min {$min} or max {$max}.");
         }
     }
