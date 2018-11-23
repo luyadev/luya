@@ -99,6 +99,8 @@ zaa.directive("myDirective", function() {
 });
 ```
 
+> If your code depends on an external library (which is loaded trough bower for example), you have to push this dependency into the zaa LUYA admin variable: `angular.module("zaa").requires.push('ui.tinymce');`. Afterwards the `ui.tinymce` (in this example) can be used in side your directive.
+
 Now in order to use the custom `TestPlugin` in your [NgRest config model](ngrest-model.md) you can define an extra field which takes care of getting (list) and setting (update/create) the value in your `admin\ngrest\base\Model` ActiveRecord class model.
 
 ```php
