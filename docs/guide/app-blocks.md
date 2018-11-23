@@ -321,3 +321,7 @@ Maybe the application block is now known inside the config files, then there is 
     ]
 ]
 ```
+
+## Block preview
+
+To give the user a better understanding how you block could looks like you can store a jpeg image under `app/images/blocks` or `app/modules/yourmodule/images/blocks` with same name as the block e.g. `TextTransformBlock.jpg`.
