@@ -358,16 +358,20 @@ class UrlManager extends \yii\web\UrlManager
             throw new BadRequestHttpException("Unable to find nav_item_id '$navItemId' to generate the module link for url '$url'.");
         }
     
+        $isOutgoingModulePage = $item->type == 2 && $moduleName !== $item->moduleName;
+        
         // 1. if the current page is a module and the requested url is not the same module, its an outgoing link to
         // another module which should not be modificated.
         // 2. If the current page (nav) context is the homepage, we have to keep the original link as it wont work because the homepage
         // does not have a route prefix.
-        if (($item->type == 2 && $moduleName !== $item->moduleName) || $item->isHome) {
+        if ($isOutgoingModulePage || $item->isHome) {
             return $url;
         }
-
-        // if current controller context has an other module as the requested url, its an outgoing link to another module which should not be modificated.
-        if ($moduleName !== Yii::$app->controller->module->id) {
+    
+        // 1. if the current page is a module and the requested url is not the same module, its an outgoing link to
+        // another module and ...
+        // 2. if current controller context has an other module as the requested url, its an outgoing link to another module which should not be modificated.
+        if ($isOutgoingModulePage && $moduleName !== Yii::$app->controller->module->id) {
             return $url;
         }
 
