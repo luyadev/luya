@@ -95,7 +95,7 @@
      * images will get a placeholder element inserted after the iamge.
      */
     var insertPlaceholder = function() {
-        $(images).each(function () {
+        $(images).each(function (index) {
             if(!this.hasPlaceholderImage && !this.asBackground && !this.divPlaceholderExists) {
                 // Get the image by id
                 var $image = $('.' + settings.imageIdentifierPrefix + this.id);
@@ -121,8 +121,8 @@
 
                 $placeholder.insertAfter($image);
 
-                if(images[this.id]) {
-                    images[this.id].divPlaceholderExists = true;
+                if(images[index]) {
+                    images[index].divPlaceholderExists = true;
                 }
             }
         });
@@ -167,7 +167,7 @@
     var loadVisibleImages = function () {
         var visibleImages = getVisibleImages();
 
-        $(visibleImages).each(function () {
+        $(visibleImages).each(function (index) {
             // Generate a new image, add the source so it starts loading
             var $loadImage = $('<img/>', {
                 src: this.source
@@ -179,7 +179,7 @@
             $loadImage.on('load', function () {
                 // Remove the image from the images array because it's not
                 // needed anymore
-                delete images[image.id];
+                delete images[index];
 
                 var $image = $('.' + settings.imageIdentifierPrefix + image.id);
                 var $placeholder = $image.next('.' + settings.placeholderClass);
@@ -208,7 +208,7 @@
 
             // If the image can't be loaded
             $loadImage.on('error', function () {
-                delete images[image.id];
+                delete images[index];
 
                 // Trigger a error event
                 $(document).trigger("lazyimage-loaded", {
