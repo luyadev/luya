@@ -32,6 +32,11 @@
     // The image array, will be filled on init and only updated if necessary
     var images = [];
 
+    var lastId = 0;
+    var getNewId = function() {
+        return lastId += 1;
+    };
+
     /**
      * This function runs only once.
      * Search for all images (by settings.imageSelector) and save them in the
@@ -40,10 +45,13 @@
      * the image boundaries will be calculated.
      */
     var fetchImages = function() {
+        images = [];
         $(settings.imageSelector).each(function (index) {
             if(!$(this).hasClass('loaded')) {
+                var id = getNewId();
+
                 // Add the identifying class
-                $(this).addClass(settings.imageIdentifierPrefix + index);
+                $(this).addClass(settings.imageIdentifierPrefix + id);
 
                 // Get some useful infos
                 var imageWidth = parseInt($(this).attr('data-width')),
@@ -63,7 +71,7 @@
                 }
 
                 images.push({
-                    id: index,
+                    id: id,
                     source: $(this).attr('data-src'),
                     boundaries: {},
                     hasPlaceholderImage: $(this).hasClass('lazyimage'),
