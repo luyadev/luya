@@ -41,7 +41,16 @@ In order to customize the template of a basic dashboard object you can override 
 
 > The outerTemplate can have variables: title, template, dataApiUrl in double curly braces.
 
-In order to make links inside the dashboard use the `ui-sref` directive `ui-sref="custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})"` or for a given route `ui-sref="default.route({moduleRouteId:'teamadmin', controllerId:'member', actionId:'hello-world'})`.
+## Links with ui-sref
+
+In order to make links inside the dashboard use the `ui-sref` directive
+
+A few examples:
+
++ Module index page: `default({\'moduleId\':5})"`
++ To a module NgRest CRUD (or any other route): `default.route({moduleId: 5, moduleRouteId:\'myadminmodule\', controllerId:\'my-controller\', actionId:\'index\'})`
++ To a specific item/id inside the NgRest CRUD: `default.route.detail({moduleId: 5, moduleRouteId:\'myadminmodule\', controllerId:\'my-controller\', actionId:\'index\', id: 1})`
++ To a cms edit form: `custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})"`
 
 ## Custom dashboard object
 
