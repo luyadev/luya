@@ -11,6 +11,7 @@ You can choose from predefined dashboard objects which are pretty easy to implem
 + {{luya\admin\dashboard\BasicDashboardObject}}
 + {{luya\admin\dashboard\TableDashboardObject}}
 + {{luya\admin\dashboard\ListDashboardObject}}
++ {{luya\admin\dashboard\ChartDashboardObject}}
 
 ```php
 public $dashboardObjects = [
@@ -31,12 +32,16 @@ In order to customize the template of a basic dashboard object you can override 
 ```php
 [
     'class' => 'luya\admin\dashboard\BasicDashboardObject',
-    'outerTemplate' => '<div class="wrap-around-template"><h1>{{title}}</h1><small>{{template}}</small></div>',
+    'outerTemplate' => '<div class="wrap-around-template"><h1>\{\{title\}\}</h1><small>\{\{template\}\}</small></div>',
     'template' => '<ul ng-repeat="item in data"><li>{{item.title}}</li></ul>',
     'dataApiUrl' => 'admin/api-news-article',
     'title' => 'Latest News',
 ],
 ```
+
+> The outerTemplate can have variables: title, template, dataApiUrl in double curly braces.
+
+In order to make links inside the dashboard use the `ui-sref` directive `ui-sref="custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})"` or for a given route `ui-sref="default.route({moduleRouteId:'teamadmin', controllerId:'member', actionId:'hello-world'})`.
 
 ## Custom dashboard object
 
