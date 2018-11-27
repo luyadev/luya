@@ -5,6 +5,8 @@
 
 (function ($) {
 
+    var initialized = false;
+
     // Default settings, can be overwritten
     var settings = {
         // General settings
@@ -39,39 +41,40 @@
      */
     var fetchImages = function() {
         $(settings.imageSelector).each(function (index) {
-            // Add the identifying class
-            $(this).addClass(settings.imageIdentifierPrefix + index);
+            if(!$(this).hasClass('loaded')) {
+                // Add the identifying class
+                $(this).addClass(settings.imageIdentifierPrefix + index);
 
-            // Get some useful infos
-            var imageWidth = parseInt($(this).attr('data-width')),
-                imageHeight = parseInt($(this).attr('data-height')),
-                aspectRatio = settings.defaultAspectRatio,
-                asBackground = $(this).attr('data-as-background');
+                // Get some useful infos
+                var imageWidth = parseInt($(this).attr('data-width')),
+                    imageHeight = parseInt($(this).attr('data-height')),
+                    aspectRatio = settings.defaultAspectRatio,
+                    asBackground = $(this).attr('data-as-background');
 
-            // If we have an image width & height we can calculate the aspectRatio
-            // the aspect ration is only used for the div placeholder
-            if (imageWidth && imageHeight) {
-                aspectRatio = imageHeight / imageWidth;
+                // If we have an image width & height we can calculate the aspectRatio
+                // the aspect ration is only used for the div placeholder
+                if (imageWidth && imageHeight) {
+                    aspectRatio = imageHeight / imageWidth;
+                }
+
+                var divPlaceholderExists = false;
+                if($(this).next('.' + settings.placeholderClass).length >= 1) {
+                    divPlaceholderExists = true;
+                }
+
+                images.push({
+                    id: index,
+                    source: $(this).attr('data-src'),
+                    boundaries: {},
+                    hasPlaceholderImage: $(this).hasClass('lazyimage'),
+                    divPlaceholderExists: divPlaceholderExists,
+                    width: imageWidth,
+                    height: imageHeight,
+                    aspectRatio: aspectRatio,
+                    asBackground: asBackground,
+                    html: $(this)[0].outerHTML
+                });
             }
-
-            var divPlaceholderExists = false;
-            if($(this).next('.' + settings.placeholderClass).length >= 1) {
-                divPlaceholderExists = true;
-            }
-
-            images.push({
-                id: index,
-                source: $(this).attr('data-src'),
-                boundaries: {},
-                hasPlaceholderImage: $(this).hasClass('lazyimage'),
-                divPlaceholderExists: divPlaceholderExists,
-                width: imageWidth,
-                height: imageHeight,
-                aspectRatio: aspectRatio,
-                asBackground: asBackground,
-                html: $(this)[0].outerHTML
-            });
-
         });
 
         insertPlaceholder();
@@ -185,7 +188,7 @@
                     })
                 } else if (!image.hasPlaceholderImage) {
                     // If the image has a placeholder div we need to remove it
-                    $placeholder.remove();
+                    $placeholder.hide();
                 }
 
                 // Trigger a success event
@@ -235,34 +238,50 @@
         }
     };
 
-    $.fn.lazyLoad = function (options) {
-
-        // Fetch images to prepare the iamges array
-        fetchImages();
-
-        // Regularly check for changes and run needed functions
-        setInterval(function () {
-            if (status.viewportChanged === true || status.touchScrolling === true) {
+    $.lazyLoad = function (options) {        
+        if(typeof options === 'string') {
+            switch(options) {
+                case 'refetchElements':
+                fetchImages();
                 loadVisibleImages();
-                status.viewportChanged = false;
-                status.touchScrolling = false;
+                break;
             }
-        }, 250);
+        } else if (!initialized) {
+            initialized = true;
 
-        // Listen to different events the script needs to react to
-        $(document).on('touchmove', function () {
-            status.touchScrolling = true;
-        });
-        $(window).on('scroll resize', function () {
-            status.viewportChanged = true;
-            status.touchScrolling = false;
-        });
-        $(window).on('resize', function () {
-            status.resized = true;
-        });
+            if(options) {
+                settings = $.extend(settings, options);
+            }
 
-        // Finally, start loading of the first visible images (if there are any)
-        loadVisibleImages();
+            // Fetch images to prepare the iamges array
+            fetchImages();
+
+            // Regularly check for changes and run needed functions
+            setInterval(function () {
+                if (status.viewportChanged === true || status.touchScrolling === true) {
+                    loadVisibleImages();
+                    status.viewportChanged = false;
+                    status.touchScrolling = false;
+                }
+            }, 250);
+
+            // Listen to different events the script needs to react to
+            $(document).on('touchmove', function () {
+                status.touchScrolling = true;
+            });
+            $(window).on('scroll resize', function () {
+                status.viewportChanged = true;
+                status.touchScrolling = false;
+            });
+            $(window).on('resize', function () {
+                status.resized = true;
+            });
+
+            // Finally, start loading of the first visible images (if there are any)
+            loadVisibleImages();
+        }
+
+        return this;
     };
 
 }(jQuery));

@@ -79,7 +79,7 @@ class LazyLoad extends Widget
         LazyLoadAsset::register($this->view);
 
         // register js and css code with keys in order to ensure the registration is done only once
-        $this->view->registerJs("$('.lazy-image').lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
+        $this->view->registerJs("$.lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
 
         if ($this->placeholderSrc) {
             $this->view->registerCss("
