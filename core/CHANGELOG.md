@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.15 (in progress)
 
+### Added
+
++ [#1887](https://github.com/luyadev/luya/issues/1887) Add attribute hints assign option for dynamic model.
+
 ### Fixed
 
++ [#1888](https://github.com/luyadev/luya/issues/1888) Fixed issue with ranger values which can have float values.
 + [#1876](https://github.com/luyadev/luya/issues/1876) Fixed the url generation without module context when using language switcher.
 
 ## 1.0.14 (17. November 2018)
