@@ -167,19 +167,20 @@
     var loadVisibleImages = function () {
         var visibleImages = getVisibleImages();
 
-        $(visibleImages).each(function (index) {
+        $(visibleImages).each(function () {
             // Generate a new image, add the source so it starts loading
             var $loadImage = $('<img/>', {
                 src: this.source
             });
 
             var image = this;
+            var imageIndex = images.map(function(e) { return e.id; }).indexOf(image.id);
 
             // If the image was loaded successfully
             $loadImage.on('load', function () {
                 // Remove the image from the images array because it's not
                 // needed anymore
-                delete images[index];
+                delete images[imageIndex];
 
                 var $image = $('.' + settings.imageIdentifierPrefix + image.id);
                 var $placeholder = $image.next('.' + settings.placeholderClass);
@@ -208,7 +209,7 @@
 
             // If the image can't be loaded
             $loadImage.on('error', function () {
-                delete images[index];
+                delete images[imageIndex];
 
                 // Trigger a error event
                 $(document).trigger("lazyimage-loaded", {
