@@ -133,7 +133,15 @@ class ModuleReflection extends BaseObject
     /**
      * Determine the default route based on current defaultRoutes or parsedRequested by the UrlManager.
      *
-     * @return array
+     * @return array An array with
+     * + route: The path/route to the controller
+     * + args: If the url has no params, it returns all params from get request.
+     * + originalArgs: The arguments (params) parsed from the url trogh url manager
+     * 
+     * @see Related problems and changes:
+     * + https://github.com/luyadev/luya/issues/1885
+     * + https://github.com/luyadev/luya/issues/1267
+     * + https://github.com/luyadev/luya/issues/754
      */
     public function getRequestRoute()
     {
@@ -150,30 +158,13 @@ class ModuleReflection extends BaseObject
             $array = [
                 'route' => $route[0],
                 'args' => $route[1],
+                'originalArgs' => $route[1],
             ];
         }
         // resolve the current route by the module
         $array['route'] = $this->module->resolveRoute($array['route']);
-        // overload args if none defined with massiv get assigment
-        if (count($array['args']) === 0) {
-            /**
-             * issue: https://github.com/luyadev/luya/issues/754
-             *
-             * 01.02.2016: we have to remove the get param overloading, otherwhise we can not guarnte
-             * to re generate the current url rule. Have to verify why in which case this was needed.
-             *
-             * original: $array['args'] = $this->request->get();
-             * new: do not overload: $array['args'] = [];
-             */
-            $array['args'] = [];
-        }
-        
-        /**
-         * issue: https://github.com/luyadev/luya/issues/754
-         *
-         * As the route resolving should not contain empty argument list we overload the $requertRoute['args'] if they are empty
-         * with the whole get params
-         */
+
+        // if there are no arguments, all get params are assigned. In order to use the original arguments from parse request use `originalArgs` instead of `args`.
         if (empty($array['args'])) {
             $array['args'] = $this->request->get();
         }
@@ -210,6 +201,7 @@ class ModuleReflection extends BaseObject
         $this->_defaultRoute = [
             'route' => implode('/', [$this->module->id, $controller, (empty($action)) ? 'index' : $action]),
             'args' => $args,
+            'originalArgs' => $args,
         ];
     }
     
@@ -225,7 +217,7 @@ class ModuleReflection extends BaseObject
         return [
             'module' => $this->module->id,
             'route' => $this->module->id . '/' . $request['route'],
-            'params' => $request['args'],
+            'params' => $request['originalArgs'],
         ];
     }
 
