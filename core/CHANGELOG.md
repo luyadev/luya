@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
++ [#1885](https://github.com/luyadev/luya/issues/1885) Fix issue where current url rule appends path param.
 + [#1889](https://github.com/luyadev/luya/issues/1889) Add possibility to fetch images that are inserted after lazyLoading is initialised.
 + [#1887](https://github.com/luyadev/luya/issues/1887) Add attribute hints assign option for dynamic model.
 
