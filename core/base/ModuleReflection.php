@@ -186,7 +186,7 @@ class ModuleReflection extends BaseObject
      */
     public function setRequestRoute($route, array $args = [])
     {
-        $this->_requestRoute = ['route' => $route, 'args' => $args];
+        $this->_requestRoute = ['route' => $route, 'args' => $args, 'originalArgs' => $args];
     }
 
     /**
