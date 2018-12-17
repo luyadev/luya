@@ -136,7 +136,7 @@ return [
 ];
 ```
 
-As now the element `test` has a mocked $foo paremter and will return the following rendered content in the styleguide:
+As now the element `test` has a mocked $foo parameter and will return the following rendered content in the styleguide:
 
 ```php
 <p>Mocking value for $foo</p>
