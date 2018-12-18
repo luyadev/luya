@@ -8,13 +8,13 @@ use Yii;
  * DynamicModel extends from yii\base\Dynamic Model.
  *
  * Additional Dynamic Model to provide attribute labels and attribute hints.
- * 
+ *
  * ```php
  * $model = new DynamicModel(['query']);
  * $model->attributeLabels = ['query' => 'Search term'];
  * $model->attributeHints = ['query' => 'Enter a search term in order to find articles.'];
  * $model->addRule(['query'], 'string');
- * $model->addRule(['query'], 'required'); 
+ * $model->addRule(['query'], 'required');
  * ```
  *
  * @author Basil Suter <basil@nadar.io>

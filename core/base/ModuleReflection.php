@@ -137,7 +137,7 @@ class ModuleReflection extends BaseObject
      * + route: The path/route to the controller
      * + args: If the url has no params, it returns all params from get request.
      * + originalArgs: The arguments (params) parsed from the url trogh url manager
-     * 
+     *
      * @see Related problems and changes:
      * + https://github.com/luyadev/luya/issues/1885
      * + https://github.com/luyadev/luya/issues/1267

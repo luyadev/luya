@@ -4,9 +4,9 @@ namespace luya\web\jsonld;
 
 /**
  * Local Business
- * 
+ *
  * @see https://schema.org/LocalBusiness
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.14
  */

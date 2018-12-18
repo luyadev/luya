@@ -4,7 +4,6 @@ namespace luya\web\jsonld;
 
 use luya\helpers\ObjectHelper;
 
-
 /**
  * JsonLd ContactPoint.
  *
@@ -74,7 +73,7 @@ class ContactPoint extends BaseThing
 
     /**
      * Set Area Served.
-     * 
+     *
      * The geographic area where a service or offered item is provided. Supersedes serviceArea.
      *
      * @param Place|TextValue $areaServed
@@ -102,7 +101,7 @@ class ContactPoint extends BaseThing
 
     /**
      * Set Available Language.
-     * 
+     *
      * A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage
      *
      * @param string $availableLanguage
@@ -128,7 +127,7 @@ class ContactPoint extends BaseThing
 
     /**
      * Set Contact Type.
-     * 
+     *
      * A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
      *
      * @param string $contactType
@@ -154,7 +153,7 @@ class ContactPoint extends BaseThing
 
     /**
      * Set Fax Number.
-     * 
+     *
      * The fax number.
      *
      * @param string $faxNumber

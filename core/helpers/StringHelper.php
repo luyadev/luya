@@ -226,11 +226,11 @@ class StringHelper extends BaseStringHelper
      * Highlight a word within a content.
      *
      * Since version 1.0.14 an array of words to highlight is possible.
-     * 
+     *
      * > This function IS NOT case sensitive!
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param string $content The content to find the word.
      * @param string $word The word to find within the content.
      * @param string $markup The markup used wrap the word to highlight.
