@@ -228,12 +228,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6"
+                "reference": "d22086dd2eee5ca02e4c29b9a5bdf3645bfdbbff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6",
-                "reference": "63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/d22086dd2eee5ca02e4c29b9a5bdf3645bfdbbff",
+                "reference": "d22086dd2eee5ca02e4c29b9a5bdf3645bfdbbff",
                 "shasum": ""
             },
             "require": {
@@ -326,16 +326,16 @@
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "1.0.3",
+            "version": "1.0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "d5274bd0e7a67987c7b4b3ee9d91f8268f638174"
+                "reference": "4b23be17cf061f776496fe848f5e7686d4f2fe06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d5274bd0e7a67987c7b4b3ee9d91f8268f638174",
-                "reference": "d5274bd0e7a67987c7b4b3ee9d91f8268f638174",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/4b23be17cf061f776496fe848f5e7686d4f2fe06",
+                "reference": "4b23be17cf061f776496fe848f5e7686d4f2fe06",
                 "shasum": ""
             },
             "require": {
@@ -372,7 +372,7 @@
                 "composer",
                 "luya"
             ],
-            "time": "2018-01-16T09:12:39+00:00"
+            "time": "2018-12-18T08:08:02+00:00"
         },
         {
             "name": "phpmailer/phpmailer",

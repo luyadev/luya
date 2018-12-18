@@ -59,9 +59,21 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "shasum": null
+                "shasum": ""
             },
-            "type": "bower-asset"
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "punycode.js",
+                "bower-asset-ignore": [
+                    "coverage",
+                    "tests",
+                    ".*",
+                    "component.json",
+                    "Gruntfile.js",
+                    "node_modules",
+                    "package.json"
+                ]
+            }
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -202,16 +214,16 @@
         },
         {
             "name": "curl/curl",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6"
+                "reference": "d22086dd2eee5ca02e4c29b9a5bdf3645bfdbbff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6",
-                "reference": "63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/d22086dd2eee5ca02e4c29b9a5bdf3645bfdbbff",
+                "reference": "d22086dd2eee5ca02e4c29b9a5bdf3645bfdbbff",
                 "shasum": ""
             },
             "require": {
@@ -253,7 +265,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2018-11-17T10:32:36+00:00"
+            "time": "2018-12-04T19:47:03+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -304,16 +316,16 @@
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "1.0.3",
+            "version": "1.0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "d5274bd0e7a67987c7b4b3ee9d91f8268f638174"
+                "reference": "4b23be17cf061f776496fe848f5e7686d4f2fe06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d5274bd0e7a67987c7b4b3ee9d91f8268f638174",
-                "reference": "d5274bd0e7a67987c7b4b3ee9d91f8268f638174",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/4b23be17cf061f776496fe848f5e7686d4f2fe06",
+                "reference": "4b23be17cf061f776496fe848f5e7686d4f2fe06",
                 "shasum": ""
             },
             "require": {
@@ -350,7 +362,7 @@
                 "composer",
                 "luya"
             ],
-            "time": "2018-01-16T09:12:39+00:00"
+            "time": "2018-12-18T08:08:02+00:00"
         },
         {
             "name": "nadar/php-composer-reader",
@@ -981,16 +993,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.14",
+            "version": "1.0.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "80fe9192b66b1cf80ff49637403db61884859ef3"
+                "reference": "46226dc830d03b9428b337a446e2df5837a80b7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/80fe9192b66b1cf80ff49637403db61884859ef3",
-                "reference": "80fe9192b66b1cf80ff49637403db61884859ef3",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/46226dc830d03b9428b337a446e2df5837a80b7c",
+                "reference": "46226dc830d03b9428b337a446e2df5837a80b7c",
                 "shasum": ""
             },
             "require": {
@@ -1034,20 +1046,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-11-17T11:49:53+00:00"
+            "time": "2018-12-03T12:45:15+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "1.2.3",
+            "version": "1.2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "dc7031e7c994cd76881c16049b2b60b2d1f78f73"
+                "reference": "58d70f66edabb68ad93224174f7389676ae08b29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/dc7031e7c994cd76881c16049b2b60b2d1f78f73",
-                "reference": "dc7031e7c994cd76881c16049b2b60b2d1f78f73",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/58d70f66edabb68ad93224174f7389676ae08b29",
+                "reference": "58d70f66edabb68ad93224174f7389676ae08b29",
                 "shasum": ""
             },
             "require": {
@@ -1108,20 +1120,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-11-21T21:00:04+00:00"
+            "time": "2018-12-06T19:34:24+00:00"
         },
         {
             "name": "luyadev/luya-module-cms",
-            "version": "1.0.7.2",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "4b57893b2d847c0cbddf4796332c225188f7c6ca"
+                "reference": "80863ec01f17487ede12cc11d170ef8eba92c64e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/4b57893b2d847c0cbddf4796332c225188f7c6ca",
-                "reference": "4b57893b2d847c0cbddf4796332c225188f7c6ca",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/80863ec01f17487ede12cc11d170ef8eba92c64e",
+                "reference": "80863ec01f17487ede12cc11d170ef8eba92c64e",
                 "shasum": ""
             },
             "require-dev": {
@@ -1172,7 +1184,7 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2018-10-17T19:22:23+00:00"
+            "time": "2018-12-03T14:07:31+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -3094,16 +3106,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.35.4",
+            "version": "v1.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "7e081e98378a1e78c29cc9eba4aefa5d78a05d2a"
+                "reference": "730c9c4471b5152d23061feb02b03382264c8a15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7e081e98378a1e78c29cc9eba4aefa5d78a05d2a",
-                "reference": "7e081e98378a1e78c29cc9eba4aefa5d78a05d2a",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/730c9c4471b5152d23061feb02b03382264c8a15",
+                "reference": "730c9c4471b5152d23061feb02b03382264c8a15",
                 "shasum": ""
             },
             "require": {
@@ -3113,12 +3125,12 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.3"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.35-dev"
+                    "dev-master": "1.36-dev"
                 }
             },
             "autoload": {
@@ -3156,7 +3168,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-07-13T07:12:17+00:00"
+            "time": "2018-12-16T10:34:11+00:00"
         },
         {
             "name": "webmozart/assert",
