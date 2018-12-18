@@ -17,7 +17,7 @@ trait PropertyValueTrait
     
     /**
      * @inheritdoc
-     * 
+     *
      * @return static
      */
     public function setMaxValue($maxValue)
@@ -39,7 +39,7 @@ trait PropertyValueTrait
     
     /**
      * @inheritdoc
-     * 
+     *
      * @return static
      */
     public function setMinValue($minValue)
@@ -61,7 +61,7 @@ trait PropertyValueTrait
     
     /**
      * @inheritdoc
-     * 
+     *
      * @return static
      */
     public function setMeasurementTechnique($measurementTechnique)
@@ -83,7 +83,7 @@ trait PropertyValueTrait
     
     /**
      * @inheritdoc
-     * 
+     *
      * @return static
      */
     public function setPropertyID($propertyID)
@@ -105,7 +105,7 @@ trait PropertyValueTrait
     
     /**
      * @inheritdoc
-     * 
+     *
      * @return static
      */
     public function setUnitCode($unitCode)
@@ -127,7 +127,7 @@ trait PropertyValueTrait
     
     /**
      * @inheritdoc
-     * 
+     *
      * @return static
      */
     public function setUnitText($uniText)
@@ -149,7 +149,7 @@ trait PropertyValueTrait
     
     /**
      * @inheritdoc
-     * 
+     *
      * @return static
      */
     public function setValue($value)

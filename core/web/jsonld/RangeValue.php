@@ -4,14 +4,13 @@ namespace luya\web\jsonld;
 
 use yii\base\InvalidConfigException;
 
-
 class RangeValue extends BaseValue
 {
     private $_value;
 
     public function __construct($value)
     {
-        $this->_value = $value;    
+        $this->_value = $value;
     }
 
     public function ensureRange($min, $max)

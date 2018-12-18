@@ -4,7 +4,7 @@ namespace luya\web\jsonld;
 
 /**
  * Entertainment Business
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.14
  */

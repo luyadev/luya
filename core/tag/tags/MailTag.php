@@ -49,9 +49,9 @@ EOT;
      */
     public function parse($value, $sub)
     {
-        return Html::tag('a', Html::encode($sub) ?: $this->obfuscate($value), [
+        return Html::tag('a', Htmml::encode($sub) ?: $this->obfuscate($value), [
             'rel' => 'nofollow',
-            'href' => $this->obfuscate('mailto:'.$value),
+            'href' => 'mailto:'.$this->obfuscate($value),
             'encoding' => false,
         ]);
     }
@@ -65,12 +65,12 @@ EOT;
      */
     public function obfuscate($email)
     {
-        $alwaysEncode = ['.', ':', '@'];
+        $alwaysEncode = ['.', ':', '@', '+'];
         $result = null;
         // Encode string using oct and hex character codes
         for ($i = 0; $i < strlen($email); $i++) {
-            // Encode 25% of characters including several that always should be encoded
-            if (in_array($email[$i], $alwaysEncode) || mt_rand(1, 100) < 25) {
+            // Encode 50% of characters including several that always should be encoded
+            if (in_array($email[$i], $alwaysEncode) || mt_rand(1, 100) < 50) {
                 if (mt_rand(0, 1)) {
                     $result .= '&#' . ord($email[$i]) . ';';
                 } else {

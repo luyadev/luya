@@ -16,7 +16,7 @@ trait ImageObjectTrait
     private $_caption;
     
     /**
-     * 
+     *
      * @return static
      */
     public function setCaption($caption)
@@ -36,7 +36,7 @@ trait ImageObjectTrait
     private $_exifData;
     
     /**
-     * 
+     *
      * @return static
      */
     public function setExifData(PropertyValue $propertyValue)
@@ -57,7 +57,7 @@ trait ImageObjectTrait
     private $_representativeOfPage;
     
     /**
-     * 
+     *
      * @return static
      */
     public function setRepresentativeOfPage($representativeOfPage)
@@ -78,7 +78,7 @@ trait ImageObjectTrait
     private $_thumbnail;
     
     /**
-     * 
+     *
      * @return static
      */
     public function setThumbnail(ImageObject $imageObject)

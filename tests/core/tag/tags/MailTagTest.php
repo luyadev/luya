@@ -14,7 +14,7 @@ class MailTagTest extends LuyaWebTestCase
         $this->assertNotNull($tag->readme());
         $this->assertNotNull($tag->readme());
         
-        $this->assertSame('<a href="mailto:hello@luya.io">hello@luya.io</a>', $tag->parse('hello@luya.io', null));
-        $this->assertSame('<a href="mailto:hello@luya.io">E-Mail</a>', $tag->parse('hello@luya.io', 'E-Mail'));
+        $this->assertContains('<a href="mailto:', $tag->parse('hello@luya.io', null));
+        $this->assertContains('E-Mail</a>', $tag->parse('hello@luya.io', 'E-Mail'));
     }
 }

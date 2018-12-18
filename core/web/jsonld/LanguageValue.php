@@ -4,11 +4,11 @@ namespace luya\web\jsonld;
 
 /**
  * Language value
- * 
- * 
+ *
+ *
  * @see https://tools.ietf.org/html/bcp47
  * @see https://schema.org/availableLanguage
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.14
  */
