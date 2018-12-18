@@ -49,7 +49,7 @@ EOT;
      */
     public function parse($value, $sub)
     {
-        return Html::tag('a', Htmml::encode($sub) ?: $this->obfuscate($value), [
+        return Html::tag('a', Html::encode($sub) ?: $this->obfuscate($value), [
             'rel' => 'nofollow',
             'href' => 'mailto:'.$this->obfuscate($value),
             'encoding' => false,
