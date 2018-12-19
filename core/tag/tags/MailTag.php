@@ -61,26 +61,15 @@ EOT;
      *
      * @param string $email
      * @return string
-     * @see https://stackoverflow.com/a/12592364/4611030
+     * @see http://php.net/manual/de/function.bin2hex.php#11027
      */
     public function obfuscate($email)
     {
-        $alwaysEncode = ['.', ':', '@', '+'];
-        $result = null;
-        // Encode string using oct and hex character codes
+        $output = null;
         for ($i = 0; $i < strlen($email); $i++) {
-            // Encode 50% of characters including several that always should be encoded
-            if (in_array($email[$i], $alwaysEncode) || mt_rand(1, 100) < 50) {
-                if (mt_rand(0, 1)) {
-                    $result .= '&#' . ord($email[$i]) . ';';
-                } else {
-                    $result .= '&#x' . dechex(ord($email[$i])) . ';';
-                }
-            } else {
-                $result .= $email[$i];
-            }
+            $output .= '&#'.ord($email[$i]).';';
         }
-    
-        return $result;
+        
+	    return $output;
     }
 }
