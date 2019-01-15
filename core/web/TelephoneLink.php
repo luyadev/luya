@@ -36,7 +36,7 @@ class TelephoneLink extends BaseLink
      *
      * If no valid telephone is provided, not value is set.
      *
-     * @param string $telephone The telephone number which should be used for the tel link.
+     * @param string|boolean $telephone The telephone number which should be used for the tel link.
      */
     public function setTelephone($telephone)
     {
@@ -52,13 +52,15 @@ class TelephoneLink extends BaseLink
         ]);
         if ($validator->validate($telephone, $error)) {
             $this->_telephone = $telephone;
+        } else {
+            $this->_telephone = false;
         }
     }
 
     /**
      * Getter method for the telephone.
      *
-     * @return string Returns the telephone from the setter method, if telephone is not valid null is returned.
+     * @return string Returns the telephone from the setter method, if telephone is not valid false is returned.
      */
     public function getTelephone()
     {
