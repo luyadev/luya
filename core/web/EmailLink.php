@@ -3,6 +3,7 @@
 namespace luya\web;
 
 use yii\validators\EmailValidator;
+use yii\base\InvalidConfigException;
 
 /**
  * Email Link.
@@ -15,6 +16,18 @@ use yii\validators\EmailValidator;
 class EmailLink extends BaseLink
 {
     private $_email;
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        
+        if ($this->email === null) {
+            throw new InvalidConfigException('The email attribute can not be empty and must be set trough configuration array.');
+        }
+    }
     
     /**
      * Setter method for e-mail.
@@ -28,13 +41,15 @@ class EmailLink extends BaseLink
         $validator = new EmailValidator();
         if ($validator->validate($email)) {
             $this->_email = $email;
+        } else {
+            $this->_email = false;
         }
     }
     
     /**
      * Getter method for the e-mail.
      *
-     * @return string Returns the e-mail from the setter method, if mail is not valid null is returned.
+     * @return string|boolean Returns the e-mail from the setter method, if mail is not valid false is returned.
      */
     public function getEmail()
     {
@@ -46,7 +61,7 @@ class EmailLink extends BaseLink
      */
     public function getHref()
     {
-        return empty($this->getEmail()) ?: 'mailto:' . $this->getEmail();
+        return empty($this->getEmail()) ? null : 'mailto:' . $this->getEmail();
     }
 
     /**
