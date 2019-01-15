@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#1897](https://github.com/luyadev/luya/issues/1897) Yii_* constants where not available in config files as Yii entry script was loaded after config files.
 + [#1888](https://github.com/luyadev/luya/issues/1888) Fixed issue with range values which can have float values.
 + [#1876](https://github.com/luyadev/luya/issues/1876) Fixed the url generation without module context when using language switcher.
 
