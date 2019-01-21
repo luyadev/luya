@@ -246,8 +246,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function createRouteEnsure(array $overrideKeys = [])
     {
-        $langShortCode = '';
-        if (isset ($overrideKeys['langShortCode'])) {
+        if (isset($overrideKeys['langShortCode'])) {
             $langShortCode = $overrideKeys['langShortCode'];
         } else {
             $langShortCode = $this->langShortCode;
