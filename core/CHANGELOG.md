@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#1902](https://github.com/luyadev/luya/pull/1902) Composition component hides alternate url lang codes when hideDefaultPrefixOnly is true and current lang code is default.
 + [#1898](https://github.com/luyadev/luya/issues/1898) Telephone link raises an exception if an invalid telephone number is provided.
 + [#1897](https://github.com/luyadev/luya/issues/1897) Yii_* constants where not available in config files as Yii entry script was loaded after config files.
 + [#1888](https://github.com/luyadev/luya/issues/1888) Fixed issue with range values which can have float values.
