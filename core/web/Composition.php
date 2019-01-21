@@ -246,7 +246,12 @@ class Composition extends Component implements \ArrayAccess
      */
     public function createRouteEnsure(array $overrideKeys = [])
     {
-        return $this->hidden || (!$this->hidden && $this->langShortCode == $this->defaultLangShortCode && $this->hideDefaultPrefixOnly) ? '' : $this->createRoute($overrideKeys);
+        if (isset($overrideKeys['langShortCode'])) {
+            $langShortCode = $overrideKeys['langShortCode'];
+        } else {
+            $langShortCode = $this->langShortCode;
+        }
+        return $this->hidden || (!$this->hidden && $langShortCode == $this->defaultLangShortCode && $this->hideDefaultPrefixOnly) ? '' : $this->createRoute($overrideKeys);
     }
 
     /**
