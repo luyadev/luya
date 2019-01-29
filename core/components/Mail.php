@@ -432,7 +432,7 @@ class Mail extends Component
      */
     public function addAttachment($filePath, $name = null)
     {
-        $this->getMailer()->addAttachment($filePath, empty($name) ? '' : $name);
+        $this->getMailer()->addAttachment($filePath, empty($name) ? pathinfo($filePath, PATHINFO_BASENAME) : $name);
         
         return $this;
     }
