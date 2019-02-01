@@ -304,7 +304,7 @@ In order to extend a block with a special behaviour the `blockVariations` proper
 ],
 ```
 
-Maybe the application block is now known inside the config files, then there is an alternative option to define block variations:
+Maybe the application block is not known inside the config files, then there is an alternative option to define block variations:
 
 ```php
 'cmsadmin' => [
