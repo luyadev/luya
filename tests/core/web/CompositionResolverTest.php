@@ -6,6 +6,7 @@ use luyatests\LuyaWebTestCase;
 use luya\web\CompositionResolver;
 use luya\web\Request;
 use luya\web\Composition;
+use yii\web\NotFoundHttpException;
 
 class CompositionResolverTest extends LuyaWebTestCase
 {
@@ -20,5 +21,68 @@ class CompositionResolverTest extends LuyaWebTestCase
 
         $resolver = new CompositionResolver($request, $composition);
         $this->assertSame(['lang' => 'de'], $resolver->resolvedValues);
+    }
+
+    public function testExpectedValuesResolver()
+    {
+        $request = new Request();
+        $request->pathInfo = 'en/foo/bar';
+        
+        $composition = new Composition($request);
+        $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
+        $composition->expectedValues = [
+            'lang' => ['en'],
+            'xyz' => ['foo'],
+        ];
+
+        $resolver = new CompositionResolver($request, $composition);
+        $this->assertSame(['lang' => 'en', 'xyz' => 'foo'], $resolver->resolvedValues);
+
+        $request = new Request();
+        $request->pathInfo = 'de/foo/bar';
+        
+        $composition = new Composition($request);
+        $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
+        $composition->expectedValues = [
+            'lang' => ['en'],
+            'xyz' => ['foo'],
+        ];
+
+        $resolver = new CompositionResolver($request, $composition);
+
+        $this->expectException(NotFoundHttpException::class);
+        $resolver->resolvedValues;
+    }
+
+    public function testExpectedResolverWithEmptyValuesButDefaults()
+    {
+        $request = new Request();
+        $request->pathInfo = '';
+        
+        $composition = new Composition($request);
+        $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
+        $composition->default = ['lang' => 'en', 'xyz' => 'foo'];
+        $composition->expectedValues = [
+            'lang' => ['en'],
+            'xyz' => ['foo'],
+        ];
+
+        $resolver = new CompositionResolver($request, $composition);
+        $this->assertSame(['lang' => 'en', 'xyz' => 'foo'], $resolver->resolvedValues);
+
+        $request = new Request();
+        $request->pathInfo = '';
+        
+        $composition = new Composition($request);
+        $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
+        $composition->default = ['lang' => 'en', 'xyz' => 'foo'];
+        $composition->expectedValues = [
+            'lang' => ['de'],
+            'xyz' => ['foo'],
+        ];
+
+        $resolver = new CompositionResolver($request, $composition);
+        $this->expectException(NotFoundHttpException::class);
+        $resolver->resolvedValues;
     }
 }

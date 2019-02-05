@@ -6,6 +6,7 @@ use yii\base\BaseObject;
 use luya\web\Request;
 use luya\helpers\Url;
 use luya\helpers\StringHelper;
+use yii\web\NotFoundHttpException;
 
 /**
  * Resolve composition values from a given path and pattern.
@@ -163,6 +164,17 @@ class CompositionResolver extends BaseObject
                 $matches = [];
                 $keys = $this->composition->default;
                 $route = $requestPathInfo;
+            }
+
+            // the validation check for validates composition values is enabled
+            if ($this->composition->expectedValues) {
+                foreach ($keys as $k => $v) {
+                    $possibleValues = $this->composition->expectedValues[$k];
+
+                    if (!in_array($v, $possibleValues)) {
+                        throw new NotFoundHttpException("The requested composition key \"{$k}\" with value \"{$v}\" is not in the possible values list.");
+                    }
+                }
             }
             
             $this->_resolved = [
