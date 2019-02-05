@@ -161,4 +161,14 @@ class MailTest extends \luyatests\LuyaWebTestCase
         
         $this->assertSame('Bar', $mail->convertMessageToAltBody('<p>Bar</p>'));
     }
+
+    public function testAttachementPathInfo()
+    {
+        $mail = new Mail();
+        $mail->compose('bar', 'foo');
+        $file = Yii::getAlias('@app/hashfile.txt');
+        $mail->addAttachment($file);
+        
+        $this->assertNotEmpty($mail->getMailer()->getAttachments());
+    }
 }

@@ -32,4 +32,12 @@ class TelephoneLinkTest extends LuyaWebTestCase
         $this->assertContains('+49 123456', $link->getTelephone());
         $this->assertContains('tel:+49123456', $link->getHref());
     }
+
+    public function testInvalidNumberFromLinkConvertion()
+    {
+        $link = new TelephoneLink(['telephone' => 'https://luya.io']);
+
+        $this->assertFalse($link->getTelephone());
+        $this->assertNull($link->getHref());
+    }
 }

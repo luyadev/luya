@@ -215,8 +215,6 @@ abstract class Boot
      */
     public function applicationConsole()
     {
-        $this->includeYii();
-
         $this->setIsCli(true);
         $config = $this->getConfigArray();
         $config['defaultRoute'] = 'help';
@@ -226,6 +224,8 @@ abstract class Boot
             }
         }
         
+        $this->includeYii();
+
         $baseUrl = null;
         if (isset($config['consoleBaseUrl'])) {
             $baseUrl = $config['consoleBaseUrl'];
@@ -258,8 +258,8 @@ abstract class Boot
      */
     public function applicationWeb()
     {
-        $this->includeYii();
         $config = $this->getConfigArray();
+        $this->includeYii();
         $mergedConfig = ArrayHelper::merge($config, ['bootstrap' => ['luya\web\Bootstrap']]);
         $this->app = new WebApplication($mergedConfig);
         if (!$this->mockOnly) {

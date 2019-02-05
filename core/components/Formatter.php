@@ -8,8 +8,8 @@ use yii\validators\UrlValidator;
 /**
  * Formating Dates.
  *
- * It extends the Yii2 formatter component by a signifcant configuration option which allwos you
- * to *predefine* a format for each language if no sepcific format is provided.
+ * It extends the Yii2 formatter component by a signifcant configuration option which allows you
+ * to *predefine* a format for each language if no specific format is provided.
  *
  * ```php
  * 'components' => [

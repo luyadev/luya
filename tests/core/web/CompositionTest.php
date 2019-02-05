@@ -317,5 +317,15 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('de', $composition->createRouteEnsure()); // is not hidden cause default is `en` and provided in the url is `de/hello/world`.
         $composition = new Composition($request, ['hidden' => false, 'hideDefaultPrefixOnly' => true, 'default' => ['langShortCode' => 'de']]);
         $this->assertSame('', $composition->createRouteEnsure()); // is default `de` and also provided in the url `de/hello/world`
+
+        // not hidden while overriding with alternative to current lang code 
+        $request = new Request(['hostInfo' => 'http://localhost', 'pathInfo' => 'de/hello/world']);
+        $composition = new Composition($request, ['hidden' => false, 'hideDefaultPrefixOnly' => true, 'default' => ['langShortCode' => 'de']]);
+        $this->assertSame('fr', $composition->createRouteEnsure(['langShortCode' => 'fr']));
+
+        // hidden while overriding with alternative to current, but equal to default lang code 
+        $request = new Request(['hostInfo' => 'http://localhost', 'pathInfo' => 'de/hello/world']);
+        $composition = new Composition($request, ['hidden' => false, 'hideDefaultPrefixOnly' => true, 'default' => ['langShortCode' => 'en']]);
+        $this->assertSame('', $composition->createRouteEnsure(['langShortCode' => 'en']));
     }
 }
