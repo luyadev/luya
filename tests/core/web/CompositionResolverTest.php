@@ -5,6 +5,7 @@ namespace luya\tests\core\web;
 use luyatests\LuyaWebTestCase;
 use luya\web\CompositionResolver;
 use luya\web\Request;
+use luya\web\Composition;
 
 class CompositionResolverTest extends LuyaWebTestCase
 {
@@ -13,10 +14,11 @@ class CompositionResolverTest extends LuyaWebTestCase
         $request = new Request();
         $request->pathInfo = 'de/foo/bar';
         
-        $resolver = new CompositionResolver($request);
-        $resolver->pattern = '<lang:[a-z]{2}>';
-        $resolver->defaultValues = ['lang' => 'fr'];
-        
+        $composition = new Composition($request);
+        $composition->pattern = '<lang:[a-z]{2}>';
+        $composition->default = ['lang' => 'fr'];
+
+        $resolver = new CompositionResolver($request, $composition);
         $this->assertSame(['lang' => 'de'], $resolver->resolvedValues);
     }
 }

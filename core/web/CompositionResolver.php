@@ -30,32 +30,21 @@ class CompositionResolver extends BaseObject
     protected $request;
     
     /**
-     * @var string Url matching prefix, which is used for all the modules (e.g. an e-store requireds a language
-     * as the cms needs this informations too). After proccessing this informations, they will be removed
-     * from the url for further proccessing.
-     *
-     * Examples of how to use patterns:
-     *
-     * ```php
-     * 'pattern' => '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>', // de-ch; fr-ch
-     * ```
+     * @var Composition Composition object.
      */
-    public $pattern;
-    
-    /**
-     * @var array Default value if there is no composition provided in the url. The default value must match the url.
-     */
-    public $defaultValues = [];
-    
+    public $composition;
+
     /**
      * Constructor ensures given Request component.
      *
      * @param Request $request
+     * @param Composition $composition
      * @param array $config
      */
-    public function __construct(Request $request, array $config = [])
+    public function __construct(Request $request, Composition $composition, array $config = [])
     {
         $this->request = $request;
+        $this->composition = $composition;
         parent::__construct($config);
     }
     
@@ -118,7 +107,7 @@ class CompositionResolver extends BaseObject
      */
     protected function buildRegexPattern()
     {
-        return "@^{$this->pattern}\/@";
+        return "@^{$this->composition->pattern}\/@";
     }
     
     private $_resolved;
@@ -149,7 +138,7 @@ class CompositionResolver extends BaseObject
                      [2]=> string(8) "[a-z]{2}"
                  }
              */
-            preg_match_all(static::VAR_MATCH_REGEX, $this->pattern, $patternDefinitions, PREG_SET_ORDER);
+            preg_match_all(static::VAR_MATCH_REGEX, $this->composition->pattern, $patternDefinitions, PREG_SET_ORDER);
             
             foreach ($patternDefinitions as $definition) {
                 $newRegex = str_replace($definition[0], '('.rtrim(ltrim($definition[2], '('), ')').')', $newRegex);
@@ -172,7 +161,7 @@ class CompositionResolver extends BaseObject
                 $route = StringHelper::replaceFirst($compositionPrefix, '', $requestPathInfo);
             } else {
                 $matches = [];
-                $keys = $this->defaultValues;
+                $keys = $this->composition->default;
                 $route = $requestPathInfo;
             }
             

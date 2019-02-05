@@ -194,7 +194,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function getResolvedPathInfo(Request $request)
     {
-        return new CompositionResolver($request, ['pattern' => $this->pattern, 'defaultValues' => $this->default]);
+        return new CompositionResolver($request, $this);
     }
 
     /**
