@@ -114,6 +114,27 @@ class Composition extends Component implements \ArrayAccess
      * @since 1.0.5
      */
     public $allowedHosts = null;
+    
+    /**
+     * A list of values which are valid for every pattern. If set and a value is provided which is not inside this property
+     * an http not found exception is thrown.
+     * 
+     * Every value must be set for the given pattern name:
+     * 
+     * ```php
+     * 'expectedValues' => [
+     *     'langShortCode' => ['en', 'de'], // langShortCode pattern is required
+     *     'countryShortCode' => ['ch', 'fr', 'de', 'uk'], // additional patterns if configured
+     * ],
+     * ``` 
+     *
+     * > This configuration is usual only used in MVC applications without CMS module, as the cms module throws an
+     * > exception if the requested language is not available.
+     * 
+     * @var array An array where key is the pattern and value an array of possible values for this pattern.
+     * @since 1.0.15
+     */
+    public $expectedValues = [];
 
     /**
      * Class constructor, to get data from DiContainer.
