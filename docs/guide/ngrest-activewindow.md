@@ -56,7 +56,7 @@ In order to add an ActiveWindow into your NgRest config it has to be added in th
 public function ngRestActiveWindows()
 {
     return [
-        ['class' => \luya\admin\aws\TestActiveWindow::className(), 'label' => 'My Window Alias', 'icon' => 'extension'],
+        ['class' => \luya\admin\aws\TestActiveWindow::class, 'label' => 'My Window Alias', 'icon' => 'extension'],
     ];
 }
 ```
@@ -83,6 +83,12 @@ public function callbackHelloWorld($name)
     return $this->sendSuccess('Hello ' . $name);
 }
 ```
+
+There are a few built in widgets you can use:
+
++ {{luya\admin\ngrest\aw\CallbackButtonWidget}} - Generate a button with a click to a callback.
++ {{luya\admin\ngrest\aw\CallbackButtonFileDownloadWidget}} - Generate a button which will then provide a download of a given file.
++ {{luya\admin\ngrest\aw\ActiveWindowFormWidget}} - Generate a form to submit data to a callback.
 
 ## Generate a form
 
