@@ -155,11 +155,11 @@ class TagParser extends BaseObject
         // extract context
         $value = isset($context['value']) ? $context['value'] : false;
         $sub = isset($context['sub']) ? $context['sub'] : false;
-        // the sub value can contain escpaded values must be parsed back
+        // the sub value can contain escaped values, those values must be parsed back into the original state.
         if ($sub) {
             $sub = str_replace(['\)', '\('], [')', '('], $sub);
         }
-        // run parse
+        // run parse method inside the tag object.
         return $this->tags[$tag]->parse($value, $sub);
     }
 
