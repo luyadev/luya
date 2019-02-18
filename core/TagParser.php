@@ -39,7 +39,7 @@ class TagParser extends BaseObject
      * @var string Base regular expression to determine function, values and value-sub informations.
      * @see https://regex101.com/r/hP9nJ1/1 - Online Regex tester
      */
-    const REGEX = '/(?<function>[a-z]+)\[(?<value>.*?)\](\((?<sub>.*?)\))?/mi';
+    const REGEX = '/(?<function>[a-z]+)\[(?<value>.*?)\]((?<!\\)\((?<sub>.*?)(?<!\\)\))?/mi';
     
     private $tags = [
         'mail' => ['class' => 'luya\tag\tags\MailTag'],
