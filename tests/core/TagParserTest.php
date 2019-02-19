@@ -34,6 +34,14 @@ class TestTag extends BaseTag
     }
 }
 
+class Test2Tag extends TestTag
+{
+    public function parse($value, $sub)
+    {
+        return '<a href="'.$value.'">'.$sub.'</a>';
+    }
+}
+
 class TagParserTest extends LuyaWebTestCase
 {
     public function testInvalidContent()
@@ -69,5 +77,12 @@ class TagParserTest extends LuyaWebTestCase
         $this->assertSame('value', TagParser::convert('test[value]'));
         $this->assertSame('test[]', TagParser::convert('test[]'));
         $this->assertSame('value|sub', TagParser::convert('test[value](sub)'));
+    }
+
+    public function testSubValueWithBrackets()
+    {
+        TagParser::inject('test', ['class' => Test2Tag::class]);
+
+        $this->assertSame('<a href="1">Example file (PDF)</a>', TagParser::convert('test[1](Example file \(PDF\))'));
     }
 }
