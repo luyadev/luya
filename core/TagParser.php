@@ -39,7 +39,7 @@ class TagParser extends BaseObject
      * @var string Base regular expression to determine function, values and value-sub informations.
      * @see https://regex101.com/r/hP9nJ1/1 - Online Regex tester
      */
-    const REGEX = '/(?<function>[a-z]+)\[(?<value>.*?)\](\((?<sub>.*?)\))?/mi';
+    const REGEX = '/(?<function>[a-z]+)\[(?<value>.*?)\]((?<!\\\\)\((?<sub>.*?)(?<!\\\\)\))?/mi';
     
     private $tags = [
         'mail' => ['class' => 'luya\tag\tags\MailTag'],
@@ -100,6 +100,11 @@ class TagParser extends BaseObject
         return $context->tags;
     }
     
+    /**
+     * Get the TagParser object, create new if not exists
+     * 
+     * @return static
+     */
     private static function getInstance()
     {
         if (self::$_instance === null) {
@@ -109,16 +114,27 @@ class TagParser extends BaseObject
         return self::$_instance;
     }
     
+    /**
+     * Internal method to add a tag into the tags array.
+     */
     private function addTag($identifier, $tagObjectConfig)
     {
         $this->tags[$identifier] = $tagObjectConfig;
     }
 
+    /**
+     * Check if the given tag name exists.
+     * 
+     * @return boolean
+     */
     private function hasTag($tag)
     {
         return isset($this->tags[$tag]);
     }
 
+    /**
+     * Create the tag instance (object) for a given tag name.
+     */
     private function instantiatTag($tag)
     {
         if (!is_object($this->tags[$tag])) {
@@ -127,17 +143,36 @@ class TagParser extends BaseObject
         }
     }
     
-    private function evalTag($tag, $context)
+    /**
+     * Parse the given tag with context informations.
+     * 
+     * @return string Returns the parsed tag value.
+     */
+    private function parseTag($tag, $context)
     {
+        // ensure tag is an object
         $this->instantiatTag($tag);
-        
+        // extract context
         $value = isset($context['value']) ? $context['value'] : false;
         $sub = isset($context['sub']) ? $context['sub'] : false;
-     
-        
+        // the sub value can contain escaped values, those values must be parsed back into the original state.
+        if ($sub) {
+            $sub = str_replace(['\)', '\('], [')', '('], $sub);
+        }
+        // run parse method inside the tag object.
         return $this->tags[$tag]->parse($value, $sub);
     }
 
+    /**
+     * Process a given text.
+     * 
+     * + This will find all tag based expressions inside the text
+     * + instantiate the tag if the alias exists.
+     * + parse the tag and modify the input $text
+     * 
+     * @param string $text The input text   
+     * @return string The parsed text
+     */
     private function processText($text)
     {
         // verify if content is a string otherwhise just return the original provided content
@@ -152,10 +187,10 @@ class TagParser extends BaseObject
             if (empty($row['value'])) {
                 continue;
             }
-            
+            // extract tag name from regex
             $tag = $row['function'];
             if ($this->hasTag($tag)) {
-                $replace = $this->evalTag($tag, $row);
+                $replace = $this->parseTag($tag, $row);
                 $text = preg_replace('/'.preg_quote($row[0], '/').'/mi', $replace, $text, 1);
             }
         }
