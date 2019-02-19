@@ -102,7 +102,7 @@ class TagParser extends BaseObject
     
     /**
      * Get the TagParser object, create new if not exists
-     * 
+     *
      * @return static
      */
     private static function getInstance()
@@ -124,7 +124,7 @@ class TagParser extends BaseObject
 
     /**
      * Check if the given tag name exists.
-     * 
+     *
      * @return boolean
      */
     private function hasTag($tag)
@@ -145,7 +145,7 @@ class TagParser extends BaseObject
     
     /**
      * Parse the given tag with context informations.
-     * 
+     *
      * @return string Returns the parsed tag value.
      */
     private function parseTag($tag, $context)
@@ -165,12 +165,12 @@ class TagParser extends BaseObject
 
     /**
      * Process a given text.
-     * 
+     *
      * + This will find all tag based expressions inside the text
      * + instantiate the tag if the alias exists.
      * + parse the tag and modify the input $text
-     * 
-     * @param string $text The input text   
+     *
+     * @param string $text The input text
      * @return string The parsed text
      */
     private function processText($text)
