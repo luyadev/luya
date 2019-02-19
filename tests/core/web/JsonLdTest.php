@@ -371,7 +371,7 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
                 'reviewCount' => 2,
                 'worstRating' => 2,
                 '@type' => 'AggregateRating',
-            ],        
+            ],
             'description' => 'luya.io restaurant!',
             'geo' => [
                 'latitude' => 123,

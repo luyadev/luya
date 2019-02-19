@@ -84,6 +84,6 @@ EOT;
             $output .= '&#'.ord($email[$i]).';';
         }
         
-	    return $output;
+        return $output;
     }
 }
