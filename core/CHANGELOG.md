@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## (in progress)
 
+### Fixed
+
++ [#1909](https://github.com/luyadev/luya/issues/1909) Fix issued with wrong delimiter defintion in StringHelper::highlightWord() function.
+
 ## 1.0.15 (19. February 2019)
 
 ## Changed
