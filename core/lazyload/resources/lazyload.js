@@ -155,7 +155,7 @@
         // If the screen got resized we need to update the image boundaries first
         if (status.resized) {
             status.resized = false;
-            return calculateImageBoundaries(filterImages());
+            return calculateImageBoundaries(filterImages);
         }
 
         return filterImages();
