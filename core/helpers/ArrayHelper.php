@@ -187,6 +187,7 @@ class ArrayHelper extends BaseArrayHelper
      */
     public static function searchColumn(array $array, $column, $search)
     {
+        $array = array_values($array); // align array keys
         $columns = array_column($array, $column);
         $key = array_search($search, $columns);
         return ($key !== false) ?  $array[$key] : false;

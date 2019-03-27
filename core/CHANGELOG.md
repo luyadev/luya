@@ -6,8 +6,9 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#1911](https://github.com/luyadev/luya/issues/1911) Fixed bug in ArrayHelper::searchColumn() when using assoc arrays.
 + [#1910](https://github.com/luyadev/luya/issues/1910) Fixed resized callback in lazyload js
-+ [#1909](https://github.com/luyadev/luya/issues/1909) Fix issued with wrong delimiter defintion in StringHelper::highlightWord() function.
++ [#1909](https://github.com/luyadev/luya/issues/1909) Fixed issued with wrong delimiter defintion in StringHelper::highlightWord() function.
 
 ## 1.0.15 (19. February 2019)
 
