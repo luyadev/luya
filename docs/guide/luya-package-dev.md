@@ -26,7 +26,7 @@ cd luya-package-skeleton
     "name": "username/package",
     "type": "luya-extension",
     "require-dev": {
-        "luyadev/luya-testsuite": "~1.0.0"
+        "luyadev/luya-testsuite": "^1.0"
     },
     "autoload" : {
         "psr-4" : {
@@ -70,7 +70,7 @@ As LUYA is built upon the composer package manager every extension must be inclu
     "type": "luya-extension",
     "minimum-stability": "stable",
     "require": {
-        "luyadev/luya-core": "~1.0.0"
+        "luyadev/luya-core": "^1.0"
     },
     "extra": {
     

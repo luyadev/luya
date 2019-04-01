@@ -269,7 +269,7 @@ Create a composer.json
         }
     },
     "require-dev" : {
-        "luyadev/luya-core" : "~1.0.0"
+        "luyadev/luya-core" : "^1.0"
     },
     "extra" : {
         "luya" : {
@@ -288,7 +288,7 @@ Now you can include the private LUYA DI package into your projects:
 
 ```
 "require" : {
-    "mycompanyvendor/luya-di" : "~1.0.0",
+    "mycompanyvendor/luya-di" : "^1.0",
 },
 "repositories": [
     {
