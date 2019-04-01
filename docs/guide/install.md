@@ -13,7 +13,7 @@ composer global require "fxp/composer-asset-plugin:~1.4"
 After setting up Composer, we execute the Composer command `create-project` to checkout the **luya-kickstarter** application, an **out of the box** LUYA setup to run your website directly. It´s recommend to run the `create-project` command directly from your htdocs/webserver folder like this:
 
 ```sh
-composer create-project luyadev/luya-kickstarter:~1.0.0
+composer create-project luyadev/luya-kickstarter:^1.0
 ```
 
 > Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
