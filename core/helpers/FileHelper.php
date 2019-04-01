@@ -198,10 +198,12 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      */
     public static function unlink($file)
     {
-        // default unlink
-        if (@unlink($file)) {
-            return true;
-        }
+        // no errors should be thrown, return false instead.
+        try {
+            if (parent::unlink($file)) {
+                return true;
+            }
+        } catch (\Exception $e) {}
         
         // try to force symlinks
         if (is_link($file)) {

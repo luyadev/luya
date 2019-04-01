@@ -75,6 +75,11 @@ class FileHelperTest extends LuyaWebTestCase
         
         $this->assertFalse(FileHelper::getFileContent('doesNotExist.txt'));
     }
+
+    public function testUnlink()
+    {
+        $this->assertFalse(FileHelper::unlink('doesnotexsts.jpg'));
+    }
     
     public function testClassInfo()
     {
