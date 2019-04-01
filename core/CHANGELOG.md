@@ -2,13 +2,13 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## (in progress)
+## 1.0.16 (1. April 2019)
 
 ### Fixed
 
 + [#1911](https://github.com/luyadev/luya/issues/1911) Fixed bug in ArrayHelper::searchColumn() when using assoc arrays.
-+ [#1910](https://github.com/luyadev/luya/issues/1910) Fixed resized callback in lazyload js
-+ [#1909](https://github.com/luyadev/luya/issues/1909) Fixed issued with wrong delimiter defintion in StringHelper::highlightWord() function.
++ [#1910](https://github.com/luyadev/luya/issues/1910) Fixed resized callback in lazyload js when using LazyLoad widget.
++ [#1909](https://github.com/luyadev/luya/issues/1909) Fixed issued with wrong delimiter definition in StringHelper::highlightWord() function.
 
 ## 1.0.15 (19. February 2019)
 
