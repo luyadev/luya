@@ -42,8 +42,7 @@
         "psr-4": {
             "luya\\": "core/",
             "luya\\dev\\": "dev",
-            "luyatests\\": "tests/",
-            "Aspsms\\": "repos/aspsms/src/"
+            "luyatests\\": "tests/"
         }
     },
     "extra": {
