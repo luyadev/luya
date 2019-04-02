@@ -48,7 +48,7 @@ class TelephoneLink extends BaseLink
         $telephone = ltrim($telephone, '\\');
 
         $validator = new RegularExpressionValidator([
-            'pattern' => '#^(?:0|\+[0-9]{2})[\d- ()]+$#'
+            'pattern' => '#^(?:0|\+[0-9]{2})[\d\- ()]+$#'
         ]);
         if ($validator->validate($telephone, $error)) {
             $this->_telephone = $telephone;
