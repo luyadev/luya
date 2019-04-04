@@ -246,6 +246,10 @@ abstract class Boot
             ],
         ]);
         $this->app = new ConsoleApplication($mergedConfig);
+
+        $this->theme = Yii::$app->themes->getTheme();
+        Yii::setAlias('theme', $this->theme['active']);
+
         if (!$this->mockOnly) {
             exit($this->app->run());
         }
@@ -262,6 +266,10 @@ abstract class Boot
         $this->includeYii();
         $mergedConfig = ArrayHelper::merge($config, ['bootstrap' => ['luya\web\Bootstrap']]);
         $this->app = new WebApplication($mergedConfig);
+
+        $this->theme = Yii::$app->themes->getTheme();
+        Yii::setAlias('theme', $this->theme['active']);
+
         if (!$this->mockOnly) {
             return $this->app->run();
         }
