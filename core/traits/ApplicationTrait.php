@@ -200,6 +200,7 @@ trait ApplicationTrait
         return array_merge(parent::coreComponents(), [
             'mail' => ['class' => 'luya\components\Mail'],
             'formatter' => ['class' => 'luya\components\Formatter'],
+            'themes' => ['class' => 'luya\components\Themes'],
         ]);
     }
 

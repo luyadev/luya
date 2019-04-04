@@ -179,6 +179,16 @@ abstract class Module extends \yii\base\Module
     public $moduleLayout = 'layout';
 
     /**
+     * @var string The default file of layout
+     */
+    public $layout = 'main';
+
+    /**
+     * @var string The default folder of theme load
+     */
+    public $theme;
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -199,13 +209,24 @@ abstract class Module extends \yii\base\Module
      *
      * the *@app* namespace views will be looked up for view files
      *
+     * Now use Themes component to load theme from database
+     *
      * @return string
      * @see \yii\base\Module::getLayoutPath()
      */
     public function getLayoutPath()
     {
+
+        $this->theme = Yii::$app->themes->getTheme();
+
+        if(!$this->theme || !empty($this->theme['theme']['error'])){
+            throw new InvalidConfigException(sprintf('Theme is not found'));
+        }
+
+        $this->layout = $this->theme['layout_file'];
+
         if ($this->useAppLayoutPath) {
-            $this->setLayoutPath('@app/views/'.$this->id.'/layouts');
+            $this->setLayoutPath($this->theme['layout']);
         }
 
         return parent::getLayoutPath();
