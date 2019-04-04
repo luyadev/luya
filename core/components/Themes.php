@@ -64,17 +64,69 @@ class Themes extends \yii\base\Component
         return $this;
     }
 
-
     /**
-     * Get Themes directory
+     * Get current theme from SQL
+     * If you have own theme you must inset into db record named active_theme like that:
      *
+     * INSERT INTO `admin_config` (`name`, `value`, `is_system`, `id`) VALUES ('active_theme', '@app/themes/teamwant', '1', NULL);
+     *
+     * todo: create admin module to manage themes
      * @return string
+     * @throws \yii\db\Exception
      */
-    public function getThemesDir()
+    public function getActive()
     {
-        return Yii::$app->basePath . '/themes';
+        try {
+            $connection = Yii::$app->getDb();
+            $command = $connection->createCommand("SELECT * FROM `admin_config` WHERE `name` = :name limit 1;", [':name' => 'active_theme']);
+
+            $result = $command->queryOne();
+
+            if (!$result) {
+                return '@app/themes/blank';
+            }
+
+        } catch (\Exception $e) {
+//            do none, return default theme
+            return '@app/themes/blank';
+        }
+
+        return $result['value'];
     }
 
+    /**
+     *
+     * Read theme info from XML theme file
+     *
+     * @param $path
+     * @return array
+     */
+    public function getThemeData($path)
+    {
+
+        $path = implode('/', array_map(function ($v) {
+            return Yii::getAlias($v);
+        }, explode('/', $path)));
+
+
+        if (file_exists($path . '/theme.xml')) {
+            $xml = simplexml_load_string(file_get_contents($path . '/theme.xml'));
+
+            if ($xml === false) {
+                return array();
+            }
+
+            return array(
+                'name' => $xml->name,
+                'description' => $xml->description,
+                'author' => $xml->author,
+                'image' => $xml->image,
+            );
+        }
+
+        return array();
+
+    }
 
     /**
      * Get all themes as array list
@@ -115,63 +167,13 @@ class Themes extends \yii\base\Component
     }
 
     /**
+     * Get Themes directory
      *
-     * Read theme info from XML theme file
-     *
-     * @param $path
-     * @return array
-     */
-    public function getThemeData($path)
-    {
-
-        $path = implode('/', array_map(function ($v) {
-            return Yii::getAlias($v);
-        }, explode('/', $path)));
-
-
-        if (file_exists($path . '/theme.xml')) {
-            $xml = simplexml_load_string(file_get_contents($path . '/theme.xml'));
-
-            if ($xml === false) {
-                return array();
-            }
-
-            return array(
-                'name' => $xml->name,
-                'description' => $xml->description,
-                'author' => $xml->author,
-                'image' => $xml->image,
-            );
-        }
-
-        return array();
-
-    }
-
-
-    /**
-     * Get current theme from SQL
-     * If you have own theme you must inset into db record named active_theme like that:
-     *
-     * INSERT INTO `admin_config` (`name`, `value`, `is_system`, `id`) VALUES ('active_theme', '@app/themes/teamwant', '1', NULL);
-     *
-     * todo: create admin module to manage themes
      * @return string
-     * @throws \yii\db\Exception
      */
-    public function getActive()
+    public function getThemesDir()
     {
-
-        $connection = Yii::$app->getDb();
-        $command = $connection->createCommand("SELECT * FROM `admin_config` WHERE `name` = :name limit 1;", [':name' => 'active_theme']);
-
-        $result = $command->queryOne();
-
-        if (!$result) {
-            return '@app/themes/blank';
-        }
-
-        return $result['value'];
+        return Yii::$app->basePath . '/themes';
     }
 
     /**
