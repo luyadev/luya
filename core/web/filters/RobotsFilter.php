@@ -63,7 +63,7 @@ class RobotsFilter extends ActionFilter
      */
     protected function getRenderTime()
     {
-        $value = Yii::$app->session->get(self::ROBOTS_FILTER_SESSION_IDENTIFIER, time());
+        $value = Yii::$app->session->get(self::ROBOTS_FILTER_SESSION_IDENTIFIER, [$this->getSessionKeyByOwner() => time()]);
 
         if (isset($value[$this->getSessionKeyByOwner()])) {
             return $value[$this->getSessionKeyByOwner()];
