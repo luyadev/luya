@@ -6,6 +6,7 @@ use Yii;
 use yii\base\ActionFilter;
 use yii\base\InvalidCallException;
 use yii\helpers\VarDumper;
+use yii\base\Controller;
 use luya\helpers\ArrayHelper;
 
 /**
@@ -49,6 +50,12 @@ class RobotsFilter extends ActionFilter
      */
     public $delay = 2.5;
     
+    /**
+     * @var string|null A string which identifiers the current robots filter in case you have multiple controllers on the same page with robot filters enabled.
+     * @since 1.0.17
+     */
+    public $sessionKey;
+
     const ROBOTS_FILTER_SESSION_IDENTIFIER = '__robotsFilterRenderTime';
     
     /**
@@ -56,7 +63,13 @@ class RobotsFilter extends ActionFilter
      */
     protected function getRenderTime()
     {
-        return Yii::$app->session->get(self::ROBOTS_FILTER_SESSION_IDENTIFIER, time());
+        $value = Yii::$app->session->get(self::ROBOTS_FILTER_SESSION_IDENTIFIER, time());
+
+        if (isset($value[$this->getSessionKeyByOwner()])) {
+            return $value[$this->getSessionKeyByOwner];
+        }
+
+        return $value;
     }
     
     /**
@@ -66,7 +79,28 @@ class RobotsFilter extends ActionFilter
      */
     protected function setRenderTime($time)
     {
-        Yii::$app->session->set(self::ROBOTS_FILTER_SESSION_IDENTIFIER, $time);
+        Yii::$app->session->set(self::ROBOTS_FILTER_SESSION_IDENTIFIER, [$this->getSessionKeyByOwner() => $time]);
+    }
+
+    /**
+     * Get a specific key for the current robots filter session array.
+     * 
+     * This ensures that when multiple forms are on the same page, only the robot check is handeld for the given module name.
+     *
+     * @return string
+     * @since 1.0.17
+     */
+    protected function getSessionKeyByOwner()
+    {
+        if ($this->sessionKey) {
+            return $this->sessionKey;
+        }
+
+        if ($this->owner instanceof Controller) {
+            return $this->owner->module->id;
+        }
+
+        return 'generic';
     }
     
     /**
