@@ -17,7 +17,7 @@ In order to fix this, make sure you have the same default language short code in
 
 In order to run LUYA with deployer nicely on a production server, the following components should be installed (we use the most common components apache2 and mysql, of course you can run LUYA with other database components and webservers like nginx):
 
-+ php 7.0 (or higher)
++ php 7.1 (or higher) (php 7.0 and php 5.6 should work but its not tested anymore)
 + mysql 5.5 (or higher)
 + php extensions: curl, fileinfo, mbstring, icu, phar
 + apache modules: mod_rewrite
