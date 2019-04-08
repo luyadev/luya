@@ -19,7 +19,7 @@ install:
   - travis_retry composer self-update && composer --version
   - travis_retry composer global require "fxp/composer-asset-plugin:~1.3"
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - travis_retry composer install --prefer-dist --no-interaction
+  - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
 
 before_script:
   - mysql -e 'create database myapp_test;'
