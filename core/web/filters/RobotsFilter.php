@@ -66,7 +66,7 @@ class RobotsFilter extends ActionFilter
         $value = Yii::$app->session->get(self::ROBOTS_FILTER_SESSION_IDENTIFIER, time());
 
         if (isset($value[$this->getSessionKeyByOwner()])) {
-            return $value[$this->getSessionKeyByOwner];
+            return $value[$this->getSessionKeyByOwner()];
         }
 
         return $value;
