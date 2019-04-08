@@ -69,7 +69,7 @@ class RobotsFilter extends ActionFilter
             return $value[$this->getSessionKeyByOwner()];
         }
 
-        return $value;
+        return time();
     }
     
     /**
@@ -79,7 +79,8 @@ class RobotsFilter extends ActionFilter
      */
     protected function setRenderTime($time)
     {
-        Yii::$app->session->set(self::ROBOTS_FILTER_SESSION_IDENTIFIER, [$this->getSessionKeyByOwner() => $time]);
+        $merge = Yii::$app->session->get(self::ROBOTS_FILTER_SESSION_IDENTIFIER, []);
+        Yii::$app->session->set(self::ROBOTS_FILTER_SESSION_IDENTIFIER, array_merge([$this->getSessionKeyByOwner() => $time], $merge));
     }
 
     /**
