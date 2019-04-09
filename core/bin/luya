@@ -24,6 +24,6 @@ foreach ($loaders as $file) {
 }
 
 $boot = new \luya\Boot();
-$boot->configFile = 'configs/env.php';
+$boot->configFile = __DIR__ . '/../../../../configs/env.php'; // https://github.com/luyadev/luya/issues/1799
 $boot->setBaseYiiFile($vendor . '/yiisoft/yii2/Yii.php');
 $boot->applicationConsole();
