@@ -52,7 +52,7 @@ class TestPlugin extends Plugin
 {
     public function renderList($id, $ngModel)
     {
-        $this->createListTag($id, $ngModel);
+        $this->createListTag($ngModel);
     }
     
     public function renderUpdate($id, $ngModel)
