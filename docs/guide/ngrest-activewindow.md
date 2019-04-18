@@ -128,7 +128,7 @@ The below view file shows an AngularJS controller which collects data from the t
 
 ```php
 <script>
-zaa.bootstrap.register('InlineController', ['$scope', function($scope,) {
+zaa.bootstrap.register('InlineController', ['$scope', function($scope) {
 
     $scope.data = <?= $dataFromController; ?>;
 
