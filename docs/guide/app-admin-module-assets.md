@@ -66,4 +66,4 @@ public function getJsTranslationMessages()
 
 > Only registered translation keys can be used, see [[app-translation.md]] module translation section to register translations.
 
-Now you can use this registered translation keys inside your javascript files with `i18n['i18n_message_key_from_message_1']`. If you have a parameterized translation message you can use `i18nParam('i18n_message_key_from_message_2', {variable: value})`.
+Now you can use this registered translation keys inside your javascript files with `i18n['i18n_message_key_from_message_1']`. If you have a parameterized translation message you can use `i18nParam('i18n_message_key_from_message_2', {variable: value})`. The message for this parameterized value could be `Hello %variable%`.
