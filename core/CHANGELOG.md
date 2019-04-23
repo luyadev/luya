@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.17 (23. April 2019)
 
+### Fixed
+
 + [#1799](https://github.com/luyadev/luya/issues/1799) Use relative config file path for luya binary file.
 + [#1914](https://github.com/luyadev/luya/issues/1914) Fixed problem with `RobotsFilter` when used in multiple forms on the same CMS page.
+
+### Added
+
 + [#1912](https://github.com/luyadev/luya/issues/1912) Added `ObjectHelper::isTraitInstanceOf` method to check whether an object contains a certain trait or not.
 
 ## 1.0.16 (1. April 2019)
