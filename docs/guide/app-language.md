@@ -56,7 +56,7 @@ In order to map a given domain to language use {{luya\web\Composition::$hostInfo
 ## Localisation prefix
 
 ```php
-pattern' => '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>',
+'pattern' => '<langShortCode:[a-z]{2}>-<countryShortCode:[a-z]{2}>',
 'default' => [
     'countryShortCode' => 'us',
     'langShortCode' => 'en',
