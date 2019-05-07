@@ -129,7 +129,7 @@ class ArrayHelper extends BaseArrayHelper
      * ];
      * ```
      *
-     * Assuming the above array parameter searching for `1` would return:
+     * Assuming the above array the expression `ArrayHelper::search($data, 1)` would return:
      *
      * ```php
      * $data  = [

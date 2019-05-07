@@ -89,7 +89,7 @@ class UrlManager extends \yii\web\UrlManager
         // This can be the case when composition is hidden, but not default language is loaded and a
         // url composition route is loaded!
         // @see https://github.com/luyadev/luya/issues/1146
-        $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver->getResolvedKeyValue('langShortCode'));
+        $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver->getResolvedKeyValue(Composition::VAR_LANG_SHORT_CODE));
         
         // set the application language based from the parsed composition request:
         Yii::$app->setLocale($this->composition->langShortCode);
@@ -358,7 +358,7 @@ class UrlManager extends \yii\web\UrlManager
             return $url;
         }
     
-        $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->lang($composition['langShortCode'])->one();
+        $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->lang($composition[Composition::VAR_LANG_SHORT_CODE])->one();
     
         if (!$item) {
             throw new BadRequestHttpException("Unable to find nav_item_id '$navItemId' to generate the module link for url '$url'.");
