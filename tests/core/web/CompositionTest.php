@@ -35,6 +35,47 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         
         return $composition->getResolvedPathInfo($request);
     }
+
+    public function testResolveHostInfo()
+    {
+        $request = new Request();
+        $comp = new Composition($request);
+        
+        // basic tests
+        $comp->hostInfoMapping = [
+            'http://mydomain.com' => ['langShortCode' => 'en'],
+            'http://meinedomain.de' => ['langShortCode' => 'de'],
+        ];
+        $this->assertSame('http://meinedomain.de', $comp->resolveHostInfo('de'));
+        $this->assertSame('http://mydomain.com', $comp->resolveHostInfo('en'));
+
+        // advanced config tests
+        $comp->hostInfoMapping = [
+            'http://mydomain.com' => ['langShortCode' => 'en', 'countryPrefix' => 'en'],
+            'http://mydomain.ch' => ['langShortCode' => 'de', 'countryPrefix' => 'ch'],
+            'http://meinedomain.de' => ['langShortCode' => 'de', 'countryPrefix' => 'de'],
+        ];
+        $this->assertSame('http://meinedomain.de', $comp->resolveHostInfo(['langShortCode' => 'de', 'countryPrefix' => 'de']));
+        $this->assertSame('http://mydomain.ch', $comp->resolveHostInfo(['langShortCode' => 'de', 'countryPrefix' => 'ch']));
+        $this->assertSame('http://mydomain.com', $comp->resolveHostInfo(['langShortCode' => 'en', 'countryPrefix' => 'en']));
+
+        // wrong (double) config defintion resolver
+        $comp->hostInfoMapping = [
+            'http://mydomain.com' => ['langShortCode' => 'en', 'countryPrefix' => 'en'],
+            'http://mydomain.ch' => ['langShortCode' => 'de', 'countryPrefix' => 'ch'],
+            'http://meinedomain.de' => ['langShortCode' => 'de', 'countryPrefix' => 'ch'],
+        ];
+        $this->assertFalse($comp->resolveHostInfo(['langShortCode' => 'de', 'countryPrefix' => 'de']));
+        $this->assertSame('http://mydomain.ch', $comp->resolveHostInfo(['langShortCode' => 'de', 'countryPrefix' => 'ch']));
+        $this->assertSame('http://mydomain.com', $comp->resolveHostInfo(['langShortCode' => 'en', 'countryPrefix' => 'en']));
+    
+        // not found config
+        $comp->hostInfoMapping = [
+            'http://mydomain.com' => ['langShortCode' => 'en'],
+            'http://meinedomain.de' => ['langShortCode' => 'de'],
+        ];
+        $this->assertFalse($comp->resolveHostInfo('cn'));
+    }
     
     public function testEmptyRouteResolver()
     {
