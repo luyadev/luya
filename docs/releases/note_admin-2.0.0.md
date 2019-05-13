@@ -30,6 +30,12 @@ With version 2.0 a new featured called "data pools" has arrived, this is somethi
 
 PICTURE
 
+## Api Request Logger
+
+With this version we took a big step head for using the admin as headless API, therfore we have added a new request logger option you can enable in order to gather informations about the API Request. What are the slowesd urls? Which one is often v ery much so you might cache this request on the client?
+
+PICTURE
+
 ## Updates
 
 + We have moved to latest version of Bootstrap 4 CSS Framework.
