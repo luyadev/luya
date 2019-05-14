@@ -1,4 +1,4 @@
-# NgRest config plugins
+# NgRest Attribute Plugins
 
 An NgRest plugin is like the type of an input which means you can create selects, date pickers, file or image uploads and more. Each NgRest Config Plugin can have its configuration options. You should read the [[ngrest-model.md]] guide section to understand how to use the plugins.
 
