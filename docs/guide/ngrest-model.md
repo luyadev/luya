@@ -1,4 +1,4 @@
-# NgRest model
+# NgRest Model
 
 The {{luya\admin\ngrest\base\NgRestModel}} is the base class for the API. It is implementing the {{yii\db\ActiveRecord}} class in order to find, update, create and delete database table data.
 
