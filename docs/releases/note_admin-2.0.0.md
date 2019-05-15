@@ -12,7 +12,7 @@ So make sure to use the correct version constraint in order to profit from upcom
 
 By default the admin module now integrations the Yii Queue component. The Yii Queue is used for the new LUYA Scheduler system:
 
-PICTURE
+![LUYA Admin Scheduler](https://raw.githubusercontent.com/luyadev/luya-module-admin/master/docs/images/admin-scheduler.png)
 
 This is a new generic angular directive which turns any field into a scheduling option in order to plan the change of ANY value. Lets say you have a CRUD system with a stauts field "published", "archived", "draft", by now you can enable scheduling for this field which then let you change the value of the field for any given time or date in the future! No more need for datetime fields in order to setup display limitations. There are also cronjobs and a "fake cronjob" you can enable in order to run the queue without the setup of cronjobs but you have to turn it on by your own. This is vers usefull for small pages.
 
@@ -20,7 +20,7 @@ This is a new generic angular directive which turns any field into a scheduling 
 
 We have strongly enhanced the CRUD system. Searching, Filtering and Sorting is now always context specific. So you can apply a filter and search in the results of the filter afterwards. There is also a new Tags view which lets you filter the content for tags. 
 
-PICTURE
+![LUYA Admin Tags](https://raw.githubusercontent.com/luyadev/luya-module-admin/master/docs/images/admin-tags.png)
 
 The tags view will automatically appear if the system detectes that your ngrest model has the Taggable Trait attached - this is how we think a system should work!
 
@@ -28,13 +28,11 @@ The tags view will automatically appear if the system detectes that your ngrest 
 
 With version 2.0 a new featured called "data pools" has arrived, this is something we very looking for internal for a long time. Its a common scenario to have data in the same table, but you want to display those data in 2 seperate CRUD systems. Therfore the table has commonly a field which is "type" or similar name. With the new `itemPoolApi` permission entry and ngRestPools() method you are able to display only data for this given type. This information about the pool will even passed to inherited curd realtion views!
 
-PICTURE
-
-## Api Request Logger
+## Api Request Insight
 
 With this version we took a big step head for using the admin as headless API, therfore we have added a new request logger option you can enable in order to gather informations about the API Request. What are the slowesd urls? Which one is often v ery much so you might cache this request on the client?
 
-PICTURE
+![LUYA Admin Requests](https://raw.githubusercontent.com/luyadev/luya-module-admin/master/docs/images/admin-requests.png)
 
 ## Updates
 
