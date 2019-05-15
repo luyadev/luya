@@ -3,37 +3,38 @@ LUYA admin 2.0.0 release
 ## Move to semver
 
 With the new admin version we switch to strict semver versioning. This means we try to follow http://semver.org as good as possible.
-Therefore the version constraint changed from `~` to `^` operator. As by the previous versioning system the admin module would become version 1.3, we skipped this plan and made 2.0 out of it. This will also be the case for all other modules which will have breaking changes in future.
-The cms module will follow shorty after this release with version 2.0 as well.
+Therefore the version constraint changed from `~` to `^` operator. As by the previous versioning system the admin module would become version 1.3, we skipped this plan and made 2.0 out of it. This will also be the case for all other modules with breaking changes in future.
+The CMS module will follow shorty after this release with version 2.0 as well.
 
 So make sure to use the correct version constraint in order to profit from upcoming updates.
 
 ## Scheduler
 
-By default the admin module now integrations the Yii Queue component. The Yii Queue is used for the new LUYA Scheduler system:
+By default the Admin module now integrates the Yii Queue component. The Yii Queue is used for the new LUYA Scheduler system which.
 
 ![LUYA Admin Scheduler](https://raw.githubusercontent.com/luyadev/luya/master/docs/images/admin-scheduler.png)
 
-This is a new generic angular directive which turns any field into a scheduling option in order to plan the change of ANY value. Lets say you have a CRUD system with a stauts field "published", "archived", "draft", by now you can enable scheduling for this field which then let you change the value of the field for any given time or date in the future! No more need for datetime fields in order to setup display limitations. There are also cronjobs and a "fake cronjob" you can enable in order to run the queue without the setup of cronjobs but you have to turn it on by your own. This is vers usefull for small pages.
+This is a new generic Angular directive which turns any field into a scheduling option to plan the change of ANY value. Lets say you have a CRUD system with a stauts field "published", "archived" and "draft" by now you can enable scheduling for those fields which then let you change the value of the field for any given time or date in the future! No more need for datetime or timestamp fields in order to setup display limitations. There are is also a cronjob and a "fake cronjob" you can enable in order to run the queue without to setup of crontab but you have to turn it on by yourself in the configuration of the admin module.
 
 ## NgRest Crud
 
 We have strongly enhanced the CRUD system. Searching, Filtering and Sorting is now always context specific. So you can apply a filter and search in the results of the filter afterwards. There is also a new Tags view which lets you filter the content for tags. 
 
-
 ![LUYA Admin Tags](https://raw.githubusercontent.com/luyadev/luya/master/docs/images/admin-tags.png)
 
-The tags view will automatically appear if the system detectes that your ngrest model has the Taggable Trait attached - this is how we think a system should work!
+The tags view will automatically appear if the system detects that your ngrest model has the Taggable Trait attached - this is how we think a system should work!
 
 ## Data Pools
 
-With version 2.0 a new featured called "data pools" has arrived, this is something we very looking for internal for a long time. Its a common scenario to have data in the same table, but you want to display those data in 2 seperate CRUD systems. Therfore the table has commonly a field which is "type" or similar name. With the new `itemPoolApi` permission entry and ngRestPools() method you are able to display only data for this given type. This information about the pool will even passed to inherited curd realtion views!
+With version 2.0 a new featured called "data pools" has arrived, this is something we where looking for internaly for a long time. Its a common scenario to have data in the same table, but you want to display those data in 2 seperate CRUD systems - as technically they are in the same table but the logic for the administration user could be different. Therfore the table has commonly a field with the "type". With the new `itemPoolApi` permission entry and ngRestPools() method you are now able to display only data for this given type. This information about the pool will even passed to inherited CRUD realtion viewsl, if available.
 
 ## Api Request Insight
 
-With this version we took a big step head for using the admin as headless API, therfore we have added a new request logger option you can enable in order to gather informations about the API Request. What are the slowesd urls? Which one is often v ery much so you might cache this request on the client?
+With this version we took a big step ahead for using the admin as headless API, therefore we have added a new tool to take a deeper insight over all the reqests coming to the API. What are the slowest urls? Which API is called very often, so you might cache this request on the client?
 
 ![LUYA Admin Requests](https://raw.githubusercontent.com/luyadev/luya/master/docs/images/admin-requests.png)
+
+In addition the LUYA headless client has been released as Version 2.0 with some new features and improvments. It was never easier to use LUYA Admin as a Data Provider for different websites, modules and applications.
 
 ## Updates
 
