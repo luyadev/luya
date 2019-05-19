@@ -23,7 +23,14 @@ foreach ($loaders as $file) {
 	}	
 }
 
+// https://github.com/luyadev/luya/issues/1799
+$configFilePaths = [__DIR__ . '/../../../../configs/env.php', 'configs/env.php'];
+foreach ($configFilePaths as $configFile) {
+	if (file_exists($configFile)) {
+		break;
+	}
+}
 $boot = new \luya\Boot();
-$boot->configFile = __DIR__ . '/../../../../configs/env.php'; // https://github.com/luyadev/luya/issues/1799
+$boot->configFile = $configFile;
 $boot->setBaseYiiFile($vendor . '/yiisoft/yii2/Yii.php');
 $boot->applicationConsole();
