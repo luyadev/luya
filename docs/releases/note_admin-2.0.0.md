@@ -15,6 +15,14 @@ The admin module now integrates the Yii Queue component upon which the new LUYA 
 
 This is a new generic Angular directive which turns any field into a scheduling option to plan the change of ANY value. Let's assume you have a CRUD system with a status field and its possible values "published", "archived" and "draft". Now you can enable scheduling for this field in order to have its value automatically changed at any given date and time in the future. No more need for datetime or timestamp fields in order to setup display limitations. You can enable a cronjob or have the system run a "fake cronjob" (which has to be turned on in the configuration of the admin module) in order to process the queue.
 
+## Data Notifications
+
+A brand new "data" notification system points you to CRUD list where new data has been added since your last visit. In order to get notifications you just have to visit this CRUD view once, afterwards you will get notifications about new incoming data, whether its from other administration users or a formular in frontend. This is very intereting for frontend formulars and inputs. As the notification are only automatically enabled when visited, the system will not annoy users with random notifications on every edge, this is specially important when different people works in different sections.
+
+![LUYA Admin Notifications](https://raw.githubusercontent.com/luyadev/luya/master/docs/images/admin-notifications.png)
+
+And you can of course, turn off this notifcations for any CRUD table with a single click.
+
 ## NgRest CRUD
 
 We have strongly enhanced the CRUD system. Searching, filtering and sorting is now context specific. So you can apply a filter and search in the results of the filter afterwards. There is also a new tags view which lets you filter the content by tags. 
@@ -41,8 +49,12 @@ In addition, the LUYA headless client has been released as version 2.0, too, wit
 
 + We have upgraded to the latest version of the Bootstrap 4 framework.
 + We have integrated unglue.io as a compiling system for JavaScript and CSS (if you have not checked out unglue, you should definitely do so). The compiler is based on PHP, so you can install the binary via composer and start compiling right away **without any use of Node.js**!
-+ Deprecated some classes and methods.
 + Improved API speed for API users and also allowed more flexibility when creating custom API actions.
 + New sorting definition option for CRUD views (for example relation attribute sorting setup).
++ Provide new reloadButton option to set custom reload events (for example call clear cache url in frontend).
 + Fixed a lot of smaller bugs.
-+ Made small UI improvements (like reset icon for search etc.)
++ Made small UI improvements (like reset icon for search etc.).
+
+Please check the full [Changelog](https://github.com/luyadev/luya-module-admin/blob/master/CHANGELOG.md) and the [Upgrading](https://github.com/luyadev/luya-module-admin/blob/master/UPGRADE.md) where you will find a list of all breaking changes.
+
+XYZ May 2019, LUYA developer team
