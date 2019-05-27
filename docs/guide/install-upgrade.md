@@ -2,8 +2,6 @@
 
 This page describes how to update an existing LUYA instance to the latest version.
 
-> **Before upgrading, [read carefully the backward compatibility breaks Guide](https://github.com/luyadev/luya/blob/master/core/UPGRADE.md)**
-
 ## Composer
 
 Change the LUYA versions for each modules and LUYA itself in your composer.json
