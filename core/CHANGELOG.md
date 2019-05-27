@@ -4,31 +4,23 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.18 (27. May 2019)
 
-+ Fixed issue when binary is loading config file from vendor folder.
 + [#1921](https://github.com/luyadev/luya/issues/1921) Added new `resolveHostInfo()` in Composition component in order to find a given host for a mapping defintion.
++ Fixed issue when binary is loading config file from vendor folder.
++ Update lock files to allow latest test suite with admin 2.0 constraint.
 
 ## 1.0.17 (23. April 2019)
 
-### Fixed
-
 + [#1799](https://github.com/luyadev/luya/issues/1799) Use relative config file path for luya binary file.
 + [#1914](https://github.com/luyadev/luya/issues/1914) Fixed problem with `RobotsFilter` when used in multiple forms on the same CMS page.
-
-### Added
-
 + [#1912](https://github.com/luyadev/luya/issues/1912) Added `ObjectHelper::isTraitInstanceOf` method to check whether an object contains a certain trait or not.
 
 ## 1.0.16 (1. April 2019)
-
-### Fixed
 
 + [#1911](https://github.com/luyadev/luya/issues/1911) Fixed bug in ArrayHelper::searchColumn() when using assoc arrays.
 + [#1910](https://github.com/luyadev/luya/issues/1910) Fixed resized callback in lazyload js when using LazyLoad widget.
 + [#1909](https://github.com/luyadev/luya/issues/1909) Fixed issued with wrong delimiter definition in StringHelper::highlightWord() function.
 
 ## 1.0.15 (19. February 2019)
-
-## Changed
 
 + [#1895](https://github.com/luyadev/luya/issues/1895) Changed to email output obfuscation in email tag instead of plain email mailto link.
 
