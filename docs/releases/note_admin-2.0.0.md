@@ -17,11 +17,11 @@ This is a new generic Angular directive which turns any field into a scheduling 
 
 ## Data Notifications
 
-A brand new "data" notification system points you to CRUD list where new data has been added since your last visit. In order to get notifications you just have to visit this CRUD view once, afterwards you will get notifications about new incoming data, whether its from other administration users or a formular in frontend. This is very intereting for frontend formulars and inputs. As the notification are only automatically enabled when visited, the system will not annoy users with random notifications on every edge, this is specially important when different people works in different sections.
+Also new is a notification system that highlights CRUD lists with new data added since your last visit, either through the administration or a frontend form. In order to receive these notifications, you simply have to visit a CRUD view once. This is especially interesting for frontend-generated inputs. As the notifications are only automatically enabled for visited CRUD views, the system will not overwhelm and annoy users with notifications that are not of interest to them – this is important with different users working in different sections.
 
 ![LUYA Admin Notifications](https://raw.githubusercontent.com/luyadev/luya/master/docs/images/admin-notifications.png)
 
-And you can of course, turn off this notifcations for any CRUD table with a single click.
+And, of course, you can turn off these notifications for any CRUD view with a single click.
 
 ## NgRest CRUD
 
@@ -55,6 +55,6 @@ In addition, the LUYA headless client has been released as version 2.0, too, wit
 + Fixed a lot of smaller bugs.
 + Made small UI improvements (like reset icon for search etc.).
 
-Please check the full [Changelog](https://github.com/luyadev/luya-module-admin/blob/master/CHANGELOG.md) and the [Upgrading](https://github.com/luyadev/luya-module-admin/blob/master/UPGRADE.md) where you will find a list of all breaking changes.
+Please check the full [Changelog](https://github.com/luyadev/luya-module-admin/blob/master/CHANGELOG.md) and the [Upgrading Guide](https://github.com/luyadev/luya-module-admin/blob/master/UPGRADE.md) where you will find a list of all breaking changes.
 
-XYZ May 2019, LUYA developer team
+May 2019, LUYA developer team
