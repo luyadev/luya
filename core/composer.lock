@@ -68,16 +68,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.3.1",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "9e8ec3d10fad04748176144f108d7355662ae75e"
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/9e8ec3d10fad04748176144f108d7355662ae75e",
-                "reference": "9e8ec3d10fad04748176144f108d7355662ae75e",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -96,7 +96,7 @@
                 "jquery",
                 "library"
             ],
-            "time": "2018-01-20T17:26:57+00:00"
+            "time": "2019-05-01T21:19:28+00:00"
         },
         {
             "name": "bower-asset/punycode",
@@ -326,16 +326,16 @@
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "1.0.4.2",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "2e80ae60066ba53c131a25b0b088a607dc226dc6"
+                "reference": "4d9d1cb15346ff0cbbc3dfebeed9d5bb4013380e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/2e80ae60066ba53c131a25b0b088a607dc226dc6",
-                "reference": "2e80ae60066ba53c131a25b0b088a607dc226dc6",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/4d9d1cb15346ff0cbbc3dfebeed9d5bb4013380e",
+                "reference": "4d9d1cb15346ff0cbbc3dfebeed9d5bb4013380e",
                 "shasum": ""
             },
             "require": {
@@ -372,7 +372,7 @@
                 "composer",
                 "luya"
             ],
-            "time": "2018-12-24T09:18:03+00:00"
+            "time": "2019-05-14T05:37:27+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -442,21 +442,21 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.16",
+            "version": "2.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "789de9783d41e6ca10fffc3644a43a764f79b399"
+                "reference": "3e74c7338dd83cea6ffc6f5c25202b9f2f271f89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/789de9783d41e6ca10fffc3644a43a764f79b399",
-                "reference": "789de9783d41e6ca10fffc3644a43a764f79b399",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/3e74c7338dd83cea6ffc6f5c25202b9f2f271f89",
+                "reference": "3e74c7338dd83cea6ffc6f5c25202b9f2f271f89",
                 "shasum": ""
             },
             "require": {
                 "bower-asset/inputmask": "~3.2.2 | ~3.3.5",
-                "bower-asset/jquery": "3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
+                "bower-asset/jquery": "3.4.*@stable | 3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
                 "bower-asset/punycode": "1.3.*",
                 "bower-asset/yii2-pjax": "~2.0.1",
                 "cebe/markdown": "~1.0.0 | ~1.1.0 | ~1.2.0",
@@ -538,7 +538,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2019-01-30T23:54:16+00:00"
+            "time": "2019-05-21T16:01:16+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
