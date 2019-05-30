@@ -4,6 +4,8 @@ namespace luya\helpers;
 
 use luya\Exception;
 use ReflectionMethod;
+use yii\base\Controller;
+use luya\base\Module;
 
 /**
  * Helper methods when dealing with Objects.
@@ -171,5 +173,67 @@ class ObjectHelper
         }
 
         return call_user_func_array([$object, $method], $methodArgs);
+    }
+
+    /**
+     * Get all actions from a given controller.
+     *
+     * @param Controller $controller
+     * @return array
+     * @since 1.0.19
+     */
+    public function getActions(Controller $controller)
+    {
+        $actions = array_keys($controller->actions());
+        $class = new \ReflectionClass($controller);
+        foreach ($class->getMethods() as $method) {
+            $name = $method->getName();
+            if ($name !== 'actions' && $method->isPublic() && !$method->isStatic() && strncmp($name, 'action', 6) === 0) {
+                $actions[] = Inflector::camel2id(substr($name, 6), '-', true);
+            }
+        }
+        sort($actions);
+        return array_unique($actions);
+    }
+
+    /**
+     * Get all controllers for a given luya Module
+     *
+     * @param Module $module
+     * @return array
+     * @since 1.0.19
+     */
+    public function getControllers(Module $module)
+    {
+        $files = [];
+        try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L253
+            foreach (FileHelper::findFiles($module->controllerPath) as $file) {
+                $files[self::fileToName($module->controllerPath, $file)] = $file;
+            }
+        } catch (InvalidParamException $e) {
+            try {
+                $staticPath = static::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
+                foreach (FileHelper::findFiles($staticPath) as $file) {
+                    $files[self::fileToName($staticPath, $file)] = $file;
+                }
+            } catch (InvalidParamException $e) {
+                // catch if folder not found.
+            }
+        };
+        
+        return $files;
+    }
+
+    /**
+     * Namify a controller file
+     *
+     * @param string $prefix
+     * @param string $file
+     * @return string
+     * @since 1.0.19
+     */
+    private static function fileToName($prefix, $file)
+    {
+        Inflector::camel2id(ltrim(str_replace([$prefix, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR));
     }
 }
