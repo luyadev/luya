@@ -212,7 +212,7 @@ class ObjectHelper
             }
         } catch (InvalidParamException $e) {
             try {
-                $staticPath = static::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
+                $staticPath = $module::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
                 foreach (FileHelper::findFiles($staticPath) as $file) {
                     $files[self::fileToName($staticPath, $file)] = $file;
                 }
@@ -234,6 +234,6 @@ class ObjectHelper
      */
     private static function fileToName($prefix, $file)
     {
-        Inflector::camel2id(ltrim(str_replace([$prefix, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR));
+        return Inflector::camel2id(ltrim(str_replace([$prefix, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR));
     }
 }
