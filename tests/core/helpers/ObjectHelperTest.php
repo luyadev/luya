@@ -3,8 +3,8 @@
 namespace luyatests\core\helpers;
 
 use luya\helpers\ObjectHelper;
-
-
+use luyatests\data\controllers\FooController;
+use luyatests\data\modules\ctrlmodule\Module;
 
 trait XYZ
 {
@@ -138,5 +138,22 @@ class ObjectHelperTest extends \luyatests\LuyaWebTestCase
         
         $this->expectException('luya\Exception');
         $this->assertFalse(ObjectHelper::isInstanceOf('fooBar', ['\Exception']));
+    }
+
+    public function testGetActions()
+    {
+        $ctrl = new FooController('id', $this->app);
+
+        $this->assertSame([
+            0 => 'index',
+            1 => 'xyz',
+        ], ObjectHelper::getActions($ctrl));
+    }
+
+    public function testGetControllers()
+    {
+        $module = new Module('id');
+        $ctrls = ObjectHelper::getControllers($module);
+        $this->assertArrayHasKey('default', $ctrls);
     }
 }

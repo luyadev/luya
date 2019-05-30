@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.19 (in progress)
 
++ [#1925](https://github.com/luyadev/luya/issues/1925) Add new actions and controller retrieve options in object helper.
+
 ## 1.0.18 (27. May 2019)
 
 + [#1921](https://github.com/luyadev/luya/issues/1921) Added new `resolveHostInfo()` in Composition component in order to find a given host for a mapping defintion.
