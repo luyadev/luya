@@ -182,7 +182,7 @@ class ObjectHelper
      * @return array
      * @since 1.0.19
      */
-    public function getActions(Controller $controller)
+    public static function getActions(Controller $controller)
     {
         $actions = array_keys($controller->actions());
         $class = new \ReflectionClass($controller);
@@ -203,7 +203,7 @@ class ObjectHelper
      * @return array
      * @since 1.0.19
      */
-    public function getControllers(Module $module)
+    public static function getControllers(Module $module)
     {
         $files = [];
         try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L253
