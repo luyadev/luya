@@ -5,7 +5,6 @@ namespace luya\web\jsonld;
 use luya\helpers\ObjectHelper;
 use yii\base\InvalidConfigException;
 
-
 /**
  * JsonLd Rating.
  *
@@ -27,7 +26,7 @@ class Rating extends BaseThing
 
     /**
      * Set Author
-     * 
+     *
      * The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
      *
      * @param Organization|Person $author
@@ -54,7 +53,7 @@ class Rating extends BaseThing
 
     /**
      * Set best Rating.
-     * 
+     *
      * The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.
      *
      * @param integer $bestRating
@@ -82,7 +81,7 @@ class Rating extends BaseThing
      * Set Worst Rating.
      *
      * The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.
-     * 
+     *
      * @param integer $worstRating
      * @return static
      */
@@ -106,7 +105,7 @@ class Rating extends BaseThing
 
     /**
      * Set Rating Value.
-     * 
+     *
      * The rating for the content.
      *
      * @param integer $ratingValue
@@ -139,7 +138,7 @@ class Rating extends BaseThing
 
     /**
      * Set Review Aspect.
-     * 
+     *
      * This Review or Rating is relevant to this part or facet of the itemReviewed.
      *
      * @param string $reviewAspect

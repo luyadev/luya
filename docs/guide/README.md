@@ -62,6 +62,7 @@
   + [Plugins](ngrest-plugins.md)
     + [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
     + [Plugin Selects](ngrest-plugin-select.md)
+  + [Pools](ngrest-pools.md)
 + Lessons
   + [Forms in Blocks](lesson-blockform.md)
   + [Image slider Block](lesson-imagesliderblock.md)

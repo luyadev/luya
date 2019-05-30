@@ -226,11 +226,11 @@ class StringHelper extends BaseStringHelper
      * Highlight a word within a content.
      *
      * Since version 1.0.14 an array of words to highlight is possible.
-     * 
+     *
      * > This function IS NOT case sensitive!
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param string $content The content to find the word.
      * @param string $word The word to find within the content.
      * @param string $markup The markup used wrap the word to highlight.
@@ -242,7 +242,7 @@ class StringHelper extends BaseStringHelper
         $content = strip_tags($content);
         $latest = null;
         foreach ($word as $needle) {
-            preg_match_all("/".preg_quote($needle)."+/i", $content, $matches);
+            preg_match_all("/".preg_quote($needle, '/')."+/i", $content, $matches);
             if (is_array($matches[0]) && count($matches[0]) >= 1) {
                 foreach ($matches[0] as $match) {
                     // ensure if a word is found twice we don't replace again.

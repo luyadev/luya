@@ -304,7 +304,7 @@ In order to extend a block with a special behaviour the `blockVariations` proper
 ],
 ```
 
-Maybe the application block is now known inside the config files, then there is an alternative option to define block variations:
+Maybe the application block is not known inside the config files, then there is an alternative option to define block variations:
 
 ```php
 'cmsadmin' => [
@@ -325,3 +325,4 @@ Maybe the application block is now known inside the config files, then there is 
 ## Block preview
 
 To give the user a better understanding how you block could looks like you can store a jpeg image under `app/images/blocks` or `app/modules/yourmodule/images/blocks` with same name as the block e.g. `TextTransformBlock.jpg`.
+This image will be display on hover over a block name in the navigation. Make sure that this file size is so small as possible (maybe use a image optimizer) and image size is under 400x400 pixel.

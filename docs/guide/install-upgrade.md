@@ -1,9 +1,6 @@
 # Upgrading LUYA
 
-This page describes how to update an existing LUYA instance to the latest version. 
-The current version of LUYA is `1.0.0`.
-
-> **Before upgrading, [read carefully the backward compatibility breaks Guide](https://github.com/luyadev/luya/blob/master/core/UPGRADE.md)**
+This page describes how to update an existing LUYA instance to the latest version.
 
 ## Composer
 
@@ -11,9 +8,9 @@ Change the LUYA versions for each modules and LUYA itself in your composer.json
 
 ```json
 "require": {
-    "luyadev/luya-core" : "~1.0.0",
-    "luyadev/luya-module-cms" : "~1.0.0",
-    "luyadev/luya-module-admin" : "~1.1.0"
+    "luyadev/luya-core" : "^1.0",
+    "luyadev/luya-module-cms" : "^1.0",
+    "luyadev/luya-module-admin" : "^1.2"
 }
 ```
 

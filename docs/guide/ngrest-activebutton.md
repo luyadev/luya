@@ -4,7 +4,7 @@ Active Buttons are analog to [[ngrest-activewindow.md]] a button you can attach 
 
 There are built in Acitve Buttons you can use and configure or you can create your own Active Buttons and attach them to an [[ngrest-model.md]].
 
-## Creating an Active Button
+## Creating an Active Button
 
 There is a base class for all Active Buttons called {{luya\admin\ngrest\base\ActiveButton}}, the final implementation only requires a handler method.
 
@@ -43,7 +43,7 @@ The handle method must return {{luya\admin\ngrest\base\ActiveButton::sendSuccess
 
 Als you can triggere events for certain situations. Assuming you are going to modify the value of a column isnide this CRUD, a forced reload of the curd list can be done trough {{luya\admin\ngrest\base\ActiveButton::sendReloadEvent()}}.
 
-## Attaching the Button
+## Attaching the Button
 
 An Active Button can be attached inside every {{luya\admin\ngrest\base\NgRest}} model trough the {{luya\admin\ngrest\base\NgRest::ngRestActiveButtons()}} method.
 

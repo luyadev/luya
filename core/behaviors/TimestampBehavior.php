@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
  *
  * ```php
  * 'timestamp' => [
- *     'class' => \luya\behaviors\Timestamp::class,
+ *     'class' => \luya\behaviors\TimestampBehavior::class,
  *     'insert' => ['last_update'],
  *     'update' => ['last_update'],
  * ]

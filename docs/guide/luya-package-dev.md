@@ -19,14 +19,16 @@ git clone https://github.com/luyadev/luya-package-skeleton
 cd luya-package-skeleton
 ```
 
-1) Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
-2) Create a composer.json with basic informations about the vendor and package name. Replace username with your github username or vendor name, and package with the package name. Example `nadar/luya-material-blocks`.
+1. Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
+
+2. Create a composer.json with basic informations about the vendor and package name. Replace username with your github username or vendor name, and package with the package name. Example `nadar/luya-material-blocks`.
+
 ```json
 {
     "name": "username/package",
     "type": "luya-extension",
     "require-dev": {
-        "luyadev/luya-testsuite": "~1.0.0"
+        "luyadev/luya-testsuite": "^1.0"
     },
     "autoload" : {
         "psr-4" : {
@@ -36,14 +38,15 @@ cd luya-package-skeleton
     "extra": {
       "luya" : {
         "blocks": [
-            "src/blocks"
+            "src{{DS}}blocks"
         ]
       }
     }
 }
 ```
 
-3) As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, example `src/HeroBlock.php`.
+
+3. As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, example `src/HeroBlock.php`.
 
 ```php
 <?php
@@ -70,7 +73,7 @@ As LUYA is built upon the composer package manager every extension must be inclu
     "type": "luya-extension",
     "minimum-stability": "stable",
     "require": {
-        "luyadev/luya-core": "~1.0.0"
+        "luyadev/luya-core": "^1.0"
     },
     "extra": {
     
@@ -96,16 +99,16 @@ The composer.json file can contain an extra section which can be read by the LUY
 "extra" : {
     "luya" : {
         "blocks": [
-            "path/to/blocks"
+            "path{{DS}}to{{DS}}blocks"
         ],
         "bootstrap": [
-            "src/MyBootstrapClass.php"
+            "src{{DS}}MyBootstrapClass.php"
         ]
     }
 }
 ```
 
-+ blocks: Include the provided folders or blocks while import command.
++ blocks: Include the provided folders or blocks while import command. Use `{{DS}}` for the directory seperator, the luya composer plugin auto replace by current OS specific directory seperator.
 + bootstrap: Add the file to the LUYA bootstraping process.
 
 > When importing blocks a namespace for each block class have to be provided. You can use the [Composer autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading) feature handle namespaces.

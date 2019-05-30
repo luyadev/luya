@@ -149,6 +149,31 @@ class ArrayHelperTest extends LuyaWebTestCase
         
         $this->assertSame([], ArrayHelper::searchColumns($array, 'foo', 'NOTFOUNDATALL'));
     }
+
+    public function testSearchColumnsAndColumnWithAssocKeys()
+    {
+        $numbers = [
+            10 => ['column' => 'a'],
+            20 => ['column' => 'b'],
+        ];
+
+        $assoc = [
+            "one" => ['column' => 'c'],
+            "two" => ['column' => 'd'],
+        ];
+
+        $this->assertSame([
+            20 => ['column' => 'b'],
+        ], ArrayHelper::searchColumns($numbers, 'column', 'b'));
+
+        $this->assertSame([
+            "two" => ['column' => 'd'],
+        ], ArrayHelper::searchColumns($assoc, 'column', 'd'));
+
+        $this->assertSame(['column' => 'b'], ArrayHelper::searchColumn($numbers, 'column', 'b'));
+
+        $this->assertSame(['column' => 'd'], ArrayHelper::searchColumn($assoc, 'column', 'd'));
+    }
     
     public function testGenerateRange()
     {

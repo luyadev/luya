@@ -46,7 +46,7 @@ class UnitMenu extends Component
         }
         
         if ($this->fakeType2) {
-            return new ItemRedirect();
+            return new ItemModule();
         }
         
         if ($this->getHome) {
@@ -75,7 +75,7 @@ class ItemHome
     public $isHome = true;
 }
 
-class ItemRedirect
+class ItemModule
 {
     public $type = 2;
     

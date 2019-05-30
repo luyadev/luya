@@ -23,7 +23,7 @@ class PostalAddress extends ContactPoint
 
     /**
      * Set Address Country.
-     * 
+     *
      * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
      *
      * @param string $addressCountry
@@ -49,7 +49,7 @@ class PostalAddress extends ContactPoint
 
     /**
      * Set Address Locality.
-     * 
+     *
      * The locality. For example, Mountain View.
      *
      * @param string $addressLocality
@@ -75,7 +75,7 @@ class PostalAddress extends ContactPoint
 
     /**
      * Set Address Region.
-     * 
+     *
      * The region. For example, CA.
      *
      * @param string $addressRegion
@@ -101,7 +101,7 @@ class PostalAddress extends ContactPoint
 
     /**
      * Set Post Office Box Number.
-     * 
+     *
      * The post office box number for PO box addresses.
      *
      * @param string $postOfficeBoxNumber
@@ -127,7 +127,7 @@ class PostalAddress extends ContactPoint
 
     /**
      * Set Postal Code.
-     * 
+     *
      * The postal code. For example, 94043.
      *
      * @param string $postalCode
@@ -155,7 +155,7 @@ class PostalAddress extends ContactPoint
      * Set Street Address.
      *
      * The street address. For example, 1600 Amphitheatre Pkwy.
-     * 
+     *
      * @param string $streetAddress
      * @return static
      */

@@ -7,6 +7,7 @@ use yii\base\Component;
 use yii\web\ForbiddenHttpException;
 use luya\Exception;
 use luya\helpers\StringHelper;
+use luya\helpers\ArrayHelper;
 
 /**
  * Composition parseRequest Handler.
@@ -37,6 +38,8 @@ use luya\helpers\StringHelper;
  */
 class Composition extends Component implements \ArrayAccess
 {
+    const VAR_LANG_SHORT_CODE = 'langShortCode';
+    
     /**
      * @var string The Regular-Expression matching the var finder inside the url parts
      */
@@ -75,12 +78,12 @@ class Composition extends Component implements \ArrayAccess
      * 'pattern' => '<langShortCode:[a-z]{2}>/<countryShortCode:[a-z]{2}>', // de/ch; fr/ch
      * ```
      */
-    public $pattern = '<langShortCode:[a-z]{2}>';
+    public $pattern = "<".self::VAR_LANG_SHORT_CODE.":[a-z]{2}>";
 
     /**
      * @var array Default value if there is no composition provided in the url. The default value must match the url.
      */
-    public $default = ['langShortCode' => 'en'];
+    public $default = [self::VAR_LANG_SHORT_CODE => 'en'];
 
     /**
      * @var array Define the default behavior for differnet host info schemas, if the host info is not found
@@ -114,6 +117,27 @@ class Composition extends Component implements \ArrayAccess
      * @since 1.0.5
      */
     public $allowedHosts = null;
+    
+    /**
+     * A list of values which are valid for every pattern. If set and a value is provided which is not inside this property
+     * an http not found exception is thrown.
+     *
+     * Every value must be set for the given pattern name:
+     *
+     * ```php
+     * 'expectedValues' => [
+     *     'langShortCode' => ['en', 'de'], // langShortCode pattern is required
+     *     'countryShortCode' => ['ch', 'fr', 'de', 'uk'], // additional patterns if configured
+     * ],
+     * ```
+     *
+     * > This configuration is usual only used in MVC applications without CMS module, as the cms module throws an
+     * > exception if the requested language is not available.
+     *
+     * @var array An array where key is the pattern and value an array of possible values for this pattern.
+     * @since 1.0.15
+     */
+    public $expectedValues = [];
 
     /**
      * Class constructor, to get data from DiContainer.
@@ -135,7 +159,7 @@ class Composition extends Component implements \ArrayAccess
         parent::init();
 
         // check if the required key langShortCode exist in the default array.
-        if (!array_key_exists('langShortCode', $this->default)) {
+        if (!array_key_exists(self::VAR_LANG_SHORT_CODE, $this->default)) {
             throw new Exception("The composition default rule must contain a langShortCode.");
         }
 
@@ -169,6 +193,46 @@ class Composition extends Component implements \ArrayAccess
         return false;
     }
 
+    /**
+     * Find the host for a given definition based on the {{Composition::$hostInfoMapping}} definition.
+     * 
+     * Find the host info mapping (if existing) for a lang short code:
+     * 
+     * ```php
+     * $host = $composition->resolveHostInfo('en');
+     * ```
+     * 
+     * Or resolve by provide full host info mapping defintion:
+     * 
+     * ```php
+     * $host = $composition->resolveHostInfo([
+     *     'langShortCode' => 'de'
+     *     'countryShortCode' => 'ch',
+     * ]);
+     * ```
+     * 
+     * > Keep in mind that when {{Composition::$hostInfoMapping}} is empty (no defintion), false is returned.
+     * 
+     * @param string|array $defintion The hostinfo mapping config containing an array with full defintion of different keys or a string
+     * which will only resolved based on langShortCode identifier.
+     * @return string|boolean Returns the host name from the host info maping otherwise false if not found.
+     * @since 1.0.18
+     */
+    public function resolveHostInfo($defintion)
+    {
+        // if its a scalar value, we assume the user wants to find host info based on languageShortCode
+        if (is_scalar($defintion)) {
+            $defintion = [self::VAR_LANG_SHORT_CODE => $defintion];
+        }
+
+        $results = $this->hostInfoMapping;
+        foreach ($defintion as $key => $value) {
+            $results = ArrayHelper::searchColumns($results, $key, $value);
+        }
+
+        return empty($results) ? false : key($results);;
+    }
+
     private $_keys;
     
     /**
@@ -194,7 +258,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function getResolvedPathInfo(Request $request)
     {
-        return new CompositionResolver($request, ['pattern' => $this->pattern, 'defaultValues' => $this->default]);
+        return new CompositionResolver($request, $this);
     }
 
     /**
@@ -246,7 +310,12 @@ class Composition extends Component implements \ArrayAccess
      */
     public function createRouteEnsure(array $overrideKeys = [])
     {
-        return $this->hidden || (!$this->hidden && $this->langShortCode == $this->defaultLangShortCode && $this->hideDefaultPrefixOnly) ? '' : $this->createRoute($overrideKeys);
+        if (isset($overrideKeys[self::VAR_LANG_SHORT_CODE])) {
+            $langShortCode = $overrideKeys[self::VAR_LANG_SHORT_CODE];
+        } else {
+            $langShortCode = $this->langShortCode;
+        }
+        return $this->hidden || (!$this->hidden && $langShortCode == $this->defaultLangShortCode && $this->hideDefaultPrefixOnly) ? '' : $this->createRoute($overrideKeys);
     }
 
     /**
@@ -325,7 +394,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function getLangShortCode()
     {
-        return $this->getKey('langShortCode');
+        return $this->getKey(self::VAR_LANG_SHORT_CODE);
     }
     
     /**
@@ -335,7 +404,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function getDefaultLangShortCode()
     {
-        return $this->default['langShortCode'];
+        return $this->default[self::VAR_LANG_SHORT_CODE];
     }
 
     /**
@@ -398,7 +467,7 @@ class Composition extends Component implements \ArrayAccess
      */
     public function getLanguage()
     {
-        return $this->getKey('langShortCode');
+        return $this->getKey(self::VAR_LANG_SHORT_CODE);
     }
     
     /**

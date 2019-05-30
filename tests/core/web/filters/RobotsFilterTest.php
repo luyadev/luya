@@ -46,4 +46,21 @@ class RobotsFilterTest extends LuyaWebTestCase
         $this->expectException('yii\base\InvalidCallException');
         $this->assertSame('foobar', $ctrl->runAction('test'));
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testNewArrayBasedKeys()
+    {
+        $filter = new RobotsFilter();
+
+        $this->assertSame('res', $filter->afterAction('xyz', 'res'));
+        $this->assertTrue($filter->beforeAction('xyz'));
+
+        $this->assertSame('generic', $this->invokeMethod($filter, 'getSessionKeyByOwner'));
+
+        $this->assertSame(time(), $this->invokeMethod($filter, 'getRenderTime'));
+
+
+    }
 }

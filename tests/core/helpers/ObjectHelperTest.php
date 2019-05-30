@@ -4,6 +4,17 @@ namespace luyatests\core\helpers;
 
 use luya\helpers\ObjectHelper;
 
+
+
+trait XYZ
+{
+
+}
+
+trait ABC {
+    use XYZ;
+}
+
 /**
  * Testing Object Class
  *
@@ -12,6 +23,8 @@ use luya\helpers\ObjectHelper;
  */
 class TestObject
 {
+    use ABC;
+
     public function m1($foo, $bar)
     {
         return [$foo, $bar];
@@ -35,6 +48,17 @@ class TestObject
 
 class ObjectHelperTest extends \luyatests\LuyaWebTestCase
 {
+    public function testHasTraitInstance()
+    {
+        $o = new TestObject();
+
+        $this->assertTrue(ObjectHelper::isTraitInstanceOf($o, ABC::class));
+        $this->assertTrue(ObjectHelper::isTraitInstanceOf($o, XYZ::class));
+        $this->assertTrue(ObjectHelper::isTraitInstanceOf($o, ['no', XYZ::class]));
+        $this->assertFalse(ObjectHelper::isTraitInstanceOf($o, ['foo', 'bar']));
+        $this->assertTrue(ObjectHelper::isTraitInstanceOf($o, $o));
+    }
+
     public function testRequiredArgs()
     {
         $response = ObjectHelper::callMethodSanitizeArguments((new TestObject()), 'm1', ['foo' => 1, 'bar' => 2]);

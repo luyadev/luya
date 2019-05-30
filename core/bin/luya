@@ -2,21 +2,35 @@
 <?php
 
 // loaders array
-$loaders = [
-	'vendor/autoload.php',
-	__DIR__ . '/../vendor/autoload.php',
-	__DIR__ . '/../../vendor/autoload.php',
-	__DIR__ . '/../../../autoload.php',
-];
+$loaders = [];
+foreach ([getcwd(), __DIR__, ''] as $prefix) {
+	$loaders[] = [$prefix];
+	$loaders[] = [$prefix, '..'];
+	$loaders[] = [$prefix, '..', '..'];
+	$loaders[] = [$prefix, '..', '..', '..'];
+	$loaders[] = [$prefix, '..', '..', '..', '..'];
+}
 // find vendor if exists
 foreach ($loaders as $file) {
-	if (file_exists($file)) {
-		require($file);
-		$vendor = pathinfo($file, PATHINFO_DIRNAME);
-	}
+	$path = implode(DIRECTORY_SEPARATOR, $file);
+	foreach ([DIRECTORY_SEPARATOR, ''] as $slash) {
+		$file = $path . $slash . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+		if (file_exists($file)) {
+			require_once($file);
+			$vendor = pathinfo($file, PATHINFO_DIRNAME);
+			break 2;
+		}
+	}	
 }
 
+// https://github.com/luyadev/luya/issues/1799
+$configFilePaths = [__DIR__ . '/../../../../configs/env.php', 'configs/env.php'];
+foreach ($configFilePaths as $configFile) {
+	if (file_exists($configFile)) {
+		break;
+	}
+}
 $boot = new \luya\Boot();
-$boot->configFile = 'configs/env.php';
+$boot->configFile = $configFile;
 $boot->setBaseYiiFile($vendor . '/yiisoft/yii2/Yii.php');
 $boot->applicationConsole();

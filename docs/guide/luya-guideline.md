@@ -57,6 +57,8 @@ All classes have to use a standard PHPDoc block including the *author* and *sinc
  * @property string $virtualProperty This describes the response of the vritualProperty
  * @property \luya\base\Module $virtualProperty2 This describes the response but ensures class linkable IDE abilities.
  *
+ * @see Take a look at {{luya\base\Module::resolveRoute()}}
+ * @deprecated Deprecated in 1.0.10 will be removed in 2.0.0 use {{luya\base\Module2}} instead.
  * @author John Doe <john@example.com>
  * @since 1.0.0 
  */

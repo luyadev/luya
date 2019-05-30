@@ -203,49 +203,49 @@ class XLSXWriter
         if ($sheet->freeze_rows && $sheet->freeze_columns) {
             $sheet->file_writer->write('<pane ySplit="' . $sheet->freeze_rows . '" xSplit="' . $sheet->freeze_columns . '" topLeftCell="' . self::xlsCell(
                 $sheet->freeze_rows,
-                    $sheet->freeze_columns
+                $sheet->freeze_columns
             ) . '" activePane="bottomRight" state="frozen"/>');
             $sheet->file_writer->write('<selection activeCell="' . self::xlsCell(
                 $sheet->freeze_rows,
-                    0
+                0
             ) . '" activeCellId="0" pane="topRight" sqref="' . self::xlsCell($sheet->freeze_rows, 0) . '"/>');
             $sheet->file_writer->write('<selection activeCell="' . self::xlsCell(
                 0,
-                    $sheet->freeze_columns
+                $sheet->freeze_columns
             ) . '" activeCellId="0" pane="bottomLeft" sqref="' . self::xlsCell(
-                        0,
-                    $sheet->freeze_columns
+                0,
+                $sheet->freeze_columns
                     ) . '"/>');
             $sheet->file_writer->write('<selection activeCell="' . self::xlsCell(
                 $sheet->freeze_rows,
-                    $sheet->freeze_columns
+                $sheet->freeze_columns
             ) . '" activeCellId="0" pane="bottomRight" sqref="' . self::xlsCell(
-                        $sheet->freeze_rows,
-                    $sheet->freeze_columns
+                $sheet->freeze_rows,
+                $sheet->freeze_columns
                     ) . '"/>');
         } elseif ($sheet->freeze_rows) {
             $sheet->file_writer->write('<pane ySplit="' . $sheet->freeze_rows . '" topLeftCell="' . self::xlsCell(
                 $sheet->freeze_rows,
-                    0
+                0
             ) . '" activePane="bottomLeft" state="frozen"/>');
             $sheet->file_writer->write('<selection activeCell="' . self::xlsCell(
                 $sheet->freeze_rows,
-                    0
+                0
             ) . '" activeCellId="0" pane="bottomLeft" sqref="' . self::xlsCell(
-                        $sheet->freeze_rows,
-                    0
+                $sheet->freeze_rows,
+                0
                     ) . '"/>');
         } elseif ($sheet->freeze_columns) {
             $sheet->file_writer->write('<pane xSplit="' . $sheet->freeze_columns . '" topLeftCell="' . self::xlsCell(
                 0,
-                    $sheet->freeze_columns
+                $sheet->freeze_columns
             ) . '" activePane="topRight" state="frozen"/>');
             $sheet->file_writer->write('<selection activeCell="' . self::xlsCell(
                 0,
-                    $sheet->freeze_columns
+                $sheet->freeze_columns
             ) . '" activeCellId="0" pane="topRight" sqref="' . self::xlsCell(
-                        0,
-                    $sheet->freeze_columns
+                0,
+                $sheet->freeze_columns
                     ) . '"/>');
         } else { // not frozen
             $sheet->file_writer->write('<selection activeCell="A1" activeCellId="0" pane="topLeft" sqref="A1"/>');
@@ -469,7 +469,7 @@ class XLSXWriter
         } elseif ($num_format_type == 'n_auto' || 1) { //auto-detect unknown column types
             if (!is_string($value) || $value == '0' || ($value[0] != '0' && ctype_digit($value)) || preg_match(
                 "/^\-?(0|[1-9][0-9]*)(\.[0-9]+)?$/",
-                    $value
+                $value
             )
             ) {
                 $file->write('<c r="' . $cell_name . '" s="' . $cell_style_idx . '" t="n"><v>' . self::xmlspecialchars($value) . '</v></c>');//int,float,currency
@@ -749,7 +749,7 @@ class XLSXWriter
         if (!empty($this->keywords)) {
             $core_xml .= '<cp:keywords>' . self::xmlspecialchars(implode(
                 ", ",
-                    (array)$this->keywords
+                (array)$this->keywords
             )) . '</cp:keywords>';
         }
         $core_xml .= '<dc:description>' . self::xmlspecialchars($this->description) . '</dc:description>';
@@ -792,7 +792,7 @@ class XLSXWriter
                 $sheetname = self::sanitize_sheetname($sheet->sheetname);
                 $workbook_xml .= '<definedName name="_xlnm._FilterDatabase" localSheetId="0" hidden="1">\'' . self::xmlspecialchars($sheetname) . '\'!$A$1:' . self::xlsCell(
                     $sheet->row_count - 1,
-                        count($sheet->columns) - 1,
+                    count($sheet->columns) - 1,
                     true
                 ) . '</definedName>';
                 $i++;

@@ -4,15 +4,14 @@ namespace luya\web\jsonld;
 
 use yii\base\InvalidConfigException;
 
-
 /**
  * Opening Hours value.
- * 
+ *
  * Days: Mo, Tu, We, Th, Fr, Sa, Su.
  * Time: Times are specified using 24:00 time. For example, 3pm is specified as 15:00.
- * 
+ *
  * Output: Mo 10:00-23:00, We 11:00-22:00
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.14
  */
@@ -40,7 +39,7 @@ class OpeningHoursValue extends BaseValue
 
     /**
      * Set a a value for a day.
-     * 
+     *
      * ```php
      * setDay(OpeningHoursValue::DAY_MONDAY, ['08:00' => '12:00', '14:00' => '20:00']);
      * ```

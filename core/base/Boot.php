@@ -24,7 +24,7 @@ abstract class Boot
     /**
      * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/core/CHANGELOG.md)
      */
-    const VERSION = '1.0.15';
+    const VERSION = '1.0.19';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
@@ -224,6 +224,8 @@ abstract class Boot
             }
         }
         
+        $this->includeYii();
+
         $baseUrl = null;
         if (isset($config['consoleBaseUrl'])) {
             $baseUrl = $config['consoleBaseUrl'];
@@ -231,7 +233,6 @@ abstract class Boot
             $baseUrl = '/';
         }
         
-        $this->includeYii();
         $mergedConfig = ArrayHelper::merge($config, [
             'bootstrap' => ['luya\console\Bootstrap'],
             'components' => [

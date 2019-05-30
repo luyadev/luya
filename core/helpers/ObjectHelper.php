@@ -16,33 +16,112 @@ class ObjectHelper
     /**
      * Checks a given variable if its an instance of an element in the $instances list.
      *
-     * @param string $variable The variable to type check against instances.
-     * @param string|array|object $instances A list of classes, a string for a given class, or an object.
+     * ```php
+     * $object = new \Exception();
+     * 
+     * ObjectHelper::isInstanceOf($object, '\Exception');
+     * ```
+     * 
+     * @param object $object The object to type check against haystack.
+     * @param string|array|object $haystack A list of classes, a string for a given class, or an object.
      * @param boolean $throwException Whether an exception should be thrown or not.
      * @throws \luya\Exception
      * @return boolean
      * @since 1.0.3
      */
-    public static function isInstanceOf($variable, $instances, $throwException = true)
+    public static function isInstanceOf($object, $haystack, $throwException = true)
     {
-        // if instances is an object (compare object directly) we have to extra the class name to compare with instanceof later
-        if (is_object($instances)) {
-            $instances = get_class($instances);
+        // if instances is an object (compare object directly) we have to get the class name to compare with instanceof later
+        if (is_object($haystack)) {
+            $haystack = get_class($haystack);
         }
         
-        $instances = (array) $instances;
+        $haystack = (array) $haystack;
         
-        foreach ($instances as $class) {
-            if ($variable instanceof $class) {
+        foreach ($haystack as $class) {
+            if ($object instanceof $class) {
                 return true;
             }
         }
         
         if ($throwException) {
-            throw new Exception("The given variable must be an instance of: " . implode(",", $instances));
+            throw new Exception("The given object must be an instance of: " . implode(",", $haystack));
         }
         
         return false;
+    }
+
+    /**
+     * Check whether a given object contains a trait.
+     * 
+     * ```php
+     * trait XYZ {
+     * 
+     * }
+     * 
+     * class ABC {
+     *    use XYZ;
+     * }
+     * 
+     * $object = new ABC();
+     * 
+     * ObjectHelper::isTraitInstanceOf($object, XYZ::class);
+     * ```
+     *
+     * @param object $object
+     * @param string|array|object $haystack
+     * @return boolean
+     * @since 1.0.17
+     */
+    public static function isTraitInstanceOf($object, $haystack)
+    {
+        $traits = static::traitsList($object);
+
+        // if its an object, the all traits for the given object.
+        if (is_object($haystack)) {
+            $haystack = static::traitsList($haystack);
+        }
+
+        foreach ((array) $haystack as $stack) {
+            if (in_array($stack, $traits)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Get an array with all traits for a given object
+     *
+     * @param object $object
+     * @param boolean $autoload
+     * @return array
+     * @since 1.0.17
+     * @see https://www.php.net/manual/en/function.class-uses.php#122427
+     */
+    public static function traitsList($object, $autoload = true)
+    {
+        $traits = [];
+
+        // Get traits of all parent classes
+        do {
+            $traits = array_merge(class_uses($object, $autoload), $traits);
+        } while ($object = get_parent_class($object));
+
+        // Get traits of all parent traits
+        $traitsToSearch = $traits;
+        while (!empty($traitsToSearch)) {
+            $newTraits = class_uses(array_pop($traitsToSearch), $autoload);
+            $traits = array_merge($newTraits, $traits);
+            $traitsToSearch = array_merge($newTraits, $traitsToSearch);
+        };
+
+        foreach ($traits as $trait => $same) {
+            $traits = array_merge(class_uses($trait, $autoload), $traits);
+        }
+
+        return $traits;
     }
     
     /**

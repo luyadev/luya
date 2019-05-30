@@ -5,6 +5,7 @@ namespace luya\web;
 use Yii;
 
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 
 /**
  * Extended LUYA UrlManager.
@@ -75,7 +76,12 @@ class UrlManager extends \yii\web\UrlManager
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
         $resolver = $this->getComposition()->getResolvedPathInfo($request);
 
-        $request->setPathInfo($resolver->resolvedPath);
+        try {
+            $request->setPathInfo($resolver->resolvedPath);
+        } catch (NotFoundHttpException $error) {
+            // the resolver has thrown an 404 excpetion, stop parsing request and return false (which is: page not found)
+            return false;
+        }
         
         $parsedRequest = parent::parseRequest($request);
 
@@ -83,7 +89,7 @@ class UrlManager extends \yii\web\UrlManager
         // This can be the case when composition is hidden, but not default language is loaded and a
         // url composition route is loaded!
         // @see https://github.com/luyadev/luya/issues/1146
-        $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver->getResolvedKeyValue('langShortCode'));
+        $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver->getResolvedKeyValue(Composition::VAR_LANG_SHORT_CODE));
         
         // set the application language based from the parsed composition request:
         Yii::$app->setLocale($this->composition->langShortCode);
@@ -352,7 +358,7 @@ class UrlManager extends \yii\web\UrlManager
             return $url;
         }
     
-        $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->lang($composition['langShortCode'])->one();
+        $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->lang($composition[Composition::VAR_LANG_SHORT_CODE])->one();
     
         if (!$item) {
             throw new BadRequestHttpException("Unable to find nav_item_id '$navItemId' to generate the module link for url '$url'.");

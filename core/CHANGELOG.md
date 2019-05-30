@@ -2,10 +2,44 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.15 (in progress)
+## 1.0.19 (in progress)
+
+## 1.0.18 (27. May 2019)
+
++ [#1921](https://github.com/luyadev/luya/issues/1921) Added new `resolveHostInfo()` in Composition component in order to find a given host for a mapping defintion.
++ Fixed issue when binary is loading config file from vendor folder.
++ Update lock files to allow latest test suite with admin 2.0 constraint.
+
+## 1.0.17 (23. April 2019)
+
++ [#1799](https://github.com/luyadev/luya/issues/1799) Use relative config file path for luya binary file.
++ [#1914](https://github.com/luyadev/luya/issues/1914) Fixed problem with `RobotsFilter` when used in multiple forms on the same CMS page.
++ [#1912](https://github.com/luyadev/luya/issues/1912) Added `ObjectHelper::isTraitInstanceOf` method to check whether an object contains a certain trait or not.
+
+## 1.0.16 (1. April 2019)
+
++ [#1911](https://github.com/luyadev/luya/issues/1911) Fixed bug in ArrayHelper::searchColumn() when using assoc arrays.
++ [#1910](https://github.com/luyadev/luya/issues/1910) Fixed resized callback in lazyload js when using LazyLoad widget.
++ [#1909](https://github.com/luyadev/luya/issues/1909) Fixed issued with wrong delimiter definition in StringHelper::highlightWord() function.
+
+## 1.0.15 (19. February 2019)
+
++ [#1895](https://github.com/luyadev/luya/issues/1895) Changed to email output obfuscation in email tag instead of plain email mailto link.
+
+### Added
+
++ [#1905](https://github.com/luyadev/luya/issues/1905) Added composition `$expectedValues` property to configure expected pattern values (test if language is in the list of valid languages).
++ [#1885](https://github.com/luyadev/luya/issues/1885) Fix issue where current url rule appends path param.
++ [#1889](https://github.com/luyadev/luya/issues/1889) Add possibility to fetch images that are inserted after lazyLoading is initialised.
++ [#1887](https://github.com/luyadev/luya/issues/1887) Add attribute hints assign option for dynamic model.
 
 ### Fixed
 
++ [#1907](https://github.com/luyadev/luya/issues/1907) Tags can now have escaped sub values like `file[1](file.png \(PDF\))`.
++ [#1900](https://github.com/luyadev/luya/issues/1900) Fixed issue when attachment file name is not provided.
++ [#1902](https://github.com/luyadev/luya/pull/1902) Composition component hides alternate url lang codes when hideDefaultPrefixOnly is true and current lang code is default.
++ [#1898](https://github.com/luyadev/luya/issues/1898) Telephone link raises an exception if an invalid telephone number is provided.
++ [#1888](https://github.com/luyadev/luya/issues/1888) Fixed issue with range values which can have float values.
 + [#1876](https://github.com/luyadev/luya/issues/1876) Fixed the url generation without module context when using language switcher.
 
 ## 1.0.14 (17. November 2018)

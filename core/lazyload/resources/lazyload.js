@@ -5,6 +5,8 @@
 
 (function ($) {
 
+    var initialized = false;
+
     // Default settings, can be overwritten
     var settings = {
         // General settings
@@ -30,6 +32,11 @@
     // The image array, will be filled on init and only updated if necessary
     var images = [];
 
+    var lastId = 0;
+    var getNewId = function() {
+        return lastId += 1;
+    };
+
     /**
      * This function runs only once.
      * Search for all images (by settings.imageSelector) and save them in the
@@ -38,40 +45,44 @@
      * the image boundaries will be calculated.
      */
     var fetchImages = function() {
+        images = [];
         $(settings.imageSelector).each(function (index) {
-            // Add the identifying class
-            $(this).addClass(settings.imageIdentifierPrefix + index);
+            if(!$(this).hasClass('loaded')) {
+                var id = getNewId();
 
-            // Get some useful infos
-            var imageWidth = parseInt($(this).attr('data-width')),
-                imageHeight = parseInt($(this).attr('data-height')),
-                aspectRatio = settings.defaultAspectRatio,
-                asBackground = $(this).attr('data-as-background');
+                // Add the identifying class
+                $(this).addClass(settings.imageIdentifierPrefix + id);
 
-            // If we have an image width & height we can calculate the aspectRatio
-            // the aspect ration is only used for the div placeholder
-            if (imageWidth && imageHeight) {
-                aspectRatio = imageHeight / imageWidth;
+                // Get some useful infos
+                var imageWidth = parseInt($(this).attr('data-width')),
+                    imageHeight = parseInt($(this).attr('data-height')),
+                    aspectRatio = settings.defaultAspectRatio,
+                    asBackground = $(this).attr('data-as-background');
+
+                // If we have an image width & height we can calculate the aspectRatio
+                // the aspect ration is only used for the div placeholder
+                if (imageWidth && imageHeight) {
+                    aspectRatio = imageHeight / imageWidth;
+                }
+
+                var divPlaceholderExists = false;
+                if($(this).next('.' + settings.placeholderClass).length >= 1) {
+                    divPlaceholderExists = true;
+                }
+
+                images.push({
+                    id: id,
+                    source: $(this).attr('data-src'),
+                    boundaries: {},
+                    hasPlaceholderImage: $(this).hasClass('lazyimage'),
+                    divPlaceholderExists: divPlaceholderExists,
+                    width: imageWidth,
+                    height: imageHeight,
+                    aspectRatio: aspectRatio,
+                    asBackground: asBackground,
+                    html: $(this)[0].outerHTML
+                });
             }
-
-            var divPlaceholderExists = false;
-            if($(this).next('.' + settings.placeholderClass).length >= 1) {
-                divPlaceholderExists = true;
-            }
-
-            images.push({
-                id: index,
-                source: $(this).attr('data-src'),
-                boundaries: {},
-                hasPlaceholderImage: $(this).hasClass('lazyimage'),
-                divPlaceholderExists: divPlaceholderExists,
-                width: imageWidth,
-                height: imageHeight,
-                aspectRatio: aspectRatio,
-                asBackground: asBackground,
-                html: $(this)[0].outerHTML
-            });
-
         });
 
         insertPlaceholder();
@@ -84,7 +95,7 @@
      * images will get a placeholder element inserted after the iamge.
      */
     var insertPlaceholder = function() {
-        $(images).each(function () {
+        $(images).each(function (index) {
             if(!this.hasPlaceholderImage && !this.asBackground && !this.divPlaceholderExists) {
                 // Get the image by id
                 var $image = $('.' + settings.imageIdentifierPrefix + this.id);
@@ -110,8 +121,8 @@
 
                 $placeholder.insertAfter($image);
 
-                if(images[this.id]) {
-                    images[this.id].divPlaceholderExists = true;
+                if(images[index]) {
+                    images[index].divPlaceholderExists = true;
                 }
             }
         });
@@ -144,7 +155,7 @@
         // If the screen got resized we need to update the image boundaries first
         if (status.resized) {
             status.resized = false;
-            return calculateImageBoundaries(filterImages());
+            return calculateImageBoundaries(filterImages);
         }
 
         return filterImages();
@@ -163,12 +174,13 @@
             });
 
             var image = this;
+            var imageIndex = images.map(function(e) { return e.id; }).indexOf(image.id);
 
             // If the image was loaded successfully
             $loadImage.on('load', function () {
                 // Remove the image from the images array because it's not
                 // needed anymore
-                delete images[image.id];
+                delete images[imageIndex];
 
                 var $image = $('.' + settings.imageIdentifierPrefix + image.id);
                 var $placeholder = $image.next('.' + settings.placeholderClass);
@@ -185,7 +197,7 @@
                     })
                 } else if (!image.hasPlaceholderImage) {
                     // If the image has a placeholder div we need to remove it
-                    $placeholder.remove();
+                    $placeholder.hide();
                 }
 
                 // Trigger a success event
@@ -197,7 +209,7 @@
 
             // If the image can't be loaded
             $loadImage.on('error', function () {
-                delete images[image.id];
+                delete images[imageIndex];
 
                 // Trigger a error event
                 $(document).trigger("lazyimage-loaded", {
@@ -235,34 +247,50 @@
         }
     };
 
-    $.fn.lazyLoad = function (options) {
-
-        // Fetch images to prepare the iamges array
-        fetchImages();
-
-        // Regularly check for changes and run needed functions
-        setInterval(function () {
-            if (status.viewportChanged === true || status.touchScrolling === true) {
+    $.lazyLoad = function (options) {        
+        if(typeof options === 'string') {
+            switch(options) {
+                case 'refetchElements':
+                fetchImages();
                 loadVisibleImages();
-                status.viewportChanged = false;
-                status.touchScrolling = false;
+                break;
             }
-        }, 250);
+        } else if (!initialized) {
+            initialized = true;
 
-        // Listen to different events the script needs to react to
-        $(document).on('touchmove', function () {
-            status.touchScrolling = true;
-        });
-        $(window).on('scroll resize', function () {
-            status.viewportChanged = true;
-            status.touchScrolling = false;
-        });
-        $(window).on('resize', function () {
-            status.resized = true;
-        });
+            if(options) {
+                settings = $.extend(settings, options);
+            }
 
-        // Finally, start loading of the first visible images (if there are any)
-        loadVisibleImages();
+            // Fetch images to prepare the iamges array
+            fetchImages();
+
+            // Regularly check for changes and run needed functions
+            setInterval(function () {
+                if (status.viewportChanged === true || status.touchScrolling === true) {
+                    loadVisibleImages();
+                    status.viewportChanged = false;
+                    status.touchScrolling = false;
+                }
+            }, 250);
+
+            // Listen to different events the script needs to react to
+            $(document).on('touchmove', function () {
+                status.touchScrolling = true;
+            });
+            $(window).on('scroll resize', function () {
+                status.viewportChanged = true;
+                status.touchScrolling = false;
+            });
+            $(window).on('resize', function () {
+                status.resized = true;
+            });
+
+            // Finally, start loading of the first visible images (if there are any)
+            loadVisibleImages();
+        }
+
+        return this;
     };
 
 }(jQuery));
