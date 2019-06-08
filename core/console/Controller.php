@@ -7,7 +7,6 @@ use yii\helpers\Console;
 use yii\console\Controller as BaseController;
 use luya\helpers\ObjectHelper;
 use yii\base\InvalidCallException;
-use yii\console\Application;
 
 /**
  * Console Controller base class.
@@ -25,7 +24,7 @@ abstract class Controller extends BaseController
         parent::init();
 
         // Ensure the console command is running under web application object.
-        if (!ObjectHelper::isInstanceOf(Yii::$app, Application::class, false)) {
+        if (!ObjectHelper::isInstanceOf(Yii::$app, 'yii\console\Application', false)) {
             throw new InvalidCallException("The console controller can only run within a console Application context.");
         }
     }
