@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.19 (in progress)
 
++ [#1927](https://github.com/luyadev/luya/issues/1927) New check whether console command is running in console application context.
 + [#1925](https://github.com/luyadev/luya/issues/1925) Add new actions and controller retrieve options in object helper.
 
 ## 1.0.18 (27. May 2019)

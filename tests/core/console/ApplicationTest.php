@@ -6,19 +6,29 @@ use luyatests\LuyaConsoleTestCase;
 
 use Yii;
 use yii\console\Controller;
+use luyatests\data\commands\TestConsoleCommand;
+use luya\web\Application;
 
 class ApplicationTest extends LuyaConsoleTestCase
 {
     public function testInvalidCommandException()
     {
         $this->expectException('yii\console\Exception');
-        Yii::$app->runAction('luya/luya/luya');
+        $this->app->runAction('luya/luya/luya');
     }
     
     public function testInvalidRouteCommand()
     {
-        $this->expectException('yii\console\Exception');
-        Yii::$app->runAction('consolemodule/test-command/notavailable');
+        $this->expectException('yii\console\UnknownCommandException');
+        $this->app->runAction('consolemodule/test-command/notavailable');
+    }
+
+    public function testInvalidApplicationContext()
+    {
+        $module = new Application(['basePath' => dirname(__DIR__), 'id' => 'barfoo']);
+        $this->expectException("yii\base\InvalidCallException");
+        $command = new TestConsoleCommand('console', $module);
+        $command->actionFoo();
     }
         
     public function testRouting()
