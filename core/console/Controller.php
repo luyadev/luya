@@ -4,6 +4,10 @@ namespace luya\console;
 
 use Yii;
 use yii\helpers\Console;
+use yii\console\Controller as BaseController;
+use luya\helpers\ObjectHelper;
+use yii\base\InvalidCallException;
+use yii\console\Application;
 
 /**
  * Console Controller base class.
@@ -14,8 +18,18 @@ use yii\helpers\Console;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class Controller extends \yii\console\Controller
+abstract class Controller extends BaseController
 {
+    public function init()
+    {
+        parent::init();
+
+        // Ensure the console command is running under web application object.
+        if (!ObjectHelper::isInstanceOf(Yii::$app, Application::class, false)) {
+            throw new InvalidCallException("The console controller can only run within a console Application context.");
+        }
+    }
+
     /**
      * Helper method to see if the current Application is muted or not. If the Application is muted, no output
      * will displayed.
