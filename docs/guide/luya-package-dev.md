@@ -102,7 +102,7 @@ The composer.json file can contain an extra section which can be read by the LUY
             "path{{DS}}to{{DS}}blocks"
         ],
         "bootstrap": [
-            "src{{DS}}MyBootstrapClass.php"
+            "namespace\\to\\the\\Class"
         ]
     }
 }
