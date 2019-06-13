@@ -6,6 +6,7 @@ use luya\web\jsonld\BlogPosting;
 use luya\web\jsonld\CreativeWork;
 use luya\web\jsonld\LiveBlogPosting;
 use luya\web\jsonld\Organization;
+use luya\web\jsonld\Service;
 use luya\web\jsonld\SocialMediaPosting;
 use luya\web\jsonld\Thing;
 use luya\web\JsonLd;
@@ -401,5 +402,22 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
             '@type' => 'Restaurant'
 
         ], $r->toArray());
+    }
+
+    /**
+     * @since 1.0.19
+     */
+    public function testService()
+    {
+        $service = (new Service())->setName('Taxi driving')->setIsRelatedTo(new Service(['name' => 'Bus driving']));
+
+        $this->assertSame([
+            'isRelatedTo' => [
+                'name' => 'Bus driving',
+                '@type' => 'Service'
+            ],
+            'name' => 'Taxi driving',
+            '@type' => 'Service'
+        ], $service->toArray());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace luya\web;
 
+use luya\web\jsonld\Service;
 use Yii;
 use yii\helpers\Json;
 use yii\base\BaseObject;
@@ -288,6 +289,18 @@ class JsonLd extends BaseObject
     public static function propertyValue(array $config = [])
     {
         return self::addGraph((new PropertyValue($config)));
+    }
+
+    /**
+     * Register a new service
+     *
+     * @param array $config
+     * @return \luya\web\jsonld\Service
+     * @since 1.0.19
+     */
+    public static function service(array $config = [])
+    {
+        return self::addGraph((new Service($config)));
     }
     
     /**
