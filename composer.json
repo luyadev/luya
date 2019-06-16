@@ -26,16 +26,15 @@
         "issues": "https://github.com/luyadev/luya/issues"
     },
     "require": {
-        "luyadev/luya-composer": "~1.0.0",
+        "luyadev/luya-composer": "^1.0",
         "yiisoft/yii2": "~2.0.15",
         "curl/curl": "^2.0 || ^1.0",
         "phpmailer/phpmailer": "^6.0",
         "nadar/php-composer-reader": "^1.0",
-        "cpliakas/git-wrapper": "^1.0||^2.0"
+        "cpliakas/git-wrapper": "^1.0 || ^2.0"
     },
     "require-dev": {
-        "luyadev/luya-testsuite": "~1.0.0",
-        "php-coveralls/php-coveralls": "^1.0",
+        "luyadev/luya-testsuite": "^1.0",
         "nadar/github-markdown-fixer": "^1.0"
     },
     "autoload": {
