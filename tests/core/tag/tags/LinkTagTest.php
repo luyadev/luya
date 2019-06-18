@@ -41,4 +41,11 @@ class LinkTagTest extends LuyaWebTestCase
         $this->assertSame('<a class="link-external" href="https://luya.io" target="_blank">subalias</a>', $link->parse('https://luya.io', 'subalias'));
         $this->assertSame('<a class="link-external" href="http://www.luya.io" target="_blank">subalias</a>', $link->parse('www.luya.io', 'subalias'));
     }
+
+    public function testRelativeLink()
+    {
+        $link = new LinkTag();
+
+        $this->assertSame('<a class="link-internal" href="/go/here">/go/here</a>', $link->parse('/go/here', null));
+    }
 }
