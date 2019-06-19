@@ -34,7 +34,7 @@ before_script:
   - chmod +x ./cc-test-reporter
 
 script:
-  - vendor/bin/phpunit tests/ $PHPUNIT_FLAGS --configuration travis.phpunit.xml
+  - vendor/bin/phpunit --verbose $PHPUNIT_FLAGS --configuration travis.phpunit.xml
   
 after_script:
   - if [[ "$TRAVIS_PHP_VERSION" == "7.1" ]]; then ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT; fi
