@@ -7,6 +7,7 @@ use ReflectionMethod;
 use luya\Exception;
 use yii\base\Controller;
 use luya\base\Module;
+use yii\base\InvalidParamException;
 
 /**
  * Helper methods when dealing with Objects.
