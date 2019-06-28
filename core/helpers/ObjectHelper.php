@@ -2,8 +2,9 @@
 
 namespace luya\helpers;
 
-use luya\Exception;
+use ReflectionClass;
 use ReflectionMethod;
+use luya\Exception;
 use yii\base\Controller;
 use luya\base\Module;
 
@@ -185,7 +186,7 @@ class ObjectHelper
     public static function getActions(Controller $controller)
     {
         $actions = array_keys($controller->actions());
-        $class = new \ReflectionClass($controller);
+        $class = new ReflectionClass($controller);
         foreach ($class->getMethods() as $method) {
             $name = $method->getName();
             if ($name !== 'actions' && $method->isPublic() && !$method->isStatic() && strncmp($name, 'action', 6) === 0) {
@@ -206,20 +207,23 @@ class ObjectHelper
     public static function getControllers(Module $module)
     {
         $files = [];
+
         try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L253
-            foreach (FileHelper::findFiles($module->controllerPath) as $file) {
-                $files[self::fileToName($module->controllerPath, $file)] = $file;
+            if (is_dir($module->controllerPath)) {
+                foreach (FileHelper::findFiles($module->controllerPath) as $file) {
+                    $files[self::fileToName($module->controllerPath, $file)] = $file;
+                }
             }
         } catch (InvalidParamException $e) {
-            try {
-                $staticPath = $module::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
-                foreach (FileHelper::findFiles($staticPath) as $file) {
-                    $files[self::fileToName($staticPath, $file)] = $file;
-                }
-            } catch (InvalidParamException $e) {
-                // catch if folder not found.
-            }
+            
         };
+
+        $staticPath = $module::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
+        if (is_dir($staticPath)) {
+            foreach (FileHelper::findFiles($staticPath) as $file) {
+                $files[self::fileToName($staticPath, $file)] = $file;
+            }
+        }
         
         return $files;
     }
