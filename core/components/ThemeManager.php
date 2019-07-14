@@ -2,6 +2,7 @@
 
 namespace luya\components;
 
+use luya\helpers\Json;
 use Yii;
 use luya\Exception;
 
@@ -14,17 +15,18 @@ use luya\Exception;
  * @author Mateusz Szymański Teamwant <kontakt@teamwant.pl>
  * @since 1.0.0
  */
-class Themes extends \yii\base\Component
+class ThemeManager extends \yii\base\Component
 {
 
     /**
      * @var array
      */
-    private $config = array();
+    private $config = [];
+    
     /**
      * @var array
      */
-    private $themes = array();
+    private $themes = [];
 
 
     /**
@@ -43,7 +45,7 @@ class Themes extends \yii\base\Component
      */
     public function setup()
     {
-
+        
         $this->config['active'] = $this->getActive();
         $this->config['views'] = $this->config['active'] . '/views';
         $this->config['resources'] = $this->config['active'] . '/resources';
@@ -59,7 +61,6 @@ class Themes extends \yii\base\Component
 
 
         Yii::$app->params['active_theme'] = $this->config;
-
 
         return $this;
     }
@@ -96,40 +97,41 @@ class Themes extends \yii\base\Component
 
     /**
      *
-     * Read theme info from XML theme file
+     * Read theme info from JSON theme file
      *
      * @param $path
      * @return array
      */
     public function getThemeData($path)
     {
-
+        // @todo: Do we need this?
         $path = implode('/', array_map(function ($v) {
             return Yii::getAlias($v);
         }, explode('/', $path)));
+    
+        $themeFile = $path . '/theme.json';
+        if (file_exists($themeFile)) {
+            $data = Json::decode(file_get_contents($themeFile));
 
-
-        if (file_exists($path . '/theme.xml')) {
-            $xml = simplexml_load_string(file_get_contents($path . '/theme.xml'));
-
-            if ($xml === false) {
-                return array();
+            if ($data === false) {
+                return [];
             }
 
-            return array(
-                'name' => $xml->name,
-                'description' => $xml->description,
-                'author' => $xml->author,
-                'image' => $xml->image,
-            );
+            return [
+                'name' => $data->name,
+                'description' => $data->description,
+                'author' => $data->author,
+                'image' => $data->image,
+            ];
         }
 
-        return array();
+        return [];
 
     }
 
     /**
-     * Get all themes as array list
+     * @todo: Should be exclude in a ThemeImporter and loaded via CLI command `import`
+     * Get all themes as array list.
      *
      * @return array
      */
@@ -147,16 +149,17 @@ class Themes extends \yii\base\Component
 
         foreach (scandir($dir) as $entry) {
             if ($entry != "." && $entry != "..") {
+    
+                $themeFile = $dir . '/' . $entry . '/theme.json';
+                if (file_exists($themeFile)) {
+                    $data = Json::decode(file_get_contents($themeFile));
 
-                if (file_exists($dir . '/' . $entry . '/theme.xml')) {
-                    $xml = simplexml_load_string(file_get_contents($dir . '/' . $entry . '/theme.xml'));
-
-                    if ($xml === false) {
+                    if ($data === false) {
                         continue;
                     }
 
                     $this->themes[$entry] = [
-                        'name' => $xml->name
+                        'name' => $data->name
                     ];
                 }
 

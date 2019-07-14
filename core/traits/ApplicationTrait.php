@@ -2,6 +2,7 @@
 
 namespace luya\traits;
 
+use luya\components\ThemeManager;
 use Yii;
 use luya\base\AdminModuleInterface;
 use luya\base\Module;
@@ -11,8 +12,9 @@ use luya\base\PackageInstaller;
 /**
  * LUYA Appliation trait
  *
- * @property string $webroot Returns the webroot directory event for console commands.
+ * @property string                $webroot Returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
+ * @property ThemeManager          $themeManager Get luya theme manager
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -200,7 +202,7 @@ trait ApplicationTrait
         return array_merge(parent::coreComponents(), [
             'mail' => ['class' => 'luya\components\Mail'],
             'formatter' => ['class' => 'luya\components\Formatter'],
-            'themes' => ['class' => 'luya\components\Themes'],
+            'themeManager' => ['class' => 'luya\components\ThemeManager'],
         ]);
     }
 
