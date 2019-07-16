@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\components;
+namespace luya\theme;
 
 use luya\helpers\Json;
 use Yii;
@@ -17,14 +17,15 @@ use luya\Exception;
  */
 class ThemeManager extends \yii\base\Component
 {
-
-    /**
-     * @var array
-     */
-    private $config = [];
+    const APP_THEMES_BLANK = '@app/themes/blank';
     
     /**
-     * @var array
+     * @var Theme
+     */
+    private $activeTheme;
+    
+    /**
+     * @var Theme[]
      */
     private $themes = [];
 
@@ -45,22 +46,10 @@ class ThemeManager extends \yii\base\Component
      */
     public function setup()
     {
+        $this->activeTheme = new Theme(['path' => $this->getActiveThemePath()]);
+        Yii::setAlias('theme', $this->activeTheme->path);
         
-        $this->config['active'] = $this->getActive();
-        $this->config['views'] = $this->config['active'] . '/views';
-        $this->config['resources'] = $this->config['active'] . '/resources';
-        $this->config['layout'] = $this->config['views'] . '/layouts';
-        $this->config['layout_file'] = 'main';
-        $this->config['layout_main'] = $this->config['layout'] . '/' . $this->config['layout_file'] . '.php';
-
-        if ($data = $this->getThemeData($this->config['active'])) {
-            $this->config['theme'] = $data;
-        } else {
-            $this->config['theme'] = ['error' => 1];
-        }
-
-
-        Yii::$app->params['active_theme'] = $this->config;
+        Yii::$app->params['active_theme'] = $this->activeTheme;
 
         return $this;
     }
@@ -75,7 +64,7 @@ class ThemeManager extends \yii\base\Component
      * @return string
      * @throws \yii\db\Exception
      */
-    public function getActive()
+    public function getActiveThemePath()
     {
         try {
             $connection = Yii::$app->getDb();
@@ -84,59 +73,25 @@ class ThemeManager extends \yii\base\Component
             $result = $command->queryOne();
 
             if (!$result) {
-                return '@app/themes/blank';
+                return self::APP_THEMES_BLANK;
             }
 
         } catch (\Exception $e) {
 //            do none, return default theme
-            return '@app/themes/blank';
+            return self::APP_THEMES_BLANK;
         }
 
         return $result['value'];
     }
 
     /**
-     *
-     * Read theme info from JSON theme file
-     *
-     * @param $path
-     * @return array
-     */
-    public function getThemeData($path)
-    {
-        // @todo: Do we need this?
-        $path = implode('/', array_map(function ($v) {
-            return Yii::getAlias($v);
-        }, explode('/', $path)));
-    
-        $themeFile = $path . '/theme.json';
-        if (file_exists($themeFile)) {
-            $data = Json::decode(file_get_contents($themeFile));
-
-            if ($data === false) {
-                return [];
-            }
-
-            return [
-                'name' => $data->name,
-                'description' => $data->description,
-                'author' => $data->author,
-                'image' => $data->image,
-            ];
-        }
-
-        return [];
-
-    }
-
-    /**
-     * @todo: Should be exclude in a ThemeImporter and loaded via CLI command `import`
      * Get all themes as array list.
      *
-     * @return array
+     * @return Theme[]
      */
     public function getThemes()
     {
+        //  @todo: Should be exclude in a ThemeImporter and loaded via CLI command `import`. And load the dirs from the package.
         $dir = $this->getThemesDir();
 
         if (!is_dir($dir)) {
@@ -174,18 +129,18 @@ class ThemeManager extends \yii\base\Component
      *
      * @return string
      */
-    public function getThemesDir()
+    protected function getThemesDir()
     {
         return Yii::$app->basePath . '/themes';
     }
 
     /**
      * Return $this->config value
-     * @return array
+     * @return Theme
      */
-    public function getTheme()
+    public function getActiveTheme()
     {
-        return $this->config;
+        return $this->activeTheme;
     }
 
 }

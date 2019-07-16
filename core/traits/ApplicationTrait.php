@@ -2,7 +2,7 @@
 
 namespace luya\traits;
 
-use luya\components\ThemeManager;
+use luya\theme\ThemeManager;
 use Yii;
 use luya\base\AdminModuleInterface;
 use luya\base\Module;
@@ -202,7 +202,7 @@ trait ApplicationTrait
         return array_merge(parent::coreComponents(), [
             'mail' => ['class' => 'luya\components\Mail'],
             'formatter' => ['class' => 'luya\components\Formatter'],
-            'themeManager' => ['class' => 'luya\components\ThemeManager'],
+            'themeManager' => ['class' => 'luya\theme\ThemeManager'],
         ]);
     }
 
