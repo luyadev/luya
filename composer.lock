@@ -332,23 +332,23 @@
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.10.0",
+            "version": "v4.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "d85d39da4576a6934b72480be6978fb10c860021"
+                "reference": "83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/d85d39da4576a6934b72480be6978fb10c860021",
-                "reference": "d85d39da4576a6934b72480be6978fb10c860021",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7",
+                "reference": "83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
             },
             "require-dev": {
-                "simpletest/simpletest": "^1.1"
+                "simpletest/simpletest": "dev-master#72de02a7b80c6bb8864ef9bf66d41d2f58f826bd"
             },
             "type": "library",
             "autoload": {
@@ -361,7 +361,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL"
+                "LGPL-2.1-or-later"
             ],
             "authors": [
                 {
@@ -375,7 +375,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2018-02-23T01:58:20+00:00"
+            "time": "2019-07-14T18:58:38+00:00"
         },
         {
             "name": "luyadev/luya-composer",
@@ -429,16 +429,16 @@
         },
         {
             "name": "nadar/php-composer-reader",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nadar/php-composer-reader.git",
-                "reference": "1498c172313c5402357f43066c3e07f310f69076"
+                "reference": "a37d2315f1346e73dd0d3419832d8f471eaad085"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nadar/php-composer-reader/zipball/1498c172313c5402357f43066c3e07f310f69076",
-                "reference": "1498c172313c5402357f43066c3e07f310f69076",
+                "url": "https://api.github.com/repos/nadar/php-composer-reader/zipball/a37d2315f1346e73dd0d3419832d8f471eaad085",
+                "reference": "a37d2315f1346e73dd0d3419832d8f471eaad085",
                 "shasum": ""
             },
             "require": {
@@ -464,7 +464,7 @@
                 }
             ],
             "description": "Read and manipulate composer.json",
-            "time": "2019-04-30T13:02:20+00:00"
+            "time": "2019-06-17T19:44:34+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -534,16 +534,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "4e6c670af81c4fb0b6c08b035530a9915d0b691f"
+                "reference": "d257021c1ab28d48d24a16de79dfab445ce93398"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/4e6c670af81c4fb0b6c08b035530a9915d0b691f",
-                "reference": "4e6c670af81c4fb0b6c08b035530a9915d0b691f",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/d257021c1ab28d48d24a16de79dfab445ce93398",
+                "reference": "d257021c1ab28d48d24a16de79dfab445ce93398",
                 "shasum": ""
             },
             "require": {
@@ -600,20 +600,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:10:05+00:00"
+            "time": "2019-06-13T11:03:18+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-            "version": "v1.1.1",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher-contracts.git",
-                "reference": "8fa2cf2177083dd59cf8e44ea4b6541764fbda69"
+                "reference": "c61766f4440ca687de1084a5c00b08e167a2575c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/8fa2cf2177083dd59cf8e44ea4b6541764fbda69",
-                "reference": "8fa2cf2177083dd59cf8e44ea4b6541764fbda69",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/c61766f4440ca687de1084a5c00b08e167a2575c",
+                "reference": "c61766f4440ca687de1084a5c00b08e167a2575c",
                 "shasum": ""
             },
             "require": {
@@ -658,11 +658,11 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-05-22T12:23:29+00:00"
+            "time": "2019-06-20T06:46:26+00:00"
         },
         {
             "name": "symfony/process",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -711,16 +711,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.20",
+            "version": "2.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "bd05e0e0ac353cb239997da78f459d0960a1fe9f"
+                "reference": "d430bf78cf59e341bf4a1cb401a4ae71a889a492"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/bd05e0e0ac353cb239997da78f459d0960a1fe9f",
-                "reference": "bd05e0e0ac353cb239997da78f459d0960a1fe9f",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/d430bf78cf59e341bf4a1cb401a4ae71a889a492",
+                "reference": "d430bf78cf59e341bf4a1cb401a4ae71a889a492",
                 "shasum": ""
             },
             "require": {
@@ -807,27 +807,28 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2019-06-04T19:10:59+00:00"
+            "time": "2019-07-16T19:44:09+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
-            "version": "2.0.7",
+            "version": "2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "1439e78be1218c492e6cde251ed87d3f128b9534"
+                "reference": "5c7ca9836cf80b34db265332a7f2f8438eb469b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/1439e78be1218c492e6cde251ed87d3f128b9534",
-                "reference": "1439e78be1218c492e6cde251ed87d3f128b9534",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/5c7ca9836cf80b34db265332a7f2f8438eb469b9",
+                "reference": "5c7ca9836cf80b34db265332a7f2f8438eb469b9",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0"
             },
             "require-dev": {
-                "composer/composer": "^1.0"
+                "composer/composer": "^1.0",
+                "phpunit/phpunit": "<7"
             },
             "type": "composer-plugin",
             "extra": {
@@ -861,7 +862,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2018-07-05T15:44:47+00:00"
+            "time": "2019-07-16T13:22:30+00:00"
         }
     ],
     "packages-dev": [
@@ -1090,16 +1091,16 @@
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "2c740153b96671691efaf2355c676fcdfb6ebb36"
+                "reference": "32a79cfff92e27b65c91635adbaa0dc46403a532"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/2c740153b96671691efaf2355c676fcdfb6ebb36",
-                "reference": "2c740153b96671691efaf2355c676fcdfb6ebb36",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/32a79cfff92e27b65c91635adbaa0dc46403a532",
+                "reference": "32a79cfff92e27b65c91635adbaa0dc46403a532",
                 "shasum": ""
             },
             "require": {
@@ -1111,7 +1112,6 @@
                 "bower-asset/angular": "^1.7",
                 "bower-asset/angular-filter": "~0.5.15",
                 "bower-asset/angular-loading-bar": "^0.9",
-                "bower-asset/angularjs-slider": "~6.6.0",
                 "bower-asset/bowser": "^1.9",
                 "bower-asset/echarts": "~3.8.5",
                 "bower-asset/ng-file-upload": "~12.2.0",
@@ -1120,7 +1120,6 @@
                 "bower-asset/twigjs-bower": "~0.10.5",
                 "bower-asset/ui-router": "~0.4.0",
                 "luyadev/luya-testsuite": "~1.0.11",
-                "php-coveralls/php-coveralls": "^1.0",
                 "twbs/bootstrap": "~4.3.0",
                 "unglue/client": "^1.4.1"
             },
@@ -1166,38 +1165,38 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2019-06-12T14:19:26+00:00"
+            "time": "2019-06-25T14:46:56+00:00"
         },
         {
             "name": "luyadev/luya-module-cms",
-            "version": "1.0.9.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "e8325864007f4ca0ed7a860d844cff10d48c4475"
+                "reference": "252e25a333559155041a9d489e7f090b59c3e8e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/e8325864007f4ca0ed7a860d844cff10d48c4475",
-                "reference": "e8325864007f4ca0ed7a860d844cff10d48c4475",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/252e25a333559155041a9d489e7f090b59c3e8e6",
+                "reference": "252e25a333559155041a9d489e7f090b59c3e8e6",
                 "shasum": ""
             },
             "require-dev": {
-                "luyadev/luya-testsuite": "~1.0.0",
-                "php-coveralls/php-coveralls": "^1.0",
-                "twbs/bootstrap": "v4.0.0-beta"
+                "luyadev/luya-testsuite": "^1.0@dev",
+                "twbs/bootstrap": "~4.3.0",
+                "unglue/client": "^1.3"
             },
             "type": "luya-core",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "2.0.x-dev"
                 },
                 "luya": {
                     "bootstrap": [
                         "\\luya\\cms\\frontend\\Bootstrap"
                     ],
                     "blocks": [
-                        "src/frontend/blocks"
+                        "src{{DS}}frontend{{DS}}blocks"
                     ]
                 }
             },
@@ -1230,31 +1229,36 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2019-05-27T13:33:24+00:00"
+            "time": "2019-06-26T12:52:58+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.17",
+            "version": "1.0.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "a509ada5495cce4b249ba8485b762164e30c533c"
+                "reference": "828c9b6de876fd60ec81ad105b1dc5b45eb24ee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/a509ada5495cce4b249ba8485b762164e30c533c",
-                "reference": "a509ada5495cce4b249ba8485b762164e30c533c",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/828c9b6de876fd60ec81ad105b1dc5b45eb24ee2",
+                "reference": "828c9b6de876fd60ec81ad105b1dc5b45eb24ee2",
                 "shasum": ""
             },
             "require": {
                 "curl/curl": "^2.0 || ^1.0",
                 "luyadev/luya-core": "^1.0",
-                "luyadev/luya-module-admin": "^1.0|^2.0",
-                "luyadev/luya-module-cms": "^1.0",
+                "luyadev/luya-module-admin": "^1.0 || ^2.0",
+                "luyadev/luya-module-cms": "^1.0 || ^2.0",
                 "phpunit/phpunit": "^6.0",
                 "twig/twig": "^1.0"
             },
             "type": "luya-core",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "luya\\testsuite\\": "src/"
@@ -1278,7 +1282,7 @@
                 "module",
                 "php"
             ],
-            "time": "2019-05-27T09:47:28+00:00"
+            "time": "2019-06-26T13:55:17+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2752,16 +2756,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.42.1",
+            "version": "v1.42.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "671347603760a88b1e7288aaa9378f33687d7edf"
+                "reference": "21707d6ebd05476854805e4f91b836531941bcd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/671347603760a88b1e7288aaa9378f33687d7edf",
-                "reference": "671347603760a88b1e7288aaa9378f33687d7edf",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/21707d6ebd05476854805e4f91b836531941bcd4",
+                "reference": "21707d6ebd05476854805e4f91b836531941bcd4",
                 "shasum": ""
             },
             "require": {
@@ -2814,7 +2818,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-06-04T11:31:08+00:00"
+            "time": "2019-06-18T15:35:16+00:00"
         },
         {
             "name": "webmozart/assert",
