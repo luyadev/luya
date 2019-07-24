@@ -39,7 +39,7 @@ We recommend to use either the identity or pem strategie: this way you can commi
 
 ### Example configuration file
 
-```
+```php
 require 'vendor/luyadev/luya-deployer/luya.php';
 
 // define your configuration here. Uncomment the connection strategy of your choice (we recommend pem)
