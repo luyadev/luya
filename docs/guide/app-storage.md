@@ -36,14 +36,14 @@ return [
 ]
 ```
 
-## Upload Files
+## Upload Files & Images
 
-TBD
-
-Take a look at {{luya\admin\storage\BaseFileSystemStorage}}.
-
-## Upload Images
-
-TBD
+Working with storage component in admin, cronjob or frontend situations:
 
 Take a look at {{luya\admin\storage\BaseFileSystemStorage}}.
+
+## Frontend Storage Upload
+
+Uploading an image/file in a frontend form:
+
+Take a look at {{luya\admin\ngrest\validators\StorageUploadValidator}}.
