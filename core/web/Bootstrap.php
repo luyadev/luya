@@ -30,6 +30,7 @@ class Bootstrap extends BaseBootstrap
     /**
      * Before bootstrap run process.
      *
+     * @param Application $app
      * @see \luya\base\BaseBootstrap::beforeRun()
      */
     public function beforeRun($app)
@@ -98,6 +99,7 @@ class Bootstrap extends BaseBootstrap
     /**
      * Invokes the bootstraping process.
      *
+     * @param Application $app
      * @see \luya\base\BaseBootstrap::run()
      */
     public function run($app)
@@ -131,6 +133,8 @@ class Bootstrap extends BaseBootstrap
                 // in admin context, admin url rules have always precedence over frontend rules.
                 $this->_urlRules = array_merge($app->getModule('admin')->urlRules, $this->_urlRules);
             }
+    
+            $app->themeManager->setup();
         }
         
         $app->getUrlManager()->addRules($this->_urlRules);

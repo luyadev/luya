@@ -36,7 +36,6 @@ class ThemeManager extends \yii\base\Component
     public function init()
     {
         parent::init();
-        $this->setup();
     }
 
 
