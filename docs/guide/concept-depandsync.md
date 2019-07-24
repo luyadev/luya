@@ -1,6 +1,5 @@
 # Deployment and Sync
 
-
 As a very powerful part LUYA ecosystem a timesaving and pretty awesome processes for synchronization and deployment has been developed. This guide explains the best practice of how to bring your website online and sync it back to your local development environment.
 
 The following is required to reproduce the steps in this guide:
@@ -9,7 +8,6 @@ The following is required to reproduce the steps in this guide:
 + Server with SSH access (Prod environment).
 + ssh keys so you can fetch the data from the production server. There is a good tutorial on setting up the keys [here](https://help.github.com/en/enterprise/2.16/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 + A local development machine with LAMP or WAMP stack.
-
 
 This process never syncs data **from the local environment to the production server**, only the **opposite way**!
 
@@ -24,7 +22,6 @@ We recommend that you deploy the website to the server in an early stadium of th
 
 ## Deployment
 
-
 1. Set up your production environment on the server (create the database, enable ssh, etc.)
 2. Change the `env-prod.php` config.
 3. Install and configure the [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)
@@ -38,11 +35,7 @@ You can connect to the server either using:
 * Identity file `->identityFile('~/.ssh/yourkey')`
 * PEM file (e.g. using AWS or Lightsail) `->pemFile('~/.ssh/yourfile.pem')`
 
-We recommend to use either the identity or pem strategie: this way you can commit your `config.php` file on your repo, without having to store a pasword on the repo, which you don't want to do of course.
-
-### Git repository
-
-By using the ssh keys strategy for cloning your project, you don't have to store your github pasword in the config.php file. 
+We recommend to use either the identity or pem strategie: this way you can commit your `deploy.php` file on your repo, without having to store a pasword on the repo, which you don't want to do of course.
 
 ### Example configuration file
 
@@ -60,7 +53,6 @@ server('prod', 'server.servername.com', 22)
         ->env('deploy_path', '/home/appname/'); // Define the base path to deploy your project to.
 
 set('repository', 'git@github.com:$GITHUBUSER/$REPONAME.git');
-
 ```
 
 You are now ready to deploy your website to the server and can start to add content on the production environment.
