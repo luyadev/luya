@@ -13,6 +13,7 @@ use yii\base\Model;
 use yii\base\InvalidParamException;
 use luya\rest\UserBehaviorInterface;
 use luya\web\filters\JsonCruftFilter;
+use app\helpers\RestHelper;
 
 /**
  * Rest Behaviors Trait.
@@ -173,20 +174,7 @@ trait RestBehaviorsTrait
      */
     public function sendModelError(Model $model)
     {
-        if (!$model->hasErrors()) {
-            throw new InvalidParamException('The model as thrown an uknown Error.');
-        }
-        
-        Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');
-        $result = [];
-        foreach ($model->getFirstErrors() as $name => $message) {
-            $result[] = [
-                'field' => $name,
-                'message' => $message,
-            ];
-        }
-        
-        return $result;
+        return RestHelper::sendModelError($model);
     }
     
     /**
@@ -216,16 +204,6 @@ trait RestBehaviorsTrait
      */
     public function sendArrayError(array $errors)
     {
-        Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');
-        $result = [];
-        foreach ($errors as $key => $value) {
-            $messages = (array) $value;
-            
-            foreach ($messages as $msg) {
-                $result[] = ['field' => $key, 'message' => $msg];
-            }
-        }
-        
-        return $result;
+        return RestHelper::sendArrayError($errors);
     }
 }
