@@ -1,8 +1,8 @@
 # CMS page properties
 
-Page properties are personalised settings you can apply to specific pages. 
+Page properties are personalised settings you can apply to specific pages. Once a property has defined, it can be aplied to every page. 
 
-Let´s assume you would like to use different colors on different pages, therefore you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files for [blocks](app-blocks.md) or [layouts](app-cmslayouts.md) components.
+Let´s assume you would like to use different colors on different pages, therefore you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files, or [blocks](app-blocks.md), or [layouts](app-cmslayouts.md) components.
 
 Use cases:
 
@@ -14,9 +14,9 @@ Use cases:
 ## Creating a new property
 
 
-All properties must be in a folder called `properties` and must contain suffix `Property` inside the filename. LUYA will automatically detect and setup all properties when you run the [import](luya-console.md) command. You can either create the properties folder inside your application or module folder to enable reusable modules with properties which will be attached automatically too.
+All properties must be in a folder called `properties` and must contain the suffix `Property` inside the filename. LUYA will automatically detect and setup all properties when you run the [import](luya-console.md) command. You can either create the properties folder inside your application or in your module folder to enable reusable modules with properties which will be attached automatically too.
 
-Example of a property for creating a text field wich can be attached somewhere in your view files:
+Below you can see an example of a property for creating a text field wich can be attached somewhere in your view files:
 
 ```php
 <?php
@@ -42,13 +42,21 @@ class TestProperty extends \luya\admin\base\Property
 }
 ```
 
-After running the import command you will see the property in the CMS admin. In order to understand the methods used in dept refer to the API Guide {{\luya\admin\base\Property}}.
+After running the import command, you will see the property in the CMS admin. To set the property for a page, do the following;
 
-There is a set of predefined properties provided from which you can extend, this because some blocks have to override the `getValue()` method in order to change the value output, as this is common scenario we have built classes you can do abstraction from.
+1. Go to the page in the CMS admin
+2. Press on the settings button in the top right corner
+3. Press page properties
+4. Here you can find all the properties which you have defined as described above
+
+
+In order to understand the methods in depth refer to the API Guide {{\luya\admin\base\Property}}.
+
+There is a set of predefined properties provided from which you can extend because some uses cases require that you override the `getValue()` method in order to change the value output. As this is common scenario we have built classes so you can abstract this.
 
 #### Image property
 
-The image property is often used to return the path of an uploaded image, so you can abstract your property from {{\luya\admin\base\ImageProperty}} like the example below:
+The image property is often used to return the path of an uploaded image, so you can abstract your property from {{\luya\admin\base\ImageProperty}} like in the example below:
 
 ```php
 class MyImage extends \luya\admin\base\ImageProperty
@@ -65,9 +73,16 @@ class MyImage extends \luya\admin\base\ImageProperty
 }
 ```
 
-In order to use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage'); ?>" />`.
+In order to use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage'); ?>" />`. The `$item` is an object from the `menu` in your view. You could e.g. do the following where you find the property defined in the home page and use it:
 
-> All properties implement the magical method `__toString()` and will return the return value from the `getValue()` method by default. Keep in mind that this is only true for the echo or return context. When checking for the existance of a value, explicitely use the `getValue()` method as otherwise the Property object is returned, which always resolves to true.
+```
+$property = Yii::$app->menu->home->getProperty('myImage');
+$image = $prop->getValue();
+echo Html::img($image, ['class' => 'yourImageClass']);
+```
+
+
+> All properties implement the magical method `__toString()` and will return the value from the `getValue()` method by default. Keep in mind that this is only true for the echo or return context. When checking for the existance of a value, explicitely use the `getValue()` method as otherwise the Property object is returned, which always resolves to true.
 
 Predefined properties
 
@@ -84,9 +99,9 @@ You can access the properties in
 
 #### In menus
 
-A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item the menu component does have a `getProperty($varName)` method on each item, e. g. collecting the menu and retrieving the page property `navImage` could be done as followed:
+A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item, the menu component has a `getProperty($varName)` method on each item. Collecting the menu and retrieving the page property `navImage` could be done as follows:
 
-Getting the value of a property, if not found null will be returned.
+Getting the value of a property for the current page, if it is not found `null` will be returned.
 
 ```php
 echo Yii::$app->menu->current->getPropertyValue('myProperty');
@@ -108,7 +123,7 @@ Working with a property object:
 <?php endforeach; ?>
 ```
 
-This method allows you to find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')`.
+This method allows you to find and evaluate properties for menu items and allows you to also to use `Yii::$app->menu->current->getProperty('xyz')`.
 
 > When dealing with large menus you can preload the models (including properties) for a given menu query by using {{luya\cms\menu\Query::preloadModels}} or {{luya\cms\Menu::findAll}} with the second statement `true`.
 
@@ -134,11 +149,11 @@ $this->getEnvOption('pageObject)->nav->properties;
 
 ## Events
 
-You can use events inside your block to modified the behavior of your page:
+You can use events inside your block to modify the behavior of your page:
 
 |Name | Description |
 |---  | ---
-|EVENT_BEFORE_RENDER    |This event will be triggered before the page get render, you can set `$event->isValid` to false to prevent the system from further outputs.
+|EVENT_BEFORE_RENDER    |This event will be triggered before the page get rendered, you can set `$event->isValid` to `false` to prevent the system from further outputs.
 
 #### Example of EVENT_BEFORE_RENDER
 
