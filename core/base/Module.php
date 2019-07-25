@@ -216,14 +216,15 @@ abstract class Module extends \yii\base\Module
     {
         $this->theme = Yii::$app->themeManager->getActiveTheme();
 
-        if(!$this->theme){
-            throw new InvalidConfigException(sprintf('Theme is not found'));
-        }
-
-        $this->layout = $this->theme->layout;
+        if ($this->theme){
+            $this->layout = $this->theme->layout;
     
-        if ($this->useAppLayoutPath) {
-            $this->setLayoutPath($this->theme->layoutPath);
+            if ($this->useAppLayoutPath) {
+                $this->setLayoutPath($this->theme->layoutPath);
+            }
+            
+        } elseif ($this->useAppLayoutPath) {
+            $this->setLayoutPath('@app/views/'.$this->id.'/layouts');
         }
 
         return parent::getLayoutPath();

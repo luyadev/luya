@@ -5,14 +5,15 @@ namespace luya\theme;
 use luya\helpers\Json;
 use Yii;
 use luya\Exception;
+use yii\base\InvalidConfigException;
 
 /**
  * Theme for LUYA CMS.
  *
- * This module / component allow user to manage actual display themes.
+ * This component manage the actual display themes.
  *
  * @author Mateusz Szymański Teamwant <zzixxus@gmail.com>
- * @author Mateusz Szymański Teamwant <kontakt@teamwant.pl>
+ * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since 1.0.0
  */
 class ThemeManager extends \yii\base\Component
@@ -29,28 +30,26 @@ class ThemeManager extends \yii\base\Component
      */
     private $themes = [];
 
-
     /**
-     * Initialize Themes Component
-     */
-    public function init()
-    {
-        parent::init();
-    }
-
-
-    /**
-     * Setup component
-     * @return $this
+     * Setup active theme
      */
     public function setup()
     {
-        $this->activeTheme = new Theme(['path' => $this->getActiveThemePath()]);
-        Yii::setAlias('theme', $this->activeTheme->path);
+        if (!$this->activeTheme) {
+            $basePath = $this->getActiveThemeBasePath();
+        } elseif (is_string($this->activeTheme)) {
+            $basePath = $this->activeTheme;
+        } else {
+            throw new InvalidConfigException('Active theme already loaded.');
+        }
+    
+        $themeConfig = new ThemeConfig($basePath);
+    
+        $this->activeTheme = new Theme($themeConfig);
+        Yii::$app->view->theme = $this->activeTheme;
+        Yii::setAlias('theme', $this->activeTheme->basePath);
         
         Yii::$app->params['active_theme'] = $this->activeTheme;
-
-        return $this;
     }
 
     /**
@@ -63,7 +62,7 @@ class ThemeManager extends \yii\base\Component
      * @return string
      * @throws \yii\db\Exception
      */
-    public function getActiveThemePath()
+    public function getActiveThemeBasePath()
     {
         try {
             $connection = Yii::$app->getDb();
@@ -82,7 +81,7 @@ class ThemeManager extends \yii\base\Component
 
         return $result['value'];
     }
-
+    
     /**
      * Get all themes as array list.
      *
@@ -141,5 +140,12 @@ class ThemeManager extends \yii\base\Component
     {
         return $this->activeTheme;
     }
-
+    
+    /**
+     * @param Theme|string $theme
+     */
+    public function setActiveTheme($theme)
+    {
+        $this->activeTheme = $theme;
+    }
 }
