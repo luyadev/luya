@@ -13,7 +13,6 @@ Use cases:
 
 ## Creating a new property
 
-
 All properties must be in a folder called `properties` and must contain the suffix `Property` inside the filename. LUYA will automatically detect and setup all properties when you run the [import](luya-console.md) command. You can either create the properties folder inside your application or in your module folder to enable reusable modules with properties which will be attached automatically too.
 
 Below you can see an example of a property for creating a text field wich can be attached somewhere in your view files:
@@ -49,7 +48,6 @@ After running the import command, you will see the property in the CMS admin. To
 3. Press page properties
 4. Here you can find all the properties which you have defined as described above
 
-
 In order to understand the methods in depth refer to the API Guide {{\luya\admin\base\Property}}.
 
 There is a set of predefined properties provided from which you can extend because some uses cases require that you override the `getValue()` method in order to change the value output. As this is common scenario we have built classes so you can abstract this.
@@ -75,12 +73,11 @@ class MyImage extends \luya\admin\base\ImageProperty
 
 In order to use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage'); ?>" />`. The `$item` is an object from the `menu` in your view. You could e.g. do the following where you find the property defined in the home page and use it:
 
-```
+```php
 $property = Yii::$app->menu->home->getProperty('myImage');
 $image = $prop->getValue();
 echo Html::img($image, ['class' => 'yourImageClass']);
 ```
-
 
 > All properties implement the magical method `__toString()` and will return the value from the `getValue()` method by default. Keep in mind that this is only true for the echo or return context. When checking for the existance of a value, explicitely use the `getValue()` method as otherwise the Property object is returned, which always resolves to true.
 
