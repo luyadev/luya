@@ -23,6 +23,9 @@ return [
         'ctrlmodule' => [
             'class' => '\luyatests\data\modules\ctrlmodule\Module',
         ],
+        'thememodule' => [
+            'class' => '\luyatests\data\modules\thememodule\Module',
+        ],
     ],
     'components' => [
         'composition' => [

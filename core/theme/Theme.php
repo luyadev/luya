@@ -45,11 +45,16 @@ class Theme extends \yii\base\Theme
     {
         $pathMap = ['@app/views', $themeConfig->getViewPath()];
     
-        foreach ($themeConfig->getParents() as $parent) {
-            $pathMap[] = $parent->getViewPath();
-            $this->pathMap[$this->getViewPath()] = $pathMap;
+        foreach ($themeConfig->getParents() as $parentConfig) {
+            $pathMap[] = $parentConfig->getViewPath();
         }
+    
+        $viewPath = $this->getViewPath();
+        $pos = strpos($viewPath, '/');
+        $rootPath = $pos === false ? $viewPath : (substr($viewPath, 0, $pos) . '/views');
+        $this->pathMap[$rootPath] = $pathMap;
         
+        $this->pathMap[$viewPath] = $pathMap;
         $this->pathMap['@app/views'] = $pathMap;
     }
     
@@ -62,7 +67,7 @@ class Theme extends \yii\base\Theme
     
     public function getViewPath(): string
     {
-        return $this->basePath . '/views';
+        return $this->config->getViewPath();
     }
     
     public function getLayoutPath(): string

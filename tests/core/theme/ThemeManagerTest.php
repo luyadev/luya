@@ -48,13 +48,17 @@ class ThemeManagerTest extends LuyaWebTestCase
         $this->assertEquals("BLANK 2 THEME", $result);
     }
     
-    public function testUseAppLayoutPath()
+    public function testThemeFromModule()
     {
-        $this->markTestSkipped();
+        $themeManager = new ThemeManager();
+        $themeManager->activeTheme = '@thememodule/themes/testTheme';
+        $themeManager->setup();
+        
+        /** @var Controller $controller */
+        $controller = \Yii::$app->createController('thememodule/default/index')[0];
     
-//        Yii::$app->getModule('unitmodule')->useAppLayoutPath = true;
-//        $p = Yii::$app->getModule('unitmodule')->getLayoutPath();
-//        $this->assertContains('views/unitmodule/layouts', $p);
+        $result = $controller->render("index");
+        $this->assertEquals(Yii::getAlias('@thememodule/themes/testTheme/views/default/index.php'), $result);
     }
     
     public function testNotUseAppLayoutPath()

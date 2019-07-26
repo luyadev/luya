@@ -1,0 +1,4 @@
+{
+    "name": "test theme",
+    "parentTheme": "@app/themes/blank"
+}

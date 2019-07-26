@@ -27,13 +27,14 @@ class ThemeTest extends LuyaWebTestCase
                 '@app/themes/blank2/views',
                 '@app/themes/blank/views',
             ],
-            realpath(Yii::getAlias('@luyatests/data/themes/blank3/views')) => [
+            '@app/themes/blank3/views' => [
                 '@app/views',
                 '@app/themes/blank3/views',
                 '@app/themes/blank2/views',
                 '@app/themes/blank/views',
             ],
         ];
+        var_dump($theme->pathMap);
         $this->assertEquals($expectedPathMap, $theme->pathMap);
     }
 }

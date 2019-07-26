@@ -55,6 +55,8 @@ class ThemeConfig extends BaseObject
     }
     
     /**
+     * Load the parent themes recursive.
+     *
      * @return ThemeConfig[]
      */
     public function getParents()
