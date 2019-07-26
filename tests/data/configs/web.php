@@ -9,6 +9,7 @@ return [
         '@runtime' => dirname(__DIR__) . '/runtime',
         '@luyatests' => dirname(__DIR__) . '/../',
     ],
+    'controllerNamespace' => 'luyatests\\data\\controllers',
     'modules' => [
         'unitmodule' => [
             'class' => '\luyatests\data\modules\unitmodule\Module',

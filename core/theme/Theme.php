@@ -42,29 +42,15 @@ class Theme extends \yii\base\Theme
      */
     protected function initPathMap(ThemeConfig $themeConfig)
     {
-        $pathMap = [$themeConfig->basePath];
+        $pathMap = ['@app/views', $themeConfig->getViewPath()];
     
         foreach ($themeConfig->getParents() as $parent) {
-            $pathMap[] = $parent->basePath;
-            $this->pathMap[$this->basePath] = $pathMap;
+            $pathMap[] = $parent->getViewPath();
+            $this->pathMap[$this->getViewPath()] = $pathMap;
         }
         
+//        $pathMap[] = '@app/views';
         $this->pathMap['@app/views'] = $pathMap;
-    }
-    
-    /**
-     * Init the path mapping include the parent themes
-     */
-    protected function initPathMapRec(ThemeConfig $themeConfig, &$pathMap = []) : array
-    {
-        $pathMap[] = $themeConfig->basePath;
-        $parent = $themeConfig->getParent();
-        if ($parent) {
-            $this->initPathMap($parent, $pathMap);
-            $this->pathMap[$this->basePath] = $pathMap;
-        }
-        
-        return $pathMap;
     }
     
     protected $_layout = 'main';

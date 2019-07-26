@@ -84,4 +84,9 @@ class ThemeConfig extends BaseObject
     {
         $this->_parentTheme = $parentTheme;
     }
+    
+    public function getViewPath(): string
+    {
+        return $this->basePath . '/views';
+    }
 }

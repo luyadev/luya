@@ -179,7 +179,7 @@ abstract class Module extends \yii\base\Module
     /**
      * @var string The default file of layout
      */
-    public $layout = 'main';
+//    public $layout = 'main';
 
     /**
      * @var string The default folder of theme load
@@ -220,6 +220,8 @@ abstract class Module extends \yii\base\Module
             $this->layout = $this->theme->layout;
     
             if ($this->useAppLayoutPath) {
+                // @todo Layout inheritance
+//                $this->theme->applyTo()
                 $this->setLayoutPath($this->theme->layoutPath);
             }
             

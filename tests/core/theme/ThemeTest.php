@@ -2,10 +2,11 @@
 
 namespace luyatests\core\theme;
 
-
+use Yii;
+use luya\theme\Theme;
 use luya\theme\ThemeConfig;
+use luya\theme\ThemeManager;
 use luyatests\LuyaWebTestCase;
-use yii\base\Theme;
 
 /**
  * @author Bennet Klarhoelter <boehsermoe@me.com>
@@ -20,11 +21,17 @@ class ThemeTest extends LuyaWebTestCase
         $theme = new Theme($themeConfig);
     
         $expectedPathMap = [
-            '/var/www/themes/blank3' => [
-                '@app/themes/blank3',
-            ],
             '@app/views' => [
-                '@app/themes/blank3'
+                '@app/views',
+                '@app/themes/blank3/views',
+                '@app/themes/blank2/views',
+                '@app/themes/blank/views',
+            ],
+            realpath(Yii::getAlias('@luyatests/data/themes/blank3/views')) => [
+                '@app/views',
+                '@app/themes/blank3/views',
+                '@app/themes/blank2/views',
+                '@app/themes/blank/views',
             ],
         ];
         $this->assertEquals($expectedPathMap, $theme->pathMap);

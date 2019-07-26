@@ -12,6 +12,8 @@ use yii\base\InvalidConfigException;
  *
  * This component manage the actual display themes.
  *
+ * @property Theme $activeTheme
+ *
  * @author Mateusz Szymański Teamwant <zzixxus@gmail.com>
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since 1.0.0
@@ -23,7 +25,7 @@ class ThemeManager extends \yii\base\Component
     /**
      * @var Theme
      */
-    private $activeTheme;
+    private $_activeTheme;
     
     /**
      * @var Theme[]
@@ -39,14 +41,16 @@ class ThemeManager extends \yii\base\Component
             $basePath = $this->getActiveThemeBasePath();
         } elseif (is_string($this->activeTheme)) {
             $basePath = $this->activeTheme;
-        } else {
-            throw new InvalidConfigException('Active theme already loaded.');
+        } elseif ($this->activeTheme instanceof Theme) {
+            // Active theme already loaded
+            return;
         }
     
         $themeConfig = new ThemeConfig($basePath);
-    
         $this->activeTheme = new Theme($themeConfig);
+        
         Yii::$app->view->theme = $this->activeTheme;
+        
         Yii::setAlias('theme', $this->activeTheme->basePath);
         
         Yii::$app->params['active_theme'] = $this->activeTheme;
@@ -133,12 +137,11 @@ class ThemeManager extends \yii\base\Component
     }
 
     /**
-     * Return $this->config value
      * @return Theme
      */
     public function getActiveTheme()
     {
-        return $this->activeTheme;
+        return $this->_activeTheme;
     }
     
     /**
@@ -146,6 +149,6 @@ class ThemeManager extends \yii\base\Component
      */
     public function setActiveTheme($theme)
     {
-        $this->activeTheme = $theme;
+        $this->_activeTheme = $theme;
     }
 }

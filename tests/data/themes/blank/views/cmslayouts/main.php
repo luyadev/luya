@@ -1,0 +1,4 @@
+<?php
+?>
+
+<?= $placeholders['content']; ?>
