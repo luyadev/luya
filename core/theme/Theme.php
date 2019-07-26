@@ -49,7 +49,6 @@ class Theme extends \yii\base\Theme
             $this->pathMap[$this->getViewPath()] = $pathMap;
         }
         
-//        $pathMap[] = '@app/views';
         $this->pathMap['@app/views'] = $pathMap;
     }
     
