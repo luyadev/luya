@@ -1,27 +1,59 @@
 # Deployment and Sync
 
-
 As a very powerful part LUYA ecosystem a timesaving and pretty awesome processes for synchronization and deployment has been developed. This guide explains the best practice of how to bring your website online and sync it back to your local development environment.
 
 The following is required to reproduce the steps in this guide:
 
 + Git repository (we use GitHub, BitBucket or others are working too).
 + Server with SSH access (Prod environment).
++ ssh keys so you can fetch the data from the production server. There is a good tutorial on setting up the keys [here](https://help.github.com/en/enterprise/2.16/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 + A local development machine with LAMP or WAMP stack.
 
+This process never syncs data **from the local environment to the production server**, only the **opposite way**!
 
-This process never sync data **from the local environment to the production server**, only the **opposite way**!
+When starting to build a website, follow this proposed process:
 
-When starting to build a website create a GitHub repository for the project, check out the LUYA kickstarter project, add the included files into the new GitHub repository and start developing your website.
+1. create a GitHub repository for the project
+2. check out the LUYA kickstarter project
+3. add the included files into the new GitHub repository (don't commit the vendor directory - this is downloaden by composer)
+4. start developing your website.
 
 We recommend that you deploy the website to the server in an early stadium of the development cycle. So use dummy text and data on your local system.
 
 ## Deployment
 
-
-1. Set up your production environment on the server (create database, enable ssh, etc.)
+1. Set up your production environment on the server (create the database, enable ssh, etc.)
 2. Change the `env-prod.php` config.
-3. Install and configure the [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer) that you can deploy your website with the `./vendor/bin/dep luya prod` command.
+3. Install and configure the [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)
+4. Deploy your website with the `./vendor/bin/dep luya prod` command.
+
+### Connection strategies
+
+You can connect to the server either using:
+
+* Pasword `->password('your pwd')`
+* Identity file `->identityFile('~/.ssh/yourkey')`
+* PEM file (e.g. using AWS or Lightsail) `->pemFile('~/.ssh/yourfile.pem')`
+
+We recommend to use either the identity or pem strategie: this way you can commit your `deploy.php` file on your repo, without having to store a pasword on the repo, which you don't want to do of course.
+
+### Example configuration file
+
+```php
+require 'vendor/luyadev/luya-deployer/luya.php';
+
+// define your configuration here. Uncomment the connection strategy of your choice (we recommend pem)
+// Change the $VAR with your information
+server('prod', 'server.servername.com', 22)
+        ->user('$USERNAME')
+        //->identityFile('~/.ssh/identityfile')
+        //->password('$PWD') 
+        //->pemFile('~/.ssh/pemfile.pem')
+        ->stage('prep')
+        ->env('deploy_path', '/home/appname/'); // Define the base path to deploy your project to.
+
+set('repository', 'git@github.com:$GITHUBUSER/$REPONAME.git');
+```
 
 You are now ready to deploy your website to the server and can start to add content on the production environment.
 

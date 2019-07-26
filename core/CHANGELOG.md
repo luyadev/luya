@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.20 (in progress)
 
++ [#]() Added new REST Helper method.
+
 ## 1.0.19 (22. July 2019)
 
 + [#1931](https://github.com/luyadev/luya/issues/1931) Fixed issue with relativ paths in link tag.
