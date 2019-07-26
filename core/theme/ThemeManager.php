@@ -8,7 +8,7 @@ use luya\Exception;
 use yii\base\InvalidConfigException;
 
 /**
- * Theme for LUYA CMS.
+ * Theme for LUYA.
  *
  * This component manage the actual display themes.
  *
@@ -52,8 +52,6 @@ class ThemeManager extends \yii\base\Component
         Yii::$app->view->theme = $this->activeTheme;
         
         Yii::setAlias('theme', $this->activeTheme->basePath);
-        
-        Yii::$app->params['active_theme'] = $this->activeTheme;
     }
 
     /**
@@ -89,11 +87,12 @@ class ThemeManager extends \yii\base\Component
     /**
      * Get all themes as array list.
      *
+     * @todo: Should be exclude in a ThemeImporter and loaded via CLI command `import`. And load the dirs from the package.
+     *
      * @return Theme[]
      */
     public function getThemes()
     {
-        //  @todo: Should be exclude in a ThemeImporter and loaded via CLI command `import`. And load the dirs from the package.
         $dir = $this->getThemesDir();
 
         if (!is_dir($dir)) {

@@ -177,11 +177,6 @@ abstract class Module extends \yii\base\Module
     public $moduleLayout = 'layout';
 
     /**
-     * @var string The default file of layout
-     */
-//    public $layout = 'main';
-
-    /**
      * @var string The default folder of theme load
      */
     public $theme;
@@ -203,11 +198,9 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
-     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true,.
-     *
-     * the *@app* namespace views will be looked up for view files
-     *
-     * Now use Themes component to load theme from database
+     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true,
+     * the *@app* namespace views will be looked up for view files.
+     * Else the layout path of the active theme will be used.
      *
      * @return string
      * @see \yii\base\Module::getLayoutPath()

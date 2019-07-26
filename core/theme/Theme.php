@@ -8,7 +8,8 @@ use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 
 /**
- * Class Theme
+ * Extend the yii2 theme component and build the correct `$pathMap`
+ * depends on given ThemeConfig include parents inheritance.
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
  *

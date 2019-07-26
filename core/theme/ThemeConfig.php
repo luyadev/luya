@@ -2,10 +2,18 @@
 
 namespace luya\theme;
 
+use luya\helpers\FileHelper;
 use Yii;
 use luya\helpers\Json;
 use yii\base\BaseObject;
+use yii\base\InvalidConfigException;
 
+/**
+ * Load the config from the theme.json file and the config inheritance from the parent theme.
+ *
+ * @author Bennet Klarhoelter <boehsermoe@me.com>
+ * @since 1.1.0
+ */
 class ThemeConfig extends BaseObject
 {
     public $basePath;
@@ -15,8 +23,13 @@ class ThemeConfig extends BaseObject
     
     public function __construct(string $basePath)
     {
+        if (!is_readable(Yii::getAlias($basePath))) {
+            throw new InvalidConfigException("The base path $basePath is not readable or not exists.");
+        }
+        
         $config = [];
         
+        // @todo do not load the json every time
         $themeFile = Yii::getAlias($basePath . '/theme.json');
         if (file_exists($themeFile)) {
             $config = Json::decode(file_get_contents($themeFile)) ?: [];
