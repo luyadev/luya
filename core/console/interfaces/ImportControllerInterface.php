@@ -13,7 +13,7 @@ interface ImportControllerInterface
     /**
      * Get all files from a directory.
      *
-     * The direcotry must be in _scanFolders map of the {{luya\console\commands\ImporterController}}. An array will be returnd with the keys:
+     * The directory must be in _scanFolders map of the {{luya\console\commands\ImporterController}}. An array will be returned with the keys:
      *
      * + file: The name of the file inside the provided folder (e.g. MyBlock.php)
      * + module: The name of the module where the file belongs to.

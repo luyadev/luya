@@ -24,7 +24,7 @@ class ThemeConfig extends BaseObject
     public function __construct(string $basePath)
     {
         if (!is_readable(Yii::getAlias($basePath))) {
-            throw new InvalidConfigException("The base path $basePath is not readable or not exists.");
+            throw new InvalidConfigException("The path of $basePath is not readable or not exists.");
         }
         
         $config = [];
