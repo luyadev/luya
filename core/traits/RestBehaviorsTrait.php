@@ -10,10 +10,9 @@ use yii\filters\auth\HttpBearerAuth;
 use yii\filters\ContentNegotiator;
 use yii\filters\Cors;
 use yii\base\Model;
-use yii\base\InvalidParamException;
 use luya\rest\UserBehaviorInterface;
 use luya\web\filters\JsonCruftFilter;
-use app\helpers\RestHelper;
+use luya\helpers\RestHelper;
 
 /**
  * Rest Behaviors Trait.
