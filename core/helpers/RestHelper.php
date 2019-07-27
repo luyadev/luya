@@ -41,7 +41,7 @@ class RestHelper
      * @throws \yii\base\InvalidParamException
      * @return array If the model has errors InvalidParamException will be thrown, otherwise an array with message and field key.
      */
-    public function sendModelError(Model $model)
+    public static function sendModelError(Model $model)
     {
         if (!$model->hasErrors()) {
             throw new InvalidParamException('The model as thrown an uknown Error.');
@@ -84,7 +84,7 @@ class RestHelper
      * @return array Returns an array with field and message keys for each item.
      * @since 1.0.3
      */
-    public function sendArrayError(array $errors)
+    public static function sendArrayError(array $errors)
     {
         Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');
         $result = [];
