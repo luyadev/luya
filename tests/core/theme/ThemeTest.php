@@ -34,7 +34,7 @@ class ThemeTest extends LuyaWebTestCase
                 '@app/themes/blank/views',
             ],
         ];
-        var_dump($theme->pathMap);
+
         $this->assertEquals($expectedPathMap, $theme->pathMap);
     }
 }
