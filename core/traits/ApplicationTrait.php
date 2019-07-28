@@ -151,17 +151,23 @@ trait ApplicationTrait
         setlocale(LC_ALL, $locale.'.utf8', $locale.'UTF-8', $locale);
     }
 
+    private $_packageInstaller;
+    
     /**
      * Get the package Installer
      * @return \luya\base\PackageInstaller
      */
     public function getPackageInstaller()
     {
-        $file = Yii::getAlias('@vendor/luyadev/installer.php');
+        if ($this->_packageInstaller == null) {
+            $file = Yii::getAlias('@vendor/luyadev/installer.php');
         
-        $data = is_file($file) ? include $file : [];
-         
-        return new PackageInstaller($data);
+            $data = is_file($file) ? include $file : [];
+        
+            $this->_packageInstaller = new PackageInstaller($data);
+        }
+        
+        return $this->_packageInstaller;
     }
     
     /**

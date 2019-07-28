@@ -2,13 +2,14 @@
 
 namespace luya\theme;
 
+use luya\base\PackageConfig;
 use luya\helpers\Json;
 use Yii;
 use luya\Exception;
 use yii\base\InvalidConfigException;
 
 /**
- * Theme for LUYA.
+ * Core theme manager for LUYA.
  *
  * This component manage the actual display themes.
  *
@@ -28,9 +29,9 @@ class ThemeManager extends \yii\base\Component
     private $_activeTheme;
     
     /**
-     * @var Theme[]
+     * @var ThemeConfig[]
      */
-    private $themes = [];
+    private $_themes = [];
 
     /**
      * Setup active theme
@@ -89,50 +90,53 @@ class ThemeManager extends \yii\base\Component
      *
      * @todo: Should be exclude in a ThemeImporter and loaded via CLI command `import`. And load the dirs from the package.
      *
-     * @return Theme[]
+     * @return ThemeConfig[]
      */
     public function getThemes()
     {
-        $dir = $this->getThemesDir();
-
-        if (!is_dir($dir)) {
-            if (!mkdir($dir, 0777, true)) {
-                throw new Exception('Themes directory not exists: ' . $dir);
-            }
-
-            chmod($dir, 0766);
+        if ($this->_themes) {
+            return $this->_themes;
         }
-
-        foreach (scandir($dir) as $entry) {
-            if ($entry != "." && $entry != "..") {
+        
+        $themeDefinitions = $this->getThemeDefinitions();
     
-                $themeFile = $dir . '/' . $entry . '/theme.json';
-                if (file_exists($themeFile)) {
-                    $data = Json::decode(file_get_contents($themeFile));
-
-                    if ($data === false) {
-                        continue;
-                    }
-
-                    $this->themes[$entry] = [
-                        'name' => $data->name
-                    ];
-                }
-
+        foreach ($themeDefinitions as $themeDefinition) {
+            $dir = Yii::getAlias($themeDefinition);
+            
+            if (!is_dir($dir) || is_readable($dir)) {
+                throw new Exception('Theme directory not exists or readable: ' . $dir);
+            }
+    
+            $themeFile = $dir . '/theme.json';
+            if (file_exists($themeFile)) {
+                $themeConfig = new ThemeConfig($themeDefinition);
+                $this->_themes[$themeDefinition] = $themeConfig;
             }
         }
-
-        return $this->themes;
+    
+        return $this->_themes;
     }
 
     /**
-     * Get Themes directory
+     * Get Themes directories
      *
-     * @return string
+     * @return string[]
      */
-    protected function getThemesDir()
+    protected function getThemeDefinitions() : array
     {
-        return Yii::$app->basePath . '/themes';
+        $themeDefinitions = [];
+        
+        foreach (scandir(Yii::getAlias('@app/themes')) as $dirPath) {
+            $themeDefinitions = array_merge($themeDefinitions, "@app/themes/" , basename($dirPath));
+        }
+        
+        foreach (Yii::$app->getPackageInstaller()->getConfigs() as $config) {
+            /** @var PackageConfig $config */
+            $themeDefinitions = array_merge($themeDefinitions, $config->themes);
+        }
+        var_dump($themeDefinitions);
+        die;
+        return $themeDefinitions;
     }
 
     /**

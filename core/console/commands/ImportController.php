@@ -45,7 +45,7 @@ class ImportController extends Command implements ImportControllerInterface
         }
         // foreach scanFolder inside the app namespace
         foreach ($this->scanFolders as $folderName) {
-            $this->addToDirectory(Yii::getAlias("@app/$folderName"), $folderName, '\\app\\'.$folderName, '@app');
+            $this->addToDirectory(Yii::getAlias("@app/$folderName"), $folderName, '\\app\\'.$folderName, 'app');
         }
     }
 
