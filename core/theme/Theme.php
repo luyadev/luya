@@ -85,11 +85,8 @@ class Theme extends \yii\base\Theme
         return $this->basePath . '/resources';
     }
     
-    public function getInfo()
+    public function getConfig()
     {
-        return [
-            'name' => $this->config->getName(),
-            'path' => $this->basePath,
-        ];
+        return $this->config;
     }
 }
