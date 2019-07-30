@@ -8,9 +8,9 @@ use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 
 /**
- * Extend the yii2 theme component and build the correct `$pathMap`
- * depends on given ThemeConfig include parents inheritance.
+ * Extend the yii2 theme component and build up the `$pathMap` depends on given \luya\theme\ThemeConfig which include parents inheritance.
  *
+ * @see \luya\theme\ThemeConfig
  * @author Bennet Klarhoelter <boehsermoe@me.com>
  *
  * @property-read string $layout
@@ -26,7 +26,7 @@ class Theme extends \yii\base\Theme
     public function __construct(ThemeConfig $config)
     {
         $this->config = $config;
-        parent::__construct(['basePath' => $config->basePath]);
+        parent::__construct(['basePath' => $config->getBasePath()]);
     }
     
     public function init()

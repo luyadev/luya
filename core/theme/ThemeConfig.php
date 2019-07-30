@@ -28,19 +28,12 @@ class ThemeConfig extends BaseObject implements Arrayable
     public $author;
     public $image;
     
-    public function __construct(string $basePath)
+    public function __construct(string $basePath, array $config)
     {
         if (!is_readable(Yii::getAlias($basePath))) {
             throw new InvalidConfigException("The path of $basePath is not readable or not exists.");
         }
-        
-        $config = [];
-        
-        $themeFile = Yii::getAlias($basePath . '/theme.json');
-        if (file_exists($themeFile)) {
-            $config = Json::decode(file_get_contents($themeFile)) ?: [];
-        }
-        
+    
         $this->_basePath = $basePath;
     
         parent::__construct($config);
@@ -53,20 +46,16 @@ class ThemeConfig extends BaseObject implements Arrayable
         }
     }
     
-    public function getBasePath()
-    {
-        return $this->_basePath;
-    }
-    
     protected $_parent;
     
     /**
+     * Load the config of the parent theme.
      * @return ThemeConfig
      */
     public function getParent()
     {
         if ($this->parentTheme) {
-            $this->_parent = new ThemeConfig($this->parentTheme);
+            $this->_parent = Yii::$app->themeManager->getThemeByBasePath($this->parentTheme);
         }
         
         return $this->_parent;
@@ -90,10 +79,13 @@ class ThemeConfig extends BaseObject implements Arrayable
         return $parents;
     }
     
+    public function getBasePath()
+    {
+        return $this->_basePath;
+    }
+    
     public function getViewPath(): string
     {
         return $this->getBasePath() . '/views';
     }
-    
-    
 }

@@ -23,16 +23,6 @@ class ThemeController extends \luya\console\Command
     public $defaultAction = 'create';
     
     /**
-     * Humanize the class name
-     *
-     * @return string The humanized name.
-     */
-    public function humanizeName($name)
-    {
-        return $name = Inflector::humanize(Inflector::camel2words($name));
-    }
-    
-    /**
      * Render the json template.
      *
      * @param string $basePath
@@ -41,7 +31,7 @@ class ThemeController extends \luya\console\Command
      */
     public function renderJson(string $basePath, string $themeName)
     {
-        $themeConfig = new ThemeConfig($basePath);
+        $themeConfig = new ThemeConfig($basePath, []);
         $themeConfig->name = $themeName;
     
         if ($this->confirm('Inherit from other theme?')) {
@@ -74,7 +64,7 @@ class ThemeController extends \luya\console\Command
     {
         Console::clearScreenBeforeCursor();
     
-        $themeName = $this->prompt("Enter the name of the theme you like to generate:");
+        $themeName = $this->prompt("Enter the name (lower case) of the theme you like to generate:");
         
         $newName = preg_replace("/[^a-z]/", "", strtolower($themeName));
         if ($newName !== $themeName) {
@@ -84,14 +74,31 @@ class ThemeController extends \luya\console\Command
                 $themeName = $newName;
             }
         }
+    
+        $availableModules = implode(', ', array_column(Yii::$app->getFrontendModules(), 'id'));
+        $themeLocation = $this->prompt("Enter the theme location where to generate (as path alias e.g. app, $availableModules):", ['default' => 'app']);
+        $themeLocation = '@' . ltrim($themeLocation, '@');
+    
+        preg_match("#^@[A-z]+#", $themeLocation, $newThemeLocation);
+        if ($newThemeLocation[0] !== $themeLocation) {
+            if (!$this->confirm("We have changed the name to '{$newThemeLocation}'. Do you want to proceed with this name?")) {
+                return $this->outputError('Abort by user.');
+            } else {
+                $themeLocation = $newThemeLocation;
+            }
+        }
         
-        $basePath = '@app' . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName;
-        
-        $appModulesFolder = Yii::$app->basePath . DIRECTORY_SEPARATOR . 'themes';
-        $themeFolder = $appModulesFolder . DIRECTORY_SEPARATOR . $themeName;
+        $basePath = $themeLocation . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName;
+        $themeFolder = Yii::getAlias($basePath);
         
         if (file_exists($themeFolder)) {
             return $this->outputError("The folder " . $themeFolder . " exists already.");
+        }
+    
+        $this->outputInfo("Theme path alias: " . $basePath);
+        $this->outputInfo("Theme real path: " . $themeFolder);
+        if (!$this->confirm("Do you want continue?")) {
+            return $this->outputError('Abort by user.');
         }
         
         $folders = [

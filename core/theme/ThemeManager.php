@@ -32,7 +32,36 @@ class ThemeManager extends \yii\base\Component
      * @var ThemeConfig[]
      */
     private $_themes = [];
-
+    
+    /**
+     * Read the theme.json and create a new \luya\theme\ThemeConfig for the given base path.
+     *
+     * @param string $basePath
+     *
+     * @return ThemeConfig
+     * @throws Exception
+     * @throws InvalidConfigException
+     */
+    protected static function loadThemeConfig(string $basePath): ThemeConfig
+    {
+        $dir = Yii::getAlias($basePath);
+        
+        if (!is_dir($dir) || !is_readable($dir)) {
+            throw new Exception('Theme directory not exists or readable: ' . $dir);
+        }
+        
+        $themeFile = $dir . '/theme.json';
+        if (file_exists($themeFile)) {
+            $config = Json::decode(file_get_contents($themeFile)) ?: [];
+        } else {
+            $config = [];
+        }
+        
+        $themeConfig = new ThemeConfig($basePath, $config);
+        
+        return $themeConfig;
+    }
+    
     /**
      * Setup active theme
      */
@@ -45,7 +74,7 @@ class ThemeManager extends \yii\base\Component
 
         $basePath = $this->getActiveThemeBasePath();
         
-        $themeConfig = new ThemeConfig($basePath);
+        $themeConfig = $this->getThemeByBasePath($basePath);
         $this->activeTheme = new Theme($themeConfig);
         
         Yii::$app->view->theme = $this->activeTheme;
@@ -85,22 +114,12 @@ class ThemeManager extends \yii\base\Component
         $themeDefinitions = $this->getThemeDefinitions();
     
         foreach ($themeDefinitions as $themeDefinition) {
-            $dir = Yii::getAlias($themeDefinition);
-            
-            if (!is_dir($dir) || is_readable($dir)) {
-                throw new Exception('Theme directory not exists or readable: ' . $dir);
-            }
-    
-            $themeFile = $dir . '/theme.json';
-            if (file_exists($themeFile)) {
-                $themeConfig = new ThemeConfig($themeDefinition);
-                $this->_themes[$themeDefinition] = $themeConfig;
-            }
+            $this->_themes[$themeDefinition] = static::loadThemeConfig($themeDefinition);
         }
     
         return $this->_themes;
     }
-
+    
     /**
      * Get theme definitions by search in `@app/themes` and the `Yii::$app->getPackageInstaller()`
      *
@@ -121,7 +140,15 @@ class ThemeManager extends \yii\base\Component
         
         return $themeDefinitions;
     }
+    
+    
+    public function getThemeByBasePath($basePath)
+    {
+        $themes = $this->getThemes();
 
+        return isset($themes[$basePath]) ? $themes[$basePath] : null;
+    }
+    
     /**
      * @return Theme
      */
