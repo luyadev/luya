@@ -2,6 +2,7 @@
 
 namespace luyatests\core\theme;
 
+use luya\helpers\Json;
 use Yii;
 use luya\theme\Theme;
 use luya\theme\ThemeConfig;
@@ -17,7 +18,9 @@ class ThemeTest extends LuyaWebTestCase
     public function testPathMap()
     {
         $basePath = '@app/themes/blank3';
-        $themeConfig = new ThemeConfig($basePath);
+        $config = Json::decode(file_get_contents(Yii::getAlias($basePath . '/theme.json')));
+        
+        $themeConfig = new ThemeConfig($basePath, $config);
         $theme = new Theme($themeConfig);
     
         $expectedPathMap = [

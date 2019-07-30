@@ -130,7 +130,7 @@ class ThemeManager extends \yii\base\Component
         $themeDefinitions = [];
         
         foreach (scandir(Yii::getAlias('@app/themes')) as $dirPath) {
-            $themeDefinitions = array_merge($themeDefinitions, "@app/themes/" , basename($dirPath));
+            $themeDefinitions[] = "@app/themes/" . basename($dirPath);
         }
         
         foreach (Yii::$app->getPackageInstaller()->getConfigs() as $config) {

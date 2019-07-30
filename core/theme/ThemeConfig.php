@@ -8,6 +8,7 @@ use luya\helpers\Json;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
 use yii\base\BaseObject;
+use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 
 /**
@@ -56,6 +57,9 @@ class ThemeConfig extends BaseObject implements Arrayable
     {
         if ($this->parentTheme) {
             $this->_parent = Yii::$app->themeManager->getThemeByBasePath($this->parentTheme);
+            if (!$this->_parent) {
+                throw new InvalidArgumentException("Theme parent {$this->parentTheme} could not found.");
+            }
         }
         
         return $this->_parent;
