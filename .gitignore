@@ -23,7 +23,7 @@
 
 ### LUYA
 phpunit.xml
-vendor/
+/vendor/
 scripts/.subsplit
 /build/
 
