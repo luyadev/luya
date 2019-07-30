@@ -17,7 +17,7 @@ use yii\base\InvalidConfigException;
  *
  * @author Mateusz Szymański Teamwant <zzixxus@gmail.com>
  * @author Bennet Klarhölter <boehsermoe@me.com>
- * @since 1.0.0
+ * @since 1.1.0
  */
 class ThemeManager extends \yii\base\Component
 {
