@@ -38,15 +38,13 @@ class ThemeManager extends \yii\base\Component
      */
     public function setup()
     {
-        if (!$this->activeTheme) {
-            $basePath = $this->getActiveThemeBasePath();
-        } elseif (is_string($this->activeTheme)) {
-            $basePath = $this->activeTheme;
-        } elseif ($this->activeTheme instanceof Theme) {
+        if ($this->activeTheme instanceof Theme) {
             // Active theme already loaded
             return;
         }
-    
+
+        $basePath = $this->getActiveThemeBasePath();
+        
         $themeConfig = new ThemeConfig($basePath);
         $this->activeTheme = new Theme($themeConfig);
         
@@ -56,41 +54,27 @@ class ThemeManager extends \yii\base\Component
     }
 
     /**
-     * Get current theme from SQL
-     * If you have own theme you must inset into db record named active_theme like that:
+     * Get base path of active theme.
      *
-     * INSERT INTO `admin_config` (`name`, `value`, `is_system`, `id`) VALUES ('active_theme', '@app/themes/teamwant', '1', NULL);
-     *
-     * todo: create admin module to manage themes
      * @return string
      * @throws \yii\db\Exception
      */
-    public function getActiveThemeBasePath()
+    protected function getActiveThemeBasePath()
     {
-        try {
-            $connection = Yii::$app->getDb();
-            $command = $connection->createCommand("SELECT * FROM `admin_config` WHERE `name` = :name limit 1;", [':name' => 'active_theme']);
-
-            $result = $command->queryOne();
-
-            if (!$result) {
-                return self::APP_THEMES_BLANK;
-            }
-
-        } catch (\Exception $e) {
-//            do none, return default theme
-            return self::APP_THEMES_BLANK;
+        if (!empty($this->activeTheme) && is_string($this->activeTheme)) {
+            // load active theme by config
+            return $this->activeTheme;
         }
-
-        return $result['value'];
+    
+        return self::APP_THEMES_BLANK;
     }
     
     /**
-     * Get all themes as array list.
-     *
-     * @todo: Should be exclude in a ThemeImporter and loaded via CLI command `import`. And load the dirs from the package.
+     * Get all theme configs as array list.
      *
      * @return ThemeConfig[]
+     * @throws Exception
+     * @throws InvalidConfigException
      */
     public function getThemes()
     {
@@ -118,7 +102,7 @@ class ThemeManager extends \yii\base\Component
     }
 
     /**
-     * Get Themes directories
+     * Get theme definitions by search in `@app/themes` and the `Yii::$app->getPackageInstaller()`
      *
      * @return string[]
      */
@@ -134,8 +118,7 @@ class ThemeManager extends \yii\base\Component
             /** @var PackageConfig $config */
             $themeDefinitions = array_merge($themeDefinitions, $config->themes);
         }
-        var_dump($themeDefinitions);
-        die;
+        
         return $themeDefinitions;
     }
 

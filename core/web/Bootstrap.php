@@ -132,9 +132,10 @@ class Bootstrap extends BaseBootstrap
                 // as the admin module needs to listen for $apiDefintions we have to get the urlRules from the admin and merge with the existing rules:
                 // in admin context, admin url rules have always precedence over frontend rules.
                 $this->_urlRules = array_merge($app->getModule('admin')->urlRules, $this->_urlRules);
+            } else {
+                // Frontend context
+                $app->themeManager->setup();
             }
-    
-            $app->themeManager->setup();
         }
         
         $app->getUrlManager()->addRules($this->_urlRules);

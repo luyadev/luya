@@ -60,12 +60,4 @@ class ThemeManagerTest extends LuyaWebTestCase
         $result = $controller->render("index");
         $this->assertEquals(Yii::getAlias('@thememodule/themes/testTheme/views/default/index.php'), $result);
     }
-    
-    public function testNotUseAppLayoutPath()
-    {
-        $this->markTestSkipped();
-//        Yii::$app->getModule('unitmodule')->useAppLayoutPath = false;
-//        $p = Yii::$app->getModule('unitmodule')->getLayoutPath();
-//        $this->assertContains('unitmodule/views/layouts', $p);
-    }
 }

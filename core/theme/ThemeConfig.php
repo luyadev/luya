@@ -20,8 +20,9 @@ class ThemeConfig extends BaseObject implements Arrayable
 {
     use ArrayableTrait;
     
+    protected $_basePath;
+    
     public $name;
-    public $basePath;
     public $parentTheme;
     public $description;
     public $author;
@@ -40,7 +41,7 @@ class ThemeConfig extends BaseObject implements Arrayable
             $config = Json::decode(file_get_contents($themeFile)) ?: [];
         }
         
-        $config['basePath'] = $basePath;
+        $this->_basePath = $basePath;
     
         parent::__construct($config);
     }
@@ -48,8 +49,13 @@ class ThemeConfig extends BaseObject implements Arrayable
     public function init()
     {
         if (empty($this->name)) {
-            $this->name = basename($this->basePath);
+            $this->name = basename($this->_basePath);
         }
+    }
+    
+    public function getBasePath()
+    {
+        return $this->_basePath;
     }
     
     protected $_parent;
@@ -86,7 +92,7 @@ class ThemeConfig extends BaseObject implements Arrayable
     
     public function getViewPath(): string
     {
-        return $this->basePath . '/views';
+        return $this->getBasePath() . '/views';
     }
     
     
