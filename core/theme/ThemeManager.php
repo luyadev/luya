@@ -12,7 +12,7 @@ use yii\base\InvalidConfigException;
 /**
  * Core theme manager for LUYA.
  *
- * This component manage the actual display themes.
+ * This component manage available themes via file system and the actual display themes.
  *
  * @property Theme $activeTheme
  *
@@ -174,8 +174,10 @@ class ThemeManager extends \yii\base\Component
     public function setActiveTheme($theme)
     {
         $this->_activeTheme = $theme;
-
-        Yii::$app->view->theme = $theme;
-        Yii::setAlias('activeTheme', $theme->basePath);
+    
+        if ($theme instanceof Theme) {
+            Yii::$app->view->theme = $theme;
+            Yii::setAlias('activeTheme', $theme->basePath);
+        }
     }
 }
