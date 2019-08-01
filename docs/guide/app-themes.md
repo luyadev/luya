@@ -62,7 +62,19 @@ The application and all modules can have a *themes* directory which will be load
 
 > One of the main ideas behind LUYA is to store data in files and import them into your database.
 
-## Links
+## Theme packages
 
-+ [Frontend Module guide](app-module-frontend.md)
-+ [Admin Module guide](app-admin-module.md)
+You can also create a theme as a composer package.
+You only have to add inside the extra section of the *composer.json* the relative path to every theme you want to register.
+
+```json
+{
+    "extra": {
+        "luya" : {
+            "themes": ["themes/blank"]
+        }
+    }
+}
+```
+
+For more information to packages see [package guide](luya-package-dev.md).

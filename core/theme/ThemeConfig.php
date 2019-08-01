@@ -19,14 +19,15 @@ use yii\base\InvalidConfigException;
  */
 class ThemeConfig extends BaseObject implements Arrayable
 {
-    use ArrayableTrait;
+    use ArrayableTrait {
+        fields as arrayFields;
+    }
     
     protected $_basePath;
     
     public $name;
     public $parentTheme;
     public $description;
-    public $author;
     public $image;
     
     public function __construct(string $basePath, array $config)
@@ -45,6 +46,13 @@ class ThemeConfig extends BaseObject implements Arrayable
         if (empty($this->name)) {
             $this->name = basename($this->_basePath);
         }
+    }
+    
+    public function fields()
+    {
+        return array_merge($this->arrayFields(), [
+            'pathMap'
+        ]);
     }
     
     protected $_parent;
@@ -81,6 +89,25 @@ class ThemeConfig extends BaseObject implements Arrayable
         }
         
         return $parents;
+    }
+    
+    private $_pathMap = [];
+    
+    public function getPathMap()
+    {
+        $pathMap = $this->_pathMap;
+        
+        $parent = $this->getParent();
+        if ($parent) {
+            $pathMap = array_merge($pathMap, $parent->getPathMap());
+        }
+    
+        return $pathMap;
+    }
+    
+    protected function setPathMap(array $pathMap)
+    {
+        $this->_pathMap = $pathMap;
     }
     
     public function getBasePath()

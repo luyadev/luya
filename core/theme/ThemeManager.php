@@ -6,6 +6,7 @@ use luya\base\PackageConfig;
 use luya\helpers\Json;
 use Yii;
 use luya\Exception;
+use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 
 /**
@@ -73,13 +74,15 @@ class ThemeManager extends \yii\base\Component
         }
 
         $basePath = $this->getActiveThemeBasePath();
-        
-        $themeConfig = $this->getThemeByBasePath($basePath);
-        $this->activeTheme = new Theme($themeConfig);
-        
-        Yii::$app->view->theme = $this->activeTheme;
-        
-        Yii::setAlias('theme', $this->activeTheme->basePath);
+    
+        try {
+            $themeConfig = $this->getThemeByBasePath($basePath);
+            $theme = new Theme($themeConfig);
+            $this->setActiveTheme($theme);
+    
+        } catch (InvalidArgumentException $ex) {
+            Yii::error($ex->getMessage(), 'luya-theme');
+        }
     }
 
     /**
@@ -114,7 +117,9 @@ class ThemeManager extends \yii\base\Component
         $themeDefinitions = $this->getThemeDefinitions();
     
         foreach ($themeDefinitions as $themeDefinition) {
-            $this->_themes[$themeDefinition] = static::loadThemeConfig($themeDefinition);
+            $themeConfig = static::loadThemeConfig($themeDefinition);
+            $this->_themes[$themeDefinition] = $themeConfig;
+            Yii::setAlias('@' . basename($themeConfig->getBasePath()), $themeConfig->getBasePath());
         }
     
         return $this->_themes;
@@ -128,9 +133,11 @@ class ThemeManager extends \yii\base\Component
     protected function getThemeDefinitions() : array
     {
         $themeDefinitions = [];
-        
-        foreach (scandir(Yii::getAlias('@app/themes')) as $dirPath) {
-            $themeDefinitions[] = "@app/themes/" . basename($dirPath);
+    
+        if (file_exists(Yii::getAlias('@app/themes'))) {
+            foreach (scandir(Yii::getAlias('@app/themes')) as $dirPath) {
+                $themeDefinitions[] = "@app/themes/" . basename($dirPath);
+            }
         }
         
         foreach (Yii::$app->getPackageInstaller()->getConfigs() as $config) {
@@ -145,8 +152,12 @@ class ThemeManager extends \yii\base\Component
     public function getThemeByBasePath($basePath)
     {
         $themes = $this->getThemes();
+        
+        if (!isset($themes[$basePath])) {
+            throw new InvalidArgumentException("Theme $basePath could not loaded.");
+        }
 
-        return isset($themes[$basePath]) ? $themes[$basePath] : null;
+        return $themes[$basePath];
     }
     
     /**
@@ -163,5 +174,8 @@ class ThemeManager extends \yii\base\Component
     public function setActiveTheme($theme)
     {
         $this->_activeTheme = $theme;
+
+        Yii::$app->view->theme = $theme;
+        Yii::setAlias('activeTheme', $theme->basePath);
     }
 }

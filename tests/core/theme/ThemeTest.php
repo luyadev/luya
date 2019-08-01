@@ -36,6 +36,18 @@ class ThemeTest extends LuyaWebTestCase
                 '@app/themes/blank2/views',
                 '@app/themes/blank/views',
             ],
+            '@app/themes/blank2/views' => [
+                '@app/views',
+                '@app/themes/blank3/views',
+                '@app/themes/blank2/views',
+                '@app/themes/blank/views',
+            ],
+            '@app/themes/blank/views' => [
+                '@app/views',
+                '@app/themes/blank3/views',
+                '@app/themes/blank2/views',
+                '@app/themes/blank/views',
+            ],
         ];
 
         $this->assertEquals($expectedPathMap, $theme->pathMap);

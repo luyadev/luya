@@ -34,7 +34,7 @@ class Theme extends \yii\base\Theme
         if ($this->getBasePath() === null) {
             throw new InvalidConfigException("Property base path must be set");
         }
-    
+        
         $this->initPathMap($this->config);
     }
     
@@ -43,19 +43,27 @@ class Theme extends \yii\base\Theme
      */
     protected function initPathMap(ThemeConfig $themeConfig)
     {
-        $pathMap = ['@app/views', $themeConfig->getViewPath()];
+        $viewPath = $this->getViewPath();
+        $this->pathMap[$viewPath] = null;
     
+        $pathMap = ['@app/views', $themeConfig->getViewPath()];
+        
         foreach ($themeConfig->getParents() as $parentConfig) {
             $pathMap[] = $parentConfig->getViewPath();
+            $this->pathMap[$parentConfig->getViewPath()] = null;
         }
     
-        $viewPath = $this->getViewPath();
+        foreach ($themeConfig->getPathMap() as $from) {
+            $this->pathMap[$from] = null;
+        }
+    
+        foreach ($this->pathMap as $from => &$tos) {
+            $tos = $pathMap;
+        }
+    
         $pos = strpos($viewPath, '/');
         $rootPath = $pos === false ? $viewPath : (substr($viewPath, 0, $pos) . '/views');
         $this->pathMap[$rootPath] = $pathMap;
-        
-        $this->pathMap[$viewPath] = $pathMap;
-        $this->pathMap['@app/views'] = $pathMap;
     }
     
     protected $_layout = 'main';
