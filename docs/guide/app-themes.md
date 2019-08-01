@@ -78,3 +78,7 @@ You only have to add inside the extra section of the *composer.json* the relativ
 ```
 
 For more information to packages see [package guide](luya-package-dev.md).
+
+Some other examples of theme packages:
+
++ [luya-blockcollection](https://github.com/boehsermoe/luya-blockcollection/tree/theme)
