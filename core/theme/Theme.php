@@ -53,7 +53,8 @@ class Theme extends \yii\base\Theme
             $this->pathMap[$parentConfig->getViewPath()] = null;
         }
     
-        foreach ($themeConfig->getPathMap() as $from) {
+        $additionalPathMap = $this->getAdditionalPathMap($themeConfig);
+        foreach ($additionalPathMap as $from) {
             $this->pathMap[$from] = null;
         }
     
@@ -97,4 +98,21 @@ class Theme extends \yii\base\Theme
     {
         return $this->config;
     }
+    
+    /**
+     * @param ThemeConfig $themeConfig
+     *
+     * @return array
+     */
+    protected function getAdditionalPathMap(ThemeConfig $themeConfig): array
+    {
+        $pathMap = $themeConfig->pathMap;
+        
+        $parentConfig = $themeConfig->getParent();
+        if ($parentConfig) {
+            $pathMap = array_merge($pathMap, $this->getAdditionalPathMap($parentConfig));
+        }
+        
+        return $pathMap;
+}
 }

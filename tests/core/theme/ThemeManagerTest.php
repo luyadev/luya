@@ -16,8 +16,10 @@ class ThemeManagerTest extends LuyaWebTestCase
     public function testRenderLayoutInheritance()
     {
         $themeManager = new ThemeManager();
-        $themeManager->activeTheme = '@app/themes/blank3';
+        $themeManager->activeThemeName = '@app/themes/blank3';
         $themeManager->setup();
+        
+        $this->assertEquals(Yii::getAlias('@app/themes/blank3'), $themeManager->getActiveTheme()->getBasePath());
     
         /** @var Controller $controller */
         $controller = \Yii::$app->createController('foo')[0];
@@ -38,7 +40,7 @@ class ThemeManagerTest extends LuyaWebTestCase
     public function testRenderViewInheritance()
     {
         $themeManager = new ThemeManager();
-        $themeManager->activeTheme = '@app/themes/blank3';
+        $themeManager->activeThemeName = '@app/themes/blank3';
         $themeManager->setup();
         
         $result = \Yii::$app->getView()->render('//test/index');
@@ -51,7 +53,7 @@ class ThemeManagerTest extends LuyaWebTestCase
     public function testThemeFromModule()
     {
         $themeManager = new ThemeManager();
-        $themeManager->activeTheme = '@thememodule/themes/testTheme';
+        $themeManager->activeThemeName = '@thememodule/themes/testTheme';
         $themeManager->setup();
         
         /** @var Controller $controller */

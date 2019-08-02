@@ -15,7 +15,7 @@ use luyatests\LuyaWebTestCase;
  */
 class ThemeTest extends LuyaWebTestCase
 {
-    public function testPathMap()
+    public function testSimplePathMap()
     {
         $basePath = '@app/themes/blank3';
         $config = Json::decode(file_get_contents(Yii::getAlias($basePath . '/theme.json')));
@@ -50,6 +50,32 @@ class ThemeTest extends LuyaWebTestCase
             ],
         ];
 
+        $this->assertEquals($expectedPathMap, $theme->pathMap);
+    }
+    
+    public function testAdditionalPathMap()
+    {
+        $theme1Config = new ThemeConfig('@app/themes/blank', []);
+        $theme2Config = new ThemeConfig('@app/themes/blank2', ['parent' => $theme1Config, 'pathMap' => ['@additional/views']]);
+        $theme3Config = new ThemeConfig('@app/themes/blank3', ['parent' => $theme2Config]);
+        
+        $theme = new Theme($theme3Config);
+    
+        $themePathOrder = [
+            '@app/views',
+            '@app/themes/blank3/views',
+            '@app/themes/blank2/views',
+            '@app/themes/blank/views',
+        ];
+        
+        $expectedPathMap = [
+            '@app/views' => $themePathOrder,
+            '@app/themes/blank3/views' => $themePathOrder,
+            '@app/themes/blank2/views' => $themePathOrder,
+            '@app/themes/blank/views' => $themePathOrder,
+            '@additional/views' => $themePathOrder,
+        ];
+        
         $this->assertEquals($expectedPathMap, $theme->pathMap);
     }
 }

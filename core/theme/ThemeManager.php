@@ -14,8 +14,6 @@ use yii\base\InvalidConfigException;
  *
  * This component manage available themes via file system and the actual display themes.
  *
- * @property Theme $activeTheme
- *
  * @author Mateusz Szymański Teamwant <zzixxus@gmail.com>
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since 1.1.0
@@ -25,9 +23,11 @@ class ThemeManager extends \yii\base\Component
     const APP_THEMES_BLANK = '@app/themes/blank';
     
     /**
-     * @var Theme
+     * Name of the theme which should be activated on setup.
+     *
+     * @var string
      */
-    private $_activeTheme;
+    public $activeThemeName;
     
     /**
      * @var ThemeConfig[]
@@ -68,23 +68,23 @@ class ThemeManager extends \yii\base\Component
      */
     public function setup()
     {
-        if ($this->activeTheme instanceof Theme) {
+        if ($this->getActiveTheme() instanceof Theme) {
             // Active theme already loaded
             return;
         }
 
         $basePath = $this->getActiveThemeBasePath();
-    
+
         try {
             $themeConfig = $this->getThemeByBasePath($basePath);
             $theme = new Theme($themeConfig);
-            $this->setActiveTheme($theme);
-    
+            $this->activate($theme);
+        
         } catch (InvalidArgumentException $ex) {
             Yii::error($ex->getMessage(), 'luya-theme');
         }
     }
-
+    
     /**
      * Get base path of active theme.
      *
@@ -93,9 +93,8 @@ class ThemeManager extends \yii\base\Component
      */
     protected function getActiveThemeBasePath()
     {
-        if (!empty($this->activeTheme) && is_string($this->activeTheme)) {
-            // load active theme by config
-            return $this->activeTheme;
+        if (!empty($this->activeThemeName) && is_string($this->activeThemeName)) {
+            return $this->activeThemeName;
         }
     
         return self::APP_THEMES_BLANK;
@@ -118,8 +117,7 @@ class ThemeManager extends \yii\base\Component
     
         foreach ($themeDefinitions as $themeDefinition) {
             $themeConfig = static::loadThemeConfig($themeDefinition);
-            $this->_themes[$themeDefinition] = $themeConfig;
-            Yii::setAlias('@' . basename($themeConfig->getBasePath()), $themeConfig->getBasePath());
+            $this->registerTheme($themeConfig);
         }
     
         return $this->_themes;
@@ -148,7 +146,6 @@ class ThemeManager extends \yii\base\Component
         return $themeDefinitions;
     }
     
-    
     public function getThemeByBasePath($basePath)
     {
         $themes = $this->getThemes();
@@ -161,23 +158,53 @@ class ThemeManager extends \yii\base\Component
     }
     
     /**
-     * @return Theme
+     * Register a theme config and set the path alias with the name of the theme.
+     *
+     * @param ThemeConfig $themeConfig Base path of the theme.
+     *
+     * @throws InvalidConfigException
+     */
+    protected function registerTheme(ThemeConfig $themeConfig)
+    {
+        if (isset($this->_themes[$themeConfig->getBasePath()])) {
+            throw new InvalidArgumentException("Theme already registered.");
+        }
+        
+        $this->_themes[$themeConfig->getBasePath()] = $themeConfig;
+    
+        Yii::setAlias('@' . basename($themeConfig->getBasePath()) . 'Theme', $themeConfig->getBasePath());
+    }
+    
+    /**
+     * Change the active theme in the \yii\base\View component and set the `activeTheme ` alias to new theme base path.
+     *
+     * @param Theme $theme
+     */
+    protected function activate(Theme $theme)
+    {
+        Yii::$app->view->theme = $theme;
+        Yii::setAlias('activeTheme', $theme->basePath);
+        
+        $this->setActiveTheme($theme);
+    }
+    
+    /**
+     * @var Theme|null
+     */
+    private $_activeTheme;
+    
+    /**
+     * The active theme. Is null if no theme activated.
+     *
+     * @var Theme|null
      */
     public function getActiveTheme()
     {
         return $this->_activeTheme;
     }
     
-    /**
-     * @param Theme|string $theme
-     */
-    public function setActiveTheme($theme)
+    protected function setActiveTheme(Theme $theme)
     {
         $this->_activeTheme = $theme;
-    
-        if ($theme instanceof Theme) {
-            Yii::$app->view->theme = $theme;
-            Yii::setAlias('activeTheme', $theme->basePath);
-        }
     }
 }
