@@ -66,13 +66,17 @@ The *blue* theme does need to have this view file because it will inherit from t
 
 But the views from `@app/views` will be override all other theme views.
 
-The order of view inheritance (pathMap) is following (first match will be used from top to bottom):
+The order of view inheritance (pathMap) will looks like this:
 
 ```pathmap
-@app/views
-@blueTheme/views
-@blankTheme/views
+// requested path => [theme paths]
+@app/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+@blueTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+@blankTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
 ```
+
+At first search the requested path in the first column. 
+On a match searching in the list of theme paths for a exists file in the defined order.
 
 ### Additional path map
 
@@ -86,13 +90,13 @@ It is also possible to define additional path for inheritance by add a path map 
 }
 ```
 
-These additional paths will be added to the path map after the theme base path:
+These additional paths will be added to the end of the path map:
 
 ```
-@app/views
-@blueTheme/views
-@moduleAlias/frontend/views
-@blankTheme/views
+@app/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+@blueTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+@blankTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+@moduleAlias/frontend/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
 ```
 
 ## Theme manager
