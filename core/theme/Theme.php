@@ -50,21 +50,19 @@ class Theme extends \yii\base\Theme
         
         foreach ($themeConfig->getParents() as $parentConfig) {
             $pathMap[] = $parentConfig->getViewPath();
-            $this->pathMap[$parentConfig->getViewPath()] = null;
+            $this->pathMap[$parentConfig->getViewPath()] = &$pathMap;
         }
     
         $additionalPathMap = $this->getAdditionalPathMap($themeConfig);
         foreach ($additionalPathMap as $from) {
-            $this->pathMap[$from] = null;
-        }
-    
-        foreach ($this->pathMap as $from => &$tos) {
-            $tos = $pathMap;
+            $this->pathMap[$from] = $pathMap;
         }
     
         $pos = strpos($viewPath, '/');
         $rootPath = $pos === false ? $viewPath : (substr($viewPath, 0, $pos) . '/views');
         $this->pathMap[$rootPath] = $pathMap;
+    
+        $this->pathMap['@app/views'] = $pathMap;
     }
     
     protected $_layout = 'main';
