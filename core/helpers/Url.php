@@ -92,4 +92,31 @@ class Url extends \yii\helpers\BaseUrl
         
         return $url;
     }
+
+    /**
+     * Removes schema, protocol and www. subdomain from host.
+     * 
+     * For example `https://luya.io/path` would return `luya.io/path`.
+     *
+     * @param string $url The url to extract
+     * @return string returns the url without protocol or www. subdomain
+     * @since 1.0.20
+     */
+    public static function cleanHost($url)
+    {
+        return str_replace(['www.', 'http://', 'https://'], '', Url::ensureHttp($url));
+    }
+    /**
+     * Return only the domain of a path.
+     * 
+     * For example `https://luya.io/path` would return `luya.io` without path informations.
+     *
+     * @param string $url The url to extract
+     * @return string Returns only the domain from the url.
+     * @since 1.0.20
+     */
+    public static function domain($url)
+    {
+        return self::cleanHost(parse_url(Url::ensureHttp($url), PHP_URL_HOST));
+    }
 }

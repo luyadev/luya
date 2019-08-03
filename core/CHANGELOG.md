@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.20 (in progress)
 
++ [#1940](https://github.com/luyadev/luya/issues/1940) Add Url helper methods `cleanHost()` and `domain()`.
 + [#]() Added new REST Helper method.
 
 ## 1.0.19 (22. July 2019)
