@@ -7,9 +7,12 @@ use yii\helpers\Json;
 use Curl\Curl;
 use luya\helpers\Url;
 use luya\helpers\ObjectHelper;
-use luya\helpers\StringHelper;
 use luya\helpers\ArrayHelper;
 use yii\web\Application;
+use yii\web\HttpException;
+use yii\base\Exception;
+use yii\base\ErrorException;
+use luya\Boot;
 
 /**
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
@@ -125,8 +128,10 @@ trait ErrorHandlerTrait
         $_line = 0;
         $_trace = [];
         $_previousException = [];
+        $_exceptionClassName = 'Unknown';
         
         if (is_object($exception)) {
+            $_exceptionClassName = get_class($exception);
             $prev = $exception->getPrevious();
             
             if (!empty($prev)) {
@@ -150,6 +155,14 @@ trait ErrorHandlerTrait
             $_line = isset($exception['line']) ? $exception['line'] : __LINE__;
         }
 
+        $exceptionName = 'Exception';
+
+        if ($exception instanceof Exception) {
+            $exceptionName = $exception->getName();
+        } elseif ($exception instanceof ErrorException) {
+            $exceptionName = $exception->getName();
+        }
+
         return [
             'message' => $_message,
             'file' => $_file,
@@ -165,8 +178,14 @@ trait ErrorHandlerTrait
             'bodyParams' => Yii::$app instanceof Application ? ArrayHelper::coverSensitiveValues(Yii::$app->request->bodyParams) : [],
             'session' => isset($_SESSION) ? ArrayHelper::coverSensitiveValues($_SESSION, $this->sensitiveKeys) : [],
             'server' => isset($_SERVER) ? ArrayHelper::coverSensitiveValues($_SERVER, $this->sensitiveKeys) : [],
-            'profiling' => Yii::getLogger()->profiling,
-            'logger' => Yii::getLogger()->messages,
+            // since 1.0.20
+            'yii_debug' => YII_DEBUG,
+            'yii_env' => YII_ENV,
+            'status_code' => $exception instanceof HttpException ? $exception->statusCode : 500,
+            'exception_name' => $exceptionName,
+            'exception_class_name' => $_exceptionClassName,
+            'php_version' => phpversion(),
+            'luya_version' => Boot::VERSION,
         ];
     }
     
@@ -180,14 +199,66 @@ trait ErrorHandlerTrait
     {
         $_trace = [];
         foreach ($exception->getTrace() as $key => $item) {
-            $_trace[$key] = [
-                'file' => isset($item['file']) ? $item['file'] : null,
-                'line' => isset($item['line']) ? $item['line'] : null,
-                'function' => isset($item['function']) ? $item['function'] : null,
-                'class' => isset($item['class']) ? $item['class'] : null,
-            ];
+            $_trace[$key] = $this->buildTraceItem($item);
         }
         
         return $_trace;
+    }
+
+    private function buildTraceItem(array $item)
+    {
+        $file = isset($item['file']) ? $item['file'] : null;
+        $line = isset($item['line']) ? $item['line'] : null;
+        $contextLine = null;
+        $preContext = [];
+        $postContext = [];
+
+        try {
+            $lineInArray = $line -1;
+            // load file from path
+            $fileInfo = file($file, FILE_IGNORE_NEW_LINES);
+            // load file if false from real path
+            if (!$fileInfo) {
+                $fileInfo = file(realpath($file), FILE_IGNORE_NEW_LINES);
+            }
+
+            if ($fileInfo && isset($fileInfo[$lineInArray])) {
+                $contextLine = $fileInfo[$lineInArray];
+            }
+
+            if ($contextLine) {
+                for ($i = 1; $i <= 6; $i++) {
+
+                    // pre context
+                    if (isset($fileInfo[$lineInArray - $i])) {
+                        $preContext[] = $fileInfo[$lineInArray - $i];
+                    }
+
+                    // post context
+                    if (isset($fileInfo[$i + $lineInArray])) {
+                        $postContext[] = $fileInfo[$i + $lineInArray];
+                    }
+                }
+
+                $preContext = array_reverse($preContext);
+            }
+        } catch (\Exception $e) {
+
+        }
+
+        unset($fileInfo);
+
+        return [
+            'file' => $file,
+            'abs_path' => realpath($file),
+            'line' => $line,
+            'context_line' => $contextLine,
+            'pre_context' => $preContext,
+            'post_context' => $postContext,
+            'function' => isset($item['function']) ? $item['function'] : null,
+            'class' => isset($item['class']) ? $item['class'] : null,
+            // currently arguments wont be transmited due to large amount of informations based on base object
+            //'args' => isset($item['args']) ? ArrayHelper::coverSensitiveValues($item['args'], $this->sensitiveKeys) : [],
+        ];
     }
 }
