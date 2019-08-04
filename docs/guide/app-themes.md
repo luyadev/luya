@@ -151,4 +151,4 @@ For more information to packages see [package guide](luya-package-dev.md).
 
 Some other examples of theme packages:
 
-+ [luya-blockcollection](https://github.com/boehsermoe/luya-blockcollection/tree/theme)
++ [luya-themecollection](https://github.com/boehsermoe/luya-themecollection)
