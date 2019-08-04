@@ -6,7 +6,6 @@ use luya\base\PackageConfig;
 use luya\Exception;
 use luya\helpers\Json;
 use Yii;
-use yii\base\Event;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 
@@ -96,11 +95,11 @@ class ThemeManager extends \yii\base\Component
      */
     protected function beforeSetup(string &$basePath)
     {
-        $event = new Event();
-        $event->data = ['basePath' => $basePath];
+        $event = new SetupEvent();
+        $event->basePath = $basePath;
         $this->trigger('setup', $event);
         
-        $basePath = $event->data['basePath'];
+        $basePath = $event->basePath;
     }
     
     /**
