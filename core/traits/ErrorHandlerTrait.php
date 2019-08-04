@@ -242,13 +242,12 @@ trait ErrorHandlerTrait
 
                 $preContext = array_reverse($preContext);
             }
+            unset($fileInfo);
         } catch (\Exception $e) {
-
+            // catch if any file load error appears
         }
 
-        unset($fileInfo);
-
-        return [
+        return array_filter([
             'file' => $file,
             'abs_path' => realpath($file),
             'line' => $line,
@@ -259,6 +258,8 @@ trait ErrorHandlerTrait
             'class' => isset($item['class']) ? $item['class'] : null,
             // currently arguments wont be transmited due to large amount of informations based on base object
             //'args' => isset($item['args']) ? ArrayHelper::coverSensitiveValues($item['args'], $this->sensitiveKeys) : [],
-        ];
+        ], function($value) {
+            return !empty($value);
+        });
     }
 }
