@@ -6,6 +6,7 @@ use luya\base\PackageConfig;
 use luya\helpers\Json;
 use Yii;
 use luya\Exception;
+use yii\base\Event;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 
@@ -66,7 +67,7 @@ class ThemeManager extends \yii\base\Component
     /**
      * Setup active theme
      */
-    public function setup()
+    final public function setup()
     {
         if ($this->getActiveTheme() instanceof Theme) {
             // Active theme already loaded
@@ -76,6 +77,8 @@ class ThemeManager extends \yii\base\Component
         $basePath = $this->getActiveThemeBasePath();
 
         try {
+            $this->beforeSetup($basePath);
+    
             $themeConfig = $this->getThemeByBasePath($basePath);
             $theme = new Theme($themeConfig);
             $this->activate($theme);
@@ -83,6 +86,18 @@ class ThemeManager extends \yii\base\Component
         } catch (InvalidArgumentException $ex) {
             Yii::error($ex->getMessage(), 'luya-theme');
         }
+    }
+    
+    /**
+     * @param string $basePath
+     */
+    protected function beforeSetup(string &$basePath)
+    {
+        $event = new Event();
+        $event->data = ['basePath' => $basePath];
+        $this->trigger('setup', $event);
+    
+        $basePath = $event->data['basePath'];
     }
     
     /**
