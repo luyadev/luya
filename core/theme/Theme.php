@@ -43,10 +43,10 @@ class Theme extends \yii\base\Theme
      */
     protected function initPathMap(ThemeConfig $themeConfig)
     {
-        $viewPath = $this->getViewPath();
-        $this->pathMap[$viewPath] = null;
-    
         $pathMap = ['@app/views', $themeConfig->getViewPath()];
+    
+        $viewPath = $this->getViewPath();
+        $this->pathMap[$viewPath] = &$pathMap;
         
         foreach ($themeConfig->getParents() as $parentConfig) {
             $pathMap[] = $parentConfig->getViewPath();
