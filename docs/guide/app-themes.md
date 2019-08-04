@@ -1,6 +1,6 @@
 # Project themes
 
-A theme can used to overwrite other views and _resources (will come late)_
+A theme can used to overwrite other views.
 
 ## Theme folder structure
 
@@ -13,7 +13,7 @@ Structure of a theme
     ├── resources
     ├── views
     │   ├── layouts
-    │       └── main.php
+    │       └── theme.php
     │   └── site
     │       └── index.php
     └── theme.json
@@ -98,6 +98,10 @@ These additional paths will be added to the end of the path map:
 @blankTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
 @moduleAlias/frontend/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
 ```
+
+## Layouts
+
+Themes will use the layout file *theme.php* as default and the cmslayout *theme.php* too. You have to select this theme layout in the page version.
 
 ## Theme manager
 
