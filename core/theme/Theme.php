@@ -65,7 +65,7 @@ class Theme extends \yii\base\Theme
         $this->pathMap['@app/views'] = $pathMap;
     }
     
-    protected $_layout = 'main';
+    protected $_layout = 'theme';
     
     public function getLayout(): string
     {
