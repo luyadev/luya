@@ -205,6 +205,12 @@ trait ErrorHandlerTrait
         return $_trace;
     }
 
+    /**
+     * Build the array trace item with file context.
+     *
+     * @param array $item
+     * @return array
+     */
     private function buildTraceItem(array $item)
     {
         $file = isset($item['file']) ? $item['file'] : null;
@@ -222,25 +228,20 @@ trait ErrorHandlerTrait
                 if (!$fileInfo) {
                     $fileInfo = file(realpath($file), FILE_IGNORE_NEW_LINES);
                 }
-
                 if ($fileInfo && isset($fileInfo[$lineInArray])) {
                     $contextLine = $fileInfo[$lineInArray];
                 }
-
                 if ($contextLine) {
                     for ($i = 1; $i <= 6; $i++) {
-
                         // pre context
                         if (isset($fileInfo[$lineInArray - $i])) {
                             $preContext[] = $fileInfo[$lineInArray - $i];
                         }
-
                         // post context
                         if (isset($fileInfo[$i + $lineInArray])) {
                             $postContext[] = $fileInfo[$i + $lineInArray];
                         }
                     }
-
                     $preContext = array_reverse($preContext);
                 }
                 unset($fileInfo);
