@@ -119,5 +119,6 @@ class UrlTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('luya.io', Url::domain('luya.io/barfoo'));
         $this->assertSame('luya.io', Url::domain('www.luya.io/barfoo'));
         $this->assertSame('luya.io', Url::domain('https://www.luya.io/barfoo'));
+        $this->assertSame('beta.luya.io', Url::domain('https://beta.luya.io'));
     }
 }
