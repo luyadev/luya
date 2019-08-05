@@ -213,38 +213,40 @@ trait ErrorHandlerTrait
         $preContext = [];
         $postContext = [];
 
-        try {
-            $lineInArray = $line -1;
-            // load file from path
-            $fileInfo = file($file, FILE_IGNORE_NEW_LINES);
-            // load file if false from real path
-            if (!$fileInfo) {
-                $fileInfo = file(realpath($file), FILE_IGNORE_NEW_LINES);
-            }
-
-            if ($fileInfo && isset($fileInfo[$lineInArray])) {
-                $contextLine = $fileInfo[$lineInArray];
-            }
-
-            if ($contextLine) {
-                for ($i = 1; $i <= 6; $i++) {
-
-                    // pre context
-                    if (isset($fileInfo[$lineInArray - $i])) {
-                        $preContext[] = $fileInfo[$lineInArray - $i];
-                    }
-
-                    // post context
-                    if (isset($fileInfo[$i + $lineInArray])) {
-                        $postContext[] = $fileInfo[$i + $lineInArray];
-                    }
+        if (!empty($file)) {
+            try {
+                $lineInArray = $line -1;
+                // load file from path
+                $fileInfo = file($file, FILE_IGNORE_NEW_LINES);
+                // load file if false from real path
+                if (!$fileInfo) {
+                    $fileInfo = file(realpath($file), FILE_IGNORE_NEW_LINES);
                 }
 
-                $preContext = array_reverse($preContext);
+                if ($fileInfo && isset($fileInfo[$lineInArray])) {
+                    $contextLine = $fileInfo[$lineInArray];
+                }
+
+                if ($contextLine) {
+                    for ($i = 1; $i <= 6; $i++) {
+
+                        // pre context
+                        if (isset($fileInfo[$lineInArray - $i])) {
+                            $preContext[] = $fileInfo[$lineInArray - $i];
+                        }
+
+                        // post context
+                        if (isset($fileInfo[$i + $lineInArray])) {
+                            $postContext[] = $fileInfo[$i + $lineInArray];
+                        }
+                    }
+
+                    $preContext = array_reverse($preContext);
+                }
+                unset($fileInfo);
+            } catch (\Exception $e) {
+                // catch if any file load error appears
             }
-            unset($fileInfo);
-        } catch (\Exception $e) {
-            // catch if any file load error appears
         }
 
         return array_filter([
