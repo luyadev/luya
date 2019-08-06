@@ -131,8 +131,7 @@ class Mail extends Component
         if ($this->_mailer === null) {
             $this->_mailer = new PHPMailer();
             $this->_mailer->CharSet = 'UTF-8';
-            $this->_mailer->From = $this->from;
-            $this->_mailer->FromName = $this->fromName;
+            $this->_mailer->setFrom($this->from, $this->fromName);
             $this->_mailer->isHTML(true);
             $this->_mailer->XMailer = ' ';
             // if sending over smtp, define the settings for the smpt server
