@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file. This projec
 ## 1.0.21
 
 + [#1942](https://github.com/luyadev/luya/issues/1942) Use phpmailers `setFrom()` method instead of `$from` and `$fromName` property.
++ [#340|admin](https://github.com/luyadev/luya-module-admin/issues/340) Allow extending the auth methods in rest behavior trait.
 
 ## 1.0.20 (5. August 2019)
 
