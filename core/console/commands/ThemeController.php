@@ -23,48 +23,18 @@ class ThemeController extends \luya\console\Command
     public $defaultAction = 'create';
     
     /**
-     * Render the json template.
+     * Create a new theme.
      *
-     * @param string $basePath
-     * @param string $themeName
-     * @return string
-     */
-    public function renderJson(string $basePath, string $themeName)
-    {
-        $themeConfig = new ThemeConfig($basePath, []);
-        $themeConfig->name = $themeName;
-    
-        if ($this->confirm('Inherit from other theme?')) {
-            $themeConfig->parentTheme = $this->prompt("Enter the base path (e.g. `@app/themes/blank`) of the parent theme:",
-                [
-                    'default' => '@app/themes/blank',
-                    'validator' => function ($input, &$error) {
-                        if (preg_match('/^[a-z]+$/', $input) === false) {
-                            $error = 'The theme name must be only letter chars!';
-                            return false;
-                        } elseif (Yii::getAlias($input, false) === false) {
-                            $error = 'The theme base path not exists!';
-                            return false;
-                        }
-                    
-                        return true;
-                    },
-                ]);
-        }
-        
-        return Json::encode($themeConfig->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    }
-    
-    /**
-     * Create a new frontend/admin module.
+     * @param string|null $themeName
      *
-     * @return number
+     * @return int
+     * @throws \yii\base\Exception
      */
-    public function actionCreate()
+    public function actionCreate(string $themeName = null)
     {
         Console::clearScreenBeforeCursor();
     
-        $themeName = $this->prompt("Enter the name (lower case) of the theme you like to generate:");
+        $themeName = $this->prompt("Enter the name (lower case) of the theme you like to generate:", ['default' => $themeName]);
         
         $newName = preg_replace("/[^a-z]/", "", strtolower($themeName));
         if ($newName !== $themeName) {
@@ -90,7 +60,7 @@ class ThemeController extends \luya\console\Command
         
         $basePath = $themeLocation . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName;
         $themeFolder = Yii::getAlias($basePath);
-        
+    
         if (file_exists($themeFolder)) {
             return $this->outputError("The folder " . $themeFolder . " exists already.");
         }
@@ -122,5 +92,38 @@ class ThemeController extends \luya\console\Command
         }
         
         return $this->outputSuccess("Theme files has been created successfully. Please run `".$_SERVER['PHP_SELF']." import` to loaded into the database.");
+    }
+    
+    /**
+     * Render the json template.
+     *
+     * @param string $basePath
+     * @param string $themeName
+     * @return string
+     */
+    private function renderJson(string $basePath, string $themeName)
+    {
+        $themeConfig = new ThemeConfig($basePath, []);
+        $themeConfig->name = $themeName;
+        
+        if ($this->confirm('Inherit from other theme?')) {
+            $themeConfig->parentTheme = $this->prompt("Enter the base path (e.g. `@app/themes/blank`) of the parent theme:",
+                [
+                    'default' => '@app/themes/blank',
+                    'validator' => function ($input, &$error) {
+                        if (preg_match('/^[a-z]+$/', $input) === false) {
+                            $error = 'The theme name must be only letter chars!';
+                            return false;
+                        } elseif (Yii::getAlias($input, false) === false) {
+                            $error = 'The theme base path not exists!';
+                            return false;
+                        }
+                        
+                        return true;
+                    },
+                ]);
+        }
+        
+        return Json::encode($themeConfig->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 }
