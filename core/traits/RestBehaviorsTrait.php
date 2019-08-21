@@ -34,7 +34,7 @@ use luya\helpers\RestHelper;
 trait RestBehaviorsTrait
 {
     /**
-     * @var boolean Whether CORS is enabled or not.
+     * @var boolean Whether CORS should be enabled or not.
      */
     public $enableCors = false;
     
@@ -81,6 +81,20 @@ trait RestBehaviorsTrait
         
         return false;
     }
+    
+    /**
+     * Return all Auth methods for Composite Auth.
+     *
+     * @return array
+     * @since 1.0.21
+     */
+    public function getCompositeAuthMethods()
+    {
+        return [
+            QueryParamAuth::class,
+            HttpBearerAuth::class,
+        ];   
+    }
 
     /**
      * Override the default {{yii\rest\Controller::behaviors()}} method.
@@ -102,12 +116,9 @@ trait RestBehaviorsTrait
         } else {
             // change to admin user auth class
             $behaviors['authenticator'] = [
-                'class' => CompositeAuth::className(),
+                'class' => CompositeAuth::class,
                 'user' => $this->getUserAuthClass(),
-                'authMethods' => [
-                    QueryParamAuth::className(),
-                    HttpBearerAuth::className(),
-                ],
+                'authMethods' => $this->getCompositeAuthMethods(),
             ];
             
             if ($this->enableCors) {
@@ -118,12 +129,9 @@ trait RestBehaviorsTrait
         if ($this->enableCors) {
             $behaviors['cors'] = Cors::class;
         }
-        
-        
-        
 
         $behaviors['contentNegotiator'] = [
-            'class' => ContentNegotiator::className(),
+            'class' => ContentNegotiator::class,
             'formats' => [
                 'application/json' => Response::FORMAT_JSON,
                 'application/xml' => Response::FORMAT_XML,
@@ -143,7 +151,7 @@ trait RestBehaviorsTrait
         
         return $behaviors;
     }
-    
+
     /**
      * Send Model errors with correct headers.
      *
