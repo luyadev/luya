@@ -48,6 +48,7 @@ trait RestBehaviorsTrait
      * ],
      * ```
      * @since 1.0.7
+     * @see {{yii\filters\ContentNegotiator::$languages}}
      */
     public $languages = [];
     
@@ -57,6 +58,16 @@ trait RestBehaviorsTrait
      * @since 1.0.7
      */
     public $jsonCruft = false;
+
+    /**
+     * @var array list of action IDs that this filter will be applied to, but auth failure will not lead to error.
+     * It may be used for actions, that are allowed for public, but return some additional data for authenticated users.
+     * Defaults to empty, meaning authentication is not optional for any action.
+     * Since version 2.0.10 action IDs can be specified as wildcards, e.g. `site/*`.
+     * @since 1.0.21
+     * @see {{yii\filters\auth\AuthMethod::$optional}}
+     */
+    public $authOptional = [];
     
     /**
      * Whether the rest controller is protected or not.
@@ -119,6 +130,7 @@ trait RestBehaviorsTrait
                 'class' => CompositeAuth::class,
                 'user' => $this->getUserAuthClass(),
                 'authMethods' => $this->getCompositeAuthMethods(),
+                'optional' => $this->authOptional,
             ];
             
             if ($this->enableCors) {
