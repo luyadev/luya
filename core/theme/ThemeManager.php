@@ -14,13 +14,14 @@ use yii\base\InvalidConfigException;
  *
  * This component manage available themes via file system and the actual display themes.
  *
- * @author Mateusz Szymański Teamwant <zzixxus@gmail.com>
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since  1.1.0
  */
 class ThemeManager extends \yii\base\Component
 {
     const APP_THEMES_BLANK = '@app/themes/blank';
+
+    const EVENT_BEFORE_SETUP = 'eventBeforeSetup';
     
     /**
      * Name of the theme which should be activated on setup.
@@ -43,7 +44,7 @@ class ThemeManager extends \yii\base\Component
      * @throws Exception
      * @throws InvalidConfigException
      */
-    protected static function loadThemeConfig(string $basePath): ThemeConfig
+    protected static function loadThemeConfig(string $basePath)
     {
         if (strpos($basePath, '@') === 0) {
             $dir = Yii::getAlias($basePath);
@@ -97,7 +98,7 @@ class ThemeManager extends \yii\base\Component
     {
         $event = new SetupEvent();
         $event->basePath = $basePath;
-        $this->trigger('setup', $event);
+        $this->trigger(self::EVENT_BEFORE_SETUP, $event);
         
         $basePath = $event->basePath;
     }
@@ -145,7 +146,7 @@ class ThemeManager extends \yii\base\Component
      *
      * @return string[]
      */
-    protected function getThemeDefinitions(): array
+    protected function getThemeDefinitions()
     {
         $themeDefinitions = [];
         

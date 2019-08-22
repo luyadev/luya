@@ -45,6 +45,8 @@ class ThemeConfig extends BaseObject implements Arrayable
         if (empty($this->name)) {
             $this->name = basename($this->_basePath);
         }
+        
+        parent::init();
     }
     
     protected $_parent;
@@ -93,7 +95,7 @@ class ThemeConfig extends BaseObject implements Arrayable
         return $this->_basePath;
     }
     
-    public function getViewPath(): string
+    public function getViewPath()
     {
         return $this->getBasePath() . '/views';
     }

@@ -3,6 +3,7 @@
 namespace luya\theme;
 
 use luya\helpers\Json;
+use luya\helpers\StringHelper;
 use Yii;
 use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
@@ -21,6 +22,8 @@ use yii\base\InvalidConfigException;
  */
 class Theme extends \yii\base\Theme
 {
+    const RESOURCES_PATH = 'resources';
+    const LAYOUTS_PATH = 'layouts';
     protected $config;
     
     public function __construct(ThemeConfig $config)
@@ -36,6 +39,8 @@ class Theme extends \yii\base\Theme
         }
         
         $this->initPathMap($this->config);
+        
+        parent::init();
     }
     
     /**
@@ -67,19 +72,19 @@ class Theme extends \yii\base\Theme
     
     protected $_layout = 'theme';
     
-    public function getLayout(): string
+    public function getLayout()
     {
         return $this->_layout;
     }
     
-    public function getViewPath(): string
+    public function getViewPath()
     {
         return $this->config->getViewPath();
     }
     
-    public function getLayoutPath(): string
+    public function getLayoutPath()
     {
-        return $this->viewPath . '/layouts';
+        return $this->viewPath . '/' . self::LAYOUTS_PATH;
     }
     
     public function getLayoutFile()
@@ -89,7 +94,7 @@ class Theme extends \yii\base\Theme
     
     public function getResourcePath()
     {
-        return $this->basePath . '/resources';
+        return $this->basePath . '/' . self::RESOURCES_PATH;
     }
     
     public function getConfig()
@@ -102,7 +107,7 @@ class Theme extends \yii\base\Theme
      *
      * @return array
      */
-    protected function getAdditionalPathMap(ThemeConfig $themeConfig): array
+    protected function getAdditionalPathMap(ThemeConfig $themeConfig)
     {
         $pathMap = $themeConfig->pathMap;
         
