@@ -2,6 +2,8 @@
 
 namespace luya\web;
 
+use Yii;
+use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use luya\base\AdminModuleInterface;
 use luya\TagParser;
@@ -134,7 +136,11 @@ class Bootstrap extends BaseBootstrap
                 $this->_urlRules = array_merge($app->getModule('admin')->urlRules, $this->_urlRules);
             } else {
                 // Frontend context
-                $app->themeManager->setup();
+                try {
+                    $app->themeManager->setup();
+                } catch (InvalidConfigException $ex) {
+                    Yii::error($ex->getMessage(), 'luya-theme');
+                }
             }
         }
         

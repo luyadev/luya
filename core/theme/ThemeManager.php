@@ -70,6 +70,10 @@ class ThemeManager extends \yii\base\Component
     
     /**
      * Setup active theme
+     *
+     * @throws Exception
+     * @throws InvalidConfigException
+     * @throws \yii\db\Exception
      */
     final public function setup()
     {
@@ -80,15 +84,11 @@ class ThemeManager extends \yii\base\Component
         
         $basePath = $this->getActiveThemeBasePath();
         
-        try {
-            $this->beforeSetup($basePath);
-            
-            $themeConfig = $this->getThemeByBasePath($basePath);
-            $theme = new Theme($themeConfig);
-            $this->activate($theme);
-        } catch (InvalidArgumentException $ex) {
-            Yii::error($ex->getMessage(), 'luya-theme');
-        }
+        $this->beforeSetup($basePath);
+        
+        $themeConfig = $this->getThemeByBasePath($basePath);
+        $theme = new Theme($themeConfig);
+        $this->activate($theme);
     }
     
     /**
@@ -164,6 +164,13 @@ class ThemeManager extends \yii\base\Component
         return $themeDefinitions;
     }
     
+    /**
+     * @param $basePath
+     *
+     * @return ThemeConfig
+     * @throws Exception
+     * @throws InvalidConfigException
+     */
     public function getThemeByBasePath($basePath)
     {
         $themes = $this->getThemes();
