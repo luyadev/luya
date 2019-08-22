@@ -9,6 +9,7 @@ class InflectorHelperTest extends \luyatests\LuyaWebTestCase
 {
     public function testSlug()
     {
+        $this->assertSame('www-luya-io', Inflector::slug(Inflector::camel2words('www.luya.io')));
         // testing with transliteration and with lowercase transformation
         $this->assertEquals('zhe-shi-luya', Inflector::slug('這是 LUYA ', '-', true, true));
         // testing with transliteration and without lowercase transformation

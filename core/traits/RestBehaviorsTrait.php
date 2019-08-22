@@ -10,7 +10,6 @@ use yii\filters\auth\HttpBearerAuth;
 use yii\filters\ContentNegotiator;
 use yii\filters\Cors;
 use yii\base\Model;
-use yii\base\InvalidParamException;
 use luya\rest\UserBehaviorInterface;
 use luya\web\filters\JsonCruftFilter;
 use luya\helpers\RestHelper;
@@ -35,7 +34,7 @@ use luya\helpers\RestHelper;
 trait RestBehaviorsTrait
 {
     /**
-     * @var boolean Whether CORS is enabled or not.
+     * @var boolean Whether CORS should be enabled or not.
      */
     public $enableCors = false;
     
@@ -49,6 +48,7 @@ trait RestBehaviorsTrait
      * ],
      * ```
      * @since 1.0.7
+     * @see {{yii\filters\ContentNegotiator::$languages}}
      */
     public $languages = [];
     
@@ -58,6 +58,16 @@ trait RestBehaviorsTrait
      * @since 1.0.7
      */
     public $jsonCruft = false;
+
+    /**
+     * @var array list of action IDs that this filter will be applied to, but auth failure will not lead to error.
+     * It may be used for actions, that are allowed for public, but return some additional data for authenticated users.
+     * Defaults to empty, meaning authentication is not optional for any action.
+     * Since version 2.0.10 action IDs can be specified as wildcards, e.g. `site/*`.
+     * @since 1.0.21
+     * @see {{yii\filters\auth\AuthMethod::$optional}}
+     */
+    public $authOptional = [];
     
     /**
      * Whether the rest controller is protected or not.
@@ -82,6 +92,20 @@ trait RestBehaviorsTrait
         
         return false;
     }
+    
+    /**
+     * Return all Auth methods for Composite Auth.
+     *
+     * @return array
+     * @since 1.0.21
+     */
+    public function getCompositeAuthMethods()
+    {
+        return [
+            QueryParamAuth::class,
+            HttpBearerAuth::class,
+        ];   
+    }
 
     /**
      * Override the default {{yii\rest\Controller::behaviors()}} method.
@@ -103,12 +127,10 @@ trait RestBehaviorsTrait
         } else {
             // change to admin user auth class
             $behaviors['authenticator'] = [
-                'class' => CompositeAuth::className(),
+                'class' => CompositeAuth::class,
                 'user' => $this->getUserAuthClass(),
-                'authMethods' => [
-                    QueryParamAuth::className(),
-                    HttpBearerAuth::className(),
-                ],
+                'authMethods' => $this->getCompositeAuthMethods(),
+                'optional' => $this->authOptional,
             ];
             
             if ($this->enableCors) {
@@ -119,12 +141,9 @@ trait RestBehaviorsTrait
         if ($this->enableCors) {
             $behaviors['cors'] = Cors::class;
         }
-        
-        
-        
 
         $behaviors['contentNegotiator'] = [
-            'class' => ContentNegotiator::className(),
+            'class' => ContentNegotiator::class,
             'formats' => [
                 'application/json' => Response::FORMAT_JSON,
                 'application/xml' => Response::FORMAT_XML,
@@ -144,7 +163,7 @@ trait RestBehaviorsTrait
         
         return $behaviors;
     }
-    
+
     /**
      * Send Model errors with correct headers.
      *

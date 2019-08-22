@@ -22,8 +22,6 @@ class ErrorHandlerTest extends LuyaWebTestCase
         $handler->renderException($exception);
         ob_end_clean();
         
-        
-        
         $this->assertContains('Whoops', Yii::$app->response->data);
     }
     
@@ -45,21 +43,18 @@ class ErrorHandlerTest extends LuyaWebTestCase
         $this->assertNull($handler->lastTransferCall);
     }
     
-    /**
-     * @runInSeparateProcess
-     */
     public function testTransferWithTransferableException()
     {
-        Yii::$app->response->data = null;
         $handler = new ErrorHandler();
-        $handler->transferException = true;
-        
         $exception = new Exception("Transfer Me Not");
-        ob_start();
-        $handler->renderException($exception);
-        ob_end_clean();
-        
-        // This exception will call a not resolvable url
-        $this->assertNotNull($handler->lastTransferCall);
+        $arr = $handler->getExceptionArray($exception);
+
+        $this->assertArrayHasKey('exception_name', $arr);
+        $this->assertArrayHasKey('php_version', $arr);
+        $this->assertArrayHasKey('luya_version', $arr);
+        $this->assertArrayHasKey('status_code', $arr);
+        $this->assertArrayHasKey('yii_env', $arr);
+        $this->assertArrayHasKey('yii_debug', $arr);
+        $this->assertArrayHasKey('exception_class_name', $arr);
     }
 }
