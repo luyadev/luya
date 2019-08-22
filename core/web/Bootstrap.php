@@ -136,11 +136,7 @@ class Bootstrap extends BaseBootstrap
                 $this->_urlRules = array_merge($app->getModule('admin')->urlRules, $this->_urlRules);
             } else {
                 // Frontend context
-                try {
-                    $app->themeManager->setup();
-                } catch (InvalidConfigException $ex) {
-                    Yii::error($ex->getMessage(), 'luya-theme');
-                }
+                $app->themeManager->setup();
             }
         }
         

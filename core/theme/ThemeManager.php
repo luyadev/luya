@@ -85,7 +85,7 @@ class ThemeManager extends \yii\base\Component
         $basePath = $this->getActiveThemeBasePath();
         
         $this->beforeSetup($basePath);
-        
+    
         $themeConfig = $this->getThemeByBasePath($basePath);
         $theme = new Theme($themeConfig);
         $this->activate($theme);

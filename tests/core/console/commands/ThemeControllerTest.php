@@ -37,9 +37,4 @@ JSON;
 
         $this->assertJsonStringEqualsJsonString($expectedJson, file_get_contents($themePath . DIRECTORY_SEPARATOR . 'theme.json'));
     }
-    
-    public function testRenderJson()
-    {
-    
-    }
 }
