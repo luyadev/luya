@@ -57,7 +57,7 @@ class ModuleTest extends LuyaWebTestCase
     
     public function testThemeLayoutPath()
     {
-        Yii::$app->themeManager->activeThemeName = '@app/themes/blank';
+        Yii::$app->themeManager->activeThemeName = '@app/themes/moduleTest';
         Yii::$app->themeManager->setup();
         
         Yii::$app->getModule('unitmodule')->useAppLayoutPath = false;
@@ -67,12 +67,12 @@ class ModuleTest extends LuyaWebTestCase
     
     public function testThemeUseAppLayoutPath()
     {
-        Yii::$app->themeManager->activeThemeName = '@app/themes/blank';
+        Yii::$app->themeManager->activeThemeName = '@app/themes/moduleTest';
         Yii::$app->themeManager->setup();
         
         Yii::$app->getModule('unitmodule')->useAppLayoutPath = true;
         $path = Yii::$app->getModule('unitmodule')->getLayoutPath();
-        $this->assertContains('/themes/blank/views/layouts', $path);
+        $this->assertContains('/themes/moduleTest/views/layouts', $path);
     }
     
     public function testGetControllerFiles()
