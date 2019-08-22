@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.20 (in progress)
+## 1.0.21
 
-+ [#]() Added new REST Helper method.
++ [#1942](https://github.com/luyadev/luya/issues/1942) Use phpmailers `setFrom()` method instead of `$from` and `$fromName` property.
++ [#340|admin](https://github.com/luyadev/luya-module-admin/issues/340) Allow extending the auth methods in rest behavior trait.
+
+## 1.0.20 (5. August 2019)
+
++ [#1940](https://github.com/luyadev/luya/issues/1940) Add Url helper methods `cleanHost()` and `domain()`.
++ [#1939](https://github.com/luyadev/luya/issues/1939) Added new informations to error transfer to api.
++ [#1941](https://github.com/luyadev/luya/issues/1941) Added new REST Helper method to send errors from a model or an array.
 
 ## 1.0.19 (22. July 2019)
 

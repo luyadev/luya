@@ -104,4 +104,21 @@ class UrlTest extends \luyatests\LuyaWebTestCase
         
         $this->assertEquals('http://luya.io', Url::ensureHttp('http://luya.io', true)); // @TODO ensure https, expected: https://luya.io
     }
+
+    public function testCleanHost()
+    {
+        $this->assertSame('luya.io/barfoo', Url::cleanHost('https://luya.io/barfoo'));
+        $this->assertSame('luya.io/barfoo', Url::cleanHost('luya.io/barfoo'));
+        $this->assertSame('luya.io/barfoo', Url::cleanHost('www.luya.io/barfoo'));
+        $this->assertSame('luya.io/barfoo', Url::cleanHost('https://www.luya.io/barfoo'));
+    }
+
+    public function testDomain()
+    {
+        $this->assertSame('luya.io', Url::domain('https://luya.io/barfoo'));
+        $this->assertSame('luya.io', Url::domain('luya.io/barfoo'));
+        $this->assertSame('luya.io', Url::domain('www.luya.io/barfoo'));
+        $this->assertSame('luya.io', Url::domain('https://www.luya.io/barfoo'));
+        $this->assertSame('beta.luya.io', Url::domain('https://beta.luya.io'));
+    }
 }
