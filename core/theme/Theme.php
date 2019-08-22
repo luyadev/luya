@@ -22,8 +22,8 @@ use yii\base\InvalidConfigException;
  */
 class Theme extends \yii\base\Theme
 {
-    const RESOURCES_PATH = 'resources';
     const LAYOUTS_PATH = 'layouts';
+    
     protected $config;
     
     public function __construct(ThemeConfig $config)
@@ -85,21 +85,6 @@ class Theme extends \yii\base\Theme
     public function getLayoutPath()
     {
         return $this->viewPath . '/' . self::LAYOUTS_PATH;
-    }
-    
-    public function getLayoutFile()
-    {
-        return $this->layoutPath . '/' . $this->layout . '.php';
-    }
-    
-    public function getResourcePath()
-    {
-        return $this->basePath . '/' . self::RESOURCES_PATH;
-    }
-    
-    public function getConfig()
-    {
-        return $this->config;
     }
     
     /**
