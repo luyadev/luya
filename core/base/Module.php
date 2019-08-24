@@ -213,8 +213,6 @@ abstract class Module extends \yii\base\Module
             $this->layout = $this->theme->layout;
     
             if ($this->useAppLayoutPath) {
-                // @todo Layout inheritance
-//                $this->theme->applyTo()
                 $this->setLayoutPath($this->theme->layoutPath);
             }
             
