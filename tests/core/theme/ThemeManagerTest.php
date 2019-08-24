@@ -28,6 +28,9 @@ class ThemeManagerTest extends LuyaWebTestCase
         $this->assertInstanceOf(Theme::class, $themeManager->getActiveTheme());
     }
     
+    /**
+     * @runInSeparateProcess Must be isolated from other tests to check the path aliases.
+     */
     public function testSetupWithoutActiveTheme()
     {
         $themeManager = new ThemeManager();
@@ -35,9 +38,7 @@ class ThemeManagerTest extends LuyaWebTestCase
     
         $this->assertNull(Yii::$app->view->theme, 'Theme must be null set.');
         $this->assertNull($themeManager->getActiveTheme());
-        
-        // Cannot tested because aliases are not reset between the tests.
-        // $this->assertFalse(Yii::getAlias('@activeTheme', false), 'Alias path must not set.');
+        $this->assertFalse(Yii::getAlias('@activeTheme', false), 'Alias path must not set.');
     }
     
     public function testRenderLayoutInheritance()
