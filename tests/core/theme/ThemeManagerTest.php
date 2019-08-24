@@ -2,6 +2,7 @@
 
 namespace luyatests\core\theme;
 
+use luya\theme\Theme;
 use luya\web\Controller;
 use Yii;
 use luya\theme\ThemeManager;
@@ -13,6 +14,32 @@ use luyatests\LuyaWebTestCase;
  */
 class ThemeManagerTest extends LuyaWebTestCase
 {
+    public function testSetup()
+    {
+        $themeManager = new ThemeManager();
+        $themeManager->activeThemeName = '@app/themes/blank';
+        $themeManager->setup();
+        
+        $this->assertNotNull(Yii::$app->view->theme, 'Theme must be set.');
+        $expectedPath = realpath(Yii::getAlias('@luyatests/data/themes/blank'));
+        $this->assertEquals($expectedPath, Yii::$app->view->theme->basePath, 'Theme base path not correct.');
+        $this->assertEquals($expectedPath, Yii::getAlias('@activeTheme'), 'Alias path is not correct.');
+    
+        $this->assertInstanceOf(Theme::class, $themeManager->getActiveTheme());
+    }
+    
+    public function testSetupWithoutActiveTheme()
+    {
+        $themeManager = new ThemeManager();
+        $themeManager->setup();
+    
+        $this->assertNull(Yii::$app->view->theme, 'Theme must be null set.');
+        $this->assertNull($themeManager->getActiveTheme());
+        
+        // Cannot tested because aliases are not reset between the tests.
+        // $this->assertFalse(Yii::getAlias('@activeTheme', false), 'Alias path must not set.');
+    }
+    
     public function testRenderLayoutInheritance()
     {
         $themeManager = new ThemeManager();

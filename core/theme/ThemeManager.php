@@ -19,8 +19,6 @@ use yii\base\InvalidConfigException;
  */
 class ThemeManager extends \yii\base\Component
 {
-    const APP_THEMES_BLANK = '@app/themes/blank';
-
     const EVENT_BEFORE_SETUP = 'eventBeforeSetup';
     
     /**
@@ -83,12 +81,13 @@ class ThemeManager extends \yii\base\Component
         }
         
         $basePath = $this->getActiveThemeBasePath();
+        if ($basePath) {
+            $this->beforeSetup($basePath);
         
-        $this->beforeSetup($basePath);
-    
-        $themeConfig = $this->getThemeByBasePath($basePath);
-        $theme = new Theme($themeConfig);
-        $this->activate($theme);
+            $themeConfig = $this->getThemeByBasePath($basePath);
+            $theme = new Theme($themeConfig);
+            $this->activate($theme);
+        }
     }
     
     /**
@@ -115,7 +114,7 @@ class ThemeManager extends \yii\base\Component
             return $this->activeThemeName;
         }
         
-        return self::APP_THEMES_BLANK;
+        return false;
     }
     
     /**
