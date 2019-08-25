@@ -87,6 +87,11 @@ class Theme extends \yii\base\Theme
         return $this->viewPath . '/' . self::LAYOUTS_PATH;
     }
     
+    public function getConfig()
+    {
+        return $this->config;
+    }
+    
     /**
      * @param ThemeConfig $themeConfig
      *
