@@ -2,6 +2,7 @@
 
 namespace luya\base;
 
+use luya\theme\Theme;
 use Yii;
 use yii\base\InvalidConfigException;
 use luya\console\interfaces\ImportControllerInterface;
@@ -177,7 +178,7 @@ abstract class Module extends \yii\base\Module
     public $moduleLayout = 'layout';
 
     /**
-     * @var string The default folder of theme load
+     * @var Theme The default folder of theme load
      */
     public $theme;
 
@@ -193,6 +194,12 @@ abstract class Module extends \yii\base\Module
                 throw new InvalidConfigException(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
+    
+        $this->theme = Yii::$app->themeManager->getActiveTheme();
+    
+        if ($this->theme) {
+            $this->layout = $this->theme->layout;
+        }
 
         static::onLoad();
     }
@@ -207,11 +214,7 @@ abstract class Module extends \yii\base\Module
      */
     public function getLayoutPath()
     {
-        $this->theme = Yii::$app->themeManager->getActiveTheme();
-    
         if ($this->theme){
-            $this->layout = $this->theme->layout;
-    
             if ($this->useAppLayoutPath) {
                 $this->setLayoutPath($this->theme->layoutPath);
             }
