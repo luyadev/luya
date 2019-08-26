@@ -17,18 +17,17 @@ use yii\base\InvalidConfigException;
  * @property-read string $layout
  * @property-read string $viewPath
  * @property-read string $layoutPath
- * @property-read string $layoutFile
  * @property-read string $resourcePath
  */
 class Theme extends \yii\base\Theme
 {
     const LAYOUTS_PATH = 'layouts';
     
-    protected $config;
+    private $_config;
     
     public function __construct(ThemeConfig $config)
     {
-        $this->config = $config;
+        $this->_config = $config;
         parent::__construct(['basePath' => $config->getBasePath()]);
     }
     
@@ -38,7 +37,7 @@ class Theme extends \yii\base\Theme
             throw new InvalidConfigException("Property base path must be set");
         }
         
-        $this->initPathMap($this->config);
+        $this->initPathMap($this->_config);
         
         parent::init();
     }
@@ -79,7 +78,7 @@ class Theme extends \yii\base\Theme
     
     public function getViewPath()
     {
-        return $this->config->getViewPath();
+        return $this->getConfig()->getViewPath();
     }
     
     public function getLayoutPath()
@@ -89,7 +88,7 @@ class Theme extends \yii\base\Theme
     
     public function getConfig()
     {
-        return $this->config;
+        return $this->_config;
     }
     
     /**

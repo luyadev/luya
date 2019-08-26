@@ -59,20 +59,30 @@ class ModuleTest extends LuyaWebTestCase
     {
         Yii::$app->themeManager->activeThemeName = '@app/themes/moduleTest';
         Yii::$app->themeManager->setup();
+    
+        /** @var \luya\base\Module $module */
+        $module = Yii::$app->getModule('unitmodule');
+        $module->init();
         
-        Yii::$app->getModule('unitmodule')->useAppLayoutPath = false;
-        $path = Yii::$app->getModule('unitmodule')->getLayoutPath();
-        $this->assertContains('/modules/unitmodule/views/layouts', $path);
+        $this->assertNotNull($module->theme);
+    
+        $module->useAppLayoutPath = false;
+        $this->assertContains('/modules/unitmodule/views/layouts', $module->getLayoutPath());
     }
     
     public function testThemeUseAppLayoutPath()
     {
         Yii::$app->themeManager->activeThemeName = '@app/themes/moduleTest';
         Yii::$app->themeManager->setup();
-        
-        Yii::$app->getModule('unitmodule')->useAppLayoutPath = true;
-        $path = Yii::$app->getModule('unitmodule')->getLayoutPath();
-        $this->assertContains('/views/unitmodule/layouts', $path);
+    
+        /** @var \luya\base\Module $module */
+        $module = Yii::$app->getModule('unitmodule');
+        $module->init();
+    
+        $this->assertNotNull($module->theme);
+    
+        $module->useAppLayoutPath = true;
+        $this->assertContains('/themes/moduleTest/views/layouts', $module->getLayoutPath());
     }
     
     public function testGetControllerFiles()
