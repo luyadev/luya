@@ -117,4 +117,15 @@ return [
 ];
 ```
 
-This will set value to `0` if `null` value recieves the API.
+This will set value to `0` if `null` value recieves the API. Or change the initValue to 0 when configure the select plugin:
+
+```php
+return [
+    'user_id' => [
+        'selectArray',
+        'data' => [1 => 'John Doe', 2 => 'Jane Doe']],
+        'initValue' => 0,
+];
+```
+
+Assuming the user_id validation rule requires an integer value.
