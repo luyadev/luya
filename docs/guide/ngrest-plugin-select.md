@@ -84,7 +84,7 @@ In order to generate a custom label field you can also pass a closure function:
 }
 ```
 
-> **Attention** Please keep in mind the plugin will override the default values from the database to display the rest api data.
+> **Attention** Please keep in mind this plugin will override the default values from the database to display the rest api data. To prevent such a behavior use {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} instead.
 > 
 > ```php
 > public function getCustomer()
@@ -93,7 +93,7 @@ In order to generate a custom label field you can also pass a closure function:
 > }
 > ```
 > 
-> The above example **will not work** if the customer_id field is already observed from the `selectModel` plugin. You can always access the old data (before the after find event) like this:
+> The above example **will not work** if the customer_id field as the value is already observed from the `selectModel` plugin. You can always access the old data (before the after find event) like this:
 > 
 > ```php
 > public function getOriginalCustomerId()
