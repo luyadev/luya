@@ -106,3 +106,15 @@ In order to generate a custom label field you can also pass a closure function:
 >     return $this->hasOne(Customer::class, ['id' => 'originalCustomerId']);
 > }
 > ```
+
+## Handling `null` empty values
+
+By default a **no selection** or a **reset of a currently selected** item will assign the value `null` to this field as defined in {{luya\admin\ngrest\plugins\Select::$initValue}}. This might make problem with handling empty [Yii validation rule inputs](https://www.yiiframework.com/doc/guide/2.0/en/input-validation#handling-empty-inputs) as `null` wont be threated. Therfore you could change initValue to `0` or change the validation rules to have a default value on empty:
+
+```php
+return [
+    ['user_id', 'default', 'value' => 0],
+];
+```
+
+This will set value to `0` if `null` value recieves the API.
