@@ -72,7 +72,7 @@ class ModuleTest extends LuyaWebTestCase
         
         Yii::$app->getModule('unitmodule')->useAppLayoutPath = true;
         $path = Yii::$app->getModule('unitmodule')->getLayoutPath();
-        $this->assertContains('/themes/moduleTest/views/layouts', $path);
+        $this->assertContains('/views/unitmodule/layouts', $path);
     }
     
     public function testGetControllerFiles()
