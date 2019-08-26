@@ -123,8 +123,9 @@ This will set value to `0` if `null` value recieves the API. Or change the initV
 return [
     'user_id' => [
         'selectArray',
-        'data' => [1 => 'John Doe', 2 => 'Jane Doe']],
+        'data' => [1 => 'John Doe', 2 => 'Jane Doe'],
         'initValue' => 0,
+    ]
 ];
 ```
 
