@@ -4,7 +4,13 @@
 
 The LUYA admin provides a basic JWT generator including an out of the box authentification system which can proxy requests trough LUYA Admin Api User and those permission system.
 
-## Implementation
+## Prerequisite
+
++ A custom (application) admin module is required to setup JWT ([[app-admin-module.md]]).
++ Understand Api Users which are explaind in Headless Guide Section ([[concept-headless.md]]).
++ 
+
+## How it works
 
 As all LUYA admin APIs requerd an authentification are proxied trough LUYA API Users (Read about [[concept.headless.md]]).
 
@@ -26,16 +32,52 @@ The image shows the above descriped cycle.
 
 ![luya-proxy](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/jwt-apiuser-proxy.png "JWT with Admin as Proxy")
 
+## Setup
 
-## Permissions
+[TBD]
 
-A few principals regarding permissions:
++ Setup admin module with XYZ properties
++ Admin module with user model implemeting {{}}  Interface.
++ Generate Action for Login (generate token) and signup (if needed).
++ Setup the Api User and granted needed permissions (none if not shareable should be selected).
 
-+ Unless an action is masked as `authOptional` **every action requires authentification**.
-+ If the group of the API user is **no permissions** only your custom actions are accessible.
-+ When accessing NgRest API actions like update, create, list or view (detail) and permission is granted the actions are logged with the configured ApiUser.
+The User which contains user data:
 
-## Example
+```php
+
+class User extends \luya\admin\ngrest\base\NgRestModel implements luya\admin\base\JwtIdentityInterface
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%user}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-user';
+    }
+
+    // ....... other ngrest models specific content ........... //
+
+    /* JwtIdentityInterface */
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public static function loginByJwtToken(\Lcobucci\JWT\Token $token)
+    {
+        return self::findOne(['jwtToken' => $token->__toString()]);
+    }
+}
+```
 
 An NgRest Api with additonal login, signup and me actions.
 
@@ -111,3 +153,12 @@ class UserController extends \luya\admin\ngrest\base\Api
     }
 }
 ```
+
+## Permissions
+
+A few principals regarding permissions:
+
++ Unless an action is masked as {{luya\traits\RestBehaviorsTrait::$authOptional}} **every action requires authentification**.
++ If the group of the defined {{luya\admin\Module::$jwtApiUserEmail}} API user has **no permissions**, only your custom actions are accessible.
++ When accessing NgRest API actions like update, create, list or view (detail) and permission is granted the actions are logged with the configured ApiUser.
++ As permission is proxied trough Api Users, a valid Api User token could access those informations as well.
