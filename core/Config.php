@@ -61,7 +61,7 @@ use luya\helpers\ArrayHelper;
  * ```
  * 
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.10
+ * @since 1.0.21
  */
 class Config
 {
@@ -81,6 +81,13 @@ class Config
 
     const RUNTIME_WEB = 2;
     
+    /**
+     * Constructor
+     *
+     * @param string $id
+     * @param string $basePath
+     * @param array $applicationConfig
+     */
     public function __construct($id, $basePath, array $applicationConfig = [])
     {
         $applicationConfig['id'] = $id;
@@ -90,21 +97,21 @@ class Config
     }
 
     /**
-     * Undocumented function
+     * register application level config
      *
-     * @param [type] $config
+     * @param array $config The array to configure
      * @return ConfigDefinition
      */
-    public function application($config)
+    public function application(array $config)
     {
         return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_APPLICATIONS, md5(serialize($config)), $config));
     }
 
     /**
-     * Undocumented function
+     * Register a module.
      *
-     * @param [type] $id
-     * @param [type] $config
+     * @param string $id The module identifier.
+     * @param string|array $config The configuration for the given module. If a string is given this will be taken as `class` property.
      * @return ConfigDefinition
      */
     public function module($id, $config)
@@ -113,11 +120,11 @@ class Config
     }
 
     /**
-     * Undocumented function
+     * Register a component
      *
-     * @param [type] $id
-     * @param [type] $config
-     * @param [type] $runtime
+     * @param string $id The id of the component
+     * @param string|array $config The configuration for the given module. If a string is given this will be taken as `class` property.
+     * @param string $runtime The runtime for the component: all, web or console
      * @return ConfigDefinition
      */
     public function component($id, $config, $runtime = self::RUNTIME_ALL)
@@ -126,10 +133,10 @@ class Config
     }
 
     /**
-     * Undocumented function
+     * Register a web runtime component.
      *
-     * @param [type] $id
-     * @param [type] $config
+     * @param string $id The id of the component
+     * @param string|array $config The configuration for the given module. If a string is given this will be taken as `class` property.
      * @return ConfigDefinition
      */
     public function webComponent($id, $config)
@@ -138,10 +145,10 @@ class Config
     }
 
     /**
-     * Undocumented function
+     * Register a console runtime component.
      *
-     * @param [type] $id
-     * @param [type] $config
+     * @param string $id The id of the component
+     * @param string|array $config The configuration for the given module. If a string is given this will be taken as `class` property.
      * @return ConfigDefinition
      */
     public function consoleComponent($id, $config)
@@ -152,7 +159,7 @@ class Config
     private $_definitions = [];
 
     /**
-     * Undocumented function
+     * Add a defintion into the defintions bag.
      *
      * @param ConfigDefinition $definition
      * @return ConfigDefinition
@@ -180,11 +187,24 @@ class Config
         return $this->_isCliRuntime;
     }
 
+    /**
+     * Setter method for runtime.
+     * 
+     * > This method is mainly used for unit testing.
+     *
+     * @param boolean $value
+     */
     public function setCliRuntime($value)
     {
         $this->_isCliRuntime = $value;
     }
 
+    /**
+     * Export the given configuration as array for certain envs.
+     *
+     * @param array $envs A list of environments to export. if nothing is given all enviroments will be returned.
+     * @return array The configuration array
+     */
     public function toArray(array $envs = [])
     {
         $config = [];
@@ -208,6 +228,12 @@ class Config
         return $config;
     }
 
+    /**
+     * Append a given defintion int othe config
+     *
+     * @param array $config
+     * @param ConfigDefinition $definition
+     */
     private function appendConfig(&$config, ConfigDefinition $definition)
     {
         switch ($definition->getGroup()) {
@@ -226,6 +252,13 @@ class Config
         }
     }
 
+    /**
+     * Add a array key based component defintion.
+     *
+     * @param array $config
+     * @param ConfigDefinition $definition
+     * @param string $section
+     */
     private function handleKeyBaseMerge(&$config, ConfigDefinition $definition, $section)
     {
         if (!array_key_exists($section, $config)) {

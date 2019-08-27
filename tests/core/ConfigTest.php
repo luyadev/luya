@@ -21,6 +21,8 @@ class ConfigTest extends LuyaWebTestCase
         $config->module('admin', 'luya\admin\Module');
         $config->module('cms', ['class' => 'luya\cms\frontend\Module']);
 
+        $this->assertTrue($config->isCliRuntime());
+
         $this->assertSame([
             'defaultRoute' => 'cms',
             'id' => 'id',
@@ -129,5 +131,24 @@ class ConfigTest extends LuyaWebTestCase
                 ]
             ]
         ], $config->toArray(['customname', Config::ENV_LOCAL]));
+    }
+
+    public function testSwitchOfRuntimeForExistingComponent()
+    {
+        $config = new Config('switch', 'basePath');
+        $config->setCliRuntime(true);
+
+        $config->component('test', ['web' => true])->webRuntime();
+        $config->component('test', ['console' => true])->consoleRuntime();
+
+        $this->assertSame([
+            'id' => 'switch',
+            'basePath' => 'basePath',
+            'components' => [
+                'test' => [
+                    'console' => true
+                ]
+            ]
+        ], $config->toArray());
     }
 }
