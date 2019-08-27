@@ -122,4 +122,21 @@ class ThemeManagerTest extends LuyaWebTestCase
         $themeManager = new ThemeManager();
         $themeManager->getThemeByBasePath('@theme/not/exists');
     }
+    
+    /**
+     * @expectedException \luya\Exception
+     * @expectedExceptionMessageRegExp #^Theme directory not exists or readable: [\w/]+/themes/not-readable$#
+     */
+    public function testNotReadableThemeDir()
+    {
+        $themeManager = new ThemeManager();
+        // only writeable dir
+        mkdir(Yii::getAlias('@app/themes/not-readable'), 0200);
+        
+        try {
+            $themeManager->getThemes();
+        } finally {
+            rmdir(Yii::getAlias('@app/themes/not-readable'));
+        }
+    }
 }
