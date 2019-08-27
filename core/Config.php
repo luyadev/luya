@@ -4,65 +4,71 @@ namespace luya;
 
 use luya\helpers\ArrayHelper;
 
+use function Opis\Closure\serialize;
+
 /**
  * Configuration array Helper.
  * 
- * The {{luya\Config}} allowy you to create the configuration for different hosts and between web and console config.
+ * The {{luya\Config}} allows you to create the configuration for different hosts and difference between web and console config.
  * 
  * ```php
- * // base config which is the same for all envs, console and web
- * Config::base(['id' => 'myapp', 'basePath' => dirname(__DIR__)]);
- * ```
+ * $config = new Config('myapp', dirname(__DIR__), [
+ *     'siteTitle' => 'My LUYA Project',
+ *     'defaultRoute' => 'cms',
+ *     // other application level configurations
+ * ]);
  * 
- * Register modules:
+ * // define global components which works either for console or web runtime
  * 
- * ```php
- * Config::module('admin', ['class' => 'luya\admin\Module', 'secureLogin' => false]);
- * Config::module('cms', 'luya\cms\frontend\Module'); // Same as: ['class' => 'luya\cms\frontend\Module']
- * ```
+ * $config->component('mail', [
+ *     'host' => 'xyz',
+ *     'from' => 'from@luya.io',
+ * ]);
  * 
- * Setup components based on the env:
- * 
- * ```php
- * // prod database
- * Config::component('db', [
+ * $config->component('db', [
  *     'class' => 'yii\db\Connection',
  *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
  *     'username' => 'foo',
  *     'password' => 'bar',
- * ], Config::ENV_PROD);
+ * ])->env('martin');
  * 
- * // local database
- * Config::component('db', [
- *     'class' => 'yii\db\Connection',
- *     'dsn' => 'mysql:host=localhost;dbname=local_db',
- *     'username' => 'foo',
- *     'password' => 'bar',
- * ], Config::ENV_LOCAL);
- * ```
  * 
- * Switch between console and web application:
  * 
- * ```php
- * Config::web([
- *     'components' => [
- *         'request' => [
- *             'luya\web\Request' => [
- *                 'cookieValidationKey' => '123123123123123123123',
- *             ]
- *         ]
- *     ]
+ * // define components which are only for web or console runtime:
+ * 
+ * $config->webComponent('request', [
+ *     'cookieValidationKey' => 'xyz',
  * ]);
- * ```
  * 
- * Configurations from {{luya\Config::web()}} and {{luya\Config::console()}} will override predefined configurations
- * from {{luya\Config::base()}}.
+ * // which is equals to, but the above is better to read and structure in the config file
+ * 
+ * $config->component('request', [
+ *     'cookieValidationKey' => 'xyz',
+ * ])->webRuntime();
+ * 
+ * // adding modules
+ * 
+ * $config->module('admin', [
+ *     'class' => 'luya\admin\Module',
+ *     'secureLogin' => true,
+ * ]);
+ * 
+ * $config->module('cms', 'luya\cms\frontend\Module'); // which is equals to $config->module('cms', ['class' => 'luya\cms\frontend\Module']);
+ * 
+ * // export and generate the config for a given enviroment or environment independent.
+ * 
+ * return $config->toArray(); // returns the config not taking care of enviroment variables like prod, env
+ * 
+ * return $config->toArray(Config::ENV_PROD);
+ * ```
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.10
  */
 class Config
 {
+    const ENV_ALL = 'all';
+
     const ENV_PROD = 'prod';
     
     const ENV_PREP = 'prep';
@@ -70,50 +76,160 @@ class Config
     const ENV_DEV = 'dev';
     
     const ENV_LOCAL = 'local';
+
+    const RUNTIME_ALL = 0;
+
+    const RUNTIME_CONSOLE = 1;
+
+    const RUNTIME_WEB = 2;
     
-    protected static $config = [];
-    
-    protected static function merge($existing, $override)
+    public function __construct($id, $basePath, array $applicationConfig = [])
     {
-        return ArrayHelper::merge($existing, $override);
+        $applicationConfig['id'] = $id;
+        $applicationConfig['basePath'] = $basePath;
+
+        $this->application($applicationConfig);
     }
-    
+
     /**
-     * Returns the current sapi name in lower case.
+     * Undocumented function
      *
-     * @return string e.g. cli or web
+     * @param [type] $config
+     * @return ConfigDefinition
      */
-    public function isCli()
+    public function application($config)
     {
-        return strtolower(php_sapi_name()) === 'cli';
+        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_APPLICATIONS, md5(serialize($config)), $config));
     }
-    
-    public static function base(array $config)
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @param [type] $config
+     * @return ConfigDefinition
+     */
+    public function module($id, $config)
     {
-        self::$config = self::merge(self::$config, $config);
+        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_MODULES, $id, $config));
     }
-    
-    public static function web(array $config, $env = null)
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @param [type] $config
+     * @param [type] $runtime
+     * @return ConfigDefinition
+     */
+    public function component($id, $config, $runtime = self::RUNTIME_ALL)
     {
-        if (!self::isCli()) {
-            self::$config = self::merge(self::$config, $config);
+        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_COMPONENTS, $id, $config))->runtime($runtime);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @param [type] $config
+     * @return ConfigDefinition
+     */
+    public function webComponent($id, $config)
+    {
+        return $this->component($id, $config, self::RUNTIME_WEB);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @param [type] $config
+     * @return ConfigDefinition
+     */
+    public function consoleComponent($id, $config)
+    {
+        return $this->component($id, $config, self::RUNTIME_CONSOLE);
+    }
+
+    private $_definitions = [];
+
+    /**
+     * Undocumented function
+     *
+     * @param ConfigDefinition $definition
+     * @return ConfigDefinition
+     */
+    private function addDefinition(ConfigDefinition $definition)
+    {
+        $this->_definitions[] = $definition;
+
+        return $definition;
+    }
+
+    private $_isCliRuntime;
+
+    /**
+     * Whether runtime is cli or not
+     *
+     * @return boolean
+     */
+    public function isCliRuntime()
+    {
+        if ($this->_isCliRuntime === null) {
+            $this->_isCliRuntime = strtolower(php_sapi_name()) === 'cli';
         }
+
+        return $this->_isCliRuntime;
     }
-    
-    public static function console(array $config, $env = null)
+
+    public function setCliRuntime($value)
     {
-        if (self::isCli()) {
-            self::$config = self::merge(self::$config, $config);
+        $this->_isCliRuntime = $value;
+    }
+
+    public function toArray(array $envs = [self::ENV_ALL])
+    {
+        $config = [];
+
+        foreach ($this->_definitions as $defintion) {
+            /** @var ConfigDefinition $definition */
+
+            if (!$definition->validateEnvs($envs)) {
+                continue;
+            }
+
+            if ($definition->validateRuntime(self::RUNTIME_ALL)) {
+                $this->appendConfig($config, $definition);
+            } elseif ($this->isCliRuntime() && $definition->validateRuntime(self::RUNTIME_CONSOLE)) {
+                $this->appendConfig($config, $definition);
+            } elseif (!$this->isCliRuntime() && $definition->validateRuntime(self::RUNTIME_WEB)) {
+                $this->appendConfig($config, $definition);
+            }
         }
+
+        return $config;
     }
-    
-    public static function component($id, array $config, $env = null)
+
+    private function appendConfig(&$config, ConfigDefinition $definition)
     {
-        
-    }
-    
-    public static function module($id, array $config, $env = null)
-    {
-        
+        switch ($definition->getGroup()) {
+            case ConfigDefinition::GROUP_APPLICATIONS:
+                foreach ($definition->getConfig() as $k => $v) {
+                    $config[$k] = $v;
+                }
+                break;
+            case ConfigDefinition::GROUP_COMPONENTS:
+                if (!array_key_exists('components', $config)) {
+                    $config['components'] = [];
+                }
+                $config['components'][$definition->getKey()] = $definition->getConfig();
+                break;
+            case ConfigDefinition::GROUP_MODULES:
+                if (!array_key_exists('modules', $config)) {
+                    $config['modules'] = [];
+                }
+                $config['modules'][$definition->getKey()] = $definition->getConfig();
+                break;
+        }
     }
 }
