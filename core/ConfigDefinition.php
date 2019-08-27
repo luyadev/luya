@@ -25,6 +25,11 @@ class ConfigDefinition
      */
     const GROUP_APPLICATIONS = 3;
 
+    /**
+     * @var integer boostrap section group
+     */
+    const GROUP_BOOTSTRAPS = 4;
+
     private $_group;
 
     private $_key;

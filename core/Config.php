@@ -132,6 +132,17 @@ class Config
     }
 
     /**
+     * Register one or more bootstrap entries into the bootstrap section.
+     *
+     * @param array $config An array with bootstrap entries, its common to use the module name
+     * @return ConfigDefinition
+     */
+    public function bootstrap(array $config)
+    {
+        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_BOOTSTRAPS, md5(serialize($config)), $config));
+    }
+
+    /**
      * Register a module.
      *
      * @param string $id The module identifier.
@@ -272,6 +283,14 @@ class Config
             case ConfigDefinition::GROUP_MODULES:
                 $this->handleKeyBaseMerge($config, $definition, 'modules');
                 break;
+
+            case ConfigDefinition::GROUP_BOOTSTRAPS:
+                if (!array_key_exists('bootstrap', $config)) {
+                    $config['bootstrap'] = [];
+                }
+                foreach ($definition->getConfig() as $v) {
+                    $config['bootstrap'][] = $v;
+                }
         }
     }
 

@@ -191,4 +191,19 @@ class ConfigTest extends LuyaWebTestCase
             ]
         ], $config->toArray([Config::ENV_PREP]));
     }
+
+    public function testBootstrap()
+    {
+        $config = new Config('bootstrap', 'basePath');
+        $config->bootstrap(['id1', 'id2']);
+        $config->bootstrap(['id3']);
+
+        $this->assertSame([
+            'id' => 'bootstrap',
+            'basePath' => 'basePath',
+            'bootstrap' => [
+                'id1', 'id2', 'id3'
+            ]
+        ], $config->toArray());
+    }
 }
