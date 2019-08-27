@@ -3,6 +3,75 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+## 1.0.21
+
++ [#1772](https://github.com/luyadev/luya/issues/1772) With the new support of `luya\Config` its recommend to switch to the new configuration of LUYA. The old system will still work, but its recommend to change the way how configs are stored and retrieved. Since version 1.0.21 its recommend to have a **single config file** called `config.php`. The config file could look like this 
+
+```php
+$config = new Config('testapp', dirname(__DIR__), [
+    'siteTitle' => 'My Test App',
+    'defaultRoute' => 'cms',
+    'modules' => [
+        'admin' => [
+            'class' => 'luya\admin\Module',
+            'secureLogin' => true,
+        ],
+        'cms' => [
+            'class' => 'luya\cms\frontend\Module',
+        ],
+        'cmsadmin' => [
+            'class' => 'luya\cms\admin\Module',
+        ]
+    ],
+    'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'charset' => 'utf8',
+        ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
+        'composition' => [
+            'default' => [
+                'langShortCode' => 'en'
+            ],
+            'hidden' => true,
+        ],
+    ],
+    'bootstrap' => [
+        'cms',
+    ]
+]);
+
+$config->component('db', [
+    'dsn' => 'mysql:host=LOCAL_HOST;dbname=LOCAL_NAME',
+    'username' => 'LOCAL_USER',
+    'password' => 'LOCAL_PW',
+])->env(Config::ENV_LOCAL);
+
+$config->component('db', [
+    'dsn' => 'mysql:host=PROD_HOST;dbname=PROD_NAME',
+    'username' => 'PROD_USER',
+    'password' => 'PROD_PW',
+])->env(Config::ENV_PROD);
+
+$config->webComponent('request', [
+    'cookieValidationKey' => 'XYZ',
+]);
+
+return $config;
+```
+
+The config file returns an instance of `luya\Config` therefore the `env.php` should now look like this:
+
+```php
+<?php
+
+$config = include('config.php');
+
+return $config->toArray([\luya\Config::ENV_LOCAL]);
+```
+
 1.0.0 (12. December 2017)
 -------------------
 
