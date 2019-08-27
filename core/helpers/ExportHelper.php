@@ -164,7 +164,11 @@ class ExportHelper
             } elseif (!is_scalar($item)) {
                 $item = "[array]";
             }
-            $item = $enclose.Html::encode($item).$enclose;
+            $item = $enclose.str_replace([
+                '"',
+            ], [
+                '""',
+            ], $item).$enclose;
         });
 
         return implode($delimiter, $row) . PHP_EOL;

@@ -87,6 +87,10 @@ The above created configuration would produce something like this an Yii array c
 
 
 ```php
+
+define('YII_DEBUG', true);
+define('YII_ENV', 'prep');
+
 return [
     'id' => 'myproject',
     'siteTitle' => 'My Project',
@@ -193,6 +197,7 @@ The `env.php` will recieve the `$config` object and is then therefore responsibl
 $config = require 'config.php'; 
 
 return $config->toArray(\luya\Config::ENV_PROD);
+```
 
 ## Create company wide config
 
