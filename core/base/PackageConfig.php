@@ -18,5 +18,9 @@ class PackageConfig extends BaseObject
     
     public $package;
     
+    /**
+     * @var array
+     * @since 1.1.0
+     */
     public $themes = [];
 }
