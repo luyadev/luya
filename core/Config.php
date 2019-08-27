@@ -4,8 +4,6 @@ namespace luya;
 
 use luya\helpers\ArrayHelper;
 
-use function Opis\Closure\serialize;
-
 /**
  * Configuration array Helper.
  * 
@@ -187,11 +185,11 @@ class Config
         $this->_isCliRuntime = $value;
     }
 
-    public function toArray(array $envs = [self::ENV_ALL])
+    public function toArray(array $envs = [])
     {
         $config = [];
-
-        foreach ($this->_definitions as $defintion) {
+        $envs = array_merge($envs, [self::ENV_ALL]);
+        foreach ($this->_definitions as $definition) {
             /** @var ConfigDefinition $definition */
 
             if (!$definition->validateEnvs($envs)) {
@@ -219,17 +217,25 @@ class Config
                 }
                 break;
             case ConfigDefinition::GROUP_COMPONENTS:
-                if (!array_key_exists('components', $config)) {
-                    $config['components'] = [];
-                }
-                $config['components'][$definition->getKey()] = $definition->getConfig();
+                $this->handleKeyBaseMerge($config, $definition, 'components');
                 break;
+
             case ConfigDefinition::GROUP_MODULES:
-                if (!array_key_exists('modules', $config)) {
-                    $config['modules'] = [];
-                }
-                $config['modules'][$definition->getKey()] = $definition->getConfig();
+                $this->handleKeyBaseMerge($config, $definition, 'modules');
                 break;
+        }
+    }
+
+    private function handleKeyBaseMerge(&$config, ConfigDefinition $definition, $section)
+    {
+        if (!array_key_exists($section, $config)) {
+            $config[$section] = [];
+        }
+
+        if (isset($config[$section][$definition->getKey()])) {
+            $config[$section][$definition->getKey()] = ArrayHelper::merge($config[$section][$definition->getKey()], $definition->getConfig());
+        } else {
+            $config[$section][$definition->getKey()] = $definition->getConfig();
         }
     }
 }

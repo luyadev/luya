@@ -55,14 +55,14 @@ class ConfigDefinition
 
     public function webRuntime()
     {
-        $this->_runtime = Config::RUNTIME_CONSOLE;
+        $this->_runtime = Config::RUNTIME_WEB;
 
         return $this;
     }
 
     public function validateRuntime($runtime)
     {
-        return $this->_runtime = $runtime;
+        return $this->_runtime == $runtime;
     }
 
     public function validateEnvs(array $envs)
