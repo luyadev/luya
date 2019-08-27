@@ -39,36 +39,56 @@ This is how a default config file (e.g. `configs/env-local.php` or `configs/env-
 define('YII_DEBUG', true);
 define('YII_ENV', 'prep');
 
-$config = \luya\Config('myproject', dirname(__DIR__), [
-    'siteTitle' => 'My Project',
+$config = new Config('testapp', dirname(__DIR__), [
+    'siteTitle' => 'My Test App',
     'defaultRoute' => 'cms',
+    'modules' => [
+        'admin' => [
+            'class' => 'luya\admin\Module',
+            'secureLogin' => true,
+        ],
+        'cms' => [
+            'class' => 'luya\cms\frontend\Module',
+        ],
+        'cmsadmin' => [
+            'class' => 'luya\cms\admin\Module',
+        ]
+    ],
+    'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'charset' => 'utf8',
+        ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
+        'composition' => [
+            'default' => [
+                'langShortCode' => 'en'
+            ],
+            'hidden' => true,
+        ],
+    ],
+    'bootstrap' => [
+        'cms',
+    ]
 ]);
 
-// modules
-$config->module('admin', [
-    'class' => 'luya\admin\Module',
-    'secureLogin' => false, // when enabling secure login, the mail component must be proper configured otherwise the auth token mail will not send.
-    'interfaceLanguage' => 'en', // Set the administration area language. 
-]);
-$config->module('cms', [
-    'class' => 'luya\cms\frontend\Module',
-    'contentCompression' => true, // compressing the cms output (removing white spaces and newlines)
-]);
-$config->module('cmsadmin', 'luya\cms\admin\Module');
+$config->component('db', [
+    'dsn' => 'mysql:host=LOCAL_HOST;dbname=LOCAL_NAME',
+    'username' => 'LOCAL_USER',
+    'password' => 'LOCAL_PW',
+])->env(Config::ENV_LOCAL);
 
-// components
-$config->component('mail', [
-    'isSMTP' => false, // use phps mail() function
-    'from' => 'hello@luya.io',
-    'fromName' => 'hello@luya.io',
-]);
-$config->component('composition', [
-    'hidden' => true, // no language in your url (most case for pages which are not multilingual)
-    'default' => ['langShortCode' => 'en'], // the default language for the composition should match your default language shortCode in the langauge table.
-])
+$config->component('db', [
+    'dsn' => 'mysql:host=PROD_HOST;dbname=PROD_NAME',
+    'username' => 'PROD_USER',
+    'password' => 'PROD_PW',
+])->env(Config::ENV_PROD);
 
-// tell the application to bootstrap the cms module
-$config->bootstrap(['cms']);
+$config->webComponent('request', [
+    'cookieValidationKey' => 'XYZ',
+]);
 
 return $config;
 ```
@@ -81,47 +101,6 @@ example content of `env.php`:
 $config = require 'config.php'; 
 
 return $config->toArray(\luya\Config::ENV_PROD);
-```
-
-The above created configuration would produce something like this an Yii array configuration style:
-
-
-```php
-
-define('YII_DEBUG', true);
-define('YII_ENV', 'prep');
-
-return [
-    'id' => 'myproject',
-    'siteTitle' => 'My Project',
-    'defaultRoute' => 'cms',
-    'basePath' => dirname(__DIR__),
-    'modules' => [
-        'admin' => [
-            'class' => 'luya\admin\Module',
-            'secureLogin' => true,
-            'interfaceLanguage' => 'en',
-        ],
-        'cms' => [
-            'class' => 'luya\cms\frontend\Module',
-        ],
-        'cmsadmin' => 'luya\cms\admin\Module',
-    ],
-    'components' => [
-        'mail' => [
-            'isSMTP' => false,
-            'from' => 'hello@luya.io',
-            'fromName' => 'hello@luya.io',
-        ],
-        'composition' => [
-            'hidden' => true, 
-            'default' => ['langShortCode' => 'en'],
-        ],
-    ],
-    'bootstrap' => [
-        'cms',
-    ],
-];
 ```
 
 ## Configuration File for Console and Web
