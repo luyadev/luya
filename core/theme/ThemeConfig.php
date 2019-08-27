@@ -23,12 +23,35 @@ class ThemeConfig extends BaseObject implements Arrayable
     
     protected $_basePath;
     
+    /**
+     * @var string The pretty name of the theme.
+     */
     public $name;
-    public $parentTheme;
-    public $pathMap = [];
-    public $description;
-    public $image;
     
+    /**
+     * @var string Base path (or alias) of the parent theme.
+     */
+    public $parentTheme;
+    
+    /**
+     * @var array Additional path to override by this theme.
+     * @see \luya\theme\Theme::getAdditionalPathMap
+     */
+    public $pathMap = [];
+    
+    /**
+     * @var string Some information about the theme.
+     */
+    public $description;
+    
+    /**
+     * ThemeConfig constructor with base path of the theme directory and config as array.
+     *
+     * @param string $basePath The base path of the theme.
+     * @param array  $config key-value pair
+     *
+     * @throws InvalidConfigException
+     */
     public function __construct(string $basePath, array $config)
     {
         if (!is_readable(Yii::getAlias($basePath))) {
@@ -40,6 +63,9 @@ class ThemeConfig extends BaseObject implements Arrayable
         parent::__construct($config);
     }
     
+    /**
+     * @inheritDoc
+     */
     public function init()
     {
         if (empty($this->name)) {
@@ -67,15 +93,22 @@ class ThemeConfig extends BaseObject implements Arrayable
         return $this->_parent;
     }
     
+    /**
+     * Set the parent theme config. Is only required while initialize this class.
+     *
+     * @param ThemeConfig $themeConfig
+     */
     protected function setParent(ThemeConfig $themeConfig)
     {
         $this->_parent = $themeConfig;
     }
     
     /**
-     * Load the parent themes recursive.
+     * Load all parent themes recursive in a ordered array. First entry is the parent of this theme, seconds entry is the parent of the parent and so on.
      *
-     * @return ThemeConfig[]
+     * @return array
+     * @throws InvalidConfigException
+     * @throws \luya\Exception
      */
     public function getParents()
     {
@@ -90,11 +123,21 @@ class ThemeConfig extends BaseObject implements Arrayable
         return $parents;
     }
     
+    /**
+     * Base path (or alias) to the theme directory.
+     *
+     * @return string
+     */
     public function getBasePath()
     {
         return $this->_basePath;
     }
     
+    /**
+     * Path to view directory of the theme.
+     *
+     * @return string
+     */
     public function getViewPath()
     {
         return $this->getBasePath() . '/views';

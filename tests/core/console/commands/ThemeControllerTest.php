@@ -30,8 +30,7 @@ class ThemeControllerTest extends \luyatests\LuyaConsoleTestCase
     "name": "mynewtheme",
     "parentTheme": "@app/themes/blank",
     "pathMap": [],
-    "description": null,
-    "image": null
+    "description": null
 }
 JSON;
 

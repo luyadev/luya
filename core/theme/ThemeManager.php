@@ -61,9 +61,7 @@ class ThemeManager extends \yii\base\Component
             $config = [];
         }
         
-        $themeConfig = new ThemeConfig($basePath, $config);
-        
-        return $themeConfig;
+        return new ThemeConfig($basePath, $config);
     }
     
     /**
@@ -218,7 +216,7 @@ class ThemeManager extends \yii\base\Component
     private $_activeTheme;
     
     /**
-     * The active theme. Is null if no theme activated.
+     * Get the active theme. Is null if no theme activated.
      *
      * @var Theme|null
      */
@@ -227,6 +225,11 @@ class ThemeManager extends \yii\base\Component
         return $this->_activeTheme;
     }
     
+    /**
+     * Change the active theme.
+     *
+     * @param Theme $theme
+     */
     protected function setActiveTheme(Theme $theme)
     {
         $this->_activeTheme = $theme;

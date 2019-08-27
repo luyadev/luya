@@ -9,15 +9,16 @@ use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 
 /**
- * Extend the yii2 theme component and build up the `$pathMap` depends on given \luya\theme\ThemeConfig which include parents inheritance.
+ * Extend the yii2 theme component and build up the `$pathMap` depends on given {{\luya\theme\ThemeConfig}} which include parents inheritance.
+ *
+ * @property string $layout
+ * @property string $viewPath
+ * @property string $layoutPath
+ * @property string $resourcePath
  *
  * @see \luya\theme\ThemeConfig
  * @author Bennet Klarhoelter <boehsermoe@me.com>
- *
- * @property-read string $layout
- * @property-read string $viewPath
- * @property-read string $layoutPath
- * @property-read string $resourcePath
+ * @since 1.1.0
  */
 class Theme extends \yii\base\Theme
 {
@@ -25,12 +26,22 @@ class Theme extends \yii\base\Theme
     
     private $_config;
     
+    /**
+     * Theme constructor with a configuration as {{\luya\theme\ThemeConfig}} object.
+     *
+     * @param ThemeConfig $config configuration for this theme.
+     */
     public function __construct(ThemeConfig $config)
     {
         $this->_config = $config;
         parent::__construct(['basePath' => $config->getBasePath()]);
     }
     
+    /**
+     * Initialize the theme.
+     *
+     * @throws InvalidConfigException
+     */
     public function init()
     {
         if ($this->getBasePath() === null) {
@@ -95,6 +106,8 @@ class Theme extends \yii\base\Theme
      * @param ThemeConfig $themeConfig
      *
      * @return array
+     * @throws InvalidConfigException
+     * @throws \luya\Exception
      */
     protected function getAdditionalPathMap(ThemeConfig $themeConfig)
     {
