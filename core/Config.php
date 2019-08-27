@@ -117,7 +117,6 @@ class Config
     {
         $applicationConfig['id'] = $id;
         $applicationConfig['basePath'] = $basePath;
-
         $this->application($applicationConfig);
     }
 
@@ -234,13 +233,12 @@ class Config
     {
         $config = [];
         $envs = array_merge($envs, [self::ENV_ALL]);
-        foreach ($this->_definitions as $definition) {
-            /** @var ConfigDefinition $definition */
-
+        foreach ($this->_definitions as $definition) { /** @var ConfigDefinition $definition */
+            // validate if current export env is in the list of envs
             if (!$definition->validateEnvs($envs)) {
                 continue;
             }
-
+            // validate runtime circumstances
             if ($definition->validateRuntime(self::RUNTIME_ALL)) {
                 $this->appendConfig($config, $definition);
             } elseif ($this->isCliRuntime() && $definition->validateRuntime(self::RUNTIME_CONSOLE)) {
@@ -286,10 +284,12 @@ class Config
      */
     private function handleKeyBaseMerge(&$config, ConfigDefinition $definition, $section)
     {
+        // ass missing section key
         if (!array_key_exists($section, $config)) {
             $config[$section] = [];
         }
 
+        // if key exists, merge otherwise create key
         if (isset($config[$section][$definition->getKey()])) {
             $config[$section][$definition->getKey()] = ArrayHelper::merge($config[$section][$definition->getKey()], $definition->getConfig());
         } else {
