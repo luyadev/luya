@@ -168,6 +168,7 @@ Field name examples (for table *admin_user*):
 + password_salt
 + group_id
 
+
 ### SCSSS
 
 The SCSS folder contains all SCSS files and is structured as follows:
