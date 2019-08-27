@@ -2,11 +2,13 @@
 
 namespace luyatests\core\theme;
 
+use luya\theme\SetupEvent;
 use luya\theme\Theme;
 use luya\web\Controller;
 use Yii;
 use luya\theme\ThemeManager;
 use luyatests\LuyaWebTestCase;
+use yii\base\InvalidCallException;
 
 /**
  * @author Bennet Klarhoelter <boehsermoe@me.com>
@@ -26,6 +28,26 @@ class ThemeManagerTest extends LuyaWebTestCase
         $this->assertEquals($expectedPath, Yii::getAlias('@activeTheme'), 'Alias path is not correct.');
     
         $this->assertInstanceOf(Theme::class, $themeManager->getActiveTheme());
+    }
+    
+    public function testBeforeSetupEvent()
+    {
+        $themeManager = new ThemeManager();
+        $themeManager->activeThemeName = '@app/themes/test';
+        $themeManager->on(ThemeManager::EVENT_BEFORE_SETUP, function(SetupEvent $setupEvent) {
+            $setupEvent->basePath = '@app/themes/blank';
+        });
+        $themeManager->setup();
+        
+        $expectedPath = realpath(Yii::getAlias('@luyatests/data/themes/blank'));
+        $this->assertEquals($expectedPath, Yii::$app->view->theme->basePath, 'Theme base path not correct.');
+        $this->assertEquals($expectedPath, Yii::getAlias('@activeTheme'), 'Alias path is not correct.');
+        
+        $themeManager->off(ThemeManager::EVENT_BEFORE_SETUP);
+        $themeManager->on(ThemeManager::EVENT_BEFORE_SETUP, function(SetupEvent $setupEvent) {
+            throw new InvalidCallException('Theme setup already done.');
+        });
+        $themeManager->setup();
     }
     
     /**
@@ -89,5 +111,15 @@ class ThemeManagerTest extends LuyaWebTestCase
     
         $result = $controller->render("index");
         $this->assertEquals(Yii::getAlias('@thememodule/themes/testTheme/views/default/index.php'), $result);
+    }
+    
+    /**
+     * @expectedException \yii\base\InvalidArgumentException
+     * @expectedExceptionMessage Theme @theme/not/exists could not loaded.
+     */
+    public function testInvalidThemeBasePath()
+    {
+        $themeManager = new ThemeManager();
+        $themeManager->getThemeByBasePath('@theme/not/exists');
     }
 }

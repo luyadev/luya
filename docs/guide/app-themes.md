@@ -81,6 +81,7 @@ On a match searching in the list of theme paths for a exists file in the defined
 ### Additional path map
 
 It is also possible to define additional path for inheritance by add a path map in the theme config.
+In this way block and widget views can also be override with a theme.
 
 ```theme.json
 {

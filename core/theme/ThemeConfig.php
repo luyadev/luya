@@ -53,15 +53,15 @@ class ThemeConfig extends BaseObject implements Arrayable
     
     /**
      * Load the config of the parent theme.
+     *
      * @return ThemeConfig
+     * @throws InvalidConfigException
+     * @throws \luya\Exception
      */
     public function getParent()
     {
-        if ($this->parentTheme) {
+        if ($this->_parent === null && $this->parentTheme) {
             $this->_parent = Yii::$app->themeManager->getThemeByBasePath($this->parentTheme);
-            if (!$this->_parent) {
-                throw new InvalidArgumentException("Theme parent {$this->parentTheme} could not found.");
-            }
         }
         
         return $this->_parent;

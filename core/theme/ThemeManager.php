@@ -164,13 +164,13 @@ class ThemeManager extends \yii\base\Component
     }
     
     /**
-     * @param $basePath
+     * @param string $basePath
      *
      * @return ThemeConfig
      * @throws Exception
      * @throws InvalidConfigException
      */
-    public function getThemeByBasePath($basePath)
+    public function getThemeByBasePath(string $basePath)
     {
         $themes = $this->getThemes();
         
