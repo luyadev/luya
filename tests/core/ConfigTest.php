@@ -151,4 +151,44 @@ class ConfigTest extends LuyaWebTestCase
             ]
         ], $config->toArray());
     }
+
+    public function testComponentEnvMerging()
+    {
+        $config = new Config('test', 'basePath');
+        $config->component('db', 'yii\db\Connection');
+
+        $config->component('db', [
+            'username' => 'prod',
+            'password' => 'prod',
+        ])->env(Config::ENV_PROD);
+
+        $config->component('db', [
+            'username' => 'prep',
+            'password' => 'prep',
+        ])->env(Config::ENV_PREP);
+
+        $this->assertSame([
+            'id' => 'test',
+            'basePath' => 'basePath',
+            'components' => [
+                'db' => [
+                    'class' => 'yii\db\Connection',
+                    'username' => 'prod',
+                    'password' => 'prod',
+                ]
+            ]
+        ], $config->toArray([Config::ENV_PROD]));
+
+        $this->assertSame([
+            'id' => 'test',
+            'basePath' => 'basePath',
+            'components' => [
+                'db' => [
+                    'class' => 'yii\db\Connection',
+                    'username' => 'prep',
+                    'password' => 'prep',
+                ]
+            ]
+        ], $config->toArray([Config::ENV_PREP]));
+    }
 }
