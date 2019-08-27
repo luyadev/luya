@@ -178,11 +178,6 @@ abstract class Module extends \yii\base\Module
     public $moduleLayout = 'layout';
 
     /**
-     * @var Theme The default folder of theme load
-     */
-    public $theme;
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -194,11 +189,9 @@ abstract class Module extends \yii\base\Module
                 throw new InvalidConfigException(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
-    
-        $this->theme = Yii::$app->themeManager->getActiveTheme();
-    
-        if ($this->theme) {
-            $this->layout = $this->theme->getLayout();
+        
+        if (Yii::$app->themeManager->hasActiveTheme()) {
+            $this->layout = Yii::$app->themeManager->getActiveTheme()->layout;
         }
 
         static::onLoad();
@@ -214,11 +207,8 @@ abstract class Module extends \yii\base\Module
      */
     public function getLayoutPath()
     {
-        if ($this->theme){
-            if ($this->useAppLayoutPath) {
-                $this->setLayoutPath($this->theme->getLayoutPath());
-            }
-            
+        if (Yii::$app->themeManager->hasActiveTheme() && $this->useAppLayoutPath){
+            $this->setLayoutPath(Yii::$app->themeManager->getActiveTheme()->layoutPath);
         } elseif ($this->useAppLayoutPath) {
             $this->setLayoutPath('@app/views/'.$this->id.'/layouts');
         }

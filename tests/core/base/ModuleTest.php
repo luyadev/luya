@@ -64,7 +64,7 @@ class ModuleTest extends LuyaWebTestCase
         $module = Yii::$app->getModule('unitmodule');
         $module->init();
         
-        $this->assertNotNull($module->theme);
+        $this->assertEquals('theme', $module->layout);
     
         $module->useAppLayoutPath = false;
         $this->assertContains('/modules/unitmodule/views/layouts', $module->getLayoutPath());
@@ -79,7 +79,7 @@ class ModuleTest extends LuyaWebTestCase
         $module = Yii::$app->getModule('unitmodule');
         $module->init();
     
-        $this->assertNotNull($module->theme);
+        $this->assertEquals('theme', $module->layout);
     
         $module->useAppLayoutPath = true;
         $this->assertContains('/themes/moduleTest/views/layouts', $module->getLayoutPath());

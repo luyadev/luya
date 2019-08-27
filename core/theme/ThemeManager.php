@@ -234,4 +234,12 @@ class ThemeManager extends \yii\base\Component
     {
         $this->_activeTheme = $theme;
     }
+    
+    /**
+     * @return bool
+     */
+    public function hasActiveTheme()
+    {
+        return $this->getActiveTheme() !== null;
+    }
 }
