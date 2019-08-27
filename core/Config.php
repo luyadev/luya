@@ -28,9 +28,7 @@ use luya\helpers\ArrayHelper;
  *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
  *     'username' => 'foo',
  *     'password' => 'bar',
- * ])->env('martin');
- * 
- * 
+ * ]);
  * 
  * // define components which are only for web or console runtime:
  * 
@@ -58,6 +56,33 @@ use luya\helpers\ArrayHelper;
  * return $config->toArray(); // returns the config not taking care of enviroment variables like prod, env
  * 
  * return $config->toArray(Config::ENV_PROD);
+ * ```
+ * 
+ * Switching between envs can be usefull if certain configurations should only apply on a certain environment. Therefore you can add `env()` behind componenets, applications and modules.
+ * 
+ * ```php
+ * $config->component('db', [
+ *     'class' => 'yii\db\Connection',
+ *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
+ *     'username' => 'foo',
+ *     'password' => 'bar',
+ * ])->env(Config::ENV_LOCAL);
+ * 
+ * $config->component('db', [
+ *     'class' => 'yii\db\Connection',
+ *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
+ *     'username' => 'foo',
+ *     'password' => 'bar',
+ * ])->env(Config::ENV_DEV);
+ * 
+ * $config->component('db', [
+ *     'class' => 'yii\db\Connection',
+ *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
+ *     'username' => 'foo',
+ *     'password' => 'bar',
+ * ])->env(Config::ENV_PROD);
+ * 
+ * return $config->toArray(Config::ENV_PROD); // would only return the prod env db component
  * ```
  * 
  * @author Basil Suter <basil@nadar.io>
