@@ -62,10 +62,17 @@ public function extendPermissionRoutes()
 
 The above *module/controller/action* route is now protected by admin UI authorization.
 
+## Controllers and the given Persmission
+
+There are different controllers which can be extended, but they have different permission systems. Some use `routes` and others take `apis` as permission level.
+
++ {{luya\admin\base\Controller}}: This is a WEB controller and permission is handled trough `routes`. Those controllers usually return html content and not rest responses (like json).
++ {{luya\admin\base\RestController}}: The RestController can take `routes` as permission, route validation can be done trough {{luya\admin\base\RestController::checkRouteAccess()}}. The controller requies response of array data (json response).
++ {{luya\admin\base\RestActiveController}}: The modelClass based ActiveController which implements basic REST behaviors like create,update,view and delete based on a given model. The permission is authorized trough `apis` and the implementation of {{luya\admin\base\RestActiveController::checkAccess()}}.
 
 ## Disable controller or action permission
 
-Inside of each {{luya\web\Controller}} abstracted class you can disable/override the permission check be enabling the property {{luya\web\Controller::$disablePermissionCheck}}. This means all **logged in users** can access this controller but guest (not logged in users) are still not allowed to see this controller.
+Inside of each {{luya\admin\base\Controller}} abstracted class you can disable/override the permission check be enabling the property {{luya\admin\base\Controller::$disablePermissionCheck}}. This means all **logged in users** can access this controller but guest (not logged in users) are still not allowed to see this controller.
 
 ```php
 class MyTestController extends \luya\admin\base\Controller
