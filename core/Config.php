@@ -137,7 +137,7 @@ class Config
         $this->_env = $env;
         
         try {
-            $callback($this);
+            call_user_func($callback, $this);
         } finally {
             $this->_env = null;
         }
