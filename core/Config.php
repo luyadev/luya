@@ -6,60 +6,60 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Configuration array Helper.
- * 
+ *
  * The {{luya\Config}} allows you to create the configuration for different hosts and difference between web and console config.
- * 
+ *
  * ```php
  * $config = new Config('myapp', dirname(__DIR__), [
  *     'siteTitle' => 'My LUYA Project',
  *     'defaultRoute' => 'cms',
  *     // other application level configurations
  * ]);
- * 
+ *
  * // define global components which works either for console or web runtime
- * 
+ *
  * $config->component('mail', [
  *     'host' => 'xyz',
  *     'from' => 'from@luya.io',
  * ]);
- * 
+ *
  * $config->component('db', [
  *     'class' => 'yii\db\Connection',
  *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
  *     'username' => 'foo',
  *     'password' => 'bar',
  * ]);
- * 
+ *
  * // define components which are only for web or console runtime:
- * 
+ *
  * $config->webComponent('request', [
  *     'cookieValidationKey' => 'xyz',
  * ]);
- * 
+ *
  * // which is equals to, but the above is better to read and structure in the config file
- * 
+ *
  * $config->component('request', [
  *     'cookieValidationKey' => 'xyz',
  * ])->webRuntime();
- * 
+ *
  * // adding modules
- * 
+ *
  * $config->module('admin', [
  *     'class' => 'luya\admin\Module',
  *     'secureLogin' => true,
  * ]);
- * 
+ *
  * $config->module('cms', 'luya\cms\frontend\Module'); // which is equals to $config->module('cms', ['class' => 'luya\cms\frontend\Module']);
- * 
+ *
  * // export and generate the config for a given enviroment or environment independent.
- * 
+ *
  * return $config->toArray(); // returns the config not taking care of enviroment variables like prod, env
- * 
+ *
  * return $config->toArray(Config::ENV_PROD);
  * ```
- * 
+ *
  * Switching between envs can be usefull if certain configurations should only apply on a certain environment. Therefore you can add `env()` behind componenets, applications and modules.
- * 
+ *
  * ```php
  * $config->component('db', [
  *     'class' => 'yii\db\Connection',
@@ -67,24 +67,24 @@ use luya\helpers\ArrayHelper;
  *     'username' => 'foo',
  *     'password' => 'bar',
  * ])->env(Config::ENV_LOCAL);
- * 
+ *
  * $config->component('db', [
  *     'class' => 'yii\db\Connection',
  *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
  *     'username' => 'foo',
  *     'password' => 'bar',
  * ])->env(Config::ENV_DEV);
- * 
+ *
  * $config->component('db', [
  *     'class' => 'yii\db\Connection',
  *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
  *     'username' => 'foo',
  *     'password' => 'bar',
  * ])->env(Config::ENV_PROD);
- * 
+ *
  * return $config->toArray(Config::ENV_PROD); // would only return the prod env db component
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.21
  */
@@ -118,6 +118,30 @@ class Config
         $applicationConfig['id'] = $id;
         $applicationConfig['basePath'] = $basePath;
         $this->application($applicationConfig);
+    }
+    
+    private $_env;
+    
+    /**
+     * Assign the env to each component, module or application that defined inside the callback.
+     *
+     * Callback function has one parameter with the current {{luya\Config}} object.
+     *
+     * @param string $env The environment to assigne inside the callback.
+     * @param callable $callback function(\luya\Config $config)
+     * @return $this
+     */
+    public function env($env, callable $callback)
+    {
+        $this->_env = $env;
+        
+        try {
+            call_user_func($callback, $this);
+        } finally {
+            $this->_env = null;
+        }
+        
+        return $this;
     }
 
     /**
@@ -201,6 +225,10 @@ class Config
      */
     private function addDefinition(ConfigDefinition $definition)
     {
+        if ($this->_env !== null) {
+            $definition->env($this->_env);
+        }
+        
         $this->_definitions[] = $definition;
 
         return $definition;
@@ -224,7 +252,7 @@ class Config
 
     /**
      * Setter method for runtime.
-     * 
+     *
      * > This method is mainly used for unit testing.
      *
      * @param boolean $value

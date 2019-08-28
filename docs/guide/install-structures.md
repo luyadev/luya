@@ -152,10 +152,10 @@ $config->consoleComponent('request', [
 
 ## Configuration for different Environments
 
-As a key concept of LUYA is to Dont repeat yourself with {{luya\Config}} a configuration file for differnt hosts can be done in a single file using `env()`. Assuming a database connection which has different connection details on different hosts (prep and prod) define the {{yii\db\Connection}} as followed:
+As a key concept of LUYA is to Dont repeat yourself with {{luya\Config}} a configuration file for different hosts can be done in a single file using `env()`. Assuming a database connection which has different connection details on different hosts (prep and prod) define the {{yii\db\Connection}} as followed:
 
 ```php
- $config->component('db', [
+$config->component('db', [
      'class' => 'yii\db\Connection',
      'dsn' => 'mysql:host=localhost;dbname=prod_db',
     'username' => 'foo',
@@ -170,7 +170,32 @@ $config->component('db', [
 ])->env(Config::ENV_PROD);
 ```
 
-The `env.php` will recieve the `$config` object and is then therefore responsible to correctly return the given env:
+You can also define multiple components in a environment block/scope.
+
+```php
+$config->env(Config::ENV_PREP, function(Config $config) {
+    $config->component('db', [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=localhost;dbname=prod_db',
+        'username' => 'foo',
+        'password' => 'bar',
+    ]);
+    $config->component('cache', [
+        'class' => 'yii\caching\DummyCache',
+    ]);
+});
+
+$config->env(Config::ENV_PROD, function(Config $config) {
+    $config->component('db', [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=localhost;dbname=prod_db',
+        'username' => 'foo',
+        'password' => 'bar',
+    ]);
+});
+```
+
+The `env.php` will receive the `$config` object and is then therefore responsible to correctly return the given env:
 
 ```php
 $config = require 'config.php'; 
