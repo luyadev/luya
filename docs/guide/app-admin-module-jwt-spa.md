@@ -8,7 +8,7 @@ The LUYA admin provides a basic JWT generator including an out of the box authen
 
 + A custom (application) admin module is required to setup JWT ([[app-admin-module.md]]).
 + Understand Api Users which are explaind in Headless Guide Section ([[concept-headless.md]]).
-+ 
++ Configure the {{luya\admin\components\Jwt}} component.
 
 ## How it works
 
@@ -25,7 +25,7 @@ Make Request:
 
 + The Authentification system will threat JWT auth first.
 + Token will be passed to the {{luya\admin\baseJwtIdentityInterface::loginByJwtToken()}} method. Return the user if login is valid.
-+ The Api User model defined in {{luya\admin\Module::$jwtApiUserEmail}} will be looked up and loggedin.
++ The Api User model defined in {{luya\admin\components\Jwt::$apiUserEmail}} will be looked up and loggedin.
 + The authenticated Api User check permission based on the related groups (Api Users can associated with multiple groups or none).
 
 The image shows the above descriped cycle.
@@ -34,12 +34,22 @@ The image shows the above descriped cycle.
 
 ## Setup
 
-[TBD]
+1. Configure the {{luya\admin\components\Jwt}} component in your config:
 
-+ Setup admin module with XYZ properties
-+ Admin module with user model implemeting {{}}  Interface.
-+ Generate Action for Login (generate token) and signup (if needed).
-+ Setup the Api User and granted needed permissions (none if not shareable should be selected).
+```php
+'components' => [
+    'jwt' => [
+        'class' => 'luya\admin\components\Jwt',
+        'key' => 'MySecretJwtKey',
+        'apiUserEmail' => 'jwtapiuser@luya.io',
+        'identityClass' => 'app\modules\myadminmodule\models\User',
+    ],
+],
+```
+
+2. Implement the {{luya\admin\base\JwtIdentityInterface}} into the given {{luya\admin\components\Jwt::$identityClass}}.
+3. Generate an Action for Login (generate token) and signup (if needed).
+4. Setup the defined {{luya\admin\components\Jwt::$apiUserEmail}} Api User and grant the needed permissions (none if no admin resources should be accessible).
 
 The User which contains user data:
 
@@ -159,6 +169,6 @@ class UserController extends \luya\admin\ngrest\base\Api
 A few principals regarding permissions:
 
 + Unless an action is masked as {{luya\traits\RestBehaviorsTrait::$authOptional}} **every action requires authentification**.
-+ If the group of the defined {{luya\admin\Module::$jwtApiUserEmail}} API user has **no permissions**, only your custom actions are accessible.
++ If the group of the defined {{luya\admin\components\Jwt::$apiUserEmail}} API user has **no permissions**, only your custom actions are accessible.
 + When accessing NgRest API actions like update, create, list or view (detail) and permission is granted the actions are logged with the configured ApiUser.
 + As permission is proxied trough Api Users, a valid Api User token could access those informations as well.
