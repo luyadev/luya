@@ -159,10 +159,12 @@ class UserController extends \luya\admin\ngrest\base\Api
      */
     public function actionMe()
     {
-        return $this->jwtIdentity;
+        return $this->jwt->identity;
     }
 }
 ```
+
+If a successfull jwt authentication is made the {{luya\admin\components\Jwt::$identity}} contains the {{luya\admin\components\Jwt::$identityClass}} object implementing {{luya\admin\base\JwtIdentityInterface}}.
 
 ## Permissions
 
