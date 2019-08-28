@@ -27,7 +27,7 @@ class ThemeManagerTest extends LuyaWebTestCase
         $this->assertEquals($expectedPath, Yii::$app->view->theme->basePath, 'Theme base path not correct.');
         $this->assertEquals($expectedPath, Yii::getAlias('@activeTheme'), 'Alias path is not correct.');
     
-        $this->assertInstanceOf(Theme::class, $themeManager->getActiveTheme());
+        $this->assertInstanceOf(Theme::class, $themeManager->activeTheme);
     }
     
     public function testBeforeSetupEvent()
@@ -59,7 +59,7 @@ class ThemeManagerTest extends LuyaWebTestCase
         $themeManager->setup();
     
         $this->assertNull(Yii::$app->view->theme, 'Theme must be null set.');
-        $this->assertNull($themeManager->getActiveTheme());
+        $this->assertNull($themeManager->activeTheme);
         $this->assertFalse(Yii::getAlias('@activeTheme', false), 'Alias path must not set.');
     }
     
@@ -69,7 +69,7 @@ class ThemeManagerTest extends LuyaWebTestCase
         $themeManager->activeThemeName = '@app/themes/blank3';
         $themeManager->setup();
         
-        $this->assertEquals(Yii::getAlias('@app/themes/blank3'), $themeManager->getActiveTheme()->getBasePath());
+        $this->assertEquals(Yii::getAlias('@app/themes/blank3'), $themeManager->activeTheme->getBasePath());
     
         /** @var Controller $controller */
         $controller = \Yii::$app->createController('foo')[0];

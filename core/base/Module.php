@@ -190,8 +190,8 @@ abstract class Module extends \yii\base\Module
             }
         }
         
-        if (Yii::$app->themeManager->hasActiveTheme()) {
-            $this->layout = Yii::$app->themeManager->getActiveTheme()->layout;
+        if (Yii::$app->themeManager->hasActiveTheme) {
+            $this->layout = Yii::$app->themeManager->activeTheme->layout;
         }
 
         static::onLoad();
@@ -207,8 +207,8 @@ abstract class Module extends \yii\base\Module
      */
     public function getLayoutPath()
     {
-        if (Yii::$app->themeManager->hasActiveTheme() && $this->useAppLayoutPath){
-            $this->setLayoutPath(Yii::$app->themeManager->getActiveTheme()->layoutPath);
+        if (Yii::$app->themeManager->hasActiveTheme && $this->useAppLayoutPath){
+            $this->setLayoutPath(Yii::$app->themeManager->activeTheme->layoutPath);
         } elseif ($this->useAppLayoutPath) {
             $this->setLayoutPath('@app/views/'.$this->id.'/layouts');
         }

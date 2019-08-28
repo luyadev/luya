@@ -14,6 +14,9 @@ use yii\base\InvalidConfigException;
  *
  * This component manage available themes via file system and the actual display themes.
  *
+ * @property bool $hasActiveTheme
+ * @property Theme $activeTheme
+ *
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since  1.1.0
  */
@@ -73,7 +76,7 @@ class ThemeManager extends \yii\base\Component
      */
     final public function setup()
     {
-        if ($this->getActiveTheme() instanceof Theme) {
+        if ($this->activeTheme instanceof Theme) {
             // Active theme already loaded
             return;
         }
@@ -218,7 +221,7 @@ class ThemeManager extends \yii\base\Component
     /**
      * Get the active theme. Is null if no theme activated.
      *
-     * @var Theme|null
+     * @return Theme|null
      */
     public function getActiveTheme()
     {
@@ -238,7 +241,7 @@ class ThemeManager extends \yii\base\Component
     /**
      * @return bool
      */
-    public function hasActiveTheme()
+    public function getHasActiveTheme()
     {
         return $this->getActiveTheme() !== null;
     }
