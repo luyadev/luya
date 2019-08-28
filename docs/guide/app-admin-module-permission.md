@@ -63,7 +63,7 @@ public function extendPermissionRoutes()
 The above *module/controller/action* route is now protected by admin UI authorization.
 
 
-## Disable controller permission
+## Disable controller or action permission
 
 Inside of each {{luya\web\Controller}} abstracted class you can disable/override the permission check be enabling the property {{luya\web\Controller::$disablePermissionCheck}}. This means all **logged in users** can access this controller but guest (not logged in users) are still not allowed to see this controller.
 
@@ -75,6 +75,20 @@ class MyTestController extends \luya\admin\base\Controller
     public function actionIndex()
     {
         // This action can be performed by all logged in admin users but not guest users.
+    }
+}
+```
+
+In order disable permissions for only a given action you can define {{luya\traits\RestBehaviorsTrait::$authOptional}} to make an action public available:
+
+```php
+class MyTestController extends \luya\admin\base\Controller
+{
+    public $authOptional = ['public'];
+
+    public function actionPublic()
+    {
+        // this action is now public to everyone without authorization
     }
 }
 ```
