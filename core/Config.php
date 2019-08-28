@@ -120,16 +120,15 @@ class Config
         $this->application($applicationConfig);
     }
     
-    private $_env = null;
+    private $_env;
     
     /**
-     * Assign the env to each component that defined inside the callback.
+     * Assign the env to each component, module or application that defined inside the callback.
      *
-     * Callback function has one parameter with this config.
+     * Callback function has one parameter with the current {{luya\Config}} object.
      *
-     * @param string   $env
+     * @param string $env The environment to assigne inside the callback.
      * @param callable $callback function(\luya\Config $config)
-     *
      * @return $this
      */
     public function env($env, callable $callback)
