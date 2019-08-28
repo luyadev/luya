@@ -159,7 +159,7 @@ class UserController extends \luya\admin\ngrest\base\Api
      */
     public function actionMe()
     {
-        return $this->jwt->identity;
+        return Yii::$app->jwt->identity;
     }
 }
 ```
