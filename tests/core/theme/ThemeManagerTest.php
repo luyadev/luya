@@ -141,6 +141,18 @@ class ThemeManagerTest extends LuyaWebTestCase
         }
     }
     
+    /**
+     * @expectedException \yii\base\InvalidConfigException
+     * @expectedExceptionMessageRegExp #^Theme config file missing at: [\w/]+/otherThemeLocation/emptyThemeDir/theme.json$#
+     */
+    public function testEmptyThemeDir()
+    {
+        $themeManager = new ThemeManager();
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = '@app/otherThemeLocation/emptyThemeDir';
+        
+        $themeManager->getThemes();
+    }
+    
     public function testRelativeThemeDefinition()
     {
         $relativePath = 'otherThemeLocation/foo';
