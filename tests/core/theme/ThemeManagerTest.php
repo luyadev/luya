@@ -8,6 +8,7 @@ use luya\web\Controller;
 use Yii;
 use luya\theme\ThemeManager;
 use luyatests\LuyaWebTestCase;
+use yii\base\InvalidArgumentException;
 use yii\base\InvalidCallException;
 
 /**
@@ -138,5 +139,42 @@ class ThemeManagerTest extends LuyaWebTestCase
         } finally {
             rmdir(Yii::getAlias('@app/themes/not-readable'));
         }
+    }
+    
+    public function testRelativeThemeDefinition()
+    {
+        $relativePath = 'otherThemeLocation/foo';
+    
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = $relativePath;
+    
+        $themeManager = new ThemeManager();
+        $basePath = realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . $relativePath;
+        $themeConfig = $themeManager->getThemeByBasePath($basePath);
+        
+        $this->assertEquals("fooTheme", $themeConfig->name);
+    }
+    
+    public function testAbsoluteThemeDefinition()
+    {
+        $absolutePath = realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . 'otherThemeLocation/foo';
+    
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = $absolutePath;
+        
+        $themeManager = new ThemeManager();
+        $themeConfig = $themeManager->getThemeByBasePath($absolutePath);
+        
+        $this->assertEquals("fooTheme", $themeConfig->name);
+    }
+    
+    /**
+     * @expectedException \yii\base\InvalidArgumentException
+     * @expectedExceptionMessage  Theme @app/themes/blank already registered.
+     */
+    public function testDuplicateThemeDefinition()
+    {
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = '@app/themes/blank';
+        
+        $themeManager = new ThemeManager();
+        $themeManager->getThemes();
     }
 }

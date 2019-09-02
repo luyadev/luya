@@ -82,21 +82,41 @@ class Theme extends \yii\base\Theme
     
     protected $_layout = 'theme';
     
+    /**
+     * The name of the layout to be applied to this theme views.
+     *
+     * @return string Default `theme`
+     */
     public function getLayout()
     {
         return $this->_layout;
     }
     
+    /**
+     * Path to the directory that contains the theme views.
+     *
+     * @return string
+     */
     public function getViewPath()
     {
         return $this->getConfig()->getViewPath();
     }
     
+    /**
+     * Path to the directory that contains the theme layouts.
+     *
+     * @return string
+     */
     public function getLayoutPath()
     {
         return $this->viewPath . '/' . self::LAYOUTS_PATH;
     }
     
+    /**
+     * Theme configuration that contains the base theme information.
+     *
+     * @return ThemeConfig
+     */
     public function getConfig()
     {
         return $this->_config;
@@ -119,5 +139,5 @@ class Theme extends \yii\base\Theme
         }
         
         return $pathMap;
-}
+    }
 }

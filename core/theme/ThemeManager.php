@@ -22,6 +22,9 @@ use yii\base\InvalidConfigException;
  */
 class ThemeManager extends \yii\base\Component
 {
+    /**
+     * Name of the event before the active theme will be setup.
+     */
     const EVENT_BEFORE_SETUP = 'eventBeforeSetup';
     
     /**
@@ -51,6 +54,8 @@ class ThemeManager extends \yii\base\Component
             $dir = Yii::getAlias($basePath);
         } elseif (strpos($basePath, '/') !== 0) {
             $dir = $basePath = Yii::$app->basePath . DIRECTORY_SEPARATOR . $basePath;
+        } else {
+            $dir = $basePath;
         }
         
         if (!is_dir($dir) || !is_readable($dir)) {
@@ -58,12 +63,12 @@ class ThemeManager extends \yii\base\Component
         }
         
         $themeFile = $dir . '/theme.json';
-        if (file_exists($themeFile)) {
-            $config = Json::decode(file_get_contents($themeFile)) ?: [];
-        } else {
-            $config = [];
+        if (!file_exists($themeFile)) {
+            throw new InvalidConfigException('Theme config file missing at: ' . $themeFile);
         }
         
+        $config = Json::decode(file_get_contents($themeFile)) ?: [];
+    
         return new ThemeConfig($basePath, $config);
     }
     
@@ -92,6 +97,8 @@ class ThemeManager extends \yii\base\Component
     }
     
     /**
+     * Trigger the {{\luya\theme\ThemeManager::EVENT_BEFORE_SETUP}} event.
+     *
      * @param string $basePath
      */
     protected function beforeSetup(string &$basePath)
@@ -151,7 +158,7 @@ class ThemeManager extends \yii\base\Component
         $themeDefinitions = [];
         
         if (file_exists(Yii::getAlias('@app/themes'))) {
-            foreach (scandir(Yii::getAlias('@app/themes')) as $dirPath) {
+            foreach (glob(Yii::getAlias('@app/themes/*')) as $dirPath) {
                 $themeDefinitions[] = "@app/themes/" . basename($dirPath);
             }
         }
@@ -191,13 +198,14 @@ class ThemeManager extends \yii\base\Component
      */
     protected function registerTheme(ThemeConfig $themeConfig)
     {
-        if (isset($this->_themes[$themeConfig->getBasePath()])) {
-            throw new InvalidArgumentException("Theme already registered.");
+        $basePath = $themeConfig->getBasePath();
+        if (isset($this->_themes[$basePath])) {
+            throw new InvalidArgumentException("Theme $basePath already registered.");
         }
         
-        $this->_themes[$themeConfig->getBasePath()] = $themeConfig;
+        $this->_themes[$basePath] = $themeConfig;
         
-        Yii::setAlias('@' . basename($themeConfig->getBasePath()) . 'Theme', $themeConfig->getBasePath());
+        Yii::setAlias('@' . basename($basePath) . 'Theme', $basePath);
     }
     
     /**
@@ -219,7 +227,7 @@ class ThemeManager extends \yii\base\Component
     private $_activeTheme;
     
     /**
-     * Get the active theme. Is null if no theme activated.
+     * Get the active theme. Null if no theme is activated.
      *
      * @return Theme|null
      */
@@ -239,6 +247,8 @@ class ThemeManager extends \yii\base\Component
     }
     
     /**
+     * Check if a theme is activated.
+     *
      * @return bool
      */
     public function getHasActiveTheme()

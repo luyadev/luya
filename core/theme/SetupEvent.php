@@ -12,5 +12,8 @@ use yii\base\Event;
  */
 class SetupEvent extends Event
 {
+    /**
+     * @var string Base path of the theme to setup.
+     */
     public $basePath;
 }
