@@ -13,7 +13,7 @@ use yii\helpers\Inflector;
  * Command to create a new LUYA theme.
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
- * @since 1.1.0
+ * @since 1.0.22
  */
 class ThemeController extends \luya\console\Command
 {
