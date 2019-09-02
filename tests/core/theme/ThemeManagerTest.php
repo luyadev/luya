@@ -150,12 +150,12 @@ class ThemeManagerTest extends LuyaWebTestCase
         $themeManager = new ThemeManager();
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = '@app/otherThemeLocation/emptyThemeDir';
     
-        mkdir(Yii::getAlias('@app/themes/emptyThemeDir'));
+        mkdir(Yii::getAlias('@app/otherThemeLocation/emptyThemeDir'));
     
         try {
             $themeManager->getThemes();
         } finally {
-            rmdir(Yii::getAlias('@app/themes/emptyThemeDir'));
+            rmdir(Yii::getAlias('@app/otherThemeLocation/emptyThemeDir'));
         }
     }
     
