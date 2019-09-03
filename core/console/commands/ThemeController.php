@@ -111,22 +111,23 @@ class ThemeController extends \luya\console\Command
             $themeConfig->parentTheme = $this->prompt("Enter the base path (e.g. `@app/themes/blank`) of the parent theme:",
                 [
                     'default' => null,
-                    'validator' => function ($input, &$error) {
-                        if (preg_match('/^[a-z]+$/', $input) === false) {
-                            $error = 'The theme name must be only letter chars!';
-                            return false;
-                        } elseif (Yii::getAlias($input, false) === false) {
-                            $error = 'The theme base path not exists!';
-                            return false;
-                        }
-                        
-                        return true;
-                    },
+                    'validator' => [$this, 'validateParentTheme'],
                 ]);
-            
-            
         }
         
         return Json::encode($themeConfig->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
+    private function validateParentTheme($input, &$error)
+    {
+        if (!preg_match('/^@[a-z]+$/', $input)) {
+            $error = 'The theme name must be only letter chars!';
+            return false;
+        } elseif (Yii::getAlias($input, false) === false) {
+            $error = 'The theme base path not exists!';
+            return false;
+        }
+
+        return true;
     }
 }

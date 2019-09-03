@@ -131,6 +131,29 @@ JSON;
         $this->assertEquals('Theme real path: ' . Yii::getAlias('@app/themes/mynewtheme'), $controller->readOutput());
         $this->assertEquals("Theme files has been created successfully. Please run `".$_SERVER['PHP_SELF']." import` to loaded into the database.", $controller->readOutput());
     }
+
+    public function testValidateParentTheme()
+    {
+        $controller = new ThemeController('module', Yii::$app);
+
+        $error = null;
+        $input = '@INVALID';
+        $result = $this->invokeMethod($controller, 'validateParentTheme', [$input, &$error]);
+        $this->assertFalse($result);
+        $this->assertEquals('The theme name must be only letter chars!', $error);
+
+        $error = null;
+        $input = '@invalid';
+        $result = $this->invokeMethod($controller, 'validateParentTheme', [$input, &$error]);
+        $this->assertFalse($result);
+        $this->assertEquals('The theme base path not exists!', $error);
+
+        $error = null;
+        $input = '@app';
+        $result = $this->invokeMethod($controller, 'validateParentTheme', [$input, &$error]);
+        $this->assertTrue($result);
+        $this->assertNull($error);
+    }
 }
 
 class ThemeControllerStub extends ThemeController
