@@ -110,7 +110,7 @@ class ThemeController extends \luya\console\Command
         if ($this->confirm('Inherit from other theme?')) {
             $themeConfig->parentTheme = $this->prompt("Enter the base path (e.g. `@app/themes/blank`) of the parent theme:",
                 [
-                    'default' => '@app/themes/blank',
+                    'default' => null,
                     'validator' => function ($input, &$error) {
                         if (preg_match('/^[a-z]+$/', $input) === false) {
                             $error = 'The theme name must be only letter chars!';
@@ -123,6 +123,8 @@ class ThemeController extends \luya\console\Command
                         return true;
                     },
                 ]);
+            
+            
         }
         
         return Json::encode($themeConfig->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

@@ -4,6 +4,7 @@ namespace luyatests\core\console\commands;
 
 use luya\console\commands\ThemeController;
 use luya\helpers\FileHelper;
+use luya\testsuite\traits\CommandStdStreamTrait;
 use Yii;
 
 class ThemeControllerTest extends \luyatests\LuyaConsoleTestCase
@@ -28,7 +29,7 @@ class ThemeControllerTest extends \luyatests\LuyaConsoleTestCase
         $expectedJson = <<<JSON
 {
     "name": "mynewtheme",
-    "parentTheme": "@app/themes/blank",
+    "parentTheme": "",
     "pathMap": [],
     "description": null
 }
@@ -104,4 +105,35 @@ JSON;
         $this->assertEquals(1, $exitCode);
         $this->assertEquals("The folder $themePath exists already.", $controller->readOutput());
     }
+    
+    public function testInvalidParentTheme()
+    {
+        $themePath = Yii::getAlias('@luyatests/data/themes/mynewtheme');
+        FileHelper::removeDirectory($themePath);
+    
+        $controller = new ThemeControllerStub('module', Yii::$app);
+    
+        // Enter valid theme name
+        $controller->sendInput('mynewtheme');
+        // Enter valid location/alias
+        $controller->sendInput('app');
+        // Do you want continue? -> answer with no
+        $controller->sendInput('yes');
+        // Inherit from other theme? -> answer with yes
+        $controller->sendInput('yes');
+        // Enter invalid parent theme
+        $controller->sendInput('INVALID-PARENT');
+    
+        $exitCode = $controller->actionCreate();
+    
+        $this->assertEquals(0, $exitCode);
+        $this->assertEquals('Theme path alias: @app/themes/mynewtheme', $controller->readOutput());
+        $this->assertEquals('Theme real path: ' . Yii::getAlias('@app/themes/mynewtheme'), $controller->readOutput());
+        $this->assertEquals("Theme files has been created successfully. Please run `".$_SERVER['PHP_SELF']." import` to loaded into the database.", $controller->readOutput());
+    }
+}
+
+class ThemeControllerStub extends ThemeController
+{
+    use CommandStdStreamTrait;
 }
