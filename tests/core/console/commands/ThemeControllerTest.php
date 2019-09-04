@@ -70,16 +70,17 @@ JSON;
     
         $controller->truncateStreams();
     
-    
         // Enter valid theme name
         $controller->sendInput('themename');
         // Enter valid location/alias
-        $controller->sendInput('@app');
+        $controller->sendInput('@app-invalid');
+        // Rename theme location? -> answer with yes
+        $controller->sendInput('yes');
         // Do you want continue? -> answer with no
         $controller->sendInput('no');
-    
+
         $exitCode = $controller->actionCreate();
-    
+
         $this->assertEquals(1, $exitCode);
         $this->assertEquals('Theme path alias: @app/themes/themename', $controller->readOutput());
         $this->assertEquals('Theme real path: ' . Yii::getAlias('@app/themes/themename'), $controller->readOutput());

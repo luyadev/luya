@@ -50,7 +50,7 @@ class ThemeController extends \luya\console\Command
         $themeLocation = '@' . ltrim($themeLocation, '@');
     
         preg_match("#^@[A-z]+#", $themeLocation, $newThemeLocation);
-    
+
         if ($newThemeLocation[0] !== $themeLocation) {
             if (!$this->confirm("We have changed the name to '{$newThemeLocation[0]}'. Do you want to proceed with this name?")) {
                 return $this->outputError('Abort by user.');
