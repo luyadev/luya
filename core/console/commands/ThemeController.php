@@ -52,10 +52,10 @@ class ThemeController extends \luya\console\Command
         preg_match("#^@[A-z]+#", $themeLocation, $newThemeLocation);
     
         if ($newThemeLocation[0] !== $themeLocation) {
-            if (!$this->confirm("We have changed the name to '{$newThemeLocation}'. Do you want to proceed with this name?")) {
+            if (!$this->confirm("We have changed the name to '{$newThemeLocation[0]}'. Do you want to proceed with this name?")) {
                 return $this->outputError('Abort by user.');
             } else {
-                $themeLocation = $newThemeLocation;
+                $themeLocation = $newThemeLocation[0];
             }
         }
         
