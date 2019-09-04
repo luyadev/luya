@@ -59,7 +59,7 @@ JSON;
         // Enter valid theme name
         $controller->sendInput('themename');
         // Enter invalid location/alias
-        $controller->sendInput('-invalid!sign1');
+        $controller->sendInput('@invalid!sign1');
         // answer with no
         $controller->sendInput('no');
         
@@ -74,7 +74,7 @@ JSON;
         // Enter valid theme name
         $controller->sendInput('themename');
         // Enter valid location/alias
-        $controller->sendInput('app');
+        $controller->sendInput('@app');
         // Do you want continue? -> answer with no
         $controller->sendInput('no');
     
