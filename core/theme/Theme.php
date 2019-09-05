@@ -18,7 +18,7 @@ use yii\base\InvalidConfigException;
  *
  * @see \luya\theme\ThemeConfig
  * @author Bennet Klarhoelter <boehsermoe@me.com>
- * @since 1.0.22
+ * @since 1.0.21
  */
 class Theme extends \yii\base\Theme
 {
