@@ -6,10 +6,10 @@ Permissions are commonly part of the {{luya\admin\base\Module::getMenu()}} metho
 
 In order to make wording clear in this guide section:
 
-+ Authentication: This means you have to provided an access token, bearere token or session based authenatication mechanism.
-+ Permission: This means an API or WEB-Route is stored in the LUYA ADMIN permission system and can be associated to given groups which can be then associated to users (both users and api users).
-+ user vs api user: Api Users are not able to login in the Admin UI, while users do. There are also other limitations Api Users can not do by default.
-+ REST/API vs WEB: A REST/API Controller will return josn or xml formatted content and auth must be done via token, while a web controller returns html (scalar values) and authentication is done trough session cookie.
++ Authentication: This means you have to provide an access token, bearer auth header or session based authentication mechanism in order to access the given resource.
++ Permission: This means an API or WEB-Route is stored in the LUYA ADMIN permission system and can be associated to given groups which can be then associated to users (both users and api users). For example, users can be edited, added and deleted.
++ User vs API User: API Users are not able to login in the Admin UI, while Users do. There are also other limitations, like API Users can not access actions without permission entries, if disabled (which is by default)
++ REST/API vs WEB: A REST/API Controller will return JSON or XML formatted content and authentication must be done via token, while a web controller returns html (scalar values) and authentication is done trough session cookie.
 
 ## The menu
 
