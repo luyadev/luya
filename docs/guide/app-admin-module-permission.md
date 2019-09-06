@@ -10,6 +10,8 @@ In order to make wording clear in this guide section:
 + Permission: This means an API or WEB-Route is stored in the LUYA ADMIN permission system and can be associated to given groups which can be then associated to users (both users and api users). For example, users can be edited, added and deleted.
 + User vs API User: API Users are not able to login in the Admin UI, while Users do. There are also other limitations, like API Users can not access actions without permission entries, if disabled (which is by default)
 + REST/API vs WEB: A REST/API Controller will return JSON or XML formatted content and authentication must be done via token, while a web controller returns html (scalar values) and authentication is done trough session cookie.
++ Permission Routes: Permission entry for {{luya\admin\base\RestController}} and {{luya\admin\base\Controller}}.
++ Permission Apis: Permission entry for {{luya\admin\base\RestActiveController}}
 
 ## The menu
 
