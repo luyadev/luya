@@ -10,6 +10,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#1942](https://github.com/luyadev/luya/issues/1942) Use phpmailers `setFrom()` method instead of `$from` and `$fromName` property.
 + [#340|admin](https://github.com/luyadev/luya-module-admin/issues/340) Allow extending the auth methods in rest behavior trait.
 + [#1916](https://github.com/luyadev/luya/issues/1916) Extended LUYA Core with a mechanism to load and handle themes.
++ [#1938](https://github.com/luyadev/luya/issues/1938) Added `luyaBootstrap($app)` method to base module. When the application starts, all LUYA modules will be initialized and therefore will call the `luyaBootstrap($app)` method.
 
 ## 1.0.20 (5. August 2019)
 
