@@ -50,14 +50,13 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bestiejs/punycode.js.git",
+                "url": "https://github.com/bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "shasum": ""
+                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -1233,16 +1232,16 @@
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.17.2",
+            "version": "1.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "828c9b6de876fd60ec81ad105b1dc5b45eb24ee2"
+                "reference": "a803e3d74b74c8e491c3dcfac457fe12b6d3b5ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/828c9b6de876fd60ec81ad105b1dc5b45eb24ee2",
-                "reference": "828c9b6de876fd60ec81ad105b1dc5b45eb24ee2",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/a803e3d74b74c8e491c3dcfac457fe12b6d3b5ae",
+                "reference": "a803e3d74b74c8e491c3dcfac457fe12b6d3b5ae",
                 "shasum": ""
             },
             "require": {
@@ -1282,7 +1281,7 @@
                 "module",
                 "php"
             ],
-            "time": "2019-06-26T13:55:17+00:00"
+            "time": "2019-09-04T06:33:09+00:00"
         },
         {
             "name": "myclabs/deep-copy",

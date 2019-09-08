@@ -2,6 +2,8 @@
 
 namespace luya\web;
 
+use Yii;
+use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use luya\base\AdminModuleInterface;
 use luya\TagParser;
@@ -30,6 +32,7 @@ class Bootstrap extends BaseBootstrap
     /**
      * Before bootstrap run process.
      *
+     * @param Application $app
      * @see \luya\base\BaseBootstrap::beforeRun()
      */
     public function beforeRun($app)
@@ -98,6 +101,7 @@ class Bootstrap extends BaseBootstrap
     /**
      * Invokes the bootstraping process.
      *
+     * @param Application $app
      * @see \luya\base\BaseBootstrap::run()
      */
     public function run($app)
@@ -130,6 +134,9 @@ class Bootstrap extends BaseBootstrap
                 // as the admin module needs to listen for $apiDefintions we have to get the urlRules from the admin and merge with the existing rules:
                 // in admin context, admin url rules have always precedence over frontend rules.
                 $this->_urlRules = array_merge($app->getModule('admin')->urlRules, $this->_urlRules);
+            } else {
+                // Frontend context
+                $app->themeManager->setup();
             }
         }
         

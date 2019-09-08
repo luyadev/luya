@@ -46,6 +46,7 @@ class Application extends \yii\console\Application
             // luya default commands
             'migrate' => 'luya\console\commands\MigrateController',
             'module' => 'luya\console\commands\ModuleController',
+            'theme' => 'luya\console\commands\ThemeController',
             'import' => 'luya\console\commands\ImportController',
             'health' => 'luya\console\commands\HealthController',
         ];

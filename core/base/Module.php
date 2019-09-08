@@ -2,6 +2,7 @@
 
 namespace luya\base;
 
+use luya\theme\Theme;
 use Yii;
 use yii\base\InvalidConfigException;
 use luya\console\interfaces\ImportControllerInterface;
@@ -189,20 +190,26 @@ abstract class Module extends \yii\base\Module
             }
         }
         
+        if (Yii::$app->themeManager->hasActiveTheme) {
+            $this->layout = Yii::$app->themeManager->activeTheme->layout;
+        }
+
         static::onLoad();
     }
 
     /**
-     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true,.
-     *
-     * the *@app* namespace views will be looked up for view files
+     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true,
+     * the *@app* namespace views will be looked up for view files.
+     * Else the layout path of the active theme will be used.
      *
      * @return string
      * @see \yii\base\Module::getLayoutPath()
      */
     public function getLayoutPath()
     {
-        if ($this->useAppLayoutPath) {
+        if (Yii::$app->themeManager->hasActiveTheme && $this->useAppLayoutPath){
+            $this->setLayoutPath(Yii::$app->themeManager->activeTheme->layoutPath);
+        } elseif ($this->useAppLayoutPath) {
             $this->setLayoutPath('@app/views/'.$this->id.'/layouts');
         }
 

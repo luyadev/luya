@@ -1,4 +1,4 @@
-# Create package (Extension/Module)
+# Create package (Extension/Module/Theme)
 
 This guide is intended to provide the very basic steps to create a LUYA Package (also known as extension or module). 
 There are different type of packages:
@@ -12,7 +12,7 @@ In this guide we will give you a very basic step by step instruction in **how to
 
 ## Create basic extension with a block
 
-You can use this sekeleton for a new package: https://github.com/luyadev/luya-package-skeleton
+You can use this skeleton for a new package: https://github.com/luyadev/luya-package-skeleton
 
 ```sh
 git clone https://github.com/luyadev/luya-package-skeleton

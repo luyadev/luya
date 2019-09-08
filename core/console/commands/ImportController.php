@@ -28,7 +28,7 @@ class ImportController extends Command implements ImportControllerInterface
     /**
      * @var array An array with all folder names inside an application/module to scan for files.
      */
-    protected $scanFolders = ['blocks', 'filters', 'properties', 'blockgroups'];
+    protected $scanFolders = ['themes', 'blocks', 'filters', 'properties', 'blockgroups'];
 
     /**
      * @inheritdoc
@@ -45,7 +45,7 @@ class ImportController extends Command implements ImportControllerInterface
         }
         // foreach scanFolder inside the app namespace
         foreach ($this->scanFolders as $folderName) {
-            $this->addToDirectory(Yii::getAlias("@app/$folderName"), $folderName, '\\app\\'.$folderName, '@app');
+            $this->addToDirectory(Yii::getAlias("@app/$folderName"), $folderName, '\\app\\'.$folderName, 'app');
         }
     }
 
@@ -69,6 +69,7 @@ class ImportController extends Command implements ImportControllerInterface
                 'files' => $this->scanDirectoryFiles($path, $ns, $module),
             ];
         }
+    
     }
     
     /**
@@ -86,6 +87,7 @@ class ImportController extends Command implements ImportControllerInterface
             if (substr($file, 0, 1) !== '.') {
                 $files[] = [
                     'file' => $file,
+                    'filePath' => $path.DIRECTORY_SEPARATOR.$file,
                     'module' => $module,
                     'ns' => $ns.'\\'.pathinfo($file, PATHINFO_FILENAME),
                 ];

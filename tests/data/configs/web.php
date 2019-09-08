@@ -9,6 +9,7 @@ return [
         '@runtime' => dirname(__DIR__) . '/runtime',
         '@luyatests' => dirname(__DIR__) . '/../',
     ],
+    'controllerNamespace' => 'luyatests\\data\\controllers',
     'modules' => [
         'unitmodule' => [
             'class' => '\luyatests\data\modules\unitmodule\Module',
@@ -21,6 +22,9 @@ return [
         ],
         'ctrlmodule' => [
             'class' => '\luyatests\data\modules\ctrlmodule\Module',
+        ],
+        'thememodule' => [
+            'class' => '\luyatests\data\modules\thememodule\Module',
         ],
     ],
     'components' => [

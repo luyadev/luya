@@ -17,4 +17,10 @@ class PackageConfig extends BaseObject
     public $blocks = [];
     
     public $package;
+    
+    /**
+     * @var array
+     * @since 1.0.21
+     */
+    public $themes = [];
 }
