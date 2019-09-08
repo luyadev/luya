@@ -246,6 +246,7 @@ abstract class Boot
             ],
         ]);
         $this->app = new ConsoleApplication($mergedConfig);
+
         if (!$this->mockOnly) {
             exit($this->app->run());
         }
@@ -262,6 +263,7 @@ abstract class Boot
         $this->includeYii();
         $mergedConfig = ArrayHelper::merge($config, ['bootstrap' => ['luya\web\Bootstrap']]);
         $this->app = new WebApplication($mergedConfig);
+
         if (!$this->mockOnly) {
             return $this->app->run();
         }

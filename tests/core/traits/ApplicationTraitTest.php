@@ -16,12 +16,12 @@ class ApplicationTraitTest extends LuyaWebTestCase
     
     public function testCountApplicationModules()
     {
-        $this->assertSame(4, count($this->trait->getApplicationModules()));
+        $this->assertSame(5, count($this->trait->getApplicationModules()));
     }
 
     public function testCountFrontendModules()
     {
-        $this->assertSame(3, count($this->trait->getFrontendModules()));
+        $this->assertSame(4, count($this->trait->getFrontendModules()));
     }
     
     public function testLocalisation()

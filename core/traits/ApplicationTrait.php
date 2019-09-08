@@ -2,6 +2,7 @@
 
 namespace luya\traits;
 
+use luya\theme\ThemeManager;
 use Yii;
 use luya\base\AdminModuleInterface;
 use luya\base\Module;
@@ -11,8 +12,9 @@ use luya\base\PackageInstaller;
 /**
  * LUYA Appliation trait
  *
- * @property string $webroot Returns the webroot directory event for console commands.
+ * @property string                $webroot Returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
+ * @property ThemeManager          $themeManager Get luya theme manager
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -149,17 +151,23 @@ trait ApplicationTrait
         setlocale(LC_ALL, $locale.'.utf8', $locale.'UTF-8', $locale);
     }
 
+    private $_packageInstaller;
+    
     /**
      * Get the package Installer
      * @return \luya\base\PackageInstaller
      */
     public function getPackageInstaller()
     {
-        $file = Yii::getAlias('@vendor/luyadev/installer.php');
+        if ($this->_packageInstaller == null) {
+            $file = Yii::getAlias('@vendor/luyadev/installer.php');
         
-        $data = is_file($file) ? include $file : [];
-         
-        return new PackageInstaller($data);
+            $data = is_file($file) ? include $file : [];
+        
+            $this->_packageInstaller = new PackageInstaller($data);
+        }
+        
+        return $this->_packageInstaller;
     }
     
     /**
@@ -200,6 +208,7 @@ trait ApplicationTrait
         return array_merge(parent::coreComponents(), [
             'mail' => ['class' => 'luya\components\Mail'],
             'formatter' => ['class' => 'luya\components\Formatter'],
+            'themeManager' => ['class' => 'luya\theme\ThemeManager'],
         ]);
     }
 

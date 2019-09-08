@@ -1,0 +1,6 @@
+{
+    "parentTheme" : "@app/themes/blank",
+    "pathMap": [
+        "@unitmodule/views"
+    ]
+}

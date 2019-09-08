@@ -29,6 +29,7 @@
   + [Security](app-security.md)
   + [JsonLd](app-jsonld.md)
   + [Modules](app-module.md)
+  + [Themes](app-themes.md)
 + CMS
   + [CMS Layouts](app-cmslayouts.md)
   + [Menus & Navigations](app-menu.md)
