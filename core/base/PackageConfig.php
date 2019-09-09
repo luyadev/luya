@@ -11,7 +11,7 @@ use yii\base\BaseObject;
  * @property array $bootstrap
  * @property array $blocks
  * @property string $package
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -59,13 +59,13 @@ class PackageConfig extends BaseObject
      * Getter method for bootstrap
      *
      * Example content:
-     * 
+     *
      * ```php
      * return [
      *  0 => '\\luya\\admin\\Bootstrap',
      * ]
      * ```
-     * 
+     *
      * @return array An array with bootstrap classes.
      * @since 1.0.21
      */
@@ -78,13 +78,13 @@ class PackageConfig extends BaseObject
      * Getter method for blocks
      *
      * Example content:
-     * 
+     *
      * ```php
      * return [
      *    0 => 'vendor/luyadev/luya-module-cms/src/frontend/blocks',
      * ]
      * ```
-     * 
+     *
      * @return array An array with block defintions.
      * @since 1.0.21
      */
@@ -97,7 +97,7 @@ class PackageConfig extends BaseObject
      * Getter method for package
      *
      * Example content:
-     * 
+     *
      * ```php
      * return [
      *   'name' => 'luyadev/luya-module-admin',
@@ -109,7 +109,7 @@ class PackageConfig extends BaseObject
      *   'packageFolder' => 'luyadev/luya-module-admin',
      * ]
      * ```
-     * 
+     *
      * @return array An array with all informations about the package.
      * @since 1.0.21
      */

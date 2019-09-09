@@ -203,7 +203,8 @@ class FileHelper extends \yii\helpers\BaseFileHelper
             if (parent::unlink($file)) {
                 return true;
             }
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
         
         // try to force symlinks
         if (is_link($file)) {

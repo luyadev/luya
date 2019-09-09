@@ -195,24 +195,24 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * Find the host for a given definition based on the {{Composition::$hostInfoMapping}} definition.
-     * 
+     *
      * Find the host info mapping (if existing) for a lang short code:
-     * 
+     *
      * ```php
      * $host = $composition->resolveHostInfo('en');
      * ```
-     * 
+     *
      * Or resolve by provide full host info mapping defintion:
-     * 
+     *
      * ```php
      * $host = $composition->resolveHostInfo([
      *     'langShortCode' => 'de'
      *     'countryShortCode' => 'ch',
      * ]);
      * ```
-     * 
+     *
      * > Keep in mind that when {{Composition::$hostInfoMapping}} is empty (no defintion), false is returned.
-     * 
+     *
      * @param string|array $defintion The hostinfo mapping config containing an array with full defintion of different keys or a string
      * which will only resolved based on langShortCode identifier.
      * @return string|boolean Returns the host name from the host info maping otherwise false if not found.
@@ -230,7 +230,8 @@ class Composition extends Component implements \ArrayAccess
             $results = ArrayHelper::searchColumns($results, $key, $value);
         }
 
-        return empty($results) ? false : key($results);;
+        return empty($results) ? false : key($results);
+        ;
     }
 
     private $_keys;

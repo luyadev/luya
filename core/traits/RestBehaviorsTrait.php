@@ -104,7 +104,7 @@ trait RestBehaviorsTrait
         return [
             QueryParamAuth::class,
             HttpBearerAuth::class,
-        ];   
+        ];
     }
 
     /**

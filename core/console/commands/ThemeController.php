@@ -108,11 +108,13 @@ class ThemeController extends \luya\console\Command
         $themeConfig->name = $themeName;
         
         if ($this->confirm('Inherit from other theme?')) {
-            $themeConfig->parentTheme = $this->prompt("Enter the base path (e.g. `@app/themes/blank`) of the parent theme:",
+            $themeConfig->parentTheme = $this->prompt(
+                "Enter the base path (e.g. `@app/themes/blank`) of the parent theme:",
                 [
                     'default' => null,
                     'validator' => [$this, 'validateParentTheme'],
-                ]);
+                ]
+            );
         }
         
         return Json::encode($themeConfig->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

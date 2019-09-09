@@ -9,7 +9,7 @@ use yii\base\BaseObject;
  *
  * @property string $timestamp
  * @property PackageConfig[] $configs
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -60,7 +60,7 @@ class PackageInstaller extends BaseObject
     
     /**
      * Getter method for Configs.
-     * 
+     *
      * @return PackageConfig[]
      */
     public function getConfigs()

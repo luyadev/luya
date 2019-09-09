@@ -91,7 +91,7 @@ trait ErrorHandlerTrait
 
     /**
      * Returns whether a given exception is whitelisted or not.
-     * 
+     *
      * If an exception is whitelisted or in the liste of whitelisted exception
      * the exception content won't be transmitted to the error api.
      *
@@ -289,7 +289,7 @@ trait ErrorHandlerTrait
             'class' => isset($item['class']) ? $item['class'] : null,
             // currently arguments wont be transmited due to large amount of informations based on base object
             //'args' => isset($item['args']) ? ArrayHelper::coverSensitiveValues($item['args'], $this->sensitiveKeys) : [],
-        ], function($value) {
+        ], function ($value) {
             return !empty($value);
         });
     }

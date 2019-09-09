@@ -215,14 +215,14 @@ class XLSXWriter
             ) . '" activeCellId="0" pane="bottomLeft" sqref="' . self::xlsCell(
                 0,
                 $sheet->freeze_columns
-                    ) . '"/>');
+            ) . '"/>');
             $sheet->file_writer->write('<selection activeCell="' . self::xlsCell(
                 $sheet->freeze_rows,
                 $sheet->freeze_columns
             ) . '" activeCellId="0" pane="bottomRight" sqref="' . self::xlsCell(
                 $sheet->freeze_rows,
                 $sheet->freeze_columns
-                    ) . '"/>');
+            ) . '"/>');
         } elseif ($sheet->freeze_rows) {
             $sheet->file_writer->write('<pane ySplit="' . $sheet->freeze_rows . '" topLeftCell="' . self::xlsCell(
                 $sheet->freeze_rows,
@@ -234,7 +234,7 @@ class XLSXWriter
             ) . '" activeCellId="0" pane="bottomLeft" sqref="' . self::xlsCell(
                 $sheet->freeze_rows,
                 0
-                    ) . '"/>');
+            ) . '"/>');
         } elseif ($sheet->freeze_columns) {
             $sheet->file_writer->write('<pane xSplit="' . $sheet->freeze_columns . '" topLeftCell="' . self::xlsCell(
                 0,
@@ -246,7 +246,7 @@ class XLSXWriter
             ) . '" activeCellId="0" pane="topRight" sqref="' . self::xlsCell(
                 0,
                 $sheet->freeze_columns
-                    ) . '"/>');
+            ) . '"/>');
         } else { // not frozen
             $sheet->file_writer->write('<selection activeCell="A1" activeCellId="0" pane="topLeft" sqref="A1"/>');
         }

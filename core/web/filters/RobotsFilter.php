@@ -39,7 +39,7 @@ use luya\exceptions\WhitelistedException;
  *     ];
  * }
  * ```
- * 
+ *
  * Its also recommend to use {{luya\widgets\SubmitButtonWidget}} when creating forms.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -87,7 +87,7 @@ class RobotsFilter extends ActionFilter
 
     /**
      * Get a specific key for the current robots filter session array.
-     * 
+     *
      * This ensures that when multiple forms are on the same page, only the robot check is handeld for the given module name.
      *
      * @return string

@@ -29,7 +29,7 @@ class ResponseCache extends PageCache
      *     // do something whether is the response cached or not
      * });
      * ```
-     * 
+     *
      * @deprecated Replaced in favor of {{beforeCacheResponse}} and {{afterRestoreResponse}}. Will be removed in 2.0
      */
     public $actionsCallable = [];

@@ -198,11 +198,11 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
-     * The LUYA Bootstrap method will be invoken when the application starts. 
-     * 
+     * The LUYA Bootstrap method will be invoken when the application starts.
+     *
      * As LUYA modules will be loaded while bootstraping, this method will ALWAYS be invoken when
      * the application starts.
-     * 
+     *
      * Compared to the {{yii\base\BootstrapInterface}} the module or class must still be configured
      * to bootstrap in the configuration section, the {{luyaBootstrap}} will be invoken always.
      *
@@ -223,7 +223,7 @@ abstract class Module extends \yii\base\Module
      */
     public function getLayoutPath()
     {
-        if (Yii::$app->themeManager->hasActiveTheme && $this->useAppLayoutPath){
+        if (Yii::$app->themeManager->hasActiveTheme && $this->useAppLayoutPath) {
             $this->setLayoutPath(Yii::$app->themeManager->activeTheme->layoutPath);
         } elseif ($this->useAppLayoutPath) {
             $this->setLayoutPath('@app/views/'.$this->id.'/layouts');
