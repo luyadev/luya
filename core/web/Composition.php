@@ -231,7 +231,6 @@ class Composition extends Component implements \ArrayAccess
         }
 
         return empty($results) ? false : key($results);
-        ;
     }
 
     private $_keys;
