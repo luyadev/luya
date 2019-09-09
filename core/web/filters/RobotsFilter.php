@@ -4,10 +4,10 @@ namespace luya\web\filters;
 
 use Yii;
 use yii\base\ActionFilter;
-use yii\base\InvalidCallException;
 use yii\helpers\VarDumper;
 use yii\base\Controller;
 use luya\helpers\ArrayHelper;
+use luya\exceptions\WhitelistedException;
 
 /**
  * Prevent Robots from sending Forms.
@@ -39,6 +39,8 @@ use luya\helpers\ArrayHelper;
  *     ];
  * }
  * ```
+ * 
+ * Its also recommend to use {{luya\widgets\SubmitButtonWidget}} when creating forms.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -121,7 +123,7 @@ class RobotsFilter extends ActionFilter
     {
         if (Yii::$app->request->isPost) {
             if ($this->getElapsedProcessTime() < $this->delay) {
-                throw new InvalidCallException("Robots Filter has detected an invalid Request: " . VarDumper::export(ArrayHelper::coverSensitiveValues(Yii::$app->request->post())));
+                throw new WhitelistedException("Robots Filter has detected an invalid Request: " . VarDumper::export(ArrayHelper::coverSensitiveValues(Yii::$app->request->post())));
             }
         }
         

@@ -43,7 +43,7 @@ class RobotsFilterTest extends LuyaWebTestCase
     {
         $_SERVER['REQUEST_METHOD'] = 'post';
         $ctrl = new StubRobotsController('stub', Yii::$app);
-        $this->expectException('yii\base\InvalidCallException');
+        $this->expectException('luya\exceptions\WhitelistedException');
         $this->assertSame('foobar', $ctrl->runAction('test'));
     }
 
@@ -60,7 +60,5 @@ class RobotsFilterTest extends LuyaWebTestCase
         $this->assertSame('generic', $this->invokeMethod($filter, 'getSessionKeyByOwner'));
 
         $this->assertSame(time(), $this->invokeMethod($filter, 'getRenderTime'));
-
-
     }
 }

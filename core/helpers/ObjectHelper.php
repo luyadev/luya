@@ -26,6 +26,15 @@ class ObjectHelper
      * ObjectHelper::isInstanceOf($object, '\Exception');
      * ```
      * 
+     * In order to check if an object is at least an instance of one given resourcese use:
+     * 
+     * ```php
+     * ObjectHelper::isInstanceOf($object, ['not\this\Object', 'maybe\this\Object', '\Exception']);
+     * ```
+     * 
+     * If at least one of the given exception names in the array is an instance of the given object, true
+     * is returned.
+     * 
      * @param object $object The object to type check against haystack.
      * @param string|array|object $haystack A list of classes, a string for a given class, or an object.
      * @param boolean $throwException Whether an exception should be thrown or not.

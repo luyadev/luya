@@ -6,7 +6,10 @@ use Yii;
 use luya\Exception;
 use luyatests\LuyaWebTestCase;
 use luya\console\ErrorHandler;
+use luya\exceptions\WhitelistedException;
+use yii\base\InvalidConfigException;
 use yii\web\Application;
+use yii\web\NotFoundHttpException;
 
 class ErrorHandlerTest extends LuyaWebTestCase
 {
@@ -83,5 +86,17 @@ class ErrorHandlerTest extends LuyaWebTestCase
         
         $this->assertTrue(Yii::$app instanceof Application);
         $this->assertSame([], $response['bodyParams']);
+    }
+
+    public function testIsWhitelisted()
+    {
+        $stud = new ErrorHandler();
+        $notFound = new NotFoundHttpException("not found");
+        $this->assertTrue($stud->isExceptionWhitelisted($notFound));
+        $this->assertFalse($stud->isExceptionWhitelisted(['foobar']));
+        $other = new InvalidConfigException('invalid config');
+        $this->assertFalse($stud->isExceptionWhitelisted($other));
+        $whitelisted = new WhitelistedException('whitelisted!');
+        $this->assertTrue($stud->isExceptionWhitelisted($whitelisted));
     }
 }
