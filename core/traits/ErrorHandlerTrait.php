@@ -13,6 +13,7 @@ use yii\web\HttpException;
 use yii\base\Exception;
 use yii\base\ErrorException;
 use luya\Boot;
+use luya\exceptions\WhitelistedException;
 
 /**
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
@@ -42,10 +43,19 @@ trait ErrorHandlerTrait
     public $lastTransferCall;
     
     /**
-     * @var array An array of exceptions which are whitelisted and therefore NOT TRANSFERED.
+     * @var array An array of exceptions which are whitelisted and therefore NOT TRANSFERED. Whitelisted exception
+     * are basically expected application logic which does not need to report informations to the developer, as the
+     * application works as expect.
      * @since 1.0.5
      */
-    public $whitelist = ['yii\web\NotFoundHttpException'];
+    public $whitelist = [
+        'yii\base\InvalidRouteException',
+        'yii\web\NotFoundHttpException',
+        'yii\web\ForbiddenHttpException',
+        'yii\web\MethodNotAllowedHttpException',
+        'yii\web\UnauthorizedHttpException',
+        'yii\web\BadRequestHttpException',
+    ];
     
     /**
      * @var array
@@ -78,6 +88,29 @@ trait ErrorHandlerTrait
             'line' => $line,
         ]));
     }
+
+    /**
+     * Returns whether a given exception is whitelisted or not.
+     * 
+     * If an exception is whitelisted or in the liste of whitelisted exception
+     * the exception content won't be transmitted to the error api.
+     *
+     * @param mixed $exception
+     * @return boolean Returns true if whitelisted, or false if not and can therefore be transmitted.
+     * @since 1.0.21
+     */
+    public function isExceptionWhitelisted($exception)
+    {
+        if (!is_object($exception)) {
+            return false;
+        }
+
+        if (ObjectHelper::isInstanceOf($exception, WhitelistedException::class, false)) {
+            return true;
+        }
+
+        return ObjectHelper::isInstanceOf($exception, $this->whitelist, false);
+    }
     
     /**
      * Send the array data to the api server.
@@ -87,20 +120,15 @@ trait ErrorHandlerTrait
      */
     private function apiServerSendData(array $data)
     {
-        if ($this->transferException) {
-            $curl = new Curl();
-            $curl->setOpt(CURLOPT_CONNECTTIMEOUT, 2);
-            $curl->setOpt(CURLOPT_TIMEOUT, 2);
-            $curl->post(Url::ensureHttp(rtrim($this->api, '/')).'/create', [
-                'error_json' => Json::encode($data),
-            ]);
-            
-            $this->lastTransferCall = $curl;
-            
-            return $curl->isSuccess();
-        }
+        $curl = new Curl();
+        $curl->setOpt(CURLOPT_CONNECTTIMEOUT, 2);
+        $curl->setOpt(CURLOPT_TIMEOUT, 2);
+        $curl->post(Url::ensureHttp(rtrim($this->api, '/')).'/create', [
+            'error_json' => Json::encode($data),
+        ]);
+        $this->lastTransferCall = $curl;
         
-        return null;
+        return $curl->isSuccess();
     }
     
     /**
@@ -108,7 +136,7 @@ trait ErrorHandlerTrait
      */
     public function renderException($exception)
     {
-        if (!ObjectHelper::isInstanceOf($exception, $this->whitelist, false) && $this->transferException) {
+        if ($this->transferException && !$this->isExceptionWhitelisted($exception)) {
             $this->apiServerSendData($this->getExceptionArray($exception));
         }
         
