@@ -43,7 +43,9 @@ trait ErrorHandlerTrait
     public $lastTransferCall;
     
     /**
-     * @var array An array of exceptions which are whitelisted and therefore NOT TRANSFERED.
+     * @var array An array of exceptions which are whitelisted and therefore NOT TRANSFERED. Whitelisted exception
+     * are basically expected application logic which does not need to report informations to the developer, as the
+     * application works as expect.
      * @since 1.0.5
      */
     public $whitelist = [

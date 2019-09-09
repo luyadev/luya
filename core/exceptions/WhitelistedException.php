@@ -5,7 +5,7 @@ namespace luya\exceptions;
 use luya\Exception;
 
 /**
- * An exception which is Whitelisted and therefore expect.
+ * An exception which is Whitelisted and therefore expected.
  * 
  * > Whitelisted Exception won't be transmitted to the LUYA error api.
  * 
