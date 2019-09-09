@@ -19,7 +19,7 @@ class PackageInstallerTest extends LuyaWebTestCase
                     'nonexstingstring' => 'content',
                     'nonexistingarray' => ['content1', 'content2'],
                     'blocks' => ['block.php'],
-                    'bootstraps' => ['bootstrap.php'],
+                    'bootstrap' => ['bootstrap.php'],
                 ]
             ]
         ]);
@@ -30,7 +30,10 @@ class PackageInstallerTest extends LuyaWebTestCase
             $this->assertSame(null, $config->getValue('THIS_KEY_DOES_NOT_EXISTS'));
             $this->assertSame(['content1', 'content2'], $config->getValue('nonexistingarray'));
             $this->assertSame(['block.php'], $config->blocks);
-            $this->assertSame(['bootstrap.php'], $config->bootstraps);
+            $this->assertSame(['bootstrap.php'], $config->bootstrap);
+
+            $this->expectException('yii\base\UnknownPropertyException');
+            $config->doesnotexsts;
         }
 
         $this->assertSame(12345, $installer->getTimestamp());
