@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.21
 
++ [#1956](https://github.com/luyadev/luya/issues/1956) Ensure a not existing package installer config value `installer.php` won't throw an exception.
 + [#1947](https://github.com/luyadev/luya/issues/1947) Whiteliste more exception which should not be transmitted to error API.
 + [#1772](https://github.com/luyadev/luya/issues/1772) Add new `luya\Config` to generate configuration builds depending on console or web runtime.
 + [#1950](https://github.com/luyadev/luya/issues/1950) Fixed bug in Export Helper when dealing with special chars.
