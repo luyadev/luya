@@ -2,11 +2,11 @@
 
 namespace luya\base;
 
-use luya\theme\Theme;
 use Yii;
 use yii\base\InvalidConfigException;
 use luya\console\interfaces\ImportControllerInterface;
 use luya\helpers\ObjectHelper;
+use yii\base\Application;
 
 /**
  * LUYA Module base class.
@@ -195,6 +195,22 @@ abstract class Module extends \yii\base\Module
         }
 
         static::onLoad();
+    }
+
+    /**
+     * The LUYA Bootstrap method will be invoken when the application starts. 
+     * 
+     * As LUYA modules will be loaded while bootstraping, this method will ALWAYS be invoken when
+     * the application starts.
+     * 
+     * Compared to the {{yii\base\BootstrapInterface}} the module or class must still be configured
+     * to bootstrap in the configuration section, the {{luyaBootstrap}} will be invoken always.
+     *
+     * @param Application $app
+     * @since 1.0.21
+     */
+    public function luyaBootstrap(Application $app)
+    {
     }
 
     /**
