@@ -1,28 +1,29 @@
 # Project themes
 
-A theme can be used to overwrite other views.
+A theme can be used to overwrite views form other themes (inherit) or other module views.
 
 ## Theme folder structure
 
 > In order to create your custom theme you can run the [Console Command](luya-console.md) `theme/create` wizard.
 
-Structure of a theme
+Themes directories can be located at `@app/themes/{themeName}` or inside of a composer package (see below). To load a new theme you have to execute `vendor/bin/luya import` form console.
+
+Example of a theme directory structure:
 
 ```
     .
+    ├── theme.json     // required
     ├── resources
-    ├── views
-    │   ├── layouts
-    │       └── theme.php
-    │   └── site
-    │       └── index.php
-    └── theme.json
+    └── views
+        ├── layouts
+        │   └── theme.php
+        └── site
+            └── index.php   
 ```
 
 ## Configure active theme
 
-To enable a theme you have to define it in your config file. The theme `@app/themes/blank` is the fallback/default theme.
-E.g. add this to your configs in the themeManager section:
+To enable a theme you have to assigne it to the theme manager. You can define this in your config file just add the theme alias e.g. `@app/themes/blank` to the `themeManager` config section:
 
 ```php
 $config = [
@@ -36,7 +37,7 @@ $config = [
 
 ## Example theme config
 
-In our example we make a *blue theme* which inherit from the default *@app/themes/blank*.
+In our example we make a *blue theme* which inherit from the theme *@app/themes/blank*.
 
 The *blank* theme (base)
 
@@ -64,7 +65,7 @@ Theme inherit all view files from their parents. Only if a theme has the same vi
 In the above example the *blank* theme could have the view `@blankTheme/views/site/index`.
 The *blue* theme does need to have this view file because it will inherit from the *blank* theme.
 
-But the views from `@app/views` will be override all other theme views.
+**But the views from `@app/views` will be override all other theme views.
 
 The order of view inheritance (pathMap) will looks like this:
 
