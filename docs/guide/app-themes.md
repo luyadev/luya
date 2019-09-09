@@ -1,6 +1,6 @@
 # Project themes
 
-A theme can used to overwrite other views.
+A theme can be used to overwrite other views.
 
 ## Theme folder structure
 
@@ -55,7 +55,7 @@ The *blue* theme based on *blank* theme:
 }
 ```
 
-*For detailed information of theme config see \luya\theme\ThemeConfig*
+For detailed information of theme config take a look at {{luya\theme\ThemeConfig}} class.
 
 ## File inheritance/override
 
@@ -106,11 +106,11 @@ Themes will use the layout file *theme.php* as default and the cmslayout *theme.
 
 ## Theme manager
 
-The `\luya\theme\ThemeManager` holds all theme information and also the active theme.
+The {{luya\theme\ThemeManager}} holds all theme information and also the active theme.
 
 ## Resources
 
-Every registered theme
+An example asset which contains resources from a theme.
 
 ```php
 class ResourcesAsset extends \luya\web\Asset
