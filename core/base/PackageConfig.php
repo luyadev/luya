@@ -31,6 +31,18 @@ class PackageConfig extends BaseObject
     }
 
     /**
+     * Set only a given value for a given key.
+     *
+     * @param string $key
+     * @param mixed $value
+     * @since 1.0.21
+     */
+    public function setValue($key, $value)
+    {
+        $this->_values[$key] = $value;
+    }
+
+    /**
      * Get a certain value by key
      *
      * @param string $key
