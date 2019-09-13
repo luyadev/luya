@@ -227,6 +227,15 @@ trait ErrorHandlerTrait
     {
         $_trace = [];
         foreach ($exception->getTrace() as $key => $item) {
+            // if a trace entry does not contain file and/or line omit from exception as this
+            // is by defintion the first stack trace entry.
+            if (!isset($item['file'])) {
+                $item['file'] = $exception->getFile();
+            }
+            if (!isset($item['line'])) {
+                $item['line'] = $exception->getLine();
+            }
+
             $_trace[$key] = $this->buildTraceItem($item);
         }
         

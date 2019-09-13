@@ -99,4 +99,13 @@ class ErrorHandlerTest extends LuyaWebTestCase
         $whitelisted = new WhitelistedException('whitelisted!');
         $this->assertTrue($stud->isExceptionWhitelisted($whitelisted));
     }
+    
+    public function testTrace()
+    {
+        $ex = new Exception('foobar here');
+        $stud = new ErrorHandler();
+        $context = $stud->getExceptionArray($ex)['trace'][0];
+
+        $this->assertContains('new Exception(\'foobar here\')', $context['context_line']);
+    }
 }
