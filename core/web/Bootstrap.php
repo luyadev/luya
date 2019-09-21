@@ -138,8 +138,8 @@ class Bootstrap extends BaseBootstrap
                 // Frontend context
                 $app->themeManager->setup();
                 
-                if (Yii::$app->themeManager->hasActiveTheme) {
-                    $this->layout = Yii::$app->themeManager->activeTheme->layout;
+                if ($app->themeManager->hasActiveTheme) {
+                    $app->layout = $app->themeManager->activeTheme->layout;
                 }
             }
         }
