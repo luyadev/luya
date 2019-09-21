@@ -62,7 +62,7 @@ class ModuleTest extends LuyaWebTestCase
     
         /** @var \luya\base\Module $module */
         $module = Yii::$app->getModule('unitmodule');
-        $module->init();
+        $module->luyaBootstrap(Yii::$app);
         
         $this->assertEquals('theme', $module->layout);
     
@@ -77,7 +77,7 @@ class ModuleTest extends LuyaWebTestCase
     
         /** @var \luya\base\Module $module */
         $module = Yii::$app->getModule('unitmodule');
-        $module->init();
+        $module->luyaBootstrap(Yii::$app);
     
         $this->assertEquals('theme', $module->layout);
     
