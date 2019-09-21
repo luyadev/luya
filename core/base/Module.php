@@ -207,9 +207,6 @@ abstract class Module extends \yii\base\Module
      */
     public function luyaBootstrap(Application $app)
     {
-        if (Yii::$app->themeManager->hasActiveTheme) {
-            $this->layout = Yii::$app->themeManager->activeTheme->layout;
-        }
     }
 
     /**
