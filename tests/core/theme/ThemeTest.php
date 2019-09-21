@@ -84,11 +84,9 @@ class ThemeTest extends LuyaWebTestCase
      */
     public function testInvalidConfig()
     {
-        $themeConfigMock = new class extends ThemeConfig
-        {
+        $themeConfigMock = new class extends ThemeConfig {
             public function __construct()
             {
-            
             }
         };
         $themeConfig = new $themeConfigMock();

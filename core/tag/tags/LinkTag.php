@@ -56,7 +56,7 @@ class LinkTag extends BaseTag
     public function parse($value, $sub)
     {
         if (StringHelper::startsWith($value, '//')) {
-            // its an absolute url 
+            // its an absolute url
             $value = StringHelper::replaceFirst('//', Url::base(true) . '/', $value);
             $external = false;
         } elseif (StringHelper::startsWith($value, '/')) {

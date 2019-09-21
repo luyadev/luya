@@ -69,7 +69,6 @@ class ImportController extends Command implements ImportControllerInterface
                 'files' => $this->scanDirectoryFiles($path, $ns, $module),
             ];
         }
-    
     }
     
     /**

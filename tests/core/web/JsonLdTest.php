@@ -87,7 +87,7 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
             (new ImageObject())
             ->setContentUrl(new UrlValue('path/to/image.jpg'))
             ->setUploadDate((new DateValue('12-12-2017')))
-            );
+        );
         
         $this->assertSame([
             'image' => [

@@ -8,7 +8,7 @@ use yii\base\InvalidParamException;
 
 /**
  * Rest API Helper.
- * 
+ *
  * @since 1.0.20
  * @author Basil Suter <basil@nadar.io>
  */

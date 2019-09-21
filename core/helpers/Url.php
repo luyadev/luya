@@ -95,7 +95,7 @@ class Url extends \yii\helpers\BaseUrl
 
     /**
      * Removes schema, protocol and www. subdomain from host.
-     * 
+     *
      * For example `https://luya.io/path` would return `luya.io/path`.
      *
      * @param string $url The url to extract
@@ -108,7 +108,7 @@ class Url extends \yii\helpers\BaseUrl
     }
     /**
      * Return only the domain of a path.
-     * 
+     *
      * For example `https://luya.io/path` would return `luya.io` without path informations.
      *
      * @param string $url The url to extract

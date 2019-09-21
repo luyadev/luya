@@ -35,7 +35,7 @@ class ThemeManagerTest extends LuyaWebTestCase
     {
         $themeManager = new ThemeManager();
         $themeManager->activeThemeName = '@app/themes/test';
-        $themeManager->on(ThemeManager::EVENT_BEFORE_SETUP, function(SetupEvent $setupEvent) {
+        $themeManager->on(ThemeManager::EVENT_BEFORE_SETUP, function (SetupEvent $setupEvent) {
             $setupEvent->basePath = '@app/themes/blank';
         });
         $themeManager->setup();
@@ -45,7 +45,7 @@ class ThemeManagerTest extends LuyaWebTestCase
         $this->assertEquals($expectedPath, Yii::getAlias('@activeTheme'), 'Alias path is not correct.');
         
         $themeManager->off(ThemeManager::EVENT_BEFORE_SETUP);
-        $themeManager->on(ThemeManager::EVENT_BEFORE_SETUP, function(SetupEvent $setupEvent) {
+        $themeManager->on(ThemeManager::EVENT_BEFORE_SETUP, function (SetupEvent $setupEvent) {
             throw new InvalidCallException('Theme setup already done.');
         });
         $themeManager->setup();
@@ -148,7 +148,7 @@ class ThemeManagerTest extends LuyaWebTestCase
     public function testEmptyThemeDir()
     {
         $themeManager = new ThemeManager();
-        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = '@app/otherThemeLocation/emptyThemeDir';
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', ['@app/otherThemeLocation/emptyThemeDir']);
     
         mkdir(Yii::getAlias('@app/otherThemeLocation/emptyThemeDir'));
     
@@ -163,7 +163,7 @@ class ThemeManagerTest extends LuyaWebTestCase
     {
         $relativePath = 'otherThemeLocation/foo';
     
-        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = $relativePath;
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$relativePath]);
     
         $themeManager = new ThemeManager();
         $basePath = realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . $relativePath;
@@ -176,7 +176,7 @@ class ThemeManagerTest extends LuyaWebTestCase
     {
         $absolutePath = realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . 'otherThemeLocation/foo';
     
-        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = $absolutePath;
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$absolutePath]);
         
         $themeManager = new ThemeManager();
         $themeConfig = $themeManager->getThemeByBasePath($absolutePath);
@@ -190,7 +190,7 @@ class ThemeManagerTest extends LuyaWebTestCase
      */
     public function testDuplicateThemeDefinition()
     {
-        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->themes[] = '@app/themes/blank';
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', ['@app/themes/blank']);
         
         $themeManager = new ThemeManager();
         $themeManager->getThemes();

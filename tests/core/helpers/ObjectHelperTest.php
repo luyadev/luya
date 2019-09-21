@@ -8,10 +8,10 @@ use luyatests\data\modules\ctrlmodule\Module;
 
 trait XYZ
 {
-
 }
 
-trait ABC {
+trait ABC
+{
     use XYZ;
 }
 

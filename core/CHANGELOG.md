@@ -3,13 +3,20 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.21
+## 1.0.22
 
++ [#1962](https://github.com/luyadev/luya/issues/1962) Fix problem with first stack trace informations not containing line and file informations.
+
+## 1.0.21 (9. September 2019)
+
++ [#1956](https://github.com/luyadev/luya/issues/1956) Ensure a not existing package installer config value `installer.php` won't throw an exception.
++ [#1947](https://github.com/luyadev/luya/issues/1947) Whiteliste more exception which should not be transmitted to error API.
 + [#1772](https://github.com/luyadev/luya/issues/1772) Add new `luya\Config` to generate configuration builds depending on console or web runtime.
 + [#1950](https://github.com/luyadev/luya/issues/1950) Fixed bug in Export Helper when dealing with special chars.
 + [#1942](https://github.com/luyadev/luya/issues/1942) Use phpmailers `setFrom()` method instead of `$from` and `$fromName` property.
 + [#340|admin](https://github.com/luyadev/luya-module-admin/issues/340) Allow extending the auth methods in rest behavior trait.
 + [#1916](https://github.com/luyadev/luya/issues/1916) Extended LUYA Core with a mechanism to load and handle themes.
++ [#1938](https://github.com/luyadev/luya/issues/1938) Added `luyaBootstrap($app)` method to base module. When the application starts, all LUYA modules will be initialized and therefore will call the `luyaBootstrap($app)` method.
 
 ## 1.0.20 (5. August 2019)
 

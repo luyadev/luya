@@ -4,7 +4,7 @@ namespace luya;
 
 /**
  * Contains the defintion of a config element.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.21
  */
