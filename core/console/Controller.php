@@ -41,6 +41,21 @@ abstract class Controller extends BaseController
     }
 
     /**
+     * Generates a printable string from a message.
+     *
+     * If a message is not a string, it will return var export to generate
+     * a returnable string from a message.
+     * 
+     * @param mixed $message
+     * @return string
+     * @since 1.0.22
+     */
+    public function printableMessage($message)
+    {
+        return is_scalar($message) ? $message : var_export($message, true);
+    }
+
+    /**
      * Helper method for writting console application output, include before and after wrappers.
      *
      * @param string $message The message which is displayed
@@ -53,7 +68,7 @@ abstract class Controller extends BaseController
             if ($color !== null) {
                 $format[] = $color;
             }
-            echo Console::ansiFormat("\r".$message."\n", $format);
+            echo Console::ansiFormat("\r".$this->printableMessage($message)."\n", $format);
         }
     }
 

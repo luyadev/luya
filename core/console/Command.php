@@ -39,7 +39,8 @@ abstract class Command extends \luya\console\Controller
     public function verbosePrint($message, $section = null)
     {
         if ($this->verbose) {
-            $this->output((!empty($section)) ? $section . ': ' . $message : $message);
+            $message = $this->printableMessage($message);
+            $this->output(!empty($section) ? $section . ': ' . $message : $message);
         }
     }
     
