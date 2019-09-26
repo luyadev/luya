@@ -28,5 +28,18 @@ class CommandTest extends LuyaConsoleTestCase
     public function testHelper()
     {
         $cmd = new SubCommand('myid', Yii::$app->getModule('unitmodule'));
+        $help = $cmd->getHelp();
+        $this->assertSame('', $help);
+    }
+
+    public function testPrintableDebugMessage()
+    {
+        $cmd = new SubCommand('myid', Yii::$app->getModule('unitmodule'));
+        $this->assertSame('foobar', $cmd->printableMessage('foobar'));
+        $this->assertSameTrimmed('array (
+  \'foo\' => \'bar\',           
+)', $cmd->printableMessage(['foo' => 'bar']));
+
+        $cmd->verbosePrint('verbose!');
     }
 }
