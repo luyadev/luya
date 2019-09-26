@@ -42,5 +42,11 @@ class CommandTest extends LuyaConsoleTestCase
 
         $cmd->verbose = 1;
         $cmd->verbosePrint('verbose!');
+
+        $this->app->mute = 0;
+
+        $this->assertSame(1, $cmd->outputError('test'));
+        $this->assertSame(0, $cmd->outputSuccess(['foo' => 'bar']));
+        $this->assertSame(0, $cmd->outputInfo('info'));
     }
 }
