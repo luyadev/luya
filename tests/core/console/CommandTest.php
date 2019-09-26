@@ -40,6 +40,7 @@ class CommandTest extends LuyaConsoleTestCase
   \'foo\' => \'bar\',           
 )', $cmd->printableMessage(['foo' => 'bar']));
 
+        $cmd->verbose = 1;
         $cmd->verbosePrint('verbose!');
     }
 }
