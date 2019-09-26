@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.22
 
++ [#1964](https://github.com/luyadev/luya/pull/1964) Ensure console commands can return none scalar values to debug or prinit.
 + [#1962](https://github.com/luyadev/luya/issues/1962) Fix problem with first stack trace informations not containing line and file informations.
 
 ## 1.0.21 (9. September 2019)
