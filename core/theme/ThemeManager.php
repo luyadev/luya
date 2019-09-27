@@ -133,7 +133,7 @@ class ThemeManager extends \yii\base\Component
      * @return ThemeConfig[]
      * @throws \yii\base\Exception
      */
-    public function getThemes(bool $throwException = true)
+    public function getThemes($throwException = true)
     {
         if ($this->_themes) {
             return $this->_themes;
