@@ -54,8 +54,8 @@ We are always looking for people who share their thoughts, code and problems wit
 
 1. Create Database (example luya_env_phpunit)
 2. Insert Database dump from `tests/data/sql/1.0.0.sql`
-3. Rename phpunit.xml.dist to phpunit.xml
-4. Change dsn, username and password in phpunit.xml
+3. Rename `phpunit.xml.dist` to `phpunit.xml`
+4. Change dsn, username and password in `phpunit.xml`
 5. Ensure you have installed current composer packages `composer install` with dev packages.
 6. Execute the phpunit bin file `./vendor/bin/phpunit`.
 
