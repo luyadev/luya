@@ -128,11 +128,12 @@ class ThemeManager extends \yii\base\Component
     /**
      * Get all theme configs as array list.
      *
+     * @param bool $throwException
+     *
      * @return ThemeConfig[]
-     * @throws Exception
-     * @throws InvalidConfigException
+     * @throws \yii\base\Exception
      */
-    public function getThemes()
+    public function getThemes($throwException = true)
     {
         if ($this->_themes) {
             return $this->_themes;
@@ -141,8 +142,14 @@ class ThemeManager extends \yii\base\Component
         $themeDefinitions = $this->getThemeDefinitions();
         
         foreach ($themeDefinitions as $themeDefinition) {
-            $themeConfig = static::loadThemeConfig($themeDefinition);
-            $this->registerTheme($themeConfig);
+            try {
+                $themeConfig = static::loadThemeConfig($themeDefinition);
+                $this->registerTheme($themeConfig);
+            } catch (\yii\base\Exception $ex) {
+                if ($throwException) {
+                    throw $ex;
+                }
+            }
         }
         
         return $this->_themes;

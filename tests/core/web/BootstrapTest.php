@@ -42,5 +42,6 @@ class BootstrapTest extends LuyaWebTestCase
         $boot->bootstrap(Yii::$app);
     
         $this->assertTrue(Yii::$app->themeManager->hasActiveTheme);
+        $this->assertEquals('theme', Yii::$app->layout);
     }
 }
