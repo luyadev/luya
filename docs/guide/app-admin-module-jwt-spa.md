@@ -62,7 +62,7 @@ class User extends \luya\admin\ngrest\base\NgRestModel implements luya\admin\bas
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'user';
     }
 
     /**
