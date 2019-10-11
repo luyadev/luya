@@ -91,6 +91,31 @@ trait ApplicationTrait
      * ```
      */
     public $locales = [];
+
+    /**
+     * @var array An array to provide application wide cors settings.
+     * 
+     * ```php
+     * 'corsConfig' => [
+     * ]
+     */
+    public $corsConfig = [
+        'class' => 'yii\filters\Cors',
+        'cors' => [
+            'Origin' => ['*'],
+            'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+            'Access-Control-Request-Headers' => ['*'],
+            'Access-Control-Allow-Credentials' => null,
+            'Access-Control-Max-Age' => 86400,
+            'Access-Control-Expose-Headers' => [
+                'X-Pagination-Current-Page', 
+                'X-Cruft-Length',
+                'X-Pagination-Page-Count',
+                'X-Pagination-Per-Page',
+                'X-Pagination-Total-Count'
+            ],
+        ],
+    ];
     
     /**
      * Add trace info to luya application trait
