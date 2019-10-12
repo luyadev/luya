@@ -91,6 +91,48 @@ trait ApplicationTrait
      * ```
      */
     public $locales = [];
+
+    /**
+     * @var array An array to provide application wide CORS settings.
+     * 
+     * By default the X-Headers of Yii and LUYA Admin are exposed. In order to override the cors
+     * config the following example would work (including cors class definition).
+     * 
+     * ```php
+     * 'corsConfig' => [
+     * 'class' => 'yii\filters\Cors',
+     *     'cors' => [
+     *         'Origin' => ['*'],
+     *         'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+     *         'Access-Control-Request-Headers' => ['*'],
+     *         'Access-Control-Allow-Credentials' => null,
+     *         'Access-Control-Max-Age' => 86400,
+     *         'Access-Control-Expose-Headers' => [
+     *             'X-My-Header-Name',
+     *         ],
+     *     ],
+     * ]
+     * ```
+     * 
+     * @since 1.0.22
+     */
+    public $corsConfig = [
+        'class' => 'yii\filters\Cors',
+        'cors' => [
+            'Origin' => ['*'],
+            'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+            'Access-Control-Request-Headers' => ['*'],
+            'Access-Control-Allow-Credentials' => null,
+            'Access-Control-Max-Age' => 86400,
+            'Access-Control-Expose-Headers' => [
+                'X-Pagination-Current-Page', 
+                'X-Pagination-Page-Count',
+                'X-Pagination-Per-Page',
+                'X-Pagination-Total-Count',
+                'X-Cruft-Length',
+            ],
+        ],
+    ];
     
     /**
      * Add trace info to luya application trait

@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.22
 
++ [#1967](https://github.com/luyadev/luya/pull/1967) New `corsConfig` option for Application in order to set application wide cors settings.
 + [#1964](https://github.com/luyadev/luya/pull/1964) Ensure console commands can return none scalar values to debug or prinit.
 + [#1962](https://github.com/luyadev/luya/issues/1962) Fix problem with first stack trace informations not containing line and file informations.
 + [#1963](https://github.com/luyadev/luya/pull/1963) Fix for theme bootstraping and layout loading.

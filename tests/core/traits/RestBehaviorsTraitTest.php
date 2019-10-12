@@ -93,4 +93,18 @@ class RestBehaviorsTraitTest extends LuyaWebTestCase
         $this->assertArrayHasKey('authenticator', $controller->behaviors());
         $this->assertInstanceOf('yii\web\User', $controller->behaviors()['authenticator']['user']);
     }
+
+    public function testCorsConfig()
+    {
+        $this->app->corsConfig = [
+            'class' => 'invalid\cors\class',
+        ];
+        $ctrl = new RestBehaviorsTraitTestStubWithoutUser('id', $this->app);
+        $ctrl->enableCors = true;
+
+        $behaviors = $ctrl->behaviors();
+
+        $this->assertSame(['class' => 'invalid\cors\class'], $behaviors['cors']);
+
+    }
 }
