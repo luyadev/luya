@@ -137,6 +137,10 @@ class Bootstrap extends BaseBootstrap
             } else {
                 // Frontend context
                 $app->themeManager->setup();
+                
+                if ($app->themeManager->hasActiveTheme) {
+                    $app->layout = $app->themeManager->activeTheme->layout;
+                }
             }
         }
         

@@ -28,6 +28,15 @@ When using the CMS Module the configuration must match your configuration of the
 
 ![set-default-language](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/set-default-language.png "Set CMS default language")
 
+## Retrieve current language
+
+There are two ways to retrieve the current active language:
+
+|Method|Example Value|Description
+|------|-------------|----------
+|`Yii::$app->composition->langShortCode`|`en`|As the name already tells, it will return the current language **short code** of the current page. Depending on the composition and language table configuration.
+|`Yii::$app->language`|`en_EN`|Returns the i18n localisation value defined from locales.
+
 ## Localisation with locales
 
 As the composition component can override the {{yii\base\Application::$language}} which is the base property for all translations within a Yii system you can define localisations for each language. Localisation are usually set trough setlocale() this is what LUYA does in the {{luya\traits\ApplicationTrait}}. You can define a localisation file for each language with the {{luya\traits\ApplicationTrait::$locales}} property, for example when language `de` is given it should take the `de_CH.utf8` locale file:

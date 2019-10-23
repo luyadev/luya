@@ -225,10 +225,22 @@ Sometimes it is useful and common to directly manage relational data inside the 
 public function ngRestRelations()
 {
     return [
-        ['label' => 'The Label', 'apiEndpoint' => \path\to\ngRest\Model::ngRestApiEndpoint(), 'dataProvider' => $this->getSales()],
+        ['label' => 'Label', 'targetModel' => \path\to\Model::class, 'dataProvider' => $this->getSales()],
     ];
 }
 ```
+
+Where `getSales()` would be:
+
+```php
+public function getSales()
+{
+    return $this->hasMany(Sales::class, ['id' => 'sale_id']);
+}
+``` 
+
+Take a look at {{luya\admin\ngrest\base\NgRestRelation}} for the full object configuration properties.
+
 
 The above example will use the `getSales()` method of the current model where you are implementing this relation. The `getSales()` must return an {{yii\db\QueryInterface}} Object, for example you can use `$this->hasMany(Model, ['key' => 'rel'])` or `new \yii\db\Query()`.
 

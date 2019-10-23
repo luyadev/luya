@@ -33,6 +33,11 @@ class View extends \yii\web\View
     {
         // call parent initializer
         parent::init();
+
+        if (empty($this->theme) && Yii::$app->themeManager->hasActiveTheme) {
+            $this->theme = Yii::$app->themeManager->activeTheme;
+        }
+
         // auto register csrf tags if enabled
         if ($this->autoRegisterCsrf && Yii::$app->request->enableCsrfValidation) {
             $this->registerCsrfMetaTags();

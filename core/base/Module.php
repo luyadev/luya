@@ -189,10 +189,6 @@ abstract class Module extends \yii\base\Module
                 throw new InvalidConfigException(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
-        
-        if (Yii::$app->themeManager->hasActiveTheme) {
-            $this->layout = Yii::$app->themeManager->activeTheme->layout;
-        }
 
         static::onLoad();
     }

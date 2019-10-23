@@ -8,7 +8,6 @@ use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\ContentNegotiator;
-use yii\filters\Cors;
 use yii\base\Model;
 use luya\rest\UserBehaviorInterface;
 use luya\web\filters\JsonCruftFilter;
@@ -139,7 +138,7 @@ trait RestBehaviorsTrait
         }
         
         if ($this->enableCors) {
-            $behaviors['cors'] = Cors::class;
+            $behaviors['cors'] = Yii::$app->corsConfig;
         }
 
         $behaviors['contentNegotiator'] = [
