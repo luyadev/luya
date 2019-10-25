@@ -135,7 +135,7 @@ class ThemeManagerTest extends LuyaWebTestCase
         mkdir(Yii::getAlias('@app/themes/not-readable'), 0200);
         
         try {
-            $themeManager->getThemes();
+            $themeManager->getThemes(true);
         } finally {
             rmdir(Yii::getAlias('@app/themes/not-readable'));
         }
@@ -153,7 +153,7 @@ class ThemeManagerTest extends LuyaWebTestCase
         mkdir(Yii::getAlias('@app/otherThemeLocation/emptyThemeDir'));
     
         try {
-            $themeManager->getThemes();
+            $themeManager->getThemes(true);
         } finally {
             rmdir(Yii::getAlias('@app/otherThemeLocation/emptyThemeDir'));
         }
@@ -193,6 +193,6 @@ class ThemeManagerTest extends LuyaWebTestCase
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', ['@app/themes/blank']);
         
         $themeManager = new ThemeManager();
-        $themeManager->getThemes();
+        $themeManager->getThemes(true);
     }
 }

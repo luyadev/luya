@@ -89,7 +89,7 @@ class ThemeManager extends \yii\base\Component
         $basePath = $this->getActiveThemeBasePath();
         if ($basePath) {
             $this->beforeSetup($basePath);
-        
+            
             $themeConfig = $this->getThemeByBasePath($basePath);
             $theme = new Theme($themeConfig);
             $this->activate($theme);
@@ -133,7 +133,7 @@ class ThemeManager extends \yii\base\Component
      * @return ThemeConfig[]
      * @throws \yii\base\Exception
      */
-    public function getThemes($throwException = true)
+    public function getThemes($throwException = false)
     {
         if ($this->_themes) {
             return $this->_themes;
