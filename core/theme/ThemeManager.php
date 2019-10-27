@@ -53,7 +53,6 @@ class ThemeManager extends \yii\base\Component
         if (strpos($basePath, '@') === 0) {
             $dir = Yii::getAlias($basePath);
         } elseif (strpos($basePath, '/') !== 0) {
-            // todo: keep basepath as relative path
             $dir = $basePath = Yii::$app->basePath . DIRECTORY_SEPARATOR . $basePath;
         } else {
             $dir = $basePath;
