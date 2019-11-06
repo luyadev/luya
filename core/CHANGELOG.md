@@ -5,6 +5,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.23
 
++ [#1971](https://github.com/luyadev/luya/issues/1971) Add opcache reset to health command.
+
 ## 1.0.22 (22. October 2019)
 
 + [#1967](https://github.com/luyadev/luya/pull/1967) New `corsConfig` option for Application in order to set application wide cors settings.
