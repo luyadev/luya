@@ -37,7 +37,7 @@ In order to make your api listen to differnt method types you can use $apiRules:
 
 ```php
 public $apiRules = [
-    'api-yourmodule-yourcontroller => [
+    'api-yourmodule-yourcontroller' => [
         'extraPatterns' => [
             'POST new-comment' => 'new-comment' // the action actionNewComment() which listens only to post
             'PUT update-comment' => 'update-comment', // the action actionUpdateComment() which listens only to put
