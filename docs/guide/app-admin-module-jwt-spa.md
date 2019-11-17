@@ -1,6 +1,6 @@
-# JWT auth with SPA Applications
+# JWT authentication
 
-> since LUYA admin module version 2.2
+> available since LUYA admin module version 2.2
 
 The LUYA admin provides a basic JWT generator including an out of the box authentification system which can proxy requests trough LUYA Admin Api User and those permission system.
 
