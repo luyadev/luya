@@ -166,6 +166,41 @@ class UserController extends \luya\admin\ngrest\base\Api
 
 If a successfull jwt authentication is made the {{luya\admin\components\Jwt::$identity}} contains the {{luya\admin\components\Jwt::$identityClass}} object implementing {{luya\admin\base\JwtIdentityInterface}}.
 
+## CORS Preflight Request
+
+When working with cross domain requests, each xhr request to the API will make an *option request* or also known as *preflight request*. The {{luya\admin\ngrest\base\Api}} controllers provide an out of the box solution which works for common CRUD operations (add, view, list, edit, delete). When working with custom actions you might need to configure the option request for the given method. Therefore you need to configure the API with the following setup: create an url rule for options request, define the option and make sure the option is available without authentification (its common that option request won't have authentication headers).
+
+Create the url rule for the option request, which defines where the option action should be looked up:
+
+```php
+public $apiRules = [
+    'my-api-name' => [
+        'extraPatterns' => [
+            'OPTIONS index' => 'options',
+        ]
+    ]
+];
+```
+
+The above example will forward all OPTIONS request made to the `my-api-name` API on the index action to the options action. `'OPTIONS index' => 'options'` index is the requested action, and options is the action to forward.
+
+As the options request is forwared to the `options` action we should create this in the controller:
+
+```php
+public function actions()
+{
+    return [
+        'options' => luya\admin\ngrest\base\actions\OptionsAction:class,
+    ];
+}
+```
+
+Now the controller has an options action. In order to ensure that the options action does not required permission add the action name to the {{luya\traits\RestBehaviorsTrait::$authOptional}} array:
+
+```php
+public $authOptional = ['options'];
+```
+
 ## Permissions
 
 A few principals regarding permissions:
