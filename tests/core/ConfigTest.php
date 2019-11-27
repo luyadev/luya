@@ -251,4 +251,34 @@ class ConfigTest extends LuyaWebTestCase
             ]
         ], $config->toArray([Config::ENV_PROD]));
     }
+
+    public function testCallable()
+    {
+        $config = new Config('web', 'basePath', [
+            'common' => 'common'
+        ]);
+
+        $this->assertTrue($config->isCliRuntime());
+        $config->callback(function(Config $cfg) {
+            $cfg->setCliRuntime(false);
+        });
+        // to array runs the callable
+        $config->toArray();
+
+        $this->assertFalse($config->isCliRuntime());
+
+        // use config for prod env
+        $config = new Config('web', 'basePath', [
+            'common' => 'common'
+        ]);
+
+        $this->assertTrue($config->isCliRuntime());
+        $config->callback(function(Config $cfg) {
+            $cfg->setCliRuntime(false);
+        })->env(Config::ENV_PROD);
+        // to array runs the callable
+        $config->toArray([Config::ENV_DEV]);
+        // the callable has no effect sind it only runs in prod
+        $this->assertTrue($config->isCliRuntime());
+    }
 }

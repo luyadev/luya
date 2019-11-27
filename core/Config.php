@@ -179,6 +179,18 @@ class Config
     }
 
     /**
+     * Run a callable functions for the defined env when toArray() is called.
+     *
+     * @param callable $fn The function to run, the first argument of the closure is the {{luya\Config}} object.
+     * @return ConfigDefinition
+     * @since 1.0.23
+     */
+    public function callback(callable $fn)
+    {
+        return $this->addDefinition(New ConfigDefinition(ConfigDefinition::GROUP_CALLABLE, false, $fn));
+    }
+
+    /**
      * Register a component
      *
      * @param string $id The id of the component
@@ -320,6 +332,10 @@ class Config
                     $config['bootstrap'][] = $v;
                 }
                 break;
+
+            case ConfigDefinition::GROUP_CALLABLE:
+                call_user_func($definition->getConfig(), $this);
+            break;
         }
     }
 
