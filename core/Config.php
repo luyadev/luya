@@ -178,6 +178,11 @@ class Config
         return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_MODULES, $id, $config));
     }
 
+    public function callback(callable $fn)
+    {
+        return $this->addDefinition(New ConfigDefinition(ConfigDefinition::GROUP_CALLABLE, false, $fn));
+    }
+
     /**
      * Register a component
      *
@@ -320,6 +325,10 @@ class Config
                     $config['bootstrap'][] = $v;
                 }
                 break;
+
+            case ConfigDefinition::GROUP_CALLABLE:
+                call_user_func($definition->getConfig(), $this);
+            break;
         }
     }
 

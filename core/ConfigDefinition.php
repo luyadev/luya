@@ -30,11 +30,13 @@ class ConfigDefinition
      */
     const GROUP_BOOTSTRAPS = 4;
 
+    const GROUP_CALLABLE = 5;
+
     private $_group;
 
     private $_key;
 
-    private $_config = [];
+    private $_config;
 
     /**
      * Consturctor
@@ -47,7 +49,7 @@ class ConfigDefinition
     {
         $this->_group = $group;
         $this->_key = $key;
-        $this->_config = is_array($config) ? $config : ['class' => $config];
+        $this->_config = is_scalar($config) ? ['class' => $config] : $config;
     }
 
     private $_env = Config::ENV_ALL;
