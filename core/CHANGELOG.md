@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.23
 
++ [#1974](https://github.com/luyadev/luya/issues/1974) Register module components in bootstrap section before run luyaBootstrap method.
 + [#1971](https://github.com/luyadev/luya/issues/1971) Add opcache reset to health command.
 
 ## 1.0.22 (22. October 2019)
