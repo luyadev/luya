@@ -178,6 +178,13 @@ class Config
         return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_MODULES, $id, $config));
     }
 
+    /**
+     * Run a callable functions for the defined env when toArray() is called.
+     *
+     * @param callable $fn The function to run, the first argument of the closure is the {{luya\Config}} object.
+     * @return ConfigDefinition
+     * @since 1.0.23
+     */
     public function callback(callable $fn)
     {
         return $this->addDefinition(New ConfigDefinition(ConfigDefinition::GROUP_CALLABLE, false, $fn));
