@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.23
+## 1.0.23 (27. November 2019)
 
 + [#1975](https://github.com/luyadev/luya/pull/1975) Added new luya\Config `callback(fn)` function to run define('YII_DEBUG', true) commands.
 + [#1974](https://github.com/luyadev/luya/issues/1974) Register module components in bootstrap section before run luyaBootstrap method.
