@@ -218,7 +218,7 @@ class Config
     private $_definitions = [];
 
     /**
-     * Add a defintion into the defintions bag.
+     * Add a definition into the definitions bag.
      *
      * @param ConfigDefinition $definition
      * @return ConfigDefinition
@@ -291,7 +291,7 @@ class Config
     }
 
     /**
-     * Append a given defintion int othe config
+     * Append a given definition int othe config
      *
      * @param array $config
      * @param ConfigDefinition $definition
@@ -319,11 +319,12 @@ class Config
                 foreach ($definition->getConfig() as $v) {
                     $config['bootstrap'][] = $v;
                 }
+                break;
         }
     }
 
     /**
-     * Add a array key based component defintion.
+     * Add a array key based component definition.
      *
      * @param array $config
      * @param ConfigDefinition $definition
