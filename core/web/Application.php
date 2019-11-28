@@ -16,6 +16,8 @@ use yii\web\ForbiddenHttpException;
  * @property \luya\web\View $view The view component.
  * @property \luya\web\Request $request The request component.
  * @property \luya\web\ErrorHandler $errorHandler The error handler component.
+ * @property \luya\admin\components\Jwt $jwt The admin JWT handler component, if enabled in the Admin module.
+ * @property \yii\queue\db\Queue $adminqueue The yii queue component configured for the Admin module.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
