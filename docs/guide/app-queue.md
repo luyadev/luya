@@ -34,7 +34,7 @@ The fake cronjob won't be executed on console (cli) commands. The information ab
 
 ### Cronjob (admin/queue Command)
 
-In shared hosting enviroments the best usage for the admins queue scheduler system is to setup a cronjob which runs every 5 minutes (ary at any other frequents depending on your needs). Make sure that {{luya\admin\Module::$autoBootstrapQueue}} is disabled un setup a cronjob with runs the {{luya\admin\commands\QueueController}} as `admin/queue` command.
+In shared hosting enviroments the best usage for the admins queue scheduler system is to setup a cronjob which runs every 5 minutes (ary at any other frequents depending on your needs). Make sure that {{luya\admin\Module::$autoBootstrapQueue}} is disabled un setup a cronjob with runs the {{luya\admin\commands\QueueController}} as `admin/queue` command:
 
 ```sh
 /vendor/bin/luya admin/queue
@@ -42,7 +42,7 @@ In shared hosting enviroments the best usage for the admins queue scheduler syst
 
 ### Realtime Listen
 
-Since version 2.0.4 the native implementation of the [Yii Queue](https://github.com/yiisoft/yii2-queue) is bootstraped and you might run all the commands from the original component. The most common use case to process the queue in realtime, therfore the `queue/listen` command is used. 
+Since version 2.0.4 the native implementation of the [Yii Queue](https://github.com/yiisoft/yii2-queue) is bootstraped, therefore you might run all the commands from the original component. The most common use case is to process the queue in realtime, therfore the `queue/listen` command is used:
 
 ```sh
 ./vendor/bin/luya queue/listen --verbose=1
