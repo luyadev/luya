@@ -49,3 +49,9 @@ Since version 2.0.4 the native implementation of the [Yii Queue](https://github.
 ```
 
 The verbose option helps to debug and should be disabled in production.
+
+## Retry & Errors
+
+The Queue is by default conigured to allow 5 retrys of an error job each 5 minutes. So assuming the exectued job fails (throws a {{luya\Exception}} for instance) the queue waits 5 minutes until a next try is executed. This will be done unit 5 trys are processed, then the job will be removed from the queue.
+
+An exception is therefore the expected error format to ensure the job will retry again. If the exception is part of your application ensure to surround the job logic with a try catch block.
