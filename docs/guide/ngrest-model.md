@@ -105,10 +105,10 @@ public function extraFields()
 }
 ```
 
-Now we have an extraField with the name `registeredCount`. When accessing this extra field the getter method `getRegisteredCount()` will execute and the number of users will be returned. In order to get this additional into the CRUD list grid view you have to define the extra field in {{\luya\admin\ngrest\base\NgRestModel::ngrestExtraAttributeTypes()}} like the other not extra attribute fields.
+Now we have an extraField with the name `registeredCount`. When accessing this extra field the getter method `getRegisteredCount()` will execute and the number of users will be returned. In order to get this additional into the CRUD list grid view you have to define the extra field in {{\luya\admin\ngrest\base\NgRestModel::ngRestExtraAttributeTypes()}} like the other not extra attribute fields.
 
 ```php
-public function ngrestExtraAttributeTypes()
+public function ngRestExtraAttributeTypes()
 {
     return [
         'registeredCount' => 'number',
