@@ -126,9 +126,23 @@ class StringHelper extends BaseStringHelper
      *
      * If an array of needle words is provided the $strict parameter defines whether all need keys must be found
      * in the string to get the `true` response or if just one of the keys are found the response is already `true`.
+     * 
+     * ```php
+     * if (StringHelper::contains('foo', 'the foo bar Bar'')) {
+     *    echo "yes!";
+     * }
+     * ```
+     * 
+     * check if one of the given needles exists:
+     * 
+     * ```php
+     * if (StringHelper::contains(['jungle', 'hell0], 'Welcome to the jungle!)) {
+     *    echo "yes!";
+     * }
+     * ```
      *
      * @param string|array $needle The char or word to find in the $haystack. Can be an array to multi find words or char in the string.
-     * @param string $haystack The haystack where the $needle string should be looked  up.
+     * @param string $haystack The haystack where the $needle string should be looked up. A string or phrase with words.
      * @param boolean $strict If an array of needles is provided the $strict parameter defines whether all keys must be found ($strict = true) or just one result must be found ($strict = false).
      * @return boolean If an array of values is provided the response may change depending on $findAll.
      */
