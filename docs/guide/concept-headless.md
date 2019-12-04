@@ -17,7 +17,7 @@ With introduction of Headless System a new Api User layer has been introduced. A
 + Api Users are unable to login into the admin area (trough UI)
 + None, one or more permission groups can be assigned to an Api User.
 
-## PHP CLient
+## PHP Client
 
 [LUYA Headless Client](https://luya.io/packages/luyadev--luya-headless): Read the [LUYA Headless client documentation](https://luya.io/packages/luyadev--luya-headless) in order to see how to make calls!
 

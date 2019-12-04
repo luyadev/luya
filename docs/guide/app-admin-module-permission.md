@@ -121,6 +121,17 @@ class Pets extends luya\admin\base\Module
 
 Now the action route `pets/test-rest/dogs` can only accessed when the user has the certain permission assigned, but `pets/test-rest/cats` can be accessed by any authenticated user. If  {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} is enabled, even Api Users could access the endpoint.
 
+In order to turn of the {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} apiUser check only for a given controller you might override {{luya\admin\traits::canApiUserAccess()}}.
+
+```php
+public function canApiUserAccess()
+{
+    return true;
+}
+```
+
+Now the given API controller is also accessible to api users.
+
 ### RestActiveController
 
 The {{luya\admin\base\RestActiveController}} requires a model class to perform classic read, create, update and delete tasks. If a custom action is defined, by default **no permission** is required for this action unless its defined in {{luya\admin\base\RestActiveController::actionPermissions()}}:

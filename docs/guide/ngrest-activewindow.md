@@ -166,7 +166,7 @@ The admin UI of LUYA provides some basic reusable ActiveWindows which you can re
 
 |Class|Description
 |--|--|
-|{{\luya\admin\aws\TagActiveWindow}}|Provides the option to set tags for the given record.
+|{{\luya\admin\aws\TaggableActiveWindow}}|Provides the option to set tags for the given record.
 |{{\luya\admin\aws\ImageSelectCollectionActiveWindow}}|Select images from the file manager and store them in a reference table.
 |{{\luya\admin\aws\FlowActiveWindow}}|Provides an image uploader (flow uploader) which are hidden in the filemanager and stored in a reference table.
 |{{\luya\admin\aws\DetailViewActiveWindow}}|A detail view where you can define the attributes with the given type or just print all fields with the corresponding value.
