@@ -29,7 +29,7 @@ class SubmitButtonWidget extends Widget
      * @var string The label which should be displayed on button.
      */
     public $label;
-    
+
     /**
      * @var string The label which should be visible when the button is pushed. for example `... sending`.
      */
@@ -53,21 +53,28 @@ class SubmitButtonWidget extends Widget
     }
 
     /**
-     * {@inheritDoc}
+     * Add beforeSubmit handler which disables button and replaces button text
+     * @return string
      */
     public function run()
     {
-        $js = [
-            'this.disabled=true;',
-        ];
 
-        if ($this->pushed) {
-            $js[] = "this.innerHTML='{$this->pushed}';";
-        }
+        $this->view->registerJs("
+            $(document).on('beforeSubmit', function (e) {                
+                var buttonSelector = $(e.target).find(':submit');
+                var formSelector = $(e.target);
+                if (formSelector.find('div.has-error').length === 0) {
+                    buttonSelector.attr('disabled', true);
+                    var newButtonLabel = '" . $this->pushed . "';
+                    if (newButtonLabel) {
+                        buttonSelector.html('" . $this->pushed . "');
+                    }                            
+                }
+                return true;
+            });");
 
-        return Html::decode(Html::submitButton($this->label, ArrayHelper::merge([
-            'onclick' => new JsExpression(implode(" ", $js)),
-            'encoding' => false,
-        ], $this->options)));
+        return Html::decode(Html::submitButton($this->label,
+            ArrayHelper::merge(['id' => $this->getId()], $this->options)));
     }
+
 }
