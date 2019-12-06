@@ -73,8 +73,7 @@ class SubmitButtonWidget extends Widget
                 return true;
             });");
 
-        return Html::decode(Html::submitButton($this->label,
-            ArrayHelper::merge(['id' => $this->getId()], $this->options)));
+        return Html::decode(Html::submitButton($this->label, $this->options));
     }
 
 }
