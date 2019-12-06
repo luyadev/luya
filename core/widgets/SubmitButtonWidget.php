@@ -7,6 +7,7 @@ use luya\helpers\Html;
 use luya\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
 use yii\web\JsExpression;
+use yii\widgets\ActiveForm;
 
 /**
  * Generates a submit button for a form. This should be used when submiting payment forms
@@ -41,6 +42,11 @@ class SubmitButtonWidget extends Widget
     public $options = [];
 
     /**
+     * @var activeForm Define activeForm context to use widget in context and only disable button when validation succeeded
+     */
+    public $activeForm;
+
+    /**
      * {@inheritDoc}
      */
     public function init()
@@ -58,12 +64,12 @@ class SubmitButtonWidget extends Widget
      */
     public function run()
     {
-
-        $this->view->registerJs("
+        if ($this->activeForm && $this->activeForm instanceof ActiveForm) {
+            $this->view->registerJs("
             $(document).on('beforeSubmit', function (e) {                
                 var buttonSelector = $(e.target).find(':submit');
                 var formSelector = $(e.target);
-                if (formSelector.find('div.has-error').length === 0) {
+                if (formSelector.find('div." . $this->activeForm->errorCssClass . "').length === 0) {
                     buttonSelector.attr('disabled', true);
                     var newButtonLabel = '" . $this->pushed . "';
                     if (newButtonLabel) {
@@ -72,6 +78,19 @@ class SubmitButtonWidget extends Widget
                 }
                 return true;
             });");
+        } else {
+            $js = [
+                'this.disabled=true;',
+            ];
+
+            if ($this->pushed) {
+                $js[] = "this.innerHTML='{$this->pushed}';";
+            }
+            $this->options = ArrayHelper::merge([
+                'onclick' => new JsExpression(implode(" ", $js)),
+                'encoding' => false,
+            ], $this->options);
+        }
 
         return Html::decode(Html::submitButton($this->label, $this->options));
     }
