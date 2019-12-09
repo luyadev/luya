@@ -152,7 +152,7 @@ class ArrayHelper extends BaseArrayHelper
      * @param array $array The multidimensional array keys.
      * @param string $searchText The text you where search inside the rows.
      * @param boolean $sensitive Whether to use strict sensitive search (true) or case insenstivie search (false).
-     * @param array $keys A list of array keys which should be taken to search in, if empty or not provided it will lookup all array keys by default. {@since 2.0.14}
+     * @param array $keys A list of array keys which should be taken to search in, if empty or not provided it will lookup all array keys by default. {@since 1.0.24}
      * @return array The modified array depending on the search result hits.
      */
     public static function search(array $array, $searchText, $sensitive = false, array $keys = [])
