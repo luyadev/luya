@@ -20,6 +20,8 @@ use yii\widgets\ActiveForm;
  * SubmitButtonWidget::widget(['label' => 'Save', 'pushed' => 'Saving ...', 'options' => ['class' => 'btn btn-primary']]);
  * $form::end();
  * ```
+ * 
+ * @property ActiveForm $activeForm Set active form context of the button.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.21
@@ -41,14 +43,12 @@ class SubmitButtonWidget extends Widget
      */
     public $options = [];
 
-    /**
-     * @var activeForm Define activeForm context to use widget in context and only disable button when validation succeeded
-     * @since 1.0.24 First time this was introduced
-     */
     private $_activeForm;
 
     /**
-     * @param $activeForm Set $activeForm and check for type "ActiveForm"
+     * Setter method for Active Form context.
+     *
+     * @param ActiveForm $activeForm Set $activeForm and check for type "ActiveForm"
      * @since 1.0.24
      */
     public function setActiveForm(ActiveForm $activeForm)
@@ -57,6 +57,8 @@ class SubmitButtonWidget extends Widget
     }
 
     /**
+     * Getter method for Active Form context.
+     *
      * @return ActiveForm Return $activeForm
      * @since 1.0.24
      */
