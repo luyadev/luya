@@ -140,21 +140,35 @@ class ArrayHelper extends BaseArrayHelper
      * ```
      *
      * Searching for the string `Bar` would return the the orignal array is bar would be found in both.
+     * 
+     * In order to search only in certain keys defined $keys attribute:
+     * 
+     * ```php
+     * ArrayHelper::search($data, 'Foo', false, ['name']);
+     * ```
+     * 
+     * The above example will search only in the array key `name` for the `Foo` expression.
      *
      * @param array $array The multidimensional array keys.
      * @param string $searchText The text you where search inside the rows.
      * @param boolean $sensitive Whether to use strict sensitive search (true) or case insenstivie search (false).
+     * @param array $keys A list of array keys which should be taken to search in, if empty or not provided it will lookup all array keys by default. {@since 2.0.14}
      * @return array The modified array depending on the search result hits.
      */
-    public static function search(array $array, $searchText, $sensitive = false)
+    public static function search(array $array, $searchText, $sensitive = false, array $keys = [])
     {
-        $function = ($sensitive) ? 'strpos' : 'stripos';
-        return array_filter($array, function ($item) use ($searchText, $function) {
+        $function = $sensitive ? 'strpos' : 'stripos';
+        return array_filter($array, function ($item) use ($searchText, $function, $keys) {
             $response = false;
             foreach ($item as $key => $value) {
                 if ($response) {
                     continue;
                 }
+
+                if (!empty($keys) && !in_array($key, $keys)) {
+                    continue;
+                }
+                
                 if ($function($value, "$searchText") !== false) {
                     $response = true;
                 }
