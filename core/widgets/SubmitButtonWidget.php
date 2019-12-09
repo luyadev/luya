@@ -42,30 +42,27 @@ class SubmitButtonWidget extends Widget
     public $options = [];
 
     /**
-     * @since 1.0.24 First time this was introduced
-     *
      * @var activeForm Define activeForm context to use widget in context and only disable button when validation succeeded
+     * @since 1.0.24 First time this was introduced
      */
-    protected $activeForm;
+    private $_activeForm;
 
     /**
-     * @since 1.0.24 First time this was introduced
-     *
      * @param $activeForm Set $activeForm and check for type "ActiveForm"
+     * @since 1.0.24
      */
     public function setActiveForm(ActiveForm $activeForm)
     {
-        $this->activeForm = $activeForm;
+        $this->_activeForm = $activeForm;
     }
 
     /**
-     * @since 1.0.24 First time this was introduced
-     *
      * @return ActiveForm Return $activeForm
+     * @since 1.0.24
      */
     public function getActiveForm()
     {
-        return $this->activeForm;
+        return $this->_activeForm;
     }
 
     /**
@@ -81,19 +78,18 @@ class SubmitButtonWidget extends Widget
     }
 
     /**
-     * * @since 1.0.24 Added "ActiveForm-Mode" which only disables button when given ActiveForm is validated successful
-     *
      * Add beforeSubmit handler which disables button and replaces button text
      * @return string
+     * @since 1.0.24 Added "ActiveForm-Mode" which only disables button when given ActiveForm is validated successful
      */
     public function run()
     {
-        if ($this->activeForm) {
+        if ($this->_activeForm) {
             $this->view->registerJs("            
             $(document).on('beforeSubmit', function (e) {                
                 var buttonSelector = $(e.target).find(':submit');
                 var formSelector = $(e.target);
-                if (formSelector.find('div." . $this->activeForm->errorCssClass . "').length === 0) {
+                if (formSelector.find('div." . $this->_activeForm->errorCssClass . "').length === 0) {
                     buttonSelector.attr('disabled', true);
                     var newButtonLabel = '" . $this->pushed . "';
                     if (newButtonLabel) {

@@ -12,7 +12,7 @@ class SubmitButtonWidgetTest extends LuyaWebTestCase
     public function testException()
     {
         $this->expectException(\TypeError::class);
-        SubmitButtonWidget::widget(['label' => 'foo', 'pushed' => 'barfoo', 'activeForm' => 'wrongType', 'options' => ['class' => 'btn']])
+        SubmitButtonWidget::widget(['label' => 'foo', 'pushed' => 'barfoo', 'activeForm' => 'wrongType', 'options' => ['class' => 'btn']]);
     }
 
     public function testRun()
