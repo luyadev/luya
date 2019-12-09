@@ -92,12 +92,9 @@ class SubmitButtonWidget extends Widget
                 if (formSelector.find('div." . $this->_activeForm->errorCssClass . "').length === 0) {
                     buttonSelector.attr('disabled', true);
                     var newButtonLabel = '" . $this->pushed . "';
-                    if (newButtonLabel) {
-                        buttonSelector.html('" . $this->pushed . "');
-                    }                            
+                    if (newButtonLabel) { buttonSelector.html('" . $this->pushed . "'); }                            
                 }
-                return true;
-            });");
+                return true;});");
         } else {
             $js = [
                 'this.disabled=true;',
