@@ -6,6 +6,14 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 1.0.24
 
 + [#1969](https://github.com/luyadev/luya/pull/1969) Fixed exception handling while loading empty theme directories.
++ [#1977](https://github.com/luyadev/luya/pull/1977) Added new `ArrayHelper::combine()` method to generate an array with the same keys and values.
++ [#1977](https://github.com/luyadev/luya/pull/1978) Added support for ActiveForm context to SubmitButtonWidget. Supporting multi form (including pjax) on same page.
+
+## 1.0.23 (27. November 2019)
+
++ [#1975](https://github.com/luyadev/luya/pull/1975) Added new luya\Config `callback(fn)` function to run define('YII_DEBUG', true) commands.
++ [#1974](https://github.com/luyadev/luya/issues/1974) Register module components in bootstrap section before run luyaBootstrap method.
++ [#1971](https://github.com/luyadev/luya/issues/1971) Add opcache reset to health command.
 
 ## 1.0.22 (22. October 2019)
 

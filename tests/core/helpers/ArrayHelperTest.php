@@ -249,4 +249,10 @@ class ArrayHelperTest extends LuyaWebTestCase
         
         $this->assertTrue(is_object($response['object']));
     }
+
+    public function testCombine()
+    {
+        $this->assertSame(['foo' => 'foo', 'bar' => 'bar'], ArrayHelper::combine(['foo', 'bar']));
+        $this->assertSame(['foo' => 'foo', 'bar' => 'bar'], ArrayHelper::combine(['baz1' => 'foo', 'baz2' => 'bar']));
+    }
 }

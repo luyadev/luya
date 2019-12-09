@@ -39,6 +39,11 @@ class HealthController extends \luya\console\Command
      */
     public function actionIndex()
     {
+        // opcache reset should run in web context, but might be helpfull as well.
+        if (function_exists('opcache_reset')) {
+            @opcache_reset();
+        }
+
         $error = false;
 
         @chdir(Yii::getAlias('@app'));

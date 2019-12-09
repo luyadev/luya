@@ -81,6 +81,8 @@ class ArrayHelper extends BaseArrayHelper
     
     /**
      * Prepend an assoc array item as first entry for a given array.
+     * 
+     * Adds the given key with value as first entry to $arr
      *
      * @param array $arr The array where the value should be prepend
      * @param string $key The new array key
@@ -277,5 +279,24 @@ class ArrayHelper extends BaseArrayHelper
         }
         
         return $array;
+    }
+
+    /**
+     * Helper method to generate an array with the same keys and values.
+     * 
+     * ```php
+     * $data = ArrayHelper::combine(['foo', 'bar']);
+     * 
+     * // generates
+     * ['foo' => 'foo', 'bar' => 'bar'];
+     * ```
+     *
+     * @param array $array The array to combine.
+     * @return array
+     * @since 1.0.24
+     */
+    public static function combine(array $array)
+    {
+        return array_combine($array, $array);
     }
 }

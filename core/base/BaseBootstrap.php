@@ -103,8 +103,6 @@ abstract class BaseBootstrap implements BootstrapInterface
             // set an alias for all user modules
             Yii::setAlias('@'.$id, $module->getBasePath());
 
-            $module->luyaBootstrap($app);
-
             // see if the module has a registerComponents method
             foreach ($module->registerComponents() as $componentId => $definition) {
                 if (!$app->has($componentId)) {
@@ -112,6 +110,8 @@ abstract class BaseBootstrap implements BootstrapInterface
                     $app->set($componentId, $definition);
                 }
             }
+
+            $module->luyaBootstrap($app);
         }
     }
 
