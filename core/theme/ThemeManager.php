@@ -89,7 +89,7 @@ class ThemeManager extends \yii\base\Component
         $basePath = $this->getActiveThemeBasePath();
         if ($basePath) {
             $this->beforeSetup($basePath);
-        
+            
             $themeConfig = $this->getThemeByBasePath($basePath);
             $theme = new Theme($themeConfig);
             $this->activate($theme);
@@ -128,12 +128,11 @@ class ThemeManager extends \yii\base\Component
     /**
      * Get all theme configs as array list.
      *
-     * @param bool $throwException
-     *
+     * @param bool $throwException Whether an exception should by throw or not. By version 1.0.24 this is disabled by default.
      * @return ThemeConfig[]
      * @throws \yii\base\Exception
      */
-    public function getThemes($throwException = true)
+    public function getThemes($throwException = false)
     {
         if ($this->_themes) {
             return $this->_themes;
