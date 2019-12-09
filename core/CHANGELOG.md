@@ -6,6 +6,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 1.0.24
 
 + [#1977](https://github.com/luyadev/luya/pull/1977) Added new `ArrayHelper::combine()` method to generate an array with the same keys and values.
++ [#1977](https://github.com/luyadev/luya/pull/1978) Added support for ActiveForm context to SubmitButtonWidget. Supporting multi form (including pjax) on same page.
 
 ## 1.0.23 (27. November 2019)
 
