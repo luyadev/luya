@@ -42,9 +42,31 @@ class SubmitButtonWidget extends Widget
     public $options = [];
 
     /**
+     * @since 1.0.24 First time this was introduced
+     *
      * @var activeForm Define activeForm context to use widget in context and only disable button when validation succeeded
      */
-    public $activeForm;
+    protected $activeForm;
+
+    /**
+     * @since 1.0.24 First time this was introduced
+     *
+     * @param $activeForm Set $activeForm and check for type "ActiveForm"
+     */
+    public function setActiveForm($activeForm) {
+        if ($activeForm instanceof ActiveForm) {
+            $this->activeForm = $activeForm;
+        }
+    }
+
+    /**
+     * @since 1.0.24 First time this was introduced
+     *
+     * @return ActiveForm Return $activeForm
+     */
+    public function getActiveForm() {
+        return $this->activeForm;
+    }
 
     /**
      * {@inheritDoc}
@@ -59,13 +81,15 @@ class SubmitButtonWidget extends Widget
     }
 
     /**
+     * * @since 1.0.24 Added "ActiveForm-Mode" which only disables button when given ActiveForm is validated successful
+     *
      * Add beforeSubmit handler which disables button and replaces button text
      * @return string
      */
     public function run()
     {
-        if ($this->activeForm && $this->activeForm instanceof ActiveForm) {
-            $this->view->registerJs("
+        if ($this->activeForm) {
+            $this->view->registerJs("            
             $(document).on('beforeSubmit', function (e) {                
                 var buttonSelector = $(e.target).find(':submit');
                 var formSelector = $(e.target);
