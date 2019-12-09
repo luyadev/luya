@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.24
+## 1.0.24 (9. December 2019)
 
 + [#1980](https://github.com/luyadev/luya/pull/1980) Added `ArrayHelper::search()` keys option to search only in certain array keys.
 + [#1969](https://github.com/luyadev/luya/pull/1969) Fixed exception handling while loading empty theme directories.
