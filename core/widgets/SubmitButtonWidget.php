@@ -53,10 +53,9 @@ class SubmitButtonWidget extends Widget
      *
      * @param $activeForm Set $activeForm and check for type "ActiveForm"
      */
-    public function setActiveForm($activeForm) {
-        if ($activeForm instanceof ActiveForm) {
-            $this->activeForm = $activeForm;
-        }
+    public function setActiveForm(ActiveForm $activeForm)
+    {
+        $this->activeForm = $activeForm;
     }
 
     /**
@@ -64,7 +63,8 @@ class SubmitButtonWidget extends Widget
      *
      * @return ActiveForm Return $activeForm
      */
-    public function getActiveForm() {
+    public function getActiveForm()
+    {
         return $this->activeForm;
     }
 
