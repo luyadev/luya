@@ -59,6 +59,11 @@ We are always looking for people who share their thoughts, code and problems wit
 5. Ensure you have installed current composer packages `composer install` with dev packages.
 6. Execute the phpunit bin file `./vendor/bin/phpunit`.
 
+#### Karma tests (JS)
+
+1. Run `yarn install`
+2. Run `yarn test`
+
 #### Shield
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
