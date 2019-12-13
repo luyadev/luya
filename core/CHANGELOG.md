@@ -5,6 +5,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.25
 
++ [#1981](https://github.com/luyadev/luya/pull/1981) Add `append()` function to Url Helper. The append() method will add a given key value param to the current url.
+
 ## 1.0.24 (9. December 2019)
 
 + [#1980](https://github.com/luyadev/luya/pull/1980) Added `ArrayHelper::search()` keys option to search only in certain array keys.

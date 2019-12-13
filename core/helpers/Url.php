@@ -121,7 +121,9 @@ class Url extends \yii\helpers\BaseUrl
     }
 
     /**
-     * Append a given part of the url to the current url
+     * Append a given part of the url to the current url.
+     * 
+     * It will only append query params in key value format to the current URL.
      *
      * @param string|array $append A string with url fragments or an array which will be processed by http_build_query.
      * @param boolean $scheme Add full path schema to the url, by default false. Otherwise absolute paths are used (including domain).
