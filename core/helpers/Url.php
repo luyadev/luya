@@ -119,4 +119,35 @@ class Url extends \yii\helpers\BaseUrl
     {
         return self::cleanHost(parse_url(Url::ensureHttp($url), PHP_URL_HOST));
     }
+
+    /**
+     * Append a given part of the url to the current url
+     *
+     * @param string|array $append A string with url fragments or an array which will be processed by http_build_query.
+     * @param boolean $scheme Add full path schema to the url, by default true. Otherwise relative paths are used
+     * @return string
+     * @since 1.0.25
+     */
+    public static function urlAppend($append, $scheme = true)
+    {
+        if (is_array($append)) {
+            $append = http_build_query($append);
+        }
+        // remove starting & and ? chars
+        $append = ltrim($append, '&?');
+        $url = $scheme ? Yii::$app->request->absoluteUrl : Yii::$app->request->url;
+        // use &: Do we have already a ? in the url
+        if (StringHelper::contains('?', $url)) {
+            // seperator already existing
+            if (StringHelper::endsWith($url, '&')) {
+                return $url . $append;
+            }
+
+            // add seperator
+            return $url . '&' . $append;
+        }
+        
+        // use ?
+        return $url . '?' . $append;
+    }
 }
