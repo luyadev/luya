@@ -7,8 +7,8 @@
 The LUYA core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by helpers and a structured way to run and build any web application you can think of. 
 
 [![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
-[![Coverage Status](https://coveralls.io/repos/github/luyadev/luya/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/luyadev/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/luyadev/luya/?branch=master)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ef6b66d505ccf0b731b5/test_coverage)](https://codeclimate.com/github/luyadev/luya/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ef6b66d505ccf0b731b5/maintainability)](https://codeclimate.com/github/luyadev/luya/maintainability)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
 [![Join the Slack Team](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
