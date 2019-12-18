@@ -21,7 +21,7 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
 
     public function testWrongFormat()
     {
-        $model = new StubModel();
+        $model = new StubModelValidatorPhone();
         $validator = new PhoneNumberValidator();
         $validator->validateAttribute($model, 'value');
         $this->assertTrue($model->hasErrors());
@@ -29,7 +29,7 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
 
     public function testWrongFormatButNumber()
     {
-        $model = new StubModel();
+        $model = new StubModelValidatorPhone();
         $model->value = '0628711234';
         $validator = new PhoneNumberValidator();
         $validator->validateAttribute($model, 'value');
@@ -40,7 +40,7 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
     {
         foreach ($this->correctNumbersWithoutCountryCode as $number => $expect) {
 
-            $model = new StubModel();
+            $model = new StubModelValidatorPhone();
             $model->value = $number;
             $validator = new PhoneNumberValidator();
             $validator->validateAttribute($model, 'value');
@@ -53,7 +53,7 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
     {
         foreach ($this->correctNumbersWithCountryCode as $number => $expect) {
 
-            $model = new StubModel();
+            $model = new StubModelValidatorPhone();
             $model->value = $number;
             $validator = new PhoneNumberValidator();
             $validator->country = $expect['country'];
@@ -64,7 +64,7 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
     }
 }
 
-class StubModel extends Model
+class StubModelValidatorPhone extends Model
 {
     public $value;
 }
