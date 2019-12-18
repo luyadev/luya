@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.25
 
++ [#1982](https://github.com/luyadev/luya/pull/1982) New `PhoneNumberValidator` to validate Phone Numbers and standardized the format.
 + [#1981](https://github.com/luyadev/luya/pull/1981) Add `appendQuery()` and `appendQueryTourl()` function to Url Helper. The append method will add a given key value query param to the current url or any url.
 
 ## 1.0.24 (9. December 2019)

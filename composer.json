@@ -31,7 +31,8 @@
         "curl/curl": "^2.0 || ^1.0",
         "phpmailer/phpmailer": "^6.0",
         "nadar/php-composer-reader": "^1.0",
-        "cpliakas/git-wrapper": "^1.0 || ^2.0"
+        "cpliakas/git-wrapper": "^1.0 || ^2.0",
+        "giggsey/libphonenumber-for-php": "^8.11"
     },
     "require-dev": {
         "luyadev/luya-testsuite": "^1.0",

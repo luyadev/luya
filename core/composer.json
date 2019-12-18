@@ -19,7 +19,8 @@
     	"luyadev/luya-composer" : "^1.0",
         "yiisoft/yii2": "~2.0.15",
         "curl/curl" : "^2.0 || ^1.0",
-        "phpmailer/phpmailer": "^6.0"
+        "phpmailer/phpmailer": "^6.0",
+        "giggsey/libphonenumber-for-php": "^8.11"
         
     },
     "autoload" : {
