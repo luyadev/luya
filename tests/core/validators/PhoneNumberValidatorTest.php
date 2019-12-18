@@ -2,6 +2,7 @@
 
 namespace luyatests\core\validators;
 
+use libphonenumber\PhoneNumberType;
 use luya\validators\PhoneNumberValidator;
 use luyatests\LuyaWebTestCase;
 use yii\base\Model;
@@ -71,6 +72,24 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
             $this->assertFalse($model->hasErrors());
             $this->assertSame($expect['expect'], $model->value);
         }
+    }
+
+    public function testTypeCompare()
+    {
+        $model = new StubModelValidatorPhone();
+        $model->value = '+41791234567';
+
+        $validator = new PhoneNumberValidator();
+        $validator->country = 'CH';
+        $validator->type = PhoneNumberType::FIXED_LINE;
+        $validator->validateAttribute($model, 'value');
+
+        $this->assertSame(
+            ['value' => [
+                'The phone number does not match the required type FIXED_LINE.',
+            ]
+        ], $model->getErrors());
+        $this->assertTrue($model->hasErrors());
     }
 }
 
