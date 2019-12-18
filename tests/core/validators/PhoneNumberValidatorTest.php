@@ -11,6 +11,12 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
     public $correctNumbersWithoutCountryCode = [
         '+41 62 871 12 34' => '+41628711234',
         '+41 062 871 12 34' => '+41628711234',
+        '+41 999 871 12 34' => false, // this will fail!
+        '0041 062 871 12 34' => false,
+        '0041 62 871 12 34' => false,
+        '0041628711234' => false,
+        '041628711234' => false,
+        '0416028711234' => false,
     ];
 
     public $correctNumbersWithCountryCode = [
@@ -44,8 +50,12 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
             $model->value = $number;
             $validator = new PhoneNumberValidator();
             $validator->validateAttribute($model, 'value');
-            $this->assertFalse($model->hasErrors());
-            $this->assertSame($expect, $model->value);
+            if ($expect === false) {
+                $this->assertTrue($model->hasErrors());
+            } else {
+                $this->assertFalse($model->hasErrors());
+                $this->assertSame($expect, $model->value);
+            }
         }
     }
 

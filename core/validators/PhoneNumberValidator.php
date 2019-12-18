@@ -10,7 +10,7 @@ use yii\validators\Validator;
 /**
  * Phone Number Validator.
  * 
- * Validates a given phone number, and converts into standarized format by default. See {{PhoneNumberValidator::$autoFormat}}
+ * Validates a given phone number, and converts into standardized format by default. See {{PhoneNumberValidator::$autoFormat}}
  * 
  * @see https://github.com/giggsey/libphonenumber-for-php This library is used to parse, format and validate.
  * @author Basil Suter  <basil@nadar.io>
@@ -29,7 +29,7 @@ class PhoneNumberValidator extends Validator
     public $country;
 
     /**
-     * @var boolean Whether the phone number value should be standarized with formating function and write back to the model. This is usefull
+     * @var boolean Whether the phone number value should be standardized with formating function and write back to the model. This is usefull
      * in order to have all phone numbers save in the correct format in the database.
      */
     public $autoFormat = true;
