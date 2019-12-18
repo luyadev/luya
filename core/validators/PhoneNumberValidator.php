@@ -12,6 +12,7 @@ use yii\validators\Validator;
  * 
  * Validates a given phone number, and converts into standarized format by default. See {{PhoneNumberValidator::$autoFormat}}
  * 
+ * @see https://github.com/giggsey/libphonenumber-for-php This library is used to parse, format and validate.
  * @author Basil Suter  <basil@nadar.io>
  * @since 1.0.25
  */
