@@ -7,6 +7,12 @@ use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
 use yii\validators\Validator;
 
+/**
+ * Phone Number Validator.
+ * 
+ * @author Basil Suter  <basil@nadar.io>
+ * @since 1.0.25
+ */
 class PhoneNumberValidator extends Validator
 {
     public $country;
