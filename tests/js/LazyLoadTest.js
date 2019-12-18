@@ -12,33 +12,35 @@ describe("Test LazyLoading: Image loading", function() {
     it("should have class `loaded`", function (done) {
         var imageId;
 
-        // Set imageLoaded to false and wait for event sent by the lazyloading plugin
-        var imageLoaded = false;
-        $(document).one('lazyimage-loaded', function(e, info) {
-            if(info.type == 'success') {
-                imageId = info.imageId;
-                imageLoaded = true;
-            }
-        });
+        ( function($) {
+            // Set imageLoaded to false and wait for event sent by the lazyloading plugin
+            var imageLoaded = false;
+            $(document).one('lazyimage-loaded', function(e, info) {
+                if(info.type == 'success') {
+                    imageId = info.imageId;
+                    imageLoaded = true;
+                }
+            });
 
-        // Load fixture
-        setFixtures(basicLazyLoadImageFixture);
+            // Load fixture
+            setFixtures(basicLazyLoadImageFixture);
 
-        // Init lazyloading
-        $.lazyLoad();
+            // Init lazyloading
+            $.lazyLoad();
 
-        // Check every half second if the image has been loaded
-        // and if so, call the done() function
-        var startTime = Date.now();
-        setInterval(function() {
-            if(imageLoaded) {
-                // Check if this.imageId has class loaded
-                expect($(imageId).hasClass('loaded')).toBe(true);
-                done();
-            } else {
-                console.log('Waiting for image to load... (' + Math.round((Date.now() - startTime) / 1000) + 's)');
-            }
-        }, 500);
+            // Check every half second if the image has been loaded
+            // and if so, call the done() function
+            var startTime = Date.now();
+            setInterval(function() {
+                if(imageLoaded) {
+                    // Check if this.imageId has class loaded
+                    expect($(imageId).hasClass('loaded')).toBe(true);
+                    done();
+                } else {
+                    console.log('Waiting for image to load... (' + Math.round((Date.now() - startTime) / 1000) + 's)');
+                }
+            }, 500);
+        }) (jQuery)
     });
 
     afterEach(function() {

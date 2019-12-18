@@ -121,4 +121,19 @@ class UrlTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('luya.io', Url::domain('https://www.luya.io/barfoo'));
         $this->assertSame('beta.luya.io', Url::domain('https://beta.luya.io'));
     }
+
+    public function testUrlAppend()
+    {
+        $this->assertSame('/luya/envs/dev/public_html/?foo=bar', Url::appendQuery('?foo=bar'));
+        $this->assertSame('http://localhost/luya/envs/dev/public_html/?foo=bar', Url::appendQuery('?foo=bar', true));
+        $this->assertSame('/luya/envs/dev/public_html/?foo=bar', Url::appendQuery(['foo' => 'bar']));
+        $this->assertSame('/luya/envs/dev/public_html/?foo=bar', Url::appendQuery('&foo=bar'));
+        $this->assertSame('/luya/envs/dev/public_html/?foo=bar', Url::appendQuery('?&foo=bar'));
+    }
+
+    public function testAppendToUrl()
+    {
+        $this->assertSame('http://luya.io?x=z&foo=bar', Url::appendQueryToUrl('http://luya.io?x=z', '?foo=bar'));
+        $this->assertSame('http://luya.io?foo=bar', Url::appendQueryToUrl('http://luya.io?', '?foo=bar'));
+    }
 }

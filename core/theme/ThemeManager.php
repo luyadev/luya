@@ -128,8 +128,7 @@ class ThemeManager extends \yii\base\Component
     /**
      * Get all theme configs as array list.
      *
-     * @param bool $throwException
-     *
+     * @param bool $throwException Whether an exception should by throw or not. By version 1.0.24 this is disabled by default.
      * @return ThemeConfig[]
      * @throws \yii\base\Exception
      */

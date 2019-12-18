@@ -3,9 +3,17 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.24
+## 1.0.25
 
++ [#1982](https://github.com/luyadev/luya/pull/1982) New `PhoneNumberValidator` to validate Phone Numbers and standardized the format.
++ [#1981](https://github.com/luyadev/luya/pull/1981) Add `appendQuery()` and `appendQueryTourl()` function to Url Helper. The append method will add a given key value query param to the current url or any url.
+
+## 1.0.24 (9. December 2019)
+
++ [#1980](https://github.com/luyadev/luya/pull/1980) Added `ArrayHelper::search()` keys option to search only in certain array keys.
++ [#1969](https://github.com/luyadev/luya/pull/1969) Fixed exception handling while loading empty theme directories.
 + [#1977](https://github.com/luyadev/luya/pull/1977) Added new `ArrayHelper::combine()` method to generate an array with the same keys and values.
++ [#1977](https://github.com/luyadev/luya/pull/1978) Added support for ActiveForm context to SubmitButtonWidget. Supporting multi form (including pjax) on same page.
 
 ## 1.0.23 (27. November 2019)
 

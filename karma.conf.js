@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Wed Oct 31 2018 14:06:19 GMT+0100 (GMT+01:00)
+// Generated on Thu Dec 12 2019 10:02:48 GMT+0100 (Central European Standard Time)
 
 module.exports = function(config) {
   config.set({
@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'vendor/bower-asset/jquery/dist/jquery.js',
+      // 'vendor/bower-asset/jquery/dist/jquery.js',
       'core/lazyload/resources/lazyload.min.js',
       'tests/js/*.js'
     ],
@@ -52,12 +52,12 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox', 'Safari', 'PhantomJS'],
+    browsers: ['Chrome', 'Firefox', 'PhantomJS'],
 
 
     // Continuous Integration mode
