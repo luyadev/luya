@@ -128,6 +128,21 @@ public function ngRestScopes($)
 }
 ```
 
+#### Extra Attribute without Value
+
+In certain siutation the extra field is not bound to any data, therefore you can either override the extraFields() method and remove the custom attribute or you can attach the "virtual" attribute to an existing root attribute using `.` notation:
+
+```php
+public function ngRestExtraAttributeTypes()
+{
+     return [
+        'id.indexField' => ['index'],
+    ];
+}
+```
+
+This will use the root attribute id which is present in the view, this can be usefull when using {{luya\admin\ngrest\plugins\Angular}} plugins.
+
 ## Grid list default order/sort
 
 By default the gird list is sorted by the primary key (mostly known as ID) in descending direction. To override the default implement just override the `ngRestListOrder` method with an array where the key is the field and value the direction of sorting.
