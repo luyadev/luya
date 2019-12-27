@@ -35,7 +35,7 @@ $config = [
 ];
 ``` 
 
-since version 3.0 of cms, activate a them can also be done in the admim area under *Settings* -> *Themes*
+Since version 3.0 of CMS module, activate a theme can also be done in the admim area under *Settings* -> *Themes*
 
 ![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
 
