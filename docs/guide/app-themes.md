@@ -47,7 +47,7 @@ The *blank* theme (base)
 
 ```theme.json
 {
-    name: "Blank theme"
+    "name": "Blank theme"
 }
 ```
 
