@@ -35,7 +35,7 @@ $config = [
 ];
 ``` 
 
-since version 3.0 of cms, activate a them can also be done in the admim area under *Settings* -> *Themes*
+Since version 3.0 of CMS module, activate a theme can also be done in the admim area under *Settings* -> *Themes*
 
 ![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
 
@@ -45,15 +45,15 @@ In our example we make a *blue theme* which inherit from the theme *@app/themes/
 
 The *blank* theme (base)
 
-```theme.json
+```json
 {
-    name: "Blank theme"
+    "name": "Blank theme"
 }
 ```
 
 The *blue* theme based on *blank* theme:
 
-```theme.json
+```json
 {
     "name": "Blue theme",
     "parentTheme": "@app/themes/blank"
@@ -66,14 +66,13 @@ For detailed information of theme config take a look at {{luya\theme\ThemeConfig
 
 Theme inherit all view files from their parents. Only if a theme has the same view file as its parent than this file will be used while rendering.
 
-In the above example the *blank* theme could have the view `@blankTheme/views/site/index`.
-The *blue* theme does need to have this view file because it will inherit from the *blank* theme.
+In the above example the *blank* theme could have the view `@blankTheme/views/site/index`. The *blue* theme does need to have this view file because it will inherit from the *blank* theme.
 
-**But the views from `@app/views` will be override all other theme views.
+**But the views from `@app/views` will be override all other theme views**.
 
 The order of view inheritance (pathMap) will looks like this:
 
-```pathmap
+```
 // requested path => [theme paths]
 @app/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
 @blueTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
@@ -88,7 +87,7 @@ On a match searching in the list of theme paths for a exists file in the defined
 It is also possible to define additional path for inheritance by add a path map in the theme config.
 In this way block and widget views can also be override with a theme.
 
-```theme.json
+```json
 {
     "pathMap": [
         "@moduleAlias/frontend/views"

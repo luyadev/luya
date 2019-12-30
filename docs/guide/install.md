@@ -4,17 +4,13 @@ The LUYA installation requires Composer, please have a look at the [official Com
 
 > Find the [installation Video on Youtube](https://www.youtube.com/watch?v=Ybq878PMe_U) in order to help you install LUYA.
 
-First of all it´s mandatory to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. To install the `fxp/composer-asset-plugin` globally open your terminal and run the following command:
-
-```sh
-composer global require "fxp/composer-asset-plugin:~1.4"
-```
-
 After setting up Composer, we execute the Composer command `create-project` to checkout the **luya-kickstarter** application, an **out of the box** LUYA setup to run your website directly. It´s recommend to run the `create-project` command directly from your htdocs/webserver folder like this:
 
 ```sh
 composer create-project luyadev/luya-kickstarter:^1.0
 ```
+
+> Info: There are also other LUYA Kickstarter packages, check the [kickstarter packages section](https://luya.io/packages).
 
 > Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
@@ -23,11 +19,11 @@ If the Composer installation is done change into the **configs** folder inside t
 
 ```sh
 cp env.php.dist env.php
-cp env-local-db.php.dist env-local-db.php
 ```
 
-Now the database connection inside the `configs/env-local-db.php` file needs to fit your mysql servers configuration. 
-It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-environments.md). 
+Now the database connection inside the `configs/config.php` file needs to fit your mysql servers configuration. 
+It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-environments.md).
+
 After successfully setting up your database connection, you have to reopen your terminal and change into your project directory and excute the **luya** binary files which has been installed into your vendor folder by composer as described in the follwing.
 
 Run the migration files with the [migrate console command](luya-console.md):

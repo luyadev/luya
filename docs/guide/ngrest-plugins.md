@@ -2,7 +2,7 @@
 
 An NgRest plugin is like the type of an input which means you can create selects, date pickers, file or image uploads and more. Each NgRest Config Plugin can have its configuration options. You should read the [[ngrest-model.md]] guide section to understand how to use the plugins.
 
-### Available plugins
+## LUYA System plugins
 
 The plugins listed below can be configured but make sure your are familiar with the class reference of the plugin to be informed about all details.
 
@@ -35,6 +35,8 @@ The plugins listed below can be configured but make sure your are familiar with 
 |sortRelationArray|{{luya\admin\ngrest\plugins\SortRelationArray}}|array|Similar to selectArray but with the ability to sort and to selected multiple items.
 |sortRelationModel|{{luya\admin\ngrest\plugins\SortRelationModel}}|array|Similar to selectModel but with the ability to sort and to selected multiple items.
 |html|{{luya\admin\ngrest\plugins\Html}}|string|HTML data without encoding.
+|raw|{{luya\admin\ngrest\plugins\Raw}}|string|Does not modify the content, usefull when working with json api input/output.
+|index|{{luya\admin\ngrest\plugins\Index}}|string|Sequential number index.
 
 ## Create a custom project Plugin
 
