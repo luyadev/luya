@@ -2,10 +2,9 @@
 
 namespace luya\helpers;
 
-use yii\db\ActiveQueryInterface;
-use yii\db\ActiveRecordInterface;
-use yii\helpers\Html;
 use luya\Exception;
+use yii\base\Model;
+use yii\db\QueryInterface;
 
 /**
  * Exporting into Formats.
@@ -16,9 +15,9 @@ use luya\Exception;
 class ExportHelper
 {
     /**
-     * Export an Array or ActiveQuery instance into a CSV formated string.
+     * Export an Array or QueryInterface instance into a CSV formated string.
      *
-     * @param array|ActiveQueryInterface $input The data to export into a csv
+     * @param array|QueryInterface $input The data to export into a csv
      * @param array $keys Defines which keys should be packed into the generated CSV. The defined keys does not change the sort behavior of the generated csv.
      * @param string $header Whether the column name should be set as header inside the csv or not.
      * @return string The generated CSV as string.
@@ -33,9 +32,9 @@ class ExportHelper
     }
 
     /**
-     * Export an Array or ActiveQuery instance into a Excel formatted string.
+     * Export an Array or QueryInterface instance into a Excel formatted string.
      *
-     * @param array|ActiveQueryInterface $input
+     * @param array|QueryInterface $input
      * @param array $keys Defines which keys should be packed into the generated xlsx. The defined keys does not change the sort behavior of the generated xls.
      * @param bool $header
      * @return mixed
@@ -57,13 +56,13 @@ class ExportHelper
     /**
      * Check type of input and return correct array.
      *
-     * @param array|object $input
+     * @param array|QueryInterface $input
      * @return array
      * @since 1.0.4
      */
     protected static function transformInput($input)
     {
-        if ($input instanceof ActiveQueryInterface) {
+        if ($input instanceof QueryInterface) {
             return $input->all();
         }
 
@@ -74,14 +73,14 @@ class ExportHelper
      * Generate content by rows.
      *
      * @param array $contentRows
-     * @param string$delimiter
-     * @param string $keys
+     * @param string $delimiter
+     * @param array $keys
      * @param bool $generateHeader
      * @return array
      * @throws Exception
      * @since 1.0.4
      */
-    protected static function generateContentArray($contentRows, $keys, $generateHeader = true)
+    protected static function generateContentArray($contentRows, array $keys, $generateHeader = true)
     {
         if (is_scalar($contentRows)) {
             throw new Exception("Content must be either an array, object or traversable");
@@ -104,9 +103,10 @@ class ExportHelper
             }
             $rows[$i] = ArrayHelper::toArray($content, $attributeKeys, false);
 
-            // handler header
+            // handle header
             if ($i == 0 && $generateHeader) {
-                if ($content instanceof ActiveRecordInterface) {
+                if ($content instanceof Model) {
+                    /** @var Model $content */
                     foreach ($content as $k => $v) {
                         if (empty($keys)) {
                             $header[] = $content->getAttributeLabel($k);
@@ -130,8 +130,10 @@ class ExportHelper
     }
 
     /**
+     * Generate the output string with delimiters.
+     * 
      * @param array $input
-     * @param $delimiter
+     * @param string $delimiter
      * @return null|string
      * @since 1.0.4
      */

@@ -19,7 +19,7 @@ In order to run LUYA with deployer nicely on a production server, the following 
 
 + php 7.1 (or higher) (php 7.0 and php 5.6 should work but its not tested anymore)
 + mysql 5.5 (or higher)
-+ php extensions: curl, fileinfo, mbstring, icu, phar
++ php extensions: curl, fileinfo, mbstring, icu, phar, zip
 + apache modules: mod_rewrite
 + git (for deployer)
 + composer (for deployer)
