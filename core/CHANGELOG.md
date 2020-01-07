@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.25
+## 1.0.25 (7. January 2020)
 
 + [#1982](https://github.com/luyadev/luya/pull/1982) New `PhoneNumberValidator` to validate Phone Numbers and standardized the format.
 + [#1981](https://github.com/luyadev/luya/pull/1981) Add `appendQuery()` and `appendQueryTourl()` function to Url Helper. The append method will add a given key value query param to the current url or any url.
