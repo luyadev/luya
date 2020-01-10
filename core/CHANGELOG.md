@@ -5,6 +5,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.26
 
++ [#1987](https://github.com/luyadev/luya/issues/1987) Fix bug with closures in `luya\Config` application and bootstrap section.
+
 ## 1.0.25 (7. January 2020)
 
 + [#1982](https://github.com/luyadev/luya/pull/1982) New `PhoneNumberValidator` to validate Phone Numbers and standardized the format.

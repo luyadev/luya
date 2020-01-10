@@ -152,7 +152,7 @@ class Config
      */
     public function application(array $config)
     {
-        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_APPLICATIONS, md5(serialize($config)), $config));
+        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_APPLICATIONS, 'application', $config));
     }
 
     /**
@@ -163,7 +163,7 @@ class Config
      */
     public function bootstrap(array $config)
     {
-        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_BOOTSTRAPS, md5(serialize($config)), $config));
+        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_BOOTSTRAPS, 'bootstrap', $config));
     }
 
     /**
@@ -316,6 +316,7 @@ class Config
                     $config[$k] = $v;
                 }
                 break;
+
             case ConfigDefinition::GROUP_COMPONENTS:
                 $this->handleKeyBaseMerge($config, $definition, 'components');
                 break;
@@ -353,11 +354,14 @@ class Config
             $config[$section] = [];
         }
 
+        // array key from definition in order to merge with existing values
+        $key = $definition->getKey();
+
         // if key exists, merge otherwise create key
-        if (isset($config[$section][$definition->getKey()])) {
-            $config[$section][$definition->getKey()] = ArrayHelper::merge($config[$section][$definition->getKey()], $definition->getConfig());
+        if (isset($config[$section][$key])) {
+            $config[$section][$key] = ArrayHelper::merge($config[$section][$key], $definition->getConfig());
         } else {
-            $config[$section][$definition->getKey()] = $definition->getConfig();
+            $config[$section][$key] = $definition->getConfig();
         }
     }
 }

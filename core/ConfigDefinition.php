@@ -30,6 +30,9 @@ class ConfigDefinition
      */
     const GROUP_BOOTSTRAPS = 4;
 
+    /**
+     * @var integer a group of callables
+     */
     const GROUP_CALLABLE = 5;
 
     private $_group;
