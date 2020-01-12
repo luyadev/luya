@@ -14,6 +14,8 @@ composer create-project luyadev/luya-kickstarter:^1.0
 
 > Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
+> Note: In previous versions the fxp composer plugin was required `composer global require "fxp/composer-asset-plugin:~1.4"` but this has been replaced with [Asset Packagist](https://asset-packagist.org). If the Asset Packagist is not present in the composer.json you might install the fxp plugin as its a "legacy" project setup.
+
 The `create-project` command will create a folder (inside of your current folder where the `composer create-project` command was executed) named **luya-kickstarter**. 
 If the Composer installation is done change into the **configs** folder inside the application and copy the `.dist` template files to original `.php` files.
 
