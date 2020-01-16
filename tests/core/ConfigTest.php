@@ -189,6 +189,19 @@ class ConfigTest extends LuyaWebTestCase
                 ]
             ]
         ], $config->toArray([Config::ENV_PREP]));
+
+
+        $this->assertSame([
+            'id' => 'test',
+            'basePath' => 'basePath',
+            'components' => [
+                'db' => [
+                    'class' => 'yii\db\Connection',
+                    'username' => 'prep',
+                    'password' => 'prep',
+                ]
+            ]
+        ], $config->toArray(Config::ENV_PREP));
     }
 
     public function testBootstrap()

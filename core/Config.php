@@ -277,12 +277,13 @@ class Config
     /**
      * Export the given configuration as array for certain envs.
      *
-     * @param array $envs A list of environments to export. if nothing is given all enviroments will be returned.
+     * @param array|string $envs A list of environments to export. if nothing is given all enviroments will be returned. A string will be threated as array with 1 entry.
      * @return array The configuration array
      */
-    public function toArray(array $envs = [])
+    public function toArray($envs = [])
     {
         $config = [];
+        $envs = (array) $envs;
         $envs = array_merge($envs, [self::ENV_ALL]);
         foreach ($this->_definitions as $definition) { /** @var ConfigDefinition $definition */
             // validate if current export env is in the list of envs
