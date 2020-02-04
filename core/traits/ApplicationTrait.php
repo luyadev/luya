@@ -12,9 +12,9 @@ use luya\base\PackageInstaller;
 /**
  * LUYA Appliation trait
  *
- * @property string                $webroot Returns the webroot directory event for console commands.
+ * @property string $webroot Returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
- * @property ThemeManager          $themeManager Get luya theme manager
+ * @property ThemeManager $themeManager Get luya theme manager
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

@@ -106,17 +106,21 @@ class Composition extends Component implements \ArrayAccess
      * @var array|string An array with all valid hosts in order to ensure the request host is equals to valid hosts.
      * This filter provides protection against ['host header' attacks](https://www.acunetix.com/vulnerabilities/web/host-header-attack).
      *
+     * The allowed hosts check does not care about the protocol (https/http), there fore take a look the {{luya\traits\ApplicationTrait::$ensureSecureConnection}}.
+     * 
      * ```php
      * 'allowedHosts' => [
-     *     'example.com',
-     *     '*.example.com',
+     *     'example.com', // this does not include www.
+     *     '*.example.com', // this incluides www. and all other subdomains.
      * ]
      * ```
+     * 
+     * > In order to allow all subdomains including www or not use `*example.com`.
      *
-     * If null is defined, the allow host filtering is disabled, default value.
+     * If no value is defined, the allowed host filtering is disable, this is the default behavior.
      * @since 1.0.5
      */
-    public $allowedHosts = null;
+    public $allowedHosts;
     
     /**
      * A list of values which are valid for every pattern. If set and a value is provided which is not inside this property
