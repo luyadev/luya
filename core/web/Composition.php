@@ -168,7 +168,7 @@ class Composition extends Component implements \ArrayAccess
         }
 
         if ($this->allowedHosts !== null && !$this->isHostAllowed($this->allowedHosts)) {
-            throw new ForbiddenHttpException("The current host '{$this->request->hostName}' is not in the list valid of hosts.");
+            throw new ForbiddenHttpException("Invalid host name.");
         }
         
         if (array_key_exists($this->request->hostInfo, $this->hostInfoMapping)) {
