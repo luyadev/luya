@@ -83,7 +83,7 @@ class ExportHelper
     protected static function generateContentArray($contentRows, array $keys, $generateHeader = true)
     {
         if (is_scalar($contentRows)) {
-            throw new Exception("Content must be either an array, object or traversable");
+            throw new Exception("Content must be either an array, object or traversable.");
         }
 
         $attributeKeys = $keys;
@@ -101,7 +101,9 @@ class ExportHelper
             } elseif (!empty($keys) && is_object($content)) {
                 $attributeKeys[get_class($content)] = $keys;
             }
-            $rows[$i] = ArrayHelper::toArray($content, $attributeKeys, false);
+            $row = ArrayHelper::toArray($content, $attributeKeys, false);
+            ksort($row);
+            $rows[$i] = $row;
 
             // handle header
             if ($i == 0 && $generateHeader) {
@@ -109,16 +111,20 @@ class ExportHelper
                     /** @var Model $content */
                     foreach ($content as $k => $v) {
                         if (empty($keys)) {
-                            $header[] = $content->getAttributeLabel($k);
+                            $header[$k] = $content->getAttributeLabel($k);
                         } elseif (in_array($k, $keys)) {
-                            $header[] = $content->getAttributeLabel($k);
+                            $header[$k] = $content->getAttributeLabel($k);
                         }
                     }
                 } else {
                     $header = array_keys($rows[0]);
                 }
+
+                ksort($header);
             }
 
+            unset($row);
+            gc_collect_cycles();
             $i++;
         }
 
