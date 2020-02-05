@@ -85,15 +85,3 @@ The syntax we use to build the forms in LUYA ADMNI UI is as followed:
     </div>
 </div>
 ```
-
-### Responsive tables
-
-In addition to the bootstrap `table-responsive` version we have a wrapper to improve the overall behaviour of tables on mobile. You can use the table wrapper as following:
-
-```html
-<div class="table-responsive-wrapper">
-    <table class="table ..."></table>
-</div>
-```
-
-In this case you do not have to add the `table-responsive` class to the `table` HTML element to the table.
