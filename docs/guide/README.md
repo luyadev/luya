@@ -78,3 +78,5 @@
   + [Collaboration](luya-collaboration.md)
   + [Unit Test](luya-unittest.md)
   + [Admin Browser Compatibility](luya-browser.md)
+  + [Arguments for LUYA](luya-arguments.md)
+  + [The LUYA Organisation](luya-organisation.md)
