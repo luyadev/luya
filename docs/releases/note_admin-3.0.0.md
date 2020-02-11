@@ -1,0 +1,32 @@
+!WIP
+
+LUYA admin 3.0.0 release
+
+## 2FA with OTP Option
+
+...
+
+## Remember Device
+
+With version 3.0 its now possible to remeber a certain devices for a given amount of days. This means if the *remember this device* checkbox has been toggle during login process, you will be auto logged in for a certain amount of days on this device without asking for password or email. If you idle for to long and the admin kicks you off, the cookie with this information will be destroyed and the device will be removed from the list againi. So don't fall asleep while typing. To understand how this works, the LUYA admin will stored an device specific unique token in a cookie that will be retreived when open the admin ui.
+
+## New Account View
+
+...
+
+## Queue Errors
+
+The integration with Yii Queue gets even deeper. Exceptions which are thrown while queue run are now logged for each retry. Even the job was successfull at the end, all thrown exceptions and error will be stored and are visible. This makes it more easy to debug queue jobs.
+
+## "Forgot your password"?
+
+A new button "forgot your password" has been added to the login screen, only if enabled in the admin module configuration. By default its disabled due to a small security risk.
+
+## Session based lockout is now IP based lockout
+
+In the previous version we have integrated a session based lockout. If you where attempting to login for a certain amount your session profile have been locked out. As its easy to clear session date, we have now implemented an ip based lockout. Its also possible to switch ips but its better then session based lockout. If brute forcing is the method of attack, and the mail adresse has been breached, the email based lockout will step into action anyhow.
+
+
+Please check the full [Changelog](https://github.com/luyadev/luya-module-admin/blob/master/CHANGELOG.md) and the [Upgrading Guide](https://github.com/luyadev/luya-module-admin/blob/master/UPGRADE.md) where you will find a list of all breaking changes.
+
+February 2020, LUYA developer team
