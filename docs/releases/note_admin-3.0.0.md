@@ -32,7 +32,7 @@ A new button "forgot your password" has been added to the login screen, only if 
 
 ps: if you like to have a random background image in the back of the login screen, just install the login image extension https://luya.io/packages/nadar--luya-login-image.
 
-## Session based lockout is now IP based lockout
+## Session based lockout is now IP based lockout
 
 In the previous version we have integrated a session based lockout. If you where attempting to login for a certain amount your session profile have been locked out. As its easy to clear session date, we have now implemented an ip based lockout. Its also possible to switch ips but its better then session based lockout. If brute forcing is the method of attack, and the mail adresse has been breached, the email based lockout will step into action anyhow.
 
