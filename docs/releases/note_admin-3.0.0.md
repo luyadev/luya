@@ -1,5 +1,3 @@
-!WIP
-
 LUYA admin 3.0.0 release
 
 ## Two-Factor Authentication with OTP (One-Time Password)
