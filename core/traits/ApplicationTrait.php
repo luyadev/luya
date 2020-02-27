@@ -156,7 +156,7 @@ trait ApplicationTrait
      * 'locales' => ['de' => 'de_CH']
      * ```
      *
-     * @param string $lang Find the locale POSIX for the provided $lang short code.
+     * @param string $lang Find the locale for the provided $lang short code.
      * @return string The localisation code for the provided lang short code.
      */
     public function ensureLocale($lang)
@@ -175,8 +175,8 @@ trait ApplicationTrait
     }
     
     /**
-     * Setter method ensures the locilations POSIX from {{ensureLocale}} for the provided lang
-     * and changes the Yii::$app->langauge and sets the `setlocale()` code from ensureLocale().
+     * Setter method ensures the localisation from {{ensureLocale}} for the provided lang
+     * and changes the Yii::$app->langauge for the given $lang and sets the `setlocale()` code from ensureLocale().
      *
      * From the setlocale docs about, try different locales:
      *
@@ -188,8 +188,8 @@ trait ApplicationTrait
      */
     public function setLocale($lang)
     {
+        $this->language = $lang;
         $locale = str_replace(['.utf8', '.UTF-8'], '', $this->ensureLocale($lang));
-        $this->language = $locale;
         setlocale(LC_ALL, $locale.'.utf8', $locale.'UTF-8', $locale);
     }
 
