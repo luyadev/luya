@@ -23,7 +23,12 @@ Example of a theme directory structure:
 
 ## Configure active theme
 
-To enable a theme you have to assign it to the theme manager. You can define this in your config file just add the theme alias e.g. `@app/themes/blank` to the `themeManager` config section:
+Since version 3.0 of CMS module, activate a theme can be done in the admim area under *Settings* -> *Themes*
+
+![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
+
+
+You can set a active theme in your config file also. Add the theme alias e.g. `@app/themes/blank` to the `themeManager` config section: 
 
 ```php
 $config = [
@@ -34,10 +39,6 @@ $config = [
     ]
 ];
 ``` 
-
-Since version 3.0 of CMS module, activate a theme can also be done in the admim area under *Settings* -> *Themes*
-
-![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
 
 ## Example theme config
 
@@ -160,4 +161,4 @@ For more information to packages see [package guide](luya-package-dev.md).
 
 Some other examples of theme packages:
 
-+ [luya-themecollection](https://github.com/boehsermoe/luya-themecollection)
++ [luya-themes](https://github.com/luyadev/luya-themes)
