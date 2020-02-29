@@ -74,7 +74,7 @@ class NotifyController extends \luya\console\Command
 }
 ```
 
-> Always use `ouputError($message)` or `outputSuccess($message)` to return the status of the execution inside of the command, depending on this output we can handle PHPUnit test easy and return colorized outputs.
+> Always use `ouputError($message)` or `outputSuccess($message)` to return the status of the execution inside of the command, depending on this output we can handle PHPUnit test and return colorized outputs.
 
 To run the `actionIndex()` from the above mentioned `NotfyController` controller in the `yourmodule` module:
 

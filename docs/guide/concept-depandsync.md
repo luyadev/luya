@@ -22,10 +22,17 @@ We recommend that you deploy the website to the server in an early stadium of th
 
 ## Deployment
 
+The deployment (using [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)) will mainly publish the git repository on the production server and runs certain LUYA related tasks, like migration and import commands. It will also ensure the right `env.php` is created on the server based on the deploy.php server name setting `server('prod', ...)`.
+
 1. Set up your production environment on the server (create the database, enable ssh, etc.)
-2. Change the `env-prod.php` config.
+2. Ensure the config contains the right informations in {{luya\Config::ENV_PROD}} context.
 3. Install and configure the [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)
 4. Deploy your website with the `./vendor/bin/dep luya prod` command.
+5. **First deployment:** Run the `./vendor/bin/luya admin/setup` command **on the production server**. To do so loggin with SSH and rund the admin/setup command.
+
+> After the **first deployment** make sure the `public_html/assets`, `public_html/storage` and `runtime` is writeable, if the deployer could not set the permissions accordingly.
+
+If you encounter problems while deployment try to run `./vendor/bin/dep luya prod -vvv` which will display more informations.
 
 ### Connection strategies
 

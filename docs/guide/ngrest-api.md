@@ -170,36 +170,48 @@ Complex and nested conditions are possible as well:
 
 #### A few example as json and http get param
 
-JSON:
+The following examples show filter requests for json body param or as get param. This helps to transform from json to http get param as its mostly harder to read and write.
 
+<table>
+<thead>
+<tr>
+<th>json</th>
+<th>get</th>
+</tr>
+</thead>
+
+<tr>
+<td>
 ```json
 {
     "filter": {"group_id":{"in": [1,2,3]}
 }
 ```
-
-as HTTP Param:
-
+</td>
+<td>
 ```
 filter[group_id][in][0]=1&filter[group_id][in][1]=2&filter[group_id][in][2]=4
 ```
+</td>
+</tr>
 
-JSON:
-
+<tr>
+<td>
 ```json
 {
     "filter": {"group_id":{"gt":1}
 }
 ```
-
-as HTTP Param:
-
+</td>
+<td>
 ```
 filter[group_id][gt]=1
 ```
+</td>
+</tr>
 
-JSON:
-
+<tr>
+<td>
 ```json
 {
     "filter": {
@@ -210,11 +222,13 @@ JSON:
     }
 }
 ```
-
-as HTTP Param:
-
+</td>
+<td>
 ```
-filter[or][0][name]=John&filter[or][1][emil]=john@doe.com
+filter[or][0][name]=John&filter[or][1][email]=john@doe.com
 ```
+</td>
+</tr>
+</table>
 
 > In order to decode and test a get url use `urldecode(http_build_query(['filter' => [/*...*/]))`

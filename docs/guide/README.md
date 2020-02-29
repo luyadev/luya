@@ -30,7 +30,7 @@
   + [JsonLd](app-jsonld.md)
   + [Modules](app-module.md)
   + [Themes](app-themes.md)
-  + [Queue](app-queue.md)
+  + [Queue/Scheduler](app-queue.md)
 + CMS
   + [CMS Layouts](app-cmslayouts.md)
   + [Menus & Navigations](app-menu.md)
@@ -78,3 +78,5 @@
   + [Collaboration](luya-collaboration.md)
   + [Unit Test](luya-unittest.md)
   + [Admin Browser Compatibility](luya-browser.md)
+  + [Arguments for LUYA](luya-arguments.md)
+  + [The LUYA Organisation](luya-organisation.md)

@@ -32,7 +32,7 @@ class ApplicationTraitTest extends LuyaWebTestCase
         $app->locales = ['de' => 'de_CH.utf8'];
         $app->setLocale('de');
         $this->assertEquals('de_CH.utf8', $app->ensureLocale('de'));
-        $this->assertSame('de_CH', $app->language);
+        $this->assertSame('en-US', $app->language);
     }
     
     public function testWithoutUtf8Notiation()
@@ -41,7 +41,7 @@ class ApplicationTraitTest extends LuyaWebTestCase
         $lang = 'de';
         $app->locales = [$lang => 'de_CH'];
         $this->assertSame('de_CH', $app->ensureLocale($lang));
-        $this->assertSame('de_CH', $app->language);
+        $this->assertSame('en-US', $app->language);
     }
     
     public function testUknownLocales()

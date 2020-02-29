@@ -92,13 +92,30 @@ class Config
 {
     const ENV_ALL = 'all';
 
+    /**
+     * @var string Predefined constant for production
+     */
     const ENV_PROD = 'prod';
     
+    /**
+     * @var string Predefined constant for preproduction
+     */
     const ENV_PREP = 'prep';
     
+    /**
+     * @var string Predefined constant for development mode
+     */
     const ENV_DEV = 'dev';
     
+    /**
+     * @var string Predefined constant for local development
+     */
     const ENV_LOCAL = 'local';
+
+    /**
+     * @var string Predefined constant for ci enviroments
+     */
+    const ENV_CI = 'ci';
 
     const RUNTIME_ALL = 0;
 
