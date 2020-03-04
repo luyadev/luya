@@ -209,3 +209,24 @@ A few principals regarding permissions:
 + If the group of the defined {{luya\admin\components\Jwt::$apiUserEmail}} API user has **no permissions**, only your custom actions are accessible.
 + When accessing NgRest API actions like update, create, list or view (detail) and permission is granted the actions are logged with the configured ApiUser.
 + As permission is proxied trough Api Users, a valid Api User token could access those informations as well.
+
+## User Based CheckAccess
+
+Its a common task to check the permission for a certain user id, whether the user can update/delete an item or not. Thefore the {{luya\admin\base\RestActiveController::checkAccess()}} method can be extended by some JWT user id based actions.
+
+```php
+public function checkAccess($action, $model = null, $params = [])
+{
+    parent::checkAccess($action, $model, $params);
+
+    // see if jwt user performs this action
+    if (Yii::$app->jwt->identity && ($action == 'delete' || $action == 'update')) {
+        // if jwt user id is not equal the models user id, throw forbidden exception.
+        if (Yii::$app->jwt->identity->id != $model->user_id) {
+            throw new ForbiddenHttpException("Unable to delete/update this item due to permission restrictions.");
+        }
+    }
+}
+```
+
+The above method assume that the `$model` has a column with `user_id`, adjust this to match the user id column.
