@@ -44,6 +44,8 @@ install:
       fi
   - |
       if [ $TASK_TESTS_JS == 1 ]; then
+        export DISPLAY=:99.0
+        sh -e /etc/init.d/xvfb start
         travis_retry yarn
       fi
 
