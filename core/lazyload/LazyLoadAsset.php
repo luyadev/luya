@@ -15,13 +15,13 @@ class LazyLoadAsset extends Asset
     /**
      * @var string The path to the source files of the asset.
      */
-    public $sourcePath = '@luya/lazyload/resources';
+    public $sourcePath = '@luya/resources/lazyload';
 
     /**
      * @var array An array with all javascript files for this asset located in the source path folder.
      */
     public $js = [
-        'lazyload.min.js',
+        YII_ENV_PROD ? 'lazyload.js' : 'lazyload.src.js',
     ];
 
     /**
