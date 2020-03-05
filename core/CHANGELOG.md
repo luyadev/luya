@@ -6,6 +6,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 1.1.0
 
 + [Admin#464](https://github.com/luyadev/luya-module-admin/issues/464) The `ApplicationTrait::setLocale()` does not change the `Yii::$app->language` value as before. In order to change the application language use `Yii::$app->language` directly.
++ Added Karma tests to Travis.
 
 ## 1.0.26 (20. February 2020)
 
