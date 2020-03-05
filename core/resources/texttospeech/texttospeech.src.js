@@ -1,5 +1,4 @@
-(function ($) {
-
+(function($) {
     $.textToSpeech = function(options) {
         var settings = $.extend(
             {
@@ -13,6 +12,7 @@
                 playEvent: 'textToSpeech:play',
                 pauseEvent: 'textToSpeech:pause',
                 stopEvent: 'textToSpeech:stop',
+                finishedPlayingEvent: 'textToSpeech:finished',
                 eventSelector: 'body',
                 language: 'en',
                 favoriteVoice: ''
@@ -46,6 +46,7 @@
 
                         /* initiate with prepared text */
                         utterance = new SpeechSynthesisUtterance(text);
+                        console.log(utterance);
 
                         /* cancel is needed for chrome sometimes */
                         window.speechSynthesis.cancel();
@@ -89,9 +90,10 @@
                         utterance.onend = function() {
                             flag = false;
                             $playElement.removeClass(settings.playClass);
+                            $(settings.eventSelector).trigger(settings.finishedPlayingEvent);
                         };
-                        $playElement.toggleClass(settings.playClass);
 
+                        $playElement.toggleClass(settings.playClass);
                         window.speechSynthesis.speak(utterance);
                     }
                     if (paused) {
@@ -129,5 +131,4 @@
                 }
             }
     };
-
-}(jQuery));
+})(jQuery);
