@@ -8,11 +8,11 @@ use Yii;
 use yii\base\InvalidConfigException;
 
 /**
- * layButtonSelector: '#play-button',
-                    pauseButtonSelector: '#pause-button',
-                    stopBauttonSelector: '#stop-button',
-                    targetSelector: '.main-content',
-                    text: '
+ * Text to Speech
+ * 
+ * @author Martin Petrasch <martin@zephir.ch>
+ * @author Basil Suter <git@nadar.io>
+ * @since 1.1.0
  */
 class TextToSpeechWidget extends Widget
 {
@@ -35,6 +35,10 @@ class TextToSpeechWidget extends Widget
     public $pauseButtonSelector = '#pause-button';
 
     public $stopButtonSelector = '#stop-button';
+
+    public $playButtonActiveClass = 'playing';
+
+    public $pauseButtonActiveClass = 'paused';
 
     public $containerClass = 'text-to-speech-container';
 
@@ -59,7 +63,7 @@ class TextToSpeechWidget extends Widget
         if (!$this->text && !$this->targetSelector) {
             throw new InvalidConfigException("Either text or targetSelector property must be configured.");
         }
-        if ($this->buttons === null) {
+        if ($this->buttons === null || $this->buttons === true) {
             $this->buttons[] = $this->createButton('Play', 'play-button', $this->playSVG);
             $this->buttons[] = $this->createButton('Pause', 'pause-button', $this->pauseSVG);
             $this->buttons[] = $this->createButton('Stop', 'stop-button', $this->stopSVG);
@@ -75,6 +79,8 @@ class TextToSpeechWidget extends Widget
             'pauseButtonSelector' => $this->pauseButtonSelector,
             'stopButtonSelector' => $this->stopButtonSelector,
             'targetSelector' => $this->targetSelector,
+            'playClass' => $this->playButtonActiveClass,
+            'pauseClass' => $this->pauseButtonActiveClass,
             'text' => $this->text ? $this->text : '', // must be an empty string as it will checked with .length
             'language' => Yii::$app->composition->langShortCode,
         ]);
