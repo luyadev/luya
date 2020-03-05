@@ -4,6 +4,13 @@ namespace luya\texttospeech;
 
 use luya\web\Asset;
 
+/**
+ * Text to Speech Asset.
+ * 
+ * @author Martin Petrasch <martin@zephir.ch>
+ * @author Basil Suter <git@nadar.io>
+ * @since 1.1.0
+ */
 class TextToSpeechAsset extends Asset
 {
     /**
@@ -15,7 +22,7 @@ class TextToSpeechAsset extends Asset
      * @var array An array with all javascript files for this asset located in the source path folder.
      */
     public $js = [
-        YII_ENV_PROD ? 'texttospeech.js' : 'texttospeech.src.js',
+        YII_DEBUG ? 'texttospeech.src.js' : 'texttospeech.js',
     ];
 
     /**
