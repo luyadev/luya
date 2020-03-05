@@ -10,7 +10,7 @@ class TextToSpeechWidgetTest extends LuyaWebTestCase
     public function testRender()
     {
         $content = TextToSpeechWidget::widget([
-            
+            'targetSelector' => '#foobar'
         ]);
 
         $this->assertContains('button class="text-to-speech-button text-to-speech-button-stop-button" id="stop-button"', $content);

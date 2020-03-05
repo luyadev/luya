@@ -14,8 +14,8 @@
                 pauseEvent: 'textToSpeech:pause',
                 stopEvent: 'textToSpeech:stop',
                 eventSelector: 'body',
-                language: 'de-DE',
-                favoriteVoice: 'Google Deutsch'
+                language: 'en',
+                favoriteVoice: ''
             },
             options
         );
