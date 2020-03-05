@@ -6,40 +6,50 @@
                 playButtonSelector: '#play-button',
                 pauseButtonSelector: '#pause-button',
                 stopButtonSelector: '#stop-button',
+                playClass: 'played',
+                pauseClass: 'paused',
                 targetSelector: '.main-content',
-                text: ''
+                text: '',
+                playEvent: 'textToSpeech:play',
+                pauseEvent: 'textToSpeech:pause',
+                stopEvent: 'textToSpeech:stop',
+                eventSelector: 'body',
+                language: 'de-DE',
+                favoriteVoice: 'Google Deutsch'
             },
             options
         );
-​
+
         if ('speechSynthesis' in window)
             with (speechSynthesis) {
                 const $playElement = $(settings.playButtonSelector);
                 const $pauseElement = $(settings.pauseButtonSelector);
                 const $stopElement = $(settings.stopButtonSelector);
-​
+
                 let flag = false;
                 let paused = false;
-​
+
                 $playElement.on('click', onClickPlay);
                 $pauseElement.on('click', onClickPause);
                 $stopElement.on('click', onClickStop);
-​
+
                 function onClickPlay() {
                     if (!flag) {
                         flag = true;
-​
-                        var text = $(settings.targetClass).text();
-                        if (settings.text.length > 0) {
+
+                        var text = $(settings.targetSelector).text();
+                        if (settings.text instanceof Function) {
+                            text = settings.text();
+                        } else if (settings.text.length > 0) {
                             text = settings.text;
                         }
-​
+
                         /* initiate with prepared text */
                         utterance = new SpeechSynthesisUtterance(text);
-​
+
                         /* cancel is needed for chrome sometimes */
                         window.speechSynthesis.cancel();
-​
+
                         /* getVoices could be async */
                         const allVoicesObtained = new Promise(function(resolve, reject) {
                             let voices = window.speechSynthesis.getVoices();
@@ -52,70 +62,72 @@
                                 });
                             }
                         });
-​
+
                         allVoicesObtained.then(voices => {
                             /* set standard voice */
                             utterance.voice = voices.filter(function(voice) {
-                                return voice.lang === 'de-DE';
+                                return voice.lang === settings.language;
                             })[0];
-​
+
                             /* search for german "google" voice (=higher quality) if available */
                             utterance.voice = voices.filter(function(voice) {
-                                return voice.name === 'Google Deutsch';
+                                return voice.name === settings.favoriteVoice;
                             })[0];
                         });
-​
+
                         /* stop playback in chrome on window close */
                         $(window).on('beforeunload', function() {
                             window.speechSynthesis.cancel();
                         });
-​
+
                         // set voice default values
                         utterance.volume = 1;
                         utterance.rate = 1;
                         utterance.pitch = 1;
-                        utterance.lang = 'de-DE';
-​
+                        utterance.lang = settings.language;
+
                         utterance.onend = function() {
                             flag = false;
-                            $.trigeer('isPlaying');
-                            $playElement.removeClass('played');
+                            $playElement.removeClass(settings.playClass);
                         };
-                        $playElement.toggleClass('played');
-​
+                        $playElement.toggleClass(settings.playClass);
+
                         window.speechSynthesis.speak(utterance);
                     }
                     if (paused) {
                         /* unpause/resume narration */
-                        $playElement.toggleClass('played');
-                        $pauseElement.toggleClass('paused');
+                        $playElement.toggleClass(settings.playClass);
+                        $pauseElement.toggleClass(settings.pauseClass);
                         window.speechSynthesis.resume();
                         paused = false;
                     }
+                    $(settings.eventSelector).trigger(settings.playEvent);
                 }
-​
+
                 function onClickPause() {
                     if (!paused && window.speechSynthesis.speaking) {
-                        $pauseElement.addClass('paused');
-                        $playElement.removeClass('played');
-​
+                        $pauseElement.addClass(settings.pauseClass);
+                        $playElement.removeClass(settings.playClass);
+
                         paused = true;
                         window.speechSynthesis.pause();
+                        $(settings.eventSelector).trigger(settings.pauseEvent);
                     }
                 }
-​
+
                 function onClickStop() {
                     if (window.speechSynthesis.speaking) {
                         if (paused) {
                             paused = false;
-                            $pauseElement.removeClass('paused');
-                            $playElement.removeClass('played');
+                            $pauseElement.removeClass(settings.pauseClass);
+                            $playElement.removeClass(settings.playClass);
                         }
                         flag = false;
                         window.speechSynthesis.cancel();
+                        $(settings.eventSelector).trigger(settings.stopEvent);
                     }
                 }
-        }
+            }
     };
 
 }(jQuery));
