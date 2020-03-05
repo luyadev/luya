@@ -1,0 +1,1 @@
+jQuery.textToSpeech=function(){};

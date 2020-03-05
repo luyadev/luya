@@ -1,0 +1,6 @@
+{
+    "js" :
+        [
+            "texttospeech.src.js"
+        ]
+    }
