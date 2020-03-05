@@ -78,7 +78,12 @@ class TextToSpeechWidget extends Widget
     /**
      * @var string The class which each of the text-to-speech buttons recieves.
      */
-    public $buttonClass = 'text-to-speech-button';
+    public $buttonClass = 'btn text-to-speech-button';
+
+    /**
+     * @var integer The size of the default buttons, in pixel.
+     */
+    public $buttonSize = 30;
 
     /**
      * @var array|boolean You can either disable the default buttons by setting buttons to false, or you can provide an array with button configurations, each element requires the following keys:
@@ -143,6 +148,7 @@ class TextToSpeechWidget extends Widget
             'id' => $this->getId(),
             'containerClass' => $this->containerClass,
             'buttonClass' => $this->buttonClass,
+            'buttonSize' => $this->buttonSize,
         ]);
     }
 
