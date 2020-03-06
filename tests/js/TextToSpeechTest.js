@@ -3,7 +3,7 @@ describe('Test TextToSpeech', function() {
 
     beforeEach(async function() {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
     });
 
     afterEach(function() {
