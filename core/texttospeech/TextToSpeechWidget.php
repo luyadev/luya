@@ -9,11 +9,11 @@ use yii\base\InvalidConfigException;
 
 /**
  * Text to Speech.
- * 
+ *
  * Using the browsers text to speech option to return a websites text. Either be providing the text as string or read the text from a given css class selector.
- * 
+ *
  * Example using a Selector:
- * 
+ *
  * ```
  * <?php
  * TextToSpeechWidget::widget(['targetSelector' => '#content']);
@@ -22,9 +22,9 @@ use yii\base\InvalidConfigException;
  *    Hello World, this is LUYA Text to Speech!
  * </div>
  * ```
- * 
+ *
  * By default the Widget will generate a play, pause and stop icon at the location the widget is integrated.
- * 
+ *
  * @author Martin Petrasch <martin@zephir.ch>
  * @author Basil Suter <git@nadar.io>
  * @since 1.1.0
@@ -35,7 +35,7 @@ class TextToSpeechWidget extends Widget
      * @var string The jQuery selector which should be used to read the content from, examples:
      * - `.container`: All elements which class `.container` will be spoken.
      * - `#content`: The element with id `id="content"` only will be spoken.
-     * 
+     *
      * The input data will be wrapped with `$()`.
      */
     public $targetSelector;
@@ -131,17 +131,35 @@ class TextToSpeechWidget extends Widget
         TextToSpeechAsset::register($this->view);
 
         $config = Json::htmlEncode([
-            'playButtonSelector' => $this->playButtonSelector,
-            'pauseButtonSelector' => $this->pauseButtonSelector,
-            'stopButtonSelector' => $this->stopButtonSelector,
-            'targetSelector' => $this->targetSelector,
-            'playClass' => $this->playButtonActiveClass,
-            'pauseClass' => $this->pauseButtonActiveClass,
             'text' => $this->text ? $this->text : '', // must be an empty string as it will checked with .length
             'language' => Yii::$app->composition->langShortCode,
         ]);
 
-        $this->view->registerJs("$.textToSpeech({$config});");
+        $this->view->registerJs("
+            var tts = $.textToSpeech({$config});
+            var playButton = $('{$this->playButtonSelector}');
+            var pauseButton = $('{$this->pauseButtonSelector}');
+            " . ($this->targetSelector ? "tts.setText($('{$this->targetSelector}').text());" : "") . "
+            var applyPlayClasses = function () {
+                playButton.addClass('{$this->playButtonActiveClass}');
+                pauseButton.removeClass('{$this->pauseButtonActiveClass}');
+            };
+            var applyPauseClasses = function () {
+                playButton.removeClass('{$this->playButtonActiveClass}');
+                pauseButton.addClass('{$this->pauseButtonActiveClass}');
+            };
+            var cleanupClasses = function () {
+                playButton.removeClass('{$this->playButtonActiveClass}');
+                pauseButton.removeClass('{$this->pauseButtonActiveClass}');
+            };
+            $('document').on('textToSpeech:play', applyPlayClasses);
+            $('document').on('textToSpeech:pause', applyPauseClasses);
+            $('document').on('textToSpeech:resume', applyPlayClasses);
+            $('document').on('textToSpeech:stop', cleanupClasses);
+            playButton.on('click', function() { tts.play() });
+            pauseButton.on('click', function() { tts.pause() });
+            $('{$this->stopButtonSelector}').on('click', function() { tts.stop() });
+        ");
 
         return $this->render('texttospeech', [
             'buttons' => $this->buttons,

@@ -14,7 +14,7 @@ module.exports = function(config) {
         files: [
             // 'vendor/bower-asset/jquery/dist/jquery.js',
             'core/resources/lazyload/lazyload.js',
-            'core/resources/texttospeech/texttospeech.src.js',
+            'core/resources/texttospeech/texttospeech.js',
             'tests/js/*.js'
         ],
 
@@ -45,7 +45,7 @@ module.exports = function(config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['ChromeHeadless', 'Firefox'],
+        browsers: ['InsecureChrome', 'Firefox'],
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
@@ -53,6 +53,13 @@ module.exports = function(config) {
 
         // Concurrency level
         // how many browser should be started simultaneous
-        concurrency: Infinity
+        concurrency: Infinity,
+
+        customLaunchers: {
+            InsecureChrome: {
+                base: 'Chrome',
+                flags: ['--autoplay-policy=no-user-gesture-required', '--disable-web-security', '--disable-site-isolation-trials']
+            }
+        }
     });
 };

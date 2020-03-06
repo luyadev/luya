@@ -2,18 +2,14 @@
     $.textToSpeech = function(options) {
         var settings = $.extend(
             {
-                playButtonSelector: '#play-button',
-                pauseButtonSelector: '#pause-button',
-                stopButtonSelector: '#stop-button',
-                playClass: 'played',
-                pauseClass: 'paused',
-                targetSelector: '.main-content',
                 text: '',
                 playEvent: 'textToSpeech:play',
                 pauseEvent: 'textToSpeech:pause',
+                resumeEvent: 'textToSpeech:resume',
                 stopEvent: 'textToSpeech:stop',
+                errorEvent: 'textToSpeech:error',
                 finishedPlayingEvent: 'textToSpeech:finished',
-                eventSelector: 'body',
+                eventSelector: 'document',
                 language: 'en',
                 favoriteVoice: ''
             },
@@ -22,32 +18,25 @@
 
         if ('speechSynthesis' in window)
             with (speechSynthesis) {
-                const $playElement = $(settings.playButtonSelector);
-                const $pauseElement = $(settings.pauseButtonSelector);
-                const $stopElement = $(settings.stopButtonSelector);
+            return {
+                utterance: null,
+                isPaused: false,
+                checkIfSpeakingInterval: null,
 
-                let flag = false;
-                let paused = false;
+                play() {
+                    if (this.isPaused) {
+                        return this.resume()
+                    }
 
-                $playElement.on('click', onClickPlay);
-                $pauseElement.on('click', onClickPause);
-                $stopElement.on('click', onClickStop);
+                    this.utterance = new SpeechSynthesisUtterance(settings.text);
 
-                function onClickPlay() {
-                    if (!flag) {
-                        flag = true;
+                    this.utterance.onerror = (e) => {
+                        console.error(e)
+                        this.stop()
+                        $(settings.eventSelector).trigger(settings.errorEvent)
+                    }
 
-                        var text = $(settings.targetSelector).text();
-                        if (settings.text instanceof Function) {
-                            text = settings.text();
-                        } else if (settings.text.length > 0) {
-                            text = settings.text;
-                        }
-
-                        /* initiate with prepared text */
-                        utterance = new SpeechSynthesisUtterance(text);
-                        console.log(utterance);
-
+                    try {
                         /* cancel is needed for chrome sometimes */
                         window.speechSynthesis.cancel();
 
@@ -65,70 +54,78 @@
                         });
 
                         allVoicesObtained.then(voices => {
-                            /* set standard voice */
-                            utterance.voice = voices.filter(function(voice) {
-                                return voice.lang === settings.language;
-                            })[0];
+                            if (this.utterance) {
+                                /* set standard voice */
+                                this.utterance.voice = voices.filter(function(voice) {
+                                    return voice.lang === settings.language;
+                                })[0];
 
-                            /* search for german "google" voice (=higher quality) if available */
-                            utterance.voice = voices.filter(function(voice) {
-                                return voice.name === settings.favoriteVoice;
-                            })[0];
+                                /* search for german "google" voice (=higher quality) if available */
+                                this.utterance.voice = voices.filter(function(voice) {
+                                    return voice.name === settings.favoriteVoice;
+                                })[0];
+
+                                // set voice default values
+                                this.utterance.volume = 1;
+                                this.utterance.rate = 1;
+                                this.utterance.pitch = 1;
+                                this.utterance.lang = settings.language;
+
+                                this.checkIfSpeaking()
+                                window.speechSynthesis.speak(this.utterance);
+                                $(settings.eventSelector).trigger(settings.playEvent);
+                            }
                         });
-
-                        /* stop playback in chrome on window close */
-                        $(window).on('beforeunload', function() {
-                            window.speechSynthesis.cancel();
-                        });
-
-                        // set voice default values
-                        utterance.volume = 1;
-                        utterance.rate = 1;
-                        utterance.pitch = 1;
-                        utterance.lang = settings.language;
-
-                        utterance.onend = function() {
-                            flag = false;
-                            $playElement.removeClass(settings.playClass);
-                            $(settings.eventSelector).trigger(settings.finishedPlayingEvent);
-                        };
-
-                        $playElement.toggleClass(settings.playClass);
-                        window.speechSynthesis.speak(utterance);
+                    } catch(e) {
+                        console.warn(e)
+                        this.stop()
                     }
-                    if (paused) {
-                        /* unpause/resume narration */
-                        $playElement.toggleClass(settings.playClass);
-                        $pauseElement.toggleClass(settings.pauseClass);
+                },
+
+                pause() {
+                    /* pause narration */
+                    this.isPaused = true;
+                    window.speechSynthesis.pause();
+                    $(settings.eventSelector).trigger(settings.pauseEvent);
+                },
+
+                resume() {
+                    if (this.isPaused) {
+                        this.isPaused = false;
                         window.speechSynthesis.resume();
-                        paused = false;
+                        $(settings.eventSelector).trigger(settings.resumeEvent);
                     }
-                    $(settings.eventSelector).trigger(settings.playEvent);
-                }
+                },
 
-                function onClickPause() {
-                    if (!paused && window.speechSynthesis.speaking) {
-                        $pauseElement.addClass(settings.pauseClass);
-                        $playElement.removeClass(settings.playClass);
-
-                        paused = true;
-                        window.speechSynthesis.pause();
-                        $(settings.eventSelector).trigger(settings.pauseEvent);
+                stop() {
+                    if (this.checkIfSpeakingInterval) {
+                        clearInterval(this.checkIfSpeakingInterval);
                     }
-                }
 
-                function onClickStop() {
-                    if (window.speechSynthesis.speaking) {
-                        if (paused) {
-                            paused = false;
-                            $pauseElement.removeClass(settings.pauseClass);
-                            $playElement.removeClass(settings.playClass);
+                    this.isPaused = false;
+                    window.speechSynthesis.cancel();
+                    $(settings.eventSelector).trigger(settings.stopEvent);
+                },
+
+                checkIfSpeaking() {
+                    this.checkIfSpeakingInterval = setInterval(() => {
+                        if (this.utterance && !this.isPaused && !window.speechSynthesis.speaking) {
+                            this.stop()
                         }
-                        flag = false;
-                        window.speechSynthesis.cancel();
-                        $(settings.eventSelector).trigger(settings.stopEvent);
-                    }
+                    }, 500);
+                },
+
+                setText(text) {
+                    settings.text = text
+                },
+
+                getText() {
+                    return settings.text
                 }
+
             }
+        } else {
+            return false
+        }
     };
 })(jQuery);
