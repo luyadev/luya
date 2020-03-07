@@ -103,7 +103,7 @@ class TestRestController extends luya\admin\base\RestController
         return ['sheba', 'whiskas'];
     }
 }
-``
+```
 
 Assuming the module name is `pets` the requested routes would be `pets/test-rest/dogs` and `pets/test-rest/cats`
 
@@ -113,7 +113,7 @@ class Pets extends luya\admin\base\Module
      public function extendPermissionRoutes()
      {
          return [
-             ['route' => 'pets/test-rest-dogs', 'alias' => 'Dogs Action',
+             ['route' => 'pets/test-rest-dogs', 'alias' => 'Dogs Action']
          ];
      }
 }
@@ -158,7 +158,7 @@ class TestActiveRestController extends luya\admin\base\ActiveRestController
         return ['sheba', 'whiskas'];
     }
 }
-``
+```
 
 With the following module config:
 
@@ -172,7 +172,7 @@ class Pets extends luya\admin\base\Module
      public function extendPermissionApis()
      {
          return [
-             ['api' => 'my-pets-api', 'alias' => 'Pets API',
+             ['api' => 'my-pets-api', 'alias' => 'Pets API']
          ];
      }
 }
