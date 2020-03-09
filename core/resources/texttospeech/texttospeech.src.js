@@ -36,6 +36,11 @@
                         $(settings.eventSelector).trigger(settings.errorEvent)
                     }
 
+                    /* stop playback in chrome on window close */
+                    $(window).on('beforeunload', function() {
+                        window.speechSynthesis.cancel();
+                    });
+
                     try {
                         /* cancel is needed for chrome sometimes */
                         window.speechSynthesis.cancel();
