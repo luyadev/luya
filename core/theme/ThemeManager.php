@@ -4,6 +4,7 @@ namespace luya\theme;
 
 use luya\base\PackageConfig;
 use luya\Exception;
+use luya\helpers\FileHelper;
 use luya\helpers\Json;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -42,8 +43,7 @@ class ThemeManager extends \yii\base\Component
     /**
      * Read the theme.json and create a new \luya\theme\ThemeConfig for the given base path.
      *
-     * @param string $basePath
-     *
+     * @param string $basePath Base path can either be a path to a folder with theme.json files or an absolute path to a theme.json file
      * @return ThemeConfig
      * @throws Exception
      * @throws InvalidConfigException
@@ -62,9 +62,15 @@ class ThemeManager extends \yii\base\Component
             throw new Exception('Theme directory not exists or readable: ' . $dir);
         }
         
-        $themeFile = $dir . '/theme.json';
-        if (!file_exists($themeFile)) {
-            throw new InvalidConfigException('Theme config file missing at: ' . $themeFile);
+        // $basePath is an absolute path = /VENDOR/NAME/theme.json
+        if (file_exists($basePath)) {
+            // if basePath is the theme file itself and existing process:
+            $themeFile = $basePath;
+        } else {
+            $themeFile = $dir . DIRECTORY_SEPARATOR . 'theme.json';
+            if (!file_exists($themeFile)) {
+                throw new InvalidConfigException('Theme config file missing at: ' . $themeFile);
+            }
         }
         
         $config = Json::decode(file_get_contents($themeFile)) ?: [];
