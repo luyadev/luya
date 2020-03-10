@@ -1,6 +1,6 @@
 # Project themes
 
-A theme can be used to overwrite views form other themes (inherit) or other module views.
+A theme can be used to overwrite views of other modules (e.g. app) or other themes with inheritance.
 
 ## Theme folder structure
 
@@ -23,7 +23,12 @@ Example of a theme directory structure:
 
 ## Configure active theme
 
-To enable a theme you have to assign it to the theme manager. You can define this in your config file just add the theme alias e.g. `@app/themes/blank` to the `themeManager` config section:
+Since version 3.0 of CMS module, activate a theme can be done in the admim area under *Settings* -> *Themes*
+
+![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
+
+
+You can set a active theme in your config file also. Add the theme alias e.g. `@app/themes/blank` to the `themeManager` config section: 
 
 ```php
 $config = [
@@ -34,10 +39,6 @@ $config = [
     ]
 ];
 ``` 
-
-Since version 3.0 of CMS module, activate a theme can also be done in the admim area under *Settings* -> *Themes*
-
-![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
 
 ## Example theme config
 
@@ -143,7 +144,7 @@ The application and all modules can have a *themes* directory which will be load
 
 ## Theme packages
 
-You can also create a theme as a composer package.
+You can also register a theme from a composer package.
 You only have to add inside the extra section of the *composer.json* the relative path to every theme you want to register.
 
 ```json
@@ -156,8 +157,16 @@ You only have to add inside the extra section of the *composer.json* the relativ
 }
 ```
 
+The name/alias of this theme would be *@yourVendorName/themes/blank*, this is need if you want to activate it in the config file.
+
+If a theme override views of other modules/packages, those dependencies have to be defined in the *composer.json* as require.
+
+## Theme extension/collection
+
+If your theme is more complex and need there own blocks, helpers, etc. you can also create a package which include one or more themes. 
+
 For more information to packages see [package guide](luya-package-dev.md).
 
 Some other examples of theme packages:
 
-+ [luya-themecollection](https://github.com/boehsermoe/luya-themecollection)
++ [luya-themes](https://github.com/luyadev/luya-themes)
