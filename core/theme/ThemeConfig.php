@@ -2,13 +2,10 @@
 
 namespace luya\theme;
 
-use luya\helpers\FileHelper;
 use Yii;
-use luya\helpers\Json;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
 use yii\base\BaseObject;
-use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 
 /**
@@ -20,8 +17,6 @@ use yii\base\InvalidConfigException;
 class ThemeConfig extends BaseObject implements Arrayable
 {
     use ArrayableTrait;
-    
-    protected $_basePath;
     
     /**
      * @var string The pretty name of the theme.
@@ -122,6 +117,8 @@ class ThemeConfig extends BaseObject implements Arrayable
         
         return $parents;
     }
+
+    private $_basePath;
     
     /**
      * Base path (or alias) to the theme directory.

@@ -63,9 +63,10 @@ class ThemeManager extends \yii\base\Component
         }
         
         // $basePath is an absolute path = /VENDOR/NAME/theme.json
-        if (file_exists($basePath)) {
-            // if basePath is the theme file itself and existing process:
+        if (is_file($basePath) && file_exists($basePath)) {
             $themeFile = $basePath;
+            // if basePath is the theme file itself and existing process:
+            $basePath = pathinfo($basePath, PATHINFO_DIRNAME);
         } else {
             $themeFile = $dir . DIRECTORY_SEPARATOR . 'theme.json';
             if (!file_exists($themeFile)) {
