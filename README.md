@@ -62,7 +62,7 @@ We are always looking for people who share their thoughts, code and problems wit
 #### Karma tests (JS)
 
 1. Run `yarn install`
-2. Run `yarn test`
+2. Run `yarn test` (for single run) or `yarn dev` to work on the tests
 
 #### Shield
 

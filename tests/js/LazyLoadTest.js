@@ -23,21 +23,21 @@ describe("Test LazyLoading: Image loading", function() {
             });
 
             // Load fixture
-            setFixtures(basicLazyLoadImageFixture);
+            const fixture = setFixtures(basicLazyLoadImageFixture);
 
             // Init lazyloading
             $.lazyLoad();
 
             // Check every half second if the image has been loaded
             // and if so, call the done() function
-            var startTime = Date.now();
+            // var startTime = Date.now();
             setInterval(function() {
                 if(imageLoaded) {
                     // Check if this.imageId has class loaded
-                    expect($(imageId).hasClass('loaded')).toBe(true);
+                    expect(fixture.find(imageId).hasClass('loaded')).toBe(true);
                     done();
                 } else {
-                    console.log('Waiting for image to load... (' + Math.round((Date.now() - startTime) / 1000) + 's)');
+                    // console.log('Waiting for image to load... (' + Math.round((Date.now() - startTime) / 1000) + 's)');
                 }
             }, 500);
         }) (jQuery)
