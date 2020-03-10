@@ -48,7 +48,7 @@ class ThemeManager extends \yii\base\Component
      * @throws Exception
      * @throws InvalidConfigException
      */
-    protected static function loadThemeConfig(string $basePath)
+    public static function loadThemeConfig(string $basePath)
     {
         if (strpos($basePath, '@') === 0) {
             $dir = Yii::getAlias($basePath);
@@ -58,16 +58,17 @@ class ThemeManager extends \yii\base\Component
             $dir = $basePath;
         }
         
-        if (!is_dir($dir) || !is_readable($dir)) {
-            throw new Exception('Theme directory not exists or readable: ' . $dir);
-        }
-        
         // $basePath is an absolute path = /VENDOR/NAME/theme.json
         if (is_file($basePath) && file_exists($basePath)) {
             $themeFile = $basePath;
             // if basePath is the theme file itself and existing process:
             $basePath = pathinfo($basePath, PATHINFO_DIRNAME);
         } else {
+            
+            if (!is_dir($dir) || !is_readable($dir)) {
+                throw new Exception('Theme directory not exists or readable: ' . $dir);
+            }
+
             $themeFile = $dir . DIRECTORY_SEPARATOR . 'theme.json';
             if (!file_exists($themeFile)) {
                 throw new InvalidConfigException('Theme config file missing at: ' . $themeFile);
