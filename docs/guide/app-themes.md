@@ -11,6 +11,7 @@ A theme has a fixed define folder structure:
 ```
 .
 ├── theme.json     // required
+|- composer.json // recommend
 ├── resources
 └── views
     ├── layouts
@@ -20,91 +21,41 @@ A theme has a fixed define folder structure:
 ```
 
 + `theme.json`: The theme.json contains all information about the theme itself. Like the name, description and optional array with `pathMaps`.
++ `composer.json`: The composer.json is required to pushed the package to packagist. 
 + `layouts/theme.php`: The theme.php in the layout folder is like the `layout.php` file in Yii applications. The layout/theme.php requires a `$content` variable.
 + `cmslayouts/theme.php`: The cms layout [[cms-layouts.md]] which should be taken. Those can be changed in the admin UI.
 
+> Take a look at the LUYA Theme Skeleton Project: https://github.com/luyadev/luya-theme-skeleton
 
+Thise is what does files could looke like:
 
-## Theme folder structure
-
-Themes directories can be located at `@app/themes/{themeName}` or inside of a composer package (see below). To load a new theme you have to execute `vendor/bin/luya import` form console.
-
-Example of a theme directory structure:
-
+theme.json
 ```
-    .
-    ├── theme.json     // required
-    ├── resources
-    └── views
-        ├── layouts
-        │   └── theme.php
-        └── site
-            └── index.php   
 ```
 
-## Configure active theme
+composer.json
+```
+```
 
-Since version 3.0 of CMS module, activate a theme can be done in the admim area under *Settings* -> *Themes*
+layouts/theme.php
+```php
+```
+
+cmslayouts/theme.php
+```php
+
+```
+
+
+## Import and Activate
+
+While running the `import` (`./vendor/bin/luya import`) command, the theme information will be loaded from the `theme.json` and stored in the database. The imported will show the imported themes when running the import command.
+
+After a succesfull import of the new theme, it can be activated in the CMS Admin `Themes` section:
 
 ![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
 
-
-You can set a active theme in your config file also. Add the theme alias e.g. `@app/themes/blank` to the `themeManager` config section: 
-
-```php
-$config = [
-    'components' => [
-        'themeManager' => [
-            'activeTheme' => '@app/themes/blank'
-        ]
-    ]
-];
-``` 
-
-## Example theme config
-
-In our example we make a *blue theme* which inherit from the theme *@app/themes/blank*.
-
-The *blank* theme (base)
-
-```json
-{
-    "name": "Blank theme"
-}
-```
-
-The *blue* theme based on *blank* theme:
-
-```json
-{
-    "name": "Blue theme",
-    "parentTheme": "@app/themes/blank"
-}
-```
-
-For detailed information of theme config take a look at {{luya\theme\ThemeConfig}} class.
-
-## File inheritance/override
-
-Theme inherit all view files from their parents. Only if a theme has the same view file as its parent than this file will be used while rendering.
-
-In the above example the *blank* theme could have the view `@blankTheme/views/site/index`. The *blue* theme does need to have this view file because it will inherit from the *blank* theme.
-
-**But the views from `@app/views` will be override all other theme views**.
-
-The order of view inheritance (pathMap) will looks like this:
-
-```
-// requested path => [theme paths]
-@app/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
-@blueTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
-@blankTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
-```
-
-At first search the requested path in the first column. 
-On a match searching in the list of theme paths for a exists file in the defined order.
-
-### Additional path map
+## Additional path map
 
 It is also possible to define additional path for inheritance by add a path map in the theme config.
 In this way block and widget views can also be override with a theme.
@@ -126,13 +77,41 @@ These additional paths will be added to the end of the path map:
 @moduleAlias/frontend/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
 ```
 
-## Layouts
+### File inheritance/override
 
-Themes will use the layout file *theme.php* as default and the cmslayout *theme.php* too. You have to select this theme layout in the page version.
+Theme inherit all view files from their parents. Only if a theme has the same view file as its parent than this file will be used while rendering.
 
-## Theme manager
+The blank theme (base)
 
-The {{luya\theme\ThemeManager}} holds all theme information and also the active theme.
+```json
+{
+    "name": "Blank theme"
+}
+```
+
+The blue theme based on *blank* theme:
+
+```json
+{
+    "name": "Blue theme",
+    "parentTheme": "@app/themes/blank"
+}
+```
+
+In the above example the *blank* theme could have the view `@blankTheme/views/site/index`. The *blue* theme does need to have this view file because it will inherit from the *blank* theme.
+
+**But the views from `@app/views` will be override all other theme views**.
+
+The order of view inheritance (pathMap) will looks like this:
+
+```
+// requested path => [theme paths]
+@app/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+@blueTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+@blankTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+```
+
+At first search the requested path in the first column. On a match searching in the list of theme paths for a exists file in the defined order.
 
 ## Resources
 
@@ -157,12 +136,6 @@ class ResourcesAsset extends \luya\web\Asset
 }
 ```
 
-## Import Method
-
-The application and all modules can have a *themes* directory which will be loaded when running the [console command `import`](luya-console.md). 
-
-> One of the main ideas behind LUYA is to store data in files and import them into your database.
-
 ## Theme packages
 
 You can also register a theme from a composer package.
@@ -178,16 +151,4 @@ You only have to add inside the extra section of the *composer.json* the relativ
 }
 ```
 
-The name/alias of this theme would be *@yourVendorName/themes/blank*, this is need if you want to activate it in the config file.
-
 If a theme override views of other modules/packages, those dependencies have to be defined in the *composer.json* as require.
-
-## Theme extension/collection
-
-If your theme is more complex and need there own blocks, helpers, etc. you can also create a package which include one or more themes. 
-
-For more information to packages see [package guide](luya-package-dev.md).
-
-Some other examples of theme packages:
-
-+ [luya-themes](https://github.com/luyadev/luya-themes)
