@@ -27,21 +27,50 @@ A theme has a fixed define folder structure:
 
 > Take a look at the LUYA Theme Skeleton Project: https://github.com/luyadev/luya-theme-skeleton
 
-Thise is what does files could looke like:
+This is what the files could look like:
 
-theme.json
-```
+theme.json:
+
+|variable|description|example
+|--------|-----------|-----
+|name|The name which is displayed in the Theme Manager|`my-super-name`
+|description|A description what this theme include or what its built on|`My Super Theme based on Bootstrap 4 and JQuery`
+|pathMap|An array with ..... Read more about in Additional path map|`[]`
+|parentTheme|.... Read more about in the File inheritance/override section|`null`
+
+```json 
+{
+    "name": "my-super-theme",
+    "parentTheme": null,
+    "pathMap": [],
+    "description": "A theme based on Bootstrap 4 free creative theme (https://startbootstrap.com/themes/creative/)"
+}
 ```
 
-composer.json
-```
+composer.json:
+
+```json
+{
+    ...
+    "type": "luya-theme",
+    ...
+    "extra": {
+        "luya": {
+            "themes": [
+                "theme.json"
+            ]
+        }
+    }
+}
 ```
 
-layouts/theme.php
+layouts/theme.php:
+
 ```php
 ```
 
 cmslayouts/theme.php
+
 ```php
 
 ```
@@ -55,10 +84,11 @@ After a succesfull import of the new theme, it can be activated in the CMS Admin
 
 ![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
 
-## Additional path map
+## Additional path map (`pathMap`)
 
-It is also possible to define additional path for inheritance by add a path map in the theme config.
-In this way block and widget views can also be override with a theme.
+**TODO: Why should i do this? Example? Use Case?**
+
+It is also possible to define additional path for inheritance by add a path map in the theme config. In this way block and widget views can also be override with a theme.
 
 ```json
 {
@@ -77,7 +107,7 @@ These additional paths will be added to the end of the path map:
 @moduleAlias/frontend/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
 ```
 
-### File inheritance/override
+### File inheritance/override (`parentTheme`)
 
 Theme inherit all view files from their parents. Only if a theme has the same view file as its parent than this file will be used while rendering.
 
@@ -104,39 +134,15 @@ In the above example the *blank* theme could have the view `@blankTheme/views/si
 
 The order of view inheritance (pathMap) will looks like this:
 
-```
-// requested path => [theme paths]
-@app/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
-@blueTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
-@blankTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
-```
+1. equested path => [theme paths]
+2. @app/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+3. @blueTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+3. @blankTheme/views => [ @app/views, @blueTheme/views, @blankTheme/views ]
+
 
 At first search the requested path in the first column. On a match searching in the list of theme paths for a exists file in the defined order.
 
-## Resources
-
-An example asset which contains resources from a theme.
-
-```php
-class ResourcesAsset extends \luya\web\Asset
-{
-    public $sourcePath = '@blankTheme/dist';
-    
-    public $css = [
-        'main.css'
-    ];
-
-    public $js = [
-        'main.js',
-    ];
-
-    public $depends = [
-        'yii\web\JqueryAsset',
-    ];
-}
-```
-
-## Theme packages
+## Theme packages (composer.json)
 
 You can also register a theme from a composer package.
 You only have to add inside the extra section of the *composer.json* the relative path to every theme you want to register.
