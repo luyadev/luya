@@ -1,10 +1,31 @@
 # Project themes
 
-A theme can be used to overwrite views of other modules (e.g. app) or other themes with inheritance.
-
-## Theme folder structure
+A theme can be used to overwrite views of other modules (e.g. app) or other themes with inheritance. A Theme is a collection of informations like Assets and Views. Its bundled and therefore shareable.
 
 > In order to create your custom theme you can run the [Console Command](luya-console.md) `theme/create` wizard.
+
+## Create a new theme
+
+A theme has a fixed define folder structure:
+
+```
+.
+├── theme.json     // required
+├── resources
+└── views
+    ├── layouts
+    │   └── theme.php
+    └── cmslayouts
+        └── theme.php   
+```
+
++ `theme.json`: The theme.json contains all information about the theme itself. Like the name, description and optional array with `pathMaps`.
++ `layouts/theme.php`: The theme.php in the layout folder is like the `layout.php` file in Yii applications. The layout/theme.php requires a `$content` variable.
++ `cmslayouts/theme.php`: The cms layout [[cms-layouts.md]] which should be taken. Those can be changed in the admin UI.
+
+
+
+## Theme folder structure
 
 Themes directories can be located at `@app/themes/{themeName}` or inside of a composer package (see below). To load a new theme you have to execute `vendor/bin/luya import` form console.
 
