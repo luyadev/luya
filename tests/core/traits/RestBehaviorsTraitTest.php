@@ -105,6 +105,5 @@ class RestBehaviorsTraitTest extends LuyaWebTestCase
         $behaviors = $ctrl->behaviors();
 
         $this->assertSame(['class' => 'invalid\cors\class'], $behaviors['cors']);
-
     }
 }

@@ -122,7 +122,7 @@ class Url extends \yii\helpers\BaseUrl
 
     /**
      * Append a query to the current url.
-     * 
+     *
      * See {{luya\helpers\Url::appendToUrl()}}
      *
      * @param string|array $append A string with url fragments or an array which will be processed by http_build_query.

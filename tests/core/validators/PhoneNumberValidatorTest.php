@@ -46,7 +46,6 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
     public function testCorrectNumberWithOutCountryCode()
     {
         foreach ($this->correctNumbersWithoutCountryCode as $number => $expect) {
-
             $model = new StubModelValidatorPhone();
             $model->value = $number;
             $validator = new PhoneNumberValidator();
@@ -63,7 +62,6 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
     public function testCorrectNumberWithCountryCode()
     {
         foreach ($this->correctNumbersWithCountryCode as $number => $expect) {
-
             $model = new StubModelValidatorPhone();
             $model->value = $number;
             $validator = new PhoneNumberValidator();
@@ -88,7 +86,9 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
             ['value' => [
                 'The phone number does not match the required type FIXED_LINE.',
             ]
-        ], $model->getErrors());
+        ],
+            $model->getErrors()
+        );
         $this->assertTrue($model->hasErrors());
     }
 }

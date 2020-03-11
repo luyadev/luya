@@ -63,7 +63,6 @@ class ThemeManager extends \yii\base\Component
             // if basePath is the theme file itself and existing process:
             $basePath = pathinfo($basePath, PATHINFO_DIRNAME);
         } else {
-            
             if (!is_dir($dir) || !is_readable($dir)) {
                 throw new Exception('Theme directory not exists or readable: ' . $dir);
             }
@@ -96,7 +95,7 @@ class ThemeManager extends \yii\base\Component
         $basePath = $this->getActiveThemeBasePath();
         $this->beforeSetup($basePath);
         
-        if ($basePath) { 
+        if ($basePath) {
             $themeConfig = $this->getThemeByBasePath($basePath);
             $theme = new Theme($themeConfig);
             $this->activate($theme);

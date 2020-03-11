@@ -126,15 +126,15 @@ class StringHelper extends BaseStringHelper
      *
      * If an array of needle words is provided the $strict parameter defines whether all need keys must be found
      * in the string to get the `true` response or if just one of the keys are found the response is already `true`.
-     * 
+     *
      * ```php
      * if (StringHelper::contains('foo', 'the foo bar Bar'')) {
      *    echo "yes!";
      * }
      * ```
-     * 
+     *
      * check if one of the given needles exists:
-     * 
+     *
      * ```php
      * if (StringHelper::contains(['jungle', 'hell0], 'Welcome to the jungle!)) {
      *    echo "yes!";

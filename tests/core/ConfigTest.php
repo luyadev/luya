@@ -272,7 +272,7 @@ class ConfigTest extends LuyaWebTestCase
         ]);
 
         $this->assertTrue($config->isCliRuntime());
-        $config->callback(function(Config $cfg) {
+        $config->callback(function (Config $cfg) {
             $cfg->setCliRuntime(false);
         });
         // to array runs the callable
@@ -286,7 +286,7 @@ class ConfigTest extends LuyaWebTestCase
         ]);
 
         $this->assertTrue($config->isCliRuntime());
-        $config->callback(function(Config $cfg) {
+        $config->callback(function (Config $cfg) {
             $cfg->setCliRuntime(false);
         })->env(Config::ENV_PROD);
         // to array runs the callable

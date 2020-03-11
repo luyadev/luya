@@ -11,9 +11,9 @@ use yii\validators\Validator;
 
 /**
  * Phone Number Validator.
- * 
+ *
  * Validates a given phone number, and converts into standardized format by default. See {{PhoneNumberValidator::$autoFormat}}
- * 
+ *
  * @see https://github.com/giggsey/libphonenumber-for-php This library is used to parse, format and validate.
  * @author Basil Suter  <basil@nadar.io>
  * @since 1.0.25
@@ -21,9 +21,9 @@ use yii\validators\Validator;
 class PhoneNumberValidator extends Validator
 {
     /**
-     * @var string If a phone number does not contain the country prefix (+41 f.e), define a default country format which then defines the 
+     * @var string If a phone number does not contain the country prefix (+41 f.e), define a default country format which then defines the
      * country prefix.
-     * 
+     *
      * ```php
      * 'country' => 'CH',
      * ```
@@ -42,10 +42,10 @@ class PhoneNumberValidator extends Validator
     public $autoFormatFormat = PhoneNumberFormat::E164;
 
     /**
-     * @var integer If enabled, the validator will check the type of number. This can be usefull to test for mobile phone numbers. 
-     * 
+     * @var integer If enabled, the validator will check the type of number. This can be usefull to test for mobile phone numbers.
+     *
      * An example to check for mobile phone numbers:
-     * 
+     *
      * ```php
      * 'type' => \libphonenumber\PhoneNumberType::MOBILE
      * ```
@@ -77,7 +77,6 @@ class PhoneNumberValidator extends Validator
             if ($this->autoFormat) {
                 $model->{$attribute} = $phoneUtil->format($number, $this->autoFormatFormat);
             }
-
         } catch (NumberParseException $exception) {
             $this->addError($model, $attribute, Yii::t('luya', 'Invalid phone number, ensure it starts with the correct country code.'));
         }

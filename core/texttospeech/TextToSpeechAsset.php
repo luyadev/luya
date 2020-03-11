@@ -6,7 +6,7 @@ use luya\web\Asset;
 
 /**
  * Text to Speech Asset.
- * 
+ *
  * @author Martin Petrasch <martin@zephir.ch>
  * @author Basil Suter <git@nadar.io>
  * @since 1.1.0

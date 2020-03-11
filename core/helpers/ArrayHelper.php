@@ -81,7 +81,7 @@ class ArrayHelper extends BaseArrayHelper
     
     /**
      * Prepend an assoc array item as first entry for a given array.
-     * 
+     *
      * Adds the given key with value as first entry to $arr
      *
      * @param array $arr The array where the value should be prepend
@@ -140,13 +140,13 @@ class ArrayHelper extends BaseArrayHelper
      * ```
      *
      * Searching for the string `Bar` would return the the orignal array is bar would be found in both.
-     * 
+     *
      * In order to search only in certain keys defined $keys attribute:
-     * 
+     *
      * ```php
      * ArrayHelper::search($data, 'Foo', false, ['name']);
      * ```
-     * 
+     *
      * The above example will search only in the array key `name` for the `Foo` expression.
      *
      * @param array $array The multidimensional array keys.
@@ -297,10 +297,10 @@ class ArrayHelper extends BaseArrayHelper
 
     /**
      * Helper method to generate an array with the same keys and values.
-     * 
+     *
      * ```php
      * $data = ArrayHelper::combine(['foo', 'bar']);
-     * 
+     *
      * // generates
      * ['foo' => 'foo', 'bar' => 'bar'];
      * ```

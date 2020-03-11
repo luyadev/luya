@@ -45,7 +45,7 @@ abstract class Controller extends BaseController
      *
      * If a message is not a string, it will return var export to generate
      * a returnable string from a message.
-     * 
+     *
      * @param mixed $message
      * @return string
      * @since 1.0.22

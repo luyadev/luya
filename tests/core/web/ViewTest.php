@@ -65,6 +65,5 @@ class ViewTest extends \luyatests\LuyaWebTestCase
         $expectedPath = realpath(Yii::getAlias('@luyatests/data/themes/blank'));
         $this->assertEquals($expectedPath, $view->theme->basePath, 'Theme base path not correct.');
         $this->assertEquals($expectedPath, Yii::getAlias('@activeTheme'), 'Alias path is not correct.');
-
     }
 }
