@@ -4,7 +4,6 @@ namespace luya\theme;
 
 use luya\base\PackageConfig;
 use luya\Exception;
-use luya\helpers\FileHelper;
 use luya\helpers\Json;
 use Yii;
 use yii\base\InvalidArgumentException;
