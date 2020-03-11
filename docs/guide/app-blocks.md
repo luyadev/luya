@@ -2,6 +2,8 @@
 
 Blocks are elements used in the CMS module to display and configure data. Blocks are dropped into the placeholders of a [CMS Layout](app-cmslayouts.md). An example of a block could be a paragraph tag where the user can add the content. LUYA CMS module is shipped with some default blocks, but you can create your own elements.
 
+![Block Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/block-admin.png "Block Admin")
+
 ## Create a new block
 
 > use `./vendor/bin/luya cms/block/create` console command to generate a Block.
