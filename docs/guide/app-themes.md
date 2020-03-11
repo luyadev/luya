@@ -176,4 +176,4 @@ In the `extra.luya.themes` section of the composer json an array with themes can
 }
 ```
 
-Both defintions are valid, either defined the folder where the theme.json is contained or directly point to the theme.json.
+Both definitions are valid, either with the folder where the theme.json is contained or directly point to the theme.json file.
