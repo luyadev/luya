@@ -29,7 +29,7 @@ class Asset extends \yii\web\AssetBundle
 
         if ($this->sourcePath === null) {
             $class = new ReflectionClass($this);
-            return dirname($class->getFileName()) . DIRECTORY_SEPARATOR . $this->defaultSourcePathFolder . DIRECTORY_SEPARATOR . Inflector::camel2id($class->getName());
+            $this->sourcePath = dirname($class->getFileName()) . DIRECTORY_SEPARATOR . $this->defaultSourcePathFolder . DIRECTORY_SEPARATOR . Inflector::camel2id($class->getShortName());
         }
     }
 }
