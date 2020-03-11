@@ -5,8 +5,9 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.1.0
 
-+ [Admin#464](https://github.com/luyadev/luya-module-admin/issues/464) The `ApplicationTrait::setLocale()` does not change the `Yii::$app->language` value as before. In order to change the application language use `Yii::$app->language` directly.
-+ [#1993](https://github.com/luyadev/luya/pull/1993) Added new Text to Speech Widget.
++ [Admin#464](https://github.com/luyadev/luya-module-admin/issues/464) The `luya\traits\ApplicationTrait::setLocale()` does not change the `Yii::$app->language` value as before. In order to change the application language use `Yii::$app->language` directly.
++ [#1995](https://github.com/luyadev/luya/issues/1998) The `luya\web\Asset` defines a default `$sourcePath` when value is `null`. The default path is relativ to its file location `<FILE_LOCATION>/resources/<ASSET_NAME>`.
++ [#1993](https://github.com/luyadev/luya/pull/1993) Added new Text to Speech Widget `luya\texttospeech\TextToSpeechWidget`.
 + Added Karma tests to Travis.
 
 ## 1.0.26 (20. February 2020)
