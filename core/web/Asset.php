@@ -8,7 +8,7 @@ use ReflectionClass;
 /**
  * Asset Bundles.
  *
- * The main differente to the Yii implementation is that {{$sourcePath}} has a default value which points into a `/resources` folder containing
+ * Since version 1.1, the main differente to the Yii implementation is that {{$sourcePath}} has a default value which points into a `/resources` folder containing
  * the name of the assets itself.
  * 
  * Assuming an `MySuperAsset` asset in `/app` folder will lookup all files under `/app/resources/my-super-asset/...`.
@@ -19,7 +19,8 @@ use ReflectionClass;
 class Asset extends \yii\web\AssetBundle
 {
     /**
-     * @var string When $sourcePath is null, the Asset object will automaticcaly assign the current 
+     * @var string When $sourcePath is null, the Asset object will automatically assign this folder relative to its object.
+     * @since 1.1.0
      */
     public $defaultSourcePathFolder = 'resources';
 
