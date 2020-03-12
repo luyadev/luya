@@ -28,9 +28,8 @@ class ThemeManager extends \yii\base\Component
     const EVENT_BEFORE_SETUP = 'eventBeforeSetup';
     
     /**
-     * Name of the theme which should be activated on setup.
-     *
-     * @var string
+     * @var string Name of the theme which should be activated on setup. This is commonly used to defined the active theme when **not**
+     * using the CMS ThemeManager to switch between themes.
      */
     public $activeThemeName;
     
@@ -47,7 +46,7 @@ class ThemeManager extends \yii\base\Component
      * @throws Exception
      * @throws InvalidConfigException
      */
-    public static function loadThemeConfig(string $basePath)
+    public function loadThemeConfig(string $basePath)
     {
         if (strpos($basePath, '@') === 0) {
             $dir = Yii::getAlias($basePath);
@@ -85,7 +84,7 @@ class ThemeManager extends \yii\base\Component
      * @throws InvalidConfigException
      * @throws \yii\db\Exception
      */
-    final public function setup()
+    public function setup()
     {
         if ($this->activeTheme instanceof Theme) {
             // Active theme already loaded
@@ -148,7 +147,7 @@ class ThemeManager extends \yii\base\Component
         
         foreach ($themeDefinitions as $themeDefinition) {
             try {
-                $themeConfig = static::loadThemeConfig($themeDefinition);
+                $themeConfig = $this->loadThemeConfig($themeDefinition);
                 $this->registerTheme($themeConfig);
             } catch (\yii\base\Exception $ex) {
                 if ($throwException) {

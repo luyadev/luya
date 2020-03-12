@@ -175,7 +175,8 @@ class ThemeManagerTest extends LuyaWebTestCase
     public function testDirectThemeFilePath()
     {
         $path = realpath(__DIR__ . '/../../data/themes/blank/theme.json');
-        $config = ThemeManager::loadThemeConfig($path);
+        $manager = new ThemeManager();
+        $config = $manager->loadThemeConfig($path);
 
         $this->assertSame('blank', $config->name);
     }
