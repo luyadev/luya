@@ -36,7 +36,8 @@
     },
     "require-dev": {
         "luyadev/luya-testsuite": "^1.0",
-        "nadar/github-markdown-fixer": "^1.0"
+        "nadar/github-markdown-fixer": "^1.0",
+        "unglue/client": "^1.5"
     },
     "autoload": {
         "psr-4": {

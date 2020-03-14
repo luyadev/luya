@@ -4,6 +4,8 @@ The CMS layouts let the "Content Management System" know where to render the con
 
 If you are using the CMS module in your application (which is installed by default in the LUYA kickstarter application) then you can use the CMS layouts.
 
+![CMS Layouts](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/cmslayouts.png "CMS Layouts")
+
 ## Create new Layout
 
 All CMS layouts are stored in the `views/cmslayouts` folder which is located in the base path of your project. If we create a new layout with e.g. 2 columns we just add a new view file to the cmslayouts folder like `views/cmslayouts/2columns.php`.

@@ -204,7 +204,7 @@ class Config
      */
     public function callback(callable $fn)
     {
-        return $this->addDefinition(New ConfigDefinition(ConfigDefinition::GROUP_CALLABLE, false, $fn));
+        return $this->addDefinition(new ConfigDefinition(ConfigDefinition::GROUP_CALLABLE, false, $fn));
     }
 
     /**

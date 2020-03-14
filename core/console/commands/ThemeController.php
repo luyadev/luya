@@ -92,7 +92,7 @@ class ThemeController extends \luya\console\Command
             FileHelper::writeFile($fileName, $content);
         }
         
-        return $this->outputSuccess("Theme files has been created successfully. Please run `".$_SERVER['PHP_SELF']." import` to loaded into the database.");
+        return $this->outputSuccess("Theme files has been created successfully. Please run `".$_SERVER['PHP_SELF']." import` to import the theme into the database.");
     }
     
     /**

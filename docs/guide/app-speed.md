@@ -23,6 +23,14 @@ In order to enable the caching, open your config and add the caching to the comp
 
 There are also a few other caching mechanism available and built in into Yii. See the [supported cache storage](http://www.yiiframework.com/doc-2.0/guide-caching-data.html#supported-cache-storage)
 
+## Page Caching
+
+Since version 3.0 of LUYA Cms its als possible to cache the whole page.
+
+![CMS Page Caching](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/page-caching.png "CMS Page Caching")
+
+When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.
+
 ## Database
 
 In order to reduce the sql requests you can also enable schema caching in your database component which will only work if you have defined a caching mechanism from above.

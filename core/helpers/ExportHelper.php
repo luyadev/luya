@@ -137,7 +137,7 @@ class ExportHelper
 
     /**
      * Generate the output string with delimiters.
-     * 
+     *
      * @param array $input
      * @param string $delimiter
      * @return null|string

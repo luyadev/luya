@@ -28,9 +28,8 @@ class ThemeManager extends \yii\base\Component
     const EVENT_BEFORE_SETUP = 'eventBeforeSetup';
     
     /**
-     * Name of the theme which should be activated on setup.
-     *
-     * @var string
+     * @var string Name of the theme which should be activated on setup. This is commonly used to defined the active theme when **not**
+     * using the CMS ThemeManager to switch between themes.
      */
     public $activeThemeName;
     
@@ -42,13 +41,12 @@ class ThemeManager extends \yii\base\Component
     /**
      * Read the theme.json and create a new \luya\theme\ThemeConfig for the given base path.
      *
-     * @param string $basePath
-     *
+     * @param string $basePath Base path can either be a path to a folder with theme.json files or an absolute path to a theme.json file
      * @return ThemeConfig
      * @throws Exception
      * @throws InvalidConfigException
      */
-    protected static function loadThemeConfig(string $basePath)
+    public function loadThemeConfig(string $basePath)
     {
         if (strpos($basePath, '@') === 0) {
             $dir = Yii::getAlias($basePath);
@@ -58,13 +56,20 @@ class ThemeManager extends \yii\base\Component
             $dir = $basePath;
         }
         
-        if (!is_dir($dir) || !is_readable($dir)) {
-            throw new Exception('Theme directory not exists or readable: ' . $dir);
-        }
-        
-        $themeFile = $dir . '/theme.json';
-        if (!file_exists($themeFile)) {
-            throw new InvalidConfigException('Theme config file missing at: ' . $themeFile);
+        // $basePath is an absolute path = /VENDOR/NAME/theme.json
+        if (is_file($basePath) && file_exists($basePath)) {
+            $themeFile = $basePath;
+            // if basePath is the theme file itself and existing process:
+            $basePath = pathinfo($basePath, PATHINFO_DIRNAME);
+        } else {
+            if (!is_dir($dir) || !is_readable($dir)) {
+                throw new Exception('Theme directory not exists or readable: ' . $dir);
+            }
+
+            $themeFile = $dir . DIRECTORY_SEPARATOR . 'theme.json';
+            if (!file_exists($themeFile)) {
+                throw new InvalidConfigException('Theme config file missing at: ' . $themeFile);
+            }
         }
         
         $config = Json::decode(file_get_contents($themeFile)) ?: [];
@@ -79,7 +84,7 @@ class ThemeManager extends \yii\base\Component
      * @throws InvalidConfigException
      * @throws \yii\db\Exception
      */
-    final public function setup()
+    public function setup()
     {
         if ($this->activeTheme instanceof Theme) {
             // Active theme already loaded
@@ -89,7 +94,7 @@ class ThemeManager extends \yii\base\Component
         $basePath = $this->getActiveThemeBasePath();
         $this->beforeSetup($basePath);
         
-        if ($basePath) { 
+        if ($basePath) {
             $themeConfig = $this->getThemeByBasePath($basePath);
             $theme = new Theme($themeConfig);
             $this->activate($theme);
@@ -142,7 +147,7 @@ class ThemeManager extends \yii\base\Component
         
         foreach ($themeDefinitions as $themeDefinition) {
             try {
-                $themeConfig = static::loadThemeConfig($themeDefinition);
+                $themeConfig = $this->loadThemeConfig($themeDefinition);
                 $this->registerTheme($themeConfig);
             } catch (\yii\base\Exception $ex) {
                 if ($throwException) {

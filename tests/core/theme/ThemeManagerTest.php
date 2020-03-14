@@ -171,6 +171,15 @@ class ThemeManagerTest extends LuyaWebTestCase
         
         $this->assertEquals("fooTheme", $themeConfig->name);
     }
+
+    public function testDirectThemeFilePath()
+    {
+        $path = realpath(__DIR__ . '/../../data/themes/blank/theme.json');
+        $manager = new ThemeManager();
+        $config = $manager->loadThemeConfig($path);
+
+        $this->assertSame('blank', $config->name);
+    }
     
     public function testAbsoluteThemeDefinition()
     {

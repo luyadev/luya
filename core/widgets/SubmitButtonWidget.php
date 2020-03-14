@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
  * SubmitButtonWidget::widget(['label' => 'Save', 'pushed' => 'Saving ...', 'options' => ['class' => 'btn btn-primary']]);
  * $form::end();
  * ```
- * 
+ *
  * @property ActiveForm $activeForm Set active form context of the button.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -113,5 +113,4 @@ class SubmitButtonWidget extends Widget
 
         return Html::decode(Html::submitButton($this->label, $this->options));
     }
-
 }

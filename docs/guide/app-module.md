@@ -3,6 +3,8 @@
 A very important behavior in *LUYA* projects are **modules**. You can always use modules to put your own custom and reusable logic inside. 
 For instance you can put database logic inside of the ActiveRecord models. A module can also provide information for other module, e.g.  [CMS Blocks](app-blocks.md). 
 
+![Installed Modules](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/installed-packages.png "Installed Modules")
+
 ## Module Types
 
 There are two different types of modules:

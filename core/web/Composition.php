@@ -107,14 +107,14 @@ class Composition extends Component implements \ArrayAccess
      * This filter provides protection against ['host header' attacks](https://www.acunetix.com/vulnerabilities/web/host-header-attack).
      *
      * The allowed hosts check does not care about the protocol (https/http), there fore take a look the {{luya\traits\ApplicationTrait::$ensureSecureConnection}}.
-     * 
+     *
      * ```php
      * 'allowedHosts' => [
      *     'example.com', // this does not include www.
      *     '*.example.com', // this incluides www. and all other subdomains.
      * ]
      * ```
-     * 
+     *
      * > In order to allow all subdomains including www or not use `*example.com`.
      *
      * If no value is defined, the allowed host filtering is disable, this is the default behavior.

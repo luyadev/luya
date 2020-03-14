@@ -130,7 +130,7 @@ JSON;
         $this->assertEquals(0, $exitCode);
         $this->assertEquals('Theme path alias: @app/themes/mynewtheme', $controller->readOutput());
         $this->assertEquals('Theme real path: ' . Yii::getAlias('@app/themes/mynewtheme'), $controller->readOutput());
-        $this->assertEquals("Theme files has been created successfully. Please run `".$_SERVER['PHP_SELF']." import` to loaded into the database.", $controller->readOutput());
+        $this->assertEquals("Theme files has been created successfully. Please run `".$_SERVER['PHP_SELF']." import` to import the theme into the database.", $controller->readOutput());
     }
 
     public function testValidateParentTheme()

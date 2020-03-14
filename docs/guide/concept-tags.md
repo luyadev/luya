@@ -7,6 +7,8 @@ LUYA tags are a very strong and useful BBCode (Bulletin Board Code) alike tag pa
 Let's assume you want to create a [Bootstrap tooltip](http://getbootstrap.com/javascript/#tooltips) right at the fingertips of all contents in all modules or views. 
 As the [elements](concept-elements.md) is thought to be a tool for the developer itself, the tag differs from this idea. It can be easily used by all editors or users of the admin UI.
 
+![LUYA Tags](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/tags.png "LUYA Tags")
+
 ## Create a tag
 
 As mentioned above, we create a new `TooltipTag` with a PHP file somewhere where you might think it is a good location, it is recommend locate them in the `app/tags` folder:

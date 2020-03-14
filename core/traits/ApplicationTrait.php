@@ -94,10 +94,10 @@ trait ApplicationTrait
 
     /**
      * @var array An array to provide application wide CORS settings.
-     * 
+     *
      * By default the X-Headers of Yii and LUYA Admin are exposed. In order to override the cors
      * config the following example would work (including cors class definition).
-     * 
+     *
      * ```php
      * 'corsConfig' => [
      * 'class' => 'yii\filters\Cors',
@@ -113,7 +113,7 @@ trait ApplicationTrait
      *     ],
      * ]
      * ```
-     * 
+     *
      * @since 1.0.22
      */
     public $corsConfig = [
@@ -125,7 +125,7 @@ trait ApplicationTrait
             'Access-Control-Allow-Credentials' => null,
             'Access-Control-Max-Age' => 86400,
             'Access-Control-Expose-Headers' => [
-                'X-Pagination-Current-Page', 
+                'X-Pagination-Current-Page',
                 'X-Pagination-Page-Count',
                 'X-Pagination-Per-Page',
                 'X-Pagination-Total-Count',
@@ -176,11 +176,11 @@ trait ApplicationTrait
     
     /**
      * Set the application localisation trough `setlocale`.
-     * 
+     *
      * The value will be parsed trough {{ensureLocale()}} in order to generated different possible localisation
      * values like `en_EN` or `en_EN.utf8` and it will generate from `de` a locale value like `de_DE`.
      *
-     * setlocale() can have multiple arguments: 
+     * setlocale() can have multiple arguments:
      *
      * > If locale is an array or followed by additional parameters then each array element or parameter
      * > is tried to be set as new locale until success. This is useful if a locale is known under different

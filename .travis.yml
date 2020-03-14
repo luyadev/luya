@@ -1,6 +1,8 @@
 env:
   global:
     - CC_TEST_REPORTER_ID=e104088a64c54b2a68debe43e4600b48f53a73441e99449223a9fa08c070cf97
+    - TASK_TESTS_PHP=1
+    - TASK_TESTS_JS=0
 
 language: php
 
@@ -14,11 +16,19 @@ php:
   - nightly
   
 matrix:
-    allow_failures:
-        - php: 5.6
-        - php: 7.0
-        - php: 7.4
-        - php: nightly
+  inlcude: 
+  - language: node_js
+    node_js: "8"
+    env: TASK_TESTS_PHP=0 TASK_TESTS_JS=1
+    # overwrite services used for PHP tests
+    services:
+      - xvfb
+
+  allow_failures:
+    - php: 5.6
+    - php: 7.0
+    - php: 7.4
+    - php: nightly
   
 sudo: false
 
@@ -26,20 +36,38 @@ services:
   - mysql
 
 install:
-  - travis_retry composer self-update && composer --version
-  - travis_retry composer global require "fxp/composer-asset-plugin:~1.3"
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
+  - |
+      if [ $TASK_TESTS_PHP == 1 ]; then
+        travis_retry composer self-update && composer --version
+        travis_retry composer global require "fxp/composer-asset-plugin:~1.3"
+        export PATH="$HOME/.composer/vendor/bin:$PATH"
+        travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
+      fi
+  - |
+      if [ $TASK_TESTS_JS == 1 ]; then
+        export DISPLAY=:99.0
+        travis_retry yarn
+      fi
 
 before_script:
-  - mysql -e 'create database myapp_test;'
-  - mysql -u root myapp_test < tests/data/sql/1.0.0.sql
-  - if [[ "$TRAVIS_PHP_VERSION" == "7.1" ]]; then PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"; fi
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
+  - |
+      if [[ $TASK_TESTS_PHP == 1 && $TRAVIS_PHP_VERSION != nightly ]]; then
+        mysql -e 'create database myapp_test;'
+        mysql -u root myapp_test < tests/data/sql/1.0.0.sql
+        if [[ "$TRAVIS_PHP_VERSION" == "7.1" ]]; then PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"; fi
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+      fi
 
 script:
-  - vendor/bin/phpunit --verbose $PHPUNIT_FLAGS --configuration travis.phpunit.xml
+    - |
+        if [ $TASK_TESTS_PHP == 1 ]; then
+          vendor/bin/phpunit --verbose $PHPUNIT_FLAGS --configuration travis.phpunit.xml
+        fi
+    - |
+        if [ $TASK_TESTS_JS == 1 ]; then
+          travis_retry yarn test
+        fi
   
 after_script:
   - if [[ "$TRAVIS_PHP_VERSION" == "7.1" ]]; then ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT; fi
