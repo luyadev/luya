@@ -1,8 +1,9 @@
 <?php
 
-namespace luya\theme;
+namespace luyatests\core\theme;
 
 use luya\helpers\Json;
+use luya\theme\ThemeConfig;
 use luyatests\LuyaWebTestCase;
 use Yii;
 
@@ -27,6 +28,15 @@ class ThemeConfigTest extends LuyaWebTestCase
         $themeConfig = new ThemeConfig('@app/themes/blank', []);
         
         $this->assertCount(0, $themeConfig->getParents());
+    }
+    
+    public function testBasePath()
+    {
+        $basePath = '@app/themes/blank3';
+        $config = Json::decode(file_get_contents(Yii::getAlias($basePath . '/theme.json')));
+        
+        $themeConfig = new ThemeConfig($basePath, $config);
+        $this->assertEquals('@app/themes/blank3', $themeConfig->getBasePath());
     }
     
     public function testGetViewPath()

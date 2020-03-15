@@ -159,16 +159,15 @@ class ThemeManagerTest extends LuyaWebTestCase
         }
     }
     
-    public function testRelativeThemeDefinition()
+    public function testAliasThemeDefinition()
     {
-        $relativePath = 'otherThemeLocation/foo';
+        $relativePath = '@app/otherThemeLocation/foo';
     
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$relativePath]);
     
         $themeManager = new ThemeManager();
-        $basePath = realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . $relativePath;
-        $themeConfig = $themeManager->getThemeByBasePath($basePath);
-        
+    
+        $themeConfig = $themeManager->getThemeByBasePath($relativePath);
         $this->assertEquals("fooTheme", $themeConfig->name);
     }
 

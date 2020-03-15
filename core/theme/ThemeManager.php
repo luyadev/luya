@@ -50,12 +50,14 @@ class ThemeManager extends \yii\base\Component
     {
         if (strpos($basePath, '@') === 0) {
             $dir = Yii::getAlias($basePath);
-        } elseif (strpos($basePath, '/') !== 0) {
-            $dir = $basePath = Yii::$app->basePath . DIRECTORY_SEPARATOR . $basePath;
-        } else {
+        } elseif (strpos($basePath, '/') === 0) {
+            // absolute path
             $dir = $basePath;
+        } else {
+            // relative path
+            $dir = Yii::$app->basePath . DIRECTORY_SEPARATOR . $basePath;
         }
-        
+
         // $basePath is an absolute path = /VENDOR/NAME/theme.json
         if (is_file($basePath) && file_exists($basePath)) {
             $themeFile = $basePath;
