@@ -5,6 +5,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.1.1
 
++ [#1970](https://github.com/luyadev/luya/issues/1970) Fixed a bug with relative theme paths. 
+
 ## 1.1.0 (12. March 2020)
 
 + [Admin#464](https://github.com/luyadev/luya-module-admin/issues/464) The `luya\traits\ApplicationTrait::setLocale()` does not change the `Yii::$app->language` value as before. In order to change the application language use `Yii::$app->language` directly.
