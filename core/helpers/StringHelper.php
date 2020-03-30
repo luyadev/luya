@@ -304,6 +304,7 @@ class StringHelper extends BaseStringHelper
      * @param mixed $value The value to check.
      * @param boolean $strict
      * @return boolean
+     * @since 1.2.0
      */
     public static function isNummeric($value, $strict = true)
     {
