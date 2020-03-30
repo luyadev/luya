@@ -290,4 +290,36 @@ class StringHelper extends BaseStringHelper
     
         return $array;
     }
+
+    /**
+     * Check whether a value is numeric or not.
+     * 
+     * There are situations where is_numeric does not provide the desried result,
+     * like for example `is_numeric('3e30')` would return true, as e can be considered
+     * as exponential operator.
+     * 
+     * Therfore this function checks with regex whether values or 0-9 if strict is enabled,
+     * which is default behavior.
+     *
+     * @param mixed $value The value to check.
+     * @param boolean $strict
+     * @return boolean
+     * @since 1.2.0
+     */
+    public static function isNummeric($value, $strict = true)
+    {
+        if (!is_scalar($value)) {
+            return false;
+        }
+
+        if (is_bool($value)) {
+            return false;
+        }
+
+        if ($strict) {
+            return preg_match('/^[0-9]+$/', $value) == 1 ? true : false;
+        }    
+
+        return is_numeric($value);
+    }
 }
