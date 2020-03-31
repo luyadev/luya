@@ -19,6 +19,17 @@ use luya\console\interfaces\ImportControllerInterface;
  * ```
  *
  * Each of the importer classes must extend the {{\luya\console\Importer}} class.
+ * 
+ * To override importer settings reconfigure the importer command:
+ * 
+ * ```php
+ * 'controllerMap' => [
+ *     'import' => [
+ *         'class' => ImportController::class,
+ *         'scanFolders' => ['themes', 'blocks'],
+ *      ]
+ * ]
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -28,7 +39,7 @@ class ImportController extends Command implements ImportControllerInterface
     /**
      * @var array An array with all folder names inside an application/module to scan for files.
      */
-    protected $scanFolders = ['themes', 'blocks', 'filters', 'properties', 'blockgroups'];
+    public $scanFolders = ['themes', 'blocks', 'filters', 'properties', 'blockgroups'];
 
     /**
      * @inheritdoc
@@ -54,18 +65,18 @@ class ImportController extends Command implements ImportControllerInterface
     /**
      * Add a given directory to the list of folders.
      *
-     * @param string $path
-     * @param string $folderName
-     * @param string $ns
-     * @param string $module The name/id of the module.
+     * @param string $path The path on which the data is located `/app/myfolder`
+     * @param string $folderName The name of the folder `myfolder`
+     * @param string $ns The namespace which is used inside ths folder `\\app\\myfolder`
+     * @param string $module The name/id of the module. The module which will be pased to the invoken importer method for example `admin`.
      */
-    protected function addToDirectory($path, $folderName, $ns, $module)
+    public function addToDirectory($path, $folderName, $ns, $module)
     {
         if (file_exists($path)) {
             $this->_dirs[$folderName][] = [
                 'ns' => $ns,
                 'module' => $module,
-                'folderPath' => $path.DIRECTORY_SEPARATOR,
+                'folderPath' => rtrim($path,DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR,
                 'files' => $this->scanDirectoryFiles($path, $ns, $module),
             ];
         }
