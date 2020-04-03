@@ -39,7 +39,7 @@ install:
   - |
       if [ $TASK_TESTS_PHP == 1 ]; then
         travis_retry composer self-update && composer --version
-        travis_retry composer global require "fxp/composer-asset-plugin:~1.3"
+        composer config -g github-oauth.github.com "$TOKEN"
         export PATH="$HOME/.composer/vendor/bin:$PATH"
         travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
       fi

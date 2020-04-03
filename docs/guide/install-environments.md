@@ -10,23 +10,46 @@ Below, all these configs and environments explained:
 ![configs-graphic](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/configs-luya.jpg "LUYA envs config")
 
 ## env.php
+
 The `env.php` file returns the currently used config, so this file is used to change the config on different environment.
-This file is ignored by GitHub by default. 
-If a new project is created an example file named `env.php.dist` will be provided (see [Install](install.md)).
+This file is ignored by GitHub by default. If a new project is created an example file named `env.php.dist` will be provided (see [Install](install.md)).
 
-## env-local-db.php
-This file contains all informations which are not planed to be shared between developers, e.g. the database configuration.  
-This file is ignored by Github by default as well. 
-If a new project is created an example file named `env-local-db.php.dist` will be provided (see [Install](install.md)).
+## config.php
 
-## env-local.php
-This file is used to store all configs for developers which can be shared. All necessary configs which are not in `env-local-db.php` are provided by this file.
+> Since version 1.0.21 of LUYA core the {{luya\Config}} is used to generate configs.
 
-## env-dev.php
-The `env-dev.php` file should be used for environments that are online but are still under **development**. It can be used to show a preview to the agencies and/or designes but should not be used for customers.
+The config.php file contains a {{luya\Config}} object, in order to defined components, modules or application level configurations for a certain environment use {{luya\Config::env()}} method:
 
-## env-prep.php
-The `env-prep.php` file contains the configs for the **preproduction** environment. This environment can be used to show the website to the customer and add the content before the go live.
+An example for define the db component for certain environments:
 
-## env-prod.php
-And finally the `env-prod.php` for the **production** environment. It is used to configure the site for the live environment.
+ ```php
+ $config->component('db', [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=prod_db',
+    'username' => 'foo',
+    'password' => 'bar',
+])->env(Config::ENV_LOCAL);
+
+$config->component('db', [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=prod_db',
+    'username' => 'foo',
+    'password' => 'bar',
+])->env(Config::ENV_DEV);
+
+$config->component('db', [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=prod_db',
+    'username' => 'foo',
+    'password' => 'bar',
+])->env(Config::ENV_PROD);
+```
+
+The {{luya\Config}} has constants for all LUYA env types:
+
++ {{luya\Config::ENV_ALL}}: All environments
++ {{luya\Config::ENV_LOCAL}}: local computer (local development stage)
++ {{luya\Config::ENV_DEV}}: dev/shared server
++ {{luya\Config::ENV_PREP}}: preproduction server
++ {{luya\Config::ENV_CI}}: ci server
++ {{luya\Config::ENV_PROD}}: production
