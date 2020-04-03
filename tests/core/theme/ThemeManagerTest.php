@@ -184,8 +184,8 @@ class ThemeManagerTest extends LuyaWebTestCase
     }
     
     /**
-     * @expectedException \yii\base\InvalidArgumentException
-     * @expectedExceptionMessage  Theme vendorThemeLocation/foo could not loaded.
+     * @expectedException \yii\base\InvalidConfigException
+     * @expectedExceptionMessage Theme base path have to be absolute or alias: vendorThemeLocation/foo
      */
     public function testRelativeThemeDefinition()
     {
@@ -201,13 +201,13 @@ class ThemeManagerTest extends LuyaWebTestCase
     
     public function testVendorThemeDefinition()
     {
-        $relativePath = 'vendorThemeLocation/foo';
+        $relativePath = 'vendor/luyadev/luya-core/vendorThemeLocation/foo';
         
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$relativePath]);
         
         $themeManager = new ThemeManager();
         
-        $themeConfig = $themeManager->getThemeByBasePath('@vendor/luyadev/luya-core/' . $relativePath, true);
+        $themeConfig = $themeManager->getThemeByBasePath('@' . $relativePath, true);
         $this->assertEquals("fooTheme", $themeConfig->name);
     }
     
