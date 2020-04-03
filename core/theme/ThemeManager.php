@@ -146,7 +146,7 @@ class ThemeManager extends \yii\base\Component
         }
         
         $themeDefinitions = $this->getThemeDefinitions();
-        
+
         foreach ($themeDefinitions as $themeDefinition) {
             try {
                 $themeConfig = $this->loadThemeConfig($themeDefinition);
@@ -177,12 +177,13 @@ class ThemeManager extends \yii\base\Component
         }
         
         foreach (Yii::$app->getPackageInstaller()->getConfigs() as $config) {
+    
             /** @var PackageConfig $config */
             foreach ($config->themes as $theme) {
                 if (strpos($theme, '@') === 0 || strpos($theme, '/') === 0) {
                     $themeDefinitions[] = $theme;
                 } else {
-                    $themeDefinitions[] = '@vendor' . DIRECTORY_SEPARATOR . $config->package['packageFolder'] . DIRECTORY_SEPARATOR . $theme;
+                    $themeDefinitions[] = preg_replace('#^vendor/#', '@vendor/', $theme);
                 }
             }
         }
