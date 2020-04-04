@@ -58,19 +58,21 @@ use luya\helpers\ArrayHelper;
  * return $config->toArray([Config::ENV_PROD]);
  * ```
  *
+ * ## Envs
+ *
  * Switching between envs can be usefull if certain configurations should only apply on a certain environment. Therefore you can add `env()` behind componenets, applications and modules.
  *
  * ```php
  * $config->component('db', [
  *     'class' => 'yii\db\Connection',
- *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
+ *     'dsn' => 'mysql:host=localhost;dbname=local_db',
  *     'username' => 'foo',
  *     'password' => 'bar',
  * ])->env(Config::ENV_LOCAL);
  *
  * $config->component('db', [
  *     'class' => 'yii\db\Connection',
- *     'dsn' => 'mysql:host=localhost;dbname=prod_db',
+ *     'dsn' => 'mysql:host=localhost;dbname=dev_db',
  *     'username' => 'foo',
  *     'password' => 'bar',
  * ])->env(Config::ENV_DEV);

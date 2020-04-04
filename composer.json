@@ -57,7 +57,10 @@
     "config": {	
         "platform": {	
             "php": "7.1.3"	
-        }	
+        },
+        "fxp-asset": {
+            "enabled": false
+        }
     },
     "bin": [
         "core/bin/luya",

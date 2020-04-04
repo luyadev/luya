@@ -65,7 +65,7 @@ In order to enable image and file upload you can just use the file input:
 <?= $activeForm->field($form, 'attachment[]')->fileInput(['multiple' => true, 'accept' => 'file/*']) ?>
 ```
 
-Validation inside the model:
+Validation inside the model is done by {{luya\admin\ngrest\validators\StorageUploadValidator}}. This will not only validate but also save the file in LUYA admin storage [[app-storage.md]]
 
 ```php
 [['attachment'], StorageUploadValidator::class, 'multiple' => true],

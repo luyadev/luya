@@ -42,7 +42,7 @@ When reporting bugs, it is important to understand where to create the issue. Th
 
 + [Core](https://github.com/luyadev/luya) The core library, which extends the Yii Framework.
 + [CMS](https://github.com/luyadev/luya-module-cms) The Content Management System Admin and Frontend. Working with Blocks, render CMS Pages, etc.
-+ [Admin](https://github.com/luyadev/luya-module-admin) The admin UI itself, including all CURD operations belongs to this module.
++ [Admin](https://github.com/luyadev/luya-module-admin) The admin UI itself, including all CRUD operations belongs to this module.
 
 #### Contribution
 
