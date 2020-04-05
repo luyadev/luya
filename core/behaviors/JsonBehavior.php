@@ -10,6 +10,29 @@ use luya\helpers\Json;
  * Json Behavior.
  *
  * Provides auto encoding for array values after validation in order to store in the database.
+ * 
+ * In order to work only with arrayable json values use:
+ * 
+ * ```php
+ * public function behaviors()
+ * {
+ *     return [
+ *         'json' => [
+ *             'class' => JsonBehavior:class,
+ *             'attributes' => ['json_field'],
+ *             'encodeBeforeValidate' => true,
+ *             'decodeAfterFind' => true,
+ *         ]
+ *     ];
+ * }
+ * 
+ * public function rules()
+ * {
+ *     return [
+ *         [['json_field', 'each', 'rule' => ['safe']]]
+ *     ]
+ * }
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.9
@@ -17,6 +40,18 @@ use luya\helpers\Json;
 class JsonBehavior extends Behavior
 {
     public $attributes = [];
+
+    /**
+     * @var boolean If enabled, the data will be encoded before validating, this means the validation rule should be `array` otherwise the validation must be `string`.
+     * @since 1.2.0 
+     */
+    public $encodeBeforeValidate = false;
+
+    /**
+     * @var boolean If enabled the data will be encoded from json to array after populating the active record data.
+     * @since 1.2.0
+     */
+    public $decodeAfterFind = false;
     
     /**
      * @inheritdoc
