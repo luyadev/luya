@@ -159,26 +159,16 @@ class ThemeManagerTest extends LuyaWebTestCase
         }
     }
     
-    public function testRelativeThemeDefinition()
+    public function testAliasThemeDefinition()
     {
-        $relativePath = 'otherThemeLocation/foo';
+        $relativePath = '@app/otherThemeLocation/foo';
     
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$relativePath]);
     
         $themeManager = new ThemeManager();
-        $basePath = realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . $relativePath;
-        $themeConfig = $themeManager->getThemeByBasePath($basePath);
-        
+    
+        $themeConfig = $themeManager->getThemeByBasePath($relativePath, true);
         $this->assertEquals("fooTheme", $themeConfig->name);
-    }
-
-    public function testDirectThemeFilePath()
-    {
-        $path = realpath(__DIR__ . '/../../data/themes/blank/theme.json');
-        $manager = new ThemeManager();
-        $config = $manager->loadThemeConfig($path);
-
-        $this->assertSame('blank', $config->name);
     }
     
     public function testAbsoluteThemeDefinition()
@@ -188,9 +178,47 @@ class ThemeManagerTest extends LuyaWebTestCase
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$absolutePath]);
         
         $themeManager = new ThemeManager();
-        $themeConfig = $themeManager->getThemeByBasePath($absolutePath);
+        $themeConfig = $themeManager->getThemeByBasePath($absolutePath, true);
         
         $this->assertEquals("fooTheme", $themeConfig->name);
+    }
+    
+    /**
+     * @expectedException \yii\base\InvalidConfigException
+     * @expectedExceptionMessage Theme base path have to be absolute or alias: vendorThemeLocation/foo
+     */
+    public function testRelativeThemeDefinition()
+    {
+        $relativePath = 'vendorThemeLocation/foo';
+        
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$relativePath]);
+        
+        $themeManager = new ThemeManager();
+
+        $themeConfig = $themeManager->getThemeByBasePath($relativePath, true);
+        $this->assertEquals("fooTheme", $themeConfig->name);
+    }
+    
+    public function testVendorThemeDefinition()
+    {
+        $relativePath = 'vendor/luyadev/luya-core/vendorThemeLocation/foo';
+        
+        Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$relativePath]);
+        
+        $themeManager = new ThemeManager();
+        
+        $themeConfig = $themeManager->getThemeByBasePath('@' . $relativePath, true);
+        $this->assertEquals("fooTheme", $themeConfig->name);
+    }
+    
+    
+    public function testDirectThemeFilePath()
+    {
+        $path = realpath(__DIR__ . '/../../data/themes/blank/theme.json');
+        $manager = new ThemeManager();
+        $config = $manager->loadThemeConfig($path);
+        
+        $this->assertSame('blank', $config->name);
     }
     
     /**
