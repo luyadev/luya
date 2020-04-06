@@ -81,13 +81,6 @@ class JsonBehavior extends Behavior
     {
         foreach ($this->attributes as $name) {
 
-            if ($this->owner instanceof BaseActiveRecord) {
-                if (!isset($this->owner->getDirtyAttributes()[$name])) {
-                    continue;
-                }
-            }
-            
-            
             $value = $this->owner->{$name};
             
             if (is_array($value)) {
@@ -115,6 +108,12 @@ class JsonBehavior extends Behavior
      */
     public function jsonEncode($value)
     {
+        // if value is already a json, skip encoding and return result
+        // ensure data is not doulble encoded or throws exception
+        if (Json::isJson($value)) {
+            return $value;
+        }
+
         return Json::encode($value);
     }
     
