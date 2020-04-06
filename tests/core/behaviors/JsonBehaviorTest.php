@@ -61,5 +61,10 @@ class JsonBehaviorTest extends LuyaWebTestCase
         $model->trigger(ActiveRecord::EVENT_AFTER_FIND);
         
         $this->assertSame([1,2,3], $model->json);
+
+        $model->trigger(ActiveRecord::EVENT_AFTER_FIND);
+        
+        $this->assertSame([1,2,3], $model->json);
+
     }
 }
