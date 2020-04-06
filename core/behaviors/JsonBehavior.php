@@ -5,6 +5,7 @@ namespace luya\behaviors;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use luya\helpers\Json;
+use yii\db\BaseActiveRecord;
 
 /**
  * Json Behavior.
@@ -43,9 +44,10 @@ class JsonBehavior extends Behavior
 
     /**
      * @var boolean If enabled, the data will be encoded before validating, this means the validation rule should be `array` otherwise the validation must be `string`.
+     * This might also differ based on how the data is passed to the model. Data passed to the model will be encoded from string to array (if not already).
      * @since 1.2.0 
      */
-    public $encodeBeforeValidate = false;
+    public $encodeBeforeValidate = true;
 
     /**
      * @var boolean If enabled the data will be encoded from json to array after populating the active record data.
@@ -58,29 +60,53 @@ class JsonBehavior extends Behavior
      */
     public function events()
     {
-        return [
-            ActiveRecord::EVENT_AFTER_VALIDATE => 'autoEncodeAttributes',
-        ];
+        $events = [];
+        if ($this->encodeBeforeValidate) {
+            $events[ActiveRecord::EVENT_BEFORE_VALIDATE] = 'encodeAttributes';
+        } else {
+            $events[ActiveRecord::EVENT_AFTER_VALIDATE] = 'encodeAttributes';
+        }
+
+        if ($this->decodeAfterFind) {
+            $events[ActiveRecord::EVENT_AFTER_FIND] = 'decodeAttributes';
+        }
+
+        return $events;
     }
     
     /**
-     * Encode attributes.
+     * Encode all attributes from json to php.
      */
-    public function autoEncodeAttributes()
+    public function encodeAttributes()
     {
         foreach ($this->attributes as $name) {
-            if (!isset($this->owner->getDirtyAttributes()[$name])) {
-                continue;
+
+            if ($this->owner instanceof BaseActiveRecord) {
+                if (!isset($this->owner->getDirtyAttributes()[$name])) {
+                    continue;
+                }
             }
+            
             
             $value = $this->owner->{$name};
             
             if (is_array($value)) {
-                $this->owner->{$name} = $this->jsonEncode($name);
+                $this->owner->{$name} = $this->jsonEncode($value);
             }
         }
     }
     
+    /**
+     * Decode all attributes from php to json.
+     */
+    public function decodeAttributes()
+    {
+        foreach ($this->attributes as $name) {
+            $value = $this->owner->{$name};
+            
+            $this->owner->{$name} = $this->jsonDecode($value);
+        }
+    }
     /**
      * Encodes the given value into a JSON string.
      *
@@ -100,6 +126,11 @@ class JsonBehavior extends Behavior
      */
     public function jsonDecode($value)
     {
+        // data is already passed by array
+        if (is_array($value)) {
+            return $value;
+        }
+
         return Json::decode($value);
     }
 }
