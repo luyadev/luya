@@ -26,4 +26,22 @@ class JsonBehaviorTest extends LuyaWebTestCase
         
         $this->assertSame(['foo' => 'bar'], $model->json);
     }
+
+    public function testOfAttributes()
+    {
+        $model = new DynamicModel(['json' => null]);
+        $model->attachBehavior('jsonBehavior', ['class' => JsonBehavior::class, 'attributes' => ['json'], 'decodeAfterFind' => true, 'encodeBeforeValidate' => false]);
+
+        $model->addRule('json', 'string');
+
+        $model->json = "[1,2,3]";
+
+        $this->assertTrue($model->validate());
+
+        $this->assertSame('[1,2,3]', $model->json);
+
+        $model->trigger(ActiveRecord::EVENT_AFTER_FIND);
+        
+        $this->assertSame([1,2,3], $model->json);
+    }
 }
