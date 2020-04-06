@@ -66,5 +66,7 @@ class JsonBehaviorTest extends LuyaWebTestCase
         
         $this->assertSame([1,2,3], $model->json);
 
+        $this->assertSame('[1,2]', $model->jsonEncode('[1,2]'));
+
     }
 }
