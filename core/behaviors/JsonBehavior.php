@@ -2,9 +2,9 @@
 
 namespace luya\behaviors;
 
+use luya\helpers\Json;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use luya\helpers\Json;
 use yii\db\BaseActiveRecord;
 
 /**
