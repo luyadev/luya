@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.2.1 (7. April 2020)
 
-+ []() Default values for JsonBehavior was wrong declared, expected is the opposite way 1. array as validation rule, 2. auto decode data after find.
++ [#2008](https://github.com/luyadev/luya/pull/2008) Default values for JsonBehavior was wrong declared, expected is the opposite way 1. array as validation rule, 2. auto decode data after find.
 
 ## 1.2.0 (7. April 2020)
 

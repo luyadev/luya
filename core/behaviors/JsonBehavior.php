@@ -5,7 +5,6 @@ namespace luya\behaviors;
 use luya\helpers\Json;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use yii\db\BaseActiveRecord;
 
 /**
  * Json Behavior.
