@@ -5,14 +5,14 @@ namespace luya\behaviors;
 use luya\helpers\Json;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use yii\db\BaseActiveRecord;
 
 /**
  * Json Behavior.
  *
- * Provides auto encoding for array values after validation in order to store in the database.
+ * Therefore the JsonBehavior default confiugration let you seamless work with expecting array values, array input 
+ * and array output. Provides auto encoding for array values after validation in order to store in the database.
  * 
- * In order to work only with arrayable json values use:
+ * An example of how to declared, validate and assign json values (as array):
  * 
  * ```php
  * public function behaviors()
@@ -21,8 +21,6 @@ use yii\db\BaseActiveRecord;
  *         'json' => [
  *             'class' => JsonBehavior:class,
  *             'attributes' => ['json_field'],
- *             'encodeBeforeValidate' => true,
- *             'decodeAfterFind' => true,
  *         ]
  *     ];
  * }
@@ -34,6 +32,12 @@ use yii\db\BaseActiveRecord;
  *     ]
  * }
  * ```
+ * 
+ * The above mode assumes an array is passed to the model:
+ * 
+ * ```php
+ * $model->json_field = ['foo' => 'bar'];
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.9
@@ -43,17 +47,17 @@ class JsonBehavior extends Behavior
     public $attributes = [];
 
     /**
-     * @var boolean If enabled, the data will be encoded before validating, this means the validation rule should be `array` otherwise the validation must be `string`.
+     * @var boolean If enabled, the data will be encoded before validating, this means the validation rule should be `string` otherwise the validation must be `array`.
      * This might also differ based on how the data is passed to the model. Data passed to the model will be encoded from string to array (if not already).
      * @since 1.2.0 
      */
-    public $encodeBeforeValidate = true;
+    public $encodeBeforeValidate = false;
 
     /**
      * @var boolean If enabled the data will be encoded from json to array after populating the active record data.
      * @since 1.2.0
      */
-    public $decodeAfterFind = false;
+    public $decodeAfterFind = true;
     
     /**
      * @inheritdoc
