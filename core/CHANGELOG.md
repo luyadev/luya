@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.2.2
 
++ [#2011](https://github.com/luyadev/luya/pull/2011) Update theme create command to work on Windows
 + [#2009](https://github.com/luyadev/luya/pull/2009) Improve the performance of mb_str_split, this will strongly improve the speed when working with LUYA crawler result previews.
 
 ## 1.2.1 (7. April 2020)
