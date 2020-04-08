@@ -193,4 +193,23 @@ EOT;
         $this->assertFalse(StringHelper::isNummeric('3e30'));
         $this->assertTrue(StringHelper::isNummeric('3e30', false));
     }
+
+    public function testMbStrSplit()
+    {
+        $this->assertSame([
+            'f','o','o', ' ', 'b', 'a', 'r'
+        ], StringHelper::mb_str_split('foo bar'));
+        $this->assertSame([
+            'fo', 'o ', 'ba', 'r'
+        ], StringHelper::mb_str_split('foo bar', 2));
+
+        $this->assertSame([
+            0 => 'М',
+            1 => 'а',
+            2 => 'р',
+            3 => 'у',
+            4 => 'с',
+            5 => 'я',
+        ], StringHelper::mb_str_split('Маруся'));
+    }
 }
