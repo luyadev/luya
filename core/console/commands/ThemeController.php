@@ -59,7 +59,7 @@ class ThemeController extends \luya\console\Command
             }
         }
         
-        $basePath = $themeLocation . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName;
+        $basePath = $themeLocation . '/themes/' . $themeName;
         $themeFolder = Yii::getAlias($basePath);
     
         if (file_exists($themeFolder)) {
