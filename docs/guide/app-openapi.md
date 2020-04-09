@@ -8,6 +8,8 @@ Since version 3.2 of LUYA Admin Module an OpenAPI file generator is available. T
 
 The purpose of the generator is to have documentation where it should belong, in the code, but also provide those descriptions to the Endpoint Consumers.
 
+![OpenAPI Custom Action](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/openapi-code-to-redoc.png "OpenAPI Custom Action")
+
 ## Enable OpenApi Endpoint
 
 In order to enable the OpenApi Endpoint you can either use `remoteToken` or ` publicOpenApi` property:
