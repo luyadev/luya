@@ -50,12 +50,14 @@ class ThemeManager extends \yii\base\Component
     {
         if (strpos($basePath, '@') === 0) {
             $dir = Yii::getAlias($basePath);
-        } elseif (strpos($basePath, '/') !== 0) {
-            $dir = $basePath = Yii::$app->basePath . DIRECTORY_SEPARATOR . $basePath;
-        } else {
+        } elseif (strpos($basePath, '/') === 0) {
+            // absolute path
             $dir = $basePath;
+        } else {
+            // relative path
+            throw new InvalidConfigException('Theme base path have to be absolute or alias: ' . $basePath);
         }
-        
+
         // $basePath is an absolute path = /VENDOR/NAME/theme.json
         if (is_file($basePath) && file_exists($basePath)) {
             $themeFile = $basePath;
@@ -144,7 +146,7 @@ class ThemeManager extends \yii\base\Component
         }
         
         $themeDefinitions = $this->getThemeDefinitions();
-        
+
         foreach ($themeDefinitions as $themeDefinition) {
             try {
                 $themeConfig = $this->loadThemeConfig($themeDefinition);
@@ -175,8 +177,15 @@ class ThemeManager extends \yii\base\Component
         }
         
         foreach (Yii::$app->getPackageInstaller()->getConfigs() as $config) {
+    
             /** @var PackageConfig $config */
-            $themeDefinitions = array_merge($themeDefinitions, $config->themes);
+            foreach ($config->themes as $theme) {
+                if (strpos($theme, '@') === 0 || strpos($theme, '/') === 0) {
+                    $themeDefinitions[] = $theme;
+                } else {
+                    $themeDefinitions[] = preg_replace('#^vendor/#', '@vendor/', $theme);
+                }
+            }
         }
         
         return $themeDefinitions;
@@ -184,14 +193,15 @@ class ThemeManager extends \yii\base\Component
     
     /**
      * @param string $basePath
+     * @param bool $throwException
      *
      * @return ThemeConfig
-     * @throws Exception
+     * @throws \yii\base\Exception
      * @throws InvalidConfigException
      */
-    public function getThemeByBasePath(string $basePath)
+    public function getThemeByBasePath(string $basePath, $throwException = false)
     {
-        $themes = $this->getThemes();
+        $themes = $this->getThemes($throwException);
         
         if (!isset($themes[$basePath])) {
             throw new InvalidArgumentException("Theme $basePath could not loaded.");

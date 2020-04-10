@@ -278,17 +278,11 @@ class StringHelper extends BaseStringHelper
      * @param string $string The string to split into an array
      * @param integer $length The length of the chars to cut.
      * @since 1.0.12
+     * @see https://www.php.net/manual/de/function.str-split.php#115703
      */
     public static function mb_str_split($string, $length = 1)
     {
-        $array = [];
-        $stringLength = mb_strlen($string, 'UTF-8');
-    
-        for ($i = 0; $i < $stringLength; $i += $length) {
-            $array[] = mb_substr($string, $i, $length, 'UTF-8');
-        }
-    
-        return $array;
+        return preg_split('/(.{'.$length.'})/us', $string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
     }
 
     /**

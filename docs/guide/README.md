@@ -31,6 +31,7 @@
   + [Modules](app-module.md)
   + [Themes](app-themes.md)
   + [Queue/Scheduler](app-queue.md)
+  + [OpenAPI](app-openapi.md)
 + CMS
   + [CMS Layouts](app-cmslayouts.md)
   + [Menus & Navigations](app-menu.md)
