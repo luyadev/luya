@@ -88,8 +88,8 @@ class ThemeController extends \luya\console\Command
             $themeFolder. DIRECTORY_SEPARATOR . 'theme.json' => $this->renderJson($basePath, $themeName),
             $themeFolder. DIRECTORY_SEPARATOR . ucfirst($themeName) . 'Asset.php' => $this->renderAssetClass($themeName),
             $themeFolder. DIRECTORY_SEPARATOR . 'resources/'. $themeName .'-asset/style.css' => '',
-            $themeFolder. DIRECTORY_SEPARATOR . 'views/layouts/theme.php' => '',
-            $themeFolder. DIRECTORY_SEPARATOR . 'views/cmslayouts/theme.php' => '',
+            $themeFolder. DIRECTORY_SEPARATOR . 'views/layouts/theme.php' => $this->renderLayout($themeName),
+            $themeFolder. DIRECTORY_SEPARATOR . 'views/cmslayouts/theme.php' => $this->renderCmsLayout($themeName),
         ];
         
         foreach ($contents as $fileName => $content) {
@@ -151,5 +151,48 @@ class {$className} extends Asset
         }
         
         return true;
+    }
+    
+    private function renderLayout($themeName)
+    {
+        $className = ucfirst($themeName) . 'Asset';
+    
+        return '<?php
+/**
+ * @var $this \luya\web\View
+ */
+use luya\themes\frontend\\'.$className.';
+
+'.$className.'::register($this);
+
+$this->beginPage();
+?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->composition->language; ?>">
+    <head>
+        <title><?= $this->title; ?></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="author" content="boehsermoe">
+        <?php $this->head() ?>
+    </head>
+    <body class="homepage">
+    <?php $this->beginBody() ?>
+
+        <div id="wrapper">
+            <?php echo $content ?>
+        </div>
+
+    <?php $this->endBody() ?>
+    </body>
+</html>
+<?php $this->endPage() ?>
+';
+    }
+    
+    private function renderCmsLayout()
+    {
+        return '<?= $placeholders[\'content\'] ?>';
     }
 }
