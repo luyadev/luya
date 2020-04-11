@@ -1,8 +1,6 @@
 # OpenAPI Generator
 
-> WIP!
-
-> This feature is still in Beta and only available when LUYA Admin Module 3.2 is installed.
+> WIP: This feature is still in Beta and only available when LUYA Admin Module 3.2 is installed.
 
 Since version 3.2 of LUYA Admin Module an OpenAPI file generator is available. The generator creates a JSON OpenAPI Defintion based on all REST UrlRules and routes provided with ControllerMap.
 
@@ -65,3 +63,19 @@ The `actionTest()` requires an param `$id` and will return a {{luya\admin\models
 ![OpenAPI Custom Action](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/openapi-custom-action.png "OpenAPI Custom Action")
 
 When Parsing ActiveRecords the `@property` values of a class will be interpreted as well as `attributeLabels()` and `attributeHints()`.
+
+## OpenAPI Client
+
+In order to consum the OpenAPI trough OpenAPI Client you have to turn off {{luya\admin\Module::$jsonCruft}} behavior in the {{luya\Config}} for the Admin Module:
+
+```php
+ 'admin' => [
+    'class' => 'luya\admin\Module',
+    'jsonCruft' => false,
+    // ...
+ ]
+```
+
+Currently test client generators:
+
++ https://github.com/janephp/janephp
