@@ -124,6 +124,30 @@ class ThemeController extends \luya\console\Command
         return Json::encode($themeConfig->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
     
+    /**
+     * @param $input
+     * @param $error
+     *
+     * @return bool
+     */
+    private function validateParentTheme($input, &$error)
+    {
+        if (!preg_match('/^@[a-z]+$/', $input)) {
+            $error = 'The theme name must be only letter chars!';
+            return false;
+        } elseif (Yii::getAlias($input, false) === false) {
+            $error = 'The theme base path not exists!';
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /**
+     * @param $themeName
+     *
+     * @return string
+     */
     private function renderAssetClass($themeName)
     {
         $className = ucfirst($themeName) . 'Asset';
@@ -140,19 +164,11 @@ class {$className} extends Asset
 }";
     }
     
-    private function validateParentTheme($input, &$error)
-    {
-        if (!preg_match('/^@[a-z]+$/', $input)) {
-            $error = 'The theme name must be only letter chars!';
-            return false;
-        } elseif (Yii::getAlias($input, false) === false) {
-            $error = 'The theme base path not exists!';
-            return false;
-        }
-        
-        return true;
-    }
-    
+    /**
+     * @param $themeName
+     *
+     * @return string
+     */
     private function renderLayout($themeName)
     {
         $className = ucfirst($themeName) . 'Asset';
@@ -174,7 +190,6 @@ $this->beginPage();
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="author" content="boehsermoe">
         <?php $this->head() ?>
     </head>
     <body class="homepage">
@@ -191,6 +206,9 @@ $this->beginPage();
 ';
     }
     
+    /**
+     * @return string
+     */
     private function renderCmsLayout()
     {
         return '<?= $placeholders[\'content\'] ?>';
