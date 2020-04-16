@@ -115,15 +115,16 @@ The i18n fields will be saved as JSON with a string entry for every CMS language
 
 Sometimes you want to define fields which are not part of the ActiveRecord model and are not part of the database table, e. g. you want to display a count of registered users on the CRUD list. To achieve this you may use the `extraFields` principal combined with the {{yii\base\BaseObject}} getter/setter information.
 
+Extra fields require:
+
++ A getter method. `getRegisteredCount()`
++ A defintion entry in {{\luya\admin\ngrest\base\NgRestModel::ngRestExtraAttributeTypes()}}. `'registeredCount' => 'number'`
++ A validation rule assigned to the attribute name using {{\luya\admin\ngrest\base\NgRestModel::rules()}}.  `['registeredCount', 'safe']`
+
 ```php
 public function getRegisteredCount()
 {
     return Users::find()->count();
-}
-
-public function extraFields()
-{
-    return ['registeredCount'];
 }
 ```
 
@@ -138,7 +139,9 @@ public function ngRestExtraAttributeTypes()
 }
 ```
 
-Now the only thing you have to do is to add the field to the {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes()}} definition.
+> The `ngRestExtraAttributeTypes()` defined attributes will be automatically added to {{luya\luya\admin\ngrest\base\NgRestModel::extraFields()}}.
+
+In order to work with this new defined extraibue pass the extra to the {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes()}} definition.
 
 ```php
 public function ngRestScopes($)
@@ -149,6 +152,8 @@ public function ngRestScopes($)
     ];
 }
 ```
+
+Its also required to add a validation rule using {{\luya\admin\ngrest\base\NgRestModel::rules()}} for the given attribute, as all attributes defined in {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes()}} will be looked up in the list of {{\luya\admin\ngrest\base\NgRestModel::rules()}}.
 
 #### Extra Attribute without Value
 
