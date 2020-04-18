@@ -14,7 +14,8 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: root
           MYSQL_DATABASE: myapp_test
         ports:
           - 3306:3306
@@ -53,7 +54,7 @@ jobs:
         run: composer update $DEFAULT_COMPOSER_FLAGS
 
       - name: Setup Test DB
-        run: mysql -u root myapp_test < tests/data/sql/1.0.0.sql
+        run: mysql -u root -ppassword myapp_test < tests/data/sql/1.0.0.sql
 
       - name: PHP Unit tests for PHP 
         run: vendor/bin/phpunit --verbose --configuration travis.phpunit.xml
