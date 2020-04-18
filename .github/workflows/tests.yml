@@ -48,8 +48,12 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
+
       - name: Install dependencies
         run: composer update $DEFAULT_COMPOSER_FLAGS
+
+      - name: Setup Test DB
+        run: mysql -u root myapp_test < tests/data/sql/1.0.0.sql
 
       - name: PHP Unit tests for PHP 
         run: vendor/bin/phpunit --verbose --configuration travis.phpunit.xml
