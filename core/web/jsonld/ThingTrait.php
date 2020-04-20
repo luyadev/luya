@@ -257,4 +257,30 @@ trait ThingTrait
         $this->_url = $url->getValue();
         return $this;
     }
+
+    private $_offers;
+
+    /**
+     * Set Offer
+     *
+     * @param Offer $offer
+     * @since @since 1.2.2
+     * @return static
+     */
+    public function setOffers(Offer $offers)
+    {
+        $this->_offers = $offers;
+        return $this;
+    }
+
+    /**
+     * Get Offer
+     *
+     * @return Offer
+     * @since 1.2.2
+     */
+    public function getOffers()
+    {
+        return $this->_offers;
+    }
 }
