@@ -34,6 +34,7 @@ use luya\web\jsonld\GeoCoordinates;
 use luya\web\jsonld\PriceValue;
 use luya\web\jsonld\Review;
 use luya\web\jsonld\RangeValue;
+use yii\base\InvalidConfigException;
 
 class JsonLdTest extends ConsoleApplicationTestCase
 {
@@ -413,6 +414,12 @@ class JsonLdTest extends ConsoleApplicationTestCase
             '@type' => 'Restaurant'
 
         ], $r->toArray());
+    }
+
+    public function testInvalidCurrencyValue()
+    {
+        $this->expectException(InvalidConfigException::class);
+        new CurrencyValue('CH');
     }
 
     public function testOffers()
