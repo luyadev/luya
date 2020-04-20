@@ -1,6 +1,7 @@
 <?php
 namespace luyatests\core\web;
 
+use luya\testsuite\cases\ConsoleApplicationTestCase;
 use luya\web\jsonld\Article;
 use luya\web\jsonld\BlogPosting;
 use luya\web\jsonld\CreativeWork;
@@ -30,11 +31,20 @@ use luya\web\jsonld\CurrencyValue;
 use luya\web\jsonld\FoodEstablishment;
 use luya\web\jsonld\Restaurant;
 use luya\web\jsonld\GeoCoordinates;
+use luya\web\jsonld\PriceValue;
 use luya\web\jsonld\Review;
 use luya\web\jsonld\RangeValue;
 
-class JsonLdTest extends \luyatests\LuyaConsoleTestCase
+class JsonLdTest extends ConsoleApplicationTestCase
 {
+    public function getConfigArray()
+    {
+        return [
+           'id' => 'mytestapp',
+           'basePath' => dirname(__DIR__),
+        ];
+    }
+    
     public function testAssignView()
     {
         Jsonld::addGraph(['foo' => 'bar']);
@@ -51,9 +61,11 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
     public function testBaseThingGetters()
     {
         $thing = (new Thing());
-        $same = ['name', 'additionalType', 'alternateName', 'description', 'disambiguatingDescription', 'identifier', 'image', 'mainEntityOfPage', 'sameAs', 'subjectOf', 'url'];
+        $same = ['name', 'additionalType', 'alternateName', 'description', 'offers', 'disambiguatingDescription', 'identifier', 'image', 'mainEntityOfPage', 'sameAs', 'subjectOf', 'url'];
         sort($same);
-        $this->assertSame($same, $thing->resolveGetterMethods());
+        $r = $thing->resolveGetterMethods();
+        sort($r);
+        $this->assertSame($same, $r);
     }
 
     /**
@@ -401,5 +413,24 @@ class JsonLdTest extends \luyatests\LuyaConsoleTestCase
             '@type' => 'Restaurant'
 
         ], $r->toArray());
+    }
+
+    public function testOffers()
+    {
+        $o = (new Offer())
+            ->setOffers(
+                (new Offer())
+                    ->setPrice(new PriceValue('12,34'))
+                    ->setPriceCurrency(new CurrencyValue('CHF'))
+            );
+
+        $this->assertSame([
+            'offers' => [
+                'price' => '12.34',
+                'priceCurrency' => 'CHF',
+                '@type' => 'Offer',
+            ],
+            '@type' => 'Offer'
+        ], $o->toArray());
     }
 }
