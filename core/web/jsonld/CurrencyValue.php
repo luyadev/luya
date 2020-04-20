@@ -2,6 +2,8 @@
 
 namespace luya\web\jsonld;
 
+use yii\base\InvalidConfigException;
+
 /**
  * The currency accepted.
  *
@@ -17,11 +19,15 @@ class CurrencyValue extends BaseValue
 
     public function __construct($currency)
     {
+        if (strlen($currency) !== 3) {
+            throw new InvalidConfigException("The currency value must have 3 letter code like USD, CHF. Value \"{$currency}\" given.");
+        }
+        
         $this->_currency = $currency;
     }
 
     public function getValue()
     {
-        return $this->_currency;
+        return strtoupper($this->_currency);
     }
 }
