@@ -219,5 +219,7 @@ EOT;
         $this->assertTrue(StringHelper::filterMatch('hello', 'HELLO'));
         $this->assertTrue(StringHelper::filterMatch('hello', 'he*'));
         $this->assertFalse(StringHelper::filterMatch('hello', ['foo', 'bar']));
+        $this->assertFalse(StringHelper::filterMatch('hello', '!hello'));
+        $this->assertFalse(StringHelper::filterMatch('hello', '!hello', 'hello'));
     }
 }
