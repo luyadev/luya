@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.3.0
+
++ [#2016](https://github.com/luyadev/luya/pull/2016) Filter Match function.
+
 ## 1.2.2 (20. April 2020)
 
 + [#2011](https://github.com/luyadev/luya/pull/2011) Update theme create command to work on Windows
