@@ -212,4 +212,12 @@ EOT;
             5 => 'я',
         ], StringHelper::mb_str_split('Маруся'));
     }
+
+    public function testMatchFilter()
+    {
+        $this->assertTrue(StringHelper::filterMatch('hello', 'hello'));
+        $this->assertTrue(StringHelper::filterMatch('hello', 'HELLO'));
+        $this->assertTrue(StringHelper::filterMatch('hello', 'he*'));
+        $this->assertFalse(StringHelper::filterMatch('hello', ['foo', 'bar']));
+    }
 }

@@ -41,7 +41,9 @@ class StringHelper extends BaseStringHelper
     }
     
     /**
-     * Checke whether a strings starts with the wildcard symbole and compares the string before the wild card symbol *
+     * String Wildcard Check.
+     * 
+     * Checks whether a strings starts with the wildcard symbole and compares the string before the wild card symbol *
      * with the string provided, if there is NO wildcard symbold it always return false.
      *
      *
@@ -58,6 +60,82 @@ class StringHelper extends BaseStringHelper
         }
         
         return self::startsWith($string, rtrim($with, '*'), $caseSensitive);
+    }
+
+
+
+    /**
+     * See if filter conditions match the given value.
+     * 
+     * Example filter conditions:
+     *
+     * + "cms_*" include only cms_* tables
+     * + "cms_*,admin_*" include only cms_* and admin_* tables
+     * + "!cms_*" exclude all cms_* tables
+     * + "!cms_*,!admin_*" exclude all cms_*and admin_* tables
+     * + "cms_*,!admin_*" include all cms_* tables but exclude all admin_* tables
+     *
+     * Only first match is relevant:
+     * 
+     * + "cms_*,!admin_*,admin_*" include all cms_* tables but exclude all admin_* tables (last match has no effect)
+     * + "cms_*,admin_*,!admin_*" include all cms_* and admin_* tables (last match has no effect)
+     * 
+     * Example using condition string:
+     * 
+     * ```php
+     * filterMatch('hello', 'he*'); // true
+     * filterMatch('hello', 'ho,he*'); // true
+     * filterMatch('hello', ['ho', 'he*']); // true
+     * ```
+     *
+     * @param $value The value on which the filter conditions should be applied on.
+     * @param array|string $filters An array of filter conditions, if a string is given he will be exploded by commas.
+     * @param boolean $caseSensitive Whether to match value even when lower/upper case is not correct/same.
+     * @return bool True if table can be skipped.
+     * @since 1.3.0
+     */
+    public static function filterMatch($value, $conditions, $caseSensitive = true)
+    {
+        if (is_scalar($conditions)) {
+            $conditions = self::explode($conditions, ",", true, true);
+        }
+
+        foreach ($conditions as $condition) {
+            $isMatch = true;
+            // negate
+            if (substr($condition, 0, 1) == "!") {
+                $isMatch = false;
+                $condition = substr($condition, 1);
+            }
+            if ($caseSensitive) {
+                $condition = strtolower($condition);
+                $value = strtolower($value);
+            }
+            if ($condition == $value || self::startsWithWildcard($value, $condition)) {
+                return $isMatch;
+            }
+        }
+
+        return false;
+        /*
+        $skip = true;
+
+        foreach ($filters as $filter) {
+            $exclude = false;
+            if (substr($filter, 0, 1) == "!") {
+                $exclude = true;
+                $skip = false;
+
+                $filter = substr($filter, 1);
+            }
+            
+            if ($filter == $tableName || StringHelper::startsWithWildcard($tableName, $filter)) {
+                return $exclude;
+            }
+        }
+
+        return $skip;
+        */
     }
     
     /**
