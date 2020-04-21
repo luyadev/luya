@@ -69,11 +69,11 @@ class StringHelper extends BaseStringHelper
      * 
      * Example filter conditions:
      *
-     * + "cms_*" include only cms_* tables
-     * + "cms_*,admin_*" include only cms_* and admin_* tables
-     * + "!cms_*" exclude all cms_* tables
-     * + "!cms_*,!admin_*" exclude all cms_*and admin_* tables
-     * + "cms_*,!admin_*" include all cms_* tables but exclude all admin_* tables
+     * + `cms_*` matches everything starting with "cms_".
+     * + `cms_*,admin_*` matches booth cms_* and admin_* tables.
+     * + `!cms_*` matches all not start with "cms_"
+     * + `!cms_*,!admin_*` matches all not starting with "cms_" and not starting with "admin_"
+     * + `cms_*,!admin_*` matches all start with "cms_" but not start with "admin_"
      *
      * Only first match is relevant:
      * 
@@ -91,7 +91,7 @@ class StringHelper extends BaseStringHelper
      * @param $value The value on which the filter conditions should be applied on.
      * @param array|string $filters An array of filter conditions, if a string is given he will be exploded by commas.
      * @param boolean $caseSensitive Whether to match value even when lower/upper case is not correct/same.
-     * @return bool True if table can be skipped.
+     * @return bool Returns true if one of the given filter conditions matches.
      * @since 1.3.0
      */
     public static function filterMatch($value, $conditions, $caseSensitive = true)
@@ -117,25 +117,6 @@ class StringHelper extends BaseStringHelper
         }
 
         return false;
-        /*
-        $skip = true;
-
-        foreach ($filters as $filter) {
-            $exclude = false;
-            if (substr($filter, 0, 1) == "!") {
-                $exclude = true;
-                $skip = false;
-
-                $filter = substr($filter, 1);
-            }
-            
-            if ($filter == $tableName || StringHelper::startsWithWildcard($tableName, $filter)) {
-                return $exclude;
-            }
-        }
-
-        return $skip;
-        */
     }
     
     /**
