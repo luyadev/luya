@@ -15,6 +15,16 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: ['7.0', '7.1', '7.2', '7.3', '7.4']
+      
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: myapp_test
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       ## checkout the repoistory 
@@ -32,6 +42,12 @@ jobs:
       ## install composer
       - name: Install dependencies
         run: composer install $DEFAULT_COMPOSER_FLAGS
+
+      ## inject database
+      - name: Setup database
+        run: |
+          mysql -e 'create database myapp_test;'
+          mysql -u root myapp_test < tests/data/sql/1.0.0.sql 
 
       ## run unit tests
       - name: PHP Unit tests for PHP 
