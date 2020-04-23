@@ -24,7 +24,7 @@ jobs:
           MYSQL_USER: root
           MYSQL_DATABASE: myapp_test
         ports:
-            - 3306
+          - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -46,7 +46,6 @@ jobs:
 
       ## inject database
       - name: Setup database
-        uses: actions/checkout@v1
         run: |
           sudo /etc/init.d/mysql start
           mysql -h 127.0.0.1 -u root myapp_test < tests/data/sql/1.0.0.sql 
