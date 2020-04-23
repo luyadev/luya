@@ -21,6 +21,7 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_USER: root
           MYSQL_DATABASE: myapp_test
         ports:
           - 3306
@@ -46,6 +47,7 @@ jobs:
       ## inject database
       - name: Setup database
         run: |
+          sudo systemctl start mysql
           mysql -e 'create database myapp_test;'
           mysql -u root myapp_test < tests/data/sql/1.0.0.sql 
 
