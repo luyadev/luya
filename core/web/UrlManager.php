@@ -85,6 +85,11 @@ class UrlManager extends \yii\web\UrlManager
         
         $parsedRequest = parent::parseRequest($request);
 
+        // if [[enablePrettyUrl]] is `false`. `false` is returned if the current request cannot be successfully parsed.
+        if ($parsedRequest === false) {
+            return false;
+        }
+
         // ensure if the parsed route first match equals the composition pattern.
         // This can be the case when composition is hidden, but not default language is loaded and a
         // url composition route is loaded!
