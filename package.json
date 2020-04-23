@@ -16,7 +16,7 @@
     "karma-safari-launcher": "^1.0.0"
   },
   "scripts": {
-      "test": "karma start travis.karma.conf.js",
+      "test": "karma start actions.karma.conf.js",
       "dev": "karma start karma.conf.js"
   }
 }

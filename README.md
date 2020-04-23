@@ -5,7 +5,7 @@
 The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-core/v/stable)](https://packagist.org/packages/luyadev/luya-core)
-[![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
+![Tests](https://github.com/luyadev/luya/workflows/Tests/badge.svg)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ef6b66d505ccf0b731b5/test_coverage)](https://codeclimate.com/github/luyadev/luya/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ef6b66d505ccf0b731b5/maintainability)](https://codeclimate.com/github/luyadev/luya/maintainability)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
