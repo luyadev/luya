@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.3.0
 
++ [#2014](https://github.com/luyadev/luya/pull/2014) Replace Travis-CI with GitHub Actions, fix PHP 7.4 compatibility issue.
 + [#2016](https://github.com/luyadev/luya/pull/2016) Filter Match function.
 
 ## 1.2.2 (20. April 2020)
