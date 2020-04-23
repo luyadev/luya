@@ -75,21 +75,11 @@ jobs:
   npm:
     name: Node
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [8.x, 10.x, 12.x]
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: sudo apt-get install xvfb
-      - run: export DISPLAY=:99.0
+      - uses: actions/checkout@v1
       - run: yarn
-      - run: yarn test
-        env:
-          CI: true
+      - run: sudo apt-get install xvfb
+      - run: xvfb-run --auto-servernum yarn test
 
   ## headless
   headless:
@@ -115,10 +105,10 @@ jobs:
         # NOTE: this pins the action to a specific commit sha for security
         # reasons but you can also use a version tag if desired. For example:
         # ianwalter/puppeteer@3.0.0
-        uses: ianwalter/puppeteer@12728ddef82390d1ecd4732fb543f62177392fbb
+        uses: ianwalter/puppeteer@3.0.0
         with:
           args: yarn
       - name: Test
-        uses: ianwalter/puppeteer@12728ddef82390d1ecd4732fb543f62177392fbb
+        uses: ianwalter/puppeteer@3.0.0
         with:
           args: yarn test
