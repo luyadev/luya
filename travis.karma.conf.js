@@ -58,7 +58,7 @@ module.exports = function(config) {
         customLaunchers: {
             InsecureChrome: {
                 base: 'Chrome',
-                flags: ['--autoplay-policy=no-user-gesture-required', '--disable-web-security', '--disable-site-isolation-trials', '--no-sandbox']
+                flags: ['--autoplay-policy=no-user-gesture-required', '--disable-web-security', '--disable-site-isolation-trials']
             }
         }
     });
