@@ -48,7 +48,7 @@ class TranslationController extends BaseDevCommand
 
         foreach ($messageFiles as $messageFile) {
             $content = file_get_contents($messageFile);
-            $newContent = preg_replace("/(\];)/", "\t'$key' => '$text',\n$1", $content);
+            $newContent = preg_replace("/(\];)/", "    '$key' => '$text',\n$1", $content);
 
             if (!$this->dry) {
                 file_put_contents($messageFile, $newContent);

@@ -267,6 +267,39 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $comp = new Composition($request);
         $this->assertTrue($comp->isHostAllowed(['localhost']));
     }
+
+    public function testMultipleWildcardAllowedHosts()
+    {
+        $request = new Request();
+        $request->hostInfo = 'https://www.luya.io';
+        $this->assertSame($request->hostName, 'www.luya.io');
+        $comp = new Composition($request);
+        $this->assertFalse($comp->isHostAllowed(['luya.io']));
+
+        $this->assertTrue($comp->isHostAllowed(['*luya.io']));
+        $this->assertTrue($comp->isHostAllowed(['*.luya.io']));
+
+        // should be false as www. does not exitss
+        $request = new Request();
+        $request->hostInfo = 'https://luya.io';
+        $this->assertSame($request->hostName, 'luya.io');
+        $comp = new Composition($request);
+        $this->assertFalse($comp->isHostAllowed(['*.luya.io']));
+    }
+
+    public function testAllowedHostsPreviewDomainWildcard()
+    {
+        $commonPreviewUrls = 'https://luya.io.12-34-45-67.example.com';
+        $request = new Request();
+        $request->hostInfo = $commonPreviewUrls;
+        $this->assertSame($request->hostName, 'luya.io.12-34-45-67.example.com');
+        $comp = new Composition($request);
+        $this->assertFalse($comp->isHostAllowed(['luya.io']));
+        $this->assertFalse($comp->isHostAllowed(['*luya.io']));
+        $this->assertTrue($comp->isHostAllowed(['luya.io*']));
+        $this->assertFalse($comp->isHostAllowed(['example.com']));
+        $this->assertTrue($comp->isHostAllowed(['*.example.com']));
+    }
     
     public function testAllowedHostsItems()
     {

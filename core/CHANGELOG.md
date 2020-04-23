@@ -1,9 +1,88 @@
 # LUYA CORE CHANGELOG
 
-All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
+All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
+In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.19 (in progress)
+## 1.3.0
 
++ [#2014](https://github.com/luyadev/luya/pull/2014) Replace Travis-CI with GitHub Actions, fix PHP 7.4 compatibility issue.
++ [#2016](https://github.com/luyadev/luya/pull/2016) Filter Match function.
+
+## 1.2.2 (20. April 2020)
+
++ [#2011](https://github.com/luyadev/luya/pull/2011) Update theme create command to work on Windows
++ [#2009](https://github.com/luyadev/luya/pull/2009) Improve the performance of mb_str_split, this will strongly improve the speed when working with LUYA crawler result previews.
++ [#2012](https://github.com/luyadev/luya/pull/2012) Extend the create theme cli command with assets.
++ [#2015](https://github.com/luyadev/luya/pull/2015) JsonLd Offers information added.
+
+## 1.2.1 (7. April 2020)
+
++ [#2008](https://github.com/luyadev/luya/pull/2008) Default values for JsonBehavior was wrong declared, expected is the opposite way 1. array as validation rule, 2. auto decode data after find.
+
+## 1.2.0 (7. April 2020)
+
++ [#2003](https://github.com/luyadev/luya/pull/2003) Add new `StringHelper::isNumeric()` which checks whether a value is nummeric (with regex instead of `is_numeric`) or not.
++ [#2004](https://github.com/luyadev/luya/pull/2004) Make impoter public in order to improve setting up unit tests and option to override in controller map configuration.
++ [#1970](https://github.com/luyadev/luya/issues/1970) Fixed a bug with relative theme paths.
++ [#2007](https://github.com/luyadev/luya/pull/2007) Fixed a bug in JsonBehavior and added new properties for auto decoding data after find.
+
+## 1.1.0 (12. March 2020)
+
++ [Admin#464](https://github.com/luyadev/luya-module-admin/issues/464) The `luya\traits\ApplicationTrait::setLocale()` does not change the `Yii::$app->language` value as before. In order to change the application language use `Yii::$app->language` directly.
++ [#1995](https://github.com/luyadev/luya/issues/1998) The `luya\web\Asset` defines a default `$sourcePath` when value is `null`. The default path is relativ to its file location `<FILE_LOCATION>/resources/<ASSET_NAME>`.
++ [#1993](https://github.com/luyadev/luya/pull/1993) Added new Text to Speech Widget `luya\texttospeech\TextToSpeechWidget`.
++ Added Karma tests to Travis.
+
+## 1.0.26 (20. February 2020)
+
++ [#1987](https://github.com/luyadev/luya/issues/1987) Fix bug with closures in `luya\Config` application and bootstrap section.
+
+## 1.0.25 (7. January 2020)
+
++ [#1982](https://github.com/luyadev/luya/pull/1982) New `PhoneNumberValidator` to validate Phone Numbers and standardized the format.
++ [#1981](https://github.com/luyadev/luya/pull/1981) Add `appendQuery()` and `appendQueryTourl()` function to Url Helper. The append method will add a given key value query param to the current url or any url.
++ [#1986](https://github.com/luyadev/luya/pull/1986) Corrected the event triggering while the theme setup
+
+## 1.0.24 (9. December 2019)
+
++ [#1980](https://github.com/luyadev/luya/pull/1980) Added `ArrayHelper::search()` keys option to search only in certain array keys.
++ [#1969](https://github.com/luyadev/luya/pull/1969) Fixed exception handling while loading empty theme directories.
++ [#1977](https://github.com/luyadev/luya/pull/1977) Added new `ArrayHelper::combine()` method to generate an array with the same keys and values.
++ [#1977](https://github.com/luyadev/luya/pull/1978) Added support for ActiveForm context to SubmitButtonWidget. Supporting multi form (including pjax) on same page.
+
+## 1.0.23 (27. November 2019)
+
++ [#1975](https://github.com/luyadev/luya/pull/1975) Added new luya\Config `callback(fn)` function to run define('YII_DEBUG', true) commands.
++ [#1974](https://github.com/luyadev/luya/issues/1974) Register module components in bootstrap section before run luyaBootstrap method.
++ [#1971](https://github.com/luyadev/luya/issues/1971) Add opcache reset to health command.
+
+## 1.0.22 (22. October 2019)
+
++ [#1967](https://github.com/luyadev/luya/pull/1967) New `corsConfig` option for Application in order to set application wide cors settings.
++ [#1964](https://github.com/luyadev/luya/pull/1964) Ensure console commands can return none scalar values to debug or prinit.
++ [#1962](https://github.com/luyadev/luya/issues/1962) Fix problem with first stack trace informations not containing line and file informations.
++ [#1963](https://github.com/luyadev/luya/pull/1963) Fix for theme bootstraping and layout loading.
+
+## 1.0.21 (9. September 2019)
+
++ [#1956](https://github.com/luyadev/luya/issues/1956) Ensure a not existing package installer config value `installer.php` won't throw an exception.
++ [#1947](https://github.com/luyadev/luya/issues/1947) Whiteliste more exception which should not be transmitted to error API.
++ [#1772](https://github.com/luyadev/luya/issues/1772) Add new `luya\Config` to generate configuration builds depending on console or web runtime.
++ [#1950](https://github.com/luyadev/luya/issues/1950) Fixed bug in Export Helper when dealing with special chars.
++ [#1942](https://github.com/luyadev/luya/issues/1942) Use phpmailers `setFrom()` method instead of `$from` and `$fromName` property.
++ [#340|admin](https://github.com/luyadev/luya-module-admin/issues/340) Allow extending the auth methods in rest behavior trait.
++ [#1916](https://github.com/luyadev/luya/issues/1916) Extended LUYA Core with a mechanism to load and handle themes.
++ [#1938](https://github.com/luyadev/luya/issues/1938) Added `luyaBootstrap($app)` method to base module. When the application starts, all LUYA modules will be initialized and therefore will call the `luyaBootstrap($app)` method.
+
+## 1.0.20 (5. August 2019)
+
++ [#1940](https://github.com/luyadev/luya/issues/1940) Add Url helper methods `cleanHost()` and `domain()`.
++ [#1939](https://github.com/luyadev/luya/issues/1939) Added new informations to error transfer to api.
++ [#1941](https://github.com/luyadev/luya/issues/1941) Added new REST Helper method to send errors from a model or an array.
+
+## 1.0.19 (22. July 2019)
+
++ [#1931](https://github.com/luyadev/luya/issues/1931) Fixed issue with relativ paths in link tag.
 + [#1927](https://github.com/luyadev/luya/issues/1927) New check whether console command is running in console application context.
 + [#1925](https://github.com/luyadev/luya/issues/1925) Add new actions and controller retrieve options in object helper.
 + [#1929](https://github.com/luyadev/luya/pull/1930) Added JsonLd service and intangible

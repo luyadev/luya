@@ -6,7 +6,7 @@ All dashboard objects are defined inside the {{luya\admin\base\Module::$dashboar
 
 ## Predefined dashboards
 
-You can choose from predefined dashboard objects which are pretty easy to implement:
+You can choose from predefined dashboard objects which provides predefined styles to render:
 
 + {{luya\admin\dashboard\BasicDashboardObject}}
 + {{luya\admin\dashboard\TableDashboardObject}}

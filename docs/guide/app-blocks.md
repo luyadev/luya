@@ -2,6 +2,8 @@
 
 Blocks are elements used in the CMS module to display and configure data. Blocks are dropped into the placeholders of a [CMS Layout](app-cmslayouts.md). An example of a block could be a paragraph tag where the user can add the content. LUYA CMS module is shipped with some default blocks, but you can create your own elements.
 
+![Block Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/block-admin.png "Block Admin")
+
 ## Create a new block
 
 > use `./vendor/bin/luya cms/block/create` console command to generate a Block.
@@ -177,11 +179,12 @@ $propObject = $this->getEnvOption('pageObject')->nav->getProperty('myCustomPrope
 
 If there is a property defined you will get the property object otherwise returning `false`.
 
-> Since LUYA cms module 1.1 `$appView` is deprecated, use `$this` instead!
-
-## Using assets in blocks
+## Register Assets and JavaScript/CSS
 
 Sometimes your block should also register some css or js files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
+
+
+> Since LUYA CMS version 1.1 `$appView` is deprecated, use `$this` instead!
 
 Assuming the below code is the PHP View of your Block:
 
@@ -189,21 +192,25 @@ Assuming the below code is the PHP View of your Block:
 MyBlockAsset::register($this);
 ```
 
-Now your [[app-assets.md]] is registered in the application view object.
+Now the [[app-assets.md]] is registered in the application view object.
 
-## Register JS or CSS in block View (inline)
+Its also possible to just register certain js or css code, there fore use `registerJs` or `registerCss` directly in the view files of the block.
 
-Sometimes your block needs to pass data to JS (or CSS). The easiest way to do that is to register your data in the blocks View file.
-
-### JS
+Registering some JS Code:
 
 ```php
 $this->registerJs("
-    var data = ['some', 'data'];
+    console.log('hello world');
 ");
 ```
 
-### CSS
+or register a variable
+
+```php
+$this->registerJsVar("foo", "bar"); // var foo = 'bar'
+```
+
+And for css inline styles use:
 
 ```php
 $this->registerCss("

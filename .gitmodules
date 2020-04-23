@@ -1,6 +1,0 @@
-[submodule "envs/dev/modules/luya-module-admin"]
-	path = envs/dev/modules/luya-module-admin
-	url = git://github.com/luyadev/luya-module-admin.git
-[submodule "envs/dev/modules/luya-module-cms"]
-	path = envs/dev/modules/luya-module-cms
-	url = git://github.com/luyadev/luya-module-cms.git

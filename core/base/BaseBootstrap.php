@@ -39,7 +39,7 @@ abstract class BaseBootstrap implements BootstrapInterface
         
         $this->extractModules($app);
         $this->beforeRun($app);
-        $this->registerComponents($app);
+        $this->startModules($app);
         $this->run($app);
         
         // end trace
@@ -97,11 +97,12 @@ abstract class BaseBootstrap implements BootstrapInterface
      *
      * @param object $app Luya Appliation `\luya\base\Application`.
      */
-    private function registerComponents($app)
+    private function startModules($app)
     {
         foreach ($this->getModules() as $id => $module) {
             // set an alias for all user modules
             Yii::setAlias('@'.$id, $module->getBasePath());
+
             // see if the module has a registerComponents method
             foreach ($module->registerComponents() as $componentId => $definition) {
                 if (!$app->has($componentId)) {
@@ -109,6 +110,8 @@ abstract class BaseBootstrap implements BootstrapInterface
                     $app->set($componentId, $definition);
                 }
             }
+
+            $module->luyaBootstrap($app);
         }
     }
 

@@ -29,171 +29,178 @@ This is how a standard LUYA kickstarter application hierarchy should look and wh
     └── layouts
 ```
 
-## Example configuration
+## Configurtion Files and Config Builder
 
 This is how a default config file (e.g. `configs/env-local.php` or `configs/env-prod.php`) would look like:
 
-```php
+> since version 1.0.21 of LUYA core the {{luya\Config}} is used to generate configs:
 
+```php
 define('YII_DEBUG', true);
 define('YII_ENV', 'prep');
 
-return [
-    
-    /*
-     * For best interoperability it is recommend to use only alphanumeric characters when specifying an application ID
-     */
-    'id' => 'myproject',
-    
-    /*
-     * The name of your site, will be display on the login screen
-     */
-    'siteTitle' => 'My Project',
-    
-    /*
-     * Let the application know which module should be executed by default (if no url is set). This module must be included 
-     * in the modules section. In the most cases you are using the cms as default handler for your website. But the concept
-     * of LUYA is also that you can use a website without the CMS module! 
-     */
+$config = new Config('testapp', dirname(__DIR__), [
+    'siteTitle' => 'My Test App',
     'defaultRoute' => 'cms',
-    
-    /*
-     * Define the basePath of the project (Yii Configration Setup)
-     */
-    'basePath' => dirname(__DIR__),
-    
-    'modules' => [
-        
-        /*
-         * If you have other administration module (e.g. cmsadmin) then you going to need this module. The Admin UI module provides
-         * a lot of functionalitiy like storage system etc. But the basic concept of LUYA is also that you can use LUYA without the
-         * admin module.
-         * 
-         * @secureLogin: (boolean) This will activated a two-way authentification method where u get a token sent by mail, for this feature
-         * you have to make sure the mail component is configured correctly, you can test with console command `./vendor/bin/luya health/mailer`.
-         */
-        'admin' => [
-            'class' => 'luya\admin\Module',
-            'secureLogin' => false, // when enabling secure login, the mail component must be proper configured otherwise the auth token mail will not send.
-            'interfaceLanguage' => 'en', // Set the administration area language. 
-        ],
-        
-        /*
-         * You can use the cms module if you like.
-         */
-        'cms' => [
-            'class' => 'luya\cms\frontend\Module',
-            'contentCompression' => true, // compressing the cms output (removing white spaces and newlines)
-        ],
-        
-        /*
-         * This is the administration module for the `cms` module.
-         */
-        'cmsadmin' => 'luya\cms\admin\Module',
-        
-    ],
-    'components' => [
-        
-        /*
-         * Add your smtp connection to the mail component to send mails (which is required for secure login), you can test your
-         * mail component with the luya console command ./vendor/bin/luya health/mailer.
-         */
-        'mail' => [
-            'host' => null,
-            'username' => null,
-            'password' => null,
-            'from' => null,
-            'fromName' => null,
-        ],
-
-        /*
-         * ATTENTION:
-         * To help us improve our Software you can enable (true) this property to send all Exceptions directly to the luya developer team. The follwing informations will be transfered:
-         * - $_GET, $_POST
-         * - Exception Object (inlcuding stack trace, line, linenr, message, file)
-         *
-         * You can also create your own errorapi (zehir/luya-modul-errorapi) module to get notification
-         * about the errors from your projects.
-         */
-        'errorHandler' => [
-            'transferException' => false,
-        ],
-        
-        /*
-         * The composition component handles your languages and they way your urls will look like. The composition components will
-         * automatically add the language prefix wich is defined in `default` to your url (the language part in the url, f.e. "yourdomain.com/en/homepage").
-         * 
-         * hidden: (boolean) If this website is not multi lingual you can hide the composition, other whise you have to enable this.
-         */
-        'composition' => [
-            'hidden' => true, // no language in your url (most case for pages which are not multilingual)
-            'default' => ['langShortCode' => 'en'], // the default language for the composition should match your default language shortCode in the langauge table.
-        ],
-        
-        /*
-         * If cache is enabled LUYA will cache cms blocks and speed up the system in different ways. In the prep config
-         * we use the DummyCache to imitate the caching behavior, but actually nothing gets cached. In production you should change to
-         * use caching which matches your hosting environment. In most cases yii\caching\FileCache will result in fast website.
-         * 
-         * http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-apis
-         */
-        'cache' => [
-            'class' => 'yii\caching\DummyCache', // use: yii\caching\FileCache
-        ],
-    ],
-    'bootstrap' => [
-        'cms',
-    ],
-];
-```
-
-## Production config
-
-In production we try to keep the configs as small as possible, there fore an example.
-
-> Notice that YII_DEBUG and YII_ENV is removed, as this by default the production ready setting, this allows us to keep the config small and clean.
-
-```php
-
-return [
-    'id' => 'myproject',
-    'siteTitle' => 'My Project',
-    'defaultRoute' => 'cms',
-    'basePath' => dirname(__DIR__),
     'modules' => [
         'admin' => [
             'class' => 'luya\admin\Module',
             'secureLogin' => true,
-            'interfaceLanguage' => 'en',
         ],
         'cms' => [
             'class' => 'luya\cms\frontend\Module',
         ],
-        'cmsadmin' => 'luya\cms\admin\Module',
+        'cmsadmin' => [
+            'class' => 'luya\cms\admin\Module',
+        ]
     ],
     'components' => [
-        'mail' => [
-            'host' => null,
-            'username' => null,
-            'password' => null,
-            'from' => null,
-            'fromName' => null,
-        ],
-        'errorHandler' => [
-            'transferException' => true,
-        ],
-        'composition' => [
-            'hidden' => true, 
-            'default' => ['langShortCode' => 'en'],
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'charset' => 'utf8',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache', // use: yii\caching\FileCache
+            'class' => 'yii\caching\FileCache',
+        ],
+        'composition' => [
+            'default' => [
+                'langShortCode' => 'en'
+            ],
+            'hidden' => true,
         ],
     ],
     'bootstrap' => [
         'cms',
-    ],
+    ]
+]);
+
+$config->component('db', [
+    'dsn' => 'mysql:host=LOCAL_HOST;dbname=LOCAL_NAME',
+    'username' => 'LOCAL_USER',
+    'password' => 'LOCAL_PW',
+])->env(Config::ENV_LOCAL);
+
+$config->component('db', [
+    'dsn' => 'mysql:host=PROD_HOST;dbname=PROD_NAME',
+    'username' => 'PROD_USER',
+    'password' => 'PROD_PW',
+])->env(Config::ENV_PROD);
+
+$config->webComponent('request', [
+    'cookieValidationKey' => 'XYZ',
+]);
+
+return $config;
+```
+
+As the `env.php` now recieves the Config object and won't be stored in git the enviroment to return can be choosen there:
+
+example content of `env.php`:
+
+```php
+$config = require 'config.php'; 
+
+return $config->toArray(\luya\Config::ENV_PROD);
+```
+
+## Configuration File for Console and Web
+
+Since the introduction of {{luya\Config}} its possible to set components for either console or web runtime, assuming you have `cookieValidationKey` in `request` component which is only valid on web runtime you can use {{luya\Config::webComponent()}} to register the component:
+
+```php
+$config->webComponent('request', [
+    'cookieValidationKey' => 'XYZ',
+]);
+```
+
+The same also works for console components:
+
+```php
+$config->consoleComponent('request', [
+    'params' => ['foo' => 'bar'],
+]);
+```
+
+You can even merge data from the component which works on both runtime systems:
+
+```php
+$config->component('request', [
+    'isConsoleRequest' => false,
+]);
+$config->webComponent('request', [
+    'cookieValidationKey' => 'XYZ',
+]);
+$config->consoleComponent('request', [
+    'params' => ['foo' => 'bar'],
+]);
+```
+
+// depending on console or web request would resolve:
+```php
+// on web runtime:
+'request' => [
+    'isConsoleRequest' => false,
+    'cookieValidationKey' => 'XYZ',
 ];
+
+// while on console runtime:
+'request' => [
+    'isConsoleRequest' => false,
+    'params' => ['foo' => 'bar'],
+];
+```
+
+## Configuration for different Environments
+
+As a key concept of LUYA is to Dont repeat yourself with {{luya\Config}} a configuration file for different hosts can be done in a single file using `env()`. Assuming a database connection which has different connection details on different hosts (prep and prod) define the {{yii\db\Connection}} as followed:
+
+```php
+$config->component('db', [
+     'class' => 'yii\db\Connection',
+     'dsn' => 'mysql:host=localhost;dbname=prod_db',
+    'username' => 'foo',
+    'password' => 'bar',
+])->env(Config::ENV_PREP);
+
+$config->component('db', [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=prod_db',
+    'username' => 'foo',
+    'password' => 'bar',
+])->env(Config::ENV_PROD);
+```
+
+You can also define multiple components in a environment block/scope.
+
+```php
+$config->env(Config::ENV_PREP, function(Config $config) {
+    $config->component('db', [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=localhost;dbname=prod_db',
+        'username' => 'foo',
+        'password' => 'bar',
+    ]);
+    $config->component('cache', [
+        'class' => 'yii\caching\DummyCache',
+    ]);
+});
+
+$config->env(Config::ENV_PROD, function(Config $config) {
+    $config->component('db', [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=localhost;dbname=prod_db',
+        'username' => 'foo',
+        'password' => 'bar',
+    ]);
+});
+```
+
+The `env.php` will receive the `$config` object and is then therefore responsible to correctly return the given env:
+
+```php
+$config = require 'config.php'; 
+
+return $config->toArray(\luya\Config::ENV_PROD);
 ```
 
 ## Create company wide config
@@ -304,7 +311,7 @@ So now there is no need to configure `errorHandler` or `mail` component, as its 
 
 The `public_html` folder is the root directory. It contains the application bootstrap file. If you want to reflect your web server directory structure, you can rename the `public_html` folder to whatever you want to. For example: `www` or `web`. You just need to update your configuration by adding the `webrootDirectory` config, f.e. it should look like this: `'webrootDirectory' => 'www'`
 
-## Composer - get latest development version
+## Composer latest LUYA development version
 
 In order to get latest development build (dev-master) for the LUYA modules and core your `composer.json` could look like this:
 
@@ -315,8 +322,6 @@ In order to get latest development build (dev-master) for the LUYA modules and c
         "luyadev/luya-module-admin" : "^1.0@dev",
         "luyadev/luya-module-cms" : "^1.0@dev",
         "luyadev/luya-module-crawler" : "^1.0@dev",
-        "luyadev/luya-module-payment" : "^1.0@dev",
-        "luyadev/luya-module-exporter" : "^1.0@dev",
         "luyadev/luya-deployer" : "^1.0@dev"
     },
     "require-dev" : {

@@ -103,7 +103,7 @@ In the traditional way you would have to run the action `actionComments` like fo
 
 ## Filtering
 
-Sometimes you need to have additional filtering methods for a given API requests. Assuming you'd like filter row for a given where condition, like groups you have to create a Filtering Model and declare the filter model in the API.
+Sometimes you need to have additional filtering methods for a given API requests, therefore {{yii\data\DataFilter}} is ussed.. Assuming you'd like filter row for a given where condition, like groups you have to create a Filtering Model and declare the filter model in the API.
 
 Define the filter model:
 
@@ -133,3 +133,102 @@ class MyApi extends luya\admin\ngrest\base\Api
 ```
 
 Now as you have declared the filtering model to the api, this allows you to use the `filter` param, assuming you d like to filter for a given group_id in the users lise there url would like this `my-api-filter?filter[group_id]=1`.
+
+The filter can also be part of the requested body, the body param should then start with `filter` as well:
+
+```json
+{
+    "filter": {"group_id":1}
+}
+```
+
+Complex and nested conditions are possible as well:
+
+```json
+{
+    "or": [
+        {
+            "and": [
+                {
+                    "name": "some name",
+                },
+                {
+                    "price": "25",
+                }
+            ]
+        },
+        {
+            "id": {"in": [2, 5, 9]},
+            "price": {
+                "gt": 10,
+                "lt": 50
+            }
+        }
+    ]
+}
+```
+
+#### A few example as json and http get param
+
+The following examples show filter requests for json body param or as get param. This helps to transform from json to http get param as its mostly harder to read and write.
+
+<table>
+<thead>
+<tr>
+<th>json</th>
+<th>get</th>
+</tr>
+</thead>
+
+<tr>
+<td>
+```json
+{
+    "filter": {"group_id":{"in": [1,2,3]}
+}
+```
+</td>
+<td>
+```
+filter[group_id][in][0]=1&filter[group_id][in][1]=2&filter[group_id][in][2]=4
+```
+</td>
+</tr>
+
+<tr>
+<td>
+```json
+{
+    "filter": {"group_id":{"gt":1}
+}
+```
+</td>
+<td>
+```
+filter[group_id][gt]=1
+```
+</td>
+</tr>
+
+<tr>
+<td>
+```json
+{
+    "filter": {
+        "or": [
+            {"name":"John"},
+            {"email":"john@doe.com"}
+        ]
+    }
+}
+```
+</td>
+<td>
+```
+filter[or][0][name]=John&filter[or][1][email]=john@doe.com
+```
+</td>
+</tr>
+</table>
+
+> In order to decode and test a get url use `urldecode(http_build_query(['filter' => [/*...*/]))`

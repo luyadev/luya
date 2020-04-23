@@ -1,0 +1,82 @@
+name: Tests
+
+on: [push, pull_request]
+
+env:
+  DEFAULT_COMPOSER_FLAGS: "--prefer-dist --no-interaction --ignore-platform-reqs"
+  PHPUNIT_EXCLUDE_GROUP: mssql,oci,wincache,xcache,zenddata,cubrid
+  CC_TEST_REPORTER_ID: e104088a64c54b2a68debe43e4600b48f53a73441e99449223a9fa08c070cf97
+jobs:
+
+  ## PHP UNIT
+  phpunit:
+    name: PHP ${{ matrix.php }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        php: ['7.1', '7.2', '7.3', '7.4']
+      
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_USER: root
+          MYSQL_DATABASE: myapp_test
+        ports:
+          - "8888:3306"
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      ## checkout the repoistory 
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      ## Install(?) php
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: apc, curl, dom, imagick, intl, mbstring, mcrypt, memcached, mysql, pdo, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql, sqlite
+          ini-values: date.timezone='UTC'
+
+      ## install composer
+      - name: Install dependencies
+        run: composer install $DEFAULT_COMPOSER_FLAGS
+
+      ## inject database
+      - name: Setup database
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -h 127.0.0.1 --port 8888 -u root myapp_test < tests/data/sql/1.0.0.sql 
+
+      ## run unit tests
+      - name: PHP Unit tests for PHP 
+        run: vendor/bin/phpunit --verbose --configuration actions.phpunit.xml
+        if: matrix.php == '7.4' || matrix.php == '7.3' || matrix.php == '7.2' || matrix.php == '7.0'
+
+      ## unit test with coverage
+      - name: PHP Unit tests for PHP 7.1
+        run: vendor/bin/phpunit --verbose --coverage-clover=clover.xml --configuration actions.phpunit.xml
+        if: matrix.php == '7.1'
+
+      ## coverage
+      - name: Code coverage
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter after-build -t clover
+        if: matrix.php == '7.1'
+        continue-on-error: true # if is fork
+
+  ## NODE
+  npm:
+    name: Node
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: yarn
+      - run: sudo apt-get install xvfb
+      - run: xvfb-run --auto-servernum yarn test

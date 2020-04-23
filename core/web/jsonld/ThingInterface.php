@@ -130,4 +130,20 @@ interface ThingInterface
      * @return static
      */
     public function setUrl(UrlValue $url);
+
+    /**
+     * Set Offer
+     *
+     * @param Offer $offer
+     * @since 1.2.2
+     */
+    public function setOffers(Offer $offers);
+
+    /**
+     * Get Offer
+     *
+     * @return Offer
+     * @since 1.2.2
+     */
+    public function getOffers();
 }

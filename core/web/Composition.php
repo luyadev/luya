@@ -106,17 +106,21 @@ class Composition extends Component implements \ArrayAccess
      * @var array|string An array with all valid hosts in order to ensure the request host is equals to valid hosts.
      * This filter provides protection against ['host header' attacks](https://www.acunetix.com/vulnerabilities/web/host-header-attack).
      *
+     * The allowed hosts check does not care about the protocol (https/http), there fore take a look the {{luya\traits\ApplicationTrait::$ensureSecureConnection}}.
+     *
      * ```php
      * 'allowedHosts' => [
-     *     'example.com',
-     *     '*.example.com',
+     *     'example.com', // this does not include www.
+     *     '*.example.com', // this incluides www. and all other subdomains.
      * ]
      * ```
      *
-     * If null is defined, the allow host filtering is disabled, default value.
+     * > In order to allow all subdomains including www or not use `*example.com`.
+     *
+     * If no value is defined, the allowed host filtering is disable, this is the default behavior.
      * @since 1.0.5
      */
-    public $allowedHosts = null;
+    public $allowedHosts;
     
     /**
      * A list of values which are valid for every pattern. If set and a value is provided which is not inside this property
@@ -164,7 +168,7 @@ class Composition extends Component implements \ArrayAccess
         }
 
         if ($this->allowedHosts !== null && !$this->isHostAllowed($this->allowedHosts)) {
-            throw new ForbiddenHttpException("The current host '{$this->request->hostName}' is not in the list valid of hosts.");
+            throw new ForbiddenHttpException("Invalid host name.");
         }
         
         if (array_key_exists($this->request->hostInfo, $this->hostInfoMapping)) {
@@ -195,24 +199,24 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * Find the host for a given definition based on the {{Composition::$hostInfoMapping}} definition.
-     * 
+     *
      * Find the host info mapping (if existing) for a lang short code:
-     * 
+     *
      * ```php
      * $host = $composition->resolveHostInfo('en');
      * ```
-     * 
+     *
      * Or resolve by provide full host info mapping defintion:
-     * 
+     *
      * ```php
      * $host = $composition->resolveHostInfo([
      *     'langShortCode' => 'de'
      *     'countryShortCode' => 'ch',
      * ]);
      * ```
-     * 
+     *
      * > Keep in mind that when {{Composition::$hostInfoMapping}} is empty (no defintion), false is returned.
-     * 
+     *
      * @param string|array $defintion The hostinfo mapping config containing an array with full defintion of different keys or a string
      * which will only resolved based on langShortCode identifier.
      * @return string|boolean Returns the host name from the host info maping otherwise false if not found.
@@ -230,7 +234,7 @@ class Composition extends Component implements \ArrayAccess
             $results = ArrayHelper::searchColumns($results, $key, $value);
         }
 
-        return empty($results) ? false : key($results);;
+        return empty($results) ? false : key($results);
     }
 
     private $_keys;

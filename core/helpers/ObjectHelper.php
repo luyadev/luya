@@ -2,10 +2,12 @@
 
 namespace luya\helpers;
 
-use luya\Exception;
+use ReflectionClass;
 use ReflectionMethod;
+use luya\Exception;
 use yii\base\Controller;
 use luya\base\Module;
+use yii\base\InvalidParamException;
 
 /**
  * Helper methods when dealing with Objects.
@@ -20,10 +22,19 @@ class ObjectHelper
      *
      * ```php
      * $object = new \Exception();
-     * 
+     *
      * ObjectHelper::isInstanceOf($object, '\Exception');
      * ```
-     * 
+     *
+     * In order to check if an object is at least an instance of one given resourcese use:
+     *
+     * ```php
+     * ObjectHelper::isInstanceOf($object, ['not\this\Object', 'maybe\this\Object', '\Exception']);
+     * ```
+     *
+     * If at least one of the given exception names in the array is an instance of the given object, true
+     * is returned.
+     *
      * @param object $object The object to type check against haystack.
      * @param string|array|object $haystack A list of classes, a string for a given class, or an object.
      * @param boolean $throwException Whether an exception should be thrown or not.
@@ -55,18 +66,18 @@ class ObjectHelper
 
     /**
      * Check whether a given object contains a trait.
-     * 
+     *
      * ```php
      * trait XYZ {
-     * 
+     *
      * }
-     * 
+     *
      * class ABC {
      *    use XYZ;
      * }
-     * 
+     *
      * $object = new ABC();
-     * 
+     *
      * ObjectHelper::isTraitInstanceOf($object, XYZ::class);
      * ```
      *
@@ -185,7 +196,7 @@ class ObjectHelper
     public static function getActions(Controller $controller)
     {
         $actions = array_keys($controller->actions());
-        $class = new \ReflectionClass($controller);
+        $class = new ReflectionClass($controller);
         foreach ($class->getMethods() as $method) {
             $name = $method->getName();
             if ($name !== 'actions' && $method->isPublic() && !$method->isStatic() && strncmp($name, 'action', 6) === 0) {
@@ -206,20 +217,22 @@ class ObjectHelper
     public static function getControllers(Module $module)
     {
         $files = [];
+
         try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L253
-            foreach (FileHelper::findFiles($module->controllerPath) as $file) {
-                $files[self::fileToName($module->controllerPath, $file)] = $file;
+            if (is_dir($module->controllerPath)) {
+                foreach (FileHelper::findFiles($module->controllerPath) as $file) {
+                    $files[self::fileToName($module->controllerPath, $file)] = $file;
+                }
             }
         } catch (InvalidParamException $e) {
-            try {
-                $staticPath = $module::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
-                foreach (FileHelper::findFiles($staticPath) as $file) {
-                    $files[self::fileToName($staticPath, $file)] = $file;
-                }
-            } catch (InvalidParamException $e) {
-                // catch if folder not found.
-            }
         };
+
+        $staticPath = $module::staticBasePath() . DIRECTORY_SEPARATOR . 'controllers';
+        if (is_dir($staticPath)) {
+            foreach (FileHelper::findFiles($staticPath) as $file) {
+                $files[self::fileToName($staticPath, $file)] = $file;
+            }
+        }
         
         return $files;
     }

@@ -44,6 +44,10 @@ We recommend to enable {{luya\admin\Module::$secureLogin}} which will send you a
 ]
 ```
 
+Since admin version 3.0 its also possible to setup 2FA login wiht OTP trough any authenticator app.
+
+![LUYA 2FA](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/2fa.png)
+
 ## Strong admin user password policy
 
 We recommend to enable the {{luya\admin\Module::$strongPasswordPolicy}} property which is availabe since `luya-module-admin` version 1.1.1 and enabled by default since 1.2.0. This property makes sure the user has to enter a strong password with: uppercase, lowercase, special chars, digits and numbers with an min length of 8 chars.

@@ -92,4 +92,78 @@ class Url extends \yii\helpers\BaseUrl
         
         return $url;
     }
+
+    /**
+     * Removes schema, protocol and www. subdomain from host.
+     *
+     * For example `https://luya.io/path` would return `luya.io/path`.
+     *
+     * @param string $url The url to extract
+     * @return string returns the url without protocol or www. subdomain
+     * @since 1.0.20
+     */
+    public static function cleanHost($url)
+    {
+        return str_replace(['www.', 'http://', 'https://'], '', Url::ensureHttp($url));
+    }
+    /**
+     * Return only the domain of a path.
+     *
+     * For example `https://luya.io/path` would return `luya.io` without path informations.
+     *
+     * @param string $url The url to extract
+     * @return string Returns only the domain from the url.
+     * @since 1.0.20
+     */
+    public static function domain($url)
+    {
+        return self::cleanHost(parse_url(Url::ensureHttp($url), PHP_URL_HOST));
+    }
+
+    /**
+     * Append a query to the current url.
+     *
+     * See {{luya\helpers\Url::appendToUrl()}}
+     *
+     * @param string|array $append A string with url fragments or an array which will be processed by http_build_query.
+     * @param boolean $scheme Add full path schema to the url, by default false. Otherwise absolute paths are used (including domain).
+     * @return string
+     * @since 1.0.25
+     */
+    public static function appendQuery($append, $scheme = false)
+    {
+        $url = $scheme ? Yii::$app->request->absoluteUrl : Yii::$app->request->url;
+
+        return self::appendQueryToUrl($url, $append);
+    }
+
+    /**
+     * Append an url part to an url
+     *
+     * @param string $url The url where the data should be appended.
+     * @param string|array $append The query param to append, if an array is given http_build_query() will taken to build the query string.
+     * @return string Returns the url with appended query string
+     * @since 1.0.25
+     */
+    public static function appendQueryToUrl($url, $append)
+    {
+        if (is_array($append)) {
+            $append = http_build_query($append);
+        }
+        // remove starting & and ? chars
+        $append = ltrim($append, '&?');
+        // use &: Do we have already a ? in the url
+        if (StringHelper::contains('?', $url)) {
+            // seperator already existing
+            if (StringHelper::endsWith($url, '&') || StringHelper::endsWith($url, '?')) {
+                return $url . $append;
+            }
+
+            // add seperator
+            return $url . '&' . $append;
+        }
+        
+        // use ?
+        return $url . '?' . $append;
+    }
 }

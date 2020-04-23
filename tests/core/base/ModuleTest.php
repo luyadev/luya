@@ -2,6 +2,7 @@
 
 namespace luyatests\core\base;
 
+use luya\theme\ThemeManager;
 use Yii;
 use luyatests\LuyaWebTestCase;
 use luyatests\data\modules\urlmodule\Module;
@@ -52,6 +53,32 @@ class ModuleTest extends LuyaWebTestCase
         Yii::$app->getModule('unitmodule')->useAppLayoutPath = false;
         $p = Yii::$app->getModule('unitmodule')->getLayoutPath();
         $this->assertContains('unitmodule/views/layouts', $p);
+    }
+    
+    public function testThemeLayoutPath()
+    {
+        Yii::$app->themeManager->activeThemeName = '@app/themes/moduleTest';
+        Yii::$app->themeManager->setup();
+    
+        /** @var \luya\base\Module $module */
+        $module = Yii::$app->getModule('unitmodule');
+        $module->luyaBootstrap(Yii::$app);
+        
+        $module->useAppLayoutPath = false;
+        $this->assertContains('/modules/unitmodule/views/layouts', $module->getLayoutPath());
+    }
+    
+    public function testThemeUseAppLayoutPath()
+    {
+        Yii::$app->themeManager->activeThemeName = '@app/themes/moduleTest';
+        Yii::$app->themeManager->setup();
+    
+        /** @var \luya\base\Module $module */
+        $module = Yii::$app->getModule('unitmodule');
+        $module->luyaBootstrap(Yii::$app);
+    
+        $module->useAppLayoutPath = true;
+        $this->assertContains('/themes/moduleTest/views/layouts', $module->getLayoutPath());
     }
     
     public function testGetControllerFiles()

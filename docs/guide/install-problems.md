@@ -19,7 +19,7 @@ In order to run LUYA with deployer nicely on a production server, the following 
 
 + php 7.1 (or higher) (php 7.0 and php 5.6 should work but its not tested anymore)
 + mysql 5.5 (or higher)
-+ php extensions: curl, fileinfo, mbstring, icu, phar
++ php extensions: curl, fileinfo, mbstring, icu, phar, zip
 + apache modules: mod_rewrite
 + git (for deployer)
 + composer (for deployer)
@@ -31,9 +31,9 @@ Maybe you like to test the latest features of LUYA, so you can use the following
 
 ```json
 "require": {
-    "luyadev/luya-core" : "^1.0@dev",
-    "luyadev/luya-module-admin" : "^1.0@dev",
-    "luyadev/luya-module-cms" : "^1.0@dev"
+    "luyadev/luya-core" : "dev-master",
+    "luyadev/luya-module-admin" : "dev-master",
+    "luyadev/luya-module-cms" : "dev-master"
 }
 ```
 
@@ -41,4 +41,3 @@ Maybe you like to test the latest features of LUYA, so you can use the following
 
 + If you are getting problems during the installation of LUYA, unexpected errors or strange behaviors please [create an issue on GitHub](https://github.com/luyadev/luya/issues).
 + Join our Slack Team: [![Join the Slack Team](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
-+ Join Gitter to get help from the LUYA community: [![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

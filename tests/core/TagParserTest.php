@@ -85,4 +85,29 @@ class TagParserTest extends LuyaWebTestCase
 
         $this->assertSame('<a href="1">Example file (PDF)</a>', TagParser::convert('test[1](Example file \(PDF\))'));
     }
+
+    public function testMarkdownNewslines()
+    {
+        $input = <<<EOT
+First sentence
+image[49287]([L-R] Caption)
+second sentence
+EOT;
+
+        $this->assertSameNoSpace('<p>First sentence<br />
+image[49287]([L-R] Caption)<br />
+second sentence</p>', TagParser::convertWithMarkdown($input));
+
+$input = <<<EOT
+First sentence
+
+image[49287]([L-R] Caption)
+
+second sentence
+EOT;
+
+        $this->assertSameNoSpace('<p>First sentence</p>
+<p>image[49287]([L-R] Caption)</p>
+<p>second sentence</p>', TagParser::convertWithMarkdown($input));
+    }
 }

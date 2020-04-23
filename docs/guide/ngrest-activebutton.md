@@ -41,7 +41,7 @@ class DuplicateActiveButton extends ActiveButton
 
 The handle method must return {{luya\admin\ngrest\base\ActiveButton::sendSuccess()}} or {{luya\admin\ngrest\base\ActiveButton::sendError()}} in order to make a correct API response to the grid view.
 
-Als you can triggere events for certain situations. Assuming you are going to modify the value of a column isnide this CRUD, a forced reload of the curd list can be done trough {{luya\admin\ngrest\base\ActiveButton::sendReloadEvent()}}.
+Als you can triggere events for certain situations. Assuming you are going to modify the value of a column isnide this CRUD, a forced reload of the CRUD list can be done trough {{luya\admin\ngrest\base\ActiveButton::sendReloadEvent()}}.
 
 ## Attaching the Button
 

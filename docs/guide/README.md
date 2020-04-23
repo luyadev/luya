@@ -29,6 +29,9 @@
   + [Security](app-security.md)
   + [JsonLd](app-jsonld.md)
   + [Modules](app-module.md)
+  + [Themes](app-themes.md)
+  + [Queue/Scheduler](app-queue.md)
+  + [OpenAPI](app-openapi.md)
 + CMS
   + [CMS Layouts](app-cmslayouts.md)
   + [Menus & Navigations](app-menu.md)
@@ -53,6 +56,7 @@
   + [Permissions &amp; Menu](app-admin-module-permission.md)
   + [Icons &amp; CSS Styles](app-admin-module-styles.md)
   + [Create Admin API](app-admin-module-api.md)
+  + [JWT &amp; SPA](app-admin-module-jwt-spa.md)
 + NgRest CRUD
   + [Concept](ngrest-concept.md)
   + [Model](ngrest-model.md)
@@ -75,3 +79,5 @@
   + [Collaboration](luya-collaboration.md)
   + [Unit Test](luya-unittest.md)
   + [Admin Browser Compatibility](luya-browser.md)
+  + [Arguments for LUYA](luya-arguments.md)
+  + [The LUYA Organisation](luya-organisation.md)

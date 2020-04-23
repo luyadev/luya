@@ -41,7 +41,9 @@ class StringHelper extends BaseStringHelper
     }
     
     /**
-     * Checke whether a strings starts with the wildcard symbole and compares the string before the wild card symbol *
+     * String Wildcard Check.
+     * 
+     * Checks whether a strings starts with the wildcard symbole and compares the string before the wild card symbol *
      * with the string provided, if there is NO wildcard symbold it always return false.
      *
      *
@@ -58,6 +60,63 @@ class StringHelper extends BaseStringHelper
         }
         
         return self::startsWith($string, rtrim($with, '*'), $caseSensitive);
+    }
+
+
+
+    /**
+     * See if filter conditions match the given value.
+     * 
+     * Example filter conditions:
+     *
+     * + `cms_*` matches everything starting with "cms_".
+     * + `cms_*,admin_*` matches booth cms_* and admin_* tables.
+     * + `!cms_*` matches all not start with "cms_"
+     * + `!cms_*,!admin_*` matches all not starting with "cms_" and not starting with "admin_"
+     * + `cms_*,!admin_*` matches all start with "cms_" but not start with "admin_"
+     *
+     * Only first match is relevant:
+     * 
+     * + "cms_*,!admin_*,admin_*" include all cms_* tables but exclude all admin_* tables (last match has no effect)
+     * + "cms_*,admin_*,!admin_*" include all cms_* and admin_* tables (last match has no effect)
+     * 
+     * Example using condition string:
+     * 
+     * ```php
+     * filterMatch('hello', 'he*'); // true
+     * filterMatch('hello', 'ho,he*'); // true
+     * filterMatch('hello', ['ho', 'he*']); // true
+     * ```
+     *
+     * @param $value The value on which the filter conditions should be applied on.
+     * @param array|string $filters An array of filter conditions, if a string is given he will be exploded by commas.
+     * @param boolean $caseSensitive Whether to match value even when lower/upper case is not correct/same.
+     * @return bool Returns true if one of the given filter conditions matches.
+     * @since 1.3.0
+     */
+    public static function filterMatch($value, $conditions, $caseSensitive = true)
+    {
+        if (is_scalar($conditions)) {
+            $conditions = self::explode($conditions, ",", true, true);
+        }
+
+        foreach ($conditions as $condition) {
+            $isMatch = true;
+            // negate
+            if (substr($condition, 0, 1) == "!") {
+                $isMatch = false;
+                $condition = substr($condition, 1);
+            }
+            if ($caseSensitive) {
+                $condition = strtolower($condition);
+                $value = strtolower($value);
+            }
+            if ($condition == $value || self::startsWithWildcard($value, $condition)) {
+                return $isMatch;
+            }
+        }
+
+        return false;
     }
     
     /**
@@ -127,8 +186,22 @@ class StringHelper extends BaseStringHelper
      * If an array of needle words is provided the $strict parameter defines whether all need keys must be found
      * in the string to get the `true` response or if just one of the keys are found the response is already `true`.
      *
+     * ```php
+     * if (StringHelper::contains('foo', 'the foo bar Bar'')) {
+     *    echo "yes!";
+     * }
+     * ```
+     *
+     * check if one of the given needles exists:
+     *
+     * ```php
+     * if (StringHelper::contains(['jungle', 'hell0], 'Welcome to the jungle!)) {
+     *    echo "yes!";
+     * }
+     * ```
+     *
      * @param string|array $needle The char or word to find in the $haystack. Can be an array to multi find words or char in the string.
-     * @param string $haystack The haystack where the $needle string should be looked  up.
+     * @param string $haystack The haystack where the $needle string should be looked up. A string or phrase with words.
      * @param boolean $strict If an array of needles is provided the $strict parameter defines whether all keys must be found ($strict = true) or just one result must be found ($strict = false).
      * @return boolean If an array of values is provided the response may change depending on $findAll.
      */
@@ -264,16 +337,42 @@ class StringHelper extends BaseStringHelper
      * @param string $string The string to split into an array
      * @param integer $length The length of the chars to cut.
      * @since 1.0.12
+     * @see https://www.php.net/manual/de/function.str-split.php#115703
      */
     public static function mb_str_split($string, $length = 1)
     {
-        $array = [];
-        $stringLength = mb_strlen($string, 'UTF-8');
-    
-        for ($i = 0; $i < $stringLength; $i += $length) {
-            $array[] = mb_substr($string, $i, $length, 'UTF-8');
+        return preg_split('/(.{'.$length.'})/us', $string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+    }
+
+    /**
+     * Check whether a value is numeric or not.
+     * 
+     * There are situations where is_numeric does not provide the desried result,
+     * like for example `is_numeric('3e30')` would return true, as e can be considered
+     * as exponential operator.
+     * 
+     * Therfore this function checks with regex whether values or 0-9 if strict is enabled,
+     * which is default behavior.
+     *
+     * @param mixed $value The value to check.
+     * @param boolean $strict
+     * @return boolean
+     * @since 1.2.0
+     */
+    public static function isNummeric($value, $strict = true)
+    {
+        if (!is_scalar($value)) {
+            return false;
         }
-    
-        return $array;
+
+        if (is_bool($value)) {
+            return false;
+        }
+
+        if ($strict) {
+            return preg_match('/^[0-9]+$/', $value) == 1 ? true : false;
+        }    
+
+        return is_numeric($value);
     }
 }

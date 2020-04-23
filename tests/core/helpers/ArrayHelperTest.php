@@ -106,6 +106,15 @@ class ArrayHelperTest extends LuyaWebTestCase
         $this->assertSame(2, count(ArrayHelper::search($data, 'fo')));
         
         $this->assertSame(1, count(ArrayHelper::search($data, 'Foo', true)));
+
+        $this->assertSame([], ArrayHelper::search($data, 1, false, ['name']));
+        $this->assertSame([
+            [
+                'name' => 'Foo Bar',
+                'description' => 'same',
+                'id' => 1,
+            ]
+        ], ArrayHelper::search($data, 1, false, ['id']));
     }
     
     public function testSearchColumn()
@@ -248,5 +257,11 @@ class ArrayHelperTest extends LuyaWebTestCase
         $response = ArrayHelper::coverSensitiveValues(['object' => new \stdClass(), 'array' => [], 'string' => 'string', 'integer' => 1], ['pass']);
         
         $this->assertTrue(is_object($response['object']));
+    }
+
+    public function testCombine()
+    {
+        $this->assertSame(['foo' => 'foo', 'bar' => 'bar'], ArrayHelper::combine(['foo', 'bar']));
+        $this->assertSame(['foo' => 'foo', 'bar' => 'bar'], ArrayHelper::combine(['baz1' => 'foo', 'baz2' => 'bar']));
     }
 }

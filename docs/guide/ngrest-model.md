@@ -57,6 +57,28 @@ public function ngRestScopes()
 }
 ```
 
+The primary key column will be auto added to the list scope, in order to hide the ID column set {{luya\admin\ngrest\base\Plugin::$hideInList}} but add the attribute to the list scope:
+
+```php
+public function ngRestAttributeTypes()
+{
+    return [
+        'id' => ['number', 'hideInList' => true],
+    ];
+}
+```
+
+Add to the list of attributes:
+
+```php
+public function ngRestScopes()
+{
+    return [
+        ['list', ['id', /* ... */ ]],
+    ];
+}
+```
+
 #### Delete
 
 To enable a delete button where the user can remove an item from the database table you can configure the delete pointer:
@@ -93,22 +115,23 @@ The i18n fields will be saved as JSON with a string entry for every CMS language
 
 Sometimes you want to define fields which are not part of the ActiveRecord model and are not part of the database table, e. g. you want to display a count of registered users on the CRUD list. To achieve this you may use the `extraFields` principal combined with the {{yii\base\BaseObject}} getter/setter information.
 
+Extra fields require:
+
++ A getter method. `getRegisteredCount()`
++ A defintion entry in {{\luya\admin\ngrest\base\NgRestModel::ngRestExtraAttributeTypes()}}. `'registeredCount' => 'number'`
++ A validation rule assigned to the attribute name using {{\luya\admin\ngrest\base\NgRestModel::rules()}}.  `['registeredCount', 'safe']`
+
 ```php
 public function getRegisteredCount()
 {
     return Users::find()->count();
 }
-
-public function extraFields()
-{
-    return ['registeredCount'];
-}
 ```
 
-Now we have an extraField with the name `registeredCount`. When accessing this extra field the getter method `getRegisteredCount()` will execute and the number of users will be returned. In order to get this additional into the CRUD list grid view you have to define the extra field in {{\luya\admin\ngrest\base\NgRestModel::ngrestExtraAttributeTypes()}} like the other not extra attribute fields.
+Now we have an extraField with the name `registeredCount`. When accessing this extra field the getter method `getRegisteredCount()` will execute and the number of users will be returned. In order to get this additional into the CRUD list grid view you have to define the extra field in {{\luya\admin\ngrest\base\NgRestModel::ngRestExtraAttributeTypes()}} like the other not extra attribute fields.
 
 ```php
-public function ngrestExtraAttributeTypes()
+public function ngRestExtraAttributeTypes()
 {
     return [
         'registeredCount' => 'number',
@@ -116,7 +139,9 @@ public function ngrestExtraAttributeTypes()
 }
 ```
 
-Now the only thing you have to do is to add the field to the {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes()}} definition.
+> The `ngRestExtraAttributeTypes()` defined attributes will be automatically added to {{luya\luya\admin\ngrest\base\NgRestModel::extraFields()}}.
+
+In order to work with this new defined extraibue pass the extra to the {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes()}} definition.
 
 ```php
 public function ngRestScopes($)
@@ -127,6 +152,23 @@ public function ngRestScopes($)
     ];
 }
 ```
+
+Its also required to add a validation rule using {{\luya\admin\ngrest\base\NgRestModel::rules()}} for the given attribute, as all attributes defined in {{\luya\admin\ngrest\base\NgRestModel::ngRestScopes()}} will be looked up in the list of {{\luya\admin\ngrest\base\NgRestModel::rules()}}.
+
+#### Extra Attribute without Value
+
+In certain siutation the extra field is not bound to any data, therefore you can either override the extraFields() method and remove the custom attribute or you can attach the "virtual" attribute to an existing root attribute using `.` notation:
+
+```php
+public function ngRestExtraAttributeTypes()
+{
+     return [
+        'id.indexField' => ['index'],
+    ];
+}
+```
+
+This will use the root attribute id which is present in the view, this can be usefull when using {{luya\admin\ngrest\plugins\Angular}} plugins.
 
 ## Grid list default order/sort
 
@@ -225,10 +267,22 @@ Sometimes it is useful and common to directly manage relational data inside the 
 public function ngRestRelations()
 {
     return [
-        ['label' => 'The Label', 'apiEndpoint' => \path\to\ngRest\Model::ngRestApiEndpoint(), 'dataProvider' => $this->getSales()],
+        ['label' => 'Label', 'targetModel' => \path\to\Model::class, 'dataProvider' => $this->getSales()],
     ];
 }
 ```
+
+Where `getSales()` would be:
+
+```php
+public function getSales()
+{
+    return $this->hasMany(Sales::class, ['id' => 'sale_id']);
+}
+``` 
+
+Take a look at {{luya\admin\ngrest\base\NgRestRelation}} for the full object configuration properties.
+
 
 The above example will use the `getSales()` method of the current model where you are implementing this relation. The `getSales()` must return an {{yii\db\QueryInterface}} Object, for example you can use `$this->hasMany(Model, ['key' => 'rel'])` or `new \yii\db\Query()`.
 

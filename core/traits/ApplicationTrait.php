@@ -2,6 +2,7 @@
 
 namespace luya\traits;
 
+use luya\theme\ThemeManager;
 use Yii;
 use luya\base\AdminModuleInterface;
 use luya\base\Module;
@@ -13,6 +14,7 @@ use luya\base\PackageInstaller;
  *
  * @property string $webroot Returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
+ * @property ThemeManager $themeManager Get luya theme manager
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -89,6 +91,48 @@ trait ApplicationTrait
      * ```
      */
     public $locales = [];
+
+    /**
+     * @var array An array to provide application wide CORS settings.
+     *
+     * By default the X-Headers of Yii and LUYA Admin are exposed. In order to override the cors
+     * config the following example would work (including cors class definition).
+     *
+     * ```php
+     * 'corsConfig' => [
+     * 'class' => 'yii\filters\Cors',
+     *     'cors' => [
+     *         'Origin' => ['*'],
+     *         'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+     *         'Access-Control-Request-Headers' => ['*'],
+     *         'Access-Control-Allow-Credentials' => null,
+     *         'Access-Control-Max-Age' => 86400,
+     *         'Access-Control-Expose-Headers' => [
+     *             'X-My-Header-Name',
+     *         ],
+     *     ],
+     * ]
+     * ```
+     *
+     * @since 1.0.22
+     */
+    public $corsConfig = [
+        'class' => 'yii\filters\Cors',
+        'cors' => [
+            'Origin' => ['*'],
+            'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+            'Access-Control-Request-Headers' => ['*'],
+            'Access-Control-Allow-Credentials' => null,
+            'Access-Control-Max-Age' => 86400,
+            'Access-Control-Expose-Headers' => [
+                'X-Pagination-Current-Page',
+                'X-Pagination-Page-Count',
+                'X-Pagination-Per-Page',
+                'X-Pagination-Total-Count',
+                'X-Cruft-Length',
+            ],
+        ],
+    ];
     
     /**
      * Add trace info to luya application trait
@@ -112,7 +156,7 @@ trait ApplicationTrait
      * 'locales' => ['de' => 'de_CH']
      * ```
      *
-     * @param string $lang Find the locale POSIX for the provided $lang short code.
+     * @param string $lang Find the locale for the provided $lang short code.
      * @return string The localisation code for the provided lang short code.
      */
     public function ensureLocale($lang)
@@ -131,10 +175,12 @@ trait ApplicationTrait
     }
     
     /**
-     * Setter method ensures the locilations POSIX from {{ensureLocale}} for the provided lang
-     * and changes the Yii::$app->langauge and sets the `setlocale()` code from ensureLocale().
+     * Set the application localisation trough `setlocale`.
      *
-     * From the setlocale docs about, try different locales:
+     * The value will be parsed trough {{ensureLocale()}} in order to generated different possible localisation
+     * values like `en_EN` or `en_EN.utf8` and it will generate from `de` a locale value like `de_DE`.
+     *
+     * setlocale() can have multiple arguments:
      *
      * > If locale is an array or followed by additional parameters then each array element or parameter
      * > is tried to be set as new locale until success. This is useful if a locale is known under different
@@ -145,21 +191,26 @@ trait ApplicationTrait
     public function setLocale($lang)
     {
         $locale = str_replace(['.utf8', '.UTF-8'], '', $this->ensureLocale($lang));
-        $this->language = $locale;
         setlocale(LC_ALL, $locale.'.utf8', $locale.'UTF-8', $locale);
     }
 
+    private $_packageInstaller;
+    
     /**
      * Get the package Installer
      * @return \luya\base\PackageInstaller
      */
     public function getPackageInstaller()
     {
-        $file = Yii::getAlias('@vendor/luyadev/installer.php');
+        if ($this->_packageInstaller == null) {
+            $file = Yii::getAlias('@vendor/luyadev/installer.php');
         
-        $data = is_file($file) ? include $file : [];
-         
-        return new PackageInstaller($data);
+            $data = is_file($file) ? include $file : [];
+        
+            $this->_packageInstaller = new PackageInstaller($data);
+        }
+        
+        return $this->_packageInstaller;
     }
     
     /**
@@ -200,6 +251,7 @@ trait ApplicationTrait
         return array_merge(parent::coreComponents(), [
             'mail' => ['class' => 'luya\components\Mail'],
             'formatter' => ['class' => 'luya\components\Formatter'],
+            'themeManager' => ['class' => 'luya\theme\ThemeManager'],
         ]);
     }
 

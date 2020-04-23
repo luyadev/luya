@@ -166,4 +166,60 @@ EOT;
         $this->assertSame('Не следует, однако, забывать, что высокое ка', $text);
         $this->assertSame('Не следует, однако, <b>забывать</b>, что высокое ка', StringHelper::highlightWord($text, $word));
     }
+
+    public function testIsNumeric()
+    {
+        $this->assertTrue(StringHelper::isNummeric(1));
+        $this->assertTrue(StringHelper::isNummeric(1, false));
+        $this->assertTrue(StringHelper::isNummeric(112334));
+        $this->assertTrue(StringHelper::isNummeric(112334, false));
+
+        // mixed char
+        $this->assertFalse(StringHelper::isNummeric('abc'));
+        $this->assertFalse(StringHelper::isNummeric('xyz2'));
+        $this->assertFalse(StringHelper::isNummeric('abc', false));
+        $this->assertFalse(StringHelper::isNummeric('xyz2', false));
+
+        // none scalar
+        $this->assertFalse(StringHelper::isNummeric(true));
+        $this->assertFalse(StringHelper::isNummeric(true, false));
+        $this->assertFalse(StringHelper::isNummeric(false));
+        $this->assertFalse(StringHelper::isNummeric(false, false));
+        $this->assertFalse(StringHelper::isNummeric([]));
+        $this->assertFalse(StringHelper::isNummeric([], false));
+        
+        
+        // exponent number case
+        $this->assertFalse(StringHelper::isNummeric('3e30'));
+        $this->assertTrue(StringHelper::isNummeric('3e30', false));
+    }
+
+    public function testMbStrSplit()
+    {
+        $this->assertSame([
+            'f','o','o', ' ', 'b', 'a', 'r'
+        ], StringHelper::mb_str_split('foo bar'));
+        $this->assertSame([
+            'fo', 'o ', 'ba', 'r'
+        ], StringHelper::mb_str_split('foo bar', 2));
+
+        $this->assertSame([
+            0 => 'М',
+            1 => 'а',
+            2 => 'р',
+            3 => 'у',
+            4 => 'с',
+            5 => 'я',
+        ], StringHelper::mb_str_split('Маруся'));
+    }
+
+    public function testMatchFilter()
+    {
+        $this->assertTrue(StringHelper::filterMatch('hello', 'hello'));
+        $this->assertTrue(StringHelper::filterMatch('hello', 'HELLO'));
+        $this->assertTrue(StringHelper::filterMatch('hello', 'he*'));
+        $this->assertFalse(StringHelper::filterMatch('hello', ['foo', 'bar']));
+        $this->assertFalse(StringHelper::filterMatch('hello', '!hello'));
+        $this->assertFalse(StringHelper::filterMatch('hello', '!hello', 'hello'));
+    }
 }

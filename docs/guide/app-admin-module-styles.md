@@ -1,6 +1,6 @@
 # Admin CSS Styles
 
-All [Bootstrap4](https://v4-alpha.getbootstrap.com/) css style classes are available in der admin UI. On top of this LUYA provides generic css classes for buttons with predefined icons and colors.
+All [Bootstrap 4](https://getbootstrap.com/) css styles and classes are available in the LUYA ADMIN UI. On top of thi,s LUYA provides generic css classes for buttons with predefined icons and colors.
 
 ## Buttons
 
@@ -73,6 +73,7 @@ Below, the tables show you which icon stands for what. The full set of usable ic
 
 ## Forms
 
+The syntax we use to build the forms in LUYA ADMNI UI is as followed:
 
 ```html
 <div class="form-group form-side-by-side">
@@ -84,29 +85,3 @@ Below, the tables show you which icon stands for what. The full set of usable ic
     </div>
 </div>
 ```
-
-## Tables
-
-You can use all the classes provided by bootstrap4: https://getbootstrap.com/docs/4.0/content/tables/
-
-### Responsive tables
-
-In addition to the bootstrap `table-responsive` version we have a wrapper to improve the overall behaviour of tables on mobile.  
-You can use the table wrapper as following:
-
-```html
-<div class="table-responsive-wrapper">
-    <table class="table ..."></table>
-</div>
-```
-
-In this case you do not have to add the `table-responsive` class to the `table` HTML element to the table.
-
-## General Colors (in progress)
-
-
-| Element | Color | HEX Color|used for|
-|---------|-------|---------|---------|
-|`<button type="button" class="btn btn-save">Save</button>`|green|#28a745|save, create, upload|
-
-

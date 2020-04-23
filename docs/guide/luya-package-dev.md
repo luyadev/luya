@@ -1,4 +1,4 @@
-# Create package (Extension/Module)
+# Create package (Extension/Module/Theme)
 
 This guide is intended to provide the very basic steps to create a LUYA Package (also known as extension or module). 
 There are different type of packages:
@@ -7,25 +7,25 @@ There are different type of packages:
 |----|----------
 |extension|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
 |module|Can contain the same as an extension but also modules and controllers which needs to be registered in the config of the application.
-
-In this guide we will give you a very basic step by step instruction in **how to create an extension** with a block for the cms which will be distributed over the packagist package manager.
+|theme|A theme holds informations including blocks, layouts and cmslayouts.
 
 ## Create basic extension with a block
 
-You can use this sekeleton for a new package: https://github.com/luyadev/luya-package-skeleton
+n this guide we will give you a very basic step by step instruction in **how to create an extension** with a block for the cms which will be distributed over the packagist package manager.
+
+You can use this skeleton for a new package: https://github.com/luyadev/luya-package-skeleton
 
 ```sh
 git clone https://github.com/luyadev/luya-package-skeleton
 cd luya-package-skeleton
 ```
 
-1. Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
-
-2. Create a composer.json with basic informations about the vendor and package name. Replace username with your github username or vendor name, and package with the package name. Example `nadar/luya-material-blocks`.
+1) Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
+2) Create a composer.json with basic informations about the VENDOR and PACKAGE name. Replace VENDOR with your github username or vendor name, and PACKAGE with the package name. Example `nadar/luya-material-blocks`.
 
 ```json
 {
-    "name": "username/package",
+    "name": "VENDOR/PACKAGE",
     "type": "luya-extension",
     "require-dev": {
         "luyadev/luya-testsuite": "^1.0"
@@ -46,11 +46,11 @@ cd luya-package-skeleton
 ```
 
 
-3. As we have mappend the namespace `username\package` into the `src/` folder you can now create you block inside the src folder, example `src/HeroBlock.php`.
+3) As we have mappend the namespace `VENDOR\PACKAGE` into the `src/` folder you can now create you block inside the src folder, example `src/HeroBlock.php`.
 
 ```php
 <?php
-namespace username\package;
+namespace PACKAGE\PACKAGE;
 
 use luya\cms\base\PhpBlock;
 
@@ -85,11 +85,13 @@ The following **types** are supported by LUYA composer
 
 + luya-extension
 + luya-module
++ luya-theme
 
 |type|description
 |----|----------
 |luya-extension|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
 |luya-module|Can contain the same as luya-extension but also modules and controllers.
+|luya-theme|Can contain the same as extensions but also cmslayouts, layouts and other frontend resources.
 
 ### Extra section
 

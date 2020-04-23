@@ -132,4 +132,13 @@ class ExportHelperTest extends LuyaWebTestCase
         $string = ExportHelper::xlsx($input, $keys, $header);
         file_put_contents($filename, $string);
     }
+
+    public function testSpecialCharsEncoding()
+    {
+        $content = ExportHelper::csv([
+            ['&', "'", 'a"b"c'],
+        ], [], false);
+
+        $this->assertSameTrimmed('"&","\'","a""b""c"', $content);
+    }
 }
