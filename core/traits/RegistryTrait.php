@@ -40,6 +40,7 @@ trait RegistryTrait
      * Loads all config data into an array.
      *
      * @return array
+     * @since 1.3.0
      */
     protected static function getData()
     {
@@ -51,6 +52,16 @@ trait RegistryTrait
         }
 
         return self::$_data;
+    }
+
+    /**
+     * Clear data array.
+     * 
+     * @since 1.3.0
+     */
+    protected static function clearData()
+    {
+        self::$_data = null;
     }
     
     /**
@@ -96,7 +107,7 @@ trait RegistryTrait
     public static function set($name, $value)
     {
         $model = self::find()->where([self::getNameAttribute() => $name])->one();
-    
+        self::clearData();
         if ($model) {
             return (bool) $model->updateAttributes([
                 self::getValueAttribute() => $value,
@@ -122,6 +133,7 @@ trait RegistryTrait
         $model = self::find()->where([self::getNameAttribute() => $name])->one();
     
         if ($model) {
+            self::clearData();
             return (bool) $model->delete();
         }
     
