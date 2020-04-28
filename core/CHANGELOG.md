@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.3.0
+## 1.3.0 (28. April 2020)
 
 + [#2017](https://github.com/luyadev/luya/pull/2017) Improve the performance of `luya\traits\RegistryTrait`
 + [#2014](https://github.com/luyadev/luya/pull/2014) Replace Travis-CI with GitHub Actions, fix PHP 7.4 compatibility issue.
