@@ -46,7 +46,7 @@ trait RegistryTrait
     {
         if (self::$_data === null) {
             self::$_data = self::find()
-                ->select([self::getNameAttribute(), self::getValueAttribute()])
+                ->select([self::getValueAttribute(), self::getNameAttribute()])
                 ->indexBy(self::getNameAttribute())
                 ->column();
         }
