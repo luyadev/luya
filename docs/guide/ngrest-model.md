@@ -170,7 +170,7 @@ public function ngRestExtraAttributeTypes()
 
 This will use the root attribute id which is present in the view, this can be usefull when using {{luya\admin\ngrest\plugins\Angular}} plugins.
 
-## Grid list default order/sort
+## Default Order (Sorting)
 
 By default the gird list is sorted by the primary key (mostly known as ID) in descending direction. To override the default implement just override the `ngRestListOrder` method with an array where the key is the field and value the direction of sorting.
 
@@ -185,7 +185,9 @@ Now the default ordering of the grid list data is by the field *timestamp_create
 + `SORT_ASC` = From lower to bigger chars/numbers *1,2,3,..*
 + `SORT_DESC` = From bigger to lower chars/numbers *...,3,2,1*
 
-## Grid list group fields
+> In order allow sorting for joined fields (using SelectModel f.e.) take a look at {{luya\admin\ngrest\base\Plugin::setSortField()}}
+
+## Group by Field Value
 
 To generate more user friendly CRUD list panels the ability to group fields helps a lot in case of usability. This will automatically group the field values for the defined field and removes the column if the defined group field. To define a default group by policy override the {{\luya\admin\ngrest\base\NgRestModel::ngRestGroupByField()}} method by returning a string with the field name where the group should be applied to:
 
