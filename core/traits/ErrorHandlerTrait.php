@@ -214,6 +214,8 @@ trait ErrorHandlerTrait
             'exception_class_name' => $_exceptionClassName,
             'php_version' => phpversion(),
             'luya_version' => Boot::VERSION,
+            'yii_version' => Yii::getVersion(),
+            'app_version' => Yii::$app->version,
         ];
     }
     
