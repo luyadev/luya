@@ -294,4 +294,17 @@ class ConfigTest extends LuyaWebTestCase
         // the callable has no effect sind it only runs in prod
         $this->assertTrue($config->isCliRuntime());
     }
+
+    public function testMergeApplicationLevel()
+    {
+        $config = new Config('foo', 'bar');
+        $config->application(['version' => 1]);
+        $config->application(['version' => 2]);
+
+        $this->assertSame([
+            'id' => 'foo',
+            'basePath' => 'bar',
+            'version' => 2,
+        ], $config->toArray());
+    }
 }
