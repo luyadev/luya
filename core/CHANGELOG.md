@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.3.1 (7. May 2020)
 
-+ [#]() Add App and Yii version to ErrorHandler API.
++ [#2021](https://github.com/luyadev/luya/pull/2021) Add App and Yii version to ErrorHandler API.
 
 ## 1.3.0 (28. April 2020)
 
