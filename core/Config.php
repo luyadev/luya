@@ -145,7 +145,33 @@ class Config
      * Assign the env to each component, module or application that defined inside the callback.
      *
      * Callback function has one parameter with the current {{luya\Config}} object.
+     * 
+     * An example using env to wrap multiple configuration lines into a single environment:
+     * 
+     * ```php
+     * $config->env(Config::ENV_LOCAL, function($config) {
+     *   
+     *     $config->callback(function() {
+     *         define('YII_DEBUG', true);
+     *         define('YII_ENV', 'local');
+     *     });
+     *   
+     *     $config->component('db', [
+     *         'dsn' => 'mysql:host=luya_db;dbname=luya_kickstarter',
+     *         'username' => 'luya',
+     *         'password' => 'luya',
+     *         'enableSchemaCache' => false,
+     *     ]);
+     *   
+     *     $config->module('debug', [
+     *         'class' => 'yii\debug\Module',
+     *         'allowedIPs' => ['*'],
+     *     ]);
      *
+     *     $config->bootstrap(['debug']);
+     * });
+     * ```
+     * 
      * @param string $env The environment to assigne inside the callback.
      * @param callable $callback function(\luya\Config $config)
      * @return $this
