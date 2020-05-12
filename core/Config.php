@@ -86,6 +86,9 @@ use luya\helpers\ArrayHelper;
  *
  * return $config->toArray(Config::ENV_PROD); // would only return the prod env db component
  * ```
+ * 
+ * > When mergin varaibles, the later will always override the former. If arrays are involved the values will be added, not replaced!
+ * > Example: `'foo' => 'bar', 'values' => [1]` and `'foo' => 'baz', 'values' => [2]` will be merged to: `'foo' => 'baz', 'values' => [1,2]`.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.21
