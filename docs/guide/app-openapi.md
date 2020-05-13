@@ -19,7 +19,7 @@ In order to enable the OpenApi Endpoint you can either use `remoteToken` or ` pu
 
 When developer settings are enabled in User Profile (Preferences -> General -> Developer Mode), a new debug panel with OpenAPI informations is shown:
 
-![OpenAPI Toolbar](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/debug-toolbar-openapi.png "OpenAPI Toolbar")
+![OpenAPI Toolbar](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/debug-toolbar-openapi-2.png "OpenAPI Toolbar")
 
 ## ReDoc Viewer
 
