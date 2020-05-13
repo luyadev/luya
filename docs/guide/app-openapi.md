@@ -10,6 +10,8 @@ The purpose of the generator is to have documentation where it should belong, in
 
 ## Enable OpenApi Endpoint
 
+> To generate the OpenApi File the `cebe/php-openapi` composer package is required, install the library with `composer require cebe/php-openapi`.
+
 In order to enable the OpenApi Endpoint you can either use `remoteToken` or ` publicOpenApi` property:
 
 + `remoteToken`: If a {{luya\web\Application::remoteToken}} is defined, the `?token=sha1($remoteToken)` param can be used to retrieve the OpenAPI defintion: `https://yourdomain.com/admin/api-admin-remote/openapi?token=8843d7f92416211de9ebb963ff4ce28125932878` (where token is an sha1 encoded value of remoteToken)
@@ -17,7 +19,7 @@ In order to enable the OpenApi Endpoint you can either use `remoteToken` or ` pu
 
 When developer settings are enabled in User Profile (Preferences -> General -> Developer Mode), a new debug panel with OpenAPI informations is shown:
 
-[[[SCREENSHOT DEBUG TOOLBAR]]]
+![OpenAPI Toolbar](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/debug-toolbar-openapi.png "OpenAPI Toolbar")
 
 ## ReDoc Viewer
 
