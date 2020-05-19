@@ -69,6 +69,15 @@ class LinkTag extends BaseTag
         
         $label = empty($sub) ? $value : $sub;
         
-        return Html::a($label, $value, ['class' => $external ? 'link-external' : 'link-internal', 'target' => $external ? '_blank' : null]);
+        $options = [
+            'class' => $external ? 'link-external' : 'link-internal',
+            'target' => $external ? '_blank' : null,
+        ];
+
+        if ($external) {
+            $options['rel'] = 'noopener';
+        }
+        
+        return Html::a($label, $value, $options);
     }
 }

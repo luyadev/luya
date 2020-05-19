@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.3.2 (in progress)
+
++ [#2023](https://github.com/luyadev/luya/issues/2023) Added `rel="noopener"` to links which open in a new window.
+
 ## 1.3.1 (7. May 2020)
 
 + [#2021](https://github.com/luyadev/luya/pull/2021) Add App and Yii version to ErrorHandler API.
