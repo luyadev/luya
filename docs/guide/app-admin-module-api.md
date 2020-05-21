@@ -46,6 +46,24 @@ public $apiRules = [
 ];
 ```
 
+An example of how to override the {{yii\rest\UrlRule}} patterns:
+
+```php
+public $apis = [
+    'api-usertoken-login' => 'luya\admin\usertoken\apis\LoginController',
+];
+
+public $apiRules = [
+    'api-usertoken-login' => [
+        'patterns' => [
+            'GET' => ' index',
+        ]
+    ],
+];
+```
+
+Now the POST request will run the index action.
+
 ## Make Request / How to access
 
 Depending on your definition including your language code definition, your API should now be reachable under `http://host/yourlanguagecode/admin/api-yourmodule-yourcontroller`. In order to access the actionWorld use `http://host/yourlanguagecode/admin/api-yourmodule-yourcontroller/hello`.
