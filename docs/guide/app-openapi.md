@@ -66,6 +66,35 @@ The `actionTest()` requires an param `$id` and will return a {{luya\admin\models
 
 When Parsing ActiveRecords the `@property` values of a class will be interpreted as well as `attributeLabels()` and `attributeHints()`.
 
+### Request Body
+
+With introduction of LUYA Admin OpenApi Generator we make use of the `@uses` tag to reference POST Request Bodies. As the POST data is not defined in the `@param` section we recommend to use `@uses`:
+
+```php
+/**
+ * @uses app\models\PostSaveModel The model which is taken as request body.
+ */
+public function actionPostSave()
+{
+    // ..
+}
+```
+
+The above example defines the `$_POST` fields based on the object properties and attributes. For a none object definition related definitions:
+
+```php
+/**
+ * @uses string username
+ * @uses string password
+ */
+public function actionPostSave()
+{
+    // ..
+}
+```
+
+Which would be equals to `$_POST['username']` and `$_POST['password']`.
+
 ## OpenAPI Client
 
 In order to consum the OpenAPI trough OpenAPI Client you have to turn off {{luya\admin\Module::$jsonCruft}} behavior in the {{luya\Config}} for the Admin Module:
