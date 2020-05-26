@@ -95,6 +95,29 @@ public function actionPostSave()
 
 Which would be equals to `$_POST['username']` and `$_POST['password']`.
 
+### Change Verb
+
+In order to ensure all the actions have the correct verbs its recommend to use the {{luya\base\Module::$rulRule}} variable, which can declare or override actuall {{yii\rest\UrlRule}} patters or add extraPattersn:
+
+An example of how to defined whether an actrin is only allowed for post or not, which is also taken into account when rendering the OpenApi file:
+
+```php
+public $apiRules = [
+    'api-admin-timestamp' => [
+        'patterns' => [
+            'POST' => 'index',
+        ]
+    ],
+    'api-admin-user' => [
+        'extraPatterns' => [
+            'POST change-password' => 'change-password',
+        ]
+    ]
+];
+```
+
+The first example will map `POST api-admin-timestamp` to the index action, the second example ensures that action `change-password` can only run as POST request.
+
 ## OpenAPI Client
 
 In order to consum the OpenAPI trough OpenAPI Client you have to turn off {{luya\admin\Module::$jsonCruft}} behavior in the {{luya\Config}} for the Admin Module:
