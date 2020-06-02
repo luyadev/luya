@@ -2,6 +2,7 @@
 
 namespace luya\web;
 
+use luya\helpers\StringHelper;
 use Yii;
 
 /**
@@ -70,7 +71,7 @@ class Request extends \yii\web\Request
                     $resolver = Yii::$app->composition->getResolvedPathInfo($this);
                     $parts = explode('/', $resolver->resolvedPath);
                     $first = reset($parts);
-                    if (preg_match('/admin/i', $first, $results)) {
+                    if (StringHelper::startsWith($first, 'admin')) {
                         $this->_isAdmin = true;
                     } else {
                         $this->_isAdmin = false;
