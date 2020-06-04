@@ -71,7 +71,11 @@ class Request extends \yii\web\Request
                     $resolver = Yii::$app->composition->getResolvedPathInfo($this);
                     $parts = explode('/', $resolver->resolvedPath);
                     $first = reset($parts);
-                    if (StringHelper::startsWith($first, 'admin')) {
+
+                    // Check for a full route path where the module ends with admin like `newsadmin` and this module is loaded in the list of modules.
+                    if (count($parts) > 1 && Yii::$app->hasModule($first) && StringHelper::endsWith($first, 'admin'))
+                        $this->_isAdmin = true;
+                    elseif (StringHelper::startsWith($first, 'admin')) {
                         $this->_isAdmin = true;
                     } else {
                         $this->_isAdmin = false;
