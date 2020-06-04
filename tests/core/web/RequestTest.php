@@ -2,6 +2,7 @@
 
 namespace luyatests\core\web;
 
+use luya\admin\Module;
 use Yii;
 use luya\web\Request;
 
@@ -9,6 +10,7 @@ class RequestTest extends \luyatests\LuyaWebTestCase
 {
     public function testisAdmin()
     {
+        $this->app->setModule('newsadmin', ['class' => Module::class]);
         $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'admin/test/';
@@ -27,7 +29,7 @@ class RequestTest extends \luyatests\LuyaWebTestCase
         $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'newsadmin/foo/test/';
-        $this->assertEquals(false, $request->isAdmin);
+        $this->assertEquals(true, $request->isAdmin);
 
         $request = new Request();
         $request->forceWebRequest = true;

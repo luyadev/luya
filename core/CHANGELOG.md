@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.4.1 (4. June 2020)
+
++ [#2027](https://github.com/luyadev/luya/pull/2027) Fixed regression with `luya\web\Request::$isAdmin` when working with admin module names like `newsadmin/default/index` (introduced in [#2019](https://github.com/luyadev/luya/issues/2019)).
+
 ## 1.4.0 (2. June 2020)
 
 + [#2019](https://github.com/luyadev/luya/issues/2019) The property `luya\web\Request::$isAdmin` is now more restrict and won't match admin modules like `newsadmin` which would have been evaulated as true before this change.
