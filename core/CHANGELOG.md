@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.4.1 (4. June 2020)
 
-+ [#2027](https://github.com/luyadev/luya/pull/2027) Fixed regression with `luya\web\Request::$isAdmin` when working with admin module names (introduced in [#2019](https://github.com/luyadev/luya/issues/2019)).
++ [#2027](https://github.com/luyadev/luya/pull/2027) Fixed regression with `luya\web\Request::$isAdmin` when working with admin module names like `newsadmin/default/index` (introduced in [#2019](https://github.com/luyadev/luya/issues/2019)).
 
 ## 1.4.0 (2. June 2020)
 
