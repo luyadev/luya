@@ -222,4 +222,13 @@ EOT;
         $this->assertFalse(StringHelper::filterMatch('hello', '!hello'));
         $this->assertFalse(StringHelper::filterMatch('hello', '!hello', 'hello'));
     }
+
+    public function testTemplate()
+    {
+        $this->assertSame('<p>bar</p>', StringHelper::template('<p>{{foo}}</p>', ['foo' => 'bar']));
+        $this->assertSame('<p>bar</p>', StringHelper::template('<p>{{ foo }}</p>', ['foo' => 'bar']));
+
+        $this->assertSame('<p>bar {{unknown}}</p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar']));
+        $this->assertSame('<p>bar {{unknown}}</p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar', 'xyz' => 'abc']));
+    }
 }
