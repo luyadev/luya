@@ -375,4 +375,44 @@ class StringHelper extends BaseStringHelper
 
         return is_numeric($value);
     }
+
+    /**
+     * Templating a string with Variables
+     * 
+     * The variables should be declared as `{{username}}` while the variables array key should contain `username`.
+     * 
+     * Usage example:
+     * 
+     * ```php
+     * $content = StringHelper::template('<p>{{ name }}</p>', ['name' => 'John']);
+     * 
+     * // output: <p>John</p>
+     * ```
+     * 
+     * If a variable is not found, the original curly bracktes will be returned.
+     * 
+     * @param string $template The template to parse. The template may contain double curly brackets variables.
+     * @param array $variables The variables which should be available in the template.
+     * @param boolean $removeEmpty Whether variables in double curly brackets should be removed event the have not be assigned by $variables array.
+     * @return string
+     * @since 1.5.0
+     */
+    public static function template($template, array $variables = [], $removeEmpty = false)
+    {
+        preg_match_all("/{{(.*?)}}/", $template, $matches, PREG_SET_ORDER);
+
+        if (empty($matches)) {
+            return $template;
+        }
+
+        foreach ($matches as $match) {
+            if (array_key_exists(trim($match[1]), $variables)) {
+                $template = str_replace($match[0], $variables[trim($match[1])], $template);
+            } elseif ($removeEmpty) {
+                $template = str_replace($match[0], '', $template);
+            }
+        }
+
+        return $template;
+    }
 }
