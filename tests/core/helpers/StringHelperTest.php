@@ -230,5 +230,6 @@ EOT;
 
         $this->assertSame('<p>bar {{unknown}}</p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar']));
         $this->assertSame('<p>bar {{unknown}}</p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar', 'xyz' => 'abc']));
+        $this->assertSame('<p>bar </p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar', 'xyz' => 'abc'], true));
     }
 }
