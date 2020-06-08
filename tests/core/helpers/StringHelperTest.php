@@ -225,6 +225,7 @@ EOT;
 
     public function testTemplate()
     {
+        $this->assertSame('<p>bar</p>', StringHelper::template('<p>bar</p>'));
         $this->assertSame('<p>bar</p>', StringHelper::template('<p>{{foo}}</p>', ['foo' => 'bar']));
         $this->assertSame('<p>bar</p>', StringHelper::template('<p>{{ foo }}</p>', ['foo' => 'bar']));
 
