@@ -233,7 +233,7 @@ class ModuleReflection extends BaseObject
         // create controller object
         $controller = $this->module->createController($requestRoute['route']);
         // throw error if the requests request does not returns a valid controller object
-        if (!isset($controller[0]) && !is_object($controller[0])) {
+        if (!$controller || !isset($controller[0]) || !is_object($controller[0])) {
             throw new NotFoundHttpException(sprintf("Unable to create controller '%s' for module '%s'.", $requestRoute['route'], $this->module->id));
         }
         
