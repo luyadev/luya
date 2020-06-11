@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.5.0
 
++ [#2029](https://github.com/luyadev/luya/pull/2029) Ensure `administrator` path does not resolve in `luya\web\Request::$isAdmin` true.
 + [#2028](https://github.com/luyadev/luya/pull/2028) New `StringHelper::template()` method to parse variables inside a string containing `{{ name }}` curly brackets.
 
 ## 1.4.1 (4. June 2020)
