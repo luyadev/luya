@@ -76,7 +76,7 @@ class Request extends \yii\web\Request
                     // @see https://github.com/luyadev/luya/pull/2027
                     if (count($parts) > 0 && StringHelper::endsWith($first, 'admin') && Yii::$app->hasModule($first))
                         $this->_isAdmin = true;
-                    elseif (StringHelper::startsWith($first, 'admin')) {
+                    elseif (strtolower(trim($first)) == 'admin') {
                         $this->_isAdmin = true;
                     } else {
                         $this->_isAdmin = false;
