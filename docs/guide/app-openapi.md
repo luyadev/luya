@@ -95,7 +95,27 @@ public function actionPostSave()
 
 Which would be equals to `$_POST['username']` and `$_POST['password']`.
 
-### Change Verb
+### Working with actions() Array
+
+With the Yii Framework its very convient to make use of `actions()` definition as array inside a controller. This allows to easy share actions among controllers. The downside of this behavior is the Description and Title of those Actions are always the same. So the OpenApi Documentation for those actions like Rest Actions `actionIndex()`, `actionUpdate($id)`, `actionView($id)` are all the same. In order to fix this problem we encourage you to use [@method](https://docs.phpdoc.org/latest/references/phpdoc/tags/method.html) PhpDoc Param this will also improve the Documentation of your Code and generate correctly meaningful OpenApi documentations.
+
+```php
+<?php
+/**
+ * @method app\models\User[] actionIndex() Returns all user along with ........
+ */
+ class MyApiController
+ {
+     public function actions()
+     {
+         return [
+             'index' => ['class' => 'yii\rest\IndexAction']
+         ];
+     }
+ }
+```
+
+## Change Verb
 
 In order to ensure all the actions have the correct verbs its recommend to use the {{luya\base\Module::$rulRule}} variable, which can declare or override actuall {{yii\rest\UrlRule}} patters or add extraPattersn:
 
