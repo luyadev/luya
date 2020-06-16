@@ -135,14 +135,14 @@ $config->consoleComponent('request', [
 ]);
 ```
 
-// depending on console or web request would resolve:
+depending on console or web request would resolve:
+
 ```php
 // on web runtime:
 'request' => [
     'isConsoleRequest' => false,
     'cookieValidationKey' => 'XYZ',
 ];
-
 // while on console runtime:
 'request' => [
     'isConsoleRequest' => false,
