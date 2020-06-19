@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.5.0
+## 1.5.0 (19. June 2020)
 
 + [#2029](https://github.com/luyadev/luya/pull/2029) Ensure `administrator` path does not resolve in `luya\web\Request::$isAdmin` true.
 + [#2028](https://github.com/luyadev/luya/pull/2028) New `StringHelper::template()` method to parse variables inside a string containing `{{ name }}` curly brackets.
