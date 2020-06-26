@@ -33,8 +33,7 @@ Other helpfull informations:
 If you have any questions or problems, don't hesitate to find support in the following channels.
 
 + [Issues on GitHub](https://github.com/luyadev/luya/issues)
-+ [Join the Slack Team](https://slack.luya.io)
-+ [Ask us in Gitter](https://gitter.im/luyadev/luya)
++ [Join the Forum](https://forum.luya.io)
 
 ## Bug Report
 
