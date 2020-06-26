@@ -4,4 +4,4 @@ We have made a enviroment repos for developers you can clone into your webserver
 
 https://github.com/luyadev/luya-env-dev
 
-For any questions you can also join the slack community: https://slack.luya.io
+For any questions you can also join the Forum: https://forum.luya.io
