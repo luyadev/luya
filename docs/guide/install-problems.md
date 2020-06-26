@@ -40,4 +40,4 @@ Maybe you like to test the latest features of LUYA, so you can use the following
 ## Ask us!
 
 + If you are getting problems during the installation of LUYA, unexpected errors or strange behaviors please [create an issue on GitHub](https://github.com/luyadev/luya/issues).
-+ Join our Slack Team: [![Join the Slack Team](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
++ Join the Forum [forum.luya.io](https://forum.luya.io)
