@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.5.1 (in progress)
+
++ [#2031](https://github.com/luyadev/luya/issues/2031) Updated LazyLoad for `options` array so that `alt` and `title` attributes can be passed to it.
+
 ## 1.5.0 (19. June 2020)
 
 + [#2029](https://github.com/luyadev/luya/pull/2029) Ensure `administrator` path does not resolve in `luya\web\Request::$isAdmin` true.
