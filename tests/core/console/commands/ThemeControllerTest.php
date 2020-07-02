@@ -22,9 +22,11 @@ class ThemeControllerTest extends \luyatests\LuyaConsoleTestCase
         $this->assertEquals(0, $exitCode);
         
         $this->assertDirectoryExists($themePath);
-        $this->assertDirectoryExists($themePath . DIRECTORY_SEPARATOR . 'resources');
-        $this->assertDirectoryExists($themePath . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'cmslayouts');
-        $this->assertDirectoryExists($themePath . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layouts');
+        $this->assertDirectoryExists($themePath . 'resources');
+        $this->assertFileExists($themePath . 'resources/mynewtheme.css');
+        $this->assertFileExists($themePath . 'MynewthemeAsset.php');
+        $this->assertFileExists($themePath . 'views' . DIRECTORY_SEPARATOR . 'cmslayouts/theme.php');
+        $this->assertFileExists($themePath . 'views' . DIRECTORY_SEPARATOR . 'layouts/theme.php');
         
         $expectedJson = <<<JSON
 {

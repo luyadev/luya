@@ -87,7 +87,7 @@ class ThemeController extends \luya\console\Command
         $contents = [
             $themeFolder. DIRECTORY_SEPARATOR . 'theme.json' => $this->renderJson($basePath, $themeName),
             $themeFolder. DIRECTORY_SEPARATOR . ucfirst($themeName) . 'Asset.php' => $this->renderAssetClass($themeName),
-            $themeFolder. DIRECTORY_SEPARATOR . 'resources/'. $themeName .'-asset/style.css' => '',
+            $themeFolder. DIRECTORY_SEPARATOR . 'resources/'. $themeName .'.css' => '',
             $themeFolder. DIRECTORY_SEPARATOR . 'views/layouts/theme.php' => $this->renderLayout($themeName),
             $themeFolder. DIRECTORY_SEPARATOR . 'views/cmslayouts/theme.php' => $this->renderCmsLayout($themeName),
         ];
@@ -159,7 +159,7 @@ use luya\web\Asset;
 class {$className} extends Asset
 {
     public \$css = [
-        \'{$themeName}.css\',
+        'resources/{$themeName}.css',
     ];
 }";
     }
@@ -177,7 +177,7 @@ class {$className} extends Asset
 /**
  * @var $this \luya\web\View
  */
-use luya\themes\frontend\\'.$className.';
+use app\themes\\'.$themeName.'\\'.$className.';
 
 '.$className.'::register($this);
 
