@@ -54,28 +54,27 @@ The following conventions have to be used when contributing to the LUYA project.
 
 ```php
 <?php
-namespace Vendor\Package;
+namespace Vendor;
 
 use FooInterface;
 use BarClass as Bar;
-use OtherVendor\OtherPackage\BazClass;
 
 class Foo extends Bar implements FooInterface
 {
     public function sampleFunction($a, $b = null)
     {
         if ($a === $b) {
-            bar();
+            
         } elseif ($a > $b) {
-            $foo->bar($arg1);
+            
         } else {
-            BazClass::bar($arg2, $arg3);
+            
         }
     }
 
     final public static function bar()
     {
-        // method body
+        
     }
 }
 ```
@@ -140,6 +139,10 @@ class FooBar
      }
 }
 ```
+
+With introduction of LUYA Admin OpenApi Generator we make use of the `@uses` tag to reference POST Request Bodies. As the POST data is not defined in the `@param` section we recommend to use `@uses`, see [[app-openapi.md]].
+
+Which would be equals to `$_POST['username']` and `$_POST['password']`.
 
 ### SQL
 

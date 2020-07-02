@@ -86,6 +86,9 @@ use luya\helpers\ArrayHelper;
  *
  * return $config->toArray(Config::ENV_PROD); // would only return the prod env db component
  * ```
+ * 
+ * > When mergin varaibles, the later will always override the former. If arrays are involved the values will be added, not replaced!
+ * > Example: `'foo' => 'bar', 'values' => [1]` and `'foo' => 'baz', 'values' => [2]` will be merged to: `'foo' => 'baz', 'values' => [1,2]`.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.21
@@ -145,7 +148,33 @@ class Config
      * Assign the env to each component, module or application that defined inside the callback.
      *
      * Callback function has one parameter with the current {{luya\Config}} object.
+     * 
+     * An example using env to wrap multiple configuration lines into a single environment:
+     * 
+     * ```php
+     * $config->env(Config::ENV_LOCAL, function($config) {
+     *   
+     *     $config->callback(function() {
+     *         define('YII_DEBUG', true);
+     *         define('YII_ENV', 'local');
+     *     });
+     *   
+     *     $config->component('db', [
+     *         'dsn' => 'mysql:host=luya_db;dbname=luya_kickstarter',
+     *         'username' => 'luya',
+     *         'password' => 'luya',
+     *         'enableSchemaCache' => false,
+     *     ]);
+     *   
+     *     $config->module('debug', [
+     *         'class' => 'yii\debug\Module',
+     *         'allowedIPs' => ['*'],
+     *     ]);
      *
+     *     $config->bootstrap(['debug']);
+     * });
+     * ```
+     * 
      * @param string $env The environment to assigne inside the callback.
      * @param callable $callback function(\luya\Config $config)
      * @return $this

@@ -212,4 +212,25 @@ EOT;
             5 => 'я',
         ], StringHelper::mb_str_split('Маруся'));
     }
+
+    public function testMatchFilter()
+    {
+        $this->assertTrue(StringHelper::filterMatch('hello', 'hello'));
+        $this->assertTrue(StringHelper::filterMatch('hello', 'HELLO'));
+        $this->assertTrue(StringHelper::filterMatch('hello', 'he*'));
+        $this->assertFalse(StringHelper::filterMatch('hello', ['foo', 'bar']));
+        $this->assertFalse(StringHelper::filterMatch('hello', '!hello'));
+        $this->assertFalse(StringHelper::filterMatch('hello', '!hello', 'hello'));
+    }
+
+    public function testTemplate()
+    {
+        $this->assertSame('<p>bar</p>', StringHelper::template('<p>bar</p>'));
+        $this->assertSame('<p>bar</p>', StringHelper::template('<p>{{foo}}</p>', ['foo' => 'bar']));
+        $this->assertSame('<p>bar</p>', StringHelper::template('<p>{{ foo }}</p>', ['foo' => 'bar']));
+
+        $this->assertSame('<p>bar {{unknown}}</p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar']));
+        $this->assertSame('<p>bar {{unknown}}</p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar', 'xyz' => 'abc']));
+        $this->assertSame('<p>bar </p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar', 'xyz' => 'abc'], true));
+    }
 }

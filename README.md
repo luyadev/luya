@@ -5,14 +5,13 @@
 The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-core/v/stable)](https://packagist.org/packages/luyadev/luya-core)
-[![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
+![Tests](https://github.com/luyadev/luya/workflows/Tests/badge.svg)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ef6b66d505ccf0b731b5/test_coverage)](https://codeclimate.com/github/luyadev/luya/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ef6b66d505ccf0b731b5/maintainability)](https://codeclimate.com/github/luyadev/luya/maintainability)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
-[![Join the Slack Team](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 
-![LUYA RC4 Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-rc4.png)
+![LUYA RC4 Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/images/cms.png)
 
 ## Installation
 
@@ -33,8 +32,7 @@ Other helpfull informations:
 If you have any questions or problems, don't hesitate to find support in the following channels.
 
 + [Issues on GitHub](https://github.com/luyadev/luya/issues)
-+ [Join the Slack Team](https://slack.luya.io)
-+ [Ask us in Gitter](https://gitter.im/luyadev/luya)
++ [Join the Forum](https://forum.luya.io)
 
 ## Bug Report
 

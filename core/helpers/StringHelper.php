@@ -41,7 +41,9 @@ class StringHelper extends BaseStringHelper
     }
     
     /**
-     * Checke whether a strings starts with the wildcard symbole and compares the string before the wild card symbol *
+     * String Wildcard Check.
+     * 
+     * Checks whether a strings starts with the wildcard symbole and compares the string before the wild card symbol *
      * with the string provided, if there is NO wildcard symbold it always return false.
      *
      *
@@ -58,6 +60,63 @@ class StringHelper extends BaseStringHelper
         }
         
         return self::startsWith($string, rtrim($with, '*'), $caseSensitive);
+    }
+
+
+
+    /**
+     * See if filter conditions match the given value.
+     * 
+     * Example filter conditions:
+     *
+     * + `cms_*` matches everything starting with "cms_".
+     * + `cms_*,admin_*` matches booth cms_* and admin_* tables.
+     * + `!cms_*` matches all not start with "cms_"
+     * + `!cms_*,!admin_*` matches all not starting with "cms_" and not starting with "admin_"
+     * + `cms_*,!admin_*` matches all start with "cms_" but not start with "admin_"
+     *
+     * Only first match is relevant:
+     * 
+     * + "cms_*,!admin_*,admin_*" include all cms_* tables but exclude all admin_* tables (last match has no effect)
+     * + "cms_*,admin_*,!admin_*" include all cms_* and admin_* tables (last match has no effect)
+     * 
+     * Example using condition string:
+     * 
+     * ```php
+     * filterMatch('hello', 'he*'); // true
+     * filterMatch('hello', 'ho,he*'); // true
+     * filterMatch('hello', ['ho', 'he*']); // true
+     * ```
+     *
+     * @param $value The value on which the filter conditions should be applied on.
+     * @param array|string $filters An array of filter conditions, if a string is given he will be exploded by commas.
+     * @param boolean $caseSensitive Whether to match value even when lower/upper case is not correct/same.
+     * @return bool Returns true if one of the given filter conditions matches.
+     * @since 1.3.0
+     */
+    public static function filterMatch($value, $conditions, $caseSensitive = true)
+    {
+        if (is_scalar($conditions)) {
+            $conditions = self::explode($conditions, ",", true, true);
+        }
+
+        foreach ($conditions as $condition) {
+            $isMatch = true;
+            // negate
+            if (substr($condition, 0, 1) == "!") {
+                $isMatch = false;
+                $condition = substr($condition, 1);
+            }
+            if ($caseSensitive) {
+                $condition = strtolower($condition);
+                $value = strtolower($value);
+            }
+            if ($condition == $value || self::startsWithWildcard($value, $condition)) {
+                return $isMatch;
+            }
+        }
+
+        return false;
     }
     
     /**
@@ -315,5 +374,45 @@ class StringHelper extends BaseStringHelper
         }    
 
         return is_numeric($value);
+    }
+
+    /**
+     * Templating a string with Variables
+     * 
+     * The variables should be declared as `{{username}}` while the variables array key should contain `username`.
+     * 
+     * Usage example:
+     * 
+     * ```php
+     * $content = StringHelper::template('<p>{{ name }}</p>', ['name' => 'John']);
+     * 
+     * // output: <p>John</p>
+     * ```
+     * 
+     * If a variable is not found, the original curly bracktes will be returned.
+     * 
+     * @param string $template The template to parse. The template may contain double curly brackets variables.
+     * @param array $variables The variables which should be available in the template.
+     * @param boolean $removeEmpty Whether variables in double curly brackets should be removed event the have not be assigned by $variables array.
+     * @return string
+     * @since 1.5.0
+     */
+    public static function template($template, array $variables = [], $removeEmpty = false)
+    {
+        preg_match_all("/{{(.*?)}}/", $template, $matches, PREG_SET_ORDER);
+
+        if (empty($matches)) {
+            return $template;
+        }
+
+        foreach ($matches as $match) {
+            if (array_key_exists(trim($match[1]), $variables)) {
+                $template = str_replace($match[0], $variables[trim($match[1])], $template);
+            } elseif ($removeEmpty) {
+                $template = str_replace($match[0], '', $template);
+            }
+        }
+
+        return $template;
     }
 }

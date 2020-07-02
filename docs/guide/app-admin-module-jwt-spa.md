@@ -34,7 +34,8 @@ The image shows the above descriped cycle.
 
 ## Setup
 
-1. Configure the {{luya\admin\components\Jwt}} component in your config:
++ Create an Api User in the Admin UI which will handle the JWT requests as Proxy User.
++ Configure the {{luya\admin\components\Jwt}} component in your config:
 
 ```php
 'components' => [
@@ -47,9 +48,9 @@ The image shows the above descriped cycle.
 ],
 ```
 
-2. Implement the {{luya\admin\base\JwtIdentityInterface}} into the given {{luya\admin\components\Jwt::$identityClass}}.
-3. Generate an Action for Login (generate token) and signup (if needed).
-4. Setup the defined {{luya\admin\components\Jwt::$apiUserEmail}} Api User and grant the needed permissions (none if no admin resources should be accessible).
++ Implement the {{luya\admin\base\JwtIdentityInterface}} into the given {{luya\admin\components\Jwt::$identityClass}}.
++ Generate an Action for Login (generate token) and signup (if needed).
++ Setup the defined {{luya\admin\components\Jwt::$apiUserEmail}} Api User and grant the needed permissions (none if no admin resources should be accessible).
 
 The User which contains user data:
 

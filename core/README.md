@@ -10,7 +10,6 @@ The LUYA core extends the [Yii 2 Framework](https://github.com/yiisoft/yii2) by 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ef6b66d505ccf0b731b5/test_coverage)](https://codeclimate.com/github/luyadev/luya/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ef6b66d505ccf0b731b5/maintainability)](https://codeclimate.com/github/luyadev/luya/maintainability)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
-[![Join the Slack Team](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 
 ## About the LUYA core

@@ -18,6 +18,7 @@ use luya\web\View;
  *
  * @author Basil Suter <basil@nadar.io>
  * @author Marc Stampfli <marc.stampfli@zephir.ch>
+ * @author Alex Schmid <schmid@netfant.ch>
  * @since 1.0.0
  */
 class LazyLoad extends Widget
@@ -63,6 +64,12 @@ class LazyLoad extends Widget
      * @var string Additional classes for the lazy load image.
      */
     public $extraClass;
+
+    /**
+     * @var array Options array for the html tag. This array can be used to pass e.g. a `title` or `alt` tag.
+     * @since 1.5.1
+     */
+    public $options = [];
 
     /**
      * @inheritdoc
@@ -162,12 +169,12 @@ class LazyLoad extends Widget
 
         if ($this->placeholderSrc) {
             $tag = '<div class="' . $class . '">';
-            $tag .= Html::tag('img', '', ['class' => 'lazy-image lazyimage', 'data-src' => $this->src]);
+            $tag .= Html::tag('img', '', array_merge($this->options, ['class' => 'lazy-image lazyimage', 'data-src' => $this->src]));
             $tag .= Html::tag('img', '', ['class' => 'lazyimage-placeholder-image', 'src' => $this->placeholderSrc]);
             $tag .= '<noscript><img class="lazyimage-image" src="' . $this->src . '" /></noscript>';
             $tag .= '</div>';
         } else {
-            $tag = Html::tag('img', '', ['class' => $class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
+            $tag = Html::tag('img', '', array_merge($this->options, ['class' => $class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]));
             if ($this->width && $this->height) {
                 $tag .= '<div class="lazy-placeholder ' . $class .'"><div style="display: block; height: 0px; padding-bottom: ' . ($this->height / $this->width) * 100 . '%;"></div><div class="loader"></div></div>';
             }

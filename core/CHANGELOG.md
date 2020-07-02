@@ -3,11 +3,40 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.2.2
+## 1.5.1 (in progress)
+
++ [#2031](https://github.com/luyadev/luya/issues/2031) Updated LazyLoad for `options` array so that `alt` and `title` attributes can be passed to it.
+
+## 1.5.0 (19. June 2020)
+
++ [#2029](https://github.com/luyadev/luya/pull/2029) Ensure `administrator` path does not resolve in `luya\web\Request::$isAdmin` true.
++ [#2028](https://github.com/luyadev/luya/pull/2028) New `StringHelper::template()` method to parse variables inside a string containing `{{ name }}` curly brackets.
+
+## 1.4.1 (4. June 2020)
+
++ [#2027](https://github.com/luyadev/luya/pull/2027) Fixed regression with `luya\web\Request::$isAdmin` when working with admin module names like `newsadmin/default/index` (introduced in [#2019](https://github.com/luyadev/luya/issues/2019)).
+
+## 1.4.0 (2. June 2020)
+
++ [#2019](https://github.com/luyadev/luya/issues/2019) The property `luya\web\Request::$isAdmin` is now more restrict and won't match admin modules like `newsadmin` which would have been evaulated as true before this change.
++ [#2023](https://github.com/luyadev/luya/issues/2023) Added `rel="noopener"` to links which open in a new window.
+
+## 1.3.1 (7. May 2020)
+
++ [#2021](https://github.com/luyadev/luya/pull/2021) Add App and Yii version to ErrorHandler API.
+
+## 1.3.0 (28. April 2020)
+
++ [#2017](https://github.com/luyadev/luya/pull/2017) Improve the performance of `luya\traits\RegistryTrait`
++ [#2014](https://github.com/luyadev/luya/pull/2014) Replace Travis-CI with GitHub Actions, fix PHP 7.4 compatibility issue.
++ [#2016](https://github.com/luyadev/luya/pull/2016) Added new `luya\helpers\String::filterMatch()` filter match function to filter a value based on multiple conditions.
+
+## 1.2.2 (20. April 2020)
 
 + [#2011](https://github.com/luyadev/luya/pull/2011) Update theme create command to work on Windows
 + [#2009](https://github.com/luyadev/luya/pull/2009) Improve the performance of mb_str_split, this will strongly improve the speed when working with LUYA crawler result previews.
 + [#2012](https://github.com/luyadev/luya/pull/2012) Extend the create theme cli command with assets.
++ [#2015](https://github.com/luyadev/luya/pull/2015) JsonLd Offers information added.
 
 ## 1.2.1 (7. April 2020)
 

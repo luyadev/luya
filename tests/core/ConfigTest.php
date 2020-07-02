@@ -294,4 +294,54 @@ class ConfigTest extends LuyaWebTestCase
         // the callable has no effect sind it only runs in prod
         $this->assertTrue($config->isCliRuntime());
     }
+
+    public function testMergeApplicationLevel()
+    {
+        $config = new Config('foo', 'bar');
+        $config->application(['version' => 1]);
+        $config->application(['version' => 2]);
+
+        $this->assertSame([
+            'id' => 'foo',
+            'basePath' => 'bar',
+            'version' => 2,
+        ], $config->toArray());
+    }
+
+    public function testMergeSameVariable()
+    {
+        $config = new Config('foo', 'bar', [
+            'components' => [
+                'composition' => [
+                    'hidden' => false,
+                    'default' => ['langShortCode' => 'de'],
+                    'allowedHosts' => ['*.foo'],
+                ],
+            ]
+        ]);
+
+        $config->env(Config::ENV_LOCAL, function($config) {
+            $config->component('composition', [
+                'allowedHosts' => ['dd'],
+                'hidden' => true,
+            ]);
+        });
+
+        $this->assertSame([
+            'components' => [
+                'composition' => [
+                    'hidden' => true,
+                    'default' => [
+                        'langShortCode' => 'de'
+                    ],
+                    'allowedHosts' => [
+                        0 => '*.foo',
+                        1 => 'dd'
+                    ],
+                ],
+            ],
+            'id' => 'foo',
+            'basePath' => 'bar',
+        ], $config->toArray([Config::ENV_LOCAL]));
+    }
 }
