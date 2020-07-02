@@ -24,7 +24,7 @@ class ThemeControllerTest extends \luyatests\LuyaConsoleTestCase
         $this->assertDirectoryExists($themePath);
         $this->assertDirectoryExists($themePath . 'resources');
         $this->assertFileExists($themePath . 'resources/mynewtheme.css');
-        $this->assertFileExists($themePath . 'MyNewThemeAsset.php');
+        $this->assertFileExists($themePath . 'MynewthemeAsset.php');
         $this->assertFileExists($themePath . 'views' . DIRECTORY_SEPARATOR . 'cmslayouts/theme.php');
         $this->assertFileExists($themePath . 'views' . DIRECTORY_SEPARATOR . 'layouts/theme.php');
         
