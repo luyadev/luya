@@ -37,6 +37,7 @@ The plugins listed below can be configured but make sure your are familiar with 
 |html|{{luya\admin\ngrest\plugins\Html}}|string|HTML data without encoding.
 |raw|{{luya\admin\ngrest\plugins\Raw}}|string|Does not modify the content, usefull when working with json api input/output.
 |index|{{luya\admin\ngrest\plugins\Index}}|string|Sequential number index.
+|angular|{{luya\admin\ngrest\plugins\Angular}}|string|Write a custom Angular Js Template which can interact with the current item value.
 
 ## Create a custom project Plugin
 
