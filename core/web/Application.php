@@ -10,6 +10,7 @@ use yii\web\ForbiddenHttpException;
  * LUYA Web Application.
  *
  * @property \luya\cms\Menu $menu Menu component in order to build navigation from CMS module.
+ * @property \luya\cms\Website $website Website component in order to get website from CMS module.
  * @property \luya\admin\storage\BaseFileSystemStorage $storage Storage component for reading, saving and holding files from the Admin module.
  * @property \luya\web\Composition $composition Composition component.
  * @property \luya\web\Element $element The element component.
