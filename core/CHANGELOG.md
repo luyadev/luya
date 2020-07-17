@@ -7,6 +7,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 + [#2031](https://github.com/luyadev/luya/issues/2031) Updated LazyLoad for `options` array so that `alt` and `title` attributes can be passed to it.
 + [#2020](https://github.com/luyadev/luya/issues/2020) Fixed generated files of theme/create command.
++ [#2037](https://github.com/luyadev/luya/issues/2037) Overhauled the LazyLoad javascript, now uses IntersectionObserver.
 
 ## 1.5.0 (19. June 2020)
 

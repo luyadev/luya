@@ -5,292 +5,208 @@
 
 (function ($) {
 
-    var initialized = false;
+    const lazyload = {
 
-    // Default settings, can be overwritten
-    var settings = {
-        // General settings
-        threshold: 200,
-        imageIdentifierPrefix: 'lazy-image-',
-        imageSelector: '.lazy-image:not(.lazy-placeholder)',
-        placeholderClass: 'lazy-placeholder',
+        debug: false,
+        initialized: false,
 
-        // Settings for non image placeholder
-        defaultAspectRatio: 1.777777778,
+        // Used to identify all lazyload images
+        // including background images
+        imageSelector: '.js-lazyimage',
+        // The image class applied to all regular
+        // <img> lazyload images
+        imageClass: 'lazyimage',
+        // The wrapper class around the lazyimage
+        // used for positioning and
+        // aspect ratio
+        imageWrapperClass: 'lazyimage-wrapper',
+        // The placeholder div that includes the
+        // loader html
+        placeholderClass: 'lazyimage-placeholder',
+        // The loader html, customize according
+        // to your needs
         loaderHtml: '<div class="loader"></div>',
 
-        // Settings for image placeholder
-    };
+        images: [],
+        observer: null,
+        observerOptions: {
+            root: document,
+            rootMargin: '200px 0px 200px',
+            threshold: 0.01
+        },
 
-    // Status object, will be used to determine if a refresh is necessary
-    var status = {
-        viewportChanged: false,
-        touchScrolling: false,
-        resized: false
-    };
+        latestId: 0,
 
-    // The image array, will be filled on init and only updated if necessary
-    var images = [];
+        // Return a new id based on
+        // latestId
+        getId() {
+            return this.latestId += 1
+        },
 
-    var lastId = 0;
-    var getNewId = function() {
-        return lastId += 1;
-    };
+        /**
+         * Returns the image object from the
+         * images array based on the image id
+         * 
+         * @param integer id 
+         * @returns object
+         */
+        getImageById(id) {
+            return this.images.find(image => image.id === id)
+        },
+        
+        /**
+         * Collects all images on page
+         * and writes them in the images array
+         */
+        collectImages() {
+            const context = this
+            $(this.imageSelector).each(function() {
+                if ($(this).data('lazy-id') === undefined) {
+                    const id = context.getId()
+                    $(this)
+                        .data('lazy-id', id)
+                        .addClass(`${context.imageClass}-${id}`)
 
-    /**
-     * This function runs only once.
-     * Search for all images (by settings.imageSelector) and save them in the
-     * images variable. All important data gets collected here too.
-     * After all images are stored, the palceholders will be generated and
-     * the image boundaries will be calculated.
-     */
-    var fetchImages = function() {
-        images = [];
-        $(settings.imageSelector).each(function (index) {
-            if(!$(this).hasClass('loaded')) {
-                var id = getNewId();
-
-                // Add the identifying class
-                $(this).addClass(settings.imageIdentifierPrefix + id);
-
-                // Get some useful infos
-                var imageWidth = parseInt($(this).attr('data-width')),
-                    imageHeight = parseInt($(this).attr('data-height')),
-                    aspectRatio = settings.defaultAspectRatio,
-                    asBackground = $(this).attr('data-as-background');
-
-                // If we have an image width & height we can calculate the aspectRatio
-                // the aspect ration is only used for the div placeholder
-                if (imageWidth && imageHeight) {
-                    aspectRatio = imageHeight / imageWidth;
+                    context.images.push({
+                        id,
+                        el: this,
+                        asBackground: !!$(this).data('as-background'),
+                        isLoaded: false,
+                        isObserved: false
+                    })
                 }
+            })
 
-                var divPlaceholderExists = false;
-                if($(this).next('.' + settings.placeholderClass).length >= 1) {
-                    divPlaceholderExists = true;
-                }
+            this.log('Images', this.images)
+        },
 
-                images.push({
-                    id: id,
-                    source: $(this).attr('data-src'),
-                    boundaries: {},
-                    hasPlaceholderImage: $(this).hasClass('lazyimage'),
-                    divPlaceholderExists: divPlaceholderExists,
-                    width: imageWidth,
-                    height: imageHeight,
-                    aspectRatio: aspectRatio,
-                    asBackground: asBackground,
-                    html: $(this)[0].outerHTML
-                });
+        observeImages() {
+            if (!this.observer) {
+                this.initObserver()
             }
-        });
 
-        insertPlaceholder();
-        calculateImageBoundaries();
-    };
-
-    /**
-     * This function runs only once.
-     * All images that don't have a placeholder image or are only background-
-     * images will get a placeholder element inserted after the iamge.
-     */
-    var insertPlaceholder = function() {
-        $(images).each(function (index) {
-            if(!this.hasPlaceholderImage && !this.asBackground && !this.divPlaceholderExists) {
-                // Get the image by id
-                var $image = $('.' + settings.imageIdentifierPrefix + this.id);
-                var cssClass = $image.attr('class');
-
-                // Check if cssClass is set and if yes, remove the imageIdentifier
-                if(typeof cssClass === 'string') {
-                    cssClass = cssClass.replace(settings.imageIdentifierPrefix + this.id, '');
-                }
-
-                // Generate a placeholder element with the same class and
-                // insert it after the image.
-                var $placeholder = $('<div/>', {
-                    class: settings.placeholderClass + ' ' + cssClass,
-                });
-
-                $placeholder.append($('<div/>').css({
-                    'height': 0,
-                    'padding-bottom': (this.aspectRatio * 100) + '%'
-                }));
-
-                $placeholder.append($(settings.loaderHtml));
-
-                $placeholder.insertAfter($image);
-
-                if(images[index]) {
-                    images[index].divPlaceholderExists = true;
+            for (const image of this.images) {
+                if (!image.isObserved && !image.isLoaded) {
+                    this.observer.observe(image.el)
+                    image.isObserved = true
                 }
             }
-        });
-    };
+        },
 
-    /**
-     * This function determines which images are visible.
-     * It will run everytime a status (in the status object) gets updated.
-     */
-    var getVisibleImages = function() {
-        var filterImages = function() {
-            return $.grep(images, function (image) {
-                if (typeof image === 'undefined')
-                    return false;
+        imageIntersects(entries) {
+            for (const entry of entries) {
+                if (entry.isIntersecting) {
+                    this.observer.unobserve(entry.target)
+                    this.loadImage(this.getImageById($(entry.target).data('lazy-id')))
+                }
+            }
+        },
 
-                var windowTop = $(window).scrollTop();
-                var windowHeight = $(window).innerHeight();
+        loadImage(image) {
+            const context = this
 
-                var docViewTop = windowTop - 200 - settings.threshold;
-                var docViewBottom = (windowTop + windowHeight) + 200 + settings.threshold;
+            this.log('Image loading:', { id: image.id, image })
 
-                // Check if image is in view
-                return (
-                    image.boundaries.top >= docViewTop && image.boundaries.top <= docViewBottom ||
-                    image.boundaries.top <= docViewTop && image.boundaries.bottom <= docViewBottom && image.boundaries.bottom >= docViewTop
-                );
-            });
-        };
+            $(document).trigger('lazyimage-loading', {
+                image
+            })
 
-        // If the screen got resized we need to update the image boundaries first
-        if (status.resized) {
-            status.resized = false;
-            return calculateImageBoundaries(filterImages);
-        }
-
-        return filterImages();
-    };
-
-    /**
-     * Load all visible images
-     */
-    var loadVisibleImages = function () {
-        var visibleImages = getVisibleImages();
-
-        $(visibleImages).each(function () {
-            // Generate a new image, add the source so it starts loading
-            var $loadImage = $('<img/>', {
-                src: this.source
-            });
-
-            var image = this;
-            var imageIndex = images.map(function(e) { return e.id; }).indexOf(image.id);
+            const $loadImage = $('<img/>')
 
             // If the image was loaded successfully
             $loadImage.on('load', function () {
-                // Remove the image from the images array because it's not
-                // needed anymore
-                delete images[imageIndex];
+                image.isLoaded = true
 
-                var $image = $('.' + settings.imageIdentifierPrefix + image.id);
-                var $placeholder = $image.next('.' + settings.placeholderClass);
-
-                // Update the original img tag to show the image
-                $image.attr('src', image.source);
-                $image.addClass('loaded');
+                const $el = $(image.el)
 
                 if (image.asBackground) {
                     // If the image is a background-image we need to update the
                     // original div with the background image url
-                    $('.' + settings.imageIdentifierPrefix + image.id).css({
-                        backgroundImage: 'url(' + image.source + ')'
+                    $el.css({
+                        backgroundImage: 'url(' + $el.data('src') + ')'
                     })
-                } else if (!image.hasPlaceholderImage) {
-                    // If the image has a placeholder div we need to remove it
-                    $placeholder.hide();
+                } else {
+                    // Set the src value
+                    // apply the "loaded" class
+                    $el
+                        .attr('src', $el.data('src'))
+                        .addClass('loaded')
+                        .parent(`.${context.imageWrapperClass}`)
+                        .addClass('loaded')
                 }
+
+                context.log('Image loaded:', { id: image.id, image })
 
                 // Trigger a success event
                 $(document).trigger("lazyimage-loaded", {
                     type: 'success',
-                    imageId: '.' + settings.imageIdentifierPrefix + image.id
-                });
-            });
+                    image
+                })
+            })
 
             // If the image can't be loaded
             $loadImage.on('error', function () {
-                delete images[imageIndex];
+                context.log('Image load error:', { id: image.id, image })
 
                 // Trigger a error event
                 $(document).trigger("lazyimage-loaded", {
                     type: 'error',
-                    imageId: '.' + settings.imageIdentifierPrefix + image.id
-                });
-            });
-        });
-    };
+                    image
+                })
+            })
 
-    /**
-     * Calculates the images top and bottom boundaries
-     */
-    var calculateImageBoundaries = function(callback) {
-        for (var imageIndex in images) {
-            var image = images[imageIndex];
-            var $image = $('.' + settings.imageIdentifierPrefix + image.id);
-            var $placeholder = $image.next('.' + settings.placeholderClass);
+            // Load the image
+            $loadImage.attr('src', $(image.el).data('src'))
+        },
 
-            // The image might not have a placeholder, if that's the case
-            // we use the image element itself
-            var elemTop = $placeholder.length > 0 ? $placeholder.offset().top : $image.offset().top;
+        initObserver() {
+            this.observer = new IntersectionObserver(this.imageIntersects.bind(this), this.observerOptions)
+        },
 
-            image.boundaries = {
-                top: elemTop,
-                bottom: elemTop + ($placeholder.length > 0 ? $placeholder.outerHeight() : $image.outerHeight()),
-            };
+        init(options) {
+            this.log('Init, options:', options || {})
 
-            // Update the image in the images array
-            images[imageIndex] = image;
+            // Extend the lazyload object options
+            for (const option in options) {
+                if (this.hasOwnProperty(option) && typeof this[option] !== 'function') {
+                    if (typeof this[option] === 'object') {
+                        this[option] = $.extend(this[option], options[option])
+                    } else {
+                        this[option] = options[option]
+                    }
+                }
+            }
+
+            // If not initialized already, do so
+            if (!this.initialized) {
+                this.collectImages()
+                this.initObserver()
+                this.observeImages()
+            }
+
+            this.initialized = true
+        },
+
+        log() {
+            if (this.debug) {
+                console.log(...arguments)
+            }
         }
+    }
 
-        if (typeof callback === 'function') {
-            return callback();
-        }
-    };
-
-    $.lazyLoad = function (options) {        
+    $.lazyLoad = function (options) {
         if(typeof options === 'string') {
             switch(options) {
                 case 'refetchElements':
-                fetchImages();
-                loadVisibleImages();
+                case 'collectImages':
+                    lazyload.collectImages()
+                    lazyload.observeImages()
                 break;
             }
-        } else if (!initialized) {
-            initialized = true;
-
-            if(options) {
-                settings = $.extend(settings, options);
-            }
-
-            // Fetch images to prepare the iamges array
-            fetchImages();
-
-            // Regularly check for changes and run needed functions
-            setInterval(function () {
-                if (status.viewportChanged === true || status.touchScrolling === true) {
-                    loadVisibleImages();
-                    status.viewportChanged = false;
-                    status.touchScrolling = false;
-                }
-            }, 250);
-
-            // Listen to different events the script needs to react to
-            $(document).on('touchmove', function () {
-                status.touchScrolling = true;
-            });
-            $(window).on('scroll resize', function () {
-                status.viewportChanged = true;
-                status.touchScrolling = false;
-            });
-            $(window).on('resize', function () {
-                status.resized = true;
-            });
-
-            // Finally, start loading of the first visible images (if there are any)
-            loadVisibleImages();
+        } else {
+            lazyload.init(options)
+            return this
         }
+    }
 
-        return this;
-    };
-
-}(jQuery));
+}(jQuery))
