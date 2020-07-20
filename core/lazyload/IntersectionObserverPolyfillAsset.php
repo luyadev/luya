@@ -7,8 +7,8 @@ use luya\web\Asset;
 /**
  * The Lazyload asset files provides all required resources and implements jquery.
  *
- * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0
+ * @author Marc Stampfli <marc@zephir.ch>
+ * @since 1.6.0
  */
 class IntersectionObserverPolyfillAsset extends Asset
 {

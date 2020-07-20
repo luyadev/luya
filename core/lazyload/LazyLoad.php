@@ -7,8 +7,6 @@ use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use luya\web\View;
 
-use function GuzzleHttp\json_encode;
-
 /**
  * Image Lazy Loader.
  *
@@ -19,7 +17,7 @@ use function GuzzleHttp\json_encode;
  * In order to read more visit the [[concept-lazyload.md]] guide section.
  *
  * @author Basil Suter <basil@nadar.io>
- * @author Marc Stampfli <marc.stampfli@zephir.ch>
+ * @author Marc Stampfli <marc@zephir.ch>
  * @author Alex Schmid <schmid@netfant.ch>
  * @since 1.0.0
  */

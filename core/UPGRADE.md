@@ -3,7 +3,7 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
-## 1.5.1
+## 1.6.0
 
 + [#2037](https://github.com/luyadev/luya/issues/2037) Because of the recent changes and to make the transition between placeholder and image smoother, the image won't have "position: relative" anymore. The image now relys on the wrapper and the placeholder to set its size. The only issue with that is, that you can't apply a width directly to the `<img>` tag anymore. Now it has to be applied to the parent div (`.lazyimage-wrapper`) or any element above.
 
