@@ -83,17 +83,6 @@ To use the lazyloader with a background image, e.g. on a `<div class="lazy-image
 <noscript><div class="custom-classes" style="background-image: url(<?= $extras['image']->source ?>);"></div></noscript>
 ```
 
-## Event
-
-Each image wich is fully loaded will trigger an event `lazyimage-loaded` on the `document`.
-The event provides an object with the image id (ID selector) and the type of the event (`success` or `error`).
-
-```
-$(document).on("lazyimage-loaded", function(e, response) {
-    $(response.imageId).doStuff();
-});
-```
-
 ## Using lazy loader with storage component
 
 Using the lazy loader with a storage component {{\luya\admin\image\Item}} is easier because you can automatically get the width and height from the storage component:
@@ -106,3 +95,62 @@ $image = Yii::$app->storage->getImage(123);
     'height' => $image->resolutionHeight,
 ]); ?>
 ```
+
+
+## Event
+
+Each image wich is fully loaded will trigger the events `lazyimage-loading` and `lazyimage-loaded` on the `document`.
+The `lazyimage-loaded` event provides an object with the imageObject used and the type of the event (`success` or `error`).
+
+```
+$(document).on("lazyimage-loaded", function(e, image) {
+    console.log(image)
+});
+```
+
+## Legacy support
+
+If you **don't** need older browser (mainly IE) support, you can disable the legacy support (https://caniuse.com/#feat=intersectionobserver).
+
+```php
+<?= LazyLoad::widget([
+    'legacySupport' => false
+]); ?>
+```
+
+## JS Options
+
+To set custom JS options you will have to first disable the automatic init of the lazyload function.
+
+```php
+<?= LazyLoad::widget([
+    'initJs' => false
+]); ?>
+```
+
+Then before the closing body tag you can init lazyLoad:
+
+```js
+$.lazyLoad({
+    // Show console logs
+    debug: false,
+
+    // The loader html, customize according
+    // to your needs
+    loaderHtml: '<div class="loader"></div>',
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options
+    observerOptions: {
+        root: document,
+        rootMargin: '200px 0px 200px',
+        threshold: 0.01
+    },
+})
+```
+
+> There are more options than the ones shown here, but you probably won't need them. If you do, check the lazyload.src.js for all the options.
+
+## Collect new images
+
+If you add images dynamically (with the correct lazyload markup provided by the widget), you can call `$.lazyLoad('collectImages')`.  
+This will collect all images that aren't already existing and start to observe them.

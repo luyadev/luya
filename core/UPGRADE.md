@@ -3,6 +3,10 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+## 1.6.0
+
++ [#2037](https://github.com/luyadev/luya/issues/2037) Because of the recent changes and to make the transition between placeholder and image smoother, the image won't have "position: relative" anymore. The image now relys on the wrapper and the placeholder to set its size. The only issue with that is, that you can't apply a width directly to the `<img>` tag anymore. Now it has to be applied to the parent div (`.lazyimage-wrapper`) or any element above.
+
 ## 1.0.21
 
 + [#1772](https://github.com/luyadev/luya/issues/1772) With the new support of `luya\Config` its recommend to switch to the new configuration of LUYA. The old system will still work, but its recommend to change the way how configs are stored and retrieved. Since version 1.0.21 its recommend to have a **single config file** called `config.php`. The config file could look like this 

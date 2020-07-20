@@ -17,7 +17,7 @@ use luya\web\View;
  * In order to read more visit the [[concept-lazyload.md]] guide section.
  *
  * @author Basil Suter <basil@nadar.io>
- * @author Marc Stampfli <marc.stampfli@zephir.ch>
+ * @author Marc Stampfli <marc@zephir.ch>
  * @author Alex Schmid <schmid@netfant.ch>
  * @since 1.0.0
  */
@@ -72,6 +72,18 @@ class LazyLoad extends Widget
     public $options = [];
 
     /**
+     * @var array Legacy support for older Browsers (Adds the IntersectionOberserver Polyfill, default: true)
+     * @since 1.6.0
+     */
+    public $legacySupport = true;
+
+    /**
+     * @var array Optionally disable the automatic init of the lazyload function so you can override the JS options
+     * @since 1.6.0
+     */
+    public $initJs = true;
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -83,73 +95,58 @@ class LazyLoad extends Widget
         }
 
         // register the asset file
+        if ($this->legacySupport) {
+            IntersectionObserverPolyfillAsset::register($this->view);
+        }
         LazyLoadAsset::register($this->view);
 
-        // register js and css code with keys in order to ensure the registration is done only once
-        $this->view->registerJs("$.lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
-
-        if ($this->placeholderSrc) {
-            $this->view->registerCss("
-                .lazyimage-wrapper {
-                    display: block;
-                    width: 100%;
-                    position: relative;
-                    overflow: hidden;
-                }
-                .lazyimage {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    bottom: 0;
-                    right: 0;
-                    opacity: 0;
-                    height: 100%;
-                    width: 100%;
-                    -webkit-transition: 1s ease-in-out opacity;
-                    transition: 1s ease-in-out opacity;
-                    -webkit-transform: translate(-50%,-50%);
-                    transform: translate(-50%,-50%);
-                    -o-object-fit: cover;
-                    object-fit: cover;
-                    -o-object-position: center center;
-                    object-position: center center;
-                    z-index: 20;
-                }
-                .lazyimage.loaded {
-                    opacity: 1;
-                }
-                .lazyimage-placeholder-image {
-                    display: block;
-                    width: 100%;
-                    height: auto;
-                }
-                .nojs .lazyimage,
-                .nojs .lazyimage-placeholder-image,
-                .no-js .lazyimage,
-                .no-js .lazyimage-placeholder-image {
-                    display: none;
-                }
-            ", [], self::CSS_ASSET_KEY_PLACEHOLDER);
-        } else {
-            $this->view->registerCss("
-                .lazy-image {
-                    display: none;
-                }
-                .lazy-image.loaded {
-                    display: block;
-                }
-                .lazy-placeholder {
-                    background-color: #f2f2f2;
-                    position: relative;
-                    display: block;
-                    width: 100%;
-                }
-                .nojs .lazy-placeholder,
-                .no-js .lazy-placeholder {
-                    display: none;
-                }
-            ", [], self::CSS_ASSET_KEY);
+        if ($this->initJs) {
+            // register js and css code with keys in order to ensure the registration is done only once
+            $this->view->registerJs("$.lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
         }
+
+        $this->view->registerCss("
+            .lazyimage-wrapper {
+                display: block;
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+            .lazyimage {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                bottom: 0;
+                right: 0;
+                opacity: 0;
+                height: 100%;
+                width: 100%;
+                -webkit-transition: .5s ease-in-out opacity;
+                transition: .5s ease-in-out opacity;
+                -webkit-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+                -o-object-fit: cover;
+                object-fit: cover;
+                -o-object-position: center center;
+                object-position: center center;
+                z-index: 20;
+            }
+            .lazyimage.loaded {
+                opacity: 1;
+            }
+            .lazyimage-placeholder {
+                display: block;
+                width: 100%;
+                height: auto;
+                background-color: #f0f0f0;
+            }
+            .nojs .lazyimage,
+            .nojs .lazyimage-placeholder,
+            .no-js .lazyimage,
+            .no-js .lazyimage-placeholder {
+                display: none;
+            }
+        ", [], self::CSS_ASSET_KEY);
     }
 
     /**
@@ -157,29 +154,24 @@ class LazyLoad extends Widget
      */
     public function run()
     {
-        $class = ($this->placeholderSrc ? 'lazyimage-wrapper' : 'lazy-image') . ' ' . $this->extraClass;
-
         if ($this->placeholderSrc && $this->placeholderAsBase64) {
             $this->placeholderSrc = 'data:image/jpg;base64,' . base64_encode(file_get_contents($this->placeholderSrc));
         }
 
         if ($this->attributesOnly && !$this->placeholderSrc) {
-            return "class=\"{$class}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
+            return "class=\"js-lazyimage {$this->extraClass}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
         }
 
+        $tag = '<div class="lazyimage-wrapper ' . $this->extraClass . '">';
+        $tag .= Html::tag('img', '', array_merge($this->options, ['class' => 'js-lazyimage lazyimage', 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]));
         if ($this->placeholderSrc) {
-            $tag = '<div class="' . $class . '">';
-            $tag .= Html::tag('img', '', array_merge($this->options, ['class' => 'lazy-image lazyimage', 'data-src' => $this->src]));
-            $tag .= Html::tag('img', '', ['class' => 'lazyimage-placeholder-image', 'src' => $this->placeholderSrc]);
-            $tag .= '<noscript><img class="lazyimage-image" src="' . $this->src . '" /></noscript>';
-            $tag .= '</div>';
+            $tag .= Html::tag('img', '', ['class' => 'lazyimage-placeholder', 'src' => $this->placeholderSrc]);
         } else {
-            $tag = Html::tag('img', '', array_merge($this->options, ['class' => $class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]));
-            if ($this->width && $this->height) {
-                $tag .= '<div class="lazy-placeholder ' . $class .'"><div style="display: block; height: 0px; padding-bottom: ' . ($this->height / $this->width) * 100 . '%;"></div><div class="loader"></div></div>';
-            }
-            $tag .= '<noscript><img class="'.$class.'" src="'.$this->src.'" /></noscript>';
+            $aspectRatio = ($this->height && $this->width) ? (($this->height / $this->width) * 100) : 56.25;
+            $tag .= '<div class="lazyimage-placeholder"><div style="display: block; height: 0px; padding-bottom: ' . $aspectRatio . '%;"></div><div class="loader"></div></div>';
         }
+        $tag .= '<noscript><img class="lazyimage loaded ' . $this->extraClass . '" src="'.$this->src.'" /></noscript>';
+        $tag .= '</div>';
 
         return $tag;
     }

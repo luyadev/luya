@@ -1,6 +1,5 @@
 {
-"js" :
-    [
+    "js": [
         "lazyload.src.js"
     ]
 }
