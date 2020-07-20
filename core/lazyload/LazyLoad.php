@@ -73,13 +73,13 @@ class LazyLoad extends Widget
 
     /**
      * @var array Legacy support for older Browsers (Adds the IntersectionOberserver Polyfill, default: true)
-     * @since 1.5.1
+     * @since 1.6.0
      */
     public $legacySupport = true;
 
     /**
      * @var array Optionally disable the automatic init of the lazyload function so you can override the JS options
-     * @since 1.5.1
+     * @since 1.6.0
      */
     public $initJs = true;
 
