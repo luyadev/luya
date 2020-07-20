@@ -67,7 +67,7 @@ class LazyLoad extends Widget
 
     /**
      * @var array Options array for the html tag. This array can be used to pass e.g. a `title` or `alt` tag.
-     * @since 1.5.1
+     * @since 1.6.0
      */
     public $options = [];
 
