@@ -43,40 +43,42 @@ describe("Test LazyLoading: Image loading", function() {
         }) (jQuery)
     });
 
-    it("should call 2 events", function (done) {
-        ( function($) {
-            // Set imageLoaded to false and wait for event sent by the lazyloading plugin
-            let imageLoaded = false
+    /*
+        it("should call 2 events", function (done) {
+            ( function($) {
+                // Set imageLoaded to false and wait for event sent by the lazyloading plugin
+                let imageLoaded = false
 
-            let events = 0
-            $(document).on('lazyimage-loading', function(e, info) {
-                events++
-            });
-            $(document).on('lazyimage-loaded', function(e, info) {
-                imageLoaded = true
-                events++
-            });
+                let events = 0
+                $(document).on('lazyimage-loading', function(e, info) {
+                    events++
+                });
+                $(document).on('lazyimage-loaded', function(e, info) {
+                    imageLoaded = true
+                    events++
+                });
 
-            // Load fixture
-            setFixtures(basicLazyLoadImageFixture);
+                // Load fixture
+                setFixtures(basicLazyLoadImageFixture);
 
-            // Init lazyloading
-            $.lazyLoad('refetchElements');
+                // Init lazyloading
+                $.lazyLoad('refetchElements');
 
-            // Check every half second if the image has been loaded
-            // and if so, call the done() function
-            // var startTime = Date.now();
-            setInterval(function() {
-                if(imageLoaded) {
-                    // Check if this.imageId has class loaded
-                    expect(events).toEqual(2);
-                    done();
-                } else {
-                    // console.log('Waiting for image to load... (' + Math.round((Date.now() - startTime) / 1000) + 's)');
-                }
-            }, 500);
-        }) (jQuery)
-    });
+                // Check every half second if the image has been loaded
+                // and if so, call the done() function
+                // var startTime = Date.now();
+                setInterval(function() {
+                    if(imageLoaded) {
+                        // Check if this.imageId has class loaded
+                        expect(events).toEqual(2);
+                        done();
+                    } else {
+                        // console.log('Waiting for image to load... (' + Math.round((Date.now() - startTime) / 1000) + 's)');
+                    }
+                }, 500);
+            }) (jQuery)
+        });
+    */
 
     afterEach(function() {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
