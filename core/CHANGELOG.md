@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.6.1
+
++ [#2040](https://github.com/luyadev/luya/pull/2040) Fixed an issue where LazyLoad widget returns aspect ratio values with commas instead of dots, because of locale formatting.
+
 ## 1.6.0 (20. July 2020)
 
 > Small LazyLoader adjustment. Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.

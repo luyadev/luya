@@ -84,6 +84,51 @@ class LazyLoad extends Widget
     public $initJs = true;
 
     /**
+     * @var string The default classes which will be registered.
+     * @since 1.6.1
+     */
+    public $defaultCss = '.lazyimage-wrapper {
+        display: block;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .lazyimage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        -webkit-transition: .5s ease-in-out opacity;
+        transition: .5s ease-in-out opacity;
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center center;
+        object-position: center center;
+        z-index: 20;
+    }
+    .lazyimage.loaded {
+        opacity: 1;
+    }
+    .lazyimage-placeholder {
+        display: block;
+        width: 100%;
+        height: auto;
+        background-color: #f0f0f0;
+    }
+    .nojs .lazyimage,
+    .nojs .lazyimage-placeholder,
+    .no-js .lazyimage,
+    .no-js .lazyimage-placeholder {
+        display: none;
+    }';
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -105,48 +150,20 @@ class LazyLoad extends Widget
             $this->view->registerJs("$.lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
         }
 
-        $this->view->registerCss("
-            .lazyimage-wrapper {
-                display: block;
-                width: 100%;
-                position: relative;
-                overflow: hidden;
-            }
-            .lazyimage {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                bottom: 0;
-                right: 0;
-                opacity: 0;
-                height: 100%;
-                width: 100%;
-                -webkit-transition: .5s ease-in-out opacity;
-                transition: .5s ease-in-out opacity;
-                -webkit-transform: translate(-50%,-50%);
-                transform: translate(-50%,-50%);
-                -o-object-fit: cover;
-                object-fit: cover;
-                -o-object-position: center center;
-                object-position: center center;
-                z-index: 20;
-            }
-            .lazyimage.loaded {
-                opacity: 1;
-            }
-            .lazyimage-placeholder {
-                display: block;
-                width: 100%;
-                height: auto;
-                background-color: #f0f0f0;
-            }
-            .nojs .lazyimage,
-            .nojs .lazyimage-placeholder,
-            .no-js .lazyimage,
-            .no-js .lazyimage-placeholder {
-                display: none;
-            }
-        ", [], self::CSS_ASSET_KEY);
+        $this->view->registerCss($this->defaultCss, [], self::CSS_ASSET_KEY);
+    }
+    
+    /**
+     * Returns the aspect ration based on height or width.
+     * 
+     * If no width or height is provided, the default value 56.25 will be returned.
+     *
+     * @return float A dot seperated ratio value
+     * @since 1.6.1
+     */
+    protected function generateAspectRation()
+    {
+        return ($this->height && $this->width) ? str_replace(',', '.', ($this->height / $this->width) * 100) : 56.25;
     }
 
     /**
@@ -167,8 +184,7 @@ class LazyLoad extends Widget
         if ($this->placeholderSrc) {
             $tag .= Html::tag('img', '', ['class' => 'lazyimage-placeholder', 'src' => $this->placeholderSrc]);
         } else {
-            $aspectRatio = ($this->height && $this->width) ? (($this->height / $this->width) * 100) : 56.25;
-            $tag .= '<div class="lazyimage-placeholder"><div style="display: block; height: 0px; padding-bottom: ' . $aspectRatio . '%;"></div><div class="loader"></div></div>';
+            $tag .= '<div class="lazyimage-placeholder"><div style="display: block; height: 0px; padding-bottom: ' . $this->generateAspectRation() . '%;"></div><div class="loader"></div></div>';
         }
         $tag .= '<noscript><img class="lazyimage loaded ' . $this->extraClass . '" src="'.$this->src.'" /></noscript>';
         $tag .= '</div>';
