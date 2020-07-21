@@ -199,37 +199,37 @@ The following examples show filter requests for json body param or as get param.
 
 <tr>
 <td>
-```json
+<code>
 {
     "filter": {"group_id":{"in": [1,2,3]}
 }
-```
+</code>
 </td>
 <td>
-```
+<code>
 filter[group_id][in][0]=1&filter[group_id][in][1]=2&filter[group_id][in][2]=4
-```
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
-```json
+<code>
 {
     "filter": {"group_id":{"gt":1}
 }
-```
+</code>
 </td>
 <td>
-```
+<code>
 filter[group_id][gt]=1
-```
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
-```json
+<code>
 {
     "filter": {
         "or": [
@@ -238,7 +238,7 @@ filter[group_id][gt]=1
         ]
     }
 }
-```
+</code>
 </td>
 <td>
 ```
