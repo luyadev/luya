@@ -11,11 +11,9 @@ class MyEndpoint extends Api
 }
 ```
 
-## Join relations
+## Expand Relations
 
-Its very common to join relation data for index list view in order to reduce sql queries. To do so define the {{luya\admin\ngrest\base\Api::withRelations()}} method inside your API. This can be either an array with relations which will be passed to `index, list and view` or an array with a subdefintion in order to define which relation should be used when.
-
-basic:
+Its very common to join relation data for index list view in order to reduce sql queries. To do so define the {{luya\admin\ngrest\base\Api::withRelations()}} method inside your API. This can be either an array with relations which will be passed to `index, list and view` or an array with a subdefintion in order to define which relation should be used in which scenario.
 
 ```php
 public function withRelations()
@@ -24,7 +22,7 @@ public function withRelations()
 }
 ```
 
-The above relations will be auto added trough {{yii\db\ActiveQuery::with()}}. In order to define view specific actions:
+The above relations will be auto added trough {{yii\db\ActiveQuery::with()}} if defined in `?expand=user,images`. In order to define view specific actions:
 
 ```php
 public function withRelations()
@@ -36,6 +34,25 @@ public function withRelations()
     ];
 }
 ```
+
+The Yii Framework has a very convenient way to work with model sub relations, using [expand](https://www.yiiframework.com/doc/guide/2.0/en/rest-resources) can also "unfold" sub relations when defined in {{luya\admin\ngrest\base\NgRestModel::extraFields()}}.
+
+```php
+class XYZ extends NgRestModel
+{
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+    
+    public function extraFields()
+    {
+        return array_merge(['user'], parent::extraFields());
+    }
+}
+```
+
+> The {{luya\admin\ngrest\base\Api::withRelations()}} will **eager load** the data, but in order to expand sub relations f.e. `user.country` the country relation must be defined in {{luya\admin\ngrest\base\NgRestModel::extraFields()}} `array_merge(['country'], parent::extraFields())` inside the User model.
 
 ## Pagination
 
@@ -103,7 +120,7 @@ In the traditional way you would have to run the action `actionComments` like fo
 
 ## Filtering
 
-Sometimes you need to have additional filtering methods for a given API requests, therefore {{yii\data\DataFilter}} is ussed.. Assuming you'd like filter row for a given where condition, like groups you have to create a Filtering Model and declare the filter model in the API.
+Sometimes you need to have additional filtering methods for a given API requests, therefore {{yii\data\DataFilter}} is ussed. Assuming you'd like filter row for a given where condition, like groups you have to create a Filtering Model and declare the filter model in the API.
 
 Define the filter model:
 
