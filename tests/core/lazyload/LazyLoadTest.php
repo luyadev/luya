@@ -30,4 +30,12 @@ class LazyLoadTest extends LuyaWebTestCase
             LazyLoad::widget(['src' => 'abc.jpg', 'extraClass' => 'add', 'height' => 1920,  'width' => 1080])
         );
     }
+
+    public function testLazyLoadAttributesOnly()
+    {
+        $this->assertSame(
+            'class="js-lazyimage add" data-src="abc.jpg" data-width="1080" data-height="1920" data-as-background="1"',
+            LazyLoad::widget(['src' => 'abc.jpg', 'extraClass' => 'add', 'height' => 1920,  'width' => 1080, 'attributesOnly' => true])
+        );
+    }
 }

@@ -71,6 +71,7 @@
                         id,
                         el: this,
                         asBackground: !!$(this).data('as-background'),
+                        replacePlaceholder: !!$(this).data('replace-placeholder'),
                         isLoaded: false,
                         isObserved: false
                     })
@@ -128,11 +129,23 @@
                 } else {
                     // Set the src value
                     // apply the "loaded" class
-                    $el
-                        .attr('src', $el.data('src'))
-                        .addClass('loaded')
-                        .parent(`.${context.imageWrapperClass}`)
-                        .addClass('loaded')
+                    
+                    if (!image.replacePlaceholder) {
+                        $el
+                            .attr('src', $el.data('src'))
+                            .addClass('loaded')
+                            .parent(`.${context.imageWrapperClass}`)
+                            .addClass('loaded')
+                    } else {
+                        const $wrapper = $el.parent(`.${context.imageWrapperClass}`)
+                        $wrapper
+                            .replaceWith(
+                                $el
+                                    .removeClass('lazyimage')
+                                    .addClass('loaded lazy-image')
+                                    .attr('src', $el.data('src'))
+                            )
+                    }
                 }
 
                 context.log('Image loaded:', { id: image.id, image })
