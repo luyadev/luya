@@ -6,6 +6,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 1.6.1
 
 + [#2040](https://github.com/luyadev/luya/pull/2040) Fixed an issue where LazyLoad widget returns aspect ratio values with commas instead of dots, because of locale formatting.
++ [#2041](https://github.com/luyadev/luya/issues/2041) Fixed Polyfill (for older Browsers). Added new option `replacePlaceholder` (default `true`) to define if the image should replace the placeholder or fade in "above" it.
++ Fixed LazyLoad BC break introduced in 1.6.0
 
 ## 1.6.0 (20. July 2020)
 
