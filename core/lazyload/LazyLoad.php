@@ -85,8 +85,8 @@ class LazyLoad extends Widget
 
     /**
      * @var boolean If set to false, the size will be set by the placeholder (based on width/height). This enables
-     *              smoother fading of the image. Leave on true to have it work with CSS Frameworks like Bootstrap.
-     *              Has no effect if `attributesOnly` is `true`.
+     * smoother fading of the image. Leave on true to have it work with CSS Frameworks like Bootstrap.
+     * Has no effect if `attributesOnly` is `true`.
      * @since 1.6.1
      */
     public $replacePlaceholder = true;
@@ -128,7 +128,6 @@ class LazyLoad extends Widget
             display: block;
             width: 100%;
             height: auto;
-            background-color: #f0f0f0;
         }
         .nojs .lazyimage,
         .nojs .lazyimage-placeholder,
@@ -152,12 +151,15 @@ class LazyLoad extends Widget
         // register the asset file
         if ($this->legacySupport) {
             IntersectionObserverPolyfillAsset::register($this->view);
+            $this->view->registerJs("IntersectionObserver.prototype.POLL_INTERVAL = 100;", View::POS_READY);
         }
         LazyLoadAsset::register($this->view);
 
         if ($this->initJs) {
             // register js and css code with keys in order to ensure the registration is done only once
-            $this->view->registerJs("$.lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
+            $this->view->registerJs("
+                $.lazyLoad();
+            ", View::POS_READY, self::JS_ASSET_KEY);
         }
 
         $this->view->registerCss($this->defaultCss, [], self::CSS_ASSET_KEY);
@@ -166,7 +168,7 @@ class LazyLoad extends Widget
     /**
      * Returns the aspect ration based on height or width.
      *
-     * If no width or height is provided, the default value 56.25 will be returned.
+     * If no width or height is provided, the default value 0 will be returned.
      *
      * @return float A dot seperated ratio value
      * @since 1.6.1
@@ -186,14 +188,14 @@ class LazyLoad extends Widget
         }
 
         if ($this->attributesOnly && !$this->placeholderSrc) {
-            return "class=\"js-lazyimage {$this->extraClass}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
+            return "class=\"js-lazyimage $this->extraClass\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
         }
 
         $tag = '<div class="lazyimage-wrapper ' . $this->extraClass . '">';
         $tag .= Html::tag('img', '', array_merge(
             $this->options,
             [
-                'class' => 'js-lazyimage lazyimage',
+                'class' => 'js-lazyimage lazyimage' . ($this->replacePlaceholder ? (' ' . $this->extraClass) : ''),
                 'data-src' => $this->src,
                 'data-width' => $this->width,
                 'data-height' => $this->height,
