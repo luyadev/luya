@@ -87,13 +87,13 @@ The following **types** are supported by LUYA composer
 + luya-module
 + luya-theme
 
-|type|description
+|Composer-Type|Description
 |----|----------
-|luya-extension|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
-|luya-module|Can contain the same as luya-extension but also modules and controllers.
-|luya-theme|Can contain the same as extensions but also cmslayouts, layouts and other frontend resources.
+|`luya-extension`|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
+|`luya-module`|Can contain the same as luya-extension but also modules and controllers.
+|`luya-theme`|Can contain the same as extensions but also cmslayouts, layouts and other frontend resources.
 
-### Extra section
+## Extra section
 
 The composer.json file can contain an extra section which can be read by the LUYA composer. E.g. we could do the following things:
 
@@ -114,3 +114,48 @@ The composer.json file can contain an extra section which can be read by the LUY
 + bootstrap: Add the file to the LUYA bootstraping process.
 
 > When importing blocks a namespace for each block class have to be provided. You can use the [Composer autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading) feature handle namespaces.
+
+## Bootstraping dependencies in dependencies (child dependencies)
+
+Its very common to create a "private" (company specific let' say) repository containing code for several projects and also includes the LUYA requirements like `admin` and `cms`. As LUYA strongly relys on the [LUYA Composer](https://github.com/luyadev/luya-composer) which contains a `bootstrap` section to make more easy to load data when creating extensions and modules this can be a problem when work with child Dependencies (A Dependencies of a Dependencies).
+
+Assuming the following scenario we have a `BaseRepo` and an `ProjectApplication` where the `ProjectApplication` requires the `BaseRepo` as a dependency.
+
+**BaseRepo:**
+
+```json
+{
+     "require": {
+        "luyadev/luya-module-cms" : "^3.0"
+}
+```
+
+**ProjectApplication:**
+
+```json
+{
+     "require": {
+        "mycompany/base-repo": "^1.0",
+}
+```
+
+As the `ProjectApplication` now requires the `BaseRepo` as a dependency the [Bootstraping Section of LUYA Module CMS](https://github.com/luyadev/luya-module-cms/blob/master/composer.json#L48-L50) is ignored. Therefore its important to call those requirements again in your `BaseRepo`:
+
+**Fixed BaseRepo:**
+
+```json
+{
+     "require": {
+        "luyadev/luya-module-cms" : "^3.0"
+    },
+    "extra" : {
+        "luya" : {
+            "bootstrap": [
+                "luya\\cms\\frontend\\Bootstrap"
+            ]
+        }
+    }
+}
+```
+
+Otherwise you can either call the Bootstrap Section in your config or the LUYA CMS Bootstraping methods won't be run.
