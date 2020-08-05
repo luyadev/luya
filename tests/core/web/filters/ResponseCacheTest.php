@@ -7,7 +7,6 @@ use luyatests\LuyaWebTestCase;
 use yii\base\Action;
 use luya\web\Controller;
 use luya\web\filters\ResponseCache;
-use luyatests\data\classes\UnitCache;
 
 class StubAction extends Action
 {
