@@ -34,6 +34,12 @@ use yii\web\Response;
 class JsonCruftFilter extends ActionFilter
 {
     const CRUFT_HEADER_NAME = 'X-CRUFT-LENGTH';
+
+    /**
+     * @var array A list of status codes which does not need cruft prepend as it has by defintion no content.
+     * @since 1.6.2
+     */
+    public $ignoreStatusCodes = [204];
     
     /**
      * @var string The curft string which is appended to every json rest response.
@@ -66,7 +72,7 @@ class JsonCruftFilter extends ActionFilter
      */
     public function afterAction($action, $result)
     {
-        if (Yii::$app->response->format == Response::FORMAT_JSON) {
+        if (Yii::$app->response->format == Response::FORMAT_JSON && !in_array(Yii::$app->response->statusCode, $this->ignoreStatusCodes)) {
             Yii::$app->response->headers->set(self::CRUFT_HEADER_NAME, $this->getCruftLength());
             Yii::$app->response->on(Response::EVENT_AFTER_PREPARE, function ($event) {
                 $event->sender->content = $this->prependCruft($event->sender->content);
