@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.6.2
+## 1.6.2 (6. August 2020)
 
 + [#2043](https://github.com/luyadev/luya/pull/2043) Fix issue with JsonCruft filter and response code 204, which means no content given.
 
