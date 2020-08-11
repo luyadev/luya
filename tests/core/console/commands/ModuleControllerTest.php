@@ -45,7 +45,7 @@ EOT;
 namespace app\modules\frontend;
 
 /**
- * Foo Admin Module.
+ * Foo Frontend Module.
  *
  * File has been created with `module/create` command.
  *
