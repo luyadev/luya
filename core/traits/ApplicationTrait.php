@@ -345,4 +345,21 @@ trait ApplicationTrait
 
         return $assets;
     }
+
+    /**
+     * Get all js translations from all admin modules
+     *
+     * @return array
+     * @since 1.7.0
+     */
+    public function getAdminModulesJsTranslationMessages()
+    {
+        $jsTranslations = [];
+        foreach ($this->getAdminModules() as $module) {
+            $jsTranslations = array_merge($module->getJsTranslationMessages(), $jsTranslations);
+        }
+
+        return $jsTranslations;
+    }
+    
 }
