@@ -2,9 +2,6 @@
 
 namespace luya\web;
 
-use Yii;
-use yii\base\InvalidConfigException;
-use yii\helpers\ArrayHelper;
 use luya\base\AdminModuleInterface;
 use luya\TagParser;
 use luya\base\BaseBootstrap;
@@ -22,8 +19,6 @@ class Bootstrap extends BaseBootstrap
     private $_urlRules = [];
     
     private $_apiRules = [];
-
-    private $_adminAssets = [];
     
     private $_jsTranslations = [];
     
@@ -112,14 +107,13 @@ class Bootstrap extends BaseBootstrap
                 
                 foreach ($this->getModules() as $id => $module) {
                     if ($module instanceof AdminModuleInterface) {
-                        $this->_adminAssets = ArrayHelper::merge($module->getAdminAssets(), $this->_adminAssets);
                         $this->_jsTranslations[$id] = $module->getJsTranslationMessages();
                     }
                 }
                 
-                $app->getModule('admin')->assets = $this->_adminAssets;
+                $app->getModule('admin')->assets = $app->getAdminModulesAssets(); // @deprecated in version 2.0 or 4.0 of LUYA Admin Module
                 $app->getModule('admin')->controllerMap = $this->_apis;
-                $app->getModule('admin')->moduleMenus = $app->getAdminModulesMenus();
+                $app->getModule('admin')->moduleMenus = $app->getAdminModulesMenus(); // @deprecated in version 2.0 or 4.0 of LUYA Admin Module
                 $app->getModule('admin')->setJsTranslations($this->_jsTranslations);
                 
                 // calculate api defintions
