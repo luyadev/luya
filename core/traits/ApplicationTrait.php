@@ -308,4 +308,22 @@ trait ApplicationTrait
         
         return $modules;
     }
+
+    /**
+     * Get all admin menu modules
+     *
+     * @return array An array where the key is the module id and value the menu array.
+     * @since 1.6.3
+     */
+    public function getAdminModulesMenus()
+    {
+        $menu = [];
+        foreach($this->getAdminModules() as $module) {
+            if ($module->getMenu()) {
+                $menu[$module->id] = $module->getMenu();
+            }
+        }
+
+        return $menu;
+    }
 }

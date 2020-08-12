@@ -24,8 +24,6 @@ class Bootstrap extends BaseBootstrap
     private $_apiRules = [];
 
     private $_adminAssets = [];
-
-    private $_adminMenus = [];
     
     private $_jsTranslations = [];
     
@@ -115,16 +113,13 @@ class Bootstrap extends BaseBootstrap
                 foreach ($this->getModules() as $id => $module) {
                     if ($module instanceof AdminModuleInterface) {
                         $this->_adminAssets = ArrayHelper::merge($module->getAdminAssets(), $this->_adminAssets);
-                        if ($module->getMenu()) {
-                            $this->_adminMenus[$module->id] = $module->getMenu();
-                        }
                         $this->_jsTranslations[$id] = $module->getJsTranslationMessages();
                     }
                 }
                 
                 $app->getModule('admin')->assets = $this->_adminAssets;
                 $app->getModule('admin')->controllerMap = $this->_apis;
-                $app->getModule('admin')->moduleMenus = $this->_adminMenus;
+                $app->getModule('admin')->moduleMenus = $app->getAdminModulesMenus();
                 $app->getModule('admin')->setJsTranslations($this->_jsTranslations);
                 
                 // calculate api defintions
