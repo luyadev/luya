@@ -355,8 +355,8 @@ trait ApplicationTrait
     public function getAdminModulesJsTranslationMessages()
     {
         $jsTranslations = [];
-        foreach ($this->getAdminModules() as $module) {
-            $jsTranslations = array_merge($module->getJsTranslationMessages(), $jsTranslations);
+        foreach ($this->getAdminModules() as $id => $module) {
+            $jsTranslations[$id] = $module->getJsTranslationMessages();
         }
 
         return $jsTranslations;
