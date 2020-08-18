@@ -2,10 +2,6 @@
 
 namespace luya\web;
 
-use Yii;
-use yii\base\InvalidConfigException;
-use yii\helpers\ArrayHelper;
-use luya\base\AdminModuleInterface;
 use luya\TagParser;
 use luya\base\BaseBootstrap;
 
@@ -22,12 +18,6 @@ class Bootstrap extends BaseBootstrap
     private $_urlRules = [];
     
     private $_apiRules = [];
-
-    private $_adminAssets = [];
-
-    private $_adminMenus = [];
-    
-    private $_jsTranslations = [];
     
     /**
      * Before bootstrap run process.
@@ -112,20 +102,10 @@ class Bootstrap extends BaseBootstrap
                 // @see https://github.com/luyadev/luya/issues/1778
                 $app->request->csrfParam = '_csrf_admin';
                 
-                foreach ($this->getModules() as $id => $module) {
-                    if ($module instanceof AdminModuleInterface) {
-                        $this->_adminAssets = ArrayHelper::merge($module->getAdminAssets(), $this->_adminAssets);
-                        if ($module->getMenu()) {
-                            $this->_adminMenus[$module->id] = $module->getMenu();
-                        }
-                        $this->_jsTranslations[$id] = $module->getJsTranslationMessages();
-                    }
-                }
-                
-                $app->getModule('admin')->assets = $this->_adminAssets;
+                $app->getModule('admin')->assets = $app->getAdminModulesAssets(); // @deprecated in version 2.0 or 4.0 of LUYA Admin Module
                 $app->getModule('admin')->controllerMap = $this->_apis;
-                $app->getModule('admin')->moduleMenus = $this->_adminMenus;
-                $app->getModule('admin')->setJsTranslations($this->_jsTranslations);
+                $app->getModule('admin')->moduleMenus = $app->getAdminModulesMenus(); // @deprecated in version 2.0 or 4.0 of LUYA Admin Module
+                $app->getModule('admin')->setJsTranslations($app->getAdminModulesJsTranslationMessages());
                 
                 // calculate api defintions
                 if ($app->getModule('admin')->hasProperty('apiDefintions')) { // ensure backwards compatibility

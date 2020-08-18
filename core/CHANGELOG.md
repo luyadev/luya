@@ -3,8 +3,9 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.6.3
+## 1.7.0
 
++ [#2045](https://github.com/luyadev/luya/pull/2045) Provide application methods to retrieve menu and asset data from all admin modules.
 + [#2044](https://github.com/luyadev/luya/issues/2044) Fix issue with wrong PHP Doc Name for frontend Module `module/create` command.
 
 ## 1.6.2 (6. August 2020)

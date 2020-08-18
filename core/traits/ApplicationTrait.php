@@ -291,6 +291,8 @@ trait ApplicationTrait
         return $modules;
     }
     
+    private $_adminModules;
+
     /**
      * Return all Admin Module Interface implementing modules.
      *
@@ -298,14 +300,66 @@ trait ApplicationTrait
      */
     public function getAdminModules()
     {
-        $modules = [];
-        
-        foreach ($this->getModules() as $id => $obj) {
-            if ($obj instanceof Module && $obj instanceof AdminModuleInterface) {
-                $modules[$id] = $obj;
+        if ($this->_adminModules === null) {
+            $this->_adminModules = [];
+            foreach ($this->getModules() as $id => $obj) {
+                if ($obj instanceof Module && $obj instanceof AdminModuleInterface) {
+                    $this->_adminModules[$id] = $obj;
+                }
             }
         }
-        
-        return $modules;
+
+        return $this->_adminModules;
     }
+
+    /**
+     * Get all admin menu modules
+     *
+     * @return array An array where the key is the module id and value the menu array.
+     * @since 1.7.0
+     */
+    public function getAdminModulesMenus()
+    {
+        $menu = [];
+        foreach($this->getAdminModules() as $module) {
+            if ($module->getMenu()) {
+                $menu[$module->id] = $module->getMenu();
+            }
+        }
+
+        return $menu;
+    }
+
+    /**
+     * Get all assets files from all admin modules
+     *
+     * @return array
+     * @since 1.7.0
+     */
+    public function getAdminModulesAssets()
+    {
+        $assets = [];
+        foreach ($this->getAdminModules() as $module) {
+            $assets = array_merge($module->getAdminAssets(), $assets);
+        }
+
+        return $assets;
+    }
+
+    /**
+     * Get all js translations from all admin modules
+     *
+     * @return array
+     * @since 1.7.0
+     */
+    public function getAdminModulesJsTranslationMessages()
+    {
+        $jsTranslations = [];
+        foreach ($this->getAdminModules() as $module) {
+            $jsTranslations = array_merge($module->getJsTranslationMessages(), $jsTranslations);
+        }
+
+        return $jsTranslations;
+    }
+    
 }
