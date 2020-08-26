@@ -142,7 +142,7 @@ trait ApplicationTrait
         parent::init();
         
         // add trace info
-        Yii::trace('initialize LUYA Application', __METHOD__);
+        Yii::debug('initialize LUYA Application', __METHOD__);
         
         $this->setLocale($this->language);
     }
