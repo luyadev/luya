@@ -1,5 +1,3 @@
-
-
 # Developer guidelines
 
 Here are some simple rules how to deal with documentations, linking or using PHPDoc.
