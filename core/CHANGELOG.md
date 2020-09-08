@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.7.1 
+
++ [#2049](https://github.com/luyadev/luya/pull/2049) Change the behaviors attaching order to follow [Yii CORS guide](https://www.yiiframework.com/doc/guide/2.0/en/rest-controllers#cors).
+
 ## 1.7.0 (26. August 2020)
 
 + [#2045](https://github.com/luyadev/luya/pull/2045) Provide application methods to retrieve menu and asset data from all admin modules.
