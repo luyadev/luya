@@ -422,18 +422,17 @@ class StringHelper extends BaseStringHelper
      * Its very common to use seperators when working with user input, for example a list of domains seperated by commas. Therefore
      * this function will use common seperators the generate an array from a text string.
      * 
-     * Explodes the string by: "Newline", ";", ",", " " 
+     * Explodes the string by: "Newline", ";", ","
      * 
      * + newline
      * + comma
-     * + space
      * + point comma
      *
      * @param string $text A text which contains a list of items seperated by seperators like commas.
      * @return array
-     * @since 1.0.0
+     * @since 1.7.1
      */
-    public static function textList($text, array $seperators = [PHP_EOL, "\n", "\r", "\n\r", ";", ",", " "])
+    public static function textList($text, array $seperators = [PHP_EOL, "\n", "\r", "\n\r", ";", ","])
     {
         return StringHelper::explode(str_replace($seperators, ';', $text), ";", true, true);
     }

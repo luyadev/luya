@@ -233,4 +233,10 @@ EOT;
         $this->assertSame('<p>bar {{unknown}}</p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar', 'xyz' => 'abc']));
         $this->assertSame('<p>bar </p>', StringHelper::template('<p>{{ foo }} {{unknown}}</p>', ['foo' => 'bar', 'xyz' => 'abc'], true));
     }
+
+    public function testTextList()
+    {
+        $this->assertSame(['foo', 'bar'], StringHelper::textList('foo ,bar'));
+        $this->assertSame(['foo', 'bar hans'], StringHelper::textList('foo; bar hans'));
+    }
 }
