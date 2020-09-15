@@ -202,6 +202,8 @@ The following Injectors are currently available:
 |Class        |Description
 |---        |---
 |{{\luya\cms\injectors\ActiveQueryCheckboxInjector}}|Generates as checkbox selection from an ActiveRecord and assign the selected model rows into the extraVars section. In order to select only a specific fields add the `select()` to the ActiveRecord find ActiveQuery.
+|{{\luya\cms\injectors\ActiveQueryRadioInjector}}|Generates a radio list 
+|{{\luya\cms\injectors\ActiveQuerySelectInjector.php}}|Generates a dropdown select
 |{{\luya\cms\injectors\LinkInjector}}|Generates an ability to select a link and returns the correct url to the link based on the user selection.
 |{{\luya\cms\injectors\TagInjector}}|Generates a checkbox to select all available admin tags and provides api to return those selected tags.
 
