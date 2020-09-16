@@ -31,9 +31,9 @@ This is how a standard LUYA kickstarter application hierarchy should look and wh
 
 ## Configurtion Files and Config Builder
 
-This is how a default config file (e.g. `configs/env-local.php` or `configs/env-prod.php`) would look like:
+Config files (e.g. `configs/env-local.php` or `configs/env-prod.php`) return a configuration array.
 
-> since version 1.0.21 of LUYA core the {{luya\Config}} is used to generate configs:
+> since version 1.0.21 of LUYA core the {{luya\Config}} is used to generate configs (`configs/config.php`):
 
 ```php
 define('YII_DEBUG', true);
