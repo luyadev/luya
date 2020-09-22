@@ -43,7 +43,7 @@ abstract class BaseBootstrap implements BootstrapInterface
         $this->run($app);
         
         // end trace
-        Yii::trace('End of the LUYA bootstraping process', __METHOD__);
+        Yii::debug('End of the LUYA bootstraping process', __METHOD__);
         Yii::endProfile('LUYA Boostrap process profiling');
     }
 
@@ -106,7 +106,7 @@ abstract class BaseBootstrap implements BootstrapInterface
             // see if the module has a registerComponents method
             foreach ($module->registerComponents() as $componentId => $definition) {
                 if (!$app->has($componentId)) {
-                    Yii::trace('Register component ' . $componentId, __METHOD__);
+                    Yii::debug('Register component ' . $componentId, __METHOD__);
                     $app->set($componentId, $definition);
                 }
             }

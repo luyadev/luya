@@ -187,6 +187,14 @@ public $apiRules = [
 
 The above example will forward all OPTIONS request made to the `my-api-name` API on the index action to the options action. `'OPTIONS index' => 'options'` index is the requested action, and options is the action to forward.
 
+> Instead of define each custom action for the method and the options request its possible to set an options wildcard defintion like `OPTIONS <action:[a-zA-Z0-9\-]+>' => 'options'`. Full example
+> ```
+> 'GET type' => 'type',
+> 'GET agenda' => 'agenda',
+> 'GET years-range' => 'years-range',
+> 'OPTIONS <action:[a-zA-Z0-9\-]+>' => 'options',
+> ```
+
 As the options request is forwared to the `options` action we should create this in the controller:
 
 ```php

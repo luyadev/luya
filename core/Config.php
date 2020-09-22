@@ -58,6 +58,19 @@ use luya\helpers\ArrayHelper;
  * return $config->toArray([Config::ENV_PROD]);
  * ```
  *
+ * ## Runtime
+ *
+ * Each method returns an {{luya\ConfigDefinition}} object and can therefore be configured for different runtimes (console/web). The given example will add a console command
+ * only for console applications:
+ *
+ * ```php
+ * $config->application([
+ *     'controllerMap' => [
+ *         's3' => 'luya\aws\commands\S3Command',
+ *     ]
+ * ])->consoleRuntime();
+ * ```
+ *
  * ## Envs
  *
  * Switching between envs can be usefull if certain configurations should only apply on a certain environment. Therefore you can add `env()` behind componenets, applications and modules.

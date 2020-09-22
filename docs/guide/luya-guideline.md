@@ -25,13 +25,13 @@ When dealing with a Controller, Action or another PHP names use single quotes \`
 
 This represents a guideline how words and proper nouns should be written in the documentation.
 
-+ LUYA - always capitalized
-+ Composer 
++ LUYA – always capitalized
++ Composer
 + AngularJS
 + NgRest
 + ActiveWindow
 + ActiveRecord
-+ admin UI - instead of Admin, admin module or Admin UI
++ admin UI – instead of Admin, admin module or Admin UI
 + GitHub
 + API
 + OSX
@@ -39,16 +39,16 @@ This represents a guideline how words and proper nouns should be written in the 
 + HTML
 + DRY
 + CRUD
-+ e.g. - instead of f.e., for example or similar expressions
-+ yourdomain.com - instead of example.com, yourproject.com, etc
++ e.g. – instead of f.e., for example or similar expressions
++ yourdomain.com – instead of example.com, yourproject.com, etc
 
-It should be avoided to use personal pronouns (e.g. we have this, we recommend that, you can, etc.), please use impersonal pronouns ( e.g. there is this, it´s recommend that, etc.).
+It should be avoided to use personal pronouns (e.g. we have this, we recommend that, you can, etc.), please use impersonal pronouns ( e.g. there is this, it’s recommended that, etc.).
 
 ## Coding conventions
 
 The following conventions have to be used when contributing to the LUYA project.
 
-### PHP 
+### PHP
 
 [PSR2 Naming convention](http://www.php-fig.org/psr/psr-2/). This example encompasses some of the rules below as a quick overview:
 
@@ -79,7 +79,7 @@ class Foo extends Bar implements FooInterface
 }
 ```
 
-The example above shows how to intend brackets.
+The example above shows how to indent brackets.
 
 ### PHPDOC
 
@@ -97,7 +97,7 @@ All classes have to use a standard PHPDoc block including the *author* and *sinc
  * @see Take a look at luya\base\Module::resolveRoute()
  * @deprecated Deprecated in 1.0.10 will be removed in 2.0.0 use luya\base\Module instead.
  * @author John Doe <john@example.com>
- * @since 1.0.0 
+ * @since 1.0.0
  */
 class FooBar()
 {
@@ -172,7 +172,7 @@ Field name examples (for table *admin_user*):
 + group_id
 
 
-### SCSSS
+### SCSS
 
 The SCSS folder contains all SCSS files and is structured as follows:
 
@@ -210,3 +210,4 @@ HTML:
 ```
 
 > You can see that all classes for the `crud` component are prefixed with `crud-`. That way we always know what we can find in which SCSS file. In the HTML you can see that there is a standalone component `table`, wrapped by the class `crud-table`. This results in an extra scss component `_table.scss`.
+

@@ -121,9 +121,14 @@ trait RestBehaviorsTrait
     {
         $behaviors = parent::behaviors();
 
-        if (!$this->getUserAuthClass()) {
-            unset($behaviors['authenticator']);
-        } else {
+        if ($this->enableCors) {
+            $behaviors['cors'] = Yii::$app->corsConfig;
+        }
+
+        unset($behaviors['authenticator']);
+
+        if ($this->getUserAuthClass()) {
+            
             // change to admin user auth class
             $behaviors['authenticator'] = [
                 'class' => CompositeAuth::class,
@@ -135,10 +140,6 @@ trait RestBehaviorsTrait
             if ($this->enableCors) {
                 $behaviors['authenticator']['except'] = ['options'];
             }
-        }
-        
-        if ($this->enableCors) {
-            $behaviors['cors'] = Yii::$app->corsConfig;
         }
 
         $behaviors['contentNegotiator'] = [

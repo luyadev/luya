@@ -3,9 +3,25 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.6.1
+## 1.7.1 
+
++ [#2051](https://github.com/luyadev/luya/pull/2051) Add new string helper method (`luya\helpers\String::textList()`) which converts a string with items seperated by commas or whitespaces into an array with items.
++ [#2049](https://github.com/luyadev/luya/pull/2049) Change the behaviors attaching order to follow [Yii CORS guide](https://www.yiiframework.com/doc/guide/2.0/en/rest-controllers#cors).
+
+## 1.7.0 (26. August 2020)
+
++ [#2045](https://github.com/luyadev/luya/pull/2045) Provide application methods to retrieve menu and asset data from all admin modules.
++ [#2044](https://github.com/luyadev/luya/issues/2044) Fix issue with wrong PHP Doc Name for frontend Module `module/create` command.
+
+## 1.6.2 (6. August 2020)
+
++ [#2043](https://github.com/luyadev/luya/pull/2043) Fix issue with JsonCruft filter and response code 204, which means no content given.
+
+## 1.6.1 (28. July 2020)
 
 + [#2040](https://github.com/luyadev/luya/pull/2040) Fixed an issue where LazyLoad widget returns aspect ratio values with commas instead of dots, because of locale formatting.
++ [#2041](https://github.com/luyadev/luya/issues/2041) Fixed Polyfill (for older Browsers). Added new option `replacePlaceholder` (default `true`) to define if the image should replace the placeholder or fade in "above" it.
++ Fixed LazyLoad BC break introduced in 1.6.0
 
 ## 1.6.0 (20. July 2020)
 

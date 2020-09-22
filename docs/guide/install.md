@@ -4,6 +4,8 @@ The LUYA installation requires Composer, please have a look at the [official Com
 
 > Find the [installation Video on Youtube](https://www.youtube.com/watch?v=Ybq878PMe_U) in order to help you install LUYA.
 
+## Composer create-project
+
 After setting up Composer, we execute the Composer command `create-project` to checkout the **luya-kickstarter** application, an **out of the box** LUYA setup to run your website directly. It´s recommend to run the `create-project` command directly from your htdocs/webserver folder like this:
 
 ```sh
@@ -17,14 +19,18 @@ composer create-project luyadev/luya-kickstarter:^1.0
 > Note: In previous versions the fxp composer plugin was required `composer global require "fxp/composer-asset-plugin:~1.4"` but this has been replaced with [Asset Packagist](https://asset-packagist.org). If the Asset Packagist is not present in the composer.json you might install the fxp plugin as its a "legacy" project setup.
 
 The `create-project` command will create a folder (inside of your current folder where the `composer create-project` command was executed) named **luya-kickstarter**. 
+
+## Copy Config
+
 If the Composer installation is done change into the **configs** folder inside the application and copy the `.dist` template files to original `.php` files.
 
 ```sh
 cp env.php.dist env.php
 ```
 
-Now the database connection inside the `configs/config.php` file needs to fit your mysql servers configuration. 
-It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-environments.md).
+Now the database connection inside the `configs/config.php` file needs to fit your mysql servers configuration. It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-environments.md).
+
+## Run Migrate and Import
 
 After successfully setting up your database connection, you have to reopen your terminal and change into your project directory and excute the **luya** binary files which has been installed into your vendor folder by composer as described in the follwing.
 
@@ -41,6 +47,8 @@ Build and import all filesystem configurations into the database with the [impor
 ```sh
 ./vendor/bin/luya import
 ```
+
+## Run admin/setup
 
 Finally execute the [setup console command](luya-console.md) command which is going to setup a user, group and permissions:
 

@@ -72,61 +72,70 @@ class LazyLoad extends Widget
     public $options = [];
 
     /**
-     * @var array Legacy support for older Browsers (Adds the IntersectionOberserver Polyfill, default: true)
+     * @var boolean Legacy support for older Browsers (Adds the IntersectionOberserver Polyfill, default: true)
      * @since 1.6.0
      */
     public $legacySupport = true;
 
     /**
-     * @var array Optionally disable the automatic init of the lazyload function so you can override the JS options
+     * @var boolean Optionally disable the automatic init of the lazyload function so you can override the JS options
      * @since 1.6.0
      */
     public $initJs = true;
 
     /**
+     * @var boolean If set to false, the size will be set by the placeholder (based on width/height). This enables
+     * smoother fading of the image. Leave on true to have it work with CSS Frameworks like Bootstrap.
+     * Has no effect if `attributesOnly` is `true`.
+     * @since 1.6.1
+     */
+    public $replacePlaceholder = true;
+
+    /**
      * @var string The default classes which will be registered.
      * @since 1.6.1
      */
-    public $defaultCss = '.lazyimage-wrapper {
-        display: block;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-    }
-    .lazyimage {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        bottom: 0;
-        right: 0;
-        opacity: 0;
-        height: 100%;
-        width: 100%;
-        -webkit-transition: .5s ease-in-out opacity;
-        transition: .5s ease-in-out opacity;
-        -webkit-transform: translate(-50%,-50%);
-        transform: translate(-50%,-50%);
-        -o-object-fit: cover;
-        object-fit: cover;
-        -o-object-position: center center;
-        object-position: center center;
-        z-index: 20;
-    }
-    .lazyimage.loaded {
-        opacity: 1;
-    }
-    .lazyimage-placeholder {
-        display: block;
-        width: 100%;
-        height: auto;
-        background-color: #f0f0f0;
-    }
-    .nojs .lazyimage,
-    .nojs .lazyimage-placeholder,
-    .no-js .lazyimage,
-    .no-js .lazyimage-placeholder {
-        display: none;
-    }';
+    public $defaultCss = '
+        .lazyimage-wrapper {
+            display: block;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .lazyimage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            -webkit-transition: .5s ease-in-out opacity;
+            transition: .5s ease-in-out opacity;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center center;
+            object-position: center center;
+            z-index: 20;
+        }
+        .lazyimage.loaded {
+            opacity: 1;
+        }
+        .lazyimage-placeholder {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .nojs .lazyimage,
+        .nojs .lazyimage-placeholder,
+        .no-js .lazyimage,
+        .no-js .lazyimage-placeholder {
+            display: none;
+        }
+    ';
 
     /**
      * @inheritdoc
@@ -142,12 +151,15 @@ class LazyLoad extends Widget
         // register the asset file
         if ($this->legacySupport) {
             IntersectionObserverPolyfillAsset::register($this->view);
+            $this->view->registerJs("IntersectionObserver.prototype.POLL_INTERVAL = 100;", View::POS_READY);
         }
         LazyLoadAsset::register($this->view);
 
         if ($this->initJs) {
             // register js and css code with keys in order to ensure the registration is done only once
-            $this->view->registerJs("$.lazyLoad();", View::POS_READY, self::JS_ASSET_KEY);
+            $this->view->registerJs("
+                $.lazyLoad();
+            ", View::POS_READY, self::JS_ASSET_KEY);
         }
 
         $this->view->registerCss($this->defaultCss, [], self::CSS_ASSET_KEY);
@@ -155,8 +167,8 @@ class LazyLoad extends Widget
     
     /**
      * Returns the aspect ration based on height or width.
-     * 
-     * If no width or height is provided, the default value 56.25 will be returned.
+     *
+     * If no width or height is provided, the default value 0 will be returned.
      *
      * @return float A dot seperated ratio value
      * @since 1.6.1
@@ -176,17 +188,26 @@ class LazyLoad extends Widget
         }
 
         if ($this->attributesOnly && !$this->placeholderSrc) {
-            return "class=\"js-lazyimage {$this->extraClass}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
+            return "class=\"js-lazyimage $this->extraClass\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
         }
 
         $tag = '<div class="lazyimage-wrapper ' . $this->extraClass . '">';
-        $tag .= Html::tag('img', '', array_merge($this->options, ['class' => 'js-lazyimage lazyimage', 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]));
+        $tag .= Html::tag('img', '', array_merge(
+            $this->options,
+            [
+                'class' => 'js-lazyimage lazyimage' . ($this->replacePlaceholder ? (' ' . $this->extraClass) : ''),
+                'data-src' => $this->src,
+                'data-width' => $this->width,
+                'data-height' => $this->height,
+                'data-replace-placeholder' => $this->replacePlaceholder ? '1' : '0'
+            ]
+        ));
         if ($this->placeholderSrc) {
             $tag .= Html::tag('img', '', ['class' => 'lazyimage-placeholder', 'src' => $this->placeholderSrc]);
         } else {
             $tag .= '<div class="lazyimage-placeholder"><div style="display: block; height: 0px; padding-bottom: ' . $this->generateAspectRation() . '%;"></div><div class="loader"></div></div>';
         }
-        $tag .= '<noscript><img class="lazyimage loaded ' . $this->extraClass . '" src="'.$this->src.'" /></noscript>';
+        $tag .= '<noscript><img class="loaded ' . $this->extraClass . '" src="'.$this->src.'" /></noscript>';
         $tag .= '</div>';
 
         return $tag;

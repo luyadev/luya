@@ -7,7 +7,7 @@ echo "<?php\n";
 namespace <?= $ns ?>\frontend;
 
 /**
- * <?= $name; ?> Admin Module.
+ * <?= $name; ?> Frontend Module.
  *
  * <?= $luyaText; ?> 
  * 

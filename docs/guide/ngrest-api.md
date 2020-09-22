@@ -241,9 +241,9 @@ filter[group_id][gt]=1
 </code>
 </td>
 <td>
-```
+<code>
 filter[or][0][name]=John&filter[or][1][email]=john@doe.com
-```
+</code>
 </td>
 </tr>
 </table>

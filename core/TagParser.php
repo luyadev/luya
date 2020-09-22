@@ -139,7 +139,7 @@ class TagParser extends BaseObject
     {
         if (!is_object($this->tags[$tag])) {
             $this->tags[$tag] = Yii::createObject($this->tags[$tag]);
-            Yii::trace('tag parser object generated for:'. $tag, __CLASS__);
+            Yii::debug('tag parser object generated for:'. $tag, __CLASS__);
         }
     }
     

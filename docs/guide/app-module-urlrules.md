@@ -13,30 +13,35 @@ namespace app\modules\estore;
 class Module extends \luya\base\Module
 {
     public $urlRules = [
-        ['pattern' => 'my-basket', 'route' => 'estore/basket/index'], // equals to: 'my-basket' => 'estore/basket/index'
-        
+        [
+            'pattern' => 'my-basket',
+            'route' => 'estore/basket/index',
+        ],
+        'my-basket' => 'estore/basket/index', // which is equals to the above
     ];
 }
 ```
 
-The url rule explained in details:
+The possible url rule keys if not the short form is used.
 
-|Variable     |Description
+|Key     |Description
 |-------------|------------
-|pattern      |The newly defined name for the rule which is what the end-users see.
-|route        |To internal route used to determine the new location, based on the yii2 routing concept `module/controller/action`.
+|`pattern`      |The newly defined name for the rule which is what the end-users see.
+|`route`        |To internal route used to determine the new location, based on the yii2 routing concept `module/controller/action`.
+|`defaults`     |Provide default values for a given pattern param `'defaults' => ['date' => 0]`
+|`composition`  |Provides the option to defined multi lingual patterns for a given language `'composition' => ['fr' => 'estore/panier', 'de' => 'estore/warenkorb']`
 
 You can also use parameters in url rules:
 
 ```php
-['pattern' => 'article-detail/<id:\d+>', 'route' => 'estore/article/index'],
+'article-detail/<id:\d+>' => 'estore/article/index',
 ```
 
 Visit the [Yii Documentation](http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#parameterizing-routes) for more details about parameters.
 
-> If you are using the module in a CMS context your patterns must be prefix with the module name, otherwise the CMS can not auto replace the new pattern with the CMS context information. For example redirecting from controller foo action index to controller bar action index inside a module both url rules must be prefix. For foo `['MODULE/name-for-foo-index' => 'MODULE/foo/index']` for bar `['MODULE/name-for-bar-index' => 'MODULE/bar/index']` so they must have the full qualified route with the name of the module used in the config to register the module. Also the patterns **must** prefix the module name.
+> **Important Note:** If you are using the module in a CMS context your patterns must be prefix with the module name, otherwise the CMS can not auto replace the new pattern with the CMS context information. For example redirecting from controller foo action index to controller bar action index inside a module both url rules must be prefix. For foo `['MODULE/name-for-foo-index' => 'MODULE/foo/index']` for bar `['MODULE/name-for-bar-index' => 'MODULE/bar/index']` so they must have the full qualified route with the name of the module used in the config to register the module. Also the patterns **must** prefix the module name.
 
-Below, a short list of regex expressions you may use to parameterize the urls:
+Below, a short list of regex expressions you may use to parameterize the URLs:
 
 |Regex      |Description        |Example
 |---        |---                |---
@@ -48,8 +53,7 @@ Below, a short list of regex expressions you may use to parameterize the urls:
 
 ## Using the rule to make a link
 
-When you have defined url rules for your module you may want to use them in your view and/or controller files to generate the links that the user can click on it. To make links we use the {{luya\helpers\Url}} class.
-Lets assume we create links for the above created rule patterns:
+When you have defined url rules for your module you may want to use them in your view and/or controller files to generate the links that the user can click on it. To make links we use the {{luya\helpers\Url}} class. Lets assume we create links for the above created rule patterns:
 
 ```php
 \luya\helpers\Url::toRoute(['/estore/basket/index']);
@@ -61,14 +65,18 @@ And a the parameterized route:
 \luya\helpers\Url::toRoute(['/estore/article/index', 'id' => 123]);
 ```
 
+> Its also possible to make links for given Page IDs or Module Names inside the CMS therefore take a look at CMS {{luya\cms\helpers\Url}} which inherits from {{luya\helpers\Url}}
+
 ## Multilingual language patterns
 
 If you have multi lingual pages you need patterns for different languages which can be defined in your `$urlRules` configuration too. This will only work when defining the rules inside a module.
 
 ```php
 public $urlRules = [
-    ['pattern' => 'estore/basket', 'route' => 'estore/basket/default', 'composition' => 
-        [
+    [
+        'pattern' => 'estore/basket',
+        'route' => 'estore/basket/default',
+        'composition' => [
             'fr' => 'estore/panier',
             'de' => 'estore/warenkorb'
         ]
