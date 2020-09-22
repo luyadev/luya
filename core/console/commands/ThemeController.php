@@ -59,7 +59,7 @@ class ThemeController extends \luya\console\Command
             }
         }
         
-        $basePath = $themeLocation . '/themes/' . $themeName;
+        $basePath = $themeLocation . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName;
         $themeFolder = Yii::getAlias($basePath);
         
         if (file_exists($themeFolder)) {
@@ -76,8 +76,8 @@ class ThemeController extends \luya\console\Command
             '',
             'resources',
             'views',
-            'views/layouts',
-            'views/cmslayouts',
+            'views'.DIRECTORY_SEPARATOR.'layouts',
+            'views'.DIRECTORY_SEPARATOR.'cmslayouts',
         ];
         
         foreach ($folders as $folder) {
@@ -87,9 +87,9 @@ class ThemeController extends \luya\console\Command
         $contents = [
             $themeFolder. DIRECTORY_SEPARATOR . 'theme.json' => $this->renderJson($basePath, $themeName),
             $themeFolder. DIRECTORY_SEPARATOR . ucfirst($themeName) . 'Asset.php' => $this->renderAssetClass($themeName),
-            $themeFolder. DIRECTORY_SEPARATOR . 'resources/'. $themeName .'.css' => '',
-            $themeFolder. DIRECTORY_SEPARATOR . 'views/layouts/theme.php' => $this->renderLayout($themeName),
-            $themeFolder. DIRECTORY_SEPARATOR . 'views/cmslayouts/theme.php' => $this->renderCmsLayout($themeName),
+            $themeFolder. DIRECTORY_SEPARATOR . 'resources'.DIRECTORY_SEPARATOR. $themeName .'.css' => '',
+            $themeFolder. DIRECTORY_SEPARATOR . 'views'.DIRECTORY_SEPARATOR.'layouts'.DIRECTORY_SEPARATOR.'theme.php' => $this->renderLayout($themeName),
+            $themeFolder. DIRECTORY_SEPARATOR . 'views'.DIRECTORY_SEPARATOR.'cmslayouts'.DIRECTORY_SEPARATOR.'theme.php' => $this->renderCmsLayout($themeName),
         ];
         
         foreach ($contents as $fileName => $content) {
