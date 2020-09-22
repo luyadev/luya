@@ -7,6 +7,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 + [#2051](https://github.com/luyadev/luya/pull/2051) Add new string helper method (`luya\helpers\String::textList()`) which converts a string with items seperated by commas or whitespaces into an array with items.
 + [#2049](https://github.com/luyadev/luya/pull/2049) Change the behaviors attaching order to follow [Yii CORS guide](https://www.yiiframework.com/doc/guide/2.0/en/rest-controllers#cors).
++ [#8](https://github.com/luyadev/luya-themes/issues/8) Theme create command with DIRECTORY_SEPARATOR.
 
 ## 1.7.0 (26. August 2020)
 
