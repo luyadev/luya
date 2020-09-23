@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.7.1 
+## 1.7.1 (23. September 2020)
 
 + [#2057](https://github.com/luyadev/luya/issues/2057) Fixed a issue with the root option of the IntersectionObserver.
 + [#2051](https://github.com/luyadev/luya/pull/2051) Add new string helper method (`luya\helpers\String::textList()`) which converts a string with items seperated by commas or whitespaces into an array with items.
