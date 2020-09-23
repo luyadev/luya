@@ -94,13 +94,12 @@ cmslayouts/theme.php
 
 ## Import and Activate
 
-While running the `import` (`./vendor/bin/luya import`) command, the theme information will be loaded from the `theme.json` and stored in the database. The imported will show the imported themes when running the import command.
+While running the `import` (`./vendor/bin/luya import`) command, the theme information will be loaded from the `theme.json` and stored in the database. The command will list the imported themes and layouts after running.
 
-After a succesfull import of the new theme, the theme itself can be activated in the CMS Admin `Themes` section:
+After a succesfull import of the new theme, the theme itself can be activated in the CMS Admin `Themes` section.
+**For each new and exists pages you have to set/change the selected layout file**
 
 ![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
-
-**For each new and exists pages you have to set/change the selected layout file**
 
 > For developing purposes themes can also be activated withing the {{luya\theme\ThemeManager}} component with {{luya\theme\ThemeManager::$activeThemeName}} property.
 
