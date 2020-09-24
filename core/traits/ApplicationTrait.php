@@ -13,8 +13,10 @@ use luya\base\PackageInstaller;
  * LUYA Appliation trait
  *
  * @property string $webroot Returns the webroot directory event for console commands.
- * @property \luya\components\Mail $mail Get luya mail component
- * @property ThemeManager $themeManager Get luya theme manager
+ * @property \luya\components\Mail $mail Mail Component
+ * @property \luya\components\Formatter $formatter Format values
+ * @property \luya\theme\ThemeManager $themeManager Theme Manager
+ * @property \luya\base\PackageInstaller $packageInstaller
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -233,6 +235,8 @@ trait ApplicationTrait
      * ```php
      * Yii::setAlias('@webroot', $app->webroot);
      * ```
+     *
+     * @return string The webroot of the application.
      */
     public function getWebroot()
     {
@@ -245,6 +249,8 @@ trait ApplicationTrait
 
     /**
      * Add additional core components to the yii2 base core components.
+     *
+     * @return array
      */
     public function luyaCoreComponents()
     {
@@ -258,7 +264,7 @@ trait ApplicationTrait
     /**
      * Get an array with all modules which are an instance of the `luya\base\Module`.
      *
-     * @return \luya\base\Module
+     * @return \luya\base\Module[]
      */
     public function getApplicationModules()
     {
