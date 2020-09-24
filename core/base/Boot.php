@@ -12,8 +12,8 @@ use luya\helpers\ArrayHelper;
 /**
  * LUYA Boot wrapper.
  *
- * Run the Luya/Yii Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
- * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
+ * Run a LUYA Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
+ * a config file with LUYA configuration must be provided via `$configFile` property. By default LUYA will try to find
  * the default config `../configs/env.php`.
  *
  * @author Basil Suter <basil@nadar.io>
