@@ -1,0 +1,13 @@
+* text=auto eol=lf
+
+.gitattributes export-ignore
+.github/ export-ignore
+.gitignore export-ignore
+actions.* export-ignore
+composer.lock export-ignore
+docs/ export-ignore
+karma.conf.js export-ignore
+LICENSE.md export-ignore
+README.md export-ignore
+tests/ export-ignore
+yarn.lock export-ignore
