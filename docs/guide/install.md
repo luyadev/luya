@@ -60,7 +60,7 @@ The setup process will ask you for an email and password to store your personal 
 
 > `./vendor/bin/luya health` will make a small check if several directories exist and readable/writable.
 
-You can log in now into the administration interface, e.g. `http://localhost/luya-kickstarter/public_html/admin` (dependings on the location of the LUYA files).
+You can now log into the administration interface, e.g. `http://localhost/luya-kickstarter/public_html/admin` (dependings on the location of the LUYA files).
 
 > Check the [Installation Problems and Questions Site](install-problems.md) if you have any problems with the LUYA setup.
 
