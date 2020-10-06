@@ -1,38 +1,38 @@
 # Create a LUYA Application
 
-The LUYA installation requires Composer, please have a look at the [official Composer website](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) if you haven´t installed on your system yet.
+The LUYA installation requires Composer. Please have a look at the [official Composer website](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) if you haven´t installed it on your system yet.
 
 > Find the [installation Video on Youtube](https://www.youtube.com/watch?v=Ybq878PMe_U) in order to help you install LUYA.
 
 ## Composer create-project
 
-After setting up Composer, we execute the Composer command `create-project` to checkout the **luya-kickstarter** application, an **out of the box** LUYA setup to run your website directly. It´s recommend to run the `create-project` command directly from your htdocs/webserver folder like this:
+After setting up Composer, we execute the Composer command `create-project` to checkout the **luya-kickstarter** application, an **out of the box** LUYA setup to run your website directly. It is recommended to run the `create-project` command directly from your htdocs/webserver folder like this:
 
 ```sh
 composer create-project luyadev/luya-kickstarter:^1.0
 ```
 
-> Info: There are also other LUYA Kickstarter packages, check the [kickstarter packages section](https://luya.io/packages).
+> Info: For more LUYA Kickstarter packages, check the [kickstarter packages section](https://luya.io/packages).
 
-> Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
+> Note: During the installation you may be asked for the Github login credentials. This is normal, because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
-> Note: In previous versions the fxp composer plugin was required `composer global require "fxp/composer-asset-plugin:~1.4"` but this has been replaced with [Asset Packagist](https://asset-packagist.org). If the Asset Packagist is not present in the composer.json you might install the fxp plugin as its a "legacy" project setup.
+> Note: In previous versions the fxp composer plugin was required `composer global require "fxp/composer-asset-plugin:~1.4"` but this has been replaced with [Asset Packagist](https://asset-packagist.org). If the Asset Packagist is not present in the composer.json, you might install the fxp plugin as it is a "legacy" project setup.
 
-The `create-project` command will create a folder (inside of your current folder where the `composer create-project` command was executed) named **luya-kickstarter**. 
+The `create-project` command will create a folder (inside of your current folder, where the `composer create-project` command was executed) named **luya-kickstarter**. 
 
 ## Copy Config
 
-If the Composer installation is done change into the **configs** folder inside the application and copy the `.dist` template files to original `.php` files.
+If the Composer installation is done, switch to **configs** folder inside the application and copy the `.dist` template files to original `.php` files.
 
 ```sh
 cp env.php.dist env.php
 ```
 
-Now the database connection inside the `configs/config.php` file needs to fit your mysql servers configuration. It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-environments.md).
+Now the database connection inside the `configs/config.php` file needs to fit your mysql servers' configuration. It is recommended to open all config files once to change values and understand the behavior. In order to understand the config files, read more in the [environment configs section](install-environments.md).
 
 ## Run Migrate and Import
 
-After successfully setting up your database connection, you have to reopen your terminal and change into your project directory and excute the **luya** binary files which has been installed into your vendor folder by composer as described in the follwing.
+After successfully setting up your database connection, you have to reopen your terminal and switch to your project directory and excute the **luya** binary files, which has been installed into your vendor folder by composer as described below.
 
 Run the migration files with the [migrate console command](luya-console.md):
 
@@ -50,7 +50,7 @@ Build and import all filesystem configurations into the database with the [impor
 
 ## Run admin/setup
 
-Finally execute the [setup console command](luya-console.md) command which is going to setup a user, group and permissions:
+Finally execute the [setup console command](luya-console.md) command, which is going to setup a user, group and permissions:
 
 ```sh
 ./vendor/bin/luya admin/setup
@@ -60,9 +60,9 @@ The setup process will ask you for an email and password to store your personal 
 
 > `./vendor/bin/luya health` will make a small check if several directories exist and readable/writable.
 
-You can now log in into the administration interface, e.g. `http://localhost/luya-kickstarter/public_html/admin` (dependings on the location of the LUYA files).
+You can log in now into the administration interface, e.g. `http://localhost/luya-kickstarter/public_html/admin` (dependings on the location of the LUYA files).
 
-> Visit the [Installation Problems and Questions Site](install-problems.md) when you have any problems with the LUYA setup.
+> Check the [Installation Problems and Questions Site](install-problems.md) if you have any problems with the LUYA setup.
 
 ---
 
