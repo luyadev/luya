@@ -2,8 +2,7 @@
 
 Ability to make an checkbox input where you can select items from another table connected with a via/ref Table.
 
-+ Create public property (in order to communicate with the api) `$groups`
-+ Add the extra field to the safe attributes.
++ Create public property (in order to communicate with the api) f.e. `$adminGroups`
 + Register the attribute type in the `ngrestExtraAttributeTypes()` method.
 
 ## Active query relation
@@ -42,14 +41,13 @@ class User extends \luya\admin\ngrest\base\NgRestModel
     public function ngRestScopes($config)
     {
         return [
-             // ...
              [['create', 'update'], ['adminGroups']],
         ];
     }
 }
 ```
 
-The difference is mainly to use a variable which is used to store and get data for plugin prefix with `admin`.
+The difference is mainly to use a variable which is used to store and get data for plugin prefix with `admin` in the above example its `$adminGroups`.
 
 ## No relation definition
 
@@ -74,7 +72,7 @@ class User extends \luya\admin\ngrest\base\NgRestModel
     {
         return [
             'groups' => [
-                'checkboxRelation',
+                'class' => CheckboxRelation::class,
                 'model' => Group::className(),
                 'refJoinTable' => 'admin_user_group',
                 'refModelPkId' => 'group_id',
