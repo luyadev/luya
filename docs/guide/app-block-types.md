@@ -71,6 +71,7 @@ There are several types you can use to generate your block controllers. Each cla
 |[zaa-multiple-inputs](app-block-type-multiple-inputs.md)| TYPE_MULTIPLE_INPUTS | Creates an expandable list with plugins for each row.
 |zaa-color|TYPE_COLOR|A color wheel to choose a color which will return the hex code of the selected color.
 |zaa-slug|TYPE_SLUG|Input field which will generate url safe strings where only a-z, 0-9 and - is allowed.
+|zaa-table|TYPE_TABLE|Generates a table generator where you can create cols and rows.
 
 ### Examples with block types
 
