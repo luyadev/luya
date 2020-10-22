@@ -40,9 +40,9 @@ class LinkTag extends BaseTag
     public function readme()
     {
         return 'Generate a link to an external page or an internal page. 
-        In order to call an internal URL use the `//` prefix like `link[//contact](Go to contact)`, now the `//` are replace by the url of the webserver. 
-        If a single `/` is used its a relative url and therfore won\'t be changed.
-        In order to generate an external url use `link[luya.io](Go to Luya.io)`.';
+In order to call an internal URL use the `//` prefix like `link[//contact](Go to contact)`, now the `//` are replace by the url of the webserver. 
+If a single `/` is used its a relative url and therfore won\'t be changed.
+In order to generate an external url use `link[luya.io](Go to Luya.io)`.';
     }
     
     /**
