@@ -93,7 +93,7 @@ public function ngRestScopes()
 }
 ``` 
 
-This will trigger the {{luya\admin\ngrest\base\NgRestModel::delete()} method and will irrevocable remove the given record. You can override the {{luya\admin\ngrest\base\NgRestModel::delete()} method to change the behavior of a deletion or using {{luya\admin\traits\SoftDeleteTrait}}.
+This will trigger the {{luya\admin\ngrest\base\NgRestModel::delete()}} method and will irrevocable remove the given record. You can override the {{luya\admin\ngrest\base\NgRestModel::delete()}} method to change the behavior of a deletion or using {{luya\admin\traits\SoftDeleteTrait}}.
 
 ## Multlingual / i18n fields
 
