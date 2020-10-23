@@ -32,13 +32,15 @@ Now you can add a field into the above defined type, this is like a configuratio
 ] 
 ```
 
+> Since version 3.4 of LUYA Module CMS its possible to define a `required` property in order to ensure can not be empty.
+
 Above, this would create an input variable with a text input field and a label `From Label for the User`. 
 The type of the field can be added into a group you like:
 
 ```php
 return [
     'vars' => [
-        ['var' => 'userInputText', 'label' => 'Description of userInputText', 'type' => self::TYPE_TEXT]
+        ['var' => 'userInputText', 'label' => 'Description of userInputText', 'type' => self::TYPE_TEXT, 'required' => true]
     ]
 ];
 ```
@@ -75,7 +77,7 @@ There are several types you can use to generate your block controllers. Each cla
 
 ### Examples with block types
 
-Example for file download (file upload) and Markdown text for textarea inputs.
+Example for file download (file upload) and Markdown text for textarea inputs, where the text is required.
 
 ```php
 public function config()
@@ -83,7 +85,7 @@ public function config()
     return [
         'vars' => [
              ['var' => 'image', 'label' => 'Image', 'type' => self::TYPE_IMAGEUPLOAD, 'options' => ['no_filter' => true]],
-             ['var' => 'text', 'label' => 'Text', 'type' => self::TYPE_TEXTAREA],
+             ['var' => 'text', 'label' => 'Text', 'type' => self::TYPE_TEXTAREA, 'required' => true],
              ['var' => 'download', 'label' => 'Download', 'type' => self::TYPE_FILEUPLOAD],
         ],
     ];
