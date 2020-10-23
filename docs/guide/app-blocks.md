@@ -53,6 +53,8 @@ class TextTransformBlock extends \luya\cms\base\PhpBlock
 }
 ```
 
+> Read more about details regarding {{luya\cms\base\InternalBaseBlock:config()}} in [[app-block-types.md]].
+
 As we have switched to PHPBlock by default you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block, e.g. `TextTransformBlock.php`. 
 
 In the example above, the view file should look like this:
