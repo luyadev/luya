@@ -20,13 +20,15 @@ class ExportHelper
      * @param array|QueryInterface $input The data to export into a csv
      * @param array $keys Defines which keys should be packed into the generated CSV. The defined keys does not change the sort behavior of the generated csv.
      * @param string $header Whether the column name should be set as header inside the csv or not.
+     * @param array $options Options {@since 1.8.0}
+     * + `sort`: boolean, whether they row should be sorted by its keys, default is true.
      * @return string The generated CSV as string.
      */
-    public static function csv($input, array $keys = [], $header = true)
+    public static function csv($input, array $keys = [], $header = true, array $options = [])
     {
         $delimiter = ",";
         $input = self::transformInput($input);
-        $array = self::generateContentArray($input, $keys, $header);
+        $array = self::generateContentArray($input, $keys, $header, $options);
 
         return self::generateOutputString($array, $delimiter);
     }
@@ -37,15 +39,17 @@ class ExportHelper
      * @param array|QueryInterface $input
      * @param array $keys Defines which keys should be packed into the generated xlsx. The defined keys does not change the sort behavior of the generated xls.
      * @param bool $header
+     * @param array $options Options {@since 1.8.0}
+     * + `sort`: boolean, whether they row should be sorted by its keys, default is true.
      * @return mixed
      * @throws Exception
      * @since 1.0.4
      */
-    public static function xlsx($input, array $keys = [], $header = true)
+    public static function xlsx($input, array $keys = [], $header = true, array $options = [])
     {
         $input = self::transformInput($input);
 
-        $array = self::generateContentArray($input, $keys, $header);
+        $array = self::generateContentArray($input, $keys, $header, $options);
 
         $writer = new XLSXWriter();
         $writer->writeSheet($array);
@@ -76,11 +80,13 @@ class ExportHelper
      * @param string $delimiter
      * @param array $keys
      * @param bool $generateHeader
+     * @param array $options Options {@since 1.8.0}
+     * + `sort`: boolean, whether they row should be sorted by its keys, default is true.
      * @return array
      * @throws Exception
      * @since 1.0.4
      */
-    protected static function generateContentArray($contentRows, array $keys, $generateHeader = true)
+    protected static function generateContentArray($contentRows, array $keys, $generateHeader = true, $options  = [])
     {
         if (is_scalar($contentRows)) {
             throw new Exception("Content must be either an array, object or traversable.");
@@ -102,7 +108,11 @@ class ExportHelper
                 $attributeKeys[get_class($content)] = $keys;
             }
             $row = ArrayHelper::toArray($content, $attributeKeys, false);
-            ksort($row);
+
+            if (ArrayHelper::getValue($options, 'sort', true)) {
+                ksort($row);
+            }
+            
             $rows[$i] = $row;
 
             // handle header
@@ -120,7 +130,9 @@ class ExportHelper
                     $header = array_keys($rows[0]);
                 }
 
-                ksort($header);
+                if (ArrayHelper::getValue($options, 'sort', true)) {
+                    ksort($header);
+                }
             }
 
             unset($row);
