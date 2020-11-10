@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.8.0 (10. Novemeber 2020)
 
-+ [#]() Added new `['sort' => false]` option to ExportHelper::csv() and ExportHelper::xls().
++ [#2067](https://github.com/luyadev/luya/pull/2067) Added new `['sort' => false]` option to ExportHelper::csv() and ExportHelper::xls().
 
 ## 1.7.1 (23. September 2020)
 
