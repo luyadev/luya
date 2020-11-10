@@ -141,4 +141,19 @@ class ExportHelperTest extends LuyaWebTestCase
 
         $this->assertSameTrimmed('"&","\'","a""b""c"', $content);
     }
+
+    public function testSortingDisabled()
+    {
+        $content = ExportHelper::csv([
+            ['c' => 'c', 'b' => 'b', 'a' => 'a'],
+        ], [], false);
+
+        $this->assertSameTrimmed('"a","b","c"', $content);
+
+        $content = ExportHelper::csv([
+            ['c' => 'c', 'b' => 'b', 'a' => 'a'],
+        ], [], false, ['sort' => false]);
+
+        $this->assertSameTrimmed('"c","b","a"', $content);
+    }
 }
