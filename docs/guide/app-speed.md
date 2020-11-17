@@ -10,9 +10,6 @@ In order to enable the caching, open your config and add the caching to the comp
 
 ```php
 'components' => [
-
-    // ...
-    
     'cache' => [
         'class' => 'yii\caching\FileCache',
     ]
@@ -25,11 +22,13 @@ There are also a few other caching mechanism available and built in into Yii. Se
 
 ## Page Caching
 
-Since version 3.0 of LUYA Cms its als possible to cache the whole page.
+> since CMS 3.0
+
+It is als possible to cache the whole page response. This dramatically improves the page speed and is recommend to setup whenever its possible. By default the data is in the cache for 2 hours but will be destroyed when you edit or move blocks around on the given page.
 
 ![CMS Page Caching](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/page-caching.png "CMS Page Caching")
 
-When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.
+Keepp in mind, that when enabled, the whole page will be cached including all blocks, therefore **dynamically generated data in blocks will not be updated**!
 
 ## Database
 
@@ -52,7 +51,7 @@ When dealing with large database tables in your application you should define da
 
 ## Session
 
-> since admin 3.9
+> since Admin 3.9
 
 The admin provides an out of the box table which can be taken to store the session inside the database, thereore just configured:
 
