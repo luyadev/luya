@@ -49,3 +49,16 @@ In order to reduce the sql requests you can also enable schema caching in your d
 ```
 
 When dealing with large database tables in your application you should define database indexes (for example when working with mysql).
+
+## Session
+
+> since admin 3.9
+
+The admin provides an out of the box table which can be taken to store the session inside the database, thereore just configured:
+
+```php
+ $config->component('session', [
+    'class' => 'yii\web\DbSession',
+    'sessionTable' => 'admin_session',
+]);
+```
