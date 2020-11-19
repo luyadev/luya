@@ -127,6 +127,7 @@ Assuming the following scenario we have a `BaseRepo` and an `ProjectApplication`
 {
      "require": {
         "luyadev/luya-module-cms" : "^3.0"
+     }
 }
 ```
 
@@ -135,7 +136,8 @@ Assuming the following scenario we have a `BaseRepo` and an `ProjectApplication`
 ```json
 {
      "require": {
-        "mycompany/base-repo": "^1.0",
+        "mycompany/base-repo": "^1.0"
+    }
 }
 ```
 
