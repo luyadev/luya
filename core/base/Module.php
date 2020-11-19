@@ -149,8 +149,9 @@ abstract class Module extends \yii\base\Module
     /**
      * @var array mapping from action ID to view configurations.
      * Each name-value pair specifies the configuration of a specifed oder wildcard action to a single view folder.
-     * The first match
-     * For example,
+     * The first match.
+     *
+     * For example:
      *
      * ```php
      * [
@@ -160,6 +161,8 @@ abstract class Module extends \yii\base\Module
      *   '*' => '@app/views/mymodule',
      * ]
      * ```
+     *
+     * > Keep in mind, the viewMap only works when `useAppViewPath` is `false`.
      *
      * @since 1.0.11
      */
