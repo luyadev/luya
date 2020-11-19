@@ -63,6 +63,20 @@ You an also define multiple rows, here an advanced example for a layout with 4 p
 
 > If a json file is used for the CMS layout the addition of new placeholders must be available in the json file as well as this will be the priority source for importing CMS layouts.
 
+## Provide CMS Layouts
+
+There are two ways of defining a cmslayout in order for importing them. Either use the folder structure, where it requires a folder named `cmslayouts` or there is an option to defined them inside the {{luya\cms\admin\Module::$cmsLayouts}} property.
+
+```php
+'cmsadmin' => [
+    'class' => 'luya\cms\admin\Module',
+    'cmsLayouts' => [
+          '@app/path/to/cmslayouts', // a folder with layout files
+          '@app/file/TheCmsLayout.php', // a layout file
+     ],
+]
+```
+
 ## Import and use
 
 To enable the new CMS layout file or after updating an existing layout file you have to run the `import` command from the terminal.
