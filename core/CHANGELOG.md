@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.8.0 (24. Novemeber 2020)
+## 1.8.0 (24. November 2020)
 
 + [#2069](https://github.com/luyadev/luya/issues/2069) `WebsiteLink` does not prepend the URL protocol when an acnhor link `#foo-bar` is provided.
 + [#2067](https://github.com/luyadev/luya/pull/2067) Added new `['sort' => false]` option to ExportHelper::csv() and ExportHelper::xls().
