@@ -5,7 +5,6 @@ namespace luya\web;
 use luya\helpers\Url;
 use yii\base\InvalidConfigException;
 use luya\helpers\StringHelper;
-use phpDocumentor\Reflection\Types\String_;
 
 /**
  * Generate External Link object.
