@@ -48,6 +48,9 @@ class WebsiteLink extends BaseLink
     {
         if (StringHelper::startsWith($href, '//')) {
             $this->_href = Url::base(true) . str_replace('//', '/', $href);
+        } elseif (StringHelper::startsWith($href, '#')) {
+            // When an anchor link is given, do not modify the link. This can be usefull for one pagers
+            $this->_href = $href;
         } else {
             $this->_href = Url::ensureHttp($href);
         }

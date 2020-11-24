@@ -30,4 +30,22 @@ class WebsiteLinkTest extends LuyaWebTestCase
 
         $this->assertContains('public_html/go/there?p=1', $link->href);
     }
+
+    public function testTarget()
+    {
+        $link = new WebsiteLink(['href' => 'https://luya.io', 'target' => '_blank']);
+
+        $this->assertSame('_blank', $link->getTarget());
+    }
+
+    public function testAnchorLink()
+    {
+        $link = new WebsiteLink(['href' => '#my-super-anchor']);
+
+        $this->assertSame('#my-super-anchor', $link->getHref());
+
+        $link = new WebsiteLink(['href' => '//page-link#my-super-anchor']);
+
+        $this->assertContains('/page-link#my-super-anchor', $link->getHref());
+    }
 }
