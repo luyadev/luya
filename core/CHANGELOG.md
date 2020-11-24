@@ -5,13 +5,13 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.8.0 (24. November 2020)
 
-+ [#2069](https://github.com/luyadev/luya/issues/2069) `WebsiteLink` does not prepend the URL protocol when an acnhor link `#foo-bar` is provided.
++ [#2069](https://github.com/luyadev/luya/issues/2069) `WebsiteLink` does not prepend the URL protocol when an anchor link `#foo-bar` is provided.
 + [#2067](https://github.com/luyadev/luya/pull/2067) Added new `['sort' => false]` option to ExportHelper::csv() and ExportHelper::xls().
 
 ## 1.7.1 (23. September 2020)
 
 + [#2057](https://github.com/luyadev/luya/issues/2057) Fixed a issue with the root option of the IntersectionObserver.
-+ [#2051](https://github.com/luyadev/luya/pull/2051) Add new string helper method (`luya\helpers\String::textList()`) which converts a string with items seperated by commas or whitespaces into an array with items.
++ [#2051](https://github.com/luyadev/luya/pull/2051) Add new string helper method (`luya\helpers\String::textList()`) which converts a string with items separated by commas or whitespaces into an array with items.
 + [#2049](https://github.com/luyadev/luya/pull/2049) Change the behaviors attaching order to follow [Yii CORS guide](https://www.yiiframework.com/doc/guide/2.0/en/rest-controllers#cors).
 + [#8](https://github.com/luyadev/luya-themes/issues/8) Theme create command with DIRECTORY_SEPARATOR.
 
@@ -49,7 +49,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.4.0 (2. June 2020)
 
-+ [#2019](https://github.com/luyadev/luya/issues/2019) The property `luya\web\Request::$isAdmin` is now more restrict and won't match admin modules like `newsadmin` which would have been evaulated as true before this change.
++ [#2019](https://github.com/luyadev/luya/issues/2019) The property `luya\web\Request::$isAdmin` is now more restrict and won't match admin modules like `newsadmin` which would have been evaluated as true before this change.
 + [#2023](https://github.com/luyadev/luya/issues/2023) Added `rel="noopener"` to links which open in a new window.
 
 ## 1.3.1 (7. May 2020)
@@ -75,15 +75,15 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.2.0 (7. April 2020)
 
-+ [#2003](https://github.com/luyadev/luya/pull/2003) Add new `StringHelper::isNumeric()` which checks whether a value is nummeric (with regex instead of `is_numeric`) or not.
-+ [#2004](https://github.com/luyadev/luya/pull/2004) Make impoter public in order to improve setting up unit tests and option to override in controller map configuration.
++ [#2003](https://github.com/luyadev/luya/pull/2003) Add new `StringHelper::isNumeric()` which checks whether a value is numeric (with regex instead of `is_numeric`) or not.
++ [#2004](https://github.com/luyadev/luya/pull/2004) Make importer public in order to improve setting up unit tests and option to override in controller map configuration.
 + [#1970](https://github.com/luyadev/luya/issues/1970) Fixed a bug with relative theme paths.
 + [#2007](https://github.com/luyadev/luya/pull/2007) Fixed a bug in JsonBehavior and added new properties for auto decoding data after find.
 
 ## 1.1.0 (12. March 2020)
 
 + [Admin#464](https://github.com/luyadev/luya-module-admin/issues/464) The `luya\traits\ApplicationTrait::setLocale()` does not change the `Yii::$app->language` value as before. In order to change the application language use `Yii::$app->language` directly.
-+ [#1995](https://github.com/luyadev/luya/issues/1998) The `luya\web\Asset` defines a default `$sourcePath` when value is `null`. The default path is relativ to its file location `<FILE_LOCATION>/resources/<ASSET_NAME>`.
++ [#1995](https://github.com/luyadev/luya/issues/1998) The `luya\web\Asset` defines a default `$sourcePath` when value is `null`. The default path is relative to its file location `<FILE_LOCATION>/resources/<ASSET_NAME>`.
 + [#1993](https://github.com/luyadev/luya/pull/1993) Added new Text to Speech Widget `luya\texttospeech\TextToSpeechWidget`.
 + Added Karma tests to Travis.
 
@@ -113,14 +113,14 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 1.0.22 (22. October 2019)
 
 + [#1967](https://github.com/luyadev/luya/pull/1967) New `corsConfig` option for Application in order to set application wide cors settings.
-+ [#1964](https://github.com/luyadev/luya/pull/1964) Ensure console commands can return none scalar values to debug or prinit.
++ [#1964](https://github.com/luyadev/luya/pull/1964) Ensure console commands can return none scalar values to debug or print.
 + [#1962](https://github.com/luyadev/luya/issues/1962) Fix problem with first stack trace informations not containing line and file informations.
-+ [#1963](https://github.com/luyadev/luya/pull/1963) Fix for theme bootstraping and layout loading.
++ [#1963](https://github.com/luyadev/luya/pull/1963) Fix for theme bootstrapping and layout loading.
 
 ## 1.0.21 (9. September 2019)
 
 + [#1956](https://github.com/luyadev/luya/issues/1956) Ensure a not existing package installer config value `installer.php` won't throw an exception.
-+ [#1947](https://github.com/luyadev/luya/issues/1947) Whiteliste more exception which should not be transmitted to error API.
++ [#1947](https://github.com/luyadev/luya/issues/1947) Whitelisted more exceptions which should not be transmitted to error API.
 + [#1772](https://github.com/luyadev/luya/issues/1772) Add new `luya\Config` to generate configuration builds depending on console or web runtime.
 + [#1950](https://github.com/luyadev/luya/issues/1950) Fixed bug in Export Helper when dealing with special chars.
 + [#1942](https://github.com/luyadev/luya/issues/1942) Use phpmailers `setFrom()` method instead of `$from` and `$fromName` property.
@@ -142,7 +142,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 1.0.18 (27. May 2019)
 
-+ [#1921](https://github.com/luyadev/luya/issues/1921) Added new `resolveHostInfo()` in Composition component in order to find a given host for a mapping defintion.
++ [#1921](https://github.com/luyadev/luya/issues/1921) Added new `resolveHostInfo()` in Composition component in order to find a given host for a mapping definition.
 + Fixed issue when binary is loading config file from vendor folder.
 + Update lock files to allow latest test suite with admin 2.0 constraint.
 
@@ -155,7 +155,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 1.0.16 (1. April 2019)
 
 + [#1911](https://github.com/luyadev/luya/issues/1911) Fixed bug in ArrayHelper::searchColumn() when using assoc arrays.
-+ [#1910](https://github.com/luyadev/luya/issues/1910) Fixed resized callback in lazyload js when using LazyLoad widget.
++ [#1910](https://github.com/luyadev/luya/issues/1910) Fixed resize callback in lazyload js when using LazyLoad widget.
 + [#1909](https://github.com/luyadev/luya/issues/1909) Fixed issued with wrong delimiter definition in StringHelper::highlightWord() function.
 
 ## 1.0.15 (19. February 2019)
@@ -663,3 +663,5 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 - `#836` Fixed bug where importer does delete wrong files.
 - `#989` Fixed bug where redirect and module pages are lost when choosing a container but also choose a subsite from another container.
 - `#709` Removed ApiCmsNavItemPageBlockItem factory and angular resources dependencie.
+
+
