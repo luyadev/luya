@@ -39,6 +39,8 @@ There are two ways to retrieve the current active language:
 
 ## Localisation with locales
 
+> Instead of using the locales system, we recommend you to make usage of the php intl extension, which is commonly available. Therfore f.e you use `Yii::$app->formatter->asDateTime($time, 'MMMM yyyy')` instead of  `strftime("%B %Y", $date);`. Take a look at the formating syntax here http://userguide.icu-project.org/formatparse/datetime
+
 As the composition component can override the {{yii\base\Application::$language}} which is the base property for all translations within a Yii system you can define localisations for each language. Localisation are usually set trough setlocale() this is what LUYA does in the {{luya\traits\ApplicationTrait}}. You can define a localisation file for each language with the {{luya\traits\ApplicationTrait::$locales}} property, for example when language `de` is given it should take the `de_CH.utf8` locale file:
 
 ```php
