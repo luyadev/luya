@@ -17,12 +17,12 @@ use luya\admin\ngrest\base\ActiveButton;
 
 class DuplicateActiveButton extends ActiveButton
 {
-    public function defaultIcon()
+    public function getDefaultIcon()
     {
         return 'control_point_duplicate';
     }
 
-    public function defaultLabel()
+    public function getDefaultLabel()
     {
         return 'Duplicate';
     }
