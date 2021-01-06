@@ -8,7 +8,7 @@ LUYA has been proofenly used in different cloud environments using Docker and f.
 
 This chart illustrates what is required to make your Webserver stateless:
 
-1. Database
+1. a Database
 2. Caching Server (f.e. Memcached)
 3. S3 compataible Storage (For file uploads, assets, etc.) working as a CDN
 
@@ -16,6 +16,82 @@ This chart illustrates what is required to make your Webserver stateless:
 
 ## Dockerize your Application
 
+First you need to Dockerize your LUYA application. There are maybe multiple docker images available, but for **production** we currently recommend to use https://gitlab.com/zephir.ch/foss/luya-docker. Create a `Dockerfile` which could look like this:
+
+```
+FROM registry.gitlab.com/zephir.ch/foss/luya-docker:1
+
+## Replace the default server name `luya` with your own server name
+RUN sed -i 's/server_name luya;/server_name MY_SUPER_WEBSITE.COM;/g' /etc/nginx/conf.d/default.conf
+
+COPY . /var/www/html
+
+RUN mkdir -p /var/www/html/public_html/assets
+RUN mkdir -p /var/www/html/runtime
+
+RUN chmod 777 /var/www/html/public_html/assets
+RUN chmod 777 /var/www/html/runtime
+```
+
+By default this will load the {{luya\Config}} with `ENV_PROD`, you can adjust this by chaning the ENV variable `LUYA_CONFIG_ENV` on run or build time.
+
 ## Configure your Application
 
-## Hints
+Ensure [LUYA AWS](https://github.com/luyadev/luya-aws) is installed, so you can store files and assets into your s3 compatible storage system. 
+
+#### Storage Component
+
+```php
+$config->component('storage', [
+    'class' => 'luya\aws\S3FileSystem',
+    'bucket' => 'BUCKET_NAME',
+    'key' => 'KEY',
+    'secret' => 'SECRET',
+    'region' => 'eu-central-1',
+]);
+```
+
+#### Cache Component
+
+```php
+$config->component('cache', [
+    'class' => 'yii\caching\MemCache',
+    'useMemcached' => true,
+    'servers' => [
+        [
+            'host' => 'MEMCACHEDSERVER',
+            'port' => '11211',
+            'weight' => 100,
+        ],
+    ],
+]);
+```
+
+#### Session Component
+
+```php
+$config->component('session', [
+    'class' => 'yii\web\DbSession',
+    'sessionTable' => 'admin_session',
+]);
+```
+
+#### Asset Manager Component
+
+```php
+$config->component('assetManager', [
+    'class' => 'luya\aws\AssetManager',
+    'forceCopy' => false,
+    'appendTimestamp' => true,
+]);
+```
+
+#### Request Component
+
+Maybe you need to turn off secure headers, since the IP of the pod can change for every request:
+
+```php
+$config->webComponent('request', [
+    'secureHeaders' => [],
+]);
+```
