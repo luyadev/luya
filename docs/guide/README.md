@@ -6,6 +6,7 @@
   + [Upgrade](install-upgrade.md)
   + [Structure & Config](install-structures.md)
   + [Environments](install-environments.md)
+  + [Cloud & Docker](install-cloud-docker.md)
 + Key Concepts
   + [Core](concept-core.md)
   + [Tags](concept-tags.md)
