@@ -88,7 +88,7 @@ $config->component('assetManager', [
 
 #### Request Component
 
-Maybe you need to turn off secure headers, since the IP of the pod can change for every request:
+If the urls do not contain https schema, this is because [$isSecureConnection](https://www.yiiframework.com/doc/api/2.0/yii-web-request#getIsSecureConnection()-detail) will return false, therefor you can define the secure headers or disable them as followed:
 
 ```php
 $config->webComponent('request', [
