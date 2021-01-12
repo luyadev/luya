@@ -121,7 +121,7 @@ class Pets extends luya\admin\base\Module
 
 Now the action route `pets/test-rest/dogs` can only accessed when the user has the certain permission assigned, but `pets/test-rest/cats` can be accessed by any authenticated user. If  {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} is enabled, even Api Users could access the endpoint.
 
-In order to turn of the {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} apiUser check only for a given controller you might override {{luya\admin\traits::canApiUserAccess()}}.
+In order to turn of the {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} apiUser check only for a given controller you might override {{luya\admin\traits\AdminRestBehaviorTrait::canApiUserAccess()}}.
 
 ```php
 public function canApiUserAccess()
