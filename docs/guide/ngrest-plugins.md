@@ -120,11 +120,6 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
     {
         // This is triggered when the active record tries to get the values for the field. This is the basic getter/setter concept of the yii\base\BaseObject.
     }
-    
-    public function extraFields()
-    {
-        return ['field'];
-    }
 
     public function ngRestExtraAttributeTypes()
     {
