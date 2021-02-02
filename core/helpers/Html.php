@@ -2,13 +2,13 @@
 
 namespace luya\helpers;
 
-use yii\helpers\BaseHtml;
+use luya\yii\helpers\Html as HelpersHtml;
 
 /**
  * Extend Yii Html Helper.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Html extends BaseHtml
+class Html extends HelpersHtml
 {
 }
