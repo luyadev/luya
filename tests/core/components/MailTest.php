@@ -140,7 +140,7 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $mail = new Mail();
         $mailer = $mail->mailer;
         $header = $mailer->createHeader();
-        $this->assertNotContains('X-Mailer', $header);
+        $this->assertStringNotContainsString('X-Mailer', $header);
     }
     
     public function testAltBody()
