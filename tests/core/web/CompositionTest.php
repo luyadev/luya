@@ -325,20 +325,17 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $comp = new Composition($request);
         $this->assertFalse($comp->isHostAllowed(['foobar.com']));
     }
-    /**
-     * @expectedException Exception
-     */
+
     public function testExceptionOnInit()
     {
+        $this->expectException('Exception');
         $request = new Request();
         $comp = new Composition($request, ['default' => ['noLangShortCode' => 'ch']]);
     }
     
-    /**
-     * @expectedException Exception
-     */
     public function testNotAllowedUnset()
     {
+        $this->expectException('Exception');
         $request = new Request();
         $comp = new Composition($request);
         unset($comp['langShortCode']);

@@ -27,9 +27,9 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         ],
     ];
 
-    public function setUp()
+    public function afterSetup()
     {
-        parent::setUp();
+        parent::afterSetup();
         Yii::$app->composition->setKey('langShortCode', 'en');
     }
 
@@ -235,7 +235,7 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
 
         $r = $urlManager->createMenuItemUrl(['othermodule/controller/action'], 3);
 
-        $this->assertContains('/othermodule/controller/action', $r);
+        $this->assertStringContainsString('/othermodule/controller/action', $r);
     }
     
     public function testCreateMenuItemUrlWithHomeItem()
@@ -247,7 +247,7 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         
         $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3);
         
-        $this->assertContains('/unitmodule/controller/action', $r);
+        $this->assertStringContainsString('/unitmodule/controller/action', $r);
     }
     
     public function testCreateMenuItemUrlRedirectType2()
@@ -275,7 +275,7 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
 
         $r = $urlManager->createMenuItemUrl(['othermodule/controller/action'], 2);
 
-        $this->assertContains('/othermodule/controller/action', $r);
+        $this->assertStringContainsString('/othermodule/controller/action', $r);
     }
     
     public function testCreateMenuItemUrlWithException()
@@ -300,7 +300,7 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
     
         $r = $urlManager->createMenuItemUrl(['moduledoesnotexists/controller/action'], 3);
          
-        $this->assertContains('moduledoesnotexists/controller/action', $r);
+        $this->assertStringContainsString('moduledoesnotexists/controller/action', $r);
     }
     
     /**
@@ -340,7 +340,7 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
                 ['pattern' => 'impressum', 'route' => 'wirpre/default/imprint', 'composition' => ['fr' => 'mentions-legales']],
         ]);
         $url = $urlManager->createUrl(['/wirpre/default/imprint']);
-        $this->assertContains('/mentions-legales', $url);
+        $this->assertStringContainsString('/mentions-legales', $url);
     }
     
     public function testUrlCreationWithComplexCompositionPattern()

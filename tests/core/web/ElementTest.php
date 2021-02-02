@@ -51,11 +51,9 @@ class ElementTest extends \luyatests\LuyaWebTestCase
     }
     */
 
-    /**
-     * @expectedException Exception
-     */
     public function testNotExistingElement()
     {
+        $this->expectException('Exception');
         $element = new \luya\web\Element();
         // throws: The requested element 'foobar' does not exists in the element list. You may register the element first with `addElement(name, closure)`.
         $element->foobar();

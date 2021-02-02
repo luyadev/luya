@@ -29,16 +29,6 @@ class ViewTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('<p> foo bar </p>', $view->compress('    <p> foo    bar      </p>'));
     }
     
-    /*
-    public function testAssetUrlGetter()
-    {
-        $view = new View();
-        TestAsset::register($view);
-        $url = $view->getAssetUrl(TestAsset::class);
-        $this->assertContains('c0d3b50b', $url);
-    }
-    */
-    
     public function testUknownAssetUrl()
     {
         $this->expectException('luya\Exception');
@@ -50,7 +40,7 @@ class ViewTest extends \luyatests\LuyaWebTestCase
     {
         $view = new View();
         $url = $view->getPublicHtml();
-        $this->assertContains('public_html', $url);
+        $this->assertStringContainsString('public_html', $url);
     }
 
     public function testThemeSetup()

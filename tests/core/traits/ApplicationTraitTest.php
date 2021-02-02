@@ -9,7 +9,7 @@ class ApplicationTraitTest extends LuyaWebTestCase
 {
     private $trait;
     
-    public function setUp()
+    public function afterSetup()
     {
         $this->trait = Yii::$app;
     }
@@ -28,7 +28,7 @@ class ApplicationTraitTest extends LuyaWebTestCase
     {
         $app = Yii::$app;
         // default
-        $this->assertContains('en-US', $app->ensureLocale($app->language));
+        $this->assertStringContainsString('en-US', $app->ensureLocale($app->language));
         $app->locales = ['de' => 'de_CH.utf8'];
         $app->setLocale('de');
         $this->assertEquals('de_CH.utf8', $app->ensureLocale('de'));

@@ -22,7 +22,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
         $handler->renderException($exception);
         ob_end_clean();
         
-        $this->assertContains('Whoops', Yii::$app->response->data);
+        $this->assertStringContainsString('Whoops', Yii::$app->response->data);
     }
     
     /**

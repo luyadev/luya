@@ -4,11 +4,9 @@ namespace luyatests\core;
 
 class ExceptionTest extends \luyatests\LuyaWebTestCase
 {
-    /**
-     * @expectedException \luya\Exception
-     */
     public function testException()
     {
+        $this->expectException('\luya\Exception');
         throw new \luya\Exception('fixme');
     }
     

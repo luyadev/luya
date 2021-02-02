@@ -13,30 +13,24 @@ class BootTest extends \luyatests\LuyaWebTestCase
         $this->assertTrue($boot->isCli());
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testUnableToFindConfigFile()
     {
+        $this->expectException('Exception');
         $boot = new Boot();
         $boot->run();
     }
     
-    /**
-     * @expectedException Exception
-     */
     public function testWrongConfigFile()
     {
+        $this->expectException('Exception');
         $boot = new Boot();
         $boot->configFile = __DIR__ . '/../../data/configs/wrongconfig.php';
         $boot->run();
     }
     
-    /**
-     * @expectedException Exception
-     */
     public function testYiiNotFound()
     {
+        $this->expectException('Exception');
         $boot = new Boot();
         $boot->configFile = __DIR__ . '/../../data/configs/console.php';
         $boot->setBaseYiiFile('wrongPathToYii.php');

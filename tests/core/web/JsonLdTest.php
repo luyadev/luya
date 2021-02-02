@@ -55,7 +55,7 @@ class JsonLdTest extends ConsoleApplicationTestCase
         $out = ob_get_contents();
         ob_end_clean();
 
-        $this->assertContains('<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"foo":"bar"}]}</script>', $out);
+        $this->assertStringContainsString('<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"foo":"bar"}]}</script>', $out);
         JsonLd::reset();
     }
 
@@ -381,6 +381,7 @@ class JsonLdTest extends ConsoleApplicationTestCase
         $this->assertSame([
             'aggregateRating' => [
                 'bestRating' => 4,
+                'ratingCount' => 0,
                 'reviewCount' => 2,
                 'worstRating' => 2,
                 '@type' => 'AggregateRating',

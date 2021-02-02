@@ -48,21 +48,15 @@ class ThemeConfigTest extends LuyaWebTestCase
         $this->assertEquals($basePath . '/views', $themeConfig->getViewPath());
     }
     
-    /**
-     * @expectedException \yii\base\InvalidConfigException
-     * @expectedExceptionMessage The path of @app/not/exists is not readable or not exists.
-     */
     public function testInvalidConfig()
     {
+        $this->expectException('\yii\base\InvalidConfigException');
         $themeConfig = new ThemeConfig('@app/not/exists', []);
     }
     
-    /**
-     * @expectedException \yii\base\InvalidArgumentException
-     * @expectedExceptionMessage Theme @app/not/exists could not loaded.
-     */
     public function testInvalidParent()
     {
+        $this->expectException('\yii\base\InvalidArgumentException');
         $themeConfig = new ThemeConfig('@app/themes/blank', ['parentTheme' => '@app/not/exists']);
         $themeConfig->getParent();
     }

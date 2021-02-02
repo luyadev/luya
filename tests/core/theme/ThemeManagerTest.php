@@ -114,22 +114,16 @@ class ThemeManagerTest extends LuyaWebTestCase
         $this->assertEquals(Yii::getAlias('@thememodule/themes/testTheme/views/default/index.php'), $result);
     }
     
-    /**
-     * @expectedException \yii\base\InvalidArgumentException
-     * @expectedExceptionMessage Theme @theme/not/exists could not loaded.
-     */
     public function testInvalidThemeBasePath()
     {
+        $this->expectException('\yii\base\InvalidArgumentException');
         $themeManager = new ThemeManager();
         $themeManager->getThemeByBasePath('@theme/not/exists');
     }
     
-    /**
-     * @expectedException \luya\Exception
-     * @expectedExceptionMessageRegExp #^Theme directory not exists or readable: [\w/]+/themes/not-readable$#
-     */
     public function testNotReadableThemeDir()
     {
+        $this->expectException('\luya\Exception');
         $themeManager = new ThemeManager();
         // only writeable dir
         mkdir(Yii::getAlias('@app/themes/not-readable'), 0200);
@@ -141,12 +135,9 @@ class ThemeManagerTest extends LuyaWebTestCase
         }
     }
     
-    /**
-     * @expectedException \yii\base\InvalidConfigException
-     * @expectedExceptionMessageRegExp #^Theme config file missing at: [\w/]+/otherThemeLocation/emptyThemeDir/theme.json$#
-     */
     public function testEmptyThemeDir()
     {
+        $this->expectException('\yii\base\InvalidConfigException');
         $themeManager = new ThemeManager();
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', ['@app/otherThemeLocation/emptyThemeDir']);
     
@@ -183,12 +174,9 @@ class ThemeManagerTest extends LuyaWebTestCase
         $this->assertEquals("fooTheme", $themeConfig->name);
     }
     
-    /**
-     * @expectedException \yii\base\InvalidConfigException
-     * @expectedExceptionMessage Theme base path have to be absolute or alias: vendorThemeLocation/foo
-     */
     public function testRelativeThemeDefinition()
     {
+        $this->expectException('\yii\base\InvalidConfigException');
         $relativePath = 'vendorThemeLocation/foo';
         
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', [$relativePath]);
@@ -221,12 +209,9 @@ class ThemeManagerTest extends LuyaWebTestCase
         $this->assertSame('blank', $config->name);
     }
     
-    /**
-     * @expectedException \yii\base\InvalidArgumentException
-     * @expectedExceptionMessage  Theme @app/themes/blank already registered.
-     */
     public function testDuplicateThemeDefinition()
     {
+        $this->expectException('\yii\base\InvalidArgumentException');
         Yii::$app->getPackageInstaller()->getConfigs()['luyadev/luya-core']->setValue('themes', ['@app/themes/blank']);
         
         $themeManager = new ThemeManager();

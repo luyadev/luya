@@ -16,7 +16,8 @@
         "issues" : "https://github.com/luyadev/luya/issues"
     },
     "require" : {
-    	"luyadev/luya-composer" : "^1.0",
+        "luyadev/luya-composer" : "^1.0",
+        "luyadev/yii-helpers":"^1.0",
         "yiisoft/yii2": "~2.0.15",
         "curl/curl" : "^2.0 || ^1.0",
         "phpmailer/phpmailer": "^6.0",
@@ -28,10 +29,17 @@
             "luya\\" : ""
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
+
+   "config":{
+        "fxp-asset":{
+            "enabled":false
         }
     },
+   "repositories":[
+        {
+            "type":"composer",
+            "url":"https://asset-packagist.org"
+        }
+    ],
     "bin" : ["bin/luya"]
 }
