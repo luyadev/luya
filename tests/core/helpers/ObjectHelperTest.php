@@ -110,12 +110,9 @@ class ObjectHelperTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('bar', $response['foo']);
     }
     
-    /**
-     *  @expectedException Exception
-     *  @expectedExceptionMessage The argument 'foo' is required for method 'm3' in class 'luyatests\core\helpers\TestObject'.
-     */
     public function testException()
     {
+        $this->expectException('Exception');
         ObjectHelper::callMethodSanitizeArguments((new TestObject()), 'm3');
     }
     

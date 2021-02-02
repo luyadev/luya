@@ -78,12 +78,9 @@ class ThemeTest extends LuyaWebTestCase
         $this->assertEquals($expectedPathMap, $theme->pathMap);
     }
     
-    /**
-     * @expectedException \yii\base\InvalidConfigException
-     * @expectedExceptionMessage Property base path must be set
-     */
     public function testInvalidConfig()
     {
+        $this->expectException('\yii\base\InvalidConfigException');
         $themeConfigMock = new class extends ThemeConfig {
             public function __construct()
             {

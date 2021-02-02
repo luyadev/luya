@@ -12,11 +12,9 @@ class ModuleReflectionTest extends \luyatests\LuyaWebTestCase
         return new ModuleReflection(new \luya\web\Request(), new \luya\web\UrlManager(), ['module' => $module]);
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testInitException()
     {
+        $this->expectException('Exception');
         return new ModuleReflection(new \luya\web\Request(), new \luya\web\UrlManager());
     }
     
@@ -84,11 +82,9 @@ class ModuleReflectionTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('bar', $controllerResponse);
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testNotFoundControllerException()
     {
+        $this->expectException('Exception');
         $ref = $this->buildObject(Yii::$app->getModule('urlmodule'));
         $ref->defaultRoute('foo', 'index');
         $request = $ref->getRequestRoute();
