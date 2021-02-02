@@ -91,7 +91,7 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
                 $haystack[$key] = $this->removeEmptyValues($value);
             }
             // remove empty values value value is NULL or an empty string ''
-            if ($value === null || $value == '') {
+            if ($value === null || $value === '') {
                 unset($haystack[$key]);
             }
         }

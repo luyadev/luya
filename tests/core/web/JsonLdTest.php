@@ -381,6 +381,7 @@ class JsonLdTest extends ConsoleApplicationTestCase
         $this->assertSame([
             'aggregateRating' => [
                 'bestRating' => 4,
+                'ratingCount' => 0,
                 'reviewCount' => 2,
                 'worstRating' => 2,
                 '@type' => 'AggregateRating',
