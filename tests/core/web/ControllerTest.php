@@ -12,9 +12,9 @@ class ControllerTest extends \luyatests\LuyaWebTestCase
 {
     public $controller;
 
-    public function setUp()
+    public function afterSetup()
     {
-        parent::setUp();
+        parent::afterSetup();
         $this->controller = new StubController('stub', Yii::$app->getModule('viewmodule'));
     }
 

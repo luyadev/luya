@@ -9,8 +9,8 @@ class AssetTest extends LuyaWebTestCase
 {
     public function testDefaultSourcePath()
     {
-        $this->assertContains('core/web/resources/asset', (new Asset())->sourcePath);
-        $this->assertContains('core/web/resources/my-super-asset', (new MySuperAsset())->sourcePath);
+        $this->assertStringContainsString('core/web/resources/asset', (new Asset())->sourcePath);
+        $this->assertStringContainsString('core/web/resources/my-super-asset', (new MySuperAsset())->sourcePath);
     }
 }
 

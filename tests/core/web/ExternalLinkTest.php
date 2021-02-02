@@ -28,7 +28,7 @@ class WebsiteLinkTest extends LuyaWebTestCase
     {
         $link = new WebsiteLink(['href' => '//go/there?p=1']);
 
-        $this->assertContains('public_html/go/there?p=1', $link->href);
+        $this->assertStringContainsString('public_html/go/there?p=1', $link->href);
     }
 
     public function testTarget()
@@ -46,6 +46,6 @@ class WebsiteLinkTest extends LuyaWebTestCase
 
         $link = new WebsiteLink(['href' => '//page-link#my-super-anchor']);
 
-        $this->assertContains('/page-link#my-super-anchor', $link->getHref());
+        $this->assertStringContainsString('/page-link#my-super-anchor', $link->getHref());
     }
 }

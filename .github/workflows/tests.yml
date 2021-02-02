@@ -3,7 +3,7 @@ name: Tests
 on: [push, pull_request]
 
 env:
-  DEFAULT_COMPOSER_FLAGS: "--prefer-dist --no-interaction --ignore-platform-reqs"
+  DEFAULT_COMPOSER_FLAGS: "--prefer-dist --no-interaction"
   PHPUNIT_EXCLUDE_GROUP: mssql,oci,wincache,xcache,zenddata,cubrid
   CC_TEST_REPORTER_ID: e104088a64c54b2a68debe43e4600b48f53a73441e99449223a9fa08c070cf97
 jobs:
@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        php: ['7.1', '7.2', '7.3', '7.4']
+        php: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0']
       
     services:
       mysql:

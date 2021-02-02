@@ -106,6 +106,6 @@ class ErrorHandlerTest extends LuyaWebTestCase
         $stud = new ErrorHandler();
         $context = $stud->getExceptionArray($ex)['trace'][0];
 
-        $this->assertContains('new Exception(\'foobar here\')', $context['context_line']);
+        $this->assertStringContainsString('new Exception(\'foobar here\')', $context['context_line']);
     }
 }

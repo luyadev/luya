@@ -5,6 +5,7 @@
 *~.nib
 *.launch
 .DS_Store
+composer.lock
 
 ### ECLIPSE
 .metadata
@@ -35,5 +36,4 @@ scripts/.sass_log
 node_modules/
 /repos/
 /devconfig.json
-
 luya
