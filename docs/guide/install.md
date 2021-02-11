@@ -64,6 +64,26 @@ You can now log into the administration interface, e.g. `http://localhost/luya-k
 
 > Check the [Installation Problems and Questions Site](install-problems.md) if you have any problems with the LUYA setup.
 
+## Docker (docker-compose)
+
+When you run the LUYA Kickstarter with docker-compose (see the docker-compose.yml for more details) you start the docker container by using
+
+```
+docker-compose up
+```
+
+Afterwards all dependencies will be installed and a webserver including a database is running. You can now run a specially docker setup command:
+
+```
+docker-compose exec luya_web setup
+``` 
+
+This will run the migrate, import and setup command with a default user `admin@admin.com` and password `admin`. To run further commands use
+
+```
+docker-compose exec luya_web luya <console_command>
+```
+
 ---
 
 ### What's next?
