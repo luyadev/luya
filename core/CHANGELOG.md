@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 2.0.0 ()
+
+> Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.
+
++ [#2068](https://github.com/luyadev/luya/issues/2068) Disabled the automatically register process of CSRF tokens. Since ActiveForms are widely used they register the CSRF token.
+
 ## 1.9.0 (11. February 2020)
 
 + [#2074](https://github.com/luyadev/luya/pull/2074) Replace helpers with `luya\yii-helpers` library. Added testsuite 2.0 for php 8.0 and 7.0 tests.

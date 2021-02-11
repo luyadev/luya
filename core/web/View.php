@@ -23,7 +23,7 @@ class View extends \yii\web\View
      * @var boolean If csrf validation is enabled in the request component, and autoRegisterCsrf is enabled, then
      * all the meta informations will be auto added to meta tags.
      */
-    public $autoRegisterCsrf = true;
+    public $autoRegisterCsrf = false;
     
     /**
      * Init view object. Implements auto register csrf meta tokens.
