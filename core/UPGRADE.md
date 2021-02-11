@@ -3,6 +3,16 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+## 2.0.0
+
++ [#2068](https://github.com/luyadev/luya/issues/2068) In order to restore the auto register mechanism for csrf tokens either use `ActiveForms` or configure your component:
+
+```php
+$config->webComponent('view', [
+    'autoRegisterCsrf' => true,
+]);
+```
+
 ## 1.6.0
 
 + [#2037](https://github.com/luyadev/luya/issues/2037) The LazyLoad widget now surrounds the image with a wrapper class (that will have the extraClass applied), keep that in mind - you might need to tweak your CSS a little bit. By default this wrapper will then be replaced by the actual image tag (Option: `replacePlaceholder`).
