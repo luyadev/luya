@@ -11,7 +11,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -32,7 +32,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -248,16 +248,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.12.17",
+            "version": "8.12.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "d914436bd646e9d645e7f8ac6644bf7e33a023d4"
+                "reference": "2d50e0aea1f70508b39a3d22c62d24d66d532ed2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/d914436bd646e9d645e7f8ac6644bf7e33a023d4",
-                "reference": "d914436bd646e9d645e7f8ac6644bf7e33a023d4",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/2d50e0aea1f70508b39a3d22c62d24d66d532ed2",
+                "reference": "2d50e0aea1f70508b39a3d22c62d24d66d532ed2",
                 "shasum": ""
             },
             "require": {
@@ -312,7 +312,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2021-01-27T19:06:58+00:00"
+            "time": "2021-02-08T10:31:32+00:00"
         },
         {
             "name": "giggsey/locale",
