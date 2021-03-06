@@ -10,19 +10,15 @@
          convertWarningsToExceptions="true"
 >
     <testsuites>
-        <testsuite name="Package Test Suite">
-            <directory>./tests</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-		<blacklist>
-			<directory>./vendor</directory>
-			<directory>./tests</directory>
-		</blacklist>
-		<whitelist processUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">./core</directory>
-        </whitelist>
-	</filter>
+      <testsuite name="LUYA TESTS">
+          <directory>tests</directory>
+      </testsuite>
+  </testsuites>
+  <filter>
+      <whitelist>
+          <directory suffix=".php">./src</directory>
+      </whitelist>
+  </filter>
     <php>
         <const name="DB_DSN" value="mysql:host=127.0.0.1;port=8888;dbname=myapp_test" />
         <const name="DB_USER" value="root" />
