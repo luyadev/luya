@@ -102,7 +102,7 @@ class Svg extends Widget
     public function run()
     {
         // Cache generated code
-        return $this->getOrSetHasCache(['svg', $this->folder, $this->file, $this->cssClass], function () {
+        return $this->getOrSetHasCache(['svg', $this->folder, $this->file, $this->cssClass, $this->symbolName], function () {
 
             // Check if file ends with .svg, if not add the extension
             $svgFile = StringHelper::endsWith($this->file, '.svg') ? $this->file : $this->file . '.svg';
