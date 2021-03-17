@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
-         backupGlobals="false"
-         bootstrap="vendor/autoload.php"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
+    backupGlobals="false"
+    bootstrap="vendor/autoload.php"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
 >
     <testsuites>
-      <testsuite name="LUYA TESTS">
-          <directory>tests</directory>
-      </testsuite>
-  </testsuites>
-  <filter>
-      <whitelist>
-          <directory suffix=".php">./src</directory>
-      </whitelist>
-  </filter>
+        <testsuite name="LUYA TESTS">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="false">
+            <directory suffix=".php">./core</directory>
+            <exclude>
+                <directory>./vendor</directory>
+                <directory>./tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
     <php>
         <const name="DB_DSN" value="mysql:host=127.0.0.1;port=8888;dbname=myapp_test" />
         <const name="DB_USER" value="root" />
