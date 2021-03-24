@@ -21,8 +21,7 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: myapp_test
         ports:
           - "8888:3306"
@@ -50,7 +49,7 @@ jobs:
       - name: Setup database
         run: |
           sudo /etc/init.d/mysql start
-          mysql -h 127.0.0.1 --port 8888 -u root myapp_test < tests/data/sql/1.0.0.sql 
+          mysql -h 127.0.0.1 --port 8888 -u root -proot myapp_test < tests/data/sql/1.0.0.sql 
 
       ## run unit tests
       - name: PHP Unit tests for PHP 

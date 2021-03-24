@@ -26,6 +26,6 @@
     <php>
         <const name="DB_DSN" value="mysql:host=127.0.0.1;port=8888;dbname=myapp_test" />
         <const name="DB_USER" value="root" />
-        <const name="DB_PASS" value="" />
+        <const name="DB_PASS" value="root" />
     </php>
 </phpunit>
