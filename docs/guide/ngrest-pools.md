@@ -1,8 +1,8 @@
 # NgRest Pools
 
-> Since luya-module-admin version 2.0
+> Available since luya-module-admin version 2.0
 
-TBD {{luya\admin\ngrest\base\NgRestModel::ngRestPools}}
+See {{luya\admin\ngrest\base\NgRestModel::ngRestPools()}}
 
 ## Define data pools
 
