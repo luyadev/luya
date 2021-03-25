@@ -62,8 +62,9 @@ public function ngRestActiveWindows()
 ```
 
 #### Button condition
-A button condition can be defined adding a `condition` string to be evaluated towards the row fields.
-Example:
+
+A button condition can be defined adding a `condition` string to be evaluated towards the row fields. Example:
+
 ```php
 public function ngRestActiveWindows()
 {
@@ -72,6 +73,7 @@ public function ngRestActiveWindows()
     ];
 }
 ```
+
 This `My Windows Alias` button will only be shown for if the row `firstname` equals to 'foo' 
 
 ### View files
