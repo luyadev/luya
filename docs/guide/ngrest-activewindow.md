@@ -61,6 +61,21 @@ public function ngRestActiveWindows()
 }
 ```
 
+#### Button condition
+
+A button condition can be defined adding a `condition` string to be evaluated towards the row fields. Example:
+
+```php
+public function ngRestActiveWindows()
+{
+    return [
+        ['class' => \luya\admin\aws\TestActiveWindow::className(), 'label' => 'My Window Alias', 'icon' => 'extension', 'condition' => '{firstname}==\'foo\''],
+    ];
+}
+```
+
+This `My Windows Alias` button will only be shown for if the row `firstname` equals to 'foo' 
+
 ### View files
 
 To render view files you can run the method `$this->render()` inside your ActiveWindow class. The render method will lookup for php view file based on the base path of your `$module` property. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` property and your Active Window name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
