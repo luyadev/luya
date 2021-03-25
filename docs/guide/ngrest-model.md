@@ -273,8 +273,9 @@ public function scenarios()
 ```
 
 ## Button conditions
-In order to show/hide the update and delete buttons, you can define a `buttonCondition` along with the scope parameters 
-Example:
+
+In order to show/hide the update and delete buttons, you can define a `buttonCondition` along with the scope parameters Example:
+
 ```php
 public function ngRestScopes()
 {
@@ -290,14 +291,15 @@ public function ngRestScopes()
 A conditin like `['{title}'=>2, '{firstname}'=>'\'bar\'']]` will be evaluted as ng-show="item.title==2 && item.firstname=='bar'"
 
 The button conditions might also be defined separtly in the `ngRestConfigOptions()` function e.g. :
+
 ```php
 public function ngRestConfigOptions()
 {
     return [
-            'buttonCondition' => [
-                [ 'update', '{title}==1'],
-                [ 'delete', '{title}==2'],
-            ],
-        ];
+        'buttonCondition' => [
+            [ 'update', '{title}==1'],
+            [ 'delete', '{title}==2'],
+        ],
+   ];
 }
 ```
