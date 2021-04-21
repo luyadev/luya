@@ -192,7 +192,7 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('us', $override);
         
         // as override does not set/change the base value
-        $this->assertEquals('en', $comp->getLanguage());
+        $this->assertEquals('en', $comp->getLangShortCode());
         $this->assertEquals('en', $comp['langShortCode']);
         $this->assertTrue(isset($comp['langShortCode']));
         $comp['fooCode'] = 'bar';
