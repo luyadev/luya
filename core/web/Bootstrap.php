@@ -103,7 +103,6 @@ class Bootstrap extends BaseBootstrap
                 $app->request->csrfParam = '_csrf_admin';
                 
                 $app->getModule('admin')->controllerMap = $this->_apis;
-                $app->getModule('admin')->setJsTranslations($app->getAdminModulesJsTranslationMessages());
                 
                 // calculate api defintions
                 if ($app->getModule('admin')->hasProperty('apiDefintions')) { // ensure backwards compatibility
