@@ -100,7 +100,7 @@ In order to define the url rules from the urlManager config scope, you can just 
 
 > When composition is enabled, it will take the correct route for the current language and prefix the pattern if enable in composition config.
 
-To verify which composition language is used you can dump `Yii::$app->composition->language`. The {{luya\web\Composition}} component is taking care of LUYA multi language websites and is registered by default for all LUYA projects.
+To verify which composition language is used you can dump `Yii::$app->composition->langShortCode`. The {{luya\web\Composition}} component is taking care of LUYA multi language websites and is registered by default for all LUYA projects.
 
 ## Application Controller Routes
 

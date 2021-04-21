@@ -72,19 +72,6 @@ abstract class Boot
         return $this->_baseYiiFile;
     }
 
-    /**
-     * Whether current request is runing in cli env or not.
-     *
-     * This is determined by php_sapi_name().
-     *
-     * @return boolean
-     * @deprecated Depreacted since 1.0.12 use getisCli() instead.
-     */
-    public function isCli()
-    {
-        return $this->getIsCli();
-    }
-
     private $_isCli;
 
     /**

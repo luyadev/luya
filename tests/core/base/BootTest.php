@@ -10,7 +10,6 @@ class BootTest extends \luyatests\LuyaWebTestCase
     {
         $boot = new Boot();
         $this->assertEquals('cli', $boot->getSapiName());
-        $this->assertTrue($boot->isCli());
     }
 
     public function testUnableToFindConfigFile()

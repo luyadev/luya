@@ -84,7 +84,7 @@ class ResponseCacheTest extends LuyaWebTestCase
         $controller = new StubController('fooctrl', Yii::$app);
         $action = new StubAction('fooaction', $controller);
     
-        $filter = new ResponseCache(['actions' => ['fooaction']]);
+        $filter = new ResponseCache();
         $content = $filter->beforeAction($action);
         $this->assertTrue($content);
     }

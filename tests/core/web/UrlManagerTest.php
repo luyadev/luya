@@ -311,7 +311,7 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $request = new Request();
         $request->pathInfo = 'mentions-legales';
         $composition = new Composition($request, ['hidden' => true, 'default' => ['langShortCode' => 'fr']]);
-        $this->assertSame('fr', $composition->language);
+        $this->assertSame('fr', $composition->langShortCode);
         $urlManager = new UrlManager();
         $urlManager->composition = $composition;
         $urlManager->addRules([

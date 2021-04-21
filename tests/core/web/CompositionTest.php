@@ -9,17 +9,6 @@ use luya\web\Composition;
  * removed tests to implemented here (if not already).
  *
  *
- $parts = Yii::$app->composition->get();
-
- $this->assertArrayHasKey('langShortCode', $parts);
- $this->assertArrayHasKey('foo', $parts);
- $this->assertArrayHasKey('bar', $parts);
-
- $this->assertEquals('de', $parts['langShortCode']);
- $this->assertEquals('de', Yii::$app->composition->getLanguage());
- $this->assertEquals('1234', $parts['foo']);
- $this->assertEquals('luya09', $parts['bar']);
-
  *
  * @author nadar
  */
@@ -192,7 +181,7 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('us', $override);
         
         // as override does not set/change the base value
-        $this->assertEquals('en', $comp->getLanguage());
+        $this->assertEquals('en', $comp->getLangShortCode());
         $this->assertEquals('en', $comp['langShortCode']);
         $this->assertTrue(isset($comp['langShortCode']));
         $comp['fooCode'] = 'bar';

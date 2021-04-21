@@ -102,9 +102,7 @@ class Bootstrap extends BaseBootstrap
                 // @see https://github.com/luyadev/luya/issues/1778
                 $app->request->csrfParam = '_csrf_admin';
                 
-                $app->getModule('admin')->assets = $app->getAdminModulesAssets(); // @deprecated in version 2.0 or 4.0 of LUYA Admin Module
                 $app->getModule('admin')->controllerMap = $this->_apis;
-                $app->getModule('admin')->moduleMenus = $app->getAdminModulesMenus(); // @deprecated in version 2.0 or 4.0 of LUYA Admin Module
                 $app->getModule('admin')->setJsTranslations($app->getAdminModulesJsTranslationMessages());
                 
                 // calculate api defintions

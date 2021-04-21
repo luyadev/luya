@@ -23,6 +23,7 @@ return $this->render('form', [...]);
 ```
 
 Read more about CSRF implementation in the [Yii Framework Security Guide](https://www.yiiframework.com/doc/guide/2.0/en/security-best-practices#avoiding-csrf).
++ [#2081](https://github.com/luyadev/luya/pull/2081) Removed deprecated methods and/or added a deprecation error trigger.
 
 ## 1.6.0
 
