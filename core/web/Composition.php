@@ -44,11 +44,6 @@ class Composition extends Component implements \ArrayAccess
      * @var string The Regular-Expression matching the var finder inside the url parts
      */
     const VAR_MATCH_REGEX = '/<(\w+):?([^>]+)?>/';
-    
-    /**
-     * @deprecated Deprecated in 1.0.5 remove in 1.1.x
-     */
-    const EVENT_AFTER_SET = 'EVENT_AFTER_SET';
 
     /**
      * @var \yii\web\Request Request-Object container from DI
@@ -461,16 +456,15 @@ class Composition extends Component implements \ArrayAccess
         throw new Exception('Deleting keys in Composition is not allowed.');
     }
     
-    // Deprecated methods
-    
     /**
      * Wrapper for `getKey('langShortCode')` to load language to set php env settings.
      *
      * @return string|boolean Get the language value from the langShortCode key, false if not set.
-     * @deprecated in 1.1.0 use `getLangShortCode()` instead.
+     * @deprecated in 1.1.0 use `getLangShortCode()` instead, trigger in 2.0, will be removed in 3.0
      */
     public function getLanguage()
     {
+        trigger_error('use `getLangShortCode()` instead. Will be removed in version 3.0', E_USER_DEPRECATED);
         return $this->getKey(self::VAR_LANG_SHORT_CODE);
     }
     
@@ -478,10 +472,11 @@ class Composition extends Component implements \ArrayAccess
      * Return the whole composition array.
      *
      * @return array
-     * @deprecated Remove in 1.1.0 use `getKeys()` instead.
+     * @deprecated Remove in 1.1.0 use `getKeys()` instead, trigger in 2.0, will be removed in 3.0
      */
     public function get()
     {
+        trigger_error('use `getKeys()` instead. Will be removed in version 3.0', E_USER_DEPRECATED);
         return $this->_keys;
     }
     
@@ -489,10 +484,11 @@ class Composition extends Component implements \ArrayAccess
      * Return a path like string with all composition with trailing slash e.g. us/e.
      *
      * @return string
-     * @deprecated Remove in 1.1.0 use `getPrefixPath()` instead.
+     * @deprecated Remove in 1.1.0 use `getPrefixPath()` instead, trigger in 2.0, will be removed in 3.0
      */
     public function getFull()
     {
+        trigger_error('use `getPrefixPath()` instead. Will be removed in version 3.0', E_USER_DEPRECATED);
         return $this->createRouteEnsure();
     }
 }

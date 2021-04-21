@@ -185,9 +185,6 @@ If there is a property defined you will get the property object otherwise return
 
 Sometimes your block should also register some css or js files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
 
-
-> Since LUYA CMS version 1.1 `$appView` is deprecated, use `$this` instead!
-
 Assuming the below code is the PHP View of your Block:
 
 ```php

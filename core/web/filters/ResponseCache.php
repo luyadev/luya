@@ -30,13 +30,13 @@ class ResponseCache extends PageCache
      * });
      * ```
      *
-     * @deprecated Replaced in favor of {{beforeCacheResponse}} and {{afterRestoreResponse}}. Will be removed in 2.0
+     * @deprecated Replaced in favor of {{beforeCacheResponse}} and {{afterRestoreResponse}}. Triggers note in 2.0, will be removed in 3.0
      */
     public $actionsCallable = [];
     
     /**
      * @var array
-     * @deprecated Use {{$only}} or {{$except}} instead. Will be removed in 2.0
+     * @deprecated Use {{$only}} or {{$except}} instead. Triggers note in 2.0, will be removed in 3.0
      */
     public $actions = [];
     
@@ -49,6 +49,7 @@ class ResponseCache extends PageCache
         
         // support deprecated $actions property
         if (!empty($this->actions)) {
+            trigger_error('$actions property will be removed in version 3.0, use {{$only}} or {{$except}} instead', E_USER_DEPRECATED);
             $this->only = $this->actions;
         }
     }
@@ -79,6 +80,7 @@ class ResponseCache extends PageCache
         
         // support legacy property.
         if (!empty($this->actionsCallable)) {
+            trigger_error('$actionsCallable property will be removed in version 3.0, use {{beforeCacheResponse}} and {{afterRestoreResponse}} instead.', E_USER_DEPRECATED);
             $this->callActionCallable($action->id, Yii::$app->response->content);
         }
         
