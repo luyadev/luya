@@ -322,6 +322,7 @@ Maybe the application block is not known inside the config files, then there is 
                  'vars' => ['cssClass' => 'bold-font-css-class'],
                  'cfgs' => [], // will be ignore as its empty, so you can also just remove this part.
                  'extras' => [], // will be ignore as its empty, so you can also just remove this part.
+                 'is_default' => 0,
              ],
          ]
     ]
