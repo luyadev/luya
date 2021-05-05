@@ -69,10 +69,20 @@ $config->component('cache', [
 
 #### Session Component
 
+When you have connection to a database, use:
+
 ```php
 $config->component('session', [
     'class' => 'yii\web\DbSession',
     'sessionTable' => 'admin_session',
+]);
+```
+
+otherwise use the session cache
+
+```php
+$config->component('session', [
+    'class' => 'yii\web\CacheSession',
 ]);
 ```
 
