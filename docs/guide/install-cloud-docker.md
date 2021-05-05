@@ -88,6 +88,8 @@ $config->component('session', [
 
 #### Asset Manager Component
 
+When you have LUYA AWS S3 Storage enabled, you can switch the asset manager to use that bucket. LUYA will upload your assets to that server, so the resources file are served from a CDN:
+
 ```php
 $config->component('assetManager', [
     'class' => 'luya\aws\AssetManager',
@@ -95,6 +97,16 @@ $config->component('assetManager', [
     'appendTimestamp' => true,
 ]);
 ```
+
+Without bucket, you can at least configured the asset manager to not create unique timestamp, this allows you to have multiple webservers at the same time:
+
+```php
+$config->component('assetManager', [
+    'appendTimestamp' => true,
+    'hashCallback' => function ($path) {
+        return hash('md4', $path);
+    }  
+]);
 
 #### Request Component
 
