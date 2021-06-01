@@ -81,6 +81,12 @@ $langShortCode = Yii::$app->composition['langShortCode'];
 $countryShortCode = Yii::$app->composition['countryShortCode'];
 ```
 
+## Language Parameter for APIs
+
+Since version 3.1 of LUYA Admin the [ConentNegotiator](https://www.yiiframework.com/doc/api/2.0/yii-filters-contentnegotiator) correctly receives all available LUYA Admin languages. For instance, when you have setup `fr`, `de` and `en`, then the ContentNegotiator will listen to `Vary` `Accept` or `Accept-Language` Header, as well for `_lang` get param. If the content negotiator can detected one of the given languages in those methods, the `Yii::$app->language` will recieve this value, which will also be used to deocde/encode {{luya\admin\ngrest\base\NgRestModel::$i18n}} attributes.
+
+In consequences, this also means that the {{luya\web\Composition}} localisation in the URL (f.e. `de/foobar`) has no effect when working with APIs, either use HTTP Headers or `_lang` get parameter. In order restore the behavior before 3.1 which has taken the composition language path into account, you can configure {{luya\admin\components\AdminLanguage::$activeShortCodeCallable}}, but its not recommended.
+
 ## Other language related topics
 
 + [[app-translation.md]] - Register and create message files.
