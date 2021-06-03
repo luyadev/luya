@@ -216,5 +216,6 @@ The menu component triggers certain {{yii\base\Event}}. You can hook on those ev
 ]
 ```
 
-+ {{luya\cms\frontend\events\MenuItemEvent}}: This event is triggered when a menu item is created in the menu. 
-+ {{luya\cms\frontend\events\BeforeRenderEvent}}: This event is triggered when page properties are generated and rendered, see [[app-cmsproperties]]
++ `eventOnItemFind`: This {{luya\cms\frontend\events\MenuItemEvent}} is triggered when a menu item is created in the menu. 
+
+> See [[app-cmsproperties]], when working with {{luya\cms\frontend\events\BeforeRenderEvent}} events in page properties.
