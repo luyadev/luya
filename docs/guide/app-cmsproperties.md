@@ -52,7 +52,13 @@ In order to understand the methods in depth refer to the API Guide {{\luya\admin
 
 There is a set of predefined properties provided from which you can extend because some uses cases require that you override the `getValue()` method in order to change the value output. As this is common scenario we have built classes so you can abstract this.
 
-#### Image property
+Predefined properties you might extend from:
+
++ {{luya\admin\base\ImageProperty}}
++ {{luya\admin\base\CheckboxProperty}}
++ {{luya\admin\base\CheckboxArrayProperty}}
+
+#### Image property Example
 
 The image property is often used to return the path of an uploaded image, so you can abstract your property from {{\luya\admin\base\ImageProperty}} like in the example below:
 
@@ -81,12 +87,7 @@ echo Html::img($image, ['class' => 'yourImageClass']);
 
 > All properties implement the magical method `__toString()` and will return the value from the `getValue()` method by default. Keep in mind that this is only true for the echo or return context. When checking for the existance of a value, explicitely use the `getValue()` method as otherwise the Property object is returned, which always resolves to true.
 
-Predefined properties
-
-+ {{luya\admin\base\ImageProperty}}
-+ {{luya\admin\base\CheckboxProperty}}
-
-## Get a property
+## Access the property
 
 You can access the properties in
 
