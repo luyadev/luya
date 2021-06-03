@@ -195,3 +195,26 @@ Or as example inside the application configuration
    ]
 ]
 ```
+
+## Events
+
+The menu component triggers certain {{yii\base\Event}}. You can hook on those events in the configuration for your {{luya\cms\menu\Component}}.
+
+```php
+'components' => [
+    'menu' => [
+        'class' => 'luya\cms\Menu',
+        'on eventOnItemFind' => function(\luya\cms\frontend\events\MenuItemEvent $event) {
+            // see if this menu item has a property
+            $prop = $event->item->getProperty('propertyIdentifier');
+            if ($prop) {
+                // if yes, and the method of this provery evaulates whether visible or not, show/hide the item
+                $event->setVisible($prop->isItemVisible());
+            }
+        }
+    ]
+]
+```
+
++ {{luya\cms\frontend\events\MenuItemEvent}}: This event is triggered when a menu item is created in the menu. 
++ {{luya\cms\frontend\events\BeforeRenderEvent}}: This event is triggered when page properties are generated and rendered, see [[app-cmsproperties]]
