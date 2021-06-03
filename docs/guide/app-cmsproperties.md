@@ -57,6 +57,7 @@ Predefined properties you might extend from:
 + {{luya\admin\base\ImageProperty}}
 + {{luya\admin\base\CheckboxProperty}}
 + {{luya\admin\base\CheckboxArrayProperty}}
++ {{luya\admin\base\RadioProperty}}
 
 #### Image property Example
 
