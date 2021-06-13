@@ -10,6 +10,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#2068](https://github.com/luyadev/luya/issues/2068) Disabled the automatically register process of CSRF tokens. Since ActiveForms are widely used they register the CSRF token.
 + [#2081](https://github.com/luyadev/luya/pull/2081) Removed deprecated methods and/or added a deprecation error trigger.
 + [#2077](https://github.com/luyadev/luya/pull/2077) Fix issue with caching when using SVG widget and symbol names.
++ [#2085](https://github.com/luyadev/luya/pull/2085) Option to disable language override by resolved composition content in UrlManager.
 
 ## 1.9.0 (11. February 2021)
 
