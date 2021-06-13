@@ -21,6 +21,18 @@ use yii\web\NotFoundHttpException;
 class UrlManager extends \yii\web\UrlManager
 {
     /**
+     * Defines whether the {{luya\web\Composition}} should override the `Yii::$app->language` from its resolved value or not. If disabled
+     * the Yii::$app->language won't be overriden but you can still access the resolved value with `Yii::$app->composition->langShortCode`.
+     * 
+     * Disabling this option can be usefull when working with a website which does not requires the LUYA CMS and you might enable multi lingual
+     * content but on the same routes with a get param f.e. `?_lang=xyz` instead of `/xyz/<slug>`.
+     * 
+     * @since 2.0.0
+     * @var boolean Whether the {{luya\web\Composition}} resolved value should override `Yii::$app->language` or not.
+     */
+    public $overrideLanguage = true;
+
+    /**
      * @var boolean Pretty urls are enabled by default and can not be turned off in luya cms context.
      */
     public $enablePrettyUrl = true;
@@ -96,9 +108,11 @@ class UrlManager extends \yii\web\UrlManager
         // @see https://github.com/luyadev/luya/issues/1146
         $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver->getResolvedKeyValue(Composition::VAR_LANG_SHORT_CODE));
         
-        // set the application language based from the parsed composition request:
-        Yii::$app->setLocale($this->composition->langShortCode);
-        Yii::$app->language = $this->composition->langShortCode;
+        if ($this->overrideLanguage) {
+            // set the application language based from the parsed composition request:
+            Yii::$app->setLocale($this->composition->langShortCode);
+            Yii::$app->language = $this->composition->langShortCode;
+        }
         
         // if enableStrictParsing is enabled and the route is not found, $parsedRequest will return `false`.
         if ($res === false && ($this->composition->hidden || $parsedRequest === false)) {
