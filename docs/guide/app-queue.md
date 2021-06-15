@@ -56,6 +56,8 @@ The verbose option helps to debug and should be disabled in production.
 
 In order to push a certain job into the built in admin queue you can use `Yii::$app->adminqueue->push(new MyCustomJob())` or if you like to delay the execution use for certain seconds, use `Yii::$app->adminqueue->delay(3600)->push(new MySuperJob())`.
 
+The response from the push method is always the queue id, so you can check or store the status of the job with `Yii::$app->queue->isDone($id)`.
+
 ## Retry & Errors
 
 The Queue is by default conigured to allow 5 retrys of an error job each 5 minutes. So assuming the exectued job fails (throws a {{luya\Exception}} for instance) the queue waits 5 minutes until a next try is executed. This will be repeated until 5 trys are processed, then the job will be removed from the queue with status failed.
