@@ -67,22 +67,22 @@ In order to make a configurable and shareable Active Select extends from {{luya\
 class DeleteActiveSelection extends ActiveSelection
 {
     /**
-{@inheritDoc}
+     * {@inheritDoc}
      */
     public $label = 'Delete';
 
     /**
-{@inheritDoc}
+    * {@inheritDoc}
      */
     public $icon = 'delete';
 
     /**
-@var string The success message to display.
+     * @var string The success message to display.
      */
     public $message = '%s items has been deleted';
 
     /**
-{@inheritDoc}
+     * {@inheritDoc}
      */
     public function handle(array $items)
     {
@@ -123,6 +123,7 @@ public function ngRestActiveSelections()
         ],
         [
             'class' => luya\admin\selections\DeleteActiveSelection::class,
+            'message' => 'I have just deleted some items',
         ]
     ];
 }
