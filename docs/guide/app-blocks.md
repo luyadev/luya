@@ -22,7 +22,7 @@ class TextTransformBlock extends \luya\cms\base\PhpBlock
 {
     public function icon()
     {
-        return 'extension'; // https://design.google.com/icons/
+        return 'extension'; // https://material.io/resources/icons/
     }
     
     public function name()
@@ -53,6 +53,17 @@ class TextTransformBlock extends \luya\cms\base\PhpBlock
 }
 ```
 
+Define help information for the admin view:
+
+```php
+public function getFieldHelp()
+{
+    return [
+        'content' => 'An explain example of what this var does and where it is displayed.',
+    ];
+}
+```
+
 > Read more about details regarding {{luya\cms\base\InternalBaseBlock:config()}} in [[app-block-types.md]].
 
 As we have switched to PHPBlock by default you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block, e.g. `TextTransformBlock.php`. 
@@ -79,17 +90,6 @@ In order to retrieve values from configurations (`$this->[METHOD]`):
 |placeholder|{{luya\cms\base\PhpBlockView::placeholderValue()}}
 
 Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
-
-Define help information for the admin view:
-
-```php
-public function getFieldHelp()
-{
-    return [
-        'content' => 'An explain example of what this var does and where it is displayed.',
-    ];
-}
-```
 
 ## Register and import
 
