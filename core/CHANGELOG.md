@@ -11,6 +11,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#2081](https://github.com/luyadev/luya/pull/2081) Removed deprecated methods and/or added a deprecation error trigger.
 + [#2077](https://github.com/luyadev/luya/pull/2077) Fix issue with caching when using SVG widget and symbol names.
 + [#2085](https://github.com/luyadev/luya/pull/2085) Option to disable language override by resolved composition content in UrlManager.
++ [#2089](https://github.com/luyadev/luya/pull/2089) Ensure that `scanDirectoryFiles()` returns only files and not folders.
 
 ## 1.9.0 (11. February 2021)
 

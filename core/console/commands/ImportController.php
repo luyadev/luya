@@ -96,6 +96,7 @@ class ImportController extends Command implements ImportControllerInterface
         foreach (scandir($path) as $file) {
             if (substr($file, 0, 1) !== '.') {
                 $files[] = [
+                    'isFile' => is_file($path.DIRECTORY_SEPARATOR.$file),
                     'file' => $file,
                     'filePath' => $path.DIRECTORY_SEPARATOR.$file,
                     'module' => $module,
@@ -116,7 +117,9 @@ class ImportController extends Command implements ImportControllerInterface
         if (array_key_exists($folderName, $this->_dirs)) {
             foreach ($this->_dirs[$folderName] as $folder) {
                 foreach ($folder['files'] as $file) {
-                    $files[] = $file;
+                    if ($file['isFile']) {
+                        $files[] = $file;
+                    }
                 }
             }
         }
