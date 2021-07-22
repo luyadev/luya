@@ -1,12 +1,12 @@
 # Themes
 
-A theme can be used to overwrite views of other modules (e.g. app) or other themes with inheritance. A Theme is a collection of informations like Assets and Views. Its bundled and therefore shareable.
+A theme can be used to overwrite views of other modules (e.g. app) or other themes with inheritance. As a collection of informations like Assets or Views it's bundled and therefore shareable.
 
 > In order to create your custom theme you can run the [Console Command](luya-console.md) `theme/create` wizard.
 
 ## Create a new theme
 
-A theme has a recommend folder structure. Each theme **requires to have a theme.json** which holds the basic Theme informations. The Layout and Cmslayout files should be named as `theme.php`. Below an example of how a theme structure should look like:
+A theme has a recommend folder structure. Each theme **requires to have a `theme.json`** which holds the basic theme informations. The layout and CMS layout files should be named as `theme.php`. Below an example of how a theme structure should look like:
 
 ```
 .
@@ -20,16 +20,16 @@ A theme has a recommend folder structure. Each theme **requires to have a theme.
         └── theme.php   
 ```
 
-+ `theme.json`: The theme.json contains all information about the theme itself. Like the name, description and optional array with pathMaps.
-+ `composer.json`: The composer.json is required to push the package to packagist and makes the installation process very fast.
-+ `layouts/theme.php`: The theme.php in the layout folder is like the layout.php file in Yii applications. The layout/theme.php requires a `$content` variable.
-+ `cmslayouts/theme.php`: The cms layout [[cms-layouts.md]] which should be taken. Those can be changed in the admin UI.
++ `theme.json`: The theme configuration file contains all information about the theme itself like the name, description and optional array with path maps.
++ `composer.json`: The Composer configuration file is required to push the package to packagist and makes the installation process very fast.
++ `layouts/theme.php`: The layout file in the `layouts` folder is like the `layout.php` file in Yii applications and requires a `$content` variable.
++ `cmslayouts/theme.php`: The CMS layout [[cms-layouts.md]] which should be taken. Those can be changed in the admin UI.
 
 > Take a look at the LUYA Theme Skeleton Project: https://github.com/luyadev/luya-theme-skeleton
 
-This is what the files could look like:
+This is what these files could look like:
 
-theme.json:
+Theme configuration file `theme.json`:
 
 |variable|description|example
 |--------|-----------|-----
@@ -47,7 +47,7 @@ theme.json:
 }
 ```
 
-composer.json:
+Composer configuration file `composer.json`:
 
 ```json
 {
@@ -64,7 +64,7 @@ composer.json:
 }
 ```
 
-layouts/theme.php:
+Layout file `layouts/theme.php`:
 
 ```php
 <?php
@@ -84,7 +84,7 @@ $this->beginPage();
 <?php $this->endPage() ?>
 ```
 
-cmslayouts/theme.php
+CMS layout file `cmslayouts/theme.php`:
 
 ```php
 <div>
@@ -94,10 +94,10 @@ cmslayouts/theme.php
 
 ## Import and Activate
 
-While running the `import` (`./vendor/bin/luya import`) command, the theme information will be loaded from the `theme.json` and stored in the database. The command will list the imported themes and layouts after running.
+While running the import command (`./vendor/bin/luya import`), the theme information will be loaded from the `theme.json` and stored in the database. The command will list the imported themes and layouts after running.
 
-After a succesfull import of the new theme, the theme itself can be activated in the CMS Admin `Themes` section.
-**For each new and exists pages you have to set/change the selected layout file**
+After a succesfull import of the new theme, the theme itself can be activated in the CMS Admin *Themes* section.
+**For each new and exists pages you have to set/change the selected layout file.**
 
 ![theme-management](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/theme-management.png "LUYA theme management")
 
@@ -105,7 +105,7 @@ After a succesfull import of the new theme, the theme itself can be activated in
 
 ## Additional path map (`pathMap`)
 
-It is also possible to define additional path for inheritance by adding a path map in the theme config. In this way block and widget views can also be override with a theme.
+It is also possible to define additional path for inheritance by adding a path map in the theme config. In this way block and widget views can also be override with a theme:
 
 ```json
 {
@@ -126,7 +126,7 @@ These additional paths will be added to the end of the path map:
 
 Theme inherit all view files from their parents. Only if a theme has the same view file as its parent than this file will be used while rendering.
 
-The blank theme (base)
+The blank theme (base):
 
 ```json
 {
@@ -157,11 +157,11 @@ The order of view inheritance (pathMap) will looks like this:
 
 At first search the requested path in the first column. On a match searching in the list of theme paths for a exists file in the defined order.
 
-## Theme packages (composer.json)
+## Theme packages
 
-When developing a LUYA theme for distribution via Packagist, the theme information can be stored in the `composer.json`. This makes the installation process for the consumer very short. Adding the Theme package to the composer.json run `composer update` and `luya import` and the theme appear in the Layout overview.
+When developing a LUYA theme for distribution via Packagist, the theme information can be stored in the `composer.json`. This makes the installation process for the consumer very short. Adding the theme package to the `composer.json` run `composer update` and `luya import` and the theme appears in the *Layouts* overview.
 
-In the `extra.luya.themes` section of the composer json an array with themes can be provided. Either a path to a folder which contains the `theme.json` or a direct path to a theme.json file is possible:
+In the `extra.luya.themes` section of the `composer.json` an array with themes can be provided. Either a path to a folder which contains the `theme.json` or a direct path to a `theme.json` file is possible:
 
 
 ```json
@@ -177,4 +177,4 @@ In the `extra.luya.themes` section of the composer json an array with themes can
 }
 ```
 
-Both definitions are valid, either with the folder where the theme.json is contained or directly point to the theme.json file.
+Both definitions are valid, either with the folder where the `theme.json` is contained or directly point to the `theme.json` file.
