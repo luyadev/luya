@@ -24,6 +24,7 @@ Global LUYA commands:
 |`health/mailer`|Check if you mailer component is working and can send mails.
 |`module/create`|Create new [frontend/admin module](app-module.md) with a wizzard.
 |`module/controller/action`|All commands stored in the folder `commands` can be run by default routing.
+|`theme/create`|Create new [theme](app-themes.md) with a wizzard.
 
 Admin UI commands:
 
