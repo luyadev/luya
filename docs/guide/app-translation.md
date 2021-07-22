@@ -4,7 +4,7 @@ This section explains as a summary how to use the [Yii Messaging system](http://
 
 ## Application translation
 
-To use the translation/messaging system in your controller or view files you have to configure the Yii i18n component:
+To use the translation/messaging system in your controller or view files you have to configure the Yii i18n component in `configs/config.php`:
 
 ```php
 'components' => [
@@ -60,7 +60,7 @@ In order to provide translations for the admin menu ({{luya\admin\base\Module::g
 
 ## Message source content
 
-The message source file itself which contains the translations for the specific language is an array with a key where you can identifier the message and a value which is the content. Example content for `messages/de/app.php`:
+The message source file itself which contains the translations for the specific language is an array with a key where you can identifier the message and a value which is the content. Example content for `messages/en/app.php`:
 
 ```php
 return [
@@ -167,4 +167,4 @@ return [
 ];
 ```
 
-To run the command use `./vendor/bin/luya message msgconfig.php` this will now extract all the Yii::t messages into the messages folder files.
+To run the command use `./vendor/bin/luya message msgconfig.php` this will now extract all the `Yii::t` messages into the messages folder files.
