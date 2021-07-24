@@ -23,26 +23,54 @@ When dealing with a Controller, Action or another PHP names use single quotes \`
 
 ### Wording
 
-This represents a guideline how words and proper nouns should be written in the documentation.
+This represents a guideline how words and proper nouns should be written in the documentation:
 
 + LUYA – always capitalized
-+ Composer
-+ AngularJS
-+ NgRest
-+ ActiveWindow
 + ActiveRecord
++ ActiveWindow
 + admin UI – instead of Admin, admin module or Admin UI
-+ GitHub
++ AJAX
++ AngularJS
 + API
-+ OSX
-+ PHP
-+ HTML
-+ DRY
++ CMS
++ Composer
++ CORS
 + CRUD
++ CSS
++ DRY
 + e.g. – instead of f.e., for example or similar expressions
-+ yourdomain.com – instead of example.com, yourproject.com, etc
++ Git
++ GitHub
++ HTML
++ i18n
++ JavaScript
++ jQuery
++ JS
++ JSON
++ JWT
++ LAMP
++ macOS
++ MAMP
++ NgRest
++ OpenAPI
++ PHP
++ PHPDoc
++ PHPMailer
++ POST
++ REST
++ SCSS
++ SQL
++ SSH
++ SVN
++ UI
++ URL
++ VCS
++ WAMP
++ XAMPP
++ Yii
++ yourdomain.com – instead of example.com, yourproject.com, etc.
 
-It should be avoided to use personal pronouns (e.g. we have this, we recommend that, you can, etc.), please use impersonal pronouns ( e.g. there is this, it’s recommended that, etc.).
+It should be avoided to use personal pronouns (e.g. we have this, we recommend that, you can, etc.), please use impersonal pronouns (e.g. there is this, it’s recommended that, etc.).
 
 ## Coding conventions
 
@@ -81,7 +109,7 @@ class Foo extends Bar implements FooInterface
 
 The example above shows how to indent brackets.
 
-### PHPDOC
+### PHPDoc
 
 All classes have to use a standard PHPDoc block including the *author* and *since* tag.
 
