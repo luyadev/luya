@@ -7,7 +7,7 @@ Let´s assume you would like to use different colors on different pages, therefo
 Use cases:
 
 + Background image
-+ Colors, css properties for contents
++ Colors, CSS properties for contents
 + Specific meta information
 + Protecting a page
 

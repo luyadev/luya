@@ -56,7 +56,7 @@ class XYZ extends NgRestModel
 
 ## Pagination
 
-The LUYA Api automaticcally enabled pagination after 200 rows, but you can also force this settings by configure the {{luya\admin\ngrest\base\Api::$pagination}} property:
+The LUYA API automaticcally enabled pagination after 200 rows, but you can also force this settings by configure the {{luya\admin\ngrest\base\Api::$pagination}} property:
 
 ```php
 public $pagination = ['defaultPageSize' => 50];
@@ -102,7 +102,7 @@ class NewsController extends \luya\admin\ngrest\base\Api
 }
 ```
 
-The apis entry would be
+The APIs entry would be
 
 ```php
 public $apis = [
@@ -149,7 +149,7 @@ class MyApi extends luya\admin\ngrest\base\Api
 }
 ```
 
-Now as you have declared the filtering model to the api, this allows you to use the `filter` param, assuming you d like to filter for a given group_id in the users lise there url would like this `my-api-filter?filter[group_id]=1`.
+Now as you have declared the filtering model to the API, this allows you to use the `filter` param, assuming you d like to filter for a given group_id in the users lise there url would like this `my-api-filter?filter[group_id]=1`.
 
 The filter can also be part of the requested body, the body param should then start with `filter` as well:
 

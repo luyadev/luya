@@ -74,7 +74,7 @@ An example of how to apply a filter in real`time to a retrieved image:
 <img src="<?= Yii::$app->storage->getImage(139)->applyFilter('my-filter')->source; ?>" border="0" />
 ```
 
-Where **139** could be the image `id` from your database source active record. If you have a field with image() in your ngRest model you can access directly this variable:
+Where **139** could be the image `id` from your database source ActiveRecord. If you have a field with image() in your ngRest model you can access directly this variable:
 
 ```php
 <?php foreach($newsData as $item): ?>

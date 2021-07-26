@@ -4,7 +4,7 @@ The LUYA installation requires Composer, please have a look at the [official Com
 
 > Find the [installation Video on Youtube](https://www.youtube.com/watch?v=7StCJviSGkg) in order to help you install LUYA.
 
-First of all it´s mandatory to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. To install the `fxp/composer-asset-plugin` globally open your terminal and run the following command:
+First of all it´s mandatory to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via Composer. To install the `fxp/composer-asset-plugin` globally open your terminal and run the following command:
 
 ```sh
 composer global require "fxp/composer-asset-plugin:~1.4"

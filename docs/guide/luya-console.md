@@ -17,7 +17,7 @@ Global LUYA commands:
 
 |Command|Description
 |--------|---------
-|`import`|Updates permission, cms blocks, cms layouts, image filters. Import is a one of the main concepts of LUYA. Its saving your project data into the database. This way you can track your files within VCS (Git, SVN) and import them. [Create Import Commmand](app-module.md#import-method).
+|`import`|Updates permission, CMS blocks, CMS layouts, image filters. Import is a one of the main concepts of LUYA. Its saving your project data into the database. This way you can track your files within VCS (Git, SVN) and import them. [Create Import Commmand](app-module.md#import-method).
 |`migrate`|Execute all migrations from all modules, updates your database if any. The main difference to the Yii migrate command is its going to collect all migrations from all modules.
 |`migrate/create migration1 modulename`|Create new migration file named `mymigration1` in the module `modulename`: `migrate/create mymigration1 modulename`.
 |`health`|Tests all basic directory if they are writable and existing.
@@ -31,14 +31,14 @@ Admin UI commands:
 |Command|Description
 |---    |---
 |`admin/setup`|Execute the *LUYA* Setup will create a user, group and base table informations.
-|`admin/setup/user`|Create a new user for the *LUYA* Admin UI from command line.
+|`admin/setup/user`|Create a new user for the *LUYA* admin UI from command line.
 |`admin/filter`|Generate a [Filter](app-filters.md) Class.
 |`admin/proxy`|Start the [content sync](concept-depandsync) process.
 |`admin/proxy/clear`|Flush the configuration setup for the content sync process.
 |`admin/storage/cleanup`|Cleanup not existing files compare file system and database.
 |`admin/storage/cleanup-image-table`|Find if duplications are available in the image table (same filter and file id). If confirmed it will remove all duplications except of one, the first one created.
 |`admin/storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwise they are created on request load.
-|`admin/active-window/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
+|`admin/active-window/create`|Generate a [new ActiveWindow](ngrest-activewindow.md) class file based on your configuration.
 |`admin/crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
 |`admin/crud/model`|Generates only the [NgRestModel](ngrest-model.md). Usage `./vendor/bin/luya admin/crud/model "app\models\Customer"` 
 

@@ -9,7 +9,7 @@ LUYA comes with a {{luya\components\Mail}} component that uses PHPMailer. You ca
         'username' => 'your@user.host.com',
         'password' => 'YourSmtpPassword',
         'from' => 'you@luya.io',
-        'fromName' => 'Luya Admin',
+        'fromName' => 'LUYA Admin',
         'altBody' => 'Your HTML ALT BODY'
     ]
 ]

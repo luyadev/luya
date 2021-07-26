@@ -263,7 +263,7 @@ class Bootstrap implements BootstrapInterface
 }
 ```
 
-Create a composer.json
+Create a `composer.json`:
 
 ```json
 {
@@ -305,7 +305,7 @@ Now you can include the private LUYA DI package into your projects:
 ]
 ```
 
-So now there is no need to configure `errorHandler` or `mail` component, as its done by default whenever the application is running (due to luya bootstrap file).
+So now there is no need to configure `errorHandler` or `mail` component, as its done by default whenever the application is running (due to LUYA bootstrap file).
 
 ## Changing the root directory
 

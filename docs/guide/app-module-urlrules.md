@@ -41,7 +41,7 @@ Visit the [Yii Documentation](http://www.yiiframework.com/doc-2.0/guide-runtime-
 
 > **CMS Context:** If you are using the module in a CMS context your patterns must be prefix with the module name, otherwise the CMS can not auto replace the new pattern with the CMS context information. For example redirecting from controller foo action index to controller bar action index inside a module both url rules must be prefix. For foo `['MODULE/name-for-foo-index' => 'MODULE/foo/index']` for bar `['MODULE/name-for-bar-index' => 'MODULE/bar/index']` so they must have the full qualified route with the name of the module used in the config to register the module. Also the patterns **must** prefix the module name.
 
-> **CMS Page Context:** When you place a **module block** in order to render a module controller and the rendered content produces links (for example a user login, and there is a link to another action where user can reset its password) its important to **disable strict render in cms settings**! Edit Pen -> Expert -> Strict URL Parsing -> Disable
+> **CMS Page Context:** When you place a **module block** in order to render a module controller and the rendered content produces links (for example a user login, and there is a link to another action where user can reset its password) its important to **disable strict render in CMS settings**! Edit Pen -> Expert -> Strict URL Parsing -> Disable
 
 Below, a short list of regex expressions you may use to parameterize the URLs:
 
@@ -104,7 +104,7 @@ To verify which composition language is used you can dump `Yii::$app->compositio
 
 ## Application Controller Routes
 
-When the CMS module is enabled it will take over all URLs who are not covered by URL rules in the URL manager, otherwise the CMS won't have the ability to generate pages with slugs and nested subpages. When working with "default" Yii Framework controllers an URL rule is required to get accessable web URL. Let's assume we have a controller which returns data for an async request, we would like to access the url in order to make an ajax call somewhere in the layout.
+When the CMS module is enabled it will take over all URLs who are not covered by URL rules in the URL manager, otherwise the CMS won't have the ability to generate pages with slugs and nested subpages. When working with "default" Yii Framework controllers an URL rule is required to get accessable web URL. Let's assume we have a controller which returns data for an async request, we would like to access the url in order to make an AJAX call somewhere in the layout.
 
 Create the controller, change response format to json and return an array:
 

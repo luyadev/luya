@@ -16,7 +16,7 @@ composer create-project luyadev/luya-kickstarter:^1.0
 
 > Note: During the installation you may be asked for the Github login credentials. This is normal, because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
-> Note: In previous versions the fxp composer plugin was required `composer global require "fxp/composer-asset-plugin:~1.4"` but this has been replaced with [Asset Packagist](https://asset-packagist.org). If the Asset Packagist is not present in the composer.json, you might install the fxp plugin as it is a "legacy" project setup.
+> Note: In previous versions the fxp Composer plugin was required `composer global require "fxp/composer-asset-plugin:~1.4"` but this has been replaced with [Asset Packagist](https://asset-packagist.org). If the Asset Packagist is not present in the `composer.json, you might install the fxp plugin as it is a "legacy" project setup.
 
 The `create-project` command will create a folder (inside of your current folder, where the `composer create-project` command was executed) named **luya-kickstarter**. 
 
@@ -32,7 +32,7 @@ Now the database connection inside the `configs/config.php` file needs to fit yo
 
 ## Run Migrate and Import
 
-After successfully setting up your database connection, you have to reopen your terminal and switch to your project directory and excute the **luya** binary files, which has been installed into your vendor folder by composer as described below.
+After successfully setting up your database connection, you have to reopen your terminal and switch to your project directory and excute the **luya** binary files, which has been installed into your vendor folder by Composer as described below.
 
 Run the migration files with the [migrate console command](luya-console.md):
 

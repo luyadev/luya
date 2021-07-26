@@ -1,6 +1,6 @@
 # Create a custom AngularJS controller and an admin view
 
-Sometimes you just want to create your own view within the admin module with your own AngularJS controller, view and api responses. Therefore this lessons shows you what is needed, how to register and create a quick basic view within minutes.
+Sometimes you just want to create your own view within the admin module with your own AngularJS controller, view and API responses. Therefore this lessons shows you what is needed, how to register and create a quick basic view within minutes.
 
 This lesson assumes, that you already have an admin UI module registered and running, see [[lesson-module.md]].
 
@@ -22,7 +22,7 @@ When clicking on the menu point the route `myadminmodule/finder/index` will be t
 
 ## Create controller
 
-Creating the controller `FinderController` with an `index` action and a api callable action named `data`:
+Creating the controller `FinderController` with an `index` action and a API callable action named `data`:
 
 ```php
 <?php

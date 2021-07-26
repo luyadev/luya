@@ -65,6 +65,7 @@ This represents a guideline how words and proper nouns should be written in the 
 + MySQL
 + NgRest
 + OpenAPI
++ OS
 + PHP
 + PHPDoc
 + PHPMailer
@@ -181,7 +182,7 @@ class FooBar
 }
 ```
 
-With introduction of LUYA Admin OpenApi Generator we make use of the `@uses` tag to reference POST Request Bodies. As the POST data is not defined in the `@param` section we recommend to use `@uses`, see [[app-openapi.md]].
+With introduction of LUYA Admin OpenAPI Generator we make use of the `@uses` tag to reference POST Request Bodies. As the POST data is not defined in the `@param` section we recommend to use `@uses`, see [[app-openapi.md]].
 
 Which would be equals to `$_POST['username']` and `$_POST['password']`.
 

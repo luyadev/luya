@@ -15,7 +15,7 @@ When starting to build a website, follow this proposed process:
 
 1. create a GitHub repository for the project
 2. check out the LUYA kickstarter project
-3. add the included files into the new GitHub repository (don't commit the vendor directory - this is downloaden by composer)
+3. add the included files into the new GitHub repository (don't commit the vendor directory - this is downloaded by Composer)
 4. start developing your website.
 
 We recommend that you deploy the website to the server in an early stadium of the development cycle. So use dummy text and data on your local system.

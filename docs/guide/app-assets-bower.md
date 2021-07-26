@@ -1,6 +1,6 @@
-# Load assets via composer bower
+# Load assets via composer-bower
 
-> Attention: The LUYA team discontinued to user bower assets, as it makes the composer update process very slow.
+> Attention: The LUYA team discontinued to user bower assets, as it makes the Composer update process very slow.
 
 require
 --------
@@ -15,7 +15,7 @@ require : {
 
 extras
 ------
-check your composer.json to set the extra informations:
+check your `composer.json` to set the extra informations:
 
 ```json
     "extra": {

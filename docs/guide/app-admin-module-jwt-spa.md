@@ -2,12 +2,12 @@
 
 > available since LUYA admin module version 2.2
 
-The LUYA admin provides a basic JWT generator including an out of the box authentification system which can proxy requests trough LUYA Admin Api User and those permission system.
+The LUYA admin provides a basic JWT generator including an out of the box authentification system which can proxy requests trough LUYA admin API User and those permission system.
 
 ## Prerequisite
 
 + A custom (application) admin module is required to setup JWT ([[app-admin-module.md]]).
-+ Understand Api Users which are explaind in Headless Guide Section ([[concept-headless.md]]).
++ Understand API Users which are explaind in Headless Guide Section ([[concept-headless.md]]).
 + Configure the {{luya\admin\components\Jwt}} component.
 
 ## How it works
@@ -25,8 +25,8 @@ Make Request:
 
 + The Authentification system will threat JWT auth first.
 + Token will be passed to the {{luya\admin\baseJwtIdentityInterface::loginByJwtToken()}} method. Return the user if login is valid.
-+ The Api User model defined in {{luya\admin\components\Jwt::$apiUserEmail}} will be looked up and loggedin.
-+ The authenticated Api User check permission based on the related groups (Api Users can associated with multiple groups or none).
++ The API User model defined in {{luya\admin\components\Jwt::$apiUserEmail}} will be looked up and loggedin.
++ The authenticated API User check permission based on the related groups (API Users can associated with multiple groups or none).
 
 The image shows the above descriped cycle.
 
@@ -34,7 +34,7 @@ The image shows the above descriped cycle.
 
 ## Setup
 
-+ Create an Api User in the Admin UI which will handle the JWT requests as Proxy User.
++ Create an API User in the admin UI which will handle the JWT requests as Proxy User.
 + Configure the {{luya\admin\components\Jwt}} component in your config:
 
 ```php
@@ -50,7 +50,7 @@ The image shows the above descriped cycle.
 
 + Implement the {{luya\admin\base\JwtIdentityInterface}} into the given {{luya\admin\components\Jwt::$identityClass}}.
 + Generate an Action for Login (generate token) and signup (if needed).
-+ Setup the defined {{luya\admin\components\Jwt::$apiUserEmail}} Api User and grant the needed permissions (none if no admin resources should be accessible).
++ Setup the defined {{luya\admin\components\Jwt::$apiUserEmail}} API User and grant the needed permissions (none if no admin resources should be accessible).
 
 The User which contains user data:
 
@@ -90,7 +90,7 @@ class User extends \luya\admin\ngrest\base\NgRestModel implements luya\admin\bas
 }
 ```
 
-An NgRest Api with additonal login, signup and me actions.
+An NgRest API with additonal login, signup and me actions.
 
 ```php
 /**
@@ -218,8 +218,8 @@ A few principals regarding permissions:
 
 + Unless an action is masked as {{luya\traits\RestBehaviorsTrait::$authOptional}} **every action requires authentification**.
 + If the group of the defined {{luya\admin\components\Jwt::$apiUserEmail}} API user has **no permissions**, only your custom actions are accessible.
-+ When accessing NgRest API actions like update, create, list or view (detail) and permission is granted the actions are logged with the configured ApiUser.
-+ As permission is proxied trough Api Users, a valid Api User token could access those informations as well.
++ When accessing NgRest API actions like update, create, list or view (detail) and permission is granted the actions are logged with the configured API User.
++ As permission is proxied trough API Users, a valid API User token could access those informations as well.
 
 ## User Based CheckAccess
 

@@ -8,11 +8,11 @@ The purpose of the generator is to have documentation where it should belong, in
 
 ![OpenAPI Custom Action](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/openapi-code-to-redoc.png "OpenAPI Custom Action")
 
-## Enable OpenApi Endpoint
+## Enable OpenAPI Endpoint
 
-> To generate the OpenApi File the `cebe/php-openapi` composer package is required, install the library with `composer require cebe/php-openapi`.
+> To generate the OpenAPI File the `cebe/php-openapi` Composer package is required, install the library with `composer require cebe/php-openapi`.
 
-In order to enable the OpenApi Endpoint you can either use `remoteToken` or ` publicOpenApi` property:
+In order to enable the OpenAPI Endpoint you can either use `remoteToken` or ` publicOpenApi` property:
 
 + `remoteToken`: If a {{luya\web\Application::remoteToken}} is defined, the `?token=sha1($remoteToken)` param can be used to retrieve the OpenAPI defintion: `https://yourdomain.com/admin/api-admin-remote/openapi?token=8843d7f92416211de9ebb963ff4ce28125932878` (where token is an sha1 encoded value of remoteToken)
 + `publicOpenApi`: Enable {{luya\admin\Module::$publicOpenApi}} will expose the Endpoint `https://yourdomain.com/admin/api-admin-remote/openapi` to everyone, without any authentication or token.
@@ -27,7 +27,7 @@ When logged into the Admin Module, the Documentation can be explored in real tim
 
 ## PHP Documentation
 
-The details, descriptions and paramters or mostly read from the PhpDoc blocks, this means documentation inside the code will be exposed to the Api Consumers, thefore its finally absolute worth to take time making propper documentations. This will make other developers, yourself and Api Consumers happy. The LUYA OpenAPI generator can interpret reference to objects and classes, will follow them and publish those to the OpenAPI.
+The details, descriptions and paramters or mostly read from the PhpDoc blocks, this means documentation inside the code will be exposed to the API Consumers, thefore its finally absolute worth to take time making propper documentations. This will make other developers, yourself and API Consumers happy. The LUYA OpenAPI generator can interpret reference to objects and classes, will follow them and publish those to the OpenAPI.
 
 An example of an LUYA Admin API Defintion:
 
@@ -68,7 +68,7 @@ When Parsing ActiveRecords the `@property` values of a class will be interpreted
 
 ### Request Body
 
-With introduction of LUYA Admin OpenApi Generator we make use of the `@uses` tag to reference POST Request Bodies. As the POST data is not defined in the `@param` section we recommend to use `@uses`:
+With introduction of LUYA Admin OpenAPI Generator we make use of the `@uses` tag to reference POST Request Bodies. As the POST data is not defined in the `@param` section we recommend to use `@uses`:
 
 ```php
 /**
@@ -97,7 +97,7 @@ Which would be equals to `$_POST['username']` and `$_POST['password']`.
 
 ### Working with actions() Array
 
-With the Yii Framework its very convient to make use of `actions()` definition as array inside a controller. This allows to easy share actions among controllers. The downside of this behavior is the Description and Title of those Actions are always the same. So the OpenApi Documentation for those actions like Rest Actions `actionIndex()`, `actionUpdate($id)`, `actionView($id)` are all the same. In order to fix this problem we encourage you to use [@method](https://docs.phpdoc.org/latest/references/phpdoc/tags/method.html) PhpDoc Param this will also improve the Documentation of your Code and generate correctly meaningful OpenApi documentations.
+With the Yii Framework its very convient to make use of `actions()` definition as array inside a controller. This allows to easy share actions among controllers. The downside of this behavior is the Description and Title of those Actions are always the same. So the OpenAPI documentation for those actions like Rest Actions `actionIndex()`, `actionUpdate($id)`, `actionView($id)` are all the same. In order to fix this problem we encourage you to use [@method](https://docs.phpdoc.org/latest/references/phpdoc/tags/method.html) PhpDoc Param this will also improve the Documentation of your Code and generate correctly meaningful OpenAPI documentations.
 
 ```php
 <?php
@@ -119,7 +119,7 @@ With the Yii Framework its very convient to make use of `actions()` definition a
 
 In order to ensure all the actions have the correct verbs its recommend to use the {{luya\base\Module::$rulRule}} variable, which can declare or override actuall {{yii\rest\UrlRule}} patters or add extraPattersn:
 
-An example of how to defined whether an actrin is only allowed for post or not, which is also taken into account when rendering the OpenApi file:
+An example of how to defined whether an actrin is only allowed for post or not, which is also taken into account when rendering the OpenAPI file:
 
 ```php
 public $apiRules = [

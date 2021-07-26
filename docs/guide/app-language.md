@@ -6,7 +6,7 @@ Keep in mind that the `language` property of your application is the main settin
 
 ## How to configure
 
-As LUYA is developed as a modular system the languages must be configured in several parts of the system. The multi lingual support works with or without cms.
+As LUYA is developed as a modular system the languages must be configured in several parts of the system. The multi lingual support works with or without CMS.
 
 There is a component known as [composition component](concept-composition.md) which is dealing with the language settings. The component is invoked by the application boot process and changes the base url inside the urlManager based on your configuration. If the composition is actived and not hidden it will manipulate the {{yii\base\Application::$language}}. So it can override your language from the configuration.
 

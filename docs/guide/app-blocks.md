@@ -141,7 +141,7 @@ $this->getEnvOption($key, $defaultValue);
 
 The following keys are available:
 
-+ **id**: Return the unique identifier from the cms context
++ **id**: Return the unique identifier from the CMS context
 + **blockId**: Returns the id of this block (unique identifier)
 + **context**: Returns frontend or backend to find out in which context you are.
 + **pageObject**: Returns the {{\luya\cms\models\NavItem}} Object where you can run {{luya\cms\models\NavItem::getNav()}} to retrievew the Nav Object.
@@ -183,7 +183,7 @@ If there is a property defined you will get the property object otherwise return
 
 ## Register Assets and JavaScript/CSS
 
-Sometimes your block should also register some css or js files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
+Sometimes your block should also register some CSS or js files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
 
 Assuming the below code is the PHP View of your Block:
 
@@ -193,7 +193,7 @@ MyBlockAsset::register($this);
 
 Now the [[app-assets.md]] is registered in the application view object.
 
-Its also possible to just register certain js or css code, there fore use `registerJs` or `registerCss` directly in the view files of the block.
+Its also possible to just register certain js or CSS code, there fore use `registerJs` or `registerCss` directly in the view files of the block.
 
 Registering some JS Code:
 
@@ -209,7 +209,7 @@ or register a variable
 $this->registerJsVar("foo", "bar"); // var foo = 'bar'
 ```
 
-And for css inline styles use:
+And for CSS inline styles use:
 
 ```php
 $this->registerCss("
@@ -217,11 +217,11 @@ $this->registerCss("
 "); 
 ```
 
-## Ajax Requests in Block
+## AJAX Requests in Block
 
-To implement ajax inside a block the following concept is used:
+To implement AJAX inside a block the following concept is used:
 
-+ {{\luya\cms\base\InternalBaseBlock::createAjaxLink()}}: Create the link to the callback, this url must be used for your ajax requests.
++ {{\luya\cms\base\InternalBaseBlock::createAjaxLink()}}: Create the link to the callback, this url must be used for your AJAX requests.
 + `callback...()`: Define a callback, you have to prefix the method with *callback*.
 
 Create a callback and define all parameters. The callback is what the url returns to your javascript which can be html or json.
@@ -233,7 +233,7 @@ public function callbackHelloWorld($time)
 }
 ```
 
-The above callback requires the parameter `$time` and must be called trough an ajax call inside of the javascript, to create the url for this specific callback we are going to use createAjaxLink:
+The above callback requires the parameter `$time` and must be called trough an AJAX call inside of the javascript, to create the url for this specific callback we are going to use `createAjaxLink`:
 
 ```php
 $this->createAjaxLink('HellWorld', ['time' => time()]);
@@ -241,7 +241,7 @@ $this->createAjaxLink('HellWorld', ['time' => time()]);
 
 You could store this created link from above inside your extras vars and pass it to the javascript.
 
-You can pass additional values to the callback by using the post ajax method and collect them in your callback via Yii::$app->request->post(). The get parameters are used to resolve the callback.
+You can pass additional values to the callback by using the post AJAX method and collect them in your callback via `Yii::$app->request->post(). The get parameters are used to resolve the callback.
 
 
 ## Block groups

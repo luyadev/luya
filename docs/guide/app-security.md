@@ -85,4 +85,4 @@ You should never disabled this behavior, but if you are unable to parse the resp
 
 ## Deployment
 
-We recommend to use the [LUYA deployer](https://github.com/luyadev/luya-deployer) in order to deploy your website. To do so you have to provide credentials to your VCS and webserver. In order to increase security, you should use a `PEM` file to make the webserver connection. By default, the LUYA deployer will remove sensitive files like README, deployer.php, composer.json, composer.lock and .git data after deployment.
+We recommend to use the [LUYA deployer](https://github.com/luyadev/luya-deployer) in order to deploy your website. To do so you have to provide credentials to your VCS and webserver. In order to increase security, you should use a `PEM` file to make the webserver connection. By default, the LUYA deployer will remove sensitive files like `README`, `deployer.php`, `composer.json`, `composer.lock` and `.git` data after deployment.

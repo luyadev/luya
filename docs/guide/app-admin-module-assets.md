@@ -1,6 +1,6 @@
 # Admin assets
 
-This section describes how to add assets (css or javascript) files to your administration module. To ensure that they are depending and initializing your files at the right point all your custom assets should depend on the `admin\assets\Main` package.
+This section describes how to add assets (CSS or javascript) files to your administration module. To ensure that they are depending and initializing your files at the right point all your custom assets should depend on the `admin\assets\Main` package.
 
 ## Register Asset Bundle
 
