@@ -17,7 +17,7 @@ class MyTestAsset extends \luya\web\Asset
 }
 ```
 
-From the example above the css file `style.css` would be looked up in the location `@app/resources/css/styles`.
+From the example above the CSS file `style.css` would be looked up in the location `@app/resources/css/styles`.
 
 > In a project context, we recommend to *not* store images inside the asset sources. Images should stored in the `public_html` folder and you can access them in the view with `src="<?= $this->publicHtml; ?>/myimage.jpg"`.
 
@@ -39,7 +39,7 @@ Only when the view renders a page, it will generate `link` and `script` tags for
 
 ### Publish Options
 
-To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders which should be published. E. g. in the LUYA kickstarter project you'll find a 'boostrap' and a 'css' folder in the publish options:
+To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders which should be published. E. g. in the LUYA kickstarter project you'll find a `boostrap` and a `css` folder in the publish options:
 
 ```php
 public $publishOptions = [
@@ -64,7 +64,7 @@ public $publishOptions = [
 
 ### Accessing the asset path
 
-Sometimes you may want to access the folder with the asset files, therefore you need to retrieve the baseUrl of the asset which as the *actual path of the folder in the filesystem* which is in the `public_html/assets/$HASH_NUMBER`.
+Sometimes you may want to access the folder with the asset files, therefore you need to retrieve the base URL of the asset which as the *actual path of the folder in the filesystem* which is in the `public_html/assets/$HASH_NUMBER`.
 
 Run the the get bundle method inside your view file for the registered assetManager in the view object:
 

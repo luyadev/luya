@@ -8,7 +8,7 @@ Every JSON-LD property starts within a given type like `Person` the base of ever
 
 |Name|Usage
 |----|-----
-|{{luya\web\jsonld\Thing}}|This is the base object for every json ld object.
+|{{luya\web\jsonld\Thing}}|This is the base object for every JSON-LD object.
 |{{luya\web\jsonld\Person}}|Authors for serveral things like blog post, comments or used when having text about a person.
 |{{luya\web\jsonld\BlogPosting}}|Used for Blog posts or news articles.
 |{{luya\web\jsonld\Organization}}|Provides information about an organization such as a school, NGO, corporation, club, etc.
@@ -54,7 +54,7 @@ luya\web\JsonLd::addGraph([
 
 Some properties require a given type of value, therefore we have Value objects. Some methods can require those objects in order to make sure the correct value is passed to the properties, otherwise you could enter values which are not valid for the given key. 
 
-An example for a value object with an url to a given image:
+An example for a value object with an URL to a given image:
 
 ```php
 $image = (new ImageObject())

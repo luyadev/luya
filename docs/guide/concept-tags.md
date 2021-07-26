@@ -1,6 +1,6 @@
 # Tags
 
-The basic idea behind the tag parser is to enhance the markdown syntax with your customized tags.
+The basic idea behind the tag parser is to enhance the Markdown syntax with your customized tags.
 
 LUYA tags are a very strong and useful BBCode (Bulletin Board Code) alike tag parsing concept. You can just add your own tags within an application or ship them directly with modules.
 
@@ -62,7 +62,7 @@ I am tooltip[John Doe](This tooltip text appears when hovering over John Doe).
 
 ## Parse content
 
-Perhaps you are not in a context where the parsing is enabled. In this case you can parse your content by using {{luya\TagParser::convert()}} or with markdown integration {{luya\TagParser::convertWithMarkdown()}}. This enables the availabilty to parse tags even in your controller or view files.
+Perhaps you are not in a context where the parsing is enabled. In this case you can parse your content by using {{luya\TagParser::convert()}} or with Markdown integration {{luya\TagParser::convertWithMarkdown()}}. This enables the availabilty to parse tags even in your controller or view files.
 
 ```php
 echo TagParser::convert('Hello this is: tooltip[John Doe]'); // Parse content with tags

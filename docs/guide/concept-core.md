@@ -9,7 +9,7 @@ There is a clear vision of the structure for modern web applications, in particl
 + Components wich are already set by the core 
 + Bulletproof DRY concept for secure and fast development
 
-In other words it means you can also use LUYA to build an application without administration or cms but it still allows you to maintain the same code base over different projects, e.g. with just an MVC provided by Yii via the LUYA core or if you just need an admin UI where you can manage data of your application or as well if you also need a cms to manage the content.
+In other words it means you can also use LUYA to build an application without administration or CMS but it still allows you to maintain the same code base over different projects, e.g. with just an MVC provided by Yii via the LUYA core or if you just need an admin UI where you can manage data of your application or as well if you also need a CMS to manage the content.
 
 ## Setup core application
 
@@ -165,7 +165,7 @@ use yii\helpers\Html;
 
 ## Using core kickstarter project
 
-There is a composer package to start a LUYA core application project very quickly by using the `composer create-project` command.
+There is a Composer package to start a LUYA core application project very quickly by using the `composer create-project` command.
 
 ```
 composer create-project luyadev/luya-kickstarter-core:^1.0@dev

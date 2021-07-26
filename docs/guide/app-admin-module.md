@@ -1,6 +1,6 @@
 # Admin modules
 
-An admin module provides the ability to quickly create an admin UI section for your data. The LUYA Crud system is called [[ngrest-concept.md]] or you can also use [[app-admin-controllerview.md]] in order to render a view with data from a controller.
+An admin module provides the ability to quickly create an admin UI section for your data. The LUYA CRUD system is called [[ngrest-concept.md]] or you can also use [[app-admin-controllerview.md]] in order to render a view with data from a controller.
 
 Some features available in the admin UI section:
 

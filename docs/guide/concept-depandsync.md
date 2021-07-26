@@ -6,8 +6,8 @@ The following is required to reproduce the steps in this guide:
 
 + Git repository (we use GitHub, BitBucket or others are working too).
 + Server with SSH access (Prod environment).
-+ ssh keys so you can fetch the data from the production server. There is a good tutorial on setting up the keys [here](https://help.github.com/en/enterprise/2.16/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-+ A local development machine with LAMP or WAMP stack.
++ SSH keys so you can fetch the data from the production server. There is a good tutorial on setting up the keys [here](https://help.github.com/en/enterprise/2.16/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
++ A local development machine with LAMP, MAMP or WAMP stack.
 
 This process never syncs data **from the local environment to the production server**, only the **opposite way**!
 
@@ -15,16 +15,16 @@ When starting to build a website, follow this proposed process:
 
 1. create a GitHub repository for the project
 2. check out the LUYA kickstarter project
-3. add the included files into the new GitHub repository (don't commit the vendor directory - this is downloaden by composer)
+3. add the included files into the new GitHub repository (don't commit the vendor directory - this is downloaded by Composer)
 4. start developing your website.
 
 We recommend that you deploy the website to the server in an early stadium of the development cycle. So use dummy text and data on your local system.
 
 ## Deployment
 
-The deployment (using [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)) will mainly publish the git repository on the production server and runs certain LUYA related tasks, like migration and import commands. It will also ensure the right `env.php` is created on the server based on the deploy.php server name setting `server('prod', ...)`.
+The deployment (using [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)) will mainly publish the Git repository on the production server and runs certain LUYA related tasks, like migration and import commands. It will also ensure the right `env.php` is created on the server based on the deploy.php server name setting `server('prod', ...)`.
 
-1. Set up your production environment on the server (create the database, enable ssh, etc.)
+1. Set up your production environment on the server (create the database, enable SSH, etc.)
 2. Ensure the config contains the right informations in {{luya\Config::ENV_PROD}} context.
 3. Install and configure the [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)
 4. Deploy your website with the `./vendor/bin/dep luya prod` command.
@@ -88,7 +88,7 @@ For details and more commands, see {{luya\admin\commands\ProxyController}}.
 ## Deploy prep env
 
 
-When running a pre-production env (prep) its very common to copy the database and files after deployment but its recommend to achieved that with deployer and admin/proxy via the smart way. Therefore just update your **deploy.php** following the example below:
+When running a pre-production env (prep) its very common to copy the database and files after deployment but its recommend to achieved that with deployer and admin/proxy via the smart way. Therefore just update your `deploy.php` following the example below:
 
 ```php
 task('deploy:syncProdEnv', function() {

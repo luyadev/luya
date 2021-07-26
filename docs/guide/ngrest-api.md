@@ -13,7 +13,7 @@ class MyEndpoint extends Api
 
 ## Expand Relations
 
-Its very common to join relation data for index list view in order to reduce sql queries. To do so define the {{luya\admin\ngrest\base\Api::withRelations()}} method inside your API. This can be either an array with relations which will be passed to `index, list and view` or an array with a subdefintion in order to define which relation should be used in which scenario.
+Its very common to join relation data for index list view in order to reduce SQL queries. To do so define the {{luya\admin\ngrest\base\Api::withRelations()}} method inside your API. This can be either an array with relations which will be passed to `index, list and view` or an array with a subdefintion in order to define which relation should be used in which scenario.
 
 ```php
 public function withRelations()
@@ -52,11 +52,11 @@ class XYZ extends NgRestModel
 }
 ```
 
-> The {{luya\admin\ngrest\base\Api::withRelations()}} will **eager load** the data, but in order to expand sub relations f.e. `user.country` the country relation must be defined in {{luya\admin\ngrest\base\NgRestModel::extraFields()}} `array_merge(['country'], parent::extraFields())` inside the User model.
+> The {{luya\admin\ngrest\base\Api::withRelations()}} will **eager load** the data, but in order to expand sub relations e.g. `user.country` the country relation must be defined in {{luya\admin\ngrest\base\NgRestModel::extraFields()}} `array_merge(['country'], parent::extraFields())` inside the User model.
 
 ## Pagination
 
-The LUYA Api automaticcally enabled pagination after 200 rows, but you can also force this settings by configure the {{luya\admin\ngrest\base\Api::$pagination}} property:
+The LUYA API automaticcally enabled pagination after 200 rows, but you can also force this settings by configure the {{luya\admin\ngrest\base\Api::$pagination}} property:
 
 ```php
 public $pagination = ['defaultPageSize' => 50];
@@ -84,7 +84,7 @@ public function prepareIndexQuery()
 
 Make sure to call the parent implementation!
 
-## Extra Url Rules
+## Extra URL Rules
 
 Since core 1.0.10 and admin 1.2.2 you can also provide some extra patterns for your APIs. With the configuration of {{luya\base\Module::$apiRules}} you can give every API a customized setup. As the rules are defined trough {{yii\rest\UrlRule}} you can now set extra pattern, exclude given actions or change tokens.
 
@@ -102,7 +102,7 @@ class NewsController extends \luya\admin\ngrest\base\Api
 }
 ```
 
-The apis entry would be
+The APIs entry would be
 
 ```php
 public $apis = [
@@ -149,7 +149,7 @@ class MyApi extends luya\admin\ngrest\base\Api
 }
 ```
 
-Now as you have declared the filtering model to the api, this allows you to use the `filter` param, assuming you d like to filter for a given group_id in the users lise there url would like this `my-api-filter?filter[group_id]=1`.
+Now as you have declared the filtering model to the API, this allows you to use the `filter` param, assuming you d like to filter for a given group_id in the users lise there URL would like this `my-api-filter?filter[group_id]=1`.
 
 The filter can also be part of the requested body, the body param should then start with `filter` as well:
 
@@ -185,9 +185,9 @@ Complex and nested conditions are possible as well:
 }
 ```
 
-#### A few example as json and http get param
+#### A few example as JSON and HTTP GET param
 
-The following examples show filter requests for json body param or as get param. This helps to transform from json to http get param as its mostly harder to read and write.
+The following examples show filter requests for JSON body param or as get param. This helps to transform from JSON to HTTP GET param as its mostly harder to read and write.
 
 <table>
 <thead>
@@ -248,4 +248,4 @@ filter[or][0][name]=John&filter[or][1][email]=john@doe.com
 </tr>
 </table>
 
-> In order to decode and test a get url use `urldecode(http_build_query(['filter' => [/*...*/]))`
+> In order to decode and test a get URL use `urldecode(http_build_query(['filter' => [/*...*/]))`

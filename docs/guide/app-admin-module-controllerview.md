@@ -51,7 +51,7 @@ public function getMenu()
 
 You have now told the administration module that there is a new menu entry. All you have to do is now run the `./vendor/bin/luya import` command and assign the new permissions to your admin UI.
 
-> Important! Do not forget to run `import` command **and** assign the permission to your Administration Group in the Admin UI afterwards!
+> Important! Do not forget to run `import` command **and** assign the permission to your Administration Group in the admin UI afterwards!
 
 You could also use {{luya\admin\componenets\AdminMenuBuilder::nodeRoute()}} which would not have a group and item which gives you a larger screen to build your custom views.
 

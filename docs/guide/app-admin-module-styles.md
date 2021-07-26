@@ -1,6 +1,6 @@
 # Admin CSS Styles
 
-All [Bootstrap 4](https://getbootstrap.com/) css styles and classes are available in the LUYA ADMIN UI. On top of thi,s LUYA provides generic css classes for buttons with predefined icons and colors.
+All [Bootstrap 4](https://getbootstrap.com/) CSS styles and classes are available in the LUYA ADMIN UI. On top of thi,s LUYA provides generic CSS classes for buttons with predefined icons and colors.
 
 ## Buttons
 
@@ -18,13 +18,13 @@ The Bootstrap4 `btn` class is extended by some predefined colors which are assig
 <button type="button" class="btn btn-config">Configuration</button>
 ```
 
-You can combine the btn class with predefined icons, e.g. the use icons can be achieved by simply adding the css class `btn-icon` to the above listed button and the related icon will appear.
+You can combine the btn class with predefined icons, e.g. the use icons can be achieved by simply adding the CSS class `btn-icon` to the above listed button and the related icon will appear.
 
 ```html
 <button type="button" class="btn btn-save btn-icon">Save</button>
 ```
 
-> Please keep in mind that `<input type="button" class="btn btn-icon btn-save" value="Button label" />` does <b>not</b> work because input fields do not support the pseudo css class *:after*. So use the `button` HTML element or something else instead of `input`.
+> Please keep in mind that `<input type="button" class="btn btn-icon btn-save" value="Button label" />` does <b>not</b> work because input fields do not support the pseudo CSS class *:after*. So use the `button` HTML element or something else instead of `input`.
 
 If you would like to display a button with a generic predefined icon use `btn-icon` without a defined class:
 

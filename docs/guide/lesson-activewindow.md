@@ -4,7 +4,7 @@ In this lesson we are going to add a special email function to the [address book
 
 We will learn how to add and integrate an [ActiveWindow](https://luya.io/guide/ngrest-activewindow) to an existing LUYA module.
 
-## Creating the Active Window
+## Creating the ActiveWindow
 
 As in the previous examples we will use a LUYA code wizard to create a generic base for our ActiveWindow:
 

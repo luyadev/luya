@@ -2,18 +2,18 @@
 
 ## Example project folder hierarchy
 
-This is how a standard LUYA kickstarter application hierarchy should look and where files, configs, modules and views should be located.
+This is how a standard LUYA kickstarter application hierarchy should look and where files, configs, modules and views should be located:
 
 ```
 .
-├── public_html
-│   ├── storage
-│   └── css
 ├── assets
+├── blockgroups
 ├── blocks
-├── filters
 ├── configs
+├── filters
+├── messages
 ├── migrations
+├── models
 ├── modules
 │   ├── <APP-MODULE>
 │   │   ├── assets
@@ -21,7 +21,12 @@ This is how a standard LUYA kickstarter application hierarchy should look and wh
 │   └── <APP-ADMIN-MODULE>
 │       ├── assets
 │       └── controllers
+├── public_html
+│   ├── storage
+│   └── css
+├── resources
 ├── runtime
+├── themes
 └── views
     ├── <APP-MODULE>
     │   └── default
@@ -29,11 +34,11 @@ This is how a standard LUYA kickstarter application hierarchy should look and wh
     └── layouts
 ```
 
-## Configurtion Files and Config Builder
+## Configuration Files and Config Builder
 
 Config files (e.g. `configs/env-local.php` or `configs/env-prod.php`) return a configuration array.
 
-> since version 1.0.21 of LUYA core the {{luya\Config}} is used to generate configs (`configs/config.php`):
+> Since version 1.0.21 of LUYA core the {{luya\Config}} is used to generate configs (`configs/config.php`):
 
 ```php
 define('YII_DEBUG', true);
@@ -93,7 +98,7 @@ $config->webComponent('request', [
 return $config;
 ```
 
-As the `env.php` now recieves the Config object and won't be stored in git the enviroment to return can be choosen there:
+As the `env.php` now recieves the Config object and won't be stored in Git the enviroment to return can be choosen there:
 
 example content of `env.php`:
 
@@ -135,7 +140,7 @@ $config->consoleComponent('request', [
 ]);
 ```
 
-depending on console or web request would resolve:
+Depending on console or web request would resolve:
 
 ```php
 // on web runtime:
@@ -152,7 +157,7 @@ depending on console or web request would resolve:
 
 ## Configuration for different Environments
 
-As a key concept of LUYA is to Dont repeat yourself with {{luya\Config}} a configuration file for different hosts can be done in a single file using `env()`. Assuming a database connection which has different connection details on different hosts (prep and prod) define the {{yii\db\Connection}} as followed:
+As a key concept of LUYA is to don't repeat yourself with {{luya\Config}} a configuration file for different hosts can be done in a single file using `env()`. Assuming a database connection which has different connection details on different hosts (prep and prod) define the {{yii\db\Connection}} as followed:
 
 ```php
 $config->component('db', [
@@ -205,7 +210,7 @@ return $config->toArray(\luya\Config::ENV_PROD);
 
 ## Create company wide config
 
-Its very common that you like to share configuration values over different projects, therefore we encourage you to create your own LUYA DI repo, create a private repository on your VCS Platform (example Github) add a Bootstrap file like:
+Its very common that you like to share configuration values over different projects, therefore we encourage you to create your own LUYA DI repo, create a private repository on your VCS Platform (example GitHub) add a Bootstrap file like:
 
 ```php
 <?php
@@ -263,7 +268,7 @@ class Bootstrap implements BootstrapInterface
 }
 ```
 
-Create a composer.json
+Create a `composer.json`:
 
 ```json
 {
@@ -305,11 +310,11 @@ Now you can include the private LUYA DI package into your projects:
 ]
 ```
 
-So now there is no need to configure `errorHandler` or `mail` component, as its done by default whenever the application is running (due to luya bootstrap file).
+So now there is no need to configure `errorHandler` or `mail` component, as its done by default whenever the application is running (due to LUYA bootstrap file).
 
 ## Changing the root directory
 
-The `public_html` folder is the root directory. It contains the application bootstrap file. If you want to reflect your web server directory structure, you can rename the `public_html` folder to whatever you want to. For example: `www` or `web`. You just need to update your configuration by adding the `webrootDirectory` config, f.e. it should look like this: `'webrootDirectory' => 'www'`
+The `public_html` folder is the root directory. It contains the application bootstrap file. If you want to reflect your web server directory structure, you can rename the `public_html` folder to whatever you want to. For example: `www` or `web`. You just need to update your configuration by adding the `webrootDirectory` config, e.g. it should look like this: `'webrootDirectory' => 'www'`
 
 ## Composer latest LUYA development version
 

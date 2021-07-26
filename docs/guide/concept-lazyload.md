@@ -67,7 +67,7 @@ To enable base64 encoding of your placeholder image, you have to make sure that 
 
 To use the lazyloader with a background image, e.g. on a `<div class="lazy-image"></div>`, you just have to set the `attributesOnly` parameter to `true`.
 
-> Remember to use a noscript tag to show the image if no javascript is present.
+> Remember to use a noscript tag to show the image if no JavaScript is present.
 > The plugin doesn't need any width or height information in this mode, make sure to define these
 > yourself.
 
@@ -148,7 +148,7 @@ $.lazyLoad({
 })
 ```
 
-> There are more options than the ones shown here, but you probably won't need them. If you do, check the lazyload.src.js for all the options.
+> There are more options than the ones shown here, but you probably won't need them. If you do, check the `lazyload.src.js` for all the options.
 
 ## Collect new images
 

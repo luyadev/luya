@@ -25,7 +25,7 @@ public function ngrestAttributeTypes()
 
 ### SelectRelationActiveQuery
 
-When dealing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data but there is no model callback for the label fields, it returns raw sql data. In order to use this plugin you need to have a `hasOne` relation.
+When dealing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data but there is no model callback for the label fields, it returns raw SQL data. In order to use this plugin you need to have a `hasOne` relation.
 
 ```php
 'user_id' => [
@@ -46,7 +46,7 @@ In order to access the data through a eager loaded relation, the relation name m
 ]
 ```
 
-In order to eager load the `user` relation withing api list calls, the `with()` defintion can be configured in {{luya\admin\ngrest\base\Api::prepareListQuery()}}:
+In order to eager load the `user` relation withing API list calls, the `with()` defintion can be configured in {{luya\admin\ngrest\base\Api::prepareListQuery()}}:
 
 ```php
 public function prepareListQuery()
@@ -74,7 +74,7 @@ public function ngrestAttributeTypes()
 }
 ```
 
-You can define more options for the select model like `where statements and which fields should be displayed take a look at class api {{luya\admin\ngrest\plugins\SelectModel}} for more information.
+You can define more options for the select model like `where statements and which fields should be displayed take a look at class API {{luya\admin\ngrest\plugins\SelectModel}} for more information.
 
 In order to generate a custom label field you can also pass a closure function:
 
@@ -84,7 +84,7 @@ In order to generate a custom label field you can also pass a closure function:
 }
 ```
 
-> **Attention** Please keep in mind this plugin will override the default values from the database to display the rest api data. To prevent such a behavior use {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} instead.
+> **Attention** Please keep in mind this plugin will override the default values from the database to display the REST API data. To prevent such a behavior use {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} instead.
 > 
 > ```php
 > public function getCustomer()

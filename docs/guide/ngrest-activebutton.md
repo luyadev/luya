@@ -1,6 +1,6 @@
 # Active Buttons
 
-Active Buttons are analog to [[ngrest-activewindow.md]], a button you can attach to a given ngrest CRUD row with a handler which can then interact with the Active Record class.
+Active Buttons are analog to [[ngrest-activewindow.md]], a button you can attach to a given NgRest CRUD row with a handler which can then interact with the Active Record class.
 
 There are built in Active Buttons you can use and configure or you can create your own Active Buttons and attach them to an [[ngrest-model.md]].
 

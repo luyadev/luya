@@ -1,6 +1,6 @@
 # Admin dashboard objects
 
-Dashboard objects are elements defined by your admin module attached to the admin UI entry dashboard screen after the login. Basically the dashboard objects are returning a template which is feed by an api response.
+Dashboard objects are elements defined by your admin module attached to the admin UI entry dashboard screen after the login. Basically the dashboard objects are returning a template which is feed by an API response.
 
 All dashboard objects are defined inside the {{luya\admin\base\Module::$dashboardObjects}} property.
 
@@ -39,7 +39,7 @@ In order to customize the template of a basic dashboard object you can override 
 ],
 ```
 
-> The outerTemplate can have variables: title, template, dataApiUrl in double curly braces.
+> The outerTemplate can have variables: `title`, `template`, `dataApiUrl` in double curly braces.
 
 ## Links with ui-sref
 
@@ -50,7 +50,7 @@ A few examples:
 + Module index page: `default({\'moduleId\':5})"`
 + To a module NgRest CRUD (or any other route): `default.route({moduleId: 5, moduleRouteId:\'myadminmodule\', controllerId:\'my-controller\', actionId:\'index\'})`
 + To a specific item/id inside the NgRest CRUD: `default.route.detail({moduleId: 5, moduleRouteId:\'myadminmodule\', controllerId:\'my-controller\', actionId:\'index\', id: 1})`
-+ To a cms edit form: `custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})"`
++ To a CMS edit form: `custom.cmsedit({ navId : item.nav_id, templateId: \'cmsadmin/default/index\'})"`
 
 ## Custom dashboard object
 

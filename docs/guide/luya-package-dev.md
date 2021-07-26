@@ -7,11 +7,11 @@ There are different type of packages:
 |----|----------
 |extension|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
 |module|Can contain the same as an extension but also modules and controllers which needs to be registered in the config of the application.
-|theme|A theme holds informations including blocks, layouts and cmslayouts.
+|theme|A theme holds informations including blocks, layouts and CMS layouts.
 
 ## Create basic extension with a block
 
-n this guide we will give you a very basic step by step instruction in **how to create an extension** with a block for the cms which will be distributed over the packagist package manager.
+n this guide we will give you a very basic step by step instruction in **how to create an extension** with a block for the CMS which will be distributed over the packagist package manager.
 
 You can use this skeleton for a new package: https://github.com/luyadev/luya-package-skeleton
 
@@ -21,7 +21,7 @@ cd luya-package-skeleton
 ```
 
 1) Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
-2) Create a composer.json with basic informations about the VENDOR and PACKAGE name. Replace VENDOR with your github username or vendor name, and PACKAGE with the package name. Example `nadar/luya-material-blocks`.
+2) Create a `composer.json` with basic informations about the VENDOR and PACKAGE name. Replace VENDOR with your GitHub username or vendor name, and PACKAGE with the package name. Example `nadar/luya-material-blocks`.
 
 ```json
 {
@@ -60,12 +60,12 @@ class HeroBlock extends PhpBlock
 }
 ```
 
-4) In order to test the blocks you can register with Composer https://getcomposer.org/doc/05-repositories.md#path or provide the cms admin the path to the blocks `'cmsadmin' => ['blocks' => 'path/to/blocks/src']]`.
-5) Now you should commit and push the code to github and register the package on packagist: https://packagist.org/packages/submit
+4) In order to test the blocks you can register with Composer https://getcomposer.org/doc/05-repositories.md#path or provide the CMS admin the path to the blocks `'cmsadmin' => ['blocks' => 'path/to/blocks/src']]`.
+5) Now you should commit and push the code to GitHub and register the package on packagist: https://packagist.org/packages/submit
 
 ## Composer definition informations
 
-As LUYA is built upon the composer package manager every extension must be included via composer. Therefore first create your own composer package by creating a `composer.json` file, e.g.:
+As LUYA is built upon the Composer package manager every extension must be included via Composer. Therefore first create your own Composer package by creating a `composer.json` file, e.g.:
 
 ```json
 {
@@ -81,7 +81,7 @@ As LUYA is built upon the composer package manager every extension must be inclu
 }
 ```
 
-The following **types** are supported by LUYA composer
+The following **types** are supported by LUYA Composer
 
 + luya-extension
 + luya-module
@@ -91,11 +91,11 @@ The following **types** are supported by LUYA composer
 |----|----------
 |`luya-extension`|Is used when you have blocks, helpers, assets, widgets, components and other files but no module or controller.
 |`luya-module`|Can contain the same as luya-extension but also modules and controllers.
-|`luya-theme`|Can contain the same as extensions but also cmslayouts, layouts and other frontend resources.
+|`luya-theme`|Can contain the same as extensions but also CMS layouts, layouts and other frontend resources.
 
 ## Extra section
 
-The composer.json file can contain an extra section which can be read by the LUYA composer. E.g. we could do the following things:
+The `composer.json` file can contain an extra section which can be read by the LUYA Composer. E.g. we could do the following things:
 
 ```json
 "extra" : {
@@ -110,7 +110,7 @@ The composer.json file can contain an extra section which can be read by the LUY
 }
 ```
 
-+ blocks: Include the provided folders or blocks while import command. Use `{{DS}}` for the directory seperator, the luya composer plugin auto replace by current OS specific directory seperator.
++ blocks: Include the provided folders or blocks while import command. Use `{{DS}}` for the directory seperator, the LUYA Composer plugin auto replace by current OS specific directory seperator.
 + bootstrap: Add the file to the LUYA bootstraping process.
 
 > When importing blocks a namespace for each block class have to be provided. You can use the [Composer autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading) feature handle namespaces.

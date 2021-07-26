@@ -9,7 +9,7 @@ LUYA comes with a {{luya\components\Mail}} component that uses PHPMailer. You ca
         'username' => 'your@user.host.com',
         'password' => 'YourSmtpPassword',
         'from' => 'you@luya.io',
-        'fromName' => 'Luya Admin',
+        'fromName' => 'LUYA Admin',
         'altBody' => 'Your HTML ALT BODY'
     ]
 ]
@@ -57,7 +57,7 @@ if (!$mail) {
 
 ## Using the PHPMailer Object
 
-If you want to access the phpmailer object you should use the Object-Mode which provides access to the `mailer()` method which is the PHPMailer Object. Here you find a list of [PHPMailer propertys](https://github.com/PHPMailer/PHPMailer#a-simple-example) you can set like in the example below:
+If you want to access the PHPMailer object you should use the Object-Mode which provides access to the `mailer()` method which is the PHPMailer Object. Here you find a list of [PHPMailer propertys](https://github.com/PHPMailer/PHPMailer#a-simple-example) you can set like in the example below:
 
 ```php
 $mail = Yii::$app->mail;

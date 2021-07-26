@@ -9,7 +9,7 @@ Informations about creating guides and how they are displayed on luya.io:
 + Heading 1 titles will be removed from rendering on luya.io and the navigation title is used instead
 + Heading 2 titles will be used to automatically generate the table of contents on luya.io
 
-In order to create a link inside the guide or PHPDoc to a PHP Class use the following syntax:
+In order to create a link inside the guide or PHPDoc to a PHP class use the following syntax:
 
 + `{{luya\base\Module}}` This will generate a link to the API for the given class name.
 + `{{luya\base\Module::$apis}}` Generate a link to an API class with property `$apis`.
@@ -17,7 +17,7 @@ In order to create a link inside the guide or PHPDoc to a PHP Class use the foll
 
 If you want to link from the API PHPDoc to the guide use:
 
-+ `[[concept-tags.md]]` Assuming the markdown file would be located in the `/docs/guide` folder.
++ `[[concept-tags.md]]` Assuming the Markdown file would be located in the `/docs/guide` folder.
 
 When dealing with a Controller, Action or another PHP names use single quotes \`MyController\`. For example `MyController` would name the controller defined in the file `MyController.php` with the action `indexAction()`, same notation goes for PHP variables like `$foobar`.
 
@@ -47,9 +47,11 @@ This represents a guideline how words and proper nouns should be written in the 
 + DRY
 + e.g. – instead of f.e., for example or similar expressions
 + FAQ
++ GET – REST API command
 + Git
 + GitHub
 + HTML
++ HTTP
 + i18n
 + JavaScript
 + jQuery
@@ -65,10 +67,11 @@ This represents a guideline how words and proper nouns should be written in the 
 + MySQL
 + NgRest
 + OpenAPI
++ OS
 + PHP
 + PHPDoc
 + PHPMailer
-+ POST
++ POST – REST API command
 + REST
 + SCSS
 + SQL
@@ -181,7 +184,7 @@ class FooBar
 }
 ```
 
-With introduction of LUYA Admin OpenApi Generator we make use of the `@uses` tag to reference POST Request Bodies. As the POST data is not defined in the `@param` section we recommend to use `@uses`, see [[app-openapi.md]].
+With introduction of LUYA Admin OpenAPI Generator we make use of the `@uses` tag to reference POST Request Bodies. As the POST data is not defined in the `@param` section we recommend to use `@uses`, see [[app-openapi.md]].
 
 Which would be equals to `$_POST['username']` and `$_POST['password']`.
 
@@ -220,7 +223,7 @@ The SCSS folder contains all SCSS files and is structured as follows:
 | Folders | Description |
 |---------|-------------|
 | `base/` | Contains basic styles like the reboot, angular fixes and default styles for tags |
-| `browser-fixes/` | Contains specific browser fixes, for each fix we use a different file (e.g. _ie.scss) |
+| `browser-fixes/` | Contains specific browser fixes, for each fix we use a different file (e.g. `_ie.scss`) |
 | `components/` | Here all the components are stored. See "components" further down |
 | `fonts/` | Contains font-face and mixins for the specific font. |
 | `helpers/` | Mixins and functions |
@@ -250,5 +253,5 @@ HTML:
 </div>
 ```
 
-> You can see that all classes for the `crud` component are prefixed with `crud-`. That way we always know what we can find in which SCSS file. In the HTML you can see that there is a standalone component `table`, wrapped by the class `crud-table`. This results in an extra scss component `_table.scss`.
+> You can see that all classes for the `crud` component are prefixed with `crud-`. That way we always know what we can find in which SCSS file. In the HTML you can see that there is a standalone component `table`, wrapped by the class `crud-table`. This results in an extra SCSS component `_table.scss`.
 

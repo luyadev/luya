@@ -1,6 +1,6 @@
 # Custom Admin API
 
-If you want to create your own custom API without using the LUYA ngrest base API function, you only have to consider a few things. 
+If you want to create your own custom API without using the LUYA NgRest base API function, you only have to consider a few things. 
 
 ## API Controller File
 
@@ -23,9 +23,9 @@ class MyController extends \luya\admin\base\RestController
 }
 ```
 
-## Register the Api in Module
+## Register the API in Module
 
-Define the endpoint in `$apis` property in `Module.php` for the custom API like a normal ngrest API: (assuming you're defining the API inside a module)
+Define the endpoint in `$apis` property in `Module.php` for the custom API like a normal NgRest API: (assuming you're defining the API inside a module)
 
 ```php
 public $apis = [
@@ -33,7 +33,7 @@ public $apis = [
 ];
 ```
 
-In order to make your api listen to differnt method types you can use $apiRules:
+In order to make your API listen to differnt method types you can use $apiRules:
 
 ```php
 public $apiRules = [

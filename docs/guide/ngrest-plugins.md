@@ -23,21 +23,21 @@ The plugins listed below can be configured but make sure your are familiar with 
 |checkboxList        |{{\luya\admin\ngrest\plugins\CheckboxList}}|array        |Create multiple checkboxes and return the selected items as array.
 |[checkboxRelation](ngrest-plugin-checkboxrelation.md) |{{\luya\admin\ngrest\plugins\CheckboxRelation}}|array |Create multiple checkbox based on another model with a via table.
 |[CheckboxRelationActiveQuery](ngrest-plugin-checkboxrelation.md)|{{\luya\admin\ngrest\plugins\CheckboxRelationActiveQuery}}|array |Create an Checkbox relation based on a current existing relation definition inside the Model.
-|date                |{{\luya\admin\ngrest\plugins\Date}}|integer |Date picker to choose date, month and year. Returns the unix timestamp of the selection.
-|datetime             |{{\luya\admin\ngrest\plugins\Datetime}}|integer |Date picker to choose date, month, year hour and minute. Returns the unix timestamp of the selection.
+|date                |{{\luya\admin\ngrest\plugins\Date}}|integer |Date picker to choose date, month and year. Returns the Unix timestamp of the selection.
+|datetime             |{{\luya\admin\ngrest\plugins\Datetime}}|integer |Date picker to choose date, month, year hour and minute. Returns the Unix timestamp of the selection.
 |decimal            |{{\luya\admin\ngrest\plugins\Decimal}}|float    |Creates a decimal input field. First parameter defines optional step size. Default = 0.001
 |number                |{{\luya\admin\ngrest\plugins\Number}}|integer |Input field where only numbers are allowed.
 |cmsPage            |{{\luya\admin\ngrest\plugins\CmsPage}}|{{luya\cms\menu\Item}}|Cms page selection and returns the menu component item.
-|link               |{{\luya\admin\ngrest\plugins\Link}}|{{luya\web\LinkInterface}}|Select an internal page or enter an external link, the database field must be a varchar field in order to store information and the cms module is required.
-|slug               |{{\luya\admin\ngrest\plugins\Slug}}|string|Generates a slugified string which can be used for url rules.
+|link               |{{\luya\admin\ngrest\plugins\Link}}|{{luya\web\LinkInterface}}|Select an internal page or enter an external link, the database field must be a varchar field in order to store information and the CMS module is required.
+|slug               |{{\luya\admin\ngrest\plugins\Slug}}|string|Generates a slugified string which can be used for URL rules.
 |color                |{{\luya\admin\ngrest\plugins\Color}}|string|A color wheel to pick a color.
-|sortable            |{{\luya\admin\ngrest\plugins\Sortable}}|integer|Sort items in crud list with arrow keys up/down. Commonly used in combination of {{luya\admin\traits\SortableTrait}}.
+|sortable            |{{\luya\admin\ngrest\plugins\Sortable}}|integer|Sort items in CRUD list with arrow keys up/down. Commonly used in combination of {{luya\admin\traits\SortableTrait}}.
 |sortRelationArray|{{luya\admin\ngrest\plugins\SortRelationArray}}|array|Similar to selectArray but with the ability to sort and to selected multiple items.
 |sortRelationModel|{{luya\admin\ngrest\plugins\SortRelationModel}}|array|Similar to selectModel but with the ability to sort and to selected multiple items.
 |html|{{luya\admin\ngrest\plugins\Html}}|string|HTML data without encoding.
-|raw|{{luya\admin\ngrest\plugins\Raw}}|string|Does not modify the content, usefull when working with json api input/output.
+|raw|{{luya\admin\ngrest\plugins\Raw}}|string|Does not modify the content, usefull when working with JSON API input/output.
 |index|{{luya\admin\ngrest\plugins\Index}}|string|Sequential number index.
-|angular|{{luya\admin\ngrest\plugins\Angular}}|string|Write a custom Angular Js Template which can interact with the current item value.
+|angular|{{luya\admin\ngrest\plugins\Angular}}|string|Write a custom AngularJS template which can interact with the current item value.
 
 ## Create a custom project Plugin
 
@@ -79,8 +79,8 @@ class TestPlugin extends Plugin
 }
 ```
 
-The above class is abstracted from the {{luya\admin\ngrest\base\Plugin}} which requires the {{luya\admin\ngrest\base\Plugin::renderUpdate}}, {{luya\admin\ngrest\base\Plugin::renderList}} and {{luya\admin\ngrest\base\Plugin::renderCreate}} methods which are basically taking care of the form input or the element in the crud list view. As you can see the helper method {{luya\admin\helpers\Angular::directive}} is in charge to return a form input tag with a custom directive named `my-directive`. 
-The directive has to be stored in a javascript file related to the admin UI which you can include by using [Admin Module Assets](app-admin-module-assets.md), e.g.:
+The above class is abstracted from the {{luya\admin\ngrest\base\Plugin}} which requires the {{luya\admin\ngrest\base\Plugin::renderUpdate}}, {{luya\admin\ngrest\base\Plugin::renderList}} and {{luya\admin\ngrest\base\Plugin::renderCreate}} methods which are basically taking care of the form input or the element in the CRUD list view. As you can see the helper method {{luya\admin\helpers\Angular::directive}} is in charge to return a form input tag with a custom directive named `my-directive`. 
+The directive has to be stored in a JavaScript file related to the admin UI which you can include by using [Admin Module Assets](app-admin-module-assets.md), e.g.:
 
 ```js
 zaa.directive("myDirective", function() {
@@ -113,12 +113,12 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
     
     public function setField($data)
     {
-        // This is triggered when the value from the AngularJS api response tries to save or update the model with $data.
+        // This is triggered when the value from the AngularJS API response tries to save or update the model with $data.
     }
     
     public function getField()
     {
-        // This is triggered when the active record tries to get the values for the field. This is the basic getter/setter concept of the yii\base\BaseObject.
+        // This is triggered when the ActiveRecord tries to get the values for the field. This is the basic getter/setter concept of the yii\base\BaseObject.
     }
 
     public function ngRestExtraAttributeTypes()

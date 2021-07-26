@@ -7,11 +7,11 @@ Permissions are commonly part of the {{luya\admin\base\Module::getMenu()}} metho
 In order to make wording clear in this guide section:
 
 + Authentication: This means you have to provide an access token, bearer auth header or session based authentication mechanism in order to access the given resource.
-+ Permission: This means an API or WEB-Route is stored in the LUYA ADMIN permission system and can be associated to given groups which can be then associated to users (both users and api users). For example, users can be edited, added and deleted.
-+ User vs API User: API Users are not able to login in the Admin UI, while Users do. There are also other limitations, like API Users can not access actions without permission entries, if disabled (which is by default)
-+ REST/API vs WEB: A REST/API Controller will return JSON or XML formatted content and authentication must be done via token, while a web controller returns html (scalar values) and authentication is done trough session cookie.
++ Permission: This means an API or WEB-Route is stored in the LUYA ADMIN permission system and can be associated to given groups which can be then associated to users (both users and API users). For example, users can be edited, added and deleted.
++ User vs API User: API Users are not able to login in the admin UI, while Users do. There are also other limitations, like API Users can not access actions without permission entries, if disabled (which is by default)
++ REST/API vs WEB: A REST/API Controller will return JSON or XML formatted content and authentication must be done via token, while a web controller returns HTML (scalar values) and authentication is done trough session cookie.
 + Permission Routes: Permission entry for {{luya\admin\base\RestController}} and {{luya\admin\base\Controller}}.
-+ Permission Apis: Permission entry for {{luya\admin\base\RestActiveController}}
++ Permission APIs: Permission entry for {{luya\admin\base\RestActiveController}}
 
 ## The menu
 
@@ -57,7 +57,7 @@ public function extendPermissionApis()
 }
 ```
 
-The above api `api-cms-moveblock` is now protected by the admin UI authorization system and you can allocate which user group roles are able to edit, create and delete.
+The above API `api-cms-moveblock` is now protected by the admin UI authorization system and you can allocate which user group roles are able to edit, create and delete.
 
 ```php
 public function extendPermissionRoutes()
@@ -75,17 +75,17 @@ The above *module/controller/action* route is now protected by admin UI authoriz
 
 There are different controllers which can be extended, but they have different permission systems. Some use `routes` and others take `apis` as permission level.
 
-+ {{luya\admin\base\Controller}}: This is a WEB controller and permission is handled trough `routes`. Those controllers usually return html content and not REST responses (like json).
-+ {{luya\admin\base\RestController}}: The RestController can take `routes` as permission, route validation can be done trough {{luya\admin\base\RestController::checkRouteAccess()}}. The controller requies response of array data (json response).
++ {{luya\admin\base\Controller}}: This is a WEB controller and permission is handled trough `routes`. Those controllers usually return HTML content and not REST responses (like JSON).
++ {{luya\admin\base\RestController}}: The RestController can take `routes` as permission, route validation can be done trough {{luya\admin\base\RestController::checkRouteAccess()}}. The controller requies response of array data (JSON response).
 + {{luya\admin\base\RestActiveController}}: The modelClass based ActiveController which implements basic REST behaviors like create,update,view and delete based on a given model. The permission is authorized trough `apis` and the implementation of {{luya\admin\base\RestActiveController::checkAccess()}}.
 
-## Custom Actions in REST/Api Controllers
+## Custom Actions in REST/API Controllers
 
-The handling of permissions is different for {{luya\admin\base\RestController}} and {{luya\admin\base\RestActiveController}} even though both are REST/Api Controllers. Also the handling of whether the API request is made from {{luya\admin\models\ApiUser}} or a "admin ui" {{luya\admin\models\User}} differs. The API user default behavior to grant actions without permission is defined in {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}}.
+The handling of permissions is different for {{luya\admin\base\RestController}} and {{luya\admin\base\RestActiveController}} even though both are REST/API Controllers. Also the handling of whether the API request is made from {{luya\admin\models\ApiUser}} or a "admin UI" {{luya\admin\models\User}} differs. The API user default behavior to grant actions without permission is defined in {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}}.
 
 ### RestController
 
-The {{luya\admin\base\RestController}} contains by default **no permission** unless the action is defined in {{luya\admin\base\Module::extendPermissionRoutes()}}. This means that any authenticated user will have access to the action unless a extend permission route is provied. If {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} is enabled, also Api Users will have access, by default api users won't have access.
+The {{luya\admin\base\RestController}} contains by default **no permission** unless the action is defined in {{luya\admin\base\Module::extendPermissionRoutes()}}. This means that any authenticated user will have access to the action unless a extend permission route is provied. If {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} is enabled, also API Users will have access, by default API users won't have access.
 
 The current permission route is resolved by the {{luya\admin\base\RestController::permissionRoute()}} action.
 
@@ -119,9 +119,9 @@ class Pets extends luya\admin\base\Module
 }
 ```
 
-Now the action route `pets/test-rest/dogs` can only accessed when the user has the certain permission assigned, but `pets/test-rest/cats` can be accessed by any authenticated user. If  {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} is enabled, even Api Users could access the endpoint.
+Now the action route `pets/test-rest/dogs` can only accessed when the user has the certain permission assigned, but `pets/test-rest/cats` can be accessed by any authenticated user. If  {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} is enabled, even API Users could access the endpoint.
 
-In order to turn of the {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} apiUser check only for a given controller you might override {{luya\admin\traits\AdminRestBehaviorTrait::canApiUserAccess()}}.
+In order to turn of the {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} API User check only for a given controller you might override {{luya\admin\traits\AdminRestBehaviorTrait::canApiUserAccess()}}.
 
 ```php
 public function canApiUserAccess()
@@ -130,7 +130,7 @@ public function canApiUserAccess()
 }
 ```
 
-Now the given API controller is also accessible to api users.
+Now the given API controller is also accessible to API users.
 
 ### RestActiveController
 
@@ -178,7 +178,7 @@ class Pets extends luya\admin\base\Module
 }
 ```
 
-Now the actionDogs is only visible if the group of the user has permission update, while the cats action is visible to all authenticated users. If {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} is enabled, even Api Users could access the endpoint.
+Now the actionDogs is only visible if the group of the user has permission update, while the cats action is visible to all authenticated users. If {{luya\admin\Module::$apiUserAllowActionsWithoutPermissions}} is enabled, even API Users could access the endpoint.
 
 ## Disable Controller permission
 
@@ -196,7 +196,7 @@ class MyTestController extends \luya\admin\base\Controller
 }
 ```
 
-## Disable REST/Api action authentication
+## Disable REST/API action authentication
 
 In order disable permissions for only a given action you can define {{luya\traits\RestBehaviorsTrait::$authOptional}} to make an action public available:
 

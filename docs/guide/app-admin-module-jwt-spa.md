@@ -2,19 +2,19 @@
 
 > available since LUYA admin module version 2.2
 
-The LUYA admin provides a basic JWT generator including an out of the box authentification system which can proxy requests trough LUYA Admin Api User and those permission system.
+The LUYA admin provides a basic JWT generator including an out of the box authentification system which can proxy requests trough LUYA admin API User and those permission system.
 
 ## Prerequisite
 
 + A custom (application) admin module is required to setup JWT ([[app-admin-module.md]]).
-+ Understand Api Users which are explaind in Headless Guide Section ([[concept-headless.md]]).
++ Understand API Users which are explaind in Headless Guide Section ([[concept-headless.md]]).
 + Configure the {{luya\admin\components\Jwt}} component.
 
 ## How it works
 
 As all LUYA admin APIs requerd an authentification are proxied trough LUYA API Users (Read about [[concept.headless.md]]).
 
-The life cycle of the JWT request is described as followed (assuming jwt configuration in the modul is done accordingly):
+The life cycle of the JWT request is described as followed (assuming JWT configuration in the modul is done accordingly):
 
 Get the token:
 
@@ -25,8 +25,8 @@ Make Request:
 
 + The Authentification system will threat JWT auth first.
 + Token will be passed to the {{luya\admin\baseJwtIdentityInterface::loginByJwtToken()}} method. Return the user if login is valid.
-+ The Api User model defined in {{luya\admin\components\Jwt::$apiUserEmail}} will be looked up and loggedin.
-+ The authenticated Api User check permission based on the related groups (Api Users can associated with multiple groups or none).
++ The API User model defined in {{luya\admin\components\Jwt::$apiUserEmail}} will be looked up and loggedin.
++ The authenticated API User check permission based on the related groups (API Users can associated with multiple groups or none).
 
 The image shows the above descriped cycle.
 
@@ -34,7 +34,7 @@ The image shows the above descriped cycle.
 
 ## Setup
 
-+ Create an Api User in the Admin UI which will handle the JWT requests as Proxy User.
++ Create an API User in the admin UI which will handle the JWT requests as Proxy User.
 + Configure the {{luya\admin\components\Jwt}} component in your config:
 
 ```php
@@ -50,7 +50,7 @@ The image shows the above descriped cycle.
 
 + Implement the {{luya\admin\base\JwtIdentityInterface}} into the given {{luya\admin\components\Jwt::$identityClass}}.
 + Generate an Action for Login (generate token) and signup (if needed).
-+ Setup the defined {{luya\admin\components\Jwt::$apiUserEmail}} Api User and grant the needed permissions (none if no admin resources should be accessible).
++ Setup the defined {{luya\admin\components\Jwt::$apiUserEmail}} API User and grant the needed permissions (none if no admin resources should be accessible).
 
 The User which contains user data:
 
@@ -90,7 +90,7 @@ class User extends \luya\admin\ngrest\base\NgRestModel implements luya\admin\bas
 }
 ```
 
-An NgRest Api with additonal login, signup and me actions.
+An NgRest API with additonal login, signup and me actions.
 
 ```php
 /**
@@ -111,7 +111,7 @@ class UserController extends \luya\admin\ngrest\base\Api
     public $modelClass = 'app\modules\myapimodule\models\User';
 
     /**
-     * Make user login and return the user with the fresh generated jwt token which is stored in the user.
+     * Make user login and return the user with the fresh generated JWT token which is stored in the user.
      * 
      * > No authentification needed.
      */
@@ -152,7 +152,7 @@ class UserController extends \luya\admin\ngrest\base\Api
     }
 
     /**
-     * Returns the currently logged in jwt authenticated user.
+     * Returns the currently logged in JWT authenticated user.
      *
      * > This method requires authentification.
      * 
@@ -165,15 +165,15 @@ class UserController extends \luya\admin\ngrest\base\Api
 }
 ```
 
-If a successfull jwt authentication is made the {{luya\admin\components\Jwt::$identity}} contains the {{luya\admin\components\Jwt::$identityClass}} object implementing {{luya\admin\base\JwtIdentityInterface}}.
+If a successfull JWT authentication is made the {{luya\admin\components\Jwt::$identity}} contains the {{luya\admin\components\Jwt::$identityClass}} object implementing {{luya\admin\base\JwtIdentityInterface}}.
 
 ## CORS Preflight Request
 
 When working with cross domain requests, each xhr request to the API will make an *option request* or also known as *preflight request*. The {{luya\admin\ngrest\base\Api}} controllers provide an out of the box solution which works for common CRUD operations (add, view, list, edit, delete). This can be enabled by setting {{luya\admin\Module::$cors}} to true. For further CORS config options use {{luya\traits\ApplicationTrait::$corsConfig}}.
 
-When working with custom actions you might need to configure the option request for the given method. Therefore you need to configure the API with the following setup: create an url rule for options request, define the option and make sure the option is available without authentification (its common that option request won't have authentication headers).
+When working with custom actions you might need to configure the option request for the given method. Therefore you need to configure the API with the following setup: create an URL rule for options request, define the option and make sure the option is available without authentification (its common that option request won't have authentication headers).
 
-Create the url rule for the option request, which defines where the option action should be looked up:
+Create the URL rule for the option request, which defines where the option action should be looked up:
 
 ```php
 public $apiRules = [
@@ -218,8 +218,8 @@ A few principals regarding permissions:
 
 + Unless an action is masked as {{luya\traits\RestBehaviorsTrait::$authOptional}} **every action requires authentification**.
 + If the group of the defined {{luya\admin\components\Jwt::$apiUserEmail}} API user has **no permissions**, only your custom actions are accessible.
-+ When accessing NgRest API actions like update, create, list or view (detail) and permission is granted the actions are logged with the configured ApiUser.
-+ As permission is proxied trough Api Users, a valid Api User token could access those informations as well.
++ When accessing NgRest API actions like update, create, list or view (detail) and permission is granted the actions are logged with the configured API User.
++ As permission is proxied trough API Users, a valid API User token could access those informations as well.
 
 ## User Based CheckAccess
 
@@ -230,7 +230,7 @@ public function checkAccess($action, $model = null, $params = [])
 {
     parent::checkAccess($action, $model, $params);
 
-    // see if jwt user performs this action
+    // see if JWT user performs this action
     if (Yii::$app->jwt->identity && ($action == 'delete' || $action == 'update')) {
         // if jwt user id is not equal the models user id, throw forbidden exception.
         if (Yii::$app->jwt->identity->id != $model->user_id) {

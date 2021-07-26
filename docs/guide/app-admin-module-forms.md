@@ -47,7 +47,7 @@ If you would like to arrange two forms vertically side by side this could be don
 
 ## Generate form with AngularJS 
 
-Using the angular directive to generate forms as described in the html markup before:
+Using the angular directive to generate forms as described in the HTML markup before:
 
 ```html 
 <?= Angular::text('ngModel', 'Left text input', ['placeholder' => 'text input here ...']); ?>

@@ -305,7 +305,7 @@ For our first view, the list view, we will create the `views/default/index.php` 
 <?php endforeach; ?>
 ```
 
-Again you should work with style sheets, CSS class names and external javascript files but for the sake of a short example we will define everything inline.
+Again you should work with style sheets, CSS class names and external JavaScript files but for the sake of a short example we will define everything inline.
 
 ### Setting up the detail view
 

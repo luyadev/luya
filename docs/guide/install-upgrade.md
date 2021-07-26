@@ -4,7 +4,7 @@ This page describes how to update an existing LUYA instance to the latest versio
 
 ## Composer
 
-Change the LUYA versions for each modules and LUYA itself in your composer.json
+Change the LUYA versions for each modules and LUYA itself in your `composer.json`:
 
 ```json
 "require": {

@@ -4,7 +4,7 @@ The LUYA installation requires Composer, please have a look at the [official Com
 
 > Find the [installation Video on Youtube](https://www.youtube.com/watch?v=7StCJviSGkg) in order to help you install LUYA.
 
-First of all it´s mandatory to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. To install the `fxp/composer-asset-plugin` globally open your terminal and run the following command:
+First of all it´s mandatory to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via Composer. To install the `fxp/composer-asset-plugin` globally open your terminal and run the following command:
 
 ```sh
 composer global require "fxp/composer-asset-plugin:~1.4"
@@ -16,7 +16,7 @@ After setting up Composer, we execute the Composer command `create-project` to c
 composer create-project luyadev/luya-kickstarter:^1.0
 ```
 
-> Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
+> Note: During the installation Composer may ask for your GitHub login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from GitHub. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
 The `create-project` command will create a folder (inside of your current folder where the `composer create-project` command was executed) named **luya-kickstarter**. 
 If the Composer installation is done change into the **configs** folder inside the application and copy the `.dist` template files to original `.php` files.
@@ -26,11 +26,11 @@ copy env.php.dist env.php
 copy env-local-db.php.dist env-local-db.php
 ```
 
-Now the database connection inside the `configs/env-local-db.php` file needs to fit your mysql servers configuration. 
+Now the database connection inside the `configs/env-local-db.php` file needs to fit your MySQL servers configuration. 
 It´s recommend to open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environment configs section](install-configs.md). 
 After successfully setting up your database connection you have to reopen your terminal and **change into your project directory and excute the console command at `public_html` folder**
 
-> `php` command is available if you already add your php.exe path on your system environment variable
+> `php` command is available if you already add your `php.exe` path on your system environment variable
 
 Run the migration files with the [migrate console command](luya-console.md):
 

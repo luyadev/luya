@@ -119,7 +119,7 @@ Lets see what happens when the value of `Yii::t("app", "placesAvailable", ["slot
 
 ## Message Extract Command
 
-In order to use the yii messages command, an example config could look like this `msgconfig.php`:
+In order to use the Yii messages command, an example config could look like this `msgconfig.php`:
 
 ```php
 <?php

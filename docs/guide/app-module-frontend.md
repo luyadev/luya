@@ -25,7 +25,7 @@ You can enable this option for all modules by changing the default value inside 
 
 #### CMS context
 
-When including a module into the CMS, the rendering of your module view file will automatically ignore the layout, otherwise you would have a mess with html as the CMS already wraps its cmslayout and afterwards also wraps the layout. But you may use the [frontend layouts](app-module-layouts.md) which allows you to use a sub layout for all the module controller views.
+When including a module into the CMS, the rendering of your module view file will automatically ignore the layout, otherwise you would have a mess with HTML as the CMS already wraps its CMS layout and afterwards also wraps the layout. But you may use the [frontend layouts](app-module-layouts.md) which allows you to use a sub layout for all the module controller views.
 
 ## Title and meta information
 
@@ -55,7 +55,7 @@ This is equal for meta tags or descriptions:
 public function actionIndex()
 {
     // register meta tag
-    $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'Luya, Yii, PHP']);
+    $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'LUYA, Yii, PHP']);
     $this->view->registerMetaTag(['name' => 'description', 'content' => 'Description of this page.'], 'metaDescription');
     
     return $this->render('index');
@@ -65,7 +65,7 @@ public function actionIndex()
 Or in the view file:
 
 ```php
-$this->registerMetaTag(['name' => 'keywords', 'content' => 'Luya, Yii, PHP']);
+$this->registerMetaTag(['name' => 'keywords', 'content' => 'LUYA, Yii, PHP']);
 $this->registerMetaTag(['name' => 'description', 'content' => 'Description of this page.'], 'metaDescription');
 ```
 
@@ -130,7 +130,7 @@ class DefaultController extends Controller
 }
 ```
 
-Those actions are already accessible by an exact url, because we have a `DefaultController` in our `frontendmodule` most likely the url for the `actionHello()` is:
+Those actions are already accessible by an exact url, because we have a `DefaultController` in our `frontendmodule` most likely the URL for the `actionHello()` is:
 
 `your-public-project-domain/frontendmodule/default/hello`
 
@@ -138,4 +138,4 @@ Please keep in mind that those actions are case sensitive, which means `actionWh
 
 `your-public-project-domain/frontendmodule/default/who-am-i`
 
-Of course the url rules in the `Module.php` can be used for pointing to controllers and views.
+Of course the URL rules in the `Module.php` can be used for pointing to controllers and views.

@@ -9,7 +9,7 @@ For instance you can put database logic inside of the ActiveRecord models. A mod
 
 There are two different types of modules:
 
-+ [Admin](app-admin-module.md) - Contains Models, Migrations Administration, [NgRest Crud](ngrest-concept.md).
++ [Admin](app-admin-module.md) - Contains Models, Migrations Administration, [NgRest CRUD](ngrest-concept.md).
 + [Frontend](app-module-frontend.md) - Contains controllers and views, logic for frontend implementations.
 
 > In order to create your custom module you can run the [Console Command](luya-console.md) `module/create` wizard.
@@ -113,9 +113,9 @@ public function import(\luya\console\interfaces\ImportControllerInterface $impor
 }
 ```
 
-## PSR-4 binding with composer
+## PSR-4 binding with Composer
 
-Sometimes you do not want to use the long namespaces names like `app\modules\mymodule` and create a shortcut to access your files. In order to add a shorter *alias* to your namespace you psr-4 bind them in your composer.json file. 
+Sometimes you do not want to use the long namespaces names like `app\modules\mymodule` and create a shortcut to access your files. In order to add a shorter *alias* to your namespace you psr-4 bind them in your `composer.json` file. 
 To do so open the `composer.json` file and add the *autoload* section (if not exists):
 
 ```json
@@ -126,7 +126,7 @@ To do so open the `composer.json` file and add the *autoload* section (if not ex
 }
 ```
 
-Run the `composer dump-autoload` command in order to refresh the autoload section of your composer file. Now you are able to access the *app/modules/mymodule* files directly with the *mymodule* module namepsace.
+Run the `composer dump-autoload` command in order to refresh the autoload section of your Composer file. Now you are able to access the *app/modules/mymodule* files directly with the *mymodule* module namepsace.
 
 ## Links
 

@@ -14,9 +14,9 @@ composer create-project luyadev/luya-kickstarter:^1.0
 
 > Info: For more LUYA Kickstarter packages, check the [kickstarter packages section](https://luya.io/packages).
 
-> Note: During the installation you may be asked for the Github login credentials. This is normal, because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
+> Note: During the installation you may be asked for the GitHub login credentials. This is normal, because Composer needs to get enough API rate-limit to retrieve the dependent package information from GitHub. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
-> Note: In previous versions the fxp composer plugin was required `composer global require "fxp/composer-asset-plugin:~1.4"` but this has been replaced with [Asset Packagist](https://asset-packagist.org). If the Asset Packagist is not present in the composer.json, you might install the fxp plugin as it is a "legacy" project setup.
+> Note: In previous versions the fxp Composer plugin was required `composer global require "fxp/composer-asset-plugin:~1.4"` but this has been replaced with [Asset Packagist](https://asset-packagist.org). If the Asset Packagist is not present in the `composer.json`, you might install the fxp plugin as it is a "legacy" project setup.
 
 The `create-project` command will create a folder (inside of your current folder, where the `composer create-project` command was executed) named **luya-kickstarter**. 
 
@@ -28,11 +28,11 @@ If the Composer installation is done, switch to **configs** folder inside the ap
 cp env.php.dist env.php
 ```
 
-Now the database connection inside the `configs/config.php` file needs to fit your mysql servers' configuration. It is recommended to open all config files once to change values and understand the behavior. In order to understand the config files, read more in the [environment configs section](install-environments.md).
+Now the database connection inside the `configs/config.php` file needs to fit your MySQL servers' configuration. It is recommended to open all config files once to change values and understand the behavior. In order to understand the config files, read more in the [environment configs section](install-environments.md).
 
 ## Run Migrate and Import
 
-After successfully setting up your database connection, you have to reopen your terminal and switch to your project directory and excute the **luya** binary files, which has been installed into your vendor folder by composer as described below.
+After successfully setting up your database connection, you have to reopen your terminal and switch to your project directory and excute the **luya** binary files, which has been installed into your vendor folder by Composer as described below.
 
 Run the migration files with the [migrate console command](luya-console.md):
 
@@ -66,13 +66,13 @@ You can now log into the administration interface, e.g. `http://localhost/luya-k
 
 ## Docker (docker-compose)
 
-When you run the LUYA Kickstarter with docker-compose (see the docker-compose.yml for more details) you start the docker container by using
+When you run the LUYA Kickstarter with docker-compose (see the docker-compose.yml for more details) you start the Docker container by using
 
 ```
 docker-compose up
 ```
 
-Afterwards all dependencies will be installed and a webserver including a database is running. You can now run a specially docker setup command:
+Afterwards all dependencies will be installed and a webserver including a database is running. You can now run a specially Docker setup command:
 
 ```
 docker-compose exec luya_web setup
