@@ -1,10 +1,10 @@
-## JsonLd 
+## JSON-LD
 
 Modern web applications needs to provide the websites informations in structure way for search engines, therefore you can use {{luya\web\JsonLd}}. The inheritation and full documentation about the schema itself is available under http://schema.org.
 
 ## Basic usage
 
-Every JsonLd property starts within a given type like `Person` the base of every type is `Thing`. The following list highlights the most common used types:
+Every JSON-LD property starts within a given type like `Person` the base of every type is `Thing`. The following list highlights the most common used types:
 
 |Name|Usage
 |----|-----
@@ -27,7 +27,7 @@ JsonLd::person()
    ->setBirthPlace('Ulm, Germany');
 ```
 
-Keep in mind that a lot of objects require a certain sub object. This makes it more complex to build and understand, but also provides the possibility for the nesting which are required by the schema defintions. For example the `BlogPosting` publisher requires an `Organisation` object and the organisation logo requires an `ImageObject` object.
+Keep in mind that a lot of objects require a certain sub object. This makes it more complex to build and understand, but also provides the possibility for the nesting which are required by the schema defintions. For example the `BlogPosting` publisher requires an `Organisation` object and the organisation logo requires an `ImageObject` object:
 
 ```php
 $logo = (new ImageObject())
@@ -41,7 +41,7 @@ JsonLd::blogPosting()
     ->setPublisher($organisation)
 ```
 
-Currently we do not have all possible types implemented but you can always register them by yourself by calling {{luya\web\JsonLd::addGraph()}} with an array which contains the defintions.
+Currently we do not have all possible types implemented but you can always register them by yourself by calling {{luya\web\JsonLd::addGraph()}} with an array which contains the defintions:
 
 ```php
 luya\web\JsonLd::addGraph([
@@ -73,7 +73,7 @@ The value object will then parse the input correctly for the given schema proper
 
 ## Advanced usage
 
-An example for providing structured JsonLd for a blog with LUYA cms module:
+An example for providing structured JSON-LD for a blog with LUYA CMS module:
 
 ```php
 $current = Yii::$app->menu->current;
