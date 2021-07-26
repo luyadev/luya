@@ -2,18 +2,18 @@
 
 ## Example project folder hierarchy
 
-This is how a standard LUYA kickstarter application hierarchy should look and where files, configs, modules and views should be located.
+This is how a standard LUYA kickstarter application hierarchy should look and where files, configs, modules and views should be located:
 
 ```
 .
-├── public_html
-│   ├── storage
-│   └── css
 ├── assets
+├── blockgroups
 ├── blocks
-├── filters
 ├── configs
+├── filters
+├── messages
 ├── migrations
+├── models
 ├── modules
 │   ├── <APP-MODULE>
 │   │   ├── assets
@@ -21,7 +21,12 @@ This is how a standard LUYA kickstarter application hierarchy should look and wh
 │   └── <APP-ADMIN-MODULE>
 │       ├── assets
 │       └── controllers
+├── public_html
+│   ├── storage
+│   └── css
+├── resources
 ├── runtime
+├── themes
 └── views
     ├── <APP-MODULE>
     │   └── default
@@ -29,11 +34,11 @@ This is how a standard LUYA kickstarter application hierarchy should look and wh
     └── layouts
 ```
 
-## Configurtion Files and Config Builder
+## Configuration Files and Config Builder
 
 Config files (e.g. `configs/env-local.php` or `configs/env-prod.php`) return a configuration array.
 
-> since version 1.0.21 of LUYA core the {{luya\Config}} is used to generate configs (`configs/config.php`):
+> Since version 1.0.21 of LUYA core the {{luya\Config}} is used to generate configs (`configs/config.php`):
 
 ```php
 define('YII_DEBUG', true);
@@ -135,7 +140,7 @@ $config->consoleComponent('request', [
 ]);
 ```
 
-depending on console or web request would resolve:
+Depending on console or web request would resolve:
 
 ```php
 // on web runtime:
@@ -152,7 +157,7 @@ depending on console or web request would resolve:
 
 ## Configuration for different Environments
 
-As a key concept of LUYA is to Dont repeat yourself with {{luya\Config}} a configuration file for different hosts can be done in a single file using `env()`. Assuming a database connection which has different connection details on different hosts (prep and prod) define the {{yii\db\Connection}} as followed:
+As a key concept of LUYA is to don't repeat yourself with {{luya\Config}} a configuration file for different hosts can be done in a single file using `env()`. Assuming a database connection which has different connection details on different hosts (prep and prod) define the {{yii\db\Connection}} as followed:
 
 ```php
 $config->component('db', [
