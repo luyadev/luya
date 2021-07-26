@@ -1,6 +1,6 @@
 # Admin assets
 
-This section describes how to add assets (CSS or javascript) files to your administration module. To ensure that they are depending and initializing your files at the right point all your custom assets should depend on the `admin\assets\Main` package.
+This section describes how to add assets (CSS or JavaScript) files to your administration module. To ensure that they are depending and initializing your files at the right point all your custom assets should depend on the `admin\assets\Main` package.
 
 ## Register Asset Bundle
 
@@ -19,7 +19,7 @@ class MyAdminAsset extends \luya\web\Asset
         'js/johndoe.js',
     ];
 
-    // important to solve all javascript dependency issues here, e.g. jquery, bower, angular, ...
+    // important to solve all JavaScript dependency issues here, e.g. jQuery, bower, angular, ...
     public $depends = [
         'luya\admin\assets\Main',
     ];
@@ -53,7 +53,7 @@ As the admin UI is written in angular the assets must be pre assigned to the adm
 
 ## Using i18n in JavaScript
 
-In order to use the i18n service inside your javascript files, you have to pass the translations keys you d'like to use inside your javascript to the admin aui. Therefore define {{luya\admin\base\Module::getJsTranslationMessages()}} in your admin module class:
+In order to use the i18n service inside your JavaScript files, you have to pass the translations keys you d'like to use inside your JavaScript to the admin aui. Therefore define {{luya\admin\base\Module::getJsTranslationMessages()}} in your admin module class:
 
 ```php
 public function getJsTranslationMessages()
@@ -66,4 +66,4 @@ public function getJsTranslationMessages()
 
 > Only registered translation keys can be used, see [[app-translation.md]] module translation section to register translations.
 
-Now you can use this registered translation keys inside your javascript files with `i18n['i18n_message_key_from_message_1']`. If you have a parameterized translation message you can use `i18nParam('i18n_message_key_from_message_2', {variable: value})`. The message for this parameterized value could be `Hello %variable%`.
+Now you can use this registered translation keys inside your JavaScript files with `i18n['i18n_message_key_from_message_1']`. If you have a parameterized translation message you can use `i18nParam('i18n_message_key_from_message_2', {variable: value})`. The message for this parameterized value could be `Hello %variable%`.

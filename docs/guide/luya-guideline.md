@@ -9,7 +9,7 @@ Informations about creating guides and how they are displayed on luya.io:
 + Heading 1 titles will be removed from rendering on luya.io and the navigation title is used instead
 + Heading 2 titles will be used to automatically generate the table of contents on luya.io
 
-In order to create a link inside the guide or PHPDoc to a PHP Class use the following syntax:
+In order to create a link inside the guide or PHPDoc to a PHP class use the following syntax:
 
 + `{{luya\base\Module}}` This will generate a link to the API for the given class name.
 + `{{luya\base\Module::$apis}}` Generate a link to an API class with property `$apis`.
@@ -17,7 +17,7 @@ In order to create a link inside the guide or PHPDoc to a PHP Class use the foll
 
 If you want to link from the API PHPDoc to the guide use:
 
-+ `[[concept-tags.md]]` Assuming the markdown file would be located in the `/docs/guide` folder.
++ `[[concept-tags.md]]` Assuming the Markdown file would be located in the `/docs/guide` folder.
 
 When dealing with a Controller, Action or another PHP names use single quotes \`MyController\`. For example `MyController` would name the controller defined in the file `MyController.php` with the action `indexAction()`, same notation goes for PHP variables like `$foobar`.
 
@@ -47,9 +47,11 @@ This represents a guideline how words and proper nouns should be written in the 
 + DRY
 + e.g. – instead of f.e., for example or similar expressions
 + FAQ
++ GET – REST API command
 + Git
 + GitHub
 + HTML
++ HTTP
 + i18n
 + JavaScript
 + jQuery
@@ -69,7 +71,7 @@ This represents a guideline how words and proper nouns should be written in the 
 + PHP
 + PHPDoc
 + PHPMailer
-+ POST
++ POST – REST API command
 + REST
 + SCSS
 + SQL

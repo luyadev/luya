@@ -93,7 +93,7 @@ $config->webComponent('request', [
 return $config;
 ```
 
-As the `env.php` now recieves the Config object and won't be stored in git the enviroment to return can be choosen there:
+As the `env.php` now recieves the Config object and won't be stored in Git the enviroment to return can be choosen there:
 
 example content of `env.php`:
 
@@ -205,7 +205,7 @@ return $config->toArray(\luya\Config::ENV_PROD);
 
 ## Create company wide config
 
-Its very common that you like to share configuration values over different projects, therefore we encourage you to create your own LUYA DI repo, create a private repository on your VCS Platform (example Github) add a Bootstrap file like:
+Its very common that you like to share configuration values over different projects, therefore we encourage you to create your own LUYA DI repo, create a private repository on your VCS Platform (example GitHub) add a Bootstrap file like:
 
 ```php
 <?php
@@ -309,7 +309,7 @@ So now there is no need to configure `errorHandler` or `mail` component, as its 
 
 ## Changing the root directory
 
-The `public_html` folder is the root directory. It contains the application bootstrap file. If you want to reflect your web server directory structure, you can rename the `public_html` folder to whatever you want to. For example: `www` or `web`. You just need to update your configuration by adding the `webrootDirectory` config, f.e. it should look like this: `'webrootDirectory' => 'www'`
+The `public_html` folder is the root directory. It contains the application bootstrap file. If you want to reflect your web server directory structure, you can rename the `public_html` folder to whatever you want to. For example: `www` or `web`. You just need to update your configuration by adding the `webrootDirectory` config, e.g. it should look like this: `'webrootDirectory' => 'www'`
 
 ## Composer latest LUYA development version
 

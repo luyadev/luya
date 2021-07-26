@@ -22,7 +22,7 @@ We recommend that you deploy the website to the server in an early stadium of th
 
 ## Deployment
 
-The deployment (using [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)) will mainly publish the git repository on the production server and runs certain LUYA related tasks, like migration and import commands. It will also ensure the right `env.php` is created on the server based on the deploy.php server name setting `server('prod', ...)`.
+The deployment (using [LUYA deployer](https://luya.io/packages/luyadev--luya-deployer)) will mainly publish the Git repository on the production server and runs certain LUYA related tasks, like migration and import commands. It will also ensure the right `env.php` is created on the server based on the deploy.php server name setting `server('prod', ...)`.
 
 1. Set up your production environment on the server (create the database, enable ssh, etc.)
 2. Ensure the config contains the right informations in {{luya\Config::ENV_PROD}} context.
@@ -88,7 +88,7 @@ For details and more commands, see {{luya\admin\commands\ProxyController}}.
 ## Deploy prep env
 
 
-When running a pre-production env (prep) its very common to copy the database and files after deployment but its recommend to achieved that with deployer and admin/proxy via the smart way. Therefore just update your **deploy.php** following the example below:
+When running a pre-production env (prep) its very common to copy the database and files after deployment but its recommend to achieved that with deployer and admin/proxy via the smart way. Therefore just update your `deploy.php` following the example below:
 
 ```php
 task('deploy:syncProdEnv', function() {

@@ -106,7 +106,7 @@ To verify which composition language is used you can dump `Yii::$app->compositio
 
 When the CMS module is enabled it will take over all URLs who are not covered by URL rules in the URL manager, otherwise the CMS won't have the ability to generate pages with slugs and nested subpages. When working with "default" Yii Framework controllers an URL rule is required to get accessable web URL. Let's assume we have a controller which returns data for an async request, we would like to access the url in order to make an AJAX call somewhere in the layout.
 
-Create the controller, change response format to json and return an array:
+Create the controller, change response format to JSON and return an array:
 
 ```php
 <?php

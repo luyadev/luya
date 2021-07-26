@@ -9,7 +9,7 @@ In order to make wording clear in this guide section:
 + Authentication: This means you have to provide an access token, bearer auth header or session based authentication mechanism in order to access the given resource.
 + Permission: This means an API or WEB-Route is stored in the LUYA ADMIN permission system and can be associated to given groups which can be then associated to users (both users and API users). For example, users can be edited, added and deleted.
 + User vs API User: API Users are not able to login in the admin UI, while Users do. There are also other limitations, like API Users can not access actions without permission entries, if disabled (which is by default)
-+ REST/API vs WEB: A REST/API Controller will return JSON or XML formatted content and authentication must be done via token, while a web controller returns html (scalar values) and authentication is done trough session cookie.
++ REST/API vs WEB: A REST/API Controller will return JSON or XML formatted content and authentication must be done via token, while a web controller returns HTML (scalar values) and authentication is done trough session cookie.
 + Permission Routes: Permission entry for {{luya\admin\base\RestController}} and {{luya\admin\base\Controller}}.
 + Permission APIs: Permission entry for {{luya\admin\base\RestActiveController}}
 
@@ -75,8 +75,8 @@ The above *module/controller/action* route is now protected by admin UI authoriz
 
 There are different controllers which can be extended, but they have different permission systems. Some use `routes` and others take `apis` as permission level.
 
-+ {{luya\admin\base\Controller}}: This is a WEB controller and permission is handled trough `routes`. Those controllers usually return html content and not REST responses (like json).
-+ {{luya\admin\base\RestController}}: The RestController can take `routes` as permission, route validation can be done trough {{luya\admin\base\RestController::checkRouteAccess()}}. The controller requies response of array data (json response).
++ {{luya\admin\base\Controller}}: This is a WEB controller and permission is handled trough `routes`. Those controllers usually return HTML content and not REST responses (like JSON).
++ {{luya\admin\base\RestController}}: The RestController can take `routes` as permission, route validation can be done trough {{luya\admin\base\RestController::checkRouteAccess()}}. The controller requies response of array data (JSON response).
 + {{luya\admin\base\RestActiveController}}: The modelClass based ActiveController which implements basic REST behaviors like create,update,view and delete based on a given model. The permission is authorized trough `apis` and the implementation of {{luya\admin\base\RestActiveController::checkAccess()}}.
 
 ## Custom Actions in REST/API Controllers

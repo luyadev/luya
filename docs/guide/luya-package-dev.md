@@ -21,7 +21,7 @@ cd luya-package-skeleton
 ```
 
 1) Create a repository on GitHub, make sure the repository is public, otherwise we can not register on packagist.org.
-2) Create a `composer.json` with basic informations about the VENDOR and PACKAGE name. Replace VENDOR with your github username or vendor name, and PACKAGE with the package name. Example `nadar/luya-material-blocks`.
+2) Create a `composer.json` with basic informations about the VENDOR and PACKAGE name. Replace VENDOR with your GitHub username or vendor name, and PACKAGE with the package name. Example `nadar/luya-material-blocks`.
 
 ```json
 {
@@ -61,7 +61,7 @@ class HeroBlock extends PhpBlock
 ```
 
 4) In order to test the blocks you can register with Composer https://getcomposer.org/doc/05-repositories.md#path or provide the CMS admin the path to the blocks `'cmsadmin' => ['blocks' => 'path/to/blocks/src']]`.
-5) Now you should commit and push the code to github and register the package on packagist: https://packagist.org/packages/submit
+5) Now you should commit and push the code to GitHub and register the package on packagist: https://packagist.org/packages/submit
 
 ## Composer definition informations
 

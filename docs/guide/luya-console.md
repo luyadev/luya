@@ -7,7 +7,7 @@ The base directory is where folders like vendor, public_html, runtime are locate
 ./vendor/bin/luya <command>
 ```
 
-> On Windows systems you can run commands from the public_html folder and run: `php index.php <command>`
+> On Windows systems you can run commands from the `public_html` folder and run: `php index.php <command>`
 
 Where *command* is one of the following commands below:
 

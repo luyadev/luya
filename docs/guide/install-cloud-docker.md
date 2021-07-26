@@ -1,6 +1,6 @@
 # Cloud & Docker 
 
-LUYA has been proofenly used in different cloud environments using Docker and f.e. Kubernetes. This ensures your application runs in a stateless context, which means that your application does not store any informations inside the webserver itself. This makes it possible to scale LUYA into an infinite number of websites (PODs) where the load balancer can randomly send traffic to and the user won't notce anything, but actually jumping between webserver. This section explains how you have to configure LUYA in order to achieve this behavior.
+LUYA has been proofenly used in different cloud environments using Docker and e.g. Kubernetes. This ensures your application runs in a stateless context, which means that your application does not store any informations inside the webserver itself. This makes it possible to scale LUYA into an infinite number of websites (PODs) where the load balancer can randomly send traffic to and the user won't notce anything, but actually jumping between webserver. This section explains how you have to configure LUYA in order to achieve this behavior.
 
 ## Overview
 
@@ -9,14 +9,14 @@ LUYA has been proofenly used in different cloud environments using Docker and f.
 This chart illustrates what is required to make your Webserver stateless:
 
 1. a Database
-2. Caching Server (f.e. Memcached)
-3. S3 compataible Storage (For file uploads, assets, etc.) working as a CDN
+2. Caching Server (e.g. Memcached)
+3. S3 compataible Storage (for file uploads, assets, etc.) working as a CDN
 
 > There different solutions you can use, for example its not required to have a shared caching system, but its strongly required as a single request can warm a cache state for all webservers!
 
 ## Dockerize your Application
 
-First you need to Dockerize your LUYA application. There are maybe multiple docker images available, but for **production** we currently recommend to use https://gitlab.com/zephir.ch/foss/luya-docker. Create a `Dockerfile` which could look like this:
+First you need to Dockerize your LUYA application. There are maybe multiple Docker images available, but for **production** we currently recommend to use https://gitlab.com/zephir.ch/foss/luya-docker. Create a `Dockerfile` which could look like this:
 
 ```
 FROM registry.gitlab.com/zephir.ch/foss/luya-docker:1

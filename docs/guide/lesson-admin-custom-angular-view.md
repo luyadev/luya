@@ -36,7 +36,7 @@ class FinderController extends Controller
 {
     // disables the route based permissions checks
     public $disablePermissionCheck = true;
-    // let the controller know that actionData returns data in API Format (json).
+    // let the controller know that actionData returns data in API Format (JSON).
     public $apiResponseActions = ['data'];
     
     // The view file to rendern when entering this controller
@@ -84,4 +84,4 @@ zaa.bootstrap.register('MyController', ['$scope', '$http', function($scope, $htt
 </div>
 ```
 
-Its very common to just write the angular controller code inside the view, of course you can also make a javascript file and add this to an asset and register the [[app-admin-module-assets.md]].
+Its very common to just write the angular controller code inside the view, of course you can also make a JavaScript file and add this to an asset and register the [[app-admin-module-assets.md]].

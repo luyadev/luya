@@ -14,7 +14,7 @@ The LUYA admin provides a basic JWT generator including an out of the box authen
 
 As all LUYA admin APIs requerd an authentification are proxied trough LUYA API Users (Read about [[concept.headless.md]]).
 
-The life cycle of the JWT request is described as followed (assuming jwt configuration in the modul is done accordingly):
+The life cycle of the JWT request is described as followed (assuming JWT configuration in the modul is done accordingly):
 
 Get the token:
 
@@ -111,7 +111,7 @@ class UserController extends \luya\admin\ngrest\base\Api
     public $modelClass = 'app\modules\myapimodule\models\User';
 
     /**
-     * Make user login and return the user with the fresh generated jwt token which is stored in the user.
+     * Make user login and return the user with the fresh generated JWT token which is stored in the user.
      * 
      * > No authentification needed.
      */
@@ -152,7 +152,7 @@ class UserController extends \luya\admin\ngrest\base\Api
     }
 
     /**
-     * Returns the currently logged in jwt authenticated user.
+     * Returns the currently logged in JWT authenticated user.
      *
      * > This method requires authentification.
      * 
@@ -165,7 +165,7 @@ class UserController extends \luya\admin\ngrest\base\Api
 }
 ```
 
-If a successfull jwt authentication is made the {{luya\admin\components\Jwt::$identity}} contains the {{luya\admin\components\Jwt::$identityClass}} object implementing {{luya\admin\base\JwtIdentityInterface}}.
+If a successfull JWT authentication is made the {{luya\admin\components\Jwt::$identity}} contains the {{luya\admin\components\Jwt::$identityClass}} object implementing {{luya\admin\base\JwtIdentityInterface}}.
 
 ## CORS Preflight Request
 
@@ -230,7 +230,7 @@ public function checkAccess($action, $model = null, $params = [])
 {
     parent::checkAccess($action, $model, $params);
 
-    // see if jwt user performs this action
+    // see if JWT user performs this action
     if (Yii::$app->jwt->identity && ($action == 'delete' || $action == 'update')) {
         // if jwt user id is not equal the models user id, throw forbidden exception.
         if (Yii::$app->jwt->identity->id != $model->user_id) {

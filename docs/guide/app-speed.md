@@ -47,7 +47,7 @@ In order to reduce the sql requests you can also enable schema caching in your d
 ]
 ```
 
-When dealing with large database tables in your application you should define database indexes (for example when working with mysql).
+When dealing with large database tables in your application you should define database indexes (for example when working with MySQL).
 
 ## Session
 

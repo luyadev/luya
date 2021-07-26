@@ -16,9 +16,9 @@ See the GIF below:
 
 ![Creating ImagesliderBlock](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/imagesliderblock-create.gif "Creating block with commands")
 
-This will automatically create an pre filled "ImagesliderBlock.php" in our **blocks** directory and an empty view file with the same name in **views/blocks**
+This will automatically create an pre filled `ImagesliderBlock.php` in our **blocks** directory and an empty view file with the same name in **views/blocks**
 
-## Register an external Javascript and CSS file
+## Register an external JavaScript and CSS file
 
 As LUYA is build upon Yii2, we can use the built in asset system. We register external JS files like [shown in the Yii guide](http://www.yiiframework.com/doc-2.0/guide-output-client-scripts.html#script-files) in the beginning of the view file:
 
@@ -31,7 +31,7 @@ $this->registerJsFile(
 ?>
 ```
 
-We are using the open source Javascript slider plugin [slick](http://kenwheeler.github.io/slick/).
+We are using the open source JavaScript slider plugin [slick](http://kenwheeler.github.io/slick/).
 
 Additionally we will add the link to the needed slick CSS files:
 
@@ -107,7 +107,7 @@ $this->registerJs("$('.slider').slick({
 
 ## Enable image preview in admin view
 
-To be able to see the images of the used image array, we have to provide a view template for LUYA. Besides PHP, it is possible to use [Twig](https://twig.sensiolabs.org/) as a template engine. Similar to our front end output, we want to parse each image of the array but this time we do not use a plugin and show every image side by side. Modify the **admin()** function in ```blocks/ImagesliderBlock.php``` like this:
+To be able to see the images of the used image array, we have to provide a view template for LUYA. Besides PHP, it is possible to use [Twig](https://twig.sensiolabs.org/) as a template engine. Similar to our front end output, we want to parse each image of the array but this time we do not use a plugin and show every image side by side. Modify the **admin()** function in `blocks/ImagesliderBlock.php` like this:
 
 ```php
 public function admin()

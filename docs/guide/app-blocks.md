@@ -89,11 +89,11 @@ In order to retrieve values from configurations (`$this->[METHOD]`):
 |extra|{{luya\cms\base\PhpBlockView::extraValue()}}
 |placeholder|{{luya\cms\base\PhpBlockView::placeholderValue()}}
 
-Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
+Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the PHP block view.
 
 ## Register and import
 
-After creating a block, you have to *import* it into your application. The reason behind the import process is to avoid rely on database structure (which cant be tracked in a VCS or SVN easily) and to work with php files you can manage in version control system (e.g. GitHub or Bitbucket). Run the [Import Command](luya-console.md):
+After creating a block, you have to *import* it into your application. The reason behind the import process is to avoid rely on database structure (which cant be tracked in a VCS or SVN easily) and to work with PHP files you can manage in version control system (e.g. GitHub or Bitbucket). Run the [Import Command](luya-console.md):
 
 ```sh
 ./vendor/bin/luya import
@@ -183,7 +183,7 @@ If there is a property defined you will get the property object otherwise return
 
 ## Register Assets and JavaScript/CSS
 
-Sometimes your block should also register some CSS or js files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
+Sometimes your block should also register some CSS or JavaScript files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
 
 Assuming the below code is the PHP View of your Block:
 
@@ -193,9 +193,9 @@ MyBlockAsset::register($this);
 
 Now the [[app-assets.md]] is registered in the application view object.
 
-Its also possible to just register certain js or CSS code, there fore use `registerJs` or `registerCss` directly in the view files of the block.
+Its also possible to just register certain JavaScript or CSS code, there fore use `registerJs` or `registerCss` directly in the view files of the block.
 
-Registering some JS Code:
+Registering some JavaScript code:
 
 ```php
 $this->registerJs("
@@ -203,7 +203,7 @@ $this->registerJs("
 ");
 ```
 
-or register a variable
+Or register a variable:
 
 ```php
 $this->registerJsVar("foo", "bar"); // var foo = 'bar'
@@ -224,7 +224,7 @@ To implement AJAX inside a block the following concept is used:
 + {{\luya\cms\base\InternalBaseBlock::createAjaxLink()}}: Create the link to the callback, this url must be used for your AJAX requests.
 + `callback...()`: Define a callback, you have to prefix the method with *callback*.
 
-Create a callback and define all parameters. The callback is what the url returns to your javascript which can be html or json.
+Create a callback and define all parameters. The callback is what the url returns to your JavaScript which can be HTML or JSON.
 
 ```php
 public function callbackHelloWorld($time)
@@ -233,13 +233,13 @@ public function callbackHelloWorld($time)
 }
 ```
 
-The above callback requires the parameter `$time` and must be called trough an AJAX call inside of the javascript, to create the url for this specific callback we are going to use `createAjaxLink`:
+The above callback requires the parameter `$time` and must be called trough an AJAX call inside of the JavaScript, to create the url for this specific callback we are going to use `createAjaxLink`:
 
 ```php
 $this->createAjaxLink('HellWorld', ['time' => time()]);
 ```
 
-You could store this created link from above inside your extras vars and pass it to the javascript.
+You could store this created link from above inside your extras vars and pass it to the JavaScript.
 
 You can pass additional values to the callback by using the post AJAX method and collect them in your callback via `Yii::$app->request->post(). The get parameters are used to resolve the callback.
 

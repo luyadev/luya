@@ -84,7 +84,7 @@ In order to generate a custom label field you can also pass a closure function:
 }
 ```
 
-> **Attention** Please keep in mind this plugin will override the default values from the database to display the rest API data. To prevent such a behavior use {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} instead.
+> **Attention** Please keep in mind this plugin will override the default values from the database to display the REST API data. To prevent such a behavior use {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} instead.
 > 
 > ```php
 > public function getCustomer()

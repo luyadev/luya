@@ -25,7 +25,7 @@ You can enable this option for all modules by changing the default value inside 
 
 #### CMS context
 
-When including a module into the CMS, the rendering of your module view file will automatically ignore the layout, otherwise you would have a mess with html as the CMS already wraps its CMS layout and afterwards also wraps the layout. But you may use the [frontend layouts](app-module-layouts.md) which allows you to use a sub layout for all the module controller views.
+When including a module into the CMS, the rendering of your module view file will automatically ignore the layout, otherwise you would have a mess with HTML as the CMS already wraps its CMS layout and afterwards also wraps the layout. But you may use the [frontend layouts](app-module-layouts.md) which allows you to use a sub layout for all the module controller views.
 
 ## Title and meta information
 

@@ -27,7 +27,7 @@ When logged into the Admin Module, the Documentation can be explored in real tim
 
 ## PHP Documentation
 
-The details, descriptions and paramters or mostly read from the PhpDoc blocks, this means documentation inside the code will be exposed to the API Consumers, thefore its finally absolute worth to take time making propper documentations. This will make other developers, yourself and API Consumers happy. The LUYA OpenAPI generator can interpret reference to objects and classes, will follow them and publish those to the OpenAPI.
+The details, descriptions and paramters or mostly read from the PHPDoc blocks, this means documentation inside the code will be exposed to the API Consumers, thefore its finally absolute worth to take time making propper documentations. This will make other developers, yourself and API Consumers happy. The LUYA OpenAPI generator can interpret reference to objects and classes, will follow them and publish those to the OpenAPI.
 
 An example of an LUYA Admin API Defintion:
 
@@ -97,7 +97,7 @@ Which would be equals to `$_POST['username']` and `$_POST['password']`.
 
 ### Working with actions() Array
 
-With the Yii Framework its very convient to make use of `actions()` definition as array inside a controller. This allows to easy share actions among controllers. The downside of this behavior is the Description and Title of those Actions are always the same. So the OpenAPI documentation for those actions like Rest Actions `actionIndex()`, `actionUpdate($id)`, `actionView($id)` are all the same. In order to fix this problem we encourage you to use [@method](https://docs.phpdoc.org/latest/references/phpdoc/tags/method.html) PhpDoc Param this will also improve the Documentation of your Code and generate correctly meaningful OpenAPI documentations.
+With the Yii Framework its very convient to make use of `actions()` definition as array inside a controller. This allows to easy share actions among controllers. The downside of this behavior is the Description and Title of those Actions are always the same. So the OpenAPI documentation for those actions like REST actions `actionIndex()`, `actionUpdate($id)`, `actionView($id)` are all the same. In order to fix this problem we encourage you to use [@method](https://docs.phpdoc.org/latest/references/phpdoc/tags/method.html) PHPDoc Param this will also improve the documentation of your code and generate correctly meaningful OpenAPI documentations.
 
 ```php
 <?php

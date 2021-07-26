@@ -11,9 +11,9 @@ For a general guide to create PHP Unit Tests refer to [Getting Started with PHPU
 
 ## Unit test everything with a complete suite test
 
-1. Create a new database (for example *luya_env_phpunit*)
-2. Insert the database dump for your LUYA version from *tests/data/sql/* (for example `1.0.0.sql`)
-3. Rename `phpunit.xml.dist` in LUYA root to `phpunit.xml`
-4. Change *dsn*, *username* and *password* in `phpunit.xml`
+1. Create a new database (for example *luya_env_phpunit*).
+2. Insert the database dump for your LUYA version from `tests/data/sql/` (for example `1.0.0.sql`).
+3. Rename `phpunit.xml.dist` in LUYA root to `phpunit.xml`.
+4. Change *dsn*, *username* and *password* in `phpunit.xml`.
 5. Ensure you have installed the current Composer packages by running `composer install` within the local LUYA dev package.
 6. Execute the *phpunit* binary file with `./vendor/bin/phpunit`.

@@ -52,7 +52,7 @@ class XYZ extends NgRestModel
 }
 ```
 
-> The {{luya\admin\ngrest\base\Api::withRelations()}} will **eager load** the data, but in order to expand sub relations f.e. `user.country` the country relation must be defined in {{luya\admin\ngrest\base\NgRestModel::extraFields()}} `array_merge(['country'], parent::extraFields())` inside the User model.
+> The {{luya\admin\ngrest\base\Api::withRelations()}} will **eager load** the data, but in order to expand sub relations e.g. `user.country` the country relation must be defined in {{luya\admin\ngrest\base\NgRestModel::extraFields()}} `array_merge(['country'], parent::extraFields())` inside the User model.
 
 ## Pagination
 
@@ -185,9 +185,9 @@ Complex and nested conditions are possible as well:
 }
 ```
 
-#### A few example as json and http get param
+#### A few example as JSON and HTTP GET param
 
-The following examples show filter requests for json body param or as get param. This helps to transform from json to http get param as its mostly harder to read and write.
+The following examples show filter requests for JSON body param or as get param. This helps to transform from JSON to HTTP GET param as its mostly harder to read and write.
 
 <table>
 <thead>

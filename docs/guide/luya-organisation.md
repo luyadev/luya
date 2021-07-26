@@ -29,7 +29,7 @@
 
 Current LUYA Organisation members with the respective role:
 
-|Github|Name|Role
+|GitHub|Name|Role
 |------|----|----
 |[nadar](https://github.com/nadar)|Basil Suter|Project Lead
 |[TheMaaarc](https://github.com/TheMaaarc)|Marc Stampfli|Core Member

@@ -252,4 +252,4 @@ zaa.directive("myInput", function(){
 });
 ```
 
-Now after creating the module with the asset file and the javascript. You can use `my-input` directive (example code above) inside your block config as type.
+Now after creating the module with the asset file and the JavaScript. You can use `my-input` directive (example code above) inside your block config as type.

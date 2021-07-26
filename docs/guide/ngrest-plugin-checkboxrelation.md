@@ -2,7 +2,7 @@
 
 Ability to make an checkbox input where you can select items from another table connected with a via/ref Table.
 
-+ Create public property (in order to communicate with the API) f.e. `$adminGroups`
++ Create public property (in order to communicate with the API) e.g. `$adminGroups`
 + Register the attribute type in the `ngrestExtraAttributeTypes()` method.
 
 ## Active query relation

@@ -35,9 +35,9 @@ The plugins listed below can be configured but make sure your are familiar with 
 |sortRelationArray|{{luya\admin\ngrest\plugins\SortRelationArray}}|array|Similar to selectArray but with the ability to sort and to selected multiple items.
 |sortRelationModel|{{luya\admin\ngrest\plugins\SortRelationModel}}|array|Similar to selectModel but with the ability to sort and to selected multiple items.
 |html|{{luya\admin\ngrest\plugins\Html}}|string|HTML data without encoding.
-|raw|{{luya\admin\ngrest\plugins\Raw}}|string|Does not modify the content, usefull when working with json API input/output.
+|raw|{{luya\admin\ngrest\plugins\Raw}}|string|Does not modify the content, usefull when working with JSON API input/output.
 |index|{{luya\admin\ngrest\plugins\Index}}|string|Sequential number index.
-|angular|{{luya\admin\ngrest\plugins\Angular}}|string|Write a custom Angular Js Template which can interact with the current item value.
+|angular|{{luya\admin\ngrest\plugins\Angular}}|string|Write a custom AngularJS template which can interact with the current item value.
 
 ## Create a custom project Plugin
 
@@ -80,7 +80,7 @@ class TestPlugin extends Plugin
 ```
 
 The above class is abstracted from the {{luya\admin\ngrest\base\Plugin}} which requires the {{luya\admin\ngrest\base\Plugin::renderUpdate}}, {{luya\admin\ngrest\base\Plugin::renderList}} and {{luya\admin\ngrest\base\Plugin::renderCreate}} methods which are basically taking care of the form input or the element in the CRUD list view. As you can see the helper method {{luya\admin\helpers\Angular::directive}} is in charge to return a form input tag with a custom directive named `my-directive`. 
-The directive has to be stored in a javascript file related to the admin UI which you can include by using [Admin Module Assets](app-admin-module-assets.md), e.g.:
+The directive has to be stored in a JavaScript file related to the admin UI which you can include by using [Admin Module Assets](app-admin-module-assets.md), e.g.:
 
 ```js
 zaa.directive("myDirective", function() {

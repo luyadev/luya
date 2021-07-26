@@ -78,7 +78,7 @@ This `My Windows Alias` button will only be shown for if the row `firstname` equ
 
 ### View files
 
-To render view files you can run the method `$this->render()` inside your ActiveWindow class. The render method will lookup for php view file based on the base path of your `$module` property. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` property and your ActiveWindow name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
+To render view files you can run the method `$this->render()` inside your ActiveWindow class. The render method will lookup for PHP view file based on the base path of your `$module` property. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` property and your ActiveWindow name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
 
 ## How to make a Button
 

@@ -115,7 +115,7 @@ public function import(\luya\console\interfaces\ImportControllerInterface $impor
 
 ## PSR-4 binding with Composer
 
-Sometimes you do not want to use the long namespaces names like `app\modules\mymodule` and create a shortcut to access your files. In order to add a shorter *alias* to your namespace you psr-4 bind them in your `composer.json file. 
+Sometimes you do not want to use the long namespaces names like `app\modules\mymodule` and create a shortcut to access your files. In order to add a shorter *alias* to your namespace you psr-4 bind them in your `composer.json` file. 
 To do so open the `composer.json` file and add the *autoload* section (if not exists):
 
 ```json
