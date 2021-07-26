@@ -55,6 +55,7 @@ This represents a guideline how words and proper nouns should be written in the 
 + jQuery
 + JS
 + JSON
++ JSON-LD
 + JWT
 + LAMP
 + macOS
