@@ -31,14 +31,22 @@ This represents a guideline how words and proper nouns should be written in the 
 + admin UI – instead of Admin, admin module or Admin UI
 + AJAX
 + AngularJS
++ Apache
 + API
++ AWS
++ BBCode
++ CDN
++ CI
 + CMS
 + Composer
 + CORS
 + CRUD
 + CSS
++ DNS
++ Docker
 + DRY
 + e.g. – instead of f.e., for example or similar expressions
++ FAQ
 + Git
 + GitHub
 + HTML
@@ -47,10 +55,14 @@ This represents a guideline how words and proper nouns should be written in the 
 + jQuery
 + JS
 + JSON
++ JSON-LD
 + JWT
 + LAMP
 + macOS
 + MAMP
++ Markdown
++ MVC
++ MySQL
 + NgRest
 + OpenAPI
 + PHP
@@ -63,6 +75,7 @@ This represents a guideline how words and proper nouns should be written in the 
 + SSH
 + SVN
 + UI
++ Unix
 + URL
 + VCS
 + WAMP
