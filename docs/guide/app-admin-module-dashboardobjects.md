@@ -39,7 +39,7 @@ In order to customize the template of a basic dashboard object you can override 
 ],
 ```
 
-> The outerTemplate can have variables: title, template, dataApiUrl in double curly braces.
+> The outerTemplate can have variables: `title`, `template`, `dataApiUrl` in double curly braces.
 
 ## Links with ui-sref
 

@@ -53,7 +53,7 @@ As the admin UI is written in angular the assets must be pre assigned to the adm
 
 ## Using i18n in JavaScript
 
-In order to use the i18n service inside your JavaScript files, you have to pass the translations keys you d'like to use inside your JavaScript to the admin aui. Therefore define {{luya\admin\base\Module::getJsTranslationMessages()}} in your admin module class:
+In order to use the i18n service inside your JavaScript files, you have to pass the translations keys you d'like to use inside your JavaScript to the admin UI. Therefore define {{luya\admin\base\Module::getJsTranslationMessages()}} in your admin module class:
 
 ```php
 public function getJsTranslationMessages()

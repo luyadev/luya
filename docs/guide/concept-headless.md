@@ -27,7 +27,7 @@ In order to configure JWT authentification read more in the JWT & SPA Section: [
 
 ## Additional Configuration
 
-If you build a website with the LUYA CMS but use the headless client to render the content, you may want to configure the preview url to point to your headless page.
+If you build a website with the LUYA CMS but use the headless client to render the content, you may want to configure the preview URL to point to your headless page.
 
 ```php
 'modules' => [

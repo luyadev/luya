@@ -6,7 +6,7 @@
 
 **[Follow the general installation guide](install.md) and then use the macOS specific settings below.**
 
-Most macOS Apache services does not work with the default unix socket defined in your `php.ini` (as it could be of the wrong loaded PHP profile), so you have to define an additional unix socket inside your dsn configuration of the database component:
+Most macOS Apache services does not work with the default Unix socket defined in your `php.ini` (as it could be of the wrong loaded PHP profile), so you have to define an additional Unix socket inside your dsn configuration of the database component:
 
 #### MAMP
 

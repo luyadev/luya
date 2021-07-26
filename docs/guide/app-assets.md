@@ -64,7 +64,7 @@ public $publishOptions = [
 
 ### Accessing the asset path
 
-Sometimes you may want to access the folder with the asset files, therefore you need to retrieve the baseUrl of the asset which as the *actual path of the folder in the filesystem* which is in the `public_html/assets/$HASH_NUMBER`.
+Sometimes you may want to access the folder with the asset files, therefore you need to retrieve the base URL of the asset which as the *actual path of the folder in the filesystem* which is in the `public_html/assets/$HASH_NUMBER`.
 
 Run the the get bundle method inside your view file for the registered assetManager in the view object:
 

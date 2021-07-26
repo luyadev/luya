@@ -61,8 +61,8 @@ There are several types you can use to generate your block controllers. Each cla
 |zaa-wysiwyg|TYPE_WYSIWYG|Creates a small wysiwyg editor
 |[zaa-select](app-block-type-select.md)|TYPE_SELECT|Creates a select drop down with options based on the options parameter. The options item must contain a value and label key, e.g. `[["value" => "v1", "label" => "Value 1"], ["value" => "v2", "label" => "Value 2"]]`.
 |zaa-radio|TYPE_RADIO|Creates a radio button selection based on the options parameter. The Options item must contain a value and label key, e.g. `[["value" => "v1", "label" => "Value 1"], ["value" => "v2", "label" => "Value 2"]]`.
-|zaa-date|TYPE_DATE|Creates a date picker where the user can choose a date, the response inside the block will be a unix timestamp.
-|zaa-datetime|TYPE_DATETIME|Creates a date picker where the user can choose a date and provide an additional time, the response inside the block will be a unix timestamp.
+|zaa-date|TYPE_DATE|Creates a date picker where the user can choose a date, the response inside the block will be a Unix timestamp.
+|zaa-datetime|TYPE_DATETIME|Creates a date picker where the user can choose a date and provide an additional time, the response inside the block will be a Unix timestamp.
 |[zaa-checkbox](app-block-type-checkbox.md)|TYPE_CHECKBOX|Creates a single checkbox (e.g. to define on/off states).
 |[zaa-checkbox-array](app-block-type-checkbox-array.md)|TYPE_CHECKBOX_ARRAY|Create an array with checkboxes.
 |zaa-file-upload|TYPE_FILEUPLOAD|Creates a file upload form and returns the fileId on success.
@@ -72,7 +72,7 @@ There are several types you can use to generate your block controllers. Each cla
 |zaa-list-array|TYPE_LIST_ARRAY|Creates an array with a key variable `value`.
 |[zaa-multiple-inputs](app-block-type-multiple-inputs.md)| TYPE_MULTIPLE_INPUTS | Creates an expandable list with plugins for each row.
 |zaa-color|TYPE_COLOR|A color wheel to choose a color which will return the hex code of the selected color.
-|zaa-slug|TYPE_SLUG|Input field which will generate url safe strings where only a-z, 0-9 and - is allowed.
+|zaa-slug|TYPE_SLUG|Input field which will generate URL safe strings where only a-z, 0-9 and - is allowed.
 |zaa-table|TYPE_TABLE|Generates a table generator where you can create cols and rows.
 
 ### Examples with block types
@@ -207,7 +207,7 @@ The following Injectors are currently available:
 |{{\luya\cms\injectors\ActiveQueryCheckboxInjector}}|Generates as checkbox selection from an ActiveRecord and assign the selected model rows into the extraVars section. In order to select only a specific fields add the `select()` to the ActiveRecord find ActiveQuery.
 |{{\luya\cms\injectors\ActiveQueryRadioInjector}}|Generates a radio list 
 |{{\luya\cms\injectors\ActiveQuerySelectInjector.php}}|Generates a dropdown select
-|{{\luya\cms\injectors\LinkInjector}}|Generates an ability to select a link and returns the correct url to the link based on the user selection.
+|{{\luya\cms\injectors\LinkInjector}}|Generates an ability to select a link and returns the correct URL to the link based on the user selection.
 |{{\luya\cms\injectors\TagInjector}}|Generates a checkbox to select all available admin tags and provides API to return those selected tags.
 
 ### Injector API

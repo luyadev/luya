@@ -171,9 +171,9 @@ If a successfull JWT authentication is made the {{luya\admin\components\Jwt::$id
 
 When working with cross domain requests, each xhr request to the API will make an *option request* or also known as *preflight request*. The {{luya\admin\ngrest\base\Api}} controllers provide an out of the box solution which works for common CRUD operations (add, view, list, edit, delete). This can be enabled by setting {{luya\admin\Module::$cors}} to true. For further CORS config options use {{luya\traits\ApplicationTrait::$corsConfig}}.
 
-When working with custom actions you might need to configure the option request for the given method. Therefore you need to configure the API with the following setup: create an url rule for options request, define the option and make sure the option is available without authentification (its common that option request won't have authentication headers).
+When working with custom actions you might need to configure the option request for the given method. Therefore you need to configure the API with the following setup: create an URL rule for options request, define the option and make sure the option is available without authentification (its common that option request won't have authentication headers).
 
-Create the url rule for the option request, which defines where the option action should be looked up:
+Create the URL rule for the option request, which defines where the option action should be looked up:
 
 ```php
 public $apiRules = [

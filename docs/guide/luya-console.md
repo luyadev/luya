@@ -105,7 +105,7 @@ Its very often case where you like to render a view and send a mail inside a con
 
 As the console command does not know your web server URL and there is no parameter of your web server url, therefore LUYA has a special configuration property called {{luya\traits\ApplicationTrait::$consoleHostInfo}}.
 
-This value will be used when defined as baseUrl for the urlManager.
+This value will be used when defined as base URL for the urlManager.
 
 ```php
 'consoleHostInfo' => 'https://luya.io',

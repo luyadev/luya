@@ -25,7 +25,7 @@ public function ngrestAttributeTypes()
 
 ### SelectRelationActiveQuery
 
-When dealing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data but there is no model callback for the label fields, it returns raw sql data. In order to use this plugin you need to have a `hasOne` relation.
+When dealing with large tables the {{luya\admin\ngrest\plugins\SelectRelationActiveQuery}} class can handle large amount of data but there is no model callback for the label fields, it returns raw SQL data. In order to use this plugin you need to have a `hasOne` relation.
 
 ```php
 'user_id' => [

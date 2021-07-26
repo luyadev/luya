@@ -221,10 +221,10 @@ $this->registerCss("
 
 To implement AJAX inside a block the following concept is used:
 
-+ {{\luya\cms\base\InternalBaseBlock::createAjaxLink()}}: Create the link to the callback, this url must be used for your AJAX requests.
++ {{\luya\cms\base\InternalBaseBlock::createAjaxLink()}}: Create the link to the callback, this URL must be used for your AJAX requests.
 + `callback...()`: Define a callback, you have to prefix the method with *callback*.
 
-Create a callback and define all parameters. The callback is what the url returns to your JavaScript which can be HTML or JSON.
+Create a callback and define all parameters. The callback is what the URL returns to your JavaScript which can be HTML or JSON.
 
 ```php
 public function callbackHelloWorld($time)
@@ -233,7 +233,7 @@ public function callbackHelloWorld($time)
 }
 ```
 
-The above callback requires the parameter `$time` and must be called trough an AJAX call inside of the JavaScript, to create the url for this specific callback we are going to use `createAjaxLink`:
+The above callback requires the parameter `$time` and must be called trough an AJAX call inside of the JavaScript, to create the URL for this specific callback we are going to use `createAjaxLink`:
 
 ```php
 $this->createAjaxLink('HellWorld', ['time' => time()]);

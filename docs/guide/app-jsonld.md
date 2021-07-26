@@ -54,7 +54,7 @@ luya\web\JsonLd::addGraph([
 
 Some properties require a given type of value, therefore we have Value objects. Some methods can require those objects in order to make sure the correct value is passed to the properties, otherwise you could enter values which are not valid for the given key. 
 
-An example for a value object with an url to a given image:
+An example for a value object with an URL to a given image:
 
 ```php
 $image = (new ImageObject())

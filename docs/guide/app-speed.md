@@ -4,7 +4,7 @@ There are a few things you can do to speed up your application when running LUYA
 
 ## Caching
 
-You should always enable caching in production! Caching stores data inside the runtime folder which will reduce the number of sql requests. The LUYA admin UI and CMS module are using the caching system where often for large and time consuming tasks.
+You should always enable caching in production! Caching stores data inside the runtime folder which will reduce the number of SQL requests. The LUYA admin UI and CMS module are using the caching system where often for large and time consuming tasks.
 
 In order to enable the caching, open your config and add the caching to the components section:
 
@@ -32,7 +32,7 @@ Keepp in mind, that when enabled, the whole page will be cached including all bl
 
 ## Database
 
-In order to reduce the sql requests you can also enable schema caching in your database component which will only work if you have defined a caching mechanism from above.
+In order to reduce the SQL requests you can also enable schema caching in your database component which will only work if you have defined a caching mechanism from above.
 
 ```php
 'components' => [

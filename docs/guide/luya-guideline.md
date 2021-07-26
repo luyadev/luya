@@ -223,7 +223,7 @@ The SCSS folder contains all SCSS files and is structured as follows:
 | Folders | Description |
 |---------|-------------|
 | `base/` | Contains basic styles like the reboot, angular fixes and default styles for tags |
-| `browser-fixes/` | Contains specific browser fixes, for each fix we use a different file (e.g. _ie.scss) |
+| `browser-fixes/` | Contains specific browser fixes, for each fix we use a different file (e.g. `_ie.scss`) |
 | `components/` | Here all the components are stored. See "components" further down |
 | `fonts/` | Contains font-face and mixins for the specific font. |
 | `helpers/` | Mixins and functions |
@@ -253,5 +253,5 @@ HTML:
 </div>
 ```
 
-> You can see that all classes for the `crud` component are prefixed with `crud-`. That way we always know what we can find in which SCSS file. In the HTML you can see that there is a standalone component `table`, wrapped by the class `crud-table`. This results in an extra scss component `_table.scss`.
+> You can see that all classes for the `crud` component are prefixed with `crud-`. That way we always know what we can find in which SCSS file. In the HTML you can see that there is a standalone component `table`, wrapped by the class `crud-table`. This results in an extra SCSS component `_table.scss`.
 

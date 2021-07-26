@@ -23,7 +23,7 @@ In order to run LUYA with deployer nicely on a production server, the following 
 + Apache modules: mod_rewrite
 + Git (for deployer)
 + Composer (for deployer)
-+ ssh access (for deployer)
++ SSH access (for deployer)
 
 ## Require the dev-master
 
