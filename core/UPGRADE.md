@@ -23,7 +23,16 @@ return $this->render('form', [...]);
 ```
 
 Read more about CSRF implementation in the [Yii Framework Security Guide](https://www.yiiframework.com/doc/guide/2.0/en/security-best-practices#avoiding-csrf).
-+ [#2081](https://github.com/luyadev/luya/pull/2081) Removed deprecated methods and/or added a deprecation error trigger.
+
++ [#2081](https://github.com/luyadev/luya/pull/2081) Removed deprecated methods and/or added a deprecation error trigger. Search and Replace:
+  + `composition->language` new `composition->langShortCode`
+  + `composition->get()` new `composition->getKeys()`
+  + `composition->getFull()` (`composition->full`) new `composition->prefixPath`
+  + Removed `luya\Boot::isCli()` use `luya\Boot::getIsCli()` instead
+  + Removed `luya\behaviors\Encode` use `luya\behaviors\HtmlEncodeBehavior` instead.
+  + Removed `luya\behaviors\Timestamp` use `luya\behaviors\TimestampBehavior` instead.
+  + Removed `luya\web\Composition::EVENT_AFTER_SET` - no replacement
+  + Removed `luya\web\CompositionAfterSetEvent` - no replacement
 
 ## 1.6.0
 
