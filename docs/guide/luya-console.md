@@ -38,7 +38,7 @@ Admin UI commands:
 |`admin/storage/cleanup`|Cleanup not existing files compare file system and database.
 |`admin/storage/cleanup-image-table`|Find if duplications are available in the image table (same filter and file id). If confirmed it will remove all duplications except of one, the first one created.
 |`admin/storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwise they are created on request load.
-|`admin/active-window/create`|Generate a [new ActiveWindow](ngrest-activewindow.md) class file based on your configuration.
+|`admin/active-window/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
 |`admin/crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
 |`admin/crud/model`|Generates only the [NgRestModel](ngrest-model.md). Usage `./vendor/bin/luya admin/crud/model "app\models\Customer"` 
 

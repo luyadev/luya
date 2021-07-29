@@ -27,7 +27,9 @@ This represents a guideline how words and proper nouns should be written in the 
 
 + LUYA – always capitalized
 + ActiveRecord
-+ ActiveWindow
++ Active Window
++ Active Button
++ Active Selection
 + admin UI – instead of Admin, admin module or Admin UI
 + AJAX
 + AngularJS

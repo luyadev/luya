@@ -1,16 +1,16 @@
-# NgRest ActiveWindow
+# NgRest Active Window
 
-An *NgRest ActiveWindow* is a concept to attach a modal window into a [NgRest CRUD list](ngrest-concept.md). The ActiveWindow is always bound to an **ID** of an item and is represented as a button with an icon and/or an alias, e.g. a button in the CRUD list:
+An *NgRest ActiveWindow* is a concept to attach a modal window into a [NgRest CRUD list](ngrest-concept.md). The Active Window is always bound to an **ID** of an item and is represented as a button with an icon and/or an alias, e.g. a button in the CRUD list:
 
-![button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aw_button.png "ActiveWindow button")
+![button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aw_button.png "Active Window button")
 
-An example of an ActiveWindow (Change Password) when clicked:
+An example of an Active Window (Change Password) when clicked:
 
-![overlay-window](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aw_window.png "ActiveWindow overlay")
+![overlay-window](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aw_window.png "Active Window overlay")
 
-## Create an ActiveWindow
+## Create an Active Window
 
-> Use the [`admin/active-window` console command](luya-console.md) to generate a new ActiveWindow.
+> Use the [`admin/active-window` console command](luya-console.md) to generate a new Active Window.
 
 A very basic example class with the name *TestActiveWindow* just renders an index and contains a callback:
 
@@ -33,7 +33,7 @@ class TestActiveWindow extends \luya\admin\ngrest\base\ActiveWindow
 }
 ```
 
-Some general information about ActiveWindows:
+Some general information about Active Windows:
 
 + The property `$module` is required and is used to determine the path for the views files.
 + The `index()` method is required and will always be the default method which is rendered by clicking on the button in the CRUD grid list.
@@ -46,11 +46,11 @@ Working with callbacks
 
 Calling the callbacks
 
-+ When a ActiveWindow callback is called the lower camelcase prefix method e.g. `callbackHelloWorld` must be called as `hello-world`.
++ When a Active Window callback is called the lower camelcase prefix method e.g. `callbackHelloWorld` must be called as `hello-world`.
 
 ## Attaching the class
 
-In order to add an ActiveWindow into your NgRest config it has to be added in the {{luya\admin\ngrest\base\NgRestModel::ngRestActive Windows()}} method. As the ActiveWindow contains the {{yii\base\BaseObject}} as extend class you can configure all public properties while the class is loading. Below, an example of how to load an ActiveWindow class and define `label` and `icon` public properties. The alias and icon properties are present in every ActiveWindow and can always be overridden.
+In order to add an Active Window into your NgRest config it has to be added in the {{luya\admin\ngrest\base\NgRestModel::ngRestActive Windows()}} method. As the Active Window contains the {{yii\base\BaseObject}} as extend class you can configure all public properties while the class is loading. Below, an example of how to load an Active Window class and define `label` and `icon` public properties. The alias and icon properties are present in every Active Window and can always be overridden.
 
 ```php
 public function ngRestActiveWindows()
@@ -78,7 +78,7 @@ This `My Windows Alias` button will only be shown for if the row `firstname` equ
 
 ### View files
 
-To render view files you can run the method `$this->render()` inside your ActiveWindow class. The render method will lookup for PHP view file based on the base path of your `$module` property. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` property and your ActiveWindow name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
+To render view files you can run the method `$this->render()` inside your Active Window class. The render method will lookup for PHP view file based on the base path of your `$module` property. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` property and your Active Window name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
 
 ## How to make a Button
 
@@ -137,7 +137,7 @@ public function callbackPostData($firstname, $lastname)
 
 ## AngularJS in view files
 
-As the admin UI is written in AngularJS which let´s you easily create inline AngularJS controllers to interact with your ActiveWindow class.
+As the admin UI is written in AngularJS which let´s you easily create inline AngularJS controllers to interact with your Active Window class.
 
 The below view file shows an AngularJS controller which collects data from the the controller assigned into the view but uses `ng-repeat to display and render the data.
 
@@ -161,7 +161,7 @@ zaa.bootstrap.register('InlineController', ['$scope', function($scope) {
 </div>
 ```
 
-After the ActiveWindow response from the function `addToList` has received the ActiveWindow will be reloaded. This is just a very quick integration example and it does not give the user a true AngularJS experience but shows you how to deliver solutions in a very short time.
+After the Active Window response from the function `addToList` has received the Active Window will be reloaded. This is just a very quick integration example and it does not give the user a true AngularJS experience but shows you how to deliver solutions in a very short time.
 
 When working with angular you might want to trigger some of the functions of the CRUD, here a list of what functions are callable and what they do:
 
@@ -206,9 +206,9 @@ To disable permission checks, you have to set the `permissionLevel` to am empty 
 ...
 ```
 
-## Existing reusable ActiveWindows
+## Existing reusable Active Windows
 
-The admin UI of LUYA provides some basic reusable ActiveWindows which you can reuse and use out of the box. Just attach them to your NgRest config with the given configuration. Take a look at the API reference for more details in how to attach the specific ActiveWindow.
+The admin UI of LUYA provides some basic reusable Active Windows which you can reuse and use out of the box. Just attach them to your NgRest config with the given configuration. Take a look at the API reference for more details in how to attach the specific Active Window.
 
 |Class|Description
 |--|--|

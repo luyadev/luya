@@ -73,7 +73,7 @@
   + [Forms in Blocks](lesson-blockform.md)
   + [Image slider Block](lesson-imagesliderblock.md)
   + [Admin and Frontend module](lesson-module.md)
-  + [Create an ActiveWindow](lesson-activewindow.md)
+  + [Create an Active Window](lesson-activewindow.md)
   + [Custom Angular Controller and Admin View](lesson-admin-custom-angular-view.md)
 + Developers
   + [Create Package (ext/module)](luya-package-dev.md)
