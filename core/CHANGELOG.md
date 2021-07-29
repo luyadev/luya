@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 2.0.1 (29. July 2021)
 
-+ Forgot to adjust the LUYA Version Constant in `luya\Boot::version`.
++ Forgot to adjust the LUYA Version Constant `luya\Boot::VERSION`.
 
 ## 2.0.0 (27. July 2021)
 
