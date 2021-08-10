@@ -35,7 +35,6 @@ Admin UI commands:
 |`admin/filter`|Generate a [Filter](app-filters.md) Class.
 |`admin/proxy`|Start the [content sync](concept-depandsync) process.
 |`admin/proxy/clear`|Flush the configuration setup for the content sync process.
-|`admin/storage/cleanup`|Cleanup not existing files compare file system and database.
 |`admin/storage/cleanup-image-table`|Find if duplications are available in the image table (same filter and file id). If confirmed it will remove all duplications except of one, the first one created.
 |`admin/storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwise they are created on request load.
 |`admin/active-window/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
