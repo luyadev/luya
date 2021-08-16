@@ -10,7 +10,13 @@ If you are using the CMS module in your application (which is installed by defau
 
 All CMS layouts are stored in the `views/cmslayouts` folder which is located in the base path of your project. If we create a new layout with e.g. 2 columns we just add a new view file to the CMS layouts folder like `views/cmslayouts/2columns.php`.
 
-You can now add HTML content to the new CMS layout file `2columns.php` but the most important is to let the CMS know on which part of the file the user can add content (blocks). To mark the area which can be filled with user content is called placeholder a can be defined with the $placeholders array `<?= $placeholders['YOUR_VARIABLE_NAME']; ?>`. In the example below we have made 2 placeholders for each column (left and right):
+You can now add HTML content to the new CMS layout file `2columns.php`, but the most important is to let the CMS know on which part of the file the user can add content (blocks). The area which can be filled with user content is called a placeholder and is defined with the `$placeholders` array:
+
+```php
+<?= $placeholders['YOUR_VARIABLE_NAME']; ?>
+```
+
+In the example below we have made 2 placeholders for each column (left and right):
 
 ```php
 <div class="row">
@@ -40,9 +46,9 @@ In order to provide a JSON, use the same name as for the layout with the ending 
 }
 ```
 
-Now the administration area knows how the placeholder columns are structured based on the the bootstrap4 grid system. The max amount of cols is 12.
+Now the administration area knows how the placeholder columns are structured based on the the Bootstrap 4 grid system. The maximum amount of `cols` is 12.
 
-You an also define multiple rows, here an advanced example for a layout with 4 placeholders:
+You can also define multiple rows, here an advanced example for a layout with 4 placeholders:
 
 ```json
 {
