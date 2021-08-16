@@ -6,11 +6,11 @@ Blocks are elements used in the CMS module to display and configure data. Blocks
 
 ## Create a new block
 
-> use `./vendor/bin/luya cms/block/create` console command to generate a Block.
+> Use `./vendor/bin/luya cms/block/create` console command to generate a block.
 
 You can add blocks to your application or to a module. In either case, the folder where the blocks are stored must be named as **blocks**. Additionally blocks should have the suffix `Block` in their filename.
 
-For example, we create a Block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
+For example, we create a block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
 
 This is how the `TextTransformBlock` could look like in your code:
 
@@ -66,7 +66,7 @@ public function getFieldHelp()
 
 > Read more about details regarding {{luya\cms\base\InternalBaseBlock:config()}} in [[app-block-types.md]].
 
-As we have switched to PHPBlock by default you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block, e.g. `TextTransformBlock.php`. 
+As we have switched to `PHPBlock` by default you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block, e.g. `TextTransformBlock.php`. 
 
 In the example above, the view file should look like this:
 
@@ -99,11 +99,11 @@ After creating a block, you have to *import* it into your application. The reaso
 ./vendor/bin/luya import
 ```
 
-This will add or update the Block into the CMS system. If you rename or remove a Block from your application, the old block will be deleted from your database.
+This will add or update the block into the CMS system. If you rename or remove a Block from your application, the old block will be deleted from your database.
 
 ### Module blocks
 
-When you add a block inside of a module you have to define the `$module` properties, this will ensure the view file will be found in the correct folder. This way, you can redistributed blocks with your own package to other users.
+When you add a block inside of a module you have to define the `$module` properties, this will ensure the view file will be found in the correct folder. This way, you can redistributed blocks with your own package to other users:
 
 ```php
 class TestBlock extends \luya\cms\base\PhpBlock
@@ -114,7 +114,7 @@ class TestBlock extends \luya\cms\base\PhpBlock
 
 ## Caching
 
-To speed up your system you can enable the cache for each block by the definition of a [caching component](http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-components) in your configs. Block caching is disabled by default for all blocks.
+To speed up your system you can enable the cache for each block by the definition of a [caching component](http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-components) in your configs. Block caching is disabled by default for all blocks:
 
 ```php
 class MyTestBlock extends \luya\cms\base\PhpBlock
@@ -144,7 +144,7 @@ The following keys are available:
 + **id**: Return the unique identifier from the CMS context
 + **blockId**: Returns the id of this block (unique identifier)
 + **context**: Returns frontend or backend to find out in which context you are.
-+ **pageObject**: Returns the {{\luya\cms\models\NavItem}} Object where you can run {{luya\cms\models\NavItem::getNav()}} to retrievew the Nav Object.
++ **pageObject**: Returns the {{\luya\cms\models\NavItem}} object where you can run {{luya\cms\models\NavItem::getNav()}} to retrieve the {{\luya\cms\models\Nav}} object.
 + **isFirst**: Returns whether this block is the first in its placeholder or not.
 + **isLast**: Return whether his block is the last in its placeholder or not.
 + **index**: Returns the number of the index/position within this placheholder.
@@ -176,16 +176,16 @@ The above example would only open the row element once and closes the row contai
 If there are any CMS properties defined you can access them like this:
 
 ```php
-$propObject = $this->getEnvOption('pageObject')->nav->getProperty('myCustomProperty');
+$propObject = $this->getEnvOption('pageObject')->navItem->nav->getProperty('myCustomProperty');
 ```
 
 If there is a property defined you will get the property object otherwise returning `false`.
 
 ## Register Assets and JavaScript/CSS
 
-Sometimes your block should also register some CSS or JavaScript files, therefore you can access the global {{\luya\web\View}} Object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
+Sometimes your block should also register some CSS or JavaScript files, therefore you can access the global {{\luya\web\View}} object inside of your PHP view template. It is quite similar to registering other assets with the difference that you are accessing the global scope view instead of the view on `$this`.
 
-Assuming the below code is the PHP View of your Block:
+Assuming the below code is the PHP view of your block:
 
 ```php
 MyBlockAsset::register($this);
@@ -193,7 +193,7 @@ MyBlockAsset::register($this);
 
 Now the [[app-assets.md]] is registered in the application view object.
 
-Its also possible to just register certain JavaScript or CSS code, there fore use `registerJs` or `registerCss` directly in the view files of the block.
+Its also possible to just register certain JavaScript or CSS code, there fore use `registerJs()` or `registerCss()` directly in the view files of the block.
 
 Registering some JavaScript code:
 
@@ -233,7 +233,7 @@ public function callbackHelloWorld($time)
 }
 ```
 
-The above callback requires the parameter `$time` and must be called trough an AJAX call inside of the JavaScript, to create the URL for this specific callback we are going to use `createAjaxLink`:
+The above callback requires the parameter `$time` and must be called trough an AJAX call inside of the JavaScript, to create the URL for this specific callback we are going to use `createAjaxLink()`:
 
 ```php
 $this->createAjaxLink('HellWorld', ['time' => time()]);
@@ -241,7 +241,7 @@ $this->createAjaxLink('HellWorld', ['time' => time()]);
 
 You could store this created link from above inside your extras vars and pass it to the JavaScript.
 
-You can pass additional values to the callback by using the post AJAX method and collect them in your callback via `Yii::$app->request->post(). The get parameters are used to resolve the callback.
+You can pass additional values to the callback by using the post AJAX method and collect them in your callback via `Yii::$app->request->post()`. The get parameters are used to resolve the callback.
 
 
 ## Block groups
@@ -331,5 +331,5 @@ Maybe the application block is not known inside the config files, then there is 
 
 ## Block preview
 
-To give the user a better understanding how you block could looks like you can store a jpeg image under `app/images/blocks` or `app/modules/yourmodule/images/blocks` with same name as the block e.g. `TextTransformBlock.jpg`.
+To give the user a better understanding how you block could looks like you can store a JPEG image under `app/images/blocks` or `app/modules/yourmodule/images/blocks` with same name as the block e.g. `TextTransformBlock.jpg`.
 This image will be display on hover over a block name in the navigation. Make sure that this file size is so small as possible (maybe use a image optimizer) and image size is under 400x400 pixel.
