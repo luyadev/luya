@@ -1,10 +1,10 @@
 # Admin CSS Styles
 
-All [Bootstrap 4](https://getbootstrap.com/) CSS styles and classes are available in the LUYA ADMIN UI. On top of thi,s LUYA provides generic CSS classes for buttons with predefined icons and colors.
+All [Bootstrap 4](https://getbootstrap.com/) CSS styles and classes are available in the LUYA admin UI. On top of this LUYA provides generic CSS classes for buttons with predefined icons and colors.
 
 ## Buttons
 
-The Bootstrap4 `btn` class is extended by some predefined colors which are assigned to specific function ( e.g. save, delete, abort). The following classes are available in the whole admin UI:
+The Bootstrap 4 `btn` class is extended by some predefined colors which are assigned to specific function (e.g. save, delete, abort). The following classes are available in the whole admin UI:
 
 ```html
 <button type="button" class="btn btn-save">Save</button>
@@ -18,7 +18,7 @@ The Bootstrap4 `btn` class is extended by some predefined colors which are assig
 <button type="button" class="btn btn-config">Configuration</button>
 ```
 
-You can combine the btn class with predefined icons, e.g. the use icons can be achieved by simply adding the CSS class `btn-icon` to the above listed button and the related icon will appear.
+You can combine the `btn` class with predefined icons, e.g. the use icons can be achieved by simply adding the CSS class `btn-icon` to the above listed button and the related icon will appear.
 
 ```html
 <button type="button" class="btn btn-save btn-icon">Save</button>
@@ -38,7 +38,7 @@ If you want a button `btn-icon` without a background simply add `btn-link`:
 <button type="button" class="btn btn-icon btn-link"><i class="material-icons">check</i>Link</button>
 ```
 
-Below some examples combinations:
+Below some example combinations:
 
 ```html
 <button type="button" class="btn btn-icon btn-save">Save button with icon and text</button>
@@ -48,32 +48,32 @@ Below some examples combinations:
  
 ## Icons
 
-Below, the tables show you which icon stands for what. The full set of usable icons is available under https://material.io/icons.
+Below, the table shows you which icon stands for what. The full set of usable icons is available under https://material.io/icons.
 
 | Description | Icon            | Name         |
 | ------------- | ------------- | ------------- |
-| Upload icon | <i class="material-icons">file_upload</i> | file_upload |
-| Download icon | <i class="material-icons">file_download</i> | file_download |
-| Edit icon | <i class="material-icons">edit</i> | edit |
-| Add icon | <i class="material-icons">add_box</i> | add_box |
-| Add icon for button | <i class="material-icons">add</i> | add |
-| Delete icon | <i class="material-icons">delete</i> | delete |
-| Save / Confirm icon | <i class="material-icons">check.png | check |
-| Abort / Clear icon | <i class="material-icons">clear</i>  | clear |
-| Config icon | <i class="material-icons">settings</i> | settings |
-| Settings icon | <i class="material-icons">more_vert</i> | more_vert |
-| Visible icon | <i class="material-icons">visibility</i> | visibility |
-| Invisible icon | <i class="material-icons">visibility_off</i> | visibility_off |
-| Online icon | <i class="material-icons">cloud_queue</i> | cloud_queue |
-| Offline icon | <i class="material-icons">cloud_off</i> | cloud_off |
-| Sort icon | <i class="material-icons">keyboard_arrow_down</i> <i class="material-icons">keyboard_arrow_up</i> | keyboard\_arrow\_down / keyboard\_arrow\_up |
-| Folder icon | <i class="material-icons">folder</i> | folder |
-| Create folder | <i class="material-icons">create_new_folder</i> | create_new_folder |
+| Upload icon | <i class="material-icons">file_upload</i> | `file_upload` |
+| Download icon | <i class="material-icons">file_download</i> | `file_download` |
+| Edit icon | <i class="material-icons">edit</i> | `edit` |
+| Add icon | <i class="material-icons">add_box</i> | `add_box` |
+| Add icon for button | <i class="material-icons">add</i> | `add` |
+| Delete icon | <i class="material-icons">delete</i> | `delete` |
+| Save / Confirm icon | <i class="material-icons">check.png | `check` |
+| Abort / Clear icon | <i class="material-icons">clear</i>  | `clear` |
+| Config icon | <i class="material-icons">settings</i> | `settings` |
+| Settings icon | <i class="material-icons">more_vert</i> | `more_vert` |
+| Visible icon | <i class="material-icons">visibility</i> | `visibility` |
+| Invisible icon | <i class="material-icons">visibility_off</i> | `visibility_off` |
+| Online icon | <i class="material-icons">cloud_queue</i> | `cloud_queue` |
+| Offline icon | <i class="material-icons">cloud_off</i> | `cloud_off` |
+| Sort icon | <i class="material-icons">keyboard_arrow_down</i> <i class="material-icons">keyboard_arrow_up</i> | `keyboard_arrow_down` / `keyboard_arrow_up` |
+| Folder icon | <i class="material-icons">folder</i> | `folder` |
+| Create folder icon | <i class="material-icons">create_new_folder</i> | `create_new_folder` |
 
 
 ## Forms
 
-The syntax we use to build the forms in LUYA ADMNI UI is as followed:
+The syntax we use to build the forms in LUYA admin UI is as follows:
 
 ```html
 <div class="form-group form-side-by-side">
