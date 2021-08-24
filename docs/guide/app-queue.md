@@ -65,3 +65,21 @@ The response from the push method is always the queue id, so you can check or st
 The Queue is by default conigured to allow 5 retrys of an error job each 5 minutes. So assuming the exectued job fails (throws a {{luya\Exception}} for instance) the queue waits 5 minutes until a next try is executed. This will be repeated until 5 trys are processed, then the job will be removed from the queue with status failed.
 
 An exception is therefore the expected error format to ensure the job will retry again. If the exception is part of your application ensure to surround the job logic with a try catch block.
+
+## Queue Image Filters
+
+Since version 4.0 of Admin Module its possible to queue the generating of image filters, this means that when a new image is uploaded, the filter versions of this image will be created in the queue and not in realtime when the image is uploaded, this can usefull to remove the load from the webserver and move it to the queue application which is running. Here is an example config of the storage system to generate the listed filters in the queue:
+
+```php
+$config->component('storage', [
+    'class' => 'luya\aws\S3FileSystem',
+    // ... more s3 config details
+    
+    // enable the queue filters
+    'queueFilters' => true,
+    // defines which filters should be created in the queue, its recommend to add the default filters and also maybe some project specific filters
+    'queueFiltersList' => ['tiny-crop', 'medium-crop', 'teaser', 'detail'],
+]);
+```
+
+See {{luya\admin\storage\BaseFileSystemStorage::$queueFilters}} for more details.
