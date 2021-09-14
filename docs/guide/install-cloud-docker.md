@@ -107,6 +107,7 @@ $config->component('assetManager', [
         return hash('md4', $path);
     }  
 ]);
+```
 
 #### Request Component
 
