@@ -29,14 +29,7 @@
 
 Current LUYA Organisation members with the respective role:
 
-|GitHub|Name|Role
-|------|----|----
-|[nadar](https://github.com/nadar)|Basil Suter|Project Lead
-|[TheMaaarc](https://github.com/TheMaaarc)|Marc Stampfli|Core Member
-|[dev7ch](https://github.com/dev7ch)|Silvan Hahn|Maintainer
-|[rolandschaub](https://github.com/rolandschaub)|Roland Schaub|Maintainer
-|[boehsermoe](https://github.com/boehsermoe)|Bennet Klarhölter|Maintainer
-|[martinpetrasch](https://github.com/martinpetrasch)|Martin Petrasch|Extension Manager
+[see Github People Tab](https://github.com/orgs/luyadev/people)
 
 ## 6. Roles
 
