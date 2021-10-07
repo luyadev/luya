@@ -43,14 +43,12 @@ When your custom tags are ready they need to be injected into the {{luya\TagPars
 In order to inject the created tag from above, add the `$tags` property to your application config (e.g. `configs/env-local.php`):
 
 ```php
-return [
-    'id' => 'myPage',
-    // ...
-    'tags' => [
-        'tooltip' => ['class' => 'app\tags\TooltipTag'],
-    ],
-    // ...
-];
+'id' => 'myPage',
+// ...
+'tags' => [
+    'tooltip' => ['class' => 'app\tags\TooltipTag'],
+],
+// ...
 ```
 
 After including the example tag in your config file it is available under the name **tooltip**. 
