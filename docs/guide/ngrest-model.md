@@ -57,24 +57,22 @@ public function ngRestScopes()
 }
 ```
 
-The primary key column will be auto added to the list scope, in order to hide the ID column set {{luya\admin\ngrest\base\Plugin::$hideInList}} but add the attribute to the list scope:
+The primary key column will be auto added to the list scope, in order to hide the ID column or other columns set {{luya\admin\ngrest\base\Plugin::$hideInList}} to `true` in `ngRestAttributeTypes()`. Be sure that the attribute is added to the `list` scope in `ngRestScopes()`:
 
 ```php
 public function ngRestAttributeTypes()
 {
     return [
         'id' => ['number', 'hideInList' => true],
+        //...
     ];
 }
-```
 
-Add to the list of attributes:
-
-```php
 public function ngRestScopes()
 {
     return [
         ['list', ['id', /* ... */ ]],
+        //...
     ];
 }
 ```
