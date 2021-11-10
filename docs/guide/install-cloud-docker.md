@@ -12,7 +12,7 @@ This chart illustrates what is required to make your Webserver stateless:
 2. Caching Server (e.g. Memcached)
 3. S3 compataible Storage (for file uploads, assets, etc.) working as a CDN
 
-> There different solutions you can use, for example its not required to have a shared caching system, but its strongly required as a single request can warm a cache state for all webservers!
+> There different solutions you can use, for example its not required to have a shared caching system, but its strongly recommended as a single request can warm a cache state for all webservers!
 
 ## Dockerize your Application
 
