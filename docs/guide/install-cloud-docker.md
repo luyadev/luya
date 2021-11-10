@@ -98,7 +98,7 @@ $config->component('assetManager', [
 ]);
 ```
 
-Without bucket, you can at least configured the asset manager to not create unique timestamp, this allows you to have multiple webservers at the same time:
+Without bucket, you can at least configured the asset manager to not create unique folder hashes, this allows you to have multiple webservers at the same time:
 
 ```php
 $config->component('assetManager', [
