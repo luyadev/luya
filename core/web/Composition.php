@@ -97,7 +97,6 @@ class Composition extends Component implements \ArrayAccess
     public $hostInfoMapping = [];
     
     /**
-     *
      * @var array|string An array with all valid hosts in order to ensure the request host is equals to valid hosts.
      * This filter provides protection against ['host header' attacks](https://www.acunetix.com/vulnerabilities/web/host-header-attack).
      *
@@ -118,6 +117,7 @@ class Composition extends Component implements \ArrayAccess
     public $allowedHosts;
     
     /**
+     * @var array An array where key is the pattern and value an array of possible values for this pattern.
      * A list of values which are valid for every pattern. If set and a value is provided which is not inside this property
      * an http not found exception is thrown.
      *
@@ -133,7 +133,6 @@ class Composition extends Component implements \ArrayAccess
      * > This configuration is usual only used in MVC applications without CMS module, as the cms module throws an
      * > exception if the requested language is not available.
      *
-     * @var array An array where key is the pattern and value an array of possible values for this pattern.
      * @since 1.0.15
      */
     public $expectedValues = [];
