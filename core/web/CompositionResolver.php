@@ -6,6 +6,7 @@ use yii\base\BaseObject;
 use luya\web\Request;
 use luya\helpers\Url;
 use luya\helpers\StringHelper;
+use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -168,11 +169,16 @@ class CompositionResolver extends BaseObject
 
             // the validation check for validates composition values is enabled
             if ($this->composition->expectedValues) {
-                foreach ($keys as $k => $v) {
-                    $possibleValues = $this->composition->expectedValues[$k];
+                foreach ($keys as $patternKey => $expectedPatternValue) {
 
-                    if (!in_array($v, $possibleValues)) {
-                        throw new NotFoundHttpException("The requested composition key \"{$k}\" with value \"{$v}\" is not in the possible values list.");
+                    if (!array_key_exists($patternKey, $this->composition->expectedValues)) {
+                        throw new InvalidConfigException("Invalid configuration, the expectedValues configuration key \"{$patternKey}\" does not exists in the resolved values list.");
+                    }
+
+                    $possibleValues = $this->composition->expectedValues[$patternKey];
+
+                    if (!in_array($expectedPatternValue, $possibleValues)) {
+                        throw new NotFoundHttpException("The requested composition key \"{$patternKey}\" with value \"{$expectedPatternValue}\" is not in the possible values list.");
                     }
                 }
             }
