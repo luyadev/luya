@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 2.0.2 (7. December 2021)
+
++ [#2113](https://github.com/luyadev/luya/pull/2113) Improve error handling for expected composition values configuration.
++ New translations for bg, fr, hu, pt and ro
+
 ## 2.0.1 (29. July 2021)
 
 + Forgot to adjust the LUYA Version Constant `luya\Boot::VERSION`.
