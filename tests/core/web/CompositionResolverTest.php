@@ -6,6 +6,7 @@ use luyatests\LuyaWebTestCase;
 use luya\web\CompositionResolver;
 use luya\web\Request;
 use luya\web\Composition;
+use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 
 class CompositionResolverTest extends LuyaWebTestCase
@@ -83,6 +84,23 @@ class CompositionResolverTest extends LuyaWebTestCase
 
         $resolver = new CompositionResolver($request, $composition);
         $this->expectException(NotFoundHttpException::class);
+        $resolver->resolvedValues;
+    }
+
+    public function testInvalidConfigurationForExpectedValues()
+    {
+        $request = new Request();
+        $request->pathInfo = '';
+        
+        $composition = new Composition($request);
+        $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
+        $composition->default = ['lang' => 'en', 'xyz' => 'foo'];
+        $composition->expectedValues = [
+            'doesnotexists' => ['en'],
+        ];
+
+        $resolver = new CompositionResolver($request, $composition);
+        $this->expectException(InvalidConfigException::class);
         $resolver->resolvedValues;
     }
 }

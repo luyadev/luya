@@ -177,7 +177,7 @@ class CompositionResolver extends BaseObject
 
                     $possibleValues = $this->composition->expectedValues[$patternKey];
 
-                    if (!in_array($v, $possibleValues)) {
+                    if (!in_array($expectedPatternValue, $possibleValues)) {
                         throw new NotFoundHttpException("The requested composition key \"{$patternKey}\" with value \"{$expectedPatternValue}\" is not in the possible values list.");
                     }
                 }
