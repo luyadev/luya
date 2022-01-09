@@ -4,7 +4,7 @@ A few tips to increase the security of your LUYA application in a production env
 
 ## Webserver & Files
 
-Make sure that your webserver points to the `public_html` directory, otherwise sensitive data contained in files might be exposed to the public. Preventing exposure is especially important with yml or env files. Therefore make sure not to commit the `.env` file from Docker, as it contains your access token!
+Make sure that your webserver points to the `public_html` directory, otherwise sensitive data contained in files might be exposed to the public. Preventing exposure is especially important with yml or env files. Therefore make sure not to commit the `.env` file from Docker, as it may contain your access token!
 
 ## DNS Wildcard
 
@@ -27,11 +27,10 @@ return [
     'id' => 'myapp',
     // ...
     'ensureSecureConnection' => true,
-    // ...
 ]
 ```
 
-When enabling `ensureSecureConnection` a few other security mechnism are triggered as well, like cookies use secure flag and a few headers will be set (Strict-Transport-Security, X-XSS-Protection, X-Frame-Options => "SAMEORIGIN".
+When enabling `ensureSecureConnection` a few other security mechnism are triggered as well, like cookies use secure flag and a few headers will be set `Strict-Transport-Security`, `X-XSS-Protection`, `X-Frame-Options => "SAMEORIGIN"` in order to prevent [Clickjacking](https://de.wikipedia.org/wiki/Clickjacking).
 
 ## Secure login
 
@@ -61,7 +60,7 @@ We recommend to enable the {{luya\admin\Module::$strongPasswordPolicy}} property
 
 ## Email verification
 
-With enabling of {{luya\admin\Module::$emailVerification}} the user can not change its e-mail until the verification code (which has been sent to the current email) has been entered. This makes it impossiable to overtake the current account and also not to lock yourself out by entering a wrong email.
+With enabling of {{luya\admin\Module::$emailVerification}} the user can not change its e-mail until the verification code (which has been sent to the current email) has been entered. This makes it harder to overtake the current account and also not to lock yourself out by entering a wrong email.
 
 ```php
 'admin' => [
