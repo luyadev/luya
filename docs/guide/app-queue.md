@@ -78,7 +78,7 @@ $config->component('storage', [
     // enable the queue filters
     'queueFilters' => true,
     // defines which filters should be created in the queue, its recommend to add the default filters and also maybe some project specific filters
-    'queueFiltersList' => ['tiny-crop', 'medium-crop', 'teaser', 'detail'],
+    'queueFiltersList' => ['tiny-crop', 'medium-thumbnail', 'teaser', 'detail'],
 ]);
 ```
 
