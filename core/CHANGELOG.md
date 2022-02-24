@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 2.0.3
 
-+ [#2118](https://github.com/luyadev/luya/pull/2118) Remove conflicting attributeLabels property from DynamicModel.
++ [#2118](https://github.com/luyadev/luya/pull/2118) Removed conflicting `$attributeLabels` property from DynamicModel (Yii provides this option since 2.0.35, therefore not required by LUYA anymore).
 
 ## 2.0.2 (7. December 2021)
 
