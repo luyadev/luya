@@ -39,13 +39,10 @@ The content for `composer.json` would be:
         "luyadev/luya-core" : "^1.0"
     },
     "config": {
-        "fxp-asset" : {
-            "pattern-skip-version": "(-build|-patch)",
-             "installer-paths": {
-                "bower-asset-library": "vendor/bower"
-            }
-        }   
-    }
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
 }
 ```
 
