@@ -193,17 +193,13 @@ Above example will add the TestActiveWindow button if the user has the VIEW perm
 If `permissionLevel` attribute is not set, the default behavior is applied which is `CAN_UPDATE` permission is required.
 
 ```php
-...
-        ['class' => \luya\admin\aws\TestActiveWindow::className(), 'label' => 'My Window'],
-...
+['class' => \luya\admin\aws\TestActiveWindow::className(), 'label' => 'My Window'],
 ```
 
 To disable permission checks, you have to set the `permissionLevel` to am empty string: 
 
 ```php
-...
-        ['class' => \luya\admin\aws\TestActiveWindow::className(), 'label' => 'My Window', 'permissionLevel' => ''],
-...
+['class' => \luya\admin\aws\TestActiveWindow::className(), 'label' => 'My Window', 'permissionLevel' => ''],
 ```
 
 ## Existing reusable Active Windows
