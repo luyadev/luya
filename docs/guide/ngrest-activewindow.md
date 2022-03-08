@@ -50,7 +50,7 @@ Calling the callbacks
 
 ## Attaching the class
 
-In order to add an Active Window into your NgRest config it has to be added in the {{luya\admin\ngrest\base\NgRestModel::ngRestActive Windows()}} method. As the Active Window contains the {{yii\base\BaseObject}} as extend class you can configure all public properties while the class is loading. Below, an example of how to load an Active Window class and define `label` and `icon` public properties. The alias and icon properties are present in every Active Window and can always be overridden.
+In order to add an Active Window into your NgRest config it has to be added in the {{luya\admin\ngrest\base\NgRestModel::ngRestActiveWindows()}} method. As the Active Window contains the {{yii\base\BaseObject}} as extend class you can configure all public properties while the class is loading. Below, an example of how to load an Active Window class and define `label` and `icon` public properties. The alias and icon properties are present in every Active Window and can always be overridden.
 
 ```php
 public function ngRestActiveWindows()
