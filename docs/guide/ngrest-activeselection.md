@@ -52,7 +52,7 @@ public function ngRestActiveSelections()
                 // sends a reload event, so the ngrest list will be reloaded afterwards. 
                 $context->sendReloadEvent();
 
-                return $context->sendSuccess('We did, what you teached.')
+                return $context->sendSuccess('We did, what you teached.');
             }
         ]
     ]
