@@ -76,6 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - run: git config --global url."https://".insteadOf git://
       - run: yarn
       - run: sudo apt-get install xvfb
       - run: xvfb-run --auto-servernum yarn test
