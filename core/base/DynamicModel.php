@@ -32,7 +32,7 @@ class DynamicModel extends \yii\base\DynamicModel
      *
      * @param array $hints Array of attribute hints
      * @return $this
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public function setAttributeHints(array $hints)
     {
@@ -44,7 +44,7 @@ class DynamicModel extends \yii\base\DynamicModel
      * Get all hints for backwards compatibility.
      * 
      * @return array
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public function getAttributeHints()
     {
