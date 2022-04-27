@@ -2,7 +2,7 @@
   "name": "luya",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://git@github.com:luyadev/luya.git",
+  "repository": "git@github.com:luyadev/luya.git",
   "author": "Marc Stampfli <marc@zephir.ch>",
   "license": "MIT",
   "devDependencies": {
