@@ -60,22 +60,36 @@ class JsonBehavior extends Behavior
     public $decodeAfterFind = true;
     
     /**
+     * @var array An Array with all events which should be attached. Based on {{$encodeBeforeValidate}} and {{$decodeAfterFind}} the array will automatically receive certain events. The main goal for this property is
+     * to have the option to attach events by yourself. For example it could be useful to decode values on ngrest find.
+     * 
+     * ```php
+     * [
+     *     'class' => JsonBehavior::class,
+     *     'events' => [NgRestModel::EVENT_AFTER_NGREST_FIND => 'decodeAttributes']
+     *     'attributes' => ['my_super_json_attribute'],
+     * ]
+     * ```
+     * @since 2.1.0
+     */
+    public $events = [];
+
+    /**
      * @inheritdoc
      */
     public function events()
     {
-        $events = [];
         if ($this->encodeBeforeValidate) {
-            $events[ActiveRecord::EVENT_BEFORE_VALIDATE] = 'encodeAttributes';
+            $this->events[ActiveRecord::EVENT_BEFORE_VALIDATE] = 'encodeAttributes';
         } else {
-            $events[ActiveRecord::EVENT_AFTER_VALIDATE] = 'encodeAttributes';
+            $this->events[ActiveRecord::EVENT_AFTER_VALIDATE] = 'encodeAttributes';
         }
 
         if ($this->decodeAfterFind) {
-            $events[ActiveRecord::EVENT_AFTER_FIND] = 'decodeAttributes';
+            $this->events[ActiveRecord::EVENT_AFTER_FIND] = 'decodeAttributes';
         }
 
-        return $events;
+        return $this->events;
     }
     
     /**
