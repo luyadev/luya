@@ -55,13 +55,33 @@ Als you can triggere events for certain situations. Assuming you are going to mo
 
 ## Attaching the Button
 
-An Active Button can be attached inside every {{luya\admin\ngrest\base\NgRest}} model trough the {{luya\admin\ngrest\base\NgRest::ngRestActiveButtons()}} method.
+An Active Button can be attached inside every {{luya\admin\ngrest\base\NgRestModel}} model trough the {{luya\admin\ngrest\base\NgRestModel::ngRestActiveButtons()}} method.
 
 ```php
 public function ngRestActiveButtons()
 {
     return [
         ['class' => '\path\to\ActiveButtonClass'],
+    ];
+}
+```
+
+An example of how to override the label and icon defined in the button:
+
+```php
+public function ngRestActiveButtons()
+{
+    return [
+        [
+            'class' => ActiveButtonClass::class,
+            'icon' => 'thumb_up',
+            'label' => 'Approve',
+        ],
+        [
+            'class' => ActiveButtonClass::class,
+            'icon' => 'thumb_down',
+            'label' => 'Decline'
+        ],
     ];
 }
 ```
