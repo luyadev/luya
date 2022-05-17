@@ -81,19 +81,19 @@ class PhoneNumberValidator extends Validator
             $number = $phoneUtil->parse($value, $this->country);
 
             if (!$number || !$phoneUtil->isValidNumber($number)) {
-                return [Yii::t('luya', 'Invalid phone number.')];
+                return [Yii::t('luya', 'Invalid phone number.'), []];
             }
 
             if ($this->type !== null && ($phoneUtil->getNumberType($number) !== $this->type)) {
                 $typeName = PhoneNumberType::values()[$this->type];
-                return [Yii::t('luya', 'The phone number does not match the required type {name}.', ['name' => $typeName])];
+                return [Yii::t('luya', 'The phone number does not match the required type {name}.', ['name' => $typeName]), []];
             }
 
             // refactor the phone number and store in property for later use
             $this->formatedValue = $phoneUtil->format($number, $this->autoFormatFormat);
 
         } catch (NumberParseException $exception) {
-            return [Yii::t('luya', 'Invalid phone number, ensure it starts with the correct country code.')];
+            return [Yii::t('luya', 'Invalid phone number, ensure it starts with the correct country code.'), []];
         }
 
         return null;

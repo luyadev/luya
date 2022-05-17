@@ -91,6 +91,22 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
         );
         $this->assertTrue($model->hasErrors());
     }
+
+    public function testStandAloneValidationError()
+    {
+        $validator = new PhoneNumberValidator(['type' => PhoneNumberType::MOBILE]);
+        $validator->validate('123123', $error);
+        $this->assertSame('Invalid phone number, ensure it starts with the correct country code.', $error);
+    }
+
+    public function testStandAloneValidationSuccess()
+    {
+        $validator = new PhoneNumberValidator(['type' => PhoneNumberType::MOBILE]);
+        $validator->validate('+41791234567', $error);
+        $this->assertEmpty($error);
+        $this->assertSame('+41791234567', $validator->formatedValue);
+        
+    }
 }
 
 class StubModelValidatorPhone extends Model
