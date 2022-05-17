@@ -86,7 +86,7 @@ class PhoneNumberValidator extends Validator
 
             if ($this->type !== null && ($phoneUtil->getNumberType($number) !== $this->type)) {
                 $typeName = PhoneNumberType::values()[$this->type];
-                return [Yii::t('luya', 'The phone number does not match the required type {name}.', ['name' => $typeName]];
+                return [Yii::t('luya', 'The phone number does not match the required type {name}.', ['name' => $typeName])];
             }
 
             // refactor the phone number and store in property for later use
