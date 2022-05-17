@@ -42,6 +42,12 @@ class PhoneNumberValidator extends Validator
     public $autoFormatFormat = PhoneNumberFormat::E164;
 
     /**
+     * @var string This property will recieved the formated value (the parsed value lets say).
+     * @since 2.2.0
+     */
+    public $formatedValue = null;
+
+    /**
      * @var integer If enabled, the validator will check the type of number. This can be usefull to test for mobile phone numbers.
      *
      * An example to check for mobile phone numbers:
@@ -57,28 +63,39 @@ class PhoneNumberValidator extends Validator
      */
     public function validateAttribute($model, $attribute)
     {
-        $phoneUtil = PhoneNumberUtil::getInstance();
+        parent::validateAttribute($model, $attribute);
 
-        $value = $model->{$attribute};
+        if ($this->autoFormat) {
+            $model->{$attribute} = $this->formatedValue;   
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function validateValue($value)
+    {
+        $phoneUtil = PhoneNumberUtil::getInstance();
 
         try {
             $number = $phoneUtil->parse($value, $this->country);
 
             if (!$number || !$phoneUtil->isValidNumber($number)) {
-                return $this->addError($model, $attribute, Yii::t('luya', 'Invalid phone number.'));
+                return [Yii::t('luya', 'Invalid phone number.'), []];
             }
 
             if ($this->type !== null && ($phoneUtil->getNumberType($number) !== $this->type)) {
                 $typeName = PhoneNumberType::values()[$this->type];
-                return $this->addError($model, $attribute, Yii::t('luya', 'The phone number does not match the required type {name}.', ['name' => $typeName]));
+                return [Yii::t('luya', 'The phone number does not match the required type {name}.', ['name' => $typeName]), []];
             }
 
-            // refactor the phone number
-            if ($this->autoFormat) {
-                $model->{$attribute} = $phoneUtil->format($number, $this->autoFormatFormat);
-            }
+            // refactor the phone number and store in property for later use
+            $this->formatedValue = $phoneUtil->format($number, $this->autoFormatFormat);
+
         } catch (NumberParseException $exception) {
-            $this->addError($model, $attribute, Yii::t('luya', 'Invalid phone number, ensure it starts with the correct country code.'));
+            return [Yii::t('luya', 'Invalid phone number, ensure it starts with the correct country code.'), []];
         }
+
+        return null;
     }
 }
