@@ -19,9 +19,7 @@ return [
 ]
 ```
 
-This means the storage system is always a direct implementation of what type of file system is used.
-
-Here is an example file configuration if you need to have the option to upload insecure files like csv or svgs:
+This means the storage system is always a direct implementation of what type of file system is used. Here is an example file configuration if you need to have the option to upload insecure files like csv or svgs:
 
 ```php
 return [
@@ -30,7 +28,7 @@ return [
         'storage' => [
             'class' => 'luya\admin\filesystem\LocalFileSystem',
             'whitelistExtensions' => ['csv', 'svg'],
-            'whitelistMimeTypes' => ['text/plain'], // as this is the mime type for csv files
+            'whitelistMimeTypes' => ['text/plain', 'image/svg+xml'], // as this is the mime type for csv files
          ]
     ]
 ]
