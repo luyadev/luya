@@ -38,7 +38,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: curl, dom, imagick, intl, mbstring, mcrypt, memcached, mysql, pdo, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql, sqlite
-          ini-values: date.timezone='UTC'
+          ini-values: date.timezone='UTC',error_reporting=E_ALL,display_errors=On
           coverage: xdebug
 
       ## install composer
