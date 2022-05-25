@@ -3,8 +3,9 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 2.2.0 ()
+## 2.2.0 (25. May 2022)
 
++ [#2147](https://github.com/luyadev/luya/pull/2147) PHP 8.1 compatibility
 + [#2124](https://github.com/luyadev/luya/pull/2124) `luya\validators\PhoneNumberValidator` can now be used as standalone validator like this: `(new PhoneNumberValidator())->validate('+411231245')`.
 
 ## 2.1.0 (27. April 2022)
