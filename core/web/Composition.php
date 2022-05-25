@@ -438,6 +438,7 @@ class Composition extends Component implements \ArrayAccess
      * @param string $offset The key to get from the array.
      * @return mixed The value for the offset key from the array.
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->getKey($offset, null);
