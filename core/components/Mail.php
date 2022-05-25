@@ -141,7 +141,7 @@ class Mail extends Component
                 }
                 $this->_mailer->isSMTP();
                 $this->_mailer->SMTPSecure = $this->smtpSecure;
-                $this->_mailer->Host = $this->host;
+                $this->_mailer->Host = (string) $this->host;
                 $this->_mailer->SMTPAuth= $this->smtpAuth;
                 $this->_mailer->Username = $this->username;
                 $this->_mailer->Password = $this->password;
@@ -495,7 +495,7 @@ class Mail extends Component
         
         try {
             // connect to an SMTP server
-            if ($smtp->connect($this->host, $this->port)) {
+            if ($smtp->connect((string) $this->host, $this->port)) {
                 // yay hello
                 if ($smtp->hello('localhost')) {
                     if ($smtp->authenticate($this->username, $this->password)) {
