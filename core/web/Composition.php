@@ -411,6 +411,7 @@ class Composition extends Component implements \ArrayAccess
      * @see \ArrayAccess::offsetExists()
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->_keys[$offset]);
@@ -418,12 +419,13 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * ArrayAccess set value to array.
-     *
+     * 
      * @see \ArrayAccess::offsetSet()
      * @param string $offset The key of the array
      * @param mixed $value The value for the offset key.
      * @throws \luya\Exception
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->setKey($offset, $value);
@@ -450,6 +452,7 @@ class Composition extends Component implements \ArrayAccess
      * @param string $offset The key to unset from the array.
      * @throws \luya\Exception
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         throw new Exception('Deleting keys in Composition is not allowed.');
