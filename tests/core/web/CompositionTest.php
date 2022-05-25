@@ -106,6 +106,7 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('ch', $resolved['countryShortCode']);
         $this->assertArrayHasKey('langShortCode', $resolved);
         $this->assertEquals('de', $resolved['langShortCode']);
+        $this->assertEquals('de', $composition['langShortCode']);
     }
 
    

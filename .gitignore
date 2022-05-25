@@ -5,6 +5,7 @@
 *~.nib
 *.launch
 .DS_Store
+.phpunit*
 composer.lock
 
 ### ECLIPSE

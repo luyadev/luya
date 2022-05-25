@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        php: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0']
+        php: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
       
     services:
       mysql:
@@ -38,7 +38,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: curl, dom, imagick, intl, mbstring, mcrypt, memcached, mysql, pdo, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql, sqlite
-          ini-values: date.timezone='UTC'
+          ini-values: date.timezone='UTC',error_reporting=E_ALL,display_errors=On
           coverage: xdebug
 
       ## install composer
@@ -54,7 +54,7 @@ jobs:
       ## run unit tests
       - name: PHP Unit tests for PHP 
         run: vendor/bin/phpunit --verbose --configuration actions.phpunit.xml
-        if: matrix.php == '8.0' || matrix.php == '7.4' || matrix.php == '7.3' || matrix.php == '7.2' || matrix.php == '7.0'
+        if: matrix.php == '8.1' || matrix.php == '8.0' || matrix.php == '7.4' || matrix.php == '7.3' || matrix.php == '7.2' || matrix.php == '7.0'
 
       ## unit test with coverage
       - name: PHP Unit tests for PHP 7.1

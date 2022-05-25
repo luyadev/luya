@@ -131,7 +131,7 @@ class Mail extends Component
         if ($this->_mailer === null) {
             $this->_mailer = new PHPMailer();
             $this->_mailer->CharSet = 'UTF-8';
-            $this->_mailer->setFrom($this->from, $this->fromName);
+            $this->_mailer->setFrom((string) $this->from, (string) $this->fromName);
             $this->_mailer->isHTML(true);
             $this->_mailer->XMailer = ' ';
             // if sending over smtp, define the settings for the smpt server
@@ -141,7 +141,7 @@ class Mail extends Component
                 }
                 $this->_mailer->isSMTP();
                 $this->_mailer->SMTPSecure = $this->smtpSecure;
-                $this->_mailer->Host = $this->host;
+                $this->_mailer->Host = (string) $this->host;
                 $this->_mailer->SMTPAuth= $this->smtpAuth;
                 $this->_mailer->Username = $this->username;
                 $this->_mailer->Password = $this->password;
@@ -495,7 +495,7 @@ class Mail extends Component
         
         try {
             // connect to an SMTP server
-            if ($smtp->connect($this->host, $this->port)) {
+            if ($smtp->connect((string) $this->host, $this->port)) {
                 // yay hello
                 if ($smtp->hello('localhost')) {
                     if ($smtp->authenticate($this->username, $this->password)) {

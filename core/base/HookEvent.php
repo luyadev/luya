@@ -60,21 +60,37 @@ final class HookEvent extends BaseObject implements \ArrayAccess
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->iteration($value, $offset);
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->_iterations[$offset]);
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->_iterations[$offset]);
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->_iterations[$offset]) ? $this->_iterations[$offset] : null;

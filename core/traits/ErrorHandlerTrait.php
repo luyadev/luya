@@ -123,7 +123,7 @@ trait ErrorHandlerTrait
         $curl = new Curl();
         $curl->setOpt(CURLOPT_CONNECTTIMEOUT, 2);
         $curl->setOpt(CURLOPT_TIMEOUT, 2);
-        $curl->post(Url::ensureHttp(rtrim($this->api, '/')).'/create', [
+        $curl->post(Url::ensureHttp(rtrim((string) $this->api, '/')).'/create', [
             'error_json' => Json::encode($data),
         ]);
         $this->lastTransferCall = $curl;
