@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 2.2.1
+
++ [#2152](https://github.com/luyadev/luya/issues/2152) Fix issue when creating a LUYA theme on Windows.
+
 ## 2.2.0 (25. May 2022)
 
 + [#2147](https://github.com/luyadev/luya/pull/2147) PHP 8.1 compatibility
