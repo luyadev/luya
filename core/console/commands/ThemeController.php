@@ -60,7 +60,7 @@ class ThemeController extends \luya\console\Command
         }
         
         $basePath = $themeLocation . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName;
-        $themeFolder = Yii::getAlias($basePath);
+        $themeFolder = Yii::getAlias($themeLocation) . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName;
         
         if (file_exists($themeFolder)) {
             return $this->outputError("The folder " . $themeFolder . " exists already.");
