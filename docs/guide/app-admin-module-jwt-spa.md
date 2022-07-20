@@ -83,9 +83,10 @@ class User extends \luya\admin\ngrest\base\NgRestModel implements luya\admin\bas
         return $this->id;
     }
 
-    public static function loginByJwtToken(\Lcobucci\JWT\Token $token)
+    public static function loginByJwtToken(\Lcobucci\JWT\Token\Plain $token)
     {
-        return self::findOne(['jwtToken' => $token->__toString()]);
+        // $userId = $token->claims()->get('uid');
+        return self::findOne(['jwtToken' => $token->toString()]);
     }
 }
 ```
