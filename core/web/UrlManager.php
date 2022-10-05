@@ -272,12 +272,13 @@ class UrlManager extends \yii\web\UrlManager
      * @param string|array $params Use a string to represent a route (e.g. `site/index`), or an array to represent a route with query parameters (e.g. `['site/index', 'param1' => 'value1']`).
      * @param integer $navItemId The nav item Id
      * @param null|\luya\web\Composition $composition Optional other composition config instead of using the default composition
+     * @param boolean $scheme Whether to use absolute scheme path or not. This can be either `http`, `https`, `true` or `false`
      * @return string
      */
-    public function createMenuItemUrl($params, $navItemId, $composition = null)
+    public function createMenuItemUrl($params, $navItemId, $composition = null, $scheme = false)
     {
         $composition = empty($composition) ? $this->getComposition() : $composition;
-        $url = $this->internalCreateUrl($params, $composition);
+        $url = $scheme ? $this->internalCreateAbsoluteUrl($params, $scheme, $composition) : $this->internalCreateUrl($params, $composition);
 
         if (!$this->menu) {
             return $url;
@@ -324,12 +325,13 @@ class UrlManager extends \yii\web\UrlManager
      *
      * @param string|array $params The see createUrl
      * @param boolean $scheme Whether to use absolute scheme path or not.
+     * @param null|\luya\web\Composition $composition Composition instance to change the route behavior
      * @return string The created url
      */
-    public function internalCreateAbsoluteUrl($params, $scheme = null)
+    public function internalCreateAbsoluteUrl($params, $scheme = null, $composition = null)
     {
         $params = (array) $params;
-        $url = $this->internalCreateUrl($params);
+        $url = $this->internalCreateUrl($params, $composition);
         if (strpos($url, '://') === false) {
             $url = $this->getHostInfo() . $url;
         }

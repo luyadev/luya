@@ -11,7 +11,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -29,16 +29,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.6.0",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
+                "url": "git@github.com:jquery/jquery-dist.git",
+                "reference": "3711efedf0ca2e998cd0417324f717f2e0b828ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/e786e3d9707ffd9b0dd330ca135b66344dcef85a",
-                "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/3711efedf0ca2e998cd0417324f717f2e0b828ec",
+                "reference": "3711efedf0ca2e998cd0417324f717f2e0b828ec"
             },
             "type": "bower-asset",
             "license": [
@@ -147,16 +147,16 @@
         },
         {
             "name": "curl/curl",
-            "version": "2.3.2",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "8a3e3f1cb6061180c53cb18e2ad823f68ff91ac0"
+                "reference": "ba385e40c5907850c555db24505c127fe29f1e44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/8a3e3f1cb6061180c53cb18e2ad823f68ff91ac0",
-                "reference": "8a3e3f1cb6061180c53cb18e2ad823f68ff91ac0",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/ba385e40c5907850c555db24505c127fe29f1e44",
+                "reference": "ba385e40c5907850c555db24505c127fe29f1e44",
                 "shasum": ""
             },
             "require": {
@@ -199,26 +199,36 @@
             ],
             "support": {
                 "issues": "https://github.com/php-mod/curl/issues",
-                "source": "https://github.com/php-mod/curl/tree/2.3.2"
+                "source": "https://github.com/php-mod/curl/tree/2.4.0"
             },
-            "time": "2021-04-11T19:00:09+00:00"
+            "time": "2022-08-29T08:52:24+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.14.0",
+            "version": "v4.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "12ab42bd6e742c70c0a52f7b82477fcd44e64b75"
+                "reference": "523407fb06eb9e5f3d59889b3978d5bfe94299c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/12ab42bd6e742c70c0a52f7b82477fcd44e64b75",
-                "reference": "12ab42bd6e742c70c0a52f7b82477fcd44e64b75",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/523407fb06eb9e5f3d59889b3978d5bfe94299c8",
+                "reference": "523407fb06eb9e5f3d59889b3978d5bfe94299c8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2"
+                "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0"
+            },
+            "require-dev": {
+                "cerdic/css-tidy": "^1.7 || ^2.0",
+                "simpletest/simpletest": "dev-master"
+            },
+            "suggest": {
+                "cerdic/css-tidy": "If you want to use the filter 'Filter.ExtractStyleBlocks'.",
+                "ext-bcmath": "Used for unit conversion and imagecrash protection",
+                "ext-iconv": "Converts text to and from non-UTF-8 encodings",
+                "ext-tidy": "Used for pretty-printing HTML"
             },
             "type": "library",
             "autoload": {
@@ -250,26 +260,26 @@
             ],
             "support": {
                 "issues": "https://github.com/ezyang/htmlpurifier/issues",
-                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.14.0"
+                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.16.0"
             },
-            "time": "2021-12-25T01:21:49+00:00"
+            "time": "2022-09-18T07:06:19+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.12.28",
+            "version": "8.12.56",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "f503d56d269e9b8572440820ef029e296dadaa1e"
+                "reference": "0f6481df7bee33fe0ed87d2af06770527a2e1c86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/f503d56d269e9b8572440820ef029e296dadaa1e",
-                "reference": "f503d56d269e9b8572440820ef029e296dadaa1e",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/0f6481df7bee33fe0ed87d2af06770527a2e1c86",
+                "reference": "0f6481df7bee33fe0ed87d2af06770527a2e1c86",
                 "shasum": ""
             },
             "require": {
-                "giggsey/locale": "^1.7",
+                "giggsey/locale": "^1.7|^2.0",
                 "php": ">=5.3.2",
                 "symfony/polyfill-mbstring": "^1.17"
             },
@@ -325,36 +335,37 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2021-07-20T13:33:24+00:00"
+            "time": "2022-09-23T15:16:03+00:00"
         },
         {
             "name": "giggsey/locale",
-            "version": "1.9",
+            "version": "2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/Locale.git",
-                "reference": "b07f1eace8072ccc61445ad8fbd493ff9d783043"
+                "reference": "9c1dca769253f6a3e81f9a5c167f53b6a54ab635"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/Locale/zipball/b07f1eace8072ccc61445ad8fbd493ff9d783043",
-                "reference": "b07f1eace8072ccc61445ad8fbd493ff9d783043",
+                "url": "https://api.github.com/repos/giggsey/Locale/zipball/9c1dca769253f6a3e81f9a5c167f53b6a54ab635",
+                "reference": "9c1dca769253f6a3e81f9a5c167f53b6a54ab635",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": ">=7.2"
             },
             "require-dev": {
+                "ext-json": "*",
                 "pear/pear-core-minimal": "^1.9",
                 "pear/pear_exception": "^1.0",
                 "pear/versioncontrol_git": "^0.5",
-                "phing/phing": "~2.7",
-                "php-coveralls/php-coveralls": "^1.0|^2.0",
-                "phpunit/phpunit": "^4.8|^5.0",
-                "symfony/console": "^2.8|^3.0|^4.0",
-                "symfony/filesystem": "^2.8|^3.0|^4.0",
-                "symfony/finder": "^2.8|^3.0|^4.0",
-                "symfony/process": "^2.8|^3.0|^4.0"
+                "phing/phing": "^2.7",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^8.5|^9.5",
+                "symfony/console": "^5.0",
+                "symfony/filesystem": "^5.0",
+                "symfony/finder": "^5.0",
+                "symfony/process": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -370,15 +381,15 @@
                 {
                     "name": "Joshua Gigg",
                     "email": "giggsey@gmail.com",
-                    "homepage": "http://giggsey.com/"
+                    "homepage": "https://giggsey.com/"
                 }
             ],
             "description": "Locale functions required by libphonenumber-for-php",
             "support": {
                 "issues": "https://github.com/giggsey/Locale/issues",
-                "source": "https://github.com/giggsey/Locale/tree/master"
+                "source": "https://github.com/giggsey/Locale/tree/2.2"
             },
-            "time": "2020-07-07T11:16:24+00:00"
+            "time": "2022-04-06T07:33:59+00:00"
         },
         {
             "name": "luyadev/luya-composer",
@@ -436,16 +447,16 @@
         },
         {
             "name": "luyadev/yii-helpers",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/yii-helpers.git",
-                "reference": "9956ed63f516110c2b588471507b870e748c4cfb"
+                "reference": "6ec9996a7443c4ba1bf4f92178cf58121a4723d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/yii-helpers/zipball/9956ed63f516110c2b588471507b870e748c4cfb",
-                "reference": "9956ed63f516110c2b588471507b870e748c4cfb",
+                "url": "https://api.github.com/repos/luyadev/yii-helpers/zipball/6ec9996a7443c4ba1bf4f92178cf58121a4723d8",
+                "reference": "6ec9996a7443c4ba1bf4f92178cf58121a4723d8",
                 "shasum": ""
             },
             "require": {
@@ -473,9 +484,9 @@
             "description": "Static helper methods in addition to the Yii Framework.",
             "support": {
                 "issues": "https://github.com/luyadev/yii-helpers/issues",
-                "source": "https://github.com/luyadev/yii-helpers/tree/1.2.1"
+                "source": "https://github.com/luyadev/yii-helpers/tree/1.2.2"
             },
-            "time": "2022-04-21T12:44:04+00:00"
+            "time": "2022-07-20T12:41:59+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -529,16 +540,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.5.0",
+            "version": "v6.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "a5b5c43e50b7fba655f793ad27303cd74c57363c"
+                "reference": "a94fdebaea6bd17f51be0c2373ab80d3d681269b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/a5b5c43e50b7fba655f793ad27303cd74c57363c",
-                "reference": "a5b5c43e50b7fba655f793ad27303cd74c57363c",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/a94fdebaea6bd17f51be0c2373ab80d3d681269b",
+                "reference": "a94fdebaea6bd17f51be0c2373ab80d3d681269b",
                 "shasum": ""
             },
             "require": {
@@ -550,10 +561,12 @@
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "doctrine/annotations": "^1.2",
+                "php-parallel-lint/php-console-highlighter": "^1.0.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3.2",
                 "phpcompatibility/php-compatibility": "^9.3.5",
                 "roave/security-advisories": "dev-latest",
-                "squizlabs/php_codesniffer": "^3.5.6",
-                "yoast/phpunit-polyfills": "^0.2.0"
+                "squizlabs/php_codesniffer": "^3.6.2",
+                "yoast/phpunit-polyfills": "^1.0.0"
             },
             "suggest": {
                 "ext-mbstring": "Needed to send email in multibyte encoding charset or decode encoded addresses",
@@ -593,7 +606,7 @@
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "support": {
                 "issues": "https://github.com/PHPMailer/PHPMailer/issues",
-                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.5.0"
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.6.4"
             },
             "funding": [
                 {
@@ -601,24 +614,27 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-16T14:33:43+00:00"
+            "time": "2022-08-22T09:22:00+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.23.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "2df51500adbaebdc4c38dea4c89a2e131c45c8a1"
+                "reference": "9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2df51500adbaebdc4c38dea4c89a2e131c45c8a1",
-                "reference": "2df51500adbaebdc4c38dea4c89a2e131c45c8a1",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e",
+                "reference": "9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
+            },
+            "provide": {
+                "ext-mbstring": "*"
             },
             "suggest": {
                 "ext-mbstring": "For best performance"
@@ -626,7 +642,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.23-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -634,12 +650,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -665,7 +681,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.23.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.26.0"
             },
             "funding": [
                 {
@@ -681,20 +697,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-27T09:27:20+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.45",
+            "version": "2.0.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "e2223d4085e5612aa616635f8fcaf478607f62e8"
+                "reference": "d73259c3bc886648a6875109f9f09cddeff03708"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/e2223d4085e5612aa616635f8fcaf478607f62e8",
-                "reference": "e2223d4085e5612aa616635f8fcaf478607f62e8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/d73259c3bc886648a6875109f9f09cddeff03708",
+                "reference": "d73259c3bc886648a6875109f9f09cddeff03708",
                 "shasum": ""
             },
             "require": {
@@ -803,7 +819,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-11T13:12:40+00:00"
+            "time": "2022-08-18T22:18:45+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -890,5 +906,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }
