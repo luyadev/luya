@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 2.2.1
 
++ [#2159](https://github.com/luyadev/luya/pull/2159) Added missing option to create menu items with a scheme instead of relative paths.
 + [#2152](https://github.com/luyadev/luya/issues/2152) Fix issue when creating a LUYA theme on Windows.
 
 ## 2.2.0 (25. May 2022)
