@@ -220,7 +220,18 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         Yii::$app->controller = new UrlStubController('stub', Yii::$app->getModule('unitmodule'));
 
         $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3);
-       
+        $this->assertSame('this-is-a-cms-link/controller/action', $r);
+
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3, null, 'https');
+        $this->assertSame('https://localhost/this-is-a-cms-link/controller/action', $r);
+
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3, null, 'http');
+        $this->assertSame('http://localhost/this-is-a-cms-link/controller/action', $r);
+
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3, null, true);
+        $this->assertSame('http://localhost/this-is-a-cms-link/controller/action', $r);
+
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3, null, false);
         $this->assertSame('this-is-a-cms-link/controller/action', $r);
     }
 
@@ -234,8 +245,9 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         Yii::$app->controller = new UrlStubController('stub', Yii::$app->getModule('unitmodule'));
 
         $r = $urlManager->createMenuItemUrl(['othermodule/controller/action'], 3);
-
         $this->assertStringContainsString('/othermodule/controller/action', $r);
+        $r = $urlManager->createMenuItemUrl(['othermodule/controller/action'], 3, null, 'https');
+        $this->assertStringContainsString('https://localhost', $r);
     }
     
     public function testCreateMenuItemUrlWithHomeItem()
@@ -246,8 +258,10 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $this->assertNotFalse($menu);
         
         $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3);
-        
         $this->assertStringContainsString('/unitmodule/controller/action', $r);
+
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3, null, 'https');
+        $this->assertStringContainsString('https://localhost', $r);
     }
     
     public function testCreateMenuItemUrlRedirectType2()
@@ -260,8 +274,10 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         Yii::$app->controller = new UrlStubController('stub', Yii::$app->getModule('unitmodule'));
 
         $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 2);
-         
         $this->assertSame('this-is-a-module-type-page/controller/action', $r);
+
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 2, null, 'http');
+        $this->assertSame('http://localhost/this-is-a-module-type-page/controller/action', $r);
     }
 
     public function testCreateMenuItemUrlRedirectType2ToOtherModule()
@@ -274,7 +290,6 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         Yii::$app->controller = new UrlStubController('stub', Yii::$app->getModule('unitmodule'));
 
         $r = $urlManager->createMenuItemUrl(['othermodule/controller/action'], 2);
-
         $this->assertStringContainsString('/othermodule/controller/action', $r);
     }
     
@@ -287,8 +302,6 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
     
         $this->expectException('yii\web\BadRequestHttpException');
         $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 1);
-         
-        $this->assertSame('this-is-a-cms-link/controller/action', $r);
     }
     
     public function testCreateMenuItemUrlButUnableToFindModuleInRoute()
