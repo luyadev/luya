@@ -66,7 +66,7 @@ You can now log into the administration interface, e.g. `http://localhost/luya-k
 
 ## Docker (docker-compose)
 
-When you run the LUYA Kickstarter with docker-compose (see the docker-compose.yml for more details) you start the Docker container by using
+When you run the LUYA Kickstarter with docker-compose (see the [docker-compose.yml](https://github.com/luyadev/luya-kickstarter/blob/master/docker-compose.yml) for more details) you start the Docker container by using
 
 ```
 docker-compose up
@@ -83,6 +83,8 @@ This will run the migrate, import and setup command with a default user `admin@a
 ```
 docker-compose exec luya_web luya <console_command>
 ```
+
+Since the Dockerimage is running on port 80, the docker-compose maps the internal [https://github.com/luyadev/luya-kickstarter/blob/master/docker-compose.yml#L27](port 80 to your machines port 8080) so you can now access your website in the browser under `localhost:8080`.
 
 ---
 
