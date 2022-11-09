@@ -14,6 +14,7 @@ namespace luya\web\jsonld;
  */
 class Place extends BaseThing implements PlaceInterface
 {
+    use PlaceTrait;
     /**
      * @inheritdoc
      */
@@ -21,6 +22,4 @@ class Place extends BaseThing implements PlaceInterface
     {
         return 'Place';
     }
-    
-    use PlaceTrait;
 }

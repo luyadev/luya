@@ -2,11 +2,11 @@
 
 namespace luya\console;
 
-use Yii;
-use yii\helpers\Console;
-use yii\console\Controller as BaseController;
 use luya\helpers\ObjectHelper;
+use Yii;
 use yii\base\InvalidCallException;
+use yii\console\Controller as BaseController;
+use yii\helpers\Console;
 
 /**
  * Console Controller base class.
@@ -97,7 +97,7 @@ abstract class Controller extends BaseController
 
         return 0;
     }
-    
+
     /**
      * Helper method to stop the console command with a info message which is threated in case of returns as success
      * but does have a different output color (blue). outputInfo returns exit code 0.
@@ -108,7 +108,7 @@ abstract class Controller extends BaseController
     public function outputInfo($message)
     {
         $this->output($message, Console::FG_CYAN);
-        
+
         return 0;
     }
 }

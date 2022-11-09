@@ -22,7 +22,7 @@ class ContactPoint extends BaseThing
     }
 
     private $_email;
-    
+
     /**
      * Setter method for email.
      *
@@ -34,7 +34,7 @@ class ContactPoint extends BaseThing
         $this->_email = $email;
         return $this;
     }
-    
+
     /**
      * Getter method for email.
      *
@@ -44,9 +44,9 @@ class ContactPoint extends BaseThing
     {
         return $this->_email;
     }
-    
+
     private $_telephone;
-    
+
     /**
      * Setter method for telephone.
      *
@@ -58,7 +58,7 @@ class ContactPoint extends BaseThing
         $this->_telephone = $telephone;
         return $this;
     }
-    
+
     /**
      * Getter method for telephone.
      *
@@ -122,7 +122,7 @@ class ContactPoint extends BaseThing
     {
         return $this->_availableLanguage;
     }
-    
+
     private $_contactType;
 
     /**

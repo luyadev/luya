@@ -12,7 +12,7 @@ namespace luya\web\jsonld;
 class ImageObject extends BaseThing implements ImageObjectInterface
 {
     use ImageObjectTrait;
-    
+
     /**
      * @inheritdoc
      */

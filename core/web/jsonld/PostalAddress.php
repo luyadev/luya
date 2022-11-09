@@ -148,7 +148,7 @@ class PostalAddress extends ContactPoint
     {
         return $this->_postalCode;
     }
-    
+
     private $_streetAddress;
 
     /**

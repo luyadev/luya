@@ -17,28 +17,28 @@ use yii\base\InvalidConfigException;
 class ThemeConfig extends BaseObject implements Arrayable
 {
     use ArrayableTrait;
-    
+
     /**
      * @var string The pretty name of the theme.
      */
     public $name;
-    
+
     /**
      * @var string Base path (or alias) of the parent theme.
      */
     public $parentTheme;
-    
+
     /**
      * @var array Additional path to override by this theme.
      * @see \luya\theme\Theme::getAdditionalPathMap
      */
     public $pathMap = [];
-    
+
     /**
      * @var string Some information about the theme.
      */
     public $description;
-    
+
     /**
      * ThemeConfig constructor with base path of the theme directory and config as array.
      *
@@ -52,12 +52,12 @@ class ThemeConfig extends BaseObject implements Arrayable
         if (!is_readable(Yii::getAlias($basePath))) {
             throw new InvalidConfigException("The path of $basePath is not readable or not exists.");
         }
-    
+
         $this->_basePath = $basePath;
-    
+
         parent::__construct($config);
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -66,12 +66,12 @@ class ThemeConfig extends BaseObject implements Arrayable
         if (empty($this->name)) {
             $this->name = basename($this->_basePath);
         }
-        
+
         parent::init();
     }
-    
+
     protected $_parent;
-    
+
     /**
      * Load the config of the parent theme.
      *
@@ -84,10 +84,10 @@ class ThemeConfig extends BaseObject implements Arrayable
         if ($this->_parent === null && $this->parentTheme) {
             $this->_parent = Yii::$app->themeManager->getThemeByBasePath($this->parentTheme);
         }
-        
+
         return $this->_parent;
     }
-    
+
     /**
      * Set the parent theme config. Is only required while initialize this class.
      *
@@ -97,7 +97,7 @@ class ThemeConfig extends BaseObject implements Arrayable
     {
         $this->_parent = $themeConfig;
     }
-    
+
     /**
      * Load all parent themes recursive in a ordered array. First entry is the parent of this theme, seconds entry is the parent of the parent and so on.
      *
@@ -108,18 +108,18 @@ class ThemeConfig extends BaseObject implements Arrayable
     public function getParents()
     {
         $parents = [];
-        
+
         $parent = $this->getParent();
         if ($parent) {
             $parents[] = $parent;
             $parents = array_merge($parents, $parent->getParents());
         }
-        
+
         return $parents;
     }
 
     private $_basePath;
-    
+
     /**
      * Base path (or alias) to the theme directory.
      *
@@ -129,7 +129,7 @@ class ThemeConfig extends BaseObject implements Arrayable
     {
         return $this->_basePath;
     }
-    
+
     /**
      * Path to view directory of the theme.
      *

@@ -58,7 +58,7 @@ class Hook extends BaseObject
     public static function on($name, $value, $prepend = false)
     {
         $object = new HookEvent(['handler' => $value]);
-        
+
         if ($prepend) {
             array_unshift(static::$_hooks[$name], $object);
         } else {
@@ -77,12 +77,12 @@ class Hook extends BaseObject
     {
         if (isset(static::$_hooks[$name])) {
             $events = [];
-            
+
             foreach (static::$_hooks[$name] as $hookEvent) {
                 if ($hookEvent->isHandled) {
                     continue;
                 }
-                
+
                 if (is_array($hookEvent->handler)) {
                     $hookEvent->output = call_user_func_array($hookEvent->handler, [$hookEvent]);
                 } elseif (is_callable($hookEvent->handler)) {
@@ -90,9 +90,9 @@ class Hook extends BaseObject
                 } else {
                     throw new Exception("The provided hook event handler is not valid.");
                 }
-                
+
                 $hookEvent->isHandled = true;
-                
+
                 if ($hookEvent->isValid) {
                     $events[] = $hookEvent;
                 }
@@ -103,7 +103,7 @@ class Hook extends BaseObject
 
         return [];
     }
-    
+
     /**
      * Get the string output of the hooks.
      *
@@ -116,10 +116,10 @@ class Hook extends BaseObject
         foreach (self::trigger($name) as $hook) {
             $buffer[] = $hook->output;
         }
-        
+
         return implode("", $buffer);
     }
-    
+
     /**
      * Get the array output of iteration hooks.
      *
@@ -132,7 +132,7 @@ class Hook extends BaseObject
         foreach (self::trigger($name) as $hook) {
             $buffer = array_merge($buffer, $hook->getIterations());
         }
-        
+
         return $buffer;
     }
 }

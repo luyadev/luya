@@ -12,9 +12,9 @@ namespace luya\web\jsonld;
 trait PropertyValueTrait
 {
     use ThingTrait;
-    
+
     private $_maxValue;
-    
+
     /**
      * @inheritdoc
      *
@@ -23,10 +23,10 @@ trait PropertyValueTrait
     public function setMaxValue($maxValue)
     {
         $this->_maxValue = $maxValue;
-        
+
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -34,9 +34,9 @@ trait PropertyValueTrait
     {
         return $this->_maxValue;
     }
-    
+
     private $_minValue;
-    
+
     /**
      * @inheritdoc
      *
@@ -45,10 +45,10 @@ trait PropertyValueTrait
     public function setMinValue($minValue)
     {
         $this->_minValue = $minValue;
-       
+
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -56,9 +56,9 @@ trait PropertyValueTrait
     {
         return $this->_minValue;
     }
-    
+
     private $_measurementTechnique;
-    
+
     /**
      * @inheritdoc
      *
@@ -67,10 +67,10 @@ trait PropertyValueTrait
     public function setMeasurementTechnique($measurementTechnique)
     {
         $this->_measurementTechnique = $measurementTechnique;
-        
+
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -78,9 +78,9 @@ trait PropertyValueTrait
     {
         return $this->_measurementTechnique;
     }
-    
+
     private $_propertyId;
-    
+
     /**
      * @inheritdoc
      *
@@ -89,10 +89,10 @@ trait PropertyValueTrait
     public function setPropertyID($propertyID)
     {
         $this->_propertyId = $propertyID;
-        
+
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -100,9 +100,9 @@ trait PropertyValueTrait
     {
         return $this->_propertyId;
     }
-    
+
     private $_unitCode;
-    
+
     /**
      * @inheritdoc
      *
@@ -111,10 +111,10 @@ trait PropertyValueTrait
     public function setUnitCode($unitCode)
     {
         $this->_unitCode = $unitCode;
-        
+
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -122,9 +122,9 @@ trait PropertyValueTrait
     {
         return $this->_unitCode;
     }
-    
+
     private $_unitText;
-    
+
     /**
      * @inheritdoc
      *
@@ -133,10 +133,10 @@ trait PropertyValueTrait
     public function setUnitText($uniText)
     {
         $this->_unitText = $uniText;
-        
+
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -144,9 +144,9 @@ trait PropertyValueTrait
     {
         return $this->_unitText;
     }
-    
+
     private $_value;
-    
+
     /**
      * @inheritdoc
      *
@@ -155,10 +155,10 @@ trait PropertyValueTrait
     public function setValue($value)
     {
         $this->_value = $value;
-        
+
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */

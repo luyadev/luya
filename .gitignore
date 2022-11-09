@@ -38,3 +38,4 @@ node_modules/
 /repos/
 /devconfig.json
 luya
+.php-cs-fixer

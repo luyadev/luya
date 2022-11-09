@@ -2,10 +2,10 @@
 
 namespace luyatests\core\behaviors;
 
-use luyatests\LuyaWebTestCase;
-use yii\base\ModelEvent;
 use luya\behaviors\Timestamp;
 use luyatests\data\models\DummyBaseModel;
+use luyatests\LuyaWebTestCase;
+use yii\base\ModelEvent;
 
 class TimestampTest extends LuyaWebTestCase
 {
@@ -13,24 +13,24 @@ class TimestampTest extends LuyaWebTestCase
     {
         $event = new ModelEvent();
         $event->sender = new DummyBaseModel();
-         
+
         $behavior = new Timestamp();
         $behavior->insert = ['foo'];
         $behavior->beforeInsert($event);
-         
+
         $this->assertNotNull($event->sender->foo);
         $this->assertNull($event->sender->bar);
     }
-    
+
     public function testUpdateEvent()
     {
         $event = new ModelEvent();
         $event->sender = new DummyBaseModel();
-         
+
         $behavior = new Timestamp();
         $behavior->update = ['foo'];
         $behavior->beforeUpdate($event);
-         
+
         $this->assertNotNull($event->sender->foo);
         $this->assertNull($event->sender->bar);
     }

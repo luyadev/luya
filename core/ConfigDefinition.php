@@ -13,27 +13,27 @@ class ConfigDefinition
     /**
      * @var integer componenets group
      */
-    const GROUP_COMPONENTS = 1;
+    public const GROUP_COMPONENTS = 1;
 
     /**
      * @var integer modules group
      */
-    const GROUP_MODULES = 2;
+    public const GROUP_MODULES = 2;
 
     /**
      * @var integer applications group
      */
-    const GROUP_APPLICATIONS = 3;
+    public const GROUP_APPLICATIONS = 3;
 
     /**
      * @var integer boostrap section group
      */
-    const GROUP_BOOTSTRAPS = 4;
+    public const GROUP_BOOTSTRAPS = 4;
 
     /**
      * @var integer a group of callables
      */
-    const GROUP_CALLABLE = 5;
+    public const GROUP_CALLABLE = 5;
 
     private $_group;
 
@@ -84,7 +84,7 @@ class ConfigDefinition
 
         return $this;
     }
-    
+
     /**
      * Set console runtime
      *

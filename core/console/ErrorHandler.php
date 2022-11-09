@@ -13,7 +13,7 @@ use luya\traits\ErrorHandlerTrait;
 class ErrorHandler extends \yii\console\ErrorHandler
 {
     use ErrorHandlerTrait;
-    
+
     /**
      * @var string This propertie has been added in order to make sure console commands config
      * does also work in console env.

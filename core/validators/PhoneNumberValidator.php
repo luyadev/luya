@@ -66,7 +66,7 @@ class PhoneNumberValidator extends Validator
         parent::validateAttribute($model, $attribute);
 
         if ($this->autoFormat) {
-            $model->{$attribute} = $this->formatedValue;   
+            $model->{$attribute} = $this->formatedValue;
         }
     }
 
@@ -91,7 +91,6 @@ class PhoneNumberValidator extends Validator
 
             // refactor the phone number and store in property for later use
             $this->formatedValue = $phoneUtil->format($number, $this->autoFormatFormat);
-
         } catch (NumberParseException $exception) {
             return [Yii::t('luya', 'Invalid phone number, ensure it starts with the correct country code.'), []];
         }

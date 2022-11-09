@@ -12,7 +12,7 @@ namespace luya\web\jsonld;
 class Comment extends BaseThing implements CommentInterface
 {
     use CommentTrait;
-    
+
     /**
      * @inheritdoc
      */

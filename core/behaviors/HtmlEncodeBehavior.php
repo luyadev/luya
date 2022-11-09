@@ -2,9 +2,9 @@
 
 namespace luya\behaviors;
 
+use luya\helpers\Html;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use luya\helpers\Html;
 
 /**
  * Auto Encodes value after find.
@@ -42,7 +42,7 @@ class HtmlEncodeBehavior extends Behavior
             ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
         ];
     }
-    
+
     /**
      * Event will be triggered after find.
      *
@@ -54,7 +54,7 @@ class HtmlEncodeBehavior extends Behavior
             $this->owner->{$attribute} = $this->htmlEncode($this->owner->{$attribute});
         }
     }
-    
+
     /**
      * Encodes the given value based on {{luya\helpers\Html::encode()}}.
      *

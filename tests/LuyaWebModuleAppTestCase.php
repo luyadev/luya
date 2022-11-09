@@ -2,8 +2,8 @@
 
 namespace luyatests;
 
-use luya\testsuite\cases\BaseTestSuite;
 use luya\base\Boot;
+use luya\testsuite\cases\BaseTestSuite;
 
 require 'vendor/autoload.php';
 require 'data/env.php';
@@ -14,7 +14,7 @@ class LuyaWebModuleAppTestCase extends BaseTestSuite
     {
         return include(__DIR__ .'/data/configs/webmoduleapp.php');
     }
-    
+
     public function bootApplication(Boot $boot)
     {
         $boot->applicationWeb();

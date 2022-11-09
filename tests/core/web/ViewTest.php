@@ -3,9 +3,9 @@
 namespace luyatests\core\web;
 
 use luya\theme\Theme;
-use Yii;
-use luya\web\View;
 use luya\web\Asset;
+use luya\web\View;
+use Yii;
 
 class TestAsset extends Asset
 {
@@ -28,14 +28,14 @@ class ViewTest extends \luyatests\LuyaWebTestCase
 
         $this->assertSame('<p> foo bar </p>', $view->compress('    <p> foo    bar      </p>'));
     }
-    
+
     public function testUknownAssetUrl()
     {
         $this->expectException('luya\Exception');
         $view = new View();
         $view->getAssetUrl('Uknown');
     }
-    
+
     public function testGetPublicHtml()
     {
         $view = new View();

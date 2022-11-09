@@ -14,6 +14,7 @@ namespace luya\web\jsonld;
  */
 class LiveBlogPosting extends BaseThing implements LiveBlogPostingInterface
 {
+    use LiveBlogPostingTrait;
     /**
      * @inheritdoc
      */
@@ -21,6 +22,4 @@ class LiveBlogPosting extends BaseThing implements LiveBlogPostingInterface
     {
         return 'LiveBlogPosting';
     }
-
-    use LiveBlogPostingTrait;
 }

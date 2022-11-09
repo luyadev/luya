@@ -23,7 +23,7 @@ class JsonBehaviorTest extends LuyaWebTestCase
         $this->assertSame('{"foo":"bar"}', $model->json);
 
         $model->trigger(ActiveRecord::EVENT_AFTER_FIND);
-        
+
         $this->assertSame(['foo' => 'bar'], $model->json);
     }
 
@@ -41,7 +41,7 @@ class JsonBehaviorTest extends LuyaWebTestCase
         $this->assertSame('[1,2,3]', $model->json);
 
         $model->trigger(ActiveRecord::EVENT_AFTER_FIND);
-        
+
         $this->assertSame([1,2,3], $model->json);
     }
 
@@ -59,15 +59,14 @@ class JsonBehaviorTest extends LuyaWebTestCase
         $this->assertSame('[1,2,3]', $model->json);
 
         $model->trigger(ActiveRecord::EVENT_AFTER_FIND);
-        
+
         $this->assertSame([1,2,3], $model->json);
 
         $model->trigger(ActiveRecord::EVENT_AFTER_FIND);
-        
+
         $this->assertSame([1,2,3], $model->json);
 
         $this->assertSame('[1,2]', $model->jsonEncode('[1,2]'));
-
     }
 
     public function testExpectedDefaultBehavior()

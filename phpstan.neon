@@ -1,0 +1,7 @@
+parameters:
+  level: 0
+  paths:
+    - src
+  bootstrapFiles:
+    - vendor/yiisoft/yii2/Yii.php
+  tmpDir: .tmp

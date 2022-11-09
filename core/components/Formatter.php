@@ -61,7 +61,7 @@ class Formatter extends \yii\i18n\Formatter
      * See {{\luya\component\Formatter::$datetimeFormat}} for more informations about valid values.
      */
     public $datetimeFormats = [];
-    
+
     /**
      * @var array An array with time formats to use as default values where the key is the local language and value
      * the format to use for the given language.
@@ -87,16 +87,16 @@ class Formatter extends \yii\i18n\Formatter
         if (isset($this->dateFormats[$this->locale])) {
             $this->dateFormat = $this->dateFormats[$this->locale];
         }
-        
+
         if (isset($this->datetimeFormats[$this->locale])) {
             $this->datetimeFormat = $this->datetimeFormats[$this->locale];
         }
-        
+
         if (isset($this->timeFormats[$this->locale])) {
             $this->timeFormat = $this->timeFormats[$this->locale];
         }
     }
-   
+
     /**
      * Auto format the value to a given format like url, email.
      *
@@ -115,17 +115,17 @@ class Formatter extends \yii\i18n\Formatter
         if ((new EmailValidator())->validate($value)) {
             return $this->asEmail($value);
         }
-        
+
         // url validator
         if ((new UrlValidator())->validate($value)) {
             return $this->asUrl($value);
         }
-        
+
         // boolean type
         if (is_bool($value)) {
             return $this->asBoolean($value);
         }
-        
+
         return $value;
     }
 }

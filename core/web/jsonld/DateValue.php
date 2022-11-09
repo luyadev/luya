@@ -13,7 +13,7 @@ namespace luya\web\jsonld;
 class DateValue extends BaseValue
 {
     private $_date;
-    
+
     /**
      * Provide date data.
      *
@@ -23,7 +23,7 @@ class DateValue extends BaseValue
     {
         $this->_date = $date;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -32,7 +32,7 @@ class DateValue extends BaseValue
         if (is_numeric($this->_date)) {
             $this->_date = date("Y-m-d", $this->_date);
         }
-        
+
         return $this->_date;
     }
 }

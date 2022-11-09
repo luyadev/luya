@@ -2,9 +2,9 @@
 
 namespace luya\console;
 
+use luya\base\Module;
 use luya\console\interfaces\ImportControllerInterface;
 use yii\base\BaseObject;
-use luya\base\Module;
 
 /**
  * Base class for all Importer classes.
@@ -33,11 +33,11 @@ use luya\base\Module;
  */
 abstract class Importer extends BaseObject
 {
-    const QUEUE_POSITION_FIRST = 0;
+    public const QUEUE_POSITION_FIRST = 0;
 
-    const QUEUE_POSITION_MIDDLE = 50;
+    public const QUEUE_POSITION_MIDDLE = 50;
 
-    const QUEUE_POSITION_LAST = 100;
+    public const QUEUE_POSITION_LAST = 100;
 
     /**
      * @var int The priority between 0 and 100 where to Import command should be queued.
@@ -55,7 +55,7 @@ abstract class Importer extends BaseObject
      * @var \luya\base\Module Read only module object property.
      */
     private $_module;
-    
+
     /**
      * Class constructor containing the importer object from where its called.
      *
@@ -65,7 +65,7 @@ abstract class Importer extends BaseObject
     {
         $this->_importer = $importer;
         $this->_module = $module;
-        
+
         parent::__construct($config);
     }
 
@@ -78,7 +78,7 @@ abstract class Importer extends BaseObject
     {
         return $this->_importer;
     }
-    
+
     /**
      * Returns the module object where the command has been found.
      *

@@ -2,9 +2,9 @@
 
 namespace luya\web;
 
-use Yii;
 use luya\Exception;
 use luya\helpers\FileHelper;
+use Yii;
 
 /**
  * HTML Element Component.
@@ -79,7 +79,7 @@ class Element extends \yii\base\Component
      * @var string The path to the folder where the view files to render can be found.
      */
     public $viewsFolder = '@app/views/elements/';
-    
+
     /**
      * @var array Contains all registered elements.
      */
@@ -142,7 +142,7 @@ class Element extends \yii\base\Component
     public function addElement($name, $closure, $mockedArgs = [])
     {
         $this->_elements[$name] = $closure;
-        
+
         $this->mockArgs($name, $mockedArgs);
     }
 
@@ -156,7 +156,7 @@ class Element extends \yii\base\Component
     {
         return array_key_exists($name, $this->_elements);
     }
-    
+
     /**
      * Returns an array with all registered Element-Names.
      *
@@ -176,7 +176,7 @@ class Element extends \yii\base\Component
     {
         return $this->_elements;
     }
-    
+
     /**
      * Renders the closure for the given name and returns the content.
      *
@@ -190,7 +190,7 @@ class Element extends \yii\base\Component
         if (!array_key_exists($name, $this->_elements)) {
             throw new Exception("The requested element '$name' does not exist in the list. You may register the element first with `addElement(name, closure)`.");
         }
-    
+
         return call_user_func_array($this->_elements[$name], $params);
     }
 
@@ -208,9 +208,9 @@ class Element extends \yii\base\Component
 
         return $this->_folder;
     }
-    
+
     private $_mockedArguments = [];
-    
+
     /**
      * Mock arguments for an element in order to render those inside the styleguide.
      *
@@ -221,7 +221,7 @@ class Element extends \yii\base\Component
     {
         $this->_mockedArguments[$elementName] = $args;
     }
-    
+
     /**
      * Find the mocked value for an element argument.
      *
@@ -238,7 +238,7 @@ class Element extends \yii\base\Component
             }
             return $response;
         }
-        
+
         return false;
     }
 

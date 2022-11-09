@@ -16,6 +16,7 @@ namespace luya\web\jsonld;
  */
 class Event extends BaseThing implements EventInterface
 {
+    use EventTrait;
     /**
      * @inheritdoc
      */
@@ -23,6 +24,4 @@ class Event extends BaseThing implements EventInterface
     {
         return 'Event';
     }
-    
-    use EventTrait;
 }

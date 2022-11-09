@@ -2,16 +2,16 @@
 
 namespace luyatests\core\base;
 
-use Yii;
 use luya\base\BaseBootstrap;
 use luya\web\Application;
+use Yii;
 
 class CustomBootstrap extends BaseBootstrap
 {
     public function beforeRun($app)
     {
     }
-    
+
     public function run($app)
     {
     }
@@ -26,7 +26,7 @@ class BaseBootstrapTest extends \luyatests\LuyaWebTestCase
         $this->assertTrue($bs->hasModule('unitmodule'));
         $this->assertFalse($bs->hasModule('notexistingmodule'));
     }
-    
+
     public function testEmptyModules()
     {
         $app = new Application(['id' => '123', 'basePath' => '']);

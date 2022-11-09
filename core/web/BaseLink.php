@@ -2,9 +2,9 @@
 
 namespace luya\web;
 
-use yii\base\BaseObject;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
+use yii\base\BaseObject;
 
 /**
  * The basic class for LinkInterface object.
@@ -16,8 +16,9 @@ use yii\base\ArrayableTrait;
  */
 abstract class BaseLink extends BaseObject implements LinkInterface, Arrayable
 {
-    use LinkTrait, ArrayableTrait;
-    
+    use LinkTrait;
+    use ArrayableTrait;
+
     /**
      * @inheritdoc
      */

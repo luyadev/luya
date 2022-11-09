@@ -7,9 +7,9 @@ use yii\base\Model;
 class DummyBaseModel extends Model
 {
     public $foo;
-    
+
     public $bar;
-    
+
     public function rules()
     {
         return [

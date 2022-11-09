@@ -2,9 +2,9 @@
 
 namespace luya\web\jsonld;
 
+use luya\helpers\StringHelper;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
-use luya\helpers\StringHelper;
 use yii\base\BaseObject;
 
 /**
@@ -18,9 +18,9 @@ use yii\base\BaseObject;
 abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
 {
     use ThingTrait;
-    
+
     use ArrayableTrait { toArray as protected internalToArray; }
-    
+
     /**
      * Contains the jsonLd definton @type value if not null or false.
      *
@@ -30,7 +30,7 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
     {
         return false;
     }
-    
+
     /**
      * Find all getter methods.
      *
@@ -40,36 +40,36 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
     {
         $resolved = [];
         $methods = get_class_methods($this);
-        
+
         if (!$methods) {
             return [];
         }
-        
+
         foreach ($methods as $method) {
             if (StringHelper::startsWith($method, 'get', true)) {
                 $resolved[] = lcfirst(StringHelper::replaceFirst('get', '', $method));
             }
         }
-        
+
         asort($resolved);
-        
+
         return $resolved;
     }
-    
+
     /**
      * @inheritdoc
      */
     public function toArray(array $fields = [], array $expand = [], $recursive = true)
     {
         $array = $this->removeEmptyValues($this->internalToArray($fields, $expand, $recursive));
-        
+
         if ($this->typeDefintion()) {
             $array['@type'] = $this->typeDefintion();
         }
-        
+
         return $array;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -77,7 +77,7 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
     {
         return $this->resolveGetterMethods();
     }
-    
+
     /**
      * Cleanup array from null values.
      *
@@ -95,7 +95,7 @@ abstract class BaseThing extends BaseObject implements Arrayable, ThingInterface
                 unset($haystack[$key]);
             }
         }
-        
+
         return $haystack;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace luyatests\core\web\filters;
 
-use Yii;
-use luyatests\LuyaWebTestCase;
 use luya\web\Controller;
 use luya\web\filters\RobotsFilter;
+use luyatests\LuyaWebTestCase;
+use Yii;
 
 class StubRobotsController extends Controller
 {
@@ -18,7 +18,7 @@ class StubRobotsController extends Controller
             ]
         ];
     }
-    
+
     public function actionTest()
     {
         return 'foobar';
@@ -35,7 +35,7 @@ class RobotsFilterTest extends LuyaWebTestCase
         $ctrl = new StubRobotsController('stub', Yii::$app);
         $this->assertSame('foobar', $ctrl->runAction('test'));
     }
-    
+
     /**
      * @runInSeparateProcess
      */

@@ -12,7 +12,7 @@ namespace luya\web\jsonld;
 class UrlValue extends BaseValue
 {
     private $_url;
-    
+
     /**
      * Provide url data.
      *
@@ -22,7 +22,7 @@ class UrlValue extends BaseValue
     {
         $this->_url = $url;
     }
-    
+
     /**
      * @inheritDoc
      */

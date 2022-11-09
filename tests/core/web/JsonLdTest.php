@@ -1,39 +1,38 @@
 <?php
+
 namespace luyatests\core\web;
 
 use luya\testsuite\cases\ConsoleApplicationTestCase;
+use luya\web\JsonLd;
+use luya\web\jsonld\AggregateRating;
 use luya\web\jsonld\Article;
 use luya\web\jsonld\BlogPosting;
-use luya\web\jsonld\CreativeWork;
-use luya\web\jsonld\LiveBlogPosting;
-use luya\web\jsonld\Organization;
-use luya\web\jsonld\SocialMediaPosting;
-use luya\web\jsonld\Thing;
-use luya\web\JsonLd;
-use luya\web\jsonld\Person;
-use luya\web\jsonld\ImageObject;
-use luya\web\jsonld\DateValue;
-use yii\helpers\Json;
-use luya\web\jsonld\UrlValue;
-use luya\web\jsonld\DateTimeValue;
-use luya\web\jsonld\AggregateRating;
 use luya\web\jsonld\Comment;
 use luya\web\jsonld\ContactPoint;
 use luya\web\jsonld\Country;
+use luya\web\jsonld\CreativeWork;
+use luya\web\jsonld\CurrencyValue;
+use luya\web\jsonld\DateTimeValue;
+use luya\web\jsonld\DateValue;
+use luya\web\jsonld\Event;
+use luya\web\jsonld\FoodEstablishment;
+use luya\web\jsonld\GeoCoordinates;
+use luya\web\jsonld\ImageObject;
+use luya\web\jsonld\LiveBlogPosting;
+use luya\web\jsonld\LocalBusiness;
 use luya\web\jsonld\MediaObject;
 use luya\web\jsonld\Offer;
-use luya\web\jsonld\PostalAddress;
-use luya\web\jsonld\Rating;
-use luya\web\jsonld\Event;
-use luya\web\jsonld\LocalBusiness;
 use luya\web\jsonld\OpeningHoursValue;
-use luya\web\jsonld\CurrencyValue;
-use luya\web\jsonld\FoodEstablishment;
-use luya\web\jsonld\Restaurant;
-use luya\web\jsonld\GeoCoordinates;
+use luya\web\jsonld\Organization;
+use luya\web\jsonld\Person;
+use luya\web\jsonld\PostalAddress;
 use luya\web\jsonld\PriceValue;
+use luya\web\jsonld\Rating;
+use luya\web\jsonld\Restaurant;
 use luya\web\jsonld\Review;
-use luya\web\jsonld\RangeValue;
+use luya\web\jsonld\SocialMediaPosting;
+use luya\web\jsonld\Thing;
+use luya\web\jsonld\UrlValue;
 use yii\base\InvalidConfigException;
 
 class JsonLdTest extends ConsoleApplicationTestCase
@@ -45,7 +44,7 @@ class JsonLdTest extends ConsoleApplicationTestCase
            'basePath' => dirname(__DIR__),
         ];
     }
-    
+
     public function testAssignView()
     {
         Jsonld::addGraph(['foo' => 'bar']);
@@ -93,7 +92,7 @@ class JsonLdTest extends ConsoleApplicationTestCase
             'name' => 'The BlogPosting',
             '@type' => 'BlogPosting',
         ], $thing->toArray());
-        
+
         $blog = (new BlogPosting())
         ->setSharedContent((new CreativeWork())->setAbout((new Thing())->setDescription("about this")))
         ->setImage(
@@ -101,7 +100,7 @@ class JsonLdTest extends ConsoleApplicationTestCase
             ->setContentUrl(new UrlValue('path/to/image.jpg'))
             ->setUploadDate((new DateValue('12-12-2017')))
         );
-        
+
         $this->assertSame([
             'image' => [
                 'contentUrl' => 'path/to/image.jpg',
@@ -193,38 +192,38 @@ class JsonLdTest extends ConsoleApplicationTestCase
             '@type' => 'SocialMediaPosting',
         ], $thing->toArray());
     }
-    
+
     public function testImageObject()
     {
         $imageObject = (new ImageObject())->setCaption('foobar');
-        
+
         $this->assertSame([
             'caption' => 'foobar',
             '@type' => 'ImageObject',
         ], $imageObject->toArray());
-        
+
         $imageObject = (new ImageObject())->setCaption('foobar')->setUrl(new UrlValue('image.jpg'));
-        
+
         $this->assertSame([
             'caption' => 'foobar',
             'url' => 'image.jpg',
             '@type' => 'ImageObject',
         ], $imageObject->toArray());
     }
-    
+
     public function testAggregateRating()
     {
         $ar = new AggregateRating();
         $ar->setName('name');
-        
+
         $this->assertSame(['name' => 'name', '@type' => 'AggregateRating'], $ar->toArray());
     }
-    
+
     public function testComment()
     {
         $cmt = new Comment();
         $cmt->setDescription('My comment');
-        
+
         $this->assertSame(['description' => 'My comment', '@type' => 'Comment'], $cmt->toArray());
     }
 
@@ -232,30 +231,30 @@ class JsonLdTest extends ConsoleApplicationTestCase
     {
         $cp = new ContactPoint();
         $cp->setEmail('basil@nadar.io');
-        
+
         $this->assertSame(['email' => 'basil@nadar.io', '@type' => 'ContactPoint'], $cp->toArray());
     }
-    
+
     public function testCountry()
     {
         $country = new Country();
         $country->setDescription('Switzerland');
         $this->assertSame(['description' => 'Switzerland', '@type' => 'Country'], $country->toArray());
     }
-    
+
     public function testMediaObject()
     {
         $mo = new MediaObject();
         $mo->setContentUrl(new UrlValue('www.luya.io'));
-        
+
         $this->assertSame(['contentUrl' => 'www.luya.io', '@type' => 'MediaObject'], $mo->toArray());
     }
-    
+
     public function testOffer()
     {
         $offer = new Offer();
         $offer->setDescription('My offer');
-        
+
         $this->assertSame(['description' => 'My offer', '@type' => 'Offer'], $offer->toArray());
     }
 
@@ -269,20 +268,20 @@ class JsonLdTest extends ConsoleApplicationTestCase
             '@type' => 'Event',
         ], $event->toArray());
     }
-    
+
     public function testPostalAddress()
     {
         $pa = new PostalAddress();
         $pa->setEmail('basil@nadar.io');
-        
+
         $this->assertSame(['email' => 'basil@nadar.io', '@type' => 'PostalAddress'], $pa->toArray());
     }
-    
+
     public function testRating()
     {
         $rating = new Rating();
         $rating->setDescription('my rating');
-        
+
         $this->assertSame(['description' => 'my rating', '@type' => 'Rating'], $rating->toArray());
     }
 
@@ -308,7 +307,7 @@ class JsonLdTest extends ConsoleApplicationTestCase
             '@type' => 'LocalBusiness',
         ], $biz->toArray());
     }
-    
+
     public function testFoodEsablishment()
     {
         $foe = new FoodEstablishment();

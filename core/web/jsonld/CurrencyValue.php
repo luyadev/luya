@@ -22,7 +22,7 @@ class CurrencyValue extends BaseValue
         if (strlen($currency) !== 3) {
             throw new InvalidConfigException("The currency value must have 3 letter code like USD, CHF. Value \"{$currency}\" given.");
         }
-        
+
         $this->_currency = $currency;
     }
 

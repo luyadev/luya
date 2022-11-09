@@ -22,7 +22,7 @@ trait NextPrevModel
     {
         return self::find()->where(['>', 'id', $this->id])->limit(1)->one();
     }
-    
+
     /**
      * Get the previous record of a current id
      *

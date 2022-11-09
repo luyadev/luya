@@ -14,6 +14,7 @@ namespace luya\web\jsonld;
  */
 class CreativeWork extends BaseThing implements CreativeWorkInterface
 {
+    use CreativeWorkTrait;
     /**
      * @inheritdoc
      */
@@ -21,6 +22,4 @@ class CreativeWork extends BaseThing implements CreativeWorkInterface
     {
         return 'CreativeWork';
     }
-
-    use CreativeWorkTrait;
 }

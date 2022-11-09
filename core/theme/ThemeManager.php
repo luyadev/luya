@@ -25,19 +25,19 @@ class ThemeManager extends \yii\base\Component
     /**
      * Name of the event before the active theme will be setup.
      */
-    const EVENT_BEFORE_SETUP = 'eventBeforeSetup';
-    
+    public const EVENT_BEFORE_SETUP = 'eventBeforeSetup';
+
     /**
      * @var string Name of the theme which should be activated on setup. This is commonly used to defined the active theme when **not**
      * using the CMS ThemeManager to switch between themes.
      */
     public $activeThemeName;
-    
+
     /**
      * @var ThemeConfig[]
      */
     private $_themes = [];
-    
+
     /**
      * Read the theme.json and create a new \luya\theme\ThemeConfig for the given base path.
      *
@@ -73,12 +73,12 @@ class ThemeManager extends \yii\base\Component
                 throw new InvalidConfigException('Theme config file missing at: ' . $themeFile);
             }
         }
-        
+
         $config = Json::decode(file_get_contents($themeFile)) ?: [];
-    
+
         return new ThemeConfig($basePath, $config);
     }
-    
+
     /**
      * Setup active theme
      *
@@ -92,17 +92,17 @@ class ThemeManager extends \yii\base\Component
             // Active theme already loaded
             return;
         }
-        
+
         $basePath = $this->getActiveThemeBasePath();
         $this->beforeSetup($basePath);
-        
+
         if ($basePath) {
             $themeConfig = $this->getThemeByBasePath($basePath);
             $theme = new Theme($themeConfig);
             $this->activate($theme);
         }
     }
-    
+
     /**
      * Trigger the {{\luya\theme\ThemeManager::EVENT_BEFORE_SETUP}} event.
      *
@@ -113,10 +113,10 @@ class ThemeManager extends \yii\base\Component
         $event = new SetupEvent();
         $event->basePath = $basePath;
         $this->trigger(self::EVENT_BEFORE_SETUP, $event);
-        
+
         $basePath = $event->basePath;
     }
-    
+
     /**
      * Get base path of active theme.
      *
@@ -128,10 +128,10 @@ class ThemeManager extends \yii\base\Component
         if (!empty($this->activeThemeName) && is_string($this->activeThemeName)) {
             return $this->activeThemeName;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Get all theme configs as array list.
      *
@@ -144,7 +144,7 @@ class ThemeManager extends \yii\base\Component
         if ($this->_themes) {
             return $this->_themes;
         }
-        
+
         $themeDefinitions = $this->getThemeDefinitions();
 
         foreach ($themeDefinitions as $themeDefinition) {
@@ -157,10 +157,10 @@ class ThemeManager extends \yii\base\Component
                 }
             }
         }
-        
+
         return $this->_themes;
     }
-    
+
     /**
      * Get theme definitions by search in `@app/themes` and the `Yii::$app->getPackageInstaller()`
      *
@@ -169,15 +169,15 @@ class ThemeManager extends \yii\base\Component
     protected function getThemeDefinitions()
     {
         $themeDefinitions = [];
-        
+
         if (file_exists(Yii::getAlias('@app/themes'))) {
             foreach (glob(Yii::getAlias('@app/themes/*')) as $dirPath) {
                 $themeDefinitions[] = "@app/themes/" . basename($dirPath);
             }
         }
-        
+
         foreach (Yii::$app->getPackageInstaller()->getConfigs() as $config) {
-    
+
             /** @var PackageConfig $config */
             foreach ($config->themes as $theme) {
                 if (strpos($theme, '@') === 0 || strpos($theme, '/') === 0) {
@@ -187,10 +187,10 @@ class ThemeManager extends \yii\base\Component
                 }
             }
         }
-        
+
         return $themeDefinitions;
     }
-    
+
     /**
      * @param string $basePath
      * @param bool $throwException
@@ -202,14 +202,14 @@ class ThemeManager extends \yii\base\Component
     public function getThemeByBasePath(string $basePath, $throwException = false)
     {
         $themes = $this->getThemes($throwException);
-        
+
         if (!isset($themes[$basePath])) {
             throw new InvalidArgumentException("Theme $basePath could not loaded.");
         }
-        
+
         return $themes[$basePath];
     }
-    
+
     /**
      * Register a theme config and set the path alias with the name of the theme.
      *
@@ -223,12 +223,12 @@ class ThemeManager extends \yii\base\Component
         if (isset($this->_themes[$basePath])) {
             throw new InvalidArgumentException("Theme $basePath already registered.");
         }
-        
+
         $this->_themes[$basePath] = $themeConfig;
-        
+
         Yii::setAlias('@' . basename($basePath) . 'Theme', $basePath);
     }
-    
+
     /**
      * Change the active theme in the \yii\base\View component and set the `activeTheme ` alias to new theme base path.
      *
@@ -238,15 +238,15 @@ class ThemeManager extends \yii\base\Component
     {
         Yii::$app->view->theme = $theme;
         Yii::setAlias('activeTheme', $theme->basePath);
-        
+
         $this->setActiveTheme($theme);
     }
-    
+
     /**
      * @var Theme|null
      */
     private $_activeTheme;
-    
+
     /**
      * Get the active theme. Null if no theme is activated.
      *
@@ -256,7 +256,7 @@ class ThemeManager extends \yii\base\Component
     {
         return $this->_activeTheme;
     }
-    
+
     /**
      * Change the active theme.
      *
@@ -266,7 +266,7 @@ class ThemeManager extends \yii\base\Component
     {
         $this->_activeTheme = $theme;
     }
-    
+
     /**
      * Check if a theme is activated.
      *

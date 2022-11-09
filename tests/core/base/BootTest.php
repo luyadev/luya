@@ -18,7 +18,7 @@ class BootTest extends \luyatests\LuyaWebTestCase
         $boot = new Boot();
         $boot->run();
     }
-    
+
     public function testWrongConfigFile()
     {
         $this->expectException('Exception');
@@ -26,7 +26,7 @@ class BootTest extends \luyatests\LuyaWebTestCase
         $boot->configFile = __DIR__ . '/../../data/configs/wrongconfig.php';
         $boot->run();
     }
-    
+
     public function testYiiNotFound()
     {
         $this->expectException('Exception');
@@ -36,14 +36,14 @@ class BootTest extends \luyatests\LuyaWebTestCase
         $boot->mockOnly = true;
         $boot->applicationConsole();
     }
-    
+
     public function testSetterGetterConfig()
     {
         $boot = new Boot();
         $boot->setConfigArray(['foo' => 'bar']);
         $this->assertSame(['foo' => 'bar'], $boot->getConfigArray());
     }
-    
+
     public function testConsoleHostInfo()
     {
         $boot = new Boot();
@@ -51,11 +51,11 @@ class BootTest extends \luyatests\LuyaWebTestCase
         $boot->setConfigArray(['id' => 'test', 'basePath' => dirname(__DIR__), 'consoleHostInfo' => 'https://luya.io']);
         $boot->mockOnly = true;
         $boot->applicationConsole();
-        
+
         $this->assertSame('https://luya.io', $boot->app->urlManager->hostInfo);
         $this->assertSame('', $boot->app->urlManager->baseUrl); // as the baseUrl setter method will ltrim
     }
-    
+
     public function testConsoleHostInfoAndBasePath()
     {
         $boot = new Boot();
@@ -63,7 +63,7 @@ class BootTest extends \luyatests\LuyaWebTestCase
         $boot->setConfigArray(['id' => 'test', 'basePath' => dirname(__DIR__), 'consoleHostInfo' => 'https://luya.io', 'consoleBaseUrl' => '/luya-kickstarter']);
         $boot->mockOnly = true;
         $boot->applicationConsole();
-        
+
         $this->assertSame('https://luya.io', $boot->app->urlManager->hostInfo);
         $this->assertSame('/luya-kickstarter', $boot->app->urlManager->baseUrl); // as the baseUrl setter method will ltrim
     }

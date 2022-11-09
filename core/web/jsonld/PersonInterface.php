@@ -326,7 +326,7 @@ interface PersonInterface
      * @return static
      */
     public function setKnows(Person $knows);
-    
+
     /**
      * @return Offer
      */

@@ -12,9 +12,9 @@ namespace luya\web\jsonld;
 trait MediaObjectTrait
 {
     use CreativeWorkTrait;
-    
+
     private $_contentUrl;
-    
+
     /**
      * @inheritdoc
      *
@@ -25,7 +25,7 @@ trait MediaObjectTrait
         $this->_contentUrl = $url->getValue();
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -33,9 +33,9 @@ trait MediaObjectTrait
     {
         return $this->_contentUrl;
     }
-    
+
     private $_embedUrl;
-    
+
     /**
      * @inheritdoc
      *
@@ -45,7 +45,7 @@ trait MediaObjectTrait
     {
         $this->_embedUrl = $url->getValue();
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -53,9 +53,9 @@ trait MediaObjectTrait
     {
         return $this->_embedUrl;
     }
-    
+
     private $_uploadDate;
-    
+
     /**
      * @inheritdoc
      *
@@ -66,7 +66,7 @@ trait MediaObjectTrait
         $this->_uploadDate = $date->getValue();
         return $this;
     }
-    
+
     /**
      * @inheritdoc
      */

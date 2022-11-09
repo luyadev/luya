@@ -2,9 +2,9 @@
 
 namespace luyatests\core\console;
 
-use Yii;
 use luya\console\Controller;
 use luyatests\LuyaConsoleTestCase;
+use Yii;
 
 class TestController extends Controller
 {

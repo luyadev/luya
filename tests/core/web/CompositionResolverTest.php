@@ -2,10 +2,10 @@
 
 namespace luya\tests\core\web;
 
-use luyatests\LuyaWebTestCase;
+use luya\web\Composition;
 use luya\web\CompositionResolver;
 use luya\web\Request;
-use luya\web\Composition;
+use luyatests\LuyaWebTestCase;
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 
@@ -15,7 +15,7 @@ class CompositionResolverTest extends LuyaWebTestCase
     {
         $request = new Request();
         $request->pathInfo = 'de/foo/bar';
-        
+
         $composition = new Composition($request);
         $composition->pattern = '<lang:[a-z]{2}>';
         $composition->default = ['lang' => 'fr'];
@@ -28,7 +28,7 @@ class CompositionResolverTest extends LuyaWebTestCase
     {
         $request = new Request();
         $request->pathInfo = 'en/foo/bar';
-        
+
         $composition = new Composition($request);
         $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
         $composition->expectedValues = [
@@ -41,7 +41,7 @@ class CompositionResolverTest extends LuyaWebTestCase
 
         $request = new Request();
         $request->pathInfo = 'de/foo/bar';
-        
+
         $composition = new Composition($request);
         $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
         $composition->expectedValues = [
@@ -59,7 +59,7 @@ class CompositionResolverTest extends LuyaWebTestCase
     {
         $request = new Request();
         $request->pathInfo = '';
-        
+
         $composition = new Composition($request);
         $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
         $composition->default = ['lang' => 'en', 'xyz' => 'foo'];
@@ -73,7 +73,7 @@ class CompositionResolverTest extends LuyaWebTestCase
 
         $request = new Request();
         $request->pathInfo = '';
-        
+
         $composition = new Composition($request);
         $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
         $composition->default = ['lang' => 'en', 'xyz' => 'foo'];
@@ -91,7 +91,7 @@ class CompositionResolverTest extends LuyaWebTestCase
     {
         $request = new Request();
         $request->pathInfo = '';
-        
+
         $composition = new Composition($request);
         $composition->pattern = '<lang:[a-z]{2}>/<xyz:[a-z]{3}>';
         $composition->default = ['lang' => 'en', 'xyz' => 'foo'];

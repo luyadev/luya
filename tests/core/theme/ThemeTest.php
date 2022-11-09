@@ -18,10 +18,10 @@ class ThemeTest extends LuyaWebTestCase
     {
         $basePath = '@app/themes/blank3';
         $config = Json::decode(file_get_contents(Yii::getAlias($basePath . '/theme.json')));
-        
+
         $themeConfig = new ThemeConfig($basePath, $config);
         $theme = new Theme($themeConfig);
-        
+
         $expectedPathMap = [
             '@app/views' => [
                 '@app/views',
@@ -48,25 +48,25 @@ class ThemeTest extends LuyaWebTestCase
                 '@app/themes/blank/views',
             ],
         ];
-        
+
         $this->assertEquals($expectedPathMap, $theme->pathMap);
     }
-    
+
     public function testAdditionalPathMap()
     {
         $theme1Config = new ThemeConfig('@app/themes/blank', []);
         $theme2Config = new ThemeConfig('@app/themes/blank2', ['parent' => $theme1Config, 'pathMap' => ['@additional/views']]);
         $theme3Config = new ThemeConfig('@app/themes/blank3', ['parent' => $theme2Config]);
-        
+
         $theme = new Theme($theme3Config);
-        
+
         $themePathOrder = [
             '@app/views',
             '@app/themes/blank3/views',
             '@app/themes/blank2/views',
             '@app/themes/blank/views',
         ];
-        
+
         $expectedPathMap = [
             '@app/views' => $themePathOrder,
             '@app/themes/blank3/views' => $themePathOrder,
@@ -74,20 +74,20 @@ class ThemeTest extends LuyaWebTestCase
             '@app/themes/blank/views' => $themePathOrder,
             '@additional/views' => $themePathOrder,
         ];
-        
+
         $this->assertEquals($expectedPathMap, $theme->pathMap);
     }
-    
+
     public function testInvalidConfig()
     {
         $this->expectException('\yii\base\InvalidConfigException');
-        $themeConfigMock = new class extends ThemeConfig {
+        $themeConfigMock = new class () extends ThemeConfig {
             public function __construct()
             {
             }
         };
         $themeConfig = new $themeConfigMock();
-        
+
         $theme = new Theme($themeConfig);
     }
 }

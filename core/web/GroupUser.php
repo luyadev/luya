@@ -116,21 +116,21 @@ class GroupUser extends User
         if ($this->isGuest) {
             return false;
         }
-        
+
         $identity = $this->identity;
-        
+
         if (!$identity instanceof GroupUserIdentityInterface) {
             throw new InvalidConfigException('The $identityClass must be instance of luya\web\GroupUserIdentityInterface.');
         }
-        
-        
+
+
         $groups = (array) $alias;
         foreach ($groups as $groupAlias) {
             if (in_array($groupAlias, $identity->authGroups())) {
                 return true;
             }
         }
-        
+
         return false;
     }
 }

@@ -12,9 +12,9 @@ namespace luya\web\jsonld;
 trait ImageObjectTrait
 {
     use MediaObjectTrait;
-    
+
     private $_caption;
-    
+
     /**
      *
      * @return static
@@ -24,7 +24,7 @@ trait ImageObjectTrait
         $this->_caption = $caption;
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -32,9 +32,9 @@ trait ImageObjectTrait
     {
         return $this->_caption;
     }
-    
+
     private $_exifData;
-    
+
     /**
      *
      * @return static
@@ -42,10 +42,10 @@ trait ImageObjectTrait
     public function setExifData(PropertyValue $propertyValue)
     {
         $this->_exifData = $propertyValue;
-       
+
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -53,9 +53,9 @@ trait ImageObjectTrait
     {
         return $this->_exifData;
     }
-    
+
     private $_representativeOfPage;
-    
+
     /**
      *
      * @return static
@@ -63,10 +63,10 @@ trait ImageObjectTrait
     public function setRepresentativeOfPage($representativeOfPage)
     {
         $this->_representativeOfPage = $representativeOfPage;
-       
+
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -74,9 +74,9 @@ trait ImageObjectTrait
     {
         return $this->_representativeOfPage;
     }
-    
+
     private $_thumbnail;
-    
+
     /**
      *
      * @return static
@@ -84,10 +84,10 @@ trait ImageObjectTrait
     public function setThumbnail(ImageObject $imageObject)
     {
         $this->_thumbnail = $imageObject;
-        
+
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */

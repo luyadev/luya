@@ -2,15 +2,15 @@
 
 namespace luyatests\core\components;
 
-use luyatests\LuyaWebTestCase;
 use luya\components\Formatter;
+use luyatests\LuyaWebTestCase;
 
 class FormatterTest extends LuyaWebTestCase
 {
     public function testDefaultSettingsFromGivenArray()
     {
         $ts = '1494338433'; // 9. May 2017, 16:00:33
-        
+
         $formatter = new Formatter([
             'dateFormats' => [
                 'en' => 'MM/MM/MM',
@@ -18,10 +18,10 @@ class FormatterTest extends LuyaWebTestCase
             ],
             'locale' => 'de',
         ]);
-        
+
         // only with php intl extension the response will be like this!
         $this->assertSame('2017/2017/2017', $formatter->asDate($ts));
-        
+
         $formatter = new Formatter([
             'datetimeFormats' => [
                 'en' => 'HH/mm',
@@ -30,9 +30,9 @@ class FormatterTest extends LuyaWebTestCase
             ],
             'locale' => 'fr',
         ]);
-        
+
         $this->assertSame('14.00', $formatter->asDatetime($ts));
-        
+
         $formatter = new Formatter([
             'timeFormats' => [
                 'en' => 'HH/mm/ss',
@@ -41,14 +41,14 @@ class FormatterTest extends LuyaWebTestCase
             ],
             'locale' => 'fr',
         ]);
-        
+
         $this->assertSame('14:00:33', $formatter->asTime($ts));
     }
-    
+
     public function testautoFormat()
     {
         $formatter = new Formatter();
-        
+
         $this->assertSame(1, $formatter->autoFormat(1));
         $this->assertSame('Yes', $formatter->autoFormat(true));
         $this->assertSame('No', $formatter->autoFormat(false));

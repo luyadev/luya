@@ -2,8 +2,8 @@
 
 namespace luya\web;
 
-use luya\TagParser;
 use luya\base\BaseBootstrap;
+use luya\TagParser;
 
 /**
  * LUYA base bootstrap class which will be called during the bootstraping process.
@@ -16,9 +16,9 @@ class Bootstrap extends BaseBootstrap
     private $_apis = [];
 
     private $_urlRules = [];
-    
+
     private $_apiRules = [];
-    
+
     /**
      * Before bootstrap run process.
      *
@@ -30,7 +30,7 @@ class Bootstrap extends BaseBootstrap
         foreach ($app->tags as $name => $config) {
             TagParser::inject($name, $config);
         }
-        
+
         foreach ($this->getModules() as $id => $module) {
             foreach ($module->urlRules as $key => $rule) {
                 if (is_string($key)) {
@@ -39,12 +39,12 @@ class Bootstrap extends BaseBootstrap
                     $this->_urlRules[] = $rule;
                 }
             }
-            
+
             // get all api rules (since 1.0.10)
             foreach ($module->apiRules as $endpoint => $rule) {
                 $this->_apiRules[$endpoint] = $rule;
             }
-            
+
             /**
              * 'api-admin-user' => 'admin\apis\UserController',
              * 'api-cms-navcontainer' => 'admin\apis\NavContainerController'
@@ -52,7 +52,7 @@ class Bootstrap extends BaseBootstrap
             foreach ($module->apis as $alias => $class) {
                 $this->_apis[$alias] = ['class' => $class, 'module' => $module];
             }
-            
+
             foreach ($module->tags as $name => $config) {
                 TagParser::inject($name, $config);
             }
@@ -75,16 +75,16 @@ class Bootstrap extends BaseBootstrap
                 $collection[] = 'admin/'.$alias;
             }
         }
-        
+
         $result = [];
         $result[] = ['controller' => $collection];
-        
+
         // generate the rules from apiRules defintions as they are own entries:
         foreach ($rules as $api => $rule) {
             $rule['controller'] = 'admin/' . $api;
             $result[] = $rule;
         }
-        
+
         return $result;
     }
 
@@ -101,9 +101,9 @@ class Bootstrap extends BaseBootstrap
                 // When admin context, change csrf token, this will not terminate the frontend csrf token:
                 // @see https://github.com/luyadev/luya/issues/1778
                 $app->request->csrfParam = '_csrf_admin';
-                
+
                 $app->getModule('admin')->controllerMap = $this->_apis;
-                
+
                 // calculate api defintions
                 if ($app->getModule('admin')->hasProperty('apiDefintions')) { // ensure backwards compatibility
                     $app->getModule('admin')->apiDefintions = $this->generateApiRuleDefintions($this->_apis, $this->_apiRules);
@@ -114,13 +114,13 @@ class Bootstrap extends BaseBootstrap
             } else {
                 // Frontend context
                 $app->themeManager->setup();
-                
+
                 if ($app->themeManager->hasActiveTheme) {
                     $app->layout = $app->themeManager->activeTheme->layout;
                 }
             }
         }
-        
+
         $app->getUrlManager()->addRules($this->_urlRules);
     }
 }

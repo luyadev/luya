@@ -2,18 +2,18 @@
 
 namespace luya\traits;
 
-use Yii;
-use yii\helpers\Json;
 use Curl\Curl;
-use luya\helpers\Url;
-use luya\helpers\ObjectHelper;
-use luya\helpers\ArrayHelper;
-use yii\web\Application;
-use yii\web\HttpException;
-use yii\base\Exception;
-use yii\base\ErrorException;
 use luya\Boot;
 use luya\exceptions\WhitelistedException;
+use luya\helpers\ArrayHelper;
+use luya\helpers\ObjectHelper;
+use luya\helpers\Url;
+use Yii;
+use yii\base\ErrorException;
+use yii\base\Exception;
+use yii\helpers\Json;
+use yii\web\Application;
+use yii\web\HttpException;
 
 /**
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
@@ -41,7 +41,7 @@ trait ErrorHandlerTrait
      * @since 1.0.5
      */
     public $lastTransferCall;
-    
+
     /**
      * @var array An array of exceptions which are whitelisted and therefore NOT TRANSFERED. Whitelisted exception
      * are basically expected application logic which does not need to report informations to the developer, as the
@@ -56,13 +56,13 @@ trait ErrorHandlerTrait
         'yii\web\UnauthorizedHttpException',
         'yii\web\BadRequestHttpException',
     ];
-    
+
     /**
      * @var array
      * @since 1.0.6
      */
     public $sensitiveKeys = ['password', 'pwd', 'pass', 'passwort', 'pw', 'token', 'hash', 'authorization'];
-    
+
     /**
      * Send a custom message to the api server event its not related to an exception.
      *
@@ -111,7 +111,7 @@ trait ErrorHandlerTrait
 
         return ObjectHelper::isInstanceOf($exception, $this->whitelist, false);
     }
-    
+
     /**
      * Send the array data to the api server.
      *
@@ -127,10 +127,10 @@ trait ErrorHandlerTrait
             'error_json' => Json::encode($data),
         ]);
         $this->lastTransferCall = $curl;
-        
+
         return $curl->isSuccess();
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -139,7 +139,7 @@ trait ErrorHandlerTrait
         if ($this->transferException && !$this->isExceptionWhitelisted($exception)) {
             $this->apiServerSendData($this->getExceptionArray($exception));
         }
-        
+
         return parent::renderException($exception);
     }
 
@@ -157,11 +157,11 @@ trait ErrorHandlerTrait
         $_trace = [];
         $_previousException = [];
         $_exceptionClassName = 'Unknown';
-        
+
         if (is_object($exception)) {
             $_exceptionClassName = get_class($exception);
             $prev = $exception->getPrevious();
-            
+
             if (!empty($prev)) {
                 $_previousException = [
                     'message' => $prev->getMessage(),
@@ -170,7 +170,7 @@ trait ErrorHandlerTrait
                     'trace' => $this->buildTrace($prev),
                 ];
             }
-            
+
             $_trace = $this->buildTrace($exception);
             $_message = $exception->getMessage();
             $_file = $exception->getFile();
@@ -218,7 +218,7 @@ trait ErrorHandlerTrait
             'app_version' => Yii::$app->version,
         ];
     }
-    
+
     /**
      * Build trace array from exception.
      *
@@ -240,7 +240,7 @@ trait ErrorHandlerTrait
 
             $_trace[$key] = $this->buildTraceItem($item);
         }
-        
+
         return $_trace;
     }
 

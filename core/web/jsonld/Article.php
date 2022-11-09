@@ -15,6 +15,7 @@ namespace luya\web\jsonld;
  */
 class Article extends BaseThing implements ArticleInterface
 {
+    use ArticleTrait;
     /**
      * @inheritdoc
      */
@@ -22,6 +23,4 @@ class Article extends BaseThing implements ArticleInterface
     {
         return 'Article';
     }
-
-    use ArticleTrait;
 }

@@ -3,8 +3,8 @@
 namespace luya\widgets;
 
 use luya\base\Widget;
-use luya\helpers\Html;
 use luya\helpers\ArrayHelper;
+use luya\helpers\Html;
 use yii\base\InvalidConfigException;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;

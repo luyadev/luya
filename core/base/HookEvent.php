@@ -18,24 +18,24 @@ final class HookEvent extends BaseObject implements \ArrayAccess
      * @var array|callable The executable handler to use when calling the hook event in order to generate the $output.
      */
     public $handler;
-    
+
     /**
      * @var string The output which is generated when the $handler is called, this is used in order to return string outputs.
      */
     public $output;
-    
+
     /**
      * @var boolean Whether the hook event is handled already or not.
      */
     public $isHandled = false;
-    
+
     /**
      * @var boolean Whether the current event is valid or not, if set to false, this event will not be triggered on output.
      */
     public $isValid = true;
-    
+
     private $_iterations = [];
-    
+
     /**
      * Getter method for iteration.
      *
@@ -45,7 +45,7 @@ final class HookEvent extends BaseObject implements \ArrayAccess
     {
         return $this->_iterations;
     }
-    
+
     /**
      * Add Iteration
      * @param mixed $value The value of the key
@@ -59,7 +59,7 @@ final class HookEvent extends BaseObject implements \ArrayAccess
             $this->_iterations[$key] = $value;
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -68,7 +68,7 @@ final class HookEvent extends BaseObject implements \ArrayAccess
     {
         $this->iteration($value, $offset);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -77,7 +77,7 @@ final class HookEvent extends BaseObject implements \ArrayAccess
     {
         return isset($this->_iterations[$offset]);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -86,7 +86,7 @@ final class HookEvent extends BaseObject implements \ArrayAccess
     {
         unset($this->_iterations[$offset]);
     }
-    
+
     /**
      * {@inheritDoc}
      */

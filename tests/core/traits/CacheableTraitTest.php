@@ -2,11 +2,11 @@
 
 namespace luyatests\core\traits;
 
-use Yii;
-use luyatests\LuyaWebTestCase;
 use luya\traits\CacheableTrait;
-use yii\caching\FileDependency;
 use luyatests\data\classes\UnitCache;
+use luyatests\LuyaWebTestCase;
+use Yii;
+use yii\caching\FileDependency;
 
 class CacheStub
 {
@@ -23,7 +23,7 @@ class CacheableTraitTest extends LuyaWebTestCase
         $this->assertFalse($cache->deleteHasCache('not'));
         $this->assertFalse($cache->getHasCache('not'));
     }
-    
+
     public function testCacheable()
     {
         Yii::$app->set('cache', ['class' => 'yii\caching\DummyCache']);
@@ -35,7 +35,7 @@ class CacheableTraitTest extends LuyaWebTestCase
         $this->assertTrue($cache->deleteHasCache('foo'));
         $this->assertFalse($cache->getHasCache('foo'));
     }
-    
+
     public function testCacheableArrayKeys()
     {
         Yii::$app->set('cache', ['class' => 'yii\caching\DummyCache']);
@@ -44,7 +44,7 @@ class CacheableTraitTest extends LuyaWebTestCase
         $this->assertTrue($cache->deleteHasCache(['cache', 'bar']));
         $this->assertFalse($cache->getHasCache(['cache', 'bar']));
     }
-    
+
     public function testFlushAllCache()
     {
         Yii::$app->set('cache', ['class' => UnitCache::className()]);

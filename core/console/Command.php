@@ -2,11 +2,11 @@
 
 namespace luya\console;
 
-use Yii;
-use yii\helpers\StringHelper;
-use yii\helpers\Inflector;
 use luya\base\AdminModuleInterface;
 use luya\base\CoreModuleInterface;
+use Yii;
+use yii\helpers\Inflector;
+use yii\helpers\StringHelper;
 
 /**
  * Console Command base class.
@@ -24,12 +24,12 @@ abstract class Command extends \luya\console\Controller
      * @var boolean Whether the verbose printing is enabled from options parameter or not.
      */
     public $verbose = false;
-    
+
     /**
      * @var boolean Whether the command is in interactive mode or not, provided by option paremeters.
      */
     public $interactive = true;
-    
+
     /**
      * Method to print informations directly when verbose is enabled.
      *
@@ -43,7 +43,7 @@ abstract class Command extends \luya\console\Controller
             $this->output(!empty($section) ? $section . ': ' . $message : $message);
         }
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -51,7 +51,7 @@ abstract class Command extends \luya\console\Controller
     {
         return ['verbose', 'interactive'];
     }
-    
+
     // HELPER METHODS
 
     /**
@@ -66,7 +66,7 @@ abstract class Command extends \luya\console\Controller
             'admin' => 'Admin Modules are used when the Data-Managment should be done inside the Administration area.',
         ]);
     }
-    
+
     /**
      * Get selection list for console commands with defined options.
      *
@@ -89,7 +89,7 @@ abstract class Command extends \luya\console\Controller
                     continue;
                 }
             }
-    
+
             if (isset($options['hideCore']) && $options['hideCore']) {
                 if ($object instanceof CoreModuleInterface) {
                     continue;
@@ -97,12 +97,12 @@ abstract class Command extends \luya\console\Controller
             }
             $modules[$id] = $id;
         }
-    
+
         $text = (isset($options['text'])) ? $options['text'] : 'Please select a module:';
-    
+
         return $this->select($text, $modules);
     }
-    
+
     /**
      * Generates a class name with camelcase style and specific suffix, if not already provided
      *
@@ -113,14 +113,14 @@ abstract class Command extends \luya\console\Controller
     public function createClassName($string, $suffix = false)
     {
         $name = Inflector::camelize($string);
-    
+
         if ($suffix !== false && StringHelper::endsWith($name, $suffix, false)) {
             $name = substr($name, 0, -(strlen($suffix)));
         }
-    
+
         return $name . $suffix;
     }
-    
+
     /**
      * Generates the LUYA text which all generator files should include.
      *

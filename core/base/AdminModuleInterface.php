@@ -21,7 +21,7 @@ interface AdminModuleInterface
      * @return false|\luya\admin\components\AdminMenuBuilderInterface
      */
     public function getMenu();
-    
+
     /**
      * Returns all Asset files to registered in the administration interfaces.
      *
@@ -40,7 +40,7 @@ interface AdminModuleInterface
      * @return array An array with with assets files where the array has no key and the value is the path to the asset class.
      */
     public function getAdminAssets();
-    
+
     /**
      * Returns all message identifier for the current module which should be assigned to the javascript admin interface.
      *

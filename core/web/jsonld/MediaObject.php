@@ -12,7 +12,7 @@ namespace luya\web\jsonld;
 class MediaObject extends BaseThing implements MediaObjectInterface
 {
     use MediaObjectTrait;
-    
+
     /**
      * @inheritdoc
      */

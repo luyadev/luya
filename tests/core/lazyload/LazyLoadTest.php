@@ -2,8 +2,8 @@
 
 namespace luyatests\core\lazyload;
 
-use luyatests\LuyaWebTestCase;
 use luya\lazyload\LazyLoad;
+use luyatests\LuyaWebTestCase;
 
 class LazyLoadTest extends LuyaWebTestCase
 {

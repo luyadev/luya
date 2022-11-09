@@ -2,13 +2,13 @@
 
 namespace luya\base;
 
-use Yii;
-use yii\web\NotFoundHttpException;
-use yii\base\InvalidConfigException;
+use luya\web\Controller;
 use luya\web\Request;
 use luya\web\UrlManager;
+use Yii;
 use yii\base\BaseObject;
-use luya\web\Controller;
+use yii\base\InvalidConfigException;
+use yii\web\NotFoundHttpException;
 
 /**
  * Run any route inside the provided module.
@@ -48,7 +48,7 @@ class ModuleReflection extends BaseObject
      * @var \luya\web\UrlManager UrlManager object from DI-Container.
      */
     public $urlManager;
-    
+
     /**
      * @var \yii\base\Controller|null The controller paramter is null until the [[run()]] method has been applied.
      */
@@ -78,13 +78,13 @@ class ModuleReflection extends BaseObject
         if ($this->module === null) {
             throw new InvalidConfigException('The module attribute is required and can not be null.');
         }
-        
+
         // add the module specific url rules to the url manager
         $this->urlManager->addRules($this->module->urlRules, true);
     }
 
     private $_module;
-    
+
     /**
      * Setter for the module property.
      *
@@ -94,7 +94,7 @@ class ModuleReflection extends BaseObject
     {
         $this->_module = $module;
     }
-    
+
     /**
      * Getter for the module property.
      *
@@ -104,9 +104,9 @@ class ModuleReflection extends BaseObject
     {
         return $this->_module;
     }
-    
+
     private $_suffix;
-    
+
     /**
      * Setter for the suffix property.
      *
@@ -127,7 +127,7 @@ class ModuleReflection extends BaseObject
     {
         return $this->_suffix;
     }
-    
+
     private $_requestRoute;
 
     /**
@@ -148,7 +148,7 @@ class ModuleReflection extends BaseObject
         if ($this->_requestRoute !== null) {
             return $this->_requestRoute;
         }
-        
+
         if ($this->_defaultRoute !== null && empty($this->getSuffix())) {
             $array = $this->_defaultRoute;
         } else {
@@ -168,14 +168,14 @@ class ModuleReflection extends BaseObject
         if (empty($array['args'])) {
             $array['args'] = $this->request->get();
         }
-        
+
         // @see https://github.com/luyadev/luya/issues/1267
         if ($this->_defaultRoute !== null) {
             $array['args'] = array_merge($this->_defaultRoute['args'], $array['args']);
         }
 
         $this->_requestRoute = $array;
-        
+
         return $array;
     }
 
@@ -204,7 +204,7 @@ class ModuleReflection extends BaseObject
             'originalArgs' => $args,
         ];
     }
-    
+
     /**
      * Returns the url rule parameters which are taken from the requested route.
      *
@@ -213,7 +213,7 @@ class ModuleReflection extends BaseObject
     public function getUrlRule()
     {
         $request = $this->getRequestRoute();
-        
+
         return [
             'module' => $this->module->id,
             'route' => $this->module->id . '/' . $request['route'],
@@ -236,12 +236,12 @@ class ModuleReflection extends BaseObject
         if (!$controller || !isset($controller[0]) || !is_object($controller[0])) {
             throw new NotFoundHttpException(sprintf("Unable to create controller '%s' for module '%s'.", $requestRoute['route'], $this->module->id));
         }
-        
+
         Yii::debug('LUYA module run module "'.$this->module->id.'" route ' . $requestRoute['route'], __METHOD__);
-        
+
         $this->controller = $controller[0];
         $originalController = Yii::$app->controller;
-        
+
         /**
          * Override the current application controller in order to ensure current() url handling which is used
          * for relativ urls/rules.
@@ -259,7 +259,7 @@ class ModuleReflection extends BaseObject
         $this->controller->on(Controller::EVENT_AFTER_ACTION, function ($event) use ($originalController) {
             Yii::$app->controller = $originalController;
         });
-        
+
         // run the action on the provided controller object
         return $this->controller->runAction($controller[1], $requestRoute['args']);
     }

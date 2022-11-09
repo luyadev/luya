@@ -2,12 +2,12 @@
 
 namespace luya\base;
 
-use Yii;
-use ReflectionClass;
-use luya\Exception;
-use luya\web\Application as WebApplication;
 use luya\console\Application as ConsoleApplication;
+use luya\Exception;
 use luya\helpers\ArrayHelper;
+use luya\web\Application as WebApplication;
+use ReflectionClass;
+use Yii;
 
 /**
  * LUYA Boot wrapper.
@@ -24,8 +24,8 @@ abstract class Boot
     /**
      * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/core/CHANGELOG.md)
      */
-    const VERSION = '2.2.1';
-    
+    public const VERSION = '2.2.1';
+
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
      */
@@ -61,7 +61,7 @@ abstract class Boot
     {
         $this->_baseYiiFile = $baseYiiFile;
     }
-    
+
     /**
      * Getter method for Yii base file.
      *
@@ -101,7 +101,7 @@ abstract class Boot
     {
         $this->_isCli = $isCli;
     }
-    
+
     /**
      * Returns the current sapi name in lower case.
      *
@@ -113,7 +113,7 @@ abstract class Boot
     }
 
     private $_configArray;
-    
+
     /**
      * This method allows you to directly inject a configuration array instead of using the config file
      * method.
@@ -133,7 +133,7 @@ abstract class Boot
     {
         $this->_configArray = $config;
     }
-    
+
     /**
      * The prependConfigArray will be merged into the config, this way you can prepand config values for a custom Boot class.
      *
@@ -146,7 +146,7 @@ abstract class Boot
     {
         return [];
     }
-    
+
     /**
      * Get the config array from the configFile path with the predefined values.
      *
@@ -160,21 +160,21 @@ abstract class Boot
                 if (!$this->getIsCli()) {
                     throw new Exception("Unable to load the config file '".$this->configFile."'.");
                 }
-                
+
                 $config = ['id' => 'consoleapp', 'basePath' => dirname(__DIR__)];
             } else {
                 $config = require $this->configFile;
             }
-    
+
             if (!is_array($config)) {
                 throw new Exception("config file '".$this->configFile."' found but no array returning.");
             }
-            
+
             // preset the values from the defaultConfigArray
             if (!empty($this->prependConfigArray())) {
                 $config = ArrayHelper::merge($config, $this->prependConfigArray());
             }
-         
+
             $this->_configArray = $config;
         }
 
@@ -210,7 +210,7 @@ abstract class Boot
                 unset($config['components']['composition']);
             }
         }
-        
+
         $this->includeYii();
 
         $baseUrl = null;
@@ -219,7 +219,7 @@ abstract class Boot
         } elseif (isset($config['consoleHostInfo'])) {
             $baseUrl = '/';
         }
-        
+
         $mergedConfig = ArrayHelper::merge($config, [
             'bootstrap' => ['luya\console\Bootstrap'],
             'components' => [
@@ -255,7 +255,7 @@ abstract class Boot
             return $this->app->run();
         }
     }
-    
+
     /**
      * Returns the path to luya core files
      *
@@ -266,7 +266,7 @@ abstract class Boot
         $reflector = new ReflectionClass(get_class($this));
         return dirname($reflector->getFileName());
     }
-    
+
     /**
      * Helper method to check whether the provided Yii Base file exists, if yes include and
      * return the file.
@@ -278,19 +278,19 @@ abstract class Boot
     {
         if (file_exists($this->_baseYiiFile)) {
             defined('LUYA_YII_VENDOR') ?: define('LUYA_YII_VENDOR', dirname($this->_baseYiiFile));
-            
+
             $baseYiiFolder = LUYA_YII_VENDOR . DIRECTORY_SEPARATOR;
             $luyaYiiFile = $this->getCoreBasePath() . DIRECTORY_SEPARATOR .  'Yii.php';
-            
+
             if (file_exists($luyaYiiFile)) {
                 require_once($baseYiiFolder . 'BaseYii.php');
                 require_once($luyaYiiFile);
             } else {
                 require_once($baseYiiFolder . 'Yii.php');
             }
-            
+
             Yii::setAlias('@luya', $this->getCoreBasePath());
-            
+
             return true;
         }
 

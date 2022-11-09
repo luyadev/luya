@@ -2,8 +2,8 @@
 
 namespace luyatests\core\web;
 
-use luyatests\LuyaWebTestCase;
 use luya\web\ErrorHandlerExceptionRenderEvent;
+use luyatests\LuyaWebTestCase;
 
 class ErrorHandlerExceptionRenderEventTest extends LuyaWebTestCase
 {

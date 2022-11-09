@@ -3,7 +3,6 @@
 namespace luyatests\core\console\commands;
 
 use luya\console\commands\HealthController;
-use luya\helpers\FileHelper;
 use luya\testsuite\traits\CommandStdStreamTrait;
 use Yii;
 
@@ -13,7 +12,7 @@ class HealthControllerTest extends \luyatests\LuyaConsoleTestCase
     {
         $ctrl = new HealthControllerStub('ctrl', Yii::$app);
         $ctrl->actionIndex();
-    
+
         $this->assertEquals("The directory the health commands is applying to: " . realpath(Yii::getAlias('@luyatests/data')), $ctrl->readOutput());
         $this->assertEquals("public_html/assets: directory exists already", $ctrl->readOutput());
         $this->assertEquals("public_html/storage: successfully created directory", $ctrl->readOutput());

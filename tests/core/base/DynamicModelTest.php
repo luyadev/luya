@@ -2,9 +2,9 @@
 
 namespace luyatests\core;
 
-use luyatests\LuyaWebTestCase;
-
 use luya\base\DynamicModel;
+
+use luyatests\LuyaWebTestCase;
 
 class StubTestModel extends DynamicModel
 {
@@ -19,9 +19,9 @@ class DynamicModelTest extends LuyaWebTestCase
             'foo' => 'Foo Label',
             'bar' => 'Bar Label',
         ];
-        
+
         $atr = $model->attributeLabels();
-        
+
         $this->assertArrayHasKey('foo', $atr);
         $this->assertArrayHasKey('bar', $atr);
         $this->assertSame('Foo Label', $atr['foo']);

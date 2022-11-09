@@ -2,12 +2,11 @@
 
 namespace luya\traits;
 
-use luya\theme\ThemeManager;
-use Yii;
 use luya\base\AdminModuleInterface;
-use luya\base\Module;
 use luya\base\CoreModuleInterface;
+use luya\base\Module;
 use luya\base\PackageInstaller;
+use Yii;
 
 /**
  * LUYA Appliation trait
@@ -27,7 +26,7 @@ trait ApplicationTrait
      * @var string Title for the application used in different sections like Login screen
      */
     public $siteTitle = 'LUYA Application';
-    
+
     /**
      * @var string|boolean Set a token, which will be used to collect data from a central host, if you want to enable this feature.
      * Use http://passwordsgenerator.net/ to create complex strings. When you have enabled this feature you can collect information's from
@@ -40,7 +39,7 @@ trait ApplicationTrait
      * in the console mode, cause some importer classes need those variables.
      */
     public $webrootDirectory = 'public_html';
-    
+
     /**
      * @var string This value will be used as hostInfo when running console applications in urlManager. An example for using the hostInfo
      *
@@ -49,7 +48,7 @@ trait ApplicationTrait
      * ```
      */
     public $consoleHostInfo;
-    
+
     /**
      * @var string This value is used when declared for console request as urlManger baseUrl in order to enable urlHandling. If {{luya\web\traits\ApplicationTrait::$consoleHostInfo}}
      * is defined, consoleBaseUrl will use `/` as default value. The base url is the path where the application is running after hostInfo like
@@ -61,14 +60,14 @@ trait ApplicationTrait
      * But in the most cases when the website is online the baseUrl is `/` which is enabled by default when {{luya\web\traits\ApplicationTrait::$consoleHostInfo}} is defined.
      */
     public $consoleBaseUrl;
-    
+
     /**
      * @var boolean If enabled, the application will throw an exception if a request is not from a secure connection (https). So any none secure request will throw
      * a {{yii\web\ForbiddenHttpException}}. This option will also make sure REST APIs are requested by a secure connection.
      * @since 1.0.5
      */
     public $ensureSecureConnection = false;
-    
+
     /**
      * @var array Add tags to the TagParser class. Example
      *
@@ -135,20 +134,20 @@ trait ApplicationTrait
             ],
         ],
     ];
-    
+
     /**
      * Add trace info to luya application trait
      */
     public function init()
     {
         parent::init();
-        
+
         // add trace info
         Yii::debug('initialize LUYA Application', __METHOD__);
-        
+
         $this->setLocale($this->language);
     }
-    
+
     /**
      * Transform the $language into a locale sign to set php env settings.
      *
@@ -167,15 +166,15 @@ trait ApplicationTrait
         if (array_key_exists($lang, $this->locales)) {
             return $this->locales[$lang];
         }
-        
+
         // generate from `de` the locale `de_DE` or from `en` `en_EN` only if $lang is 2 chars.
         if (strlen($lang) == 2) {
             return strtolower($lang) . '_' . strtoupper($lang);
         }
-        
+
         return $lang;
     }
-    
+
     /**
      * Set the application localisation trough `setlocale`.
      *
@@ -197,7 +196,7 @@ trait ApplicationTrait
     }
 
     private $_packageInstaller;
-    
+
     /**
      * Get the package Installer
      * @return \luya\base\PackageInstaller
@@ -206,15 +205,15 @@ trait ApplicationTrait
     {
         if ($this->_packageInstaller == null) {
             $file = Yii::getAlias('@vendor/luyadev/installer.php');
-        
+
             $data = is_file($file) ? include $file : [];
-        
+
             $this->_packageInstaller = new PackageInstaller($data);
         }
-        
+
         return $this->_packageInstaller;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -223,12 +222,12 @@ trait ApplicationTrait
         foreach ($this->getPackageInstaller()->getConfigs() as $config) {
             $this->bootstrap = array_merge($this->bootstrap, $config->bootstrap);
         }
-        
+
         parent::bootstrap();
     }
-    
+
     private $_webroot;
-    
+
     /**
      * Read only property which is used in cli bootstrap process to set the @webroot alias
      *
@@ -243,7 +242,7 @@ trait ApplicationTrait
         if ($this->_webroot === null) {
             $this->_webroot = realpath(realpath($this->basePath) . DIRECTORY_SEPARATOR . $this->webrootDirectory);
         }
-        
+
         return $this->_webroot;
     }
 
@@ -296,7 +295,7 @@ trait ApplicationTrait
 
         return $modules;
     }
-    
+
     private $_adminModules;
 
     /**
@@ -327,7 +326,7 @@ trait ApplicationTrait
     public function getAdminModulesMenus()
     {
         $menu = [];
-        foreach($this->getAdminModules() as $module) {
+        foreach ($this->getAdminModules() as $module) {
             if ($module->getMenu()) {
                 $menu[$module->id] = $module->getMenu();
             }
@@ -367,5 +366,4 @@ trait ApplicationTrait
 
         return $jsTranslations;
     }
-    
 }

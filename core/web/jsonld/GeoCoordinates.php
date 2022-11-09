@@ -73,7 +73,7 @@ class GeoCoordinates extends BaseThing
     public function setElevation($elevation)
     {
         $this->_elevation = $elevation;
-        
+
         return $this;
     }
 

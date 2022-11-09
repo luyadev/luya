@@ -21,7 +21,7 @@ class Request extends \yii\web\Request
      * @var boolean Force web request to enable unit tests with simulated web requests
      */
     public $forceWebRequest = false;
-    
+
     /**
      * @var string The validation cookie for cookies, should be overwritten in your configuration.
      *
@@ -30,16 +30,16 @@ class Request extends \yii\web\Request
      * http://randomkeygen.com using a 504-bit WPA Key
      */
     public $cookieValidationKey = '(`1gq(|TI2Zxx7zZH<Zk052a9a$@l2EtD9wT`lkTO@7uy{cPaJt4y70mxh4q(3';
-    
+
     /**
      * @var array A list of default available parsers.
      */
     public $parsers = [
         'application/json' => 'yii\web\JsonParser',
     ];
-    
+
     private $_isAdmin;
-    
+
     /**
      * Setter method to force isAdmin request.
      *
@@ -49,7 +49,7 @@ class Request extends \yii\web\Request
     {
         $this->_isAdmin = $state;
     }
-    
+
     /**
      * Getter method resolves the current url request and check if admin context.
      *
@@ -74,9 +74,9 @@ class Request extends \yii\web\Request
 
                     // Check for a full route path where the module ends with admin like `newsadmin` and this module is loaded in the list of modules.
                     // @see https://github.com/luyadev/luya/pull/2027
-                    if (count($parts) > 0 && StringHelper::endsWith($first, 'admin') && Yii::$app->hasModule($first))
+                    if (count($parts) > 0 && StringHelper::endsWith($first, 'admin') && Yii::$app->hasModule($first)) {
                         $this->_isAdmin = true;
-                    elseif (strtolower(trim($first)) == 'admin') {
+                    } elseif (strtolower(trim($first)) == 'admin') {
                         $this->_isAdmin = true;
                     } else {
                         $this->_isAdmin = false;
@@ -84,10 +84,10 @@ class Request extends \yii\web\Request
                 }
             }
         }
-        
+
         return $this->_isAdmin;
     }
-    
+
     /**
      * Get the user client language.
      *

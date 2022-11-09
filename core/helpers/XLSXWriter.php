@@ -3,7 +3,6 @@
 namespace luya\helpers;
 
 use luya\yii\helpers\XLSXWriter as HelpersXLSXWriter;
-use ZipArchive;
 
 /*
  * @license MIT License

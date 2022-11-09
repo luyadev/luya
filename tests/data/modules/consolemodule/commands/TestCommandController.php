@@ -15,7 +15,7 @@ class TestCommandController extends Command
     {
         return $this->outputError('error');
     }
-    
+
     public function actionInfo()
     {
         return $this->outputInfo('info');

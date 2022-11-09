@@ -2,9 +2,9 @@
 
 namespace luya\console\commands;
 
+use luya\helpers\FileHelper;
 use Yii;
 use yii\helpers\Console;
-use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
 
 /**
@@ -19,7 +19,7 @@ class ModuleController extends \luya\console\Command
      * @inheritdoc
      */
     public $defaultAction = 'create';
-    
+
     /**
      * Humanize the class name
      *
@@ -29,7 +29,7 @@ class ModuleController extends \luya\console\Command
     {
         return $name = Inflector::humanize(Inflector::camel2words($name));
     }
-    
+
     /**
      * Render the readme template.
      *
@@ -48,7 +48,7 @@ class ModuleController extends \luya\console\Command
             'luyaText' => $this->getGeneratorText('module/create'),
         ]);
     }
-    
+
     /**
      * Render the admin template.
      *
@@ -66,7 +66,7 @@ class ModuleController extends \luya\console\Command
             'luyaText' => $this->getGeneratorText('module/create'),
         ]);
     }
-    
+
     /**
      * Render the frontend template.
      *
@@ -84,7 +84,7 @@ class ModuleController extends \luya\console\Command
             'luyaText' => $this->getGeneratorText('module/create'),
         ]);
     }
-    
+
     /**
      * Create a new frontend/admin module.
      *
@@ -93,11 +93,11 @@ class ModuleController extends \luya\console\Command
     public function actionCreate()
     {
         Console::clearScreenBeforeCursor();
-        
+
         $moduleName = $this->prompt("Enter the name of the module you like to generate:");
 
         $newName = preg_replace("/[^a-z]/", "", strtolower($moduleName));
-        
+
         if ($newName !== $moduleName) {
             if (!$this->confirm("We have changed the name to '{$newName}'. Do you want to proceed with this name?")) {
                 return $this->outputError('Abort by user.');
@@ -105,14 +105,14 @@ class ModuleController extends \luya\console\Command
                 $moduleName = $newName;
             }
         }
-        
+
         $appModulesFolder = Yii::$app->basePath . DIRECTORY_SEPARATOR . 'modules';
         $moduleFolder = $appModulesFolder . DIRECTORY_SEPARATOR . $moduleName;
-        
+
         if (file_exists($moduleFolder)) {
             return $this->outputError("The folder " . $moduleFolder . " exists already.");
         }
-        
+
         $folders = [
             'basePath' => $moduleFolder,
             'adminPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'admin',
@@ -126,21 +126,21 @@ class ModuleController extends \luya\console\Command
         ];
 
         $ns = 'app\\modules\\'.$moduleName;
-        
+
         foreach ($folders as $folder) {
             FileHelper::createDirectory($folder);
         }
-        
+
         $contents = [
             $moduleFolder. DIRECTORY_SEPARATOR . 'README.md' => $this->renderReadme($folders, $moduleName, $ns),
             $moduleFolder. DIRECTORY_SEPARATOR . 'admin/Module.php' => $this->renderAdmin($folders, $moduleName, $ns),
             $moduleFolder. DIRECTORY_SEPARATOR . 'frontend/Module.php' => $this->renderFrontend($folders, $moduleName, $ns),
         ];
-        
+
         foreach ($contents as $fileName => $content) {
             FileHelper::writeFile($fileName, $content);
         }
-        
+
         return $this->outputSuccess("Module files has been created successfully. Check the README file to understand how to add the module to your config.");
     }
 }

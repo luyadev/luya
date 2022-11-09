@@ -20,16 +20,16 @@ use yii\rest\ActiveController as BaseActiveController;
 abstract class ActiveController extends BaseActiveController
 {
     use RestBehaviorsTrait;
-    
+
     /**
      * @var string The constant for the restcreate scenario
      */
-    const SCENARIO_RESTCREATE = 'restcreate';
+    public const SCENARIO_RESTCREATE = 'restcreate';
 
     /**
      * @var string The constant for the rest update scenario
      */
-    const SCENARIO_RESTUPDATE = 'restupdate';
+    public const SCENARIO_RESTUPDATE = 'restupdate';
 
     /**
      * @var string The create scenario name from self::SCENARIO_RESTCREATE
@@ -55,7 +55,7 @@ abstract class ActiveController extends BaseActiveController
      * @see \yii\data\Pagination
      */
     public $pagination = false;
-    
+
     /**
      * If a user should not get access to the rest api, an ForbiddenHttpException must be thrown:
      *

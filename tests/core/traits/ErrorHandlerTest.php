@@ -2,11 +2,11 @@
 
 namespace luyatests\core\traits;
 
-use Yii;
-use luya\Exception;
-use luyatests\LuyaWebTestCase;
 use luya\console\ErrorHandler;
+use luya\Exception;
 use luya\exceptions\WhitelistedException;
+use luyatests\LuyaWebTestCase;
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\web\Application;
 use yii\web\NotFoundHttpException;
@@ -18,7 +18,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
         try {
             $stud = new ErrorHandler();
             $response = $stud->getExceptionArray(new Exception('foobar'));
-            
+
             $this->assertArrayHasKey('message', $response);
             $this->assertArrayHasKey('file', $response);
             $this->assertArrayHasKey('line', $response);
@@ -34,13 +34,13 @@ class ErrorHandlerTest extends LuyaWebTestCase
             $this->assertEquals('Error: foobar', $e->getMessage());
         }
     }
-    
+
     public function testExceptionStringTrace()
     {
         try {
             $stud = new ErrorHandler();
             $response = $stud->getExceptionArray('Is a string exception');
-    
+
             $this->assertArrayHasKey('message', $response);
             $this->assertArrayHasKey('file', $response);
             $this->assertArrayHasKey('line', $response);
@@ -56,13 +56,13 @@ class ErrorHandlerTest extends LuyaWebTestCase
             $this->assertEquals('Error: foobar', $e->getMessage());
         }
     }
-    
+
     public function testExceptionArrayTrace()
     {
         try {
             $stud = new ErrorHandler();
             $response = $stud->getExceptionArray(['array', 'is', 'exception']);
-    
+
             $this->assertArrayHasKey('message', $response);
             $this->assertArrayHasKey('file', $response);
             $this->assertArrayHasKey('line', $response);
@@ -78,12 +78,12 @@ class ErrorHandlerTest extends LuyaWebTestCase
             $this->assertEquals('Error: foobar', $e->getMessage());
         }
     }
-    
+
     public function testBodyParams()
     {
         $stud = new ErrorHandler();
         $response = $stud->getExceptionArray(['array', 'is', 'exception']);
-        
+
         $this->assertTrue(Yii::$app instanceof Application);
         $this->assertSame([], $response['bodyParams']);
     }
@@ -99,7 +99,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
         $whitelisted = new WhitelistedException('whitelisted!');
         $this->assertTrue($stud->isExceptionWhitelisted($whitelisted));
     }
-    
+
     /*
     public function testTrace()
     {

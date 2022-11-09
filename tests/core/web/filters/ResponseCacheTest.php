@@ -2,11 +2,11 @@
 
 namespace luyatests\core\web\filters;
 
-use Yii;
-use luyatests\LuyaWebTestCase;
-use yii\base\Action;
 use luya\web\Controller;
 use luya\web\filters\ResponseCache;
+use luyatests\LuyaWebTestCase;
+use Yii;
+use yii\base\Action;
 
 class StubAction extends Action
 {
@@ -28,7 +28,7 @@ class StubBehaviorController extends Controller
             ],
         ];
     }
-    
+
     public function actionFoobar()
     {
         Yii::$app->response->content = 'FooBarContent';
@@ -48,12 +48,12 @@ class ResponseCacheTest extends LuyaWebTestCase
     {
         $controller = new StubController('fooctrl', Yii::$app);
         $action = new StubAction('fooaction', $controller);
-        
+
         $filter = new ResponseCache();
         $content = $filter->beforeAction($action);
         $this->assertTrue($content);
     }
-    
+
     /*
     public function testInsideActionListAndExistsInCache()
     {
@@ -77,18 +77,18 @@ class ResponseCacheTest extends LuyaWebTestCase
 
     }
     */
-    
+
     public function testInsideActionListButNotInCache()
     {
         //Yii::$app->set('cache', ['class' => UnitCache::className(), 'data' => ['1c0df0a894101ab12bd0535c3dc11a11' => 'foobar']]);
         $controller = new StubController('fooctrl', Yii::$app);
         $action = new StubAction('fooaction', $controller);
-    
+
         $filter = new ResponseCache();
         $content = $filter->beforeAction($action);
         $this->assertTrue($content);
     }
-    
+
     /*
     public function testInsideActionListButNotInCacheButTriggerAfterSendEvent()
     {

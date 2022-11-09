@@ -27,12 +27,12 @@ class TimestampBehavior extends Behavior
      * @var array An array with all fields where the timestamp should be applied to on insert.
      */
     public $insert = [];
-    
+
     /**
      * @var array An array with all fields where the timestamp should be applied to on update.
      */
     public $update = [];
-    
+
     /**
      * Register event handlers before insert and update.
      *
@@ -45,7 +45,7 @@ class TimestampBehavior extends Behavior
             ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeUpdate',
         ];
     }
-    
+
     /**
      * Insert the timestamp for all provided fields.
      *
@@ -57,7 +57,7 @@ class TimestampBehavior extends Behavior
             $event->sender->$field = time();
         }
     }
-    
+
     /**
      * Update the timestamp for all provided fields.
      *

@@ -8,7 +8,7 @@ class UnitCache extends Cache
 {
     public $serializer = false;
     public $data = [];
-    
+
     /**
      * Retrieves a value from cache with a specified key.
      * This is the implementation of the method declared in the parent class.

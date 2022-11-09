@@ -1,4 +1,5 @@
 <?php
+
  return [
     '{attribute} must have a minimum length of {length} characters.' => '{attribute} musi mieć co najmniej {length} znaków.',
     '{attribute} must include at least one special character.' => '{attribute} musi zawierać przynajmniej jeden znak specjalny.',

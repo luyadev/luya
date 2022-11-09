@@ -9,11 +9,11 @@ use yii\db\ActiveRecord;
 /**
  * Json Behavior.
  *
- * Therefore the JsonBehavior default confiugration let you seamless work with expecting array values, array input 
+ * Therefore the JsonBehavior default confiugration let you seamless work with expecting array values, array input
  * and array output. Provides auto encoding for array values after validation in order to store in the database.
- * 
+ *
  * An example of how to declared, validate and assign json values (as array):
- * 
+ *
  * ```php
  * public function behaviors()
  * {
@@ -24,7 +24,7 @@ use yii\db\ActiveRecord;
  *         ]
  *     ];
  * }
- * 
+ *
  * public function rules()
  * {
  *     return [
@@ -32,9 +32,9 @@ use yii\db\ActiveRecord;
  *     ]
  * }
  * ```
- * 
+ *
  * The above mode assumes an array is passed to the model:
- * 
+ *
  * ```php
  * $model->json_field = ['foo' => 'bar'];
  * ```
@@ -49,7 +49,7 @@ class JsonBehavior extends Behavior
     /**
      * @var boolean If enabled, the data will be encoded before validating, this means the validation rule should be `string` otherwise the validation must be `array`.
      * This might also differ based on how the data is passed to the model. Data passed to the model will be encoded from string to array (if not already).
-     * @since 1.2.0 
+     * @since 1.2.0
      */
     public $encodeBeforeValidate = false;
 
@@ -58,11 +58,11 @@ class JsonBehavior extends Behavior
      * @since 1.2.0
      */
     public $decodeAfterFind = true;
-    
+
     /**
      * @var array An Array with all events which should be attached. Based on {{$encodeBeforeValidate}} and {{$decodeAfterFind}} the array will automatically receive certain events. The main goal for this property is
      * to have the option to attach events by yourself. For example it could be useful to decode values on ngrest find.
-     * 
+     *
      * ```php
      * [
      *     'class' => JsonBehavior::class,
@@ -91,22 +91,21 @@ class JsonBehavior extends Behavior
 
         return $this->events;
     }
-    
+
     /**
      * Encode all attributes from json to php.
      */
     public function encodeAttributes()
     {
         foreach ($this->attributes as $name) {
-
             $value = $this->owner->{$name};
-            
+
             if (is_array($value)) {
                 $this->owner->{$name} = $this->jsonEncode($value);
             }
         }
     }
-    
+
     /**
      * Decode all attributes from php to json.
      */
@@ -114,7 +113,7 @@ class JsonBehavior extends Behavior
     {
         foreach ($this->attributes as $name) {
             $value = $this->owner->{$name};
-            
+
             $this->owner->{$name} = $this->jsonDecode($value);
         }
     }
@@ -134,7 +133,7 @@ class JsonBehavior extends Behavior
 
         return Json::encode($value);
     }
-    
+
     /**
      * Decodes the given JSON string into a PHP data structure.
      *

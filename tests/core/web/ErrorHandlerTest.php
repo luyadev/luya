@@ -2,11 +2,11 @@
 
 namespace luyatests\core\web;
 
-use Yii;
-use luyatests\LuyaWebTestCase;
-use luya\web\ErrorHandler;
-use yii\web\NotFoundHttpException;
 use luya\Exception;
+use luya\web\ErrorHandler;
+use luyatests\LuyaWebTestCase;
+use Yii;
+use yii\web\NotFoundHttpException;
 
 class ErrorHandlerTest extends LuyaWebTestCase
 {
@@ -17,14 +17,14 @@ class ErrorHandlerTest extends LuyaWebTestCase
     {
         $handler = new ErrorHandler();
         $exception = new NotFoundHttpException("Whoops");
-        
+
         ob_start();
         $handler->renderException($exception);
         ob_end_clean();
-        
+
         $this->assertStringContainsString('Whoops', Yii::$app->response->data);
     }
-    
+
     /**
      * @runInSeparateProcess
      */
@@ -33,7 +33,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
         Yii::$app->response->data = null;
         $handler = new ErrorHandler();
         $handler->transferException = true;
-        
+
         $exception = new NotFoundHttpException("Transfer Me Not");
         ob_start();
         $handler->renderException($exception);
@@ -42,7 +42,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
         // NotFoundHttpException is in whitelist by default
         $this->assertNull($handler->lastTransferCall);
     }
-    
+
     public function testTransferWithTransferableException()
     {
         $handler = new ErrorHandler();

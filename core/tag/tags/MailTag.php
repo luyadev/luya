@@ -2,8 +2,8 @@
 
 namespace luya\tag\tags;
 
-use yii\helpers\Html;
 use luya\tag\BaseTag;
+use yii\helpers\Html;
 
 /**
  * TagParser MailTag.
@@ -31,7 +31,7 @@ class MailTag extends BaseTag
     {
         return 'mail[info@luya.io](Mail us!)';
     }
-    
+
     /**
      * The readme instructions string for the MailTag.
      *
@@ -44,7 +44,7 @@ class MailTag extends BaseTag
 The mail Tag allows you to create E-Mail links to an address. Example use `mail[info@luya.io]` or with an additional value info use `mail[info@luya.io](send mail)`.      
 EOT;
     }
-    
+
     /**
      * Generate the Mail Tag.
      *
@@ -83,7 +83,7 @@ EOT;
         for ($i = 0; $i < strlen($email); $i++) {
             $output .= '&#'.ord($email[$i]).';';
         }
-        
+
         return $output;
     }
 }

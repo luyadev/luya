@@ -14,6 +14,7 @@ namespace luya\web\jsonld;
  */
 class SocialMediaPosting extends BaseThing implements SocialMediaPostingInterface
 {
+    use SocialMediaPostingTrait;
     /**
      * @inheritdoc
      */
@@ -21,6 +22,4 @@ class SocialMediaPosting extends BaseThing implements SocialMediaPostingInterfac
     {
         return 'SocialMediaPosting';
     }
-
-    use SocialMediaPostingTrait;
 }

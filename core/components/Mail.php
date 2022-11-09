@@ -2,11 +2,11 @@
 
 namespace luya\components;
 
-use Yii;
-use yii\base\Component;
 use luya\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use Yii;
+use yii\base\Component;
 
 /**
  * LUYA mail component to compose messages and send them via SMTP.
@@ -55,7 +55,7 @@ class Mail extends Component
      * @var string alternate text message if email client doesn't support HTML
      */
     public $altBody;
-    
+
     /**
      * @var string|boolean Define a layout template file which is going to be wrapped around the body()
      * content. The file alias will be resolved so an example layout could look as followed:
@@ -73,7 +73,7 @@ class Mail extends Component
      * ```
      */
     public $layout = false;
-    
+
     /**
      * @var boolean Whether mailer sends mails trough an an smtp server or via php mail() function. In order to configure the smtp use:
      *
@@ -87,32 +87,32 @@ class Mail extends Component
     public $isSMTP = true;
 
     // smtp settings
-    
+
     /**
      * @var string The host address of the SMTP server for authentification like `mail.luya.io`, if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
     public $host;
-    
+
     /**
      * @var string The username which should be used for SMTP auth e.g `php@luya.io`, if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
     public $username;
-    
+
     /**
      * @var string The password which should be used for SMTP auth, if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
     public $password;
-    
+
     /**
      * @var integer The port which is used to connect to the SMTP server (default is 587), if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
     public $port = 587;
-    
+
     /**
      * @var string Posible values are `tls` or `ssl` or empty `` (default is tls), if {{Mail::$isSMTP}} is disabled, this property has no effect.
      */
     public $smtpSecure = 'tls';
-    
+
     /**
      * @var boolean Whether the SMTP requires authentication or not, enabled by default. If {{Mail::$isSMTP}} is disabled, this property has no effect. If
      * enabled the following properties can be used:
@@ -120,7 +120,7 @@ class Mail extends Component
      * + {{Mail::$password}}
      */
     public $smtpAuth = true;
-    
+
     /**
      * Getter for the mailer object
      *
@@ -154,7 +154,7 @@ class Mail extends Component
 
         return $this->_mailer;
     }
-    
+
     /**
      * Reset the mailer object to null
      *
@@ -164,7 +164,7 @@ class Mail extends Component
     {
         $this->_mailer = null;
     }
-    
+
     /**
      * Compose a new mail message.
      *
@@ -185,7 +185,7 @@ class Mail extends Component
         }
         return $this;
     }
-    
+
     /**
      * Set the mail message subject of the mailer instance
      *
@@ -197,7 +197,7 @@ class Mail extends Component
         $this->getMailer()->Subject = $subject;
         return $this;
     }
-    
+
     /**
      * Set the HTML body for the mailer message, if a layout is defined the layout
      * will automatically wrapped about the html body.
@@ -230,7 +230,7 @@ class Mail extends Component
         $tags = ['</p>', '<br />', '<br>', '<hr />', '<hr>', '</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</h6>'];
         return trim(strip_tags(str_replace($tags, PHP_EOL, $message)));
     }
-    
+
     /**
      * Render a view file for the given Controller context.
      *
@@ -247,12 +247,12 @@ class Mail extends Component
     public function render($viewFile, array $params = [])
     {
         $this->body(Yii::$app->view->render($viewFile, $params));
-        
+
         return $this;
     }
-    
+
     private $_context = [];
-    
+
     /**
      * Pass option parameters to the layout files.
      *
@@ -262,7 +262,7 @@ class Mail extends Component
     public function context(array $vars)
     {
         $this->_context = $vars;
-        
+
         return $this;
     }
 
@@ -279,14 +279,14 @@ class Mail extends Component
         if ($this->layout === false) {
             return $content;
         }
-        
+
         $view = Yii::$app->getView();
-        
+
         $vars = array_merge($this->_context, ['content' => $content]);
-        
+
         return $view->renderPhpFile(Yii::getAlias($this->layout), $vars);
     }
-    
+
     /**
      * Add multiple addresses into the mailer object.
      *
@@ -314,10 +314,10 @@ class Mail extends Component
                 $this->address($mail, $name);
             }
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Add a single address with optional name
      *
@@ -421,7 +421,7 @@ class Mail extends Component
 
         return $this;
     }
-    
+
     /**
      * Add attachment.
      *
@@ -432,10 +432,10 @@ class Mail extends Component
     public function addAttachment($filePath, $name = null)
     {
         $this->getMailer()->addAttachment($filePath, empty($name) ? pathinfo($filePath, PATHINFO_BASENAME) : $name);
-        
+
         return $this;
     }
-    
+
     /**
      * Add ReplyTo Address.
      *
@@ -446,7 +446,7 @@ class Mail extends Component
     public function addReplyTo($email, $name = null)
     {
         $this->getMailer()->addReplyTo($email, empty($name) ? $email : $name);
-        
+
         return $this;
     }
 
@@ -487,12 +487,12 @@ class Mail extends Component
     {
         //Create a new SMTP instance
         $smtp = new SMTP();
-        
+
         if ($verbose) {
             // Enable connection-level debug output
             $smtp->do_debug = 3;
         }
-        
+
         try {
             // connect to an SMTP server
             if ($smtp->connect((string) $this->host, $this->port)) {

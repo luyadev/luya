@@ -14,6 +14,7 @@ namespace luya\web\jsonld;
  */
 class Person extends BaseThing implements PersonInterface
 {
+    use PersonTrait;
     /**
      * @inheritdoc
      */
@@ -21,6 +22,4 @@ class Person extends BaseThing implements PersonInterface
     {
         return 'Person';
     }
-    
-    use PersonTrait;
 }

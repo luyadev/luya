@@ -92,7 +92,7 @@ class PackageConfig extends BaseObject
     {
         return $this->getValue('blocks', []);
     }
-    
+
     /**
      * Getter method for package
      *

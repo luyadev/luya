@@ -79,7 +79,7 @@ trait EventTrait
     public function setAttendee($attendee)
     {
         ObjectHelper::isInstanceOf($attendee, [Organization::class, PersonInterface::class]);
-        
+
         $this->_attendee = $attendee;
         return $this;
     }
@@ -103,7 +103,7 @@ trait EventTrait
     public function setComposer($composer)
     {
         ObjectHelper::isInstanceOf($author, [Organization::class, PersonInterface::class]);
-        
+
         $this->_composer = $composer;
         return $this;
     }
@@ -127,7 +127,7 @@ trait EventTrait
     public function setContributor($contributor)
     {
         ObjectHelper::isInstanceOf($contributor, [Organization::class, PersonInterface::class]);
-        
+
         $this->_contributor = $contributor;
         return $this;
     }
@@ -241,7 +241,7 @@ trait EventTrait
     public function setFunder($funder)
     {
         ObjectHelper::isInstanceOf($funder, [Organization::class, PersonInterface::class]);
-        
+
         $this->_funder = $funder;
         return $this;
     }
@@ -354,7 +354,7 @@ trait EventTrait
     public function setOrganizer($organizer)
     {
         ObjectHelper::isInstanceOf($organizer, [Organization::class, PersonInterface::class]);
-        
+
         $this->_organizer = $organizer;
         return $this;
     }
@@ -379,7 +379,7 @@ trait EventTrait
     public function setPerformer($performer)
     {
         ObjectHelper::isInstanceOf($performer, [Organization::class, PersonInterface::class]);
-        
+
         $this->_performer = $performer;
         return $this;
     }
@@ -475,7 +475,7 @@ trait EventTrait
     public function setSponsor($sponsor)
     {
         ObjectHelper::isInstanceOf($sponsor, [Organization::class, PersonInterface::class]);
-        
+
         $this->_sponsor = $sponsor;
         return $this;
     }
@@ -569,7 +569,7 @@ trait EventTrait
     public function setTranslator($translator)
     {
         ObjectHelper::isInstanceOf($translator, [Organization::class, PersonInterface::class]);
-        
+
         $this->_translator = $translator;
         return $this;
     }

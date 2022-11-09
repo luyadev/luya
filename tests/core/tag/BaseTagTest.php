@@ -2,8 +2,8 @@
 
 namespace luyatests\core\tag;
 
-use luyatests\LuyaWebTestCase;
 use luya\tag\BaseTag;
+use luyatests\LuyaWebTestCase;
 
 class MockTag extends BaseTag
 {
@@ -11,12 +11,12 @@ class MockTag extends BaseTag
     {
         return 'example';
     }
-    
+
     public function readme()
     {
         return 'readme';
     }
-    
+
     public function parse($value, $sub)
     {
         return null;

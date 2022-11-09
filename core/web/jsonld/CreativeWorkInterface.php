@@ -671,7 +671,7 @@ interface CreativeWorkInterface extends ThingInterface
      * @return static
      */
     public function setThumbnailUrl(UrlValue $thumbnailUrl);
-    
+
     /**
      * @return CreativeWork
      */
@@ -715,7 +715,7 @@ interface CreativeWorkInterface extends ThingInterface
      * @return static
      */
     public function setVersion($version);
-    
+
     /**
      * @return CreativeWork
      */

@@ -2,11 +2,11 @@
 
 namespace luya\base;
 
-use Yii;
-use yii\base\InvalidConfigException;
 use luya\console\interfaces\ImportControllerInterface;
 use luya\helpers\ObjectHelper;
+use Yii;
 use yii\base\Application;
+use yii\base\InvalidConfigException;
 
 /**
  * LUYA Module base class.
@@ -47,7 +47,7 @@ abstract class Module extends \yii\base\Module
      * ```
      */
     public $apis = [];
-    
+
     /**
      * @var array An array with additional rules for a given api name. This allows you to extend and customize the {{yii\rest\UrlRule}} for
      * a given API. Example:
@@ -78,9 +78,9 @@ abstract class Module extends \yii\base\Module
      * As by default the yii2 configurable object you can also pass properties to your tag object in order to configure them.
      */
     public $tags = [];
-    
+
     private $_urlRules = [];
-    
+
     /**
      * UrlRules for this module. You can either provide a full {{luya\web\UrlRule}}
      * object configuration as array like this:
@@ -136,7 +136,7 @@ abstract class Module extends \yii\base\Module
      * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
      */
     public $useAppLayoutPath = true;
-    
+
     /**
      * @var bool Define the location of the view files inside the controller actions
      *
@@ -296,7 +296,7 @@ abstract class Module extends \yii\base\Module
     {
         return false;
     }
-    
+
     /**
      * returns "luya\base" for example.
      *
@@ -306,7 +306,7 @@ abstract class Module extends \yii\base\Module
     {
         return implode('\\', array_slice(explode('\\', get_class($this)), 0, -1));
     }
-    
+
     /**
      * Returns all controller files of this module from the `getControllerPath()` folder, where the key is the reusable
      * id of this controller and value the file on the server.
@@ -317,7 +317,7 @@ abstract class Module extends \yii\base\Module
     {
         return ObjectHelper::getControllers($this);
     }
-    
+
     /**
      * Overrides the yii2 default behavior by not throwing an exception if no alias has been defined
      * for the controller namespace. Otherwise each module requires an alias for its first namepsace entry
@@ -344,7 +344,7 @@ abstract class Module extends \yii\base\Module
     public static function onLoad()
     {
     }
-    
+
     /**
      * Register a Translation to the i18n component.
      *
@@ -374,7 +374,7 @@ abstract class Module extends \yii\base\Module
             ];
         }
     }
-    
+
     /**
      * Get base path from static view port.
      *
@@ -383,7 +383,7 @@ abstract class Module extends \yii\base\Module
     public static function staticBasePath()
     {
         $class = new \ReflectionClass(get_called_class());
-        
+
         return dirname($class->getFileName());
     }
 

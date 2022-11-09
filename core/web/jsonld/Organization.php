@@ -13,6 +13,7 @@ namespace luya\web\jsonld;
  */
 class Organization extends BaseThing implements OrganizationInterface
 {
+    use OrganizationTrait;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,4 @@ class Organization extends BaseThing implements OrganizationInterface
     {
         return 'Organization';
     }
-    
-    use OrganizationTrait;
 }

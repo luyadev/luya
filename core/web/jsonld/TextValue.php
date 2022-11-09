@@ -2,8 +2,8 @@
 
 namespace luya\web\jsonld;
 
-use luya\helpers\StringHelper;
 use luya\helpers\Html;
+use luya\helpers\StringHelper;
 
 /**
  * Text Value.
@@ -16,7 +16,7 @@ use luya\helpers\Html;
 class TextValue extends BaseValue
 {
     private $_text;
-    
+
     /**
      * Provide date data.
      *
@@ -26,7 +26,7 @@ class TextValue extends BaseValue
     {
         $this->_text = $text;
     }
-    
+
     /**
      * Truncate the string for a given lenth.
      *
@@ -36,10 +36,10 @@ class TextValue extends BaseValue
     public function truncate($length)
     {
         $this->_text = StringHelper::truncate($this->_text, $length);
-        
+
         return $this;
     }
-    
+
     /**
      * Html encode the text data.
      *
@@ -48,10 +48,10 @@ class TextValue extends BaseValue
     public function encode()
     {
         $this->_text = Html::encode($this->_text);
-        
+
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */

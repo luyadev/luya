@@ -18,12 +18,12 @@ interface ImageObjectInterface extends MediaObjectInterface
      * @return static
      */
     public function setCaption($caption);
-    
+
     /**
      * Getter method for Caption.
      */
     public function getCaption();
-    
+
     /**
      * Setter method for exif data via PropertyValue.
      *
@@ -31,12 +31,12 @@ interface ImageObjectInterface extends MediaObjectInterface
      * @return static
      */
     public function setExifData(PropertyValue $propertyValue);
-    
+
     /**
      * Getter method for exit data.
      */
     public function getExifData();
-    
+
     /**
      * Setter method for representative of page value
      *
@@ -44,12 +44,12 @@ interface ImageObjectInterface extends MediaObjectInterface
      * @return static
      */
     public function setRepresentativeOfPage($representativeOfPage);
-    
+
     /**
      * Getter method for representative of page value
      */
     public function getRepresentativeOfPage();
-    
+
     /**
      * Setter method for Thumbnail.
      *
@@ -57,7 +57,7 @@ interface ImageObjectInterface extends MediaObjectInterface
      * @return static
      */
     public function setThumbnail(ImageObject $imageObject);
-    
+
     /**
      * Getter method for thumbnail.
      */

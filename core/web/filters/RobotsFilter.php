@@ -2,12 +2,12 @@
 
 namespace luya\web\filters;
 
+use luya\exceptions\WhitelistedException;
+use luya\helpers\ArrayHelper;
 use Yii;
 use yii\base\ActionFilter;
-use yii\helpers\VarDumper;
 use yii\base\Controller;
-use luya\helpers\ArrayHelper;
-use luya\exceptions\WhitelistedException;
+use yii\helpers\VarDumper;
 
 /**
  * Prevent Robots from sending Forms.
@@ -51,15 +51,15 @@ class RobotsFilter extends ActionFilter
      * @var float The number of seconds a human would have to fill up the form, before the form is triggered as invalid.
      */
     public $delay = 2.5;
-    
+
     /**
      * @var string|null A string which identifiers the current robots filter in case you have multiple controllers on the same page with robot filters enabled.
      * @since 1.0.17
      */
     public $sessionKey;
 
-    const ROBOTS_FILTER_SESSION_IDENTIFIER = '__robotsFilterRenderTime';
-    
+    public const ROBOTS_FILTER_SESSION_IDENTIFIER = '__robotsFilterRenderTime';
+
     /**
      * @return integer Returns the latest render timestamp.
      */
@@ -73,7 +73,7 @@ class RobotsFilter extends ActionFilter
 
         return time();
     }
-    
+
     /**
      * Render Time Setter.
      *
@@ -105,7 +105,7 @@ class RobotsFilter extends ActionFilter
 
         return 'generic';
     }
-    
+
     /**
      * Return the elapsed process time to fill in the form.
      *
@@ -115,7 +115,7 @@ class RobotsFilter extends ActionFilter
     {
         return (int) (time() - $this->getRenderTime());
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -126,17 +126,17 @@ class RobotsFilter extends ActionFilter
                 throw new WhitelistedException("Robots Filter has detected an invalid Request: " . VarDumper::export(ArrayHelper::coverSensitiveValues(Yii::$app->request->post())));
             }
         }
-        
+
         return true;
     }
-    
+
     /**
      * @inheritdoc
      */
     public function afterAction($action, $result)
     {
         $this->setRenderTime(time());
-        
+
         return $result;
     }
 }

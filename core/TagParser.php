@@ -2,8 +2,8 @@
 
 namespace luya;
 
-use Yii;
 use luya\tag\TagMarkdownParser;
+use Yii;
 use yii\base\BaseObject;
 
 /**
@@ -39,16 +39,16 @@ class TagParser extends BaseObject
      * @var string Base regular expression to determine function, values and value-sub informations.
      * @see https://regex101.com/r/hP9nJ1/1 - Online Regex tester
      */
-    const REGEX = '/(?<function>[a-z]+)\[(?<value>.*?)\]((?<!\\\\)\((?<sub>.*?)(?<!\\\\)\))?/mi';
-    
+    public const REGEX = '/(?<function>[a-z]+)\[(?<value>.*?)\]((?<!\\\\)\((?<sub>.*?)(?<!\\\\)\))?/mi';
+
     private $tags = [
         'mail' => ['class' => 'luya\tag\tags\MailTag'],
         'tel' => ['class' => 'luya\tag\tags\TelTag'],
         'link' => ['class' => 'luya\tag\tags\LinkTag'],
     ];
-    
+
     private static $_instance;
-    
+
     /**
      * Inject a new tag with a given name and a configurable array config.
      *
@@ -59,7 +59,7 @@ class TagParser extends BaseObject
     {
         self::getInstance()->addTag($name, $config);
     }
-    
+
     /**
      * Convert the CMS-Tags into HTML-Tags.
      *
@@ -70,7 +70,7 @@ class TagParser extends BaseObject
     {
         return self::getInstance()->processText($text);
     }
-    
+
     /**
      * Convert the CMS-Tags into HTMl-Tags and additional convert GFM Markdown into Html as well. The main purpose
      * of this method to fix the conflict between markdown and tag parser when using urls.
@@ -82,7 +82,7 @@ class TagParser extends BaseObject
     {
         return (new TagMarkdownParser())->parse(static::convert($text));
     }
-    
+
     /**
      * Generate the instance for all registered tags.
      *
@@ -96,10 +96,10 @@ class TagParser extends BaseObject
         foreach ($context->tags as $key => $config) {
             $context->instantiatTag($key);
         }
-        
+
         return $context->tags;
     }
-    
+
     /**
      * Get the TagParser object, create new if not exists
      *
@@ -108,12 +108,12 @@ class TagParser extends BaseObject
     private static function getInstance()
     {
         if (self::$_instance === null) {
-            self::$_instance = new self;
+            self::$_instance = new self();
         }
-    
+
         return self::$_instance;
     }
-    
+
     /**
      * Internal method to add a tag into the tags array.
      */
@@ -142,7 +142,7 @@ class TagParser extends BaseObject
             Yii::debug('tag parser object generated for:'. $tag, __CLASS__);
         }
     }
-    
+
     /**
      * Parse the given tag with context informations.
      *
@@ -194,7 +194,7 @@ class TagParser extends BaseObject
                 $text = preg_replace('/'.preg_quote($row[0], '/').'/mi', $replace, $text, 1);
             }
         }
-        
+
         return $text;
     }
 }

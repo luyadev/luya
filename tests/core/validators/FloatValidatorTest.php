@@ -2,9 +2,9 @@
 
 namespace luyatests\core\validators;
 
+use luya\validators\FloatValidator;
 use luyatests\LuyaWebTestCase;
 use yii\base\Model;
-use luya\validators\FloatValidator;
 
 class StubModel extends Model
 {
@@ -20,7 +20,7 @@ class FloatValidatorTest extends LuyaWebTestCase
         $float->validateAttribute($model, 'value');
         $this->assertNotEmpty($model->getErrors());
     }
-    
+
     public function testArrayValue()
     {
         $model = new StubModel();
@@ -29,7 +29,7 @@ class FloatValidatorTest extends LuyaWebTestCase
         $float->validateAttribute($model, 'value');
         $this->assertNotEmpty($model->getErrors());
     }
-    
+
     public function testStringValue()
     {
         $model = new StubModel();
@@ -39,7 +39,7 @@ class FloatValidatorTest extends LuyaWebTestCase
         $this->assertNotEmpty($model->getErrors());
         $this->assertSame('Value must be a float or numeric value.', $model->getErrors('value')[0]);
     }
-    
+
     public function testNumericStringValue()
     {
         $model = new StubModel();
@@ -48,7 +48,7 @@ class FloatValidatorTest extends LuyaWebTestCase
         $float->validateAttribute($model, 'value');
         $this->assertEmpty($model->getErrors());
     }
-    
+
     public function testNumericStringFloatValue()
     {
         $model = new StubModel();
@@ -57,7 +57,7 @@ class FloatValidatorTest extends LuyaWebTestCase
         $float->validateAttribute($model, 'value');
         $this->assertEmpty($model->getErrors());
     }
-    
+
     public function testNumericValue()
     {
         $model = new StubModel();
@@ -66,7 +66,7 @@ class FloatValidatorTest extends LuyaWebTestCase
         $float->validateAttribute($model, 'value');
         $this->assertEmpty($model->getErrors());
     }
-    
+
     public function testFloatValue()
     {
         $model = new StubModel();
@@ -75,7 +75,7 @@ class FloatValidatorTest extends LuyaWebTestCase
         $float->validateAttribute($model, 'value');
         $this->assertEmpty($model->getErrors());
     }
-    
+
     public function testZeroFloatValue()
     {
         $model = new StubModel();

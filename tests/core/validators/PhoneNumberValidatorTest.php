@@ -105,7 +105,6 @@ class PhoneNumberValidatorTest extends LuyaWebTestCase
         $validator->validate('+41791234567', $error);
         $this->assertEmpty($error);
         $this->assertSame('+41791234567', $validator->formatedValue);
-        
     }
 }
 

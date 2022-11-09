@@ -23,10 +23,10 @@ class UrlManager extends \yii\web\UrlManager
     /**
      * Defines whether the {{luya\web\Composition}} should override the `Yii::$app->language` from its resolved value or not. If disabled
      * the Yii::$app->language won't be overriden but you can still access the resolved value with `Yii::$app->composition->langShortCode`.
-     * 
+     *
      * Disabling this option can be usefull when working with a website which does not requires the LUYA CMS and you might enable multi lingual
      * content but on the same routes with a get param f.e. `?_lang=xyz` instead of `/xyz/<slug>`.
-     * 
+     *
      * @since 2.0.0
      * @var boolean Whether the {{luya\web\Composition}} resolved value should override `Yii::$app->language` or not.
      */
@@ -71,10 +71,10 @@ class UrlManager extends \yii\web\UrlManager
         if (isset($parts[0]) && $parts[0] == $language) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Extend functionality of parent::parseRequest() by verify and resolve the composition informations.
      *
@@ -94,7 +94,7 @@ class UrlManager extends \yii\web\UrlManager
             // the resolver has thrown an 404 excpetion, stop parsing request and return false (which is: page not found)
             return false;
         }
-        
+
         $parsedRequest = parent::parseRequest($request);
 
         // if [[enablePrettyUrl]] is `false`. `false` is returned if the current request cannot be successfully parsed.
@@ -107,32 +107,32 @@ class UrlManager extends \yii\web\UrlManager
         // url composition route is loaded!
         // @see https://github.com/luyadev/luya/issues/1146
         $res = $this->routeHasLanguageCompositionPrefix($parsedRequest[0], $resolver->getResolvedKeyValue(Composition::VAR_LANG_SHORT_CODE));
-        
+
         if ($this->overrideLanguage) {
             // set the application language based from the parsed composition request:
             Yii::$app->setLocale($this->composition->langShortCode);
             Yii::$app->language = $this->composition->langShortCode;
         }
-        
+
         // if enableStrictParsing is enabled and the route is not found, $parsedRequest will return `false`.
         if ($res === false && ($this->composition->hidden || $parsedRequest === false)) {
             return $parsedRequest;
         }
-        
+
         $composition = $this->composition->createRoute();
         $length = strlen($composition);
         $route = $parsedRequest[0];
-        
+
         if (substr($route, 0, $length+1) == $composition.'/') {
             $parsedRequest[0] = substr($parsedRequest[0], $length);
         }
-        
+
         // remove start trailing slashes from route.
         $parsedRequest[0] = ltrim($parsedRequest[0], '/');
-        
+
         return $parsedRequest;
     }
-    
+
     /**
      * Extend functionality of parent::addRules by the ability to add composition routes.
      *
@@ -186,7 +186,7 @@ class UrlManager extends \yii\web\UrlManager
     {
         $this->_composition = $composition;
     }
-    
+
     /**
      * Get the composition component
      *
@@ -297,15 +297,15 @@ class UrlManager extends \yii\web\UrlManager
     public function internalCreateUrl($params, $composition = null)
     {
         $params = (array) $params;
-        
+
         $composition = empty($composition) ? $this->getComposition() : $composition;
-        
+
         $originalParams = $params;
-        
+
         // prepand the original route, whether is hidden or not!
         // https://github.com/luyadev/luya/issues/1146
         $params[0] = $composition->prependTo($params[0], $composition->createRoute());
-        
+
         $response = parent::createUrl($params);
 
         // Check if the parsed route with the prepand composition has been found or not.
@@ -319,7 +319,7 @@ class UrlManager extends \yii\web\UrlManager
 
         return $this->prependBaseUrl($response);
     }
-    
+
     /**
      * Create absolute url from the given route params.
      *
@@ -340,7 +340,7 @@ class UrlManager extends \yii\web\UrlManager
         }
         return $url;
     }
-    
+
     /**
      * See if the module of a provided route exists in the luya application list.
      *
@@ -352,16 +352,16 @@ class UrlManager extends \yii\web\UrlManager
     private function findModuleInRoute($route)
     {
         $route = parse_url($route, PHP_URL_PATH);
-        
+
         $parts = array_values(array_filter(explode('/', $route)));
-        
+
         if (isset($parts[0]) && array_key_exists($parts[0], Yii::$app->getApplicationModules())) {
             return $parts[0];
         }
-    
+
         return false;
     }
-    
+
     /**
      * Replace the url with the current module context.
      *
@@ -375,19 +375,19 @@ class UrlManager extends \yii\web\UrlManager
     {
         $route = $composition->removeFrom($this->removeBaseUrl($url));
         $moduleName = $this->findModuleInRoute($route);
-    
+
         if ($moduleName === false || $this->menu === false) {
             return $url;
         }
-    
+
         $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->lang($composition[Composition::VAR_LANG_SHORT_CODE])->one();
-    
+
         if (!$item) {
             throw new BadRequestHttpException("Unable to find nav_item_id '$navItemId' to generate the module link for url '$url'.");
         }
-    
+
         $isOutgoingModulePage = $item->type == 2 && $moduleName !== $item->moduleName;
-        
+
         // 1. if the current page is a module and the requested url is not the same module, its an outgoing link to
         // another module which should not be modificated.
         // 2. If the current page (nav) context is the homepage, we have to keep the original link as it wont work because the homepage
@@ -395,7 +395,7 @@ class UrlManager extends \yii\web\UrlManager
         if ($isOutgoingModulePage || $item->isHome) {
             return $url;
         }
-    
+
         // 1. if the current page is a module and the requested url is not the same module, its an outgoing link to
         // another module and ...
         // 2. if current controller context has an other module as the requested url, its an outgoing link to another module which should not be modificated.

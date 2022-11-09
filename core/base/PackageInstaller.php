@@ -16,7 +16,7 @@ use yii\base\BaseObject;
 class PackageInstaller extends BaseObject
 {
     private $_timestamp;
-    
+
     /**
      * Setter method for timestamp.
      *
@@ -26,7 +26,7 @@ class PackageInstaller extends BaseObject
     {
         $this->_timestamp = $timestamp;
     }
-        
+
     /**
      * Getter method for timestamp.
      *
@@ -36,9 +36,9 @@ class PackageInstaller extends BaseObject
     {
         return $this->_timestamp;
     }
-    
+
     private $_configs = [];
-    
+
     /**
      * Setter method for configurations (PackageConfig).
      *
@@ -54,10 +54,10 @@ class PackageInstaller extends BaseObject
             // assign object
             $objects[$key] = $packageConfig;
         }
-        
+
         $this->_configs = $objects;
     }
-    
+
     /**
      * Getter method for Configs.
      *

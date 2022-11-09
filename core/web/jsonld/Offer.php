@@ -12,7 +12,7 @@ namespace luya\web\jsonld;
 class Offer extends BaseThing implements OfferInterface
 {
     use OfferTrait;
-    
+
     /**
      * @inheritdoc
      */

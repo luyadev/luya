@@ -3,7 +3,6 @@
 namespace luya\web\jsonld;
 
 use luya\helpers\ObjectHelper;
-use yii\base\InvalidConfigException;
 
 /**
  * JsonLd Rating.
@@ -133,7 +132,7 @@ class Rating extends BaseThing
 
         return $this->_ratingValue = $range->getValue();
     }
-    
+
     private $_reviewAspect;
 
     /**

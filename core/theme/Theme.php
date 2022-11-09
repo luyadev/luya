@@ -2,10 +2,6 @@
 
 namespace luya\theme;
 
-use luya\helpers\Json;
-use luya\helpers\StringHelper;
-use Yii;
-use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 
 /**
@@ -22,10 +18,10 @@ use yii\base\InvalidConfigException;
  */
 class Theme extends \yii\base\Theme
 {
-    const LAYOUTS_PATH = 'layouts';
-    
+    public const LAYOUTS_PATH = 'layouts';
+
     private $_config;
-    
+
     /**
      * Theme constructor with a configuration as {{\luya\theme\ThemeConfig}} object.
      *
@@ -36,7 +32,7 @@ class Theme extends \yii\base\Theme
         $this->_config = $config;
         parent::__construct(['basePath' => $config->getBasePath()]);
     }
-    
+
     /**
      * Initialize the theme.
      *
@@ -47,41 +43,41 @@ class Theme extends \yii\base\Theme
         if ($this->getBasePath() === null) {
             throw new InvalidConfigException("Property base path must be set");
         }
-        
+
         $this->initPathMap($this->_config);
-        
+
         parent::init();
     }
-    
+
     /**
      * Init the path mapping include the parent themes
      */
     protected function initPathMap(ThemeConfig $themeConfig)
     {
         $pathMap = ['@app/views', $themeConfig->getViewPath()];
-    
+
         $viewPath = $this->getViewPath();
         $this->pathMap[$viewPath] = &$pathMap;
-        
+
         foreach ($themeConfig->getParents() as $parentConfig) {
             $pathMap[] = $parentConfig->getViewPath();
             $this->pathMap[$parentConfig->getViewPath()] = &$pathMap;
         }
-    
+
         $additionalPathMap = $this->getAdditionalPathMap($themeConfig);
         foreach ($additionalPathMap as $from) {
             $this->pathMap[$from] = $pathMap;
         }
-    
+
         $pos = strpos($viewPath, '/');
         $rootPath = $pos === false ? $viewPath : (substr($viewPath, 0, $pos) . '/views');
         $this->pathMap[$rootPath] = $pathMap;
-    
+
         $this->pathMap['@app/views'] = $pathMap;
     }
-    
+
     protected $_layout = 'theme';
-    
+
     /**
      * The name of the layout to be applied to this theme views.
      *
@@ -91,7 +87,7 @@ class Theme extends \yii\base\Theme
     {
         return $this->_layout;
     }
-    
+
     /**
      * Path to the directory that contains the theme views.
      *
@@ -101,7 +97,7 @@ class Theme extends \yii\base\Theme
     {
         return $this->getConfig()->getViewPath();
     }
-    
+
     /**
      * Path to the directory that contains the theme layouts.
      *
@@ -111,7 +107,7 @@ class Theme extends \yii\base\Theme
     {
         return $this->viewPath . '/' . self::LAYOUTS_PATH;
     }
-    
+
     /**
      * Theme configuration that contains the base theme information.
      *
@@ -121,7 +117,7 @@ class Theme extends \yii\base\Theme
     {
         return $this->_config;
     }
-    
+
     /**
      * @param ThemeConfig $themeConfig
      *
@@ -132,12 +128,12 @@ class Theme extends \yii\base\Theme
     protected function getAdditionalPathMap(ThemeConfig $themeConfig)
     {
         $pathMap = $themeConfig->pathMap;
-        
+
         $parentConfig = $themeConfig->getParent();
         if ($parentConfig) {
             $pathMap = array_merge($pathMap, $this->getAdditionalPathMap($parentConfig));
         }
-        
+
         return $pathMap;
     }
 }

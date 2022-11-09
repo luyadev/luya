@@ -12,7 +12,7 @@ namespace luya\web\jsonld;
 class Country extends BaseThing implements CountryInterface
 {
     use CountryTrait;
-    
+
     /**
      * @inheritdoc
      */

@@ -17,7 +17,7 @@ interface TagInterface
      * @return string The example string like `mail[info@luya.io](Mail us!)`.
      */
     public function example();
-    
+
     /**
      * Get the readme informations of the current tag, markdown syntax is allowed.
      *

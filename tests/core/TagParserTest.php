@@ -2,10 +2,10 @@
 
 namespace luyatests\core;
 
-use luyatests\LuyaWebTestCase;
-use luya\TagParser;
-use luya\tag\tags\LinkTag;
 use luya\tag\BaseTag;
+use luya\tag\tags\LinkTag;
+use luya\TagParser;
+use luyatests\LuyaWebTestCase;
 
 class TestTag extends BaseTag
 {
@@ -13,23 +13,23 @@ class TestTag extends BaseTag
     {
         return 'testtag';
     }
-    
+
     public function example()
     {
         return 'testtag';
     }
-    
+
     public function readme()
     {
         return 'testtag';
     }
-    
+
     public function parse($value, $sub)
     {
         if (empty($sub)) {
             return $value;
         }
-        
+
         return $value . '|'. $sub;
     }
 }
@@ -54,23 +54,23 @@ class TagParserTest extends LuyaWebTestCase
         $this->assertSame([], TagParser::convert([]));
         $this->assertSame('', TagParser::convert(''));
     }
-    
+
     public function testContentWithMarkdown()
     {
         $this->assertSame('<p>foo</p>', trim(TagParser::convertWithMarkdown('foo')));
     }
-    
+
     public function testInjectTag()
     {
         TagParser::inject('foo', ['class' => LinkTag::class]);
-        
+
         $tags = TagParser::getInstantiatedTagObjects();
-        
+
         $this->arrayHasKey('foo', $tags);
-        
+
         $this->assertInstanceOf('luya\tag\tags\LinkTag', $tags['foo']);
     }
-    
+
     public function testProcessText()
     {
         TagParser::inject('test', ['class' => TestTag::class]);
@@ -98,7 +98,7 @@ EOT;
 image[49287]([L-R] Caption)<br />
 second sentence</p>', TagParser::convertWithMarkdown($input));
 
-$input = <<<EOT
+        $input = <<<EOT
 First sentence
 
 image[49287]([L-R] Caption)

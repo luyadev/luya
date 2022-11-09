@@ -2,43 +2,43 @@
 
 namespace luyatests\core\web;
 
-use luyatests\LuyaWebTestCase;
 use luya\web\GroupUser;
 use luya\web\GroupUserIdentityInterface;
-use yii\base\Model;
 use luyatests\data\models\UserIdentity;
+use luyatests\LuyaWebTestCase;
+use yii\base\Model;
 
 class GroupAUserIdentity extends Model implements GroupUserIdentityInterface
 {
     public $id = 1;
-    
+
     public function authGroups()
     {
         return [
             'group-a',
         ];
     }
-    
+
     public static function findIdentity($id)
     {
-        return (new self);
+        return (new self());
     }
-    
+
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return false;
     }
-    
+
     public function getId()
     {
         return 1;
     }
-    
+
     public function getAuthKey()
     {
         return false;
     }
-    
+
     public function validateAuthKey($authKey)
     {
         return false;
@@ -53,7 +53,7 @@ class GroupUserTest extends LuyaWebTestCase
         $this->assertTrue($user->isGuest);
         $this->assertFalse($user->inGroup('group-a'));
     }
-    
+
     /**
      * @runInSeparateProcess
      */
@@ -68,7 +68,7 @@ class GroupUserTest extends LuyaWebTestCase
         $this->assertTrue($user->inGroup(['group-a', 'group-c']));
         $this->assertTrue($user->inGroup(['group-c', 'group-b', 'group-a']));
     }
-    
+
     /**
      * @runInSeparateProcess
      */

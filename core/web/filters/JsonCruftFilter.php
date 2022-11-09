@@ -33,19 +33,19 @@ use yii\web\Response;
  */
 class JsonCruftFilter extends ActionFilter
 {
-    const CRUFT_HEADER_NAME = 'X-CRUFT-LENGTH';
+    public const CRUFT_HEADER_NAME = 'X-CRUFT-LENGTH';
 
     /**
      * @var array A list of status codes which does not need cruft prepend as it has by defintion no content.
      * @since 1.6.2
      */
     public $ignoreStatusCodes = [204];
-    
+
     /**
      * @var string The curft string which is appended to every json rest response.
      */
     public $cruft = ")]}',\n";
-    
+
     /**
      * Get the string lengt from the cruf.
      *
@@ -55,7 +55,7 @@ class JsonCruftFilter extends ActionFilter
     {
         return strlen($this->cruft);
     }
-    
+
     /**
      * Prepend the cruft string to a given content.
      *
@@ -66,7 +66,7 @@ class JsonCruftFilter extends ActionFilter
     {
         return $this->cruft . trim($content);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -78,7 +78,7 @@ class JsonCruftFilter extends ActionFilter
                 $event->sender->content = $this->prependCruft($event->sender->content);
             });
         }
-        
+
         return $result;
     }
 }

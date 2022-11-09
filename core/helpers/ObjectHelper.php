@@ -2,11 +2,11 @@
 
 namespace luya\helpers;
 
+use luya\base\Module;
+use luya\Exception;
 use ReflectionClass;
 use ReflectionMethod;
-use luya\Exception;
 use yii\base\Controller;
-use luya\base\Module;
 use yii\base\InvalidParamException;
 
 /**
@@ -48,19 +48,19 @@ class ObjectHelper
         if (is_object($haystack)) {
             $haystack = get_class($haystack);
         }
-        
+
         $haystack = (array) $haystack;
-        
+
         foreach ($haystack as $class) {
             if ($object instanceof $class) {
                 return true;
             }
         }
-        
+
         if ($throwException) {
             throw new Exception("The given object must be an instance of: " . implode(",", $haystack));
         }
-        
+
         return false;
     }
 
@@ -136,7 +136,7 @@ class ObjectHelper
 
         return $traits;
     }
-    
+
     /**
      * Convert Object to Array
      *
@@ -147,7 +147,7 @@ class ObjectHelper
     {
         return (array) $object;
     }
-    
+
     /**
      * Call a method and ensure arguments.
      *
@@ -233,7 +233,7 @@ class ObjectHelper
                 $files[self::fileToName($staticPath, $file)] = $file;
             }
         }
-        
+
         return $files;
     }
 

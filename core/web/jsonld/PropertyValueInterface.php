@@ -18,12 +18,12 @@ interface PropertyValueInterface extends ThingInterface
      * @return static
      */
     public function setMaxValue($maxValue);
-    
+
     /**
      * Getter method for maxValue
      */
     public function getMaxValue();
-    
+
     /**
      * Setter method for measurement Technique.
      *
@@ -31,12 +31,12 @@ interface PropertyValueInterface extends ThingInterface
      * @return static
      */
     public function setMeasurementTechnique($measurementTechnique);
-    
+
     /**
      * Getter method for measurement Technique.
      */
     public function getMeasurementTechnique();
-    
+
     /**
      * Setter method for minValue.
      *
@@ -44,12 +44,12 @@ interface PropertyValueInterface extends ThingInterface
      * @return static
      */
     public function setMinValue($minValue);
-    
+
     /**
      * Getter method for minValue.
      */
     public function getMinValue();
-    
+
     /**
      * Setter method for propertyId.
      *
@@ -62,7 +62,7 @@ interface PropertyValueInterface extends ThingInterface
      * Getter method for propertyId.
      */
     public function getPropertyID();
-    
+
     /**
      * Setter method for unitCode.
      *
@@ -70,12 +70,12 @@ interface PropertyValueInterface extends ThingInterface
      * @return static
      */
     public function setUnitCode($unitCode);
-    
+
     /**
      * Getter method for unitCode.
      */
     public function getUnitCode();
-    
+
     /**
      * Setter method for unitText.
      *
@@ -88,7 +88,7 @@ interface PropertyValueInterface extends ThingInterface
      * Getter method for unitText.
      */
     public function getUnitText();
-    
+
     /**
      * Setter method for value.
      *

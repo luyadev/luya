@@ -15,4 +15,5 @@ class AssetTest extends LuyaWebTestCase
 }
 
 class MySuperAsset extends Asset
-{}
+{
+}

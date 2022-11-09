@@ -218,26 +218,26 @@ class ConfigTest extends LuyaWebTestCase
             ]
         ], $config->toArray());
     }
-    
+
     public function testEnvScope()
     {
         $config = new Config('web', 'basePath', [
             'common' => 'common'
         ]);
-    
+
         $config->env(Config::ENV_LOCAL, function (Config $config) {
             $config->application(['local' => 'bar']);
         });
-    
+
         $config->env(Config::ENV_PROD, function (Config $config) {
             $config->component('prod', 'bar');
             $config->component('prod2', 'foo');
         });
-    
+
         $config->env('customname', function (Config $config) {
             $config->component('custom', 'bar');
         });
-    
+
         $this->assertSame([
             'common' => 'common',
             'id' => 'web',
@@ -249,7 +249,7 @@ class ConfigTest extends LuyaWebTestCase
                 ]
             ]
         ], $config->toArray(['customname', Config::ENV_LOCAL]));
-    
+
         $this->assertSame([
             'common' => 'common',
             'id' => 'web',
@@ -320,7 +320,7 @@ class ConfigTest extends LuyaWebTestCase
             ]
         ]);
 
-        $config->env(Config::ENV_LOCAL, function($config) {
+        $config->env(Config::ENV_LOCAL, function ($config) {
             $config->component('composition', [
                 'allowedHosts' => ['dd'],
                 'hidden' => true,

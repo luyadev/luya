@@ -2,9 +2,9 @@
 
 namespace luya\tag\tags;
 
-use luya\tag\BaseTag;
-use luya\helpers\Url;
 use luya\helpers\StringHelper;
+use luya\helpers\Url;
+use luya\tag\BaseTag;
 use yii\helpers\Html;
 
 /**
@@ -30,7 +30,7 @@ class LinkTag extends BaseTag
     {
         return 'link[luya.io](Visit us!)';
     }
-    
+
     /**
      * The readme instructions string for the LinkTag.
      *
@@ -44,7 +44,7 @@ In order to call an internal URL use the `//` prefix like `link[//contact](Go to
 If a single `/` is used its a relative url and therfore won\'t be changed.
 In order to generate an external url use `link[luya.io](Go to Luya.io)`.';
     }
-    
+
     /**
      * Generate the Link Tag.
      *
@@ -66,9 +66,9 @@ In order to generate an external url use `link[luya.io](Go to Luya.io)`.';
             $value = Url::ensureHttp($value);
             $external = true;
         }
-        
+
         $label = empty($sub) ? $value : $sub;
-        
+
         $options = [
             'class' => $external ? 'link-external' : 'link-internal',
             'target' => $external ? '_blank' : null,
@@ -77,7 +77,7 @@ In order to generate an external url use `link[luya.io](Go to Luya.io)`.';
         if ($external) {
             $options['rel'] = 'noopener';
         }
-        
+
         return Html::a($label, $value, $options);
     }
 }

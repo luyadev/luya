@@ -2,10 +2,10 @@
 
 namespace luya\web;
 
-use Yii;
-
 use luya\Exception;
+
 use luya\helpers\StringHelper;
+use Yii;
 
 /**
  * LUYA web view wrapper.
@@ -24,7 +24,7 @@ class View extends \yii\web\View
      * all the meta informations will be auto added to meta tags.
      */
     public $autoRegisterCsrf = false;
-    
+
     /**
      * Init view object. Implements auto register csrf meta tokens.
      * @see \yii\base\View::init()
@@ -57,11 +57,11 @@ class View extends \yii\web\View
     public function getAssetUrl($assetName)
     {
         $assetName = ltrim($assetName, '\\');
-        
+
         if (!isset($this->assetBundles[$assetName])) {
             throw new Exception("The AssetBundle '$assetName' is not registered.");
         }
-        
+
         return $this->assetBundles[$assetName]->baseUrl;
     }
 

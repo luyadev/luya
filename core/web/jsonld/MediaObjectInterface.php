@@ -18,12 +18,12 @@ interface MediaObjectInterface extends CreativeWorkInterface
      * @return static
      */
     public function setContentUrl(UrlValue $url);
-    
+
     /**
      * Getter method for contentUrl.
      */
     public function getContentUrl();
-    
+
     /**
      * A URL pointing to a player for a specific video. In general, this is the information in the src element of an embed tag and should not be the same as the content of the loc tag.
      *
@@ -31,19 +31,19 @@ interface MediaObjectInterface extends CreativeWorkInterface
      * @return static
      */
     public function setEmbedUrl(UrlValue $url);
-    
+
     /**
      * Getter method for embedUrl.
      */
     public function getEmbedUrl();
-    
+
     /**
      * Date when this media object was uploaded to this site.
      * @param DateValue $date
      * @return static
      */
     public function setUploadDate(DateValue $date);
-    
+
     /**
      * Getter method for uploadDate.
      */

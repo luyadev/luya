@@ -2,16 +2,16 @@
 
 namespace luya\traits;
 
-use Yii;
-use yii\web\Response;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\QueryParamAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\ContentNegotiator;
-use yii\base\Model;
+use luya\helpers\RestHelper;
 use luya\rest\UserBehaviorInterface;
 use luya\web\filters\JsonCruftFilter;
-use luya\helpers\RestHelper;
+use Yii;
+use yii\base\Model;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\QueryParamAuth;
+use yii\filters\ContentNegotiator;
+use yii\web\Response;
 
 /**
  * Rest Behaviors Trait.
@@ -36,7 +36,7 @@ trait RestBehaviorsTrait
      * @var boolean Whether CORS should be enabled or not.
      */
     public $enableCors = false;
-    
+
     /**
      * @var array An array with languages which are passed to {{yii\filters\ContentNegotiator::$languages}}. Example
      *
@@ -50,7 +50,7 @@ trait RestBehaviorsTrait
      * @see {{yii\filters\ContentNegotiator::$languages}}
      */
     public $languages = [];
-    
+
     /**
      * @var boolean Whether a unparsable cruf should be added to the json response or not. When enabled you have to parse the json response first before interpreting
      * as json.
@@ -67,7 +67,7 @@ trait RestBehaviorsTrait
      * @see {{yii\filters\auth\AuthMethod::$optional}}
      */
     public $authOptional = [];
-    
+
     /**
      * Whether the rest controller is protected or not.
      *
@@ -77,21 +77,21 @@ trait RestBehaviorsTrait
     {
         if ($this instanceof UserBehaviorInterface) {
             $class = $this->userAuthClass();
-            
+
             if (!$class) { // return false;
                 return false;
             }
-            
+
             if (!is_object($class)) {
                 return Yii::createObject($class);
             }
-    
+
             return $class;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Return all Auth methods for Composite Auth.
      *
@@ -128,7 +128,7 @@ trait RestBehaviorsTrait
         unset($behaviors['authenticator']);
 
         if ($this->getUserAuthClass()) {
-            
+
             // change to admin user auth class
             $behaviors['authenticator'] = [
                 'class' => CompositeAuth::class,
@@ -136,7 +136,7 @@ trait RestBehaviorsTrait
                 'authMethods' => $this->getCompositeAuthMethods(),
                 'optional' => $this->authOptional,
             ];
-            
+
             if ($this->enableCors) {
                 $behaviors['authenticator']['except'] = ['options'];
             }
@@ -150,7 +150,7 @@ trait RestBehaviorsTrait
             ],
             'languages' => $this->languages,
         ];
-        
+
         // by default rate limiter behavior is removed as it requires a database
         // user given from the admin module.
         if (isset($behaviors['rateLimiter'])) {
@@ -160,7 +160,7 @@ trait RestBehaviorsTrait
         if ($this->jsonCruft) {
             $behaviors['cruft'] = JsonCruftFilter::class;
         }
-        
+
         return $behaviors;
     }
 
@@ -195,7 +195,7 @@ trait RestBehaviorsTrait
     {
         return RestHelper::sendModelError($model);
     }
-    
+
     /**
      * Send Array validation error.
      *

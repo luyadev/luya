@@ -24,7 +24,7 @@ namespace luya\web\jsonld;
 class DurationValue extends BaseValue
 {
     private $_duration;
-    
+
     /**
      * Set duration data.
      *
@@ -34,7 +34,7 @@ class DurationValue extends BaseValue
     {
         $this->_duration = $duration;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -44,10 +44,10 @@ class DurationValue extends BaseValue
         if (!is_numeric($this->_duration)) {
             $this->_duration = strtotime($this->_duration, 0);
         }
-        
+
         return $this->timeToIso8601Duration($this->_duration);
     }
-    
+
     /**
      * Convert time to iso date.
      *
@@ -57,30 +57,30 @@ class DurationValue extends BaseValue
      */
     protected function timeToIso8601Duration($time)
     {
-        $units = array(
+        $units = [
             "Y" => 365*24*3600,
             "D" =>     24*3600,
             "H" =>        3600,
             "M" =>          60,
             "S" =>           1,
-        );
-        
+        ];
+
         $str = "P";
         $istime = false;
-        
+
         foreach ($units as $unitName => &$unit) {
             $quot  = intval($time / $unit);
             $time -= $quot * $unit;
             $unit  = $quot;
             if ($unit > 0) {
-                if (!$istime && in_array($unitName, array("H", "M", "S"))) { // There may be a better way to do this
+                if (!$istime && in_array($unitName, ["H", "M", "S"])) { // There may be a better way to do this
                     $str .= "T";
                     $istime = true;
                 }
                 $str .= strval($unit) . $unitName;
             }
         }
-        
+
         return $str;
     }
 }

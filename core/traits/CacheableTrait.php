@@ -57,7 +57,7 @@ trait CacheableTrait
      * @var boolean Whether the caching is enabled or disabled.
      */
     private $_cachable;
-    
+
     /**
      * Check if the current configuration of the application and the property allows a caching of the
      * language container data.
@@ -69,10 +69,10 @@ trait CacheableTrait
         if ($this->_cachable === null) {
             $this->_cachable = Yii::$app->has('cache') ? true : false;
         }
-    
+
         return $this->_cachable;
     }
-    
+
     /**
     * Method combines both [[setHasCache()]] and [[getHasCache()]] methods to retrieve value identified by a $key,
     * or to store the result of $closure execution if there is no cache available for the $key.
@@ -106,14 +106,14 @@ trait CacheableTrait
         if (($value = $this->getHasCache($key)) !== false) {
             return $value;
         }
-        
+
         $value = call_user_func($closure, $this);
-        
+
         $this->setHasCache($key, $value, $dependency, $duration);
-        
+
         return $value;
     }
-    
+
     /**
      * Store cache data for a specific key if caching is enabled in this application.
      *
@@ -130,13 +130,13 @@ trait CacheableTrait
             if (is_array($dependency)) {
                 $dependency = Yii::createObject($dependency);
             }
-            
+
             return Yii::$app->cache->set($key, $value, is_null($cacheExpiration) ? $this->_cacheExpiration : $cacheExpiration, $dependency);
         }
-        
+
         return false;
     }
-    
+
     /**
      * Remove a value from the cache if caching is enabled.
      *
@@ -148,10 +148,10 @@ trait CacheableTrait
         if ($this->isCachable()) {
             return Yii::$app->cache->delete($key);
         }
-        
+
         return false;
     }
-    
+
     /**
      * Get the caching data if caching is allowed and there is any data stored for this key.
      *
@@ -162,19 +162,19 @@ trait CacheableTrait
     {
         if ($this->isCachable()) {
             $data = Yii::$app->cache->get($key);
-            
+
             $enumKey = (is_array($key)) ? implode(",", $key) : $key;
-            
+
             if ($data) {
                 Yii::debug("Cacheable trait key '$enumKey' successfully loaded from cache.", __METHOD__);
                 return $data;
             }
             Yii::debug("Cacheable trait key '$enumKey' has not been found in cache.", __METHOD__);
         }
-    
+
         return false;
     }
-    
+
     /**
      * Deletes all values from cache.
      *
@@ -185,7 +185,7 @@ trait CacheableTrait
         if ($this->isCachable()) {
             return Yii::$app->cache->flush();
         }
-        
+
         return false;
     }
 }

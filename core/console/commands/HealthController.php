@@ -31,7 +31,7 @@ class HealthController extends \luya\console\Command
         'configs/env.php',
         'public_html/index.php',
     ];
-    
+
     /**
      * Create all required directories an check whether they are writeable or not.
      *
@@ -49,7 +49,7 @@ class HealthController extends \luya\console\Command
         @chdir(Yii::getAlias('@app'));
 
         $this->output('The directory the health commands is applying to: ' . Yii::getAlias('@app'));
-        
+
         foreach ($this->folders as $folder => $writable) {
             $mode = ($writable) ? 0777 : 0775;
             if (!file_exists($folder)) {
@@ -62,7 +62,7 @@ class HealthController extends \luya\console\Command
             } else {
                 $this->outputInfo("$folder: directory exists already");
             }
-            
+
             if ($writable && !is_writable($folder)) {
                 $this->outputInfo("$folder: is not writeable, try to set mode '$mode'.");
                 @chmod($folder, $mode);
@@ -84,7 +84,7 @@ class HealthController extends \luya\console\Command
                 $this->outputError("$file: file does not exists!");
             }
         }
-        
+
         return $error ? $this->outputError('Health check found errors!') : $this->outputSuccess('O.K.');
     }
 

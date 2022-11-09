@@ -24,7 +24,7 @@ interface LinkInterface
      * @return string Returns the href string which can be either with or without domain.
      */
     public function getHref();
-    
+
     /**
      * Get the target attribute value inside the Link tag.
      *

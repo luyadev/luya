@@ -2,12 +2,12 @@
 
 namespace luya\console\commands;
 
-use Yii;
-use yii\console\widgets\Table;
-use luya\Boot;
 use luya\admin\models\Config;
+use luya\Boot;
 use luya\console\Command;
 use luya\console\interfaces\ImportControllerInterface;
+use Yii;
+use yii\console\widgets\Table;
 
 /**
  * Import controller runs the module defined importer classes.
@@ -19,9 +19,9 @@ use luya\console\interfaces\ImportControllerInterface;
  * ```
  *
  * Each of the importer classes must extend the {{\luya\console\Importer}} class.
- * 
+ *
  * To override importer settings reconfigure the importer command:
- * 
+ *
  * ```php
  * 'controllerMap' => [
  *     'import' => [
@@ -47,7 +47,7 @@ class ImportController extends Command implements ImportControllerInterface
     public function init()
     {
         parent::init();
-        
+
         // foreach scanFolders of all modules
         foreach (Yii::$app->getApplicationModules() as $id => $module) {
             foreach ($this->scanFolders as $folderName) {
@@ -61,7 +61,7 @@ class ImportController extends Command implements ImportControllerInterface
     }
 
     private $_dirs = [];
-    
+
     /**
      * Add a given directory to the list of folders.
      *
@@ -76,12 +76,12 @@ class ImportController extends Command implements ImportControllerInterface
             $this->_dirs[$folderName][] = [
                 'ns' => $ns,
                 'module' => $module,
-                'folderPath' => rtrim($path,DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR,
+                'folderPath' => rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR,
                 'files' => $this->scanDirectoryFiles($path, $ns, $module),
             ];
         }
     }
-    
+
     /**
      * Scan a given directory path and return an array with namespace, module and file.
      *
@@ -104,10 +104,10 @@ class ImportController extends Command implements ImportControllerInterface
                 ];
             }
         }
-        
+
         return $files;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -123,10 +123,10 @@ class ImportController extends Command implements ImportControllerInterface
                 }
             }
         }
-        
+
         return $files;
     }
-    
+
     private $_log = [];
 
     /**
@@ -136,7 +136,7 @@ class ImportController extends Command implements ImportControllerInterface
     {
         $this->_log[$section][] = $value;
     }
-    
+
     /**
      * Get all log data.
      *
@@ -172,11 +172,11 @@ class ImportController extends Command implements ImportControllerInterface
                 }
             }
         }
-        
+
         ksort($queue);
         return $queue;
     }
-    
+
     /**
      * Run the import process.
      *
@@ -197,17 +197,17 @@ class ImportController extends Command implements ImportControllerInterface
             Config::set(Config::CONFIG_INSTALLER_VENDOR_TIMESTAMP, Yii::$app->packageInstaller->timestamp);
             Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
         }
-        
+
         $this->output('LUYA import command (based on LUYA ' . Boot::VERSION . ')');
-        
+
         foreach ($this->getLog() as $section => $value) {
             $this->outputInfo(PHP_EOL . $section . ":");
             $this->logValueToTable($value);
         }
-        
+
         return $this->outputSuccess("Importer run successful.");
     }
-    
+
     /**
      * Print the log values as a table.
      *
@@ -219,7 +219,7 @@ class ImportController extends Command implements ImportControllerInterface
         $table = new Table();
         $table->setHeaders(['Key', 'Value']);
         $rows = [];
-     
+
         foreach ($logs as $key => $value) {
             if (is_array($value)) {
                 foreach ($value as $kk => $kv) {

@@ -2,8 +2,8 @@
 
 namespace luya\tag\tags;
 
-use luya\tag\BaseTag;
 use luya\helpers\StringHelper;
+use luya\tag\BaseTag;
 use yii\helpers\Html;
 
 /**
@@ -27,7 +27,7 @@ class TelTag extends BaseTag
     {
         return 'tel[+41 123 45 65](Call us!)';
     }
-    
+
     /**
      * The readme instructions string for the TelTag.
      *
@@ -38,7 +38,7 @@ class TelTag extends BaseTag
     {
         return 'Generate a tel link which is commonly used on mobile websites in order create a click to call link. tel[+41 061 123 123] or with with a name instead of the phone number tel[+41 061 123 123](call us now!).';
     }
-    
+
     /**
      * Generate the Tel Tag.
      *
@@ -51,13 +51,13 @@ class TelTag extends BaseTag
     {
         return Html::a(empty($sub) ? $value : $sub, 'tel:' . $this->ensureNumber($value));
     }
-        
+
     private function ensureNumber($number)
     {
         if (!StringHelper::startsWith($number, '+')) {
             $number = '+'.$number;
         }
-        
+
         return str_replace(" ", "", $number);
     }
 }

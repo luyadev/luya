@@ -42,7 +42,7 @@ class DynamicModel extends \yii\base\DynamicModel
 
     /**
      * Get all hints for backwards compatibility.
-     * 
+     *
      * @return array
      * @since 2.1.0
      */
@@ -60,7 +60,7 @@ class DynamicModel extends \yii\base\DynamicModel
         foreach ($this->attributeHints as $key => $value) {
             $hints[$key] = Yii::t('app', $value);
         }
-        
+
         return $hints;
     }
 }

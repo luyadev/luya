@@ -2,9 +2,9 @@
 
 namespace luya\console;
 
-use Yii;
 use luya\base\BaseBootstrap;
 use luya\helpers\FileHelper;
+use Yii;
 use yii\helpers\Inflector;
 
 /**
@@ -40,11 +40,11 @@ class Bootstrap extends BaseBootstrap
             if (file_exists($folder) && is_dir($folder)) {
                 foreach (FileHelper::findFiles($folder) as $file) {
                     $module->controllerNamespace = $module->namespace . '\commands';
-                    
+
                     $className = '\\'.$module->getNamespace().'\\commands\\' . pathinfo($file, PATHINFO_FILENAME);
 
                     $command = str_replace('-controller', '', $module->id . '/' . Inflector::camel2id(pathinfo($file, PATHINFO_FILENAME)));
-                    
+
                     Yii::$app->controllerMap[$command] = ['class' => $className];
                 }
             }

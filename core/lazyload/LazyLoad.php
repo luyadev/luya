@@ -3,9 +3,9 @@
 namespace luya\lazyload;
 
 use luya\base\Widget;
+use luya\web\View;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
-use luya\web\View;
 
 /**
  * Image Lazy Loader.
@@ -23,10 +23,10 @@ use luya\web\View;
  */
 class LazyLoad extends Widget
 {
-    const JS_ASSET_KEY = 'lazyload.js.register';
+    public const JS_ASSET_KEY = 'lazyload.js.register';
 
-    const CSS_ASSET_KEY = 'lazyload.css.register';
-    const CSS_ASSET_KEY_PLACEHOLDER = 'lazyload.placeholder.css.register';
+    public const CSS_ASSET_KEY = 'lazyload.css.register';
+    public const CSS_ASSET_KEY_PLACEHOLDER = 'lazyload.placeholder.css.register';
 
     /**
      * @var string The path to the image you want to lazy load.
@@ -164,7 +164,7 @@ class LazyLoad extends Widget
 
         $this->view->registerCss($this->defaultCss, [], self::CSS_ASSET_KEY);
     }
-    
+
     /**
      * Returns the aspect ration based on height or width.
      *

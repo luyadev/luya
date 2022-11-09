@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\web\jsonld;
 
 /**

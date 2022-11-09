@@ -2,12 +2,12 @@
 
 namespace luya\web;
 
+use luya\Exception;
+use luya\helpers\ArrayHelper;
+use luya\helpers\StringHelper;
 use Yii;
 use yii\base\Component;
 use yii\web\ForbiddenHttpException;
-use luya\Exception;
-use luya\helpers\StringHelper;
-use luya\helpers\ArrayHelper;
 
 /**
  * Composition parseRequest Handler.
@@ -38,12 +38,12 @@ use luya\helpers\ArrayHelper;
  */
 class Composition extends Component implements \ArrayAccess
 {
-    const VAR_LANG_SHORT_CODE = 'langShortCode';
-    
+    public const VAR_LANG_SHORT_CODE = 'langShortCode';
+
     /**
      * @var string The Regular-Expression matching the var finder inside the url parts
      */
-    const VAR_MATCH_REGEX = '/<(\w+):?([^>]+)?>/';
+    public const VAR_MATCH_REGEX = '/<(\w+):?([^>]+)?>/';
 
     /**
      * @var \yii\web\Request Request-Object container from DI
@@ -95,7 +95,7 @@ class Composition extends Component implements \ArrayAccess
      * The above configuration must be defined in your compostion componeont configuration in your config file.
      */
     public $hostInfoMapping = [];
-    
+
     /**
      * @var array|string An array with all valid hosts in order to ensure the request host is equals to valid hosts.
      * This filter provides protection against ['host header' attacks](https://www.acunetix.com/vulnerabilities/web/host-header-attack).
@@ -115,7 +115,7 @@ class Composition extends Component implements \ArrayAccess
      * @since 1.0.5
      */
     public $allowedHosts;
-    
+
     /**
      * @var array An array where key is the pattern and value an array of possible values for this pattern.
      * A list of values which are valid for every pattern. If set and a value is provided which is not inside this property
@@ -164,12 +164,12 @@ class Composition extends Component implements \ArrayAccess
         if ($this->allowedHosts !== null && !$this->isHostAllowed($this->allowedHosts)) {
             throw new ForbiddenHttpException("Invalid host name.");
         }
-        
+
         if (array_key_exists($this->request->hostInfo, $this->hostInfoMapping)) {
             $this->default = $this->hostInfoMapping[$this->request->hostInfo];
         }
     }
-    
+
     /**
      * Checks if the current request name against the allowedHosts list.
      *
@@ -179,15 +179,15 @@ class Composition extends Component implements \ArrayAccess
     public function isHostAllowed($allowedHosts)
     {
         $currentHost = $this->request->hostName;
-        
+
         $rules = (array) $allowedHosts;
-        
+
         foreach ($rules as $allowedHost) {
             if (StringHelper::matchWildcard($allowedHost, $currentHost)) {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -232,7 +232,7 @@ class Composition extends Component implements \ArrayAccess
     }
 
     private $_keys;
-    
+
     /**
      * Resolves the current key and value objects based on the current pathInto and pattern from Request component.
      *
@@ -244,10 +244,10 @@ class Composition extends Component implements \ArrayAccess
         if ($this->_keys === null) {
             $this->_keys = $this->getResolvedPathInfo($this->request)->resolvedValues;
         }
-        
+
         return $this->_keys;
     }
-    
+
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
      *
@@ -283,10 +283,10 @@ class Composition extends Component implements \ArrayAccess
     public function getKey($key, $defaultValue = false)
     {
         $this->getKeys();
-        
+
         return isset($this->_keys[$key]) ? $this->_keys[$key] : $defaultValue;
     }
-    
+
     /**
      * Get the composition prefix path based on current provided request.
      *
@@ -326,7 +326,7 @@ class Composition extends Component implements \ArrayAccess
     public function createRoute(array $overrideKeys = [])
     {
         $composition = $this->getKeys();
-        
+
         foreach ($overrideKeys as $key => $value) {
             if (array_key_exists($key, $composition)) {
                 $composition[$key] = $value;
@@ -384,7 +384,7 @@ class Composition extends Component implements \ArrayAccess
 
         return preg_replace("#$pattern#", '', $route, 1);
     }
-    
+
     /**
      * Wrapper for `getKey('langShortCode')` to load language to set php env settings.
      *
@@ -394,7 +394,7 @@ class Composition extends Component implements \ArrayAccess
     {
         return $this->getKey(self::VAR_LANG_SHORT_CODE);
     }
-    
+
     /**
      * Return the the default langt short code.
      *
@@ -419,7 +419,7 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * ArrayAccess set value to array.
-     * 
+     *
      * @see \ArrayAccess::offsetSet()
      * @param string $offset The key of the array
      * @param mixed $value The value for the offset key.
@@ -458,7 +458,7 @@ class Composition extends Component implements \ArrayAccess
     {
         throw new Exception('Deleting keys in Composition is not allowed.');
     }
-    
+
     /**
      * Wrapper for `getKey('langShortCode')` to load language to set php env settings.
      *
@@ -470,7 +470,7 @@ class Composition extends Component implements \ArrayAccess
         trigger_error('use `getLangShortCode()` instead. Will be removed in version 3.0', E_USER_DEPRECATED);
         return $this->getKey(self::VAR_LANG_SHORT_CODE);
     }
-    
+
     /**
      * Return the whole composition array.
      *
@@ -482,7 +482,7 @@ class Composition extends Component implements \ArrayAccess
         trigger_error('use `getKeys()` instead. Will be removed in version 3.0', E_USER_DEPRECATED);
         return $this->_keys;
     }
-    
+
     /**
      * Return a path like string with all composition with trailing slash e.g. us/e.
      *

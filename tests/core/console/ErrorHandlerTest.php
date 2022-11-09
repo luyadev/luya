@@ -2,10 +2,9 @@
 
 namespace luyatests\core\console;
 
-use Yii;
-use luyatests\LuyaConsoleTestCase;
-use luya\Exception;
 use luya\console\ErrorHandler;
+use luya\Exception;
+use luyatests\LuyaConsoleTestCase;
 
 class ErrorHandlerTest extends LuyaConsoleTestCase
 {
@@ -17,7 +16,7 @@ class ErrorHandlerTest extends LuyaConsoleTestCase
         ob_start();
         $handler->renderException($error);
         $output = ob_get_clean();
-        
+
         $this->assertNotNull($handler->lastTransferCall);
     }
 }

@@ -11,7 +11,7 @@ namespace luya\web\jsonld;
 class DateTimeValue extends BaseValue
 {
     private $_datetime;
-    
+
     /**
      * Provide datetime value.
      *
@@ -21,7 +21,7 @@ class DateTimeValue extends BaseValue
     {
         $this->_datetime = $datetime;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -30,7 +30,7 @@ class DateTimeValue extends BaseValue
         if (is_numeric($this->_datetime)) {
             $this->_datetime = date("c", $this->_datetime);
         }
-        
+
         return $this->_datetime;
     }
 }

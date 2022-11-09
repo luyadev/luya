@@ -10,7 +10,7 @@ use ReflectionClass;
  *
  * Since version 1.1, the main differente to the Yii implementation is that {{$sourcePath}} has a default value which points into a `/resources` folder containing
  * the name of the assets itself.
- * 
+ *
  * Assuming an `MySuperAsset` asset in `/app` folder will lookup all files under `/app/resources/my-super-asset/...`.
  *
  * @author Basil Suter <basil@nadar.io>

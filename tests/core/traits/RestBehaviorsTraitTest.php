@@ -2,11 +2,11 @@
 
 namespace luyatests\core\traits;
 
-use Yii;
-use luyatests\LuyaWebTestCase;
 use luya\rest\Controller;
 use luya\rest\UserBehaviorInterface;
 use luyatests\data\models\User;
+use luyatests\LuyaWebTestCase;
+use Yii;
 
 class RestBehaviorsTraitTestStubWithUserBehaviorFalse extends Controller implements UserBehaviorInterface
 {
@@ -49,45 +49,45 @@ class RestBehaviorsTraitTest extends LuyaWebTestCase
     public function testFalseUserAuthClass()
     {
         $controller = new RestBehaviorsTraitTestStubWithUserBehaviorFalse('controller', Yii::$app);
-        
+
         $this->assertArrayHasKey('verbFilter', $controller->behaviors());
         $this->assertArrayHasKey('contentNegotiator', $controller->behaviors());
         $this->assertArrayNotHasKey('authenticator', $controller->behaviors());
     }
-    
+
     public function testWithoutUserAuthClass()
     {
         $controller = new RestBehaviorsTraitTestStubWithoutUser('controller', Yii::$app);
-    
+
         $this->assertArrayHasKey('verbFilter', $controller->behaviors());
         $this->assertArrayHasKey('contentNegotiator', $controller->behaviors());
         $this->assertArrayNotHasKey('authenticator', $controller->behaviors());
     }
-    
+
     public function testStringUserAuthClass()
     {
         $controller = new RestBehaviorsTraitTestStubWithUserBehaviorString('controller', Yii::$app);
-    
+
         $this->assertArrayHasKey('verbFilter', $controller->behaviors());
         $this->assertArrayHasKey('contentNegotiator', $controller->behaviors());
         $this->assertArrayHasKey('authenticator', $controller->behaviors());
         $this->assertInstanceOf('yii\web\User', $controller->behaviors()['authenticator']['user']);
     }
-    
+
     public function testObjectUserAuthClass()
     {
         $controller = new RestBehaviorsTraitTestStubWithUserBehaviorObject('controller', Yii::$app);
-    
+
         $this->assertArrayHasKey('verbFilter', $controller->behaviors());
         $this->assertArrayHasKey('contentNegotiator', $controller->behaviors());
         $this->assertArrayHasKey('authenticator', $controller->behaviors());
         $this->assertInstanceOf('yii\web\User', $controller->behaviors()['authenticator']['user']);
     }
-    
+
     public function testArrayUserAuthClass()
     {
         $controller = new RestBehaviorsTraitTestStubWithUserBehaviorArray('controller', Yii::$app);
-    
+
         $this->assertArrayHasKey('verbFilter', $controller->behaviors());
         $this->assertArrayHasKey('contentNegotiator', $controller->behaviors());
         $this->assertArrayHasKey('authenticator', $controller->behaviors());

@@ -12,7 +12,7 @@ namespace luya\web\jsonld;
 class PropertyValue extends BaseThing implements PropertyValueInterface
 {
     use PropertyValueTrait;
-    
+
     /**
      * @inheritdoc
      */

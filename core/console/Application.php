@@ -51,7 +51,7 @@ class Application extends \yii\console\Application
             'health' => 'luya\console\commands\HealthController',
         ];
     }
-    
+
     /**
      * @inheritdoc
      */

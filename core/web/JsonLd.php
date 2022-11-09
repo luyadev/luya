@@ -2,29 +2,29 @@
 
 namespace luya\web;
 
-use Yii;
-use yii\helpers\Json;
-use yii\base\BaseObject;
 use luya\Exception;
-use luya\web\jsonld\Person;
-use luya\web\jsonld\Event;
-use luya\web\jsonld\Place;
-use luya\web\jsonld\LiveBlogPosting;
+use luya\web\jsonld\AggregateRating;
 use luya\web\jsonld\Article;
 use luya\web\jsonld\BlogPosting;
-use luya\web\jsonld\CreativeWork;
-use luya\web\jsonld\Organization;
-use luya\web\jsonld\SocialMediaPosting;
-use luya\web\jsonld\Thing;
-use luya\web\jsonld\ImageObject;
-use luya\web\jsonld\AggregateRating;
-use luya\web\jsonld\Rating;
 use luya\web\jsonld\Comment;
 use luya\web\jsonld\ContactPoint;
 use luya\web\jsonld\Country;
+use luya\web\jsonld\CreativeWork;
+use luya\web\jsonld\Event;
+use luya\web\jsonld\ImageObject;
+use luya\web\jsonld\LiveBlogPosting;
 use luya\web\jsonld\Offer;
+use luya\web\jsonld\Organization;
+use luya\web\jsonld\Person;
+use luya\web\jsonld\Place;
 use luya\web\jsonld\PostalAddress;
 use luya\web\jsonld\PropertyValue;
+use luya\web\jsonld\Rating;
+use luya\web\jsonld\SocialMediaPosting;
+use luya\web\jsonld\Thing;
+use Yii;
+use yii\base\BaseObject;
+use yii\helpers\Json;
 
 /**
  * Registerin Microdata as JsonLD.
@@ -97,7 +97,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new CreativeWork($config)));
     }
-    
+
     /**
      * Register new Event.
      *
@@ -137,7 +137,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new Organization($config)));
     }
-    
+
     /**
      * Register new Person.
      *
@@ -189,7 +189,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new ImageObject($config)));
     }
-    
+
     /**
      * Register new Aggregated Rating.
      *
@@ -213,7 +213,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new Rating($config)));
     }
-    
+
     /**
      * Register new Comment.
      *
@@ -225,7 +225,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new Comment($config)));
     }
-    
+
     /**
      * Register new Contact Point.
      *
@@ -239,7 +239,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new ContactPoint($config)));
     }
-    
+
     /**
      * Register new Country.
      *
@@ -265,7 +265,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new Offer($config)));
     }
-    
+
     /**
      * Register new Postal Address.
      *
@@ -277,7 +277,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new PostalAddress()));
     }
-    
+
     /**
      * Register new Property Value.
      *
@@ -289,7 +289,7 @@ class JsonLd extends BaseObject
     {
         return self::addGraph((new PropertyValue($config)));
     }
-    
+
     /**
      * Register graph data.
      *
@@ -299,17 +299,17 @@ class JsonLd extends BaseObject
     public static function addGraph($data)
     {
         self::registerView();
-        
+
         if (is_scalar($data)) {
             throw new Exception("Data must be either an array or an object of type luya\web\jsonld\BaseThing.");
         }
-        
+
         Yii::$app->view->params['@context'] = 'https://schema.org';
         Yii::$app->view->params['@graph'][] = $data;
-        
+
         return $data;
     }
-    
+
     /**
      * Reset the JsonLd Data.
      *
@@ -320,9 +320,9 @@ class JsonLd extends BaseObject
         self::$_view = null;
         Yii::$app->view->params['@graph'] = [];
     }
-    
+
     private static $_view;
-    
+
     /**
      * Register the view file an observe the event which then reads the data from @graph params key.
      */
@@ -332,7 +332,7 @@ class JsonLd extends BaseObject
             Yii::$app->view->on(View::EVENT_BEGIN_BODY, function ($event) {
                 echo '<script type="application/ld+json">' . Json::encode($event->sender->params) . '</script>';
             });
-                    
+
             self::$_view = true;
         }
     }

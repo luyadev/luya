@@ -2,9 +2,9 @@
 
 namespace luya\web;
 
+use luya\helpers\StringHelper;
 use luya\helpers\Url;
 use yii\base\InvalidConfigException;
-use luya\helpers\StringHelper;
 
 /**
  * Generate External Link object.
@@ -24,21 +24,21 @@ class WebsiteLink extends BaseLink
      * @var string The default value which is used for website links is `_blank` you can override this property in order to change the default value.
      */
     public $defaultTarget = '_blank';
-    
+
     /**
      * @inheritdoc
      */
     public function init()
     {
         parent::init();
-        
+
         if ($this->href === null) {
             throw new InvalidConfigException('The href attribute can not be empty and must be set trough configuration array.');
         }
     }
-    
+
     private $_href;
-    
+
     /**
      * Set the href value for an external link resource.
      *
@@ -55,7 +55,7 @@ class WebsiteLink extends BaseLink
             $this->_href = Url::ensureHttp($href);
         }
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -63,9 +63,9 @@ class WebsiteLink extends BaseLink
     {
         return $this->_href;
     }
-    
+
     private $_target;
-    
+
     /**
      * Setter method for the link target.
      *
@@ -75,7 +75,7 @@ class WebsiteLink extends BaseLink
     {
         $this->_target = $target;
     }
-    
+
     /**
      * @inheritdoc
      */
