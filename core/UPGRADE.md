@@ -5,7 +5,7 @@ This document will help you upgrading from a LUYA Version into another. For more
 
 ## 2.3.0
 
-+ [#2165](https://github.com/luyadev/luya/pull/2165) Official deprecated unit tests for php 7.0, 7.1, 7.2 and 7.3. The minium php version is now 7.4, see [php supported versions](https://www.php.net/supported-versions.php). The code keeps the same and should be backwards compatible but its not official tested anymore.
++ [#2165](https://github.com/luyadev/luya/pull/2165) Official deprecated unit tests for php 7.0 and 7.1. The minium php version is now 7.2, see [php supported versions](https://www.php.net/supported-versions.php). The code keeps the same and should be backwards compatible but its not official tested anymore.
 
 ## 2.0.0
 

@@ -7,7 +7,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 > Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.
 
-+ [#2165](https://github.com/luyadev/luya/pull/2165) Official deprecated unit tests for php 7.0, 7.1
++ [#2165](https://github.com/luyadev/luya/pull/2165) Official deprecated unit tests for php 7.0 and 7.1. Code is unchanged.
 
 ## 2.2.1 (5. October 2022)
 
