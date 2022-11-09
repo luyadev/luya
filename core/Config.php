@@ -398,7 +398,7 @@ class Config
 
             case ConfigDefinition::GROUP_CALLABLE:
                 call_user_func($definition->getConfig(), $this);
-            break;
+                break;
         }
     }
 

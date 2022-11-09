@@ -177,7 +177,6 @@ class ThemeManager extends \yii\base\Component
         }
 
         foreach (Yii::$app->getPackageInstaller()->getConfigs() as $config) {
-
             /** @var PackageConfig $config */
             foreach ($config->themes as $theme) {
                 if (strpos($theme, '@') === 0 || strpos($theme, '/') === 0) {
