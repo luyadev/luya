@@ -197,8 +197,6 @@ abstract class Boot
 
     /**
      * Run Cli-Application based on the provided config file.
-     *
-     * @return string|integer
      */
     public function applicationConsole()
     {
@@ -241,8 +239,6 @@ abstract class Boot
 
     /**
      * Run Web-Application based on the provided config file.
-     *
-     * @return string Returns the Yii Application run() method if mock is disabled. Otherwise returns void
      */
     public function applicationWeb()
     {

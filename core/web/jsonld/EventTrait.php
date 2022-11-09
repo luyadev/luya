@@ -102,7 +102,7 @@ trait EventTrait
      */
     public function setComposer($composer)
     {
-        ObjectHelper::isInstanceOf($author, [Organization::class, PersonInterface::class]);
+        ObjectHelper::isInstanceOf($composer, [Organization::class, PersonInterface::class]);
 
         $this->_composer = $composer;
         return $this;

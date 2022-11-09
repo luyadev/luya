@@ -40,7 +40,7 @@ class AggregateRating extends Rating
      */
     public function getItemReviewed()
     {
-        $this->_itemReviewed;
+        return $this->_itemReviewed;
     }
 
     private $_ratingCount;
