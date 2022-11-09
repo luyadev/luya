@@ -93,6 +93,6 @@ final class HookEvent extends BaseObject implements \ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        return isset($this->_iterations[$offset]) ? $this->_iterations[$offset] : null;
+        return $this->_iterations[$offset] ?? null;
     }
 }

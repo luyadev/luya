@@ -98,7 +98,7 @@ abstract class Command extends \luya\console\Controller
             $modules[$id] = $id;
         }
 
-        $text = (isset($options['text'])) ? $options['text'] : 'Please select a module:';
+        $text = $options['text'] ?? 'Please select a module:';
 
         return $this->select($text, $modules);
     }

@@ -128,7 +128,6 @@ trait RestBehaviorsTrait
         unset($behaviors['authenticator']);
 
         if ($this->getUserAuthClass()) {
-
             // change to admin user auth class
             $behaviors['authenticator'] = [
                 'class' => CompositeAuth::class,

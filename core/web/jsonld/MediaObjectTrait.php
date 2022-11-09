@@ -44,6 +44,7 @@ trait MediaObjectTrait
     public function setEmbedUrl(UrlValue $url)
     {
         $this->_embedUrl = $url->getValue();
+        return $this;
     }
 
     /**

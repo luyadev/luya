@@ -284,7 +284,7 @@ class Composition extends Component implements \ArrayAccess
     {
         $this->getKeys();
 
-        return isset($this->_keys[$key]) ? $this->_keys[$key] : $defaultValue;
+        return $this->_keys[$key] ?? $defaultValue;
     }
 
     /**

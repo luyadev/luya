@@ -26,6 +26,7 @@ class GeoCoordinates extends BaseThing
     public function setAddress(PostalAddress $address)
     {
         $this->_address = $address;
+        return $this;
     }
 
     /**

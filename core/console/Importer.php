@@ -101,7 +101,7 @@ abstract class Importer extends BaseObject
      */
     public function addLog($value)
     {
-        $this->getImporter()->addLog(get_called_class(), $value);
+        $this->getImporter()->addLog(static::class, $value);
     }
 
     /**

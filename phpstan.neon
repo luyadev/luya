@@ -1,7 +1,9 @@
 parameters:
   level: 0
   paths:
-    - src
+    - core
+  excludePaths:
+    - core/vendor
   bootstrapFiles:
     - vendor/yiisoft/yii2/Yii.php
   tmpDir: .tmp

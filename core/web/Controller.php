@@ -37,7 +37,6 @@ abstract class Controller extends \yii\web\Controller
             } elseif (is_array($this->module->viewMap)) {
                 $currentAction = $this->id . '/' . ($this->action ? $this->action->id : $this->defaultAction);
                 foreach ($this->module->viewMap as $action => $viewPath) {
-
                     // Special case for map all views of controller
                     if ($action === '*') {
                         return $viewPath . '/' . $this->id;

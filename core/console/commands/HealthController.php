@@ -91,7 +91,6 @@ class HealthController extends \luya\console\Command
     /**
      * Test Mail-Component (Use --verbose=1 to enable smtp debug output)
      *
-     * @return boolean Whether successfull or not.
      * @throws \Exception On smtp failure
      */
     public function actionMailer()
