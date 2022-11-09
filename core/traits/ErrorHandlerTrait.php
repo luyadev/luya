@@ -178,9 +178,9 @@ trait ErrorHandlerTrait
         } elseif (is_string($exception)) {
             $_message = 'exception string: ' . $exception;
         } elseif (is_array($exception)) {
-            $_message = isset($exception['message']) ? $exception['message'] : 'exception array dump: ' . print_r($exception, true);
-            $_file = isset($exception['file']) ? $exception['file'] : __FILE__;
-            $_line = isset($exception['line']) ? $exception['line'] : __LINE__;
+            $_message = $exception['message'] ?? 'exception array dump: ' . print_r($exception, true);
+            $_file = $exception['file'] ?? __FILE__;
+            $_line = $exception['line'] ?? __LINE__;
         }
 
         $exceptionName = 'Exception';
@@ -195,12 +195,12 @@ trait ErrorHandlerTrait
             'message' => $_message,
             'file' => $_file,
             'line' => $_line,
-            'requestUri' => isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null,
-            'serverName' => isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null,
+            'requestUri' => $_SERVER['REQUEST_URI'] ?? null,
+            'serverName' => $_SERVER['SERVER_NAME'] ?? null,
             'date' => date('d.m.Y H:i'),
             'trace' => $_trace,
             'previousException' => $_previousException,
-            'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null,
+            'ip' => $_SERVER['REMOTE_ADDR'] ?? null,
             'get' => isset($_GET) ? ArrayHelper::coverSensitiveValues($_GET, $this->sensitiveKeys) : [],
             'post' => isset($_POST) ? ArrayHelper::coverSensitiveValues($_POST, $this->sensitiveKeys) : [],
             'bodyParams' => Yii::$app instanceof Application ? ArrayHelper::coverSensitiveValues(Yii::$app->request->bodyParams) : [],
@@ -252,8 +252,8 @@ trait ErrorHandlerTrait
      */
     private function buildTraceItem(array $item)
     {
-        $file = isset($item['file']) ? $item['file'] : null;
-        $line = isset($item['line']) ? $item['line'] : null;
+        $file = $item['file'] ?? null;
+        $line = $item['line'] ?? null;
         $contextLine = null;
         $preContext = [];
         $postContext = [];
@@ -296,8 +296,8 @@ trait ErrorHandlerTrait
             'context_line' => $contextLine,
             'pre_context' => $preContext,
             'post_context' => $postContext,
-            'function' => isset($item['function']) ? $item['function'] : null,
-            'class' => isset($item['class']) ? $item['class'] : null,
+            'function' => $item['function'] ?? null,
+            'class' => $item['class'] ?? null,
             // currently arguments wont be transmited due to large amount of informations based on base object
             //'args' => isset($item['args']) ? ArrayHelper::coverSensitiveValues($item['args'], $this->sensitiveKeys) : [],
         ], function ($value) {

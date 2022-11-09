@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 2.3.0
+
+> Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.
+
++ [#2165](https://github.com/luyadev/luya/pull/2165) Official deprecated unit tests for php 7.0, 7.1
+
 ## 2.2.1 (5. October 2022)
 
 + [#2159](https://github.com/luyadev/luya/pull/2159) Added missing option to create menu items with a scheme instead of relative paths.

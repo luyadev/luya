@@ -12,7 +12,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->skip([
-        __DIR__ . '/core/*/vendor/**/*',
+        __DIR__ . '/core/vendor',
     ]);
 
     // register a single rule

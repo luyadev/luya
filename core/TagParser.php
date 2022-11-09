@@ -139,7 +139,7 @@ class TagParser extends BaseObject
     {
         if (!is_object($this->tags[$tag])) {
             $this->tags[$tag] = Yii::createObject($this->tags[$tag]);
-            Yii::debug('tag parser object generated for:'. $tag, __CLASS__);
+            Yii::debug('tag parser object generated for:'. $tag, self::class);
         }
     }
 
@@ -153,8 +153,8 @@ class TagParser extends BaseObject
         // ensure tag is an object
         $this->instantiatTag($tag);
         // extract context
-        $value = isset($context['value']) ? $context['value'] : false;
-        $sub = isset($context['sub']) ? $context['sub'] : false;
+        $value = $context['value'] ?? false;
+        $sub = $context['sub'] ?? false;
         // the sub value can contain escaped values, those values must be parsed back into the original state.
         if ($sub) {
             $sub = str_replace(['\)', '\('], [')', '('], $sub);

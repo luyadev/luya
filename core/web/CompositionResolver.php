@@ -88,7 +88,7 @@ class CompositionResolver extends BaseObject
     {
         $keys = $this->resolvedValues;
 
-        return isset($keys[$key]) ? $keys[$key] : false;
+        return $keys[$key] ?? false;
     }
 
     /**

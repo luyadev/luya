@@ -382,7 +382,7 @@ abstract class Module extends \yii\base\Module
      */
     public static function staticBasePath()
     {
-        $class = new \ReflectionClass(get_called_class());
+        $class = new \ReflectionClass(static::class);
 
         return dirname($class->getFileName());
     }

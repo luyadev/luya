@@ -226,7 +226,7 @@ abstract class Boot
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
                     'baseUrl' => $baseUrl,
-                    'hostInfo' => isset($config['consoleHostInfo']) ? $config['consoleHostInfo'] : null,
+                    'hostInfo' => $config['consoleHostInfo'] ?? null,
                 ],
             ],
         ]);

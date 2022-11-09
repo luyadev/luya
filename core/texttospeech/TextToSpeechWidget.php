@@ -131,7 +131,7 @@ class TextToSpeechWidget extends Widget
         TextToSpeechAsset::register($this->view);
 
         $config = Json::htmlEncode([
-            'text' => $this->text ? $this->text : '', // must be an empty string as it will checked with .length
+            'text' => $this->text ?: '', // must be an empty string as it will checked with .length
             'language' => Yii::$app->language,
         ]);
 
