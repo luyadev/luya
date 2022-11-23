@@ -39,3 +39,4 @@ node_modules/
 /devconfig.json
 luya
 .php-cs-fixer
+.php-cs-fixer.cache
