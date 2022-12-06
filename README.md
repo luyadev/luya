@@ -23,7 +23,7 @@ We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUY
 Other helpfull informations:
 
 + [Read in the Guide](https://luya.io/guide)
-+ [Checkout the API documentation](https://luya.io/api)
++ [Checkout the API documentation](https://api.luya.io)
 + [Changelog](core/CHANGELOG.md)
 + [Version upgrade Breaks](core/UPGRADE.md)
 
@@ -32,7 +32,7 @@ Other helpfull informations:
 If you have any questions or problems, don't hesitate to find support in the following channels.
 
 + [Issues on GitHub](https://github.com/luyadev/luya/issues)
-+ [Join the Forum](https://forum.luya.io)
++ [Join the Forum](https://github.com/orgs/luyadev/discussions)
 
 ## Bug Report
 
@@ -46,7 +46,7 @@ When reporting bugs, it is important to understand where to create the issue. Th
 
 We are always looking for people who share their thoughts, code and problems with us. Below the links to the contribution guides:
 
-[Help us building LUYA](https://luya.io/guide/luya-collaboration)
+[Help us building LUYA](https://luya.io/guide/dev/collaboration.html)
 
 #### Unit Test
 
