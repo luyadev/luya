@@ -24,8 +24,8 @@ use yii\validators\UrlValidator;
  *
  * The follwing form norms are available:
  *
- * - `php:$format` php prefixed string where $format has following options: http://php.net/manual/en/function.date.php
- * - `$format` Or without php prefix use ICU options: http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax
+ * - `php:$format` php prefixed string where $format has following options: https://php.net/manual/en/function.date.php
+ * - `$format` Or without php prefix use ICU options: https://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

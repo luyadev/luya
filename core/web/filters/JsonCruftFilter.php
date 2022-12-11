@@ -26,7 +26,7 @@ use yii\web\Response;
  *
  * AngularJs built in protection: https://docs.angularjs.org/api/ng/service/$http#interceptors => JSON Vulnerability Protection
  *
- * @see http://blog.portswigger.net/2016/11/json-hijacking-for-modern-web.html
+ * @see https://blog.portswigger.net/2016/11/json-hijacking-for-modern-web.html
  * @see https://stackoverflow.com/a/3270390
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.7

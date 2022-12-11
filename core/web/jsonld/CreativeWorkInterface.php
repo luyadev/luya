@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd - Creative Work Interface
  *
- * @see http://schema.org/CreativeWork
+ * @see https://schema.org/CreativeWork
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1

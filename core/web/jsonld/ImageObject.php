@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd ImageObject.
  *
- * @see http://schema.org/ImageObject
+ * @see https://schema.org/ImageObject
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

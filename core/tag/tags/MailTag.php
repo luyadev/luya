@@ -75,7 +75,7 @@ EOT;
      *
      * @param string $email
      * @return string
-     * @see http://php.net/manual/de/function.bin2hex.php#11027
+     * @see https://php.net/manual/de/function.bin2hex.php#11027
      */
     public function obfuscate($email)
     {

@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd PostalAddress.
  *
- * @see http://schema.org/PostalAddress
+ * @see https://schema.org/PostalAddress
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

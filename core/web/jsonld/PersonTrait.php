@@ -7,7 +7,7 @@ use luya\helpers\ObjectHelper;
 /**
  * JsonLd - Person trait
  *
- * @see http://schema.org/Person
+ * @see https://schema.org/Person
  *
  * @author Alex Schmid
  * @since 1.0.0
@@ -429,7 +429,7 @@ trait PersonTrait
     }
 
     /**
-     * Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used,
+     * Gender of the person. While https://schema.org/Male and https://schema.org/Female may be used,
      * text strings are also acceptable for people who do not identify as a binary gender.
      *
      * @param GenderType|string $gender

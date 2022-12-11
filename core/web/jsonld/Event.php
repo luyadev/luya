@@ -9,7 +9,7 @@ namespace luya\web\jsonld;
  * Ticketing information may be added via the offers property.
  * Repeated events may be structured as separate Event objects.
  *
- * @see http://schema.org/Event
+ * @see https://schema.org/Event
  *
  * @author Alex Schmid
  * @since 1.0.0

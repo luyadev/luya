@@ -7,7 +7,7 @@ namespace luya\web\jsonld;
  *
  * A post to a social media platform, including blog posts, tweets, Facebook posts, etc.
  *
- * @see http://schema.org/SocialMediaPosting
+ * @see https://schema.org/SocialMediaPosting
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1

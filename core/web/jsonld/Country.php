@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd Country.
  *
- * @see http://schema.org/Country
+ * @see https://schema.org/Country
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

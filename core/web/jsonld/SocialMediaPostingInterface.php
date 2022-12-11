@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd - Social Media Posting Interface
  *
- * @see http://schema.org/SocialMediaPosting
+ * @see https://schema.org/SocialMediaPosting
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1
