@@ -7,7 +7,7 @@ namespace luya\web\jsonld;
  *
  * Entities that have a somewhat fixed, physical extension.
  *
- * @see http://schema.org/Place
+ * @see https://schema.org/Place
  *
  * @author Alex Schmid
  * @since 1.0.0

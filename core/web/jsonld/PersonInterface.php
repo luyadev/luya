@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd - Person interface
  *
- * @see http://schema.org/Organization
+ * @see https://schema.org/Organization
  *
  * @author Alex Schmid
  * @since 1.0.0

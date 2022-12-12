@@ -7,7 +7,7 @@ use luya\helpers\ObjectHelper;
 /**
  * JsonLd ContactPoint.
  *
- * @see http://schema.org/ContactPoint
+ * @see https://schema.org/ContactPoint
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

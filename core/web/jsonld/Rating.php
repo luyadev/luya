@@ -7,7 +7,7 @@ use luya\helpers\ObjectHelper;
 /**
  * JsonLd Rating.
  *
- * @see http://schema.org/Rating
+ * @see https://schema.org/Rating
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

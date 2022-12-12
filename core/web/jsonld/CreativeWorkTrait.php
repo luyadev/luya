@@ -7,7 +7,7 @@ use luya\helpers\ObjectHelper;
 /**
  * JsonLd - Creative Work Trait
  *
- * @see http://schema.org/CreativeWork
+ * @see https://schema.org/CreativeWork
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1
@@ -1273,7 +1273,7 @@ trait CreativeWorkTrait
 
     /**
      * Indicates (by URL or string) a particular version of a schema used in some CreativeWork.
-     * For example, a document could declare a schemaVersion using an URL such as http://schema.org/version/2.0/
+     * For example, a document could declare a schemaVersion using an URL such as https://schema.org/version/2.0/
      * if precise indication of schema version was required by some application.
      *
      * @param UrlValue $schemaVersion

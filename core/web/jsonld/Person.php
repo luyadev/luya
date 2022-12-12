@@ -7,7 +7,7 @@ namespace luya\web\jsonld;
  *
  * A person (alive, dead, undead, or fictional).
  *
- * @see http://schema.org/Person
+ * @see https://schema.org/Person
  *
  * @author Alex Schmid
  * @since 1.0.0

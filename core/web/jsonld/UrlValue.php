@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * Value object for Urls.
  *
- * @see http://schema.org/URL
+ * @see https://schema.org/URL
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

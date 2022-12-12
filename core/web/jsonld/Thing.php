@@ -7,7 +7,7 @@ namespace luya\web\jsonld;
  *
  * The most generic type of item.
  *
- * @see http://schema.org/Thing
+ * @see https://schema.org/Thing
  *
  * @author Alex Schmid
  * @since 1.0.0

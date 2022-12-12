@@ -7,7 +7,7 @@ namespace luya\web\jsonld;
  *
  * A blog post.
  *
- * @see http://schema.org/BlogPosting
+ * @see https://schema.org/BlogPosting
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1

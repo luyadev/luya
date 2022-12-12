@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd - Article Interface
  *
- * @see http://schema.org/Article
+ * @see https://schema.org/Article
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1

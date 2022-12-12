@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd - Live Blog Posting trait
  *
- * @see http://schema.org/LiveBlogPosting
+ * @see https://schema.org/LiveBlogPosting
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1

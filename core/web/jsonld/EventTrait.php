@@ -7,7 +7,7 @@ use luya\helpers\ObjectHelper;
 /**
  * JsonLd - Event trait
  *
- * @see http://schema.org/Event
+ * @see https://schema.org/Event
  *
  * @author Alex Schmid
  * @since 1.0.0

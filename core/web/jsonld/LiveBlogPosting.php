@@ -7,7 +7,7 @@ namespace luya\web\jsonld;
  *
  * A blog post intended to provide a rolling textual coverage of an ongoing event through continuous updates.
  *
- * @see http://schema.org/LiveBlogPosting
+ * @see https://schema.org/LiveBlogPosting
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1

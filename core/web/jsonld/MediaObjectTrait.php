@@ -5,7 +5,7 @@ namespace luya\web\jsonld;
 /**
  * JsonLd MediaObject Trait.
  *
- * @see http://schema.org/MediaObject
+ * @see https://schema.org/MediaObject
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.3
  */

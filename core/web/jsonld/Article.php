@@ -8,7 +8,7 @@ namespace luya\web\jsonld;
  * An article, such as a news article or piece of investigative report.
  * Newspapers and magazines have articles of many different types and this is intended to cover them all.
  *
- * @see http://schema.org/Article
+ * @see https://schema.org/Article
  *
  * @author Alex Schmid <alex.schmid@stud.unibas.ch>
  * @since 1.0.1
