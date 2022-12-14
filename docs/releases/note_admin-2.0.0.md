@@ -2,7 +2,7 @@ LUYA admin 2.0.0 release
 
 ## Move to semver
 
-With this new version of the LUYA admin, we switch to strict semver versioning. This means that we will try to follow http://semver.org as good as possible.
+With this new version of the LUYA admin, we switch to strict semver versioning. This means that we will try to follow https://semver.org as good as possible.
 Therefore the version constraint changed from the `~` to the `^` operator. With the previous versioning system, the admin module would have become version 1.3, with the new one it will be 2.0. This will also be the case for all other modules with breaking changes in the future (the CMS module will follow shortly with version 2.0 as well).
 
 So make sure to use the correct version constraint in order to profit from upcoming updates.
