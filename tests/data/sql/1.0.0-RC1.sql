@@ -1,6 +1,6 @@
 -- phpMyAdmin SQL Dump
 -- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- https://www.phpmyadmin.net
 --
 -- Host: localhost
 -- Erstellungszeit: 04. Okt 2016 um 13:57
