@@ -356,6 +356,27 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $this->assertStringContainsString('/mentions-legales', $url);
     }
 
+    public function testCompositionRuleWithWhenPointingToAnotherLanguage()
+    {
+        $request = new Request();
+        $request->pathInfo = '/';
+        $composition = new Composition($request, ['hidden' => false, 'default' => ['langShortCode' => 'de']]);
+        $urlManager = new UrlManager();
+        $urlManager->composition = $composition;
+        $urlManager->addRules([
+                ['pattern' => '', 'route' => 'mymodule/default/index'],
+                ['pattern' => 'impressum', 'route' => 'mymodule/default/imprint', 'composition' => ['fr' => 'mentions-legales']],
+        ]);
+        $url = $urlManager->createUrl(['/mymodule/default/imprint']);
+        $this->assertStringContainsString('/impressum', $url);
+
+        $url = $urlManager->createUrl(['fr/mymodule/default/imprint']);
+        $this->assertStringContainsString('/mentions-legales', $url);
+
+        $url = $urlManager->createUrl(['/fr/mymodule/default/imprint']);
+        $this->assertStringContainsString('/mentions-legales', $url);
+    }
+
     public function testUrlCreationWithComplexCompositionPattern()
     {
         $request = new Request(['hostInfo' => 'http://localhost', 'pathInfo' => 'en-GB/admin', 'baseUrl' => '/']);
