@@ -83,7 +83,7 @@ class TagParser extends BaseObject
         if (empty($text)) {
             return $text;
         }
-        
+
         return (new TagMarkdownParser())->parse(static::convert($text));
     }
 
