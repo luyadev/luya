@@ -1,56 +1,56 @@
 {
-    "name": "luyadev/luya-core",
-    "description": "LUYA is a scalable web framework and content management system with the goal to please developers, clients and users alike.",
-    "type": "luya-core",
-    "keywords": [
-        "luya",
-        "core",
-        "yii2",
-        "yii",
-        "cms",
-        "admin"
-    ],
-    "license": "MIT",
-    "homepage": "https://luya.io",
-    "authors": [
-        {
-            "name": "Basil Suter",
-            "email": "git@nadar.io",
-            "homepage": "https://github.com/nadar"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/luyadev/luya/issues"
+  "name": "luyadev/luya-core",
+  "description": "LUYA is a scalable web framework and content management system with the goal to please developers, clients and users alike.",
+  "type": "luya-core",
+  "keywords": [
+    "luya",
+    "core",
+    "yii2",
+    "yii",
+    "cms",
+    "admin"
+  ],
+  "license": "MIT",
+  "homepage": "https://luya.io",
+  "authors": [
+    {
+      "name": "Basil Suter",
+      "email": "git@nadar.io",
+      "homepage": "https://github.com/nadar"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/luyadev/luya/issues"
+  },
+  "require": {
+    "luyadev/luya-composer": "^1.0",
+    "luyadev/yii-helpers": "^1.0",
+    "yiisoft/yii2": "~2.0.15",
+    "curl/curl": "^2.0 || ^1.0",
+    "phpmailer/phpmailer": "^6.0",
+    "giggsey/libphonenumber-for-php": "^8.11"
+  },
+  "autoload": {
+    "psr-4": {
+      "luya\\": ""
+    }
+  },
+  "config": {
+    "fxp-asset": {
+      "enabled": false
     },
-    "require": {
-        "luyadev/luya-composer": "^1.0",
-        "luyadev/yii-helpers": "^1.0",
-        "yiisoft/yii2": "~2.0.15",
-        "curl/curl": "^2.0 || ^1.0",
-        "phpmailer/phpmailer": "^6.0",
-        "giggsey/libphonenumber-for-php": "^8.11"
-    },
-    "autoload": {
-        "psr-4": {
-            "luya\\": ""
-        }
-    },
-    "config": {
-        "fxp-asset": {
-            "enabled": false
-        },
-        "allow-plugins": {
-            "yiisoft/yii2-composer": true,
-            "luyadev/luya-composer": true
-        }
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],
-    "bin": [
-        "bin/luya"
-    ]
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "luyadev/luya-composer": true
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "bin": [
+    "bin/luya"
+  ]
 }

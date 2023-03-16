@@ -3,6 +3,7 @@
 namespace luyatests\core\tag;
 
 use luya\tag\TagMarkdownParser;
+use luya\TagParser;
 use luyatests\LuyaWebTestCase;
 
 class StubTagMarkdownParser extends TagMarkdownParser
@@ -15,6 +16,11 @@ class StubTagMarkdownParser extends TagMarkdownParser
 
 class TagMarkdownParserTest extends LuyaWebTestCase
 {
+    public function testNullValues()
+    {
+        $this->assertNull(TagParser::convertWithMarkdown(null));
+    }
+
     public function testNewline()
     {
         $parser = new TagMarkdownParser();
