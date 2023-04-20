@@ -24,7 +24,7 @@ abstract class Boot
     /**
      * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/core/CHANGELOG.md)
      */
-    public const VERSION = '2.2.1';
+    public const VERSION = '2.3.0';
 
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
