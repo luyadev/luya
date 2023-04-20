@@ -4,6 +4,8 @@ parameters:
     - core
   excludePaths:
     - core/vendor
+  scanFiles:
+    - vendor/yiisoft/yii2/Yii.php
   bootstrapFiles:
     - vendor/yiisoft/yii2/Yii.php
   tmpDir: .tmp
