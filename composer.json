@@ -36,7 +36,7 @@
     "giggsey/libphonenumber-for-php": "^8.11"
   },
   "require-dev": {
-    "luyadev/luya-testsuite": "^2.0",
+    "luyadev/luya-testsuite": "^3.1.4",
     "nadar/github-markdown-fixer": "^1.0",
     "unglue/client": "^1.5",
     "friendsofphp/php-cs-fixer": "^3.2",
