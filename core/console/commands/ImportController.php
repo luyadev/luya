@@ -193,8 +193,8 @@ class ImportController extends Command implements ImportControllerInterface
         }
 
         if (Yii::$app->hasModule('admin')) {
-            Config::set(Config::CONFIG_LAST_IMPORT_TIMESTAMP, time());
-            Config::set(Config::CONFIG_INSTALLER_VENDOR_TIMESTAMP, Yii::$app->packageInstaller->timestamp);
+            Config::set(Config::CONFIG_LAST_IMPORT_TIMESTAMP, time()); /** @phpstan-ignore-line */
+            Config::set(Config::CONFIG_INSTALLER_VENDOR_TIMESTAMP, Yii::$app->packageInstaller->timestamp); /** @phpstan-ignore-line */
             Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
         }
 
