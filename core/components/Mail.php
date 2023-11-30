@@ -142,7 +142,7 @@ class Mail extends Component
                 $this->_mailer->isSMTP();
                 $this->_mailer->SMTPSecure = $this->smtpSecure;
                 $this->_mailer->Host = (string) $this->host;
-                $this->_mailer->SMTPAuth= $this->smtpAuth;
+                $this->_mailer->SMTPAuth = $this->smtpAuth;
                 $this->_mailer->Username = $this->username;
                 $this->_mailer->Password = $this->password;
                 $this->_mailer->Port = $this->port;

@@ -123,7 +123,7 @@ class UrlManager extends \yii\web\UrlManager
         $length = strlen($composition);
         $route = $parsedRequest[0];
 
-        if (substr($route, 0, $length+1) == $composition.'/') {
+        if (substr($route, 0, $length + 1) == $composition.'/') {
             $parsedRequest[0] = substr($parsedRequest[0], $length);
         }
 

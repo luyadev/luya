@@ -58,8 +58,8 @@ class DurationValue extends BaseValue
     protected function timeToIso8601Duration($time)
     {
         $units = [
-            "Y" => 365*24*3600,
-            "D" =>     24*3600,
+            "Y" => 365 * 24 * 3600,
+            "D" =>     24 * 3600,
             "H" =>        3600,
             "M" =>          60,
             "S" =>           1,

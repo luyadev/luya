@@ -260,7 +260,7 @@ trait ErrorHandlerTrait
 
         if (!empty($file)) {
             try {
-                $lineInArray = $line -1;
+                $lineInArray = $line - 1;
                 // load file from path
                 $fileInfo = file($file, FILE_IGNORE_NEW_LINES);
                 // load file if false from real path
