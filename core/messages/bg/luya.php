@@ -1,7 +1,7 @@
 <?php
 
 return [
-    '{attribute} must have a minimum length of {length} characters.' => '{атрибутът} трябва да има поне {length} знака.',
+    '{attribute} must have a minimum length of {length} characters.' => '{attribute} трябва да има поне {length} знака.',
     '{attribute} must include at least one special character.' => '{attribute} трябва да съдържа поне един специален знак. ',
     '{attribute} must include at least one digit.' => '{attribute} трябва да съдържа поне едно число.',
     '{attribute} must include at least one letter.' => '{attribute} трябва да съдържа поне една буква.',
