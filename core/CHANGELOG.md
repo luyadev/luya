@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 2.3.2
+
 ## 2.3.1 (7. February 2024) 
 
 + [#2187](https://github.com/luyadev/luya/pull/2187) Fixed parameter placeholders in translations (bg, hu, ro)
