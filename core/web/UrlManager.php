@@ -3,7 +3,6 @@
 namespace luya\web;
 
 use Yii;
-
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 

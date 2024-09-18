@@ -3,7 +3,6 @@
 namespace luyatests\core\console;
 
 use luya\web\Application;
-
 use luyatests\data\commands\TestConsoleCommand;
 use luyatests\LuyaConsoleTestCase;
 use Yii;
